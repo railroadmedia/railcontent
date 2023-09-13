@@ -103,9 +103,9 @@
                             {{--<br><br>--}}
                             {{--Yes, anything!--}}
                             {{--<br><br>--}}
-                            {{--The Guitar System is the ultimate encyclopedia of guitar lessons -- and it’s an affordable solution to reach your goals. So hey, why not join us and reach your goals?--}}
+                            {{--The Guitar System is the ultimate encyclopedia of guitar lessons — and it’s an affordable solution to reach your goals. So hey, why not join us and reach your goals?--}}
                             {{--<br><br>--}}
-                            {{--<u>Just click here to get started</u> -- and join in the celebration by playing and creating the music you love.--}}
+                            {{--<u>Just click here to get started</u> — and join in the celebration by playing and creating the music you love.--}}
                             {{--<br></p>--}}
                         {{--<div class="join">Get Started &raquo;</div>--}}
                     {{--</div>--}}
@@ -312,32 +312,32 @@
             <h3 class="columns">Learn anything you want on the guitar with Nate Savage’s best-selling video <br class="show-for-large">
                                 lessons that have been trusted by thousands of guitarists around the world!</h3>
             <div class="columns medium-6 circle-point">
-                <div class="point-icon"><i class="fal fa-signal"></i></div>
+                <div class="point-icon"><i class="fa-light fa-signal"></i></div>
                 <p><strong>Beginner To Advanced</strong><br>
                     Perfect for guitarists of all levels with progressive step-by-step lessons on every topic.</p>
             </div>
             <div class="columns medium-6 circle-point">
-                <div class="point-icon"><i class="fal fa-video"></i></div>
+                <div class="point-icon"><i class="fa-light fa-video"></i></div>
                 <p><strong>Guided Video Lessons</strong><br>
                     Learn at your own pace with easy to follow video lessons and online progress tracking.</p>
             </div>
             <div class="columns medium-6 circle-point">
-                <div class="point-icon"><i class="fal fa-music"></i></div>
+                <div class="point-icon"><i class="fa-light fa-music"></i></div>
                 <p><strong>85+ Guitar Jam Tracks</strong><br>
                     Half the fun learning the guitar is playing along to music, so you’ll get tons of jam tracks to enjoy.</p>
             </div>
             <div class="columns medium-6 circle-point">
-                <div class="point-icon"><i class="fal fa-laptop"></i></div>
+                <div class="point-icon"><i class="fa-light fa-laptop"></i></div>
                 <p><strong>Instant Online Access</strong><br>
                     Start your first lesson today with 24/7 online access from any computer, tablet, or smartphone.</p>
             </div>
             <div class="columns medium-6 circle-point">
-                <div class="point-icon"><i class="fal fa-id-card"></i></div>
+                <div class="point-icon"><i class="fa-light fa-id-card"></i></div>
                 <p><strong>Unlimited Lifetime Access</strong><br>
                     Get The Guitar System for just ${{ floatval($productPrices['GUITAR-SYSTEM']->discounted_price) }} today to get online access to the entire course - for life.</p>
             </div>
             <div class="columns medium-6 circle-point">
-                <div class="point-icon"><i class="fal fa-thumbs-up"></i></div>
+                <div class="point-icon"><i class="fa-light fa-thumbs-up"></i></div>
                 <p><strong>Money-Back Guarantee</strong><br>
                     Try The Guitar System risk-free for three months with our 90-day money-back guarantee.</p>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Decorators\Content;
 
 use App\Maps\ContentTypes;
+use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Support\Collection;
 
 class LessonAssignmentDecorator extends TypeDecoratorBase
@@ -21,13 +22,16 @@ class LessonAssignmentDecorator extends TypeDecoratorBase
         );
 
         $initialDecorationMode = \Railroad\Railcontent\Decorators\ModeDecoratorBase::$decorationMode;
-        \Railroad\Railcontent\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+        \Railroad\Railcontent\Decorators\ModeDecoratorBase::$decorationMode =
+            \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+        Decorator::$typeDecoratorsEnabled = false;
 
         $childHierarchyRows = $this->contentHierarchyService->getByParentIds(
             $contentsOfTypes->pluck('id')
                 ->toArray()
         );
         \Railroad\Railcontent\Decorators\ModeDecoratorBase::$decorationMode = $initialDecorationMode;
+        Decorator::$typeDecoratorsEnabled = true;
 
         if (empty($childHierarchyRows)) {
             return $contents;
@@ -38,17 +42,18 @@ class LessonAssignmentDecorator extends TypeDecoratorBase
                 ->keyBy('id');
 
         foreach ($contentsOfTypes as $contentIndex => $content) {
-
+            $duration = 0;
             foreach ($childHierarchyRows as $childHierarchyRow) {
                 if ($childHierarchyRow['parent_id'] == $content['id'] &&
                     !empty($assignmentContents[$childHierarchyRow['child_id']])) {
-
+                    $duration += $assignmentContents[$childHierarchyRow['child_id']]['length_in_seconds'] ?? 0;
                     $contentsOfTypes[$contentIndex]['assignments'][] =
                         $assignmentContents[$childHierarchyRow['child_id']];
                 }
             }
 
             $contentsOfTypes[$contentIndex]['assignments'] = $contentsOfTypes[$contentIndex]['assignments'] ?? [];
+            $contentsOfTypes[$contentIndex]['assignments_duration'] = $duration;
         }
 
         return $this->mergeDecorated($contents, $contentsOfTypes);

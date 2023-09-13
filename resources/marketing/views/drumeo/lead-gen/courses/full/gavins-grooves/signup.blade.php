@@ -117,7 +117,7 @@
             <br><br>
             @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                "formId" => "Drumeo - Engagement - Trigger - Gavins Grooves - Web Form",
+                "formId" => "Drumeo - Engagement - Trigger - Gavins Grooves - Web Form2",
                 "formName" => 'Gavins Grooves',
                 "buttonText" => 'Send The Videos&nbsp;'
             ])

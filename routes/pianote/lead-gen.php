@@ -20,6 +20,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/pentatonic-scale', [LeadGenController::class, 'pentatonicScale']);
     Route::get('/chord-inversions', [LeadGenController::class, 'chordInversions']);
     Route::get('/recitals', [LeadGenController::class, 'recitals']);
+    Route::get('/6-reasons', [LeadGenController::class, 'sixReasons']);
     Route::get('/classical-cohort-1', [LeadGenController::class, 'classicalcohort1']);
     Route::get('/classical-cohort-2', [LeadGenController::class, 'classicalcohort2']);
     Route::get('/classical-cohort-3', [LeadGenController::class, 'classicalcohort3']);
@@ -47,7 +48,15 @@ Route::domain('{pianoteDomain}')
         function () {
             Route::get('/{page?}', LeadGenController::class . '@chordHacks')
                 ->whereIn('page', [
-                    null,'thank-you'
+                    null, 'thank-you', 'ty-annual', 'ty-monthly'
+                ]);
+        }
+    );
+    Route::group(['prefix' => 'blues-piano-bootcamp'],
+        function () {
+            Route::get('/{page?}', LeadGenController::class . '@bluesPianoBootcamp')
+                ->whereIn('page', [
+                    null, 'thank-you', 'ty-annual', 'ty-monthly'
                 ]);
         }
     );
@@ -64,7 +73,7 @@ Route::domain('{pianoteDomain}')
         function () {
             Route::get('/{page?}', LeadGenController::class . '@gstd')
                 ->whereIn('page', [
-                    null,'thank-you'
+                    null, 'thank-you', 'ty-annual', 'ty-monthly'
                 ]);
         }
     );

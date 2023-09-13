@@ -22,10 +22,10 @@ export default class LearningPathLevelContentModel extends ContentModel {
 
     get postChildLessonCount() {
         if (this.brand === 'singeo' || this.brand === 'guitareo') {
-            return this.post.lesson_count ? `${this.post.lesson_count} Lessons` : 'TBD';
+            return this.post.lesson_count ? `${this.post.lesson_count} Lessons` : '';
         }
 
-        return this.post.lesson_count ? `${this.post.lesson_count} Courses` : 'TBD';
+        return this.post.lesson_count ? `${this.post.lesson_count} Courses` : '';
     }
 
     get levelNumber() {

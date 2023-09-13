@@ -9,11 +9,11 @@
     <meta property="og:title" content="Pianote Shop">
     <meta name="description" content="Get Lessons, T-Shirts, & Much More!">
     <meta property="og:description" content="Get Lessons, T-Shirts, & Much More!">
-    @if(Carbon\Carbon::create(2023, 8, 1, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/july/pianote-summer-share-image.jpg">
-    @else
+{{--    @if(Carbon\Carbon::create(2023, 8, 1, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())--}}
+{{--        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/july/pianote-summer-share-image.jpg">--}}
+{{--    @else--}}
         <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg">
-    @endif
+{{--    @endif--}}
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 @endsection
 
@@ -28,28 +28,20 @@
 @endsection
 
 @section('body')
-{{--    <header class="drum-shop-header">--}}
-{{--        <picture>--}}
-{{--            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg">--}}
-{{--            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg" alt="header background image" fetchpriority="high" />--}}
-{{--        </picture>--}}
-{{--        <div class="container mx-auto relative z-10">--}}
-{{--            <div class="px-2 md:px-3">--}}
-{{--                <div class="float-left px-2 md:px-3 w-full">--}}
-{{--                    <img class="h-12 sm:h-14 md:h-24 lg:h-28 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/pianote-shop-logo.png" alt="pianote logo" fetchpriority="high">--}}
-{{--                    <h3>GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!</h3>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </header>--}}
-
-    @include('_partials.components.shop.promo-top-banner',[
-        'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-shop-summer-sale-bg.jpg',
-        'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-summer-sale-logo.svg',
-        'logoStyles' => 'mb-3 ml-2 sm:ml-6 lg:ml-10',
-        'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
-        'promoText' => 'SAVE UP TO 68% UNTIL JULY 31ST!',
-    ])
+    <header class="drum-shop-header">
+        <picture>
+            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg">
+            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg" alt="header background image" fetchpriority="high" />
+        </picture>
+        <div class="container mx-auto relative z-10">
+            <div class="px-2 md:px-3">
+                <div class="float-left px-2 md:px-3 w-full">
+                    <img class="h-12 sm:h-14 md:h-24 lg:h-28 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/pianote-shop-logo.png" alt="pianote logo" fetchpriority="high">
+                    <h3>GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!</h3>
+                </div>
+            </div>
+        </div>
+    </header>
 
     @if(Session::has('addedProducts'))
         <section class="added-to-cart-background clearfix">
@@ -81,9 +73,9 @@
         "all" => true
     ])
     <div class="white-box">
-                @include('_partials.layout.holiday.bundle-cards', [
-                    "header" => 'Join Pianote + Choose <br class="sm:hidden"> Your Bonus Bundle',
-                ])
+{{--                @include('_partials.layout.holiday.bundle-cards', [--}}
+{{--                    "header" => 'Join Pianote + Choose <br class="sm:hidden"> Your Bonus Bundle',--}}
+{{--                ])--}}
 
         {{--        <section class="bundles">--}}
         {{--            <div class="container mx-auto">--}}
@@ -107,6 +99,7 @@
         {{--        </section>--}}
 
         {{--    LESSONS    --}}
+        <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <ul class="container mx-auto fixed-cards text-center lg:text-left">
                 <li>
@@ -115,20 +108,20 @@
                         Piano Lessons
                     </h1>
                 </li>
-{{--                @include('musora.shop._shop-card', [--}}
-{{--                     "itemURL" => "/",--}}
-{{--                     "sku" => null,--}}
-{{--                     "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",--}}
-{{--                     "title" => "Pianote Membership",--}}
-{{--                     "packAuthor" => "Lisa Witt",--}}
-{{--                     "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",--}}
-{{--                     "specialPrice" => "7-Day Free Trial",--}}
-{{--                     "fullPrice" => 240,--}}
-{{--                     "price" => 240,--}}
-{{--                     "category" => "lessons",--}}
-{{--                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",--}}
-{{--                     'soldOut' => false,--}}
-{{--                ])--}}
+                @include('musora.shop._shop-card', [
+                     "itemURL" => "/",
+                     "sku" => null,
+                     "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
+                     "title" => "Pianote Membership",
+                     "packAuthor" => "Lisa Witt",
+                     "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",
+                     "specialPrice" => "7-Day Free Trial",
+                     "fullPrice" => 240,
+                     "price" => 240,
+                     "category" => "lessons",
+                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
+                     'soldOut' => false,
+                ])
 
                 @foreach($lessons as $key => $lesson)
                     @include('musora.shop._shop-card', [
@@ -152,6 +145,7 @@
         </section>
 
         {{--   ACCESSORIES     --}}
+        <div id="accessories" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'accessories' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
@@ -180,6 +174,7 @@
         </section>
 
         {{--   HATS     --}}
+        <div id="hats" class="anchor"></div>
         <section class="grid-view category-section" data-category="hats" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
@@ -210,6 +205,7 @@
         </section>
 
         {{--   SHIRTS     --}}
+        <div id="shirts" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
@@ -238,6 +234,7 @@
         </section>
 
         {{--   HOODIES     --}}
+        <div id="hoodies" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>

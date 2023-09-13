@@ -3,9 +3,9 @@
 @section('meta')
     @parent
     <title>Drumeo Gift Card</title>
-    <meta name="description" content="Give the gift of drum lessons with a gift card to Drumeo -- with your choice between a one-month, 6-month, or 1-year membership pass.">
+    <meta name="description" content="Give the gift of drum lessons with a gift card to Drumeo — with your choice between a one-month, 6-month, or 1-year membership pass.">
     <meta property="og:image" content="https://s3.amazonaws.com/drumeo-packs/Merch/pass.jpg" style="display: none;">
-    <meta property="og:description" content="Give the gift of drum lessons with a gift card to Drumeo -- with your choice between a one-month, 6-month, or 1-year membership pass.">
+    <meta property="og:description" content="Give the gift of drum lessons with a gift card to Drumeo — with your choice between a one-month, 6-month, or 1-year membership pass.">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 @stop()
 

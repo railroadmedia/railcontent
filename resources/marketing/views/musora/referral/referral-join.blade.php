@@ -1,4 +1,13 @@
-@extends('musora._partials.layout')
+@extends('_partials.layout.global-layout')
+
+<!-- Footer -->
+@section('layout-footer')
+    @include('_partials.layout.global-footer', [
+        "brand" => "musora",
+        "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png"
+    ])
+@stop
+
 
 @section('head-includes')
     <title>Join | {{ ucfirst($referralBrand) }}</title>
@@ -69,7 +78,7 @@
 @stop
 
 <!-- Main -->
-@section('layout-body')
+@section('global-layout-body')
 
     @include('musora.referral.join')
 

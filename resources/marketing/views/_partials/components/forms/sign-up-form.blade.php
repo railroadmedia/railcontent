@@ -25,7 +25,7 @@
     @if(!empty($formName))
         {!! \Railroad\LeadTracker\Services\LeadTrackerService::getRequestTrackingInputsHtmlFromRequest(
             $formName,
-            route('customer-io.submit-email-form', [], false),
+            route('customer-io.submit-email-form-rc', [], false),
             'post',
             null,
             null,
@@ -37,7 +37,7 @@
         <input id='sign-up-email' class="w-full" name="email" type="email" placeholder="Your Email" required @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif />
     </div>
     <div class="infusion-submit w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-5/12' }}">
-        <button class="submit g-recaptcha bg-{{$brand}} @if(!empty($outline)) outline @endif" type="submit"
+        <button class="submit g-recaptcha bg-{{$brand}} hover:opacity-80 @if(!empty($outline)) outline @endif" type="submit"
                 data-sitekey="{{$recaptchaKey}}"
                 data-callback='recaptchaSubmit{{$cleanFormId}}'
                 data-action='submit'>
@@ -61,7 +61,7 @@
 
 @if(empty($noTy) && empty($minimalForm))
     <div class="disclaimer opacity-70 mx-auto flex items-center justify-center" @if(!empty($disclaimerColor)) style="color: {{$disclaimerColor}};" @endif>
-        <i class="fal fa-info-circle leading-none mr-2"></i>
+        <i class="fa-light fa-info-circle leading-none mr-2"></i>
         <span class="text-left leading-tight text-xs max-w-lg">By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</span>
     </div>
     <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl">
@@ -88,11 +88,10 @@
 <script>
     function recaptchaSubmit{{$cleanFormId}}(token) {
         document.getElementById("{{$cleanFormId}}").submit();
-        var formId = $(this).find("input[name='inf_form_xid']").val();
 
         dataLayer.push({
             "event": "gtm.formSubmit",
-            "formId": formId,
+            "formId": "{{ $cleanFormId }}",
             "formSuccess": true
         });
     }

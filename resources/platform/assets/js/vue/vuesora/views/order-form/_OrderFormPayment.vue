@@ -637,3 +637,9 @@ export default {
         color: #F71B26;
     }
 </style>
+
+<style scoped>
+    .hidden {
+        display: none !important;
+    }
+</style>

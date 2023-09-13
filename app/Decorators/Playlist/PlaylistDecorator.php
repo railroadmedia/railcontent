@@ -22,6 +22,8 @@ class PlaylistDecorator extends ModeDecoratorBase
     private ContentLastEngagedService $contentLastEngagedService;
     private UserPlaylistContentRepository $userPlaylistContentRepository;
 
+    public static $skip = false;
+
     /**
      * @param PinnedPlaylistsRepository $pinnedPlaylistsRepository
      * @param UserPlaylistsService $userPlaylistsService
@@ -42,6 +44,10 @@ class PlaylistDecorator extends ModeDecoratorBase
 
     public function decorate($playlists)
     {
+        if ((self::$skip) || $playlists->isEmpty()) {
+            return $playlists;
+        }
+
         $playlists = $playlists->toArray();
         $userIds = [];
         $playlistIds = [];
@@ -52,6 +58,67 @@ class PlaylistDecorator extends ModeDecoratorBase
             $userIds[] = $playlist['user_id'];
             $playlists[$index]['url'] =
                 url()->route('platform.user.playlist', ["id" => $playlist['id'], "brand" => brand()]);
+
+            $playlists[$index]['playback_url'] = url()->route('platform.play.playlist', [
+                'playlistId' => $playlist['id'],
+            ]);
+
+            $playlists[$index]['description'] = ($playlist['description']) ? $playlist['description'] : ' ';
+            $playlists[$index]['is_my_playlist'] = user() ? (($playlist['user_id'] == user()->id) ? 1 : 0) : 0;
+        }
+
+        ContentRepository::$bypassPermissions = false;
+
+        if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM) {
+            return $playlists;
+        }
+
+        $completedItems = $this->userPlaylistsService->countCompletedUserPlaylistContents(
+            $playlistIds
+        );
+
+        $startedItems = $this->userPlaylistsService->countStartedUserPlaylistContents(
+            $playlistIds
+        );
+
+        $totalItems = $this->userPlaylistsService->countUserPlaylistItems(
+            $playlistIds
+        );
+
+        $userIds = array_unique($userIds);
+
+
+        /**
+         * @var $users User[]
+         */
+        $users =
+            User::query()
+                ->whereIn('id', $userIds)
+                ->get();
+
+        $keyedUsers = [];
+
+        foreach ($users as $userIndex => $user) {
+            $keyedUsers[$user->id] = $user;
+        }
+
+        foreach ($playlists as $index => $playlist) {
+
+            $minsec = gmdate("i:s", $playlists[$index]['duration'] ?? 0);
+            $hours = (gmdate("d", $playlists[$index]['duration'] ?? 0)-1)*24 + gmdate("H", $playlists[$index]['duration'] ?? 0);
+            $playlists[$index]['duration_formated'] = ($hours == 0)? $minsec : $hours.':'.$minsec ;
+
+            $playlists[$index]['progress_percent'] = 0;
+            $playlists[$index]['completed_items'] = $completedItems[$playlist['id']] ?? 0;
+            $playlists[$index]['started_items'] = $startedItems[$playlist['id']] ?? 0;
+            $playlists[$index]['total_items'] = $totalItems[$playlist['id']] ?? 0;
+            $playlists[$index]['state'] =
+                ($playlists[$index]['completed_items'] > 0 || $playlists[$index]['started_items'] > 0) ? 'started' :
+                    (($playlists[$index]['completed_items'] == $playlists[$index]['total_items']) ? 'completed' : '');
+            if($playlists[$index]['total_items'] > 0){
+                $playlists[$index]['progress_percent'] = $playlists[$index]['completed_items']/$playlists[$index]['total_items'];
+            }
+
             if (!$playlist['thumbnail_url']) {
                 $playlists[$index]['uploaded_thumbnail'] = false;
                 $firstItem = $this->userPlaylistContentRepository->getFirstContentByPlaylistId($playlist['id']);
@@ -71,11 +138,12 @@ class PlaylistDecorator extends ModeDecoratorBase
                     $firstItem = $this->contentService->getById($firstItem['content_id']);
 
                     $playlists[$index]['thumbnail_url'] = '';
+                    Decorator::$typeDecoratorsEnabled = true;
                     if ($firstItem) {
                         $parent =
                             $this->contentService->getByChildId($firstItem['id'])
                                 ->first();
-                        Decorator::$typeDecoratorsEnabled = true;
+
                         $playlists[$index]['square_thumbnail'] =
                             (($firstItem['type'] == 'assignment' &&
                                     ($firstItem->fetch('parent')) &&
@@ -98,34 +166,6 @@ class PlaylistDecorator extends ModeDecoratorBase
                 $playlists[$index]['uploaded_thumbnail'] = true;
             }
 
-            $minsec = gmdate("i:s", $playlists[$index]['duration'] ?? 0);
-            $hours = (gmdate("d", $playlists[$index]['duration'] ?? 0)-1)*24 + gmdate("H", $playlists[$index]['duration'] ?? 0);
-            $playlists[$index]['duration_formated'] = ($hours == 0)? $minsec : $hours.':'.$minsec ;
-
-            $playlists[$index]['playback_url'] = url()->route('platform.play.playlist', [
-                'playlistId' => $playlist['id'],
-            ]);
-
-            $playlists[$index]['description'] = ($playlist['description']) ? $playlist['description'] : ' ';
-        }
-
-        $userIds = array_unique($userIds);
-
-        /**
-         * @var $users User[]
-         */
-        $users =
-            User::query()
-                ->whereIn('id', $userIds)
-                ->get();
-
-        $keyedUsers = [];
-
-        foreach ($users as $userIndex => $user) {
-            $keyedUsers[$user->id] = $user;
-        }
-
-        foreach ($playlists as $index => $playlist) {
             if (!isset($keyedUsers[$playlist['user_id']])) {
                 unset($playlists[$index]);
 
@@ -136,41 +176,11 @@ class PlaylistDecorator extends ModeDecoratorBase
              * @var $user User
              */
             $playlistAuthor = $keyedUsers[$playlist['user_id']];
-            $playlists[$index]['is_my_playlist'] = user() ? (($playlist['user_id'] == user()->id) ? 1 : 0) : 0;
+            //            $playlists[$index]['is_my_playlist'] = user() ? (($playlist['user_id'] == user()->id) ? 1 : 0) : 0;
             $playlists[$index]['user'] = [];
             $playlists[$index]['user']['id'] = $playlistAuthor['id'];
             $playlists[$index]['user']['display_name'] = $playlistAuthor['display_name'];
             $playlists[$index]['user']['fields.profile_picture_image_url'] = $playlistAuthor['profile_picture_url'];
-        }
-        ContentRepository::$bypassPermissions = false;
-
-        if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM) {
-            return $playlists;
-        }
-
-        $completedItems = $this->userPlaylistsService->countCompletedUserPlaylistContents(
-            $playlistIds
-        );
-
-        $startedItems = $this->userPlaylistsService->countStartedUserPlaylistContents(
-            $playlistIds
-        );
-
-        $totalItems = $this->userPlaylistsService->countUserPlaylistItems(
-            $playlistIds
-        );
-
-        foreach ($playlists as $index => $playlist) {
-            $playlists[$index]['progress_percent'] = 0;
-            $playlists[$index]['completed_items'] = $completedItems[$playlist['id']] ?? 0;
-            $playlists[$index]['started_items'] = $startedItems[$playlist['id']] ?? 0;
-            $playlists[$index]['total_items'] = $totalItems[$playlist['id']] ?? 0;
-            $playlists[$index]['state'] =
-                ($playlists[$index]['completed_items'] > 0 || $playlists[$index]['started_items'] > 0) ? 'started' :
-                    (($playlists[$index]['completed_items'] == $playlists[$index]['total_items']) ? 'completed' : '');
-            if($playlists[$index]['total_items'] > 0){
-                $playlists[$index]['progress_percent'] = $playlists[$index]['completed_items']/$playlists[$index]['total_items'];
-            }
         }
 
         return $playlists;

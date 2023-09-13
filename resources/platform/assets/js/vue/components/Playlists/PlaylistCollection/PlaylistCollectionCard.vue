@@ -10,26 +10,27 @@
             type: String,
             default: "drumeo"
         },
-        list: {
+        listElement: {
             type: Object,
             default: {}
         },
         isListView: {
             type: Boolean,
             default: false,
-        }
+        },
+        isMiniCatalog: {
+            type: Boolean,
+            default: false,
+        },
     });
 
     //-----------Computed Props-----------//
     const duration_formated = computed(()=> {
-        return props.list.duration_formated === '00:00' ? '0:00' : props.list.duration_formated.replace(/^0(?:0:0?)?/, '');
+        return props.listElement.duration_formated ? props.listElement.duration_formated.replace(/^0(?:0:0?)?/, '') : '0:00';
     })
     const description = computed(() => {
-        return props.list.description.replace(/(<([^>]+)>)/gi, "");
+        return props.listElement.description.replace(/(<([^>]+)>)/gi, "");
     })
-
-    //-------------Refs-------------//
-    const dropdownTarget = ref(null)
 
     //-----------Reactive Data-----------//
     const state = reactive({
@@ -68,8 +69,8 @@
     ]
 
     //-----------Watchers-----------//
-    watch(props.list, async (newList) => {
-        state.isPinned = newList.pinned;
+    watch(props.listElement, async (newListElement) => {
+        state.isPinned = newListElement.pinned;
     })
 
     //-----------Methods-----------//
@@ -95,33 +96,35 @@
 
     onBeforeMount(() => {
         //check if it's pinned with request? Or prerender?
-        state.isPinned = props.list.pinned ? true : false;
-        state.isPrivate = props.list.private;
+        state.isPinned = props.listElement.pinned ? true : false;
+        state.isPrivate = props.listElement.private;
     });
 
 </script>
 <template>
     <div class="tw-group tw-relative"
-         :class="isListView ? 'tw-h-[56px] tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825]' : 'tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1' "
+         :class="isListView ? 'tw-h-[56px] tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825]' : `tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 ${isMiniCatalog ? 'tw-w-[205px] tw-min-w-[205px] lg:tw-w-auto lg:tw-min-w-0 tw-pr-[10px]' : ''}` "
     >
         <!-- Playlist thumbnail -->
         <PlaylistThumbnail
-            :list="list"
+            :listElement="listElement"
             :isListView="isListView"
+            :isMiniCatalog="isMiniCatalog"
             :brand="brand"
+            :linkUrl="listElement.playback_url"
         />
 
         <!-- PLAYLIST INFO: clickable link -->
-        <a  :href="list.url"
-            class="tw-flex tw-w-full tw-text-[#0D0D0D] dark:tw-text-white"
+        <a  :href="listElement.url"
+            class="playlist-info-link tw-flex tw-w-full tw-text-[#0D0D0D] dark:tw-text-white"
             :class="props.isListView ? '' : 'tw-col-span-4'"
         >
             <div class="tw-w-full" :class="props.isListView ? 'tw-grid tw-grid-cols-10 tw-items-center' : '' ">
                 <!--name-->
-                <p class="tw-font-bold tw-truncate tw-w-full"
+                <p class="playlist-info-link-name tw-font-bold tw-truncate tw-w-full"
                    :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-7 xl:tw-col-span-2 tw-pl-2 md:tw-pl-[19px] tw-pr-2' : '' "
                 >
-                    {{ list.name }}
+                    {{ listElement.name }}
                 </p>
                 <!--description-->
                 <p class="tw-truncate tw-hidden"
@@ -134,8 +137,8 @@
                     :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-3 tw-w-full tw-pl-2 md:tw-pl-0 md:tw-text-base' : ''"
                 >
                     <div :class="props.isListView ? 'md:tw-w-1/2 tw-inline-flex tw-items-center tw-justify-center' : '' ">
-                        <span v-if="list.category" :class="{'tw-text-center' : props.isListView}">
-                            {{ list.category }}
+                        <span v-if="listElement.category" :class="{'tw-text-center' : props.isListView}">
+                            {{ listElement.category }}
                             <span class="tw-mx-1 tw-leading-none" :class="props.isListView ? 'md:tw-hidden' : '' ">|</span>
                         </span>
                     </div>
@@ -146,9 +149,9 @@
             </div>
             <!-- Pinned Icon -->
             <div class="tw-inline-flex tw-items-center tw-transition-colors"
-                 :class="[ !props.isListView ? 'tw-z-20 tw-absolute tw-top-2 tw-right-2 tw-bg-[rgba(0,12,23,0.5)] tw-rounded-full tw-p-1.5' : 'tw-px-4 xl:tw-px-8',`dark:tw-text-white`, { 'tw-opacity-0' : !state.isPinned } ]"
+                 :class="[ !props.isListView ? 'tw-z-20 tw-absolute tw-top-2 tw-right-2 tw-bg-[rgba(0,12,23,0.5)] tw-rounded-full tw-p-1.5' : 'tw-px-4 xl:tw-px-8', { 'tw-opacity-0' : !state.isPinned } ]"
             >
-                <musora-icon icon-name="tack" class="tw-w-[20px] tw-h-[20px] tw-mx-auto tw-hidden md:tw-flex" />
+                <musora-icon icon-name="tack" class="tw-w-[20px] tw-h-[20px] tw-mx-auto tw-hidden md:tw-flex tw-text-white" />
             </div>
         </a>
 
@@ -169,11 +172,11 @@
                 <!-- Dropdown-->
                 <PlaylistDropdown
                     :brand="brand"
-                    :dropdownTop="state.dropdownTop"
+                    :dropdownTop="isMiniCatalog ? true : state.dropdownTop"
                     :is-private="state.isPrivate"
                     :is-pinned="state.isPinned"
                     :dropdownOptions="dropdownOptions"
-                    :data="list"
+                    :data="listElement"
                     :is-open="state.dropdownOpen"
                     type="playlist"
                     @closeDropdown="state.dropdownOpen = false"
@@ -183,3 +186,9 @@
         </div>
     </div>
 </template>
+
+<style>
+.playlist-info-link:hover .playlist-info-link-name {
+    text-decoration: underline;
+}
+</style>

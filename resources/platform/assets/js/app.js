@@ -14,6 +14,7 @@ import AppContainer from './vue/apps/AppContainer.vue';
 import PageContainer from './vue/components/PageContainer/PageContainer.vue';
 import HomeCardLinks from './vue/components/HomeCardLinks/HomeCardLinks.vue';
 import CatalogSection from './vue/components/CatalogSection/CatalogSection.vue';
+import CatalogueCardContainer from './vue/components/Catalogue/CatalogueCardContainer.vue';
 import StatsSection from './vue/components/StatsSection/StatsSection.vue';
 import HeaderCarousel from './vue/components/HeaderCarousel/HeaderCarousel.vue'
 import StaticHeader from './vue/components/HeaderCarousel/StaticHeader.vue'
@@ -25,6 +26,7 @@ import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue';
 import InfoModal from './vue/components/Modal/InfoModal';
 import SoundSlice from './vue/components/SoundSlice/SoundSlice.vue';
 import CohortBanner from './vue/components/CohortBanner/CohortBanner.vue';
+import ContentInfo from './vue/components/ContentInfo/ContentInfo';
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -255,6 +257,8 @@ app.component('AppContainer', AppContainer)
     .component('InfoModal', InfoModal)
     .component('SoundSlice', SoundSlice)
     .component('CohortBanner', CohortBanner)
+    .component('CatalogueCardContainer', CatalogueCardContainer)
+    .component('ContentInfo', ContentInfo)
 
     .component('PlaylistPlaybackWrapper', defineAsyncComponent(() =>
         import(
@@ -295,6 +299,13 @@ app.component('AppContainer', AppContainer)
         import(
             /* webpackChunkName: "song-request" */
             `./vue/components/Songs/SongRequest.vue`
+        )
+    ))
+
+    .component('ReportUser', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "report-user" */
+            `./vue/components/ReportUser/ReportUser.vue`
         )
     ))
 

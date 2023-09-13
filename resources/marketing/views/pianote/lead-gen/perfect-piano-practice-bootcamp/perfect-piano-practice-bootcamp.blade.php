@@ -306,7 +306,7 @@
                                 <p class="leading-none text-lg py-1 text-black"><strong class="font-black">17</strong></p>
                             </div>
                             <p class="leading-tight uppercase text-yellow ml-4">
-                                <a target="_blank" href="https://www.google.com/search?q=9am+PDT" class="font-extrabold"><strong>Monday, October 17 @ 9am PDT</strong> <i class="fal fa-info-circle"></i></a>
+                                <a target="_blank" href="https://www.google.com/search?q=9am+PDT" class="font-extrabold"><strong>Monday, October 17 @ 9am PDT</strong> <i class="fa-light fa-info-circle"></i></a>
                             </p>
                         </div>
                         <p class="leading-tight mb-4" style="color:#fcffe3">
@@ -340,7 +340,7 @@
                         <br><br>
                         You’ll leave knowing how to structure your practice times to reach your goals, and you’ll have a planned template to follow.
                         <br><br>
-                        Best of all -- it’s 100% FREE.
+                        Best of all — it’s 100% FREE.
                         <br><br>
                         Simply enter your email to save your spot.
 

@@ -40,6 +40,7 @@ Route::domain('{drumeoDomain}')
     Route::get('/awards/', [SalesController::class, 'awards']);
     Route::get('/sonor/', [SalesController::class, 'sonor']);
     Route::get('/alesis', [SalesController::class, 'alesis']);
+    Route::get('/alesis/existing', [SalesController::class, 'alesisExisting']);
 
     Route::get('/june', [SalesController::class, 'trial']);
     Route::get('/trial-key', [SalesController::class, 'trial']);

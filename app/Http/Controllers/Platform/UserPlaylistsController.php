@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Carbon\Carbon;
+
 use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
+use App\Decorators\Playlist\PlaylistDecorator;
 use App\Decorators\Playlist\RoutingDecorator;
+use App\Decorators\Content\ResourceDecorator;
 use App\Http\Controllers\BaseController;
 use App\Services\PlaylistService;
 use Illuminate\Http\Request;
@@ -99,7 +103,7 @@ class UserPlaylistsController extends BaseController
             brand(),
             $term
         );
-
+        UserPlaylistsRepository::$availableCategories = false;
         $currentUser = [
             "avatar" => user()->profile_picture_url,
             "xp" => user()->totalXp(),
@@ -176,6 +180,18 @@ class UserPlaylistsController extends BaseController
             ContentRepository::$pullFutureContent = $oldFutureContent;
 
             foreach ($items as $index => $item) {
+                if ($item['type'] == 'song' && empty($item['assignments'] ?? [])) {
+                    LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
+                    $this->lessonAssignmentDecorator->decorate(new Collection([$item]))
+                        ->first();
+                    if(count($item['assignments'] ?? []) > 0){
+                        $playlistItems[$index]['duration'] = $item['assignments'][0]['length_in_seconds'] ?? 0;
+                    }
+                }
+                if($item['type'] == 'assignment'){
+                    $playlistItems[$index]['duration'] = $item['length_in_seconds'];
+                }
+
                 $playlistItems[$index]['id'] = $item['id'];
                 $playlistItems[$index]['type'] = $item['type'];
                 $playlistItems[$index]['title'] = $item['title'];
@@ -186,7 +202,7 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['need_access'] = $item['need_access'] ?? false;
                 $playlistItems[$index]['need_access_message'] = $item['need_access_message'] ?? '';
 
-                $playlistItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
+                $playlistItems[$index]['duration'] = $playlistItems[$index]['duration'] ?? $item->fetch('fields.video.fields.length_in_seconds', 0);
                 $playlistItems[$index]['url'] = url()->route('platform.user.playlist-item', [
                     'playlistId' => $playlistId,
                     'playlistItemId' => $item['user_playlist_item_id'],
@@ -211,6 +227,8 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['parent_title'] = $item['parent_title'] ?? '';
                 $playlistItems[$index]['is_high_routine'] = $item['is_high_routine'] ?? false;
                 $playlistItems[$index]['is_low_routine'] = $item['is_low_routine'] ?? false;
+                $playlistItems[$index]['playlist_item_name'] = $item['playlist_item_name'] ?? false;
+                $playlistItems[$index]['content_name'] = $item['content_name'] ?? false;
             }
         }
 
@@ -252,7 +270,7 @@ class UserPlaylistsController extends BaseController
             ContentService::STATUS_ARCHIVED
         ];
         ContentRepository::$pullFutureContent = true;
-
+        PlaylistDecorator::$decorationMode= DecoratorInterface::DECORATION_MODE_MINIMUM;
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId, false);
         throw_if((empty($playlist) || ($playlist == -1)), new NotFoundHttpException());
 
@@ -282,6 +300,7 @@ class UserPlaylistsController extends BaseController
         ContentRepository::$bypassPermissions = true;
         $content = $this->contentService->getById($playlistItem['content_id']);
         ModeDecoratorBase::$decorationMode =   DecoratorInterface::DECORATION_MODE_MAXIMUM;
+        ResourceDecorator::$decorationMode = ResourceDecorator::DECORATION_MODE_MAXIMUM;
         $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 20, $page);
         ContentRepository::$bypassPermissions = false;
 
@@ -327,6 +346,8 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['parent_title'] = $item['parent_title'] ?? '';
             $otherItems[$index]['is_high_routine'] = $item['is_high_routine'] ?? false;
             $otherItems[$index]['is_low_routine'] = $item['is_low_routine'] ?? false;
+            $otherItems[$index]['content_name'] = $item['content_name'] ?? false;
+            $otherItems[$index]['playlist_item_name'] = $item['playlist_item_name'] ?? false;
         }
 
         if (!empty($content['parent_content_data'] ?? [])) {
@@ -354,9 +375,16 @@ class UserPlaylistsController extends BaseController
         $playlistItem['playlist_item_name'] = $initialItem['playlist_item_name'] ?? false;
         $playlistItem['is_full_track'] = $initialItem['is_full_track'] ?? false;
         $playlistItem['is_instrumentless_track'] = $initialItem['is_instrumentless_track'] ?? false;
+        $playlistItem['resources'] = $initialItem['resources'] ?? [] ;
 
-        $userPlaylists = collect($this->userPlaylistsService->getUserPlaylist(user()->id, 'user-playlist'));
-        $playlists = $userPlaylists->whereNotIn('id', $playlistId);
+        // Calculate if the playlist item is released or not
+        $givenDate = Carbon::parse($initialItem['published_on']);
+        $today = Carbon::now();
+        if ($givenDate->lt($today)) {
+            $playlistItem['released'] = true;
+        } else {
+            $playlistItem['released'] = false;
+        }
 
         $playlistLessons = (new ContentFilterResultsEntity([
                                                                'results' => $otherItems,
@@ -365,9 +393,9 @@ class UserPlaylistsController extends BaseController
                                                                ),
                                                            ]))->toResponseRawJson();
 
-        $relatedPlaylists = (new ContentFilterResultsEntity(['results' => $playlists]))->toResponseRawJson();
-        if (empty($playlistItem['assignments'] ?? [])) {
+        if (empty($playlistItem['assignments'] ?? []) && $playlistItem['type'] !== 'assignment') {
             LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
+            AddedToPrimaryPlaylistDecorator::$skip = true;
             $this->lessonAssignmentDecorator->decorate(new Collection([$playlistItem]))
                 ->first();
         }
@@ -406,6 +434,10 @@ class UserPlaylistsController extends BaseController
                     $playlistItem['parent']['parent']->fetch('data.thumbnail_url')
                 );
             }
+            }
+        if (!empty($playlistItem['parent'] ?? [])){
+            $playlistItem['resources'] = array_merge($playlistItem['resources'] ?? [], $initialItem['parent']['resources'] ?? []) ;
+
         }
 
         $relatedLesson =
@@ -418,7 +450,6 @@ class UserPlaylistsController extends BaseController
             "playlist" => $playlist,
             "playlistItem" => $playlistItem,
             "lessonType" => $playlistItem['type'],
-            "relatedPlaylists" => $relatedPlaylists,
             "playlistItems" => $playlistLessons,
             "relatedLesson" => $relatedLesson,
             "relatedLessons" => $relatedLesson,

@@ -45,6 +45,7 @@
             <order-form
                 theme-color="guitareo"
                 brand="guitareo"
+                referral-code="{{ $referralCode }}"
                 :cart="{{ json_encode($cart) }}"
                 cart-data-url='{{ get_musora_brand_base_url() }}'
                 :billing-address="{{ json_encode($billingAddress) }}"
@@ -70,7 +71,7 @@
                 <div class="flex flex-row flex-wrap text-center features">
                     <div class="flex flex-column xs-12 sm-4 align-center pa-3">
                         <i
-                            class="fal fa-mobile text-white mb-2"
+                            class="fa-light fa-mobile text-white mb-2"
                             style="font-size:40px;"
                         ></i>
 
@@ -100,7 +101,7 @@
 
                     <div class="flex flex-column xs-12 sm-4 pa-3 pv-2 align-center">
                         <i
-                            class="fal fa-check-circle text-white mb-2"
+                            class="fa-light fa-check-circle text-white mb-2"
                             style="font-size:40px;"
                         ></i>
                         <p class="tiny font-bold text-white">

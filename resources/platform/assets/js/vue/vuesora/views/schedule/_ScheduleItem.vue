@@ -51,12 +51,11 @@
             </div>
 
         <!-- ADD TO LIST OR RESET PROGRESS BUTTONS -->
-        <div class="tw-hidden md:tw-flex tw-flex-col icon-col tw-justify-center hide-xs-only">  
+        <div class="tw-flex tw-flex-col icon-col tw-justify-center">  
             <div class="body">
                 <i
-                    class="add-to-list fas fa-plus flex-center pointer"
-                    :class="is_added ? 'is-added ' + themeTextClass : 'tw-text-[#52525A] dark:tw-text-[#9EC0DC]'"
-                    :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"
+                    class="add-to-list fas fa-plus flex-center pointer tw-text-[#52525A] dark:tw-text-[#9EC0DC]"
+                    title="Add to Playlist"
                     @click.stop.prevent="addToList"
                 ></i>
             </div>

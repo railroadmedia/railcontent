@@ -17,17 +17,13 @@
 
 @section('scripts')
     @parent
-
-    <script>
-        $(document).ready(function () {
-
-            $(document).foundation();
-        });
-    </script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @stop()
+
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
 
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
@@ -41,7 +37,7 @@
             <img class="px-4 w-auto max-h-20 mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png" alt="Successful drumming logo">
 
             <div class="float-left w-full px-3 sm:px-4 video-container">
-                <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
+                <i @click="trailer = true;" class="fas fa-play play-button autoplay-video"></i>
             </div>
             <div class="float-left w-full px-3 sm:px-4 text-container">
                 <div class="course-logo">
@@ -63,13 +59,13 @@
                 </p>
             </div>
         </div>
-
-        <div class="reveal large" id="previewModal" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/275665270?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-        </div>
     </header>
+
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '275665270',
+        'vimeo' => true,
+    ])
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-6xl mx-auto">
@@ -143,7 +139,7 @@
                  whatever that might mean to you.</h6>
             <div class="flex flex-wrap justify-center align-center">
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-tree"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-tree"></i></div>
                     <p><strong>THE DRUMMING TREE</strong><br>
                         Perfect for drummers of all levels with progressive step-by-step lessons on every topic.</p>
                 </div>
@@ -158,47 +154,47 @@
                         A simple three-step formula for unlocking your creativity while creating your own drum fills.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-list"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-list"></i></div>
                     <p><strong>THE STYLE SELECTOR </strong><br>
                         Explore a variety of musical styles including rock, jazz, latin, funk, country, metal, and more.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-file-alt"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-file-alt"></i></div>
                     <p><strong>THE DRUMMING CHEAT SHEET </strong><br>
                         The easier way to create personalized charts for learning and remembering song structures.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-music"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-music"></i></div>
                     <p><strong>THE DRUMMING SONG SIMPLIFIER</strong><br>
                         A fast and effective way to play-along to virtually any song without learning every drum part.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-lock"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-lock"></i></div>
                     <p><strong>THE LOCKED-IN SYSTEM </strong><br>
                         A simple three-phase approach for working with a bassist to create a better musical foundation.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-headphones"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-headphones"></i></div>
                     <p><strong>THE SUCCESSFUL BAND METHOD </strong><br>
                         A list of 10 important guidelines for bands to follow to improve your chance of success.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-check"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-check"></i></div>
                     <p><strong>THE DRUMMER’S CHECKLIST </strong><br>
                         A comprehensive list of everything drummers should bring to the practice room, studio, or live gig.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-calendar-alt"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-calendar-alt"></i></div>
                     <p><strong>THE HABITUAL DRUMMER </strong><br>
                         Five steps to maintaining the habits you need to achieve consistent drumming progress.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-lightbulb"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-lightbulb"></i></div>
                     <p><strong>THE INSPIRED DRUMMER </strong><br>
                         Ten sources of drumming inspiration to help you stay motivated as a musician.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-users"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-users"></i></div>
                     <p><strong>THE CONNECTED DRUMMER </strong><br>
                         Ten unique ways you can connect with other musicians for support and encouragement.</p>
                 </div>
@@ -216,7 +212,7 @@
                     <h2 class="text-center sm:text-left"><strong>Jared Falk</strong></h2>
                     <h6 class="leading-normal mt-4 lg:mt-6">Jared Falk has been a trusted source for online drum lessons for 15+ years.
                         <br><br>
-                        As the face of Drumeo, Jared is a pioneer of online drum instruction -- helping prospective drummers around the world learn their first beats and beyond.
+                        As the face of Drumeo, Jared is a pioneer of online drum instruction — helping prospective drummers around the world learn their first beats and beyond.
                         <br><br>
                         His passion, grit, and approachable style have helped him become the most-watched drum instructor online… ever! And now you can take in his first-ever full curriculum for beginner drummers anytime and anywhere it fits your schedule.
                     </h6>

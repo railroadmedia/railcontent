@@ -138,7 +138,7 @@
             }
         }
     </style>
-    @if(!empty($thomann))
+    @if(!empty($thomann) || !empty($alesis))
         <style>
             .apply {
                 background:#0b76db;
@@ -165,14 +165,19 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
         "subscriptionVersion" => true,
-        "fullSubscriptionVersion" => true,
         "trialVersion" => true,
         "joinUrl" => '/choose-plan',
     ])
 
-    <div class="py-8 sm:py-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+    <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-            @if(empty($thomann))
+            @if(!empty($alesis))
+                <img alt="alesis logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-6 sm:h-10 transition-opacity opacity-0" src="{{ musora_cdn('redeem/alesis/alesis-logo.png') }}">
+                <h3 class="leading-tight mt-3 mb-6 sm:mb-10"><strong>Redeem your membership<br class="sm:hidden"> to Drumeo.</strong></h3>
+                <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
+                    <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/113327941" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
+                </div>
+            @elseif(empty($thomann))
                 <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership for<br class="hidden sm:inline"> Drumeo, Pianote, Guitareo & Singeo.</strong></h3>
                 <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
                     <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/113327941" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
@@ -192,7 +197,16 @@
                 </div>
             @endif
              @if($newAccount)
-                @if(empty($thomann))
+                @if(!empty($alesis))
+                    <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+                        <strong><b>Existing Member?</b>
+                            <br>
+                            <a class="text-drumeo underline" href="/alesis/existing">Click here to add to your account.</a>
+                        </strong>
+                        <br>
+                        <em>(The form below is only for new accounts)</em>
+                    </div>
+                @elseif(empty($thomann))
                     <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
                         <strong><b>Existing Member?</b>
                             <br>
@@ -210,15 +224,25 @@
 
                 @include('musora.pages.redeem._redeem-form')
              @else
-                <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
-                    <strong> <b>Not already a member?</b>
+                @if(!empty($alesis))
+                    <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+                        <strong> <b>Not already a member?</b>
+                            <br>
+                            <a class="text-drumeo underline" href="/alesis">Click here to redeem on a new account.</a>
+                        </strong>
                         <br>
-                        <a class="text-drumeo underline" href="/redeem">Click here to redeem on a new account.</a>
-                    </strong>
-                    <br>
-                    <em>(The form below is only for existing members)</em>
-                </div>
-
+                        <em>(The form below is only for existing members)</em>
+                    </div>
+                @else
+                    <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+                        <strong> <b>Not already a member?</b>
+                            <br>
+                            <a class="text-drumeo underline" href="/redeem">Click here to redeem on a new account.</a>
+                        </strong>
+                        <br>
+                        <em>(The form below is only for existing members)</em>
+                    </div>
+                @endif
                 @foreach ($errors->all() as $error)
                     <br>
                     <p class="validation-error">{{ $error }}</p>

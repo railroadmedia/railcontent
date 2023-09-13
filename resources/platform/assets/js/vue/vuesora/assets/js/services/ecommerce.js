@@ -79,7 +79,7 @@ export default {
      * Clears all cart items.
      *
      * @param {String} url
-     * 
+     *
      * @returns {Promise}
      */
     clearCart(url) {
@@ -163,8 +163,8 @@ export default {
      *
      * @returns {Promise}
      */
-    getPaymentMethods(url, user_id) {
-        return axios.get(url+`/ecommerce/user-payment-method/${user_id}`)
+    getPaymentMethods(user_id) {
+        return axios.get(`/ecommerce/user-payment-method/${user_id}`)
             .then(response => response)
             .catch(ErrorHandler);
     },
@@ -226,8 +226,8 @@ export default {
      * @param {String|Number} payment_method_id
      * @returns {Promise}
      */
-    deletePaymentMethod(url, payment_method_id) {
-        return axios.delete(url+`/ecommerce/payment-method/${payment_method_id}`)
+    deletePaymentMethod(payment_method_id) {
+        return axios.delete(`/ecommerce/payment-method/${payment_method_id}`)
             .then(response => response)
             .catch(ErrorHandler);
     },

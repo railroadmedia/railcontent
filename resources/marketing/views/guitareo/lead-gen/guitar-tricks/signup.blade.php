@@ -107,7 +107,7 @@
             <h2>Your mission starts <strong class="text-yellow">HERE</strong>.</h2>
             <h4 class="leading-7 mt-2 mx-auto mb-5 max-w-xl md:mt-4 md:mb-9 lg:max-w-3xl lg:mt-4 l:mb-12">Most guitar lessons are boring because the end-result is <strong>so far away</strong>. This is different. Rob Scallon is
                 taking you on a <u>free 6-video mission</u> where you’ll learn how to play those super catchy but slightly
-                annoying COMMERCIAL JINGLES on the guitar-- and to complete your mission you’ll need to pick up two
+                annoying COMMERCIAL JINGLES on the guitar— and to complete your mission you’ll need to pick up two
                 vital guitar skills that will last a lifetime. <em>Are you up for the challenge?</em></h4>
             <div class="flex flex-wrap">
                 @foreach ($steps as $step)
@@ -134,7 +134,7 @@
         "bgColor" => "black",
         "meetYourTeacher" => '<h2>Meet your teacher...</h2>',
         "name" => '<img class="w-full mb-80 md:my-7 md:max-w-md" src="https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/rob-scallon.png" style="max-width:210px;">',
-        "desc" => "Rob Scallon plays guitar for the internet -- with 2M Subscribers on YouTube and counting -- and now he’s sharing his best tips to help YOU get more out of this amazing instrument.",
+        "desc" => "Rob Scallon plays guitar for the internet — with 2M Subscribers on YouTube and counting — and now he’s sharing his best tips to help YOU get more out of this amazing instrument.",
         "asSeenColor" => "text-yellow",
         "thumbnails" => [
             [
@@ -170,7 +170,7 @@
         "bgImg" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/order-background.jpg",
         "img" => '<img class="w-full max-w-md" src="https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/logo-with.png">',
         "text" => '<h2 class="my-10">Enter your email below<br class="sm:hidden"> to get started!</h2>',
-        "formId" => "Guitareo - Engagement - Trigger - Guitar Tricks - Web Form",
+        "formId" => "Guitareo - Engagement - Trigger - Guitar Tricks - Web Form2",
         "formName" => 'Guitar Tricks',
         "submitButtonColor" => 'orange',
     ])

@@ -1,12 +1,19 @@
-@extends('pianote.lead-gen.chord-hacks.chord-hacks-layout')
+@extends('pianote.lead-gen.lead-gen-layout-tw')
 
 @section('meta')
     @parent
     <title>Chord Hacks | Pianote</title>
-@stop()
+    <meta property="og:title" content="Chord Hacks">
+
+    <meta name="description" content="The easiest way to learn beautiful piano chords.">
+    <meta property="og:description" content="The easiest way to learn beautiful piano chords.">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/share-image.jpg" style="display: none;">
+    <meta property="og:url" content="https://www.pianote.com/chord-hacks">
+@endsection
 
 @section('head')
     @parent
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-learn-songs.css') }}" rel="stylesheet">
     <style>
         header .disclaimer {
             display: none;
@@ -28,7 +35,7 @@
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-2"><strong>Sign up for 5 FREE play-along lessons</strong></h6>
 
-                    <div class="mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video" style="padding-bottom: 75%;" data-open="trailer">
+                    <div class="mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video" style="padding-bottom: 75%;" data-open="trailer">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/header-image-m.png" alt="header image" fetchpriority="high" />
                         <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
@@ -57,7 +64,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="relative bg-contain bg-top cursor-hover autoplay-video" style="padding-bottom: 102%;" data-open="trailer">
+                    <div class="relative bg-contain bg-top cursor-pointer autoplay-video" style="padding-bottom: 102%;" data-open="trailer">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/header-image.png" alt="header image" fetchpriority="high" />
                         <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
@@ -166,7 +173,7 @@
             <img class="h-56 inline sm:hidden transition-all opacity-0 mb-5" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/dont-practice-play.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
             <div class="text-left flex flex-wrap sm:flex-nowrap items-center">
                 <div class=" max-w-lg sm:pr-7">
-                    <h2 class="mb-3 sm:mb-7"><strong>Don’t practice -- PLAY!</strong></h2>
+                    <h2 class="mb-3 sm:mb-7"><strong>Don’t practice — PLAY!</strong></h2>
                     <p class="leading-normal">Practice makes perfect. But it also makes you question your sanity.
                         <br><br>
                         You’re on your own. It’s repetitive. It doesn’t sound good. And it’s hard.
@@ -202,28 +209,11 @@
             </div>
         </div>
     </section>
-    <section class="py-8 md:py-16 lg:py-20 relative" style="background:linear-gradient(to bottom,#01050F, #02142a);">
-        <div class="container mx-auto relative z-20">
-            <div class="flex flex-wrap max-w-6xl mx-auto px-2 lg:px-3">
-                <div class="px-3 md:px-4 w-full md:w-5/12 lg:w-5/12">
-                    <h4 class="mb-3 text-white">
-                        <strong>Is this really free?</strong>
-                    </h4>
-                    <p style="color:#ABB5C2;">
-                        Yes! We love sharing videos to help piano players -- and deep down we hope you’ll see some of the value that we provide inside Pianote juuuuust in case you ever want to consider joining!
-                    </p>
-                </div>
-                <div class="px-3 md:px-4 w-full md:w-7/12 lg:w-7/12">
-                    <h4 class="mt-7 md:mt-0 mb-3 text-white">
-                        <strong>Why do I need to give my email address?</strong>
-                    </h4>
-                    <p style="color:#ABB5C2;">
-                        Secretly, we’re hoping to start a relationship with you. This is our way of saying “Hey we create awesome piano lessons, can we show you?” Don’t worry, we won’t send you spam or share your email address with anybody else. You’ll get exactly what’s promised on this page along with ongoing piano videos, free lessons, and some special offers. And if you don’t like our emails, you can unsubscribe at any time.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+
+    @include('pianote.lead-gen.partials.quick-questions', [
+        'textColor' => 'white',
+        'bgColor' => 'linear-gradient(to bottom,#01050F, #02142a)'
+    ])
     <div id="final" class="anchor"></div>
     <section class="text-center customize px-4 lg:px-6 relative z-50 overflow-hidden py-10 sm:py-20" style="background:#eff7ff;">
         <div class="max-w-5xl mx-auto flex flex-wrap flex-col md:flex-row md:items-center">
@@ -241,7 +231,7 @@
                 <div class="max-w-md md:max-w-auto mx-auto md:mx-0">
                     @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
-                    "formId" => "Pianote - Engagement - Trigger - Chord Hacks - Web Form",
+                    "formId" => "Pianote - Engagement - Trigger - Chord Hacks - Web Form2",
                     "formName" => 'Chord Hacks',
                         "buttonText" => "start for free",
                         'stacked' => true,

@@ -24,7 +24,7 @@ $product = (object)[
         [
             'name' => '6 Pairs of Drumeo Drumsticks',
             'price' => 77.70,
-            'bundle_desc' => 'The Drumeo 5A Drumsticks by Vater -- made of hickory for strength and durability, featuring up to 2X the moisture content than most manufacturers for longer-lasting sticks, and personally hand-rolled by Alan Vater to ensure they’re weighted and tone-matched to perfection.',
+            'bundle_desc' => 'The Drumeo 5A Drumsticks by Vater — made of hickory for strength and durability, featuring up to 2X the moisture content than most manufacturers for longer-lasting sticks, and personally hand-rolled by Alan Vater to ensure they’re weighted and tone-matched to perfection.',
             'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
             'bundle_free_shipping' => true,
             'lifetime_access' => false,
@@ -33,7 +33,7 @@ $product = (object)[
         [
             'name' => 'Electrify Your Drumming',
             'price' => 197,
-            'bundle_desc' => 'Electrify Your Drumming will teach you the tools and styles of electronic dance music -- so you can build energy with risers, lock in with the vocals, add power to your beats and fills, create a climax in the music, and ultimately fuel any song with your playing -- giving you valuable skills that will apply to every style of music.',
+            'bundle_desc' => 'Electrify Your Drumming will teach you the tools and styles of electronic dance music — so you can build energy with risers, lock in with the vocals, add power to your beats and fills, create a climax in the music, and ultimately fuel any song with your playing — giving you valuable skills that will apply to every style of music.',
             'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eyd.jpg',
             'bundle_free_shipping' => true,
             'lifetime_access' => false,
@@ -60,7 +60,7 @@ $product = (object)[
         [
             'name' => 'Drum Technique Made Easy',
             'price' => 197,
-            'bundle_desc' => 'Technique guru Bruce Becker delivers an intimate 26-week course where you’ll get his proven process for improving your hand technique and foot technique so you can develop more speed and control around the kit -- all while preventing injuries & enjoying the music. ',
+            'bundle_desc' => 'Technique guru Bruce Becker delivers an intimate 26-week course where you’ll get his proven process for improving your hand technique and foot technique so you can develop more speed and control around the kit — all while preventing injuries & enjoying the music. ',
             'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg',
             'bundle_free_shipping' => false,
             'lifetime_access' => true,
@@ -78,7 +78,7 @@ $product = (object)[
         [
             'name' => 'Learn Songs Faster',
             'price' => 19,
-            'bundle_desc' => 'A 75-minute masterclass with Jared Falk & Dave Atkinson to help you learn MORE songs in less time -- from active listening that’ll help you hear phrasing and understand song structure, to building effective grooves and fills, and keeping time so your playing always matches the music.',
+            'bundle_desc' => 'A 75-minute masterclass with Jared Falk & Dave Atkinson to help you learn MORE songs in less time — from active listening that’ll help you hear phrasing and understand song structure, to building effective grooves and fills, and keeping time so your playing always matches the music.',
             'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/lsf.jpg',
             'bundle_free_shipping' => false,
             'lifetime_access' => true,
@@ -114,7 +114,7 @@ $product = (object)[
         [
             'name' => 'Great Hands For A Lifetime | Tommy Igoe',
             'price' => 29.99,
-            'bundle_desc' => 'Your pathway to playing better, faster, and healthier for a lifetime of pain-free drumming -- Great Hands For A Lifetime will help you unlock your potential and protect your hands for the many years of drumming to come.',
+            'bundle_desc' => 'Your pathway to playing better, faster, and healthier for a lifetime of pain-free drumming — Great Hands For A Lifetime will help you unlock your potential and protect your hands for the many years of drumming to come.',
             'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/tommy_card.jpg',
             'bundle_free_shipping' => false,
             'lifetime_access' => true,
@@ -179,7 +179,7 @@ $bonuses = [
     [
         'name' => 'Drumeo Drumsticks',
         'price' => 77.70,
-        'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer',
+        'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer',
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
         'shipping' => true,
     ],

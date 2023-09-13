@@ -23,8 +23,6 @@
     @parent
     <script>
         $(document).ready(function () {
-            $(document).foundation();
-
             // featured post header slider
             var $thumbNav = $('.slide-button'),
                 $imageSwap = $('.swapper-container .large-image');
@@ -159,6 +157,10 @@
     <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
 
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
+
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
         "name" => "Comfort Cover",
@@ -176,7 +178,7 @@
                 WATCH<br> THE DEMO
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
             </div>
-            <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
+            <i @click="trailer = true;" class="fas fa-play play-button autoplay-video"></i>
             <br>
             <h1><strong>Upgrade your drum<br class="hide-for-medium"> throne in seconds.</strong></h1>
             {{--            @if($products['comfort-cover']->getStockAvailability() > 0)--}}
@@ -195,31 +197,34 @@
                 @endif
             </p>
         </div>
-        <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/510872818?autoplay=1"
-                    frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-            {{--            @if($products['comfort-cover']->getStockAvailability() > 0)--}}
-            <a href="/ecommerce/add-to-cart?products[comfort-cover]=1" class="join blue">Get Comfy &raquo;</a>
-            {{--@endif--}}
-        </div>
     </header>
 
-    <section class="content-section coaches-info text-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/spread-background.jpg">
+    @component('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '510872818',
+        'vimeo' => true,
+    ])
+        @slot('button')
+            <div class="text-center bg-white rounded-b-xl py-4">
+                <a href="/ecommerce/add-to-cart?products[comfort-cover]=1" class="join blue">Get Comfy »</a>
+            </div>
+        @endslot
+    @endcomponent
+
+    <section class="content-section coaches-info text-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/spread-background.jpg">
         <div class="container mx-auto relative z-10">
             <h2><strong>The best seat <br class="hide-for-medium"> in the house.</strong></h2>
             <div class="text-section text-center relative z-10">
                 <img alt="Comfort cover spread" class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1300,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/comfort-cover-spread.png">
                 <p class="text-left">As a drummer, you’re ALWAYS sitting.
                     <br><br>
-                    Through every practice, rehearsal and gig, you’re constantly confined to your drum throne. Sometimes it’s great -- you have a built in place to chill out. But other times, it’s NOT.
+                    Through every practice, rehearsal and gig, you’re constantly confined to your drum throne. Sometimes it’s great — you have a built in place to chill out. But other times, it’s NOT.
                     <br><br>
                     Like when you hop on the drums after a long day sitting at work or in traffic and you just want to do the thing you love without nagging back, hip, or butt pain.
                     <br><br>
                     That’s why the fine folks at Drum Art created the Drumeo Comfort Cover.
                     <br><br>
-                    Designed specifically for drummers, the Comfort Cover absorbs shock, distributes your weight evenly, and improves your posture behind the drums -- instantly giving you a comfier, healthier, better drumming experience.
+                    Designed specifically for drummers, the Comfort Cover absorbs shock, distributes your weight evenly, and improves your posture behind the drums — instantly giving you a comfier, healthier, better drumming experience.
                 </p>
             </div>
         </div>
@@ -263,7 +268,7 @@
                     <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/icon-10-second.png" alt="Time icon">
                     <h4><strong>10 SECOND SET UP </strong></h4>
                     <p>
-                        The Comfort Cover easily folds up and can be taken to any of your gigs or rehearsals -- making every drum throne feel like home.
+                        The Comfort Cover easily folds up and can be taken to any of your gigs or rehearsals — making every drum throne feel like home.
                     </p>
                 </div>
             </div>
@@ -288,19 +293,19 @@
                     </div>
                 </div>
                 <div class="table-wrap">
-                    <p>The Comfort Cover gives you a consistent foundation every time (and everywhere) you sit down to play the drums -- so you can play longer, harder, and in total comfort.</p>
+                    <p>The Comfort Cover gives you a consistent foundation every time (and everywhere) you sit down to play the drums — so you can play longer, harder, and in total comfort.</p>
                     <table>
                         <tr>
                             <td>Portable</td>
-                            <td><i class="fal fa-check"></i></td>
+                            <td><i class="fa-light fa-check"></i></td>
                         </tr>
                         <tr>
                             <td>Hand-stitched</td>
-                            <td><i class="fal fa-check"></i></td>
+                            <td><i class="fa-light fa-check"></i></td>
                         </tr>
                         <tr>
                             <td>Made In Italy</td>
-                            <td><i class="fal fa-check"></i></td>
+                            <td><i class="fa-light fa-check"></i></td>
                         </tr>
                         <tr>
                             <td>Cost</td>
@@ -392,7 +397,7 @@
                 @include('_partials.components.question-dropdown', [
                 "num" => "?",
                 "title" => "Will the Comfort Cover replace my existing throne?",
-                "desc" => "No! The Comfort Cover upgrades your existing round drum throne to a more comfortable drumming experience. Just slide it over top and start playing -- you’re ready to go in seconds.",
+                "desc" => "No! The Comfort Cover upgrades your existing round drum throne to a more comfortable drumming experience. Just slide it over top and start playing — you’re ready to go in seconds.",
                 ])
             </div>
         </div>

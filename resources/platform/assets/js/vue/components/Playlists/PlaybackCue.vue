@@ -167,13 +167,18 @@ const handlePlaylistRepeatToggle = () => {
     }
 };
 
-const handleExpandedView = () => {
-    //set to oposite value
-    localStorage.setItem("playerExpanded", !playlistsStore.playerExpanded);
-    localStorage.setItem("isSidebarCollapsed", !pageContainerStore.isSidebarCollapsed);
+const handleExpandedView = (value) => {
+    localStorage.setItem("playerExpanded", value);
 
-    pageContainerStore.isSidebarCollapsed = !pageContainerStore.isSidebarCollapsed; 
-    playlistsStore.playerExpanded = !playlistsStore.playerExpanded
+    playlistsStore.playerExpanded = value;
+
+    // collapse sidebar when player is expanded and use localstorage to remember the state when player is collapsed
+    if(value){
+        pageContainerStore.isSidebarCollapsed = value;
+    }
+    else {
+        pageContainerStore.isSidebarCollapsed = JSON.parse(localStorage.getItem('isSidebarCollapsed'));
+    }
 }
 
 //-----------Lifecycle Hooks -----------//
@@ -185,12 +190,16 @@ onBeforeMount(() => {
 
     if (localStorage.getItem("playbackShuffleOn")) {
         isPlaybackShuffleOn.value = JSON.parse(localStorage.getItem("playbackShuffleOn"));
-    } 
+    }
     if (localStorage.getItem("isPlaybackPlaylistRepeatOn")) {
         isPlaybackPlaylistRepeatOn.value = JSON.parse(localStorage.getItem("isPlaybackPlaylistRepeatOn"));
     }
     if (localStorage.getItem("playerExpanded")) {
         playlistsStore.playerExpanded = JSON.parse(localStorage.getItem("playerExpanded"));
+
+        if(playlistsStore.playerExpanded){
+            pageContainerStore.isSidebarCollapsed = true;
+        }
     }
 
     localStorage.setItem("playbackRepeatOn", false);
@@ -241,13 +250,13 @@ onMounted(() => {
                     </a>
                     <!-- Expand/Collapse -->
                     <button class="tw-px-1 lg:tw-hidden" :title="state.collapsed ? 'Show Playback Cue' : 'Hide Playback Cue'"
-                        :class="state.collapsed ? 'tw-rotate-180' : ''" @click="state.collapsed = !state.collapsed">
+                        :class="state.collapsed ? '' : 'tw-rotate-180'" @click="state.collapsed = !state.collapsed">
                         <i class="fas fa-chevron-down tw-text-[#00101D] dark:tw-text-white"></i>
                     </button>
                     <!-- Fullscreen -->
-                    <button class="tw-px-1 tw-hidden tw-text-[#445F74] hover:tw-text-black dark:hover:tw-text-white dark:tw-text-[#7E9AB1] tw-ml-1" 
-                            :class="{ 'lg:tw-inline-block' : !playlistsStore.playerExpanded }" 
-                            @click.prevent="handleExpandedView"
+                    <button class="tw-px-1 tw-hidden tw-text-[#445F74] hover:tw-text-black dark:hover:tw-text-white dark:tw-text-[#7E9AB1] tw-ml-1"
+                            :class="{ 'lg:tw-inline-block' : !playlistsStore.playerExpanded }"
+                            @click.prevent="handleExpandedView(true)"
                     >
                         <i class="fas fa-up-right-and-down-left-from-center"></i>
                     </button>
@@ -308,8 +317,8 @@ onMounted(() => {
 
             <div class="tw-hidden" :class="{ 'lg:tw-inline-flex lg:tw-w-1/3 lg:tw-justify-end' : playlistsStore.playerExpanded }" >
                 <!-- Exit Fullscreen -->
-                <button class="tw-px-1 tw-text-[#00101D] dark:tw-text-white tw-ml-1 tw-font-bebas-neue tw-flex tw-flex-nowrap tw-items-center tw-leading-[21px]" 
-                        @click.prevent="handleExpandedView"
+                <button class="tw-px-1 tw-text-[#00101D] dark:tw-text-white tw-ml-1 tw-font-bebas-neue tw-flex tw-flex-nowrap tw-items-center tw-leading-[21px]"
+                        @click.prevent="handleExpandedView(false)"
                 >
                     Exit <i class="fas fa-xmark tw-ml-2"></i>
                 </button>
@@ -317,8 +326,8 @@ onMounted(() => {
         </div>
         <!-- Items -->
         <div v-if="playlistsStore.lessons.length" id="cue-scroll-container"
-            class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-relative"
-            :class="[{ 'tw-hidden lg:tw-block' : state.collapsed  }, { 'lg:tw-hidden' : playlistsStore.playerExpanded }, {'tw-overflow-y-auto': playlistsStore.lessons.length > 6} ]">
+            class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-relative tw-overflow-y-auto"
+            :class="[{ 'tw-hidden lg:tw-block' : state.collapsed  }, { 'lg:tw-hidden' : playlistsStore.playerExpanded }]">
             <!-- Top Skeleton for offset For top Infinite Scroll -->
             <!-- <div v-if="shouldShowTopSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
                 <div
@@ -329,7 +338,7 @@ onMounted(() => {
             <playlist-card :currentItem="playlistItemPosition" v-for="(lesson, i) in playlistsStore.lessons"
                 :key="'playlist-card-cue-' + lesson.id" :index="i" :cardId="'playlist-card-cue-' + lesson.id"
                 :lesson="lesson" :token="token" :brand="brand" :cue-version="true" :in-playback-cue="true"
-                :is-my-playlist="isMyPlaylist" 
+                :is-my-playlist="isMyPlaylist"
             />
             <!-- Skeleton Loader For Infinite Scroll -->
             <div v-if="shouldShowBottomSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">

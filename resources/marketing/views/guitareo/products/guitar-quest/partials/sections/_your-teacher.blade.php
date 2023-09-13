@@ -1,5 +1,5 @@
 {{-- Guitar Quest: Your Teacher Section --}}
-<section id="your_teacher" class="py-28 bg-top bg-contain bg-no-repeat" style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Frob-scallon-guide-background.png?auto=format&ixlib=php-1.2.1&w=2000&s=628c5effb415d56efeb57a83db77071a'); background-color: hsl(222, 100%, 3.92%);">
+<section id="your_teacher" class="py-28 bg-top bg-contain bg-no-repeat" style="background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-scallon-guide-background.png'); background-color: hsl(222, 100%, 3.92%);">
     <div class="max-w-screen-xl m-auto px-6 pb-6 flex text-white flex-col">
         <div class="w-full m-auto text-white text-center md:w-3/4 lg:w-1/2">
             <p class="italic mb-0 text-goldenrod pb-4 text-2xl md:text-3xl md:pb-0">
@@ -8,24 +8,24 @@
             <h2 class="block uppercase -mt-4 text-center font-bison-bold text-7xl md:text-9xl lg:leading-none">Rob Scallon</h2>
         </div>
         <div class="w-full m-auto relative -mt-7 md:-mt-11 md:w-9/12 lg:w-7/12">
-            <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Frob-scallon-guide.png?auto=format&ixlib=php-1.2.1&w=700&s=240ca9a0dea227df6d09f8fa0504a594" alt="frob scallon">
+            <img src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-scallon-guide.png" alt="frob scallon">
             <div class="bottom-0 w-full h-48 absolute gradient"></div>
         </div>
         <div class="w-full m-auto text-white relative -mt-24 md:w-3/4 lg:w-1/2">
             <h3 class="text-center uppercase mb-4 font-bison-bold mb-6 text-5xl md:text-6xl">
                 Your <span class="text-goldenrod underline">Mission</span>
             </h3>
-            <p>Music is a language -- and just like you didn’t start talking by understanding prepositions and nouns, you shouldn’t learn guitar by endlessly studying theory. <span class="font-bold">Instead, let’s just start playing!</span></p>
+            <p>Music is a language — and just like you didn’t start talking by understanding prepositions and nouns, you shouldn’t learn guitar by endlessly studying theory. <span class="font-bold">Instead, let’s just start playing!</span></p>
             <p>We'll play a show, shoot a music video, make commercial jingles, rock out, make a BUNCH of noise and write a ton of your own music along the way.</p>
             <p>GuitarQuest isn’t an all-in-one-guide, it’s not a step by step curriculum. It’s hardly even guitar lessons! You’ll start with a mission: <span class="italic">There’s a concert going on RIGHT NOW but the guitarist didn’t show. And they’re turning to you! Just learn these chords...</span></p>
-            <p>And level after level, we’re going to trick you into playing things you didn’t think you could, faster than you expected -- and you’ll end up doing the repetition and practice NOT because it’s practice, but because you’re making something cool happen!</p>
-            <p>You’ll gain momentum that keeps you hooked and falling more and more in love with the guitar. And you'll have the freedom to take your guitar journey anywhere you want -- playing songs, jamming with your friends, and writing your own music.</p>
+            <p>And level after level, we’re going to trick you into playing things you didn’t think you could, faster than you expected — and you’ll end up doing the repetition and practice NOT because it’s practice, but because you’re making something cool happen!</p>
+            <p>You’ll gain momentum that keeps you hooked and falling more and more in love with the guitar. And you'll have the freedom to take your guitar journey anywhere you want — playing songs, jamming with your friends, and writing your own music.</p>
             <p>I think you’re going to love it.</p>
             <!-- Signature -->
             <div class="flex flex-col items-center mb-6">
-                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Frob-scallon-headshot.jpg?auto=format&ixlib=php-1.2.1&w=65&s=e3d92fde0383f3f6b0548940c8dabf4a" width="65px" class="rounded-full mb-2" alt="frob scallon">
+                <img src="https://www.musora.com/musora-cdn/image/width=65,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-scallon-headshot.jpg" width="65px" class="rounded-full mb-2" alt="frob scallon">
                 <div class="block w-40 mx-auto">
-                    <img class="w-full" src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Frob-signature-2.png?auto=format&ixlib=php-1.2.1&w=200&s=67c6685c8fff21f1467906714f73e61c" alt="rob signature">
+                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-signature-2.png" alt="rob signature">
                 </div>
             </div>
             <!-- Social Links -->

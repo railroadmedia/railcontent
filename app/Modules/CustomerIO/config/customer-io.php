@@ -58,6 +58,16 @@ return [
     // form names and configuration
     'forms' => [
         'drumeo' => [
+            'Kristinas Top 25' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_kristinas-top-25',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
             '40 Songs' => [
                 'custom_attributes' => [
                 ],
@@ -300,6 +310,16 @@ return [
             ],
         ],
         'pianote' => [
+            'Blues Piano Bootcamp' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_blues-piano-bootcamp',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Chord Hacks' => [
                 'custom_attributes' => [
                 ],
@@ -535,6 +555,16 @@ return [
                 ],
                 'events' => [
                     'pianote_prospect_7-days',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Waltz in A Minor' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_waltz-in-a-minor',
                 ],
                 'accounts_to_sync' => [
                     'pianote',

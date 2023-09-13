@@ -2,11 +2,11 @@
   <teleport v-if="showNotification" to="#notifications-container">
     <div style="position: fixed; left: 0; width: 100vw; z-index: 10000; bottom: 40px;">
       <div class="tw-text-center tw-pb-6">
-          <div class="lg:tw-flex">
-              <div class="tw-hidden lg:tw-block" :class="isSidebarCollapsed ? 'lg:tw-w-[68px]' : 'lg:tw-w-[256px]'"></div>
-              <div class="lg:tw-flex-1 tw-flex tw-justify-center">
-                  <div class="lg:tw-max-w-[1280px] tw-w-full lg:tw-container lg:tw-mx-auto lg:tw-pl-7 lg:tw-pr-9">
-                    <div :class="`
+        <div class="lg:tw-flex">
+          <div class="tw-hidden lg:tw-block" :class="isSidebarCollapsed ? 'lg:tw-w-[68px]' : 'lg:tw-w-[256px]'"></div>
+          <div class="lg:tw-flex-1 tw-flex tw-justify-center">
+            <div class="lg:tw-max-w-[1280px] tw-w-full lg:tw-mx-auto lg:tw-pl-7 lg:tw-pr-9">
+              <div :class="`
                               tw-px-[16px]
                               tw-py-2
                               tw-w-4/6 lg:tw-w-full
@@ -19,24 +19,25 @@
                               dark:tw-bg-white
                               tw-bg-[#081825]
                               ${slideClassData}`
-                    ">
-                      <div class="tw-flex tw-justify-between tw-items-center tw-text-sm">
-                        <div class="tw-flex tw-items-center">
-                          <musora-icon v-if="SVGIcon.length" 
-                                      :icon-name="SVGIcon" 
-                                      class="tw-w-[24px] tw-h-[24px] tw-mr-2 tw-inline-flex" />
-                          <i v-else class="fas tw-mr-2 tw-text-[22px]" :class="notificationIcon ? notificationIcon : 'fa-bell'"></i>
-                          <span class="tw-font-bold tw-text-sm">{{ notificationText }}</span>
-                        </div>
-                        <button class="tw-ml-2 dark:tw-bg-[#E4E4E7] tw-bg-[#223F57] tw-w-[40px] tw-h-[40px] tw-flex-shrink-0 tw-border-none tw-rounded-full"
-                          v-on:click="handleOnClose">
-                          <i class="far fa-times dark:tw-text-black tw-text-white"></i>
-                        </button>
-                      </div>
-                    </div>
+                ">
+                <div class="tw-flex tw-justify-between tw-items-center tw-text-sm">
+                  <div class="tw-flex tw-items-center">
+                    <musora-icon v-if="SVGIcon.length" :icon-name="SVGIcon"
+                      class="tw-w-[24px] tw-h-[24px] tw-mr-2 tw-inline-flex" />
+                    <i v-else class="fas tw-mr-2 tw-text-[22px]"
+                      :class="notificationIcon ? notificationIcon : 'fa-bell'"></i>
+                    <span class="tw-font-bold tw-text-sm">{{ notificationText }}</span>
                   </div>
+                  <button
+                    class="tw-ml-2 dark:tw-bg-[#E4E4E7] tw-bg-[#223F57] tw-w-[40px] tw-h-[40px] tw-flex-shrink-0 tw-border-none tw-rounded-full"
+                    v-on:click="handleOnClose">
+                    <i class="far fa-times dark:tw-text-black tw-text-white"></i>
+                  </button>
+                </div>
               </div>
+            </div>
           </div>
+        </div>
       </div>
     </div>
   </teleport>
@@ -49,6 +50,7 @@ const iconAllowList = {
   playlist: true,
   shuffle: true,
   repeat: true,
+  report: true,
 };
 
 export default {
@@ -78,6 +80,10 @@ export default {
       type: Boolean,
       default: () => false,
     },
+    duration: {
+      type: Number,
+      default: 500
+    },
   },
   emits: ['onClose'],
   updated() {
@@ -90,12 +96,12 @@ export default {
       setTimeout(() => {
         this.$emit('onClose');
         this.slideClassData = 'slide-in-bottom';
-      }, 500);
+      }, this.slideDuration);
     },
 
     //Capitalize Helper
     capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
+      return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
   },
@@ -115,6 +121,7 @@ export default {
     icon(val) {
       //Check if it's a Musora Icon
       if (iconAllowList[val]) {
+        console.log(val)
         this.SVGIcon = val;
       } else {
         this.SVGIcon = '';
@@ -126,6 +133,8 @@ export default {
         this.notificationIcon = 'fa-exclamation-circle tw-text-[#facb15]';
       } else if (val === 'check') {
         this.notificationIcon = 'fa-check-circle tw-text-[#22c55d]';
+      } else if (val === 'edit') {
+        this.notificationIcon = 'fa-edit dark:tw-text-black tw-text-white';
       } else if (val === 'xp') {
         this.notificationIcon = 'fa-child dark:tw-text-black tw-text-white';
       } else {

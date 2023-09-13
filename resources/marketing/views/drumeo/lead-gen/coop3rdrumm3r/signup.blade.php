@@ -95,23 +95,7 @@
 
     @include('drumeo.lead-gen.partials.enter-email1',[
         "headLine" => "Enter your email below for 5 free video lessons for getting started.",
-        "formId" => "Drumeo - Engagement - Trigger - CC HTSPD - Web Form",
+        "formId" => "Drumeo - Engagement - Trigger - CC HTSPD - Web Form2",
         "formName" => "COOP3RDRUMM3R - CC HTSPD - Lead Gen"
     ])
-
-    <div class="reveal max-w-2xl" id="signUpModal" data-reveal>
-        <section class="header pop-up">
-            <h1 class="text-center">
-                Enter your email below for 5 free <br class="hidden sm:inline">
-                video lessons for getting started.
-            </h1>
-
-            @include("drumeo.lead-gen.partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-                "stacked" => true,
-                "formId" => "Drumeo - Engagement - Trigger - CC HTSPD - Web Form",
-                "formName" => 'COOP3RDRUMM3R - CC HTSPD - Lead Gen',
-            ])
-        </section>
-    </div>
 @stop

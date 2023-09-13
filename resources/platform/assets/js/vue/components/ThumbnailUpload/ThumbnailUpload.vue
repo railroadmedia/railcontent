@@ -125,6 +125,7 @@ function handleUploadError() {
                     v-if="type==='playlist'"
                     :img="imgUrlRef"
                     :brand="brand"
+                    :is-thumbnail-upload="true"
                 />
 
                 <img v-else class="tw-w-[158px] tw-h-[158px] tw-rounded-[9px]"

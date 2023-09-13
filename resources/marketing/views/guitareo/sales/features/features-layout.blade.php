@@ -28,7 +28,7 @@
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
-        'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-spread.png',
+        'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-collage.png',
     ])
 
     @include('musora.sales.components.app-section', [

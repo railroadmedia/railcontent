@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Platform;
 use App\Collections\PackCollection;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
+use App\Decorators\Playlist\PlaylistDecorator;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Content\CoachesController;
 use App\Maps\ContentTypes;
@@ -238,8 +239,10 @@ class HomePageController extends BaseController
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
         $collectionForDecoration = new RailcontentCollection();
+        PlaylistDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
         $collectionForDecoration = $collectionForDecoration->merge($usersList->results());
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'playlist');
+        PlaylistDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         $hasGear = count(
                 user()->onboardingGear->filter(function ($item) {
@@ -343,7 +346,7 @@ class HomePageController extends BaseController
             "hotForumTopics" => $hotForumTopics,
             "newContentJson" => $newContent->toResponseRawJson(),
             "startedContentJson" => $startedLessons->toResponseRawJson(),
-            "startedContentCount" => count($startedLessons),
+            "hasStartedLessons" => count($followedLessons->results()) > 0,
             "usersList" => $usersList,
             "userMetrics" => $userMetrics,
             "nextLearningPathLevel" => $nextLearningPathLevel,
@@ -626,7 +629,7 @@ class HomePageController extends BaseController
             user()->id,
             'user-playlist',
             brand(),
-            5
+            8
         );
 
         $results =

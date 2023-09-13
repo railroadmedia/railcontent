@@ -79,10 +79,10 @@
     ])
 
     @if(!empty($pack->fetch('*fields.instructor')) || !empty($pack->fetch('data.description')))
-        @include('partials.bladesora.members.content._content-info', [
-            "instructors" => $pack->fetch('*fields.instructor'),
-            "contentDescription" => $pack->fetch('data.description', null),
-        ])
+        <content-info
+            :instructors="{{ json_encode($pack->fetch('*fields.instructor')) }}"
+            :content-description="{{ json_encode($pack->fetch('data.description', null)) }}"
+        ></content-info>
     @endif
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-3">

@@ -306,7 +306,7 @@
                                 <p class="leading-none text-lg py-1 text-black"><strong class="font-black">13</strong></p>
                             </div>
                             <p class="leading-tight uppercase text-yellow ml-4">
-                                <a target="_blank" href="https://www.google.com/search?q=2pm+PDT" class="font-extrabold"><strong>Tuesday, September 13 @ 2pm PDT</strong> <i class="fal fa-info-circle"></i></a>
+                                <a target="_blank" href="https://www.google.com/search?q=2pm+PDT" class="font-extrabold"><strong>Tuesday, September 13 @ 2pm PDT</strong> <i class="fa-light fa-info-circle"></i></a>
                             </p>
                         </div>
                         <p class="leading-tight mb-4" style="color:#fcffe3">
@@ -332,7 +332,7 @@
                         <br><br>
                         It can be confusing, overwhelming, and even frustrating to know where or how to begin your piano journey. Not to mention expensive.
                         <br><br>
-                        So we’re taking ALL of the risk and worry out of it with your first lesson -- 100% FREE.
+                        So we’re taking ALL of the risk and worry out of it with your first lesson — 100% FREE.
                         <br><br>
                         Join Lisa Witt live via Zoom for 90 minutes and discover just what’s possible.
                         <br><br>

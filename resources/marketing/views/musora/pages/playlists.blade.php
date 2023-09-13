@@ -192,7 +192,7 @@
                         <div class="w-full sm:w-1/4 sm:px-2 lg:px-3 mb-4 sm:mb-0">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
-                                    <i class="fal {!! $songItem['fa-icon'] !!} text-4xl text-musora-gold"></i>
+                                    <i class="fa-light {!! $songItem['fa-icon'] !!} text-4xl text-musora-gold"></i>
                                     {{--                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="pl-3 sm:pl-0 text-left sm:text-center">

@@ -1,8 +1,4 @@
 @php
-    //dd($playlist);
-    //dd(get_defined_vars()['__data']);
-    //dd(isset($playlistItem['instrumentless']));
-
     $brandParams = [
         'drumeo' => '&show_chords=0',
         'singeo' => '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
@@ -14,6 +10,52 @@
         $recordingIdx = 2;
     }
     $soundsliceAdditionalParams = $brandParams[$brand] . '&layout=3&recording_idx=' . $recordingIdx;
+
+    $contentBreadCrumb = new stdClass();
+    if(!empty($lessonContent->fetch('*fields.instructor')) ||
+        !empty($lessonContent->fetch('data.description')) ||
+        !empty($lessonContent['chapters'])){
+
+            if(!empty($lessonContent['parent'])){
+                if(str_contains($lessonContent['parent']->fetch('type'),'learning-path')) {
+                    if($brand === 'drumeo'){
+                        $contentBreadCrumb->firstLevelUrl = '/drumeo/method/drumeo-method/241247';
+                    }
+                    else if($brand === 'pianote'){
+                        $contentBreadCrumb->firstLevelUrl = '/pianote/method/pianote-method/276693';
+                    }
+                    else if($brand === 'guitareo'){
+                        $contentBreadCrumb->firstLevelUrl = '/guitareo/method/guitareo-method/333652';
+                    }
+                    else if($brand === 'singeo'){
+                        $contentBreadCrumb->firstLevelUrl = '/singeo/method/singeo-method/308514';
+                    }
+                    $contentBreadCrumb->firstLevelTitle = $brand.' Method';
+                }
+                else if(str_contains($lessonContent['parent']->fetch('type'),'pack-bundle')){
+                    $contentBreadCrumb->firstLevelUrl = url()->route('platform.packs');
+                    $contentBreadCrumb->firstLevelTitle = 'Packs';
+                }
+                else if(str_contains($lessonContent['parent']->fetch('type'),'course-part')){
+                    $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", 'courses');
+                    $contentBreadCrumb->firstLevelTitle = 'Course';
+                }
+                else {
+                    $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent['parent']->fetch('type')]]);
+                    $contentBreadCrumb->firstLevelTitle = $lessonContent['parent']->fetch('type');
+                }
+
+                $contentBreadCrumb->secondLevelUrl = $lessonContent['parent']->fetch('url');
+                $contentBreadCrumb->secondLevelTitle = $lessonContent['parent']->fetch('fields.title');
+                $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
+            }
+            else {
+                $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent->fetch('type')]]);
+                $contentBreadCrumb->firstLevelTitle = parse_lesson_type_readable($lessonContent->fetch('type'), true);
+                $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
+            }
+    }
+
 @endphp
 
 @extends('partials.layout', ['forceHideSidebar' => false])
@@ -31,13 +73,14 @@
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
 
     {{-- WRAPPER VUE --}}
-    <playlist-playback-wrapper 
-        lesson-type="{{ $lessonType }}" 
-        brand="{{ $brand }}" 
+    <playlist-playback-wrapper
+        :is-released="{{ json_encode($playlistItem['released']) }}"
+        lesson-type="{{ $lessonType }}"
+        brand="{{ $brand }}"
         user-id="{{ user()->id }}"
-        additional-soundslice-params="{{ $soundsliceAdditionalParams }}" 
+        additional-soundslice-params="{{ $soundsliceAdditionalParams }}"
         playlist-id="{{ $playlist['id'] }}"
-        soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? '' }}" 
+        soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? '' }}"
         content-id="{{ $lessonContent->fetch('id') }}"
         youtube-video-id="{{ $lessonContent->fetch('fields.video.fields.youtube_video_id') }}"
         vimeo-video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
@@ -53,13 +96,13 @@
         description="{{ $lessonContent->fetch('data.description') }}"
         parent-title="{{ isset($parent) ? $parent->fetch('fields.title') : null }}"
         playlist-name="{{ $playlist['name'] }}"
-        next-lesson-url="{{ $nextPlaylistItemUrl }}" 
+        next-lesson-url="{{ $nextPlaylistItemUrl }}"
         prev-lesson-url="{{ $previousPlaylistItemUrl }}"
-        playlist-duration="{{ $playlist['duration'] }}" 
+        playlist-duration="{{ $playlist['duration'] }}"
         user-name="{{ user()->display_name }}"
-        user-avatar="{{ user()->profile_picture_url }}" 
+        user-avatar="{{ user()->profile_picture_url }}"
         user-xp="{{ user()->totalXP() }}"
-        user-access-level="{{ user()->access_level }}" 
+        user-access-level="{{ user()->access_level }}"
         playlist-url="{{ $playlist['url'] }}"
         :video-resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
         :instructors="{{ json_encode($lessonContent['coaches'] ?? []) }}"
@@ -69,16 +112,22 @@
         :useLegacyVideoPlayer="{{ user()->use_legacy_video_player ?? false }}"
         :song-ranges="{{ json_encode($lessonContent['ranges'] ?? []) }}"
         :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}" {{-- Todo: Find a way to re add captions --}} {{-- :captions="{{ $lessonContent->fetch('fields.video.data.captions') }}" --}}
-        :playlist-items="{{ $playlistItems }}" 
+        :playlist-items="{{ $playlistItems }}"
         :related-lesson="{{ $relatedLesson }}"
-        :related-playlists="{{ $relatedPlaylists }}" 
         :playlist-item-position="{{ $positionInPlaylist }}"
         :playlist-item-id="{{ $playlistItem['id'] }}"
-        :playlist-item-title="{{ json_encode($playlistItem['title']) }}"
+        :playlist-item-title="{{ json_encode($playlistItem['playlist_item_name'] ? $playlistItem['playlist_item_name'] : $playlistItem['title']) }}"
         :start-second="{{ $playlistItem['start_second'] ?? 0 }}"
         :is-my-playlist="{{ $playlist['is_my_playlist'] }}"
         :end-second="{{ $playlistItem['end_second'] ?? $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
         subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] }}"
+        :assignments="{{ json_encode($lessonContent->fetch('*assignments', [])) }}"
+        :lesson-data="{{ json_encode($lessonContent) }}"
+        :show-info-button="{{ json_encode(!empty($lessonContent->fetch('*fields.instructor')) || !empty($lessonContent->fetch('data.description')) || !empty($lessonContent['chapters'])) }}"
+        :content-breadcrumb="{{ json_encode($contentBreadCrumb) }}"
+        :content-chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
+        :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}"
+        :content-instructors="{{ json_encode($lessonContent->fetch('*fields.instructor')) }}"
     >
     </playlist-playback-wrapper>
 @endsection

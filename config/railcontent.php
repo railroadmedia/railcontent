@@ -367,8 +367,10 @@ return [
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
 
             \App\Decorators\Content\InstructorDecorator::class,
-            \App\Decorators\Content\PlaylistItemDecorator::class,
+            \App\Decorators\Content\ResourceDecorator::class,
             \App\Decorators\Content\ContentTimezoneDecorator::class,
+            \App\Decorators\Content\PlaylistItemDecorator::class,
+
         ]
     ],
 
@@ -672,6 +674,8 @@ return [
                 'allowableFilters' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
+                'trailer1' => 448684113,
+                'trailer2' => 448684140
             ],
             'diy-drum-experiments' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/diy-drum-experiments.jpg',
@@ -1725,9 +1729,15 @@ return [
             "icon3_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/60a5d4c0-6dce-4f12-b1cb-a47996be1500/public",
         ],
     ],
+    'cohort_timeline_image_urls' => [
+        'drumeo' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/8ad4190c-98a2-450d-395d-8dea196b3200/public',
+        'pianote' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/4cbfd99c-fdc1-4872-173a-4b26c32b0200/public',
+        'guitareo' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/637d3903-f6a6-4f37-b152-0eb88969bb00/public',
+        'singeo' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/06b2a24d-60ba-4f6d-9e8d-3a467b2d0b00/public'
+    ],
     'content_multiple_level_content_depth_playlist_allowed' => [
         'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
     ],
     'playlist_items_limit' => 300,
-    'search_in_playlist_items_name' => false
+    'search_in_playlist_items_name' => true
 ];

@@ -19,7 +19,7 @@
             "lessonNumber" => "1",
             "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/drum-set-maintenance/1.jpg",
             "lessonText" => "Drums",
-            "description" => "The routine maintenance you KNOW you should be doing -- changing drum heads, oiling lugs, and removing scuff marks."
+            "description" => "The routine maintenance you KNOW you should be doing — changing drum heads, oiling lugs, and removing scuff marks."
         ],
         [
             "lessonNumber" => "2",
@@ -37,7 +37,7 @@
             "lessonNumber" => "4",
             "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/drum-set-maintenance/4.jpg",
             "lessonText" => "Pedal",
-            "description" => "Your pedal sees the most wear & tear on the kit -- use these tips to keep yours clean, springy, and squeak-free. "
+            "description" => "Your pedal sees the most wear & tear on the kit — use these tips to keep yours clean, springy, and squeak-free. "
         ],
         [
             "lessonNumber" => "5",
@@ -98,7 +98,7 @@
             <br><br class="hidden sm:inline">
             @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                "formId" => "Drumeo - Engagement - Trigger - Drum Maintenance - Web Form",
+                "formId" => "Drumeo - Engagement - Trigger - Drum Maintenance - Web Form2",
                 "formName" => 'Drum Set Maintenance',
                 "buttonText" => 'Send The Videos&nbsp;',
                 "multipleSignUpFormsOnThePage" => true

@@ -9,8 +9,8 @@
     <title>Tom Sawyer Practice Tool Demo | Drumeo</title>
     <meta property="og:title" content="Tom Sawyer Practice Tool Demo">
 
-    <meta name="description" content="Accurate sheet music that scrolls-along with the music -- and practice tools to slow it down, speed it up, create loops, add or remove the metronome, and… well, play songs faster!">
-    <meta property="og:description" content="Accurate sheet music that scrolls-along with the music -- and practice tools to slow it down, speed it up, create loops, add or remove the metronome, and… well, play songs faster!">
+    <meta name="description" content="Accurate sheet music that scrolls-along with the music — and practice tools to slow it down, speed it up, create loops, add or remove the metronome, and… well, play songs faster!">
+    <meta property="og:description" content="Accurate sheet music that scrolls-along with the music — and practice tools to slow it down, speed it up, create loops, add or remove the metronome, and… well, play songs faster!">
 
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
@@ -27,7 +27,7 @@
 
 <div class="w-full relative overflow-hidden" style="padding-bottom: 100vh;">
     <iframe class="fixed inset-0 h-full w-full absolute"
-            src="https://www.soundslice.com/scores/169812/embed/?api=1&amp;scroll_type=2&amp;branding=0"
+            src="https://www.soundslice.com/slices/jtYcc/embed/?api=1&amp;scroll_type=2&amp;branding=0"
             frameborder="0" allowfullscreen="allowfullscreen"></iframe>
 </div>
 

@@ -19,7 +19,24 @@ return [
         //--------------------------------------------------
         // drumeo
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
+            'form_name' => 'Kristinas Top 25',
+            'brand' => 'drumeo',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        [
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => '40 Songs',
             'brand' => 'drumeo',
@@ -36,7 +53,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'COOP3RDRUMM3R - CC HTSPD - Lead Gen',
             'brand' => 'drumeo',
@@ -53,7 +70,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Drum Set Maintenance',
             'brand' => 'drumeo',
@@ -70,7 +87,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Fastest Way To Get Faster',
             'brand' => 'drumeo',
@@ -87,7 +104,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Getting Started On The Drums',
             'brand' => 'drumeo',
@@ -104,7 +121,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Hand Technique',
             'brand' => 'drumeo',
@@ -121,7 +138,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Linear Drumming',
             'brand' => 'drumeo',
@@ -138,7 +155,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Grooves Of Michael Jackson',
             'brand' => 'drumeo',
@@ -155,7 +172,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Must-Know Drum Grooves',
             'brand' => 'drumeo',
@@ -172,7 +189,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Sucherman Sound',
             'brand' => 'drumeo',
@@ -189,7 +206,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'The Ultimate Drumming Toolbox',
             'brand' => 'drumeo',
@@ -206,7 +223,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Fastest Way To Get Faster - Facebook',
             'brand' => 'drumeo',
@@ -223,7 +240,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Getting Started On The Drums - Facebook',
             'brand' => 'drumeo',
@@ -240,7 +257,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Getting Started On The Drums - Thrive',
             'brand' => 'drumeo',
@@ -257,7 +274,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Gavins Grooves',
             'brand' => 'drumeo',
@@ -274,7 +291,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Free Play-Alongs',
             'brand' => 'drumeo',
@@ -291,7 +308,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Metal Play-Alongs',
             'brand' => 'drumeo',
@@ -308,7 +325,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Grooves Of John Bonham',
             'brand' => 'drumeo',
@@ -325,7 +342,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Blog Signup',
             'brand' => 'drumeo',
@@ -342,7 +359,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => '2 Million Celebration',
             'brand' => 'drumeo',
@@ -359,7 +376,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Drumeo Awards Giveaway',
             'brand' => 'drumeo',
@@ -376,7 +393,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Drumeo Awards Giveaway 2',
             'brand' => 'drumeo',
@@ -393,7 +410,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => '30 Day Drummer Waitlist',
             'brand' => 'drumeo',
@@ -410,7 +427,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => '30 Day Chops Waitlist',
             'brand' => 'drumeo',
@@ -429,7 +446,7 @@ return [
         //--------------------------------------------------
         // pianote
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Chord Hacks - Facebook',
             'brand' => 'pianote',
@@ -446,7 +463,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Chord Hacks',
             'brand' => 'pianote',
@@ -463,7 +480,24 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
+            'form_name' => 'Blues Piano Bootcamp',
+            'brand' => 'pianote',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        [
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Getting Started On The Piano - Facebook',
             'brand' => 'pianote',
@@ -480,7 +514,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Getting Started On The Piano',
             'brand' => 'pianote',
@@ -497,7 +531,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Learn 3 Songs On Piano',
             'brand' => 'pianote',
@@ -514,7 +548,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Beginner Piano Christmas Carols',
             'brand' => 'pianote',
@@ -531,7 +565,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'NPPSH Waitlist',
             'brand' => 'pianote',
@@ -548,7 +582,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Easy Chords Waitlist',
             'brand' => 'pianote',
@@ -565,7 +599,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => '50 Chord Charts',
             'brand' => 'pianote',
@@ -582,7 +616,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Sight Reading Made Simple',
             'brand' => 'pianote',
@@ -599,7 +633,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Blog Signup',
             'brand' => 'pianote',
@@ -616,7 +650,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'F Sharp Minor',
             'brand' => 'pianote',
@@ -633,7 +667,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'The Minor Blues Made Easy',
             'brand' => 'pianote',
@@ -650,7 +684,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Pentatonic Scale',
             'brand' => 'pianote',
@@ -667,7 +701,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Practice Chord Inversions',
             'brand' => 'pianote',
@@ -684,7 +718,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Riffs And Fills',
             'brand' => 'pianote',
@@ -701,7 +735,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => '1 Million',
             'brand' => 'pianote',
@@ -718,7 +752,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Classical Piano Quick Start',
             'brand' => 'pianote',
@@ -735,7 +769,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Piano In 5 Days',
             'brand' => 'pianote',
@@ -752,7 +786,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'The Magic of Piano Chords Bootcamp',
             'brand' => 'pianote',
@@ -769,7 +803,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Piano For Complete Beginners Bootcamp',
             'brand' => 'pianote',
@@ -786,7 +820,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Perfect Practice Bootcamp',
             'brand' => 'pianote',
@@ -803,7 +837,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Giveaway Form',
             'brand' => 'pianote',
@@ -820,7 +854,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'FP30 Giveaway',
             'brand' => 'pianote',
@@ -837,7 +871,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => '7 Days To Sight Reading',
             'brand' => 'pianote',
@@ -854,7 +888,24 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
+            'form_name' => 'Waltz in A Minor',
+            'brand' => 'pianote',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        [
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Personality Quiz Academic',
             'brand' => 'pianote',
@@ -871,7 +922,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Personality Quiz Entertainer',
             'brand' => 'pianote',
@@ -888,7 +939,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Personality Quiz Explorer',
             'brand' => 'pianote',
@@ -905,7 +956,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Personality Quiz Scientist',
             'brand' => 'pianote',
@@ -924,7 +975,7 @@ return [
         //--------------------------------------------------
         // guitareo
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Acoustic Guitar Jump Start',
             'brand' => 'guitareo',
@@ -941,7 +992,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Guitar Chords for Hit songs',
             'brand' => 'guitareo',
@@ -958,7 +1009,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'The Beginner Guitar Starter',
             'brand' => 'guitareo',
@@ -975,7 +1026,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'The Guitarists Toolbox',
             'brand' => 'guitareo',
@@ -992,7 +1043,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Guitar Tricks',
             'brand' => 'guitareo',
@@ -1009,7 +1060,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'GQ Waitlist',
             'brand' => 'guitareo',
@@ -1026,7 +1077,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Song Hour',
             'brand' => 'guitareo',
@@ -1043,7 +1094,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Fretboard Cheatsheet',
             'brand' => 'guitareo',
@@ -1060,7 +1111,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Solo In An Hour',
             'brand' => 'guitareo',
@@ -1077,7 +1128,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Getting Started On The Acoustic Guitar',
             'brand' => 'guitareo',
@@ -1094,7 +1145,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Getting Started On The Electric Guitar',
             'brand' => 'guitareo',
@@ -1111,7 +1162,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Blog Signup',
             'brand' => 'guitareo',
@@ -1128,7 +1179,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Guitareo Waitlist 2',
             'brand' => 'guitareo',
@@ -1145,7 +1196,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Live Bootcamp',
             'brand' => 'guitareo',
@@ -1162,7 +1213,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Chord Bootcamp',
             'brand' => 'guitareo',
@@ -1181,7 +1232,7 @@ return [
         //-------------------------------------------
         // singeo
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Improve Any Voice',
             'brand' => 'singeo',
@@ -1198,7 +1249,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Holiday Karaoke',
             'brand' => 'singeo',
@@ -1215,7 +1266,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Singeo Waitlist',
             'brand' => 'singeo',
@@ -1232,7 +1283,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Singeo Waitlist 2',
             'brand' => 'singeo',
@@ -1249,7 +1300,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Stop Hating Your Voice',
             'brand' => 'singeo',
@@ -1266,7 +1317,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Studio Giveaway',
             'brand' => 'singeo',
@@ -1283,7 +1334,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Eikon Giveaway',
             'brand' => 'singeo',
@@ -1300,7 +1351,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Ultimate Giveaway',
             'brand' => 'singeo',
@@ -1317,7 +1368,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Mic Giveaway',
             'brand' => 'singeo',
@@ -1334,7 +1385,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Vocal Bootcamp',
             'brand' => 'singeo',
@@ -1351,7 +1402,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Breath Bootcamp',
             'brand' => 'singeo',
@@ -1368,7 +1419,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Harmony Bootcamp',
             'brand' => 'singeo',
@@ -1385,7 +1436,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form',
+            'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Blog Signup',
             'brand' => 'singeo',

@@ -16,7 +16,7 @@
           'position' => 'left',
           'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/thumb3.jpg',
           'title' => 'Chord Inversions 101',
-          'desc' => 'Inversions can be scary and a little confusing. But they open up the keyboard in an entirely new way. The concept behind them is simple. And the result -- is powerful. You’ll get tips to practice and master your chord inversions so they’ll become second nature.'
+          'desc' => 'Inversions can be scary and a little confusing. But they open up the keyboard in an entirely new way. The concept behind them is simple. And the result — is powerful. You’ll get tips to practice and master your chord inversions so they’ll become second nature.'
       ],
       [
           'position' => 'right',
@@ -397,9 +397,9 @@
                     </h2>
                     <p class="text-left" style="color: #2A2F34; max-width: 406px; margin: 0;">
                         Even classical music that’s 100s of years old. <br><br>
-                        Chords are the foundation of music. When you understand and can play chords -- you’ll be able to play the songs you love easier, with more confidence.
+                        Chords are the foundation of music. When you understand and can play chords — you’ll be able to play the songs you love easier, with more confidence.
                         <br><br>
-                        Beyond that -- chords allow you to start writing your own music and improvising on the piano.
+                        Beyond that — chords allow you to start writing your own music and improvising on the piano.
                         <br><br>
                         It all comes down to chords.
                     </p>
@@ -520,7 +520,7 @@
                     <h2 class="text-center sm:text-left"><strong>Lisa Witt</strong></h2>
                     <h6 class="leading-normal mt-4 lg:mt-6">I know what it’s like to struggle on the piano. <br><br>
                         I have a short attention span, and learning to read music was like trying to understand a language that made no sense to me. <br><br>
-                        But what I’ve realized is that the traditional approach to piano lessons is not the only way to learn. We’re all different. And as a teacher, I’ve made it my mission to take the fear out of learning the piano -- and prove that YOU can do this. <br><br>
+                        But what I’ve realized is that the traditional approach to piano lessons is not the only way to learn. We’re all different. And as a teacher, I’ve made it my mission to take the fear out of learning the piano — and prove that YOU can do this. <br><br>
                         Even if you don’t believe me. <br><br>
                         It’s why I’m so excited about this course - because it’s going to show you what’s possible. <br><br>
                         I hope you’ll give me a chance to do that.

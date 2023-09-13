@@ -70,7 +70,7 @@
                 <br><br> You just want to PLAY THE DRUMS!
                 <br>
                 <img class="quote float-right" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/webinar/quote-image.png">
-                <br> You want to play along to your favorite songs. You want to play the beats and fills that you used to love -- and add new ones that you always wished you could play. And you want to have fun!
+                <br> You want to play along to your favorite songs. You want to play the beats and fills that you used to love — and add new ones that you always wished you could play. And you want to have fun!
                 <br><br> So in this one-hour live event, you’ll get the ammunition you need ‘come back to the drums’ with more clarity, clearer expectations, and a practice plan that’s guaranteed to work.
                 <br><br> And the best part? It’s live. So we’ll take YOUR questions and talk about what’s working, what’s not, and make sure that you have a better plan going forward. Just click any of the big buttons on this page to register. Let’s do this!
                 <br><br> To Your Drumming Success,
@@ -78,7 +78,7 @@
             <div class="avatar">
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/webinar/jared-falk.jpg">
                 <h4><strong>Jared Falk</strong></h4>
-                <h5><strong>DRUMEO CO-FOUNDER & CEO</strong></h5>
+                <h5><strong>DRUMEO FOUNDER</strong></h5>
             </div>
             <div class="awards columns">
                 <div class="columns small-4">
@@ -100,7 +100,7 @@
             <img src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/webinar/computer.png">
             <div class="details columns no-padding">
                 <div class="detail-box clearfix">
-                    <i class="fal fa-globe"></i>
+                    <i class="fa-light fa-globe"></i>
                     <p>
                         <strong>INTERNET READY DEVICE</strong><br> This is a live-streaming event. You’ll be able to watch from any internet-ready phone, tablet, laptop, or desktop computer.
                     </p>
@@ -112,7 +112,7 @@
                     </p>
                 </div>
                 <div class="detail-box clearfix">
-                    <i class="fal fa-file-edit"></i>
+                    <i class="fa-light fa-file-edit"></i>
                     <p>
                         <strong>PEN & PAPER</strong><br> I know everybody isn’t a ‘pen and paper’ note taker. And that’s fine. If you are, bring a pen and paper. If not, bring whatever works best for you!
                     </p>

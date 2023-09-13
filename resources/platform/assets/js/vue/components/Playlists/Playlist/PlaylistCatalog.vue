@@ -1,5 +1,5 @@
 <script setup>
-import {onBeforeMount, onMounted, watch, inject, ref, reactive, computed, onUpdated} from 'vue';
+import {onBeforeMount, onMounted, watch, inject, ref, reactive } from 'vue';
     import { storeToRefs  } from 'pinia';
     import { VueDraggableNext } from 'vue-draggable-next';
     import PlaylistService from '../../../../services/playlists.js';

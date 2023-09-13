@@ -469,7 +469,7 @@
 
     <section class="jared-quote text-center">
         <div class="row">
-            <h3><em>“Versatility is such a core component of becoming a more successful drummer -- and this book is the perfect reference for any drummer to learn about new styles, start playing new styles, and become well rounded musicians who’ll develop freedom across genres and develop their own voice on the drums.”</em></h3>
+            <h3><em>“Versatility is such a core component of becoming a more successful drummer — and this book is the perfect reference for any drummer to learn about new styles, start playing new styles, and become well rounded musicians who’ll develop freedom across genres and develop their own voice on the drums.”</em></h3>
             <div class="pic-name">
                 <img class="avatar" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/jared.jpg" alt="Jared Falk">
                 <div class="name">

@@ -1418,12 +1418,11 @@ h1, h2, h3, h4, h5, h6 {
         }
 
         blockquote {
-            font: 700 27px/1.1em $robotocondensed;
-            text-transform: uppercase;
+            font: italic 400 27px/1.1em $opensans;
             color: $drumeoBlue;
+            border-left: 5px solid $drumeoBlue;
             width: 100%;
             margin: 0 auto 15px;
-            border-left: 5px solid $drumeoBlue;
             padding: 10px 0 10px 15px;
             @include tablet {
                 font-size: 31px;
@@ -1470,6 +1469,53 @@ h1, h2, h3, h4, h5, h6 {
             padding: 13px 20px;
             @include tablet {
                 padding: 17px 25px;
+            }
+        }
+
+        .box-snippet {
+            position: relative;
+            margin: 40px auto;
+            width: 96%;
+
+            .content {
+                display: flex;
+                padding: 10px;
+                position: relative;
+                color: white;
+                background: $drumeoBlue;
+                border-radius: 2px;
+
+                .icon {
+                    margin-right: 10px;
+                    background: white;
+                    color: $drumeoBlue;
+                    font-size: 24px;
+                    padding: 10px;
+                    border-radius: 100%;
+                    min-width: 44px;
+                    text-align: center;
+                }
+
+                .text-container {
+                    padding: 4px 0;
+                    position: relative;
+                    z-index: 10;
+
+                    a {
+                        color: #fff!important;
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .shadow {
+                border: 3px solid $drumeoBlue;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: -10px;
+                top: 10px;
+                border-radius: 2px;
             }
         }
 
@@ -2647,52 +2693,5 @@ h1, h2, h3, h4, h5, h6 {
                 -webkit-box-orient: vertical;
             }
         }
-    }
-}
-
-.box-snippet {
-    position: relative;
-    margin: 40px auto;
-    width: 96%;
-
-    .content {
-        display: flex;
-        padding: 10px;
-        position: relative;
-        color: white;
-        background: $drumeoBlue;
-        border-radius: 2px;
-
-        .icon {
-            margin-right: 10px;
-            background: white;
-            color: $drumeoBlue;
-            font-size: 24px;
-            padding: 10px;
-            border-radius: 100%;
-            min-width: 44px;
-            text-align: center;
-        }
-
-        .text-container {
-            padding: 4px 0;
-            position: relative;
-            z-index: 10;
-
-            a {
-                color: #fff;
-                text-decoration: underline;
-            }
-        }
-    }
-
-    .shadow {
-        border: 3px solid $drumeoBlue;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: -10px;
-        top: 10px;
-        border-radius: 2px;
     }
 }

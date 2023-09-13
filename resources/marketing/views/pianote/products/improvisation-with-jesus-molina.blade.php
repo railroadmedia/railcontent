@@ -294,7 +294,7 @@
     {{--<div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#051124;">--}}
     {{--<div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/coaches-thumbs.jpg"></div>--}}
     {{--<div class=" px-4 lg:px-6 py-5 lg:py-7">--}}
-    {{--<i class="text-4xl align-middle fal fa-piano text-pianote"></i>--}}
+    {{--<i class="text-4xl align-middle fa-light fa-piano text-pianote"></i>--}}
     {{--<img class="h-5 ml-2 imgfilter-method lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method-text">--}}
     {{--<h4 class="leading-tight my-3"><strong>Step-By-Step<br class="hidden md:inline"> Curriculum</strong></h4>--}}
     {{--<p class="leading-normal text-light-navy">Build your foundation on the piano with a perfectly structured curriculum that will teach you all the skills you need to start playing beautiful music. This is your guide to musical freedom on the piano, perfect for beginners and intermediates.</p>--}}
@@ -385,7 +385,7 @@
     {{--'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/logo.png',--}}
     {{--'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/sight-reading.jpg',--}}
     {{--'title' => 'Sight Reading Made Simple',--}}
-    {{--'description' => 'If you’ve ever struggled through a music class -- let us show you how easy reading music can be.',--}}
+    {{--'description' => 'If you’ve ever struggled through a music class — let us show you how easy reading music can be.',--}}
     {{--'artist' => 'Lisa <strong>Witt</strong>',--}}
     {{--],--}}
     {{--[--}}

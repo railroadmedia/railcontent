@@ -10,7 +10,7 @@
     <title>@yield('title') | {{ ucfirst($brand) }}</title>
 
     <base target="_parent">
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body {

@@ -170,7 +170,7 @@
         <div class="max-w-md md:max-w-4xl mx-auto text-center px-6 lg:px-0">
             <h3 class="font-extrabold mb-4">How does it work?</h3>
             <p class="md:max-w-lg lg:max-w-xl mb-6">
-                It’s simple. You’ll get 8 step-by-step video lessons from us that will show you exactly what to do -- and better still… <br><br>
+                It’s simple. You’ll get 8 step-by-step video lessons from us that will show you exactly what to do — and better still… <br><br>
                 Exactly HOW TO PRACTICE. You’ll be able to sing along with hand-picked practice exercises after every lesson. You just have to press play.
             </p>
             @foreach($lessons as $key => $lesson)

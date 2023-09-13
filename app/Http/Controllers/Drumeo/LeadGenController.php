@@ -15,9 +15,26 @@ class LeadGenController extends BaseController
     {
         switch ($page) {
             case null:
-                return view('drumeo.lead-gen.100-songs.signup', ['recaptchaKey'=>config('recaptcha.key')]);
+                return view('drumeo.lead-gen.100-songs.signup', ['theme'=> 'drumeo', 'recaptchaKey'=>config('recaptcha.key')]);
             case 'unlocked':
                 return view('drumeo.lead-gen.100-songs.unlocked');
+            case 'thank-you':
+                return view('drumeo.lead-gen.100-songs.thank-you', ['theme'=> 'drumeo', 'month' => true]);
+            case 'ty-annual':
+                return view('drumeo.lead-gen.100-songs.ty-annual', ['theme'=> 'drumeo', 'month' => true]);
+            case 'ty-monthly':
+                return view('drumeo.lead-gen.100-songs.ty-monthly', ['theme'=> 'drumeo', 'month' => true]);
+        }
+
+        throw new NotFoundHttpException();
+    }
+    public function kristinasTop25(Request $request, $domain, $page = null)
+    {
+        switch ($page) {
+            case null:
+                return view('drumeo.lead-gen.kristinas-top-25.signup', ['theme'=> 'drumeo', 'recaptchaKey'=>config('recaptcha.key')]);
+            case 'unlocked':
+                return view('drumeo.lead-gen.kristinas-top-25.unlocked');
         }
 
         throw new NotFoundHttpException();
@@ -28,13 +45,6 @@ class LeadGenController extends BaseController
         return view('drumeo.lead-gen.coop3rdrumm3r.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
-    public function destupefy()
-    {
-        return view('drumeo.lead-gen.100-songs.signup', ['recaptchaKey'=>config('recaptcha.key')]);
-
-        throw new NotFoundHttpException();
-    }
-
     public function drumSetMaintenance()
     {
         return view('drumeo.lead-gen.courses.full.drum-set-maintenance.signup', ['recaptchaKey'=>config('recaptcha.key')]);
@@ -43,11 +53,6 @@ class LeadGenController extends BaseController
     public function dtmeTestimonials(Request $request, $domain, $page = null)
     {
         return view('drumeo.products.dtme-testimonials');
-    }
-
-    public function faster()
-    {
-        return view('drumeo.lead-gen.faster.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function fasterNeon()
@@ -67,6 +72,10 @@ class LeadGenController extends BaseController
                 return view('drumeo.lead-gen.getting-started.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
                 return view('drumeo.lead-gen.getting-started.thank-you', ['theme'=> 'drumeo', 'month' => true]);
+            case 'ty-annual':
+                return view('drumeo.lead-gen.getting-started.ty-annual', ['theme'=> 'drumeo', 'month' => true]);
+            case 'ty-monthly':
+                return view('drumeo.lead-gen.getting-started.ty-monthly', ['theme'=> 'drumeo', 'month' => true]);
             case '10-practice':
                 $currentLesson = (object) array(
                     'title' => 'Building Your Practice Routine',
@@ -100,6 +109,21 @@ class LeadGenController extends BaseController
                     'totalLessonNum' => 10,
                     'currentLessonNum' => 10,
                 ]);
+        }
+
+        throw new NotFoundHttpException();
+    }
+    public function faster(Request $request, $domain, $page = null)
+    {
+        switch ($page) {
+            case null:
+                return view('drumeo.lead-gen.faster.signup', ['recaptchaKey'=>config('recaptcha.key')]);
+            case 'thank-you':
+                return view('drumeo.lead-gen.faster.thank-you', ['theme'=> 'drumeo', 'month' => true]);
+            case 'ty-annual':
+                return view('drumeo.lead-gen.getting-started.ty-annual');
+            case 'ty-monthly':
+                return view('drumeo.lead-gen.getting-started.ty-monthly');
         }
 
         throw new NotFoundHttpException();
@@ -248,7 +272,7 @@ class LeadGenController extends BaseController
             return view('drumeo.lead-gen.blog-forms.'.$page, ['recaptchaKey'=>config('recaptcha.key')]);
         }
         else {
-            return view('drumeo.lead-gen.pages.'.$page);
+            return view('drumeo.lead-gen.pages.'.$page, ['theme' => 'drumeo']);
         }
 
         throw new NotFoundHttpException();

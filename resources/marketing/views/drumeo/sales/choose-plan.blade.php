@@ -70,8 +70,8 @@
             "firstPoint" => "The world’s best drum lessons.",
             "thirdPoint" => "Unlimited personal support.",
             "fifthPoint" => "Lesson access for piano, guitar, and singing.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-30-Day]=1&locked=true",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-30-Day]=1&locked=true",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-30-Day]=1&locked=true&referralCode=$referralCode",
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-30-Day]=1&locked=true&referralCode=$referralCode",
         ])
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'drumming',

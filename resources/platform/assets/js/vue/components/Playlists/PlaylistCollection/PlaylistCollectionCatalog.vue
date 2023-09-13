@@ -44,6 +44,7 @@
         showControls: true,
         searchTerm: '',
         sortValue: '',
+        categories: '',
     })
 
     //----------Methods----------//
@@ -51,7 +52,7 @@
     const handlePageChange = (pageNumber) => {
         //load playlists
         playlistsStore.loadingPlaylists = true;
-        playlistsStore.getPlaylists({ brand: props.brand, page: pageNumber, term: state.searchTerm, sort: state.sortValue, limit: 10 }, token);
+        playlistsStore.getPlaylists({ brand: props.brand, page: pageNumber, term: state.searchTerm, sort: state.sortValue, categories: state.categories ? [state.categories] : [], limit: 10 }, token);
         //update current page number
         playlistsStore.resultsPage = pageNumber;
         //update url
@@ -79,6 +80,7 @@
                     limit: null,
                     term: state.searchTerm,
                     sort: state.sortValue,
+                    categories: state.categories ? [state.categories] : [],
                 }, token);
         }
         //For Create Modal to reload Playlists
@@ -102,6 +104,7 @@
         //Set resultsPage
         playlistsStore.resultsPage = Number(params.page || 1);
         state.searchTerm = params.search || '';
+        state.categories = params['categories[]'] || '';
         state.sortValue = params.sortby_val || '-created_at';
     });
 
@@ -110,7 +113,9 @@
         const params = new Proxy(new URLSearchParams(window.location.search), {
             get: (searchParams, prop) => searchParams.get(prop),
         });
+
         state.searchTerm = params.search || '';
+        state.categories = params['categories[]'] || '';
         state.sortValue = params.sortby_val || '-created_at';
     })
 
@@ -127,24 +132,23 @@
 <template>
     <main class="tw-w-full">
         <!-- No Playlists -->
-        <section v-if="playlistsStore.playlists.length === 0 && !playlistsStore.loadingPlaylists && !state.searchTerm.length"
+        <section v-if="playlistsStore.playlists.length === 0 && !playlistsStore.loadingPlaylists && !state.searchTerm && !state.categories"
                  class="tw-w-full tw-flex dark:tw-text-white tw-items-center "
-                 :class="miniCatalog ? 'tw-mt-1' : 'tw-mt-[58px] tw-flex-col'"
+                 :class="miniCatalog ? 'tw-mt-1 tw-px-4 lg:tw-px-0' : 'tw-mt-[58px] tw-flex-col'"
         >
-            <div class="tw-h-[84px] tw-w-[84px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#223F57] dark:tw-bg-[#445F74] "
-                 :class="{'tw-mb-[30px]': !miniCatalog}"
-            >
-                <musora-icon icon-name="playlist" class="tw-w-[36px]" />
-            </div>
-            <div :class="{'tw-ml-4': miniCatalog}">
+            <div>
                 <h1 class="tw-text-3xl tw-font-normal tw-font-open-sans tw-text-[16px]" :class="!miniCatalog ? 'tw-mb-[15px]' : 'tw-mb-2' ">
                     You haven't created any playlists yet.
                 </h1>
+                <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
+                    <a :href="`/${brand}/create-playlist-window`" class="tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg md:tw-text-xl tw-mr-2 tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white md:tw-mb-2">Create Playlist</a>
+                    <a href="/playlists" class="tw-border-2 tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg md:tw-text-xl tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17] md:tw-mb-2">Learn More</a>
+                </div>
             </div>
         </section>
 
         <!-- Catalog -->
-        <div v-if="playlistsStore.playlists.length !== 0 || state.searchTerm.length" class="tw-w-full">
+        <div v-else class="tw-w-full">
             <!-- Controls -->
             <PlaylistCollectionControls
                 v-if="!props.miniCatalog || state.searchTerm.length"
@@ -176,32 +180,36 @@
             </header>
 
             <!-- Cards -->
-            <section v-if="!playlistsStore.loadingPlaylists" class="tw-w-full tw-relative tw-mb-5"
+            <section v-if="!playlistsStore.loadingPlaylists && !miniCatalog" class="tw-w-full tw-relative tw-mb-5"
                 :class="state.isListView && !miniCatalog ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 3xl:tw-grid-cols-6 tw-gap-4' "
             >
-                <!-- Mini Catalog -->
-                <template v-if="miniCatalog">
-                    <playlist-collection-card
-                        v-for="list in playlistsStore.playlists.slice(0,5)"
-                        :key="list.id"
-                        :list="list"
-                        :isListView="false"
-                        :token="token"
-                        :brand="brand"
-                    />
-                </template>
                 <!-- Full Catalog -->
-                <template v-else>
                     <playlist-collection-card
-                        v-for="list in playlistsStore.playlists"
-                        :key="list.id"
-                        :list="list"
+                        v-for="listElement in playlistsStore.playlists"
+                        :key="listElement.id"
+                        :listElement="listElement"
                         :isListView="state.isListView"
                         :token="token"
                         :brand="brand"
                     />
-                </template>
             </section>
+            <section class="tw-w-full tw-block tw-overflow-x-auto lg:tw-overflow-x-hidden tw-no-scrollbar">
+                <div v-if="!playlistsStore.loadingPlaylists && miniCatalog && !state.isListView" 
+                    class="tw-px-4 lg:tw-px-0 tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-nowrap lg:tw-auto-rows-[0] lg:tw-grid-rows-1 lg:tw-overflow-hidden lg:tw-grid lg:tw-grid-cols-5 2xl:tw-grid-cols-6 4xl:tw-grid-cols-8 xl:tw-gap-[12px] 2xl:tw-gap-[16px]"
+                >
+                <!-- Mini Catalog -->
+                    <playlist-collection-card
+                        v-for="listElement in playlistsStore.playlists.slice(0,8)"
+                        :key="listElement.id"
+                        :listElement="listElement"
+                        :isListView="false"
+                        :isMiniCatalog="true"
+                        :token="token"
+                        :brand="brand"
+                    />
+                </div>
+            </section>
+            
 
             <!-- Pagination -->
             <Pagination
@@ -213,8 +221,8 @@
             />
 
             <!-- No Playlists -->
-            <section v-if="playlistsStore.playlists.length === 0 && state.searchTerm" class="tw-w-full tw-flex tw-flex-col dark:tw-text-white tw-items-center tw-mt-[58px]">
-                <h2 class="tw-text-3xl tw-font-bold tw-mb-[15px]">No results found for <span :class="`tw-text-${brand}`">{{ state.searchTerm }}</span></h2>
+            <section v-if="playlistsStore.playlists.length === 0 && (state.categories || state.searchTerm)" class="tw-w-full tw-flex tw-flex-col dark:tw-text-white tw-items-center tw-mt-[58px]">
+                <h2 class="tw-text-3xl tw-font-bold tw-mb-[15px]">No results found for <span v-if="state.categories">category <span :class="`tw-text-${brand}`">{{ state.categories }}</span></span> <span v-if="state.categories && state.searchTerm">and</span> <span v-if="state.searchTerm">keyword <span :class="`tw-text-${brand}`">{{ state.searchTerm }}</span></span></h2>
             </section>
         </div>
 
