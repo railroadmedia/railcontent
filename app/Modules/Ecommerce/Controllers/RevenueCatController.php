@@ -28,12 +28,11 @@ class RevenueCatController extends Controller
      * @param PaymentService $paymentService
      */
     public function __construct(
-        RevenueCatService   $revenueCatService,
+        RevenueCatService $revenueCatService,
         SubscriptionService $subscriptionService,
-        UserProductService  $userProductService,
-        PaymentService      $paymentService
-    )
-    {
+        UserProductService $userProductService,
+        PaymentService $paymentService
+    ) {
         $this->revenueCatService = $revenueCatService;
         $this->subscriptionService = $subscriptionService;
         $this->userProductService = $userProductService;
@@ -66,7 +65,7 @@ class RevenueCatController extends Controller
                 echo 'INITIAL_PURCHASE';
 
                 //create new user
-                $user = $this->getUser(
+                $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'],
                     $data['event']['original_app_user_id'],
                     true
@@ -79,7 +78,9 @@ class RevenueCatController extends Controller
                 $productId = $this->getProductId($data['event']['product_id']);
 
                 //get Musora product
-                $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId)->first();
+                $musoraProduct =
+                    $this->getMusoraProduct($type, $data['event'], $productId)
+                        ->first();
 
                 //get RevenueCat subscription
                 $currentRevenueCatSubscription =
@@ -99,7 +100,12 @@ class RevenueCatController extends Controller
                 }
 
                 if ($data['event']['period_type'] != 'TRIAL') {
-                    $this->paymentService->create($musoraSubscription, $type, $data['event']['event_timestamp_ms'], $data['event']['transaction_id']);
+                    $this->paymentService->create(
+                        $musoraSubscription,
+                        $type,
+                        $data['event']['event_timestamp_ms'],
+                        $data['event']['transaction_id']
+                    );
                 }
 
                 //Assign user product
@@ -117,9 +123,10 @@ class RevenueCatController extends Controller
                 echo 'RENEWAL';
 
                 // get Musora user
-                $user = $this->getUser(
+                $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'],
-                    $data['event']['original_app_user_id'], true
+                    $data['event']['original_app_user_id'],
+                    true
                 );
                 if (!$user) {
                     //TBD
@@ -158,7 +165,12 @@ class RevenueCatController extends Controller
                     $data['event']['expiration_at_ms']
                 );
 
-                $this->paymentService->create($musoraSubscription, $type, $data['event']['purchased_at_ms'], $data['event']['transaction_id']);
+                $this->paymentService->create(
+                    $musoraSubscription,
+                    $type,
+                    $data['event']['purchased_at_ms'],
+                    $data['event']['transaction_id']
+                );
 
                 //update user product
                 $this->userProductService->assignUserProduct(
@@ -171,7 +183,7 @@ class RevenueCatController extends Controller
             case 'PRODUCT_CHANGE':
                 echo 'PRODUCT_CHANGE';
                 // get Musora user
-                $user = $this->getUser(
+                $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'],
                     $data['event']['original_app_user_id']
                 );
@@ -212,7 +224,7 @@ class RevenueCatController extends Controller
                 // code...
                 break;
             case 'CANCELLATION':
-                $user = $this->getUser(
+                $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
                     $data['event']['original_app_user_id']
                 );
@@ -277,7 +289,7 @@ class RevenueCatController extends Controller
                 // code...
                 break;
             case 'EXPIRATION':
-                $user = $this->getUser(
+                $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
                     $data['event']['original_app_user_id']
                 );
@@ -324,7 +336,7 @@ class RevenueCatController extends Controller
                 $this->subscriptionService->updateSubscription(
                     $musoraSubscription,
                     $data['event']['expiration_at_ms'],
-                     null,
+                    null,
                     $data['event']['expiration_reason']
                 );
                 break;
@@ -338,36 +350,6 @@ class RevenueCatController extends Controller
     }
 
     /**
-     * @param $value
-     * @param $appUserId
-     * @param false $createIfNotExists
-     * @return User|null
-     */
-    private function getUser($value = null, $appUserId, $createIfNotExists = false): ?User
-    {
-        $user =
-            User::query()
-                ->where('email', $value)
-                ->orWhere('revenuecat_origin_app_user_id', $appUserId)
-                ->orWhere('id', $appUserId)
-                ->first();
-        if (!$user && $createIfNotExists) {
-            $parts = explode('@', $value);
-            $user = new User;
-            $user->email = $value;
-            $user->setPassword($value);
-            $user->display_name = $parts[0] . rand(10000, 99999);
-            $user->revenuecat_origin_app_user_id = $appUserId;
-            $user->save();
-        } elseif ($user) {
-            $user->revenuecat_origin_app_user_id = $appUserId;
-            $user->save();
-        }
-
-        return $user;
-    }
-
-    /**
      * @param string $type
      * @param $event
      * @param mixed $productId
@@ -375,18 +357,19 @@ class RevenueCatController extends Controller
      */
     private function getMusoraProduct(string $type, $event, mixed $productId)
     {
-        $store = $type . '_store';
+        $store = $type.'_store';
         $isTrialConversion = array_key_exists('is_trial_conversion', $event) && $event['is_trial_conversion'];
         if ($event['period_type'] == 'TRIAL' || $isTrialConversion) {
-            $productsMap = [config('ecommerce.' . $store . '_products_map_trial')[$productId]];
+            $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$productId]];
         } else {
-            $productsMap = [config('ecommerce.' . $store . '_products_map')[$productId]];
+            $productsMap = [config('ecommerce.'.$store.'_products_map')[$productId]];
         }
 
         if ($event['type'] != 'INITIAL_PURCHASE' && !$isTrialConversion) {
             $productsMap = array_merge(
-                [config('ecommerce.' . $store . '_products_map')[$productId]],
-                [config('ecommerce.' . $store . '_products_map_trial')[$productId]]);
+                [config('ecommerce.'.$store.'_products_map')[$productId]],
+                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
+            );
         }
 
         $musoraProduct =
@@ -400,8 +383,8 @@ class RevenueCatController extends Controller
      * @param $productId1
      * @return string
      */
-    private function getProductId($productId1): string
-    {
+    private function getProductId($productId1)
+    : string {
         $productId = $productId1;
         if (strpos($productId, ':') !== false) {
             $productId = explode(':', $productId)[0];
@@ -416,8 +399,8 @@ class RevenueCatController extends Controller
      * @return mixed
      * @throws \Exception
      */
-    private function getCurrentRevenueCatSubscription($appUserId, string $productId): mixed
-    {
+    private function getCurrentRevenueCatSubscription($appUserId, string $productId)
+    : mixed {
         $subscriber = $this->revenueCatService->getSubscriber($appUserId);
 
         $revenueCatSubscriptions = (json_decode(json_encode($subscriber->subscriptions), true));
@@ -438,7 +421,7 @@ class RevenueCatController extends Controller
         $musoraSubscription =
             Subscription::query()
                 ->where('user_id', '=', $user->id)
-                ->where('type', '=', $type . '_subscription')
+                ->where('type', '=', $type.'_subscription')
                 ->whereIn(
                     'product_id',
                     $musoraProducts->pluck('id')
@@ -451,92 +434,31 @@ class RevenueCatController extends Controller
 
     public function syncSubscriber(Request $request)
     {
-        $user = $this->getUser(
-            null,
-            $request->get('original_app_user_id')
-        );
-
-        $subscriber = $this->revenueCatService->getSubscriber($request->get('original_app_user_id'));
-        $entitlements = $subscriber->entitlements;
-        $subscriptions = $subscriber->subscriptions;
-
-        $active = false;
-        if (!empty($entitlements)) {
-            foreach ($entitlements as $entitlement) {
-                $productIdentifier = $entitlement->product_identifier;
-                $subscriptionData = $subscriptions->$productIdentifier;
-                if (Carbon::parse($subscriptionData->expires_date) >= now()->subDays(5)) {
-                    $active = true;
-                }
-                $type = (strtolower($subscriptionData->store) == 'app_store') ? 'apple' : 'google';
-                $store = $type . '_store';
-                $productsMap = array_merge(
-                    [config('ecommerce.' . $store . '_products_map')[$productIdentifier]],
-                    [config('ecommerce.' . $store . '_products_map_trial')[$productIdentifier]]);
-
-                $musoraProduct =
-                    Product::whereIn('sku', $productsMap)
-                        ->get();
-                if ($user) {
-                    $userId = $user->id;
-                    $musoraSubscription =
-                        Subscription::query()
-                            ->where('user_id', '=', $userId)
-                            ->where('type', '=', $type . '_subscription')
-                            ->whereIn(
-                                'product_id',
-                                $musoraProduct->pluck('id')
-                                    ->toArray()
-                            )
-                            ->first();
-
-                    if (!$musoraSubscription) {
-                        $musoraSubscription = $this->subscriptionService->createSubscription(
-                            $userId,
-                            Carbon::parse($subscriptionData->expires_date)->getTimestampMs(),
-                            $musoraProduct->first(),
-                            $type,
-                            Carbon::parse($subscriptionData->purchase_date)->getTimestampMs(),
-                            Carbon::parse($subscriptionData->unsubscribe_detected_at)->getTimestampMs()
-                        );
-
-                        //Assign user product
-                        $this->userProductService->assignUserProduct($userId, $musoraSubscription->product_id, $musoraSubscription->paid_until);
-                    } else {
-                        //update subscription
-                        $this->subscriptionService->updateSubscription(
-                            $musoraSubscription,
-                            Carbon::parse($subscriptionData->expires_date)->getTimestampMs(),
-                            Carbon::parse($subscriptionData->unsubscribe_detected_at)->getTimestampMs()
-                        );
-                        //update user product
-                        $this->userProductService->assignUserProduct($userId, $musoraSubscription->product_id, $musoraSubscription->paid_until);
-                    }
-                }
-            }
-        }
+        $user = $this->revenueCatService->syncSubscriber($request->get('original_app_user_id'), $request->get('email'));
 
         if (!$user) {
             return response()->json([
-                'shouldCreateAccount' => true,
-            ]);
+                                        'shouldCreateAccount' => true,
+                                    ]);
         }
 
-        if (!user() || (\user() && \user()->id !== $userId)) {
+        if (!user() || (\user() && \user()->id !== $user->id)) {
             return response()->json([
-                'shouldLogin' => true,
-                'email' => $user->email,
-            ]);
-        } else if (\user()) {
-            $token = $user->createToken('');
-            $user->withAccessToken($token);
+                                        'shouldLogin' => true,
+                                        'email' => $user->email,
+                                    ]);
+        } else {
+            if (\user()) {
+                $token = $user->createToken('');
+                $user->withAccessToken($token);
 
-            return response()->json([
-                'success' => true,
-                'token' => $token->plainTextToken,
-                'tokenType' => 'bearer',
-                'userId' => $user->id,
-            ]);
+                return response()->json([
+                                            'success' => true,
+                                            'token' => $token->plainTextToken,
+                                            'tokenType' => 'bearer',
+                                            'userId' => $user->id,
+                                        ]);
+            }
         }
     }
 }
