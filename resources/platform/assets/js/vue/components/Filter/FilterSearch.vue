@@ -1,6 +1,7 @@
 <script setup>
   import InputLabel from "../InputLabel/InputLabel.vue";
   import { SearchIcon } from '@heroicons/vue/outline'
+  import {ref} from "vue";
 
   const props = defineProps({
     isSidebarCollapsed: {
@@ -9,8 +10,14 @@
     brand: {
       type: String,
       default: 'Drumeo',
-    }
+    },
+    searchTerm: {
+      type: String,
+      default: '',
+    },
   });
+
+  const search_term = ref(props.searchTerm);
 
   const emit = defineEmits(['onSubmit', 'onTextChange'])
 
@@ -19,20 +26,20 @@
   };
 
   const handleChange = (val) => {
-    emit('onTextChange', val);
+    search_term.value = val;
   };
 
   const handleSubmitSearch = () => {
-    emit('onSubmit');
+    emit('onSubmit', { term: search_term });
   };
 
   const handleIconClick = () => {
-      handleSubmitSearch();
+    emit('onSubmit', { term: search_term });
   };
 </script>
 
 <template>
-  <form 
+  <form
     class="tw-relative dark:tw-bg-black tw-bg-white tw-rounded-[63px] tw-w-full md:tw-max-w-[576px] md:tw-ml-[10px] tw-h-[50px]"
   >
     <!-- Search Icon -->
@@ -41,6 +48,7 @@
     </div>
 
     <InputLabel
+      v-model="search_term"
       :showClearButton="true"
       placeholder="Search"
       inputName="term"
