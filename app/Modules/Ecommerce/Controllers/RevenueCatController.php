@@ -516,13 +516,13 @@ class RevenueCatController extends Controller
             }
         }
 
-        if (!$user && $active) {
+        if (!$user) {
             return response()->json([
                 'shouldCreateAccount' => true,
             ]);
         }
 
-        if (\user() && \user()->id !== $userId) {
+        if (!user() || (\user() && \user()->id !== $userId)) {
             return response()->json([
                 'shouldLogin' => true,
                 'email' => $user->email,
