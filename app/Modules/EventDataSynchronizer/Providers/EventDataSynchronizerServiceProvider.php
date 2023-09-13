@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Providers;
 
+use App\Modules\Ecommerce\Events\UserProductsUpdated;
 use App\Modules\EventDataSynchronizer\Console\Commands\CustomerIOSyncUser;
 use App\Modules\EventDataSynchronizer\Console\Commands\ExpiredProductResync;
 use App\Modules\EventDataSynchronizer\Console\Commands\MigrateMinutesWatchedPoints;
@@ -27,9 +28,6 @@ use Railroad\Ecommerce\Events\Subscriptions\SubscriptionCreated;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionRenewed;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionRenewFailed;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionUpdated;
-use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
-use Railroad\Ecommerce\Events\UserProducts\UserProductDeleted;
-use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
 use App\Modules\EventDataSynchronizer\Console\Commands\HelpScoutIndex;
 use App\Modules\EventDataSynchronizer\Console\Commands\ProductOwnerUserFieldResyncTool;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoExistingDevices;
@@ -89,23 +87,11 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
         PaymentMethodUpdated::class => [
             CustomerIoSyncEventListener::class . '@handleUserPaymentMethodUpdated',
         ],
-        UserProductCreated::class => [
-            CustomerIoSyncEventListener::class . '@handleUserProductCreated',
-            UserProductToUserContentPermissionListener::class . '@handleCreated',
-            HelpScoutEventListener::class . '@handleUserProductCreated',
-            UserMembershipFieldsListener::class . '@handleUserProductCreated',
-        ],
-        UserProductUpdated::class => [
-            CustomerIoSyncEventListener::class . '@handleUserProductUpdated',
-            UserProductToUserContentPermissionListener::class . '@handleUpdated',
-            HelpScoutEventListener::class . '@handleUserProductUpdated',
-            UserMembershipFieldsListener::class . '@handleUserProductUpdated',
-        ],
-        UserProductDeleted::class => [
-            CustomerIoSyncEventListener::class . '@handleUserProductDeleted',
-            UserProductToUserContentPermissionListener::class . '@handleDeleted',
-            HelpScoutEventListener::class . '@handleUserProductDeleted',
-            UserMembershipFieldsListener::class . '@handleUserProductDeleted',
+        UserProductsUpdated::class => [
+            CustomerIoSyncEventListener::class . '@handleUserProductsUpdated',
+            UserProductToUserContentPermissionListener::class . '@handleUserProductsUpdated',
+            HelpScoutEventListener::class . '@handleUserProductsUpdated',
+            UserMembershipFieldsListener::class . '@handleUserProductsUpdated',
         ],
         SubscriptionCreated::class => [
             CustomerIoSyncEventListener::class . '@handleSubscriptionCreated',

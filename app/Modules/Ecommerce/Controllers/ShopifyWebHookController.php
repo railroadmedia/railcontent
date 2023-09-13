@@ -9,20 +9,26 @@ use Illuminate\Support\Facades\Log;
 
 class ShopifyWebHookController extends Controller
 {
-    private ShopifySyncService $shopifyOrderService;
+    private ShopifySyncService $shopifySyncService;
 
     public function __construct(ShopifySyncService $shopifyOrderService)
     {
-        $this->shopifyOrderService = $shopifyOrderService;
+        $this->shopifySyncService = $shopifyOrderService;
     }
 
     public function orderUpdated(Request $request)
     {
-        Log::debug('Shopify order updated webhook received');
-        Log::debug(print_r($request->all(), true));
+        try {
+            Log::debug('Shopify order updated webhook received');
+            Log::debug(print_r($request->all(), true));
 
-        $shopifyCustomerId = $request->get('customer')['id'];
-        $this->shopifyOrderService->syncCustomer($shopifyCustomerId);
+            $shopifyCustomerId = $request->get('customer')['id'];
+            Log::debug("Shopify customer id: $shopifyCustomerId");
+            $this->shopifySyncService->syncCustomer($shopifyCustomerId);
+        } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
+        }
     }
 
 }

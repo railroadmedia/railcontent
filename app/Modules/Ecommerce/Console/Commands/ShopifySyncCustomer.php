@@ -12,9 +12,9 @@ class ShopifySyncCustomer extends Command
 {
     protected $signature = 'ecommerce:ShopifySyncCustomer {shopifyCustomerId}';
 
-    public function handle(ShopifySyncService $shopifyOrderService)
+    public function handle(ShopifySyncService $shopifySyncService)
     {
         $shopifyCustomerId = $this->argument('shopifyCustomerId');
-        $shopifyOrderService->syncCustomer($shopifyCustomerId);
+        $shopifySyncService->syncCustomer($shopifyCustomerId);
     }
 }

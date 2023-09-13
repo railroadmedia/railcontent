@@ -2,15 +2,13 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners\HelpScout;
 
+use App\Modules\Ecommerce\Events\UserProductsUpdated;
 use Carbon\Carbon;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionCreated;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionRenewed;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionRenewFailed;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionUpdated;
-use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
-use Railroad\Ecommerce\Events\UserProducts\UserProductDeleted;
-use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
 use App\Modules\EventDataSynchronizer\Jobs\HelpScoutUpdateUser;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
@@ -34,7 +32,7 @@ class HelpScoutEventListener
     /**
      * HelpScoutEventListener constructor.
      *
-     * @param  UserService  $userService
+     * @param UserService $userService
      */
     public function __construct(UserService $userService)
     {
@@ -42,7 +40,7 @@ class HelpScoutEventListener
     }
 
     /**
-     * @param  UserCreated  $userCreated
+     * @param UserCreated $userCreated
      */
     public function handleUserCreated(UserCreated $userCreated)
     {
@@ -54,7 +52,6 @@ class HelpScoutEventListener
             $user = $this->userService->getByEmailOrNull($userCreated->getUser()->id);
 
             if (!empty($user) && !in_array($userCreated->getUser()->id, self::$alreadyQueuedUserIds)) {
-
                 dispatch(
                     (new HelpScoutUpdateUser($user))
                         ->delay(Carbon::now()->addSeconds(3))
@@ -68,7 +65,7 @@ class HelpScoutEventListener
     }
 
     /**
-     * @param  UserUpdated  $userUpdated
+     * @param UserUpdated $userUpdated
      */
     public function handleUserUpdated(UserUpdated $userUpdated)
     {
@@ -80,7 +77,6 @@ class HelpScoutEventListener
             $user = $this->userService->getByEmailOrNull($userUpdated->getNewUser()->id);
 
             if (!empty($user) && !in_array($userUpdated->getNewUser()->id, self::$alreadyQueuedUserIds)) {
-
                 dispatch(
                     (new HelpScoutUpdateUser($user))
                         ->delay(Carbon::now()->addSeconds(3))
@@ -93,21 +89,16 @@ class HelpScoutEventListener
         }
     }
 
-    /**
-     * @param  UserProductCreated  $userProductCreated
-     */
-    public function handleUserProductCreated(UserProductCreated $userProductCreated)
+    public function handleUserProductsUpdated(UserProductsUpdated $userProductsUpdated)
     {
         if (self::$disable) {
             return;
         }
 
         try {
-            $user = $this->userService->getByEmailOrNull(
-                $userProductCreated->getUserProduct()
-                    ->getUser()
-                    ->getId()
-            );
+            //help scout syncing has never worked due to this code, may leave this for rudderstack integration
+            $userId = $userProductsUpdated->getUserId();
+            $user = $this->userService->getByEmailOrNull($userId);
 
             if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                 dispatch(
@@ -123,65 +114,7 @@ class HelpScoutEventListener
     }
 
     /**
-     * @param  UserProductUpdated  $userProductUpdated
-     */
-    public function handleUserProductUpdated(UserProductUpdated $userProductUpdated)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        try {
-            $user = $this->userService->getByEmailOrNull(
-                $userProductUpdated->getNewUserProduct()
-                    ->getUser()
-                    ->getId()
-            );
-
-            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
-                dispatch(
-                    (new HelpScoutUpdateUser($user))
-                        ->delay(Carbon::now()->addSeconds(3))
-                );
-
-                self::$alreadyQueuedUserIds[] = $user->id;
-            }
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
-     * @param  UserProductDeleted  $userProductDeleted
-     */
-    public function handleUserProductDeleted(UserProductDeleted $userProductDeleted)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        try {
-            $user = $this->userService->getByEmailOrNull(
-                $userProductDeleted->getUserProduct()
-                    ->getUser()
-                    ->getId()
-            );
-
-            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
-                dispatch(
-                    (new HelpScoutUpdateUser($user))
-                        ->delay(Carbon::now()->addSeconds(3))
-                );
-
-                self::$alreadyQueuedUserIds[] = $user->id;
-            }
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
-     * @param  SubscriptionCreated  $subscriptionCreated
+     * @param SubscriptionCreated $subscriptionCreated
      */
     public function handleSubscriptionCreated(SubscriptionCreated $subscriptionCreated)
     {
@@ -217,7 +150,7 @@ class HelpScoutEventListener
     }
 
     /**
-     * @param  SubscriptionUpdated  $subscriptionUpdated
+     * @param SubscriptionUpdated $subscriptionUpdated
      */
     public function handleSubscriptionUpdated(SubscriptionUpdated $subscriptionUpdated)
     {
@@ -250,7 +183,7 @@ class HelpScoutEventListener
     }
 
     /**
-     * @param  SubscriptionRenewed  $subscriptionRenewed
+     * @param SubscriptionRenewed $subscriptionRenewed
      */
     public function handleSubscriptionRenewed(SubscriptionRenewed $subscriptionRenewed)
     {
@@ -261,7 +194,6 @@ class HelpScoutEventListener
         try {
             if (!empty($subscriptionRenewed->getSubscription()) &&
                 !empty($subscriptionRenewed->getSubscription()->getUser())) {
-
                 $user = $subscriptionRenewed->getSubscription()->getUser();
 
                 if ($user instanceof EcommerceUser) {
@@ -278,7 +210,6 @@ class HelpScoutEventListener
                         self::$alreadyQueuedUserIds[] = $user->id;
                     }
                 }
-
             }
         } catch (Throwable $throwable) {
             error_log($throwable);
@@ -286,7 +217,7 @@ class HelpScoutEventListener
     }
 
     /**
-     * @param  SubscriptionRenewFailed  $subscriptionRenewFailed
+     * @param SubscriptionRenewFailed $subscriptionRenewFailed
      */
     public function handleSubscriptionRenewalAttemptFailed(SubscriptionRenewFailed $subscriptionRenewFailed)
     {
@@ -297,7 +228,6 @@ class HelpScoutEventListener
         try {
             if (!empty($subscriptionRenewFailed->getSubscription()) &&
                 !empty($subscriptionRenewFailed->getSubscription()->getUser())) {
-
                 $user = $subscriptionRenewFailed->getSubscription()->getUser();
 
                 if ($user instanceof EcommerceUser) {
@@ -314,7 +244,6 @@ class HelpScoutEventListener
                         self::$alreadyQueuedUserIds[] = $user->id;
                     }
                 }
-
             }
         } catch (Throwable $throwable) {
             error_log($throwable);

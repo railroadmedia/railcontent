@@ -3,7 +3,7 @@
 namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\Models\UserProduct;
-use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserProductService
 {
@@ -30,6 +30,11 @@ class UserProductService
     {
         $count = UserProduct::query()->where('product_id', '=', $productId)->count();
         return $count;
+    }
+
+    public function getUserProductsQuery($userId): Builder
+    {
+        return UserProduct::query()->where('user_id', '=', $userId);
     }
 
 
