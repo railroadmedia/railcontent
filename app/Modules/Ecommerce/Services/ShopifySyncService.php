@@ -53,6 +53,10 @@ class ShopifySyncService
             $customerShopifyId = $this->shopifyCustomerService->createShopifyCustomer($user);
         }
 
+        if (!$customerShopifyId) {
+            // TODO: something happened and the customer wasn't created in Shopify. What to do?
+        }
+
         // STEP 2: create shopify order data
         $postData = $this->createOrderData($customerShopifyId, $user->email, $product, $price, $tax);
 

@@ -24,7 +24,7 @@ class ShopifyCustomerService
     }
 
     public function createShopifyCustomer(User $user)
-    : int {
+    : ?int {
         $customers = $this->getCustomersForUser($user);
 
         $alreadySyncedUserCustomers = $customers->filter(fn(Customer $customer) => !is_null($customer->getShopifyId()));
@@ -55,7 +55,7 @@ class ShopifyCustomerService
                 )
             );
 
-            return 0;
+            return null;
         }
 
         $user->shopify_id = $customerResource->id;
