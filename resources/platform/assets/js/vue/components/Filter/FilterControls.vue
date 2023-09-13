@@ -1,7 +1,7 @@
 <template>
     <div class="tw-flex tw-flex-col md:tw-flex-row tw-w-full tw-pt-8 tw-justify-between tw-px-[12px] lg:tw-px-0">
         <div class="tw-flex tw-grow tw-relative tw-mb-[18px]">
-            <filter-tabs :selected-tab="selectedTab" :tab-options="tabOptions" @onTabClick="(value) => $emit('onFilterTabClick', value)" />
+            <filter-tabs :selected-tab="selectedTab" :tab-options="tabOptions" @onTabClick="handleTabClick" />
             <div class="tw-flex tw-grow tw-justify-end">
                 <button @click="handleOpenDropdown"
                     class="tw-flex md:tw-hidden tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="tw-flex tw-grow tw-justify-end tw-relative">
-            <filter-search @on-submit="(value) => $emit('onTermSearch', value)" @on-text-change="handleSearchChange" :search-term="searchTerm" ></filter-search>
+            <filter-search @on-submit="handleSubmit" @on-text-change="handleSearchChange" :search-term="searchTerm" ></filter-search>
             <button v-if="!isCollapsed" @click="() => emit('onToggleCollapse')"
                 class="tw-hidden md:tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[50px] tw-h-[50px] tw-border-[2px] tw-border-black tw-bg-white dark:tw-border-white tw-rounded-full">
                 <XIcon class="tw-w-[18px] tw-h-[18px] tw-text-black" />
@@ -79,16 +79,16 @@
     const inputText = ref('');
     const selectedSort = ref(sortOptions[0].key);
 
-    const handleTabClick = (key) => {
-        selectedTab.value = key;
+    const handleTabClick = (value) => {
+        emit('onFilterTabClick', value)
     };
 
     const handleSearchChange = (text) => {
         inputText.value = text;
     };
 
-    const handleSubmit = () => {
-        console.log('submit');
+    const handleSubmit = (value) => {
+        emit('onTermSearch', value)
     };
 
     const handleCloseDropdown = () => {
