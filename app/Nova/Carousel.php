@@ -67,8 +67,7 @@ class Carousel extends Resource
                     '3' => '' . __('V3') . '',
                     '4' => '' . __('V4') . '',
                 ];
-            })
-                ->rules('required'),
+            }),
             Boolean::make('Draft')->hideFromIndex()->default(true),
             Number::make('Display Order', 'display_order')->hideFromIndex(),
             DateTime::make('Start Time', 'start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
