@@ -28,6 +28,16 @@
     import ModalRenderer from '../Modal/ModalRenderer.vue';
 
     const emit = defineEmits(['onClose']);
+    const props = defineProps({
+        multiSelectColumns: {
+            type: Array,
+            default: [],
+        },
+        singleSelectColumns: {
+            type: Array,
+            default: [],
+        },
+    });
 </script>
 
 <style scoped>
