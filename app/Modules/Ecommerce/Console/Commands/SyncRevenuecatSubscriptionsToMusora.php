@@ -21,6 +21,7 @@ class SyncRevenuecatSubscriptionsToMusora extends Command
         UserProductService $userProductService
     ) {
         $userId = $this->argument('userId');
+        $user = $revenueCatService->getUser(null, $userId);
         $subscriber = $revenueCatService->getSubscriber($userId);
         $revenueCatSubscriptions = (json_decode(json_encode($subscriber->subscriptions), true));
 
@@ -30,7 +31,7 @@ class SyncRevenuecatSubscriptionsToMusora extends Command
 
             $musoraSubscription =
                 Subscription::query()
-                    ->where('user_id', '=', $userId)
+                    ->where('user_id', '=', $user->id)
                     ->where('type', '=', $type.'_subscription')
                     ->whereIn(
                         'product_id',
@@ -41,7 +42,7 @@ class SyncRevenuecatSubscriptionsToMusora extends Command
 
             if (!$musoraSubscription) {
                 $musoraSubscription = $subscriptionService->createSubscription(
-                    $userId,
+                    $user->id,
                     $subscriptionData['expires_date'],
                     $musoraProduct->first() ,
                     $type,
@@ -50,7 +51,7 @@ class SyncRevenuecatSubscriptionsToMusora extends Command
                 );
 
                 //Assign user product
-                $userProductService->assignUserProduct($userId,  $musoraSubscription->product_id, $musoraSubscription->paid_until);
+                $userProductService->assignUserProduct($user->id,  $musoraSubscription->product_id, $musoraSubscription->paid_until);
             } else {
                 //update subscription
                 $subscriptionService->updateSubscription(
@@ -58,8 +59,9 @@ class SyncRevenuecatSubscriptionsToMusora extends Command
                     $subscriptionData['expires_date'],
                     $subscriptionData['unsubscribe_detected_at']
                 );
+
                 //update user product
-                $userProductService->assignUserProduct($userId,  $musoraSubscription->product_id, $musoraSubscription->paid_until);
+                $userProductService->assignUserProduct($user->id,  $musoraSubscription->product_id, $musoraSubscription->paid_until);
             }
         }
 

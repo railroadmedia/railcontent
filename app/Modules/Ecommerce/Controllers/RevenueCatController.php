@@ -205,14 +205,18 @@ class RevenueCatController extends Controller
                 $currentRevenueCatSubscription =
                     $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
 
-                //create Musora subscription
-                $musoraSubscription = $this->subscriptionService->createSubscription(
-                    $user->id,
-                    $data['event']['expiration_at_ms'],
-                    $musoraProduct->first(),
-                    $type,
-                    $data['event']['purchased_at_ms']
-                );
+                //check if Musora subscription for new product exists
+                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
+                if(!$musoraSubscription) {
+                    //create Musora subscription
+                    $musoraSubscription = $this->subscriptionService->createSubscription(
+                        $user->id,
+                        $data['event']['expiration_at_ms'],
+                        $musoraProduct->first(),
+                        $type,
+                        $data['event']['purchased_at_ms']
+                    );
+                }
 
                 //Assign user product
                 $this->userProductService->assignUserProduct(
@@ -358,14 +362,14 @@ class RevenueCatController extends Controller
     private function getMusoraProduct(string $type, $event, mixed $productId)
     {
         $store = $type.'_store';
-        $isTrialConversion = array_key_exists('is_trial_conversion', $event) && $event['is_trial_conversion'];
-        if ($event['period_type'] == 'TRIAL' || $isTrialConversion) {
+
+        if ($event['period_type'] == 'TRIAL' ) {
             $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$productId]];
         } else {
             $productsMap = [config('ecommerce.'.$store.'_products_map')[$productId]];
         }
 
-        if ($event['type'] != 'INITIAL_PURCHASE' && !$isTrialConversion) {
+        if ($event['type'] != 'INITIAL_PURCHASE' ) {
             $productsMap = array_merge(
                 [config('ecommerce.'.$store.'_products_map')[$productId]],
                 [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
