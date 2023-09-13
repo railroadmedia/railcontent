@@ -62,10 +62,10 @@ class Carousel extends Resource
             Boolean::make('Visible on Mobile', 'visible_on_mobile')->hideFromIndex()->default(true),
             Select::make(__('Mobile endpoint version'), 'mobile_version')->options(function () {
                 return [
-                    'v1' => '' . __('V1') . '',
-                    'v2' => '' . __('V2') . '',
-                    'v3' => '' . __('V3') . '',
-                    'v4' => '' . __('V4') . '',
+                    '1' => '' . __('V1') . '',
+                    '2' => '' . __('V2') . '',
+                    '3' => '' . __('V3') . '',
+                    '4' => '' . __('V4') . '',
                 ];
             })
                 ->rules('required'),

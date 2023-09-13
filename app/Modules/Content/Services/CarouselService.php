@@ -19,13 +19,16 @@ class CarouselService
 
     public function getCarouselSlides()
     {
+        $mobileEndpointVersion = (config('musora-api.api.version'));
+        $mobileEndpointVersion = str_replace('v', '', $mobileEndpointVersion);
+
         $brandId = Brand::query()
             ->where('name', brand())
             ->first()->id;
 
         $query = Carousel::query()
             ->where('brand_id', $brandId)
-            ->where('visible', true)
+
             ->where(
                 function ($query) {
                     return $query
@@ -48,6 +51,20 @@ class CarouselService
             });
         }
 
+        if($mobileEndpointVersion){
+           $query = $query
+               ->where('visible_on_mobile', '=',1)
+               ->where(
+                function ($query) use ($mobileEndpointVersion) {
+                    return $query
+                        ->whereNull('mobile_version')
+                        ->orWhere('mobile_version', '<=', $mobileEndpointVersion);
+                }
+            );
+        }else{
+            $query = $query
+                ->where('visible_on_desktop', '=',1);
+        }
             $carousel = $query->orderBy('display_order')
             ->get();
 
