@@ -9,6 +9,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/', [SalesController::class, 'home'] );
         Route::get('/trial', [SalesController::class, 'trialPosters'] );
         Route::get('/posters-trial', [SalesController::class, 'trialPosters'] );
+        Route::get('/chords-trial', [SalesController::class, 'trialChords'] );
         Route::get('/trial-songs', [SalesController::class, 'trialSongs'] );
         Route::get('/trial-beginner', [SalesController::class, 'trialBeginner'] );
         Route::get('/trial-month', [SalesController::class, 'homeMonth'] );
