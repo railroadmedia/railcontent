@@ -44,9 +44,16 @@ class ShopifyCustomerService
                 $customerResource = $this->shopify->updateCustomer($existingCustomerShopifyId, $postData);
             }
         } catch (ValidationException $exception) {
-            Log::error(sprintf("Validation failed when sending customer data to Shopify: %s", $exception->getMessage()));
-            Log::error(sprintf("Please investigate for user or customers with email address %s. Attempted customer data: %s",
-                    $user->getEmail(), json_encode($postData)));
+            Log::error(
+                sprintf("Validation failed when sending customer data to Shopify: %s", $exception->getMessage())
+            );
+            Log::error(
+                sprintf(
+                    "Please investigate for user or customers with email address %s. Attempted customer data: %s",
+                    $user->getEmail(),
+                    json_encode($postData)
+                )
+            );
 
             return 0;
         }
@@ -66,8 +73,10 @@ class ShopifyCustomerService
     private function getCustomersForUser(User $user)
     : Collection {
         $qb = $this->customerRepository->createQueryBuilder('customer');
-        $qb->where($qb->expr()
-            ->eq("customer.email", ":email"))
+        $qb->where(
+            $qb->expr()
+                ->eq("customer.email", ":email")
+        )
             ->setParameter("email", $user->getEmail());
 
         $q = $qb->getQuery();
