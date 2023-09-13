@@ -3,6 +3,7 @@
         <filter-controls
             :search-term="searchTerm"
             :is-collapsed="isCollapsed"
+            :selected-sort="selectedSort"
             :tab-options="tabOptions" :selected-tab="selectedTab"
             @on-toggle-collapse="handleToggleCollapse"
             @on-term-search="(value) => $emit('handleSearch', value)"
@@ -33,6 +34,10 @@
 
     const props = defineProps({
         searchTerm: {
+            type: String,
+            default: '',
+        },
+        selectedSort: {
             type: String,
             default: '',
         },

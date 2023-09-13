@@ -5,7 +5,7 @@
             <div class="tw-flex tw-grow tw-justify-end">
                 <button @click="handleOpenDropdown"
                     class="tw-flex md:tw-hidden tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
-                    <SortDescendingIcon class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
+                    <musora-icon :icon-name="sortIcon()" class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
                 </button>
                 <button v-if="!isCollapsed" @click="() => emit('onToggleCollapse')"
                     class="tw-flex md:tw-hidden tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
@@ -29,9 +29,9 @@
             </button>
             <button @click="handleOpenDropdown"
                 class="tw-hidden md:tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[50px] tw-h-[50px] tw-border-[2px] tw-border-black tw-bg-white dark:tw-bg-[#000C17] dark:tw-border-white tw-rounded-full">
-                <SortDescendingIcon class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
+                <musora-icon :icon-name="sortIcon()" class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
             </button>
-            <FilterSortDropdown v-if="showDropdown" :sortOptions="sortOptions" @onClose="handleCloseDropdown"
+            <FilterSortDropdown v-if="showDropdown" :sortOptions="sortOptions" :selected-sort="selectedSort" @onClose="handleCloseDropdown"
                 @onSort="handleSort" />
         </div>
     </div>
@@ -39,13 +39,18 @@
 
 <script setup>
     import { ref } from 'vue';
-    import { SortDescendingIcon, AdjustmentsIcon, XIcon } from '@heroicons/vue/outline';
+    import { AdjustmentsIcon, XIcon } from '@heroicons/vue/outline';
     import FilterTabs from './FilterTabs.vue';
     import FilterSearch from './FilterSearch.vue';
     import FilterSortDropdown from './FilterSortDropdown.vue';
+    import MusoraIcon from "../MusoraIcons/MusoraIcon";
 
     const props = defineProps({
         searchTerm: {
+            type: String,
+            default: '',
+        },
+        selectedSort: {
             type: String,
             default: '',
         },
@@ -66,11 +71,11 @@
     const emit = defineEmits(['onToggleCollapse', 'onFilterTabClick', 'onTermSearch', 'onContentSort']);
 
     const sortOptions = [
-        { key: '-popularity', name: 'Most Popular' },
-        { key: '-published_on', name: 'Newest First' },
-        { key: 'published_on', name: 'Oldest First' },
-        { key: 'slug', name: 'Name: A to Z' },
-        { key: '-slug', name: 'Name: Z to A' },
+        { key: '-published_on', name: 'Newest First', icon: 'sort-down', },
+        { key: 'published_on', name: 'Oldest First', icon: 'sort-up', },
+        { key: '-popularity', name: 'Most Popular', icon: 'sort-popularity', },
+        { key: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
+        { key: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
     ];
 
     const showDropdown = ref(false);
@@ -102,6 +107,10 @@
     const handleSort = (key) => {
         selectedSort.value = key;
         emit('onContentSort', { target: { value: key } } );
+    };
+
+    const sortIcon = () => {
+        return props.selectedSort ? sortOptions.find(option => option.key === props.selectedSort).icon : 'sort-down';
     };
 </script>
 
