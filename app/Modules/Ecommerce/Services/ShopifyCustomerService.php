@@ -2,10 +2,12 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use Doctrine\ORM\Exception\ORMException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Customer;
+use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Ecommerce\Repositories\CustomerRepository;
 use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\Shopify;
@@ -14,13 +16,16 @@ class ShopifyCustomerService
 {
     private Shopify $shopify;
     private CustomerRepository $customerRepository;
+    private EcommerceEntityManager $entityManager;
 
     public function __construct(
         Shopify $shopify,
         CustomerRepository $customerRepository,
+        EcommerceEntityManager $entityManager
     ) {
         $this->shopify = $shopify;
         $this->customerRepository = $customerRepository;
+        $this->entityManager = $entityManager;
     }
 
     public function createShopifyCustomer(User $user)
@@ -58,8 +63,28 @@ class ShopifyCustomerService
             return null;
         }
 
-        $user->shopify_id = $customerResource->id;
-        $user->save();
+        try {
+            $shopifyCustomerId = $customerResource->id;
+            // record the shopify ID on the User
+            $user->shopify_id = $shopifyCustomerId;
+            $user->save();
+            // and any of their related Customers
+            $customers->each(function (Customer $customer) use ($shopifyCustomerId) {
+                if ($customer->getShopifyId() !== $shopifyCustomerId) {
+                    $customer->setShopifyId($shopifyCustomerId);
+                    $this->entityManager->persist($customer);
+                    $this->entityManager->flush();
+                }
+            });
+        } catch (ORMException $e) {
+            Log::error(
+                sprintf(
+                    "Failed to save shopify_id for user or customer with email address %s: %s",
+                    $user->getEmail(),
+                    $e->getMessage()
+                )
+            );
+        }
 
         return $user->shopify_id;
     }
@@ -120,4 +145,5 @@ class ShopifyCustomerService
 
         return $customerData;
     }
+
 }

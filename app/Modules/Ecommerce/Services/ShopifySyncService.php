@@ -48,7 +48,7 @@ class ShopifySyncService
     public function syncOrder(User $user, Product $product, float $price, float $tax)
     : void {
         Log::debug("Start syncing purchase for user $user->id");
-        // STEP 1: Is user sync'ed?
+        // STEP 1: Is user synced?
         $customerShopifyId = $user->shopify_id;
         if (!$customerShopifyId) {
             $customerShopifyId = $this->shopifyCustomerService->createShopifyCustomer($user);
@@ -120,8 +120,8 @@ class ShopifySyncService
     : array {
         return [
             "price" => $price,
-            "quantity" => 1,
-            "requires_shipping" => false,
+            "quantity" => 1, // for digital products, only 1 item of each
+            "requires_shipping" => false, // no shipping required since it is for digital products
             "sku" => $product->sku,
             "title" => $product->name,
             "variant_id" => $product->shopify_id,
