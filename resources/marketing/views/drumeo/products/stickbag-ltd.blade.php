@@ -100,6 +100,11 @@
         .join.gold {
             background:linear-gradient(to bottom, #e2c584, #ad7c12);
         }
+        .darkmode .dropdown {
+            background:#020d24!important;
+            color:#fff!important;
+
+        }
     </style>
 
     @php $memberPrice = floatval($productPrices['Drumeo-VaterSticks']->discounted_price) @endphp

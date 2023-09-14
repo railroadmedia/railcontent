@@ -9,7 +9,7 @@
     <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="quietkick logo" class="h-20 sm:h-28" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-stickbag-logo.svg"><br>
+                <img alt="quietkick logo" class="h-20 sm:h-28" src="https://www.musora.com/musora-cdn/image/width=680,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-stickbag-logo.svg"><br>
                 <h5 class="leading-tight text-gold"><strong><em>Only <s class="opacity-50">250</s> 198 Available</em></strong></h5>
                 <h2 class="leading-tight mt-5 mb-1"><strong>Pack like a pro.</strong></h2>
                 <h6 class="leading-tight"><s class="opacity-50">$197</s> <strong class="text-gold">$177</strong> Launch Special</h6>
@@ -21,12 +21,59 @@
         {{--    <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to bottom, transparent, rgba(0,79,153,0.6));"></div>--}}
         <img class="object-cover w-full relative z-0" style="height: 600px;" src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/header-image.jpg"></img>
     </header>
+    <section class="text-center px-5 sm:px-6 pb-12 sm:pb-14 lg:pb-20 text-white" style="background-color:#09090a;">
+        <div class="flex justify-center items-end -mt-10 relative z-10">
+            <img class="h-10 sm:h-14" style="transform: scaleX(-1);" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/arrow.svg" alt="learn playing image" fetchpriority="high">
+            <img class="h-20 sm:h-28 mx-3" src="https://www.musora.com/musora-cdn/image/width=370,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/limited-edition-patch.png" alt="learn playing image" fetchpriority="high">
+            <img class="h-10 sm:h-14" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/arrow.svg" alt="learn playing image" fetchpriority="high">
+        </div>
+        <div class="container max-w-5xl mx-auto">
+            <h1 class="my-5 sm:my-10"><strong><span class="text-gold">You’re invited</span> to the<br> black & gold club. </strong></h1>
+            <img class="mb-5 h-64 inline sm:hidden" src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/jared-profile.png" alt="learn playing image" fetchpriority="high">
+            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start">
+                <div class="max-w-xl sm:pl-7 lg:pl-8 mx-0 sm:order-1">
+                <p class="leading-normal">
+                    Twelve years ago, I started the most exciting and terrifying adventure of my life.
+                    <br><br>
+                    And there are only two reasons Drumeo is still here today:
+                    <br><br>
+                    Priorty #1 has always been solving problems for you on the drums<br>
+                    The support and dedication of our Lifetime Members
+                    <br><br>
+                    So when it came to creating a stick bag, it had to meet both those requirements.
+                    <br><br>
+                    Drumeo’s product genius, Kyle Radomsky, worked with a brilliant designer to create what I think is the coolest stick bag ever (scroll down to see why) – but that wasn’t enough.
+                    <br><br>
+                    <strong>I wanted to do something special for the Lifetime Members who’ve helped build Drumeo.</strong>
+                    <br><br>
+                    So we’ve made a limited run of 250 hand numbered black leather StickBags. You won’t find these anywhere else – and once they’re gone, they’re gone.
+                    <br><br>
+                    They come with rugged leather pockets and a unique hand-written number. Plus, you'll get a personal "Thank You" note from Drumeo's geeky founder (that's me).
+                    <br><br>
+                    If you’re the collector type, you’re on the right page.
+                    <br><br>
+                    Scroll down to check out the Limited Edition StickBag. For launch, we’ve ONLY made these available to you and your fellow Lifetime Members.
+                    <br><br>
+                    I hope it helps you pack like a pro.
+                </p>
+                    <br>
+                <img class="h-16 float-right transition-opacity opacity-0"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                        src="https://www.musora.com/musora-cdn/image/width=140,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/signature-jared.png"
+                        alt="learn playing image"
+                >
+                </div>
+                <img class="h-64 lg:h-80 hidden sm:inline transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=570,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/jared-profile.png" alt="learn playing image">
+            </div>
+        </div>
+    </section>
 @else
     <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <img alt="quietkick" class="h-14 sm:h-16" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/stickbag-logo2.svg"><br>
-                <h1 class="leading-tight mt-2 mb-3 text-6xl"><strong>Pack like a pro.</strong></h1>
+                <h1 class="leading-tight mt-2 mb-3 text-4xl sm:text-5xl lg:text-6xl"><strong>Pack like a pro.</strong></h1>
                 <h3 class="leading-tight">
                     @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
                         <s class="opacity-50">${{ floatval($productPrices['stickbag']->price) }}.</s>
@@ -221,14 +268,14 @@
                         @endif
                         @foreach ($slides as $slide)
                             <li class="splide__slide px-2 text-center">
-                                <img class="h-68 rounded-xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/{{ $slide['img'] }}" alt="drumeo stickbag" />
+                                <img class="object-cover h-56 rounded-xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/{{ $slide['img'] }}" alt="drumeo stickbag" />
                             </li>
                         @endforeach
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6 lg:hidden">
+        <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6 lg:hidden @if(!empty($blackBag)) darkmode @endif">
             @php
                 $gridItems = [
                     [
@@ -497,7 +544,7 @@
 @if(!empty($blackBag))
     <section class="py-16 sm:py-24 lg:py-28 relative overflow-hidden text-white text-center customize px-4 lg:px-6" style="background:#000 url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-order-bg.jpg) center center/cover;">
         <div class="container mx-auto max-w-6xl relative z-50">
-            <img alt="quietkick logo" class="h-20 sm:h-28" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-stickbag-logo.svg"><br>
+            <img alt="quietkick logo" class="h-20 sm:h-28" src="https://www.musora.com/musora-cdn/image/width=680,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-stickbag-logo.svg"><br>
             <h5 class="leading-tight text-gold"><strong><em>Only <s class="opacity-50">250</s> 198 Available</em></strong></h5>
             <h2 class="leading-tight mt-5 mb-1"><strong>Pack like a pro.</strong></h2>
             <h6 class="leading-tight"><s class="opacity-50">$197</s> <strong class="text-gold">$177</strong> Launch Special</h6>
@@ -542,7 +589,7 @@
                                 @if(!empty($memberVersion))
                                     href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=6&products[Drumeo-Key]=1&locked=true"
                                 @else
-                                    href="/lp"
+                                    href="/promo-bag"
                                 @endif
                                 class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo">
                             <div class="bg-white px-3 py-6 md:py-9">
