@@ -30,6 +30,10 @@ class EcommerceServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
         $this->loadRoutesFrom(__DIR__ . '/../routes/shopify.php');
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/shopify.php',
+            'shopify'
+        );
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'enabled' => false,
+    'enabled' => ENV('SHOPIFY_ENABLED', false),
 ];

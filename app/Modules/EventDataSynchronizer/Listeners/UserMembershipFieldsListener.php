@@ -42,7 +42,7 @@ class UserMembershipFieldsListener
     {
         $this->userMembershipFieldsService->sync($deletedEvent->getUserProduct()->getUser()->getId());
     }
-    
+
     public function handleUserProductsUpdated(UserProductsUpdated $userProductsUpdated)
     {
         $this->userMembershipFieldsService->sync($userProductsUpdated->getUserId());

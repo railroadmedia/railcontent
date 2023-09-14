@@ -25,6 +25,9 @@ class ShopifySyncService
 
     public function syncCustomer($shopifyCustomerId)
     {
+        if(!config('shopify.enabled')){
+            return;
+        }
         $userId = $this->getUserIdFromShopifyCustomerId($shopifyCustomerId);
         if (!$userId) {
             throw new \Exception("User not found for shopify customer id $shopifyCustomerId");
