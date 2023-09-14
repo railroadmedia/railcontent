@@ -76,9 +76,9 @@
                 <h1 class="leading-tight mt-2 mb-3 text-4xl sm:text-5xl lg:text-6xl"><strong>Pack like a pro.</strong></h1>
                 <h3 class="leading-tight">
                     @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
-                        <s class="opacity-50">${{ floatval($productPrices['stickbag']->price) }}.</s>
+                        <s class="opacity-50">${{ floatval($productPrices['stickbag']->price) }}</s>
                         <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
-                        (Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%).
+                        (Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%)
                     @else
                         <strong>Only ${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
                     @endif
@@ -510,8 +510,8 @@
                 <table>
                     @if(!empty($blackBag))
                     <tr>
-                        <td class="px-3 py-1 text-left border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Limited Edition Bag</td>
-                        <td class="px-5 py-1 border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
+                        <td class="px-3 py-1 text-left border-b border-collapse text-gold @if(!empty($blackBag)) border-white @else border-black @endif">Limited Edition Bag</td>
+                        <td class="px-5 py-1 border-b border-collapse text-gold @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
                     </tr>
                     @endif
                     <tr>
