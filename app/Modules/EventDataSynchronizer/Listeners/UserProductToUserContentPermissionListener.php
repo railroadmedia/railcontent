@@ -13,6 +13,8 @@ use Railroad\Ecommerce\Events\Subscriptions\CommandSubscriptionRenewFailed;
 use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
 use Railroad\Ecommerce\Events\UserProducts\UserProductDeleted;
 use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
+use Railroad\Railcontent\Helpers\CacheHelper;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Resora\Events\Created;
 use Railroad\Resora\Events\Updated;
 
@@ -105,6 +107,13 @@ class UserProductToUserContentPermissionListener
             $existingPermissions->updated_on = $now;
             $existingPermission->save();
         }
+        // clear the railcontent cache
+        CacheHelper::deleteUserFields(
+            [
+                ConfigService::$redisPrefix . ':userId_' . $userId,
+            ],
+            'content'
+        );
     }
 
     private function buildUserPermissionsList(int $userId): array
