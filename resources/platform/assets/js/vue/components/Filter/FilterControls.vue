@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-flex-col md:tw-flex-row tw-w-full tw-pt-8 tw-justify-between tw-px-[12px] lg:tw-px-0">
+    <div class="tw-flex tw-flex-col md:tw-flex-row tw-w-full tw-justify-between tw-px-[12px] lg:tw-px-0">
         <div class="tw-flex tw-grow tw-relative tw-mb-[18px]">
             <filter-tabs :selected-tab="selectedTab" :tab-options="tabOptions" @onTabClick="handleTabClick" />
             <div class="tw-flex tw-grow tw-justify-end">
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="tw-flex tw-grow tw-justify-end tw-relative">
-            <filter-search @on-submit="handleSubmit" @on-text-change="handleSearchChange" :search-term="searchTerm" ></filter-search>
+            <filter-search @on-submit="handleSubmit" @on-text-change="handleSearchChange"></filter-search>
             <button v-if="!isCollapsed" @click="() => emit('onToggleCollapse')"
                 class="tw-hidden md:tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[50px] tw-h-[50px] tw-border-[2px] tw-border-black tw-bg-white dark:tw-border-white tw-rounded-full">
                 <XIcon class="tw-w-[18px] tw-h-[18px] tw-text-black" />
@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-    import { ref } from 'vue';
+import {onMounted, ref} from 'vue';
     import { AdjustmentsIcon, XIcon } from '@heroicons/vue/outline';
     import FilterTabs from './FilterTabs.vue';
     import FilterSearch from './FilterSearch.vue';
@@ -46,10 +46,6 @@
     import MusoraIcon from "../MusoraIcons/MusoraIcon";
 
     const props = defineProps({
-        searchTerm: {
-            type: String,
-            default: '',
-        },
         selectedSort: {
             type: String,
             default: '',
@@ -66,23 +62,20 @@
           type: Array,
           default: [],
         },
+        sortOptionData: {
+            type: Array,
+            default: [],
+        },
     });
 
-    const emit = defineEmits(['onToggleCollapse', 'onFilterTabClick', 'onTermSearch', 'onContentSort']);
-
-    const sortOptions = [
-        { key: '-published_on', name: 'Newest First', icon: 'sort-down', },
-        { key: 'published_on', name: 'Oldest First', icon: 'sort-up', },
-        { key: '-popularity', name: 'Most Popular', icon: 'sort-popularity', },
-        { key: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
-        { key: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
-    ];
+    const emit = defineEmits(['onToggleCollapse', 'onFilterTabClick', 'onSearchChange', 'onSearchSubmit', 'onContentSort']);
 
     const showDropdown = ref(false);
+    const sortOptions = ref(props.sortOptionData);
 
     // the following refs will be replaced by pinia state
     const inputText = ref('');
-    const selectedSort = ref(sortOptions[0].key);
+    const selectedSort = ref('');
 
     const handleTabClick = (value) => {
         emit('onFilterTabClick', value)
@@ -90,10 +83,11 @@
 
     const handleSearchChange = (text) => {
         inputText.value = text;
+        emit('onSearchChange', text)
     };
 
-    const handleSubmit = (value) => {
-        emit('onTermSearch', value)
+    const handleSubmit = () => {
+        emit('onSearchSubmit');
     };
 
     const handleCloseDropdown = () => {
@@ -106,12 +100,29 @@
 
     const handleSort = (key) => {
         selectedSort.value = key;
-        emit('onContentSort', { target: { value: key } } );
+        emit('onContentSort', key);
     };
 
     const sortIcon = () => {
-        return props.selectedSort ? sortOptions.find(option => option.key === props.selectedSort).icon : 'sort-down';
+        return props.selectedSort ? props.sortOptions.find(option => option.key === props.selectedSort).icon : 'sort-down';
     };
+
+    onMounted(()=>{
+        if (props.sortOptionData.length === 0){
+            sortOptions.value = [
+                { key: '-published_on', name: 'Newest First', icon: 'sort-down', },
+                { key: 'published_on', name: 'Oldest First', icon: 'sort-up', },
+                { key: '-popularity', name: 'Most Popular', icon: 'sort-popularity', },
+                { key: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
+                { key: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
+            ];
+        }
+        else {
+            sortOptions.value = props.sortOptionData;
+        }
+
+        selectedSort.value = sortOptions.value[0].key;
+    })
 </script>
 
 <style scoped></style>
