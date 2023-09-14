@@ -121,13 +121,25 @@ class MusoraApiProductProvider implements ProductProviderInterface
     public function getCohortTemplate($slug)
     : array {
         $cohort = $this->cohortService->getCohort($slug);
-
+        $cohort['timeline_image_url'] = config('railcontent.cohort_timeline_image_urls')[brand()] ?? config('railcontent.cohort_timeline_image_urls')['pianote'];
         foreach (config('railcontent.cohort_icons')[brand()] ?? [] as $key => $value) {
             $cohort[$key] = $value;
         }
         if($cohort['cohort_trailer']){
             $vimeoId =  (int) substr(parse_url($cohort['cohort_trailer'], PHP_URL_PATH), 7);
             $cohort['trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId);
+        }
+        if($cohort['description_trailer_1']){
+            $vimeoId1 =  (int) substr(parse_url($cohort['description_trailer_1'], PHP_URL_PATH), 7);
+            $cohort['first_day_trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId1);
+        }
+        if($cohort['description_trailer_2']){
+            $vimeoId2 =  (int) substr(parse_url($cohort['description_trailer_2'], PHP_URL_PATH), 7);
+            $cohort['last_day_trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId2);
+        }
+        if($cohort['demo_trailer']){
+            $vimeoId3 =  (int) substr(parse_url($cohort['demo_trailer'], PHP_URL_PATH), 7);
+            $cohort['demo_trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId3);
         }
         if($cohort['content_id']){
             $initialBypassPermissions = ContentRepository::$bypassPermissions;
@@ -160,6 +172,10 @@ class MusoraApiProductProvider implements ProductProviderInterface
                 url()->route('platform.cohort.register', ['brand' => brand(), 'product' => $product->getSku()]) : '';
 
         $enrollmentClosed = $cohort['enrollmentClosed'];
+        $lists = $cohort->lists;
+        foreach ($lists as $list) {
+            $list->description = preg_replace('/{'.'enrolled'.'}/', $nPackOwners, $list->description);
+        }
 
         return [
             'hasProduct' => $hasProduct,
@@ -167,6 +183,7 @@ class MusoraApiProductProvider implements ProductProviderInterface
             'registerButtonUrl' => $registerButtonUrl,
             'cohort' => $cohort,
             'faq' => $cohort->dropdowns->toArray(),
+            'lists' => $lists->toArray(),
             'enrollmentClosed' => $enrollmentClosed,
         ];
     }

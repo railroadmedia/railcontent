@@ -55,7 +55,7 @@
                     "formId" => "Singeo - Engagement - Trigger - 4 Exercises - Web Form",
                     "formName" => 'Improve Any Voice',
                     "buttonText" => "Send My Videos",
-                    "oneLineLg" => true,
+                    "noTy" => true
                     ])
                 </div>
             </div>
@@ -129,10 +129,10 @@
             <div class="w-full mx-auto max-w-lg lg:max-w-3xl">
                 @include("singeo._partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                    "formId" => "Singeo - Engagement - Trigger - 4 Exercises - Web Form",
+                    "formId" => "Singeo - Engagement - Trigger - 4 Exercises - Web Form2",
                     "formName" => 'Improve Any Voice',
                     "buttonText" => "Send My Videos",
-                    "oneLineLg" => true,
+                    "noTy" => true
                     ])
             </div>
         </div>

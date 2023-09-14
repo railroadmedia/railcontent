@@ -162,7 +162,7 @@
 
 <!-- Main -->
 @section('layout-body')
-    <div class="py-8 sm:py-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+    <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
             @if(empty($thomann))
                 <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership for<br class="hidden sm:inline"> Drumeo, Pianote, Guitareo & Singeo.</strong></h3>

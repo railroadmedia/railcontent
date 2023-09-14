@@ -170,7 +170,7 @@
                         <strong>Tesler-Mabe</strong></h1>
                         <div class="uppercase text-yellow-2 lg:text-lg">TEACHING GUITARISTS FOR {{ date('Y') - 2013}} YEARS</div>
                     </div>
-                    <p class="leading-relaxed text-left mt-4 lg:mt-5">Ayla Tesler-Mabe has made a splash in the music industry as a professional guitarist, vocalist, and songwriter -- playing in popular bands including Ludic and formally Calpurnia. And while she’s actively creating new music and performing, Ayla’s also passionate about helping students through Guitareo every day!</p>
+                    <p class="leading-relaxed text-left mt-4 lg:mt-5">Ayla Tesler-Mabe has made a splash in the music industry as a professional guitarist, vocalist, and songwriter — playing in popular bands including Ludic and formally Calpurnia. And while she’s actively creating new music and performing, Ayla’s also passionate about helping students through Guitareo every day!</p>
                 </div>
             </div>
         </div>
@@ -188,7 +188,7 @@
         ',
         "text" => '<h1 class="font-bison-bold">Play your first solo<br class="inline md:hidden"> in less than 60 minutes</h1>
         <div class="leading-normal mt-2 md:mt-3 mb-4 md:mb-6 lg:text-lg">Enter your email below for your free lessons...</div>',
-        "formId" => "Guitareo - Engagement - Trigger - Solo In An Hour - Web Form",
+        "formId" => "Guitareo - Engagement - Trigger - Solo In An Hour - Web Form2",
         "formName" => 'Solo In An Hour',
         "submitButtonColor" => 'linear-gradient(180deg,#ffd500,#ffb600)',
     ])

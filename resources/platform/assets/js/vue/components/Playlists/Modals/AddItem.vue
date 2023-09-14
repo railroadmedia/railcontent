@@ -278,7 +278,7 @@ onMounted(() => {
 
         <AddDuplicate v-if="duplicateProps.show" :title="duplicateProps.title" :brand="brand"
             @onConfirm="() => handleDuplicateConfirm(duplicateProps.id)" @onClose="handleDuplicateCancel"  />
-        
+
         <div v-if="isLoadingAssignments || isLoadingPlaylists"
             class="tw-z-40 tw-flex tw-w-full tw-h-full tw-text-white tw-absolute tw-top-0 tw-left-0 tw-items-center tw-justify-center tw-bg-black/40">
             <LoadingSpinner class="tw-w-[40px] tw-h-[40px] tw-text-white" />
@@ -407,7 +407,7 @@ onMounted(() => {
         </Table>
         <div class="tw-w-full tw-flex tw-flex-col sm:tw-flex-row sm:tw-justify-between tw-pt-[25px] tw-max-w-xs sm:tw-max-w-none tw-mx-auto">
             <button @click="handleCreate"
-                class="tw-btn-secondary tw-uppercase tw-text-[#3F3F46] dark:tw-text-white tw-min-w-[167px] tw-h-[35px] tw-hidden sm:tw-inline-flex disabled:tw-opacity-40"
+                class="tw-btn-secondary tw-uppercase tw-text-[#00101D] dark:tw-text-white tw-min-w-[167px] tw-h-[35px] tw-hidden sm:tw-inline-flex tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] disabled:tw-opacity-40"
                 :disabled="props.content.type === 'song' && (addInstrumentlessToggle === false && addFullSongToggle === false) || (includeHighRoutine === false && includeLowRoutine === false)"
             >
                 <PlusIcon class="tw-w-[15px] tw-h-[15px]" />
@@ -416,21 +416,21 @@ onMounted(() => {
             <!--Save Buttons -->
             <button v-if="props.content.type === 'song'"
                     @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:disabled:tw-bg-[#0A2847] dark:disabled:tw-text-[#445F74] tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600`"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:tw-text-[#00101D] disabled:tw-bg-[#B2B2B5] disabled:tw-text-[#65656B] dark:disabled:tw-bg-[#081F37] dark:disabled:tw-text-[#445F74] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-h-[35px]`"
                     :disabled="selectedPlaylists.length === 0 || (addInstrumentlessToggle === false && addFullSongToggle === false) "
             >
                 SAVE
             </button>
             <button v-else-if="props.content.type === 'routine'"
                     @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:disabled:tw-bg-[#0A2847] dark:disabled:tw-text-[#445F74] tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600`"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:tw-text-[#00101D] disabled:tw-bg-[#B2B2B5] disabled:tw-text-[#65656B] dark:disabled:tw-bg-[#081F37] dark:disabled:tw-text-[#445F74] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-h-[35px]`"
                     :disabled="selectedPlaylists.length === 0 || (includeHighRoutine === false && includeLowRoutine === false)"
             >
                 SAVE
             </button>
             <button v-else
                     @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:disabled:tw-bg-[#0A2847] dark:disabled:tw-text-[#445F74] tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600`"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:tw-text-[#00101D] disabled:tw-bg-[#B2B2B5] disabled:tw-text-[#65656B] dark:disabled:tw-bg-[#081F37] dark:disabled:tw-text-[#445F74] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-h-[35px]`"
                     :disabled="selectedPlaylists.length === 0"
             >
                 SAVE

@@ -7,6 +7,7 @@ use App\Maps\ContentTypes;
 use App\Services\User\UserAccessService;
 use App\Services\UserMetricsService;
 use Illuminate\Http\Request;
+use Modules\UserManagementSystem\Models\ReportedUser;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Points\Services\UserPointsService;
 use Railroad\Railcontent\Entities\ContentEntity;
@@ -111,6 +112,13 @@ class ProfilePublicPagesController extends BaseController
         ];
 
         $isSubscriber = $user->isAMember();
+
+        $reported =
+            ReportedUser::where('user_id', '=', $user->id)
+                ->where('reporter_id', '=', user()->id)
+                ->first();
+
+        $user->is_reported = $reported ? true : false;
 
         return view(
             'account.dashboard',

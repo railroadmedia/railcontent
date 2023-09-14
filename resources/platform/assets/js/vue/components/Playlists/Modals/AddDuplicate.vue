@@ -34,13 +34,13 @@ const props = defineProps({
 
             <div class="tw-pt-8 tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-justify-center tw-w-full">
                 <!-- Delete Lesson -->
-                <button :class="`tw-mb-2 sm:tw-mb-0 sm:tw-order-1 tw-btn-primary tw-bg-${brand} tw-px-[30px] tw-w-[218px] hover:tw-bg-${brand}-600`"
+                <button :class="`tw-mb-2 sm:tw-mb-0 sm:tw-order-1 tw-btn-primary tw-px-[30px] tw-w-[218px] tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white`"
                     @click.prevent="() => emit('onConfirm')">
                     CONFIRM
                 </button>
                 <!-- Close Modal -->
                 <button @click="() => emit('onClose')"
-                    class="tw-btn-secondary dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-w-[218px] sm:tw-mr-2">
+                    class="tw-btn-secondary tw-w-[218px] sm:tw-mr-2 tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]">
                     CANCEL
                 </button>
             </div>

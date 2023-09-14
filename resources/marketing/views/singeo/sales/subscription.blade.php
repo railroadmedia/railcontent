@@ -146,16 +146,6 @@
         ])
     @endif
 
-    @if(empty($trialVersion))
-    @include('_partials.components.promo-top-banner',[
-        'bg' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-shop-summer-sale-bg.jpg',
-        'logo' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-summer-sale-logo.svg',
-        'logoStyles' => '-mb-3',
-        'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
-        'promoText' => 'SAVE UP TO 74% UNTIL JULY 31ST!',
-    ])
-    @endif
-
     @php
         $bubble1 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/hailey-benedict.png';
         $bubble2 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/lisa-witt.png';
@@ -237,7 +227,7 @@
         @yield('promo-banner')
     @endif
 
-
+    @include('musora.sales.components.musicounts-section')
 
     @php
         $gridItems = [
@@ -541,7 +531,7 @@
         'header' => 'Trusted by singers everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
-        'youtube' => '75,000',
+        'youtube' => '97,000',
         'facebookLink' => 'https://facebook.com/singeoofficial/',
         'facebook' => '23,000',
         'instagramLink' => 'https://instagram.com/singeoofficial/',
@@ -607,11 +597,13 @@
         'logo' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png',
         'header' => 'Unlimited singing lessons.<br> Vocal coaches and support.<br>1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
-                    <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> All-access for piano, guitar, drums, and singing.</li>
+                    <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> We’ll donate 20% towards music programs for kids. </li>',
         'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/singeo-spread.png',
         ])
+{{--        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>--}}
+{{--        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>--}}
+{{--        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',--}}
     @endif
 
     @include('musora.sales.components.app-section', [

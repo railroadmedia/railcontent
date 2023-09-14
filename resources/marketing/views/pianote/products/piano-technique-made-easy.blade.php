@@ -2,11 +2,11 @@
 
 @section('global-head')
     <title>Piano Technique Made Easy | Pianote</title>
-    <meta name="description" content="Master the fundamentals -- so you can play anything you want on the piano.">
+    <meta name="description" content="Master the fundamentals — so you can play anything you want on the piano.">
 
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/og-image.jpg" style="display: none;">
     <meta property="og:title" content="Piano Technique Made Easy">
-    <meta property="og:description" content="Master the fundamentals -- so you can play anything you want on the piano.">
+    <meta property="og:description" content="Master the fundamentals — so you can play anything you want on the piano.">
     <meta property="og:url" content="https://www.pianote.com/piano-technique-made-easy">
 
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
         <div class="container">
             <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/logo.png" alt="Pianote technique made easy logo"><br>
             <i class="fas fa-play play-vimeo autoplay-video" data-toggle="modal" data-target="#trailer"></i>
-            <h2>Master the fundamentals -- so you can <br> <strong>play anything you want on the piano.</strong></h2>
+            <h2>Master the fundamentals — so you can <br> <strong>play anything you want on the piano.</strong></h2>
             {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
             <a
                 class="join vue-add-to-cart"
@@ -68,16 +68,16 @@
             <img class="hidden-sm hidden-md hidden-lg" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/struggle-graphic-mobile.png" alt="Struggle diagram">
             <p>Feeling stuck on the keys? Like you’ve hit a wall you just can’t break through?
                 <br><br>
-                We all have that one song -- you know, the one you WANT to play but wonder if you’ll ever be good enough to make it happen.
+                We all have that one song — you know, the one you WANT to play but wonder if you’ll ever be good enough to make it happen.
                 <br><br>
-                Because up until now -- it hasn’t.
+                Because up until now — it hasn’t.
                 <br><br>
                 Chances are your technique is holding you back.
                 <br><br>
                 Here’s the thing about technique…<br>
                 <strong>It’s the FOUNDATION of your piano playing.</strong>
                 <br><br>
-                And without a good foundation -- you’ll never reach the heights you dream of. You’ll get stuck at the same level.
+                And without a good foundation — you’ll never reach the heights you dream of. You’ll get stuck at the same level.
                 <br><br>
                 Forever frustrated that you’re not seeing the results you know you deserve.
                 <br><br>
@@ -124,15 +124,15 @@
 
             <div class="clearfix check-container text-center">
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">FEEL LIKE<br>YOU BELONG</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">NEVER BE<br>OVERWHELMED</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">KNOW YOUR<br>INSTRUMENT</h4>
                 </div>
             </div>
@@ -152,15 +152,15 @@
 
             <div class="clearfix check-container text-center">
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">EVERY MAJOR &<br> MINOR SCALE</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">NEVER FEEL <br>TRAPPED</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">SONGS BECOME <br>EASIER</h4>
                 </div>
             </div>
@@ -179,15 +179,15 @@
 
             <div class="clearfix check-container text-center">
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">EVERY CHORD ON<br> EVERY KEY</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">UNLOCK  <br>NEW SONGS</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">CHANGE CHORDS  <br>FASTER</h4>
                 </div>
             </div>
@@ -206,15 +206,15 @@
 
             <div class="clearfix check-container text-center">
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">SOUND LIKE <br> EINAUDI</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">ADD BEAUTY TO <br>YOUR PLAYING</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">STEP-BY-STEP <br>INSTRUCTIONS</h4>
                 </div>
             </div>
@@ -227,20 +227,20 @@
                     <br><br> At the end of every level you’ll be able to play the most popular chord progressions used in your favorite songs.
                     <br><br> This makes learning pop songs a breeze because you’ll have already mastered the progressions that are used in EVERY key.
                     <br><br> So you’ll NEVER have to be intimidated by different key signatures or chord progressions.
-                    <br><br> And that song you’ve been dreaming of -- won’t seem so hard anymore.</p>
+                    <br><br> And that song you’ve been dreaming of — won’t seem so hard anymore.</p>
             </div>
 
             <div class="clearfix check-container text-center">
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">MASTER CHORD <br> PROGRESSIONS</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">PLAY SONGS   <br>MORE EASILY</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">
                         <span class="hidden-sm hidden-md hidden-lg">USE YOUR <br>TECHNIQUE</span>
                         <span class="hidden-xs">PUT YOUR <br>TECHNIQUE TO USE</span>
@@ -469,7 +469,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="embed-responsive embed-responsive-4by3">
-                    <iframe class="embed-responsive-item reset-on-close" src="" data-lazy-load-url="https://www.soundslice.com/scores/404032/embed/?api=1&amp;scroll_type=2&amp;branding=0" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                    <iframe class="embed-responsive-item reset-on-close" src="" data-lazy-load-url="https://www.soundslice.com/slices/6JGVc/embed/?api=1&amp;scroll_type=2&amp;branding=0" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
             </div>
         </div>
@@ -479,14 +479,14 @@
             <h2><strong>Your hands <br class="hidden-sm hidden-md hidden-lg"> will thank you.</strong></h2>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-piano-keyboard"></i>
+                <i class="fa-light fa-piano-keyboard"></i>
                 <p>
                     <strong>Step-By-Step Lessons</strong><br> Every lesson is presented in order, starting at the easiest level. You’ll only progress when you’re ready.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-signal-alt"></i>
+                <i class="fa-light fa-signal-alt"></i>
                 <p>
                     <strong>All Skill Levels</strong><br> These lessons are perfect for all levels, from beginners wanting to master new keys to experienced players who need a refresher.
                 </p>
@@ -494,14 +494,14 @@
 
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-video"></i>
+                <i class="fa-light fa-video"></i>
                 <p>
                     <strong>Guided Video Lessons</strong><br> Learn at your own pace, whenever it suits you. Watch a lesson as many times as you need from your own home.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-tachometer-alt"></i>
+                <i class="fa-light fa-tachometer-alt"></i>
                 <p>
                     <strong>More Effective Practice</strong><br> Don’t waste your practice time. Only work on the right exercises, at the right time. That guarantees the fastest results.
                 </p>
@@ -509,14 +509,14 @@
 
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-hands-helping"></i>
+                <i class="fa-light fa-hands-helping"></i>
                 <p>
                     <strong>Personalized Support</strong><br> Need help? No problem! Get all your questions answered by REAL teachers who are here to help you every step of the way.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-infinity"></i>
+                <i class="fa-light fa-infinity"></i>
                 <p>
                     <strong>Lifetime Access</strong><br> The lessons are yours for life. They never expire and you can come back to them any time, as often as you like.
                 </p>
@@ -564,7 +564,7 @@
         <div class="container">
             <img class="logo lazy"
                     data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/logo.png" alt="Pianote technique made easy logo">
-            <h2>Master the fundamentals -- so you can <br> <strong>play anything you want on the piano.</strong></h2>
+            <h2>Master the fundamentals — so you can <br> <strong>play anything you want on the piano.</strong></h2>
             {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
             <a
                 href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['piano-technique-made-easy' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"

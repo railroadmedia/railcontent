@@ -3,13 +3,12 @@
     RE add captions
     fix tracking for videos
 */
-import { onBeforeMount, computed } from 'vue';
+import { onBeforeMount, computed, reactive } from 'vue';
 import { usePlaylistsStore } from '../../../stores/playlists';
 import SoundSlice from '../SoundSlice/SoundSlice.vue';
 import PlaybackCue from './PlaybackCue.vue';
 import Comments from '../../vuesora/views/comments/Comments.vue';
 import PlaybackNavButtons from './PlaybackNavButtons.vue';
-import RelatedLesson from './RelatedLesson.vue';
 import Breadcrumb from './Breadcrumb.vue';
 import VideoMediaElement from '../../vuesora/components/MediaElement/MediaElement.vue';
 import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
@@ -17,9 +16,14 @@ import VideoResources from '../../vuesora/components/VideoResources/VideoResourc
 import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import ContentUnavailable from './ContentUnavailable.vue';
 import AssignmentsContainer from '../../vuesora/components/AssignmentsContainer/AssignmentsContainer.vue';
+import ContentInfo from '../ContentInfo/ContentInfo.vue';
 
 //-----------Props-----------//
 const props = defineProps({
+    isReleased: {
+        type: Boolean,
+        default: false,
+    },
     additionalSoundsliceParams: {
         type: String,
         default: ''
@@ -36,9 +40,25 @@ const props = defineProps({
         type: String,
         default: ''
     },
+    contentBreadcrumb: {
+        type: Object,
+        default: () => {}
+    },
+    contentChapters: {
+        type: Array,
+        default: () => []
+    },
+    contentDescription: {
+        type: String,
+        default: ''
+    },
     contentId: {
         type: [Number, String],
         default: ''
+    },
+    contentInstructors: {
+        type: Array,
+        default: () => []
     },
     currentSecond: {
         type: [Number, String],
@@ -68,7 +88,7 @@ const props = defineProps({
         default: false
     },
     lessonData:{
-        type: Array,
+        type: [Array, Object],
         default: () => []
     },
     lessonType: {
@@ -220,6 +240,10 @@ const props = defineProps({
     },
 });
 
+const state = reactive({
+    assignmentCollapsed: false,
+});
+
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
 
@@ -246,9 +270,7 @@ const lessonDate = activeItem.published_on_in_timezone ? activeItem.published_on
 //computed
 const homeUrl = computed(() => `/${props.brand}/playlists`);
 const secondLevelUrl = computed(() => `/${props.brand}/playlist/${props.playlistId}`);
-const released = computed(() => {
-    return lessonDateParsed < dateNow;
-})
+
 const needAccess = computed(() => {
     return activeItem.need_access;
 })
@@ -261,7 +283,7 @@ const isSong = computed(() => {
 })
 
 const unavailableType = computed(() => {
-    if (!released) {
+    if (!props.isReleased) {
         return 'unreleased';
     }
     if (needAccess) {
@@ -299,12 +321,12 @@ onBeforeMount(() => {
                  :class="playlistsStore.playerExpanded ? '2xl:tw-col-span-3' : '2xl:tw-col-span-2'"
             >
                 <!-- Content Unavailable -->
-                <ContentUnavailable v-if="!released || needAccess" @goToNext="handleGoToNext"
+                <ContentUnavailable v-if="!isReleased || needAccess" @goToNext="handleGoToNext"
                     :subscriptionCalendarId="subscriptionCalendarId" :bgImgUrl="thumbnailUrl"
                     :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle"
                     :message="needAccessMessage" />
                 <!-- Soundslice Player -->
-                <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine') && !needAccess && released"
+                <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine') && !needAccess && isReleased"
                     class="tw-w-full tw-aspect-video tw-max-h-[90vh] tw-mb-4"
                     :class="{ 'tw-max-w-[1280px]' : !playlistsStore.playerExpanded }"
                 >
@@ -313,7 +335,7 @@ onBeforeMount(() => {
                     </SoundSlice>
                 </div>
                 <!-- Video Players -->
-                <div v-if="released && !needAccess" class="p-lg-only lean tw-relative">
+                <div v-if="isReleased && !needAccess" class="p-lg-only lean tw-relative">
                     <div v-if="youtubeVideoId && String(youtubeVideoId).length" class="widescreen mb-2 bg-black">
                         <YoutubePlayer ref="mediaElementVueInstance" :brand="brand" :video-id="youtubeVideoId"
                             :start-second="startSecond" :end-second="endSecond"
@@ -358,14 +380,12 @@ onBeforeMount(() => {
                         :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
                         :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
                         :user-id="userId" :resources="videoResources" :show-add-to-list="true"
-                        :show-complete-button="released && !needAccess" :relatedLesson="relatedLesson"
+                        :show-complete-button="isReleased && !needAccess" :relatedLesson="relatedLesson"
                         :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton" />
                     <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
-                    <RelatedLesson v-if="relatedLesson && relatedLesson.data && relatedLesson.data.length"
-                        :relatedLesson="relatedLesson.data[0]" :brand="brand" />
                 </div>
                 <!-- Info Section -->
-                <slot name="info-section"></slot>
+                <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription" :content-chapters="contentChapters" :instructors="contentInstructors" />
             </div>
 
             <!-- Cue and Realted Playlist Wrapper -->
@@ -400,10 +420,15 @@ onBeforeMount(() => {
             <div class="tw-col-span-3 2xl:tw-col-span-2" :class="playlistsStore.playerExpanded ? 'lg:tw-hidden' : ''">
                 <!-- Assignments Section -->
                 <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
-                    <div class="tw-flex tw-flex-row tw-w-full">
+                    <div class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
                         <h1 class="heading dark:tw-text-white">Assignments</h1>
+                        <button @click="state.assignmentCollapsed = !state.assignmentCollapsed">
+                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center" :class="!state.assignmentCollapsed && 'tw-rotate-180'">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </button>
                     </div>
-                    <div class="tw-flex tw-flex-row tw-w-full">
+                    <div class="tw-flex-row tw-w-full" :class="state.assignmentCollapsed ? 'tw-hidden' : 'tw-flex'">
                         <assignments-container
                             :lesson-data="lessonData"
                             :assignments="assignments"

@@ -182,14 +182,15 @@
     </div>
 
     <!-- ADD TO LIST OR RESET PROGRESS BUTTONS -->
-    <div v-if="displayUserInteractions && item.type !== 'learning-path-level'"
+    <div v-if="displayUserInteractions"
       class="flex tw-flex-col icon-col tw-justify-center" :class="is_search ? '' : 'hide-xs-only'">
       <div v-if="resetProgress" class="body">
         <i class="fas fa-undo flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D] reset"
           :class="isBranchPath ? branchPathText : 'text-grey-2 hover-text-black'" title="Reset Progress"
           @click.stop.prevent="progressReset"></i>
       </div>
-      <button 
+      <button
+          v-if="!resetProgress"
           class="add-to-list tw-inline-flex tw-rounded-full tw-justify-center tw-px-0.5 tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white"
           :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'"
           :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"

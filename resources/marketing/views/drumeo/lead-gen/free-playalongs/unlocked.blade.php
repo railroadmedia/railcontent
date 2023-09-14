@@ -51,7 +51,7 @@
                         'song' => 'The Check In',
                         'artist' => 'Jost Nickel',
                         'url' => '/free-playalongs/songs/1',
-                        'descriptions' => 'Contemporary funk with a few odd-time curve balls -- keep your head up!',
+                        'descriptions' => 'Contemporary funk with a few odd-time curve balls — keep your head up!',
                         ],
                         [
                         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/Rashid-williams-Rock-out.png',
@@ -79,7 +79,7 @@
                         'song' => 'Drum-E-O',
                         'artist' => 'Kaz Rodriguez',
                         'url' => '/free-playalongs/songs/5',
-                        'descriptions' => 'Kaz has created play-alongs for the best drummers in the world -- now it’s your turn!',
+                        'descriptions' => 'Kaz has created play-alongs for the best drummers in the world — now it’s your turn!',
                         ],
                         [
                         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/glen-sobel-7-8-rock.png',
@@ -93,7 +93,7 @@
                         'song' => 'Straight Reggae',
                         'artist' => 'Sarah Thawer',
                         'url' => '/free-playalongs/songs/7',
-                        'descriptions' => 'Turn the beat around with a stanky reggae groove -- is your crosstick ready?',
+                        'descriptions' => 'Turn the beat around with a stanky reggae groove — is your crosstick ready?',
                         ],
                         [
                         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/tony-coleman-shuffle.png',

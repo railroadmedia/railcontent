@@ -145,18 +145,8 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
-
     @endif
 
-    @if(empty($trialVersion))
-    @include('_partials.components.promo-top-banner',[
-        'bg' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-shop-summer-sale-bg.jpg',
-        'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-summer-sale-logo.svg',
-        'logoStyles' => '-mt-16 ml-8 sm:ml-24 lg:ml-32',
-        'title' => 'Join Drumeo And Save 20%<br class="sm:hidden"> + Choose Your Bonus Bundle',
-        'promoText' => 'SAVE UP TO 81% UNTIL JULY 31ST!',
-    ])
-    @endif
 
     @php
         $bubble1 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/dorothea-taylor.png';
@@ -219,6 +209,8 @@
         @yield('promo-banner')
     @endif
 
+    @include('musora.sales.components.musicounts-section')
+
     @php
         $gridItems = [
             [
@@ -254,7 +246,7 @@
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/world-class-teachers.jpg',
                 'title' => 'World-Class Teachers',
-                'desc' => 'The best drummers are here -- including Grammy Award winners and touring musicians.',
+                'desc' => 'The best drummers are here — including Grammy Award winners and touring musicians.',
                 'lessonInfo' => [
                     [
                         'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/world-class-teachers.jpg',
@@ -542,7 +534,7 @@
             'name' => 'Ivy Elizondo',
             'video' => '373445819',
             'title' => 'Now we have a band and we’re recording an album!',
-            'description' => 'When Ivy’s kids decided to stop playing drums, she jumped on the throne instead -- she’s used Drumeo to build a foundation and formed a band.',
+            'description' => 'When Ivy’s kids decided to stop playing drums, she jumped on the throne instead — she’s used Drumeo to build a foundation and formed a band.',
             ],
         ]
     @endphp
@@ -550,7 +542,7 @@
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
-        'youtube' => '2.7M',
+        'youtube' => '2.8M',
         'facebookLink' => 'https://facebook.com/drumeo/',
         'facebook' => '1.2M',
         'instagramLink' => 'https://instagram.com/drumeoofficial/',
@@ -591,7 +583,7 @@
                 [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
                 'title' => 'Drumeo Drumsticks',
-                'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
+                'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
                 'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
                 'shipping' => true,
                 ],
@@ -627,11 +619,13 @@
         'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png',
         'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 5000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
-                    <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and voice lessons with full access to all Musora communities.</li>',
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> All-access for piano, guitar, drums, and singing.</li>
+                    <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> We’ll donate 20% towards music programs for kids. </li>',
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-collage.png',
         ])
+{{--        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>--}}
+{{--        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>--}}
+{{--        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and voice lessons with full access to all Musora communities.</li>--}}
     @endif
 
     @include('musora.sales.components.app-section', [

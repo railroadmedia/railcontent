@@ -128,7 +128,7 @@
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
-                                    <i class="fal {!! $songItem['fa-icon'] !!} text-3xl sm:text-4xl text-drumeo"></i>
+                                    <i class="fa-light {!! $songItem['fa-icon'] !!} text-3xl sm:text-4xl text-drumeo"></i>
 {{--                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="text-left sm:text-center">
@@ -200,7 +200,7 @@
             'name' => 'Ivy Elizondo',
             'video' => '373445819',
             'title' => 'Now we have a band and we’re recording an album!',
-            'description' => 'When Ivy’s kids decided to stop playing drums, she jumped on the throne instead -- she’s used Drumeo to build a foundation and formed a band.',
+            'description' => 'When Ivy’s kids decided to stop playing drums, she jumped on the throne instead — she’s used Drumeo to build a foundation and formed a band.',
             ],
         ]
     @endphp

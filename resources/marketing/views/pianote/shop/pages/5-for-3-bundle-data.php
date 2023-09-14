@@ -96,7 +96,7 @@
                 'name' => 'The Power of Chords',
                 'price' => 97,
 
-                'bundle_desc' => 'Play the music you love on the piano with the awesome Power of Chords. This fun course will demystify chording and show you how chords are the foundation of ALL music (even classical). When you understand and can play chords -- you’ll be able to play the songs you love easier, with more confidence.',
+                'bundle_desc' => 'Play the music you love on the piano with the awesome Power of Chords. This fun course will demystify chording and show you how chords are the foundation of ALL music (even classical). When you understand and can play chords — you’ll be able to play the songs you love easier, with more confidence.',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/power-of-chords.jpg',
                 'bundle_free_shipping' => false,
                 'lifetime_access' => true,
@@ -116,7 +116,7 @@
                 'name' => 'Piano Riffs & Fills',
                 'price' => 99,
 
-                'bundle_desc' => 'Anyone can play a chord -- but what happens in the spaces between the chords distinguishes the great players from the mediocre ones. Fill those spaces with piano riffs that will make you sound professional, polished ... and close to perfect. This course is broken down so even complete beginners can start sounding amazing. You’ll be shown exactly how to play the fills -- note for note.',
+                'bundle_desc' => 'Anyone can play a chord — but what happens in the spaces between the chords distinguishes the great players from the mediocre ones. Fill those spaces with piano riffs that will make you sound professional, polished ... and close to perfect. This course is broken down so even complete beginners can start sounding amazing. You’ll be shown exactly how to play the fills — note for note.',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
                 'bundle_free_shipping' => false,
                 'lifetime_access' => true,
@@ -136,7 +136,7 @@
                 'name' => 'Faster Fingers',
                 'price' => 99,
 
-                'bundle_desc' => 'Increase your finger speed, strength, and accuracy with this complete digital training pack. Faster Fingers is your roadmap to success on the piano. You’ll be guided every step of the way with daily practice videos and encouragement, plus you’ll be able to play along with every exercise and record your speed. The metronome doesn’t lie -- you’ll be able to SEE how much faster you’re getting.',
+                'bundle_desc' => 'Increase your finger speed, strength, and accuracy with this complete digital training pack. Faster Fingers is your roadmap to success on the piano. You’ll be guided every step of the way with daily practice videos and encouragement, plus you’ll be able to play along with every exercise and record your speed. The metronome doesn’t lie — you’ll be able to SEE how much faster you’re getting.',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/faster-fingers.jpg',
                 'bundle_free_shipping' => false,
                 'lifetime_access' => true,

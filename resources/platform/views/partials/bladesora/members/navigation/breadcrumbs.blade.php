@@ -1,4 +1,4 @@
-<div id="breadCrumbs" class="tw-fluid tw-w-full tw-bg-[#F9F9F9] tw-text-[#3F3F46] dark:tw-bg-black dark:tw-text-[#A1A1A9] collapsed" dusk="breadcrumbs">
+<div id="breadCrumbs" class="tw-fluid tw-w-full tw-bg-[#E6E7E9] tw-text-[#3F3F46] dark:tw-bg-black dark:tw-text-[#A1A1A9] collapsed" dusk="breadcrumbs">
     <div class="tw-container tw-mx-auto tw-px-4 pa-1 tw-uppercase tw-text-center tw-flex tw-justify-center">
         {{--<div class="flex flex-row">--}}
             @foreach($pages as $index => $page)

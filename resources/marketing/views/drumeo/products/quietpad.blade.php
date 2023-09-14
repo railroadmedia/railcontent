@@ -19,8 +19,6 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
-            $(document).foundation();
-
             $('.pad-toggle').click(function (e) {
                 e.stopPropagation();
                 $('.pad-flipper').toggleClass('flipped');
@@ -115,8 +113,11 @@
             });
         });
     </script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
+
+@section('body-data')
+    x-data="{ trailerOne: false, trailerTwo: false, }"
+@endsection
 
 @section('content')
 
@@ -137,7 +138,7 @@
                 <span>WATCH<br> THE DEMO</span>
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
             </div>
-            <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
+            <i @click="trailerOne = true;" class="fas fa-play play-button autoplay-video"></i>
             <br class="hide-for-medium">
             <img class="logo hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad.png" alt="Quietpad logo">
             <h2><strong style="font-weight: 900;">Practice anywhere</strong> with two<br class="hide-for-medium"> full-size playing surfaces.</h2>
@@ -145,15 +146,21 @@
             <p class="dense" style="opacity: 0;"><strong class="text-yellow">LAUNCH SPECIAL</strong><br>
                 <s>NORMALLY ${{ floatval($productPrices['quietpad']->price) }}.</s> <strong>ONLY ${{ floatval($productPrices['quietpad']->discounted_price) }}</strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['quietpad']->discounted_price) / floatval($productPrices['quietpad']->price)))) }}%)</p>
         </div>
-        <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/395000347?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
-        </div>
     </header>
 
-    <section class="content-section two-sides text-center" style="background-color: #f4f8fb; color:#000;">
+    @component('_partials.components.video-modal',[
+        'name' => 'trailerOne',
+        'video' => '395000347',
+        'vimeo' => true,
+    ])
+        @slot('button')
+            <div class="text-center bg-white rounded-b-xl py-4">
+                <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            </div>
+        @endslot
+    @endcomponent
+
+    <section class="content-section two-sides text-center">
         <div class="row">
             <h2><strong>One traditional side.<br class="hide-for-medium"> One quiet side.</strong></h2>
             <h5>The portable, double-sided practice pad<br class="hide-for-medium"> with different <br class="show-for-medium-only">volumes so you can<br class="hide-for-medium"> practice late into the night.</h5>
@@ -198,22 +205,28 @@
             <div class="thumb img-modal"><div style="background-image: url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/pad-quiet-jord-over-shoulder.jpg);"></div></div>
             <div class="thumb size-16-9 img-modal"><div style="background-image: url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/pad-snare-jared-2.jpg);"></div></div>
             <div class="thumb size-16-9 img-modal float-right"><div style="background-image: url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/pad-quiet-dub.jpg);"></div></div>
-            <div class="video-pop autoplay-video" data-open="blindModal">
-                <div class="watch-badge">
+            <div class="video-pop autoplay-video" @click="trailerTwo = true;">
+                <div class="watch-badge absolute top-1/3 left-2/3 sm:left-3/4 lg:left-2/3 transform -translate-x-1/2 -translate-y-1/2">
                     <span>WATCH<br> BLIND TEST</span>
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
+                    <img class="block mt-2 w-8 sm:w-11" src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
                 </div>
-                <img class="play-button" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
+                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-20"></i>
                 <img class="bg" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/blindfold-test-thumb.jpg" alt="Thumnail">
             </div>
         </div>
-        <div class="reveal large text-center" id="blindModal" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/394999066?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
-        </div>
     </section>
+
+    @component('_partials.components.video-modal',[
+        'name' => 'trailerTwo',
+        'video' => '394999066',
+        'vimeo' => true,
+    ])
+        @slot('button')
+            <div class="text-center bg-white rounded-b-xl py-4">
+                <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            </div>
+        @endslot
+    @endcomponent
 
     <div class="slider-overlay">
         <div class="slider-lightbox">

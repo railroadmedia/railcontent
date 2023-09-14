@@ -354,6 +354,35 @@ r mwp artisan VaporEnvManager web-staging-one push
 Environment variables are highly sensitive and need to stay secure. Please do not ever commit these .env files or share
 them. They should be deleted from your machine after updates are pushed.
 
+To update all staging environments at once, you can use the following commands:
+1. Pull all .env files
+```
+r mwp artisan VaporEnvManager beta-testing pull &&
+r mwp artisan VaporEnvManager pre-production pull &&
+r mwp artisan VaporEnvManager web-staging-one pull &&
+r mwp artisan VaporEnvManager web-staging-two pull &&
+r mwp artisan VaporEnvManager web-staging-three pull &&
+r mwp artisan VaporEnvManager web-staging-four pull &&
+r mwp artisan VaporEnvManager web-staging-five pull &&
+r mwp artisan VaporEnvManager app-staging-one pull &&
+r mwp artisan VaporEnvManager app-staging-two pull &&
+r mwp artisan VaporEnvManager app-staging-three pull
+```
+2. Edit all .env files
+3. Push all .env files
+```
+r mwp artisan VaporEnvManager beta-testing push &&
+r mwp artisan VaporEnvManager pre-production push &&
+r mwp artisan VaporEnvManager web-staging-one push &&
+r mwp artisan VaporEnvManager web-staging-two push &&
+r mwp artisan VaporEnvManager web-staging-three push &&
+r mwp artisan VaporEnvManager web-staging-four push &&
+r mwp artisan VaporEnvManager web-staging-five push &&
+r mwp artisan VaporEnvManager app-staging-one push &&
+r mwp artisan VaporEnvManager app-staging-two push &&
+r mwp artisan VaporEnvManager app-staging-three push
+```
+
 # How To Update Staging/Vapor Environments Databases From Production Data
 
 Use the r command 'update-databases'. Example:  
@@ -490,3 +519,55 @@ then use this URL and swap in the user of the account you wish to log in to:
 ```
 https://www.musora.com/user-management-system/login-as-user/USER_ID
 ```
+
+
+# How To Access Our Redis Clusters
+Our redis servers are run by AWS's service Elasticache. AWS does not allow access to redis servers outside the VPC
+(virtual private network) that they are in. To connect to the redis cluster directly via CLI, first 
+its necessary to SSH connect to an EC2 instance within the same VPC.  
+
+We have 2 main redis clusters, one for our old infrastructure (musora.com/admin (musora center)) and one for our new 
+infrastructure (musora.com, brand.com, etc (MWP)). Each has a production and staging cluster.  
+
+
+## How To Connect To Our New Infrastructure Redis Server (musora.com, brand.com, etc (MWP))
+**SSH in to our mini EC2 instance running our in Laravel Vapor AWS VPC**  
+1. Create the SSH key file from your manager container in railenvironment:  
+`nano /credentials/jump-box-private-key`
+2. Paste & save in the contents of our 1pass entry **Laravel Vapor Jumpbox Production&Staging SSH Private Key**
+3. Connect to the EC2 instance (answer yes to fingerprint question):  
+`ssh -i /credentials/jump-box-private-key ubuntu@ec2-18-220-31-60.us-east-2.compute.amazonaws.com`
+4. Connect to our production redis cluster:  
+`redis-cli -h musora-production-redis-cache.l3iqij.clustercfg.use2.cache.amazonaws.com` 
+
+<br>  
+
+We have 3 redis clusters in our Laravel Vapor infrastructure:  
+
+**musora-production-redis-cache** (for general production laravel usage)  
+`musora-production-redis-cache.l3iqij.clustercfg.use2.cache.amazonaws.com`  
+  
+
+**musora-production-session-cache** (for our production web login sessions)  
+`musora-production-session-cache.l3iqij.clustercfg.use2.cache.amazonaws.com`  
+  
+
+**musora-staging-redis-cache** (for all our staging environments usage)  
+`musora-staging-redis-cache.l3iqij.clustercfg.use2.cache.amazonaws.com`  
+
+
+## How To Connect To Our Old Infrastructure Redis Server (musora.com/admin (musora center))
+
+### Production  
+**SSH in to our mini EC2 instance running our in Kubernetes AWS VPC**
+1. Set kubernetes to our production environment: `kset` -> choose 9 (musora) -> choose 2 (production)
+2. Run our cli helper commend to connect to a k8 pod: `kx` -> choose 2 (any production pod will work)
+3. Connect to redis:  
+`redis-cli -h musora-production-m4.l3iqij.0001.use2.cache.amazonaws.com`  
+
+### Staging  
+**SSH in to our mini EC2 instance running our in Kubernetes AWS VPC**
+1. Set kubernetes to our production environment: `kset` -> choose 9 (musora) -> choose 1 (staging)
+2. Run our cli helper commend to connect to a k8 pod: `kx` -> choose 2 (any staging pod will work)
+3. Connect to redis:  
+`redis-cli -h musora-staging.l3iqij.0001.use2.cache.amazonaws.com`  

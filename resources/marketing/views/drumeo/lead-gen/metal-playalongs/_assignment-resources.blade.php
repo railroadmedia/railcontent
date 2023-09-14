@@ -8,15 +8,15 @@ if (!isset($assignmentID)) {
     class="assignment-row border-gray-100 border-b-2 py-4 sm:px-3 @if(!empty($defaultOpen)) active @endif">
     <div class="w-full flex text-left items-center justify-between">
         @if(!empty($assignmentID))
-            <i class="fal fa-fw fa-file-music text-3xl flex-shrink-0"></i>
+            <i class="fa-light fa-fw fa-file-music text-3xl flex-shrink-0"></i>
             {{--<i class="complete-button {{ ($songInAnHourProgress->$assignmentID ?? null) == 'completed' ? 'active' : '' }} far fa-check text-center text-2xl text-gray-300 border-4 rounded-full cursor-pointer transition-all duration-300 hover:bg-gray-200 hover:text-white"--}}
                     {{--data-content-id="{{ $assignmentID }}" style="min-width: 39px;"></i>--}}
         @elseif(!empty($pdfURL))
-            <i class="fal fa-fw fa-file-music text-3xl flex-shrink-0"></i>
+            <i class="fa-light fa-fw fa-file-music text-3xl flex-shrink-0"></i>
         @elseif(!empty($mp3URL))
-            <a href="{{ $mp3URL }}" target="_blank"><i class="fal fa-fw fa-music text-3xl"></i></a>
+            <a href="{{ $mp3URL }}" target="_blank"><i class="fa-light fa-fw fa-music text-3xl"></i></a>
         @elseif(!empty($zipURL))
-            <a href="{{ $zipURL }}" target="_blank"><i class="fal fa-fw fa-cloud-download text-3xl"></i></a>
+            <a href="{{ $zipURL }}" target="_blank"><i class="fa-light fa-fw fa-cloud-download text-3xl"></i></a>
         @endif
 
         <div class="pl-3 sm:pl-4 max-w-2xl max-w-2xl mr-auto">
@@ -36,7 +36,7 @@ if (!isset($assignmentID)) {
             @if(!empty($soundslice))
                 <i class="fas fa-fw fa-play pl-2 mr-2 sm:mr-6 ml-auto text-xl outline-none cursor-pointer text-yellow relative z-10 autoplay-video flex-shrink-0" data-open="{{ $assignmentID }}Modal"></i>
             @endif
-            <i class="fal fa-fw fa-angle-down transition-all duration-300 @if(empty($soundslice) && empty($vimeo)) ml-auto  @endif @if(!empty($pdfURL) || !empty($mp3URL)) cursor-pointer @endif text-4xl flex-shrink-0 w-9"></i>
+            <i class="fa-light fa-fw fa-angle-down transition-all duration-300 @if(empty($soundslice) && empty($vimeo)) ml-auto  @endif @if(!empty($pdfURL) || !empty($mp3URL)) cursor-pointer @endif text-4xl flex-shrink-0 w-9"></i>
         @endif
     </div>
 

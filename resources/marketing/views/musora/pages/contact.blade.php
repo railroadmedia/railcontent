@@ -46,48 +46,48 @@
 {{--            lg:grid-cols-4 --}}
             gap-3 sm:gap-4">
                 <div  class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9 relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fal fa-toggle-on text-3xl md:text-4xl mb-3"></i>
+                    <i class="fa-light fa-toggle-on text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Membership options</p>
                     <p class="text-sm">What different types of memberships are available? </p>
                     <a href="#" data-beacon-article-sidebar="64272ebf8fe95055b525a84d" class="absolute inset-0" aria-label="Membership options"></a>
                 </div>
                 <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9 relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fal fa-book-open text-3xl md:text-4xl mb-3"></i>
+                    <i class="fa-light fa-book-open text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Lesson curriculum</p>
                     <p class="text-sm">Do you have a specific lesson curriculum?</p>
                     <a href="#" data-beacon-article-sidebar="637fe0fc6eb6095a0543930a" class="absolute inset-0" aria-label="Lesson curriculum"></a>
                 </div>
                 <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9 relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fal fa-truck-fast text-3xl md:text-4xl mb-3"></i>
+                    <i class="fa-light fa-truck-fast text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Shipment tracking</p>
                     <p class="text-sm">I ordered a product from you, how can I track my shipment?</p>
                     <a href="#" data-beacon-article-sidebar="634b2901927a2c1634dfac43" class="absolute inset-0" aria-label="Shipment tracking"></a>
                 </div>
                 <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9 relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fal fa-tag text-3xl md:text-4xl mb-3"></i>
+                    <i class="fa-light fa-tag text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Free and paid</p>
                     <p class="text-sm">What’s the difference between free and paid content?</p>
                     <a href="#" data-beacon-article-sidebar="6467ad5b67acd170a44c2eb8" class="absolute inset-0" aria-label="Free and paid"></a>
                 </div>
                 <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9 relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fal fa-badge-check text-3xl md:text-4xl mb-3"></i>
+                    <i class="fa-light fa-badge-check text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">90-day guarantee</p>
                     <p class="text-sm">What are the terms for your refund guarantee? </p>
                     <a href="#" data-beacon-article-sidebar="6467b2256413a34741154344" class="absolute inset-0" aria-label="90-day guarantee"></a>
                 </div>
                 <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9 relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fal fa-hand-holding-dollar text-3xl md:text-4xl mb-3"></i>
+                    <i class="fa-light fa-hand-holding-dollar text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Customs fees</p>
                     <p class="text-sm">Does Musora cover customs fees?</p>
                     <a href="#" data-beacon-article-sidebar="6467b51367acd170a44c2ef9" class="absolute inset-0" aria-label="Customs fees"></a>
                 </div>
 {{--                <a href="" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">--}}
-{{--                    <i class="fal fa-trophy text-3xl md:text-4xl mb-3"></i>--}}
+{{--                    <i class="fa-light fa-trophy text-3xl md:text-4xl mb-3"></i>--}}
 {{--                    <p class="font-bold mb-1 text-sm"> Learning outcomes</p>--}}
 {{--                    <p class="text-sm"></p>--}}
 {{--                </a>--}}
 {{--                <a href="" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">--}}
-{{--                    <i class="fal fa-desktop text-3xl md:text-4xl mb-3"></i>--}}
+{{--                    <i class="fa-light fa-desktop text-3xl md:text-4xl mb-3"></i>--}}
 {{--                    <p class="font-bold mb-1 text-sm">Online or in-person lessons?</p>--}}
 {{--                    <p class="text-sm"></p>--}}
 {{--                </a>--}}
@@ -167,7 +167,4 @@
     <script src="{{ mix('platform/js/manifest.js') }}"></script>
     <script src="{{ mix('platform/js/vendor.js') }}"></script>
     <script src="{{ mix('platform/js/app.js') }}"></script>
-    <script>
-
-    </script>
 @endsection

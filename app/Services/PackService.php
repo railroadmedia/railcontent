@@ -104,7 +104,6 @@ class PackService
     {
         ContentRepository::$pullFutureContent = true;
         AddedToPrimaryPlaylistDecorator::$skip = true;
-        PackDecorator::$skip = true;
         LessonAssignmentDecorator::$skip = true;
         ContentExperienceDecorator::$skip = true;
 

@@ -151,16 +151,6 @@
         ])
     @endif
 
-    @if(empty($trialVersion))
-    @include('_partials.components.promo-top-banner',[
-        'bg' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-shop-summer-sale-bg.jpg',
-        'logo' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-summer-sale-logo.svg',
-        'logoStyles' => 'mb-3',
-        'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
-        'promoText' => 'SAVE UP TO 91% UNTIL JULY 31ST!',
-    ])
-    @endif
-
     @php
         $bubble1 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/rob-scallon.png';
         $bubble2 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/ayla-tesler-mabe.png';
@@ -216,6 +206,7 @@
         'cta' => 'SEE YOUR DEAL &raquo',
     ])
 
+    @include('musora.sales.components.musicounts-section')
 
     @php
         $gridItems = [
@@ -525,7 +516,7 @@
             ],
             [
             'title' => "I’ve started making my own melodies.",
-            'description' => "Guitareo has been fun and motivated me to try more. I like how we start making melodies quickly along with helpful background information on chords and notes. I love seeing other students post their melodies -- it’s so much fun to listen to others!",
+            'description' => "Guitareo has been fun and motivated me to try more. I like how we start making melodies quickly along with helpful background information on chords and notes. I love seeing other students post their melodies — it’s so much fun to listen to others!",
             'name' => 'Jan M',
             'image' => 'https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/testimonials/jan-berlin-germany.jpg',
             'location' => 'Germany',
@@ -620,11 +611,13 @@
         'logo' => 'https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png',
         'header' => 'Unlimited guitar lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
-                    <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> All-access for piano, guitar, drums, and singing.</li>
+                    <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> We’ll donate 20% towards music programs for kids. </li>',
         'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-collage.png',
         ])
+{{--        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>--}}
+{{--        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>--}}
+{{--        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',--}}
     @endif
 
     @include('musora.sales.components.app-section', [

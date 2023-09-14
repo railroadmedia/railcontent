@@ -135,8 +135,7 @@
                 @endphp
                 @foreach($bonuses as $bonus)
                     <div class="w-1/2 sm:w-1/3 px-2 md:px-3 mb-5 md:mb-7">
-                        <div class="relative autoplay-video cursor-pointer overflow-hidden rounded-md" data-open="signUpModal">
-                            <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="margin: -39px;"></i>
+                        <div class="relative overflow-hidden rounded-md">
                             <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=95/{{ $bonus['image'] }}"></div>
                         </div>
                         <h5 class="mt-2 mb-1 md:text-lg lg:text-xl"><strong>w/ {{ $bonus['artist'] }}</strong></h5>
@@ -278,28 +277,12 @@
                 @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                         "formName" => 'Metal Play-Alongs',
-                        "formId" => "Drumeo - Engagement - Trigger - Metal Play-Alongs - Web Form",
+                        "formId" => "Drumeo - Engagement - Trigger - Metal Play-Alongs - Web Form2",
                         "buttonText" => "Hook Me Up ",
                     ])
             </div>
         </div>
     </section>
-
-    <div class="reveal text-center max-w-2xl" id="signUpModal" data-reveal style="background-color: rgb(243, 244, 246);">
-        <div class="py-5 px-3 md:px-9 md:py-9">
-            <h4 class="leading-normal mb-4 md:text-xl lg:text-2xl"><strong>
-                    Add your drumming to nine high-quality <br class="inline md:hidden">
-                    drumless play-along tracks.
-                </strong></h4>
-            @include("drumeo.lead-gen.partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-                "formName" => 'Metal Play-Alongs',
-                "formId" => "Drumeo - Engagement - Trigger - Metal Play-Alongs - Web Form",
-                "buttonText" => "Hook Me Up ",
-                "stacked" => true
-            ])
-        </div>
-    </div>
 @stop
 
 @section('scripts')

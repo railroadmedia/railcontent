@@ -115,7 +115,8 @@
                     "formId" => $formId,
                     "formName" => $formName,
                     "buttonText" => "Get started for free",
-                    "stacked" => true
+                    "stacked" => true,
+                    "redirectURL" => "/faster/thank-you/",
                 ])
             </div>
             <div class="w-full sm:w-5/12 lg:w-1/2 sm:pl-5 lg:pl-12 xl:px-12 hidden sm:block">
@@ -222,10 +223,11 @@
         <img class="h-16 lg:h-20" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
         <h5 class="my-5 sm:my-7">Enter your email to receive ten free exercises.</h5>
         @include("drumeo.lead-gen.partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-            "formId" => $formId,
+            "recaptchaKey" => $recaptchaKey,
+            "formId" => $formId . '2',
             "formName" => $formName,
             "buttonText" => "Send videos",
+            "redirectURL" => "/faster/thank-you/",
         ])
         </div>
     </section>

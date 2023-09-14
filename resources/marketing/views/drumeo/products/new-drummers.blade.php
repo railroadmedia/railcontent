@@ -10,7 +10,8 @@
 
     @include('_partials.layout._fonts')
 
-    @include('_partials.layout._tailwindcdn')
+{{--    @include('_partials.layout._tailwindcdn')--}}
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/ndsh.css') }}" rel="stylesheet">
@@ -54,6 +55,10 @@
     </style>
 @stop
 
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
+
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
@@ -68,7 +73,7 @@
     <header class="text-center text-white py-5 md:py-8 bg-top bg-no-repeat relative" style="background-color:#020d1f;background-image: url(https://www.musora.com/musora-cdn/image/width=3000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/header.jpg);">
         <div class="container mx-auto relative z-10">
             <img class="logo" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png" alt="New Drummers Logo"><br>
-            <i class="fas fa-play play-button autoplay-video mt-40 md:mt-72 mb-16 md:mb-24" data-open="trailer"></i>
+            <i class="fas fa-play play-button autoplay-video mt-40 md:mt-72 mb-16 md:mb-24" @click="trailer = true;"></i>
             <h2><strong>Crush your first 90 days<br class="inline md:hidden"> on the drums.</strong></h2>
             <h5 class="my-3">Go from a total beginner to <br class="inline md:hidden"> playing drums with real music.</h5>
             <h4 class="text-yellow-400 mb-3 md:mb-5"><strong>ONLY
@@ -78,21 +83,15 @@
         </div>
     </header>
 
-    <div class="reveal large" id="trailer" data-reveal data-reset-on-close="false">
-        <div class="aspect-16:9 w-full relative">
-            <iframe class="absolute w-full h-full reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/543324037?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        </div>
-    </div>
-
     <section class="text-center text-white py-10 md:py-20 lg:py-24 relative overflow-hidden" style="background:#000a1e;">
         <div class="container mx-auto z-10 relative">
             <div class="px-2 md:px-4">
                 <div class="relative w-full rounded-2xl mx-auto h-10 beg-adv-text" style="max-width: 840px;">
                     <img class="absolute top-0 h-5 md:h-7" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png" alt="New Drummers Logo">
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap hidden md:inline">Play your<br> favorite songs<br><i class="fal fa-angle-down"></i></p>
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap">Play in<br> bands<br><i class="fal fa-angle-down"></i></p>
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap hidden md:inline">Write & record<br> drum parts<br><i class="fal fa-angle-down"></i></p>
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap">Play anything<br> you want<br><i class="fal fa-angle-down"></i></p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap hidden md:inline">Play your<br> favorite songs<br><i class="fa-light fa-angle-down"></i></p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap">Play in<br> bands<br><i class="fa-light fa-angle-down"></i></p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap hidden md:inline">Write & record<br> drum parts<br><i class="fa-light fa-angle-down"></i></p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap">Play anything<br> you want<br><i class="fa-light fa-angle-down"></i></p>
                 </div>
                 <div class="relative w-full rounded-2xl h-20 mx-auto flex space-between overflow-hidden items-center beg-adv-bar" style="background-color: #1571bd;max-width: 840px;">
                     <div class="h-full flex items-center flex-wrap relative" style="background-color:#00bafd;">
@@ -106,9 +105,9 @@
                 </div>
                 <div class="relative w-full rounded-2xl mx-auto h-10 beg-adv-text block md:hidden" style="max-width: 840px;">
                     <p></p>
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap inline md:hidden"><i class="fal fa-angle-up"></i><br>Play your<br> favorite songs</p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap inline md:hidden"><i class="fa-light fa-angle-up"></i><br>Play your<br> favorite songs</p>
                     <p></p>
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap inline md:hidden"><i class="fal fa-angle-up"></i><br>Write & record<br> drum parts</p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap inline md:hidden"><i class="fa-light fa-angle-up"></i><br>Write & record<br> drum parts</p>
                     <p></p>
                 </div>
             </div>
@@ -164,7 +163,7 @@
                         <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
                             <h2 class="uppercase text-blue"><strong>Drum Theory Simplifier<sup>&trade;</sup></strong></h2>
                             <h4 class="my-3 md:my-5"><strong>How to read drum music.</strong></h4>
-                            <h6 class="leading-relaxed">It’s not as hard as it sounds. Jared breaks down reading drum music in a quick & fun way so you’ll be able to look at a page of simple drum music and hear the pattern in your head -- it’s like you speak another language!</h6>
+                            <h6 class="leading-relaxed">It’s not as hard as it sounds. Jared breaks down reading drum music in a quick & fun way so you’ll be able to look at a page of simple drum music and hear the pattern in your head — it’s like you speak another language!</h6>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>03</strong></h1>
@@ -275,7 +274,7 @@
                         <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
                             <h2 class="uppercase text-blue"><strong>Drum Theory Simplifier<sup>&trade;</sup></strong></h2>
                             <h4 class="my-3 md:my-5"><strong>How to read drum music.</strong></h4>
-                            <h6 class="leading-relaxed">It’s not as hard as it sounds. Jared breaks down reading drum music in a quick & fun way so you’ll be able to look at a page of simple drum music and hear the pattern in your head -- it’s like you speak another language!</h6>
+                            <h6 class="leading-relaxed">It’s not as hard as it sounds. Jared breaks down reading drum music in a quick & fun way so you’ll be able to look at a page of simple drum music and hear the pattern in your head — it’s like you speak another language!</h6>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>03</strong></h1>
@@ -393,7 +392,7 @@
                 <h1 class="text-center md:text-left text-blue m-0 text-5xl md:text-6xl lg:text-8xl leading-none"><strong>JARED<br class="hidden md:inline"> FALK</strong></h1>
                 <h6 class="mt-60 md:mt-5 leading-relaxed">Jared Falk has been a trusted source for online drum lessons for 15+ years.
                     <br><br>
-                    As the face of Drumeo, Jared is a pioneer of online drum instruction -- helping prospective drummers around the world learn their first beats and beyond.
+                    As the face of Drumeo, Jared is a pioneer of online drum instruction — helping prospective drummers around the world learn their first beats and beyond.
                     <br><br>
                     His passion, grit, and approachable style have helped him become the most-watched drum instructor online… ever! And now you can take in his first-ever full curriculum for beginner drummers anytime and anywhere it fits your schedule.</h6>
             </div>
@@ -576,7 +575,7 @@
         <div class="container mx-auto">
             <img class="logo lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png" alt="New Drummers Logo">
             <h2 class="mt-5 md:mt-8"><strong>Crush your first 90 days<br class="inline md:hidden"> on the drums.</strong></h2>
-            {{--<h6 class="mb-5 md:mb-14 leading-normal px-3"><em>Choose your adventure -- get your beginner lessons for just $7 <br class="hidden md:inline">--}}
+            {{--<h6 class="mb-5 md:mb-14 leading-normal px-3"><em>Choose your adventure — get your beginner lessons for just $7 <br class="hidden md:inline">--}}
                     {{--or add a practice pad and drumsticks for a discount. </em></h6>--}}
 
             <h5 class="my-3 leading-normal px-3">Go from a total beginner to <br class="inline md:hidden"> playing drums with real music.</h5>
@@ -623,9 +622,14 @@
 
     @include("drumeo.sales.partials._footer")
 
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '543324037',
+        'vimeo' => true,
+    ])
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
@@ -633,7 +637,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script>
         $(document).ready(function () {
-            $(document).foundation();
             $('.slick-1').slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,

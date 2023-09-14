@@ -60,7 +60,7 @@
                 <div class="max-w-xs mx-auto px-10 sm:px-7 relative">
                     <img class="absolute top-0 right-0 -mx-14 -my-3 h-14" src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" style="filter: sepia()saturate(20)brightness(.8)hue-rotate(-17deg);">
                     <div class="w-full relative rounded-xl overflow-hidden border-4 border-white" style="padding-bottom: 172%;">
-                        <iframe class="fixed inset-0 h-full w-full absolute" src="//player.vimeo.com/video/TODO" frameborder="0" allowfullscreen title="intro-video"></iframe>
+                        <iframe class="fixed inset-0 h-full w-full absolute" src="//player.vimeo.com/video/851442222" frameborder="0" allowfullscreen title="intro-video"></iframe>
                     </div>
                 </div>
                 <p class="mt-8 max-w-lg">Here’s what you need to do now:
@@ -141,7 +141,7 @@
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
-                                    <i class="fal {!! $songItem['fa-icon'] !!} text-3xl sm:text-4xl text-pianote"></i>
+                                    <i class="fa-light {!! $songItem['fa-icon'] !!} text-3xl sm:text-4xl text-pianote"></i>
 {{--                                                                        <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="text-left sm:text-center">

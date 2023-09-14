@@ -65,6 +65,7 @@
                     "formId" => "Singeo - Engagement - Trigger - Stop Hating Your Voice - Web Form",
                     "formName" => 'Stop Hating Your Voice',
                     "buttonText" => "Send My Lessons",
+                    "stacked" => true,
                     "noTy" => true
                     ])
 
@@ -175,10 +176,9 @@
             <div class="w-full mx-auto max-w-lg lg:max-w-3xl">
                 @include("singeo._partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                    "formId" => "Singeo - Engagement - Trigger - Stop Hating Your Voice - Web Form",
+                    "formId" => "Singeo - Engagement - Trigger - Stop Hating Your Voice - Web Form2",
                     "formName" => 'Stop Hating Your Voice',
                     "buttonText" => "Send My Lessons",
-                    "oneLineLg" => true,
                     "noTy" => true
                     ])
 

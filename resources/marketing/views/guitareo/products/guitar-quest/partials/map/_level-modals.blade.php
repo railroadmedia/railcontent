@@ -25,7 +25,7 @@
             <div x-show="levelModalOpen === 1"
                  x-on:click.stop
                  class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2FGuitar-Quest-1-0.png?auto=format&ixlib=php-1.2.1&w=2000&s=1ab22facad3a99b9c5a3ab59cfcc3f9b" />
+                <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-1-0.png" />
                 <div class="p-6">
                     <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">9 Videos // 10 Challenges</h4>
                     <p class="text-sm">There’s a concert going on RIGHT NOW but the guitarist didn’t show. And they’re turning to you. Just learn these chords… You’ll get a simple crash course so you can fill in for the show (even though you’ve never played guitar before).</p>
@@ -48,10 +48,10 @@
             <div x-show="levelModalOpen === 2"
                 x-on:click.stop
                 class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2FGuitar-Quest-2-0.png?auto=format&ixlib=php-1.2.1&w=2000&s=029027bcdf62593d95e1e4959775a635" />
+                <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-2-0.png" />
                 <div class="p-6">
                     <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">8 Videos // 9 Challenges</h4>
-                    <p class="text-sm">You don't want the rest of your band to know that you don't play guitar -- and there's a music video shoot coming up soon. So you’re going to prepare with a secret guitar lesson in a secret location, where you'll learn the absolute basics and how to make it seem like you've been playing for a long time.</p>
+                    <p class="text-sm">You don't want the rest of your band to know that you don't play guitar — and there's a music video shoot coming up soon. So you’re going to prepare with a secret guitar lesson in a secret location, where you'll learn the absolute basics and how to make it seem like you've been playing for a long time.</p>
                     <ul class="list-none ml-0 text-sm">
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Get Familiar With Your Guitar</span></li>
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Explore Your Amp (Optional)</span></li>
@@ -70,10 +70,10 @@
             <div x-show="levelModalOpen === 3"
                 x-on:click.stop
                 class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2FGuitar-Quest-3-0.png?auto=format&ixlib=php-1.2.1&w=2000&s=4c64fc507666feea5fbfa51e089adb30" />
+                <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-3-0.png" />
                 <div class="p-6">
                     <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">9 Videos // 13 Challenges</h4>
-                    <p class="text-sm">It's time for the new music video -- and if you can quickly learn the song before the band shows up, no one will ever notice that you don't actually play guitar. You've got this -- with some basic strumming and easy new chords.</p>
+                    <p class="text-sm">It's time for the new music video — and if you can quickly learn the song before the band shows up, no one will ever notice that you don't actually play guitar. You've got this — with some basic strumming and easy new chords.</p>
                     <ul class="list-none ml-0 text-sm">
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Strumming Pattern #1</span></li>
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Strumming Pattern #2</span></li>
@@ -96,7 +96,7 @@
             <div x-show="levelModalOpen === 4"
                 x-on:click.stop
                 class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2FGuitar-Quest-4-0.png?auto=format&ixlib=php-1.2.1&w=2000&s=9296666162d1f324dcef8d52f550fb7b" />
+                <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-4-0.png" />
                 <div class="p-6">
                     <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">9 Videos // 12 Challenges</h4>
                     <p class="text-sm">The label needs more songs, so you’re heading into the mountains with an acoustic guitar to explore your creative side. But when you finally get settled around the campfire, a strange bearded man comes out of the woods and demands you play one of his songs. Oh, and he’s carrying an axe!</p>
@@ -121,7 +121,7 @@
             <div x-show="levelModalOpen === 5"
                 x-on:click.stop
                 class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2FGuitar-Quest-5-0.png?auto=format&ixlib=php-1.2.1&w=2000&s=87d7668b114c6c1c28f43c7e3afe7858" />
+                <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-5-0.png" />
                 <div class="p-6">
                     <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">12 Videos // 6 Challenges</h4>
                     <p class="text-sm">Your band is exploding in popularity and you've decided to immediately sell out and play commercial jingles while the iron is hot. It's time for you to double-down on basic guitar techniques that'll let you play catchier tunes and add more color to your playing.</p>
@@ -140,10 +140,10 @@
             <div x-show="levelModalOpen === 6"
                 x-on:click.stop
                 class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2FGuitar-Quest-6-0.png?auto=format&ixlib=php-1.2.1&w=2000&s=827a0b3e1815df14e30a1fbbf57e121a" />
+                <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-6-0.png" />
                 <div class="p-6">
                     <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">9 Videos // 7 Challenges</h4>
-                    <p class="text-sm">After selling out, the band needs to re-establish itself for the diehard fans -- and what better way than a punk show! Your audience will expect something hardcore, so it's time for you to get familiar with the fretboard and play some power chords!</p>
+                    <p class="text-sm">After selling out, the band needs to re-establish itself for the diehard fans — and what better way than a punk show! Your audience will expect something hardcore, so it's time for you to get familiar with the fretboard and play some power chords!</p>
                     <ul class="list-none ml-0 text-sm">
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Get Familiar With The Fretboard</span></li>
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Practice The One Note Riff</span></li>
@@ -160,7 +160,7 @@
             <div x-show="levelModalOpen === 7"
                 x-on:click.stop
                 class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2FGuitar-Quest-7-0.png?auto=format&ixlib=php-1.2.1&w=2000&s=67bab0b81fb356d763a8fae56d8adfbd" />
+                <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-7-0.png" />
                 <div class="p-6">
                     <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">7 Videos // 11 Challenges</h4>
                     <p class="text-sm">You're in the studio recording a song, but your 'Post-Alaskan Indie Folk' band isn't very productive. There are some elements recorded, but you REALLY need to fill in the gaps and finish the song while they’re gone. It needs to be done today. It’s your time to shine!</p>
@@ -184,7 +184,7 @@
             <div x-show="levelModalOpen === 8"
                 x-on:click.stop
                 class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2FGuitar-Quest-8-0.png?auto=format&ixlib=php-1.2.1&w=2000&s=fc9c7a85c8e7c9cbe82b7e16211ab731" />
+                <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-8-0.png" />
                 <div class="p-6">
                     <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">9 Videos // 15 Challenges</h4>
                     <p class="text-sm">The band is growing tired of writing music. “Let’s just play covers!” You’ve got some skills, but a new challenge awaits: how do you learn how to play ANY song on the guitar… fast?</p>
@@ -212,10 +212,10 @@
             <div x-show="levelModalOpen === 9"
                 x-on:click.stop
                 class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2FGuitar-Quest-9-0.png?auto=format&ixlib=php-1.2.1&w=2000&s=3dbab20b2a24fa1684f66bcbe63676cd" />
+                <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-9-0.png" />
                 <div class="p-6">
                     <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">10 Videos // 10 Challenges</h4>
-                    <p class="text-sm">Here's the final song. The final boss. It's everything you've learned so far in ONE high energy tune -- and it's so satisfying to pull off. If you can muster up the skill and determination to play this, you've completed your GuitarQuest!</p>
+                    <p class="text-sm">Here's the final song. The final boss. It's everything you've learned so far in ONE high energy tune — and it's so satisfying to pull off. If you can muster up the skill and determination to play this, you've completed your GuitarQuest!</p>
                     <ul class="list-none ml-0 text-sm">
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">The Chorus Riff (1st Half)</span></li>
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">The Chorus Riff (2nd Half)</span></li>

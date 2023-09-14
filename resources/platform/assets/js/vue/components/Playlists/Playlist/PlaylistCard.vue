@@ -59,7 +59,7 @@ const artist = computed(() => {
 })
 
 const released = computed(() => {
-    return lessonDateParsed < dateNow;
+    return props.lesson.status === 'published';
 })
 
 //Instructor

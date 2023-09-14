@@ -6,8 +6,11 @@ use App\ViewComposers\MarketingCartSidebarViewComposer;
 use App\ViewComposers\MarketingPagesProductsViewComposer;
 use App\ViewComposers\NavigationViewComposer;
 use App\ViewComposers\RailanalyticsIframeTrackingViewComposer;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Railroad\Ecommerce\Contracts\UserProviderInterface as EcommerceUserProviderInterface;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface as EventDataSynchronizerUserProviderInterface;
 use Railroad\DoctrineArrayHydrator\Contracts\UserProviderInterface as ArrayHydratorUserProviderInterface;
@@ -27,7 +30,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $request = Request::instance();
+
+        // This is only for cloudflare performance testing to be able to access URLs behind our auth. This should
+        // never be used for anything other than bots we control.
+        if (str_starts_with($request->server->get('REQUEST_URI'), '/url-token-auth/')) {
+            $token = Str::betweenFirst($request->server->get('REQUEST_URI'), '/url-token-auth/', '/');
+            $realPath = Str::after($request->server->get('REQUEST_URI'), $token . '/');
+
+            $request->headers->add(['Authorization' => "Bearer {$token}"]);
+
+            $request->server->set('REQUEST_URI', '/' . $realPath);
+        }
     }
 
     /**

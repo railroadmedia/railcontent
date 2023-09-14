@@ -196,7 +196,7 @@ onBeforeMount(() => {
     }
     if (localStorage.getItem("playerExpanded")) {
         playlistsStore.playerExpanded = JSON.parse(localStorage.getItem("playerExpanded"));
-        
+
         if(playlistsStore.playerExpanded){
             pageContainerStore.isSidebarCollapsed = true;
         }
@@ -250,7 +250,7 @@ onMounted(() => {
                     </a>
                     <!-- Expand/Collapse -->
                     <button class="tw-px-1 lg:tw-hidden" :title="state.collapsed ? 'Show Playback Cue' : 'Hide Playback Cue'"
-                        :class="state.collapsed ? 'tw-rotate-180' : ''" @click="state.collapsed = !state.collapsed">
+                        :class="state.collapsed ? '' : 'tw-rotate-180'" @click="state.collapsed = !state.collapsed">
                         <i class="fas fa-chevron-down tw-text-[#00101D] dark:tw-text-white"></i>
                     </button>
                     <!-- Fullscreen -->

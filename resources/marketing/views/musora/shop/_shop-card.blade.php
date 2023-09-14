@@ -57,7 +57,7 @@
                     @if(!empty($specialPrice))
                         <p class="text-promo mb-4"><strong class="font-extrabold">{{  $specialPrice  }}</strong></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <p class="leading-tight mb-2 price"><s>${{ floatVal($fullPrice) }}</s> <strong class="font-extrabold text-promo">
+                        <p class="leading-tight mb-2 price"><s>${{ floatVal($fullPrice) }}</s> <strong class="font-extrabold text-{{ $theme }}">
                                 @if(number_format($price, 2) == intval($price))
                                     ${{  floatVal($price)  }}
                                 @else
@@ -65,7 +65,7 @@
                                 @endif
                             </strong></p>
                     @else
-                        <p class="leading-tight mb-2 price"><strong class="font-extrabold text-promo"> ${{  floatVal($price)  }}</strong></p>
+                        <p class="leading-tight mb-2 price"><strong class="font-extrabold text-{{ $theme }}"> ${{  floatVal($price)  }}</strong></p>
                     @endif
                     @if(!empty($includedEdge))
                         <p class="description relative -mt-2 mb-1"><em class="text-red">Or free with {{ ucfirst($theme) }}</em></p>

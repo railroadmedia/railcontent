@@ -125,7 +125,6 @@
                                 onload="this.classList.remove('opacity-0')"
                             >
                         </picture>
-                        <p class="absolute bottom-0 right-0 m-3 rounded-lg text-white px-2 py-0.5 font-semibold" style="background-color:rgba(0,0,0,0.8);">10:00</p>
                     </div>
                     <p class="w-2/3 sm:w-full pl-3 sm:pl-0 mt-3 leading-normal">Want to play the Blues? Then you NEED to know the 12-Bar Blues pattern.</p>
                 </div>
@@ -141,7 +140,6 @@
                             onload="this.classList.remove('opacity-0')"
                         >
                     </picture>
-                    <p class="absolute bottom-0 right-0 m-3 rounded-lg text-white px-2 py-0.5 font-semibold" style="background-color:rgba(0,0,0,0.8);">10:00</p>
                     </div>
                     <p class="w-2/3 sm:w-full pl-3 sm:pl-0 mt-3 leading-normal">To play the Blues, you have to feel the Blues. This lesson will show you how to get into the swing of things.</p>
                 </div>
@@ -157,7 +155,6 @@
                             onload="this.classList.remove('opacity-0')"
                         >
                     </picture>
-                    <p class="absolute bottom-0 right-0 m-3 rounded-lg text-white px-2 py-0.5 font-semibold" style="background-color:rgba(0,0,0,0.8);">10:00</p>
                     </div>
                     <p class="w-2/3 sm:w-full pl-3 sm:pl-0 mt-3 leading-normal">Break away from basic chords. You’ll be confidently playing through chord changes with this iconic Boogie Pattern.</p>
                 </div>
@@ -173,9 +170,8 @@
                             onload="this.classList.remove('opacity-0')"
                         >
                     </picture>
-                    <p class="absolute bottom-0 right-0 m-3 rounded-lg text-white px-2 py-0.5 font-semibold" style="background-color:rgba(0,0,0,0.8);">10:00</p>
                     </div>
-                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 mt-3 leading-normal">We’ve saved the best ‘till last. In this lesson, you’ll get two iconic Blues Riffs you can use anywhere. These sound amazing!</p>
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 mt-3 leading-normal">We’ve saved the best ‘till last. In this lesson, you’ll play an iconic Blues riff over your chord progression.  You’ll want to save this one!</p>
                 </div>
             </div>
         </div>
@@ -194,7 +190,7 @@
                     <h2 class="text-center sm:text-left"><strong>Kevin Castro</strong></h2>
                     <p class="leading-normal mt-4 lg:mt-6">Kevin Castro wouldn’t be a professional pianist without the Blues. In fact, it was a Blues improvisation that got him accepted into University.
                         <br><br>
-                        Since then, he’s toured with rising stars (JESSIA, Elijah Woods), played at TikTok Headquarters in New York and LA, and even recorded a demo for Jennifer Lopez (which was, sadly, never released).
+                        Since then, he’s toured with rising stars (JESSIA, Elijah Woods), played at TikTok Headquarters in New York and LA, and even recorded a demo for Jennifer Lopez.
                         <br><br>
                         But Kevin’s real passion comes from sharing his experience and knowledge with students.
                         <br><br>
@@ -225,7 +221,7 @@
                     <div class="max-w-md md:max-w-auto mx-auto">
                         @include('pianote._partials.sign-up-form', [
                         "recaptchaKey" => $recaptchaKey,
-                        "formId" => "Pianote - Engagement - Trigger - Blues Piano Bootcamp - Web Form",
+                        "formId" => "Pianote - Engagement - Trigger - Blues Piano Bootcamp - Web Form - Footer",
                         "formName" => 'Blues Piano Bootcamp',
                             "buttonText" => "start for free",
                             'stacked' => true,
@@ -237,9 +233,10 @@
             </div>
         </div>
     </section>
+
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "demoVid",
-        "video" => '//player.vimeo.com/video/TODO&autoplay=1',
+        "video" => '//player.vimeo.com/video/851372644?autoplay=1',
         "title" => 'demoVid'
     ])
 @stop

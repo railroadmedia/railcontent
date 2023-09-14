@@ -147,12 +147,12 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.choose-plan', ['products' => $products, 'theme' => 'drumeo']);
     }
-    public function choosePlanMonth()
+    public function choosePlanMonth(Request $request)
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.choose-plan', ['products' => $products, 'theme' => 'drumeo', 'month' => true]);
+        return view('drumeo.sales.choose-plan', ['products' => $products, 'theme' => 'drumeo', 'month' => true, 'referralCode' => $request->get('referralCode')]);
     }
     public function method()
     {
@@ -228,7 +228,7 @@ class SalesController extends BaseController
     }
     public function thirtyDayDrummer()
     {
-        $productId = 516;
+        $productId = 741;
         /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
         $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
         $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
@@ -356,7 +356,16 @@ class SalesController extends BaseController
     public function alesis(Request $request)
     {
         return view('drumeo.pages.redeem.redeem-page', [
+            'alesis' => true,
             'newAccount' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function alesisExisting(Request $request)
+    {
+        return view('drumeo.pages.redeem.redeem-page', [
+            'alesis' => true,
+            'newAccount' => false,
             'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ]);
     }

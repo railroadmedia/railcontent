@@ -1,4 +1,4 @@
-<div class="tw-flex tw-flex-wrap tw-transition-colors tw-flex-col tw-w-full sm:tw-w-1/2 lg:tw-w-1/3 tw-rounded-md pa-2 hover:tw-shadow-lg dark:hover:tw-bg-[#081825] tw-border tw-border-transparent dark:hover:tw-border-[#223F57]">
+<div class="tw-flex tw-flex-nowrap sm:tw-flex-wrap tw-transition-colors tw-flex-col tw-min-w-[340px] sm:tw-min-w-0 sm:tw-w-[340px] lg:tw-w-auto tw-rounded-md pa-2 hover:tw-shadow-lg dark:hover:tw-bg-[#081825] tw-border tw-border-transparent dark:hover:tw-border-[#223F57]">
     <a href="{{ $url }}" class="tw-flex tw-flex-row tw-no-underline tw-flex-1">
         <div class="tw-flex tw-flex-col tw-text-[#00101D] dark:tw-text-white hot-forum-avatar-col"
         >
@@ -43,7 +43,7 @@
             </h6>
             <p class="tw-text-xs dark:tw-text-white tw-text-[#00101D] tw-flex-1 tw-relative tw-pb-6" style="overflow-wrap: anywhere;">
                 {!! substr(str_replace('&nbsp;', '', $post), 0, 100) !!}...
-                <span class="tw-font-bold dark:tw-text-white tw-text-[#00101D] tw-underline tw-absolute tw-left-0 tw-bottom-0">See Post &raquo;</span>
+                <span class="tw-inline xl:tw-block tw-font-bold dark:tw-text-white tw-text-[#00101D] tw-underline lg:tw-absolute lg:tw-left-0 lg:tw-bottom-0">See Post &raquo;</span>
             </p>
         </div>
     </a>

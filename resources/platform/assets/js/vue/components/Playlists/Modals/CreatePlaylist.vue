@@ -317,8 +317,8 @@
             </div>
         </div>
         <div class="tw-pt-[30px] tw-flex tw-flex-col sm:tw-flex-row tw-justify-between">
-            <button @click="() => emit('onCloseModal')" class="tw-order-1 sm:tw-order-none tw-btn-primary tw-text-center tw-justify-center tw-items-center tw-border-[#000C17] dark:tw-text-white dark:tw-border-white dark:bg-[#081825] tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10">CANCEL</button>
-            <button @click="() => handleConfirm()" :class="`tw-mb-2 sm:tw-mb-0 sm:tw-ml-4 tw-btn-primary tw-bg-${brand} tw-text-center tw-flex tw-justify-center tw-items-center hover:tw-bg-${brand}-600`"><span>{{ props.modalProps.modalType === 'create' ? 'create' : props.modalProps.modalType === 'duplicate' ? 'duplicate' : 'save' }}</span></button>
+            <button @click="() => emit('onCloseModal')" class="tw-order-1 sm:tw-order-none tw-btn-primary tw-text-center tw-justify-center tw-items-center tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]">CANCEL</button>
+            <button @click="() => handleConfirm()" :class="`tw-mb-2 sm:tw-mb-0 sm:tw-ml-4 tw-btn-primary tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-text-center tw-flex tw-justify-center tw-items-center`"><span>{{ props.modalProps.modalType === 'create' ? 'create' : props.modalProps.modalType === 'duplicate' ? 'duplicate' : 'save' }}</span></button>
         </div>
     </div>
 </template>

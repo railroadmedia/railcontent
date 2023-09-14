@@ -6,8 +6,8 @@
     <title>Ayla's Top Gear Picks | Guitareo</title>
     <meta property="og:title" content="Ayla's Top Gear Picks | Guitareo">
 
-    <meta name="description" content="You can peruse Ayla’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views -- and gotten the Guitareo stamp of approval!">
-    <meta property="og:description" content="You can peruse Ayla’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views -- and gotten the Guitareo stamp of approval!">
+    <meta name="description" content="You can peruse Ayla’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views — and gotten the Guitareo stamp of approval!">
+    <meta property="og:description" content="You can peruse Ayla’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views — and gotten the Guitareo stamp of approval!">
 
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2023/share-image-guitareo.jpg">
     <meta property="og:url" content="https://www.guitareo.com/{{ Request::path() }}">

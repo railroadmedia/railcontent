@@ -52,6 +52,7 @@
         @endif
         <div class="container order-form mv-3">
             <order-form
+                referral-code="{{ $referralCode }}"
                 theme-color="drumeo"
                 brand="drumeo"
                 :cart="{{ json_encode($cart) }}"
@@ -79,7 +80,7 @@
                 <div class="flex flex-row flex-wrap text-center features">
                     <div class="flex flex-column xs-12 sm-4 align-center pa-3">
                         <i
-                            class="fal fa-mobile text-white mb-2"
+                            class="fa-light fa-mobile text-white mb-2"
                             style="font-size:40px;"
                         ></i>
 
@@ -109,7 +110,7 @@
 
                     <div class="flex flex-column xs-12 sm-4 pa-3 pv-2 align-center">
                         <i
-                            class="fal fa-check-circle text-white mb-2"
+                            class="fa-light fa-check-circle text-white mb-2"
                             style="font-size:40px;"
                         ></i>
                         <p class="tiny font-bold text-white">

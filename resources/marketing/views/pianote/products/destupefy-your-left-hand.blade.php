@@ -119,7 +119,7 @@
                     <div id="step1" class="anchor"></div>
                     <h4 class="text-red"><strong>STEP 1</strong></h4>
                     <h2><strong>INCREASE YOUR IQ</strong></h2>
-                    <p>Start from scratch and show your left-hand what to do. Because once it knows what it’s supposed to do, we can put it to work.  In this section, you’ll get the basic skills of keyboard familiarity and finger independence. So your fingers will move when YOU want them to -- not on their own.</p>
+                    <p>Start from scratch and show your left-hand what to do. Because once it knows what it’s supposed to do, we can put it to work.  In this section, you’ll get the basic skills of keyboard familiarity and finger independence. So your fingers will move when YOU want them to — not on their own.</p>
                     <div class="image-grid-item col-xs-12 col-sm-6 col-md-3">
                         <div class="thumbnail" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/lesson-1.jpg)"><div class="top-left-badge">LESSON 1</div></div>
                         <p><strong>Left-Hand Intervals</strong><br>
@@ -236,7 +236,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="embed-responsive embed-responsive-4by3">
-                    <iframe class="embed-responsive-item" src="https://www.soundslice.com/scores/475623/embed/?api=1&amp;scroll_type=2&amp;branding=0" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                    <iframe class="embed-responsive-item" src="https://www.soundslice.com/slices/LrHfc/embed/?api=1&amp;scroll_type=2&amp;branding=0" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
             </div>
         </div>
@@ -247,14 +247,14 @@
             <h4 class="text-red"><em>You’ll have constant access to REAL teachers throughout the training course, as well as your fellow students. Never feel lost or overwhelmed. There will always be help when you need it.</em></h4>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-stopwatch"></i>
+                <i class="fa-light fa-stopwatch"></i>
                 <p>
                     <strong>Short Lessons</strong><br> The longest lesson is only 10 minutes. That means you spend more time playing - and getting better!
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-signal-alt"></i>
+                <i class="fa-light fa-signal-alt"></i>
                 <p>
                     <strong>Perfect For All Levels</strong><br> Structured step-by-step lessons you can take at your own pace.
                 </p>
@@ -262,14 +262,14 @@
 
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-piano-keyboard"></i>
+                <i class="fa-light fa-piano-keyboard"></i>
                 <p>
                     <strong>Practice-along Exercises</strong><br> Play-along exercises will help you master the fundamentals and build the foundation needed for success.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-question"></i>
+                <i class="fa-light fa-question"></i>
                 <p>
                     <strong>Your Questions Answered</strong><br> Got questions? You’ll always find answers. Real teachers will be available to help when you need it.
                 </p>
@@ -277,14 +277,14 @@
 
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-file-download"></i>
+                <i class="fa-light fa-file-download"></i>
                 <p>
                     <strong>Downloadable Resources</strong><br> EVERY lesson comes with downloadable exercises and resources. You’ll get over 21 pages of printable exercises.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-infinity"></i>
+                <i class="fa-light fa-infinity"></i>
                 <p>
                     <strong>Yours Forever</strong><br> These lessons NEVER expire. Watch them again, and again, and again… (you get the point).
                 </p>
@@ -361,7 +361,7 @@
                         alt="90-Day Money-Back Guarantee">
                 <p>You shouldn’t have to pay for something you don’t get. That’s why if your left hand is not better, faster, and more independent, you won’t pay a cent.
                     <br><br>
-                    And you’ll have 90 days to test it all. Many courses only offer a short guarantee -- some as little as 14 days.
+                    And you’ll have 90 days to test it all. Many courses only offer a short guarantee — some as little as 14 days.
                     <br><br>
                     But you know it takes more than that to tell if something is REALLY working. And we want you to be able to try EVERYTHING in this course before deciding whether it’s worth your money.
                     <br><br>

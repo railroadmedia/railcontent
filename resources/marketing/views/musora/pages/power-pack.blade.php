@@ -275,7 +275,7 @@
                 </div>
             </form>
                 <div class="disclaimer">
-                    <i class="fal fa-info-circle"></i>
+                    <i class="fa-light fa-info-circle"></i>
                     <p>By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</p>
                 </div>
                 <br><br>

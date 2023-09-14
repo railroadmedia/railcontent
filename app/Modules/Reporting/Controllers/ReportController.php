@@ -3,6 +3,7 @@
 namespace App\Modules\Reporting\Controllers;
 
 use App\Modules\Reporting\Services\YouTrackCompletedItemsReport;
+use App\Modules\Reporting\Services\YouTrackSprintReport;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -29,6 +30,8 @@ class ReportController extends Controller
         switch ($id) {
             case "completed-items":
                 return app()->make(YouTrackCompletedItemsReport::class)->generate($startDate, $endDate);
+            case "sprint":
+                return app()->make(YouTrackSprintReport::class)->generate($startDate, $endDate);
         }
         return null;
     }

@@ -456,9 +456,9 @@
 
     <section class="pt-16">
         <div class="max-w-5xl mx-auto flex flex-wrap sm:flex-nowrap items-center lg:rounded-lg bg-cover py-10 px-4 px-6 lg:px-20 text-white bg-bottom" style="background-image: url(https://d2vyvo0tyx8ig5.cloudfront.net/backgrounds/background-1.jpg);">
-            <img class="rounded-full h-40 md:h-52 border-white border-8 mx-auto mb-6 md:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lisa-witt.jpg" alt="lisa witt">
+            <img class="rounded-full h-40 md:h-52 border-white border-8 mx-auto mb-6 md:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lisa-witt.jpg" alt="Headshot of woman with short platinum hair.">
             <div class="w-full md:w-auto text-center flex-grow sm:pl-5 lg:pl-8">
-                <img class="h-12 sm:h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/logo-2.svg" alt="chord hacks">
+                <img class="h-12 sm:h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/logo-2.svg" alt="Text “On the Piano” in handwritten style font.">
                 <div class="my-4">
                     Go from absolute beginner to playing<br class="hidden sm:inline-block">
                     your first song in four easy lessons!
@@ -697,7 +697,7 @@
             </p>
             @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
-                    "formId" => 'Pianote - Engagement - Trigger - Website Signup - Web Form',
+                    "formId" => 'Pianote - Engagement - Trigger - Website Signup - Web Form2',
                     "formName" => 'Pianote General',
                 'buttonText'=> 'Subscribe to the note',
             ])
