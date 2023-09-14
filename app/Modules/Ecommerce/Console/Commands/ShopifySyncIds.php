@@ -14,11 +14,40 @@ class ShopifySyncIds extends Command
     public function handle(Shopify $shopify)
     {
         $this->withExecutionTime(function () use ($shopify) {
+            $startPageIndex = $this->argument('startPageIndex');
+            if ($startPageIndex > 0) {
+                $pages = $shopify->paginateProducts(['limit' => 250]);
+                foreach ($pages as $page) {
+                    foreach ($page as $product) {
+                        $variants = $shopify->getVariants($product->id);
+                        foreach ($variants as $variant) {
+                            $this->info($variant->id);
+                            try {
+                                $shopify->getVariantMetafields($variant->id)->each(
+                                    function ($metafield) use ($shopify, $variant) {
+                                        if ($metafield->key == '_id') {
+                                            $product = Product::query()->find($metafield->value) ?? null;
+                                            if ($product) {
+                                                $product->shopify_id = $variant->id;
+                                                $product->save();
+                                            }
+                                        }
+                                    }
+                                );
+                            } catch
+                            (\Exception $e) {
+                                $this->error($e->getMessage());
+                            }
+                        }
+                    }
+                }
+            }
+
+
             $pages = $shopify->paginateCustomers([
                     'limit' => 250,
                 ]
             );
-            $startPageIndex = $this->argument('startPageIndex');
             $i = 1;
 
             foreach ($pages as $page) {
@@ -44,32 +73,6 @@ class ShopifySyncIds extends Command
                     }
                 }
                 $i++;
-            }
-
-            $pages = $shopify->paginateProducts(['limit' => 250]);
-            foreach ($pages as $page) {
-                foreach ($page as $product) {
-                    $variants = $shopify->getVariants($product->id);
-                    foreach ($variants as $variant) {
-                        $this->info($variant->id);
-                        try {
-                            $shopify->getVariantMetafields($variant->id)->each(
-                                function ($metafield) use ($shopify, $variant) {
-                                    if ($metafield->key == '_id') {
-                                        $product = Product::query()->find($metafield->value) ?? null;
-                                        if ($product) {
-                                            $product->shopify_id = $variant->id;
-                                            $product->save();
-                                        }
-                                    }
-                                }
-                            );
-                        } catch
-                        (\Exception $e) {
-                            $this->error($e->getMessage());
-                        }
-                    }
-                }
             }
         });
     }
