@@ -9,32 +9,41 @@ use Signifly\Shopify\Shopify;
 
 class ShopifySyncIds extends Command
 {
-    protected $signature = 'ecommerce:ShopifySyncIDs';
+    protected $signature = 'ecommerce:ShopifySyncIDs {startPageIndex=0}';
 
     public function handle(Shopify $shopify)
     {
         $this->withExecutionTime(function () use ($shopify) {
-            $pages = $shopify->paginateCustomers(['limit' => 250]); // returns Cursor
+            $pages = $shopify->paginateCustomers([
+                    'limit' => 250,
+                ]
+            );
+            $startPageIndex = $this->argument('startPageIndex');
+            $i = 1;
 
             foreach ($pages as $page) {
-                foreach ($page as $customer) {
-                    $this->info($customer->id);
-                    try {
-                        $shopify->getCustomerMetafields($customer->id)->each(
-                            function ($metafield) use ($shopify, $customer) {
-                                if ($metafield->key == '_id') {
-                                    $user = User::query()->find($metafield->value) ?? null;
-                                    if ($user) {
-                                        $user->shopify_id = $customer->id;
-                                        $user->save();
+                $this->info('Page ' . $i);
+                if ($i <= $startPageIndex) {
+                    foreach ($page as $customer) {
+                        $this->info($customer->id);
+                        try {
+                            $shopify->getCustomerMetafields($customer->id)->each(
+                                function ($metafield) use ($shopify, $customer) {
+                                    if ($metafield->key == '_id') {
+                                        $user = User::query()->find($metafield->value) ?? null;
+                                        if ($user) {
+                                            $user->shopify_id = $customer->id;
+                                            $user->save();
+                                        }
                                     }
                                 }
-                            }
-                        );
-                    } catch (\Exception $e) {
-                        $this->error($e->getMessage());
+                            );
+                        } catch (\Exception $e) {
+                            $this->error($e->getMessage());
+                        }
                     }
                 }
+                $i++;
             }
 
             $pages = $shopify->paginateProducts(['limit' => 250]);
