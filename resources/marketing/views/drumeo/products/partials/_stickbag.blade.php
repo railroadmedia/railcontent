@@ -8,9 +8,9 @@
 <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
     <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
         <div class="container mx-auto max-w-5xl">
-            <img alt="quietkick" class="h-10 sm:h-16" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/stickbag-logo.svg"><br>
-            <h1 class="leading-tight"><strong>Pack like a pro.</strong></h1>
-            <h3 class="my-4 sm:my-6">
+            <img alt="quietkick" class="h-10 sm:h-14" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/stickbag-logo.svg"><br>
+            <h1 class="leading-tight mt-2 mb-3 text-6xl"><strong>Pack like a pro.</strong></h1>
+            <h3 class="leading-tight">
                 @if(floatval($productPrices['Drumeo-VaterSticks']->price) > floatval($productPrices['Drumeo-VaterSticks']->discounted_price))
                     <s class="opacity-50">${{ floatval($productPrices['Drumeo-VaterSticks']->price) }}.</s>
                     <strong>${{ floatval($productPrices['Drumeo-VaterSticks']->discounted_price) }}</strong>
@@ -19,10 +19,11 @@
                     <strong>Only ${{ floatval($productPrices['Drumeo-VaterSticks']->discounted_price) }}</strong>
                 @endif
             </h3>
-            <div class="my-3 sm:my-6">
-            <a class="join smaller outline" ><i class="fas fa-play"></i> &nbsp;Watch Video</a>
+            <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
+                <div class="sm:w-5/12 join smaller outline hidden sm:inline-block"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
+                <div class="sm:w-5/12 join smaller outline sm:hidden inline-block"   @click="trailerM = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                 @if( $products['Drumeo-VaterSticks']->getStockAvailability() > 1 && !empty($products['Drumeo-VaterSticks']->getStockAvailability()))
-                    <a class="join smaller blue" href="#customize-anchor">Order Now</a>
+                    <a class="w-5/12 join smaller blue" href="#customize-anchor">Order Now</a>
                 @else
                     <a class="join smaller sold-out">SOLD OUT</a>
                 @endif
@@ -31,14 +32,14 @@
         </div>
     </div>
     <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to bottom, transparent, rgba(0,79,153,0.6));"></div>
-{{--    <video class="object-cover w-full h-full relative z-0" poster="" src="https://player.vimeo.com/progressive_redirect/playback/696274730/rendition/1080p?loc=external&signature=a2e19f58b044993d2561fbeaabcd4855ec9d1f577a7bba332fc5a7e7221cb23a" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
-    <img class="object-cover w-full h-96 lg:h-full relative z-0" src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/header-image.jpg"></img>
+    <video class="object-cover w-full relative z-0" style="height: 600px;" poster="" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/header-vid.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+{{--    <img class="object-cover w-full h-96 lg:h-full relative z-0" src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/header-image.jpg"></img>--}}
 </header>
 
 <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" @if(!empty($blackBag)) style="background-color:#020D24;color:#fff;" @endif>
     <div class="container mx-auto z-10 relative max-w-5xl pb-16">
         <h2 class="leading-tight"><strong>A StickBag you’ll want<br class="sm:hidden"> to show your friends.</strong></h2>
-        <p class="leading-normal mt-2 mb-5">Crafted with input from gigging pros, the Drumeo StickBag features thoughtful<br class="sm:inline"> details that will help you organize your tools and even save you mid-song.</p>
+        <p class="leading-normal mt-2 mb-5">Crafted with input from gigging pros, the Drumeo StickBag features thoughtful<br class="hidden sm:inline"> details that will help you organize your tools and even save you mid-song.</p>
         <div class="hidden lg:flex">
             <div class="w-1/4 pr-3">
                 <div>
@@ -313,13 +314,13 @@
                 <tr style="background-color:transparent!important;">
                     <td></td>
                     <td class="rounded-t-xl">
-                        <img class="h-8 md:h-20 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/drumeo-comparison.png" alt="logo-white">
+                        <img class="h-12 md:h-20 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/drumeo-comparison.png" alt="logo-white">
                     </td>
                     <td class="rounded-t-xl">
-                        <img class="h-8 md:h-20 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/vic-firth-comparison.png" alt="logo-white">
+                        <img class="h-12 md:h-20 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/vic-firth-comparison.png" alt="logo-white">
                     </td>
                     <td class="rounded-t-xl">
-                        <img class="h-8 md:h-20 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/tackle-comparison.png" alt="logo-white">
+                        <img class="h-12 md:h-20 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/tackle-comparison.png" alt="logo-white">
                     </td>
                 </tr>
                 <tr>
@@ -369,7 +370,7 @@
         <h2><strong>The last StickBag<br class="sm:hidden"> you’ll ever need.</strong></h2>
         <h6 class="leading-tight mt-2 mb-5 sm:mb-10">A bag built to take everything<br class="sm:hidden"> from garage to stage. </h6>
 
-        <img class="h-96 inline-block sm:hidden transition-opacity opacity-0"
+        <img class="w-full inline-block sm:hidden transition-opacity opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 @if(!empty($blackBag))
@@ -389,44 +390,109 @@
                 @endif
                 alt="learn playing image"
         >
-{{--        <div class="flex flex-wrap items-center">--}}
-{{--            <div class="w-1/4">--}}
-{{--                <div class="p-2 w-full"><div class="h-44 sm:h-52 lg:h-48 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/todo.jpg"></div></div>--}}
-{{--                <div class="p-2 w-full"><div class="h-32 sm:h-52 lg:h-44 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/todo04.jpg"></div></div>--}}
-{{--            </div>--}}
-{{--            <div class="w-1/2">--}}
-{{--                <div class="p-2 w-full"><div class="h-36 sm:h-52 lg:h-96 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/todo02.jpg"></div></div>--}}
-{{--            </div>--}}
-{{--            <div class="w-1/4">--}}
-{{--                <div class="p-2 w-full"><div class="h-44 sm:h-52 lg:h-48 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/todo01.jpg"></div></div>--}}
-{{--                <div class="p-2 w-full"><div class="h-44 sm:h-52 lg:h-44 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/todo01.jpg"></div></div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+
+        @if(!empty($blackBag))
+            @php
+                $slides = [
+                 [
+                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-waterproof-m.jpg',
+                 ],
+                 [
+                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-suede-m.jpg',
+                 ],
+                 [
+                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-zipper-m.jpg',
+                 ],
+                 [
+                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-holster-m.jpg',
+                 ],
+                 [
+                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-premium-hooks-m.jpg',
+                 ],
+                 [
+                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-drum-key-m.jpg',
+                 ],
+             ];
+            @endphp
+        @else
+            @php
+                $slides = [
+                 [
+                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/waterproof-m.jpg',
+                 ],
+                 [
+                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/suede-m.jpg',
+                 ],
+                 [
+                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/zipper-m.jpg',
+                 ],
+                 [
+                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/holster-m.jpg',
+                 ],
+                 [
+                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/premium-hooks-m.jpg',
+                 ],
+                 [
+                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/drum-key-m.jpg',
+                 ],
+             ];
+            @endphp
+        @endif
+        @foreach($slides as $slide)
+            @component('_partials.components.modal', ['name' => 'imageModal'])
+                @slot('content')
+                    <div class="relative overflow-y-visible max-w-3xl px-4 md:px-5 lg:px-7 py-5 md:py-7 lg:py-10 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
+                        <img class="logo h-7 md:h-12 lg:h-14" src="{{$slide['img']}}">
+                    </div>
+                @endslot
+            @endcomponent
+        @endforeach
+
+        <div class="flex flex-wrap items-center">
+            <div class="w-full sm:w-1/2 sm:order-1">
+                <div class="p-2 w-full"><div data-open="image1" class="cursor-pointer h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl"
+                            style="background-image:url(https://www.musora.com/musora-cdn/image/width=1200,quality=95/{{ $slides[0]['img'] }})"></div></div>
+            </div>
+            <div class="w-1/2 sm:w-1/4">
+                <div class="p-2 w-full"><div data-open="image1" class="cursor-pointer h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
+                            style="background-image:url(https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $slides[1]['img'] }})"></div></div>
+                <div class="p-2 w-full"><div data-open="image1" class="cursor-pointer h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
+                            style="background-image:url(https://www.musora.com/musora-cdn/image/width=1200,quality=95/{{ $slides[2]['img'] }})"></div></div>
+            </div>
+            <div class="w-1/2 sm:w-1/4 sm:order-2">
+                <div class="p-2 w-full"><div data-open="image1" class="cursor-pointer h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
+                            style="background-image:url(https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $slides[3]['img'] }})"></div></div>
+                <div class="p-2 w-full"><div data-open="image1" class="cursor-pointer h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
+                            style="background-image:url(https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $slides[4]['img'] }})"></div></div>
+            </div>
+        </div>
         <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: Sticks/Brushes are not included.</em></p>
         <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
             <p class="sm:max-w-md m-0 sm:pr-5 lg:pr-10 text-left mb-5 sm:mb-0">Your Drumeo StickBag is built with premium components to ensure a long-lasting home for your sticks wherever your drumming takes you.</p>
-            <table class="rounded-xl border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">
-                <tr class="rounded-xl">
-                    <td class="px-3 py-1 text-left border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Durable construction</td>
-                    <td class="px-5 py-1 border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
-                </tr>
-                <tr>
-                    <td class="px-3 py-1 text-left border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Premium zippers</td>
-                    <td class="px-5 py-1 border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
-                </tr>
-                <tr>
-                    <td class="px-3 py-1 text-left border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Quick-stick slot</td>
-                    <td class="px-5 py-1 border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
-                </tr>
-                <tr>
-                    <td class="px-3 py-1 text-left border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Drum key</td>
-                    <td class="px-5 py-1 border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
-                </tr>
-                <tr>
-                    <td class="px-3 py-1 text-left border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Cost</td>
-                    <td class="px-5 py-1 border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">$97</td>
-                </tr>
-            </table>
+            <div class="overflow-hidden rounded-xl border @if(!empty($blackBag)) border-white @else border-black @endif">
+                <table>
+                    <tr>
+                        <td class="px-3 py-1 text-left border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Durable construction</td>
+                        <td class="px-5 py-1 border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-1 text-left border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Premium zippers</td>
+                        <td class="px-5 py-1 border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-1 text-left border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Quick-stick slot</td>
+                        <td class="px-5 py-1 border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-1 text-left border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Drum key</td>
+                        <td class="px-5 py-1 border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-1 text-left  border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Cost</td>
+                        <td class="px-5 py-1  border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">$97</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </section>
@@ -440,7 +506,7 @@
 
             <div class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl mx-auto">
                 <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                    <p class="inline-block relative -bottom-4 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black" >Save 34%</p>
+                    <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >Save 34%</p>
                     <a href="/ecommerce/add-to-cart?products[stickbag]=1&products[Drumeo-Key]=1&locked=true" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
                         <div class="bg-white px-3 py-5 md:py-7">
                             <h4 class="mb-2 sm:mb-3"><strong>StickBag Only</strong></h4>
@@ -462,7 +528,7 @@
                 </div>
                 <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                     <img class="h-16 absolute top-0 right-0 z-10" src="https://www.musora.com/musora-cdn/image/width=130,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/free-shipping-icon.svg">
-                    <p class="inline-block relative -bottom-4 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-drumeo" >LAUNCH SPECIAL</p>
+                    <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-drumeo uppercase" >LAUNCH SPECIAL</p>
                     <a
                             @if(!empty($memberVersion))
                                 href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=6&locked=true"
@@ -528,3 +594,15 @@
         </div>
     </div>
 </section>
+
+@include('_partials.components.video-modal',[
+    'name' => 'trailer',
+    'video' => '864032205',
+    'vimeo' => true,
+])
+@include('_partials.components.video-modal',[
+    'name' => 'trailerM',
+    'video' => '864032414',
+    'vimeo' => true,
+        'styles' => 'pb-[177%] bg-white',
+])

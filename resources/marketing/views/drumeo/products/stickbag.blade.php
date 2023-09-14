@@ -13,7 +13,7 @@
     @include('_partials.layout._fonts')
     <?php \App\Analytics\Tracker::trackProductImpression('Drumeo-VaterSticks'); ?>
 
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
@@ -24,19 +24,18 @@
             color:#0b76db;
         }
 
-        .content-section table.comparison.eardrums tr td:nth-child(1),
+        .join.smaller.outline {
+            padding:12px 7%;
+        }
+
+        .content-section table.comparison.eardrums tr td:nth-child(1) {
+            width: 18%;
+
+        }
         .content-section table.comparison.eardrums tr td:nth-child(2),
         .content-section table.comparison.eardrums tr td:nth-child(3),
         .content-section table.comparison.eardrums tr td:nth-child(4) {
-            width: 25%;
-        }
-        @media (min-width: 768px) {
-            .content-section table.comparison.eardrums tr td:nth-child(1),
-            .content-section table.comparison.eardrums tr td:nth-child(2),
-            .content-section table.comparison.eardrums tr td:nth-child(3),
-            .content-section table.comparison.eardrums tr td:nth-child(4) {
-                width: 26%;
-            }
+            width: 27.33%;
         }
         .content-section table.comparison.eardrums tr td:nth-child(3),
         .content-section table.comparison.eardrums tr td:nth-child(4) {
@@ -59,6 +58,9 @@
             font-size:12px;
             text-transform:none;
 
+        }
+        .content-section table.comparison.eardrums tr:last-child td {
+            padding: 15px 7px 30px;
         }
         .content-section table.comparison.eardrums tr:last-child td strong {
             font-size: 16px;
@@ -97,6 +99,18 @@
     @php $memberPrice = floatval($productPrices['Drumeo-VaterSticks']->discounted_price) @endphp
 @stop
 
+@section('body-data')
+    x-data="{
+    trailer: false,
+    trailerM: false,
+    image1: false,
+    image2: false,
+    image3: false,
+    image4: false,
+    image5: false,
+    }"
+@endsection
+
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
@@ -114,8 +128,6 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}" defer></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}" defer></script>
     <script>
         $(document).ready(function () {
             $('table tr td:nth-child(3)').on('click', function(){
