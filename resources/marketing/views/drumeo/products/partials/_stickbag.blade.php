@@ -378,7 +378,7 @@
                 <tr style="background-color:transparent!important;">
                     <td></td>
                     <td class="rounded-t-xl">
-                        <img class="h-12 md:h-20 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/drumeo-comparison.png" alt="logo-white">
+                        <img class="h-12 md:h-20 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/comparison2.png" alt="logo-white">
                     </td>
                     <td class="rounded-t-xl">
                         <img class="h-12 md:h-20 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/vic-firth-comparison.png" alt="logo-white">
@@ -419,7 +419,7 @@
                 </tr>
                 <tr style="background-color:transparent!important;">
                     <td class="rounded-b-xl">Total</td>
-                    <td class="rounded-b-xl"><s class="opacity-50">$147</s> <strong>$97</strong></td>
+                    <td class="rounded-b-xl"><s class="opacity-50">${{ floatval($productPrices['stickbag']->price) }}</s> <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong></td>
                     <td class="rounded-b-xl"><strong>$104</strong></td>
                     <td class="rounded-b-xl"><strong>$220</strong></td>
                 </tr>
@@ -532,7 +532,7 @@
                     </tr>
                     <tr>
                         <td class="px-3 py-1 text-left  border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Cost</td>
-                        <td class="px-5 py-1  border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">@if(!empty($blackBag)) $177 @else $97 @endif</td>
+                        <td class="px-5 py-1  border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">@if(!empty($blackBag)) $177 @else ${{ floatval($productPrices['stickbag']->discounted_price) }} @endif</td>
                     </tr>
                 </table>
             </div>
@@ -573,7 +573,7 @@
                                         alt="learn playing image"
                                 >
                                 <br>
-                                <h4 class="inline-block leading-tight"><s>$149</s> <strong>$97</strong></h4>
+                                <h4 class="inline-block leading-tight"><s>${{ floatval($productPrices['stickbag']->price) }}</s> <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong></h4>
                                 <p class="text-sm"><em>Save 34%. One-time payment.</em></p>
                                 <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Select</div>
                                 <p class="text-sm mb-1.5">1 Drumeo StickBag<sup>NEW</sup></p>

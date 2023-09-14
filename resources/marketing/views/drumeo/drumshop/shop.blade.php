@@ -142,8 +142,8 @@
                         <a href="/drumshop/stickbag" class="rounded-xl mb-5 overflow-hidden relative inline-block w-full sm:text-left px-7 sm:px-10 lg:px-16 pt-48 pb-4 sm:py-12 lg:py-14 transition-opacity hover:opacity-90" style="background-color:#f5f5f5;">
                             <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
                                 <img class="h-14 sm:h-20 lg:h-28" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/sb_logo.png"><br>
-                                <div class="join blue smaller my-2 lg:my-3 w-full">ONLY <s class="opacity-60">$197</s> $147</div><br>
-                                <h6 class="inline-block text-drumeo uppercase font-bebas leading-none">{{ round(100 - (100 * (147 / 197))) }}% off</h6>
+                                <div class="join blue smaller my-2 lg:my-3 w-full">ONLY <s class="opacity-60">${{ floatval($productPrices['stickbag']->price) }}</s> ${{ floatval($productPrices['stickbag']->discounted_price) }}</div><br>
+                                <h6 class="inline-block text-drumeo uppercase font-bebas leading-none">{{ round(100 - (100 * (97 / 147))) }}% off</h6>
                             </div>
                             <h5 class="absolute z-20 top-0 left-0 text-white rounded-br-xl bg-drumeo uppercase font-bebas py-1 px-3 leading-none">
                                 SALE ENDS IN
