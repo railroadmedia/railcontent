@@ -14,8 +14,8 @@ class ShopifySyncIds extends Command
     public function handle(Shopify $shopify)
     {
         $this->withExecutionTime(function () use ($shopify) {
-            $startPageIndex = $this->argument('startPageIndex');
-            if ($startPageIndex > 0) {
+            $startPageIndex = intval($this->argument('startPageIndex'));
+            if ($startPageIndex == 0) {
                 $pages = $shopify->paginateProducts(['limit' => 250]);
                 foreach ($pages as $page) {
                     foreach ($page as $product) {
@@ -52,7 +52,7 @@ class ShopifySyncIds extends Command
 
             foreach ($pages as $page) {
                 $this->info('Page ' . $i);
-                if ($i <= $startPageIndex) {
+                if ($i >= $startPageIndex) {
                     foreach ($page as $customer) {
                         $this->info($customer->id);
                         try {
