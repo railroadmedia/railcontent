@@ -5,16 +5,18 @@ namespace App\Modules\EventDataSynchronizer\Listeners;
 use App\Modules\Content\Models\UserPermission;
 use App\Modules\Content\Services\ContentPermissionsService;
 use App\Modules\Ecommerce\Events\UserProductsUpdated;
-use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\UserProduct;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Railroad\Ecommerce\Events\Subscriptions\CommandSubscriptionRenewFailed;
+use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
+use Railroad\Ecommerce\Events\UserProducts\UserProductDeleted;
+use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Services\ConfigService;
-
+use Railroad\Resora\Events\Created;
+use Railroad\Resora\Events\Updated;
 
 class UserProductToUserContentPermissionListener
 {
@@ -27,6 +29,30 @@ class UserProductToUserContentPermissionListener
     ) {
         $this->userProductService = $userProductService;
         $this->contentPermissionsService = $contentPermissionsService;
+    }
+
+    /**
+     * @param Created $createdEvent
+     */
+    public function handleCreated(UserProductCreated $createdEvent)
+    {
+        $this->syncUserId($createdEvent->getUserProduct()->getUser()->getId());
+    }
+
+    /**
+     * @param Updated $updatedEvent
+     */
+    public function handleUpdated(UserProductUpdated $updatedEvent)
+    {
+        $this->syncUserId($updatedEvent->getNewUserProduct()->getUser()->getId());
+    }
+
+    /**
+     * @param Updated $updatedEvent
+     */
+    public function handleDeleted(UserProductDeleted $deletedEvent)
+    {
+        $this->syncUserId($deletedEvent->getUserProduct()->getUser()->getId());
     }
 
     public function handleUserProductsUpdated(UserProductsUpdated $userProductsUpdated)
@@ -81,6 +107,13 @@ class UserProductToUserContentPermissionListener
             $existingPermissions->updated_on = $now;
             $existingPermission->save();
         }
+        // clear the railcontent cache
+        CacheHelper::deleteUserFields(
+            [
+                ConfigService::$redisPrefix . ':userId_' . $userId,
+            ],
+            'content'
+        );
     }
 
     private function buildUserPermissionsList(int $userId): array

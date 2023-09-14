@@ -9,6 +9,9 @@ use Railroad\Ecommerce\Events\Subscriptions\SubscriptionCreated;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionRenewed;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionRenewFailed;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionUpdated;
+use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
+use Railroad\Ecommerce\Events\UserProducts\UserProductDeleted;
+use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
 use App\Modules\EventDataSynchronizer\Jobs\HelpScoutUpdateUser;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
@@ -83,6 +86,92 @@ class HelpScoutEventListener
                 );
 
                 self::$alreadyQueuedUserIds[] = $userUpdated->getNewUser()->id;
+            }
+        } catch (Throwable $throwable) {
+            error_log($throwable);
+        }
+    }
+
+    /**
+     * @param  UserProductCreated  $userProductCreated
+     */
+    public function handleUserProductCreated(UserProductCreated $userProductCreated)
+    {
+        if (self::$disable) {
+            return;
+        }
+
+        try {
+            $user = $this->userService->getByEmailOrNull(
+                $userProductCreated->getUserProduct()
+                    ->getUser()
+                    ->getId()
+            );
+
+            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
+                dispatch(
+                    (new HelpScoutUpdateUser($user))
+                        ->delay(Carbon::now()->addSeconds(3))
+                );
+
+                self::$alreadyQueuedUserIds[] = $user->id;
+            }
+        } catch (Throwable $throwable) {
+            error_log($throwable);
+        }
+    }
+
+    /**
+     * @param  UserProductUpdated  $userProductUpdated
+     */
+    public function handleUserProductUpdated(UserProductUpdated $userProductUpdated)
+    {
+        if (self::$disable) {
+            return;
+        }
+
+        try {
+            $user = $this->userService->getByEmailOrNull(
+                $userProductUpdated->getNewUserProduct()
+                    ->getUser()
+                    ->getId()
+            );
+
+            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
+                dispatch(
+                    (new HelpScoutUpdateUser($user))
+                        ->delay(Carbon::now()->addSeconds(3))
+                );
+
+                self::$alreadyQueuedUserIds[] = $user->id;
+            }
+        } catch (Throwable $throwable) {
+            error_log($throwable);
+        }
+    }
+
+    /**
+     * @param  UserProductDeleted  $userProductDeleted
+     */
+    public function handleUserProductDeleted(UserProductDeleted $userProductDeleted)
+    {
+        if (self::$disable) {
+            return;
+        }
+
+        try {
+            $user = $this->userService->getByEmailOrNull(
+                $userProductDeleted->getUserProduct()
+                    ->getUser()
+                    ->getId()
+            );
+
+            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
+                dispatch(
+                    (new HelpScoutUpdateUser($user))
+                        ->delay(Carbon::now()->addSeconds(3))
+                );
+                self::$alreadyQueuedUserIds[] = $user->id;
             }
         } catch (Throwable $throwable) {
             error_log($throwable);
