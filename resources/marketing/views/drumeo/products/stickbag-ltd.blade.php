@@ -94,6 +94,12 @@
                 display: none;
             }
         }
+        .text-gold {
+            color:#d8b66e;
+        }
+        .join.gold {
+            background:linear-gradient(to bottom, #e2c584, #ad7c12);
+        }
     </style>
 
     @php $memberPrice = floatval($productPrices['Drumeo-VaterSticks']->discounted_price) @endphp

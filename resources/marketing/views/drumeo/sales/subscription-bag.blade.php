@@ -148,6 +148,33 @@
     @endif
 
 
+    <section class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-white text-center customize px-4 lg:px-6" style="background:#173c59 url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/promo-order-bg.jpg) center center/cover;">
+        <div class="container mx-auto max-w-6xl relative z-50">
+            <div class="w-full">
+                <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
+                    <div class=" inline-block relative w-full group" style="padding-bottom: 39.5%;perspective: 1000px;">
+                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
+                            <div class=" {{--border-2 border-promo--}} front absolute z-20  w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
+                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=950,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/lessons-stickbag-option.png);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <h2 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Get unlimited drum lessons<br class="hidden sm:inline"> + a free StickBag & more!</strong></h2>
+
+                <p class="leading-tight mt-4 sm:mt-5 mb-2"><span class="text-musora">Join Drumeo and get a Drumeo StickBag, a brushes sleeve, <br class="hidden sm:inline">
+                        a premium drum key, and 6 pairs of 5A drumsticks.</span></p>
+
+                <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>$20/month</strong></h3>
+                <p class="leading-tight opacity-70 text-sm"><em>Billed at $240 per year.</em></p>
+                <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;"
+                        href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=6&products[Drumeo-Key]=1&locked=true"
+                >GET STARTED</a>
+            </div>
+            <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
+        </div>
+    </section>
     @php
         $bubble1 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/dorothea-taylor.png';
         $bubble2 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/todd-sucherman.png';
@@ -211,7 +238,7 @@
 
 
     <section class="text-center px-5 sm:px-6 pt-72 pb-10 sm:py-14 lg:py-20 relative">
-        <div class="inset-0 hidden sm:block absolute" style="background: url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/promo-image.jpg) center center/cover;"></div>
+        <div class="inset-0 hidden sm:block absolute" style="background: url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/promo-image.jpg) center center/cover;"></div>
         <div class="inset-0 sm:hidden block absolute" style="background: url(https://www.musora.com/musora-cdn/image/width=800,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/promo-image-m.jpg) center -20px/cover;"></div>
         <div class="container max-w-5xl mx-auto relative z-10">
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-start items-start">
@@ -228,7 +255,7 @@
                         <br><br>
                         Click below for your best year on the drums yet.
                         <br>
-                        <a class="join drumeo smaller my-3 w-1/2 anchor-slide" href="#customize-anchor">GET Started &raquo;</a>
+                        <a class="join drumeo smaller my-3 w-1/2" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=6&products[Drumeo-Key]=1&locked=true">GET Started &raquo;</a>
                         <br>
                         <em>Free worldwide shipping!</em>
                     </p>
@@ -591,21 +618,21 @@
                     <div class=" inline-block relative w-full group" style="padding-bottom: 39.5%;perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div class=" {{--border-2 border-promo--}} front absolute z-20  w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/lessons-stickbag-option.png);"></div>
+                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=950,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/lessons-stickbag-option.png);"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <br>
-                <h2 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>StickBag + Unlimited<br class="sm:hidden"> Drum Lessons</strong></h2>
+                <h2 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Get unlimited drum lessons<br class="hidden sm:inline"> + a free StickBag & more!</strong></h2>
 
                 <p class="leading-tight mt-4 sm:mt-5 mb-2"><span class="text-musora">Join Drumeo and get a Drumeo StickBag, a brushes sleeve, <br class="hidden sm:inline">
                         a premium drum key, and 6 pairs of 5A drumsticks.</span></p>
 
-                <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Free Stickbag</strong></h3>
-                <p class="leading-tight opacity-70 text-sm"><em>with annual Drumeo Membership</em></p>
+                <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>$20/month</strong></h3>
+                <p class="leading-tight opacity-70 text-sm"><em>Billed at $240 per year.</em></p>
                 <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;"
-                        href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=6&locked=true"
+                        href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=6&products[Drumeo-Key]=1&locked=true"
                 >GET STARTED</a>
             </div>
             <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
