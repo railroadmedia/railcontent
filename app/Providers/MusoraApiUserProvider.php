@@ -369,8 +369,7 @@ class MusoraApiUserProvider implements UserProviderInterface
     public function getUserAfterRevenuecatPurchase($email, $password, $revenuecatOriginalAppUserId)
     {
         $user =
-            \Modules\UserManagementSystem\Models\User::where('email', $email)
-                ->where('revenuecat_origin_app_user_id', '=', $revenuecatOriginalAppUserId)
+            \Modules\UserManagementSystem\Models\User::where('revenuecat_origin_app_user_id', '=', $revenuecatOriginalAppUserId)
                 ->first();
 
         if (!$user) {
@@ -378,6 +377,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         }
 
         if ($user) {
+            $user->email = $email;
             $user->setPassword($password);
             $user->save();
 

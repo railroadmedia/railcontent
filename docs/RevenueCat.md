@@ -72,7 +72,8 @@ Musora Actions:
 A transfer of transactions and entitlements was initiated between one App User ID(s) to another.
 
 Musora Actions:
-- No action has been taken
+- Get user based on revenuecat old original app user id(transferred_from)
+- Update user’s revenuecat original app user id with the new revenuecat original app user id(transferred_to)
 
 
 ## New mobile app endpoints

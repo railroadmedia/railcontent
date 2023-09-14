@@ -124,7 +124,7 @@ class RevenueCatController extends Controller
 
                 // get Musora user
                 $user = $this->revenueCatService->getUser(
-                    $data['event']['subscriber_attributes']['email']['value'],
+                    $data['event']['subscriber_attributes']['email']['value'] ?? null,
                     $data['event']['original_app_user_id'],
                     true
                 );
@@ -184,7 +184,7 @@ class RevenueCatController extends Controller
                 echo 'PRODUCT_CHANGE';
                 // get Musora user
                 $user = $this->revenueCatService->getUser(
-                    $data['event']['subscriber_attributes']['email']['value'],
+                    $data['event']['subscriber_attributes']['email']['value'] ?? null,
                     $data['event']['original_app_user_id']
                 );
                 if (!$user) {
@@ -290,7 +290,19 @@ class RevenueCatController extends Controller
                 // code...
                 break;
             case 'TRANSFER':
-                // code...
+               $oldRevenueCatAppUserId = $data['event']['transferred_from'];
+
+               foreach ($oldRevenueCatAppUserId as $key => $value) {
+                   $user = $this->revenueCatService->getUser(
+                       null,
+                       $value
+                   );
+                   if($user){
+                       $user->revenuecat_origin_app_user_id = $data['event']['transferred_to'][0];
+                       $user->save();
+                       continue;
+                   }
+               }
                 break;
             case 'EXPIRATION':
                 $user = $this->revenueCatService->getUser(
