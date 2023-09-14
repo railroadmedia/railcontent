@@ -47,6 +47,7 @@ class ShopifySyncService
      */
     public function syncOrder(User $user, Product $product, float $price, float $tax)
     : void {
+        Log::debug("Start syncing purchase for user $user->id");
         // STEP 1: Is user sync'ed?
         $customerShopifyId = $user->shopify_id;
         if (!$customerShopifyId) {
@@ -54,14 +55,26 @@ class ShopifySyncService
         }
 
         if (!$customerShopifyId) {
-            // TODO: something happened and the customer wasn't created in Shopify. What to do?
+            // Return and it will be reprocessed in a command
+            return;
         }
 
+        Log::debug("User ID: $user->id; Customer Shopify ID: $customerShopifyId. Creating Shopify order payload");
         // STEP 2: create shopify order data
         $postData = $this->createOrderData($customerShopifyId, $user->email, $product, $price, $tax);
 
+        Log::debug("User ID: $user->id; Customer Shopify ID: $customerShopifyId. Pushing order to Shopify");
         // STEP 3: push order to shopify
-        $this->shopify->createOrder($postData);
+        $orderResource = $this->shopify->createOrder($postData);
+        Log::info("User ID: $user->id; Customer Shopify ID: $customerShopifyId. Created order $orderResource->id in Shopify");
+
+        // STEP 4: sync user products
+        try {
+            $this->syncCustomer($user);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
+        }
     }
 
     /**
