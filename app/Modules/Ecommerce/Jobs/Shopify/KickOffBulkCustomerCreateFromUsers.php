@@ -33,6 +33,8 @@ class KickOffBulkCustomerCreateFromUsers implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable, LogsShopify;
 
+    //TODO DELETEME TEST
+    public $timeout = 30;
     protected CustomerRepository $customerRepository;
     protected AddressRepository $addressRepository;
     protected Shopify $shopify;
@@ -51,15 +53,22 @@ class KickOffBulkCustomerCreateFromUsers implements ShouldQueue
         $this->addressRepository = $addressRepository;
         $this->shopify = $shopify;
 
-        $usersToCreate = $this->getUsersToCreateQuery();
+        //TODO DELETEME TEST
+        $i = 0;
+        $this->batch()->add(Collection::times(100, function () use (&$i) {
+            return new TestJob(++$i);
+        }));
 
-        $batchSize = 500;
-        $this->logInfo(sprintf("Found %s users to be created in Shopify.", $usersToCreate->count()));
-        $this->logInfo("Dispatching jobs to sync users ...");
 
-        $usersToCreate->chunk($batchSize, function (Collection $users) {
-            $this->batch()->add(new BulkCustomerCreateFromUsers($users, $this->execute));
-        });
+        // $usersToCreate = $this->getUsersToCreateQuery();
+        //
+        // $batchSize = 500;
+        // $this->logInfo(sprintf("Found %s users to be created in Shopify.", $usersToCreate->count()));
+        // $this->logInfo("Dispatching jobs to sync users ...");
+        //
+        // $usersToCreate->chunk($batchSize, function (Collection $users) {
+        //     $this->batch()->add(new BulkCustomerCreateFromUsers($users, $this->execute));
+        // });
     }
 
     /**
