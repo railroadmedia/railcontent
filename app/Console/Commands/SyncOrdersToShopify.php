@@ -10,6 +10,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Order;
 use Railroad\Ecommerce\Entities\OrderItem;
 use Railroad\Ecommerce\Entities\OrderItemFulfillment;
@@ -20,7 +21,6 @@ use Railroad\Ecommerce\Repositories\OrderRepository;
 use Railroad\Ecommerce\Repositories\OrderItemRepository;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\RepositoryBase;
-use Railroad\Ecommerce\Repositories\UserRepository;
 use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\REST\Resources\ApiResource;
 use Signifly\Shopify\REST\Resources\OrderResource;
@@ -52,7 +52,6 @@ class SyncOrdersToShopify extends Command
     protected OrderRepository $orderRepository;
     protected OrderItemRepository $orderItemRepository;
     protected ProductRepository $productRepository;
-    protected UserRepository $userRepository;
     protected EcommerceEntityManager $entityManager;
 
     // the date and time that the last sync for this entity was performed
@@ -77,7 +76,6 @@ class SyncOrdersToShopify extends Command
      * @param OrderRepository $orderRepository
      * @param OrderItemRepository $orderItemRepository
      * @param ProductRepository $productRepository
-     * @param UserRepository $userRepository
      * @param EcommerceEntityManager $entityManager
      * @return int
      */
@@ -86,7 +84,6 @@ class SyncOrdersToShopify extends Command
                            OrderRepository $orderRepository,
                            OrderItemRepository $orderItemRepository,
                            ProductRepository $productRepository,
-                           UserRepository $userRepository,
                            EcommerceEntityManager $entityManager): int
     {
         $this->shopify = $shopify;
@@ -94,7 +91,6 @@ class SyncOrdersToShopify extends Command
         $this->orderRepository = $orderRepository;
         $this->orderItemRepository = $orderItemRepository;
         $this->productRepository = $productRepository;
-        $this->userRepository = $userRepository;
         $this->entityManager = $entityManager;
 
         // record this as a class variable so that it doesn't get updated with each loop of the users
@@ -214,8 +210,8 @@ class SyncOrdersToShopify extends Command
             if (!is_null($order->getUser())) {
                 // the user is returned with only their id and email, so get the id and get a fresh copy
                 try {
-                    $user = $this->userRepository->find($order->getUser()->getId());
-                    if (is_null($user->getShopifyId())) {
+                    $user = User::find($order->getUser()->getId());
+                    if (is_null($user->shopify_id)) {
                         $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>SKIPPED</error>", "User has not been synced to Shopify"];
                         $skip = true;
                     }
@@ -505,14 +501,18 @@ class SyncOrdersToShopify extends Command
     {
         // the user or customer is returned with only their id and email, so get the id and get a fresh copy
         if ($order->getUser()) {
-            $purchaser = $this->userRepository->find($order->getUser()->getId());
+            $purchaser = User::find($order->getUser()->getId());
+            $purchaserId = $purchaser->shopify_id;
+            $purchaserEmail = $purchaser->email;
         } else {
             $purchaser = $this->customerRepository->find($order->getCustomer()->getId());
+            $purchaserId = $purchaser->getShopifyId();
+            $purchaserEmail = $purchaser->getEmail();
         }
 
         $orderData = [
-            "customer" => ["id" => $purchaser->getShopifyId()],
-            "email" => $purchaser->getEmail(),
+            "customer" => ["id" => $purchaserId],
+            "email" => $purchaserEmail,
             "note" => $order->getNote(),
             "processed_at" => $order->getCreatedAt()->toIso8601String(),
             "source_name" => $order->getBrand(),
