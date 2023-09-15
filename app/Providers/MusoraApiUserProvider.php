@@ -205,9 +205,11 @@ class MusoraApiUserProvider implements UserProviderInterface
         $inUseDisplayName =
             \Modules\UserManagementSystem\Models\User::where('display_name', $displayName)
                 ->get();
+        $mobileEndpointVersion = (config('musora-api.api.version'));
+        $mobileEndpointVersion = str_replace('v', '', $mobileEndpointVersion);
 
         if (($inUseDisplayName->count() > 0) && (strtolower($displayName) != strtolower(user()->display_name))) {
-            throw new MusoraAPIException('This display name is already in use', 'Display name exist', 200);
+            throw new MusoraAPIException('This display name is already in use', 'Display name exist', ($mobileEndpointVersion >= 2)?200:500);
         }
 
         user()->display_name = $displayName;
