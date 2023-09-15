@@ -302,6 +302,13 @@ class SalesController extends BaseController
             'nPackOwners' => $nPackOwners,
         ]);
     }
+    public function ultimatePracticeBundle()
+    {
+
+        return view('pianote.products.ultimate-practice-bundle', [
+            'theme' => 'pianote',
+        ]);
+    }
 
 
     // 408 is the 3 month access code product
