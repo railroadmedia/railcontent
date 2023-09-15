@@ -10,7 +10,7 @@
                             @endif
                             Available</em></strong></h5>
                 <h2 class="leading-tight mt-5 mb-1"><strong>Pack like a pro.</strong></h2>
-                <h6 class="leading-tight"><s class="opacity-50">$197</s> <strong class="text-gold">$177</strong> Launch Special</h6>
+                <h6 class="leading-tight"><strong class="text-gold">$197</strong></h6>
                 @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
                     <a class="join smaller gold mt-6 w-full max-w-xs"
                             href="/ecommerce/add-to-cart?locked=true&product-array=stickbag-ltd:1,drum-key-gold:1"
@@ -540,7 +540,7 @@
                     </tr>
                     <tr>
                         <td class="px-3 py-1 text-left  border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Cost</td>
-                        <td class="px-5 py-1  border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">@if(!empty($blackBag)) $177 @else ${{ floatval($productPrices['stickbag']->discounted_price) }} @endif</td>
+                        <td class="px-5 py-1  border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">@if(!empty($blackBag)) $197 @else ${{ floatval($productPrices['stickbag']->discounted_price) }} @endif</td>
                     </tr>
                 </table>
             </div>
@@ -559,7 +559,7 @@
                         @endif
                         Available</em></strong></h5>
             <h2 class="leading-tight mt-5 mb-1"><strong>Pack like a pro.</strong></h2>
-            <h6 class="leading-tight"><s class="opacity-50">$197</s> <strong class="text-gold">$177</strong> Launch Special</h6>
+            <h6 class="leading-tight"> <strong class="text-gold">$197</strong></h6>
             @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
                 <a class="join smaller gold mt-6 w-full max-w-xs"
                         href="/ecommerce/add-to-cart?locked=true&product-array=stickbag-ltd:1,drum-key-gold:1"
