@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Providers;
 
+use App\Modules\Ecommerce\Console\Commands\CheckPurchasesMigratedIntoRevenuecat;
 use App\Modules\Ecommerce\Console\Commands\FixMissingStripeCustomerIds;
 use App\Modules\Ecommerce\Console\Commands\FixMobileSubscriptionsBrand;
 use App\Modules\Ecommerce\Console\Commands\MigrateExistingStripeMusoraGatewayPaymentsToDrumeo;
@@ -44,7 +45,8 @@ class EcommerceServiceProvider extends ServiceProvider
                 MigratePaypalGatewayToMusora::class,
                 MigrateStripeSubscriptions::class,
                 FixMobileSubscriptionsBrand::class,
-                SyncRevenuecatSubscriptionsToMusora::class
+                SyncRevenuecatSubscriptionsToMusora::class,
+                CheckPurchasesMigratedIntoRevenuecat::class,
             ]
         );
 
