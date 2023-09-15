@@ -10,7 +10,7 @@
                             @endif
                             Available</em></strong></h5>
                 <h2 class="leading-tight mt-5 mb-1"><strong>Pack like a pro.</strong></h2>
-                <h6 class="leading-tight"><strong class="text-gold">$197</strong></h6>
+                <h4 class="leading-tight"><strong class="text-gold">$197</strong></h4>
                 @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
                     <a class="join smaller gold mt-6 w-full max-w-xs"
                             href="/ecommerce/add-to-cart?locked=true&product-array=stickbag-ltd:1,drum-key-gold:1"
@@ -28,7 +28,7 @@
             <img class="h-8 sm:h-14" style="transform: scaleX(-1);" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/arrow.svg" alt="learn playing image" fetchpriority="high">
             <div class="relative">
                 @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
-                    <p class="absolute text-black text-sm font-bebas" style="top: 63%;left: 43%;"><em>{{ $products['stickbag-ltd']->getStockAvailability() }}</em></p>
+                    <p class="absolute text-black text-sm font-bebas" style="top: 63%;left: 43%;"><em>{{ 251 - $products['stickbag-ltd']->getStockAvailability() }}</em></p>
                 @endif
 
                 <img class="h-28 mx-3" src="https://www.musora.com/musora-cdn/image/width=370,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/limited-edition-patch.png" alt="learn playing image" fetchpriority="high">
@@ -45,8 +45,8 @@
                     <br><br>
                     And there are only two reasons Drumeo is still here today:
                     <br><br>
-                    Priorty #1 has always been solving problems for you on the drums<br>
-                    The support and dedication of our Lifetime Members
+                    1. To solve problems for you on the drums.<br>
+                    2. And to make sure our students always GET more than they give.
                     <br><br>
                     So when it came to creating a stick bag, it had to meet both those requirements.
                     <br><br>
@@ -559,7 +559,7 @@
                         @endif
                         Available</em></strong></h5>
             <h2 class="leading-tight mt-5 mb-1"><strong>Pack like a pro.</strong></h2>
-            <h6 class="leading-tight"> <strong class="text-gold">$197</strong></h6>
+            <h4 class="leading-tight"> <strong class="text-gold">$197</strong></h4>
             @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
                 <a class="join smaller gold mt-6 w-full max-w-xs"
                         href="/ecommerce/add-to-cart?locked=true&product-array=stickbag-ltd:1,drum-key-gold:1"
