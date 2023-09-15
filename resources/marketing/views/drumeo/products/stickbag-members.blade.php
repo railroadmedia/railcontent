@@ -11,7 +11,6 @@
     <meta property="og:url" content="https://www.drumeo.com/drumshop/stickbag/">
 
     @include('_partials.layout._fonts')
-    <?php \App\Analytics\Tracker::trackProductImpression('Drumeo-VaterSticks'); ?>
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
@@ -101,8 +100,6 @@
             background:linear-gradient(to bottom, #e2c584, #ad7c12);
         }
     </style>
-
-    @php $memberPrice = floatval($productPrices['Drumeo-VaterSticks']->discounted_price) @endphp
 @stop
 
 @section('body-data')
@@ -121,12 +118,6 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('drumeo.products.partials.promo-banner', [
-                "name" => "StickBag",
-                "fullPrice" => floatval($productPrices['Drumeo-VaterSticks']->price),
-                "price" => $memberPrice,
-                "noBreadcrumb" => true
-            ])
 
     @include('drumeo.products.partials._stickbag',[
     "memberVersion" => true,

@@ -138,7 +138,7 @@
             <div class="container mx-auto">
                 <div class="float-left w-full px-2 md:px-3 card-wrap">
 
-                    @if(Carbon\Carbon::create(2023, 9, 15, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now() && Carbon\Carbon::create(2023, 9, 18, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                    @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 9, 18, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                         <a href="/drumshop/stickbag" class="rounded-xl mb-5 overflow-hidden relative inline-block w-full sm:text-left px-7 sm:px-10 lg:px-16 pt-48 pb-4 sm:py-12 lg:py-14 transition-opacity hover:opacity-90" style="background-color:#f5f5f5;">
                             <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
                                 <img class="h-14 sm:h-20 lg:h-28" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/sb_logo.png"><br>
@@ -431,13 +431,12 @@
 @section('layout-scripts')
     @parent
     @include('_partials.components.countdown',[
-        'countdownDate2' => '2023-09-11 00:00:00',
-        'countdownDate' => '2023-09-15 00:00:00',
+        'countdownDate2' => '2023-09-18 00:00:00',
+        'countdownDate' => '2023-09-22 00:00:00',
         'promoVersion' => true
     ])
 {{--    week 2--}}
-{{--    'countdownDate2' => '2023-09-18 00:00:00',--}}
-{{--    'countdownDate' => '2023-09-22 00:00:00',--}}
+
 {{--    week 3--}}
 {{--    'countdownDate2' => '2023-09-25 00:00:00',--}}
 {{--    'countdownDate' => '2023-09-29 00:00:00',--}}

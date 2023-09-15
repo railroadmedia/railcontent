@@ -1,16 +1,14 @@
 
-@include('drumeo.products.partials.promo-banner', [
-            "name" => "StickBag",
-            "fullPrice" => floatval($productPrices['stickbag']->price),
-            "price" => $memberPrice,
-            "noBreadcrumb" => true
-        ])
 @if(!empty($blackBag))
     <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <img alt="quietkick logo" class="h-20 sm:h-28" src="https://www.musora.com/musora-cdn/image/width=680,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-stickbag-logo.svg"><br>
-                <h5 class="leading-tight text-gold"><strong><em>Only <s class="opacity-50">250</s> 198 Available</em></strong></h5>
+                <h5 class="leading-tight text-gold"><strong><em>Only <s class="opacity-50">250</s>
+                            @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
+                                {{ $products['stickbag-ltd']->getStockAvailability() }}
+                            @endif
+                            Available</em></strong></h5>
                 <h2 class="leading-tight mt-5 mb-1"><strong>Pack like a pro.</strong></h2>
                 <h6 class="leading-tight"><s class="opacity-50">$197</s> <strong class="text-gold">$177</strong> Launch Special</h6>
                 @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
@@ -27,9 +25,15 @@
     </header>
     <section class="text-center px-5 sm:px-6 pb-12 sm:pb-14 lg:pb-20 text-white" style="background-color:#09090a;">
         <div class="flex justify-center items-end -mt-10 relative z-10">
-            <img class="h-10 sm:h-14" style="transform: scaleX(-1);" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/arrow.svg" alt="learn playing image" fetchpriority="high">
-            <img class="h-20 sm:h-28 mx-3" src="https://www.musora.com/musora-cdn/image/width=370,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/limited-edition-patch.png" alt="learn playing image" fetchpriority="high">
-            <img class="h-10 sm:h-14" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/arrow.svg" alt="learn playing image" fetchpriority="high">
+            <img class="h-8 sm:h-14" style="transform: scaleX(-1);" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/arrow.svg" alt="learn playing image" fetchpriority="high">
+            <div class="relative">
+                @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
+                    <p class="absolute text-black text-sm font-bebas" style="top: 63%;left: 43%;"><em>{{ $products['stickbag-ltd']->getStockAvailability() }}</em></p>
+                @endif
+
+                <img class="h-28 mx-3" src="https://www.musora.com/musora-cdn/image/width=370,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/limited-edition-patch.png" alt="learn playing image" fetchpriority="high">
+            </div>
+            <img class="h-8 sm:h-14" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/arrow.svg" alt="learn playing image" fetchpriority="high">
         </div>
         <div class="container max-w-5xl mx-auto">
             <h1 class="my-5 sm:my-10"><strong><span class="text-gold">You’re invited</span> to the<br> black & gold club. </strong></h1>
@@ -401,7 +405,7 @@
                     <td>Capacity</td>
                     <td>18 Pairs</td>
                     <td>24 Pairs</td>
-                    <td>6 Pairs</td>
+                    <td>12 Pairs</td>
                 </tr>
                 <tr>
                     <td>Protective<br> Brush Sleeve</td>
@@ -419,7 +423,7 @@
                     <td>Drum Key<br> Included</td>
                     <td>YES</td>
                     <td>NO</td>
-                    <td>NO</td>
+                    <td>YES</td>
                 </tr>
                 <tr style="background-color:transparent!important;">
                     <td class="rounded-b-xl">Total</td>

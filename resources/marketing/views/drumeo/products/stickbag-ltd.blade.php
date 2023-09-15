@@ -8,10 +8,9 @@
     <meta property="og:description" content="Pack like a pro.">
 
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/share-image-limited.jpg" style="display: none;">
-    <meta property="og:url" content="https://www.drumeo.com/drumshop/stickbag/">
+    <meta property="og:url" content="https://www.drumeo.com/drumshop/stickbag-ltd/">
 
     @include('_partials.layout._fonts')
-    <?php \App\Analytics\Tracker::trackProductImpression('Drumeo-VaterSticks'); ?>
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
@@ -106,8 +105,6 @@
 
         }
     </style>
-
-    @php $memberPrice = floatval($productPrices['Drumeo-VaterSticks']->discounted_price) @endphp
 @stop
 
 @section('body-data')
@@ -126,12 +123,6 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('drumeo.products.partials.promo-banner', [
-                "name" => "StickBag",
-                "fullPrice" => floatval($productPrices['Drumeo-VaterSticks']->price),
-                "price" => $memberPrice,
-                "noBreadcrumb" => true
-            ])
 
     @include('drumeo.products.partials._stickbag',[
     "blackBag" => true,
