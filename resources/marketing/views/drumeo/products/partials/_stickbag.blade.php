@@ -429,7 +429,7 @@
                     <td class="rounded-b-xl">Total</td>
                     <td class="rounded-b-xl"><s class="opacity-50">${{ floatval($productPrices['stickbag']->price) }}</s> <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong></td>
                     <td class="rounded-b-xl"><strong>$104</strong></td>
-                    <td class="rounded-b-xl"><strong>$220</strong></td>
+                    <td class="rounded-b-xl"><strong>$200</strong></td>
                 </tr>
                 </tbody>
             </table>
