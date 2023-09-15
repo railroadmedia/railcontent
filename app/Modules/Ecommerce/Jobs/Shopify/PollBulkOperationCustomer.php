@@ -5,12 +5,10 @@ namespace App\Modules\Ecommerce\Jobs\Shopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\PollsShopifyBulkOperation;
 use Exception;
-use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
 use Modules\UserManagementSystem\Models\User;
 use Signifly\Shopify\Shopify;
@@ -21,7 +19,7 @@ use Signifly\Shopify\Shopify;
  * Shopify.
  * The general flow of the process is as follows:
  * 1. Poll Shopify for the status of our bulk operation
- * 2. If the bulk operation has not completed, add another call of this job to the batch, with a delay
+ * 2. If the bulk operation has not completed, dispatch another call of this job, with a delay
  *  - This process will repeat until one of the following occurs:
  *      - i. the bulk operation has completed
  *          - we will move on to step 3
@@ -38,12 +36,7 @@ use Signifly\Shopify\Shopify;
  */
 class PollBulkOperationCustomer implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable, PollsShopifyBulkOperation, LogsShopify;
-
-    public function middleware(): array
-    {
-        return [new SkipIfBatchCancelled()];
-    }
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, PollsShopifyBulkOperation, LogsShopify;
 
     // 14 minutes
     protected const TIMEOUT = 840;
@@ -61,25 +54,25 @@ class PollBulkOperationCustomer implements ShouldQueue
             if ($status !== "COMPLETED") {
                 // if the batch didn't finish, keep trying until it does, or we approach our 15-minute lambda time limit
                 if ($this->secondsPassed < self::TIMEOUT) {
-                    $this->batch()
-                        ->add((new PollBulkOperationCustomer($this->bulkOperationId,
+                    sleep(self::DELAY);
+                    PollBulkOperationCustomer::dispatchSync($this->bulkOperationId,
                             $this->shopifySync,
                             $this->sourceFileName,
                             $this->resourceType,
                             $this->secondsPassed+self::DELAY
-                        ))
-                        ->delay(now()->addSeconds(self::DELAY)));
+                        );
                     return;
                 }
 
                 // Shopify is taking too long to process our bulk data, so cancel the operation and our whole job batch
                 $this->cancelShopifyOperation();
 
-                $this->logError(sprintf("%s: Bulk Operation was not completed within our time limit."
+                $timeoutMessage = sprintf("%s: Bulk Operation was not completed within our time limit."
                     . " The Shopify operation has been cancelled and this job batch has been cancelled. Please review the"
-                    . " batch size of Users and try again with a lower count", $this->getClassName()));
+                    . " batch size of Users and try again with a lower count", $this->getClassName());
 
-                $this->batch()->cancel();
+                $this->logError($timeoutMessage);
+                $this->fail($timeoutMessage);
                 return;
             }
 
@@ -99,9 +92,9 @@ class PollBulkOperationCustomer implements ShouldQueue
 
             // and dispatch another job to parse the results and update our users or customers
             if ($this->resourceType === User::class) {
-                $this->batch()->add(new ParseBulkOperationResultsForUsers($this->sourceFileName, $resultsFileName, $this->shopifySync));
+                ParseBulkOperationResultsForUsers::dispatchSync($this->sourceFileName, $resultsFileName, $this->shopifySync);
             } else {
-                $this->batch()->add(new ParseBulkOperationResultsForCustomers($this->sourceFileName, $resultsFileName, $this->shopifySync));
+                ParseBulkOperationResultsForCustomers::dispatchSync($this->sourceFileName, $resultsFileName, $this->shopifySync);
             }
 
         } catch (Exception $e) {

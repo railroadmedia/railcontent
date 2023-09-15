@@ -6,6 +6,7 @@ use App\Models\ShopifySync;
 use App\Modules\Ecommerce\Jobs\Shopify\PollBulkOperationCustomer;
 use Exception;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Storage;
 use libphonenumber\NumberParseException;
 use libphonenumber\PhoneNumberFormat;
@@ -95,8 +96,7 @@ trait SyncsShopifyCustomer
                 }
 
                 // grab the bulk operation id from the response, and pass that to the polling job
-                // DEV NOTE: adding the job to the batch means that it becomes next in line (before the next BulkCustomerCreateFromUsers in the batch)
-                $this->batch()->add(new PollBulkOperationCustomer($bulkOperationData->id, $shopifySync, $filename, $resourceType));
+                PollBulkOperationCustomer::dispatchSync($bulkOperationData->id, $shopifySync, $filename, $resourceType);
             } else {
                 throw new Exception(sprintf("%s: bulkOperationRunMutation GraphQl mutation failed: %s",
                     $this->getClassName(), $bulkResponse->reason()));

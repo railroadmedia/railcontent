@@ -3,11 +3,10 @@
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
-use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
@@ -23,7 +22,7 @@ use Signifly\Shopify\Shopify;
  */
 class KickOffBulkCustomerCreateFromUsers implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable, LogsShopify;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, LogsShopify;
 
     protected CustomerRepository $customerRepository;
     protected AddressRepository $addressRepository;
@@ -44,12 +43,12 @@ class KickOffBulkCustomerCreateFromUsers implements ShouldQueue
         $this->shopify = $shopify;
 
         $usersToCreate = $this->getUsersToCreateQuery();
-        $batchSize = 500;
+        $chunkSize = 500;
         $this->logInfo(sprintf("Found %s users to be created in Shopify.", $usersToCreate->count()));
         $this->logInfo("Dispatching jobs to sync users ...");
 
-        $usersToCreate->chunk($batchSize, function (Collection $users) {
-            $this->batch()->add(new BulkCustomerCreateFromUsers($users, $this->execute));
+        $usersToCreate->chunk($chunkSize, function (Collection $users) {
+            BulkCustomerCreateFromUsers::dispatchSync($users, $this->execute);
         });
     }
 

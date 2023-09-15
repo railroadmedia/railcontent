@@ -4,10 +4,9 @@ namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use Doctrine\ORM\QueryBuilder;
-use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
@@ -22,7 +21,7 @@ use Signifly\Shopify\Shopify;
  */
 class KickOffBulkCustomerCreateFromCustomers implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable, LogsShopify;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, LogsShopify;
 
     protected EcommerceEntityManager $entityManager;
     protected Shopify $shopify;
@@ -42,13 +41,13 @@ class KickOffBulkCustomerCreateFromCustomers implements ShouldQueue
 
         $emails = $this->getEmailOfCustomersToCreate();
 
-        $batchSize = 500;
+        $chunkSize = 500;
         $this->logInfo(sprintf("Found %s customers to be created in Shopify.", $emails->count()));
         $this->logInfo("Dispatching jobs to sync customers ...");
 
-        $chunks = $emails->chunk($batchSize);
+        $chunks = $emails->chunk($chunkSize);
         $chunks->each(function (Collection $emailAddresses) {
-            $this->batch()->add(new BulkCustomerCreateFromCustomers($emailAddresses, $this->execute));
+            BulkCustomerCreateFromCustomers::dispatchSync($emailAddresses, $this->execute);
         });
     }
 
@@ -70,7 +69,7 @@ class KickOffBulkCustomerCreateFromCustomers implements ShouldQueue
             )
             ->distinct();
 
-        //    TODO?
+        // if we add in limits, use this
         // if ($this->getLimit()) {
         //     $qb->setMaxResults($this->getLimit());
         // }

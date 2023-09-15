@@ -8,12 +8,10 @@ use App\Modules\Ecommerce\Jobs\Shopify\Traits\StagesUploadToShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsShopifyCustomer;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Modules\UserManagementSystem\Models\User;
@@ -35,19 +33,14 @@ use Signifly\Shopify\Shopify;
  * 5. Make a GraphQL mutation post to Shopify to upload our .jsonl file into that staged upload area
  * 6. Make a GraphQL mutation post to Shopify to request a `bulkOperationRunMutation` to create the customers,
  *    using the .jsonl file that Shopify now has, and to provide our necessary data for each customer they create
- * 7. Add a new PollBulkOperationCustomer job to this job's batch, that will continually poll Shopify for our results
+ * 7. Dispatch a PollBulkOperationCustomer job, that will continually poll Shopify for our results
  *
  * Please refer to the PollBulkOperationCustomer class for notes on the process from there.
  * @see https://shopify.dev/docs/api/usage/bulk-operations/imports for full details from Shopify
  */
 class BulkCustomerCreateFromUsers implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable, SyncsShopifyCustomer, StagesUploadToShopify, FindsCustomers;
-
-    public function middleware(): array
-    {
-        return [new SkipIfBatchCancelled()];
-    }
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, SyncsShopifyCustomer, StagesUploadToShopify, FindsCustomers;
 
     protected CustomerRepository $customerRepository;
     protected AddressRepository $addressRepository;

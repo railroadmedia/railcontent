@@ -10,13 +10,11 @@ use App\Modules\Ecommerce\Jobs\Shopify\Traits\UsesStorageForShopifySyncData;
 use Carbon\Carbon;
 use Doctrine\ORM\Exception\ORMException;
 use Exception;
-use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Address;
@@ -46,13 +44,8 @@ use Railroad\Ecommerce\Repositories\CustomerRepository;
  */
 class ParseBulkOperationResultsForUsers implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable, LogsShopify, FindsCustomers,
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, LogsShopify, FindsCustomers,
         SavesShopifyIdOnAddresses, UsesStorageForShopifySyncData;
-
-    public function middleware(): array
-    {
-        return [new SkipIfBatchCancelled()];
-    }
 
     // the array of user data that's in the source file - only populated if necessary
     private array $_sourceFileUsers = [];
