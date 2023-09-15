@@ -169,8 +169,7 @@
                 <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>$20/month</strong></h3>
                 <p class="leading-tight opacity-70 text-sm"><em>Billed at $240 per year.</em></p>
                 <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;"
-                        href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=6&products[Drumeo-Key]=1&locked=true"
-                >GET STARTED</a>
+                        href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6,Drumeo-Key:1">GET STARTED</a>
             </div>
             <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
         </div>
@@ -255,7 +254,7 @@
                         <br><br>
                         Click below for your best year on the drums yet.
                         <br>
-                        <a class="join drumeo smaller my-3 w-1/2" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=6&products[Drumeo-Key]=1&locked=true">GET Started &raquo;</a>
+                        <a class="join drumeo smaller my-3 w-1/2" href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6,Drumeo-Key:1">GET Started &raquo;</a>
                         <br>
                         <em>Free worldwide shipping!</em>
                     </p>
@@ -632,7 +631,7 @@
                 <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>$20/month</strong></h3>
                 <p class="leading-tight opacity-70 text-sm"><em>Billed at $240 per year.</em></p>
                 <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;"
-                        href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=6&products[Drumeo-Key]=1&locked=true"
+                        href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6,Drumeo-Key:1"
                 >GET STARTED</a>
             </div>
             <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>

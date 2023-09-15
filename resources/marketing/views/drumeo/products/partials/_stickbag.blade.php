@@ -13,9 +13,13 @@
                 <h5 class="leading-tight text-gold"><strong><em>Only <s class="opacity-50">250</s> 198 Available</em></strong></h5>
                 <h2 class="leading-tight mt-5 mb-1"><strong>Pack like a pro.</strong></h2>
                 <h6 class="leading-tight"><s class="opacity-50">$197</s> <strong class="text-gold">$177</strong> Launch Special</h6>
-                <a class="join smaller gold mt-6 w-full max-w-xs"
-                        href="/ecommerce/add-to-cart?products[stickbag-ltd]=1&products[drum-key-gold]=1&locked=true"
-                >Order Now</a>
+                @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
+                    <a class="join smaller gold mt-6 w-full max-w-xs"
+                            href="/ecommerce/add-to-cart?locked=true&product-array=stickbag-ltd:1,drum-key-gold:1"
+                    >Order Now</a>
+                @else
+                    <span class="join smaller sold-out mt-6 w-full max-w-xs">Order Now</span>
+                @endif
             </div>
         </div>
         {{--    <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to bottom, transparent, rgba(0,79,153,0.6));"></div>--}}
@@ -72,7 +76,7 @@
     <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="quietkick" class="h-14 sm:h-16" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/stickbag-logo2.svg"><br>
+                <img alt="quietkick" class="h-14 sm:h-16" src="https://www.musora.com/musora-cdn/image/width=280,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/stickbag-logo2.svg"><br>
                 <h1 class="leading-tight mt-2 mb-3 text-4xl sm:text-5xl lg:text-6xl"><strong>Pack like a pro.</strong></h1>
                 <h3 class="leading-tight">
                     @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
@@ -487,19 +491,19 @@
 
         <div class="flex flex-wrap items-center">
             <div class="w-full sm:w-1/2 sm:order-1">
-                <div class="p-2 w-full"><div data-open="image1" class="cursor-pointer h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl"
+                <div class="p-2 w-full"><div data-open="image1" class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl"
                             style="background-image:url(https://www.musora.com/musora-cdn/image/width=1200,quality=95/{{ $slides[0]['img'] }})"></div></div>
             </div>
             <div class="w-1/2 sm:w-1/4">
-                <div class="p-2 w-full"><div data-open="image1" class="cursor-pointer h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
+                <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
                             style="background-image:url(https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $slides[1]['img'] }})"></div></div>
-                <div class="p-2 w-full"><div data-open="image1" class="cursor-pointer h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
+                <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
                             style="background-image:url(https://www.musora.com/musora-cdn/image/width=1200,quality=95/{{ $slides[2]['img'] }})"></div></div>
             </div>
             <div class="w-1/2 sm:w-1/4 sm:order-2">
-                <div class="p-2 w-full"><div data-open="image1" class="cursor-pointer h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
+                <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
                             style="background-image:url(https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $slides[3]['img'] }})"></div></div>
-                <div class="p-2 w-full"><div data-open="image1" class="cursor-pointer h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
+                <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
                             style="background-image:url(https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $slides[4]['img'] }})"></div></div>
             </div>
         </div>
@@ -545,25 +549,33 @@
     <section class="py-16 sm:py-24 lg:py-28 relative overflow-hidden text-white text-center customize px-4 lg:px-6" style="background:#000 url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-order-bg.jpg) center center/cover;">
         <div class="container mx-auto max-w-6xl relative z-50">
             <img alt="quietkick logo" class="h-20 sm:h-28" src="https://www.musora.com/musora-cdn/image/width=680,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-stickbag-logo.svg"><br>
-            <h5 class="leading-tight text-gold"><strong><em>Only <s class="opacity-50">250</s> 198 Available</em></strong></h5>
+            <h5 class="leading-tight text-gold"><strong><em>Only <s class="opacity-50">250</s>
+                        @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
+                            {{ $products['stickbag-ltd']->getStockAvailability() }}
+                        @endif
+                        Available</em></strong></h5>
             <h2 class="leading-tight mt-5 mb-1"><strong>Pack like a pro.</strong></h2>
             <h6 class="leading-tight"><s class="opacity-50">$197</s> <strong class="text-gold">$177</strong> Launch Special</h6>
-            <a class="join smaller gold mt-6 w-full max-w-xs"
-                    href="/ecommerce/add-to-cart?products[stickbag-ltd]=1&products[drum-key-gold]=1&locked=true"
-            >Order Now</a>
+            @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
+                <a class="join smaller gold mt-6 w-full max-w-xs"
+                        href="/ecommerce/add-to-cart?locked=true&product-array=stickbag-ltd:1,drum-key-gold:1"
+                >Order Now</a>
+            @else
+                <span class="join smaller sold-out mt-6 w-full max-w-xs">Sold Out</span>
+            @endif
         </div>
     </section>
 @else
     <section class="content-section text-center customize px-4 lg:px-6" style="background:#173c59 url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/order-bg.jpg) center center/cover;">
         <div class="container mx-auto">
-            <img alt="quietkick logo" class="h-14 sm:h-28" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/stickbag-logo2.svg"><br>
+            <img alt="quietkick logo" class="h-14 sm:h-28" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/stickbag-logo2.svg"><br>
 
             @if( $products['stickbag']->getStockAvailability() > 1 && !empty($products['stickbag']->getStockAvailability()))
 
                 <div class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl mx-auto">
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >Save 34%</p>
-                        <a href="/ecommerce/add-to-cart?products[stickbag]=1&products[Drumeo-Key]=1&locked=true" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
+                        <a href="/ecommerce/add-to-cart?locked=true&product-array=stickbag:1,Drumeo-Key:1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
                             <div class="bg-white px-3 py-5 md:py-7">
                                 <h4 class="mb-2 sm:mb-3"><strong>StickBag Only</strong></h4>
                                 <img class="h-24 transition-opacity opacity-0"
@@ -587,7 +599,7 @@
                         <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-drumeo uppercase" >LAUNCH SPECIAL</p>
                         <a
                                 @if(!empty($memberVersion))
-                                    href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=6&products[Drumeo-Key]=1&locked=true"
+                                    href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6,Drumeo-Key:1"
                                 @else
                                     href="/promo-bag"
                                 @endif
