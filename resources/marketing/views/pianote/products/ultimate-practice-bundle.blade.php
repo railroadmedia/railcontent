@@ -48,11 +48,11 @@
                         </div>
                         <div class="slider-container overflow-hidden w-full mb-5 md:mb-7" style="font-size: 0;">
                             <div class="slider-for overflow-hidden  rounded ">
-                                <div style="display: inline-block; width: 100%;">
-                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-111.jpg" alt="slide image 7">
-                                </div>
                                 <div style="display: none;">
                                     <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Meta-images/c8053b11-c400-4618-9322-3d0965d74759-Pianote-Poster-Bundle-01.jpg" alt="slide image 1">
+                                </div>
+                                <div style="display: none;">
+                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-111.jpg" alt="slide image 7">
                                 </div>
                                 <div style="display: none;">
                                     <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/practice-planner/pp-front-cover.jpg" alt="slide image 2">
@@ -77,8 +77,8 @@
                                 </div>
                             </div>
                             <div class="slider-nav mx-auto w-full ">
-                                <div style="display: inline-block; width: 100%;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-111.jpg" alt="slide image 7"></div>
                                 <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Meta-images/c8053b11-c400-4618-9322-3d0965d74759-Pianote-Poster-Bundle-01.jpg" alt="slide image 7"></div>
+                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-111.jpg" alt="slide image 7"></div>
                                 <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/practice-planner/pp-front-cover.jpg" alt="slide image 10"></div>
                                 <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-03.jpg" alt="slide image 7"></div>
                                 <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-04.jpg" alt="slide image 7"></div>
@@ -116,8 +116,6 @@
                 <div class="pack-details mx-auto mb-7 pb-5 sm:pb-9 lg:pb-11">
                     <div class="drumshop-accordion">
                         <p><div><p>Music theory can be… tricky.
-                                <br/><br/>
-                                Music theory can be… tricky.
                                 <br/><br/>
                                 Connecting what you see on a page to the keys can feel like a giant leap. That’s why we’ve made it easy with 6 beautiful full-color posters highlighting the essential theory you need to play the songs you love.
                                 <br/><br/>
