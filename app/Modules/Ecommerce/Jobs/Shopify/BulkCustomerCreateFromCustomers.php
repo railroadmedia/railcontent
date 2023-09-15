@@ -16,7 +16,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
-use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Customer;
 use Railroad\Ecommerce\Repositories\AddressRepository;
 use Railroad\Ecommerce\Repositories\CustomerRepository;
@@ -24,11 +23,11 @@ use Signifly\Shopify\Shopify;
 
 /**
  * BulkCustomerCreateFromUsers is a job used to perform a Bulk Operation in shopify to create multiple customers, using
- * the collection of Users provided as a constructor parameter.
+ * the collection of Customers, found using the email addresses provided as a constructor parameter.
  * This job will simulate its process, as best as possible, when the `$execute` parameter is set to false.
  * The general flow of the process is as follows:
- * 1. Create a new ShopifySync entry for this batch of users
- * 2. Build up the json data for each user, so that it can be created as a Customer in Shopify, using the
+ * 1. Create a new ShopifySync entry for this batch of customers
+ * 2. Build up the json data for each customer, so that it can be created as a Customer in Shopify, using the
  *    [CustomerInput](https://shopify.dev/docs/api/admin-graphql/2023-07/input-objects/CustomerInput) format
  * 3. Compile those json data and save them all in a .jsonl-formatted file that we'll store
  * 4. Make a GraphQL mutation post to Shopify to get them to create a staged upload for us
@@ -40,7 +39,7 @@ use Signifly\Shopify\Shopify;
  * Please refer to the PollBulkOperationCustomer class for notes on the process from there.
  * @see https://shopify.dev/docs/api/usage/bulk-operations/imports for full details from Shopify
  */
-class BulkCustomerCreateFromUsers implements ShouldQueue
+class BulkCustomerCreateFromCustomers implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable, SyncsShopifyCustomer, StagesUploadToShopify, FindsCustomers;
 
@@ -54,10 +53,10 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
     protected Shopify $shopify;
 
     /**
-     * @param Collection $users the users to create Shopify Customers for
+     * @param Collection<string> $emails the email addresses to use to get our customers to create Shopify Customers for
      * @param bool $execute are we executing this process, or simulating?
      */
-    public function __construct(protected Collection $users, protected bool $execute)
+    public function __construct(protected Collection $emails, protected bool $execute)
     {
     }
 
@@ -76,23 +75,23 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
             ])
             : null;
 
-        $usersData = [];
-        // build up the payload for each user
-        $this->users->each(function (User $user) use (&$usersData) {
-            // find any of our Customers with the same email address
-            $userCustomers = $this->getCustomersForUser($user);
-            if ($this->checkUserIsNew($user, $userCustomers)) {
-                $usersData[] = json_encode($this->createCustomerData($user, $userCustomers));
+        $customersData = [];
+        // build up the payload for each customer's email address
+        $this->emails->each(function (?string $email) use (&$customersData) {
+            // safety check for empty email addresses (we have some)
+            if (empty($email)) {
+                $this->logError(sprintf("%s: Customer(s) with an empty email address were found and cannot be" .
+                    " synced to Shopify.", $this->getClassName()));
+                return;
             }
+
+            // find any of our Customers with the same email address
+            $customers = $this->getCustomersForEmail($email);
+            $customersData[] = json_encode($this->createCustomerData($customers));
         });
 
-        // safety check for edge case that all users in this batch were already synced as customers
-        if (empty($usersData)) {
-            return;
-        }
-
         try {
-            $this->syncData($usersData, $shopifySync, User::class);
+            $this->syncData($customersData, $shopifySync, Customer::class);
         } catch (Exception $e) {
             $this->logError($e->getMessage());
             return;
@@ -100,89 +99,49 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
     }
 
     /**
-     * Check for any Customers with the User's email address, that have already been synced to Shopify.
-     * Log an error if the User has synced Customer(s).
+     * Create the data to post to Shopify to create a Customer from our collection of Customers
      *
-     * @param User $user
-     * @param Collection<Customer> $userCustomers
-     * @return bool true if the User or any related Customers does not have any record in Shopify
-     */
-    protected function checkUserIsNew(User $user, Collection $userCustomers): bool
-    {
-        // check for any of the user's customer entities that may have already been synced
-        $alreadySyncedUserCustomers = $userCustomers->filter(fn (Customer $customer) => !is_null($customer->getShopifyId()));
-        if ($alreadySyncedUserCustomers->isNotEmpty()){
-            /** @var Customer $syncedCustomer */
-            $syncedCustomer = $alreadySyncedUserCustomers->first();
-            $shopifyId = $syncedCustomer->getShopifyId();
-            if ($this->execute) {
-                $user->shopify_id = $shopifyId;
-                $user->save();
-            }
-            $this->logError(sprintf("%s: Customer(s) with email address %s were already synced" .
-                " to Shopify. User ID %s has been given the shopify_id %s and was skipped", $this->getClassName(), $user->email, $user->id, $shopifyId));
-        }
-
-        return $alreadySyncedUserCustomers->isEmpty();
-    }
-
-    /**
-     * Create the data to post to Shopify to create a Customer from our User
-     *
-     * DEV NOTE: we don't bother looking at the user's customers because our system doesn't allow for
-     * new Customers to be made after a User already exists with the same email address.
-     *
-     * @param User $user
-     * @param Collection<Customer> $userCustomers
+     * @param Collection<Customer> $customers
      * @return array
      */
-    protected function createCustomerData(User $user, Collection $userCustomers): array
+    protected function createCustomerData(Collection $customers): array
     {
+        // sort the customers collection so that we have the newest one first (so we can work our way back when trying to find data)
+        $customers = $customers->sort(function (Customer $customer1, Customer $customer2) {
+            return $customer1->getUpdatedAt() < $customer2->getUpdatedAt();
+        });
+
         $customerData = [
-            "email" => $user->email,
-            "firstName" => $user->first_name,
-            "lastName" => $user->last_name,
-            "note" => $user->support_note,
-            "phone" => $this->getPhoneNumberForUser($user),
+            "email" => $customers->first()->getEmail(),
+            "note" => $this->getCustomerValueFor($customers, "getNote"),
+            "phone" => $this->getPhoneNumberForCustomer($customers),
             // "tags" => "",
         ];
+        // DEV NOTE: we don't bother making a metafield entry for the ID, because we use multiple customers, so it's
+        // not a clean 1-1 mapping
 
-        // refer to https://shopify.dev/docs/apps/custom-data/metafields/types
-        // we can use meta fields for stuff like our user id, etc
-        $customerData["metafields"] = [
-            [
-                "key" => "_id",
-                "value" => (string)$user->id,
-                "type" => "number_integer",
-                "namespace" => "users"
-            ]
-        ];
-
-        $customerData["addresses"] = $this->createAddressesData($user, $userCustomers);
+        $customerData["addresses"] = $this->createAddressesData($customers);
 
         return ["input" => $customerData];
     }
 
+
     /**
-     * Get all addresses for this user and its customers, then format it to meet Shopify's expectation
+     * Get all addresses for the customers, then format it to meet Shopify's expectation
      *
-     * @param User $user
      * @param Collection<Customer> $customers
      * @return Collection
      */
-    protected function createAddressesData(User $user, Collection $customers): Collection
+    protected function createAddressesData(Collection $customers): Collection
     {
-        $addressData = collect();
-        // get all the addresses for the user
-        $addresses = collect($this->addressRepository->getUserShippingAddresses($user->id));
-
-        // and its customers
+        $addresses = collect();
         $customers->each(fn(Customer $customer) => $addresses->push(
             ...$this->addressRepository->getCustomerShippingAddresses($customer->getId())
         ));
 
         $addresses = $this->cleanUpAddresses($addresses);
 
+        $addressData = collect();
         $addresses->each(function($addressArray) use ($addressData) {
             $addressData->push ($addressArray);
         });

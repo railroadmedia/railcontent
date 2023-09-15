@@ -12,6 +12,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
+use Modules\UserManagementSystem\Models\User;
 use Signifly\Shopify\Shopify;
 
 /**
@@ -61,7 +62,12 @@ class PollBulkOperationCustomer implements ShouldQueue
                 // if the batch didn't finish, keep trying until it does, or we approach our 15-minute lambda time limit
                 if ($this->secondsPassed < self::TIMEOUT) {
                     $this->batch()
-                        ->add((new PollBulkOperationCustomer($this->bulkOperationId, $this->shopifySync, $this->sourceFileName, $this->secondsPassed+self::DELAY))
+                        ->add((new PollBulkOperationCustomer($this->bulkOperationId,
+                            $this->shopifySync,
+                            $this->sourceFileName,
+                            $this->resourceType,
+                            $this->secondsPassed+self::DELAY
+                        ))
                         ->delay(now()->addSeconds(self::DELAY)));
                     return;
                 }
@@ -91,8 +97,13 @@ class PollBulkOperationCustomer implements ShouldQueue
                     $this->getClassName(), $pollResponse->url));
             }
 
-            // and dispatch another job to parse the results and update our users
-            $this->batch()->add(new ParseBulkOperationResultsForUsers($this->sourceFileName, $resultsFileName, $this->shopifySync));
+            // and dispatch another job to parse the results and update our users or customers
+            if ($this->resourceType === User::class) {
+                $this->batch()->add(new ParseBulkOperationResultsForUsers($this->sourceFileName, $resultsFileName, $this->shopifySync));
+            } else {
+                $this->batch()->add(new ParseBulkOperationResultsForCustomers($this->sourceFileName, $resultsFileName, $this->shopifySync));
+            }
+
         } catch (Exception $e) {
             $this->logError($e->getMessage());
         }

@@ -16,6 +16,7 @@ trait PollsShopifyBulkOperation
     public function __construct(protected string $bulkOperationId,
                                 protected ?ShopifySync $shopifySync,
                                 protected string $sourceFileName,
+                                protected string $resourceType,
                                 protected int $secondsPassed = 0)
     {
     }

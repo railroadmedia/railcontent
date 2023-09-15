@@ -13,12 +13,10 @@ use Exception;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
-use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Address;
 use Railroad\Ecommerce\Entities\Customer;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
@@ -26,25 +24,23 @@ use Railroad\Ecommerce\Repositories\AddressRepository;
 use Railroad\Ecommerce\Repositories\CustomerRepository;
 
 /**
- * ParseBulkOperationResultsForUsers is a job used to process the Shopify bulk operation results file in our storage,
+ * ParseBulkOperationResultsForCustomers is a job used to process the Shopify bulk operation results file in our storage,
  * that resulted from the PollBulkOperationCustomer job. Each line of the .jsonl file referenced by $resultsFilename
- * provides data from the result of Shopify creating a customer with our provided data from a user, and this job
- * evaluates each one of those to update our users and applicable customers, along with their addresses, with a
- * Shopify ID to signify their corresponding data in Shopify.
+ * provides data from the result of Shopify creating a customer with our provided data from a grouping of customers,
+ * and this job evaluates each one of those to update our customers, along with their addresses, with a  Shopify ID
+ * to signify their corresponding data in Shopify.
  * The general flow of the process is as follows:
  * 1. Parse the .jsonl file, where each line is a json_encoded GraphQL payload about the customer that was created,
  *  and the line number from the source file that was used to create it
  * 2. If there were any errors provided in the response, we will log them, and if possible attempt to remedy them
- * 3. Use the returned Shopify ID to set the user's shopify_id, identified by the metafield we created with our user ID
- * 4. Find any customers with the same email address (because Shopify has a unique constraint on the email address and
- *  treats them as the same entity), and set the customer(s)'s shopify_id
- * 5. Use the returned customer's addresses to identify our address(es) that were used to create them in Shopify, and
+ * 3. Use the returned Shopify ID to set all the customers' shopify_id, identified by the email address
+ * 4. Use the returned customer's addresses to identify our address(es) that were used to create them in Shopify, and
  *  set the address(es)'s shopify_id with the corresponding Shopify address's ID. We must do it in this way, because
  *  Shopify doesn't allow for metafields on addresses, so we can't leverage the same process.
- * 6. Finish the ShopifySync entry that was created at the start of this batch
- * 7. Delete the source and result files that were generated for this batch
+ * 5. Finish the ShopifySync entry that was created at the start of this batch
+ * 6. Delete the source and result files that were generated for this batch
  */
-class ParseBulkOperationResultsForUsers implements ShouldQueue
+class ParseBulkOperationResultsForCustomers implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable, LogsShopify, FindsCustomers,
         SavesShopifyIdOnAddresses, UsesStorageForShopifySyncData;
@@ -54,10 +50,10 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
         return [new SkipIfBatchCancelled()];
     }
 
-    // the array of user data that's in the source file - only populated if necessary
-    private array $_sourceFileUsers = [];
+    // the array of customer data that's in the source file - only populated if necessary
+    private array $_sourceFileCustomers = [];
 
-    // the array of shopify IDs that were synced for the users and their addresses
+    // the array of shopify IDs that were synced for the customers and their addresses
     private array $shopifyIds = [];
 
     protected CustomerRepository $customerRepository;
@@ -79,7 +75,7 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
             $resultsFile = $this->getFile($this->resultsFilename);
             if (is_null($resultsFile)) {
                 throw new Exception(sprintf("%s: Results file %s was not found in storage and cannot be used to".
-                    " update our users", $this->getClassName(), $this->resultsFilename));
+                    " update our customers", $this->getClassName(), $this->resultsFilename));
             }
 
             // the results file is a json line file, so we need to break it down, line by line
@@ -95,9 +91,9 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
                         $this->handleErrors($responseData, $lineNumber);
                         continue;
                     }
-                    // and if everything's good, update the user
+                    // and if everything's good, update the customer
                     if ($responseData->customer) {
-                        $this->updateUserWithShopifyId($responseData->customer);
+                        $this->updateCustomersWithShopifyId($responseData->customer);
                     }
                 }
             }
@@ -116,35 +112,24 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
     }
 
     /**
-     * Find the user based on the metafield's value that we sent, and update it and any applicable customers
-     * with the Shopify ID from the customer data.
+     * Find the customers with the matching email address, and update them  with the Shopify ID from the customer data.
      *
      * @param object $customerData
      * @return void
      * @throws Exception
      */
-    protected function updateUserWithShopifyId(object $customerData): void
+    protected function updateCustomersWithShopifyId(object $customerData): void
     {
         // pluck out the shopify id from the response data (comes in the format gid://shopify/Customer/xxxxxxxxxxxxx)
         $shopifyId = str($customerData->id)->afterLast("/");
         $shopifyId = intval($shopifyId->value);
 
-        // pluck out our user id from the response data
-        // DEV NOTE: we are (currently) only requesting the metafield for our internal id, so we can just grab the
-        // first edge. If we ever update that, be sure to filter through the edges to get the one we want
-        $userId = $customerData->metafields->edges[0]->node->value;
+        // pluck out the email address from the response data
+        $email = $customerData->email;
 
         try {
-            $user = User::findOrFail($userId);
-
-            $user->shopify_id = $shopifyId;
-            $user->update();
-            // log the success
-            $this->logInfo(sprintf("%s: User %s synced with Shopify ID %s", $this->getClassName(), $user->id, $user->shopify_id));
-            $this->shopifyIds[] = $shopifyId;
-
-            // find any customers with the same email address, and update them as well
-            $customers = $this->getCustomersForUser($user);
+            // find any customers with the same email address, and update them
+            $customers = $this->getCustomersForEmail($email);
             $customers->each(function (Customer $customer) use ($shopifyId) {
                 if ($customer->getShopifyId() !== $shopifyId) {
                     $customer->setShopifyId($shopifyId);
@@ -161,13 +146,13 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
                 // used to create it. We need to take the address data and find any of our user's or customers' addresses
                 // that match the values, and assign the shopify_id to those
                 foreach($customerData->addresses as $address) {
-                    $matchedAddresses = $this->findAddressesWithMatchingData($userId, $customers,
+                    $matchedAddresses = $this->findAddressesWithMatchingData(null, $customers,
                         $address->firstName, $address->lastName, $address->address1, $address->address2, $address->city,
                         $address->province, $address->provinceCode, $address->zip, $address->country, $address->countryCode);
                     if ($matchedAddresses->isEmpty()) {
                         // this means we have an address in Shopify that we don't have in our database
                         $this->logError(sprintf("%s: Shopify returned address information that we don't have on".
-                            " file for user %s:", $this->getClassName(), $userId));
+                            " file for customer(s) with email %s:", $this->getClassName(), $email));
                         $this->logError(print_r($address, true));
                     } else {
                         try {
@@ -180,16 +165,12 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
                             $this->logInfo(sprintf("%s: Address(es) %s synced with Shopify ID %s",
                                 $this->getClassName(), $matchedAddresses->map(fn(Address $address) => $address->getId())->implode(", "), $addressShopifyId));
                         } catch (ORMException $e) {
-                            $this->logError(sprintf("%s: Failed to save Shopify ID on Address(es): ",
+                            $this->logError(sprintf("%s: Failed to save Shopify ID on Address(es): %s",
                                 $this->getClassName(), $e->getMessage()));
                         }
                     }
                 }
             }
-
-        } catch (ModelNotFoundException $e) {
-            throw new Exception(sprintf("%s: User could not be found using the returned metafield data %s.".
-                " User cannot be updated with shopify_id %s", $this->getClassName(), $userId, $shopifyId));
         } catch (ORMException $e) {
             throw new Exception(sprintf("%s: Could not save Ecommerce entity: %s.",
                 $this->getClassName(), $e->getMessage()));
@@ -230,7 +211,7 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
                 $this->logError(sprintf("%s: Shopify returned an error that we have not handled when processing the"
                     ." results. Please update to %s's handleErrors function to handle this error. Our data and the error"
                     ." error response will follow", $this->getClassName(), get_class($this)));
-                $this->logError(print_r($this->getSourceFileUsers()[$lineNumber], true));
+                $this->logError(print_r($this->getSourceFileCustomers()[$lineNumber], true));
                 $this->logError(print_r($error, true));
             }
 
@@ -247,37 +228,37 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
      */
     protected function getUserValueFromSourceFile(int $lineNumber, string $attribute): mixed
     {
-        $userData = $this->getSourceFileUsers()[$lineNumber];
+        $userData = $this->getSourceFileCustomers()[$lineNumber];
         return $userData->$attribute;
     }
 
     /**
-     * Get the array of users data from the source file
+     * Get the array of customers data from the source file
      *
      * @return array
      * @throws Exception
      */
-    protected function getSourceFileUsers(): array
+    protected function getSourceFileCustomers(): array
     {
-        // if we haven't already unpacked the users array, we'll have to read the file from storage and break it into the users
-        if (empty($this->_sourceFileUsers)) {
+        // if we haven't already unpacked the customers array, we'll have to read the file from storage and break it into the users
+        if (empty($this->_sourceFileCustomers)) {
 
             $sourceFile = $this->getFile($this->sourceFilename);
             if (is_null($sourceFile)) {
                 throw new Exception(sprintf("%s: Source file %s was not found in storage and cannot be used to".
-                    " update our users", $this->getClassName(), $this->sourceFilename));
+                    " update our customers", $this->getClassName(), $this->sourceFilename));
             }
 
             // the results file is a json line file, so we need to break it down, line by line
             $sourceFileUserStrings = explode("\n", $sourceFile);
-            $this->_sourceFileUsers = collect($sourceFileUserStrings)
+            $this->_sourceFileCustomers = collect($sourceFileUserStrings)
                 ->transform(function (string $userJson){
                     return json_decode($userJson)->input;
                 })
                 ->toArray();
         }
 
-        return $this->_sourceFileUsers;
+        return $this->_sourceFileCustomers;
     }
 
     /**

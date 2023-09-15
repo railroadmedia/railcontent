@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Ecommerce\Jobs\Shopify\BulkCustomerCreateFromUsers;
+use App\Modules\Ecommerce\Jobs\Shopify\KickOffBulkCustomerCreateFromCustomers;
 use App\Modules\Ecommerce\Jobs\Shopify\KickOffBulkCustomerCreateFromUsers;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -52,7 +53,10 @@ class SyncBulkCustomersToShopify extends Command
         $this->info("Jobs dispatched. Please check the logs for results of the SyncBulkCustomersToShopify jobs.");
 
         $timeStart = microtime(true);
-        Bus::batch(new KickOffBulkCustomerCreateFromUsers($this->getIsExecuting()))
+        Bus::batch([
+            new KickOffBulkCustomerCreateFromUsers($this->getIsExecuting()),
+            new KickOffBulkCustomerCreateFromCustomers($this->getIsExecuting())
+        ])
             ->finally(function () use ($timeStart) {
                 $diff = microtime(true) - $timeStart;
                 $sec = intval($diff);

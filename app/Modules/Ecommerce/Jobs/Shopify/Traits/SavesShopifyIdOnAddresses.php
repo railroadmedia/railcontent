@@ -16,7 +16,6 @@ trait SavesShopifyIdOnAddresses
      * and retrieve any that have matching values to those provided.
      *
      * @param int|null $userId
-     * @param int|null $customerId
      * @param Collection<Customer>|null $customers
      * @param string $firstName
      * @param string $lastName
@@ -24,20 +23,24 @@ trait SavesShopifyIdOnAddresses
      * @param string $address2
      * @param string $city
      * @param string $province
+     * @param string $provinceCode
      * @param string $zip
      * @param string $country
+     * @param string $countryCode
      * @return Collection
      */
-    protected function findAddressesWithMatchingData(?int $userId, ?int $customerId, ?Collection $customers,
+    protected function findAddressesWithMatchingData(?int $userId, ?Collection $customers,
                                                      string $firstName, string $lastName, string $address1,
-                                                     string $address2, string $city, string $province, string $zip,
-                                                     string $country): Collection
+                                                     string $address2, string $city, string $province, string $provinceCode,
+                                                     string $zip, string $country, string $countryCode): Collection
     {
         // one or the other must be set
-        assert(!is_null($userId) || !is_null($customerId));
+        assert(!is_null($userId) || (!is_null($customers) && $customers->isNotEmpty()));
 
         // make a key out of the values, so we can compare our addresses (ignoring case)
-        $checkKey = preg_replace('/\s+/', '',
+        // DEV NOTE: we aren't consistent with region and country, and Shopify automatically converts names and codes,
+        // so we need to create keys for all possibilities
+        $checkKeyNamedProvinceAndCountry = preg_replace('/\s+/', '',
             strtoupper($firstName)
                     . strtoupper($lastName)
                     . strtoupper($address1)
@@ -48,6 +51,40 @@ trait SavesShopifyIdOnAddresses
                     . strtoupper($country)
                 );
 
+        $checkKeyProvinceCodeAndCountryName = preg_replace('/\s+/', '',
+            strtoupper($firstName)
+            . strtoupper($lastName)
+            . strtoupper($address1)
+            . strtoupper($address2)
+            . strtoupper($city)
+            . strtoupper($provinceCode)
+            . strtoupper($zip)
+            . strtoupper($country)
+        );
+
+        $checkKeyProvinceNameAndCountryCode = preg_replace('/\s+/', '',
+            strtoupper($firstName)
+            . strtoupper($lastName)
+            . strtoupper($address1)
+            . strtoupper($address2)
+            . strtoupper($city)
+            . strtoupper($province)
+            . strtoupper($zip)
+            . strtoupper($countryCode)
+        );
+
+        $checkKeyProvinceAndCountryCode = preg_replace('/\s+/', '',
+            strtoupper($firstName)
+            . strtoupper($lastName)
+            . strtoupper($address1)
+            . strtoupper($address2)
+            . strtoupper($city)
+            . strtoupper($provinceCode)
+            . strtoupper($zip)
+            . strtoupper($countryCode)
+        );
+
+        $checkKeys = collect([$checkKeyNamedProvinceAndCountry, $checkKeyProvinceCodeAndCountryName, $checkKeyProvinceNameAndCountryCode, $checkKeyProvinceAndCountryCode]);
 
         $addresses = collect();
         if (!is_null($userId)) {
@@ -61,13 +98,15 @@ trait SavesShopifyIdOnAddresses
             }
             $addresses;
         } else {
-            // get all the addresses for the customer
-            collect($this->getAddressRepository()->getCustomerShippingAddresses($customerId));
+            // get all the addresses for the customers
+            $customers->each(fn(Customer $customer) => $addresses->push(
+                ...$this->getAddressRepository()->getCustomerShippingAddresses($customer->getId())
+            ));
         }
 
         // go through each address, and see if it matches all our values
-        return $addresses->filter(function (Address $address) use ($checkKey) {
-            return $checkKey === $this->getKey($address);
+        return $addresses->filter(function (Address $address) use ($checkKeys) {
+            return $checkKeys->contains($this->getKey($address));
         });
     }
 
