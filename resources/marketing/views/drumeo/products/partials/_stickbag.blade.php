@@ -28,7 +28,7 @@
             <img class="h-8 sm:h-14" style="transform: scaleX(-1);" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/arrow.svg" alt="learn playing image" fetchpriority="high">
             <div class="relative">
                 @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
-                    <p class="absolute text-black text-sm font-bebas" style="top: 63%;left: 43%;"><em>{{ 251 - $products['stickbag-ltd']->getStockAvailability() }}</em></p>
+                    <p class="absolute text-black text-sm font-bebas" style="top: 63%;left: 43%;"><em>{{ $products['stickbag-ltd']->getStockAvailability() }}</em></p>
                 @endif
 
                 <img class="h-28 mx-3" src="https://www.musora.com/musora-cdn/image/width=370,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/limited-edition-patch.png" alt="learn playing image" fetchpriority="high">
