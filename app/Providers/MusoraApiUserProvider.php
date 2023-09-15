@@ -207,7 +207,7 @@ class MusoraApiUserProvider implements UserProviderInterface
                 ->get();
 
         if (($inUseDisplayName->count() > 0) && (strtolower($displayName) != strtolower(user()->display_name))) {
-            throw new MusoraAPIException('This display name is already in use', 'Display name exist', 500);
+            throw new MusoraAPIException('This display name is already in use', 'Display name exist', 200);
         }
 
         user()->display_name = $displayName;
