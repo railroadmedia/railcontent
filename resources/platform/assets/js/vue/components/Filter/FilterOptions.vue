@@ -1,6 +1,6 @@
 <template>
     <div class="lg:tw-flex tw-flex-wrap lg:tw-gap-14 tw-text-[#000C17] dark:tw-text-white">
-        <filter-multi-selection-item v-for="column in multiSelectColumns" :column="column" @click-column-item="clickColumnItem" :filters="filters">
+        <filter-multi-selection-item v-for="column in multiSelectColumns" :column="column" @click-column-item="(category, item) => clickColumnItem(category, item)" :selected-filters="selectedFilters">
         </filter-multi-selection-item>
         <filter-single-selection-item v-for="column in singleSelectColumns" :column="column" @single-select="singleSelect" :selected-value="selectedOption[column.category] ? selectedOption[column.category].value : ''">
         </filter-single-selection-item>
@@ -8,57 +8,67 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue';
-import FilterMultiSelectionItem from './FilterMultiSelectionItem';
-import FilterSingleSelectionItem from './FilterSingleSelectionItem';
+    import { onMounted, ref } from 'vue';
+    import FilterMultiSelectionItem from './FilterMultiSelectionItem';
+    import FilterSingleSelectionItem from './FilterSingleSelectionItem';
+    import { throttle } from 'lodash';
 
-const props = defineProps({
-    multiSelectColumns: {
-        type: Array,
-        default: [],
-    },
-    singleSelectColumns: {
-        type: Array,
-        default: [],
-    },
-});
+    const props = defineProps({
+        multiSelectColumns: {
+            type: Array,
+            default: [],
+        },
+        selectedFilters:{
+            type: Object,
+            default: {},
+        },
+        singleSelectColumns: {
+            type: Array,
+            default: [],
+        },
+    });
 
- const filters = ref({});
- const selectedOption = ref({});
+    const emit = defineEmits(['on-filter-click-handle']);
 
- const clickColumnItem = (category, item) => {
-     if (filters.value[category]){
-        const isChecked = filters.value[category].find((f)=> f.value === item.value);
+    const selectedOption = ref({});
 
-        if (isChecked) {
-            filters.value[category] = filters.value[category].filter((f) => f.value !== item.value);
+    const clickColumnItem = throttle((category, item) => {
+        console.log('filtering')
+         let newSelection = {...props.selectedFilters};
 
-            if(filters.value[category].length === 0) {
-                delete filters.value[category];
+         if (newSelection[category]){
+            const isChecked = newSelection[category].find((f)=> f === item.key);
+
+            if (isChecked) {
+                newSelection[category] = newSelection[category].filter((f) => f !== item.key);
+
+                if(newSelection[category].length === 0) {
+                    delete newSelection[category];
+                }
+            }
+            else {
+                newSelection[category].push(item.key);
+            }
+
+         }
+         else {
+             newSelection[category] = [item.key];
+         }
+
+         emit('on-filter-click-handle', newSelection);
+    },1500);
+
+    const singleSelect = (category, item) => {
+        selectedOption.value[category] = item;
+    }
+
+    onMounted(()=>{
+        if(Object.keys(selectedOption.value).length === 0 && props.singleSelectColumns.length > 0) {
+            selectedOption.value = {
+                [props.singleSelectColumns[0].category]: props.singleSelectColumns[0].items[0],
             }
         }
-
-        else {
-            filters.value[category].push(item);
-        }
-     }
-
-     else {
-         filters.value[category] = [item];
-     }
- };
-
- const singleSelect = (category, item) => {
-     selectedOption.value[category] = item;
- }
-
-onMounted(()=>{
-    if(Object.keys(selectedOption.value).length === 0 && props.singleSelectColumns.length > 0) {
-        selectedOption.value = {
-            [props.singleSelectColumns[0].category]: props.singleSelectColumns[0].items[0],
-        }
-    }
-})
+    })
 </script>
 
 <style scoped>

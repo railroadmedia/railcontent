@@ -1,12 +1,13 @@
 <template>
-    <div class="md:tw-px-8 tw-pt-8">
+    <div>
         <filter-controls
-            :search-term="searchTerm"
             :is-collapsed="isCollapsed"
             :selected-sort="selectedSort"
+            :sort-option-data="sortOptions"
             :tab-options="tabOptions" :selected-tab="selectedTab"
             @on-toggle-collapse="handleToggleCollapse"
-            @on-term-search="(value) => $emit('handleSearch', value)"
+            @on-search-change="(value) => $emit('handleSearchChange', value)"
+            @on-search-submit="$emit('handleSearchSubmit')"
             @on-content-sort="(value) => $emit('handleContentSort', value)"
             @on-filter-tab-click="(value) => $emit('onClickFilterTab', value)"
         />
@@ -14,14 +15,17 @@
             v-if="!isCollapsed && isMobile"
             :multi-select-columns="multiSelectColumns"
             :single-select-columns="singleSelectColumns"
-            @on-filter-click-handle="(category, item) => $emit('on-filter-click')"
+            :selected-filters="selectedFilters"
+            @on-filter-click-handle="(selection) => $emit('on-filter-click', selection)"
         />
         <filter-options-modal
             v-if="!isCollapsed && !isMobile"
             :is-collapsed-mobile="isCollapsed"
+            :selected-filters="selectedFilters"
             :multi-select-columns="multiSelectColumns"
             :single-select-columns="singleSelectColumns"
             @onClose="handleToggleCollapse"
+            @handle-filter-click="(selection) => $emit('on-filter-click', selection)"
         />
     </div>
 </template>
@@ -33,21 +37,9 @@
     import FilterControls from './FilterControls.vue';
 
     const props = defineProps({
-        searchTerm: {
-            type: String,
-            default: '',
-        },
-        selectedSort: {
-            type: String,
-            default: '',
-        },
-        selectedTab: {
-            type: String,
-            default: '',
-        },
         tabOptions: {
             type: Array,
-            default: [{ key: 'songs', value: 'Songs' }, { key: 'artist', value: 'Artist' }, { key: 'genre', value: 'Genre' }],
+            default: [],
         },
         multiSelectColumns: {
             type: Array,
@@ -104,6 +96,18 @@
                 },
             ],
         },
+        selectedFilters: {
+            type: Object,
+            default: {},
+        },
+        selectedSort: {
+            type: String,
+            default: '',
+        },
+        selectedTab: {
+            type: String,
+            default: '',
+        },
         singleSelectColumns: {
             type: Array,
             default: [
@@ -125,6 +129,10 @@
                     ],
                 },
             ],
+        },
+        sortOptions: {
+            type: Array,
+            default: [],
         },
     });
 

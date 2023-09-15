@@ -8,7 +8,12 @@
                 </button>
             </div>
             <div class="tw-h-[calc(100%-200px)] tw-w-full tw-flex tw-flex-col tw-overflow-scroll">
-                <filter-options></filter-options>
+                <filter-options
+                    :selected-filters="selectedFilters"
+                    :multi-select-columns="multiSelectColumns"
+                    :single-select-columns="singleSelectColumns"
+                    @on-filter-click-handle="(selection) => $emit('handle-filter-click', selection)"
+                />
             </div>
             <div class="tw-sticky tw-flex tw-items-center tw-justify-center tw-gap-[10px] tw-px-[12px] tw-bottom-0 tw-h-[107px] tw-bg-[#081825] tw-border-y tw-border-[#081825] tw-text-white" style="z-index: 2000;">
                 <button class="tw-btn-secondary tw-bg-black tw-h-[50px] tw-max-w-[164px]">
@@ -36,6 +41,10 @@
         singleSelectColumns: {
             type: Array,
             default: [],
+        },
+        selectedFilters: {
+            type: Object,
+            default: {},
         },
     });
 </script>

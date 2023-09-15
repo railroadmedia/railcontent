@@ -23,7 +23,7 @@
             type: Object,
             default: {},
         },
-        filters: {
+        selectedFilters: {
             type: Object,
             default: {},
         },
@@ -36,7 +36,7 @@
     }
 
     const isSelected = (key) => {
-        return props.filters[props.column.category] && props.filters[props.column.category].find((f)=> f.key === key) ? true : false;
+        return props.selectedFilters[props.column.category] && props.selectedFilters[props.column.category].find((f)=> f === key) ? true : false;
     }
 </script>
 

@@ -688,8 +688,8 @@ export default {
     }
   },
   methods: {
-    handleContentSort(event) {
-      this.sort = event.target.value;
+    handleContentSort(key) {
+      this.sort = key;
       //reset page params
       this.page = 1;
 
