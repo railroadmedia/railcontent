@@ -212,4 +212,9 @@ class RechargeGateway
         }
         return $result;
     }
+
+    public function getSubscriptions($shopifyCustomerId)
+    {
+        return $this->call('GET', '/subscriptions', ['customer_id' => $shopifyCustomerId]);
+    }
 }

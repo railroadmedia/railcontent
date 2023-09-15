@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Content\Services\ContentPermissionsService;
 use App\Modules\Ecommerce\Events\UserProductsUpdated;
+use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\UserProduct;
 use Carbon\Carbon;
@@ -30,7 +31,7 @@ class ShopifySyncService
 
     public function syncCustomer($shopifyCustomerId)
     {
-        if(!config('shopify.enabled')){
+        if (!config('shopify.enabled')) {
             return;
         }
         $userId = $this->getUserIdFromShopifyCustomerId($shopifyCustomerId);
@@ -39,6 +40,8 @@ class ShopifySyncService
         }
         $ownedProducts = $this->getOwnedProducts($shopifyCustomerId);
         $this->syncUserProducts($userId, $ownedProducts);
+
+        $this->syncSubscriptionData($userId, $shopifyCustomerId);
     }
 
     /**
@@ -204,5 +207,13 @@ class ShopifySyncService
 
         event(new UserProductsUpdated($userId));
     }
+
+    private function syncSubscriptionData(mixed $userId, $shopifyCustomerId)
+    {
+        $subscriptions = $this->recharge->getSubscriptions($shopifyCustomerId);
+
+
+    }
+
 
 }
