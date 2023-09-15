@@ -173,6 +173,7 @@ const handleSoundsliceEvent = (event) => {
             case 'ssNotationLoaded':
                 //Get Duration
                 ssiframe.value.contentWindow.postMessage(`{"method": "getDuration" }`, 'https://www.soundslice.com');
+                
                 //Set Volume
                 ssiframe.value.contentWindow.postMessage(`{"method": "setVolume", "arg": ${globalSettings.volume} }`, 'https://www.soundslice.com');
                 
@@ -203,14 +204,10 @@ const handleSoundsliceEvent = (event) => {
                 saveVolume(cmd.arg)
                 break
             case 'ssLayoutChange':
-                console.log(cmd.arg)
                 saveLayout(cmd.arg)
                 break
             case 'ssZoom':
                 saveZoom(cmd.arg);
-                break
-            case 'ssLayoutChange':
-                //saveLayout(cmd.arg);
                 break
             //UNIQUE SETTINGS
             case 'ssCurrentTime':
@@ -262,17 +259,17 @@ onBeforeMount(()=> {
         globalSettings.volume = localStorage.getItem("ssVolume");
     }
 
+    //GET Current Time
+    if(localStorage.getItem(`${ props.soundsliceSlug }_currentTime`)) {
+        uniqueSettings.time = localStorage.getItem(`${ props.soundsliceSlug }_currentTime`);
+    }
+
     //GET Layout
     if(localStorage.getItem("ssLayout")) {
         globalSettings.layout = localStorage.getItem("ssLayout");
         params.set('layout', globalSettings.layout);
         url.search = params.toString();
         ssURL.value = url.toString();
-    }
-
-    //GET Current Time
-    if(localStorage.getItem(`${ props.soundsliceSlug }_currentTime`)) {
-        uniqueSettings.time = localStorage.getItem(`${ props.soundsliceSlug }_currentTime`);
     }
 
     //GET Zoom
@@ -283,7 +280,9 @@ onBeforeMount(()=> {
     //GET Audio Source
     // if(localStorage.getItem(`${ props.soundsliceSlug }_audioSource`)) {
     //     uniqueSettings.audioSource = localStorage.getItem(`${ props.soundsliceSlug }_audioSource`);
-    //     ssURL.value = `https://www.soundslice.com/${scoreOrSlice()}/${props.soundsliceSlug}/embed/?api=1&scroll_type=2&branding=0&top_controls=1&u=${props.userId}&show_chords=0&layout=3&recording_idx=${uniqueSettings.audioSource}`;
+    //     params.set('recording_idx', uniqueSettings.audioSource);
+    //     url.search = params.toString();
+    //     ssURL.value = url.toString();
     // }
 })
 
