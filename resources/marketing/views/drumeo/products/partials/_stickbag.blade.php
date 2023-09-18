@@ -13,7 +13,7 @@
                 <h4 class="leading-tight"><strong class="text-gold">$197</strong></h4>
                 @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
                     <a class="join smaller gold mt-6 w-full max-w-xs"
-                            href="/ecommerce/add-to-cart?locked=true&product-array=stickbag-ltd:1,drum-key-gold:1"
+                            href="/ecommerce/add-to-cart?locked=true&product-array=stickbag-ltd:1"
                     >Order Now</a>
                 @else
                     <span class="join smaller sold-out mt-6 w-full max-w-xs">Order Now</span>
@@ -562,7 +562,7 @@
             <h4 class="leading-tight"> <strong class="text-gold">$197</strong></h4>
             @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
                 <a class="join smaller gold mt-6 w-full max-w-xs"
-                        href="/ecommerce/add-to-cart?locked=true&product-array=stickbag-ltd:1,drum-key-gold:1"
+                        href="/ecommerce/add-to-cart?locked=true&product-array=stickbag-ltd:1"
                 >Order Now</a>
             @else
                 <span class="join smaller sold-out mt-6 w-full max-w-xs">Sold Out</span>
@@ -579,7 +579,7 @@
                 <div class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl mx-auto">
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >Save 34%</p>
-                        <a href="/ecommerce/add-to-cart?locked=true&product-array=stickbag:1,Drumeo-Key:1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
+                        <a href="/ecommerce/add-to-cart?locked=true&product-array=stickbag:1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
                             <div class="bg-white px-3 py-5 md:py-7">
                                 <h4 class="mb-2 sm:mb-3"><strong>StickBag Only</strong></h4>
                                 <img class="h-24 transition-opacity opacity-0"
@@ -603,7 +603,7 @@
                         <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-drumeo uppercase" >LAUNCH SPECIAL</p>
                         <a
                                 @if(!empty($memberVersion))
-                                    href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6,Drumeo-Key:1"
+                                    href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6"
                                 @else
                                     href="/promo-bag"
                                 @endif
