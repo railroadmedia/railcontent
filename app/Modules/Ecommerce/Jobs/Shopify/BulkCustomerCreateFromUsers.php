@@ -64,7 +64,7 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
         // start the sync log
         $shopifySync = $this->execute
             ? ShopifySync::create([
-                "resource" => "customer_create_bulk",
+                "resource" => "customer",
                 "started_at" => Carbon::now()
             ])
             : null;
