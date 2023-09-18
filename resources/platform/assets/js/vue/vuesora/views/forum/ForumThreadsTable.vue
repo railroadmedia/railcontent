@@ -47,80 +47,9 @@
             @handle-search-change="handleSearchChange"
             @handle-search-submit="getSearchResults"
         />
-        <!-- Search -->
+
         <div class="tw-flex tw-px-2 ">
             <div class="tw-flex tw-flex-col tw-mb-6 tw-w-full">
-<!--                <div class="tw-flex tw-flex-wrap">-->
-
-<!--                    <template v-if="!onlyFollowed && !searching">-->
-<!--                        &lt;!&ndash; Filter &ndash;&gt;-->
-<!--                        <div class="flex tw-ml-0 form-group tw-w-full md:tw-w-1/3 md:tw-pr-10">-->
-<!--                            <div-->
-<!--                                class="form-group xs-12 tw-w-full">-->
-<!--                                <select-->
-<!--                                    id="threadSort"-->
-<!--                                    v-model="filterInterface"-->
-<!--                                    class="has-input tw-text-[#00101D] dark:tw-text-white tw-pb-0 tw-bg-white dark:tw-bg-transparent"-->
-<!--                                >-->
-<!--                                    <option-->
-<!--                                        v-for="option in filterOptions"-->
-<!--                                        :key="option.label"-->
-<!--                                        :value="option.value"-->
-<!--                                        class="tw-text-[#00101D]"-->
-<!--                                    >-->
-<!--                                        {{ option.label }}-->
-<!--                                    </option>-->
-<!--                                </select>-->
-<!--                                <label-->
-<!--                                    for="threadSort"-->
-<!--                                    :class="brand"-->
-<!--                                >Sort By... </label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </template>-->
-
-<!--                    &lt;!&ndash; Search Bar &ndash;&gt;-->
-<!--                    <div class="tw-flex tw-w-full tw-mb-4 tw-order-first md:tw-order-last"-->
-<!--                        :class="[!onlyFollowed && !searching ? 'md:tw-w-2/3' : '']"-->
-<!--                    >-->
-<!--                        <div class="tw-flex tw-flex-col tw-w-full tw-w-full tw-mr-3 form-group">-->
-<!--                            <input-->
-<!--                                id="threadSearch"-->
-<!--                                class="dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74] tw-pb-0"-->
-<!--                                :class="{ 'has-input': searchTerm.length }"-->
-<!--                                ref="searchInput"-->
-<!--                                v-model.lazy="searchInterface"-->
-<!--                                type="text"-->
-<!--                            >-->
-<!--                            <label-->
-<!--                                for="threadSearch"-->
-<!--                                class="dark:tw-text-[#9EC0DC]"-->
-<!--                                :class="brand"-->
-<!--                            >Search</label>-->
-
-<!--                            <span-->
-<!--                                v-if="searching"-->
-<!--                                id="clearSearch"-->
-<!--                                class="tw-px-4 tw-py-3 tw-cursor-pointer tw-absolute tw-right-0"-->
-<!--                                @click="clearSearch"-->
-<!--                            >-->
-<!--                                <i class="fas fa-times"></i>-->
-<!--                            </span>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash; Submit Button &ndash;&gt;-->
-<!--                        <div class="tw-flex tw-flex-col">-->
-<!--                            <button-->
-<!--                                class="tw-btn-primary tw-px-4 sm:tw-px-5 lg:tw-px-12"-->
-<!--                                :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"-->
-<!--                                @click="$refs.searchInput.blur()"-->
-<!--                            >-->
-<!--                                <i class="fas fa-search sm:tw-mr-1 tw-text-sm"></i>-->
-<!--                                <span class="tw-hidden sm:tw-inline-flex">Search</span>-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
                 <p
                     v-if="searching"
                     class="tiny font-italic text-grey-4 dark:tw-text-[#9EC0DC] tw-mt-2 tw-ml-6"
