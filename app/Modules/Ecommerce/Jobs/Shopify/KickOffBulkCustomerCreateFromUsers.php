@@ -34,8 +34,9 @@ class KickOffBulkCustomerCreateFromUsers implements ShouldQueue
 
     /**
      * @param bool $execute are we executing this process, or simulating?
+     * @param int|null $limit an optional limit of the number of users to sync
      */
-    public function __construct(protected bool $execute)
+    public function __construct(protected bool $execute, protected ?int $limit)
     {
     }
 
@@ -48,14 +49,34 @@ class KickOffBulkCustomerCreateFromUsers implements ShouldQueue
 
         $usersToCreate = $this->getUsersToCreateQuery();
         $batchSize = 500;
-        $this->logInfo(sprintf("Found %s users to be created in Shopify.", $usersToCreate->count()));
+        $totalCount = $usersToCreate->count();
+        $infoString = sprintf("Found %s users to be created in Shopify.", $totalCount);
+        if ($this->limit) {
+            if ($this->limit % $batchSize) {
+                $oldLimit = $this->limit;
+                $this->limit = $batchSize * ceil($this->limit / $batchSize);
+                $infoString .= sprintf(" Limit %s selected, but increased to %s for batching.", $oldLimit, $this->limit);
+            }
+            $infoString .= sprintf(" Limiting to %s.", $this->limit);
+        }
+        $infoString .= sprintf(" Performing in batches of %s.", $batchSize);
+        $this->logInfo($infoString);
         $this->logInfo("Dispatching jobs to sync users ...");
 
         //DEV NOTE: we can't just chunk the collection and dispatch the job within it, because this kickoff job
         // will time out, so pass the information into the next job to perform the query within itself
         $jobs = [];
-        $this->getUserIdRangesToCreate($batchSize)->each(function (int $userId) use ($batchSize, &$jobs){
+        $totalCountForRun = is_null($this->limit) ? $totalCount : min($totalCount, $this->limit);
+        $runningTotal = 0;
+        $this->getUserIdRangesToCreate($batchSize)->each(function (int $userId) use ($totalCountForRun, $batchSize, &$runningTotal, &$jobs){
             $jobs[] = new BulkCustomerCreateFromUsers($userId, $batchSize, $this->execute);
+
+            if ($this->limit) {
+                $runningTotal += $batchSize;
+                if ($runningTotal >= $totalCountForRun) {
+                    return false;
+                }
+            }
         });
         Bus::chain($jobs)->dispatch();
     }
@@ -95,6 +116,6 @@ class KickOffBulkCustomerCreateFromUsers implements ShouldQueue
      */
     protected function getClassName(): string
     {
-        return "SyncBulkCustomersToShopify";
+        return "SyncBulkUsersToShopify";
     }
 }

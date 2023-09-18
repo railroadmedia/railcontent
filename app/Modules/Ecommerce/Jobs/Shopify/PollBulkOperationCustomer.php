@@ -107,6 +107,6 @@ class PollBulkOperationCustomer implements ShouldQueue
      */
     protected function getClassName(): string
     {
-        return "SyncBulkCustomersToShopify";
+        return $this->resourceType === User::class ? "SyncBulkUsersToShopify" : "SyncBulkCustomersToShopify";
     }
 }

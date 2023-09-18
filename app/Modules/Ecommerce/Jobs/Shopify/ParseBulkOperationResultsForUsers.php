@@ -278,7 +278,7 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
      */
     protected function getClassName(): string
     {
-        return "SyncBulkCustomersToShopify";
+        return "SyncBulkUsersToShopify";
     }
 
     /**
