@@ -151,12 +151,23 @@
                 @handle-content-sort="handleSortChange"
                 @handle-search-change="handleSearchChange"
                 @handle-search-submit="handleSearchSubmit"
-            />
+            >
+                <template #viewToggleButton>
+                    <button
+                        class="tw-h-[40px] tw-text-xs tw-uppercase tw-font-bebas-neue tw-px-0.5 tw-text-[#000C17] dark:tw-text-white tw-ml-4"
+                        @click="() => emit('onUpdateListView', !isListView)"
+                        title="Toggle List/Grid View"
+                    >
+                        <musora-icon class="tw-w-[24px]" :icon-name="isListView ? 'list-view' : 'grid-view'" />
+                    </button>
+                </template>
+
+            </FilterWrapper>
         </div>
         <!-- List/Grid Toggle -->
-        <div class="tw-ml-2">
+        <div class="tw-hidden md:tw-block lg:tw-ml-2">
             <button
-                class="tw-h-[50px] tw-text-xs tw-uppercase tw-font-bebas-neue tw-px-0.5 tw-text-white"
+                class="tw-h-[50px] tw-text-xs tw-uppercase tw-font-bebas-neue tw-px-0.5 tw-text-[#000C17] dark:tw-text-white"
                 @click="() => emit('onUpdateListView', !isListView)"
                 title="Toggle List/Grid View"
             >
