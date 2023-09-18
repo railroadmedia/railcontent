@@ -10,6 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Bus;
 use Railroad\Ecommerce\Entities\Customer;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Signifly\Shopify\Shopify;
@@ -25,6 +26,9 @@ class KickOffBulkCustomerCreateFromCustomers implements ShouldQueue
 
     protected EcommerceEntityManager $entityManager;
     protected Shopify $shopify;
+
+    // we don't want retries
+    public $tries = 1;
 
     /**
      * @param bool $execute are we executing this process, or simulating?
@@ -46,9 +50,12 @@ class KickOffBulkCustomerCreateFromCustomers implements ShouldQueue
         $this->logInfo("Dispatching jobs to sync customers ...");
 
         $chunks = $emails->chunk($chunkSize);
-        $chunks->each(function (Collection $emailAddresses) {
-            BulkCustomerCreateFromCustomers::dispatchSync($emailAddresses, $this->execute);
+        //DEV NOTE: we can't just chunk the collection and dispatch the job within it, because this kick off job will time out
+        $jobs = [];
+        $chunks->each(function (Collection $emailAddresses) use (&$jobs) {
+            $jobs[] = new BulkCustomerCreateFromCustomers($emailAddresses, $this->execute);
         });
+        Bus::chain($jobs)->dispatch();
     }
 
     /**
