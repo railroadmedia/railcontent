@@ -3,10 +3,10 @@
 namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
-use App\Modules\Ecommerce\Jobs\Shopify\KickOffBulkCustomerCreateFromCustomers;
+use App\Modules\Ecommerce\Jobs\Shopify\KickOffBulkCustomerCreateFromUsers;
 use Carbon\Carbon;
 
-class SyncBulkCustomersToShopify extends Command
+class SyncBulkUsersToShopify extends Command
 {
 
     /**
@@ -14,8 +14,8 @@ class SyncBulkCustomersToShopify extends Command
      *
      * @var string
      */
-    protected $signature = 'shopify:sync-customers-bulk
-                            {--limit= : (Optional) The number of customers to limit this run to. Not recommended for production environment. }
+    protected $signature = 'shopify:sync-users-bulk
+                            {--limit= : (Optional) The number of users to limit this run to. Not recommended for production environment. }
                             {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
 
     /**
@@ -23,7 +23,7 @@ class SyncBulkCustomersToShopify extends Command
      *
      * @var string
      */
-    protected $description = 'Sync our customers up to Shopify';
+    protected $description = 'Sync our users up to Shopify';
 
     function getIsExecuting(): bool
     {
@@ -47,19 +47,19 @@ class SyncBulkCustomersToShopify extends Command
      */
     public function handle(): int
     {
-        $this->info(sprintf("Starting SyncBulkCustomersToShopify at %s", Carbon::now()->toString()));
+        $this->info(sprintf("Starting SyncBulkUsersToShopify at %s", Carbon::now()->toString()));
         if (!$this->getIsExecuting()){
             $this->info("Executing in simulation mode. The source jsonl files will be created, but not processed."
-                ." Please check the logs for results of the SyncBulkCustomersToShopify jobs to get the file names for"
+                ." Please check the logs for results of the SyncBulkUsersToShopify jobs to get the file names for"
                 ." your review.  Use --execute to run for real.");
         }
 
         // the kickoff jobs for users and customers create more jobs in sequence, and we want all users to be completed
-        // before the customers start, so we will dispatch only the kickoff for customers, and the users should have
-        // first been run separately
-        KickOffBulkCustomerCreateFromCustomers::dispatchSync($this->getIsExecuting(), $this->getLimit());
+        // before the customers start, so we will dispatch only the kickoff for users, and the customers will be run
+        // separately
+        KickOffBulkCustomerCreateFromUsers::dispatchSync($this->getIsExecuting(), $this->getLimit());
 
-        $this->info("Jobs dispatched. Please check the logs for results of the SyncBulkCustomersToShopify jobs.");
+        $this->info("Jobs dispatched. Please check the logs for results of the SyncBulkUsersToShopify jobs.");
 
         return self::SUCCESS;
     }
