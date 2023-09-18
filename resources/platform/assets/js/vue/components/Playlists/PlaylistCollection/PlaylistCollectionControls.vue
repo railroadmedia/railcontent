@@ -144,6 +144,7 @@
     <nav class="tw-flex tw-my-4 tw-w-full tw-flex-wrap md:tw-flex-nowrap">
         <div class="tw-w-full">
             <FilterWrapper
+                :search-term="state.searchTerm"
                 :sort-options="sortOptions"
                 :multi-select-columns="categories"
                 :selected-filters="state.selectedFilters"
@@ -161,7 +162,6 @@
                         <musora-icon class="tw-w-[24px]" :icon-name="isListView ? 'list-view' : 'grid-view'" />
                     </button>
                 </template>
-
             </FilterWrapper>
         </div>
         <!-- List/Grid Toggle -->

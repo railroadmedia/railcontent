@@ -1,10 +1,12 @@
 <template>
     <div>
         <filter-controls
+            :search-term="searchTerm"
             :is-collapsed="isCollapsed"
             :selected-sort="selectedSort"
             :sort-option-data="sortOptions"
             :tab-options="tabOptions" :selected-tab="selectedTab"
+            :hide-filter-icon="multiSelectColumns.length === 0"
             @on-toggle-collapse="handleToggleCollapse"
             @on-search-change="(value) => $emit('handleSearchChange', value)"
             @on-search-submit="$emit('handleSearchSubmit')"
@@ -45,58 +47,11 @@
         },
         multiSelectColumns: {
             type: Array,
-            default: [
-                {
-                    category: 'Skill level',
-                    items: [
-                        {
-                            value: 'Level 1',
-                            key: 'level_1',
-                        },
-                        {
-                            value: 'Level 2',
-                            key: 'level_2',
-                        },
-                        {
-                            value: 'Level 3',
-                            key: 'level_3',
-                        },
-                        {
-                            value: 'Level 4',
-                            key: 'level_4',
-                        },
-                        {
-                            value: 'Level 5',
-                            key: 'level_5',
-                        },
-                    ],
-                },
-                {
-                    category: 'Genre',
-                    items: [
-                        {
-                            value: 'item 1',
-                            key: 'item_1',
-                        },
-                        {
-                            value: 'item 2',
-                            key: 'item_2',
-                        },
-                        {
-                            value: 'item 3',
-                            key: 'item_3',
-                        },
-                        {
-                            value: 'item 4',
-                            key: 'item_4',
-                        },
-                        {
-                            value: 'item 5',
-                            key: 'item_5',
-                        },
-                    ],
-                },
-            ],
+            default: [],
+        },
+        searchTerm:{
+            type: String,
+            default: '',
         },
         selectedFilters: {
             type: Object,

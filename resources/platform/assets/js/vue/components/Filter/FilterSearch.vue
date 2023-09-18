@@ -10,6 +10,10 @@
       type: String,
       default: 'Drumeo',
     },
+    searchTerm: {
+      type: String,
+      default: '',
+    },
   });
 
   const emit = defineEmits(['onSubmit', 'onTextChange'])
@@ -42,6 +46,7 @@
 
     <InputLabel
       :showClearButton="true"
+      :initial-value="searchTerm"
       placeholder="Search"
       inputName="term"
       id="sidebar-search"
