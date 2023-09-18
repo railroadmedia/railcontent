@@ -2,19 +2,20 @@
     <div class="tw-flex tw-flex-col md:tw-flex-row tw-w-full tw-justify-between tw-px-[12px] lg:tw-px-0">
         <div class="tw-flex tw-grow tw-relative tw-mb-[18px]">
             <filter-tabs :selected-tab="selectedTab" :tab-options="tabOptions" @onTabClick="handleTabClick" />
-            <div class="tw-flex tw-grow tw-justify-end">
+            <div class="tw-flex tw-grow tw-justify-end md:tw-hidden">
                 <button @click="handleOpenDropdown"
-                    class="tw-flex md:tw-hidden tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
+                    class="tw-flex tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
                     <musora-icon :icon-name="sortIcon()" class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
                 </button>
                 <button v-if="!isCollapsed" @click="() => emit('onToggleCollapse')"
-                    class="tw-flex md:tw-hidden tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
+                    class="tw-flex tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
                     <XIcon class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
                 </button>
                 <button v-else @click="() => emit('onToggleCollapse')"
-                    class="tw-flex md:tw-hidden tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
+                    class="tw-flex tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
                     <AdjustmentsIcon class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
                 </button>
+                <slot></slot>
             </div>
         </div>
         <div class="tw-flex tw-grow tw-justify-end tw-relative">

@@ -10,7 +10,9 @@
             @on-search-submit="$emit('handleSearchSubmit')"
             @on-content-sort="(value) => $emit('handleContentSort', value)"
             @on-filter-tab-click="(value) => $emit('onClickFilterTab', value)"
-        />
+        >
+            <slot name="viewToggleButton"></slot>
+        </filter-controls>
         <filter-options
             v-if="!isCollapsed && isMobile"
             :multi-select-columns="multiSelectColumns"
