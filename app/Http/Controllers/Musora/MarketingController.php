@@ -34,6 +34,11 @@ class MarketingController extends BaseController
         return view('musora.pages.privacy');
     }
 
+    public function preferences()
+    {
+        return view('musora.pages.preferences');
+    }
+
     public function careers()
     {
         return view('musora.pages.careers');

@@ -1,4 +1,7 @@
-@extends('musora._partials.layout')
+@extends('musora._partials.layout', [
+    'whiteNav' => true,
+    'fullSubscriptionVersion' => true,
+])
 
 @section('head-includes')
     <title>Musora - Social Learning Communities For Musicians</title>
