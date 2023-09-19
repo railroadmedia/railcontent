@@ -87,9 +87,9 @@
 <script>
     function recaptchaSubmit{{$cleanFormId}}(token) {
         const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        const userEmail = document.getElementById('sign-up-email').value;
+        const userEmail = document.getElementById('sign-up-email');
 
-        if(userEmail.match(emailFormat)){
+        if(userEmail.value.match(emailFormat)){
             document.getElementById("{{$cleanFormId}}").submit();
             dataLayer.push({
                 "event": "gtm.formSubmit",
@@ -97,6 +97,8 @@
                 "formSuccess": true
             });
             emailSignUpConversionTrackerForImpactProvider();
+        } else {
+            userEmail.classList.add('bg-red-200');
         }
     }
 </script>
