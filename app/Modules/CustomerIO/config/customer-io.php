@@ -420,6 +420,16 @@ return [
                     'pianote',
                 ],
             ],
+            'Easy Classical Songs' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_easy-classical-songs',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'F Sharp Minor' => [
                 'custom_attributes' => [
                 ],

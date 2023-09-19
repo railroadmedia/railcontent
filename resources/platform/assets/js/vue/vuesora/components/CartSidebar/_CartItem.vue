@@ -32,7 +32,7 @@
                         class="inline-flex flex-column body ml-2 mr-auto csb-product-price"
                     >
                         <i
-                            class="fas fa-spin fa-spinner inline-flex justify-center"
+                            class="fas fa-spin fa-loader inline-flex justify-center"
                             :class="'text-'+brand"
                         ></i>
                     </div>

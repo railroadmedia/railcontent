@@ -1,9 +1,9 @@
 @php
     $cardImages = [
-        'drumeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/drumeo-free.png',
-        'pianote' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/pianote-free.png',
-        'singeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/singeo-free.png',
-        'guitareo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/guitareo-free.png',
+        'drumeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/drumeo-30-day-free-trial.png',
+        'pianote' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/pianote-30-day-free-trial.png',
+        'singeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/singeo-30-day-free-trial.png',
+        'guitareo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/guitareo-30-day-free-trial.png',
     ];
 
     $instruments = [
@@ -98,7 +98,7 @@
                             </div>
                         </div>
                         <div class="inline-block">
-                            <a href="{{ get_legacy_brand_base_url($brand) }}/choose-your-trial-month?referralCode={{ $referralCode }}" class="btn-primary btn-small bg-{{ $brand }} py-5 px-20 mr-2 text-base">1 MONTH FOR FREE</a>
+                            <a href="#customize-anchor" class="btn-primary btn-small bg-{{ $brand }} py-5 px-20 mr-2 text-base">1 MONTH FOR FREE</a>
                             <div class="flex flex-wrap items-center justify-center ">
                                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                                     <i class="align-middle text-base fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
@@ -125,49 +125,69 @@
         </div>
     </section>
 
-    <section class="bg-[#F3B13E] py-9">
-        <div class="text-center px-4 sm:px-0">
-            <p>Sign up for a {{ ucfirst($brand) }} 30-Day Free Trial for a chance to win a {{ $prizeNames[$brand] }}.</p>
-            <p class="italic font-bold">The contest ends on September 14, 2023.</p>
-        </div>
-    </section>
+    <div id="customize-anchor" class="anchor anchor-slide"></div>
+    @include('musora.sales.components.card-selection-section', [
+        'theme' => $referralBrand,
+        "month" => true,
+        "whiteBg" => true,
+        "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
+        "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
+        "songs" => "Thousands of popular songs.",
+        "firstPoint" => "Learn piano, guitar, drums, & singing.",
+        "thirdPoint" => "Unlimited personal support",
+        "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-30-day-trial-membership]=1&locked=true&referralCode=" . $referralCode,
+        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[musora-monthly-recurring-30-day-trial-membership]=1&locked=true&referralCode=" . $referralCode,
+    ])
 
-    <section style="background:linear-gradient({{ $gradients[$brand] }});">
-        <div class="flex flex-col lg:flex-row text-white max-w-4xl mx-auto items-center px-4 xl:px-0 text-center lg:text-left">
-            <div class="mb-6 pt-10 lg:pt-0 lg:my-40 lg:max-w-md w-full lg:mr-6">
-                <h2 class="font-extrabold leading-none mb-4">This could be yours…</h2>
-                <div class="font-bold mt-2 mb-4 ">{{ $prizeNamesWithModel[$brand] }}</div>
-                <div>{!! $prizeDesc[$brand] !!}</div>
-            </div>
+    @include('musora.sales.components.trial-explanation', [
+        'theme' => $referralBrand,
+        'instrument' => 'musical',
+        "month" => true,
+    ])
 
-            <img class="@if($brand === 'drumeo') sm:h-[450px] lg:h-[32rem] xl:h-[33rem] -mb-6 lg:-mb-20 @elseif($brand === 'pianote') sm:h-[450px] lg:h-[23rem] xl:h-[28rem] -mb-10 lg:-mb-32 lg:-ml-20 @elseif($brand === 'guitareo') sm:h-[450px] lg:h-[23rem] xl:h-[28rem] -mb-6 lg:-mb-32 lg:-ml-10 @elseif($brand === 'singeo') -mb-6 lg:mb-0 sm:h-56 lg:h-52 xl:h-64 @endif mx-auto" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $prizeImgs[$brand] }}" alt="{{ $brand }} prize" />
-        </div>
-    </section>
+{{--    <section class="bg-[#F3B13E] py-9">--}}
+{{--        <div class="text-center px-4 sm:px-0">--}}
+{{--            <p>Sign up for a {{ ucfirst($brand) }} 30-Day Free Trial for a chance to win a {{ $prizeNames[$brand] }}.</p>--}}
+{{--            <p class="italic font-bold">The contest ends on September 14, 2023.</p>--}}
+{{--        </div>--}}
+{{--    </section>--}}
 
-    <section class="py-20">
-        <div class="max-w-6xl mx-auto px-6 2xl:px-0 dark:text-white">
-            <h4 class="mb-4"><strong>Terms and Conditions</strong></h4>
-            <p>
-                <strong>Eligibility:</strong> This contest is open to Musora students with an active, paid membership and newly referred students, 18 years or older at the time of entry. Void where prohibited by law. Employees, officers, and directors of the sponsor and their immediate family members and/or those living in the same household are not eligible to participate in the contest.
-                <br><br>
-                <strong>How to Enter:</strong> Participants automatically receive (1) entry to the contest when a referred friend signs up for a membership with a 30-day trial from August 18 to September 14, 2023. Participants may collect up to (5) contest entries for {{ ucfirst($brand) }} based on each successful referral during the contest period. New students who sign up for {{ ucfirst($brand) }} will gain one contest entry. No purchase is necessary to enter or win.
-                <br><br>
-                <strong>Prize:</strong> The contest prize is a {{ $prizeWithPrice[$brand] }}. The prizes are non-transferable and cannot be exchanged for cash.
-                <br><br>
-                <strong>Winner Selection:</strong> The winner will be randomly selected from all eligible entries received during the contest period. The winner will be notified by email or direct message within 48 hours of the selection. If the winner does not respond within 48 hours, another winner will be selected.
-                <br><br>
-                <strong>Release:</strong> By entering the contest, participants release and hold harmless the sponsor, their affiliates, and their respective officers, directors, employees, and agents from any liability or any injury, loss, or damage of any kind arising from or in connection with the contest or any prize won.
-                <br><br>
-                <strong>General Conditions:</strong> The sponsor reserves the right to cancel, suspend, or modify the contest if fraud, technical failures, or any other factor beyond their control impairs the contest's integrity, as determined by the sponsor in their sole discretion. The sponsor reserves the right to disqualify any individual who violates these Terms and Conditions or interferes with the contest in any way.
-                <br><br>
-                <strong>Governing Law:</strong> The contest shall be governed by and construed by the laws of the country where the contest is held, without regard to conflicts of law principles.
-                <br><br>
-                <strong>Privacy:</strong> Personal information collected from participants will be used only to administer the contest and will not be shared with any third party except as necessary to fulfill the prize.
-                <br><br>
-                By participating in the contest, participants agree to be bound by these Terms and Conditions.
-            </p>
-        </div>
-    </section>
+{{--    <section style="background:linear-gradient({{ $gradients[$brand] }});">--}}
+{{--        <div class="flex flex-col lg:flex-row text-white max-w-4xl mx-auto items-center px-4 xl:px-0 text-center lg:text-left">--}}
+{{--            <div class="mb-6 pt-10 lg:pt-0 lg:my-40 lg:max-w-md w-full lg:mr-6">--}}
+{{--                <h2 class="font-extrabold leading-none mb-4">This could be yours…</h2>--}}
+{{--                <div class="font-bold mt-2 mb-4 ">{{ $prizeNamesWithModel[$brand] }}</div>--}}
+{{--                <div>{!! $prizeDesc[$brand] !!}</div>--}}
+{{--            </div>--}}
+
+{{--            <img class="@if($brand === 'drumeo') sm:h-[450px] lg:h-[32rem] xl:h-[33rem] -mb-6 lg:-mb-20 @elseif($brand === 'pianote') sm:h-[450px] lg:h-[23rem] xl:h-[28rem] -mb-10 lg:-mb-32 lg:-ml-20 @elseif($brand === 'guitareo') sm:h-[450px] lg:h-[23rem] xl:h-[28rem] -mb-6 lg:-mb-32 lg:-ml-10 @elseif($brand === 'singeo') -mb-6 lg:mb-0 sm:h-56 lg:h-52 xl:h-64 @endif mx-auto" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $prizeImgs[$brand] }}" alt="{{ $brand }} prize" />--}}
+{{--        </div>--}}
+{{--    </section>--}}
+
+{{--    <section class="py-20">--}}
+{{--        <div class="max-w-6xl mx-auto px-6 2xl:px-0 dark:text-white">--}}
+{{--            <h4 class="mb-4"><strong>Terms and Conditions</strong></h4>--}}
+{{--            <p>--}}
+{{--                <strong>Eligibility:</strong> This contest is open to Musora students with an active, paid membership and newly referred students, 18 years or older at the time of entry. Void where prohibited by law. Employees, officers, and directors of the sponsor and their immediate family members and/or those living in the same household are not eligible to participate in the contest.--}}
+{{--                <br><br>--}}
+{{--                <strong>How to Enter:</strong> Participants automatically receive (1) entry to the contest when a referred friend signs up for a membership with a 30-day trial from August 18 to September 14, 2023. Participants may collect up to (5) contest entries for {{ ucfirst($brand) }} based on each successful referral during the contest period. New students who sign up for {{ ucfirst($brand) }} will gain one contest entry. No purchase is necessary to enter or win.--}}
+{{--                <br><br>--}}
+{{--                <strong>Prize:</strong> The contest prize is a {{ $prizeWithPrice[$brand] }}. The prizes are non-transferable and cannot be exchanged for cash.--}}
+{{--                <br><br>--}}
+{{--                <strong>Winner Selection:</strong> The winner will be randomly selected from all eligible entries received during the contest period. The winner will be notified by email or direct message within 48 hours of the selection. If the winner does not respond within 48 hours, another winner will be selected.--}}
+{{--                <br><br>--}}
+{{--                <strong>Release:</strong> By entering the contest, participants release and hold harmless the sponsor, their affiliates, and their respective officers, directors, employees, and agents from any liability or any injury, loss, or damage of any kind arising from or in connection with the contest or any prize won.--}}
+{{--                <br><br>--}}
+{{--                <strong>General Conditions:</strong> The sponsor reserves the right to cancel, suspend, or modify the contest if fraud, technical failures, or any other factor beyond their control impairs the contest's integrity, as determined by the sponsor in their sole discretion. The sponsor reserves the right to disqualify any individual who violates these Terms and Conditions or interferes with the contest in any way.--}}
+{{--                <br><br>--}}
+{{--                <strong>Governing Law:</strong> The contest shall be governed by and construed by the laws of the country where the contest is held, without regard to conflicts of law principles.--}}
+{{--                <br><br>--}}
+{{--                <strong>Privacy:</strong> Personal information collected from participants will be used only to administer the contest and will not be shared with any third party except as necessary to fulfill the prize.--}}
+{{--                <br><br>--}}
+{{--                By participating in the contest, participants agree to be bound by these Terms and Conditions.--}}
+{{--            </p>--}}
+{{--        </div>--}}
+{{--    </section>--}}
 
     @include('_partials.components.video-modal',[
         'name' => 'drumeoTrailer',
