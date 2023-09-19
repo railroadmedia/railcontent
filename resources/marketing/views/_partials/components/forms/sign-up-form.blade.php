@@ -87,13 +87,18 @@
 
 <script>
     function recaptchaSubmit{{$cleanFormId}}(token) {
-        document.getElementById("{{$cleanFormId}}").submit();
+        const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const userEmail = document.getElementById('sign-up-email').value;
 
-        dataLayer.push({
-            "event": "gtm.formSubmit",
-            "formId": "{{ $cleanFormId }}",
-            "formSuccess": true
-        });
+        if(userEmail.match(emailFormat)){
+            document.getElementById("{{$cleanFormId}}").submit();
+            dataLayer.push({
+                "event": "gtm.formSubmit",
+                "formId": "{{ $cleanFormId }}",
+                "formSuccess": true
+            });
+            emailSignUpConversionTrackerForImpactProvider();
+        }
     }
 </script>
 
