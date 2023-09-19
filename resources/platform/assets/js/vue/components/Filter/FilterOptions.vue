@@ -32,7 +32,7 @@
 
     const selectedOption = ref({});
 
-    const clickColumnItem = throttle((category, item) => {
+    const clickColumnItem = (category, item) => {
          let newSelection = {...props.selectedFilters};
 
          if (newSelection[category]){
@@ -55,7 +55,7 @@
          }
 
          emit('on-filter-click-handle', newSelection);
-    },1500);
+    };
 
     const singleSelect = (category, item) => {
         selectedOption.value[category] = item;
