@@ -142,6 +142,7 @@
     @include('musora.sales.components.trial-explanation', [
         'theme' => $referralBrand,
         'instrument' => 'musical',
+        "month" => true,
     ])
 
 {{--    <section class="bg-[#F3B13E] py-9">--}}
