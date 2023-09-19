@@ -221,120 +221,107 @@
                             type: 'loop',
                             focus: 0,
                             interval: 2000,
+                            drag   : 'free',
+                            snap   : false,
                             breakpoints: {
-                                768: {
-                                    perPage: 2.5,
-                                    drag   : 'free',
-                                    snap   : false,
-                                },
                                 767: {
                                     perPage: 1.5,
-                                    drag   : 'free',
-                                    snap   : false,
                                 },
                             },
                         }).mount()
                     },
                 }"
         >
-            <div x-ref="splide" class="splide">
+            <div x-ref="splide" class="splide text-left">
                 <div class="splide__track pb-8">
                     <ul class="splide__list items-start">
                         @if(!empty($blackBag))
                             @php
-                                $slides = [
-                                 [
-                                     'img' => 'marketing/drumeo/shop/stickbag/black-waterproof-m.jpg',
-                                 ],
-                                 [
-                                     'img' => 'marketing/drumeo/shop/stickbag/black-suede-m.jpg',
-                                 ],
-                                 [
-                                     'img' => 'marketing/drumeo/shop/stickbag/black-zipper-m.jpg',
-                                 ],
-                                 [
-                                     'img' => 'marketing/drumeo/shop/stickbag/black-holster-m.jpg',
-                                 ],
-                                 [
-                                     'img' => 'marketing/drumeo/shop/stickbag/black-premium-hooks-m.jpg',
-                                 ],
-                                 [
-                                     'img' => 'marketing/drumeo/shop/stickbag/black-drum-key-m.jpg',
-                                 ],
-                             ];
+                                $gridItems = [
+                                    [
+                                         'img' => 'marketing/drumeo/shop/stickbag/black-suede-m.jpg',
+                                    'title' => 'Sweat, water and beer-proof.',
+                                    'desc' => 'Your StickBag is made from waxed canvas – rugged cotton soaked in wax for extra strength and water resistance.',
+                                    ],
+                                    [
+                                         'img' => 'marketing/drumeo/shop/stickbag/black-waterproof-m.jpg',
+                                    'title' => 'Flexible pockets for all your goodies.',
+                                    'desc' => 'Drum keys, tuning gels, a Snickers bar? Flexible pockets let you jam all your goodies inside without losing its shape. ',
+                                    ],
+                                    [
+                                         'img' => 'marketing/drumeo/shop/stickbag/black-zipper-m.jpg',
+                                    'title' => 'Zippers as tough as you are.',
+                                    'desc' => 'Top-quality reinforced zippers make for a long-lasting stick bag – even when it’s jammed to the teeth with sticks, brushes, and mallets.',
+                                    ],
+                                    [
+                                         'img' => 'marketing/drumeo/shop/stickbag/black-holster-m.jpg',
+                                    'title' => 'One in the chamber.',
+                                    'desc' => 'An easy-access sleeve lets your “rescue stick” poke just out of your stick bag so you can make that quick grab mid-song. ',
+                                    ],
+                                    [
+                                         'img' => 'marketing/drumeo/shop/stickbag/black-drum-key-m.jpg',
+                                    'title' => 'Drum keychain (key included!)',
+                                    'desc' => 'Finally, a drum key you won’t lose. Your StickBag includes a brushed pewter drum key that has its own little key ring to live inside your bag. ',
+                                    ],
+                                    [
+                                         'img' => 'marketing/drumeo/shop/stickbag/black-premium-hooks-m.jpg',
+                                    'title' => 'Premium Metal Tom Hooks',
+                                    'desc' => 'No more tying your bag up with string. Your Drumeo StickBag includes sturdy metal loops that easily attach to any tom lugs.',
+                                    ],
+                                ];
                             @endphp
                         @else
                             @php
-                                $slides = [
-                                 [
-                                     'img' => 'marketing/drumeo/shop/stickbag/waterproof-m.jpg',
-                                 ],
-                                 [
-                                     'img' => 'marketing/drumeo/shop/stickbag/suede-m.jpg',
-                                 ],
-                                 [
-                                     'img' => 'marketing/drumeo/shop/stickbag/zipper-m.jpg',
-                                 ],
-                                 [
-                                     'img' => 'marketing/drumeo/shop/stickbag/holster-m.jpg',
-                                 ],
-                                 [
-                                     'img' => 'marketing/drumeo/shop/stickbag/premium-hooks-m.jpg',
-                                 ],
-                                 [
-                                     'img' => 'marketing/drumeo/shop/stickbag/drum-key-m.jpg',
-                                 ],
-                             ];
+                                $gridItems = [
+                                [
+                                 'img' => 'marketing/drumeo/shop/stickbag/waterproof-m2.jpg',
+                                'title' => 'Sweat, water and beer-proof.',
+                                'desc' => 'Your StickBag is made from waxed canvas – rugged cotton soaked in wax for extra strength and water resistance.',
+                                ],
+                                [
+                                 'img' => 'marketing/drumeo/shop/stickbag/suede-m2.jpg',
+                                'title' => 'Flexible pockets for all your goodies.',
+                                'desc' => 'Drum keys, tuning gels, a Snickers bar? Flexible pockets let you jam all your goodies inside without losing its shape. ',
+                                ],
+                                [
+                                 'img' => 'marketing/drumeo/shop/stickbag/zipper-m2.jpg',
+                                'title' => 'Zippers as tough as you are.',
+                                'desc' => 'Top-quality reinforced zippers make for a long-lasting stick bag – even when it’s jammed to the teeth with sticks, brushes, and mallets.',
+                                ],
+                                [
+                                 'img' => 'marketing/drumeo/shop/stickbag/holster-m2.jpg',
+                                'title' => 'One in the chamber.',
+                                'desc' => 'An easy-access sleeve lets your “rescue stick” poke just out of your stick bag so you can make that quick grab mid-song. ',
+                                ],
+                                [
+                                 'img' => 'marketing/drumeo/shop/stickbag/drum-key-m2.jpg',
+                                'title' => 'Drum keychain (key included!)',
+                                'desc' => 'Finally, a drum key you won’t lose. Your StickBag includes a brushed pewter drum key that has its own little key ring to live inside your bag. ',
+                                ],
+                                [
+                                 'img' => 'marketing/drumeo/shop/stickbag/premium-hooks-m2.jpg',
+                                'title' => 'Premium Metal Tom Hooks',
+                                'desc' => 'No more tying your bag up with string. Your Drumeo StickBag includes sturdy metal loops that easily attach to any tom lugs.',
+                                ]
+                                ];
                             @endphp
                         @endif
-                        @foreach ($slides as $slide)
-                            <li class="splide__slide px-2 text-center">
-                                <img class="object-cover h-56 rounded-xl transition-opacity opacity-0"
-                                        loading="lazy"
-                                        onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slide['img'] }}" alt="drumeo stickbag" />
+                        @foreach ($gridItems as $gridItem)
+                            <li class="splide__slide px-1">
+                                <div class="rounded-xl overflow-hidden shadow-md" @if(!empty($blackBag)) style="color:#fff;background-color:#000;" @else style="color:#000;background-color:#F6F8FC;" @endif>
+                                    <div class="relative" style="padding-bottom:71%;">
+                                        <img class="absolute object-cover h-full w-full transition-opacity opacity-1"
+                                                loading="lazy" onload="this.classList.remove('opacity-0')" alt="drumeo stickbag"
+                                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $gridItem['img'] }}">
+                                    </div>
+                                    <p class="mt-4 mb-1 px-4 font-black leading-tight"><strong>{{ $gridItem['title'] }}</strong></p>
+                                    <p class="px-4 pb-6 text-sm leading-tight">{{ $gridItem['desc'] }}</p>
+                                </div>
                             </li>
                         @endforeach
                     </ul>
                 </div>
             </div>
-        </div>
-        <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6 lg:hidden @if(!empty($blackBag)) darkmode @endif">
-            @php
-                $gridItems = [
-                    [
-                    'title' => 'Sweat, water and beer-proof.',
-                    'desc' => 'Your StickBag is made from waxed canvas – rugged cotton soaked in wax for extra strength and water resistance.',
-                    ],
-                    [
-                    'title' => 'Flexible pockets for all your goodies.',
-                    'desc' => 'Drum keys, tuning gels, a Snickers bar? Flexible pockets let you jam all your goodies inside without losing its shape. ',
-                    ],
-                    [
-                    'title' => 'Zippers as tough as you are.',
-                    'desc' => 'Top-quality reinforced zippers make for a long-lasting stick bag – even when it’s jammed to the teeth with sticks, brushes, and mallets.',
-                    ],
-                    [
-                    'title' => 'One in the chamber.',
-                    'desc' => 'An easy-access sleeve lets your “rescue stick” poke just out of your stick bag so you can make that quick grab mid-song. ',
-                    ],
-                    [
-                    'title' => 'Drum keychain (key included!)',
-                    'desc' => 'Finally, a drum key you won’t lose. Your StickBag includes a brushed pewter drum key that has its own little key ring to live inside your bag. ',
-                    ],
-                    [
-                    'title' => 'Premium Metal Tom Hooks',
-                    'desc' => 'No more tying your bag up with string. Your Drumeo StickBag includes sturdy metal loops that easily attach to any tom lugs.',
-                    ],
-                ];
-            @endphp
-            @foreach ($gridItems as $key => $gridItem)
-                @include('_partials.components.question-dropdown', [
-                    'variant' => true,
-                    "title" => $gridItem['title'],
-                    "desc" => $gridItem['desc'],
-                    'open' => $key === 0 ? true : false
-                ])
-            @endforeach
         </div>
     </div>
 </section>
@@ -472,13 +459,13 @@
             @php
                 $slides = [
                  [
+                     'img' => 'marketing/drumeo/shop/stickbag/black-gallery2.jpg',
+                 ],
+                 [
                      'img' => 'marketing/drumeo/shop/stickbag/black-gallery-l1.jpg',
                  ],
                  [
                      'img' => 'marketing/drumeo/shop/stickbag/black-gallery-l2.jpg',
-                 ],
-                 [
-                     'img' => 'marketing/drumeo/shop/stickbag/black-gallery2.jpg',
                  ],
                  [
                      'img' => 'marketing/drumeo/shop/stickbag/black-gallery-r1.jpg',
@@ -492,13 +479,13 @@
             @php
                 $slides = [
                  [
+                     'img' => 'marketing/drumeo/shop/stickbag/gallery2.jpg',
+                 ],
+                 [
                      'img' => 'marketing/drumeo/shop/stickbag/gallery-l1.jpg',
                  ],
                  [
                      'img' => 'marketing/drumeo/shop/stickbag/gallery-l2.jpg',
-                 ],
-                 [
-                     'img' => 'marketing/drumeo/shop/stickbag/gallery2.jpg',
                  ],
                  [
                      'img' => 'marketing/drumeo/shop/stickbag/gallery-r1.jpg',
