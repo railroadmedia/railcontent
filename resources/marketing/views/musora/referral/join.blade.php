@@ -1,9 +1,9 @@
 @php
     $cardImages = [
-        'drumeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/drumeo-free.png',
-        'pianote' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/pianote-free.png',
-        'singeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/singeo-free.png',
-        'guitareo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/guitareo-free.png',
+        'drumeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/drumeo-30-day-free-trial.png',
+        'pianote' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/pianote-30-day-free-trial.png',
+        'singeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/singeo-30-day-free-trial.png',
+        'guitareo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/guitareo-30-day-free-trial.png',
     ];
 
     $instruments = [

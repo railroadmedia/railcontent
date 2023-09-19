@@ -49,10 +49,10 @@
     $containerClass = $canRefer ? '' : 'tw-justify-center';
 
     $cardImages = [
-        'drumeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/30-day-guest-pass.png',
-        'pianote' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/pianote-guest-pass.png',
-        'singeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/singeo-guest-pass.png',
-        'guitareo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/guitareo-guest-pass.png',
+        'drumeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/drumeo-30-day-free-trial.png',
+        'pianote' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/pianote-30-day-free-trial.png',
+        'singeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/singeo-30-day-free-trial.png',
+        'guitareo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/guitareo-30-day-free-trial.png',
     ];
 
     $cardImage = $cardImages[$brand];
