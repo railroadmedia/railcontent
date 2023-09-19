@@ -33,7 +33,6 @@
     const selectedOption = ref({});
 
     const clickColumnItem = throttle((category, item) => {
-        console.log('filtering')
          let newSelection = {...props.selectedFilters};
 
          if (newSelection[category]){
