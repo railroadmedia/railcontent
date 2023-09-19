@@ -571,3 +571,20 @@ We have 3 redis clusters in our Laravel Vapor infrastructure:
 2. Run our cli helper commend to connect to a k8 pod: `kx` -> choose 2 (any staging pod will work)
 3. Connect to redis:  
 `redis-cli -h musora-staging.l3iqij.0001.use2.cache.amazonaws.com`  
+
+# Musora Center For Staging/Testing/Local
+
+Musora center is set up inside the MWP for staging and local usage. **It does not work on production yet.**  
+The production setup still uses kubernetes and the 'musora' repository.  
+
+Local URL: [https://dev.musora.com:8443/musora-center/](https://dev.musora.com:8443/musora-center/)  
+Any Staging URL: [https://web-staging-one.musora.com/musora-center/](https://web-staging-one.musora.com/musora-center/)  
+
+## How To Re-Compile MWP Musora Center Assets And Javascript
+
+1. From inside our manager container, navigate to /app/musora-web-platform/app/Modules/MusoraCenter/frontend 
+2. `cd /app/musora-web-platform/app/Modules/MusoraCenter/frontend`
+3. Run: `npm run build`
+4. Publish the new assets to the MWP public folder: `r mwp artisan vendor:publish`
+5. Choose the `App\Modules\MusoraCenter\Providers\MusoraCenterServiceProvider` line to publish
+6. Commit all files changes and deploy.
