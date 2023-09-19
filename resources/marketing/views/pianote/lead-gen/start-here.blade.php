@@ -405,6 +405,16 @@
             >
                 articles
             </a>
+             <a
+                    class="py-1 sm:py-2 flex-grow nav-items"
+                    x-bind:class="nav === 'articles-pianists' && 'selected-nav'"
+                    href="#articles-pianists"
+                    x-on:click="
+                    nav = 'articles-pianists';
+                "
+            >
+                articles for pianists
+            </a>
         </div>
     </section>
     <section class="text-white py-20" id="starthere" style="background: #00101D;">
