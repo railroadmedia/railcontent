@@ -98,17 +98,18 @@ class MusoraApiUserProvider implements UserProviderInterface
 //            $isAppleAppSubscriber = $membershipSubscription->getType() == Subscription::TYPE_APPLE_SUBSCRIPTION;
 //            $isGoogleAppSubscriber = $membershipSubscription->getType() == Subscription::TYPE_GOOGLE_SUBSCRIPTION;
 //        }
-
-        $revenuecatSubscriber = $this->revenueCatService->getSubscriber($user['revenuecat_origin_app_user_id']);
-        $entitlements = $revenuecatSubscriber->entitlements;
-        $subscriptions = $revenuecatSubscriber->subscriptions;
-
         $store = false;
-        if (!empty($entitlements)) {
-            foreach ($entitlements as $entitlement) {
-                $productIdentifier = $entitlement->product_identifier;
-                $subscriptionData = $subscriptions->$productIdentifier;
-                $store = $subscriptionData->store;
+        if($user['revenuecat_origin_app_user_id']) {
+            $revenuecatSubscriber = $this->revenueCatService->getSubscriber($user['revenuecat_origin_app_user_id']);
+            $entitlements = $revenuecatSubscriber->entitlements;
+            $subscriptions = $revenuecatSubscriber->subscriptions;
+
+            if (!empty($entitlements)) {
+                foreach ($entitlements as $entitlement) {
+                    $productIdentifier = $entitlement->product_identifier;
+                    $subscriptionData = $subscriptions->$productIdentifier;
+                    $store = $subscriptionData->store;
+                }
             }
         }
         $isAppleAppSubscriber = ($store && $store == 'app_store')?true:false;
