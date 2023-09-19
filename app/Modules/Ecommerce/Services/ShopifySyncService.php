@@ -2,12 +2,11 @@
 
 namespace App\Modules\Ecommerce\Services;
 
-use App\Modules\Content\Services\ContentPermissionsService;
 use App\Modules\Ecommerce\Events\UserProductsUpdated;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
-use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\UserProduct;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 use Signifly\Shopify\REST\Resources\OrderResource;
@@ -16,17 +15,23 @@ use Signifly\Shopify\Shopify;
 class ShopifySyncService
 {
     private Shopify $shopify;
-    private ShopifyCustomerService $shopifyCustomerService;
-    private ContentPermissionsService $permissionService;
+    private RechargeGateway $recharge;
+    private UserProductService $userProductService;
+    private ProductService $productService;
+    private MembershipTimeService $membershipTimeService;
 
     public function __construct(
         Shopify $shopify,
-        ContentPermissionsService $permissionService,
-        ShopifyCustomerService $shopifyCustomerService
+        RechargeGateway $recharge,
+        MembershipTimeService $membershipTimeService,
+        ProductService $productService,
+        UserProductService $userProductService
     ) {
         $this->shopify = $shopify;
-        $this->permissionService = $permissionService;
-        $this->shopifyCustomerService = $shopifyCustomerService;
+        $this->recharge = $recharge;
+        $this->userProductService = $userProductService;
+        $this->productService = $productService;
+        $this->membershipTimeService = $membershipTimeService;
     }
 
     public function syncCustomer($shopifyCustomerId)
@@ -38,10 +43,13 @@ class ShopifySyncService
         if (!$userId) {
             throw new \Exception("User not found for shopify customer id $shopifyCustomerId");
         }
-        $ownedProducts = $this->getOwnedProducts($shopifyCustomerId);
-        $this->syncUserProducts($userId, $ownedProducts);
+        $orders = $this->shopify->getCustomerOrders($shopifyCustomerId, ['status' => 'any']);
+        $membershipTimes = $this->membershipTimeService->syncShopifyOrders($userId, $orders);
+        $membershipExpirationDate = $this->membershipTimeService->getMembershipExpirationDate($membershipTimes);
 
-        $this->syncSubscriptionData($userId, $shopifyCustomerId);
+        $this->syncUserProducts($userId, $orders, $membershipTimes, $membershipExpirationDate);
+
+        $this->syncSubscriptionData($userId, $shopifyCustomerId, $membershipExpirationDate);
     }
 
     /**
@@ -155,12 +163,13 @@ class ShopifySyncService
         foreach ($orders as $order) {
             $createdAt = Carbon::createFromDate($order->created_at);
             foreach ($order->line_items as $lineItem) {
-                $productId = $lineItem['product_id'];
-                if (!($ownedProducts[$productId] ?? null) || $ownedProducts[$productId] < $createdAt) {
-                    $ownedProducts[$productId] = $createdAt;
+                $variantId = $lineItem['variant_id'];
+                if (!($ownedProducts[$variantId] ?? null) || $ownedProducts[$variantId] < $createdAt) {
+                    $ownedProducts[$variantId] = $createdAt;
                 }
             }
         }
+
         return $ownedProducts;
     }
 
@@ -180,17 +189,21 @@ class ShopifySyncService
                 ->get()
                 ->keyBy('product_id');
 
-        foreach ($ownedShopifyProducts as $shopifyProductId => $createdAt) {
-            $product = $products[$shopifyProductId] ?? null;
+        foreach ($ownedProducts as $shopifyVariantId => $createdAt) {
+            $product = $products[$shopifyVariantId] ?? null;
             if (!$product) {
-                Log::error("Shopify Product $shopifyProductId not found");
+                Log::error("Shopify Product $shopifyVariantId not found");
                 continue;
             }
             $userProduct = $existingUserProducts[$product->id] ?? new UserProduct();
             $userProduct->user_id = $userId;
             $userProduct->product_id = $product->id;
             $userProduct->start_date = $createdAt;
-            $userProduct->expiration_date = $product->calculateExpirationDate($createdAt);
+            $expirationDate = ($membershipTimesLatestLookup[$shopifyVariantId]?->tempExpirationDate ??
+                $product->calculateExpirationDate($createdAt))
+                ->clone()
+                ->addDays(config('ecommerce.days_before_access_revoked_after_expiry', 7));
+            $userProduct->expiration_date = $expirationDate;
             $userProduct->quantity = 1;
             $userProduct->save();
             $userProducts[$userProduct->product_id] = $userProduct;
@@ -208,12 +221,44 @@ class ShopifySyncService
         event(new UserProductsUpdated($userId));
     }
 
-    private function syncSubscriptionData(mixed $userId, $shopifyCustomerId)
+    private function syncSubscriptionData(mixed $userId, $shopifyCustomerId, ?Carbon $membershipExpirationDate)
     {
-        $subscriptions = $this->recharge->getSubscriptions($shopifyCustomerId);
+        $rechargeCustomerId = 123016577; //TODO: need to get this somehow
+        $subscriptions = $this->recharge->getSubscriptions($rechargeCustomerId);
+        $shopifyProductIds = $subscriptions->pluck('external_variant_id.ecommerce')->toArray();
+        $productLookup = $this->productService->getProductsByShopifyIdsQuery($shopifyProductIds)
+            ->keyBy('shopify_id');
+
+        $membershipSubscriptions = $subscriptions->filter(function ($subscription) use ($productLookup) {
+            $product = $productLookup[$subscription->external_variant_id->ecommerce] ?? null;
+            if (!$product) {
+                Log::error("Product not found for recharge subscription $subscription->id");
+                return false;
+            }
+            return $product->isMembershipProduct() && $subscription->status == 'active';
+        });
+
+        $userProducts = $this->userProductService->getUserProductsQuery($userId)->with('product')->get();
+        $isLifetimeMember = $userProducts->contains(function ($userProduct) {
+            /** @var UserProduct $userProduct */
+            return $userProduct->isValidLifeTime();
+        });
 
 
+        if ($isLifetimeMember) {
+            foreach ($membershipSubscriptions as $membershipSubscription) {
+                $this->recharge->cancelSubscription($membershipSubscription, 'Lifetime Member');
+            }
+        } elseif ($membershipSubscriptions->count() > 1) {
+            $mostRecentSubscription = $subscriptions->sortByDesc('created_at')->first();
+
+            foreach ($membershipSubscriptions as $membershipSubscription) {
+                if ($membershipSubscription->id != $mostRecentSubscription->id) {
+                    $this->recharge->cancelSubscription($membershipSubscription, 'Duplicate Subscription');
+                }
+            }
+
+            $this->recharge->updateSubscriptionNextChargeDate($mostRecentSubscription, $membershipExpirationDate);
+        }
     }
-
-
 }

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class Product
@@ -122,7 +123,12 @@ class Product extends Model
 
     public function isMembershipProduct(): bool
     {
-        return in_array($this->digital_access_type, Product::MEMBERSHIP_DIGITAL_ACCESS_TYPES);
+        return in_array($this->getDigitalAccessTypeAsEnum(), Product::MEMBERSHIP_DIGITAL_ACCESS_TYPES);
+    }
+
+    public function getDigitalAccessTypeAsEnum(): ?DigitalAccessType
+    {
+        return DigitalAccessType::tryFrom($this->digital_access_type);
     }
 
     public function getDigitalAccessPermissionNames(): array
@@ -136,15 +142,55 @@ class Product extends Model
         );
     }
 
-    public function calculateExpirationDate(Carbon $createdAt)
+    public function calculateExpirationDate(Carbon $startedAt)
     {
         if ($this->digital_access_time_type == Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME) {
             return Carbon::maxValue();
         }
-        $interval = CarbonInterval::make(
-            $this->digital_access_time_interval_length . ' ' . $this->digital_access_time_interval_type
-        );
+        $days = $this->getMembershipTimeDays();
+        $months = $this->getMembershipTimeMonths();
 
-        return $createdAt->clone()->add($interval);
+        return $startedAt->clone()->addDays($days)->addMonths($months);
+    }
+
+    public function getMembershipTimeDays(): ?int
+    {
+        switch ($this->digital_access_time_interval_type) {
+            case 'days':
+                return $this->digital_access_time_interval_length ?? 0;
+            case 'month':
+            case 'year':
+            case '':
+                return 0;
+        }
+        Log::error(
+            "Not Implemented membership time interval type: $this->digital_access_time_interval_type",
+            [
+                'product_id' => $this->id,
+                'digital_access_time_interval_type' => $this->digital_access_time_interval_type,
+            ]
+        );
+        return null;
+    }
+
+    public function getMembershipTimeMonths(): ?int
+    {
+        switch ($this->digital_access_time_interval_type) {
+            case 'days':
+            case '':
+                return 0;
+            case 'month':
+                return $this->digital_access_time_interval_length;
+            case 'year':
+                return 12 * $this->digital_access_time_interval_length;
+        }
+        Log::error(
+            "Not Implemented membership time interval type: $this->digital_access_time_interval_type",
+            [
+                'product_id' => $this->id,
+                'digital_access_time_interval_type' => $this->digital_access_time_interval_type,
+            ]
+        );
+        return null;
     }
 }

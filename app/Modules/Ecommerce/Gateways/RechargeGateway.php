@@ -2,6 +2,8 @@
 
 namespace App\Modules\Ecommerce\Gateways;
 
+use Carbon\Carbon;
+
 class RechargeGateway
 {
     private $access_token = '';
@@ -215,6 +217,28 @@ class RechargeGateway
 
     public function getSubscriptions($shopifyCustomerId)
     {
-        return $this->call('GET', '/subscriptions', ['customer_id' => $shopifyCustomerId]);
+        return collect(
+            $this->call('GET', '/subscriptions', [
+                'customer_id' => $shopifyCustomerId,
+                'limit' => 250
+            ])->subscriptions
+        );
+    }
+
+    public function cancelSubscription($subscription, $cancelReason, $cancelReasonComments = '', $sendEmail = true): void
+    {
+        $this->call('POST', "/subscriptions/$subscription->id/cancel", [
+            'cancellation_reason' => $cancelReason,
+            'cancellation_reason_comments' => $cancelReasonComments,
+        ]);
+    }
+
+    public function updateSubscriptionNextChargeDate($subscription, Carbon $nextChargeDate): void
+    {
+        $this->call(
+            'POST',
+            "/subscriptions/$subscription->id/set_next_charge_date",
+            ['date' => $nextChargeDate->isoFormat('YYYY-MM-DD')]
+        );
     }
 }
