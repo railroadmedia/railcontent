@@ -701,7 +701,7 @@
         <div class="max-w-xl md:max-w-5xl mx-auto px-4 pt-16" id="articles">
             <h3 class="font-extrabold mb-2">Articles</h3>
             <p class="mb-4">
-                Insights into piano learning, benefits, and challenges.
+                Topics of interest for piano enthusiasts everywhere.
             </p>
             <div class="flex flex-col md:flex-row md:gap-4">
                 <a href="/blog/how-long-does-it-take-to-learn-piano-survey/" class="flex-1 mb-10 md:mb-0">
@@ -747,60 +747,6 @@
                     </h5>
                     <p>
                         The piano is one of the best instruments for beginners...and one of the hardest for musicians to master.
-                    </p>
-                </a>
-            </div>
-        </div>
-
-        <div class="max-w-xl md:max-w-5xl mx-auto px-4 pt-16" id="articles-pianists">
-            <h3 class="font-extrabold mb-2">Articles for Pianists</h3>
-            <p class="mb-4">
-                Topics of interest for piano enthusiasts everywhere.
-            </p>
-            <div class="flex flex-col md:flex-row md:gap-4">
-                <a href="/blog/history-of-the-piano/" class="flex-1 mb-10 md:mb-0">
-                    <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:good/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/01/04154216/2023-01-What-Is-Musicianship-768x432.jpg" alt="piano evolutiong">
-                        <i class="fas fa-arrow-circle-right arrows"></i>
-                    </div>
-                    <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
-                        CHARMAINE LI / ARTICLES
-                    </p>
-                    <h5 class="font-bold mb-2 leading-6">
-                        What Is Musicianship?
-                    </h5>
-                    <p>
-                        Being a piano player is more than playing the right notes at the right time. Learn how to develop your musicianship.
-                    </p>
-                </a>
-                <a href="/blog/hardest-piano-song/" class="flex-1 mb-10 md:mb-0">
-                    <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:good/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2022/10/06100459/2022-10-Legendary-Pieces-768x432.jpg" alt="top 10 hardest piano songs">
-                        <i class="fas fa-arrow-circle-right arrows"></i>
-                    </div>
-                    <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
-                        CHARMAINE LI / ARTICLES
-                    </p>
-                    <h5 class="font-bold mb-2 leading-6">
-                        40+ Legendary Classical Piano Songs By Difficulty
-                    </h5>
-                    <p>
-                        Explore the stories behind 40+ famous classical piano songs and get links to sheet music and tutorials to help you start playing.
-                    </p>
-                </a>
-                <a href="/blog/the-many-styles-of-piano-playing-styles-genres/" class="flex-1">
-                    <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:good/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2022/09/14114445/HowPianosWork-02-768x432.jpg" alt="piano styles">
-                        <i class="fas fa-arrow-circle-right arrows"></i>
-                    </div>
-                    <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
-                        CHARMAINE LI / Articles
-                    </p>
-                    <h5 class="font-bold mb-2 leading-6">
-                        How Pianos Work
-                    </h5>
-                    <p>
-                        How does a piano work? Take a peek under the lid for a fascinating tour of the piano's intricate system of hammers and strings.
                     </p>
                 </a>
             </div>
