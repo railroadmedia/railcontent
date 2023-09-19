@@ -98,7 +98,7 @@
                             </div>
                         </div>
                         <div class="inline-block">
-                            <a href="{{ get_legacy_brand_base_url($brand) }}/choose-your-trial-month?referralCode={{ $referralCode }}" class="btn-primary btn-small bg-{{ $brand }} py-5 px-20 mr-2 text-base">1 MONTH FOR FREE</a>
+                            <a href="#customize-anchor" class="btn-primary btn-small bg-{{ $brand }} py-5 px-20 mr-2 text-base">1 MONTH FOR FREE</a>
                             <div class="flex flex-wrap items-center justify-center ">
                                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                                     <i class="align-middle text-base fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
@@ -124,6 +124,24 @@
             @endif
         </div>
     </section>
+
+    <div id="customize-anchor" class="anchor anchor-slide"></div>
+    @include('musora.sales.components.card-selection-section', [
+        "whiteBg" => true,
+        "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
+        "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
+        "songs" => "Thousands of popular songs.",
+        "firstPoint" => "Learn piano, guitar, drums, & singing.",
+        "thirdPoint" => "Unlimited personal support",
+        "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",
+        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[musora-monthly-recurring-7-day-trial-membership]=1&locked=true",
+        "annualLink" => "/ecommerce/add-to-cart?products[musora-base-annual-recurring-7-day-trial-membership]=1&locked=true",
+        "monthlyLink" => "/ecommerce/add-to-cart?products[musora-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
+    ])
+
+    @include('musora.sales.components.trial-explanation', [
+        'instrument' => 'musical',
+    ])
 
 {{--    <section class="bg-[#F3B13E] py-9">--}}
 {{--        <div class="text-center px-4 sm:px-0">--}}
