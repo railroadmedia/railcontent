@@ -20,7 +20,7 @@ trait SavesShopifyIdOnAddresses
      * @param string $firstName
      * @param string $lastName
      * @param string $address1
-     * @param string $address2
+     * @param string|null $address2
      * @param string $city
      * @param string $province
      * @param string $provinceCode
@@ -31,7 +31,7 @@ trait SavesShopifyIdOnAddresses
      */
     protected function findAddressesWithMatchingData(?int $userId, ?Collection $customers,
                                                      string $firstName, string $lastName, string $address1,
-                                                     string $address2, string $city, string $province, string $provinceCode,
+                                                     ?string $address2, string $city, string $province, string $provinceCode,
                                                      string $zip, string $country, string $countryCode): Collection
     {
         // one or the other must be set
@@ -44,7 +44,7 @@ trait SavesShopifyIdOnAddresses
             strtoupper($firstName)
                     . strtoupper($lastName)
                     . strtoupper($address1)
-                    . strtoupper($address2)
+                    . strtoupper($address2 ?? "")
                     . strtoupper($city)
                     . strtoupper($province)
                     . strtoupper($zip)
@@ -55,7 +55,7 @@ trait SavesShopifyIdOnAddresses
             strtoupper($firstName)
             . strtoupper($lastName)
             . strtoupper($address1)
-            . strtoupper($address2)
+            . strtoupper($address2 ?? "")
             . strtoupper($city)
             . strtoupper($provinceCode)
             . strtoupper($zip)
@@ -66,7 +66,7 @@ trait SavesShopifyIdOnAddresses
             strtoupper($firstName)
             . strtoupper($lastName)
             . strtoupper($address1)
-            . strtoupper($address2)
+            . strtoupper($address2 ?? "")
             . strtoupper($city)
             . strtoupper($province)
             . strtoupper($zip)
@@ -77,7 +77,7 @@ trait SavesShopifyIdOnAddresses
             strtoupper($firstName)
             . strtoupper($lastName)
             . strtoupper($address1)
-            . strtoupper($address2)
+            . strtoupper($address2 ?? "")
             . strtoupper($city)
             . strtoupper($provinceCode)
             . strtoupper($zip)
@@ -139,7 +139,7 @@ trait SavesShopifyIdOnAddresses
             strtoupper($address->getFirstName())
                 . strtoupper($address->getLastName())
                 . strtoupper($address->getStreetLine1())
-                . strtoupper($address->getStreetLine2())
+                . strtoupper($address->getStreetLine2() ?? "")
                 . strtoupper($address->getCity())
                 . strtoupper($address->getRegion())
                 . strtoupper($address->getZip())
