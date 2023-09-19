@@ -21,7 +21,10 @@
             </div>
         </div>
         {{--    <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to bottom, transparent, rgba(0,79,153,0.6));"></div>--}}
-        <img class="object-cover w-full relative z-0" style="height: 600px;" src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/header-image.jpg"></img>
+        <img class="object-cover w-full relative z-0 transition-opacity opacity-0"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+                style="height: 600px;" src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/header-image.jpg"></img>
     </header>
     <section class="text-center px-5 sm:px-6 pb-12 sm:pb-14 lg:pb-20 text-white" style="background-color:#09090a;">
         <div class="flex justify-center items-end -mt-10 relative z-10">
@@ -31,13 +34,21 @@
                     <p class="absolute text-black font-black" style="top: 57.5%;left: 41%;font-family: serif;font-size:17px;">{{ $products['stickbag-ltd']->getStockAvailability() }}</p>
                 @endif
 
-                <img class="h-28 mx-3" src="https://www.musora.com/musora-cdn/image/width=370,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/limited-edition-patch.png" alt="learn playing image" fetchpriority="high">
+                <img src="https://www.musora.com/musora-cdn/image/width=370,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/limited-edition-patch.png"
+                        class="h-28 mx-3 transition-opacity opacity-0"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                        alt="learn playing image" fetchpriority="high">
             </div>
             <img class="h-8 sm:h-14" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/arrow.svg" alt="learn playing image" fetchpriority="high">
         </div>
         <div class="container max-w-5xl mx-auto">
             <h1 class="my-5 sm:my-10"><strong><span class="text-gold">You’re invited</span> to the<br> black & gold club. </strong></h1>
-            <img class="mb-5 h-64 inline sm:hidden" src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/jared-profile.png" alt="learn playing image" fetchpriority="high">
+            <img class="mb-5 h-64 inline sm:hidden transition-opacity opacity-0"
+                    src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/jared-profile.png"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                    alt="learn playing image" fetchpriority="high">
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start">
                 <div class="max-w-xl sm:pl-7 lg:pl-8 mx-0 sm:order-1">
                 <p class="leading-normal">
@@ -72,7 +83,8 @@
                         alt="learn playing image"
                 >
                 </div>
-                <img class="h-64 lg:h-80 hidden sm:inline transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=570,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/jared-profile.png" alt="learn playing image">
+                <img class="h-64 lg:h-80 hidden sm:inline  transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')"
+                        src="https://www.musora.com/musora-cdn/image/width=570,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/jared-profile.png" alt="learn playing image">
             </div>
         </div>
     </section>
@@ -104,7 +116,8 @@
             </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to bottom, transparent, rgba(0,79,153,0.6));"></div>
-        <video class="object-cover w-full relative z-0" style="height: 600px;" poster="" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/header-vid.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+        <video class="object-cover w-full relative z-0" style="height: 600px;" type="video/mp4" autoplay loop playsinline muted
+                src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/header-vid.mp4"></video>
     </header>
 @endif
 
@@ -276,7 +289,9 @@
                         @endif
                         @foreach ($slides as $slide)
                             <li class="splide__slide px-2 text-center">
-                                <img class="object-cover h-56 rounded-xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/{{ $slide['img'] }}" alt="drumeo stickbag" />
+                                <img class="object-cover h-56 rounded-xl transition-opacity opacity-0"
+                                        loading="lazy"
+                                        onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/{{ $slide['img'] }}" alt="drumeo stickbag" />
                             </li>
                         @endforeach
                     </ul>
@@ -345,7 +360,9 @@
                 src="https://www.musora.com/musora-cdn/image/width=820,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/thank-you-text.png"
             @endif
         >
-        <img class="my-6 h-56 rounded-xl overflow-hidden inline sm:hidden"
+        <img class="my-6 h-56 rounded-xl overflow-hidden inline sm:hidden transition-opacity opacity-0"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
                 @if(!empty($blackBag))
                     src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-stick-sleeve.jpg"
                 @else
@@ -386,13 +403,22 @@
                 <tr style="background-color:transparent!important;">
                     <td></td>
                     <td class="rounded-t-xl">
-                        <img class="h-12 md:h-20 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/comparison2.png" alt="logo-white">
+                        <img class="h-12 md:h-20 transition-opacity opacity-0"
+                                loading="lazy"
+                                onload="this.classList.remove('opacity-0')"
+                                src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/comparison2.png" alt="logo-white">
                     </td>
                     <td class="rounded-t-xl">
-                        <img class="h-12 md:h-20 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/vic-firth-comparison.png" alt="logo-white">
+                        <img class="h-12 md:h-20 transition-opacity opacity-0"
+                                loading="lazy"
+                                onload="this.classList.remove('opacity-0')"
+                                src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/vic-firth-comparison.png" alt="logo-white">
                     </td>
                     <td class="rounded-t-xl">
-                        <img class="h-12 md:h-20 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/tackle-comparison.png" alt="logo-white">
+                        <img class="h-12 md:h-20 transition-opacity opacity-0"
+                                loading="lazy"
+                                onload="this.classList.remove('opacity-0')"
+                                src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/tackle-comparison.png" alt="logo-white">
                     </td>
                 </tr>
                 <tr>
@@ -487,7 +513,9 @@
             @component('_partials.components.modal', ['name' => 'imageModal'])
                 @slot('content')
                     <div class="relative overflow-y-visible max-w-3xl px-4 md:px-5 lg:px-7 py-5 md:py-7 lg:py-10 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
-                        <img class="logo h-7 md:h-12 lg:h-14" src="{{$slide['img']}}">
+                        <img class="logo h-7 md:h-12 lg:h-14 transition-opacity opacity-0"
+                                loading="lazy"
+                                onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{$slide['img']}}">
                     </div>
                 @endslot
             @endcomponent
@@ -496,19 +524,19 @@
         <div class="flex flex-wrap items-center">
             <div class="w-full sm:w-1/2 sm:order-1">
                 <div class="p-2 w-full"><div data-open="image1" class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl"
-                            style="background-image:url(https://www.musora.com/musora-cdn/image/width=1200,quality=95/{{ $slides[0]['img'] }})"></div></div>
+                            style="background-image:url(https://www.musora.com/musora-cdn/image/width=1000,quality=95/{{ $slides[0]['img'] }})"></div></div>
             </div>
             <div class="w-1/2 sm:w-1/4">
                 <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
-                            style="background-image:url(https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $slides[1]['img'] }})"></div></div>
+                            style="background-image:url(https://www.musora.com/musora-cdn/image/width=480,quality=95/{{ $slides[1]['img'] }})"></div></div>
                 <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
-                            style="background-image:url(https://www.musora.com/musora-cdn/image/width=1200,quality=95/{{ $slides[2]['img'] }})"></div></div>
+                            style="background-image:url(https://www.musora.com/musora-cdn/image/width=480,quality=95/{{ $slides[2]['img'] }})"></div></div>
             </div>
             <div class="w-1/2 sm:w-1/4 sm:order-2">
                 <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
-                            style="background-image:url(https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $slides[3]['img'] }})"></div></div>
+                            style="background-image:url(https://www.musora.com/musora-cdn/image/width=480,quality=95/{{ $slides[3]['img'] }})"></div></div>
                 <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
-                            style="background-image:url(https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $slides[4]['img'] }})"></div></div>
+                            style="background-image:url(https://www.musora.com/musora-cdn/image/width=480,quality=95/{{ $slides[4]['img'] }})"></div></div>
             </div>
         </div>
         <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: Sticks/Brushes are not included.</em></p>
@@ -585,7 +613,7 @@
                                 <img class="h-24 transition-opacity opacity-0"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
-                                        src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/stickbag-option.png"
+                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/stickbag-option.png"
                                         alt="learn playing image"
                                 >
                                 <br>
