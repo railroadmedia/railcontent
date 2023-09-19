@@ -444,10 +444,12 @@
                         Acoustic vs. digital. Upright vs. grand. Learn how to shop for your dream instrument with confidence.
                     </p>
                 </a>
-                <a href="/blog/best-way-to-learn-piano/" class="flex-1">
+                <a href="/blog/best-way-to-learn-piano/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg border-pianote border-2 mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/04/11102931/best-way-to-learn-piano-768x512.jpg" alt="what is the best way to learn piano">
-                        <i class="fas fa-arrow-circle-right arrows"></i>
+                    <div class="relative aspect-16:9 overflow-hidden rounded-xl border-pianote border-2 mb-4 thumbnail lazyload">
+                        <img src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/04/11102931/best-way-to-learn-piano-768x512.jpg" class="transition-opacity duration-500 opacity-1 absolute object-cover h-full w-full" loading="lazy">
+                    </div>
+                    <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1">
                         Pianote / Articles
