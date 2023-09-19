@@ -16,6 +16,7 @@ Route::domain('{musoraDomain}')
         Route::get('contact', [MarketingController::class, 'contact']);
         Route::get('terms-of-service', [MarketingController::class, 'terms']);
         Route::get('privacy-policy', [MarketingController::class, 'privacy']);
+        Route::get('preferences', [MarketingController::class, 'preferences']);
         Route::get('careers', [MarketingController::class, 'careers']);
         Route::get('ambassador', [MarketingController::class, 'ambassador']);
         Route::get('brand', [MarketingController::class, 'brand']);

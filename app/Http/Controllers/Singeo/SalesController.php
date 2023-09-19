@@ -100,6 +100,11 @@ class SalesController extends BaseController
         return view('singeo.lead-gen.subscribed');
     }
 
+    public function preferences()
+    {
+        return view('singeo.lead-gen.preferences');
+    }
+
     public function letssingasong()
     {
         return view('singeo.lead-gen.lets-sing-a-song');
