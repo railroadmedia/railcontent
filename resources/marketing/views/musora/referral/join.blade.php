@@ -128,16 +128,15 @@
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('musora.sales.components.card-selection-section', [
         'theme' => $referralBrand,
+        "month" => true,
         "whiteBg" => true,
         "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
         "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
         "songs" => "Thousands of popular songs.",
         "firstPoint" => "Learn piano, guitar, drums, & singing.",
         "thirdPoint" => "Unlimited personal support",
-        "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",
-        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[musora-monthly-recurring-7-day-trial-membership]=1&locked=true",
-        "annualLink" => "/ecommerce/add-to-cart?products[musora-base-annual-recurring-7-day-trial-membership]=1&locked=true",
-        "monthlyLink" => "/ecommerce/add-to-cart?products[musora-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
+        "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-30-day-trial-membership]=1&locked=true&referralCode=" . $referralCode,
+        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[musora-monthly-recurring-30-day-trial-membership]=1&locked=true&referralCode=" . $referralCode,
     ])
 
     @include('musora.sales.components.trial-explanation', [
