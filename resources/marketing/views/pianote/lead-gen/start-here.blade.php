@@ -387,6 +387,16 @@
             </a>
             <a
                     class="py-1 sm:py-2 flex-grow nav-items"
+                    x-bind:class="nav === 'musicianship' && 'selected-nav'"
+                    href="#musicianship"
+                    x-on:click="
+                    nav = 'musicianship';
+                "
+            >
+                musicianship
+            </a>
+            <a
+                    class="py-1 sm:py-2 flex-grow nav-items"
                     x-bind:class="nav === 'articles' && 'selected-nav'"
                     href="#articles"
                     x-on:click="
@@ -404,20 +414,19 @@
                 The most important beginner lessons, all in one place.
             </p>
             <div class="flex flex-col md:flex-row md:gap-4">
-                <a href="/blog/all-piano-chords/" class="flex-1 mb-10 md:mb-0">
+                <a href="/blog/how-to-play-piano/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg border-pianote border-2 mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://img.youtube.com/vi/sG7QDw5CoU8/maxresdefault.jpg" alt="how to play piano">
+                        <img class="rounded-lg border-pianote border-2 mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/quality=95,width=600/https://pianote.s3.us-east-1.amazonaws.com/blog/2021/How%20to%20Play%20Piano%20-%20Ultimate%20Guide/HowToPlayPiano-01.jpg" alt="how to play piano">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1">
-                        Lisa Witt / Chord Theory
+                        CHARMAINE LI / Musicianship
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        How to Play ALL Piano Chords
-                        (Major, Minor, 7ths)
+                       How to Play Piano
                     </h5>
                     <p style="color: #D4D4D4;">
-                        Learn how to play ALL piano chords with a free, downloadable chord chart PDF with complete chord formulas.
+                        Everything you need to get started with piano, from buying your first instrument to mastering the fundamentals.
                     </p>
                 </a>
                 <a href="/blog/how-to-buy-piano/" class="flex-1 mb-10 md:mb-0">
@@ -435,19 +444,19 @@
                         Acoustic vs. digital. Upright vs. grand. Learn how to shop for your dream instrument with confidence.
                     </p>
                 </a>
-                <a href="/blog/learn-piano-online/" class="flex-1">
+                <a href="/blog/best-way-to-learn-piano/" class="flex-1">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg border-pianote border-2 mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://pianote.s3.us-east-1.amazonaws.com/blog/2021/Learn%20Piano%20Online/Learn%20Piano%20Online-02.jpg" alt="how to learn piano">
+                        <img class="rounded-lg border-pianote border-2 mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/04/11102931/best-way-to-learn-piano-768x512.jpg" alt="what is the best way to learn piano">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1">
                         Pianote / Articles
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        How to Learn Piano Online
+                        What’s the Best Way to Learn Piano? (Online, Teachers & More)
                     </h5>
                     <p style="color: #D4D4D4;">
-                        Take advantage of learning whatever you want, wherever you want, whenever you want.
+                        Online. Books. Teachers. What’s the best way to learn piano? Explore your 21st-century options.
                     </p>
                 </a>
             </div>
@@ -509,19 +518,19 @@
                         Channel your inner Freddie Mercury with the iconic and legendary piano-driven rock anthem.
                     </p>
                 </a>
-                <a href="/blog/play-any-song-on-the-piano/" class="flex-1">
+                <a href="/blog/coldplay-the-scientist/" class="flex-1">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://img.youtube.com/vi/pZHKJHprR4Y/maxresdefault.jpg" alt="3 things to play any song">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://img.youtube.com/vi/yD0tj7vQd7s/maxresdefault.jpg" alt="how to play a perfect beginner song">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
-                        Lisa Witt / Song Tutorials
+                        Lisa Witt / Pop/Rock
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        How to Play ANY Pop Song on <br class="hidden lg:inline-block">the Piano
+                       “The Scientist” (Coldplay) Tutorial
                     </h5>
                     <p>
-                        All you need are a few tools and you can make your arrangement as simple or complex as you like.
+                        This Coldplay classic is a perfect beginner song. Learn it step-by-step with Lisa.
                     </p>
                 </a>
             </div>
@@ -547,34 +556,34 @@
                         How to read notes, make sense of music symbols, and learn music faster with sight-reading shortcuts.
                     </p>
                 </a>
-                <a href="/blog/how-to-play-piano-chords/" class="flex-1 mb-10 md:mb-0">
+                <a href="/blog/piano-music-theory-basics/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2022/07/25151755/ChordFormulas-1-768x432.jpg" alt="piano chord formulas">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/05/19082410/Music-Theory-thumbnail-1-768x432.png" alt="music theory basics">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
                         Pianote / THEORY
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        How to Play Piano Chords
+                        Music Theory Basics: What to Learn First
                     </h5>
                     <p>
-                        Chords form the foundation to all Western music. Instantly unlock hundreds of songs by understanding them.
+                        Theory is a lot, we get it! Here are the absolute fundamentals you should learn first.
                     </p>
                 </a>
-                <a href="/blog/how-to-use-the-circle-of-fifths/" class="flex-1">
+                <a href="/blog/piano-scales/" class="flex-1">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2018/08/22095755/Circle-of-Fifths-New-768x432.png" alt="circle of fifths">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/03/19121717/MajorAmp-1-768x432.png" alt="circle of fifths">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
-                        Pianote / THEORY
+                        Pianote / Scales and Keys
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        How to Use the Circle of Fifths
+                        Piano Scales: Types of Scales & How to Apply Them
                     </h5>
                     <p>
-                        The Circle of Fifths is an invaluable tool that helps with understanding key signatures and chord progressions.
+                        The main types of scales, how they work, and why it’s smart to practice them.
                     </p>
                 </a>
             </div>
@@ -615,9 +624,33 @@
                         Playing hands together is one of the toughest skills for beginners to master. Here’s a 5-day plan to improve hand independence.
                     </p>
                 </a>
-                <a href="/blog/piano-practice-routine-for-beginners/" class="flex-1">
+                <a href="/blog/how-piano-pedals-work/" class="flex-1">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://img.youtube.com/vi/yrgO3R8mgGo/maxresdefault.jpg" alt="beginner pianist practice routine">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/quality=96,width=600/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/07/19154235/2023-07-Piano-Pedals-Explained-1920x1080-1.jpg" alt="beginner pianist practice routine">
+                        <i class="fas fa-arrow-circle-right arrows"></i>
+                    </div>
+                    <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
+                        Pianote / TECHNIQUE
+                    </p>
+                    <h5 class="font-bold mb-2 leading-6">
+                        How Piano Pedals Work
+                    </h5>
+                    <p>
+                        How the sustain, sostenuto, and una corda pedals work and how to use them effectively.
+                    </p>
+                </a>
+            </div>
+        </div>
+
+        <div class="max-w-xl md:max-w-5xl mx-auto px-4 pt-16" id="musicianship">
+            <h3 class="font-extrabold mb-2">Musicianship</h3>
+            <p class="mb-4">
+                Musicianship skills include ear training, songwriting, improvisation, playing in groups, and more.
+            </p>
+            <div class="flex flex-col md:flex-row md:gap-4">
+                <a href="/blog/piano-practice-routine-for-beginners/" class="flex-1 mb-10 md:mb-0">
+                    <div class="relative thumbnail-container">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://img.youtube.com/vi/yrgO3R8mgGo/maxresdefault.jpg" alt="piano practice routine for beginners">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
@@ -629,10 +662,95 @@
                     <p>
                         A beginner-friendly routine designed to maximize skill and minimize boredom.
                     </p>
+                    </a>
+                <a href="/blog/how-to-improvise-on-piano/" class="flex-1 mb-10 md:mb-0">
+                    <div class="relative thumbnail-container">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://img.youtube.com/vi/FJ-Y21kBkMk/maxresdefault.jpg" alt="how to improvise on piano">
+                        <i class="fas fa-arrow-circle-right arrows"></i>
+                    </div>
+                    <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
+                        Jesús Molina, Pianote / Improvisation
+                    </p>
+                    <h5 class="font-bold mb-2 leading-6">
+                        How to Improvise on Piano: A Beginner’s Guide
+                    </h5>
+                    <p>
+                        There’s a technique to improvising. Get tips from top piano improviser Jesús Molina.
+                    </p>
+                </a>
+                <a href="/blog/interval-ear-training/" class="flex-1">
+                    <div class="relative thumbnail-container">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://img.youtube.com/vi/U8xQfdKPRXs/maxresdefault.jpg" alt="ultimate guide to interval ear training">
+                        <i class="fas fa-arrow-circle-right arrows"></i>
+                    </div>
+                    <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
+                        Kevin Castro / Ear Training
+                    </p>
+                    <h5 class="font-bold mb-2 leading-6">
+                        Ultimate Guide to Interval Ear Training: How to Play By Ear Using Intervals
+                    </h5>
+                    <p>
+                        How the sustain, sostenuto, and una corda pedals work and how to use them effectively.
+                    </p>
                 </a>
             </div>
         </div>
+
         <div class="max-w-xl md:max-w-5xl mx-auto px-4 pt-16" id="articles">
+            <h3 class="font-extrabold mb-2">Articles</h3>
+            <p class="mb-4">
+                Insights into piano learning, benefits, and challenges.
+            </p>
+            <div class="flex flex-col md:flex-row md:gap-4">
+                <a href="/blog/how-long-does-it-take-to-learn-piano-survey/" class="flex-1 mb-10 md:mb-0">
+                    <div class="relative thumbnail-container">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/quality=95,width=600/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/08/24114556/Blog-Thumbnail-1920x1080-1.jpg" alt="how long does it take to learn piano">
+                        <i class="fas fa-arrow-circle-right arrows"></i>
+                    </div>
+                    <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
+                        CHARMAINE LI / ARTICLES
+                    </p>
+                    <h5 class="font-bold mb-2 leading-6">
+                        How Long Does It Take to Learn Piano? We Asked 1000+ Pianists
+                    </h5>
+                    <p>
+                        It takes 4-5 years of consistent practice on average to get to an intermediate level of piano.
+                    </p>
+                </a>
+                <a href="/blog/benefits-of-learning-piano/" class="flex-1 mb-10 md:mb-0">
+                    <div class="relative thumbnail-container">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2022/05/18091546/2023-08-Piano-Is-Good-For-You-1920x1080-1-768x432.jpg" alt="benefits of learning piano">
+                        <i class="fas fa-arrow-circle-right arrows"></i>
+                    </div>
+                    <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
+                        CHARMAINE LI / ARTICLES
+                    </p>
+                    <h5 class="font-bold mb-2 leading-6">
+                        14 Benefits of Playing Piano
+                    </h5>
+                    <p>
+                        Piano is good for you! It can improve mood, slow cognitive decline, and it's the perfect mindfulness exercise.
+                    </p>
+                </a>
+                <a href="/blog/is-piano-hard-to-learn/" class="flex-1">
+                    <div class="relative thumbnail-container">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/05/12081100/Is-Piano-Hard-1400x788-1-768x432.jpg" alt="is piano hard to learn">
+                        <i class="fas fa-arrow-circle-right arrows"></i>
+                    </div>
+                    <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
+                        CHARMAINE LI / Articles
+                    </p>
+                    <h5 class="font-bold mb-2 leading-6">
+                        Is Piano Hard to Learn? Tips for Beginners
+                    </h5>
+                    <p>
+                        The piano is one of the best instruments for beginners...and one of the hardest for musicians to master.
+                    </p>
+                </a>
+            </div>
+        </div>
+
+        <div class="max-w-xl md:max-w-5xl mx-auto px-4 pt-16" id="articles-pianists">
             <h3 class="font-extrabold mb-2">Articles for Pianists</h3>
             <p class="mb-4">
                 Topics of interest for piano enthusiasts everywhere.
