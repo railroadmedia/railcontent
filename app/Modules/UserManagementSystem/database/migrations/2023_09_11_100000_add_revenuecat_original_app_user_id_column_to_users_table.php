@@ -16,6 +16,11 @@ class AddRevenuecatOriginalAppUserIdColumnToUsersTable extends Migration
         Schema::table('usora_users', function (Blueprint $table) {
             $table->string('revenuecat_origin_app_user_id')->after('is_lifetime_member')->nullable()->index();
         });
+
+        \DB::statement("update usora_users SET revenuecat_origin_app_user_id = id where id in ( SELECT user_id FROM `ecommerce_subscriptions`
+where type in ('apple_subscription','google_subscriptions')
+ORDER BY `ecommerce_subscriptions`.`id` DESC);");
+
     }
 
     /**

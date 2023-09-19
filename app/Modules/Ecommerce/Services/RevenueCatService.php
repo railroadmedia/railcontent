@@ -141,7 +141,6 @@ class RevenueCatService
             User::query()
                 ->where('email', $value)
                 ->orWhere('revenuecat_origin_app_user_id', $appUserId)
-                ->orWhere('id', $appUserId)
                 ->first();
         if (!$user && $createIfNotExists) {
             $parts = explode('@', $value);
