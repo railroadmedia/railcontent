@@ -19,20 +19,20 @@ trait SavesShopifyIdOnAddresses
      * @param Collection<Customer>|null $customers
      * @param string $firstName
      * @param string $lastName
-     * @param string $address1
+     * @param string|null $address1
      * @param string|null $address2
-     * @param string $city
-     * @param string $province
-     * @param string $provinceCode
-     * @param string $zip
-     * @param string $country
-     * @param string $countryCode
+     * @param string|null $city
+     * @param string|null $province
+     * @param string|null $provinceCode
+     * @param string|null $zip
+     * @param string|null $country
+     * @param string|null $countryCode
      * @return Collection
      */
     protected function findAddressesWithMatchingData(?int $userId, ?Collection $customers,
-                                                     string $firstName, string $lastName, string $address1,
-                                                     ?string $address2, string $city, string $province, string $provinceCode,
-                                                     string $zip, string $country, string $countryCode): Collection
+                                                     string $firstName, string $lastName, ?string $address1,
+                                                     ?string $address2, ?string $city, ?string $province, ?string $provinceCode,
+                                                     ?string $zip, ?string $country, ?string $countryCode): Collection
     {
         // one or the other must be set
         assert(!is_null($userId) || (!is_null($customers) && $customers->isNotEmpty()));
@@ -43,45 +43,45 @@ trait SavesShopifyIdOnAddresses
         $checkKeyNamedProvinceAndCountry = preg_replace('/\s+/', '',
             strtoupper($firstName)
                     . strtoupper($lastName)
-                    . strtoupper($address1)
+                    . strtoupper($address1 ?? "")
                     . strtoupper($address2 ?? "")
-                    . strtoupper($city)
-                    . strtoupper($province)
-                    . strtoupper($zip)
-                    . strtoupper($country)
+                    . strtoupper($city ?? "")
+                    . strtoupper($province ?? "")
+                    . strtoupper($zip ?? "")
+                    . strtoupper($country ?? "")
                 );
 
         $checkKeyProvinceCodeAndCountryName = preg_replace('/\s+/', '',
             strtoupper($firstName)
             . strtoupper($lastName)
-            . strtoupper($address1)
+            . strtoupper($address1 ?? "")
             . strtoupper($address2 ?? "")
-            . strtoupper($city)
-            . strtoupper($provinceCode)
-            . strtoupper($zip)
-            . strtoupper($country)
+            . strtoupper($city ?? "")
+            . strtoupper($provinceCode ?? "")
+            . strtoupper($zip ?? "")
+            . strtoupper($country ?? "")
         );
 
         $checkKeyProvinceNameAndCountryCode = preg_replace('/\s+/', '',
             strtoupper($firstName)
             . strtoupper($lastName)
-            . strtoupper($address1)
+            . strtoupper($address1 ?? "")
             . strtoupper($address2 ?? "")
-            . strtoupper($city)
-            . strtoupper($province)
-            . strtoupper($zip)
-            . strtoupper($countryCode)
+            . strtoupper($city ?? "")
+            . strtoupper($province ?? "")
+            . strtoupper($zip ?? "")
+            . strtoupper($countryCode ?? "")
         );
 
         $checkKeyProvinceAndCountryCode = preg_replace('/\s+/', '',
             strtoupper($firstName)
             . strtoupper($lastName)
-            . strtoupper($address1)
+            . strtoupper($address1 ?? "")
             . strtoupper($address2 ?? "")
-            . strtoupper($city)
-            . strtoupper($provinceCode)
-            . strtoupper($zip)
-            . strtoupper($countryCode)
+            . strtoupper($city ?? "")
+            . strtoupper($provinceCode ?? "")
+            . strtoupper($zip ?? "")
+            . strtoupper($countryCode ?? "")
         );
 
         $checkKeys = collect([$checkKeyNamedProvinceAndCountry, $checkKeyProvinceCodeAndCountryName, $checkKeyProvinceNameAndCountryCode, $checkKeyProvinceAndCountryCode]);
@@ -138,12 +138,12 @@ trait SavesShopifyIdOnAddresses
         return preg_replace('/\s+/', '',
             strtoupper($address->getFirstName())
                 . strtoupper($address->getLastName())
-                . strtoupper($address->getStreetLine1())
+                . strtoupper($address->getStreetLine1() ?? "")
                 . strtoupper($address->getStreetLine2() ?? "")
-                . strtoupper($address->getCity())
-                . strtoupper($address->getRegion())
-                . strtoupper($address->getZip())
-                . strtoupper($address->getCountry())
+                . strtoupper($address->getCity() ?? "")
+                . strtoupper($address->getRegion() ?? "")
+                . strtoupper($address->getZip() ?? "")
+                . strtoupper($address->getCountry() ?? "")
             );
     }
 
