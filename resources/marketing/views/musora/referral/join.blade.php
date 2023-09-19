@@ -127,6 +127,7 @@
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('musora.sales.components.card-selection-section', [
+        'theme' => $referralBrand,
         "whiteBg" => true,
         "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
         "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
@@ -140,6 +141,7 @@
     ])
 
     @include('musora.sales.components.trial-explanation', [
+        'theme' => $referralBrand,
         'instrument' => 'musical',
     ])
 
