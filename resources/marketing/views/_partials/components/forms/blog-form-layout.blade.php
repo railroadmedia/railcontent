@@ -13,19 +13,7 @@
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
-        body {
-            height:100vh;
-            position:relative;
-        }
-        h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
-            font-weight:900
-        }
-
         h5 {
-            font-weight:400;
-            line-height:1em;
-            font-family:"Open Sans", sans-serif;
-            margin:0 auto;
             font-size:15px
         }
 
@@ -120,15 +108,11 @@
     {!! \App\Analytics\Tracker::headBottom() !!}
 </head>
 
-<body
-    @if(!empty($darkBg))
-        class="bg-musora-black text-white"
-    @endif
->
+<body class="h-screen @if(!empty($darkBg)) bg-musora-black text-white  @endif ">
 {!! \App\Analytics\Tracker::bodyTop() !!}
 
-    <section class="text-center absolute top-1/2 left-1/2 w-full px-3 sm:px-4" style="transform:translate(-50%,-50%)">
-        <div class="max-w-4xl mx-auto">
+    <section class="text-center flex items-center h-full w-full px-3 sm:px-4">
+        <div class="w-full max-w-4xl mx-auto">
             @yield('subtitle')
             @yield('form')
         </div>
