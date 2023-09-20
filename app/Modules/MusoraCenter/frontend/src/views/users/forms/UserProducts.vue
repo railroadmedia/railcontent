@@ -51,47 +51,47 @@
                         {{ getActiveUntil(item.attributes.expiration_date) }}
                     </td>
 
-                    <td class="text-center">
-                        <v-tooltip top>
-                            <template v-slot:activator="{ on }">
-                                <v-btn
-                                    fab
-                                    x-small
-                                    raised
-                                    :color="brandColor"
-                                    class="mx-1 white--text"
-                                    v-on="on"
-                                    @click="openEditForm(item.id)"
-                                >
-                                    <v-icon>
-                                        edit
-                                    </v-icon>
-                                </v-btn>
-                            </template>
+<!--                    <td class="text-center">-->
+<!--                        <v-tooltip top>-->
+<!--                            <template v-slot:activator="{ on }">-->
+<!--                                <v-btn-->
+<!--                                    fab-->
+<!--                                    x-small-->
+<!--                                    raised-->
+<!--                                    :color="brandColor"-->
+<!--                                    class="mx-1 white&#45;&#45;text"-->
+<!--                                    v-on="on"-->
+<!--                                    @click="openEditForm(item.id)"-->
+<!--                                >-->
+<!--                                    <v-icon>-->
+<!--                                        edit-->
+<!--                                    </v-icon>-->
+<!--                                </v-btn>-->
+<!--                            </template>-->
 
-                            <span>Edit User Product</span>
-                        </v-tooltip>
+<!--                            <span>Edit User Product</span>-->
+<!--                        </v-tooltip>-->
 
-                        <v-tooltip top>
-                            <template v-slot:activator="{ on }">
-                                <v-btn
-                                    fab
-                                    x-small
-                                    raised
-                                    color="error"
-                                    class="mx-1 white--text"
-                                    v-on="on"
-                                    @click.stop="cancelUserProduct(item.id)"
-                                >
-                                    <v-icon>
-                                        cancel
-                                    </v-icon>
-                                </v-btn>
-                            </template>
+<!--                        <v-tooltip top>-->
+<!--                            <template v-slot:activator="{ on }">-->
+<!--                                <v-btn-->
+<!--                                    fab-->
+<!--                                    x-small-->
+<!--                                    raised-->
+<!--                                    color="error"-->
+<!--                                    class="mx-1 white&#45;&#45;text"-->
+<!--                                    v-on="on"-->
+<!--                                    @click.stop="cancelUserProduct(item.id)"-->
+<!--                                >-->
+<!--                                    <v-icon>-->
+<!--                                        cancel-->
+<!--                                    </v-icon>-->
+<!--                                </v-btn>-->
+<!--                            </template>-->
 
-                            <span>Expire</span>
-                        </v-tooltip>
-                    </td>
+<!--                            <span>Expire</span>-->
+<!--                        </v-tooltip>-->
+<!--                    </td>-->
                 </tr>
             </template>
         </v-data-table>
@@ -318,12 +318,6 @@ export default {
                     align: 'left',
                     sortable: false,
                     width: 190,
-                },
-                {
-                    text: 'Actions',
-                    align: 'center',
-                    sortable: false,
-                    width: 120,
                 },
             ],
             editingUserProduct: this.getDefaultUserProduct(),

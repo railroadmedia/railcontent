@@ -93,49 +93,49 @@
                 class="mb-4 text-center px-4 column"
             >
                 <!-- USER SUBSCRIPTIONS -->
-                <user-subscriptions
-                    :user-id="userId"
-                    :user-payment-methods="userPaymentMethods"
-                    :user-payment-methods-included-data="userPaymentMethodsIncludedData"
-                    :user-subscriptions="userSubscriptions"
-                    :included-data="userSubscriptionsIncludedData"
-                ></user-subscriptions>
+<!--                <user-subscriptions-->
+<!--                    :user-id="userId"-->
+<!--                    :user-payment-methods="userPaymentMethods"-->
+<!--                    :user-payment-methods-included-data="userPaymentMethodsIncludedData"-->
+<!--                    :user-subscriptions="userSubscriptions"-->
+<!--                    :included-data="userSubscriptionsIncludedData"-->
+<!--                ></user-subscriptions>-->
 
                 <!-- USER ORDERS -->
-                <user-orders
-                    :user-id="userId"
-                    :this-user="thisUser"
-                    :user-orders="userOrders"
-                    :included-data="userOrdersIncludedData"
-                    :user-addresses="userAddresses"
-                    :user-payment-methods="userPaymentMethods"
-                    :user-payment-methods-included-data="userPaymentMethodsIncludedData"
-                    @orderCreated="loadUserData"
-                    @paymentRefunded="loadUserData"
-                ></user-orders>
+<!--                <user-orders-->
+<!--                    :user-id="userId"-->
+<!--                    :this-user="thisUser"-->
+<!--                    :user-orders="userOrders"-->
+<!--                    :included-data="userOrdersIncludedData"-->
+<!--                    :user-addresses="userAddresses"-->
+<!--                    :user-payment-methods="userPaymentMethods"-->
+<!--                    :user-payment-methods-included-data="userPaymentMethodsIncludedData"-->
+<!--                    @orderCreated="loadUserData"-->
+<!--                    @paymentRefunded="loadUserData"-->
+<!--                ></user-orders>-->
 
                 <!-- USER PAYMENT METHODS -->
-                <user-payment-methods
-                    :user-id="userId"
-                    :user-email="thisUser.email"
-                    :user-payment-methods="userPaymentMethods"
-                    :included-data="userPaymentMethodsIncludedData"
-                    :user-addresses="userAddresses.filter(address =>
-                        address.attributes.type === 'billing')"
-                ></user-payment-methods>
+<!--                <user-payment-methods-->
+<!--                    :user-id="userId"-->
+<!--                    :user-email="thisUser.email"-->
+<!--                    :user-payment-methods="userPaymentMethods"-->
+<!--                    :included-data="userPaymentMethodsIncludedData"-->
+<!--                    :user-addresses="userAddresses.filter(address =>-->
+<!--                        address.attributes.type === 'billing')"-->
+<!--                ></user-payment-methods>-->
 
-                <!-- USER MEMBERSHIP ACTIONS -->
-                <user-membership-actions
-                    :user-id="userId"
-                    :user-membership-actions="userMembershipActions"
-                    :included-data="userMembershipActionsIncludedData"
-                ></user-membership-actions>
+<!--                &lt;!&ndash; USER MEMBERSHIP ACTIONS &ndash;&gt;-->
+<!--                <user-membership-actions-->
+<!--                    :user-id="userId"-->
+<!--                    :user-membership-actions="userMembershipActions"-->
+<!--                    :included-data="userMembershipActionsIncludedData"-->
+<!--                ></user-membership-actions>-->
 
                 <!-- USER ADDRESSES -->
-                <user-addresses
-                    :user-id="userId"
-                    :user-addresses="userAddresses"
-                ></user-addresses>
+<!--                <user-addresses-->
+<!--                    :user-id="userId"-->
+<!--                    :user-addresses="userAddresses"-->
+<!--                ></user-addresses>-->
 
                 <user-access-codes
                     :user-id="userId"

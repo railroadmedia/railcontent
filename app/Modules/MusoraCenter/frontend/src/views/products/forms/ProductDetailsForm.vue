@@ -36,153 +36,153 @@
                     required
                     @change="getPermissionsByBrand()"
                 ></v-select>
-                <v-text-field
-                    v-model="$_product_sku"
-                    label="SKU"
-                    :color="brandColor"
-                    :rules="validationRules.sku"
-                    hint="Marketing/Sales SKU. Must be unique, do not edit this for existing products unless you know what you are doing"
-                    persistent-hint
-                    class="mb-4"
-                    :required="true"
-                ></v-text-field>
+<!--                <v-text-field-->
+<!--                    v-model="$_product_sku"-->
+<!--                    label="SKU"-->
+<!--                    :color="brandColor"-->
+<!--                    :rules="validationRules.sku"-->
+<!--                    hint="Marketing/Sales SKU. Must be unique, do not edit this for existing products unless you know what you are doing"-->
+<!--                    persistent-hint-->
+<!--                    class="mb-4"-->
+<!--                    :required="true"-->
+<!--                ></v-text-field>-->
 
-                <v-text-field
-                    v-model="$_fulfillment_sku"
-                    label="Inventory/Fulfillment Name"
-                    :color="brandColor"
-                    :rules="validationRules.fulfillment_sku"
-                    hint="This is used by out shipping company to figure out which products are which."
-                    persistent-hint
-                    class="mb-4"
-                    :required="false"
-                ></v-text-field>
+<!--                <v-text-field-->
+<!--                    v-model="$_fulfillment_sku"-->
+<!--                    label="Inventory/Fulfillment Name"-->
+<!--                    :color="brandColor"-->
+<!--                    :rules="validationRules.fulfillment_sku"-->
+<!--                    hint="This is used by out shipping company to figure out which products are which."-->
+<!--                    persistent-hint-->
+<!--                    class="mb-4"-->
+<!--                    :required="false"-->
+<!--                ></v-text-field>-->
 
-                <v-text-field
-                    v-model="$_inventory_control_sku"
-                    label="Inventory Control SKU"
-                    :color="brandColor"
-                    :rules="validationRules.inventory_control_sku"
-                    hint="Used by accounting."
-                    persistent-hint
-                    class="mb-4"
-                    :required="false"
-                ></v-text-field>
+<!--                <v-text-field-->
+<!--                    v-model="$_inventory_control_sku"-->
+<!--                    label="Inventory Control SKU"-->
+<!--                    :color="brandColor"-->
+<!--                    :rules="validationRules.inventory_control_sku"-->
+<!--                    hint="Used by accounting."-->
+<!--                    persistent-hint-->
+<!--                    class="mb-4"-->
+<!--                    :required="false"-->
+<!--                ></v-text-field>-->
 
-                <v-text-field
-                    v-model="$_product_price"
-                    label="Price"
-                    :color="brandColor"
-                    :rules="validationRules.price"
-                    :required="true"
-                ></v-text-field>
+<!--                <v-text-field-->
+<!--                    v-model="$_product_price"-->
+<!--                    label="Price"-->
+<!--                    :color="brandColor"-->
+<!--                    :rules="validationRules.price"-->
+<!--                    :required="true"-->
+<!--                ></v-text-field>-->
 
-                <v-custom-file-input
-                    v-model="$_product_thumbnail"
-                    label="Thumbnail Image"
-                    input-key="Thumbnail Image"
-                    :color="brandColor"
-                    :base-file-name="thisProduct.id + '-product-thumb-'"
-                    upload-endpoint="/railcontent/remote"
-                    :required="true"
-                ></v-custom-file-input>
+<!--                <v-custom-file-input-->
+<!--                    v-model="$_product_thumbnail"-->
+<!--                    label="Thumbnail Image"-->
+<!--                    input-key="Thumbnail Image"-->
+<!--                    :color="brandColor"-->
+<!--                    :base-file-name="thisProduct.id + '-product-thumb-'"-->
+<!--                    upload-endpoint="/railcontent/remote"-->
+<!--                    :required="true"-->
+<!--                ></v-custom-file-input>-->
 
-                <v-textarea
-                    v-model="$_product_description"
-                    label="Description"
-                    :color="brandColor"
-                    multi-line
-                    no-resize
-                    class="mt-4"
-                ></v-textarea>
+<!--                <v-textarea-->
+<!--                    v-model="$_product_description"-->
+<!--                    label="Description"-->
+<!--                    :color="brandColor"-->
+<!--                    multi-line-->
+<!--                    no-resize-->
+<!--                    class="mt-4"-->
+<!--                ></v-textarea>-->
 
-                <v-select
-                    v-model="$_product_type"
-                    label="Type"
-                    :color="brandColor"
-                    :items="['digital subscription', 'digital one time', 'physical one time']"
-                    :rules="validationRules.type"
-                    required
-                ></v-select>
-                <v-text-field
-                    v-model="$_product_category"
-                    label="Category"
-                    :color="brandColor"
-                    :rules="validationRules.category"
-                    :required="true"
-                ></v-text-field>
+<!--                <v-select-->
+<!--                    v-model="$_product_type"-->
+<!--                    label="Type"-->
+<!--                    :color="brandColor"-->
+<!--                    :items="['digital subscription', 'digital one time', 'physical one time']"-->
+<!--                    :rules="validationRules.type"-->
+<!--                    required-->
+<!--                ></v-select>-->
+<!--                <v-text-field-->
+<!--                    v-model="$_product_category"-->
+<!--                    label="Category"-->
+<!--                    :color="brandColor"-->
+<!--                    :rules="validationRules.category"-->
+<!--                    :required="true"-->
+<!--                ></v-text-field>-->
 
-                <v-text-field
-                    v-model="$_sales_page_url"
-                    label="Sales Page URL"
-                    :color="brandColor"
-                ></v-text-field>
+<!--                <v-text-field-->
+<!--                    v-model="$_sales_page_url"-->
+<!--                    label="Sales Page URL"-->
+<!--                    :color="brandColor"-->
+<!--                ></v-text-field>-->
 
-                <v-switch
-                    v-model="$_is_active"
-                    label="Is Active"
-                    :color="brandColor"
-                ></v-switch>
+<!--                <v-switch-->
+<!--                    v-model="$_is_active"-->
+<!--                    label="Is Active"-->
+<!--                    :color="brandColor"-->
+<!--                ></v-switch>-->
 
-                <v-switch
-                    v-model="$_is_physical"
-                    label="Is Physical"
-                    :color="brandColor"
-                ></v-switch>
+<!--                <v-switch-->
+<!--                    v-model="$_is_physical"-->
+<!--                    label="Is Physical"-->
+<!--                    :color="brandColor"-->
+<!--                ></v-switch>-->
 
-                <v-text-field
-                    v-if="$_is_physical"
-                    v-model="$_product_weight"
-                    label="Weight"
-                    :color="brandColor"
-                    suffix="lbs."
-                    :disabled="!$_is_physical"
-                    class="mb-4"
-                    required
-                ></v-text-field>
+<!--                <v-text-field-->
+<!--                    v-if="$_is_physical"-->
+<!--                    v-model="$_product_weight"-->
+<!--                    label="Weight"-->
+<!--                    :color="brandColor"-->
+<!--                    suffix="lbs."-->
+<!--                    :disabled="!$_is_physical"-->
+<!--                    class="mb-4"-->
+<!--                    required-->
+<!--                ></v-text-field>-->
 
-                <v-divider class="mt-5 mb-5"></v-divider>
+<!--                <v-divider class="mt-5 mb-5"></v-divider>-->
 
-                <v-text-field
-                    v-model="$_public_stock_count"
-                    label="Public Stock Count (for visual marketing purposes, students can see this on sales pages)"
-                    :color="brandColor"
-                    :rules="validationRules.public_stock_count"
-                    :required="true"
-                ></v-text-field>
+<!--                <v-text-field-->
+<!--                    v-model="$_public_stock_count"-->
+<!--                    label="Public Stock Count (for visual marketing purposes, students can see this on sales pages)"-->
+<!--                    :color="brandColor"-->
+<!--                    :rules="validationRules.public_stock_count"-->
+<!--                    :required="true"-->
+<!--                ></v-text-field>-->
 
-                <v-divider class="mt-5 mb-5"></v-divider>
+<!--                <v-divider class="mt-5 mb-5"></v-divider>-->
 
-                <v-label>
-                  Do not edit the 'Stock Count' or 'Min Stock Level'
-                  values unless you know what are you are doing. If you are a marketer
-                  and looking to update the public facing stock number that people see on the sales pages, edit the
-                  "Public Stock Count" value above.
-                </v-label>
+<!--                <v-label>-->
+<!--                  Do not edit the 'Stock Count' or 'Min Stock Level'-->
+<!--                  values unless you know what are you are doing. If you are a marketer-->
+<!--                  and looking to update the public facing stock number that people see on the sales pages, edit the-->
+<!--                  "Public Stock Count" value above.-->
+<!--                </v-label>-->
 
-                <v-switch
-                    v-model="unlockStockCount"
-                    label="Unlock Stock Count Editing (FINANCE TEAM ONLY)"
-                    :color="brandColor"
-                ></v-switch>
+<!--                <v-switch-->
+<!--                    v-model="unlockStockCount"-->
+<!--                    label="Unlock Stock Count Editing (FINANCE TEAM ONLY)"-->
+<!--                    :color="brandColor"-->
+<!--                ></v-switch>-->
 
-                <v-text-field
-                    :disabled="!unlockStockCount"
-                    v-model.number="$_product_stock"
-                    label="Stock Count (MUST LEAVE EMPTY FOR NON-PHYSICAL ITEMS)"
-                    :color="brandColor"
-                ></v-text-field>
+<!--                <v-text-field-->
+<!--                    :disabled="!unlockStockCount"-->
+<!--                    v-model.number="$_product_stock"-->
+<!--                    label="Stock Count (MUST LEAVE EMPTY FOR NON-PHYSICAL ITEMS)"-->
+<!--                    :color="brandColor"-->
+<!--                ></v-text-field>-->
 
-                <v-text-field
-                    :disabled="!unlockStockCount"
-                    v-model="$_min_stock_level"
-                    label="Min Stock Level (product will not be purchasable once stock count reaches this level)"
-                    :color="brandColor"
-                    :rules="validationRules.min_stock_level"
-                    :required="true"
-                ></v-text-field>
+<!--                <v-text-field-->
+<!--                    :disabled="!unlockStockCount"-->
+<!--                    v-model="$_min_stock_level"-->
+<!--                    label="Min Stock Level (product will not be purchasable once stock count reaches this level)"-->
+<!--                    :color="brandColor"-->
+<!--                    :rules="validationRules.min_stock_level"-->
+<!--                    :required="true"-->
+<!--                ></v-text-field>-->
 
-                <v-divider class="mt-5 mb-5"></v-divider>
+<!--                <v-divider class="mt-5 mb-5"></v-divider>-->
 
                 <v-select
                     v-model="$_digital_access_permission_names"
