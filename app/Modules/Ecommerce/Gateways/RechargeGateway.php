@@ -6,6 +6,8 @@ use Carbon\Carbon;
 
 class RechargeGateway
 {
+    private const API_VERSION_2021_11 = '2021-11';
+    private const API_VERSION_2021_01 = '2021-01';
     private $access_token = '';
 
     private $ch;
@@ -16,8 +18,13 @@ class RechargeGateway
     }
 
 
-    public function call($method = 'GET', $url = '/', $data = [], $options = [])
-    {
+    public function call(
+        $method = 'GET',
+        $url = '/',
+        $data = [],
+        $options = [],
+        $apiVersion = self::API_VERSION_2021_11
+    ) {
         // Setup options
         $defaults = [
             'charset' => 'UTF-8',
@@ -56,7 +63,7 @@ class RechargeGateway
         if ($this->access_token) {
             $defaultHeaders[] = 'X-Recharge-Access-Token: ' . $this->access_token;
         }
-        $defaultHeaders[] = 'X-Recharge-Version: 2021-11';
+        $defaultHeaders[] = "X-Recharge-Version: $apiVersion";
         $headers = array_merge($defaultHeaders, $options['headers']);
 
         // Setup URL
@@ -215,18 +222,32 @@ class RechargeGateway
         return $result;
     }
 
+    public function getCustomer($shopifyCustomerId)
+    {
+        return collect(
+            $this->call('GET', '/customers', [
+                'external_customer_id' => $shopifyCustomerId,
+                'limit' => 250
+            ])
+        );
+    }
+
     public function getSubscriptions($shopifyCustomerId)
     {
         return collect(
             $this->call('GET', '/subscriptions', [
-                'customer_id' => $shopifyCustomerId,
+                'shopify_customer_id' => $shopifyCustomerId,
                 'limit' => 250
-            ])->subscriptions
+            ], apiVersion: self::API_VERSION_2021_01)->subscriptions
         );
     }
 
-    public function cancelSubscription($subscription, $cancelReason, $cancelReasonComments = '', $sendEmail = true): void
-    {
+    public function cancelSubscription(
+        $subscription,
+        $cancelReason,
+        $cancelReasonComments = '',
+        $sendEmail = true
+    ): void {
         $this->call('POST', "/subscriptions/$subscription->id/cancel", [
             'cancellation_reason' => $cancelReason,
             'cancellation_reason_comments' => $cancelReasonComments,
