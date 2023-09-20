@@ -19,6 +19,17 @@ trait LogsShopify
     }
 
     /**
+     * Log the given debug message
+     *
+     * @param string $debugMessage
+     * @return void
+     */
+    protected function logDebug(string $debugMessage): void
+    {
+        Log::debug($debugMessage);
+    }
+
+    /**
      * Log the given error message
      *
      * @param string $errorMessage

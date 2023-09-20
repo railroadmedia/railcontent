@@ -76,6 +76,7 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
         $users = User::query()
             ->whereNull("shopify_id")
             ->where("id", ">=", $this->firstUserId)
+            ->orderBy("id")
             ->limit($this->batchSize)
             ->get();
 
@@ -91,6 +92,8 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
 
         // safety check for edge case that all users in this batch were already synced as customers
         if (empty($usersData)) {
+            $this->logInfo(sprintf("%s: All users in this batch were already synced. Skipping this batch.",
+                $this->getClassName()));
             return;
         }
 
