@@ -1,18 +1,18 @@
 <template>
   <div>
-    <div class="tw-flex tw-items-start tw-mb-3 tw-w-full tw-flex-wrap">
+    <div class="tw-flex tw-items-start tw-mb-3 tw-flex-wrap">
 
-      <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mr-auto">
+      <div class="tw-text-[#00101D] dark:tw-text-white lg:tw-flex-1">
         <h1 class="heading tw-py-2 tw-pr-4 xl:tw-pr-0">
           {{ title }}
         </h1>
       </div>
       <!-- Video CTAs -->
-      <div class="tw-flex tw-items-start tw-flex-shrink-0 tw-py-2">
+      <div class="tw-flex tw-items-start tw-py-2 lg:tw-ml-8">
         <!-- Info Button -->
-        <div v-if="showInfoButton" class="flex flex-column resource-button ph-1">
+        <div v-if="showInfoButton" class="flex flex-column resource-button pl-0 lg:pl-2 lg:pr-2">
           <button class="btn stacked" id="toggleInstructorInfo" @click="toggleInfo">
-            <span class="tw-shadow-none tw-text-lg tw-h-auto tw-text-[#3F3F46] dark:tw-text-white" style="padding: 0 8px">
+            <span class="tw-shadow-none tw-text-lg tw-h-auto tw-text-[#3F3F46] dark:tw-text-white tw-pl-0.5 lg:tw-pl-2 tw-pr-2">
               <musora-icon :icon-name="openInfo ? 'info-filled' : 'info'" class="tw-w-6 tw-h-6 tw-mb-1" />
               Info
             </span>
@@ -20,9 +20,9 @@
         </div>
 
         <!-- Like Button -->
-        <div class="flex flex-column resource-button ph-1">
+        <div class="flex flex-column resource-button px-2">
           <button class="btn stacked" @click="likeContent">
-            <span class="tw-shadow-none tw-text-lg tw-h-auto" style="padding: 0 8px"
+            <span class="tw-shadow-none tw-text-lg tw-h-auto tw-px-2"
               :class="hasLiked ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-white'">
               <musora-icon :icon-name="hasLiked ? 'thumb-like-filled' : 'thumb-like'" class="tw-w-6 tw-h-6 tw-mb-1" />
               {{ totalLikes }}
@@ -31,20 +31,19 @@
         </div>
 
         <!-- Share Button -->
-        <div class="flex flex-column resource-button ph-1">
+        <div class="flex flex-column resource-button px-2">
           <button @click="handleOpenModal" class="btn stacked">
-            <span class="tw-shadow-none tw-text-[#3F3F46] dark:tw-text-white tw-text-lg tw-h-auto" style="padding: 0 8px">
+            <span class="tw-shadow-none tw-text-[#3F3F46] dark:tw-text-white tw-text-lg tw-h-auto tw-px-2">
               <musora-icon icon-name="share" class="tw-w-6 tw-h-6 tw-mb-1" />
               Share
             </span>
           </button>
         </div>
 
-        <div v-if="resources.length > 0" class="flex flex-column resource-button ph-1 relative">
+        <div v-if="resources.length > 0" class="flex flex-column resource-button px-2 relative">
           <button class="btn open-resources stacked" @click="resourceDropdown = !resourceDropdown">
-            <span class="tw-shadow-none tw-h-auto"
-              :class="resourceDropdown ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-white tw-text-lg'"
-              style="padding: 0 8px">
+            <span class="tw-shadow-none tw-h-auto tw-px-2"
+              :class="resourceDropdown ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-white tw-text-lg'">
               <musora-icon icon-name="file" class="tw-w-6 tw-h-6 tw-mb-1" />
               Resources
             </span>
@@ -72,9 +71,9 @@
           </transition>
         </div>
 
-        <div class="flex flex-column resource-button ph-1" v-if="showAddToList">
+        <div class="flex flex-column resource-button px-2" v-if="showAddToList">
           <button class="btn stacked" @click="addToList">
-            <span class="tw-shadow-none tw-text-lg tw-text-[#3F3F46] dark:tw-text-white tw-h-auto" style="padding: 0 8px">
+            <span class="tw-shadow-none tw-text-lg tw-text-[#3F3F46] dark:tw-text-white tw-h-auto tw-px-2">
               <musora-icon icon-name="plus" class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all" />
               <span class="hide-xs-only">
                 Add to List
@@ -87,9 +86,9 @@
         </div>
 
         <!-- Completed Button -->
-        <div class="flex flex-column resource-button ph-1" v-if="showCompleteButton">
+        <div class="flex flex-column resource-button px-2" v-if="showCompleteButton">
           <button class="btn stacked" @click="handleCompleteLesson">
-            <span class="tw-shadow-none tw-text-lg tw-text-[#3F3F46] dark:tw-text-white tw-h-auto" style="padding: 0 8px">
+            <span class="tw-shadow-none tw-text-lg tw-text-[#3F3F46] dark:tw-text-white tw-h-auto tw-px-2">
               <musora-icon v-if="completed" icon-name="circle-check-filled"
                 class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all" />
               <musora-icon v-else icon-name="circle-check" class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all" />
