@@ -242,24 +242,9 @@ export default {
                     name: 'users',
                 },
                 {
-                    label: 'Customers',
-                    icon: 'contact_phone',
-                    name: 'customers',
-                },
-                {
                     label: 'Products',
                     icon: 'shopping_cart',
                     name: 'products',
-                },
-                {
-                    label: 'Daily Stats',
-                    icon: 'score',
-                    name: 'daily-stats',
-                },
-                {
-                    label: 'Orders',
-                    icon: 'credit_card',
-                    name: 'orders',
                 },
                 {
                     label: 'Access Codes',
@@ -267,39 +252,9 @@ export default {
                     name: 'access-codes',
                 },
                 {
-                    label: 'Failed Billing',
-                    icon: 'money_off',
-                    name: 'failed-billing',
-                },
-                {
-                    label: 'Discounts',
-                    icon: 'money',
-                    name: 'discounts',
-                },
-                {
-                    label: 'Shipping Fulfillment',
-                    icon: 'local_shipping',
-                    name: 'shipping-fulfillment',
-                },
-                {
                     label: 'Mentors',
                     icon: 'person',
                     name: 'mentors',
-                },
-                {
-                    label: 'Accounting Reporting',
-                    icon: 'assessment',
-                    name: 'accounting-reporting',
-                },
-                {
-                    label: 'Membership Stats',
-                    icon: 'style',
-                    name: 'membership-stats',
-                },
-                {
-                    label: 'Retention Stats',
-                    icon: 'loyalty',
-                    name: 'retention-stats',
                 },
             ],
         };
