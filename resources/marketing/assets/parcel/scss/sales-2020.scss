@@ -143,19 +143,17 @@ img {
     }
 
     &.smaller {
-        padding: 8px 30px;
+        padding: 15px 30px;
         font-size: 16px;
         @include tablet {
             font-size: 18px;
-            padding: 11px 30px;
         }
 
         &.outline {
-            padding: 7px 28px;
+            padding: 12px 28px;
             font-size: 16px;
             @include tablet {
                 font-size: 18px;
-                padding: 9px 28px;
             }
         }
     }

@@ -37,6 +37,11 @@ class LeadGenController extends BaseController
         return view('pianote.lead-gen.subscribed');
     }
 
+    public function preferences()
+    {
+        return view('pianote.lead-gen.preferences');
+    }
+
     public function weeklyemail()
     {
         return view('pianote.lead-gen.blog-forms.weekly-email', ['recaptchaKey'=>config('recaptcha.key')]);

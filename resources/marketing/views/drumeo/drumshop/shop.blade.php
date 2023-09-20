@@ -137,29 +137,39 @@
         <section class="bundles">
             <div class="container mx-auto">
                 <div class="float-left w-full px-2 md:px-3 card-wrap">
-
-                    @if(Carbon\Carbon::create(2023, 9, 11, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                        <a href="/drumshop/quietkick" class="rounded-xl mb-5 overflow-hidden relative inline-block w-full sm:text-left px-7 sm:px-10 lg:px-16 pt-48 pb-4 sm:py-12 lg:py-14 transition-opacity hover:opacity-90" style="background-color:#bbbabf;">
+                    <a href="/drumshop/stickbag" class="rounded-xl mb-5 overflow-hidden relative inline-block w-full sm:text-left px-7 sm:px-10 lg:px-16 pt-48 pb-4 sm:py-12 lg:py-14 transition-opacity hover:opacity-90" style="background-color:#f5f5f5;">
+                        <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
+                            <img class="h-14 sm:h-20 lg:h-28" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/sb_logo.png"><br>
+                            <div class="join blue smaller my-2 lg:my-3 w-full">ONLY <s class="opacity-60">${{ floatval($productPrices['stickbag']->price) }}</s> ${{ floatval($productPrices['stickbag']->discounted_price) }}</div><br>
+                            <h6 class="inline-block text-drumeo uppercase font-bebas leading-none">{{ round(100 - (100 * (97 / 147))) }}% off</h6>
+                        </div>
+                        <h5 class="absolute z-20 top-0 left-0 text-white rounded-br-xl bg-drumeo uppercase font-bebas py-1 px-3 leading-none">
+                            NEW
+                        </h5>
+                        <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/sb_banner.png);"></div>
+                        <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-center" style="background-image:url(https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/sb_banner_m.png);"></div>
+                    </a>
+                    @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 9, 18, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                        <a href="/drumshop/stickbag" class="rounded-xl mb-5 overflow-hidden relative inline-block w-full sm:text-left px-7 sm:px-10 lg:px-16 pt-48 pb-4 sm:py-12 lg:py-14 transition-opacity hover:opacity-90" style="background-color:#f5f5f5;">
                             <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
-                                <img class="h-14 sm:h-20 lg:h-28" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/drumeo-quietkick.png"><br>
-                                <div class="join blue smaller my-2 lg:my-3 w-full">ONLY <s class="opacity-60">$79</s> $59</div><br>
-                                <h6 class="inline-block text-drumeo uppercase font-bebas leading-none">{{ round(100 - (100 * (59 / 79))) }}% off</h6>
+                                <img class="h-14 sm:h-20 lg:h-28" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/sb_logo.png"><br>
+                                <div class="join blue smaller my-2 lg:my-3 w-full">ONLY <s class="opacity-60">${{ floatval($productPrices['stickbag']->price) }}</s> ${{ floatval($productPrices['stickbag']->discounted_price) }}</div><br>
+                                <h6 class="inline-block text-drumeo uppercase font-bebas leading-none">{{ round(100 - (100 * (97 / 147))) }}% off</h6>
                             </div>
                             <h5 class="absolute z-20 top-0 left-0 text-white rounded-br-xl bg-drumeo uppercase font-bebas py-1 px-3 leading-none">
                                 SALE ENDS IN
-                                <span x-cloak x-data="timer()" x-init="countdown2()">
+                            <span x-cloak x-data="timer()" x-init="countdown2()">
                                  <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0">left!</span>
+                                 <span x-cloak x-show="timeLeft > 0 && day < 1 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0 && hour < 1"><span x-text="second"></span><span x-text="secondText"></span></span>
                                  <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
                              </span>
                             </h5>
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/qk_banner.png);"></div>
-                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-center" style="background-image:url(https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/qk_banner_m.png);"></div>
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/sb_banner.png);"></div>
+                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-center" style="background-image:url(https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/sb_banner_m.png);"></div>
                         </a>
-{{--                        <a href="/drumshop/eardrums" class="rounded-xl mb-5 overflow-hidden relative inline-block w-full sm:text-left px-7 sm:px-10 lg:px-16 pt-48 pb-4 sm:py-12 lg:py-14 transition-opacity hover:opacity-90">--}}
+{{--                        <a href="/drumshop/eardrums" class="rounded-xl mb-5 overflow-hidden relative inline-block w-full sm:text-left px-7 sm:px-10 lg:px-16 pt-48 pb-4 sm:py-12 lg:py-14 transition-opacity hover:opacity-90" style="background-color:#f2f2f4;">--}}
 {{--                            <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">--}}
 {{--                                <img class="h-14 sm:h-20 lg:h-28" src="https://cdn.musora.com/image/fetch/w_790,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/ed_logo.png"><br>--}}
 {{--                                <div class="join blue smaller my-2 lg:my-3 w-full">ONLY <s class="opacity-60">$149</s> $127</div><br>--}}
@@ -167,12 +177,11 @@
 {{--                            </div>--}}
 {{--                            <h5 class="absolute z-20 top-0 left-0 text-white rounded-br-xl bg-drumeo uppercase font-bebas py-1 px-3 leading-none">--}}
 {{--                                SALE ENDS IN--}}
-{{--                                <span x-cloak x-data="timer()" x-init="countdown2()">--}}
+{{--                        <span x-cloak x-data="timer()" x-init="countdown2()">--}}
 {{--                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0">left!</span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && day < 1 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && hour < 1"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
 {{--                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
 {{--                             </span>--}}
 {{--                            </h5>--}}
@@ -186,12 +195,11 @@
 {{--                            </div>--}}
 {{--                            <h5 class="absolute z-20 top-0 left-0 text-white rounded-br-xl bg-drumeo uppercase font-bebas py-1 px-3 leading-none">--}}
 {{--                                SALE ENDS IN--}}
-{{--                                <span x-cloak x-data="timer()" x-init="countdown2()">--}}
+{{--                        <span x-cloak x-data="timer()" x-init="countdown2()">--}}
 {{--                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0">left!</span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && day < 1 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && hour < 1"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
 {{--                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
 {{--                             </span>--}}
 {{--                            </h5>--}}
@@ -434,13 +442,10 @@
 @section('layout-scripts')
     @parent
     @include('_partials.components.countdown',[
-        'countdownDate2' => '2023-09-11 00:00:00',
-        'countdownDate' => '2023-09-15 00:00:00',
+        'countdownDate2' => '2023-09-18 00:00:00',
+        'countdownDate' => '2023-09-22 00:00:00',
         'promoVersion' => true
     ])
-{{--    week 2--}}
-{{--    'countdownDate2' => '2023-09-18 00:00:00',--}}
-{{--    'countdownDate' => '2023-09-22 00:00:00',--}}
 {{--    week 3--}}
 {{--    'countdownDate2' => '2023-09-25 00:00:00',--}}
 {{--    'countdownDate' => '2023-09-29 00:00:00',--}}
