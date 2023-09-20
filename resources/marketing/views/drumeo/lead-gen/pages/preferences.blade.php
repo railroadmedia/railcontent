@@ -62,7 +62,7 @@
 
 @section('global-body')
     @include("drumeo.sales.partials._nav")
-    <div class="text-center container mx-auto max-w-5xl py-56 sm:py-96">
+    <div class="text-center container mx-auto max-w-5xl py-48 sm:py-72">
         <h2>Success!</h2>
         <p><em>Your preferences have been updated successfully. Thank you!</em></p>
         <a class="join blue smaller" href="https://www.musora.com/drumeo">Members Area</a>
