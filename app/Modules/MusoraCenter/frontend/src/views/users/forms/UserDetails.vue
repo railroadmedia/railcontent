@@ -82,7 +82,6 @@ export default {
 
         $_email: {
             get() {
-              console.log( this.userEmail || this.thisUser);
                 return this.userEmail || this.thisUser.attributes.email;
             },
             set(value) {
