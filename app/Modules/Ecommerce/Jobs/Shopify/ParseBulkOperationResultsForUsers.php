@@ -103,6 +103,8 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
 
             // and delete the files from our storage
             $this->deleteFiles([$this->sourceFilename, $this->resultsFilename]);
+
+            $this->logInfo(sprintf("%s: Completed %s", $this->getClassName(), get_class($this)));
         } catch (Exception $e) {
             $this->logError($e->getMessage());
         }
