@@ -149,7 +149,7 @@
                         <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/sb_banner.png);"></div>
                         <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-center" style="background-image:url(https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/sb_banner_m.png);"></div>
                     </a>
-                    @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 9, 25, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now() && Carbon\Carbon::create(2023, 9, 22, 8, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
+                    @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 9, 25, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now() && Carbon\Carbon::create(2023, 9, 22, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
                         <a href="/drumshop/eardrums" class="rounded-xl mb-5 overflow-hidden relative inline-block w-full sm:text-left px-7 sm:px-10 lg:px-16 pt-48 pb-4 sm:py-12 lg:py-14 transition-opacity hover:opacity-90" style="background-color:#f2f2f4;">
                             <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
                                 <img class="h-14 sm:h-20 lg:h-28" src="https://cdn.musora.com/image/fetch/w_790,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/ed_logo.png"><br>
@@ -422,16 +422,23 @@
 
 @section('layout-scripts')
     @parent
-    @include('_partials.components.countdown',[
-        'countdownDate2' => '2023-09-18 00:00:00',
-        'countdownDate' => '2023-09-22 00:00:00',
-        'promoVersion' => true
-    ])
-{{--    week 3--}}
-{{--    'countdownDate2' => '2023-09-25 00:00:00',--}}
-{{--    'countdownDate' => '2023-09-29 00:00:00',--}}
-{{--    week 4--}}
-{{--    'countdownDate2' => '2023-10-01 00:00:00',--}}
-{{--    'countdownDate' => '2023-10-01 00:00:00',--}}
+    @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 9, 22, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
+        @include('_partials.components.countdown',[
+            'countdownDate2' => '2023-09-25 00:00:00',
+            'countdownDate' => '2023-09-29 00:00:00',
+            'promoVersion' => true
+        ])
+    @else
+        @include('_partials.components.countdown',[
+            'countdownDate2' => '2023-09-18 00:00:00',
+            'countdownDate' => '2023-09-22 00:00:00',
+            'promoVersion' => true
+        ])
+    @endif
+{{--    @include('_partials.components.countdown',[--}}
+{{--        'countdownDate2' => '2023-10-01 00:00:00',--}}
+{{--        'countdownDate' => '2023-10-01 00:00:00',--}}
+{{--        'promoVersion' => true--}}
+{{--    ])--}}
 @endsection
 
