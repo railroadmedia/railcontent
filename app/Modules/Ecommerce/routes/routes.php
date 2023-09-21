@@ -13,5 +13,10 @@ Route::prefix(config('ecommerce.route_prefix'))->group(function () {
         'revenuecat/webhook/notification',
         \App\Modules\Ecommerce\Controllers\RevenueCatController::class . '@processNotification'
     );
+
+    Route::post(
+        'revenuecat/restore',
+        \App\Modules\Ecommerce\Controllers\RevenueCatController::class . '@syncSubscriber'
+    )->middleware([\Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class]);
 });
 
