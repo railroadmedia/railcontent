@@ -5,10 +5,7 @@ namespace App\Modules\Ecommerce\Services;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Models\Subscription;
-use App\Modules\Ecommerce\Models\UserProduct;
 use App\Modules\UserManagementSystem\Services\UserService;
-use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 
 class SubscriptionService
