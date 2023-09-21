@@ -2,7 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Providers;
 
-use App\Modules\Ecommerce\Events\UserProductsUpdated;
+use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\EventDataSynchronizer\Console\Commands\CustomerIOSyncUser;
 use App\Modules\EventDataSynchronizer\Console\Commands\ExpiredProductResync;
 use App\Modules\EventDataSynchronizer\Console\Commands\MigrateMinutesWatchedPoints;
@@ -109,11 +109,11 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
             HelpScoutEventListener::class . '@handleUserProductDeleted',
             UserMembershipFieldsListener::class . '@handleUserProductDeleted',
         ],
-        UserProductsUpdated::class => [
-            CustomerIoSyncEventListener::class . '@handleUserProductsUpdated',
-            UserProductToUserContentPermissionListener::class . '@handleUserProductsUpdated',
-            HelpScoutEventListener::class . '@handleUserProductsUpdated',
-            UserMembershipFieldsListener::class . '@handleUserProductsUpdated',
+        UserAccessPermissionsUpdated::class => [
+            CustomerIoSyncEventListener::class . '@handleUserAccessPermissionsUpdated',
+            UserProductToUserContentPermissionListener::class . '@handleUserAccessPermissionsUpdated',
+            HelpScoutEventListener::class . '@handleUserAccessPermissionsUpdated',
+            UserMembershipFieldsListener::class . '@handleUserAccessPermissionsUpdated',
         ],
         SubscriptionCreated::class => [
             CustomerIoSyncEventListener::class . '@handleSubscriptionCreated',

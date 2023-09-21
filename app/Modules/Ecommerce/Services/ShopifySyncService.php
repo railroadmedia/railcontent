@@ -7,7 +7,7 @@ use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\UserProduct;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 use Signifly\Shopify\REST\Resources\OrderResource;
@@ -19,12 +19,12 @@ class ShopifySyncService
     private RechargeGateway $recharge;
     private UserProductService $userProductService;
     private ProductService $productService;
-    private MembershipTimeService $membershipTimeService;
+    private UserAccessPermissionsService $userAccessPermissionsService;
 
     public function __construct(
         Shopify $shopify,
         RechargeGateway $recharge,
-        MembershipTimeService $membershipTimeService,
+        UserAccessPermissionsService $userAccessPermissionsService,
         ProductService $productService,
         UserProductService $userProductService
     ) {
@@ -32,10 +32,10 @@ class ShopifySyncService
         $this->recharge = $recharge;
         $this->userProductService = $userProductService;
         $this->productService = $productService;
-        $this->membershipTimeService = $membershipTimeService;
+        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
-    public function syncCustomer($shopifyCustomerId)
+    public function syncCustomer($shopifyCustomerId): void
     {
         if (!config('shopify.enabled')) {
             return;
@@ -45,9 +45,11 @@ class ShopifySyncService
             throw new \Exception("User not found for shopify customer id $shopifyCustomerId");
         }
         $orders = $this->shopify->getCustomerOrders($shopifyCustomerId, ['status' => 'any']);
-        $membershipTimes = $this->membershipTimeService->syncShopifyOrders($userId, $orders);
-        $membershipExpirationDate = $this->membershipTimeService->getMembershipExpirationDate($membershipTimes);
-        $this->syncUserProducts($userId, $orders, $membershipTimes, $membershipExpirationDate);
+        $this->userAccessPermissionsService->syncShopifyOrders($userId, $orders);
+
+
+
+
         $this->syncSubscriptionData($userId, $shopifyCustomerId, $membershipExpirationDate);
     }
 
@@ -147,54 +149,34 @@ class ShopifySyncService
 
     private function getUserIdFromShopifyCustomerId($shopifyCustomerId)
     {
-        $user =
-            User::query()
-                ->where('shopify_id', '=', $shopifyCustomerId)
-                ->first('id');
+        $user = User::query()->where('shopify_id', '=', $shopifyCustomerId)->first('id');
         return $user->id ?? null;
     }
 
-    private function getOwnedProducts(int $shopifyCustomerId)
-    : array {
-        $orders = $this->shopify->getCustomerOrders($shopifyCustomerId);
-        $ownedProducts = [];
-        /** @var OrderResource $order */
-        foreach ($orders as $order) {
-            $createdAt = Carbon::createFromDate($order->created_at);
-            foreach ($order->line_items as $lineItem) {
-                $variantId = $lineItem['variant_id'];
-                if (!($ownedProducts[$variantId] ?? null) || $ownedProducts[$variantId] < $createdAt) {
-                    $ownedProducts[$variantId] = $createdAt;
-                }
+    private function syncUserProducts(
+        mixed $userId,
+        Collection $userAccessPermissions,
+        ?Carbon $membershipExpirationDate
+    ): void {
+        $latestUserAccessPermissions = $userAccessPermissions->groupBy('permission_id')->map(
+            function (Collection $membershipTimes) {
+                return $membershipTimes->sortByDesc('tempExpirationDate')->first();
             }
-        }
+        );
 
-        return $ownedProducts;
-    }
-
-    private function syncUserProducts(mixed $userId, array $ownedShopifyProducts)
-    {
-        $products =
-            Product::query()
-                ->whereIn('shopify_id', array_keys($ownedShopifyProducts))
-                ->get()
-                ->keyBy('shopify_id');
-
+        $existingUserProducts = UserProduct::query()
+            ->where('user_id', '=', $userId)
+            ->get()
+            ->keyBy('product_id');
         $userProducts = collect();
 
-        $existingUserProducts =
-            UserProduct::query()
-                ->where('user_id', '=', $userId)
-                ->get()
-                ->keyBy('product_id');
-
-        foreach ($ownedProducts as $shopifyVariantId => $createdAt) {
+        foreach ($latestUserAccessPermissions as $permission) {
             $product = $products[$shopifyVariantId] ?? null;
             if (!$product) {
                 Log::error("Shopify Product $shopifyVariantId not found");
                 continue;
             }
-            $expirationDate = ($membershipTimesLatestLookup[$shopifyVariantId]?->tempExpirationDate ??
+            $expirationDate = ($userAccessPermissionsLookup[$shopifyVariantId]?->tempExpirationDate ??
                 $product->calculateExpirationDate($createdAt))
                 ->clone()
                 ->addDays(config('ecommerce.days_before_access_revoked_after_expiry', 7));

@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners\HelpScout;
 
+use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\Ecommerce\Events\UserProductsUpdated;
 use Carbon\Carbon;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
@@ -178,7 +179,7 @@ class HelpScoutEventListener
         }
     }
 
-    public function handleUserProductsUpdated(UserProductsUpdated $userProductsUpdated)
+    public function handleUserAccessPermissionsUpdated(UserAccessPermissionsUpdated $userAccessPermissionsUpdated)
     {
         if (self::$disable) {
             return;

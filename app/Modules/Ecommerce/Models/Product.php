@@ -193,4 +193,27 @@ class Product extends Model
         );
         return null;
     }
+
+    public function isLifeTime()
+    {
+        return $this->digital_access_time_type == self::DIGITAL_ACCESS_TIME_TYPE_LIFETIME;
+    }
+
+    public function getContentPermissions($permissionsLookup): Collection
+    {
+        $permissionNames = collect($this->getDigitalAccessPermissionNames());
+        return $permissionNames->map(function ($permissionName) use ($permissionsLookup) {
+            $brand = $this->brand;
+            $keyBrand = $brand . '_' . $permissionName;
+            $keyGeneral = 'musora_' . $permissionName;
+            $permission = $permissionsLookup[$keyBrand] ?? $permissionsLookup[$keyGeneral] ?? null;
+            if (!$permission) {
+                Log::error(
+                    "Permission $brand - $permissionName does not exist.  Fix issue with product $this->id - $this->name and resync."
+                );
+                return false;
+            }
+            return $permission;
+        });
+    }
 }
