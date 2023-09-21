@@ -11,6 +11,9 @@ use App\Modules\Ecommerce\Models\UserAccessPermission;
 use App\Modules\Ecommerce\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Modules\UserManagementSystem\Models\User;
+use Railroad\Ecommerce\Entities\User as EcommerceUser;
+use Railroad\Ecommerce\Services\UserProductService;
 
 class UserAccessPermissionsService
 {
@@ -135,5 +138,20 @@ class UserAccessPermissionsService
         }
 
         return $userAccessPermissions->doesUserOwnPermissions($this->cachedPackPermissionIds);
+    }
+
+    public function userHadOrHasAnyDigitalProductsForBrand(User $user, $brand): bool
+    {
+        if (config('shopify.enabled')) {
+            $userAccessPermissions = $this->getUserAccessPermissions($user->id);
+            $permissionIds = $this->contentPermissionsService->getByBrand($brand)->pluck('id')->toArray();
+            return $userAccessPermissions->hasUserOwnedPermissions($permissionIds);
+        }
+        $userProductService = app(UserProductService::class);
+
+        return $userProductService->userHadOrHasAnyDigitalProductsForBrand(
+            new EcommerceUser($user->id, $user->email),
+            $brand
+        );
     }
 }

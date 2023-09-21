@@ -22,27 +22,9 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
      */
     private $user;
 
-    private ContentPermissionsService $contentPermissionsService;
-    private UserAccessPermissionsService $userAccessPermissionsService;
-
     public function __construct(User $user)
     {
         $this->user = $user;
-    }
-
-    private function userHadOrHasAnyDigitalProductsForBrand(User $user, $brand): bool
-    {
-        if (config('shopify.enabled')) {
-            $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($user->id);
-            $permissionIds = $this->contentPermissionsService->getByBrand($brand)->pluck('id')->toArray();
-            return $userAccessPermissions->hasUserOwnedPermissions($permissionIds);
-        }
-        $userProductService = app(UserProductService::class);
-
-        return $userProductService->userHadOrHasAnyDigitalProductsForBrand(
-            new EcommerceUser($user->id, $user->email),
-            $brand
-        );
     }
 
     /**
@@ -54,11 +36,8 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
         CustomerIoSyncService $customerIoSyncService,
         UserService $userService,
         UserAccessPermissionsService $userAccessPermissionsService,
-        ContentPermissionsService $contentPermissionsService
     ) {
         try {
-            $this->contentPermissionsService = $contentPermissionsService;
-            $this->userAccessPermissionsService = $userAccessPermissionsService;
             $this->user = $userService->getByIdOrNull($this->user->id);
             $accountNameBrandsToSync = config('event-data-synchronizer.customer_io_account_name_brands_to_sync', []);
             $accountNameToSyncAllBrand = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
@@ -69,7 +48,7 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
                 $syncThisWorkspace = false;
 
                 foreach ($brands as $brand) {
-                    if ($this->userHadOrHasAnyDigitalProductsForBrand($this->user, $brand)
+                    if ($userAccessPermissionsService->userHadOrHasAnyDigitalProductsForBrand($this->user, $brand)
                         || $accountNameToSyncAllBrand == $brand) {
                         $syncThisWorkspace = true;
                     }
