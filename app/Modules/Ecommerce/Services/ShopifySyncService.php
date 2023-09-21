@@ -273,22 +273,6 @@ class ShopifySyncService
         return null;
     }
 
-    private function getOwnedProductsArray($orders): array
-    {
-        $ownedProducts = [];
-        /** @var OrderResource $order */
-        foreach ($orders as $order) {
-            $createdAt = Carbon::createFromDate($order->created_at);
-            foreach ($order->line_items as $lineItem) {
-                $variantId = $lineItem['variant_id'];
-                if (!($ownedProducts[$variantId] ?? null) || $ownedProducts[$variantId] < $createdAt) {
-                    $ownedProducts[$variantId] = $createdAt;
-                }
-            }
-        }
-        return $ownedProducts;
-    }
-
     public function createOrUpdateUserProduct(
         int $productId,
         int $userId,

@@ -69,7 +69,6 @@ class UserAccessPermissionsService
         }
     }
 
-
     private function syncShopifyOrder(
         int $userId,
         $order,
