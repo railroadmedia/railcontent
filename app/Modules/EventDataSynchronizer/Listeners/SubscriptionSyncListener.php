@@ -20,10 +20,7 @@ class SubscriptionSyncListener
 
     public function handleUserAccessPermissionsUpdated(UserAccessPermissionsUpdated $userAccessPermissionsUpdated): void
     {
-        $this->subscriptionService->syncSubscriptionData(
-            $userAccessPermissionsUpdated->getUserId(),
-            $userAccessPermissionsUpdated->getUserAccessPermissions()
-        );
+        $this->subscriptionService->syncSubscriptionData($userAccessPermissionsUpdated->getUserAccessPermissions());
     }
 
 }
