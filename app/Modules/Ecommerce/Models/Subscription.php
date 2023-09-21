@@ -27,19 +27,6 @@ use Modules\UserManagementSystem\Models\User;
  * @property Carbon $paid_until
  * @property Carbon $canceled_on
  * @property string $cancellation_reason
- * @property string note
- * @property float total_price
- * @property float tax
- * @property string currency
- * @property string interval_type
- * @property int interval_count
- * @property ?int total_cycles_due
- * @property int total_cycles_paid
- * @property int renewal_attempt
- * @property ?int payment_method_id
- * @property Carbon apple_expiration_date
- * @property string external_app_store_id
- * @property string paypal_recurring_profile_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
@@ -59,6 +46,7 @@ use Modules\UserManagementSystem\Models\User;
  * @property string|null $paypal_recurring_profile_id
  * @property int|null $failed_payment_id
  * @property-read User|null $user
+ * @property ?PaymentMethod $paymentMethod
  * @method static \App\Modules\Ecommerce\database\factories\SubscriptionFactory factory(...$parameters)
  * @method static Builder|Subscription fromUser(int $userId)
  * @method static Builder|Subscription newModelQuery()
@@ -145,6 +133,11 @@ class Subscription extends Model
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class, 'payment_method_id');
     }
 
     public function getIntervalType(): SubscriptionIntervalType

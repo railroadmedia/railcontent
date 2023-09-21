@@ -4,8 +4,10 @@ namespace App\Modules\EventDataSynchronizer\Listeners;
 
 use App\Modules\Content\Models\UserPermission;
 use App\Modules\Content\Services\ContentPermissionsService;
-use App\Modules\Ecommerce\Events\UserProductsUpdated;
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
+use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\Ecommerce\Models\UserProduct;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
@@ -22,13 +24,16 @@ class UserProductToUserContentPermissionListener
 {
     private UserProductService $userProductService;
     private ContentPermissionsService $contentPermissionsService;
+    private UserAccessPermissionsService $userAccessPermissionsService;
 
     public function __construct(
         UserProductService $userProductService,
         ContentPermissionsService $contentPermissionsService,
+        UserAccessPermissionsService $userAccessPermissionsService
     ) {
         $this->userProductService = $userProductService;
         $this->contentPermissionsService = $contentPermissionsService;
+        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
     /**
@@ -55,9 +60,40 @@ class UserProductToUserContentPermissionListener
         $this->syncUserId($deletedEvent->getUserProduct()->getUser()->getId());
     }
 
-    public function handleUserProductsUpdated(UserProductsUpdated $userProductsUpdated)
+    public function handleUserAccessPermissionsUpdated(UserAccessPermissionsUpdated $userAccessPermissionsUpdated): void
     {
-        $this->syncUserId($userProductsUpdated->getUserId());
+        $this->syncContentPermissions(
+            $userAccessPermissionsUpdated->getUserId(),
+            $userAccessPermissionsUpdated->getUserAccessPermissions()
+        );
+    }
+
+    public function syncContentPermissions(int $userId, UserAccessPermissionsCollection $userAccessPermissions): void
+    {
+        $permissionIds =$userAccessPermissions->getPermissionIds();
+        $existingUserPermissions = $this->contentPermissionsService->getUserPermissionsQuery($userId)->get()->keyBy(
+            'permission_id'
+        );
+
+        foreach ($permissionIds as $permissionId ) {
+            list($startDate, $expirationDate) = $userAccessPermissions->getActiveDates($permissionId);
+            if ($expirationDate) {
+                $expirationDate->addDays(config('ecommerce.days_before_access_revoked_after_expiry', 7));
+            }
+            $userPermission = $existingUserPermissions[$permissionId] ?? null;
+            if (!$userPermission) {
+                $userPermission = new UserPermission();
+                $userPermission->user_id = $userId;
+                $userPermission->permission_id = $permissionId;
+                $userPermission->created_on = Carbon::now();
+            }
+            if ($userPermission->start_date != $startDate || $userPermission->expiration_date != $expirationDate) {
+                $userPermission->start_date = $startDate;
+                $userPermission->expiration_date = $expirationDate;
+                $userPermission->updated_on = Carbon::now();
+                $userPermission->save();
+            }
+        }
     }
 
     /**
@@ -87,6 +123,11 @@ class UserProductToUserContentPermissionListener
 
     public function syncUserId($userId)
     {
+        if (config('shopify.enabled')) {
+            $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId)->get();
+            $this->syncContentPermissions($userId, $userAccessPermissions);
+            return;
+        }
         $userPermissions = $this->buildUserPermissionsList($userId);
         $existingPermissions = UserPermission::query()->where('user_id', '=', $userId)
             ->whereIn('permission_id', array_keys($userPermissions))->get()->keyBy('permission_id');
@@ -111,12 +152,7 @@ class UserProductToUserContentPermissionListener
             $existingPermission->save();
         }
         // clear the railcontent cache
-        CacheHelper::deleteUserFields(
-            [
-                ConfigService::$redisPrefix . ':userId_' . $userId,
-            ],
-            'content'
-        );
+        CacheHelper::deleteUserFields([ConfigService::$redisPrefix . ':userId_' . $userId,], 'content');
     }
 
     private function buildUserPermissionsList(int $userId): array
