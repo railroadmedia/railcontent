@@ -89,20 +89,19 @@ class UserMembershipFieldsService
     {
         $userId = $userAccessPermissions->getUserId();
 
-
+        //This code is difficult to understand and should be thoroughly understood before changing it
+        //membership expiration date comes from both plus and basic permissions combined
+        $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate();
+        //access level comes from plus or basic permissions
         $plusMembershipExpirationDate = $userAccessPermissions->getPlusMembershipExpirationDate();
         $basicMembershipExpirationDate = $userAccessPermissions->getBasicMembershipExpirationDate();
 
-        $membershipExpirationDate = max([$plusMembershipExpirationDate, $basicMembershipExpirationDate]);
-
         $membershipLevel = null;
-
         if ($plusMembershipExpirationDate > Carbon::now()) {
             $membershipLevel = 'plus';
         } elseif ($basicMembershipExpirationDate > Carbon::now()) {
             $membershipLevel = 'basic';
         }
-
 
         $isLifetimeMember = $userAccessPermissions->getIsLifetimeMember();
         $isDrumeoLifetimeMember = $userAccessPermissions->getIsDrumeoLifetimeMember();

@@ -28,7 +28,6 @@ class UserAccessPermissionsCollection
             }
         });
         $this->permissionIdLookup = $this->collection->groupBy('permission_id');
-
     }
 
 
@@ -68,7 +67,10 @@ class UserAccessPermissionsCollection
 
     public function getMembershipExpirationDate(): ?Carbon
     {
-        list($startDate, $endDate) = $this->getActiveDates(self::MusoraPlusMembershipPermission);
+        list($startDate, $endDate) = $this->getActiveDates([
+            self::MusoraPlusMembershipPermission,
+            self::MusoraBasicMembershipPermission
+        ]);
         return $endDate;
     }
 
@@ -96,15 +98,21 @@ class UserAccessPermissionsCollection
         return $endDate == Carbon::maxValue();
     }
 
-    public function getOwnsPacks(array $packPermissionIds)
+    public function doesUserOwnPermissions(array $permissionIds): bool
     {
-        list($startDate, $endDate) = $this->getActiveDates($packPermissionIds);
+        list($startDate, $endDate) = $this->getActiveDates($permissionIds);
         return $endDate > Carbon::now();
     }
 
     public function getPermissionIds(): array
     {
         return $this->collection->pluck('permission_id')->unique()->sort()->toArray();
+    }
+
+    public function hasUserOwnedPermissions(array $permissionIds): bool
+    {
+        list($startDate, $endDate) = $this->getActiveDates($permissionIds);
+        return $endDate != null;
     }
 
 

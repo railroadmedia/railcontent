@@ -32,7 +32,7 @@ class UserAccessPermissionsService
 
     public function getUserAccessPermissions(int $userId): UserAccessPermissionsCollection
     {
-        $permissions = $this->getUserAccessPermissionsQuery($userId);
+        $permissions = $this->getUserAccessPermissionsQuery($userId)->get();
         return new UserAccessPermissionsCollection($userId, $permissions);
     }
 
@@ -134,6 +134,6 @@ class UserAccessPermissionsService
             })->flatten(1)->unique()->toArray();
         }
 
-        return $userAccessPermissions->getOwnsPacks($this->cachedPackPermissionIds);
+        return $userAccessPermissions->doesUserOwnPermissions($this->cachedPackPermissionIds);
     }
 }
