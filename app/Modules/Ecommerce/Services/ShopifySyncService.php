@@ -46,10 +46,10 @@ class ShopifySyncService
      * @param int[] $productIds
      * @param string $brand
      * @param float $price
-     * @param float $tax
+     * @param float|null $tax
      * @return void
      */
-    public function syncOrder(User $user, array $productIds, string $brand, float $price, float $tax)
+    public function syncOrder(User $user, array $productIds, string $brand, float $price, ?float $tax)
     : void {
         if(!config('shopify.enabled')){
             return;
@@ -100,17 +100,22 @@ class ShopifySyncService
         float $tax
     )
     : array {
-        return [
+        $data = [
             "customer" => ["id" => $customerShopifyId],
             "email" => $email,
             "processed_at" => Carbon::now(),
             "source_name" => $brand,
             "subtotal_price" => $price,
             "total_outstanding" => 0,
-            "total_price" => $price,
-            "total_tax" => $tax,
+            "total_price" => $price + ($tax ?? 0),
             "line_items" => $this->createOrderItems($productIds, $price),
         ];
+
+        if (!$tax) {
+            $data['total_tax'] = $tax;
+        }
+
+        return $data;
     }
 
     /**

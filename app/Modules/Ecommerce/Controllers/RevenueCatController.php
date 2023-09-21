@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Controllers;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Services\RevenueCatService;
+use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
@@ -20,23 +21,27 @@ class RevenueCatController extends Controller
     private SubscriptionService $subscriptionService;
     private UserProductService $userProductService;
     private PaymentService $paymentService;
+    private ShopifySyncService $shopifySyncService;
 
     /**
      * @param RevenueCatService $revenueCatService
      * @param SubscriptionService $subscriptionService
      * @param UserProductService $userProductService
      * @param PaymentService $paymentService
+     * @param ShopifySyncService $shopifySyncService
      */
     public function __construct(
         RevenueCatService $revenueCatService,
         SubscriptionService $subscriptionService,
         UserProductService $userProductService,
-        PaymentService $paymentService
+        PaymentService $paymentService,
+        ShopifySyncService $shopifySyncService
     ) {
         $this->revenueCatService = $revenueCatService;
         $this->subscriptionService = $subscriptionService;
         $this->userProductService = $userProductService;
         $this->paymentService = $paymentService;
+        $this->shopifySyncService = $shopifySyncService;
     }
 
     public function processNotification(Request $request)
@@ -78,41 +83,17 @@ class RevenueCatController extends Controller
                 $productId = $this->getProductId($data['event']['product_id']);
 
                 //get Musora product
+                /** @var Product $musoraProduct */
                 $musoraProduct =
                     $this->getMusoraProduct($type, $data['event'], $productId)
                         ->first();
 
-                //get RevenueCat subscription
-                $currentRevenueCatSubscription =
-                    $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
-
-                //check if already exists Musora subscription
-                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
-                if (!$musoraSubscription) {
-                    //create Musora subscription
-                    $musoraSubscription = $this->subscriptionService->createSubscription(
-                        $user->id,
-                        $data['event']['expiration_at_ms'],
-                        $musoraProduct,
-                        $type,
-                        $data['event']['purchased_at_ms']
-                    );
-                }
-
-                if ($data['event']['period_type'] != 'TRIAL') {
-                    $this->paymentService->create(
-                        $musoraSubscription,
-                        $type,
-                        $data['event']['event_timestamp_ms'],
-                        $data['event']['transaction_id']
-                    );
-                }
-
-                //Assign user product
-                $this->userProductService->assignUserProduct(
-                    $user->id,
-                    $musoraSubscription->product_id,
-                    $musoraSubscription->paid_until
+                $this->shopifySyncService->syncOrder(
+                    $user,
+                    [$musoraProduct->id],
+                    $musoraProduct->brand,
+                    $musoraProduct->price,
+                    $this->calculateTaxAmount($musoraProduct->price, $data['event']['tax_percentage'])
                 );
                 break;
             case 'NON_RENEWING_PURCHASE':
@@ -142,41 +123,12 @@ class RevenueCatController extends Controller
                 //get Musora product
                 $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId);
 
-                //get RevenueCat subscription
-                $currentRevenueCatSubscription =
-                    $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
-
-                //get Musora subscription
-                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
-                if (!$musoraSubscription) {
-                    //create Musora subscription
-                    $musoraSubscription = $this->subscriptionService->createSubscription(
-                        $user->id,
-                        $data['event']['expiration_at_ms'],
-                        $musoraProduct->first(),
-                        $type,
-                        $data['event']['purchased_at_ms']
-                    );
-                }
-
-                //update Musora subscription
-                $this->subscriptionService->updateSubscription(
-                    $musoraSubscription,
-                    $data['event']['expiration_at_ms']
-                );
-
-                $this->paymentService->create(
-                    $musoraSubscription,
-                    $type,
-                    $data['event']['purchased_at_ms'],
-                    $data['event']['transaction_id']
-                );
-
-                //update user product
-                $this->userProductService->assignUserProduct(
-                    $user->id,
-                    $musoraSubscription->product_id,
-                    $musoraSubscription->paid_until
+                $this->shopifySyncService->syncOrder(
+                    $user,
+                    [$musoraProduct->id],
+                    $musoraProduct->brand,
+                    $musoraProduct->price,
+                    $this->calculateTaxAmount($musoraProduct->price, $data['event']['tax_percentage'])
                 );
 
                 break;
@@ -223,6 +175,14 @@ class RevenueCatController extends Controller
                     $user->id,
                     $musoraSubscription->product_id,
                     $musoraSubscription->paid_until
+                );
+
+                $this->shopifySyncService->syncOrder(
+                    $user,
+                    [$musoraProduct->id],
+                    $musoraProduct->brand,
+                    $musoraProduct->price,
+                    $this->calculateTaxAmount($musoraProduct->price, $data['event']['tax_percentage'])
                 );
 
                 // code...
@@ -363,6 +323,20 @@ class RevenueCatController extends Controller
         }
 
         return response()->json();
+    }
+
+    /**
+     * @param float $price
+     * @param float $taxPercentage
+     * @return float|null
+     */
+    private function calculateTaxAmount(float $price, float $taxPercentage)
+    : ?float {
+        if (!$taxPercentage) {
+            return null;
+        }
+
+        return floor($price * $taxPercentage);
     }
 
     /**
