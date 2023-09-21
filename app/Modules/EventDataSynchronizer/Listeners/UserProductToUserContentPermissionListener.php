@@ -10,7 +10,6 @@ use App\Modules\Ecommerce\Models\UserProduct;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Railroad\Ecommerce\Events\Subscriptions\CommandSubscriptionRenewFailed;
 use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
