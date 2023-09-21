@@ -46,11 +46,8 @@ class ShopifySyncService
         }
         $orders = $this->shopify->getCustomerOrders($shopifyCustomerId, ['status' => 'any']);
         $this->userAccessPermissionsService->syncShopifyOrders($userId, $orders);
-
-
-
-
-        $this->syncSubscriptionData($userId, $shopifyCustomerId, $membershipExpirationDate);
+        //Todo: move this to an event listener
+        //$this->syncSubscriptionData($userId, $shopifyCustomerId, $membershipExpirationDate);
     }
 
     /**
@@ -147,72 +144,6 @@ class ShopifySyncService
         ]);
     }
 
-    private function getUserIdFromShopifyCustomerId($shopifyCustomerId)
-    {
-        $user = User::query()->where('shopify_id', '=', $shopifyCustomerId)->first('id');
-        return $user->id ?? null;
-    }
-
-    private function syncUserProducts(
-        mixed $userId,
-        Collection $userAccessPermissions,
-        ?Carbon $membershipExpirationDate
-    ): void {
-        $latestUserAccessPermissions = $userAccessPermissions->groupBy('permission_id')->map(
-            function (Collection $membershipTimes) {
-                return $membershipTimes->sortByDesc('tempExpirationDate')->first();
-            }
-        );
-
-        $existingUserProducts = UserProduct::query()
-            ->where('user_id', '=', $userId)
-            ->get()
-            ->keyBy('product_id');
-        $userProducts = collect();
-
-        foreach ($latestUserAccessPermissions as $permission) {
-            $product = $products[$shopifyVariantId] ?? null;
-            if (!$product) {
-                Log::error("Shopify Product $shopifyVariantId not found");
-                continue;
-            }
-            $expirationDate = ($userAccessPermissionsLookup[$shopifyVariantId]?->tempExpirationDate ??
-                $product->calculateExpirationDate($createdAt))
-                ->clone()
-                ->addDays(config('ecommerce.days_before_access_revoked_after_expiry', 7));
-
-            $userProduct = $this->createOrUpdateUserProduct(
-                $product->id,
-                $userId,
-                $createdAt,
-                $expirationDate,
-                $existingUserProducts
-            );
-            $userProducts[$userProduct->product_id] = $userProduct;
-            if ($product->digital_membership_access_expiration_date) {
-                $bonusUserProduct = $this->handlePackMembershipBonus(
-                    $product,
-                    $membershipExpirationDate,
-                    $existingUserProducts,
-                    $userId,
-                    $createdAt
-                );
-                if ($bonusUserProduct) {
-                    $userProducts[$bonusUserProduct->product_id] = $bonusUserProduct;
-                }
-            }
-        }
-        $userProductIdsToDelete = [];
-        foreach ($existingUserProducts as $existingUserProduct) {
-            if (!array_key_exists($existingUserProduct->product_id, $userProducts->toArray())) {
-                $userProductIdsToDelete[] = $existingUserProduct->id;
-            }
-        }
-        UserProduct::query()->whereIn('id', $userProductIdsToDelete)->delete();
-
-        event(new UserProductsUpdated($userId));
-    }
-
     private function syncSubscriptionData(int $userId, int $shopifyCustomerId, ?Carbon $membershipExpirationDate)
     {
         $subscriptions = $this->recharge->getSubscriptions($shopifyCustomerId);
@@ -251,47 +182,5 @@ class ShopifySyncService
 
             $this->recharge->updateSubscriptionNextChargeDate($mostRecentSubscription, $membershipExpirationDate);
         }
-    }
-
-    private function handlePackMembershipBonus(
-        Product $product,
-        ?Carbon $membershipExpirationDate,
-        int $userId,
-        Carbon $createdAt,
-        Collection $existingUserProducts
-    ): ?UserProduct {
-        if ($product->digital_membership_access_expiration_date > $membershipExpirationDate) {
-            $bonusMembershipProductId = config('ecommerce.bonus_membership_product_id');
-            return $this->createOrUpdateUserProduct(
-                $bonusMembershipProductId,
-                $userId,
-                $createdAt,
-                $product->digital_membership_access_expiration_date,
-                $existingUserProducts
-            );
-        }
-        return null;
-    }
-
-    public function createOrUpdateUserProduct(
-        int $productId,
-        int $userId,
-        Carbon $createdAt,
-        ?Carbon $expirationDate,
-        Collection $existingUserProducts
-    ): UserProduct {
-        $userProduct = $existingUserProducts[$productId] ?? null;
-        if (!$userProduct) {
-            $userProduct = new UserProduct();
-            $userProduct->user_id = $userId;
-            $userProduct->product_id = $productId;
-            $userProduct->quantity = 1;
-        }
-        if ($userProduct->start_date != $createdAt || $userProduct->expiration_date != $expirationDate) {
-            $userProduct->start_date = $createdAt;
-            $userProduct->expiration_date = $expirationDate;
-            $userProduct->save();
-        }
-        return $userProduct;
     }
 }
