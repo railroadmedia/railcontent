@@ -23,17 +23,6 @@
               Info
             </div>
           </button>
-<!--            <button -->
-<!--                class="btn stacked tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full dark:tw-border dark:tw-border-[#223F57]/40"-->
-<!--                :class="openInfo ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90'"-->
-<!--                id="toggleInstructorInfo" -->
-<!--                @click="toggleInfo"-->
-<!--            >-->
-<!--                <span class="tw-shadow-none tw-text-lg tw-h-auto tw-text-[#3F3F46] dark:tw-text-white tw-pl-0.5 lg:tw-pl-2 tw-pr-2">-->
-<!--                  <musora-icon :icon-name="openInfo ? 'info-filled' : 'info'" class="tw-w-6 tw-h-6 tw-mb-1" />-->
-<!--                  Info-->
-<!--                </span>-->
-<!--            </button>-->
         </div>
 
         <!-- Like Button -->
