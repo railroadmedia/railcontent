@@ -26,7 +26,8 @@ class ShopifySyncService
         RechargeGateway $recharge,
         UserAccessPermissionsService $userAccessPermissionsService,
         ProductService $productService,
-        UserProductService $userProductService
+        UserProductService $userProductService,
+        ShopifyCustomerService $shopifyCustomerService,
     ) {
         $this->shopify = $shopify;
         $this->recharge = $recharge;
@@ -48,6 +49,12 @@ class ShopifySyncService
         $this->userAccessPermissionsService->syncShopifyOrders($userId, $orders);
         //Todo: move this to an event listener
         //$this->syncSubscriptionData($userId, $shopifyCustomerId, $membershipExpirationDate);
+    }
+
+    private function getUserIdFromShopifyCustomerId($shopifyCustomerId)
+    {
+        $user = User::query()->where('shopify_id', '=', $shopifyCustomerId)->first('id');
+        return $user->id ?? null;
     }
 
     /**
