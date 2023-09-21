@@ -12,8 +12,8 @@
         <!-- Info Button -->
         <div v-if="showInfoButton" class="flex flex-column resource-button tw-pr-2">
            <button
-               class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full dark:tw-border dark:tw-border-[#223F57]/40"
-               :class="openInfo ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90'"
+               class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full"
+               :class="openInfo ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40'"
                id="toggleInstructorInfo"
                title="More Info"
                @click="toggleInfo"
@@ -28,8 +28,9 @@
         <!-- Like Button -->
         <div class="flex flex-column resource-button tw-pr-2">
           <button
-              class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full dark:tw-border dark:tw-border-[#223F57]/40"
-              :class="hasLiked ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90'"
+              class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full"
+              :class="hasLiked ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40'"
+              :title="hasLiked ? 'Unlike' : 'Like'"
               @click="likeContent"
           >
               <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
@@ -43,6 +44,7 @@
         <div class="flex flex-column resource-button tw-pr-2">
           <button
               class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+              title="Share"
               @click="handleOpenModal"
           >
             <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
@@ -56,6 +58,7 @@
         <div class="flex flex-column resource-button tw-pr-2" v-if="showAddToList">
           <button
               class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+              title="Add to Playlist"
               @click="addToList"
           >
             <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
