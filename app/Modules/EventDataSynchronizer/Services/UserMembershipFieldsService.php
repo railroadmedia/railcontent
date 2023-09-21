@@ -44,6 +44,13 @@ class UserMembershipFieldsService
 
     public function syncUserIds(array $userIds): bool
     {
+        if (config('shopify.enabled')) {
+            foreach ($userIds as $userId) {
+                $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId);
+                $this->syncUserAccess($userAccessPermissions);
+            }
+            return true;
+        }
         $qb = $this->userProductRepository->createQueryBuilder('up');
 
         $qb->select(['up', 'p'])
