@@ -10,8 +10,8 @@ return new class extends Migration {
     {
         Schema::create('user_access_permissions', function (Blueprint $table) {
             $table->id();
-            $table->integer("user_id");
-            $table->integer("permission_id");
+            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger("permission_id");
             $table->enum("source", ["manual", "shopify"]);
             $table->string("source_hash", 40);
             $table->dateTime("start_time");
@@ -21,7 +21,6 @@ return new class extends Migration {
             $table->enum("status", ["active", "revoked"]);
             $table->timestamps();
 
-            $table->index("user_id");
             $table->foreign("user_id")->references('id')->on("usora_users");
             $table->foreign("permission_id")->references('id')->on("railcontent_permissions");
         });
