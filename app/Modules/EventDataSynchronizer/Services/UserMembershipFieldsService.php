@@ -125,8 +125,7 @@ class UserMembershipFieldsService
     {
         if (config('shopify.enabled')) {
             $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId);
-            $this->syncUserAccess($userId, $userAccessPermissions);
-            return true;
+            return $this->syncUserAccess($userAccessPermissions);
         }
         if (!isset($userProducts)) {
             $userProducts = $this->userProductRepository->getAllUsersProducts($userId);

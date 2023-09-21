@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
+use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\UserManagementSystem\Services\UserService;
@@ -43,7 +44,7 @@ class SubscriptionService
         $user = $this->userService->getByIdOrNull($userAccessPermissions->getUserId());
         $subscriptions = $this->recharge->getSubscriptions($user->shopify_id);
         $shopifyVariantIds = $subscriptions->pluck('shopify_variant_id')->toArray();
-        $productLookup = $this->productService->getProductsByShopifyIdsQuery($shopifyVariantIds)
+        $productLookup = $this->productService->getProductsByShopifyIds($shopifyVariantIds)
             ->keyBy('shopify_id');
 
         $membershipSubscriptions = $subscriptions->filter(function ($subscription) use ($productLookup) {
@@ -52,7 +53,7 @@ class SubscriptionService
                 Log::error("Product not found for recharge subscription $subscription->id");
                 return false;
             }
-            return $product->isMembershipProduct() && $subscription->status == 'active';
+            return $product->isMembershipProduct() && $subscription->status == RechargeSubscriptionStatusEnum::Active;
         });
 
         $isLifetimeMember = $userAccessPermissions->getIsLifetimeMember();

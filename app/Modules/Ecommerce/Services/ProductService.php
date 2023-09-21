@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 class ProductService
 {
 
-    public function getProductsByShopifyIdsQuery(array $shopifyProductIds)
+    public function getProductsByShopifyIds(array $shopifyProductIds)
     {
         return Product::query()
             ->whereIn('shopify_id', $shopifyProductIds)

@@ -126,9 +126,11 @@ class RechargeGateway
         $returnError = null;
 
         $retry = true;
-        while ($retry) {
+        $maxAttempts = 5;
+        $attemptCount = 0;
+        while ($retry && $attemptCount < $maxAttempts) {
             $retry = false;
-
+            $attemptCount++;
             $response = curl_exec($ch);
             $headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
             $result = json_decode(substr($response, $headerSize), $options['return_array']);
@@ -251,6 +253,7 @@ class RechargeGateway
         $this->call('POST', "/subscriptions/$subscription->id/cancel", [
             'cancellation_reason' => $cancelReason,
             'cancellation_reason_comments' => $cancelReasonComments,
+            'send_email' => $sendEmail
         ]);
     }
 

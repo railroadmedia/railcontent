@@ -5,8 +5,9 @@ namespace App\Modules\Ecommerce\Enums;
 /**
  * Based on shopify order statuses
  */
-enum UserAccessPermissionsStatusEnum: string
+enum RechargeSubscriptionStatusEnum: string
 {
     case Active = 'active';
-    case Revoked = 'revoked';
+    case Cancelled = 'cancelled';
+    case Expired = 'expired';
 }

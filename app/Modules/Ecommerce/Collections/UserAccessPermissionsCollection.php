@@ -46,7 +46,7 @@ class UserAccessPermissionsCollection
         }
 
         $userAccessPermissions = $userAccessPermissions
-            ->where('status', '!=', UserAccessPermissionsStatusEnum::revoked)
+            ->where('status', '!=', UserAccessPermissionsStatusEnum::Revoked)
             ->sortBy('start_time');
         $expirationDate = null;
         $startDate = null;

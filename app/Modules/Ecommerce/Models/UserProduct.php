@@ -78,7 +78,7 @@ class UserProduct extends Model
 
     public function isValidLifeTime()
     {
-        if (empty($userProduct->expiration_date) &&
+        if (empty($this->expiration_date) &&
             $this->product->isMembershipProduct() &&
             $this->product->digital_access_time_type == Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME) {
             return true;

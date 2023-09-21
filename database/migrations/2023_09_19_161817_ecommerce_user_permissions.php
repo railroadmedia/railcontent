@@ -22,10 +22,8 @@ return new class extends Migration {
             $table->timestamps();
 
             $table->index("user_id");
-        });
-
-        Schema::table('railcontent_permissions', function (Blueprint $table) {
-            $table->enum("permission_id");
+            $table->foreign("user_id")->references('id')->on("usora_users");
+            $table->foreign("permission_id")->references('id')->on("railcontent_permissions");
         });
     }
 

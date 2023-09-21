@@ -14,7 +14,7 @@ class ContentPermissionsService
         return Permission::query()->get();
     }
 
-    public function getUserPermissions(int $userId)
+    public function getUserPermissionsQuery(int $userId)
     {
         return UserPermission::query()->where('user_id', '=', $userId);
     }

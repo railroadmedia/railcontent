@@ -44,7 +44,7 @@ class UserAccessPermissionsService
             }
         );
         $variantIds = $orders->pluck('line_items')->flatten(1)->pluck('variant_id')->unique()->toArray();
-        $productLookup = $this->productService->getProductsByShopifyIdsQuery($variantIds)->keyBy('shopify_id');
+        $productLookup = $this->productService->getProductsByShopifyIds($variantIds)->keyBy('shopify_id');
         $contentPermissionsLookup = $this->contentPermissionsService->getAll()->keyBy(function ($permission) {
             return $permission->brand . '_' . $permission->name;
         });
@@ -95,7 +95,7 @@ class UserAccessPermissionsService
                     $accessPermission = new UserAccessPermission();
                     $accessPermission->user_id = $userId;
                     $accessPermission->permission_id = $contentPermission->id;
-                    $accessPermission->source = UserAccessPermissionsSourceEnum::shopify;
+                    $accessPermission->source = UserAccessPermissionsSourceEnum::Shopify;
                     $accessPermission->source_hash = $hash;
                     $accessPermission->start_time = Carbon::parse($order['created_at']);
                     $accessPermission->time_days = $product->getMembershipTimeDays();
@@ -119,9 +119,9 @@ class UserAccessPermissionsService
     private function getPermissionStatusFromOrder($order): UserAccessPermissionsStatusEnum
     {
         if ($order['cancelled_at']) {
-            return UserAccessPermissionsStatusEnum::revoked;
+            return UserAccessPermissionsStatusEnum::Revoked;
         }
-        return UserAccessPermissionsStatusEnum::active;
+        return UserAccessPermissionsStatusEnum::Active;
     }
 
     public function getOwnsPacks(UserAccessPermissionsCollection $userAccessPermissions): bool

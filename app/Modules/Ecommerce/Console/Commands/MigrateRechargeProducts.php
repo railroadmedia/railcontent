@@ -82,6 +82,7 @@ class MigrateRechargeProducts extends Command
             return 'month';
         }
         if ($product->subscription_interval_type == 'year') {
+            //Recharge handles years as 12 months, so we need to convert it appropriately
             return 'month';
         }
         throw new \Exception("Not implemented");
@@ -96,6 +97,7 @@ class MigrateRechargeProducts extends Command
         }
         if ($product->subscription_interval_type == 'year') {
             if ($product->subscription_interval_count == 1) {
+                //Recharge handles years as 12 months, so we need to convert it appropriately
                 return 12;
             }
         }

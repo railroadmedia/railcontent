@@ -25,6 +25,7 @@ class MigrateRechargeSubscriptions extends Command
             foreach ($subscriptions as $subscription) {
                 $product = $subscription->product;
                 $variantId = $product->shopify_id;
+                //TODO:Check to make sure product has a shopify id
                 $variant = $shopify->getVariant($variantId);
                 $productId = $variant->product_id;
 
@@ -76,6 +77,7 @@ class MigrateRechargeSubscriptions extends Command
             return 'month';
         }
         if ($subscription->interval_type == 'year') {
+            //Recharge handles years as 12 months, so we need to convert it appropriately
             return 'month';
         }
         throw new \Exception("Not implemented");
@@ -90,6 +92,7 @@ class MigrateRechargeSubscriptions extends Command
         }
         if ($subscription->interval_type == 'year') {
             if ($subscription->interval_count == 1) {
+                //Recharge handles years as 12 months, so we need to convert it appropriately
                 return 12;
             }
         }

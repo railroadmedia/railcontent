@@ -7,6 +7,6 @@ namespace App\Modules\Ecommerce\Enums;
  */
 enum UserAccessPermissionsSourceEnum: string
 {
-    case manual = 'manual';
-    case shopify = 'shopify';
+    case Manual = 'manual';
+    case Shopify = 'shopify';
 }
