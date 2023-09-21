@@ -1,7 +1,7 @@
 <template>
     <div
         :id="domID"
-        class="tw-flex tw-flex-row comment-post pv mb-1 dark:tw-text-white "
+        class="tw-flex tw-flex-row comment-post pv mb-1 dark:tw-text-white"
         :class="{'pinned': pinned}"
     >
         <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px]">
@@ -44,105 +44,111 @@
             </p>
         </div>
         <div class="tw-flex tw-flex-col tw-flex-grow">
-            <div class="tw-flex tw-flex-row tw-mb-1 comment-meta">
-                <div class="tw-flex tw-flex-col tw-flex-grow tw-mr-1">
-                    <h2 class="tw-flex break-words tw-leading-0 tw-items-end">
-                        <a
-                            v-if="hasPublicProfiles"
-                            :href="profileRoute"
-                            target="_blank"
-                            class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
-                        >
-                            {{ comment.user.display_name }}
-                        </a>
-                        <span
-                            v-else
-                            class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
-                        >
-                            {{ comment.user.display_name }}
-                        </span>
+            <div class="tw-group/comment">
+                <div class="tw-flex tw-flex-row tw-mb-1 comment-meta">
+                    <div class="tw-flex tw-flex-col tw-flex-grow tw-mr-1">
+                        <h2 class="tw-flex break-words tw-leading-0 tw-items-end">
+                            <a
+                                v-if="hasPublicProfiles"
+                                :href="profileRoute"
+                                target="_blank"
+                                class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
+                            >
+                                {{ comment.user.display_name }}
+                            </a>
+                            <span
+                                v-else
+                                class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
+                            >
+                                {{ comment.user.display_name }}
+                            </span>
 
-                        <span class="tw-font-normal tw-font-bebas-neue tw-uppercase dark:tw-text-white tw-text-[16px] tw-ml-[9px] tw-leading-0">
-                            {{ dateString }}
-                        </span>
-                    </h2>
-                </div>
+                            <span class="tw-font-normal tw-font-bebas-neue tw-uppercase dark:tw-text-white tw-text-[16px] tw-ml-[9px] tw-leading-0">
+                                {{ dateString }}
+                            </span>
+                        </h2>
+                    </div>
 
-                <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-grow-0">
-                    <div class="tw-flex tw-flex-row">
-                        <span
-                            v-if="(isUsersPost || isCurrentUserAdmin)"
-                            class="no-decoration tw-cursor-pointer tw-mr-1"
-                            @click="deleteComment"
-                        >
-                            <TrashIcon class="tw-w-[16px] tw-h-[16px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]" />
-                        </span>
+                    <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-grow-0">
+                        <div class="tw-flex tw-flex-row">
+                            <span
+                                v-if="(isUsersPost || isCurrentUserAdmin)"
+                                class="no-decoration tw-cursor-pointer tw-mr-1"
+                                @click="deleteComment"
+                            >
+                                <TrashIcon class="tw-w-[16px] tw-h-[16px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]" />
+                            </span>
 
-                        <!--<span class="tiny no-decoration text-grey-3 pointer">-->
-                        <!--<i class="fas fa-link"-->
-                        <!--@click="getCommentLink"></i>-->
-                        <!--<textarea class="comment-id-copy"-->
-                        <!--contenteditable="true">{{ commentUrl }}</textarea>-->
-                        <!--</span>-->
+                            <!--<span class="tiny no-decoration text-grey-3 pointer">-->
+                            <!--<i class="fas fa-link"-->
+                            <!--@click="getCommentLink"></i>-->
+                            <!--<textarea class="comment-id-copy"-->
+                            <!--contenteditable="true">{{ commentUrl }}</textarea>-->
+                            <!--</span>-->
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="tw-flex tw-flex-row body tw-mb-2">
-                <div
-                    class="tw-flex tw-flex-col post-body tw-flex-grow tw-forum-post"
-                    v-html="comment.comment"
-                >
+                <div class="tw-flex tw-flex-row body tw-mb-2">
+                    <div
+                        class="tw-flex tw-flex-col post-body tw-flex-grow tw-forum-post"
+                        v-html="comment.comment"
+                    >
+                    </div>
                 </div>
-            </div>
 
-            <div class="tw-flex tw-flex-row tw-flex-wrap tw-mb-3">
-                <div class="tw-flex tw-flex-col tw-my-2 tw-w-full">
-                    <div class="tw-flex tw-flex-row tw-items-center">
-                        <p
-                            class="tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
-                            :class="comment.is_liked ? themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
-                            dusk="like-button"
-                            @click="likeComment"
-                        >
-                            <musora-icon :icon-name="comment.is_liked  ? 'thumb-like-filled' : 'thumb-like'"  class="tw-w-6 tw-h-6" />
-                            <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
-                                &nbsp;{{ comment.like_count }}
-                            </span>
-                        </p>
+                <div class="tw-flex tw-flex-row tw-flex-wrap tw-mb-3">
+                    <div class="tw-flex tw-flex-col tw-my-2 tw-w-full">
+                        <div class="tw-flex tw-flex-row tw-items-center">
+                            <p
+                                class="tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
+                                :class="comment.is_liked ? themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
+                                dusk="like-button"
+                                @click="likeComment"
+                            >
+                                <musora-icon :icon-name="comment.is_liked  ? 'thumb-like-filled' : 'thumb-like'"  class="tw-w-6 tw-h-6" />
+                                <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
+                                    &nbsp;{{ comment.like_count }}
+                                </span>
+                            </p>
 
-                        <p
-                            class="tw-ml-[16px] tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
-                            :class="replying ? themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
-                            dusk="reply-button"
-                            @click="replyToComment"
-                        >
-                            <MusoraIcon icon-name="comment-outline" class="tw-inline tw-h-[22px] tw-w-[22px]" width="22" height="22" viewBox="0 0 22 22"/>
-                            <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
-                                <span v-if="comment.replies && comment.replies.length > 0">&nbsp;{{ comment.replies.length }}</span>&nbsp;{{ repliesToShow.length > 1 ? 'REPLIES' : 'REPLY' }}&nbsp;
-                            </span>
-                        </p>
+                            <p
+                                class="tw-ml-[16px] tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
+                                :class="replying ? themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
+                                dusk="reply-button"
+                                @click="replyToComment"
+                            >
+                                <MusoraIcon icon-name="comment-outline" class="tw-inline tw-h-[22px] tw-w-[22px]" width="22" height="22" viewBox="0 0 22 22"/>
+                                <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
+                                    <span v-if="comment.replies && comment.replies.length > 0">&nbsp;{{ comment.replies.length }}</span>&nbsp;{{ repliesToShow.length > 1 ? 'REPLIES' : 'REPLY' }}&nbsp;
+                                </span>
+                            </p>
 
-                        <span class="tw-flex-grow"></span>
+                            <span class="tw-flex-grow"></span>
 
-                        <p
-                            class="dark:tw-text-white tw-text-[#00101D] tw-cursor-pointer tw-flex tw-items-center"
-                            :data-open-modal="openModalString"
-                            @click="openLikes"
-                        >
-                            <ThumbUpIcon
-                                class="tw-inline tw-mr-[5px] dark:tw-text-white tw-text-[#00101D] tw-border-black dark:tw-border-white tw-border-2 tw-rounded-full tw-bg-transparent tw-p-[3px] tw-w-[22px] tw-h-[22px]"
-                                :class="comment.like_count > 0 ? themeBgClass : 'bg-grey-2'"
-                            />&nbsp;{{ comment.like_count }}
-                        </p>
-                        <p
-                            class="dark:tw-text-[#627F97] tw-text-[#65656B] tw-font-bebas-neue tw-cursor-pointer tw-flex tw-items-center"
-                            @click="reportComment"
-                        ><FlagIcon
-                                class="tw-inline tw-ml-[16px] tw-mr-[5px] tw-w-[20px] tw-h-[20px]"
-                                :class="isReported ? 'tw-text-[#00101D] dark:tw-text-[#80A0B9]' : 'tw-text-[#65656B] dark:tw-text-[#627F97]'"
-                            />&nbsp;{{ isReported ? 'REPORTED' : 'REPORT'  }}
-                        </p>
+                            <div class="lg:tw-hidden group-hover/comment:lg:tw-flex tw-flex tw-items-center tw-text-[#3F3F46] dark:tw-text-white tw-cursor-pointer tw-relative tw-h-[20px]">
+                                <button @click="toggleDropdown">
+                                    <svg class="tw-rotate-90" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.5 5.20768L12.5 5.2181M12.5 12.4993L12.5 12.5098M12.5 19.791L12.5 19.8014M12.5 6.24935C11.9247 6.24935 11.4583 5.78298 11.4583 5.20768C11.4583 4.63239 11.9247 4.16602 12.5 4.16602C13.0753 4.16602 13.5417 4.63239 13.5417 5.20768C13.5417 5.78298 13.0753 6.24935 12.5 6.24935ZM12.5 13.541C11.9247 13.541 11.4583 13.0746 11.4583 12.4993C11.4583 11.9241 11.9247 11.4577 12.5 11.4577C13.0753 11.4577 13.5417 11.9241 13.5417 12.4993C13.5417 13.0746 13.0753 13.541 12.5 13.541ZM12.5 20.8327C11.9247 20.8327 11.4583 20.3663 11.4583 19.791C11.4583 19.2157 11.9247 18.7493 12.5 18.7493C13.0753 18.7493 13.5417 19.2157 13.5417 19.791C13.5417 20.3663 13.0753 20.8327 12.5 20.8327Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                </button>
+
+                                <ul
+                                    v-if="showDropdown"
+                                    class="tw-absolute tw-top-6 tw-right-0 tw-drop-shadow-lg tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-z-50"
+                                    v-click-outside="hideDropdown"
+                                >
+                                    <li>
+                                        <button class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-whitespace-nowrap tw-text-sm" :data-open-modal="openModalString" @click="openLikes">
+                                            <musora-icon icon-name="thumb-like"  class="tw-w-6 tw-h-6 tw-mr-1" /> See All Likes
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-whitespace-nowrap tw-text-sm" @click="reportComment">
+                                            <FlagIcon class="tw-inline tw-w-6 tw-h-6 tw-mr-1" /> Report Comment
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -312,6 +318,7 @@ export default {
             reply: '',
             loading: false,
             isReported: false,
+            showDropdown: false,
         };
     },
     computed: {
@@ -499,7 +506,7 @@ export default {
                     window.shownotification({
                         icon: 'error',
                         text: 'There was am error reporting this comment, please try again later.'
-                    }); 
+                    });
                 });
             } else {
                 window.shownotification({
@@ -507,6 +514,8 @@ export default {
                     text: 'You have already reported this comment.'
                 });
             }
+
+            this.hideDropdown()
         },
 
         deleteComment() {
@@ -552,6 +561,8 @@ export default {
                     totalLikeUsers: payload.busToRoot ? payload.totalLikeUsers : this.comment.like_count,
                 });
             }
+
+            this.hideDropdown()
         },
 
         getCommentLink(event) {
@@ -567,11 +578,19 @@ export default {
                 commentId.blur();
             }, 50);
         },
+
+        toggleDropdown() {
+            this.showDropdown = !this.showDropdown;
+        },
+
+        hideDropdown() {
+            this.showDropdown = false;
+        },
     },
     beforeMount() {
         this.isReported = this.comment.is_reported_by_viewer;
     },
-    watch: { 
+    watch: {
       	openedCommentId: function(newVal, oldVal) { // watch it
           if (newVal !== oldVal && this.openedCommentId !== this.comment.id) {
             this.replying = false;
