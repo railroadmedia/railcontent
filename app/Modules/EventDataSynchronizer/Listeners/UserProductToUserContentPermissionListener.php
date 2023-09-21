@@ -4,6 +4,7 @@ namespace App\Modules\EventDataSynchronizer\Listeners;
 
 use App\Modules\Content\Models\UserPermission;
 use App\Modules\Content\Services\ContentPermissionsService;
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\Ecommerce\Models\UserProduct;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
@@ -68,24 +69,23 @@ class UserProductToUserContentPermissionListener
         );
     }
 
-    public function syncContentPermissions(int $userId, Collection $userAccessPermissions): void
+    public function syncContentPermissions(int $userId, UserAccessPermissionsCollection $userAccessPermissions): void
     {
-        $userAccessPermissionsByPermissionId = $userAccessPermissions->groupBy('permission_id');
+        $permissionIds =$userAccessPermissions->getPermissionIds();
         $existingUserPermissions = $this->contentPermissionsService->getUserPermissions($userId)->get()->keyBy(
             'permission_id'
         );
 
-        foreach ($userAccessPermissionsByPermissionId as $userAccessPermissionId => $userAccessPermissionsList) {
-            list($startDate, $expirationDate) = $this->userAccessPermissionsService
-                ->getActiveDates($userAccessPermissionsList);
+        foreach ($permissionIds as $permissionId ) {
+            list($startDate, $expirationDate) = $userAccessPermissions->getActiveDates($permissionId);
             if ($expirationDate) {
                 $expirationDate->addDays(config('ecommerce.days_before_access_revoked_after_expiry', 7));
             }
-            $userPermission = $existingUserPermissions[$userAccessPermissionId] ?? null;
+            $userPermission = $existingUserPermissions[$permissionId] ?? null;
             if (!$userPermission) {
                 $userPermission = new UserPermission();
                 $userPermission->user_id = $userId;
-                $userPermission->permission_id = $userAccessPermissionId;
+                $userPermission->permission_id = $permissionId;
                 $userPermission->created_on = Carbon::now();
             }
             if ($userPermission->start_date != $startDate || $userPermission->expiration_date != $expirationDate) {

@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Services;
 
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Carbon\Carbon;
 use Railroad\Ecommerce\Entities\Product;
@@ -77,16 +78,13 @@ class UserMembershipFieldsService
         return true;
     }
 
-    public function syncUserAccess($userId, $userAccessPermissions)
+    public function syncUserAccess(UserAccessPermissionsCollection $userAccessPermissions): bool
     {
-        $plusMembershipExpirationDate = $this->userAccessPermissionsService
-            ->getPlusMembershipExpirationDate($userAccessPermissions);
-        $basicMembershipExpirationDate = $this->userAccessPermissionsService
-            ->getBasicMembershipExpirationDate($userAccessPermissions);
-        $songsAccessExpirationDate = $this->userAccessPermissionsService
-            ->getSongsAccessExpirationDate($userAccessPermissions);
+        $userId = $userAccessPermissions->getUserId();
+        $plusMembershipExpirationDate = $userAccessPermissions->getPlusMembershipExpirationDate();
+        $basicMembershipExpirationDate = $userAccessPermissions->getBasicMembershipExpirationDate();
 
-        $membershipExpirationDate = Carbon::max($plusMembershipExpirationDate, $basicMembershipExpirationDate);
+        $membershipExpirationDate = $plusMembershipExpirationDate->max($basicMembershipExpirationDate);
 
         $membershipLevel = null;
         if ($basicMembershipExpirationDate > Carbon::now()) {
@@ -95,13 +93,10 @@ class UserMembershipFieldsService
         if ($plusMembershipExpirationDate > Carbon::now()) {
             $membershipLevel = 'plus';
         }
-        if ($songsAccessExpirationDate > Carbon::now()) {
-            $membershipLevel = 'plus';
-        }
 
 
-        $isLifetimeMember = $this->userAccessPermissionsService->getIsLifetimeMember($userAccessPermissions);
-        $isDrumeoLifetimeMember = $this->userAccessPermissionsService->getIsDrumeoLifetimeMember($userAccessPermissions);
+        $isLifetimeMember = $userAccessPermissions->getIsLifetimeMember();
+        $isDrumeoLifetimeMember = $userAccessPermissions->getIsDrumeoLifetimeMember();
         $ownsPacks = $this->userAccessPermissionsService->getOwnsPacks($userAccessPermissions);
 
 
@@ -127,7 +122,7 @@ class UserMembershipFieldsService
     public function sync($userId, array $userProducts = null, array $associatedCoaches = null): bool
     {
         if (config('shopify.enabled')) {
-            $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId)->get();
+            $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId);
             $this->syncUserAccess($userId, $userAccessPermissions);
             return true;
         }

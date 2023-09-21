@@ -2,24 +2,81 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Models\Subscription;
+use App\Modules\Ecommerce\Models\UserProduct;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 
 class SubscriptionService
 {
-    public function getFirstSubscriptionBrand(int $userId, array $brands)
-    : string {
-        $result =
-            Subscription::query()
-                ->whereIn('brand', $brands)
-                ->fromUser($userId)
-                ->orderBy('created_at')
-                ->first('brand');
 
+    private UserAccessPermissionsService $userAccessPermissionsService;
+    private ProductService $productService;
+    private RechargeGateway $recharge;
+
+    public function __construct(
+        UserAccessPermissionsService $userAccessPermissionsService,
+        ProductService $productService,
+        RechargeGateway $recharge
+    ) {
+        $this->userAccessPermissionsService = $userAccessPermissionsService;
+        $this->productService = $productService;
+        $this->recharge = $recharge;
+    }
+
+    public function getFirstSubscriptionBrand(int $userId, array $brands): string
+    {
+        $result = Subscription::query()
+            ->whereIn('brand', $brands)
+            ->fromUser($userId)
+            ->orderBy('created_at')
+            ->first('brand');
         return $result['brand'] ?? '';
     }
 
-    /**
+    public function syncSubscriptionData(int $userId, Collection $userAccessPermissions): void
+    {
+        $subscriptions = $this->recharge->getSubscriptions($shopifyCustomerId);
+        $shopifyVariantIds = $subscriptions->pluck('shopify_variant_id')->toArray();
+        $productLookup = $this->productService->getProductsByShopifyIdsQuery($shopifyVariantIds)
+            ->keyBy('shopify_id');
+
+        $membershipSubscriptions = $subscriptions->filter(function ($subscription) use ($productLookup) {
+            $product = $productLookup[$subscription->shopify_variant_id] ?? null;
+            if (!$product) {
+                Log::error("Product not found for recharge subscription $subscription->id");
+                return false;
+            }
+            return $product->isMembershipProduct() && $subscription->status == 'active';
+        });
+
+        $userProducts = $this->userAccessPermissionsService->getIsLifetimeMember($userAccessPermissions);
+        $isLifetimeMember = $userProducts->contains(function ($userProduct) {
+            /** @var UserProduct $userProduct */
+            return $userProduct->isValidLifeTime();
+        });
+
+
+        if ($isLifetimeMember) {
+            foreach ($membershipSubscriptions as $membershipSubscription) {
+                $this->recharge->cancelSubscription($membershipSubscription, 'Lifetime Member');
+            }
+        } elseif ($membershipSubscriptions->count() > 1) {
+            $mostRecentSubscription = $subscriptions->sortByDesc('created_at')->first();
+
+            foreach ($membershipSubscriptions as $membershipSubscription) {
+                if ($membershipSubscription->id != $mostRecentSubscription->id) {
+                    $this->recharge->cancelSubscription($membershipSubscription, 'Duplicate Subscription');
+                }
+            }
+
+            $this->recharge->updateSubscriptionNextChargeDate($mostRecentSubscription, $membershipExpirationDate);
+        }
+    }
+
+        /**
      * @param $userId
      * @param $expiresDate
      * @param $musoraProduct

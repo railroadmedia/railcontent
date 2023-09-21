@@ -187,7 +187,7 @@ class HelpScoutEventListener
 
         try {
             //help scout syncing has never worked due to this code, may leave this for rudderstack integration
-            $userId = $userProductsUpdated->getUserId();
+            $userId = $userAccessPermissionsUpdated->getUserId();
             $user = $this->userService->getByEmailOrNull($userId);
 
             if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {

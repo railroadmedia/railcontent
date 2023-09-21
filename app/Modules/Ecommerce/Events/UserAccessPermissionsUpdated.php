@@ -2,27 +2,25 @@
 
 namespace App\Modules\Ecommerce\Events;
 
-use Illuminate\Support\Collection;
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 
 class UserAccessPermissionsUpdated
 {
-    private int $userId;
-    private Collection $userAccessPermissions;
+    private UserAccessPermissionsCollection $userAccessPermissions;
 
-    public function __construct(int $userId, Collection $userAccessPermissions)
+    public function __construct(UserAccessPermissionsCollection $userAccessPermissions)
     {
-        $this->userId = $userId;
         $this->userAccessPermissions = $userAccessPermissions;
     }
 
-    public function getUserId(): int
-    {
-        return $this->userId;
-    }
-
-    public function getUserAccessPermissions(): Collection
+    public function getUserAccessPermissions(): UserAccessPermissionsCollection
     {
         return $this->userAccessPermissions;
+    }
+
+    public function getUserId()
+    {
+        return $this->userAccessPermissions->getUserId();
     }
 
 }

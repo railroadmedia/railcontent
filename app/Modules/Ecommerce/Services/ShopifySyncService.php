@@ -150,44 +150,4 @@ class ShopifySyncService
             "vendor" => $product->brand,
         ]);
     }
-
-    private function syncSubscriptionData(int $userId, int $shopifyCustomerId, ?Carbon $membershipExpirationDate)
-    {
-        $subscriptions = $this->recharge->getSubscriptions($shopifyCustomerId);
-        $shopifyVariantIds = $subscriptions->pluck('shopify_variant_id')->toArray();
-        $productLookup = $this->productService->getProductsByShopifyIdsQuery($shopifyVariantIds)
-            ->keyBy('shopify_id');
-
-        $membershipSubscriptions = $subscriptions->filter(function ($subscription) use ($productLookup) {
-            $product = $productLookup[$subscription->shopify_variant_id] ?? null;
-            if (!$product) {
-                Log::error("Product not found for recharge subscription $subscription->id");
-                return false;
-            }
-            return $product->isMembershipProduct() && $subscription->status == 'active';
-        });
-
-        $userProducts = $this->userProductService->getUserProductsQuery($userId)->with('product')->get();
-        $isLifetimeMember = $userProducts->contains(function ($userProduct) {
-            /** @var UserProduct $userProduct */
-            return $userProduct->isValidLifeTime();
-        });
-
-
-        if ($isLifetimeMember) {
-            foreach ($membershipSubscriptions as $membershipSubscription) {
-                $this->recharge->cancelSubscription($membershipSubscription, 'Lifetime Member');
-            }
-        } elseif ($membershipSubscriptions->count() > 1) {
-            $mostRecentSubscription = $subscriptions->sortByDesc('created_at')->first();
-
-            foreach ($membershipSubscriptions as $membershipSubscription) {
-                if ($membershipSubscription->id != $mostRecentSubscription->id) {
-                    $this->recharge->cancelSubscription($membershipSubscription, 'Duplicate Subscription');
-                }
-            }
-
-            $this->recharge->updateSubscriptionNextChargeDate($mostRecentSubscription, $membershipExpirationDate);
-        }
-    }
 }
