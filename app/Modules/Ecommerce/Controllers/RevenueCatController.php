@@ -8,11 +8,9 @@ use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\Ecommerce\Services\UserProductService;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
-use Modules\Ecommerce\Services\PaymentService;
 use Modules\UserManagementSystem\Models\User;
 
 class RevenueCatController extends Controller
@@ -20,27 +18,23 @@ class RevenueCatController extends Controller
     private RevenueCatService $revenueCatService;
     private SubscriptionService $subscriptionService;
     private UserProductService $userProductService;
-    private PaymentService $paymentService;
     private ShopifySyncService $shopifySyncService;
 
     /**
      * @param RevenueCatService $revenueCatService
      * @param SubscriptionService $subscriptionService
      * @param UserProductService $userProductService
-     * @param PaymentService $paymentService
      * @param ShopifySyncService $shopifySyncService
      */
     public function __construct(
         RevenueCatService $revenueCatService,
         SubscriptionService $subscriptionService,
         UserProductService $userProductService,
-        PaymentService $paymentService,
         ShopifySyncService $shopifySyncService
     ) {
         $this->revenueCatService = $revenueCatService;
         $this->subscriptionService = $subscriptionService;
         $this->userProductService = $userProductService;
-        $this->paymentService = $paymentService;
         $this->shopifySyncService = $shopifySyncService;
     }
 
