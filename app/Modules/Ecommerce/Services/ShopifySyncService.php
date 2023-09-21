@@ -47,8 +47,6 @@ class ShopifySyncService
         }
         $orders = $this->shopify->getCustomerOrders($shopifyCustomerId, ['status' => 'any']);
         $this->userAccessPermissionsService->syncShopifyOrders($userId, $orders);
-        //Todo: move this to an event listener
-        //$this->syncSubscriptionData($userId, $shopifyCustomerId, $membershipExpirationDate);
     }
 
     private function getUserIdFromShopifyCustomerId($shopifyCustomerId)
