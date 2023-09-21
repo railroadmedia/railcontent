@@ -18,6 +18,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Payment extends Model
 {
+    const TYPE_APPLE_SUBSCRIPTION_RENEWAL = 'apple_subscription_renewal';
+    const TYPE_GOOGLE_SUBSCRIPTION_RENEWAL = 'google_subscription_renewal';
+    const STATUS_PAID = 'paid';
+
     protected $table = 'ecommerce_payments';
     protected $primaryKey = 'id';
 }

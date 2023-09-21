@@ -8470,16 +8470,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.40",
+            "version": "dev-v3.0-revenuecat",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "d1df30379b7a11caa066c808448d474e7453b5f9"
+                "reference": "8a64297be1100855104cd86a7a59dd3be8caf6b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/d1df30379b7a11caa066c808448d474e7453b5f9",
-                "reference": "d1df30379b7a11caa066c808448d474e7453b5f9",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/8a64297be1100855104cd86a7a59dd3be8caf6b7",
+                "reference": "8a64297be1100855104cd86a7a59dd3be8caf6b7",
                 "shasum": ""
             },
             "require": {
@@ -8509,9 +8509,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.40"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.0-revenuecat"
             },
-            "time": "2023-09-19T07:59:46+00:00"
+            "time": "2023-09-13T11:35:41+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -17205,6 +17205,12 @@
             "alias_normalized": "5.0.102.0"
         },
         {
+            "package": "railroad/musora-api",
+            "version": "dev-v3.0-revenuecat",
+            "alias": "v3.1.36",
+            "alias_normalized": "3.1.36.0"
+        },
+        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
@@ -17214,6 +17220,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "railroad/ecommerce": 20,
+        "railroad/musora-api": 20,
         "railroad/railanalytics": 20
     },
     "prefer-stable": true,
