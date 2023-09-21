@@ -347,7 +347,7 @@ class CustomerIoSyncEventListener
         }
 
         try {
-            $userId = $userProductsUpdated->getUserId();
+            $userId = $userAccessPermissionsUpdated->getUserId();
             $user = $this->userService->getByIdOrNull($userId);
 
             if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
