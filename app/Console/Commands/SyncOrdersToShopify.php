@@ -14,12 +14,16 @@ use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Order;
 use Railroad\Ecommerce\Entities\OrderItem;
 use Railroad\Ecommerce\Entities\OrderItemFulfillment;
+use Railroad\Ecommerce\Entities\Payment;
 use Railroad\Ecommerce\Entities\Product;
+use Railroad\Ecommerce\Entities\Refund;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Ecommerce\Repositories\CustomerRepository;
 use Railroad\Ecommerce\Repositories\OrderRepository;
 use Railroad\Ecommerce\Repositories\OrderItemRepository;
+use Railroad\Ecommerce\Repositories\PaymentRepository;
 use Railroad\Ecommerce\Repositories\ProductRepository;
+use Railroad\Ecommerce\Repositories\RefundRepository;
 use Railroad\Ecommerce\Repositories\RepositoryBase;
 use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\REST\Resources\ApiResource;
@@ -52,6 +56,8 @@ class SyncOrdersToShopify extends Command
     protected OrderRepository $orderRepository;
     protected OrderItemRepository $orderItemRepository;
     protected ProductRepository $productRepository;
+    protected PaymentRepository $paymentRepository;
+    protected RefundRepository $refundRepository;
     protected EcommerceEntityManager $entityManager;
 
     // the date and time that the last sync for this entity was performed
@@ -67,6 +73,7 @@ class SyncOrdersToShopify extends Command
     const TABLE_ITEM_ID = "item_id";
     const TABLE_SHOPIFY_FULFILLMENT_ID = "shopify_fulfillment_id";
     const TABLE_ITEM_ACTION = "order_item_fulfillment_action";
+    const DEFAULT_CURRENCY = "USD";
 
     /**
      * Execute the console command.
@@ -75,7 +82,9 @@ class SyncOrdersToShopify extends Command
      * @param CustomerRepository $customerRepository
      * @param OrderRepository $orderRepository
      * @param OrderItemRepository $orderItemRepository
+     * @param PaymentRepository $paymentRepository
      * @param ProductRepository $productRepository
+     * @param RefundRepository $refundRepository
      * @param EcommerceEntityManager $entityManager
      * @return int
      */
@@ -83,14 +92,18 @@ class SyncOrdersToShopify extends Command
                            CustomerRepository $customerRepository,
                            OrderRepository $orderRepository,
                            OrderItemRepository $orderItemRepository,
+                           PaymentRepository $paymentRepository,
                            ProductRepository $productRepository,
+                           RefundRepository $refundRepository,
                            EcommerceEntityManager $entityManager): int
     {
         $this->shopify = $shopify;
         $this->customerRepository = $customerRepository;
         $this->orderRepository = $orderRepository;
         $this->orderItemRepository = $orderItemRepository;
+        $this->paymentRepository = $paymentRepository;
         $this->productRepository = $productRepository;
+        $this->refundRepository = $refundRepository;
         $this->entityManager = $entityManager;
 
         // record this as a class variable so that it doesn't get updated with each loop of the users
@@ -114,7 +127,15 @@ class SyncOrdersToShopify extends Command
     {
         $fresh = $this->getIsFresh();
         $limit = $this->getLimit();
-        $tableHeader = ["Order ID", "Order Item ID", "Order Item Fulfillment ID", "Refund ID", "Action", "Shopify ID"];
+        $tableHeader = [
+            "Order ID",
+            "Order Item ID",
+            "Payment ID",
+            "Order Item Fulfillment ID",
+            "Refund ID",
+            "Action",
+            "Shopify ID"
+        ];
         $this->tableRows = [];
 
         // get the orders, using pagination to keep from blowing up the memory usage
@@ -212,12 +233,12 @@ class SyncOrdersToShopify extends Command
                 try {
                     $user = User::find($order->getUser()->getId());
                     if (is_null($user->shopify_id)) {
-                        $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>SKIPPED</error>", "User has not been synced to Shopify"];
+                        $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "<error>SKIPPED</error>", "User has not been synced to Shopify"];
                         $skip = true;
                     }
                 } catch (ORMException $e) {
                     $this->error(sprintf("Could not find user by ID %s", $order->getUser()->getId()));
-                    $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>SKIPPED</error>", "User not found"];
+                    $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "<error>SKIPPED</error>", "User not found"];
                     $skip = true;
                 }
             } elseif (!is_null($order->getCustomer())) {
@@ -225,12 +246,12 @@ class SyncOrdersToShopify extends Command
                 try {
                     $customer = $this->customerRepository->find($order->getCustomer()->getId());
                     if (is_null($customer->getShopifyId())) {
-                        $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>SKIPPED</error>", "Customer has not been synced to Shopify"];
+                        $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "<error>SKIPPED</error>", "Customer has not been synced to Shopify"];
                         $skip = true;
                     }
                 } catch (ORMException $e) {
                     $this->error(sprintf("Could not find customer by ID %s", $order->getCustomer()->getId()));
-                    $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>SKIPPED</error>", "Customer not found"];
+                    $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "<error>SKIPPED</error>", "Customer not found"];
                     $skip = true;
                 }
             } else {
@@ -284,7 +305,7 @@ class SyncOrdersToShopify extends Command
             $this->error(sprintf("Failed to find User or Customer for Order ID %s",
                 $order->getId()));
             // record the failure in the table then exit out for this order
-            $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>FAILED</error>", $e->getMessage()];
+            $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "<error>FAILED</error>", $e->getMessage()];
             return;
         }
 
@@ -300,7 +321,7 @@ class SyncOrdersToShopify extends Command
                         $orderResource = $this->shopify->updateOrder($order->getShopifyId(), $postData);
                     } else {
                         $orderResource = null;
-                        $this->tableRows[] = [$order->getId(), "--", "--", "--", "Skipped", $order->getShopifyId()];
+                        $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "Skipped", $order->getShopifyId()];
                     }
                     $orderShopifyId = $order->getShopifyId();
                 }
@@ -310,7 +331,7 @@ class SyncOrdersToShopify extends Command
                 $this->error(sprintf("Please investigate for Order ID %s. Attempted order data: %s",
                     $order->getId(), json_encode($postData)));
                 // record the failure in the table then exit out for this order
-                $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>FAILED</error>", $exception->getMessage()];
+                $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "<error>FAILED</error>", $exception->getMessage()];
                 return;
             }
 
@@ -322,7 +343,7 @@ class SyncOrdersToShopify extends Command
                     $this->entityManager->flush();
                 }
                 $this->shopifyIds->push($orderShopifyId);
-                $this->tableRows[] = [$order->getId(), "--", "--", "--", $isCreating ? "Created" : "Updated", $orderShopifyId];
+                $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", $isCreating ? "Created" : "Updated", $orderShopifyId];
             } catch (\Doctrine\ORM\Exception\ORMException $e) {
                 $this->error(sprintf("Failed to save shopify_id for order ID %s: %s",
                     $order->getId(), $e->getMessage()));
@@ -348,7 +369,15 @@ class SyncOrdersToShopify extends Command
                             $this->entityManager->persist($lineItem);
                             $this->entityManager->flush();
                         }
-                        $this->tableRows[] = [$order->getId(), $sentLineItem["ecommerce_order_item_id"], "--", "--", $isCreatedLineItem ? "Created" : "Updated", $lineItemShopifyId];
+                        $this->tableRows[] = [
+                            $order->getId(),
+                            $sentLineItem["ecommerce_order_item_id"],
+                            "--",
+                            "--",
+                            "--",
+                            $isCreatedLineItem ? "Created" : "Updated",
+                            $lineItemShopifyId
+                        ];
                     } catch (\Doctrine\ORM\Exception\ORMException $e) {
                         $this->error(sprintf("Failed to save shopify_id for order item ID %s: %s",
                             $sentLineItem["ecommerce_order_item_id"], $e->getMessage()));
@@ -358,13 +387,17 @@ class SyncOrdersToShopify extends Command
                     }
                 }
             }
-            // STEP 5: add the Fulfillments and tracking
+
+            // STEP 5: add payments
+            $this->sendPaymentsForOrderToShopify($order);
+
+            // STEP 6: add the Fulfillments and tracking
             $fulfillmentOrder = $this->getFulfillmentOrderResource($order);
             if (is_null($fulfillmentOrder)) {
                 $this->error(sprintf("Failed to retrieve Fulfillment Order Resource from Shopify for Order ID %s",
                     $order->getId()));
                 // record the failure in the table then exit out for this order
-                $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>FAILED</error>", "No Fulfillment Order Resource"];
+                $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "<error>FAILED</error>", "No Fulfillment Order Resource"];
                 return;
             }
             $fulfillmentOrderStatus = $fulfillmentOrder->getAttributes()["status"];
@@ -385,6 +418,7 @@ class SyncOrdersToShopify extends Command
                             $this->tableRows[] = [
                                 $order->getId(),
                                 "--",
+                                "--",
                                 $fulfillmentRecord[self::TABLE_ITEM_ID],
                                 "--",
                                 $fulfillmentRecord[self::TABLE_ITEM_ACTION],
@@ -397,8 +431,8 @@ class SyncOrdersToShopify extends Command
                         $order->getId(), $e->getMessage()));
                 }
             }
-            // STEP 6: add any refunds
-            //TODO SRR-41: get any of our refunds and send those to shopify
+            // STEP 7: add any refunds
+            $this->sendRefundsForOrderToShopify($order);
         } else {
             // simulating
             $orderShopifyId = $order->getShopifyId() ?? $simulatedShopifyId;
@@ -410,7 +444,19 @@ class SyncOrdersToShopify extends Command
             } else {
                 $action = "Skipped";
             }
-            $this->tableRows[] = [$order->getId(), "--", "--", "--", $action, $orderShopifyId];
+            $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", $action, $orderShopifyId];
+
+            // record the payment creations, but we won't actually do it
+            $payments = $this->getPaymentsDataToSync($order);
+            $payments->each(fn(array $paymentData)  => $this->tableRows[] = [
+                $order->getId(),
+                "--",
+                $paymentData["id"],
+                "--",
+                "--",
+                "Created",
+                $orderShopifyId+$paymentData["id"]
+            ]);
 
             $fulfillmentOrder = $this->getFulfillmentOrderResource($order);
             if (!is_null($fulfillmentOrder)) {
@@ -432,6 +478,7 @@ class SyncOrdersToShopify extends Command
                     $lineItemData["ecommerce_order_item_id"],
                     "--",
                     "--",
+                    "--",
                     $lineItemData["shopify_id"] ? "Updated" : "Created",
                     $lineItemShopifyId
                 ];
@@ -451,6 +498,7 @@ class SyncOrdersToShopify extends Command
                                 "--",
                                 $fulfillmentRecord[self::TABLE_ITEM_ID],
                                 "--",
+                                "--",
                                 $fulfillmentRecord[self::TABLE_ITEM_ACTION],
                                 $fulfillmentRecord[self::TABLE_SHOPIFY_FULFILLMENT_ID]
                             ];
@@ -461,7 +509,18 @@ class SyncOrdersToShopify extends Command
                         $order->getId(), $e->getMessage()));
                 }
             }
-            //TODO SRR-41: get any of our refunds and simulate sending those to shopify
+            // record the refunds, but we won't actually do it
+            $refunds = $this->getRefundsToSync($order);
+            $refunds->each(fn(Refund $refund)  => $this->tableRows[] = [
+                $order->getId(),
+                "--",
+                "--",
+                "--",
+                $refund->getId(),
+                "Created",
+                $orderShopifyId+$refund->getId()
+            ]);
+
         }
     }
 
@@ -613,6 +672,202 @@ class SyncOrdersToShopify extends Command
         });
 
         return $orderItemsData;
+    }
+
+
+    /**
+     * Get the unsynced payments for this order, and send the data to Shopify to create a payment transaction
+     * for each one, recording the result's shopify_id
+     *
+     * @param Order $order
+     * @return void
+     */
+    private function sendPaymentsForOrderToShopify(Order $order): void
+    {
+        $this->getPaymentsDataToSync($order)->each(function(array $paymentData) use ($order) {
+            $paymentId = $paymentData["id"];
+            try {
+                $paymentResource = $this->shopify->createOrderTransaction($order->getShopifyId(), $paymentData["data"]);
+                $paymentShopifyId = $paymentResource->id;
+
+                // record the shopify ID on the Payment
+                $payment = $this->paymentRepository->find($paymentId);
+                $payment->setShopifyId($paymentShopifyId);
+                $this->entityManager->persist($payment);
+                $this->entityManager->flush();
+
+                $this->shopifyIds->push($paymentShopifyId);
+                $this->tableRows[] = [$order->getId(), "--", $paymentId, "--", "--", "Created" , $paymentShopifyId];
+
+            } catch (ValidationException $exception) {
+                $this->error(sprintf("Validation failed when sending order transaction to Shopify: %s",
+                    $exception->getMessage()));
+                $this->error(sprintf("Please investigate for Order ID %s. Attempted order data: %s",
+                    $order->getId(), json_encode($paymentData["data"])));
+                $this->tableRows[] = [$order->getId(), "--", $paymentId, "--", "--", "<error>FAILED</error>", $exception->getMessage()];
+            } catch (\Doctrine\ORM\Exception\ORMException $exception) {
+                $this->error(sprintf("Failed to save shopify_id for payment ID %s: %s",
+                    $paymentId, $exception->getMessage()));
+                $this->tableRows[] = [$order->getId(), "--", $paymentId, "--", "--", "<error>FAILED</error>", $exception->getMessage()];
+            }
+        });
+    }
+
+    /**
+     * Get all payments for this order that need to be synced up to Shopify, and transform the data into the
+     * format required by Shopify
+     *
+     * @param Order $order
+     * @return Collection
+     */
+    private function getPaymentsDataToSync(Order $order): Collection
+    {
+        // we get an ArrayCollection from doctrine, so just take the normal array from that
+        /** @var Payment[] $payments */
+        $payments = $order->getPayments()->toArray();
+        if (empty($payments)) {
+            return collect();
+        }
+        $payments = collect($payments)
+            ->filter(fn(Payment $payment) => is_null($payment->getShopifyId()) && $payment->getStatus() === Payment::STATUS_PAID);
+
+        return $payments->transform(function(Payment $payment) {
+            return
+                [
+                    "id" => $payment->getId(),
+                    "data" =>
+                        [
+                            "currency" => $payment->getCurrency(),
+                            "amount" => number_format($payment->getTotalPaid(), 2),
+                            "kind" => "sale",
+                            // DEV NOTE: this is not documented in Shopify, but it is required
+                            "source" => "external"
+                        ]
+                ];
+        });
+    }
+
+    /**
+     * Get the unsynced refunds for this order, and complete the process to perform a refund in Shopify for each one,
+     * recording the result's shopify_id
+     *
+     * @param Order $order
+     * @return void
+     */
+    private function sendRefundsForOrderToShopify(Order $order): void
+    {
+        $orderShopifyId = $order->getShopifyId();
+        // get any refunds that need to be sent
+        $refunds = $this->getRefundsToSync($order);
+        if ($refunds->isEmpty()) {
+            return;
+        }
+
+        // 1. orders are automatically closed (or "archived", as it's also called), and refunds cannot be issued to
+        // closed orders. So before we issue any, we need to check the status, and reopen the order, if it's closed
+        $orderShopifyAttributes = $this->shopify->getOrder($orderShopifyId)->getAttributes();
+        $wasReopened = false;
+
+        if ($orderShopifyAttributes["closed_at"]) {
+            $this->shopify->openOrder($orderShopifyId);
+            $wasReopened = true;
+        }
+
+        $refunds->each(function (Refund $refund) use ($order, $orderShopifyId) {
+            $paymentToRefund = $refund->getPayment();
+            if (is_null($paymentToRefund)) {
+                $this->error(sprintf("No payment found for Refund ID %s. Refund cannot be sent to Shopify",
+                    $refund->getId()));
+                $this->tableRows[] = [$order->getId(), "--", "--", "--", $refund->getId(), "<error>FAILED</error>", "Payment not found"];
+                return;
+            }
+
+            // 2. use the calculate endpoint to initiate the process
+            $currency = $paymentToRefund->getCurrency() ?? self::DEFAULT_CURRENCY;
+            $calculateResponse = $this->shopify->calculateOrderRefund($orderShopifyId,
+                [
+                    "currency" => $currency
+                ]
+            );
+
+            // check the transactions in the response, to make sure our payment is in there, so we can use its Shopify ID with the refund
+            $transactionData = collect($calculateResponse->getAttributes()["transactions"])
+                ->firstWhere("parent_id", $paymentToRefund->getShopifyId());
+
+            if (is_null($transactionData)) {
+                $this->error(sprintf("Shopify did not return a transaction for our Payment ID %s, attempting for Refund ID %s. Refund cannot be sent to Shopify",
+                    $paymentToRefund->getId(), $refund->getId()));
+                $this->tableRows[] = [$order->getId(), "--", "--", "--", $refund->getId(), "<error>FAILED</error>", "Payment not in calculated refund"];
+                return;
+            }
+
+            // safety check that we're not trying to refund more than we're allowed
+            if ($refund->getRefundedAmount() > floatval($transactionData["maximum_refundable"])) {
+                $this->error(sprintf("Attempting to refund %s for Refund ID %s, which exceeds the maximum_refundable of %s. Refund cannot be sent to Shopify",
+                    number_format($refund->getRefundedAmount(), 2), $refund->getId(), $transactionData["maximum_refundable"]));
+                $this->tableRows[] = [$order->getId(), "--", "--", "--", $refund->getId(), "<error>FAILED</error>", "Refund amount too high"];
+                return;
+            }
+
+            // 3. we can now make the actual refund
+            $refundData = [
+                "currency" => $currency,
+                "notify" => false,
+                "transactions" => [
+                    [
+                        "parent_id" => $paymentToRefund->getShopifyId(),
+                        "amount" => $refund->getRefundedAmount(),
+                        "kind" => "refund"
+                    ]
+                ]
+            ];
+            if ($refund->getNote()){
+                $refundData["note"] = $refund->getNote();
+            }
+
+            $refundResource = $this->shopify->createOrderRefund($orderShopifyId, $refundData);
+            $refundShopifyId = $refundResource->id;
+
+            // record the shopify ID on the Refund
+            $refund->setShopifyId($refundShopifyId);
+            try {
+                $this->entityManager->persist($refund);
+                $this->entityManager->flush();
+
+                $this->shopifyIds->push($refundShopifyId);
+                $this->tableRows[] = [$order->getId(), "--", "--", "--", $refund->getId(), "Created" , $refundShopifyId];
+            } catch (\Doctrine\ORM\Exception\ORMException $e) {
+                $this->error(sprintf("Failed to save shopify_id for refund ID %s: %s",
+                    $refund->getId(), $e->getMessage()));
+            }
+        });
+
+        // 4. if we had to reopen the order, we need to close it again
+        if ($wasReopened) {
+            $this->shopify->closeOrder($orderShopifyId);
+        }
+    }
+
+    /**
+     * Get a collection of refunds that need to be synced for this order
+     *
+     * @param Order $order
+     * @return Collection
+     */
+    private function getRefundsToSync(Order $order): Collection
+    {
+        // we get an ArrayCollection from doctrine, so just take the normal array from that
+        /** @var Payment[] $payments */
+        $payments = $order->getPayments()->toArray();
+        if (empty($payments)) {
+            return collect();
+        }
+        $refunds = $this->refundRepository->getPaymentsRefunds($payments);
+        if (empty($refunds)) {
+            return collect();
+        }
+
+        return collect($refunds)->filter(fn (Refund $refund) => is_null($refund->getShopifyId()));
     }
 
     /**
