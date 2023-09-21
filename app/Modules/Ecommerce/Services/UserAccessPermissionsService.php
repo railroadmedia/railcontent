@@ -17,7 +17,7 @@ class UserAccessPermissionsService
     private ProductService $productService;
     private ContentPermissionsService $contentPermissionsService;
 
-    private array $cachedPackPermissionIds;
+    private ?array $cachedPackPermissionIds = null;
 
     function __construct(ProductService $productService, ContentPermissionsService $contentPermissionsService)
     {

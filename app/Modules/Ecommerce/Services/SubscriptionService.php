@@ -2,9 +2,11 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\UserProduct;
+use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
@@ -15,15 +17,18 @@ class SubscriptionService
     private UserAccessPermissionsService $userAccessPermissionsService;
     private ProductService $productService;
     private RechargeGateway $recharge;
+    private UserService $userService;
 
     public function __construct(
         UserAccessPermissionsService $userAccessPermissionsService,
         ProductService $productService,
-        RechargeGateway $recharge
+        RechargeGateway $recharge,
+        UserService $userService
     ) {
         $this->userAccessPermissionsService = $userAccessPermissionsService;
         $this->productService = $productService;
         $this->recharge = $recharge;
+        $this->userService = $userService;
     }
 
     public function getFirstSubscriptionBrand(int $userId, array $brands): string
@@ -36,9 +41,10 @@ class SubscriptionService
         return $result['brand'] ?? '';
     }
 
-    public function syncSubscriptionData(int $userId, Collection $userAccessPermissions): void
+    public function syncSubscriptionData(UserAccessPermissionsCollection $userAccessPermissions): void
     {
-        $subscriptions = $this->recharge->getSubscriptions($shopifyCustomerId);
+        $user = $this->userService->getByIdOrNull($userAccessPermissions->getUserId());
+        $subscriptions = $this->recharge->getSubscriptions($user->shopify_id);
         $shopifyVariantIds = $subscriptions->pluck('shopify_variant_id')->toArray();
         $productLookup = $this->productService->getProductsByShopifyIdsQuery($shopifyVariantIds)
             ->keyBy('shopify_id');
@@ -52,12 +58,7 @@ class SubscriptionService
             return $product->isMembershipProduct() && $subscription->status == 'active';
         });
 
-        $userProducts = $this->userAccessPermissionsService->getIsLifetimeMember($userAccessPermissions);
-        $isLifetimeMember = $userProducts->contains(function ($userProduct) {
-            /** @var UserProduct $userProduct */
-            return $userProduct->isValidLifeTime();
-        });
-
+        $isLifetimeMember = $userAccessPermissions->getIsLifetimeMember();
 
         if ($isLifetimeMember) {
             foreach ($membershipSubscriptions as $membershipSubscription) {
@@ -71,6 +72,8 @@ class SubscriptionService
                     $this->recharge->cancelSubscription($membershipSubscription, 'Duplicate Subscription');
                 }
             }
+
+            $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate();
 
             $this->recharge->updateSubscriptionNextChargeDate($mostRecentSubscription, $membershipExpirationDate);
         }

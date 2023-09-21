@@ -18,7 +18,7 @@ class ProductService
     public function getAllPacks(): Collection
     {
         return Product::query()
-            ->whereIn('digital_access_type', Product::DIGITAL_ACCESS_TYPE_SPECIFIC_CONTENT_ACCESS)
+            ->where('digital_access_type', Product::DIGITAL_ACCESS_TYPE_SPECIFIC_CONTENT_ACCESS)
             ->get();
     }
 }

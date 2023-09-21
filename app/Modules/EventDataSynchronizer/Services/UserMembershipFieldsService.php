@@ -81,17 +81,19 @@ class UserMembershipFieldsService
     public function syncUserAccess(UserAccessPermissionsCollection $userAccessPermissions): bool
     {
         $userId = $userAccessPermissions->getUserId();
+
+
         $plusMembershipExpirationDate = $userAccessPermissions->getPlusMembershipExpirationDate();
         $basicMembershipExpirationDate = $userAccessPermissions->getBasicMembershipExpirationDate();
 
-        $membershipExpirationDate = $plusMembershipExpirationDate->max($basicMembershipExpirationDate);
+        $membershipExpirationDate = max([$plusMembershipExpirationDate, $basicMembershipExpirationDate]);
 
         $membershipLevel = null;
-        if ($basicMembershipExpirationDate > Carbon::now()) {
-            $membershipLevel = 'basic';
-        }
+
         if ($plusMembershipExpirationDate > Carbon::now()) {
             $membershipLevel = 'plus';
+        } elseif ($basicMembershipExpirationDate > Carbon::now()) {
+            $membershipLevel = 'basic';
         }
 
 

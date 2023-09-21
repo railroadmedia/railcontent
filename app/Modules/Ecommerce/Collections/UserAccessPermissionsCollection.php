@@ -40,7 +40,7 @@ class UserAccessPermissionsCollection
     public function getActiveDates(int|array $permissions): array
     {
         if (is_integer($permissions)) {
-            $userAccessPermissions = $this->permissionIdLookup[$permissions];
+            $userAccessPermissions = $this->permissionIdLookup[$permissions] ?? collect();
         } else {
             $userAccessPermissions = $this->collection->whereIn('permission_id', $permissions);
         }
@@ -64,6 +64,12 @@ class UserAccessPermissionsCollection
                 ->addMonths($userAccessPermission->time_months);
         }
         return array($startDate, $expirationDate);
+    }
+
+    public function getMembershipExpirationDate(): ?Carbon
+    {
+        list($startDate, $endDate) = $this->getActiveDates(self::MusoraPlusMembershipPermission);
+        return $endDate;
     }
 
     public function getPlusMembershipExpirationDate(): ?Carbon
