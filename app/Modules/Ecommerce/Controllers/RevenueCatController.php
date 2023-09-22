@@ -101,7 +101,7 @@ class RevenueCatController extends Controller
                 // get Musora user
                 $user = $this->revenueCatService->getUser(
                     array_key_exists('email', $subscriberAttributtes) ?
-                        $data['event']['subscriber_attributes']['email']['value'] : null,
+                        $subscriberAttributtes['email']['value'] : null,
                     $data['event']['original_app_user_id'],
                     true
                 );
