@@ -9,6 +9,7 @@ use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\Ecommerce\Services\UserProductService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
@@ -82,11 +83,13 @@ class RevenueCatController extends Controller
                     $this->getMusoraProduct($type, $data['event'], $productId);
 
                 $price = $data['event']['price'] ?? $musoraProduct->price;
+                $processedAt = Carbon::parse($data['event']['purchased_at_ms']);
 
                 $this->shopifySyncService->syncOrder(
                     $user,
                     [$musoraProduct->id],
                     $musoraProduct->brand,
+                    Carbon::parse($data['event']['purchased_at_ms']),
                     $price,
                     $this->calculateTaxAmount($price, $data['event']['tax_percentage'])
                 );
@@ -126,6 +129,7 @@ class RevenueCatController extends Controller
                     $user,
                     [$musoraProduct->id],
                     $musoraProduct->brand,
+                    Carbon::parse($data['event']['purchased_at_ms']),
                     $price,
                     $this->calculateTaxAmount($price, $data['event']['tax_percentage'])
                 );

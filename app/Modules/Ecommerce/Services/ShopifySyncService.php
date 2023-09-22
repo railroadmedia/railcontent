@@ -49,7 +49,7 @@ class ShopifySyncService
      * @param float|null $tax
      * @return void
      */
-    public function syncOrder(User $user, array $productIds, string $brand, float $price, ?float $tax)
+    public function syncOrder(User $user, array $productIds, string $brand, Carbon $processedAt, float $price, ?float $tax)
     : void {
         if (!config('shopify.enabled')) {
             return;
@@ -66,7 +66,7 @@ class ShopifySyncService
 
         Log::debug("User ID: $user->id; Customer Shopify ID: $customerShopifyId. Creating Shopify order payload");
         // STEP 2: create shopify order data
-        $postData = $this->createOrderData($customerShopifyId, $user->email, $productIds, $brand, $price, $tax);
+        $postData = $this->createOrderData($customerShopifyId, $user->email, $productIds, $brand, $processedAt, $price, $tax);
 
         Log::debug("User ID: $user->id; Customer Shopify ID: $customerShopifyId. Pushing order to Shopify");
         // STEP 3: push order to shopify
@@ -100,6 +100,7 @@ class ShopifySyncService
         string $email,
         array $productIds,
         string $brand,
+        Carbon $processedAt,
         float $price,
         float $tax
     )
@@ -107,7 +108,7 @@ class ShopifySyncService
         $data = [
             "customer" => ["id" => $customerShopifyId],
             "email" => $email,
-            "processed_at" => Carbon::now(),
+            "processed_at" => $processedAt,
             "source_name" => $brand,
             "subtotal_price" => number_format($price, 2),
             "total_outstanding" => "0.00",
@@ -115,7 +116,7 @@ class ShopifySyncService
             "line_items" => $this->createOrderItems($productIds, $price),
         ];
 
-        if (!$tax) {
+        if ($tax) {
             $data['total_tax'] = number_format($tax, 2);
         }
 
