@@ -43,6 +43,8 @@ trait SyncsShopifyCustomer
         // DEV NOTE: as per the [JSON Lines specs](https://jsonlines.org/), the line separator is '\n'
         $filename = $this->createFileForLocalData(implode("\n", $data));
 
+        $this->logDebug(sprintf("%s: created file %s", $this->getClassName(), $filename));
+
         if ($this->execute) {
             // make sure the shopify sync isn't null when executing
             assert(!is_null($shopifySync));
@@ -91,12 +93,17 @@ trait SyncsShopifyCustomer
                 // check the status and make sure it's CREATED
                 $bulkOperationData = $responseBody->data->bulkOperationRunMutation->bulkOperation;
                 if ($bulkOperationData?->status !== "CREATED") {
+                    $this->logError(sprintf("%s: bulkOperationRunMutation failed to create. Response body printed below.",
+                        $this->getClassName()));
+                    $this->logError(print_r($responseBody, true));
                     throw new Exception(sprintf("%s: Unexpected status returned while attempting to call bulkOperationRunMutation on Shopify for file %s: %s",
                         $this->getClassName(), $filename, $bulkOperationData?->status ?? null));
                 }
 
                 // grab the bulk operation id from the response, and pass that to the polling job
-                PollBulkOperationCustomer::dispatchSync($bulkOperationData->id, $shopifySync, $filename, $resourceType);
+                $this->logDebug(sprintf("%s: bulkOperationRunMutation succeeded. Shopify created operation ID %s",
+                    $this->getClassName(), $bulkOperationData->id));
+                PollBulkOperationCustomer::dispatchSync($bulkOperationData->id, $shopifySync, $filename, $resourceType, $this->getIsUsingMask());
             } else {
                 throw new Exception(sprintf("%s: bulkOperationRunMutation GraphQl mutation failed: %s",
                     $this->getClassName(), $bulkResponse->reason()));

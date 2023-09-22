@@ -17,6 +17,7 @@ trait PollsShopifyBulkOperation
                                 protected ?ShopifySync $shopifySync,
                                 protected string $sourceFileName,
                                 protected string $resourceType,
+                                protected bool $useMaskedEmail,
                                 protected int $secondsPassed = 0)
     {
     }
