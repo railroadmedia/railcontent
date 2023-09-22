@@ -711,7 +711,7 @@
         ]
     @endphp
     @include('musora.sales.components.order-section-bonuses', [
-    'bgColor' => true,
+    'bgColor' => 'background:linear-gradient(to bottom, #941831, #6B0059);',
     'max5' => true,
     'bonusWidth' => 'w-1/2 md:w-1/4',
     'promoLogo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/national-piano-month-logo.svg',
