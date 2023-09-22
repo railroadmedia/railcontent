@@ -55,7 +55,7 @@
         </div>
 
         <!-- Add Button -->
-        <div class="flex flex-column resource-button tw-pr-2" v-if="showAddToList">
+        <div v-if="showAddToList" class="flex flex-column resource-button tw-pr-2">
           <button
               class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
               title="Add to Playlist"
@@ -69,7 +69,7 @@
         </div>
 
         <!-- Completed Button -->
-        <div class="flex flex-column resource-button tw-pr-2" v-if="showCompleteButton">
+        <div v-if="showCompleteButton" class="flex flex-column resource-button tw-pr-2">
           <button
               class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
               @click="handleCompleteLesson"
@@ -83,9 +83,54 @@
           </button>
         </div>
 
+        <!-- Resources Button -->
+        <div v-if="resources.length > 0 && showResourceButton()" class="flex flex-column resource-button tw-pr-2 tw-relative">
+          <button
+              class="open-resources tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+              title="Download Resources"
+              @click="toggleResourceDropdown"
+          >
+            <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
+              <musora-icon icon-name="file" class="tw-w-6 tw-h-6 tw-mr-1" />
+              Resources
+            </div>
+          </button>
+
+          <transition name="grow-fade">
+              <ul v-show="resourceDropdown" class="tw-absolute tw-top-10 tw-right-2 tw-overflow-hidden tw-rounded tw-bg-white dark:tw-bg-[#081825] tw-z-50 tw-drop-shadow-lg">
+                  <li v-for="resource in resources" :key="resource.resource_name">
+                      <a
+                          class="tw-flex tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-sm tw-whitespace-nowrap tw-text-black dark:tw-text-white"
+                          :key="resource.resource_name"
+                          :href="resource.resource_url"
+                          :aria-label="`Download ${resource.resource_name}`"
+                      >
+                          <i class="fas tw-mr-1" :class="getResourceIcon(resource.resource_url)"></i>
+                          {{ resource.resource_name }}
+                      </a>
+                  </li>
+              </ul>
+          </transition>
+        </div>
+
+        <!-- Report Button -->
+        <div v-if="showReportButton()" class="flex flex-column resource-button tw-pr-2 tw-relative">
+          <button
+              class="open-resources tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+              title="Report An Issue"
+              @click=""
+          >
+              <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
+                  <div class="tw-h-6 tw-flex tw-items-center">
+                      <FlagIcon class="tw-w-5 tw-h-5 tw-mr-1" />
+                  </div>
+                  Report
+              </div>
+          </button>
+        </div>
+
         <!-- More Button -->
-        <!-- TODO: Need to update conditional as adding more options in dropdown -->
-        <div v-if="resources.length > 0" class="flex flex-column resource-button tw-relative">
+        <div v-if="(resources.length > 0 && !showResourceButton()) || !showReportButton()" class="flex flex-column resource-button tw-relative">
           <button
               class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-1 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
               title="More"
@@ -103,7 +148,7 @@
               v-click-outside="clickOutSideDropdown"
           >
             <!-- Resources -->
-            <li v-if="resources.length > 0" class="tw-group tw-relative">
+            <li v-if="resources.length > 0 && !showResourceButton()" class="tw-group tw-relative">
                 <button
                     class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-sm"
                 >
@@ -127,6 +172,20 @@
                         </a>
                     </li>
                 </ul>
+            </li>
+
+            <!-- Report -->
+            <li v-if="!showReportButton()" class="tw-group tw-relative">
+              <button
+                  class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-sm"
+              >
+                  <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
+                      <div class="tw-h-6 tw-w-6 tw-flex tw-items-center tw-justify-center tw-mr-1">
+                          <FlagIcon class="tw-w-5 tw-h-5" />
+                      </div>
+                      Report
+                  </div>
+              </button>
             </li>
           </ul>
         </div>
@@ -186,6 +245,7 @@ import ContentService from "../../assets/js/services/content";
 import CoachesInLesson from "./CoachesInLesson.vue";
 import ModalRenderer from "../../../components/Modal/ModalRenderer.vue";
 import { XIcon } from "@heroicons/vue/solid";
+import { FlagIcon } from "@heroicons/vue/outline";
 
 export default {
   name: "VideoResources",
@@ -193,6 +253,7 @@ export default {
     CoachesInLesson,
     ModalRenderer,
     XIcon,
+    FlagIcon,
   },
   mixins: [ThemeClasses],
   props: {
@@ -454,9 +515,26 @@ export default {
     toggleMore() {
       this.showMore = !this.showMore;
     },
+    toggleResourceDropdown(){
+      this.resourceDropdown = !this.resourceDropdown;
+    },
     clickOutSideDropdown(){
         this.showMore = false;
-    }
+    },
+    showResourceButton(){
+       if(!this.showInfoButton || !this.showCompleteButton){
+           return true;
+       }
+
+       return false;
+    },
+    showReportButton(){
+        if((!this.showInfoButton && !this.showCompleteButton) || (!this.showInfoButton && !this.resources.length > 0) || (!this.showCompleteButton && !this.resources.length > 0)){
+            return true;
+        }
+
+        return false;
+    },
   },
 };
 </script>
