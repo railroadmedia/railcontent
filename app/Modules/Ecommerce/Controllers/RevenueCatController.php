@@ -78,16 +78,17 @@ class RevenueCatController extends Controller
                 $productId = $this->getProductId($data['event']['product_id']);
 
                 //get Musora product
-                /** @var Product $musoraProduct */
                 $musoraProduct =
                     $this->getMusoraProduct($type, $data['event'], $productId);
+
+                $price = $data['event']['price'] ?? $musoraProduct->price;
 
                 $this->shopifySyncService->syncOrder(
                     $user,
                     [$musoraProduct->id],
                     $musoraProduct->brand,
-                    $musoraProduct->price,
-                    $this->calculateTaxAmount($musoraProduct->price, $data['event']['tax_percentage'])
+                    $price,
+                    $this->calculateTaxAmount($price, $data['event']['tax_percentage'])
                 );
                 break;
             case 'NON_RENEWING_PURCHASE':
@@ -119,12 +120,14 @@ class RevenueCatController extends Controller
                 //get Musora product
                 $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId);
 
+                $price = $data['event']['price'] ?? $musoraProduct->price;
+
                 $this->shopifySyncService->syncOrder(
                     $user,
                     [$musoraProduct->id],
                     $musoraProduct->brand,
-                    $musoraProduct->price,
-                    $this->calculateTaxAmount($musoraProduct->price, $data['event']['tax_percentage'])
+                    $price,
+                    $this->calculateTaxAmount($price, $data['event']['tax_percentage'])
                 );
 
                 break;
@@ -156,12 +159,14 @@ class RevenueCatController extends Controller
                  *      - Update user attributes
                  */
 
+                $price = $data['event']['price'] ?? $musoraProduct->price;
+
                 $this->shopifySyncService->syncOrder(
                     $user,
                     [$musoraProduct->id],
                     $musoraProduct->brand,
-                    $musoraProduct->price,
-                    $this->calculateTaxAmount($musoraProduct->price, $data['event']['tax_percentage'])
+                    $price,
+                    $this->calculateTaxAmount($price, $data['event']['tax_percentage'])
                 );
 
                 // code...
@@ -336,9 +341,10 @@ class RevenueCatController extends Controller
      * @param string $type
      * @param $event
      * @param mixed $productId
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|object|null
+     * @param null $userId
+     * @return Product
      */
-    private function getMusoraProduct(string $type, $event, mixed $productId, $userId = null)
+    private function getMusoraProduct(string $type, $event, mixed $productId, $userId = null): Product
     {
         $store = $type.'_store';
         $existingUserProducts =
