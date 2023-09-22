@@ -16,6 +16,7 @@ class SyncBulkUsersToShopify extends Command
      */
     protected $signature = 'shopify:sync-users-bulk
                             {--limit= : (Optional) The number of users to limit this run to. Not recommended for production environment. }
+                            {--no-email-mask : Do not mask customer Email addresses. Without this flag, email addresses will be masked in Shopify. }
                             {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
 
     /**
@@ -25,9 +26,23 @@ class SyncBulkUsersToShopify extends Command
      */
     protected $description = 'Sync our users up to Shopify';
 
-    function getIsExecuting(): bool
+    /**
+     * Is this sync running for real?
+     *
+     * @return bool
+     */
+    protected function getIsExecuting(): bool
     {
         return $this->option("execute") == true;
+    }
+
+    /**
+     * Is this sync using masked email addresses?
+     * @return bool
+     */
+    protected function getIsUsingMaskedEmails(): bool
+    {
+        return $this->option("no-email-mask") == false;
     }
 
     /**
@@ -35,7 +50,7 @@ class SyncBulkUsersToShopify extends Command
      *
      * @return int|null
      */
-    function getLimit(): ?int
+    protected function getLimit(): ?int
     {
         return $this->option("limit");
     }
@@ -57,7 +72,7 @@ class SyncBulkUsersToShopify extends Command
         // the kickoff jobs for users and customers create more jobs in sequence, and we want all users to be completed
         // before the customers start, so we will dispatch only the kickoff for users, and the customers will be run
         // separately
-        KickOffBulkCustomerCreateFromUsers::dispatchSync($this->getIsExecuting(), $this->getLimit());
+        KickOffBulkCustomerCreateFromUsers::dispatchSync($this->getIsExecuting(), $this->getIsUsingMaskedEmails(), $this->getLimit());
 
         $this->info("Jobs dispatched. Please check the logs for results of the SyncBulkUsersToShopify jobs.");
 

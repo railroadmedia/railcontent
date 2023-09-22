@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Models\ShopifySync;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\FindsCustomers;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\StagesUploadToShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsShopifyCustomer;
 use Carbon\Carbon;
@@ -42,7 +43,7 @@ use Signifly\Shopify\Shopify;
  */
 class BulkCustomerCreateFromUsers implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, SyncsShopifyCustomer, StagesUploadToShopify, FindsCustomers;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, SyncsShopifyCustomer, StagesUploadToShopify, FindsCustomers, HandlesMaskedEmailAddress;
 
     protected CustomerRepository $customerRepository;
     protected AddressRepository $addressRepository;
@@ -51,9 +52,10 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
     /**
      * @param int $firstUserId the id of the first user to find in this batch
      * @param int $batchSize the number of users to get in this batch and create Shopify Customers for
+     * @param bool $useMaskedEmail are we using masked email addresses?
      * @param bool $execute are we executing this process, or simulating?
      */
-    public function __construct(protected int $firstUserId, protected int $batchSize, protected bool $execute)
+    public function __construct(protected int $firstUserId, protected int $batchSize, protected bool $useMaskedEmail, protected bool $execute)
     {
     }
 
@@ -145,7 +147,7 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
     protected function createCustomerData(User $user, Collection $userCustomers): array
     {
         $customerData = [
-            "email" => $user->email,
+            "email" => $this->getEmailForShopify($user->email),
             "firstName" => $user->first_name,
             "lastName" => $user->last_name,
             "note" => $user->support_note,
@@ -226,5 +228,13 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
     protected function getCustomerRepository(): CustomerRepository
     {
         return $this->customerRepository;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getIsUsingMask(): bool
+    {
+        return $this->useMaskedEmail;
     }
 }

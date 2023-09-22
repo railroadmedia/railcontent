@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Models\ShopifySync;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\FindsCustomers;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SavesShopifyIdOnAddresses;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\UsesStorageForShopifySyncData;
@@ -45,7 +46,7 @@ use Railroad\Ecommerce\Repositories\CustomerRepository;
 class ParseBulkOperationResultsForUsers implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, LogsShopify, FindsCustomers,
-        SavesShopifyIdOnAddresses, UsesStorageForShopifySyncData;
+        SavesShopifyIdOnAddresses, UsesStorageForShopifySyncData, HandlesMaskedEmailAddress;
 
     // the array of user data that's in the source file - only populated if necessary
     private array $_sourceFileUsers = [];
@@ -57,7 +58,7 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
     protected AddressRepository $addressRepository;
     protected EcommerceEntityManager $entityManager;
 
-    public function __construct(protected string $sourceFilename, protected string $resultsFilename, protected ShopifySync $shopifySync)
+    public function __construct(protected string $sourceFilename, protected string $resultsFilename, protected bool $useMaskedEmail, protected ShopifySync $shopifySync)
     {
     }
 
@@ -305,5 +306,13 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
     protected function getEntityManager(): EcommerceEntityManager
     {
         return $this->entityManager;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getIsUsingMask(): bool
+    {
+        return $this->useMaskedEmail;
     }
 }

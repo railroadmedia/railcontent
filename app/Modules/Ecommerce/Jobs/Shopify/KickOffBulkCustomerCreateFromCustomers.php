@@ -32,9 +32,10 @@ class KickOffBulkCustomerCreateFromCustomers implements ShouldQueue
 
     /**
      * @param bool $execute are we executing this process, or simulating?
+     * @param bool $useMaskedEmail are we using masked email addresses?
      * @param int|null $limit an optional limit of the number of customers to sync
      */
-    public function __construct(protected bool $execute, protected ?int $limit)
+    public function __construct(protected bool $execute, protected bool $useMaskedEmail, protected ?int $limit)
     {
     }
 
@@ -67,7 +68,7 @@ class KickOffBulkCustomerCreateFromCustomers implements ShouldQueue
         $totalCountForRun = is_null($this->limit) ? $totalCount : min($totalCount, $this->limit);
         $runningTotal = 0;
         $chunks->each(function (Collection $emailAddresses) use ($totalCountForRun, $batchSize, &$runningTotal, &$jobs) {
-            $jobs[] = new BulkCustomerCreateFromCustomers($emailAddresses, $this->execute);
+            $jobs[] = new BulkCustomerCreateFromCustomers($emailAddresses, $this->useMaskedEmail, $this->execute);
 
             if ($this->limit) {
                 $runningTotal += $batchSize;
