@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Services;
 
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Carbon\Carbon;
 use Doctrine\ORM\NonUniqueResultException;
 use Exception;
@@ -41,20 +42,22 @@ class CustomerIoSyncService
     private $contentFollowsRepository;
 
     private UserMembershipFieldsService $userMembershipFieldsService;
+    private UserAccessPermissionsService $userAccessPermissionsService;
 
     public function __construct(
-        SubscriptionRepository      $subscriptionRepository,
-        UserProductRepository       $userProductRepository,
-        ProductRepository           $productRepository,
-        ContentFollowsRepository    $contentFollowsRepository,
+        SubscriptionRepository $subscriptionRepository,
+        UserProductRepository $userProductRepository,
+        ProductRepository $productRepository,
+        ContentFollowsRepository $contentFollowsRepository,
         UserMembershipFieldsService $userMembershipFieldsService,
-    )
-    {
+        UserAccessPermissionsService $userAccessPermissionsService
+    ) {
         $this->subscriptionRepository = $subscriptionRepository;
         $this->userProductRepository = $userProductRepository;
         $this->productRepository = $productRepository;
         $this->contentFollowsRepository = $contentFollowsRepository;
         $this->userMembershipFieldsService = $userMembershipFieldsService;
+        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
     /**
@@ -64,7 +67,11 @@ class CustomerIoSyncService
      */
     public function getUsersCustomAttributes(User $user, array $brands = null)
     {
-        $membershipAccessAttributes = $this->getUsersMembershipAccessAttributes($user, $brands);
+        if (config('shopify.enabled')) {
+            $membershipAccessAttributes = $this->getUsersMembershipAccessAttributes($user, $brands);
+        } else {
+            $membershipAccessAttributes = $this->getUsersMembershipAccessAttributesDeprecated($user, $brands);
+        }
         $contentFollowAttributes = $this->getUsersContentFollowAttributes($user);
 
         return array_merge(
@@ -106,6 +113,41 @@ class CustomerIoSyncService
         ];
     }
 
+    private function getUsersMembershipAccessAttributes(User $user, mixed $brands): array
+    {
+        $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($user->id);
+        throw new Exception("Customer ID attributes Not implemented");
+        $isAppSignup = false;
+        $attributes = [];
+        foreach ($brands as $brand) {
+            $attributes += [
+                $brand . "_membership_access-expiration-date" => $user->membership_expiration_date,
+                $brand . "_membership_latest-access-start-date" => '',
+                $brand . "_membership_first-access-start-date" => '',
+                $brand . "_membership_is_lifetime" => $user->is_lifetime_member,
+                $brand . "_membership_latest-access-type" => '',
+                $brand . "_membership_status" => '',
+                $brand . "_membership_latest-access-product-id" => '',
+                $brand . '_membership_subscription_type' => '',
+                $brand . '_membership_subscription-rate-cents' => '',
+                $brand . '_membership_subscription-currency' => '',
+                $brand . '_membership_subscription_renewal-date' => '',
+                $brand . '_retention_failed-billing_membership_subscription-renewal-attempts' => '',
+                $brand . '_membership_subscription_cancellation-date' => '',
+                $brand . '_membership_subscription_cancellation-reason' => '',
+                $brand . '_membership_subscription_latest-start-date' => '',
+                $brand . '_membership_subscription_first-start-date' => '',
+                $brand . '_membership_subscription_trial-type' => '',
+                $brand . '_user_payment_primary-method-expiration-date' => '',
+                $brand . '_membership_subscription_source_app-store' => '',
+                $brand . '_owned_pack_product_skus' => '',
+                $brand . '_owned_pack_product_ids' => '',
+            ];
+        }
+        return $attributes;
+    }
+
+
     /**
      * Attribute list:
      * BRAND_membership_access-expiration-date (null if BRAND_membership_is_lifetime is true)
@@ -118,15 +160,21 @@ class CustomerIoSyncService
      * @return array
      * @throws NonUniqueResultException
      */
-    public function getUsersMembershipAccessAttributes(User $user, array $brands = []): array
+    public function getUsersMembershipAccessAttributesDeprecated(User $user, array $brands = []): array
     {
         if (empty($brands)) {
             $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
         }
 
-        $latestSubscription = $this->subscriptionRepository->getUserMembershipSubscriptionBeforeDate($user->id, Carbon::now());
+        $latestSubscription = $this->subscriptionRepository->getUserMembershipSubscriptionBeforeDate(
+            $user->id,
+            Carbon::now()
+        );
         $userProducts = $this->userProductRepository->getAllUsersProducts($user->id);
-        $membershipProduct = $this->userMembershipFieldsService->getUserProductThatRepresentsUsersMembership($user->id, $userProducts);
+        $membershipProduct = $this->userMembershipFieldsService->getUserProductThatRepresentsUsersMembership(
+            $user->id,
+            $userProducts
+        );
 
         $productAttributes = [];
 
@@ -144,7 +192,14 @@ class CustomerIoSyncService
 
             $latestMembershipUserProductToSync = $this->getLatestMembershipUserProduct($eligibleUserProducts);
             $firstMembershipUserProductToSync = $this->getFirstMembershipUserProduct($eligibleUserProducts);
-            $this->addMembershipAccessProperties($brand, $latestSubscription, $membershipProduct, $latestMembershipUserProductToSync, $firstMembershipUserProductToSync, $productAttributes);
+            $this->addMembershipAccessProperties(
+                $brand,
+                $latestSubscription,
+                $membershipProduct,
+                $latestMembershipUserProductToSync,
+                $firstMembershipUserProductToSync,
+                $productAttributes
+            );
         }
 
         $this->handleLifetimeMembership($userProducts, $brands, $productAttributes);
@@ -218,13 +273,14 @@ class CustomerIoSyncService
      * @param array $productAttributes
      * @return void
      */
-    private function addMembershipAccessProperties(string        $brand,
-                                                   ?Subscription $latestSubscription,
-                                                   ?UserProduct  $membershipProduct,
-                                                   ?UserProduct  $latestMembershipUserProductToSync,
-                                                   ?UserProduct  $firstMembershipUserProductToSync,
-                                                   array         &$productAttributes): void
-    {
+    private function addMembershipAccessProperties(
+        string $brand,
+        ?Subscription $latestSubscription,
+        ?UserProduct $membershipProduct,
+        ?UserProduct $latestMembershipUserProductToSync,
+        ?UserProduct $firstMembershipUserProductToSync,
+        array &$productAttributes
+    ): void {
         $membershipAccessExpirationDate = $membershipProduct?->getExpirationDate() ?: null;
 
         if (!empty($latestMembershipUserProductToSync) && !empty($firstMembershipUserProductToSync)) {
@@ -279,7 +335,8 @@ class CustomerIoSyncService
             }
             // BR-904: the musora_membership_latest-access-product-id should use the lifetime membership product, if applicable
             $rootBrand = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
-            $productAttributes[$rootBrand . '_membership_latest-access-product-id'] = $lifetimeMembership->getProduct()?->getId() ?? null;
+            $productAttributes[$rootBrand . '_membership_latest-access-product-id'] = $lifetimeMembership->getProduct(
+            )?->getId() ?? null;
         }
     }
 
@@ -346,8 +403,11 @@ class CustomerIoSyncService
      * @param array $brands
      * @return array
      */
-    public function getUsersSubscriptionAttributes(User $user, array $userMembershipAccessAttributes, array $brands = [])
-    {
+    public function getUsersSubscriptionAttributes(
+        User $user,
+        array $userMembershipAccessAttributes,
+        array $brands = []
+    ) {
         if (empty($brands)) {
             $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
         }
@@ -606,4 +666,5 @@ class CustomerIoSyncService
             && $product->getBrand() == $brand
             && $product->isMembershipProduct();
     }
+
 }

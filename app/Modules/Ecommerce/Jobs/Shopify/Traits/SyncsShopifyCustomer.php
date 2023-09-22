@@ -103,7 +103,7 @@ trait SyncsShopifyCustomer
                 // grab the bulk operation id from the response, and pass that to the polling job
                 $this->logDebug(sprintf("%s: bulkOperationRunMutation succeeded. Shopify created operation ID %s",
                     $this->getClassName(), $bulkOperationData->id));
-                PollBulkOperationCustomer::dispatchSync($bulkOperationData->id, $shopifySync, $filename, $resourceType);
+                PollBulkOperationCustomer::dispatchSync($bulkOperationData->id, $shopifySync, $filename, $resourceType, $this->getIsUsingMask());
             } else {
                 throw new Exception(sprintf("%s: bulkOperationRunMutation GraphQl mutation failed: %s",
                     $this->getClassName(), $bulkResponse->reason()));

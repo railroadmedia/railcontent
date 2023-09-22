@@ -59,6 +59,7 @@ class PollBulkOperationCustomer implements ShouldQueue
                             $this->shopifySync,
                             $this->sourceFileName,
                             $this->resourceType,
+                            $this->useMaskedEmail,
                             $this->secondsPassed+self::DELAY
                         );
                     return;
@@ -92,9 +93,9 @@ class PollBulkOperationCustomer implements ShouldQueue
 
             // and dispatch another job to parse the results and update our users or customers
             if ($this->resourceType === User::class) {
-                ParseBulkOperationResultsForUsers::dispatchSync($this->sourceFileName, $resultsFileName, $this->shopifySync);
+                ParseBulkOperationResultsForUsers::dispatchSync($this->sourceFileName, $resultsFileName, $this->useMaskedEmail, $this->shopifySync);
             } else {
-                ParseBulkOperationResultsForCustomers::dispatchSync($this->sourceFileName, $resultsFileName, $this->shopifySync);
+                ParseBulkOperationResultsForCustomers::dispatchSync($this->sourceFileName, $resultsFileName, $this->useMaskedEmail, $this->shopifySync);
             }
 
         } catch (Exception $e) {

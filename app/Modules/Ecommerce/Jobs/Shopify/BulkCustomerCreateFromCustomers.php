@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Models\ShopifySync;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\FindsCustomers;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\StagesUploadToShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsShopifyCustomer;
 use Carbon\Carbon;
@@ -39,7 +40,7 @@ use Signifly\Shopify\Shopify;
  */
 class BulkCustomerCreateFromCustomers implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, SyncsShopifyCustomer, StagesUploadToShopify, FindsCustomers;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, SyncsShopifyCustomer, StagesUploadToShopify, FindsCustomers, HandlesMaskedEmailAddress;
 
     protected CustomerRepository $customerRepository;
     protected AddressRepository $addressRepository;
@@ -47,9 +48,10 @@ class BulkCustomerCreateFromCustomers implements ShouldQueue
 
     /**
      * @param Collection<string> $emails the email addresses to use to get our customers to create Shopify Customers for
+     * @param bool $useMaskedEmail are we using masked email addresses?
      * @param bool $execute are we executing this process, or simulating?
      */
-    public function __construct(protected Collection $emails, protected bool $execute)
+    public function __construct(protected Collection $emails, protected bool $useMaskedEmail, protected bool $execute)
     {
     }
 
@@ -105,7 +107,7 @@ class BulkCustomerCreateFromCustomers implements ShouldQueue
         });
 
         $customerData = [
-            "email" => $customers->first()->getEmail(),
+            "email" => $this->getEmailForShopify($customers->first()->getEmail()),
             "note" => $this->getCustomerValueFor($customers, "getNote"),
             "phone" => $this->getPhoneNumberForCustomer($customers),
             // "tags" => "",
@@ -172,5 +174,13 @@ class BulkCustomerCreateFromCustomers implements ShouldQueue
     protected function getCustomerRepository(): CustomerRepository
     {
         return $this->customerRepository;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getIsUsingMask(): bool
+    {
+        return $this->useMaskedEmail;
     }
 }

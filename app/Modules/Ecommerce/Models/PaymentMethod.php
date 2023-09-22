@@ -25,7 +25,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
- *
+ * @property ?CreditCard $creditCard
+ * @property ?Address $address
  */
 class PaymentMethod extends Model
 {
@@ -38,4 +39,15 @@ class PaymentMethod extends Model
     {
         return PaymentMethodFactory::new();
     }
+
+    public function creditCard()
+    {
+        return $this->belongsTo(CreditCard::class, 'credit_card_id');
+    }
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class, 'billing_address_id');
+    }
+
 }

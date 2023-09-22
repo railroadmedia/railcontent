@@ -39,6 +39,10 @@ trait FindsCustomers
     private function getCustomersForUserOrEmail(User|string $userOrEmail): Collection
     {
         $email = $userOrEmail instanceof User ? $userOrEmail->email : $userOrEmail;
+        if ($this->classUsesMaskedEmail()) {
+            $email = $this->getEmailFromShopify($email);
+        }
+
         $qb = $this->getCustomerRepository()->createQueryBuilder('customer');
         $qb->where(
             $qb->expr()
@@ -48,6 +52,16 @@ trait FindsCustomers
         $q = $qb->getQuery();
 
         return collect($q->getResult());
+    }
+
+    /**
+     * Check if this class uses masked email addresses
+     *
+     * @return bool
+     */
+    private function classUsesMaskedEmail(): bool
+    {
+        return in_array(HandlesMaskedEmailAddress::class, array_keys(class_uses_recursive($this)));
     }
 
     /**
