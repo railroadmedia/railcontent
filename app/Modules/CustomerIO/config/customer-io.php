@@ -268,6 +268,16 @@ return [
                     'drumeo',
                 ],
             ],
+            'Drumeo Giveaway' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
             'Drumeo Awards Giveaway' => [
                 'custom_attributes' => [
                 ],

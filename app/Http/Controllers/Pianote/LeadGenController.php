@@ -112,6 +112,15 @@ class LeadGenController extends BaseController
         return view('pianote.lead-gen.lifetime-members-masterclass');
     }
 
+    public function songSecrets()
+    {
+        return view('pianote.lead-gen.song-secrets.song-secrets', ['theme' => 'pianote']);
+    }
+    public function songSecretsTY()
+    {
+        return view('pianote.lead-gen.song-secrets.thank-you', ['theme' => 'pianote']);
+    }
+
     public function beginnerBootcamp(Request $request, $domain, $page = null)
     {
         if(is_null($page)){
