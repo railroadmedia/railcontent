@@ -25037,6 +25037,10 @@ a:visited{
   --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06)) !important;
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important;
 }
+.tw-drop-shadow{
+  --tw-drop-shadow: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06)) !important;
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important;
+}
 .tw-grayscale{
   --tw-grayscale: grayscale(100%) !important;
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important;
@@ -25941,6 +25945,10 @@ a:visited{
 :is(.tw-dark .hover\:dark\:tw-bg-\[\#102230\]):hover{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(16 34 48 / var(--tw-bg-opacity)) !important;
+}
+:is(.tw-dark .hover\:dark\:tw-bg-\[\#627F97\]):hover{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(98 127 151 / var(--tw-bg-opacity)) !important;
 }
 :is(.tw-dark .dark\:hover\:tw-text-\[\#000C17\]:hover){
   --tw-text-opacity: 1 !important;
