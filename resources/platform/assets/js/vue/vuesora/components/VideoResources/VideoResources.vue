@@ -3,7 +3,7 @@
     <div class="tw-flex tw-items-start tw-justify-between tw-mb-3 tw-flex-wrap">
 
       <div class="tw-text-[#00101D] dark:tw-text-white lg:tw-flex-1">
-        <h1 class="heading tw-py-2 tw-pr-4 xl:tw-pr-0">
+        <h1 class="heading tw-py-2 tw-pr-4 xl:tw-pr-0 tw-text-xl md:tw-text-2xl lg:tw-text-[28px]">
           {{ title }}
         </h1>
       </div>

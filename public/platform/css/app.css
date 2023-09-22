@@ -22053,6 +22053,12 @@ a:visited{
 .tw-mt-auto{
   margin-top: auto !important;
 }
+.-tw-mb-20{
+  margin-bottom: -5rem !important;
+}
+.-tw-mt-20{
+  margin-top: -5rem !important;
+}
 .-tw-mb-36{
   margin-bottom: -9rem !important;
 }
@@ -24483,6 +24489,12 @@ a:visited{
 }
 .tw-pt-\[80px\]{
   padding-top: 80px !important;
+}
+.tw-pb-20{
+  padding-bottom: 5rem !important;
+}
+.tw-pt-20{
+  padding-top: 5rem !important;
 }
 .tw-pb-40{
   padding-bottom: 10rem !important;
@@ -27668,6 +27680,9 @@ a:visited{
   .lg\:tw-text-base{
     font-size: 1rem !important;
     line-height: 1.5rem !important;
+  }
+  .lg\:tw-text-\[28px\]{
+    font-size: 28px !important;
   }
   .lg\:tw-font-normal{
     font-weight: 400 !important;
