@@ -1798,11 +1798,9 @@ return [
         'courses' => 'Courses',
         'student-focus' => 'StudentFocus',
         'play-alongs' => 'PlayAlongs',
-        'live' => 'Live',
         'rudiments' => 'Rudiments',
         'routines' => 'Routines',
         'archives' => 'Archives',
         'song-tutorials' => 'SongTutorials',
-        'schedule' => 'Schedule'
     ]
 ];

@@ -145,8 +145,8 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
-
     @endif
+
 
     @php
         $bubble1 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/dorothea-taylor.png';
@@ -208,6 +208,8 @@
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
+
+    @include('musora.sales.components.musicounts-section')
 
     @php
         $gridItems = [
@@ -540,7 +542,7 @@
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
-        'youtube' => '2.7M',
+        'youtube' => '2.8M',
         'facebookLink' => 'https://facebook.com/drumeo/',
         'facebook' => '1.2M',
         'instagramLink' => 'https://instagram.com/drumeoofficial/',
@@ -617,11 +619,13 @@
         'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png',
         'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 5000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
-                    <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and voice lessons with full access to all Musora communities.</li>',
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> All-access for piano, guitar, drums, and singing.</li>
+                    <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> We’ll donate 20% towards music programs for kids. </li>',
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-collage.png',
         ])
+{{--        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>--}}
+{{--        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>--}}
+{{--        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and voice lessons with full access to all Musora communities.</li>--}}
     @endif
 
     @include('musora.sales.components.app-section', [

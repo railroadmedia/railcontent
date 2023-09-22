@@ -10,17 +10,19 @@ Route::domain('{musoraDomain}')
     ->middleware(['web_public'])
     ->group(function () {
         Route::get('/', [MarketingController::class, 'homepage']);
-        Route::get('/6-reasons', [MarketingController::class, 'sixReasons']);
+        Route::get('6-reasons', [MarketingController::class, 'sixReasons']);
 //        Route::get('/handbook', [MarketingController::class, 'handbook']);
         Route::get('about', [MarketingController::class, 'about']);
         Route::get('contact', [MarketingController::class, 'contact']);
         Route::get('terms-of-service', [MarketingController::class, 'terms']);
         Route::get('privacy-policy', [MarketingController::class, 'privacy']);
+        Route::get('preferences', [MarketingController::class, 'preferences']);
         Route::get('careers', [MarketingController::class, 'careers']);
         Route::get('ambassador', [MarketingController::class, 'ambassador']);
         Route::get('brand', [MarketingController::class, 'brand']);
         Route::get('unified-2022', [MarketingController::class, 'unified2022']);
         Route::get('mentors', [MarketingController::class, 'mentors']);
+        Route::get('moderators', [MarketingController::class, 'moderators']);
         Route::get('playlists', [MarketingController::class, 'playlists']);
         Route::get('referral-join', [ReferralJoinController::class, 'join']);
         Route::get('recitals', [MarketingController::class, 'recitals']);

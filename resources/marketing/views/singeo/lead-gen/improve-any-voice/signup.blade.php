@@ -55,7 +55,7 @@
                     "formId" => "Singeo - Engagement - Trigger - 4 Exercises - Web Form",
                     "formName" => 'Improve Any Voice',
                     "buttonText" => "Send My Videos",
-                    "oneLineLg" => true,
+                    "noTy" => true
                     ])
                 </div>
             </div>
@@ -132,7 +132,7 @@
                     "formId" => "Singeo - Engagement - Trigger - 4 Exercises - Web Form2",
                     "formName" => 'Improve Any Voice',
                     "buttonText" => "Send My Videos",
-                    "oneLineLg" => true,
+                    "noTy" => true
                     ])
             </div>
         </div>

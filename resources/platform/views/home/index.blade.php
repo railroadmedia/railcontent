@@ -59,7 +59,7 @@
         </div>
 
         {{-- Continue Section --}}
-        @if($hasStartedLessons)
+        @if(count(json_decode($startedContentJson)->data) > 0)
             @component('partials.bladesora.members.components.home._continue-section', [
                 'brand' => brand(),
                 'hasStartedContent' => $hasStartedLessons,
@@ -77,18 +77,19 @@
             'contentEndpoint' => '/railcontent/content',
             'allLessonsUrl' => url()->route('platform.new-lessons'),
             'newContentJson' => $newContentJson,
+            'hasContinueSection' => $hasStartedLessons,
             ])
         @endcomponent
 
-        @if(count($hotForumTopics) > 0)
-            {{-- Popular Conversations --}}
-            @component('partials.bladesora.members.components.home._conversations-section', [
-                'brand' => brand(),
-                'forumUrl' => brand() . '/forums',
-                'forumPosts' => $hotForumTopics,
-                ])
-            @endcomponent
-        @endif
+{{--        @if(count($hotForumTopics) > 0)--}}
+{{--            --}}{{-- Popular Conversations --}}
+{{--            @component('partials.bladesora.members.components.home._conversations-section', [--}}
+{{--                'brand' => brand(),--}}
+{{--                'forumUrl' => brand() . '/forums',--}}
+{{--                'forumPosts' => $hotForumTopics,--}}
+{{--                ])--}}
+{{--            @endcomponent--}}
+{{--        @endif--}}
 
         {{-- From Subscribed Coaches --}}
         @if($hasfollowedLessons)
@@ -101,7 +102,7 @@
                 ])
             @endcomponent
         @endif
-        
+
         {{-- Subscribed Coaches --}}
         @if($hasSubscribedCoaches)
             @component('partials.bladesora.members.components.home._coaches-section', [
@@ -113,7 +114,7 @@
                 ])
             @endcomponent
         @endif
-        
+
         {{-- My Playlists --}}
         @component('partials.bladesora.members.components.home._list-section', [
             'brand' => brand(),
@@ -121,7 +122,7 @@
             'usersList' => $usersList,
             ])
         @endcomponent
-        
+
         <div class="tw-px-4 lg:tw-px-0">
             {{-- Live Banner --}}
             @if( !empty($coachEvent) )
@@ -169,7 +170,7 @@
 
 @section('layout-scripts')
     @parent
-    
+
     @if(str_contains(Request::url(), 'create-playlist-window'))
         <script>
             document.addEventListener('DOMContentLoaded', function () {

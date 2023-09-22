@@ -2,7 +2,7 @@
     //dd($newContentJson);
 @endphp
 
-<section class="tw-flex tw-flex-row tw-mb-6 md:tw-mb-8">
+<section class="tw-flex tw-flex-row tw-mb-6 md:tw-mb-8 @if($hasContinueSection) -tw-mt-5 @endif">
     <div class="tw-flex tw-flex-col tw-w-full">
 
         <!-- Section Title -->

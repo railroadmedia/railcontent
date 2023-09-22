@@ -2111,6 +2111,7 @@ return [
             'is_lifetime_member',
             'is_drumeo_lifetime_member',
             'access_level',
+            'login_as_users',
         ],
 
         'quick-tips' => [
@@ -5086,7 +5087,6 @@ return [
             'membership_level',
             'is_lifetime_member',
             'is_drumeo_lifetime_member',
-            'show_onboarding',
             'access_level',
         ],
 

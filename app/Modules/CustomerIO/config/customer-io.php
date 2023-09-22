@@ -58,6 +58,16 @@ return [
     // form names and configuration
     'forms' => [
         'drumeo' => [
+            'Kristinas Top 25' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_kristinas-top-25',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
             '40 Songs' => [
                 'custom_attributes' => [
                 ],
@@ -405,6 +415,16 @@ return [
                 ],
                 'events' => [
                     'pianote_prospect_blog-signup',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Easy Classical Songs' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_easy-classical-songs',
                 ],
                 'accounts_to_sync' => [
                     'pianote',

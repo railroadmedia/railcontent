@@ -1,5 +1,6 @@
 @extends('musora._partials.layout', [
     'whiteNav' => true,
+    'fullSubscriptionVersion' => true,
 ])
 
 @section('head-includes')
@@ -243,31 +244,34 @@
             </div>
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
-        <div class="container max-w-4xl mx-auto">
-            <img class="text-center mx-auto sm:h-20 lg:h-24 mb-10 hidden sm:inline-block" src="https://musora-center.s3.amazonaws.com/homepage/2023/learn-practice-play.png">
-            <img class="text-center mx-auto h-24 inline-block sm:hidden" src="https://musora-center.s3.amazonaws.com/homepage/2023/learn-practice-play-m.png">
-            <img class="my-5 h-64 inline sm:hidden"
-                src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/intro-collage3.png"
-                alt="learn playing image"
-                fetchpriority="high"
-            >
-            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-center mb-5">
-                <p class="leading-normal max-w-xl pr-7 mx-0">Learning an instrument can be frustrating. So we’ve made the most helpful music lessons on the planet:
-                    <br><br>
-                    Guided video lessons from great teachers, interactive exercises that transform practice into play, and <strong>thousands of popular songs</strong> for every style, era, and skill level. PLUS unlimited personal support from real teachers.
-                    <br><br>
-                    You’ll play more. You’ll fall in love with the process. And we’re so confident you’ll love your new skills that you’ll get a 7-day free trial PLUS a 90-day guarantee (just to make sure!).
-                </p>
-                <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/intro-collage3.png"
-                    alt="learn playing image"
-                >
-            </div>
-        </div>
-    </section>
+
+    @include('musora.sales.components.musicounts-section')
+
+{{--    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">--}}
+{{--        <div class="container max-w-4xl mx-auto">--}}
+{{--            <img class="text-center mx-auto sm:h-20 lg:h-24 mb-10 hidden sm:inline-block" src="https://musora-center.s3.amazonaws.com/homepage/2023/learn-practice-play.png">--}}
+{{--            <img class="text-center mx-auto h-24 inline-block sm:hidden" src="https://musora-center.s3.amazonaws.com/homepage/2023/learn-practice-play-m.png">--}}
+{{--            <img class="my-5 h-64 inline sm:hidden"--}}
+{{--                src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/intro-collage3.png"--}}
+{{--                alt="learn playing image"--}}
+{{--                fetchpriority="high"--}}
+{{--            >--}}
+{{--            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-center mb-5">--}}
+{{--                <p class="leading-normal max-w-xl pr-7 mx-0">Learning an instrument can be frustrating. So we’ve made the most helpful music lessons on the planet:--}}
+{{--                    <br><br>--}}
+{{--                    Guided video lessons from great teachers, interactive exercises that transform practice into play, and <strong>thousands of popular songs</strong> for every style, era, and skill level. PLUS unlimited personal support from real teachers.--}}
+{{--                    <br><br>--}}
+{{--                    You’ll play more. You’ll fall in love with the process. And we’re so confident you’ll love your new skills that you’ll get a 7-day free trial PLUS a 90-day guarantee (just to make sure!).--}}
+{{--                </p>--}}
+{{--                <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"--}}
+{{--                    loading="lazy"--}}
+{{--                    onload="this.classList.remove('opacity-0')"--}}
+{{--                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/intro-collage3.png"--}}
+{{--                    alt="learn playing image"--}}
+{{--                >--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10 relative z-20" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
 
 

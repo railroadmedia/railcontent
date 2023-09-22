@@ -9,7 +9,7 @@
         <div class="text-left flex-grow relative">
             <div
                 class="pt-4 sm:pt-6
-                @if(!empty($variant))
+                @if(!empty($variant) && !empty($num))
                 px-4 sm:px-5
                 @else
                 pr-4 sm:pr-5 pl-8 sm:pl-12
@@ -27,7 +27,7 @@
                     @else
                         py-1 text-xs md:text-sm text-white absolute -left-11 sm:-left-14 md:-left-16 -top-0.5 sm:top-0.5
                      @endif
-                    " :class="open ? 'bg-{{$theme}}' : ' @if(empty($variant)) bg-[#838C98] @endif '">{{$num}}</span>@endif
+                    " :class="open ? 'bg-{{$theme}}' : ' @if(empty($variant)) bg-[#838C98] @endif '">{!! $num !!}</span>@endif
                     {!! $title !!}
                 </h5>
             </div>
@@ -64,7 +64,7 @@
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     />
-                    @if(!empty($info['desc']))
+                    @if(!empty($info['title']))
                         <div class="md:pl-6">
                             <h5 class="font-black">{{$info['title']}}</h5>
                             @if(!empty($info['desc']))<p class="my-2">{{$info['desc']}}</p>@endif

@@ -1,4 +1,4 @@
-import ContentService from '../vuesora/assets/js/helper-functions/content';
+import ContentService from '../vuesora/assets/js/services/content';
 import Toasts from '../vuesora/assets/js/classes/toasts';
 
 const getValue = (obj, key) => {
@@ -18,8 +18,10 @@ export default function useUserCatalogueEvents(props, context) {
             submitButton: {
                 text: `<span class="bg-${props.themeColor} text-white short">I want to start over</span>`,
                 callback: () => {
-                    icon.classList.remove('fa-undo');
-                    icon.classList.add('fa-spin', 'fa-spinner');
+                    if(icon){
+                        icon.classList.remove('fa-undo');
+                        icon.classList.add('fa-spin', 'fa-spinner');
+                    }
 
                     props.emitResetProgress({
                         content_id: props.item.id,
@@ -84,9 +86,10 @@ export default function useUserCatalogueEvents(props, context) {
                     props.content.splice(post_index, 1);
                 }
 
-
-                payload.icon.classList.remove('fa-spin', 'fa-spinner');
-                payload.icon.classList.add('fa-undo');
+                if(payload.icon) {
+                    payload.icon.classList.remove('fa-spin', 'fa-spinner');
+                    payload.icon.classList.add('fa-undo');
+                }
             });
     }
 

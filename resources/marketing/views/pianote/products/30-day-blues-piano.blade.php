@@ -16,6 +16,177 @@
     <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
     <style>
+
+        [placeholder]:focus::-webkit-input-placeholder {
+            color:transparent
+        }
+
+        form ::-webkit-input-placeholder, form ::-moz-placeholder, form :-ms-input-placeholder, form :-moz-placeholder {
+            color:#777
+        }
+
+        form {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        @media (min-width: 768px) {
+            form {
+                margin: 0 auto 10px;
+            }
+        }
+
+        form input, form button {
+            font: 400 18px/50px 'Open Sans', sans-serif;
+            height: 50px;
+            color: #999;
+            border-radius: 100px;
+            text-align: left;
+            padding: 7px 20px;
+            margin: 0 auto 15px;
+        }
+        @media (min-width: 768px) {
+            form input, form button {
+                font-size: 22px;
+                height: 65px;
+                line-height: 65px;
+            }
+        }
+        form input[type="submit"], form button[type="submit"], form input button, form button button {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-weight: 700;
+            color: #fff;
+            background: #F61A30;
+            text-transform: uppercase;
+            margin: 0 auto 15px;
+            display: block;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: center;
+            padding: 0;
+        }
+        form input[type="submit"]:hover, form button[type="submit"]:hover, form input button:hover, form button button:hover {
+            background:#ff5454;
+        }
+        .disclaimer {
+            display: none;
+            margin: 0 auto;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+        .thank-you-box {
+            width:100%;
+            max-width:960px;
+            border-radius:5px;
+            height:auto;
+            max-height:0;
+            visibility:hidden;
+            opacity:0;
+            transition:all .4s ease-in;
+            display:block;
+            margin:0 auto;
+            background:#FFF;
+            text-align:center;
+            overflow:hidden;
+            color:#000
+        }
+
+        .thank-you-box.active {
+            max-height:1000px;
+            visibility:visible;
+            opacity:1;
+            padding:15px
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box.active {
+                padding:20px
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box.active {
+                padding:30px
+            }
+        }
+
+        .thank-you-box p {
+            font:400 15px/1.4em "Open Sans", sans-serif;
+            margin:0 auto
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box p {
+                font-size:19px
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box p {
+                font-size:23px
+            }
+        }
+
+        .thank-you-box p em {
+            line-height:1.4em;
+            max-width:550px;
+            display:inline-block;
+            font-size:12px
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box p em {
+                font-size:14px
+            }
+        }
+
+        .thank-you-box h2 {
+            font:700 30px/1em "Roboto Condensed", sans-serif;
+            margin:15px auto;
+            text-transform:uppercase;
+            color:#F61A30
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box h2 {
+                font-size:37px;
+                margin:20px auto
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box h2 {
+                font-size:44px
+            }
+        }
+
+        .thank-you-box .social-media a {
+            background:#000;
+            color:#fff;
+            border-radius:50%;
+            display:inline-block;
+            text-align:center;
+            margin:20px 3px 0;
+            width:50px;
+            height:50px;
+            line-height:50px;
+            font-size:26px
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box .social-media a {
+                width:70px;
+                height:70px;
+                line-height:70px;
+                font-size:35px;
+                margin:25px 10px 0
+            }
+        }
+    </style>
+    <style>
         .timeline-container .timeline:after,
         .timeline-container:after {
             background-color: #284ffd;
@@ -79,10 +250,11 @@
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
 {{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
-                                <a href="#final" class="join medium w-full anchor-slide">ENROLL NOW</a>
-                            <p class="opacity-70 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">
-                                <a href="https://www.musora.com/pianote/enrollment/30-day-blues-piano">Pianote Members register for free here.</a>
-                            </p>
+                            <span class="join sold-out medium w-full">SOLD OUT</span>
+{{--                                <a href="#final" class="join medium w-full anchor-slide">ENROLL NOW</a>--}}
+{{--                            <p class="opacity-70 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">--}}
+{{--                                <a href="https://www.musora.com/pianote/enrollment/30-day-blues-piano">Pianote Members register for free here.</a>--}}
+{{--                            </p>--}}
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/piano-players-trusted.png" alt="joined student profiles" fetchpriority="high">
@@ -102,18 +274,18 @@
                 <div class="w-full sm:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 sm:py-3 lg:py-4">
                     <p class="tracking-wide text-pianote text-sm">STARTS ON</p>
                     <h4 class="px-3 lg:px-5"><strong>Sept. 4th</strong></h4>
-                    <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
-                    <p class="text-sm px-3 lg:px-5">
-                        <span class="text-pianote">Enrollment closes in</span><br class="inline lg:hidden">
-                        <span x-cloak x-data="timer()" x-init="countdown()">
-                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                         </span>
+{{--                    <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">--}}
+{{--                    <p class="text-sm px-3 lg:px-5">--}}
+{{--                        <span class="text-pianote">Enrollment closes in</span><br class="inline lg:hidden">--}}
+{{--                        <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                         </span>--}}
 {{--                        Enrollment closed--}}
-                    </p>
+{{--                    </p>--}}
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
@@ -250,9 +422,9 @@
                     <i class="fas fa-check text-pianote mr-5"></i> Guaranteed results</h4>
             </div>
 
-            <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">ENROLL NOW</a><br>
-            <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/piano-players-trusted.png" alt="joined student profiles">
-            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
+{{--            <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">ENROLL NOW</a><br>--}}
+{{--            <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/piano-players-trusted.png" alt="joined student profiles">--}}
+{{--            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>--}}
 
         </div>
     </section>
@@ -358,15 +530,15 @@
             </div>
             <h1 class="font-bebas text-5xl sm:text-6xl lg:text-7xl">FAIR WARNING</h1>
             <h6 class="leading-normal  mt-4 mb-8">30-Day Blues Piano is a daily guided workout program for piano players — where you’ll get a new video each weekday and live support throughout the month. Because of this, students will not be able to join midway. You need to register before the course begins.</h6>
-                        <h4 class="py-1.5 w-full font-bebas uppercase inline-block mx-auto" style="background-color:#fd5;color:#9d1032;">REGISTRATION CLOSES IN<br class="inline sm:hidden">
-                            <span x-cloak x-data="timer()" x-init="countdown()">
-                                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                                     </span>
-                        </h4>
+{{--                        <h4 class="py-1.5 w-full font-bebas uppercase inline-block mx-auto" style="background-color:#fd5;color:#9d1032;">REGISTRATION CLOSES IN<br class="inline sm:hidden">--}}
+{{--                            <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                                     </span>--}}
+{{--                        </h4>--}}
         </div>
     </section>
     <section class="text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40">
@@ -397,14 +569,9 @@
                 </div>
             </div>
 
-
-{{--            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>--}}
-
-                <a href="#final"
-                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
-
-            <img class="h-7 mr-1 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/piano-players-trusted.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
+{{--            <a href="#final" class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>--}}
+{{--            <img class="h-7 mr-1 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/piano-players-trusted.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('opacity-0')">--}}
+{{--            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>--}}
         </div>
     </section>
 
@@ -427,66 +594,71 @@
     <section class="py-10 sm:py-16 lg:py-20 text-white bg-cover bg-top" style="background:#00114f url(https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/order-bg.jpg);">
         <div class="max-w-6xl mx-auto text-center">
             <img class="h-24 sm:h-28 lg:h-32 mb-3 sm:mb-5 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30DD logo season3 logo">
-            <h3 class="mb-4"><strong>20 Guided Play-Along Lessons +<br class="lg:hidden"> Feedback From REAL Teachers.</strong></h3>
-            <p class="leading-normal mb-12">
-                <strong class="bg-white text-black px-1">EARLY BIRD SPECIAL:</strong> Save up to 20% <br class="sm:hidden">on all bundles before August 20th.
-                <br><br><strong class="font-black"><i class="fas fa-arrow-down"></i> CHOOSE YOUR BUNDLE <i class="fas fa-arrow-down"></i></strong>
-            </p>
+            <h3 class="mb-4"><strong>20 Guided Play-Along Lessons +<br> Feedback From REAL Teachers.</strong></h3>
+{{--            <p class="leading-normal mb-12">--}}
+{{--                <strong class="bg-white text-black px-1">EARLY BIRD SPECIAL:</strong> Save up to 20% <br class="sm:hidden">on all bundles before August 20th.--}}
+{{--                <br><br>--}}
+{{--                <strong class="font-black"><i class="fas fa-arrow-down"></i> CHOOSE YOUR BUNDLE <i class="fas fa-arrow-down"></i></strong>--}}
+{{--            </p>--}}
 
-            <div class="grid md:grid-cols-3 gap-2 lg:gap-4 items-start px-4 mx-auto max-w-md md:max-w-none text-black">
-                <div class="bg-white rounded-xl border border-pianote py-8 px-4 mb-8 md:mb-0">
-                    <div class="text-center -mt-11">
-                        <div class="bg-pianote rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Course Only</div>
-                        <h4><strong>30-Day Blues Piano</strong></h4>
-                        <p class="italic mb-4 text-xs mt-2">Course Only<br> &nbsp; </p>
-                        <img class="h-24 lg:h-32 pb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/course-only2.png" alt="Tier 1 pack" />
-                        <h2><s class="text-[#ABB5C2] mr-2">$97</s><strong>$77</strong></h2>
-                        <p class="italic mb-4 text-xs">One-time payment</p>
-                        <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1&promo-code=special&redirect=/order&locked=true" class="join bg-pianote medium w-full">ENROLL NOW</a>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl border border-blue-600 py-8 px-4 mb-8 md:mb-0">
-                    <div class="text-center -mt-11">
-                        <div class="bg-[#284FFD] rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">ONLY UNTIL AUGUST 20TH</div>
-                        <h4><strong>Early Bird Special</strong></h4>
-                        <p class="italic mb-4 text-xs mt-2">Course + 2 bonuses worth $138
-                            <br><strong class="text-blue-600">FREE SHIPPING WORLDWIDE</strong></p>
-                        <img class="h-24 lg:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/early-bird-collage.png" alt="Tier 2 pack" />
-                        <h2><s class="text-[#ABB5C2] mr-2">$235</s><strong>$97</strong></h2>
-                        <p class="italic mb-4 text-xs">One-time payment</p>
-                        <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1,faster-fingers:1,piano-chords-and-scales-guide:1&redirect=/order&locked=true" class="join medium w-full mb-5 bg-[#284FFD]">ENROLL NOW</a>
-                        <p class="inline-block text-left">
-                            <b>30-Day Blues Piano</b><br/>
-                            <b class="text-blue-600">Bonus</b> Faster Fingers<br>
-                            <b class="text-blue-600">Bonus</b> Chords & Scales Book<br>
-                            <b class="text-blue-600">Bonus</b> <i>Shipping Worldwide</i>
-                        </p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl border border-pianote py-8 px-4">
-                    <div class="text-center -mt-11">
-                        <div class="bg-pianote rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">LAUNCH MEMBERSHIP SPECIAL</div>
-                        <h4><strong>Unlimited Lessons</strong></h4>
-                        <p class="italic mb-4 text-xs mt-2">1 year of Pianote + 7 bonuses worth $486
-                            <br><strong class="text-pianote">FREE SHIPPING WORLDWIDE</strong></p>
-                        <img class="h-24 lg:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/launch-membership-collage.png" alt="Tier 3 pack" />
-                        <h2><s class="text-[#ABB5C2] mr-2">$726</s><strong>$200</strong></h2>
-                        <p class="italic mb-4 text-xs">Your first year</p>
-                        <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,30-day-blues-piano:1,easy-chords:1,new-piano-players-start-here:1,faster-fingers:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1&promo-code=special&redirect=/order&locked=true" class="join blue medium w-full mb-5">ENROLL NOW</a>
-                        <p class="inline-block text-left">
-                            <b>Annual Pianote Membership</b><br/>
-                            <b class="text-pianote">Free</b> 30-Day Blues Piano<br>
-                            <b class="text-pianote">Free</b> Faster Fingers<br>
-                            <b class="text-pianote">Free</b> Chords & Scales Book<br>
-                            <b class="text-pianote">Free</b> <i>Shipping Worldwide</i><br>
-                            <b class="text-pianote">Free</b> Easy Chords<br>
-                            <b class="text-pianote">Free</b> New Piano Players Start Here<br>
-                            <b class="text-pianote">Free</b> Chords & Scales Posters<br>
-                            <b class="text-pianote">Free</b> Pianote Practice Planner<br>
-                        </p>
-                    </div>
-                </div>
-            </div>
+{{--            <span class="join sold-out medium w-full max-w-xs align-middle mt-7" data-open="waitlistModal">JOIN WAITLIST</span>--}}
+            <span class="join sold-out medium w-full max-w-xs align-middle mt-7">SOLD OUT</span>
+{{--            <div class="grid md:grid-cols-2 gap-2 lg:gap-4 items-start justify-center px-4 mx-auto max-w-md md:max-w-3xl text-black">--}}
+{{--                <div class="bg-white rounded-xl border border-pianote py-8 px-4 mb-8 md:mb-0">--}}
+{{--                    <div class="text-center -mt-11">--}}
+{{--                        <div class="bg-pianote rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Course Only</div>--}}
+{{--                        <h4><strong>30-Day Blues Piano</strong></h4>--}}
+{{--                        <p class="italic mb-4 text-xs mt-2">Course Only<br> &nbsp; </p>--}}
+{{--                        <img class="h-24 lg:h-32 pb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/course-only2.png" alt="Tier 1 pack" />--}}
+{{--                        <h2><s class="text-[#ABB5C2] mr-2">$97</s><strong>$77</strong></h2>--}}
+{{--                        <p class="italic mb-4 text-xs">One-time payment</p>--}}
+{{--                        <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1&promo-code=special&redirect=/order&locked=true" class="join bg-pianote medium w-full">ENROLL NOW</a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="bg-white rounded-xl border border-blue-600 py-8 px-4 mb-8 md:mb-0">--}}
+{{--                    <div class="text-center -mt-11">--}}
+{{--                        <div class="bg-[#284FFD] rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">30-Day Blues Bundle</div>--}}
+{{--                        <h4><strong>30-Day Blues Piano</strong></h4>--}}
+{{--                        <p class="italic mb-4 text-xs mt-2">Course + Faster Fingers--}}
+{{--                            <br><strong class="text-blue-600">FREE SHIPPING WORLDWIDE</strong>--}}
+{{--                        </p>--}}
+{{--                        <img class="h-24 lg:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/course-only.png" alt="Tier 2 pack" />--}}
+{{--                        <h2><s class="text-[#ABB5C2] mr-2">$235</s><strong>$97</strong></h2>--}}
+{{--                        <p class="italic mb-4 text-xs">One-time payment</p>--}}
+{{--                        <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1,faster-fingers:1&redirect=/order&locked=true" class="join medium w-full mb-5 bg-[#284FFD]">ENROLL NOW</a>--}}
+{{--                        <p class="inline-block text-left">--}}
+{{--                            <b>30-Day Blues Piano</b><br/>--}}
+{{--                            <b class="text-blue-600">Bonus</b> Faster Fingers--}}
+{{--                            <br>--}}
+{{--                            <b class="text-blue-600">Bonus</b> Chords & Scales Book<br>--}}
+{{--                            <b class="text-blue-600">Bonus</b> <i>Shipping Worldwide</i>--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="bg-white rounded-xl border border-pianote py-8 px-4">--}}
+{{--                    <div class="text-center -mt-11">--}}
+{{--                        <div class="bg-pianote rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">LAUNCH MEMBERSHIP SPECIAL</div>--}}
+{{--                        <h4><strong>Unlimited Lessons</strong></h4>--}}
+{{--                        <p class="italic mb-4 text-xs mt-2">1 year of Pianote + 7 bonuses worth $486--}}
+{{--                            <br><strong class="text-pianote">FREE SHIPPING WORLDWIDE</strong></p>--}}
+{{--                        <img class="h-24 lg:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/launch-membership-collage.png" alt="Tier 3 pack" />--}}
+{{--                        <h2><s class="text-[#ABB5C2] mr-2">$726</s><strong>$240</strong></h2>--}}
+{{--                        <p class="italic mb-4 text-xs">Per year</p>--}}
+{{--                        <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,30-day-blues-piano:1,easy-chords:1,new-piano-players-start-here:1,faster-fingers:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1&redirect=/order&locked=true" class="join blue medium w-full mb-5">ENROLL NOW</a>--}}
+{{--                        <p class="inline-block text-left">--}}
+{{--                            <b>Annual Pianote Membership</b><br/>--}}
+{{--                            <b class="text-pianote">Free</b> 30-Day Blues Piano<br>--}}
+{{--                            <b class="text-pianote">Free</b> Faster Fingers<br>--}}
+{{--                            <b class="text-pianote">Free</b> Chords & Scales Book<br>--}}
+{{--                            <b class="text-pianote">Free</b> <i>Shipping Worldwide</i><br>--}}
+{{--                            <b class="text-pianote">Free</b> Easy Chords<br>--}}
+{{--                            <b class="text-pianote">Free</b> New Piano Players Start Here<br>--}}
+{{--                            <b class="text-pianote">Free</b> Chords & Scales Posters<br>--}}
+{{--                            <b class="text-pianote">Free</b> Pianote Practice Planner<br>--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
     </section>
 
@@ -530,6 +702,25 @@
         </div>
     </section>
 
+    <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none" id="waitlistModal" style="max-width: 560px;" data-reveal data-reset-on-close="false">
+        <div class="p-5 sm:p-7">
+            {{--            <img class="h-14 sm:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/new-piano-players-start-here-logo-2+1.png">--}}
+            <h3 class="leading-tight my-4"><strong>Join The Waitlist!</strong></h3>
+            <p class="mb-4">
+                Enter your email below to get notified when the next <br class="hidden sm:inline">
+                edition of 30-Day Blues Piano is announced. </p>
+
+            @include("pianote._partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
+                "formName" => 'Easy Chords Waitlist',
+                "formId" => "Pianote - Engagement - Trigger - Easy Chords Waitlist - Web Form",
+                "buttonText" => "Let Me Know ",
+                "stacked" => true,
+                "noSocial" => true,
+            ])
+        </div>
+    </div>
+
     @include('_partials.components.video-modal',[
         'name' => 'demoVid',
         'video' => '852836211',
@@ -548,6 +739,7 @@
     @include("pianote.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
         <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
@@ -558,6 +750,7 @@
 
     <script>
         $(document).ready(function () {
+            $(document).foundation();
             $('.comparison tr td:nth-child(3)').on('click', function(){
                 $(this).parents().find('table').removeClass('private books online');
                 $(this).parents().find('table').addClass('online');

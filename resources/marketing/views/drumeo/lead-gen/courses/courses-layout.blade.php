@@ -91,7 +91,7 @@
                 @yield('artists')
 
                 <div class="columns artist blue">
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/jared-falk.jpg">
+                    <img src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header4.png">
                     <p><strong>And Many More...</strong><br>
                         courses, play-alongs, & song breakdowns</p>
                 </div>
