@@ -30,7 +30,7 @@ class ShopifySyncService
 
     public function syncCustomer($shopifyCustomerId)
     {
-        if(!config('shopify.enabled')){
+        if (!config('shopify.enabled')) {
             return;
         }
         $userId = $this->getUserIdFromShopifyCustomerId($shopifyCustomerId);
@@ -51,7 +51,7 @@ class ShopifySyncService
      */
     public function syncOrder(User $user, array $productIds, string $brand, float $price, ?float $tax)
     : void {
-        if(!config('shopify.enabled')){
+        if (!config('shopify.enabled')) {
             return;
         }
         Log::debug("Start syncing purchase for user $user->id");
@@ -59,7 +59,9 @@ class ShopifySyncService
         $customerShopifyId = $user->shopify_id;
         if (!$customerShopifyId) {
             $customerShopifyId = $this->shopifyCustomerService->createShopifyCustomer($user);
-            if (!$customerShopifyId) return; // Return and it will be reprocessed in a command
+            if (!$customerShopifyId) {
+                return;
+            } // Return and it will be reprocessed in a command
         }
 
         Log::debug("User ID: $user->id; Customer Shopify ID: $customerShopifyId. Creating Shopify order payload");
@@ -69,11 +71,13 @@ class ShopifySyncService
         Log::debug("User ID: $user->id; Customer Shopify ID: $customerShopifyId. Pushing order to Shopify");
         // STEP 3: push order to shopify
         $orderResource = $this->shopify->createOrder($postData);
-        Log::info("User ID: $user->id; Customer Shopify ID: $customerShopifyId. Created order $orderResource->id in Shopify");
+        Log::info(
+            "User ID: $user->id; Customer Shopify ID: $customerShopifyId. Created order $orderResource->id in Shopify"
+        );
 
         // STEP 4: sync user products
         try {
-            $this->syncCustomer($user);
+            $this->syncCustomer($customerShopifyId);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
@@ -105,9 +109,9 @@ class ShopifySyncService
             "email" => $email,
             "processed_at" => Carbon::now(),
             "source_name" => $brand,
-            "subtotal_price" => $price,
-            "total_outstanding" => 0,
-            "total_price" => $price + ($tax ?? 0),
+            "subtotal_price" => number_format($price, 2),
+            "total_outstanding" => "0.00",
+            "total_price" => number_format($price + ($tax ?? 0), 2),
             "line_items" => $this->createOrderItems($productIds, $price),
         ];
 
@@ -127,17 +131,20 @@ class ShopifySyncService
      */
     private function createOrderItems(array $productIds, float $price)
     : array {
-        return Product::whereIn('id', $productIds)->get()->map(
-            fn (Product $product) => [
-            "price" => $price,
-            "quantity" => 1, // for digital products, only 1 item of each
-            "requires_shipping" => false, // no shipping required since it is for digital products
-            "sku" => $product->sku,
-            "title" => $product->name,
-            "variant_id" => $product->shopify_id,
-            "variant_inventory_management" => "shopify",
-            "vendor" => $product->brand,
-        ]);
+        return Product::whereIn('id', $productIds)
+            ->get()
+            ->map(
+                fn(Product $product) => [
+                    "price" => $price,
+                    "quantity" => 1, // for digital products, only 1 item of each
+                    "requires_shipping" => false, // no shipping required since it is for digital products
+                    "sku" => $product->sku,
+                    "title" => $product->name,
+                    "variant_id" => $product->shopify_id,
+                    "variant_inventory_management" => "shopify",
+                    "vendor" => $product->brand,
+                ]
+            )->all();
     }
 
     private function getUserIdFromShopifyCustomerId($shopifyCustomerId)
