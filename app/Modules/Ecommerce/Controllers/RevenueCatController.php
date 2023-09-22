@@ -149,29 +149,12 @@ class RevenueCatController extends Controller
                 //get Musora product
                 $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId);
 
-                //get RevenueCat subscription
-                $currentRevenueCatSubscription =
-                    $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
-
-                //check if Musora subscription for new product exists
-                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
-                if (!$musoraSubscription) {
-                    //create Musora subscription
-                    $musoraSubscription = $this->subscriptionService->createSubscription(
-                        $user->id,
-                        $data['event']['expiration_at_ms'],
-                        $musoraProduct->first(),
-                        $type,
-                        $data['event']['purchased_at_ms']
-                    );
-                }
-
-                //Assign user product
-                $this->userProductService->assignUserProduct(
-                    $user->id,
-                    $musoraSubscription->product_id,
-                    $musoraSubscription->paid_until
-                );
+                /*
+                 *  @todo Shopify:
+                 *      - update membership times for old product
+                 *  @todo CustomerIO:
+                 *      - Update user attributes
+                 */
 
                 $this->shopifySyncService->syncOrder(
                     $user,
@@ -201,6 +184,13 @@ class RevenueCatController extends Controller
 
                 //get Musora product
                 $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId);
+
+                /*
+                 * @todo Shopify
+                 *      - update membership times
+                 * @todo CustomerIO:
+                 *      - Push cancellation data for user
+                 */
 
                 //get RevenueCat subscription
                 $currentRevenueCatSubscription =
@@ -278,6 +268,13 @@ class RevenueCatController extends Controller
 
                 //get Musora product
                 $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId, $user->id);
+
+                /*
+                 *  @todo Shopify:
+                 *      - update membership times
+                 *  @todo CustomerIO:
+                 *      - Push expiration data for user?
+                 */
 
                 //get RevenueCat subscription
                 $currentRevenueCatSubscription =
