@@ -1,5 +1,5 @@
 // tailwind.config.js
-const stylesoraTheme = require('stylesora/theme');
+const stylesoraTheme = require('../platform/assets/js/stylesora/theme');
 const plugin = require('tailwindcss/plugin')
 const colors = require("tailwindcss/colors");
 
@@ -31,11 +31,11 @@ module.exports = {
   },
   plugins: [
     //Stylesora's Attributes
-    require("stylesora/attributes")(),
+    require("../platform/assets/js/stylesora/attributes")(),
     //Stylesora's Utility Classes
-    require("stylesora/utilities/")(),
+    require("../platform/assets/js/stylesora/utilities/")(),
     //Stylesora's Component Styles
-    require("stylesora/components/")(),
+    require("../platform/assets/js/stylesora/components/")(),
     //New Utilities
     plugin(function({ addUtilities }) {
       addUtilities({

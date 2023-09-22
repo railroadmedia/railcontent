@@ -2,6 +2,8 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners\CustomerIo;
 
+use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
+use App\Modules\Ecommerce\Events\UserProductsUpdated;
 use App\Modules\EventDataSynchronizer\Events\FirstActivityPerDay;
 use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
 use App\Modules\EventDataSynchronizer\Events\UTMLinks;
@@ -322,6 +324,30 @@ class CustomerIoSyncEventListener
             $userId = $userProductDeleted->getUserProduct()
                 ->getUser()
                 ->getId();
+            $user = $this->userService->getByIdOrNull($userId);
+
+            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
+                dispatch(
+                    (new CustomerIoSyncUserByUserId($user))->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
+                );
+                self::$alreadyQueuedUserIds[] = $user->id;
+            }
+        } catch (Throwable $throwable) {
+            error_log($throwable);
+        }
+    }
+
+    public function handleUserAccessPermissionsUpdated(UserAccessPermissionsUpdated $userAccessPermissionsUpdated)
+    {
+        if (self::$disable) {
+            return;
+        }
+
+        try {
+            $userId = $userProductsUpdated->getUserId();
             $user = $this->userService->getByIdOrNull($userId);
 
             if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {

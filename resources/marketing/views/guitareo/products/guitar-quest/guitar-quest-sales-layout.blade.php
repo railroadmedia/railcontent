@@ -8,7 +8,7 @@
     <meta property="og:url" content="https://www.guitareo.com/guitar-quest"/>
     <meta property="og:title" content="GuitarQuest | Your Guitar Journey Starts Here"/>
     <meta property="og:description" content="Rob Scallon’s online guitar lessons for getting started on the guitar and making your favorite musical projects come to life."/>
-    <meta property="og:image" content="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fshare-image.png?auto=format&ixlib=php-1.2.1&w=1500&s=4294b260a12b5d809a9b8182414e2312"/>
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/share-image.png"/>
 @stop()
 
 @section('styles')

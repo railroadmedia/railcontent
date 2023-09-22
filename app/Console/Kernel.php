@@ -124,6 +124,8 @@ class Kernel extends ConsoleKernel
     {
         $this->load(__DIR__ . '/Commands');
 
+        $this->load(app_path('Modules/Ecommerce/Console/Commands'));
+
         // TODO: uncomment when the console route file exists
         //require base_path('routes/console.php');
     }

@@ -146,13 +146,6 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
-        <a href="/shop/30-day-blues-piano" class="flex text-white items-center justify-center py-2 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(180deg, #000f24 0%, #010e4a 100%);">
-            <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />
-            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-tight">
-                REGISTRATION CLOSES Aug. 31 <span class="hidden sm:inline">|</span> <br class="sm:hidden"><span class="text-pianote underline">Click here to join &raquo;</span>
-            </p>
-        </a>
-
     @endif
 
     @php
@@ -251,6 +244,7 @@
         @yield('promo-banner')
     @endif
 
+    @include('musora.sales.components.musicounts-section')
 
     @php
         $gridItems = [
@@ -668,11 +662,13 @@
         'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png',
         'header' => 'Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
-                    <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> All-access for piano, guitar, drums, and singing.</li>
+                    <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> We’ll donate 20% towards music programs for kids. </li>',
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-collage.png',
         ])
+{{--        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>--}}
+{{--        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>--}}
+{{--        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',--}}
     @endif
 
     @include('musora.sales.components.app-section', [

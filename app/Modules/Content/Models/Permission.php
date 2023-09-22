@@ -7,6 +7,11 @@ use App\Modules\Content\database\factories\PermissionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property integer $id
+ * @property string $name
+ * @property string $brand
+ */
 class Permission extends Model
 {
     use HasFactory;

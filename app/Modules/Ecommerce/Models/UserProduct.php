@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class UserProduct
@@ -36,6 +37,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|UserProduct whereUpdatedAt($value)
  * @method static Builder|UserProduct whereUserId($value)
  * @mixin \Eloquent
+ * @property Product $product
  */
 class UserProduct extends Model
 {
@@ -55,6 +57,14 @@ class UserProduct extends Model
         return UserProductFactory::new();
     }
 
+    /**
+     * @return Product
+     */
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
+
     public function isValid(): bool
     {
         if ((empty($this->expiration_date) || $this->expiration_date > Carbon::now()) &&
@@ -65,4 +75,16 @@ class UserProduct extends Model
 
         return false;
     }
+
+    public function isValidLifeTime()
+    {
+        if (empty($this->expiration_date) &&
+            $this->product->isMembershipProduct() &&
+            $this->product->digital_access_time_type == Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME) {
+            return true;
+        }
+        return false;
+    }
+
+
 }

@@ -100,10 +100,10 @@ return array(
         'guitareo' => []
     ],
     'forum_rules_post_id' => [
-        'drumeo' => 4721,
-        'guitareo' => 2675,
-        'singeo' => 3,
-        'pianote' => 1
+        'drumeo' => 337724,
+        'guitareo' => 44705,
+        'singeo' => 42098,
+        'pianote' => 112873
     ],
     'decorators'=> [
         'posts' => [

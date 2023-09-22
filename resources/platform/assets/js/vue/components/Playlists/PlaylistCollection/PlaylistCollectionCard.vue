@@ -32,9 +32,6 @@
         return props.listElement.description.replace(/(<([^>]+)>)/gi, "");
     })
 
-    //-------------Refs-------------//
-    const dropdownTarget = ref(null)
-
     //-----------Reactive Data-----------//
     const state = reactive({
         dropdownOpen: false,
@@ -175,7 +172,7 @@
                 <!-- Dropdown-->
                 <PlaylistDropdown
                     :brand="brand"
-                    :dropdownTop="state.dropdownTop"
+                    :dropdownTop="isMiniCatalog ? true : state.dropdownTop"
                     :is-private="state.isPrivate"
                     :is-pinned="state.isPinned"
                     :dropdownOptions="dropdownOptions"

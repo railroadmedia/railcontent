@@ -1,0 +1,73 @@
+<?php
+
+namespace App\Modules\Ecommerce\Jobs\Shopify;
+
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Collection;
+use Modules\UserManagementSystem\Models\User;
+use Railroad\Ecommerce\Repositories\AddressRepository;
+use Railroad\Ecommerce\Repositories\CustomerRepository;
+use Signifly\Shopify\Shopify;
+
+/**
+ * KickOffBulkCustomerCreateFromUsers kicks off the process to perform a bulk operation in Shopify to create new
+ * customers, using data from our users that have not yet been synced. This is done through a job so that we can offload
+ * the process and free up the calling command.
+ */
+class KickOffBulkCustomerCreateFromUsers implements ShouldQueue
+{
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, LogsShopify;
+
+    protected CustomerRepository $customerRepository;
+    protected AddressRepository $addressRepository;
+    protected Shopify $shopify;
+
+    /**
+     * @param bool $execute are we executing this process, or simulating?
+     */
+    public function __construct(protected bool $execute)
+    {
+    }
+
+    public function handle(CustomerRepository $customerRepository, AddressRepository $addressRepository, Shopify $shopify): void
+    {
+        // set DI instances that we'll need
+        $this->customerRepository = $customerRepository;
+        $this->addressRepository = $addressRepository;
+        $this->shopify = $shopify;
+
+        $usersToCreate = $this->getUsersToCreateQuery();
+        $chunkSize = 500;
+        $this->logInfo(sprintf("Found %s users to be created in Shopify.", $usersToCreate->count()));
+        $this->logInfo("Dispatching jobs to sync users ...");
+
+        $usersToCreate->chunk($chunkSize, function (Collection $users) {
+            BulkCustomerCreateFromUsers::dispatchSync($users, $this->execute);
+        });
+    }
+
+    /**
+     * Get the query builder that we'll use to get all users to create in Shopify
+     *
+     * @return Builder
+     */
+    private function getUsersToCreateQuery(): Builder
+    {
+        return User::query()
+            ->whereNull("shopify_id");
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getClassName(): string
+    {
+        return "SyncBulkCustomersToShopify";
+    }
+}

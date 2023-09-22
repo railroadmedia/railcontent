@@ -1,11 +1,11 @@
 @extends('_partials.layout.global-template')
 
 @section('layout-styles')
+    <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/marketing/parcel/drumeo/drum-shop.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
 @endsection
 
 @section('body-data')

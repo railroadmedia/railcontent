@@ -7,7 +7,7 @@
 @section('promo-banner')
     <section class="py-8 md:py-12 relative text-white text-center" style="z-index: 51;margin: 0 auto -70px; background:#000612;">
         <div class="max-w-screen-xl m-auto px-6 lg:flex lg:items-start">
-            <img class="inline-block w-3/4 sm:w-full sm:max-w-sm mb-5 lg:mb-0 mx-auto lg:mx-0" src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Flead-gen%2Fsong-in-an-hour%2Flogo-purple-discount.png?auto=format&ixlib=php-1.2.1&w=770&s=4d7d292914d2861e342201198a006f95" alt="logo purple">
+            <img class="inline-block w-3/4 sm:w-full sm:max-w-sm mb-5 lg:mb-0 mx-auto lg:mx-0" src="https://www.musora.com/musora-cdn/image/width=770,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/logo-purple-discount.png" alt="logo purple">
             <div class="lg:pl-10 max-w-lg lg:max-w-2xl mx-auto lg:mx-0">
                 <p class="font-primary text-lg sm:text-xl"><strong class="font-black">CONTINUE YOUR JOURNEY <i class="fas fa-long-arrow-right mx-1" style="color:#6100a6;"></i> <span class="inline-block"> SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['guitar-quest']->price)))) }}% ON GUITAR QUEST</span></strong></p>
                 <p class="font-primary text-sm sm:text-base my-4 leading-relaxed text-left">
@@ -36,10 +36,10 @@
 @section('final')
     <!-- Start Here -->
     {{-- Guitar Quest: Start Here --}}
-    <section class="py-24 bg-top bg-cover md:py-48" style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Forder-background.jpg?auto=format&ixlib=php-1.2.1&w=1500&s=102f8f89fa2527e02113803a5fa19e3c')">
+    <section class="py-24 bg-top bg-cover md:py-48" style="background-image: url('https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/order-background.jpg')">
         <div class="max-w-screen-xl m-auto px-4 md:px-6 flex">
             <div class="w-full m-auto text-white text-center lg:w-10/12">
-                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fguitar-quest-logo.png?auto=format&ixlib=php-1.2.1&w=700&s=5768e9ca4e1a3a4a28966bd8fcad1d61" width="400px" class="m-auto block mb-10">
+                <img src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png" width="400px" class="m-auto block mb-10">
                 <h2 class="uppercase text-3xl font-bison-bold sm:text-5xl md:text-6xl mb-2">Your Guitar Journey<br class="inline xl:hidden"> Starts Here.</h2>
 
                 <h4 class="text-xl mb-2 md:mb-10 font-primary sm:text-2xl md:text-3xl">

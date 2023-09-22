@@ -90,7 +90,7 @@ class SyncProductsToShopify extends Command
         }
 
         // STEP 2: get all the products that need to be synced
-        $limit = $this->option("limit");
+        $limit = $this->getLimit();
         $products = is_null($limit) ? $this->getEcommerceEntities($fresh) : $this->getEcommerceEntities($fresh)->take($limit);
 
         $this->info("Found {$products->count()} products to be synced");
@@ -791,6 +791,14 @@ class SyncProductsToShopify extends Command
     function getIsFresh(): bool
     {
         return $this->option("fresh");
+    }
+
+    /**
+     * @inheritDoc
+     */
+    function getLimit(): ?int
+    {
+        return $this->option("limit");
     }
 
     /**
