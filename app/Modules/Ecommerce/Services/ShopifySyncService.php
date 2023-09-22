@@ -112,7 +112,7 @@ class ShopifySyncService
         ];
 
         if (!$tax) {
-            $data['total_tax'] = $tax;
+            $data['total_tax'] = number_format($tax, 2);
         }
 
         return $data;
