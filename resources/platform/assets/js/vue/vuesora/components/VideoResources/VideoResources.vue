@@ -113,24 +113,8 @@
           </transition>
         </div>
 
-        <!-- Report Button -->
-        <div v-if="showReportButton()" class="flex flex-column resource-button tw-pr-2 tw-relative">
-          <button
-              class="open-resources tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
-              title="Report An Issue"
-              @click=""
-          >
-              <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
-                  <div class="tw-h-6 tw-flex tw-items-center">
-                      <FlagIcon class="tw-w-5 tw-h-5 tw-mr-1" />
-                  </div>
-                  Report
-              </div>
-          </button>
-        </div>
-
         <!-- More Button -->
-        <div v-if="(resources.length > 0 && !showResourceButton()) || !showReportButton()" class="flex flex-column resource-button tw-relative">
+        <div class="flex flex-column resource-button tw-relative">
           <button
               class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-1 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
               title="More"
@@ -175,7 +159,7 @@
             </li>
 
             <!-- Report -->
-            <li v-if="!showReportButton()" class="tw-group tw-relative">
+            <li class="tw-group tw-relative">
               <button
                   class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-sm"
               >
@@ -527,13 +511,6 @@ export default {
        }
 
        return false;
-    },
-    showReportButton(){
-        if((!this.showInfoButton && !this.showCompleteButton) || (!this.showInfoButton && !this.resources.length > 0) || (!this.showCompleteButton && !this.resources.length > 0)){
-            return true;
-        }
-
-        return false;
     },
   },
 };
