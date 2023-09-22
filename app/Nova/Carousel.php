@@ -60,14 +60,36 @@ class Carousel extends Resource
             Text::make('Name')->sortable()->help('For easy reference to this banner in the CMS. This info won\'t show on the banner.')->required()->rules('required'),
             Boolean::make('Visible on Desktop', 'visible_on_desktop')->hideFromIndex()->default(true),
             Boolean::make('Visible on Mobile', 'visible_on_mobile')->hideFromIndex()->default(true),
-            Select::make(__('Mobile endpoint version'), 'mobile_version')->options(function () {
+            Select::make(__('All but latest version'), 'mobile_version_below')->options(function () {
                 return [
                     '1' => '' . __('V1') . '',
                     '2' => '' . __('V2') . '',
                     '3' => '' . __('V3') . '',
                     '4' => '' . __('V4') . '',
                 ];
-            }),
+            })->hideFromIndex()
+                ->hide()
+                ->dependsOn(
+                    ['visible_on_mobile'],
+                    function (Select $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->visible_on_mobile) $field->show();
+                    }
+                ),
+            Select::make(__('Selected version and higher only'), 'mobile_version_above')->options(function () {
+                return [
+                    '1' => '' . __('V1') . '',
+                    '2' => '' . __('V2') . '',
+                    '3' => '' . __('V3') . '',
+                    '4' => '' . __('V4') . '',
+                ];
+            })->hideFromIndex()
+                ->hide()
+                ->dependsOn(
+                ['visible_on_mobile'],
+                function (Select $field, NovaRequest $request, FormData $formData) {
+                    if ($formData->visible_on_mobile) $field->show();
+                }
+            ),
             Boolean::make('Draft')->hideFromIndex()->default(true),
             Number::make('Display Order', 'display_order')->hideFromIndex(),
             DateTime::make('Start Time', 'start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),

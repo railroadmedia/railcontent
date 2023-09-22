@@ -57,10 +57,16 @@ class CarouselService
                ->where(
                 function ($query) use ($mobileEndpointVersion) {
                     return $query
-                        ->whereNull('mobile_version')
-                        ->orWhere('mobile_version', '<=', $mobileEndpointVersion);
-                }
-            );
+                        ->whereNull('mobile_version_below')
+                        ->orWhere('mobile_version_below', '>=', $mobileEndpointVersion);
+                })
+               ->where(
+                   function ($query) use ($mobileEndpointVersion) {
+                       return $query
+                           ->whereNull('mobile_version_above')
+                           ->orWhere('mobile_version_above', '<=', $mobileEndpointVersion);
+                   }
+               );
         }else{
             $query = $query
                 ->where('visible_on_desktop', '=',1);
