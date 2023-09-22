@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Console\Commands\Traits\SyncsToShopify;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SavesShopifyIdOnAddresses;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
@@ -28,7 +29,7 @@ use Signifly\Shopify\Shopify;
 
 class SyncCustomersToShopify extends Command
 {
-    use SyncsToShopify, SavesShopifyIdOnAddresses;
+    use SyncsToShopify, SavesShopifyIdOnAddresses, HandlesMaskedEmailAddress;
 
     /**
      * The name and signature of the console command.
@@ -37,6 +38,7 @@ class SyncCustomersToShopify extends Command
      */
     protected $signature = 'shopify:sync-customers
                             {--limit= : (Optional) The number of users and customers to limit this run to. Applies to each.}
+                            {--no-email-mask : Do not mask customer Email addresses. Without this flag, email addresses will be masked in Shopify. }
                             {--fresh : Sync all users and customers, not just those that need it}
                             {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
 
@@ -135,7 +137,6 @@ class SyncCustomersToShopify extends Command
             ->when($limit, function (Builder $q) use ($limit) {
                 return $q->limit($limit);
             });
-
         $totalCount = $usersQuery->count();
         $infoString = "Found {$totalCount} users to be synced.";
         if ($limit) {
@@ -422,7 +423,7 @@ class SyncCustomersToShopify extends Command
      */
     private function linkExistingCustomer(string $email): void
     {
-        $shopifyCustomers = $this->shopify->getCustomers(["email" => $email]);
+        $shopifyCustomers = $this->shopify->getCustomers(["email" => $this->getEmailForShopify($email)]);
         $shopifyAttributes = $shopifyCustomers->first()->getAttributes() ?? null;
 
         // this shouldn't be possible, but check just in case
@@ -588,7 +589,7 @@ class SyncCustomersToShopify extends Command
     {
         $customerData = [
             "currency" => "USD",
-            "email" => $user->email,
+            "email" => $this->getEmailForShopify($user->email),
             "first_name" => $user->first_name,
             "last_name" => $user->last_name,
             "note" => $user->support_note,
@@ -623,7 +624,7 @@ class SyncCustomersToShopify extends Command
     {
         return [
             "currency" => "USD",
-            "email" => $email,
+            "email" => $this->getEmailForShopify($email),
             "note" => $this->getCustomerValueFor($customers, "getNote"),
             "phone" => $this->getPhoneNumberForCustomer($customers),
             // "tags" => "",
@@ -1082,5 +1083,13 @@ class SyncCustomersToShopify extends Command
     protected function getEntityManager(): EcommerceEntityManager
     {
         return $this->entityManager;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getIsUsingMask(): bool
+    {
+        return $this->option("no-email-mask") == false;
     }
 }
