@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Console\Commands\Traits\SyncsToShopify;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\SavesShopifyIdOnAddresses;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Exception\ORMException;
@@ -27,7 +28,7 @@ use Signifly\Shopify\Shopify;
 
 class SyncCustomersToShopify extends Command
 {
-    use SyncsToShopify;
+    use SyncsToShopify, SavesShopifyIdOnAddresses;
 
     /**
      * The name and signature of the console command.
@@ -223,6 +224,15 @@ class SyncCustomersToShopify extends Command
                     $customerResource = $this->shopify->updateCustomer($existingCustomerShopifyId, $postData);
                 }
             } catch (ValidationException $exception) {
+                // we can have edge cases where the customer was created in Shopify, but we didn't record their shopify_id,
+                // so check for that error and record Shopify's id on our records
+                $errors = collect($exception->errors);
+                if (collect($errors->get("email"))->contains("has already been taken") ){
+                    $this->linkExistingCustomer($user->email);
+                    $this->tableRows[] = [$user->id, "User", "<error>EMAIL EXISTING</error>", "Email account already taken. Shopify ID recorded locally."];
+                    return;
+                }
+
                 $this->error(sprintf("Validation failed when sending customer data to Shopify: %s",
                     $exception->getMessage()));
                 $this->error(sprintf("Please investigate for user or customers with email address %s. Attempted customer data: %s",
@@ -340,6 +350,15 @@ class SyncCustomersToShopify extends Command
                             $customerResource = $this->shopify->updateCustomer($existingCustomerShopifyId, $postData);
                         }
                     } catch (ValidationException $exception) {
+                        // we can have edge cases where the customer was created in Shopify, but we didn't record their shopify_id,
+                        // so check for that error and record Shopify's id on our records
+                        $errors = collect($exception->errors);
+                        if (collect($errors->get("email"))->contains("has already been taken") ){
+                            $this->linkExistingCustomer($email);
+                            $this->tableRows[] = [$email, "Customer", "<error>EMAIL EXISTING</error>", "Email account already taken. Shopify ID recorded locally."];
+                            return;
+                        }
+
                         $this->error(sprintf("Validation failed when sending customer data to Shopify: %s",
                             $exception->getMessage()));
                         $this->error(sprintf("Please investigate for customer with email address %s. Attempted customer data: %s",
@@ -390,6 +409,67 @@ class SyncCustomersToShopify extends Command
             $this->finishSyncLogIfExecuting($this->shopifyIds);
             // and clear the table rows for the next run
             $this->tableRows = [];
+        });
+    }
+
+    /**
+     * Query Shopify for a customer with the given email address. If found, get our user and/or customers with the
+     * same email address, and store the shopify_id to link them to the Shopify customer.
+     * Use the Shopify customer's addresses to set the shopify_id for our user/customer's addresses as well.
+     *
+     * @param string $email
+     * @return void
+     */
+    private function linkExistingCustomer(string $email): void
+    {
+        $shopifyCustomers = $this->shopify->getCustomers(["email" => $email]);
+        $shopifyAttributes = $shopifyCustomers->first()->getAttributes() ?? null;
+
+        // this shouldn't be possible, but check just in case
+        if (is_null($shopifyAttributes)) {
+            $this->error(sprintf("The email address %s was already in use in Shopify, but no customers were found".
+                " when attempting to retrieve it from Shopify", $email));
+            $this->tableRows[] = [$email, "", "<error>FAILED</error>", "Existing email but no customers"];
+            return;
+        }
+
+        $shopifyCustomerId = $shopifyAttributes["id"];
+        // find all of our users and customers with that email address, and store the shopify_id
+         $user = User::query()->firstWhere("email", $email);
+
+        if (!is_null($user)) {
+            $user->shopify_id = $shopifyCustomerId;
+            $user->update();
+        }
+        $customers = $this->getCustomersForEmail($email);
+        try {
+            $customers->each(function (Customer $customer) use ($shopifyCustomerId) {
+                $customer->setShopifyId($shopifyCustomerId);
+                $this->entityManager->persist($customer);
+                $this->entityManager->flush();
+            });
+        } catch (ORMException $e) {
+            $this->error(sprintf("Failed to store shopify_id %s on customers with email address %s: %s",
+                $shopifyCustomerId, $email, $e->getMessage()));
+            $this->tableRows[] = [$email, "<error>FAILED</error>", "Failed to save shopify_id on existing customers"];
+        }
+
+        // find any addresses for our user and/or customers that match Shopify's, and store the shopify_id
+        collect($shopifyAttributes["addresses"])->each(function(array $addressData) use ($email, $customers, $user) {
+            $matchedAddresses = $this->findAddressesWithMatchingData($user->id ?? null, $customers,
+                $addressData["first_name"], $addressData["last_name"], $addressData["address1"], $addressData["address2"],
+                $addressData["city"], $addressData["province"], $addressData["province_code"], $addressData["zip"],
+                $addressData["country"], $addressData["country_code"]);
+            if ($matchedAddresses->isNotEmpty()) {
+                $addressShopifyId = $addressData["id"];
+                try {
+                    $this->storeShopifyId($matchedAddresses, $addressShopifyId);
+                } catch (ORMException $e) {
+                    $this->error(sprintf("Failed to store shopify_id %s on address(es) for user or customer with email".
+                        " address %s: %s", $addressShopifyId, $email, $e->getMessage()));
+                    $this->tableRows[] = [$email, "<error>FAILED</error>", "Failed to save shopify_id on existing addresses"];
+                }
+            }
         });
     }
 
@@ -684,6 +764,25 @@ class SyncCustomersToShopify extends Command
     }
 
     /**
+     * Get all customers with the given email address
+     *
+     * @param string $email
+     * @return Collection
+     */
+    private function getCustomersForEmail(string $email): Collection
+    {
+        $qb = $this->customerRepository->createQueryBuilder('customer');
+        $qb->where(
+            $qb->expr()
+                ->eq("customer.email", ":email")
+        )->setParameter("email", $email);
+
+        $q = $qb->getQuery();
+
+        return collect($q->getResult());
+    }
+
+    /**
      * For the given collection of Addresses, clean up the data and format it in a way that Shopify will accept
      *
      * @param Collection<Address> $addresses
@@ -967,5 +1066,21 @@ class SyncCustomersToShopify extends Command
         // All of that is done in the handle function, and so this function is never used.
 
         return collect();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getAddressRepository(): AddressRepository
+    {
+        return $this->addressRepository;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getEntityManager(): EcommerceEntityManager
+    {
+        return $this->entityManager;
     }
 }
