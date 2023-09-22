@@ -83,7 +83,6 @@ class RevenueCatController extends Controller
                     $this->getMusoraProduct($type, $data['event'], $productId);
 
                 $price = $data['event']['price'] ?? $musoraProduct->price;
-                $processedAt = Carbon::parse($data['event']['purchased_at_ms']);
 
                 $this->shopifySyncService->syncOrder(
                     $user,
