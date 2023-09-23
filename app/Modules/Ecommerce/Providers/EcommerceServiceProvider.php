@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Providers;
 
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class EcommerceServiceProvider extends ServiceProvider
@@ -22,11 +23,13 @@ class EcommerceServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    : void
+    public function boot(): void
     {
-        $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
-        $this->loadRoutesFrom(__DIR__ . '/../routes/shopify.php');
+        Route::middleware('web_or_api_public')
+            ->group(__DIR__ . '/../routes/routes.php')
+            ->group(__DIR__ . '/../routes/shopify.php');
+
+
         $this->mergeConfigFrom(
             __DIR__ . '/../config/shopify.php',
             'shopify'
@@ -38,8 +41,7 @@ class EcommerceServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    : void
+    public function register(): void
     {
         parent::register();
     }

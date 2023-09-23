@@ -2,90 +2,38 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
+use App\Modules\Ecommerce\Services\ShopifyStoreFrontAPIService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Session;
 use Signifly\Shopify\Shopify;
 
 class ShopifyCartAPIController extends Controller
 {
-    private Shopify $shopify;
+    private ShopifyStoreFrontAPIService $shopifyStoreFrontAPIService;
 
-    public function __construct(Shopify $shopify)
+    private const SHOPIFY_CART_ID_SESSION_KEY = 'shopify_session_cart_id';
+
+    public function __construct(ShopifyStoreFrontAPIService $shopifyStoreFrontAPIService)
     {
-        $this->shopify = $shopify;
+        $this->shopifyStoreFrontAPIService = $shopifyStoreFrontAPIService;
     }
 
-    public function handleWebhook(Request $request)
+    public function createOrAddToCart(Request $request)
     {
-        dd($request->all());
-    }
+        $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
 
-    public function addToCart(Request $request)
-    {
-        $gqlUrl = $this->shopify->getBaseUrl() . "/graphql.json";
+        var_dump(Session::all());
 
-        $data['query'] =
-            'mutation CartCreate($input: CartInput) {
-    cartCreate(input: $input) {
-        cart {
-            checkoutUrl
-            createdAt
-            id
-            note
-            totalQuantity
-            updatedAt
-            buyerIdentity {
-                countryCode
-                email
-                phone
-                walletPreferences
-                customer {
-                    acceptsMarketing
-                    createdAt
-                    displayName
-                    email
-                    firstName
-                    id
-                    lastName
-                    numberOfOrders
-                    phone
-                    tags
-                    updatedAt
-                }
-            }
-            cost {
-                totalAmount {
-                    amount
-                    currencyCode
-                }
-            }
-            lines(first: 100) {
-                edges {
-                    node {
-                        id
-                        quantity
-                    }
-                }
-            }
+        if (empty($existingShopifyCartId)) {
+            $cartData = $this->shopifyStoreFrontAPIService->createCart(['46137514361127' => 3], ['my-discount01']);
+
+            Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
+        } else {
+            $cartData = $this->shopifyStoreFrontAPIService->addToCart($existingShopifyCartId, ['46137514361127' => 3]);
         }
-        userErrors {
-            code
-            field
-            message
-        }
-    }
-}';
 
-        $data['variables'] = [
-            'input' => [
-                'lines' => [
-                    ['quantity' => 1, 'merchandiseId' => 'gid://shopify/ProductVariant/46137514361127']
-                ]
-            ]
-        ];
-
-        $results = $this->shopify->graphQl()->post($gqlUrl, $data);
-        dd($results->body());
+        return response("Yes!");
     }
 }
