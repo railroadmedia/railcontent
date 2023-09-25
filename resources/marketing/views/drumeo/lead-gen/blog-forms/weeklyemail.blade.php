@@ -16,6 +16,7 @@
     @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
         "formId" => "Drumeo - Engagement - Trigger - Blog Signup - WebForm",
+        "inputText" => "Enter Your Email",
         "buttonText" => "Join 400K+ Drummers",
         "minimalForm" => true,
     ])
