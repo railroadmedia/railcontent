@@ -6,9 +6,9 @@
 @section('title', 'Weekly Email')
 
 @section('subtitle')
-    <h5 class="leading-normal mb-3 md:mb-4">
-        <strong>Drumming secrets you won't find<br class="sm:hidden"> anywhere else.</strong><br class="hidden sm:inline">
-        Get insider tips, viral videos<br class="sm:hidden"> and Drumeo deals right to your inbox.</h5>
+    <h5 class="leading-tight mb-2 md:mb-4">
+        <strong class="inline-block mb-2">Drumming secrets you won't <br class="sm:hidden"> find anywhere else.</strong><br>
+        Get insider tips, viral videos and <br class="sm:hidden"> Drumeo deals right to your inbox.</h5>
 @endsection
 
 @section('form')
