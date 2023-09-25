@@ -12,10 +12,10 @@
 
     @include('_partials.layout._fonts')
 
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">
 
     <style>
         .text-yellow {
@@ -82,48 +82,6 @@
             .slick-2 .slick-arrow.slick-next {
                 right: -80px;
             }
-        }
-
-        .flip-div,
-        .flip-div .bg-image {
-            padding-bottom: 120%;
-        }
-        @media (min-width: 768px) {
-            .flip-div,
-            .flip-div .bg-image {
-                padding-bottom: 167%;
-            }
-        }
-        .flip-div,
-        .flip-div .bg-image {
-            padding-bottom: 100%;
-        }
-        .flip-div.flipped .front,
-        .flip-div.flipped .front {
-            -ms-transform: rotateY(180deg);
-            -webkit-transform: rotateY(180deg);
-            transform: rotateY(180deg);
-        }
-        .flip-div.flipped .back,
-        .flip-div.flipped .back {
-            -ms-transform: rotateY(0deg);
-            -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
-        }
-        .flip-div .back,
-        .flip-div .back {
-            -ms-transform: rotateY(-180deg);
-            -webkit-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
-        }
-        .flip-div .front,
-        .flip-div .back {
-            -ms-transition: transform 0.8s;
-            -webkit-transition: transform 0.8s;
-            transition: transform 0.8s;
-            -ms-backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
         }
     </style>
 @stop
