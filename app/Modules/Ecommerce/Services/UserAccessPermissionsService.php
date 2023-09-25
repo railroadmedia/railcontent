@@ -11,6 +11,7 @@ use App\Modules\Ecommerce\Models\UserAccessPermission;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\UserProduct;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
@@ -45,19 +46,60 @@ class UserAccessPermissionsService
         return new UserAccessPermissionsCollection($userId, $permissions);
     }
 
+    /**
+     * @param int $userId
+     * @param int[] $productIds
+     * @param Carbon $startTime
+     * @param UserAccessPermissionsSourceEnum $source
+     * @return void
+     * @throws Exception
+     */
+    public function AddUserAccessPermissionsForProducts(
+        int $userId,
+        array $productIds,
+        Carbon $startTime,
+        UserAccessPermissionsSourceEnum $source
+    )
+    : void {
+        $contentPermissionsLookup = $this->getContentPermissionsLookup();
+        $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($userId);
+
+        $products =
+            Product::whereIn('id', $productIds)
+                ->get();
+
+        foreach ($products as $product) {
+            $contentPermissions = $product->getContentPermissions($contentPermissionsLookup);
+
+            foreach ($contentPermissions as $contentPermission) {
+                $accessPermission = new UserAccessPermission();
+                $accessPermission->user_id = $userId;
+                $accessPermission->permission_id = $contentPermission->id;
+                $accessPermission->source = UserAccessPermissionsSourceEnum::Shopify;
+                $accessPermission->source_hash = '';
+                $accessPermission->start_time = $startTime;
+                $accessPermission->time_days = $product->getMembershipTimeDays();
+                $accessPermission->time_months = $product->getMembershipTimeMonths();
+                $accessPermission->time_lifetime = $product->isLifeTime();
+                $accessPermission->status = UserAccessPermissionsStatusEnum::Active;
+                $accessPermission->save();
+                $existingAccessPermissionsLookup["$source->value.$accessPermission->id"] = $accessPermission;
+            }
+        }
+
+        $accessPermissions = new UserAccessPermissionsCollection(
+            $userId, $existingAccessPermissionsLookup->values()
+        );
+        event(new UserAccessPermissionsUpdated($accessPermissions));
+    }
+
+
     public function syncShopifyOrders(int $userId, $orders): void
     {
-        $existingAccessPermissionsLookup = $this->getUserAccessPermissionsQuery($userId)->get()->keyBy(
-            function (UserAccessPermission $permission) {
-                $hash = !empty($permission->source_hash) ? $permission->source_hash : $permission->id;
-                return "$permission->source.$hash";
-            }
-        );
+        $contentPermissionsLookup = $this->getContentPermissionsLookup();
+        $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($userId);
         $variantIds = $orders->pluck('line_items')->flatten(1)->pluck('variant_id')->unique()->toArray();
         $productLookup = $this->productService->getProductsByShopifyIds($variantIds)->keyBy('shopify_id');
-        $contentPermissionsLookup = $this->contentPermissionsService->getAll()->keyBy(function ($permission) {
-            return $permission->brand . '_' . $permission->name;
-        });
 
         $wasUpdated = false;
         foreach ($orders->sortBy('created_at') as $order) {
@@ -250,5 +292,22 @@ class UserAccessPermissionsService
         }
         ksort($permissionsToCreate);
         return $permissionsToCreate;
+    }
+
+    private function getContentPermissionsLookup(): Collection
+    {
+        return $this->contentPermissionsService->getAll()->keyBy(function ($permission) {
+            return $permission->brand . '_' . $permission->name;
+        });
+    }
+
+    private function getExistingUserAccessLookup(int $userId): Collection
+    {
+        return $this->getUserAccessPermissionsQuery($userId)->get()->keyBy(
+            function (UserAccessPermission $permission) {
+                $hash = !empty($permission->source_hash) ? $permission->source_hash : $permission->id;
+                return "$permission->source.$hash";
+            }
+        );
     }
 }
