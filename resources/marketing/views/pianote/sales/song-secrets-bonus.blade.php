@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
@@ -99,19 +100,15 @@
             margin-bottom: -5px;
         }
 
-        @if(!empty($trialVersion))
-            .option-buttons.active {
-                border-color:#f61a30!important;
-                background-color:#4a0c12 !important;
-            }
-            .option-buttons.active .radio-check {
-                border-color:#f61a30!important;
-                background-color:#f61a30!important;
-            }
-            .option-buttons.active .radio-check i {
-                display:block!important;
-            }
-        @endif
+        table.comparison tr td:nth-child(2) {
+            background-color: #f61a30;
+            text-shadow: 3px 3px #f61a30;
+        }
+        table.comparison tr:hover td:nth-child(2),
+        table.comparison tr:nth-child(2n):hover td:nth-child(2) {
+            background-color:#eb1a2f;
+
+        }
     </style>
 @stop
 
@@ -202,30 +199,6 @@
         ];
     @endphp
 
-    @if(empty($hideHeader) || !$hideHeader)
-        @if(!empty($beginnerVersion))
-            @include('musora.sales.components.header-section', [
-                'header' => 'Online piano lessons<br> tailored for beginners.',
-                'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> friendly teachers, and songs perfect for your skill level.',
-                'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
-                'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
-                'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
-                'pointOne' => 'Perfect for Beginners',
-                'pointTwo' => 'Super-Friendly Teachers',
-                'pointThree' => 'Fun Lessons',
-            ])
-        @elseif(!empty($songsVersion))
-            @include('musora.sales.components.header-section', [
-                'header' => 'Learn piano from real teachers.<br> Play your favorite songs.',
-                'desc' => ' Find and play the songs you love. Download, print, and<br class="hidden sm:inline">   play 1000+ songs. Plus get flexible, fun lessons and<br class="hidden sm:inline">  unlimited personal support from real teachers.',
-                'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
-                'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
-                'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
-                'pointOne' => '1000+ popular songs',
-                'pointTwo' => 'World-Class Teachers',
-                'pointThree' => 'Learn anywhere, anytime',
-            ])
-        @else
             @include('musora.sales.components.header-section', [
                 'header' => 'Online piano lessons<br> for all skill levels.',
                 'underline' => true,
@@ -237,284 +210,7 @@
                 'pointTwo' => 'World-Class Teachers',
                 'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
             ])
-        @endif
-    @endif
 
-    @hasSection('promo-banner')
-        @yield('promo-banner')
-    @endif
-
-
-    @php
-        $gridItems = [
-            [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/modern-method.jpg',
-                'title' => '10-Level Curriculum',
-                'desc' => 'Develop your core skills, techniques, and musicality to play beautifully in any setting. ',
-                'lessonInfo' => [
-                    [
-                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/modern-method.jpg',
-                    ],
-                ]
-            ],
-            [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/practical-assignments.jpg',
-                'title' => 'Practical Assignments',
-                'desc' => 'You\'ll always have on-screen assignments and practice tools to help you see results.',
-                'lessonInfo' => [
-                    [
-                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/practical-assignments.jpg',
-                    ],
-                ]
-            ],
-            [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/guided-workouts.jpg',
-                'title' => 'Guided Workouts',
-                'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
-                'lessonInfo' => [
-                    [
-                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/guided-workouts.jpg',
-                    ],
-                ]
-            ],
-            [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/world-class-teachers.jpg',
-                'title' => 'World-Class Teachers',
-                'desc' => 'Lifetime teachers, touring performers, recording professionals, and trending stars. ',
-                'lessonInfo' => [
-                    [
-                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/world-class-teachers.jpg',
-                    ],
-                ]
-            ],
-            [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/downloadable-videos.jpg',
-                'title' => 'Downloadable Videos',
-                'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime. ',
-                'lessonInfo' => [
-                    [
-                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/downloadable-videos.jpg',
-                    ],
-                ]
-            ],
-            [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/personalized-support.jpg',
-                'title' => 'Personalized Support',
-                'desc' => 'Get weekly live streams, student lesson plans, and access to a global piano community. ',
-                'lessonInfo' => [
-                    [
-                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/personalized-support.jpg',
-                    ],
-                ]
-            ],
-        ];
-    @endphp
-
-    @include('musora.sales.components.trailer-grid-section', [
-        'header' => 'Your piano goals<br class="inline sm:hidden"> start here.',
-        'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum and direct access to real teachers. ',
-    ])
-
-    @php
-        $buttons = [
-            'Styles', 'Technique', 'Creativity'
-        ];
-
-        $courses = [
-            [
-                'title' => 'Learn any style',
-                'images' => [
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/classical-piano.jpg',
-                    'title' => 'Classical<br> Piano',
-                    'instructor' => 'Victoria Theodore',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/cocktail-piano.jpg',
-                    'title' => 'Cocktail<br> Piano',
-                    'instructor' => 'Brett Ziegler',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/latin-essentials.jpg',
-                    'title' => 'Latin<br> Essentials',
-                    'instructor' => 'Kevin Castro',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/worship-piano.jpg',
-                    'title' => 'Worship<br> Piano',
-                    'instructor' => 'Amberly Martz',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/improvisational-jazz.jpg',
-                    'title' => 'Improvisational<br> Jazz',
-                    'instructor' => 'Jesús Molina',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/gospel-piano.jpg',
-                    'title' => 'Gospel<br> Piano',
-                    'instructor' => 'Erskine Hawkins',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/Latin-Jazz.jpg',
-                    'title' => 'Latin<br> Jazz',
-                    'instructor' => 'Gabriel Palatchi',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/Tango-Piano.jpg',
-                    'title' => 'Tango<br> Piano',
-                    'instructor' => 'Sangah Noona',
-                    ]
-                ]
-            ],
-            [
-                'title' => 'Add essential techniques',
-                'images' => [
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/piano-technique-made-easy.jpg',
-                    'title' => 'Piano Technique<br> Made Easy',
-                    'instructor' => 'Cassi Falk',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/faster-fingers.jpg',
-                    'title' => 'Faster<br> Fingers',
-                    'instructor' => 'Lisa Witt',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/hanon-exercises.jpg',
-                    'title' => 'Hanon<br> Exercises',
-                    'instructor' => 'Cassi Falk',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/de-stupefy-your-left-hand.jpg',
-                    'title' => 'De-Stupefy<br> Your Left Hand',
-                    'instructor' => 'Lisa Witt',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/beautifully-simple-piano-arpeggios.jpg',
-                    'title' => 'Beautifully<br> Simple Piano<br> Arpeggios',
-                    'instructor' => 'Sangah Noona',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/riffs-fills.jpg',
-                    'title' => 'Riffs<br> & Fills',
-                    'instructor' => 'Lisa Witt',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/7-days-to-sight-reading.jpg',
-                    'title' => '7 Days To<br> Sight Reading',
-                    'instructor' => 'Lisa Witt',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/dexterity-finger-strength.jpg',
-                    'title' => 'Dexterity &<br> Finger Strength',
-                    'instructor' => 'Cassi Falk',
-                    ],
-                ]
-            ],
-            [
-                'title' => 'Play more creatively',
-                'images' => [
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/playing-piano-beautifully.jpg',
-                    'title' => 'Playing Piano<br> Beautifully',
-                    'instructor' => 'Lisa Witt',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/musical-freedom.jpg',
-                    'title' => 'Improvisation &<br> Musical Freedom',
-                    'instructor' => 'Jesús Molina',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/the-perfect-arrangement.jpg',
-                    'title' => 'The Perfect<br> Arrangement',
-                    'instructor' => 'Summer Swee-Singh',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/creative-composition.jpg',
-                    'title' => 'Creative<br> Composition',
-                    'instructor' => 'Lisa Witt',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pillars-of-improvisation.jpg',
-                    'title' => 'Pillars of<br> Improvisation',
-                    'instructor' => 'Jordan Leibel',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/the-power-of-chords.jpg',
-                    'title' => 'The Power<br> of Chords',
-                    'instructor' => 'Lisa Witt',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/creative-song-writing.jpg',
-                    'title' => 'Creative<br> Songwriting',
-                    'instructor' => 'Josh Dion',
-                    ],
-                    [
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/rhythmic-playing.jpg',
-                    'title' => 'Rhythmic<br> Playing',
-                    'instructor' => 'Jay Oliver',
-                    ],
-                ]
-            ],
-        ];
-    @endphp
-
-    @include('musora.sales.components.coaches-section', [
-        'header' => 'Real Teachers,  <br class="sm:hidden">Real Results.',
-        'desc' => 'Amplify your skills with exclusive artist <br class="hidden md:inline"> courses + live events with special guests.'
-    ])
-
-    @php
-        $songItems = [
-            [
-                'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/songs-icon.svg',
-                'title' => '1000+ popular songs.',
-                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level. ',
-            ],
-            [
-                'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/tempo-icons.svg',
-                'title' => 'Find the perfect tempo.',
-                'desc' => 'Slow down any section of a song to make those tricky bars easier. ',
-            ],
-            [
-                'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/loop-icons.svg',
-                'title' => 'Loop the hard parts.',
-                'desc' => 'Create practice loops to play-through those difficult parts over and over.   ',
-            ],
-            [
-                'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/timing-icons.svg',
-                'title' => 'Improve your timing.',
-                'desc' => 'Use the built-in-metronome – your new best friend for difficult rhythms.  ',
-            ],
-            [
-                'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/play-it-right-icon.svg',
-                'title' => 'Play it right the first time.',
-                'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
-            ],
-            [
-                'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/devices-icons.svg',
-                'title' => 'Take your songs anywhere.',
-                'desc' => 'Accessible on any device, or printable, so you can play any song, any time.    ',
-            ],
-
-        ];
-    @endphp
-
-    @include('musora.sales.components.songs-section', [
-        'header' => 'Play your favorite songs.',
-        'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note.',
-        'video' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/device.png',
-        'brandName' => 'Pianote',
-        'bannerDesc' => 'Powered by Musora, Pianote includes full access to our communities for drums, guitar, and voice.',
-    ])
-    @include('musora.sales.components.learn-by-playing-section', [
-        'header' => 'Learn the piano by<br class="inline sm:hidden"> <u>playing the piano</u>.',
-        'desc' => 'With Pianote, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
-                'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314572/rendition/540p/file.mp4?loc=external&signature=b8d6bc7c80a784c2cc9473ae9e1389b3f9e005fbbce2568d7bd6b7d548a4c19e',
-
-    ])
-
-{{--    @include('pianote.sales.headphones-section')--}}
 
     @php
         $testimonials = [
@@ -590,13 +286,41 @@
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
         'instagram' => '200K',
     ])
-    @if(empty($trialVersion))
+
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+        <div class="container max-w-6xl mx-auto">
+            <div class="relative">
+                <table class="w-full mx-auto comparison max-w-4xl mx-auto mb-10 private">
+                    <tbody>
+                    <tr style="background-color:transparent!important;">
+                        <td></td>
+                        <td class="rounded-t-xl"><img class="h-8 sm:h-14 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=220,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-white.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')"></td>
+                        <td class="cursor-pointer sm:cursor-default rounded-tr-xl"><strong>Piano<br> Books</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Style</td>
+                        <td>20 Play-Along Lessons</td>
+                        <td>In-Person</td>
+                    </tr>
+                    <tr>
+                        <td>Investment</td>
+                        <td class="rounded-b-xl"><strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong><br>Single Payment</td>
+                        <td class="rounded-br-xl"><strong>$19-$49</strong><br>&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
     @include('musora.sales.components.guarantee-section', [
         'badge' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png',
-        'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
-        'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the piano.',
+        'header' => '<strong>But what if it doesn’t work for you?</strong>',
+        'desc' => 'You’ll love your Pianote lessons and how quickly you’ll see progress. That’s our promise.<br>
+But what if it doesn’t work?<br>
+Then you won’t have to pay. We’re so confident you’ll love the results, that you’ll 90 days to put us to the test. It’s the longest guarantee out there. And it’s enough time to really know if this is for you.<br>
+If you’re not happy (for any reason), simply let us know within 90 days for a refund.<br>
+That’s the Play Better Guarantee™',
     ])
-    @endif
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
@@ -610,10 +334,10 @@
                     'shipping' => 'true'
                 ],
                 [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
-                    'title' => 'Piano Riffs<br> & Fills',
-                    'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
-                    'price' => floatval($productPrices['piano-riffs-and-fills']->price),
+                    'title' => 'Easy Chords',
+                    'price' => 97,
+                    'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
+                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
                 ],
                 [
                     'title' => 'New Piano Players Start Here',
@@ -622,10 +346,10 @@
                     'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
                 ],
                 [
-                    'title' => 'Easy Chords',
-                    'price' => 97,
-                    'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
+                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
+                    'title' => 'Piano Riffs<br> & Fills',
+                    'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
+                    'price' => floatval($productPrices['piano-riffs-and-fills']->price),
                 ],
                 [
                     'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chords-poster.jpg',
@@ -665,15 +389,19 @@
                 ],
             ]
         @endphp
-        @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-annual-2w-card.png',
+
+    @include('musora.sales.components.order-section-bonuses', [
+    'bgColor' => 'background:linear-gradient(to bottom, #860c9f, #da174b);',
         'firstYearPrice' => '177',
+        'buttonColor' => 'white',
         'CTA' => 'CLAIM YOUR OFFER',
-        'header' => 'Online piano lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[todo]=1&redirect=/order&locked=true&promo-code=special',
-        'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
-        ])
+    'promoLogo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/national-piano-month-logo.svg',
+    'topImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-annual-2w-card.png',
+    'subHeader' => '<strong><span class="text-musora">SAVE 20%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 3 COURSES, 6 POSTERS & THE CHORDS AND SCALES BOOK.',
+    'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
+    'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&redirect=/order&locked=true&promo-code=special',
+    'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
+    ])
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/devices.png',

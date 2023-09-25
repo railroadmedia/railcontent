@@ -306,6 +306,12 @@ class SalesController extends BaseController
             'nPackOwners' => $nPackOwners,
         ]);
     }
+    public function thirtyDayBluesPianoDeal()
+    {
+        return view('pianote.products.30-day-blues-piano-deal', [
+            'theme' => 'pianote',
+        ]);
+    }
     public function ultimatePracticeBundle()
     {
 
