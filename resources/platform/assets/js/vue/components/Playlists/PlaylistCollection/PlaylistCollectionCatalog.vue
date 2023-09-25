@@ -137,12 +137,12 @@
                  :class="miniCatalog ? 'tw-mt-1 tw-px-4 lg:tw-px-0' : 'tw-mt-[58px] tw-flex-col'"
         >
             <div>
-                <h1 class="tw-text-3xl tw-font-normal tw-font-open-sans tw-text-[16px]" :class="!miniCatalog ? 'tw-mb-[15px]' : 'tw-mb-2' ">
+                <h1 class="tw-text-3xl tw-font-normal tw-font-open-sans tw-text-[16px] tw-text-center" :class="!miniCatalog ? 'tw-mb-[15px]' : 'tw-mb-2' ">
                     You haven't created any playlists yet.
                 </h1>
                 <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
-                    <a :href="`/${brand}/create-playlist-window`" class="tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg md:tw-text-xl tw-mr-2 tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white md:tw-mb-2">Create Playlist</a>
-                    <a href="/playlists" class="tw-border-2 tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg md:tw-text-xl tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17] md:tw-mb-2">Learn More</a>
+                    <a :href="`/${brand}/create-playlist-window`" class="tw-btn-primary tw-rounded-full tw-text-lg md:tw-text-xl tw-mr-2 tw-line-clamp-1 md:tw-inline-block tw-bg-white tw-text-[#000C17] hover:tw-bg-[#00101D] hover:dark:tw-bg-[#627F97] hover:tw-text-white md:tw-mb-2 tw-border-2 tw-border-[#000C17]">Create Playlist</a>
+                    <a href="/playlists" class="tw-border-2 tw-btn-primary tw-rounded-full tw-text-lg md:tw-text-xl tw-line-clamp-1 md:tw-inline-block tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17] md:tw-mb-2">Learn More</a>
                 </div>
             </div>
         </section>
@@ -194,7 +194,7 @@
                     />
             </section>
             <section class="tw-w-full tw-block tw-overflow-x-auto lg:tw-overflow-x-hidden tw-no-scrollbar">
-                <div v-if="!playlistsStore.loadingPlaylists && miniCatalog && !state.isListView" 
+                <div v-if="!playlistsStore.loadingPlaylists && miniCatalog && !state.isListView"
                     class="tw-px-4 lg:tw-px-0 tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-nowrap lg:tw-auto-rows-[0] lg:tw-grid-rows-1 lg:tw-overflow-hidden lg:tw-grid lg:tw-grid-cols-5 2xl:tw-grid-cols-6 4xl:tw-grid-cols-8 xl:tw-gap-[12px] 2xl:tw-gap-[16px]"
                 >
                 <!-- Mini Catalog -->
@@ -209,7 +209,7 @@
                     />
                 </div>
             </section>
-            
+
 
             <!-- Pagination -->
             <Pagination

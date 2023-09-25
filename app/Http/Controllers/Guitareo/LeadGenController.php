@@ -14,6 +14,9 @@ class LeadGenController extends BaseController
     public function thankyou() {
         return view('guitareo.lead-gen.pages.thank-you');
     }
+    public function sixReasons() {
+        return view('guitareo.lead-gen.pages.6-reasons');
+    }
     public function welcomeparty() {
         return view('guitareo.lead-gen.pages.welcome-party');
     }
@@ -25,6 +28,9 @@ class LeadGenController extends BaseController
     }
     public function subscribed() {
         return view('guitareo.lead-gen.pages.subscribed');
+    }
+    public function preferences() {
+        return view('guitareo.lead-gen.pages.preferences');
     }
     public function weeklyemail() {
         return view('guitareo.lead-gen.pages.weekly-email', ['recaptchaKey'=>config('recaptcha.key')]);

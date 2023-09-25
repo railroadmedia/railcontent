@@ -1,11 +1,29 @@
-<div style="background:linear-gradient(30deg, #0a3761, #0c1526);">
-<section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"  style="background:url(https://dpwjbsxqtam5n.cloudfront.net/sales/2023/order-bg-tile-2.png) center center/160px;">
-    <div class="container mx-auto max-w-6xl relative z-50">
+<div
+        @if(!empty($bgColor))
+            style="background:linear-gradient(to bottom, #941831, #6B0059);"
+        @else
+            style="background:linear-gradient(30deg, #0a3761, #0c1526);"
+        @endif
+>
+<section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
+        @if(empty($bgColor)) style="background:url(https://dpwjbsxqtam5n.cloudfront.net/sales/2023/order-bg-tile-2.png) center center/160px;" @endif >
+    <div class="container mx-auto relative z-50 @if(!empty($max5)) max-w-5xl @else max-w-6xl @endif">
         <div class="w-full">
+            @if(!empty($promoLogo))
+                <div class="text-center">
+                    <img
+                            class="h-12 lg:h-16 mb-6 transition-opacity opacity-0"
+                            src="{{ $promoLogo }}"
+                            alt="Promo logo"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                    />
+                </div>
+            @endif
             <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
                 <div class=" inline-block relative w-full group" style="padding-bottom: 45%;perspective: 1000px;">
                     <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
-                        <div class=" {{--border-2 border-promo--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
+                        <div class=" {{--border-2 border-musora--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
                             <div class="h-full w-full bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/{{ $topImage }});"></div>
                         </div>
                     </div>
@@ -13,9 +31,17 @@
             </div>
             <br>
             @if(!empty($header))<h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>{!! $header !!}</strong></h3>@endif
-            <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-            <p class="leading-tight text-sm @if(empty($subDescription)) mb-6 @endif"><em>First year discount: <s class="opacity-40">${{ Prices::$plusSubscriptionAnnualFull }}</s> @if(!empty($firstYearPrice))
-                ${{$firstYearPrice}} @else ${{ 200 }}@endif.<br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
+            @if(!empty($subHeader))<h4 class="leading-tight mt-4 sm:mt-5 mb-2">{!! $subHeader !!}</h4>@endif
+            <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
+                @if(!empty($CTA))
+                    {{ $CTA }}
+                @else
+                    GET Started &raquo;
+                @endif
+            </a>
+            <p class="leading-tight text-sm mb-6"><em>First year discount: <s class="opacity-40">${{ Prices::$plusSubscriptionAnnualFull }}</s>
+                    <strong>@if(!empty($firstYearPrice)) ${{$firstYearPrice}} @else ${{ 200 }}@endif</strong>.
+                    <br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
         </div>
         <div style="font-size:0px">
             @foreach($bonuses as $bonus)
@@ -42,7 +68,7 @@
                         <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                             <div
                                 x-ref="front"
-                                class="border-2 border-promo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
+                                class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
                                 style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
                                 @if(!empty($bonus['badge']))
                                     <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
@@ -56,7 +82,7 @@
                             </div>
                             <div
                                 x-ref="back"
-                                class="back border-2 border-promo absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
+                                class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
                                 style="backface-visibility: hidden;"
                             >
                                 <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
@@ -67,12 +93,14 @@
                     </div>
 
                     <p class="w-full leading-normal mt-2">
-                        {{--<strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>--}}
+                        @if(!empty($bonus['title']))
+                            <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
+                        @endif
                         <span style="text-transform:uppercase; display:inline-block;">
                             @if(!empty($bonus['price']))
                             <s class="opacity-40">${{ $bonus['price'] }}</s>
                             @endif
-                            <strong class="text-promo">FREE</strong></span><br>
+                            <strong class="text-musora">FREE</strong></span><br>
                         <em>
                             @if(!empty($bonus['shipping']))
                                 Free Shipping
@@ -122,7 +150,19 @@
                 @endif
             </div>
         </div>
-        <a class="join {{ $theme }} my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+        <h3 class="leading-tight mt-6 mb-1">
+            <s class="opacity-50">${{ Prices::$plusSubscriptionAnnualFull }}</s>
+            @if(!empty($firstYearPrice)) <strong>${{$firstYearPrice}}</strong> <span class="text-musora">(Save {{ round(100 - (100 * ($firstYearPrice / 240))) }}%)</span>  @else <strong>$200</strong> <span class="text-musora">(Save 20%)</span>  @endif
+
+        </h3>
+        <p class="text-sm mb-4 sm:mb-6">For your first year, then ${{ Prices::$plusSubscriptionAnnualFull }}/yr.</p>
+        <a class="join {{ $theme }} mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
+            @if(!empty($CTA))
+                {{ $CTA }}
+            @else
+                GET Started &raquo;
+            @endif
+        </a>
         @if(!empty($altButtonLink))
             <br>
             <a class="inline-block text-light-navy mt-2" href="{{ $altButtonLink }}"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>

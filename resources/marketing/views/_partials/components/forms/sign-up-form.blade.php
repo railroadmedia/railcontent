@@ -19,8 +19,7 @@
 
 <form id="{{$cleanFormId}}" accept-charset="UTF-8" method="POST"
     action="{{ url()->route('customer-io.submit-email-form-rc') }}"
-    class="ajax-form clearfix infusion-form facebook-track-lead mx-auto"
-    onsubmit="emailSignUpConversionTrackerForImpactProvider()">
+    class="ajax-form clearfix infusion-form facebook-track-lead mx-auto">
 
     @if(!empty($formName))
         {!! \Railroad\LeadTracker\Services\LeadTrackerService::getRequestTrackingInputsHtmlFromRequest(
@@ -87,13 +86,20 @@
 
 <script>
     function recaptchaSubmit{{$cleanFormId}}(token) {
-        document.getElementById("{{$cleanFormId}}").submit();
+        const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const userEmail = document.getElementById('sign-up-email');
 
-        dataLayer.push({
-            "event": "gtm.formSubmit",
-            "formId": "{{ $cleanFormId }}",
-            "formSuccess": true
-        });
+        if(userEmail.value.match(emailFormat)){
+            document.getElementById("{{$cleanFormId}}").submit();
+            dataLayer.push({
+                "event": "gtm.formSubmit",
+                "formId": "{{ $cleanFormId }}",
+                "formSuccess": true
+            });
+            emailSignUpConversionTrackerForImpactProvider();
+        } else {
+            userEmail.classList.add('bg-red-200');
+        }
     }
 </script>
 

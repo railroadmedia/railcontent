@@ -9,10 +9,12 @@ Route::domain('{guitareoDomain}')
     ->group(function () {
 
     Route::get('/thank-you', [LeadGenController::class, 'thankyou']);
+    Route::get('/6-reasons', [LeadGenController::class, 'sixReasons']);
     Route::get('/welcome-party', [LeadGenController::class, 'welcomeparty']);
     Route::get('/welcome-party-carlos', [LeadGenController::class, 'welcomepartycarlos']);
     Route::get('/confirming', [LeadGenController::class, 'confirming']);
     Route::get('/subscribed', [LeadGenController::class, 'subscribed']);
+    Route::get('/preferences', [LeadGenController::class, 'preferences']);
     Route::get('/weekly-email', [LeadGenController::class, 'weeklyemail']);
     Route::get('/weeklyemail', [LeadGenController::class, 'weeklyemail2']);
     Route::get('/recitals', [LeadGenController::class, 'recitals']);

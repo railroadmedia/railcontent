@@ -74,6 +74,33 @@
         .bg-referral {
             background:linear-gradient(to bottom, #010e2c, #000c17);
         }
+
+        .join {
+            display:inline-block;
+            font:500 22px/1em 'Bebas Neue', sans-serif;
+            letter-spacing:0.1em;
+            text-transform:uppercase;
+            background:#0c1524;
+            border-radius:50px;
+            color:#fff;
+            padding:17px 7%;
+            outline:none;
+            cursor:pointer;
+            text-align:center;
+            user-select:none;
+            text-decoration:none;
+            transition:background-color 0.3s, color 0.3s, opacity 0.3s;
+            box-shadow:0 0 0 rgba(0, 0, 0, 0.35);
+        }
+        .join.musora {
+            background-color:#FFAE00;
+            color:#000;
+        }
+
+        .join.musora:hover {
+            background:#FFAE00;
+            color:#000;
+        }
     </style>
 @stop
 
