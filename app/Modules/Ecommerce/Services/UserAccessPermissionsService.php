@@ -75,7 +75,7 @@ class UserAccessPermissionsService
                 $accessPermission = new UserAccessPermission();
                 $accessPermission->user_id = $userId;
                 $accessPermission->permission_id = $contentPermission->id;
-                $accessPermission->source = UserAccessPermissionsSourceEnum::Shopify;
+                $accessPermission->source = $source;
                 $accessPermission->source_hash = '';
                 $accessPermission->start_time = $startTime;
                 $accessPermission->time_days = $product->getMembershipTimeDays();
