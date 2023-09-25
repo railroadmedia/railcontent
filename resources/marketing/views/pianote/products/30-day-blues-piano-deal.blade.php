@@ -137,7 +137,7 @@
                 You’ve done the hard part.<br>
                 <strong>Keep the momentum going!</strong>
             </h2>
-            <h5 class=" text-pianote uppercase"><strong>GET UNLIMITED PIANO LESSONS FOR A YEAR + 5 FREE BONUSES</strong></h5>
+            <h5 class=" text-pianote uppercase"><strong>GET UNLIMITED PIANO LESSONS FOR A YEAR + 10 FREE BONUSES</strong></h5>
             <div class="w-full mx-auto my-8 px-3" style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
                     <iframe class="absolute w-full h-full reset-on-close bg-black" src="//player.vimeo.com/video/754886689" frameborder="0" allowfullscreen allow="autoplay"></iframe>
@@ -271,7 +271,7 @@
         'CTA' => 'CLAIM YOUR OFFER',
     'bgColor' => 'background:linear-gradient(to bottom, #01050F 66%, #07132C);',
     'topImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-annual-2w-card.png',
-    'subHeader' => '<strong><span class="text-musora">SAVE 26%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 4 FREE BONUSES & 6 FREE POSTERS.',
+    'subHeader' => '<strong><span class="text-musora">SAVE 26%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 10 FREE BONUSES.',
     'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&redirect=/order&locked=true&promo-code=special',
     'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
     ])
