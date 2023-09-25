@@ -1,6 +1,7 @@
 <template>
     <div>
         <filter-controls
+            :title="title"
             :search-term="searchTerm"
             :is-collapsed="isCollapsed"
             :selected-sort="selectedSort"
@@ -62,6 +63,10 @@
             default: '',
         },
         selectedTab: {
+            type: String,
+            default: '',
+        },
+        title:{
             type: String,
             default: '',
         },

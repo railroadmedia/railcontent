@@ -144,6 +144,7 @@
     <nav class="tw-flex tw-my-4 tw-w-full tw-flex-wrap md:tw-flex-nowrap">
         <div class="tw-w-full">
             <FilterWrapper
+                title="All Playlists"
                 :search-term="state.searchTerm"
                 :sort-options="sortOptions"
                 :multi-select-columns="categories"
