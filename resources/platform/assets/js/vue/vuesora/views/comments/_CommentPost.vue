@@ -44,7 +44,7 @@
             </p>
         </div>
         <div class="tw-flex tw-flex-col tw-flex-grow">
-            <div class="tw-group/comment">
+            <div class="tw-group/comment" v-on:mouseleave="showDropdown = false;">
                 <div class="tw-flex tw-flex-row tw-mb-1 comment-meta">
                     <div class="tw-flex tw-flex-col tw-flex-grow tw-mr-1">
                         <h2 class="tw-flex break-words tw-leading-0 tw-items-end">

@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-flex-row comment-post pv mv-1 dark:tw-text-white tw-ml-[-70px] sm:tw-ml-[-60] md:tw-ml-0 tw-group/reply">
+    <div class="tw-flex tw-flex-row comment-post pv mv-1 dark:tw-text-white tw-ml-[-70px] sm:tw-ml-[-60] md:tw-ml-0 tw-group/reply" v-on:mouseleave="showDropdown = false;">
         <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px]">
             <div
                 v-if="hasPublicProfiles"
