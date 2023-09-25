@@ -183,9 +183,6 @@ class UserAccessPermissionsService
         $userPermissions = $this->buildUserPermissionsList($userId, $contentPermissionsLookup);
         $wasUpdated = false;
         foreach ($userPermissions as $permissionId => $dates) {
-            if ($permissionId == 92) {
-                $test2 = 0;
-            }
             $isLifeTime = $dates['expiration_date'] == null;
             $expirationDate = $isLifeTime ? Carbon::maxValue() : Carbon::parse($dates['expiration_date']);
 
