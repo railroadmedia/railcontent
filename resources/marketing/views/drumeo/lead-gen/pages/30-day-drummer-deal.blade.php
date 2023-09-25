@@ -323,6 +323,28 @@
             </div>
         </div>
     </section>
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+        <div class="container max-w-4xl mx-auto">
+            <h3 class="text-center leading-tight"><strong>Improve your Drum Fills and Ghost Notes<br> with Domino Santantonio.</strong></h3>
+            <p class="leading-normal mt-2 sm:mt-3">Domino will help you take the next steps on the drums<br> with her all NEW follow-up packs to 30-Day Drummer:</p>
+            <div class="flex flex-wrap text-left mx-auto my-6 sm:my-9 text-white">
+                <div class="w-1/2 pr-2 sm:px-2">
+                    <div class="rounded-xl overflow-hidden" style="background-color:#071023;">
+                        <img class="transition-all" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-coaches2.jpg" alt="day1 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
+                        <p class="p-2 sm:p-5 text-sm">Still stumbling in and out of drum fills? In 10-Day Fills, Domino will help you play seamless transitions in and out of popular drum fills. You’ll play along with her every day for 10 days until you can play fills with excellent timing & feel.</p>
+                    </div>
+                </div>
+                <div class="w-1/2 sm:px-2">
+                    <div class="rounded-xl overflow-hidden" style="background-color:#071023;">
+                        <img class="transition-all" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-coaches2.jpg" alt="day 30 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
+                        <p class="p-2 sm:p-5 text-sm">Challenge your coordination and feel by playing tasty ghost notes with REAL music. Taught in the same format as 30-Day Drummer, you’ll play along with Domino every day for 10 days until your ghost notes feel effortless.</p>
+                    </div>
+                </div>
+            </div>
+            <h6><em>These brand new follow-up packs drop on October 5, 2023.</em><br><br>
+                <strong class="text-drumeo">And they’re included FREE with your Drumeo membership.</strong></h6>
+        </div>
+    </section>
 
     <section class="pt-12 md:pt-20" style="background-color:#F1F7FE;">
         <h3 class="font-extrabold text-center mb-4">
