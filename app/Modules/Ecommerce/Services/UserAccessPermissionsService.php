@@ -54,7 +54,7 @@ class UserAccessPermissionsService
      * @return void
      * @throws Exception
      */
-    public function AddUserAccessPermissionsForProducts(
+    public function addUserAccessPermissionsForProducts(
         int $userId,
         array $productIds,
         Carbon $startTime,
