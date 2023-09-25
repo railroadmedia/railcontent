@@ -20,7 +20,7 @@ export default {
         sort = 'email',
         search_term = '',
     }) {
-        return axios.get('/usora/json-api/user/index', {
+        return axios.get('/user-management-system/user/index', {
             params: {
                 limit,
                 page,

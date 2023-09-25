@@ -254,17 +254,25 @@ class UserController extends Controller
 
         $users =
             User::query()
-                ->where('displayName', 'LIKE', "%{$searchTerm}%")
+                ->where('display_name', 'LIKE', "%{$searchTerm}%")
                 ->orWhere('email', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('firstName', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('lastName', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('phoneNumber', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('first_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('phone_number', 'LIKE', "%{$searchTerm}%")
                 ->limit($request->get('per_page', 25))
                 ->orderBy($request->get('sort', 'createdAt'))
                 ->get();
+        $results = [];
+        foreach($users as $user){
+            $results[] = [
+                "id" => $user->id,
+                "type" => "user",
+                "attributes" => $user
+            ];
+        }
 
         return json_encode([
-                               "data" => json_encode($users),
+                               "data" => $results,
                            ]);
     }
 
