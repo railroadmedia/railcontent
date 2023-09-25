@@ -301,7 +301,7 @@ class SyncOrdersToShopify extends Command
         // STEP 2: build up the data structure, if the order needs to be updated
         try {
             $postData = $this->createOrderData($order, $isCreating);
-        } catch (ORMException $e) {
+        } catch (Exception $e) {
             $this->error(sprintf("Failed to find User or Customer for Order ID %s",
                 $order->getId()));
             // record the failure in the table then exit out for this order
@@ -555,6 +555,7 @@ class SyncOrdersToShopify extends Command
      * @param bool $withMetafields
      * @return array
      * @throws ORMException
+     * @throws Exception
      */
     private function createOrderData(Order $order, bool $withMetafields): array
     {
@@ -569,16 +570,35 @@ class SyncOrdersToShopify extends Command
             $purchaserEmail = $purchaser->getEmail();
         }
 
+        /*
+         * DEV NOTE: the documentation at https://shopify.dev/docs/api/admin-rest/2023-07/resources/order state that the
+         * currency field is read-only, but it actually is still functional for legacy purposes (for now), and is currently
+         * the only way to set the currency of an order through the Admin API. We need to set the currency on the order
+         * so that any payments and/or refunds are handled in the appropriate currency.
+         */
+        // we need to know what currency was used, so try to find any payments for this order
+        $currency = self::DEFAULT_CURRENCY;
+        $payments = collect($order->getPayments()->toArray());
+        if ($payments->isNotEmpty()) {
+            $currencies = $payments->map(fn(Payment $payment) => $payment->getCurrency())->unique();
+            // we should only have one payment per order, but do a safety check here just in case
+            if ($currencies->count() > 1) {
+                throw new Exception(sprintf("Multiple currencies found for Order %s. ", $order->getId()));
+            }
+            $currency = $currencies->first();
+        }
+
         $orderData = [
+            "currency" => $currency,
             "customer" => ["id" => $purchaserId],
             "email" => $purchaserEmail,
             "note" => $order->getNote(),
             "processed_at" => $order->getCreatedAt()->toIso8601String(),
             "source_name" => $order->getBrand(),
-            "subtotal_price" => $order->getProductDue() ?? ($order->getTotalDue() - $order->getTaxesDue() - $order->getShippingDue()),
-            "total_outstanding" => $order->getTotalDue() - $order->getTotalPaid(),
-            "total_price" => $order->getTotalDue(),
-            "total_tax" => $order->getTaxesDue(),
+            "subtotal_price" => number_format(($order->getProductDue()?? ($order->getTotalDue() - $order->getTaxesDue() - $order->getShippingDue())) ?? 0, 2),
+            "total_outstanding" => number_format(($order->getTotalDue() - $order->getTotalPaid()) ?? 0, 2),
+            "total_price" => number_format($order->getTotalDue() ?? 0, 2),
+            "total_tax" => number_format($order->getTaxesDue() ?? 0, 2),
             // "tags" => "",
         ];
 
@@ -631,7 +651,7 @@ class SyncOrdersToShopify extends Command
                 "ecommerce_order_item_id" => $orderItem->getId(),
                 "fulfillable_quantity" => $orderItem->getQuantity(),
                 "fulfillment_service" => "manual",
-                "price" => $orderItem->getInitialPrice(),
+                "price" => number_format($orderItem->getFinalPrice() ?? 0, 2),
                 "quantity" => $orderItem->getQuantity(),
                 "requires_shipping" => $orderItem->getWeight() > 0,
                 "sku" => $orderItem->getProduct()?->getSku(),
