@@ -10,6 +10,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Order;
 use Railroad\Ecommerce\Entities\OrderItem;
@@ -591,7 +592,7 @@ class SyncOrdersToShopify extends Command
         $orderData = [
             "currency" => $currency,
             "customer" => ["id" => $purchaserId],
-            "email" => $purchaserEmail,
+            "email" => app()->isProduction() ? $purchaserEmail : Str::beforeLast($purchaserEmail, ".example"),
             "note" => $order->getNote(),
             "processed_at" => $order->getCreatedAt()->toIso8601String(),
             "source_name" => $order->getBrand(),
