@@ -4,14 +4,15 @@ namespace App\Modules\Ecommerce\Controllers;
 
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
+use App\Modules\Ecommerce\Models\UserProduct;
 use App\Modules\Ecommerce\Services\RevenueCatService;
+use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
-use Modules\Ecommerce\Services\PaymentService;
 use Modules\UserManagementSystem\Models\User;
 
 class RevenueCatController extends Controller
@@ -19,24 +20,24 @@ class RevenueCatController extends Controller
     private RevenueCatService $revenueCatService;
     private SubscriptionService $subscriptionService;
     private UserProductService $userProductService;
-    private PaymentService $paymentService;
+    private ShopifySyncService $shopifySyncService;
 
     /**
      * @param RevenueCatService $revenueCatService
      * @param SubscriptionService $subscriptionService
      * @param UserProductService $userProductService
-     * @param PaymentService $paymentService
+     * @param ShopifySyncService $shopifySyncService
      */
     public function __construct(
         RevenueCatService $revenueCatService,
         SubscriptionService $subscriptionService,
         UserProductService $userProductService,
-        PaymentService $paymentService
+        ShopifySyncService $shopifySyncService
     ) {
         $this->revenueCatService = $revenueCatService;
         $this->subscriptionService = $subscriptionService;
         $this->userProductService = $userProductService;
-        $this->paymentService = $paymentService;
+        $this->shopifySyncService = $shopifySyncService;
     }
 
     public function processNotification(Request $request)
@@ -79,40 +80,17 @@ class RevenueCatController extends Controller
 
                 //get Musora product
                 $musoraProduct =
-                    $this->getMusoraProduct($type, $data['event'], $productId)
-                        ->first();
+                    $this->getMusoraProduct($type, $data['event'], $productId);
 
-                //get RevenueCat subscription
-                $currentRevenueCatSubscription =
-                    $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
+                $price = $data['event']['price'] ?? $musoraProduct->price;
 
-                //check if already exists Musora subscription
-                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
-                if (!$musoraSubscription) {
-                    //create Musora subscription
-                    $musoraSubscription = $this->subscriptionService->createSubscription(
-                        $user->id,
-                        $data['event']['expiration_at_ms'],
-                        $musoraProduct,
-                        $type,
-                        $data['event']['purchased_at_ms']
-                    );
-                }
-
-                if ($data['event']['period_type'] != 'TRIAL') {
-                    $this->paymentService->create(
-                        $musoraSubscription,
-                        $type,
-                        $data['event']['event_timestamp_ms'],
-                        $data['event']['transaction_id']
-                    );
-                }
-
-                //Assign user product
-                $this->userProductService->assignUserProduct(
-                    $user->id,
-                    $musoraSubscription->product_id,
-                    $musoraSubscription->paid_until
+                $this->shopifySyncService->syncOrder(
+                    $user,
+                    [$musoraProduct->id],
+                    $musoraProduct->brand,
+                    Carbon::parse($data['event']['purchased_at_ms']),
+                    $price,
+                    $this->calculateTaxAmount($price, $data['event']['tax_percentage'])
                 );
                 break;
             case 'NON_RENEWING_PURCHASE':
@@ -121,10 +99,12 @@ class RevenueCatController extends Controller
                 break;
             case 'RENEWAL':
                 echo 'RENEWAL';
+                $subscriberAttributtes = $data['event']['subscriber_attributes'];
 
                 // get Musora user
                 $user = $this->revenueCatService->getUser(
-                    $data['event']['subscriber_attributes']['email']['value'] ?? null,
+                    array_key_exists('email', $subscriberAttributtes) ?
+                        $subscriberAttributtes['email']['value'] : null,
                     $data['event']['original_app_user_id'],
                     true
                 );
@@ -142,41 +122,15 @@ class RevenueCatController extends Controller
                 //get Musora product
                 $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId);
 
-                //get RevenueCat subscription
-                $currentRevenueCatSubscription =
-                    $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
+                $price = $data['event']['price'] ?? $musoraProduct->price;
 
-                //get Musora subscription
-                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
-                if (!$musoraSubscription) {
-                    //create Musora subscription
-                    $musoraSubscription = $this->subscriptionService->createSubscription(
-                        $user->id,
-                        $data['event']['expiration_at_ms'],
-                        $musoraProduct->first(),
-                        $type,
-                        $data['event']['purchased_at_ms']
-                    );
-                }
-
-                //update Musora subscription
-                $this->subscriptionService->updateSubscription(
-                    $musoraSubscription,
-                    $data['event']['expiration_at_ms']
-                );
-
-                $this->paymentService->create(
-                    $musoraSubscription,
-                    $type,
-                    $data['event']['purchased_at_ms'],
-                    $data['event']['transaction_id']
-                );
-
-                //update user product
-                $this->userProductService->assignUserProduct(
-                    $user->id,
-                    $musoraSubscription->product_id,
-                    $musoraSubscription->paid_until
+                $this->shopifySyncService->syncOrder(
+                    $user,
+                    [$musoraProduct->id],
+                    $musoraProduct->brand,
+                    Carbon::parse($data['event']['purchased_at_ms']),
+                    $price,
+                    $this->calculateTaxAmount($price, $data['event']['tax_percentage'])
                 );
 
                 break;
@@ -225,6 +179,13 @@ class RevenueCatController extends Controller
                     $musoraSubscription->paid_until
                 );
 
+                /*
+                 *  @todo Shopify:
+                 *      - update membership times for old product
+                 *  @todo CustomerIO:
+                 *      - Update user attributes
+                 */
+
                 // code...
                 break;
             case 'CANCELLATION':
@@ -245,6 +206,13 @@ class RevenueCatController extends Controller
 
                 //get Musora product
                 $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId);
+
+                /*
+                 * @todo Shopify
+                 *      - update membership times
+                 * @todo CustomerIO:
+                 *      - Push cancellation data for user
+                 */
 
                 //get RevenueCat subscription
                 $currentRevenueCatSubscription =
@@ -290,19 +258,19 @@ class RevenueCatController extends Controller
                 // code...
                 break;
             case 'TRANSFER':
-               $oldRevenueCatAppUserId = $data['event']['transferred_from'];
+                $oldRevenueCatAppUserId = $data['event']['transferred_from'];
 
-               foreach ($oldRevenueCatAppUserId as $key => $value) {
-                   $user = $this->revenueCatService->getUser(
-                       null,
-                       $value
-                   );
-                   if($user){
-                       $user->revenuecat_origin_app_user_id = $data['event']['transferred_to'][0];
-                       $user->save();
-                       continue;
-                   }
-               }
+                foreach ($oldRevenueCatAppUserId as $key => $value) {
+                    $user = $this->revenueCatService->getUser(
+                        null,
+                        $value
+                    );
+                    if ($user) {
+                        $user->revenuecat_origin_app_user_id = $data['event']['transferred_to'][0];
+                        $user->save();
+                        continue;
+                    }
+                }
                 break;
             case 'EXPIRATION':
                 $user = $this->revenueCatService->getUser(
@@ -321,7 +289,14 @@ class RevenueCatController extends Controller
                 $productId = $this->getProductId($data['event']['product_id']);
 
                 //get Musora product
-                $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId);
+                $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId, $user->id);
+
+                /*
+                 *  @todo Shopify:
+                 *      - update membership times
+                 *  @todo CustomerIO:
+                 *      - Push expiration data for user?
+                 */
 
                 //get RevenueCat subscription
                 $currentRevenueCatSubscription =
@@ -366,33 +341,57 @@ class RevenueCatController extends Controller
     }
 
     /**
+     * @param float $price
+     * @param float $taxPercentage
+     * @return float|null
+     */
+    private function calculateTaxAmount(float $price, float $taxPercentage)
+    : ?float {
+        if (!$taxPercentage) {
+            return 0;
+        }
+
+        return floor($price * $taxPercentage);
+    }
+
+    /**
      * @param string $type
      * @param $event
      * @param mixed $productId
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|object|null
+     * @param null $userId
+     * @return Product
      */
-    private function getMusoraProduct(string $type, $event, mixed $productId)
+    private function getMusoraProduct(string $type, $event, mixed $productId, $userId = null): Product
     {
         $store = $type.'_store';
+        $existingUserProducts =
+            UserProduct::where('user_id', $userId)
+                ->get();
 
-        if ($event['period_type'] == 'TRIAL' ) {
+        if ($event['period_type'] == 'TRIAL') {
             $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$productId]];
         } else {
             $productsMap = [config('ecommerce.'.$store.'_products_map')[$productId]];
         }
 
-        if ($event['type'] != 'INITIAL_PURCHASE' ) {
+        if ($event['type'] != 'INITIAL_PURCHASE') {
             $productsMap = array_merge(
                 [config('ecommerce.'.$store.'_products_map')[$productId]],
-                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
-            );
+                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]);
         }
 
-        $musoraProduct =
+        $musoraProducts =
             Product::whereIn('sku', $productsMap)
                 ->get();
 
-        return $musoraProduct;
+        foreach ($musoraProducts as $key => $value) {
+            if ($existingUserProducts->pluck('product_id')
+                ->contains($value->id)) {
+                return $musoraProducts[$key];
+            }
+        }
+
+        return $musoraProducts->first();
     }
 
     /**
