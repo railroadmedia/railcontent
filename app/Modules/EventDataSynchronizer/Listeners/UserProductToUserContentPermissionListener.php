@@ -70,15 +70,18 @@ class UserProductToUserContentPermissionListener
 
     public function syncContentPermissions(int $userId, UserAccessPermissionsCollection $userAccessPermissions): void
     {
-        $permissionIds =$userAccessPermissions->getPermissionIds();
+        $permissionIds = $userAccessPermissions->getPermissionIds();
         $existingUserPermissions = $this->contentPermissionsService->getUserPermissions($userId)->keyBy(
             'permission_id'
         );
 
-        foreach ($permissionIds as $permissionId ) {
+        foreach ($permissionIds as $permissionId) {
             list($startDate, $expirationDate) = $userAccessPermissions->getActiveDates($permissionId);
             if ($expirationDate) {
                 $expirationDate->addDays(config('ecommerce.days_before_access_revoked_after_expiry', 7));
+            }
+            if ($expirationDate > Carbon::maxValue()) {
+                $expirationDate = Carbon::maxValue();
             }
             $userPermission = $existingUserPermissions[$permissionId] ?? null;
             if (!$userPermission) {
