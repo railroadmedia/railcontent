@@ -114,7 +114,7 @@ class LeadGenController extends BaseController
 
     public function songSecrets()
     {
-        return view('pianote.lead-gen.song-secrets.song-secrets', ['theme' => 'pianote']);
+        return view('pianote.lead-gen.song-secrets.song-secrets-webinar', ['theme' => 'pianote']);
     }
     public function songSecretsTY()
     {
