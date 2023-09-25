@@ -39,7 +39,7 @@ export default {
      * @returns {Promise} - resolved promise with the response object
      */
     getUserById(id) {
-        return axios.get(`/usora/json-api/user/show/${id}`)
+        return axios.get(`/user-management-system/user/show/${id}`)
             .then(response => response)
             .catch(ErrorHandler.push);
     },

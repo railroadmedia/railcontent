@@ -115,8 +115,12 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         if ($user) {
+            $user['shopify_customer_url'] = ($user->shopify_id)?'https://admin.shopify.com/store/'.config('usora.shopify_store').'/customers/'.$user->shopify_id:'';
+            $user['revenuecat_customer_url'] = ($user->revenuecat_origin_app_user_id)?'https://app.revenuecat.com/customers/'.config('usora.revenuecat_project_id').'/'.$user->revenuecat_origin_app_user_id:'';
+
             return json_encode([
-                                   "data" => ["attributes" => json_encode($user)],
+                                   "data" => ["id" => $user->id,
+                                       "type" => "user","attributes" => $user],
                                ]);
         } else {
             throw new NotFoundHttpException();
