@@ -148,7 +148,7 @@
         ])
     @endif
 
-    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
+    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white relative" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
         <div class="container max-w-5xl mx-auto">
             <h2><strong>Unlimited piano lessons + 2 FREE posters. </strong></h2>
             <p class="leading-tight text-musora mt-1"><strong>You’ll get free Chords & Scales Posters when you try Pianote for 7 days ($18 value)</strong></p>
@@ -182,6 +182,16 @@
             </div>
         </div>
     </section>
+    <div class="sticky-trigger block"></div>
+    <a href="#customize-anchor"
+            class="promo-banner flex text-white items-center justify-center -mt-10 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide"style="background: linear-gradient(to bottom, #f41a30, #79080b);">
+        {{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
+        <h3 class="inline-block font-bebas text-musora mx-0 pr-3">* FREE POSTERS *</h3>
+        <p class="inline-block text-xs mx-0 leading-tight">
+            Get <strong>2 free posters</strong> when you try
+            <br> Pianote for 7 days. <em>While quantities last.</em>
+        </p>
+    </a>
 
     @php
         $bubble1 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/summer-swee-singh.png';
@@ -279,14 +289,6 @@
         @yield('promo-banner')
     @endif
 
-    <a href="#customize-anchor" class="flex text-white items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] anchor-slide" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
-        {{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
-        <h3 class="inline-block font-bebas text-musora mx-0 pr-3">* FREE POSTERS *</h3>
-        <p class="inline-block text-xs mx-0 leading-tight">
-            Get <strong>2 free posters</strong> when you try
-            <br> Pianote for 7 days. <em>While quantities last.</em>
-        </p>
-    </a>
 
     @php
         $gridItems = [
@@ -711,6 +713,24 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
+    <script>
+        $(document).ready(function () {
+            var stickyBar = $('.promo-banner');
+            $(window).scroll(function () {
+                var stickTrigger = $('.sticky-trigger').offset().top;
+                var unstickTrigger = $('.unstick-trigger').offset().top;
+                if ($(this).scrollTop() > (unstickTrigger - 115)) {
+                    stickyBar.removeClass('fixed mt-0');
+                }
+                if ($(this).scrollTop() < stickTrigger - 115) {
+                    stickyBar.removeClass('fixed mt-0');
+                }
+                if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
+                    stickyBar.addClass('fixed mt-0');
+                }
+            });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
