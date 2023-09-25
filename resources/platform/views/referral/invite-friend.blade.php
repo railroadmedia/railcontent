@@ -39,7 +39,6 @@
 @section('layout-scripts')
     <script>
         function sendPass(e) {
-            e.preventDefault();
 
             let token = document.getElementById('_token').value;
             let brand = document.getElementById('brand').value;
@@ -51,7 +50,7 @@
                 email,
             };
 
-            if(email){
+            if(email.valid){
                 fetch('{{ url()->route('referral.email-invite') }}', {
                     method: 'POST',
                     headers: {

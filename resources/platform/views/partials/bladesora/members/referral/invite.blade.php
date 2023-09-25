@@ -126,7 +126,7 @@
                                    for="email"><strong>Invite via email</strong></label>
                             <div
                                 class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
-                                <input type="hidden" name="_token" class="sort-input" id="_token"
+                                <input type="hidden" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="_token" class="sort-input" id="_token"
                                        value="{{ csrf_token() }}" />
                                 <input type="hidden" name="brand" class="sort-input"
                                        value="{{ $brand }}" id="brand" />
