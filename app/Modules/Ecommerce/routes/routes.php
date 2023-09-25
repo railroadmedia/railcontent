@@ -1,7 +1,10 @@
 <?php
 
 use App\Modules\Ecommerce\Controllers\AccessCodeController;
+use App\Modules\Ecommerce\Controllers\AccessCodeJsonController;
+use App\Modules\Ecommerce\Controllers\RevenueCatController;
 use Illuminate\Support\Facades\Route;
+use Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable;
 use Railroad\Ecommerce\Controllers\AppleStoreKitController;
 
 Route::prefix(config('ecommerce.route_prefix'))->group(function () {
@@ -12,13 +15,13 @@ Route::prefix(config('ecommerce.route_prefix'))->group(function () {
 
     Route::post(
         'revenuecat/webhook/notification',
-        \App\Modules\Ecommerce\Controllers\RevenueCatController::class . '@processNotification'
+        RevenueCatController::class . '@processNotification'
     );
 
     Route::post(
         'revenuecat/restore',
-        \App\Modules\Ecommerce\Controllers\RevenueCatController::class . '@syncSubscriber'
-    )->middleware([\Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class]);
+        RevenueCatController::class . '@syncSubscriber'
+    )->middleware([AuthenticateIfAvailable::class]);
 
     /*
      * ACCESS CODES

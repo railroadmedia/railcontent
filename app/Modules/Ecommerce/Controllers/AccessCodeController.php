@@ -76,6 +76,7 @@ class AccessCodeController extends Controller
         $rawAccessCode = $request->get('access_code');
 
         $productIds = $this->accessCodeService->getAccessCodeProducts($rawAccessCode);
+
         /*
          * SRR-37: Update user permissions
          */
