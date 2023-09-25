@@ -9,11 +9,12 @@ use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
 use App\Modules\Ecommerce\Models\Product;
+use App\Modules\Ecommerce\Models\UserProduct;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
-use Railroad\Ecommerce\Services\UserProductService;
 
 class UserAccessPermissionsService
 {
@@ -21,11 +22,16 @@ class UserAccessPermissionsService
     private ContentPermissionsService $contentPermissionsService;
 
     private ?array $cachedPackPermissionIds = null;
+    private UserProductService $userProductService;
 
-    function __construct(ProductService $productService, ContentPermissionsService $contentPermissionsService)
-    {
+    function __construct(
+        ProductService $productService,
+        ContentPermissionsService $contentPermissionsService,
+        UserProductService $userProductService
+    ) {
         $this->productService = $productService;
         $this->contentPermissionsService = $contentPermissionsService;
+        $this->userProductService = $userProductService;
     }
 
     private function getUserAccessPermissionsQuery(int $userId)
@@ -43,7 +49,8 @@ class UserAccessPermissionsService
     {
         $existingAccessPermissionsLookup = $this->getUserAccessPermissionsQuery($userId)->get()->keyBy(
             function (UserAccessPermission $permission) {
-                return "$permission->source.$permission->source_hash";
+                $hash = !empty($permission->source_hash) ? $permission->source_hash : $permission->id;
+                return "$permission->source.$hash";
             }
         );
         $variantIds = $orders->pluck('line_items')->flatten(1)->pluck('variant_id')->unique()->toArray();
@@ -62,6 +69,13 @@ class UserAccessPermissionsService
                 $contentPermissionsLookup
             );
         }
+
+        $wasUpdated |= $this->ensureUserProductAccess(
+            $userId,
+            $existingAccessPermissionsLookup,
+            $contentPermissionsLookup
+        );
+
 
         if ($wasUpdated) {
             $accessPermissions = new UserAccessPermissionsCollection(
@@ -153,5 +167,88 @@ class UserAccessPermissionsService
             new EcommerceUser($user->id, $user->email),
             $brand
         );
+    }
+
+    /**
+     * Temporary function to handle manual changes to user products not represented in users orders
+     */
+    private function ensureUserProductAccess(
+        int $userId,
+        Collection $existingAccessPermissionsLookup,
+        Collection $contentPermissionsLookup
+    ): bool {
+        $userAccessPermissions = new UserAccessPermissionsCollection(
+            $userId, $existingAccessPermissionsLookup->values()
+        );
+        $userPermissions = $this->buildUserPermissionsList($userId, $contentPermissionsLookup);
+        $wasUpdated = false;
+        foreach ($userPermissions as $permissionId => $dates) {
+            $isLifeTime = $dates['expiration_date'] == null;
+            $expirationDate = $isLifeTime ? Carbon::maxValue() : Carbon::parse($dates['expiration_date']);
+
+            list(, $userAccessExpirationDate) = $userAccessPermissions->getActiveDates($permissionId);
+            if ($userAccessExpirationDate < Carbon::now()) {
+                $userAccessExpirationDate = Carbon::now();
+            }
+            if ($userAccessExpirationDate < $expirationDate) {
+                $days = $isLifeTime ? 0 : ($expirationDate->diffInDays($userAccessExpirationDate) + 1);
+                //User products not synced with orders Add manual permission to fix missing access
+                $accessPermission = new UserAccessPermission();
+                $accessPermission->user_id = $userId;
+                $accessPermission->permission_id = $permissionId;
+                $accessPermission->source = UserAccessPermissionsSourceEnum::Manual;
+                $accessPermission->source_hash = '';
+                $accessPermission->start_time = $userAccessExpirationDate;
+                $accessPermission->time_days = $days;
+                $accessPermission->time_months = 0;
+                $accessPermission->time_lifetime = $isLifeTime;
+                $accessPermission->status = UserAccessPermissionsStatusEnum::Active;
+                $accessPermission->save();
+                $existingAccessPermissionsLookup["manual.$accessPermission->id"] = $accessPermission;
+                $wasUpdated = true;
+            }
+        }
+        return $wasUpdated;
+    }
+
+    private function buildUserPermissionsList(int $userId, $permissionsLookup): array
+    {
+        $userProducts = $this->userProductService->getUserProductsQuery($userId)->with('product')->get();
+        $permissionsToCreate = [];
+
+        /** @var UserProduct $userProduct */
+        foreach ($userProducts as $userProduct) {
+            $product = $userProduct->product;
+            $permissionNames = $product->getDigitalAccessPermissionNames();
+
+            if (empty($permissionNames)) {
+                continue;
+            }
+
+            foreach ($permissionNames as $permissionName) {
+                // we need to check by brand as well since some permissions across brands have the same name
+                $brand = $product->brand;
+                $keyBrand = $brand . '_' . $permissionName;
+                $keyGeneral = 'musora_' . $permissionName;
+                $permission = $permissionsLookup[$keyBrand] ?? $permissionsLookup[$keyGeneral] ?? null;
+                if (!$permission) {
+                    Log::error(
+                        "Permission $brand - $permissionName does not exist.  Fix issue with product $product->id - $product->name and resync."
+                    );
+                    continue;
+                }
+                $permissionId = $permission['id'];
+
+                if (!array_key_exists($permissionId, $permissionsToCreate)
+                    || $permissionsToCreate[$permissionId]['expiration_date'] < $userProduct->expiration_date) {
+                    $permissionsToCreate[$permissionId] = [
+                        'expiration_date' => $userProduct->expiration_date,
+                        'start_date' => $userProduct->start_date,
+                    ];
+                }
+            }
+        }
+        ksort($permissionsToCreate);
+        return $permissionsToCreate;
     }
 }
