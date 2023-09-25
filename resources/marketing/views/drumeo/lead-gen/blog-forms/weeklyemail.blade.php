@@ -7,8 +7,8 @@
 
 @section('subtitle')
     <h5 class="leading-normal mb-3 md:mb-4">
-        <strong>Drumming secrets<span class="hidden sm:inline"> you won't find anywhere else</span>.</strong> Join 400K+ drummers who get  <br class="hidden sm:inline">
-        tips, viral videos, and insider deals on Drumeo products right to their inbox.</h5>
+        <strong>Drumming secrets you won't find<br class="sm:hidden"> anywhere else.</strong><br class="hidden sm:inline">
+        Get insider tips, viral videos<br class="sm:hidden"> and Drumeo deals right to your inbox.</h5>
 @endsection
 
 @section('form')
@@ -16,7 +16,7 @@
     @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
         "formId" => "Drumeo - Engagement - Trigger - Blog Signup - WebForm",
-        "buttonText" => "Join The Drum Club &raquo;",
+        "buttonText" => "Join 400K+ Drummers",
         "minimalForm" => true,
     ])
 
