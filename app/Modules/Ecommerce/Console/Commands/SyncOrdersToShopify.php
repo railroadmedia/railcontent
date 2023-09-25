@@ -757,7 +757,6 @@ class SyncOrdersToShopify extends Command
                     "id" => $payment->getId(),
                     "data" =>
                         [
-                            "currency" => $payment->getCurrency(),
                             "amount" => number_format($payment->getTotalPaid(), 2),
                             "kind" => "sale",
                             // DEV NOTE: this is not documented in Shopify, but it is required
