@@ -16,7 +16,7 @@ Route::domain('{drumeoDomain}')
             Route::get('/gift-card', [SalesController::class, 'giftCard']);
             Route::get('/{page?}', ShopController::class . '@products')
                 ->whereIn('page', [
-                    'beginner-book', 'better-drum-fills', 'beyond-beginner-drumming', 'comfort-cover', 'drum-technique-made-easy', 'drumsticks', 'electrify-your-drumming', 'festival-videos', 'independence-made-easy', 'learn-songs-faster', 'new-drummers', 'practice-pad-full', 'quietpad', 'rock-drumming-masterclass', 'successful-drumming-discount', 'stickbag', 'stickbag-members', 'stickbag-ltd', 'the-drummers-toolbox', 'tony-royster-jr'
+                    'beginner-book', 'better-drum-fills', 'beyond-beginner-drumming', 'comfort-cover', 'drum-technique-made-easy', 'drumsticks', 'electrify-your-drumming', 'festival-videos', 'independence-made-easy', 'learn-songs-faster', 'new-drummers', 'padstand', 'practice-pad-full', 'quietpad', 'rock-drumming-masterclass', 'successful-drumming-discount', 'stickbag', 'stickbag-members', 'stickbag-ltd', 'the-drummers-toolbox', 'tony-royster-jr'
                 ]);
 
             Route::get('/30-day-drummer', [SalesController::class, 'thirtyDayDrummer'] );
