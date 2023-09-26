@@ -249,96 +249,108 @@
     </style>
 @stop()
 
+@section('body-data')
+    x-data="{
+    enroll: false
+    }"
+@endsection
+
 @section('global-body')
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
 
 
-    <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
+    <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background:linear-gradient(to bottom, #850c9f, #d7164e);">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-14 sm:h-18 lg:h-20 mb-1 sm:mb-0 lg:mb-3" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="logo" fetchpriority="high">
-                    <h1 class=""><strong>30 days to</strong></h1>
-                    <h2 class="sm:-mt-1 lg:mt-0">better piano chords.</h2>
-
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting June 5th.</strong></h6>
-
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video" style="padding-bottom: 75%;" data-open="trailer">
-                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/header-image-m.png" alt="header image" fetchpriority="high" />
-                        <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
-                    </div>
-
-                    <p class="hidden lg:inline">
-                        <i class="fas fa-check text-pianote"></i> Learn by doing
-                        <i class="ml-2 fas fa-check text-pianote"></i> Play every day
-                        <i class="ml-2 fas fa-check text-pianote"></i> No theory required</p>
-                    <div class="flex inline lg:hidden">
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> Learn  <br> by doing</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> Play  <br>every day</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> No theory <br> required</p>
-                    </div>
-
-                    <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
-                        <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>
-{{--                                <a href="#final" class="join medium w-full anchor-slide">ENROLL NOW</a>--}}
-                            <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">
-                                <a href="https://www.musora.com/pianote/enrollment/easy-chords">Pianote Members register for free here.</a>
-                            </p>
-                        </div>
-                        <div class="w-full sm:w-1/2 lg:pb-5">
-                            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/piano-players.png" alt="joined student profiles" fetchpriority="high">
-                            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
-                        </div>
-                    </div>
+                    <h2 class="sm:-mt-1 lg:mt-0">The Fastest Way to Play Popular Songs on the Piano</h2>
+                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><em>Proven strategies to help you play the songs you love on the piano - no matter what your age or experience level! It’s never too late to play the songs you love on the piano. I’ll show you how!</em></h6>
+                    <div @click="enroll = true;" class="join white medium w-full">ENROLL NOW</div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video" data-open="trailer">
+                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/header-image.png" alt="header image" fetchpriority="high" />
-                        <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="    background-color: #f4f8fb;">
         <div class="container max-w-4xl mx-auto">
 
             <img class="h-56 inline sm:hidden transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/intro-image.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <h2 class="text-center mt-5 sm:mt-0"><strong>Why chords?</strong></h2>
-            <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7 lg:mb-10 uppercase text-pianote">We’re so glad you asked…</p>
-
-            <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
-                <p class="leading-normal max-w-lg pr-7">Chords are the foundation of music.
-                    <br><br>
-                    All music (even classical) is made from chords. The songs you love to listen to and play are little more than chord progressions with a melody on top. When you know how to play beautiful chord progressions, your playing will sound better, you’ll be more confident, and you’ll have more fun.
-                    <br><br>
-                    And no, you don’t need to understand any complex theory.
-                    <br><br>
-                    Easy Chords will bridge the gap between knowing about chords, and actually being able to use them. You’ll learn popular progressions, chord inversions, and rhythms to enhance your playing and take you beyond a beginner.
-                    <br><br>
-                    And it only takes 10 minutes a day, 5 days a week.
-                    <br><br>
-                    That’s less time than it takes for a trip to the grocery store.</p>
+            <div class="text-left flex flex-wrap sm:flex-nowrap">
+                <div class=" max-w-lg pr-7">
+                    <h4 class="text-center mt-5 sm:mt-0"><strong>You’ll be playing a song in 60 minutes!</strong></h4>
+                    <p class="text-pianote"><em>(Well, more like 10 minutes once you start playing.)</em></p>
+                    <p class="leading-normal">And I know it’s true because I’ve done it for thousands of students just like you. With a few simple tips and secrets, you’ll be able to play hundreds of songs for yourself and your loved ones.
+                        <br><br>
+                        Imagine the surprise when they hear you play!
+                        <br><br>
+                        So how does it work? Register for your FREE webinar and I’ll show you:
+                        <br><br>
+                        <i class="mr-1 text-pianote fas fa-check"></i> What traditional lessons won’t teach you<br>
+                        <i class="mr-1 text-pianote fas fa-check"></i> How to play music WITHOUT needing to know all the notes<br>
+                        <i class="mr-1 text-pianote fas fa-check"></i> The alternative to sheet music that makes playing songs so much easier - and FUN
+                        <br><br>
+                        It’s 100% FREE. Simply click below and get ready to see the piano in a whole new light:</p>
+                </div>
                 <img class="h-96 hidden sm:inline transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/intro-image.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
+        </div>
+    </section>
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 mb-32 sm:mb-56 lg:mb-72">
+        <div class="container max-w-4xl mx-auto">
+
+            <h2><strong>In just 60 minutes, you’ll know…</strong></h2>
+
+
+            Play Chords on ANY Key
+            Chords are your secret weapon for playing the songs you love. Major. Minor. You’ll learn them!
+
+            The Ultimate Sheet Music Hack
+            You don’t need to read complicated music to play songs. There’s an easier way.
+
+            Play 100s of Songs
+            You’ll learn how to play a chord on ANY key. And use those chords to play 100s of songs.
+
+
         </div>
     </section>
 
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
-        <div class="container max-w-4xl mx-auto">
-            <div class=" aspect-16:9  cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">
+        <div class="container max-w-4xl mx-auto -mt-36 sm:-mt-64 lg:-mt-96">
+            <h2><strong>So how is this different?</strong></h2>
+            <div class=" aspect-16:9  cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" data-open="trailer">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
                 <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/trailer.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
             </div>
+            Dear fellow piano player,
+
+            If you’re struggling to figure out how to make progress on this instrument…
+
+            If you’re overwhelmed by the traditional approach of note reading and just want to have fun playing the songs you love…
+
+            If you’re skeptical of the promises made by so many online courses and videos…
+
+            If you’re nervous because you tried learning in the past but had a bad experience…
+
+            This webinar will change everything. Over 60 minutes, I’ll show you exactly how to start playing the songs you love without fear or frustration.
+
+            It’ll be a lot of fun. And it won’t cost you a cent.
+
+            All you have to do, is click to enroll.
+
+            [ ENROLL NOW ]
 
 
         </div>
     </section>
-    <section class="text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40" style="background-color:#f4f8fb;">
+    <section class="text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
                 <div class="w-52 sm:w-64 lg:w-72 relative -mb-8 sm:mb-0 sm:-mr-8">
@@ -348,31 +360,23 @@
                 </div>
 
                 <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-20 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
-                    <h6 class="uppercase text-pianote leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
-                    <h2 class="text-center sm:text-left"><strong>Lisa Witt</strong></h2>
-                    <p class="leading-normal mt-4 lg:mt-6">Piano chords changed my life.
+                    <h2 class="text-center sm:text-left"><strong>Hello my friend! I’m Lisa.</strong></h2>
+                    <p class="leading-normal mt-4 lg:mt-6">The day I discovered the simple way to play my favorite songs on the piano was my AHA moment. And it changed my life!
                         <br><br>
-                        I grew up learning classical piano through the Royal Conservatory. I didn’t know what chords were, or how they were used in composition.
+                        I grew up taking traditional classical piano lessons, and I struggled. I couldn’t read music very well and even had to repeat a piano grade. But the day I learned about chords was the day I really started to enjoy the piano.
                         <br><br>
-                        I just had to read the notes on the page and play them.
+                        I realized that I didn’t have to read every single note on a page…
                         <br><br>
-                        That all changed the day I discovered chords and chord inversions.
+                        I didn’t have to memorize countless rules and complex theory…
                         <br><br>
-                        Suddenly I could start improvising, creating my own rhythms and melodies, and eventually write my own music. Music became something I “created” rather than something I “played”.
+                        And I could play the songs I wanted to play in MINUTES -- not months.
                         <br><br>
-                        Chords gave me the ability and confidence to do what we all dream of doing…
+                        It was freedom.
                         <br><br>
-                        Sit down at the piano and “just play”.
+                        And it led me to dedicate my life to teaching others. Since that day, I’ve made it my life’s work to show students that you CAN play the songs you love.
                         <br><br>
-                        If you’ve ever dreamt of playing popular songs for your family and friends without spending months learning every note. Or if you’ve ever wanted to explore improvisation and song-writing. Or if you just want to sit and play the keys and see what comes out…
-                        <br><br>
-                        You need to try Easy Chords.
-                        <br><br>
-                        Over 30 days, I’ll guide you through the stages I used to learn and feel comfortable playing piano chords. You’ll discover how chord inversions will transform your playing and make it easier to play the songs you love.
-                        <br><br>
-                        Come join me.
+                        And if you’re willing to give me just a little bit of your time, I’ll show you too.
                     </p>
-                    <img class="float-right h-12 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/lisa-witt-signature.png" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
             </div>
 
@@ -384,26 +388,13 @@
     </section>
 
     <div id="final" class="anchor"></div>
-    <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
-        <div class="container max-w-6xl mx-auto relative z-50">
-            <div class="flex flex-wrap items-center justify-center">
-                <div class="text-center w-full sm:w-7/12 lg:w-1/3 mb-7 lg:mb-0">
-                    <img class="h-20 md:h-24 lg:h-28 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <h4 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
-                            20 Guided Play-Along Lessons.<br>
-                            Feedback From Real Teachers.<br>
-                            Lifetime Course Access.
-                        </strong></h4>
-                    <div class="w-full mx-auto sm:mx-0">
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Master your chord changes & inversions.</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Course runs June 5 to July 5.</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>  Choose your best option to get started.</p>
-                    </div>
-                    <span class="join sold-out medium w-full align-middle" data-open="waitlistModal">JOIN WAITLIST</span>
-                </div>
-
-            </div>
+    <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background:linear-gradient(to bottom, #850c9f, #d7164e);">
+        <div class="container max-w-3xl mx-auto">
+            <p class="text-musora mb-6">It’s your turn…</p>
+            <img class="h-20 md:h-24 lg:h-28 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <h3><strong>The Fastest Way to Play<br> Popular Songs on the Piano</strong></h3>
+            <p>Click below to choose a date and time that works for YOU! Get proven strategies to help you play the songs you love on the piano - no matter what age! It’s never too late to play the songs you love on the piano. I’ll show you how!</p>
+            <div @click="enroll = true;" class="join medium w-full">ENROLL NOW</div>
         </div>
     </section>
 
@@ -414,57 +405,47 @@
             <div class="max-w-6xl mt-4 sm:mt-10 px-4">
                 @include('_partials.components.question-dropdown', [
                 "num" => "?",
-                "title" => "Why do I need to register if I get it for free as a member?",
-                "desc" => "It’s a 30-day course and it only works if you’re actively participating. So we wanted to make sure you raised your hand to enroll in the journey.<br><br>This isn’t a “watch a lesson, go do something else for 10 days, watch another” type of routine. So we’re asking for a commitment from anybody who participates.",
+                "title" => "So how does this work?",
+                "desc" => "This is a webinar. When you click “ENROLL NOW” you’ll be able to choose a time and date that works for you! The video lessons is not live, but you’ll be able to ask questions and get answers from our team of moderators who will be in the chat.",
                 ])
+
                 @include('_partials.components.question-dropdown', [
-                "title" => "What if I miss a day (or two)?",
-                "desc" => "That’s totally fine. The course is meant to be flexible if you miss a day here or there. There are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session if you ever need to catch up.",
-                "num" => '?',
+                "num" => "?",
+                "title" => "What will I learn?",
+                "desc" => "You’ll get the secrets and tips to play popular songs on the piano. During the 60 minutes, Lisa will break down how to use chords and lead sheets to sound beautiful. Think of it as your first piano lesson for a new way of playing.",
                 ])
+
                 @include('_partials.components.question-dropdown', [
-                "title" => "Do I need a digital piano or software?",
-                "desc" => "No! This course works with all pianos and keyboards. You don’t have to plug anything in and you don't need any fancy plugins or software. Simply click play on your lesson, and follow along!",
-                "num" => '?',
+                "num" => "?",
+                "title" => "Do I have to watch it all at once?",
+                "desc" => "When you register, you’ll be able to choose your preferred date and time. We’d encourage you to pick a time that will allow you to watch the entire thing. During that time, you won’t be able to pause or rewind it. But if you can’t make it through the whole thing, that’s ok! You’ll be able to replay the webinar any time and you can pause or rewind during the replay.",
                 ])
+
                 @include('_partials.components.question-dropdown', [
-                "title" => "How much time per week will this course require?",
-                "desc" => "Easy Chords gives you guided daily piano lessons for thirty days – with a few flex days built in for when life happens. Each lesson is only 10 minutes. We’ve made it short so you’re more likely to keep playing!",
-                "num" => '?',
+                "num" => "?",
+                "title" => "What are you selling?",
+                "desc" => "Our goal is to inspire and educate piano players around the world. The webinar will introduce you to Lisa’s method of playing which doesn’t require years of practice and reading music. You’ll learn a lot just from watching. Then, at the end, if you decide this style of learning is right for you, Lisa will let you know about her online learning platform that uses this style. There’s absolutely no obligation.",
                 ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "What devices can I access the course on?",
-                "desc" => "Easy Chords is available on your laptop, tablet, or phone. You’ll also have access through the Musora App after you’ve completed your purchase of the course.",
-                "num" => '?',
-                ])
-            </div>
-            <div class="inline-block w-full px-3 md:px-4 my-5" style="color:#2a2f34;">
-                <p><strong>Any other questions?</strong><br class="inline-block md:hidden"> Call us toll-free at
-                    <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
-                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
-            </div>
-            <div class="inline-block w-full px-3 md:px-4 mb-10" style="color:#2a2f34;">
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
             </div>
         </div>
     </section>
 
-    @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/823788317?h=b2955e3bc7&autoplay=1',
-        "title" => 'trailer'
-    ])
+@component('_partials.components.modal', ['name' => 'enroll'])
+@slot('content')
+<div class="relative overflow-y-visible max-w-3xl px-4 md:px-5 lg:px-7 py-5 md:py-7 lg:py-10 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
+    <noscript><div style="text-align: center; margin-top: 1em; text-decoration: none; undefined"><a style="color: #000; font-size: 13px;" href="https://www.pianote.com/song-secrets-webinar">REGISTER NOW</a></div></noscript><style>.ewebinar__RegForm { font-family: inherit; padding: 0; text-align: left; min-width: 300px; max-width: 450px; margin: auto; } .ewebinar__RegForm a:hover, .ewebinar__RegForm a:visited, .ewebinar__RegForm a:link, .ewebinar__RegForm a:active { text-decoration: none; } .ewebinar__RegForm * { box-sizing: border-box; } .ewebinar__RegForm:not(.loading) .ewebinar__Dots { opacity: 0; animation: none; } .ewebinar__RegForm__Content { padding: 1.5rem; } .ewebinar__RegForm:not(.ewebinar__RegForm--horizontal) .ewebinar__RegForm__Content { padding-bottom: 0.25rem; } .ewebinar__RegForm__Footer { padding: 1.5rem; padding-top: 0; display: flex; flex-direction: row; justify-content: flex-end; } .ewebinar__RegForm .ewebinar__RegisterButton, .ewebinar__RegForm .ewebinar__RegisterButton__Wrap { max-width: unset !important; width: 100%; } .ewebinar__RegForm__Field { margin-bottom: 1.25rem; } .ewebinar__RegForm__Field input, .ewebinar__RegForm__Field select { font-size: inherit; } .ewebinar__RegForm__Field input { display: block; width: 100%; line-height: 1.21428571em; font-family: inherit; padding: 0.67857143em 1em; background: #fff; border: 1px solid rgba(34, 36, 38, 0.15); color: rgba(0, 0, 0, 0.87); border-radius: 0.28571429rem; box-shadow: none; } .ewebinar__RegForm__Field input::placeholder { color: #dedede !important; } .ewebinar__Session__Dropdown::after { position: absolute; content: '⌄'; font-weight: 600; display: block; right: 1em; top: 50%; transform: translate(-10%, -75%) scale(2, 1.5); pointer-events: none; } .ewebinar__RegForm__Error, .ewebinar__RegForm__Field__Error { color: #ff7470; font-size: 0.8rem; padding: 0.5833em 0.833em; display: none; } .ewebinar__RegForm__Error { margin-top: 0; padding: 0.5833em 0; margin-bottom: 0 !important; text-align: center; } .ewebinar__RegForm__Field__Error { display: none; position: relative; background: #fff; border: 1px solid #ff7470; border-radius: 0.28571429rem; margin-top: 0.5rem; } .ewebinar__RegForm__Field__Error::before { position: absolute; content: ''; background: #fff; border-left: 1px solid; border-top: 1px solid; z-index: 2; width: 0.6666em; height: 0.6666em; margin-top: -1px; border-color: inherit; border-width: 1px 0 0 1px; transform: translateX(-50%) translateY(-50%) rotate(45deg); top: 0; left: 50%; }  @media only screen and (min-width: 992px) {   } .ewebinar__RegForm__Field .ewebinar__Session__Dropdown__Select { height: auto; min-height: 2.58em; } .ewebinar__Session__Dropdown { position: relative; border: none; background: #fff; border-radius: 5px; width: 100%; outline: none; border: 1px solid #444; font-size: 1.1em; } .ewebinar__Session__Dropdown__Select { font-family: inherit; height: 36px; padding: 0 1em; opacity: 1 !important; padding-right: 2.5rem; border: none; border-radius: 0.5em; font-size: 1em; width: 100%; outline: none; -webkit-appearance: none; -moz-appearance: none; appearance: none; } .ewebinar__Session__Dropdown::after { position: absolute; content: '⌄'; font-weight: 600; display: block; right: 1em; top: 50%; transform: translate(-10%, -75%) scale(2, 1.5); pointer-events: none; } .ewebinar__Session__Dropdown__Select:invalid { color: #dedede !important; }.ewebinar__Widget { line-height: 1.5; } .ewebinar__Widget select { display: flex; } .ewebinar__Widget * { box-sizing: border-box; } .ewebinar__RegisterButton { font-family: inherit; box-sizing: border-box; font-family: inherit; position: relative; display: inline-block;   padding: 0.5em 2em; cursor: pointer; border-width: 0px; outline: none; transition: all 0.2s; font-weight: 500; font-size: inherit; box-sizing: border-box; margin: 0; } .ewebinar__RegisterButton * { font-family: inherit; } .ewebinar__RegisterButton:hover { transform: scale(1.02); } .ewebinar__RegisterButton:active {  box-shadow: none; } .ewebinar__RegisterButton .ewebinar__ButtonText { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline; vertical-align: baseline !important;  } @media only screen and (max-width: 614px) { .ewebinar__RegisterButton { max-width: 320px !important; min-height: 42px !important; width: 100% !important; } } .ewebinar__Dots { opacity: 1; animation: 1.5s linear 0s normal forwards 1.5 delayin; position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; align-items: center; } button .ewebinar__Dots { background: #f51a2fff; border-radius: 50px; } .ewebinar__LoadingDot { height: 0.5em; width: 0.5em; border-radius: 100%; display: inline-block; animation: 1.2s ewebinar-loading-dot ease-in-out infinite; } .ewebinar__LoadingDot:nth-of-type(2) { animation-delay: 0.15s; margin-left: 0.5em; } .ewebinar__LoadingDot:nth-of-type(3) { animation-delay: 0.25s; margin-left: 0.5em; } @keyframes delayin { 0% { opacity:0; } 66% { opacity:0; } 100% { opacity:1; } } @keyframes ewebinar-loading-dot { 30% { transform: translateY(-35%); opacity: 0.3; } 60% { transform: translateY(0%); opacity: 0.8; } }</style><div id="w1695680165808" class="ewebinar__Widget ewebinar__RegForm_Root" style="width: 100%;"><form class="ewebinar__RegForm ewebinar--ltr"><div class="ewebinar__RegForm__Content"><div><div class="ewebinar__RegForm__Field ewebinar__RegForm__Field--Sessions"><div class="ewebinar__Session__Dropdown" style="color: #f61a30ff; border-color: #f61a30ff;"><select name="session" class="ewebinar__Session__Dropdown__Select ewebinar__Session__Dropdown__Select--placeholder}"><option class="ewebinar__FixedBar__Content__Session__Dropdown__Select" value="" disabled="disabled" selected="selected" hidden="">Getting sessions...</option></select></div><div class="ewebinar__RegForm__Field__Error"></div></div><div class="ewebinar__RegForm__Field"><div class="ewebinar__RegForm__Field__Input"><input id="name" name="name" placeholder="Name"></div><div class="ewebinar__RegForm__Field__Error"></div></div><div class="ewebinar__RegForm__Field"><div class="ewebinar__RegForm__Field__Input"><input id="email" name="email" placeholder="Email"></div><div class="ewebinar__RegForm__Field__Error"></div></div></div><div class="ewebinar__RegForm__Captcha"></div><div class="ewebinar__RegForm__Error"></div></div><div class="ewebinar__RegForm__Footer"><a class="ewebinar__RegisterButton__Wrap ewebinar--ltr" href="javascript:;" style="text-decoration: none; undefined;"><button class="ewebinar__Widget ewebinar__RegisterButton" type="submit" style="border-radius: 50px; background: #f51a2fff; color: #ffffff; undefined"><div class="ewebinar__Dots"><span class="ewebinar__LoadingDot" style="background: #ffffff"></span><span class="ewebinar__LoadingDot" style="background: #ffffff"></span><span class="ewebinar__LoadingDot" style="background: #ffffff"></span></div><span class="ewebinar__ButtonText" style="white-space: nowrap">REGISTER NOW</span></button></a></div></form></div>
+    <script>(function (w,d,s,o,f,js,fjs) { w['eWidget']=o;w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) }; if(d.getElementById(o)) return; js = d.createElement(s), fjs = d.getElementsByTagName(s)[0]; js.id = o; js.src = f; fjs.parentNode.insertBefore(js, fjs); }(window, document, 'script', '_ew', 'https://app.ewebinar.com/widget.js'));_ew('init', {"root":"w1695680165808","isReview":false,"mode":"public","openInPopup":false,"for":"Registration","type":"RegForm","source":"","url":"https://www.pianote.com/song-secrets-webinar","shortUrl":"https://webinar.pianote.com/webinar/12267","sessions":[],"formType":"LatestForm","ewebinar":{"title":"Pianote%20Webinar%20Test","borderRadius":50,"primaryColor":"#f61a30ff","readableColor":"#ffffff","actionColor":"#f51a2fff","readableActionColor":"#ffffff","readableOnWhiteColor":"#f61a30ff","language":"en"},"showGdprBanner":false,"gdprBannerMode":"Off","gdprBannerText":"","carouselId":"","button":{"btnText":"REGISTER NOW","showButtonTimer":true,"buttonPrimaryColor":"#f51a2fff","buttonReadableColor":"#ffffff","align":"Center","isFullWidth":false},"registerForm":{"horizontal":false,"hideSessionsDropdown":false,"showOnlyBuiltInFields":false,"showFieldsLabel":false,"openLinkInNewWindow":false,"showConsentCheckbox":false,"formSessionType":"ShowDropdown","consentCheckboxText":"","fields":[{"fieldName":"Name","propertyName":"name","type":"Text","subType":null,"isRequired":true,"isRemovable":false,"note":"","options":null,"__typename":"RegistrationFormField"},{"fieldName":"Email","propertyName":"email","type":"Email","subType":null,"isRequired":true,"isRemovable":false,"note":"","options":null,"__typename":"RegistrationFormField"}]}});window.ewInit && window.ewInit();</script>
 
-    @include("pianote.sales.partials._footer")
+</div>
+@endslot
+@endcomponent
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+@include("pianote.sales.partials._footer")
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @stop
