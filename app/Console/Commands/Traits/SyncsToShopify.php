@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityRepository;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Railroad\Ecommerce\Repositories\RepositoryBase;
 use Signifly\Shopify\REST\Resources\CustomerResource;
@@ -224,7 +225,8 @@ trait SyncsToShopify
      */
     protected function handleRateLimit(): void
     {
-        $limit = $this->shopify->getLastResponse()?->headers()["X-Shopify-Shop-Api-Call-Limit"][0] ?? "0/40";
+        $limit = $this->shopify->getLastResponse()?->headers()["X-Shopify-Shop-Api-Call-Limit"][0] ?? "0/400";
+        Log::info(sprintf("Shopify API Call Limit: %s", $limit));
         $current = intval(Str::before($limit, "/"));
         $max = intval(Str::after($limit, "/"));
 
@@ -235,5 +237,5 @@ trait SyncsToShopify
     }
 
     // the closest difference of the current call and limit that we'll allow before sleeping
-    protected int $RATE_LIMIT_THRESHOLD = 5;
+    protected int $RATE_LIMIT_THRESHOLD = 60;
 }

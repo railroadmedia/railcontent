@@ -263,6 +263,8 @@ class SyncOrdersToShopify extends Command
 
             if (!$skip) {
                 $this->syncOrder($order, $fresh, $index + 1);
+                // safety check for the rate limit
+                $this->handleRateLimit();
             }
 
             $bar->advance();
@@ -708,7 +710,6 @@ class SyncOrdersToShopify extends Command
         $this->getPaymentsDataToSync($order)->each(function(array $paymentData) use ($order) {
             $paymentId = $paymentData["id"];
             try {
-                $this->handleRateLimit();
                 $paymentResource = $this->shopify->createOrderTransaction($order->getShopifyId(), $paymentData["data"]);
                 $paymentShopifyId = $paymentResource->id;
 
@@ -786,12 +787,10 @@ class SyncOrdersToShopify extends Command
 
         // 1. orders are automatically closed (or "archived", as it's also called), and refunds cannot be issued to
         // closed orders. So before we issue any, we need to check the status, and reopen the order, if it's closed
-        $this->handleRateLimit();
         $orderShopifyAttributes = $this->shopify->getOrder($orderShopifyId)->getAttributes();
         $wasReopened = false;
 
         if ($orderShopifyAttributes["closed_at"]) {
-            $this->handleRateLimit();
             $this->shopify->openOrder($orderShopifyId);
             $wasReopened = true;
         }
@@ -807,7 +806,6 @@ class SyncOrdersToShopify extends Command
 
             // 2. use the calculate endpoint to initiate the process
             $currency = $paymentToRefund->getCurrency() ?? self::DEFAULT_CURRENCY;
-            $this->handleRateLimit();
             $calculateResponse = $this->shopify->calculateOrderRefund($orderShopifyId,
                 [
                     "currency" => $currency
@@ -849,7 +847,6 @@ class SyncOrdersToShopify extends Command
                 $refundData["note"] = $refund->getNote();
             }
 
-            $this->handleRateLimit();
             $refundResource = $this->shopify->createOrderRefund($orderShopifyId, $refundData);
             $refundShopifyId = $refundResource->id;
 
@@ -869,7 +866,6 @@ class SyncOrdersToShopify extends Command
 
         // 4. if we had to reopen the order, we need to close it again
         if ($wasReopened) {
-            $this->handleRateLimit();
             $this->shopify->closeOrder($orderShopifyId);
         }
     }
@@ -1004,7 +1000,6 @@ class SyncOrdersToShopify extends Command
                 }
             } else {
                 // we only need to create new fulfillments
-                $this->handleRateLimit();
                 if ($isNewFulFillment) {
                     $fulfillmentResult = $this->shopify->createFulfillment($fulfillmentData);
                     $fulfillmentShopifyId = $fulfillmentResult->getAttributes()["id"];
@@ -1066,7 +1061,6 @@ class SyncOrdersToShopify extends Command
             // if we're simulating, we don't have a real $shopifyFulfillmentAttributes because we didn't send the data
             // to Shopify, so get the fulfillment data if it exists
             if (!is_null($fulfillment->getShopifyId())) {
-                $this->handleRateLimit();
                 $orderFulfillmentResource = $this->shopify->getOrderFulfillment($fulfillment->getOrder()->getShopifyId(), $fulfillment->getShopifyId());
                 $shopifyFulfillmentAttributes = $orderFulfillmentResource->getAttributes();
             } else {
@@ -1097,7 +1091,6 @@ class SyncOrdersToShopify extends Command
         ];
 
         if (!$this->getIsSimulation()) {
-            $this->handleRateLimit();
             $this->shopify->updateTrackingForFulfillment($shopifyFulfillmentAttributes["id"], $trackingData);
         }
         $resultRecord [self::TABLE_ITEM_ACTION] = $isCreating ? "Created" : "Updated";
@@ -1151,7 +1144,6 @@ class SyncOrdersToShopify extends Command
         if ($this->getIsSimulation()) {
             $record[self::TABLE_SHOPIFY_FULFILLMENT_ID] = $fulfillmentOrderLineItemId;
         } else {
-            $this->handleRateLimit();
             $fulfillmentResult = $this->shopify->createFulfillment($fulfillmentData);
             $record[self::TABLE_SHOPIFY_FULFILLMENT_ID] = $fulfillmentResult->getAttributes()["id"];
         }
@@ -1174,12 +1166,10 @@ class SyncOrdersToShopify extends Command
         // get the fulfillment order and its status, so we can update it with our data
         if (!$this->getIsSimulation()) {
             // Shopify created an Order Fulfillment for our Order when they created it, so we need to grab that from them
-            $this->handleRateLimit();
             $fulfillmentOrders = $this->shopify->getOrderFulfillmentOrders($orderShopifyId);
         } else {
             // if we're simulating, try to get the order's fulfillment orders from shopify, if we have a real shopify id
             if (!is_null($orderShopifyId)) {
-                $this->handleRateLimit();
                 $fulfillmentOrders = $this->shopify->getOrderFulfillmentOrders($orderShopifyId);
             }
         }
