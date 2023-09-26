@@ -274,7 +274,7 @@ class RevenueCatController extends Controller
 
                 $this->subscriptionService->updateSubscription(
                     $musoraSubscription,
-                    $data['event']['expiration_at_ms'],
+                    Carbon::create($currentRevenueCatSubscription['expires_date'])->getTimestampMs(),
                     $currentRevenueCatSubscription['unsubscribe_detected_at'],
                     $data['event']['cancel_reason']
                 );
