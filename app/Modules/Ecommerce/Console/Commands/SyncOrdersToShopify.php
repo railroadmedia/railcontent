@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Console\Commands\Traits\SyncsToShopify;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use Carbon\Carbon;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
@@ -10,7 +11,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Order;
 use Railroad\Ecommerce\Entities\OrderItem;
@@ -33,7 +33,7 @@ use Signifly\Shopify\Shopify;
 
 class SyncOrdersToShopify extends Command
 {
-    use SyncsToShopify;
+    use SyncsToShopify, HandlesMaskedEmailAddress;
 
     /**
      * The name and signature of the console command.
@@ -592,7 +592,7 @@ class SyncOrdersToShopify extends Command
         $orderData = [
             "currency" => $currency,
             "customer" => ["id" => $purchaserId],
-            "email" => app()->isProduction() ? $purchaserEmail : Str::beforeLast($purchaserEmail, ".example"),
+            "email" => $this->getEmailForShopify($purchaserEmail),
             "note" => $order->getNote(),
             "processed_at" => $order->getCreatedAt()->toIso8601String(),
             "source_name" => $order->getBrand(),
@@ -1222,5 +1222,13 @@ class SyncOrdersToShopify extends Command
     protected function getEcommerceEntityRepository(): RepositoryBase
     {
         return $this->orderRepository;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getIsUsingMask(): bool
+    {
+        return !app()->isProduction();
     }
 }
