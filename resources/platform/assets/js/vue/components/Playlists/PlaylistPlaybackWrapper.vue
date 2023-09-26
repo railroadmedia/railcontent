@@ -17,6 +17,7 @@ import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.
 import ContentUnavailable from './ContentUnavailable.vue';
 import AssignmentsContainer from '../../vuesora/components/AssignmentsContainer/AssignmentsContainer.vue';
 import ContentInfo from '../ContentInfo/ContentInfo.vue';
+import RelatedPlaylists from './RelatedPlaylists';
 
 //-----------Props-----------//
 const props = defineProps({
