@@ -161,7 +161,7 @@
             <!-- Report -->
             <li class="tw-group tw-relative">
               <button
-                  class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-sm"
+                  class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-sm" @click="toggleReportModal"
               >
                   <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
                       <div class="tw-h-6 tw-w-6 tw-flex tw-items-center tw-justify-center tw-mr-1">
@@ -175,7 +175,17 @@
         </div>
       </div>
 
-      <ModalRenderer v-if="showModalContent" @onClose="handleOpenModal"
+      <ReportModal
+          v-if="showReportModal"
+          :brand="brand"
+          :logo="reportLogo"
+          :recipient="reportRecipient"
+          :user-name="reportUserName"
+          :user-email="reportUserEmail"
+          @onCloseModal="toggleReportModal"
+      />
+
+      <ModalRenderer v-if="showShareModal" @onClose="handleOpenModal"
         key="ModalRendererOnVideoResource">
         <div class="tw-relative tw-container tw-w-full tw-h-full tw-flex tw-justify-center tw-items-center">
           <button @click="handleOpenModal" aria-label="Close share modal"
@@ -228,12 +238,14 @@ import Toasts from "../../assets/js/classes/toasts";
 import ContentService from "../../assets/js/services/content";
 import CoachesInLesson from "./CoachesInLesson.vue";
 import ModalRenderer from "../../../components/Modal/ModalRenderer.vue";
+import ReportModal from "../../../components/Modal/ReportModal";
 import { XIcon } from "@heroicons/vue/solid";
 import { FlagIcon } from "@heroicons/vue/outline";
 
 export default {
   name: "VideoResources",
   components: {
+      ReportModal,
     CoachesInLesson,
     ModalRenderer,
     XIcon,
@@ -329,7 +341,27 @@ export default {
     lesson: {
       type: Object,
       default: {},
-    }
+    },
+
+    reportRecipient: {
+      type: String,
+      default: '',
+    },
+
+    reportLogo: {
+      type: String,
+      default: '',
+    },
+
+    reportUserName: {
+      type: String,
+      default: '',
+    },
+
+    reportUserEmail: {
+      type: String,
+      default: '',
+    },
   },
 
   data() {
@@ -339,7 +371,8 @@ export default {
       totalLikes: this.likeCount,
       hasAdded: this.isAdded,
       useTimecode: true,
-      showModalContent: false,
+      showShareModal: false,
+      showReportModal: false,
       completed: this.lesson.completed,
       openInfo: false,
       showMore: false,
@@ -372,7 +405,7 @@ export default {
       return 0;
     },
     handleOpenModal() {
-      this.showModalContent = !this.showModalContent;
+      this.showShareModal = !this.showShareModal;
     },
     likeContent() {
       this.hasLiked = !this.hasLiked;
@@ -501,6 +534,9 @@ export default {
     },
     toggleResourceDropdown(){
       this.resourceDropdown = !this.resourceDropdown;
+    },
+    toggleReportModal(){
+      this.showReportModal = !this.showReportModal;
     },
     clickOutSideDropdown(){
         this.showMore = false;
