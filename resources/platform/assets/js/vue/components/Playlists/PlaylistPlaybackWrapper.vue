@@ -158,6 +158,14 @@ const props = defineProps({
         type: Object,
         default: {}
     },
+    reportLogo: {
+        type: String,
+        default: ''
+    },
+    reportRecipient: {
+        type: String,
+        default: ''
+    },
     showInfoButton: {
         type: Boolean,
         default: false
@@ -184,6 +192,10 @@ const props = defineProps({
     },
     userId: {
         type: [String, Number],
+        default: ''
+    },
+    userEmail: {
+        type: String,
         default: ''
     },
     userName: {
@@ -381,7 +393,9 @@ onBeforeMount(() => {
                         :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
                         :user-id="userId" :resources="videoResources" :show-add-to-list="true"
                         :show-complete-button="isReleased && !needAccess" :relatedLesson="relatedLesson"
-                        :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton" />
+                        :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton"
+                        :report-logo="reportLogo" :report-recipient="reportRecipient" :report-user-email="userEmail" :report-user-name="userName"
+                    />
                     <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
                 </div>
                 <!-- Info Section -->
