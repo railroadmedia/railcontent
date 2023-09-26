@@ -116,7 +116,6 @@
         " :class="`${this.overview ? 'tw-mt-4' : ''}`">
         <span v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`">
           <span v-if="i > 0" class="bullet">-</span>
-
           {{ column_data }}
         </span>
       </p>
@@ -174,7 +173,7 @@
         {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}
       </div>
     </template>
-    
+
     <div v-if="is_search" class="
         flex tw-flex-col
         uppercase
