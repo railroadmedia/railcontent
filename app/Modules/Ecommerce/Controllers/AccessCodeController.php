@@ -24,7 +24,7 @@ class AccessCodeController extends Controller
      */
     private UserProviderInterface $userProvider;
 
-    /**
+/**
      * @var UserAccessPermissionsService
      */
     private UserAccessPermissionsService $userAccessPermissionsService;
