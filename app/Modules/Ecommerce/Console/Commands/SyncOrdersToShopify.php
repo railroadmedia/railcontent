@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Console\Commands\Traits\SyncsToShopify;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use Carbon\Carbon;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
@@ -10,7 +11,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Order;
 use Railroad\Ecommerce\Entities\OrderItem;
@@ -20,8 +20,8 @@ use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Entities\Refund;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Ecommerce\Repositories\CustomerRepository;
-use Railroad\Ecommerce\Repositories\OrderRepository;
 use Railroad\Ecommerce\Repositories\OrderItemRepository;
+use Railroad\Ecommerce\Repositories\OrderRepository;
 use Railroad\Ecommerce\Repositories\PaymentRepository;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\RefundRepository;
@@ -33,7 +33,7 @@ use Signifly\Shopify\Shopify;
 
 class SyncOrdersToShopify extends Command
 {
-    use SyncsToShopify;
+    use SyncsToShopify, HandlesMaskedEmailAddress;
 
     /**
      * The name and signature of the console command.
@@ -263,6 +263,8 @@ class SyncOrdersToShopify extends Command
 
             if (!$skip) {
                 $this->syncOrder($order, $fresh, $index + 1);
+                // safety check for the rate limit
+                $this->handleRateLimit();
             }
 
             $bar->advance();
@@ -592,7 +594,7 @@ class SyncOrdersToShopify extends Command
         $orderData = [
             "currency" => $currency,
             "customer" => ["id" => $purchaserId],
-            "email" => app()->isProduction() ? $purchaserEmail : Str::beforeLast($purchaserEmail, ".example"),
+            "email" => $this->getEmailForShopify($purchaserEmail),
             "note" => $order->getNote(),
             "processed_at" => $order->getCreatedAt()->toIso8601String(),
             "source_name" => $order->getBrand(),
@@ -758,7 +760,6 @@ class SyncOrdersToShopify extends Command
                     "id" => $payment->getId(),
                     "data" =>
                         [
-                            "currency" => $payment->getCurrency(),
                             "amount" => number_format($payment->getTotalPaid(), 2),
                             "kind" => "sale",
                             // DEV NOTE: this is not documented in Shopify, but it is required
@@ -1223,5 +1224,13 @@ class SyncOrdersToShopify extends Command
     protected function getEcommerceEntityRepository(): RepositoryBase
     {
         return $this->orderRepository;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getIsUsingMask(): bool
+    {
+        return !app()->isProduction();
     }
 }

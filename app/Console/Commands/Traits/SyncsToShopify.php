@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityRepository;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Railroad\Ecommerce\Repositories\RepositoryBase;
 use Signifly\Shopify\REST\Resources\CustomerResource;
@@ -211,4 +212,30 @@ trait SyncsToShopify
      * @return RepositoryBase|EntityRepository
      */
     abstract protected function getEcommerceEntityRepository(): RepositoryBase|EntityRepository;
+
+    /**
+     * WARNING: Do NOT call this before the first `$this->>shopify->___` call, because there will not yet be
+     * an existing last response.
+     *
+     * Check the API call rate limit based on the last response, to see if we're approaching our limit, and
+     * to sleep if so, to recover our calls.
+     * This needs to be called before any `$this->>shopify->___` calls that you want to protect.
+     *
+     * @return void
+     */
+    protected function handleRateLimit(): void
+    {
+        $limit = $this->shopify->getLastResponse()?->headers()["X-Shopify-Shop-Api-Call-Limit"][0] ?? "0/400";
+        Log::info(sprintf("Shopify API Call Limit: %s", $limit));
+        $current = intval(Str::before($limit, "/"));
+        $max = intval(Str::after($limit, "/"));
+
+        if ($max - $current <= $this->RATE_LIMIT_THRESHOLD) {
+            $this->warn("About to hit API rate limit. Sleeping for 1 second...");
+            sleep(1);
+        }
+    }
+
+    // the closest difference of the current call and limit that we'll allow before sleeping
+    protected int $RATE_LIMIT_THRESHOLD = 60;
 }

@@ -99,9 +99,9 @@ class KickOffBulkCustomerCreateFromCustomers implements ShouldQueue
             ->distinct();
 
         // if we add in limits, use this
-        // if ($this->getLimit()) {
-        //     $qb->setMaxResults($this->getLimit());
-        // }
+        if ($this->limit) {
+            $qb->setMaxResults($this->limit);
+        }
 
         $q = $qb->getQuery();
 
