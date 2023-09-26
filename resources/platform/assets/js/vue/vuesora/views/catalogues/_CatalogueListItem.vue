@@ -130,45 +130,51 @@
     </div>
 
     <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
-    <div v-for="(column_data, i) in mappedData.column_data" v-if="!is_search" :key="`${item.id}-mappedData-${i}`" class="
-        tw-hidden
-        xl:tw-flex
-        tw-uppercase
-        tw-items-center
-        tw-justify-center
-        basic-col
-        tw-text-center
-        tw-text-xs
-        font-compressed
-      " :data-test="column_data">
-      {{ column_data }}
-    </div>
+    <template v-if="!is_search || contentType === 'song' ">
+      <div v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`" class="
+          tw-hidden
+          xl:tw-flex
+          tw-uppercase
+          tw-items-center
+          tw-justify-center
+          basic-col
+          tw-text-center
+          tw-text-xs
+          font-compressed
+        " :data-test="column_data">
+        {{ column_data }}
+      </div>
+    </template>
 
     <!-- ONLY SHOW TYPE ON SEARCHES -->
-    <div v-if="mappedData.column_data && mappedData.column_data.length && is_search" class="
-        tw-hidden
-        sm:tw-flex
-        tw-flex-col
-        tw-uppercase
-        tw-justify-center
-        basic-col
-        tw-text-center
-        tw-text-xs
-      ">
-      {{ mappedData.column_data[0] }}
-    </div>
-    <div v-if="is_search" class="
-        tw-hidden
-        sm:tw-flex
-        tw-flex-col
-        tw-uppercase
-        tw-justify-center
-        basic-col
-        tw-text-center
-        tw-text-xs
-      ">
-      {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}
-    </div>
+    <template v-if="contentType !== 'song'">
+      <div v-if="mappedData.column_data && mappedData.column_data.length && is_search" class="
+          tw-hidden
+          sm:tw-flex
+          tw-flex-col
+          tw-uppercase
+          tw-justify-center
+          basic-col
+          tw-text-center
+          tw-text-xs
+        ">
+        {{ mappedData.column_data[0] }}
+      </div>
+      
+      <div v-if="is_search" class="
+          tw-hidden
+          sm:tw-flex
+          tw-flex-col
+          tw-uppercase
+          tw-justify-center
+          basic-col
+          tw-text-center
+          tw-text-xs
+        ">
+        {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}
+      </div>
+    </template>
+    
     <div v-if="is_search" class="
         flex tw-flex-col
         uppercase
