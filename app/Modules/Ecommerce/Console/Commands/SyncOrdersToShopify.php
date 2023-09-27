@@ -41,6 +41,7 @@ class SyncOrdersToShopify extends Command
      * @var string
      */
     protected $signature = 'shopify:sync-orders
+                            {--startingOrderId= : (Optional) The order Id to start processing at}
                             {--limit= : (Optional) The number of order to limit this run to}
                             {--fresh : Sync all orders, not just those that need it}
                             {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
@@ -89,15 +90,16 @@ class SyncOrdersToShopify extends Command
      * @param EcommerceEntityManager $entityManager
      * @return int
      */
-    public function handle(Shopify $shopify,
-                           CustomerRepository $customerRepository,
-                           OrderRepository $orderRepository,
-                           OrderItemRepository $orderItemRepository,
-                           PaymentRepository $paymentRepository,
-                           ProductRepository $productRepository,
-                           RefundRepository $refundRepository,
-                           EcommerceEntityManager $entityManager): int
-    {
+    public function handle(
+        Shopify $shopify,
+        CustomerRepository $customerRepository,
+        OrderRepository $orderRepository,
+        OrderItemRepository $orderItemRepository,
+        PaymentRepository $paymentRepository,
+        ProductRepository $productRepository,
+        RefundRepository $refundRepository,
+        EcommerceEntityManager $entityManager
+    ): int {
         $this->shopify = $shopify;
         $this->customerRepository = $customerRepository;
         $this->orderRepository = $orderRepository;
@@ -118,6 +120,7 @@ class SyncOrdersToShopify extends Command
 
         return self::SUCCESS;
     }
+
     /**
      * Get all the orders that need to be synced, and perform the sync action on each one
      *
@@ -128,6 +131,8 @@ class SyncOrdersToShopify extends Command
     {
         $fresh = $this->getIsFresh();
         $limit = $this->getLimit();
+        $startingOrderId = $this->getStartingOrderId();
+        $endingOrderID = $startingOrderId + $limit;
         $tableHeader = [
             "Order ID",
             "Order Item ID",
@@ -143,50 +148,53 @@ class SyncOrdersToShopify extends Command
         $qb = $this->orderRepository->createQueryBuilder('entity');
         if (!$fresh) {
             $this->info(
-                sprintf("Retrieving all orders that have not been synced, or have been updated since %s ...",
-                    $this->lastSyncAt->toString())
+                sprintf(
+                    "Retrieving all orders that have not been synced, or have been updated since %s ...",
+                    $this->lastSyncAt->toString()
+                )
             );
 
             // we also need to check if any of the order's order items or order item fulfillments need to be synced,
             // so create query builders for each of those
             $orderItemQB = new QueryBuilder($this->entityManager);
             $orderItemFulfillmentQB = new QueryBuilder($this->entityManager);
-
-            $qb->where(
-                $qb->expr()
-                    ->isNull("entity.shopifyId")
-            )->orWhere(
-                $qb->expr()
-                    ->gt("entity.updatedAt", ":lastSyncAt")
-            )->orWhere(
-                $qb->expr()->in(
-                    "entity.id",
-                    $orderItemQB->select("oi.orderId")
-                        ->from(OrderItem::class, "oi")
-                        ->where(
-                            $orderItemQB->expr()
-                                ->isNull("oi.shopifyId")
-                        )->orWhere(
-                            $orderItemQB->expr()
-                                ->gt("oi.updatedAt", ":lastSyncAt")
+            $qb->where($qb->expr()->gte('entity.id', ':startingOrderId'))
+                ->andWhere($qb->expr()->lt('entity.id', ':endingOrderId'))
+                ->andWhere(
+                    $qb->expr()->orX(
+                        $qb->expr()->isNull("entity.shopifyId"),
+                        $qb->expr()->gt("entity.updatedAt", ":lastSyncAt"),
+                        $qb->expr()->in(
+                            "entity.id",
+                            $orderItemQB->select("oi.orderId")
+                                ->from(OrderItem::class, "oi")
+                                ->where(
+                                    $orderItemQB->expr()
+                                        ->isNull("oi.shopifyId")
+                                )->orWhere(
+                                    $orderItemQB->expr()
+                                        ->gt("oi.updatedAt", ":lastSyncAt")
+                                )
+                                ->getDQL()
+                        ),
+                        $qb->expr()->in(
+                            "entity.id",
+                            $orderItemFulfillmentQB->select("oif.orderId")
+                                ->from(OrderItemFulfillment::class, "oif")
+                                ->where(
+                                    $orderItemQB->expr()
+                                        ->isNull("oif.shopifyId")
+                                )->orWhere(
+                                    $orderItemQB->expr()
+                                        ->gt("oif.updatedAt", ":lastSyncAt")
+                                )
+                                ->getDQL()
                         )
-                        ->getDQL()
+                    )
                 )
-            )->orWhere(
-                $qb->expr()->in(
-                    "entity.id",
-                    $orderItemFulfillmentQB->select("oif.orderId")
-                        ->from(OrderItemFulfillment::class, "oif")
-                        ->where(
-                            $orderItemQB->expr()
-                                ->isNull("oif.shopifyId")
-                        )->orWhere(
-                            $orderItemQB->expr()
-                                ->gt("oif.updatedAt", ":lastSyncAt")
-                        )
-                        ->getDQL()
-                )
-            )->setParameter("lastSyncAt", $this->lastSyncAt);
+                ->setParameter("lastSyncAt", $this->lastSyncAt)
+                ->setParameter('startingOrderId', $startingOrderId)
+                ->setParameter('endingOrderId', $endingOrderID);
         }
 
         if ($limit) {
@@ -210,7 +218,6 @@ class SyncOrdersToShopify extends Command
         $bar = $this->output->createProgressBar($batchSize);
 
         foreach ($paginator as $index => $order) {
-
             // starting the batch
             if ($index % $batchSize === 0) {
                 // start the sync log and prep the progress bar and table
@@ -220,8 +227,7 @@ class SyncOrdersToShopify extends Command
                 $this->shopifyIds = collect();
                 $this->createSyncLogIfExecuting();
                 // if this is the last run of the batches, set the progress bar's size
-                if ($batchRun === $totalBatchesToRun)
-                {
+                if ($batchRun === $totalBatchesToRun) {
                     $bar = $this->output->createProgressBar($totalCountForRun % $batchSize);
                 }
                 $bar->start();
@@ -234,12 +240,28 @@ class SyncOrdersToShopify extends Command
                 try {
                     $user = User::find($order->getUser()->getId());
                     if (is_null($user->shopify_id)) {
-                        $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "<error>SKIPPED</error>", "User has not been synced to Shopify"];
+                        $this->tableRows[] = [
+                            $order->getId(),
+                            "--",
+                            "--",
+                            "--",
+                            "--",
+                            "<error>SKIPPED</error>",
+                            "User has not been synced to Shopify"
+                        ];
                         $skip = true;
                     }
                 } catch (ORMException $e) {
                     $this->error(sprintf("Could not find user by ID %s", $order->getUser()->getId()));
-                    $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "<error>SKIPPED</error>", "User not found"];
+                    $this->tableRows[] = [
+                        $order->getId(),
+                        "--",
+                        "--",
+                        "--",
+                        "--",
+                        "<error>SKIPPED</error>",
+                        "User not found"
+                    ];
                     $skip = true;
                 }
             } elseif (!is_null($order->getCustomer())) {
@@ -247,17 +269,35 @@ class SyncOrdersToShopify extends Command
                 try {
                     $customer = $this->customerRepository->find($order->getCustomer()->getId());
                     if (is_null($customer->getShopifyId())) {
-                        $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "<error>SKIPPED</error>", "Customer has not been synced to Shopify"];
+                        $this->tableRows[] = [
+                            $order->getId(),
+                            "--",
+                            "--",
+                            "--",
+                            "--",
+                            "<error>SKIPPED</error>",
+                            "Customer has not been synced to Shopify"
+                        ];
                         $skip = true;
                     }
                 } catch (ORMException $e) {
                     $this->error(sprintf("Could not find customer by ID %s", $order->getCustomer()->getId()));
-                    $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "<error>SKIPPED</error>", "Customer not found"];
+                    $this->tableRows[] = [
+                        $order->getId(),
+                        "--",
+                        "--",
+                        "--",
+                        "--",
+                        "<error>SKIPPED</error>",
+                        "Customer not found"
+                    ];
                     $skip = true;
                 }
             } else {
                 // something went very wrong here
-                $this->error(sprintf("No user or customer found for Order ID %s. Skipping order sync.", $order->getId()));
+                $this->error(
+                    sprintf("No user or customer found for Order ID %s. Skipping order sync.", $order->getId())
+                );
                 $skip = true;
             }
 
@@ -270,7 +310,7 @@ class SyncOrdersToShopify extends Command
             $bar->advance();
 
             // batch has ended
-            if (($index % $batchSize === $batchSize-1) || $index+1 === $totalCountForRun) {
+            if (($index % $batchSize === $batchSize - 1) || $index + 1 === $totalCountForRun) {
                 // print progress bar and table
                 $bar->finish();
                 $this->newLine();
@@ -305,8 +345,12 @@ class SyncOrdersToShopify extends Command
         try {
             $postData = $this->createOrderData($order, $isCreating);
         } catch (Exception $e) {
-            $this->error(sprintf("Failed to find User or Customer for Order ID %s",
-                $order->getId()));
+            $this->error(
+                sprintf(
+                    "Failed to find User or Customer for Order ID %s",
+                    $order->getId()
+                )
+            );
             // record the failure in the table then exit out for this order
             $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "<error>FAILED</error>", $e->getMessage()];
             return;
@@ -324,17 +368,42 @@ class SyncOrdersToShopify extends Command
                         $orderResource = $this->shopify->updateOrder($order->getShopifyId(), $postData);
                     } else {
                         $orderResource = null;
-                        $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "Skipped", $order->getShopifyId()];
+                        $this->tableRows[] = [
+                            $order->getId(),
+                            "--",
+                            "--",
+                            "--",
+                            "--",
+                            "Skipped",
+                            $order->getShopifyId()
+                        ];
                     }
                     $orderShopifyId = $order->getShopifyId();
                 }
             } catch (ValidationException $exception) {
-                $this->error(sprintf("Validation failed when sending order data to Shopify: %s",
-                    $exception->getMessage()));
-                $this->error(sprintf("Please investigate for Order ID %s. Attempted order data: %s",
-                    $order->getId(), json_encode($postData)));
+                $this->error(
+                    sprintf(
+                        "Validation failed when sending order data to Shopify: %s",
+                        $exception->getMessage()
+                    )
+                );
+                $this->error(
+                    sprintf(
+                        "Please investigate for Order ID %s. Attempted order data: %s",
+                        $order->getId(),
+                        json_encode($postData)
+                    )
+                );
                 // record the failure in the table then exit out for this order
-                $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "<error>FAILED</error>", $exception->getMessage()];
+                $this->tableRows[] = [
+                    $order->getId(),
+                    "--",
+                    "--",
+                    "--",
+                    "--",
+                    "<error>FAILED</error>",
+                    $exception->getMessage()
+                ];
                 return;
             }
 
@@ -346,10 +415,23 @@ class SyncOrdersToShopify extends Command
                     $this->entityManager->flush();
                 }
                 $this->shopifyIds->push($orderShopifyId);
-                $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", $isCreating ? "Created" : "Updated", $orderShopifyId];
+                $this->tableRows[] = [
+                    $order->getId(),
+                    "--",
+                    "--",
+                    "--",
+                    "--",
+                    $isCreating ? "Created" : "Updated",
+                    $orderShopifyId
+                ];
             } catch (\Doctrine\ORM\Exception\ORMException $e) {
-                $this->error(sprintf("Failed to save shopify_id for order ID %s: %s",
-                    $order->getId(), $e->getMessage()));
+                $this->error(
+                    sprintf(
+                        "Failed to save shopify_id for order ID %s: %s",
+                        $order->getId(),
+                        $e->getMessage()
+                    )
+                );
             }
 
             // STEP 4b: record the Shopify Order's Line Items as our Order Items
@@ -382,11 +464,21 @@ class SyncOrdersToShopify extends Command
                             $lineItemShopifyId
                         ];
                     } catch (\Doctrine\ORM\Exception\ORMException $e) {
-                        $this->error(sprintf("Failed to save shopify_id for order item ID %s: %s",
-                            $sentLineItem["ecommerce_order_item_id"], $e->getMessage()));
+                        $this->error(
+                            sprintf(
+                                "Failed to save shopify_id for order item ID %s: %s",
+                                $sentLineItem["ecommerce_order_item_id"],
+                                $e->getMessage()
+                            )
+                        );
                     } catch (ORMException $e) {
-                        $this->error(sprintf("Could not find order item with ID %s: %s",
-                            $sentLineItem["ecommerce_order_item_id"], $e->getMessage()));
+                        $this->error(
+                            sprintf(
+                                "Could not find order item with ID %s: %s",
+                                $sentLineItem["ecommerce_order_item_id"],
+                                $e->getMessage()
+                            )
+                        );
                     }
                 }
             }
@@ -397,10 +489,22 @@ class SyncOrdersToShopify extends Command
             // STEP 6: add the Fulfillments and tracking
             $fulfillmentOrder = $this->getFulfillmentOrderResource($order);
             if (is_null($fulfillmentOrder)) {
-                $this->error(sprintf("Failed to retrieve Fulfillment Order Resource from Shopify for Order ID %s",
-                    $order->getId()));
+                $this->error(
+                    sprintf(
+                        "Failed to retrieve Fulfillment Order Resource from Shopify for Order ID %s",
+                        $order->getId()
+                    )
+                );
                 // record the failure in the table then exit out for this order
-                $this->tableRows[] = [$order->getId(), "--", "--", "--", "--", "<error>FAILED</error>", "No Fulfillment Order Resource"];
+                $this->tableRows[] = [
+                    $order->getId(),
+                    "--",
+                    "--",
+                    "--",
+                    "--",
+                    "<error>FAILED</error>",
+                    "No Fulfillment Order Resource"
+                ];
                 return;
             }
             $fulfillmentOrderStatus = $fulfillmentOrder->getAttributes()["status"];
@@ -410,10 +514,12 @@ class SyncOrdersToShopify extends Command
             // and for each line item...
             foreach ($lineItems as $lineItemData) {
                 try {
-                    $fulfillmentRecords = $this->sendFulfillmentsForOrderItemToShopify($lineItemData["fulfillment_order_id"],
+                    $fulfillmentRecords = $this->sendFulfillmentsForOrderItemToShopify(
+                        $lineItemData["fulfillment_order_id"],
                         $lineItemData["line_item_id"],
                         $lineItemData["id"],
-                        $fulfillmentOrderStatus);
+                        $fulfillmentOrderStatus
+                    );
                     // ... record the fulfillment(s) made for the line item
                     if ($fulfillmentRecords) {
                         foreach ($fulfillmentRecords as $fulfillmentRecord) {
@@ -430,8 +536,13 @@ class SyncOrdersToShopify extends Command
                         }
                     }
                 } catch (Exception $e) {
-                    $this->error(sprintf("Failed to send fulfillments data to Shopify for order ID %s: %s",
-                        $order->getId(), $e->getMessage()));
+                    $this->error(
+                        sprintf(
+                            "Failed to send fulfillments data to Shopify for order ID %s: %s",
+                            $order->getId(),
+                            $e->getMessage()
+                        )
+                    );
                 }
             }
             // STEP 7: add any refunds
@@ -442,7 +553,7 @@ class SyncOrdersToShopify extends Command
             // record the action for the order
             if ($isCreating) {
                 $action = "Created";
-            } elseif($needsToUpdate) {
+            } elseif ($needsToUpdate) {
                 $action = "Updated";
             } else {
                 $action = "Skipped";
@@ -451,14 +562,14 @@ class SyncOrdersToShopify extends Command
 
             // record the payment creations, but we won't actually do it
             $payments = $this->getPaymentsDataToSync($order);
-            $payments->each(fn(array $paymentData)  => $this->tableRows[] = [
+            $payments->each(fn(array $paymentData) => $this->tableRows[] = [
                 $order->getId(),
                 "--",
                 $paymentData["id"],
                 "--",
                 "--",
                 "Created",
-                $orderShopifyId+$paymentData["id"]
+                $orderShopifyId + $paymentData["id"]
             ]);
 
             $fulfillmentOrder = $this->getFulfillmentOrderResource($order);
@@ -487,7 +598,8 @@ class SyncOrdersToShopify extends Command
                 ];
 
                 try {
-                    $fulfillmentRecords = $this->sendFulfillmentsForOrderItemToShopify($lineItemData["ecommerce_order_item_id"],
+                    $fulfillmentRecords = $this->sendFulfillmentsForOrderItemToShopify(
+                        $lineItemData["ecommerce_order_item_id"],
                         $lineItemShopifyId,
                         $fulfillmentOrderLineItemId,
                         $fulfillmentOrderStatus
@@ -508,22 +620,26 @@ class SyncOrdersToShopify extends Command
                         }
                     }
                 } catch (Exception $e) {
-                    $this->error(sprintf("Failed to send fulfillments data to Shopify for order ID %s: %s",
-                        $order->getId(), $e->getMessage()));
+                    $this->error(
+                        sprintf(
+                            "Failed to send fulfillments data to Shopify for order ID %s: %s",
+                            $order->getId(),
+                            $e->getMessage()
+                        )
+                    );
                 }
             }
             // record the refunds, but we won't actually do it
             $refunds = $this->getRefundsToSync($order);
-            $refunds->each(fn(Refund $refund)  => $this->tableRows[] = [
+            $refunds->each(fn(Refund $refund) => $this->tableRows[] = [
                 $order->getId(),
                 "--",
                 "--",
                 "--",
                 $refund->getId(),
                 "Created",
-                $orderShopifyId+$refund->getId()
+                $orderShopifyId + $refund->getId()
             ]);
-
         }
     }
 
@@ -598,7 +714,11 @@ class SyncOrdersToShopify extends Command
             "note" => $order->getNote(),
             "processed_at" => $order->getCreatedAt()->toIso8601String(),
             "source_name" => $order->getBrand(),
-            "subtotal_price" => number_format(($order->getProductDue()?? ($order->getTotalDue() - $order->getTaxesDue() - $order->getShippingDue())) ?? 0, 2),
+            "subtotal_price" => number_format(
+                ($order->getProductDue() ?? ($order->getTotalDue() - $order->getTaxesDue() - $order->getShippingDue(
+                    ))) ?? 0,
+                2
+            ),
             "total_outstanding" => number_format(($order->getTotalDue() - $order->getTotalPaid()) ?? 0, 2),
             "total_price" => number_format($order->getTotalDue() ?? 0, 2),
             "total_tax" => number_format($order->getTaxesDue() ?? 0, 2),
@@ -620,16 +740,16 @@ class SyncOrdersToShopify extends Command
 
         if ($order->getTaxesDue()) {
             $orderData["tax_lines"] = [
-                [ "price" => $order->getTaxesDue()]
+                ["price" => $order->getTaxesDue()]
             ];
         }
 
         // the proper addresses should already have been synced by the user/customer, so only use it if Shopify has it
         if ($order->getBillingAddress()?->getShopifyId()) {
-            $orderData["billing_address"] = [ "id" => $order->getBillingAddress()->getShopifyId()];
+            $orderData["billing_address"] = ["id" => $order->getBillingAddress()->getShopifyId()];
         }
         if ($order->getShippingAddress()?->getShopifyId()) {
-            $orderData["shipping_address"] = [ "id" => $order->getShippingAddress()->getShopifyId()];
+            $orderData["shipping_address"] = ["id" => $order->getShippingAddress()->getShopifyId()];
         }
 
         $orderData["line_items"] = $this->createOrderItems($order);
@@ -667,7 +787,7 @@ class SyncOrdersToShopify extends Command
             if ($orderItem->getTotalDiscounted()) {
                 $data["applied_discounts"] = [
                     [
-                        "amount" =>  number_format($orderItem->getTotalDiscounted(), 2)
+                        "amount" => number_format($orderItem->getTotalDiscounted(), 2)
                     ]
                 ];
             }
@@ -707,7 +827,7 @@ class SyncOrdersToShopify extends Command
      */
     private function sendPaymentsForOrderToShopify(Order $order): void
     {
-        $this->getPaymentsDataToSync($order)->each(function(array $paymentData) use ($order) {
+        $this->getPaymentsDataToSync($order)->each(function (array $paymentData) use ($order) {
             $paymentId = $paymentData["id"];
             try {
                 $paymentResource = $this->shopify->createOrderTransaction($order->getShopifyId(), $paymentData["data"]);
@@ -720,18 +840,47 @@ class SyncOrdersToShopify extends Command
                 $this->entityManager->flush();
 
                 $this->shopifyIds->push($paymentShopifyId);
-                $this->tableRows[] = [$order->getId(), "--", $paymentId, "--", "--", "Created" , $paymentShopifyId];
-
+                $this->tableRows[] = [$order->getId(), "--", $paymentId, "--", "--", "Created", $paymentShopifyId];
             } catch (ValidationException $exception) {
-                $this->error(sprintf("Validation failed when sending order transaction to Shopify: %s",
-                    $exception->getMessage()));
-                $this->error(sprintf("Please investigate for Order ID %s. Attempted order data: %s",
-                    $order->getId(), json_encode($paymentData["data"])));
-                $this->tableRows[] = [$order->getId(), "--", $paymentId, "--", "--", "<error>FAILED</error>", $exception->getMessage()];
+                $this->error(
+                    sprintf(
+                        "Validation failed when sending order transaction to Shopify: %s",
+                        $exception->getMessage()
+                    )
+                );
+                $this->error(
+                    sprintf(
+                        "Please investigate for Order ID %s. Attempted order data: %s",
+                        $order->getId(),
+                        json_encode($paymentData["data"])
+                    )
+                );
+                $this->tableRows[] = [
+                    $order->getId(),
+                    "--",
+                    $paymentId,
+                    "--",
+                    "--",
+                    "<error>FAILED</error>",
+                    $exception->getMessage()
+                ];
             } catch (\Doctrine\ORM\Exception\ORMException $exception) {
-                $this->error(sprintf("Failed to save shopify_id for payment ID %s: %s",
-                    $paymentId, $exception->getMessage()));
-                $this->tableRows[] = [$order->getId(), "--", $paymentId, "--", "--", "<error>FAILED</error>", $exception->getMessage()];
+                $this->error(
+                    sprintf(
+                        "Failed to save shopify_id for payment ID %s: %s",
+                        $paymentId,
+                        $exception->getMessage()
+                    )
+                );
+                $this->tableRows[] = [
+                    $order->getId(),
+                    "--",
+                    $paymentId,
+                    "--",
+                    "--",
+                    "<error>FAILED</error>",
+                    $exception->getMessage()
+                ];
             }
         });
     }
@@ -752,9 +901,12 @@ class SyncOrdersToShopify extends Command
             return collect();
         }
         $payments = collect($payments)
-            ->filter(fn(Payment $payment) => is_null($payment->getShopifyId()) && $payment->getStatus() === Payment::STATUS_PAID);
+            ->filter(
+                fn(Payment $payment) => is_null($payment->getShopifyId()) && $payment->getStatus(
+                    ) === Payment::STATUS_PAID
+            );
 
-        return $payments->transform(function(Payment $payment) {
+        return $payments->transform(function (Payment $payment) {
             return
                 [
                     "id" => $payment->getId(),
@@ -798,15 +950,28 @@ class SyncOrdersToShopify extends Command
         $refunds->each(function (Refund $refund) use ($order, $orderShopifyId) {
             $paymentToRefund = $refund->getPayment();
             if (is_null($paymentToRefund)) {
-                $this->error(sprintf("No payment found for Refund ID %s. Refund cannot be sent to Shopify",
-                    $refund->getId()));
-                $this->tableRows[] = [$order->getId(), "--", "--", "--", $refund->getId(), "<error>FAILED</error>", "Payment not found"];
+                $this->error(
+                    sprintf(
+                        "No payment found for Refund ID %s. Refund cannot be sent to Shopify",
+                        $refund->getId()
+                    )
+                );
+                $this->tableRows[] = [
+                    $order->getId(),
+                    "--",
+                    "--",
+                    "--",
+                    $refund->getId(),
+                    "<error>FAILED</error>",
+                    "Payment not found"
+                ];
                 return;
             }
 
             // 2. use the calculate endpoint to initiate the process
             $currency = $paymentToRefund->getCurrency() ?? self::DEFAULT_CURRENCY;
-            $calculateResponse = $this->shopify->calculateOrderRefund($orderShopifyId,
+            $calculateResponse = $this->shopify->calculateOrderRefund(
+                $orderShopifyId,
                 [
                     "currency" => $currency
                 ]
@@ -817,17 +982,44 @@ class SyncOrdersToShopify extends Command
                 ->firstWhere("parent_id", $paymentToRefund->getShopifyId());
 
             if (is_null($transactionData)) {
-                $this->error(sprintf("Shopify did not return a transaction for our Payment ID %s, attempting for Refund ID %s. Refund cannot be sent to Shopify",
-                    $paymentToRefund->getId(), $refund->getId()));
-                $this->tableRows[] = [$order->getId(), "--", "--", "--", $refund->getId(), "<error>FAILED</error>", "Payment not in calculated refund"];
+                $this->error(
+                    sprintf(
+                        "Shopify did not return a transaction for our Payment ID %s, attempting for Refund ID %s. Refund cannot be sent to Shopify",
+                        $paymentToRefund->getId(),
+                        $refund->getId()
+                    )
+                );
+                $this->tableRows[] = [
+                    $order->getId(),
+                    "--",
+                    "--",
+                    "--",
+                    $refund->getId(),
+                    "<error>FAILED</error>",
+                    "Payment not in calculated refund"
+                ];
                 return;
             }
 
             // safety check that we're not trying to refund more than we're allowed
             if ($refund->getRefundedAmount() > floatval($transactionData["maximum_refundable"])) {
-                $this->error(sprintf("Attempting to refund %s for Refund ID %s, which exceeds the maximum_refundable of %s. Refund cannot be sent to Shopify",
-                    number_format($refund->getRefundedAmount(), 2), $refund->getId(), $transactionData["maximum_refundable"]));
-                $this->tableRows[] = [$order->getId(), "--", "--", "--", $refund->getId(), "<error>FAILED</error>", "Refund amount too high"];
+                $this->error(
+                    sprintf(
+                        "Attempting to refund %s for Refund ID %s, which exceeds the maximum_refundable of %s. Refund cannot be sent to Shopify",
+                        number_format($refund->getRefundedAmount(), 2),
+                        $refund->getId(),
+                        $transactionData["maximum_refundable"]
+                    )
+                );
+                $this->tableRows[] = [
+                    $order->getId(),
+                    "--",
+                    "--",
+                    "--",
+                    $refund->getId(),
+                    "<error>FAILED</error>",
+                    "Refund amount too high"
+                ];
                 return;
             }
 
@@ -843,7 +1035,7 @@ class SyncOrdersToShopify extends Command
                     ]
                 ]
             ];
-            if ($refund->getNote()){
+            if ($refund->getNote()) {
                 $refundData["note"] = $refund->getNote();
             }
 
@@ -857,10 +1049,15 @@ class SyncOrdersToShopify extends Command
                 $this->entityManager->flush();
 
                 $this->shopifyIds->push($refundShopifyId);
-                $this->tableRows[] = [$order->getId(), "--", "--", "--", $refund->getId(), "Created" , $refundShopifyId];
+                $this->tableRows[] = [$order->getId(), "--", "--", "--", $refund->getId(), "Created", $refundShopifyId];
             } catch (\Doctrine\ORM\Exception\ORMException $e) {
-                $this->error(sprintf("Failed to save shopify_id for refund ID %s: %s",
-                    $refund->getId(), $e->getMessage()));
+                $this->error(
+                    sprintf(
+                        "Failed to save shopify_id for refund ID %s: %s",
+                        $refund->getId(),
+                        $e->getMessage()
+                    )
+                );
             }
         });
 
@@ -889,7 +1086,7 @@ class SyncOrdersToShopify extends Command
             return collect();
         }
 
-        return collect($refunds)->filter(fn (Refund $refund) => is_null($refund->getShopifyId()));
+        return collect($refunds)->filter(fn(Refund $refund) => is_null($refund->getShopifyId()));
     }
 
     /**
@@ -904,11 +1101,12 @@ class SyncOrdersToShopify extends Command
      * @return array|null
      * @throws Exception
      */
-    private function sendFulfillmentsForOrderItemToShopify(int $fulfillmentOrderId,
-                                                           int $orderItemShopifyId,
-                                                           int $fulfillmentOrderLineItemId,
-                                                           string $fulfillmentOrderStatus): ?array
-    {
+    private function sendFulfillmentsForOrderItemToShopify(
+        int $fulfillmentOrderId,
+        int $orderItemShopifyId,
+        int $fulfillmentOrderLineItemId,
+        string $fulfillmentOrderStatus
+    ): ?array {
         if ($this->getIsSimulation()) {
             // if we're simulating, we passed in the order item's ID as the $fulfillmentOrderId
             $orderItem = $this->orderItemRepository->find($fulfillmentOrderId);
@@ -916,21 +1114,36 @@ class SyncOrdersToShopify extends Command
             $orderItem = $this->orderItemRepository->getByShopifyId($orderItemShopifyId);
         }
         if (is_null($orderItem)) {
-            throw new Exception(sprintf("No ecommerce Order Item found for shopify_id %s. Skipping fulfillment process with Shopify.", $orderItemShopifyId));
+            throw new Exception(
+                sprintf(
+                    "No ecommerce Order Item found for shopify_id %s. Skipping fulfillment process with Shopify.",
+                    $orderItemShopifyId
+                )
+            );
         }
 
         // get the product, so we can see how to handle its fulfillment
         if ($productEntity = $orderItem->getProduct()) {
             // the product might be inactive, so use the id to get a fresh copy with all its data
-            $product = $this->productRepository->findProduct($productEntity->getId(), [0,1]);
+            $product = $this->productRepository->findProduct($productEntity->getId(), [0, 1]);
 
-            if ($product->getType() === Product::TYPE_DIGITAL_SUBSCRIPTION || $product->getType() === Product::TYPE_DIGITAL_ONE_TIME){
-                return $this->fulfillDigitalProduct($fulfillmentOrderId, $fulfillmentOrderLineItemId, $orderItem->getQuantity() ?? 0, $fulfillmentOrderStatus);
-            } elseif($product->getType() === Product::TYPE_PHYSICAL_ONE_TIME) {
+            if ($product->getType() === Product::TYPE_DIGITAL_SUBSCRIPTION || $product->getType(
+                ) === Product::TYPE_DIGITAL_ONE_TIME) {
+                return $this->fulfillDigitalProduct(
+                    $fulfillmentOrderId,
+                    $fulfillmentOrderLineItemId,
+                    $orderItem->getQuantity() ?? 0,
+                    $fulfillmentOrderStatus
+                );
+            } elseif ($product->getType() === Product::TYPE_PHYSICAL_ONE_TIME) {
                 return $this->fulfillPhysicalProduct($fulfillmentOrderId, $fulfillmentOrderLineItemId, $orderItem);
             } else {
-                throw new Exception(sprintf("Unknown product type %s. Cannot create Shopify Fulfillment.",
-                    $product->getType()));
+                throw new Exception(
+                    sprintf(
+                        "Unknown product type %s. Cannot create Shopify Fulfillment.",
+                        $product->getType()
+                    )
+                );
             }
         }
         return [];
@@ -945,8 +1158,11 @@ class SyncOrdersToShopify extends Command
      * @param OrderItem $orderItem
      * @return array<array> array of result arrays
      */
-    private function fulfillPhysicalProduct(int $fulfillmentOrderId, int $fulfillmentOrderLineItemId, OrderItem $orderItem): array
-    {
+    private function fulfillPhysicalProduct(
+        int $fulfillmentOrderId,
+        int $fulfillmentOrderLineItemId,
+        OrderItem $orderItem
+    ): array {
         $fulfillmentRecords = [];
         // physical products might have fulfillments, so check for any
         $fulfillments = collect($orderItem->getOrderItemFulfillments());
@@ -1018,12 +1234,20 @@ class SyncOrdersToShopify extends Command
                             $this->entityManager->flush();
                         }
                     } catch (\Doctrine\ORM\Exception\ORMException $e) {
-                        $this->error(sprintf("Failed to save shopify_id for order item fulfillment ID %s: %s",
-                            $fulfillment->getId(), $e->getMessage()));
+                        $this->error(
+                            sprintf(
+                                "Failed to save shopify_id for order item fulfillment ID %s: %s",
+                                $fulfillment->getId(),
+                                $e->getMessage()
+                            )
+                        );
                     }
                 } else {
                     // retrieve the fulfillment data from Shopify, so we can handle its tracking information
-                    $fulfillmentResult = $this->shopify->getOrderFulfillment($orderItem->getOrder()->getShopifyId(), $fulfillment->getShopifyId());
+                    $fulfillmentResult = $this->shopify->getOrderFulfillment(
+                        $orderItem->getOrder()->getShopifyId(),
+                        $fulfillment->getShopifyId()
+                    );
                     $resultRecord = [
                         self::TABLE_ITEM_ID => $fulfillment->getId(),
                         self::TABLE_SHOPIFY_FULFILLMENT_ID => $fulfillment->getShopifyId(),
@@ -1034,7 +1258,10 @@ class SyncOrdersToShopify extends Command
                 $fulfillmentRecords[] = $resultRecord;
 
                 if (!is_null($fulfillment->getTrackingNumber())) {
-                    $fulfillmentRecords[] = $this->sendTrackingInfoForFulfillmentToShopify($fulfillment, $fulfillmentResult->getAttributes());
+                    $fulfillmentRecords[] = $this->sendTrackingInfoForFulfillmentToShopify(
+                        $fulfillment,
+                        $fulfillmentResult->getAttributes()
+                    );
                 }
             }
         });
@@ -1050,8 +1277,10 @@ class SyncOrdersToShopify extends Command
      * @param array $shopifyFulfillmentAttributes
      * @return string[] array of result data to display in the table
      */
-    private function sendTrackingInfoForFulfillmentToShopify(OrderItemFulfillment $fulfillment, array $shopifyFulfillmentAttributes): array
-    {
+    private function sendTrackingInfoForFulfillmentToShopify(
+        OrderItemFulfillment $fulfillment,
+        array $shopifyFulfillmentAttributes
+    ): array {
         $resultRecord = [
             self::TABLE_ITEM_ID => $fulfillment->getId() . " tracking",
             self::TABLE_SHOPIFY_FULFILLMENT_ID => "N/A",
@@ -1061,7 +1290,10 @@ class SyncOrdersToShopify extends Command
             // if we're simulating, we don't have a real $shopifyFulfillmentAttributes because we didn't send the data
             // to Shopify, so get the fulfillment data if it exists
             if (!is_null($fulfillment->getShopifyId())) {
-                $orderFulfillmentResource = $this->shopify->getOrderFulfillment($fulfillment->getOrder()->getShopifyId(), $fulfillment->getShopifyId());
+                $orderFulfillmentResource = $this->shopify->getOrderFulfillment(
+                    $fulfillment->getOrder()->getShopifyId(),
+                    $fulfillment->getShopifyId()
+                );
                 $shopifyFulfillmentAttributes = $orderFulfillmentResource->getAttributes();
             } else {
                 // otherwise, just fake creating a new one
@@ -1073,8 +1305,7 @@ class SyncOrdersToShopify extends Command
 
         // if the tracking number already exists, make sure we have a change that needs to be sent
         if ($shopifyFulfillmentAttributes["tracking_number"] === $fulfillment->getTrackingNumber() &&
-            $shopifyFulfillmentAttributes["tracking_company"] === $fulfillment->getCompany())
-        {
+            $shopifyFulfillmentAttributes["tracking_company"] === $fulfillment->getCompany()) {
             $resultRecord [self::TABLE_ITEM_ACTION] = "Skipped";
             return $resultRecord;
         }
@@ -1106,8 +1337,12 @@ class SyncOrdersToShopify extends Command
      * @param string $fulfillmentOrderStatus
      * @return array<array> array of result arrays
      */
-    private function fulfillDigitalProduct(int $fulfillmentOrderId, int $fulfillmentOrderLineItemId, int $quantity, string $fulfillmentOrderStatus): array
-    {
+    private function fulfillDigitalProduct(
+        int $fulfillmentOrderId,
+        int $fulfillmentOrderLineItemId,
+        int $quantity,
+        string $fulfillmentOrderStatus
+    ): array {
         $fulfillmentRecords = [];
         $record = [
             self::TABLE_ITEM_ID => "N/A for digital product",
@@ -1197,7 +1432,7 @@ class SyncOrdersToShopify extends Command
     /**
      * @inheritDoc
      */
-    function getIsSimulation(): bool
+    protected function getIsSimulation(): bool
     {
         return $this->option("execute") == false;
     }
@@ -1205,7 +1440,7 @@ class SyncOrdersToShopify extends Command
     /**
      * @inheritDoc
      */
-    function getIsFresh(): bool
+    protected function getIsFresh(): bool
     {
         return $this->option("fresh");
     }
@@ -1213,9 +1448,17 @@ class SyncOrdersToShopify extends Command
     /**
      * @inheritDoc
      */
-    function getLimit(): ?int
+    protected function getLimit(): ?int
     {
         return $this->option("limit");
+    }
+
+    /**
+     * @inheritDoc
+     */
+    function getStartingOrderId(): ?int
+    {
+        return $this->option("startingOrderId") ?? 0;
     }
 
     /**

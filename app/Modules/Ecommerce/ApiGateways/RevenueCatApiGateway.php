@@ -7,13 +7,14 @@ use Exception;
 class RevenueCatApiGateway
 {
     /**
-
-    /**
-     * @param string $customerIoAppApiKey
-     * @param string $customerId
+     * @param $appUserId
+     * @param string $platform
+     * @param string $app
+     * @return mixed
+     * @throws Exception
      */
     public function getSubscriber(
-        $appUserId
+        $appUserId, $platform = 'ios', $app = 'Pianote'
     ) {
         $ch = curl_init();
 
@@ -23,8 +24,8 @@ class RevenueCatApiGateway
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 
         $headers = [];
-        $headers[] = 'Authorization: Bearer appl_HhuXJEzLSKLbTcXMORRLIPzAEXx';
-            //.config('ecommerce.revenuecat.'.$platform)[$app];
+        $headers[] = 'Authorization: Bearer '
+            .config('ecommerce.revenuecat.'.$platform)[$app];
         $headers[] = 'Content-Type: application/json';
         $headers[] = 'Accept: application/json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);

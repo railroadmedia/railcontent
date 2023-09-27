@@ -55,13 +55,17 @@ trait SyncsToShopify
     protected function notifyStartupStatus(): void
     {
         if ($this->getIsSimulation()) {
-            $this->info("Executing in simulation mode. No changes will be made to the database.  Use --execute to run for real.");
+            $this->info(
+                "Executing in simulation mode. No changes will be made to the database.  Use --execute to run for real."
+            );
         }
 
         if ($this->getIsFresh()) {
             $this->info(
-                sprintf("Performing a fresh sync. All ecommerce %s will be sent to Shopify.",
-                    Str::plural($this->getSyncResource()))
+                sprintf(
+                    "Performing a fresh sync. All ecommerce %s will be sent to Shopify.",
+                    Str::plural($this->getSyncResource())
+                )
             );
         }
     }
@@ -115,17 +119,21 @@ trait SyncsToShopify
      * @param RepositoryBase|EntityRepository|null $repository - optional override of the repository to query
      * @return Collection
      */
-    protected function getEcommerceEntities(bool $fresh, RepositoryBase|EntityRepository|null $repository = null) : Collection
-    {
+    protected function getEcommerceEntities(
+        bool $fresh,
+        RepositoryBase|EntityRepository|null $repository = null
+    ): Collection {
         $entityRepository = $repository ?? $this->getEcommerceEntityRepository();
         $qb = $entityRepository->createQueryBuilder('entity');
 
         if (!$fresh) {
             $lastSyncAt = $this->getDateTimeOfLastSync();
             $this->info(
-                sprintf("Retrieving all %s that have not been synced, or have been updated since %s ...",
+                sprintf(
+                    "Retrieving all %s that have not been synced, or have been updated since %s ...",
                     Str::plural($this->getSyncResource()),
-                    $lastSyncAt->toString())
+                    $lastSyncAt->toString()
+                )
             );
             $qb->where(
                 $qb->expr()
@@ -158,7 +166,9 @@ trait SyncsToShopify
             ProductResource::class => "getProducts",
             CustomerResource::class => "getCustomers",
             OrderResource::class => "getOrders",
-            default => throw new Exception("{$this->getShopifyResourceClass()} has not been configured in getResourceFunction()"),
+            default => throw new Exception(
+                "{$this->getShopifyResourceClass()} has not been configured in getResourceFunction()"
+            ),
         };
     }
 
@@ -167,21 +177,21 @@ trait SyncsToShopify
      *
      * @return bool
      */
-    abstract function getIsSimulation(): bool;
+    abstract protected function getIsSimulation(): bool;
 
     /**
      * Are we doing a fresh sync of everything?
      *
      * @return bool
      */
-    abstract function getIsFresh(): bool;
+    abstract protected function getIsFresh(): bool;
 
     /**
      * Get the optional limit to the number of entities to sync
      *
      * @return int|null
      */
-    abstract function getLimit(): ?int;
+    abstract protected function getLimit(): ?int;
 
     /**
      * Get the name of type of Shopify Resource this class interacts with
