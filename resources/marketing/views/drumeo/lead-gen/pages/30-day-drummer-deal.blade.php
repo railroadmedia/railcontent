@@ -242,38 +242,26 @@
                     <iframe class="absolute w-full h-full reset-on-close bg-black" src="//player.vimeo.com/video/754886689" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
             </div>
-            <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">
-                You’ve spent 30 days crushing it on the drums. <br><br>
-                And we want to make it easy for you to keep going. So we put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses. <br><br>
+            <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">You’ve spent 30 days crushing it on the drums.
+                <br><br>
+                And we want to make it easy for you to keep going. So we put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses.
+                <br><br>
                 <b>Join Drumeo today and you’ll get:</b>
             </p>
             <ul class="pl-4 mx-auto text-left rounded-xl text-white px-3 py-4" style="width: 100%; max-width: 700px; background-color:#0D1627;">
-                <li class="flex items-start mb-1">
-                    <span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span>
-                    Step-by-step lessons building on what you learned in 30-Day Drummer
-                </li>
-                <li class="flex items-start mb-1">
-                    <span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span>
-                    Easy access to hundreds of popular songs you can play with your new skills
-                </li>
-                <li class="flex items-start mb-1">
-                    <span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span>
-                    Personalized support for ALL your drumming questions
-                </li>
-                <li class="flex items-start mb-1">
-                    <span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span>
-                    An exclusive Masterclass with Domino to help you plan your next steps (BONUS)
-                </li>
-                <li class="flex items-start">
-                    <span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span>
-                    Fresh drumsticks, the Best Beginner Drum Book, and a popular training pack (BONUS)
-                </li>
+                <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Step-by-step lessons building on what you learned in 30-Day Drummer</li>
+                <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Access to 5000+ popular songs you can play with your new skills</li>
+                <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Personalized support for ALL your drumming questions</li>
+                <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Follow-up courses 10-Day Fills and 10-Day Ghost Notes with Domino (NEW!)</li>
+                <li class="flex items-start"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> The brand NEW Drumeo StickBag and a fresh pair of 5A drumsticks (FREE BONUSES)</li>
             </ul>
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">
-                <strong class="text-drumeo">Plus,</strong> you’ll have FREE priority registration for any future 30-Day Drummer events like this one (we’ll be doing more, promise). <br><br>
-                And we’ll also knock $40 off your membership for being a dedicated 30-Day Drummer student (because hey, why not?). <br><br>
-                <b>But heads up:</b> This offer is only available until March 31, 2023. <br><br>
-                Click below to get started and keep crushing it on the drums for the next year! <br><br>
+                <strong class="text-drumeo">Plus,</strong> you’ll have FREE priority registration for any future 30-Day Drummer events like this one (we’ll be doing more, promise).
+                <br><br>
+                And we’ll also knock $40 off your membership for being a dedicated 30-Day Drummer student (because hey, why not?).
+                <br><br>
+                <b>But heads up:</b> This offer is only available until October 5, 2023. <br><br>
+                Click below to get started and keep crushing it on the drums for the next year!
             </p>
 {{--                        <div class="px-3 md:px-0">--}}
 {{--                            <a class="join blue w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">SEE THE DEAL</a>--}}
