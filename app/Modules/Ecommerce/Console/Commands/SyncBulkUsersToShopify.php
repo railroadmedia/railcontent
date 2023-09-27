@@ -24,7 +24,7 @@ class SyncBulkUsersToShopify extends Command
      *
      * @var string
      */
-    protected $description = 'Sync our users up to Shopify';
+    protected $description = 'Sync our users up to Shopify in a bulk operation';
 
     /**
      * Is this sync running for real?

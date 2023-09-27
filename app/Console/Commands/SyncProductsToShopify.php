@@ -881,7 +881,7 @@ class SyncProductsToShopify extends Command
     /**
      * @inheritDoc
      */
-    function getIsSimulation(): bool
+    protected function getIsSimulation(): bool
     {
         return $this->option("execute") == false;
     }
@@ -889,7 +889,7 @@ class SyncProductsToShopify extends Command
     /**
      * @inheritDoc
      */
-    function getIsFresh(): bool
+    protected function getIsFresh(): bool
     {
         return $this->option("fresh");
     }

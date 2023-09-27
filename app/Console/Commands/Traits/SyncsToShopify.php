@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityRepository;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Railroad\Ecommerce\Repositories\RepositoryBase;
 use Signifly\Shopify\REST\Resources\CustomerResource;
@@ -54,13 +55,17 @@ trait SyncsToShopify
     protected function notifyStartupStatus(): void
     {
         if ($this->getIsSimulation()) {
-            $this->info("Executing in simulation mode. No changes will be made to the database.  Use --execute to run for real.");
+            $this->info(
+                "Executing in simulation mode. No changes will be made to the database.  Use --execute to run for real."
+            );
         }
 
         if ($this->getIsFresh()) {
             $this->info(
-                sprintf("Performing a fresh sync. All ecommerce %s will be sent to Shopify.",
-                    Str::plural($this->getSyncResource()))
+                sprintf(
+                    "Performing a fresh sync. All ecommerce %s will be sent to Shopify.",
+                    Str::plural($this->getSyncResource())
+                )
             );
         }
     }
@@ -114,17 +119,21 @@ trait SyncsToShopify
      * @param RepositoryBase|EntityRepository|null $repository - optional override of the repository to query
      * @return Collection
      */
-    protected function getEcommerceEntities(bool $fresh, RepositoryBase|EntityRepository|null $repository = null) : Collection
-    {
+    protected function getEcommerceEntities(
+        bool $fresh,
+        RepositoryBase|EntityRepository|null $repository = null
+    ): Collection {
         $entityRepository = $repository ?? $this->getEcommerceEntityRepository();
         $qb = $entityRepository->createQueryBuilder('entity');
 
         if (!$fresh) {
             $lastSyncAt = $this->getDateTimeOfLastSync();
             $this->info(
-                sprintf("Retrieving all %s that have not been synced, or have been updated since %s ...",
+                sprintf(
+                    "Retrieving all %s that have not been synced, or have been updated since %s ...",
                     Str::plural($this->getSyncResource()),
-                    $lastSyncAt->toString())
+                    $lastSyncAt->toString()
+                )
             );
             $qb->where(
                 $qb->expr()
@@ -157,7 +166,9 @@ trait SyncsToShopify
             ProductResource::class => "getProducts",
             CustomerResource::class => "getCustomers",
             OrderResource::class => "getOrders",
-            default => throw new Exception("{$this->getShopifyResourceClass()} has not been configured in getResourceFunction()"),
+            default => throw new Exception(
+                "{$this->getShopifyResourceClass()} has not been configured in getResourceFunction()"
+            ),
         };
     }
 
@@ -166,21 +177,21 @@ trait SyncsToShopify
      *
      * @return bool
      */
-    abstract function getIsSimulation(): bool;
+    abstract protected function getIsSimulation(): bool;
 
     /**
      * Are we doing a fresh sync of everything?
      *
      * @return bool
      */
-    abstract function getIsFresh(): bool;
+    abstract protected function getIsFresh(): bool;
 
     /**
      * Get the optional limit to the number of entities to sync
      *
      * @return int|null
      */
-    abstract function getLimit(): ?int;
+    abstract protected function getLimit(): ?int;
 
     /**
      * Get the name of type of Shopify Resource this class interacts with
@@ -211,4 +222,34 @@ trait SyncsToShopify
      * @return RepositoryBase|EntityRepository
      */
     abstract protected function getEcommerceEntityRepository(): RepositoryBase|EntityRepository;
+
+    /**
+     * WARNING: Do NOT call this before the first `$this->>shopify->___` call, because there will not yet be
+     * an existing last response.
+     *
+     * Check the API call rate limit based on the last response, to see if we're approaching our limit, and
+     * to sleep if so, to recover our calls.
+     * This needs to be called before any `$this->>shopify->___` calls that you want to protect.
+     *
+     * @return void
+     */
+    protected function handleRateLimit(): void
+    {
+        if ($this->getIsSimulation()) {
+            return;
+        }
+
+        $limit = $this->shopify->getLastResponse()?->headers()["X-Shopify-Shop-Api-Call-Limit"][0] ?? "0/400";
+        Log::info(sprintf("Shopify API Call Limit: %s", $limit));
+        $current = intval(Str::before($limit, "/"));
+        $max = intval(Str::after($limit, "/"));
+
+        if ($max - $current <= $this->RATE_LIMIT_THRESHOLD) {
+            $this->warn("About to hit API rate limit. Sleeping for 1 second...");
+            sleep(1);
+        }
+    }
+
+    // the closest difference of the current call and limit that we'll allow before sleeping
+    protected int $RATE_LIMIT_THRESHOLD = 60;
 }
