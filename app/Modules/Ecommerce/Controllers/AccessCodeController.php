@@ -80,12 +80,14 @@ class AccessCodeController extends Controller
         /*
          * SRR-37: Update user permissions
          */
-        $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
-            $user->getId(),
-            $productIds,
-            Carbon::now(),
-            UserAccessPermissionsSourceEnum::AccessCode,
-        );
+        if (config('shopify.enabled')) {
+            $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
+                $user->getId(),
+                $productIds,
+                Carbon::now(),
+                UserAccessPermissionsSourceEnum::AccessCode,
+            );
+        }
 
         $accessCode = $this->accessCodeService->claim($rawAccessCode, $user, $request->get('context'));
 
