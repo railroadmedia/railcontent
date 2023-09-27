@@ -20,6 +20,9 @@
                     />
                 </div>
             @endif
+            @if(!empty($promoHeader))
+                {!! $promoHeader !!}
+            @endif
             <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
                 <div class=" inline-block relative w-full group" style="padding-bottom: 45%;perspective: 1000px;">
                     <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">

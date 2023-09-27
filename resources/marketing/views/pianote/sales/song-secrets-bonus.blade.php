@@ -277,14 +277,14 @@
         ]
     @endphp
     @include('musora.sales.components.testimonials-section', [
-        'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
-        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
+        'header' => 'Trusted by students<br class="inline-block sm:hidden">  just like you.',
+        'reviewText' => '',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
-        'youtube' => '1.3M',
+        'youtube' => '1.4M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
         'facebook' => '430K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '200K',
+        'instagram' => '220K',
     ])
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
@@ -389,13 +389,12 @@ That’s the Play Better Guarantee™',
                 ],
             ]
         @endphp
-
     @include('musora.sales.components.order-section-bonuses', [
     'bgColor' => 'background:linear-gradient(to bottom, #860c9f, #da174b);',
         'firstYearPrice' => '177',
         'buttonColor' => 'white',
         'CTA' => 'CLAIM YOUR OFFER',
-    'promoLogo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/national-piano-month-logo.svg',
+    'promoHeader' => '<h2 class="leading-tight mb-4"><strong class="text-musora">Save 71% with your</strong><br>exclusive Webinar Bundle.</h2>',
     'topImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-annual-2w-card.png',
     'subHeader' => '<strong><span class="text-musora">SAVE 20%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 3 COURSES, 6 POSTERS & THE CHORDS AND SCALES BOOK.',
     'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
