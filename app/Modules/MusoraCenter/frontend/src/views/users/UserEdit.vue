@@ -75,14 +75,6 @@
                         </div>
                     </v-col>
                 </v-card>
-
-                <!-- USER PERMISSIONS -->
-                <user-products
-                    :user-id="userId"
-                    :user-products="userProducts"
-                    :included-data="userProductsIncludedData"
-                    @userProductEdit="loadUserData"
-                ></user-products>
             </v-col>
         </v-row>
 
@@ -92,6 +84,12 @@
                 cols="12"
                 class="mb-4 text-center px-4 column"
             >
+                <!-- USER ACCESS PERMISSIONS -->
+                <user-products
+                    :user-id="userId"
+                    :user-products="userAccessPermissions"
+                    @userProductEdit="loadUserData"
+                ></user-products>
                 <!-- USER SUBSCRIPTIONS -->
 <!--                <user-subscriptions-->
 <!--                    :user-id="userId"-->
@@ -209,7 +207,7 @@ import membershipActionsApi from '../../api/ecommerce/membership-actions';
 import paymentsApi from '../../api/ecommerce/payments';
 import ordersApi from '../../api/ecommerce/orders';
 import subscriptionsApi from '../../api/ecommerce/subscriptions';
-import userProductsApi from '../../api/ecommerce/user-products';
+import userPermissionsApi from '../../api/ecommerce/user-permissions';
 import brandColors from '../../api/mixins.js';
 import Middleware from '../../middleware/user';
 import UserAccessCodes from './forms/UserAccessCodes';
@@ -278,8 +276,7 @@ export default {
             userMembershipActions: [],
             userMembershipActionsIncludedData: [],
             userPermissions: [],
-            userProducts: [],
-            userProductsIncludedData: [],
+            userAccessPermissions: [],
             userRoles: [],
             userNotes: '',
         };
@@ -434,14 +431,14 @@ export default {
                 });
         },
 
-        getUserProducts() {
-            userProductsApi.getUserProducts(this.userId, {
+        getUserAccessPermissions() {
+            userPermissionsApi.getUserAccessPermissions(this.userId, {
                 limit: 100,
             })
                 .then((response) => {
                     if (response) {
-                        this.userProducts = response.data.data;
-                        this.userProductsIncludedData = response.data.included;
+                        this.userAccessPermissions = response.data.data;
+                        console.log(this.userAccessPermissions);
                     }
                 });
         },
@@ -456,17 +453,11 @@ export default {
         },
 
         loadUserData() {
-            this.getUserSubscriptions();
-
-            this.getUserOrderHistory();
-
-            this.getUserPaymentMethods();
-
             this.getUserAddresses();
 
             this.getMembershipActions();
 
-            this.getUserProducts();
+            this.getUserAccessPermissions();
 
             this.getUserRoles();
         },

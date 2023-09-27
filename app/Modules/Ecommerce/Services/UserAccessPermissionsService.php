@@ -59,8 +59,7 @@ class UserAccessPermissionsService
         array $productIds,
         Carbon $startTime,
         UserAccessPermissionsSourceEnum $source
-    )
-    : void {
+    ): void {
         $contentPermissionsLookup = $this->getContentPermissionsLookup();
         $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($userId);
 
@@ -309,5 +308,10 @@ class UserAccessPermissionsService
                 return "$permission->source.$hash";
             }
         );
+    }
+
+    public function getUserAccessPermissionsList(int $userId, int $page, int $limit)
+    {
+        return $this->getUserAccessPermissionsQuery($userId)->paginate($limit, ['*'], 'page', $page);
     }
 }

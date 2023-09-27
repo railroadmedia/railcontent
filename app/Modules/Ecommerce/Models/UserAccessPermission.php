@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Models;
 
+use App\Modules\Content\Models\Permission;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use Carbon\Carbon;
@@ -26,5 +27,18 @@ class UserAccessPermission extends Model
     protected $table = 'user_access_permissions';
 
     protected $primaryKey = 'id';
+
+    public function permission()
+    {
+        return $this->belongsTo(Permission::class);
+    }
+
+    public function getExpirationTime(): string
+    {
+        if ($this->time_lifetime) {
+            return 'Forever';
+        }
+        return Carbon::parse($this->start_time)->addDays($this->time_days)->addMonths($this->time_months)->toDateTimeString();
+    }
 
 }

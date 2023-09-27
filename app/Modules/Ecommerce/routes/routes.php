@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\Ecommerce\Controllers\UserAccessPermissionsController;
 use Illuminate\Support\Facades\Route;
 use Railroad\Ecommerce\Controllers\AppleStoreKitController;
 
@@ -18,5 +19,7 @@ Route::prefix(config('ecommerce.route_prefix'))->group(function () {
         'revenuecat/restore',
         \App\Modules\Ecommerce\Controllers\RevenueCatController::class . '@syncSubscriber'
     )->middleware([\Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class]);
-});
 
+    Route::get('user-access-permissions', UserAccessPermissionsController::class . '@index')
+        ->name('user-access-permissions.index');
+});
