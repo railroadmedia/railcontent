@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Entities\User;
 use Railroad\Ecommerce\Repositories\ProductRepository;
+use Railroad\Ecommerce\Services\UserProductService as EcommerceUserProductService;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Throwable;
@@ -25,17 +26,20 @@ class CohortPackController
     private UserProductService $userProductService;
     private CohortService $cohortService;
     private ContentService $contentService;
+    private EcommerceUserProductService $ecommerceUserProductService;
 
     private UserAccessPermissionsService $userAccessPermissionsService;
 
     public function __construct(
         UserProductService $userProductService,
+        EcommerceUserProductService $ecommerceUserProductService,
         ProductRepository $productRepository,
         CohortService $cohortService,
         ContentService $contentService,
         UserAccessPermissionsService $userAccessPermissionsService,
     ) {
         $this->userProductService = $userProductService;
+        $this->ecommerceUserProductService = $ecommerceUserProductService;
         $this->productRepository = $productRepository;
         $this->cohortService = $cohortService;
         $this->contentService = $contentService;
@@ -133,12 +137,17 @@ class CohortPackController
 
             /** @var Product $product */
             $product = $this->productRepository->bySku($sku);
-            $this->userAccessPermissionsService->AddUserAccessPermissionsForProducts(
-                $user->getId(),
-                [$product->getId()],
-                Carbon::now(),
-                UserAccessPermissionsSourceEnum::Challenges
-            );
+
+            if (config('shopify.enabled')) {
+                $this->userAccessPermissionsService->AddUserAccessPermissionsForProducts(
+                    $user->getId(),
+                    [$product->getId()],
+                    Carbon::now(),
+                    UserAccessPermissionsSourceEnum::Challenges
+                );
+            } else {
+                $this->ecommerceUserProductService->assignUserProduct($user, $product, null, 1);
+            }
 
             if ($request->expectsJson()) {
                 return response()->json(

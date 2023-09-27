@@ -12,18 +12,22 @@ use Illuminate\Http\Request;
 use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Entities\User;
 use Railroad\Ecommerce\Repositories\ProductRepository;
+use Railroad\Ecommerce\Services\UserProductService;
 
 class CohortPackController
 {
 
     private ProductRepository $productRepository;
+    private UserProductService $userProductService;
     private UserAccessPermissionsService $userAccessPermissionsService;
 
     public function __construct(
         ProductRepository $productRepository,
+        UserProductService $userProductService,
         UserAccessPermissionsService $userAccessPermissionsService,
     ) {
         $this->productRepository = $productRepository;
+        $this->userProductService = $userProductService;
         $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
@@ -55,12 +59,16 @@ class CohortPackController
 
             /** @var Product $product */
             $product = $this->productRepository->bySku($sku);
-            $this->userAccessPermissionsService->AddUserAccessPermissionsForProducts(
-                $user->getId(),
-                [$product->getId()],
-                Carbon::now(),
-                UserAccessPermissionsSourceEnum::Challenges
-            );
+            if (config('shopify.enabled')) {
+                $this->userAccessPermissionsService->AddUserAccessPermissionsForProducts(
+                    $user->getId(),
+                    [$product->getId()],
+                    Carbon::now(),
+                    UserAccessPermissionsSourceEnum::Challenges
+                );
+            } else {
+                $this->userProductService->assignUserProduct($user, $product, null, 1);
+            }
 
             return redirect()
                 ->back()
