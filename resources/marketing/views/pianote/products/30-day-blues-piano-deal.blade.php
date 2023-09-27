@@ -12,10 +12,10 @@
 
     @include('_partials.layout._fonts')
 
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">
 
     <style>
         .text-yellow {
@@ -83,64 +83,22 @@
                 right: -80px;
             }
         }
-
-        .flip-div,
-        .flip-div .bg-image {
-            padding-bottom: 120%;
-        }
-        @media (min-width: 768px) {
-            .flip-div,
-            .flip-div .bg-image {
-                padding-bottom: 167%;
-            }
-        }
-        .flip-div,
-        .flip-div .bg-image {
-            padding-bottom: 100%;
-        }
-        .flip-div.flipped .front,
-        .flip-div.flipped .front {
-            -ms-transform: rotateY(180deg);
-            -webkit-transform: rotateY(180deg);
-            transform: rotateY(180deg);
-        }
-        .flip-div.flipped .back,
-        .flip-div.flipped .back {
-            -ms-transform: rotateY(0deg);
-            -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
-        }
-        .flip-div .back,
-        .flip-div .back {
-            -ms-transform: rotateY(-180deg);
-            -webkit-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
-        }
-        .flip-div .front,
-        .flip-div .back {
-            -ms-transition: transform 0.8s;
-            -webkit-transition: transform 0.8s;
-            transition: transform 0.8s;
-            -ms-backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
     </style>
 @stop
 
 @section('global-body')
     @include('pianote.sales.partials._nav')
 
-    <section class="py-20 text-center" style="background:#F1F7FE;">
+    <section class="px-4 py-10 sm:py-14 lg:py-16 text-center" style="background:#F1F7FE;">
         <div class="mx-auto">
             <h2 class="leading-tight mb-2">
                 You’ve done the hard part.<br>
                 <strong>Keep the momentum going!</strong>
             </h2>
-            <h5 class=" text-pianote uppercase"><strong>GET UNLIMITED PIANO LESSONS FOR A YEAR + 5 FREE BONUSES</strong></h5>
+            <h5 class=" text-pianote uppercase"><strong>GET UNLIMITED PIANO LESSONS FOR A YEAR + 10 FREE BONUSES</strong></h5>
             <div class="w-full mx-auto my-8 px-3" style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full reset-on-close bg-black" src="//player.vimeo.com/video/754886689" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                    <iframe class="absolute w-full h-full reset-on-close bg-black" src="//player.vimeo.com/video/867234191" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
             </div>
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">
@@ -177,7 +135,7 @@
                     <span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-pianote"></i></span>
                     Access to singing, guitar, or drum lessons included for as long as you remain a member (try them yourself or share with a friend)</li>
             </ul>
-            <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">
+            <p class="leading-relaxed px-3 mt-5 text-left" style="width: 100%; max-width: 700px;">
                 Plus…
                  <br><br>
                 We’ll discount your first year by $63 as a special thank you, and you’ll have 90 days to try it risk-free.
@@ -186,9 +144,6 @@
                 <br><br>
                 So click below and keep your progress going!
             </p>
-{{--                        <div class="px-3 md:px-0">--}}
-{{--                            <a class="join blue w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">SEE THE DEAL</a>--}}
-{{--                        </div>--}}
         </div>
     </section>
 
@@ -271,8 +226,8 @@
         'CTA' => 'CLAIM YOUR OFFER',
     'bgColor' => 'background:linear-gradient(to bottom, #01050F 66%, #07132C);',
     'topImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-annual-2w-card.png',
-    'subHeader' => '<strong><span class="text-musora">SAVE 26%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 4 FREE BONUSES & 6 FREE POSTERS.',
-    'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&redirect=/order&locked=true&promo-code=special',
+    'subHeader' => '<strong><span class="text-musora">SAVE 26%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 10 FREE BONUSES.',
+    'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&redirect=/order&locked=true&promo-code=special-discount',
     'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
     ])
 

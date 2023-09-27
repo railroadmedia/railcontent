@@ -440,7 +440,12 @@
                 </tr>
                 <tr style="background-color:transparent!important;">
                     <td class="rounded-b-xl">Total</td>
-                    <td class="rounded-b-xl"><s class="opacity-50">${{ floatval($productPrices['stickbag']->price) }}</s> <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong></td>
+                    <td class="rounded-b-xl">
+                        @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
+                            <s class="opacity-50">${{ floatval($productPrices['stickbag']->price) }}</s>
+                        @endif
+                        <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
+                    </td>
                     <td class="rounded-b-xl"><strong>$104</strong></td>
                     <td class="rounded-b-xl"><strong>$200</strong></td>
                 </tr>
@@ -593,7 +598,9 @@
 
                 <div class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl mx-auto">
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                        <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >Save 34%</p>
+                        @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
+                            <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >Save 34%</p>
+                        @endif
                         <a href="/ecommerce/add-to-cart?locked=true&product-array=stickbag:1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
                             <div class="bg-white px-3 py-5 md:py-7">
                                 <h4 class="mb-2 sm:mb-3"><strong>StickBag Only</strong></h4>
@@ -604,8 +611,16 @@
                                         alt="learn playing image"
                                 >
                                 <br>
-                                <h4 class="inline-block leading-tight"><s>${{ floatval($productPrices['stickbag']->price) }}</s> <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong></h4>
-                                <p class="text-sm"><em>Save 34%. One-time payment.</em></p>
+                                <h4 class="inline-block leading-tight">
+                                    @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
+                                        <s>${{ floatval($productPrices['stickbag']->price) }}</s>
+                                    @endif
+                                    <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong></h4>
+                                <p class="text-sm"><em>
+                                        @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
+                                            Save 34%.
+                                        @endif
+                                        One-time payment.</em></p>
                                 <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Select</div>
                                 <p class="text-sm mb-1.5">1 Drumeo StickBag<sup>NEW</sup></p>
                                 <p class="text-sm mb-1.5">1 Brushes Sleeve</p>
@@ -613,6 +628,8 @@
                             </div>
                         </a>
                     </div>
+
+                    @if( Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 1, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now() )
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         <img class="h-16 absolute top-0 right-0 z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/shop/stickbag/free-shipping-icon.svg">
                         <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-drumeo uppercase" >LAUNCH SPECIAL</p>
@@ -658,6 +675,7 @@
                             </div>
                         </a>
                     </div>
+                    @endif
                 </div>
             @else
                 <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>
