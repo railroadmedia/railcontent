@@ -132,6 +132,7 @@ class SyncOrdersToShopify extends Command
         $fresh = $this->getIsFresh();
         $limit = $this->getLimit();
         $startingOrderId = $this->getStartingOrderId();
+        $endingOrderID = $startingOrderId + $limit;
         $tableHeader = [
             "Order ID",
             "Order Item ID",
@@ -157,7 +158,8 @@ class SyncOrdersToShopify extends Command
             // so create query builders for each of those
             $orderItemQB = new QueryBuilder($this->entityManager);
             $orderItemFulfillmentQB = new QueryBuilder($this->entityManager);
-            $qb->where($qb->expr()->gt('entity.id', ':startingOrderId'))
+            $qb->where($qb->expr()->gte('entity.id', ':startingOrderId'))
+                ->andWhere($qb->expr()->lt('entity.id', ':endingOrderId'))
                 ->andWhere(
                     $qb->expr()->orX(
                         $qb->expr()->isNull("entity.shopifyId"),
@@ -191,7 +193,8 @@ class SyncOrdersToShopify extends Command
                     )
                 )
                 ->setParameter("lastSyncAt", $this->lastSyncAt)
-                ->setParameter('startingOrderId', $startingOrderId);
+                ->setParameter('startingOrderId', $startingOrderId)
+                ->setParameter('endingOrderId', $endingOrderID);
         }
 
         if ($limit) {
