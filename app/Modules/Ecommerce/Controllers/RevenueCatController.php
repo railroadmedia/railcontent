@@ -223,45 +223,40 @@ class RevenueCatController extends Controller
                     break;
                 }
 
-                //store type
-                $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
+                if (!config('shopify.enabled')) {
+                    //store type
+                    $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
 
-                //new productId
-                $productId = $this->getProductId($data['event']['new_product_id']);
+                    //new productId
+                    $productId = $this->getProductId($data['event']['new_product_id']);
 
-                //get Musora product
-                $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId);
+                    //get Musora product
+                    $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId);
 
-                //get RevenueCat subscription
-                $currentRevenueCatSubscription =
-                    $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
+                    //get RevenueCat subscription
+                    $currentRevenueCatSubscription =
+                        $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
 
-                //check if Musora subscription for new product exists
-                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
-                if (!$musoraSubscription) {
-                    //create Musora subscription
-                    $musoraSubscription = $this->subscriptionService->createSubscription(
+                    //check if Musora subscription for new product exists
+                    $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
+                    if (!$musoraSubscription) {
+                        //create Musora subscription
+                        $musoraSubscription = $this->subscriptionService->createSubscription(
+                            $user->id,
+                            $data['event']['expiration_at_ms'],
+                            $musoraProduct->first(),
+                            $type,
+                            $data['event']['purchased_at_ms']
+                        );
+                    }
+
+                    //Assign user product
+                    $this->userProductService->assignUserProduct(
                         $user->id,
-                        $data['event']['expiration_at_ms'],
-                        $musoraProduct->first(),
-                        $type,
-                        $data['event']['purchased_at_ms']
+                        $musoraSubscription->product_id,
+                        $musoraSubscription->paid_until
                     );
                 }
-
-                //Assign user product
-                $this->userProductService->assignUserProduct(
-                    $user->id,
-                    $musoraSubscription->product_id,
-                    $musoraSubscription->paid_until
-                );
-
-                /*
-                 *  @todo Shopify:
-                 *      - update membership times for old product
-                 *  @todo CustomerIO:
-                 *      - Update user attributes
-                 */
 
                 // code...
                 break;
