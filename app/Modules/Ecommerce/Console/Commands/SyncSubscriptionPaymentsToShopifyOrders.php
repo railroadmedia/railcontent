@@ -102,6 +102,7 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
         $fresh = $this->getIsFresh();
         $limit = $this->getLimit();
         $startingSubscriptionPaymentId = $this->getStartingSubscriptionPaymentId();
+        $endingSubscriptionPaymentId = $startingSubscriptionPaymentId + $limit;
         $tableHeader = [
             "Subscription Payment ID",
             "Payment ID",
@@ -121,6 +122,7 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
         $paymentQB = new QueryBuilder($this->entityManager);
 
         $qb->where($qb->expr()->gte('entity.id', ':startingSubscriptionPaymentId'))
+            ->andWhere($qb->expr()->lt('entity.id', ':endingSubscriptionPaymentId'))
             ->andWhere(
                 $qb->expr()->in(
                     "entity.payment",
@@ -137,6 +139,7 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
                 )
             )
             ->setParameter("startingSubscriptionPaymentId", $startingSubscriptionPaymentId)
+            ->setParameter("endingSubscriptionPaymentId", $endingSubscriptionPaymentId)
             ->setParameter("paidStatus", "paid")
             ->setParameter("initialOrderType", "initial_order");
 
