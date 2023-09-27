@@ -42,6 +42,10 @@ class SubscriptionService
     public function syncSubscriptionData(UserAccessPermissionsCollection $userAccessPermissions): void
     {
         $user = $this->userService->getByIdOrNull($userAccessPermissions->getUserId());
+        if (!$user->shopify_id) {
+            // User doesn't have any subscriptions from Shopify to be synced.
+            return;
+        }
         $subscriptions = $this->recharge->getSubscriptions($user->shopify_id);
         $shopifyVariantIds = $subscriptions->pluck('shopify_variant_id')->toArray();
         $productLookup = $this->productService->getProductsByShopifyIds($shopifyVariantIds)
