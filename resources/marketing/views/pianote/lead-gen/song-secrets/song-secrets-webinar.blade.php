@@ -247,6 +247,9 @@
         .image-modal-arrow-right::before {
             content: "\f105";
         }
+        .join.white {
+            color:#f61a30;
+        }
     </style>
 @stop()
 
@@ -262,14 +265,14 @@
     ])
 
 
-    <header class="px-5 sm:px-6 pt-10 pb-96 sm:py-14 lg:py-20 text-white relative" style="background:linear-gradient(to bottom, #a21083 50%, #f5f8fb 51%);">
+    <header class="px-5 sm:px-6 pt-10 pb-80 sm:py-14 lg:py-20 text-white relative" style="background:linear-gradient(to bottom, #a21083 50%, #f5f8fb 51%);">
         <div class="inset-0 hidden sm:block absolute bg-center bg-cover z-0" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/header-image.png');"></div>
-        <div class="inset-0 block sm:hidden absolute bg-center bg-cover z-0" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/header-image-m.png');"></div>
+        <div class="inset-0 block sm:hidden absolute bg-bottom bg-cover z-0" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/header-image-m.png');"></div>
         <div class="container max-w-4xl mx-auto relative z-10">
             <div class="w-full sm:w-1/2 text-center lg:text-left">
                 <h3 class="font-bebas tracking-widest mb-1 sm:mb-0 lg:mb-3">SONG SECRETS</h3>
-                <h3 class="leading-tight"><strong>The Fastest Way to Play Popular Songs on the Piano</strong></h3>
-                <p class="leading-normal text-sm my-3 sm:my-5"><em>Proven strategies to help you play the songs you love on the piano - <u>no matter what your age or experience level!</u> It’s never too late to play the songs you love on the piano. I’ll show you how!</em></p>
+                <h3 class="leading-tight"><strong>The Fastest Way to Play <br class="sm:hidden"> Popular Songs on the Piano</strong></h3>
+                <p class="leading-normal text-sm my-3 sm:my-5 max-w-xs sm:max-w-full"><em>Proven strategies to help you play the songs you love on the piano - <u>no matter what your age or experience level!</u> It’s never too late to play the songs you love on the piano. I’ll show you how!</em></p>
                 <div @click="enroll = true;" class="join white medium">ENROLL NOW FOR FREE</div>
             </div>
         </div>
@@ -324,35 +327,35 @@
 
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
-        <div class="container max-w-4xl mx-auto -mt-36 sm:-mt-64 lg:-mt-96">
+        <div class="container max-w-5xl mx-auto -mt-36 sm:-mt-64 lg:-mt-96">
             <h3 class="leading-tight mb-7"><strong>So how is this different?</strong></h3>
             <img class="rounded-xl overflow-hidden cursor-pointer h-44 sm:h-96" data-open="trailer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/trailer-thumb.jpg"></img>
            <br>
-            <img class="h-9 sm:h-11 my-5 sm:my-8" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/dear-fellow.png"></img>
+            <img class="h-9 sm:h-11 my-5 sm:my-8" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/dear-fellow.png"></img>
             <div class="flex flex-wrap text-left mb-5 sm:mb-8">
                 <div class="w-full sm:w-1/2 lg:w-1/4 sm:px-4 lg:px-2 mb-4 lg:mb-0">
-                    <div class="bg-white rounded-xl shadow-lg p-5">
-                        <img class="h-12 mb-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/nervous-icon.svg"></img>
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <img class="h-12 mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/nervous-icon.svg"></img>
                         <p class="leading-normal text-sm">If you’re <strong class="font-black">nervous</strong> because you tried learning in the past but had a bad experience…</p>
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/4 sm:px-4 lg:px-2 mb-4 lg:mb-0">
-                    <div class="bg-white rounded-xl shadow-lg p-5">
-                        <img class="h-12 mb-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/struggling-icon.svg"></img>
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <img class="h-12 mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/struggling-icon.svg"></img>
                         <p class="leading-normal text-sm">If you’re <strong class="font-black">struggling</strong> to figure out how to make progress on this instrument…</p>
 
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/4 sm:px-4 lg:px-2 mb-4 sm:mb-0">
-                    <div class="bg-white rounded-xl shadow-lg p-5">
-                        <img class="h-12 mb-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/overwhelmed-icon.svg"></img>
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <img class="h-12 mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/overwhelmed-icon.svg"></img>
                         <p class="leading-normal text-sm">If you’re <strong class="font-black">overwhelmed</strong> by the traditional approach of note reading and just want to have fun playing the songs you love…</p>
 
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/4 sm:px-4 lg:px-2 mb-4 sm:mb-0">
-                    <div class="bg-white rounded-xl shadow-lg p-5">
-                        <img class="h-12 mb-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/skeptical-icon.svg"></img>
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <img class="h-12 mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/skeptical-icon.svg"></img>
                         <p class="leading-normal text-sm">If you’re <strong class="font-black">skeptical</strong> of the promises made by so many online courses and videos…</p>
 
                     </div>
@@ -424,6 +427,9 @@
                             breakpoints: {
                                 1023: {
                                     perPage: 1.5,
+                                },
+                                639: {
+                                    perPage: 1,
                                 },
                             },
                         }).mount()
@@ -526,32 +532,30 @@
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2><strong>Still have questions?</strong></h2>
-            <div class="max-w-6xl mt-4 sm:mt-10 px-4">
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "So how does this work?",
-                "desc" => "This is a webinar. When you click “ENROLL NOW” you’ll be able to choose a time and date that works for you! The video lessons is not live, but you’ll be able to ask questions and get answers from our team of moderators who will be in the chat.",
-                ])
+            <h2 class="mb-4 sm:mb-10"><strong>Still have questions?</strong></h2>
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "So how does this work?",
+            "desc" => "This is a webinar. When you click “ENROLL NOW” you’ll be able to choose a time and date that works for you! The video lessons is not live, but you’ll be able to ask questions and get answers from our team of moderators who will be in the chat.",
+            ])
 
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "What will I learn?",
-                "desc" => "You’ll get the secrets and tips to play popular songs on the piano. During the 60 minutes, Lisa will break down how to use chords and lead sheets to sound beautiful. Think of it as your first piano lesson for a new way of playing.",
-                ])
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "What will I learn?",
+            "desc" => "You’ll get the secrets and tips to play popular songs on the piano. During the 60 minutes, Lisa will break down how to use chords and lead sheets to sound beautiful. Think of it as your first piano lesson for a new way of playing.",
+            ])
 
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "Do I have to watch it all at once?",
-                "desc" => "When you register, you’ll be able to choose your preferred date and time. We’d encourage you to pick a time that will allow you to watch the entire thing. During that time, you won’t be able to pause or rewind it. But if you can’t make it through the whole thing, that’s ok! You’ll be able to replay the webinar any time and you can pause or rewind during the replay.",
-                ])
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "Do I have to watch it all at once?",
+            "desc" => "When you register, you’ll be able to choose your preferred date and time. We’d encourage you to pick a time that will allow you to watch the entire thing. During that time, you won’t be able to pause or rewind it. But if you can’t make it through the whole thing, that’s ok! You’ll be able to replay the webinar any time and you can pause or rewind during the replay.",
+            ])
 
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "What are you selling?",
-                "desc" => "Our goal is to inspire and educate piano players around the world. The webinar will introduce you to Lisa’s method of playing which doesn’t require years of practice and reading music. You’ll learn a lot just from watching. Then, at the end, if you decide this style of learning is right for you, Lisa will let you know about her online learning platform that uses this style. There’s absolutely no obligation.",
-                ])
-            </div>
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "What are you selling?",
+            "desc" => "Our goal is to inspire and educate piano players around the world. The webinar will introduce you to Lisa’s method of playing which doesn’t require years of practice and reading music. You’ll learn a lot just from watching. Then, at the end, if you decide this style of learning is right for you, Lisa will let you know about her online learning platform that uses this style. There’s absolutely no obligation.",
+            ])
         </div>
     </section>
 
