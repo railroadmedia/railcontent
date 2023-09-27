@@ -236,7 +236,7 @@
                 + 2 NEW follow-up packs with Domino<br>
                 (and 3 more bonuses!)
             </h2>
-            <h5 class=" text-drumeo uppercase">+ exclusive masterclass with Domino (and 3 more bonuses!)</h5>
+            <h5 class=" text-drumeo uppercase"></h5>
             <div class="w-full mx-auto my-8 px-3" style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
                     <iframe class="absolute w-full h-full reset-on-close bg-black" src="//player.vimeo.com/video/754886689" frameborder="0" allowfullscreen allow="autoplay"></iframe>
@@ -270,7 +270,7 @@
                 </li>
             </ul>
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">
-                Plus, you’ll have FREE priority registration for any future 30-Day Drummer events like this one (we’ll be doing more, promise). <br><br>
+                <strong class="text-drumeo">Plus,</strong> you’ll have FREE priority registration for any future 30-Day Drummer events like this one (we’ll be doing more, promise). <br><br>
                 And we’ll also knock $40 off your membership for being a dedicated 30-Day Drummer student (because hey, why not?). <br><br>
                 <b>But heads up:</b> This offer is only available until March 31, 2023. <br><br>
                 Click below to get started and keep crushing it on the drums for the next year! <br><br>
@@ -330,13 +330,13 @@
             <div class="flex flex-wrap text-left mx-auto my-6 sm:my-9 text-white">
                 <div class="w-1/2 pr-2 sm:px-2">
                     <div class="rounded-xl overflow-hidden" style="background-color:#071023;">
-                        <img class="transition-all" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-coaches2.jpg" alt="day1 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
+                        <img class="transition-all" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/september/fills.png" alt="day1 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
                         <p class="p-2 sm:p-5 text-sm">Still stumbling in and out of drum fills? In 10-Day Fills, Domino will help you play seamless transitions in and out of popular drum fills. You’ll play along with her every day for 10 days until you can play fills with excellent timing & feel.</p>
                     </div>
                 </div>
                 <div class="w-1/2 sm:px-2">
                     <div class="rounded-xl overflow-hidden" style="background-color:#071023;">
-                        <img class="transition-all" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-coaches2.jpg" alt="day 30 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
+                        <img class="transition-all" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/september/ghost-notes.png" alt="day 30 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
                         <p class="p-2 sm:p-5 text-sm">Challenge your coordination and feel by playing tasty ghost notes with REAL music. Taught in the same format as 30-Day Drummer, you’ll play along with Domino every day for 10 days until your ghost notes feel effortless.</p>
                     </div>
                 </div>
@@ -427,17 +427,17 @@
     @php
         $bonuses = [
                         [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/30DD.jpg',
+                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/september/fills-card.png',
                         'title' => "10 Day Fills",
                         'description' => 'This is an exclusive event for 30-Day Drummer students so you can launch into the next phase of your drumming with enthusiasm.',
                         ],
                         [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/30DD.jpg',
+                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/september/ghost-notes-card.png',
                         'title' => "10 Day Ghost Notes",
                         'description' => 'This is an exclusive event for 30-Day Drummer students so you can launch into the next phase of your drumming with enthusiasm.',
                         ],
                         [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/stickbag/stickbag-cart-image.jpg',
+                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/september/stick-card.png',
                         'title' => "Drumeo StickBag",
                         'description' => 'Protect your tools & keep your kit tight. All your tools in one place, safe and sound.',
                             'price' => floatval($productPrices['stickbag']->price),
@@ -459,7 +459,7 @@
         'CTA' => 'CLAIM YOUR OFFER',
     'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-annual-2w-card.png',
     'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
-    'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[todo]=1&products[todo]=1&products[Drumeo-VaterSticks]=1&locked=true&promo-code=special',
+    'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=1&locked=true&promo-code=special',
     'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
     ])
 
