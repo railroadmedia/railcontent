@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Console\Commands\Traits\SyncsToShopify;
-use App\Modules\Content\Models\Permission;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -16,7 +15,6 @@ use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\RepositoryBase;
 use Signifly\Shopify\REST\Resources\ApiResource;
-use Signifly\Shopify\REST\Resources\MetafieldResource;
 use Signifly\Shopify\REST\Resources\ProductResource;
 use Signifly\Shopify\REST\Resources\VariantResource;
 use Signifly\Shopify\Shopify;
@@ -25,6 +23,15 @@ class SyncProductsToShopify extends Command
 {
     use SyncsToShopify;
 
+    private const METAFIELD_NAMESPACE = "products";
+    private const METAFIELD_KEY = "_id";
+    private const METAFIELD_TYPE = "number_integer";
+    private const SIZE_OPTION_NAME = "Size";
+    private const SIZE_OPTION_KEY = "option1";
+
+    // running collection of the Shopify IDs returned in this run, so we can record it
+    private const SIZE_STRINGS = ["XS", "S", "M", "L", "XL", "XXL", "XXXL", "XXXXL"];
+    // products that have been synced as part of a group, and should be skipped when encountered in the loop
     /**
      * The name and signature of the console command.
      *
@@ -41,29 +48,27 @@ class SyncProductsToShopify extends Command
      * @var string
      */
     protected $description = 'Sync our products up to Shopify';
-
     protected Shopify $shopify;
     protected ProductRepository $productRepository;
     protected EcommerceEntityManager $entityManager;
-
-    // running collection of the Shopify IDs returned in this run, so we can record it
     protected Collection $shopifyIds;
-    // products that have been synced as part of a group, and should be skipped when encountered in the loop
     protected Collection $productsToSkip;
-
     // rows for displaying the results in a table
     protected array $tableRows;
 
     /**
      * Execute the console command.
      *
-     * @param Shopify $shopify
-     * @param ProductRepository $productRepository
-     * @param EcommerceEntityManager $entityManager
+     * @param  Shopify  $shopify
+     * @param  ProductRepository  $productRepository
+     * @param  EcommerceEntityManager  $entityManager
      * @return int
      */
-    public function handle(Shopify $shopify, ProductRepository $productRepository, EcommerceEntityManager $entityManager): int
-    {
+    public function handle(
+        Shopify $shopify,
+        ProductRepository $productRepository,
+        EcommerceEntityManager $entityManager
+    ): int {
         $this->shopify = $shopify;
         $this->productRepository = $productRepository;
         $this->entityManager = $entityManager;
@@ -91,7 +96,9 @@ class SyncProductsToShopify extends Command
 
         // STEP 2: get all the products that need to be synced
         $limit = $this->getLimit();
-        $products = is_null($limit) ? $this->getEcommerceEntities($fresh) : $this->getEcommerceEntities($fresh)->take($limit);
+        $products = is_null($limit) ? $this->getEcommerceEntities($fresh) : $this->getEcommerceEntities($fresh)->take(
+            $limit
+        );
 
         $this->info("Found {$products->count()} products to be synced");
 
@@ -100,7 +107,6 @@ class SyncProductsToShopify extends Command
 
         $simulatedShopifyId = 0;
         $products->each(function (Product $product) use ($fresh, $bar, $simulate, $location, &$simulatedShopifyId) {
-
             // STEP 3: check if this product was already completed as part of a group
             if ($this->productsToSkip->contains($product->getId())) {
                 $bar->advance();
@@ -114,7 +120,7 @@ class SyncProductsToShopify extends Command
                 $isCreating = $fresh || is_null($product->getShopifyId());
             } else {
                 $isAllNew = $options
-                    ->filter(fn (Product $productOption) => !is_null($productOption->getShopifyId()))
+                    ->filter(fn(Product $productOption) => !is_null($productOption->getShopifyId()))
                     ->isEmpty();
                 $isCreating = $fresh || $isAllNew;
             }
@@ -135,7 +141,7 @@ class SyncProductsToShopify extends Command
                     } else {
                         // this product of ours may not yet be in shopify, so get the first in the group that has a shopify id
                         $existingVariant = $options
-                            ->filter(fn (Product $productOption) => !is_null($productOption->getShopifyId()))
+                            ->filter(fn(Product $productOption) => !is_null($productOption->getShopifyId()))
                             ->first();
                         $variant = $this->shopify->getVariant($existingVariant->getShopifyId());
                     }
@@ -158,14 +164,18 @@ class SyncProductsToShopify extends Command
                             $this->shopify->updateVariant($product->getShopifyId(), $variantData[0]);
                         } else {
                             // we have multiple, so update or create each one
-                            foreach($variantData as $variantDatum) {
+                            foreach ($variantData as $variantDatum) {
                                 if (array_key_exists("id", $variantDatum)) {
                                     $this->shopify->updateVariant($variantDatum["id"], $variantDatum);
                                 } else {
-                                    $variantResource = $this->shopify->createVariant($productResource->getAttributes()["id"], $variantDatum);
+                                    $variantResource = $this->shopify->createVariant(
+                                        $productResource->getAttributes()["id"],
+                                        $variantDatum
+                                    );
                                     $inventoryItemId = $variantResource->getAttributes()["inventory_item_id"];
                                     // we can now set the variant's inventory
-                                    $this->shopify->adjustInventoryLevel($inventoryItemId,
+                                    $this->shopify->adjustInventoryLevel(
+                                        $inventoryItemId,
                                         $location->getAttributes()["id"],
                                         $product->getStockAvailability()
                                     );
@@ -200,68 +210,103 @@ class SyncProductsToShopify extends Command
     }
 
     /**
-     * Record the shopify ID of the variant on our Product entry,
-     * and return the formatted array to print out in our display table
-     *
-     * @param VariantResource $variantData
-     * @param Product|null $product
-     * @return array
-     * @throws OptimisticLockException
-     * @throws \Doctrine\ORM\Exception\ORMException
+     * @inheritDoc
      */
-    private function recordShopifyId(VariantResource $variantData, ?Product $product): array
+    protected function getLimit(): ?int
     {
-        $shopifyId = $variantData->id;
-        $this->shopifyIds->push($shopifyId);
+        return $this->option("limit");
+    }
 
-        // no product is given if this variant data is one of many variants for a product
-        if (is_null($product)) {
-            // get the metafield with our ID record
-            $variantMetaFields = $this->shopify->getVariantMetafields($shopifyId, ["namespace" => self::METAFIELD_NAMESPACE, "key" => self::METAFIELD_KEY]);
-            $productId = $variantMetaFields->first()?->getAttributes()["value"] ?? null;
-            try {
-                $product = $this->productRepository->findProduct($productId, [0,1]);
-            } catch (NonUniqueResultException $e) {
-                $this->error(sprintf("Failed to retrieve Product for ID %s, from Shopify metafield: %s", $shopifyId, $e->getMessage()));
-                return ["ERROR", $variantData->sku, $shopifyId];
-            }
+    /**
+     * Get all the Products that make up the related options for this Product,
+     * sorted to have the latest update first.
+     * If there are no other related products, it will be empty.
+     *
+     * @param  Product  $product
+     * @return Collection<Product>
+     * @throws ORMException
+     */
+    private function getProductOptions(Product $product): Collection
+    {
+        $products = collect();
+        $searchSkus = $this->buildProductSizeSkus($product);
+
+        if ($searchSkus->isEmpty()) {
+            return $products;
         }
 
-        if (is_null($product)) {
-            $this->error(sprintf("Product could not be found for ID %s, from Shopify metafield", $shopifyId));
-            return ["ERROR", $variantData->sku, $shopifyId];
+        // use the searchSkus to find the other products
+        $relatedProducts = $this->productRepository->bySkus($searchSkus->toArray());
+        if (count($relatedProducts)) {
+            $products->push($product);
+            $products = $products->merge($relatedProducts);
+
+            // sort the products so that the latest update is first
+            $products = $products->sort(function (Product $product1, Product $product2) {
+                return $product1->getUpdatedAt() < $product2->getUpdatedAt();
+            });
+
+            // record the IDs of these products, so we know to skip them later because they're already done
+            $this->productsToSkip->push(...$products->map(fn(Product $pr) => $pr->getId()));
+        }
+        return $products;
+    }
+
+    /**
+     * Build up a collection of SKUs that would match for other sizes of this product,
+     * if the product looks like a size option. If not, the collection will be empty.
+     *
+     * @param  Product  $product
+     * @return Collection
+     */
+    private function buildProductSizeSkus(Product $product): Collection
+    {
+        $SEPARATOR = "-";
+        // get the sku of the product and see if it ends with a size
+        $sku = $product->getSku();
+        $sizes = collect(self::SIZE_STRINGS);
+        $skuEnd = Str::afterLast($sku, $SEPARATOR);
+
+        // sku's are inconsistently cased, so analyze the end string to determine if we should transform our options
+        if (ctype_lower($skuEnd)) {
+            $sizes->transform(fn($size) => Str::lower($size));
         }
 
-        if ($product->getShopifyId() !== $shopifyId) {
-            $product->setShopifyId($shopifyId);
-            $this->entityManager->persist($product);
-            $this->entityManager->flush();
+        if ($sizes->doesntContain($skuEnd)) {
+            return collect();
         }
 
-        return [$product->getId(), $variantData->sku, $shopifyId];
+        // it looks like it's probably a size, so build up the sku for the other size options
+        $skuBase = Str::beforeLast($sku, $SEPARATOR);
+
+        return $sizes
+            ->filter(fn($size) => $size !== $skuEnd)
+            ->transform(fn($size) => $skuBase.$SEPARATOR.$size);
     }
 
     /**
      * Build up the data structure to send to Shopify, depending on product type and whether it has options or not
      *
-     * @param Product $product
-     * @param ApiResource $location
-     * @param bool $isCreating
-     * @param Collection $options
+     * @param  Product  $product
+     * @param  ApiResource  $location
+     * @param  bool  $isCreating
+     * @param  Collection  $options
      * @return array
      * @throws Exception
      */
-    private function buildPostData(Product $product, ApiResource $location, bool $isCreating, Collection $options): array
-    {
-        if ($product->getType() === Product::TYPE_DIGITAL_SUBSCRIPTION || $product->getType() === Product::TYPE_DIGITAL_ONE_TIME) {
-
+    private function buildPostData(
+        Product $product,
+        ApiResource $location,
+        bool $isCreating,
+        Collection $options
+    ): array {
+        if ($product->getType() === Product::TYPE_DIGITAL_SUBSCRIPTION || $product->getType(
+            ) === Product::TYPE_DIGITAL_ONE_TIME) {
             if ($isCreating) {
                 return $this->createProductData($product, $location->getAttributes()["id"]);
             }
             return $this->updateProductData($product);
-
-        } elseif($product->getType() === Product::TYPE_PHYSICAL_ONE_TIME){
-
+        } elseif ($product->getType() === Product::TYPE_PHYSICAL_ONE_TIME) {
             if ($isCreating) {
                 if ($options->isNotEmpty()) {
                     return $this->createProductDataWithOptions($options, $location->getAttributes()["id"]);
@@ -273,64 +318,44 @@ class SyncProductsToShopify extends Command
                 }
                 return $this->updateProductData($product);
             }
-
         } else {
-            throw new Exception(sprintf("Unknown product type %s. Expected types are: %s",
-                $product->getType(), implode(", ", [Product::TYPE_DIGITAL_ONE_TIME,
-                    Product::TYPE_DIGITAL_SUBSCRIPTION, Product::TYPE_PHYSICAL_ONE_TIME])));
+            throw new Exception(
+                sprintf(
+                    "Unknown product type %s. Expected types are: %s",
+                    $product->getType(),
+                    implode(", ", [
+                        Product::TYPE_DIGITAL_ONE_TIME,
+                        Product::TYPE_DIGITAL_SUBSCRIPTION,
+                        Product::TYPE_PHYSICAL_ONE_TIME
+                    ])
+                )
+            );
         }
     }
 
     /**
      * Create the data to post to Shopify to create a simple product with no options or extra variants
      *
-     * @param Product $product
-     * @param int $locationId
+     * @param  Product  $product
+     * @param  int  $locationId
      * @return array
      */
     private function createProductData(Product $product, int $locationId): array
     {
-        $postData = $this->formatProductData($product, true, true);
+        $postData = $this->formatProductData($product, true);
         $postData["variants"] = [$this->createVariantData($product, $locationId, true, null)];
-        return $postData;
-    }
-
-    /**
-     * Build up the payload data to update a simple product with no options or extra variants
-     *
-     * @param Product $product
-     * @return array
-     */
-    private function updateProductData(Product $product): array
-    {
-        // first, we need to get the existing product from Shopify, so we know what to update
-        $shopifyVariantId = $product->getShopifyId();
-        $shopifyVariant = $this->shopify->getVariant($shopifyVariantId);
-        $shopifyProductId = $shopifyVariant->getAttributes()["product_id"];
-        $shopifyProduct = $this->shopify->getProduct($shopifyProductId);
-
-        // build up the common data for updating the product
-        $postData = $this->formatUpdateProductData($product, $shopifyProduct);
-
-        // check for changes to the variant, so we know to update it or not
-        $variantChanges = $this->getUpdatedVariantData($product, $shopifyVariant);
-        if (count($variantChanges)) {
-            $postData["variants"][] = $variantChanges;
-        }
-
         return $postData;
     }
 
     /**
      * Build an array with the properly formatted data for a Product
      *
-     * @param Product $product
-     * @param bool $withImage
-     * @param bool $withMetafields
-     * @param Collection|null $allOptions - the collection of alike products that will be options for the product in Shopify
+     * @param  Product  $product
+     * @param  bool  $withImage
+     * @param  Collection|null  $allOptions  - the collection of alike products that will be options for the product in Shopify
      * @return array
      */
-    private function formatProductData(Product $product, bool $withImage, bool $withMetafields, ?Collection $allOptions = null): array
+    private function formatProductData(Product $product, bool $withImage, ?Collection $allOptions = null): array
     {
         $productData = [
             "title" => is_null($allOptions) ? $product->getName() : $this->guessProductNameForOption($allOptions),
@@ -353,206 +378,72 @@ class SyncProductsToShopify extends Command
         }
         $productData["status"] = $status;
 
-        if ($withMetafields) {
-            $productData["metafields"] = $this->buildProductMetafieldsData($product);
-        }
-
         return $productData;
     }
 
     /**
-     * Build an array with the properly formatted data for a Product's metafields
+     * Try to find the commonality in the name of the given products, starting at the beginning and running until they
+     * no longer match across all products. Then use some logic based on our standards to remove specific pieces like
+     * "size", and get back the base name shared with all the given products.
      *
-     * @param Product $product
-     * @return array
+     * @param  Collection<Product>  $productOptions
+     * @return string
      */
-    private function buildProductMetafieldsData(Product $product): array
+    private function guessProductNameForOption(Collection $productOptions): string
     {
-        $metafields = [];
+        $productNames = $productOptions->map(fn(Product $product) => $product->getName());
 
-        $permissionShopifyIds = [];
-        $permissions = $product->getDigitalAccessPermissionNames();
-        $productBrand = $product->getBrand();
+        // go through all the names, and walk through the names character by character, until the matching stops,
+        // so that we can pull out the common name
+        $productNames = $productNames->sort(function (string $productName1, string $productName2) {
+            return strlen($productName1) > strlen($productName2);
+        });
 
-        if ($permissions) {
-            foreach ($permissions as $permissionName) {
-                // we need to find the permission object that has the same name and brand
-                $permissionObjects = Permission::where("brand", $productBrand)->where("name", $permissionName)->get();
+        // break each product name into an array, so we can step through them all
+        $productNames->transform(fn(string $productName) => str_split($productName));
 
-                if ($permissionObjects->count() === 0) {
-                    $this->error(sprintf("No permissions found with name %s for brand %s. Cannot set permission metafields for Product %s.", $permissionName, $productBrand, $product->getId()));
-                    continue;
-                } elseif ($permissionObjects->count() > 1) {
-                    $this->error(sprintf("Multiple permissions found with name %s for brand %s. Cannot set permission metafields for Product %s.", $permissionName, $productBrand, $product->getId()));
-                    continue;
-                }
+        $baseNameArray = $productNames->shift();
 
-                $permission = $permissionObjects->first();
-                // grab the shopify_id from the permission, so we can create a metafield for it
-                $permissionShopifyId = $permission->shopify_id;
+        $commonName = "";
+        foreach ($baseNameArray as $index => $char) {
+            $matchFound = true;
+            $productNames->each(function (array $productName) use ($char, $index, &$matchFound) {
+                $matchFound &= ($productName[$index] === $char);
+            });
 
-                if (is_null($permissionShopifyId)) {
-                    $this->error(sprintf("No shopify_id set on Permission %s.Cannot set permission metafields for Product %s.", $permission->id, $product->getId()));
-                    continue;
-                }
-                $permissionShopifyIds[] = $permissionShopifyId;
-            }
-        }
-        if (!empty($permissionShopifyIds)) {
-            $metafields[] = [
-                "key" => self::PERMISSION_METAFIELD_KEY,
-                "value" => json_encode($permissionShopifyIds),
-                "type" => self::PERMISSION_METAFIELD_TYPE,
-                "namespace" => self::PERMISSION_METAFIELD_NAMESPACE
-            ];
-        }
-
-        return $metafields;
-    }
-
-    /**
-     * Build an array with the properly formatted data to update the given Product
-     *
-     * @param Product $product
-     * @param ProductResource $shopifyProduct
-     * @return array
-     */
-    private function formatUpdateProductData(Product $product, ProductResource $shopifyProduct): array
-    {
-        // check for any applicable changes
-        $productData = collect($this->formatProductData($product, false, false));
-        $shopifyProductAttributes = collect($shopifyProduct->getAttributes())->only($productData->keys());
-
-        $productChanges = $productData->diff($shopifyProductAttributes);
-
-        // make sure we include the product ID so shopify knows to update (and not replace)
-        $postData = ["id" => $shopifyProduct->getAttributes()["id"]];
-        $postData = array_merge($postData, $productChanges->toArray());
-
-        // check for changes to the image, so we don't keep creating new images every time
-        $shopifyImageData = $shopifyProduct->getAttributes()["images"];
-        if (count($shopifyImageData)) {
-            // shopify had one before ...
-            if ($product->getThumbnailUrl()) {
-                // ... and we have one now
-                // DEV NOTE: Shopify hosts the image with its own cdn, so we have to just check if the actual file name is in there
-                if (!Str::of(basename($shopifyImageData[0]["src"]))->contains(basename($product->getThumbnailUrl()))) {
-                    // it's different, so replace it
-                    $image = [
-                        "src" => $product->getThumbnailUrl()
-                    ];
-                } else {
-                    // it's the same, so do nothing
-                    $image = null;
-                }
+            if ($matchFound) {
+                $commonName .= $char;
             } else {
-                // ... but we've removed it, so clear it out
-                $image = [];
-            }
-        } else {
-            // shopify didn't have one before, so add it if we have one now
-            if ($product->getThumbnailUrl()) {
-                $image = ["src" => $product->getThumbnailUrl()];
-            } else {
-                $image = null;
+                break;
             }
         }
 
-        if ($image !== null) {
-            $postData["images"] = $image;
+        // safety check that we actually made a change
+        if ($commonName === implode($baseNameArray)) {
+            return $commonName;
         }
 
-        // check for changes to the metafields, so we don't keep creating new ones every time
-        // DEV NOTE: the metafields are on the variant's product, so we need to get that first
-        $variantData = $this->shopify->getVariant($product->getShopifyId());
-        $shopifyMetafields = $this->shopify->getProductMetafields($variantData->getAttributes()["product_id"]);
-        $metafields = collect($this->buildProductMetafieldsData($product));
-
-        // if we have no changes to any of our metafields, don't bother adding it to the post data
-        $skipMetafields = false;
-        if ($shopifyMetafields->count()) {
-            // shopify had metafields already ...
-            if ($metafields->isNotEmpty()) {
-                // ... and we have some now
-                // clean up the existing metafields response to just use the attributes
-                $shopifyMetafields->transform(fn (MetafieldResource $metafieldResource) => $metafieldResource->getAttributes());
-                /* == PERMISSIONS == */
-                $shopifyPermissionMetaField = $shopifyMetafields->filter(fn (array $metafieldAttributes)
-                    => $metafieldAttributes["namespace"] === self::PERMISSION_METAFIELD_NAMESPACE
-                    && $metafieldAttributes["key"] === self::PERMISSION_METAFIELD_KEY
-                    && $metafieldAttributes["type"] === self::PERMISSION_METAFIELD_TYPE
-                )->first();
-
-                if ($shopifyPermissionMetaField) {
-                    // get our local version, and compare the values
-                    // record the index, so we can remove it from the whole collection of metafields
-                    $localPermissionMetafieldIndex = null;
-                    $localPermissionMetafield = null;
-                    $metafields->filter(function (array $metafieldAttributes, int $index) use (&$localPermissionMetafieldIndex, &$localPermissionMetafield) {
-                        if ($metafieldAttributes["namespace"] === self::PERMISSION_METAFIELD_NAMESPACE
-                            && $metafieldAttributes["key"] === self::PERMISSION_METAFIELD_KEY
-                            && $metafieldAttributes["type"] === self::PERMISSION_METAFIELD_TYPE) {
-                            $localPermissionMetafield = $metafieldAttributes;
-                            $localPermissionMetafieldIndex = $index;
-                            return true;
-                        }
-                        return false;
-                    });
-
-                    if ($localPermissionMetafield) {
-                        // remove the permission metafield, so we can replace it
-                        $metafields->forget($localPermissionMetafieldIndex);
-
-                        if (array_diff(json_decode($shopifyPermissionMetaField["value"]), json_decode($localPermissionMetafield["value"]))) {
-                            // the values don't match, so update it with ours
-                            $metafields->push([
-                                "id" => $shopifyPermissionMetaField["id"],
-                                "namespace" => $localPermissionMetafield["namespace"],
-                                "key" => $localPermissionMetafield["key"],
-                                "type" => $localPermissionMetafield["type"],
-                                "value" => $localPermissionMetafield["value"]
-                            ]);
-                        } else {
-                            // otherwise, it's the same, and we don't need to send it
-                            $skipMetafields = true;
-                        }
-                    }
-                }
-                /* == END PERMISSIONS == */
-
-                // DEV NOTE: if other metafields are supported in the future, handle them here
-
-            } else {
-                // ... but we've removed them, so clear it out
-                $metafields = collect();
-            }
-
-        }
-
-        if (!$skipMetafields) {
-            $postData["metafields"] = $metafields->all();
-        }
-
-
-        return $postData;
+        // clean up the name, since it should have been "foo - L", "bar - Size M", etc. so remove everything before the last "-"
+        return Str::beforeLast($commonName, " -");
     }
 
     /**
      * Create the data required to post a product to Shopify as a variant
      *
-     * @param Product $product
-     * @param int|null $locationId
-     * @param bool $withMetafields
-     * @param string|null $sizeOptionName
-     * @param bool $includeInventory
+     * @param  Product  $product
+     * @param  int|null  $locationId
+     * @param  bool  $withMetafields
+     * @param  string|null  $sizeOptionName
+     * @param  bool  $includeInventory
      * @return array
      */
-    private function createVariantData(Product $product,
-                                       ?int $locationId,
-                                       bool $withMetafields,
-                                       ?string $sizeOptionName,
-                                       bool $includeInventory = true): array
-    {
+    private function createVariantData(
+        Product $product,
+        ?int $locationId,
+        bool $withMetafields,
+        ?string $sizeOptionName,
+        bool $includeInventory = true
+    ): array {
         $variantData = [
             "compare_at_price" => number_format($product->getPrice(), 2),
             "price" => number_format($product->getPrice(), 2),
@@ -588,10 +479,115 @@ class SyncProductsToShopify extends Command
     }
 
     /**
+     * Get the size of the product from its sku, following our conventions
+     *
+     * @param  Product  $product
+     * @return string|null
+     */
+    private function getSizeFromProductSku(Product $product): ?string
+    {
+        // by convention, the sku ends with the size (and an - in front of it), so just grab the end
+        // of the string after the last -
+        $sizeString = Str::afterLast($product->getSku(), "-");
+
+        // make sure this is a valid option, based on our constant of sizes
+        $sizes = collect(self::SIZE_STRINGS);
+
+        // in case the size in the name is inconsistently cased, analyze the end string to determine if we should transform our options
+        if (ctype_lower($sizeString)) {
+            $sizes->transform(fn($size) => Str::lower($size));
+        }
+
+        if ($sizes->contains($sizeString)) {
+            return $sizeString;
+        }
+
+        return null;
+    }
+
+    /**
+     * Build up the payload data to update a simple product with no options or extra variants
+     *
+     * @param  Product  $product
+     * @return array
+     */
+    private function updateProductData(Product $product): array
+    {
+        // first, we need to get the existing product from Shopify, so we know what to update
+        $shopifyVariantId = $product->getShopifyId();
+        $shopifyVariant = $this->shopify->getVariant($shopifyVariantId);
+        $shopifyProductId = $shopifyVariant->getAttributes()["product_id"];
+        $shopifyProduct = $this->shopify->getProduct($shopifyProductId);
+
+        // build up the common data for updating the product
+        $postData = $this->formatUpdateProductData($product, $shopifyProduct);
+
+        // check for changes to the variant, so we know to update it or not
+        $variantChanges = $this->getUpdatedVariantData($product, $shopifyVariant);
+        if (count($variantChanges)) {
+            $postData["variants"][] = $variantChanges;
+        }
+
+        return $postData;
+    }
+
+    /**
+     * Build an array with the properly formatted data to update the given Product
+     *
+     * @param  Product  $product
+     * @param  ProductResource  $shopifyProduct
+     * @return array
+     */
+    private function formatUpdateProductData(Product $product, ProductResource $shopifyProduct): array
+    {
+        // check for any applicable changes
+        $productData = collect($this->formatProductData($product, false));
+        $shopifyProductAttributes = collect($shopifyProduct->getAttributes())->only($productData->keys());
+
+        $productChanges = $productData->diff($shopifyProductAttributes);
+
+        // make sure we include the product ID so shopify knows to update (and not replace)
+        $postData = ["id" => $shopifyProduct->getAttributes()["id"]];
+        $postData = array_merge($postData, $productChanges->toArray());
+
+        // check for changes to the image, so we don't keep creating new images every time
+        $shopifyImageData = $shopifyProduct->getAttributes()["images"];
+        if (count($shopifyImageData)) {
+            // shopify had one before ...
+            if ($product->getThumbnailUrl()) {
+                // ... and we have one now
+                // DEV NOTE: Shopify hosts the image with its own cdn, so we have to just check if the actual file name is in there
+                if (!Str::of(basename($shopifyImageData[0]["src"]))->contains(basename($product->getThumbnailUrl()))) {
+                    // it's different, so replace it
+                    $image = [
+                        "src" => $product->getThumbnailUrl()
+                    ];
+                } else {
+                    // it's the same, so do nothing
+                    $image = null;
+                }
+            } else {
+                // ... but we've removed it, so clear it out
+                $image = [];
+            }
+        } elseif ($product->getThumbnailUrl()) {
+            $image = ["src" => $product->getThumbnailUrl()];
+        } else {
+            $image = null;
+        }
+
+        if ($image !== null) {
+            $postData["images"] = $image;
+        }
+
+        return $postData;
+    }
+
+    /**
      * Get the variant data that needs to be updated for the given product
      *
-     * @param Product $product
-     * @param VariantResource $shopifyVariant
+     * @param  Product  $product
+     * @param  VariantResource  $shopifyVariant
      * @return array
      */
     private function getUpdatedVariantData(Product $product, VariantResource $shopifyVariant): array
@@ -611,14 +607,14 @@ class SyncProductsToShopify extends Command
      * For the given collection of Products, create the data to send to Shopify with the root product, the size options,
      * and a variant for each of our Products, corresponding to a size option.
      *
-     * @param Collection $productOptions
-     * @param int|null $locationId
+     * @param  Collection  $productOptions
+     * @param  int|null  $locationId
      * @return array
      */
     private function createProductDataWithOptions(Collection $productOptions, ?int $locationId): array
     {
         // create the base of the product data, using the first (latest) entry
-        $postData = $this->formatProductData($productOptions->first(), true, true, $productOptions);
+        $postData = $this->formatProductData($productOptions->first(), true, $productOptions);
 
         // sort the options by size
         $productOptions = $this->sortProductOptionsBySize($productOptions);
@@ -627,13 +623,13 @@ class SyncProductsToShopify extends Command
         $postData["options"] = [
             "name" => self::SIZE_OPTION_NAME,
             "values" => [
-                $productOptions->map( fn (Product $product) => $this->getSizeFromProductSku($product))
+                $productOptions->map(fn(Product $product) => $this->getSizeFromProductSku($product))
             ]
         ];
 
         // create a variant for each option
         $variants = [];
-        $productOptions->each( function (Product $product) use ($locationId, &$variants) {
+        $productOptions->each(function (Product $product) use ($locationId, &$variants) {
             $variants[] = $this->createVariantData($product, $locationId, true, self::SIZE_OPTION_KEY);
         });
         $postData["variants"] = $variants;
@@ -642,10 +638,30 @@ class SyncProductsToShopify extends Command
     }
 
     /**
+     * Sort the given collection of products, to be in order of size from smallest to largest
+     *
+     * @param  Collection  $productOptions
+     * @return Collection
+     */
+    private function sortProductOptionsBySize(Collection $productOptions): Collection
+    {
+        return $productOptions->sort(function (Product $product1, Product $product2) {
+            $p1SizeString = $this->getSizeFromProductSku($product1);
+            $p2SizeString = $this->getSizeFromProductSku($product2);
+
+            // now find the index of each size string in our list of sizes, and sort accordingly
+            $p1SizeIndex = array_search($p1SizeString, self::SIZE_STRINGS);
+            $p2SizeIndex = array_search($p2SizeString, self::SIZE_STRINGS);
+
+            return $p1SizeIndex > $p2SizeIndex;
+        });
+    }
+
+    /**
      * Build up the payload data to update a Product with Options (i.e. sizes)
      *
-     * @param Collection $productOptions
-     * @param int|null $locationId
+     * @param  Collection  $productOptions
+     * @param  int|null  $locationId
      * @return array
      */
     private function updateProductDataWithOptions(Collection $productOptions, ?int $locationId): array
@@ -660,7 +676,7 @@ class SyncProductsToShopify extends Command
         // first, we need to get the existing product from Shopify, so we know what to update
         // the latest updated may not be in shopify yet, so find one that has a shopify id
         $shopifyVariantId = $productOptions
-            ->filter(fn (Product $productOption) => !is_null($productOption->getShopifyId()))
+            ->filter(fn(Product $productOption) => !is_null($productOption->getShopifyId()))
             ->first()
             ->getShopifyId();
 
@@ -686,29 +702,43 @@ class SyncProductsToShopify extends Command
         // track so we can check for any missing
         $matchedProductOptions = collect();
         $variantsData = [];
-        $allShopifyVariants->each(function (VariantResource $shopifyVariant) use ($matchedProductOptions, $productOptions, &$variantsData) {
-            // find the corresponding product from our productOptions
-            $shopifyVariantId = $shopifyVariant->getAttributes()["id"];
-            /** @var Product $matched */
-            $matched = $productOptions->filter(fn (Product $product) => $product->getShopifyId() == $shopifyVariantId)->first();
-            if (is_null($matched)) {
-                $this->error(sprintf("Failed to retrieve Product from Shopify metafield: %s. Cannot update variant!", $shopifyVariantId));
-                // continue
-                return;
-            }
-            $matchedProductOptions->push($matched->getId());
+        $allShopifyVariants->each(
+            function (VariantResource $shopifyVariant) use ($matchedProductOptions, $productOptions, &$variantsData) {
+                // find the corresponding product from our productOptions
+                $shopifyVariantId = $shopifyVariant->getAttributes()["id"];
+                /** @var Product $matched */
+                $matched = $productOptions->filter(fn(Product $product) => $product->getShopifyId() == $shopifyVariantId
+                )->first();
+                if (is_null($matched)) {
+                    $this->error(
+                        sprintf(
+                            "Failed to retrieve Product from Shopify metafield: %s. Cannot update variant!",
+                            $shopifyVariantId
+                        )
+                    );
+                    // continue
+                    return;
+                }
+                $matchedProductOptions->push($matched->getId());
 
-            $variantData = collect($this->createVariantData($matched, null, false, self::SIZE_OPTION_KEY, false));
-            // be sure to include the id so that Shopify knows to update and not create
-            $variantsData[] = array_merge(["id" => $matched->getShopifyId()], $variantData->toArray());
-        });
+                $variantData = collect($this->createVariantData($matched, null, false, self::SIZE_OPTION_KEY, false));
+                // be sure to include the id so that Shopify knows to update and not create
+                $variantsData[] = array_merge(["id" => $matched->getShopifyId()], $variantData->toArray());
+            }
+        );
 
         // if we have any new entries in the productOptions that are not yet variants, we need to add them
         $missedProducts = $productOptions
-                            ->filter(fn (Product $product) => $matchedProductOptions->doesntContain($product->getId()));
+            ->filter(fn(Product $product) => $matchedProductOptions->doesntContain($product->getId()));
         if ($missedProducts->isNotEmpty()) {
             $missedProducts->each(function (Product $missedProduct) use ($locationId, &$variantsData) {
-                $variantsData[] = $this->createVariantData($missedProduct, $locationId, true, self::SIZE_OPTION_KEY, false);
+                $variantsData[] = $this->createVariantData(
+                    $missedProduct,
+                    $locationId,
+                    true,
+                    self::SIZE_OPTION_KEY,
+                    false
+                );
             });
         }
 
@@ -716,7 +746,7 @@ class SyncProductsToShopify extends Command
         $sortedVariantsData = collect($this->sortVariantDataBySize($variantsData))->values();
         $sortedVariantsData->transform(function (array $data, int $index) {
             // Shopify starts at position 1, not 0
-            $data["position"] = $index+1;
+            $data["position"] = $index + 1;
             return $data;
         });
         $postData["variants"] = $sortedVariantsData;
@@ -725,10 +755,30 @@ class SyncProductsToShopify extends Command
     }
 
     /**
+     * Sort the given array of variant data, to be in order of size from smallest to largest
+     *
+     * @param  array  $variantData
+     * @return array
+     */
+    private function sortVariantDataBySize(array $variantData): array
+    {
+        return collect($variantData)->sort(function (array $data1, array $data2) {
+            $data1SizeString = $data1[self::SIZE_OPTION_KEY];
+            $data2SizeString = $data2[self::SIZE_OPTION_KEY];
+
+            // now find the index of each size string in our list of sizes, and sort accordingly
+            $data1SizeIndex = array_search($data1SizeString, self::SIZE_STRINGS);
+            $data2SizeIndex = array_search($data2SizeString, self::SIZE_STRINGS);
+
+            return $data1SizeIndex > $data2SizeIndex;
+        })->toArray();
+    }
+
+    /**
      * Simulate sending the post data for the product to Shopify, and record the results in the table rows
      *
-     * @param Product $product
-     * @param array $postData
+     * @param  Product  $product
+     * @param  array  $postData
      * @param $simulatedShopifyId
      * @return void
      */
@@ -741,11 +791,11 @@ class SyncProductsToShopify extends Command
                 if (array_key_exists("metafields", $variantData)) {
                     // try to get our internal Product ID from the metafields
                     $metafields = collect($variantData["metafields"]);
-                    $productIdMetafield = $metafields->filter(fn(array $fields)
-                                            => array_key_exists("namespace", $fields)
-                                                && $fields["namespace"] === self::METAFIELD_NAMESPACE
-                                                && array_key_exists("key", $fields)
-                                                && $fields["key"] === self::METAFIELD_KEY
+                    $productIdMetafield = $metafields->filter(
+                        fn(array $fields) => array_key_exists("namespace", $fields)
+                            && $fields["namespace"] === self::METAFIELD_NAMESPACE
+                            && array_key_exists("key", $fields)
+                            && $fields["key"] === self::METAFIELD_KEY
                     );
                     // we were able to find one, so that means this is a variant for an existing product in Shopify
                     $productId = $productIdMetafield->first()["value"];
@@ -759,6 +809,57 @@ class SyncProductsToShopify extends Command
             // this is a simple product with no options or additional variants
             $this->tableRows[] = [$postData["id"], $postData["sku"] ?? $product->getSku(), ++$simulatedShopifyId];
         }
+    }
+
+    /**
+     * Record the shopify ID of the variant on our Product entry,
+     * and return the formatted array to print out in our display table
+     *
+     * @param  VariantResource  $variantData
+     * @param  Product|null  $product
+     * @return array
+     * @throws OptimisticLockException
+     * @throws \Doctrine\ORM\Exception\ORMException
+     */
+    private function recordShopifyId(VariantResource $variantData, ?Product $product): array
+    {
+        $shopifyId = $variantData->id;
+        $this->shopifyIds->push($shopifyId);
+
+        // no product is given if this variant data is one of many variants for a product
+        if (is_null($product)) {
+            // get the metafield with our ID record
+            $variantMetaFields = $this->shopify->getVariantMetafields(
+                $shopifyId,
+                ["namespace" => self::METAFIELD_NAMESPACE, "key" => self::METAFIELD_KEY]
+            );
+            $productId = $variantMetaFields->first()?->getAttributes()["value"] ?? null;
+            try {
+                $product = $this->productRepository->findProduct($productId, [0, 1]);
+            } catch (NonUniqueResultException $e) {
+                $this->error(
+                    sprintf(
+                        "Failed to retrieve Product for ID %s, from Shopify metafield: %s",
+                        $shopifyId,
+                        $e->getMessage()
+                    )
+                );
+                return ["ERROR", $variantData->sku, $shopifyId];
+            }
+        }
+
+        if (is_null($product)) {
+            $this->error(sprintf("Product could not be found for ID %s, from Shopify metafield", $shopifyId));
+            return ["ERROR", $variantData->sku, $shopifyId];
+        }
+
+        if ($product->getShopifyId() !== $shopifyId) {
+            $product->setShopifyId($shopifyId);
+            $this->entityManager->persist($product);
+            $this->entityManager->flush();
+        }
+
+        return [$product->getId(), $variantData->sku, $shopifyId];
     }
 
     /**
@@ -796,208 +897,8 @@ class SyncProductsToShopify extends Command
     /**
      * @inheritDoc
      */
-    function getLimit(): ?int
-    {
-        return $this->option("limit");
-    }
-
-    /**
-     * @inheritDoc
-     */
     protected function getEcommerceEntityRepository(): RepositoryBase
     {
         return $this->productRepository;
     }
-
-    /** HELPERS **/
-
-    /**
-     * Build up a collection of SKUs that would match for other sizes of this product,
-     * if the product looks like a size option. If not, the collection will be empty.
-     *
-     * @param Product $product
-     * @return Collection
-     */
-    private function buildProductSizeSkus(Product $product): Collection
-    {
-        $SEPARATOR = "-";
-        // get the sku of the product and see if it ends with a size
-        $sku = $product->getSku();
-        $sizes = collect(self::SIZE_STRINGS);
-        $skuEnd = Str::afterLast($sku, $SEPARATOR);
-
-        // sku's are inconsistently cased, so analyze the end string to determine if we should transform our options
-        if (ctype_lower($skuEnd)) {
-            $sizes->transform(fn ($size) => Str::lower($size));
-        }
-
-        if ($sizes->doesntContain($skuEnd)) {
-            return collect();
-        }
-
-        // it looks like it's probably a size, so build up the sku for the other size options
-        $skuBase = Str::beforeLast($sku, $SEPARATOR);
-
-        return $sizes
-            ->filter(fn($size) => $size !== $skuEnd)
-            ->transform(fn ($size) => $skuBase . $SEPARATOR . $size);
-    }
-
-    /**
-     * Get all the Products that make up the related options for this Product,
-     * sorted to have the latest update first.
-     * If there are no other related products, it will be empty.
-     *
-     * @param Product $product
-     * @return Collection<Product>
-     * @throws ORMException
-     */
-    private function getProductOptions(Product $product): Collection
-    {
-        $products = collect();
-        $searchSkus = $this->buildProductSizeSkus($product);
-
-        if ($searchSkus->isEmpty()) {
-            return $products;
-        }
-
-        // use the searchSkus to find the other products
-        $relatedProducts = $this->productRepository->bySkus($searchSkus->toArray());
-        if (count($relatedProducts)) {
-            $products->push($product);
-            $products = $products->merge($relatedProducts);
-
-            // sort the products so that the latest update is first
-            $products = $products->sort(function (Product $product1, Product $product2) {
-                return $product1->getUpdatedAt() < $product2->getUpdatedAt();
-            });
-
-            // record the IDs of these products, so we know to skip them later because they're already done
-            $this->productsToSkip->push( ...$products->map(fn(Product $pr) => $pr->getId()));
-        }
-        return $products;
-    }
-
-    /**
-     * Try to find the commonality in the name of the given products, starting at the beginning and running until they
-     * no longer match across all products. Then use some logic based on our standards to remove specific pieces like
-     * "size", and get back the base name shared with all the given products.
-     *
-     * @param Collection<Product> $productOptions
-     * @return string
-     */
-    private function guessProductNameForOption(Collection $productOptions): string
-    {
-        $productNames = $productOptions->map(fn (Product $product) => $product->getName());
-
-        // go through all the names, and walk through the names character by character, until the matching stops,
-        // so that we can pull out the common name
-        $productNames = $productNames->sort(function (string $productName1, string $productName2) {
-            return strlen($productName1) > strlen($productName2);
-        });
-
-        // break each product name into an array, so we can step through them all
-        $productNames->transform(fn (string $productName) => str_split($productName));
-
-        $baseNameArray = $productNames->shift();
-
-        $commonName = "";
-        foreach($baseNameArray as $index => $char) {
-            $matchFound = true;
-            $productNames->each(function (array $productName) use ($char, $index, &$matchFound) {
-                $matchFound &= ($productName[$index] === $char);
-            }  );
-
-            if ($matchFound) {
-                $commonName .= $char;
-            } else {
-                break;
-            }
-        }
-
-        // safety check that we actually made a change
-        if ($commonName === implode($baseNameArray)) {
-            return $commonName;
-        }
-
-        // clean up the name, since it should have been "foo - L", "bar - Size M", etc. so remove everything before the last "-"
-        return Str::beforeLast($commonName, " -");
-    }
-
-    /**
-     * Get the size of the product from its sku, following our conventions
-     *
-     * @param Product $product
-     * @return string|null
-     */
-    private function getSizeFromProductSku(Product $product): ?string
-    {
-        // by convention, the sku ends with the size (and an - in front of it), so just grab the end
-        // of the string after the last -
-        $sizeString = Str::afterLast($product->getSku(), "-");
-
-        // make sure this is a valid option, based on our constant of sizes
-        $sizes = collect(self::SIZE_STRINGS);
-
-        // in case the size in the name is inconsistently cased, analyze the end string to determine if we should transform our options
-        if (ctype_lower($sizeString)) {
-            $sizes->transform(fn ($size) => Str::lower($size));
-        }
-
-        if ($sizes->contains($sizeString)) {
-            return $sizeString;
-        }
-
-        return null;
-    }
-
-    /**
-     * Sort the given collection of products, to be in order of size from smallest to largest
-     *
-     * @param Collection $productOptions
-     * @return Collection
-     */
-    private function sortProductOptionsBySize(Collection $productOptions): Collection
-    {
-        return $productOptions->sort(function (Product $product1, Product $product2) {
-            $p1SizeString = $this->getSizeFromProductSku($product1);
-            $p2SizeString = $this->getSizeFromProductSku($product2);
-
-            // now find the index of each size string in our list of sizes, and sort accordingly
-            $p1SizeIndex = array_search($p1SizeString, self::SIZE_STRINGS);
-            $p2SizeIndex = array_search($p2SizeString, self::SIZE_STRINGS);
-
-            return $p1SizeIndex > $p2SizeIndex;
-        });
-    }
-
-    /**
-     * Sort the given array of variant data, to be in order of size from smallest to largest
-     *
-     * @param array $variantData
-     * @return array
-     */
-    private function sortVariantDataBySize(array $variantData): array
-    {
-        return collect($variantData)->sort(function (array $data1, array $data2) {
-            $data1SizeString = $data1[self::SIZE_OPTION_KEY];
-            $data2SizeString = $data2[self::SIZE_OPTION_KEY];
-
-            // now find the index of each size string in our list of sizes, and sort accordingly
-            $data1SizeIndex = array_search($data1SizeString, self::SIZE_STRINGS);
-            $data2SizeIndex = array_search($data2SizeString, self::SIZE_STRINGS);
-
-            return $data1SizeIndex > $data2SizeIndex;
-        })->toArray();
-    }
-
-    private const METAFIELD_NAMESPACE = "products";
-    private const METAFIELD_KEY = "_id";
-    private const METAFIELD_TYPE = "number_integer";
-    private const PERMISSION_METAFIELD_NAMESPACE = "custom";
-    private const PERMISSION_METAFIELD_KEY = "content_permissions";
-    private const PERMISSION_METAFIELD_TYPE = "list.metaobject_reference";
-    private const SIZE_OPTION_NAME = "Size";
-    private const SIZE_OPTION_KEY = "option1";
-    private const SIZE_STRINGS = ["XS", "S", "M", "L", "XL", "XXL", "XXXL", "XXXXL"];
 }
