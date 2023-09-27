@@ -128,6 +128,9 @@
         :content-chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
         :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}"
         :content-instructors="{{ json_encode($lessonContent->fetch('*fields.instructor')) }}"
+        user-email="{{ user()->email }}"
+        report-logo="{{ config('mailora.'. $brand . '.logo-link') }}"
+        report-recipient="{{ config('mailora.'. $brand . '.ask-question-recipient') }}"
     >
     </playlist-playback-wrapper>
 @endsection
