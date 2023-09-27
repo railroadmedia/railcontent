@@ -250,6 +250,10 @@
         .join.white {
             color:#f61a30;
         }
+
+        .splide__arrow svg {
+            fill: #f61a30 !important;
+        }
     </style>
 @stop()
 
@@ -265,8 +269,8 @@
     ])
 
 
-    <header class="px-5 sm:px-6 pt-10 pb-80 sm:py-14 lg:py-20 text-white relative" style="background:linear-gradient(to bottom, #a21083 50%, #f5f8fb 51%);">
-        <div class="inset-0 hidden sm:block absolute bg-center bg-cover z-0" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/header-image.png');"></div>
+    <header class="px-5 sm:px-6 pt-10 pb-80 sm:py-14 lg:py-20 text-white relative" style="background:linear-gradient(to bottom, #910b81, #c41460 66%, #f5f8fb 66%);">
+        <div class="inset-0 hidden sm:block absolute bg-center bg-cover z-0 mx-auto" style="max-width:1800px;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/header-image.png');"></div>
         <div class="inset-0 block sm:hidden absolute bg-bottom bg-cover z-0" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/header-image-m.png');"></div>
         <div class="container max-w-4xl mx-auto relative z-10">
             <div class="w-full sm:w-1/2 text-center lg:text-left">
@@ -288,7 +292,7 @@
                         <br><br>
                         Imagine the surprise when they hear you play!
                         <br><br>
-                        So how does it work? Register for your FREE webinar and I’ll show you:</p>
+                        So how does it work? Register for your FREE Webinar and I’ll show you:</p>
                     <ul class="ml-4 sm:ml-5 fa-ul my-4">
                         <li class="font-bold"><i class="fa-li mr-1 text-pianote fas fa-check"></i> What traditional lessons won’t teach you</li>
                         <li class="font-bold"><i class="fa-li mr-1 text-pianote fas fa-check"></i> How to play music WITHOUT needing to know all the notes</li>
@@ -308,7 +312,7 @@
             <div class="flex flex-wrap text-center">
                 <div class="w-full sm:w-1/3 px-3 mb-4 sm:mb-0">
                     <img class="h-12 sm:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/320x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/chords-any-key.svg"></img>
-                    <p class="leading-tight mt-5 mb-1"><strong class="font-black">Play Chords on ANY Key</strong></p>
+                    <p class="leading-tight mt-5 mb-1"><strong class="font-black">How To Play Chords on ANY Key</strong></p>
                     <p class="leading-tight">Chords are your secret weapon for playing the songs you love. Major. Minor. You’ll learn them!</p>
                 </div>
                 <div class="w-full sm:w-1/3 px-3 mb-4 sm:mb-0">
@@ -318,7 +322,7 @@
                 </div>
                 <div class="w-full sm:w-1/3 px-3">
                     <img class="h-12 sm:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/320x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/4-chords.svg"></img>
-                    <p class="leading-tight mt-5 mb-1"><strong class="font-black">Play 100s of Songs</strong></p>
+                    <p class="leading-tight mt-5 mb-1"><strong class="font-black">How To Play 100s of Songs</strong></p>
                     <p class="leading-tight">You’ll learn how to play a chord on ANY key. And use those chords to play 100s of songs.</p>
                 </div>
             </div>
@@ -332,37 +336,26 @@
             <img class="rounded-xl overflow-hidden cursor-pointer h-44 sm:h-96" data-open="trailer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/trailer-thumb.jpg"></img>
            <br>
             <img class="h-9 sm:h-11 my-5 sm:my-8" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/dear-fellow.png"></img>
-            <div class="flex flex-wrap text-left mb-5 sm:mb-8">
-                <div class="w-full sm:w-1/2 lg:w-1/4 sm:px-4 lg:px-2 mb-4 lg:mb-0">
-                    <div class="bg-white rounded-xl shadow-md p-6">
-                        <img class="h-12 mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/nervous-icon.svg"></img>
-                        <p class="leading-normal text-sm">If you’re <strong class="font-black">nervous</strong> because you tried learning in the past but had a bad experience…</p>
-                    </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-2 items-stretch text-left mb-5 sm:mb-8">
+                <div class="bg-white rounded-xl shadow-md p-4 sm:p-6 h-full flex lg:block">
+                    <img class="h-12 lg:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/nervous-icon.svg"></img>
+                    <p class="leading-normal text-sm pl-4 lg:pl-0">If you’re <strong class="font-black">nervous</strong> because you tried learning in the past but had a bad experience…</p>
                 </div>
-                <div class="w-full sm:w-1/2 lg:w-1/4 sm:px-4 lg:px-2 mb-4 lg:mb-0">
-                    <div class="bg-white rounded-xl shadow-md p-6">
-                        <img class="h-12 mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/struggling-icon.svg"></img>
-                        <p class="leading-normal text-sm">If you’re <strong class="font-black">struggling</strong> to figure out how to make progress on this instrument…</p>
-
-                    </div>
+                <div class="bg-white rounded-xl shadow-md p-4 sm:p-6 h-full flex lg:block">
+                    <img class="h-12 lg:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/struggling-icon.svg"></img>
+                    <p class="leading-normal text-sm pl-4 lg:pl-0">If you’re <strong class="font-black">struggling</strong> to figure out how to make progress on this instrument…</p>
                 </div>
-                <div class="w-full sm:w-1/2 lg:w-1/4 sm:px-4 lg:px-2 mb-4 sm:mb-0">
-                    <div class="bg-white rounded-xl shadow-md p-6">
-                        <img class="h-12 mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/overwhelmed-icon.svg"></img>
-                        <p class="leading-normal text-sm">If you’re <strong class="font-black">overwhelmed</strong> by the traditional approach of note reading and just want to have fun playing the songs you love…</p>
-
-                    </div>
+                <div class="bg-white rounded-xl shadow-md p-4 sm:p-6 h-full flex lg:block">
+                    <img class="h-12 lg:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/overwhelmed-icon.svg"></img>
+                    <p class="leading-normal text-sm pl-4 lg:pl-0">If you’re <strong class="font-black">overwhelmed</strong> by the traditional approach of note reading and just want to have fun playing the songs you love…</p>
                 </div>
-                <div class="w-full sm:w-1/2 lg:w-1/4 sm:px-4 lg:px-2 mb-4 sm:mb-0">
-                    <div class="bg-white rounded-xl shadow-md p-6">
-                        <img class="h-12 mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/skeptical-icon.svg"></img>
-                        <p class="leading-normal text-sm">If you’re <strong class="font-black">skeptical</strong> of the promises made by so many online courses and videos…</p>
-
-                    </div>
+                <div class="bg-white rounded-xl shadow-md p-4 sm:p-6 h-full flex lg:block">
+                    <img class="h-12 lg:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/skeptical-icon.svg"></img>
+                    <p class="leading-normal text-sm pl-4 lg:pl-0">If you’re <strong class="font-black">skeptical</strong> of the promises made by so many online courses and videos…</p>
                 </div>
             </div>
 
-            <p class="leading-tight max-w-xl mx-auto mb-5"><strong>This webinar will change everything.</strong> Over 60 minutes, I’ll show you exactly how to start playing the songs you love without fear or frustration.
+            <p class="leading-tight max-w-xl mx-auto mb-5"><strong>This Webinar will change everything.</strong> Over 60 minutes, I’ll show you exactly how to start playing the songs you love without fear or frustration.
             <br><br>
             It’ll be a lot of fun. And it won’t cost you a cent.
                 <br><br>
@@ -412,9 +405,9 @@
                     init() {
                         new Splide(this.$refs.splide, {
                             classes: {
-                                    arrow: 'hidden',
+                                    arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-pianote',
                                     prev: 'hidden',
-                                    next: 'hidden',
+                                    next: 'splide__arrow--next hidden sm:flex mb-16',
                                     pagination: 'splide__pagination bottom-0',
                             },
                             perPage: 2.5,
@@ -536,7 +529,7 @@
             @include('_partials.components.question-dropdown', [
             "num" => "?",
             "title" => "So how does this work?",
-            "desc" => "This is a webinar. When you click “ENROLL NOW” you’ll be able to choose a time and date that works for you! The video lessons is not live, but you’ll be able to ask questions and get answers from our team of moderators who will be in the chat.",
+            "desc" => "This is a Webinar. When you click “ENROLL NOW” you’ll be able to choose a time and date that works for you! The video lessons is not live, but you’ll be able to ask questions and get answers from our team of moderators who will be in the chat.",
             ])
 
             @include('_partials.components.question-dropdown', [
@@ -548,13 +541,13 @@
             @include('_partials.components.question-dropdown', [
             "num" => "?",
             "title" => "Do I have to watch it all at once?",
-            "desc" => "When you register, you’ll be able to choose your preferred date and time. We’d encourage you to pick a time that will allow you to watch the entire thing. During that time, you won’t be able to pause or rewind it. But if you can’t make it through the whole thing, that’s ok! You’ll be able to replay the webinar any time and you can pause or rewind during the replay.",
+            "desc" => "When you register, you’ll be able to choose your preferred date and time. We’d encourage you to pick a time that will allow you to watch the entire thing. During that time, you won’t be able to pause or rewind it. But if you can’t make it through the whole thing, that’s ok! You’ll be able to replay the Webinar any time and you can pause or rewind during the replay.",
             ])
 
             @include('_partials.components.question-dropdown', [
             "num" => "?",
             "title" => "What are you selling?",
-            "desc" => "Our goal is to inspire and educate piano players around the world. The webinar will introduce you to Lisa’s method of playing which doesn’t require years of practice and reading music. You’ll learn a lot just from watching. Then, at the end, if you decide this style of learning is right for you, Lisa will let you know about her online learning platform that uses this style. There’s absolutely no obligation.",
+            "desc" => "Our goal is to inspire and educate piano players around the world. The Webinar will introduce you to Lisa’s method of playing which doesn’t require years of practice and reading music. You’ll learn a lot just from watching. Then, at the end, if you decide this style of learning is right for you, Lisa will let you know about her online learning platform that uses this style. There’s absolutely no obligation.",
             ])
         </div>
     </section>
