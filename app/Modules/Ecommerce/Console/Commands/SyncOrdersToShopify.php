@@ -1429,7 +1429,7 @@ class SyncOrdersToShopify extends Command
     /**
      * @inheritDoc
      */
-    function getIsSimulation(): bool
+    protected function getIsSimulation(): bool
     {
         return $this->option("execute") == false;
     }
@@ -1437,7 +1437,7 @@ class SyncOrdersToShopify extends Command
     /**
      * @inheritDoc
      */
-    function getIsFresh(): bool
+    protected function getIsFresh(): bool
     {
         return $this->option("fresh");
     }
@@ -1445,7 +1445,7 @@ class SyncOrdersToShopify extends Command
     /**
      * @inheritDoc
      */
-    function getLimit(): ?int
+    protected function getLimit(): ?int
     {
         return $this->option("limit");
     }

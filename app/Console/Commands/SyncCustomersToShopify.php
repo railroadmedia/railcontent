@@ -536,7 +536,7 @@ class SyncCustomersToShopify extends Command
     /**
      * @inheritDoc
      */
-    function getIsSimulation(): bool
+    protected function getIsSimulation(): bool
     {
         return $this->option("execute") == false;
     }
@@ -544,7 +544,7 @@ class SyncCustomersToShopify extends Command
     /**
      * @inheritDoc
      */
-    function getIsFresh(): bool
+    protected function getIsFresh(): bool
     {
         return $this->option("fresh");
     }
@@ -553,7 +553,7 @@ class SyncCustomersToShopify extends Command
      * Do not allow the Customers to be limited for the query. We require the full result set so that we can
      * group them by email address afterwards
      */
-    function getLimit(): ?int
+    protected function getLimit(): ?int
     {
         return null;
     }
@@ -561,7 +561,7 @@ class SyncCustomersToShopify extends Command
     /**
      * Get the optional limit provided for the number of users and customers to sync
      */
-    function getLimitOption(): ?int
+    protected function getLimitOption(): ?int
     {
         return $this->option("limit");
     }

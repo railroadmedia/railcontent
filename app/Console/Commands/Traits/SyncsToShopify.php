@@ -177,21 +177,21 @@ trait SyncsToShopify
      *
      * @return bool
      */
-    abstract function getIsSimulation(): bool;
+    abstract protected function getIsSimulation(): bool;
 
     /**
      * Are we doing a fresh sync of everything?
      *
      * @return bool
      */
-    abstract function getIsFresh(): bool;
+    abstract protected function getIsFresh(): bool;
 
     /**
      * Get the optional limit to the number of entities to sync
      *
      * @return int|null
      */
-    abstract function getLimit(): ?int;
+    abstract protected function getLimit(): ?int;
 
     /**
      * Get the name of type of Shopify Resource this class interacts with
