@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Console\Commands\Traits\SyncsToShopify;
-use App\Modules\Content\Models\Permission;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -16,7 +15,6 @@ use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\RepositoryBase;
 use Signifly\Shopify\REST\Resources\ApiResource;
-use Signifly\Shopify\REST\Resources\MetafieldResource;
 use Signifly\Shopify\REST\Resources\ProductResource;
 use Signifly\Shopify\REST\Resources\VariantResource;
 use Signifly\Shopify\Shopify;
@@ -290,7 +288,7 @@ class SyncProductsToShopify extends Command
      */
     private function createProductData(Product $product, int $locationId): array
     {
-        $postData = $this->formatProductData($product, true, true);
+        $postData = $this->formatProductData($product, true);
         $postData["variants"] = [$this->createVariantData($product, $locationId, true, null)];
         return $postData;
     }
@@ -326,11 +324,10 @@ class SyncProductsToShopify extends Command
      *
      * @param Product $product
      * @param bool $withImage
-     * @param bool $withMetafields
      * @param Collection|null $allOptions - the collection of alike products that will be options for the product in Shopify
      * @return array
      */
-    private function formatProductData(Product $product, bool $withImage, bool $withMetafields, ?Collection $allOptions = null): array
+    private function formatProductData(Product $product, bool $withImage, ?Collection $allOptions = null): array
     {
         $productData = [
             "title" => is_null($allOptions) ? $product->getName() : $this->guessProductNameForOption($allOptions),
@@ -353,61 +350,7 @@ class SyncProductsToShopify extends Command
         }
         $productData["status"] = $status;
 
-        if ($withMetafields) {
-            $productData["metafields"] = $this->buildProductMetafieldsData($product);
-        }
-
         return $productData;
-    }
-
-    /**
-     * Build an array with the properly formatted data for a Product's metafields
-     *
-     * @param Product $product
-     * @return array
-     */
-    private function buildProductMetafieldsData(Product $product): array
-    {
-        $metafields = [];
-
-        $permissionShopifyIds = [];
-        $permissions = $product->getDigitalAccessPermissionNames();
-        $productBrand = $product->getBrand();
-
-        if ($permissions) {
-            foreach ($permissions as $permissionName) {
-                // we need to find the permission object that has the same name and brand
-                $permissionObjects = Permission::where("brand", $productBrand)->where("name", $permissionName)->get();
-
-                if ($permissionObjects->count() === 0) {
-                    $this->error(sprintf("No permissions found with name %s for brand %s. Cannot set permission metafields for Product %s.", $permissionName, $productBrand, $product->getId()));
-                    continue;
-                } elseif ($permissionObjects->count() > 1) {
-                    $this->error(sprintf("Multiple permissions found with name %s for brand %s. Cannot set permission metafields for Product %s.", $permissionName, $productBrand, $product->getId()));
-                    continue;
-                }
-
-                $permission = $permissionObjects->first();
-                // grab the shopify_id from the permission, so we can create a metafield for it
-                $permissionShopifyId = $permission->shopify_id;
-
-                if (is_null($permissionShopifyId)) {
-                    $this->error(sprintf("No shopify_id set on Permission %s.Cannot set permission metafields for Product %s.", $permission->id, $product->getId()));
-                    continue;
-                }
-                $permissionShopifyIds[] = $permissionShopifyId;
-            }
-        }
-        if (!empty($permissionShopifyIds)) {
-            $metafields[] = [
-                "key" => self::PERMISSION_METAFIELD_KEY,
-                "value" => json_encode($permissionShopifyIds),
-                "type" => self::PERMISSION_METAFIELD_TYPE,
-                "namespace" => self::PERMISSION_METAFIELD_NAMESPACE
-            ];
-        }
-
-        return $metafields;
     }
 
     /**
@@ -420,7 +363,7 @@ class SyncProductsToShopify extends Command
     private function formatUpdateProductData(Product $product, ProductResource $shopifyProduct): array
     {
         // check for any applicable changes
-        $productData = collect($this->formatProductData($product, false, false));
+        $productData = collect($this->formatProductData($product, false));
         $shopifyProductAttributes = collect($shopifyProduct->getAttributes())->only($productData->keys());
 
         $productChanges = $productData->diff($shopifyProductAttributes);
@@ -450,7 +393,7 @@ class SyncProductsToShopify extends Command
                 $image = [];
             }
         } else {
-            // shopify didn't have one before, so add it if we have one now
+
             if ($product->getThumbnailUrl()) {
                 $image = ["src" => $product->getThumbnailUrl()];
             } else {
@@ -461,78 +404,6 @@ class SyncProductsToShopify extends Command
         if ($image !== null) {
             $postData["images"] = $image;
         }
-
-        // check for changes to the metafields, so we don't keep creating new ones every time
-        // DEV NOTE: the metafields are on the variant's product, so we need to get that first
-        $variantData = $this->shopify->getVariant($product->getShopifyId());
-        $shopifyMetafields = $this->shopify->getProductMetafields($variantData->getAttributes()["product_id"]);
-        $metafields = collect($this->buildProductMetafieldsData($product));
-
-        // if we have no changes to any of our metafields, don't bother adding it to the post data
-        $skipMetafields = false;
-        if ($shopifyMetafields->count()) {
-            // shopify had metafields already ...
-            if ($metafields->isNotEmpty()) {
-                // ... and we have some now
-                // clean up the existing metafields response to just use the attributes
-                $shopifyMetafields->transform(fn (MetafieldResource $metafieldResource) => $metafieldResource->getAttributes());
-                /* == PERMISSIONS == */
-                $shopifyPermissionMetaField = $shopifyMetafields->filter(fn (array $metafieldAttributes)
-                    => $metafieldAttributes["namespace"] === self::PERMISSION_METAFIELD_NAMESPACE
-                    && $metafieldAttributes["key"] === self::PERMISSION_METAFIELD_KEY
-                    && $metafieldAttributes["type"] === self::PERMISSION_METAFIELD_TYPE
-                )->first();
-
-                if ($shopifyPermissionMetaField) {
-                    // get our local version, and compare the values
-                    // record the index, so we can remove it from the whole collection of metafields
-                    $localPermissionMetafieldIndex = null;
-                    $localPermissionMetafield = null;
-                    $metafields->filter(function (array $metafieldAttributes, int $index) use (&$localPermissionMetafieldIndex, &$localPermissionMetafield) {
-                        if ($metafieldAttributes["namespace"] === self::PERMISSION_METAFIELD_NAMESPACE
-                            && $metafieldAttributes["key"] === self::PERMISSION_METAFIELD_KEY
-                            && $metafieldAttributes["type"] === self::PERMISSION_METAFIELD_TYPE) {
-                            $localPermissionMetafield = $metafieldAttributes;
-                            $localPermissionMetafieldIndex = $index;
-                            return true;
-                        }
-                        return false;
-                    });
-
-                    if ($localPermissionMetafield) {
-                        // remove the permission metafield, so we can replace it
-                        $metafields->forget($localPermissionMetafieldIndex);
-
-                        if (array_diff(json_decode($shopifyPermissionMetaField["value"]), json_decode($localPermissionMetafield["value"]))) {
-                            // the values don't match, so update it with ours
-                            $metafields->push([
-                                "id" => $shopifyPermissionMetaField["id"],
-                                "namespace" => $localPermissionMetafield["namespace"],
-                                "key" => $localPermissionMetafield["key"],
-                                "type" => $localPermissionMetafield["type"],
-                                "value" => $localPermissionMetafield["value"]
-                            ]);
-                        } else {
-                            // otherwise, it's the same, and we don't need to send it
-                            $skipMetafields = true;
-                        }
-                    }
-                }
-                /* == END PERMISSIONS == */
-
-                // DEV NOTE: if other metafields are supported in the future, handle them here
-
-            } else {
-                // ... but we've removed them, so clear it out
-                $metafields = collect();
-            }
-
-        }
-
-        if (!$skipMetafields) {
-            $postData["metafields"] = $metafields->all();
-        }
-
 
         return $postData;
     }
@@ -618,7 +489,7 @@ class SyncProductsToShopify extends Command
     private function createProductDataWithOptions(Collection $productOptions, ?int $locationId): array
     {
         // create the base of the product data, using the first (latest) entry
-        $postData = $this->formatProductData($productOptions->first(), true, true, $productOptions);
+        $postData = $this->formatProductData($productOptions->first(), true, $productOptions);
 
         // sort the options by size
         $productOptions = $this->sortProductOptionsBySize($productOptions);
@@ -994,9 +865,6 @@ class SyncProductsToShopify extends Command
     private const METAFIELD_NAMESPACE = "products";
     private const METAFIELD_KEY = "_id";
     private const METAFIELD_TYPE = "number_integer";
-    private const PERMISSION_METAFIELD_NAMESPACE = "custom";
-    private const PERMISSION_METAFIELD_KEY = "content_permissions";
-    private const PERMISSION_METAFIELD_TYPE = "list.metaobject_reference";
     private const SIZE_OPTION_NAME = "Size";
     private const SIZE_OPTION_KEY = "option1";
     private const SIZE_STRINGS = ["XS", "S", "M", "L", "XL", "XXL", "XXXL", "XXXXL"];
