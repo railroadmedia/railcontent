@@ -62,6 +62,7 @@ class Carousel extends Resource
             Boolean::make('Visible on Mobile', 'visible_on_mobile')->hideFromIndex()->default(true),
             Select::make(__('All but latest version'), 'mobile_version_below')->options(function () {
                 return [
+                    '' => '' . __('No restrictions') . '',
                     '1' => '' . __('V1') . '',
                     '2' => '' . __('V2') . '',
                     '3' => '' . __('V3') . '',
@@ -77,6 +78,7 @@ class Carousel extends Resource
                 ),
             Select::make(__('Selected version and higher only'), 'mobile_version_above')->options(function () {
                 return [
+                    '' => '' . __('No restrictions') . '',
                     '1' => '' . __('V1') . '',
                     '2' => '' . __('V2') . '',
                     '3' => '' . __('V3') . '',
