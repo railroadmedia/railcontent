@@ -95,14 +95,10 @@
                         <div id="order" class="anchor"></div>
                         <div class="side-slide overflow-hidden rounded border border-solid" style="border-color: #CCD3D3;">
                             <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">
-                                <p class="text-center mx-auto mb-1 font-bold text-sm md:text-base" style="color:#10D05F">Save 33%</p>
-                                <h1 class="text-center text-3xl uppercase md:text-4xl" style="color:#F71B26;"><s class="opacity-40 text-2xl">$117</s>
-                                    <strong class="font-black text-pianote">$<span class="chosen-variant-price-float">79</span></strong>
-                                </h1>
-                                <a class="online-atc" href="/ecommerce/add-to-cart?products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&redirect=/order&locked=true&promo-code=special">
-                                    <button class="join border-none bg-pianote"><i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart</button>
+
+                                <a class="online-atc anchor-slide" href="#final">
+                                    <button class="join border-none bg-pianote">ORDER NOW</button>
                                 </a>
-                                <a href="/ecommerce/add-to-cart?products[music-theory-posters]=1&redirect=/order"><p class="text-sm text-pianote mb-2"><em><u><strong>Or get the posters only for $29</strong></u></em></p></a>
                                 <p class="italic text-center mx-auto my-0 text-xs" style="color:#858c93;">
                                     You can also order by phone toll-free at<br class="hidden sm:inline">
                                     <a href="tel:+18004398921" class="text-pianote">1-800-439-8921</a> or directly at
@@ -174,6 +170,7 @@
     <section class="text-center  text-white  px-4 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:linear-gradient(to bottom, #030916, #08142e);" x-data="{ plusMembershipSelected: true }">
         <div class="container max-w-6xl mx-auto">
             <h2 class="leading-tight mb-5"><strong>Grab your perfect practice <br class="inline sm:hidden">bundle below:</strong></h2>
+            <div id="final" class="anchor"></div>
             <div class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl mx-auto">
                 <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                     <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full  uppercase" >&nbsp;</p>
@@ -189,7 +186,7 @@
                             <br>
                             <h4 class="inline-block leading-tight"><s>$39</s> <strong>$29</strong></h4>
                             <p class="text-sm"><em>Save 26%.</em></p>
-                            <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Add To Cart</div>
+                            <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">ORDER NOW</div>
                             <p class="text-sm mb-1.5"><strong>6 beautiful full-color posters highlight the essential theory you need to play the songs you love.</strong></p>
                             <p class="text-sm mb-1.5">How to read notes</p>
                             <p class="text-sm mb-1.5">Understand the circle of 5ths</p>
@@ -213,7 +210,7 @@
                             <h4 class="inline-block leading-tight"><s>$117</s> <strong>$79</strong></h4>
                             <p class="text-sm"><em>Save 33%</em></p>
                             <div class="join my-5 pianote smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">
-                                Add to cart
+                                ORDER NOW
                             </div>
                             <p class="text-sm mb-1.5 text-pianote"><strong>Includes everything in the Music Theory Poster Bundle PLUS:</strong></p>
                             <p class="text-sm mb-1.5"><strong>The Chords & Scales Book</strong> to learn every chord shape, chord variation, and scale in EVERY key.</p>

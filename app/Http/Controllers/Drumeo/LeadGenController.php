@@ -298,6 +298,10 @@ class LeadGenController extends BaseController
         return view('drumeo.lead-gen.pages.teach-a-beginner-lessons');
     }
 
+    public function giveaway()
+    {
+        return view('drumeo.lead-gen.pages.giveaway', ['recaptchaKey'=>config('recaptcha.key')]);
+    }
     public function weeklyEmail()
     {
         return view('drumeo.lead-gen.blog-forms.weekly-email', ['recaptchaKey'=>config('recaptcha.key')]);

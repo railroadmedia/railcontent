@@ -1,5 +1,6 @@
 <template>
     <div class="flex flex-column">
+        
         <template v-for="(item, i) in content" :key="'list' + item.id">
             <catalogue-list-item
                 :index="item.week || i + 1"

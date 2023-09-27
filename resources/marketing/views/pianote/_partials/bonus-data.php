@@ -2,6 +2,18 @@
 
 $bonuses = [
     [
+        'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
+        'title' => 'New Piano Players Start Here',
+        'description' => 'New to the piano? Start here! This play-along course is your first 30 days on the piano. You don’t need any previous experience or theory knowledge. Over 30 days, you’ll play along with your teacher for just 10 minutes a day! You’ll be amazing at what a little bit of consistent practice will do.',
+        'price' => 97,
+    ],
+    [
+        'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
+        'title' => 'Easy Chords',
+        'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
+        'price' => 97,
+    ],
+    [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/headphones-cart.jpg',
         'title' => 'Pianote Headphones',
         'description' => 'Hear your piano the way it was meant to sound.',

@@ -6,8 +6,9 @@
 @section('title', 'Weekly Email')
 
 @section('subtitle')
-    <h5 class="leading-normal mb-3 md:mb-4">Enjoying this article? Enter your email address to get free drum lessons, <br class="hidden sm:inline">
-        interviews, and updates from around the drumming world:</h5>
+    <h5 class="leading-normal mb-3 md:mb-4">
+        <strong>Drumming secrets<span class="hidden sm:inline"> you won't find anywhere else</span>.</strong> Join 400K+ drummers who get  <br class="hidden sm:inline">
+        tips, viral videos, and insider deals on Drumeo products right to their inbox.</h5>
 @endsection
 
 @section('form')

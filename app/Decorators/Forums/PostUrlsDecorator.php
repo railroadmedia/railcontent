@@ -297,26 +297,30 @@ class PostUrlsDecorator
             if (!filter_var($url, FILTER_VALIDATE_URL)) {
                 continue;
             }
+            try {
+                $initialRequest = \Request::create($url);
 
-            $initialRequest = \Request::create($url);
+                if (!in_array($initialRequest->getHttpHost(), [
+                    'www.drumeo.com',
+                    'www.pianote.com',
+                    'www.singeo.com',
+                    'www.guitareo.com',
+                    'forums.drumeo.com',
+                    request()->getHttpHost(),
+                ])) {
+                    continue;
+                }
 
-            if (!in_array($initialRequest->getHttpHost(), [
-                'www.drumeo.com',
-                'www.pianote.com',
-                'www.singeo.com',
-                'www.guitareo.com',
-                'forums.drumeo.com',
-                request()->getHttpHost(),
-            ])) {
+                $oldRequest = \Request::create($url);
+                $segments = $this->formatNewUrl($oldRequest->segments(), $url);
+                if ($oldRequest->getQueryString()) {
+                    $segments = $segments.'?'.$oldRequest->getQueryString();
+                }
+                $urls[$match] = $segments;
+            } catch (\Exception $e) {
                 continue;
             }
 
-            $oldRequest = \Request::create($url);
-            $segments = $this->formatNewUrl($oldRequest->segments(), $url);
-            if ($oldRequest->getQueryString()) {
-                $segments = $segments.'?'.$oldRequest->getQueryString();
-            }
-            $urls[$match] = $segments;
         }
 
         return $urls;

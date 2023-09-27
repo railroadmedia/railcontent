@@ -147,8 +147,45 @@
             "joinUrl" => '/choose-plan',
         ])
     @endif
-    <a href="#customize-anchor" class="flex text-white items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] anchor-slide" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
-{{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
+
+    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white relative" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
+        <div class="container max-w-5xl mx-auto">
+            <h2><strong>Unlimited piano lessons + 2 FREE posters. </strong></h2>
+            <p class="leading-tight text-musora mt-1"><strong>You’ll get free Chords & Scales Posters when you try Pianote for 7 days ($18 value)</strong></p>
+            <h6 class="inline-block mx-auto rounded-md text-black bg-musora py-2 px-4 mt-4 sm:mb-10"><strong>ONLY <s class="opacity-50">2000</s> @if(!empty($products['poster-chords']->getPublicStockCount())) {{ $products['poster-chords']->getPublicStockCount() }} @endif LEFT</strong></h6>
+            <img class="my-5 h-40 inline sm:hidden"
+                    src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/pianote-trial-sept-promo-collage-m.png"
+                    alt="learn playing image"
+                    fetchpriority="high"
+            >
+            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
+                <p class="leading-normal max-w-xl pr-5 lg:pr-8 mx-0">We’ll send you 2 FREE posters when you start a 7-day trial of Pianote.
+                    <br><br>
+                    Chords and Scales are the building blocks of ALL music. Sign up for a free 7-day trial of Pianote and we’ll ship you these two posters FREE of charge. No matter where you live in the world.
+                    <br><br>
+                    Why?
+                    <br><br>
+                    September is National Piano Month, and we want to get as many people playing and loving the piano as possible. Hang these posters in your practice space and use them to help play your favorite songs this month.
+                    <br><br>
+                    Supplies are limited, so grab yours today.
+                    <br>
+                    <a class="join smaller musora my-3 w-1/2 anchor-slide" href="#customize-anchor">GET Started &raquo;</a>
+                    <br>
+                    <em>Free worldwide shipping!</em>
+                </p>
+                <img class="h-80 lg:h-96 hidden sm:inline transition-opacity opacity-0"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                        src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/pianote-trial-sept-promo-collage.png"
+                        alt="learn playing image"
+                >
+            </div>
+        </div>
+    </section>
+    <div class="sticky-trigger block"></div>
+    <a href="#customize-anchor"
+            class="promo-banner flex text-white items-center justify-center -mt-10 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide"style="background: linear-gradient(to bottom, #f41a30, #79080b);">
+        {{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
         <h3 class="inline-block font-bebas text-musora mx-0 pr-3">* FREE POSTERS *</h3>
         <p class="inline-block text-xs mx-0 leading-tight">
             Get <strong>2 free posters</strong> when you try
@@ -251,41 +288,6 @@
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
-
-    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
-        <div class="container max-w-5xl mx-auto">
-            <h2><strong>Unlimited piano lessons + 2 FREE posters. </strong></h2>
-            <p class="leading-tight text-musora mt-1"><strong>You’ll get free Chords & Scales Posters when you try Pianote for 7 days ($18 value)</strong></p>
-            <h6 class="inline-block mx-auto rounded-md text-black bg-musora py-2 px-4 mt-4 sm:mb-10"><strong>ONLY <s class="opacity-50">2000</s> @if(!empty($products['poster-chords']->getPublicStockCount())) {{ $products['poster-chords']->getPublicStockCount() }} @endif LEFT</strong></h6>
-            <img class="my-5 h-40 inline sm:hidden"
-                src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/pianote-trial-sept-promo-collage-m.png"
-                alt="learn playing image"
-                fetchpriority="high"
-            >
-            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
-                <p class="leading-normal max-w-xl pr-5 lg:pr-8 mx-0">We’ll send you 2 FREE posters when you start a 7-day trial of Pianote.
-                    <br><br>
-                    Chords and Scales are the building blocks of ALL music. Sign up for a free 7-day trial of Pianote and we’ll ship you these two posters FREE of charge. No matter where you live in the world.
-                    <br><br>
-                    Why?
-                    <br><br>
-                    September is National Piano Month, and we want to get as many people playing and loving the piano as possible. Hang these posters in your practice space and use them to help play your favorite songs this month.
-                    <br><br>
-                    Supplies are limited, so grab yours today.
-                    <br>
-                    <a class="join smaller musora my-3 w-1/2 anchor-slide" href="#customize-anchor">GET Started &raquo;</a>
-                    <br>
-                    <em>Free worldwide shipping!</em>
-                </p>
-                <img class="h-80 lg:h-96 hidden sm:inline transition-opacity opacity-0"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/pianote-trial-sept-promo-collage.png"
-                    alt="learn playing image"
-                >
-            </div>
-        </div>
-    </section>
 
 
     @php
@@ -711,6 +713,24 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
+    <script>
+        $(document).ready(function () {
+            var stickyBar = $('.promo-banner');
+            $(window).scroll(function () {
+                var stickTrigger = $('.sticky-trigger').offset().top;
+                var unstickTrigger = $('.unstick-trigger').offset().top;
+                if ($(this).scrollTop() > (unstickTrigger - 115)) {
+                    stickyBar.removeClass('fixed mt-0');
+                }
+                if ($(this).scrollTop() < stickTrigger - 115) {
+                    stickyBar.removeClass('fixed mt-0');
+                }
+                if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
+                    stickyBar.addClass('fixed mt-0');
+                }
+            });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
