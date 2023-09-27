@@ -16,16 +16,16 @@
 @stop
 
 @section('page-body')
-    <div class="overflow-hidden px-3 py-5 sm:py-10 lg:py-14">
+    <div class="overflow-hidden px-3 py-5 sm:py-10 lg:py-14 text-white bg-cover bg-center text-center" style="background:#ac1179 url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/order-bg.jpg');">
         <div class="container mx-auto max-w-3xl clearfix">
-            <h5><strong>Ready to get started?</strong> Click this button to start your Song Secrets Webinar.</h5>
-            <a href="" class="join white">go to the webinar</a>
+            <h5 class="leading-tight mb-4"><strong>Ready to get started?</strong> Click this button to start your Song Secrets Webinar.</h5>
+            <a href="" class="join white smaller">go to the webinar</a>
         </div>
     </div>
     <div class="overflow-hidden px-3 py-5 sm:py-10 lg:py-14">
-        <div class="container mx-auto max-w-3xl clearfix">
+        <div class="container mx-auto max-w-4xl clearfix">
             <div class="text-center sm:px-3">
-                <img class="h-8 sm:h-10" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/TODO">
+                <h3 class="font-bebas tracking-widest my-4 text-pianote">SONG SECRETS</h3>
                 <h3 class="mt-4 leading-tight"><strong>Congratulations! Your seat is secure!</strong></h3>
                 <p class="leading-normal mt-2 mb-12">Here’s what you need to do now…</p>
                 <div class="flex flex-wrap sm:text-left">

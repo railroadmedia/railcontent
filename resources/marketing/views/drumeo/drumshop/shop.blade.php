@@ -137,6 +137,7 @@
         <section class="bundles">
             <div class="container mx-auto">
                 <div class="float-left w-full px-2 md:px-3 card-wrap">
+                    @if( Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 1, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now() )
                     <a href="/drumshop/stickbag" class="rounded-xl mb-5 overflow-hidden relative inline-block w-full sm:text-left px-7 sm:px-10 lg:px-16 pt-48 pb-4 sm:py-12 lg:py-14 transition-opacity hover:opacity-90" style="background-color:#f5f5f5;">
                         <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
                             <img class="h-14 sm:h-20 lg:h-28" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/sb_logo.png"><br>
@@ -149,6 +150,7 @@
                         <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/sb_banner.png);"></div>
                         <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-center" style="background-image:url(https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/sb_banner_m.png);"></div>
                     </a>
+                    @endif
                     @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 2, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now() && Carbon\Carbon::create(2023, 9, 29, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
                         <a href="/drumshop/accessories" class="rounded-xl mb-5 overflow-hidden relative inline-block w-full sm:text-left px-4 sm:px-10 lg:px-16 pb-44 pt-9 sm:py-12 lg:py-16 transition-opacity hover:opacity-90" style="background-color:#ffc64f;">
                             <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">

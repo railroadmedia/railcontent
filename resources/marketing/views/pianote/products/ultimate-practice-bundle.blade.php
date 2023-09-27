@@ -35,9 +35,9 @@
     ])
 
     <main class="flex flex-col w-full ">
-        <div class="clearfix container mx-auto max-w-6xl">
+        <div class="clearfix container mx-auto max-w-4xl">
             <div class="lg:flex">
-                <div class="product-wrap lg:w-2/3 px-3 md:px-4">
+                <div class="product-wrap w-full px-3 md:px-4">
                     <div class="pack-details slider-wrap w-full pt-5 mx-auto mb-1 md:pt-9 md:mt-2 lg:pt-11 lg:mt-5">
                         <div class="text-center pb-5 sm:pb-6 lg:pb-7">
                             <div class="clearfix">
@@ -49,66 +49,53 @@
                         <div class="slider-container overflow-hidden w-full mb-5 md:mb-7" style="font-size: 0;">
                             <div class="slider-for overflow-hidden  rounded ">
                                 <div style="display: none;">
-                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Meta-images/c8053b11-c400-4618-9322-3d0965d74759-Pianote-Poster-Bundle-01.jpg" alt="slide image 1">
+                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/poster-bundle-slider.png" alt="slide image 1">
                                 </div>
                                 <div style="display: none;">
-                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-111.jpg" alt="slide image 7">
+                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Meta-images/c8053b11-c400-4618-9322-3d0965d74759-Pianote-Poster-Bundle-01.jpg" alt="slide image 2">
                                 </div>
                                 <div style="display: none;">
-                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/practice-planner/pp-front-cover.jpg" alt="slide image 2">
+                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-111.jpg" alt="slide image 3">
                                 </div>
                                 <div style="display: none;">
-                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-03.jpg" alt="slide image 2">
+                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/practice-planner/pp-front-cover.jpg" alt="slide image 4">
                                 </div>
                                 <div style="display: none;">
-                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-04.jpg" alt="slide image 3">
+                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-03.jpg" alt="slide image 5">
                                 </div>
                                 <div style="display: none;">
-                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-05.jpg" alt="slide image 4">
+                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-04.jpg" alt="slide image 6">
                                 </div>
                                 <div style="display: none;">
-                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-06.jpg" alt="slide image 5">
+                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-05.jpg" alt="slide image 7">
                                 </div>
                                 <div style="display: none;">
-                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-07.jpg" alt="slide image 6">
+                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-06.jpg" alt="slide image 8">
                                 </div>
                                 <div style="display: none;">
-                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-08.jpg" alt="slide image 7">
+                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-07.jpg" alt="slide image 9">
+                                </div>
+                                <div style="display: none;">
+                                    <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-08.jpg" alt="slide image 10">
                                 </div>
                             </div>
                             <div class="slider-nav mx-auto w-full ">
-                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Meta-images/c8053b11-c400-4618-9322-3d0965d74759-Pianote-Poster-Bundle-01.jpg" alt="slide image 7"></div>
-                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-111.jpg" alt="slide image 7"></div>
-                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/practice-planner/pp-front-cover.jpg" alt="slide image 10"></div>
-                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-03.jpg" alt="slide image 7"></div>
-                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-04.jpg" alt="slide image 7"></div>
+                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://pianote.s3.amazonaws.com/sales/promos/september/poster-bundle-slider.png" alt="slide image 1"></div>
+                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Meta-images/c8053b11-c400-4618-9322-3d0965d74759-Pianote-Poster-Bundle-01.jpg" alt="slide image 2"></div>
+                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-111.jpg" alt="slide image 3"></div>
+                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/practice-planner/pp-front-cover.jpg" alt="slide image 4"></div>
+                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-03.jpg" alt="slide image 5"></div>
+                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-04.jpg" alt="slide image 6"></div>
                                 <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-05.jpg" alt="slide image 7"></div>
-                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-06.jpg" alt="slide image 7"></div>
-                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-07.jpg" alt="slide image 7"></div>
-                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-08.jpg" alt="slide image 7"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="side-bar sliding-function lg:px-4 lg:w-1/3 px-3 md:px-4 mt-2 mb-4 lg:mb-0">
-                    <div class="lg:h-0">
-                        <div id="order" class="anchor"></div>
-                        <div class="side-slide overflow-hidden rounded border border-solid" style="border-color: #CCD3D3;">
-                            <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">
-
-                                <a class="online-atc anchor-slide" href="#final">
-                                    <button class="join border-none bg-pianote">ORDER NOW</button>
-                                </a>
-                                <p class="italic text-center mx-auto my-0 text-xs" style="color:#858c93;">
-                                    You can also order by phone toll-free at<br class="hidden sm:inline">
-                                    <a href="tel:+18004398921" class="text-pianote">1-800-439-8921</a> or directly at
-                                    <a href="tel:+16048557605" class="text-pianote">1-604-855-7605</a>. </p>
+                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-06.jpg" alt="slide image 8"></div>
+                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-07.jpg" alt="slide image 9"></div>
+                                <div style="display: none;"><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/dfee81ef-ecae-4bf4-ab83-893114a7a1b7-Pianote-Poster-Bundle-08.jpg" alt="slide image 10"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="product-wrap lg:w-2/3 px-3 md:px-4">
+            <div class="product-wrap w-full px-3 md:px-4">
                 <div class="pack-details mx-auto mb-7 pb-5 sm:pb-9 lg:pb-11">
                     <div class="drumshop-accordion">
                         <p><div><p>Music theory can be… tricky.
@@ -254,7 +241,7 @@
                 asNavFor: '.slider-nav',
             });
             $('.slider-nav').slick({
-                slidesToShow: 3,
+                slidesToShow: 4,
                 slidesToScroll: 1,
                 asNavFor: '.slider-for',
                 dots: true,
