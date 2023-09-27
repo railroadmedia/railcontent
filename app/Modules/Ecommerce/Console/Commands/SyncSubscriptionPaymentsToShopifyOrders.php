@@ -39,6 +39,7 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
      * @var string
      */
     protected $signature = 'shopify:sync-subscription-payments
+                            {--startingSubscriptionPaymentId= : (Optional) The SubscriptionPayment Id to start processing at}
                             {--limit= : (Optional) The number of order to limit this run to}
                             {--fresh : Sync all subscription payments, not just those that need it}
                             {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
@@ -100,6 +101,7 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
     {
         $fresh = $this->getIsFresh();
         $limit = $this->getLimit();
+        $startingSubscriptionPaymentId = $this->getStartingSubscriptionPaymentId();
         $tableHeader = [
             "Subscription Payment ID",
             "Payment ID",
@@ -118,21 +120,23 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
         // are not for an initial_order type, and that are paid (so we don't try to sync up failed payments)
         $paymentQB = new QueryBuilder($this->entityManager);
 
-        $qb->where(
-            $qb->expr()->in(
-                "entity.payment",
-                $paymentQB->select("p.id")
-                    ->from(Payment::class, "p")
-                    ->where(
-                        $paymentQB->expr()
-                            ->eq("p.status", ":paidStatus")
-                    )->andWhere(
-                        $paymentQB->expr()
-                            ->neq("p.type", ":initialOrderType")
-                    )
-                    ->getDQL()
+        $qb->where($qb->expr()->gte('entity.id', ':startingSubscriptionPaymentId'))
+            ->andWhere(
+                $qb->expr()->in(
+                    "entity.payment",
+                    $paymentQB->select("p.id")
+                        ->from(Payment::class, "p")
+                        ->where(
+                            $paymentQB->expr()
+                                ->eq("p.status", ":paidStatus")
+                        )->andWhere(
+                            $paymentQB->expr()
+                                ->neq("p.type", ":initialOrderType")
+                        )
+                        ->getDQL()
+                )
             )
-        )
+            ->setParameter("startingSubscriptionPaymentId", $startingSubscriptionPaymentId)
             ->setParameter("paidStatus", "paid")
             ->setParameter("initialOrderType", "initial_order");
 
@@ -288,6 +292,16 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
     protected function getLimit(): ?int
     {
         return $this->option("limit");
+    }
+
+    /**
+     * Get the optional SubscriptionPayment id to start at
+     *
+     * @return int|null
+     */
+    protected function getStartingSubscriptionPaymentId(): ?int
+    {
+        return $this->option("startingSubscriptionPaymentId") ?? 0;
     }
 
     /**
