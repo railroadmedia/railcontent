@@ -40,6 +40,7 @@ class SyncRevenuecatSubscriptionsToMusora extends Command
                         $musoraProduct->pluck('id')
                             ->toArray()
                     )
+                    ->orderBy('created_at', 'desc')
                     ->first();
 
             if (!$musoraSubscription) {
