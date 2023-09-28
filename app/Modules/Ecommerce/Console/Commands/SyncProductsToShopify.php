@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Modules\Ecommerce\Console\Commands;
 
+use App\Console\Commands\Infrastructure\Command;
 use App\Console\Commands\Traits\SyncsToShopify;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Exception;
-use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Railroad\Ecommerce\Entities\Product;
