@@ -310,8 +310,16 @@ class UserAccessPermissionsService
         );
     }
 
-    public function getUserAccessPermissionsList(int $userId, int $page, int $limit)
+    public function getUserAccessPermissionsList(int $userId, int $page, int $limit): UserAccessPermissionsCollection
     {
-        return $this->getUserAccessPermissionsQuery($userId)->paginate($limit, ['*'], 'page', $page);
+        $items = collect(
+            $this->getUserAccessPermissionsQuery($userId)->with('permission')->paginate(
+                $limit,
+                ['*'],
+                'page',
+                $page
+            )->items()
+        );
+        return new UserAccessPermissionsCollection($userId, $items);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Resources\UserAccessPermissionResource;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
@@ -26,7 +27,8 @@ class UserAccessPermissionsController extends Controller
             $request->get('page'),
             $request->get('limit')
         );
-        return UserAccessPermissionResource::collection($userAccessPermissions);
+        $userAccessPermissions->determineActiveTimes();
+        return UserAccessPermissionResource::collection($userAccessPermissions->getCollection()->sortBy('actualStartTime'));
     }
 
 }

@@ -12,9 +12,9 @@ class UserAccessPermissionResource extends JsonResource
         return [
             'id' => $this->id,
             'brand' => $this->permission->brand,
-            'permission_name' => $this->permission->name,
-            'start_time' => $this->start_time,
-            'expiration_time' => $this->getExpirationTime(),
+            'permission_name' => $this->getDescription(),
+            'start_time' => $this->actualStartTime?->toDateTimeString() ?? '',
+            'expiration_time' => $this->actualExpirationTime?->toDateTimeString() ?? '',
             'status' => $this->status
         ];
     }

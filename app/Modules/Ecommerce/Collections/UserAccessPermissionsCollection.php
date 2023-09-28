@@ -45,7 +45,7 @@ class UserAccessPermissionsCollection
         }
 
         $userAccessPermissions = $userAccessPermissions
-            ->where('status', '!=', UserAccessPermissionsStatusEnum::Revoked)
+            ->where('status', '!=', UserAccessPermissionsStatusEnum::Revoked->value)
             ->sortBy('start_time');
         $expirationDate = null;
         $startDate = null;
@@ -61,6 +61,8 @@ class UserAccessPermissionsCollection
             $expirationDate = $tempStartDate->clone()
                 ->addDays($userAccessPermission->time_days)
                 ->addMonths($userAccessPermission->time_months);
+            $userAccessPermission->actualStartTime = $tempStartDate;
+            $userAccessPermission->actualExpirationTime = $expirationDate;
         }
         return array($startDate, $expirationDate);
     }
@@ -113,6 +115,18 @@ class UserAccessPermissionsCollection
     {
         list($startDate, $endDate) = $this->getActiveDates($permissionIds);
         return $endDate != null;
+    }
+
+    public function determineActiveTimes()
+    {
+        $this->permissionIdLookup->keys()->each(function ($key) {
+            $this->getActiveDates($key);
+        });
+    }
+
+    public function getCollection()
+    {
+        return $this->collection;
     }
 
 

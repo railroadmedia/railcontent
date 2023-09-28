@@ -397,7 +397,7 @@ export default {
                 return this.moment(date).format('MMM D, Y - HH:mm');
             }
 
-            return 'Forever';
+            return '-';
         },
 
         getStartDate(date) {

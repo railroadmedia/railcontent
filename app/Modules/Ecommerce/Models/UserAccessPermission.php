@@ -38,7 +38,35 @@ class UserAccessPermission extends Model
         if ($this->time_lifetime) {
             return 'Forever';
         }
-        return Carbon::parse($this->start_time)->addDays($this->time_days)->addMonths($this->time_months)->toDateTimeString();
+        return Carbon::parse($this->start_time)->addDays($this->time_days)->addMonths(
+            $this->time_months
+        )->toDateTimeString();
+    }
+
+    //These properties are calculated through the UserAccessPermissionsCollection determineActiveTimes method
+    public ?Carbon $actualStartTime = null;
+    public ?Carbon $actualExpirationTime = null;
+
+    public function getDescription(): string
+    {
+        $duration = '';
+        if ($this->time_lifetime) {
+            $duration = 'Lifetime';
+        } elseif ($this->time_days) {
+            $duration = $this->time_days . ' Day';
+            if ($this->time_days > 1) {
+                $duration .= 's';
+            }
+        } elseif ($this->time_months) {
+            $duration = $this->time_months . ' Month';
+            if ($this->time_months > 1) {
+                $duration .= 's';
+            }
+        }
+        if ($duration) {
+            return $this->permission->name . ' - ' . $duration;
+        }
+        return $this->permission->name;
     }
 
 }
