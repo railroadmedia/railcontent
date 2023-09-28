@@ -2,7 +2,7 @@
 
 namespace App\Modules\Ecommerce\Console\Commands;
 
-use App\Console\Commands\Traits\SyncsToShopify;
+use App\Modules\Ecommerce\Console\Commands\Traits\SyncsToShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\ORMException;

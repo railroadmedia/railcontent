@@ -3,7 +3,7 @@
 namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
-use App\Console\Commands\Traits\SyncsToShopify;
+use App\Modules\Ecommerce\Console\Commands\Traits\SyncsToShopify;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;

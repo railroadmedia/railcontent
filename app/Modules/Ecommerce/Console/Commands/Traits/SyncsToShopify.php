@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\Traits;
+namespace App\Modules\Ecommerce\Console\Commands\Traits;
 
 use App\Models\ShopifySync;
 use Carbon\Carbon;
