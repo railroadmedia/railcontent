@@ -140,14 +140,14 @@
                         <div class="social-platform youtube">
                             <a href="https://www.youtube.com/freedrumlessons/" target="_blank"> <i class="fab fa-youtube"></i>
                             </a>
-                            <h1 class="count" id="youtube-count">2.34M</h1>
+                            <h1 class="count" id="youtube-count">3M</h1>
                             <p>Subs<span class="show-for-medium">cribers</span></p>
                         </div>
                     </div>
                     <div class="columns no-padding medium-4">
                         <div class="social-platform facebook">
                             <a href="https://facebook.com/drumeo/" target="_blank"> <i class="fab fa-facebook-f"></i> </a>
-                            <h1 class="count" id="likes-count">1.17M</h1>
+                            <h1 class="count" id="likes-count">1.2M</h1>
                             <p>Likes</p>
                         </div>
                     </div>
@@ -155,7 +155,7 @@
                         <div class="social-platform instagram">
                             <a href="https://instagram.com/drumeoofficial/" target="_blank"> <i class="fab fa-instagram"></i>
                             </a>
-                            <h1 class="count" id="follower-count">914K</h1>
+                            <h1 class="count" id="follower-count">1.3M</h1>
                             <p>Followers</p>
                         </div>
                     </div>

@@ -542,11 +542,11 @@
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
-        'youtube' => '2.8M',
+        'youtube' => '3M',
         'facebookLink' => 'https://facebook.com/drumeo/',
         'facebook' => '1.2M',
         'instagramLink' => 'https://instagram.com/drumeoofficial/',
-        'instagram' => '1.1M',
+        'instagram' => '1.3M',
     ])
     @if(empty($trialVersion))
         @include('musora.sales.components.guarantee-section', [
