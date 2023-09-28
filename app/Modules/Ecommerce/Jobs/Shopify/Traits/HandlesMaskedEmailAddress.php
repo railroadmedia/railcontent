@@ -26,7 +26,11 @@ trait HandlesMaskedEmailAddress
     {
         if ($this->getIsUsingMask()) {
             // DEV NOTE: this will return the full $email value of the fakeSuffix isn't found
-            return Str::beforeLast($email, $this->fakeSuffix);
+            // BUT it could break at the wrong spot if the email value has the fakeSuffix in it, like drum.expert@mail.com,
+            // so we need to make sure if ends with the fakeSuffix, before splitting it
+            if (Str::endsWith($email, $this->fakeSuffix)) {
+                return Str::beforeLast($email, $this->fakeSuffix);
+            }
         }
         return $email;
     }
