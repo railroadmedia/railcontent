@@ -114,22 +114,14 @@ trait SyncsShopifyCustomer
     }
 
     /**
-     * For the given collection of Addresses, clean up the data and format it in a way that Shopify will accept
+     * For the given collection of Addresses, clean up the data and format it in a way that Shopify will accept for GraphQL
      *
      * @param Collection<Address> $addresses
      * @return Collection
      */
     protected function cleanUpAddresses(Collection $addresses): Collection
     {
-        // only use addresses that have at least streetLine1, since we may have addresses with no real data
-        $addresses = $addresses->filter(function (Address $address) {
-            return !empty($address->getStreetLine1());
-        });
-
-        // order them to start with the most recent, just in case of duplicates (we have some cases where the region is all caps, and some not, etc)
-        $addresses = $addresses->sort(function (Address $address1, Address $address2) {
-            return $address1->getUpdatedAt() < $address2->getUpdatedAt();
-        });
+        $addresses = $this->filterAndSortAddressesToClean($addresses);
 
         // transform it to fit Shopify's data structure
         $addresses->transform(function(Address $address) {
@@ -156,6 +148,68 @@ trait SyncsShopifyCustomer
                 strtoupper($address["lastName"]).
                 strtoupper($address["province"]).
                 strtoupper($address["zip"]);
+        });
+    }
+
+    /**
+     * For the given collection of Addresses, clean up the data and format it in a way that Shopify will accept for
+     * the REST API
+     *
+     * @param Collection<Address> $addresses
+     * @return Collection
+     */
+    protected function cleanUpAddressesForRest(Collection $addresses): Collection
+    {
+        $addresses = $this->filterAndSortAddressesToClean($addresses);
+
+        // transform it to fit Shopify's data structure (plus our internal id, so we can reference it to update)
+        $addresses->transform(function(Address $address) {
+            return  [
+                "ecommerce_address_id" => $address->getId(),
+                "address1" => $address->getStreetLine1(),
+                "address2" => $address->getStreetLine2(),
+                "city" => $address->getCity(),
+                "country" => $address->getCountry(),
+                "first_name" => $address->getFirstName(),
+                "last_name" => $address->getLastName(),
+                "name" => "{$address->getFirstName()} {$address->getLastName()}",
+                "province" => $address->getRegion(),
+                "zip" => $address->getZip()
+            ];
+        });
+
+        // and make sure it's unique - Shopify won't allow multiple addresses with the same data
+        return $addresses->unique(function (array $address) {
+            // ignore case
+            return strtoupper($address["address1"]).
+                strtoupper($address["address2"]).
+                strtoupper($address["city"]).
+                strtoupper($address["country"])
+                .strtoupper($address["first_name"]).
+                strtoupper($address["last_name"]).
+                strtoupper($address["name"]).
+                strtoupper($address["province"]).
+                strtoupper($address["zip"]);
+        });
+    }
+
+    /**
+     * We only want to use certain addresses, and want them ordered to start with the most recent,
+     * so filter then sort, and return the addresses.
+     *
+     * @param  Collection  $addresses
+     * @return Collection
+     */
+    private function filterAndSortAddressesToClean(Collection $addresses): Collection
+    {
+        // only use addresses that have at least streetLine1, since we may have addresses with no real data
+        $addresses = $addresses->filter(function (Address $address) {
+            return !empty($address->getStreetLine1());
+        });
+
+        // order them to start with the most recent, just in case of duplicates (we have some cases where the region is all caps, and some not, etc)
+        return $addresses->sort(function (Address $address1, Address $address2) {
+            return $address1->getUpdatedAt() < $address2->getUpdatedAt();
         });
     }
 
