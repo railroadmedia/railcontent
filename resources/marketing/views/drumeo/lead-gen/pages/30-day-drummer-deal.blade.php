@@ -239,7 +239,7 @@
             <h5 class=" text-drumeo uppercase"></h5>
             <div class="w-full mx-auto my-8 px-3" style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full reset-on-close bg-black" src="//player.vimeo.com/video/840552968" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                    <iframe class="absolute w-full h-full reset-on-close bg-black" src="//player.vimeo.com/video/869289949" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
             </div>
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">You’ve spent 30 days crushing it on the drums.
