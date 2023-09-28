@@ -145,71 +145,95 @@
         ])
     @endif
 
-    @php
-        $bubble1 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/summer-swee-singh.png';
-        $bubble2 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/lisa-witt.png';
-        $bubble3 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/jesus-molina.png';
-        $bubble4 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/kevin-castro.png';
-        $bubble5 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/erskine-hawkins.png';
-        $bubble6 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/victoria-theodore.png';
-        $bubble7 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/sangah-noona.png';
-        $bubble8 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/cassi-falk.png';
+    <section class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-center customize px-4 lg:px-8 relative overflow-hidden" style="background: #f6f8fc;">
+        <div class="container mx-auto max-w-4xl">
+            <div class="flex flex-wrap sm:flex-nowrap items-center">
+                <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5">
+                    <img class="hidden sm:inline-block h-56 sm:h-auto max-w-full sm:max-w-md lg:max-w-full transition-opacity opacity-0"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=1210,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/bundle-collage2.png"
+                            alt="{{$theme}} collage image"
+                    >
+                </div>
+                <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-auto flex-shrink-0">
+                    <img class="inline-block sm:hidden mb-4 h-64 sm:h-auto max-w-full sm:max-w-xl lg:max-w-full transition-opacity opacity-0"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/bundle-collage-m2.png"
+                            alt="{{$theme}} collage image"
+                    >
+                    <div class="inline-block mx-auto">
+                        <h2 class="w-auto leading-tight text-left"><strong class="text-pianote">Save 71% with your</strong><br> exclusive Webinar Bundle.</h2>
+                        <ul class="inline-block mx-auto fa-ul text-left pl-6 my-4 sm:my-5">
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Step-by-step lessons </li>
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> World-class instructors</li>
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> 1000+ Officially licensed songs</li>
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Detailed song tutorials</li>
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Live support</li>
+                        </ul>
+                    </div>
+                    <div class="w-72 lg:w-96 mx-auto sm:mx-0">
+                        <h2><s class="opacity-50">$240</s> <strong>$177</strong> <span class="text-sm">For your first year</span></h2>
 
-        $features = [
-            [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/piano-lesson-icon.svg',
-                'title' => 'Piano Lessons',
-                'desc' => 'Step-by-step video <br class="hidden sm:inline"> lessons on every topic.',
-            ],
-            [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/artist-course-icon.svg',
-                'title' => 'Artist Courses',
-                'desc' => 'Courses and live events<br class="hidden sm:inline"> with inspiring pianists. ',
-            ],
-            [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/songs-icon.svg',
-                'title' => '1000+ Songs',
-                'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
-            ],
-            [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/support-icon.svg',
-                'title' => '24/7 Support',
-                'desc' => 'The largest community<br class="hidden sm:inline"> of students & teachers.',
-            ],
-        ];
-        $slides = [
-            [
-                'desc' => 'Pianote is a really fun resource for those wishing to pick up tips and tricks and gain perspective. ',
-                'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/feature-testimonial-yvette.jpg',
-                'name' => 'Yvette Young',
-                'credit' => ' Multi-Instrumentalist',
-            ],
-            [
-                'desc' => 'You should check out Pianote. If you’re a beginner or intermediate, this is ideal for you!',
-                'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/feature-testimonial-ali.jpg',
-                'name' => 'Ali Spagnola',
-                'credit' => ' YouTube Entertainer',
-            ],
-            [
-                'desc' => 'Whether you’re getting your head around “Chopsticks” or brushing up on your Shostakovich, there should be a lesson for you.',
-                'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/feature-testimonial-musicradar.jpg',
-                'name' => 'MusicRadar',
-                'credit' => ' Website For Musicians',
-            ],
-        ];
-    @endphp
-
-            @include('musora.sales.components.header-section', [
-                'header' => 'Online piano lessons<br> for all skill levels.',
-                'underline' => true,
-                'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
-                'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
-                'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
-                'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
-                'pointOne' => 'Improve Your Skills',
-                'pointTwo' => 'World-Class Teachers',
-                'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-            ])
+                        <a class=" w-full sm:w-82 join smaller mt-4 @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
+                                href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&redirect=/order&locked=true&promo-code=special"
+                        >CLAIM YOUR OFFER</a>
+                        <p class="text-sm mt-2"><em>Money-back 90-day guarantee.</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="sticky-trigger block"></div>
+    <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&redirect=/order&locked=true&promo-code=special"
+            class="promo-banner flex text-white items-center justify-center -mt-10 py-1 px-2 sm:px-0 w-full z-[100] transition-none bg-cover bg-center" style="background:#ac1179 url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/order-bg.jpg');">
+        <h3 class="inline-block font-bebas mx-0 pr-3">* CONGRATULATIONS! *</h3>
+        <p class="inline-block text-sm mx-0 leading-tight">You qualify for the discount!</p>
+    </a>
+    <section class="py-6 sm:py-8 text-white text-center bg-cover bg-center" style="background:#ac1179 url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/order-bg.jpg');">
+        <div class="container max-w-4xl mx-auto">
+            <h6 class="leading-tight mb-4"><em><strong>PLUS</strong> get these special bonuses when you join today.</em></h6>
+            <div style="font-size:0px">
+                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 md:w-1/5 ">
+                    <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
+                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
+                            <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
+                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 md:w-1/5 ">
+                    <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
+                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
+                            <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
+                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 md:w-1/5 ">
+                    <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
+                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
+                            <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
+                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 md:w-1/5 ">
+                    <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
+                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
+                            <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
+                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     @php
@@ -287,25 +311,136 @@
         'instagram' => '220K',
     ])
 
+    <section class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-center customize px-4 lg:px-8 relative overflow-hidden" style="background: #f6f8fc;">
+        <div class="container mx-auto max-w-4xl">
+            <h3 class="leading-tight"><strong>Take a look at your bonuses…</strong></h3>
+            <h6 class="leading-tight text-pianote mt-2 mb-5"><em>Join today and you’ll get all of these.</em></h6>
+
+            <div class="flex flex-wrap text-left">
+                <div class="w-full mb-12 flex items-center">
+                    <div class="relative flex-shrink-0">
+                        <img class="h-96" src="">
+                        <h3 class="absolute bottom-0 mx-auto rounded-xl bg-white text-pianote px-4 py-2"><s>$39</s> <strong>FREE</strong></h3>
+                    </div>
+                    <div class="sm:pl-5 lg:pl-8">
+                        <img class="h-32 mb-3" src="">
+                        <p class="leading-tight">Our best-selling book is yours FREE. This book is your encyclopedia of piano chords & scales. Arranged by key, you’ll find every major, minor, sus, and 7th chord as well as all the scales you’ll need to play the songs you love without fear.</p>
+                    </div>
+                </div>
+                <div class="w-full mb-12 flex items-center">
+                    <div class="relative flex-shrink-0 sm:order-1">
+                        <img class="h-96" src="">
+                        <h3 class="absolute bottom-0 mx-auto rounded-xl bg-white text-pianote px-4 py-2"><s>$39</s> <strong>FREE</strong></h3>
+                    </div>
+                    <div class="sm:pr-5 lg:pr-8">
+                        <img class="h-32 mb-3" src="">
+                        <p class="leading-tight">Upgrade your practice space and master your music theory with this gorgeous poster bundle. Shipped flat so there are no creases and printed in full color on beautiful paper stock, these posters will help you connect the notes on the page to the keys on your piano.</p>
+                    </div>
+                </div>
+                <div class="w-full mb-12 flex items-center">
+                    <div class="relative flex-shrink-0">
+                        <img class="h-96" src="">
+                        <h3 class="absolute bottom-0 mx-auto rounded-xl bg-white text-pianote px-4 py-2"><s>$97</s> <strong>FREE</strong></h3>
+                    </div>
+                    <div class="sm:pl-5 lg:pl-8">
+                        <img class="h-32 mb-3" src="">
+                        <p class="leading-tight">Your first 30 days on the piano. This 30-day challenge will help you come back to the keys with confidence and feel excited to play your piano every day. Simply follow along with Lisa for 10 minutes a day. You’ll have lifetime access to this course.</p>
+                    </div>
+                </div>
+                <div class="w-full mb-12 flex items-center">
+                    <div class="relative flex-shrink-0 sm:order-1">
+                        <img class="h-96" src="">
+                        <h3 class="absolute bottom-0 mx-auto rounded-xl bg-white text-pianote px-4 py-2"><s>$97</s> <strong>FREE</strong></h3>
+                    </div>
+                    <div class="sm:pr-5 lg:pr-8">
+                        <img class="h-32 mb-3" src="">
+                        <p class="leading-tight">Put what you learned in the webinar to use with this 30-day chording challenge. Play with Lisa every day and master your chord progressions and inversions so you can play any lead sheet with ease. All you have to do is pretty play and follow along.</p>
+                    </div>
+                </div>
+                <div class="w-full mb-12 flex items-center">
+                    <div class="relative flex-shrink-0">
+                        <img class="h-96" src="">
+                        <h3 class="absolute bottom-0 mx-auto rounded-xl bg-white text-pianote px-4 py-2"><s>$99</s> <strong>FREE</strong></h3>
+                    </div>
+                    <div class="sm:pl-5 lg:pl-8">
+                        <img class="h-32 mb-3" src="">
+                        <p class="leading-tight">Take your chords and make something beautiful. Lisa will show you her favorite riffs and fills to add some emotion and beauty to your playing. These are the fills she uses every day. She’ll show you each one, note for note.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-6xl mx-auto">
             <div class="relative">
                 <table class="w-full mx-auto comparison max-w-4xl mx-auto mb-10 private">
                     <tbody>
+                    <style>
+                        table.comparison tr td {
+                            width: 33.3%!important;
+                            font-size: 14px;
+                        }
+                        @media (min-width: 768px) {
+                            table.comparison tr td {
+                                font-size: 18px;
+                            }
+
+                        }
+                    </style>
                     <tr style="background-color:transparent!important;">
                         <td></td>
-                        <td class="rounded-t-xl"><img class="h-8 sm:h-14 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=220,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-white.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')"></td>
-                        <td class="cursor-pointer sm:cursor-default rounded-tr-xl"><strong>Piano<br> Books</strong></td>
+                        <td class="rounded-tl-xl"><strong>WEBINAR<br> BUNDLE</strong></td>
+                        <td class="rounded-tr-xl">TRADITIONAL<br> LESSONS</td>
                     </tr>
                     <tr>
-                        <td>Style</td>
-                        <td>20 Play-Along Lessons</td>
-                        <td>In-Person</td>
+                        <td>Step-by-step curriculum</td>
+                        <td><i class="fas fa-check"></i></td>
+                        <td><i class="fas fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Real teacher</td>
+                        <td><i class="fas fa-check"></i></td>
+                        <td><i class="fas fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Live lessons</td>
+                        <td><i class="fas fa-check"></i></td>
+                        <td><i class="fas fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td>On-demand lessons</td>
+                        <td><i class="fas fa-check"></i></td>
+                        <td><i class="fas fa-times"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Learn from home</td>
+                        <td><i class="fas fa-check"></i></td>
+                        <td><i class="fas fa-times"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Multiple instructors</td>
+                        <td><i class="fas fa-check"></i></td>
+                        <td><i class="fas fa-times"></i></td>
+                    </tr>
+                    <tr>
+                        <td>1000+ songs</td>
+                        <td><i class="fas fa-check"></i></td>
+                        <td><i class="fas fa-times"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Books/Posters included</td>
+                        <td><i class="fas fa-check"></i></td>
+                        <td><i class="fas fa-times"></i></td>
+                    </tr>
+                    <tr>
+                        <td>90-Day Guarantee</td>
+                        <td><i class="fas fa-check"></i></td>
+                        <td><i class="fas fa-times"></i></td>
                     </tr>
                     <tr>
                         <td>Investment</td>
-                        <td class="rounded-b-xl"><strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong><br>Single Payment</td>
-                        <td class="rounded-br-xl"><strong>$19-$49</strong><br>&nbsp;</td>
+                        <td class="rounded-bl-xl"><s class="opacity-60">$611</s> <strong>$177<br> 1st year.</strong></td>
+                        <td class="rounded-br-xl">$2400-$3600 <br>per year.</td>
                     </tr>
                     </tbody>
                 </table>
@@ -436,6 +571,24 @@ That’s the Play Better Guarantee™',
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
+    <script>
+        $(document).ready(function () {
+            var stickyBar = $('.promo-banner');
+            $(window).scroll(function () {
+                var stickTrigger = $('.sticky-trigger').offset().top;
+                var unstickTrigger = $('.unstick-trigger').offset().top;
+                if ($(this).scrollTop() > (unstickTrigger - 115)) {
+                    stickyBar.removeClass('fixed mt-0');
+                }
+                if ($(this).scrollTop() < stickTrigger - 115) {
+                    stickyBar.removeClass('fixed mt-0');
+                }
+                if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
+                    stickyBar.addClass('fixed mt-0');
+                }
+            });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
