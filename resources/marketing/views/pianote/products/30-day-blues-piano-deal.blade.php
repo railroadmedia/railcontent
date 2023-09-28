@@ -175,7 +175,7 @@
     [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/scales-poster.jpg',
         'title' => 'Scales Poster',
-        'description' => 'All the major and minor scales on one place.',
+        'description' => 'All the major and minor scales in one place.',
         'price' => 9,
         'shipping' => true,
     ],
