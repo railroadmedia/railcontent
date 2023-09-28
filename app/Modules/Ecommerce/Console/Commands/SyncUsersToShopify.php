@@ -13,6 +13,7 @@ use Railroad\Ecommerce\Repositories\AddressRepository;
 use Railroad\Ecommerce\Repositories\CustomerRepository;
 use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\REST\Resources\ApiResource;
+use Signifly\Shopify\REST\Resources\CustomerResource;
 use Signifly\Shopify\Shopify;
 
 class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
@@ -186,44 +187,15 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
 
         // STEP 4: send the data to Shopify
         if (!$simulate) {
-            try {
-                if ($isCreating) {
-                    $customerResource = $this->shopify->createCustomer($postData);
-                } else {
-                    $existingCustomerShopifyId = $user->shopify_id ?? $alreadySyncedUserCustomers->first(
-                    )->getShopifyId();
-                    $customerResource = $this->shopify->updateCustomer($existingCustomerShopifyId, $postData);
-                }
-            } catch (ValidationException $exception) {
-                // we can have edge cases where the customer was created in Shopify, but we didn't record their shopify_id,
-                // so check for that error and record Shopify's id on our records
-                $errors = collect($exception->errors);
-                if (collect($errors->get("email"))->contains("has already been taken")) {
-                    $this->linkExistingCustomer($user->email);
-                    $this->tableRows[] = [
-                        $user->id,
-                        "User",
-                        "<error>EMAIL EXISTING</error>",
-                        "Email account already taken. Shopify ID recorded locally."
-                    ];
-                    return;
-                }
-
-                $this->error(
-                    sprintf(
-                        "Validation failed when sending customer data to Shopify: %s",
-                        $exception->getMessage()
-                    )
-                );
-                $this->error(
-                    sprintf(
-                        "Please investigate for user or customers with email address %s. Attempted customer data: %s",
-                        $user->email,
-                        json_encode($postData)
-                    )
-                );
-                // record the failure in the table then exit out for this user
-                $this->tableRows[] = [$user->id, "User", "<error>FAILED</error>", $exception->getMessage()];
+            $attemptNumber = 1;
+            $customerResource = $this->sendDataToShopify(
+                $postData,
+                $isCreating,
+                $alreadySyncedUserCustomers,
+                $attemptNumber
+            );
+            if (is_null($customerResource)) {
+                // we failed to send the data. the error was recorded within the sendDataToShopify function
                 return;
             }
 
@@ -312,6 +284,78 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
         }
 
         return $customerData;
+    }
+
+    /**
+     * Send the data to Shopify to create or update a customer. Allowing up to 2 attempts, so that we can retry
+     * after certain validation failures.
+     *
+     * @param  array  $postData
+     * @param  bool  $isCreating
+     * @param  Collection  $alreadySyncedUserCustomers
+     * @param  int  $attemptNumber
+     * @return CustomerResource|null
+     */
+    private function sendDataToShopify(
+        array $postData,
+        bool $isCreating,
+        Collection $alreadySyncedUserCustomers,
+        int $attemptNumber
+    ): ?CustomerResource {
+        if ($attemptNumber > 2) {
+            return null;
+        }
+
+        try {
+            if ($isCreating) {
+                $customerResource = $this->shopify->createCustomer($postData);
+            } else {
+                $existingCustomerShopifyId = $user->shopify_id ?? $alreadySyncedUserCustomers->first()->getShopifyId();
+                $customerResource = $this->shopify->updateCustomer($existingCustomerShopifyId, $postData);
+            }
+        } catch (ValidationException $exception) {
+            // we can have edge cases where the customer was created in Shopify, but we didn't record their shopify_id,
+            // so check for that error and record Shopify's id on our records
+            $errors = collect($exception->errors);
+            if (collect($errors->get("email"))->contains("has already been taken")) {
+                $this->linkExistingCustomer($user->email);
+                $this->tableRows[] = [
+                    $user->id,
+                    "User",
+                    "<error>EMAIL EXISTING</error>",
+                    "Email account already taken. Shopify ID recorded locally."
+                ];
+                return null;
+            }
+
+            // a common validation error is that the phone number is invalid. We try our best to set it to
+            // something valid, but there's no guarantee it's right. So if that validation failed, try again
+            // without a phone number
+            if (collect($errors->get("phone"))->contains("Enter a valid phone number")) {
+                // remove the phone number from the post data and try again
+                $postData["phone"] = null;
+                return $this->sendDataToShopify($postData, $isCreating, $alreadySyncedUserCustomers, ++$attemptNumber);
+            }
+
+            // a different validation error occurred that we can't handle, so report it here
+            $this->error(
+                sprintf(
+                    "Validation failed when sending customer data to Shopify: %s",
+                    $exception->getMessage()
+                )
+            );
+            $this->error(
+                sprintf(
+                    "Please investigate for user or customers with email address %s. Attempted customer data: %s",
+                    $user->email,
+                    json_encode($postData)
+                )
+            );
+            // record the failure in the table then exit out for this user
+            $this->tableRows[] = [$user->id, "User", "<error>FAILED</error>", $exception->getMessage()];
+            return null;
+        }
+        return $customerResource;
     }
 
     /**
