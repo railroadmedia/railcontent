@@ -1,7 +1,7 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 1, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
+    @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
         <script type="text/JavaScript">
             function Redirect() { window.location = "https://www.drumeo.com/lp"; }
             Redirect();
@@ -174,7 +174,7 @@
                 <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>$20/month</strong></h3>
                 <p class="leading-tight opacity-70 text-sm"><em>Billed at $240 per year.</em></p>
 
-                @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 1, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                 <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;"
                         href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6">GET STARTED</a>
                 @endif
@@ -263,7 +263,7 @@
                         Click below for your best year on the drums yet.
                         <br>
 
-                        @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 1, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                        @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                         <a class="join drumeo smaller my-3 w-1/2" href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6">GET Started &raquo;</a>
                         @endif
                         <br>
@@ -642,7 +642,7 @@
                 <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>$20/month</strong></h3>
                 <p class="leading-tight opacity-70 text-sm"><em>Billed at $240 per year.</em></p>
 
-                @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 1, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                 <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;"
                         href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6"
                 >GET STARTED</a>
