@@ -145,6 +145,10 @@
         ])
     @endif
 
+    @php
+        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[easy-chords]=1&products[new-piano-players-start-here]=1&products[piano-riffs-and-fills]=1&redirect=/order&locked=true&promo-code=special-discount'
+    @endphp
+
     <section class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-center customize px-4 lg:px-8 relative overflow-hidden" style="background: #f6f8fc;">
         <div class="container mx-auto max-w-4xl">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
@@ -177,7 +181,7 @@
                         <h2><s class="opacity-50">$240</s> <strong>$177</strong> <span class="text-sm">For your first year</span></h2>
 
                         <a class=" w-full sm:w-82 join smaller mt-4 @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
-                                href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&redirect=/order&locked=true&promo-code=special"
+                                href="{{ $buttonLink }}"
                         >CLAIM YOUR OFFER</a>
                         <p class="text-sm mt-2"><em>Money-back 90-day guarantee.</em></p>
                     </div>
@@ -186,7 +190,7 @@
         </div>
     </section>
     <div class="sticky-trigger block"></div>
-    <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&redirect=/order&locked=true&promo-code=special"
+    <a href="{{ $buttonLink }}"
             class="promo-banner flex text-white items-center justify-center -mt-10 py-1 px-2 sm:px-0 w-full z-[100] transition-none bg-cover bg-center" style="background:#ac1179 url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/order-bg.jpg');">
         <h3 class="inline-block font-bebas mx-0 pr-3">* CONGRATULATIONS! *</h3>
         <p class="inline-block text-sm mx-0 leading-tight">You qualify for the discount!</p>
@@ -543,7 +547,6 @@ That’s the Play Better Guarantee™',
     'topImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-annual-2w-card.png',
     'subHeader' => '<strong><span class="text-musora">SAVE 20%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 3 COURSES, 6 POSTERS & THE CHORDS AND SCALES BOOK.',
     'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
-    'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&redirect=/order&locked=true&promo-code=special-discount',
     'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
     ])
 
