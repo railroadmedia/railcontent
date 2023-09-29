@@ -535,7 +535,7 @@
                 ])
                 @include('pianote.products.partials._testimonial', [
                 "heading" => "I got the feeling I was actually improving…",
-                "testimonial" => "Piano Technique Made Easy has taught me the fundamentals and helped me get to playing some of my original songs.<br><br>Soon after starting, I got the feeling that I was actually improving and accomplishing what I set out to do.<br><br>If anyone is motivated to learn the piano, Pano Technique Made Easy is probably the best way to do it.",
+                "testimonial" => "Piano Technique Made Easy has taught me the fundamentals and helped me get to playing some of my original songs.<br><br>Soon after starting, I got the feeling that I was actually improving and accomplishing what I set out to do.<br><br>If anyone is motivated to learn the piano, Piano Technique Made Easy is probably the best way to do it.",
                 "name" => "Dennis Inman",
                 "location" => "Washington, USA",
                 ])

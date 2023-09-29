@@ -286,7 +286,7 @@
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>
+                            <span class="join sold-out medium w-full">SOLD OUT</span>
 {{--                                <a href="#final" class="join medium w-full anchor-slide">ENROLL NOW</a>--}}
                             <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">
                                 <a href="https://www.musora.com/pianote/enrollment/easy-chords">Pianote Members register for free here.</a>
@@ -647,7 +647,7 @@
                 @endforeach
             </div>
 
-            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>
+            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">SOLD OUT</span><br>
 
 {{--                <a href="#final"--}}
 {{--                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>--}}
@@ -709,7 +709,7 @@
                         <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Course runs June 5 to July 5.</p>
                         <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>  Choose your best option to get started.</p>
                     </div>
-                    <span class="join sold-out medium w-full align-middle" data-open="waitlistModal">JOIN WAITLIST</span>
+                    <span class="join sold-out medium w-full align-middle">SOLD OUT</span>
                 </div>
 
 {{--                <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">--}}
@@ -798,25 +798,6 @@
         </div>
     </section>
 
-    <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none" id="waitlistModal" style="max-width: 560px;" data-reveal data-reset-on-close="false">
-        <div class="p-5 sm:p-7">
-{{--            <img class="h-14 sm:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/new-piano-players-start-here-logo-2+1.png">--}}
-            <h3 class="leading-tight my-4"><strong>Join The Waitlist!</strong></h3>
-            <p class="mb-4">
-                Enter your email below to get notified when the next <br class="hidden sm:inline">
-                edition of Easy Chords is announced. </p>
-
-            @include("pianote._partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-                "formName" => 'Easy Chords Waitlist',
-                "formId" => "Pianote - Engagement - Trigger - Easy Chords Waitlist - Web Form",
-                "buttonText" => "Let Me Know ",
-                "stacked" => true,
-                "noSocial" => true,
-            ])
-        </div>
-    </div>
-
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "dayOne",
         "video" => '//player.vimeo.com/video/823805392?h=bbd23aa655&autoplay=1',
@@ -869,10 +850,6 @@
                 $(this).parents().find('table').removeClass('private books online');
                 $(this).parents().find('table').addClass('private');
             });
-
-            @if(!empty($errors) && $errors->any())
-                $('#waitlistModal').foundation('open');
-            @endif
         })
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>

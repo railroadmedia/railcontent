@@ -629,7 +629,7 @@
                         </a>
                     </div>
 
-                    @if( Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 1, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now() )
+                    @if( Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now() )
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         <img class="h-16 absolute top-0 right-0 z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/shop/stickbag/free-shipping-icon.svg">
                         <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-drumeo uppercase" >LAUNCH SPECIAL</p>
