@@ -175,10 +175,11 @@
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> 1000+ Officially licensed songs</li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Detailed song tutorials</li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Live support</li>
+                            <li class="leading-tight"><i class="fa-li fas fa-check text-pianote"></i> 10 FREE Bonuses</li>
                         </ul>
                     </div>
                     <div class="w-72 lg:w-96 mx-auto sm:mx-0">
-                        <h2><s class="opacity-50">$240</s> <strong>$177</strong> <span class="text-sm">For your first year</span></h2>
+                        <h2><s class="opacity-50">$611</s> <strong>$177</strong> <span class="text-sm">For your first year</span></h2>
 
                         <a class=" w-full sm:w-82 join smaller mt-4 @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
                                 href="{{ $buttonLink }}"
@@ -462,7 +463,7 @@
 But what if it doesn’t work?<br>
 Then you won’t have to pay. We’re so confident you’ll love the results, that you’ll 90 days to put us to the test. It’s the longest guarantee out there. And it’s enough time to really know if this is for you.<br>
 If you’re not happy (for any reason), simply let us know within 90 days for a refund.<br>
-That’s the Play Better Guarantee™',
+That’s the Play Better Guarantee™.',
     ])
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
@@ -545,7 +546,7 @@ That’s the Play Better Guarantee™',
         'CTA' => 'CLAIM YOUR OFFER',
     'promoHeader' => '<h2 class="leading-tight mb-4"><strong class="text-musora">Save 71% with your</strong><br>exclusive Webinar Bundle.</h2>',
     'topImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-annual-2w-card.png',
-    'subHeader' => '<strong><span class="text-musora">SAVE 20%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 3 COURSES, 6 POSTERS & THE CHORDS AND SCALES BOOK.',
+    'subHeader' => '<strong><span class="text-musora">SAVE 26%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 3 COURSES, 6 POSTERS & THE CHORDS AND SCALES BOOK.',
     'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
     'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
     ])

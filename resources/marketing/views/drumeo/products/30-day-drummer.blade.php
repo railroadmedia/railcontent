@@ -217,7 +217,7 @@
 
 @section('body-data')
     x-data="{
-    modal: {{ empty(user()) ? true : false }},
+    waitlistModal: false,
     }"
 @endsection
 
@@ -278,7 +278,7 @@
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>
+                            <span class="join sold-out medium w-full" @click="waitlistModal = true;">JOIN WAITLIST</span>
 {{--                                <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>--}}
 {{--                            <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">--}}
 {{--                                <a href="{{ get_musora_brand_base_url() }}/30-day-drummer">Drumeo Members register for free here.</a>--}}
@@ -793,7 +793,7 @@
             <img class="h-20 sm:h-24 lg:h-28 mb-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/30_day_drummer_logo.svg" alt="30DD logo season3 logo">
             <h3 class="mb-4"><strong>Learn the drums with daily guided workouts.</strong></h3>
 
-            <span class="join sold-out medium w-full max-w-xs align-middle mt-7" data-open="waitlistModal">JOIN WAITLIST</span>
+            <span class="join sold-out medium w-full max-w-xs align-middle mt-7" @click="waitlistModal = true;">JOIN WAITLIST</span>
 {{--            <p class="leading-normal mb-12">--}}
 {{--                <strong class="bg-musora-black text-white px-1">EARLY BIRD SPECIAL:</strong> Save up to 20% on all bundles before August 20th.--}}
 {{--                <br>&nbsp;--}}
@@ -955,22 +955,24 @@
         </div>
     </section>
 
-    <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="waitlistModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">
-        <div class="p-5 sm:p-7">
-            {{--            <img class="h-24 sm:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD logo">--}}
-            <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
-            <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
-                next edition of 30-Day Drummer is announced. </p>
-            @include("drumeo.lead-gen.partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-                "formName" => '30 Day Chops Waitlist',
-                "formId" => "Drumeo - Engagement - Trigger - 30 Day Chops Waitlist - Web Form",
-                "buttonText" => "Let Me Know ",
-                "stacked" => true,
-                "noSocial" => true,
-            ])
-        </div>
-    </div>
+    @component('_partials.components.modal', ['name' => 'waitlistModal'])
+        @slot('content')
+            <div class="relative overflow-y-visible max-w-md px-4 md:px-5 lg:px-7 py-5 md:py-7 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
+                <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
+                <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
+                    next edition of 30-Day Drummer is announced. </p>
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                        "recaptchaKey" => $recaptchaKey,
+                    "formName" => '30 Day Chops Waitlist',
+                    "formId" => "Drumeo - Engagement - Trigger - 30 Day Chops Waitlist - Web Form",
+                    "buttonText" => "Let Me Know ",
+                    "stacked" => true,
+                    "noSocial" => true,
+                ])
+            </div>
+        @endslot
+    @endcomponent
+
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
         "video" => '//player.vimeo.com/video/852777053?h=87d3e7a97a&autoplay=1',
