@@ -259,6 +259,7 @@
 
 @section('body-data')
     x-data="{
+    trailer: false,
     enroll: false
     }"
 @endsection
@@ -269,8 +270,8 @@
     ])
 
 
-    <header class="px-5 sm:px-6 pt-10 pb-80 sm:py-14 lg:py-20 text-white relative" style="background:linear-gradient(to bottom, #910b81, #c41460 66%, #f5f8fb 66%);">
-        <div class="inset-0 hidden sm:block absolute bg-center bg-cover z-0 mx-auto" style="max-width:1800px;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/header-image.png');"></div>
+    <header class="px-5 sm:px-6 pt-10 pb-80 sm:py-14 lg:py-20 xl:py-36 text-white relative" style="background:#f5f8fb;">
+        <div class="inset-0 hidden sm:block absolute bg-center bg-cover z-0 mx-auto" style="max-width:1920px;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/header-image.png');"></div>
         <div class="inset-0 block sm:hidden absolute bg-bottom bg-cover z-0" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/header-image-m.png');"></div>
         <div class="container max-w-4xl mx-auto relative z-10">
             <div class="w-full sm:w-1/2 text-center lg:text-left">
@@ -333,7 +334,10 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-5xl mx-auto -mt-36 sm:-mt-64 lg:-mt-96">
             <h3 class="leading-tight mb-7"><strong>So how is this different?</strong></h3>
-            <img class="rounded-xl overflow-hidden cursor-pointer h-44 sm:h-96" data-open="trailer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/trailer-thumb.jpg"></img>
+            <div class="relative cursor-pointer" x-on:click="trailer = true;">
+                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
+                <img class="rounded-xl overflow-hidden  h-44 sm:h-96" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/trailer.jpg"></img>
+            </div>
            <br>
             <img class="h-9 sm:h-11 my-5 sm:my-8" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/dear-fellow.png"></img>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-2 items-stretch text-left mb-5 sm:mb-8">
@@ -529,7 +533,7 @@
             @include('_partials.components.question-dropdown', [
             "num" => "?",
             "title" => "So how does this work?",
-            "desc" => "This is a Webinar. When you click “ENROLL NOW” you’ll be able to choose a time and date that works for you! The video lessons is not live, but you’ll be able to ask questions and get answers from our team of moderators who will be in the chat.",
+            "desc" => "This is a Webinar. When you click “ENROLL NOW” you’ll be able to choose a time and date that works for you! The video lessons are not live, but you’ll be able to ask questions and get answers from our team of moderators who will be in the chat.",
             ])
 
             @include('_partials.components.question-dropdown', [
@@ -561,6 +565,11 @@
 </div>
 @endslot
 @endcomponent
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '869353786',
+        'vimeo' => true,
+    ])
 
 @include("pianote.sales.partials._footer")
 

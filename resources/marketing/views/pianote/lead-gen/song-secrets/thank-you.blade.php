@@ -31,9 +31,10 @@
                 <div class="flex flex-wrap sm:text-left">
                     <div class="w-full sm:w-5/12 mx-auto px-10 max-w-xs sm:max-w-full sm:pl-0 sm:pr-5 relative">
 {{--                        <img class="absolute top-0 right-0 -mx-14 -my-3 h-14" src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" style="filter: sepia()saturate(20)brightness(.8)hue-rotate(-17deg);">--}}
-                        <div class="w-full relative rounded-xl overflow-hidden shadow-lg" style="padding-bottom: 177%;">
-                            <iframe class="fixed inset-0 h-full w-full absolute" src="//player.vimeo.com/video/TODO" frameborder="0" allowfullscreen title="intro-video"></iframe>
-                        </div>
+{{--                        <div class="w-full relative rounded-xl overflow-hidden shadow-lg" style="padding-bottom: 177%;">--}}
+{{--                            <iframe class="fixed inset-0 h-full w-full absolute" src="//player.vimeo.com/video/TODO" frameborder="0" allowfullscreen title="intro-video"></iframe>--}}
+{{--                        </div>--}}
+                        <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/lisa-witt-profile-m.png">
                     </div>
                     <p class="w-full sm:w-7/12 mt-8 sm:mt-0 flex-shrink sm:pl-4">
                         <strong><i class="fas fa-check text-pianote"></i> Check your email.</strong><br>
