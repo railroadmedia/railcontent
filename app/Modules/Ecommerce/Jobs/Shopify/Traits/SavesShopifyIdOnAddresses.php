@@ -121,9 +121,12 @@ trait SavesShopifyIdOnAddresses
     protected function storeShopifyId(Collection $addresses, int $shopifyId): void
     {
         $addresses->each(function(Address $address) use ($shopifyId) {
-            $address->setShopifyId($shopifyId);
-            $this->getEntityManager()->persist($address);
-            $this->getEntityManager()->flush();
+            // grab the eloquent model, so we can update it
+            $addressModel = \App\Modules\Ecommerce\Models\Address::find($address->getId());
+            $addressModel->shopify_id = $shopifyId;
+            $addressModel->saveWithoutUpdatedAt();
+            // refresh the doctrine model to get the change
+            $this->entityManager->refresh($address);
         });
     }
 

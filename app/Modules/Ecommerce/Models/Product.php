@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Models;
 
+use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\Ecommerce\database\factories\ProductFactory;
 use App\Modules\Ecommerce\Enums\DigitalAccessType;
 use Carbon\Carbon;
@@ -92,6 +93,7 @@ use Illuminate\Support\Facades\Log;
  */
 class Product extends Model
 {
+    use CanSaveWithoutUpdatedAt;
     use HasFactory;
     use SoftDeletes;
 

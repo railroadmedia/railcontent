@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Models;
 
+use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,12 +16,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property int $id
  * @property int $subscription_id
  * @property int $payment_id
+ * @property int|null $shopify_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
  */
 class SubscriptionPayment extends Model
 {
+    use CanSaveWithoutUpdatedAt;
+
     protected $table = 'ecommerce_subscription_payments';
     protected $primaryKey = 'id';
 

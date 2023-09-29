@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Models;
 
+use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,8 +24,8 @@ use Modules\UserManagementSystem\Models\User;
  */
 class Order extends Model
 {
+    use CanSaveWithoutUpdatedAt;
     use SoftDeletes;
-
     protected $table = 'ecommerce_orders';
     protected $primaryKey = 'id';
 

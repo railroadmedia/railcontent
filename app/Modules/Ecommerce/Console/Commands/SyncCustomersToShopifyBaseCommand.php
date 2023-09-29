@@ -7,6 +7,7 @@ use App\Modules\Ecommerce\Console\Commands\Traits\SyncsToShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\FindsCustomers;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SavesShopifyIdOnAddresses;
+use App\Modules\Ecommerce\Models\Address;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Exception\ORMException;
@@ -81,14 +82,17 @@ class SyncCustomersToShopifyBaseCommand extends Command
 
         if (!is_null($user)) {
             $user->shopify_id = $shopifyCustomerId;
-            $user->update();
+            $user->saveWithoutUpdatedAt();
         }
         $customers = $this->getCustomersForEmail($email);
         try {
             $customers->each(function (Customer $customer) use ($shopifyCustomerId) {
-                $customer->setShopifyId($shopifyCustomerId);
-                $this->entityManager->persist($customer);
-                $this->entityManager->flush();
+                // grab the eloquent model, so we can update it
+                $customerModel = \App\Modules\Ecommerce\Models\Customer::find($customer->getId());
+                $customerModel->shopify_id = $shopifyCustomerId;
+                $customerModel->saveWithoutUpdatedAt();
+                // refresh the doctrine model to get the change
+                $this->entityManager->refresh($customer);
             });
         } catch (ORMException $e) {
             $this->error(
@@ -298,9 +302,12 @@ class SyncCustomersToShopifyBaseCommand extends Command
                     try {
                         $addressEntity = $this->addressRepository->byId($addressData["ecommerce_address_id"]);
                         if ($addressEntity) {
-                            $addressEntity->setShopifyId($addressShopifyId);
-                            $this->entityManager->persist($addressEntity);
-                            $this->entityManager->flush();
+                            // grab the eloquent model, so we can update it
+                            $addressModel = Address::find($addressEntity->getId());
+                            $addressModel->shopify_id = $addressShopifyId;
+                            $addressModel->saveWithoutUpdatedAt();
+                            // refresh the doctrine model to get the change
+                            $this->entityManager->refresh($addressEntity);
                         }
                         $this->shopifyIds->push($addressShopifyId);
                     } catch (\Doctrine\ORM\ORMException $e) {

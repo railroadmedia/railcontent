@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Models;
 
+use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +26,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class OrderItemFulfillment extends Model
 {
+    use CanSaveWithoutUpdatedAt;
+
     protected $table = 'ecommerce_order_item_fulfillment';
     protected $primaryKey = 'id';
 

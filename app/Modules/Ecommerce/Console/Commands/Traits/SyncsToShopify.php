@@ -155,24 +155,6 @@ trait SyncsToShopify
     }
 
     /**
-     * Get the function to use for this resource
-     *
-     * @return string
-     * @throws Exception
-     */
-    private function getResourceFunction(): string
-    {
-        return match ($this->getShopifyResourceClass()) {
-            ProductResource::class => "getProducts",
-            CustomerResource::class => "getCustomers",
-            OrderResource::class => "getOrders",
-            default => throw new Exception(
-                "{$this->getShopifyResourceClass()} has not been configured in getResourceFunction()"
-            ),
-        };
-    }
-
-    /**
      * Are we running in simulation mode?
      *
      * @return bool

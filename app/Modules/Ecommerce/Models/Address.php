@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Models;
 
+use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\Ecommerce\database\factories\AddressFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -36,9 +37,13 @@ class Address extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use CanSaveWithoutUpdatedAt;
 
     protected $table = 'ecommerce_addresses';
     protected $primaryKey = 'id';
+
+    public const BILLING_TYPE = "billing";
+    public const SHIPPING_TYPE = "shipping";
 
     protected static function newFactory(): AddressFactory
     {
