@@ -13,6 +13,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 use Modules\Ecommerce\Services\PaymentService;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\Ecommerce\Gateways\RevenueCatGateway;
 
 class RevenueCatController extends Controller
 {
@@ -31,12 +32,14 @@ class RevenueCatController extends Controller
         RevenueCatService $revenueCatService,
         SubscriptionService $subscriptionService,
         UserProductService $userProductService,
-        PaymentService $paymentService
+        PaymentService $paymentService,
+        RevenueCatGateway $revenueCatGateway
     ) {
         $this->revenueCatService = $revenueCatService;
         $this->subscriptionService = $subscriptionService;
         $this->userProductService = $userProductService;
         $this->paymentService = $paymentService;
+        $this->revenueCatGateway = $revenueCatGateway;
     }
 
     public function processNotification(Request $request)
@@ -476,5 +479,127 @@ class RevenueCatController extends Controller
                                         ]);
             }
         }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function purchaseIOS(Request $request)
+    {
+        $revenuecatPurchase = $this->revenueCatGateway->purchase(
+            $request->input('data.attributes.receipt'),
+            null,
+            'ios',
+            $request->input('data.attributes.price'),
+            $request->input('data.attributes.currency'),
+            $request->has('data.attributes.app') ? $request->input('data.attributes.app') : 'Musora',
+        );
+        $apiResponse = json_decode($revenuecatPurchase);
+
+        $user = $this->revenueCatService->syncSubscriber(
+            $apiResponse->subscriber->original_app_user_id,
+            $request->input('data.attributes.email'),
+            true
+        );
+
+         $revenuecatPurchase = $this->revenueCatGateway->purchase(
+            $request->input('data.attributes.receipt'),
+            null,
+            'ios',
+            $request->input('data.attributes.price'),
+            $request->input('data.attributes.currency'),
+            'Drumeo',
+            $user->email,
+            $user->id
+        );
+
+
+        $token = $user->createToken('ios');
+        $user->withAccessToken($token);
+
+        $userAuthToken =  $token->plainTextToken;
+        $attributes = [
+            'receipt' => $request->input('data.attributes.receipt'),
+            'email' => $request->input('data.attributes.email'),
+            'brand' => 'pianote',
+            'valid' => true,
+            'validation_error' => null
+        ];
+        $response = new \stdClass();
+        $data = new \stdClass();
+        $data->type = 'appleReceipt';
+        $data->id = rand();
+        $data->attributes = $attributes;
+
+        $meta = new \stdClass();
+        $meta->auth_code = $userAuthToken;
+        $response->data = $data;
+        $response->meta = $meta;
+
+        return response()->json($response);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function purchaseGoogle(Request $request)
+    {
+        $revenuecatPurchase = $this->revenueCatGateway->purchase(
+            $request->input('data.attributes.purchase_token'),
+            $request->input('data.attributes.product_id'),
+            'android',
+            $request->input('data.attributes.price'),
+            $request->input('data.attributes.currency'),
+            $request->has('data.attributes.app') ? $request->input('data.attributes.app') : 'Musora',
+        );
+        $apiResponse = json_decode($revenuecatPurchase);
+
+        $user = $this->revenueCatService->syncSubscriber(
+            $apiResponse->subscriber->original_app_user_id,
+            $request->input('data.attributes.email'),
+            true
+        );
+
+        $revenuecatPurchase = $this->revenueCatGateway->purchase(
+            $request->input('data.attributes.purchase_token'),
+            $request->input('data.attributes.product_id'),
+            'android',
+            $request->input('data.attributes.price'),
+            $request->input('data.attributes.currency'),
+            $request->has('data.attributes.app') ? $request->input('data.attributes.app') : 'Musora',
+            $user->email,
+            $user->id
+        );
+
+
+        $token = $user->createToken('android');
+        $user->withAccessToken($token);
+
+        $userAuthToken =  $token->plainTextToken;
+        $attributes = [
+            'purchase_token' => $request->input('data.attributes.purchase_token'),
+            'package_name' => $request->input('data.attributes.package_name'),
+            'product_id' => $request->input('data.attributes.product_id'),
+            'email' => $request->input('data.attributes.email'),
+            'brand' => 'pianote',
+            'valid' => true,
+            'validation_error' => null
+        ];
+        $response = new \stdClass();
+        $data = new \stdClass();
+        $data->type = 'googleReceipt';
+        $data->id = rand();
+        $data->attributes = $attributes;
+
+        $meta = new \stdClass();
+        $meta->auth_code = $userAuthToken;
+        $response->data = $data;
+        $response->meta = $meta;
+
+        return response()->json($response);
     }
 }

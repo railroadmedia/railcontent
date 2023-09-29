@@ -20,3 +20,18 @@ Route::prefix(config('ecommerce.route_prefix'))->group(function () {
     )->middleware([\Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class]);
 });
 
+if(config('ecommerce.revenuecat_only') == true){
+    Route::post(
+        '/apple/verify-receipt-and-process-payment',
+        \App\Modules\Ecommerce\Controllers\RevenueCatController::class . '@purchaseIOS'
+    )
+        ->name('apple_store_kit.process_receipt');
+
+    Route::post(
+        '/google/verify-receipt-and-process-payment',
+        \App\Modules\Ecommerce\Controllers\RevenueCatController::class . '@purchaseGoogle'
+    )
+        ->name('google_play_store.process_receipt');
+
+}
+
