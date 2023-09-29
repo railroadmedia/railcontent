@@ -189,6 +189,7 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
         if (!$simulate) {
             $attemptNumber = 1;
             $customerResource = $this->sendDataToShopify(
+                $user,
                 $postData,
                 $isCreating,
                 $alreadySyncedUserCustomers,
@@ -290,6 +291,7 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
      * Send the data to Shopify to create or update a customer. Allowing up to 2 attempts, so that we can retry
      * after certain validation failures.
      *
+     * @param  User  $user
      * @param  array  $postData
      * @param  bool  $isCreating
      * @param  Collection  $alreadySyncedUserCustomers
@@ -297,6 +299,7 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
      * @return CustomerResource|null
      */
     private function sendDataToShopify(
+        User $user,
         array $postData,
         bool $isCreating,
         Collection $alreadySyncedUserCustomers,
@@ -334,7 +337,7 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
             if (collect($errors->get("phone"))->contains("Enter a valid phone number")) {
                 // remove the phone number from the post data and try again
                 $postData["phone"] = null;
-                return $this->sendDataToShopify($postData, $isCreating, $alreadySyncedUserCustomers, ++$attemptNumber);
+                return $this->sendDataToShopify($user, $postData, $isCreating, $alreadySyncedUserCustomers, ++$attemptNumber);
             }
 
             // a different validation error occurred that we can't handle, so report it here
