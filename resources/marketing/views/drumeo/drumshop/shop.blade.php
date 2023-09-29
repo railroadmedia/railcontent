@@ -152,7 +152,7 @@
                     </a>
                     @endif
                     @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 9, 29, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                        <a href="/drumshop/accessories" class="rounded-xl mb-5 overflow-hidden relative inline-block w-full sm:text-left px-4 sm:px-10 lg:px-16 pb-44 pt-9 sm:py-12 lg:py-16 transition-opacity hover:opacity-90" style="background-color:#ffc64f;">
+                        <a href="/accessories" class="rounded-xl mb-5 overflow-hidden relative inline-block w-full sm:text-left px-4 sm:px-10 lg:px-16 pb-44 pt-9 sm:py-12 lg:py-16 transition-opacity hover:opacity-90" style="background-color:#ffc64f;">
                             <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
                                 <img class="h-28 sm:h-36 lg:h-48" src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/week5_text.png"><br>
                             </div>
