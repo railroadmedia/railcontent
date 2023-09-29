@@ -147,33 +147,35 @@
             "joinUrl" => '/choose-plan',
         ])
     @endif
-
-    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white relative" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
-        <div class="container max-w-5xl mx-auto">
-            <img class="my-5 h-40 inline sm:hidden"
-                    src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/pianote-october-bundle.png"
-                    alt="learn playing image"
-                    fetchpriority="high"
-            >
-            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
-                <div class="max-w-xl pr-5 lg:pr-8 mx-0">
-                <h2><strong>Unlimited piano lessons + a FREE course for life. </strong></h2>
-                <p class="leading-tight text-musora mt-1"><strong>You’ll get a FREE course on Riffs & Fills when you try Pianote for 7 days ($99 value)</strong></p>
-                <p class="leading-normal">
-                    <a class="join smaller musora my-3 w-1/2 anchor-slide" href="#customize-anchor">Start For Free &raquo;</a>
-                    <br>
-                    <em>Free worldwide shipping!</em>
-                </p>
-                </div>
-                <img class="h-80 lg:h-96 hidden sm:inline transition-opacity opacity-0"
-                        loading="lazy"
-                        onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/pianote-october-bundle.png"
+    @if(empty($promoVersion))
+        <section class="text-center px-5 sm:px-6 py-10 sm:py-12 text-white relative" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
+            <div class="container max-w-4xl mx-auto">
+                <img class="my-5 h-36 inline sm:hidden"
+                        src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/pianote-october-bundle.png"
                         alt="learn playing image"
+                        fetchpriority="high"
                 >
+                <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
+                    <div class="max-w-xl pr-5 lg:pr-8 mx-0">
+                    <h3><strong>Unlimited piano lessons + a FREE course for life. </strong></h3>
+                    <p class="leading-tight text-musora mt-1"><strong>You’ll get a FREE course on Riffs & Fills when you try Pianote for 7 days ($99 value)</strong></p>
+                    <p class="leading-normal">
+                        <a class="join smaller musora my-3 anchor-slide" href="#customize-anchor">Start For Free &raquo;</a>
+                        <br>
+                        <em>Free online access!</em>
+                    </p>
+                    </div>
+                    <img class="h-40 lg:h-48 hidden sm:inline transition-opacity opacity-0"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/pianote-october-bundle.png"
+                            alt="learn playing image"
+                    >
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
+
     @php
         $bubble1 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/summer-swee-singh.png';
         $bubble2 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/lisa-witt.png';
@@ -269,9 +271,10 @@
         @yield('promo-banner')
     @endif
 
-    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white relative" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
+    @if(empty($promoVersion))
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-12 lg:py-14 text-white relative" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
         <div class="container max-w-5xl mx-auto">
-            <h2><strong>Start a trial. Get a FREE course. No strings attached.</strong></h2>
+            <h3><strong>Start a trial. Get a FREE course. No strings attached.</strong></h3>
             <p class="leading-tight text-musora mt-1 sm:mb-10"><strong>We’re giving you a $99 course when you start a 7-day trial of Pianote.</strong></p>
 
             <img class="my-5 h-40 inline sm:hidden"
@@ -279,11 +282,11 @@
                     alt="learn playing image"
                     fetchpriority="high"
             >
-            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
+            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start">
                 <p class="leading-normal max-w-xl pr-5 lg:pr-8 mx-0">
-                    <strong>Now you can</strong><br>
-                    Learn at home. Whenever, wherever<br>
-                    Finally start piano lessons
+                    <strong>Now you can</strong><br><br>
+                    <i class="fas fa-check text-musora mr-2"></i> Learn at home. Whenever, wherever<br>
+                    <i class="fas fa-check text-musora mr-2"></i> Finally start piano lessons
                     <br><br>
                     Stop putting it off. Start learning piano today with Pianote and we’ll give you <strong>a FREE course worth $99</strong>.
                     <br><br>
@@ -299,7 +302,7 @@
                     <br>
                     <a class="join smaller musora my-3 w-1/2 anchor-slide" href="#customize-anchor">GET Started &raquo;</a>
                     <br>
-                    <em>Free worldwide shipping!</em>
+                    <em>Free online access!</em>
                 </p>
                 <img class="h-80 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                         loading="lazy"
@@ -320,7 +323,7 @@
             <br> you try Pianote for 7 days ($99 value)
         </p>
     </a>
-    @include('musora.sales.components.musicounts-section')
+    @endif
 
     @php
         $gridItems = [
@@ -680,19 +683,48 @@
     @hasSection('final')
         @yield('final')
     @elseif(!empty($trialVersion))
-        @include('musora.sales.components.card-selection-section', [
-            "noSelector" => true,
-            "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo-light.svg",
-            "logo" => "https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png",
-            "songs" => "1000+ popular songs.",
-            "firstPoint" => "Unlimited piano lessons.",
-            "thirdPoint" => "Direct access to real teachers.",
-            "fifthPoint" => "Lesson access for singing, guitar, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[pianote-base-annual-recurring-7-day-trial-membership]=1&promo-code=annual-trial&redirect=/order&locked=true",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[pianote-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
+                style="background: linear-gradient(to right, #08203a, #0c1524);">
+            <div class="container mx-auto max-w-6xl relative z-50">
+                <div class="w-full">
+                    <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
+                        <div class=" inline-block relative w-full group" style="padding-bottom: 39.5%;perspective: 1000px;">
+                            <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
+                                <div class=" {{--border-2 border-promo--}} front absolute z-20  w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
+                                    <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/pianote-october-bundle.png);"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <h2 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Try Pianote for 7 days & get <br class="hidden sm:inline"> a FREE $99 course for life.</strong></h2>
+
+                    <p class="leading-tight mt-4 sm:mt-5 mb-2"><span class="text-musora">Click below to start your free 7-day trial. Your annual membership will<br class="hidden sm:inline"> continue on {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} (after your free trial).</span></p>
+
+                    <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Free for 7 days</strong></h3>
+                    <p class="leading-tight opacity-70 text-sm"><em>Then billed at $240 per year. Save 33%.</em></p>
+                    <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL:1,piano-riffs-and-fills:1&promo-code=annual-trial&redirect=/order&locked=true">CLICK HERE TO GET STARTED</a>
+                </div>
+                <a class="inline-block text-pianote mt-2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true"><p class="leading-tight"><strong><u>Or start a Monthly Plan for<br class="sm:hidden"> $30/month (no bonus posters)</u></strong></p></a>
+                <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
+            </div>
+        </section>
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'piano',
         ])
+        {{--        @include('musora.sales.components.card-selection-section', [--}}
+{{--            "noSelector" => true,--}}
+{{--            "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo-light.svg",--}}
+{{--            "logo" => "https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png",--}}
+{{--            "songs" => "1000+ popular songs.",--}}
+{{--            "firstPoint" => "Unlimited piano lessons.",--}}
+{{--            "thirdPoint" => "Direct access to real teachers.",--}}
+{{--            "fifthPoint" => "Lesson access for singing, guitar, and drums.",--}}
+{{--            "plusAnnualLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true",--}}
+{{--            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true",--}}
+{{--            "annualLink" => "/ecommerce/add-to-cart?products[pianote-base-annual-recurring-7-day-trial-membership]=1&promo-code=annual-trial&redirect=/order&locked=true",--}}
+{{--            "monthlyLink" => "/ecommerce/add-to-cart?products[pianote-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",--}}
+{{--        ])--}}
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'piano',
         ])
@@ -754,7 +786,7 @@
 
                     <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Free for 7 days</strong></h3>
                     <p class="leading-tight opacity-70 text-sm"><em>Then billed at $240 per year. Save 33%.</em></p>
-                    <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL:1,poster-chords:1,poster-scales:1&promo-code=annual-trial&redirect=/order&locked=true">CLICK HERE TO GET STARTED</a>
+                    <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL:1,piano-riffs-and-fills:1&promo-code=annual-trial&redirect=/order&locked=true">CLICK HERE TO GET STARTED</a>
                 </div>
                 <a class="inline-block text-pianote mt-2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true"><p class="leading-tight"><strong><u>Or start a Monthly Plan for<br class="sm:hidden"> $30/month (no bonus posters)</u></strong></p></a>
                 <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
@@ -810,6 +842,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
+    @if(empty($promoVersion))
     <script>
         $(document).ready(function () {
             var stickyBar = $('.promo-banner');
@@ -828,6 +861,7 @@
             });
         });
     </script>
+    @endif
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
