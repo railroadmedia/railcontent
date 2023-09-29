@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class UserProduct
  *
  * @package App\Modules\Ecommerce\Models
- * @property integer $user_id
- * @property integer $product_id
- * @property integer $quantity
+ * @property int $user_id
+ * @property int $product_id
+ * @property int $quantity
  * @property Carbon $start_date
  * @property Carbon $expiration_date
  * @property Carbon $created_at
@@ -42,19 +43,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UserProduct extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'ecommerce_user_products';
 
     protected $primaryKey = 'id';
 
-    public function scopeFromUser(Builder $query, int $userId): Builder
-    {
-        return $query->where('user_id', '=', $userId);
-    }
-
     protected static function newFactory(): UserProductFactory
     {
         return UserProductFactory::new();
+    }
+
+    public function scopeFromUser(Builder $query, int $userId): Builder
+    {
+        return $query->where('user_id', '=', $userId);
     }
 
     /**

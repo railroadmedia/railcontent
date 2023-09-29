@@ -4,25 +4,23 @@ namespace App\Modules\Ecommerce\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class OrderPayment
+ * Class Customer
  *
  * @package App\Modules\Ecommerce\Models
  *
  * @property int $id
- * @property int $order_id
- * @property int $payment_id
+ * @property string|null $phone
+ * @property string|null $email
+ * @property string $brand
+ * @property int|null $shopify_id
+ * @property string|null $note
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @property Carbon|null $deleted_at
- *
  */
-class OrderPayment extends Model
+class Customer extends Model
 {
-    use SoftDeletes;
-
-    protected $table = 'ecommerce_order_payments';
+    protected $table = 'ecommerce_customers';
     protected $primaryKey = 'id';
 }

@@ -3,24 +3,23 @@
 namespace App\Modules\Ecommerce\Models;
 
 use App\Modules\Ecommerce\database\factories\PaymentMethodFactory;
-use App\Modules\Ecommerce\database\factories\UserProductFactory;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class PaymentMethod
  *
  * @package App\Modules\Ecommerce\Models
  *
- * @property integer $id
- * @property integer $method_id
+ * @property int $id
+ * @property int $method_id
  * @property string $method_type
- * @property integer $credit_card_id
- * @property integer $paypal_billing_agreement_id
+ * @property int $credit_card_id
+ * @property int $paypal_billing_agreement_id
  * @property string $currency
- * @property integer $billing_address_id
+ * @property int $billing_address_id
  * @property string $note
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -31,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
 class PaymentMethod extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'ecommerce_payment_methods';
     protected $primaryKey = 'id';

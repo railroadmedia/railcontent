@@ -4,13 +4,16 @@ namespace App\Modules\Ecommerce\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Payment
  *
  * @package App\Modules\Ecommerce\Models
  *
- * @property integer $id
+ * @property int $id
+ * @property int|null $shopify_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
@@ -18,10 +21,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Payment extends Model
 {
-    const TYPE_APPLE_SUBSCRIPTION_RENEWAL = 'apple_subscription_renewal';
-    const TYPE_GOOGLE_SUBSCRIPTION_RENEWAL = 'google_subscription_renewal';
-    const STATUS_PAID = 'paid';
+    use SoftDeletes;
+
+    public const TYPE_APPLE_SUBSCRIPTION_RENEWAL = 'apple_subscription_renewal';
+    public const TYPE_GOOGLE_SUBSCRIPTION_RENEWAL = 'google_subscription_renewal';
+    public const STATUS_PAID = 'paid';
 
     protected $table = 'ecommerce_payments';
     protected $primaryKey = 'id';
+
+    public function refunds(): HasMany
+    {
+        return $this->hasMany(Refund::class);
+    }
 }

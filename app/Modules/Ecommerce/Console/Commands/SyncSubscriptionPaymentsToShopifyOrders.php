@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Console\Commands;
 
+use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Ecommerce\Console\Commands\Traits\SyncsToShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use Doctrine\ORM\EntityNotFoundException;
@@ -9,7 +10,6 @@ use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Exception;
-use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Payment;

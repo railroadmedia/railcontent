@@ -6,7 +6,6 @@ use App\Models\ShopifySync;
 use App\Modules\Ecommerce\Jobs\Shopify\PollBulkOperationCustomer;
 use Exception;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Storage;
 use libphonenumber\NumberParseException;
 use libphonenumber\PhoneNumberFormat;
