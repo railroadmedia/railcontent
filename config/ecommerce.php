@@ -794,8 +794,8 @@ return [
 
     'subscription_renewal_date' => 1,
     'failed_payments_before_de_activation' => 1,
-    'days_before_access_revoked_after_expiry_in_app_purchases_only' => 5,
-    'days_before_access_revoked_after_expiry' => 5,
+    'days_before_access_revoked_after_expiry_in_app_purchases_only' => 7,
+    'days_before_access_revoked_after_expiry' => 7,
 
     'password_creation_rules' => 'min:8|max:128', // also defined in usora
 
