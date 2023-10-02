@@ -626,6 +626,11 @@ class RevenueCatController extends Controller
     {
         Log::debug('Redirect ecommerce restore Google to RevenueCat API');
         Log::debug(var_export($request->all(), true));
+        if(empty($request->get('purchases',[]))){
+            return response()->json([
+                'shouldSignup' => true,
+            ]);
+        }
 
         foreach ($request->get('purchases') as $purchase) {
             $revenuecatPurchase = $this->revenueCatGateway->purchase(
