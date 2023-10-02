@@ -490,6 +490,9 @@ class RevenueCatController extends Controller
      */
     public function purchaseIOS(Request $request)
     {
+        Log::debug('Redirect ecommerce purchase IOS to RevenueCat API');
+        Log::debug(var_export($request->all(), true));
+
         $revenuecatPurchase = $this->revenueCatGateway->purchase(
             $request->input('data.attributes.receipt'),
             null,
@@ -499,6 +502,8 @@ class RevenueCatController extends Controller
             $request->has('data.attributes.app') ? $request->input('data.attributes.app') : 'Musora',
         );
         $apiResponse = json_decode($revenuecatPurchase);
+        Log::debug('RevenueCat API response');
+        Log::debug(var_export($apiResponse, true));
 
         $user = $this->revenueCatService->syncSubscriber(
             $apiResponse->subscriber->original_app_user_id,
@@ -551,6 +556,9 @@ class RevenueCatController extends Controller
      */
     public function purchaseGoogle(Request $request)
     {
+        Log::debug('Redirect ecommerce purchase Google to RevenueCat API');
+        Log::debug(var_export($request->all(), true));
+
         $revenuecatPurchase = $this->revenueCatGateway->purchase(
             $request->input('data.attributes.purchase_token'),
             $request->input('data.attributes.product_id'),
@@ -560,6 +568,8 @@ class RevenueCatController extends Controller
             $request->has('data.attributes.app') ? $request->input('data.attributes.app') : 'Musora',
         );
         $apiResponse = json_decode($revenuecatPurchase);
+        Log::debug('RevenueCat API response');
+        Log::debug(var_export($apiResponse, true));
 
         $user = $this->revenueCatService->syncSubscriber(
             $apiResponse->subscriber->original_app_user_id,
@@ -614,6 +624,9 @@ class RevenueCatController extends Controller
      */
     public function restoreGoogle(Request $request)
     {
+        Log::debug('Redirect ecommerce restore Google to RevenueCat API');
+        Log::debug(var_export($request->all(), true));
+
         foreach ($request->get('purchases') as $purchase) {
             $revenuecatPurchase = $this->revenueCatGateway->purchase(
                 $purchase['purchase_token'],
@@ -624,6 +637,8 @@ class RevenueCatController extends Controller
                 $request->has('app') ? $request->input('app') : 'Musora',
             );
             $apiResponse = json_decode($revenuecatPurchase);
+            Log::debug('RevenueCat API response');
+            Log::debug(var_export($apiResponse, true));
 
             if (!$apiResponse) {
                 return response()->json(
@@ -670,6 +685,9 @@ class RevenueCatController extends Controller
      * @throws \Exception
      */
     public function restoreIOS(Request $request){
+        Log::debug('Redirect ecommerce restore IOS to RevenueCat API');
+        Log::debug(var_export($request->all(), true));
+
         $receipt = $request->get('receipt', []);
         $revenuecatPurchase = $this->revenueCatGateway->purchase(
             $receipt,
@@ -680,6 +698,9 @@ class RevenueCatController extends Controller
             $request->has('app') ? $request->input('app') : 'Musora',
         );
         $apiResponse = json_decode($revenuecatPurchase);
+        Log::debug('RevenueCat API response');
+        Log::debug(var_export($apiResponse, true));
+
         if (!$apiResponse) {
             return response()->json(
                 [
