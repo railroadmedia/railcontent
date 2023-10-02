@@ -532,7 +532,7 @@ class RevenueCatController extends Controller
         $response = new \stdClass();
         $data = new \stdClass();
         $data->type = 'appleReceipt';
-        $data->id = rand();
+        $data->id = $user->id;
         $data->attributes = $attributes;
 
         $meta = new \stdClass();
@@ -595,7 +595,7 @@ class RevenueCatController extends Controller
         $response = new \stdClass();
         $data = new \stdClass();
         $data->type = 'googleReceipt';
-        $data->id = rand();
+        $data->id = $user->id;
         $data->attributes = $attributes;
 
         $meta = new \stdClass();
