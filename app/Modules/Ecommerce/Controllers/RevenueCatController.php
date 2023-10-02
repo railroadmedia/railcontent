@@ -389,7 +389,8 @@ class RevenueCatController extends Controller
         if ($event['type'] != 'INITIAL_PURCHASE') {
             $productsMap = array_merge(
                 [config('ecommerce.'.$store.'_products_map')[$productId]],
-                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]);
+                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
+            );
         }
 
         $musoraProduct =
@@ -604,5 +605,115 @@ class RevenueCatController extends Controller
         $response->meta = $meta;
 
         return response()->json($response);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|void
+     * @throws \Exception
+     */
+    public function restoreGoogle(Request $request)
+    {
+        foreach ($request->get('purchases') as $purchase) {
+            $revenuecatPurchase = $this->revenueCatGateway->purchase(
+                $purchase['purchase_token'],
+                $purchase['product_id'],
+                'android',
+                null,
+                null,
+                $request->has('app') ? $request->input('app') : 'Musora',
+            );
+            $apiResponse = json_decode($revenuecatPurchase);
+
+            if (!$apiResponse) {
+                return response()->json(
+                    [
+                        'message' => 'No valid purchases on the request',
+                    ],
+                    422
+                );
+            }
+            $user = $this->revenueCatService->syncSubscriber(
+                $apiResponse->subscriber->original_app_user_id,
+                null,
+                false
+            );
+
+            if ($user) {
+                if (user() && $user->id == user()->id) {
+                    $token = $user->createToken('android');
+                    $userAuthToken = $token->plainTextToken;
+
+                    return response()->json([
+                                                'success' => true,
+                                                'token' => $userAuthToken,
+                                                'tokenType' => 'bearer',
+                                                'userId' => $user->id,
+                                            ]);
+                }
+                return response()->json([
+                                            'shouldLogin' => true,
+                                            'email' => $user->email,
+                                        ]);
+            } else {
+                return response()->json([
+                                            'shouldCreateAccount' => true,
+                                            'purchase' => $purchase,
+                                        ]);
+            }
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function restoreIOS(Request $request){
+        $receipt = $request->get('receipt', []);
+        $revenuecatPurchase = $this->revenueCatGateway->purchase(
+            $receipt,
+            null,
+            'ios',
+            null,
+            null,
+            $request->has('app') ? $request->input('app') : 'Musora',
+        );
+        $apiResponse = json_decode($revenuecatPurchase);
+        if (!$apiResponse) {
+            return response()->json(
+                [
+                    'message' => 'No valid purchases on the request',
+                ],
+                422
+            );
+        }
+
+        $user = $this->revenueCatService->syncSubscriber(
+            $apiResponse->subscriber->original_app_user_id,
+            null,
+            false
+        );
+        if ($user) {
+            if (user() && $user->id == user()->id) {
+                $token = $user->createToken('ios');
+                $userAuthToken = $token->plainTextToken;
+
+                return response()->json([
+                                            'success' => true,
+                                            'token' => $userAuthToken,
+                                            'tokenType' => 'bearer',
+                                            'userId' => $user->id,
+                                        ]);
+            }
+            return response()->json([
+                                        'shouldLogin' => true,
+                                        'email' => $user->email,
+                                    ]);
+        } else {
+            return response()->json([
+                                        'shouldCreateAccount' => true,
+                                    ]);
+        }
     }
 }
