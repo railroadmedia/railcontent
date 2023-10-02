@@ -210,7 +210,7 @@ class RevenueCatController extends Controller
 
                 //check if Musora subscription for new product exists
                 $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
-                if(!$musoraSubscription) {
+                if (!$musoraSubscription) {
                     //create Musora subscription
                     $musoraSubscription = $this->subscriptionService->createSubscription(
                         $user->id,
@@ -277,8 +277,10 @@ class RevenueCatController extends Controller
 
                 $this->subscriptionService->updateSubscription(
                     $musoraSubscription,
-                    Carbon::create($currentRevenueCatSubscription['expires_date'])->getTimestampMs(),
-                    $currentRevenueCatSubscription['unsubscribe_detected_at'],
+                    (isset($currentRevenueCatSubscription['expires_date'])) ?
+                        Carbon::create($currentRevenueCatSubscription['expires_date'])
+                            ->getTimestampMs() : $data['event']['expiration_at_ms'],
+                    $currentRevenueCatSubscription['unsubscribe_detected_at'] ?? null,
                     $data['event']['cancel_reason']
                 );
 
@@ -293,19 +295,19 @@ class RevenueCatController extends Controller
                 // code...
                 break;
             case 'TRANSFER':
-               $oldRevenueCatAppUserId = $data['event']['transferred_from'];
+                $oldRevenueCatAppUserId = $data['event']['transferred_from'];
 
-               foreach ($oldRevenueCatAppUserId as $key => $value) {
-                   $user = $this->revenueCatService->getUser(
-                       null,
-                       $value
-                   );
-                   if($user){
-                       $user->revenuecat_origin_app_user_id = $data['event']['transferred_to'][0];
-                       $user->save();
-                       continue;
-                   }
-               }
+                foreach ($oldRevenueCatAppUserId as $key => $value) {
+                    $user = $this->revenueCatService->getUser(
+                        null,
+                        $value
+                    );
+                    if ($user) {
+                        $user->revenuecat_origin_app_user_id = $data['event']['transferred_to'][0];
+                        $user->save();
+                        continue;
+                    }
+                }
                 break;
             case 'EXPIRATION':
                 $user = $this->revenueCatService->getUser(
@@ -378,17 +380,16 @@ class RevenueCatController extends Controller
     {
         $store = $type.'_store';
 
-        if ($event['period_type'] == 'TRIAL' ) {
+        if ($event['period_type'] == 'TRIAL') {
             $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$productId]];
         } else {
             $productsMap = [config('ecommerce.'.$store.'_products_map')[$productId]];
         }
 
-        if ($event['type'] != 'INITIAL_PURCHASE' ) {
+        if ($event['type'] != 'INITIAL_PURCHASE') {
             $productsMap = array_merge(
                 [config('ecommerce.'.$store.'_products_map')[$productId]],
-                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
-            );
+                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]);
         }
 
         $musoraProduct =
@@ -504,7 +505,7 @@ class RevenueCatController extends Controller
             true
         );
 
-         $revenuecatPurchase = $this->revenueCatGateway->purchase(
+        $revenuecatPurchase = $this->revenueCatGateway->purchase(
             $request->input('data.attributes.receipt'),
             null,
             'ios',
@@ -515,17 +516,16 @@ class RevenueCatController extends Controller
             $user->id
         );
 
-
         $token = $user->createToken('ios');
         $user->withAccessToken($token);
 
-        $userAuthToken =  $token->plainTextToken;
+        $userAuthToken = $token->plainTextToken;
         $attributes = [
             'receipt' => $request->input('data.attributes.receipt'),
             'email' => $request->input('data.attributes.email'),
             'brand' => 'pianote',
             'valid' => true,
-            'validation_error' => null
+            'validation_error' => null,
         ];
         $response = new \stdClass();
         $data = new \stdClass();
@@ -575,11 +575,10 @@ class RevenueCatController extends Controller
             $user->id
         );
 
-
         $token = $user->createToken('android');
         $user->withAccessToken($token);
 
-        $userAuthToken =  $token->plainTextToken;
+        $userAuthToken = $token->plainTextToken;
         $attributes = [
             'purchase_token' => $request->input('data.attributes.purchase_token'),
             'package_name' => $request->input('data.attributes.package_name'),
@@ -587,7 +586,7 @@ class RevenueCatController extends Controller
             'email' => $request->input('data.attributes.email'),
             'brand' => 'pianote',
             'valid' => true,
-            'validation_error' => null
+            'validation_error' => null,
         ];
         $response = new \stdClass();
         $data = new \stdClass();
