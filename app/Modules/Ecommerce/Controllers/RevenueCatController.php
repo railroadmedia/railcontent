@@ -504,6 +504,8 @@ class RevenueCatController extends Controller
             $request->input('data.attributes.email'),
             true
         );
+        $user->setPassword($request->input('data.attributes.password'));
+        $user->save();
 
         $revenuecatPurchase = $this->revenueCatGateway->purchase(
             $request->input('data.attributes.receipt'),
@@ -563,6 +565,8 @@ class RevenueCatController extends Controller
             $request->input('data.attributes.email'),
             true
         );
+        $user->setPassword($request->input('data.attributes.password'));
+        $user->save();
 
         $revenuecatPurchase = $this->revenueCatGateway->purchase(
             $request->input('data.attributes.purchase_token'),
