@@ -27,6 +27,7 @@ class RevenueCatController extends Controller
      * @param SubscriptionService $subscriptionService
      * @param UserProductService $userProductService
      * @param PaymentService $paymentService
+     * @param RevenueCatGateway $revenueCatGateway
      */
     public function __construct(
         RevenueCatService $revenueCatService,
@@ -52,6 +53,9 @@ class RevenueCatController extends Controller
             Log::debug('Invalid token');
 
             return response()->json('Invalid token');
+        }
+        if (config('ecommerce.revenuecat_only') !== true){
+            return response()->json();
         }
 
         if (!$request->has('event')) {

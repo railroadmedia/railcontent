@@ -1042,5 +1042,5 @@ return [
     ],
     'sync_revenue_cat' => env('SYNC_REVENUE_CAT', true),
     'revenuecat_webhook_token' => env('REVENUECAT_WEBHOOK_TOKEN'),
-    'revenuecat_only'=> env('REVENUECAT_ONLY',true),
+    'revenuecat_only'=> env('REVENUECAT_ONLY',false),
 ];
