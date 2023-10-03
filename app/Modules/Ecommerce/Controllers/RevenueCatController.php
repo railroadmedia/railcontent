@@ -389,8 +389,7 @@ class RevenueCatController extends Controller
         if ($event['type'] != 'INITIAL_PURCHASE') {
             $productsMap = array_merge(
                 [config('ecommerce.'.$store.'_products_map')[$productId]],
-                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
-            );
+                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]);
         }
 
         $musoraProduct =
@@ -626,10 +625,10 @@ class RevenueCatController extends Controller
     {
         Log::debug('Redirect ecommerce restore Google to RevenueCat API');
         Log::debug(var_export($request->all(), true));
-        if(empty($request->get('purchases',[]))){
+        if (empty($request->get('purchases', []))) {
             return response()->json([
-                'shouldSignup' => true,
-            ]);
+                                        'shouldSignup' => true,
+                                    ]);
         }
 
         foreach ($request->get('purchases') as $purchase) {
@@ -671,6 +670,7 @@ class RevenueCatController extends Controller
                                                 'userId' => $user->id,
                                             ]);
                 }
+
                 return response()->json([
                                             'shouldLogin' => true,
                                             'email' => $user->email,
@@ -689,11 +689,17 @@ class RevenueCatController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function restoreIOS(Request $request){
+    public function restoreIOS(Request $request)
+    {
         Log::debug('Redirect ecommerce restore IOS to RevenueCat API');
         Log::debug(var_export($request->all(), true));
 
         $receipt = $request->get('receipt', []);
+        if (empty($receipt)) {
+            return response()->json([
+                                        'shouldSignup' => true,
+                                    ]);
+        }
         $revenuecatPurchase = $this->revenueCatGateway->purchase(
             $receipt,
             null,
@@ -703,16 +709,14 @@ class RevenueCatController extends Controller
             $request->has('app') ? $request->input('app') : 'Musora',
         );
         $apiResponse = json_decode($revenuecatPurchase);
+
         Log::debug('RevenueCat API response');
         Log::debug(var_export($apiResponse, true));
 
         if (!$apiResponse) {
-            return response()->json(
-                [
-                    'message' => 'No valid purchases on the request',
-                ],
-                422
-            );
+            return response()->json([
+                                        'shouldSignup' => true,
+                                    ]);
         }
 
         $user = $this->revenueCatService->syncSubscriber(
@@ -732,6 +736,7 @@ class RevenueCatController extends Controller
                                             'userId' => $user->id,
                                         ]);
             }
+
             return response()->json([
                                         'shouldLogin' => true,
                                         'email' => $user->email,
@@ -741,5 +746,80 @@ class RevenueCatController extends Controller
                                         'shouldCreateAccount' => true,
                                     ]);
         }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     */
+    public function signupIOS(Request $request)
+    {
+        Log::info('Attempting to apple signup for receipt: '.$request->get('receipt'));
+        $receipt = $request->get('receipt', []);
+        if (empty($receipt)) {
+            return response()->json([
+                                        'shouldSignup' => true,
+                                    ]);
+        }
+        $revenuecatPurchase = $this->revenueCatGateway->purchase(
+            $receipt,
+            null,
+            'ios',
+            null,
+            null,
+            $request->has('app') ? $request->input('app') : 'Musora',
+        );
+        $apiResponse = json_decode($revenuecatPurchase);
+
+        Log::debug('RevenueCat API response');
+        Log::debug(var_export($apiResponse, true));
+
+        if (!$apiResponse || !$apiResponse->subscriber || empty($apiResponse->subscriber->entitlements)) {
+            return response()->json([
+                                        'shouldSignup' => true,
+                                    ]);
+        }
+        $entitlements = $apiResponse->subscriber->entitlements;
+
+        $active = false;
+
+        foreach ($entitlements as $entitlement) {
+            if (Carbon::parse($entitlement->expires_date) >= now()->subDays(7)) {
+                $active = true;
+                $subscription = $apiResponse->subscriber->subscriptions->{$entitlement->product_identifier};
+                $store = (strtolower($subscription->store) == 'app_store') ? 'apple_store' : 'google_store';
+
+                //productId
+                $productId = $entitlement->product_identifier;
+                $productsMap = array_merge(
+                    [config('ecommerce.'.$store.'_products_map')[$productId]],
+                    [config('ecommerce.'.$store.'_products_map_trial')[$productId]]);
+
+                $musoraProduct =
+                    Product::whereIn('sku', $productsMap)
+                        ->first();
+
+                return response()->json([
+                                            'shouldLogin' => true,
+                                            'message' => 'You have an active '.
+                                                ucfirst($musoraProduct->brand ?? config('ecommerce.brand')).
+                                                ' account. Please login into your account. If you want to modify your payment plan please cancel your active subscription from device settings before.',
+                                        ]);
+            }
+        }
+
+        if (!$active) {
+            return response()->json([
+                                        'shouldRenew' => true,
+                                        'message' => 'You can not create multiple '.
+                                            ucfirst(config('ecommerce.brand')).
+                                            ' accounts under the same apple account. You already have an expired/cancelled membership. Please renew your membership.',
+                                    ]);
+        }
+
+        return response()->json([
+                                    'shouldSignup' => true,
+                                ]);
     }
 }

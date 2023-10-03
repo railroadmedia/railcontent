@@ -36,7 +36,7 @@ if (config('ecommerce.revenuecat_only') == true) {
 
         Route::post(
             '/api/apple/signup',
-            \App\Modules\Ecommerce\Controllers\RevenueCatController::class. '@restoreIOS'
+            \App\Modules\Ecommerce\Controllers\RevenueCatController::class. '@signupIOS'
         )
             ->name('apple_store_kit.signup');
 
