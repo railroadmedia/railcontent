@@ -415,12 +415,12 @@
     @php
         $bonuses = [
                         [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/september/fills-card.png',
+                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/september/fills-card2.jpg',
                         'title' => "10 Day Fills",
                         'description' => 'This is an exclusive event for 30-Day Drummer students so you can launch into the next phase of your drumming with enthusiasm.',
                         ],
                         [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/september/ghost-notes-card.png',
+                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/september/ghost-notes-card2.jpg',
                         'title' => "10 Day Ghost Notes",
                         'description' => 'This is an exclusive event for 30-Day Drummer students so you can launch into the next phase of your drumming with enthusiasm.',
                         ],
