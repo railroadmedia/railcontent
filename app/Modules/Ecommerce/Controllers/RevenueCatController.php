@@ -54,7 +54,7 @@ class RevenueCatController extends Controller
 
             return response()->json('Invalid token');
         }
-        if (config('ecommerce.revenuecat_only') !== true){
+        if (config('ecommerce.revenuecat_only') !== true) {
             return response()->json();
         }
 
@@ -398,8 +398,7 @@ class RevenueCatController extends Controller
         if ($event['type'] != 'INITIAL_PURCHASE') {
             $productsMap = array_merge(
                 [config('ecommerce.'.$store.'_products_map')[$productId]],
-                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
-            );
+                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]);
         }
 
         $musoraProduct =
@@ -824,8 +823,7 @@ class RevenueCatController extends Controller
                 $productId = $entitlement->product_identifier;
                 $productsMap = array_merge(
                     [config('ecommerce.'.$store.'_products_map')[$productId]],
-                    [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
-                );
+                    [config('ecommerce.'.$store.'_products_map_trial')[$productId]]);
 
                 $musoraProduct =
                     Product::whereIn('sku', $productsMap)
@@ -900,7 +898,8 @@ class RevenueCatController extends Controller
                     $productId = $entitlement->product_identifier;
                     $productsMap = array_merge(
                         [config('ecommerce.'.$store.'_products_map')[$productId]],
-                        [config('ecommerce.'.$store.'_products_map_trial')[$productId]]);
+                        [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
+                    );
 
                     $musoraProduct =
                         Product::whereIn('sku', $productsMap)

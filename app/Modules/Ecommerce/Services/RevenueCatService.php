@@ -8,7 +8,6 @@ use App\Modules\Ecommerce\Models\Subscription;
 use Carbon\Carbon;
 use Modules\Ecommerce\Services\PaymentService;
 use Modules\UserManagementSystem\Models\User;
-use App\Modules\Ecommerce\Services\SubscriptionService;
 
 class RevenueCatService
 {
@@ -21,8 +20,12 @@ class RevenueCatService
      * @param RevenueCatApiGateway $revenueCatApiGateway
      * @param \App\Modules\Ecommerce\Services\SubscriptionService $subscriptionService
      */
-    public function __construct(RevenueCatApiGateway $revenueCatApiGateway, SubscriptionService $subscriptionService, UserProductService $userProductService, PaymentService $paymentService)
-    {
+    public function __construct(
+        RevenueCatApiGateway $revenueCatApiGateway,
+        SubscriptionService $subscriptionService,
+        UserProductService $userProductService,
+        PaymentService $paymentService
+    ) {
         $this->revenueCatApiGateway = $revenueCatApiGateway;
         $this->subscriptionService = $subscriptionService;
         $this->userProductService = $userProductService;
@@ -70,8 +73,7 @@ class RevenueCatService
                 $store = $type.'_store';
                 $productsMap = array_merge(
                     [config('ecommerce.'.$store.'_products_map')[$productIdentifier]],
-                    [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]]
-                );
+                    [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]]);
 
                 $musoraProduct =
                     Product::whereIn('sku', $productsMap)

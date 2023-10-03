@@ -7,10 +7,9 @@ use Exception;
 class RevenueCatApiGateway
 {
     /**
-
-    /**
-     * @param string $customerIoAppApiKey
-     * @param string $customerId
+     * @param $appUserId
+     * @return mixed
+     * @throws Exception
      */
     public function getSubscriber(
         $appUserId

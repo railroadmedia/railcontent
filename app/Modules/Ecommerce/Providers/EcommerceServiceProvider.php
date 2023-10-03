@@ -6,7 +6,6 @@ use App\Modules\Ecommerce\Console\Commands\CheckPurchasesMigratedIntoRevenuecat;
 use App\Modules\Ecommerce\Console\Commands\FixMissingStripeCustomerIds;
 use App\Modules\Ecommerce\Console\Commands\FixMobileSubscriptionsBrand;
 use App\Modules\Ecommerce\Console\Commands\MigrateExistingStripeMusoraGatewayPaymentsToDrumeo;
-use App\Modules\Ecommerce\Console\Commands\MigrateIntoRevenuecat;
 use App\Modules\Ecommerce\Console\Commands\MigratePaypalGatewayToMusora;
 use App\Modules\Ecommerce\Console\Commands\MigrateStripeCustomersToMusora;
 use App\Modules\Ecommerce\Console\Commands\MigrateStripeSubscriptions;
@@ -48,7 +47,6 @@ class EcommerceServiceProvider extends ServiceProvider
                 FixMobileSubscriptionsBrand::class,
                 SyncRevenuecatSubscriptionsToMusora::class,
                 CheckPurchasesMigratedIntoRevenuecat::class,
-                MigrateIntoRevenuecat::class,
             ]
         );
 
