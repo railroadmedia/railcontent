@@ -40,8 +40,8 @@ $methods = [
         ]
     ],
     [
-        "title" => "13 Essential Guitar Chord Shapes to Play Thousands Of Songs",
-        "desc" => 'Music is a language and a powerful communication tool. You\'ll learn to read and understand chord diagrams and play progressions used in thousands of songs.',
+        "title" => "Let's Get You Playing Chords (Songs), Like Now!",
+        "desc" => "Music is a language and a powerful communication tool. You’ll learn how to play all the basic chord shapes so you can play progressions used in thousands of songs.",
         'detail' => '8 lessons',
         'lessonInfo' => [
             [

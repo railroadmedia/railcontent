@@ -73,7 +73,7 @@
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Guitareo-Method-Level2-1640823206.jpg',
             'lessonNum' => 8,
             'title' => 'Let\'s Get You Playing Chords (Songs), Like Now!',
-            'desc' => 'Music is a language and a powerful communication tool. You\'ll learn to read and understand chord diagrams and play progressions used in thousands of songs.',
+            'desc' => "Music is a language and a powerful communication tool. You’ll learn how to play all the basic chord shapes so you can play progressions used in thousands of songs.",
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Guitareo-Method-Level3-1640823216.jpg',
@@ -97,7 +97,7 @@
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Guitareo-Method-Level6-1641917824.jpg',
             'lessonNum' => 8,
             'title' => 'You Can Start Soloing, Like Now!',
-            'desc' => 'Learn three easy scales, a powerful picking technique, and how to know what key you\'re in to make soloing feel like second nature.',
+            'desc' => "Learn the most iconic scale on the guitar so you can start turning heads with your guitar solos",
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/MethodLevel7-09-1643789795.png',
