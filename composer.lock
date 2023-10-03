@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4118496e1a5abef0c036f76ba8023292",
+    "content-hash": "16323ce05d9762512f7c1c7374cea0c6",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -4382,16 +4382,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.52.15",
+            "version": "v9.52.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "e3350e87a52346af9cc655a3012d2175d2d05ad7"
+                "reference": "082345d76fc6a55b649572efe10b11b03e279d24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/e3350e87a52346af9cc655a3012d2175d2d05ad7",
-                "reference": "e3350e87a52346af9cc655a3012d2175d2d05ad7",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/082345d76fc6a55b649572efe10b11b03e279d24",
+                "reference": "082345d76fc6a55b649572efe10b11b03e279d24",
                 "shasum": ""
             },
             "require": {
@@ -4576,7 +4576,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-08-08T14:28:40+00:00"
+            "time": "2023-10-03T13:02:30+00:00"
         },
         {
             "name": "laravel/nova",
@@ -8091,7 +8091,7 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "5.0.x-dev",
+            "version": "v5.0.110",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
@@ -8138,7 +8138,7 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/5.0"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.110"
             },
             "time": "2023-10-03T12:22:30+00:00"
         },
@@ -16962,12 +16962,6 @@
     ],
     "aliases": [
         {
-            "package": "railroad/ecommerce",
-            "version": "5.0.9999999.9999999-dev",
-            "alias": "v5.0.103",
-            "alias_normalized": "5.0.103.0"
-        },
-        {
             "package": "railroad/musora-api",
             "version": "dev-v3.0-revenuecat",
             "alias": "v3.1.36",
@@ -16982,7 +16976,6 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/ecommerce": 20,
         "railroad/musora-api": 20,
         "railroad/railanalytics": 20
     },
