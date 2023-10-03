@@ -157,8 +157,8 @@
                 >
                 <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
                     <div class="max-w-xl pr-5 lg:pr-8 mx-0">
-                    <h3><strong>Unlimited piano lessons + a FREE course for life. </strong></h3>
-                    <p class="leading-tight text-musora mt-1"><strong>You’ll get a FREE course on Riffs & Fills when you try Pianote for 7 days ($99 value)</strong></p>
+                    <h3><strong>Start a trial + get a FREE course for life.</strong></h3>
+                    <p class="leading-tight text-musora mt-1"><strong>You’ll get a FREE course on Riffs & Fills ($99 value) when you try Pianote for 7 days.</strong></p>
                     <p class="leading-normal">
                         <a class="join smaller musora my-3 anchor-slide" href="#customize-anchor">Start For Free &raquo;</a>
                         <br>
@@ -284,7 +284,7 @@
             >
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start">
                 <p class="leading-normal max-w-xl pr-5 lg:pr-8 mx-0">
-                    <strong>Now you can</strong><br><br>
+                    <strong>NOW YOU CAN:</strong><br>
                     <i class="fas fa-check text-musora mr-2"></i> Learn at home. Whenever, wherever<br>
                     <i class="fas fa-check text-musora mr-2"></i> Finally start piano lessons
                     <br><br>
@@ -301,8 +301,6 @@
                     Start today.
                     <br>
                     <a class="join smaller musora my-3 w-1/2 anchor-slide" href="#customize-anchor">GET Started &raquo;</a>
-                    <br>
-                    <em>Free online access!</em>
                 </p>
                 <img class="h-80 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                         loading="lazy"
