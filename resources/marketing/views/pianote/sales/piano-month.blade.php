@@ -633,11 +633,11 @@
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
-        'youtube' => '1.3M',
+        'youtube' => '1.4M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
         'facebook' => '430K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '200K',
+        'instagram' => '220K',
     ])
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
@@ -676,7 +676,7 @@
     [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/scales-poster.jpg',
         'title' => 'Scales Poster',
-        'description' => 'All the major and minor scales on one place.',
+        'description' => 'All the major and minor scales in one place.',
         'price' => 9,
         'shipping' => true,
     ],

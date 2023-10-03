@@ -110,7 +110,7 @@
                 <br><br>
                 And if you’re wondering what to do next, we’ve got you covered. Because we want to make your next steps just as fun (and easy) as the first ones.
                 <br><br>
-                So here’s your exclusive offer. Join Panote today and you’ll get:
+                So here’s your exclusive offer. Join Pianote today and you’ll get:
             </p>
             <ul class="pl-4 mx-auto text-left rounded-xl text-white px-3 py-4" style="width: 100%; max-width: 700px; background-color:#0D1627;">
                 <li class="flex items-start mb-1">
@@ -175,7 +175,7 @@
     [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/scales-poster.jpg',
         'title' => 'Scales Poster',
-        'description' => 'All the major and minor scales on one place.',
+        'description' => 'All the major and minor scales in one place.',
         'price' => 9,
         'shipping' => true,
     ],

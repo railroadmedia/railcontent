@@ -37,7 +37,7 @@
                     </div>
                     <p class="w-full sm:w-7/12 mt-8 sm:mt-0 flex-shrink sm:pl-4">
                         <strong><i class="fas fa-check text-pianote"></i> Check your email.</strong><br>
-                        You’ll have a confirmation email landing in your inbox in the next few minutes. It has a link to your webinar plus a free gift just for you! If you don’t see it, check your spam or junk folder. And if you still can’t find it, please email <a href="mailto=support@pianote.com"><u>support@pianote.com</u></a> and we’ll be able to help you.
+                        You’ll have a confirmation email landing in your inbox in the next few minutes. It has a link to your Webinar plus a free gift just for you! If you don’t see it, check your spam or junk folder. And if you still can’t find it, please email <a href="mailto=support@pianote.com"><u>support@pianote.com</u></a> and we’ll be able to help you.
                         <br><br>
                         <strong><i class="fas fa-check text-pianote"></i> Bookmark this page.</strong><br>
                         This page is your gateway to the Webinar. Along with the email, it’s the easiest way to find and rewatch the lesson. So save this page!

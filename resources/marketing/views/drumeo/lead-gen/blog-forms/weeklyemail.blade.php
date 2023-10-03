@@ -17,7 +17,7 @@
                     "recaptchaKey" => $recaptchaKey,
         "formId" => "Drumeo - Engagement - Trigger - Blog Signup - WebForm",
         "inputText" => "Enter Your Email",
-        "buttonText" => "Join 400K+ Drummers",
+        "buttonText" => "Join The Drum Club",
         "minimalForm" => true,
     ])
 
