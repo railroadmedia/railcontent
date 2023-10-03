@@ -3,6 +3,6 @@
 @php
     $formId = "Drumeo - Engagement - Trigger - FWTGF - Web Form";
     $formName = "Fastest Way To Get Faster";
-    $headerImage = "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/solid-hero-header.png";
-    $headerImageM = 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/solid-hero-header-m.jpg';
+    $headerImage = "https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/lead-gen/faster/hero-header.png";
+    $headerImageM = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/lead-gen/faster/hero-header-m.png';
 @endphp
