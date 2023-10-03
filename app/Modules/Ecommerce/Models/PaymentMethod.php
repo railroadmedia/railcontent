@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $deleted_at
  * @property ?CreditCard $creditCard
  * @property ?Address $address
- */
+ * @property ?PaypalBillingAgreement $paypalBillingAgreement */
 class PaymentMethod extends Model
 {
     use HasFactory;
@@ -48,6 +48,11 @@ class PaymentMethod extends Model
     public function address()
     {
         return $this->belongsTo(Address::class, 'billing_address_id');
+    }
+
+    public function paypalBillingAgreement()
+    {
+        return $this->belongsTo(PaypalBillingAgreement::class, 'paypal_billing_agreement_id');
     }
 
 }

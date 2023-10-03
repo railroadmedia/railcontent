@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $deleted_at
  *
  */
-class PaypalBillingAgreements extends Model
+class PaypalBillingAgreement extends Model
 {
     protected $table = 'ecommerce_paypal_billing_agreements';
     protected $primaryKey = 'id';
