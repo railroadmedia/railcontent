@@ -23,7 +23,9 @@ $hasGenres =
 
 $hasExperience = user()->onboardingExperience ? true : false;
 
-$showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$hasExperience;
+$hasGoals= user()->onboardingGoals ? true : false;
+
+$showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$hasExperience || !$hasGoals;
 @endphp
 
 @extends('partials.layout')

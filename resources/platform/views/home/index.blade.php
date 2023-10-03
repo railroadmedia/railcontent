@@ -10,7 +10,7 @@
 
 @section('content')
     <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white">
-        @if(!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience)
+        @if(!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience || !$hasGoals)
             {{-- On Boarding TriggerBanner --}}
             <trigger-banner brand="{{ $brand }}">
             </trigger-banner>
