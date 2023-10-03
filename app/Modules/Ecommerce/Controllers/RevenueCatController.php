@@ -490,7 +490,7 @@ class RevenueCatController extends Controller
      */
     public function purchaseIOS(Request $request)
     {
-        Log::debug('Redirect ecommerce purchase IOS to RevenueCat API');
+        Log::debug('Redirect ecommerce purchase IOS to RevenueCat API:::'.$request->input('data.attributes.email'));
         Log::debug(var_export($request->all(), true));
 
         $revenuecatPurchase = $this->revenueCatGateway->purchase(
@@ -519,8 +519,8 @@ class RevenueCatController extends Controller
             'ios',
             $request->input('data.attributes.price'),
             $request->input('data.attributes.currency'),
-            'Drumeo',
-            $user->email,
+            $request->has('data.attributes.app') ? $request->input('data.attributes.app') : 'Musora',
+            $request->input('data.attributes.email'),
             $user->id
         );
 
@@ -586,7 +586,7 @@ class RevenueCatController extends Controller
             $request->input('data.attributes.price'),
             $request->input('data.attributes.currency'),
             $request->has('data.attributes.app') ? $request->input('data.attributes.app') : 'Musora',
-            $user->email,
+            $request->input('data.attributes.email'),
             $user->id
         );
 
