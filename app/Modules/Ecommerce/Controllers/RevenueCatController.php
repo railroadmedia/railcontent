@@ -394,7 +394,8 @@ class RevenueCatController extends Controller
         if ($event['type'] != 'INITIAL_PURCHASE') {
             $productsMap = array_merge(
                 [config('ecommerce.'.$store.'_products_map')[$productId]],
-                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]);
+                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
+            );
         }
 
         $musoraProduct =
@@ -515,8 +516,17 @@ class RevenueCatController extends Controller
             $request->input('data.attributes.email'),
             true
         );
+        $parts = explode('@', $request->input('data.attributes.email'));
+        $user->display_name = $parts[0].rand(10000, 99999);
         $user->setPassword($request->input('data.attributes.password'));
         $user->save();
+
+        //update Revenuecat subscriber attribute
+        $this->revenueCatGateway->updateSubscriberAttribute(
+            $user->id,
+            ['email' => $request->input('data.attributes.email')],
+            'ios'
+        );
 
         $revenuecatPurchase = $this->revenueCatGateway->purchase(
             $request->input('data.attributes.receipt'),
@@ -582,8 +592,17 @@ class RevenueCatController extends Controller
             $request->input('data.attributes.email'),
             true
         );
+        $parts = explode('@', $request->input('data.attributes.email'));
+        $user->display_name = $parts[0].rand(10000, 99999);
         $user->setPassword($request->input('data.attributes.password'));
         $user->save();
+
+        //update Revenuecat subscriber attribute
+        $this->revenueCatGateway->updateSubscriberAttribute(
+            $user->id,
+            ['email' => $request->input('data.attributes.email')],
+            'android'
+        );
 
         $revenuecatPurchase = $this->revenueCatGateway->purchase(
             $request->input('data.attributes.purchase_token'),
@@ -801,7 +820,8 @@ class RevenueCatController extends Controller
                 $productId = $entitlement->product_identifier;
                 $productsMap = array_merge(
                     [config('ecommerce.'.$store.'_products_map')[$productId]],
-                    [config('ecommerce.'.$store.'_products_map_trial')[$productId]]);
+                    [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
+                );
 
                 $musoraProduct =
                     Product::whereIn('sku', $productsMap)
@@ -813,6 +833,82 @@ class RevenueCatController extends Controller
                                                 ucfirst($musoraProduct->brand ?? config('ecommerce.brand')).
                                                 ' account. Please login into your account. If you want to modify your payment plan please cancel your active subscription from device settings before.',
                                         ]);
+            }
+        }
+
+        if (!$active) {
+            return response()->json([
+                                        'shouldRenew' => true,
+                                        'message' => 'You can not create multiple '.
+                                            ucfirst(config('ecommerce.brand')).
+                                            ' accounts under the same apple account. You already have an expired/cancelled membership. Please renew your membership.',
+                                    ]);
+        }
+
+        return response()->json([
+                                    'shouldSignup' => true,
+                                ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function signupGoogle(Request $request)
+    {
+        Log::info('Attempting to google signup for token: '.$request->get('purchases'));
+        $receipt = $request->get('purchases', []);
+        if (empty($receipt)) {
+            return response()->json([
+                                        'shouldSignup' => true,
+                                    ]);
+        }
+
+        $active = false;
+        foreach ($receipt as $purchaseItem) {
+            $revenuecatPurchase = $this->revenueCatGateway->purchase(
+                $purchaseItem['purchase_token'],
+                $purchaseItem['product_id'],
+                'android',
+                null,
+                null,
+                $request->has('app') ? $request->input('app') : 'Musora',
+            );
+            $apiResponse = json_decode($revenuecatPurchase);
+
+            Log::debug('RevenueCat API response');
+            Log::debug(var_export($apiResponse, true));
+
+            if (!$apiResponse || !$apiResponse->subscriber || empty($apiResponse->subscriber->entitlements)) {
+                return response()->json([
+                                            'shouldSignup' => true,
+                                        ]);
+            }
+            $entitlements = $apiResponse->subscriber->entitlements;
+
+            foreach ($entitlements as $entitlement) {
+                if (Carbon::parse($entitlement->expires_date) >= now()->subDays(7)) {
+                    $active = true;
+                    $subscription = $apiResponse->subscriber->subscriptions->{$entitlement->product_identifier};
+                    $store = (strtolower($subscription->store) == 'app_store') ? 'apple_store' : 'google_store';
+
+                    //productId
+                    $productId = $entitlement->product_identifier;
+                    $productsMap = array_merge(
+                        [config('ecommerce.'.$store.'_products_map')[$productId]],
+                        [config('ecommerce.'.$store.'_products_map_trial')[$productId]]);
+
+                    $musoraProduct =
+                        Product::whereIn('sku', $productsMap)
+                            ->first();
+
+                    return response()->json([
+                                                'shouldLogin' => true,
+                                                'message' => 'You have an active '.
+                                                    ucfirst($musoraProduct->brand ?? config('ecommerce.brand')).
+                                                    ' account. Please login into your account. If you want to modify your payment plan please cancel your active subscription from device settings before.',
+                                            ]);
+                }
             }
         }
 

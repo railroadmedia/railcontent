@@ -53,7 +53,7 @@ if (config('ecommerce.revenuecat_only') == true) {
             ->name('google_play_store.process_receipt');
         Route::post(
             '/api/google/signup',
-            \App\Modules\Ecommerce\Controllers\RevenueCatController::class.'@restoreGoogle'
+            \App\Modules\Ecommerce\Controllers\RevenueCatController::class.'@signupGoogle'
         )
             ->name('google_play_store.signup');
 
