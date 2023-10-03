@@ -62,7 +62,6 @@ class UserAccessPermissionsService
     )
     : void {
         $contentPermissionsLookup = $this->getContentPermissionsLookup();
-        $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($userId);
 
         $products =
             Product::whereIn('id', $productIds)
@@ -83,13 +82,10 @@ class UserAccessPermissionsService
                 $accessPermission->time_lifetime = $product->isLifeTime();
                 $accessPermission->status = UserAccessPermissionsStatusEnum::Active;
                 $accessPermission->save();
-                $existingAccessPermissionsLookup["$source->value.$accessPermission->id"] = $accessPermission;
             }
         }
 
-        $accessPermissions = new UserAccessPermissionsCollection(
-            $userId, $existingAccessPermissionsLookup->values()
-        );
+        $accessPermissions = $this->getUserAccessPermissions($userId);
         event(new UserAccessPermissionsUpdated($accessPermissions));
     }
 
