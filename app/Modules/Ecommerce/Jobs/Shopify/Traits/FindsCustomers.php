@@ -69,5 +69,5 @@ trait FindsCustomers
      *
      * @return CustomerRepository
      */
-    protected abstract function getCustomerRepository(): CustomerRepository;
+    abstract protected function getCustomerRepository(): CustomerRepository;
 }

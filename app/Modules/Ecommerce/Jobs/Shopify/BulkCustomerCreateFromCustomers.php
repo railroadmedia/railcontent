@@ -82,6 +82,11 @@ class BulkCustomerCreateFromCustomers implements ShouldQueue
 
             // find any of our Customers with the same email address
             $customers = $this->getCustomersForEmail($email);
+            if ($customers->isEmpty()){
+                $this->logError(sprintf("%s: No customers found with email address %s ... even though it's the".
+                    " email address of a customer...?", $this->getClassName(), $email));
+                return;
+            }
             $customersData[] = json_encode($this->createCustomerData($customers));
         });
 
