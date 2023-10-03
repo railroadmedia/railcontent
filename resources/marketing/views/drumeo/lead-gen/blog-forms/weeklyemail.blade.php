@@ -12,9 +12,8 @@
 @endsection
 
 @section('form')
-
     @include("drumeo.lead-gen.partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
+        "recaptchaKey" => $recaptchaKey,
         "formId" => "Drumeo - Engagement - Trigger - Blog Signup - WebForm",
         "inputText" => "Enter Your Email",
         "buttonText" => "Join The Drum Club",
