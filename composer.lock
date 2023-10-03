@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.282.0",
+            "version": "3.282.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "79a3ed5bb573f592823f8b1cffe0dbac3132e6b4"
+                "reference": "59b84106b3870da3a1a862047fc61108dccb37b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/79a3ed5bb573f592823f8b1cffe0dbac3132e6b4",
-                "reference": "79a3ed5bb573f592823f8b1cffe0dbac3132e6b4",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/59b84106b3870da3a1a862047fc61108dccb37b9",
+                "reference": "59b84106b3870da3a1a862047fc61108dccb37b9",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.282.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.282.1"
             },
-            "time": "2023-09-28T18:09:20+00:00"
+            "time": "2023-10-02T18:07:55+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -8095,12 +8095,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "c5ee6d6c8753c9cb3fc1a5713c53d1233f0518dd"
+                "reference": "ae97be7a476903495a3ebc7dbab4bf968f398046"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/c5ee6d6c8753c9cb3fc1a5713c53d1233f0518dd",
-                "reference": "c5ee6d6c8753c9cb3fc1a5713c53d1233f0518dd",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/ae97be7a476903495a3ebc7dbab4bf968f398046",
+                "reference": "ae97be7a476903495a3ebc7dbab4bf968f398046",
                 "shasum": ""
             },
             "require": {
@@ -8140,7 +8140,7 @@
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
                 "source": "https://github.com/railroadmedia/ecommerce/tree/5.0"
             },
-            "time": "2023-10-02T10:45:00+00:00"
+            "time": "2023-10-03T12:03:03+00:00"
         },
         {
             "name": "railroad/lead-tracker",
