@@ -71,49 +71,53 @@ class MusoraApiUserProvider implements UserProviderInterface
     public function getCurrentUserMembershipData(?string $brand = null)
     : array {
         $user = user();
-        $productsIds = [];
-        $products = [];
 
-//        foreach (config('ecommerce.available_brands', []) as $availableBrand) {
-//            if (!isset(config('ecommerce.membership_product_skus')[$availableBrand])) {
-//                break;
-//            }
-//            $products += $this->productRepository->bySkus(config('ecommerce.membership_product_skus')[$availableBrand]);
-//        }
-//
-//        foreach ($products as $product) {
-//            $productsIds[] = $product->getId();
-//        }
-//
-//        $membershipSubscription = $this->subscriptionRepository->getUserSubscriptionForProducts(
-//            $user->id,
-//            $productsIds,
-//            true
-//        );
-//
-//        $isAppleAppSubscriber = false;
-//        $isGoogleAppSubscriber = false;
-//
-//        if ($membershipSubscription) {
-//            $isAppleAppSubscriber = $membershipSubscription->getType() == Subscription::TYPE_APPLE_SUBSCRIPTION;
-//            $isGoogleAppSubscriber = $membershipSubscription->getType() == Subscription::TYPE_GOOGLE_SUBSCRIPTION;
-//        }
-        $store = false;
-        if($user['revenuecat_origin_app_user_id']) {
-            $revenuecatSubscriber = $this->revenueCatService->getSubscriber($user['revenuecat_origin_app_user_id']);
-            $entitlements = $revenuecatSubscriber->entitlements;
-            $subscriptions = $revenuecatSubscriber->subscriptions;
+        if (config('ecommerce.revenuecat_only') !== true) {
+            $productsIds = [];
+            $products = [];
 
-            if (!empty($entitlements)) {
-                foreach ($entitlements as $entitlement) {
-                    $productIdentifier = $entitlement->product_identifier;
-                    $subscriptionData = $subscriptions->$productIdentifier;
-                    $store = $subscriptionData->store;
+                    foreach (config('ecommerce.available_brands', []) as $availableBrand) {
+                        if (!isset(config('ecommerce.membership_product_skus')[$availableBrand])) {
+                            break;
+                        }
+                        $products += $this->productRepository->bySkus(config('ecommerce.membership_product_skus')[$availableBrand]);
+                    }
+
+                    foreach ($products as $product) {
+                        $productsIds[] = $product->getId();
+                    }
+
+                    $membershipSubscription = $this->subscriptionRepository->getUserSubscriptionForProducts(
+                        $user->id,
+                        $productsIds,
+                        true
+                    );
+
+                    $isAppleAppSubscriber = false;
+                    $isGoogleAppSubscriber = false;
+
+                    if ($membershipSubscription) {
+                        $isAppleAppSubscriber = $membershipSubscription->getType() == Subscription::TYPE_APPLE_SUBSCRIPTION;
+                        $isGoogleAppSubscriber = $membershipSubscription->getType() == Subscription::TYPE_GOOGLE_SUBSCRIPTION;
+                    }
+        }else {
+            $store = false;
+            if ($user['revenuecat_origin_app_user_id']) {
+                $revenuecatSubscriber = $this->revenueCatService->getSubscriber($user['revenuecat_origin_app_user_id']);
+                $entitlements = $revenuecatSubscriber->entitlements;
+                $subscriptions = $revenuecatSubscriber->subscriptions;
+
+                if (!empty($entitlements)) {
+                    foreach ($entitlements as $entitlement) {
+                        $productIdentifier = $entitlement->product_identifier;
+                        $subscriptionData = $subscriptions->$productIdentifier;
+                        $store = $subscriptionData->store;
+                    }
                 }
             }
+            $isAppleAppSubscriber = ($store && $store == 'app_store') ? true : false;
+            $isGoogleAppSubscriber = ($store && $store == 'play_store') ? true : false;
         }
-        $isAppleAppSubscriber = ($store && $store == 'app_store')?true:false;
-        $isGoogleAppSubscriber = ($store && $store == 'play_store')?true:false;
 
         return [
             'isEdge' => $user->isAMember(),
