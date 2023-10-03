@@ -337,7 +337,28 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
             if (collect($errors->get("phone"))->contains("Enter a valid phone number")) {
                 // remove the phone number from the post data and try again
                 $postData["phone"] = null;
-                return $this->sendDataToShopify($user, $postData, $isCreating, $alreadySyncedUserCustomers, ++$attemptNumber);
+                return $this->sendDataToShopify(
+                    $user,
+                    $postData,
+                    $isCreating,
+                    $alreadySyncedUserCustomers,
+                    ++$attemptNumber
+                );
+            }
+
+            // a known validation error is that the phone number is already in use. This is a bit of an odd unique
+            // constraint by Shopify, but it is what it is. So if that validation failed, try again
+            // without a phone number
+            if (collect($errors->get("phone"))->contains("Phone has already been taken")) {
+                // remove the phone number from the post data and try again
+                $postData["phone"] = null;
+                return $this->sendDataToShopify(
+                    $user,
+                    $postData,
+                    $isCreating,
+                    $alreadySyncedUserCustomers,
+                    ++$attemptNumber
+                );
             }
 
             // a different validation error occurred that we can't handle, so report it here
