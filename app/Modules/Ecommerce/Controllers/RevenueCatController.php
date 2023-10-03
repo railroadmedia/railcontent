@@ -856,7 +856,7 @@ class RevenueCatController extends Controller
      */
     public function signupGoogle(Request $request)
     {
-        Log::info('Attempting to google signup for token: '.$request->get('purchases'));
+        Log::info('Attempting to google signup  ');
         $receipt = $request->get('purchases', []);
         if (empty($receipt)) {
             return response()->json([
