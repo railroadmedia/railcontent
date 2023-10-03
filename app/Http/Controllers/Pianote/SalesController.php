@@ -248,10 +248,6 @@ class SalesController extends BaseController
     {
         return view('pianote.products.classical-piano-pieces', ['theme' => 'pianote']);
     }
-    public function easyChordsDeal()
-    {
-        return view('pianote.sales.pages.easy-chords-deal', ['theme' => 'pianote']);
-    }
 
     public function newPianoPlayers()
     {
@@ -305,13 +301,6 @@ class SalesController extends BaseController
     public function thirtyDayBluesPianoDeal()
     {
         return view('pianote.products.30-day-blues-piano-deal', [
-            'theme' => 'pianote',
-        ]);
-    }
-    public function ultimatePracticeBundle()
-    {
-
-        return view('pianote.products.ultimate-practice-bundle', [
             'theme' => 'pianote',
         ]);
     }
