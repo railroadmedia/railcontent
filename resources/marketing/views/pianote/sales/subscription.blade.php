@@ -795,17 +795,16 @@
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'piano',
         ])
+
 {{--        @include('musora.sales.components.order-section-collage', [--}}
 {{--        'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png',--}}
 {{--        'header' => 'Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',--}}
 {{--        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>--}}
-{{--                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> All-access for piano, guitar, drums, and singing.</li>--}}
-{{--                    <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> We’ll donate 20% towards music programs for kids. </li>',--}}
-{{--        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-collage.png',--}}
-{{--        ])--}}
-{{--        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>--}}
+{{--                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>--}}
 {{--        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>--}}
 {{--        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',--}}
+{{--        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-collage.png',--}}
+{{--        ])--}}
     @endif
 
     @include('musora.sales.components.app-section', [

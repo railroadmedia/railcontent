@@ -44,7 +44,7 @@ class SalesController extends BaseController
     }
     public function trialChords()
     {
-        return view('pianote.sales.chords-book-trial', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
+        return view('pianote.sales.chords-trial', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
     }
     public function trialSongs()
     {
@@ -61,10 +61,6 @@ class SalesController extends BaseController
     public function promoSS()
     {
         return view('pianote.sales.song-secrets-bonus', ['theme' => 'pianote', 'promoVersion' => 'true']);
-    }
-    public function pianoMonth()
-    {
-        return view('pianote.sales.piano-month', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }
     public function choosePlan()
     {

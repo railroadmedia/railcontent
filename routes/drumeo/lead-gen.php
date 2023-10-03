@@ -28,7 +28,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     Route::get('/destupefying-your-weak-hand', [LeadGenController::class, 'destupefy'] );
     Route::get('/drum-set-maintenance', [LeadGenController::class, 'drumSetMaintenance']);
     Route::get('/drum-technique-made-easy/testimonials', [LeadGenController::class, 'dtmeTestimonials']);
-    Route::get('/fwtgf', [LeadGenController::class, 'fasterNeon']);
+    Route::get('/fwtgf', [LeadGenController::class, 'faster']);
     Route::group(['prefix' => 'faster'],
         function () {
             Route::get('/{page?}', LeadGenController::class . '@faster')

@@ -101,6 +101,7 @@
                   <li v-for="resource in resources" :key="resource.resource_name">
                       <a
                           class="tw-flex tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-sm tw-whitespace-nowrap tw-text-black dark:tw-text-white"
+                          target="_blank"
                           :key="resource.resource_name"
                           :href="resource.resource_url"
                           :aria-label="`Download ${resource.resource_name}`"
@@ -147,6 +148,7 @@
                     <li v-for="resource in resources">
                         <a
                             class="tw-flex tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-sm tw-whitespace-nowrap tw-text-black dark:tw-text-white"
+                            target="_blank"
                             :key="resource.resource_name"
                             :href="resource.resource_url"
                             :aria-label="`Download ${resource.resource_name}`"
