@@ -69,10 +69,15 @@ class RevenueCatController extends Controller
 
                 //create new user
                 $user = $this->revenueCatService->getUser(
-                    $data['event']['subscriber_attributes']['email']['value'],
+                    $data['event']['subscriber_attributes']['email']['value'] ?? null,
                     $data['event']['original_app_user_id'],
                     true
                 );
+
+                if (!$user) {
+                    //TBD
+                    break;
+                }
 
                 //store type
                 $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
@@ -499,6 +504,7 @@ class RevenueCatController extends Controller
             $request->input('data.attributes.price'),
             $request->input('data.attributes.currency'),
             $request->has('data.attributes.app') ? $request->input('data.attributes.app') : 'Musora',
+            $request->input('data.attributes.email'),
         );
         $apiResponse = json_decode($revenuecatPurchase);
         Log::debug('RevenueCat API response');
@@ -565,6 +571,7 @@ class RevenueCatController extends Controller
             $request->input('data.attributes.price'),
             $request->input('data.attributes.currency'),
             $request->has('data.attributes.app') ? $request->input('data.attributes.app') : 'Musora',
+            $request->input('data.attributes.email'),
         );
         $apiResponse = json_decode($revenuecatPurchase);
         Log::debug('RevenueCat API response');
