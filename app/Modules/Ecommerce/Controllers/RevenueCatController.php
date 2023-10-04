@@ -80,6 +80,8 @@ class RevenueCatController extends Controller
 
                 if (!$user) {
                     //TBD
+                    $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
+                    Log::error('RevenueCatController processNotification::INITIAL_PURCHASE - user not found email: ' . $email . ' original_app_user_id: ' . $data['event']['original_app_user_id']);
                     break;
                 }
 
@@ -142,6 +144,8 @@ class RevenueCatController extends Controller
                 );
                 if (!$user) {
                     //TBD
+                    $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
+                    Log::error('RevenueCatController processNotification::RENEWAL - user not found email: ' . $email . ' original_app_user_id: ' . $data['event']['original_app_user_id']);
                     break;
                 }
 
@@ -201,6 +205,8 @@ class RevenueCatController extends Controller
                 );
                 if (!$user) {
                     //TBD
+                    $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
+                    Log::error('RevenueCatController processNotification::PRODUCT_CHANGE - user not found email: ' . $email . ' original_app_user_id: ' . $data['event']['original_app_user_id']);
                     break;
                 }
 
@@ -245,7 +251,8 @@ class RevenueCatController extends Controller
                     $data['event']['original_app_user_id']
                 );
                 if (!$user) {
-                    //TBD
+                    $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
+                    Log::error('RevenueCatController processNotification::CANCELLATION - user not found email: ' . $email . ' original_app_user_id: ' . $data['event']['original_app_user_id']);
                     break;
                 }
 
@@ -324,7 +331,8 @@ class RevenueCatController extends Controller
                     $data['event']['original_app_user_id']
                 );
                 if (!$user) {
-                    //TBD
+                    $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
+                    Log::error('RevenueCatController processNotification::EXPIRATION - user not found email: ' . $email . ' original_app_user_id: ' . $data['event']['original_app_user_id']);
                     break;
                 }
 
