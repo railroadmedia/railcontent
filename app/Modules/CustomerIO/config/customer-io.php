@@ -630,6 +630,16 @@ return [
                     'pianote',
                 ],
             ],
+            'Pianote Webinar' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_webinar-registrations',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
         ],
         'guitareo' => [
             'The Guitarists Toolbox' => [
