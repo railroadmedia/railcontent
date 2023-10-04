@@ -113,6 +113,13 @@ Route::group(
 
         )
             ->name('user_management_system.onboarding.experience');
+            
+        Route::post(
+            'onboarding-goals',
+            OnboardingController::class . '@goals'
+    
+        )
+            ->name('user_management_system.onboarding.goals');
 
         Route::get(
             'onboarding-saved-answers',

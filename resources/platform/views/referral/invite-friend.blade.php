@@ -43,15 +43,16 @@
 
             let token = document.getElementById('_token').value;
             let brand = document.getElementById('brand').value;
-            let email = document.getElementById('email').value;
+            let email = document.getElementById('email');
+            const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
             let data = {
                 _token: token,
                 brand,
-                email,
+                email: email.value,
             };
 
-            if(email){
+            if(email.value.match(emailFormat)){
                 fetch('{{ url()->route('referral.email-invite') }}', {
                     method: 'POST',
                     headers: {
@@ -61,13 +62,15 @@
                 })
                 .then((res) => {
                     //use email value for the modal
-                    document.getElementById('modalEmail').innerHTML = email;
+                    document.getElementById('modalEmail').innerHTML = email.value;
                     //blank input
                     document.getElementById('email').value = '';
-
                     //open modal
                     window.openModal('confirmationModal');
                 })
+            }
+            else {
+                email.classList.add('tw-bg-red-200');
             }
         }
 

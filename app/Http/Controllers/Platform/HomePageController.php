@@ -262,6 +262,8 @@ class HomePageController extends BaseController
 
         $hasExperience = user()->onboardingExperience ? true : false;
 
+        $hasGoals = user()->onboardingGoals ? true : false;
+
         $hasStartedMethod = $methodContent['started'];
         $hasCompletedMethod = $methodContent['completed'];
 
@@ -372,6 +374,7 @@ class HomePageController extends BaseController
             'hasGenres' => $hasGenres,
             'hasTopics' => $hasTopics,
             'hasExperience' => $hasExperience,
+            'hasGoals' => $hasGoals,
             'methodUrl' => ($hasCompletedMethod)? url()->route('platform.content.first-level', ['method', $methodContent['slug'], $methodContent['id']]):
                 url()->route('platform.content.jump-to-continue-content', $methodContent['id']),
             'completedLevelsUrl' => $methodContent['url'] ?? '',

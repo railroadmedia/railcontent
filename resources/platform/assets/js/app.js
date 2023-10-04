@@ -41,7 +41,6 @@ import './vue/vuesora/assets/js/functions/user-events';
 import './vue/vuesora/assets/js/functions/dropdown';
 import './vue/vuesora/assets/js/functions/modal';
 import './vue/vuesora/assets/js/functions/accordion';
-import './vue/vuesora/assets/js/functions/instructor-info';
 import './vue/vuesora/assets/js/third-party/add-event-atc';
 
 //Vuesora Components

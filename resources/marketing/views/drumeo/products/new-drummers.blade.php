@@ -370,7 +370,7 @@
             <div class="float-left w-1/3">
                 <div class="social-platform youtube py-4 md:py-5 lg:py-6 rounded-3xl w-11/12" style="color: #cd201f;background: linear-gradient(#000a1e, #00102e);">
                     <i class="fab fa-youtube text-4xl md:text-5xl lg:text-6xl"></i>
-                    <h1 class="count font-black leading-none my-2 md:my-4 text-white" id="youtube-count" data-total-count="2090000">0</h1>
+                    <h1 class="count font-black leading-none my-2 md:my-4 text-white" id="youtube-count" data-total-count="3000000">0</h1>
                     <p class="uppercase leading-none md:tracking-widest">Subs<span class="hidden sm:inline-block">cribers</span></p>
                 </div>
             </div>

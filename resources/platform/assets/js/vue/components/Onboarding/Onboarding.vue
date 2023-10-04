@@ -7,7 +7,7 @@ import InstrumentType from './steps/InstrumentType.vue'
 import Experience from './steps/Experience.vue'
 import Genre from './steps/Genre.vue'
 import Topics from './steps/Topics.vue'
-import Coaches from './steps/Coaches.vue'
+import Goals from './steps/Goals.vue'
 import { initialSteps, instrumentBrand, brandInstrument } from './constants';
 import { getInitialInfo, getCheckedSteps } from './utils';
 
@@ -33,6 +33,9 @@ const props = defineProps({
         type: Object,
     },
     selectedExperience: {
+        type: Object,
+    },
+    selectedGoals: {
         type: Object,
     },
 });
@@ -74,7 +77,7 @@ onMounted(() => {
     if (props.selectedBrand) {
         if (props.startOnStep) {
             const newSteps = [...steps.value];
-            newSteps.forEach(({}, index) => {
+            newSteps.forEach(({ }, index) => {
                 if (props.startOnStep >= index) {
                     newSteps[index].checked = true;
                 }
@@ -91,66 +94,20 @@ onMounted(() => {
 </script>
 
 <template>
-    <ModalRenderer>
-        <UserInfo
-            :brand="brand"
-            v-if="currentStep === 0"
-            @onChangeStep="changeStep"
-            @onChangeInfo="changeInfo"
-            @onCheckStep="checkStepToggle"
-            :steps="steps"
-            :info="info"
-            :config-options="configOptions"
-        />
-        <InstrumentSelect
-            :brand="brand"
-            v-if="currentStep === 1"
-            @onChangeStep="changeStep"
-            @onChangeInfo="changeInfo"
-            @onCheckStep="checkStepToggle"
-            :steps="steps"
-            :info="info"
-            :config-options="configOptions"
-        />
-        <InstrumentType
-            :brand="brand"
-            v-if="currentStep === 2"
-            @onChangeStep="changeStep"
-            @onChangeInfo="changeInfo"
-            @onCheckStep="checkStepToggle"
-            :steps="steps"
-            :info="info"
-            :config-options="configOptions"
-        />
-        <Experience
-            :brand="brand"
-            v-if="currentStep === 3"
-            @onChangeStep="changeStep"
-            @onChangeInfo="changeInfo"
-            @onCheckStep="checkStepToggle"
-            :steps="steps"
-            :info="info"
-            :config-options="configOptions"
-        />
-        <Genre
-            :brand="brand"
-            v-if="currentStep === 4"
-            @onChangeStep="changeStep"
-            @onChangeInfo="changeInfo"
-            @onCheckStep="checkStepToggle"
-            :steps="steps"
-            :info="info"
-            :config-options="configOptions"
-        />
-        <Topics
-            :brand="brand"
-            v-if="currentStep === 5"
-            @onChangeStep="changeStep"
-            @onChangeInfo="changeInfo"
-            @onCheckStep="checkStepToggle"
-            :steps="steps"
-            :info="info"
-            :config-options="configOptions"
-        />
-    </ModalRenderer>
+    <div class="tw-bg-[#000c17]">
+        <UserInfo :brand="brand" v-if="currentStep === 0" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
+            @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions" />
+        <InstrumentSelect :brand="brand" v-if="currentStep === 1" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
+            @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions" />
+        <InstrumentType :brand="brand" v-if="currentStep === 2" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
+            @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions" />
+        <Experience :brand="brand" v-if="currentStep === 3" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
+            @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions" />
+        <Genre :brand="brand" v-if="currentStep === 4" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
+            @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions" />
+        <Topics :brand="brand" v-if="currentStep === 5" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
+            @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions" />
+        <Goals :brand="brand" v-if="currentStep === 6" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
+            @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions" />
+    </div>
 </template>

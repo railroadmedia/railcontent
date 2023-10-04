@@ -162,7 +162,7 @@
                 <br><br>
                 And if you’re wondering what to do next, we’ve got you covered. Because we want to make your next steps just as fun (and easy) as the first ones.
                 <br><br>
-                So here’s your exclusive offer. Join Panote today and you’ll get:
+                So here’s your exclusive offer. Join Pianote today and you’ll get:
             </p>
             <ul class="py-4 px-6 mx-auto text-left text-white rounded-xl" style="background-color:#0d1627;">
                 <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check mr-1 text-pianote"></i></span> Unlimited access to step-by-step lessons</li>

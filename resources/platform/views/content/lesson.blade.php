@@ -108,47 +108,49 @@
                     @endif
                 </div>
 
-                <div class="tw-container tw-mx-auto lean">
-                    <video-resources theme-color="{{ $brand }}" brand="{{ $brand }}"
-                        title="{{ $lessonContent->fetch('fields.title') }}"
-                        lesson-type="{{ $lessonType }}"
-                        thumbnail-url="{{ $lessonContent->fetch('data.thumbnail_url') }}"
-                        description="{{ $lessonContent->fetch('data.description') }}"
-                        :instructors="{{ json_encode($lessonContent['coaches'] ?? []) }}"
-                        parent-title="{{ isset($parent) ? $parent->fetch('fields.title') : null }}"
-                        :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
-                        :like-count="{{ $lessonContent['like_count'] ?? 0 }}"
-                        :is-added="{{ json_encode($lessonContent->fetch('is_added_to_primary_playlist') ?? false) }}"
-                        content-id="{{ $lessonContent->fetch('id') }}" user-id="{{ auth()->id() }}"
-                        :resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
-                        :show-add-to-list="{{ json_encode($lessonType != 'song') }}"
-                        :show-info-button="{{ json_encode(!empty($lessonContent->fetch('*fields.instructor')) || !empty($lessonContent->fetch('data.description')) || !empty($lessonContent['chapters'])) }}"
-                    ></video-resources>
+                <video-resources theme-color="{{ $brand }}" brand="{{ $brand }}"
+                    title="{{ $lessonContent->fetch('fields.title') }}"
+                    lesson-type="{{ $lessonType }}"
+                    thumbnail-url="{{ $lessonContent->fetch('data.thumbnail_url') }}"
+                    description="{{ $lessonContent->fetch('data.description') }}"
+                    :instructors="{{ json_encode($lessonContent['coaches'] ?? []) }}"
+                    parent-title="{{ isset($parent) ? $parent->fetch('fields.title') : null }}"
+                    :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
+                    :like-count="{{ $lessonContent['like_count'] ?? 0 }}"
+                    :is-added="{{ json_encode($lessonContent->fetch('is_added_to_primary_playlist') ?? false) }}"
+                    content-id="{{ $lessonContent->fetch('id') }}" user-id="{{ auth()->id() }}"
+                    :resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
+                    :show-add-to-list="{{ json_encode($lessonType != 'song') }}"
+                    :show-info-button="{{ json_encode(!empty($lessonContent->fetch('*fields.instructor')) || !empty($lessonContent->fetch('data.description')) || !empty($lessonContent['chapters'])) }}"
+                    report-user-email="{{ user()->email }}"
+                    report-user-name="{{ user()->display_name }}"
+                    report-recipient="{{ config('mailora.'. $brand . '.ask-question-recipient') }}"
+                    report-logo="{{ config('mailora.'. $brand . '.logo-link') }}"
+                ></video-resources>
 
-                    {{-- Add to List and Next/Prev Buttons --}}
-                    @include('partials.bladesora.members.content.lesson-video._buttons', [
-                        'themeColor' => $brand,
-                        'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
-                        'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
-                        'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
-                        'isCompleted' => $lessonContent->fetch('completed'),
-                        'contentId' => $lessonContent->fetch('id'),
-                        'xpAmount' => $lessonContent->fetch('fields.xp'),
-                    ])
+                {{-- Add to List and Next/Prev Buttons --}}
+                @include('partials.bladesora.members.content.lesson-video._buttons', [
+                    'themeColor' => $brand,
+                    'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
+                    'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
+                    'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
+                    'isCompleted' => $lessonContent->fetch('completed'),
+                    'contentId' => $lessonContent->fetch('id'),
+                    'xpAmount' => $lessonContent->fetch('fields.xp'),
+                ])
 
-                    {{-- Ask a Question Input --}}
-                    @if ($showEmail === true)
-                        <div class="tw-flex tw-flex-row tw-mt-3" dusk="question-email">
-                            <email-form
-                                email-subject="{{ $emailSubjectOverride ?? 'Question on Lesson: ' . $lessonContent->fetch('fields.title') . ' from: ' . user()->email }}"
-                                email-type="{{ $emailTypeOverride ?? 'ask-question' }}"
-                                email-endpoint="/mailora/secure/send" success-message="Your question has been sent!"
-                                user-avatar="{{ user()->profile_picture_url }}" :lesson-page="true"
-                                theme-color="{{ $brand }}">
-                            </email-form>
-                        </div>
-                    @endif
-                </div>
+                {{-- Ask a Question Input --}}
+                @if ($showEmail === true)
+                    <div class="tw-flex tw-flex-row tw-mt-3" dusk="question-email">
+                        <email-form
+                            email-subject="{{ $emailSubjectOverride ?? 'Question on Lesson: ' . $lessonContent->fetch('fields.title') . ' from: ' . user()->email }}"
+                            email-type="{{ $emailTypeOverride ?? 'ask-question' }}"
+                            email-endpoint="/mailora/secure/send" success-message="Your question has been sent!"
+                            user-avatar="{{ user()->profile_picture_url }}" :lesson-page="true"
+                            theme-color="{{ $brand }}">
+                        </email-form>
+                    </div>
+                @endif
             </div>
 
             @if (!empty($lessonContent->fetch('*fields.instructor')) ||

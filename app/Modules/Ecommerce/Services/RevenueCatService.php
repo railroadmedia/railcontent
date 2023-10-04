@@ -6,24 +6,30 @@ use App\Modules\Ecommerce\ApiGateways\RevenueCatApiGateway;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use Carbon\Carbon;
+use Modules\Ecommerce\Services\PaymentService;
 use Modules\UserManagementSystem\Models\User;
-use App\Modules\Ecommerce\Services\SubscriptionService;
 
 class RevenueCatService
 {
     public RevenueCatApiGateway $revenueCatApiGateway;
     public SubscriptionService $subscriptionService;
     public UserProductService $userProductService;
+    public PaymentService $paymentService;
 
     /**
      * @param RevenueCatApiGateway $revenueCatApiGateway
      * @param \App\Modules\Ecommerce\Services\SubscriptionService $subscriptionService
      */
-    public function __construct(RevenueCatApiGateway $revenueCatApiGateway, SubscriptionService $subscriptionService, UserProductService $userProductService)
-    {
+    public function __construct(
+        RevenueCatApiGateway $revenueCatApiGateway,
+        SubscriptionService $subscriptionService,
+        UserProductService $userProductService,
+        PaymentService $paymentService
+    ) {
         $this->revenueCatApiGateway = $revenueCatApiGateway;
         $this->subscriptionService = $subscriptionService;
         $this->userProductService = $userProductService;
+        $this->paymentService = $paymentService;
     }
 
     /**
@@ -65,10 +71,14 @@ class RevenueCatService
                 }
                 $type = (strtolower($subscriptionData->store) == 'app_store') ? 'apple' : 'google';
                 $store = $type.'_store';
-                $productsMap = array_merge(
-                    [config('ecommerce.'.$store.'_products_map')[$productIdentifier]],
-                    [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]]
-                );
+                if ($subscriptionData->period_type == 'trial') {
+                    $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]];
+                } else {
+                    $productsMap = array_merge(
+                        [config('ecommerce.'.$store.'_products_map')[$productIdentifier]],
+                        [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]]
+                    );
+                }
 
                 $musoraProduct =
                     Product::whereIn('sku', $productsMap)
@@ -99,13 +109,6 @@ class RevenueCatService
                             Carbon::parse($subscriptionData->unsubscribe_detected_at)
                                 ->getTimestampMs()
                         );
-
-                        //Assign user product
-                        $this->userProductService->assignUserProduct(
-                            $userId,
-                            $musoraSubscription->product_id,
-                            $musoraSubscription->paid_until
-                        );
                     } else {
                         //update subscription
                         $this->subscriptionService->updateSubscription(
@@ -115,11 +118,21 @@ class RevenueCatService
                             Carbon::parse($subscriptionData->unsubscribe_detected_at)
                                 ->getTimestampMs()
                         );
-                        //update user product
-                        $this->userProductService->assignUserProduct(
-                            $userId,
-                            $musoraSubscription->product_id,
-                            $musoraSubscription->paid_until
+                    }
+
+                    //Assign user product
+                    $this->userProductService->assignUserProduct(
+                        $userId,
+                        $musoraSubscription->product_id,
+                        $musoraSubscription->paid_until
+                    );
+                    if (strtoupper($subscriptionData->period_type) != 'TRIAL') {
+                        $this->paymentService->create(
+                            $musoraSubscription,
+                            $type,
+                            Carbon::parse($subscriptionData->purchase_date)
+                                ->getTimestampMs(),
+                            $subscriptionData->store_transaction_id
                         );
                     }
                 }
@@ -142,7 +155,7 @@ class RevenueCatService
                 ->where('email', $value)
                 ->orWhere('revenuecat_origin_app_user_id', $appUserId)
                 ->first();
-        if (!$user && $createIfNotExists) {
+        if (!$user && $createIfNotExists && $value) {
             $parts = explode('@', $value);
             $user = new User;
             $user->email = $value;
