@@ -297,7 +297,9 @@ class RevenueCatController extends Controller
                     (isset($currentRevenueCatSubscription['expires_date'])) ?
                         Carbon::create($currentRevenueCatSubscription['expires_date'])
                             ->getTimestampMs() : $data['event']['expiration_at_ms'],
-                    $currentRevenueCatSubscription['unsubscribe_detected_at'] ?? null,
+                    (isset($currentRevenueCatSubscription['unsubscribe_detected_at'])) ?
+                        Carbon::create($currentRevenueCatSubscription['unsubscribe_detected_at'])
+                            ->getTimestampMs() : null,
                     $data['event']['cancel_reason']
                 );
 
