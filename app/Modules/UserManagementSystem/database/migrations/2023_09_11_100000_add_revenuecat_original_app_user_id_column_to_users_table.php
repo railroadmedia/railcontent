@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AddRevenuecatOriginalAppUserIdColumnToUsersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('usora_users', function (Blueprint $table) {
+            $table->string('revenuecat_origin_app_user_id')->after('is_lifetime_member')->nullable()->index();
+        });
+
+        \DB::statement("update usora_users SET revenuecat_origin_app_user_id = id where id in ( SELECT user_id FROM `ecommerce_subscriptions`
+where type in ('apple_subscription','google_subscriptions')
+ORDER BY `ecommerce_subscriptions`.`id` DESC);");
+
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('usora_users', function (Blueprint $table) {
+            $table->dropColumn('revenuecat_origin_app_user_id');
+        });
+    }
+
+}

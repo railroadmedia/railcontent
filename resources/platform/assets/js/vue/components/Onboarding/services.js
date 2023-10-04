@@ -31,3 +31,7 @@ export const saveInstrumentHistoryData = ({instrument}) => {
 export const saveCoachHistoryData = ({coachName, coachId}) => {
     return axios.get(`/user-management-system/onboarding-answer-history-coach?coachName=${coachName}&coachId=${coachId}`);
 }
+
+export const saveGoals = ({ goals, brand }) => {
+    return axios.post(`/user-management-system/onboarding-goals`, { goals, brand });
+};
