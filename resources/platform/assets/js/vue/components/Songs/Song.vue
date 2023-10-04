@@ -281,7 +281,7 @@ const handleCloseSoundslice = () => {
                     <div v-if="openSoundslice === 'full'" id="practiceOverlay" class="bg-white">
                         <SoundSlice :user-id="userId" :theme-color="brand"
                             :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                            :soundslice-slug="soundsliceObject.soundsliceSlug">
+                            :soundslice-slug="soundsliceObject.soundsliceSlug" :contentId="contentId">
                             <template v-slot:soundsliceControls>
                                 <SoundSliceControls :title="`${songTitle} (Full)`" :disable-next="true" :disable-prev="true"
                                     @onClose="handleCloseSoundslice" />

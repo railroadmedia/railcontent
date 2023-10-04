@@ -37,6 +37,42 @@ $bonuses = [
         'shipping' => true,
     ],
     [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chords-poster.jpg',
+        'description' => 'Play every major and minor chord.',
+        'price' => floatval($productPrices['music-theory-posters']->price),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chord-formulas-poster.jpg',
+        'description' => 'Play any chord. On any key. ',
+        'price' => floatval($productPrices['music-theory-posters']->price),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/circle-of-fifths-poster.jpg',
+        'description' => 'The essential piece of music theory.',
+        'price' => floatval($productPrices['music-theory-posters']->price),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/key-to-sight-reading-poster.jpg',
+        'description' => 'Link the notes on the page to your keys.',
+        'price' => floatval($productPrices['music-theory-posters']->price),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/dynamics-poster.jpg',
+        'description' => 'Don’t learn Italian. Just look at this poster.',
+        'price' => floatval($productPrices['music-theory-posters']->price),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/scales-poster.jpg',
+        'description' => 'All the major and minor scales on one place.',
+        'price' => floatval($productPrices['music-theory-posters']->price),
+        'shipping' => true,
+    ],
+    [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/christmas-book.jpg',
         'title' => 'Christmas Songbook',
         'description' => '14 beautiful Christmas Carols hand-picked and arranged for solo piano.',

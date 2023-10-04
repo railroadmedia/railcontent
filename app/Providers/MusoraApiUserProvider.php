@@ -181,21 +181,20 @@ class MusoraApiUserProvider implements UserProviderInterface
         }
 
         return array_merge([
-                               'id' => $user->id,
-                               'email' => $user->email,
-                               'permission_level' => $user->permission_level,
-                               'display_name' => $user->display_name,
-                               'first_name' => $user->first_name,
-                               'last_name' => $user->last_name,
-                               'avatarUrl' => $user->profile_picture_url,
-                               'profile_picture_url' => $user->profile_picture_url,
-                               'helpscout_beacon_id' => config(
-                                   'railhelpscout.helpscout_tracking_beacon_id.'.brand()
-                               ),
-                               'level_rank' => $user->getMethodLevel(),
-                               'has_started_method' => $hasStartedMethod ?? false,
-                               'has_completed_method' => $hasCompletedMethod ?? false,
-                           ], $extraData);
+            'id' => $user->id,
+            'email' => $user->email,
+            'permission_level' => $user->permission_level,
+            'display_name' => $user->display_name,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'avatarUrl' => $user->profile_picture_url,
+            'profile_picture_url' => $user->profile_picture_url,
+            'helpscout_beacon_id' => config('railhelpscout.helpscout_tracking_beacon_id.' . brand()),
+            'level_rank' => $user->getMethodLevel(),
+            'has_started_method' => $hasStartedMethod ?? false,
+            'has_completed_method' => $hasCompletedMethod ?? false,
+            'login_as_users' => $user->hasRole('login_as_users')
+        ], $extraData);
     }
 
     public function getCurrentUserExperienceData()
@@ -229,9 +228,11 @@ class MusoraApiUserProvider implements UserProviderInterface
         $inUseDisplayName =
             \Modules\UserManagementSystem\Models\User::where('display_name', $displayName)
                 ->get();
+        $mobileEndpointVersion = (config('musora-api.api.version'));
+        $mobileEndpointVersion = str_replace('v', '', $mobileEndpointVersion);
 
         if (($inUseDisplayName->count() > 0) && (strtolower($displayName) != strtolower(user()->display_name))) {
-            throw new MusoraAPIException('This display name is already in use', 'Display name exist', 500);
+            throw new MusoraAPIException('This display name is already in use', 'Display name exist', ($mobileEndpointVersion >= 2)?200:500);
         }
 
         user()->display_name = $displayName;

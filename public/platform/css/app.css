@@ -23334,10 +23334,13 @@ a:visited{
 .tw-border-transparent{
   border-color: transparent !important;
 }
+<<<<<<< HEAD
 .tw-border-\[\#E4E4E7\]{
   --tw-border-opacity: 1 !important;
   border-color: rgb(228 228 231 / var(--tw-border-opacity)) !important;
 }
+=======
+>>>>>>> shopify-MC-updates
 .tw-border-gray-300{
   --tw-border-opacity: 1 !important;
   border-color: rgb(209 213 219 / var(--tw-border-opacity)) !important;
@@ -23354,6 +23357,13 @@ a:visited{
   --tw-border-opacity: 1 !important;
   border-color: rgb(229 231 235 / var(--tw-border-opacity)) !important;
 }
+<<<<<<< HEAD
+=======
+.tw-border-\[\#E4E4E7\]{
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(228 228 231 / var(--tw-border-opacity)) !important;
+}
+>>>>>>> shopify-MC-updates
 .tw-border-\[\#3fd525\]{
   --tw-border-opacity: 1 !important;
   border-color: rgb(63 213 37 / var(--tw-border-opacity)) !important;
@@ -24225,9 +24235,12 @@ a:visited{
 .tw-pr-12{
   padding-right: 3rem !important;
 }
+<<<<<<< HEAD
 .tw-pb-2{
   padding-bottom: 0.5rem !important;
 }
+=======
+>>>>>>> shopify-MC-updates
 .tw-pr-1{
   padding-right: 0.25rem !important;
 }
@@ -24237,15 +24250,24 @@ a:visited{
 .tw-pt-\[20px\]{
   padding-top: 20px !important;
 }
+<<<<<<< HEAD
 .tw-pt-5{
   padding-top: 1.25rem !important;
 }
+=======
+>>>>>>> shopify-MC-updates
 .tw-pt-\[30px\]{
   padding-top: 30px !important;
 }
 .tw-pt-3{
   padding-top: 0.75rem !important;
 }
+<<<<<<< HEAD
+=======
+.tw-pt-5{
+  padding-top: 1.25rem !important;
+}
+>>>>>>> shopify-MC-updates
 .tw-pt-\[32px\]{
   padding-top: 32px !important;
 }
@@ -24276,6 +24298,12 @@ a:visited{
 .tw-pr-16{
   padding-right: 4rem !important;
 }
+<<<<<<< HEAD
+=======
+.tw-pb-2{
+  padding-bottom: 0.5rem !important;
+}
+>>>>>>> shopify-MC-updates
 .tw-pb-0{
   padding-bottom: 0px !important;
 }
@@ -25526,10 +25554,13 @@ a:visited{
   --tw-border-opacity: 1 !important;
   border-color: rgb(34 63 87 / var(--tw-border-opacity)) !important;
 }
+<<<<<<< HEAD
 .tw-dark .dark\:tw-border-\[\#223457\]{
   --tw-border-opacity: 1 !important;
   border-color: rgb(34 52 87 / var(--tw-border-opacity)) !important;
 }
+=======
+>>>>>>> shopify-MC-updates
 .tw-dark .dark\:tw-border-\[\#445F74\]{
   --tw-border-opacity: 1 !important;
   border-color: rgb(68 95 116 / var(--tw-border-opacity)) !important;
@@ -25542,6 +25573,13 @@ a:visited{
   --tw-border-opacity: 1 !important;
   border-color: rgb(126 154 177 / var(--tw-border-opacity)) !important;
 }
+<<<<<<< HEAD
+=======
+.tw-dark .dark\:tw-border-\[\#223457\]{
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(34 52 87 / var(--tw-border-opacity)) !important;
+}
+>>>>>>> shopify-MC-updates
 .tw-dark .dark\:tw-border-\[\#344858\]{
   --tw-border-opacity: 1 !important;
   border-color: rgb(52 72 88 / var(--tw-border-opacity)) !important;
@@ -25996,6 +26034,12 @@ a:visited{
   .sm\:tw-inline-block{
     display: inline-block !important;
   }
+<<<<<<< HEAD
+=======
+  .sm\:tw-inline{
+    display: inline !important;
+  }
+>>>>>>> shopify-MC-updates
   .sm\:tw-flex{
     display: flex !important;
   }
@@ -27450,6 +27494,17 @@ a:visited{
   .lg\:tw-p-0{
     padding: 0px !important;
   }
+<<<<<<< HEAD
+=======
+  .lg\:tw-px-4{
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  .lg\:tw-px-0{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+>>>>>>> shopify-MC-updates
   .lg\:tw-py-4{
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
@@ -27462,10 +27517,13 @@ a:visited{
     padding-left: 2rem !important;
     padding-right: 2rem !important;
   }
+<<<<<<< HEAD
   .lg\:tw-px-0{
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
+=======
+>>>>>>> shopify-MC-updates
   .lg\:tw-py-16{
     padding-top: 4rem !important;
     padding-bottom: 4rem !important;
@@ -27654,9 +27712,12 @@ a:visited{
   .xl\:tw-mb-0{
     margin-bottom: 0px !important;
   }
+<<<<<<< HEAD
   .xl\:tw-mt-0{
     margin-top: 0px !important;
   }
+=======
+>>>>>>> shopify-MC-updates
   .xl\:tw-mt-\[56px\]{
     margin-top: 56px !important;
   }
@@ -27880,9 +27941,12 @@ a:visited{
   .\32xl\:tw-ml-4{
     margin-left: 1rem !important;
   }
+<<<<<<< HEAD
   .\32xl\:tw-ml-16{
     margin-left: 4rem !important;
   }
+=======
+>>>>>>> shopify-MC-updates
   .\32xl\:tw-hidden{
     display: none !important;
   }
