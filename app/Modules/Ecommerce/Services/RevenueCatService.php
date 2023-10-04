@@ -71,9 +71,14 @@ class RevenueCatService
                 }
                 $type = (strtolower($subscriptionData->store) == 'app_store') ? 'apple' : 'google';
                 $store = $type.'_store';
-                $productsMap = array_merge(
-                    [config('ecommerce.'.$store.'_products_map')[$productIdentifier]],
-                    [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]]);
+                if ($subscriptionData->period_type == 'trial') {
+                    $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]];
+                } else {
+                    $productsMap = array_merge(
+                        [config('ecommerce.'.$store.'_products_map')[$productIdentifier]],
+                        [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]]
+                    );
+                }
 
                 $musoraProduct =
                     Product::whereIn('sku', $productsMap)
