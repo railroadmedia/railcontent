@@ -1,6 +1,6 @@
 <div
         @if(!empty($bgColor))
-            style="background:linear-gradient(to bottom, #941831, #6B0059);"
+            style="{{ $bgColor }}"
         @else
             style="background:linear-gradient(30deg, #0a3761, #0c1526);"
         @endif
@@ -20,6 +20,9 @@
                     />
                 </div>
             @endif
+            @if(!empty($promoHeader))
+                {!! $promoHeader !!}
+            @endif
             <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
                 <div class=" inline-block relative w-full group" style="padding-bottom: 45%;perspective: 1000px;">
                     <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
@@ -32,9 +35,16 @@
             <br>
             @if(!empty($header))<h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>{!! $header !!}</strong></h3>@endif
             @if(!empty($subHeader))<h4 class="leading-tight mt-4 sm:mt-5 mb-2">{!! $subHeader !!}</h4>@endif
-            <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-            <p class="leading-tight text-sm mb-6"><em>First year discount: <s class="opacity-40">${{ Prices::$plusSubscriptionAnnualFull }}</s> @if(!empty($firstYearPrice))
-                ${{$firstYearPrice}} @else ${{ 200 }}@endif.<br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
+            <a class="join @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
+                @if(!empty($CTA))
+                    {{ $CTA }}
+                @else
+                    GET Started &raquo;
+                @endif
+            </a>
+            <p class="leading-tight text-sm mb-6"><em>First year discount: <s class="opacity-40">${{ Prices::$plusSubscriptionAnnualFull }}</s>
+                    <strong>@if(!empty($firstYearPrice)) ${{$firstYearPrice}} @else ${{ 200 }}@endif</strong>.
+                    <br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
         </div>
         <div style="font-size:0px">
             @foreach($bonuses as $bonus)
@@ -143,12 +153,22 @@
                 @endif
             </div>
         </div>
-        <h3 class="leading-tight mt-6 mb-1"><s class="opacity-50">${{ Prices::$plusSubscriptionAnnualFull }}</s> <strong>$200</strong> <span class="text-musora">(Save 20%)</span> </h3>
+        <h3 class="leading-tight mt-6 mb-1">
+            <s class="opacity-50">${{ Prices::$plusSubscriptionAnnualFull }}</s>
+            @if(!empty($firstYearPrice)) <strong>${{$firstYearPrice}}</strong> <span class="text-musora">(Save {{ round(100 - (100 * ($firstYearPrice / 240))) }}%)</span>  @else <strong>$200</strong> <span class="text-musora">(Save 20%)</span>  @endif
+
+        </h3>
         <p class="text-sm mb-4 sm:mb-6">For your first year, then ${{ Prices::$plusSubscriptionAnnualFull }}/yr.</p>
-        <a class="join {{ $theme }} mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+        <a class="join @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
+            @if(!empty($CTA))
+                {{ $CTA }}
+            @else
+                GET Started &raquo;
+            @endif
+        </a>
         @if(!empty($altButtonLink))
             <br>
-            <a class="inline-block text-light-navy mt-2" href="{{ $altButtonLink }}"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
+            <a class="inline-block opacity-70 mt-2" href="{{ $altButtonLink }}"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
         @endif
     </div>
 </section>

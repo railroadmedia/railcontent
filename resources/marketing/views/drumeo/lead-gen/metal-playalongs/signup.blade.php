@@ -207,62 +207,6 @@
             </div>
         </div>
     </section>
-{{--    @include('drumeo.lead-gen.partials.screen-slider',[--}}
-{{--        "screens" => [--}}
-{{--           [--}}
-{{--               "img" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/All+Skill+Levels.jpg",--}}
-{{--               "first" => true,--}}
-{{--           ],--}}
-{{--           [--}}
-{{--               "img" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/pro+reference+video.jpg",--}}
-{{--           ],--}}
-{{--           [--}}
-{{--               "img" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/playback+tools.jpg",--}}
-{{--           ],--}}
-{{--           [--}}
-{{--               "img" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/drumless.jpg",--}}
-{{--           ],--}}
-{{--           [--}}
-{{--               "img" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/follow+in+real+time.jpg",--}}
-{{--           ],--}}
-{{--           [--}}
-{{--               "img" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/different+styles.jpg",--}}
-{{--           ],--}}
-{{--        ],--}}
-{{--        "features" => [--}}
-{{--            [--}}
-{{--                "icon" => "fa-solid fa-screwdriver-wrench",--}}
-{{--                "title" => "All skill levels.",--}}
-{{--                "desc" => "Get started with a beginner track OR dive into a more advanced song.",--}}
-{{--                "first" => true--}}
-{{--            ],--}}
-{{--            [--}}
-{{--                "icon" => "fa-solid fa-tv-music",--}}
-{{--                "title" => "Pro reference videos.",--}}
-{{--                "desc" => "Get new ideas watching a professional drummer play the same song.",--}}
-{{--            ],--}}
-{{--            [--}}
-{{--                "icon" => "icon-metronome",--}}
-{{--                "title" => "Playback tools.",--}}
-{{--                "desc" => "Add or remove the metronome to help you count out every section.",--}}
-{{--            ],--}}
-{{--            [--}}
-{{--                "icon" => "fa-solid fa-drum",--}}
-{{--                "title" => "Nine drum-less tracks.",--}}
-{{--                "desc" => "Hear exactly how your playing fits the music with no other drums.",--}}
-{{--            ],--}}
-{{--            [--}}
-{{--                "icon" => "fa-solid fa-file-music",--}}
-{{--                "title" => "Follow along in real time.",--}}
-{{--                "desc" => "You’ll also have downloadable charts to bring to your kit.",--}}
-{{--            ],--}}
-{{--            [--}}
-{{--                "icon" => "fa-solid fa-list-music",--}}
-{{--                "title" => "All different styles.",--}}
-{{--                "desc" => "Odd-time, thrash, double-bass - challenge your skills in any style!",--}}
-{{--            ],--}}
-{{--        ],--}}
-{{--    ])--}}
 
     @include('drumeo.lead-gen.partials.quick-questions',[
         "bgColor" => "#000a1e",

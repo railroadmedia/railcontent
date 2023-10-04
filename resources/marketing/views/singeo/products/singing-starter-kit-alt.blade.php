@@ -123,7 +123,7 @@
                         <img class="rounded-xl cursor-pointer hover:opacity-80 transition-opacity lazyload" data-open="lesson{{ $lesson['lesson'] }}" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/{{ $lesson['image'] }}">
                     </div>
 
-                    <div class="reveal" style="max-width:600px" id="lesson{{ $lesson['lesson'] }}" data-reveal data-reset-on-close="false">
+                    <div class="reveal max-w-2xl" style="max-width:600px" id="lesson{{ $lesson['lesson'] }}" data-reveal data-reset-on-close="false">
                         <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/{{ $lesson['image'] }}">
                         <div class="p-4">
                             <h3 class="leading-tight mb-3"><strong>{{ $lesson['title'] }}</strong></h3>
