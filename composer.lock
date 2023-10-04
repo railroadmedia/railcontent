@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "16323ce05d9762512f7c1c7374cea0c6",
+    "content-hash": "acb95bb5a2e9d66cf7e83c989dab2979",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.282.1",
+            "version": "3.282.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "59b84106b3870da3a1a862047fc61108dccb37b9"
+                "reference": "b9b4013f68f1bd5f219f9784c1b2a47da02c1261"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/59b84106b3870da3a1a862047fc61108dccb37b9",
-                "reference": "59b84106b3870da3a1a862047fc61108dccb37b9",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b9b4013f68f1bd5f219f9784c1b2a47da02c1261",
+                "reference": "b9b4013f68f1bd5f219f9784c1b2a47da02c1261",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.282.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.282.2"
             },
-            "time": "2023-10-02T18:07:55+00:00"
+            "time": "2023-10-03T18:07:23+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -5019,16 +5019,16 @@
         },
         {
             "name": "laravel/vapor-core",
-            "version": "v2.33.1",
+            "version": "v2.33.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-core.git",
-                "reference": "51d116c15d4f8a07b0d55b44622d68e4b5075743"
+                "reference": "de2ddb6c279b8e51e9ef9cea3e0f7fda829740b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/51d116c15d4f8a07b0d55b44622d68e4b5075743",
-                "reference": "51d116c15d4f8a07b0d55b44622d68e4b5075743",
+                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/de2ddb6c279b8e51e9ef9cea3e0f7fda829740b2",
+                "reference": "de2ddb6c279b8e51e9ef9cea3e0f7fda829740b2",
                 "shasum": ""
             },
             "require": {
@@ -5062,7 +5062,10 @@
                 "laravel": {
                     "providers": [
                         "Laravel\\Vapor\\VaporServiceProvider"
-                    ]
+                    ],
+                    "aliases": {
+                        "Vapor": "Laravel\\Vapor\\Vapor"
+                    }
                 }
             },
             "autoload": {
@@ -5090,9 +5093,9 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-core/tree/v2.33.1"
+                "source": "https://github.com/laravel/vapor-core/tree/v2.33.2"
             },
-            "time": "2023-09-07T14:14:16+00:00"
+            "time": "2023-09-29T13:37:32+00:00"
         },
         {
             "name": "laravel/vapor-ui",
@@ -8296,16 +8299,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "dev-v3.0-revenuecat",
+            "version": "v3.1.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "8a64297be1100855104cd86a7a59dd3be8caf6b7"
+                "reference": "643c39829756a41a6d72703874d0d9cb2ecdbe16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/8a64297be1100855104cd86a7a59dd3be8caf6b7",
-                "reference": "8a64297be1100855104cd86a7a59dd3be8caf6b7",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/643c39829756a41a6d72703874d0d9cb2ecdbe16",
+                "reference": "643c39829756a41a6d72703874d0d9cb2ecdbe16",
                 "shasum": ""
             },
             "require": {
@@ -8335,9 +8338,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.0-revenuecat"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.43"
             },
-            "time": "2023-09-13T11:35:41+00:00"
+            "time": "2023-09-26T11:11:36+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -16962,12 +16965,6 @@
     ],
     "aliases": [
         {
-            "package": "railroad/musora-api",
-            "version": "dev-v3.0-revenuecat",
-            "alias": "v3.1.36",
-            "alias_normalized": "3.1.36.0"
-        },
-        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
@@ -16976,7 +16973,6 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/musora-api": 20,
         "railroad/railanalytics": 20
     },
     "prefer-stable": true,
