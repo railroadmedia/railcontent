@@ -111,7 +111,7 @@ class UserController extends Controller
      */
     public function read(Request $request, $id)
     {
-        $this->authorize('show-users');
+        //$this->authorize('show-users');
         $user = User::findOrFail($id);
 
         if ($user) {
@@ -249,7 +249,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('index-users');
+        //$this->authorize('index-users');
         $searchTerm = $request->get('search_term');
 
         $users =
