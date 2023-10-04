@@ -23,19 +23,18 @@
             <script>(function (w,d,s,o,f,js,fjs) { w['eWidget']=o;w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) }; if(d.getElementById(o)) return; js = d.createElement(s), fjs = d.getElementsByTagName(s)[0]; js.id = o; js.src = f; fjs.parentNode.insertBefore(js, fjs); }(window, document, 'script', '_ew', 'https://app.ewebinar.com/widget.js'));_ew('init', {"root":"w1696026509378","isReview":false,"mode":"public","openInPopup":false,"for":"Thankyou","type":"ThankYou","source":"","url":"https://www.pianote.com/song-secrets-webinar","shortUrl":"https://webinar.pianote.com/webinar/12267","sessions":[],"formType":"LatestForm","ewebinar":{"title":"Pianote%20Webinar%20Test","borderRadius":50,"primaryColor":"#f61a30ff","readableColor":"#ffffff","actionColor":"#f51a2fff","readableActionColor":"#ffffff","readableOnWhiteColor":"#f61a30ff","language":"en"},"showGdprBanner":false,"gdprBannerMode":"Off","gdprBannerText":"","carouselId":"","button":{"btnText":"ENROLL NOW","showButtonTimer":false,"buttonPrimaryColor":"#ffffffff","buttonReadableColor":"#4d4d4d","align":"Center","isFullWidth":false},"thankyou":{"onlyButton":true,"jitBtnText":"Go to session now","addToCalendarBtnText":"Add to calendar","replayBtnText":"Watch replay now"}});window.ewInit && window.ewInit();</script>
         </div>
     </div>
-    <div class="overflow-hidden px-3 py-5 sm:py-10 lg:py-14">
+    <div class="overflow-hidden px-5 py-5 sm:py-10 lg:py-14">
         <div class="container mx-auto max-w-4xl clearfix">
             <div class="text-center sm:px-3">
                 <h3 class="font-bebas tracking-widest my-4 text-pianote">SONG SECRETS</h3>
-                <h3 class="mt-4 leading-tight"><strong>Congratulations! Your seat is secure!</strong></h3>
+                <h3 class="mt-4 leading-tight"><strong>Congratulations!<br class="sm:hidden"> Your seat is secure!</strong></h3>
                 <p class="leading-normal mt-2 mb-12">Here’s what you need to do now…</p>
-                <div class="flex flex-wrap sm:text-left">
+                <div class="flex flex-wrap text-left items-center">
                     <div class="w-full sm:w-5/12 mx-auto px-10 max-w-xs sm:max-w-full sm:pl-0 sm:pr-5 relative">
-{{--                        <img class="absolute top-0 right-0 -mx-14 -my-3 h-14" src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" style="filter: sepia()saturate(20)brightness(.8)hue-rotate(-17deg);">--}}
-{{--                        <div class="w-full relative rounded-xl overflow-hidden shadow-lg" style="padding-bottom: 177%;">--}}
-{{--                            <iframe class="fixed inset-0 h-full w-full absolute" src="//player.vimeo.com/video/TODO" frameborder="0" allowfullscreen title="intro-video"></iframe>--}}
-{{--                        </div>--}}
-                        <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/lisa-witt-profile-m.png">
+                        <div class="w-full relative rounded-xl overflow-hidden shadow-lg" style="padding-bottom: 177%;">
+                            <iframe class="fixed inset-0 h-full w-full absolute" src="//player.vimeo.com/video/871165314" frameborder="0" allowfullscreen title="intro-video"></iframe>
+                        </div>
+{{--                        <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/lisa-witt-profile-m.png">--}}
                     </div>
                     <p class="w-full sm:w-7/12 mt-8 sm:mt-0 flex-shrink sm:pl-4">
                         <strong><i class="fas fa-check text-pianote"></i> Check your email.</strong><br>
