@@ -1,11 +1,11 @@
 @extends('musora._partials.layout')
 
 @section('head-includes')
-    <title>6 Reasons Online Music Lessons Will Help Your Learn Faster | Musora</title>
-    <meta property="og:title" content="6 Reasons Online Music Lessons Will Help Your Learn Faster | Musora">
+    <title>Moderators at Musora</title>
+    <meta property="og:title" content="Moderators at Musora">
 
-    <meta name="description" content="Online music lessons have grown in popularity because they work!">
-    <meta property="og:description" content="Online music lessons have grown in popularity because they work!">
+    <meta name="description" content="Want to find out more about our awesome Musora Mod team? Let's get in touch!">
+    <meta property="og:description" content="Want to find out more about our awesome Musora Mod team? Let's get in touch!">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
@@ -107,10 +107,11 @@
         p strong {
             font-weight:900;
         }
+        .contact-form p {
+            margin:0;
+        }
     </style>
 @endsection
-
-@section('body-class', 'dark')
 
 <!-- Main -->
 @section('layout-body')
@@ -199,7 +200,7 @@
             </div>
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f2f0ee;">
+    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
 
             <h2 class="leading-tight mb-8 sm:mb-10"><strong>What do our funky<br class="sm:hidden"> Mods do?</strong></h2>
@@ -244,7 +245,7 @@
             </div>
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
+    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
             <h2 class="leading-tight"><strong>
                     And what's in it for our <br> sensational Moderators?</strong></h2>
@@ -297,7 +298,7 @@
 
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20">
+    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
             <img class="mb-5 h-40 inline sm:hidden"
                 src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-bottom-m2.png"
@@ -320,12 +321,12 @@
     </section>
 
     <div id="final" class="anchor"></div>
-    <section class="text-center text-white px-5 sm:px-8 py-12 sm:py-14 lg:py-20" style="background-color:#0c1524;">
+    <section class="text-center px-5 sm:px-8 py-12 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
 
             <h2 class="leading-tight"><strong>Send us a question!</strong></h2>
             <h6 class="mt-2 mb-8 sm:mb-10">Want to find out more about our awesome Musora Mod team? Let's get in touch!</h6>
-            <div class="max-w-3xl mx-auto text-left">
+            <div class="max-w-3xl mx-auto text-left contact-form">
                 <contact-email-form-marketing
                     brand="drumeo"
                     captchakey="6LfwMZ4dAAAAALEGLsEUwAqrJLLnec_sSbl72Oqx"
