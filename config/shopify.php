@@ -43,4 +43,16 @@ return [
         'include_validation_errors' => env('SHOPIFY_INCLUDE_VALIDATION_ERRORS', false),
 
     ],
+
+    'rate_limit' => [
+        /*
+         * How close to the rate limit we'll allow until we sleep, to recover some requests.
+         */
+        'threshold' => env('SHOPIFY_RATE_LIMIT_THRESHOLD', 60),
+
+        /*
+         * The number of seconds to sleep for, when we hit the rate limit threshold.
+         */
+        'sleep_time' => env('SHOPIFY_RATE_LIMIT_SLEEP_TIME', 1),
+    ]
 ];
