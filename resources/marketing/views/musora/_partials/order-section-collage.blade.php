@@ -18,10 +18,8 @@
                 <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-0 inline-block">
 
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora" aria-hidden="true"></i> Trusted by {{ number_format(Prices::$students) }} happy students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> All-access for piano, guitar, drums, and singing.</li>
-                    <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> We’ll donate 20% towards music programs for kids. </li>
-{{--                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora" aria-hidden="true"></i> Personalized feedback from real teachers.</li>--}}
-{{--                    <li class="leading-tight text-musora"><i class="fa-li fas fa-check" aria-hidden="true"></i> All-access for piano, guitar,<br class="lg:hidden"> drums, and singing. </li>--}}
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora" aria-hidden="true"></i> Personalized feedback from real teachers.</li>
+                    <li class="leading-tight text-musora"><i class="fa-li fas fa-check" aria-hidden="true"></i> All-access for piano, guitar,<br class="lg:hidden"> drums, and singing. </li>
                 </ul>
                 <div class="w-72 lg:w-96 mx-auto sm:mx-0">
                     <a class=" w-full sm:w-64 join smaller  musora-gold  w-full my-3" href="/choose-plan">

@@ -55,11 +55,6 @@ class LeadGenController extends BaseController
         return view('drumeo.products.dtme-testimonials');
     }
 
-    public function fasterNeon()
-    {
-        return view('drumeo.lead-gen.faster.signup-neon', ['recaptchaKey'=>config('recaptcha.key')]);
-    }
-
     public function gavinsGrooves()
     {
         return view('drumeo.lead-gen.courses.full.gavins-grooves.signup', ['recaptchaKey'=>config('recaptcha.key')]);

@@ -200,6 +200,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereSendMobileAppPushNotifications($value)
  * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingExperience[] $onboardingExperience
  * @property-read int|null $onboarding_experience_count
+ * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingGoals[] $onboardingGoals
+ * @property-read int|null $onboarding_goals_count
  * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingGear[] $onboardingGear
  * @property-read int|null $onboarding_gear_count
  * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingGenre[] $onboardingGenres
@@ -765,6 +767,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function onboardingExperience()
     {
         return $this->hasMany(OnboardingExperience::class);
+    }
+
+    public function onboardingGoals()
+    {
+        return $this->hasMany(OnboardingGoals::class);
     }
 
     /**
