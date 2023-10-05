@@ -61,10 +61,8 @@ class SyncProductsToShopifyDispatcher extends Command
         // find all products that need to be synced
         $products = Product::query()
             ->when(!$fresh, function (Builder $q) {
-                $lastSyncAt = $this->getDateTimeOfLastSync();
-
                 return $q->whereNull("shopify_id")
-                    ->orWhereDate("updated_at", ">", $lastSyncAt);
+                    ->orWhereDate("updated_at", ">", $this->getDateTimeOfLastSync());
             })
             ->select("id");
 
@@ -73,6 +71,7 @@ class SyncProductsToShopifyDispatcher extends Command
         $jobs = [];
 
         if ($limit) {
+            $productCount = min($limit, $productCount);
             // chunk doesn't use a limit set in the query, so we'll work around that by keeping track of the count internally
             $isAtLimit = false;
             $tally = 0;
@@ -86,8 +85,7 @@ class SyncProductsToShopifyDispatcher extends Command
                     $fresh,
                     $locationId,
                     &$jobs,
-                    &
-                    $tally
+                    &$tally
                 ) {
                     if ($isAtLimit) {
                         return false;
