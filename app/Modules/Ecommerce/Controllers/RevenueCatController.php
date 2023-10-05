@@ -122,7 +122,8 @@ class RevenueCatController extends Controller
 
                     }
 
-                    $user->subscriptionType = SubscriptionTypeEnum::fromRevenueCatStore($type);
+                    $user->subscription_type = SubscriptionTypeEnum::fromRevenueCatStore($type);
+                    $user->save();
                 } else {
                     //get RevenueCat subscription
                     $currentRevenueCatSubscription =
@@ -209,6 +210,9 @@ class RevenueCatController extends Controller
                         );
                         return response()->json(['processed']);
                     }
+
+                    $user->subscription_type = SubscriptionTypeEnum::fromRevenueCatStore($type);
+                    $user->save();
                 } else {
                     //get RevenueCat subscription
                     $currentRevenueCatSubscription =
