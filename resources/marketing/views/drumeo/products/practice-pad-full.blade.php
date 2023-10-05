@@ -651,7 +651,7 @@
             }
 
             .pad-compare table td img {
-                width:auto;
+                width:100px;
             }
 
             .pad-compare table tr td:nth-child(2) {
