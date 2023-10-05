@@ -1,14 +1,14 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <title>StickBag | Drumeo</title>
-    <meta property="og:title" content="StickBag | Drumeo">
+    <title>PadStand | Drumeo</title>
+    <meta property="og:title" content="PadStand | Drumeo">
 
-    <meta name="description" content="Pack like a pro.">
-    <meta property="og:description" content="Pack like a pro.">
+    <meta name="description" content="Practice anywhere with perfect height and ergonomics.">
+    <meta property="og:description" content="Practice anywhere with perfect height and ergonomics.">
 
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/share-image2.jpg" style="display: none;">
-    <meta property="og:url" content="https://www.drumeo.com/drumshop/stickbag/">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/padstand/share-image.jpg" style="display: none;">
+    <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
 
@@ -119,72 +119,72 @@
         "cartVersion" => true
     ])
 
-
-        <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
-            <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
-                <div class="container mx-auto max-w-5xl">
-                    <img alt="quietkick" class="h-14 sm:h-16" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/280x0/filters:quality(95)/marketing/drumeo/shop/stickbag/stickbag-logo2.svg"><br>
-                    <h2 class="leading-tight mt-2 mb-3"><strong>Practice anywhere with</strong> perfect height and ergonomics.</h2>
-                    <h3 class="leading-tight">
-                        @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
-                            <s class="opacity-50">${{ floatval($productPrices['stickbag']->price) }}</s>
-                            <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
-                            (Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%)
-                        @else
-                            <strong>Only ${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
-                        @endif
-                    </h3>
-                    <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
-                        <div class="sm:w-5/12 join smaller outline hidden sm:inline-block"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
-                        <div class="sm:w-5/12 join smaller outline sm:hidden inline-block"   @click="trailerM = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
-                        @if( $products['stickbag']->getStockAvailability() > 1 && !empty($products['stickbag']->getStockAvailability()))
-                            <a class="w-5/12 join smaller blue" href="#customize-anchor">Order Now</a>
-                        @else
-                            <a class="join smaller sold-out">SOLD OUT</a>
-                        @endif
-                    </div>
-                    <h6 class="text-sm leading-tight"><em>or get it free with an Annual Drumeo Membership.</em></h6>
+    <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
+        <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
+            <div class="container mx-auto max-w-5xl">
+                <img alt="quietkick" class="h-12 sm:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/280x0/filters:quality(95)/marketing/drumeo/shop/padstand/padstand-logo.png"><br>
+                <h2 class="leading-tight my-4"><strong>Practice anywhere with</strong><br class="hidden sm:inline"> perfect height and ergonomics.</h2>
+                <h3 class="leading-tight">
+                    @if(floatval($productPrices['padstand']->price) > floatval($productPrices['padstand']->discounted_price))
+                        <s class="opacity-50">${{ floatval($productPrices['padstand']->price) }}</s>
+                        <strong>${{ floatval($productPrices['padstand']->discounted_price) }}</strong>
+                        (Save {{ round(100 - (100 * (floatval($productPrices['padstand']->discounted_price) / floatval($productPrices['padstand']->price)))) }}%)
+                    @else
+                        <strong>Only ${{ floatval($productPrices['padstand']->discounted_price) }}</strong>
+                    @endif
+                </h3>
+                <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
+{{--                    <div class="sm:w-5/12 join smaller outline hidden sm:inline-block"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>--}}
+{{--                    <div class="sm:w-5/12 join smaller outline sm:hidden inline-block"   @click="trailerM = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>--}}
+                    @if( $products['padstand']->getStockAvailability() > 1 && !empty($products['padstand']->getStockAvailability()))
+                        <a class="w-5/12 join smaller blue" href="#customize-anchor">Order Now</a>
+                    @else
+                        <a class="join smaller sold-out">SOLD OUT</a>
+                    @endif
                 </div>
+                <h6 class="text-sm leading-tight"><em>or get it free with an Annual Drumeo Membership.</em></h6>
             </div>
-            <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to bottom, transparent, rgba(0,79,153,0.6));"></div>
-            <video class="object-cover w-full relative z-0" style="height: 600px;" type="video/mp4" autoplay loop playsinline muted
-                    src="https://d21q7xesnoiieh.cloudfront.net/marketing/drumeo/shop/stickbag/header-vid.mp4"></video>
-        </header>
+        </div>
+        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to right, rgba(7,23,43,0.85), rgba(26,32,38,0.85));"></div>
+        <img class="object-cover w-full relative z-0" style="height: 600px;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/shop/padstand/padstand-gallery-05.jpg">
+    </header>
 
-    <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" @if(!empty($blackBag)) style="background-color:#010b1a;color:#fff;" @endif>
-        <div class="container mx-auto z-10 relative max-w-5xl pb-16">
+    <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative">
+        <div class="container mx-auto z-10 relative max-w-5xl">
             <h2 class="leading-tight"><strong>Somebody had to do it.</strong></h2>
-            <p class="leading-normal mt-2 mb-5">For years, you’ve balanced your practice pad on your lap, coffee table, or worse…
-                A standard snare stand with claws overhanging like a bad overbite 😬. So we engineered a custom practice pad stand that fits any pad perfectly:</p>
+            <p class="leading-normal mt-2 mb-5">
+                For years, you’ve balanced your practice pad on your lap, coffee table, or worse…<br class="hidden sm:inline">
+                A standard snare stand with claws overhanging like a bad overbite 😬. So we <br class="hidden sm:inline">
+                engineered a custom practice pad stand that fits any pad perfectly:</p>
             @php
                 $gridItems = [
                     [
-                     'icon' => 'marketing/drumeo/shop/stickbag/todo.jpg',
-                     'img' => 'marketing/drumeo/shop/stickbag/todo-icon.svg',
+                     'icon' => 'marketing/drumeo/shop/padstand/rotated-basket-icon.svg',
+                     'img' => 'marketing/drumeo/shop/padstand/rotated-basket-icon-m.png',
                     'title' => 'Rotated Basket.',
                     'desc' => 'And just in case you’re still worried about claws, the PadStand basket is rotated 90 degrees to ensure you can practice as ergonomically as possible. This makes practice pad work more comfortable and translates better to the kit.',
                     ],
                     [
-                     'icon' => 'marketing/drumeo/shop/stickbag/todo.jpg',
-                     'img' => 'marketing/drumeo/shop/stickbag/todo-icon.svg',
+                     'icon' => 'marketing/drumeo/shop/padstand/lightweight-icon.svg',
+                     'img' => 'marketing/drumeo/shop/padstand/lightweight-icon-m.png',
                     'title' => 'Lightweight & Portable.',
                     'desc' => 'No more balancing your practice pad on a coffee table or hotel bed. The snare stand easily fits in your backpack or carry on for perfect practice sessions on the go.',
                     ],
                     [
-                     'icon' => 'marketing/drumeo/shop/stickbag/todo.jpg',
-                     'img' => 'marketing/drumeo/shop/stickbag/todo-icon.svg',
+                     'icon' => 'marketing/drumeo/shop/padstand/blue-tips-icon.svg',
+                     'img' => 'marketing/drumeo/shop/padstand/blue-tips-icon-m.png',
                     'title' => 'Cool Blue Tips.',
                     'desc' => ' The basket and feet are in custom Drumeo blue so you’ll never confuse your practice stand for your real snare stand.',
                     ],
                     [
-                     'icon' => 'marketing/drumeo/shop/stickbag/todo.jpg',
-                     'img' => 'marketing/drumeo/shop/stickbag/todo-icon.svg',
+                     'icon' => 'marketing/drumeo/shop/padstand/shorter-claws-icon.svg',
+                     'img' => 'marketing/drumeo/shop/padstand/shorter-claws-icon-m.png',
                     'title' => 'Shorter Claws.',
                     'desc' => 'No more overbite on your snare stand 😬. The PadStand features custom cut claws to grip your practice pad perfectly. That means you can practice your rudiments without dodging snare claws.',
                     ],
                     [
-                     'icon' => 'marketing/drumeo/shop/stickbag/todo.jpg',
-                     'img' => 'marketing/drumeo/shop/stickbag/todo-icon.svg',
+                     'icon' => 'marketing/drumeo/shop/padstand/extended-height-icon.svg',
+                     'img' => 'marketing/drumeo/shop/padstand/extended-height-icon-m.png',
                     'title' => 'Extended Height. ',
                     'desc' => 'Practice pads are WAY thinner than your snare drum – so why would you use the same stand? The PadStand is taller than normal snare stands so you can sit up straight and run rudiments with perfect posture.',
                     ],
@@ -194,45 +194,45 @@
                 <div class="w-1/4 pr-3">
                     <div>
                         <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $slides[0]['icon'] }}"
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[3]['icon'] }}"
                         >
-                        <h6 class="my-2"><strong>{{ $slides[0]['title'] }}</strong></h6>
-                        <p class="text-sm">{{ $slides[0]['desc'] }}</p>
+                        <h6 class="my-2"><strong>{{ $gridItems[3]['title'] }}</strong></h6>
+                        <p class="text-sm">{{ $gridItems[3]['desc'] }}</p>
                     </div>
                     <div class="my-7">
                         <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $slides[0]['icon'] }}"
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[1]['icon'] }}"
                         >
-                        <h6 class="my-2"><strong>{{ $slides[0]['title'] }}</strong></h6>
-                        <p class="text-sm">{{ $slides[0]['desc'] }}</p>
+                        <h6 class="my-2"><strong>{{ $gridItems[1]['title'] }}</strong></h6>
+                        <p class="text-sm">{{ $gridItems[1]['desc'] }}</p>
                     </div>
                     <div>
                         <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $slides[0]['icon'] }}"
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[2]['icon'] }}"
                         >
-                        <h6 class="my-2"><strong>{{ $slides[0]['title'] }}</strong></h6>
-                        <p class="text-sm">{{ $slides[0]['desc'] }}</p>
+                        <h6 class="my-2"><strong>{{ $gridItems[2]['title'] }}</strong></h6>
+                        <p class="text-sm">{{ $gridItems[2]['desc'] }}</p>
                     </div>
                 </div>
                 <div class="w-1/2">
                     <img class="transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/shop/stickbag/bag-features.png"
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/shop/padstand/padstand-diagram.png"
                     >
                 </div>
                 <div class="w-1/4 pl-3">
-                    <div>
+                    <div class="mt-16 mb-10">
                         <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $slides[0]['icon'] }}"
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[0]['icon'] }}"
                         >
-                        <h6 class="my-2"><strong>{{ $slides[0]['title'] }}</strong></h6>
-                        <p class="text-sm">{{ $slides[0]['desc'] }}</p>
+                        <h6 class="my-2"><strong>{{ $gridItems[0]['title'] }}</strong></h6>
+                        <p class="text-sm">{{ $gridItems[0]['desc'] }}</p>
                     </div>
                     <div>
                         <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $slides[0]['icon'] }}"
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[4]['icon'] }}"
                         >
-                        <h6 class="my-2"><strong>{{ $slides[0]['title'] }}</strong></h6>
-                        <p class="text-sm">{{ $slides[0]['desc'] }}</p>
+                        <h6 class="my-2"><strong>{{ $gridItems[4]['title'] }}</strong></h6>
+                        <p class="text-sm">{{ $gridItems[4]['desc'] }}</p>
                     </div>
                 </div>
             </div>
@@ -267,10 +267,10 @@
                         <ul class="splide__list items-start">
                             @foreach ($gridItems as $gridItem)
                                 <li class="splide__slide px-1">
-                                    <div class="rounded-xl overflow-hidden shadow-md" @if(!empty($blackBag)) style="color:#fff;background-color:#000;" @else style="color:#000;background-color:#F6F8FC;" @endif>
+                                    <div class="rounded-xl overflow-hidden shadow-md" style="color:#000;background-color:#F6F8FC;">
                                         <div class="relative" style="padding-bottom:71%;">
                                             <img class="absolute object-cover h-full w-full transition-opacity opacity-1"
-                                                    loading="lazy" onload="this.classList.remove('opacity-0')" alt="drumeo stickbag"
+                                                    loading="lazy" onload="this.classList.remove('opacity-0')" alt="drumeo padstand"
                                                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $gridItem['img'] }}">
                                         </div>
                                         <p class="mt-4 mb-1 px-4 font-black leading-tight"><strong>{{ $gridItem['title'] }}</strong></p>
@@ -284,26 +284,29 @@
             </div>
         </div>
     </section>
-    <section class="text-center px-5 py-10 md:py-20 lg:py-24" @if(!empty($blackBag)) style="background-color:#020d24;color:#fff;" @else style="background-color:#f6f8fc;" @endif>
+    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f6f8fc calc(50% + 1px));"></div>
+    <section class="text-center px-5 py-10 md:py-20 lg:py-24" style="background-color:#f6f8fc;">
         <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2><strong>The last StickBag<br class="sm:hidden"> you’ll ever need.</strong></h2>
-            <h6 class="leading-tight mt-2 mb-5 sm:mb-10">A bag built to take everything<br class="sm:hidden"> from garage to stage. </h6>
+            <h2><strong>Works with ANY practice pad.</strong></h2>
+            <h6 class="leading-tight mt-2 mb-5 sm:mb-10">
+                The Drumeo PadStand can be used with a QuietPad, P4, or any other branded <br class="hidden sm:inline">
+                practice pad. Simply tighten the basket for the perfect fit. </h6>
             @php
                 $slides = [
                  [
-                     'img' => 'marketing/drumeo/shop/stickbag/gallery2.jpg',
+                     'img' => 'marketing/drumeo/shop/padstand/padstand-gallery-01.jpg',
                  ],
                  [
-                     'img' => 'marketing/drumeo/shop/stickbag/gallery-l1.jpg',
+                     'img' => 'marketing/drumeo/shop/padstand/padstand-gallery-02.jpg',
                  ],
                  [
-                     'img' => 'marketing/drumeo/shop/stickbag/gallery-l2.jpg',
+                     'img' => 'marketing/drumeo/shop/padstand/padstand-gallery-03.jpg',
                  ],
                  [
-                     'img' => 'marketing/drumeo/shop/stickbag/gallery-r1.jpg',
+                     'img' => 'marketing/drumeo/shop/padstand/padstand-gallery-04.jpg',
                  ],
                  [
-                     'img' => 'marketing/drumeo/shop/stickbag/gallery-r2.jpg',
+                     'img' => 'marketing/drumeo/shop/padstand/padstand-gallery-05.jpg',
                  ],
              ];
             @endphp
@@ -337,81 +340,72 @@
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')"></div></div>
                 </div>
             </div>
-            <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: Sticks/Brushes are not included.</em></p>
+            <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: Quietkick/Sticks/Pad are not included.</em></p>
         </div>
     </section>
 
     <div id="customize-anchor" class="anchor"></div>
         <section class="content-section text-center customize px-4 lg:px-6" style="background:#173c59 url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/shop/stickbag/order-bg.jpg') center center/cover;">
-            <div class="container mx-auto">
-                <img alt="quietkick logo" class="h-14 sm:h-28" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/shop/stickbag/stickbag-logo2.svg"><br>
+            <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to right, rgba(7,23,43,0.5), rgba(26,32,38,0.5));"></div>
+            <div class="container mx-auto relative z-20">
+                <img alt="quietkick logo" class="h-14 sm:h-20 mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/shop/padstand/padstand-logo.png"><br>
 
-                @if( $products['stickbag']->getStockAvailability() > 1 && !empty($products['stickbag']->getStockAvailability()))
+                @if( $products['padstand']->getStockAvailability() > 1 && !empty($products['padstand']->getStockAvailability()))
 
                     <div class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl mx-auto">
                         <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                             <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >Save 34%</p>
-                            <a href="/ecommerce/add-to-cart?locked=true&product-array=stickbag:1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
+                            <a href="/ecommerce/add-to-cart?locked=true&product-array=padstand:1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
                                 <div class="bg-white px-3 py-5 md:py-7">
-                                    <h4 class="mb-2 sm:mb-3"><strong>StickBag Only</strong></h4>
+                                    <h4 class="mb-2 sm:mb-3"><strong>PadStand Only</strong></h4>
                                     <img class="h-24 transition-opacity opacity-0"
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
-                                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/200x0/filters:quality(95)/marketing/drumeo/shop/stickbag/stickbag-option.png"
+                                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/200x0/filters:quality(95)/marketing/drumeo/shop/padstand/padstand-only.png"
                                             alt="learn playing image"
                                     >
                                     <br>
-                                    <h4 class="inline-block leading-tight"><s>${{ floatval($productPrices['stickbag']->price) }}</s> <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong></h4>
-                                    <p class="text-sm"><em>Save 34%. One-time payment.</em></p>
+                                    <h4 class="inline-block leading-tight">
+                                        @if(floatval($productPrices['padstand']->price) > floatval($productPrices['padstand']->discounted_price))
+                                            <s>${{ floatval($productPrices['padstand']->price) }}</s>
+                                        @endif
+
+                                        <strong>${{ floatval($productPrices['padstand']->discounted_price) }}</strong></h4>
+                                    <p class="text-sm"><em>
+                                            @if(floatval($productPrices['padstand']->price) > floatval($productPrices['padstand']->discounted_price))
+                                                Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%
+                                            @endif
+                                            One-time payment.</em></p>
                                     <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Select</div>
-                                    <p class="text-sm mb-1.5">1 Drumeo StickBag<sup>NEW</sup></p>
-                                    <p class="text-sm mb-1.5">1 Brushes Sleeve</p>
-                                    <p class="text-sm">1 Premium Drum Key</p>
+                                    <p class="text-sm">1 Drumeo PadStand<sup>NEW</sup></p>
                                 </div>
                             </a>
                         </div>
                         <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                             <img class="h-16 absolute top-0 right-0 z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/shop/stickbag/free-shipping-icon.svg">
                             <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-drumeo uppercase" >LAUNCH SPECIAL</p>
-                            <a
-                                    @if(!empty($memberVersion))
-                                        href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6"
-                                    @else
-                                        href="/promo-bag"
-                                    @endif
-                                    class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo">
+                            <a href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,padstand:1,quietpad:1,rudiments-poster:1,Drumeo-VaterSticks:1"
+                                class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo">
                                 <div class="bg-white px-3 py-6 md:py-9">
-                                    <h4 class="mb-2 sm:mb-3"><strong>StickBag + Lessons</strong></h4>
+                                    <h4 class="mb-2 sm:mb-3"><strong>Ultimate Practice Rig</strong></h4>
                                     <img class="h-24 transition-opacity opacity-0"
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
-                                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/shop/stickbag/lessons-stickbag-option.png"
+                                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/shop/padstand/bundle-collage.png"
                                             alt="learn playing image"
                                     >
                                     <br>
-                                    <h4 class="inline-block leading-tight"><strong>Free StickBag</strong></h4>
-                                    <p class="text-sm"><em>
-                                            @if(!empty($memberVersion))
-                                                with annual Membership renewal
-                                            @else
-                                                with annual Drumeo Membership
-                                            @endif
-                                        </em></p>
-                                    <div class="join my-5 drumeo smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">
-                                        @if(!empty($memberVersion))
-                                            renew membership
-                                        @else
-                                            learn more
-                                        @endif
-                                    </div>
+                                    <h4 class="inline-block leading-tight"><strong>Free PadStand</strong></h4>
+                                    <p class="text-sm"><em>with annual Drumeo Membership</em></p>
+                                    <div class="join my-5 drumeo smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">learn more</div>
                                     <p class="text-sm mb-1.5 text-drumeo"><strong>Annual Drumeo Membership</strong> ($240/yr)</p>
                                     <p class="text-sm mb-1.5"><strong>The world's best drum lessons.</strong></p>
                                     <p class="text-sm mb-1.5"><strong>5000+ popular songs</strong></p>
                                     <p class="text-sm mb-1.5"><strong>Unlimited Personal Support</strong></p>
-                                    <p class="text-sm mb-1.5">1 Drumeo StickBag<sup>NEW</sup></p>
-                                    <p class="text-sm mb-1.5">1 Brushes Sleeve</p>
-                                    <p class="text-sm mb-1.5">1 Premium Drum Key</p>
-                                    <p class="text-sm">6 Pairs Of 5A Drumsticks</p>
+                                    <p class="text-sm mb-1.5">1 QuietPad</p>
+                                    <p class="text-sm mb-1.5">1 Drumeo PadStand<sup>NEW</sup></p>
+                                    <p class="text-sm mb-1.5">1 Rudiment Poster</p>
+                                    <p class="text-sm">5A Drumsticks</p>
                                 </div>
                             </a>
                         </div>
