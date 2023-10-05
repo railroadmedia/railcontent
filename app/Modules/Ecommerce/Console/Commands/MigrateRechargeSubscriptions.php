@@ -7,6 +7,8 @@ use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Models\Subscription;
 use Carbon\CarbonInterval;
+use Exception;
+use Illuminate\Support\Facades\Storage;
 use Signifly\Shopify\Shopify;
 use Carbon\Carbon;
 
@@ -16,21 +18,40 @@ class MigrateRechargeSubscriptions extends Command
 
     protected $signature = 'ecommerce:MigrateRechargeSubscriptions';
 
+    protected function getClassName(): string
+    {
+        return "MigrateRechargeSubscriptions";
+    }
+
+    protected function createFileForLocalData(string $data): string
+    {
+        $filename = $this->getClassName() . "-" . preg_replace('~\D~', '', microtime(true)) . ".csv";
+
+        if (app()->environment("local", "development")) {
+            $storageResult = Storage::put($filename, $data);
+        } else {
+            $storageResult = Storage::disk('musora_web_platform_s3')->put($filename, $data);
+        }
+
+        if (!$storageResult) {
+            throw new Exception(sprintf("%s: Failed to write .jsonl file", $this->getClassName()));
+        }
+
+        return $filename;
+    }
+
     public function handle(Shopify $shopify, RechargeGateway $rechargeGateway)
     {
         $this->withExecutionTime(function () use ($shopify, $rechargeGateway) {
-            $fileName = app_path('rechargeSubscriptions.csv');
-            $file = fopen($fileName, 'w');
             $this->info('Loading Subscriptions');
             $subscriptions = Subscription::query()->with('product')
                 ->where('is_active', 1)
                 ->where('type', 'subscription')
                 ->where('paid_until', '>', Carbon::now())
+                ->limit(100)
                 ->get();
 
             $columns = [
-                'validation_status',
-                'validation_details',
                 'external_product_id',
                 'external_variant_id',
                 'external_product_name',
@@ -60,8 +81,7 @@ class MigrateRechargeSubscriptions extends Command
                 'shipping_phone',
                 'status'
             ];
-            fputcsv($file, $columns);
-            $data = [];
+            $data = implode(',', $columns);
 
             $this->info('Loading Product Information');
             $productIds = $subscriptions->pluck('product.shopify_id')->unique()->mapWithKeys(
@@ -77,7 +97,7 @@ class MigrateRechargeSubscriptions extends Command
 
             $this->info('Building CSV');
 
-            $this->withProgressBar($subscriptions, function ($subscription) use ($file, $productIds) {
+            $this->withProgressBar($subscriptions, function ($subscription) use (&$data, $productIds) {
                 $product = $subscription->product;
                 $variantId = $product?->shopify_id ?? 0;
                 //TODO:Check to make sure product has a shopify id
@@ -93,7 +113,7 @@ class MigrateRechargeSubscriptions extends Command
                     return;
                 }
 
-                $data[] = [
+                $d = [
                     "external_product_id" => $productId,
                     "external_variant_id" => $variantId,
                     "external_product_name" => $product->name,
@@ -108,32 +128,29 @@ class MigrateRechargeSubscriptions extends Command
                     "customer_created_at" => "",
                     "last_charge_date" => "",
                     "next_charge_date" => $this->getNextChargeDate($subscription),
-                    "customer_stripe_id" => $subscription->paymentMethod?->creditCard->external_customer_id ?? "",
-                    "stripe_payment_method_id" => $subscription->paymentMethod?->creditCard->external_id ?? "",
-                    "paypal_billing_agrement_id" => $subscription->paymentMethod->paypalBillingAgreement?->external_id ?? "",
+                    "customer_stripe_id" => !app()->isProduction() ? '' :
+                        $subscription->paymentMethod?->creditCard->external_customer_id ?? "",
+                    "stripe_payment_method_id" => !app()->isProduction() ? '' :
+                        $subscription->paymentMethod?->creditCard->external_id ?? "",
+                    "paypal_billing_agrement_id" => !app()->isProduction() ? '' :
+                        $subscription->paymentMethod->paypalBillingAgreement?->external_id ?? "",
                     "shipping_email" => $this->getEmailForShopify($subscription->user->email),
                     "shipping_first_name" => $subscription->paymentMethod->address->first_name ?? "",
                     "shipping_last_name" => $subscription->paymentMethod->address->last_name ?? "",
-                    "shipping_address_1" => $subscription->paymentMethod->address->street_line_1 ?? "",
-                    "shipping_address_2" => $subscription->paymentMethod->address->street_line_2 ?? "",
-                    "shipping_city" => $subscription->paymentMethod->address->city ?? "",
-                    "shipping_province" => $subscription->paymentMethod->address->region ?? "",
-                    "shipping_zip" => $subscription->paymentMethod->address->zip ?? "",
-                    "shipping_country" => $subscription->paymentMethod->address->country ?? "",
+                    "shipping_address_1" => "31265 Wheel Ave",
+                    "shipping_address_2" => "#107",
+                    "shipping_city" => "Abbotsford",
+                    "shipping_province" => "BC",
+                    "shipping_zip" => "V2T 6H2",
+                    "shipping_country" => "Canada",
                     "shipping_phone" => '',
                     "status" => "active"
                 ];
-                fputcsv($file, array_values($data[0]));
+                $data .= "\n" . implode(',', $d);
             });
-            fclose($file);
 
-
-//            $export = join(',', array_keys($data[0]));
-//            foreach ($data as $d) {
-//                $export .= "\n" . join(',', array_values($d));
-//            }
-//
-//            $this->info($export);
+            $fileName = $this->createFileForLocalData($data);
+            $this->info("Created csv $fileName");
         });
     }
 
@@ -173,6 +190,6 @@ class MigrateRechargeSubscriptions extends Command
 
     protected function getIsUsingMask(): bool
     {
-        return true;
+        return !app()->isProduction();
     }
 }
