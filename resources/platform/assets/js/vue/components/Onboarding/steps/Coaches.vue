@@ -1,4 +1,5 @@
 <script setup>
+// THIS COMPONENT IS DEPRECATED, DO NOT DELETE BECAUSE THE HORIZONTAL SCROLL COULD BE USED IN THE FUTURE.
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";

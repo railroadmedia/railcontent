@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\Traits;
+namespace App\Modules\Ecommerce\Console\Commands\Traits;
 
 use App\Models\ShopifySync;
 use Carbon\Carbon;
@@ -152,24 +152,6 @@ trait SyncsToShopify
         $q = $qb->getQuery();
 
         return collect($q->getResult());
-    }
-
-    /**
-     * Get the function to use for this resource
-     *
-     * @return string
-     * @throws Exception
-     */
-    private function getResourceFunction(): string
-    {
-        return match ($this->getShopifyResourceClass()) {
-            ProductResource::class => "getProducts",
-            CustomerResource::class => "getCustomers",
-            OrderResource::class => "getOrders",
-            default => throw new Exception(
-                "{$this->getShopifyResourceClass()} has not been configured in getResourceFunction()"
-            ),
-        };
     }
 
     /**

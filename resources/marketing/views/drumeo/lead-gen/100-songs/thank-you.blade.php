@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
         .splide__pagination__page.is-active {
@@ -51,32 +51,34 @@
 @endsection
 
 @section('content')
-    <div class="overflow-hidden text-white px-3 py-5 sm:py-7 lg:py-12" style="background-color:#000a1e;">
-        <div class="container mx-auto max-w-3xl clearfix">
+    <div class="overflow-hidden text-white px-3 py-5 sm:py-7 lg:py-12" style="background:linear-gradient(to left, #0B76DB, #010B1F);">
+        <div class="container mx-auto max-w-5xl clearfix">
             <div class="text-center sm:px-3">
                 <img
-                    class="h-12 sm:h-14 transition-opacity opacity-0"
-                    src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
-                    alt="logo"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
+                        class="h-14 sm:h-20 transition-opacity opacity-0"
+                        src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
+                        alt="logo"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
                 />
-                <h3 class="my-4"><strong>
-                        Check your email for<br class="inline sm:hidden"> your free drum lessons.</strong></h3>
+                <h2 class="my-3"><strong>
+                        Check your email for<br class="inline sm:hidden"> your free songs.</strong></h2>
                 <p class="leading-normal mb-8">
                     Begin a free 30-day trial to test-drive<br class="inline sm:hidden">
                     the entire Drumeo song library!</p>
 
                 <img
-                    class="h-72 sm:h-96 transition-opacity opacity-0"
-                    src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/TODO.png"
-                    alt="logo"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
+                        class="h-56 sm:h-80 transition-opacity opacity-0"
+                        src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/vinyl-header.png"
+                        alt="logo"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
                 />
+
             </div>
         </div>
     </div>
+
     <section class="text-center px-3 py-5 sm:py-7" style="background-color:#FFAC00;">
         <div class="container mx-auto max-w-5xl">
             <h5 class="mb-4">
@@ -86,43 +88,68 @@
         </div>
     </section>
 
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-5xl mx-auto">
+            @component('drumeo.lead-gen.100-songs._text-image', [
+                'title' => 'Change The Tempo',
+                'subtitle' => 'Figure out the hard parts.',
+                'description' => 'Slow down or speed up any section of a song to hear every note. Practice any song with your desired tempo.',
+                'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/hard-parts.png',
+                'altText' => 'drummer',
+            ])
+            @endcomponent
+
+            @component('drumeo.lead-gen.100-songs._banner', [
+                'title' => '5000+ songs',
+                'subtitle' => ' Play the songs you love.',
+                'description' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
+                'desktopImageSrc' => 'https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/play-songs.png',
+                'mobileImageSrc' => 'https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/play-songs-m.png',
+                'altText' => 'drummer',
+            ])
+            @endcomponent
 
 
-            Change The Tempo
-            Figure out the hard parts.
-            Slow down or speed up any section of a song to hear every note. Practice any song with your desired tempo.
+            @component('drumeo.lead-gen.100-songs._text-image', [
+                'title' => 'LOOP SECTIONS',
+                'subtitle' => 'Woodshed it until you nail it.',
+                'description' => 'Slow down or speed up any section of a song to hear every note.',
+                'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/woodshed-it.png',
+                'altText' => 'singer',
+            ])
+            @endcomponent
 
+            @component('drumeo.lead-gen.100-songs._banner', [
+                'title' => 'Remove The Drums',
+                'subtitle' => 'Be the drummer in the band.',
+                'description' => 'Magically remove the original drums to make each song uniquely yours.',
+                'desktopImageSrc' => 'https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/be-the-drummer.png',
+                'mobileImageSrc' => 'https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/be-the-drummer-m.png',
+                'altText' => 'drummer',
+            ])
+            @endcomponent
 
-            5000+ songs
-            Play the songs you love.
-            Get note-for-note song breakdowns for every style, era, and skill level.
+            @component('drumeo.lead-gen.100-songs._text-image', [
+                'title' => 'Perfect Notation',
+                'subtitle' => 'Learn it right the first time.',
+                'description' => 'Get note-for-note notation and learn to play accurately from the get-go.',
+                'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/learn-it-right.png',
+                'altText' => 'note sheets',
+            ])
+            @endcomponent
 
-
-            LOOP SECTIONS
-            Woodshed it until you nail it.
-            Slow down or speed up any section of a song to hear every note.
-
-
-            Remove The Drums
-            Be the drummer in the band.
-            Magically remove the original drums to make each song uniquely yours.
-
-
-            Perfect Notation
-            Learn it right the first time.
-            Get note-for-note notation and learn to play accurately from the get-go.
-
-
-            On-The-Go
-            Take your songs with you.
-            Accessible on any device, or printable, so you can play any song, any time.
-
-
-
+            @component('drumeo.lead-gen.100-songs._text-image', [
+                'title' => 'On-The-Go',
+                'subtitle' => 'Take your songs with you.',
+                'description' => 'Accessible on any device, or printable, so you can play any song, any time.',
+                'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/take-your-songs-with-you.png',
+                'altText' => 'drummer',
+                'textRight' => true,
+            ])
+            @endcomponent
         </div>
     </section>
+
     <div class="h-5 sm:h-10 relative z-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
 
     @php
@@ -190,6 +217,7 @@
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
     ])
+
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
@@ -198,9 +226,10 @@
         "firstPoint" => "The world’s best drum lessons.",
         "thirdPoint" => "Unlimited personal support.",
         "fifthPoint" => "Lesson access for piano, guitar, and singing.",
-        "plusAnnualLink" => "/getting-started/ty-annual",
-        "plusMonthlyLink" => "/getting-started/ty-monthly",
+        "plusAnnualLink" => "/100-songs/ty-annual",
+        "plusMonthlyLink" => "/100-songs/ty-monthly",
     ])
+
     @include('musora.sales.components.trial-explanation', [
         'instrument' => 'drumming',
     ])

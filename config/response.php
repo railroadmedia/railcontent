@@ -48,7 +48,8 @@ return [
             'end_second',
             'thumbnail_url',
             'user_playlist_item_id',
-            'user_playlist_item_position'
+            'user_playlist_item_position',
+            'data.guitar_chord_image_url'
         ],
 
         'instructor' => [

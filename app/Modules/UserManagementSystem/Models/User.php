@@ -2,8 +2,10 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\Ecommerce\Enums\SubscriptionTypeEnum;
+use App\Modules\Ecommerce\Models\Address;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
@@ -203,6 +205,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereSendMobileAppPushNotifications($value)
  * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingExperience[] $onboardingExperience
  * @property-read int|null $onboarding_experience_count
+ * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingGoals[] $onboardingGoals
+ * @property-read int|null $onboarding_goals_count
  * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingGear[] $onboardingGear
  * @property-read int|null $onboarding_gear_count
  * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingGenre[] $onboardingGenres
@@ -232,6 +236,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     use HasApiTokens;
     use HasRoles;
     use Authorizable;
+    use CanSaveWithoutUpdatedAt;
 
     private ?NotificationSettings $notificationSettingsLookup = null;
 
@@ -770,6 +775,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(OnboardingExperience::class);
     }
 
+    public function onboardingGoals()
+    {
+        return $this->hasMany(OnboardingGoals::class);
+    }
+
     /**
      * @return bool
      */
@@ -865,5 +875,17 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             }
         }
         return null;
+    }
+
+    public function shippingAddresses(): HasMany
+    {
+        return $this->hasMany(Address::class, "user_id"
+        )->where("type", Address::SHIPPING_TYPE);
+    }
+
+    public function billingAddresses(): HasMany
+    {
+        return $this->hasMany(Address::class, "user_id")
+            ->where("type", Address::BILLING_TYPE);
     }
 }

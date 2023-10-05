@@ -29,7 +29,7 @@ class ShopifySyncIds extends Command
                                             $product = Product::query()->find($metafield->value) ?? null;
                                             if ($product) {
                                                 $product->shopify_id = $variant->id;
-                                                $product->save();
+                                                $product->saveWithoutUpdatedAt();
                                             }
                                         }
                                     }
@@ -62,7 +62,7 @@ class ShopifySyncIds extends Command
                                         $user = User::query()->find($metafield->value) ?? null;
                                         if ($user) {
                                             $user->shopify_id = $customer->id;
-                                            $user->save();
+                                            $user->saveWithoutUpdatedAt();
                                         }
                                     }
                                 }

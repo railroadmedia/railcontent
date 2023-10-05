@@ -1,6 +1,12 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
+    @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
+        <script type="text/JavaScript">
+            function Redirect() { window.location = "https://www.drumeo.com/lp"; }
+            Redirect();
+        </script>
+    @endif
     <title>Drumeo | Reach your drumming goals.</title>
     <meta property="og:title" content="Drumeo | Reach your drumming goals.">
     <meta property="og:url" content="https://www.drumeo.com/">
@@ -147,7 +153,6 @@
         ])
     @endif
 
-
     <section class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-white text-center customize px-4 lg:px-6" style="background:#173c59 url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/promo-order-bg.jpg) center center/cover;">
         <div class="container mx-auto max-w-6xl relative z-50">
             <div class="w-full">
@@ -168,8 +173,11 @@
 
                 <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>$20/month</strong></h3>
                 <p class="leading-tight opacity-70 text-sm"><em>Billed at $240 per year.</em></p>
+
+                @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                 <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;"
                         href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6">GET STARTED</a>
+                @endif
             </div>
             <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
         </div>
@@ -254,7 +262,10 @@
                         <br><br>
                         Click below for your best year on the drums yet.
                         <br>
+
+                        @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                         <a class="join drumeo smaller my-3 w-1/2" href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6">GET Started &raquo;</a>
+                        @endif
                         <br>
                         <em>Free worldwide shipping!</em>
                     </p>
@@ -594,11 +605,11 @@
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
-        'youtube' => '2.8M',
+        'youtube' => '3M',
         'facebookLink' => 'https://facebook.com/drumeo/',
         'facebook' => '1.2M',
         'instagramLink' => 'https://instagram.com/drumeoofficial/',
-        'instagram' => '1.1M',
+        'instagram' => '1.3M',
     ])
     @if(empty($trialVersion))
         @include('musora.sales.components.guarantee-section', [
@@ -630,9 +641,12 @@
 
                 <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>$20/month</strong></h3>
                 <p class="leading-tight opacity-70 text-sm"><em>Billed at $240 per year.</em></p>
+
+                @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                 <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;"
                         href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6"
                 >GET STARTED</a>
+                    @endif
             </div>
             <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
         </div>

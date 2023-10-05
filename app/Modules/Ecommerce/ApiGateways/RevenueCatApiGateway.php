@@ -8,13 +8,11 @@ class RevenueCatApiGateway
 {
     /**
      * @param $appUserId
-     * @param string $platform
-     * @param string $app
      * @return mixed
      * @throws Exception
      */
     public function getSubscriber(
-        $appUserId, $platform = 'ios', $app = 'Pianote'
+        $appUserId
     ) {
         $ch = curl_init();
 
@@ -24,8 +22,7 @@ class RevenueCatApiGateway
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 
         $headers = [];
-        $headers[] = 'Authorization: Bearer '
-            .config('ecommerce.revenuecat.'.$platform)[$app];
+        $headers[] = 'Authorization: Bearer '.config('ecommerce.revenuecat.ios')['Musora'];
         $headers[] = 'Content-Type: application/json';
         $headers[] = 'Accept: application/json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);

@@ -2,7 +2,7 @@
 
 namespace App\Modules\Ecommerce\Console\Commands;
 
-use App\Console\Commands\Traits\SyncsToShopify;
+use App\Modules\Ecommerce\Console\Commands\Traits\SyncsToShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use Carbon\Carbon;
 use Doctrine\ORM\ORMException;
@@ -410,9 +410,12 @@ class SyncOrdersToShopify extends Command
             try {
                 // record the shopify ID on the Order
                 if ($order->getShopifyId() !== $orderShopifyId) {
-                    $order->setShopifyId($orderShopifyId);
-                    $this->entityManager->persist($order);
-                    $this->entityManager->flush();
+                    // grab the eloquent model, so we can update it
+                    $orderModel = \App\Modules\Ecommerce\Models\Order::find($order->getId());
+                    $orderModel->shopify_id = $orderShopifyId;
+                    $orderModel->saveWithoutUpdatedAt();
+                    // refresh the doctrine model to get the change
+                    $this->entityManager->refresh($order);
                 }
                 $this->shopifyIds->push($orderShopifyId);
                 $this->tableRows[] = [
@@ -450,9 +453,12 @@ class SyncOrdersToShopify extends Command
                         $isCreatedLineItem = false;
                         if ($lineItem->getShopifyId() !== $lineItemShopifyId) {
                             $isCreatedLineItem = true;
-                            $lineItem->setShopifyId($lineItemShopifyId);
-                            $this->entityManager->persist($lineItem);
-                            $this->entityManager->flush();
+                            // grab the eloquent model, so we can update it
+                            $orderItemModel = \App\Modules\Ecommerce\Models\OrderItem::find($lineItem->getId());
+                            $orderItemModel->shopify_id = $lineItemShopifyId;
+                            $orderItemModel->saveWithoutUpdatedAt();
+                            // refresh the doctrine model to get the change
+                            $this->entityManager->refresh($lineItem);
                         }
                         $this->tableRows[] = [
                             $order->getId(),
@@ -835,9 +841,12 @@ class SyncOrdersToShopify extends Command
 
                 // record the shopify ID on the Payment
                 $payment = $this->paymentRepository->find($paymentId);
-                $payment->setShopifyId($paymentShopifyId);
-                $this->entityManager->persist($payment);
-                $this->entityManager->flush();
+                // grab the eloquent model, so we can update it
+                $paymentModel = \App\Modules\Ecommerce\Models\Payment::find($payment->getId());
+                $paymentModel->shopify_id = $paymentShopifyId;
+                $paymentModel->saveWithoutUpdatedAt();
+                // refresh the doctrine model to get the change
+                $this->entityManager->refresh($payment);
 
                 $this->shopifyIds->push($paymentShopifyId);
                 $this->tableRows[] = [$order->getId(), "--", $paymentId, "--", "--", "Created", $paymentShopifyId];
@@ -984,8 +993,10 @@ class SyncOrdersToShopify extends Command
             if (is_null($transactionData)) {
                 $this->error(
                     sprintf(
-                        "Shopify did not return a transaction for our Payment ID %s, attempting for Refund ID %s. Refund cannot be sent to Shopify",
+                        "Shopify did not return a transaction for our Payment ID %s for Shopify Order ID %s," .
+                        " attempting for Refund ID %s. Refund cannot be sent to Shopify",
                         $paymentToRefund->getId(),
+                        $orderShopifyId,
                         $refund->getId()
                     )
                 );
@@ -1043,10 +1054,13 @@ class SyncOrdersToShopify extends Command
             $refundShopifyId = $refundResource->id;
 
             // record the shopify ID on the Refund
-            $refund->setShopifyId($refundShopifyId);
             try {
-                $this->entityManager->persist($refund);
-                $this->entityManager->flush();
+                // grab the eloquent model, so we can update it
+                $refundModel = \App\Modules\Ecommerce\Models\Refund::find($refund->getId());
+                $refundModel->shopify_id = $refundShopifyId;
+                $refundModel->saveWithoutUpdatedAt();
+                // refresh the doctrine model to get the change
+                $this->entityManager->refresh($refund);
 
                 $this->shopifyIds->push($refundShopifyId);
                 $this->tableRows[] = [$order->getId(), "--", "--", "--", $refund->getId(), "Created", $refundShopifyId];
@@ -1229,9 +1243,12 @@ class SyncOrdersToShopify extends Command
                     // record the result's id as the shopify_id on our fulfillment
                     try {
                         if ($fulfillment->getShopifyId() !== $fulfillmentShopifyId) {
-                            $fulfillment->setShopifyId($fulfillmentShopifyId);
-                            $this->entityManager->persist($fulfillment);
-                            $this->entityManager->flush();
+                            // grab the eloquent model, so we can update it
+                            $fulfillmentModel = \App\Modules\Ecommerce\Models\OrderItemFulfillment::find($fulfillment->getId());
+                            $fulfillmentModel->shopify_id = $fulfillmentShopifyId;
+                            $fulfillmentModel->saveWithoutUpdatedAt();
+                            // refresh the doctrine model to get the change
+                            $this->entityManager->refresh($fulfillment);
                         }
                     } catch (\Doctrine\ORM\Exception\ORMException $e) {
                         $this->error(

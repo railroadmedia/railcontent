@@ -26,14 +26,3 @@
     @include('drumeo.lead-gen.partials._free-trial-offer')
 @endsection
 
-
-{{-- <input type="hidden" id="openModal" data-open="signUpModal"> --}}
-
-{{-- <div class="reveal medium" id="signUpModal" data-reveal data-reset-on-close="true">
-    <section class="header pop-up text-center">
-        <h6><i>Thank you for registering for access to...</i></h6>
-        <h1 class="text-center">Linear Drumming</h1>
-        <p>We are emailing you links to all the video lessons now, but if you close this pop-up, you start right away with lesson 1!</p>
-        <div class="join blue" data-close aria-label="Close modal">Start Lesson #1</div>
-    </section>
-</div> --}}

@@ -21,7 +21,7 @@ use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use \Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
@@ -73,13 +73,69 @@ class MusoraApiUserProvider implements UserProviderInterface
     : array {
         $user = user();
 
+        if (config('shopify.enabled')) {
+            $isAppleAppSubscriber = $user->subscription_type == SubscriptionTypeEnum::Apple;
+            $isGoogleAppSubscriber = $user->subscription_type == SubscriptionTypeEnum::Google;
+        } else {
+            if (config('ecommerce.revenuecat_only') !== true) {
+                $productsIds = [];
+                $products = [];
+
+                foreach (config('ecommerce.available_brands', []) as $availableBrand) {
+                    if (!isset(config('ecommerce.membership_product_skus')[$availableBrand])) {
+                        break;
+                    }
+                    $products += $this->productRepository->bySkus(
+                        config('ecommerce.membership_product_skus')[$availableBrand]
+                    );
+                }
+
+                foreach ($products as $product) {
+                    $productsIds[] = $product->getId();
+                }
+
+                $membershipSubscription = $this->subscriptionRepository->getUserSubscriptionForProducts(
+                    $user->id,
+                    $productsIds,
+                    true
+                );
+
+                $isAppleAppSubscriber = false;
+                $isGoogleAppSubscriber = false;
+
+                if ($membershipSubscription) {
+                    $isAppleAppSubscriber = $membershipSubscription->getType() == Subscription::TYPE_APPLE_SUBSCRIPTION;
+                    $isGoogleAppSubscriber =
+                        $membershipSubscription->getType() == Subscription::TYPE_GOOGLE_SUBSCRIPTION;
+                }
+            } else {
+                $store = false;
+                if ($user['revenuecat_origin_app_user_id']) {
+                    $revenuecatSubscriber =
+                        $this->revenueCatService->getSubscriber($user['revenuecat_origin_app_user_id']);
+                    $entitlements = $revenuecatSubscriber->entitlements;
+                    $subscriptions = $revenuecatSubscriber->subscriptions;
+
+                    if (!empty($entitlements)) {
+                        foreach ($entitlements as $entitlement) {
+                            $productIdentifier = $entitlement->product_identifier;
+                            $subscriptionData = $subscriptions->$productIdentifier;
+                            $store = $subscriptionData->store;
+                        }
+                    }
+                }
+                $isAppleAppSubscriber = ($store && $store == 'app_store') ? true : false;
+                $isGoogleAppSubscriber = ($store && $store == 'play_store') ? true : false;
+            }
+        }
+
         return [
             'isEdge' => $user->isAMember(),
             'isEdgeExpired' => $user->isAnExpiredMember(),
             'edgeExpirationDate' => $user->membership_expiration_date,
             'isPackOnlyOwner' => $user->isPackOnlyOwner(),
-            'isAppleAppSubscriber' => $user->subscription_type == SubscriptionTypeEnum::Apple,
-            'isGoogleAppSubscriber' => $user->subscription_type == SubscriptionTypeEnum::Google,
+            'isAppleAppSubscriber' => $isAppleAppSubscriber,
+            'isGoogleAppSubscriber' => $isGoogleAppSubscriber,
             'membership_level' => $user->membership_level,
             'is_drumeo_lifetime_member' => $user->is_drumeo_lifetime_member,
             'is_lifetime_member' => $user->is_lifetime_member,
@@ -151,7 +207,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'level_rank' => $user->getMethodLevel(),
             'has_started_method' => $hasStartedMethod ?? false,
             'has_completed_method' => $hasCompletedMethod ?? false,
-            'login_as_users' => $user->hasRole('login_as_users')
+            'login_as_users' => $user->hasRole('login_as_users'),
         ], $extraData);
     }
 
@@ -190,7 +246,9 @@ class MusoraApiUserProvider implements UserProviderInterface
         $mobileEndpointVersion = str_replace('v', '', $mobileEndpointVersion);
 
         if (($inUseDisplayName->count() > 0) && (strtolower($displayName) != strtolower(user()->display_name))) {
-            throw new MusoraAPIException('This display name is already in use', 'Display name exist', ($mobileEndpointVersion >= 2)?200:500);
+            throw new MusoraAPIException(
+                'This display name is already in use', 'Display name exist', ($mobileEndpointVersion >= 2) ? 200 : 500
+            );
         }
 
         user()->display_name = $displayName;
@@ -294,39 +352,39 @@ class MusoraApiUserProvider implements UserProviderInterface
         $this->subscriptionService->cancelUserSubscriptions($userId);
 
         $user->fill([
-                        'email' => 'musora+deleted_'.
-                            Carbon::now()
-                                ->getTimestamp().
-                            '@musora.com',
-                        'first_name' => null,
-                        'last_name' => null,
-                        'display_name' => '',
-                        'gender' => null,
-                        'country' => null,
-                        'region' => null,
-                        'city' => null,
-                        'birthday' => null,
-                        'phone_number' => null,
-                        'profile_picture_url' => null,
-                        'timezone' => null,
-                        'permission_level' => null,
-                        'drums_gear_photo' => null,
-                        'biography' => null,
-                        'piano_gear_photo' => null,
-                        'drums_gear_set_brands' => null,
-                        'drums_gear_hardware_brands' => null,
-                        'drums_gear_stick_brands' => null,
-                        'drums_gear_cymbal_brands' => null,
-                        'drums_playing_since_year' => null,
-                        'piano_gear_piano_brands' => null,
-                        'piano_gear_keyboard_brands' => null,
-                        'piano_playing_since_year' => null,
+            'email' => 'musora+deleted_' .
+                Carbon::now()
+                    ->getTimestamp() .
+                '@musora.com',
+            'first_name' => null,
+            'last_name' => null,
+            'display_name' => '',
+            'gender' => null,
+            'country' => null,
+            'region' => null,
+            'city' => null,
+            'birthday' => null,
+            'phone_number' => null,
+            'profile_picture_url' => null,
+            'timezone' => null,
+            'permission_level' => null,
+            'drums_gear_photo' => null,
+            'biography' => null,
+            'piano_gear_photo' => null,
+            'drums_gear_set_brands' => null,
+            'drums_gear_hardware_brands' => null,
+            'drums_gear_stick_brands' => null,
+            'drums_gear_cymbal_brands' => null,
+            'drums_playing_since_year' => null,
+            'piano_gear_piano_brands' => null,
+            'piano_gear_keyboard_brands' => null,
+            'piano_playing_since_year' => null,
 
-                    ]);
+        ]);
         $user->email =
-            'musora+deleted_'.
+            'musora+deleted_' .
             Carbon::now()
-                ->getTimestamp().
+                ->getTimestamp() .
             '@musora.com';
         $user->updated_at =
             Carbon::now()
@@ -341,12 +399,14 @@ class MusoraApiUserProvider implements UserProviderInterface
         return generate_musora_cross_platform_login_key(user()->id, user()->password);
     }
 
-
     public function getUserAfterRevenuecatPurchase($email, $password, $revenuecatOriginalAppUserId)
     {
-        $user =
-            \Modules\UserManagementSystem\Models\User::where('revenuecat_origin_app_user_id', '=', $revenuecatOriginalAppUserId)
-                ->first();
+        $user = \Modules\UserManagementSystem\Models\User::where(
+            'revenuecat_origin_app_user_id',
+            '=',
+            $revenuecatOriginalAppUserId
+        )
+            ->first();
 
         if (!$user) {
             $user = $this->revenueCatService->syncSubscriber($revenuecatOriginalAppUserId, $email, true);

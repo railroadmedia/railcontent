@@ -41,8 +41,15 @@ use Railroad\Ecommerce\Repositories\CustomerRepository;
  */
 class ParseBulkOperationResultsForCustomers implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, LogsShopify, FindsCustomers,
-        SavesShopifyIdOnAddresses, UsesStorageForShopifySyncData, HandlesMaskedEmailAddress;
+    use Dispatchable;
+    use FindsCustomers;
+    use HandlesMaskedEmailAddress;
+    use InteractsWithQueue;
+    use LogsShopify;
+    use Queueable;
+    use SavesShopifyIdOnAddresses;
+    use SerializesModels;
+    use UsesStorageForShopifySyncData;
 
     // the array of customer data that's in the source file - only populated if necessary
     private array $_sourceFileCustomers = [];
@@ -126,9 +133,12 @@ class ParseBulkOperationResultsForCustomers implements ShouldQueue
             $customers = $this->getCustomersForEmail($email);
             $customers->each(function (Customer $customer) use ($shopifyId) {
                 if ($customer->getShopifyId() !== $shopifyId) {
-                    $customer->setShopifyId($shopifyId);
-                    $this->entityManager->persist($customer);
-                    $this->entityManager->flush();
+                    // grab the eloquent model, so we can update it
+                    $customerModel = \App\Modules\Ecommerce\Models\Customer::find($customer->getId());
+                    $customerModel->shopify_id = $shopifyId;
+                    $customerModel->saveWithoutUpdatedAt();
+                    // refresh the doctrine model to get the change
+                    $this->entityManager->refresh($customer);
                     // log the success
                     $this->logInfo(sprintf("%s: Customer %s synced with Shopify ID %s", $this->getClassName(), $customer->getId(), $customer->getShopifyId()));
                 }

@@ -206,15 +206,18 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
             // record the shopify ID on the User ...
             if ($user->shopify_id !== $shopifyCustomerId) {
                 $user->shopify_id = $shopifyCustomerId;
-                $user->update();
+                $user->saveWithoutUpdatedAt();
             }
             try {
                 // ... and any of their related Customers
                 $userCustomers->each(function (Customer $customer) use ($shopifyCustomerId) {
                     if ($customer->getShopifyId() !== $shopifyCustomerId) {
-                        $customer->setShopifyId($shopifyCustomerId);
-                        $this->entityManager->persist($customer);
-                        $this->entityManager->flush();
+                        // grab the eloquent model, so we can update it
+                        $customerModel = \App\Modules\Ecommerce\Models\Customer::find($customer->getId());
+                        $customerModel->shopify_id = $shopifyCustomerId;
+                        $customerModel->saveWithoutUpdatedAt();
+                        // refresh the doctrine model to get the change
+                        $this->entityManager->refresh($customer);
                     }
                 });
 

@@ -2,13 +2,16 @@
 
 namespace App\Modules\Ecommerce\Models;
 
+use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\Ecommerce\database\factories\ProductFactory;
 use App\Modules\Ecommerce\Enums\DigitalAccessType;
 use Carbon\Carbon;
-use Carbon\CarbonInterval;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 
@@ -51,46 +54,48 @@ use Illuminate\Support\Facades\Log;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon $deleted_at
- * @method static \App\Modules\Ecommerce\database\factories\ProductFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Product query()
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereAutoDecrementStock($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereBrand($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereCategory($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDigitalAccessPermissionNames($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDigitalAccessTimeIntervalLength($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDigitalAccessTimeIntervalType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDigitalAccessTimeType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDigitalAccessType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereFulfillmentSku($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereInventoryControlSku($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereIsPhysical($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereMinStockLevel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereNote($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product wherePublicStockCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereSalesPageUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereSku($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereStock($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereSubscriptionIntervalCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereSubscriptionIntervalType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereThumbnailUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereWeight($value)
- * @mixin \Eloquent
+ * @method static ProductFactory factory(...$parameters)
+ * @method static Builder|Product newModelQuery()
+ * @method static Builder|Product newQuery()
+ * @method static Builder|Product query()
+ * @method static Builder|Product whereActive($value)
+ * @method static Builder|Product whereAutoDecrementStock($value)
+ * @method static Builder|Product whereBrand($value)
+ * @method static Builder|Product whereCategory($value)
+ * @method static Builder|Product whereCreatedAt($value)
+ * @method static Builder|Product whereDeletedAt($value)
+ * @method static Builder|Product whereDescription($value)
+ * @method static Builder|Product whereDigitalAccessPermissionNames($value)
+ * @method static Builder|Product whereDigitalAccessTimeIntervalLength($value)
+ * @method static Builder|Product whereDigitalAccessTimeIntervalType($value)
+ * @method static Builder|Product whereDigitalAccessTimeType($value)
+ * @method static Builder|Product whereDigitalAccessType($value)
+ * @method static Builder|Product whereFulfillmentSku($value)
+ * @method static Builder|Product whereId($value)
+ * @method static Builder|Product whereInventoryControlSku($value)
+ * @method static Builder|Product whereIsPhysical($value)
+ * @method static Builder|Product whereMinStockLevel($value)
+ * @method static Builder|Product whereName($value)
+ * @method static Builder|Product whereNote($value)
+ * @method static Builder|Product wherePrice($value)
+ * @method static Builder|Product wherePublicStockCount($value)
+ * @method static Builder|Product whereSalesPageUrl($value)
+ * @method static Builder|Product whereSku($value)
+ * @method static Builder|Product whereStock($value)
+ * @method static Builder|Product whereSubscriptionIntervalCount($value)
+ * @method static Builder|Product whereSubscriptionIntervalType($value)
+ * @method static Builder|Product whereThumbnailUrl($value)
+ * @method static Builder|Product whereType($value)
+ * @method static Builder|Product whereUpdatedAt($value)
+ * @method static Builder|Product whereWeight($value)
+ * @mixin Eloquent
  * @property Collection $userProducts
  */
 class Product extends Model
 {
+    use CanSaveWithoutUpdatedAt;
     use HasFactory;
+    use SoftDeletes;
 
     const TYPE_DIGITAL_SUBSCRIPTION = 'digital subscription';
     const TYPE_DIGITAL_ONE_TIME = 'digital one time';
@@ -129,17 +134,6 @@ class Product extends Model
     public function getDigitalAccessTypeAsEnum(): ?DigitalAccessType
     {
         return DigitalAccessType::tryFrom($this->digital_access_type);
-    }
-
-    public function getDigitalAccessPermissionNames(): array
-    {
-        if ($this->digital_access_permission_names == null) {
-            return [];
-        }
-
-        return is_array($this->digital_access_permission_names) ? $this->digital_access_permission_names : json_decode(
-            $this->digital_access_permission_names
-        );
     }
 
     public function calculateExpirationDate(Carbon $startedAt)
@@ -204,8 +198,8 @@ class Product extends Model
         $permissionNames = collect($this->getDigitalAccessPermissionNames());
         return $permissionNames->map(function ($permissionName) use ($permissionsLookup) {
             $brand = $this->brand;
-            $keyBrand = $brand . '_' . $permissionName;
-            $keyGeneral = 'musora_' . $permissionName;
+            $keyBrand = $brand.'_'.$permissionName;
+            $keyGeneral = 'musora_'.$permissionName;
             $permission = $permissionsLookup[$keyBrand] ?? $permissionsLookup[$keyGeneral] ?? null;
             if (!$permission) {
                 Log::error(
@@ -215,5 +209,16 @@ class Product extends Model
             }
             return $permission;
         });
+    }
+
+    public function getDigitalAccessPermissionNames(): array
+    {
+        if ($this->digital_access_permission_names == null) {
+            return [];
+        }
+
+        return is_array($this->digital_access_permission_names) ? $this->digital_access_permission_names : json_decode(
+            $this->digital_access_permission_names
+        );
     }
 }
