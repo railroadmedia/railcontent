@@ -1,18 +1,15 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Learn the piano anytime with real teachers. | Pianote</title>
-    <meta property="og:title" content="Pianote - Learn the piano anytime with real teachers.">
-    <meta property="og:url" content="https://www.pianote.com/">
+    <title>Save 71% with your exclusive Webinar Bundle. | Pianote</title>
+    <meta property="og:title" content="Save 71% with your exclusive Webinar Bundle.">
+    <meta property="og:url" content="https://www.pianote.com/song-secrets-bonus">
 
-    <meta name="description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
-    <meta property="og:description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
+    <meta name="description" content="$177 for your first year!">
+    <meta property="og:description" content="$177 for your first year!">
 
-    @hasSection('share-image')
-        @yield('share-image')
-    @else
-        <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg" style="display: none;">
-    @endif
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/og-image.jpg" style="display: none;">
+
 
     @include('_partials.layout._fonts')
 
