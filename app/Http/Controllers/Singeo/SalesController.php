@@ -110,11 +110,6 @@ class SalesController extends BaseController
         return view('singeo.lead-gen.lets-sing-a-song');
     }
 
-    public function sixReasons()
-    {
-        return view('singeo.lead-gen.6-reasons');
-    }
-
     public function welcomeparty()
     {
         return view('singeo.lead-gen.welcome-party');
