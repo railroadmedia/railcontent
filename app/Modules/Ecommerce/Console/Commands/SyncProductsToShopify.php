@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Modules\Ecommerce\Console\Commands;
 
-use App\Console\Commands\Traits\SyncsToShopify;
+use App\Console\Commands\Infrastructure\Command;
+use App\Modules\Ecommerce\Console\Commands\Traits\SyncsToShopify;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Exception;
-use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Railroad\Ecommerce\Entities\Product;
@@ -854,9 +854,12 @@ class SyncProductsToShopify extends Command
         }
 
         if ($product->getShopifyId() !== $shopifyId) {
-            $product->setShopifyId($shopifyId);
-            $this->entityManager->persist($product);
-            $this->entityManager->flush();
+            // grab the eloquent model, so we can update it
+            $productModel = \App\Modules\Ecommerce\Models\Product::find($product->getId());
+            $productModel->shopify_id = $shopifyId;
+            $productModel->saveWithoutUpdatedAt();
+            // refresh the doctrine model to get the change
+            $this->entityManager->refresh($product);
         }
 
         return [$product->getId(), $variantData->sku, $shopifyId];

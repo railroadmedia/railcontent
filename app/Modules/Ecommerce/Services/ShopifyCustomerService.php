@@ -67,13 +67,16 @@ class ShopifyCustomerService
             $shopifyCustomerId = $customerResource->id;
             // record the shopify ID on the User
             $user->shopify_id = $shopifyCustomerId;
-            $user->save();
+            $user->saveWithoutUpdatedAt();
             // and any of their related Customers
             $customers->each(function (Customer $customer) use ($shopifyCustomerId) {
                 if ($customer->getShopifyId() !== $shopifyCustomerId) {
-                    $customer->setShopifyId($shopifyCustomerId);
-                    $this->entityManager->persist($customer);
-                    $this->entityManager->flush();
+                    // grab the eloquent model, so we can update it
+                    $customerModel = \App\Modules\Ecommerce\Models\Customer::find($customer->getId());
+                    $customerModel->shopify_id = $shopifyCustomerId;
+                    $customerModel->saveWithoutUpdatedAt();
+                    // refresh the doctrine model to get the change
+                    $this->entityManager->refresh($customer);
                 }
             });
         } catch (ORMException $e) {

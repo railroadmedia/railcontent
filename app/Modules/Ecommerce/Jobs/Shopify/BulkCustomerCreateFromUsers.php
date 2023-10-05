@@ -125,7 +125,7 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
             $shopifyId = $syncedCustomer->getShopifyId();
             if ($this->execute) {
                 $user->shopify_id = $shopifyId;
-                $user->save();
+                $user->saveWithoutUpdatedAt();
             }
             $this->logError(sprintf("%s: Customer(s) with email address %s were already synced" .
                 " to Shopify. User ID %s has been given the shopify_id %s and was skipped", $this->getClassName(), $user->email, $user->id, $shopifyId));

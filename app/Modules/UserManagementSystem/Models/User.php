@@ -2,7 +2,9 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\CustomerIO\Models\Customer;
+use App\Modules\Ecommerce\Models\Address;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
@@ -232,6 +234,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     use HasApiTokens;
     use HasRoles;
     use Authorizable;
+    use CanSaveWithoutUpdatedAt;
 
     private ?NotificationSettings $notificationSettingsLookup = null;
 
@@ -870,5 +873,17 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             }
         }
         return null;
+    }
+
+    public function shippingAddresses(): HasMany
+    {
+        return $this->hasMany(Address::class, "user_id"
+        )->where("type", Address::SHIPPING_TYPE);
+    }
+
+    public function billingAddresses(): HasMany
+    {
+        return $this->hasMany(Address::class, "user_id")
+            ->where("type", Address::BILLING_TYPE);
     }
 }

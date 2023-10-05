@@ -2,14 +2,14 @@
 
 namespace App\Modules\Ecommerce\Console\Commands;
 
-use App\Console\Commands\Traits\SyncsToShopify;
+use App\Console\Commands\Infrastructure\Command;
+use App\Modules\Ecommerce\Console\Commands\Traits\SyncsToShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Exception;
-use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Payment;
@@ -371,11 +371,14 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
             }
 
             try {
-                // record the shopify ID on the Order
+                // record the shopify ID on the subscription payment
                 if ($subscriptionPayment->getShopifyId() !== $orderShopifyId) {
-                    $subscriptionPayment->setShopifyId($orderShopifyId);
-                    $this->entityManager->persist($subscriptionPayment);
-                    $this->entityManager->flush();
+                    // grab the eloquent model, so we can update it
+                    $subscriptionPaymentModel = \App\Modules\Ecommerce\Models\SubscriptionPayment::find($subscriptionPayment->getId());
+                    $subscriptionPaymentModel->shopify_id = $orderShopifyId;
+                    $subscriptionPaymentModel->saveWithoutUpdatedAt();
+                    // refresh the doctrine model to get the change
+                    $this->entityManager->refresh($subscriptionPayment);
                 }
                 $this->shopifyIds->push($orderShopifyId);
                 $this->tableRows[] = [$subscriptionPayment->getId(), "--", "--", "--", "--", $orderShopifyId];
@@ -388,7 +391,6 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
                     )
                 );
             }
-
 
             // STEP 4: add payments
             $this->sendPaymentsToShopify($subscriptionPayment);
@@ -653,9 +655,12 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
             $paymentShopifyId = $paymentResource->id;
 
             // record the shopify ID on the Payment
-            $payment->setShopifyId($paymentShopifyId);
-            $this->entityManager->persist($payment);
-            $this->entityManager->flush();
+            // grab the eloquent model, so we can update it
+            $paymentModel = \App\Modules\Ecommerce\Models\Payment::find($payment->getId());
+            $paymentModel->shopify_id = $paymentShopifyId;
+            $paymentModel->saveWithoutUpdatedAt();
+            // refresh the doctrine model to get the change
+            $this->entityManager->refresh($payment);
 
             $this->shopifyIds->push($paymentShopifyId);
             $this->tableRows[] = [
@@ -892,10 +897,13 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
             $refundShopifyId = $refundResource->id;
 
             // record the shopify ID on the Refund
-            $refund->setShopifyId($refundShopifyId);
             try {
-                $this->entityManager->persist($refund);
-                $this->entityManager->flush();
+                // grab the eloquent model, so we can update it
+                $refundModel = \App\Modules\Ecommerce\Models\Refund::find($refund->getId());
+                $refundModel->shopify_id = $refundShopifyId;
+                $refundModel->saveWithoutUpdatedAt();
+                // refresh the doctrine model to get the change
+                $this->entityManager->refresh($refund);
 
                 $this->shopifyIds->push($refundShopifyId);
                 $this->tableRows[] = [

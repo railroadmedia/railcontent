@@ -8,19 +8,20 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\UserManagementSystem\Models\User;
 
 /**
  * Class Subscription
  *
  * @package App\Modules\Ecommerce\Models
- * @property integer $id
+ * @property int $id
  * @property string $brand
  * @property string $type
- * @property integer $user_id
- * @property ?integer $customer_id
- * @property integer $order_id
- * @property integer $product_id
+ * @property int $user_id
+ * @property ?int $customer_id
+ * @property int $order_id
+ * @property int $product_id
  * @property bool $is_active
  * @property bool $stopped
  * @property Carbon $start_date
@@ -88,6 +89,7 @@ use Modules\UserManagementSystem\Models\User;
 class Subscription extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     const TYPE_SUBSCRIPTION = 'subscription';
     const TYPE_APPLE_SUBSCRIPTION = 'apple_subscription';
@@ -110,6 +112,11 @@ class Subscription extends Model
 
     protected $primaryKey = 'id';
 
+    protected static function newFactory(): SubscriptionFactory
+    {
+        return SubscriptionFactory::new();
+    }
+
     public function scopeFromUser(Builder $query, int $userId): Builder
     {
         return $query->where('user_id', '=', $userId);
@@ -118,11 +125,6 @@ class Subscription extends Model
     public function scopeNotCancelled(Builder $query): Builder
     {
         return $query->where('canceled_on', 'is', null);
-    }
-
-    protected static function newFactory(): SubscriptionFactory
-    {
-        return SubscriptionFactory::new();
     }
 
     public function user()

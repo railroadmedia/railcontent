@@ -170,9 +170,12 @@ class SyncCustomersToShopify extends SyncCustomersToShopifyBaseCommand
                             try {
                                 // record the shopify ID each Customer
                                 $customersCollection->each(function (Customer $customer) use ($shopifyCustomerId) {
-                                    $customer->setShopifyId($shopifyCustomerId);
-                                    $this->entityManager->persist($customer);
-                                    $this->entityManager->flush();
+                                    // grab the eloquent model, so we can update it
+                                    $customerModel = \App\Modules\Ecommerce\Models\Customer::find($customer->getId());
+                                    $customerModel->shopify_id = $shopifyCustomerId;
+                                    $customerModel->saveWithoutUpdatedAt();
+                                    // refresh the doctrine model to get the change
+                                    $this->entityManager->refresh($customer);
                                 });
 
                                 // STEP 5: build up the data structure for the Customers' Addresses
