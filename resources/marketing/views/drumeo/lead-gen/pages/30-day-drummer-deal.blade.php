@@ -263,9 +263,10 @@
                 <b>But heads up:</b> This offer is only available until October 5, 2023. <br><br>
                 Click below to get started and keep crushing it on the drums for the next year!
             </p>
-{{--                        <div class="px-3 md:px-0">--}}
+                        <div class="px-3 md:px-0">
 {{--                            <a class="join blue w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">SEE THE DEAL</a>--}}
-{{--                        </div>--}}
+                            <a class="join sold-out w-full sm:w-auto max-w-xs sm:max-w-full">SOLD OUT</a>
+                        </div>
         </div>
     </section>
 
@@ -412,44 +413,6 @@
 
     <div id="customize-section" class="anchor"></div>
 
-    @php
-        $bonuses = [
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/september/fills-card2.jpg',
-                        'title' => "10 Day Fills",
-                        'description' => 'This is an exclusive event for 30-Day Drummer students so you can launch into the next phase of your drumming with enthusiasm.',
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/september/ghost-notes-card2.jpg',
-                        'title' => "10 Day Ghost Notes",
-                        'description' => 'This is an exclusive event for 30-Day Drummer students so you can launch into the next phase of your drumming with enthusiasm.',
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/september/stick-card.png',
-                        'title' => "Drumeo StickBag",
-                        'description' => 'Protect your tools & keep your kit tight. All your tools in one place, safe and sound.',
-                            'price' => floatval($productPrices['stickbag']->price),
-                            'shipping' => true,
-                        ],
-                        [
-                            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
-                            'title' => 'Drumeo Drumsticks',
-                            'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
-                            'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
-                            'shipping' => true,
-                        ],
-        ]
-    @endphp
-    @include('musora.sales.components.order-section-bonuses', [
-    'bgColor' => 'background:linear-gradient(to bottom, #01050F 66%, #07132C);',
-    'subHeader' => '<strong><span class="text-musora">SAVE 20%</span> ON YOUR DRUMEO MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 4 FREE BONUSES.',
-    'theme' => 'drumeo',
-        'CTA' => 'CLAIM YOUR OFFER',
-    'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-annual-2w-card.png',
-    'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
-    'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=1&locked=true&promo-code=special',
-    'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
-    ])
 
     @include("drumeo.sales.partials._footer", [
             "minimal" => true
