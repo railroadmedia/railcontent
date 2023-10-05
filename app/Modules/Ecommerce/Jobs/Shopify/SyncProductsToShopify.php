@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
+use App\Models\ShopifySync;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsToShopify;
 use Doctrine\ORM\EntityRepository;
@@ -695,7 +696,7 @@ class SyncProductsToShopify implements ShouldQueue
 
     /**
      * Record the shopify ID of the variant on our Product entry,
-     * and return the formatted array to print out in our display table
+     * and return the formatted array to print out in our log
      *
      * @param  VariantResource  $variantData
      * @param  Product|null  $product
@@ -785,7 +786,7 @@ class SyncProductsToShopify implements ShouldQueue
      */
     protected function getSyncResource(): string
     {
-        return "product";
+        return ShopifySync::RESOURCE_PRODUCT;
     }
 
     /**

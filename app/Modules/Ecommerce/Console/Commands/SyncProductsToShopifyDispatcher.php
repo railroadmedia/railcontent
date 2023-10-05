@@ -146,7 +146,7 @@ class SyncProductsToShopifyDispatcher extends Command
      */
     protected function getDateTimeOfLastSync(): Carbon
     {
-        $sync = ShopifySync::where("resource", "product")->latestFinished()->first();
+        $sync = ShopifySync::where("resource", ShopifySync::RESOURCE_PRODUCT)->latestFinished()->first();
         return $sync?->finished_at ?? Carbon::createFromTimestamp(0);
     }
 }
