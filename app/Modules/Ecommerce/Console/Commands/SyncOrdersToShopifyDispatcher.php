@@ -134,6 +134,7 @@ class SyncOrdersToShopifyDispatcher extends Command
             })->catch(function (Batch $batch, Throwable $e) {
                 Log::error($e->getMessage());
             })
+            ->onQueue('command')
             ->dispatch();
         $this->info(
             sprintf(

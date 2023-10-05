@@ -35,14 +35,21 @@ class SyncOrdersToShopifyJobManager implements ShouldQueue
      */
     public $timeout = 840; // 14 minutes
 
+    /**
+     * Create a new job instance.
+     */
+    public function __construct(
+        protected int $startAtId,
+        protected int $endAtId,
+        protected Carbon $lastSyncAt,
+        protected bool $simulate,
+        protected bool $fresh
+    ) {
+    }
+
     public function middleware(): array
     {
         return [new SkipIfBatchCancelled];
-    }
-
-
-    public function __construct(protected int $startAtId, protected int $endAtId, protected Carbon $lastSyncAt,  protected bool $simulate, protected bool $fresh)
-    {
     }
 
     /**
@@ -72,7 +79,15 @@ class SyncOrdersToShopifyJobManager implements ShouldQueue
             })
             ->select("id");
 
-        $this->logDebug(sprintf("%s: running batch for %s orders: %s - %s", $this->getClassName(), $orders->count(), $this->startAtId, $this->endAtId));
+        $this->logDebug(
+            sprintf(
+                "%s: running batch for %s orders: %s - %s",
+                $this->getClassName(),
+                $orders->count(),
+                $this->startAtId,
+                $this->endAtId
+            )
+        );
 
         $batchSize = 25;
         $jobs = [];

@@ -86,6 +86,9 @@ class SyncOrdersToShopify implements ShouldQueue
     protected Collection $shopifyIds;
     protected array $results = [];
 
+    /**
+     * Create a new job instance.
+     */
     public function __construct(
         protected int $startAtId,
         protected int $endAtId,
