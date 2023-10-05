@@ -22,11 +22,10 @@ class SyncOrdersToShopifyDispatcher extends Command
      * @var string
      */
     protected $signature = 'shopify:sync-orders
-                            {--startingOrderId= : (Optional) The order Id to start processing at}
+                            {--startingId= : (Optional) The order Id to start processing at}
                             {--limit= : (Optional) The number of order to limit this run to}
                             {--fresh : Sync all orders, not just those that need it}
                             {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
-    //TODO start_at option
     /**
      * The console command description.
      *
@@ -43,25 +42,31 @@ class SyncOrdersToShopifyDispatcher extends Command
     public function handle(): int {
         $simulate = $this->option("execute") == false;
         $fresh = $this->option("fresh");
+        $startingId = $this->option("startingId");
         $limit = $this->option("limit");
 
         $lastSyncAt = $this->getDateTimeOfLastSync();
 
         // find all orders that need to be synced
         $orders = Order::query()
-            ->when(!$fresh, function (Builder $q) use ($lastSyncAt) {
-                return $q->whereNull("shopify_id")
-                    ->orWhereDate("updated_at", ">", $lastSyncAt)
+            ->when(!is_null($startingId), function (Builder $q) use ($startingId) {
+                return $q->where("id", ">=", $startingId);
+            })
+            ->where(function (Builder $q) use ($lastSyncAt, $fresh) {
+                $q->when(!$fresh, function (Builder $q) use ($lastSyncAt) {
+                    return $q->whereNull("shopify_id")
+                        ->orWhereDate("updated_at", ">", $lastSyncAt)
 
-                    // we also need to check if any of the order's order items or order item fulfillments need to be synced
-                    ->orWhereHas("orderItems", function (Builder $oiq) use ($lastSyncAt) {
-                        $oiq->whereNull("shopify_id")
-                            ->orWhereDate("updated_at", ">", $lastSyncAt);
-                    })
-                    ->orWhereHas("orderItemFullfillments", function (Builder $oifq) use ($lastSyncAt) {
-                        $oifq->whereNull("shopify_id")
-                            ->orWhereDate("updated_at", ">", $lastSyncAt);
-                    });
+                        // we also need to check if any of the order's order items or order item fulfillments need to be synced
+                        ->orWhereHas("orderItems", function (Builder $oiq) use ($lastSyncAt) {
+                            $oiq->whereNull("shopify_id")
+                                ->orWhereDate("updated_at", ">", $lastSyncAt);
+                        })
+                        ->orWhereHas("orderItemFullfillments", function (Builder $oifq) use ($lastSyncAt) {
+                            $oifq->whereNull("shopify_id")
+                                ->orWhereDate("updated_at", ">", $lastSyncAt);
+                        });
+                });
             })
             ->select("id");
         $orderCount = $orders->count();

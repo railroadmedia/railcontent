@@ -25,6 +25,7 @@ class SyncProductsToShopifyDispatcher extends Command
      * @var string
      */
     protected $signature = 'shopify:sync-products
+                            {--startingId= : (Optional) The product Id to start processing at}
                             {--limit= : (Optional) The number of products to limit this run to.}
                             {--fresh : Sync all products, not just those that need it}
                             {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
@@ -56,6 +57,7 @@ class SyncProductsToShopifyDispatcher extends Command
 
         $simulate = $this->option("execute") == false;
         $fresh = $this->option("fresh");
+        $startingId = $this->option("startingId");
         $limit = $this->option("limit");
 
         // find all products that need to be synced
@@ -63,6 +65,9 @@ class SyncProductsToShopifyDispatcher extends Command
             ->when(!$fresh, function (Builder $q) {
                 return $q->whereNull("shopify_id")
                     ->orWhereDate("updated_at", ">", $this->getDateTimeOfLastSync());
+            })
+            ->when(!is_null($startingId), function (Builder $q) use ($startingId) {
+                return $q->where("id", ">=", $startingId);
             })
             ->select("id");
 
