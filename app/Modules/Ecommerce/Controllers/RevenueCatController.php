@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
+use App\Modules\Ecommerce\Enums\SubscriptionTypeEnum;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\UserProduct;
@@ -101,7 +102,10 @@ class RevenueCatController extends Controller
                             $price,
                             $this->calculateTaxAmount($price, $data['event']['tax_percentage'])
                         );
+
                     }
+
+                    $user->subscriptionType = SubscriptionTypeEnum::fromRevenueCatStore($type);
                 } else {
                     //get RevenueCat subscription
                     $currentRevenueCatSubscription =

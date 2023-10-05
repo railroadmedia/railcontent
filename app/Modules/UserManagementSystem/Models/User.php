@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Models;
 
 use App\Modules\CustomerIO\Models\Customer;
+use App\Modules\Ecommerce\Enums\SubscriptionTypeEnum;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
@@ -97,6 +98,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string|null $biography
  * @property string|null $support_note
  * @property int|null $shopify_id
+ * @property SubscriptionTypeEnum $subscription_type
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @method static Builder|User newModelQuery()

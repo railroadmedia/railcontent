@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\Ecommerce\Enums\SubscriptionTypeEnum;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Services\CalendarService;
 use Carbon\Carbon;
@@ -71,57 +72,14 @@ class MusoraApiUserProvider implements UserProviderInterface
     public function getCurrentUserMembershipData(?string $brand = null)
     : array {
         $user = user();
-        $productsIds = [];
-        $products = [];
-
-//        foreach (config('ecommerce.available_brands', []) as $availableBrand) {
-//            if (!isset(config('ecommerce.membership_product_skus')[$availableBrand])) {
-//                break;
-//            }
-//            $products += $this->productRepository->bySkus(config('ecommerce.membership_product_skus')[$availableBrand]);
-//        }
-//
-//        foreach ($products as $product) {
-//            $productsIds[] = $product->getId();
-//        }
-//
-//        $membershipSubscription = $this->subscriptionRepository->getUserSubscriptionForProducts(
-//            $user->id,
-//            $productsIds,
-//            true
-//        );
-//
-//        $isAppleAppSubscriber = false;
-//        $isGoogleAppSubscriber = false;
-//
-//        if ($membershipSubscription) {
-//            $isAppleAppSubscriber = $membershipSubscription->getType() == Subscription::TYPE_APPLE_SUBSCRIPTION;
-//            $isGoogleAppSubscriber = $membershipSubscription->getType() == Subscription::TYPE_GOOGLE_SUBSCRIPTION;
-//        }
-        $store = false;
-        if($user['revenuecat_origin_app_user_id']) {
-            $revenuecatSubscriber = $this->revenueCatService->getSubscriber($user['revenuecat_origin_app_user_id']);
-            $entitlements = $revenuecatSubscriber->entitlements;
-            $subscriptions = $revenuecatSubscriber->subscriptions;
-
-            if (!empty($entitlements)) {
-                foreach ($entitlements as $entitlement) {
-                    $productIdentifier = $entitlement->product_identifier;
-                    $subscriptionData = $subscriptions->$productIdentifier;
-                    $store = $subscriptionData->store;
-                }
-            }
-        }
-        $isAppleAppSubscriber = ($store && $store == 'app_store')?true:false;
-        $isGoogleAppSubscriber = ($store && $store == 'play_store')?true:false;
 
         return [
             'isEdge' => $user->isAMember(),
             'isEdgeExpired' => $user->isAnExpiredMember(),
             'edgeExpirationDate' => $user->membership_expiration_date,
             'isPackOnlyOwner' => $user->isPackOnlyOwner(),
-            'isAppleAppSubscriber' => $isAppleAppSubscriber,
-            'isGoogleAppSubscriber' => $isGoogleAppSubscriber,
+            'isAppleAppSubscriber' => $user->subscription_type == SubscriptionTypeEnum::Apple,
+            'isGoogleAppSubscriber' => $user->subscription_type == SubscriptionTypeEnum::Google,
             'membership_level' => $user->membership_level,
             'is_drumeo_lifetime_member' => $user->is_drumeo_lifetime_member,
             'is_lifetime_member' => $user->is_lifetime_member,
