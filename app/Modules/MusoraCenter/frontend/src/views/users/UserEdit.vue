@@ -75,7 +75,15 @@
                         </div>
                     </v-col>
                 </v-card>
+            </v-col>
+        </v-row>
 
+        <v-row class="align-top">
+            <v-col
+                v-if="thisUser.id"
+                cols="12"
+                class="mb-4 text-center px-4 column"
+            >
                 <!-- USER ACCESS PERMISSIONS -->
                 <user-products
                     :user-id="userId"

@@ -22,7 +22,7 @@
                     </v-btn>
                 </template>
 
-                <span>Add New Level</span>
+                <span>Add User Access Permission</span>
             </v-tooltip>
         </v-toolbar>
 
@@ -42,7 +42,9 @@
                     <td class="text-left">
                         {{ item.permission_name }}
                     </td>
-
+                    <td class="text-left">
+                        {{ item.duration }}
+                    </td>
                     <td class="text-left">
                         {{ getStartDate(item.start_time) }}
                     </td>
@@ -52,50 +54,54 @@
                     </td>
 
                     <td class="text-left">
+                        {{ item.source }}
+                    </td>
+
+                    <td class="text-left">
                         {{ item.status }}
                     </td>
 
-<!--                    <td class="text-center">-->
-<!--                        <v-tooltip top>-->
-<!--                            <template v-slot:activator="{ on }">-->
-<!--                                <v-btn-->
-<!--                                    fab-->
-<!--                                    x-small-->
-<!--                                    raised-->
-<!--                                    :color="brandColor"-->
-<!--                                    class="mx-1 white&#45;&#45;text"-->
-<!--                                    v-on="on"-->
-<!--                                    @click="openEditForm(item.id)"-->
-<!--                                >-->
-<!--                                    <v-icon>-->
-<!--                                        edit-->
-<!--                                    </v-icon>-->
-<!--                                </v-btn>-->
-<!--                            </template>-->
+                    <td class="text-center">
+                        <v-tooltip top>
+                            <template v-slot:activator="{ on }">
+                                <v-btn
+                                    fab
+                                    x-small
+                                    raised
+                                    :color="brandColor"
+                                    class="mx-1 white&#45;&#45;text"
+                                    v-on="on"
+                                    @click="openEditForm(item.id)"
+                                >
+                                    <v-icon>
+                                        edit
+                                    </v-icon>
+                                </v-btn>
+                            </template>
 
-<!--                            <span>Edit User Product</span>-->
-<!--                        </v-tooltip>-->
+                            <span>Edit User Access Permission</span>
+                        </v-tooltip>
 
-<!--                        <v-tooltip top>-->
-<!--                            <template v-slot:activator="{ on }">-->
-<!--                                <v-btn-->
-<!--                                    fab-->
-<!--                                    x-small-->
-<!--                                    raised-->
-<!--                                    color="error"-->
-<!--                                    class="mx-1 white&#45;&#45;text"-->
-<!--                                    v-on="on"-->
-<!--                                    @click.stop="cancelUserProduct(item.id)"-->
-<!--                                >-->
-<!--                                    <v-icon>-->
-<!--                                        cancel-->
-<!--                                    </v-icon>-->
-<!--                                </v-btn>-->
-<!--                            </template>-->
+                        <v-tooltip top>
+                            <template v-slot:activator="{ on }">
+                                <v-btn
+                                    fab
+                                    x-small
+                                    raised
+                                    color="error"
+                                    class="mx-1 white&#45;&#45;text"
+                                    v-on="on"
+                                    @click.stop="cancelUserProduct(item.id)"
+                                >
+                                    <v-icon>
+                                        cancel
+                                    </v-icon>
+                                </v-btn>
+                            </template>
 
-<!--                            <span>Expire</span>-->
-<!--                        </v-tooltip>-->
-<!--                    </td>-->
+                            <span>Expire</span>
+                        </v-tooltip>
+                    </td>
                 </tr>
             </template>
         </v-data-table>
@@ -110,7 +116,7 @@
                     dark
                     :color="brandColor"
                 >
-                    <v-toolbar-title>Add User Level</v-toolbar-title>
+                    <v-toolbar-title>Add User Access Permission</v-toolbar-title>
                 </v-toolbar>
 
                 <v-col
@@ -122,8 +128,8 @@
                         lazy-validation
                     >
                         <v-combobox
-                            v-model="$_product_id"
-                            label="Product"
+                            v-model="$_permission_id"
+                            label="Permission"
                             :color="brandColor"
                             :items="products"
                             item-text="attributes.name"
@@ -140,13 +146,6 @@
                             </template>
                         </v-combobox>
 
-                        <v-text-field
-                            v-model="$_quantity"
-                            type="number"
-                            label="Quantity"
-                            :color="brandColor"
-                        ></v-text-field>
-
                         <v-menu
                             ref="menu"
                             v-model="datepicker"
@@ -159,10 +158,10 @@
                             <template v-slot:activator="{ on }">
                                 <v-text-field
                                     slot="activator"
-                                    v-model="$_expiration_date"
-                                    label="Expires On"
+                                    v-model="$_start_time"
+                                    label="Start Time"
                                     :color="brandColor"
-                                    hint="Leave blank to never expire."
+                                    hint="Time user is granted access.  Actual active time may differ if permissions overlap."
                                     clearable
                                     persistent-hint
                                     readonly
@@ -171,7 +170,7 @@
                             </template>
 
                             <v-date-picker
-                                v-model="$_expiration_date"
+                                v-model="$_start_time"
                                 no-title
                                 scrollable
                             >
@@ -192,54 +191,33 @@
                                 </v-btn>
                             </v-date-picker>
                         </v-menu>
-
-
-                        <v-menu
-                            ref="menu"
-                            v-model="pausedUntilDatepicker"
-                            :close-on-content-click="false"
-                            :nudge-right="40"
-                            transition="scale-transition"
-                            offset-y
-                            min-width="290px"
-                        >
-                            <template v-slot:activator="{ on }">
-                                <v-text-field
-                                    slot="activator"
-                                    v-model="$_paused_until_date"
-                                    label="Paused Until"
-                                    :color="brandColor"
-                                    hint="Leave blank to not prevent access before a date."
-                                    clearable
-                                    persistent-hint
-                                    readonly
-                                    v-on="on"
-                                ></v-text-field>
-                            </template>
-
-                            <v-date-picker
-                                v-model="$_paused_until_date"
-                                no-title
-                                scrollable
-                            >
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                    text
-                                    :color="brandColor"
-                                    @click.stop="pausedUntilDatepicker = false"
-                                >
-                                    Cancel
-                                </v-btn>
-                                <v-btn
-                                    text
-                                    :color="brandColor"
-                                    @click.stop="pausedUntilDatepicker = false"
-                                >
-                                    OK
-                                </v-btn>
-                            </v-date-picker>
-                        </v-menu>
-
+                        <v-checkbox
+                            v-model="$_is_lifetime"
+                            label="Lifetime"
+                            :color="brandColor"
+                        ></v-checkbox>
+                        <v-text-field
+                            v-model="$_nDays"
+                            v-if="!$_is_lifetime"
+                            type="number"
+                            label="# Days"
+                            hint="Number of days until access revoked.  Used to calculate access Expiration Time."
+                            :color="brandColor"
+                        ></v-text-field>
+                        <v-text-field
+                            v-model="$_nMonths"
+                            v-if="!$_is_lifetime"
+                            type="number"
+                            label="# Months"
+                            hint="Number of months until access revoked.  Used to calculate access Expiration Time."
+                            :color="brandColor"
+                        ></v-text-field>
+                        <v-select
+                            v-model="$_status"
+                            label="Status"
+                            :color="brandColor"
+                            :items="['Active', 'Revoked']"
+                        ></v-select>
                         <div class="text-right">
                             <v-btn
                                 text
@@ -313,25 +291,43 @@ export default {
                     sortable: false,
                 },
                 {
+                    text: 'Duration',
+                    align: 'left',
+                    sortable: false,
+                    width: 150,
+                },
+                {
                     text: 'Active From',
                     align: 'left',
                     sortable: false,
                     width: 190,
                 },
                 {
-                    text: 'Active Until',
+                    text: 'Expires On',
                     align: 'left',
                     sortable: false,
                     width: 190,
                 },
                 {
+                    text: 'Source',
+                    align: 'left',
+                    sortable: false,
+                    width: 150,
+                },
+                {
                     text: 'Status',
                     align: 'left',
                     sortable: false,
-                    width: 190,
+                    width: 100,
+                },
+                {
+                    text: 'Actions',
+                    align: 'center',
+                    sortable: false,
+                    width: 120,
                 },
             ],
-            editingUserProduct: this.getDefaultUserProduct(),
+            editingUserAccessPermission: this.getDefaultUserAccessPermission(),
         };
     },
     computed: {
@@ -340,39 +336,57 @@ export default {
             products: state => state.products.products,
         }),
 
-        $_product_id: {
+        $_permission_id: {
             get() {
-                return this.editingUserProduct.relationships.product.data.id;
+                return this.editingUserAccessPermission.attributes.id;
             },
             set({ id }) {
-                this.$set(this.editingUserProduct.relationships.product.data, 'id', id);
+                this.$set(this.editingUserAccessPermission.attributes, 'id', id);
             },
         },
 
-        $_quantity: {
+        $_is_lifetime: {
             get() {
-                return this.editingUserProduct.attributes.quantity || 1;
+                return this.editingUserAccessPermission.attributes.time_lifetime;
             },
             set(value) {
-                this.$set(this.editingUserProduct.attributes, 'quantity', value);
+                this.$set(this.editingUserAccessPermission.attributes, 'time_lifetime', value);
             },
         },
 
-        $_paused_until_date: {
+        $_nDays: {
             get() {
-                return this.editingUserProduct.attributes.start_date;
+                return this.editingUserAccessPermission.attributes.time_days || 0;
             },
             set(value) {
-                this.$set(this.editingUserProduct.attributes, 'start_date', value);
+                this.$set(this.editingUserAccessPermission.attributes, 'time_days', value);
             },
         },
 
-        $_expiration_date: {
+        $_nMonths: {
             get() {
-                return this.editingUserProduct.attributes.expiration_date;
+                return this.editingUserAccessPermission.attributes.time_months || 0;
             },
             set(value) {
-                this.$set(this.editingUserProduct.attributes, 'expiration_date', value);
+                this.$set(this.editingUserAccessPermission.attributes, 'time_months', value);
+            },
+        },
+
+        $_status:{
+            get() {
+                return this.editingUserAccessPermission.attributes.status;
+            },
+            set(value) {
+                this.$set(this.editingUserAccessPermission.attributes, 'status', value);
+            },
+        },
+
+        $_start_time: {
+            get() {
+                return this.editingUserAccessPermission.attributes.start_time;
+            },
+            set(value) {
+                this.$set(this.editingUserAccessPermission.attributes, 'start_time', value);
             },
         },
     },
@@ -381,10 +395,13 @@ export default {
             'getPermissions',
         ]),
 
-        getDefaultUserProduct() {
+        getDefaultUserAccessPermission() {
             return {
                 id: 0,
-                attributes: {},
+                attributes: {
+                    status : 'Active',
+                    start_time : this.moment(this.moment.now()).format('YYYY-MM-DD'),
+                },
                 relationships: {
                     user: { data: {} },
                     product: { data: {} },
@@ -412,9 +429,9 @@ export default {
             const thisUserProduct = this.userProducts.find(userProduct => userProduct.id === id);
 
             if (id) {
-                this.editingUserProduct = Utils.createObjectCopy(thisUserProduct);
+                this.editingUserAccessPermission = Utils.createObjectCopy(thisUserProduct);
             } else {
-                this.editingUserProduct = this.getDefaultUserProduct();
+                this.editingUserAccessPermission = this.getDefaultUserAccessPermission();
             }
 
             this.dialog = true;
@@ -423,7 +440,7 @@ export default {
         submitEditForm() {
             this.$root.$emit('pageLoading');
 
-            api.setUserProduct(this.editingUserProduct.id, {
+            api.setUserProduct(this.editingUserAccessPermission.id, {
                 user_id: this.userId,
                 product_id: this.$_product_id,
                 quantity: this.$_quantity,
@@ -439,7 +456,7 @@ export default {
                         });
 
                         this.dialog = false;
-                        this.editingUserProduct = this.getDefaultUserProduct();
+                        this.editingUserAccessPermission = this.getDefaultUserAccessPermission();
                     } else {
                         this.$root.$emit('displayMessage', {
                             text: 'Oops! Something went wrong. Product not added to this user.',

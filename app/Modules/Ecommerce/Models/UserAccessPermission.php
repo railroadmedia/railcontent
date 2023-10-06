@@ -49,24 +49,26 @@ class UserAccessPermission extends Model
 
     public function getDescription(): string
     {
+        return $this->permission->name;
+    }
+
+    public function getDuration(): string
+    {
         $duration = '';
         if ($this->time_lifetime) {
             $duration = 'Lifetime';
-        } elseif ($this->time_days) {
-            $duration = $this->time_days . ' Day';
-            if ($this->time_days > 1) {
-                $duration .= 's';
-            }
         } elseif ($this->time_months) {
             $duration = $this->time_months . ' Month';
             if ($this->time_months > 1) {
                 $duration .= 's';
             }
+        } elseif ($this->time_days) {
+            $duration = $this->time_days . ' Day';
+            if ($this->time_days > 1) {
+                $duration .= 's';
+            }
         }
-        if ($duration) {
-            return $this->permission->name . ' - ' . $duration;
-        }
-        return $this->permission->name;
+        return $duration;
     }
 
 }
