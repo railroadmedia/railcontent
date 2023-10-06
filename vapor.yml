@@ -182,7 +182,7 @@ environments:
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
         queues:
-          - musora-web-platform-web-staging-four
+          - default-musora-web-platform-web-staging-four
           - command-musora-web-platform-web-staging-four: 20
         cache: musora-staging-redis-cache
         build:
