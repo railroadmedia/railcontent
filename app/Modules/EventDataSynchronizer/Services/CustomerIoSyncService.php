@@ -2,7 +2,6 @@
 
 namespace App\Modules\EventDataSynchronizer\Services;
 
-use App\Modules\Ecommerce\Enums\SubscriptionTypeEnum;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Carbon\Carbon;
 use Doctrine\ORM\NonUniqueResultException;
@@ -140,10 +139,7 @@ class CustomerIoSyncService
                 $brand . '_membership_subscription_first-start-date' => '',
                 $brand . '_membership_subscription_trial-type' => '',
                 $brand . '_user_payment_primary-method-expiration-date' => '',
-                // SRR-82 need to convert to '<store>_subscription' for CustomerIO
-                $brand . '_membership_subscription_source_app-store' => SubscriptionTypeEnum::toCustomerIOAttribute(
-                    $user->subscription_type
-                ),
+                $brand . '_membership_subscription_source_app-store' => $user->hasMobileMembership(),
                 $brand . '_owned_pack_product_skus' => '',
                 $brand . '_owned_pack_product_ids' => '',
             ];

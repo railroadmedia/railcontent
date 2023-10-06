@@ -2,7 +2,6 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
-use App\Modules\Ecommerce\Enums\SubscriptionTypeEnum;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\UserProduct;
@@ -122,7 +121,8 @@ class RevenueCatController extends Controller
 
                     }
 
-                    $user->subscription_type = SubscriptionTypeEnum::fromRevenueCatStore($type);
+                    $user->has_apple_subscription = $type == 'apple';
+                    $user->has_google_subscription = $type == 'google';
                     $user->save();
                 } else {
                     //get RevenueCat subscription
@@ -211,7 +211,8 @@ class RevenueCatController extends Controller
                         return response()->json(['processed']);
                     }
 
-                    $user->subscription_type = SubscriptionTypeEnum::fromRevenueCatStore($type);
+                    $user->has_apple_subscription = $type == 'apple';
+                    $user->has_google_subscription = $type == 'google';
                     $user->save();
                 } else {
                     //get RevenueCat subscription

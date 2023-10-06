@@ -4,7 +4,6 @@ namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
-use App\Modules\Ecommerce\Enums\SubscriptionTypeEnum;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\UserManagementSystem\Services\UserService;
@@ -81,7 +80,7 @@ class SubscriptionService
             $this->recharge->updateSubscriptionNextChargeDate($mostRecentSubscription, $membershipExpirationDate);
 
             // SRR-82 set the subscription type when the user has a Recharge subscription
-            $user->subscription_type = SubscriptionTypeEnum::Recharge;
+            $user->has_recharge_subscription = true;
             $user->save();
         }
     }

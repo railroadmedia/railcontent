@@ -13,7 +13,12 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('usora_users', function (Blueprint $table) {
-            $table->enum('subscription_type', ['subscription', 'apple_subscription', 'google_subscription']);
+            $table->boolean('has_recharge_subscription')
+                ->default(false);
+            $table->boolean('has_apple_subscription')
+                ->default(false);
+            $table->boolean('has_google_subscription')
+                ->default(false);
         });
     }
 

@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Modules\CustomerIO\Services\CustomerIoService;
-use App\Modules\Ecommerce\Enums\SubscriptionTypeEnum;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Services\CalendarService;
 use Carbon\Carbon;
@@ -74,8 +73,8 @@ class MusoraApiUserProvider implements UserProviderInterface
         $user = user();
 
         if (config('shopify.enabled')) {
-            $isAppleAppSubscriber = $user->subscription_type == SubscriptionTypeEnum::Apple;
-            $isGoogleAppSubscriber = $user->subscription_type == SubscriptionTypeEnum::Google;
+            $isAppleAppSubscriber = $user->has_apple_subscription;
+            $isGoogleAppSubscriber = $user->has_google_subscription;
         } else {
             if (config('ecommerce.revenuecat_only') !== true) {
                 $productsIds = [];
