@@ -5,7 +5,7 @@
             dark
             :color="brandColor"
         >
-            <v-toolbar-title>User Products</v-toolbar-title>
+            <v-toolbar-title>User Access Permissions</v-toolbar-title>
 
             <v-spacer></v-spacer>
 
@@ -34,21 +34,25 @@
             <template
                 v-slot:item="{ item }"
             >
-                <tr :class="{'deleted-table-row': !!item.attributes.deleted_at}">
+                <tr>
                     <td class="text-center">
-                        <v-custom-brand-icon :brand="getProductBrand(item.relationships.product.data)"></v-custom-brand-icon>
+                        <v-custom-brand-icon :brand="item.brand"></v-custom-brand-icon>
                     </td>
 
                     <td class="text-left">
-                        {{ getProductName(item.relationships.product.data) }}
+                        {{ item.permission_name }}
                     </td>
 
                     <td class="text-left">
-                        {{ getStartDate(item.attributes.start_date) }}
+                        {{ getStartDate(item.start_time) }}
                     </td>
 
                     <td class="text-left">
-                        {{ getActiveUntil(item.attributes.expiration_date) }}
+                        {{ getActiveUntil(item.expiration_time) }}
+                    </td>
+
+                    <td class="text-left">
+                        {{ item.status }}
                     </td>
 
 <!--                    <td class="text-center">-->
@@ -301,6 +305,7 @@ export default {
                     text: 'Brand',
                     align: 'center',
                     sortable: false,
+                    width: 100,
                 },
                 {
                     text: 'Name',
@@ -308,13 +313,19 @@ export default {
                     sortable: false,
                 },
                 {
-                    text: 'Paused Until',
+                    text: 'Active From',
                     align: 'left',
                     sortable: false,
                     width: 190,
                 },
                 {
                     text: 'Active Until',
+                    align: 'left',
+                    sortable: false,
+                    width: 190,
+                },
+                {
+                    text: 'Status',
                     align: 'left',
                     sortable: false,
                     width: 190,
@@ -386,7 +397,7 @@ export default {
                 return this.moment(date).format('MMM D, Y - HH:mm');
             }
 
-            return 'Forever';
+            return '-';
         },
 
         getStartDate(date) {
@@ -438,20 +449,6 @@ export default {
 
                     this.$root.$emit('pageLoaded');
                 });
-        },
-
-        getProductName(data) {
-            return this.getRelatedAttributesByTypeAndId(
-                data,
-                this.userPaymentMethodsIncludedData,
-            ).attributes.name || 'N/A';
-        },
-
-        getProductBrand(data) {
-            return this.getRelatedAttributesByTypeAndId(
-                data,
-                this.userPaymentMethodsIncludedData,
-            ).attributes.brand || 'N/A';
         },
 
         cancelUserProduct(user_product_id) {

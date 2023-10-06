@@ -127,7 +127,7 @@ class UserProductToUserContentPermissionListener
     public function syncUserId($userId)
     {
         if (config('shopify.enabled')) {
-            $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId)->get();
+            $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId);
             $this->syncContentPermissions($userId, $userAccessPermissions);
             return;
         }

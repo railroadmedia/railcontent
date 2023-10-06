@@ -76,11 +76,10 @@
                     </v-col>
                 </v-card>
 
-                <!-- USER PERMISSIONS -->
+                <!-- USER ACCESS PERMISSIONS -->
                 <user-products
                     :user-id="userId"
-                    :user-products="userProducts"
-                    :included-data="userProductsIncludedData"
+                    :user-products="userAccessPermissions"
                     @userProductEdit="loadUserData"
                 ></user-products>
             </v-col>
@@ -159,7 +158,7 @@
 import { mapState, mapActions } from 'vuex';
 import api from '../../api/users';
 import cartApi from '../../api/ecommerce/cart';
-import userProductsApi from '../../api/ecommerce/user-products';
+import userPermissionsApi from '../../api/ecommerce/user-permissions';
 import brandColors from '../../api/mixins.js';
 import Middleware from '../../middleware/user';
 import UserAccessCodes from './forms/UserAccessCodes';
@@ -209,8 +208,7 @@ export default {
         return {
             userId: this.$route.params.id,
             userPermissions: [],
-            userProducts: [],
-            userProductsIncludedData: [],
+            userAccessPermissions: [],
             userRoles: [],
             userNotes: '',
         };
@@ -306,14 +304,14 @@ export default {
             }
         },
 
-        getUserProducts() {
-            userProductsApi.getUserProducts(this.userId, {
+        getUserAccessPermissions() {
+            userPermissionsApi.getUserAccessPermissions(this.userId, {
                 limit: 100,
             })
                 .then((response) => {
                     if (response) {
-                        this.userProducts = response.data.data;
-                        this.userProductsIncludedData = response.data.included;
+                        this.userAccessPermissions = response.data.data;
+                        console.log(this.userAccessPermissions);
                     }
                 });
         },
@@ -329,7 +327,7 @@ export default {
 
         loadUserData() {
 
-            this.getUserProducts();
+            this.getUserAccessPermissions();
 
             this.getUserRoles();
         },

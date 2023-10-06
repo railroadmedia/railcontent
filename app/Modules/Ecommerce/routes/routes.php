@@ -3,6 +3,7 @@
 use App\Modules\Ecommerce\Controllers\AccessCodeController;
 use App\Modules\Ecommerce\Controllers\AccessCodeJsonController;
 use App\Modules\Ecommerce\Controllers\RevenueCatController;
+use App\Modules\Ecommerce\Controllers\UserAccessPermissionsController;
 use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable;
 use Railroad\Ecommerce\Controllers\AppleStoreKitController;
@@ -58,6 +59,9 @@ Route::prefix(config('ecommerce.route_prefix'))
             )
                 ->name('access-codes.release');
         });
+
+      Route::get('user-access-permissions', UserAccessPermissionsController::class . '@index')
+        ->name('user-access-permissions.index');
     });
 
 if (config('ecommerce.revenuecat_only') == true) {

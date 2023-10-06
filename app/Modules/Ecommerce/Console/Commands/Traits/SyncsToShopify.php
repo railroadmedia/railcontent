@@ -217,10 +217,6 @@ trait SyncsToShopify
      */
     protected function handleRateLimit(): void
     {
-        if ($this->getIsSimulation()) {
-            return;
-        }
-
         $limit = $this->shopify->getLastResponse()?->headers()["X-Shopify-Shop-Api-Call-Limit"][0] ?? "0/400";
         Log::info(sprintf("Shopify API Call Limit: %s", $limit));
         $current = intval(Str::before($limit, "/"));
