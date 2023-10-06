@@ -93,6 +93,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property int $ios_count_review_display
  * @property string|null $google_latest_review_display_date
  * @property int $google_count_review_display
+ * @property string|null $revenuecat_origin_app_user_id
  * @property string|null $biography
  * @property string|null $support_note
  * @property Carbon|null $created_at
@@ -199,6 +200,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereSendMobileAppPushNotifications($value)
  * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingExperience[] $onboardingExperience
  * @property-read int|null $onboarding_experience_count
+ * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingGoals[] $onboardingGoals
+ * @property-read int|null $onboarding_goals_count
  * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingGear[] $onboardingGear
  * @property-read int|null $onboarding_gear_count
  * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingGenre[] $onboardingGenres
@@ -764,6 +767,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function onboardingExperience()
     {
         return $this->hasMany(OnboardingExperience::class);
+    }
+
+    public function onboardingGoals()
+    {
+        return $this->hasMany(OnboardingGoals::class);
     }
 
     /**

@@ -19,6 +19,11 @@
     @parent
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-10-11 00:00:00',
+        'promoVersion' => false
+    ])
 @stop()
 
 @section('body-data')
@@ -32,6 +37,30 @@
                     "price" => floatval($productPrices['SD-DIGI']->discounted_price),
                 "noBreadcrumb" => true
                 ])
+
+    <section class="text-white text-center px-5 py-6 lg:py-10" style="background:linear-gradient(to bottom, #0B76DB, #013F7A)">
+        <div class="container max-w-5xl mx-auto">
+            <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
+                <img class="h-36 sm:h-40 lg:h-60 mb-3 sm:mb-0 flex-shrink-0" src="https://www.musora.com/musora-cdn/image/width=960,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/october/sd-promo2.png">
+                <div class="sm:pl-4 lg:pl-6 flex-grow-1">
+                    <h3 class="font-bebas uppercase text-musora leading-none tracking-wider">10-YEAR ANNIVERSARY</h3>
+                    <img class="h-8 sm:h-9 lg:h-11 mx-auto mt-1.5 mb-4" src="https://www.musora.com/musora-cdn/image/width=770,quality=95/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png" alt="Successful drumming logo">
+                    <p class="leading-normal">
+                        Successful Drumming has helped more than 35,000 drummers define and achieve what success means to them on the drums. And we wanted to do something special to celebrate the 10 year anniversary.
+                        <br><br>
+                        This weekend ONLY, you’ll SAVE 89% on the top-selling pack.
+                        <br><br>
+                        <em><strong><span class="text-musora">
+                                    This offer is ONLY available <br class="lg:hidden">
+                                    until October 10th at midnight.</span>
+                                <br>
+                                Scroll down to grab lifetime access.</strong></em>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
     <header class="header stacked">
         <div class="container mx-auto clearfix xlarge" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/header-bg.jpg);">
             <img class="px-4 w-auto max-h-20 mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png" alt="Successful drumming logo">
@@ -55,7 +84,8 @@
                     @else
                         <strong>NOW ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</strong>
                     @endif
-                    <br> <span class="text-blue">90-DAY GUARANTEE.</span>
+                    <br>10-YEAR ANNIVERSARY SALE
+                    <br><strong class="text-musora">ONLY AVAILABLE UNTIL OCTOBER 10TH AT MIDNIGHT</strong>
                 </p>
             </div>
         </div>
@@ -69,7 +99,14 @@
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-6xl mx-auto">
-            <h2 class=" mb-8 sm:mb-10"><strong>The Faster Way To Improve Your Skills… For Just $247</strong></h2>
+            <h2 class=" mb-8 sm:mb-10"><strong>The Faster Way To Improve Your Skills… For Just
+                    @if($productPrices['SD-DIGI']->price > $productPrices['SD-DIGI']->discounted_price)
+                        <s class="opacity-60">${{ floatval($productPrices['SD-DIGI']->price) }}</s>
+                        ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}
+                    @else
+                        ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}
+                    @endif
+                </strong></h2>
 
 
             <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6">
@@ -263,35 +300,65 @@
     <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34;">
         <div class="container max-w-4xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=410,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png" alt="guarantee badge" src="https://www.musora.com/musora-cdn/image/width=410,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png">
-            <h2 class="my-4 sm:my-6 lg:my-8"><strong>Happy student guarantee.</strong><br> Test-drive your lessons for 90 days. Zero risk.
-
+            <h2 class="my-4 sm:my-6 lg:my-8"><strong>Happy student guarantee.</strong><br> Test-drive your lessons for 90 days. Zero risk.</h2>
             <h6 class="leading-normal">Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.</h6>
-
         </div>
     </section>
 
     <section class="pt-32 pb-20 px-2 sm:px-4 relative" style="background: #F2F8FB;">
-        <div class="max-w-xl md:max-w-3xl mx-auto text-center">
-            <img class="filter invert h-20 sm:h-24 lazyload" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png" alt="logo centered">
-            <h3 class="leading-tight font-extrabold my-10">
-                Get Jared Falk’s trusted step-by-step curriculum <br class="hidden sm:inline">
-                for a one-time payment of just $247.
+        <div class="max-w-4xl mx-auto text-center">
+            <h3 class="font-bebas uppercase text-drumeo tracking-wider mb-3">10-YEAR ANNIVERSARY</h3>
+            <img class="filter invert h-20 sm:h-24 mb-5 lazyload" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png" alt="logo centered">
+            <h3 class="leading-tight font-extrabold mb-7">
+                Jared Falk’s step-by-step plan for building a rock solid  <br class="hidden sm:inline">
+                drumming foundation for achieving any musical goals.
             </h3>
+            <h5 class="text-drumeo leading-normal"><strong>Available until October 10th at midnight.</strong><br>
+                <span class="uppercase">
+                    <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
+                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0">left!</span>
+                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                     </span>
+                </span>
+            </h5>
+            <h2 class="leading-tight my-7">
+                @if($productPrices['SD-DIGI']->price > $productPrices['SD-DIGI']->discounted_price)
+                    <strong>
+                        ONLY <s class="opacity-60">${{ floatval($productPrices['SD-DIGI']->price) }}.</s>
+                    <span class="text-drumeo">${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</span>
+                    </strong>
+                    <sub>(SAVE {{ round(100 - (100 * (floatval($productPrices['SD-DIGI']->discounted_price) / floatval($productPrices['SD-DIGI']->price)))) }}%).</sub>
+                @else
+                    <strong>
+                        ONLY
+                        <span class="text-drumeo">${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</span>
+                    </strong>
+                @endif
+            </h2>
             <a href="/ecommerce/add-to-cart?products[SD-DIGI]=1" class="join blue">Get Started &raquo;</a>
-            <div class="inline-block w-full px-3 md:px-4 my-5" style="color:#2a2f34;">
-                <p><strong>Any other questions?</strong><br class="inline-block md:hidden"> Call us toll-free at
-                    <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
-                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
-            </div>
-            <div class="inline-block w-full px-3 md:px-4" style="color:#2a2f34;">
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa" aria-hidden="true"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard" aria-hidden="true"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex" aria-hidden="true"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal" aria-hidden="true"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover" aria-hidden="true"></i>
-            </div>
+            <p class="leading-tight mt-3">LIFETIME ACCESS<br>90-DAY GUARANTEE</p>
         </div>
     </section>
 
+    <section class="text-white text-center py-10" style="background: #00101D;">
+        <div class="container mx-auto relative z-50">
+            <div class="inline-block w-full px-3 md:px-4 mb-5">
+                <p>Call us toll-free at
+                    <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
+                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
+            </div>
+            <div class="inline-block w-full px-3 md:px-4" style="margin-top: 0;">
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
+            </div>
+        </div>
+    </section>
     <span class="pack-details float-left mx-auto mb-7 px-2 pb-5 sm:px-0 sm:pb-9 lg:pb-11 hide"></span>
 @stop

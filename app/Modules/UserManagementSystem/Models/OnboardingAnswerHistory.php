@@ -43,6 +43,7 @@ class OnboardingAnswerHistory extends Model
     const QUESTION_TOPIC = 'topic';
     const QUESTION_GENRE = 'genre';
     const QUESTION_EXPERIENCE = 'experience';
+    const QUESTION_GOALS = 'goals';
     const QUESTION_INSTRUMENT = 'instrument';
     const QUESTION_COACH = 'coach';
 

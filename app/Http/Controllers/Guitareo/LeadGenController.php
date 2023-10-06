@@ -14,9 +14,6 @@ class LeadGenController extends BaseController
     public function thankyou() {
         return view('guitareo.lead-gen.pages.thank-you');
     }
-    public function sixReasons() {
-        return view('guitareo.lead-gen.pages.6-reasons');
-    }
     public function welcomeparty() {
         return view('guitareo.lead-gen.pages.welcome-party');
     }
