@@ -78,9 +78,14 @@ class SubscriptionService
             $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate();
 
             $this->recharge->updateSubscriptionNextChargeDate($mostRecentSubscription, $membershipExpirationDate);
+        }
 
-            // SRR-82 set the subscription type when the user has a Recharge subscription
+        // SRR-82 set the subscription type when the user has a Recharge subscription
+        if (!$isLifetimeMember && $membershipSubscriptions->count() > 0) {
             $user->has_recharge_subscription = true;
+            $user->save();
+        } else {
+            $user->has_recharge_subscription = false;
             $user->save();
         }
     }

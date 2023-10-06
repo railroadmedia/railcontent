@@ -30,7 +30,9 @@ return new class extends Migration {
     public function down()
     {
         Schema::table('user', function (Blueprint $table) {
-            //
+            $table->dropColumn('has_recharge_subscription');
+            $table->dropColumn('has_apple_subscription');
+            $table->dropColumn('has_google_subscription');
         });
     }
 };

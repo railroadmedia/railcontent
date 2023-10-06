@@ -463,6 +463,9 @@ class RevenueCatController extends Controller
                     null,
                     $data['event']['expiration_reason']
                 );
+
+                $this->unsetUserSubscription($user, $type);
+
                 break;
             // handle other events..
             default:
@@ -1043,6 +1046,14 @@ class RevenueCatController extends Controller
         match ($type) {
             'apple' => $user->has_apple_subscription = true,
             'google' => $user->has_google_subscription = true
+        };
+        $user->save();
+    }
+
+    private function unsetUserSubscription(User $user, string $type): void {
+        match ($type) {
+            'apple' => $user->has_apple_subscription = false,
+            'google' => $user->has_google_subscription = false
         };
         $user->save();
     }
