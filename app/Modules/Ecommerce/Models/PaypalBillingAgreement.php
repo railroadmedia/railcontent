@@ -21,8 +21,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class PaypalBillingAgreement extends Model
 {
-    use SoftDeletes;
-
     protected $table = 'ecommerce_paypal_billing_agreements';
     protected $primaryKey = 'id';
 }
