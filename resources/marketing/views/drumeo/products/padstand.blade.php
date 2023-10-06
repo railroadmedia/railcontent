@@ -105,7 +105,6 @@
 @section('body-data')
     x-data="{
     trailer: false,
-    trailerM: false,
     image1: false,
     image2: false,
     image3: false,
@@ -134,8 +133,7 @@
                     @endif
                 </h3>
                 <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
-{{--                    <div class="sm:w-5/12 join smaller outline hidden sm:inline-block"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>--}}
-{{--                    <div class="sm:w-5/12 join smaller outline sm:hidden inline-block"   @click="trailerM = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>--}}
+                    <div class="sm:w-5/12 join smaller outline"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     @if( $products['padstand']->getStockAvailability() > 1 && !empty($products['padstand']->getStockAvailability()))
                         <a class="w-5/12 join smaller blue" href="#customize-anchor">Order Now</a>
                     @else
@@ -435,14 +433,8 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '864032205',
+        'video' => '871987691',
         'vimeo' => true,
-    ])
-    @include('_partials.components.video-modal',[
-        'name' => 'trailerM',
-        'video' => '864032414',
-        'vimeo' => true,
-            'styles' => 'pb-[177%] bg-white',
     ])
 
 
