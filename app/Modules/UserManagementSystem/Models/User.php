@@ -99,6 +99,9 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string|null $biography
  * @property string|null $support_note
  * @property int|null $shopify_id
+ * @property bool|false $has_recharge_subscription
+ * @property bool|false $has_apple_subscription
+ * @property bool|false $has_google_subscription
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @method static Builder|User newModelQuery()
@@ -885,5 +888,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return $this->hasMany(Address::class, "user_id")
             ->where("type", Address::BILLING_TYPE);
+    }
+
+    public function hasMobileMembership(): bool {
+        return $this->has_apple_subscription || $this->has_google_subscription;
     }
 }

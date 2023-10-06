@@ -139,7 +139,7 @@ class CustomerIoSyncService
                 $brand . '_membership_subscription_first-start-date' => '',
                 $brand . '_membership_subscription_trial-type' => '',
                 $brand . '_user_payment_primary-method-expiration-date' => '',
-                $brand . '_membership_subscription_source_app-store' => '',
+                $brand . '_membership_subscription_source_app-store' => $user->hasMobileMembership(),
                 $brand . '_owned_pack_product_skus' => '',
                 $brand . '_owned_pack_product_ids' => '',
             ];
