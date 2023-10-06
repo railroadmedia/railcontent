@@ -371,7 +371,7 @@
                                         <strong>${{ floatval($productPrices['padstand']->discounted_price) }}</strong></h4>
                                     <p class="text-sm"><em>
                                             @if(floatval($productPrices['padstand']->price) > floatval($productPrices['padstand']->discounted_price))
-                                                Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%
+                                                Save {{ round(100 - (100 * (floatval($productPrices['padstand']->discounted_price) / floatval($productPrices['padstand']->price)))) }}%
                                             @endif
                                             One-time payment.</em></p>
                                     <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Select</div>
