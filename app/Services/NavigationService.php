@@ -41,7 +41,7 @@ class NavigationService
                         'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
-                    
+
                 ],
             ];
         }
@@ -123,7 +123,7 @@ class NavigationService
                         'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
-                    
+
                     [
                         'name' => 'Shop',
                         'path' => get_legacy_brand_base_url() . '/shop',
@@ -209,7 +209,7 @@ class NavigationService
                         'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
-                    
+
                     [
                         'name' => 'Shop',
                         'path' => get_legacy_brand_base_url() . '/shop',
@@ -290,7 +290,7 @@ class NavigationService
                     ],
                     [
                         'name' => 'Chords',
-                        'path' => '/'.brand().'/chords-scales',
+                        'path' => '/'.brand().'/courses/chord-resources/391634',
                         'icon' => 'guitar-tabs',
                     ],
                     [
@@ -305,7 +305,7 @@ class NavigationService
                         'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
-                    
+
                     [
                         'name' => 'Shop',
                         'path' => get_legacy_brand_base_url() . '/shop',
@@ -376,7 +376,7 @@ class NavigationService
                         'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
-                    
+
                     [
                         'name' => 'Shop',
                         'path' => get_legacy_brand_base_url() . '/shop',
