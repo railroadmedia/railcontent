@@ -48,12 +48,13 @@
                     <p class="leading-normal">
                         Successful Drumming has helped more than 35,000 drummers define and achieve what success means to them on the drums. And we wanted to do something special to celebrate the 10 year anniversary.
                         <br><br>
+                        This weekend ONLY, you’ll SAVE 89% on the top-selling pack.
+                        <br><br>
                         <em><strong><span class="text-musora">
                                     This offer is ONLY available <br class="lg:hidden">
                                     until October 10th at midnight.</span>
                                 <br>
-                                Scroll down to grab lifetime <br class="lg:hidden">
-                                access to all three packs.</strong></em>
+                                Scroll down to grab lifetime access.</strong></em>
                     </p>
                 </div>
 
