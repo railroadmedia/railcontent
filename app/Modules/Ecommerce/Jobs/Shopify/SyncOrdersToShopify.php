@@ -50,7 +50,7 @@ class SyncOrdersToShopify implements ShouldQueue
     use SyncsToShopify;
     use HandlesMaskedEmailAddress;
 
-    protected const DEFAULT_CURRENCY = "USD"; // 14 minutes
+    protected const DEFAULT_CURRENCY = "USD";
     protected const RESULTS_MESSAGE_TYPE = "message_type";
     protected const RESULTS_MESSAGE_TYPE_SUCCESS = "";
     protected const RESULTS_MESSAGE_TYPE_ERROR = "##ERROR## ";
@@ -62,7 +62,6 @@ class SyncOrdersToShopify implements ShouldQueue
     protected const RESULTS_MODEL_TYPE_PAYMENT = "Payment";
     protected const RESULTS_MODEL_TYPE_REFUND = "Refund";
     protected const RESULTS_MODEL_ID = "model_id";
-    // constants for tracking results
     protected const RESULTS_ACTION = "action";
     protected const RESULTS_SHOPIFY_ID = "shopify_id";
     protected const RESULTS_FAIL_MESSAGE = "failure_message";
@@ -174,8 +173,7 @@ class SyncOrdersToShopify implements ShouldQueue
             // so create query builders for each of those
             $orderItemQB = new QueryBuilder($this->entityManager);
             $orderItemFulfillmentQB = new QueryBuilder($this->entityManager);
-            $qb->where($qb->expr()->gte('entity.id', ':startingOrderId'))
-                ->andWhere($qb->expr()->lt('entity.id', ':endingOrderId'))
+            $qb->where($qb->expr()->between('entity.id', ':startingOrderId', ':endingOrderId'))
                 ->andWhere(
                     $qb->expr()->orX(
                         $qb->expr()->isNull("entity.shopifyId"),
@@ -329,20 +327,22 @@ class SyncOrdersToShopify implements ShouldQueue
                     if ($result[self::RESULTS_MESSAGE_TYPE] === self::RESULTS_MESSAGE_TYPE_ERROR) {
                         $this->logError(
                             sprintf(
-                                "%s%s ID: %s. %s",
+                                "%s%s ID: %s. %s %s",
                                 $result[self::RESULTS_MESSAGE_TYPE],
                                 $result[self::RESULTS_MODEL_TYPE],
                                 $result[self::RESULTS_MODEL_ID],
+                                $result[self::RESULTS_ACTION],
                                 $endResult
                             )
                         );
                     } else {
                         $this->logInfo(
                             sprintf(
-                                "%s%s ID: %s. %s",
+                                "%s%s ID: %s. %s %s",
                                 $result[self::RESULTS_MESSAGE_TYPE],
                                 $result[self::RESULTS_MODEL_TYPE],
                                 $result[self::RESULTS_MODEL_ID],
+                                $result[self::RESULTS_ACTION],
                                 $endResult
                             )
                         );
