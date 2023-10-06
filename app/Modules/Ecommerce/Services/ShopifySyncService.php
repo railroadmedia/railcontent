@@ -2,15 +2,11 @@
 
 namespace App\Modules\Ecommerce\Services;
 
-use App\Modules\Ecommerce\Events\UserProductsUpdated;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Models\Product;
-use App\Modules\Ecommerce\Models\UserProduct;
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
-use Signifly\Shopify\REST\Resources\OrderResource;
 use Signifly\Shopify\Shopify;
 
 class ShopifySyncService
@@ -20,6 +16,7 @@ class ShopifySyncService
     private UserProductService $userProductService;
     private ProductService $productService;
     private UserAccessPermissionsService $userAccessPermissionsService;
+    private ShopifyCustomerService $shopifyCustomerService;
 
     public function __construct(
         Shopify $shopify,
@@ -34,10 +31,11 @@ class ShopifySyncService
         $this->userProductService = $userProductService;
         $this->productService = $productService;
         $this->userAccessPermissionsService = $userAccessPermissionsService;
+        $this->shopifyCustomerService = $shopifyCustomerService;
     }
 
-    public function syncCustomer($shopifyCustomerId): void
-    {
+    public function syncCustomer($shopifyCustomerId)
+    : void {
         if (!config('shopify.enabled')) {
             return;
         }
@@ -96,6 +94,24 @@ class ShopifySyncService
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
         }
+    }
+
+    /**
+     * Checks if there's an order for a specific processed date
+     *
+     * @param int|null $shopifyCustomerId
+     * @param Carbon $processedAt
+     * @return bool
+     */
+    public function orderExistsForProcessDate(?int $shopifyCustomerId, Carbon $processedAt)
+    : bool {
+        if (!$shopifyCustomerId) {
+            return false;
+        }
+
+        $orders =
+            $this->shopify->getCustomerOrders($shopifyCustomerId, ['status' => 'any', 'processed_at' => $processedAt]);
+        return $orders->count() > 0;
     }
 
     /**

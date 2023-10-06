@@ -105,14 +105,20 @@ class RevenueCatController extends Controller
                 $price = $data['event']['price'] ?? $musoraProduct->price;
 
                 if (config('shopify.enabled')) {
-                    $this->shopifySyncService->syncOrder(
-                        $user,
-                        [$musoraProduct->id],
-                        $musoraProduct->brand,
-                        Carbon::parse($data['event']['purchased_at_ms']),
-                        $price,
-                        $this->calculateTaxAmount($price, $data['event']['tax_percentage'])
-                    );
+                    $processedAt = Carbon::parse($data['event']['purchased_at_ms']);
+                    if (!$this->shopifySyncService->orderExistsForProcessDate(
+                        $user->shopify_id,
+                        $processedAt
+                    )) {
+                        $this->shopifySyncService->syncOrder(
+                            $user,
+                            [$musoraProduct->id],
+                            $musoraProduct->brand,
+                            $processedAt,
+                            $price,
+                            $this->calculateTaxAmount($price, $data['event']['tax_percentage'])
+                        );
+                    }
                 } else {
                     //get RevenueCat subscription
                     $currentRevenueCatSubscription =
@@ -184,14 +190,21 @@ class RevenueCatController extends Controller
                 $price = $data['event']['price'] ?? $musoraProduct->price;
 
                 if (config('shopify.enabled')) {
-                    $this->shopifySyncService->syncOrder(
-                        $user,
-                        [$musoraProduct->id],
-                        $musoraProduct->brand,
-                        Carbon::parse($data['event']['purchased_at_ms']),
-                        $price,
-                        $this->calculateTaxAmount($price, $data['event']['tax_percentage'])
-                    );
+                    $processedAt = Carbon::parse($data['event']['purchased_at_ms']);
+                    if (!$this->shopifySyncService->orderExistsForProcessDate(
+                        $user->shopify_id,
+                        $processedAt
+                    )) {
+                        $this->shopifySyncService->syncOrder(
+                            $user,
+                            [$musoraProduct->id],
+                            $musoraProduct->brand,
+                            $processedAt,
+                            $price,
+                            $this->calculateTaxAmount($price, $data['event']['tax_percentage'])
+                        );
+                        return response()->json(['processed']);
+                    }
                 } else {
                     //get RevenueCat subscription
                     $currentRevenueCatSubscription =
