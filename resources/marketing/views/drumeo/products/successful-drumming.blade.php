@@ -41,9 +41,9 @@
     <section class="text-white text-center px-5 py-6 lg:py-10" style="background:linear-gradient(to bottom, #0B76DB, #013F7A)">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-                <img class="h-36 sm:h-40 lg:h-60 mb-3 sm:mb-0 flex-shrink-0" src="https://dpwjbsxqtam5n.cloudfront.net/promos/october/successful-drumming-promo.png">
+                <img class="h-36 sm:h-40 lg:h-60 mb-3 sm:mb-0 flex-shrink-0" src="https://www.musora.com/musora-cdn/image/width=960,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/october/sd-promo2.png">
                 <div class="sm:pl-5 lg:pl-8 flex-grow-1">
-                    <img class="h-10 lg:h-12 mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png" alt="Successful drumming logo">
+                    <img class="h-10 lg:h-12 mx-auto" src="https://www.musora.com/musora-cdn/image/width=770,quality=95/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png" alt="Successful drumming logo">
                     <h4 class="font-bebas uppercase text-musora leading-tight tracking-wider my-2">10-YEAR ANNIVERSARY</h4>
                     <p class="leading-normal">
                         Successful Drumming has helped more than 35,000 drummers define and achieve what success means to them on the drums. And we wanted to do something special to celebrate the 10 year anniversary.
