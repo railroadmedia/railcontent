@@ -2,10 +2,10 @@
 
 @section('global-head')
     @parent
-    <title>The Most Beautiful Classical Piano Pieces | Pianote</title>
-    <meta property="og:title" content="The Most Beautiful Classical Piano Pieces | Pianote">
-    <meta name="description" content="Timeless classics you’ll want to play over and over again. Presented in original and simplified arrangements.">
-    <meta property="og:description" content="Timeless classics you’ll want to play over and over again. Presented in original and simplified arrangements.">
+    <title>The Pianote Christmas Songbook | Pianote</title>
+    <meta property="og:title" content="The Pianote Christmas Songbook">
+    <meta name="description" content="Christmas classics to make your holiday season extra special. Presented in original and simplified arrangements.">
+    <meta property="og:description" content="Christmas classics to make your holiday season extra special. Presented in original and simplified arrangements.">
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/shop/christmas-songbook/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
@@ -82,11 +82,11 @@
                         Presented in original and simplified arrangements.
                     </p>
                     <h4 class="mb-4 sm:mb-6">
-                        @if(floatval($productPrices['classical-piano-pieces']->price) > floatval($productPrices['classical-piano-pieces']->discounted_price))
-                            <strong>ONLY</strong> <s class="opacity-60">${{ floatval($productPrices['classical-piano-pieces']->price) }}</s>
-                            <strong>${{ floatval($productPrices['classical-piano-pieces']->discounted_price) }}</strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['classical-piano-pieces']->discounted_price) / floatval($productPrices['classical-piano-pieces']->price)))) }}%)
+                        @if(floatval($productPrices['christmas-songbook']->price) > floatval($productPrices['christmas-songbook']->discounted_price))
+                            <strong>ONLY</strong> <s class="opacity-60">${{ floatval($productPrices['christmas-songbook']->price) }}</s>
+                            <strong>${{ floatval($productPrices['christmas-songbook']->discounted_price) }}</strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['christmas-songbook']->discounted_price) / floatval($productPrices['christmas-songbook']->price)))) }}%)
                         @else
-                            <strong>ONLY ${{ floatval($productPrices['classical-piano-pieces']->discounted_price) }}</strong>
+                            <strong>ONLY ${{ floatval($productPrices['christmas-songbook']->discounted_price) }}</strong>
                         @endif
                         </h4>
                     <a href="#final" class="join medium w-full anchor-slide">GET YOUR COPY &raquo;</a>
@@ -227,11 +227,11 @@
             <p class="leading-tight mt-3 mb-6">Christmas classics to make your holiday season extra special.<br class="hidden sm:inline">
                 Presented in original and simplified arrangements.</p>
 
-            @if( $products['stickbag']->getStockAvailability() > 1 && !empty($products['stickbag']->getStockAvailability()))
+            @if( $products['christmas-songbook']->getStockAvailability() > 1 && !empty($products['christmas-songbook']->getStockAvailability()))
                 <div class="flex flex-wrap items-start justify-center 2-full max-w-sm sm:max-w-3xl mx-auto">
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                        @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
-                            <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >Save 20%</p>
+                        @if(floatval($productPrices['christmas-songbook']->price) > floatval($productPrices['christmas-songbook']->discounted_price))
+                            <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >Save {{ round(100 - (100 * (floatval($productPrices['christmas-songbook']->discounted_price) / floatval($productPrices['christmas-songbook']->price)))) }}%</p>
                         @endif
                         <a href="/ecommerce/add-to-cart?locked=true&product-array=christmas-songbook:1,christmas-song-book-digital:1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
                             <div class="bg-white px-3 py-5 md:py-7">
@@ -244,13 +244,13 @@
                                 >
                                 <br>
                                 <h4 class="inline-block leading-tight">
-                                    @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
-                                        <s>${{ floatval($productPrices['stickbag']->price) }}</s>
+                                    @if(floatval($productPrices['christmas-songbook']->price) > floatval($productPrices['christmas-songbook']->discounted_price))
+                                        <s>${{ floatval($productPrices['christmas-songbook']->price) }}</s>
                                     @endif
-                                    <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong></h4>
+                                    <strong>${{ floatval($productPrices['christmas-songbook']->discounted_price) }}</strong></h4>
                                 <p class="text-sm"><em>
-                                        @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
-                                            Save 20%.
+                                        @if(floatval($productPrices['christmas-songbook']->price) > floatval($productPrices['christmas-songbook']->discounted_price))
+                                            Save {{ round(100 - (100 * (floatval($productPrices['christmas-songbook']->discounted_price) / floatval($productPrices['christmas-songbook']->price)))) }}%.
                                         @endif
                                         One-time payment.</em></p>
                                 <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Get Your Copy</div>
