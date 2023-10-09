@@ -36,7 +36,7 @@ const activePath = (path) => {
   let pathArray = path.split('/');
 
   //Page Check
-  if (pathArray[3] !== '500-songs-in-5-days' && windowPathArray[3] !== '500-songs-in-5-days') {
+  if (pathArray[3] !== '500-songs-in-5-days' && windowPathArray[3] !== '500-songs-in-5-days' && pathArray[3] !== 'chord-resources' && windowPathArray[3] !== 'chord-resources') {
     return windowPathArray[2] === pathArray[2];
   }
 
@@ -44,6 +44,11 @@ const activePath = (path) => {
   if (windowPathArray[3] === '500-songs-in-5-days' && pathArray[3] === '500-songs-in-5-days') {
     return true;
   }
+
+    // special case for guitareo chords
+    if (windowPathArray[3] === 'chord-resources' && pathArray[3] === 'chord-resources') {
+        return true;
+    }
 }
 
 onBeforeMount(() => {
