@@ -62,6 +62,12 @@ Route::prefix(config('ecommerce.route_prefix'))
 
       Route::get('user-access-permissions', UserAccessPermissionsController::class . '@index')
         ->name('user-access-permissions.index');
+
+        Route::put('user-access-permission', UserAccessPermissionsController::class . '@store')
+            ->name('user-access-permissions.store');
+
+        Route::patch('user-access-permission/{userPermissionId}', UserAccessPermissionsController::class . '@update')
+            ->name('user-access-permissions.update');
     });
 
 if (config('ecommerce.revenuecat_only') == true) {

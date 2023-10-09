@@ -318,4 +318,24 @@ class UserAccessPermissionsService
         );
         return new UserAccessPermissionsCollection($userId, $items);
     }
+
+    public function createOrUpdateUserAccessPermission($userId, $permissionId, $startTime,$timeDays, $timeMonths,$lifetime,$status,$userProductId = null)
+    {
+        $userAccessPermission = new UserAccessPermission();
+        if($userProductId){
+            $userAccessPermission = UserAccessPermission::query()->where('id', $userProductId)->first();
+        }
+        $userAccessPermission->user_id = $userId;
+        $userAccessPermission->permission_id = $permissionId;
+        $userAccessPermission->source = 'manual';
+        $userAccessPermission->source_hash = '';
+        $userAccessPermission->start_time = $startTime;
+        $userAccessPermission->time_days = $timeDays;
+        $userAccessPermission->time_months = $timeMonths;
+        $userAccessPermission->time_lifetime = $lifetime ?? 0;
+        $userAccessPermission->status = $status;
+        $userAccessPermission->save();
+
+        return $userAccessPermission;
+    }
 }
