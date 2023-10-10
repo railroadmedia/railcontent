@@ -38,29 +38,6 @@
                 "noBreadcrumb" => true
                 ])
 
-    <section class="text-white text-center px-5 py-6 lg:py-10" style="background:linear-gradient(to bottom, #0B76DB, #013F7A)">
-        <div class="container max-w-5xl mx-auto">
-            <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-                <img class="h-36 sm:h-40 lg:h-60 mb-3 sm:mb-0 flex-shrink-0" src="https://www.musora.com/musora-cdn/image/width=960,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/october/sd-promo2.png">
-                <div class="sm:pl-4 lg:pl-6 flex-grow-1">
-                    <h3 class="font-bebas uppercase text-musora leading-none tracking-wider">10-YEAR ANNIVERSARY</h3>
-                    <img class="h-8 sm:h-9 lg:h-11 mx-auto mt-1.5 mb-4" src="https://www.musora.com/musora-cdn/image/width=770,quality=95/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png" alt="Successful drumming logo">
-                    <p class="leading-normal">
-                        Successful Drumming has helped more than 35,000 drummers define and achieve what success means to them on the drums. And we wanted to do something special to celebrate the 10 year anniversary.
-                        <br><br>
-                        This weekend ONLY, you’ll SAVE 89% on the top-selling pack.
-                        <br><br>
-                        <em><strong><span class="text-musora">
-                                    This offer is ONLY available <br class="lg:hidden">
-                                    until October 10th at midnight.</span>
-                                <br>
-                                Scroll down to grab lifetime access.</strong></em>
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
     <header class="header stacked">
         <div class="container mx-auto clearfix xlarge" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/header-bg.jpg);">
             <img class="px-4 w-auto max-h-20 mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png" alt="Successful drumming logo">
@@ -84,8 +61,6 @@
                     @else
                         <strong>NOW ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</strong>
                     @endif
-                    <br>10-YEAR ANNIVERSARY SALE
-                    <br><strong class="text-musora">ONLY AVAILABLE UNTIL OCTOBER 10TH AT MIDNIGHT</strong>
                 </p>
             </div>
         </div>
@@ -307,24 +282,11 @@
 
     <section class="pt-32 pb-20 px-2 sm:px-4 relative" style="background: #F2F8FB;">
         <div class="max-w-4xl mx-auto text-center">
-            <h3 class="font-bebas uppercase text-drumeo tracking-wider mb-3">10-YEAR ANNIVERSARY</h3>
             <img class="filter invert h-20 sm:h-24 mb-5 lazyload" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png" alt="logo centered">
             <h3 class="leading-tight font-extrabold mb-7">
                 Jared Falk’s step-by-step plan for building a rock solid  <br class="hidden sm:inline">
                 drumming foundation for achieving any musical goals.
             </h3>
-            <h5 class="text-drumeo leading-normal"><strong>Available until October 10th at midnight.</strong><br>
-                <span class="uppercase">
-                    <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
-                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0">left!</span>
-                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                     </span>
-                </span>
-            </h5>
             <h2 class="leading-tight my-7">
                 @if($productPrices['SD-DIGI']->price > $productPrices['SD-DIGI']->discounted_price)
                     <strong>
