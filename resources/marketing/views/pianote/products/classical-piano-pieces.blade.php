@@ -116,7 +116,7 @@
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#F2EFED;">
         <div class="container max-w-4xl mx-auto">
-            <h3 class="text-center"><strong>Original & Simplified <br class="inline sm:hidden"> Arrangments of Every Piece</strong></h3>
+            <h3 class="text-center"><strong>Original & Simplified <br class="inline sm:hidden"> Arrangements of Every Piece</strong></h3>
             <p class="leading-normal mt-4 sm:mt-5 mb-7 sm:mb-10">
                 <span class="text-pianote"><em>Because these pieces should<br class="inline sm:hidden"> not be reserved for the pros.</em></span>
                 <br><br>

@@ -8,7 +8,7 @@
     <meta name="description" content="The Fastest Way to Play Popular Songs on the Piano">
     <meta property="og:description" content="The Fastest Way to Play Popular Songs on the Piano">
 
-    <meta property="og:image" content="TODO" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/og-image.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')

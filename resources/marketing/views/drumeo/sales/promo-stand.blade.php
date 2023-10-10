@@ -1,12 +1,6 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
-        <script type="text/JavaScript">
-            function Redirect() { window.location = "https://www.drumeo.com/lp"; }
-            Redirect();
-        </script>
-    @endif
     <title>Drumeo | Reach your drumming goals.</title>
     <meta property="og:title" content="Drumeo | Reach your drumming goals.">
     <meta property="og:url" content="https://www.drumeo.com/">
@@ -160,24 +154,22 @@
                     <div class=" inline-block relative w-full group" style="padding-bottom: 39.5%;perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div class=" {{--border-2 border-promo--}} front absolute z-20  w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=950,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/lessons-stickbag-option.png);"></div>
+                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/990x0/filters:quality(95)/marketing/drumeo/shop/padstand/bundle-collage.png');"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <br>
-                <h2 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Get unlimited drum lessons<br class="hidden sm:inline"> + a free StickBag & more!</strong></h2>
+                <h2 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Get unlimited drum lessons<br class="hidden sm:inline"> + a free PadStand & more!</strong></h2>
 
-                <p class="leading-tight mt-4 sm:mt-5 mb-2"><span class="text-musora">Join Drumeo and get a Drumeo StickBag, a brushes sleeve, <br class="hidden sm:inline">
-                        a premium drum key, and 6 pairs of 5A drumsticks.</span></p>
+                <p class="leading-tight mt-4 sm:mt-5 mb-2"><span class="text-musora">Join Drumeo and get a Drumeo PadStand, a QuietPad, <br class="hidden sm:inline">
+                        a rudiment poster, and a pair of 5A drumsticks.</span></p>
 
                 <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>$20/month</strong></h3>
                 <p class="leading-tight opacity-70 text-sm"><em>Billed at $240 per year.</em></p>
 
-                @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                 <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;"
-                        href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6">GET STARTED</a>
-                @endif
+                        href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,padstand:1,quietpad:1,rudiments-poster:1,Drumeo-VaterSticks:1">GET STARTED</a>
             </div>
             <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
         </div>
@@ -250,7 +242,7 @@
         <div class="container max-w-5xl mx-auto relative z-10">
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-start items-start">
                 <div class="max-w-lg lg:max-w-xl sm:pr-5 lg:pr-8 mx-0">
-                    <h2><strong>Pack like a pro.</strong></h2>
+                    <h2><strong>Practice anywhere with</strong> perfect height and ergonomics.</h2>
                     <p class="leading-tight text-drumeo mt-1 mb-4 sm:mb-6"><em>The ultimate drummer’s StickBag is here.</em></p>
                     <p class="leading-normal">We’re excited to announce the launch of the brand NEW Drumeo StickBag!
                         <br><br>
@@ -262,10 +254,7 @@
                         <br><br>
                         Click below for your best year on the drums yet.
                         <br>
-
-                        @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                        <a class="join drumeo smaller my-3 w-1/2" href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6">GET Started &raquo;</a>
-                        @endif
+                        <a class="join drumeo smaller my-3 w-1/2" href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,padstand:1,quietpad:1,rudiments-poster:1,Drumeo-VaterSticks:1">GET Started &raquo;</a>
                         <br>
                         <em>Free worldwide shipping!</em>
                     </p>
@@ -628,23 +617,24 @@
                     <div class=" inline-block relative w-full group" style="padding-bottom: 39.5%;perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div class=" {{--border-2 border-promo--}} front absolute z-20  w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=950,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/lessons-stickbag-option.png);"></div>
+                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/990x0/filters:quality(95)/marketing/drumeo/shop/padstand/bundle-collage.png');"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <br>
-                <h2 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Get unlimited drum lessons<br class="hidden sm:inline"> + a free StickBag & more!</strong></h2>
 
-                <p class="leading-tight mt-4 sm:mt-5 mb-2"><span class="text-musora">Join Drumeo and get a Drumeo StickBag, a brushes sleeve, <br class="hidden sm:inline">
-                        a premium drum key, and 6 pairs of 5A drumsticks.</span></p>
+                <h2 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Get unlimited drum lessons<br class="hidden sm:inline"> + a free PadStand & more!</strong></h2>
+
+                <p class="leading-tight mt-4 sm:mt-5 mb-2"><span class="text-musora">Join Drumeo and get a Drumeo PadStand, a QuietPad, <br class="hidden sm:inline">
+                        a rudiment poster, and a pair of 5A drumsticks.</span></p>
 
                 <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>$20/month</strong></h3>
                 <p class="leading-tight opacity-70 text-sm"><em>Billed at $240 per year.</em></p>
 
                 @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                 <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;"
-                        href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6"
+                        href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,padstand:1,quietpad:1,rudiments-poster:1,Drumeo-VaterSticks:1"
                 >GET STARTED</a>
                     @endif
             </div>

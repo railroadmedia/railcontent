@@ -59,6 +59,7 @@ class RevenueCatController extends Controller
             return response()->json('Invalid token');
         }
         if (config('ecommerce.revenuecat_only') !== true) {
+            Log::debug('revenuecat_only flag disabled');
             return response()->json();
         }
 

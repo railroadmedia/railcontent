@@ -44,7 +44,7 @@ class SalesController extends BaseController
     }
     public function trialChords()
     {
-        return view('pianote.sales.chords-book-trial', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
+        return view('pianote.sales.chords-trial', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
     }
     public function trialSongs()
     {
@@ -61,10 +61,6 @@ class SalesController extends BaseController
     public function promoSS()
     {
         return view('pianote.sales.song-secrets-bonus', ['theme' => 'pianote', 'promoVersion' => 'true']);
-    }
-    public function pianoMonth()
-    {
-        return view('pianote.sales.piano-month', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }
     public function choosePlan()
     {
@@ -248,13 +244,9 @@ class SalesController extends BaseController
     {
         return view('pianote.products.foundation-books');
     }
-    public function classicalPianoPieces()
+    public function christmasSongbook()
     {
-        return view('pianote.products.classical-piano-pieces', ['theme' => 'pianote']);
-    }
-    public function easyChordsDeal()
-    {
-        return view('pianote.sales.pages.easy-chords-deal', ['theme' => 'pianote']);
+        return view('pianote.products.christmas-songbook', ['theme' => 'pianote']);
     }
 
     public function newPianoPlayers()
@@ -309,13 +301,6 @@ class SalesController extends BaseController
     public function thirtyDayBluesPianoDeal()
     {
         return view('pianote.products.30-day-blues-piano-deal', [
-            'theme' => 'pianote',
-        ]);
-    }
-    public function ultimatePracticeBundle()
-    {
-
-        return view('pianote.products.ultimate-practice-bundle', [
             'theme' => 'pianote',
         ]);
     }

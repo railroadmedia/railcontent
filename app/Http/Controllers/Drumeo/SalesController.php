@@ -126,12 +126,12 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
     }
-    public function promoBag()
+    public function promoStand()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.subscription-bag', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
+        return view('drumeo.sales.promo-stand', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
     }
     public function restart()
     {

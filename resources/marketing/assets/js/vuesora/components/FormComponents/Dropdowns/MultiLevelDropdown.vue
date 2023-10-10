@@ -12,8 +12,8 @@
                     :class="[themeFocusBorder, selectedValue ? 'bg-gray-100' : 'bg-white']"
                     @click="dropdownMenuOpen = ! dropdownMenuOpen"
                     @keyup.esc="closeDropdowns()"
-                    aria-haspopup="listbox" 
-                    aria-expanded="true" 
+                    aria-haspopup="listbox"
+                    aria-expanded="true"
                     :aria-labelledby="id"
                     :aria-required="required"
                     :aria-invalid="invalid"
@@ -55,32 +55,32 @@
                  tabindex="-1"
                  @mouseleave="closeDropdowns()"
                  @keyup.esc="closeDropdowns()"
-                 class="dropdown-wrapper w-full md:w-auto absolute h-auto border border-solid border-gray-200 z-10 shadow-lg overflow-auto md:border-none md:shadow-none md:h-64 md:overflow-initial md:mt-0"
+                 class="dropdown-wrapper w-full md:w-auto absolute h-auto border border-solid border-gray-200 z-10 shadow-lg overflow-auto md:border-none md:shadow-none md:h-auto md:overflow-initial md:mt-0"
             >
-                <ul class="dropdown text-sm w-full border-none max-h-full relative overflow-initial mt-0 rounded-md md:border md:w-72"  
-                    role="listbox" 
-                    :aria-labelledby="id" 
+                <ul class="dropdown text-sm w-full border-none max-h-full relative overflow-initial mt-0 rounded-md md:border md:w-72"
+                    role="listbox"
+                    :aria-labelledby="id"
                     aria-activedescendant="listbox-option-3"
                 >
 
-                    <li v-for="(category,i) in listData" 
+                    <li v-for="(category,i) in listData"
                         :key="i"
                         class="with-dropdown md:bg-transparent"
                         :class="activeCategory === i ? 'bg-gray-200' : 'bg-transparent'"
-                    >   
+                    >
                         <!-- no submenu -->
                         <template v-if="!category.options">
-                            <input type="radio" 
-                                   :id="`category-${i}`" 
-                                   :name="name" 
-                                   :value="category.label" 
+                            <input type="radio"
+                                   :id="`category-${i}`"
+                                   :name="name"
+                                   :value="category.label"
                                    :checked="category.selected"
                                    v-model="selectedOption"
                                    @change="selectOption(i)"
                             >
 
-                            <label :for="`category-${i}`" 
-                                    class="option" 
+                            <label :for="`category-${i}`"
+                                    class="option"
                                     :class="selectedOption === category.label ? themeBgClass : ''"
                                     tabindex="0"
                                     role="option"
@@ -90,20 +90,20 @@
                                 <span>{{ category.label }}</span>
                             </label>
                         </template>
-                        
+
                         <template v-else>
-                            <div class="option" 
-                                 tabindex="0"                        
+                            <div class="option"
+                                 tabindex="0"
                                  @mouseover="openSubOnHover(i)"
                                  @click="openSubOnClick(i)"
                                  @keyup.enter="activeCategory = activeCategory === i ? '' : i"
                             >
                                 <span>{{ category.label }}</span>
                                 <span class="input-icon h-8">
-                                    <svg xmlns="http://www.w3.org/2000/svg" 
-                                            viewBox="0 0 20 20" 
-                                            fill="currentColor" 
-                                            class="transform rotate-90 md:rotate-0" 
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                            class="transform rotate-90 md:rotate-0"
                                             :class="activeCategory === i ? '-rotate-90' : 'rotate-90'">
                                         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                                     </svg>
@@ -113,7 +113,7 @@
 
                         <!-- Sub navigation -->
                         <template v-if="category.options">
-                            <div v-show="activeCategory === i" 
+                            <div v-show="activeCategory === i"
                                  class="relative w-full z-1 md:top-0 md:left-full md:pl-1 md:absolute md:h-auto"
                                  @mouseleave="closeOnHover()"
                             >
@@ -121,16 +121,16 @@
                                     <li v-for="(option, j) in category.options"
                                         :key="j"
                                     >
-                                        <input type="radio" 
-                                            :id="`option-${j}${i}`" 
-                                            :name="name" 
+                                        <input type="radio"
+                                            :id="`option-${j}${i}`"
+                                            :name="name"
                                             :value="option.value"
                                             :checked="option.checked"
                                             v-model="selectedOption"
                                             @change="selectOption(i,j)"
                                         >
-                                        <label :for="`option-${j}${i}`" 
-                                                class="option pl-6 md:pl-4" 
+                                        <label :for="`option-${j}${i}`"
+                                                class="option pl-6 md:pl-4"
                                                 :class="selectedOption === option.value ? themeBgClass : ''"
                                                 tabindex="0"
                                                 role="option"
@@ -249,7 +249,7 @@ export default {
         selectOption(cat_index, opt_index) {
             this.listData.forEach( function(category,i,catarr) {
                 if(category === catarr[cat_index]) {
-                    category.selected = true;  
+                    category.selected = true;
                 } else {
                     category.selected = false;
                 }
@@ -286,12 +286,12 @@ export default {
         selectedOption: function(val) {
             this.$emit('updateValue', val);
         },
-        
+
         selectedValue: function(value) {
             if(!value.length) {
                 this.clearSelectedValue();
             }
-        } 
+        }
     }
 }
 </script>

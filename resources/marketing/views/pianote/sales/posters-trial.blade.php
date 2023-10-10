@@ -165,7 +165,7 @@
                     <br><br>
                     Why?
                     <br><br>
-                    September is National Piano Month, and we want to get as many people playing and loving the piano as possible. Hang these posters in your practice space and use them to help play your favorite songs this month.
+                    Because the world is better with more piano players. And we want to get as many people playing and loving the piano as possible. Hang these posters in your practice space and use them to help play your favorite songs this month.
                     <br><br>
                     Supplies are limited, so grab yours today.
                     <br>
