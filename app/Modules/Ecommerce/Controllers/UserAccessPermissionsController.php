@@ -9,15 +9,18 @@ use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
+use Railroad\Permissions\Services\PermissionService;
 
 class UserAccessPermissionsController extends Controller
 {
 
     private UserAccessPermissionsService $userAccessPermissionsService;
+    private PermissionService $permissionService;
 
-    public function __construct(UserAccessPermissionsService $userAccessPermissionsService)
+    public function __construct(UserAccessPermissionsService $userAccessPermissionsService,PermissionService $permissionService)
     {
         $this->userAccessPermissionsService = $userAccessPermissionsService;
+        $this->permissionService = $permissionService;
     }
 
     public function index(Request $request)
@@ -38,15 +41,21 @@ class UserAccessPermissionsController extends Controller
 
     public function store(Request $request)
     {
-        $userAccessPermission = $this->userAccessPermissionsService->createOrUpdateUserAccessPermission(
-            $request->get('user_id'),
-            $request->get('permission_id'),
-            $request->get('start_date'),
-            $request->get('days'),
-            $request->get('months'),
-            $request->get('lifetime'),
-            $request->get('status')
-        );
+
+        $user = user();
+        $userAccessPermission=null;
+        $userIsSuperAdmin = $this->permissionService->is($user->id, 'administrator')||$this->permissionService->is($user->id, 'it');
+        if($userIsSuperAdmin) {
+            $userAccessPermission = $this->userAccessPermissionsService->createOrUpdateUserAccessPermission(
+                $request->get('user_id'),
+                $request->get('permission_id'),
+                $request->get('start_date'),
+                $request->get('days'),
+                $request->get('months'),
+                $request->get('lifetime'),
+                $request->get('status')
+            );
+        }
 
         return ($userAccessPermission);
     }

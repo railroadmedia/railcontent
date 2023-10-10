@@ -320,7 +320,6 @@ export default {
                 .then((response) => {
                     if (response) {
                         this.userAccessPermissions = response.data.data;
-                        console.log(this.userAccessPermissions);
                     }
                 });
         },
