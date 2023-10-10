@@ -132,6 +132,8 @@ class ShopifyStoreFrontAPIService
     {
         $this->sessionService = new ShopifyStoreFrontAPISessionService();
 
+        // see: https://admin.shopify.com/store/musora-sandbox-staging/settings/apps/development/62166990849/overview
+        // currently using a private app created from the shopify store admin area, not a partner app (yet!)
         Context::initialize(
             apiKey: config('shopify.apiKey'),
             apiSecretKey: config('shopify.apiSecretKey'),
