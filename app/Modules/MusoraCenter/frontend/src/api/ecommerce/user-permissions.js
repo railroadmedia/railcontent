@@ -35,7 +35,7 @@ export default {
     /**
      * Add a product to a users account
      *
-     * @param {String|Number} user_product_id
+     * @param {String|Number} user_permission_id
      * @param {Number} days
      * @param {Number} months
      * @param {String} status
@@ -45,7 +45,7 @@ export default {
      * @param {String|Number} permission_id
      * @returns {Promise} - resolved promise with the response object
      */
-    setUserPermission(user_product_id, {
+    setUserPermission(user_permission_id, {
         user_id,
         permission_id,
         start_date,
@@ -53,11 +53,9 @@ export default {
         days,
         months,
         status,
-
-
     }) {
-        const url = user_product_id ? `/ecommerce/user-access-permission/${user_product_id}` : '/ecommerce/user-access-permission';
-        const method = user_product_id ? 'PATCH' : 'PUT';
+        const url = user_permission_id ? `/ecommerce/user-access-permission/${user_permission_id}` : '/ecommerce/user-access-permission';
+        const method = user_permission_id ? 'PATCH' : 'PUT';
 
         return axios({
             url,
