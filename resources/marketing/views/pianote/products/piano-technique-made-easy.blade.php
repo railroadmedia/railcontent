@@ -469,7 +469,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="embed-responsive embed-responsive-4by3">
-                    <iframe class="embed-responsive-item reset-on-close" src="" data-lazy-load-url="https://www.soundslice.com/scores/404032/embed/?api=1&amp;scroll_type=2&amp;branding=0" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                    <iframe class="embed-responsive-item reset-on-close" src="" data-lazy-load-url="https://www.soundslice.com/slices/6JGVc/embed/?api=1&amp;scroll_type=2&amp;branding=0" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
             </div>
         </div>
@@ -535,7 +535,7 @@
                 ])
                 @include('pianote.products.partials._testimonial', [
                 "heading" => "I got the feeling I was actually improving…",
-                "testimonial" => "Piano Technique Made Easy has taught me the fundamentals and helped me get to playing some of my original songs.<br><br>Soon after starting, I got the feeling that I was actually improving and accomplishing what I set out to do.<br><br>If anyone is motivated to learn the piano, Pano Technique Made Easy is probably the best way to do it.",
+                "testimonial" => "Piano Technique Made Easy has taught me the fundamentals and helped me get to playing some of my original songs.<br><br>Soon after starting, I got the feeling that I was actually improving and accomplishing what I set out to do.<br><br>If anyone is motivated to learn the piano, Piano Technique Made Easy is probably the best way to do it.",
                 "name" => "Dennis Inman",
                 "location" => "Washington, USA",
                 ])

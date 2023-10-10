@@ -15,6 +15,10 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.6-reasons', ['theme' => 'musora']);
     }
+    public function moderators()
+    {
+        return view('musora.pages.moderators', ['theme' => 'musora']);
+    }
 
     public function handbook()
     {
@@ -28,6 +32,11 @@ class MarketingController extends BaseController
     public function privacy()
     {
         return view('musora.pages.privacy');
+    }
+
+    public function preferences()
+    {
+        return view('musora.pages.preferences');
     }
 
     public function careers()

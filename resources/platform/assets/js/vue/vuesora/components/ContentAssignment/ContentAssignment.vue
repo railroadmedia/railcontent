@@ -342,7 +342,6 @@ export default {
         },
     },
     mounted() {
-        console.log('thumb prop', this.lessonThumbnail);
         if (this.position < 3) {
             this.openAssignment();
         }

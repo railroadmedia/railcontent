@@ -19,13 +19,13 @@
         @slot('content')
             <div class="tw-flex tw-w-full tw-flex-row tw-justify-between">
                 <div class="tw-flex tw-flex-col tw-pr-4">
-                    <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
+                    <h1 class="tw-text-white tw-flex tw-items-center">
                         <musora-icon icon-name="headphones-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}">
                         </musora-icon>
-                        <span class="tw-text-32 tw-font-bold">{{ ucfirst($catalogueMeta['name']) }}</span>
+                        <span class="tw-text-[28px] lg:tw-text-32 tw-font-bold">{{ ucfirst($catalogueMeta['name']) }}</span>
                     </h1>
                     <p
-                        class="tw-text-white tw-text-[18px] tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base tw-uppercase tw-font-open-sans tw-font-bold">
+                        class="tw-text-white tw-text-sm lg:tw-text-base tw-max-w-4xl tw-pr-12 tw-uppercase tw-font-open-sans tw-font-semibold">
                         <!-- TODO: GET THIS INFO FROM BACKEND -->
                         {{ $artistsNumber }} ARTISTS | {{ $songsNumber }} SONGS
                     </p>
@@ -45,25 +45,12 @@
                 </div>
             </div>
         @endslot
-
-        @slot('interactionSlot')
-            @if ($catalogueMeta['name'] == 'Songs' && $brand === 'drumeo')
-                <div class="tw-flex tw-mt-4">
-                    <a @if (Carbon\Carbon::create(2022, 11, 15, 11, 0, 0, 'America/Vancouver') > Carbon\Carbon::now()) href="/drumeo/forums/drumeo-songs/15/december-2022-song-request-voting-thread/13853?sortby_val=published_on"
-                        @else
-                            href="/members/forums/threads/drumeo-songs/15" @endif
-                        class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600">
-                        Request A Song
-                        <span class="tw-text-4xl tw-ml-1 tw-leading-none tw-mt-0.5">»</span>
-                    </a>
-                </div>
-            @endif
-        @endslot
     @endcomponent
 
     @if ($hasStartedLessons)
-        <section class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
-            <div class="tw-flex tw-items-center tw-mt-5 tw-mb-4 tw-w-full tw-justify-between">
+        <section class="tw-container tw-mx-auto dark:tw-text-white lg:tw-px-4">
+            <!-- Section Title -->
+            <div class="tw-flex tw-items-center tw-mt-5 tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
                 <a href="/{{ $brand }}/lesson-history/in-progress" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                     <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">In Progress</h2>
                 </a>
@@ -74,28 +61,21 @@
                     See All
                 </a>
             </div>
-
-            <div id="inProgress"
-                class="tw-flex tw-flex-row tw-pt-5 tw-pb-2 tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457] feature-catalogue six-cards-row">
+            <div>
                 <transition appear name="fade">
-                    <content-catalogue catalogue-type="grid" theme-color="{{ $brand }}"
+                    <catalogue-card-container
                         :pre-loaded-content="{{ $startedLessons }}" user-id="{{ auth()->id() }}"
+                        theme-color="{{ $brand }}"
+                        catalogue-type="grid"
                         no-results-message="Looks like you haven't started any song. Once you start any, it will show up here for you to access later."
-                        :six-wide="true">
-                        <div class="flex flex-row nmh-1">
-                            @for ($i = 0; $i < 6; $i++)
-                                @include('partials.bladesora.members.skeletons.card-item', [
-                                    'thumbnailType' => $lessonType === 'song' ? 'square' : 'widescreen',
-                                    'cardClass' => 'six-wide',
-                                ])
-                            @endfor
-                        </div>
-                    </content-catalogue>
+                        :six-wide="true"
+                    >
+                    </catalogue-card-container>
                 </transition>
             </div>
         </section>
     @endif
-    
+
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white songs-catalogue-container tw-pt-[30px]">
         <transition appear name="fade">
             <content-catalogue dusk="content-catalogue" brand="{{ $brand }}" theme-color="{{ $brand }}"

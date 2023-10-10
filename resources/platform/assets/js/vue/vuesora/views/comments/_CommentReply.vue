@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-flex-row comment-post pv mv-1  dark:tw-text-white tw-ml-[-70px] sm:tw-ml-[-60] md:tw-ml-0">
+    <div class="tw-flex tw-flex-row comment-post pv mv-1 dark:tw-text-white tw-ml-[-70px] sm:tw-ml-[-60] md:tw-ml-0 tw-group/reply" v-on:mouseleave="showDropdown = false;">
         <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px]">
             <div
                 v-if="hasPublicProfiles"
@@ -120,16 +120,28 @@
 
                         <span class="tw-flex-grow"></span>
 
-                        <p
-                            class="dark:tw-text-white tw-text-[#00101D] tw-cursor-pointer tw-flex tw-items-center"
-                            :data-open-modal="openModalString"
-                            @click="openLikes"
-                        >
-                            <ThumbUpIcon
-                                class="tw-inline tw-mr-[5px] dark:tw-text-white tw-text-[#00101D] tw-border-black dark:tw-border-white tw-border-2 tw-rounded-full tw-bg-transparent tw-p-[3px] tw-w-[22px] tw-h-[22px]"
-                                :class="comment.like_count > 0 ? themeBgClass : 'bg-grey-2'"
-                            />&nbsp;{{ comment.like_count }}
-                        </p>
+                        <div class="lg:tw-hidden group-hover/reply:lg:tw-flex tw-flex tw-items-center tw-text-[#3F3F46] dark:tw-text-white tw-cursor-pointer tw-relative tw-h-[20px]">
+                            <button @click="toggleDropdown">
+                                <svg class="tw-rotate-90" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.5 5.20768L12.5 5.2181M12.5 12.4993L12.5 12.5098M12.5 19.791L12.5 19.8014M12.5 6.24935C11.9247 6.24935 11.4583 5.78298 11.4583 5.20768C11.4583 4.63239 11.9247 4.16602 12.5 4.16602C13.0753 4.16602 13.5417 4.63239 13.5417 5.20768C13.5417 5.78298 13.0753 6.24935 12.5 6.24935ZM12.5 13.541C11.9247 13.541 11.4583 13.0746 11.4583 12.4993C11.4583 11.9241 11.9247 11.4577 12.5 11.4577C13.0753 11.4577 13.5417 11.9241 13.5417 12.4993C13.5417 13.0746 13.0753 13.541 12.5 13.541ZM12.5 20.8327C11.9247 20.8327 11.4583 20.3663 11.4583 19.791C11.4583 19.2157 11.9247 18.7493 12.5 18.7493C13.0753 18.7493 13.5417 19.2157 13.5417 19.791C13.5417 20.3663 13.0753 20.8327 12.5 20.8327Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                            </button>
+
+                            <ul
+                                v-if="showDropdown"
+                                class="tw-absolute tw-top-6 tw-right-0 tw-drop-shadow-lg tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-z-50"
+                                v-click-outside="hideDropdown"
+                            >
+                                <li>
+                                    <button class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-whitespace-nowrap tw-text-sm" :data-open-modal="openModalString" @click="openLikes">
+                                        <musora-icon icon-name="thumb-like"  class="tw-w-6 tw-h-6 tw-mr-1" /> See All Likes
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-whitespace-nowrap tw-text-sm" @click="reportComment">
+                                        <FlagIcon class="tw-inline tw-w-6 tw-h-6 tw-mr-1" /> Report Comment
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -204,6 +216,7 @@ import Toasts from '../../assets/js/classes/toasts';
 import CommentService from '../../assets/js/services/comments';
 import ThemeClasses from '../../mixins/ThemeClasses';
 import { TrashIcon, ThumbUpIcon } from "@heroicons/vue/solid";
+import { FlagIcon } from "@heroicons/vue/outline";
 
 export default {
     name: 'CommentReply',
@@ -211,7 +224,8 @@ export default {
         'text-editor': TextEditor,
         TrashIcon,
         ThumbUpIcon,
-        MusoraIcon
+        MusoraIcon,
+        FlagIcon
     },
     mixins: [ThemeClasses],
     props: {
@@ -264,6 +278,8 @@ export default {
             reply: '',
             replying: false,
             loading: false,
+            isReported: false,
+            showDropdown: false,
         };
     },
     computed: {
@@ -358,6 +374,31 @@ export default {
             });
         },
 
+        reportComment() {
+            if (!this.isReported) {
+                this.isReported = true;
+                CommentService.reportComment(this.comment.id).then(() => {
+                    window.shownotification({
+                        icon: 'report',
+                        text: 'The comment was reported.'
+                    });
+                }).catch(() => {
+                    this.isReported = false;
+                    window.shownotification({
+                        icon: 'error',
+                        text: 'There was am error reporting this comment, please try again later.'
+                    });
+                });
+            } else {
+                window.shownotification({
+                    icon: 'report',
+                    text: 'You have already reported this comment.'
+                });
+            }
+
+            this.hideDropdown();
+        },
+
         openLikes() {
             if (this.comment.like_count > 0) {
                 this.$emit('openLikes', {
@@ -366,6 +407,8 @@ export default {
                     busToRoot: true,
                 });
             }
+
+            this.hideDropdown();
         },
 
         openReply() {
@@ -421,8 +464,19 @@ export default {
                 },
             });
         },
+
+        toggleDropdown() {
+            this.showDropdown = !this.showDropdown;
+        },
+
+        hideDropdown() {
+            this.showDropdown = false;
+        },
     },
-    watch: { 
+    beforeMount() {
+        this.isReported = this.comment.is_reported_by_viewer;
+    },
+    watch: {
       	openedCommentId: function(newVal, oldVal) { // watch it
           if (newVal !== oldVal && this.openedCommentId !== this.comment.id) {
             this.replying = false;

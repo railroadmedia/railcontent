@@ -263,6 +263,8 @@ class HomePageController extends BaseController
 
         $hasExperience = user()->onboardingExperience ? true : false;
 
+        $hasGoals = user()->onboardingGoals ? true : false;
+
         $hasStartedMethod = $methodContent['started'];
         $hasCompletedMethod = $methodContent['completed'];
 
@@ -347,7 +349,7 @@ class HomePageController extends BaseController
             "hotForumTopics" => $hotForumTopics,
             "newContentJson" => $newContent->toResponseRawJson(),
             "startedContentJson" => $startedLessons->toResponseRawJson(),
-            "startedContentCount" => count($startedLessons),
+            "hasStartedLessons" => count($followedLessons->results()) > 0,
             "usersList" => $usersList,
             "userMetrics" => $userMetrics,
             "nextLearningPathLevel" => $nextLearningPathLevel,
@@ -373,11 +375,10 @@ class HomePageController extends BaseController
             'hasGenres' => $hasGenres,
             'hasTopics' => $hasTopics,
             'hasExperience' => $hasExperience,
-            'methodUrl' => ($hasCompletedMethod) ? url()->route(
-                'platform.content.first-level',
-                ['method', $methodContent['slug'], $methodContent['id']]
-            ) :
+            'methodUrl' => ($hasCompletedMethod) ?
+                url()->route('platform.content.first-level', ['method', $methodContent['slug'], $methodContent['id']]) :
                 url()->route('platform.content.jump-to-continue-content', $methodContent['id']),
+            'hasGoals' => $hasGoals,
             'completedLevelsUrl' => $methodContent['url'] ?? '',
             'carousel' => $carousel,
             'cohortBanner' => json_encode($cohortBanner),
@@ -422,7 +423,7 @@ class HomePageController extends BaseController
             "hotForumTopics" => $hotForumTopics,
             "userNameToDisplay" => $userNameToDisplay,
             "userMetrics" => $userMetrics,
-            "startedContentCount" => 0 //TODO: replace with real data
+            "startedContentCount" => 0, //TODO: replace with real data
         ]);
     }
 
@@ -634,12 +635,10 @@ class HomePageController extends BaseController
             user()->id,
             'user-playlist',
             brand(),
-            5
+            8
         );
 
-        $results =
-            new ContentFilterResultsEntity(['results' => $playlists]
-            );
+        $results = new ContentFilterResultsEntity(['results' => $playlists]);
 
         return $results;
     }

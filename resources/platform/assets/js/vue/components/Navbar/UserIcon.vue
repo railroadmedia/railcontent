@@ -144,7 +144,7 @@ export default {
         </OptionElement>
         <OptionElement :href="userNavigationDropdownLinks.settingsPageUrl">
           <musora-icon icon-name="settings" class="tw-w-[20px] tw-mr-2"/>
-          Settings
+          Account
         </OptionElement>
       </OptionGroup>
       <OptionGroup>
@@ -163,7 +163,7 @@ export default {
         </OptionElement>
         <OptionElement :href="userNavigationDropdownLinks.supportPageUrl">
           <musora-icon icon-name="phone" class="tw-w-[20px] tw-mr-2"/>
-            Support
+            Get Help
           </OptionElement>
       </OptionGroup>
       <OptionGroup>

@@ -23,7 +23,9 @@ $hasGenres =
 
 $hasExperience = user()->onboardingExperience ? true : false;
 
-$showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$hasExperience;
+$hasGoals= user()->onboardingGoals ? true : false;
+
+$showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$hasExperience || !$hasGoals;
 @endphp
 
 @extends('partials.layout')
@@ -41,6 +43,7 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
         'memberSince' => $dashboardUser->created_at,
         'isCurrentUsersProfile' => $isCurrentUsersProfile,
         'showCompleteYourAccountButton' => $showCompleteYourAccountButton,
+        'dashboardUser' => $dashboardUser,
     ])
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white dark:tw-text-white tw-pt-8 tw-pb-14">

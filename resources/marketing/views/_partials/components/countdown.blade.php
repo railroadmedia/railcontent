@@ -24,6 +24,7 @@
             second: '00',
             secondText: @if(!empty($promoVersion) && $promoVersion) 'SEC' @else ' seconds' @endif,
             endTime: new Date('{{ $countdownDate }}').getTime(),
+            endTime2: @if(!empty($countdownDate2)) new Date('{{ $countdownDate2 }}').getTime() @else new Date('{{ $countdownDate }}').getTime() @endif,
             startTime: new Date().getTime(),
             timeLeft: 0,
             smallScreen: false,
@@ -105,6 +106,73 @@
                         }
                     });
                 @endif
+            },
+            countdown2: function (){
+                let _this = this;
+                this.startTime = new Date().getTime();
+                this.timeLeft = (this.endTime2 - this.startTime) / 1000;
+
+                this.startTime = new Date().getTime();
+                this.timeLeft = (this.endTime2 - this.startTime) / 1000;
+                this.day = this.formatTime(this.timeLeft / (60 * 60 * 24));
+                this.hour = this.formatTime(this.timeLeft / (60 * 60)) % 24;
+                this.minute = this.formatTime(this.timeLeft / 60) % 60;
+                this.second = this.formatTime(this.timeLeft % 60);
+
+                if ( !this.smallScreen ){
+                    this.dayText = formatText(this.day, ' days');
+                    this.hourText = formatText(this.hour, ' hours');
+                    this.minuteText = formatText(this.minute, ' minutes');
+                    this.secondText = formatText(this.second, ' seconds');
+                }
+
+                if(this.timeLeft > 0){
+                    setInterval(() => {
+                        this.startTime = new Date().getTime();
+                        this.timeLeft = (this.endTime2 - this.startTime) / 1000;
+                        this.day = this.formatTime(this.timeLeft / (60 * 60 * 24));
+                        this.hour = this.formatTime(this.timeLeft / (60 * 60)) % 24;
+                        this.minute = this.formatTime(this.timeLeft / 60) % 60;
+                        this.second = this.formatTime(this.timeLeft % 60);
+
+                        if ( !this.smallScreen ){
+                            this.dayText = formatText(this.day, ' days');
+                            this.hourText = formatText(this.hour, ' hours');
+                            this.minuteText = formatText(this.minute, ' minutes');
+                            this.secondText = formatText(this.second, ' seconds');
+                        }
+
+                    }, 1000);
+                }
+
+                const bodyWidth = window.innerWidth;
+
+                if ( bodyWidth < 768 ){
+                    this.dayText = 'D';
+                    this.hourText = 'H';
+                    this.minuteText = 'M';
+                    this.secondText = 'S';
+                    this.smallScreen = true;
+                }
+
+                window.addEventListener('resize', function(event){
+                    const bodyWidth = window.innerWidth;
+
+                    if ( bodyWidth < 768 ){
+                        _this.smallScreen = true;
+                        _this.dayText = 'D';
+                        _this.hourText = 'H';
+                        _this.minuteText = 'M';
+                        _this.secondText = 'S';
+                    }
+                    else {
+                        _this.smallScreen = false;
+                        _this.dayText = ' days';
+                        _this.hourText = ' hours';
+                        _this.minuteText = ' minutes';
+                        _this.secondText = ' seconds';
+                    }
+                });
             },
             formatTime: function (value){
                 return Math.floor(value);

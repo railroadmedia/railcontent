@@ -94,6 +94,17 @@ export default {
     },
 
     /**
+     * Report a Comment or Reply
+     *
+     * @param {String|Number} id - the comment ID to like
+     * @returns {Promise}
+     */
+
+    reportComment(id) {
+        return axios.put(`${endpointPrefix}/railcontent/comment/report/${id}`)
+    },
+
+    /**
      * Un-Like a Comment or Reply
      *
      * @param {String|Number} id - the comment ID to unlike

@@ -3,6 +3,7 @@ import ContentHelpers from "../helper-functions/content.js";
 
 export default class ContentModel {
     constructor({ brand = 'drumeo', post }) {
+        //console.log('contentmodel post', post)
         this.brand = brand;
         this.post = post;
         this.id = post.id;
@@ -44,7 +45,7 @@ export default class ContentModel {
     getPostField(key) {
         const postField = this.post?.fields?.find(field => field.key === key);
 
-        return postField ? postField.value : 'TBD';
+        return postField ? postField.value : '';
     }
 
     getPostFieldMulti(key) {
@@ -56,7 +57,7 @@ export default class ContentModel {
     getPostDatum(key) {
         const datum = this.post?.data?.find(data => data.key === key);
 
-        return datum && datum.value ? datum.value : 'TBD';
+        return datum && datum.value ? datum.value : '';
     }
 
     get postInstructor() {
@@ -104,7 +105,7 @@ export default class ContentModel {
             return `${parsedDuration} mins`;
         }
 
-        return 'TBD';
+        return '';
     }
 
     get postPublisedOn() {
@@ -131,11 +132,11 @@ export default class ContentModel {
     }
 
     get episodeNumber() {
-        return this.post.sort ? `Episode #${this.post.sort}` : 'TBD';
+        return this.post.sort ? `Episode #${this.post.sort}` : '';
     }
 
     get postChildLessonCount() {
-        return this.post.lesson_count ? `${this.post.lesson_count} Lessons` : 'TBD';
+        return this.post.lesson_count ? `${this.post.lesson_count} Lessons` : '';
     }
 
     getPostThumbnail() {
@@ -146,7 +147,7 @@ export default class ContentModel {
             singeo: 'https://dmmior4id2ysr.cloudfront.net/assets/images/singeo_fallback_thumb.jpg',
         };
         const originalThumb = this.getPostDatum('original_thumbnail_url');
-        let thumb = originalThumb === 'TBD' ? this.getPostDatum('thumbnail_url') : originalThumb;
+        let thumb = originalThumb === '' ? this.getPostDatum('thumbnail_url') : originalThumb;
 
         if (this.postType === 'learning-path' && this.brand === 'drumeo') {
             thumb = this.getPostDatum('background_image_url');
@@ -156,12 +157,12 @@ export default class ContentModel {
             thumb = this.getPostDatum('guitar_chord_image_url');
         }
 
-        return thumb !== 'TBD' ? thumb : defaults[this.brand];
+        return thumb !== '' ? thumb : defaults[this.brand];
     }
 
     getPostLogoImage() {
         let imageUrl = this.getPostDatum('logo_image_url');
-        return imageUrl === 'TBD' ? null : imageUrl;
+        return imageUrl === '' ? null : imageUrl;
     }
 
     static mapDifficulty(post) {
@@ -182,13 +183,13 @@ export default class ContentModel {
             return `advanced ${difficulty}`;
         }
         // Some content has difficulty already parsed as a word so we return that,
-        // if its falsey, just default it to 'TBD'
+        // if its falsey, just default it to ''
         return difficulty || '';
     }
 
     parseInstructors() {
         const instructors = this.getInstructors();
 
-        return instructors ? instructors.replace(/,(?=[^,]*$)/, ' &') : 'TBD';
+        return instructors ? instructors.replace(/,(?=[^,]*$)/, ' &') : '';
     }
 }

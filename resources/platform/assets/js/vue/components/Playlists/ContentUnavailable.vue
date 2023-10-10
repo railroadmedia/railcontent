@@ -78,10 +78,9 @@ const cta = computed(() => {
 });
 
 //Parse Release Date
-
-const month = DateTime.fromSeconds(props.releaseDate).toFormat('LLL');
-const dayNumber = DateTime.fromSeconds(props.releaseDate).toFormat('d');
-const yearNumber = DateTime.fromSeconds(props.releaseDate).toFormat('yy');
+const month = DateTime.fromMillis(props.releaseDate).toFormat('LLL');
+const dayNumber = DateTime.fromMillis(props.releaseDate).toFormat('d');
+const yearNumber = DateTime.fromMillis(props.releaseDate).toFormat('yy');
 
 // refs
 

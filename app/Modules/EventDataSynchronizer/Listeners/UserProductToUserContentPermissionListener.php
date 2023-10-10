@@ -89,19 +89,22 @@ class UserProductToUserContentPermissionListener
     public function handleSubscriptionRenewalFailureFromDatabaseError(
         CommandSubscriptionRenewFailed $commandSubscriptionRenewFailed
     ) {
-        try {
-            error_log('--- Attempting to recover railcontent renewal permissions ---');
-            $this->syncUserId($commandSubscriptionRenewFailed->getSubscription()->getUser()->getId());
-            error_log(
-                '--- Recovered railcontent renewal permissions successfully! user id: ' .
-                $commandSubscriptionRenewFailed->getSubscription()->getUser()->getId() . ' ---'
-            );
-        } catch (\Exception $exception) {
-            error_log(
-                '--- Recovered railcontent renewal permissions FAILED! user id: ' .
-                $commandSubscriptionRenewFailed->getSubscription()->getUser()->getId() . ' ---'
-            );
-            error_log($exception);
+        $userId = $commandSubscriptionRenewFailed->getSubscription()->getUser()?->getId() ?? 0;
+        if ($userId > 0) {
+            try {
+                error_log('--- Attempting to recover railcontent renewal permissions ---');
+                $this->syncUserId($userId);
+                error_log(
+                    '--- Recovered railcontent renewal permissions successfully! user id: ' .
+                    $userId . ' ---'
+                );
+            } catch (\Exception $exception) {
+                error_log(
+                    '--- Recovered railcontent renewal permissions FAILED! user id: ' .
+                    $userId . ' ---'
+                );
+                error_log($exception);
+            }
         }
     }
 

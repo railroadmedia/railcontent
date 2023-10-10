@@ -9,6 +9,17 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
 
             // if page is null, it's the root /
             Route::get('/{page?}', LeadGenController::class . '@oneHundredSongs')
+                ->whereIn('page', [
+                    null, 'unlocked', 'thank-you', 'ty-annual', 'ty-monthly'
+                ]);
+
+        }
+    );
+    Route::group(['prefix' => 'kristinas-top-25'],
+        function () {
+
+            // if page is null, it's the root /
+            Route::get('/{page?}', LeadGenController::class . '@kristinasTop25')
                 ->whereIn('page', [null, 'unlocked']);
 
         }
@@ -17,7 +28,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     Route::get('/destupefying-your-weak-hand', [LeadGenController::class, 'destupefy'] );
     Route::get('/drum-set-maintenance', [LeadGenController::class, 'drumSetMaintenance']);
     Route::get('/drum-technique-made-easy/testimonials', [LeadGenController::class, 'dtmeTestimonials']);
-    Route::get('/fwtgf', [LeadGenController::class, 'fasterNeon']);
+    Route::get('/fwtgf', [LeadGenController::class, 'faster']);
     Route::group(['prefix' => 'faster'],
         function () {
             Route::get('/{page?}', LeadGenController::class . '@faster')
@@ -74,7 +85,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     Route::get('/christmas-gift-guide/', [LeadGenController::class, 'christmasGift']);
     Route::get('/{page?}', LeadGenController::class . '@pages')
         ->whereIn('page', [
-            'lifetime-members-masterclass', 'click', 'free-drum-lessons', 'quick-drummer-survey', 'teach-a-beginner', 'thankyou', 'thank-you', '30-day-drummer-unsubscribe', '30-day-drummer-subscribe', 'subscribed', 'confirming', 'lets-stay-together', 'welcome-party', 'recitals', '30-day-drummer-live', 'awards', 'fwtgf-blog', '40s-blog', 'gsd-blog', 'gojb-blog', 'fpa-blog'
+            '6-reasons', 'lifetime-members-masterclass', 'click', 'free-drum-lessons', 'quick-drummer-survey', 'teach-a-beginner', 'thankyou', 'thank-you', '30-day-drummer-unsubscribe', '30-day-drummer-subscribe', 'subscribed', 'preferences', 'confirming', 'lets-stay-together', 'welcome-party', 'recitals', '30-day-drummer-live', 'awards', 'fwtgf-blog', '40s-blog', 'gsd-blog', 'gojb-blog', 'fpa-blog'
         ]);
     Route::get('/druminar/coming-back-to-the-drums', [LeadGenController::class, 'druminarCBTTD']);
     Route::get('/druminar/coming-back-to-the-drums/june-12-live-event', [LeadGenController::class, 'druminarEvent']);
@@ -83,6 +94,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     Route::get('/gift-guide/', [LeadGenController::class, 'giftGuide']);
     Route::get('/new-years-gift-guide/', [LeadGenController::class, 'newYearGift']);
     Route::get('/teach-a-beginner/lessons/', [LeadGenController::class, 'teachBeginner']);
+    Route::get('/giveaway/', [LeadGenController::class, 'giveaway']);
     Route::get('/weekly-email/', [LeadGenController::class, 'weeklyEmail']);
     Route::get('/weeklyemail/', [LeadGenController::class, 'weeklyMail']);
     Route::get('/{leadgenSlug?}', LeadGenController::class.'@leadgen')

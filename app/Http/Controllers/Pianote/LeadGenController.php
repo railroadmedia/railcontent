@@ -37,6 +37,11 @@ class LeadGenController extends BaseController
         return view('pianote.lead-gen.subscribed');
     }
 
+    public function preferences()
+    {
+        return view('pianote.lead-gen.preferences');
+    }
+
     public function weeklyemail()
     {
         return view('pianote.lead-gen.blog-forms.weekly-email', ['recaptchaKey'=>config('recaptcha.key')]);
@@ -72,6 +77,11 @@ class LeadGenController extends BaseController
         return view('pianote.lead-gen.recitals');
     }
 
+    public function sixReasons()
+    {
+        return view('pianote.lead-gen.6-reasons', ['theme' => 'pianote']);
+    }
+
     public function classicalcohort1()
     {
         return view('pianote.lead-gen.classical-cohort.1');
@@ -100,6 +110,15 @@ class LeadGenController extends BaseController
     public function lifetimeMasterclass()
     {
         return view('pianote.lead-gen.lifetime-members-masterclass');
+    }
+
+    public function songSecrets()
+    {
+        return view('pianote.lead-gen.song-secrets.song-secrets-webinar', ['theme' => 'pianote']);
+    }
+    public function songSecretsTY()
+    {
+        return view('pianote.lead-gen.song-secrets.thank-you', ['theme' => 'pianote']);
     }
 
     public function beginnerBootcamp(Request $request, $domain, $page = null)

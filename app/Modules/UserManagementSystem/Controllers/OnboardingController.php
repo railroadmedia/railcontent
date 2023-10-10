@@ -10,6 +10,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Models\OnboardingAnswerHistory;
 use Modules\UserManagementSystem\Models\OnboardingExperience;
+use Modules\UserManagementSystem\Models\OnboardingGoals;
 use Modules\UserManagementSystem\Models\OnboardingGear;
 use Modules\UserManagementSystem\Models\OnboardingTopic;
 use Modules\UserManagementSystem\Models\OnboardingGenre;
@@ -163,6 +164,32 @@ class OnboardingController extends Controller
      *
      * @param Request $request
      */
+    public function goals(Request $request)
+    {
+        $request->validate([
+            'goals' => 'required',
+            'brand' => 'required',
+        ]);
+
+        OnboardingGoals::where(['brand' => $request->brand, 'user_id' => user()->id])->delete();
+        OnboardingGoals::create(
+            ['goals' => $request->goals, 'brand' => $request->brand, 'user_id' => user()->id]
+        );
+
+        $onboardingAnswerHistory = new OnboardingAnswerHistory;
+        $onboardingAnswerHistory->onboarding_question = OnboardingAnswerHistory::QUESTION_GOALS;
+        $onboardingAnswerHistory->onboarding_answer = $request->goals;
+        $onboardingAnswerHistory->brand = $request->brand;
+        $onboardingAnswerHistory->user_id = user()->id;
+        $onboardingAnswerHistory->save();
+
+        return response(json_encode(user()), 200);
+    }
+
+    /**
+     *
+     * @param Request $request
+     */
     public function getUserOnboardingInformation(Request $request)
     {
         try {
@@ -180,6 +207,7 @@ class OnboardingController extends Controller
         $response = [
             'gears' => OnboardingGear::where(['brand' => $brand, 'user_id' => user()->id])->pluck('gear')->toArray(),
             'experience' => $experience ? intval($experience->experience_level) : $experience,
+            'goals' => OnboardingGoals::select('goals')->where(['brand' => $brand, 'user_id' => user()->id])->first(),
             'genres' => OnboardingGenre::where(['brand' => $brand, 'user_id' => user()->id])->pluck('genre')->toArray(),
             'topics' => OnboardingTopic::where(['brand' => $brand, 'user_id' => user()->id])->pluck('topic')->toArray(),
         ];

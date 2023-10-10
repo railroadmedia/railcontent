@@ -126,6 +126,13 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
     }
+    public function promoBag()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.subscription-bag', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
+    }
     public function restart()
     {
         $products = $this->productRepository->all();
@@ -356,7 +363,16 @@ class SalesController extends BaseController
     public function alesis(Request $request)
     {
         return view('drumeo.pages.redeem.redeem-page', [
+            'alesis' => true,
             'newAccount' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function alesisExisting(Request $request)
+    {
+        return view('drumeo.pages.redeem.redeem-page', [
+            'alesis' => true,
+            'newAccount' => false,
             'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ]);
     }

@@ -1,5 +1,6 @@
 @extends('musora._partials.layout', [
     'whiteNav' => true,
+    'fullSubscriptionVersion' => true,
 ])
 
 @section('head-includes')
@@ -243,6 +244,7 @@
             </div>
         </div>
     </section>
+
     <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
             <img class="text-center mx-auto sm:h-20 lg:h-24 mb-10 hidden sm:inline-block" src="https://musora-center.s3.amazonaws.com/homepage/2023/learn-practice-play.png">

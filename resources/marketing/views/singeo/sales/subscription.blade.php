@@ -227,8 +227,6 @@
         @yield('promo-banner')
     @endif
 
-
-
     @php
         $gridItems = [
             [
@@ -531,7 +529,7 @@
         'header' => 'Trusted by singers everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
-        'youtube' => '75,000',
+        'youtube' => '97,000',
         'facebookLink' => 'https://facebook.com/singeoofficial/',
         'facebook' => '23,000',
         'instagramLink' => 'https://instagram.com/singeoofficial/',
@@ -598,10 +596,11 @@
         'header' => 'Unlimited singing lessons.<br> Vocal coaches and support.<br>1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
-                    <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
-        'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/singeo-spread.png',
+        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
+        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
+                'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/singeo-spread.png',
         ])
+
     @endif
 
     @include('musora.sales.components.app-section', [
