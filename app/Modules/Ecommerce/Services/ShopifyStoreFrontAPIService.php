@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\DataTransferObjects\ShopifyCartDTO;
 use Exception;
+use Shopify\Clients\Graphql;
 use Shopify\Clients\Storefront;
 use Shopify\Context;
 use Shopify\Exception\HttpRequestException;
@@ -12,6 +13,8 @@ use Shopify\Exception\MissingArgumentException;
 class ShopifyStoreFrontAPIService
 {
     public Storefront $storefrontClient;
+    public Graphql $adminClient;
+
     public ShopifyStoreFrontAPISessionService $sessionService;
 
     private const cartGraphQLReturnDataString =
@@ -113,7 +116,6 @@ class ShopifyStoreFrontAPIService
                 }
             }
         GRAPHQL;
-
     private const userErrorsGraphQLReturnDataString =
         <<<GRAPHQL
             userErrors {
@@ -146,6 +148,13 @@ class ShopifyStoreFrontAPIService
             Context::$HOST_NAME,
             Context::$PRIVATE_APP_STOREFRONT_ACCESS_TOKEN
         );
+
+//        dd(config('shopify.privateAppAdminAccessToken'));
+
+        $this->adminClient = new Graphql(
+            Context::$HOST_NAME,
+            config('shopify.privateAppAdminAccessToken')
+        );
     }
 
     /**
@@ -165,7 +174,7 @@ class ShopifyStoreFrontAPIService
         foreach ($productVariantIdsToAddToCart as $productVariantIdToAddToCart => $quantity) {
             $createCartInputLineArray[] = [
                 'quantity' => $quantity,
-                'merchandiseId' => 'gid://shopify/ProductVariant/' . $productVariantIdToAddToCart
+                'merchandiseId' => $productVariantIdToAddToCart
             ];
         }
 
@@ -204,9 +213,11 @@ class ShopifyStoreFrontAPIService
         $responseCartData = $jsonResponse["data"]["cartCreate"]["cart"] ?? [];
 
         if ($responseCode !== 200 || empty($responseCartData)) {
-            throw new Exception("Shopify API call (cartCreate) error: " .
+            throw new Exception(
+                "Shopify API call (cartCreate) error: " .
                 "HTTP status code: $responseCode - " .
-                "HTTP response body: $responseBody");
+                "HTTP response body: $responseBody"
+            );
         }
 
         return $jsonResponse["data"]["cartCreate"]["cart"];
@@ -229,7 +240,7 @@ class ShopifyStoreFrontAPIService
         foreach ($productVariantIdsToAddToCart as $productVariantIdToAddToCart => $quantity) {
             $createCartInputLineArray[] = [
                 'quantity' => $quantity,
-                'merchandiseId' => 'gid://shopify/ProductVariant/' . $productVariantIdToAddToCart
+                'merchandiseId' => $productVariantIdToAddToCart
             ];
         }
 
@@ -262,14 +273,73 @@ class ShopifyStoreFrontAPIService
         $responseCartData = $jsonResponse["data"]["cartLinesAdd"]["cart"] ?? [];
 
         if ($responseCode !== 200 || empty($responseCartData)) {
-            throw new Exception("Shopify API call (cartLinesAdd) error: " .
+            throw new Exception(
+                "Shopify API call (cartLinesAdd) error: " .
                 "HTTP status code: $responseCode - " .
-                "HTTP response body: $responseBody");
+                "HTTP response body: $responseBody"
+            );
         }
 
         return $jsonResponse["data"]["cartLinesAdd"]["cart"];
     }
 
+    /**
+     * This accepts either Shopify product SKUs or product variant SKUs. It always returns the underlying
+     * product Shopify product variant id (not the product ID).
+     *
+     * @param array $productSKUs
+     * @return array
+     * @throws HttpRequestException
+     * @throws MissingArgumentException
+     */
+    public function getProductVariantIdsFromSKUs(array $productSKUs)
+    {
+        $productSKUsQueryStrings = [];
+
+        foreach ($productSKUs as $productSKU) {
+            $productSKUsQueryStrings[] = "(sku:$productSKU)";
+        }
+
+        $productsQueryString = implode(' OR ', $productSKUsQueryStrings);
+
+        $productData = $this->adminClient->query(
+            <<<GRAPHQL
+                query {
+                    productVariants(first: 100, query: "$productsQueryString") {
+                        edges {
+                            node {
+                                id
+                                sku
+                            }
+                        }
+                    }
+                }
+            GRAPHQL
+        );
+
+        $responseBody = $productData->getBody()->getContents();
+        $responseCode = $productData->getStatusCode();
+
+        $jsonResponse = json_decode($responseBody, true);
+
+        $responseProductVariantData = $jsonResponse["data"]["productVariants"]["edges"] ?? [];
+
+        if ($responseCode !== 200 || empty($responseProductVariantData)) {
+            throw new Exception(
+                "Shopify API call (productVariants) error: " .
+                "HTTP status code: $responseCode - " .
+                "HTTP response body: $responseBody"
+            );
+        }
+
+        $productSKUsVariantIds = [];
+
+        foreach ($jsonResponse["data"]["productVariants"]["edges"] as $edge) {
+            $productSKUsVariantIds[$edge['node']['sku']] = $edge['node']['id'];
+        }
+
+        return $productSKUsVariantIds;
+    }
 
     private function jsonStringToGraphQLObjectString($jsonString)
     {

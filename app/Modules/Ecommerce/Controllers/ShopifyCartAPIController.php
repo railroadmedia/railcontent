@@ -23,17 +23,28 @@ class ShopifyCartAPIController extends Controller
     public function createOrAddToCart(Request $request)
     {
         $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
-//        session()->put('test1', 1);
+        $productsToAdd = $request->get('products', []); // $products = ['product-sku' => quantity, ...]
+
+        $productSKUsVariantIds =
+            $this->shopifyStoreFrontAPIService->getProductVariantIdsFromSKUs(array_keys($productsToAdd));
+
+        $productVariantIdsAndQuantitiesToAdd = [];
+
+        foreach ($productsToAdd as $productSKUToAdd => $quantityToAdd) {
+            $productVariantIdsAndQuantitiesToAdd[$productSKUsVariantIds[$productSKUToAdd]] = (integer)$quantityToAdd;
+        }
 
         if (empty($existingShopifyCartId)) {
-            $cartData = $this->shopifyStoreFrontAPIService->createCart(['46334167810343' => 3, '46137514590503' => 1],
-                ['my-discount01']);
+            $cartData = $this->shopifyStoreFrontAPIService->createCart(
+                $productVariantIdsAndQuantitiesToAdd,
+                ['my-discount01']
+            );
 
             Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
         } else {
             $cartData = $this->shopifyStoreFrontAPIService->addToCart(
                 $existingShopifyCartId,
-                ['46334167810343' => 3, '46137514590503' => 1]
+                $productVariantIdsAndQuantitiesToAdd
             );
 
             Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
