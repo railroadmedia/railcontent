@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\DataTransferObjects\ShopifyCartDTO;
+use Exception;
 use Shopify\Clients\Storefront;
 use Shopify\Context;
 use Shopify\Exception\HttpRequestException;
@@ -64,6 +65,45 @@ class ShopifyStoreFrontAPIService
                         node {
                             id
                             quantity
+                            cost {
+                                totalAmount {
+                                    amount
+                                    currencyCode
+                                }
+                                subtotalAmount {
+                                    amount
+                                    currencyCode
+                                }
+                            }
+                            merchandise {
+                                ... on ProductVariant {
+                                    availableForSale
+                                    barcode
+                                    currentlyNotInStock
+                                    id
+                                    quantityAvailable
+                                    requiresShipping
+                                    sku
+                                    title
+                                    weight
+                                    weightUnit
+                                    image {
+                                        altText
+                                        height
+                                        id
+                                        originalSrc
+                                        src
+                                        transformedSrc
+                                        url
+                                        width
+                                    }
+                                    product {
+                                        id
+                                        title
+                                        description
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -114,6 +154,7 @@ class ShopifyStoreFrontAPIService
      * @return array
      * @throws MissingArgumentException
      * @throws HttpRequestException
+     * @throws Exception
      */
     public function createCart(
         array $productVariantIdsToAddToCart = [],
@@ -155,7 +196,18 @@ class ShopifyStoreFrontAPIService
             GRAPHQL,
         );
 
-        $jsonResponse = json_decode($cartData->getBody()->getContents(), true);
+        $responseBody = $cartData->getBody()->getContents();
+        $responseCode = $cartData->getStatusCode();
+
+        $jsonResponse = json_decode($responseBody, true);
+
+        $responseCartData = $jsonResponse["data"]["cartCreate"]["cart"] ?? [];
+
+        if ($responseCode !== 200 || empty($responseCartData)) {
+            throw new Exception("Shopify API call (cartCreate) error: " .
+                "HTTP status code: $responseCode - " .
+                "HTTP response body: $responseBody");
+        }
 
         return $jsonResponse["data"]["cartCreate"]["cart"];
     }
@@ -166,6 +218,7 @@ class ShopifyStoreFrontAPIService
      * @return array
      * @throws HttpRequestException
      * @throws MissingArgumentException
+     * @throws Exception
      */
     public function addToCart(
         $cartId,
@@ -201,9 +254,18 @@ class ShopifyStoreFrontAPIService
             GRAPHQL,
         );
 
-        $jsonResponse = json_decode($cartData->getBody()->getContents(), true);
+        $responseBody = $cartData->getBody()->getContents();
+        $responseCode = $cartData->getStatusCode();
 
-        dd($jsonResponse);
+        $jsonResponse = json_decode($responseBody, true);
+
+        $responseCartData = $jsonResponse["data"]["cartLinesAdd"]["cart"] ?? [];
+
+        if ($responseCode !== 200 || empty($responseCartData)) {
+            throw new Exception("Shopify API call (cartLinesAdd) error: " .
+                "HTTP status code: $responseCode - " .
+                "HTTP response body: $responseBody");
+        }
 
         return $jsonResponse["data"]["cartLinesAdd"]["cart"];
     }
