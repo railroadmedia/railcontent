@@ -802,54 +802,40 @@ class SyncOrdersToShopify implements ShouldQueue
      */
     private function createOrderItems(Order $order): array
     {
-        $orderItemsData = [];
-        collect($order->getOrderItems())->each(function (OrderItem $orderItem) use ($order, &$orderItemsData) {
+        // Doctrine for some reason performs db queries to get the order items' attributes
+        // which is causing a bottleneck, so we'll get the Eloquent models
+        $orderModel = \App\Modules\Ecommerce\Models\Order::query()
+            ->with("orderItems", "orderItems.product")
+            ->find($order->getId());
+        $orderModel->orderItems->each(function (\App\Modules\Ecommerce\Models\OrderItem $orderItem) use ($orderModel, &$orderItemsData) {
             $data = [
                 // include the shopify_id, if we have one, so we know if we're updating or creating - shopify will just ignore this
-                "shopify_id" => $orderItem->getShopifyId(),
+                "shopify_id" => $orderItem->shopify_id,
                 // include our internal id, so we can reference it to update - shopify will just ignore this
-                "ecommerce_order_item_id" => $orderItem->getId(),
-                "fulfillable_quantity" => $orderItem->getQuantity(),
+                "ecommerce_order_item_id" => $orderItem->id,
+                "fulfillable_quantity" => $orderItem->quantity,
                 "fulfillment_service" => "manual",
-                "price" => number_format($orderItem->getFinalPrice() ?? 0, 2),
-                "quantity" => $orderItem->getQuantity(),
-                "requires_shipping" => $orderItem->getWeight() > 0,
-                "sku" => $orderItem->getProduct()?->getSku(),
-                "title" => $orderItem->getProduct()?->getName(),
-                "variant_id" => $orderItem->getProduct()?->getShopifyId(),
+                "price" => number_format($orderItem->final_price ?? 0, 2),
+                "quantity" => $orderItem->quantity,
+                "requires_shipping" => $orderItem->weight > 0,
+                "sku" => $orderItem->product->sku,
+                "title" => $orderItem->product->name,
+                "variant_id" => $orderItem->product->shopify_id,
                 "variant_inventory_management" => "shopify",
-                "vendor" => $order->getBrand(),
+                "vendor" => $orderModel->brand,
             ];
 
-            if ($orderItem->getTotalDiscounted()) {
+            if ($orderItem->total_discounted) {
                 $data["applied_discounts"] = [
                     [
-                        "amount" => number_format($orderItem->getTotalDiscounted(), 2)
+                        "amount" => number_format($orderItem->total_discounted, 2)
                     ]
                 ];
             }
 
-            /*
-            // DEV NOTE: this seems to be nearly what we'd need to properly apply discounts to build up the discount process,
-            // but we won't worry about that for these historical updates and will simply use the total_discounted on each
-            // order item. Leaving this here for now, in case it's useful later on.
-           if ($orderItem->getOrderItemDiscounts()) {
-               // clean up bad data (there are some with discount id 0)
-               $orderDiscounts = collect($orderItem->getOrderItemDiscounts())
-                   ->filter(function (OrderDiscount $orderDiscount) {
-                       return $orderDiscount->getDiscount()->getId();
-                   }
-                );
-
-               $discountsData = [];
-               $orderDiscounts->each(function (OrderDiscount $orderDiscount) use (&$discountsData) {
-                       $discountsData[] = [ "amount" => $orderDiscount->getDiscount()?->getAmount()];
-                   });
-                $data["discount_allocations"] = $discountsData;
-           }
-            */
             $orderItemsData[] = $data;
         });
+
 
         return $orderItemsData;
     }
