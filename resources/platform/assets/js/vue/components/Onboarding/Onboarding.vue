@@ -113,8 +113,10 @@ onMounted(() => {
            @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions"
            :step-name="initialSteps[currentStep].label"/>
     <Topics :brand="brand" v-if="currentStep === 5" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
-            @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions"/>
+            @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions"
+            :step-name="initialSteps[currentStep].label"/>
     <Goals :brand="brand" v-if="currentStep === 6" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
-           @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions"/>
+           @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions"
+           :step-name="initialSteps[currentStep].label"/>
   </div>
 </template>
