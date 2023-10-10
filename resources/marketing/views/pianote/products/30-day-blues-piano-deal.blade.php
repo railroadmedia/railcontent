@@ -144,92 +144,13 @@
                 <br><br>
                 So click below and keep your progress going!
             </p>
+            <div class="px-3 md:px-0 mt-5">
+                {{--                            <a class="join blue w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">SEE THE DEAL</a>--}}
+                <a class="join sold-out w-full sm:w-auto max-w-xs sm:max-w-full">SOLD OUT</a>
+            </div>
         </div>
     </section>
 
-    <div id="customize-section" class="anchor"></div>
-
-    @php
-        $bonuses = [
-    [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Pianote_Planner_Card.jpg',
-        'title' => 'Practice Planner',
-        'description' => 'Always know exactly what to practice.',
-        'price' => floatval($productPrices['pianote-practice-planner']->price),
-        'shipping' => true,
-    ],
-    [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
-        'title' => 'Chords & <br>Scales Book',
-        'description' => 'Your encyclopedia of piano chords & scales.',
-        'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
-        'shipping' => true,
-    ],
-    [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chords-poster.jpg',
-        'title' => 'Chords Poster',
-        'description' => 'Play every major and minor chord.',
-        'price' => 9,
-        'shipping' => true,
-    ],
-    [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/scales-poster.jpg',
-        'title' => 'Scales Poster',
-        'description' => 'All the major and minor scales in one place.',
-        'price' => 9,
-        'shipping' => true,
-    ],
-    [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/dynamics-poster.jpg',
-        'title' => 'Dynamics Poster',
-        'description' => 'Don’t learn Italian. Just look at this poster.',
-        'price' => 9,
-        'shipping' => true,
-    ],
-    [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/key-to-sight-reading-poster.jpg',
-        'title' => 'Keys To Sight Reading Poster',
-        'description' => 'Link the notes on the page to your keys.',
-        'price' => 9,
-        'shipping' => true,
-    ],
-    [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/circle-of-fifths-poster.jpg',
-        'title' => 'Circle Of Fifths Poster',
-        'description' => 'The essential piece of music theory.',
-        'price' => 9,
-        'shipping' => true,
-    ],
-    [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chord-formulas-poster.jpg',
-        'title' => 'Chord Formulas Poster',
-        'description' => 'Play any chord. On any key. ',
-        'price' => 9,
-        'shipping' => true,
-    ],
-            [
-            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
-            'title' => 'Piano Riffs<br> & Fills',
-            'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
-            'price' => floatval($productPrices['piano-riffs-and-fills']->price),
-            ],
-    [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/power_of_chords_card.jpg',
-        'title' => 'The Power of Chords',
-        'description' => 'Play the music you love using the power of chords.',
-        'price' => floatval($productPrices['the-power-of-chords']->price),
-    ],
-        ]
-    @endphp
-    @include('musora.sales.components.order-section-bonuses', [
-        'firstYearPrice' => '177',
-        'CTA' => 'CLAIM YOUR OFFER',
-    'bgColor' => 'background:linear-gradient(to bottom, #01050F 66%, #07132C);',
-    'topImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-annual-2w-card.png',
-    'subHeader' => '<strong><span class="text-musora">SAVE 26%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 10 FREE BONUSES.',
-    'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&redirect=/order&locked=true&promo-code=special-discount',
-    'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
-    ])
 
     @include("pianote.sales.partials._footer")
     @include('_partials.components.countdown',[
