@@ -1,15 +1,23 @@
 <?php
 
-namespace App\Modules\Ecommerce\Console\Commands;
+namespace App\Modules\Ecommerce\Jobs\Shopify;
 
-use App\Console\Commands\Infrastructure\Command;
-use App\Modules\Ecommerce\Console\Commands\Traits\SyncsToShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsToShopify;
+use Carbon\Carbon;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Exception;
+use Illuminate\Bus\Batchable;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Payment;
@@ -24,31 +32,41 @@ use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\REST\Resources\ApiResource;
 use Signifly\Shopify\Shopify;
 
-class SyncSubscriptionPaymentsToShopifyOrders extends Command
+class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
 {
-    use HandlesMaskedEmailAddress;
+    use Batchable;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use LogsShopify;
+    use Queueable;
+    use SerializesModels;
     use SyncsToShopify;
+    use HandlesMaskedEmailAddress;
 
-    // constants for tracking results of creating fulfillments
-    protected const TABLE_ITEM_ID = "item_id";
-    protected const TABLE_SHOPIFY_FULFILLMENT_ID = "shopify_fulfillment_id";
+    protected const SHOPIFY_FULFILLMENT_ID = "shopify_fulfillment_id";
     protected const DEFAULT_CURRENCY = "USD";
+    protected const RESULTS_MESSAGE_TYPE = "message_type";
+    protected const RESULTS_MESSAGE_TYPE_SUCCESS = "";
+    protected const RESULTS_MESSAGE_TYPE_ERROR = "##ERROR## ";
+    protected const RESULTS_MESSAGE_TYPE_WARNING = "##WARNING## ";
+    protected const RESULTS_MODEL_TYPE = "model_type";
+    protected const RESULTS_MODEL_TYPE_SUBSCRIPTION_PAYMENT = "Subscription Payment";
+    protected const RESULTS_MODEL_TYPE_PAYMENT = "Payment";
+    protected const RESULTS_MODEL_TYPE_REFUND = "Refund";
+    protected const RESULTS_MODEL_TYPE_FULFILLMENT = "Fulfillment";
+    protected const RESULTS_MODEL_ID = "model_id";
+    protected const RESULTS_ACTION = "action";
+    protected const RESULTS_AMOUNT = "amount";
+    protected const RESULTS_SHOPIFY_ID = "shopify_id";
+    protected const RESULTS_FAIL_MESSAGE = "failure_message";
+    protected const FULFILLMENT_ITEM_ID = "item_id";
+
     /**
-     * The name and signature of the console command.
+     * The number of seconds the job can run before timing out.
      *
-     * @var string
+     * @var int
      */
-    protected $signature = 'shopify:sync-subscription-payments
-                            {--startingSubscriptionPaymentId= : (Optional) The SubscriptionPayment Id to start processing at}
-                            {--limit= : (Optional) The number of order to limit this run to}
-                            {--fresh : Sync all subscription payments, not just those that need it}
-                            {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Sync our subscription payments up to Shopify as orders';
+    public $timeout = 840;
     protected Shopify $shopify;
     protected CustomerRepository $customerRepository;
     protected RefundRepository $refundRepository;
@@ -56,8 +74,25 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
 
     protected EcommerceEntityManager $entityManager;
     protected Collection $shopifyIds;
-    // rows for displaying the results in a table
-    protected array $tableRows = [];
+    protected array $results = [];
+
+    /**
+     * Create a new job instance.
+     */
+    public function __construct(
+        protected int $startAtId,
+        protected int $endAtId,
+        protected Carbon $lastSyncAt,
+        protected bool $simulate,
+        protected bool $fresh
+    ) {
+        $this->shopifyIds = collect();
+    }
+
+    public function middleware(): array
+    {
+        return [new SkipIfBatchCancelled];
+    }
 
     /**
      * Execute the console command.
@@ -67,7 +102,7 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
      * @param  RefundRepository  $refundRepository
      * @param  SubscriptionPaymentRepository  $subscriptionPaymentRepository
      * @param  EcommerceEntityManager  $entityManager
-     * @return int
+     * @return void
      */
     public function handle(
         Shopify $shopify,
@@ -75,20 +110,37 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
         RefundRepository $refundRepository,
         SubscriptionPaymentRepository $subscriptionPaymentRepository,
         EcommerceEntityManager $entityManager
-    ): int {
+    ): void {
+        // set DI instances that we'll need
         $this->shopify = $shopify;
         $this->customerRepository = $customerRepository;
         $this->refundRepository = $refundRepository;
         $this->subscriptionPaymentRepository = $subscriptionPaymentRepository;
         $this->entityManager = $entityManager;
 
-        // DEV NOTE: we do not use the SyncsToShopify sync() here. With the huge number of Orders in our
+        $this->logDebug(
+            sprintf(
+                "%s: running batch for subscription payments %s - %s",
+                $this->getClassName(),
+                $this->startAtId,
+                $this->endAtId
+            )
+        );
+
+        // DEV NOTE: we do not use the SyncsToShopify sync() here. With the huge number of Subscription Payments in our
         // database, we need to loop through in batches, instead of the usual process in SyncsToShopify.
         $this->notifyStartupStatus();
-        $batchSize = 50;
-        $this->loopSync($batchSize);
+        $batchSize = 25;
 
-        return self::SUCCESS;
+        $this->loopSync($batchSize);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getClassName(): string
+    {
+        return "SyncSubscriptionPaymentsToShopifyOrders";
     }
 
     /**
@@ -100,18 +152,6 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
     private function loopSync(int $batchSize): void
     {
         $fresh = $this->getIsFresh();
-        $limit = $this->getLimit();
-        $startingSubscriptionPaymentId = $this->getStartingSubscriptionPaymentId();
-        $endingSubscriptionPaymentId = $startingSubscriptionPaymentId + $limit;
-        $tableHeader = [
-            "Subscription Payment ID",
-            "Payment ID",
-            "Refund ID",
-            "Amount",
-            "Fulfillment",
-            "Shopify ID"
-        ];
-        $this->tableRows = [];
 
         // get the subscription payments, using pagination to keep from blowing up the memory usage
         $qb = $this->subscriptionPaymentRepository->createQueryBuilder('entity');
@@ -120,9 +160,7 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
         // To avoid duplications in the shopify sync, we need to restrict our query to only those that
         // are not for an initial_order type, and that are paid (so we don't try to sync up failed payments)
         $paymentQB = new QueryBuilder($this->entityManager);
-
-        $qb->where($qb->expr()->gte('entity.id', ':startingSubscriptionPaymentId'))
-            ->andWhere($qb->expr()->lt('entity.id', ':endingSubscriptionPaymentId'))
+        $qb->where($qb->expr()->between('entity.id', ':startingSubscriptionPaymentId', ':endingSubscriptionPaymentId'))
             ->andWhere(
                 $qb->expr()->in(
                     "entity.payment",
@@ -138,55 +176,33 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
                         ->getDQL()
                 )
             )
-            ->setParameter("startingSubscriptionPaymentId", $startingSubscriptionPaymentId)
-            ->setParameter("endingSubscriptionPaymentId", $endingSubscriptionPaymentId)
-            ->setParameter("paidStatus", "paid")
-            ->setParameter("initialOrderType", "initial_order");
-
+            ->setParameter("startingSubscriptionPaymentId", $this->startAtId)
+            ->setParameter("endingSubscriptionPaymentId", $this->endAtId)
+            ->setParameter("paidStatus", Payment::STATUS_PAID)
+            ->setParameter("initialOrderType", Payment::TYPE_INITIAL_ORDER);
 
         if (!$fresh) {
-            $this->info("Retrieving all subscription payments that have not been synced.");
             $qb->andWhere(
                 $qb->expr()
                     ->isNull("entity.shopifyId")
             );
         }
-        if ($limit) {
-            $qb->setMaxResults($limit);
-        }
+
         $q = $qb->getQuery();
         $paginator = new Paginator($q);
 
         $totalCount = count($paginator);
 
-        $infoString = "Found {$totalCount} orders to be synced.";
-        if ($limit) {
-            $infoString .= " Limiting to {$limit}.";
-        }
+        $infoString = "Found {$totalCount} subscription payments to be synced.";
         $infoString .= " Performing in batches of {$batchSize}.";
-        $this->info($infoString);
-
-        $batchRun = 0;
-        $totalCountForRun = is_null($limit) ? $totalCount : min($totalCount, $limit);
-        $totalBatchesToRun = intval(ceil($totalCountForRun / $batchSize));
-        $bar = $this->output->createProgressBar($batchSize);
+        $this->logInfo(sprintf("%s: %s", $this->getClassName(), $infoString));
 
         foreach ($paginator as $index => $subscriptionPayment) {
             // starting the batch
             if ($index % $batchSize === 0) {
-                // start the sync log and prep the progress bar and table
-                ++$batchRun;
-                $this->newLine();
-                $this->info(sprintf("Running Orders batch %s of %s", $batchRun, $totalBatchesToRun));
                 $this->shopifyIds = collect();
                 $this->createSyncLogIfExecuting();
-                // if this is the last run of the batches, set the progress bar's size
-                if ($batchRun === $totalBatchesToRun) {
-                    $bar = $this->output->createProgressBar($totalCountForRun % $batchSize);
-                }
-                $bar->start();
             }
-
 
             // TODO: remove this check once all users/customers have been synced
             $user = $subscriptionPayment->getSubscription()->getUser();
@@ -197,25 +213,23 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
                 try {
                     $user = User::find($user->getId());
                     if (is_null($user->shopify_id)) {
-                        $this->tableRows[] = [
-                            $subscriptionPayment->getId(),
-                            "--",
-                            "--",
-                            "--",
-                            "<error>SKIPPED</error>",
-                            "User has not been synced to Shopify"
+                        $this->results[] = [
+                            self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_WARNING,
+                            self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_SUBSCRIPTION_PAYMENT,
+                            self::RESULTS_MODEL_ID => $subscriptionPayment->getId(),
+                            self::RESULTS_ACTION => "SKIPPED",
+                            self::RESULTS_FAIL_MESSAGE => "User has not been synced to Shopify"
                         ];
                         $skip = true;
                     }
                 } catch (ORMException $e) {
-                    $this->error(sprintf("Could not find user by ID %s", $user->getId()));
-                    $this->tableRows[] = [
-                        $subscriptionPayment->getId(),
-                        "--",
-                        "--",
-                        "--",
-                        "<error>SKIPPED</error>",
-                        "User not found"
+                    $this->logError(sprintf("%s: Could not find user by ID %s", $this->getClassName(), $user->getId()));
+                    $this->results[] = [
+                        self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_WARNING,
+                        self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_SUBSCRIPTION_PAYMENT,
+                        self::RESULTS_MODEL_ID => $subscriptionPayment->getId(),
+                        self::RESULTS_ACTION => "SKIPPED",
+                        self::RESULTS_FAIL_MESSAGE => "User not found"
                     ];
                     $skip = true;
                 }
@@ -224,33 +238,34 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
                 try {
                     $customer = $this->customerRepository->find($customer->getId());
                     if (is_null($customer->getShopifyId())) {
-                        $this->tableRows[] = [
-                            $subscriptionPayment->getId(),
-                            "--",
-                            "--",
-                            "--",
-                            "<error>SKIPPED</error>",
-                            "Customer has not been synced to Shopify"
+                        $this->results[] = [
+                            self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_WARNING,
+                            self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_SUBSCRIPTION_PAYMENT,
+                            self::RESULTS_MODEL_ID => $subscriptionPayment->getId(),
+                            self::RESULTS_ACTION => "SKIPPED",
+                            self::RESULTS_FAIL_MESSAGE => "Customer has not been synced to Shopify"
                         ];
                         $skip = true;
                     }
                 } catch (ORMException $e) {
-                    $this->error(sprintf("Could not find customer by ID %s", $customer->getId()));
-                    $this->tableRows[] = [
-                        $subscriptionPayment->getId(),
-                        "--",
-                        "--",
-                        "--",
-                        "<error>SKIPPED</error>",
-                        "Customer not found"
+                    $this->logError(
+                        sprintf("%s: Could not find customer by ID %s", $this->getClassName(), $customer->getId())
+                    );
+                    $this->results[] = [
+                        self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_WARNING,
+                        self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_SUBSCRIPTION_PAYMENT,
+                        self::RESULTS_MODEL_ID => $subscriptionPayment->getId(),
+                        self::RESULTS_ACTION => "SKIPPED",
+                        self::RESULTS_FAIL_MESSAGE => "Customer not found"
                     ];
                     $skip = true;
                 }
             } else {
                 // something went very wrong here
-                $this->error(
+                $this->logError(
                     sprintf(
-                        "No user or customer found for Subscription Payment ID %s. Skipping order sync.",
+                        "%s: No user or customer found for Subscription Payment ID %s. Skipping order sync.",
+                        $this->getClassName(),
                         $subscriptionPayment->getId()
                     )
                 );
@@ -259,24 +274,62 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
 
             if (!$skip) {
                 $this->syncSubscriptionPayment($subscriptionPayment, $fresh);
-                if (!$this->getIsSimulation()) {
-                    // safety check for the rate limit
-                    $this->handleRateLimit();
-                }
+
+                // safety check for the rate limit
+                $this->handleRateLimit();
             }
 
-            $bar->advance();
-
             // batch has ended
-            if (($index % $batchSize === $batchSize - 1) || $index + 1 === $totalCountForRun) {
-                // print progress bar and table
-                $bar->finish();
-                $this->newLine();
-                $this->table($tableHeader, $this->tableRows);
+            if (($index % $batchSize === $batchSize - 1) || $index + 1 === $totalCount) {
+                // print the results
+                $this->logInfo(
+                    sprintf(
+                        "%s: results for syncing orders to Shopify job %s of %s",
+                        $this->getClassName(),
+                        $this->batch()->processedJobs() + 1,
+                        $this->batch()->totalJobs
+                    )
+                );
+                foreach ($this->results as $result) {
+                    $endResult = isset($result[self::RESULTS_SHOPIFY_ID]) ? sprintf(
+                        "Shopify ID %s",
+                        $result[self::RESULTS_SHOPIFY_ID]
+                    ) : sprintf("%s %s", $result[self::RESULTS_ACTION], $result[self::RESULTS_FAIL_MESSAGE]);
+
+                    $amountResult = isset($result[self::RESULTS_AMOUNT]) ? sprintf(
+                        "Amount: %s. ",
+                        $result[self::RESULTS_AMOUNT]
+                    ) : '';
+
+                    if ($result[self::RESULTS_MESSAGE_TYPE] === self::RESULTS_MESSAGE_TYPE_ERROR) {
+                        $this->logError(
+                            sprintf(
+                                "%s%s ID: %s. %s%s",
+                                $result[self::RESULTS_MESSAGE_TYPE],
+                                $result[self::RESULTS_MODEL_TYPE],
+                                $result[self::RESULTS_MODEL_ID],
+                                $amountResult,
+                                $endResult
+                            )
+                        );
+                    } else {
+                        $this->logInfo(
+                            sprintf(
+                                "%s%s ID: %s. %s%s",
+                                $result[self::RESULTS_MESSAGE_TYPE],
+                                $result[self::RESULTS_MODEL_TYPE],
+                                $result[self::RESULTS_MODEL_ID],
+                                $amountResult,
+                                $endResult
+                            )
+                        );
+                    }
+                }
+
                 // finish the sync log
                 $this->finishSyncLogIfExecuting($this->shopifyIds);
-                // and clear the table rows for the next run
-                $this->tableRows = [];
+                // and clear the results for the next run
+                $this->results = [];
             }
         }
     }
@@ -286,54 +339,35 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
      */
     protected function getIsFresh(): bool
     {
-        return $this->option("fresh");
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function getLimit(): ?int
-    {
-        return $this->option("limit");
-    }
-
-    /**
-     * Get the optional SubscriptionPayment id to start at
-     *
-     * @return int|null
-     */
-    protected function getStartingSubscriptionPaymentId(): ?int
-    {
-        return $this->option("startingSubscriptionPaymentId") ?? 0;
+        return $this->fresh;
     }
 
     /**
      * Sync the syncSubscriptionPayment up to Shopify as an order
      *
      * @param  SubscriptionPayment  $subscriptionPayment
-     * @param  bool  $fresh
      * @return void
      */
-    private function syncSubscriptionPayment(SubscriptionPayment $subscriptionPayment, bool $fresh): void
+    private function syncSubscriptionPayment(SubscriptionPayment $subscriptionPayment): void
     {
         // STEP 1: build up the data structure
         try {
             $postData = $this->createOrderData($subscriptionPayment);
         } catch (Exception $e) {
-            $this->error(
+            $this->logError(
                 sprintf(
-                    "Failed to find User or Customer for Order ID %s",
+                    "%s: Failed to find User or Customer for Order ID %s",
+                    $this->getClassName(),
                     $subscriptionPayment->getId()
                 )
             );
-            // record the failure in the table then exit out for this order
-            $this->tableRows[] = [
-                $subscriptionPayment->getId(),
-                "--",
-                "--",
-                "--",
-                "<error>FAILED</error>",
-                $e->getMessage()
+            // record the failure in the results then exit out for this subscription payment
+            $this->results[] = [
+                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
+                self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_SUBSCRIPTION_PAYMENT,
+                self::RESULTS_MODEL_ID => $subscriptionPayment->getId(),
+                self::RESULTS_ACTION => "FAILED",
+                self::RESULTS_FAIL_MESSAGE => $e->getMessage()
             ];
             return;
         }
@@ -345,27 +379,28 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
                 $orderResource = $this->shopify->createOrder($postData);
                 $orderShopifyId = $orderResource->id;
             } catch (ValidationException $exception) {
-                $this->error(
+                $this->logError(
                     sprintf(
-                        "Validation failed when sending subscription payment data to Shopify: %s",
+                        "%s: Validation failed when sending subscription payment data to Shopify: %s",
+                        $this->getClassName(),
                         $exception->getMessage()
                     )
                 );
-                $this->error(
+                $this->logError(
                     sprintf(
-                        "Please investigate for SubscriptionPayment ID %s. Attempted order data: %s",
+                        "%s: Please investigate for SubscriptionPayment ID %s. Attempted order data: %s",
+                        $this->getClassName(),
                         $subscriptionPayment->getId(),
                         json_encode($postData)
                     )
                 );
-                // record the failure in the table then exit out for this order
-                $this->tableRows[] = [
-                    $subscriptionPayment->getId(),
-                    "--",
-                    "--",
-                    "--",
-                    "<error>FAILED</error>",
-                    $exception->getMessage()
+                // record the failure in the results then exit out for this subscription payment
+                $this->results[] = [
+                    self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
+                    self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_SUBSCRIPTION_PAYMENT,
+                    self::RESULTS_MODEL_ID => $subscriptionPayment->getId(),
+                    self::RESULTS_ACTION => "FAILED",
+                    self::RESULTS_FAIL_MESSAGE => $exception->getMessage()
                 ];
                 return;
             }
@@ -374,18 +409,26 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
                 // record the shopify ID on the subscription payment
                 if ($subscriptionPayment->getShopifyId() !== $orderShopifyId) {
                     // grab the eloquent model, so we can update it
-                    $subscriptionPaymentModel = \App\Modules\Ecommerce\Models\SubscriptionPayment::find($subscriptionPayment->getId());
+                    $subscriptionPaymentModel = \App\Modules\Ecommerce\Models\SubscriptionPayment::find(
+                        $subscriptionPayment->getId()
+                    );
                     $subscriptionPaymentModel->shopify_id = $orderShopifyId;
                     $subscriptionPaymentModel->saveWithoutUpdatedAt();
                     // refresh the doctrine model to get the change
                     $this->entityManager->refresh($subscriptionPayment);
                 }
                 $this->shopifyIds->push($orderShopifyId);
-                $this->tableRows[] = [$subscriptionPayment->getId(), "--", "--", "--", "--", $orderShopifyId];
+                $this->results[] = [
+                    self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                    self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_SUBSCRIPTION_PAYMENT,
+                    self::RESULTS_MODEL_ID => $subscriptionPayment->getId(),
+                    self::RESULTS_SHOPIFY_ID => $orderShopifyId
+                ];
             } catch (\Doctrine\ORM\Exception\ORMException $e) {
-                $this->error(
+                $this->logError(
                     sprintf(
-                        "Failed to save shopify_id for SubscriptionPayment ID %s: %s",
+                        "%s: Failed to save shopify_id for SubscriptionPayment ID %s: %s",
+                        $this->getClassName(),
                         $subscriptionPayment->getId(),
                         $e->getMessage()
                     )
@@ -398,20 +441,20 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
             // STEP 5: add the Fulfillments and tracking
             $fulfillmentOrder = $this->getFulfillmentOrderResource($orderShopifyId);
             if (is_null($fulfillmentOrder)) {
-                $this->error(
+                $this->logError(
                     sprintf(
-                        "Failed to retrieve Fulfillment Order Resource from Shopify for SubscriptionPayment ID %s",
+                        "%s: Failed to retrieve Fulfillment Order Resource from Shopify for SubscriptionPayment ID %s",
+                        $this->getClassName(),
                         $subscriptionPayment->getId()
                     )
                 );
-                // record the failure in the table then exit out for this order
-                $this->tableRows[] = [
-                    $subscriptionPayment->getId(),
-                    "--",
-                    "--",
-                    "--",
-                    "<error>FAILED</error>",
-                    "No Fulfillment Order Resource"
+                // record the failure in the results then exit out for this subscription payment
+                $this->results[] = [
+                    self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
+                    self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_SUBSCRIPTION_PAYMENT,
+                    self::RESULTS_MODEL_ID => $subscriptionPayment->getId(),
+                    self::RESULTS_ACTION => "FAILED",
+                    self::RESULTS_FAIL_MESSAGE => "No Fulfillment Order Resource"
                 ];
                 return;
             }
@@ -428,21 +471,20 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
                     // ... record the fulfillment(s) made for the line item
                     if ($fulfillmentRecords) {
                         foreach ($fulfillmentRecords as $fulfillmentRecord) {
-                            // print any records for fulfillments
-                            $this->tableRows[] = [
-                                $subscriptionPayment->getId(),
-                                "--",
-                                "--",
-                                "--",
-                                $fulfillmentRecord[self::TABLE_ITEM_ID],
-                                $fulfillmentRecord[self::TABLE_SHOPIFY_FULFILLMENT_ID]
+                            // record any fulfillments
+                            $this->results[] = [
+                                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                                self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_FULFILLMENT,
+                                self::RESULTS_MODEL_ID => $fulfillmentRecord[self::FULFILLMENT_ITEM_ID],
+                                self::RESULTS_SHOPIFY_ID => $fulfillmentRecord[self::SHOPIFY_FULFILLMENT_ID]
                             ];
                         }
                     }
                 } catch (Exception $e) {
-                    $this->error(
+                    $this->logError(
                         sprintf(
-                            "Failed to send fulfillments data to Shopify for SubscriptionPayment ID %s: %s",
+                            "%s: Failed to send fulfillments data to Shopify for SubscriptionPayment ID %s: %s",
+                            $this->getClassName(),
                             $subscriptionPayment->getId(),
                             $e->getMessage()
                         )
@@ -453,7 +495,12 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
             $this->sendRefundsToShopify($subscriptionPayment);
         } else {
             // simulating
-            $this->tableRows[] = [$subscriptionPayment->getId(), "--", "--", "--", "--", "---"];
+            $this->results[] = [
+                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_SUBSCRIPTION_PAYMENT,
+                self::RESULTS_MODEL_ID => $subscriptionPayment->getId(),
+                self::RESULTS_SHOPIFY_ID => "---"
+            ];
 
             // simulate sending the payments
             $this->sendPaymentsToShopify($subscriptionPayment);
@@ -476,21 +523,20 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
                     // record the fulfillment(s) made for the line item
                     if ($fulfillmentRecords) {
                         foreach ($fulfillmentRecords as $fulfillmentRecord) {
-                            // print any records for fulfillments
-                            $this->tableRows[] = [
-                                $subscriptionPayment->getId(),
-                                "--",
-                                "--",
-                                "--",
-                                $fulfillmentRecord[self::TABLE_ITEM_ID],
-                                "---"
+                            // record any fulfillments
+                            $this->results[] = [
+                                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                                self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_FULFILLMENT,
+                                self::RESULTS_MODEL_ID => $fulfillmentRecord[self::FULFILLMENT_ITEM_ID],
+                                self::RESULTS_SHOPIFY_ID => "---"
                             ];
                         }
                     }
                 } catch (Exception $e) {
-                    $this->error(
+                    $this->logError(
                         sprintf(
-                            "Failed to send fulfillments data to Shopify for Subscription Payment ID %s: %s",
+                            "%s: Failed to send fulfillments data to Shopify for Subscription Payment ID %s: %s",
+                            $this->getClassName(),
                             $subscriptionPayment->getId(),
                             $e->getMessage()
                         )
@@ -499,13 +545,12 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
             }
             // record the refunds, but we won't actually do it
             $refunds = $this->getRefundsToSync($subscriptionPayment);
-            $refunds->each(fn(Refund $refund) => $this->tableRows[] = [
-                $subscriptionPayment->getId(),
-                "--",
-                $refund->getId(),
-                $refund->getRefundedAmount(),
-                "--",
-                "---"
+            $refunds->each(fn(Refund $refund) => $this->results[] = [
+                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_REFUND,
+                self::RESULTS_MODEL_ID => $refund->getId(),
+                self::RESULTS_AMOUNT => $refund->getRefundedAmount(),
+                self::RESULTS_SHOPIFY_ID => "---"
             ]);
         }
     }
@@ -590,7 +635,7 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
                 $orderData["billing_address"] = ["id" => $address->getShopifyId()];
             }
         } catch (EntityNotFoundException $e) {
-            $this->error($e->getMessage());
+            $this->logError(sprintf("%s: %s", $this->getClassName(), $e->getMessage()));
         }
 
         // Shopify expects an array of line items (and each line item is an array), to represent the products purchased,
@@ -619,7 +664,7 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
      */
     protected function getIsSimulation(): bool
     {
-        return $this->option("execute") == false;
+        return $this->simulate;
     }
 
     /**
@@ -643,7 +688,13 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
             ];
 
         if ($this->getIsSimulation()) {
-            $this->tableRows[] = [$subscriptionPayment->getId(), $payment->getId(), "--", $amount, "--", "---"];
+            $this->results[] = [
+                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_PAYMENT,
+                self::RESULTS_MODEL_ID => $payment->getId(),
+                self::RESULTS_AMOUNT => $amount,
+                self::RESULTS_SHOPIFY_ID => "---"
+            ];
             return;
         }
 
@@ -663,51 +714,51 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
             $this->entityManager->refresh($payment);
 
             $this->shopifyIds->push($paymentShopifyId);
-            $this->tableRows[] = [
-                $subscriptionPayment->getId(),
-                $payment->getId(),
-                "--",
-                $amount,
-                "--",
-                $paymentShopifyId
+            $this->results[] = [
+                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_PAYMENT,
+                self::RESULTS_MODEL_ID => $payment->getId(),
+                self::RESULTS_AMOUNT => $amount,
+                self::RESULTS_SHOPIFY_ID => $paymentShopifyId
             ];
         } catch (ValidationException $exception) {
-            $this->error(
+            $this->logError(
                 sprintf(
-                    "Validation failed when sending order transaction to Shopify: %s",
+                    "%s: Validation failed when sending order transaction to Shopify: %s",
+                    $this->getClassName(),
                     $exception->getMessage()
                 )
             );
-            $this->error(
+            $this->logError(
                 sprintf(
-                    "Please investigate for SubscriptionPayment ID %s. Attempted order data: %s",
+                    "%s: Please investigate for SubscriptionPayment ID %s. Attempted order data: %s",
+                    $this->getClassName(),
                     $subscriptionPayment->getId(),
                     json_encode($paymentData["data"])
                 )
             );
-            $this->tableRows[] = [
-                $subscriptionPayment->getId(),
-                $payment->getId(),
-                "--",
-                "--",
-                "<error>FAILED</error>",
-                $exception->getMessage()
+            $this->results[] = [
+                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
+                self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_PAYMENT,
+                self::RESULTS_MODEL_ID => $payment->getId(),
+                self::RESULTS_ACTION => "FAILED",
+                self::RESULTS_FAIL_MESSAGE => $exception->getMessage()
             ];
         } catch (\Doctrine\ORM\Exception\ORMException $exception) {
-            $this->error(
+            $this->logError(
                 sprintf(
-                    "Failed to save shopify_id for payment ID %s: %s",
+                    "%s: Failed to save shopify_id for payment ID %s: %s",
+                    $this->getClassName(),
                     $payment->getId(),
                     $exception->getMessage()
                 )
             );
-            $this->tableRows[] = [
-                $subscriptionPayment->getId(),
-                $payment->getId(),
-                "--",
-                "--",
-                "<error>FAILED</error>",
-                $exception->getMessage()
+            $this->results[] = [
+                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
+                self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_PAYMENT,
+                self::RESULTS_MODEL_ID => $payment->getId(),
+                self::RESULTS_ACTION => "FAILED",
+                self::RESULTS_FAIL_MESSAGE => $exception->getMessage()
             ];
         }
     }
@@ -747,7 +798,7 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
     ): array {
         $fulfillmentRecords = [];
         $record = [
-            self::TABLE_ITEM_ID => "N/A",
+            self::FULFILLMENT_ITEM_ID => "N/A",
         ];
 
         $fulfillmentData = [
@@ -768,10 +819,10 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
         ];
 
         if ($this->getIsSimulation()) {
-            $record[self::TABLE_SHOPIFY_FULFILLMENT_ID] = "---";
+            $record[self::SHOPIFY_FULFILLMENT_ID] = "---";
         } else {
             $fulfillmentResult = $this->shopify->createFulfillment($fulfillmentData);
-            $record[self::TABLE_SHOPIFY_FULFILLMENT_ID] = $fulfillmentResult->getAttributes()["id"];
+            $record[self::SHOPIFY_FULFILLMENT_ID] = $fulfillmentResult->getAttributes()["id"];
         }
         $fulfillmentRecords[] = $record;
 
@@ -807,19 +858,19 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
         $refunds->each(function (Refund $refund) use ($subscriptionPayment, $orderShopifyId) {
             $paymentToRefund = $refund->getPayment();
             if (is_null($paymentToRefund)) {
-                $this->error(
+                $this->logError(
                     sprintf(
-                        "No payment found for Refund ID %s. Refund cannot be sent to Shopify",
+                        "%s: No payment found for Refund ID %s. Refund cannot be sent to Shopify",
+                        $this->getClassName(),
                         $refund->getId()
                     )
                 );
-                $this->tableRows[] = [
-                    $subscriptionPayment->getId(),
-                    "--",
-                    $refund->getId(),
-                    "--",
-                    "<error>FAILED</error>",
-                    "Payment not found"
+                $this->results[] = [
+                    self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
+                    self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_REFUND,
+                    self::RESULTS_MODEL_ID => $refund->getId(),
+                    self::RESULTS_ACTION => "FAILED",
+                    self::RESULTS_FAIL_MESSAGE => "Payment not found"
                 ];
                 return;
             }
@@ -838,41 +889,41 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
                 ->firstWhere("parent_id", $paymentToRefund->getShopifyId());
 
             if (is_null($transactionData)) {
-                $this->error(
+                $this->logError(
                     sprintf(
-                        "Shopify did not return a transaction for our Payment ID %s, attempting for Refund ID %s. Refund cannot be sent to Shopify",
+                        "%s: Shopify did not return a transaction for our Payment ID %s, attempting for Refund ID %s. Refund cannot be sent to Shopify",
+                        $this->getClassName(),
                         $paymentToRefund->getId(),
                         $refund->getId()
                     )
                 );
-                $this->tableRows[] = [
-                    $subscriptionPayment->getId(),
-                    "--",
-                    $refund->getId(),
-                    "--",
-                    "<error>FAILED</error>",
-                    "Payment not in calculated refund"
+                $this->results[] = [
+                    self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
+                    self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_REFUND,
+                    self::RESULTS_MODEL_ID => $refund->getId(),
+                    self::RESULTS_ACTION => "FAILED",
+                    self::RESULTS_FAIL_MESSAGE => "Payment not in calculated refund"
                 ];
                 return;
             }
 
             // safety check that we're not trying to refund more than we're allowed
             if ($refund->getRefundedAmount() > floatval($transactionData["maximum_refundable"])) {
-                $this->error(
+                $this->logError(
                     sprintf(
-                        "Attempting to refund %s for Refund ID %s, which exceeds the maximum_refundable of %s. Refund cannot be sent to Shopify",
+                        "%s: Attempting to refund %s for Refund ID %s, which exceeds the maximum_refundable of %s. Refund cannot be sent to Shopify",
+                        $this->getClassName(),
                         number_format($refund->getRefundedAmount(), 2),
                         $refund->getId(),
                         $transactionData["maximum_refundable"]
                     )
                 );
-                $this->tableRows[] = [
-                    $subscriptionPayment->getId(),
-                    "--",
-                    $refund->getId(),
-                    "--",
-                    "<error>FAILED</error>",
-                    "Refund amount too high"
+                $this->results[] = [
+                    self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
+                    self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_REFUND,
+                    self::RESULTS_MODEL_ID => $refund->getId(),
+                    self::RESULTS_ACTION => "FAILED",
+                    self::RESULTS_FAIL_MESSAGE => "Refund amount too high"
                 ];
                 return;
             }
@@ -906,18 +957,18 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
                 $this->entityManager->refresh($refund);
 
                 $this->shopifyIds->push($refundShopifyId);
-                $this->tableRows[] = [
-                    $subscriptionPayment->getId(),
-                    "--",
-                    $refund->getId(),
-                    $refund->getRefundedAmount(),
-                    "--",
-                    $refundShopifyId
+                $this->results[] = [
+                    self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                    self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_REFUND,
+                    self::RESULTS_MODEL_ID => $refund->getId(),
+                    self::RESULTS_AMOUNT => $refund->getRefundedAmount(),
+                    self::RESULTS_SHOPIFY_ID => $refundShopifyId
                 ];
             } catch (\Doctrine\ORM\Exception\ORMException $e) {
-                $this->error(
+                $this->logError(
                     sprintf(
-                        "Failed to save shopify_id for refund ID %s: %s",
+                        "%s: Failed to save shopify_id for refund ID %s: %s",
+                        $this->getClassName(),
                         $refund->getId(),
                         $e->getMessage()
                     )
@@ -950,9 +1001,10 @@ class SyncSubscriptionPaymentsToShopifyOrders extends Command
     /**
      * @inheritDoc
      */
-    protected function getShopifyResourceClass(): string
+    protected function getLimit(): ?int
     {
-        return SubscriptionPayment::class;
+        // limits were already applied in the initial command
+        return null;
     }
 
     /**
