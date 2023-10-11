@@ -66,7 +66,10 @@ class RevenueCatService
             foreach ($entitlements as $entitlement) {
                 $productIdentifier = $entitlement->product_identifier;
                 $subscriptionData = $subscriptions->$productIdentifier;
-                if (Carbon::parse($subscriptionData->expires_date) >= now()->subDays(7)) {
+                if (Carbon::parse($subscriptionData->expires_date) >= now()->subDays(config(
+                                                                                         'ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only',
+                                                                                         7
+                                                                                     ))) {
                     $active = true;
                 }
                 $type = (strtolower($subscriptionData->store) == 'app_store') ? 'apple' : 'google';

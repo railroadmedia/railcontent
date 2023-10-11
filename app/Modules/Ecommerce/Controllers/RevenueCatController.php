@@ -949,7 +949,10 @@ class RevenueCatController extends Controller
             $entitlements = $apiResponse->subscriber->entitlements;
 
             foreach ($entitlements as $entitlement) {
-                if (Carbon::parse($entitlement->expires_date) >= now()->subDays(7)) {
+                if (Carbon::parse($entitlement->expires_date) >= now()->subDays(config(
+                                                                                    'ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only',
+                                                                                    7
+                                                                                ))) {
                     $active = true;
                     $subscription = $apiResponse->subscriber->subscriptions->{$entitlement->product_identifier};
                     $store = (strtolower($subscription->store) == 'app_store') ? 'apple_store' : 'google_store';
@@ -997,7 +1000,10 @@ class RevenueCatController extends Controller
         $active = false;
 
         foreach ($entitlements as $entitlement) {
-            if (Carbon::parse($entitlement->expires_date) >= now()->subDays(7)) {
+            if (Carbon::parse($entitlement->expires_date) >= now()->subDays(config(
+                                                                                'ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only',
+                                                                                7
+                                                                            ))) {
                 $active = true;
                 $subscription = $subscriptions->{$entitlement->product_identifier};
                 $store = (strtolower($subscription->store) == 'app_store') ? 'apple_store' : 'google_store';
