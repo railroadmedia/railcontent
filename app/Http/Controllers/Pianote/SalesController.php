@@ -25,26 +25,17 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote']);
     }
-
-    public function restart()
-    {
-        return view('pianote.sales.restart', ['theme' => 'pianote']);
-    }
     public function homeMonth()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'month' => true]);
     }
+    public function promo()
+    {
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true']);
+    }
     public function trial()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
-    }
-    public function trialPosters()
-    {
-        return view('pianote.sales.posters-trial', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
-    }
-    public function trialChords()
-    {
-        return view('pianote.sales.chords-trial', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true]);
     }
     public function trialSongs()
     {
@@ -54,9 +45,18 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true', 'beginnerVersion' => 'true']);
     }
-    public function promo()
+
+    public function trialPosters()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true']);
+        return view('pianote.sales.posters-trial', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
+    }
+    public function trialChords()
+    {
+        return view('pianote.sales.chords-trial', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
+    }
+    public function restart()
+    {
+        return view('pianote.sales.restart', ['theme' => 'pianote']);
     }
     public function promoSS()
     {
