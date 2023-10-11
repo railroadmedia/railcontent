@@ -121,7 +121,7 @@
     <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="quietkick" class="h-12 sm:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/280x0/filters:quality(95)/marketing/drumeo/shop/padstand/padstand-logo.png"><br>
+                <img alt="logo" class="h-12 sm:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/280x0/filters:quality(95)/marketing/drumeo/shop/padstand/padstand-logo.png"><br>
                 <h2 class="leading-tight my-4"><strong>Practice anywhere with</strong><br class="hidden sm:inline"> perfect height and ergonomics.</h2>
                 <h3 class="leading-tight">
                     @if(floatval($productPrices['padstand']->price) > floatval($productPrices['padstand']->discounted_price))
@@ -333,7 +333,7 @@
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')"></div></div>
                 </div>
             </div>
-            <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: Quietkick/Sticks/Pad are not included.</em></p>
+            <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: QuietPad/Sticks/Pad are not included.</em></p>
         </div>
     </section>
 
@@ -341,7 +341,7 @@
         <section class="content-section text-center customize px-4 lg:px-6" style="background:#173c59 url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/shop/stickbag/order-bg.jpg') center center/cover;">
             <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to right, rgba(7,23,43,0.5), rgba(26,32,38,0.5));"></div>
             <div class="container mx-auto relative z-20">
-                <img alt="quietkick logo" class="h-14 sm:h-20 mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/shop/padstand/padstand-logo.png"><br>
+                <img alt="logo" class="h-14 sm:h-20 mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/shop/padstand/padstand-logo.png"><br>
 
                 @if( $products['padstand']->getStockAvailability() > 1 && !empty($products['padstand']->getStockAvailability()))
 
