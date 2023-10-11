@@ -20,7 +20,7 @@
                 <button
                     class="tw-flex tw-items-center tw-w-full tw-px-[10px] tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
                     @click.prevent="() => {
-                        $emit('onSort', item.key);
+                        $emit('onSort', item.value)
                         $emit('onClose');
                     }"
                 >

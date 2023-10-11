@@ -11,7 +11,6 @@
     import { onMounted, ref } from 'vue';
     import FilterMultiSelectionItem from './FilterMultiSelectionItem';
     import FilterSingleSelectionItem from './FilterSingleSelectionItem';
-    import { throttle } from 'lodash';
 
     const props = defineProps({
         multiSelectColumns: {
@@ -36,22 +35,22 @@
          let newSelection = {...props.selectedFilters};
 
          if (newSelection[category]){
-            const isChecked = newSelection[category].find((f)=> f === item.key);
+            const isChecked = newSelection[category].find((f)=> f === item.value);
 
             if (isChecked) {
-                newSelection[category] = newSelection[category].filter((f) => f !== item.key);
+                newSelection[category] = newSelection[category].filter((f) => f !== item.value);
 
                 if(newSelection[category].length === 0) {
                     delete newSelection[category];
                 }
             }
             else {
-                newSelection[category].push(item.key);
+                newSelection[category].push(item.value);
             }
 
          }
          else {
-             newSelection[category] = [item.key];
+             newSelection[category] = [item.value];
          }
 
          emit('on-filter-click-handle', newSelection);
