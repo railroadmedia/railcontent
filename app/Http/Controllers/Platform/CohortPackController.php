@@ -139,10 +139,13 @@ class CohortPackController
             $product = $this->productRepository->bySku($sku);
 
             if (config('shopify.enabled')) {
-                $this->userAccessPermissionsService->AddUserAccessPermissionsForProducts(
+                $productId = $product->getId();
+                $userId = $user->getId();
+                $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
                     $user->getId(),
                     [$product->getId()],
                     Carbon::now(),
+                    "challenge-$productId-$userId",
                     UserAccessPermissionsSourceEnum::Challenges
                 );
             } else {

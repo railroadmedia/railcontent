@@ -56,8 +56,6 @@ class AccessCodeJsonController extends Controller
      */
     private UserProviderInterface $userProvider;
 
-    private UserAccessPermissionsService $userAccessPermissionsService;
-
     /**
      * AccessCodeJsonController constructor.
      *
@@ -67,7 +65,6 @@ class AccessCodeJsonController extends Controller
      * @param PermissionService $permissionService
      * @param ProductRepository $productRepository
      * @param UserProviderInterface $userProvider
-     * @param UserAccessPermissionsService $userAccessPermissionsService
      */
     public function __construct(
         AccessCodeRepository $accessCodeRepository,
@@ -76,7 +73,6 @@ class AccessCodeJsonController extends Controller
         PermissionService $permissionService,
         ProductRepository $productRepository,
         UserProviderInterface $userProvider,
-        UserAccessPermissionsService $userAccessPermissionsService
     ) {
         $this->accessCodeRepository = $accessCodeRepository;
         $this->accessCodeService = $accessCodeService;
@@ -84,7 +80,6 @@ class AccessCodeJsonController extends Controller
         $this->permissionService = $permissionService;
         $this->productRepository = $productRepository;
         $this->userProvider = $userProvider;
-        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
     /**
@@ -160,25 +155,6 @@ class AccessCodeJsonController extends Controller
         );
 
         $rawAccessCode = $request->get('access_code');
-
-        /*
-         * SRR-37: Push new order into Shopify
-         * Executing this before claiming access code as it's simpler to cancel the order afterwards
-         *  in case there's an error when claiming
-         */
-        $productIds = $this->accessCodeService->getAccessCodeProducts($rawAccessCode);
-
-        /*
-         * SRR-37: Update user permissions
-         */
-        if (config('shopify.enabled')) {
-            $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
-                $user->getId(),
-                $productIds,
-                Carbon::now(),
-                UserAccessPermissionsSourceEnum::AccessCode,
-            );
-        }
 
         $accessCode = $this->accessCodeService->claim($rawAccessCode, $user, $request->get('context'));
 

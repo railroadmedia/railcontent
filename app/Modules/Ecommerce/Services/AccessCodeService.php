@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use Carbon\Carbon;
 use Datetime;
 use Doctrine\ORM\Exception\ORMException;
@@ -46,6 +47,11 @@ class AccessCodeService
     private AccessCodeRepository $accessCodeRepository;
 
     /**
+     * @var UserAccessPermissionsService
+     */
+    private UserAccessPermissionsService $userAccessPermissionsService;
+
+    /**
      * AccessCodeService constructor.
      *
      * @param EcommerceEntityManager $entityManager
@@ -59,13 +65,15 @@ class AccessCodeService
         ProductRepository $productRepository,
         SubscriptionRepository $subscriptionRepository,
         UserProductService $userProductService,
-        AccessCodeRepository $accessCodeRepository
+        AccessCodeRepository $accessCodeRepository,
+        UserAccessPermissionsService $userAccessPermissionsService
     ) {
         $this->entityManager = $entityManager;
         $this->productRepository = $productRepository;
         $this->subscriptionRepository = $subscriptionRepository;
         $this->userProductService = $userProductService;
         $this->accessCodeRepository = $accessCodeRepository;
+        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
     /**
@@ -89,6 +97,11 @@ class AccessCodeService
         $accessCode = $this->accessCodeRepository->findOneBy(['code' => $rawAccessCode]);
         if (!$accessCode) {
             throw new Exception("Access code does not exist!");
+        }
+
+        if ($accessCode->getIsClaimed()) {
+            // Can't claim a code that's already claimed
+            throw new Exception("Access code already claimed");
         }
 
         if (!config('shopify.enabled')) {
@@ -312,6 +325,19 @@ class AccessCodeService
 
                 event(new UserProductCreated($userProduct));
             }
+        } else {
+            /*
+             * SRR-37: Update user permissions
+             */
+            $productIds = $this->getAccessCodeProducts($rawAccessCode);
+
+            $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
+                $user->getId(),
+                $productIds,
+                Carbon::now(),
+                $accessCode->getId(),
+                UserAccessPermissionsSourceEnum::AccessCode,
+            );
         }
 
         $accessCode->setIsClaimed(true);
