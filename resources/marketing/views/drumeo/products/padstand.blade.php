@@ -7,7 +7,7 @@
     <meta name="description" content="Practice anywhere with perfect height and ergonomics.">
     <meta property="og:description" content="Practice anywhere with perfect height and ergonomics.">
 
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/padstand/share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/shop/padstand/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -152,15 +152,27 @@
             <h2 class="leading-tight"><strong>Somebody had to do it.</strong></h2>
             <p class="leading-normal mt-2 mb-5">
                 For years, you’ve balanced your practice pad on your lap, coffee table, or worse…<br class="hidden sm:inline">
-                A standard snare stand with claws overhanging like a bad overbite 😬. So we <br class="hidden sm:inline">
-                engineered a custom practice pad stand that fits any pad perfectly:</p>
+                A standard snare stand with claws overhanging like a bad overbite 😬.<br class="hidden sm:inline">
+                So we engineered a custom stand that fits any practice pad perfectly:</p>
             @php
                 $gridItems = [
+                    [
+                     'icon' => 'marketing/drumeo/shop/padstand/shorter-claws-icon.svg',
+                     'img' => 'marketing/drumeo/shop/padstand/shorter-claws-icon-m.png',
+                    'title' => 'Shorter Claws.',
+                    'desc' => 'The PadStand features shorter claws to grip your practice pad perfectly with no overhang. That means you can practice your rudiments without dodging snare claws.',
+                    ],
+                    [
+                     'icon' => 'marketing/drumeo/shop/padstand/extended-height-icon.svg',
+                     'img' => 'marketing/drumeo/shop/padstand/extended-height-icon-m.png',
+                    'title' => 'Extended Height. ',
+                    'desc' => 'Snare drums are deeper than practice pads – so why would you use the same stand? The PadStand is taller so you can sit up straight and run rudiments with perfect posture.',
+                    ],
                     [
                      'icon' => 'marketing/drumeo/shop/padstand/rotated-basket-icon.svg',
                      'img' => 'marketing/drumeo/shop/padstand/rotated-basket-icon-m.png',
                     'title' => 'Rotated Basket.',
-                    'desc' => 'And just in case you’re still worried about claws, the PadStand basket is rotated 90 degrees to ensure you can practice as ergonomically as possible. This makes practice pad work more comfortable and translates better to the kit.',
+                    'desc' => 'And just in case you’re still worried about claws… the PadStand basket is rotated 90 degrees to ensure you can practice as ergonomically as possible. ',
                     ],
                     [
                      'icon' => 'marketing/drumeo/shop/padstand/lightweight-icon.svg',
@@ -172,19 +184,7 @@
                      'icon' => 'marketing/drumeo/shop/padstand/blue-tips-icon.svg',
                      'img' => 'marketing/drumeo/shop/padstand/blue-tips-icon-m.png',
                     'title' => 'Cool Blue Tips.',
-                    'desc' => ' The basket and feet are in custom Drumeo blue so you’ll never confuse your practice stand for your real snare stand.',
-                    ],
-                    [
-                     'icon' => 'marketing/drumeo/shop/padstand/shorter-claws-icon.svg',
-                     'img' => 'marketing/drumeo/shop/padstand/shorter-claws-icon-m.png',
-                    'title' => 'Shorter Claws.',
-                    'desc' => 'No more overbite on your snare stand 😬. The PadStand features custom cut claws to grip your practice pad perfectly. That means you can practice your rudiments without dodging snare claws.',
-                    ],
-                    [
-                     'icon' => 'marketing/drumeo/shop/padstand/extended-height-icon.svg',
-                     'img' => 'marketing/drumeo/shop/padstand/extended-height-icon-m.png',
-                    'title' => 'Extended Height. ',
-                    'desc' => 'Practice pads are WAY thinner than your snare drum – so why would you use the same stand? The PadStand is taller than normal snare stands so you can sit up straight and run rudiments with perfect posture.',
+                    'desc' => 'The basket and feet are in custom Drumeo blue so you’ll never confuse your PadStand for your snare stand. ',
                     ],
                 ];
             @endphp
@@ -192,24 +192,21 @@
                 <div class="w-1/4 pr-3">
                     <div>
                         <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[3]['icon'] }}"
-                        >
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[0]['icon'] }}">
+                        <h6 class="my-2"><strong>{{ $gridItems[0]['title'] }}</strong></h6>
+                        <p class="text-sm">{{ $gridItems[0]['desc'] }}</p>
+                    </div>
+                    <div class="my-10">
+                        <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[3]['icon'] }}">
                         <h6 class="my-2"><strong>{{ $gridItems[3]['title'] }}</strong></h6>
                         <p class="text-sm">{{ $gridItems[3]['desc'] }}</p>
                     </div>
-                    <div class="my-7">
-                        <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[1]['icon'] }}"
-                        >
-                        <h6 class="my-2"><strong>{{ $gridItems[1]['title'] }}</strong></h6>
-                        <p class="text-sm">{{ $gridItems[1]['desc'] }}</p>
-                    </div>
                     <div>
                         <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[2]['icon'] }}"
-                        >
-                        <h6 class="my-2"><strong>{{ $gridItems[2]['title'] }}</strong></h6>
-                        <p class="text-sm">{{ $gridItems[2]['desc'] }}</p>
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[4]['icon'] }}">
+                        <h6 class="my-2"><strong>{{ $gridItems[4]['title'] }}</strong></h6>
+                        <p class="text-sm">{{ $gridItems[4]['desc'] }}</p>
                     </div>
                 </div>
                 <div class="w-1/2">
@@ -218,19 +215,17 @@
                     >
                 </div>
                 <div class="w-1/4 pl-3">
-                    <div class="mt-16 mb-10">
+                    <div class="mt-20 mb-14">
                         <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[0]['icon'] }}"
-                        >
-                        <h6 class="my-2"><strong>{{ $gridItems[0]['title'] }}</strong></h6>
-                        <p class="text-sm">{{ $gridItems[0]['desc'] }}</p>
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[2]['icon'] }}">
+                        <h6 class="my-2"><strong>{{ $gridItems[2]['title'] }}</strong></h6>
+                        <p class="text-sm">{{ $gridItems[2]['desc'] }}</p>
                     </div>
                     <div>
                         <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[4]['icon'] }}"
-                        >
-                        <h6 class="my-2"><strong>{{ $gridItems[4]['title'] }}</strong></h6>
-                        <p class="text-sm">{{ $gridItems[4]['desc'] }}</p>
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[1]['icon'] }}">
+                        <h6 class="my-2"><strong>{{ $gridItems[1]['title'] }}</strong></h6>
+                        <p class="text-sm">{{ $gridItems[1]['desc'] }}</p>
                     </div>
                 </div>
             </div>

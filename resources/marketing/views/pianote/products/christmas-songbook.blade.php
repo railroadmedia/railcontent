@@ -47,7 +47,7 @@
             text-rendering: auto;
             opacity: 1;
             line-height: 1;
-            font-family: "Font Awesome 5 Pro";
+            font-family: "Font Awesome 6 Pro";
             font-weight: 300;
             color: #f61a30;
             font-size: 28px;
@@ -140,35 +140,35 @@
 
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container max-w-4xl mx-auto">
-            <h3 class="text-center"><strong>Original & Simplified <br class="inline sm:hidden"> Arrangements of Every Song</strong></h3>
-            <p class="leading-normal mt-4 sm:mt-5 mb-7 sm:mb-10 mx-auto max-w-2xl">
-                <span class="text-dull-navy"><em>Perfect for beginners<br class="inline sm:hidden"> and intermediate players.</em></span>
-                <br><br>
-                Christmas songs are better when they’re shared.
-                <br><br>
-                That’s why we’ve created simplified arrangements for every song in this book. Perfect for beginners, they are easy to play while still keeping the joy and feeling of the original piece.
-                <br><br>
-                Want to know what that sounds like?
-                <br><br>
-                Click below to hear for yourself.</p>
+{{--    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">--}}
+{{--        <div class="container max-w-4xl mx-auto">--}}
+{{--            <h3 class="text-center"><strong>Original & Simplified <br class="inline sm:hidden"> Arrangements of Every Song</strong></h3>--}}
+{{--            <p class="leading-normal mt-4 sm:mt-5 mb-7 sm:mb-10 mx-auto max-w-2xl">--}}
+{{--                <span class="text-dull-navy"><em>Perfect for beginners<br class="inline sm:hidden"> and intermediate players.</em></span>--}}
+{{--                <br><br>--}}
+{{--                Christmas songs are better when they’re shared.--}}
+{{--                <br><br>--}}
+{{--                That’s why we’ve created simplified arrangements for every song in this book. Perfect for beginners, they are easy to play while still keeping the joy and feeling of the original piece.--}}
+{{--                <br><br>--}}
+{{--                Want to know what that sounds like?--}}
+{{--                <br><br>--}}
+{{--                Click below to hear for yourself.</p>--}}
 
-            <div class="flex flex-wrap text-left mx-auto mt-5 sm:mt-7">
-                <div class="w-full sm:w-1/2 sm:px-2 mb-4 sm:mb-0">
-                    <video class="example-video rounded-xl overflow-hidden w-full" controls poster="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/shop/christmas-songbook/original-thumb.png" src="https://player.vimeo.com/progressive_redirect/playback/844377509/rendition/360p/file.mp4?loc=external&signature=0dc3b6476a403c1b90b438937802ce3bbd5f17c6e8677cfcb66e8489ef2d12db"></video>
-                </div>
-                <div class="w-full sm:w-1/2 sm:px-2">
-                    <video class="example-video rounded-xl overflow-hidden w-full" controls poster="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/shop/christmas-songbook/simplified-thumb.png" src="https://player.vimeo.com/progressive_redirect/playback/844377537/rendition/360p/file.mp4?loc=external&signature=53c2216a9cad739dcae352c0102d39e5c39074c2117e77d0e93bfb2b568c823e"></video>
-                </div>
-            </div>
-        </div>
-    </section>
+{{--            <div class="flex flex-wrap text-left mx-auto mt-5 sm:mt-7">--}}
+{{--                <div class="w-full sm:w-1/2 sm:px-2 mb-4 sm:mb-0">--}}
+{{--                    <video class="example-video rounded-xl overflow-hidden w-full" controls poster="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/shop/christmas-songbook/original-thumb.png" src="https://player.vimeo.com/progressive_redirect/playback/844377509/rendition/360p/file.mp4?loc=external&signature=0dc3b6476a403c1b90b438937802ce3bbd5f17c6e8677cfcb66e8489ef2d12db"></video>--}}
+{{--                </div>--}}
+{{--                <div class="w-full sm:w-1/2 sm:px-2">--}}
+{{--                    <video class="example-video rounded-xl overflow-hidden w-full" controls poster="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/shop/christmas-songbook/simplified-thumb.png" src="https://player.vimeo.com/progressive_redirect/playback/844377537/rendition/360p/file.mp4?loc=external&signature=53c2216a9cad739dcae352c0102d39e5c39074c2117e77d0e93bfb2b568c823e"></video>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
 
     <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/shop/christmas-songbook/sample-bg.jpg');">
         <h3 class="leading-tight"><strong>Take A Look Inside.</strong></h3>
         <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative" style="bottom:-7px"></i> <em>Click to see inside the book!</em> <i class="fa-light fa-arrow-turn-down ml-1 relative" style="bottom:-7px"></i></p>
-        <a target="_blank" href="todo" class="relative">
+        <a target="_blank" href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/shop/christmas-songbook/preview-christmas-songbook.pdf" class="relative">
             <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/shop/christmas-songbook/piano-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
             <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/shop/christmas-songbook/piano.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
         </a>
@@ -262,9 +262,9 @@
 
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         <img class="h-16 absolute top-0 right-0 z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/shop/christmas-songbook/free-shipping-badge.png">
-                        <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full text-dull-navy uppercase" style="background-color:#bbd4d6;" >BEST DEAL</p>
+                        <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full text-dull-navy uppercase bg-pianote text-white" >BEST DEAL</p>
                         <a href="/ecommerce/add-to-cart?locked=true&product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,christmas-songbook:1,christmas-song-book-digital:1,piano-chords-and-scales-guide:1,new-piano-players-start-here:1,easy-chords:1"
-                            class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2" style="border-color:#bbd4d6;">
+                            class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-pianote">
                             <div class="bg-white px-3 py-6 md:py-9">
                                 <h4 class="mb-2 sm:mb-3"><strong>Holiday Bundle</strong></h4>
                                 <img class="h-28 lg:h-32 transition-opacity opacity-0"
@@ -276,7 +276,7 @@
                                 <br>
                                 <h4 class="inline-block leading-tight"><strong>Free SongBook</strong></h4>
                                 <p class="text-sm"><em>with annual Pianote Membership</em></p>
-                                <div class="join my-5 smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" style="color:#13618B;background-color:#bbd4d6;">Get Started</div>
+                                <div class="join my-5 smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Get Started</div>
                                 <p class="text-sm mb-1.5 text-pianote"><strong>Annual Pianote Membership</strong> ($240/yr)</p>
                                 <p class="text-sm mb-1.5">Christmas Songbook ($49 value)</p>
                                 <p class="text-sm mb-1.5">Digital Book (10 songs) ($10 value)</p>
