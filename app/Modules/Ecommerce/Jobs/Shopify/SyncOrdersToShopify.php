@@ -374,6 +374,19 @@ class SyncOrdersToShopify implements ShouldQueue
      */
     private function syncOrder(Order $order, bool $fresh, ?int $simulatedShopifyId): void
     {
+        // safety check: we have many bad entries carried over from the old ecommerce system, that don't have any
+        // order items, which is invalid in Shopify. If we don't have any order items, skip this order
+        if ($order->getOrderItems()->isEmpty()) {
+            $this->results[] = [
+                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_WARNING,
+                self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_ORDER,
+                self::RESULTS_MODEL_ID => $order->getId(),
+                self::RESULTS_ACTION => "SKIPPED",
+                self::RESULTS_FAIL_MESSAGE => "No Order Items"
+            ];
+            return;
+        }
+
         // STEP 1: determine if updating or creating
         $isCreating = $fresh || is_null($order->getShopifyId());
         if ($isCreating) {
@@ -802,6 +815,8 @@ class SyncOrdersToShopify implements ShouldQueue
      */
     private function createOrderItems(Order $order): array
     {
+        $orderItemsData = [];
+
         // Doctrine for some reason performs db queries to get the order items' attributes
         // which is causing a bottleneck, so we'll get the Eloquent models
         $orderModel = \App\Modules\Ecommerce\Models\Order::query()
