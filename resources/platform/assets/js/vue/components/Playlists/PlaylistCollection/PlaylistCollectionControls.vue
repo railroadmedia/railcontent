@@ -2,7 +2,7 @@
     import { onBeforeMount, watch, ref, inject, reactive } from 'vue';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
     import { usePlaylistsStore } from '../../../../stores/playlists';
-    import FilterWrapper from '../../Filter/FilterWrapper.vue';
+    // import FilterWrapper from '../../Filter/FilterWrapper.vue';
 
     //Inject
     const token = inject('csrf_token');
@@ -143,27 +143,27 @@
 <template>
     <nav class="tw-flex tw-my-4 tw-w-full tw-flex-wrap md:tw-flex-nowrap">
         <div class="tw-w-full">
-            <FilterWrapper
-                title="All Playlists"
-                :search-term="state.searchTerm"
-                :sort-options="sortOptions"
-                :multi-select-columns="categories"
-                :selected-filters="state.selectedFilters"
-                @on-filter-click="handleFilterChange"
-                @handle-content-sort="handleSortChange"
-                @handle-search-change="handleSearchChange"
-                @handle-search-submit="handleSearchSubmit"
-            >
-                <template #viewToggleButton>
-                    <button
-                        class="tw-h-[40px] tw-text-xs tw-uppercase tw-font-bebas-neue tw-px-0.5 tw-text-[#000C17] dark:tw-text-white tw-ml-4"
-                        @click="() => emit('onUpdateListView', !isListView)"
-                        title="Toggle List/Grid View"
-                    >
-                        <musora-icon class="tw-w-[24px]" :icon-name="isListView ? 'list-view' : 'grid-view'" />
-                    </button>
-                </template>
-            </FilterWrapper>
+<!--            <FilterWrapper-->
+<!--                title="All Playlists"-->
+<!--                :search-term="state.searchTerm"-->
+<!--                :sort-options="sortOptions"-->
+<!--                :multi-select-columns="categories"-->
+<!--                :selected-filters="state.selectedFilters"-->
+<!--                @on-filter-click="handleFilterChange"-->
+<!--                @handle-content-sort="handleSortChange"-->
+<!--                @handle-search-change="handleSearchChange"-->
+<!--                @handle-search-submit="handleSearchSubmit"-->
+<!--            >-->
+<!--                <template #viewToggleButton>-->
+<!--                    <button-->
+<!--                        class="tw-h-[40px] tw-text-xs tw-uppercase tw-font-bebas-neue tw-px-0.5 tw-text-[#000C17] dark:tw-text-white tw-ml-4"-->
+<!--                        @click="() => emit('onUpdateListView', !isListView)"-->
+<!--                        title="Toggle List/Grid View"-->
+<!--                    >-->
+<!--                        <musora-icon class="tw-w-[24px]" :icon-name="isListView ? 'list-view' : 'grid-view'" />-->
+<!--                    </button>-->
+<!--                </template>-->
+<!--            </FilterWrapper>-->
         </div>
         <!-- List/Grid Toggle -->
         <div class="tw-hidden md:tw-block lg:tw-ml-2">

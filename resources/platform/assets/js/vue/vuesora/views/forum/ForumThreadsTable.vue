@@ -42,11 +42,11 @@
             </div>
         </div>
 
-        <FilterWrapper
-            :search-term="searchTerm"
-            @handle-search-change="handleSearchChange"
-            @handle-search-submit="getSearchResults"
-        />
+<!--        <FilterWrapper-->
+<!--            :search-term="searchTerm"-->
+<!--            @handle-search-change="handleSearchChange"-->
+<!--            @handle-search-submit="getSearchResults"-->
+<!--        />-->
 
         <div class="tw-flex tw-px-2 ">
             <div class="tw-flex tw-flex-col tw-mb-6 tw-w-full">
@@ -161,7 +161,7 @@ import ForumSearchResult from './_ForumSearchResult.vue';
 import Pagination from '../../components/Pagination.vue';
 import ClearableFilter from '../../components/ClearableFilter.vue';
 import ForumService from '../../assets/js/services/forums';
-import FilterWrapper from "../../../components/Filter/FilterWrapper.vue";
+// import FilterWrapper from "../../../components/Filter/FilterWrapper.vue";
 
 export default {
     name: 'ForumThreadsTable',
