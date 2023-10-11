@@ -33,13 +33,12 @@ class RevenueCatController extends Controller
      * @param RevenueCatGateway $revenueCatGateway
      */
     public function __construct(
-        RevenueCatService   $revenueCatService,
+        RevenueCatService $revenueCatService,
         SubscriptionService $subscriptionService,
-        UserProductService  $userProductService,
-        PaymentService      $paymentService,
-        RevenueCatGateway   $revenueCatGateway
-    )
-    {
+        UserProductService $userProductService,
+        PaymentService $paymentService,
+        RevenueCatGateway $revenueCatGateway
+    ) {
         $this->revenueCatService = $revenueCatService;
         $this->subscriptionService = $subscriptionService;
         $this->userProductService = $userProductService;
@@ -60,6 +59,7 @@ class RevenueCatController extends Controller
         }
         if (config('ecommerce.revenuecat_only') !== true) {
             Log::debug('revenuecat_only flag disabled');
+
             return response()->json();
         }
 
@@ -86,7 +86,12 @@ class RevenueCatController extends Controller
                 if (!$user) {
                     //TBD
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
-                    Log::error('RevenueCatController processNotification::INITIAL_PURCHASE - user not found email: ' . $email . ' original_app_user_id: ' . $data['event']['original_app_user_id']);
+                    Log::error(
+                        'RevenueCatController processNotification::INITIAL_PURCHASE - user not found email: '.
+                        $email.
+                        ' original_app_user_id: '.
+                        $data['event']['original_app_user_id']
+                    );
                     break;
                 }
 
@@ -150,7 +155,12 @@ class RevenueCatController extends Controller
                 if (!$user) {
                     //TBD
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
-                    Log::error('RevenueCatController processNotification::RENEWAL - user not found email: ' . $email . ' original_app_user_id: ' . $data['event']['original_app_user_id']);
+                    Log::error(
+                        'RevenueCatController processNotification::RENEWAL - user not found email: '.
+                        $email.
+                        ' original_app_user_id: '.
+                        $data['event']['original_app_user_id']
+                    );
                     break;
                 }
 
@@ -211,7 +221,12 @@ class RevenueCatController extends Controller
                 if (!$user) {
                     //TBD
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
-                    Log::error('RevenueCatController processNotification::PRODUCT_CHANGE - user not found email: ' . $email . ' original_app_user_id: ' . $data['event']['original_app_user_id']);
+                    Log::error(
+                        'RevenueCatController processNotification::PRODUCT_CHANGE - user not found email: '.
+                        $email.
+                        ' original_app_user_id: '.
+                        $data['event']['original_app_user_id']
+                    );
                     break;
                 }
 
@@ -257,7 +272,12 @@ class RevenueCatController extends Controller
                 );
                 if (!$user) {
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
-                    Log::error('RevenueCatController processNotification::CANCELLATION - user not found email: ' . $email . ' original_app_user_id: ' . $data['event']['original_app_user_id']);
+                    Log::error(
+                        'RevenueCatController processNotification::CANCELLATION - user not found email: '.
+                        $email.
+                        ' original_app_user_id: '.
+                        $data['event']['original_app_user_id']
+                    );
                     break;
                 }
 
@@ -339,7 +359,12 @@ class RevenueCatController extends Controller
                 );
                 if (!$user) {
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
-                    Log::error('RevenueCatController processNotification::EXPIRATION - user not found email: ' . $email . ' original_app_user_id: ' . $data['event']['original_app_user_id']);
+                    Log::error(
+                        'RevenueCatController processNotification::EXPIRATION - user not found email: '.
+                        $email.
+                        ' original_app_user_id: '.
+                        $data['event']['original_app_user_id']
+                    );
                     break;
                 }
 
@@ -402,18 +427,19 @@ class RevenueCatController extends Controller
      */
     private function getMusoraProduct(string $type, $event, mixed $productId)
     {
-        $store = $type . '_store';
+        $store = $type.'_store';
 
         if ($event['period_type'] == 'TRIAL') {
-            $productsMap = [config('ecommerce.' . $store . '_products_map_trial')[$productId]];
+            $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$productId]];
         } else {
-            $productsMap = [config('ecommerce.' . $store . '_products_map')[$productId]];
+            $productsMap = [config('ecommerce.'.$store.'_products_map')[$productId]];
         }
 
         if ($event['type'] != 'INITIAL_PURCHASE') {
             $productsMap = array_merge(
-                [config('ecommerce.' . $store . '_products_map')[$productId]],
-                [config('ecommerce.' . $store . '_products_map_trial')[$productId]]);
+                [config('ecommerce.'.$store.'_products_map')[$productId]],
+                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
+            );
         }
 
         $musoraProduct =
@@ -427,8 +453,8 @@ class RevenueCatController extends Controller
      * @param $productId1
      * @return string
      */
-    private function getProductId($productId1): string
-    {
+    private function getProductId($productId1)
+    : string {
         $productId = $productId1;
         if (strpos($productId, ':') !== false) {
             $productId = explode(':', $productId)[0];
@@ -443,8 +469,8 @@ class RevenueCatController extends Controller
      * @return mixed
      * @throws \Exception
      */
-    private function getCurrentRevenueCatSubscription($appUserId, string $productId): mixed
-    {
+    private function getCurrentRevenueCatSubscription($appUserId, string $productId)
+    : mixed {
         $subscriber = $this->revenueCatService->getSubscriber($appUserId);
 
         $revenueCatSubscriptions = (json_decode(json_encode($subscriber->subscriptions), true));
@@ -465,7 +491,7 @@ class RevenueCatController extends Controller
         $musoraSubscription =
             Subscription::query()
                 ->where('user_id', '=', $user->id)
-                ->where('type', '=', $type . '_subscription')
+                ->where('type', '=', $type.'_subscription')
                 ->whereIn(
                     'product_id',
                     $musoraProducts->pluck('id')
@@ -482,26 +508,26 @@ class RevenueCatController extends Controller
 
         if (!$user) {
             return response()->json([
-                'shouldCreateAccount' => true,
-            ]);
+                                        'shouldCreateAccount' => true,
+                                    ]);
         }
 
         if (!user() || (\user() && \user()->id !== $user->id)) {
             return response()->json([
-                'shouldLogin' => true,
-                'email' => $user->email,
-            ]);
+                                        'shouldLogin' => true,
+                                        'email' => $user->email,
+                                    ]);
         } else {
             if (\user()) {
                 $token = $user->createToken('');
                 $user->withAccessToken($token);
 
                 return response()->json([
-                    'success' => true,
-                    'token' => $token->plainTextToken,
-                    'tokenType' => 'bearer',
-                    'userId' => $user->id,
-                ]);
+                                            'success' => true,
+                                            'token' => $token->plainTextToken,
+                                            'tokenType' => 'bearer',
+                                            'userId' => $user->id,
+                                        ]);
             }
         }
     }
@@ -511,10 +537,14 @@ class RevenueCatController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function signupRevenuecat(Request $request){
+    public function signupRevenuecat(Request $request)
+    {
         $user = $this->revenueCatService->getSubscriber($request->get('original_app_user_id'));
-        $subscriber = json_decode(json_encode((array)$user),
-                            true);
+
+        $subscriber = json_decode(
+            json_encode((array)$user),
+            true
+        );
 
         if (!$subscriber || empty($subscriber['entitlements'])) {
             return response()->json([
@@ -522,7 +552,7 @@ class RevenueCatController extends Controller
                                     ]);
         }
 
-        return $this->checkSignupRestrictions($user->entitlements, $user->subscriptions);
+        return $this->checkSignupRestrictions($user->entitlements, $user->subscriptions, $user->original_app_user_id);
     }
 
     /**
@@ -532,17 +562,14 @@ class RevenueCatController extends Controller
      */
     public function purchaseIOS(Request $request)
     {
-        Log::debug('Redirect ecommerce purchase IOS to RevenueCat API:::' . $request->input('data.attributes.email'));
+        Log::debug('Redirect ecommerce purchase IOS to RevenueCat API:::'.$request->input('data.attributes.email'));
         Log::debug(var_export($request->all(), true));
 
         if (!\user()) {
-            $this->validate(
-                $request,
-                [
-                    'data.attributes.email' => 'required|email',
-                    'data.attributes.password' => 'required'
-                ]
-            );
+            $this->validate($request, [
+                                        'data.attributes.email' => 'required|email',
+                                        'data.attributes.password' => 'required',
+                                    ]);
         }
 
         $email = null;
@@ -572,7 +599,7 @@ class RevenueCatController extends Controller
 
         if (!\user()) {
             $parts = explode('@', $request->input('data.attributes.email'));
-            $user->display_name = $parts[0] . rand(10000, 99999);
+            $user->display_name = $parts[0].rand(10000, 99999);
             $user->setPassword($request->input('data.attributes.password'));
             $user->save();
         }
@@ -630,13 +657,10 @@ class RevenueCatController extends Controller
         Log::debug('Redirect ecommerce purchase Google to RevenueCat API');
         Log::debug(var_export($request->all(), true));
         if (!\user()) {
-            $this->validate(
-                $request,
-                [
-                    'data.attributes.email' => 'required|email',
-                    'data.attributes.password' => 'required'
-                ]
-            );
+            $this->validate($request, [
+                                        'data.attributes.email' => 'required|email',
+                                        'data.attributes.password' => 'required',
+                                    ]);
         }
 
         $email = null;
@@ -665,7 +689,7 @@ class RevenueCatController extends Controller
         );
         if (!user()) {
             $parts = explode('@', $request->input('data.attributes.email'));
-            $user->display_name = $parts[0] . rand(10000, 99999);
+            $user->display_name = $parts[0].rand(10000, 99999);
             $user->setPassword($request->input('data.attributes.password'));
             $user->save();
         }
@@ -726,8 +750,8 @@ class RevenueCatController extends Controller
         Log::debug(var_export($request->all(), true));
         if (empty($request->get('purchases', []))) {
             return response()->json([
-                'shouldSignup' => true,
-            ]);
+                                        'shouldSignup' => true,
+                                    ]);
         }
 
         foreach ($request->get('purchases') as $purchase) {
@@ -763,22 +787,22 @@ class RevenueCatController extends Controller
                     $userAuthToken = $token->plainTextToken;
 
                     return response()->json([
-                        'success' => true,
-                        'token' => $userAuthToken,
-                        'tokenType' => 'bearer',
-                        'userId' => $user->id,
-                    ]);
+                                                'success' => true,
+                                                'token' => $userAuthToken,
+                                                'tokenType' => 'bearer',
+                                                'userId' => $user->id,
+                                            ]);
                 }
 
                 return response()->json([
-                    'shouldLogin' => true,
-                    'email' => $user->email,
-                ]);
+                                            'shouldLogin' => true,
+                                            'email' => $user->email,
+                                        ]);
             } else {
                 return response()->json([
-                    'shouldCreateAccount' => true,
-                    'purchase' => $purchase,
-                ]);
+                                            'shouldCreateAccount' => true,
+                                            'purchase' => $purchase,
+                                        ]);
             }
         }
     }
@@ -796,8 +820,8 @@ class RevenueCatController extends Controller
         $receipt = $request->get('receipt', []);
         if (empty($receipt)) {
             return response()->json([
-                'shouldSignup' => true,
-            ]);
+                                        'shouldSignup' => true,
+                                    ]);
         }
         $revenuecatPurchase = $this->revenueCatGateway->purchase(
             $receipt,
@@ -814,8 +838,8 @@ class RevenueCatController extends Controller
 
         if (!$apiResponse) {
             return response()->json([
-                'shouldSignup' => true,
-            ]);
+                                        'shouldSignup' => true,
+                                    ]);
         }
 
         $user = $this->revenueCatService->syncSubscriber(
@@ -829,21 +853,21 @@ class RevenueCatController extends Controller
                 $userAuthToken = $token->plainTextToken;
 
                 return response()->json([
-                    'success' => true,
-                    'token' => $userAuthToken,
-                    'tokenType' => 'bearer',
-                    'userId' => $user->id,
-                ]);
+                                            'success' => true,
+                                            'token' => $userAuthToken,
+                                            'tokenType' => 'bearer',
+                                            'userId' => $user->id,
+                                        ]);
             }
 
             return response()->json([
-                'shouldLogin' => true,
-                'email' => $user->email,
-            ]);
+                                        'shouldLogin' => true,
+                                        'email' => $user->email,
+                                    ]);
         } else {
             return response()->json([
-                'shouldCreateAccount' => true,
-            ]);
+                                        'shouldCreateAccount' => true,
+                                    ]);
         }
     }
 
@@ -854,12 +878,12 @@ class RevenueCatController extends Controller
      */
     public function signupIOS(Request $request)
     {
-        Log::info('Attempting to apple signup for receipt: ' . $request->get('receipt'));
+        Log::info('Attempting to apple signup for receipt: '.$request->get('receipt'));
         $receipt = $request->get('receipt', []);
         if (empty($receipt)) {
             return response()->json([
-                'shouldSignup' => true,
-            ]);
+                                        'shouldSignup' => true,
+                                    ]);
         }
         $revenuecatPurchase = $this->revenueCatGateway->purchase(
             $receipt,
@@ -876,12 +900,16 @@ class RevenueCatController extends Controller
 
         if (!$apiResponse || !$apiResponse->subscriber || empty($apiResponse->subscriber->entitlements)) {
             return response()->json([
-                'shouldSignup' => true,
-            ]);
+                                        'shouldSignup' => true,
+                                    ]);
         }
         $entitlements = $apiResponse->subscriber->entitlements;
 
-        return $this->checkSignupRestrictions($entitlements, $apiResponse->subscriber->subscriptions);
+        return $this->checkSignupRestrictions(
+            $entitlements,
+            $apiResponse->subscriber->subscriptions,
+            $apiResponse->subscriber->original_app_user_id
+        );
     }
 
     /**
@@ -894,8 +922,8 @@ class RevenueCatController extends Controller
         $receipt = $request->get('purchases', []);
         if (empty($receipt)) {
             return response()->json([
-                'shouldSignup' => true,
-            ]);
+                                        'shouldSignup' => true,
+                                    ]);
         }
 
         $active = false;
@@ -915,8 +943,8 @@ class RevenueCatController extends Controller
 
             if (!$apiResponse || !$apiResponse->subscriber || empty($apiResponse->subscriber->entitlements)) {
                 return response()->json([
-                    'shouldSignup' => true,
-                ]);
+                                            'shouldSignup' => true,
+                                        ]);
             }
             $entitlements = $apiResponse->subscriber->entitlements;
 
@@ -928,37 +956,35 @@ class RevenueCatController extends Controller
 
                     //productId
                     $productId = $entitlement->product_identifier;
-                    $productsMap = array_merge(
-                        [config('ecommerce.' . $store . '_products_map')[$productId]],
-                        [config('ecommerce.' . $store . '_products_map_trial')[$productId]]
-                    );
+                    $productsMap = array_merge([config('ecommerce.'.$store.'_products_map')[$productId]],
+                                               [config('ecommerce.'.$store.'_products_map_trial')[$productId]]);
 
                     $musoraProduct =
                         Product::whereIn('sku', $productsMap)
                             ->first();
 
                     return response()->json([
-                        'shouldLogin' => true,
-                        'message' => 'You have an active ' .
-                            ucfirst($musoraProduct->brand ?? config('ecommerce.brand')) .
-                            ' account. Please login into your account. If you want to modify your payment plan please cancel your active subscription from device settings before.',
-                    ]);
+                                                'shouldLogin' => true,
+                                                'message' => 'You have an active '.
+                                                    ucfirst($musoraProduct->brand ?? config('ecommerce.brand')).
+                                                    ' account. Please login into your account. If you want to modify your payment plan please cancel your active subscription from device settings before.',
+                                            ]);
                 }
             }
         }
 
         if (!$active) {
             return response()->json([
-                'shouldRenew' => true,
-                'message' => 'You can not create multiple ' .
-                    ucfirst(config('ecommerce.brand')) .
-                    ' accounts under the same apple account. You already have an expired/cancelled membership. Please renew your membership.',
-            ]);
+                                        'shouldRenew' => true,
+                                        'message' => 'You can not create multiple '.
+                                            ucfirst(config('ecommerce.brand')).
+                                            ' accounts under the same apple account. You already have an expired/cancelled membership. Please renew your membership.',
+                                    ]);
         }
 
         return response()->json([
-            'shouldSignup' => true,
-        ]);
+                                    'shouldSignup' => true,
+                                ]);
     }
 
     /**
@@ -966,7 +992,7 @@ class RevenueCatController extends Controller
      * @param $subscriptions
      * @return \Illuminate\Http\JsonResponse
      */
-    private function checkSignupRestrictions($entitlements, $subscriptions)
+    private function checkSignupRestrictions($entitlements, $subscriptions, $revenuecatUserId)
     : \Illuminate\Http\JsonResponse {
         $active = false;
 
@@ -978,21 +1004,27 @@ class RevenueCatController extends Controller
 
                 //productId
                 $productId = $entitlement->product_identifier;
-                $productsMap = array_merge(
-                    [config('ecommerce.'.$store.'_products_map')[$productId]],
-                    [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
-                );
+                $productsMap = array_merge([config('ecommerce.'.$store.'_products_map')[$productId]],
+                                           [config('ecommerce.'.$store.'_products_map_trial')[$productId]]);
 
                 $musoraProduct =
                     Product::whereIn('sku', $productsMap)
                         ->first();
+                $musoraUser = $this->revenueCatService->getUser(null, $revenuecatUserId);
 
-                return response()->json([
-                                            'shouldLogin' => true,
-                                            'message' => 'You have an active '.
-                                                ucfirst($musoraProduct->brand ?? config('ecommerce.brand')).
-                                                ' account. Please login into your account. If you want to modify your payment plan please cancel your active subscription from device settings before.',
-                                        ]);
+                if ($musoraUser) {
+                    return response()->json([
+                                                'shouldLogin' => true,
+                                                'message' => 'You have an active '.
+                                                    ucfirst($musoraProduct->brand ?? config('ecommerce.brand')).
+                                                    ' account. Please login into your account. If you want to modify your payment plan please cancel your active subscription from device settings before.',
+                                                'email' => $musoraUser->getEmail(),
+                                            ]);
+                } else {
+                    return response()->json([
+                                                'shouldSignup' => true,
+                                            ]);
+                }
             }
         }
 
