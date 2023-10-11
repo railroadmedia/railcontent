@@ -121,7 +121,7 @@
     <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="quietkick" class="h-12 sm:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/280x0/filters:quality(95)/marketing/drumeo/shop/padstand/padstand-logo.png"><br>
+                <img alt="logo" class="h-12 sm:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/280x0/filters:quality(95)/marketing/drumeo/shop/padstand/padstand-logo.png"><br>
                 <h2 class="leading-tight my-4"><strong>Practice anywhere with</strong><br class="hidden sm:inline"> perfect height and ergonomics.</h2>
                 <h3 class="leading-tight">
                     @if(floatval($productPrices['padstand']->price) > floatval($productPrices['padstand']->discounted_price))
@@ -333,7 +333,7 @@
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')"></div></div>
                 </div>
             </div>
-            <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: Quietkick/Sticks/Pad are not included.</em></p>
+            <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: QuietPad/Sticks/Pad are not included.</em></p>
         </div>
     </section>
 
@@ -341,13 +341,17 @@
         <section class="content-section text-center customize px-4 lg:px-6" style="background:#173c59 url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/shop/stickbag/order-bg.jpg') center center/cover;">
             <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to right, rgba(7,23,43,0.5), rgba(26,32,38,0.5));"></div>
             <div class="container mx-auto relative z-20">
-                <img alt="quietkick logo" class="h-14 sm:h-20 mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/shop/padstand/padstand-logo.png"><br>
+                <img alt="logo" class="h-14 sm:h-20 mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/shop/padstand/padstand-logo.png"><br>
 
                 @if( $products['padstand']->getStockAvailability() > 1 && !empty($products['padstand']->getStockAvailability()))
 
                     <div class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl mx-auto">
                         <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                            <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >Save 34%</p>
+                            @if(floatval($productPrices['padstand']->price) > floatval($productPrices['padstand']->discounted_price))
+                                <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >
+                                    Save {{ round(100 - (100 * (floatval($productPrices['padstand']->discounted_price) / floatval($productPrices['padstand']->price)))) }}%
+                                </p>
+                            @endif
                             <a href="/ecommerce/add-to-cart?locked=true&product-array=padstand:1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
                                 <div class="bg-white px-3 py-5 md:py-7">
                                     <h4 class="mb-2 sm:mb-3"><strong>PadStand Only</strong></h4>
@@ -377,7 +381,7 @@
                         <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                             <img class="h-16 absolute top-0 right-0 z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/shop/stickbag/free-shipping-icon.svg">
                             <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-drumeo uppercase" >LAUNCH SPECIAL</p>
-                            <a href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,padstand:1,quietpad:1,rudiments-poster:1,Drumeo-VaterSticks:1"
+                            <a href="/ecommerce/add-to-cart?locked=true&promo-code=special&product-array=DLM-1-year:1,padstand:1,quietpad:1,rudiments-poster:1,Drumeo-VaterSticks:1"
                                 class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo">
                                 <div class="bg-white px-3 py-6 md:py-9">
                                     <h4 class="mb-2 sm:mb-3"><strong>Ultimate Practice Rig</strong></h4>
@@ -390,8 +394,8 @@
                                     <br>
                                     <h4 class="inline-block leading-tight"><strong>Free PadStand</strong></h4>
                                     <p class="text-sm"><em>with annual Drumeo Membership</em></p>
-                                    <div class="join my-5 drumeo smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">learn more</div>
-                                    <p class="text-sm mb-1.5 text-drumeo"><strong>Annual Drumeo Membership</strong> ($240/yr)</p>
+                                    <div class="join my-5 drumeo smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Add To Cart</div>
+                                    <p class="text-sm mb-1.5 text-drumeo"><strong>Annual Drumeo Membership</strong> ($200/yr)</p>
                                     <p class="text-sm mb-1.5"><strong>The world's best drum lessons.</strong></p>
                                     <p class="text-sm mb-1.5"><strong>5000+ popular songs</strong></p>
                                     <p class="text-sm mb-1.5"><strong>Unlimited Personal Support</strong></p>
