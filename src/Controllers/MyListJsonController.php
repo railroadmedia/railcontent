@@ -71,12 +71,13 @@ class MyListJsonController extends Controller
 
         $userPrimaryPlaylists =
             $this->userPlaylistsService->getUserPlaylist($userId, 'primary-playlist', $request->get('brand'));
-        if(empty($userPrimaryPlaylists)){
+
+        if($userPrimaryPlaylists instanceof Collection && $userPrimaryPlaylists->isEmpty()){
             $userPrimaryPlaylists =
                 $this->userPlaylistsService->getUserPlaylist($userId, 'user-playlist', $request->get('brand'));
         }
 
-        if (empty($userPrimaryPlaylists)) {
+        if ($userPrimaryPlaylists instanceof Collection && $userPrimaryPlaylists->isEmpty()) {
             $userPrimaryPlaylist = $this->userPlaylistsService->updateOrCeate([
                                                                                   'user_id' => $userId,
                                                                                   'type' => 'user-playlist',
@@ -122,7 +123,7 @@ class MyListJsonController extends Controller
         $userPrimaryPlaylist =
             $this->userPlaylistsService->getUserPlaylist($userId, 'primary-playlist', $request->get('brand'));
 
-        if(empty($userPrimaryPlaylist)){
+        if($userPrimaryPlaylist instanceof Collection && $userPrimaryPlaylist->isEmpty()){
             $userPrimaryPlaylist =
                 $this->userPlaylistsService->getUserPlaylist($userId, 'user-playlist', $request->get('brand'));
         }
