@@ -433,6 +433,8 @@ export default {
         submitEditForm() {
             this.$root.$emit('pageLoading');
 
+            const thisUserAccessPermission = this.userAccessPermissions.find(userAccessPermission => userAccessPermission.id === this.editingUserAccessPermission.id);
+
             userPermissionsApi.setUserPermission(this.editingUserAccessPermission.id, {
                 user_id: this.userId,
                 permission_id: this.$_permission_id.id,
@@ -441,6 +443,7 @@ export default {
                 days: this.$_nDays,
                 months: this.$_nMonths,
                 status: this.$_status,
+                revoked_at: (thisUserAccessPermission && thisUserAccessPermission.status != this.$_status && this.$_status=='revoked') ? this.moment(this.moment.now()).format('YYYY-MM-DD') : null,
             })
                 .then((response) => {
                     if (response) {
@@ -471,11 +474,12 @@ export default {
                 userPermissionsApi.setUserPermission(id, {
                     user_id: this.userId,
                     permission_id: thisUserAccessPermission.permission_id.id,
-                    start_date: thisUserAccessPermission.start_time,
+                    start_date: thisUserAccessPermission.start_date,
                     lifetime: thisUserAccessPermission.time_lifetime,
                     days: thisUserAccessPermission.time_days,
                     months: thisUserAccessPermission.time_months,
                     status: 'revoked',
+                    revoked_at: this.moment(this.moment.now()).format('YYYY-MM-DD HH:mm:ss'),
                 })
                     .then((response) => {
                         if (response) {

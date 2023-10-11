@@ -319,7 +319,7 @@ class UserAccessPermissionsService
         return new UserAccessPermissionsCollection($userId, $items);
     }
 
-    public function createOrUpdateUserAccessPermission($userId, $permissionId, $startTime,$timeDays, $timeMonths,$lifetime,$status,$userProductId = null)
+    public function createOrUpdateUserAccessPermission($userId, $permissionId, $startTime,$timeDays, $timeMonths,$lifetime,$status,$revokedAt=null,$userProductId = null)
     {
         $userAccessPermission = new UserAccessPermission();
         if($userProductId){
@@ -334,6 +334,9 @@ class UserAccessPermissionsService
         $userAccessPermission->time_months = $timeMonths;
         $userAccessPermission->time_lifetime = $lifetime ?? 0;
         $userAccessPermission->status = $status;
+        if($revokedAt){
+            $userAccessPermission->revoked_at = $revokedAt;
+        }
         $userAccessPermission->save();
 
         return $userAccessPermission;

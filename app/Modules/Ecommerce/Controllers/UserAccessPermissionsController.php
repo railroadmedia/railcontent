@@ -44,8 +44,8 @@ class UserAccessPermissionsController extends Controller
 
         $user = user();
         $userAccessPermission=null;
-        $userIsSuperAdmin = $this->permissionService->is($user->id, 'administrator')||$this->permissionService->is($user->id, 'it');
-        if($userIsSuperAdmin) {
+        $userAdmin = $this->permissionService->is($user->id, 'administrator');
+        if($userAdmin) {
             $userAccessPermission = $this->userAccessPermissionsService->createOrUpdateUserAccessPermission(
                 $request->get('user_id'),
                 $request->get('permission_id'),
@@ -62,16 +62,22 @@ class UserAccessPermissionsController extends Controller
 
     public function update($id, Request $request)
     {
-        $userAccessPermission = $this->userAccessPermissionsService->createOrUpdateUserAccessPermission(
-            $request->get('user_id'),
-            $request->get('permission_id'),
-            $request->get('start_date'),
-            $request->get('days'),
-            $request->get('months'),
-            $request->get('lifetime'),
-            $request->get('status'),
-            $id
-        );
+        $user = user();
+        $userAccessPermission=null;
+        $userAdmin = $this->permissionService->is($user->id, 'administrator');
+        if($userAdmin) {
+            $userAccessPermission = $this->userAccessPermissionsService->createOrUpdateUserAccessPermission(
+                $request->get('user_id'),
+                $request->get('permission_id'),
+                $request->get('start_date'),
+                $request->get('days'),
+                $request->get('months'),
+                $request->get('lifetime'),
+                $request->get('status'),
+                $request->get('revoked_at'),
+                $id
+            );
+        }
 
         return $userAccessPermission;
     }

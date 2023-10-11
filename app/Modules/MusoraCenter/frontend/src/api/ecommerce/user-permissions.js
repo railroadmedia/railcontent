@@ -33,7 +33,7 @@ export default {
     },
 
     /**
-     * Add a product to a users account
+     * Add a permission to a users account
      *
      * @param {String|Number} user_permission_id
      * @param {Number} days
@@ -43,6 +43,7 @@ export default {
      * @param {String|Number} user_id
      * @param {String|Number} lifetime
      * @param {String|Number} permission_id
+     * @param {String} revoked_at
      * @returns {Promise} - resolved promise with the response object
      */
     setUserPermission(user_permission_id, {
@@ -53,6 +54,7 @@ export default {
         days,
         months,
         status,
+        revoked_at
     }) {
         const url = user_permission_id ? `/ecommerce/user-access-permission/${user_permission_id}` : '/ecommerce/user-access-permission';
         const method = user_permission_id ? 'PATCH' : 'PUT';
@@ -67,7 +69,8 @@ export default {
                 lifetime,
                 days,
                 months,
-                status
+                status,
+                revoked_at
             },
         })
             .then(response => response)

@@ -45,22 +45,23 @@ class UserAccessPermissionsCollection
         }
 
         $userAccessPermissions = $userAccessPermissions
-            ->where('status', '!=', UserAccessPermissionsStatusEnum::Revoked->value)
             ->sortBy('start_time');
         $expirationDate = null;
         $startDate = null;
         /** @var UserAccessPermission $userAccessPermission */
         foreach ($userAccessPermissions as $userAccessPermission) {
-            if ($userAccessPermission->time_lifetime) {
+            if ($userAccessPermission->time_lifetime && $userAccessPermission->status != 'revoked') {
                 return [Carbon::parse($userAccessPermission->start_time), Carbon::maxValue()];
             }
             $startDate = $expirationDate != null && $expirationDate > $userAccessPermission->start_time
                 ? $startDate : Carbon::parse($userAccessPermission->start_time);
             $tempStartDate = $expirationDate != null && $expirationDate > $userAccessPermission->start_time
                 ? $expirationDate : Carbon::parse($userAccessPermission->start_time);
-            $expirationDate = $tempStartDate->clone()
+            $revoked_date =
+                ($userAccessPermission->status == 'revoked') ? Carbon::parse($userAccessPermission->revoked_at) : null;
+            $expirationDate = ($revoked_date)?$revoked_date:($tempStartDate->clone()
                 ->addDays($userAccessPermission->time_days)
-                ->addMonths($userAccessPermission->time_months);
+                ->addMonths($userAccessPermission->time_months));
             $userAccessPermission->actualStartTime = $tempStartDate;
             $userAccessPermission->actualExpirationTime = $expirationDate;
         }
