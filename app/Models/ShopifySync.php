@@ -10,6 +10,11 @@ class ShopifySync extends Model
 {
     use HasFactory;
 
+    public const RESOURCE_PRODUCT = "product";
+    public const RESOURCE_CUSTOMER = "customer";
+    public const RESOURCE_ORDER = "order";
+    public const RESOURCE_SUBSCRIPTION_PAYMENT = "subscription_payment";
+
     protected $guarded = [];
 
     protected $casts = [

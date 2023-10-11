@@ -27,7 +27,13 @@ class Payment extends Model
 
     public const TYPE_APPLE_SUBSCRIPTION_RENEWAL = 'apple_subscription_renewal';
     public const TYPE_GOOGLE_SUBSCRIPTION_RENEWAL = 'google_subscription_renewal';
+    public const TYPE_INITIAL_ORDER = 'initial_order';
+    public const TYPE_PAYMENT_PLAN = 'payment_plan';
+    public const TYPE_PAYPAL_SUBSCRIPTION_RENEWAL = 'paypal_subscription_renewal';
+    public const TYPE_SUBSCRIPTION_RENEWAL = 'subscription_renewal';
     public const STATUS_PAID = 'paid';
+    public const STATUS_FAILED = 'failed';
+    public const STATUS_REFUNDED = 'refunded';
 
     protected $table = 'ecommerce_payments';
     protected $primaryKey = 'id';

@@ -181,6 +181,9 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
+        queues:
+          - musora-web-platform-web-staging-four
+          - commandmusora-web-platform-web-staging-four: 20
         cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'

@@ -34,6 +34,16 @@ class Order extends Model
         return $this->hasMany(Payment::class);
     }
 
+    public function orderItems(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function orderItemFullfillments(): HasMany
+    {
+        return $this->hasMany(OrderItemFulfillment::class);
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

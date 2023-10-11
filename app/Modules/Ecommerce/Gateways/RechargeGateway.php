@@ -205,6 +205,11 @@ class RechargeGateway
                 throw new \Exception('ERROR #' . $returnError['number'] . ': ' . $returnError['msg']);
             }
 
+            if (isset($result->errors) && $result->errors[0] ?? '' == 'shopify_customer_id not found') {
+                // Customer not found, return null result
+                return null;
+            }
+
             if (isset($result->errors)) {
                 throw new \Exception("Error:" . print_r($result->errors, true));
             }
@@ -240,7 +245,7 @@ class RechargeGateway
             $this->call('GET', '/subscriptions', [
                 'shopify_customer_id' => $shopifyCustomerId,
                 'limit' => 250
-            ], apiVersion: self::API_VERSION_2021_01)->subscriptions
+            ], apiVersion: self::API_VERSION_2021_01)?->subscriptions
         );
     }
 

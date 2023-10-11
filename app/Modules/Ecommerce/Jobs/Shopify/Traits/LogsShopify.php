@@ -30,6 +30,17 @@ trait LogsShopify
     }
 
     /**
+     * Log the given warning message
+     *
+     * @param string $warningMessage
+     * @return void
+     */
+    protected function logWarning(string $warningMessage): void
+    {
+        Log::warning($warningMessage);
+    }
+
+    /**
      * Log the given error message
      *
      * @param string $errorMessage
