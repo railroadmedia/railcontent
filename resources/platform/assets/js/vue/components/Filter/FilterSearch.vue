@@ -1,6 +1,7 @@
 <script setup>
   import InputLabel from "../InputLabel/InputLabel.vue";
   import { SearchIcon } from '@heroicons/vue/outline'
+  import {ref} from "vue";
 
   const props = defineProps({
     isSidebarCollapsed: {
@@ -16,18 +17,20 @@
     },
   });
 
-  const emit = defineEmits(['onSubmit', 'onTextChange'])
+  const emit = defineEmits(['onSubmit', 'onTextChange']);
+
+  const searchText = ref('');
 
   const handleFocus = () => {
       //emit('onCollapse', false);
   };
 
   const handleChange = (val) => {
-      emit('onTextChange', val);
+      searchText.value = val;
   };
 
   const handleSubmitSearch = () => {
-      emit('onSubmit');
+      emit('onSubmit', searchText.value);
   };
 
   const handleIconClick = () => {
