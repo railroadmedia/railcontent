@@ -24,4 +24,11 @@ class ContentPermissionsService
     {
         return UserPermission::query()->where('user_id', '=', $userId)->get();
     }
+
+    public function getContentPermissionsLookup(): Collection
+    {
+        return $this->getAll()->keyBy(function ($permission) {
+            return $permission->brand . '_' . $permission->name;
+        });
+    }
 }

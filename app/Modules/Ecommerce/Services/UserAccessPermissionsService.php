@@ -60,7 +60,7 @@ class UserAccessPermissionsService
         Carbon $startTime,
         UserAccessPermissionsSourceEnum $source
     ): void {
-        $contentPermissionsLookup = $this->getContentPermissionsLookup();
+        $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
 
         $products =
             Product::whereIn('id', $productIds)
@@ -91,7 +91,7 @@ class UserAccessPermissionsService
 
     public function syncShopifyOrders(int $userId, $orders): void
     {
-        $contentPermissionsLookup = $this->getContentPermissionsLookup();
+        $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
         $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($userId);
         $variantIds = $orders->pluck('line_items')->flatten(1)->pluck('variant_id')->unique()->toArray();
         $productLookup = $this->productService->getProductsByShopifyIds($variantIds)->keyBy('shopify_id');
@@ -181,7 +181,7 @@ class UserAccessPermissionsService
     public function getOwnsPacks(UserAccessPermissionsCollection $userAccessPermissions): bool
     {
         if (!$this->cachedPackPermissionIds) {
-            $permissions = $this->contentPermissionsService->getAll();
+            $permissions = $this->contentPermissionsService->getContentPermissionsLookup();
             $packProducts = $this->productService->getAllPacks();
             $this->cachedPackPermissionIds = $packProducts->map(function ($product) use ($permissions) {
                 return $product->getContentPermissions($permissions)->pluck('id');
@@ -287,13 +287,6 @@ class UserAccessPermissionsService
         }
         ksort($permissionsToCreate);
         return $permissionsToCreate;
-    }
-
-    private function getContentPermissionsLookup(): Collection
-    {
-        return $this->contentPermissionsService->getAll()->keyBy(function ($permission) {
-            return $permission->brand . '_' . $permission->name;
-        });
     }
 
     private function getExistingUserAccessLookup(int $userId): Collection
