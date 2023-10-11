@@ -5,7 +5,7 @@
     </div>
 </div>
 <div class="py-12 px-3 md:px-4">
-    <div class="container max-w-3xl mx-auto">
+    <div class="container max-w-3xl mx-auto break-words">
         <p class="leading-normal mb-4">Welcome to the Musora community!&nbsp; We are excited to help you on your musical journey.</p>
 
         <h4 class="leading-normal mb-4"><strong>Your Acceptance of our Terms of Use</strong>:</h4>
