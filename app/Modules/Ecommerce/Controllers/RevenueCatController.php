@@ -511,6 +511,25 @@ class RevenueCatController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
+    public function signupRevenuecat(Request $request){
+        $user = $this->revenueCatService->getSubscriber($request->get('original_app_user_id'));
+        $subscriber = json_decode(json_encode((array)$user),
+                            true);
+
+        if (!$subscriber || empty($subscriber['entitlements'])) {
+            return response()->json([
+                                        'shouldSignup' => true,
+                                    ]);
+        }
+
+        return $this->checkSignupRestrictions($user->entitlements, $user->subscriptions);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
     public function purchaseIOS(Request $request)
     {
         Log::debug('Redirect ecommerce purchase IOS to RevenueCat API:::' . $request->input('data.attributes.email'));
@@ -862,45 +881,7 @@ class RevenueCatController extends Controller
         }
         $entitlements = $apiResponse->subscriber->entitlements;
 
-        $active = false;
-
-        foreach ($entitlements as $entitlement) {
-            if (Carbon::parse($entitlement->expires_date) >= now()->subDays(7)) {
-                $active = true;
-                $subscription = $apiResponse->subscriber->subscriptions->{$entitlement->product_identifier};
-                $store = (strtolower($subscription->store) == 'app_store') ? 'apple_store' : 'google_store';
-
-                //productId
-                $productId = $entitlement->product_identifier;
-                $productsMap = array_merge(
-                    [config('ecommerce.' . $store . '_products_map')[$productId]],
-                    [config('ecommerce.' . $store . '_products_map_trial')[$productId]]);
-
-                $musoraProduct =
-                    Product::whereIn('sku', $productsMap)
-                        ->first();
-
-                return response()->json([
-                    'shouldLogin' => true,
-                    'message' => 'You have an active ' .
-                        ucfirst($musoraProduct->brand ?? config('ecommerce.brand')) .
-                        ' account. Please login into your account. If you want to modify your payment plan please cancel your active subscription from device settings before.',
-                ]);
-            }
-        }
-
-        if (!$active) {
-            return response()->json([
-                'shouldRenew' => true,
-                'message' => 'You can not create multiple ' .
-                    ucfirst(config('ecommerce.brand')) .
-                    ' accounts under the same apple account. You already have an expired/cancelled membership. Please renew your membership.',
-            ]);
-        }
-
-        return response()->json([
-            'shouldSignup' => true,
-        ]);
+        return $this->checkSignupRestrictions($entitlements, $apiResponse->subscriber->subscriptions);
     }
 
     /**
@@ -978,5 +959,54 @@ class RevenueCatController extends Controller
         return response()->json([
             'shouldSignup' => true,
         ]);
+    }
+
+    /**
+     * @param $entitlements
+     * @param $subscriptions
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private function checkSignupRestrictions($entitlements, $subscriptions)
+    : \Illuminate\Http\JsonResponse {
+        $active = false;
+
+        foreach ($entitlements as $entitlement) {
+            if (Carbon::parse($entitlement->expires_date) >= now()->subDays(7)) {
+                $active = true;
+                $subscription = $subscriptions->{$entitlement->product_identifier};
+                $store = (strtolower($subscription->store) == 'app_store') ? 'apple_store' : 'google_store';
+
+                //productId
+                $productId = $entitlement->product_identifier;
+                $productsMap = array_merge(
+                    [config('ecommerce.'.$store.'_products_map')[$productId]],
+                    [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
+                );
+
+                $musoraProduct =
+                    Product::whereIn('sku', $productsMap)
+                        ->first();
+
+                return response()->json([
+                                            'shouldLogin' => true,
+                                            'message' => 'You have an active '.
+                                                ucfirst($musoraProduct->brand ?? config('ecommerce.brand')).
+                                                ' account. Please login into your account. If you want to modify your payment plan please cancel your active subscription from device settings before.',
+                                        ]);
+            }
+        }
+
+        if (!$active) {
+            return response()->json([
+                                        'shouldRenew' => true,
+                                        'message' => 'You can not create multiple '.
+                                            ucfirst(config('ecommerce.brand')).
+                                            ' accounts under the same apple account. You already have an expired/cancelled membership. Please renew your membership.',
+                                    ]);
+        }
+
+        return response()->json([
+                                    'shouldSignup' => true,
+                                ]);
     }
 }

@@ -20,6 +20,12 @@ Route::prefix(config('ecommerce.route_prefix'))
             \App\Modules\Ecommerce\Controllers\RevenueCatController::class.'@syncSubscriber'
         )
             ->middleware([\Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class]);
+
+        Route::post(
+            'revenuecat/signup',
+            \App\Modules\Ecommerce\Controllers\RevenueCatController::class.'@signupRevenuecat'
+        )
+            ->middleware([\Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class]);
     });
 
 if (config('ecommerce.revenuecat_only') == true) {
