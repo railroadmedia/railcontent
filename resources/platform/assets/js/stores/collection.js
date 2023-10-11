@@ -78,6 +78,8 @@ export const useCollectionStore = defineStore({
                     this.data = [...this.data, ...response.data.data];
                 }
             }
+
+            this.loading = false;
         },
         setDefaults(defaults){
           if(defaults.data){
@@ -109,14 +111,14 @@ export const useCollectionStore = defineStore({
             this.tabData[this.filter.activeTab] = {
                 data: [...this.data],
                 currentPage: this.filter.currentPage,
-                totalPages: this.filter.totalPages,
+                totalPages: this.totalPages,
             }
 
             if(this.tabData[tab]){
                 this.filter.activeTab = tab;
                 this.data = ([...this.tabData[this.filter.activeTab].data]);
                 this.filter.currentPage = this.tabData[tab].currentPage;
-                this.filter.totalPages = this.tabData[tab].totalPages;
+                this.totalPages = this.tabData[tab].totalPages;
 
             } else {
                 this.filter.activeTab = tab;
