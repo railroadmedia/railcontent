@@ -15,7 +15,7 @@ class ClothingPriceIncreaseSeeder extends Seeder
      */
     public function run()
     {
-        Product::where('product_type_id', 4)->update(['price' => 35]);
-        Product::where('product_type_id', 5)->update(['price' => 65]);
+        Product::where('product_type_id', 4)->update(['discounted_price' => 35]);
+        Product::where('product_type_id', 5)->update(['discounted_price' => 65]);
     }
 }
