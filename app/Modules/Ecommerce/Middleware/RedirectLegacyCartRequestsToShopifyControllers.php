@@ -10,7 +10,8 @@ class RedirectLegacyCartRequestsToShopifyControllers
 {
     public function handle(Request $request, Closure $next)
     {
-        if ($request->path() == 'ecommerce/json/add-to-cart' && $request->method() == 'PUT') {
+        if (($request->path() == 'ecommerce/json/add-to-cart' && $request->method() == 'PUT') ||
+            ($request->path() == 'ecommerce/add-to-cart' && $request->method() == 'GET')) {
             $route = $request->route();
 
             $routeAction = array_merge($route->getAction(), [

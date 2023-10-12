@@ -52,7 +52,41 @@ class ShopifyCartAPIController extends Controller
 
         $responseData = $this->createLegacyCartResponseDataFromShopifyCartData($cartData);
 
-        return response()->json($responseData, 200);
+        if ($request->expectsJson()) {
+            return response()->json($responseData, 200);
+        }
+
+        $redirectResponse =
+            $request->get('redirect') ? redirect()->away($request->get('redirect')) : redirect()->to(
+                config('ecommerce.post_add_to_cart_redirect', '/order')
+            );
+
+        $redirectResponse->with('cart', $responseData['meta']['cart'] ?? []);
+        $redirectResponse->with('referralCode', $request->get('referralCode'));
+
+        session()->put('bonuses', []);
+
+        $addedProducts = [];
+
+        foreach ($productsToAdd as $productSKUToAdd => $quantityToAdd) {
+            foreach ($responseData['meta']['cart']['items'] as $cartLineItem) {
+                if ($cartLineItem['sku'] == $productSKUToAdd) {
+                    $addedProducts[] = [
+                        'name' => $cartLineItem['name'],
+                        'description' => $cartLineItem['description'],
+                        'thumbnail' => $cartLineItem['thumbnail_url'],
+                    ];
+                }
+            }
+        }
+
+        if (!empty($addedProducts)) {
+            session()->flash('addedProducts', $addedProducts);
+            session()->flash('cartNumberOfItems', count($responseData['meta']['cart']['items'] ?? []));
+            session()->flash('cartSubTotal', $responseData['meta']['cart']['totals']['due'] ?? 0);
+        }
+
+        return $redirectResponse;
     }
 
     public function updateCartQuantity(Request $request)

@@ -30,7 +30,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\SessionDomains::class,
-        \App\Http\Middleware\LegacyBrandCartURLRedirects::class,
+//        \App\Http\Middleware\LegacyBrandCartURLRedirects::class, // not needed after shopify
     ];
 
     /**
