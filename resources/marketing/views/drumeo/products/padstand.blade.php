@@ -381,28 +381,30 @@
                         <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                             <img class="h-16 absolute top-0 right-0 z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/shop/stickbag/free-shipping-icon.svg">
                             <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-drumeo uppercase" >LAUNCH SPECIAL</p>
-                            <a href="/ecommerce/add-to-cart?locked=true&promo-code=special&product-array=DLM-1-year:1,padstand:1,quietpad:1,rudiments-poster:1,Drumeo-VaterSticks:1"
+                            <a href="/ultimate-practice-rig"
                                 class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo">
                                 <div class="bg-white px-3 py-6 md:py-9">
                                     <h4 class="mb-2 sm:mb-3"><strong>Ultimate Practice Rig</strong></h4>
                                     <img class="h-24 transition-opacity opacity-0"
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
-                                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/shop/padstand/bundle-collage.png"
+                                            src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/october/oct-home-promo2.png"
                                             alt="learn playing image"
                                     >
                                     <br>
                                     <h4 class="inline-block leading-tight"><strong>Free PadStand</strong></h4>
                                     <p class="text-sm"><em>with annual Drumeo Membership</em></p>
-                                    <div class="join my-5 drumeo smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Add To Cart</div>
+                                    <div class="join my-5 drumeo smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Learn More</div>
                                     <p class="text-sm mb-1.5 text-drumeo"><strong>Annual Drumeo Membership</strong> ($200/yr)</p>
                                     <p class="text-sm mb-1.5"><strong>The world's best drum lessons.</strong></p>
                                     <p class="text-sm mb-1.5"><strong>5000+ popular songs</strong></p>
                                     <p class="text-sm mb-1.5"><strong>Unlimited Personal Support</strong></p>
+                                    <p class="text-sm mb-1.5">1 PadStand<sup>NEW</sup></p>
                                     <p class="text-sm mb-1.5">1 QuietPad</p>
-                                    <p class="text-sm mb-1.5">1 Drumeo PadStand<sup>NEW</sup></p>
                                     <p class="text-sm mb-1.5">1 Rudiment Poster</p>
-                                    <p class="text-sm">5A Drumsticks</p>
+                                    <p class="text-sm mb-1.5">5A Drumsticks</p>
+                                    <p class="text-sm mb-1.5">Drum Techniques Made Easy</p>
+                                    <p class="text-sm">Great Hands For A Lifetime</p>
                                 </div>
                             </a>
                         </div>

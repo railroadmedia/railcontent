@@ -229,6 +229,16 @@
         </section>
     @endif
 
+    @if($theme === 'pianote' && $leadgen->slug == 'chord-hacks/lessons')
+        @include('drumeo.lead-gen.partials.free-trial', [
+            'header' => 'You’ve started playing the piano. Now take the next step.',
+            'subHeader' => 'TRY PIANOTE FREE FOR 7 DAYS AND GET:',
+            'benefits' => ['FREE Chords & Scales book', 'The perfect step-by-step curriculum', 'Beginner-friendly song tutorials', 'Live support from REAL teachers'],
+            'img' => 'https://pianote.s3.amazonaws.com/products/30-day-blues-piano/collage-lessons.png',
+            'mobileImg' => 'https://pianote.s3.amazonaws.com/products/30-day-blues-piano/collage-lessons-m.png',
+            'customLink' => '/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL:1,piano-chords-and-scales-guide:1&promo-code=annual-trial&redirect=/order&locked=true',
+        ])
+    @endif
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>

@@ -255,7 +255,7 @@
     <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
         <div class="container max-w-5xl mx-auto">
             <h2><strong>Unlimited piano lessons +<br> a FREE Chords & Scales book.</strong></h2>
-            <p class="leading-tight text-musora mt-1 sm:mb-10"><strong>You’ll get a free Chords & Scales book when you try Pianote for 7 days ($39 value)</strong></p>
+            <p class="leading-tight text-musora mt-1 sm:mb-10"><strong>You’ll get a free Chords & Scales book ($39 value) when you try Pianote for 7 days</strong></p>
             <img class="my-5 h-40 inline sm:hidden"
                 src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chords-scales-promo-m.png"
                 alt="learn playing image"
@@ -274,7 +274,7 @@
                     <br><br>
                     At least you’ll get a free book!
                     <br>
-                    <a class="join smaller musora my-3 w-1/2 anchor-slide" href="#customize-anchor">GET Started &raquo;</a>
+                    <a class="join smaller musora my-3 w-1/2" href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL:1,piano-chords-and-scales-guide:1&promo-code=annual-trial&redirect=/order&locked=true">GET Started &raquo;</a>
                     <br>
                     <em>Free worldwide shipping!</em>
                 </p>
