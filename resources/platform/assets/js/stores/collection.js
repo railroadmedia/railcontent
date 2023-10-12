@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from "axios";
+import Toasts from "../vue/vuesora/assets/js/classes/toasts";
 
 export const useCollectionStore = defineStore({
     id: 'Collection',
@@ -22,13 +23,13 @@ export const useCollectionStore = defineStore({
         }
     },
     actions:{
-        coachEndpoint(){
+        getCoachesEndpoint(){
             return this.filter.activeTab === "allCoaches" ? '/railcontent/content?only_subscribed=' : '/railcontent/content?only_subscribed=true';
         },
         async fetchData(){
             try {
                 const response = await axios
-                    .get( this.coachEndpoint(), {
+                    .get( this.getCoachesEndpoint(), {
                         params: {
                             brand: this.brand,
                             limit: this.filter.limit,
@@ -41,6 +42,7 @@ export const useCollectionStore = defineStore({
                 return response;
             } catch (e) {
                 console.error(e);
+                //
             }
         },
         async getData(replace = true, displayLoading = true){
