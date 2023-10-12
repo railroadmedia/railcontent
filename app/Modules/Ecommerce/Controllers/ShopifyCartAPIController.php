@@ -101,6 +101,24 @@ class ShopifyCartAPIController extends Controller
         return response("Yes!");
     }
 
+    public function redirectToShopifyOrderForm(Request $request)
+    {
+        $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
+
+        $cartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
+
+        $checkoutURL = $cartData['checkoutUrl'];
+
+        // always use the checkout url for the current brand domain
+        // (must be configured properly in shopify for the store)
+        // if musora, do nothing
+        if (!empty(brand())) {
+            $checkoutURL = str_replace('musora.com', brand() . '.com', $checkoutURL);
+        }
+
+        return redirect()->away($checkoutURL);
+    }
+
     private function createLegacyCartResponseDataFromShopifyCartData($shopifyCartData)
     {
         $legacyResponseData = [

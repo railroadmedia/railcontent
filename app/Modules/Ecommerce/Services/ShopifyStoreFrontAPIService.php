@@ -286,6 +286,48 @@ class ShopifyStoreFrontAPIService
     }
 
     /**
+     * @param $cartId
+     * @param array $productVariantIdsToAddToCart
+     * @return array
+     * @throws HttpRequestException
+     * @throws MissingArgumentException
+     * @throws Exception
+     */
+    public function getCart(
+        $cartId
+    ): array {
+        $cartString = self::cartGraphQLReturnDataString;
+        $userErrorString = self::userErrorsGraphQLReturnDataString;
+
+        $cartString = str_replace('cart {', 'cart(id: "' . $cartId . '") {', $cartString);
+
+        $cartData = $this->storefrontClient->query(
+            <<<GRAPHQL
+                query Cart {
+                    $cartString
+                }
+            GRAPHQL,
+        );
+
+        $responseBody = $cartData->getBody()->getContents();
+        $responseCode = $cartData->getStatusCode();
+
+        $jsonResponse = json_decode($responseBody, true);
+
+        $responseCartData = $jsonResponse["data"]["cart"] ?? [];
+
+        if ($responseCode !== 200 || empty($responseCartData)) {
+            throw new Exception(
+                "Shopify API call (cart) error: " .
+                "HTTP status code: $responseCode - " .
+                "HTTP response body: $responseBody"
+            );
+        }
+
+        return $jsonResponse["data"]["cart"];
+    }
+
+    /**
      * This accepts either Shopify product SKUs or product variant SKUs. It always returns the underlying
      * product Shopify product variant id (not the product ID).
      *

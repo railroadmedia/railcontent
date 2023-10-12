@@ -24,3 +24,8 @@ Route::prefix('ecommerce/shopify')->group(function () {
         });
 });
 
+Route::middleware(['web_public'])
+    ->group(function () {
+        Route::get('/order/{brand?}', [\App\Modules\Ecommerce\Controllers\ShopifyCartAPIController::class, 'redirectToShopifyOrderForm'])
+            ->name('redirect-to-shopify-order-form');
+    });
