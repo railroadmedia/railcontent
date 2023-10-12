@@ -20,6 +20,17 @@ class ShopifyCartAPIController extends Controller
         $this->shopifyStoreFrontAPIService = $shopifyStoreFrontAPIService;
     }
 
+    public function getCart(Request $request)
+    {
+        $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
+
+        $cartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
+
+        $responseData = $this->createLegacyCartResponseDataFromShopifyCartData($cartData);
+
+        return response()->json($responseData, 200);
+    }
+
     public function createOrAddToCart(Request $request)
     {
         $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);

@@ -23,6 +23,18 @@ class RedirectLegacyCartRequestsToShopifyControllers
             $route->controller = false;
         }
 
+        if ($request->path() == 'ecommerce/json/cart' && $request->method() == 'GET') {
+            $route = $request->route();
+
+            $routeAction = array_merge($route->getAction(), [
+                'uses' => ShopifyCartAPIController::class . '@getCart',
+                'controller' => ShopifyCartAPIController::class . '@getCart',
+            ]);
+
+            $route->setAction($routeAction);
+            $route->controller = false;
+        }
+
         return $next($request);
     }
 }
