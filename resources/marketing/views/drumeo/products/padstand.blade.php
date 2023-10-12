@@ -454,11 +454,11 @@
             <i class="fa-light fa-times fa-2x fixed top-1 right-1 text-white cursor-pointer text-5xl"></i>
             <div
                 x-on:click.stop
-                class="relative w-full overflow-y-visible max-w-5xl"
+                class="relative w-full overflow-y-visible max-w-4xl"
             >
                 <!-- Content -->
-                <div class="relative w-full" style="padding: 5.6% 13.9% 11.6%;">
-                    <img class="absolute inset-0 z-0 w-full h-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/shop/padstand/tv-frame.png">
+                <div class="relative w-full" style="padding: 6.2% 11.3% 12.6%;">
+                    <img class="absolute inset-0 z-0 w-full h-full object-contain" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/shop/padstand/tv-frame169.png">
                     <div class="w-full relative z-10 aspect-16:9">
                         <iframe class="z-10 absolute w-full h-full reset-on-close" x-bind:src="trailer &amp;&amp; '//player.vimeo.com/video/871987691?autoplay=1'" frameborder="0" allowfullscreen="" allow="autoplay" title="trailer"></iframe>
                     </div>
