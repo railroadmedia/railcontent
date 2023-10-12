@@ -2,25 +2,19 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
-use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Resources\UserAccessPermissionResource;
-use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Log;
-use Railroad\Permissions\Services\PermissionService;
 
 class UserAccessPermissionsController extends Controller
 {
 
     private UserAccessPermissionsService $userAccessPermissionsService;
-    private PermissionService $permissionService;
 
-    public function __construct(UserAccessPermissionsService $userAccessPermissionsService,PermissionService $permissionService)
+    public function __construct(UserAccessPermissionsService $userAccessPermissionsService)
     {
         $this->userAccessPermissionsService = $userAccessPermissionsService;
-        $this->permissionService = $permissionService;
     }
 
     public function index(Request $request)
@@ -39,45 +33,43 @@ class UserAccessPermissionsController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     * @return \App\Modules\Ecommerce\Models\UserAccessPermission|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     */
     public function store(Request $request)
     {
-
-        $user = user();
-        $userAccessPermission=null;
-        $userAdmin = $this->permissionService->is($user->id, 'administrator');
-        if($userAdmin) {
-            $userAccessPermission = $this->userAccessPermissionsService->createOrUpdateUserAccessPermission(
-                $request->get('user_id'),
-                $request->get('permission_id'),
-                $request->get('start_date'),
-                $request->get('days'),
-                $request->get('months'),
-                $request->get('lifetime'),
-                $request->get('status')
-            );
-        }
+        $userAccessPermission = $this->userAccessPermissionsService->createOrUpdateUserAccessPermission(
+            $request->get('user_id'),
+            $request->get('permission_id'),
+            $request->get('start_date'),
+            $request->get('days'),
+            $request->get('months'),
+            $request->get('lifetime'),
+            $request->get('status')
+        );
 
         return ($userAccessPermission);
     }
 
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \App\Modules\Ecommerce\Models\UserAccessPermission|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     */
     public function update($id, Request $request)
     {
-        $user = user();
-        $userAccessPermission=null;
-        $userAdmin = $this->permissionService->is($user->id, 'administrator');
-        if($userAdmin) {
-            $userAccessPermission = $this->userAccessPermissionsService->createOrUpdateUserAccessPermission(
-                $request->get('user_id'),
-                $request->get('permission_id'),
-                $request->get('start_date'),
-                $request->get('days'),
-                $request->get('months'),
-                $request->get('lifetime'),
-                $request->get('status'),
-                $request->get('revoked_at'),
-                $id
-            );
-        }
+        $userAccessPermission = $this->userAccessPermissionsService->createOrUpdateUserAccessPermission(
+            $request->get('user_id'),
+            $request->get('permission_id'),
+            $request->get('start_date'),
+            $request->get('days'),
+            $request->get('months'),
+            $request->get('lifetime'),
+            $request->get('status'),
+            $request->get('revoked_at'),
+            $id
+        );
 
         return $userAccessPermission;
     }
