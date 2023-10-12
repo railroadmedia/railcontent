@@ -33,52 +33,44 @@ export default {
     },
 
     /**
-     * Add a product to a users account
+     * Add a permission to a users account
      *
-     * @param {String|Number} user_product_id
-     * @param {Number} quantity
-     * @param {String} expiration_date
+     * @param {String|Number} user_permission_id
+     * @param {Number} days
+     * @param {Number} months
+     * @param {String} status
      * @param {String} start_date
      * @param {String|Number} user_id
-     * @param {String|Number} product_id
+     * @param {String|Number} lifetime
+     * @param {String|Number} permission_id
+     * @param {String} revoked_at
      * @returns {Promise} - resolved promise with the response object
      */
-    setUserPermission(user_product_id, {
-        quantity = 1,
-        expiration_date,
-        start_date,
+    setUserPermission(user_permission_id, {
         user_id,
-        product_id,
+        permission_id,
+        start_date,
+        lifetime,
+        days,
+        months,
+        status,
+        revoked_at
     }) {
-        const url = user_product_id ? `/ecommerce/user-permission/${user_product_id}` : '/ecommerce/user-permission';
-        const method = user_product_id ? 'PATCH' : 'PUT';
+        const url = user_permission_id ? `/ecommerce/user-access-permission/${user_permission_id}` : '/ecommerce/user-access-permission';
+        const method = user_permission_id ? 'PATCH' : 'PUT';
 
         return axios({
             url,
             method,
             data: {
-                data: {
-                    type: 'userPermission',
-                    attributes: {
-                        quantity,
-                        start_date,
-                        expiration_date,
-                    },
-                    relationships: {
-                        user: user_id ? {
-                            data: {
-                                type: 'user',
-                                id: user_id,
-                            },
-                        } : undefined,
-                        product: product_id ? {
-                            data: {
-                                type: 'product',
-                                id: product_id,
-                            },
-                        } : undefined,
-                    },
-                },
+                user_id,
+                permission_id,
+                start_date,
+                lifetime,
+                days,
+                months,
+                status,
+                revoked_at
             },
         })
             .then(response => response)

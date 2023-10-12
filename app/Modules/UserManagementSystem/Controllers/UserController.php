@@ -115,12 +115,23 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         if ($user) {
-            $user['shopify_customer_url'] = ($user->shopify_id)?'https://admin.shopify.com/store/'.config('usora.shopify_store').'/customers/'.$user->shopify_id:'';
-            $user['revenuecat_customer_url'] = ($user->revenuecat_origin_app_user_id)?'https://app.revenuecat.com/customers/'.config('usora.revenuecat_project_id').'/'.$user->revenuecat_origin_app_user_id:'';
+            $user['shopify_customer_url'] =
+                ($user->shopify_id) ?
+                    'https://admin.shopify.com/store/'.config('usora.shopify_store').'/customers/'.$user->shopify_id :
+                    '';
+            $user['revenuecat_customer_url'] =
+                ($user->revenuecat_origin_app_user_id) ?
+                    'https://app.revenuecat.com/customers/'.
+                    config('usora.revenuecat_project_id').
+                    '/'.
+                    $user->revenuecat_origin_app_user_id : '';
 
             return json_encode([
-                                   "data" => ["id" => $user->id,
-                                       "type" => "user","attributes" => $user],
+                                   "data" => [
+                                       "id" => $user->id,
+                                       "type" => "user",
+                                       "attributes" => $user,
+                                   ],
                                ]);
         } else {
             throw new NotFoundHttpException();
@@ -140,16 +151,16 @@ class UserController extends Controller
         }
         try {
             $request->validate([
-               'display_name' => [
-                   Rule::unique(
-                       config('user_management_system.database_connection_name').'.usora_users'
-                   )
-                       ->ignore($id),
-                   'string',
-                   'max:64',
-                   'min:2',
-               ],
-           ]);
+                                   'display_name' => [
+                                       Rule::unique(
+                                           config('user_management_system.database_connection_name').'.usora_users'
+                                       )
+                                           ->ignore($id),
+                                       'string',
+                                       'max:64',
+                                       'min:2',
+                                   ],
+                               ]);
         } catch (ValidationException $e) {
             $messagesByField =
                 $e->validator->getMessageBag()
@@ -251,6 +262,9 @@ class UserController extends Controller
     {
         //$this->authorize('index-users');
         $searchTerm = $request->get('search_term');
+        $limit = $request->get('per_page', 25);
+        $skip = ($request->get('page', 1) - 1) * $limit;
+
 
         $users =
             User::query()
@@ -259,20 +273,38 @@ class UserController extends Controller
                 ->orWhere('first_name', 'LIKE', "%{$searchTerm}%")
                 ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
                 ->orWhere('phone_number', 'LIKE', "%{$searchTerm}%")
-                ->limit($request->get('per_page', 25))
+                ->skip($skip)
+                ->take($limit)
                 ->orderBy($request->get('sort', 'createdAt'))
                 ->get();
+        $totalResults =
+            User::query()
+                ->where('display_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('email', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('first_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('phone_number', 'LIKE', "%{$searchTerm}%")
+                ->count();
         $results = [];
-        foreach($users as $user){
+        foreach ($users as $user) {
             $results[] = [
                 "id" => $user->id,
                 "type" => "user",
-                "attributes" => $user
+                "attributes" => $user,
             ];
         }
 
         return json_encode([
                                "data" => $results,
+                               "meta" => [
+                                   "pagination" => [
+                                       "total" => $totalResults,
+                                       "per_page" => $limit,
+                                       "current_page" => 1,
+                                       "total_pages" => ceil($totalResults / $limit),
+                                       "links" => [],
+                                   ],
+                               ],
                            ]);
     }
 

@@ -10,6 +10,7 @@ use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\UserProduct;
+use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
@@ -24,28 +25,34 @@ class UserAccessPermissionsService
 
     private ?array $cachedPackPermissionIds = null;
     private UserProductService $userProductService;
+    private UserService $userService;
 
     function __construct(
         ProductService $productService,
         ContentPermissionsService $contentPermissionsService,
-        UserProductService $userProductService
+        UserProductService $userProductService,
+        UserService $userService
     ) {
         $this->productService = $productService;
         $this->contentPermissionsService = $contentPermissionsService;
         $this->userProductService = $userProductService;
+        $this->userService = $userService;
     }
 
-    private function getUserAccessPermissionsQuery(int $userId)
+    private function getUserAccessPermissionsQuery(int $userId, array $filterPermissionIds = [])
     {
-        return UserAccessPermission::query()
-            ->where('user_id', '=', $userId);
+        $query = UserAccessPermission::query()->where('user_id', '=', $userId);
+        if ($filterPermissionIds) {
+            $query = $query->whereIn('permission_id', $filterPermissionIds);
+        }
+        return $query;
     }
 
-    public function getUserAccessPermissions(int $userId)
-    : UserAccessPermissionsCollection {
-        $permissions =
-            $this->getUserAccessPermissionsQuery($userId)
-                ->get();
+    public function getUserAccessPermissions(
+        int $userId,
+        array $filterPermissionIds = []
+    ): UserAccessPermissionsCollection {
+        $permissions = $this->getUserAccessPermissionsQuery($userId, $filterPermissionIds)->get();
         return new UserAccessPermissionsCollection($userId, $permissions);
     }
 
@@ -71,6 +78,7 @@ class UserAccessPermissionsService
         $products =
             Product::whereIn('id', $productIds)
                 ->get();
+        $user = $this->userService->getByIdOrNull($userId);
 
         $addedPermissions = false;
 
@@ -98,6 +106,8 @@ class UserAccessPermissionsService
                     $addedPermissions = true;
                 }
             }
+
+            $this->handleBonusMembershipPermission($product, $user, $source);
         }
 
         if ($addedPermissions) {
@@ -133,14 +143,11 @@ class UserAccessPermissionsService
 
         $wasUpdated |= $this->ensureUserProductAccess(
             $userId,
-            $existingAccessPermissionsLookup,
             $contentPermissionsLookup
         );
 
         if ($wasUpdated) {
-            $accessPermissions = new UserAccessPermissionsCollection(
-                $userId, $existingAccessPermissionsLookup->values()
-            );
+            $accessPermissions = $this->getUserAccessPermissions($userId);
             event(new UserAccessPermissionsUpdated($accessPermissions));
         }
     }
@@ -154,6 +161,7 @@ class UserAccessPermissionsService
     )
     : bool {
         $shopifyOrderId = $order["id"];
+        $user = $this->userService->getByIdOrNull($userId);
 
         $wasUpdated = false;
         foreach ($order['line_items'] as $lineItem) {
@@ -181,7 +189,6 @@ class UserAccessPermissionsService
                     $accessPermission->time_lifetime = $product->isLifeTime();
                     $accessPermission->status = $status;
                     $accessPermission->save();
-                    $existingAccessPermissionsLookup[$hash] = $accessPermission;
                     $wasUpdated = true;
                 } elseif ($accessPermission->status != $status) {
                     //Only ever need to update the order status if order is cancelled
@@ -190,6 +197,7 @@ class UserAccessPermissionsService
                     $wasUpdated = true;
                 }
             }
+            $this->handleBonusMembershipPermission($product, $user, UserAccessPermissionsSourceEnum::Shopify);
         }
         return $wasUpdated;
     }
@@ -242,13 +250,9 @@ class UserAccessPermissionsService
      */
     private function ensureUserProductAccess(
         int $userId,
-        Collection $existingAccessPermissionsLookup,
         Collection $contentPermissionsLookup
-    )
-    : bool {
-        $userAccessPermissions = new UserAccessPermissionsCollection(
-            $userId, $existingAccessPermissionsLookup->values()
-        );
+    ): bool {
+        $userAccessPermissions = $this->getUserAccessPermissions($userId);
         $userPermissions = $this->buildUserPermissionsList($userId, $contentPermissionsLookup);
         $wasUpdated = false;
         foreach ($userPermissions as $permissionId => $dates) {
@@ -273,7 +277,6 @@ class UserAccessPermissionsService
                 $accessPermission->time_lifetime = $isLifeTime;
                 $accessPermission->status = UserAccessPermissionsStatusEnum::Active;
                 $accessPermission->save();
-                $existingAccessPermissionsLookup["manual.$accessPermission->id"] = $accessPermission;
                 $wasUpdated = true;
             }
         }
@@ -350,5 +353,62 @@ class UserAccessPermissionsService
                 ->items()
         );
         return new UserAccessPermissionsCollection($userId, $items);
+    }
+
+    public function createOrUpdateUserAccessPermission($userId, $permissionId, $startTime,$timeDays, $timeMonths,$lifetime,$status,$revokedAt=null,$userProductId = null)
+    {
+        $userAccessPermission = new UserAccessPermission();
+        if($userProductId){
+            $userAccessPermission = UserAccessPermission::query()->where('id', $userProductId)->first();
+        }
+        $userAccessPermission->user_id = $userId;
+        $userAccessPermission->permission_id = $permissionId;
+        $userAccessPermission->source = 'manual';
+        $userAccessPermission->source_hash = '';
+        $userAccessPermission->start_time = $startTime;
+        $userAccessPermission->time_days = $timeDays;
+        $userAccessPermission->time_months = $timeMonths;
+        $userAccessPermission->time_lifetime = $lifetime ?? 0;
+        $userAccessPermission->status = $status;
+        if($revokedAt){
+            $userAccessPermission->revoked_at = $revokedAt;
+        }
+        $userAccessPermission->save();
+
+        return $userAccessPermission;
+    }
+
+    public function handleBonusMembershipPermission(
+        Product $product,
+        ?User $user,
+        UserAccessPermissionsSourceEnum $source,
+    ) {
+        if ($product->digital_membership_access_expiration_date
+            && $user
+            && $user->membership_expiration_date < $product->digital_membership_access_expiration_date) {
+            $accessPermission = new UserAccessPermission();
+            $accessPermission->user_id = $user->id;
+            $accessPermission->permission_id = UserAccessPermissionsCollection::MusoraPlusMembershipPermission;
+            $accessPermission->source = $source;
+            $accessPermission->source_hash = '';
+            $accessPermission->start_time = $user->membership_expiration_date;
+            $accessPermission->time_days = Carbon::parse($user->membership_expiration_date)->diffInDays(
+                    Carbon::parse($product->digital_membership_access_expiration_date)
+                ) + 1;
+            $accessPermission->time_months = 0;
+            $accessPermission->time_lifetime = false;
+            $accessPermission->status = UserAccessPermissionsStatusEnum::Active;
+            $accessPermission->save();
+        }
+    }
+
+    public function hasPermission(?int $id, $permissionID): bool
+    {
+        return $this->getUserAccessPermissions($id, [$permissionID])->hasPermission($permissionID);
+    }
+
+    public function getNumberPermissionOwners($permissionID)
+    {
+        return UserAccessPermission::query()->distinct('user_id')->where('permission_id', '=', $permissionID)->count();
     }
 }

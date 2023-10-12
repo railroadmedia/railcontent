@@ -28,7 +28,7 @@
 
         <v-data-table
             :headers="headings"
-            :items="userProducts"
+            :items="userAccessPermissions"
             :items-per-page="5"
         >
             <template
@@ -82,7 +82,7 @@
                             <span>Edit User Access Permission</span>
                         </v-tooltip>
 
-                        <v-tooltip top>
+                        <v-tooltip  v-if="item.status=='active'" top>
                             <template v-slot:activator="{ on }">
                                 <v-btn
                                     fab
@@ -91,7 +91,7 @@
                                     color="error"
                                     class="mx-1 white&#45;&#45;text"
                                     v-on="on"
-                                    @click.stop="cancelUserProduct(item.id)"
+                                    @click.stop="cancelUserPermission(item.id)"
                                 >
                                     <v-icon>
                                         cancel
@@ -116,7 +116,9 @@
                     dark
                     :color="brandColor"
                 >
-                    <v-toolbar-title>Add User Access Permission</v-toolbar-title>
+                    <v-toolbar-title>
+                        {{ this.editingUserAccessPermission.id ? 'Edit' : 'Add' }} User Access Permission
+                    </v-toolbar-title>
                 </v-toolbar>
 
                 <v-col
@@ -127,12 +129,14 @@
                         ref="newPassword"
                         lazy-validation
                     >
+
                         <v-combobox
+                            ref="permissionInput"
                             v-model="$_permission_id"
                             label="Permission"
                             :color="brandColor"
-                            :items="products"
-                            item-text="attributes.name"
+                            :items="permissionsOptions"
+                            item-text="name"
                             item-value="id"
                         >
                             <template
@@ -140,8 +144,7 @@
                                 slot-scope="data"
                             >
                                 <v-list-item-content>
-                                    <v-list-item-title>{{ data.item.attributes.name }}:</v-list-item-title>
-                                    <v-list-item-subtitle>{{ data.item.attributes.sku }}</v-list-item-subtitle>
+                                    <v-list-item-title>{{ data.item.name }}</v-list-item-title>
                                 </v-list-item-content>
                             </template>
                         </v-combobox>
@@ -162,7 +165,6 @@
                                     label="Start Time"
                                     :color="brandColor"
                                     hint="Time user is granted access.  Actual active time may differ if permissions overlap."
-                                    clearable
                                     persistent-hint
                                     readonly
                                     v-on="on"
@@ -216,7 +218,7 @@
                             v-model="$_status"
                             label="Status"
                             :color="brandColor"
-                            :items="['Active', 'Revoked']"
+                            :items="['active', 'revoked']"
                         ></v-select>
                         <div class="text-right">
                             <v-btn
@@ -241,20 +243,12 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
-import api from '../../../api/ecommerce/user-products';
 import JsonApiMethods from '../../../mixins/json-api-methods';
 import brandColors from '../../../api/mixins.js';
 import Utils from '../../../api/utils';
 import CustomBrandIcon from '../../../components/CustomBrandIcon.vue';
-
-const defaultUserProduct = () => ({
-    id: 0,
-    attributes: {},
-    relationships: {
-        user: { data: {} },
-        product: { data: {} },
-    },
-});
+import PermissionsApi from "../../../api/permissions";
+import userPermissionsApi from '../../../api/ecommerce/user-permissions';
 
 export default {
     name: 'UserProducts',
@@ -268,7 +262,7 @@ export default {
             default: () => 0,
         },
 
-        userProducts: {
+        userAccessPermissions: {
             type: Array,
             default: () => [],
         },
@@ -328,67 +322,72 @@ export default {
                 },
             ],
             editingUserAccessPermission: this.getDefaultUserAccessPermission(),
+            permissionsOptions: [],
         };
     },
     computed: {
-        ...mapState({
-            permissionsOptions: state => state.permissions.permissions,
-            products: state => state.products.products,
-        }),
-
         $_permission_id: {
             get() {
-                return this.editingUserAccessPermission.attributes.id;
+                return this.editingUserAccessPermission.permission_id;
             },
-            set({ id }) {
-                this.$set(this.editingUserAccessPermission.attributes, 'id', id);
+            set(value) {
+                this.$set(this.editingUserAccessPermission, 'permission_id', value);
             },
         },
 
         $_is_lifetime: {
             get() {
-                return this.editingUserAccessPermission.attributes.time_lifetime;
+                return this.editingUserAccessPermission.time_lifetime;
             },
             set(value) {
-                this.$set(this.editingUserAccessPermission.attributes, 'time_lifetime', value);
+                this.$set(this.editingUserAccessPermission, 'time_lifetime', value);
             },
         },
 
         $_nDays: {
             get() {
-                return this.editingUserAccessPermission.attributes.time_days || 0;
+                return this.editingUserAccessPermission.time_days || 0;
             },
             set(value) {
-                this.$set(this.editingUserAccessPermission.attributes, 'time_days', value);
+                this.$set(this.editingUserAccessPermission, 'time_days', value);
             },
         },
 
         $_nMonths: {
             get() {
-                return this.editingUserAccessPermission.attributes.time_months || 0;
+                return this.editingUserAccessPermission.time_months || 0;
             },
             set(value) {
-                this.$set(this.editingUserAccessPermission.attributes, 'time_months', value);
+                this.$set(this.editingUserAccessPermission, 'time_months', value);
             },
         },
 
         $_status:{
             get() {
-                return this.editingUserAccessPermission.attributes.status;
+                return this.editingUserAccessPermission.status;
             },
             set(value) {
-                this.$set(this.editingUserAccessPermission.attributes, 'status', value);
+                this.$set(this.editingUserAccessPermission, 'status', value);
             },
         },
 
         $_start_time: {
             get() {
-                return this.editingUserAccessPermission.attributes.start_time;
+                return this.editingUserAccessPermission.start_date;
             },
             set(value) {
-                this.$set(this.editingUserAccessPermission.attributes, 'start_time', value);
+                this.$set(this.editingUserAccessPermission, 'start_date', value);
             },
         },
+    },
+    mounted() {
+        PermissionsApi.getPermissions({
+            limit: 100,
+        })
+            .then((response) => {
+                 const options = response.data.data;
+                 this.permissionsOptions = Utils.dynamicSort(options, 'name');
+            });
     },
     methods: {
         ...mapActions('permissions', [
@@ -398,14 +397,8 @@ export default {
         getDefaultUserAccessPermission() {
             return {
                 id: 0,
-                attributes: {
-                    status : 'Active',
-                    start_time : this.moment(this.moment.now()).format('YYYY-MM-DD'),
-                },
-                relationships: {
-                    user: { data: {} },
-                    product: { data: {} },
-                },
+                status : 'active',
+                start_date : this.moment(this.moment.now()).format('YYYY-MM-DD'),
             };
         },
 
@@ -426,10 +419,10 @@ export default {
         },
 
         openEditForm(id) {
-            const thisUserProduct = this.userProducts.find(userProduct => userProduct.id === id);
+            const thisUserAccessPermission = this.userAccessPermissions.find(userAccessPermission => userAccessPermission.id === id);
 
             if (id) {
-                this.editingUserAccessPermission = Utils.createObjectCopy(thisUserProduct);
+                this.editingUserAccessPermission = Utils.createObjectCopy(thisUserAccessPermission);
             } else {
                 this.editingUserAccessPermission = this.getDefaultUserAccessPermission();
             }
@@ -440,18 +433,23 @@ export default {
         submitEditForm() {
             this.$root.$emit('pageLoading');
 
-            api.setUserProduct(this.editingUserAccessPermission.id, {
+            const thisUserAccessPermission = this.userAccessPermissions.find(userAccessPermission => userAccessPermission.id === this.editingUserAccessPermission.id);
+
+            userPermissionsApi.setUserPermission(this.editingUserAccessPermission.id, {
                 user_id: this.userId,
-                product_id: this.$_product_id,
-                quantity: this.$_quantity,
-                expiration_date: this.$_expiration_date || null,
-                start_date: this.$_paused_until_date || null,
+                permission_id: this.$_permission_id.id,
+                start_date: this.$_start_time,
+                lifetime: this.$_is_lifetime,
+                days: this.$_nDays,
+                months: this.$_nMonths,
+                status: this.$_status,
+                revoked_at: (thisUserAccessPermission && thisUserAccessPermission.status != this.$_status && this.$_status=='revoked') ? this.moment(this.moment.now()).format('YYYY-MM-DD') : null,
             })
                 .then((response) => {
                     if (response) {
                         this.$emit('userProductEdit');
                         this.$root.$emit('displayMessage', {
-                            text: 'Product successfully added to this user!',
+                            text: 'Permission successfully added to this user!',
                             color: 'success',
                         });
 
@@ -459,7 +457,7 @@ export default {
                         this.editingUserAccessPermission = this.getDefaultUserAccessPermission();
                     } else {
                         this.$root.$emit('displayMessage', {
-                            text: 'Oops! Something went wrong. Product not added to this user.',
+                            text: 'Oops! Something went wrong. Permission not added to this user.',
                             color: 'error',
                         });
                     }
@@ -468,24 +466,32 @@ export default {
                 });
         },
 
-        cancelUserProduct(user_product_id) {
-            const confirmation = confirm('Are you sure you wish to expire this User Product?');
+        cancelUserPermission(id) {
+            const confirmation = confirm('Are you sure you wish to revoke this User Permission?');
 
             if (confirmation) {
-                api.setUserProduct(user_product_id, {
-                    expiration_date: this.moment(this.moment.now()).subtract(1, 'days').format('YYYY-MM-DD'),
+                const thisUserAccessPermission = this.userAccessPermissions.find(userAccessPermission => userAccessPermission.id === id);
+                userPermissionsApi.setUserPermission(id, {
+                    user_id: this.userId,
+                    permission_id: thisUserAccessPermission.permission_id.id,
+                    start_date: thisUserAccessPermission.start_date,
+                    lifetime: thisUserAccessPermission.time_lifetime,
+                    days: thisUserAccessPermission.time_days,
+                    months: thisUserAccessPermission.time_months,
+                    status: 'revoked',
+                    revoked_at: this.moment(this.moment.now()).format('YYYY-MM-DD HH:mm:ss'),
                 })
                     .then((response) => {
                         if (response) {
                             this.$root.$emit('displayMessage', {
-                                text: 'User Product successfully canceled!',
+                                text: 'User Permission successfully canceled!',
                                 color: 'success',
                             });
 
                             this.$emit('userProductEdit');
                         } else {
                             this.$root.$emit('displayMessage', {
-                                text: 'Oops! Something went wrong. User Product likely not canceled.',
+                                text: 'Oops! Something went wrong. User Permission likely not canceled.',
                                 color: 'error',
                             });
                         }
