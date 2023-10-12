@@ -373,6 +373,9 @@ class UserAccessPermissionsService
 
     public function getNumberPermissionOwners($permissionID)
     {
-        return UserAccessPermission::query()->distinct('user_id')->where('permission_id', '=', $permissionID)->count();
+        return UserAccessPermission::query()->distinct('user_id')
+            ->where('permission_id', '=', $permissionID)
+            ->where('status', '=', 'active')
+            ->count();
     }
 }
