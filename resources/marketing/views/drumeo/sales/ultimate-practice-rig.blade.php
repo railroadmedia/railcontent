@@ -159,7 +159,7 @@
     <section class="text-center px-5 sm:px-6 py-8 lg:py-10 text-white relative" style="background: linear-gradient(to bottom, #0b75da, #063968);">
         <div class="container max-w-4xl mx-auto">
             <img class="mb-5 h-32 inline sm:hidden"
-                src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/october/oct-home-promo2.png"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/620x0/filters:quality(95)/marketing/drumeo/promos/october/oct-home-promo2.png"
                 alt="learn playing image"
                 fetchpriority="high"
             >
@@ -173,8 +173,8 @@
                 <div class="sm:pl-5 lg:pl-8 mx-0">
                     <h3><strong>Get unlimited drum lessons + a free practice rig & more!</strong></h3>
                     <p class="leading-tight text-musora my-2">Join Drumeo and get a QuietPad, drumsticks, and our brand NEW PadStand so you can practice anywhere. It’s the ultimate drummer’s practice rig!</p>
-                    <h3 class="leading-tight"><strong>$20/month</strong></h3>
-                    <p class="leading-tight text-sm mb-2"><em>Billed at $240 per year</em></p>
+                    <h3 class="leading-tight"><strong>$16.67/month</strong></h3>
+                    <p class="leading-tight text-sm mb-2"><em>Billed at $200 per year</em></p>
                     <a class="join smaller musora w-full max-w-xs" href="/ecommerce/add-to-cart?locked=true&promo-code=special&product-array=DLM-1-year:1,padstand:1,quietpad:1,rudiments-poster:1,Drumeo-VaterSticks:1,drum-technique-made-easy-pack:1,GHFAL-DIGI:1">Get Started &raquo;</a>
                 </div>
             </div>
@@ -244,8 +244,8 @@
 
 
     <section class="text-center px-5 sm:px-8 pt-72 pb-10 sm:py-14 lg:py-20 relative">
-        <div class="inset-0 hidden sm:block absolute" style="background: url(https://www.musora.com/musora-cdn/image/width=2500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/october/padstand-promo.jpg) 66% center/cover;"></div>
-        <div class="inset-0 sm:hidden block absolute" style="background: url(https://www.musora.com/musora-cdn/image/width=800,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/october/padstand-promo-m.jpg) center -10px/cover;"></div>
+        <div class="inset-0 hidden sm:block absolute" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/october/padstand-promo.jpg') 66% center/cover;"></div>
+        <div class="inset-0 sm:hidden block absolute" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/october/padstand-promo-m.jpg') center -10px/cover;"></div>
         <div class="container max-w-5xl mx-auto relative z-10">
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-start items-start">
                 <div class="max-w-lg lg:max-w-xl sm:pr-5 lg:pr-8 mx-0">
@@ -620,7 +620,7 @@
                     <div class=" inline-block relative w-full group" style="padding-bottom: 46%;perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div class=" {{--border-2 border-promo--}} front absolute z-20  w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url('https://www.musora.com/musora-cdn/image/width=990,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/october/oct-home-promo2.png');"></div>
+                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/990x0/filters:quality(95)/marketing/drumeo/promos/october/oct-home-promo2.png');"></div>
                             </div>
                         </div>
                     </div>
