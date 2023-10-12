@@ -1035,12 +1035,20 @@ class RevenueCatController extends Controller
         }
 
         if (!$active) {
-            return response()->json([
-                                        'shouldRenew' => true,
-                                        'message' => 'You can not create multiple '.
-                                            ucfirst(config('ecommerce.brand')).
-                                            ' accounts under the same apple account. You already have an expired/cancelled membership. Please renew your membership.',
-                                    ]);
+            $musoraUser = $this->revenueCatService->getUser(null, $revenuecatUserId);
+            if ($musoraUser) {
+                return response()->json([
+                                            'shouldRenew' => true,
+                                            'message' => 'You can not create multiple '.
+                                                ucfirst(config('ecommerce.brand')).
+                                                ' accounts under the same apple account. You already have an expired/cancelled membership. Please renew your membership.',
+                                            'email' => $musoraUser->getEmail(),
+                                        ]);
+            }else {
+                return response()->json([
+                                            'shouldSignup' => true,
+                                        ]);
+            }
         }
 
         return response()->json([
