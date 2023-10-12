@@ -87,7 +87,7 @@
                 <!-- USER ACCESS PERMISSIONS -->
                 <user-products
                     :user-id="userId"
-                    :user-products="userAccessPermissions"
+                    :user-access-permissions="userAccessPermissions"
                     @userProductEdit="loadUserData"
                 ></user-products>
             </v-col>
@@ -298,6 +298,7 @@ export default {
             'setUsers',
             'editUserRole',
             'getProducts',
+            'getPermissions'
         ]),
 
         resetUserAvatar() {
@@ -319,7 +320,6 @@ export default {
                 .then((response) => {
                     if (response) {
                         this.userAccessPermissions = response.data.data;
-                        console.log(this.userAccessPermissions);
                     }
                 });
         },
