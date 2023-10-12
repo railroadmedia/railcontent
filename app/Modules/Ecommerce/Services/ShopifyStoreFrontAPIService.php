@@ -97,7 +97,7 @@ class ShopifyStoreFrontAPIService
                                         originalSrc
                                         src
                                         transformedSrc
-                                        url
+                                        url(transform: { maxWidth: 400, maxHeight: 400 })
                                         width
                                     }
                                     product {

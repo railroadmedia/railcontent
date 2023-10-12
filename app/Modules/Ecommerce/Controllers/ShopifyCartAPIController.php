@@ -75,8 +75,8 @@ class ShopifyCartAPIController extends Controller
                 'cart' => [
                     'items' => [],
                     'totals' => [
-                        "tax" => $shopifyCartData['cost']['totalTaxAmount']['amount'],
-                        "due" => $shopifyCartData['cost']['totalAmount']['amount'],
+                        "tax" => (float)($shopifyCartData['cost']['totalTaxAmount']['amount'] ?? 0),
+                        "due" => (float)($shopifyCartData['cost']['totalAmount']['amount'] ?? 0),
                     ],
                 ]
             ]
@@ -97,8 +97,8 @@ class ShopifyCartAPIController extends Controller
                     "quantity" => $shopifyLineItemData['quantity'],
                     "thumbnail_url" => $shopifyLineItemData['merchandise']['image']['url'],
                     "description" => $shopifyLineItemData['merchandise']['product']['description'],
-                    "price_before_discounts" => $shopifyLineItemData['cost']['subtotalAmount']['amount'],
-                    "price_after_discounts" => $shopifyLineItemData['cost']['totalAmount']['amount'],
+                    "price_before_discounts" => (float)$shopifyLineItemData['cost']['subtotalAmount']['amount'],
+                    "price_after_discounts" => (float)$shopifyLineItemData['cost']['totalAmount']['amount'],
                 ];
 
                 $legacyResponseData['meta']['cart']['items'][] = $legacyLineItemData;

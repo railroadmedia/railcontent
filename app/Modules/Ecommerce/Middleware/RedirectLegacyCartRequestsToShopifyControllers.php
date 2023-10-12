@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Modules\Ecommerce\Middleware;
+
+use App\Modules\Ecommerce\Controllers\ShopifyCartAPIController;
+use Closure;
+use Illuminate\Http\Request;
+
+class RedirectLegacyCartRequestsToShopifyControllers
+{
+    public function handle(Request $request, Closure $next)
+    {
+        if ($request->path() == 'ecommerce/json/add-to-cart' && $request->method() == 'PUT') {
+            $route = $request->route();
+
+            $routeAction = array_merge($route->getAction(), [
+                'uses' => ShopifyCartAPIController::class . '@createOrAddToCart',
+                'controller' => ShopifyCartAPIController::class . '@createOrAddToCart',
+            ]);
+
+            $route->setAction($routeAction);
+            $route->controller = false;
+        }
+
+        return $next($request);
+    }
+}

@@ -53,6 +53,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\SetContentPermissions::class,
             RedirectIfMobileRequest::class,
             LeadTrackerMiddleware::class,
+            \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
         ],
 
         'web_authenticated' => [
@@ -70,6 +71,7 @@ class Kernel extends HttpKernel
             RedirectIfMobileRequest::class,
             LeadTrackerMiddleware::class,
             \App\Modules\EventDataSynchronizer\Middleware\UserActivitySyncMiddleware::class,
+            \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
         ],
 
         'web_member_only' => [
@@ -86,6 +88,7 @@ class Kernel extends HttpKernel
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
             \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
             \App\Http\Middleware\SetContentPermissions::class,
+            \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
         ],
 
         'api_authenticated' => [
@@ -99,6 +102,7 @@ class Kernel extends HttpKernel
             \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
             \App\Http\Middleware\SetContentPermissions::class,
             BrandMiddleware::class,
+            \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
         ],
 
         // Do not add more middleware to these 2 without good reason!
