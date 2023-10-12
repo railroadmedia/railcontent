@@ -82,23 +82,21 @@ class UserAccessPermissionsService
                 $hash = sha1("$sourceId.$product->id.$contentPermission->id");
                 $accessPermission = $existingAccessPermissionsLookup["$source->value.$hash"] ?? null;
 
-                if ($accessPermission) {
-                    // if the permission exist, skip it
-                    continue;
+                // if the permission exist, skip it
+                if (!$accessPermission) {
+                    $accessPermission = new UserAccessPermission();
+                    $accessPermission->user_id = $userId;
+                    $accessPermission->permission_id = $contentPermission->id;
+                    $accessPermission->source = $source;
+                    $accessPermission->source_hash = $hash;
+                    $accessPermission->start_time = $startTime;
+                    $accessPermission->time_days = $product->getMembershipTimeDays();
+                    $accessPermission->time_months = $product->getMembershipTimeMonths();
+                    $accessPermission->time_lifetime = $product->isLifeTime();
+                    $accessPermission->status = UserAccessPermissionsStatusEnum::Active;
+                    $accessPermission->save();
+                    $addedPermissions = true;
                 }
-
-                $accessPermission = new UserAccessPermission();
-                $accessPermission->user_id = $userId;
-                $accessPermission->permission_id = $contentPermission->id;
-                $accessPermission->source = $source;
-                $accessPermission->source_hash = $hash;
-                $accessPermission->start_time = $startTime;
-                $accessPermission->time_days = $product->getMembershipTimeDays();
-                $accessPermission->time_months = $product->getMembershipTimeMonths();
-                $accessPermission->time_lifetime = $product->isLifeTime();
-                $accessPermission->status = UserAccessPermissionsStatusEnum::Active;
-                $accessPermission->save();
-                $addedPermissions = true;
             }
         }
 
