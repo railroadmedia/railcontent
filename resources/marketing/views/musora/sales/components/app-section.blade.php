@@ -19,13 +19,13 @@
                 <a class="inline-block" href="{!! $appleUrl !!}" target="_blank">
                     <img
                         class="h-8 md:h-10 m-1"
-                        src="https://www.musora.com/musora-cdn/image/width=260,quality=95/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/download-on-app-store-button.png"
                         alt="app store icon"
                     ></a>
                 <a class="inline-block" href="{!! $googleUrl !!}" target="_blank">
                     <img
                         class="h-8 md:h-10 m-1"
-                        src="https://www.musora.com/musora-cdn/image/width=260,quality=95/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/google-play-button.png"
                         alt="google play icon"
                     >
                 </a>
