@@ -53,7 +53,7 @@ class UserAccessPermissionsService
      * @param int $userId
      * @param int[] $productIds
      * @param Carbon $startTime
-     * @param string $uniqueId
+     * @param string $sourceId
      * @param UserAccessPermissionsSourceEnum $source
      * @return void
      */
@@ -61,7 +61,7 @@ class UserAccessPermissionsService
         int $userId,
         array $productIds,
         Carbon $startTime,
-        string $uniqueId,
+        string $sourceId,
         UserAccessPermissionsSourceEnum $source
     )
     : void {
@@ -79,7 +79,7 @@ class UserAccessPermissionsService
             $contentPermissions = $product->getContentPermissions($contentPermissionsLookup);
 
             foreach ($contentPermissions as $contentPermission) {
-                $hash = sha1("$uniqueId.$product->id.$contentPermission->id");
+                $hash = sha1("$sourceId.$product->id.$contentPermission->id");
                 $accessPermission = $existingAccessPermissionsLookup["$source->value.$hash"] ?? null;
 
                 if ($accessPermission) {
