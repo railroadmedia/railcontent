@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-    import {onMounted, reactive, ref} from 'vue';
+import {onBeforeMount, onMounted, onUnmounted, reactive, ref} from 'vue';
     import { useCollectionStore } from "../../../stores/collection";
     import ContentHelpers from '../../vuesora/assets/js/helper-functions/content.js';
     import FilterOptions from './FilterOptions.vue';
@@ -164,6 +164,7 @@
     const handleSearch = (value) => {
         collectionStore.setSearchTerm(value);
         collectionStore.getData();
+        collectionStore.setParams();
     }
 
     const handleFilterChange = (selection) => {
@@ -197,7 +198,12 @@
 
     const handleSort = (item) => {
         collectionStore.sortData(item);
+        collectionStore.setParams();
     }
+
+    onBeforeMount(()=>{
+        collectionStore.getParams();
+    })
 
     onMounted(()=>{
         getScreenSize();
@@ -217,4 +223,7 @@
         })
     })
 
+    onUnmounted(()=>{
+        window.addEventListener('resize', getScreenSize);
+    })
 </script>

@@ -61,6 +61,13 @@ export const useCollectionStore = defineStore({
                 this.fetching = false;
             })
         },
+        getParams(){
+            const params = new URLSearchParams(window.location.search);
+
+            if (params.get('term')) this.filter.searchTerm = params.get('term') || '';
+            this.filter.sort = params.get('sort') || 'slug';
+
+        },
         loadMore(){
             if (!this.fetching){
                 this.filter.currentPage++;
@@ -97,6 +104,14 @@ export const useCollectionStore = defineStore({
           if(defaults.filter){
               this.filter = {...this.filter, ...defaults.filter};
           }
+        },
+        setParams(){
+            const url = new URL(window.location.origin + window.location.pathname);
+
+            url.searchParams.set(this.filter.hasOwnProperty('term') ? 'term' : 'title', this.filter.searchTerm);
+            url.searchParams.set('sort', this.filter.sort);
+
+            window.history.pushState({}, '', url);
         },
         setSearchTerm(term){
             this.filter.searchTerm = term;
