@@ -21,4 +21,14 @@ class ProductService
             ->where('digital_access_type', Product::DIGITAL_ACCESS_TYPE_SPECIFIC_CONTENT_ACCESS)
             ->get();
     }
+
+    public function getById(int $productId): ?Product
+    {
+        return Product::query()->find($productId);
+    }
+
+    public function getBySku(string $sku): ?Product
+    {
+        return Product::query()->where('sku', '=', $sku)->first();
+    }
 }

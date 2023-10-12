@@ -190,7 +190,7 @@ class Product extends Model
 
     public function isLifeTime()
     {
-        return $this->digital_access_time_type == self::DIGITAL_ACCESS_TIME_TYPE_LIFETIME;
+        return $this->digital_access_time_interval_type == null || $this->digital_access_time_type == self::DIGITAL_ACCESS_TIME_TYPE_LIFETIME;
     }
 
     public function getContentPermissions($permissionsLookup): Collection

@@ -120,7 +120,7 @@ class UserAccessPermissionsCollection
 
     public function hasUserOwnedPermissions(array $permissionIds): bool
     {
-        list($startDate, $endDate) = $this->getActiveDates($permissionIds);
+        list(, $endDate) = $this->getActiveDates($permissionIds);
         return $endDate != null;
     }
 
@@ -134,6 +134,12 @@ class UserAccessPermissionsCollection
     public function getCollection()
     {
         return $this->collection;
+    }
+
+    public function hasPermission($permissionID): bool
+    {
+        list(, $endDate) = $this->getActiveDates($permissionID);
+        return $endDate > Carbon::now();
     }
 
 
