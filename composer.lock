@@ -2560,21 +2560,21 @@
         },
         {
             "name": "fruitcake/php-cors",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruitcake/php-cors.git",
-                "reference": "58571acbaa5f9f462c9c77e911700ac66f446d4e"
+                "reference": "3d158f36e7875e2f040f37bc0573956240a5a38b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruitcake/php-cors/zipball/58571acbaa5f9f462c9c77e911700ac66f446d4e",
-                "reference": "58571acbaa5f9f462c9c77e911700ac66f446d4e",
+                "url": "https://api.github.com/repos/fruitcake/php-cors/zipball/3d158f36e7875e2f040f37bc0573956240a5a38b",
+                "reference": "3d158f36e7875e2f040f37bc0573956240a5a38b",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4|^8.0",
-                "symfony/http-foundation": "^4.4|^5.4|^6"
+                "symfony/http-foundation": "^4.4|^5.4|^6|^7"
             },
             "require-dev": {
                 "phpstan/phpstan": "^1.4",
@@ -2584,7 +2584,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -2615,7 +2615,7 @@
             ],
             "support": {
                 "issues": "https://github.com/fruitcake/php-cors/issues",
-                "source": "https://github.com/fruitcake/php-cors/tree/v1.2.0"
+                "source": "https://github.com/fruitcake/php-cors/tree/v1.3.0"
             },
             "funding": [
                 {
@@ -2627,7 +2627,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-20T15:07:15+00:00"
+            "time": "2023-10-12T05:21:21+00:00"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -8094,16 +8094,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.110",
+            "version": "v5.0.111",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "68fcee36b3165c298d83597caea83b5c6ddb6ba9"
+                "reference": "b29e280c3cdb4f7cd0113f4da49d27c2300a4495"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/68fcee36b3165c298d83597caea83b5c6ddb6ba9",
-                "reference": "68fcee36b3165c298d83597caea83b5c6ddb6ba9",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/b29e280c3cdb4f7cd0113f4da49d27c2300a4495",
+                "reference": "b29e280c3cdb4f7cd0113f4da49d27c2300a4495",
                 "shasum": ""
             },
             "require": {
@@ -8141,9 +8141,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.110"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.111"
             },
-            "time": "2023-10-03T12:22:30+00:00"
+            "time": "2023-10-12T07:43:02+00:00"
         },
         {
             "name": "railroad/lead-tracker",
