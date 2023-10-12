@@ -47,5 +47,38 @@ class RevenueCatApiGateway
         return $result->subscriber;
     }
 
+    /**
+     * @param $userId
+     * @param $productIdentifier
+     * @return mixed
+     */
+    public function revoke(
+        $userId,
+        $productIdentifier
+    )
+    {
+        $ch = curl_init();
 
+        curl_setopt(
+            $ch,
+            CURLOPT_URL,
+            'https://api.revenuecat.com/v1/subscribers/'.$userId.'/subscriptions/'.$productIdentifier.'/revoke'
+        );
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+
+        $headers = [];
+        $headers[] = 'Authorization: Bearer '.config('ecommerce.revenuecat_secret_key');
+        $headers[] = 'Content-Type: application/json';
+        $headers[] = 'Accept: application/json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $apiResponse = curl_exec($ch);
+        curl_close($ch);
+
+        $result = json_decode($apiResponse);
+
+        return $result;
+    }
 }

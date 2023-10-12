@@ -62,6 +62,11 @@ if (config('ecommerce.revenuecat_only') == true) {
             \App\Modules\Ecommerce\Controllers\RevenueCatController::class.'@restoreGoogle'
         )
             ->name('google_play_store.restore');
+        Route::post(
+            '/google/handle-server-notification',
+            \App\Modules\Ecommerce\Controllers\RevenueCatController::class.'@processGoogleNotifications'
+        )
+            ->name('google_play_store.process_notifications');
     });
 }
 

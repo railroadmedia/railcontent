@@ -170,4 +170,23 @@ class RevenueCatService
 
         return $user;
     }
+
+
+    /**
+     * @param $userId
+     * @param $productIdentifier
+     * @param $platform
+     * @param string $app
+     * @return string
+     */
+    public function revoke(
+        $userId,
+        $productIdentifier,
+        $platform,
+        $app = 'Musora'
+    ) {
+
+   return $this->revenueCatApiGateway->revoke($userId, $productIdentifier, $platform, $app);
+
+    }
 }
