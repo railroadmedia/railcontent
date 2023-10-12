@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $time_months
  * @property integer $time_lifetime
  * @property UserAccessPermissionsStatusEnum $status
+ * @property Carbon $revoked_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
