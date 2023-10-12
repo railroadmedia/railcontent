@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import axios from "axios";
-import Toasts from "../vue/vuesora/assets/js/classes/toasts";
 
 export const useCollectionStore = defineStore({
     id: 'Collection',
@@ -42,24 +41,16 @@ export const useCollectionStore = defineStore({
                 return response;
             } catch (e) {
                 console.error(e);
-                Toasts.push({
-                    icon: "doh",
-                    themeColor: this.brand,
-                    title: "This is Embarrassing That didn't work",
-                    message:
-                        "Refresh the page and try once more, if it happens again please let us know using the chat below. ",
-                });
             }
         },
-        getData(replace = true, displayLoading = true){
+        async getData(replace = true, displayLoading = true){
             this.loading = displayLoading;
             this.fetching = true;
             if (replace) this.filter.currentPage = 1;
 
-            this.fetchData().then((response)=>{
-                this.setData(response, replace);
-                this.fetching = false;
-            })
+            const response = await this.fetchData();
+            this.setData(response, replace);
+            this.fetching = false;
         },
         getParams(){
             const params = new URLSearchParams(window.location.search);
