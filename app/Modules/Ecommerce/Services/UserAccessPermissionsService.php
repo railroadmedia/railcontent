@@ -53,9 +53,9 @@ class UserAccessPermissionsService
      * @param int $userId
      * @param int[] $productIds
      * @param Carbon $startTime
+     * @param string $uniqueId
      * @param UserAccessPermissionsSourceEnum $source
      * @return void
-     * @throws Exception
      */
     public function addUserAccessPermissionsForProducts(
         int $userId,
