@@ -42,7 +42,10 @@ export const useCollectionStore = defineStore({
                 return response;
             } catch (e) {
                 console.error(e);
-                //
+                window.shownotification({
+                    icon: 'error',
+                    text: 'This is Embarrassing That didn\'t work. Refresh the page and try once more, if it happens again please let us know using the chat below.'
+                })
             }
         },
         async getData(replace = true, displayLoading = true){
