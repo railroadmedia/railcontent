@@ -2,6 +2,8 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use Doctrine\ORM\Exception\ORMException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
@@ -138,9 +140,9 @@ class ShopifyCustomerService
             // we can use meta fields for stuff like our user id, etc
             $customerData["metafields"] = [
                 [
-                    "key" => "_id",
+                    "key" => ShopifyMetafieldKey::Id,
                     "value" => $user->id,
-                    "type" => "number_integer",
+                    "type" => ShopifyMetafieldTypes::integer,
                     "namespace" => "users",
                 ],
             ];

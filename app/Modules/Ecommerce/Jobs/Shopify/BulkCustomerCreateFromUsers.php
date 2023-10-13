@@ -3,6 +3,8 @@
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Models\ShopifySync;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\FindsCustomers;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\StagesUploadToShopify;
@@ -159,9 +161,9 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
         // we can use meta fields for stuff like our user id, etc
         $customerData["metafields"] = [
             [
-                "key" => "_id",
+                "key" => ShopifyMetafieldKey::Id,
                 "value" => (string)$user->id,
-                "type" => "number_integer",
+                "type" => ShopifyMetafieldTypes::integer,
                 "namespace" => "users"
             ]
         ];

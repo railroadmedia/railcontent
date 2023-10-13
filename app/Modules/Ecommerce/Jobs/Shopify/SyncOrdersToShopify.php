@@ -3,6 +3,8 @@
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Models\ShopifySync;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsToShopify;
@@ -784,9 +786,9 @@ class SyncOrdersToShopify implements ShouldQueue
             // we can use meta fields for stuff like our order id, etc
             $orderData["metafields"] = [
                 [
-                    "key" => "_id",
+                    "key" => ShopifyMetafieldKey::Id,
                     "value" => $order->getId(),
-                    "type" => "number_integer",
+                    "type" => ShopifyMetafieldTypes::integer,
                     "namespace" => "orders"
                 ]
             ];
