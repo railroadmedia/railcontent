@@ -221,4 +221,16 @@ class Product extends Model
             $this->digital_access_permission_names
         );
     }
+
+    /**
+     * @return int
+     */
+    public function getStockAvailability(): int
+    {
+        if ($this->min_stock_level === null || $this->stock === null) {
+            return 1000000;
+        }
+
+        return intval($this->stock) - intval($this->min_stock_level);
+    }
 }

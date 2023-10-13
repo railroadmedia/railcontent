@@ -300,10 +300,12 @@ class SyncOrdersToShopify implements ShouldQueue
             }
 
             if (!$skip) {
-                $this->syncOrder($order, $fresh, $index + 1);
+                $wasSynced = $this->syncOrder($order, $fresh, $index + 1);
 
                 // safety check for the rate limit
-                $this->handleRateLimit();
+                if ($wasSynced) {
+                    $this->handleRateLimit();
+                }
             }
 
             // batch has ended
@@ -370,9 +372,9 @@ class SyncOrdersToShopify implements ShouldQueue
      * @param  Order  $order
      * @param  bool  $fresh
      * @param  int|null  $simulatedShopifyId
-     * @return void
+     * @return bool whether the order was synced or not
      */
-    private function syncOrder(Order $order, bool $fresh, ?int $simulatedShopifyId): void
+    private function syncOrder(Order $order, bool $fresh, ?int $simulatedShopifyId): bool
     {
         // safety check: we have many bad entries carried over from the old ecommerce system, that don't have any
         // order items, which is invalid in Shopify. If we don't have any order items, skip this order
@@ -384,7 +386,7 @@ class SyncOrdersToShopify implements ShouldQueue
                 self::RESULTS_ACTION => "SKIPPED",
                 self::RESULTS_FAIL_MESSAGE => "No Order Items"
             ];
-            return;
+            return false;
         }
 
         // STEP 1: determine if updating or creating
@@ -414,7 +416,7 @@ class SyncOrdersToShopify implements ShouldQueue
                 self::RESULTS_ACTION => "FAILED",
                 self::RESULTS_FAIL_MESSAGE => sprintf("%s", $e->getMessage())
             ];
-            return;
+            return false;
         }
 
         // STEP 3: send the data to Shopify
@@ -463,7 +465,7 @@ class SyncOrdersToShopify implements ShouldQueue
                     self::RESULTS_ACTION => "FAILED",
                     self::RESULTS_FAIL_MESSAGE => $exception->getMessage()
                 ];
-                return;
+                return false;
             }
 
             try {
@@ -568,7 +570,7 @@ class SyncOrdersToShopify implements ShouldQueue
                     self::RESULTS_ACTION => "FAILED",
                     self::RESULTS_FAIL_MESSAGE => "No Fulfillment Order Resource"
                 ];
-                return;
+                return false;
             }
             $fulfillmentOrderStatus = $fulfillmentOrder->getAttributes()["status"];
 
@@ -702,6 +704,8 @@ class SyncOrdersToShopify implements ShouldQueue
                 self::RESULTS_SHOPIFY_ID => $orderShopifyId + $refund->getId()
             ]);
         }
+
+        return true;
     }
 
     /**
@@ -762,7 +766,7 @@ class SyncOrdersToShopify implements ShouldQueue
             "customer" => ["id" => $purchaserId],
             "email" => $this->getEmailForShopify($purchaserEmail),
             "note" => $order->getNote(),
-            "processed_at" => $order->getCreatedAt()->toIso8601String(),
+            "processed_at" => (new Carbon($order->getCreatedAt()))->toIso8601String(),
             "source_name" => $order->getBrand(),
             "subtotal_price" => number_format(
                 ($order->getProductDue() ?? ($order->getTotalDue() - $order->getTaxesDue() - $order->getShippingDue(
@@ -822,34 +826,36 @@ class SyncOrdersToShopify implements ShouldQueue
         $orderModel = \App\Modules\Ecommerce\Models\Order::query()
             ->with("orderItems", "orderItems.product")
             ->find($order->getId());
-        $orderModel->orderItems->each(function (\App\Modules\Ecommerce\Models\OrderItem $orderItem) use ($orderModel, &$orderItemsData) {
-            $data = [
-                // include the shopify_id, if we have one, so we know if we're updating or creating - shopify will just ignore this
-                "shopify_id" => $orderItem->shopify_id,
-                // include our internal id, so we can reference it to update - shopify will just ignore this
-                "ecommerce_order_item_id" => $orderItem->id,
-                "fulfillable_quantity" => $orderItem->quantity,
-                "fulfillment_service" => "manual",
-                "price" => number_format($orderItem->final_price ?? 0, 2),
-                "quantity" => $orderItem->quantity,
-                "requires_shipping" => $orderItem->weight > 0,
-                "sku" => $orderItem->product->sku,
-                "title" => $orderItem->product->name,
-                "variant_id" => $orderItem->product->shopify_id,
-                "variant_inventory_management" => "shopify",
-                "vendor" => $orderModel->brand,
-            ];
-
-            if ($orderItem->total_discounted) {
-                $data["applied_discounts"] = [
-                    [
-                        "amount" => number_format($orderItem->total_discounted, 2)
-                    ]
+        $orderModel->orderItems->each(
+            function (\App\Modules\Ecommerce\Models\OrderItem $orderItem) use ($orderModel, &$orderItemsData) {
+                $data = [
+                    // include the shopify_id, if we have one, so we know if we're updating or creating - shopify will just ignore this
+                    "shopify_id" => $orderItem->shopify_id,
+                    // include our internal id, so we can reference it to update - shopify will just ignore this
+                    "ecommerce_order_item_id" => $orderItem->id,
+                    "fulfillable_quantity" => $orderItem->quantity,
+                    "fulfillment_service" => "manual",
+                    "price" => number_format($orderItem->initial_price ?? 0, 2),
+                    "quantity" => $orderItem->quantity,
+                    "requires_shipping" => $orderItem->weight > 0,
+                    "sku" => $orderItem->product->sku,
+                    "title" => $orderItem->product->name,
+                    "variant_id" => $orderItem->product->shopify_id,
+                    "variant_inventory_management" => "shopify",
+                    "vendor" => $orderModel->brand,
                 ];
-            }
 
-            $orderItemsData[] = $data;
-        });
+                if ($orderItem->total_discounted) {
+                    $data["applied_discounts"] = [
+                        [
+                            "amount" => number_format($orderItem->total_discounted, 2)
+                        ]
+                    ];
+                }
+
+                $orderItemsData[] = $data;
+            }
+        );
 
 
         return $orderItemsData;
