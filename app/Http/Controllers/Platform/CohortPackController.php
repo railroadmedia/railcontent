@@ -154,10 +154,8 @@ class CohortPackController
             $user = new User(user()->id, user()->email, user()->getMembershipExpirationDate());
             if (config('shopify.enabled')) {
                 $product = $this->productService->getBySku($sku);
-                $productId = $product->id;
-                $userId = $user->getId();
                 $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
-                    $userId,
+                    $user->getId(),
                     [$product->id],
                     Carbon::now(),
                     '',
