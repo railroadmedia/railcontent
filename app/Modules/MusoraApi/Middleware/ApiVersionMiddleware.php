@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Api\Middleware;
+namespace App\Modules\MusoraApi\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
@@ -14,8 +14,8 @@ class ApiVersionMiddleware
      * @param $guard
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $guard)
-    : mixed {
+    public function handle(Request $request, Closure $next, $guard): mixed
+    {
         config(['musora-api.api.version' => $guard]);
         return $next($request);
     }

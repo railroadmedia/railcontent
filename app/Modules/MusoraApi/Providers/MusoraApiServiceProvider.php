@@ -2,7 +2,7 @@
 
 namespace App\Modules\MusoraApi\Providers;
 
-use App\Modules\Api\Middleware\ApiVersionMiddleware;
+use App\Modules\MusoraApi\Middleware\ApiVersionMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Api\Controllers\V1;
+namespace Modules\MusoraApi\Controllers\V1;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
@@ -33,8 +33,8 @@ class OnboardingController extends Controller
      * @param Request $request
      * @return Response|Application|ResponseFactory
      */
-    public function gears(Request $request)
-    : Response|Application|ResponseFactory {
+    public function gears(Request $request): Response|Application|ResponseFactory
+    {
         ['data' => $data, 'brand' => $brand] = $request->validate(['data' => 'required', 'brand' => 'required']);
 
         OnboardingGear::where(['brand' => $brand, 'user_id' => user()->id])
@@ -67,8 +67,8 @@ class OnboardingController extends Controller
      * @param Request $request
      * @return Response|Application|ResponseFactory
      */
-    public function topics(Request $request)
-    : Response|Application|ResponseFactory {
+    public function topics(Request $request): Response|Application|ResponseFactory
+    {
         ['data' => $data, 'brand' => $brand] = $request->validate([
             'brand' => 'required',
             'data' => 'required',
@@ -106,8 +106,8 @@ class OnboardingController extends Controller
      * @param Request $request
      * @return Response|Application|ResponseFactory
      */
-    public function genres(Request $request)
-    : Response|Application|ResponseFactory {
+    public function genres(Request $request): Response|Application|ResponseFactory
+    {
         ['data' => $data, 'brand' => $brand] = $request->validate([
             'brand' => 'required',
             'data' => 'required',
@@ -141,8 +141,8 @@ class OnboardingController extends Controller
      * @param Request $request
      * @return Response|Application|ResponseFactory
      */
-    public function experience(Request $request)
-    : Response|Application|ResponseFactory {
+    public function experience(Request $request): Response|Application|ResponseFactory
+    {
         ['experience_level' => $experienceLevel, 'brand' => $brand] = $request->validate([
             'experience_level' => 'integer|required|max:3',
             'brand' => 'required',
@@ -176,8 +176,8 @@ class OnboardingController extends Controller
      * @param Request $request
      * @return Response|Application|ResponseFactory
      */
-    public function goals(Request $request)
-    : Response|Application|ResponseFactory {
+    public function goals(Request $request): Response|Application|ResponseFactory
+    {
         ['goals' => $goals, 'brand' => $brand] = $request->validate([
             'goals' => 'required',
             'brand' => 'required',
@@ -204,8 +204,8 @@ class OnboardingController extends Controller
      * @param Request $request
      * @return Response|Application|ResponseFactory
      */
-    public function getUserOnboardingInformation(Request $request)
-    : Response|Application|ResponseFactory {
+    public function getUserOnboardingInformation(Request $request): Response|Application|ResponseFactory
+    {
         try {
             ['brand' => $brand] = $request->validate(['brand' => 'string|required']);
         } catch (ValidationException $e) {
@@ -246,8 +246,8 @@ class OnboardingController extends Controller
      * @param Request $request
      * @return Response|Application|ResponseFactory
      */
-    public function aboutStepCompleted(Request $request)
-    : Response|Application|ResponseFactory {
+    public function aboutStepCompleted(Request $request): Response|Application|ResponseFactory
+    {
         $request->validate([
             'skipped' => 'required',
         ]);
@@ -266,8 +266,8 @@ class OnboardingController extends Controller
      * @param Request $request
      * @return Response|Application|ResponseFactory
      */
-    public function skipAccountSetup(Request $request)
-    : Response|Application|ResponseFactory {
+    public function skipAccountSetup(Request $request): Response|Application|ResponseFactory
+    {
         ['brand' => $brand, 'skippedStep' => $skippedStep] = $request->validate([
             'brand' => 'required',
             'skippedStep' => 'required',
@@ -293,8 +293,8 @@ class OnboardingController extends Controller
      * @return Response|Application|ResponseFactory
      * @throws Exception
      */
-    public function saveOnboardingHistoryForInstrument(Request $request)
-    : Response|Application|ResponseFactory {
+    public function saveOnboardingHistoryForInstrument(Request $request): Response|Application|ResponseFactory
+    {
         try {
             $request->validate(['instrument' => 'string|required|not-in:undefined']);
         } catch (ValidationException $e) {
@@ -317,8 +317,8 @@ class OnboardingController extends Controller
      * @param Request $request
      * @return Response|Application|ResponseFactory
      */
-    public function saveOnboardingHistoryForCoach(Request $request)
-    : Response|Application|ResponseFactory {
+    public function saveOnboardingHistoryForCoach(Request $request): Response|Application|ResponseFactory
+    {
         try {
             $request->validate(['coachName' => 'string|required|not-in:undefined']);
             $request->validate(['coachId' => 'integer|required|not-in:undefined']);

@@ -1,6 +1,6 @@
 <?php
 
-use Modules\Api\Controllers\V1\OnboardingController;
+use Modules\MusoraApi\Controllers\V1\OnboardingController;
 
 Route::as('v1.')
     ->prefix('musora-api/v1')
