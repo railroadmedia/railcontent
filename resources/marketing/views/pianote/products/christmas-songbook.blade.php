@@ -94,12 +94,12 @@
             </div>
         </div>
     </header>
-    <section class="text-left px-5 sm:px-6 py-12 sm:py-10 lg:py-24 relative" style="background:#F1F7FE;">
+    <section class="text-left px-5 sm:px-6 py-12 sm:py-10 lg:py-14 relative" style="background:#F1F7FE;">
         <div class="inset-0 absolute z-0 bg-top bg-cover block sm:hidden" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/shop/christmas-songbook/song-list-bg-m.jpg')"></div>
         <div class="inset-0 absolute z-0 bg-top bg-cover hidden sm:block" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/shop/christmas-songbook/song-list-bg.jpg')"></div>
         <div class="container max-w-6xl mx-auto relative z-10">
-            <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <div class="w-full sm:w-1/2 mb-5 sm:mb-0 sm:pr-7 lg:pr-16">
+            <div class="flex flex-wrap sm:flex-nowrap items-start lg:items-center">
+                <div class="w-full sm:w-1/2 mb-5 sm:mb-0 sm:pr-10 lg:pr-12">
                     <h4 class="leading-tight text-dull-navy"><strong>All Your Favorites</strong></h4>
                     <img class="h-8 sm:h-9 lg:h-11 mt-1 mb-4 sm:mb-6" alt="In One Book." src="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/shop/christmas-songbook/in-one-book.png">
                     <p class="leading-normal">
@@ -111,29 +111,36 @@
                         <br><br>
                         Give your loved ones the gift of music this Christmas. Or treat yourself to your favorite holiday songs.</p>
                 </div>
-                <div class="w-full sm:w-1/2 sm:pl-7 lg:pl-16">
+                <div class="w-full sm:w-1/2 sm:pl-5">
                     <p class="leading-normal mb-3 sm:mb-5 text-dull-navy"><strong>Here’s the full list:</strong></p>
-                    <ol class="pl-6 list-decimal text-dull-navy" style="columns: 2; column-gap: 40px;">
-                        <li>Angels We Have Heard on High</li>
-                        <li>Auld Lang Syne</li>
-                        <li>Away in a Manger</li>
-                        <li>Carol of the Bells</li>
-                        <li>Dance of the Sugar Plum Fairy</li>
-                        <li>Deck the Halls</li>
-                        <li>God Rest Ye Merry Gentlemen</li>
-                        <li>It Came Upon a Midnight Clear</li>
-                        <li>Jingle Bells</li>
-                        <li>Joy to the World</li>
-                        <li>O Christmas Tree</li>
-                        <li>O Holy Night</li>
-                        <li>O Little Town of Bethlehem</li>
-                        <li>Silent Night</li>
-                        <li>The First Noel</li>
-                        <li>The Holly and the Ivy</li>
-                        <li>Twelve Days of Christmas</li>
-                        <li>We Three Kings</li>
-                        <li>We Wish You a Merry Christmas</li>
-                        <li>What Child is This</li>
+                    <style>
+                        @media only screen and (min-width:64em) {
+                            ol {
+                                column-count: 2;
+                            }
+                        }
+                    </style>
+                    <ol class="pl-6 list-decimal text-dull-navy" style="column-gap: 20px;">
+                        <li class="leading-none mb-3">Angels We Have Heard on High</li>
+                        <li class="leading-none mb-3">Auld Lang Syne</li>
+                        <li class="leading-none mb-3">Away in a Manger</li>
+                        <li class="leading-none mb-3">Carol of the Bells</li>
+                        <li class="leading-none mb-3">Dance of the Sugar Plum Fairy</li>
+                        <li class="leading-none mb-3">Deck the Halls</li>
+                        <li class="leading-none mb-3">God Rest Ye Merry Gentlemen</li>
+                        <li class="leading-none mb-3">It Came Upon a Midnight Clear</li>
+                        <li class="leading-none mb-3">Jingle Bells</li>
+                        <li class="leading-none mb-3">Joy to the World</li>
+                        <li class="leading-none mb-3">O Christmas Tree</li>
+                        <li class="leading-none mb-3">O Holy Night</li>
+                        <li class="leading-none mb-3">O Little Town of Bethlehem</li>
+                        <li class="leading-none mb-3">Silent Night</li>
+                        <li class="leading-none mb-3">The First Noel</li>
+                        <li class="leading-none mb-3">The Holly and the Ivy</li>
+                        <li class="leading-none mb-3">Twelve Days of Christmas</li>
+                        <li class="leading-none mb-3">We Three Kings</li>
+                        <li class="leading-none mb-3">We Wish You a Merry Christmas</li>
+                        <li class="leading-none mb-3">What Child is This</li>
                     </ol>
                 </div>
             </div>
@@ -234,7 +241,7 @@
                             <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >Save {{ round(100 - (100 * (floatval($productPrices['christmas-songbook']->discounted_price) / floatval($productPrices['christmas-songbook']->price)))) }}%</p>
                         @endif
                         <a href="/ecommerce/add-to-cart?locked=true&product-array=christmas-songbook:1,christmas-song-book-digital:1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
-                            <div class="bg-white px-3 py-5 md:py-7">
+                            <div class="bg-white px-3 py-6 md:py-9">
                                 <h4 class="mb-2 sm:mb-3"><strong>Book Only</strong></h4>
                                 <img class="h-28 lg:h-32 transition-opacity opacity-0"
                                     loading="lazy"
@@ -263,7 +270,7 @@
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         <img class="h-16 absolute top-0 right-0 z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/shop/christmas-songbook/free-shipping-badge.png">
                         <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full text-dull-navy uppercase bg-pianote text-white" >BEST DEAL</p>
-                        <a href="/ecommerce/add-to-cart?locked=true&product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,christmas-songbook:1,christmas-song-book-digital:1,piano-chords-and-scales-guide:1,new-piano-players-start-here:1,easy-chords:1"
+                        <a href="/ecommerce/add-to-cart?locked=true&promo-code=special&product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,christmas-songbook:1,christmas-song-book-digital:1,piano-chords-and-scales-guide:1,new-piano-players-start-here:1,easy-chords:1"
                             class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-pianote">
                             <div class="bg-white px-3 py-6 md:py-9">
                                 <h4 class="mb-2 sm:mb-3"><strong>Holiday Bundle</strong></h4>
@@ -274,10 +281,10 @@
                                     alt="learn playing image"
                                 >
                                 <br>
-                                <h4 class="inline-block leading-tight"><strong>Free SongBook</strong></h4>
-                                <p class="text-sm"><em>with annual Pianote Membership</em></p>
+                                <h4 class="inline-block leading-tight"><s class="opacity-60">$532</s> <strong>$200</strong></h4>
+                                <p class="text-sm"><em>Join Pianote + Get the Book FREE</em></p>
                                 <div class="join my-5 smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Get Started</div>
-                                <p class="text-sm mb-1.5 text-pianote"><strong>Annual Pianote Membership</strong> ($240/yr)</p>
+                                <p class="text-sm mb-1.5 text-pianote"><strong>Annual Pianote Membership</strong> ($240 value)</p>
                                 <p class="text-sm mb-1.5">Christmas Songbook ($49 value)</p>
                                 <p class="text-sm mb-1.5">Digital Book (10 songs) ($10 value)</p>
                                 <p class="text-sm mb-1.5">Chords & Scales Book ($39 value)</p>
