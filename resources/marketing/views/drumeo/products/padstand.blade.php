@@ -178,7 +178,7 @@
                      'icon' => 'marketing/drumeo/shop/padstand/lightweight-icon.svg',
                      'img' => 'marketing/drumeo/shop/padstand/lightweight-icon-m.png',
                     'title' => 'Lightweight & Portable.',
-                    'desc' => 'No more balancing your practice pad on a coffee table or hotel bed. The snare stand easily fits in your backpack or carry on for perfect practice sessions on the go.',
+                    'desc' => 'No more balancing your practice pad on a coffee table or hotel bed. The PadStand easily fits in your backpack or carry on for perfect practice sessions on the go.',
                     ],
                     [
                      'icon' => 'marketing/drumeo/shop/padstand/blue-tips-icon.svg',
@@ -431,12 +431,41 @@
             </div>
         </div>
     </section>
+    
+    <div
+        x-show="trailer"
+        style="display: none;z-index: 2147483002;"
+        x-on:keydown.escape.prevent.stop="trailer = false; "
+        role="dialog"
+        aria-modal="true"
+        class="fixed inset-0 overflow-y-auto"
+    >
+        <!-- Overlay -->
+        <div x-show="trailer" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-80" style="z-index: 1005;"></div>
 
-    @include('_partials.components.video-modal',[
-        'name' => 'trailer',
-        'video' => '871987691',
-        'vimeo' => true,
-    ])
+        <!-- Panel -->
+        <div
+            x-show="trailer" x-transition
+            x-on:click="trailer = false;"
+            class="relative min-h-screen flex items-start justify-center px-4 pt-40 sm:pt-28 lg:pt-16"
+            style="z-index: 1006;"
+        >
+            <!-- Close button -->
+            <i class="fa-light fa-times fa-2x fixed top-1 right-1 text-white cursor-pointer text-5xl"></i>
+            <div
+                x-on:click.stop
+                class="relative w-full overflow-y-visible max-w-4xl"
+            >
+                <!-- Content -->
+                <div class="relative w-full" style="padding: 6.2% 11.3% 12.6%;">
+                    <img class="absolute inset-0 z-0 w-full h-full object-contain" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/shop/padstand/tv-frame169.png">
+                    <div class="w-full relative z-10 aspect-16:9">
+                        <iframe class="z-10 absolute w-full h-full reset-on-close" x-bind:src="trailer &amp;&amp; '//player.vimeo.com/video/871987691?autoplay=1'" frameborder="0" allowfullscreen="" allow="autoplay" title="trailer"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     @include("drumeo.sales.partials._footer")
