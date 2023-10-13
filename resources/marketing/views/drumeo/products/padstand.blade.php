@@ -178,7 +178,7 @@
                      'icon' => 'marketing/drumeo/shop/padstand/lightweight-icon.svg',
                      'img' => 'marketing/drumeo/shop/padstand/lightweight-icon-m.png',
                     'title' => 'Lightweight & Portable.',
-                    'desc' => 'No more balancing your practice pad on a coffee table or hotel bed. The snare stand easily fits in your backpack or carry on for perfect practice sessions on the go.',
+                    'desc' => 'No more balancing your practice pad on a coffee table or hotel bed. The PadStand easily fits in your backpack or carry on for perfect practice sessions on the go.',
                     ],
                     [
                      'icon' => 'marketing/drumeo/shop/padstand/blue-tips-icon.svg',
