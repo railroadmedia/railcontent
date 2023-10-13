@@ -6,6 +6,7 @@ use App\Models\ShopifySync;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesShopifyRateLimit;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsToShopify;
 use Doctrine\ORM\EntityRepository;
@@ -34,6 +35,7 @@ class SyncProductsToShopify implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;
+    use HandlesShopifyRateLimit;
     use InteractsWithQueue;
     use LogsShopify;
     use Queueable;
