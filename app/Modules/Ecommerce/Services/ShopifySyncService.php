@@ -213,7 +213,7 @@ class ShopifySyncService
             if ($user) {
                 return $user;
             }
-            return $this->ecommerceUserProvider->createUser(
+            return $this->userService->createUser(
                 $email,
                 config('user_management_system.default_user_password')
             );
