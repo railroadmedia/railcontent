@@ -1,25 +1,48 @@
 <template>
   <div>
       <CollectionFilterWrapper
-        :filterable-values="filterableValues"
-        :tab-options="tabOptions"
-        :collection-title="collectionTitle"
-        :pre-loaded-content="preLoadedContent"
+            :filterable-values="filterableValues"
+            :tab-options="tabOptions"
+            :collection-title="collectionTitle"
+            :pre-loaded-content="preLoadedContent"
       />
 
       <transition appear name="fade">
-        <CollectionResults />
+          <CollectionResults>
+              <CoachesGridCatalogue
+                    v-if="isCoach"
+                    :content="collectionStore.data"
+                    :brand="collectionStore.brand"
+              />
+              <ListCatalogue
+                    v-else-if="isList"
+                    :content="collectionStore.data"
+              />
+          </CollectionResults>
       </transition>
   </div>
 </template>
 
 <script setup>
-  import { onMounted } from "vue";
+  import { onMounted, computed } from "vue";
+  import { useCollectionStore } from "../../../stores/collection";
+  import CoachesGridCatalogue from "../../vuesora/views/catalogues/CoachesGridCatalogue";
   import CollectionFilterWrapper from '../Filter/CollectionFilterWrapper.vue';
   import CollectionResults from '../Catalogue/CollectionResults.vue';
-  import { useCollectionStore } from "../../../stores/collection";
+  import ListCatalogue from "../../vuesora/views/catalogues/ListCatalogue";
 
   const props = defineProps({
+      brand: {
+          type: String,
+          default: '',
+      },
+      collectionTitle: {
+          type: String,
+          default: '',
+      },
+      collectionType: {
+          default: '',
+      },
       filterableValues: {
           type: Array,
           default: () => [],
@@ -56,19 +79,11 @@
           type: Array,
           default: () => ["published"],
       },
-      tabOptions: {
-          type: Array,
-          default: [],
-      },
-      collectionTitle: {
-          type: String,
-          default: '',
-      },
   });
 
   const collectionStore = useCollectionStore();
 
-  const request_params = () => {
+  const request_params = computed(() => {
       return {
           required_fields: props.requiredFields,
           statuses: props.statuses,
@@ -78,32 +93,81 @@
           included_fields: props.included_fields || [],
           limit: props.limit,
       };
-  }
+  })
+
+  const isCoach = computed(() => {
+      return props.collectionType === 'coach';
+  })
+
+  const isCourse = computed(()=> {
+      return props.collectionType === 'course';
+  })
+
+  const isList = computed(()=> {
+      return isCourse.value;
+  })
+
+  const tabOptions = computed(() => {
+    if(isCourse.value){
+        return [
+            {
+                key: 'courses',
+                value: 'Courses',
+            },
+            {
+                key: 'instructors',
+                value: 'Instructors',
+            },
+            {
+                key: 'genres',
+                value: 'Genres',
+            },
+        ];
+    } else if(isCoach.value){
+        return [
+            {
+                key: 'allCoaches',
+                value: 'All Coaches',
+            },
+            {
+                key: 'subscribedCoaches',
+                value: 'Subscribed Coaches',
+            },
+        ];
+    }
+  })
+
+  const tabData = computed(()=>{
+    const tabDataMap = {}
+
+    tabOptions.value && tabOptions.value.forEach(tab => {
+        let endpoint = '/railcontent/content';
+        if (isCoach.value){
+            endpoint = `/railcontent/content?only_subscribed=${tab.key === 'allCoaches' ? '' : 'true'}`;
+        }
+        tabDataMap[tab.key] = {
+            endpoint,
+            searchTerm: '',
+            sort: 'slug',
+        }
+    });
+    return tabDataMap;
+    
+  })
 
   onMounted(()=>{
       collectionStore.setDefaults({
           brand: props.brand,
           data: props.preLoadedContent?.data || [],
           filter: {
-              activeTab: props.tabOptions ? props.tabOptions[0].value : 'default',
-              params: {...request_params()},
-              term: '',
+              activeTab: tabOptions.value && tabOptions.value.length > 0 ? tabOptions.value[0].key : 'default',
+              params: {...request_params.value},
+              [isCoach.value ? 'term' : 'title']: '',
           },
-          tabData: {
-              allCoaches: {
-                  endpoint: '/railcontent/content?only_subscribed=',
-                  searchTerm: '',
-                  sort: 'slug',
-              },
-              subscribedCoaches: {
-                  endpoint: '/railcontent/content?only_subscribed=true',
-                  searchTerm: '',
-                  sort: 'slug',
-              },
-          },
+          tabData: tabData.value,
           totalPages: props.preLoadedContent ? Math.ceil(props.preLoadedContent.meta.totalResults / props.limit) : 0,
       })
 
-      collectionStore.getParams();
+    //   collectionStore.getParams();
   })
 </script>
