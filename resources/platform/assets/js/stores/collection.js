@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import axios from "axios";
-import Toasts from "../vue/vuesora/assets/js/classes/toasts";
 
 export const useCollectionStore = defineStore({
     id: 'Collection',

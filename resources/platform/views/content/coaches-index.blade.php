@@ -159,7 +159,7 @@
     @endcomponent
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mb-3">
-        <coach-collection-wrapper
+        <collection-wrapper
             brand="{{ $brand }}"
             content-type="coach"
             :filterable-values="{{ json_encode(['focus','style']) }}"

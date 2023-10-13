@@ -1,6 +1,6 @@
 <template>
   <div>
-      <collection-filter-wrapper
+      <CollectionFilterWrapper
         :filterable-values="filterableValues"
         :tab-options="tabOptions"
         :collection-title="collectionTitle"
@@ -8,7 +8,7 @@
       />
 
       <transition appear name="fade">
-        <content-collection />
+        <ContentCollection />
       </transition>
   </div>
 </template>
