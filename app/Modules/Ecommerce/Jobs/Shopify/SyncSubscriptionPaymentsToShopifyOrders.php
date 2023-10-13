@@ -601,7 +601,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         // tags are a string of comma-separated values, and each individual tag is limited to 40 characters in length.
         // build up an array of tags here, and we'll implode them into the data payload
         $tags = [
-          ShopifyTagIdentifier::PaymentSource->value . ':' . ShopifyTagValue::getForPayment($payment)->value
+            ShopifyTagValue::buildTag(ShopifyTagIdentifier::PaymentSource, ShopifyTagValue::getForPayment($payment))
         ];
 
         $orderData = [
