@@ -54,7 +54,7 @@ class UserAccessPermissionsCollection
                 return [Carbon::parse($userAccessPermission->start_time), Carbon::maxValue()];
             }
             if ($userAccessPermission->status == 'revoked') {
-                $userAccessPermission->actualStartTime =Carbon::parse($userAccessPermission->start_time);
+                $userAccessPermission->actualStartTime = Carbon::parse($userAccessPermission->start_time);
                 $userAccessPermission->actualExpirationTime = Carbon::parse($userAccessPermission->revoked_at);
                 continue;
             }
