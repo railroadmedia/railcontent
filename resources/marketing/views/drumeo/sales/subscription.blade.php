@@ -290,42 +290,42 @@
                 'title' => 'Learn any style',
                 'images' => [
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Todd-Sucherman.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Todd-Sucherman.jpg',
                         'title' => 'Rock <br>Drumming',
                         'instructor' => 'Todd Sucherman',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Dennis-Chambers.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Dennis-Chambers.jpg',
                         'title' => 'Funk <br>Drumming',
                         'instructor' => 'Dennis Chambers',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Domino-Santatonio.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Domino-Santatonio.jpg',
                         'title' => 'Pop <br>Drumming',
                         'instructor' => 'Domino Santantonio',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Steve-Smith.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Steve-Smith.jpg',
                         'title' => 'Jazz <br>Drumming',
                         'instructor' => 'Steve Smith',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Larnell-Lewis.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Larnell-Lewis.jpg',
                         'title' => 'Gospel <br>Drumming',
                         'instructor' => 'Larnell Lewis',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Greyson-Nektrutman.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Greyson-Nektrutman.jpg',
                         'title' => 'Big Band <br>Drumming',
                         'instructor' => 'Greyson Nekrutman',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Gene-Hoglan.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Gene-Hoglan.jpg',
                         'title' => 'Metal <br>Drumming',
                         'instructor' => 'Gene Hoglan',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/John-Wooton.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/John-Wooton.jpg',
                         'title' => 'Latin <br>Drumming',
                         'instructor' => 'John Wooton',
                     ],
@@ -335,42 +335,42 @@
                 'title' => 'Play more creatively',
                 'images' => [
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Anika-Nilles.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Anika-Nilles.jpg',
                         'title' => 'Subdivision<br> Studies',
                         'instructor' => 'Anika Nilles',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Dom-Famularo.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Dom-Famularo.jpg',
                         'title' => 'Pedal<br> Control',
                         'instructor' => 'Dom Famularo',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Tommy-Igoe.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Tommy-Igoe.jpg',
                         'title' => 'Groove<br> Essentials',
                         'instructor' => 'Tommy Igoe',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Dorothe-Taylor-01.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Dorothe-Taylor-01.jpg',
                         'title' => 'Stick<br> Control',
                         'instructor' => 'Dorothea Taylor',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Bruce-Becker.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Bruce-Becker.jpg',
                         'title' => 'Hand<br> Technique',
                         'instructor' => 'Bruce Becker',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Billy-Cobham.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Billy-Cobham.jpg',
                         'title' => 'Internal<br> Synchronization',
                         'instructor' => 'Billy Cobham',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Emmanuelle-Caplette.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Emmanuelle-Caplette.jpg',
                         'title' => 'Traditional<br> Grip',
                         'instructor' => 'Emmanuelle Caplette',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Sarah-Thawer.jpg',
+                        'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Sarah-Thawer.jpg',
                         'title' => '4-Way<br> Coordination',
                         'instructor' => 'Sarah Thawer',
                     ],
@@ -380,42 +380,42 @@
                 'title' => 'Find your groove',
                 'images' => [
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Simon-Phillips.jpg',
+                    'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Simon-Phillips.jpg',
                     'title' => 'Elevate Your<br> Drum Sound',
                     'instructor' => 'Simon Phillips',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Aaron-Spears.jpg',
+                    'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Aaron-Spears.jpg',
                     'title' => 'Drum<br> Chops',
                     'instructor' => 'Aaron Spears',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Hannah-Welton.jpg',
+                    'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Hannah-Welton.jpg',
                     'title' => 'Writing<br> Drum Parts',
                     'instructor' => 'Hannah Welton',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Matt-McGuire.jpg',
+                    'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Matt-McGuire.jpg',
                     'title' => 'Song<br> Breakdowns',
                     'instructor' => 'Matt McGuire',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Dorothe-Taylor-02.jpg',
+                    'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Dorothe-Taylor-02.jpg',
                     'title' => 'Rudiments<br> & Patterns',
                     'instructor' => 'Dorothea Taylor',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Aric-Improta.jpg',
+                    'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Aric-Improta.jpg',
                     'title' => 'The Creative<br> Mindset',
                     'instructor' => 'Aric Improta',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Kaz-Rodgriguez.jpg',
+                    'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Kaz-Rodgriguez.jpg',
                     'title' => 'Musical<br> Exercises',
                     'instructor' => 'Kaz Rodriguez',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummers/Gavin-Harrison.jpg',
+                    'img' => 'marketing/drumeo/membership/homepage/2023/drummers/Gavin-Harrison.jpg',
                     'title' => 'Bass Drum<br> Calibration',
                     'instructor' => 'Gavin Harrison',
                     ],
@@ -424,10 +424,15 @@
         ];
     @endphp
 
-    @include('musora.sales.components.coaches-section', [
+    /* @include('musora.sales.components.coaches-section', [
         'header' => 'Study with the world’s <br class="md:hidden">best drummers.',
         'desc' => 'Amplify your skills with 200+ artist courses + <br class="hidden md:inline">access exclusive live events with drumming legends.'
-    ])
+    ]) */
+
+
+    <x-coaches-section :header="'Real Teachers, <br class="sm:hidden">Real Results.'" :desc="'Amplify your skills with exclusive artist <br class="hidden md:inline"> courses + live events with special guests.'" :buttons="$buttons" :courses="$courses" />
+
+
 
     @php
         $songItems = [

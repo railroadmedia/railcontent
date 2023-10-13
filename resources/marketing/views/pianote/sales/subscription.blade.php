@@ -151,7 +151,7 @@
         <section class="text-center px-5 sm:px-6 py-10 sm:py-12 text-white relative" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
             <div class="container max-w-4xl mx-auto">
                 <img class="my-5 h-36 inline sm:hidden"
-                        src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/pianote-october-bundle.png"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/620x0/filters:quality(95)/marketing/pianote/promos/october/pianote-october-bundle.png"
                         alt="learn playing image"
                         fetchpriority="high"
                 >
@@ -168,7 +168,7 @@
                     <img class="h-40 lg:h-48 hidden sm:inline transition-opacity opacity-0"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/pianote-october-bundle.png"
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/promos/october/pianote-october-bundle.png"
                             alt="learn playing image"
                     >
                 </div>
@@ -278,7 +278,7 @@
             <p class="leading-tight text-musora mt-1 sm:mb-10"><strong>We’re giving you a $99 course when you start a 7-day trial of Pianote.</strong></p>
 
             <img class="my-5 h-40 inline sm:hidden"
-                    src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/promo-collage-m.png"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/620x0/filters:quality(95)/marketing/pianote/promos/october/promo-collage-m.png"
                     alt="learn playing image"
                     fetchpriority="high"
             >
@@ -305,7 +305,7 @@
                 <img class="h-80 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/promo-collage.png"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/promos/october/promo-collage.png"
                         alt="learn playing image"
                 >
             </div>
@@ -393,154 +393,9 @@
         'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum and direct access to real teachers. ',
     ])
 
-    @php
-        $buttons = [
-            'Styles', 'Technique', 'Creativity'
-        ];
 
-        $courses = [
-            [
-                'title' => 'Learn any style',
-                'images' => [
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/classical-piano.jpg',
-                    'title' => 'Classical<br> Piano',
-                    'instructor' => 'Victoria Theodore',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/cocktail-piano.jpg',
-                    'title' => 'Cocktail<br> Piano',
-                    'instructor' => 'Brett Ziegler',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/latin-essentials.jpg',
-                    'title' => 'Latin<br> Essentials',
-                    'instructor' => 'Kevin Castro',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/worship-piano.jpg',
-                    'title' => 'Worship<br> Piano',
-                    'instructor' => 'Amberly Martz',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/improvisational-jazz.jpg',
-                    'title' => 'Improvisational<br> Jazz',
-                    'instructor' => 'Jesús Molina',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/gospel-piano.jpg',
-                    'title' => 'Gospel<br> Piano',
-                    'instructor' => 'Erskine Hawkins',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/Latin-Jazz.jpg',
-                    'title' => 'Latin<br> Jazz',
-                    'instructor' => 'Gabriel Palatchi',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/Tango-Piano.jpg',
-                    'title' => 'Tango<br> Piano',
-                    'instructor' => 'Sangah Noona',
-                    ]
-                ]
-            ],
-            [
-                'title' => 'Add essential techniques',
-                'images' => [
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/piano-technique-made-easy.jpg',
-                    'title' => 'Piano Technique<br> Made Easy',
-                    'instructor' => 'Cassi Falk',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/faster-fingers.jpg',
-                    'title' => 'Faster<br> Fingers',
-                    'instructor' => 'Lisa Witt',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/hanon-exercises.jpg',
-                    'title' => 'Hanon<br> Exercises',
-                    'instructor' => 'Cassi Falk',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/de-stupefy-your-left-hand.jpg',
-                    'title' => 'De-Stupefy<br> Your Left Hand',
-                    'instructor' => 'Lisa Witt',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/beautifully-simple-piano-arpeggios.jpg',
-                    'title' => 'Beautifully<br> Simple Piano<br> Arpeggios',
-                    'instructor' => 'Sangah Noona',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/riffs-fills.jpg',
-                    'title' => 'Riffs<br> & Fills',
-                    'instructor' => 'Lisa Witt',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/7-days-to-sight-reading.jpg',
-                    'title' => '7 Days To<br> Sight Reading',
-                    'instructor' => 'Lisa Witt',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/dexterity-finger-strength.jpg',
-                    'title' => 'Dexterity &<br> Finger Strength',
-                    'instructor' => 'Cassi Falk',
-                    ],
-                ]
-            ],
-            [
-                'title' => 'Play more creatively',
-                'images' => [
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/playing-piano-beautifully.jpg',
-                    'title' => 'Playing Piano<br> Beautifully',
-                    'instructor' => 'Lisa Witt',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/musical-freedom.jpg',
-                    'title' => 'Improvisation &<br> Musical Freedom',
-                    'instructor' => 'Jesús Molina',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/the-perfect-arrangement.jpg',
-                    'title' => 'The Perfect<br> Arrangement',
-                    'instructor' => 'Summer Swee-Singh',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/creative-composition.jpg',
-                    'title' => 'Creative<br> Composition',
-                    'instructor' => 'Lisa Witt',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pillars-of-improvisation.jpg',
-                    'title' => 'Pillars of<br> Improvisation',
-                    'instructor' => 'Jordan Leibel',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/the-power-of-chords.jpg',
-                    'title' => 'The Power<br> of Chords',
-                    'instructor' => 'Lisa Witt',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/creative-song-writing.jpg',
-                    'title' => 'Creative<br> Songwriting',
-                    'instructor' => 'Josh Dion',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/rhythmic-playing.jpg',
-                    'title' => 'Rhythmic<br> Playing',
-                    'instructor' => 'Jay Oliver',
-                    ],
-                ]
-            ],
-        ];
-    @endphp
-
-    @include('musora.sales.components.coaches-section', [
-        'header' => 'Real Teachers,  <br class="sm:hidden">Real Results.',
-        'desc' => 'Amplify your skills with exclusive artist <br class="hidden md:inline"> courses + live events with special guests.'
-    ])
+    @include('pianote.sales.partials._coaches-section-extended')
+   
 
     @php
         $songItems = [
@@ -681,7 +536,6 @@
     @hasSection('final')
         @yield('final')
     @elseif(!empty($trialVersion))
-<<<<<<< HEAD
         <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
                 style="background: linear-gradient(to right, #08203a, #0c1524);">
             <div class="container mx-auto max-w-6xl relative z-50">
@@ -690,7 +544,7 @@
                         <div class=" inline-block relative w-full group" style="padding-bottom: 39.5%;perspective: 1000px;">
                             <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                                 <div class=" {{--border-2 border-promo--}} front absolute z-20  w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                    <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/pianote-october-bundle.png);"></div>
+                                    <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/promos/october/pianote-october-bundle.png);"></div>
                                 </div>
                             </div>
                         </div>
@@ -710,25 +564,11 @@
         </section>
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'piano',
-=======
-        @include('musora.sales.components.card-selection-section', [
-            "noSelector" => true,
-            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-plus-logo-light.svg",
-            "logo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-white.png",
-            "songs" => "1000+ popular songs.",
-            "firstPoint" => "Unlimited piano lessons.",
-            "thirdPoint" => "Direct access to real teachers.",
-            "fifthPoint" => "Lesson access for singing, guitar, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[pianote-base-annual-recurring-7-day-trial-membership]=1&promo-code=annual-trial&redirect=/order&locked=true",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[pianote-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
->>>>>>> 2ba590f6e (Updated images)
         ])
-        {{--        @include('musora.sales.components.card-selection-section', [--}}
+       {{--        @include('musora.sales.components.card-selection-section', [--}}
 {{--            "noSelector" => true,--}}
-{{--            "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo-light.svg",--}}
-{{--            "logo" => "https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png",--}}
+{{--            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-plus-logo-light.svg",--}}
+{{--            "logo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-white.png",--}}
 {{--            "songs" => "1000+ popular songs.",--}}
 {{--            "firstPoint" => "Unlimited piano lessons.",--}}
 {{--            "thirdPoint" => "Direct access to real teachers.",--}}
@@ -779,7 +619,6 @@
         'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
         ])
     @else
-<<<<<<< HEAD
         <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
                 style="background: linear-gradient(to right, #08203a, #0c1524);">
             <div class="container mx-auto max-w-6xl relative z-50">
@@ -788,7 +627,7 @@
                         <div class=" inline-block relative w-full group" style="padding-bottom: 39.5%;perspective: 1000px;">
                             <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                                 <div class=" {{--border-2 border-promo--}} front absolute z-20  w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                    <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/pianote-october-bundle.png);"></div>
+                                    <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/promos/october/pianote-october-bundle.png');"></div>
                                 </div>
                             </div>
                         </div>
@@ -808,16 +647,6 @@
         </section>
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'piano',
-=======
-        @include('musora.sales.components.order-section-collage', [
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png',
-        'header' => 'Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
-        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>
-        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
-        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-collage.png',
->>>>>>> 2ba590f6e (Updated images)
         ])
 
 {{--        @include('musora.sales.components.order-section-collage', [--}}
