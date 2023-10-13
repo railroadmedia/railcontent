@@ -48,7 +48,6 @@ class MigrateRechargeSubscriptions extends Command
                 ->where('is_active', 1)
                 ->where('type', 'subscription')
                 ->where('paid_until', '>', Carbon::now())
-                ->limit(100)
                 ->get();
 
             $columns = [
