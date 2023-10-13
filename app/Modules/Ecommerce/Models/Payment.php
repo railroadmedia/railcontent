@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Models;
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -37,6 +38,16 @@ class Payment extends Model
 
     protected $table = 'ecommerce_payments';
     protected $primaryKey = 'id';
+
+    public function orders(): BelongsToMany
+    {
+        return $this->belongsToMany(Order::class, "ecommerce_order_payments");
+    }
+
+    public function orderPayments(): HasMany
+    {
+        return $this->hasMany(OrderPayment::class);
+    }
 
     public function refunds(): HasMany
     {
