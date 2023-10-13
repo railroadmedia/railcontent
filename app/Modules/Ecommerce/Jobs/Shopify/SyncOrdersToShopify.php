@@ -1528,4 +1528,12 @@ class SyncOrdersToShopify implements ShouldQueue
         // limits were already applied in the initial command
         return null;
     }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getLastSyncAtOverride(): null|Carbon
+    {
+        return $this->lastSyncAt;
+    }
 }

@@ -182,10 +182,10 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             ->setParameter("initialOrderType", Payment::TYPE_INITIAL_ORDER);
 
         if (!$fresh) {
-            $qb->andWhere(
-                $qb->expr()
-                    ->isNull("entity.shopifyId")
-            );
+            $nullOrUpdated = $qb->expr()->orX();
+            $nullOrUpdated->add($qb->expr()->isNull("entity.shopifyId"));
+            $nullOrUpdated->add($qb->expr()->gt("entity.updatedAt", ":lastSyncAt"));
+            $qb->andWhere($nullOrUpdated)->setParameter("lastSyncAt", $this->lastSyncAt);
         }
 
         $q = $qb->getQuery();
@@ -1040,5 +1040,13 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     protected function getIsUsingMask(): bool
     {
         return !app()->isProduction();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getLastSyncAtOverride(): null|Carbon
+    {
+        return $this->lastSyncAt;
     }
 }

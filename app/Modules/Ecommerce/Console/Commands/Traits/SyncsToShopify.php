@@ -11,15 +11,14 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Railroad\Ecommerce\Repositories\RepositoryBase;
-use Signifly\Shopify\REST\Resources\CustomerResource;
-use Signifly\Shopify\REST\Resources\OrderResource;
-use Signifly\Shopify\REST\Resources\ProductResource;
 use Signifly\Shopify\Shopify;
 
 trait SyncsToShopify
 {
     protected Shopify $shopify;
     protected ShopifySync $shopifySync;
+    // the closest difference of the current call and limit that we'll allow before sleeping
+    protected int $RATE_LIMIT_THRESHOLD = 60;
 
     /**
      * Perform the sync action up to Shopify, with this class' type of resource
@@ -71,6 +70,27 @@ trait SyncsToShopify
     }
 
     /**
+     * Are we running in simulation mode?
+     *
+     * @return bool
+     */
+    abstract protected function getIsSimulation(): bool;
+
+    /**
+     * Are we doing a fresh sync of everything?
+     *
+     * @return bool
+     */
+    abstract protected function getIsFresh(): bool;
+
+    /**
+     * Get the name of the type of resource being synced to Shopify
+     *
+     * @return string
+     */
+    abstract protected function getSyncResource(): string;
+
+    /**
      * Create a log for this sync
      *
      * @return void
@@ -86,9 +106,18 @@ trait SyncsToShopify
     }
 
     /**
+     * Sync the resources for this class and return the IDs from Shopify
+     *
+     * @param  bool  $simulate  if this is a simulation, or a real execution
+     * @param  bool  $fresh  perform a fresh sync, or only new and updated
+     * @return Collection
+     */
+    abstract protected function syncResource(bool $simulate, bool $fresh): Collection;
+
+    /**
      * Finish the sync log and store the Shopify IDs
      *
-     * @param Collection $shopifyIds
+     * @param  Collection  $shopifyIds
      * @return void
      */
     protected function finishSyncLogIfExecuting(Collection $shopifyIds): void
@@ -99,17 +128,6 @@ trait SyncsToShopify
                 "shopify_ids" => $shopifyIds->toArray()
             ]);
         }
-    }
-
-    /**
-     * Get the date and time that this resource was last synced up to Shopify
-     *
-     * @return Carbon
-     */
-    protected function getDateTimeOfLastSync(): Carbon
-    {
-        $sync = ShopifySync::where("resource", $this->getSyncResource())->latestFinished()->first();
-        return $sync?->finished_at ?? Carbon::createFromTimestamp(0);
     }
 
     /**
@@ -168,18 +186,27 @@ trait SyncsToShopify
     }
 
     /**
-     * Are we running in simulation mode?
+     * Get the Repository for this ecommerce entity
      *
-     * @return bool
+     * @return RepositoryBase|EntityRepository
      */
-    abstract protected function getIsSimulation(): bool;
+    abstract protected function getEcommerceEntityRepository(): RepositoryBase|EntityRepository;
 
     /**
-     * Are we doing a fresh sync of everything?
+     * Get the date and time that this resource was last synced up to Shopify
      *
-     * @return bool
+     * @return Carbon
      */
-    abstract protected function getIsFresh(): bool;
+    protected function getDateTimeOfLastSync(): Carbon
+    {
+        $override = $this->getLastSyncAtOverride();
+        if (!is_null($override)) {
+            return $override;
+        }
+
+        $sync = ShopifySync::where("resource", $this->getSyncResource())->latestFinished()->first();
+        return $sync?->finished_at ?? Carbon::createFromTimestamp(0);
+    }
 
     /**
      * Get the optional limit to the number of entities to sync
@@ -189,27 +216,11 @@ trait SyncsToShopify
     abstract protected function getLimit(): ?int;
 
     /**
-     * Get the name of the type of resource being synced to Shopify
+     * Get the optional override of when this entity was last synced to Shopify
      *
-     * @return string
+     * @return Carbon|null
      */
-    abstract protected function getSyncResource(): string;
-
-    /**
-     * Sync the resources for this class and return the IDs from Shopify
-     *
-     * @param bool $simulate if this is a simulation, or a real execution
-     * @param bool $fresh perform a fresh sync, or only new and updated
-     * @return Collection
-     */
-    abstract protected function syncResource(bool $simulate, bool $fresh): Collection;
-
-    /**
-     * Get the Repository for this ecommerce entity
-     *
-     * @return RepositoryBase|EntityRepository
-     */
-    abstract protected function getEcommerceEntityRepository(): RepositoryBase|EntityRepository;
+    abstract protected function getLastSyncAtOverride(): null|Carbon;
 
     /**
      * WARNING: Do NOT call this before the first `$this->>shopify->___` call, because there will not yet be
@@ -233,7 +244,4 @@ trait SyncsToShopify
             sleep(1);
         }
     }
-
-    // the closest difference of the current call and limit that we'll allow before sleeping
-    protected int $RATE_LIMIT_THRESHOLD = 60;
 }

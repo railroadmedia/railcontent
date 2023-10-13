@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Jobs\Shopify;
 use App\Models\ShopifySync;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsToShopify;
+use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
@@ -65,7 +66,13 @@ class SyncProductsToShopify implements ShouldQueue
         return [new SkipIfBatchCancelled];
     }
 
-    public function __construct(protected int $startAtId, protected int $endAtId, protected int $locationId, protected bool $simulate, protected bool $fresh)
+    public function __construct(
+        protected int $startAtId,
+        protected int $endAtId,
+        protected int $locationId,
+        protected Carbon $lastSyncAt,
+        protected bool $simulate,
+        protected bool $fresh)
     {
         $this->shopifyIds = collect();
         $this->productsToSkip = collect();
@@ -914,5 +921,13 @@ class SyncProductsToShopify implements ShouldQueue
     protected function getEcommerceEntityRepository(): RepositoryBase|EntityRepository
     {
         return $this->productRepository;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getLastSyncAtOverride(): null|Carbon
+    {
+        return $this->lastSyncAt;
     }
 }

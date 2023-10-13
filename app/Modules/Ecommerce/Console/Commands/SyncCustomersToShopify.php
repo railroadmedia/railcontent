@@ -25,9 +25,10 @@ class SyncCustomersToShopify extends SyncCustomersToShopifyBaseCommand
      */
     protected $signature = 'shopify:sync-customers
                             {--limit= : (Optional) The number of customers to limit this run to.}
-                            {--no-email-mask : Do not mask customer Email addresses. Without this flag, email addresses will be masked in Shopify. }
+                            {--no-email-mask : Do not mask customer Email addresses. Without this flag, email addresses will be masked in Shopify.}
+                            {--since= : (Optional) The ISO 8601 date time to sync all changes since. e.g. 2023-10-13T17:03:25+00:00}
                             {--fresh : Sync all customers, not just those that need it}
-                            {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
+                            {--execute : Execute this sync to Shopify. Without this flag, it will be simulated.}';
 
     /**
      * The console command description.

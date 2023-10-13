@@ -25,8 +25,9 @@ class SyncSubscriptionPaymentsToShopifyOrdersDispatcher extends Command
     protected $signature = 'shopify:sync-subscription-payments
                             {--startingId= : (Optional) The SubscriptionPayment Id to start processing at}
                             {--limit= : (Optional) The number of subscription payments to limit this run to}
+                            {--since= : (Optional) The ISO 8601 date time to sync all changes since. e.g. 2023-10-13T17:03:25+00:00}
                             {--fresh : Sync all subscription payments, not just those that need it}
-                            {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
+                            {--execute : Execute this sync to Shopify. Without this flag, it will be simulated.}';
     /**
      * The console command description.
      *
@@ -177,7 +178,26 @@ class SyncSubscriptionPaymentsToShopifyOrdersDispatcher extends Command
      */
     protected function getDateTimeOfLastSync(): Carbon
     {
+        $override = $this->getLastSyncAtOverride();
+        if (!is_null($override)) {
+            return $override;
+        }
+
         $sync = ShopifySync::where("resource", ShopifySync::RESOURCE_SUBSCRIPTION_PAYMENT)->latestFinished()->first();
         return $sync?->finished_at ?? Carbon::createFromTimestamp(0);
+    }
+
+    /**
+     * Get the optional override of when this entity was last synced to Shopify
+     *
+     * @return Carbon|null
+     */
+    protected function getLastSyncAtOverride(): null|Carbon
+    {
+        $override = $this->option("since");
+        if (!is_null($override)) {
+            return new Carbon($override);
+        }
+        return null;
     }
 }
