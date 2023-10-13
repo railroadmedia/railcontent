@@ -2,8 +2,8 @@
 
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
-use App\Modules\Ecommerce\Enums\ShopifyTagIdentifier;
-use App\Modules\Ecommerce\Enums\ShopifyTagValue;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsToShopify;
@@ -598,12 +598,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         // we need to know what currency was used, so get it from the payment
         $currency = $payment->getCurrency() ?? self::DEFAULT_CURRENCY;
 
-        // tags are a string of comma-separated values, and each individual tag is limited to 40 characters in length.
-        // build up an array of tags here, and we'll implode them into the data payload
-        $tags = [
-            ShopifyTagValue::buildTag(ShopifyTagIdentifier::PaymentSource, ShopifyTagValue::getForPayment($payment))
-        ];
-
         $orderData = [
             "currency" => $currency,
             "customer" => ["id" => $purchaserId],
@@ -615,16 +609,22 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             "total_outstanding" => number_format(($payment->getTotalDue() - $payment->getTotalPaid()) ?? 0, 2),
             "total_price" => number_format($subscription->getTotalPrice() ?? 0, 2),
             "total_tax" => number_format($subscription->getTax() ?? 0, 2),
-            "tags" => implode(",", $tags),
+            // "tags" => "",
             // refer to https://shopify.dev/docs/apps/custom-data/metafields/types
             // we can use meta fields for stuff like our subscription payment id, etc
             "metafields" =>
                 array(
                     [
-                        "key" => "_id",
+                        "key" => ShopifyMetafieldKey::Id,
                         "value" => $subscriptionPayment->getId(),
-                        "type" => "number_integer",
+                        "type" => ShopifyMetafieldTypes::integer,
                         "namespace" => "subscription_payments"
+                    ],
+                    [
+                        "key" => ShopifyMetafieldKey::PaymentSource,
+                        "value" => $this->getPaymentSourceMetafieldValue($payment),
+                        "type" => ShopifyMetafieldTypes::single_line_text_field,
+                        "namespace" => "payment_source"
                     ]
                 )
         ];
@@ -665,6 +665,21 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         );
 
         return $orderData;
+    }
+
+    /**
+     * Get the value to use for the given payment's source
+     *
+     * @param  Payment  $payment
+     * @return string
+     */
+    private function getPaymentSourceMetafieldValue(Payment $payment): string
+    {
+        return match ($payment->getType()) {
+            Payment::TYPE_APPLE_SUBSCRIPTION_RENEWAL => 'apple-app',
+            Payment::TYPE_GOOGLE_SUBSCRIPTION_RENEWAL => 'google-app',
+            default => 'web-app',
+        };
     }
 
     /**
