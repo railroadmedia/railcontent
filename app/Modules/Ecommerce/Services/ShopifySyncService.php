@@ -209,7 +209,7 @@ class ShopifySyncService
             return $user;
         }
         if ($email) {
-            $user = $this->userService->getByEmailOrNull($shopifyCustomerId);
+            $user = $this->userService->getByEmailOrNull($email);
             if ($user) {
                 return $user;
             }
