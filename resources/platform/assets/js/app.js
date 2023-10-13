@@ -28,7 +28,6 @@ import SoundSlice from './vue/components/SoundSlice/SoundSlice.vue';
 import CohortBanner from './vue/components/CohortBanner/CohortBanner.vue';
 import ContentInfo from './vue/components/ContentInfo/ContentInfo';
 import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWrapper';
-import ContentCollection from './vue/components/Catalogue/ContentCollection';
 import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper';
 
 //Vuesora Assets
@@ -263,7 +262,6 @@ app.component('AppContainer', AppContainer)
     .component('CatalogueCardContainer', CatalogueCardContainer)
     .component('ContentInfo', ContentInfo)
     .component('CollectionFilterWrapper', CollectionFilterWrapper)
-    .component('ContentCollection', ContentCollection)
     .component('CollectionWrapper', CollectionWrapper)
 
     .component('PlaylistPlaybackWrapper', defineAsyncComponent(() =>
