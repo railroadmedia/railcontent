@@ -4,18 +4,6 @@
     <div v-if="isCoachesGrid"
          id="coach-section"
          class="tw-flex tw-flex-col tw-mb-6">
-            <filter-wrapper
-                :search-term="search_term"
-                :selected-tab="selectedTab"
-                :selected-sort="sort"
-                :filter-params="filter_params"
-                :multi-select-columns="filterMultiSelectColumns"
-                :tab-options="[{ value: 'allCoaches', key: 'All Coaches' }, { value: 'subscribedCoaches', key: 'Subscribed Coaches' }]"
-                @handleSearch="handleSearch"
-                @on-filter-click="applyFilters"
-                @handleContentSort="handleContentSort"
-                @on-click-filter-tab="handleFilterTabClick"
-            ></filter-wrapper>
         <div class="tw-flex tw-flex-wrap">
             <a class="tw-no-underline tw-mb-2 sm:tw-mb-0 tw-mr-6 tw-transition"
                :href="coachIndexUrl + '#coach-section'"
@@ -276,12 +264,10 @@ import Toasts from "../../assets/js/classes/toasts";
 import Pagination from "../../components/Pagination.vue";
 import UserCatalogueEvents from "../../mixins/UserCatalogueEvents";
 import ThemeClasses from "../../mixins/ThemeClasses";
-import FilterWrapper from "../../../components/Filter/FilterWrapper";
 
 export default {
   name: "ContentCatalogue",
   components: {
-      FilterWrapper,
     "grid-catalogue": GridCatalogue,
     "coach-grid-catalogue": CoachGridCatalogue,
     "coaches-grid-catalogue": CoachesGridCatalogue,
@@ -670,7 +656,6 @@ export default {
             this.selectedTab = 'allCoaches';
             this.coachData['subscribedCoaches'] = [...this.content];
             this.getContent(true, true);
-            console.log(this.coachData)
         });
 
         this.getFilterColumns();
@@ -935,7 +920,6 @@ export default {
     handleFilterChange(payload) {
       this.filter_params[payload.key] = payload.value;
       this.page = 1;
-      console.log(this.filter_params);
 
       if (this.useUrlParams) {
         this.setUrlParams();

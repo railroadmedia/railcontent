@@ -2,10 +2,10 @@
     <div class="tw-flex tw-flex-col md:tw-flex-row tw-w-full tw-justify-between">
         <div class="tw-flex tw-grow tw-relative tw-items-center tw-mb-[18px]">
             <!-- Title -->
-            <div v-if="title" class="tw-font-bold tw-text-2xl md:tw-text-[26px] lg:tw-text-3xl tw-h-[40px] md:tw-h-[50px] tw-flex tw-items-center tw-text-[#000C17] dark:tw-text-white">{{ title }}</div>
+            <div v-if="collectionTitle" class="tw-font-bold tw-text-2xl md:tw-text-[26px] lg:tw-text-3xl tw-h-[40px] md:tw-h-[50px] tw-flex tw-items-center tw-text-[#000C17] dark:tw-text-white">{{ collectionTitle }}</div>
 
             <!-- Filter Tabs -->
-            <filter-tabs v-if="tabOptions.length > 0" :selected-tab="selectedTab" :tab-options="tabOptions" @onTabClick="handleTabClick" />
+            <filter-tabs v-if="tabOptions.length > 0" :active-tab="activeTab" :tab-options="tabOptions" @onTabClick="handleTabClick" />
             <div class="tw-flex tw-grow tw-justify-end md:tw-hidden">
                 <button @click="handleOpenDropdown"
                     class="tw-flex tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="tw-flex tw-grow tw-justify-end tw-relative">
-            <filter-search :search-term="searchTerm" @on-submit="handleSubmit" @on-text-change="handleSearchChange"></filter-search>
+            <filter-search :search-term="searchTerm" @on-submit="handleSubmit"></filter-search>
             <template v-if="!hideFilterIcon">
                 <button v-if="!isCollapsed" @click="() => emit('onToggleCollapse')"
                     class="tw-hidden md:tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[50px] tw-h-[50px] tw-border-[2px] tw-border-black tw-bg-[#000C17] dark:tw-bg-white dark:tw-border-white tw-rounded-full">
@@ -38,14 +38,14 @@
                 class="tw-hidden md:tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[50px] tw-h-[50px] tw-border-[2px] tw-border-[#CBCBCD] tw-bg-white dark:tw-bg-[#000C17] dark:tw-border-white tw-rounded-full">
                 <musora-icon :icon-name="sortIcon()" class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
             </button>
-            <FilterSortDropdown v-if="showDropdown" :sortOptions="sortOptions" :selected-sort="selectedSort" @onClose="handleCloseDropdown"
-                @onSort="handleSort" />
+            <FilterSortDropdown v-if="showDropdown" :sortOptions="sortOptions" :selected-sort="()=>selectedSort" @onClose="handleCloseDropdown"
+                @onSort="value => $emit('onSort', value)" />
         </div>
     </div>
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue';
+    import {onMounted, ref} from 'vue';
     import { AdjustmentsIcon, XIcon } from '@heroicons/vue/outline';
     import FilterTabs from './FilterTabs.vue';
     import FilterSearch from './FilterSearch.vue';
@@ -53,15 +53,15 @@ import {onMounted, ref} from 'vue';
     import MusoraIcon from "../MusoraIcons/MusoraIcon";
 
     const props = defineProps({
+        activeTab: {
+            type: String,
+            default: '',
+        },
         searchTerm: {
             type: String,
             default: '',
         },
         selectedSort: {
-            type: String,
-            default: '',
-        },
-        selectedTab: {
             type: String,
             default: '',
         },
@@ -81,16 +81,15 @@ import {onMounted, ref} from 'vue';
             type: Boolean,
             default: false,
         },
-        title: {
+        collectionTitle: {
             type: String,
             default: '',
         },
     });
 
-    const emit = defineEmits(['onToggleCollapse', 'onFilterTabClick', 'onSearchChange', 'onSearchSubmit', 'onContentSort']);
-
+    const emit = defineEmits(['onToggleCollapse', 'onFilterTabClick']);
     const showDropdown = ref(false);
-    const sortOptions = ref(props.sortOptionData);
+    const sortOptions = ref(null);
 
     // the following refs will be replaced by pinia state
     const inputText = ref('');
@@ -100,13 +99,8 @@ import {onMounted, ref} from 'vue';
         emit('onFilterTabClick', value)
     };
 
-    const handleSearchChange = (text) => {
-        inputText.value = text;
-        emit('onSearchChange', text)
-    };
-
-    const handleSubmit = () => {
-        emit('onSearchSubmit');
+    const handleSubmit = (value) => {
+        emit('onSearchSubmit', value);
     };
 
     const handleCloseDropdown = () => {
@@ -117,23 +111,18 @@ import {onMounted, ref} from 'vue';
         showDropdown.value = true;
     };
 
-    const handleSort = (key) => {
-        selectedSort.value = key;
-        emit('onContentSort', key);
-    };
-
     const sortIcon = () => {
-        return props.selectedSort ? props.sortOptions.find(option => option.key === props.selectedSort).icon : 'sort-down';
+        return sortOptions.value && sortOptions.value.find(option => option.value === props.selectedSort).icon;
     };
 
     onMounted(()=>{
         if (props.sortOptionData.length === 0){
             sortOptions.value = [
-                { key: '-published_on', name: 'Newest First', icon: 'sort-down', },
-                { key: 'published_on', name: 'Oldest First', icon: 'sort-up', },
-                { key: '-popularity', name: 'Most Popular', icon: 'sort-popularity', },
-                { key: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
-                { key: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
+                { value: '-published_on', name: 'Newest First', icon: 'sort-down', },
+                { value: 'published_on', name: 'Oldest First', icon: 'sort-up', },
+                { value: '-popularity', name: 'Most Popular', icon: 'sort-popularity', },
+                { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
+                { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
             ];
         }
         else {

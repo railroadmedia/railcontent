@@ -186,6 +186,7 @@
                         no-results-message="Looks like you haven't started any lessons.
             Once you watch a video, it will show up here for you to access later."
                         :six-wide="true"
+                        :show-filter="false"
                     >
                         <div class="flex flex-row nmh-1">
                             @for($i = 0; $i < 6; $i++)

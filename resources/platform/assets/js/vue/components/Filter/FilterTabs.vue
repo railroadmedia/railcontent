@@ -17,22 +17,18 @@
             type: Array,
             default: [],
         },
-        selectedTab: {
+        activeTab: {
             type: String,
-            default: 'songs',
+            default: '',
         },
     });
     const emit = defineEmits(['onTabClick']);
 
-    const isActive = (key) => {
-        return key === props.selectedTab;
+    const isActive = (value) => {
+        return value === props.activeTab;
     };
 
     const onTabClick = (key) => {
         emit('onTabClick', key);
     };
 </script>
-
-<style scoped>
-
-</style>
