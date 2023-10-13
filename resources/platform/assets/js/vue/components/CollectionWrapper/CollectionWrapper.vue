@@ -8,7 +8,7 @@
       />
 
       <transition appear name="fade">
-        <ContentCollection />
+        <CollectionResults />
       </transition>
   </div>
 </template>
@@ -16,7 +16,7 @@
 <script setup>
   import { onMounted } from "vue";
   import CollectionFilterWrapper from '../Filter/CollectionFilterWrapper.vue';
-  import ContentCollection from '../Catalogue/ContentCollection.vue';
+  import CollectionResults from '../Catalogue/CollectionResults.vue';
   import { useCollectionStore } from "../../../stores/collection";
 
   const props = defineProps({
