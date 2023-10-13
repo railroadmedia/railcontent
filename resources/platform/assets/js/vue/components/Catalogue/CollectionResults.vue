@@ -1,9 +1,6 @@
 <template>
     <div>
-        <coaches-grid-catalogue
-            :content="collectionStore.data"
-            :brand="collectionStore.brand"
-        />
+        <slot></slot>
 
         <transition name="show-from-bottom">
             <div
@@ -25,7 +22,6 @@
 
 <script setup>
     import { onMounted, onUnmounted } from "vue";
-    import CoachesGridCatalogue from "../../vuesora/views/catalogues/CoachesGridCatalogue";
     import { useCollectionStore } from "../../../stores/collection";
 
     const collectionStore = useCollectionStore();
