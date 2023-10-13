@@ -108,7 +108,6 @@
     const handleSearch = (value) => {
         collectionStore.setSearchTerm(value);
         collectionStore.getData();
-        collectionStore.setParams();
     }
 
     const handleFilterChange = (selection) => {
@@ -128,7 +127,6 @@
 
     const handleSort = (item) => {
         collectionStore.sortData(item);
-        collectionStore.setParams();
     }
 
     const tabClick = (tab) => {
