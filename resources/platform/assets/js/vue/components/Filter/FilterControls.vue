@@ -87,7 +87,7 @@
         },
     });
 
-    const emit = defineEmits(['onToggleCollapse', 'onFilterTabClick']);
+    const emit = defineEmits(['onToggleCollapse', 'onFilterTabClick', 'onSearchSubmit']);
     const showDropdown = ref(false);
     const sortOptions = ref(null);
 
