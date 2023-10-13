@@ -30,4 +30,10 @@ class UserService
     {
         return User::query()->whereIn('id', $userIds)->get();
     }
+
+    public function getUserByShopifyCustomerId($shopifyCustomerId): ?User
+    {
+        $user = User::query()->where('shopify_id', '=', $shopifyCustomerId)->first('id');
+        return $user ?? null;
+    }
 }

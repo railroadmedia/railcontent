@@ -102,17 +102,16 @@ class UserAccessPermissionsService
     }
 
 
-    public function syncShopifyOrders(int $userId, $orders): void
+    public function syncShopifyOrders(User $user, $orders, $products): void
     {
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
-        $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($userId);
-        $variantIds = $orders->pluck('line_items')->flatten(1)->pluck('variant_id')->unique()->toArray();
-        $productLookup = $this->productService->getProductsByShopifyIds($variantIds)->keyBy('shopify_id');
+        $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($user->id);
+        $productLookup = $products->keyBy('sku');
 
         $wasUpdated = false;
         foreach ($orders->sortBy('created_at') as $order) {
             $wasUpdated |= $this->syncShopifyOrder(
-                $userId,
+                $user,
                 $order,
                 $existingAccessPermissionsLookup,
                 $productLookup,
@@ -121,31 +120,30 @@ class UserAccessPermissionsService
         }
 
         $wasUpdated |= $this->ensureUserProductAccess(
-            $userId,
+            $user,
             $contentPermissionsLookup
         );
 
 
         if ($wasUpdated) {
-            $accessPermissions = $this->getUserAccessPermissions($userId);
+            $accessPermissions = $this->getUserAccessPermissions($user->id);
             event(new UserAccessPermissionsUpdated($accessPermissions));
         }
     }
 
     private function syncShopifyOrder(
-        int $userId,
+        User $user,
         $order,
         Collection $existingAccessPermissionsLookup,
         Collection $productLookup,
         Collection $contentPermissionsLookup
     ): bool {
         $shopifyOrderId = $order["id"];
-        $user = $this->userService->getByIdOrNull($userId);
 
         $wasUpdated = false;
         foreach ($order['line_items'] as $lineItem) {
             /** @var Product $product */
-            $product = $productLookup[$lineItem['variant_id']] ?? null;
+            $product = $productLookup[$lineItem['sku']] ?? null;
             if (!$product) {
                 continue;
             }
@@ -158,7 +156,7 @@ class UserAccessPermissionsService
                 $status = $this->getPermissionStatusFromOrder($order);
                 if (!$accessPermission) {
                     $accessPermission = new UserAccessPermission();
-                    $accessPermission->user_id = $userId;
+                    $accessPermission->user_id = $user->id;
                     $accessPermission->permission_id = $contentPermission->id;
                     $accessPermission->source = UserAccessPermissionsSourceEnum::Shopify;
                     $accessPermission->source_hash = $hash;
@@ -169,7 +167,7 @@ class UserAccessPermissionsService
                     $accessPermission->status = $status;
                     $accessPermission->save();
                     $wasUpdated = true;
-                } elseif ($accessPermission->status != $status) {
+                } elseif ($accessPermission->status != $status->value) {
                     //Only ever need to update the order status if order is cancelled
                     $accessPermission->status = $status;
                     $accessPermission->save();
@@ -221,11 +219,11 @@ class UserAccessPermissionsService
      * Temporary function to handle manual changes to user products not represented in users orders
      */
     private function ensureUserProductAccess(
-        int $userId,
+        User $user,
         Collection $contentPermissionsLookup
     ): bool {
-        $userAccessPermissions = $this->getUserAccessPermissions($userId);
-        $userPermissions = $this->buildUserPermissionsList($userId, $contentPermissionsLookup);
+        $userAccessPermissions = $this->getUserAccessPermissions($user->id);
+        $userPermissions = $this->buildUserPermissionsList($user->id, $contentPermissionsLookup);
         $wasUpdated = false;
         foreach ($userPermissions as $permissionId => $dates) {
             $isLifeTime = $dates['expiration_date'] == null;
@@ -239,7 +237,7 @@ class UserAccessPermissionsService
                 $days = $isLifeTime ? 0 : ($expirationDate->diffInDays($userAccessExpirationDate) + 1);
                 //User products not synced with orders Add manual permission to fix missing access
                 $accessPermission = new UserAccessPermission();
-                $accessPermission->user_id = $userId;
+                $accessPermission->user_id = $user->id;
                 $accessPermission->permission_id = $permissionId;
                 $accessPermission->source = UserAccessPermissionsSourceEnum::Manual;
                 $accessPermission->source_hash = '';
@@ -319,10 +317,19 @@ class UserAccessPermissionsService
         return new UserAccessPermissionsCollection($userId, $items);
     }
 
-    public function createOrUpdateUserAccessPermission($userId, $permissionId, $startTime,$timeDays, $timeMonths,$lifetime,$status,$revokedAt=null,$userProductId = null)
-    {
+    public function createOrUpdateUserAccessPermission(
+        $userId,
+        $permissionId,
+        $startTime,
+        $timeDays,
+        $timeMonths,
+        $lifetime,
+        $status,
+        $revokedAt = null,
+        $userProductId = null
+    ) {
         $userAccessPermission = new UserAccessPermission();
-        if($userProductId){
+        if ($userProductId) {
             $userAccessPermission = UserAccessPermission::query()->where('id', $userProductId)->first();
         }
         $userAccessPermission->user_id = $userId;
@@ -334,7 +341,7 @@ class UserAccessPermissionsService
         $userAccessPermission->time_months = $timeMonths;
         $userAccessPermission->time_lifetime = $lifetime ?? 0;
         $userAccessPermission->status = $status;
-        if($revokedAt){
+        if ($revokedAt) {
             $userAccessPermission->revoked_at = $revokedAt;
         }
         $userAccessPermission->save();
