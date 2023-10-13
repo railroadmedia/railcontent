@@ -2,6 +2,8 @@
 
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
+use App\Modules\Ecommerce\Enums\ShopifyTagIdentifier;
+use App\Modules\Ecommerce\Enums\ShopifyTagValue;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsToShopify;
@@ -596,6 +598,12 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         // we need to know what currency was used, so get it from the payment
         $currency = $payment->getCurrency() ?? self::DEFAULT_CURRENCY;
 
+        // tags are a string of comma-separated values, and each individual tag is limited to 40 characters in length.
+        // build up an array of tags here, and we'll implode them into the data payload
+        $tags = [
+          ShopifyTagIdentifier::PaymentSource->value . ':' . ShopifyTagValue::getForPayment($payment)->value
+        ];
+
         $orderData = [
             "currency" => $currency,
             "customer" => ["id" => $purchaserId],
@@ -607,7 +615,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             "total_outstanding" => number_format(($payment->getTotalDue() - $payment->getTotalPaid()) ?? 0, 2),
             "total_price" => number_format($subscription->getTotalPrice() ?? 0, 2),
             "total_tax" => number_format($subscription->getTax() ?? 0, 2),
-            // "tags" => "",
+            "tags" => implode(",", $tags),
             // refer to https://shopify.dev/docs/apps/custom-data/metafields/types
             // we can use meta fields for stuff like our subscription payment id, etc
             "metafields" =>
@@ -630,7 +638,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
 
         // the proper addresses should already have been synced by the user/customer, so only use it if Shopify has it
         try {
-            $address = $payment->getPaymentMethod()->getBillingAddress() ?? null;
+            $address = $payment->getPaymentMethod()?->getBillingAddress() ?? null;
             if ($address?->getShopifyId()) {
                 $orderData["billing_address"] = ["id" => $address->getShopifyId()];
             }
