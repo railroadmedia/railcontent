@@ -70,14 +70,6 @@ class ShopifySyncService
         $this->syncCustomer($customer->id, $email);
     }
 
-    /**
-     * @param User $user
-     * @param int[] $productIds
-     * @param string $brand
-     * @param float $price
-     * @param float|null $tax
-     * @return void
-     */
     public function syncOrder(
         User $user,
         array $productIds,

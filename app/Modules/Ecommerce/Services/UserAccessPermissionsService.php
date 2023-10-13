@@ -142,9 +142,11 @@ class UserAccessPermissionsService
 
         $wasUpdated = false;
         foreach ($order['line_items'] as $lineItem) {
+            $sku = $lineItem['sku'];
             /** @var Product $product */
-            $product = $productLookup[$lineItem['sku']] ?? null;
+            $product = $productLookup[$sku] ?? null;
             if (!$product) {
+                Log::warning("Product $sku does not exist.  Fix issue and resync user: $user->id email: $user->email order: $shopifyOrderId");
                 continue;
             }
             $contentPermissions = $product->getContentPermissions($contentPermissionsLookup);
