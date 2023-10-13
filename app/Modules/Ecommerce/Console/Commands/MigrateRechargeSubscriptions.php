@@ -23,17 +23,21 @@ class MigrateRechargeSubscriptions extends Command
         return "MigrateRechargeSubscriptions";
     }
 
-    protected function appendToFile($filename, string $data)
+    protected function createFileForLocalData(string $data): string
     {
+        $filename = $this->getClassName() . "-" . preg_replace('~\D~', '', microtime(true)) . ".csv";
+
         if (app()->environment("local", "development")) {
-            $storageResult = Storage::append($filename, $data);
+            $storageResult = Storage::put($filename, $data);
         } else {
-            $storageResult = Storage::disk('musora_web_platform_s3')->append($filename, $data);
+            $storageResult = Storage::disk('musora_web_platform_s3')->put($filename, $data);
         }
 
         if (!$storageResult) {
             throw new Exception(sprintf("%s: Failed to write .jsonl file", $this->getClassName()));
         }
+
+        return $filename;
     }
 
     public function handle(Shopify $shopify, RechargeGateway $rechargeGateway)
@@ -77,9 +81,6 @@ class MigrateRechargeSubscriptions extends Command
                 'status'
             ];
             $data = implode(',', $columns);
-            $fileName = $this->getClassName() . "-" . preg_replace('~\D~', '', microtime(true)) . ".csv";
-
-            $this->appendToFile($fileName, $data);
 
             $this->info('Loading Product Information');
             $productIds = $subscriptions->pluck('product.shopify_id')->unique()->mapWithKeys(
@@ -93,9 +94,9 @@ class MigrateRechargeSubscriptions extends Command
                 }
             )->toArray();
 
-            $this->info("Creating csv $fileName");
+            $this->info('Building CSV');
 
-            $this->withProgressBar($subscriptions, function ($subscription) use (&$data, $productIds, $fileName) {
+            $this->withProgressBar($subscriptions, function ($subscription) use (&$data, $productIds) {
                 $product = $subscription->product;
                 $variantId = $product?->shopify_id ?? 0;
                 //TODO:Check to make sure product has a shopify id
@@ -144,10 +145,10 @@ class MigrateRechargeSubscriptions extends Command
                     "shipping_phone" => '',
                     "status" => "active"
                 ];
-                $data = implode(',', $d);
-                $fileName = $this->appendToFile($fileName, $data);
+                $data .= "\n" . implode(',', $d);
             });
 
+            $fileName = $this->createFileForLocalData($data);
             $this->info("Created csv $fileName");
         });
     }
