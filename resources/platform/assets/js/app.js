@@ -29,6 +29,7 @@ import CohortBanner from './vue/components/CohortBanner/CohortBanner.vue';
 import ContentInfo from './vue/components/ContentInfo/ContentInfo';
 import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWrapper';
 import ContentCollection from './vue/components/Catalogue/ContentCollection';
+import CoachCollectionWrapper from './vue/components/CollectionWrapper/CoachCollectionWrapper';
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -263,6 +264,7 @@ app.component('AppContainer', AppContainer)
     .component('ContentInfo', ContentInfo)
     .component('CollectionFilterWrapper', CollectionFilterWrapper)
     .component('ContentCollection', ContentCollection)
+    .component('CoachCollectionWrapper', CoachCollectionWrapper)
 
     .component('PlaylistPlaybackWrapper', defineAsyncComponent(() =>
         import(
