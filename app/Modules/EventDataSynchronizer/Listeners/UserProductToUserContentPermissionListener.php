@@ -70,7 +70,7 @@ class UserProductToUserContentPermissionListener
 
     public function syncContentPermissions(int $userId, UserAccessPermissionsCollection $userAccessPermissions): void
     {
-        $permissionIds = $userAccessPermissions->getPermissionIds();
+        $permissionIds = $userAccessPermissions->getActivePermissionIds();
         $existingUserPermissions = $this->contentPermissionsService->getUserPermissions($userId)->keyBy(
             'permission_id'
         );

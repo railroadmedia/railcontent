@@ -23,8 +23,9 @@ class ShopifyWebHookController extends Controller
             Log::debug(print_r($request->all(), true));
 
             $shopifyCustomerId = $request->get('customer')['id'];
-            Log::debug("Shopify customer id: $shopifyCustomerId");
-            $this->shopifySyncService->syncCustomer($shopifyCustomerId);
+            $email = $request->get('customer')['email'];
+            Log::debug("Shopify customer id: $shopifyCustomerId email: $email");
+            $this->shopifySyncService->syncCustomer($shopifyCustomerId, $email);
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());

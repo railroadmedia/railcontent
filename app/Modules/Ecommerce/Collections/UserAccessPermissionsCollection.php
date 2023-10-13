@@ -117,9 +117,11 @@ class UserAccessPermissionsCollection
         return $endDate > Carbon::now();
     }
 
-    public function getPermissionIds(): array
+    public function getActivePermissionIds(): array
     {
-        return $this->collection->pluck('permission_id')->unique()->sort()->toArray();
+        return $this->collection->where(function ($permission) {
+            return $permission->status != 'revoked';
+        })->pluck('permission_id')->unique()->sort()->toArray();
     }
 
     public function hasUserOwnedPermissions(array $permissionIds): bool
@@ -145,6 +147,4 @@ class UserAccessPermissionsCollection
         list(, $endDate) = $this->getActiveDates($permissionID);
         return $endDate > Carbon::now();
     }
-
-
 }

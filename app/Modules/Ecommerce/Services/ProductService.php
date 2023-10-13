@@ -8,10 +8,17 @@ use Illuminate\Support\Collection;
 class ProductService
 {
 
-    public function getProductsByShopifyIds(array $shopifyProductIds)
+    public function getProductsByShopifyIds(array $shopifyProductIds) : Collection
     {
         return Product::query()
             ->whereIn('shopify_id', $shopifyProductIds)
+            ->get();
+    }
+
+    public function getProductsBySkus(array $skus) : Collection
+    {
+        return Product::query()
+            ->whereIn('sku', $skus)
             ->get();
     }
 
