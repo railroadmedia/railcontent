@@ -14,8 +14,6 @@ export const useCollectionStore = defineStore({
                 currentPage: 1,
                 limit: 10,
                 params: {},
-                searchTerm: '',
-                sort: 'slug',
             },
             loading: false,
             tabData: {},
@@ -23,20 +21,19 @@ export const useCollectionStore = defineStore({
         }
     },
     actions:{
-        getCoachesEndpoint(){
-            return this.filter.activeTab === "allCoaches" ? '/railcontent/content?only_subscribed=' : '/railcontent/content?only_subscribed=true';
-        },
         async fetchData(){
             try {
                 const response = await axios
-                    .get( this.getCoachesEndpoint(), {
-                        params: {
-                            brand: this.brand,
-                            limit: this.filter.limit,
-                            page: this.filter.currentPage,
-                            sort: this.filter.sort,
-                            ...this.filter.params,
-                            [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm,
+                    .get(
+                        this.tabData[this.filter.activeTab].endpoint,
+                        {
+                            params: {
+                                brand: this.brand,
+                                limit: this.filter.limit,
+                                page: this.filter.currentPage,
+                                sort: this.tabData[this.filter.activeTab].sort,
+                                ...this.filter.params,
+                                [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.tabData[this.filter.activeTab].searchTerm,
                         },
                     })
                 return response;
@@ -60,8 +57,8 @@ export const useCollectionStore = defineStore({
         getParams(){
             const params = new URLSearchParams(window.location.search);
 
-            if (params.get('term')) this.filter.searchTerm = params.get('term') || '';
-            this.filter.sort = params.get('sort') || 'slug';
+            if (params.get('term')) this.tabData[this.filter.activeTab].searchTerm = params.get('term') || '';
+            this.tabData[this.filter.activeTab].sort = params.get('sort') || 'slug';
 
         },
         loadMore(){
@@ -100,12 +97,16 @@ export const useCollectionStore = defineStore({
           if(defaults.filter){
               this.filter = {...this.filter, ...defaults.filter};
           }
+
+          if(defaults.tabData){
+              this.tabData = {...defaults.tabData};
+          }
         },
         setParams(){
             const url = new URL(window.location.origin + window.location.pathname);
 
-            url.searchParams.set(this.filter.hasOwnProperty('term') ? 'term' : 'title', this.filter.searchTerm);
-            url.searchParams.set('sort', this.filter.sort);
+            url.searchParams.set(this.filter.hasOwnProperty('term') ? 'term' : 'title', this.tabData[this.filter.activeTab].searchTerm);
+            url.searchParams.set('sort', this.tabData[this.filter.activeTab].sort);
 
             window.history.pushState({}, '', url);
         },
@@ -114,18 +115,19 @@ export const useCollectionStore = defineStore({
             this.getData();
         },
         sortData(item){
-            this.filter.sort = item;
+            this.tabData[this.filter.activeTab].sort = item;
             this.getData();
         },
         switchTab(tab){
             //Save page data
             this.tabData[this.filter.activeTab] = {
+                ...this.tabData[this.filter.activeTab],
                 data: [...this.data],
                 currentPage: this.filter.currentPage,
                 totalPages: this.totalPages,
             }
 
-            if(this.tabData[tab]){
+            if(this.tabData[tab].data){
                 this.filter.activeTab = tab;
                 this.data = ([...this.tabData[this.filter.activeTab].data]);
                 this.filter.currentPage = this.tabData[tab].currentPage;
