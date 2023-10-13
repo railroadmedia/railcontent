@@ -75,14 +75,15 @@ class CohortPackController
             $nPackOwners = $this->userProductService->getNumberProductOwners($productId);
         } else {
             $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
-            $permissionID = $product->getContentPermissions($contentPermissionsLookup)->first()->id ?? null;
+            $permissionID =
+                $product->getContentPermissions($contentPermissionsLookup)
+                    ->first()->id ?? null;
             $hasProduct = user() && $this->userAccessPermissionsService->hasPermission(user()?->id, $permissionID);
             $nPackOwners = $this->userAccessPermissionsService->getNumberPermissionOwners($permissionID);
         }
         $registerButtonUrl =
             (!$hasProduct) ?
-                url()->route('platform.cohort.register', ['brand' => brand(), 'product' => $product->sku]) :
-                '#final';
+                url()->route('platform.cohort.register', ['brand' => brand(), 'product' => $product->sku]) : '#final';
 
         $enrollmentClosed = $cohort['enrollmentClosed'];
 
@@ -153,13 +154,13 @@ class CohortPackController
             $user = new User(user()->id, user()->email, user()->getMembershipExpirationDate());
             if (config('shopify.enabled')) {
                 $product = $this->productService->getBySku($sku);
-                $productId = $product->getId();
+                $productId = $product->id;
                 $userId = $user->getId();
                 $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
                     $userId,
                     [$product->id],
                     Carbon::now(),
-                    "challenge-$productId-$userId",
+                    '',
                     UserAccessPermissionsSourceEnum::Challenges
                 );
             } else {

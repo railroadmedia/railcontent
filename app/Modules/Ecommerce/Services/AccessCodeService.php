@@ -42,6 +42,16 @@ class AccessCodeService
     private ProductRepository $productRepository;
 
     /**
+     * @var SubscriptionRepository $subscriptionRepository
+     */
+    private SubscriptionRepository $subscriptionRepository;
+
+    /**
+     * @var UserProductService $userProductService
+     */
+    private UserProductService $userProductService;
+
+    /**
      * @var AccessCodeRepository $accessCodeRepository
      */
     private AccessCodeRepository $accessCodeRepository;
@@ -59,6 +69,7 @@ class AccessCodeService
      * @param SubscriptionRepository $subscriptionRepository
      * @param UserProductService $userProductService
      * @param AccessCodeRepository $accessCodeRepository
+     * @param UserAccessPermissionsService $userAccessPermissionsService
      */
     public function __construct(
         EcommerceEntityManager $entityManager,
@@ -92,8 +103,8 @@ class AccessCodeService
      * @throws Throwable
      * @throws \Doctrine\ORM\ORMException
      */
-    public function claim(string $rawAccessCode, User $user, $context = null)
-    : AccessCode {
+    public function claim(string $rawAccessCode, User $user, $context = null): AccessCode
+    {
         $accessCode = $this->accessCodeRepository->findOneBy(['code' => $rawAccessCode]);
         if (!$accessCode) {
             throw new Exception("Access code does not exist!");
@@ -362,8 +373,8 @@ class AccessCodeService
      * @throws \Doctrine\ORM\ORMException
      * @throws OptimisticLockException
      */
-    public function generateAccessCode(array $productIds, string $brand, string $source = null)
-    : AccessCode {
+    public function generateAccessCode(array $productIds, string $brand, string $source = null): AccessCode
+    {
         $accessCode = new AccessCode();
         $accessCode->setProductIds($productIds);
         $accessCode->setBrand($brand);
@@ -385,8 +396,8 @@ class AccessCodeService
      * @return int[]
      * @throws \Doctrine\ORM\ORMException
      */
-    public function getAccessCodeProducts(string $rawAccessCode)
-    : array {
+    public function getAccessCodeProducts(string $rawAccessCode): array
+    {
         $accessCode = $this->accessCodeRepository->findOneBy(['code' => $rawAccessCode]);
         if (!$accessCode) {
             throw new Exception("Access code $rawAccessCode not found.");

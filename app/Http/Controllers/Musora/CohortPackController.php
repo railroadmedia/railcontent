@@ -13,6 +13,7 @@ use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Entities\User;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Services\UserProductService;
+use Throwable;
 
 class CohortPackController
 {
@@ -49,24 +50,25 @@ class CohortPackController
     }
 
     /**
+     * @param string $sku
+     * @param string $successMessage
+     * @return RedirectResponse
      * @throws ORMException
-     * @throws Exception
+     * @throws Throwable
      */
-    private function registerForProductPack(string $sku, string $successMessage)
-    : RedirectResponse {
+    private function registerForProductPack(string $sku, string $successMessage): RedirectResponse
+    {
         if (user()?->isAMember()) {
             $user = new User(user()->id, user()->email);
 
             /** @var Product $product */
             $product = $this->productRepository->bySku($sku);
             if (config('shopify.enabled')) {
-                $productId = $product->getId();
-                $userId = $user->getId();
                 $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
                     $user->getId(),
                     [$product->getId()],
                     Carbon::now(),
-                    "challenge-$productId-$userId",
+                    '',
                     UserAccessPermissionsSourceEnum::Challenges
                 );
             } else {

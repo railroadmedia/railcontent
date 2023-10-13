@@ -70,8 +70,7 @@ class UserAccessPermissionsService
         Carbon $startTime,
         string $sourceId,
         UserAccessPermissionsSourceEnum $source
-    )
-    : void {
+    ): void {
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
         $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($userId);
 
@@ -116,19 +115,12 @@ class UserAccessPermissionsService
         }
     }
 
-    public function syncShopifyOrders(int $userId, $orders)
-    : void {
+    public function syncShopifyOrders(int $userId, $orders): void
+    {
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
         $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($userId);
-        $variantIds =
-            $orders->pluck('line_items')
-                ->flatten(1)
-                ->pluck('variant_id')
-                ->unique()
-                ->toArray();
-        $productLookup =
-            $this->productService->getProductsByShopifyIds($variantIds)
-                ->keyBy('shopify_id');
+        $variantIds = $orders->pluck('line_items')->flatten(1)->pluck('variant_id')->unique()->toArray();
+        $productLookup = $this->productService->getProductsByShopifyIds($variantIds)->keyBy('shopify_id');
 
         $wasUpdated = false;
         foreach ($orders->sortBy('created_at') as $order) {
@@ -158,8 +150,7 @@ class UserAccessPermissionsService
         Collection $existingAccessPermissionsLookup,
         Collection $productLookup,
         Collection $contentPermissionsLookup
-    )
-    : bool {
+    ): bool {
         $shopifyOrderId = $order["id"];
         $user = $this->userService->getByIdOrNull($userId);
 
@@ -202,16 +193,16 @@ class UserAccessPermissionsService
         return $wasUpdated;
     }
 
-    private function getPermissionStatusFromOrder($order)
-    : UserAccessPermissionsStatusEnum {
+    private function getPermissionStatusFromOrder($order): UserAccessPermissionsStatusEnum
+    {
         if ($order['cancelled_at']) {
             return UserAccessPermissionsStatusEnum::Revoked;
         }
         return UserAccessPermissionsStatusEnum::Active;
     }
 
-    public function getOwnsPacks(UserAccessPermissionsCollection $userAccessPermissions)
-    : bool {
+    public function getOwnsPacks(UserAccessPermissionsCollection $userAccessPermissions): bool
+    {
         if (!$this->cachedPackPermissionIds) {
             $permissions = $this->contentPermissionsService->getContentPermissionsLookup();
             $packProducts = $this->productService->getAllPacks();
@@ -227,8 +218,8 @@ class UserAccessPermissionsService
         return $userAccessPermissions->doesUserOwnPermissions($this->cachedPackPermissionIds);
     }
 
-    public function userHadOrHasAnyDigitalProductsForBrand(User $user, $brand)
-    : bool {
+    public function userHadOrHasAnyDigitalProductsForBrand(User $user, $brand): bool
+    {
         if (config('shopify.enabled')) {
             $userAccessPermissions = $this->getUserAccessPermissions($user->id);
             $permissionIds =
@@ -283,8 +274,8 @@ class UserAccessPermissionsService
         return $wasUpdated;
     }
 
-    private function buildUserPermissionsList(int $userId, $permissionsLookup)
-    : array {
+    private function buildUserPermissionsList(int $userId, $permissionsLookup): array
+    {
         $userProducts =
             $this->userProductService->getUserProductsQuery($userId)
                 ->with('product')
@@ -327,8 +318,8 @@ class UserAccessPermissionsService
         return $permissionsToCreate;
     }
 
-    private function getExistingUserAccessLookup(int $userId)
-    : Collection {
+    private function getExistingUserAccessLookup(int $userId): Collection
+    {
         return $this->getUserAccessPermissionsQuery($userId)
             ->get()
             ->keyBy(
@@ -339,8 +330,8 @@ class UserAccessPermissionsService
             );
     }
 
-    public function getUserAccessPermissionsList(int $userId, int $page, int $limit)
-    : UserAccessPermissionsCollection {
+    public function getUserAccessPermissionsList(int $userId, int $page, int $limit): UserAccessPermissionsCollection
+    {
         $items = collect(
             $this->getUserAccessPermissionsQuery($userId)
                 ->with('permission')
@@ -355,10 +346,19 @@ class UserAccessPermissionsService
         return new UserAccessPermissionsCollection($userId, $items);
     }
 
-    public function createOrUpdateUserAccessPermission($userId, $permissionId, $startTime,$timeDays, $timeMonths,$lifetime,$status,$revokedAt=null,$userProductId = null)
-    {
+    public function createOrUpdateUserAccessPermission(
+        $userId,
+        $permissionId,
+        $startTime,
+        $timeDays,
+        $timeMonths,
+        $lifetime,
+        $status,
+        $revokedAt = null,
+        $userProductId = null
+    ) {
         $userAccessPermission = new UserAccessPermission();
-        if($userProductId){
+        if ($userProductId) {
             $userAccessPermission = UserAccessPermission::query()->where('id', $userProductId)->first();
         }
         $userAccessPermission->user_id = $userId;
@@ -370,7 +370,7 @@ class UserAccessPermissionsService
         $userAccessPermission->time_months = $timeMonths;
         $userAccessPermission->time_lifetime = $lifetime ?? 0;
         $userAccessPermission->status = $status;
-        if($revokedAt){
+        if ($revokedAt) {
             $userAccessPermission->revoked_at = $revokedAt;
         }
         $userAccessPermission->save();
