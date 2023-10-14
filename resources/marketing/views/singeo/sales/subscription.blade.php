@@ -310,32 +310,32 @@
                 'title' => 'Express your voice',
                 'images' => [
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/find-your-true-voice.jpg',
+                        'img' => 'marketing/singeo/membership/homepage/2023/coaches/find-your-true-voice.jpg',
                         'title' => 'Find Your<br> True Voice',
                         'instructor' => 'Sheléa',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/The-power-of-movement.jpg',
+                        'img' => 'marketing/singeo/membership/homepage/2023/coaches/The-power-of-movement.jpg',
                         'title' => 'The Power<br> of Movement ',
                         'instructor' => 'Chris Johnson',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/singing-with-soul.jpg',
+                        'img' => 'marketing/singeo/membership/homepage/2023/coaches/singing-with-soul.jpg',
                         'title' => 'Singing<br> With Soul',
                         'instructor' => 'Tony Lindsay',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/define-your-singing.jpg',
+                        'img' => 'marketing/singeo/membership/homepage/2023/coaches/define-your-singing.jpg',
                         'title' => 'Define Your<br> Singing',
                         'instructor' => 'Cate Canning',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/the-science-of-singing-better.jpg',
+                        'img' => 'marketing/singeo/membership/homepage/2023/coaches/the-science-of-singing-better.jpg',
                         'title' => 'The Science of<br> Singing Better',
                         'instructor' => 'Darcy D',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/get-your-voice-heard-online.jpg',
+                        'img' => 'marketing/singeo/membership/homepage/2023/coaches/get-your-voice-heard-online.jpg',
                         'title' => 'Get Your Voice<br> Heard Online',
                         'instructor' => 'Hailey Benedict',
                     ]
@@ -345,32 +345,32 @@
                 'title' => 'Add essential techniqes',
                 'images' => [
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/singing-with-vibrato.jpg',
+                        'img' => 'marketing/singeo/membership/homepage/2023/coaches/singing-with-vibrato.jpg',
                         'title' => 'Sing With<br> Vibrato',
                         'instructor' => 'Lisa Witt',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/hit-the-high-notes.jpg',
+                        'img' => 'marketing/singeo/membership/homepage/2023/coaches/hit-the-high-notes.jpg',
                         'title' => 'Hit The <br>High Notes',
                         'instructor' => 'Lisa Witt',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/beautiful-harmonies.jpg',
+                        'img' => 'marketing/singeo/membership/homepage/2023/coaches/beautiful-harmonies.jpg',
                         'title' => 'Beautiful<br> Harmonies',
                         'instructor' => 'Julia Ziegler',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/how-to-sing-a-duet.jpg',
+                        'img' => 'marketing/singeo/membership/homepage/2023/coaches/how-to-sing-a-duet.jpg',
                         'title' => 'How To Sing<br> A Duet',
                         'instructor' => 'Tony Lindsay & Lisa Witt',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/singing-runs.jpg',
+                        'img' => 'marketing/singeo/membership/homepage/2023/coaches/singing-runs.jpg',
                         'title' => 'Singing<br> Runs',
                         'instructor' => 'Lisa Witt',
                     ],
                     [
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/increase-your-vocal-range.jpg',
+                        'img' => 'marketing/singeo/membership/homepage/2023/coaches/increase-your-vocal-range.jpg',
                         'title' => 'Increase Your<br> Vocal Range',
                         'instructor' => 'Lisa Witt',
                     ],
@@ -380,32 +380,32 @@
                 'title' => 'Songwriting & performance',
                 'images' => [
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/singing-starter-kit.jpg',
+                    'img' => 'marketing/singeo/membership/homepage/2023/coaches/singing-starter-kit.jpg',
                     'title' => 'Singing <br>Starter Kit',
                     'instructor' => 'Lisa Witt',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/start-writing-songs.jpg',
+                    'img' => 'marketing/singeo/membership/homepage/2023/coaches/start-writing-songs.jpg',
                     'title' => 'Start Writing<br> Songs',
                     'instructor' => 'Cate Canning',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/composing-lyrics.jpg',
+                    'img' => 'marketing/singeo/membership/homepage/2023/coaches/composing-lyrics.jpg',
                     'title' => 'Composing<br> Lyrics',
                     'instructor' => 'Tony Lindsay',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/songwriting-for-singers.jpg',
+                    'img' => 'marketing/singeo/membership/homepage/2023/coaches/songwriting-for-singers.jpg',
                     'title' => 'Songwriting <br>For Singers',
                     'instructor' => 'Hailey Benedict',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/how-your-voice-works.jpg',
+                    'img' => 'marketing/singeo/membership/homepage/2023/coaches/how-your-voice-works.jpg',
                     'title' => 'How Your <br>Voice Works',
                     'instructor' => 'Darcy D',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/coaches/how-to-record-your-voice.jpg',
+                    'img' => 'marketing/singeo/membership/homepage/2023/coaches/how-to-record-your-voice.jpg',
                     'title' => 'How To Record<br> Your Voice',
                     'instructor' => 'Cate Canning',
                     ],

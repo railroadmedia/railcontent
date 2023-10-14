@@ -412,42 +412,42 @@
                 'title' => '<i class="text-pianote align-middle mr-0.5 fa-light fa-piano-keyboard"></i> Piano',
                 'images' => [
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/classical-piano.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/classical-piano.jpg',
                     'title' => 'Classical<br> Piano',
                     'instructor' => 'Victoria Theodore',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/improvisational-jazz.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/improvisational-jazz.jpg',
                     'title' => 'Improvisational<br> Jazz',
                     'instructor' => 'Jesús Molina',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/beautifully-simple-piano-arpeggios.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/beautifully-simple-piano-arpeggios.jpg',
                     'title' => 'Simple Piano<br> Arpeggios',
                     'instructor' => 'Sangah Noona',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/the-perfect-arrangement.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/the-perfect-arrangement.jpg',
                     'title' => 'The Perfect<br> Arrangement',
                     'instructor' => 'Summer Swee-Singh',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/creative-song-writing.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/creative-song-writing.jpg',
                     'title' => 'Creative<br> Songwriting',
                     'instructor' => 'Josh Dion',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/rhythmic-playing.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/rhythmic-playing.jpg',
                     'title' => 'Rhythmic<br> Playing',
                     'instructor' => 'Jay Oliver',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/gospel-piano.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/gospel-piano.jpg',
                     'title' => 'Gospel<br> Piano',
                     'instructor' => 'Erskine Hawkins',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/latin-essentials.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/latin-essentials.jpg',
                     'title' => 'Latin<br> Essentials',
                     'instructor' => 'Kevin Castro',
                     ],
@@ -457,42 +457,42 @@
                 'title' => '<i class="text-guitareo align-middle mr-0.5 fa-light fa-guitar"></i> Guitar',
                 'images' => [
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/solo-in-an-hour.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/solo-in-an-hour.jpg',
                     'title' => 'Solo In<br> An Hour',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/songwriting-cheat-codes.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/songwriting-cheat-codes.jpg',
                     'title' => 'Songwriting<br> Cheat Codes',
                     'instructor' => 'Rob Scallon',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/rhythm-groove.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/rhythm-groove.jpg',
                     'title' => 'Rhythm &<br> Groove',
                     'instructor' => 'Sami Ghawi',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/shred-guitar.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/shred-guitar.jpg',
                     'title' => 'Shred<br> Guitar',
                     'instructor' => 'Dean Lamb',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/unlock-your-creativity.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/unlock-your-creativity.jpg',
                     'title' => 'Unlock Your<br> Creativity',
                     'instructor' => 'Yvette Young',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/musical-lanes.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/musical-lanes.jpg',
                     'title' => 'Musical<br> Lanes',
                     'instructor' => 'Mark Lettieri',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/add-power-to-your-playing.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/add-power-to-your-playing.jpg',
                     'title' => 'Add Power To<br> Your Playing',
                     'instructor' => 'Dave Weiner',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/the-anatomy-of-a-song.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/the-anatomy-of-a-song.jpg',
                     'title' => 'The Anatomy<br> of a Song',
                     'instructor' => 'Pete Thorn',
                     ],
@@ -502,42 +502,42 @@
                 'title' => '<i class="text-drumeo align-middle mr-0.5 fa-light fa-drum"></i> Drums',
                 'images' => [
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/Aaron-Spears.jpg',
                     'title' => 'Drum<br> Chops',
                     'instructor' => 'Aaron Spears',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/Hannah-Welton.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/Hannah-Welton.jpg',
                     'title' => 'Writing<br> Drum Parts',
                     'instructor' => 'Hannah Welton',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/Todd-Sucherman.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/Todd-Sucherman.jpg',
                     'title' => 'Rock <br>Drumming',
                     'instructor' => 'Todd Sucherman',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/Matt-McGuire.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/Matt-McGuire.jpg',
                     'title' => 'Song<br> Breakdowns',
                     'instructor' => 'Matt McGuire',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/Dorothe-Taylor-01.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/Dorothe-Taylor-01.jpg',
                     'title' => 'Rudiments <br>& Patterns',
                     'instructor' => 'Dorothea Taylor',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/Aric-Improta.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/Aric-Improta.jpg',
                     'title' => 'The Creative<br> Mindset',
                     'instructor' => 'Aric Improta',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/Kaz-Rodgriguez.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/Kaz-Rodgriguez.jpg',
                     'title' => 'Musical <br>Exercises',
                     'instructor' => 'Kaz Rodriguez',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/Sarah-Thawer.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/Sarah-Thawer.jpg',
                     'title' => '4-Way <br>Coordination',
                     'instructor' => 'Sarah Thawer',
                     ]
@@ -547,42 +547,42 @@
                 'title' => '<i class="text-singeo align-middle mr-0.5 fa-light fa-microphone-stand"></i> Singing',
                 'images' => [
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/find-your-true-voice.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/find-your-true-voice.jpg',
                     'title' => 'Find Your<br> True Voice',
                     'instructor' => 'Sheléa',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/The-power-of-movement.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/The-power-of-movement.jpg',
                     'title' => 'The Power<br> of Movement',
                     'instructor' => 'Chris Johnson',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/singing-with-soul.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/singing-with-soul.jpg',
                     'title' => 'Singing<br> With Soul',
                     'instructor' => 'Tony Lindsay',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/define-your-singing.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/define-your-singing.jpg',
                     'title' => 'Define Your<br> Singing',
                     'instructor' => 'Cate Canning',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/the-science-of-singing-better.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/the-science-of-singing-better.jpg',
                     'title' => 'The Science<br> of Singing Better',
                     'instructor' => 'Darcy D',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/songwriting-for-singers.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/songwriting-for-singers.jpg',
                     'title' => 'Songwriting <br>For Singers',
                     'instructor' => 'Hailey Benedict',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/hit-the-high-notes.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/hit-the-high-notes.jpg',
                     'title' => 'Hit The <br>High Notes',
                     'instructor' => 'Lisa Witt',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/musora/membership/homepage/2023/coaches/beautiful-harmonies.jpg',
+                    'img' => 'marketing/musora/membership/homepage/2023/coaches/beautiful-harmonies.jpg',
                     'title' => 'Beautiful<br> Harmonies',
                     'instructor' => 'Julia Ziegler',
                     ],

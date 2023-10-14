@@ -1,3 +1,6 @@
+
+
+
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
@@ -394,8 +397,8 @@
     ])
 
 
-    @include('pianote.sales.partials._coaches-section-extended')
-   
+   @include('pianote.sales.partials._coaches-section-extended')
+
 
     @php
         $songItems = [

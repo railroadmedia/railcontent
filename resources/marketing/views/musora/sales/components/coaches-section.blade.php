@@ -1,5 +1,3 @@
-@props(['header', 'desc', 'buttons', 'courses'])
-
 <div id="coaches" class="anchor"></div>
 <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
 <section class="py-12 md:py-20 text-center" style="background-color:#f4f8fb;">

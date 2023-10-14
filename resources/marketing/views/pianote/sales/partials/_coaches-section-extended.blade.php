@@ -1,4 +1,4 @@
-@php
+ @php
         $buttons = [
             'Styles', 'Technique', 'Creativity'
         ];
@@ -142,9 +142,47 @@
         ];
     @endphp
 
-    {{-- @include('musora.sales.components.coaches-section', [
+   @include('musora.sales.components.coaches-section', [
         'header' => 'Real Teachers,  <br class="sm:hidden">Real Results.',
         'desc' => 'Amplify your skills with exclusive artist <br class="hidden md:inline"> courses + live events with special guests.'
-    ]) --}}
+    ])
+   
 
-    <x-coaches-section :header="'Real Teachers, <br class="sm:hidden">Real Results.'" :desc="'Amplify your skills with exclusive artist <br class="hidden md:inline"> courses + live events with special guests.'" :buttons="$buttons" :courses="$courses" />
+
+
+
+    @php
+        $songItems = [
+            [
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/songs-icon.svg',
+                'title' => '1000+ popular songs.',
+                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level. ',
+            ],
+            [
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/tempo-icons.svg',
+                'title' => 'Find the perfect tempo.',
+                'desc' => 'Slow down any section of a song to make those tricky bars easier. ',
+            ],
+            [
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/loop-icons.svg',
+                'title' => 'Loop the hard parts.',
+                'desc' => 'Create practice loops to play-through those difficult parts over and over.   ',
+            ],
+            [
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/timing-icons.svg',
+                'title' => 'Improve your timing.',
+                'desc' => 'Use the built-in-metronome – your new best friend for difficult rhythms.  ',
+            ],
+            [
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/play-it-right-icon.svg',
+                'title' => 'Play it right the first time.',
+                'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
+            ],
+            [
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/devices-icons.svg',
+                'title' => 'Take your songs anywhere.',
+                'desc' => 'Accessible on any device, or printable, so you can play any song, any time.    ',
+            ],
+
+        ];
+    @endphp

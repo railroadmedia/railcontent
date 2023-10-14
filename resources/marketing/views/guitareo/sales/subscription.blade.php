@@ -286,42 +286,42 @@
                 'title' => 'Play more creatively',
                 'images' => [
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/solo-in-an-hour.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/solo-in-an-hour.jpg',
                     'title' => 'Solo In<br> An Hour',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/songwriting-cheat-codes.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/songwriting-cheat-codes.jpg',
                     'title' => 'Songwriting<br> Cheat Codes',
                     'instructor' => 'Rob Scallon',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/musical-lanes.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/musical-lanes.jpg',
                     'title' => 'Creating The Perfect <br> Guitar Part',
                     'instructor' => 'Mark Lettieri',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/add-power-to-your-playing.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/add-power-to-your-playing.jpg',
                     'title' => 'Better <br> Guitar Solos',
                     'instructor' => 'Dave Weiner',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/unlock-your-creativity.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/unlock-your-creativity.jpg',
                     'title' => 'Unlock Your<br> Creativity',
                     'instructor' => 'Yvette Young',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/the-anatomy-of-a-song.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/the-anatomy-of-a-song.jpg',
                     'title' => 'The Anatomy<br> of a Song',
                     'instructor' => 'Pete Thorn',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/looping.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/looping.jpg',
                     'title' => 'Looping',
                     'instructor' => 'David Becker',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/altered-open-tunings.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/altered-open-tunings.jpg',
                     'title' => 'Altered &<br> Open Tunings',
                     'instructor' => 'Don Ross',
                     ],
@@ -331,42 +331,42 @@
                 'title' => 'Learn any style',
                 'images' => [
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/rock-guitar.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/rock-guitar.jpg',
                     'title' => 'Rock<br> Guitar ',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/surf-guitar.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/surf-guitar.jpg',
                     'title' => 'Surf<br> Guitar',
                     'instructor' => 'Kent Shores',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/campfire-chords.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/campfire-chords.jpg',
                     'title' => 'Campfire<br> Chords',
                     'instructor' => 'Rob Scallon',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/funk-essentials.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/funk-essentials.jpg',
                     'title' => 'Funk<br> Essentials',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/bluegrass.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/bluegrass.jpg',
                     'title' => 'Bluegrass',
                     'instructor' => 'Nate Savage',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/fingerstyle.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/fingerstyle.jpg',
                     'title' => 'Fingerstyle',
                     'instructor' => 'Nate Savage',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/shred-guitar.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/shred-guitar.jpg',
                     'title' => 'Shred<br> Guitar',
                     'instructor' => 'Dean Lamb',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/musical-lanes.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/musical-lanes.jpg',
                     'title' => 'Fusion <br> /Neo-Soul',
                     'instructor' => 'Mark Lettieri',
                     ],
@@ -376,42 +376,42 @@
                 'title' => 'Add essential techniques',
                 'images' => [
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/getting-started-on-the-acoustic.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/getting-started-on-the-acoustic.jpg',
                     'title' => 'Getting Started<br> On The Acoustic<br> Guitar',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/getting-started-on-the-electric.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/getting-started-on-the-electric.jpg',
                     'title' => 'Getting Started<br> On The Electric<br> Guitar',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/picking.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/picking.jpg',
                     'title' => 'Picking',
                     'instructor' => 'Nate Savage',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/legato.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/legato.jpg',
                     'title' => 'Legato',
                     'instructor' => 'Kent Shores',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/strumming-workouts.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/strumming-workouts.jpg',
                     'title' => 'Strumming<br> Workouts',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/bending-virbrato.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/bending-virbrato.jpg',
                     'title' => 'Bending &<br> Vibrato',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/rhythm-groove.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/rhythm-groove.jpg',
                     'title' => 'Rhythm<br> & Groove ',
                     'instructor' => 'Sami Ghawi',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches/timing-feel.jpg',
+                    'img' => 'marketing/guitareo/membership/homepage/2023/coaches/timing-feel.jpg',
                     'title' => 'Timing<br> & Feel',
                     'instructor' => 'David Becker',
                     ],

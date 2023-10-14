@@ -424,13 +424,12 @@
         ];
     @endphp
 
-    /* @include('musora.sales.components.coaches-section', [
+    @include('musora.sales.components.coaches-section', [
         'header' => 'Study with the world’s <br class="md:hidden">best drummers.',
         'desc' => 'Amplify your skills with 200+ artist courses + <br class="hidden md:inline">access exclusive live events with drumming legends.'
-    ]) */
+    ])
 
 
-    <x-coaches-section :header="'Real Teachers, <br class="sm:hidden">Real Results.'" :desc="'Amplify your skills with exclusive artist <br class="hidden md:inline"> courses + live events with special guests.'" :buttons="$buttons" :courses="$courses" />
 
 
 
