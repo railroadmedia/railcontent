@@ -5,7 +5,7 @@
         <p class="leading-tight mt-2 sm:mt-3">{!! $desc !!} <strong class="cursor-pointer" x-on:click="soundslice = true;"><u>Try the demo &raquo;</u></strong></p>
 
         <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto">
-            <div style="padding-bottom:62.4%" class="mt-4 sm:mt-6 lg:mt-8 lg:mb-6 bg-cover bg-center lazyload" x-on:click="soundslice = true;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ $video }}"></div>
+            <div style="padding-bottom:62.4%" class="mt-4 sm:mt-6 lg:mt-8 lg:mb-6 bg-cover bg-center lazyload" x-on:click="soundslice = true;" data-bg={{ $video }}></div>
         </div>
         <div class="text-center w-full sm:w-auto mt-6 lg:mt-0 mx-auto mb-5">
             <div class="flex flex-wrap">

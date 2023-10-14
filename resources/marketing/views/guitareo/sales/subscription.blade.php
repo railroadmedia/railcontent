@@ -465,7 +465,7 @@
     @include('musora.sales.components.songs-section', [
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note.',
-        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/device.png',
+        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/device.png',
         'brandName' => 'Guitareo',
         'bannerDesc' => 'Powered by Musora, Guitareo includes full access to our communities for voice, piano, and drums.',
     ])

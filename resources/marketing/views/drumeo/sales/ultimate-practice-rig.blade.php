@@ -182,31 +182,31 @@
     </section>
 
     @php
-        $bubble1 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/dorothea-taylor.png';
-        $bubble2 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/todd-sucherman.png';
-        $bubble3 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/jared-falk.png';
-        $bubble4 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/hannah-welton.png';
-        $bubble5 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/larnell-lewis.png';
-        $bubble6 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/zack-grooves.png';
-        $bubble7 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/domino-santatonio.png';
-        $bubble8 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/aaron-spears.png';
+        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/bubbles/dorothea-taylor.png';
+        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/bubbles/todd-sucherman.png';
+        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/bubbles/jared-falk.png';
+        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/bubbles/hannah-welton.png';
+        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/bubbles/larnell-lewis.png';
+        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/bubbles/zack-grooves.png';
+        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/bubbles/domino-santatonio.png';
+        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/bubbles/aaron-spears.png';
 
         $slides = [
             [
                 'desc' => 'Drumeo is the real deal folks - a good place to study and realize one’s dreams.',
-                'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/billy-cobham.jpg',
+                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/billy-cobham.jpg',
                 'name' => 'Billy Cobham',
                 'credit' => 'Rolling Stone  Top 100 Drummer',
             ],
             [
                 'desc' => 'A world-class site for continuing education and insight into the world of drumming!',
-                'thumb' => 'https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/redmond.jpg',
+                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/redmond.jpg',
                 'name' => 'Rich Redmond',
                 'credit' => '3x Country Drummer Of The Year',
             ],
             [
                 'desc' => 'The Drumeo standard is one of the highest quality and is THE place to go for the best in drum education.',
-                'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/drummer-david-garibaldi.jpg',
+                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drummer-david-garibaldi.jpg',
                 'name' => 'David Garibaldi',
                 'credit' => 'Rolling Stone Top 100 Drummer',
             ],
@@ -217,9 +217,9 @@
         @include('musora.sales.components.header-section', [
             'header' => 'Learn beginner beats, fills<br> and songs on the drums.',
             'desc' => 'Try Drumeo’s award-winning online drum lessons for 7 days FREE:',
-            'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg',
-            'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo2.png',
-            'promoThumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo-m2.jpg',
+            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/jan-thumb-no-badge.jpg',
+            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/header-thumb-promo2.png',
+            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/header-thumb-promo-m2.jpg',
             'pointOne' => 'Learn New Skills',
             'pointTwo' => 'Study With Legends',
             'pointThree' => 'Play Real Songs',
@@ -229,9 +229,9 @@
             'header' => 'Online drum lessons<br> for all skill levels.',
             'underline' => true,
             'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> thousands of songs and unlimited personal support.',
-            'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg',
-            'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo2.png',
-            'promoThumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo-m2.jpg',
+            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/jan-thumb-no-badge.jpg',
+            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/header-thumb-promo2.png',
+            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/header-thumb-promo-m2.jpg',
             'pointOne' => 'Improve Your Skills',
             'pointTwo' => 'World-Class Teachers',
             'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
@@ -488,32 +488,32 @@
     @php
         $songItems = [
             [
-                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/5000-songs-icon.svg',
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/5000-songs-icon.svg',
                 'title' => '5000+ popular songs.',
                 'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
             ],
             [
-                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/tempo-icon.svg',
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/tempo-icon.svg',
                 'title' => 'Find the perfect tempo.',
                 'desc' => 'Slow down or speed up any section of a song to hear every note.',
             ],
             [
-                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/loop-icon.svg',
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/loop-icon.svg',
                 'title' => 'Loop the trouble spots.',
                 'desc' => 'No more pausing and rewinding that tricky fill. Loop it over and over again!',
             ],
             [
-                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/no-drums-icon.svg',
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/no-drums-icon.svg',
                 'title' => 'Remove the drums.',
                 'desc' => 'Magically remove the original drums to make each song uniquely yours.',
             ],
             [
-                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/play-it-right-icon.svg',
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/play-it-right-icon.svg',
                 'title' => 'Play it right the first time.',
                 'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
             ],
             [
-                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices-icon.svg',
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/devices-icon.svg',
                 'title' => 'Take your songs anywhere.',
                 'desc' => 'Accessible on any device, or printable,so you can play any song, any time.',
             ],
@@ -523,7 +523,7 @@
     @include('musora.sales.components.songs-section', [
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
-        'video' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png',
+        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/device.png',
         'brandName' => 'Drumeo',
     ])
 
