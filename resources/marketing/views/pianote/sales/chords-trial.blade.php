@@ -359,8 +359,7 @@
         'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum and direct access to real teachers. ',
     ])
 
-       @include('pianote.sales.partials._coaches-section-extended')
-
+    @include('pianote.sales.partials._coaches-section-extended')
 
     @php
                 $songItems = [

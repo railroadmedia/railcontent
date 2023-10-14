@@ -400,6 +400,7 @@
    @include('pianote.sales.partials._coaches-section-extended')
 
 
+
     @php
         $songItems = [
             [

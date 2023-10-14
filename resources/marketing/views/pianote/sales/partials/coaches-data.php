@@ -3,7 +3,12 @@
     $coachesData = [
 
     'musora' => [
-        'buttons' => ['Styles', 'Technique', 'Creativity'],
+        'buttons' => [
+            '<i class="text-pianote align-middle mr-0.5 fa-light fa-piano-keyboard"></i> Piano',
+            '<i class="text-guitareo align-middle mr-0.5 fa-light fa-guitar"></i> Guitar',
+            '<i class="text-drumeo align-middle mr-0.5 fa-light fa-drum"></i> Drums',
+            '<i class="text-singeo align-middle mr-0.5 fa-light fa-microphone-stand"></i> Singing'
+        ],
         'courses' => [
             [
                 'title' => 'Play more creatively',
