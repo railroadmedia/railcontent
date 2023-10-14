@@ -23,26 +23,24 @@ class MigrateRechargeSubscriptions extends Command
         return "MigrateRechargeSubscriptions";
     }
 
-    protected function createFileForLocalData(string $data): string
+    protected function appendToFile($filename, string $data)
     {
-        $filename = $this->getClassName() . "-" . preg_replace('~\D~', '', microtime(true)) . ".csv";
-
         if (app()->environment("local", "development")) {
-            $storageResult = Storage::put($filename, $data);
+            $storageResult = Storage::append($filename, $data);
         } else {
-            $storageResult = Storage::disk('musora_web_platform_s3')->put($filename, $data);
+            $storageResult = Storage::disk('musora_web_platform_s3')->append($filename, $data);
         }
 
         if (!$storageResult) {
             throw new Exception(sprintf("%s: Failed to write .jsonl file", $this->getClassName()));
         }
-
-        return $filename;
     }
 
     public function handle(Shopify $shopify, RechargeGateway $rechargeGateway)
     {
         $this->withExecutionTime(function () use ($shopify, $rechargeGateway) {
+            $fileName = $this->getClassName() . "-" . preg_replace('~\D~', '', microtime(true)) . ".csv";
+
             $this->info('Loading Subscriptions');
             $subscriptions = Subscription::query()->with('product')
                 ->where('is_active', 1)
@@ -81,6 +79,7 @@ class MigrateRechargeSubscriptions extends Command
                 'status'
             ];
             $data = implode(',', $columns);
+            $this->appendToFile($fileName, $data);
 
             $this->info('Loading Product Information');
             $productIds = $subscriptions->pluck('product.shopify_id')->unique()->mapWithKeys(
@@ -94,61 +93,69 @@ class MigrateRechargeSubscriptions extends Command
                 }
             )->toArray();
 
-            $this->info('Building CSV');
+            $this->info("Creating csv $fileName");
+            $i = 0;
+            $chunk = 1000;
+            $chunks = $subscriptions->chunk($chunk);
+            foreach ($chunks as $subs) {
+                $data = "";
+                $i2 = $i + $chunk;
+                $this->info("Processing chunk $i - $i2");
+                foreach ($subs as $subscription) {
+                    $product = $subscription->product;
+                    $variantId = $product?->shopify_id ?? 0;
+                    //TODO:Check to make sure product has a shopify id
+                    $productId = $productIds[$variantId] ?? 0;
+                    if (!$productId) {
+                        $this->info(
+                            "No product found for subscription: $subscription->id Product:$product?->id $product?->name $variantId"
+                        );
+                        return;
+                    }
+                    if (!$subscription->user) {
+                        $this->info("No user found for subscription: $subscription->id User:$subscription->user_id");
+                        return;
+                    }
 
-            $this->withProgressBar($subscriptions, function ($subscription) use (&$data, $productIds) {
-                $product = $subscription->product;
-                $variantId = $product?->shopify_id ?? 0;
-                //TODO:Check to make sure product has a shopify id
-                $productId = $productIds[$variantId] ?? 0;
-                if (!$productId) {
-                    $this->info(
-                        "No product found for subscription: $subscription->id Product:$product?->id $product?->name $variantId"
-                    );
-                    return;
+                    $d = [
+                        "external_product_id" => $productId,
+                        "external_variant_id" => $variantId,
+                        "external_product_name" => $product->name,
+                        "external_variant_name" => "",
+                        "quantity" => 1,
+                        "recurring_price" => $subscription->total_price,
+                        "charge_interval_unit_type" => $this->getIntervalUnit($subscription),
+                        "charge_interval_frequency" => $this->getIntervalCount($subscription),
+                        "shipping_interval_unit_type" => $this->getIntervalUnit($subscription),
+                        "shipping_interval_frequency" => $this->getIntervalCount($subscription),
+                        "charge_on_day_of_month" => "",
+                        "customer_created_at" => "",
+                        "last_charge_date" => "",
+                        "next_charge_date" => $this->getNextChargeDate($subscription),
+                        "customer_stripe_id" => !app()->isProduction() ? '' :
+                            $subscription->paymentMethod?->creditCard->external_customer_id ?? "",
+                        "stripe_payment_method_id" => !app()->isProduction() ? '' :
+                            $subscription->paymentMethod?->creditCard->external_id ?? "",
+                        "paypal_billing_agrement_id" => !app()->isProduction() ? '' :
+                            $subscription->paymentMethod->paypalBillingAgreement?->external_id ?? "",
+                        "shipping_email" => $this->getEmailForShopify($subscription->user->email),
+                        "shipping_first_name" => $subscription->paymentMethod->address->first_name ?? "",
+                        "shipping_last_name" => $subscription->paymentMethod->address->last_name ?? "",
+                        "shipping_address_1" => "31265 Wheel Ave",
+                        "shipping_address_2" => "#107",
+                        "shipping_city" => "Abbotsford",
+                        "shipping_province" => "BC",
+                        "shipping_zip" => "V2T 6H2",
+                        "shipping_country" => "Canada",
+                        "shipping_phone" => '',
+                        "status" => "active"
+                    ];
+                    $data .= (!empty($data) ? "\n" : "") . implode(',', $d);
+                    $i++;
                 }
-                if (!$subscription->user) {
-                    $this->info("No user found for subscription: $subscription->id User:$subscription->user_id");
-                    return;
-                }
+                $this->appendToFile($fileName, $data);
+            }
 
-                $d = [
-                    "external_product_id" => $productId,
-                    "external_variant_id" => $variantId,
-                    "external_product_name" => $product->name,
-                    "external_variant_name" => "",
-                    "quantity" => 1,
-                    "recurring_price" => $subscription->total_price,
-                    "charge_interval_unit_type" => $this->getIntervalUnit($subscription),
-                    "charge_interval_frequency" => $this->getIntervalCount($subscription),
-                    "shipping_interval_unit_type" => $this->getIntervalUnit($subscription),
-                    "shipping_interval_frequency" => $this->getIntervalCount($subscription),
-                    "charge_on_day_of_month" => "",
-                    "customer_created_at" => "",
-                    "last_charge_date" => "",
-                    "next_charge_date" => $this->getNextChargeDate($subscription),
-                    "customer_stripe_id" => !app()->isProduction() ? '' :
-                        $subscription->paymentMethod?->creditCard->external_customer_id ?? "",
-                    "stripe_payment_method_id" => !app()->isProduction() ? '' :
-                        $subscription->paymentMethod?->creditCard->external_id ?? "",
-                    "paypal_billing_agrement_id" => !app()->isProduction() ? '' :
-                        $subscription->paymentMethod->paypalBillingAgreement?->external_id ?? "",
-                    "shipping_email" => $this->getEmailForShopify($subscription->user->email),
-                    "shipping_first_name" => $subscription->paymentMethod->address->first_name ?? "",
-                    "shipping_last_name" => $subscription->paymentMethod->address->last_name ?? "",
-                    "shipping_address_1" => "31265 Wheel Ave",
-                    "shipping_address_2" => "#107",
-                    "shipping_city" => "Abbotsford",
-                    "shipping_province" => "BC",
-                    "shipping_zip" => "V2T 6H2",
-                    "shipping_country" => "Canada",
-                    "shipping_phone" => '',
-                    "status" => "active"
-                ];
-                $data .= "\n" . implode(',', $d);
-            });
-
-            $fileName = $this->createFileForLocalData($data);
             $this->info("Created csv $fileName");
         });
     }
