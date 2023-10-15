@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Controllers;
 
 use App\Modules\UserManagementSystem\Services\OnboardingService;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\ValidationException;
@@ -21,6 +22,25 @@ class OnboardingController extends Controller
     public function __construct(OnboardingService $onboardingService)
     {
         $this->onboardingService = $onboardingService;
+    }
+
+    public function createAccountPage(Request $request)
+    {
+        $email = $request->get('email');
+
+        // This must be generated passed so that someone can't claim someone else's email.
+        // It must be generated via md5 with the email string and special key combined.
+        // md5('email' . config('shopify.accountCreationSecretKey'))
+        // On the shopify side, we'll generate the link to this claim page and include the key in the url params. This
+        // ensures that only a person with the special link can claim that email address.
+
+        $verificationToken = $request->get('verification_token');
+
+        if ($verificationToken !== md5($email . config('shopify.accountCreationSecretKey'))) {
+            throw new AuthorizationException('Invalid verification_token.', 403);
+        }
+
+        return view('pages.account-creation', ['email' => $email, 'verificationToken' => $verificationToken]);
     }
 
     /**
