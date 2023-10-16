@@ -73,7 +73,8 @@ class SyncRevenuecatSubscriptionsToMusora extends Command
                 $paymentService->create(
                     $musoraSubscription,
                     $type,
-                    $subscriptionData['purchase_date'],
+                    Carbon::create($subscriptionData['purchase_date'])
+                        ->getTimestampMs(),
                     $subscriptionData['store_transaction_id']
                 );
             }
