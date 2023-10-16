@@ -278,6 +278,16 @@ return [
                     'drumeo',
                 ],
             ],
+            'Drumeo Giveaway Rafflepress' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_rafflepress-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
             'Drumeo Awards Giveaway' => [
                 'custom_attributes' => [
                 ],
