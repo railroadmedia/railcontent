@@ -646,7 +646,7 @@
                 @endforeach
             </div>
 
-            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">SOLD OUT</span><br>
+            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">JOIN WAITLIST</span><br>
 
 {{--                <a href="#final"--}}
 {{--                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>--}}
