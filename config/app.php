@@ -196,6 +196,7 @@ return [
         App\Modules\Reporting\Providers\ReportingServiceProvider::class,
         App\Modules\AddEventCalendars\Providers\AddEventCalendarsServiceProvider::class,
         App\Modules\EventTracking\Providers\EventTrackingServiceProvider::class,
+        App\Modules\MusoraApi\Providers\MusoraApiServiceProvider::class,
         /*
          * Application Service Providers...
          */
