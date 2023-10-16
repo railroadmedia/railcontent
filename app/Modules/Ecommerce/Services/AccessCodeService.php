@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use Carbon\Carbon;
 use Datetime;
 use Doctrine\ORM\Exception\ORMException;
@@ -41,9 +42,24 @@ class AccessCodeService
     private ProductRepository $productRepository;
 
     /**
+     * @var SubscriptionRepository $subscriptionRepository
+     */
+    private SubscriptionRepository $subscriptionRepository;
+
+    /**
+     * @var UserProductService $userProductService
+     */
+    private UserProductService $userProductService;
+
+    /**
      * @var AccessCodeRepository $accessCodeRepository
      */
     private AccessCodeRepository $accessCodeRepository;
+
+    /**
+     * @var UserAccessPermissionsService
+     */
+    private UserAccessPermissionsService $userAccessPermissionsService;
 
     /**
      * AccessCodeService constructor.
@@ -53,19 +69,22 @@ class AccessCodeService
      * @param SubscriptionRepository $subscriptionRepository
      * @param UserProductService $userProductService
      * @param AccessCodeRepository $accessCodeRepository
+     * @param UserAccessPermissionsService $userAccessPermissionsService
      */
     public function __construct(
         EcommerceEntityManager $entityManager,
         ProductRepository $productRepository,
         SubscriptionRepository $subscriptionRepository,
         UserProductService $userProductService,
-        AccessCodeRepository $accessCodeRepository
+        AccessCodeRepository $accessCodeRepository,
+        UserAccessPermissionsService $userAccessPermissionsService
     ) {
         $this->entityManager = $entityManager;
         $this->productRepository = $productRepository;
         $this->subscriptionRepository = $subscriptionRepository;
         $this->userProductService = $userProductService;
         $this->accessCodeRepository = $accessCodeRepository;
+        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
     /**
@@ -84,11 +103,16 @@ class AccessCodeService
      * @throws Throwable
      * @throws \Doctrine\ORM\ORMException
      */
-    public function claim(string $rawAccessCode, User $user, $context = null)
-    : AccessCode {
+    public function claim(string $rawAccessCode, User $user, $context = null): AccessCode
+    {
         $accessCode = $this->accessCodeRepository->findOneBy(['code' => $rawAccessCode]);
         if (!$accessCode) {
             throw new Exception("Access code does not exist!");
+        }
+
+        if ($accessCode->getIsClaimed()) {
+            // Can't claim a code that's already claimed
+            throw new Exception("Access code already claimed");
         }
 
         if (!config('shopify.enabled')) {
@@ -312,6 +336,19 @@ class AccessCodeService
 
                 event(new UserProductCreated($userProduct));
             }
+        } else {
+            /*
+             * SRR-37: Update user permissions
+             */
+            $productIds = $this->getAccessCodeProducts($rawAccessCode);
+
+            $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
+                $user->getId(),
+                $productIds,
+                Carbon::now(),
+                $accessCode->getId(),
+                UserAccessPermissionsSourceEnum::AccessCode,
+            );
         }
 
         $accessCode->setIsClaimed(true);
@@ -336,8 +373,8 @@ class AccessCodeService
      * @throws \Doctrine\ORM\ORMException
      * @throws OptimisticLockException
      */
-    public function generateAccessCode(array $productIds, string $brand, string $source = null)
-    : AccessCode {
+    public function generateAccessCode(array $productIds, string $brand, string $source = null): AccessCode
+    {
         $accessCode = new AccessCode();
         $accessCode->setProductIds($productIds);
         $accessCode->setBrand($brand);
@@ -359,8 +396,8 @@ class AccessCodeService
      * @return int[]
      * @throws \Doctrine\ORM\ORMException
      */
-    public function getAccessCodeProducts(string $rawAccessCode)
-    : array {
+    public function getAccessCodeProducts(string $rawAccessCode): array
+    {
         $accessCode = $this->accessCodeRepository->findOneBy(['code' => $rawAccessCode]);
         if (!$accessCode) {
             throw new Exception("Access code $rawAccessCode not found.");

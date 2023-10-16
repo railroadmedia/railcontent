@@ -60,47 +60,60 @@ class UserAccessPermissionsService
      * @param int $userId
      * @param int[] $productIds
      * @param Carbon $startTime
+     * @param string $sourceId
      * @param UserAccessPermissionsSourceEnum $source
      * @return void
-     * @throws Exception
      */
     public function addUserAccessPermissionsForProducts(
         int $userId,
         array $productIds,
         Carbon $startTime,
+        string $sourceId,
         UserAccessPermissionsSourceEnum $source
     ): void {
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
+        $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($userId);
 
         $products =
             Product::whereIn('id', $productIds)
                 ->get();
         $user = $this->userService->getByIdOrNull($userId);
 
+        $addedPermissions = false;
+
+        /** @var Product $product */
         foreach ($products as $product) {
             $contentPermissions = $product->getContentPermissions($contentPermissionsLookup);
 
             foreach ($contentPermissions as $contentPermission) {
-                $accessPermission = new UserAccessPermission();
-                $accessPermission->user_id = $userId;
-                $accessPermission->permission_id = $contentPermission->id;
-                $accessPermission->source = $source;
-                $accessPermission->source_hash = '';
-                $accessPermission->start_time = $startTime;
-                $accessPermission->time_days = $product->getMembershipTimeDays();
-                $accessPermission->time_months = $product->getMembershipTimeMonths();
-                $accessPermission->time_lifetime = $product->isLifeTime();
-                $accessPermission->status = UserAccessPermissionsStatusEnum::Active;
-                $accessPermission->save();
+                $hash = sha1("$sourceId.$product->id.$contentPermission->id");
+                $accessPermission = $existingAccessPermissionsLookup["$source->value.$hash"] ?? null;
+
+                // if the permission exist, skip it
+                if (!$accessPermission) {
+                    $accessPermission = new UserAccessPermission();
+                    $accessPermission->user_id = $userId;
+                    $accessPermission->permission_id = $contentPermission->id;
+                    $accessPermission->source = $source;
+                    $accessPermission->source_hash = $hash;
+                    $accessPermission->start_time = $startTime;
+                    $accessPermission->time_days = $product->getMembershipTimeDays();
+                    $accessPermission->time_months = $product->getMembershipTimeMonths();
+                    $accessPermission->time_lifetime = $product->isLifeTime();
+                    $accessPermission->status = UserAccessPermissionsStatusEnum::Active;
+                    $accessPermission->save();
+                    $addedPermissions = true;
+                }
             }
 
             $this->handleBonusMembershipPermission($product, $user, $source);
         }
 
-        $accessPermissions = $this->getUserAccessPermissions($userId);
-        event(new UserAccessPermissionsUpdated($accessPermissions));
+        if ($addedPermissions) {
+            $accessPermissions = $this->getUserAccessPermissions($userId);
+            event(new UserAccessPermissionsUpdated($accessPermissions));
+        }
     }
-
 
     public function syncShopifyOrders(User $user, $orders, $products): void
     {
@@ -124,7 +137,6 @@ class UserAccessPermissionsService
             $contentPermissionsLookup
         );
 
-
         if ($wasUpdated) {
             $accessPermissions = $this->getUserAccessPermissions($user->id);
             event(new UserAccessPermissionsUpdated($accessPermissions));
@@ -146,7 +158,9 @@ class UserAccessPermissionsService
             /** @var Product $product */
             $product = $productLookup[$sku] ?? null;
             if (!$product) {
-                Log::warning("Product $sku does not exist.  Fix issue and resync user: $user->id email: $user->email order: $shopifyOrderId");
+                Log::warning(
+                    "Product $sku does not exist.  Fix issue and resync user: $user->id email: $user->email order: $shopifyOrderId"
+                );
                 continue;
             }
             $contentPermissions = $product->getContentPermissions($contentPermissionsLookup);
@@ -195,8 +209,12 @@ class UserAccessPermissionsService
             $permissions = $this->contentPermissionsService->getContentPermissionsLookup();
             $packProducts = $this->productService->getAllPacks();
             $this->cachedPackPermissionIds = $packProducts->map(function ($product) use ($permissions) {
-                return $product->getContentPermissions($permissions)->pluck('id');
-            })->flatten(1)->unique()->toArray();
+                return $product->getContentPermissions($permissions)
+                    ->pluck('id');
+            })
+                ->flatten(1)
+                ->unique()
+                ->toArray();
         }
 
         return $userAccessPermissions->doesUserOwnPermissions($this->cachedPackPermissionIds);
@@ -206,7 +224,10 @@ class UserAccessPermissionsService
     {
         if (config('shopify.enabled')) {
             $userAccessPermissions = $this->getUserAccessPermissions($user->id);
-            $permissionIds = $this->contentPermissionsService->getByBrand($brand)->pluck('id')->toArray();
+            $permissionIds =
+                $this->contentPermissionsService->getByBrand($brand)
+                    ->pluck('id')
+                    ->toArray();
             return $userAccessPermissions->hasUserOwnedPermissions($permissionIds);
         }
         $userProductService = app(UserProductService::class);
@@ -231,7 +252,7 @@ class UserAccessPermissionsService
             $isLifeTime = $dates['expiration_date'] == null;
             $expirationDate = $isLifeTime ? Carbon::maxValue() : Carbon::parse($dates['expiration_date']);
 
-            list(, $userAccessExpirationDate) = $userAccessPermissions->getActiveDates($permissionId);
+            [, $userAccessExpirationDate] = $userAccessPermissions->getActiveDates($permissionId);
             if ($userAccessExpirationDate < Carbon::now()) {
                 $userAccessExpirationDate = Carbon::now();
             }
@@ -257,7 +278,10 @@ class UserAccessPermissionsService
 
     private function buildUserPermissionsList(int $userId, $permissionsLookup): array
     {
-        $userProducts = $this->userProductService->getUserProductsQuery($userId)->with('product')->get();
+        $userProducts =
+            $this->userProductService->getUserProductsQuery($userId)
+                ->with('product')
+                ->get();
         $permissionsToCreate = [];
 
         /** @var UserProduct $userProduct */
@@ -283,8 +307,8 @@ class UserAccessPermissionsService
                 }
                 $permissionId = $permission['id'];
 
-                if (!array_key_exists($permissionId, $permissionsToCreate)
-                    || $permissionsToCreate[$permissionId]['expiration_date'] < $userProduct->expiration_date) {
+                if (!array_key_exists($permissionId, $permissionsToCreate) ||
+                    $permissionsToCreate[$permissionId]['expiration_date'] < $userProduct->expiration_date) {
                     $permissionsToCreate[$permissionId] = [
                         'expiration_date' => $userProduct->expiration_date,
                         'start_date' => $userProduct->start_date,
@@ -298,23 +322,28 @@ class UserAccessPermissionsService
 
     private function getExistingUserAccessLookup(int $userId): Collection
     {
-        return $this->getUserAccessPermissionsQuery($userId)->get()->keyBy(
-            function (UserAccessPermission $permission) {
-                $hash = !empty($permission->source_hash) ? $permission->source_hash : $permission->id;
-                return "$permission->source.$hash";
-            }
-        );
+        return $this->getUserAccessPermissionsQuery($userId)
+            ->get()
+            ->keyBy(
+                function (UserAccessPermission $permission) {
+                    $hash = !empty($permission->source_hash) ? $permission->source_hash : $permission->id;
+                    return "$permission->source.$hash";
+                }
+            );
     }
 
     public function getUserAccessPermissionsList(int $userId, int $page, int $limit): UserAccessPermissionsCollection
     {
         $items = collect(
-            $this->getUserAccessPermissionsQuery($userId)->with('permission')->paginate(
-                $limit,
-                ['*'],
-                'page',
-                $page
-            )->items()
+            $this->getUserAccessPermissionsQuery($userId)
+                ->with('permission')
+                ->paginate(
+                    $limit,
+                    ['*'],
+                    'page',
+                    $page
+                )
+                ->items()
         );
         return new UserAccessPermissionsCollection($userId, $items);
     }
