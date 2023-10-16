@@ -17,9 +17,12 @@ class ShopifyGateway
 
     public function getCustomerOrders($shopifyCustomerId)
     {
-        $gql = <<<GQL
+        $orders = collect();
+        $cursor = "";
+        do {
+            $gql = <<<GQL
             query {
-                 orders(first:10 , query:"customer_id:$shopifyCustomerId"){
+                 orders(first:10$cursor, query:"customer_id:$shopifyCustomerId"){
                     nodes {
                         ... on Order {
                             id
@@ -39,41 +42,54 @@ class ShopifyGateway
                             }
                         }
                     }
+                    pageInfo {
+                      hasNextPage
+                      endCursor
+                    }
                 }
             }
             GQL;
 
-        $gqlUrl = $this->shopify->getBaseUrl() . "/graphql.json";
-        $pollResponse = $this->shopify->graphQl()->post($gqlUrl, ["query" => $gql]);
-        if ($pollResponse->successful()) {
-            $responseBody = json_decode($pollResponse->body());
+            $gqlUrl = $this->shopify->getBaseUrl() . "/graphql.json";
+            $pollResponse = $this->shopify->graphQl()->post($gqlUrl, ["query" => $gql]);
+            if ($pollResponse->successful()) {
+                $responseBody = json_decode($pollResponse->body());
 
-            // check for any errors
-            $responseErrors = $responseBody->errors ?? [];
-            if (!empty($responseErrors)) {
+                // check for any errors
+                $responseErrors = $responseBody->errors ?? [];
+                if (!empty($responseErrors)) {
+                    throw new Exception(
+                        sprintf(
+                            "%s: Error(s) returned while attempting to get orders for customer %s: %s",
+                            get_class($this),
+                            $shopifyCustomerId,
+                            collect($responseErrors)->implode("message", " ")
+                        )
+                    );
+                }
+
+                $orders->merge(
+                    collect($responseBody->data->orders->nodes)->map(function ($order) {
+                        return new Order($order);
+                    })
+                );
+                $hasNextPage = $responseBody->data->orders->pageInfo->hasNextPage;
+                $endCursor = $responseBody->data->orders->pageInfo->endCursor;
+                $cursor = ", after:$endCursor";
+            } else {
                 throw new Exception(
                     sprintf(
-                        "%s: Error(s) returned while attempting to get orders for customer %s: %s",
+                        "%s: Get orders failed for customer %s: %s",
                         get_class($this),
                         $shopifyCustomerId,
-                        collect($responseErrors)->implode("message", " ")
+                        $pollResponse->reason()
                     )
                 );
             }
+        } while ($hasNextPage);
 
-            return collect($responseBody->data->orders->nodes)->map(function ($order) {
-                return new Order($order);
-            });
-        } else {
-            throw new Exception(
-                sprintf(
-                    "%s: Get orders failed for customer %s: %s",
-                    get_class($this),
-                    $shopifyCustomerId,
-                    $pollResponse->reason()
-                )
-            );
-        }
+
+        return $orders;
     }
 
 
