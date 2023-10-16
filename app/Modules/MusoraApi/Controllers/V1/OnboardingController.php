@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\MusoraApi\Controllers\V1;
+namespace App\Modules\MusoraApi\Controllers\V1;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
@@ -29,6 +29,16 @@ class OnboardingController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return Response|Application|ResponseFactory
+     */
+    public function onboardingStarted(Request $request): Response|Application|ResponseFactory
+    {
+        Avo::onboarding_started(AvoHelper::defaultEventProperties());
+        return response(null, 200);
+    }
+
+    /**
      *
      * @param Request $request
      * @return Response|Application|ResponseFactory
@@ -52,7 +62,7 @@ class OnboardingController extends Controller
             ]);
             $gearList[] = $gear;
         }
-        Avo::gear_onboarding_step_completed(
+        Avo::onboarding_gear_step_completed(
             AvoHelper::defaultEventProperties([
                 'brand' => $brand,
                 'gear_list' => $gearList,
@@ -91,11 +101,10 @@ class OnboardingController extends Controller
             $topicList[] = $topic;
         }
 
-        Avo::topics_onboarding_step_completed(
+        Avo::onboarding_topics_step_completed(
             AvoHelper::defaultEventProperties([
                 'brand' => $brand,
                 'topic_list' => $topicList,
-                'has_completed_onboarding' => true,
             ])
         );
         return response(json_encode(user()), 200);
@@ -127,7 +136,7 @@ class OnboardingController extends Controller
             $genres[] = $genre;
         }
 
-        Avo::genres_onboarding_step_completed(
+        Avo::onboarding_genres_step_completed(
             AvoHelper::defaultEventProperties([
                 'brand' => $brand,
                 'genre_list' => $genres,
@@ -161,7 +170,7 @@ class OnboardingController extends Controller
         $onboardingAnswerHistory->user_id = user()->id;
         $onboardingAnswerHistory->save();
 
-        Avo::experience_onboarding_step_completed(
+        Avo::onboarding_experience_step_completed(
             AvoHelper::defaultEventProperties([
                 'brand' => $brand,
                 'experience_level' => strval($experienceLevel),
@@ -196,6 +205,14 @@ class OnboardingController extends Controller
         $onboardingAnswerHistory->user_id = user()->id;
         $onboardingAnswerHistory->save();
 
+        Avo::onboarding_goals_step_completed(
+            AvoHelper::defaultEventProperties([
+                'brand' => $brand,
+                'goals_list' => [$goals],
+                'has_completed_onboarding' => true,
+            ])
+        );
+
         return response(json_encode(user()), 200);
     }
 
@@ -208,7 +225,7 @@ class OnboardingController extends Controller
     {
         try {
             ['brand' => $brand] = $request->validate(['brand' => 'string|required']);
-        } catch (ValidationException $e) {
+        } catch (ValidationException) {
             $message = ['error' => 'Get parameter brand is invalid.'];
             return response($message, 422);
         }
@@ -252,7 +269,7 @@ class OnboardingController extends Controller
             'skipped' => 'required',
         ]);
 
-        Avo::about_onboarding_step_completed(
+        Avo::onboarding_about_step_completed(
             AvoHelper::defaultEventProperties([
                 'is_skipped' => $request->get('skipped'),
             ])
@@ -277,9 +294,9 @@ class OnboardingController extends Controller
         user()->{$userAttribute} = true;
         user()->save();
 
-        Avo::account_setup_skipped(
+        Avo::onboarding_skipped(
             AvoHelper::defaultEventProperties([
-                'step_skipped' => $skippedStep,
+                'step_skipped' => strtolower($skippedStep),
                 'brand' => $brand,
             ])
         );
@@ -297,13 +314,13 @@ class OnboardingController extends Controller
     {
         try {
             $request->validate(['instrument' => 'string|required|not-in:undefined']);
-        } catch (ValidationException $e) {
+        } catch (ValidationException) {
             $message = ['error' => 'Get parameter instrument is missing'];
             return response($message, 422);
         }
         $instrument = $request->get('instrument');
         $this->onboardingService->saveInstrument($instrument);
-        Avo::instrument_onboarding_step_completed(
+        Avo::onboarding_instrument_step_completed(
             AvoHelper::defaultEventProperties([
                 'brand' => $this->onboardingService->getBrandFromInstrument($instrument),
             ])
@@ -322,7 +339,7 @@ class OnboardingController extends Controller
         try {
             $request->validate(['coachName' => 'string|required|not-in:undefined']);
             $request->validate(['coachId' => 'integer|required|not-in:undefined']);
-        } catch (ValidationException $e) {
+        } catch (ValidationException) {
             $message = ['error' => 'Get parameter is missing from onboarding-answer-history-coach api request.'];
             return response($message, 422);
         }

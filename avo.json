@@ -7,8 +7,8 @@
     "name": "Members' Area"
   },
   "branch": {
-    "id": "master",
-    "name": "main"
+    "id": "ycp3d9CRQ",
+    "name": "add-platform-property"
   },
   "sources": [
     {
@@ -16,9 +16,9 @@
       "name": "Musora Web Platform",
       "path": "app/Modules/EventTracking/Avo/Avo.php",
       "interfacePath": "app/Modules/EventTracking/Avo/Avo.php",
-      "actionId": "9VGDZXvPicAxVWO7ph4s",
-      "branchId": "master",
-      "updatedAt": "2023-09-01T20:09:47.369Z"
+      "actionId": "sh4qV6nxdhRwDDDyLW9m",
+      "branchId": "ycp3d9CRQ",
+      "updatedAt": "2023-10-16T15:04:34.901Z"
     }
   ],
   "force": false

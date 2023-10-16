@@ -19,6 +19,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "iksaku/laravel-mass-update": "^1.0",
         "intervention/image": "^2.7",
+        "jenssegers/agent": "^2.6",
         "laravel/framework": "^9.9",
         "laravel/nova": "4.25.1",
         "laravel/sanctum": "^2.15",

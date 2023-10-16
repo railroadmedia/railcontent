@@ -181,6 +181,7 @@ return [
         \Railroad\Location\Providers\LocationServiceProvider::class,
         \Railroad\RemoteStorage\Providers\RemoteStorageServiceProvider::class,
         \Railroad\LeadTracker\Providers\LeadTrackerServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
 
         /*
          * Module Service Providers
@@ -226,6 +227,7 @@ return [
 
     'aliases' => [
 
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,

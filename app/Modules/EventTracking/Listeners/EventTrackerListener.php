@@ -9,7 +9,7 @@ use Modules\UserManagementSystem\Events\User\UserCreated;
 class EventTrackerListener
 {
     /**
-     * @param UserCreated $userCreated
+     * @param UserCreated $event
      */
     public function handleUserCreated(UserCreated $event): void
     {

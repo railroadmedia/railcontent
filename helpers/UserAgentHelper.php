@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Modules\EventTracking\Avo;
-
 use Jenssegers\Agent\Agent;
 
-class AvoHelper
+class UserAgentHelper
 {
     /**
      * @return string
@@ -38,21 +36,6 @@ class AvoHelper
             'androidos' => 'android',
             default => 'web'
         };
-    }
-
-    /**
-     * @param array $properties
-     * @return array
-     */
-    public static function defaultEventProperties(array $properties = []): array
-    {
-        $defaultProperties = [
-            'user_id_' => userIdString(),
-            'platform' => self::getRequestPlatform(),
-            'os' => self::getRequestOS()
-        ];
-
-        return array_merge($defaultProperties, $properties);
     }
 
 }
