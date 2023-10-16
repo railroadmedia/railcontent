@@ -7,6 +7,7 @@ use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
+use App\Modules\Ecommerce\Models\Shopify\Order;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\UserProduct;
@@ -145,16 +146,16 @@ class UserAccessPermissionsService
 
     private function syncShopifyOrder(
         User $user,
-        $order,
+        Order $order,
         Collection $existingAccessPermissionsLookup,
         Collection $productLookup,
         Collection $contentPermissionsLookup
     ): bool {
-        $shopifyOrderId = $order["id"];
+        $shopifyOrderId = $order->id;
 
         $wasUpdated = false;
-        foreach ($order['line_items'] as $lineItem) {
-            $sku = $lineItem['sku'];
+        foreach ($order->lineItems as $lineItem) {
+            $sku = $lineItem->sku;
             /** @var Product $product */
             $product = $productLookup[$sku] ?? null;
             if (!$product) {
@@ -166,7 +167,7 @@ class UserAccessPermissionsService
             $contentPermissions = $product->getContentPermissions($contentPermissionsLookup);
 
             foreach ($contentPermissions as $contentPermission) {
-                $hash = sha1("$shopifyOrderId.$lineItem[id].$contentPermission->id");
+                $hash = sha1("$shopifyOrderId.$lineItem->id.$contentPermission->id");
                 $accessPermission = $existingAccessPermissionsLookup["shopify.$hash"] ?? null;
 
                 $status = $this->getPermissionStatusFromOrder($order);
@@ -176,7 +177,7 @@ class UserAccessPermissionsService
                     $accessPermission->permission_id = $contentPermission->id;
                     $accessPermission->source = UserAccessPermissionsSourceEnum::Shopify;
                     $accessPermission->source_hash = $hash;
-                    $accessPermission->start_time = Carbon::parse($order['created_at']);
+                    $accessPermission->start_time = Carbon::parse($order->createdAt);
                     $accessPermission->time_days = $product->getMembershipTimeDays();
                     $accessPermission->time_months = $product->getMembershipTimeMonths();
                     $accessPermission->time_lifetime = $product->isLifeTime();
@@ -195,9 +196,9 @@ class UserAccessPermissionsService
         return $wasUpdated;
     }
 
-    private function getPermissionStatusFromOrder($order): UserAccessPermissionsStatusEnum
+    private function getPermissionStatusFromOrder(Order $order): UserAccessPermissionsStatusEnum
     {
-        if ($order['cancelled_at']) {
+        if ($order->cancelledAt) {
             return UserAccessPermissionsStatusEnum::Revoked;
         }
         return UserAccessPermissionsStatusEnum::Active;

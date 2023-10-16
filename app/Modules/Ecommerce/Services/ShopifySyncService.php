@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
@@ -24,9 +25,11 @@ class ShopifySyncService
     private ShopifyCustomerService $shopifyCustomerService;
     private UserService $userService;
     private EcommerceUserProvider $ecommerceUserProvider;
+    private ShopifyGateway $shopifyGateway;
 
     public function __construct(
         Shopify $shopify,
+        ShopifyGateway $shopifyGateway,
         RechargeGateway $recharge,
         UserAccessPermissionsService $userAccessPermissionsService,
         ProductService $productService,
@@ -43,6 +46,7 @@ class ShopifySyncService
         $this->shopifyCustomerService = $shopifyCustomerService;
         $this->userService = $userService;
         $this->ecommerceUserProvider = $ecommerceUserProvider;
+        $this->shopifyGateway = $shopifyGateway;
     }
 
     public function syncCustomer($shopifyCustomerId, $email = ''): void
@@ -50,9 +54,8 @@ class ShopifySyncService
         if (!config('shopify.enabled')) {
             return;
         }
-
-        $orders = $this->shopify->getCustomerOrders($shopifyCustomerId, ['status' => 'any']);
-        $skus = $orders->pluck('line_items')->flatten(1)->pluck('sku')->unique()->toArray();
+        $orders = $this->shopifyGateway->getCustomerOrders($shopifyCustomerId);
+        $skus = $orders->pluck('lineItems')->flatten(1)->pluck('sku')->unique()->toArray();
         $products = $this->productService->getProductsBySkus($skus);
         if ($products->contains(fn(Product $product) => $product->isDigital())) {
             $user = $this->getUser($shopifyCustomerId, $email);
@@ -143,13 +146,13 @@ class ShopifySyncService
     /**
      * Create the data to post to Shopify to create an Order
      *
-     * @param  int  $customerShopifyId
-     * @param  string  $email
-     * @param  int[]  $productIds
-     * @param  string  $brand
-     * @param  Carbon  $processedAt
-     * @param  float  $price
-     * @param  float  $tax
+     * @param int $customerShopifyId
+     * @param string $email
+     * @param int[] $productIds
+     * @param string $brand
+     * @param Carbon $processedAt
+     * @param float $price
+     * @param float $tax
      * @return array
      */
     private function createOrderData(
