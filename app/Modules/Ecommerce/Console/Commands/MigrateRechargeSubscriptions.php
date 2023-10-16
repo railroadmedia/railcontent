@@ -16,7 +16,7 @@ class MigrateRechargeSubscriptions extends Command
 {
     use HandlesMaskedEmailAddress;
 
-    protected $signature = 'ecommerce:MigrateRechargeSubscriptions {startIndex=0} {endIndex=100000}';
+    protected $signature = 'ecommerce:MigrateRechargeSubscriptions {fileName} {startIndex=0} {endIndex=100000} {--skipHeader}';
 
     protected function getClassName(): string
     {
@@ -39,7 +39,7 @@ class MigrateRechargeSubscriptions extends Command
     public function handle(Shopify $shopify, RechargeGateway $rechargeGateway)
     {
         $this->withExecutionTime(function () use ($shopify, $rechargeGateway) {
-            $fileName = $this->getClassName() . "-" . preg_replace('~\D~', '', microtime(true)) . ".csv";
+            $fileName = $this->argument('fileName');
 
             $this->info('Loading Subscriptions');
             $subscriptions = Subscription::query()->with('product')
@@ -51,38 +51,41 @@ class MigrateRechargeSubscriptions extends Command
             $count = $subscriptions->count();
             $this->info("Found $count subscriptions");
 
-            $columns = [
-                'external_product_id',
-                'external_variant_id',
-                'external_product_name',
-                'external_variant_name',
-                'quantity',
-                'recurring_price',
-                'charge_interval_unit_type',
-                'charge_interval_frequency',
-                'shipping_interval_unit_type',
-                'shipping_interval_frequency',
-                'charge_on_day_of_month',
-                'customer_created_at',
-                'last_charge_date',
-                'next_charge_date',
-                'customer_stripe_id',
-                'stripe_payment_method_id',
-                'paypal_billing_agrement_id',
-                'shipping_email',
-                'shipping_first_name',
-                'shipping_last_name',
-                'shipping_address_1',
-                'shipping_address_2',
-                'shipping_city',
-                'shipping_province',
-                'shipping_zip',
-                'shipping_country',
-                'shipping_phone',
-                'status'
-            ];
-            $data = implode(',', $columns);
-            $this->appendToFile($fileName, $data);
+            $skipHeader = $this->option('skipHeader');
+            if(!$skipHeader) {
+                $columns = [
+                    'external_product_id',
+                    'external_variant_id',
+                    'external_product_name',
+                    'external_variant_name',
+                    'quantity',
+                    'recurring_price',
+                    'charge_interval_unit_type',
+                    'charge_interval_frequency',
+                    'shipping_interval_unit_type',
+                    'shipping_interval_frequency',
+                    'charge_on_day_of_month',
+                    'customer_created_at',
+                    'last_charge_date',
+                    'next_charge_date',
+                    'customer_stripe_id',
+                    'stripe_payment_method_id',
+                    'paypal_billing_agrement_id',
+                    'shipping_email',
+                    'shipping_first_name',
+                    'shipping_last_name',
+                    'shipping_address_1',
+                    'shipping_address_2',
+                    'shipping_city',
+                    'shipping_province',
+                    'shipping_zip',
+                    'shipping_country',
+                    'shipping_phone',
+                    'status'
+                ];
+                $data = implode(',', $columns);
+                $this->appendToFile($fileName, $data);
+            }
 
             $this->info('Loading Product Information');
             $productIds = $subscriptions->pluck('product.shopify_id')->unique()->mapWithKeys(
