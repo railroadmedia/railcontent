@@ -267,7 +267,7 @@
                     <h1 class=""><strong>30 days to</strong></h1>
                     <h2 class="sm:-mt-1 lg:mt-0">better piano chords.</h2>
 
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting June 5th.</strong></h6>
+                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Play beautiful chords with <br class="inline lg:hidden"> 30 days of guided lessons.</strong></h6>
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video" style="padding-bottom: 75%;" data-open="trailer">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/header-image-m.png" alt="header image" fetchpriority="high" />
@@ -286,7 +286,7 @@
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <span class="join sold-out medium w-full">SOLD OUT</span>
+                            <span class="join sold-out medium w-full">JOIN WAITLIST</span>
 {{--                                <a href="#final" class="join medium w-full anchor-slide">ENROLL NOW</a>--}}
                             <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">
                                 <a href="https://www.musora.com/pianote/enrollment/easy-chords">Pianote Members register for free here.</a>
@@ -309,7 +309,7 @@
             <div class="flex flex-wrap sm:flex-nowrap text-center border rounded-lg border-gray-300 mt-8 lg:mt-12 mb-2 lg:mb-4">
                 <div class="w-full sm:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 sm:py-3 lg:py-4">
                     <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
-                    <h4 class="px-3 lg:px-5"><strong>June 5th</strong></h4>
+                    <h4 class="px-3 lg:px-5"><strong>Any time</strong></h4>
                     <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
 {{--                        Enrollment closes in<br class="inline lg:hidden">--}}
@@ -323,25 +323,25 @@
                         Enrollment closed
                     </p>
                 </div>
-                <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
+                <div class="flex flex-wrap sm:flex-nowrap items-top justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-calendar-day text-pianote text-2xl"></i>
-                        <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> June 5th to<br class="hidden sm:inline"> July 5th.</span></p>
+                        <p class="leading-tight mx-0"><strong class="font-black">Course Length</strong><br>
+                            <span class="text-sm"> 30 days.</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-clock text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Commitment</strong><br>
-                            <span class="text-sm">10 minutes/day<br class="hidden sm:inline"> for 30 days.</span></p>
+                            <span class="text-sm">10 minutes per day.<br class="hidden sm:inline"> for 30 days.</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-trophy text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Result</strong><br>
-                            <span class="text-sm">Better chord changes.  <br> Play 2 beautiful songs.</span></p>
+                            <span class="text-sm">Better chord changes. <br> Play 2 beautiful songs.</span></p>
                     </div>
                 </div>
             </div>
-            <p class="opacity-50 text-center"><em>Flexible lesson times to fit any schedule<br class="inline sm:hidden"> PLUS you get lifetime access!</em></p>
+            <p class="opacity-50 text-center"><em>Learn the piano on <br class="inline sm:hidden"> YOUR schedule with lifetime access!</em></p>
         </div>
     </header>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
@@ -706,10 +706,10 @@
                     <div class="w-full mx-auto sm:mx-0">
                         <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Master your chord changes & inversions.</p>
                         <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Course runs June 5 to July 5.</p>
                         <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>  Choose your best option to get started.</p>
                     </div>
-                    <span class="join sold-out medium w-full align-middle">SOLD OUT</span>
+                    <h4 class="mt-2 mb-4 sm:my-4 lg:my-5"><strong>$97</strong></h4>
+                    <span class="join sold-out medium w-full align-middle">JOIN WAITLIST</span>
                 </div>
 
 {{--                <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">--}}
