@@ -714,7 +714,7 @@
                         <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Master your chord changes & inversions.</p>
                         <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.</p>
                     </div>
-                    <h4 class="mt-2 mb-4 sm:my-4 lg:my-5"><strong>$97</strong></h4>
+                    <h4 class="mt-2 mb-4 sm:my-4 lg:my-5"><strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong></h4>
                     <span class="join sold-out medium w-full align-middle">SOLD OUT</span>
                 </div>
 
