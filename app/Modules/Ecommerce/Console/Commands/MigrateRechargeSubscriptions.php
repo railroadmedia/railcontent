@@ -16,7 +16,7 @@ class MigrateRechargeSubscriptions extends Command
 {
     use HandlesMaskedEmailAddress;
 
-    protected $signature = 'ecommerce:MigrateRechargeSubscriptions';
+    protected $signature = 'ecommerce:MigrateRechargeSubscriptions {startIndex=0} {endIndex=100000}';
 
     protected function getClassName(): string
     {
@@ -96,6 +96,8 @@ class MigrateRechargeSubscriptions extends Command
                 }
             )->toArray();
 
+            $startIndex = $this->argument('startIndex');
+            $endIndex = $this->argument('endIndex');
             $this->info("Creating csv $fileName");
             $i = 0;
             $chunk = 1000;
@@ -105,10 +107,15 @@ class MigrateRechargeSubscriptions extends Command
                 $i2 = $i + $chunk;
                 $this->info("Processing chunk $i - $i2");
                 foreach ($subs as $subscription) {
+                    if ($i < $startIndex || $i > $endIndex) {
+                        $i++;
+                        continue;
+                    }
                     $product = $subscription->product;
                     $variantId = $product?->shopify_id ?? 0;
                     //TODO:Check to make sure product has a shopify id
                     $productId = $productIds[$variantId] ?? 0;
+                    $i++;
                     if (!$productId) {
                         $this->info(
                             "No product found for subscription: $subscription->id Product:$product?->id $product?->name $variantId"
@@ -154,9 +161,10 @@ class MigrateRechargeSubscriptions extends Command
                         "status" => "active"
                     ];
                     $data .= (!empty($data) ? "\n" : "") . implode(',', $d);
-                    $i++;
                 }
-                $this->appendToFile($fileName, $data);
+                if ($data) {
+                    $this->appendToFile($fileName, $data);
+                }
             }
 
             $this->info("Created csv $fileName");
