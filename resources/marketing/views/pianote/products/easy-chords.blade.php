@@ -310,7 +310,7 @@
                                     {{-- <div class="w-full sm:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 sm:py-3 lg:py-4">
                                         <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
                                         <h4 class="px-3 lg:px-5"><strong>Any time</strong></h4> --}}
-                                        
+
                     {{--                        <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
                                             <p class="text-sm px-3 lg:px-5"> Enrollment closes in<br class="inline lg:hidden">--}}
                     {{--                        <span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">--}}
@@ -320,9 +320,9 @@
                     {{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
                     {{--                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
                     {{--                         </span> Enrollment closed </p> --}}
-                                            
+
                                     {{-- </div>
-                                
+
                                 </div> --}}
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
@@ -660,7 +660,7 @@
 <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
 --}}
 
-            
+
         </div>
     </section>
 {{--    <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-16 lg:py-20" style="background:linear-gradient(to bottom, #0b76db, #074c8e);">--}}
@@ -703,7 +703,7 @@
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container max-w-6xl mx-auto relative z-50">
             <div class="flex flex-wrap items-center justify-center">
-                <div class="text-center w-full sm:w-7/12 lg:w-1/3 mb-7 lg:mb-0">
+                <div class="text-center w-full sm:w-7/12 lg:w-5/12 mb-7 lg:mb-0">
                     <img class="h-20 md:h-24 lg:h-28 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h4 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
                             20 Guided Play-Along Lessons.<br>
@@ -713,7 +713,6 @@
                     <div class="w-full mx-auto sm:mx-0">
                         <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Master your chord changes & inversions.</p>
                         <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>  Choose your best option to get started.</p>
                     </div>
                     <h4 class="mt-2 mb-4 sm:my-4 lg:my-5"><strong>$97</strong></h4>
                     <span class="join sold-out medium w-full align-middle">SOLD OUT</span>
