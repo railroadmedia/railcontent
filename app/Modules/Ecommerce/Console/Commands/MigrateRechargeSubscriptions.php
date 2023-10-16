@@ -48,6 +48,9 @@ class MigrateRechargeSubscriptions extends Command
                 ->where('paid_until', '>', Carbon::now())
                 ->get();
 
+            $count = $subscriptions->count();
+            $this->info("Found $count subscriptions");
+
             $columns = [
                 'external_product_id',
                 'external_variant_id',
