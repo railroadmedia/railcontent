@@ -288,9 +288,9 @@
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
                             <span class="join sold-out medium w-full">JOIN WAITLIST</span>
 {{--                                <a href="#final" class="join medium w-full anchor-slide">ENROLL NOW</a>--}}
-                            <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">
+                           {{-- <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">
                                 <a href="https://www.musora.com/pianote/enrollment/easy-chords">Pianote Members register for free here.</a>
-                            </p>
+                            </p>--}}
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/piano-players.png" alt="joined student profiles" fetchpriority="high">
