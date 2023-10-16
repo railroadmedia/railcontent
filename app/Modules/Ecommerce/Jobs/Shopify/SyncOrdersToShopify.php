@@ -3,6 +3,9 @@
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Models\ShopifySync;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsToShopify;
@@ -767,7 +770,6 @@ class SyncOrdersToShopify implements ShouldQueue
             "email" => $this->getEmailForShopify($purchaserEmail),
             "note" => $order->getNote(),
             "processed_at" => (new Carbon($order->getCreatedAt()))->toIso8601String(),
-            "source_name" => $order->getBrand(),
             "subtotal_price" => number_format(
                 ($order->getProductDue() ?? ($order->getTotalDue() - $order->getTaxesDue() - $order->getShippingDue(
                     ))) ?? 0,
@@ -784,11 +786,17 @@ class SyncOrdersToShopify implements ShouldQueue
             // we can use meta fields for stuff like our order id, etc
             $orderData["metafields"] = [
                 [
-                    "key" => "_id",
+                    "key" => ShopifyMetafieldKey::Id,
                     "value" => $order->getId(),
-                    "type" => "number_integer",
-                    "namespace" => "orders"
-                ]
+                    "type" => ShopifyMetafieldTypes::integer,
+                    "namespace" => ShopifyMetafieldNamespace::Model_Orders
+                ],
+                [
+                    "key" => ShopifyMetafieldKey::Brand,
+                    "value" => $order->getBrand(),
+                    "type" => ShopifyMetafieldTypes::single_line_text_field,
+                    "namespace" => ShopifyMetafieldNamespace::Musora
+                ],
             ];
         }
 

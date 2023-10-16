@@ -3,6 +3,9 @@
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Models\ShopifySync;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsToShopify;
 use Doctrine\ORM\EntityRepository;
@@ -43,10 +46,6 @@ class SyncProductsToShopify implements ShouldQueue
      * @var int
      */
     public $timeout = 840; // 14 minutes
-
-    private const METAFIELD_NAMESPACE = "products";
-    private const METAFIELD_KEY = "_id";
-    private const METAFIELD_TYPE = "number_integer";
     private const SIZE_OPTION_NAME = "Size";
     private const SIZE_OPTION_KEY = "option1";
     private const SIZE_STRINGS = ["XS", "S", "M", "L", "XL", "XXL", "XXXL", "XXXXL"];
@@ -343,10 +342,10 @@ class SyncProductsToShopify implements ShouldQueue
             // we can use meta fields for stuff like our product id, etc
             $variantData["metafields"] = [
                 [
-                    "key" => self::METAFIELD_KEY,
-                    "value" => $product->getId(),
-                    "type" => self::METAFIELD_TYPE,
-                    "namespace" => self::METAFIELD_NAMESPACE
+                    "key" => ShopifyMetafieldKey::Id,
+                    "value" => (string)$product->getId(),
+                    "type" => ShopifyMetafieldTypes::integer,
+                    "namespace" => ShopifyMetafieldNamespace::Model_Products
                 ]
             ];
         }
@@ -676,9 +675,9 @@ class SyncProductsToShopify implements ShouldQueue
                     $metafields = collect($variantData["metafields"]);
                     $productIdMetafield = $metafields->filter(
                         fn(array $fields) => array_key_exists("namespace", $fields)
-                            && $fields["namespace"] === self::METAFIELD_NAMESPACE
+                            && $fields["namespace"] === ShopifyMetafieldNamespace::Model_Products
                             && array_key_exists("key", $fields)
-                            && $fields["key"] === self::METAFIELD_KEY
+                            && $fields["key"] === ShopifyMetafieldKey::Id
                     );
                     // we were able to find one, so that means this is a variant for an existing product in Shopify
                     $productId = $productIdMetafield->first()["value"];
@@ -715,7 +714,7 @@ class SyncProductsToShopify implements ShouldQueue
             $this->handleRateLimit();
             $variantMetaFields = $this->shopify->getVariantMetafields(
                 $shopifyId,
-                ["namespace" => self::METAFIELD_NAMESPACE, "key" => self::METAFIELD_KEY]
+                ["namespace" => ShopifyMetafieldNamespace::Model_Products, "key" => ShopifyMetafieldKey::Id]
             );
             $productId = $variantMetaFields->first()?->getAttributes()["value"] ?? null;
             try {

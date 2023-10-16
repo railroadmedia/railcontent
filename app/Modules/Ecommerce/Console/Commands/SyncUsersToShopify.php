@@ -2,6 +2,9 @@
 
 namespace App\Modules\Ecommerce\Console\Commands;
 
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsShopifyCustomer;
 use Doctrine\ORM\Exception\ORMException;
 use Illuminate\Database\Eloquent\Builder;
@@ -279,10 +282,10 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
             // we can use meta fields for stuff like our user id, etc
             $customerData["metafields"] = [
                 [
-                    "key" => "_id",
-                    "value" => $user->id,
-                    "type" => "number_integer",
-                    "namespace" => "users"
+                    "key" => ShopifyMetafieldKey::Id,
+                    "value" => (string)$user->id,
+                    "type" => ShopifyMetafieldTypes::integer,
+                    "namespace" => ShopifyMetafieldNamespace::Model_Users
                 ]
             ];
         }

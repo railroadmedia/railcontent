@@ -2,6 +2,9 @@
 
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsToShopify;
@@ -602,7 +605,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             "email" => $this->getEmailForShopify($purchaserEmail),
             "note" => $note,
             "processed_at" => $subscriptionPayment->getCreatedAt()->toIso8601String(),
-            "source_name" => $subscription->getBrand(),
             "subtotal_price" => number_format(($subscription->getTotalPrice() - $subscription->getTax()) ?? 0, 2),
             "total_outstanding" => number_format(($payment->getTotalDue() - $payment->getTotalPaid()) ?? 0, 2),
             "total_price" => number_format($subscription->getTotalPrice() ?? 0, 2),
@@ -613,10 +615,22 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             "metafields" =>
                 array(
                     [
-                        "key" => "_id",
-                        "value" => $subscriptionPayment->getId(),
-                        "type" => "number_integer",
-                        "namespace" => "subscription_payments"
+                        "key" => ShopifyMetafieldKey::Id,
+                        "value" => (string)$subscriptionPayment->getId(),
+                        "type" => ShopifyMetafieldTypes::integer,
+                        "namespace" => ShopifyMetafieldNamespace::Model_SubscriptionPayments
+                    ],
+                    [
+                        "key" => ShopifyMetafieldKey::Brand,
+                        "value" => $subscription->getBrand(),
+                        "type" => ShopifyMetafieldTypes::single_line_text_field,
+                        "namespace" => ShopifyMetafieldNamespace::Musora
+                    ],
+                    [
+                        "key" => ShopifyMetafieldKey::PaymentSource,
+                        "value" => $this->getPaymentSourceMetafieldValue($payment),
+                        "type" => ShopifyMetafieldTypes::single_line_text_field,
+                        "namespace" => ShopifyMetafieldNamespace::Musora
                     ]
                 )
         ];
@@ -630,7 +644,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
 
         // the proper addresses should already have been synced by the user/customer, so only use it if Shopify has it
         try {
-            $address = $payment->getPaymentMethod()->getBillingAddress() ?? null;
+            $address = $payment->getPaymentMethod()?->getBillingAddress() ?? null;
             if ($address?->getShopifyId()) {
                 $orderData["billing_address"] = ["id" => $address->getShopifyId()];
             }
@@ -657,6 +671,21 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         );
 
         return $orderData;
+    }
+
+    /**
+     * Get the value to use for the given payment's source
+     *
+     * @param  Payment  $payment
+     * @return string
+     */
+    private function getPaymentSourceMetafieldValue(Payment $payment): string
+    {
+        return match ($payment->getType()) {
+            Payment::TYPE_APPLE_SUBSCRIPTION_RENEWAL => 'apple-app',
+            Payment::TYPE_GOOGLE_SUBSCRIPTION_RENEWAL => 'google-app',
+            default => 'web-app',
+        };
     }
 
     /**

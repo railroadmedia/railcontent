@@ -2,6 +2,9 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\UserManagementSystem\Services\UserService;
@@ -140,12 +143,13 @@ class ShopifySyncService
     /**
      * Create the data to post to Shopify to create an Order
      *
-     * @param int $customerShopifyId
-     * @param string $email
-     * @param int[] $productIds
-     * @param string $brand
-     * @param float $price
-     * @param float $tax
+     * @param  int  $customerShopifyId
+     * @param  string  $email
+     * @param  int[]  $productIds
+     * @param  string  $brand
+     * @param  Carbon  $processedAt
+     * @param  float  $price
+     * @param  float  $tax
      * @return array
      */
     private function createOrderData(
@@ -161,11 +165,18 @@ class ShopifySyncService
             "customer" => ["id" => $customerShopifyId],
             "email" => $email,
             "processed_at" => $processedAt,
-            "source_name" => $brand,
             "subtotal_price" => number_format($price, 2),
             "total_outstanding" => "0.00",
             "total_price" => number_format($price + ($tax ?? 0), 2),
             "line_items" => $this->createOrderItems($productIds, $price),
+            "metafields" => [
+                [
+                    "key" => ShopifyMetafieldKey::Brand,
+                    "value" => $brand,
+                    "type" => ShopifyMetafieldTypes::single_line_text_field,
+                    "namespace" => ShopifyMetafieldNamespace::Musora
+                ],
+            ]
         ];
 
         if ($tax) {
