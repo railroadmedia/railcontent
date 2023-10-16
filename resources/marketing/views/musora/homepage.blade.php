@@ -827,7 +827,7 @@
     @php
         $testimonials = [
             [
-            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/marketing/drumeo/membership/homepage/2023/testimonials/ed-koop.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/ed-koop.jpg',
             'name' => 'Ed Koop',
             'brand' => 'Drummer',
             'video' => '342059271',
@@ -835,7 +835,7 @@
             'description' => 'After 20 years away from the drums, Ed says he’s loving music more than ever. He nailed his first audition and has now played at the venues of his dreams.',
             ],
             [
-            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/marketing/drumeo/membership/homepage/2023/testimonials/lisa-aragon.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/lisa-aragon.jpg',
             'name' => 'Lisa Aragon',
             'brand' => 'Drummer',
             'video' => '373252004',
@@ -843,7 +843,7 @@
             'description' => 'Lisa got interested in the drums by playing Rock Band. She had no idea she’d be performing with strangers in Nashville just a few years later.',
             ],
             [
-            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/marketing/pianote/membership/homepage/2023/testimonials/serenadorward.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/serenadorward.jpg',
             'title' => "If I was taught this way as a child, I would have never quit.",
             'description' => "I decided to sign up with Pianote not only to re-learn how to play the piano, but also because my mental health was really suffering and I needed something positive to focus on that was just for ME. I knew almost immediately that this was the answer I had been looking for. It felt like the heaviness on my shoulders got a bit lighter after every piano session.  And even though the lessons are virtual, it was like Lisa was right there beside me cheering me on.<br><br>I was blown away by how quickly I progressed with a few tutorials from Lisa. My overall confidence improved, especially with improvisation. Now I know all these little tricks (fills & riffs) and how to play inversions and practice chords in ways that sound so lovely.  If I had been taught this way as a child, I probably never would have quit.",
             'name' => 'Serena Dorward',
@@ -851,7 +851,7 @@
             'location' => 'Ontario, Canada',
             ],
             [
-            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/marketing/pianote/membership/homepage/2023/testimonials/jessripley.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/jessripley.jpg',
             'title' => "I’m blown away by the program you’ve created.",
             'description' => "Pianote is an insanely encouraging and supportive community run by an insanely encouraging and supportive team. Sincerely, I’m blown away by the program you’ve created.<br><br>I sat down one day and it just clicked. From then on, I’ve felt VERY encouraged to keep learning and practicing. It’s fulfilling and fun to see myself progress and achieve goals. Now I’m playing with both hands at the same time with confidence – and I’ve started playing along with more backing tracks and making up my own songs.",
             'name' => 'Jess Ripley',
@@ -863,7 +863,7 @@
             'description' => "I’ve come so far in such a short period of time. I’ve gone from not even knowing what palm muting was to noodling with the E & A string pentatonic shapes and creating melodies with it – and using it to work on my vibrato, slides, and bends. And I’ve gained priceless info like knowing where to place chords, start power chords, and scale shapes.<br><br>Having the breakthroughs I’ve had so far has brought me confidence and kept me sane while the world is seemingly not – and made me believe there is still a bright future ahead. As I progress, I feel supported towards achieving my goals of jamming with others and using my love for writing to start telling stories through music. All in due time.<br><br>I’m lightyears ahead of where I was at. And no matter where I go, or however tough things get, I’ll always have one of my guitars in the passenger seat and we’ll always be there for each other. The life long journey has begun!",
             'name' => 'Ërlik Sörensen',
             'brand' => 'Guitarist',
-            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/marketing/guitareo/membership/homepage/2023/testimonials/erliksorensen.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/guitareo/membership/homepage/2023/testimonials/erliksorensen.jpg',
             'location' => 'British Columbia, Canada',
             ],
             [
@@ -871,11 +871,11 @@
             'description' => "When I finished the first lesson, I had a feeling of joy that I’ve never had before when playing guitar. I'm experimenting a lot more and improving my technique. The goal-based learning makes each set of lessons more entertaining and a feeling of accomplishment when completed.",
             'name' => 'Jamie K',
             'brand' => 'Guitarist',
-            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/marketing/guitareo/membership/homepage/2023/testimonials/jamie-nova-scotia.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/guitareo/membership/homepage/2023/testimonials/jamie-nova-scotia.jpg',
             'location' => 'Nova Scotia, Canada',
             ],
             [
-            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/marketing/singeo/membership/homepage/2023/testimonials/OriannaSells.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/singeo/membership/homepage/2023/testimonials/OriannaSells.jpg',
             'name' => 'Orianna Sells',
             'brand' => 'Singer',
             'title' => 'It felt like the chains finally fell off my voice.',
@@ -883,7 +883,7 @@
             'location' => 'South Carolina, USA',
             ],
             [
-            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/marketing/singeo/membership/homepage/2023/testimonials/DamienGiven3.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/singeo/membership/homepage/2023/testimonials/DamienGiven3.jpg',
             'name' => 'Damien Given',
             'brand' => 'Singer',
             'title' => 'I’m getting back some of my old confidence.',
