@@ -785,8 +785,10 @@ class SyncOrdersToShopify implements ShouldQueue
 
             if ($notes->isNotEmpty()) {
                 $refundNotes = Str::of($refundNotes)->newLine()->append("Refund Notes:");
-                $notes->each(function (string $refundNote) use (&$refundNotes) {
-                    $refundNotes = $refundNotes->newLine()->append($refundNote, PHP_EOL);
+                $notes->each(function (?string $refundNote) use (&$refundNotes) {
+                    if (!empty($refundNote)) {
+                        $refundNotes = $refundNotes->newLine()->append($refundNote, PHP_EOL);
+                    }
                 });
             }
 
@@ -823,7 +825,7 @@ class SyncOrdersToShopify implements ShouldQueue
 
         if ($order->getTaxesDue()) {
             $orderData["tax_lines"] = [
-                ["price" => $order->getTaxesDue()]
+                ["price" => number_format($order->getTaxesDue(), 2)]
             ];
         }
 
