@@ -13,7 +13,6 @@ use Signifly\Shopify\Shopify;
 
 trait SyncsToShopify
 {
-    use HandlesShopifyRateLimit;
     use LogsShopify;
 
     protected Shopify $shopify;

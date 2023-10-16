@@ -6,6 +6,7 @@ use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesShopifyRateLimit;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsToShopify;
 use Carbon\Carbon;
@@ -39,12 +40,13 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;
+    use HandlesMaskedEmailAddress;
+    use HandlesShopifyRateLimit;
     use InteractsWithQueue;
     use LogsShopify;
     use Queueable;
     use SerializesModels;
     use SyncsToShopify;
-    use HandlesMaskedEmailAddress;
 
     protected const SHOPIFY_FULFILLMENT_ID = "shopify_fulfillment_id";
     protected const DEFAULT_CURRENCY = "USD";

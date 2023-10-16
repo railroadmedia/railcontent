@@ -6,7 +6,9 @@ use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\UserManagementSystem\Models\User;
 
@@ -29,9 +31,21 @@ class Order extends Model
     protected $table = 'ecommerce_orders';
     protected $primaryKey = 'id';
 
-    public function payments(): HasMany
+    public function payments(): BelongsToMany
     {
-        return $this->hasMany(Payment::class);
+        return $this->belongsToMany(Payment::class, "ecommerce_order_payments");
+    }
+
+    public function refunds(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Refund::class,
+            OrderPayment::class,
+            "payment_id",
+            "payment_id",
+            "id",
+            "id"
+        );
     }
 
     public function orderItems(): HasMany
