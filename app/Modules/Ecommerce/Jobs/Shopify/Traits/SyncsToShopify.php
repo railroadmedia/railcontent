@@ -191,6 +191,11 @@ trait SyncsToShopify
      */
     protected function getDateTimeOfLastSync(): Carbon
     {
+        $override = $this->getLastSyncAtOverride();
+        if (!is_null($override)) {
+            return $override;
+        }
+
         $sync = ShopifySync::where("resource", $this->getSyncResource())->latestFinished()->first();
         return $sync?->finished_at ?? Carbon::createFromTimestamp(0);
     }
@@ -201,4 +206,11 @@ trait SyncsToShopify
      * @return int|null
      */
     abstract protected function getLimit(): ?int;
+
+    /**
+     * Get the optional override of when this entity was last synced to Shopify
+     *
+     * @return Carbon|null
+     */
+    abstract protected function getLastSyncAtOverride(): null|Carbon;
 }

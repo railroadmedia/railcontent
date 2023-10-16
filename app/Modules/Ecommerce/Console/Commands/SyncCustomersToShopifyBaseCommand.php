@@ -430,4 +430,16 @@ class SyncCustomersToShopifyBaseCommand extends Command
     {
         return $this->customerRepository;
     }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getLastSyncAtOverride(): null|Carbon
+    {
+        $override = $this->option("since");
+        if (!is_null($override)) {
+            return new Carbon($override);
+        }
+        return null;
+    }
 }
