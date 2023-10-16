@@ -310,18 +310,17 @@
                 <div class="w-full sm:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 sm:py-3 lg:py-4">
                     <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
                     <h4 class="px-3 lg:px-5"><strong>Any time</strong></h4>
-                    <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
-                    <p class="text-sm px-3 lg:px-5">
-{{--                        Enrollment closes in<br class="inline lg:hidden">--}}
+                    
+{{--                        <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
+                        <p class="text-sm px-3 lg:px-5"> Enrollment closes in<br class="inline lg:hidden">--}}
 {{--                        <span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">--}}
 {{--                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
 {{--                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
 {{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
 {{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
 {{--                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
-{{--                         </span>--}}
-                        Enrollment closed
-                    </p>
+{{--                         </span> Enrollment closed </p> --}}
+                        
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-top justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
