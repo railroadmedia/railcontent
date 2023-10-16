@@ -113,11 +113,11 @@ class MigrateRechargeSubscriptions extends Command
                         $this->info(
                             "No product found for subscription: $subscription->id Product:$product?->id $product?->name $variantId"
                         );
-                        return;
+                        continue;
                     }
                     if (!$subscription->user) {
                         $this->info("No user found for subscription: $subscription->id User:$subscription->user_id");
-                        return;
+                        continue;
                     }
 
                     $d = [
