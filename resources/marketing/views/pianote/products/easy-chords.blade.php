@@ -286,13 +286,13 @@
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <span class="join sold-out medium w-full">JOIN WAITLIST</span>
+                            <span class="join sold-out medium w-full">SOLD OUT</span>
 {{--                                <a href="#final" class="join medium w-full anchor-slide">ENROLL NOW</a>--}}
                            {{-- <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">
                                 <a href="https://www.musora.com/pianote/enrollment/easy-chords">Pianote Members register for free here.</a>
                             </p>--}}
                         </div>
-                        <div class="w-full sm:w-1/2 lg:pb-5">
+                        <div class="w-full sm:w-1/2">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/piano-players.png" alt="joined student profiles" fetchpriority="high">
                             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
                         </div>
@@ -307,36 +307,43 @@
             </div>
 
             <div class="flex flex-wrap sm:flex-nowrap text-center border rounded-lg border-gray-300 mt-8 lg:mt-12 mb-2 lg:mb-4">
-                <div class="w-full sm:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 sm:py-3 lg:py-4">
-                    <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
-                    <h4 class="px-3 lg:px-5"><strong>Any time</strong></h4>
-                    
-{{--                        <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
-                        <p class="text-sm px-3 lg:px-5"> Enrollment closes in<br class="inline lg:hidden">--}}
-{{--                        <span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">--}}
-{{--                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
-{{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-{{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
-{{--                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
-{{--                         </span> Enrollment closed </p> --}}
-                        
-                </div>
-                <div class="flex flex-wrap sm:flex-nowrap items-top justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
+                                    {{-- <div class="w-full sm:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 sm:py-3 lg:py-4">
+                                        <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
+                                        <h4 class="px-3 lg:px-5"><strong>Any time</strong></h4> --}}
+                                        
+                    {{--                        <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
+                                            <p class="text-sm px-3 lg:px-5"> Enrollment closes in<br class="inline lg:hidden">--}}
+                    {{--                        <span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">--}}
+                    {{--                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+                    {{--                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+                    {{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+                    {{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+                    {{--                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+                    {{--                         </span> Enrollment closed </p> --}}
+                                            
+                                    {{-- </div>
+                                
+                                </div> --}}
+                <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-calendar-day text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Length</strong><br>
-                            <span class="text-sm"> 30 days.</span></p>
+                            <span class="text-sm">30 days.</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-clock text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Commitment</strong><br>
-                            <span class="text-sm">10 minutes per day.<br class="hidden sm:inline"> for 30 days.</span></p>
+                            <span class="text-sm">10 minutes per day.</span></p>
+                    </div>
+                    <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
+                        <i class="far fa-fw mr-3 sm:mr-0 fa-piano-keyboard text-pianote text-2xl"></i>
+                        <p class="leading-tight mx-0"><strong class="font-black">Skill Level</strong><br>
+                            <span class="text-sm">Beginner.</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-trophy text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Result</strong><br>
-                            <span class="text-sm">Better chord changes. <br> Play 2 beautiful songs.</span></p>
+                            <span class="text-sm">Play real songs on the <br> piano and sound beautiful.</span></p>
                     </div>
                 </div>
             </div>
@@ -646,13 +653,14 @@
                 @endforeach
             </div>
 
-            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">JOIN WAITLIST</span><br>
-
+{{--<span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">SOLD OUT</span><br>--}}
 {{--                <a href="#final"--}}
-{{--                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>--}}
+{{--                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+<img class="h-7 mr-1 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/piano-players.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('opacity-0')">
+<p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
+--}}
 
-            <img class="h-7 mr-1 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/piano-players.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
+            
         </div>
     </section>
 {{--    <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-16 lg:py-20" style="background:linear-gradient(to bottom, #0b76db, #074c8e);">--}}
@@ -708,7 +716,7 @@
                         <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>  Choose your best option to get started.</p>
                     </div>
                     <h4 class="mt-2 mb-4 sm:my-4 lg:my-5"><strong>$97</strong></h4>
-                    <span class="join sold-out medium w-full align-middle">JOIN WAITLIST</span>
+                    <span class="join sold-out medium w-full align-middle">SOLD OUT</span>
                 </div>
 
 {{--                <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">--}}
