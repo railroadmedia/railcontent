@@ -1019,12 +1019,16 @@ class RevenueCatController extends Controller
             }
 
             $subscriptionNotification = $data->subscriptionNotification;
+            $app = ($data->packageName == 'com.pianote2') ? 'Pianote' : (($data->packageName == 'com.drumeo')?'Drumeo':'Musora');
 
             if (strtolower($subscriptionNotification->notificationType) == self::SUBSCRIPTION_REVOKED) {
                 $revenuecatPurchase = $this->revenueCatGateway->purchase(
                     $subscriptionNotification->purchaseToken,
                     $subscriptionNotification->subscriptionId,
-                    'android'
+                    'android',
+                    null,
+                    null,
+                    $app
                 );
                 $apiResponse = json_decode($revenuecatPurchase);
 
