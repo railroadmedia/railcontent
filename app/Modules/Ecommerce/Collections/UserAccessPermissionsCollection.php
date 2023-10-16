@@ -53,15 +53,19 @@ class UserAccessPermissionsCollection
             if ($userAccessPermission->time_lifetime && $userAccessPermission->status != 'revoked') {
                 return [Carbon::parse($userAccessPermission->start_time), Carbon::maxValue()];
             }
+            if ($userAccessPermission->status == 'revoked') {
+                $userAccessPermission->actualStartTime = Carbon::parse($userAccessPermission->start_time);
+                $userAccessPermission->actualExpirationTime = Carbon::parse($userAccessPermission->revoked_at);
+                continue;
+            }
             $startDate = $expirationDate != null && $expirationDate > $userAccessPermission->start_time
                 ? $startDate : Carbon::parse($userAccessPermission->start_time);
             $tempStartDate = $expirationDate != null && $expirationDate > $userAccessPermission->start_time
                 ? $expirationDate : Carbon::parse($userAccessPermission->start_time);
-            $revoked_date =
-                ($userAccessPermission->status == 'revoked') ? Carbon::parse($userAccessPermission->revoked_at) : null;
-            $expirationDate = ($revoked_date)?$revoked_date:($tempStartDate->clone()
+
+            $expirationDate = $tempStartDate->clone()
                 ->addDays($userAccessPermission->time_days)
-                ->addMonths($userAccessPermission->time_months));
+                ->addMonths($userAccessPermission->time_months);
             $userAccessPermission->actualStartTime = $tempStartDate;
             $userAccessPermission->actualExpirationTime = $expirationDate;
         }
@@ -113,9 +117,11 @@ class UserAccessPermissionsCollection
         return $endDate > Carbon::now();
     }
 
-    public function getPermissionIds(): array
+    public function getActivePermissionIds(): array
     {
-        return $this->collection->pluck('permission_id')->unique()->sort()->toArray();
+        return $this->collection->where(function ($permission) {
+            return $permission->status != 'revoked';
+        })->pluck('permission_id')->unique()->sort()->toArray();
     }
 
     public function hasUserOwnedPermissions(array $permissionIds): bool
@@ -141,6 +147,4 @@ class UserAccessPermissionsCollection
         list(, $endDate) = $this->getActiveDates($permissionID);
         return $endDate > Carbon::now();
     }
-
-
 }
