@@ -283,6 +283,7 @@ return [
                 ],
                 'events' => [
                     'drumeo_prospect_rafflepress-giveaway',
+                    'giveaway_name',
                 ],
                 'accounts_to_sync' => [
                     'drumeo',
