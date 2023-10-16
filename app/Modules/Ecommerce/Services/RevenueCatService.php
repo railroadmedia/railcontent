@@ -6,7 +6,7 @@ use App\Modules\Ecommerce\ApiGateways\RevenueCatApiGateway;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use Carbon\Carbon;
-use Modules\Ecommerce\Services\PaymentService;
+use App\Modules\Ecommerce\Services\PaymentService;
 use Modules\UserManagementSystem\Models\User;
 
 class RevenueCatService

@@ -12,7 +12,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
-use Modules\Ecommerce\Services\PaymentService;
+use App\Modules\Ecommerce\Services\PaymentService;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Gateways\RevenueCatGateway;
 
@@ -556,6 +556,7 @@ class RevenueCatController extends Controller
             $user = user();
             $email = $user->getEmail();
         }
+        Log::debug('Purchase RevenueCat API for email :::'.$request->input('data.attributes.email') ?? $email);
         $revenuecatPurchase = $this->revenueCatGateway->purchase(
             $request->input('data.attributes.receipt'),
             null,
