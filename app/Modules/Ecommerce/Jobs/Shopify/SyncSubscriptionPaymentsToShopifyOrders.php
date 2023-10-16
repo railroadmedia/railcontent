@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
@@ -604,7 +605,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             "email" => $this->getEmailForShopify($purchaserEmail),
             "note" => $note,
             "processed_at" => $subscriptionPayment->getCreatedAt()->toIso8601String(),
-            "source_name" => $subscription->getBrand(),
             "subtotal_price" => number_format(($subscription->getTotalPrice() - $subscription->getTax()) ?? 0, 2),
             "total_outstanding" => number_format(($payment->getTotalDue() - $payment->getTotalPaid()) ?? 0, 2),
             "total_price" => number_format($subscription->getTotalPrice() ?? 0, 2),
@@ -616,15 +616,21 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                 array(
                     [
                         "key" => ShopifyMetafieldKey::Id,
-                        "value" => $subscriptionPayment->getId(),
+                        "value" => (string)$subscriptionPayment->getId(),
                         "type" => ShopifyMetafieldTypes::integer,
-                        "namespace" => "subscription_payments"
+                        "namespace" => ShopifyMetafieldNamespace::Model_SubscriptionPayments
+                    ],
+                    [
+                        "key" => ShopifyMetafieldKey::Brand,
+                        "value" => $subscription->getBrand(),
+                        "type" => ShopifyMetafieldTypes::single_line_text_field,
+                        "namespace" => ShopifyMetafieldNamespace::Musora
                     ],
                     [
                         "key" => ShopifyMetafieldKey::PaymentSource,
                         "value" => $this->getPaymentSourceMetafieldValue($payment),
                         "type" => ShopifyMetafieldTypes::single_line_text_field,
-                        "namespace" => "payment_source"
+                        "namespace" => ShopifyMetafieldNamespace::Musora
                     ]
                 )
         ];

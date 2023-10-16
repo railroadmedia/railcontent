@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsShopifyCustomer;
 use Doctrine\ORM\Exception\ORMException;
@@ -282,9 +283,9 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
             $customerData["metafields"] = [
                 [
                     "key" => ShopifyMetafieldKey::Id,
-                    "value" => $user->id,
+                    "value" => (string)$user->id,
                     "type" => ShopifyMetafieldTypes::integer,
-                    "namespace" => "users"
+                    "namespace" => ShopifyMetafieldNamespace::Model_Users
                 ]
             ];
         }
