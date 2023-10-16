@@ -75,7 +75,7 @@ class ShopifyGateway
                 );
                 $hasNextPage = $responseBody->data->orders->pageInfo->hasNextPage;
                 $endCursor = $responseBody->data->orders->pageInfo->endCursor;
-                $cursor = ", after:$endCursor";
+                $cursor = ", after: \"$endCursor\"";
             } else {
                 throw new Exception(
                     sprintf(
