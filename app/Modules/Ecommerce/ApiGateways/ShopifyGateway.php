@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\ApiGateways;
 
 use App\Modules\Ecommerce\Models\Shopify\Order;
+use Carbon\Carbon;
 use Exception;
 use Signifly\Shopify\Shopify;
 
@@ -19,6 +20,7 @@ class ShopifyGateway
     {
         $orders = collect();
         $cursor = "";
+
         do {
             $gql = <<<GQL
             query {
@@ -50,46 +52,69 @@ class ShopifyGateway
             }
             GQL;
 
-            $gqlUrl = $this->shopify->getBaseUrl() . "/graphql.json";
-            $pollResponse = $this->shopify->graphQl()->post($gqlUrl, ["query" => $gql]);
-            if ($pollResponse->successful()) {
-                $responseBody = json_decode($pollResponse->body());
+            $responseBody = $this->executeQuery($gql);
 
-                // check for any errors
-                $responseErrors = $responseBody->errors ?? [];
-                if (!empty($responseErrors)) {
-                    throw new Exception(
-                        sprintf(
-                            "%s: Error(s) returned while attempting to get orders for customer %s: %s",
-                            get_class($this),
-                            $shopifyCustomerId,
-                            collect($responseErrors)->implode("message", " ")
-                        )
-                    );
-                }
 
-                $orders = $orders->merge(
-                    collect($responseBody->data->orders->nodes)->map(function ($order) {
-                        return new Order($order);
-                    })
-                );
-                $hasNextPage = $responseBody->data->orders->pageInfo->hasNextPage;
-                $endCursor = $responseBody->data->orders->pageInfo->endCursor;
-                $cursor = ", after: \"$endCursor\"";
-            } else {
-                throw new Exception(
-                    sprintf(
-                        "%s: Get orders failed for customer %s: %s",
-                        get_class($this),
-                        $shopifyCustomerId,
-                        $pollResponse->reason()
-                    )
-                );
-            }
+            $orders = $orders->merge(
+                collect($responseBody->data->orders->nodes)->map(function ($order) {
+                    return new Order($order);
+                })
+            );
+            $hasNextPage = $responseBody->data->orders->pageInfo->hasNextPage;
+            $endCursor = $responseBody->data->orders->pageInfo->endCursor;
+            $cursor = ", after: \"$endCursor\"";
         } while ($hasNextPage);
 
 
         return $orders;
+    }
+
+    public function doesOrderExist(int $shopifyCustomerId, Carbon $processedAt): bool
+    {
+        $gql = <<<GQL
+            query {
+                 orders(first:1, query:"customer_id:$shopifyCustomerId AND processed_at:\"$processedAt\""){
+                    nodes {
+                        ... on Order {
+                            id
+                        }
+                    }
+                }
+            }
+            GQL;
+
+        $responseBody = $this->executeQuery($gql);
+       return count($responseBody->data->orders->nodes);
+    }
+
+    public function executeQuery(string $gql): mixed
+    {
+        $gqlUrl = $this->shopify->getBaseUrl() . "/graphql.json";
+        $pollResponse = $this->shopify->graphQl()->post($gqlUrl, ["query" => $gql]);
+        if ($pollResponse->successful()) {
+            $responseBody = json_decode($pollResponse->body());
+
+            // check for any errors
+            $responseErrors = $responseBody->errors ?? [];
+            if (!empty($responseErrors)) {
+                throw new Exception(
+                    sprintf(
+                        "%s: Error(s) returned: %s",
+                        get_class($this),
+                        collect($responseErrors)->implode("message", " ")
+                    )
+                );
+            }
+        } else {
+            throw new Exception(
+                sprintf(
+                    "%s: Error(s) returned: %s",
+                    get_class($this),
+                    $pollResponse->reason()
+                )
+            );
+        }
+        return $responseBody;
     }
 
 

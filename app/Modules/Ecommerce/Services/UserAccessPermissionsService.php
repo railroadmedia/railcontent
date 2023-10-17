@@ -263,7 +263,7 @@ class UserAccessPermissionsService
                 $accessPermission = new UserAccessPermission();
                 $accessPermission->user_id = $user->id;
                 $accessPermission->permission_id = $permissionId;
-                $accessPermission->source = UserAccessPermissionsSourceEnum::Manual;
+                $accessPermission->source = UserAccessPermissionsSourceEnum::Migration;
                 $accessPermission->source_hash = '';
                 $accessPermission->start_time = $userAccessExpirationDate;
                 $accessPermission->time_days = $days;

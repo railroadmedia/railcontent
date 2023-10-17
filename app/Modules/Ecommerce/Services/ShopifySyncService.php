@@ -135,15 +135,13 @@ class ShopifySyncService
      * @param Carbon $processedAt
      * @return bool
      */
-    public function orderExistsForProcessDate(?int $shopifyCustomerId, Carbon $processedAt): bool
+    public function doesOrderExist(?int $shopifyCustomerId, Carbon $processedAt): bool
     {
         if (!$shopifyCustomerId) {
             return false;
         }
 
-        $orders =
-            $this->shopify->getCustomerOrders($shopifyCustomerId, ['status' => 'any', 'processed_at' => $processedAt]);
-        return $orders->count() > 0;
+       return $this->shopifyGateway->doesOrderExist($shopifyCustomerId, $processedAt);
     }
 
     /**
