@@ -12,6 +12,7 @@ use Modules\UserManagementSystem\Models\OnboardingExperience;
 use Modules\UserManagementSystem\Models\OnboardingGear;
 use Modules\UserManagementSystem\Models\OnboardingTopic;
 use Modules\UserManagementSystem\Models\OnboardingGenre;
+use Modules\UserManagementSystem\Models\User;
 
 
 class OnboardingController extends Controller
@@ -38,6 +39,14 @@ class OnboardingController extends Controller
 
         if ($verificationToken !== md5($email . config('shopify.accountCreationSecretKey'))) {
             throw new AuthorizationException('Invalid verification_token.', 403);
+        }
+
+        if (user() && user()->getEmail() == $email) {
+            return redirect()->to('/members');
+        }
+
+        if (User::query()->where('email', $email)->exists()) {
+            return redirect()->route('login', ['email' => $email]);
         }
 
         return view('pages.account-creation', ['email' => $email, 'verificationToken' => $verificationToken]);
