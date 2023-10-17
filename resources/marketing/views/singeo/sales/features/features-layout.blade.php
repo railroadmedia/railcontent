@@ -28,7 +28,7 @@
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
-        'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/singeo-spread.png',
+        'image' => 'marketing/singeo/membership/homepage/2023/singeo-spread.png',
     ])
 
     @include('musora.sales.components.app-section', [
