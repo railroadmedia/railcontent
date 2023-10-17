@@ -168,6 +168,10 @@
             :pre-loaded-content="{{ $coaches->toResponseRawJson() }}"
             :required-fields="{{json_encode(['is_coach,1'])}}"
             :statuses="{{ json_encode(['published', 'scheduled']) }}"
+            :tab-options="{{ json_encode([
+                [ 'key' => 'allCoaches', 'value' => 'All Coaches' ],
+                [ 'key' => 'subscribedCoaches', 'value' => 'Subscribed Coaches' ]
+            ]) }}"
         />
     </div>
 
