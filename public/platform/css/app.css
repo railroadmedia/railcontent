@@ -21708,6 +21708,14 @@ a:visited{
   margin-left: 2rem !important;
   margin-right: 2rem !important;
 }
+.tw-mx-auto{
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.tw-my-4{
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
 .tw-mb-5{
   margin-bottom: 1.25rem !important;
 }
@@ -22037,6 +22045,18 @@ a:visited{
 }
 .tw-ml-1\.5{
   margin-left: 0.375rem !important;
+}
+.tw-mt-3{
+  margin-top: 0.75rem !important;
+}
+.tw-mb-2{
+  margin-bottom: 0.5rem !important;
+}
+.tw-mb-5{
+  margin-bottom: 1.25rem !important;
+}
+.tw-mb-1{
+  margin-bottom: 0.25rem !important;
 }
 .tw-box-border{
   box-sizing: border-box !important;
@@ -22693,6 +22713,9 @@ a:visited{
 .tw-w-9\/12{
   width: 75% !important;
 }
+.tw-w-full{
+  width: 100% !important;
+}
 .tw-min-w-0{
   min-width: 0px !important;
 }
@@ -22854,6 +22877,12 @@ a:visited{
 }
 .tw-max-w-\[768px\]{
   max-width: 768px !important;
+}
+.tw-max-w-\[1450px\]{
+  max-width: 1450px !important;
+}
+.tw-max-w-\[1280px\]{
+  max-width: 1280px !important;
 }
 .tw-flex-1{
   flex: 1 1 0% !important;
@@ -23270,6 +23299,9 @@ a:visited{
 }
 .tw-rounded-none{
   border-radius: 0px !important;
+}
+.tw-rounded-\[10px\]{
+  border-radius: 10px !important;
 }
 .tw-rounded-t{
   border-top-left-radius: 0.25rem !important;
@@ -23832,6 +23864,10 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(212 212 216 / var(--tw-bg-opacity)) !important;
 }
+.tw-bg-white{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+}
 .tw-bg-opacity-75{
   --tw-bg-opacity: 0.75 !important;
 }
@@ -24237,6 +24273,10 @@ a:visited{
   padding-top: 1.5rem !important;
   padding-bottom: 1.5rem !important;
 }
+.tw-px-4{
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
 .tw-pt-8{
   padding-top: 2rem !important;
 }
@@ -24474,6 +24514,9 @@ a:visited{
 .tw-pl-5{
   padding-left: 1.25rem !important;
 }
+.tw-pb-3{
+  padding-bottom: 0.75rem !important;
+}
 .tw-text-left{
   text-align: left !important;
 }
@@ -24596,6 +24639,14 @@ a:visited{
 .tw-text-\[22px\]{
   font-size: 22px !important;
 }
+.tw-text-sm{
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+.tw-text-2xl{
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+}
 .tw-font-bold{
   font-weight: 700 !important;
 }
@@ -24616,6 +24667,9 @@ a:visited{
 }
 .tw-font-medium{
   font-weight: 500 !important;
+}
+.tw-font-bold{
+  font-weight: 700 !important;
 }
 .tw-uppercase{
   text-transform: uppercase !important;
@@ -24676,6 +24730,9 @@ a:visited{
 }
 .tw-leading-\[26px\]{
   line-height: 26px !important;
+}
+.tw-leading-none{
+  line-height: 1 !important;
 }
 .tw-tracking-wide{
   letter-spacing: 0.025em !important;
@@ -24947,6 +25004,10 @@ a:visited{
 .tw-text-\[\#002039\]{
   --tw-text-opacity: 1 !important;
   color: rgb(0 32 57 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#00101D\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 16 29 / var(--tw-text-opacity)) !important;
 }
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
@@ -25788,6 +25849,10 @@ a:visited{
 .tw-dark .dark\:tw-text-\[\#F0FDF4\]{
   --tw-text-opacity: 1 !important;
   color: rgb(240 253 244 / var(--tw-text-opacity)) !important;
+}
+.tw-dark .dark\:tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 .tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::-moz-placeholder{
   --tw-placeholder-opacity: 1 !important;
@@ -26979,6 +27044,10 @@ a:visited{
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
   }
+  .md\:tw-px-8{
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
   .md\:tw-pl-6{
     padding-left: 1.5rem !important;
   }
@@ -27970,6 +28039,12 @@ a:visited{
   .\32xl\:tw-ml-4{
     margin-left: 1rem !important;
   }
+  .\32xl\:tw-mt-0{
+    margin-top: 0px !important;
+  }
+  .\32xl\:tw-ml-4{
+    margin-left: 1rem !important;
+  }
   .\32xl\:tw-hidden{
     display: none !important;
   }
@@ -27988,6 +28063,9 @@ a:visited{
   .\32xl\:tw-w-1\/6{
     width: 16.666667% !important;
   }
+  .\32xl\:tw-w-\[420px\]{
+    width: 420px !important;
+  }
   .\32xl\:tw-max-w-none{
     max-width: none !important;
   }
@@ -28005,6 +28083,9 @@ a:visited{
   }
   .\32xl\:tw-grid-cols-4{
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+  .\32xl\:tw-flex-row{
+    flex-direction: row !important;
   }
   .\32xl\:tw-flex-row{
     flex-direction: row !important;
