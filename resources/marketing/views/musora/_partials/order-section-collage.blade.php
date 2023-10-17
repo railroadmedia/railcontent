@@ -7,7 +7,7 @@
         <div class="flex flex-wrap sm:flex-nowrap items-center">
             <div class="flex w-full justify-center sm:justify-start sm:w-auto sm:order-1 mb-7 sm:mb-0 -mt-4">
                 <picture class="max-w-xs sm:max-w-full">
-                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/musora-m-team2.png">
+                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/membership/homepage/2023/musora-m-team2.png">
                     <img class="transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/musora-m-team2.png" alt="musora collage image">
                 </picture>
             </div>

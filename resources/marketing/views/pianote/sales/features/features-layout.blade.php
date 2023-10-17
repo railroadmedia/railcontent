@@ -32,7 +32,7 @@
         ])
 
     @include('musora.sales.components.app-section', [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/devices.png',
+        'image' => 'marketing/pianote/membership/homepage/2023/devices.png',
         'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?ppid=afddd5f6-fbc3-46c9-b6e4-6c9e6a6936af',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=pianote_previews',
     ])
