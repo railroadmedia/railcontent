@@ -8,6 +8,7 @@ use App\Modules\Ecommerce\Models\Subscription;
 use Carbon\Carbon;
 use App\Modules\Ecommerce\Services\PaymentService;
 use Modules\UserManagementSystem\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class RevenueCatService
 {
