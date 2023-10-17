@@ -72,9 +72,9 @@ class UserAccessPermission extends Model
         return $duration;
     }
 
-    private function getDisplaySource(): string
+    public function getDisplaySource(): string
     {
-        switch ($this->source) {
+        switch (UserAccessPermissionsSourceEnum::tryFrom($this->source)) {
             case UserAccessPermissionsSourceEnum::Apple:
                 return 'Apple Subscription';
             case UserAccessPermissionsSourceEnum::Google:

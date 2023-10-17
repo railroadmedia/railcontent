@@ -84,7 +84,7 @@ class ShopifyGateway
             GQL;
 
         $responseBody = $this->executeQuery($gql);
-       return count($responseBody->data->orders->nodes);
+        return count($responseBody->data->orders->nodes);
     }
 
     public function executeQuery(string $gql): mixed

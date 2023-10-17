@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Content\Services\ContentPermissionsService;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
+use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
@@ -15,6 +16,7 @@ use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
@@ -92,18 +94,19 @@ class UserAccessPermissionsService
 
                 // if the permission exist, skip it
                 if (!$accessPermission) {
-                    $accessPermission = new UserAccessPermission();
-                    $accessPermission->user_id = $userId;
-                    $accessPermission->permission_id = $contentPermission->id;
-                    $accessPermission->source = $source;
-                    $accessPermission->source_hash = $hash;
-                    $accessPermission->start_time = $startTime;
-                    $accessPermission->time_days = $product->getMembershipTimeDays();
-                    $accessPermission->time_months = $product->getMembershipTimeMonths();
-                    $accessPermission->time_lifetime = $product->isLifeTime();
-                    $accessPermission->status = UserAccessPermissionsStatusEnum::Active;
-                    $accessPermission->save();
-                    $addedPermissions = true;
+                    $accessPermission = $this->createUserAccessPermission(
+                        $user,
+                        $contentPermission->id,
+                        $startTime,
+                        $source,
+                        $hash,
+                        $product,
+                        UserAccessPermissionsStatusEnum::Active
+                    );
+
+                    if ($accessPermission) {
+                        $addedPermissions = true;
+                    }
                 }
             }
 
@@ -172,17 +175,18 @@ class UserAccessPermissionsService
 
                 $status = $this->getPermissionStatusFromOrder($order);
                 if (!$accessPermission) {
-                    $accessPermission = new UserAccessPermission();
-                    $accessPermission->user_id = $user->id;
-                    $accessPermission->permission_id = $contentPermission->id;
-                    $accessPermission->source = $order->getPaymentSource();
-                    $accessPermission->source_hash = $hash;
-                    $accessPermission->start_time = Carbon::parse($order->createdAt);
-                    $accessPermission->time_days = $product->getMembershipTimeDays();
-                    $accessPermission->time_months = $product->getMembershipTimeMonths();
-                    $accessPermission->time_lifetime = $product->isLifeTime();
-                    $accessPermission->status = $status;
-                    $accessPermission->save();
+                    $accessPermission = $this->createUserAccessPermission(
+                        $user,
+                        $contentPermission->id,
+                        Carbon::parse($order->createdAt),
+                        $order->getPaymentSourceEnum(),
+                        $hash,
+                        $product,
+                        $status
+                    );
+                    if ($accessPermission == null) {
+                        continue;
+                    }
                     $wasUpdated = true;
                 } elseif ($accessPermission->status != $status->value) {
                     //Only ever need to update the order status if order is cancelled
@@ -191,7 +195,7 @@ class UserAccessPermissionsService
                     $wasUpdated = true;
                 }
             }
-            $this->handleBonusMembershipPermission($product, $user, $order->getPaymentSource());
+            $this->handleBonusMembershipPermission($product, $user, $order->getPaymentSourceEnum());
         }
         return $wasUpdated;
     }
@@ -260,18 +264,22 @@ class UserAccessPermissionsService
             if ($userAccessExpirationDate < $expirationDate) {
                 $days = $isLifeTime ? 0 : ($expirationDate->diffInDays($userAccessExpirationDate) + 1);
                 //User products not synced with orders Add manual permission to fix missing access
-                $accessPermission = new UserAccessPermission();
-                $accessPermission->user_id = $user->id;
-                $accessPermission->permission_id = $permissionId;
-                $accessPermission->source = UserAccessPermissionsSourceEnum::Migration;
-                $accessPermission->source_hash = '';
-                $accessPermission->start_time = $userAccessExpirationDate;
-                $accessPermission->time_days = $days;
-                $accessPermission->time_months = 0;
-                $accessPermission->time_lifetime = $isLifeTime;
-                $accessPermission->status = UserAccessPermissionsStatusEnum::Active;
-                $accessPermission->save();
-                $wasUpdated = true;
+                $accessPermission = $this->createUserAccessPermission(
+                    $user,
+                    $permissionId,
+                    $userAccessExpirationDate,
+                    UserAccessPermissionsSourceEnum::Migration,
+                    '',
+                    new Product(),
+                    UserAccessPermissionsStatusEnum::Active,
+                    $days,
+                    0,
+                    $isLifeTime
+                );
+
+                if ($accessPermission) {
+                    $wasUpdated = true;
+                }
             }
         }
         return $wasUpdated;
@@ -363,11 +371,12 @@ class UserAccessPermissionsService
         $userAccessPermission = new UserAccessPermission();
         if ($userProductId) {
             $userAccessPermission = UserAccessPermission::query()->where('id', $userProductId)->first();
+        } else {
+            $userAccessPermission->user_id = $userId;
+            $userAccessPermission->source = 'manual';
+            $userAccessPermission->source_hash = uniqid();
         }
-        $userAccessPermission->user_id = $userId;
         $userAccessPermission->permission_id = $permissionId;
-        $userAccessPermission->source = 'manual';
-        $userAccessPermission->source_hash = '';
         $userAccessPermission->start_time = $startTime;
         $userAccessPermission->time_days = $timeDays;
         $userAccessPermission->time_months = $timeMonths;
@@ -389,19 +398,21 @@ class UserAccessPermissionsService
         if ($product->digital_membership_access_expiration_date
             && $user
             && $user->membership_expiration_date < $product->digital_membership_access_expiration_date) {
-            $accessPermission = new UserAccessPermission();
-            $accessPermission->user_id = $user->id;
-            $accessPermission->permission_id = UserAccessPermissionsCollection::MusoraPlusMembershipPermission;
-            $accessPermission->source = $source;
-            $accessPermission->source_hash = '';
-            $accessPermission->start_time = $user->membership_expiration_date;
-            $accessPermission->time_days = Carbon::parse($user->membership_expiration_date)->diffInDays(
+            $timeDays = Carbon::parse($user->membership_expiration_date)->diffInDays(
                     Carbon::parse($product->digital_membership_access_expiration_date)
                 ) + 1;
-            $accessPermission->time_months = 0;
-            $accessPermission->time_lifetime = false;
-            $accessPermission->status = UserAccessPermissionsStatusEnum::Active;
-            $accessPermission->save();
+            $this->createUserAccessPermission(
+                $user,
+                UserAccessPermissionsCollection::MusoraPlusMembershipPermission,
+                $user->membership_expiration_date,
+                $source,
+                '',
+                $product,
+                UserAccessPermissionsStatusEnum::Active,
+                $timeDays,
+                0,
+                false
+            );
         }
     }
 
@@ -416,5 +427,53 @@ class UserAccessPermissionsService
             ->where('permission_id', '=', $permissionID)
             ->where('status', '=', 'active')
             ->count();
+    }
+
+    public function createUserAccessPermission(
+        User $user,
+        int $permissionId,
+        Carbon $startTime,
+        UserAccessPermissionsSourceEnum $source,
+        string $hash,
+        Product $product,
+        UserAccessPermissionsStatusEnum $status,
+        ?int $days = null,
+        ?int $months = null,
+        ?bool $isLifeTime = null
+    ): ?UserAccessPermission {
+        if (!$days) {
+            $days = $product->getMembershipTimeDays();
+        }
+        if (!$months) {
+            $months = $product->getMembershipTimeMonths();
+        }
+        if (!$isLifeTime) {
+            $isLifeTime = $product->isLifeTime();
+        }
+        if (empty($hash)) {
+            $hash = uniqid();
+        }
+        $accessPermission = new UserAccessPermission();
+        $accessPermission->user_id = $user->id;
+        $accessPermission->permission_id = $permissionId;
+        $accessPermission->source = $source;
+        $accessPermission->source_hash = $hash;
+        $accessPermission->start_time = $startTime;
+        $accessPermission->time_days = $days;
+        $accessPermission->time_months = $months;
+        $accessPermission->time_lifetime = $isLifeTime;
+        $accessPermission->status = $status;
+        try {
+            $accessPermission->save();
+        } catch (QueryException $e) {
+            if ($e->getCode() == 23000) { //unique constraint issue, permission already exists
+                Log::warning(
+                    "UserAccessPermission already exists for user $user->id, permission $permissionId, source $source, hash $hash"
+                );
+                return null;
+            }
+            throw $e;
+        }
+        return $accessPermission;
     }
 }

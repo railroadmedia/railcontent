@@ -13,7 +13,7 @@ class Order
 
     public int $id;
     public ?string $brand;
-    public ?string $paymentSource;
+    public ShopifyPaymentSourceEnum $paymentSourceEnum;
     public Collection $lineItems;
     public ?Carbon $createdAt;
     public ?Carbon $cancelledAt;
@@ -24,7 +24,9 @@ class Order
         $this->gid = $graphGLResponse->id;
         $this->id = str_replace('gid://shopify/Order/', '', $graphGLResponse->id);
         $this->brand = $graphGLResponse->brand?->value;
-        $this->paymentSource = $graphGLResponse->paymentSource?->value;
+        $this->paymentSourceEnum = ShopifyPaymentSourceEnum::tryFrom(
+            $graphGLResponse->paymentSource?->value
+        ) ?? ShopifyPaymentSourceEnum::Web;
         $this->createdAt = $graphGLResponse->createdAt ? Carbon::parse($graphGLResponse->createdAt) : null;
         $this->cancelledAt = $graphGLResponse->cancelledAt ? Carbon::parse($graphGLResponse->cancelledAt) : null;
         $this->lineItems = collect($graphGLResponse->lineItems->nodes)->map(function ($item) {
@@ -32,9 +34,9 @@ class Order
         });
     }
 
-    public function getPaymentSource(): UserAccessPermissionsSourceEnum
+    public function getPaymentSourceEnum(): UserAccessPermissionsSourceEnum
     {
-        switch ($this->paymentSource) {
+        switch ($this->paymentSourceEnum) {
             case ShopifyPaymentSourceEnum::Apple:
                 return UserAccessPermissionsSourceEnum::Apple;
             case ShopifyPaymentSourceEnum::Google:
