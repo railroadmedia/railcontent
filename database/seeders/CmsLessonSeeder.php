@@ -445,7 +445,7 @@ class CmsLessonSeeder extends Seeder
                 "brand" => 1,
                 "product_type_id" => 1,
                 "name" => "Successful Drumming",
-                "slug" => "successful-drumming-discount",
+                "slug" => "successful-drumming",
                 "sku" => "SD-DIGI",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/successful-drumming.jpg",
                 "meta_desc" => "",

@@ -21,7 +21,6 @@ Route::domain('{pianoteDomain}')
     Route::get('/pentatonic-scale', [LeadGenController::class, 'pentatonicScale']);
     Route::get('/chord-inversions', [LeadGenController::class, 'chordInversions']);
     Route::get('/recitals', [LeadGenController::class, 'recitals']);
-    Route::get('/6-reasons', [LeadGenController::class, 'sixReasons']);
     Route::get('/classical-cohort-1', [LeadGenController::class, 'classicalcohort1']);
     Route::get('/classical-cohort-2', [LeadGenController::class, 'classicalcohort2']);
     Route::get('/classical-cohort-3', [LeadGenController::class, 'classicalcohort3']);

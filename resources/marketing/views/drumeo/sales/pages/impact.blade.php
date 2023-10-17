@@ -445,18 +445,18 @@
             text-rendering: auto;
             opacity: 1;
             line-height: 1;
-            font-family: "Font Awesome 5 Pro";
+            font-family: "Font Awesome 6 Pro";
             font-weight: 300;
             color: #0b76db;
             font-size: 26px;
         }
 
         .shorts-arrow-left::before {
-            content: "\f104";
+            content: "\f053";
         }
 
         .shorts-arrow-right::before {
-            content: "\f105";
+            content: "\f054";
         }
 
         .content-section .song-row {

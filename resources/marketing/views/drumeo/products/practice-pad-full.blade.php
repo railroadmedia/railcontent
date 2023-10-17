@@ -337,7 +337,7 @@
         }
 
         .pad-compare td {
-            font:600 13px/1em "Open Sans", sans-serif;
+            font:900 13px/1em "Open Sans", sans-serif;
             color:#000;
             text-align:center;
             padding:5px;
@@ -651,7 +651,7 @@
             }
 
             .pad-compare table td img {
-                width:auto;
+                width:100px;
             }
 
             .pad-compare table tr td:nth-child(2) {
@@ -1229,14 +1229,14 @@
         <div class="columns"><h1>HOW <strong>THE DRUMEO P4 PRACTICE PAD</strong><sup>&trade;</sup><br
                         class="show-for-medium"> COMPARES TO THE ALTERNATIVES
             </h1></div>
-        <table class="columns">
+        <table class="w-full max-w-2xl mx-auto">
             <tbody>
             <tr>
                 <td></td>
                 <td>
-                    <img src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/pad-spread.png" alt="Drumeo practice pad"><br>THE DRUMEO P4 PRACTICE PAD
+                    <img src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/pad-spread.png" alt="Drumeo practice pad"><br>DRUMEO P4<br> PRACTICE PAD
                 </td>
-                <td><img src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/other-pad.png" alt="Other brand practice pad"><br>OTHER PRACTICE PADS
+                <td><img src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/other-pad.png" alt="Other brand practice pad"><br>OTHER<br> PRACTICE PADS
                 </td>
             </tr>
             <tr>

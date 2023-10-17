@@ -331,6 +331,11 @@ export default {
                     ]
                 },
                 {
+                    label: "Musora Moderators",
+                    selected: false,
+                    value: "Musora Moderators"
+                },
+                {
                     label: "Other",
                     selected: false,
                     value: "Other"

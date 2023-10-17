@@ -77,11 +77,6 @@ class LeadGenController extends BaseController
         return view('pianote.lead-gen.recitals');
     }
 
-    public function sixReasons()
-    {
-        return view('pianote.lead-gen.6-reasons', ['theme' => 'pianote']);
-    }
-
     public function classicalcohort1()
     {
         return view('pianote.lead-gen.classical-cohort.1');
@@ -151,7 +146,7 @@ class LeadGenController extends BaseController
             case null:
                 return view('pianote.lead-gen.chord-hacks.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
-                return view('pianote.lead-gen.chord-hacks.thank-you', ['theme' => 'pianote', 'month' => true]);
+                return view('pianote.lead-gen.chord-hacks.thank-you', ['theme' => 'pianote']);
             case 'ty-annual':
                 return view('pianote.lead-gen.chord-hacks.ty-annual');
             case 'ty-monthly':

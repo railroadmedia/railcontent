@@ -85,7 +85,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     Route::get('/christmas-gift-guide/', [LeadGenController::class, 'christmasGift']);
     Route::get('/{page?}', LeadGenController::class . '@pages')
         ->whereIn('page', [
-            '6-reasons', 'lifetime-members-masterclass', 'click', 'free-drum-lessons', 'quick-drummer-survey', 'teach-a-beginner', 'thankyou', 'thank-you', '30-day-drummer-unsubscribe', '30-day-drummer-subscribe', 'subscribed', 'preferences', 'confirming', 'lets-stay-together', 'welcome-party', 'recitals', '30-day-drummer-live', 'awards', 'fwtgf-blog', '40s-blog', 'gsd-blog', 'gojb-blog', 'fpa-blog'
+            'lifetime-members-masterclass', 'click', 'free-drum-lessons', 'quick-drummer-survey', 'teach-a-beginner', 'thankyou', 'thank-you', '30-day-drummer-unsubscribe', '30-day-drummer-subscribe', 'subscribed', 'preferences', 'confirming', 'lets-stay-together', 'welcome-party', 'recitals', '30-day-drummer-live', 'awards', 'fwtgf-blog', '40s-blog', 'gsd-blog', 'gojb-blog', 'fpa-blog'
         ]);
     Route::get('/druminar/coming-back-to-the-drums', [LeadGenController::class, 'druminarCBTTD']);
     Route::get('/druminar/coming-back-to-the-drums/june-12-live-event', [LeadGenController::class, 'druminarEvent']);
