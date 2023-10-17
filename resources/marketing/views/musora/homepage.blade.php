@@ -900,7 +900,7 @@
     @include('musora._partials.order-section-collage')
 
     @include('musora.sales.components.app-section', [
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/musora/membership/homepage/2023/devices2.png',
+        'image' => 'marketing/musora/membership/homepage/2023/devices2.png',
         'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?platform=iphone',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
     ])

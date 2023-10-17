@@ -8,11 +8,11 @@
         <div class="flex flex-wrap sm:flex-nowrap items-center">
             <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5 mb-4 sm:mb-0">
                 <picture>
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1100,quality=95/{!! $image !!}">
+                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/{!! $image !!}">
                     <img class="h-72 sm:h-auto max-w-full sm:max-w-xl lg:max-w-full transition-opacity opacity-0"
                          loading="lazy"
                          onload="this.classList.remove('opacity-0')"
-                         src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/{!! $image !!}"
+                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{!! $image !!}"
                          alt="{{$theme}} collage image"
                     >
                 </picture>

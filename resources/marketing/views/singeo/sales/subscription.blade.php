@@ -595,19 +595,19 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
-        'logo' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png',
+        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/singeo-logo.png',
         'header' => 'Unlimited singing lessons.<br> Vocal coaches and support.<br>1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/singeo-spread.png',
+                'image' => 'marketing/singeo/membership/homepage/2023/singeo-spread.png',
         ])
 
     @endif
 
     @include('musora.sales.components.app-section', [
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/devices.png',
+        'image' => 'marketing/singeo/membership/homepage/2023/devices.png',
         'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?ppid=101a6930-1058-4aae-9584-1a25cec367a0',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=singeo_previews',
     ])

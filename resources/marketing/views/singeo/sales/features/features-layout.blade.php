@@ -32,7 +32,7 @@
     ])
 
     @include('musora.sales.components.app-section', [
-        'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/devices.png',
+        'image' => 'marketing/singeo/membership/homepage/2023/devices.png',
         'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?ppid=101a6930-1058-4aae-9584-1a25cec367a0',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=singeo_previews',
     ])

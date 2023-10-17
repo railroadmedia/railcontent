@@ -612,13 +612,13 @@
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
+        'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
         ])
 
     @endif
 
     @include('musora.sales.components.app-section', [
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/devices.png',
+        'image' => 'marketing/guitareo/membership/homepage/2023/devices.png',
         'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?ppid=e92a296a-7aeb-40ec-85eb-aaf891c3e6c1',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=guitareo_previews',
     ])
