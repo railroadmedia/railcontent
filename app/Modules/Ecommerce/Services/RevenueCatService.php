@@ -185,8 +185,17 @@ class RevenueCatService
         $platform,
         $app = 'Musora'
     ) {
+        Log::debug(
+            'Call revoke API '.
+            $productIdentifier.
+            ' for '.
+            $userId.
+            ' on Revenuecat(user access revoked from Google Play Console)'
+        );
 
-   return $this->revenueCatApiGateway->revoke($userId, $productIdentifier, $platform, $app);
+        $results =  $this->revenueCatApiGateway->revoke($userId, $productIdentifier, $platform, $app);
+        Log::debug(print_r($results, true));
 
+        return $results;
     }
 }

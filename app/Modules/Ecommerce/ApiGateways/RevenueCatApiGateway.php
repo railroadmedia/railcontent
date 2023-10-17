@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\ApiGateways;
 
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class RevenueCatApiGateway
 {
@@ -75,9 +76,28 @@ class RevenueCatApiGateway
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
         $apiResponse = curl_exec($ch);
-        curl_close($ch);
+
 
         $result = json_decode($apiResponse);
+
+        if (curl_errno($ch)) {
+            Log::debug(
+                'Error in revoke API '.
+                $productIdentifier.
+                ' for '.
+                $userId.
+                ' on Revenuecat(user access revoked from Google Play Console)   ::: '.curl_error($ch)
+            );
+        }
+
+        // empty result means success for some reason...
+        if (!empty($result->errors) || empty($result->subscriber)) {
+            Log::debug(
+                'RevenueCat REVOKE API call failed: '.curl_error($ch).' - '.var_export($result, true)
+            );
+        }
+
+        curl_close($ch);
 
         return $result;
     }
