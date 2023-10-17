@@ -77,9 +77,6 @@ class RevenueCatApiGateway
 
         $apiResponse = curl_exec($ch);
 
-
-        $result = json_decode($apiResponse);
-
         if (curl_errno($ch)) {
             Log::debug(
                 'Error in revoke API '.
@@ -89,6 +86,12 @@ class RevenueCatApiGateway
                 ' on Revenuecat(user access revoked from Google Play Console)   ::: '.curl_error($ch)
             );
         }
+
+        Log::debug(
+            'RevenueCat REVOKE API response: '.var_export($apiResponse, true)
+        );
+
+        $result = json_decode($apiResponse);
 
         // empty result means success for some reason...
         if (!empty($result->errors) || empty($result->subscriber)) {
