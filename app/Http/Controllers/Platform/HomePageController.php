@@ -16,6 +16,7 @@ use App\Modules\UserManagementSystem\Services\OnboardingService;
 use App\Services\LiveStreamEventService;
 use App\Services\PackService;
 use App\Services\UserMetricsService;
+use Avo;
 use Illuminate\Support\Facades\Mail;
 use Modules\UserManagementSystem\Models\BlockedUser;
 use Railroad\Railcontent\Services\UserContentProgressService;
@@ -388,7 +389,7 @@ class HomePageController extends BaseController
 
     public function onboarding(Request $request)
     {
-        \Avo::onboarding_started(AvoHelper::defaultEventProperties());
+        Avo::onboarding_started(AvoHelper::defaultEventProperties());
         return view('home.onboarding');
     }
 

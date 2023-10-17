@@ -5,6 +5,7 @@ namespace App\Modules\MusoraApi\Providers;
 use App\Modules\MusoraApi\Middleware\ApiVersionMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Modules\UserManagementSystem\Providers\AuthenticationServiceProvider;
 
 class MusoraApiServiceProvider extends ServiceProvider
 {
@@ -39,5 +40,4 @@ class MusoraApiServiceProvider extends ServiceProvider
     {
         parent::register();
     }
-
 }
