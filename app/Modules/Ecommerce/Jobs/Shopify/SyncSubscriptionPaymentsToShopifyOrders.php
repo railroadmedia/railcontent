@@ -361,9 +361,10 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         } catch (Exception $e) {
             $this->logError(
                 sprintf(
-                    "%s: Failed to find User or Customer for Order ID %s",
+                    "%s: Failed to create order data for subscription payment %s: %s",
                     $this->getClassName(),
-                    $subscriptionPayment->getId()
+                    $subscriptionPayment->getId(),
+                    $e->getMessage()
                 )
             );
             // record the failure in the results then exit out for this subscription payment
@@ -572,6 +573,13 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     {
         $payment = $subscriptionPayment->getPayment();
         $subscription = $subscriptionPayment->getSubscription();
+        $product = $subscription->getProduct();
+        // $subscription->getProduct() can be null, and we need the product in order to create the requisite line_items
+        // so if we don't have a product, exit out now
+        if (is_null($product)) {
+            throw new Exception(sprintf("No product found for SubscriptionPayment %s", $subscriptionPayment->getId()));
+        }
+
         // the user or customer is returned with only their id and email, so get the id and get a fresh copy
         if ($subscription->getUser()) {
             $purchaser = User::find($subscription->getUser()->getId());
@@ -656,7 +664,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
 
         // Shopify expects an array of line items (and each line item is an array), to represent the products purchased,
         // so build up the data for the subscription's product and nest our data inside another array
-        $product = $subscription->getProduct();
         $orderData["line_items"] = array(
             [
                 "fulfillable_quantity" => 1,
