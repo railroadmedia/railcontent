@@ -2,8 +2,7 @@
   <div>
       <CollectionFilterWrapper
             :filterable-values="filterableValues"
-            :tab-options="tabOptions"
-            :collection-title="collectionTitle"
+            :tab-options="tabOptions.length > 0 ? tabOptions : getTabOptions"
             :pre-loaded-content="preLoadedContent"
       />
 
@@ -33,10 +32,6 @@
 
   const props = defineProps({
       brand: {
-          type: String,
-          default: '',
-      },
-      collectionTitle: {
           type: String,
           default: '',
       },
@@ -79,6 +74,10 @@
           type: Array,
           default: () => ["published"],
       },
+      tabOptions: {
+          type: Array,
+          default: () => [],
+      },
   });
 
   const collectionStore = useCollectionStore();
@@ -107,7 +106,7 @@
       return isCourse.value;
   })
 
-  const tabOptions = computed(() => {
+  const getTabOptions = computed(() => {
     if(isCourse.value){
         return [
             {
@@ -123,36 +122,35 @@
                 value: 'Genres',
             },
         ];
-    } else if(isCoach.value){
-        return [
-            {
-                key: 'allCoaches',
-                value: 'All Coaches',
-            },
-            {
-                key: 'subscribedCoaches',
-                value: 'Subscribed Coaches',
-            },
-        ];
     }
   })
 
   const tabData = computed(()=>{
     const tabDataMap = {}
 
-    tabOptions.value && tabOptions.value.forEach(tab => {
-        let endpoint = '/railcontent/content';
-        if (isCoach.value){
-            endpoint = `/railcontent/content?only_subscribed=${tab.key === 'allCoaches' ? '' : 'true'}`;
-        }
-        tabDataMap[tab.key] = {
-            endpoint,
-            searchTerm: '',
-            sort: 'slug',
-        }
-    });
+    if(props.tabOptions.length > 0){
+        props.tabOptions.forEach(tab => {
+            let endpoint = '/railcontent/content';
+            if (isCoach.value){
+                endpoint = `/railcontent/content?only_subscribed=${tab.key === 'allCoaches' ? '' : 'true'}`;
+            }
+            tabDataMap[tab.key] = {
+                endpoint,
+                searchTerm: '',
+                sort: isCoach.value ? 'slug' : '-published_on',
+            }
+        });
+    } else {
+        getTabOptions.value && getTabOptions.value.forEach(tab => {
+            tabDataMap[tab.key] = {
+                endpoint: '/railcontent/content',
+                searchTerm: '',
+                sort: isCoach.value ? 'slug' : '-published_on',
+            }
+        });
+    }
+
     return tabDataMap;
-    
   })
 
   onMounted(()=>{
@@ -160,14 +158,12 @@
           brand: props.brand,
           data: props.preLoadedContent?.data || [],
           filter: {
-              activeTab: tabOptions.value && tabOptions.value.length > 0 ? tabOptions.value[0].key : 'default',
+              activeTab: props.tabOptions.length > 0 ? props.tabOptions[0].key : getTabOptions.value[0].key,
               params: {...request_params.value},
               [isCoach.value ? 'term' : 'title']: '',
           },
           tabData: tabData.value,
           totalPages: props.preLoadedContent ? Math.ceil(props.preLoadedContent.meta.totalResults / props.limit) : 0,
       })
-
-    //   collectionStore.getParams();
   })
 </script>
