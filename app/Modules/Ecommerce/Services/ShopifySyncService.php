@@ -6,6 +6,7 @@ use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
+use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\UserManagementSystem\Services\UserService;
@@ -82,7 +83,8 @@ class ShopifySyncService
         string $brand,
         Carbon $processedAt,
         float $price,
-        ?float $tax
+        ?float $tax,
+        ShopifyPaymentSourceEnum $paymentSource
     ): void {
         if (!config('shopify.enabled')) {
             return;
@@ -106,7 +108,8 @@ class ShopifySyncService
             $brand,
             $processedAt,
             $price,
-            $tax
+            $tax,
+            $paymentSource
         );
 
         Log::debug("User ID: $user->id; Customer Shopify ID: $customerShopifyId. Pushing order to Shopify");
@@ -162,7 +165,8 @@ class ShopifySyncService
         string $brand,
         Carbon $processedAt,
         float $price,
-        float $tax
+        float $tax,
+        ShopifyPaymentSourceEnum $paymentSource
     ): array {
         $data = [
             "customer" => ["id" => $customerShopifyId],
@@ -179,6 +183,12 @@ class ShopifySyncService
                     "type" => ShopifyMetafieldTypes::single_line_text_field,
                     "namespace" => ShopifyMetafieldNamespace::Musora
                 ],
+                [
+                    "key" => ShopifyMetafieldKey::PaymentSource,
+                    "value" => $paymentSource->value,
+                    "type" => ShopifyMetafieldTypes::single_line_text_field,
+                    "namespace" => ShopifyMetafieldNamespace::Musora
+                ]
             ]
         ];
 

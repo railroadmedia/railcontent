@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Jobs\Shopify;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
+use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesShopifyRateLimit;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
@@ -102,11 +103,11 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     /**
      * Execute the console command.
      *
-     * @param  Shopify  $shopify
-     * @param  CustomerRepository  $customerRepository
-     * @param  RefundRepository  $refundRepository
-     * @param  SubscriptionPaymentRepository  $subscriptionPaymentRepository
-     * @param  EcommerceEntityManager  $entityManager
+     * @param Shopify $shopify
+     * @param CustomerRepository $customerRepository
+     * @param RefundRepository $refundRepository
+     * @param SubscriptionPaymentRepository $subscriptionPaymentRepository
+     * @param EcommerceEntityManager $entityManager
      * @return void
      */
     public function handle(
@@ -151,7 +152,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     /**
      * Get all the Subscription Payments that need to be synced, and perform the sync action on each one
      *
-     * @param  int  $batchSize
+     * @param int $batchSize
      * @return void
      */
     private function loopSync(int $batchSize): void
@@ -350,7 +351,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     /**
      * Sync the syncSubscriptionPayment up to Shopify as an order
      *
-     * @param  SubscriptionPayment  $subscriptionPayment
+     * @param SubscriptionPayment $subscriptionPayment
      * @return void
      */
     private function syncSubscriptionPayment(SubscriptionPayment $subscriptionPayment): void
@@ -563,7 +564,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     /**
      * Create the data to post to Shopify to create an Order
      *
-     * @param  SubscriptionPayment  $subscriptionPayment
+     * @param SubscriptionPayment $subscriptionPayment
      * @return array
      * @throws ORMException
      * @throws Exception
@@ -586,10 +587,10 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         // the payment and subscription can each have a note, so build one out of both
         $notes = [];
         if ($subscription->getNote()) {
-            $notes[] = "Subscription: ".$subscription->getNote();
+            $notes[] = "Subscription: " . $subscription->getNote();
         }
         if ($payment->getNote()) {
-            $notes[] = "Payment: ".$payment->getNote();
+            $notes[] = "Payment: " . $payment->getNote();
         }
         $note = implode(PHP_EOL, $notes) ?: null;
         /*
@@ -678,15 +679,15 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     /**
      * Get the value to use for the given payment's source
      *
-     * @param  Payment  $payment
+     * @param Payment $payment
      * @return string
      */
     private function getPaymentSourceMetafieldValue(Payment $payment): string
     {
         return match ($payment->getType()) {
-            Payment::TYPE_APPLE_SUBSCRIPTION_RENEWAL => 'apple-app',
-            Payment::TYPE_GOOGLE_SUBSCRIPTION_RENEWAL => 'google-app',
-            default => 'web-app',
+            Payment::TYPE_APPLE_SUBSCRIPTION_RENEWAL => ShopifyPaymentSourceEnum::Apple,
+            Payment::TYPE_GOOGLE_SUBSCRIPTION_RENEWAL => ShopifyPaymentSourceEnum::Google,
+            default => ShopifyPaymentSourceEnum::Web,
         };
     }
 
@@ -702,7 +703,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
      * Get the payment for this SubscriptionPayment, and send the data to Shopify to create a payment transaction,
      * recording the result's shopify_id
      *
-     * @param  SubscriptionPayment  $subscriptionPayment
+     * @param SubscriptionPayment $subscriptionPayment
      * @return void
      */
     private function sendPaymentsToShopify(SubscriptionPayment $subscriptionPayment): void
@@ -797,7 +798,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     /**
      * Get the Fulfillment Order Resource from Shopify, for the given Shopify Order ID
      *
-     * @param  int  $orderShopifyId
+     * @param int $orderShopifyId
      * @return ApiResource|null
      */
     private function getFulfillmentOrderResource(int $orderShopifyId): ?ApiResource
@@ -817,9 +818,9 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     /**
      * Handle fulfilling an order item in Shopify for a digital product.
      *
-     * @param  int  $fulfillmentOrderId
-     * @param  int  $fulfillmentOrderLineItemId
-     * @param  int  $quantity
+     * @param int $fulfillmentOrderId
+     * @param int $fulfillmentOrderLineItemId
+     * @param int $quantity
      * @return array<array> array of result arrays
      */
     private function fulfillDigitalProduct(
@@ -864,7 +865,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
      * Get the unsynced refunds for this subscription payment, and complete the process to perform a refund
      * in Shopify for each one, recording the result's shopify_id
      *
-     * @param  SubscriptionPayment  $subscriptionPayment
+     * @param SubscriptionPayment $subscriptionPayment
      * @return void
      */
     private function sendRefundsToShopify(SubscriptionPayment $subscriptionPayment): void
@@ -1016,7 +1017,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     /**
      * Get a collection of refunds that need to be synced for this subscription payment
      *
-     * @param  SubscriptionPayment  $subscriptionPayment
+     * @param SubscriptionPayment $subscriptionPayment
      * @return Collection
      */
     private function getRefundsToSync(SubscriptionPayment $subscriptionPayment): Collection

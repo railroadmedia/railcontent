@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
+use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\UserProduct;
@@ -116,11 +117,12 @@ class RevenueCatController extends Controller
                             $musoraProduct->brand,
                             $processedAt,
                             $price,
-                            $this->calculateTaxAmount($price, $data['event']['tax_percentage'])
+                            $this->calculateTaxAmount($price, $data['event']['tax_percentage']),
+                            $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
+                                : ShopifyPaymentSourceEnum::Google
                         );
                         $this->setUserSubscription($user, $type);
                     }
-
                 } else {
                     //get RevenueCat subscription
                     $currentRevenueCatSubscription =
@@ -203,12 +205,13 @@ class RevenueCatController extends Controller
                             $musoraProduct->brand,
                             $processedAt,
                             $price,
-                            $this->calculateTaxAmount($price, $data['event']['tax_percentage'])
+                            $this->calculateTaxAmount($price, $data['event']['tax_percentage']),
+                            $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
+                                : ShopifyPaymentSourceEnum::Google
                         );
 
                         $this->setUserSubscription($user, $type);
                     }
-
                 } else {
                     //get RevenueCat subscription
                     $currentRevenueCatSubscription =
@@ -1046,7 +1049,8 @@ class RevenueCatController extends Controller
         ]);
     }
 
-    private function setUserSubscription(User $user, string $type): void {
+    private function setUserSubscription(User $user, string $type): void
+    {
         match ($type) {
             'apple' => $user->has_apple_subscription = true,
             'google' => $user->has_google_subscription = true
@@ -1054,7 +1058,8 @@ class RevenueCatController extends Controller
         $user->save();
     }
 
-    private function unsetUserSubscription(User $user, string $type): void {
+    private function unsetUserSubscription(User $user, string $type): void
+    {
         match ($type) {
             'apple' => $user->has_apple_subscription = false,
             'google' => $user->has_google_subscription = false

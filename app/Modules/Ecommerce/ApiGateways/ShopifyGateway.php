@@ -68,7 +68,7 @@ class ShopifyGateway
                     );
                 }
 
-                $orders->merge(
+                $orders = $orders->merge(
                     collect($responseBody->data->orders->nodes)->map(function ($order) {
                         return new Order($order);
                     })

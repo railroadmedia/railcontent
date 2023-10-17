@@ -2,6 +2,8 @@
 
 namespace App\Modules\Ecommerce\Models\Shopify;
 
+use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
+use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
@@ -28,5 +30,18 @@ class Order
         $this->lineItems = collect($graphGLResponse->lineItems->nodes)->map(function ($item) {
             return new OrderLineItem($item);
         });
+    }
+
+    public function getPaymentSource(): UserAccessPermissionsSourceEnum
+    {
+        switch ($this->paymentSource) {
+            case ShopifyPaymentSourceEnum::Apple:
+                return UserAccessPermissionsSourceEnum::Apple;
+            case ShopifyPaymentSourceEnum::Google:
+                return UserAccessPermissionsSourceEnum::Google;
+            case ShopifyPaymentSourceEnum::Web:
+            default:
+                return UserAccessPermissionsSourceEnum::Web;
+        }
     }
 }

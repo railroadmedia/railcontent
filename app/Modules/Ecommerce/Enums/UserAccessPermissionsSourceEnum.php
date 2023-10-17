@@ -8,8 +8,11 @@ namespace App\Modules\Ecommerce\Enums;
 enum UserAccessPermissionsSourceEnum: string
 {
     case Manual = 'manual';
-    case Shopify = 'shopify';
+    case Web = 'shopify';
     case AccessCode = 'access-code';
     case Challenges = 'challenges';
-    case RevenueCat = 'revenue-cat';
+    case Apple = 'apple';
+    case Google = 'google';
+    case Migration = 'migration';
+
 }

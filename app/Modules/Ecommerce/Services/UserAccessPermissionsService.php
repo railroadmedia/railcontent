@@ -175,7 +175,7 @@ class UserAccessPermissionsService
                     $accessPermission = new UserAccessPermission();
                     $accessPermission->user_id = $user->id;
                     $accessPermission->permission_id = $contentPermission->id;
-                    $accessPermission->source = UserAccessPermissionsSourceEnum::Shopify;
+                    $accessPermission->source = $order->getPaymentSource();
                     $accessPermission->source_hash = $hash;
                     $accessPermission->start_time = Carbon::parse($order->createdAt);
                     $accessPermission->time_days = $product->getMembershipTimeDays();
@@ -191,7 +191,7 @@ class UserAccessPermissionsService
                     $wasUpdated = true;
                 }
             }
-            $this->handleBonusMembershipPermission($product, $user, UserAccessPermissionsSourceEnum::Shopify);
+            $this->handleBonusMembershipPermission($product, $user, $order->getPaymentSource());
         }
         return $wasUpdated;
     }
