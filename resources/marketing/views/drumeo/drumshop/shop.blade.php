@@ -102,7 +102,7 @@
     ])
 
 
-    <div class="white-box">
+    <div class="px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         {{--  LESSONS  --}}
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
@@ -114,7 +114,7 @@
                     </h1>
                 </li>
                 {{-- Drumeo annual membership --}}
-                @include('musora.shop._shop-card', [
+                @include('musora.shop._shop-card-alt', [
                      "itemURL" => "/",
                      "sku" => null,
                      "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",
@@ -129,7 +129,7 @@
                      'soldOut' => false,
                 ])
                 @foreach($lessons as $key => $lesson)
-                    @include('musora.shop._shop-card', [
+                    @include('musora.shop._shop-card-alt', [
                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
                         "sku" => $lesson->sku === 'drumeo' ? null : $lesson->sku,
                         "badgeText" => $lesson->badge_text,
@@ -150,7 +150,7 @@
                 @endforeach
 
                 {{-- Drumeo gift card --}}
-                @include('musora.shop._shop-card', [
+                @include('musora.shop._shop-card-alt', [
                     "itemURL" => "/drumshop/gift-card/",
                     "thumbnail" => "https://d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
                     "title" => "Drumeo Gift Card",
@@ -174,7 +174,7 @@
                     </h1>
                 </li>
                 @foreach($accessories as $accessory)
-                    @include('musora.shop._shop-card', [
+                    @include('musora.shop._shop-card-alt', [
                         "sku" => $accessory->sku,
                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
                         "badgeText" => $accessory->badge_text,
@@ -204,7 +204,7 @@
 {{--                </li>--}}
 
 {{--                @foreach($hats as $hat)--}}
-{{--                    @include('musora.shop._shop-card', [--}}
+{{--                    @include('musora.shop._shop-card-alt', [--}}
 {{--                         "sku" => $hat->sku,--}}
 {{--                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),--}}
 {{--                         "badgeText" => $hat->badge_text,--}}
@@ -235,7 +235,7 @@
                 </li>
 
                 @foreach($shirts as $shirt)
-                    @include('musora.shop._shop-card', [
+                    @include('musora.shop._shop-card-alt', [
                          "sku" => $shirt->sku,
                          "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
                          "badgeText" => $shirt->badge_text,
@@ -250,7 +250,7 @@
                          "category" => strtolower($shirt->productType->name),
                     ])
                 @endforeach
-                @include('musora.shop._shop-card', [
+                @include('musora.shop._shop-card-alt', [
                      "badgeText" => "SEE MORE ON TEESPRING",
                      "itemURL" => "https://teespring.com/stores/drumeo",
                      "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/teespring.jpg",
@@ -278,7 +278,7 @@
                     </h1>
                 </li>
                 @foreach($hoodies as $hoodie)
-                    @include('musora.shop._shop-card', [
+                    @include('musora.shop._shop-card-alt', [
                          "sku" => $hoodie->sku,
                          "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
                          "badgeText" => $hoodie->badge_text,
