@@ -24,6 +24,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Payment;
 use Railroad\Ecommerce\Entities\Refund;
@@ -279,10 +280,12 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             }
 
             if (!$skip) {
-                $this->syncSubscriptionPayment($subscriptionPayment, $fresh);
+                $wasSynced = $this->syncSubscriptionPayment($subscriptionPayment, $fresh);
 
                 // safety check for the rate limit
-                $this->handleRateLimit();
+                if ($wasSynced) {
+                    $this->handleRateLimit();
+                }
             }
 
             // batch has ended
@@ -351,10 +354,10 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     /**
      * Sync the syncSubscriptionPayment up to Shopify as an order
      *
-     * @param SubscriptionPayment $subscriptionPayment
-     * @return void
+     * @param  SubscriptionPayment  $subscriptionPayment
+     * @return bool whether the order was synced or not
      */
-    private function syncSubscriptionPayment(SubscriptionPayment $subscriptionPayment): void
+    private function syncSubscriptionPayment(SubscriptionPayment $subscriptionPayment): bool
     {
         // STEP 1: build up the data structure
         try {
@@ -376,7 +379,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                 self::RESULTS_ACTION => "FAILED",
                 self::RESULTS_FAIL_MESSAGE => $e->getMessage()
             ];
-            return;
+            return false;
         }
 
         // STEP 2: send the data to Shopify
@@ -385,6 +388,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                 // STEP 3a: create the Order in Shopify
                 $orderResource = $this->shopify->createOrder($postData);
                 $orderShopifyId = $orderResource->id;
+                $this->handleRateLimit();
             } catch (ValidationException $exception) {
                 $this->logError(
                     sprintf(
@@ -409,7 +413,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                     self::RESULTS_ACTION => "FAILED",
                     self::RESULTS_FAIL_MESSAGE => $exception->getMessage()
                 ];
-                return;
+                return false;
             }
 
             try {
@@ -463,7 +467,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                     self::RESULTS_ACTION => "FAILED",
                     self::RESULTS_FAIL_MESSAGE => "No Fulfillment Order Resource"
                 ];
-                return;
+                return false;
             }
             // get each line item from the fulfillment order
             $lineItems = $fulfillmentOrder->getAttributes()["line_items"];
@@ -498,8 +502,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                     );
                 }
             }
-            // STEP 6: add any refunds
-            $this->sendRefundsToShopify($subscriptionPayment);
         } else {
             // simulating
             $this->results[] = [
@@ -550,16 +552,9 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                     );
                 }
             }
-            // record the refunds, but we won't actually do it
-            $refunds = $this->getRefundsToSync($subscriptionPayment);
-            $refunds->each(fn(Refund $refund) => $this->results[] = [
-                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
-                self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_REFUND,
-                self::RESULTS_MODEL_ID => $refund->getId(),
-                self::RESULTS_AMOUNT => $refund->getRefundedAmount(),
-                self::RESULTS_SHOPIFY_ID => "---"
-            ]);
         }
+
+        return true;
     }
 
     /**
@@ -593,14 +588,14 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         }
 
         // the payment and subscription can each have a note, so build one out of both
-        $notes = [];
+        $spNotes = [];
         if ($subscription->getNote()) {
-            $notes[] = "Subscription: " . $subscription->getNote();
+            $spNotes[] = "Subscription: " . $subscription->getNote();
         }
         if ($payment->getNote()) {
-            $notes[] = "Payment: " . $payment->getNote();
+            $spNotes[] = "Payment: " . $payment->getNote();
         }
-        $note = implode(PHP_EOL, $notes) ?: null;
+        $note = implode(PHP_EOL, $spNotes) ?: null;
         /*
          * DEV NOTE: the documentation at https://shopify.dev/docs/api/admin-rest/2023-07/resources/order state that the
          * currency field is read-only, but it actually is still functional for legacy purposes (for now), and is currently
@@ -614,12 +609,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             "currency" => $currency,
             "customer" => ["id" => $purchaserId],
             "email" => $this->getEmailForShopify($purchaserEmail),
-            "note" => $note,
-            "processed_at" => $subscriptionPayment->getCreatedAt()->toIso8601String(),
-            "subtotal_price" => number_format(($subscription->getTotalPrice() - $subscription->getTax()) ?? 0, 2),
-            "total_outstanding" => number_format(($payment->getTotalDue() - $payment->getTotalPaid()) ?? 0, 2),
-            "total_price" => number_format($subscription->getTotalPrice() ?? 0, 2),
-            "total_tax" => number_format($subscription->getTax() ?? 0, 2),
+            "processed_at" => (new Carbon($subscriptionPayment->getCreatedAt()))->toIso8601String(),
             // "tags" => "",
             // refer to https://shopify.dev/docs/apps/custom-data/metafields/types
             // we can use meta fields for stuff like our subscription payment id, etc
@@ -646,6 +636,56 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                 )
         ];
 
+         // record a note if there were any refunds
+        $refundNotes = null;
+        $refunds = $this->getRefundsForSubscriptionPayment($subscriptionPayment);
+        $refundAmount = 0.0;
+        if ($refunds->isNotEmpty()) {
+            $currency =  $refunds->first()->getPayment()?->getCurrency() ?? self::DEFAULT_CURRENCY;
+            $refundAmount = $refunds->sum(fn(Refund $refund) => $refund->getRefundedAmount());
+            $refundNotes = sprintf(
+                "%s %s %s applied to this subscription payment, totalling %s %s which has been discounted ".
+                "from the item in this order",
+                $refunds->count(),
+                Str::plural("refund", $refunds->count()),
+                $refunds->count() == 1 ? "was" : "were",
+                number_format($refundAmount, 2),
+               $currency
+            );
+
+            // if the refunded amount exceeds the price of the product, make a special note about the loss
+            if ($refundAmount > $subscription->getTotalPrice()) {
+                $overageNote = sprintf("NOTE: The refund exceeded the item's payment by %s %s which cannot be " .
+                    "accounted for in Shopify.",
+                    number_format($refundAmount - $subscription->getTotalPrice(), 2),
+                    $currency
+                );
+                $refundNotes = Str::of($refundNotes)->newLine()->append($overageNote);
+            }
+
+            $allRefundNotes = $refunds->map(fn(Refund $refund) => $refund->getNote())->filter();
+
+            if ($allRefundNotes->isNotEmpty()) {
+                $refundNotes = Str::of($refundNotes)->newLine()->append("Refund Notes:");
+                $allRefundNotes->each(function (?string $refundNote) use (&$refundNotes) {
+                    if (!empty($refundNote)) {
+                        $refundNotes = $refundNotes->newLine()->append($refundNote, PHP_EOL);
+                    }
+                });
+            }
+
+            $refundNotes = $refundNotes->value();
+        }
+
+        if (empty($note)) {
+            $note = $refundNotes;
+        } else {
+            $note = Str::of($note)->newLine()->append($refundNotes)->value();
+        }
+
+        if ($note) {
+            $orderData["note"] = $note;
+        }
 
         if ($subscription->getTax()) {
             $orderData["tax_lines"] = [
@@ -663,13 +703,13 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             $this->logError(sprintf("%s: %s", $this->getClassName(), $e->getMessage()));
         }
 
-        // Shopify expects an array of line items (and each line item is an array), to represent the products purchased,
-        // so build up the data for the subscription's product and nest our data inside another array
-        $orderData["line_items"] = array(
+        // Shopify expects a line item to represent the product purchased,
+        // so build up the data for the subscription's product to simulate that
+        $lineItem =
             [
                 "fulfillable_quantity" => 1,
                 "fulfillment_service" => "manual",
-                "price" => number_format($subscription->getTotalPrice(), 2),
+                "price" => number_format($subscription->getTotalPrice(), 2, '.', ''),
                 "quantity" => 1,
                 "requires_shipping" => false,
                 "sku" => $product->getSku(),
@@ -677,8 +717,30 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                 "variant_id" => $product->getShopifyId(),
                 "variant_inventory_management" => "shopify",
                 "vendor" => $product->getBrand(),
-            ]
-        );
+            ];
+
+        // DEV NOTE:
+        // Some of our refunds exceed the amount paid for their linked payments. This is usually because there
+        // were multiple payments and the refund was simply applied to the latest payment, but it could be for
+        // any reason. Shopify has strict settings to only allow a refund if the linked payment will allow it.
+        // To get around this, we will not add refunds to our orders in Shopify, and instead create discounts to
+        // compensate for the refunded amount.
+        // If the refund exceeds the amount available by the order items, we'll just silently ignore the
+        // over-refund, aside from the note handled above.
+        // We only have one payment and one item, so we'll apply the discount to the one and only line item, as much
+        // as we can.
+        if ($refundAmount) {
+            $amountToDiscount = min($refundAmount, $subscription->getTotalPrice());
+            $discounts[] =
+                [
+                    "amount" => number_format($amountToDiscount, 2, '.', '')
+                ];
+
+            $lineItem["applied_discounts"] = $discounts;
+        }
+
+        // Shopify expects an array of line items so nest our data inside another array
+        $orderData["line_items"] = array($lineItem);
 
         return $orderData;
     }
@@ -716,7 +778,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     private function sendPaymentsToShopify(SubscriptionPayment $subscriptionPayment): void
     {
         $payment = $subscriptionPayment->getPayment();
-        $amount = number_format($payment->getTotalPaid(), 2);
+        $amount = number_format($payment->getTotalPaid(), 2, '.', '');
         // format the data for the payment
         $paymentData =
             [
@@ -743,6 +805,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                 $paymentData
             );
             $paymentShopifyId = $paymentResource->id;
+            $this->handleRateLimit();
 
             // record the shopify ID on the Payment
             // grab the eloquent model, so we can update it
@@ -816,6 +879,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         if (!$this->getIsSimulation()) {
             // Shopify created an Order Fulfillment for our Order when they created it, so we need to grab that from them
             $fulfillmentOrders = $this->shopify->getOrderFulfillmentOrders($orderShopifyId);
+            $this->handleRateLimit();
         }
 
         // there can be multiple fulfillment orders (but realistically, there will most likely only be one), so grab the last entry
@@ -862,6 +926,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         } else {
             $fulfillmentResult = $this->shopify->createFulfillment($fulfillmentData);
             $record[self::SHOPIFY_FULFILLMENT_ID] = $fulfillmentResult->getAttributes()["id"];
+            $this->handleRateLimit();
         }
         $fulfillmentRecords[] = $record;
 
@@ -869,172 +934,19 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     }
 
     /**
-     * Get the unsynced refunds for this subscription payment, and complete the process to perform a refund
-     * in Shopify for each one, recording the result's shopify_id
-     *
-     * @param SubscriptionPayment $subscriptionPayment
-     * @return void
-     */
-    private function sendRefundsToShopify(SubscriptionPayment $subscriptionPayment): void
-    {
-        // get any refunds that need to be sent
-        $refunds = $this->getRefundsToSync($subscriptionPayment);
-        if ($refunds->isEmpty()) {
-            return;
-        }
-
-        $orderShopifyId = $subscriptionPayment->getShopifyId();
-        // 1. orders are automatically closed (or "archived", as it's also called), and refunds cannot be issued to
-        // closed orders. So before we issue any, we need to check the status, and reopen the order, if it's closed
-        $orderShopifyAttributes = $this->shopify->getOrder($orderShopifyId)->getAttributes();
-        $wasReopened = false;
-
-        if ($orderShopifyAttributes["closed_at"]) {
-            $this->shopify->openOrder($orderShopifyId);
-            $wasReopened = true;
-        }
-
-        $refunds->each(function (Refund $refund) use ($subscriptionPayment, $orderShopifyId) {
-            $paymentToRefund = $refund->getPayment();
-            if (is_null($paymentToRefund)) {
-                $this->logError(
-                    sprintf(
-                        "%s: No payment found for Refund ID %s. Refund cannot be sent to Shopify",
-                        $this->getClassName(),
-                        $refund->getId()
-                    )
-                );
-                $this->results[] = [
-                    self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
-                    self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_REFUND,
-                    self::RESULTS_MODEL_ID => $refund->getId(),
-                    self::RESULTS_ACTION => "FAILED",
-                    self::RESULTS_FAIL_MESSAGE => "Payment not found"
-                ];
-                return;
-            }
-
-            // 2. use the calculate endpoint to initiate the process
-            $currency = $paymentToRefund->getCurrency() ?? self::DEFAULT_CURRENCY;
-            $calculateResponse = $this->shopify->calculateOrderRefund(
-                $orderShopifyId,
-                [
-                    "currency" => $currency
-                ]
-            );
-
-            // check the transactions in the response, to make sure our payment is in there, so we can use its Shopify ID with the refund
-            $transactionData = collect($calculateResponse->getAttributes()["transactions"])
-                ->firstWhere("parent_id", $paymentToRefund->getShopifyId());
-
-            if (is_null($transactionData)) {
-                $this->logError(
-                    sprintf(
-                        "%s: Shopify did not return a transaction for our Payment ID %s, attempting for Refund ID %s. Refund cannot be sent to Shopify",
-                        $this->getClassName(),
-                        $paymentToRefund->getId(),
-                        $refund->getId()
-                    )
-                );
-                $this->results[] = [
-                    self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
-                    self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_REFUND,
-                    self::RESULTS_MODEL_ID => $refund->getId(),
-                    self::RESULTS_ACTION => "FAILED",
-                    self::RESULTS_FAIL_MESSAGE => "Payment not in calculated refund"
-                ];
-                return;
-            }
-
-            // safety check that we're not trying to refund more than we're allowed
-            if ($refund->getRefundedAmount() > floatval($transactionData["maximum_refundable"])) {
-                $this->logError(
-                    sprintf(
-                        "%s: Attempting to refund %s for Refund ID %s, which exceeds the maximum_refundable of %s. Refund cannot be sent to Shopify",
-                        $this->getClassName(),
-                        number_format($refund->getRefundedAmount(), 2),
-                        $refund->getId(),
-                        $transactionData["maximum_refundable"]
-                    )
-                );
-                $this->results[] = [
-                    self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
-                    self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_REFUND,
-                    self::RESULTS_MODEL_ID => $refund->getId(),
-                    self::RESULTS_ACTION => "FAILED",
-                    self::RESULTS_FAIL_MESSAGE => "Refund amount too high"
-                ];
-                return;
-            }
-
-            // 3. we can now make the actual refund
-            $refundData = [
-                "currency" => $currency,
-                "notify" => false,
-                "transactions" => [
-                    [
-                        "parent_id" => $paymentToRefund->getShopifyId(),
-                        "amount" => $refund->getRefundedAmount(),
-                        "kind" => "refund"
-                    ]
-                ]
-            ];
-            if ($refund->getNote()) {
-                $refundData["note"] = $refund->getNote();
-            }
-
-            $refundResource = $this->shopify->createOrderRefund($orderShopifyId, $refundData);
-            $refundShopifyId = $refundResource->id;
-
-            // record the shopify ID on the Refund
-            try {
-                // grab the eloquent model, so we can update it
-                $refundModel = \App\Modules\Ecommerce\Models\Refund::find($refund->getId());
-                $refundModel->shopify_id = $refundShopifyId;
-                $refundModel->saveWithoutUpdatedAt();
-                // refresh the doctrine model to get the change
-                $this->entityManager->refresh($refund);
-
-                $this->shopifyIds->push($refundShopifyId);
-                $this->results[] = [
-                    self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
-                    self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_REFUND,
-                    self::RESULTS_MODEL_ID => $refund->getId(),
-                    self::RESULTS_AMOUNT => $refund->getRefundedAmount(),
-                    self::RESULTS_SHOPIFY_ID => $refundShopifyId
-                ];
-            } catch (\Doctrine\ORM\Exception\ORMException $e) {
-                $this->logError(
-                    sprintf(
-                        "%s: Failed to save shopify_id for refund ID %s: %s",
-                        $this->getClassName(),
-                        $refund->getId(),
-                        $e->getMessage()
-                    )
-                );
-            }
-        });
-
-        // 4. if we had to reopen the order, we need to close it again
-        if ($wasReopened) {
-            $this->shopify->closeOrder($orderShopifyId);
-        }
-    }
-
-    /**
-     * Get a collection of refunds that need to be synced for this subscription payment
+     * Get a collection of refunds for this subscription payment
      *
      * @param SubscriptionPayment $subscriptionPayment
      * @return Collection
      */
-    private function getRefundsToSync(SubscriptionPayment $subscriptionPayment): Collection
+    private function getRefundsForSubscriptionPayment(SubscriptionPayment $subscriptionPayment): Collection
     {
         $refunds = $this->refundRepository->getPaymentsRefunds([$subscriptionPayment->getPayment()]);
         if (empty($refunds)) {
             return collect();
         }
 
-        return collect($refunds)->filter(fn(Refund $refund) => is_null($refund->getShopifyId()));
+        return collect($refunds);
     }
 
     /**
