@@ -165,9 +165,9 @@ class ShopifySyncService
             "customer" => ["id" => $customerShopifyId],
             "email" => $email,
             "processed_at" => $processedAt,
-            "subtotal_price" => number_format($price, 2),
+            "subtotal_price" => number_format($price, 2, '.', ''),
             "total_outstanding" => "0.00",
-            "total_price" => number_format($price + ($tax ?? 0), 2),
+            "total_price" => number_format($price + ($tax ?? 0), 2, '.', ''),
             "line_items" => $this->createOrderItems($productIds, $price),
             "metafields" => [
                 [
@@ -180,7 +180,7 @@ class ShopifySyncService
         ];
 
         if ($tax) {
-            $data['total_tax'] = number_format($tax, 2);
+            $data['total_tax'] = number_format($tax, 2, '.', '');
         }
 
         return $data;
