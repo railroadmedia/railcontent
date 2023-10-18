@@ -16,7 +16,7 @@ class MigrateRechargeSubscriptions extends Command
 {
     use HandlesMaskedEmailAddress;
 
-    protected $signature = 'ecommerce:MigrateRechargeSubscriptions {fileName} {startIndex=0} {endIndex=100000} {--skipHeader}';
+    protected $signature = 'ecommerce:MigrateRechargeSubscriptions {fileName} {startIndex=0} {endIndex=100000} {--skipHeader} {--test}';
 
     protected function getClassName(): string
     {
@@ -40,19 +40,24 @@ class MigrateRechargeSubscriptions extends Command
     {
         $this->withExecutionTime(function () use ($shopify, $rechargeGateway) {
             $fileName = $this->argument('fileName');
+            $isTest = $this->option('test');
 
             $this->info('Loading Subscriptions');
-            $subscriptions = Subscription::query()->with('product')
+            $subscriptionsQuery = Subscription::query()->with('product')
                 ->where('is_active', 1)
                 ->where('type', 'subscription')
-                ->where('paid_until', '>', Carbon::now())
-                ->get();
+                ->where('paid_until', '>', Carbon::now());
 
+            if ($isTest) {
+                $subscriptionsQuery->where('paid_until', '<', Carbon::now()->addDays(20));
+            }
+            $subscriptions = $subscriptionsQuery->get();
             $count = $subscriptions->count();
             $this->info("Found $count subscriptions");
 
+
             $skipHeader = $this->option('skipHeader');
-            if(!$skipHeader) {
+            if (!$skipHeader) {
                 $columns = [
                     'external_product_id',
                     'external_variant_id',
@@ -153,7 +158,7 @@ class MigrateRechargeSubscriptions extends Command
                             $subscription->paymentMethod->paypalBillingAgreement?->external_id ?? "",
                         "shipping_email" => $this->getEmailForShopify($subscription->user->email),
                         "shipping_first_name" => $subscription->paymentMethod->address->first_name ?? "",
-                        "shipping_last_name" => $subscription->paymentMethod->address->last_name ?? "",
+                        "shipping_last_name" => $subscription->paymentMethod->address->last_name ?? "Digital",
                         "shipping_address_1" => "31265 Wheel Ave",
                         "shipping_address_2" => "#107",
                         "shipping_city" => "Abbotsford",
