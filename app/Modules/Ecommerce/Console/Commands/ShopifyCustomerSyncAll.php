@@ -11,8 +11,8 @@ class ShopifyCustomerSyncAll extends Command
 
     public function handle()
     {
-        $this->runChainQuery(function (int $skip, int $take) {
+        $this->runBatchQuery(function (int $skip, int $take) {
             return new ShopifyCustomersSyncAllJob($skip, $take);
-        }, chunks: 100);
+        }, chunks: 200, queue: 'command');
     }
 }
