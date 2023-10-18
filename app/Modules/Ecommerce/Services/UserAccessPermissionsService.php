@@ -440,13 +440,13 @@ class UserAccessPermissionsService
         ?int $months = null,
         ?bool $isLifeTime = null
     ): ?UserAccessPermission {
-        if (!$days) {
+        if (!isset($days)) {
             $days = $product->getMembershipTimeDays();
         }
-        if (!$months) {
+        if (!isset($months)) {
             $months = $product->getMembershipTimeMonths();
         }
-        if (!$isLifeTime) {
+        if (!isset($isLifeTime)) {
             $isLifeTime = $product->isLifeTime();
         }
         if (empty($hash)) {
