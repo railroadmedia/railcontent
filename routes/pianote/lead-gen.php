@@ -29,6 +29,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/lifetime-members-masterclass', [LeadGenController::class, 'lifetimeMasterclass']);
     Route::get('/song-secrets-webinar', [LeadGenController::class, 'songSecrets']);
     Route::get('/song-secrets-webinar/thank-you', [LeadGenController::class, 'songSecretsTY']);
+    Route::get('/beautiful-christmas-classics', [LeadGenController::class, 'beautifulChristmasClassics']);
 
     Route::group(['prefix' => 'piano-complete-beginners-bootcamp'],
         function () {

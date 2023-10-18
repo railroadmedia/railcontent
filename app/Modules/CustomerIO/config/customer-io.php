@@ -278,6 +278,16 @@ return [
                     'drumeo',
                 ],
             ],
+            'Drumeo Giveaway Rafflepress' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_rafflepress-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
             'Drumeo Awards Giveaway' => [
                 'custom_attributes' => [
                 ],
@@ -415,6 +425,16 @@ return [
                 ],
                 'events' => [
                     'pianote_prospect_christmas-carols',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Beautiful Christmas Classics' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_beautiful-christmas-classics',
                 ],
                 'accounts_to_sync' => [
                     'pianote',

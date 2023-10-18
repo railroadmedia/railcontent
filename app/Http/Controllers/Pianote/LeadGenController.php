@@ -171,6 +171,15 @@ class LeadGenController extends BaseController
 
         throw new NotFoundHttpException();
     }
+    public function beautifulChristmasClassics(Request $request, $domain, $page = null, $lesson = null)
+    {
+        switch($page){
+            case null:
+                return view('pianote.lead-gen.beautiful-christmas-classics', ['recaptchaKey'=>config('recaptcha.key')]);
+        }
+
+        throw new NotFoundHttpException();
+    }
 
     public function riffsAndFills()
     {

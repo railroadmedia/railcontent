@@ -60,6 +60,11 @@ class MarketingController extends BaseController
         return view('musora.pages.careers');
     }
 
+    public function careersPP()
+    {
+        return view('musora.pages.careers-pinpoint');
+    }
+
     public function contact()
     {
         return view('musora.pages.contact');
