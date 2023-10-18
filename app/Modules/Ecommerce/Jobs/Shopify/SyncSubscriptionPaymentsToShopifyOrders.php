@@ -629,7 +629,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                     ],
                     [
                         "key" => ShopifyMetafieldKey::PaymentSource,
-                        "value" => $this->getPaymentSourceMetafieldValue($payment),
+                        "value" => $this->getPaymentSourceMetafieldValue($payment)->value,
                         "type" => ShopifyMetafieldTypes::single_line_text_field,
                         "namespace" => ShopifyMetafieldNamespace::Musora
                     ]
@@ -641,7 +641,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         $refunds = $this->getRefundsForSubscriptionPayment($subscriptionPayment);
         $refundAmount = 0.0;
         if ($refunds->isNotEmpty()) {
-            $currency =  $refunds->first()->getPayment()?->getCurrency() ?? self::DEFAULT_CURRENCY;
+            $currency = $refunds->first()->getPayment()?->getCurrency() ?? self::DEFAULT_CURRENCY;
             $refundAmount = $refunds->sum(fn(Refund $refund) => $refund->getRefundedAmount());
             $refundNotes = sprintf(
                 "%s %s %s applied to this subscription payment, totalling %s %s which has been discounted ".
@@ -655,8 +655,8 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
 
             // if the refunded amount exceeds the price of the product, make a special note about the loss
             if ($refundAmount > $subscription->getTotalPrice()) {
-                $overageNote = sprintf("NOTE: The refund exceeded the item's payment by %s %s which cannot be " .
-                    "accounted for in Shopify.",
+                $overageNote = sprintf(
+                    "NOTE: The refund exceeded the item's payment by %s %s which cannot be accounted for in Shopify.",
                     number_format($refundAmount - $subscription->getTotalPrice(), 2),
                     $currency
                 );
@@ -749,9 +749,9 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
      * Get the value to use for the given payment's source
      *
      * @param Payment $payment
-     * @return string
+     * @return ShopifyPaymentSourceEnum
      */
-    private function getPaymentSourceMetafieldValue(Payment $payment): string
+    private function getPaymentSourceMetafieldValue(Payment $payment): ShopifyPaymentSourceEnum
     {
         return match ($payment->getType()) {
             Payment::TYPE_APPLE_SUBSCRIPTION_RENEWAL => ShopifyPaymentSourceEnum::Apple,
