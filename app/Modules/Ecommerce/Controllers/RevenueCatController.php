@@ -101,14 +101,19 @@ class RevenueCatController extends Controller
                 $productId = $this->getProductId($data['event']['product_id']);
 
                 //get Musora product
-                $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId)->first();
-
-                $price = $data['event']['price'] ?? $musoraProducts->price;
+                $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
 
                 if (config('shopify.enabled')) {
                     $processedAt = Carbon::parse($data['event']['purchased_at_ms']);
                     if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
-                        $musoraProduct = $musoraProducts->first();
+                        $musoraProduct = $musoraProducts?->first();
+                        if(!$musoraProduct){
+                            Log::error(
+                                "RevenueCatController processNotification::RENEWAL - musora product not found: $productId"
+                            );
+                            break;
+                        }
+                        $price = $data['event']['price'] ?? $musoraProduct->price;
                         $this->shopifySyncService->syncOrder(
                             $user,
                             [$musoraProduct->id],
@@ -189,12 +194,17 @@ class RevenueCatController extends Controller
                 //get Musora product
                 $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
 
-                $price = $data['event']['price'] ?? $musoraProducts->price;
-
                 if (config('shopify.enabled')) {
                     $processedAt = Carbon::parse($data['event']['purchased_at_ms']);
                     if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
-                        $musoraProduct = $musoraProducts->first();
+                        $musoraProduct = $musoraProducts?->first();
+                        if(!$musoraProduct){
+                            Log::error(
+                                "RevenueCatController processNotification::RENEWAL - musora product not found: $productId"
+                            );
+                            break;
+                        }
+                        $price = $data['event']['price'] ?? $musoraProduct->price;
                         $this->shopifySyncService->syncOrder(
                             $user,
                             [$musoraProduct->id],
