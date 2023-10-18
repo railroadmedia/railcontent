@@ -772,19 +772,21 @@ class SyncOrdersToShopify implements ShouldQueue
         $refundAmount = 0.0;
         if ($refunds->isNotEmpty()) {
             $refundAmount = $refunds->sum(fn(Refund $refund) => $refund->getRefundedAmount());
-            $refundNotes = sprintf(
-                "%s %s %s applied to this order, totalling %s %s which has been discounted ".
-                "from the item(s) purchased",
-                $refunds->count(),
-                Str::plural("refund", $refunds->count()),
-                $refunds->count() == 1 ? "was" : "were",
-                number_format($refundAmount, 2),
-                $refunds->first()->getPayment()?->getCurrency() ?? self::DEFAULT_CURRENCY
+            $refundNotes = Str::of(
+                sprintf(
+                    "%s %s %s applied to this order, totalling %s %s which has been discounted ".
+                    "from the item(s) purchased",
+                    $refunds->count(),
+                    Str::plural("refund", $refunds->count()),
+                    $refunds->count() == 1 ? "was" : "were",
+                    number_format($refundAmount, 2),
+                    $refunds->first()->getPayment()?->getCurrency() ?? self::DEFAULT_CURRENCY
+                )
             );
             $notes = $refunds->map(fn(Refund $refund) => $refund->getNote())->filter();
 
             if ($notes->isNotEmpty()) {
-                $refundNotes = Str::of($refundNotes)->newLine()->append("Refund Notes:");
+                $refundNotes = $refundNotes->newLine()->append("Refund Notes:");
                 $notes->each(function (?string $refundNote) use (&$refundNotes) {
                     if (!empty($refundNote)) {
                         $refundNotes = $refundNotes->newLine()->append($refundNote, PHP_EOL);

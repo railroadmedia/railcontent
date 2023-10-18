@@ -636,21 +636,23 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                 )
         ];
 
-         // record a note if there were any refunds
+        // record a note if there were any refunds
         $refundNotes = null;
         $refunds = $this->getRefundsForSubscriptionPayment($subscriptionPayment);
         $refundAmount = 0.0;
         if ($refunds->isNotEmpty()) {
             $currency = $refunds->first()->getPayment()?->getCurrency() ?? self::DEFAULT_CURRENCY;
             $refundAmount = $refunds->sum(fn(Refund $refund) => $refund->getRefundedAmount());
-            $refundNotes = sprintf(
-                "%s %s %s applied to this subscription payment, totalling %s %s which has been discounted ".
-                "from the item in this order",
-                $refunds->count(),
-                Str::plural("refund", $refunds->count()),
-                $refunds->count() == 1 ? "was" : "were",
-                number_format($refundAmount, 2),
-               $currency
+            $refundNotes = Str::of(
+                sprintf(
+                    "%s %s %s applied to this subscription payment, totalling %s %s which has been discounted ".
+                    "from the item in this order",
+                    $refunds->count(),
+                    Str::plural("refund", $refunds->count()),
+                    $refunds->count() == 1 ? "was" : "were",
+                    number_format($refundAmount, 2),
+                    $currency
+                )
             );
 
             // if the refunded amount exceeds the price of the product, make a special note about the loss
@@ -660,13 +662,13 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                     number_format($refundAmount - $subscription->getTotalPrice(), 2),
                     $currency
                 );
-                $refundNotes = Str::of($refundNotes)->newLine()->append($overageNote);
+                $refundNotes = $refundNotes->newLine()->append($overageNote);
             }
 
             $allRefundNotes = $refunds->map(fn(Refund $refund) => $refund->getNote())->filter();
 
             if ($allRefundNotes->isNotEmpty()) {
-                $refundNotes = Str::of($refundNotes)->newLine()->append("Refund Notes:");
+                $refundNotes = $refundNotes->newLine()->append("Refund Notes:");
                 $allRefundNotes->each(function (?string $refundNote) use (&$refundNotes) {
                     if (!empty($refundNote)) {
                         $refundNotes = $refundNotes->newLine()->append($refundNote, PHP_EOL);
