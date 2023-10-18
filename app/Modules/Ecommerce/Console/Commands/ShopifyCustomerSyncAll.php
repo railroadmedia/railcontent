@@ -13,6 +13,6 @@ class ShopifyCustomerSyncAll extends Command
     {
         $this->runBatchQuery(function (int $skip, int $take) {
             return new ShopifyCustomersSyncAllJob($skip, $take);
-        }, chunks: 200, queue: 'command');
+        }, chunks: 1000, queue: 'command');
     }
 }
