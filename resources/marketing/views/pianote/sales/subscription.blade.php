@@ -548,7 +548,7 @@
                         <div class=" inline-block relative w-full group" style="padding-bottom: 39.5%;perspective: 1000px;">
                             <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                                 <div class=" {{--border-2 border-promo--}} front absolute z-20  w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                    <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/promos/october/pianote-october-bundle.png);"></div>
+                                    <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/promos/october/pianote-october-bundle.png');"></div>
                                 </div>
                             </div>
                         </div>
