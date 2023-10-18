@@ -20,7 +20,7 @@ class ShopifyWebHookController extends Controller
     {
         try {
             Log::debug('Shopify order updated webhook received');
-            Log::debug(print_r($request->all(), true));
+            //Log::debug(print_r($request->all(), true));
 
             $shopifyCustomerId = $request->get('customer')['id'];
             $email = $request->get('customer')['email'];
