@@ -351,10 +351,10 @@ class SyncProductsToShopify implements ShouldQueue
             // we can use meta fields for stuff like our product id, etc
             $variantData["metafields"] = [
                 [
-                    "key" => ShopifyMetafieldKey::Id,
+                    "key" => ShopifyMetafieldKey::Id->value,
                     "value" => (string)$product->getId(),
-                    "type" => ShopifyMetafieldTypes::integer,
-                    "namespace" => ShopifyMetafieldNamespace::Model_Products
+                    "type" => ShopifyMetafieldTypes::integer->value,
+                    "namespace" => ShopifyMetafieldNamespace::Model_Products->value
                 ]
             ];
         }
@@ -684,9 +684,9 @@ class SyncProductsToShopify implements ShouldQueue
                     $metafields = collect($variantData["metafields"]);
                     $productIdMetafield = $metafields->filter(
                         fn(array $fields) => array_key_exists("namespace", $fields)
-                            && $fields["namespace"] === ShopifyMetafieldNamespace::Model_Products
+                            && $fields["namespace"] === ShopifyMetafieldNamespace::Model_Products->value
                             && array_key_exists("key", $fields)
-                            && $fields["key"] === ShopifyMetafieldKey::Id
+                            && $fields["key"] === ShopifyMetafieldKey::Id->value
                     );
                     // we were able to find one, so that means this is a variant for an existing product in Shopify
                     $productId = $productIdMetafield->first()["value"];
@@ -723,7 +723,7 @@ class SyncProductsToShopify implements ShouldQueue
             $this->handleRateLimit();
             $variantMetaFields = $this->shopify->getVariantMetafields(
                 $shopifyId,
-                ["namespace" => ShopifyMetafieldNamespace::Model_Products, "key" => ShopifyMetafieldKey::Id]
+                ["namespace" => ShopifyMetafieldNamespace::Model_Products->value, "key" => ShopifyMetafieldKey::Id->value]
             );
             $productId = $variantMetaFields->first()?->getAttributes()["value"] ?? null;
             try {
