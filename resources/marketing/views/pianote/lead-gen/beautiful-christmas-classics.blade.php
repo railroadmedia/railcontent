@@ -44,9 +44,6 @@
         .infusion-form button {
             background:linear-gradient(to bottom, #01c474, #008e54)!important;
         }
-        .infusion-form button:hover {
-            background:linear-gradient(to bottom, #02de82, #00a862)!important;
-        }
         header .disclaimer {
             display: none;
             margin: 0 auto;
@@ -68,7 +65,7 @@
             <div class="w-full sm:w-7/12 lg:w-1/2 text-white max-w-xl mx-auto sm:max-w-full">
                 <div class="px-2 sm:px-3">
                     <img
-                        class="h-12 sm:h-14 lg:h-32 mb-1 transition-opacity opacity-0"
+                        class="h-24 sm:h-28 lg:h-32 mb-1 transition-opacity opacity-0"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/430x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/BPCC-logo.png"
                         alt="FWTGF logo"
                         loading="lazy"
@@ -81,13 +78,13 @@
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     />
-                    <h3 class="leading-tight mb-5">Play your favorite Christmas songs <strong>with guided lessons from real teachers</strong>.</h3>
+                    <h3 class="leading-tight mb-2 lg:mb-5">Play your favorite Christmas songs <strong>with guided lessons from real teachers</strong>.</h3>
                     <p class="mb-4">Enter your email below to grab your lessons.</p>
                 </div>
                 @include("pianote._partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                    "formId" => "Drumeo - Engagement - Trigger - FWTGF - Web Form",
-                    "formName" => "Fastest Way To Get Faster",
+                            "formName" => 'Beautiful Christmas Classics',
+                            "formId" => "Pianote - Engagement - Trigger - Beautiful Christmas Classics - Web Form",
                     "buttonText" => "Get started for free",
                     "stacked" => true,
                 ])
@@ -104,8 +101,8 @@
         </div>
     </header>
 
-    <section class="py-12 sm:py-20 px-4 text-center">
-        <div class="container max-w-5xl mx-auto">
+    <section class="py-12 sm:py-20 px-5 text-center">
+        <div class="container max-w-4xl mx-auto">
            <h3 class="font-extrabold mb-4">
                4 beautiful Christmas <br class="hidden sm:inline">
                songs everyone will want to hear.</h3>
@@ -115,62 +112,60 @@
                 Each lesson features a step-by-step walkthrough of the entire song complete with <br class="hidden sm:inline">
                 downloadable music. It’s like learning the song with the teacher sitting right next to you.
             </p>
-            <div class="flex flex-wrap justify-center max-w-xs mx-auto sm:max-w-full">
+            <div class="grid sm:grid-cols-2 gap-6 items-stretch">
                 @foreach($lessons as $key => $lesson)
-                    <div class="w-full sm:w-1/2 px-2 lg:px-3 mb-4 lg:mb-6">
-                        <div class="rounded-xl overflow-hidden" style="background: #F6F8FC; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
-                            <div class="relative">
-                                <img
-                                    class="transition-opacity opacity-0"
-                                    src="{{ $lesson['img'] }}"
-                                    alt="lesson thumbnail {{ $key+1 }}"
-                                    loading="lazy"
-                                    onload="this.classList.remove('opacity-0')"
-                                />
-                                @if(!empty($lesson['unlocked']))
-                                    <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="margin: -39px;" @click="sampleLesson = true;"></i>
-                                @else
-                                    <div class="absolute inset-0 flex justify-center items-center">
-                                        <i class="fa-solid fa-lock-keyhole text-white text-5xl"></i>
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="p-4 text-left">
-                                <h6 class="mx-0 mb-2 font-black">{{ $lesson['title'] }}</h6>
-                                <p>{{ $lesson['desc'] }}</p>
-                            </div>
+                    <div class="rounded-xl overflow-hidden" style="background: #F6F8FC; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
+                        <div class="relative">
+                            <img
+                                class="transition-opacity opacity-0"
+                                src="{{ $lesson['img'] }}"
+                                alt="lesson thumbnail {{ $key+1 }}"
+                                loading="lazy"
+                                onload="this.classList.remove('opacity-0')"
+                            />
+                            @if(!empty($lesson['unlocked']))
+                                <i class="absolute top-1/2 left-1/2 fas fa-play text-white play-button" style="margin: -39px;" @click="sampleLesson = true;"></i>
+                            @else
+                                <div class="absolute inset-0 flex justify-center items-center">
+                                    <i class="fa-solid fa-lock-keyhole text-white text-5xl"></i>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="p-5 text-left">
+                            <p class="mx-0 mb-1 leading-tight font-black">{{ $lesson['title'] }}</p>
+                            <p class="leading-tight">{{ $lesson['desc'] }}</p>
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
     </section>
-    <section class="text-center text-white relative py-16 md:py-20 lg:px-4" style="background: #00101d;">
-        <div class="container mx-auto">
-            <div class="flex flex-wrap items-start max-w-4xl mx-auto">
+    <section class="text-center relative px-5 py-10 sm:py-14" style="background: #f6f8fc;">
+        <div class="container max-w-4xl mx-auto">
+            <div class="flex flex-wrap items-start">
                 @php
                     $features = [
                         [
-                        "icon" => "https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/christmas-carols/help-icon.svg",
-                        "headLine" => "FULL WALKTHROUGHS",
+                        "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/full-walkthroughs-icon.svg",
+                        "headLine" => "Full Walkthroughs",
                         "desc" => 'Learn to play the song step-by-step<br class="inline md:hidden lg:inline"> with guidance and help.',
                         ],
                         [
-                        "icon" => "https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/christmas-carols/download-icon.svg",
-                        "headLine" => "DOWNLOADABLE MUSIC",
+                        "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/downloadable-music-icon.svg",
+                        "headLine" => "Downloadable Music",
                         "desc" => 'Save it, print it, play it. The<br class="inline md:hidden lg:inline">  music is yours forever.',
                         ],
                         [
-                        "icon" => "https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/christmas-carols/q-a-icon.svg",
-                        "headLine" => "HELP WHEN YOU NEED IT",
+                        "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/help-icon.svg",
+                        "headLine" => "Help When You Need It",
                         "desc" => 'Got questions? You’ll be able to<br class="inline md:hidden lg:inline"> ask REAL teachers for help.',
                         ],
                     ];
                 @endphp
                 @foreach ($features as $feature)
                     <div class="w-full md:w-1/3 px-3 mb-8 md:mb-0">
-                        <img class="h-12 md:12 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=95/{{ $feature['icon'] }}" alt="help-icon">
-                        <div class="my-3 lg:text-lg lg:leading-none"><strong>{{ $feature['headLine'] }}</strong></div>
+                        <img class="h-7 sm:h-8" src="{{ $feature['icon'] }}" alt="help-icon">
+                        <h6 class="my-3 leading-tight"><strong>{{ $feature['headLine'] }}</strong></h6>
                         <p>{!! $feature['desc'] !!}</p>
                     </div>
                 @endforeach
@@ -178,41 +173,37 @@
         </div>
     </section>
 
-    <section class="py-12 sm:py-20" style="background: linear-gradient(45deg, #2a2a72, #009ffd);">
-        <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8 sm:px-4 lg:px-0">
-            <img
-                class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-16 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 transition-opacity opacity-0"
-                src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/coach.jpg"
-                alt="profile picture"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-            >
-            <div class="h-10 w-full sm:hidden" style="background: linear-gradient(to left top, #00101d calc(50% - 1px), transparent, transparent calc(50% + 1px));"></div>
-            <div class="text-white text-left rounded-none sm:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-14 sm:mt-8 w-full sm:w-auto sm:flex-grow lg:max-w-xl" style="background-color:#00101d;">
-                <h6 class="uppercase leading-normal" style="color:#fd5470;">MEET YOUR TEACHER</h6>
-                <h2><strong>El Estepario Siberiano</strong></h2>
-                <h6 class="leading-normal mt-4 lg:mt-6">
-                    Estepario Siberiano has pushed the boundaries of drumming.<br><br>
-
-                    He’s inspired millions of people with his dedication, talent, and innovation – playing at speeds (with one AND two hands) that were thought to be impossible. And always applying these skills in a musical context – not just playing fast for the sake of playing fast.<br><br>
-
-                    He’s developed key exercises that have helped him play at these speeds – and now he’s here to teach you!
-                </h6>
-                <div class="flex justify-between text-center mt-7 lg:mt-10">
-                    <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
-                        <h3 class="mt-2"><strong>3.7M</strong></h3>
-                        <p class="uppercase opacity-70 text-sm">Followers</p>
+    <section class="relative text-center px-3 sm:px-6 py-10 sm:py-16 lg:py-24 bg-cover bg-center" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/coaches-bg.jpg');">
+        <div class="container max-w-4xl mx-auto relative z-20">
+            <div class="flex flex-wrap sm:flex-nowrap items-start justify-center mt-14">
+                <div class="w-full sm:w-1/2 px-4 mb-20 sm:mb-0">
+                    <div class="relative text-left z-10 rounded-xl py-8 sm:py-12 px-6 sm:px-10 w-full shadow-md" style="background-color:#fff;">
+                        <img class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 lg:w-36 z-20 rounded-full border-4 border-white shadow-md transition-all opacity-0" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')"
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/lisa-profile.jpg">
+                        <p class="leading-tight text-pianote mt-8">MEET YOUR TEACHER</p>
+                        <h3 class="leading-tight mt-1 mb-2"><strong>Lisa Witt</strong></h3>
+                        <p class="leading-normal">
+                            Lisa is the lead instructor at Pianote and will show you how to play beautiful Christmas carols on the piano.
+                            <br><br>
+                            With over 20 years of experience teaching the piano, Lisa has helped thousands of students learn to play the songs they love.
+                            <br><br>
+                            Lisa’s contagious enthusiasm will have you excited to practice and return to the keys again and again.
+                        </p>
                     </div>
-                    <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
-                        <h3 class="mt-2"><strong>2.8M</strong></h3>
-                        <p class="uppercase opacity-70 text-sm">followers</p>
-                    </div>
-                    <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
-                        <h3 class="mt-2"><strong>577M</strong></h3>
-                        <p class="uppercase opacity-70 text-sm">views</p>
+                </div>
+                <div class="w-full sm:w-1/2 px-4">
+                    <div class="relative text-left z-10 rounded-xl py-8 sm:py-12 px-6 sm:px-10 w-full shadow-md" style="background-color:#fff;">
+                        <img class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 lg:w-36 z-20 rounded-full border-4 border-white shadow-md transition-all opacity-0" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')"
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/kevin-profile.jpg">
+                        <p class="leading-tight text-pianote mt-8">MEET YOUR TEACHER</p>
+                        <h3 class="leading-tight mt-1 mb-2"><strong>Kevin Castro</strong></h3>
+                        <p class="leading-normal">
+                            Kevin is a professional touring pianist and teacher.
+                            <br><br>
+                            He’s worked with rising stars (JESSIA, Elijah Woods), played at TikTok Headquarters in New York and LA, and even recorded a demo for Jennifer Lopez.
+                            <br><br>
+                            His passion is helping people discover the joy of playing piano, and he’ll teach you two beautiful Christmas songs -- for free!
+                        </p>
                     </div>
                 </div>
             </div>
@@ -224,15 +215,15 @@
         'bgColor' => 'white'
     ])
 
-    <section class="py-14 sm:py-28 text-center text-white bg-cover bg-center" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/lead-gen/faster/order-bg.jpg');">
+    <section class="px-5 py-14 sm:py-20 text-center text-white bg-cover bg-center" style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/offer-bg.jpg');">
         <div class="max-w-3xl mx-auto">
-        <img class="h-16 lg:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/BPCC-logo.png" alt="FWTGF logo" />
-            <h2 class="leading-tight mb-5">Play your favorite Christmas songs <strong>with guided lessons from real teachers</strong>.</h2>
+        <img class="h-24 sm:h-32 lg:h-36" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/BPCC-logo.png" alt="FWTGF logo" />
+            <h3 class="leading-tight">Play your favorite Christmas songs<br class="hidden sm:inline"> <strong>with guided lessons from real teachers</strong>.</h3>
             <h5 class="my-5 sm:my-7">Enter your email below to grab your lessons.</h5>
             @include("pianote._partials.sign-up-form", [
+                            "formName" => 'Beautiful Christmas Classics',
+                            "formId" => "Pianote - Engagement - Trigger - Beautiful Christmas Classics - Web Form2",
                 "recaptchaKey" => $recaptchaKey,
-                "formId" => "Drumeo - Engagement - Trigger - FWTGF - Web Form" . '2',
-                "formName" => "Fastest Way To Get Faster",
                     "buttonText" => "Get started for free",
             ])
         </div>

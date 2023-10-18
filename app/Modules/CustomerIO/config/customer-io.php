@@ -430,6 +430,16 @@ return [
                     'pianote',
                 ],
             ],
+            'Beautiful Christmas Classics' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_beautiful-christmas-classics',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Blog Signup' => [
                 'custom_attributes' => [
                 ],
