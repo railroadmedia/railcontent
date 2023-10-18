@@ -408,7 +408,8 @@ class UserAccessPermissionsService
             if ($existingAccessPermissionsLookup["$source->value.$hash"] ?? null) {
                 return;
             }
-            $membershipExpirationDate = Carbon::parse($user->membership_expiration_date);
+            $membershipExpirationDate = Carbon::parse($user->membership_expiration_date)
+                ->addDays(-config('ecommerce.days_before_access_revoked_after_expiry', 7));
             $digitalMembershipAccessExpirationDate = Carbon::parse($product->digital_membership_access_expiration_date);
             $timeDays = $membershipExpirationDate->diffInDays($digitalMembershipAccessExpirationDate) + 1;
             $this->createUserAccessPermission(
