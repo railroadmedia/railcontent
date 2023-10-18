@@ -22,9 +22,9 @@ class ShopifyGateway
     {
         $orders = collect();
         $cursor = "";
-        $musoraNamespace = ShopifyMetafieldNamespace::Musora;
-        $brandFieldKey = ShopifyMetafieldKey::Brand;
-        $paymentSourceKey = ShopifyMetafieldKey::PaymentSource;
+        $musoraNamespace = ShopifyMetafieldNamespace::Musora->value;
+        $brandFieldKey = ShopifyMetafieldKey::Brand->value;
+        $paymentSourceKey = ShopifyMetafieldKey::PaymentSource->value;
         do {
             $gql = <<<GQL
             query {

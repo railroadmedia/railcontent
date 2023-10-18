@@ -171,7 +171,8 @@ class UserAccessPermissionsService
 
             foreach ($contentPermissions as $contentPermission) {
                 $hash = sha1("$shopifyOrderId.$lineItem->id.$contentPermission->id");
-                $accessPermission = $existingAccessPermissionsLookup["shopify.$hash"] ?? null;
+                $source = $order->getPaymentSourceEnum();
+                $accessPermission = $existingAccessPermissionsLookup["$source->value.$hash"] ?? null;
 
                 $status = $this->getPermissionStatusFromOrder($order);
                 if (!$accessPermission) {
@@ -179,7 +180,7 @@ class UserAccessPermissionsService
                         $user,
                         $contentPermission->id,
                         Carbon::parse($order->createdAt),
-                        $order->getPaymentSourceEnum(),
+                        $source,
                         $hash,
                         $product,
                         $status
@@ -468,7 +469,7 @@ class UserAccessPermissionsService
         } catch (QueryException $e) {
             if ($e->getCode() == 23000) { //unique constraint issue, permission already exists
                 Log::warning(
-                    "UserAccessPermission already exists for user $user->id, permission $permissionId, source $source, hash $hash"
+                    "UserAccessPermission already exists for user $user->id, permission $permissionId, source $source->value, hash $hash"
                 );
                 return null;
             }
