@@ -2,6 +2,8 @@
 
 namespace App\Modules\Ecommerce\ApiGateways;
 
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Models\Shopify\Order;
 use Carbon\Carbon;
 use Exception;
@@ -20,7 +22,9 @@ class ShopifyGateway
     {
         $orders = collect();
         $cursor = "";
-
+        $musoraNamespace = ShopifyMetafieldNamespace::Musora;
+        $brandFieldKey = ShopifyMetafieldKey::Brand;
+        $paymentSourceKey = ShopifyMetafieldKey::PaymentSource;
         do {
             $gql = <<<GQL
             query {
@@ -30,10 +34,10 @@ class ShopifyGateway
                             id
                             createdAt
                             cancelledAt
-                            brand: metafield(namespace: "Musora", key: "brand") {
+                            brand: metafield(namespace: "$musoraNamespace", key: "$brandFieldKey") {
                                 value
                             }
-                            paymentSource: metafield(namespace: "Musora", key: "payment_source") {
+                            paymentSource: metafield(namespace: "$musoraNamespace", key: "$paymentSourceKey") {
                                 value
                             }
                             lineItems: lineItems(first: 50) {

@@ -13,6 +13,7 @@ use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\Ecommerce\Services\PaymentService;
 use Modules\UserManagementSystem\Models\User;
@@ -507,7 +508,7 @@ class RevenueCatController extends Controller
      * @param string $type
      * @param $event
      * @param mixed $productId
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|object|null
+     * @return Collection
      */
     private function getMusoraProducts(string $type, $event, mixed $productId)
     {
