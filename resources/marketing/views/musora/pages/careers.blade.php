@@ -155,8 +155,9 @@
             <div id="join" class="anchor block relative invisible"></div>
             <h3 class="mb-5 sm:mb-10"><strong>Join our team:</strong></h3>
             <div class="max-w-4xl mx-auto mb-14 sm:mb-20">
-                <div class="w-full relative" style="height:700px;">
+                <div class="w-full relative" style="height:500px;">
                     <iframe style="filter: invert(1) hue-rotate(30deg) saturate(1.5);" class="absolute w-full h-full rounded-lg" src="https://musoramediainc.bamboohr.com/careers/" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>
+{{--                    <iframe class="absolute w-full h-full rounded-lg" src="/careers-pinpoint" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>--}}
                 </div>
             </div>
 
