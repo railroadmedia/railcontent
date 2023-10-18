@@ -137,7 +137,16 @@
                     label="RevenueCat Customer Profile"
                     :color="brandColor"
                 ></v-text-field>
-
+                <v-text-field
+                    v-model="$_membership_level"
+                    label="Membership Level"
+                    :color="brandColor"
+                ></v-text-field>
+                <v-text-field
+                    v-model="$_membership_expiration_date"
+                    label="Membership Expiration Date"
+                    :color="brandColor"
+                ></v-text-field>
                 <v-textarea
                     v-model="$_biography"
                     label="Bio"
@@ -376,6 +385,18 @@ export default {
             cache: false,
             get() {
                 return this.thisUser.attributes.revenuecat_customer_url;
+            },
+        },
+        $_membership_level: {
+            cache: false,
+            get() {
+                return this.thisUser.attributes.membership_level;
+            },
+        },
+        $_membership_expiration_date: {
+            cache: false,
+            get() {
+                return this.thisUser.attributes.membership_expiration_date;
             },
         },
         $_profile_picture_url: {
