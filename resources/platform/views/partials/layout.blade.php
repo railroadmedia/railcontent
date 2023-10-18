@@ -62,8 +62,8 @@ $isOnboarding = str_contains(request()->url(), '/onboarding')
                             user-name="{{ user()->display_name }}"
                             user-avatar="{{ user()->profile_picture_url }}"
                             user-id="{{ user()->id }}"
-                            account-url="{{ user()->getDashboardUrl() }}"
-                            :can-refer-new-students="{{ json_encode(user()->isAMember()) }}"
+                            account-url="{{ user()->dashboard_url }}"
+                            :can-refer-new-students="{{ json_encode(user()->is_a_member) }}"
                         @endif
                         @if(!empty( $hasUnreadNotifications ))
                             :has-notifications="{{ json_encode($hasUnreadNotifications) }}"

@@ -243,6 +243,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'brand_minutes_practiced' => 'json'
     ];
 
+    protected $appends = ['dashboard_url','is_a_member'];
+
     /**
      * @var string
      */
@@ -463,6 +465,28 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function getDashboardUrl()
     {
         return url()->route('platform.profile.dashboard', [$this->id, 'brand' => $this->last_used_brand]);
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getDashboardUrlAttribute()
+    {
+        if(!isset($this->attributes['dashboard_url'])) {
+            $this->attributes['dashboard_url'] = url()->route('platform.profile.dashboard', [$this->id, 'brand' => $this->last_used_brand]);
+        }
+
+        return $this->attributes['dashboard_url'];
+    }
+
+    public function getIsAMemberAttribute()
+    {
+        //if(!isset($this->attributes['is_a_member'])) {
+            $this->attributes['is_a_member'] = $this->is_lifetime_member ||
+                (!empty($this->membership_expiration_date) && $this->membership_expiration_date > Carbon::now());
+       // }
+
+        return $this->attributes['is_a_member'];
     }
 
     /**
