@@ -384,7 +384,9 @@ class UserAccessPermissionsService
         $userAccessPermission->status = $status;
         if ($revokedAt) {
             $userAccessPermission->revoked_at = $revokedAt;
-            $userAccessPermission->source_hash = uniqid();
+            if ($userAccessPermission->source == UserAccessPermissionsSourceEnum::Challenges->value) {
+                $userAccessPermission->source_hash = uniqid();
+            }
         }
         $userAccessPermission->save();
 
