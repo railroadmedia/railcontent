@@ -4,7 +4,6 @@ namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Content\Services\ContentPermissionsService;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
-use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
@@ -14,7 +13,6 @@ use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\UserProduct;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
@@ -141,10 +139,10 @@ class UserAccessPermissionsService
             $contentPermissionsLookup
         );
 
-        if ($wasUpdated) {
+        //if ($wasUpdated) {
             $accessPermissions = $this->getUserAccessPermissions($user->id);
             event(new UserAccessPermissionsUpdated($accessPermissions));
-        }
+        //}
     }
 
     private function syncShopifyOrder(
