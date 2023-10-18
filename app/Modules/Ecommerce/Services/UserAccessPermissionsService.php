@@ -80,8 +80,6 @@ class UserAccessPermissionsService
                 ->get();
         $user = $this->userService->getByIdOrNull($userId);
 
-        $addedPermissions = false;
-
         /** @var Product $product */
         foreach ($products as $product) {
             $contentPermissions = $product->getContentPermissions($contentPermissionsLookup);
@@ -92,7 +90,7 @@ class UserAccessPermissionsService
 
                 // if the permission exist, skip it
                 if (!$accessPermission) {
-                    $accessPermission = $this->createUserAccessPermission(
+                    $this->createUserAccessPermission(
                         $user,
                         $contentPermission->id,
                         $startTime,
@@ -101,20 +99,20 @@ class UserAccessPermissionsService
                         $product,
                         UserAccessPermissionsStatusEnum::Active
                     );
-
-                    if ($accessPermission) {
-                        $addedPermissions = true;
-                    }
                 }
             }
 
-            $this->handleBonusMembershipPermission($product, $user, $source);
+            $this->handleBonusMembershipPermission(
+                $product,
+                $user,
+                $source,
+                $sourceId,
+                $existingAccessPermissionsLookup
+            );
         }
 
-        if ($addedPermissions) {
-            $accessPermissions = $this->getUserAccessPermissions($userId);
-            event(new UserAccessPermissionsUpdated($accessPermissions));
-        }
+        $accessPermissions = $this->getUserAccessPermissions($userId);
+        event(new UserAccessPermissionsUpdated($accessPermissions));
     }
 
     public function syncShopifyOrders(User $user, $orders, $products): void
@@ -123,9 +121,8 @@ class UserAccessPermissionsService
         $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($user->id);
         $productLookup = $products->keyBy('sku');
 
-        $wasUpdated = false;
         foreach ($orders->sortBy('created_at') as $order) {
-            $wasUpdated |= $this->syncShopifyOrder(
+            $this->syncShopifyOrder(
                 $user,
                 $order,
                 $existingAccessPermissionsLookup,
@@ -134,15 +131,13 @@ class UserAccessPermissionsService
             );
         }
 
-        $wasUpdated |= $this->ensureUserProductAccess(
+        $this->ensureUserProductAccess(
             $user,
             $contentPermissionsLookup
         );
 
-        //if ($wasUpdated) {
         $accessPermissions = $this->getUserAccessPermissions($user->id);
         event(new UserAccessPermissionsUpdated($accessPermissions));
-        //}
     }
 
     private function syncShopifyOrder(
@@ -194,7 +189,13 @@ class UserAccessPermissionsService
                     $wasUpdated = true;
                 }
             }
-            $this->handleBonusMembershipPermission($product, $user, $order->getPaymentSourceEnum());
+            $this->handleBonusMembershipPermission(
+                $product,
+                $user,
+                $order->getPaymentSourceEnum(),
+                $shopifyOrderId . $lineItem->id,
+                $existingAccessPermissionsLookup
+            );
         }
         return $wasUpdated;
     }
@@ -383,9 +384,11 @@ class UserAccessPermissionsService
         $userAccessPermission->status = $status;
         if ($revokedAt) {
             $userAccessPermission->revoked_at = $revokedAt;
+            $userAccessPermission->source_hash = uniqid();
         }
         $userAccessPermission->save();
 
+        event(new UserAccessPermissionsUpdated($this->getUserAccessPermissions($userId)));
         return $userAccessPermission;
     }
 
@@ -393,10 +396,16 @@ class UserAccessPermissionsService
         Product $product,
         ?User $user,
         UserAccessPermissionsSourceEnum $source,
+        string $sourceId,
+        Collection $existingAccessPermissionsLookup
     ) {
         if ($product->digital_membership_access_expiration_date
             && $user
             && $user->membership_expiration_date < $product->digital_membership_access_expiration_date) {
+            $hash = sha1("$sourceId.$product->id.bonus");
+            if ($existingAccessPermissionsLookup["$source->value.$hash"] ?? null) {
+                return;
+            }
             $membershipExpirationDate = Carbon::parse($user->membership_expiration_date);
             $digitalMembershipAccessExpirationDate = Carbon::parse($product->digital_membership_access_expiration_date);
             $timeDays = $membershipExpirationDate->diffInDays($digitalMembershipAccessExpirationDate) + 1;
@@ -405,7 +414,7 @@ class UserAccessPermissionsService
                 UserAccessPermissionsCollection::MusoraPlusMembershipPermission,
                 $membershipExpirationDate,
                 $source,
-                '',
+                $hash,
                 $product,
                 UserAccessPermissionsStatusEnum::Active,
                 $timeDays,
