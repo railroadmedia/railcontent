@@ -825,7 +825,7 @@ class SyncOrdersToShopify implements ShouldQueue
 
         if ($order->getTaxesDue()) {
             $orderData["tax_lines"] = [
-                ["price" => number_format($order->getTaxesDue(), 2)]
+                ["price" => number_format($order->getTaxesDue(), 2, '.', '')]
             ];
         }
 
@@ -893,7 +893,7 @@ class SyncOrdersToShopify implements ShouldQueue
                     "ecommerce_order_item_id" => $orderItem->id,
                     "fulfillable_quantity" => $orderItem->quantity,
                     "fulfillment_service" => "manual",
-                    "price" => number_format($orderItem->initial_price ?? 0, 2),
+                    "price" => number_format($orderItem->initial_price ?? 0, 2, '.', ''),
                     "quantity" => $orderItem->quantity,
                     "requires_shipping" => $orderItem->weight > 0,
                     "sku" => $orderItem->product->sku,
@@ -909,7 +909,7 @@ class SyncOrdersToShopify implements ShouldQueue
                 if ($orderItem->total_discounted > 0) {
                     $discounts[] =
                         [
-                            "amount" => number_format($orderItem->total_discounted, 2)
+                            "amount" => number_format($orderItem->total_discounted, 2, '.', '')
                         ];
                     $hasDiscounts = true;
                 }
@@ -931,7 +931,7 @@ class SyncOrdersToShopify implements ShouldQueue
 
                         $discounts[] =
                             [
-                                "amount" => number_format($amountToDiscount, 2)
+                                "amount" => number_format($amountToDiscount, 2, '.', '')
                             ];
 
                         // reduce the amount to refund by the amount we're applying here
@@ -1064,7 +1064,7 @@ class SyncOrdersToShopify implements ShouldQueue
                     "id" => $payment->getId(),
                     "data" =>
                         [
-                            "amount" => number_format($payment->getTotalPaid(), 2),
+                            "amount" => number_format($payment->getTotalPaid(), 2, '.', ''),
                             "kind" => "sale",
                             // DEV NOTE: this is not documented in Shopify, but it is required
                             "source" => "external"
