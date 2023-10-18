@@ -110,7 +110,7 @@ export const useCollectionStore = defineStore({
             window.history.pushState({}, '', url);
         },
         setSearchTerm(term){
-            this.filter.searchTerm = term;
+            this.tabData[this.filter.activeTab].searchTerm = term;
             this.getData();
         },
         sortData(item){

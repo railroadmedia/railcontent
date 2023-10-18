@@ -1,9 +1,6 @@
 <template>
     <div class="tw-flex tw-flex-col md:tw-flex-row tw-w-full tw-justify-between">
         <div class="tw-flex tw-grow tw-relative tw-items-center tw-mb-[18px]">
-            <!-- Title -->
-            <div v-if="collectionTitle" class="tw-font-bold tw-text-2xl md:tw-text-[26px] lg:tw-text-3xl tw-h-[40px] md:tw-h-[50px] tw-flex tw-items-center tw-text-[#000C17] dark:tw-text-white">{{ collectionTitle }}</div>
-
             <!-- Filter Tabs -->
             <filter-tabs v-if="tabOptions.length > 0" :active-tab="activeTab" :tab-options="tabOptions" @onTabClick="handleTabClick" />
             <div class="tw-flex tw-grow tw-justify-end md:tw-hidden">
@@ -81,13 +78,9 @@
             type: Boolean,
             default: false,
         },
-        collectionTitle: {
-            type: String,
-            default: '',
-        },
     });
 
-    const emit = defineEmits(['onToggleCollapse', 'onFilterTabClick']);
+    const emit = defineEmits(['onToggleCollapse', 'onFilterTabClick', 'onSearchSubmit']);
     const showDropdown = ref(false);
     const sortOptions = ref(null);
 

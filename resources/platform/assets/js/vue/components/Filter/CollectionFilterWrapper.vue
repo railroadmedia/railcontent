@@ -1,7 +1,6 @@
 <template>
     <div>
         <filter-controls
-            :collection-title="collectionTitle"
             :search-term="state.searchTerm"
             :is-collapsed="isCollapsed"
             :selected-sort="collectionStore.tabData[collectionStore.filter.activeTab] && collectionStore.tabData[collectionStore.filter.activeTab].sort"
@@ -11,7 +10,7 @@
             @on-toggle-collapse="handleToggleCollapse"
             @on-search-submit="handleSearch"
             @on-sort="handleSort"
-            @on-filter-tab-click="(tabClick)"
+            @on-filter-tab-click="(value) => tabClick(value)"
         >
             <slot name="viewToggleButton"></slot>
         </filter-controls>
@@ -43,10 +42,6 @@
     import FilterControls from './FilterControls.vue';
 
     const props = defineProps({
-        collectionTitle: {
-            type: String,
-            default: '',
-        },
         filterableValues: {
             type: Array,
             default: () => [],
@@ -108,7 +103,6 @@
     const handleSearch = (value) => {
         collectionStore.setSearchTerm(value);
         collectionStore.getData();
-        collectionStore.setParams();
     }
 
     const handleFilterChange = (selection) => {
@@ -128,7 +122,6 @@
 
     const handleSort = (item) => {
         collectionStore.sortData(item);
-        collectionStore.setParams();
     }
 
     const tabClick = (tab) => {
