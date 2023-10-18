@@ -18,7 +18,7 @@ class UserAccessPermissionResource extends JsonResource
             'start_time' => ($this->status == 'revoked')?$this->start_time : ($this->actualStartTime?->toDateTimeString() ?? ''),
             'expiration_time' => $this->actualExpirationTime?->toDateTimeString() ?? '',
             'status' => $this->status,
-            'source' => $this->source,
+            'source' => $this->getDisplaySource(),
             'time_lifetime' => $this->time_lifetime,
             'time_days'=> $this->time_days,
             'time_months'=> $this->time_months,
