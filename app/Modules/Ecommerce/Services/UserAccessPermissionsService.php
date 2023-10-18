@@ -140,8 +140,8 @@ class UserAccessPermissionsService
         );
 
         //if ($wasUpdated) {
-            $accessPermissions = $this->getUserAccessPermissions($user->id);
-            event(new UserAccessPermissionsUpdated($accessPermissions));
+        $accessPermissions = $this->getUserAccessPermissions($user->id);
+        event(new UserAccessPermissionsUpdated($accessPermissions));
         //}
     }
 
@@ -397,13 +397,13 @@ class UserAccessPermissionsService
         if ($product->digital_membership_access_expiration_date
             && $user
             && $user->membership_expiration_date < $product->digital_membership_access_expiration_date) {
-            $timeDays = Carbon::parse($user->membership_expiration_date)->diffInDays(
-                    Carbon::parse($product->digital_membership_access_expiration_date)
-                ) + 1;
+            $membershipExpirationDate = Carbon::parse($user->membership_expiration_date);
+            $digitalMembershipAccessExpirationDate = Carbon::parse($product->digital_membership_access_expiration_date);
+            $timeDays = $membershipExpirationDate->diffInDays($digitalMembershipAccessExpirationDate) + 1;
             $this->createUserAccessPermission(
                 $user,
                 UserAccessPermissionsCollection::MusoraPlusMembershipPermission,
-                $user->membership_expiration_date,
+                $membershipExpirationDate,
                 $source,
                 '',
                 $product,
