@@ -2,7 +2,7 @@
   <div>
       <CollectionFilterWrapper
             :filterable-values="filterableValues"
-            :tab-options="tabOptions.length > 0 ? tabOptions : getTabOptions"
+            :tab-options="tabOptionData"
             :pre-loaded-content="preLoadedContent"
       />
 
@@ -151,6 +151,10 @@
     }
 
     return tabDataMap;
+  })
+
+  const tabOptionData = computed(()=>{
+      return props.tabOptions.length > 0 ? props.tabOptions : getTabOptions.value;
   })
 
   onMounted(()=>{
