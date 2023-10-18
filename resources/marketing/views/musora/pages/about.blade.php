@@ -340,4 +340,12 @@
 
     @include('musora._partials._lets-chat')
 
+{{--    <section class="py-12 sm:py-16 lg:py-20 px-5 relative overflow-hidden text-white text-center" style="background-color:#000C17;">--}}
+{{--        <div class="container mx-auto max-w-xl relative z-0">--}}
+{{--            <h3 style="color:#FFAE00;"><strong>Studio Grant Title</strong></h3>--}}
+{{--            <p class="max-w-2xl my-4 leading-normal">Lorem ipsum</p>--}}
+{{--            <a class="btn-primary btn-small text-drumeo bg-white pb-6 rounded-full text-sm inline-block" target="_blank" href="{{ get_musora_brand_base_url() }}/contact">Learn More</a>--}}
+{{--        </div>--}}
+{{--    </section>--}}
+
 @stop
