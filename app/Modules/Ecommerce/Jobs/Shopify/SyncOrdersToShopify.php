@@ -781,7 +781,7 @@ class SyncOrdersToShopify implements ShouldQueue
                 number_format($refundAmount, 2),
                 $refunds->first()->getPayment()?->getCurrency() ?? self::DEFAULT_CURRENCY
             );
-            $notes = $refunds->map(fn(Refund $refund) => $refund->getNote());
+            $notes = $refunds->map(fn(Refund $refund) => $refund->getNote())->filter();
 
             if ($notes->isNotEmpty()) {
                 $refundNotes = Str::of($refundNotes)->newLine()->append("Refund Notes:");
