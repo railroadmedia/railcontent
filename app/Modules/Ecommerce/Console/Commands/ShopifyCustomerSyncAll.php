@@ -7,12 +7,13 @@ use App\Modules\Ecommerce\Jobs\ShopifyCustomersSyncAllJob;
 
 class ShopifyCustomerSyncAll extends Command
 {
-    protected $signature = 'ecommerce:ShopifyCustomerSyncAll';
+    protected $signature = 'ecommerce:ShopifyCustomerSyncAll {chunkSize=1000}';
 
     public function handle()
     {
+        $chunkSize = $this->argument('chunkSize');
         $this->runBatchQuery(function (int $skip, int $take) {
             return new ShopifyCustomersSyncAllJob($skip, $take);
-        }, chunks: 1000, queue: 'command');
+        }, chunks: $chunkSize, queue: 'command');
     }
 }
