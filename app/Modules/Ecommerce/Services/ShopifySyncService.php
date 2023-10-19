@@ -176,16 +176,16 @@ class ShopifySyncService
             "line_items" => $this->createOrderItems($productIds, $price),
             "metafields" => [
                 [
-                    "key" => ShopifyMetafieldKey::Brand,
+                    "key" => ShopifyMetafieldKey::Brand->value,
                     "value" => $brand,
-                    "type" => ShopifyMetafieldTypes::single_line_text_field,
-                    "namespace" => ShopifyMetafieldNamespace::Musora
+                    "type" => ShopifyMetafieldTypes::single_line_text_field->value,
+                    "namespace" => ShopifyMetafieldNamespace::Musora->value
                 ],
                 [
-                    "key" => ShopifyMetafieldKey::PaymentSource,
+                    "key" => ShopifyMetafieldKey::PaymentSource->value,
                     "value" => $paymentSource->value,
-                    "type" => ShopifyMetafieldTypes::single_line_text_field,
-                    "namespace" => ShopifyMetafieldNamespace::Musora
+                    "type" => ShopifyMetafieldTypes::single_line_text_field->value,
+                    "namespace" => ShopifyMetafieldNamespace::Musora->value
                 ]
             ]
         ];

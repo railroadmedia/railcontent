@@ -616,22 +616,22 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             "metafields" =>
                 array(
                     [
-                        "key" => ShopifyMetafieldKey::Id,
+                        "key" => ShopifyMetafieldKey::Id->value,
                         "value" => (string)$subscriptionPayment->getId(),
-                        "type" => ShopifyMetafieldTypes::integer,
-                        "namespace" => ShopifyMetafieldNamespace::Model_SubscriptionPayments
+                        "type" => ShopifyMetafieldTypes::integer->value,
+                        "namespace" => ShopifyMetafieldNamespace::Model_SubscriptionPayments->value
                     ],
                     [
-                        "key" => ShopifyMetafieldKey::Brand,
+                        "key" => ShopifyMetafieldKey::Brand->value,
                         "value" => $subscription->getBrand(),
-                        "type" => ShopifyMetafieldTypes::single_line_text_field,
-                        "namespace" => ShopifyMetafieldNamespace::Musora
+                        "type" => ShopifyMetafieldTypes::single_line_text_field->value,
+                        "namespace" => ShopifyMetafieldNamespace::Musora->value
                     ],
                     [
-                        "key" => ShopifyMetafieldKey::PaymentSource,
+                        "key" => ShopifyMetafieldKey::PaymentSource->value,
                         "value" => $this->getPaymentSourceMetafieldValue($payment)->value,
-                        "type" => ShopifyMetafieldTypes::single_line_text_field,
-                        "namespace" => ShopifyMetafieldNamespace::Musora
+                        "type" => ShopifyMetafieldTypes::single_line_text_field->value,
+                        "namespace" => ShopifyMetafieldNamespace::Musora->value
                     ]
                 )
         ];

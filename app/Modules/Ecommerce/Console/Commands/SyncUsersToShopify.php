@@ -283,10 +283,10 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
             // we can use meta fields for stuff like our user id, etc
             $customerData["metafields"] = [
                 [
-                    "key" => ShopifyMetafieldKey::Id,
+                    "key" => ShopifyMetafieldKey::Id->value,
                     "value" => (string)$user->id,
-                    "type" => ShopifyMetafieldTypes::integer,
-                    "namespace" => ShopifyMetafieldNamespace::Model_Users
+                    "type" => ShopifyMetafieldTypes::integer->value,
+                    "namespace" => ShopifyMetafieldNamespace::Model_Users->value
                 ]
             ];
         }

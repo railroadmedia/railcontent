@@ -811,16 +811,16 @@ class SyncOrdersToShopify implements ShouldQueue
             // we can use meta fields for stuff like our order id, etc
             $orderData["metafields"] = [
                 [
-                    "key" => ShopifyMetafieldKey::Id,
+                    "key" => ShopifyMetafieldKey::Id->value,
                     "value" => $order->getId(),
-                    "type" => ShopifyMetafieldTypes::integer,
-                    "namespace" => ShopifyMetafieldNamespace::Model_Orders
+                    "type" => ShopifyMetafieldTypes::integer->value,
+                    "namespace" => ShopifyMetafieldNamespace::Model_Orders->value
                 ],
                 [
-                    "key" => ShopifyMetafieldKey::Brand,
+                    "key" => ShopifyMetafieldKey::Brand->value,
                     "value" => $order->getBrand(),
-                    "type" => ShopifyMetafieldTypes::single_line_text_field,
-                    "namespace" => ShopifyMetafieldNamespace::Musora
+                    "type" => ShopifyMetafieldTypes::single_line_text_field->value,
+                    "namespace" => ShopifyMetafieldNamespace::Musora->value
                 ],
             ];
         }
