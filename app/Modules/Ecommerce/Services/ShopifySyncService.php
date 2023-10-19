@@ -248,9 +248,4 @@ class ShopifySyncService
         }
         throw new \Exception("User not found for shopify customer id $shopifyCustomerId");
     }
-
-    protected function getIsUsingMask(): bool
-    {
-        return !app()->isProduction();
-    }
 }

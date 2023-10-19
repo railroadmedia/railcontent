@@ -212,9 +212,4 @@ class MigrateRechargeSubscriptions extends Command
         $nextInterval = Carbon::parse($subscription->paid_until);
         return $nextInterval->isoFormat('YYYY-MM-DD');
     }
-
-    protected function getIsUsingMask(): bool
-    {
-        return !app()->isProduction();
-    }
 }
