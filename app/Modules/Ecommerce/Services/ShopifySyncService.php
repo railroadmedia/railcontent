@@ -8,6 +8,7 @@ use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\UserManagementSystem\Services\UserService;
 use App\Providers\EcommerceUserProvider;
@@ -18,6 +19,8 @@ use Signifly\Shopify\Shopify;
 
 class ShopifySyncService
 {
+    use HandlesMaskedEmailAddress;
+
     private Shopify $shopify;
     private RechargeGateway $recharge;
     private UserProductService $userProductService;
@@ -55,6 +58,7 @@ class ShopifySyncService
         if (!config('shopify.enabled')) {
             return;
         }
+        Log::debug("Syncing customer $shopifyCustomerId");
         $orders = $this->shopifyGateway->getCustomerOrders($shopifyCustomerId);
         $skus = $orders->pluck('lineItems')->flatten(1)->pluck('sku')->unique()->toArray();
         $products = $this->productService->getProductsBySkus($skus);
@@ -141,7 +145,7 @@ class ShopifySyncService
             return false;
         }
 
-       return $this->shopifyGateway->doesOrderExist($shopifyCustomerId, $processedAt);
+        return $this->shopifyGateway->doesOrderExist($shopifyCustomerId, $processedAt);
     }
 
     /**
@@ -168,7 +172,7 @@ class ShopifySyncService
     ): array {
         $data = [
             "customer" => ["id" => $customerShopifyId],
-            "email" => $email,
+            "email" => $this->getEmailForShopify($email),
             "processed_at" => $processedAt,
             "subtotal_price" => number_format($price, 2, '.', ''),
             "total_outstanding" => "0.00",
@@ -241,5 +245,10 @@ class ShopifySyncService
             );
         }
         throw new \Exception("User not found for shopify customer id $shopifyCustomerId");
+    }
+
+    protected function getIsUsingMask(): bool
+    {
+        return !app()->isProduction();
     }
 }
