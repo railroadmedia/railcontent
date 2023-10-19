@@ -28,6 +28,7 @@ import studentreview from './modules/student-review';
 import instructor from './modules/instructor';
 import unit from './modules/unit';
 import unitpart from './modules/unit-part';
+import routine from './modules/routine';
 
 export {
     coach,
@@ -60,4 +61,5 @@ export {
     instructor,
     unit,
     unitpart,
+    routine,
 };

@@ -417,7 +417,8 @@ export default {
         },
     },
     mounted() {
-        this.searchTerm = this.$route.query.term ? this.$route.query.term : '';
+        if (this.$route.query.term) this.searchTerm = this.$route.query.term;
+        if (this.$route.query.page) this.currentPage = Number(this.$route.query.page);
 
         if (this.searchTerm) {
             this.searchAccessCodes();
