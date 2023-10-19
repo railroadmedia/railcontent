@@ -42,7 +42,14 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
 
     function handleItem($item): void
     {
+    }
+
+    function handleAllItems($items): bool
+    {
         $shopifySyncService = app(ShopifySyncService::class);
-        $shopifySyncService->syncCustomer($item->shopify_id);
+        foreach ($items as $item) {
+            $shopifySyncService->syncCustomer($item->shopify_id);
+        }
+        return true;
     }
 }

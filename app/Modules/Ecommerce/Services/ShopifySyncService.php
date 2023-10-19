@@ -55,14 +55,16 @@ class ShopifySyncService
 
     public function syncCustomer($shopifyCustomerId, $email = ''): void
     {
-        if (!config('shopify.enabled')) {
+        if (!config('shopify.enabled') || !$shopifyCustomerId) {
             return;
         }
-        Log::debug("Syncing customer $shopifyCustomerId");
+        Log::debug("Customer $shopifyCustomerId: GetCustomerOrders");
         $orders = $this->shopifyGateway->getCustomerOrders($shopifyCustomerId);
         $skus = $orders->pluck('lineItems')->flatten(1)->pluck('sku')->unique()->toArray();
         $products = $this->productService->getProductsBySkus($skus);
         if ($products->contains(fn(Product $product) => $product->isDigital())) {
+            $count = $orders->count();
+            Log::debug("Customer $shopifyCustomerId: Found $count orders");
             $user = $this->getUser($shopifyCustomerId, $email);
             $this->userAccessPermissionsService->syncShopifyOrders($user, $orders, $products);
         };

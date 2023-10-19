@@ -54,5 +54,9 @@ return [
          * The number of seconds to sleep for, when we hit the rate limit threshold.
          */
         'sleep_time' => env('SHOPIFY_RATE_LIMIT_SLEEP_TIME', 1),
+    ],
+    'rate_limit_gql' => [
+        'threshold_percentage' => env('SHOPIFY_RATE_LIMIT_GRAPH_QL_THRESHOLD_PERCENTAGE', 80),
+        'sleep_time' => env('SHOPIFY_RATE_LIMIT_GRAPH_QL_SLEEP_TIME', 1),
     ]
 ];

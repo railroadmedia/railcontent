@@ -117,7 +117,7 @@ class CustomerIoSyncService
     private function getUsersMembershipAccessAttributes(User $user, mixed $brands): array
     {
         $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($user->id);
-        Log::error("Customer IO attributes Not implemented");
+        //Log::error("Customer IO attributes Not implemented");
         return [];
 //        $isAppSignup = false;
 //        $attributes = [];
