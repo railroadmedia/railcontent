@@ -3,6 +3,8 @@
 namespace App\Modules\Ecommerce\Gateways;
 
 use Carbon\Carbon;
+use Exception;
+use Log;
 
 class RechargeGateway
 {
@@ -156,19 +158,19 @@ class RechargeGateway
                 $returnInfo[trim($key)] = trim($val);
             }
 
-            if (isset($returnInfo['HTTP_CODE']) && strpos(
-                    $returnInfo['HTTP_CODE'],
-                    'HTTP/1.1 429 TOO MANY REQUESTS'
-                ) > -1) {
-                \Log::info('[Recharge\API] Sleeping for 2 seconds (429 Too Many Requests / Method 1)');
-                sleep(2);
+            if (isset($returnInfo['HTTP_CODE']) && (strpos(
+                        $returnInfo['HTTP_CODE'],
+                        'HTTP/1.1 429 TOO MANY REQUESTS'
+                    ) > -1 || $returnInfo['HTTP_CODE'] == 'HTTP/2 429')) {
+                Log::warning('[Recharge\API] Sleeping for 2 seconds (429 Too Many Requests / Method 1)');
+                sleep(1);
                 $retry = true;
                 continue;
             }
 
             if (isset($returnInfo['HTTP_CODE']) && strpos($returnInfo['HTTP_CODE'], 'HTTP/1.1 409 CONFLICT') > -1) {
-                \Log::info('[Recharge\API] Sleeping for 2 seconds (409 Conflict)');
-                sleep(2);
+                Log::warning('[Recharge\API] Sleeping for 2 seconds (409 Conflict)');
+                sleep(1);
                 $retry = true;
                 continue;
             }
@@ -179,8 +181,8 @@ class RechargeGateway
                             $result->errors->UNEXPECTED_VARIANT_ERROR_TYPE,
                             'Shopify returned 429 rate limit regarding this call'
                         ) > -1) {
-                        \Log::info('[Recharge\API] Sleeping for 2 seconds (Shopify 429)');
-                        sleep(2);
+                        Log::info('[Recharge\API] Sleeping for 2 seconds (Shopify 429)');
+                        sleep(1);
                         $retry = true;
                         continue;
                     }
@@ -191,13 +193,13 @@ class RechargeGateway
                 // if recharge has taken too long
                 if (in_array($returnError['number'], [CURLE_OPERATION_TIMEDOUT, CURLE_OPERATION_TIMEOUTED])) {
                     $retry = true;
-                    \Log::debug('[Recharge\API] Request timed out, let\'s try again');
+                    Log::warning('[Recharge\API] Request timed out, let\'s try again');
                     continue;
                 }
 
                 if (stripos($returnError['msg'], 'The requested URL returned error: 429 TOO MANY REQUESTS') !== false) {
-                    \Log::info('[Recharge\API] Sleeping for 2 seconds (429 Too Many Requests / Method 2)');
-                    sleep(2);
+                    Log::warning('[Recharge\API] Sleeping for 2 seconds (429 Too Many Requests / Method 2)');
+                    sleep(1);
                     $retry = true;
                     continue;
                 }
@@ -241,11 +243,12 @@ class RechargeGateway
 
     public function getSubscriptions($shopifyCustomerId)
     {
+        $response = $this->call('GET', '/subscriptions', [
+            'shopify_customer_id' => $shopifyCustomerId,
+            'limit' => 250
+        ], apiVersion: self::API_VERSION_2021_01);
         return collect(
-            $this->call('GET', '/subscriptions', [
-                'shopify_customer_id' => $shopifyCustomerId,
-                'limit' => 250
-            ], apiVersion: self::API_VERSION_2021_01)?->subscriptions
+            $response?->subscriptions
         );
     }
 
