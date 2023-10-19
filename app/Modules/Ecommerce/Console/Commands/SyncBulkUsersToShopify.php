@@ -63,8 +63,8 @@ class SyncBulkUsersToShopify extends Command
         // before the customers start, so we will dispatch only the kickoff for users, and the customers will be run
         // separately
         KickOffBulkCustomerCreateFromUsers::dispatchSync($this->getIsExecuting(), $this->getLimit());
-
         $this->info("Jobs dispatched. Please check the logs for results of the SyncBulkUsersToShopify jobs.");
+        $this->info("Check the logs for 'SyncBulkUsersToShopify: Batch ID' to retrieve the batch id in case you need to cancel it.");
 
         return self::SUCCESS;
     }

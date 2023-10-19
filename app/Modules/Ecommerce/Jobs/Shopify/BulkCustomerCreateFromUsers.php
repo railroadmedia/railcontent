@@ -12,10 +12,12 @@ use App\Modules\Ecommerce\Jobs\Shopify\Traits\StagesUploadToShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsShopifyCustomer;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Modules\UserManagementSystem\Models\User;
@@ -46,6 +48,7 @@ use Signifly\Shopify\Shopify;
  */
 class BulkCustomerCreateFromUsers implements ShouldQueue
 {
+    use Batchable;
     use Dispatchable;
     use FindsCustomers;
     use HandlesMaskedEmailAddress;
@@ -54,6 +57,11 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
     use SerializesModels;
     use StagesUploadToShopify;
     use SyncsShopifyCustomer;
+
+    public function middleware(): array
+    {
+        return [new SkipIfBatchCancelled];
+    }
 
     protected CustomerRepository $customerRepository;
     protected AddressRepository $addressRepository;

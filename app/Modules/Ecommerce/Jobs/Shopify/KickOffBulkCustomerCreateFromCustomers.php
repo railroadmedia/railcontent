@@ -3,7 +3,9 @@
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
+use Carbon\Carbon;
 use Doctrine\ORM\QueryBuilder;
+use Illuminate\Bus\Batch;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -11,9 +13,12 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Railroad\Ecommerce\Entities\Customer;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Signifly\Shopify\Shopify;
+use Throwable;
 
 /**
  * KickOffBulkCustomerCreateFromCustomers kicks off the process to perform a bulk operation in Shopify to create new
@@ -42,6 +47,12 @@ class KickOffBulkCustomerCreateFromCustomers implements ShouldQueue
     {
     }
 
+    /**
+     * @param  EcommerceEntityManager  $entityManager
+     * @param  Shopify  $shopify
+     * @return void
+     * @throws Throwable
+     */
     public function handle(EcommerceEntityManager $entityManager, Shopify $shopify): void
     {
         // set DI instances that we'll need
@@ -80,7 +91,27 @@ class KickOffBulkCustomerCreateFromCustomers implements ShouldQueue
                 }
             }
         });
-        Bus::chain($jobs)->dispatch();
+
+        // create a batch of chained jobs, so we can cancel the batch if needed
+        $startAt = Carbon::now();
+        $batch = Bus::batch([$jobs])->then(function (Batch $batch) use ($startAt) {
+            Log::info(sprintf("SyncBulkCustomersToShopify: completed in %s seconds", $startAt->diffInSeconds()));
+        })->catch(function (Batch $batch, Throwable $e) {
+            Log::error($e->getMessage());
+        })
+            ->dispatch();
+
+        $this->logInfo(
+            sprintf(
+                "%s: Batch ID %s dispatched with %s %s to sync %s %s.",
+                $this->getClassName(),
+                $batch->id,
+                $batch->totalJobs,
+                Str::plural("job", $batch->totalJobs),
+                $totalCountForRun,
+                Str::plural("customer", $totalCountForRun)
+            )
+        );
     }
 
     /**

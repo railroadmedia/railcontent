@@ -3,6 +3,8 @@
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
+use Carbon\Carbon;
+use Illuminate\Bus\Batch;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,10 +13,13 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Repositories\AddressRepository;
 use Railroad\Ecommerce\Repositories\CustomerRepository;
 use Signifly\Shopify\Shopify;
+use Throwable;
 
 /**
  * KickOffBulkCustomerCreateFromUsers kicks off the process to perform a bulk operation in Shopify to create new
@@ -44,6 +49,14 @@ class KickOffBulkCustomerCreateFromUsers implements ShouldQueue
     {
     }
 
+
+    /**
+     * @param  CustomerRepository  $customerRepository
+     * @param  AddressRepository  $addressRepository
+     * @param  Shopify  $shopify
+     * @return void
+     * @throws Throwable
+     */
     public function handle(CustomerRepository $customerRepository, AddressRepository $addressRepository, Shopify $shopify): void
     {
         // set DI instances that we'll need
@@ -82,7 +95,27 @@ class KickOffBulkCustomerCreateFromUsers implements ShouldQueue
                 }
             }
         });
-        Bus::chain($jobs)->dispatch();
+
+        // create a batch of chained jobs, so we can cancel the batch if needed
+        $startAt = Carbon::now();
+        $batch = Bus::batch([$jobs])->then(function (Batch $batch) use ($startAt) {
+            Log::info(sprintf("SyncBulkUsersToShopify: completed in %s seconds", $startAt->diffInSeconds()));
+        })->catch(function (Batch $batch, Throwable $e) {
+            Log::error($e->getMessage());
+        })
+            ->dispatch();
+
+        $this->logInfo(
+            sprintf(
+                "%s: Batch ID %s dispatched with %s %s to sync %s %s.",
+                $this->getClassName(),
+                $batch->id,
+                $batch->totalJobs,
+                Str::plural("job", $batch->totalJobs),
+                $totalCountForRun,
+                Str::plural("user", $totalCountForRun)
+            )
+        );
     }
 
     /**
