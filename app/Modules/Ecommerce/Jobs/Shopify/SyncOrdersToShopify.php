@@ -888,6 +888,7 @@ class SyncOrdersToShopify implements ShouldQueue
                 &$orderItemsData,
                 &$refundAmount
             ) {
+                $price = $orderItem->product->isTrial() ? 0 : $orderItem->initial_price ?? 0;
                 $data = [
                     // include the shopify_id, if we have one, so we know if we're updating or creating - shopify will just ignore this
                     "shopify_id" => $orderItem->shopify_id,
@@ -895,7 +896,7 @@ class SyncOrdersToShopify implements ShouldQueue
                     "ecommerce_order_item_id" => $orderItem->id,
                     "fulfillable_quantity" => $orderItem->quantity,
                     "fulfillment_service" => "manual",
-                    "price" => number_format($orderItem->initial_price ?? 0, 2, '.', ''),
+                    "price" => number_format($price, 2, '.', ''),
                     "quantity" => $orderItem->quantity,
                     "requires_shipping" => $orderItem->weight > 0,
                     "sku" => $orderItem->product->sku,
