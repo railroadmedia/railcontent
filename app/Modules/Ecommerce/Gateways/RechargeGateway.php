@@ -247,9 +247,15 @@ class RechargeGateway
             'shopify_customer_id' => $shopifyCustomerId,
             'limit' => 250
         ], apiVersion: self::API_VERSION_2021_01);
-        return collect(
-            $response?->subscriptions
-        );
+        try {
+            return collect(
+                $response?->subscriptions
+            );
+        } catch (Exception $e) {
+            Log::error("RechargeGateway:getSubscriptions: " . $e->getMessage());
+            Log::error(print_r($response, true));
+            throw $e;
+        }
     }
 
     public function cancelSubscription(
