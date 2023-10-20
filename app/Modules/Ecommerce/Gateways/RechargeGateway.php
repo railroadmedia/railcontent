@@ -162,7 +162,7 @@ class RechargeGateway
                         $returnInfo['HTTP_CODE'],
                         'HTTP/1.1 429 TOO MANY REQUESTS'
                     ) > -1 || $returnInfo['HTTP_CODE'] == 'HTTP/2 429')) {
-                Log::warning('[Recharge\API] Sleeping for 2 seconds (429 Too Many Requests / Method 1)');
+                Log::warning('[Recharge\API] Sleeping for 1 seconds (429 Too Many Requests / Method 1)');
                 sleep(1);
                 $retry = true;
                 continue;
@@ -181,7 +181,7 @@ class RechargeGateway
                             $result->errors->UNEXPECTED_VARIANT_ERROR_TYPE,
                             'Shopify returned 429 rate limit regarding this call'
                         ) > -1) {
-                        Log::info('[Recharge\API] Sleeping for 2 seconds (Shopify 429)');
+                        Log::info('[Recharge\API] Sleeping for 1 seconds (Shopify 429)');
                         sleep(1);
                         $retry = true;
                         continue;
@@ -198,7 +198,7 @@ class RechargeGateway
                 }
 
                 if (stripos($returnError['msg'], 'The requested URL returned error: 429 TOO MANY REQUESTS') !== false) {
-                    Log::warning('[Recharge\API] Sleeping for 2 seconds (429 Too Many Requests / Method 2)');
+                    Log::warning('[Recharge\API] Sleeping for 1 seconds (429 Too Many Requests / Method 2)');
                     sleep(1);
                     $retry = true;
                     continue;
