@@ -3,6 +3,7 @@
 use App\Services\LiveStreamEventService;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Illuminate\Support\Str;
 
 if (!function_exists('current_user_has_recent_order')) {
     function current_user_has_recent_order() {
@@ -279,5 +280,28 @@ if (!function_exists('array_entity_column')) {
         }
 
         return $arrayOfValues;
+    }
+}
+
+if (!function_exists('assembleUserAttributes')) {
+    /**
+     * Extract user properties and certain method results into an array.
+     *
+     * @param object $userObject
+     * @return array
+     */
+    function assembleUserAttributes($userObject) {
+        $userData = method_exists($userObject, 'toArray') ? $userObject->toArray() : [];
+
+        $methodsToCall = ['getDashboardUrl', 'isAMember'];
+
+        foreach ($methodsToCall as $method) {
+            if (method_exists($userObject, $method)) {
+                $key = Str::snake($method);
+                $userData[$key] = $userObject->$method();
+            }
+        }
+
+        return $userData;
     }
 }

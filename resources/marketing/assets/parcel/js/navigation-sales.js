@@ -49,7 +49,7 @@ $(document).ready(function (){
         document.cookie = "cookiesEnabled=true; expires=" + date.toUTCString() + "; path=/";
         var cookiesEnabled = document.cookie.indexOf("cookiesEnabled=") !== -1;
         var hasCookie = document.cookie.indexOf("cookieAccept=true");
-        if (hasCookie < 0 && cookiesEnabled === true && window.location.hostname.endsWith('drumeo.com')) {
+        if (hasCookie < 0 && cookiesEnabled === true) {
             setTimeout(function () {
                 $(".cookie-notice").removeClass("hide");
             }, 3000);
@@ -58,7 +58,7 @@ $(document).ready(function (){
 
     function setPopUpCookie() {
         if (!popUp) {
-            document.cookie = "cookieAccept=true; expires=" + new Date(2147483647 * 1000).toUTCString() + "; path=/; domain=drumeo.com;";
+            document.cookie = "cookieAccept=true; expires=" + new Date(2147483647 * 1000).toUTCString() + "; path=/;";
             popUp = true;
         }
     }

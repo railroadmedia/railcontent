@@ -1,109 +1,193 @@
 <template>
   <div>
-    <div class="tw-flex tw-items-start tw-mb-3 tw-w-full tw-flex-wrap">
+    <div class="tw-flex tw-items-start tw-justify-between tw-mb-3 tw-flex-wrap">
 
-      <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mr-auto">
-        <h1 class="heading tw-py-2 tw-pr-4 xl:tw-pr-0">
+      <div class="tw-text-[#00101D] dark:tw-text-white lg:tw-flex-1">
+        <h1 class="heading tw-py-2 tw-pr-4 xl:tw-pr-0 tw-text-xl md:tw-text-2xl lg:tw-text-[28px]">
           {{ title }}
         </h1>
       </div>
       <!-- Video CTAs -->
-      <div class="tw-flex tw-items-start tw-flex-shrink-0 tw-py-2">
+      <div class="tw-flex tw-items-start tw-pt-3 tw-overflow-auto sm:tw-overflow-visible tw-no-scrollbar lg:tw-ml-4 tw-pb-40 -tw-mb-36 lg:-tw-mb-40">
         <!-- Info Button -->
-        <div v-if="showInfoButton" class="flex flex-column resource-button ph-1">
-          <button class="btn stacked" id="toggleInstructorInfo" @click="toggleInfo">
-            <span class="tw-shadow-none tw-text-lg tw-h-auto tw-text-[#3F3F46] dark:tw-text-white" style="padding: 0 8px">
-              <musora-icon :icon-name="openInfo ? 'info-filled' : 'info'" class="tw-w-6 tw-h-6 tw-mb-1" />
+        <div v-if="showInfoButton" class="flex flex-column resource-button tw-pr-2">
+           <button
+               class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full"
+               :class="openInfo ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40'"
+               id="toggleInstructorInfo"
+               title="More Info"
+               @click="toggleInfo"
+           >
+            <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
+              <musora-icon icon-name="info" class="tw-w-6 tw-h-6 tw-mr-1" />
               Info
-            </span>
+            </div>
           </button>
         </div>
 
         <!-- Like Button -->
-        <div class="flex flex-column resource-button ph-1">
-          <button class="btn stacked" @click="likeContent">
-            <span class="tw-shadow-none tw-text-lg tw-h-auto" style="padding: 0 8px"
-              :class="hasLiked ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-white'">
-              <musora-icon :icon-name="hasLiked ? 'thumb-like-filled' : 'thumb-like'" class="tw-w-6 tw-h-6 tw-mb-1" />
+        <div class="flex flex-column resource-button tw-pr-2">
+          <button
+              class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full"
+              :class="hasLiked ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40'"
+              :title="hasLiked ? 'Unlike' : 'Like'"
+              @click="likeContent"
+          >
+              <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
+                <musora-icon :icon-name="hasLiked ? 'thumb-like-filled' : 'thumb-like'" class="tw-w-6 tw-h-6 tw-mr-1" />
               {{ totalLikes }}
-            </span>
+              </div>
           </button>
         </div>
 
         <!-- Share Button -->
-        <div class="flex flex-column resource-button ph-1">
-          <button @click="handleOpenModal" class="btn stacked">
-            <span class="tw-shadow-none tw-text-[#3F3F46] dark:tw-text-white tw-text-lg tw-h-auto" style="padding: 0 8px">
-              <musora-icon icon-name="share" class="tw-w-6 tw-h-6 tw-mb-1" />
+        <div class="flex flex-column resource-button tw-pr-2">
+          <button
+              class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+              title="Share"
+              @click="handleOpenModal"
+          >
+            <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
+              <musora-icon icon-name="share" class="tw-w-6 tw-h-6 tw-mr-1" />
               Share
-            </span>
-          </button>
-        </div>
-
-        <div v-if="resources.length > 0" class="flex flex-column resource-button ph-1 relative">
-          <button class="btn open-resources stacked" @click="resourceDropdown = !resourceDropdown">
-            <span class="tw-shadow-none tw-h-auto"
-              :class="resourceDropdown ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-white tw-text-lg'"
-              style="padding: 0 8px">
-              <musora-icon icon-name="file" class="tw-w-6 tw-h-6 tw-mb-1" />
-              Resources
-            </span>
-          </button>
-
-          <transition name="grow-fade">
-            <div v-show="resourceDropdown" class="download-dropdown">
-              <div class="flex flex-column bg-white corners-10 shadow">
-                <a v-for="resource in resources" :key="resource.resource_name" :href="resource.resource_url"
-                  :aria-label="`Download ${resource.resource_name}`" class="
-                    flex flex-row
-                    pa-1
-                    tiny
-                    no-decoration
-                    text-black
-                    hover-bg-grey-1
-                    align-v-center
-                    nowrap
-                  " target="_blank" download>
-                  <i class="fas mr-1" style="font-size: 16px" :class="getResourceIcon(resource.resource_url)"></i>
-                  {{ resource.resource_name }}
-                </a>
-              </div>
             </div>
-          </transition>
+          </button>
         </div>
 
-        <div class="flex flex-column resource-button ph-1" v-if="showAddToList">
-          <button class="btn stacked" @click="addToList">
-            <span class="tw-shadow-none tw-text-lg tw-text-[#3F3F46] dark:tw-text-white tw-h-auto" style="padding: 0 8px">
-              <musora-icon icon-name="plus" class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all" />
-              <span class="hide-xs-only">
-                Add to List
-              </span>
-              <span class="hide-sm-up">
+        <!-- Add Button -->
+        <div v-if="showAddToList" class="flex flex-column resource-button tw-pr-2">
+          <button
+              class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+              title="Add to Playlist"
+              @click="addToList"
+          >
+            <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
+              <musora-icon icon-name="plus" class="tw-w-6 tw-h-6 tw-mr-1 tw-transition-all" />
                 Add
-              </span>
-            </span>
+            </div>
           </button>
         </div>
 
         <!-- Completed Button -->
-        <div class="flex flex-column resource-button ph-1" v-if="showCompleteButton">
-          <button class="btn stacked" @click="handleCompleteLesson">
-            <span class="tw-shadow-none tw-text-lg tw-text-[#3F3F46] dark:tw-text-white tw-h-auto" style="padding: 0 8px">
-              <musora-icon v-if="completed" icon-name="circle-check-filled"
-                class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all" />
-              <musora-icon v-else icon-name="circle-check" class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all" />
-
+        <div v-if="showCompleteButton" class="flex flex-column resource-button tw-pr-2">
+          <button
+              class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+              @click="handleCompleteLesson"
+          >
+            <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
+              <musora-icon :icon-name="completed ? 'circle-check-filled' : 'circle-check'" class="tw-w-6 tw-h-6 tw-mr-1 tw-transition-all" :class="completed ? 'tw-text-[#16A34A]' : ''" />
               <span>
                 {{ completed ? "Completed" : "Complete" }}
               </span>
-            </span>
+            </div>
           </button>
         </div>
 
+        <!-- Resources Button -->
+        <div v-if="resources.length > 0 && showResourceButton()" class="flex flex-column resource-button tw-pr-2 tw-relative">
+          <button
+              class="open-resources tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+              title="Download Resources"
+              @click="toggleResourceDropdown"
+          >
+            <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
+              <musora-icon icon-name="file" class="tw-w-6 tw-h-6 tw-mr-1" />
+              Resources
+            </div>
+          </button>
+
+          <transition name="grow-fade">
+              <ul v-show="resourceDropdown" class="tw-absolute tw-top-10 tw-right-2 tw-overflow-hidden tw-rounded tw-bg-white dark:tw-bg-[#081825] tw-z-50 tw-drop-shadow-lg">
+                  <li v-for="resource in resources" :key="resource.resource_name">
+                      <a
+                          class="tw-flex tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-sm tw-whitespace-nowrap tw-text-black dark:tw-text-white"
+                          target="_blank"
+                          :key="resource.resource_name"
+                          :href="resource.resource_url"
+                          :aria-label="`Download ${resource.resource_name}`"
+                      >
+                          <i class="fas tw-mr-1" :class="getResourceIcon(resource.resource_url)"></i>
+                          {{ resource.resource_name }}
+                      </a>
+                  </li>
+              </ul>
+          </transition>
+        </div>
+
+        <!-- More Button -->
+        <div class="flex flex-column resource-button tw-relative">
+          <button
+              class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-1 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+              title="More"
+              @click="toggleMore"
+          >
+              <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
+                  <musora-icon icon-name="ellipsis" class="tw-w-6 tw-h-6 tw-transition-all" />
+              </div>
+          </button>
+
+          <!-- Dropdown -->
+          <ul
+              v-if="showMore"
+              class="tw-absolute tw-top-10 tw-right-0 tw-drop-shadow-lg tw-rounded tw-text-black dark:tw-text-white tw-bg-white dark:tw-bg-[#081825] tw-z-50"
+              v-click-outside="clickOutSideDropdown"
+          >
+            <!-- Resources -->
+            <li v-if="resources.length > 0 && !showResourceButton()" class="tw-group tw-relative">
+                <button
+                    class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-sm"
+                >
+                    <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
+                        <musora-icon icon-name="file" class="tw-w-6 tw-h-6 tw-transition-all tw-mr-1" />
+                        Resources
+                    </div>
+                </button>
+
+                <!-- Resource Dropdown -->
+                <ul class="tw-hidden group-hover:tw-block tw-absolute tw-top-0 tw-right-full tw-overflow-hidden tw-rounded tw-bg-white dark:tw-bg-[#081825] tw-z-50">
+                    <li v-for="resource in resources">
+                        <a
+                            class="tw-flex tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-sm tw-whitespace-nowrap tw-text-black dark:tw-text-white"
+                            target="_blank"
+                            :key="resource.resource_name"
+                            :href="resource.resource_url"
+                            :aria-label="`Download ${resource.resource_name}`"
+                        >
+                            <i class="fas tw-mr-1" :class="getResourceIcon(resource.resource_url)"></i>
+                            {{ resource.resource_name }}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Report -->
+            <li class="tw-group tw-relative">
+              <button
+                  class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-sm" @click="toggleReportModal"
+              >
+                  <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
+                      <div class="tw-h-6 tw-w-6 tw-flex tw-items-center tw-justify-center tw-mr-1">
+                          <FlagIcon class="tw-w-5 tw-h-5" />
+                      </div>
+                      Report
+                  </div>
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <ModalRenderer v-if="showModalContent" @onClose="handleOpenModal"
+      <ReportModal
+          v-if="showReportModal"
+          :brand="brand"
+          :logo="reportLogo"
+          :recipient="reportRecipient"
+          :user-name="reportUserName"
+          :user-email="reportUserEmail"
+          @onCloseModal="toggleReportModal"
+      />
+
+      <ModalRenderer v-if="showShareModal" @onClose="handleOpenModal"
         key="ModalRendererOnVideoResource">
         <div class="tw-relative tw-container tw-w-full tw-h-full tw-flex tw-justify-center tw-items-center">
           <button @click="handleOpenModal" aria-label="Close share modal"
@@ -156,14 +240,18 @@ import Toasts from "../../assets/js/classes/toasts";
 import ContentService from "../../assets/js/services/content";
 import CoachesInLesson from "./CoachesInLesson.vue";
 import ModalRenderer from "../../../components/Modal/ModalRenderer.vue";
+import ReportModal from "../../../components/Modal/ReportModal";
 import { XIcon } from "@heroicons/vue/solid";
+import { FlagIcon } from "@heroicons/vue/outline";
 
 export default {
   name: "VideoResources",
   components: {
+      ReportModal,
     CoachesInLesson,
     ModalRenderer,
     XIcon,
+    FlagIcon,
   },
   mixins: [ThemeClasses],
   props: {
@@ -255,7 +343,27 @@ export default {
     lesson: {
       type: Object,
       default: {},
-    }
+    },
+
+    reportRecipient: {
+      type: String,
+      default: '',
+    },
+
+    reportLogo: {
+      type: String,
+      default: '',
+    },
+
+    reportUserName: {
+      type: String,
+      default: '',
+    },
+
+    reportUserEmail: {
+      type: String,
+      default: '',
+    },
   },
 
   data() {
@@ -265,9 +373,11 @@ export default {
       totalLikes: this.likeCount,
       hasAdded: this.isAdded,
       useTimecode: true,
-      showModalContent: false,
+      showShareModal: false,
+      showReportModal: false,
       completed: this.lesson.completed,
       openInfo: false,
+      showMore: false,
     };
   },
 
@@ -287,8 +397,6 @@ export default {
         this.resourceDropdown = false;
       }
     });
-
-    console.log('infobutton', this.showInfoButton)
   },
   methods: {
     getCurrentTime() {
@@ -299,7 +407,7 @@ export default {
       return 0;
     },
     handleOpenModal() {
-      this.showModalContent = !this.showModalContent;
+      this.showShareModal = !this.showShareModal;
     },
     likeContent() {
       this.hasLiked = !this.hasLiked;
@@ -411,6 +519,36 @@ export default {
     },
     toggleInfo() {
       this.openInfo = !this.openInfo;
+
+        const instructorInfo = document.getElementById('instructorInfo');
+        instructorInfo.classList.toggle('active');
+
+        if (this.openInfo) {
+            instructorInfo.style.maxHeight = `${instructorInfo.scrollHeight}px`;
+            instructorInfo.classList.add('tw-mb-4');
+        } else {
+            instructorInfo.style.maxHeight = '0';
+            instructorInfo.classList.remove('tw-mb-4');
+        }
+    },
+    toggleMore() {
+      this.showMore = !this.showMore;
+    },
+    toggleResourceDropdown(){
+      this.resourceDropdown = !this.resourceDropdown;
+    },
+    toggleReportModal(){
+      this.showReportModal = !this.showReportModal;
+    },
+    clickOutSideDropdown(){
+        this.showMore = false;
+    },
+    showResourceButton(){
+       if(!this.showInfoButton || !this.showCompleteButton){
+           return true;
+       }
+
+       return false;
     },
   },
 };

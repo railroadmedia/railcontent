@@ -231,7 +231,7 @@
             text-rendering: auto;
             opacity: 1;
             line-height: 1;
-            font-family: "Font Awesome 5 Pro";
+            font-family: "Font Awesome 6 Pro";
             font-weight: 300;
             color: #f61a30;
             font-size: 28px;
@@ -267,7 +267,7 @@
                     <h1 class=""><strong>30 days to</strong></h1>
                     <h2 class="sm:-mt-1 lg:mt-0">better piano chords.</h2>
 
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting June 5th.</strong></h6>
+                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Play beautiful chords with <br class="inline lg:hidden"> 30 days of guided lessons.</strong></h6>
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video" style="padding-bottom: 75%;" data-open="trailer">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/header-image-m.png" alt="header image" fetchpriority="high" />
@@ -286,13 +286,13 @@
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>
+                            <span class="join sold-out medium w-full">SOLD OUT</span>
 {{--                                <a href="#final" class="join medium w-full anchor-slide">ENROLL NOW</a>--}}
-                            <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">
+                           {{-- <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">
                                 <a href="https://www.musora.com/pianote/enrollment/easy-chords">Pianote Members register for free here.</a>
-                            </p>
+                            </p>--}}
                         </div>
-                        <div class="w-full sm:w-1/2 lg:pb-5">
+                        <div class="w-full sm:w-1/2">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/piano-players.png" alt="joined student profiles" fetchpriority="high">
                             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
                         </div>
@@ -307,41 +307,47 @@
             </div>
 
             <div class="flex flex-wrap sm:flex-nowrap text-center border rounded-lg border-gray-300 mt-8 lg:mt-12 mb-2 lg:mb-4">
-                <div class="w-full sm:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 sm:py-3 lg:py-4">
-                    <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
-                    <h4 class="px-3 lg:px-5"><strong>June 5th</strong></h4>
-                    <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
-                    <p class="text-sm px-3 lg:px-5">
-{{--                        Enrollment closes in<br class="inline lg:hidden">--}}
-{{--                        <span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">--}}
-{{--                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
-{{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-{{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
-{{--                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
-{{--                         </span>--}}
-                        Enrollment closed
-                    </p>
-                </div>
+                                    {{-- <div class="w-full sm:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 sm:py-3 lg:py-4">
+                                        <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
+                                        <h4 class="px-3 lg:px-5"><strong>Any time</strong></h4> --}}
+
+                    {{--                        <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
+                                            <p class="text-sm px-3 lg:px-5"> Enrollment closes in<br class="inline lg:hidden">--}}
+                    {{--                        <span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">--}}
+                    {{--                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+                    {{--                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+                    {{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+                    {{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+                    {{--                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+                    {{--                         </span> Enrollment closed </p> --}}
+
+                                    {{-- </div>
+
+                                </div> --}}
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-calendar-day text-pianote text-2xl"></i>
-                        <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> June 5th to<br class="hidden sm:inline"> July 5th.</span></p>
+                        <p class="leading-tight mx-0"><strong class="font-black">Course Length</strong><br>
+                            <span class="text-sm">30 days.</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-clock text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Commitment</strong><br>
-                            <span class="text-sm">10 minutes/day<br class="hidden sm:inline"> for 30 days.</span></p>
+                            <span class="text-sm">10 minutes per day.</span></p>
+                    </div>
+                    <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
+                        <i class="far fa-fw mr-3 sm:mr-0 fa-piano-keyboard text-pianote text-2xl"></i>
+                        <p class="leading-tight mx-0"><strong class="font-black">Skill Level</strong><br>
+                            <span class="text-sm">Beginner.</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-trophy text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Result</strong><br>
-                            <span class="text-sm">Better chord changes.  <br> Play 2 beautiful songs.</span></p>
+                            <span class="text-sm">Play real songs on the <br> piano and sound beautiful.</span></p>
                     </div>
                 </div>
             </div>
-            <p class="opacity-50 text-center"><em>Flexible lesson times to fit any schedule<br class="inline sm:hidden"> PLUS you get lifetime access!</em></p>
+            <p class="opacity-50 text-center"><em>Learn the piano on <br class="inline sm:hidden"> YOUR schedule with lifetime access!</em></p>
         </div>
     </header>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
@@ -647,13 +653,14 @@
                 @endforeach
             </div>
 
-            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>
-
+{{--<span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">SOLD OUT</span><br>--}}
 {{--                <a href="#final"--}}
-{{--                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>--}}
+{{--                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+<img class="h-7 mr-1 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/piano-players.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('opacity-0')">
+<p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
+--}}
 
-            <img class="h-7 mr-1 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/piano-players.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
+
         </div>
     </section>
 {{--    <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-16 lg:py-20" style="background:linear-gradient(to bottom, #0b76db, #074c8e);">--}}
@@ -696,7 +703,7 @@
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container max-w-6xl mx-auto relative z-50">
             <div class="flex flex-wrap items-center justify-center">
-                <div class="text-center w-full sm:w-7/12 lg:w-1/3 mb-7 lg:mb-0">
+                <div class="text-center w-full sm:w-7/12 lg:w-5/12 mb-7 lg:mb-0">
                     <img class="h-20 md:h-24 lg:h-28 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h4 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
                             20 Guided Play-Along Lessons.<br>
@@ -706,10 +713,9 @@
                     <div class="w-full mx-auto sm:mx-0">
                         <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Master your chord changes & inversions.</p>
                         <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Course runs June 5 to July 5.</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>  Choose your best option to get started.</p>
                     </div>
-                    <span class="join sold-out medium w-full align-middle" data-open="waitlistModal">JOIN WAITLIST</span>
+                    <h4 class="mt-2 mb-4 sm:my-4 lg:my-5"><strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong></h4>
+                    <span class="join sold-out medium w-full align-middle">SOLD OUT</span>
                 </div>
 
 {{--                <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">--}}
@@ -798,25 +804,6 @@
         </div>
     </section>
 
-    <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none" id="waitlistModal" style="max-width: 560px;" data-reveal data-reset-on-close="false">
-        <div class="p-5 sm:p-7">
-{{--            <img class="h-14 sm:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/new-piano-players-start-here-logo-2+1.png">--}}
-            <h3 class="leading-tight my-4"><strong>Join The Waitlist!</strong></h3>
-            <p class="mb-4">
-                Enter your email below to get notified when the next <br class="hidden sm:inline">
-                edition of Easy Chords is announced. </p>
-
-            @include("pianote._partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-                "formName" => 'Easy Chords Waitlist',
-                "formId" => "Pianote - Engagement - Trigger - Easy Chords Waitlist - Web Form",
-                "buttonText" => "Let Me Know ",
-                "stacked" => true,
-                "noSocial" => true,
-            ])
-        </div>
-    </div>
-
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "dayOne",
         "video" => '//player.vimeo.com/video/823805392?h=bbd23aa655&autoplay=1',
@@ -869,10 +856,6 @@
                 $(this).parents().find('table').removeClass('private books online');
                 $(this).parents().find('table').addClass('private');
             });
-
-            @if(!empty($errors) && $errors->any())
-                $('#waitlistModal').foundation('open');
-            @endif
         })
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>

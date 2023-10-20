@@ -8,7 +8,7 @@
             @onClose="handleNotificationClear"
         />
 
-                <ConfirmationModal v-if="confirmation.title" :brand="brand" modalId="confirmation-modal"
+        <ConfirmationModal v-if="confirmation.title"  modalId="confirmation-modal"
             @onClose="handleCloseConfirmationModal" :title="confirmation.title" :subtitle="confirmation.subtitle"
             :submitLabel="confirmation.submitLabel" :hideCancel="confirmation.hideCancel"
             @onCancel="handleCloseConfirmationModal" @onSubmit="handleConfirmationSubmit" />

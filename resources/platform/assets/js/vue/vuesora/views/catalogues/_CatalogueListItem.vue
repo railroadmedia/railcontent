@@ -13,6 +13,7 @@
       dark:hover:tw-bg-[#002039]
     " :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : 'hover-bg-grey-7 hover-text-black']"
     :href="renderLink ? item.url : null">
+    
     <!-- LESSON NUMBERS -->
     <div v-if="showNumbers" class="
         tw-flex
@@ -58,7 +59,6 @@
         </div>
       </div>
     </div>
-
     <!-- AVATAR INSTEAD OF THUMBNAIL -->
     <div v-if="showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center avatar-col">
       <div class="thumb-wrap rounded" style="border-radius: 50%">
@@ -130,56 +130,77 @@
     </div>
 
     <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
-    <div v-for="(column_data, i) in mappedData.column_data" v-if="!is_search" :key="`${item.id}-mappedData-${i}`" class="
-        tw-hidden
-        xl:tw-flex
-        tw-uppercase
-        tw-items-center
-        tw-justify-center
-        basic-col
-        tw-text-center
-        tw-text-xs
-        font-compressed
-      " :data-test="column_data">
-      {{ column_data }}
-    </div>
+    <template v-if="!is_search">
+      <div v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`" class="
+          tw-hidden
+          xl:tw-flex
+          tw-uppercase
+          tw-items-center
+          tw-justify-center
+          basic-col
+          tw-text-center
+          tw-text-xs
+          font-compressed
+        " :data-test="column_data">
+        {{ column_data }}
+      </div>
+    </template>
 
     <!-- ONLY SHOW TYPE ON SEARCHES -->
-    <div v-if="mappedData.column_data && mappedData.column_data.length && is_search" class="
-        tw-hidden
-        sm:tw-flex
-        tw-flex-col
-        tw-uppercase
-        tw-justify-center
-        basic-col
-        tw-text-center
-        tw-text-xs
-      ">
-      {{ mappedData.column_data[0] }}
-    </div>
-    <div v-if="is_search" class="
-        tw-hidden
-        sm:tw-flex
-        tw-flex-col
-        tw-uppercase
-        tw-justify-center
-        basic-col
-        tw-text-center
-        tw-text-xs
-      ">
-      {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}
-    </div>
-    <div v-if="is_search" class="
-        flex tw-flex-col
-        uppercase
-        tw-justify-center
-        basic-col
-        text-center
-        tw-text-xs
-        hide-sm-down
-      ">
-      {{ releaseDate }}
-    </div>
+    <template v-if="is_search">
+      <div v-if="item.type === 'song'" class="
+          tw-hidden
+          sm:tw-flex
+          tw-flex-col
+          tw-uppercase
+          tw-justify-center
+          basic-col
+          tw-text-center
+          tw-text-xs
+        ">
+        {{ itemStyle }}
+      </div>
+      <div v-if="mappedData.column_data && mappedData.column_data.length" class="
+          tw-hidden
+          sm:tw-flex
+          tw-flex-col
+          tw-uppercase
+          tw-justify-center
+          basic-col
+          tw-text-center
+          tw-text-xs
+        ">
+          <template v-if="brand !== 'pianote'">
+            {{ mappedData.column_data[0] }}
+          </template>
+          <template v-if="brand === 'pianote'">
+            {{ mappedData.column_data[1] }}
+          </template>
+      </div>
+      <div v-if="item.type !== 'song'" class="
+          tw-hidden
+          sm:tw-flex
+          tw-flex-col
+          tw-uppercase
+          tw-justify-center
+          basic-col
+          tw-text-center
+          tw-text-xs
+        ">
+        {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}
+      </div>
+      <div class="
+          flex tw-flex-col
+          uppercase
+          tw-justify-center
+          basic-col
+          text-center
+          tw-text-xs
+          hide-sm-down
+        ">
+        {{ releaseDate }}
+      </div>
+    </template>
 
     <!-- ADD TO LIST OR RESET PROGRESS BUTTONS -->
     <div v-if="displayUserInteractions"
@@ -256,6 +277,11 @@ export default {
     mappedData() {
       return this.contentModel.list;
     },
+
+    itemStyle() {
+      const field = this.item.fields.find((field) => field.key === 'style');
+      return field.value;
+    },  
 
     class_object() {
       return {

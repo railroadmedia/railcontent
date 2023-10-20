@@ -58,7 +58,7 @@ export default {
                 <!-- Card Info -->
                 <div class="card-info tw-flex tw-flex-col tw-px-4 tw-justify-center">
                     <h2 class="dark:tw-text-white tw-text-[#00101D] tw-text-xl tw-font-bold">{{ mappedData.black_title }}</h2>
-                    <p class="tw-text-sm dark:tw-text-white tw-text-[#00101D] tw-mb-4 tw-mt-3">{{ mappedData.description }}</p>
+                    <div class="tw-text-sm dark:tw-text-white tw-text-[#00101D] tw-mb-4 tw-mt-3" v-html="mappedData.description"></div>
 
                     <div class="tw-flex tw-flex-col md:tw-flex-row tw-flex-wrap">
                         <button

@@ -90,14 +90,6 @@ img {
     display: inline-block;
 }
 
-.bg-songs {
-    background-color: $songsPink;
-}
-
-.bg-coaches {
-    background-color: $coachesOrange;
-}
-
 .text-songs {
     color: $songsPink;
 }
@@ -143,19 +135,17 @@ img {
     }
 
     &.smaller {
-        padding: 8px 30px;
+        padding: 15px 30px;
         font-size: 16px;
         @include tablet {
             font-size: 18px;
-            padding: 11px 30px;
         }
 
         &.outline {
-            padding: 7px 28px;
+            padding: 12px 28px;
             font-size: 16px;
             @include tablet {
                 font-size: 18px;
-                padding: 9px 28px;
             }
         }
     }
@@ -473,17 +463,6 @@ img {
         }
     }
 
-
-    .gradient-bg {
-        height: 495px;
-        @include tablet {
-            height: 750px;
-        }
-        @include desktop {
-            height: 935px;
-        }
-    }
-
     @keyframes songsAnimation {
         0% {
             transform: translate3d(-27%, 0, 0);
@@ -588,59 +567,6 @@ img {
             }
             @include desktop {
                 width: $songLgHeight;
-            }
-        }
-    }
-
-    .half-tile-bg {
-        background-size: 500px;
-        @include tablet {
-            background-size: 520px;
-        }
-        @include xl {
-            background-size: 730px;
-        }
-    }
-
-    .big-tile-bg {
-        background-size: 550px;
-        @include tablet {
-            background-size: 1020px;
-        }
-        @include desktop {
-            background-size: 1400px;
-        }
-    }
-
-    .feature-rotater {
-        .pic-wrap {
-            min-height: 382px;
-            width: 220px;
-            @include tablet {
-                min-height: 461px;
-                width: 280px;
-            }
-            @include desktop {
-                min-height: 639px;
-                width: 400px;
-            }
-        }
-
-        .side-pic.active {
-            @include tablet {
-                display: block;
-            }
-        }
-
-        .text-icon-wrap {
-            color: #fff;
-            @include tablet {
-                color: inherit;
-            }
-
-            &.active {
-                color: #fff;
-                opacity: 1 !important;
             }
         }
     }
@@ -1009,7 +935,7 @@ img {
             text-rendering: auto;
             opacity: 1;
             line-height: 1;
-            font-family: "Font Awesome 5 Pro";
+            font-family: "Font Awesome 6 Pro";
             font-weight: 300;
             color: $drumeoBlue;
             font-size: 36px;
@@ -1137,7 +1063,7 @@ img {
     &:after {
         -moz-osx-font-smoothing: grayscale;
         -webkit-font-smoothing: antialiased;
-        font-family: "Font Awesome 5 Pro";
+        font-family: "Font Awesome 6 Pro";
         font-weight: 900;
         font-style: normal;
         font-variant: normal;

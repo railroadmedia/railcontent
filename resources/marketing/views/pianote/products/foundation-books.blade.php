@@ -29,7 +29,7 @@
         }
 
         .modal-bg:after {
-            font-family:"Font Awesome 5 Pro";
+            font-family:"Font Awesome 6 Pro";
             font-weight:900;
             font-style:normal;
             font-variant:normal;

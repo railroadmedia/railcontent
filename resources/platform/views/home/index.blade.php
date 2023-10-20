@@ -10,7 +10,7 @@
 
 @section('content')
     <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white">
-        @if(!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience)
+        @if(!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience || !$hasGoals)
             {{-- On Boarding TriggerBanner --}}
             <trigger-banner brand="{{ $brand }}">
             </trigger-banner>
@@ -90,30 +90,6 @@
 {{--                ])--}}
 {{--            @endcomponent--}}
 {{--        @endif--}}
-
-        {{-- From Subscribed Coaches --}}
-        @if($hasfollowedLessons)
-            @component('partials.bladesora.members.components.home._followed-section', [
-                'brand' => brand(),
-                'subscribedLessons' => '/'.$brand.'/lessons/subscribed', // todo: need url
-                'contentEndpoint' => '/railcontent/content',
-                'followedLessons' => $followedLessons,
-                'hasfollowedLessons' => $hasfollowedLessons,
-                ])
-            @endcomponent
-        @endif
-
-        {{-- Subscribed Coaches --}}
-        @if($hasSubscribedCoaches)
-            @component('partials.bladesora.members.components.home._coaches-section', [
-                'brand' => brand(),
-                'hasSubscribedCoaches' => $hasSubscribedCoaches,
-                'subscribedCoaches' => $subscribedCoaches,
-                'subscribedCoachesUrl' => route('platform.coaches', ['only_subscribed'=>'true']).'#coach-section',
-                'allCoachesUrl' => route('platform.coaches'),
-                ])
-            @endcomponent
-        @endif
 
         {{-- My Playlists --}}
         @component('partials.bladesora.members.components.home._list-section', [

@@ -1,4 +1,7 @@
-@extends('musora._partials.layout')
+@extends('musora._partials.layout', [
+    'whiteNav' => true,
+    'fullSubscriptionVersion' => true,
+])
 
 @section('head-includes')
     <title>6 Reasons Online Music Lessons Will Help Your Learn Faster | Musora</title>
@@ -108,300 +111,473 @@
 @section('layout-scripts')
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 @endsection
-
-<!-- Main -->
 @section('layout-body')
-    <section class="text-center relative overflow-hidden py-10 md:py-14 lg:py-16 px-6 sm:px-7">
-        <div class="container mx-auto max-w-4xl">
-            <h2 class="leading-tight"><strong>6 Reasons Online Music Lessons<br class="hidden sm:inline"> Will Help Your Learn Faster</strong></h2>
-
-            <div class="flex flex-wrap items-center justify-center mt-3 sm:mt-5 mx-auto">
-                <a aria-label="Review" class="inline-block sm:hidden" href="https://www.shopperapproved.com/reviews/Musora.com">
-                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                    <p class="inline-block leading-tight align-middle pl-1 m-0 font-bold"><u><em>{{ number_format(round(Prices::$reviews, -2)) }}+ Reviews</em></u></p>
-                </a>
-                <a aria-label="Review" class="hidden sm:inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
-                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                    <p class="inline-block leading-tight align-middle pl-1 m-0 font-bold"><u><em>{{ number_format(round(Prices::$reviews, -2)) }}+ Reviews</em></u></p>
-                </a>
-            </div>
-            <picture>
-                <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1800,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/header.png">
-                <img
-                    class="w-full my-6 lg:my-10 transition-opacity opacity-0"
-                    src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/header-m.png"
-                    alt="header image"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                >
-            </picture>
-            <p class="text-left mb-12 lg:mb-20">You <strong>can</strong> play music like you’ve always wanted – piano, guitar, drums, or singing – learning from scratch at any age, expressing yourself creatively, and playing the songs you love.
-<br><br>
-                Online music lessons have grown in popularity <strong>because they work</strong>– combining TECHNOLOGY and TRADITION with step-by-step video lessons, helpful practice tools, and all of your favorite songs.
+    @if(!empty($version) && $version === 'drums'))
+        @include('musora.pages._6-reasons', [
+            "title" => '6 Reasons Why You’ll Learn To Play<br class="hidden sm:inline"> The Drums Faster With Musora.',
+            "header" => 'https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/header-collage-drumeo.png',
+            "subHeader" => 'Imagine finally playing the drums like you’ve always wanted, expressing yourself creatively, and mastering those crazy solos that made you fall in love with music&nbsp; - all without having to spend $100s or having to go through hours of pointless practice.
+    <br><br>
+    Online drum lessons have soared in popularity for a good reason: <strong>they work.</strong>
+    <br><br>
+    By marrying TECHNOLOGY and TRADITION, Musora gives you step-by-step video lessons, handy practice tools, and a library of your favorite songs.
+    <br><br>
+    Starting your journey has never been easier. You’ll get everything you need in one single place, accessible anytime, anywhere. Plus, learning from the world’s best drum teachers and finding support within our vibrant communities WILL keep you playing longer.
+                        <br><br>
+                        <strong>Here are six reasons you’ll love online music lessons…</strong>',
+            "points" => [
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/drumeo-01.png",
+                "title" => "1. Learn & play on your schedule.",
+                "description" => "<strong>Life is busy.</strong> Juggling work, personal commitments, and hobbies can be challenging. And <strong>traditional private drum lessons only add to this pressure</strong>, forcing you to fit into someone else’s schedule.
+    <br><br>
+    That's where Musora steps in.
+    <br><br>
+    Our on-demand step-by-step video lessons, practice tools, and song library <strong>adjust to your routine, not the other way around.</strong>&nbsp;
+    <br><br>
+    Forget about the stress of rushing home or squeezing in appointments. With Musora, you can learn, practice, and play the drums at your own pace, in the comfort of your home or on-the-go.&nbsp;
+    <br><br>
+    <strong>Music should serve you. </strong>And having drum lessons that work around your life will keep you motivated and playing for longer!",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/drumeo-02.png",
+                "title" => "2. Drumming is happiness… backed by science!",
+                "description" => "In today's stress-filled world, finding time to care for your mental health is vital.
+    <br><br>
+    Playing the drums is one of the most powerful and enjoyable ways to do just that.
+    <br><br>
+    According to The Independent, playing the drums not only strengthens mental performance, memory, and coordination, but it also has a profoundly positive impact on mental health. <strong><em>“It can reduce feelings of depression</em></strong><em>, tension, and fatigue </em><strong><em>while</em></strong><em> </em><strong><em>boosting happiness,</em></strong><em> vigor, and excitement.”</em>
+    <br><br>
+    With Musora's online drum lessons, you can turn any space into your personal mental health retreat. And because our lessons fit your schedule, you can tap into the therapeutic benefits of drumming whenever it best suits you, letting you keep a balanced, harmonious life.",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/drumeo-03.png",
+                "title" => "3. The world’s best teachers.",
+                "description" => "We've all been there – you sign up for a private drum lesson, and the teacher is just… not good.
+    <br><br>
+    Maybe they're impatient, maybe they want you to focus on theory first, or they're just not a good fit for your learning style. And even if you do strike gold and find a great teacher, you're still seeing the world of drumming through just one set of eyes.
+    <br><br>
+    At Musora, <strong>we’ve handpicked some of the best drum players in the world…</strong> just for you. Learn from rock stars, <strong>touring professionals</strong>, published authors, <strong>Grammy Award winners</strong>, and industry icons.
+    <br><br>
+    Whether you're starting from scratch or looking to dive deep into a specific technique or genre, <strong>you'll be in the best hands</strong>. Learning from people that eat, sleep, and breathe drumming, day in and day out.",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/drumeo-04.png",
+                "title" => "4. Thousands of songs with note-for-note breakdowns.",
+                "description" => "The whole point of learning the drums is to actually PLAY the songs you love.
+    <br><br>
+    With Musora, you’ll get <strong>1000s of popular songs with note-for-note breakdowns</strong> and interactive practice tools like tempo control, section loops, a built-in metronome, drumless tracks and more… accessible on any device, or printable, so you can play your favorite songs anytime!
+    <br><br>
+    Sheet music can cost you hundreds of dollars per year on top of your lessons – or most online services are filled with errors, making your playing experience a frustrating one. The Musora song library only includes fully-licensed transcriptions PLUS they’re carefully reviewed by our team of professional transcribers.&nbsp;
+    <br><br>
+    Whether you love pop, rock, heavy metal or jazz… you can save some money and start playing when you join today!",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/drumeo-05.png",
+                "title" => "5. Drum lessons that don’t break the bank.",
+                "description" => "Let's do some quick math. Typical private drum lessons will cost about $30 each – and if you're going once a week, that adds up to $1560 each year (or $130 per month). Ouch.
+    <br><br>
+    A full year of Musora is only $240 – <strong>just $4.62/week, or $20/month.</strong>
+    <br><br>
+    You'll be saving $1320 per year compared to private lessons.
+    <br><br>
+    But it's not just about the cost. You'll also get unlimited access to our drum lessons – no caps, no limits.&nbsp;
+    <br><br>
+    Why? Because we don’t believe in restricting your learning. We want you to completely fall in love with playing the drums. It's not about stuffing you with more content than you can handle, it's about making sure you get the lessons you need, whenever you want them. All that for less than a weekly cup of fancy coffee!",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/drumeo-06.png",
+                "title" => "6. Unlimited love & support.",
+                "description" => "When you sign up for Musora, you're not just getting drum lessons.
+    <br><br>
+    You're also joining <strong>THOUSANDS</strong> of drum lovers all over the globe, PLUS you get a dedicated in-house team of teachers and mentors at your service.
+    <br><br>
+    This isn't just a platform – it's a community. And we’re all about people – real people who share your passion for drumming. Here, there's no question too small, no problem too big. Our live events and student reviews are designed to keep your learning on track and your motivation high.
+    <br><br>
+    With Musora, you're not just learning to hit drums with sticks – you're getting a support system that'll be with you every step of the way as you chase your goals, get to know your instrument, and ultimately, live a life filled with the joy of music. It's time to hit the right note with your drum journey.",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/guarantee.png",
+                "title" => "90-Day Learn To Play Guarantee",
+                "description" => "As educators, it’s up to us to make sure you learn. Your time is valuable enough, so we really don’t want to waste your money.
                 <br><br>
-                It’s easier to get started. You’ll have everything you need in one place, accessible anytime and affordable. And you’ll <strong>keep playing longer</strong> with the world’s best teachers and communities to support your goals.
+                So when you join Musora you’ll get a <strong>7-day free trial</strong> to make sure you love it <strong>PLUS a 90-day guarantee</strong> to give you enough time to see results. If you don’t love your music lessons experience, you’ll get your money back. No questions asked… except, maybe: how could we do better?
                 <br><br>
-                <strong>Here are six reasons you’ll love online music lessons…</strong>
-            </p>
-
-            <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
-                <picture class="w-full sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/01-happiness.jpg">
-                    <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/01-happiness.jpg"
-                    >
-                </picture>
-                <div class="sm:pl-9 flex-shrink">
-                    <h4 class="leading-tight mb-2"><strong>1. Happiness… backed by science!</strong></h4>
-                    <p>Studies show that learning and playing an instrument are some of the healthiest activities you can perform for your brain – <strong>boosting happiness</strong>, intelligence, and overall well-being.
+                <strong>You’ll only pay if you actually LOVE your music lessons experience.</strong>",
+                ],
+            ]
+        ])
+    @elseif(!empty($version) && $version === 'piano'))
+        @include('musora.pages._6-reasons', [
+            "title" => '6 Reasons Why You’ll Learn To Play<br class="hidden sm:inline"> The Piano Faster With Musora.',
+            "header" => 'https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/header-collage-pianote.png',
+            "subHeader" => 'Imagine playing the piano like you’ve always wanted, expressing yourself creatively, and mastering the songs you love - all without having to spend $100s or having to go through hours of pointless practice.
+    <br><br>
+    Online piano lessons have soared in popularity for a good reason: <strong>they work.</strong>
+    <br><br>
+    By marrying TECHNOLOGY and TRADITION, Musora gives you step-by-step video lessons, handy practice tools, and a library of your favorite songs.
+    <br><br>
+    Starting your journey has never been easier. You’ll get everything you need in one single place, accessible anytime, anywhere. Plus, learning from the world’s best piano teachers and finding support within our vibrant communities WILL keep you playing longer.
                         <br><br>
-                        The Independent says learning a musical instrument “has such a <strong>profound influence on mood</strong> that it can increase vigor, excitement and happiness, while <strong>reducing depression</strong>, tension, fatigue, anger, and confusion” – also adding that playing an instrument helps improve mental performance, memory, motor skills, and coordination.
+                        <strong>Here are six reasons you’ll love online music lessons…</strong>',
+            "points" => [
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/pianote-01.png",
+                "title" => "1. Learn & play on your schedule.",
+                "description" => "<strong>Life is busy.</strong> Juggling work, personal commitments, and hobbies can be challenging. And <strong>traditional private piano lessons only add to this pressure</strong>, forcing you to fit into someone else’s schedule.
+    <br><br>
+    That's where Musora steps in.
+    <br><br>
+    Our on-demand step-by-step video lessons, practice tools, and song library <strong>adjust to your routine, not the other way around.</strong>&nbsp;
+    <br><br>
+    Forget about the stress of rushing home or squeezing in appointments. With Musora, you can learn, practice, and play the piano at your own pace, in the comfort of your home or on-the-go.&nbsp;
+    <br><br>
+    <strong>Music should serve you. </strong>And having piano lessons that work around your life will keep you motivated and playing for longer!",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/pianote-02.png",
+                "title" => "2. Piano is happiness… backed by science!",
+                "description" => "In today's stress-filled world, finding time to care for your mental health is vital.
+    <br><br>
+    Playing the piano is one of the most powerful and enjoyable ways to do just that.
+    <br><br>
+    According to The Independent, playing piano not only strengthens mental performance, memory, and coordination, but it also has a profoundly positive impact on mental health. <strong><em>“It can reduce feelings of depression</em></strong><em>, tension, and fatigue </em><strong><em>while</em></strong><em> </em><strong><em>boosting happiness,</em></strong><em> vigor, and excitement.”</em>
+    <br><br>
+    With Musora's online piano lessons, you can turn any space into your personal mental health retreat. And because our lessons fit your schedule, you can tap into the therapeutic benefits of playing the piano whenever it best suits you, letting you keep a balanced, harmonious life.",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/pianote-03.png",
+                "title" => "3. The world’s best teachers.",
+                "description" => "We've all been there – you sign up for a private piano lesson, and the teacher is just… not good.
+    <br><br>
+    Maybe they're impatient, maybe they're boring, or they're just not a good fit for your learning style. And even if you do strike gold and find a great teacher, you're still seeing the world of piano through just one set of eyes.
+    <br><br>
+    At Musora, <strong>we’ve handpicked some of the best piano players in the world…</strong> just for you. Learn from pop stars and rock stars, <strong>touring professionals</strong>, published authors, <strong>Grammy Award winners</strong>, and industry icons.
+    <br><br>
+    Whether you're starting from scratch or looking to dive deep into a specific technique or genre, <strong>you'll be in the best hands</strong>. Learning from people that eat, sleep, and breathe piano, day in and day out.",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/pianote-04.png",
+                "title" => "4. Thousands of songs with note-for-note breakdowns.",
+                "description" => "The whole point of learning the piano is to actually PLAY the music you love.
+    <br><br>
+    With Musora, you’ll get <strong>1000s of popular songs with note-for-note breakdowns</strong> and interactive practice tools like tempo control, section loops, a built-in metronome, and more… accessible on any device, or printable, so you can play your favorite songs anytime!
+    <br><br>
+    Sheet music can cost you hundreds of dollars per year on top of your lessons – or most online services are filled with errors, making your playing experience a frustrating one. The Musora song library only includes fully-licensed transcriptions PLUS they’re carefully reviewed by our team of professional transcribers.&nbsp;
+    <br><br>
+    Whether you love pop, gospel, worship or classical music… you can save some money and start playing when you join today!",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/pianote-05.png",
+                "title" => "5. Drum lessons that don’t break the bank.",
+                "description" => "Let's do some quick math. Typical private piano lessons will cost about $30 each – and if you're going once a week, that adds up to $1,560 each year (or $130 per month). Ouch.
+    <br><br>
+    A full year of Musora is only $240 – <strong>just $4.62/week, or $20/month.</strong>
+    <br><br>
+    You'll save $1,320 per year compared to private lessons.
+    <br><br>
+    But it's not just about the cost. You'll also get unlimited access to our piano lessons – no caps, no limits.&nbsp;
+    <br><br>
+    Why? Because we don’t believe in restricting your learning. We want you to completely fall in love with playing the piano. It's not about stuffing you with more content than you can handle, it's about making sure you get the lessons you need, whenever you want them. All that for less than a weekly cup of fancy coffee!",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/pianote-06.png",
+                "title" => "6. Unlimited love & support.",
+                "description" => "When you sign up for Musora, you're not just getting piano lessons.
+    <br><br>
+    You're also joining <strong>THOUSANDS</strong> of piano lovers all over the globe, PLUS you get a dedicated in-house team of piano teachers and mentors at your service.
+    <br><br>
+    This isn't just a platform – it's a community. And we’re all about people – real people who share your passion for the piano. Here, there's no question too small, no problem too big. Our live events and student reviews are designed to keep your learning on track and your motivation high.
+    <br><br>
+    With Musora, you're not just learning to push keys – you're getting a support system that'll be with you every step of the way as you chase your goals, get to know your instrument, and ultimately, live a life filled with the joy of music. It's time to hit the right note with your piano journey.",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/guarantee.png",
+                "title" => "90-Day Learn To Play Guarantee",
+                "description" => "As educators, it’s up to us to make sure you learn. Your time is valuable enough, so we really don’t want to waste your money.
+                <br><br>
+                So when you join Musora you’ll get a <strong>7-day free trial</strong> to make sure you love it <strong>PLUS a 90-day guarantee</strong> to give you enough time to see results. If you don’t love your music lessons experience, you’ll get your money back. No questions asked… except, maybe: how could we do better?
+                <br><br>
+                <strong>You’ll only pay if you actually LOVE your music lessons experience.</strong>",
+                ],
+            ]
+        ])
+    @elseif(!empty($version) && $version === 'guitar'))
+        @include('musora.pages._6-reasons', [
+            "title" => '6 Reasons Why You’ll Learn To Play<br class="hidden sm:inline"> The Guitar Faster With Musora.',
+            "header" => 'https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/header-collage-guitareo.png',
+            "subHeader" => 'Imagine playing the guitar like you’ve always wanted. Around a campfire with your friends, or on stage at your first show… expressing yourself creatively, and rocking to the songs you love
+    <br><br>
+    &nbsp;All without having to spend $100s or having to go through hours of pointless practice.
+    <br><br>
+    Online guitar lessons have soared in popularity for a good reason: <strong>they work.</strong>
+    <br><br>
+    By marrying TECHNOLOGY and TRADITION, Musora gives you step-by-step video lessons, handy practice tools, and a massive library of tabs for your favorite songs.
+    <br><br>
+    Starting your journey has never been easier. You’ll get everything you need in one single place, accessible anytime, anywhere. Plus, learning from the world’s best teachers and finding support within our vibrant communities WILL keep you playing longer.
                         <br><br>
-                    Online music lessons will help you experience these benefits faster & more often with a flexible schedule, anywhere and anytime it works for you!</p>
-                </div>
-            </div>
-            <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
-                <picture class="w-full sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/02-learn.jpg">
-                    <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/02-learn.jpg"
-                    >
-                </picture>
-                <div class="sm:pl-9 flex-shrink">
-                    <h4 class="leading-tight mb-2"><strong>2. Learn & play whenever you want.</strong></h4>
-                    <p>Traditional private lessons require appointments, sometimes travel, and make you fit your hobby into somebody else’s calendar – while paying more than $30 per 30 minutes.
+                        <strong>Here are six reasons you’ll love online music lessons…</strong>',
+            "points" => [
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/guitareo-01.png",
+                "title" => "1. Learn & play on your schedule.",
+                "description" => "<strong>Life is busy.</strong> Juggling work, personal commitments, and hobbies can be challenging. And <strong>traditional private guitar lessons only add to this pressure</strong>, forcing you to fit into someone else’s schedule.
+    <br><br>
+    That's where Musora steps in.
+    <br><br>
+    Our on-demand step-by-step video lessons, practice tools, and song tab library <strong>adjust to your routine, not the other way around.</strong>&nbsp;
+    <br><br>
+    Forget about the stress of rushing home or squeezing in appointments. With Musora, you can learn, practice, and play the guitar at your own pace, in the comfort of your home or on-the-go.&nbsp;
+    <br><br>
+    <strong>Music should serve you. </strong>And having guitar lessons that work around your life will keep you motivated and playing for longer!",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/guitareo-02.png",
+                "title" => "2. Music is happiness… backed by science!",
+                "description" => "In today's stress-filled world, finding time to care for your mental health is vital.
+    <br><br>
+    Playing the guitar is one of the most powerful and enjoyable ways to do just that.
+    <br><br>
+    According to The Independent, playing the guitar not only strengthens mental performance, memory, and coordination, but it also has a profoundly positive impact on mental health. <strong><em>“It can reduce feelings of depression</em></strong><em>, tension, and fatigue </em><strong><em>while</em></strong><em> </em><strong><em>boosting happiness,</em></strong><em> vigor, and excitement.”</em>
+    <br><br>
+    With Musora's online guitar lessons, you can turn any space into your personal mental health retreat. And, because our lessons fit your schedule, you can tap into the therapeutic benefits of playing the guitar whenever it best suits you, letting you keep a balanced, harmonious life.",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/guitareo-03.png",
+                "title" => "3. The world’s best teachers.",
+                "description" => "We've all been there – you sign up for a private guitar lesson, and the teacher is just… not good.
+    <br><br>
+    Maybe they're impatient, maybe they're boring, or they're just not a good fit for your learning style. And even if you do strike gold and find a great teacher, you're still seeing the world of guitar-playing through just one set of eyes.
+    <br><br>
+    At Musora, <strong>we’ve handpicked some of the best guitar players in the world…</strong> just for you. Learn from <strong>touring professionals</strong>, published authors, <strong>Grammy Award winners</strong>, and industry icons.
+    <br><br>
+    Whether you're starting from scratch or looking to dive deep into a specific technique or genre, <strong>you'll be in the best hands</strong>. Learning from people that eat, sleep, and breathe guitar, day in and day out.",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/guitareo-04.png",
+                "title" => "4. Thousands of songs with note-for-note breakdowns.",
+                "description" => "The whole point of learning the guitar is to actually PLAY the songs you love.
+    <br><br>
+    With Musora, you’ll get<strong> note-for-note breakdowns of over 1,000+ of your favorite songs</strong>. Plus,interactive practice tools like tempo control, section loops, a built-in metronome, and more… accessible on any device, or printable, so you can play your favorite songs anytime!
+    <br><br>
+    Sheet music can cost you hundreds of dollars per year on top of your lessons – or most online services are filled with errors, making your playing experience a frustrating one. The Musora song library only includes fully-licensed transcriptions PLUS they’re carefully reviewed by our team of professional transcribers.&nbsp;
+    <br><br>
+    Whether you love pop, rock, jazz or country… you can save money and start playing when you join today!",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/guitareo-05.png",
+                "title" => "5. Guitar lessons that don’t break the bank.",
+                "description" => "Let's do some quick math. Typical private guitar lessons will cost about $30 each – and if you're going once a week, that adds up to $1,560 each year (or $130 per month). Ouch.
+    <br><br>
+    A full year of Musora is only $240 – <strong>just $4.62/week, or $20/month.</strong>
+    <br><br>
+    You'll save $1,320 per year compared to private lessons.
+    <br><br>
+    But it's not just about the cost. You'll also get unlimited access to our guitar lessons – no caps, no limits.&nbsp;
+    <br><br>
+    Why? Because we don’t believe in restricting your learning. We want you to completely fall in love with playing the guitar. It's not about stuffing you with more content than you can handle, it's about making sure you get the lessons you need, whenever you want them. All that for less than a weekly cup of fancy coffee!",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/guitareo-06.png",
+                "title" => "6. Unlimited love & support.",
+                "description" => "When you sign up for Musora, you're not just getting guitar lessons.
+    <br><br>
+    You're also joining <strong>THOUSANDS</strong> of music lovers all over the globe, PLUS you get a dedicated in-house team of guitar teachers and mentors at your service.
+    <br><br>
+    This isn't just a platform – it's a community. And we’re all about people – real people who share your passion for music. Here, there's no question too small, no problem too big. Our live events and student reviews are designed to keep your learning on track and your motivation high.
+    <br><br>
+    With Musora, you're not just learning to strum some strings&nbsp; – you're getting a support system that'll be with you every step of the way as you achieve your goals, get to know your instrument, and ultimately, live a life filled with the joy of music. It's time to hit the right note with your guitar journey.",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/guarantee.png",
+                "title" => "90-Day Learn To Play Guarantee",
+                "description" => "As educators, it’s up to us to make sure you learn. Your time is valuable enough, so we really don’t want to waste your money.
+                <br><br>
+                So when you join Musora you’ll get a <strong>7-day free trial</strong> to make sure you love it <strong>PLUS a 90-day guarantee</strong> to give you enough time to see results. If you don’t love your music lessons experience, you’ll get your money back. No questions asked… except, maybe: how could we do better?
+                <br><br>
+                <strong>You’ll only pay if you actually LOVE your music lessons experience.</strong>",
+                ],
+            ]
+        ])
+    @elseif(!empty($version) && $version === 'singing'))
+        @include('musora.pages._6-reasons', [
+            "title" => '6 Reasons Why You’ll Learn To <br class="hidden sm:inline"> Sing Faster With Musora.',
+            "header" => 'https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/header-collage-singeo.png',
+            "subHeader" => 'Imagine being able to sing ANY song you want. Leading the choir rather than following it. Or even just singing a lullaby for your kids and actually sounding good&nbsp; - all without having to spend $100s or having to go through hours of pointless practice.
+    <br><br>
+    Online singing lessons have soared in popularity for a good reason: <strong>they work.</strong>
+    <br><br>
+    By marrying TECHNOLOGY and TRADITION, Musora gives you step-by-step video lessons, handy practice tools, unlimited personal feedback, and a library of your favorite songs.
+    <br><br>
+    Starting your journey has never been easier. You’ll get everything you need in one single place, accessible anytime, anywhere. Plus, learning from the world’s best vocal coaches and finding support within our vibrant communities WILL keep you singing longer..
+    <br><br>
+    <strong>Here are six reasons you’ll love Musora\'s online singing lessons…</strong>',
+            "points" => [
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/singeo-01.jpg",
+                "title" => "1. Learn & play on your schedule.",
+                "description" => "<strong>Life is busy.</strong> Juggling work, personal commitments, and hobbies can be challenging. And <strong>traditional private singing lessons only add to this pressure</strong>, forcing you to fit into someone else’s schedule.
+    <br><br>
+    That's where Musora steps in.
+    <br><br>
+    Our on-demand step-by-step video lessons, practice tools, and song library <strong>adjust to your routine, not the other way around.</strong>&nbsp;
+    <br><br>
+    Forget about the stress of rushing home or squeezing in appointments. With Musora, you can learn, practice, and sing at your own pace, in the comfort of your home or on-the-go.&nbsp;
+    <br><br>
+    <strong>Music should serve you. </strong>And having singing lessons that work around your life will keep you motivated and playing for longer!",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/singeo-02.jpg",
+                "title" => "2. Unlimited personal feedback.",
+                "description" => "Learning to sing online can feel extremely daunting. Constantly asking yourself <em>“Am I actually getting better?”</em>
+    <br><br>
+    With Musora’s singing lessons, you’ll get the <strong>unlimited personal feedback </strong>and support you need to get results faster.
+    <br><br>
+    Get <strong>on-demand</strong> access to mentors, reviews &amp; live lessons with real vocal coaches to overcome the challenges unique to you and your voice.
+    <br><br>
+    The days of watching hours of video lessons and going around in circles are over!",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/singeo-03.jpg",
+                "title" => "3. Singing is happiness… backed by science!",
+                "description" => "In today's stress-filled world, finding time to care for your mental health is vital.
+    <br><br>
+    Singing is one of the most powerful and enjoyable ways to do just that.
+    <br><br>
+    According to The Independent, singing not only strengthens mental performance, memory, and coordination, but it also has a profoundly positive impact on mental health. <strong><em>“It can reduce feelings of depression</em></strong><em>, tension, and fatigue </em><strong><em>while</em></strong><em> </em><strong><em>boosting happiness,</em></strong><em> vigor, and excitement.”</em>
+    <br><br>
+    With Musora's online singing lessons, you can turn even a short commute into your personal mental health retreat. And because our lessons fit your schedule, you can tap into the therapeutic benefits of singing whenever it best suits you, letting you keep a balanced, harmonious life.",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/singeo-04.jpg",
+                "title" => "4. The world’s best teachers.",
+                "description" => "We've all been there – you sign up for a private vocal lesson, and the teacher is just… not good.
+    <br><br>
+    Maybe they're impatient, maybe you can only find group lessons, or they're just not a good fit for your learning style. And even if you do strike gold and find a great teacher, you're still seeing the world of vocal training through just one set of eyes.
+    <br><br>
+    At Musora, <strong>we’ve handpicked some of the best vocal coaches…</strong> just for you. Learn from pop stars, <strong>touring professionals</strong>, published authors, <strong>Grammy Award winners</strong>, and industry icons.
+    <br><br>
+    Whether you're starting from scratch or looking to dive deep into a specific technique or genre, <strong>you'll be in the best hands</strong>. Learning from people that eat, sleep, and breathe singing, day in and day out.",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/singeo-05.jpg",
+                "title" => "5. Singing lessons that don’t break the bank.",
+                "description" => "Let's do some quick math. Typical private lessons will cost about $30 each – and if you're going once a week, that adds up to $1560 each year (or $130 per month). Ouch.
+    <br><br>
+    A full year of Musora is only $240 – <strong>just $4.62/week, or $20/month.</strong>
+    <br><br>
+    You'll be saving $1320 per year compared to private lessons.
+    <br><br>
+    But it's not just about the cost. You'll also get unlimited access to our singing lessons – no caps, no limits.&nbsp;
+    <br><br>
+    Why? Because we don’t believe in restricting your learning. We want you to completely fall in love with singing. It's not about stuffing you with more content than you can handle, it's about making sure you get the lessons you need, whenever you want them. All that for less than a weekly cup of fancy coffee!",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/singeo-06.jpg",
+                "title" => "6. Unlimited love & support.",
+                "description" => "When you sign up for Musora, you're not just getting vocal lessons.
+    <br><br>
+    You're also joining <strong>THOUSANDS</strong> of singers all over the globe, PLUS you get a dedicated in-house team of teachers and mentors at your service.
+    <br><br>
+    This isn't just a platform – it's a community. And we’re all about people – real people who share your passion for music. Here, there's no question too small, no problem too big. Our live events and student reviews are designed to keep your learning on track and your motivation high.
+    <br><br>
+    With Musora, you're not just learning to sound better at karaoke – you're getting a support system that'll be with you every step of the way as you chase your goals, get to know your voice, and ultimately, live a life filled with the joy of music. It's time to hit the right note with your singing journey.",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/guarantee.png",
+                "title" => "90-Day Learn To Play Guarantee",
+                "description" => "As educators, it’s up to us to make sure you learn. Your time is valuable enough, so we really don’t want to waste your money.
+                <br><br>
+                So when you join Musora you’ll get a <strong>7-day free trial</strong> to make sure you love it <strong>PLUS a 90-day guarantee</strong> to give you enough time to see results. If you don’t love your music lessons experience, you’ll get your money back. No questions asked… except, maybe: how could we do better?
+                <br><br>
+                <strong>You’ll only pay if you actually LOVE your music lessons experience.</strong>",
+                ],
+            ]
+        ])
+    @else
+        @include('musora.pages._6-reasons', [
+            "title" => '6 Reasons Online Music Lessons<br class="hidden sm:inline"> Will Help Your Learn Faster',
+            "header" => 'https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/header.png',
+            "subHeader" => 'You <strong>can</strong> play music like you’ve always wanted – piano, guitar, drums, or singing – learning from scratch at any age, expressing yourself creatively, and playing the songs you love
                         <br><br>
-                        You shouldn’t feel panicked trying to rush home, or stressed trying to afford it.
+                        Online music lessons have grown in popularity <strong>because they work</strong>– combining TECHNOLOGY and TRADITION with step-by-step video lessons, helpful practice tools, and all of your favorite songs.
                         <br><br>
-                        <strong>Music should serve you!</strong>
+                        It’s easier to get started. You’ll have everything you need in one place, accessible anytime and affordable. And you’ll <strong>keep playing longer</strong> with the world’s best teachers and communities to support your goals.
                         <br><br>
-                        Online music lessons give you 24/7 on-demand access to lessons, songs, and practice tools. Learn when you want to learn. Practice with engaging, interactive tools. Or play your favorite music with 1000+ popular songs with note-for-note transcriptions, just a click away.
-                        <br><br>
-                        You can start <strong>right now</strong> for free!</p>
-                </div>
-            </div>
-            <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
-                <picture class="w-full sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/03-teachers.jpg">
-                    <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/03-teachers.jpg"
-                    >
-                </picture>
-                <div class="sm:pl-9 flex-shrink">
-                    <h4 class="leading-tight mb-2"><strong>3. The world’s best teachers.</strong></h4>
-                    <p>When you take private lessons, you’re rolling a dice on quality. There are great teachers – and there are also boring, impatient, inexperienced, and disinterested ones. And even when you find the right teacher, you’re limited to one perspective.
-                        <br><br>
-                        Musora gives you access to the world’s best teachers for piano, guitar, drums, and singing.
-                        <br><br>
-                        Learn from <strong>renowned clinicians</strong>, pop stars and rock stars, <strong>touring professionals</strong>, published authors, <strong>Grammy Award winners</strong>, and industry icons. Learn the foundations with teachers who’ve designed curriculums just for beginners – or study a specific technique or genre with teachers who live it, every day.
-                        <br><br>
-                        You’ll expand your musician horizons, stay inspired by the world’s best, and always push your musical abilities to new heights.</p>
-                </div>
-            </div>
-            <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
-                <picture class="w-full sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/04-songs2.jpg">
-                    <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/04-songs2.jpg"
-                    >
-                </picture>
-                <div class="sm:pl-9 flex-shrink">
-                    <h4 class="leading-tight mb-2"><strong>4. Thousands of songs with note-for-note breakdowns.</strong></h4>
-                    <p>The point of learning music is to <strong>PLAY</strong> music.
-                        <br><br>
-                        That’s why Musora gives you <strong>1000s of popular songs with note-for-note breakdowns</strong> and interactive practice tools like tempo control, section loops, a built-in metronome, and more… accessible on any device, or printable, so you can play your favorite songs anytime!
-                        <br><br>
-                        Normally sheet music costs you hundreds of dollars per year in addition to your lessons – or most online services are filled with errors, making your playing experience a frustrating one. The Musora song library only includes fully-licensed transcriptions PLUS they’re carefully reviewed by our team of professional transcribers.
-                        <br><br>
-                        Save some money and play more of your favorite songs when you join today!</p>
-                </div>
-            </div>
-            <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
-                <picture class="w-full sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/05-save.jpg">
-                    <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/05-save.jpg"
-                    >
-                </picture>
-                <div class="sm:pl-9 flex-shrink">
-                    <h4 class="leading-tight mb-2"><strong>5. Save your hard-earned cash!</strong></h4>
-                    <p>Most private music lessons are $30/week – and most learners do a lesson every week, bringing the total to $1560 every year (or $130 per month). A full year of Musora is only $240 – or just $4.62/week, or $20/month.
-                        <br><br>
-                        So you’ll save $1320 per year compared to private lessons.
-                        <br><br>
-                        PLUS you’ll have <strong>unlimited lessons</strong> – including the ability to learn <strong>any instrument</strong> at no additional cost. (Because we just want YOU to fall in love with playing music. It’s not about how much content you have access to, it’s about you getting the lessons you want anytime you want them!)</p>
-                </div>
-            </div>
-            <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
-                <picture class="w-full sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/06-love.jpg">
-                    <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/06-love.jpg"
-                    >
-                </picture>
-                <div class="sm:pl-9 flex-shrink">
-                    <h4 class="leading-tight mb-2"><strong>6. Unlimited love & support.</strong></h4>
-                    <p>One last thing :)
-                        <br><br>
-                        When you join Musora, you’ll join a community of 80,000+ music students from around the world PLUS our in-house team of teachers and mentors to <strong>help you reach your goals</strong>.
-                        <br><br>
-                        You’ll join a community powered by humans – where you’ll have every question answered, access to live events and personal reviews, and have the support you need to learn your instrument, reach your goals, and live a happier & healthier life with MUSIC.</p>
-                </div>
-            </div>
-            <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
-                <picture class="w-36 sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/guarantee.png">
-                    <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/guarantee.png"
-                    >
-                </picture>
-                <div class="sm:pl-9 flex-shrink">
-                    <h4 class="leading-tight mb-2"><strong>90-Day Learn To Play Guarantee</strong></h4>
-                    <p>As educators, it’s up to us to make sure you learn. Your time is valuable enough, so we really don’t want to waste your money.
-                        <br><br>
-                        So when you join Musora you’ll get a <strong>7-day free trial</strong> to make sure you love it <strong>PLUS a 90-day guarantee</strong> to give you enough time to see results. If you don’t love your music lessons experience, you’ll get your money back. No questions asked… except, maybe: how could we do better?
-                        <br><br>
-                        <strong>You’ll only pay if you actually LOVE your music lessons experience.</strong></p>
-                </div>
-            </div>
-
-            <a class="join musora-gold mb-20 sm:mb-44 w-full" href="/choose-plan">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
-
-            <h2><strong>The Best Music<br class="sm:hidden"> Lessons Ever!</strong></h2>
-            <div class="flex flex-wrap my-5 sm:my-9">
-                @php
-                    $reviews = [
-                        [
-                        "title" => "The most positive student-focused place!",
-                        "description" => "I could not be more THRILLED with Musora!!! This is the most positive, helpful, caring, innovative, knowledgeable, student-focused place on the planet!!! It has been a Godsend for me! <br><br><strong>Kristyn T.</strong>",
-                        ],
-                        [
-                        "title" => "All the instruments for a great price. ",
-                        "description" => "I love the fact that I have access to many instruments for a great price. I'm learning to play the piano, which was a passion that I hadn't fulfilled in the past but now I'm so happy for it.<br><br><strong>Juan C.</strong>",
-                        ],
-                        [
-                        "title" => "My daughter danced to my playing!",
-                        "description" => "The lightbulb moment happened when my 6 year old daughter started dancing as I played – you must be doing something right if somebody dances when you’re playing, right?<br><br><strong>John M.</strong>",
-                        ],
-                        [
-                        "title" => "Helpful lessons and supportive community. ",
-                        "description" => "The materials are in helpful bite-size chunks, the support materials are excellent, the tutors are cheerful, and the online community is very supportive.<br><br><strong>Devon F.</strong> ",
-                        ],
-                        [
-                        "title" => "The best course I’ve ever taken",
-                        "description" => "There's really no comparative substitute to learning music. Any way you can learn, I say go for it, but this is the best course I have ever taken.<br><br><strong>Russ W.</strong>",
-                        ],
-                        [
-                        "title" => "Tremendous value. ",
-                        "description" => "The value you get with Musora is tremendous. Whether you want to learn to sing, play guitar, play drums, or piano, this site has you covered.<br><br><strong>Dennis R.</strong>",
-                        ],
-                        [
-                        "title" => "Awesome to learn from home!",
-                        "description" => "It’s just so awesome to know that I can learn from home and accomplish one of my dreams.<br><br><strong>Jayde M.</strong>",
-                        ],
-                        [
-                        "title" => "Wish I was taught this way earlier!",
-                        "description" => "If I had been taught this way as a child, I probably never would have quit<br><br><strong>Serena D.</strong>",
-                        ],
-                    ]
-                @endphp
-            <div class="hidden sm:flex flex-wrap items-start text-left justify-center">
-                @foreach($reviews as $review)
-                    <div class="w-full sm:w-1/3 lg:w-1/4 px-2 lg:px-1 mb-4 lg:mb-2 ">
-                        <div class="border-2 border-black rounded-xl px-5 py-9">
-                            <div class="text-center">
-                                <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                                <h6 class="leading-tight mt-5 mb-4"><strong>{!! $review['title'] !!}</strong></h6>
-                            </div>
-                            <div>
-                                <p class="leading-normal text-sm">{!! $review['description'] !!}</p>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-                <div class="relative flex sm:hidden w-full"
-                    x-data="{
-            init() {
-                new Splide(this.$refs.splide, {
-                            classes: {
-                                    arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
-                                    prev: 'hidden',
-                                    next: 'hidden',
-                                    pagination: 'hidden',
-                            },
-                            perPage: 1.5,
-                            drag   : 'free',
-                            snap   : false,
-                            perMove: 1,
-                            type: 'loop',
-                            focus: 0,
-                            interval: 2000,
-                }).mount()
-            },
-        }"
-                >
-                    <div x-ref="splide" class="w-full splide">
-                        <div class="splide__track relative">
-                            <ul class="splide__list">
-                                @foreach($reviews as $review)
-                                    <li class="splide__slide flex flex-col items-center justify-center">
-                                        <div class="flex flex-wrap items-start w-full sm:w-1/3 px-2 lg:px-3 mb-4 lg:mb-6 text-left">
-                                            <div class="border-2 border-black rounded-xl px-5 py-9">
-                                                <div class="text-center">
-                                                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                                                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                                                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                                                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                                                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                                                    <h6 class="leading-tight mt-5 mb-4"><strong>{!! $review['title'] !!}</strong></h6>
-                                                </div>
-                                                <div>
-                                                    <p class="leading-normal text-sm">{!! $review['description'] !!}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <a aria-label="Review" class="hidden sm:inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
-                <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                <br>
-                <p class="inline-block leading-tight align-middle pl-1 m-0 font-bold"><u><em>See {{ number_format(round(Prices::$reviews, -2)) }}+ More Student Reviews</em></u></p>
-            </a>
-            <a aria-label="Review" class="inline-block sm:hidden" href="https://www.shopperapproved.com/reviews/Musora.com">
-                <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                <br>
-                <p class="inline-block leading-tight align-middle pl-1 m-0 font-bold"><u><em>See {{ number_format(round(Prices::$reviews, -2)) }}+ More Student Reviews</em></u></p>
-            </a>
-            <br>
-            <a class="join musora-gold mt-12 w-full" href="/choose-plan">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
-        </div>
-    </section>
-@stop
+                        <strong>Here are six reasons you’ll love online music lessons…</strong>',
+            "points" => [
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/01-happiness.jpg",
+                "title" => "1. Happiness… backed by science!",
+                "description" => "Studies show that learning and playing an instrument are some of the healthiest activities you can perform for your brain – <strong>boosting happiness</strong>, intelligence, and overall well-being.
+                <br><br>
+                The Independent says learning a musical instrument “has such a <strong>profound influence on mood</strong> that it can increase vigor, excitement and happiness, while <strong>reducing depression</strong>, tension, fatigue, anger, and confusion” – also adding that playing an instrument helps improve mental performance, memory, motor skills, and coordination.
+                <br><br>
+                Online music lessons will help you experience these benefits faster &amp; more often with a flexible schedule, anywhere and anytime it works for you!",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/02-learn.jpg",
+                "title" => "2. Learn & play whenever you want.",
+                "description" => "Traditional private lessons require appointments, sometimes travel, and make you fit your hobby into somebody else’s calendar – while paying more than $30 per 30 minutes.
+                <br><br>
+                You shouldn’t feel panicked trying to rush home, or stressed trying to afford it.
+                <br><br>
+                <strong>Music should serve you!</strong>
+                <br><br>
+                Online music lessons give you 24/7 on-demand access to lessons, songs, and practice tools. Learn when you want to learn. Practice with engaging, interactive tools. Or play your favorite music with 1000+ popular songs with note-for-note transcriptions, just a click away.
+                <br><br>
+                You can start <strong>right now</strong> for free!",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/03-teachers.jpg",
+                "title" => "3. The world’s best teachers.",
+                "description" => "When you take private lessons, you’re rolling a dice on quality. There are great teachers – and there are also boring, impatient, inexperienced, and disinterested ones. And even when you find the right teacher, you’re limited to one perspective.
+                <br><br>
+                Musora gives you access to the world’s best teachers for piano, guitar, drums, and singing.
+                <br><br>
+                Learn from <strong>renowned clinicians</strong>, pop stars and rock stars, <strong>touring professionals</strong>, published authors, <strong>Grammy Award winners</strong>, and industry icons. Learn the foundations with teachers who’ve designed curriculums just for beginners – or study a specific technique or genre with teachers who live it, every day.
+                <br><br>
+                You’ll expand your musician horizons, stay inspired by the world’s best, and always push your musical abilities to new heights.",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/04-songs2.jpg",
+                "title" => "4. Thousands of songs with note-for-note breakdowns.",
+                "description" => "The point of learning music is to <strong>PLAY</strong> music.
+                <br><br>
+                That’s why Musora gives you <strong>1000s of popular songs with note-for-note breakdowns</strong> and interactive practice tools like tempo control, section loops, a built-in metronome, and more… accessible on any device, or printable, so you can play your favorite songs anytime!
+                <br><br>
+                Normally sheet music costs you hundreds of dollars per year in addition to your lessons – or most online services are filled with errors, making your playing experience a frustrating one. The Musora song library only includes fully-licensed transcriptions PLUS they’re carefully reviewed by our team of professional transcribers.
+                <br><br>
+                Save some money and play more of your favorite songs when you join today!",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/05-save.jpg",
+                "title" => "5. Save your hard-earned cash!",
+                "description" => "Most private music lessons are $30/week – and most learners do a lesson every week, bringing the total to $1560 every year (or $130 per month). A full year of Musora is only $240 – or just $4.62/week, or $20/month.
+                <br><br>
+                So you’ll save $1320 per year compared to private lessons.
+                <br><br>
+                PLUS you’ll have <strong>unlimited lessons</strong> – including the ability to learn <strong>any instrument</strong> at no additional cost. (Because we just want YOU to fall in love with playing music. It’s not about how much content you have access to, it’s about you getting the lessons you want anytime you want them!)",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/06-love.jpg",
+                "title" => "6. Unlimited love & support.",
+                "description" => "One last thing 🙂
+                <br><br>
+                When you join Musora, you’ll join a community of 80,000+ music students from around the world PLUS our in-house team of teachers and mentors to <strong>help you reach your goals</strong>.
+                <br><br>
+                You’ll join a community powered by humans – where you’ll have every question answered, access to live events and personal reviews, and have the support you need to learn your instrument, reach your goals, and live a happier & healthier life with MUSIC.",
+                ],
+                [
+                "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/guarantee.png",
+                "title" => "90-Day Learn To Play Guarantee",
+                "description" => "As educators, it’s up to us to make sure you learn. Your time is valuable enough, so we really don’t want to waste your money.
+                <br><br>
+                So when you join Musora you’ll get a <strong>7-day free trial</strong> to make sure you love it <strong>PLUS a 90-day guarantee</strong> to give you enough time to see results. If you don’t love your music lessons experience, you’ll get your money back. No questions asked… except, maybe: how could we do better?
+                <br><br>
+                <strong>You’ll only pay if you actually LOVE your music lessons experience.</strong>",
+                ],
+            ]
+        ])
+    @endif
+@endsection

@@ -373,7 +373,7 @@
             text-rendering: auto;
             opacity: 1;
             line-height: 1;
-            font-family: "Font Awesome 5 Pro";
+            font-family: "Font Awesome 6 Pro";
             font-weight: 300;
             color: #BB3744;
             font-size: 30px;

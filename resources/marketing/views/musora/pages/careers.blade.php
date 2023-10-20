@@ -155,8 +155,9 @@
             <div id="join" class="anchor block relative invisible"></div>
             <h3 class="mb-5 sm:mb-10"><strong>Join our team:</strong></h3>
             <div class="max-w-4xl mx-auto mb-14 sm:mb-20">
-                <div class="w-full relative" style="height:700px;">
+                <div class="w-full relative" style="height:500px;">
                     <iframe style="filter: invert(1) hue-rotate(30deg) saturate(1.5);" class="absolute w-full h-full rounded-lg" src="https://musoramediainc.bamboohr.com/careers/" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>
+{{--                    <iframe class="absolute w-full h-full rounded-lg" src="/careers-pinpoint" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>--}}
                 </div>
             </div>
 
@@ -190,9 +191,14 @@
             <div class="max-w-2xl mx-auto relative">
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
                     <h6 class="m-0 px-5 py-2.5 border-2 border-musora before:m-[-1px] relative bg-white rounded-full">1</h6>
-                    <p class="pl-4 sm:pl-7 mt-4 m-0 text-gray-500">
-                        Once you apply for a role, you will be automatically notified that we received your application.
-                    </p>
+                    <div class="pl-4 sm:pl-7 mt-4">
+                        <p class="mx-0 mb-2 text-gray-500">
+                            Once you apply for a role, you will be automatically notified that we received your application.
+                        </p>
+                        <ul class="list-disc list-outside pl-10 text-gray-500">
+                            <li>Don't forget to check your spam folder to make sure you're receiving our emails!</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
                     <h6 class="m-0 px-5 py-2.5 border-2 border-musora before:m-[-1px] relative bg-white rounded-full">2</h6>
@@ -203,7 +209,7 @@
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
                     <h6 class="m-0 px-5 py-2.5 border-2 border-musora before:m-[-1px] relative bg-white rounded-full">3</h6>
                     <div class="pl-4 sm:pl-7 mt-4">
-                        <p class="m-0 text-gray-500">
+                        <p class="mx-0 mb-2 text-gray-500">
                             If you are selected, our Talent Acquisition Team will set up a 30-minute phone or video interview. Here are a few things we might ask:
                         </p>
                         <ul class="list-disc list-outside pl-10 text-gray-500">
