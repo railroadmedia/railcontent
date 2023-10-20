@@ -279,6 +279,21 @@ class SalesController extends BaseController
         return view('drumeo.lead-gen.pages.30-day-chops-deal', ['products' => $products, 'theme' => 'drumeo']);
     }
 
+    public function thirtyDayChallenges()
+    {
+        $productId = 741;
+        /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
+        $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
+        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userProductService->getNumberProductOwners($productId);
+
+        return view('drumeo.products.30-day-challenges', [
+            'recaptchaKey' => config('recaptcha.key'),
+            'nPackOwners' => $nPackOwners,
+            'theme' => 'drumeo',
+            'hasProduct' => $hasProduct
+        ]);
+    }
 
 
     /**
