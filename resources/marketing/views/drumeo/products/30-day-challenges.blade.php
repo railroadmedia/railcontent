@@ -297,28 +297,34 @@
 <section style="background: #00101D;">
     <div class="text-center text-white text-2xl md:text-5xl font-extrabold font-['Open Sans'] leading-10 pt-12 md:pt-20">Just Press Play</div>
     <div class="text-center text-white text-base md:text-xl font-normal font-['Open Sans'] leading-loose">Get an overview of what 30-Day Drummer has to offer!</div>
-    <div class="container max-w-5xl mx-auto lg:flex">
+    
+<div class="container max-w-7xl mx-auto p-4 md:p-6 lg:flex">
         <!-- Left Column -->
-        <div class="lg:w-2/3 p-4">
+        <div class="lg:w-4/6 py-2 md:p-4">
             <!-- Video -->
                 <div class="w-full">
                     <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/shop/30-day-challenges/drum-challenges.jpeg" />
                 </div>
 
-                <div class="mt-4 py-4 text-white font-sans text-15 font-normal font-light leading-35 hidden md:block">
+                <div class="mt-4 md:py-4 text-white font-sans text-15 font-normal font-light leading-35 hidden md:block">
                     <p>Welcome to 30-Day Drummer! At this point, you should have all the equipment you need to get started, know how to set up your gear, and be ready to have some fun playing the drums with Domino. In this first lesson and 10-minute workout, she will teach you the beginnings of the most popular drum beat of all time. And you will have fun doing it!</p>
-                    <p>Instructor: <strong>Domino Santantonio</strong></p>
-                    <p>Lesson Length: <strong>30 video lessons</strong></p>
+                    <p class="pt-10">Instructor: <strong>Domino Santantonio</strong></p>
+                    <p class="pt-2">Lesson Length: <strong>30 video lessons</strong></p>
                 </div>
         </div>
 
         <!-- Right Column -->
-        <div class="lg:w-1/3 p-4">
-            <div class="w-96 h-14 flex flex-row rounded-lg my-2 py-2" style="background: #eff7ff;">
-                <p class="text-base font-normal font-light leading-7">Course Kick-Off</p>
+        <div class="lg:w-2/6 py-2 md:p-4">
+            <div class="h-14 flex flex-row rounded-lg mb-2 px-6 py-4" style="background: #eff7ff;">                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7363 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM10 16.5V7.5L16 12L10 16.5Z" fill="#0B76DB"/>
+                    </svg>
+                <div class="text-base font-normal font-light leading-7 px-2"> Course Kick-Off</div>
             </div>
-            <div class="w-96 h-14 flex flex-row rounded-lg my-2 py-2" style="background: #eff7ff;">
-                <p class="text-base font-normal font-light leading-7">Course Kick-Off</p>
+            <div class="h-14 flex flex-row rounded-lg my-2 px-6 py-4" style="background: #eff7ff;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7363 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM10 16.5V7.5L16 12L10 16.5Z" fill="#0B76DB"/>
+                </svg>
+                <div class="text-base font-normal font-light leading-7 px-2">Setup</div>
             </div>
             <p class="text-white font-sans text-15 font-semibold leading-35">Course Lessons</p>
             @php
@@ -336,10 +342,10 @@
             ];
             @endphp
             <!-- Container with scroll  -->
-            <div x-data="{ isOpen: [] }" class="h-96 overflow-y-scroll rounded-lg">
+            <div x-data="{ isOpen: [] }" class="h-80 overflow-y-scroll rounded-lg">
                 @foreach ($lessons as $i => $lesson)
-                    <div x-data="{ open: false }" class="rounded-md bg-white shadow text-base font-normal font-light leading-7">
-                        <button @click="open = !open" class="rounded-md flex w-full items-center justify-between px-6 py-4 my-1" style="background: #eff7ff;">
+                    <div x-data="{ open: false }" class="rounded-lg bg-white shadow text-base font-normal font-light leading-7">
+                        <button @click="open = !open" class="rounded-lg flex w-full items-center justify-between px-6 py-4 my-1" style="background: #eff7ff;">
                             <span>Day {{ $i + 1 }}</span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none" x-show="open">
                                 <path d="M10.59 0.59L6 5.17L1.41 0.590001L-5.24537e-07 2L6 8L12 2L10.59 0.59Z" fill="#0B76DB" />
@@ -359,12 +365,97 @@
         </div>
     </div>
     <!-- Paragraphs for mobile -->
-        <div class="mt-4 py-4 text-white font-sans text-15 font-normal font-light leading-35 md:hidden">
-        <p>Welcome to 30-Day Drummer! At this point, you should have all the equipment you need to get started, know how to set up your gear, and be ready to have some fun playing the drums with Domino. In this first lesson and 10-minute workout, she will teach you the beginnings of the most popular drum beat of all time. And you will have fun doing it!</p>
-        <p>Instructor: <strong>Domino Santantonio</strong></p>
-        <p>Lesson Length: <strong>30 video lessons</strong></p>
+        <div class="mt-4 p-4 text-white font-sans text-15 font-normal font-light leading-35 md:hidden">
+       <p>Welcome to 30-Day Drummer! At this point, you should have all the equipment you need to get started, know how to set up your gear, and be ready to have some fun playing the drums with Domino. In this first lesson and 10-minute workout, she will teach you the beginnings of the most popular drum beat of all time. And you will have fun doing it!</p>
+        <p class="pt-10">Instructor: <strong>Domino Santantonio</strong></p>
+        <p class="pt-2">Lesson Length: <strong>30 video lessons</strong></p>
     </div>
+ <!-- Songs subsection -->
+    @php
+        $songItems = [
+            [
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/5000-songs-icon.svg',
+                'title' => '5000+ popular songs.',
+                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
+            ],
+            [
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/tempo-icon.svg',
+                'title' => 'Find the perfect tempo.',
+                'desc' => 'Slow down or speed up any section of a song to hear every note.',
+            ],
+            [
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/loop-icon.svg',
+                'title' => 'Loop the trouble spots.',
+                'desc' => 'No more pausing and rewinding that tricky fill. Loop it over and over again!',
+            ],
+            [
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/no-drums-icon.svg',
+                'title' => 'Remove the drums.',
+                'desc' => 'Magically remove the original drums to make each song uniquely yours.',
+            ],
+            [
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/play-it-right-icon.svg',
+                'title' => 'Play it right the first time.',
+                'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
+            ],
+            [
+                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/devices-icon.svg',
+                'title' => 'Take your songs anywhere.',
+                'desc' => 'Accessible on any device, or printable,so you can play any song, any time.',
+            ],
+
+        ];
+    @endphp
+
+<div
+    x-data="{ openItem: null }"
+    class="text-center text-white w-full sm:w-auto mt-6 lg:mt-0 mx-auto mb-5 px-4 md:px-6"
+>
+    <div class="flex flex-wrap">
+        @foreach ($songItems as $i => $songItem)
+            <div
+                class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6"
+                x-bind:class="{ 'bg-gradient-mobile': openItem === {{ $i }} }"
+            >
+                <div
+                    @click="openItem = (openItem === {{ $i }} ? null : {{ $i }})"
+                    class="flex sm:inline-block cursor-pointer"
+                >
+                    <div class="w-14 text-left sm:w-full flex-shrink-0">
+                        <img alt="point icon" src={{ $songItem['icon'] }} class="h-6 sm:h-10">
+                    </div>
+                    <div class="text-left">
+                        <p class="mb-1 sm:my-2">
+                            <strong>{!! $songItem['title'] !!}</strong>
+                        </p>
+                        <div
+                            x-show="openItem === {{ $i }}"
+                            x-cloak
+                            class="text-sm sm:hidden" 
+                        >
+                            {!! $songItem['desc'] !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 </section>
+
+
+
+
 
     <section class="py-10 sm:py-14 lg:py-20 bg-[#0B76DB]">
         <h3 class="mb-4 text-center text-white"><strong>17,000+ Drummers Agree...</strong></h3>
