@@ -263,28 +263,29 @@
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
 
         {{-- Play Alongs Catalogue for Drumeo --}}
-        @if( $catalogueMeta['name'] === "Play Alongs" && $brand === "drumeo" )
+{{--        @if( $catalogueMeta['name'] === "Play Alongs" && $brand === "drumeo" )--}}
 
-            <play-alongs
-                ref="playAlongsVueInstance"
-                content-endpoint="/railcontent/content"
-                theme-color="{{ $brand }}"
-                brand="{{ $brand }}"
-                :pre-loaded-content="{{ $listLessons }}"
-                :session-token="{{ json_encode(railtracker_session_token()) }}"
-                @play="handlePlayAlongsPlay"
-                @pause="handlePlayAlongsPause"
-            ></play-alongs>
+{{--            <play-alongs--}}
+{{--                ref="playAlongsVueInstance"--}}
+{{--                content-endpoint="/railcontent/content"--}}
+{{--                theme-color="{{ $brand }}"--}}
+{{--                brand="{{ $brand }}"--}}
+{{--                :pre-loaded-content="{{ $listLessons }}"--}}
+{{--                :session-token="{{ json_encode(railtracker_session_token()) }}"--}}
+{{--                @play="handlePlayAlongsPlay"--}}
+{{--                @pause="handlePlayAlongsPause"--}}
+{{--            ></play-alongs>--}}
 
-        @else
+{{--        @else--}}
             <collection-wrapper
                 :brand="{{ json_encode($brand) }}"
-                :pre-loaded-content="{{ $listLessons }}"
                 :collection-type="{{ json_encode($lessonType) }}"
                 :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
-                :included-types="{{ json_encode(['course']) }}"
-                :statuses="{{ json_encode($statuses ?? ['published']) }}"
                 :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"
+                :included-types="{{ json_encode(['course']) }}"
+                :pre-loaded-content="{{ $listLessons }}"
+                :statuses="{{ json_encode($statuses ?? ['published']) }}"
+                :test-type="{{ json_encode(is_array($lessonType) ? $lessonType : explode(',', $lessonType) ) }}"
             />
 
 {{--            <transition appear name="fade">--}}
@@ -304,7 +305,7 @@
 {{--                    :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"--}}
 {{--                    :use-url-params="true"--}}
 {{--                    :lock-unowned="true"--}}
-{{--                    :show-loading-animation="true"--}}
+{{--                    :show-loadi ng-animation="true"--}}
 {{--                    no-results-message="There are no {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }} that match those filters. Please remove some filters."--}}
 {{--                    @if($lessonType === 'routine')--}}
 {{--                        catalogue-type="routines"--}}
@@ -339,7 +340,7 @@
 {{--                </content-catalogue>--}}
 {{--            </transition>--}}
 
-        @endif
+{{--        @endif--}}
     </div>
 
 @endsection

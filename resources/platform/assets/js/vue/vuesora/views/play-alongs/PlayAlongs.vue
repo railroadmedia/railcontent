@@ -1,64 +1,64 @@
 <template>
     <div class="flex flex-column grow play-alongs">
-        <div v-if="showFilters" class="flex flex-row mt-2 tw-flex-wrap">
-            <div class="flex flex-column align-v-center">
-                <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-mb-3 ">
-                    {{ totalResults }} Play Alongs
-                </h1>
-            </div>
+<!--        <div v-if="showFilters" class="flex flex-row mt-2 tw-flex-wrap">-->
+<!--            <div class="flex flex-column align-v-center">-->
+<!--                <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-mb-3 ">-->
+<!--                    {{ totalResults }} Play Alongs-->
+<!--                </h1>-->
+<!--            </div>-->
 
-            <!-- Play Along Actions -->
-            <div class="tw-flex tw-flex-wrap tw-w-full md:tw-w-auto">
-                <div class="flex flex-row mr-1 tw-mb-3 tw-w-full md:tw-w-auto">
-                    <InputLabel
-                        inputOverride="mr-1 tw-w-full dark:placeholder:tw-text-white tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"
-                        :brand="brand" inputType="text" id="playAlongsSearchInput" inputName="search"
-                        placeholder="Search..." :inputErrors="[]" :removeDefaultInputStyles="true"
-                        @onChange="handleTitleChange" @onEnter="handleTriggerSearch" :disabled="displayFilters" 
-                    />
-                    <div class="flex flex-column tw-h-[50px]">
-                        <button
-                            :class="`tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0 tw-btn-primary tw-bg-${brand}`"
-                            title="Search Play Along by Term" @click="handleTriggerSearch">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="flex flex-column enable-filters mr-1 tw-h-[50px]">
-                    <button class="tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0"
-                        :class="isShuffle ? `tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]` : `tw-btn-secondary dark:tw-text-white ${brandTextColor}`"
-                        title="Toggle Shuffle" @click="toggleShuffle">
-                        <i class="fas fa-random"></i>
-                    </button>
-                </div>
-                <div class="flex flex-column enable-filters tw-h-[50px]">
-                    <button class="tw-btn-circle tw-mr-1 tw-mb-0 tw-h-[50px]"
-                            :class="displayFilters ? `tw-w-[50px] tw-h-[50px] tw-btn-primary tw-text-white dark:tw-bg-white dark:tw-text-[#000C17] tw-mb-0 tw-bg-${brand} hover:tw-bg-${brand}-600` : `tw-btn-secondary dark:tw-text-white tw-mb-0 ${brandTextColor}`"
-                            title="Toggle Filters" 
-                            @click="displayFilters = !displayFilters"
-                    >
-                        <i class="fas fa-filter"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+<!--            &lt;!&ndash; Play Along Actions &ndash;&gt;-->
+<!--            <div class="tw-flex tw-flex-wrap tw-w-full md:tw-w-auto">-->
+<!--                <div class="flex flex-row mr-1 tw-mb-3 tw-w-full md:tw-w-auto">-->
+<!--                    <InputLabel-->
+<!--                        inputOverride="mr-1 tw-w-full dark:placeholder:tw-text-white tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"-->
+<!--                        :brand="brand" inputType="text" id="playAlongsSearchInput" inputName="search"-->
+<!--                        placeholder="Search..." :inputErrors="[]" :removeDefaultInputStyles="true"-->
+<!--                        @onChange="handleTitleChange" @onEnter="handleTriggerSearch" :disabled="displayFilters"-->
+<!--                    />-->
+<!--                    <div class="flex flex-column tw-h-[50px]">-->
+<!--                        <button-->
+<!--                            :class="`tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0 tw-btn-primary tw-bg-${brand}`"-->
+<!--                            title="Search Play Along by Term" @click="handleTriggerSearch">-->
+<!--                            <i class="fas fa-search"></i>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="flex flex-column enable-filters mr-1 tw-h-[50px]">-->
+<!--                    <button class="tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0"-->
+<!--                        :class="isShuffle ? `tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]` : `tw-btn-secondary dark:tw-text-white ${brandTextColor}`"-->
+<!--                        title="Toggle Shuffle" @click="toggleShuffle">-->
+<!--                        <i class="fas fa-random"></i>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--                <div class="flex flex-column enable-filters tw-h-[50px]">-->
+<!--                    <button class="tw-btn-circle tw-mr-1 tw-mb-0 tw-h-[50px]"-->
+<!--                            :class="displayFilters ? `tw-w-[50px] tw-h-[50px] tw-btn-primary tw-text-white dark:tw-bg-white dark:tw-text-[#000C17] tw-mb-0 tw-bg-${brand} hover:tw-bg-${brand}-600` : `tw-btn-secondary dark:tw-text-white tw-mb-0 ${brandTextColor}`"-->
+<!--                            title="Toggle Filters"-->
+<!--                            @click="displayFilters = !displayFilters"-->
+<!--                    >-->
+<!--                        <i class="fas fa-filter"></i>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <transition name="show-from-top">
-            <play-alongs-filters v-if="showFilters" v-show="displayFilters" :theme-color="themeColor"
-                :filter-options="filterOptions" :selected-filters="selectedFilters" :loading="loading" :limit="limit"
-                :sort="sort" :brand="brand" :show-completed-only="showCompletedOnly"
-                :show-favorites-only="showFavoritesOnly" :is-shuffle="isShuffle" @filterChange="handleFilterChange"
-                @toggleFavorites="toggleFavorites" @toggleCompleted="toggleCompleted"
-                @handleContentLimit="handleContentLimit" @handleContentSort="handleContentSort"></play-alongs-filters>
-        </transition>
+<!--        <transition name="show-from-top">-->
+<!--            <play-alongs-filters v-if="showFilters" v-show="displayFilters" :theme-color="themeColor"-->
+<!--                :filter-options="filterOptions" :selected-filters="selectedFilters" :loading="loading" :limit="limit"-->
+<!--                :sort="sort" :brand="brand" :show-completed-only="showCompletedOnly"-->
+<!--                :show-favorites-only="showFavoritesOnly" :is-shuffle="isShuffle" @filterChange="handleFilterChange"-->
+<!--                @toggleFavorites="toggleFavorites" @toggleCompleted="toggleCompleted"-->
+<!--                @handleContentLimit="handleContentLimit" @handleContentSort="handleContentSort"></play-alongs-filters>-->
+<!--        </transition>-->
 
-        <div v-if="showPagination" class="flex flex-row pagination-row align-h-right">
-            <pagination :current-page="Number(page)" :total-pages="totalPages" @pageChange="handlePageChange">
-            </pagination>
-        </div>
+<!--        <div v-if="showPagination" class="flex flex-row pagination-row align-h-right">-->
+<!--            <pagination :current-page="Number(page)" :total-pages="totalPages" @pageChange="handlePageChange">-->
+<!--            </pagination>-->
+<!--        </div>-->
 
         <div class="tw-flex tw-flex-col tw-grow">
-            <play-alongs-list-item v-for="(item, i) in content" :ref="`list${item.id}`" :key="`list${item.id}`"
+            <play-alongs-list-item v-for="(item, i) in preLoadedContent" :ref="`list${item.id}`" :key="`list${item.id}`"
                 :index="i + 1" :item="item" :brand="brand"
                 :active="activeItem != null ? item.id === activeItem.id : false" :display-user-interactions="false"
                 :no-link="true" :theme-color="themeColor" :show-user-actions="showUserActions"
@@ -66,7 +66,7 @@
                 @click.native="updateTrack(item)" />
         </div>
 
-        <div v-if="content.length === 0" class="flex flex-row pa-2">
+        <div v-if="preLoadedContent.length === 0" class="flex flex-row pa-2">
             <div class="flex flex-column">
                 <p class="body mb-2">
                     We're sorry, no results were found using those filters.
@@ -81,10 +81,10 @@
             </div>
         </div>
 
-        <div v-if="showPagination" class="flex flex-row pagination-row align-h-right">
-            <pagination :current-page="Number(page)" :total-pages="totalPages" @pageChange="handlePageChange">
-            </pagination>
-        </div>
+<!--        <div v-if="showPagination" class="flex flex-row pagination-row align-h-right">-->
+<!--            <pagination :current-page="Number(page)" :total-pages="totalPages" @pageChange="handlePageChange">-->
+<!--            </pagination>-->
+<!--        </div>-->
 
         <transition name="show-from-bottom">
             <div v-show="loading" class="loading corners pa-2" @click.stop.prevent>
@@ -147,7 +147,7 @@ export default {
         },
 
         noSidebar: {
-            type: Boolean, 
+            type: Boolean,
             default: () => false,
         },
 
@@ -195,19 +195,22 @@ export default {
             type: Boolean,
             default: () => true,
         },
+        totalResults: {
+            type: Number,
+            default: () => 0,
+        },
     },
     data() {
         return {
             searchTerm: null,
-            content: this.preLoadedContent.data,
+            content: this.preLoadedContent,
             loading: false,
             currentPlaybackRate: 1,
             currentVolume: 1,
             page: 1,
             limit: 20,
             sort: '-published_on',
-            totalResults: this.preLoadedContent.meta.totalResults,
-            filterOptions: this.getFilterOptions(this.preLoadedContent.meta.filterOptions),
+            // filterOptions: this.getFilterOptions(this.preLoadedContent.meta.filterOptions),
             isKeyboardControlsEnabled: false,
             selectedFilters: {
                 bpm: null,

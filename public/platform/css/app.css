@@ -21700,6 +21700,10 @@ a:visited{
   margin-left: 45px !important;
   margin-right: 45px !important;
 }
+.-tw-mx-\[10px\]{
+  margin-left: -10px !important;
+  margin-right: -10px !important;
+}
 .tw-mx-7{
   margin-left: 1.75rem !important;
   margin-right: 1.75rem !important;
