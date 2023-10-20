@@ -341,14 +341,6 @@ class SyncCustomersToShopifyBaseCommand extends Command
     /**
      * @inheritDoc
      */
-    protected function getIsUsingMask(): bool
-    {
-        return $this->option("no-email-mask") == false;
-    }
-
-    /**
-     * @inheritDoc
-     */
     protected function getCustomerRepository(): CustomerRepository
     {
         return $this->customerRepository;

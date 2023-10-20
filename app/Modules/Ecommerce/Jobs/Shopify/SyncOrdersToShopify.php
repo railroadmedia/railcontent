@@ -1413,14 +1413,6 @@ class SyncOrdersToShopify implements ShouldQueue
     /**
      * @inheritDoc
      */
-    protected function getIsUsingMask(): bool
-    {
-        return !app()->isProduction();
-    }
-
-    /**
-     * @inheritDoc
-     */
     protected function getSyncResource(): string
     {
         return ShopifySync::RESOURCE_ORDER;

@@ -990,14 +990,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     /**
      * @inheritDoc
      */
-    protected function getIsUsingMask(): bool
-    {
-        return !app()->isProduction();
-    }
-
-    /**
-     * @inheritDoc
-     */
     protected function getLastSyncAtOverride(): null|Carbon
     {
         return $this->lastSyncAt;

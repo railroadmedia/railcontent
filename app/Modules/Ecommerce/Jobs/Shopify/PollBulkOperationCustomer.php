@@ -36,7 +36,12 @@ use Signifly\Shopify\Shopify;
  */
 class PollBulkOperationCustomer implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, PollsShopifyBulkOperation, LogsShopify;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use LogsShopify;
+    use PollsShopifyBulkOperation;
+    use Queueable;
+    use SerializesModels;
 
     // 14 minutes
     protected const TIMEOUT = 840;
@@ -59,7 +64,6 @@ class PollBulkOperationCustomer implements ShouldQueue
                             $this->shopifySync,
                             $this->sourceFileName,
                             $this->resourceType,
-                            $this->useMaskedEmail,
                             $this->secondsPassed+self::DELAY
                         );
                     return;
@@ -93,9 +97,9 @@ class PollBulkOperationCustomer implements ShouldQueue
 
             // and dispatch another job to parse the results and update our users or customers
             if ($this->resourceType === User::class) {
-                ParseBulkOperationResultsForUsers::dispatchSync($this->sourceFileName, $resultsFileName, $this->useMaskedEmail, $this->shopifySync);
+                ParseBulkOperationResultsForUsers::dispatchSync($this->sourceFileName, $resultsFileName, $this->shopifySync);
             } else {
-                ParseBulkOperationResultsForCustomers::dispatchSync($this->sourceFileName, $resultsFileName, $this->useMaskedEmail, $this->shopifySync);
+                ParseBulkOperationResultsForCustomers::dispatchSync($this->sourceFileName, $resultsFileName, $this->shopifySync);
             }
 
         } catch (Exception $e) {

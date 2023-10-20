@@ -16,7 +16,6 @@ class SyncBulkCustomersToShopify extends Command
      */
     protected $signature = 'shopify:sync-customers-bulk
                             {--limit= : (Optional) The number of customers to limit this run to. Not recommended for production environment. }
-                            {--no-email-mask : Do not mask customer Email addresses. Without this flag, email addresses will be masked in Shopify. }
                             {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
 
     /**
@@ -34,15 +33,6 @@ class SyncBulkCustomersToShopify extends Command
     protected function getIsExecuting(): bool
     {
         return $this->option("execute") == true;
-    }
-
-    /**
-     * Is this sync using masked email addresses?
-     * @return bool
-     */
-    protected function getIsUsingMaskedEmails(): bool
-    {
-        return $this->option("no-email-mask") == false;
     }
 
     /**
@@ -72,9 +62,10 @@ class SyncBulkCustomersToShopify extends Command
         // the kickoff jobs for users and customers create more jobs in sequence, and we want all users to be completed
         // before the customers start, so we will dispatch only the kickoff for customers, and the users should have
         // first been run separately
-        KickOffBulkCustomerCreateFromCustomers::dispatchSync($this->getIsExecuting(), $this->getIsUsingMaskedEmails(), $this->getLimit());
+        KickOffBulkCustomerCreateFromCustomers::dispatchSync($this->getIsExecuting(), $this->getLimit());
 
         $this->info("Jobs dispatched. Please check the logs for results of the SyncBulkCustomersToShopify jobs.");
+        $this->info("Check the logs for 'SyncBulkCustomersToShopify: Batch ID' to retrieve the batch id in case you need to cancel it.");
 
         return self::SUCCESS;
     }
