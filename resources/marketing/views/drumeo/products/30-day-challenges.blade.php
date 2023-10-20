@@ -366,16 +366,6 @@
     </div>
 </section>
 
-
-
-
-
-
-
-
-
-
-
     <section class="py-10 sm:py-14 lg:py-20 bg-[#0B76DB]">
         <h3 class="mb-4 text-center text-white"><strong>17,000+ Drummers Agree...</strong></h3>
         <p class="text-white mb-2 md:mb-3 px-4 lg:px-0 text-center">30-Day Drummer works. By focusing on playing with real music right from day one, you’ll learn the <br class="hidden lg:inline">skills to play hundreds of songs on the drums in just thirty days. Check out what students are saying:</p>
