@@ -72,10 +72,6 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
-    testType: {
-        type: Array,
-        default: () => [],
-    },
 });
 
 const collectionStore = useCollectionStore();
