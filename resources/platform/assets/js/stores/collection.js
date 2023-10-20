@@ -17,6 +17,7 @@ export const useCollectionStore = defineStore({
             loading: false,
             tabData: {},
             totalPages: 0,
+            totalResults: 0,
         }
     },
     actions:{
@@ -75,6 +76,7 @@ export const useCollectionStore = defineStore({
                     );
                 } else {
                     this.data = [...this.data, ...response.data.data];
+                    this.totalResults = response.data.meta.totalResults;
                 }
             }
 
@@ -89,16 +91,20 @@ export const useCollectionStore = defineStore({
               this.brand = defaults.brand;
           }
 
-          if(defaults.totalPages){
-              this.totalPages = defaults.totalPages;
-          }
-
           if(defaults.filter){
               this.filter = {...this.filter, ...defaults.filter};
           }
 
           if(defaults.tabData){
               this.tabData = {...defaults.tabData};
+          }
+
+          if(defaults.totalPages){
+            this.totalPages = defaults.totalPages;
+          }
+
+          if(defaults.totalResults){
+            this.totalResults = defaults.totalResults;
           }
         },
         setParams(){
