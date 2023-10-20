@@ -2,22 +2,24 @@
 <script setup>
 //Icons
 import { computed, onBeforeMount, inject } from 'vue';
+import { storeToRefs } from 'pinia'
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
 import { textColor, borderColor } from '../../../constants/brands.js';
 import PlaylistService from '../../../services/playlists.js';
 import { usePlaylistsStore } from '../../../stores/playlists';
+import { useUserStore } from '../../../stores/user';
 
 const props = defineProps({
     isSidebarCollapsed: Boolean,
-    brand: String,
     isActivePath: Boolean,
-    userId: String,
 });
 
 //Inject
 const token = inject('csrf_token');
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
+const userStore = useUserStore();
+const { brand } = storeToRefs(userStore)
 
 // Format Playlist to add Url and filter it on mount
 const formattedPinnedPlaylists = computed(() => {
@@ -27,7 +29,7 @@ const formattedPinnedPlaylists = computed(() => {
                 return ({
                     ...playlist,
                     id,
-                    url: `/${props.brand}/playlist/${id}`
+                    url: `/${brand}/playlist/${id}`
                 })
             } else {
                 return null;
@@ -46,7 +48,7 @@ const formattedUnpinnedPlaylists = computed(() => {
                 return ({
                     ...playlist,
                     id,
-                    url: `/${props.brand}/playlist/${id}`
+                    url: `/${brand}/playlist/${id}`
                 })
             } else {
                 return null;
@@ -56,7 +58,7 @@ const formattedUnpinnedPlaylists = computed(() => {
 });
 
 const handleCreatePlaylist = () => {
-    window.openplaylistmodal({ modalType: 'create', brand: props.brand, data: { name: '', category: 'General', thumbnail_url: null, description: ''} });
+    window.openplaylistmodal({ modalType: 'create', brand: brand, data: { name: '', category: 'General', thumbnail_url: null, description: ''} });
 };
 
 const unpinPlaylist = (item, brand) => {
