@@ -176,7 +176,9 @@ const getTabOptions = computed(() => {
             { key: 'allPlayAlongs', value: 'All Play-Alongs' },
         ];
     }
-    return []
+    return [
+        { key: 'lessons', value: 'Lessons' },
+    ]
 });
 
 
@@ -187,7 +189,6 @@ const tabOptionData = computed(() => {
 const getFirstTabOption = computed(() => {
     return tabOptionData.value[0]
 })
-
 
 const tabData = computed(() => {
     const tabDataMap = {};
