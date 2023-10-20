@@ -1,21 +1,34 @@
 <template>
   <div>
       <CollectionFilterWrapper
-            :filterable-values="filterableValues"
-            :tab-options="tabOptionData"
-            :pre-loaded-content="preLoadedContent"
+        v-if="showFilter"
+        :filterable-values="filterableValues"
+        :tab-options="tabOptionData"
+        :pre-loaded-content="preLoadedContent"
       />
 
       <transition appear name="fade">
           <CollectionResults>
               <CoachesGridCatalogue
-                    v-if="isCoach"
-                    :content="collectionStore.data"
-                    :brand="collectionStore.brand"
+                v-if="isCoach"
+                :content="collectionStore.data"
+                :brand="collectionStore.brand"
               />
               <ListCatalogue
-                    v-else-if="isList"
-                    :content="collectionStore.data"
+                v-else-if="isList"
+                :content="collectionStore.data"
+                @addToList="UserCatalogueEvents.methods.addToListEventHandler"
+              />
+              <RoutinesCatalogue
+                v-else-if="isRoutine"
+                :content="collectionStore.data"
+                @addToList="UserCatalogueEvents.methods.addToListEventHandler"
+              />
+              <PlayAlongs
+                v-else-if="isPlayAlong"
+                :pre-loaded-content="collectionStore.data"
+                ref="playAlongsVueInstance"
+                :total-results="collectionStore.totalResults"
               />
           </CollectionResults>
       </transition>
@@ -29,6 +42,9 @@
   import CollectionFilterWrapper from '../Filter/CollectionFilterWrapper.vue';
   import CollectionResults from '../Catalogue/CollectionResults.vue';
   import ListCatalogue from "../../vuesora/views/catalogues/ListCatalogue";
+  import UserCatalogueEvents from "../../vuesora/mixins/UserCatalogueEvents";
+  import RoutinesCatalogue from "../../vuesora/views/catalogues/RoutinesCatalogue";
+  import PlayAlongs from "../../vuesora/views/play-alongs/PlayAlongs";
 
   const props = defineProps({
       brand: {
@@ -47,10 +63,6 @@
           default: () => false,
       },
       includedFields: {
-          type: Array,
-          default: () => [],
-      },
-      includedTypes: {
           type: Array,
           default: () => [],
       },
@@ -78,7 +90,15 @@
           type: Array,
           default: () => [],
       },
+      testType: {
+          type: Array,
+          default: () => [],
+      },
   });
+
+  const activeTab = computed(() => {
+      return props.tabOptions.length > 0 ? props.tabOptions[0].key : getTabOptions.value[0].key;
+  })
 
   const collectionStore = useCollectionStore();
 
@@ -87,27 +107,65 @@
           required_fields: props.requiredFields,
           statuses: props.statuses,
           required_user_states: props.requiredUserStates,
-          included_types: props.includedTypes,
+          included_types: includedTypes.value,
           include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
           included_fields: props.included_fields || [],
           limit: props.limit,
       };
   })
 
+  const includedTypes = computed(() => {
+    let types = [props.collectionType];
+
+    if (isQuickTips.value) {
+        types.push('boot-camps');
+    }
+
+    return types;
+  })
+
+  const isList = computed(() => {
+      return isCourse.value || isQuickTips.value || isStudentFocus.value || isQAndA.value || isRudiment.value;
+  })
+
   const isCoach = computed(() => {
       return props.collectionType === 'coach';
   })
 
-  const isCourse = computed(()=> {
+  const isCourse = computed(() => {
       return props.collectionType === 'course';
   })
 
-  const isList = computed(()=> {
-      return isCourse.value;
+  const isStudentFocus = computed(() => {
+      return props.collectionType === 'student-focus';
+  })
+
+  const isPlayAlong = computed(() => {
+      return props.collectionType === 'play-along';
+  })
+
+  const isQAndA = computed(() => {
+      return props.collectionType === 'question-and-answer';
+  })
+
+  const isQuickTips = computed(() => {
+      return props.collectionType === 'quick-tips';
+  })
+
+  const isRoutine = computed(() => {
+      return props.collectionType === 'routine';
+  })
+
+  const isRudiment = computed(() => {
+      return props.collectionType === 'rudiment';
+  })
+
+  const showFilter = computed(() => {
+      return !isRoutine.value;
   })
 
   const getTabOptions = computed(() => {
-    if(isCourse.value){
+    if (isCourse.value){
         return [
             {
                 key: 'courses',
@@ -122,10 +180,69 @@
                 value: 'Genres',
             },
         ];
+    } else if (isQuickTips.value || isStudentFocus.value){
+        return [
+            {
+                key: 'lessons',
+                value: 'Lessons',
+            },
+            {
+                key: 'instructors',
+                value: 'Instructors',
+            },
+            {
+                key: 'genres',
+                value: 'Genres',
+            },
+        ];
+    } else if (isQAndA.value){
+        return [
+            {
+                key: 'allLessons',
+                value: 'All Lessons',
+            },
+        ];
+    } else if (isRoutine.value) {
+        return [
+            {
+                key: 'routines',
+                value: 'Routines',
+            },
+        ];
+    } else if (isRudiment.value){
+        return [
+            {
+                key: 'all',
+                value: 'All',
+            },
+            {
+                key: 'drags',
+                value: 'Drags',
+            },
+            {
+                key: 'flams',
+                value: 'Flams',
+            },
+            {
+                key: 'paradiddles',
+                value: 'Paradiddles',
+            },
+            {
+                key: 'rolls',
+                value: 'Rolls',
+            },
+        ];
+    } else if (isPlayAlong.value){
+        return [
+            {
+                key: 'allPlayAlongs',
+                value: 'All Play-Alongs',
+            },
+        ];
     }
   })
 
-  const tabData = computed(()=>{
+  const tabData = computed(() => {
     const tabDataMap = {}
 
     if(props.tabOptions.length > 0){
@@ -153,7 +270,7 @@
     return tabDataMap;
   })
 
-  const tabOptionData = computed(()=>{
+  const tabOptionData = computed(() => {
       return props.tabOptions.length > 0 ? props.tabOptions : getTabOptions.value;
   })
 
@@ -162,12 +279,13 @@
           brand: props.brand,
           data: props.preLoadedContent?.data || [],
           filter: {
-              activeTab: props.tabOptions.length > 0 ? props.tabOptions[0].key : getTabOptions.value[0].key,
+              activeTab: activeTab.value,
               params: {...request_params.value},
               [isCoach.value ? 'term' : 'title']: '',
           },
           tabData: tabData.value,
           totalPages: props.preLoadedContent ? Math.ceil(props.preLoadedContent.meta.totalResults / props.limit) : 0,
+          totalResults: props.preLoadedContent?.meta.totalResults || 0,
       })
   })
 </script>
