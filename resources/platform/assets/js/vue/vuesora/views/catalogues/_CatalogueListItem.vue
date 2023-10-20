@@ -305,9 +305,6 @@ export default {
       return this.index;
     },
   },
-  mounted(){
-    console.log(this.item.type)
-  },
   beforeDestroy() {
     this.contentModel = null;
   },
