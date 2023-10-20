@@ -158,7 +158,7 @@ class MigrateRechargeSubscriptions extends Command
                             $subscription->paymentMethod->paypalBillingAgreement?->external_id ?? "",
                         "shipping_email" => $this->getEmailForShopify($subscription->user->email),
                         "shipping_first_name" => $subscription->paymentMethod->address->first_name ?? "",
-                        "shipping_last_name" => $subscription->paymentMethod->address->last_name ?? "Digital",
+                        "shipping_last_name" => $subscription->paymentMethod->address->last_name ?? "",
                         "shipping_address_1" => "31265 Wheel Ave",
                         "shipping_address_2" => "#107",
                         "shipping_city" => "Abbotsford",
