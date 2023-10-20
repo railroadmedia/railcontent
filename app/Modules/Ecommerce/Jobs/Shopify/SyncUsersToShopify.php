@@ -1,79 +1,132 @@
 <?php
 
-namespace App\Modules\Ecommerce\Console\Commands;
+namespace App\Modules\Ecommerce\Jobs\Shopify;
 
+use App\Models\ShopifySync;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\FindsCustomers;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesShopifyRateLimit;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\SavesShopifyIdOnAddresses;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsAddressData;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsShopifyCustomer;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsToShopify;
+use Carbon\Carbon;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Exception\ORMException;
+use Illuminate\Bus\Batchable;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Customer;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Ecommerce\Repositories\AddressRepository;
 use Railroad\Ecommerce\Repositories\CustomerRepository;
+use Railroad\Ecommerce\Repositories\RepositoryBase;
 use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\REST\Resources\ApiResource;
 use Signifly\Shopify\REST\Resources\CustomerResource;
 use Signifly\Shopify\Shopify;
 
-class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
+class SyncUsersToShopify implements ShouldQueue
 {
+    use Batchable;
+    use Dispatchable;
+    use FindsCustomers;
+    use HandlesMaskedEmailAddress;
+    use HandlesShopifyRateLimit;
+    use InteractsWithQueue;
+    use LogsShopify;
+    use Queueable;
+    use SavesShopifyIdOnAddresses;
+    use SerializesModels;
+    use SyncsAddressData;
+    use SyncsToShopify;
     use SyncsShopifyCustomer;
 
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'shopify:sync-users
-                            {--limit= : (Optional) The number of users to limit this run to.}
-                            {--since= : (Optional) The ISO 8601 date time to sync all changes since. e.g. 2023-10-13T17:03:25+00:00}
-                            {--fresh : Sync all users, not just those that need it}
-                            {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
+    protected const RESULTS_MESSAGE_TYPE = "message_type";
+    protected const RESULTS_MESSAGE_TYPE_SUCCESS = "";
+    protected const RESULTS_MESSAGE_TYPE_ERROR = "##ERROR## ";
+    protected const RESULTS_MESSAGE_TYPE_WARNING = "##WARNING## ";
+    protected const RESULTS_MODEL_ID = "model_id";
+    protected const RESULTS_MODEL_TYPE = "model_type";
+    protected const RESULTS_MODEL_TYPE_CUSTOMER = "Customer";
+    protected const RESULTS_MODEL_TYPE_USER = "User";
+    protected const RESULTS_ACTION = "action";
+    protected const RESULTS_SHOPIFY_ID = "shopify_id";
+    protected const RESULTS_FAIL_MESSAGE = "failure_message";
+
+    protected Collection $shopifyIds;
+    protected array $results = [];
+    protected CustomerRepository $customerRepository;
+    protected AddressRepository $addressRepository;
+    protected EcommerceEntityManager $entityManager;
 
     /**
-     * The console command description.
-     *
-     * @var string
+     * Create a new job instance.
      */
-    protected $description = 'Sync our users and any related customers up to Shopify';
+    public function __construct(
+        protected int $startAtId,
+        protected int $endAtId,
+        protected Carbon $lastSyncAt,
+        protected bool $simulate,
+        protected bool $fresh
+    ) {
+        $this->shopifyIds = collect();
+    }
+
+    public function middleware(): array
+    {
+        return [new SkipIfBatchCancelled];
+    }
 
     /**
-     * Execute the console command.
+     * Execute the job
      *
      * @param  Shopify  $shopify
      * @param  CustomerRepository  $customerRepository
      * @param  AddressRepository  $addressRepository
      * @param  EcommerceEntityManager  $entityManager
-     * @return int
+     * @return void
      */
     public function handle(
         Shopify $shopify,
         CustomerRepository $customerRepository,
         AddressRepository $addressRepository,
         EcommerceEntityManager $entityManager
-    ): int {
+    ): void {
+        // set DI instances that we'll need
         $this->shopify = $shopify;
         $this->customerRepository = $customerRepository;
         $this->addressRepository = $addressRepository;
         $this->entityManager = $entityManager;
 
-        $this->notifyStartupStatus();
-
-        // record this as a class variable so that it doesn't get updated with each loop of the users
-        $this->lastSyncAt = $this->getDateTimeOfLastSync();
+        $this->logDebug(
+            sprintf("%s: running batch for users %s - %s", $this->getClassName(), $this->startAtId, $this->endAtId)
+        );
 
         // DEV NOTE: we do not use the SyncsToShopify sync() here. The huge number of Users in our
         // database leads to a unique situation for syncing up to Shopify Customers.
+        $this->notifyStartupStatus();
         $batchSize = 50;
-        $this->withExecutionTime(function () use ($batchSize) {
-            $this->loopUsersSync($batchSize);
-        });
+        $this->loopUsersSync($batchSize);
+    }
 
-        return self::SUCCESS;
+    /**
+     * @inheritDoc
+     */
+    protected function getClassName(): string
+    {
+        return "SyncUsersToShopify";
     }
 
     /**
@@ -84,84 +137,85 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
      */
     private function loopUsersSync(int $batchSize): void
     {
-        $limit = $this->getLimit();
-        $this->tableHeader = ["User or Customer ID", "Class", "Action", "Shopify Customer ID"];
-        $this->tableRows = [];
+        $fresh = $this->getIsFresh();
 
-        if (!$this->getIsFresh()) {
-            $this->info(
-                sprintf(
-                    "Retrieving all users that have not been synced, or have been updated since %s ...",
-                    $this->lastSyncAt->toString()
-                )
-            );
-        }
         $usersQuery = User::query()
-            ->when(!$this->getIsFresh(), function ($q) {
-                return $q
-                    ->whereNull("shopify_id")
-                    ->orWhere("updated_at", ">", $this->lastSyncAt);
-            })
-            ->when($limit, function (Builder $q) use ($limit) {
-                return $q->limit($limit);
+            ->whereBetween("id", [$this->startAtId, $this->endAtId])
+            ->where(function (Builder $q) {
+                $q->when(!$this->fresh, function (Builder $q) {
+                    return $q->whereNull("shopify_id")
+                        ->orWhereDate("updated_at", ">", $this->lastSyncAt);
+                });
             });
         $totalCount = $usersQuery->count();
         $infoString = "Found {$totalCount} users to be synced.";
-        if ($limit) {
-            $infoString .= " Limiting to {$limit}.";
-        }
         $infoString .= " Performing in batches of {$batchSize}.";
-        $this->info($infoString);
+        $this->logInfo($infoString);
 
-        $totalCountForRun = is_null($limit) ? $totalCount : min($totalCount, $limit);
-        $totalBatchesToRun = intval(ceil($totalCountForRun / $batchSize));
-        $userCount = 0;
         $usersQuery->chunk(
             $batchSize,
-            function (Collection $users, int $batchRun) use (
-                $batchSize,
-                $totalBatchesToRun,
-                $totalCountForRun,
-                &$userCount
-            ) {
-                $this->info(sprintf("Running Users batch %s of %s", $batchRun, $totalBatchesToRun));
+            function (Collection $users) {
                 $this->shopifyIds = collect();
+                $this->results = [];
                 $this->createSyncLogIfExecuting();
 
-                // chunk doesn't keep the limit set before, so we'll work around that by keeping track of the count internally
-                $isAtLimit = false;
-
-                // start a progress bar for this chunk
-                $bar = $this->output->createProgressBar($totalCountForRun % $batchSize);
-                $bar->start();
-
-                $users->each(function (User $user, int $index) use ($bar, $totalCountForRun, &$userCount, &$isAtLimit) {
-                    ++$userCount;
+                $users->each(function (User $user, int $index) {
                     $this->syncUser($user, $this->getIsFresh(), $this->getIsSimulation(), $index + 1);
-                    $bar->advance();
-
-                    // if this is the last user to get before exceeding our limit, denote it and break out of the loop
-                    if ($userCount >= $totalCountForRun) {
-                        $isAtLimit = true;
-                        return false;
-                    }
                 });
 
-                // print progress bar and table
-                $bar->finish();
-                $this->newLine();
-                $this->table($this->tableHeader, $this->tableRows);
+                // print the results
+                $this->logInfo(
+                    sprintf(
+                        "%s: results for syncing users to Shopify batch for job %s of %s",
+                        $this->getClassName(),
+                        $this->batch()->processedJobs() + 1,
+                        $this->batch()->totalJobs
+                    )
+                );
+
+                foreach ($this->results as $result) {
+                    $endResult = isset($result[self::RESULTS_SHOPIFY_ID]) ? sprintf(
+                        "Shopify ID %s",
+                        $result[self::RESULTS_SHOPIFY_ID]
+                    ) : $result[self::RESULTS_FAIL_MESSAGE];
+
+                    if ($result[self::RESULTS_MESSAGE_TYPE] === self::RESULTS_MESSAGE_TYPE_ERROR) {
+                        $this->logError(
+                            sprintf(
+                                "%s%s ID: %s. %s %s",
+                                $result[self::RESULTS_MESSAGE_TYPE],
+                                $result[self::RESULTS_MODEL_TYPE],
+                                $result[self::RESULTS_MODEL_ID],
+                                $result[self::RESULTS_ACTION],
+                                $endResult
+                            )
+                        );
+                    } else {
+                        $this->logInfo(
+                            sprintf(
+                                "%s%s ID: %s. %s %s",
+                                $result[self::RESULTS_MESSAGE_TYPE],
+                                $result[self::RESULTS_MODEL_TYPE],
+                                $result[self::RESULTS_MODEL_ID],
+                                $result[self::RESULTS_ACTION],
+                                $endResult
+                            )
+                        );
+                    }
+                }
+
                 // finish the sync log
                 $this->finishSyncLogIfExecuting($this->shopifyIds);
-                // and clear the table rows for the next run
-                $this->tableRows = [];
-
-                // if our last loop hit the limit, break out of the loop of all users
-                if ($isAtLimit) {
-                    return false;
-                }
             }
         );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getIsFresh(): bool
+    {
+        return $this->fresh;
     }
 
     /**
@@ -184,6 +238,8 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
             fn(Customer $customer) => !is_null($customer->getShopifyId())
         );
         $isCreating = $fresh || (is_null($user->shopify_id) && $alreadySyncedUserCustomers->isEmpty());
+
+        // TODO SRR-114: if !$isCreating, check if update is required
 
         // STEP 3: build up the data structure
         $postData = $this->createCustomerDataForUser($user, $isCreating);
@@ -229,11 +285,14 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
                     : $this->updateAddressesDataForUser($user, $userCustomers);
 
                 // STEP 6: send it to Shopify, if there are any
-                $this->sendAddressDataToShopify($addressesData, $shopifyCustomerId);
+                $errors = $this->sendAddressDataToShopify($addressesData, $shopifyCustomerId, $this->shopifyIds);
+                $this->handleRateLimit();
+                $errors->each(fn($errorMessage) => $this->logError($errorMessage));
             } catch (ORMException $e) {
-                $this->error(
+                $this->logError(
                     sprintf(
-                        "Failed to save shopify_id for user or customer with email address %s: %s",
+                        "%s: Failed to save shopify_id for user or customer with email address %s: %s",
+                        $this->getClassName(),
                         $user->email,
                         $e->getMessage()
                     )
@@ -243,14 +302,20 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
             // simulating
             $shopifyCustomerId = $user->shopify_id ?? $simulatedShopifyId;
         }
-
-        $this->tableRows[] = [$user->id, "User", $isCreating ? "Created" : "Updated", $shopifyCustomerId];
+        $this->results[] = [
+            self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+            self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_USER,
+            self::RESULTS_MODEL_ID => $user->getId(),
+            self::RESULTS_ACTION => $isCreating ? "Created" : "Updated",
+            self::RESULTS_SHOPIFY_ID => $shopifyCustomerId
+        ];
         $userCustomers->each(function (Customer $customer) use ($isCreating, $shopifyCustomerId) {
-            $this->tableRows[] = [
-                $customer->getId(),
-                "Customer",
-                $isCreating ? "Created" : "Updated",
-                $shopifyCustomerId
+            $this->results[] = [
+                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_CUSTOMER,
+                self::RESULTS_MODEL_ID => $customer->getId(),
+                self::RESULTS_ACTION => $isCreating ? "Created" : "Updated",
+                self::RESULTS_SHOPIFY_ID => $shopifyCustomerId
             ];
         });
     }
@@ -322,18 +387,32 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
                 $existingCustomerShopifyId = $user->shopify_id ?? $alreadySyncedUserCustomers->first()->getShopifyId();
                 $customerResource = $this->shopify->updateCustomer($existingCustomerShopifyId, $postData);
             }
+            $this->handleRateLimit();
         } catch (ValidationException $exception) {
             // we can have edge cases where the customer was created in Shopify, but we didn't record their shopify_id,
             // so check for that error and record Shopify's id on our records
             $errors = collect($exception->errors);
             if (collect($errors->get("email"))->contains("has already been taken")) {
-                $this->linkExistingCustomer($user->email);
-                $this->tableRows[] = [
-                    $user->id,
-                    "User",
-                    "<error>EMAIL EXISTING</error>",
-                    "Email account already taken. Shopify ID recorded locally."
-                ];
+                $failures = $this->linkExistingCustomer($user->email);
+                $this->handleRateLimit();
+                if ($failures->isNotEmpty()) {
+                    $failures->each(fn($failureMessage) => $this->results[] = [
+                        self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
+                        self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_USER,
+                        self::RESULTS_MODEL_ID => $user->id,
+                        self::RESULTS_ACTION => "LINK CUSTOMER FAILED",
+                        self::RESULTS_FAIL_MESSAGE => $failureMessage
+                    ]
+                    );
+                } else {
+                    $this->results[] = [
+                        self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_WARNING,
+                        self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_USER,
+                        self::RESULTS_MODEL_ID => $user->id,
+                        self::RESULTS_ACTION => "EXISTING EMAIL",
+                        self::RESULTS_FAIL_MESSAGE => "Email account already taken. Shopify ID recorded locally."
+                    ];
+                }
                 return null;
             }
 
@@ -368,21 +447,29 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
             }
 
             // a different validation error occurred that we can't handle, so report it here
-            $this->error(
+            $this->logError(
                 sprintf(
-                    "Validation failed when sending customer data to Shopify: %s",
+                    "%s: Validation failed when sending customer data to Shopify: %s",
+                    $this->getClassName(),
                     $exception->getMessage()
                 )
             );
-            $this->error(
+            $this->logError(
                 sprintf(
-                    "Please investigate for user or customers with email address %s. Attempted customer data: %s",
+                    "%s: Please investigate for user or customers with email address %s. Attempted customer data: %s",
+                    $this->getClassName(),
                     $user->email,
                     json_encode($postData)
                 )
             );
             // record the failure in the table then exit out for this user
-            $this->tableRows[] = [$user->id, "User", "<error>FAILED</error>", $exception->getMessage()];
+            $this->results[] = [
+                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
+                self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_USER,
+                self::RESULTS_MODEL_ID => $user->id,
+                self::RESULTS_ACTION => "FAILED",
+                self::RESULTS_FAIL_MESSAGE => $exception->getMessage()
+            ];
             return null;
         }
         return $customerResource;
@@ -431,6 +518,7 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
         $shopifyCustomerId = $user->shopify_id;
         // first, get the address information from Shopify
         $shopifyAddressesResponse = $this->shopify->getCustomerAddresses($shopifyCustomerId);
+        $this->handleRateLimit();
         $shopifyAddresses = $shopifyAddressesResponse->map(fn(ApiResource $apiResource) => $apiResource->getAttributes()
         );
 
@@ -438,7 +526,20 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
         $checkedLocalAddressIds = collect();
 
         // get data for all the addresses that need to be updated
-        $this->addDataForUpdatedAddresses($shopifyCustomerId, $shopifyAddresses, $checkedLocalAddressIds, $addressData);
+        $updateFailures = $this->addDataForUpdatedAddresses(
+            $shopifyCustomerId,
+            $shopifyAddresses,
+            $checkedLocalAddressIds,
+            $addressData
+        );
+        $updateFailures->each(fn($failureMessage) => $this->results[] = [
+            self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
+            self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_USER,
+            self::RESULTS_MODEL_ID => $user->id,
+            self::RESULTS_ACTION => "ADDRESS FAILED",
+            self::RESULTS_FAIL_MESSAGE => $failureMessage
+        ]
+        );
 
         // next, check for any additional addresses that the user has, that haven't yet been synced up to Shopify
         $allLocalAddressData = $this->createAddressesDataForUser($user, $userCustomers);
@@ -450,8 +551,76 @@ class SyncUsersToShopify extends SyncCustomersToShopifyBaseCommand
     /**
      * @inheritDoc
      */
-    protected function getClassName(): string
+    protected function getIsSimulation(): bool
     {
-        return "SyncUsersToShopify";
+        return $this->simulate;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getAddressRepository(): AddressRepository
+    {
+        return $this->addressRepository;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getSyncResource(): string
+    {
+        return ShopifySync::RESOURCE_CUSTOMER;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function syncResource(bool $simulate, bool $fresh): Collection
+    {
+        // we do not use the SyncsToShopify sync() here.
+        // All of that is done in the handle function, and so this function is never used.
+        return collect();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getEcommerceEntityRepository(): RepositoryBase|EntityRepository
+    {
+        return $this->customerRepository;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getLimit(): ?int
+    {
+        // limits were already applied in the initial command
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getLastSyncAtOverride(): null|Carbon
+    {
+        return $this->lastSyncAt;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getCustomerRepository(): CustomerRepository
+    {
+        return $this->customerRepository;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    protected function getEntityManager(): EcommerceEntityManager
+    {
+        return $this->entityManager;
     }
 }

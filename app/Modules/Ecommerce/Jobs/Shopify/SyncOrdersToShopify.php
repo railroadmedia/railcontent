@@ -245,7 +245,7 @@ class SyncOrdersToShopify implements ShouldQueue
                             self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_ORDER,
                             self::RESULTS_MODEL_ID => $order->getId(),
                             self::RESULTS_ACTION => "SKIPPED",
-                            self::RESULTS_FAIL_MESSAGE => "User has not been synced to Shopify"
+                            self::RESULTS_FAIL_MESSAGE => "User $user->id has not been synced to Shopify"
                         ];
                         $skip = true;
                     }
@@ -272,7 +272,7 @@ class SyncOrdersToShopify implements ShouldQueue
                             self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_ORDER,
                             self::RESULTS_MODEL_ID => $order->getId(),
                             self::RESULTS_ACTION => "SKIPPED",
-                            self::RESULTS_FAIL_MESSAGE => "Customer has not been synced to Shopify"
+                            self::RESULTS_FAIL_MESSAGE => "Customer {$customer->getId()} has not been synced to Shopify"
                         ];
                         $skip = true;
                     }

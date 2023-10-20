@@ -16,7 +16,7 @@ use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * This job acts as a manager between the dispatching command the syncing jobs.
+ * This job acts as a manager between the dispatching command and the syncing jobs.
  * There are too many subscription payments for the dispatcher to create all the syncing jobs fast enough, so we use
  * this job to take the large chunk of jobs, and further break that down into smaller chunks to pass along to the
  * syncing jobs.
