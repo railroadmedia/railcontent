@@ -14,10 +14,10 @@ use Illuminate\Routing\ResponseFactory;
 use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Models\OnboardingAnswerHistory;
 use Modules\UserManagementSystem\Models\OnboardingExperience;
-use Modules\UserManagementSystem\Models\OnboardingGoals;
 use Modules\UserManagementSystem\Models\OnboardingGear;
-use Modules\UserManagementSystem\Models\OnboardingTopic;
 use Modules\UserManagementSystem\Models\OnboardingGenre;
+use Modules\UserManagementSystem\Models\OnboardingGoals;
+use Modules\UserManagementSystem\Models\OnboardingTopic;
 
 class OnboardingController extends Controller
 {
@@ -271,7 +271,7 @@ class OnboardingController extends Controller
 
         Avo::onboarding_about_step_completed(
             AvoHelper::defaultEventProperties([
-                'is_skipped' => $request->get('skipped'),
+                'is_skipped' => $request->get('skipped')
             ])
         );
 
@@ -297,7 +297,7 @@ class OnboardingController extends Controller
         Avo::onboarding_skipped(
             AvoHelper::defaultEventProperties([
                 'step_skipped' => strtolower($skippedStep),
-                'brand' => $brand,
+                'brand' => $brand
             ])
         );
 
@@ -322,7 +322,7 @@ class OnboardingController extends Controller
         $this->onboardingService->saveInstrument($instrument);
         Avo::onboarding_instrument_step_completed(
             AvoHelper::defaultEventProperties([
-                'brand' => $this->onboardingService->getBrandFromInstrument($instrument),
+                'brand' => $this->onboardingService->getBrandFromInstrument($instrument)
             ])
         );
 

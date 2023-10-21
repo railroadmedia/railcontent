@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Platform;
 
-use App\Collections\PackCollection;
 use App\Decorators\Content\ContentLikesDecorator;
-use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\Playlist\PlaylistDecorator;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Content\CoachesController;
 use App\Maps\ContentTypes;
+use App\Modules\Content\Services\CarouselService;
 use App\Modules\Content\Services\CohortService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use App\Modules\EventTracking\Avo\AvoHelper;
@@ -17,28 +16,25 @@ use App\Services\LiveStreamEventService;
 use App\Services\PackService;
 use App\Services\UserMetricsService;
 use Avo;
-use Illuminate\Support\Facades\Mail;
-use Modules\UserManagementSystem\Models\BlockedUser;
-use Railroad\Railcontent\Services\UserContentProgressService;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Mail;
+use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\Points\Services\UserPointsService;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
-use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator;
+use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection as RailcontentCollection;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Modules\Content\Services\CarouselService;
 
 class HomePageController extends BaseController
 {
@@ -63,6 +59,11 @@ class HomePageController extends BaseController
      * @param PackService $packService
      * @param DatabaseManager $databaseManager
      * @param UserContentProgressService $userContentProgressService
+     * @param CarouselService $carouselService
+     * @param CohortService $cohortService
+     * @param UserProductService $userProductService
+     * @param OnboardingService $onboardingService
+     *
      */
     public function __construct(
         ContentService $contentService,
@@ -76,7 +77,7 @@ class HomePageController extends BaseController
         CarouselService $carouselService,
         CohortService $cohortService,
         UserProductService $userProductService,
-        OnboardingService $onboardingService
+        OnboardingService $onboardingService,
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;

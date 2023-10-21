@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventTracking\Avo;
 
+use App\Modules\EventTracking\Services\CustomerIoService;
 use Jenssegers\Agent\Agent;
 
 class AvoHelper
@@ -46,13 +47,17 @@ class AvoHelper
      */
     public static function defaultEventProperties(array $properties = []): array
     {
+
         $defaultProperties = [
             'user_id_' => userIdString(),
             'platform' => self::getRequestPlatform(),
             'os' => self::getRequestOS()
         ];
 
-        return array_merge($defaultProperties, $properties);
+        $customerIoService = new CustomerIoService();
+        $customerIoIds = $customerIoService->getCioIdsForUser(user());
+
+        return array_merge($defaultProperties, $properties, $customerIoIds);
     }
 
 }

@@ -6,15 +6,13 @@ use App\Modules\EventTracking\Destinations\RudderDestination;
 use App\Modules\EventTracking\Listeners\EventTrackerListener;
 use App\Providers\EventServiceProvider;
 use Avo;
-use Illuminate\Support\ServiceProvider;
 use Modules\UserManagementSystem\Events\User\UserCreated;
-use Rudder\Rudder;
 
 class EventTrackingServiceProvider extends EventServiceProvider
 {
     protected $listen = [
         UserCreated::class => [
-            EventTrackerListener::class . '@handleUserCreated'
+            [EventTrackerListener::class, 'handleUserCreated']
         ],
     ];
 
