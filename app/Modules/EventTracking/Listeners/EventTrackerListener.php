@@ -3,19 +3,11 @@
 namespace App\Modules\EventTracking\Listeners;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
-use App\Modules\EventTracking\Services\CustomerIoService;
 use Avo;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 
 class EventTrackerListener
 {
-    private CustomerIoService $customerIoService;
-
-    public function __construct(CustomerIoService $customerIoService)
-    {
-        $this->customerIoService = $customerIoService;
-    }
-
     /**
      * @param UserCreated $event
      */

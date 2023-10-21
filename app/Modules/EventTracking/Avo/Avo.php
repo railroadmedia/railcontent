@@ -112,7 +112,7 @@ class Avo
                 try {
                     $ch = curl_init('https://api.avo.app/i');
                     $data = [
-                        'ac' => 'z712eoOdOQSq6fYT6Nkg',
+                        'ac' => 'uGBY9jRT0gZOVFsBTwWp',
                         'br' => 'ycp3d9CRQ',
                         'en' => self::$__AVO_ENV__,
                         'ev' => $event_id,
@@ -149,7 +149,7 @@ class Avo
                 try {
                     $ch = curl_init('https://api.avo.app/i');
                     $data = [
-                        'ac' => 'z712eoOdOQSq6fYT6Nkg',
+                        'ac' => 'uGBY9jRT0gZOVFsBTwWp',
                         'br' => 'ycp3d9CRQ',
                         'en' => self::$__AVO_ENV__,
                         'ty' => $type,
@@ -260,13 +260,6 @@ class Avo
              foreach($genre_list as $key=>$value) {
              }
          }
-         return $messages;
-     }
-
-     private static function _assert_musora_user_id($musora_user_id, $label_ = NULL)
-     {
-         $messages = [];
-         $messages = array_merge($messages, self::_avo_assert_string('Z84ID4vk-', isset($label_) ? 'musora_user_id' . ':' . $label_ : 'musora_user_id', $musora_user_id));
          return $messages;
      }
 
@@ -434,14 +427,13 @@ class Avo
              $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
              $messages = array_merge($messages, self::_assert_os($properties['os']));
              $messages = array_merge($messages, self::_assert_platform($properties['platform']));
-             $messages = array_merge($messages, self::_assert_musora_user_id($properties['musora_user_id']));
              $messages = array_merge($messages, self::_assert_cio_id_musora($properties['cio_id_musora']));
              $messages = array_merge($messages, self::_assert_cio_id_drumeo($properties['cio_id_drumeo']));
              $messages = array_merge($messages, self::_assert_cio_id_pianote($properties['cio_id_pianote']));
              $messages = array_merge($messages, self::_assert_cio_id_singeo($properties['cio_id_singeo']));
              $messages = array_merge($messages, self::_assert_cio_id_guitareo($properties['cio_id_guitareo']));
              // debug console in Avo
-             self::_invoke('P07BEO3Z8', 'a4714ad7f18f5b9a9c3ddc192d0396ac17fd3e29f2de83c8b9a13feff936ef4b', $messages);
+             self::_invoke('P07BEO3Z8', '027a5db1196c92e5e37a1a04a8f3e165207efe838aebb3f3a3fc02fb5a63b86c', $messages);
              if (self::$__STRICT__) {
                  // throw exception if messages is not empty
                  if (count($messages) > 0) {
@@ -465,17 +457,10 @@ class Avo
              'cio_id_pianote' => $properties['cio_id_pianote'],
              'cio_id_singeo' => $properties['cio_id_singeo'],
              'cio_id_guitareo' => $properties['cio_id_guitareo'],
-             ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter(
-             [
-                 'musora_user_id' => $properties['musora_user_id'],
-             ], function($value) { return isset($value); }), TRUE));
+             ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
          }
 
          // destination rudder_stack
-         self::$rudder_stackDestination->set_user_properties($properties['user_id_'],
-         [
-             'musora_user_id' => $properties['musora_user_id'],
-         ]);
          self::$rudder_stackDestination->log_event($properties['user_id_'], 'Account Created', [
          'os' => $properties['os'],
          'platform' => $properties['platform'],
