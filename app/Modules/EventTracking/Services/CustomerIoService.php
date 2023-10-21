@@ -61,7 +61,7 @@ class CustomerIoService
                     ->where('email', '=', $user->email);
             })
             ->where('workspace_name', '=', $workspaceName)
-            ->orderBy('created_at')
+            ->orderBy('updated_at', 'desc')
             ->firstOrFail();
     }
 }
