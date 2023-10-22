@@ -21,6 +21,7 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
     .js('resources/platform/assets/js/profile.js', 'public/platform/js')
     .js('resources/platform/assets/js/lesson-page.js', 'public/platform/js')
     .js('resources/platform/assets/js/books.js', 'public/platform/js')
+    .js('resources/platform/assets/js/shopify_checkout_account_creation_link_injection_script.js', 'public/platform/js')
     .vue({ version: 3 })
     .sass(
         'resources/platform/assets/css/app.scss',
