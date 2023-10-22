@@ -4,7 +4,6 @@
     },
     "private": true,
     "scripts": {
-        "marketing-shopify": "webpack build --config resources/marketing/webpack.config.js --mode development",
         "platform-development": "mix --mix-config=resources/platform/webpack.mix.js",
         "platform-production": " npx mix --mix-config=resources/platform/webpack.mix.js --production",
         "platform-watch": "npx mix --mix-config=resources/platform/webpack.mix.js watch",
