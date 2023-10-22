@@ -22,6 +22,11 @@ Route::prefix('ecommerce/shopify')->group(function () {
                 ShopifyCartAPIController::class . '@createOrAddToCart'
             );
         });
+
+    Route::get(
+        'shopify-thank-you-page-account-creation-link-js-file',
+        ShopifyCartAPIController::class . '@serveShopifyCartCustomizationScriptTagFile'
+    );
 });
 
 Route::middleware(['web_public'])

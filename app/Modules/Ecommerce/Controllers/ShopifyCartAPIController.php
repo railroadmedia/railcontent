@@ -6,6 +6,7 @@ use App\Modules\Ecommerce\Services\ShopifyStoreFrontAPIService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Signifly\Shopify\Shopify;
 
@@ -128,6 +129,14 @@ class ShopifyCartAPIController extends Controller
         }
 
         return redirect()->away($checkoutURL);
+    }
+
+    public function serveShopifyCartCustomizationScriptTagFile(Request $request)
+    {
+        $response = Response::make(file_get_contents(public_path('/platform/js/shopify_checkout_account_creation_link_injection_script.js')), 200);
+        $response->header('Content-Type', 'application/javascript');
+
+        return $response;
     }
 
     private function createLegacyCartResponseDataFromShopifyCartData($shopifyCartData)
