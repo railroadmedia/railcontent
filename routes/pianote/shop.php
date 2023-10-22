@@ -17,6 +17,8 @@ Route::domain('{pianoteDomain}')
                 Route::get('/destupefy-your-left-hand', [SalesController::class, 'destupefyyourlefthand'] );
                 Route::get('/easy-chords', [SalesController::class, 'easyChords'] );
                 Route::get('/30-day-blues-piano', [SalesController::class, 'thirtyDayBluesPiano'] );
+                Route::get('/30-day-blues-piano/deal', [SalesController::class, 'thirtyDayBluesPianoDeal'] );
+                Route::get('/ultimate-practice-bundle', [SalesController::class, 'ultimatePracticeBundle'] );
                 Route::get('/easy-chords/deal', [SalesController::class, 'easyChordsDeal'] );
                 Route::get('/faster-fingers', [SalesController::class, 'fasterfingers'] );
                 Route::get('/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina'] );

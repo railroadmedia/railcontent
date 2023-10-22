@@ -6,13 +6,13 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Payment
+ * Class OrderPayment
  *
  * @package App\Modules\Ecommerce\Models
  *
- * @property integer $id
- * @property integer $order_id
- * @property integer $payment_id
+ * @property int $id
+ * @property int $order_id
+ * @property int $payment_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at

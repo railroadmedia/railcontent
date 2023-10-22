@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Models\ShopifySync;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\FindsCustomers;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SavesShopifyIdOnAddresses;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\UsesStorageForShopifySyncData;
@@ -44,8 +45,15 @@ use Railroad\Ecommerce\Repositories\CustomerRepository;
  */
 class ParseBulkOperationResultsForUsers implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, LogsShopify, FindsCustomers,
-        SavesShopifyIdOnAddresses, UsesStorageForShopifySyncData;
+    use Dispatchable;
+    use FindsCustomers;
+    use HandlesMaskedEmailAddress;
+    use InteractsWithQueue;
+    use LogsShopify;
+    use Queueable;
+    use SavesShopifyIdOnAddresses;
+    use SerializesModels;
+    use UsesStorageForShopifySyncData;
 
     // the array of user data that's in the source file - only populated if necessary
     private array $_sourceFileUsers = [];
@@ -103,6 +111,8 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
 
             // and delete the files from our storage
             $this->deleteFiles([$this->sourceFilename, $this->resultsFilename]);
+
+            $this->logInfo(sprintf("%s: Completed %s", $this->getClassName(), get_class($this)));
         } catch (Exception $e) {
             $this->logError($e->getMessage());
         }
@@ -131,7 +141,7 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
             $user = User::findOrFail($userId);
 
             $user->shopify_id = $shopifyId;
-            $user->update();
+            $user->saveWithoutUpdatedAt();
             // log the success
             $this->logInfo(sprintf("%s: User %s synced with Shopify ID %s", $this->getClassName(), $user->id, $user->shopify_id));
             $this->shopifyIds[] = $shopifyId;
@@ -140,9 +150,12 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
             $customers = $this->getCustomersForUser($user);
             $customers->each(function (Customer $customer) use ($shopifyId) {
                 if ($customer->getShopifyId() !== $shopifyId) {
-                    $customer->setShopifyId($shopifyId);
-                    $this->entityManager->persist($customer);
-                    $this->entityManager->flush();
+                    // grab the eloquent model, so we can update it
+                    $customerModel = \App\Modules\Ecommerce\Models\Customer::find($customer->getId());
+                    $customerModel->shopify_id = $shopifyId;
+                    $customerModel->saveWithoutUpdatedAt();
+                    // refresh the doctrine model to get the change
+                    $this->entityManager->refresh($customer);
                     // log the success
                     $this->logInfo(sprintf("%s: Customer %s synced with Shopify ID %s", $this->getClassName(), $customer->getId(), $customer->getShopifyId()));
                 }
@@ -278,7 +291,7 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
      */
     protected function getClassName(): string
     {
-        return "SyncBulkCustomersToShopify";
+        return "SyncBulkUsersToShopify";
     }
 
     /**

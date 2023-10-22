@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Modules\Ecommerce\Services\AccessCodeService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
-use Railroad\Ecommerce\Services\AccessCodeService;
 use Railroad\Ecommerce\Contracts\UserProviderInterface;
 use Railroad\Ecommerce\Services\UserProductService;
 

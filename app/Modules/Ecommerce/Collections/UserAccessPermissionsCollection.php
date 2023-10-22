@@ -28,7 +28,6 @@ class UserAccessPermissionsCollection
             }
         });
         $this->permissionIdLookup = $this->collection->groupBy('permission_id');
-
     }
 
 
@@ -46,29 +45,45 @@ class UserAccessPermissionsCollection
         }
 
         $userAccessPermissions = $userAccessPermissions
-            ->where('status', '!=', UserAccessPermissionsStatusEnum::Revoked)
             ->sortBy('start_time');
         $expirationDate = null;
         $startDate = null;
         /** @var UserAccessPermission $userAccessPermission */
         foreach ($userAccessPermissions as $userAccessPermission) {
-            if ($userAccessPermission->time_lifetime) {
+            if ($userAccessPermission->time_lifetime && $userAccessPermission->status != 'revoked') {
                 return [Carbon::parse($userAccessPermission->start_time), Carbon::maxValue()];
+            }
+            if ($userAccessPermission->status == 'revoked') {
+                $userAccessPermission->actualStartTime = Carbon::parse($userAccessPermission->start_time);
+                $userAccessPermission->actualExpirationTime = Carbon::parse($userAccessPermission->revoked_at);
+                continue;
             }
             $startDate = $expirationDate != null && $expirationDate > $userAccessPermission->start_time
                 ? $startDate : Carbon::parse($userAccessPermission->start_time);
             $tempStartDate = $expirationDate != null && $expirationDate > $userAccessPermission->start_time
                 ? $expirationDate : Carbon::parse($userAccessPermission->start_time);
+
             $expirationDate = $tempStartDate->clone()
                 ->addDays($userAccessPermission->time_days)
                 ->addMonths($userAccessPermission->time_months);
+            $userAccessPermission->actualStartTime = $tempStartDate;
+            $userAccessPermission->actualExpirationTime = $expirationDate;
+        }
+        if ($expirationDate) {
+            $expirationDate->addDays(config('ecommerce.days_before_access_revoked_after_expiry', 7));
+        }
+        if ($expirationDate > Carbon::maxValue()) {
+            $expirationDate = Carbon::maxValue();
         }
         return array($startDate, $expirationDate);
     }
 
     public function getMembershipExpirationDate(): ?Carbon
     {
-        list($startDate, $endDate) = $this->getActiveDates(self::MusoraPlusMembershipPermission);
+        list($startDate, $endDate) = $this->getActiveDates([
+            self::MusoraPlusMembershipPermission,
+            self::MusoraBasicMembershipPermission
+        ]);
         return $endDate;
     }
 
@@ -96,16 +111,40 @@ class UserAccessPermissionsCollection
         return $endDate == Carbon::maxValue();
     }
 
-    public function getOwnsPacks(array $packPermissionIds)
+    public function doesUserOwnPermissions(array $permissionIds): bool
     {
-        list($startDate, $endDate) = $this->getActiveDates($packPermissionIds);
+        list($startDate, $endDate) = $this->getActiveDates($permissionIds);
         return $endDate > Carbon::now();
     }
 
-    public function getPermissionIds(): array
+    public function getActivePermissionIds(): array
     {
-        return $this->collection->pluck('permission_id')->unique()->sort()->toArray();
+        return $this->collection->where(function ($permission) {
+            return $permission->status != 'revoked';
+        })->pluck('permission_id')->unique()->sort()->toArray();
     }
 
+    public function hasUserOwnedPermissions(array $permissionIds): bool
+    {
+        list(, $endDate) = $this->getActiveDates($permissionIds);
+        return $endDate != null;
+    }
 
+    public function determineActiveTimes()
+    {
+        $this->permissionIdLookup->keys()->each(function ($key) {
+            $this->getActiveDates($key);
+        });
+    }
+
+    public function getCollection()
+    {
+        return $this->collection;
+    }
+
+    public function hasPermission($permissionID): bool
+    {
+        list(, $endDate) = $this->getActiveDates($permissionID);
+        return $endDate > Carbon::now();
+    }
 }

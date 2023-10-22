@@ -13,7 +13,7 @@ class WebhookVerify
         $secret = env('SHOPIFY_WEBHOOK_SECRET');
         if (!$secret) {
             Log::warning('SHOPIFY_WEBHOOK_SECRET not set in .env file.  Endpoints not protected.');
-            return;
+            return $next($request);
         }
         $hmac_header = $_SERVER['HTTP_X_SHOPIFY_HMAC_SHA256'];
         $data = file_get_contents('php://input');

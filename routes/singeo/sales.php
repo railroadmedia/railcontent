@@ -38,7 +38,9 @@ Route::domain('{singeoDomain}')
 
     Route::get('/thank-you', [SalesController::class, 'thankyou']);
     Route::get('/subscribed', [SalesController::class, 'subscribed']);
+    Route::get('/preferences', [SalesController::class, 'preferences']);
     Route::get('/lets-sing-a-song', [SalesController::class, 'letssingasong']);
+    Route::get('/6-reasons', [SalesController::class, 'sixReasons']);
     Route::get('/welcome-party', [SalesController::class, 'welcomeparty']);
     Route::get('/shop/singing-starter-kit', [SalesController::class, 'singingstarterkit']);
     Route::get('/singingstarterkit', [SalesController::class, 'singingstarterkitalt']);

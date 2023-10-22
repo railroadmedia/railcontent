@@ -3,15 +3,21 @@
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Models\ShopifySync;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\FindsCustomers;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\StagesUploadToShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsShopifyCustomer;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Modules\UserManagementSystem\Models\User;
@@ -19,38 +25,54 @@ use Railroad\Ecommerce\Entities\Customer;
 use Railroad\Ecommerce\Repositories\AddressRepository;
 use Railroad\Ecommerce\Repositories\CustomerRepository;
 use Signifly\Shopify\Shopify;
-
 /**
  * BulkCustomerCreateFromUsers is a job used to perform a Bulk Operation in shopify to create multiple customers, using
- * the collection of Users provided as a constructor parameter.
+ * the collection of Users found using the provided constructor parameters.
+ * In order to maintain short-running jobs, we retrieve a batch of users to sync, using the provided id of the user to
+ * start with, and the batch size that will be used to limit the size of the query.
  * This job will simulate its process, as best as possible, when the `$execute` parameter is set to false.
  * The general flow of the process is as follows:
- * 1. Create a new ShopifySync entry for this batch of users
- * 2. Build up the json data for each user, so that it can be created as a Customer in Shopify, using the
+ * 1. Use the provided user ID and batch size to find the batch of users to use this time
+ * 2. Create a new ShopifySync entry for this batch of users
+ * 3. Build up the json data for each user, so that it can be created as a Customer in Shopify, using the
  *    [CustomerInput](https://shopify.dev/docs/api/admin-graphql/2023-07/input-objects/CustomerInput) format
- * 3. Compile those json data and save them all in a .jsonl-formatted file that we'll store
- * 4. Make a GraphQL mutation post to Shopify to get them to create a staged upload for us
- * 5. Make a GraphQL mutation post to Shopify to upload our .jsonl file into that staged upload area
- * 6. Make a GraphQL mutation post to Shopify to request a `bulkOperationRunMutation` to create the customers,
+ * 4. Compile those json data and save them all in a .jsonl-formatted file that we'll store
+ * 5. Make a GraphQL mutation post to Shopify to get them to create a staged upload for us
+ * 6. Make a GraphQL mutation post to Shopify to upload our .jsonl file into that staged upload area
+ * 7. Make a GraphQL mutation post to Shopify to request a `bulkOperationRunMutation` to create the customers,
  *    using the .jsonl file that Shopify now has, and to provide our necessary data for each customer they create
- * 7. Dispatch a PollBulkOperationCustomer job, that will continually poll Shopify for our results
+ * 8. Dispatch a PollBulkOperationCustomer job, that will continually poll Shopify for our results
  *
  * Please refer to the PollBulkOperationCustomer class for notes on the process from there.
  * @see https://shopify.dev/docs/api/usage/bulk-operations/imports for full details from Shopify
  */
 class BulkCustomerCreateFromUsers implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, SyncsShopifyCustomer, StagesUploadToShopify, FindsCustomers;
+    use Batchable;
+    use Dispatchable;
+    use FindsCustomers;
+    use HandlesMaskedEmailAddress;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+    use StagesUploadToShopify;
+    use SyncsShopifyCustomer;
+
+    public function middleware(): array
+    {
+        return [new SkipIfBatchCancelled];
+    }
 
     protected CustomerRepository $customerRepository;
     protected AddressRepository $addressRepository;
     protected Shopify $shopify;
 
     /**
-     * @param Collection $users the users to create Shopify Customers for
+     * @param int $firstUserId the id of the first user to find in this batch
+     * @param int $batchSize the number of users to get in this batch and create Shopify Customers for
      * @param bool $execute are we executing this process, or simulating?
      */
-    public function __construct(protected Collection $users, protected bool $execute)
+    public function __construct(protected int $firstUserId, protected int $batchSize, protected bool $execute)
     {
     }
 
@@ -69,9 +91,17 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
             ])
             : null;
 
+        // get the users for this batch
+        $users = User::query()
+            ->whereNull("shopify_id")
+            ->where("id", ">=", $this->firstUserId)
+            ->orderBy("id")
+            ->limit($this->batchSize)
+            ->get();
+
         $usersData = [];
         // build up the payload for each user
-        $this->users->each(function (User $user) use (&$usersData) {
+        $users->each(function (User $user) use (&$usersData) {
             // find any of our Customers with the same email address
             $userCustomers = $this->getCustomersForUser($user);
             if ($this->checkUserIsNew($user, $userCustomers)) {
@@ -81,6 +111,8 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
 
         // safety check for edge case that all users in this batch were already synced as customers
         if (empty($usersData)) {
+            $this->logInfo(sprintf("%s: All users in this batch were already synced. Skipping this batch.",
+                $this->getClassName()));
             return;
         }
 
@@ -110,7 +142,7 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
             $shopifyId = $syncedCustomer->getShopifyId();
             if ($this->execute) {
                 $user->shopify_id = $shopifyId;
-                $user->save();
+                $user->saveWithoutUpdatedAt();
             }
             $this->logError(sprintf("%s: Customer(s) with email address %s were already synced" .
                 " to Shopify. User ID %s has been given the shopify_id %s and was skipped", $this->getClassName(), $user->email, $user->id, $shopifyId));
@@ -132,7 +164,7 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
     protected function createCustomerData(User $user, Collection $userCustomers): array
     {
         $customerData = [
-            "email" => $user->email,
+            "email" => $this->getEmailForShopify($user->email),
             "firstName" => $user->first_name,
             "lastName" => $user->last_name,
             "note" => $user->support_note,
@@ -144,10 +176,10 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
         // we can use meta fields for stuff like our user id, etc
         $customerData["metafields"] = [
             [
-                "key" => "_id",
+                "key" => ShopifyMetafieldKey::Id->value,
                 "value" => (string)$user->id,
-                "type" => "number_integer",
-                "namespace" => "users"
+                "type" => ShopifyMetafieldTypes::integer->value,
+                "namespace" => ShopifyMetafieldNamespace::Model_Users->value
             ]
         ];
 
@@ -204,7 +236,7 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
      */
     protected function getClassName(): string
     {
-        return "SyncBulkCustomersToShopify";
+        return "SyncBulkUsersToShopify";
     }
 
     /**

@@ -794,7 +794,7 @@ return [
 
     'subscription_renewal_date' => 1,
     'failed_payments_before_de_activation' => 1,
-    'days_before_access_revoked_after_expiry_in_app_purchases_only' => 5,
+    'days_before_access_revoked_after_expiry_in_app_purchases_only' => 7,
     'days_before_access_revoked_after_expiry' => 7,
 
     'password_creation_rules' => 'min:8|max:128', // also defined in usora
@@ -1029,18 +1029,19 @@ return [
 
     'revenuecat'=>[
         'ios' => [
-            'Musora' => env('REVENUE_KEY_IOS_MUSORA'),
-            'Drumeo' => env('REVENUE_KEY_IOS_DRUMEO'),
-            'Pianote' => env('REVENUE_KEY_IOS_PIANOTE'),
+            'Musora' => env('REVENUE_KEY_IOS_MUSORA','appl_LdpPMmTZTRLwFbTzlOHiaqWxdSd'),
+            'Drumeo' => env('REVENUE_KEY_IOS_DRUMEO','appl_EuubnDghYEbJYsBEZQapZXHaMoU'),
+            'Pianote' => env('REVENUE_KEY_IOS_PIANOTE','appl_NODWOEDlBZjSbygaiqaOuRUVhWF'),
             ],
         'android' =>
             [
-                'Musora' => env('REVENUE_KEY_ANDROID_MUSORA'),
-                'Drumeo' => env('REVENUE_KEY_ANDROID_DRUMEO'),
-                'Pianote' => env('REVENUE_KEY_ANDROID_PIANOTE'),
+                'Musora' => env('REVENUE_KEY_ANDROID_MUSORA','goog_ZpwzTsZCbSVzcMIszJVEBkiaXyc'),
+                'Drumeo' => env('REVENUE_KEY_ANDROID_DRUMEO','goog_zPhmTIpXDeEztASiWPFtVniEPoW'),
+                'Pianote' => env('REVENUE_KEY_ANDROID_PIANOTE','goog_pBHeWlebBxUzBrXzJHkIiHbPrrK'),
             ]
     ],
     'sync_revenue_cat' => env('SYNC_REVENUE_CAT', true),
     'bonus_membership_product_id' => 732,
-    'revenuecat_webhook_token' => env('REVENUECAT_WEBHOOK_TOKEN')
+    'revenuecat_webhook_token' => env('REVENUECAT_WEBHOOK_TOKEN'),
+    'revenuecat_only'=> env('REVENUECAT_ONLY',false),
 ];

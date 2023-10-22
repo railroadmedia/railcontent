@@ -70,16 +70,13 @@ class UserProductToUserContentPermissionListener
 
     public function syncContentPermissions(int $userId, UserAccessPermissionsCollection $userAccessPermissions): void
     {
-        $permissionIds =$userAccessPermissions->getPermissionIds();
-        $existingUserPermissions = $this->contentPermissionsService->getUserPermissionsQuery($userId)->get()->keyBy(
+        $permissionIds = $userAccessPermissions->getActivePermissionIds();
+        $existingUserPermissions = $this->contentPermissionsService->getUserPermissions($userId)->keyBy(
             'permission_id'
         );
 
-        foreach ($permissionIds as $permissionId ) {
+        foreach ($permissionIds as $permissionId) {
             list($startDate, $expirationDate) = $userAccessPermissions->getActiveDates($permissionId);
-            if ($expirationDate) {
-                $expirationDate->addDays(config('ecommerce.days_before_access_revoked_after_expiry', 7));
-            }
             $userPermission = $existingUserPermissions[$permissionId] ?? null;
             if (!$userPermission) {
                 $userPermission = new UserPermission();
@@ -124,7 +121,7 @@ class UserProductToUserContentPermissionListener
     public function syncUserId($userId)
     {
         if (config('shopify.enabled')) {
-            $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId)->get();
+            $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId);
             $this->syncContentPermissions($userId, $userAccessPermissions);
             return;
         }

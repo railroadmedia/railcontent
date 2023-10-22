@@ -2,6 +2,10 @@
 
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
+use App\Modules\Content\Models\Content;
+use App\Modules\Content\Services\ContentPermissionsService;
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Exception;
 use App\Modules\CustomerIO\Services\CustomerIoService;
@@ -24,14 +28,14 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
     }
 
     /**
-     * @param  CustomerIoService  $customerIoService
+     * @param CustomerIoService $customerIoService
      * @throws \Throwable
      */
     public function handle(
         CustomerIoService $customerIoService,
         CustomerIoSyncService $customerIoSyncService,
         UserService $userService,
-        UserProductService $userProductService
+        UserAccessPermissionsService $userAccessPermissionsService,
     ) {
         try {
             $this->user = $userService->getByIdOrNull($this->user->id);
@@ -44,10 +48,8 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
                 $syncThisWorkspace = false;
 
                 foreach ($brands as $brand) {
-                    if ($userProductService->userHadOrHasAnyDigitalProductsForBrand(
-                            new EcommerceUser($this->user->id, $this->user->email),
-                            $brand
-                        ) || $accountNameToSyncAllBrand == $brand) {
+                    if ($userAccessPermissionsService->userHadOrHasAnyDigitalProductsForBrand($this->user, $brand)
+                        || $accountNameToSyncAllBrand == $brand) {
                         $syncThisWorkspace = true;
                     }
                 }
@@ -72,13 +74,13 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
     /**
      * The job failed to process.
      *
-     * @param  Throwable  $exception
+     * @param Throwable $exception
      */
     public function failed(Throwable $exception)
     {
         error_log(
-            'Error on CustomerIoSyncUserById job trying to sync user to customer.io. User ID: '.
-            $this->user->id.' - lookupEmail: '.$this->user->email
+            'Error on CustomerIoSyncUserById job trying to sync user to customer.io. User ID: ' .
+            $this->user->id . ' - lookupEmail: ' . $this->user->email
         );
 
         error_log($exception);

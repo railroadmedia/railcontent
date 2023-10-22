@@ -1,3 +1,16 @@
+@php
+    $drumeo = new StdClass();
+    $singeo = new StdClass();
+    $pianote = new StdClass();
+    $guitareo = new StdClass();
+
+    $drumeo->brand = 'drumeo';
+    $singeo->brand = 'singeo';
+    $pianote->brand = 'pianote';
+    $guitareo->brand = 'guitareo';
+    $selectedGoals = array($drumeo, $guitareo, $singeo, $pianote);
+@endphp
+
 @extends('partials.layout')
 
 @section('meta')
@@ -5,7 +18,6 @@
 @endsection
 
 @section('content')
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
         <onboarding
             :selected-brand="{{ json_encode(request()->get('brand')) }}"
             @if(request()->get('update') !== null)
@@ -16,8 +28,8 @@
             :selected-topics="{{ json_encode(user()->onboardingTopics) }}"
             :selected-genres="{{ json_encode(user()->onboardingGenres) }}"
             :selected-experience="{{ json_encode(user()->onboardingExperience) }}"
+            :selected-goals="{{ json_encode(user()->onboardingGoals)}}"
         ></onboarding>
-    </div>
 
     @include('partials._railanalytics-brand-tracking-iframe')
 @endsection

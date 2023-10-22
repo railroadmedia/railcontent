@@ -2,6 +2,9 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use Doctrine\ORM\Exception\ORMException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
@@ -67,13 +70,16 @@ class ShopifyCustomerService
             $shopifyCustomerId = $customerResource->id;
             // record the shopify ID on the User
             $user->shopify_id = $shopifyCustomerId;
-            $user->save();
+            $user->saveWithoutUpdatedAt();
             // and any of their related Customers
             $customers->each(function (Customer $customer) use ($shopifyCustomerId) {
                 if ($customer->getShopifyId() !== $shopifyCustomerId) {
-                    $customer->setShopifyId($shopifyCustomerId);
-                    $this->entityManager->persist($customer);
-                    $this->entityManager->flush();
+                    // grab the eloquent model, so we can update it
+                    $customerModel = \App\Modules\Ecommerce\Models\Customer::find($customer->getId());
+                    $customerModel->shopify_id = $shopifyCustomerId;
+                    $customerModel->saveWithoutUpdatedAt();
+                    // refresh the doctrine model to get the change
+                    $this->entityManager->refresh($customer);
                 }
             });
         } catch (ORMException $e) {
@@ -135,10 +141,10 @@ class ShopifyCustomerService
             // we can use meta fields for stuff like our user id, etc
             $customerData["metafields"] = [
                 [
-                    "key" => "_id",
-                    "value" => $user->id,
-                    "type" => "number_integer",
-                    "namespace" => "users",
+                    "key" => ShopifyMetafieldKey::Id->value,
+                    "value" => (string)$user->id,
+                    "type" => ShopifyMetafieldTypes::integer->value,
+                    "namespace" => ShopifyMetafieldNamespace::Model_Users->value,
                 ],
             ];
         }

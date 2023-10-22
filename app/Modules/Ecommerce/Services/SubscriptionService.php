@@ -42,6 +42,10 @@ class SubscriptionService
     public function syncSubscriptionData(UserAccessPermissionsCollection $userAccessPermissions): void
     {
         $user = $this->userService->getByIdOrNull($userAccessPermissions->getUserId());
+        if (!$user->shopify_id) {
+            // User doesn't have any subscriptions from Shopify to be synced.
+            return;
+        }
         $subscriptions = $this->recharge->getSubscriptions($user->shopify_id);
         $shopifyVariantIds = $subscriptions->pluck('shopify_variant_id')->toArray();
         $productLookup = $this->productService->getProductsByShopifyIds($shopifyVariantIds)
@@ -74,6 +78,15 @@ class SubscriptionService
             $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate();
 
             $this->recharge->updateSubscriptionNextChargeDate($mostRecentSubscription, $membershipExpirationDate);
+        }
+
+        // SRR-82 set the subscription type when the user has a Recharge subscription
+        if (!$isLifetimeMember && $membershipSubscriptions->count() > 0) {
+            $user->has_recharge_subscription = true;
+            $user->save();
+        } else {
+            $user->has_recharge_subscription = false;
+            $user->save();
         }
     }
 
@@ -144,8 +157,6 @@ class SubscriptionService
         if ($unsubscribeDate || $cancelReason) {
             $musoraSubscription->canceled_on = ($unsubscribeDate)?Carbon::createFromTimestampMs($unsubscribeDate):null;
             $musoraSubscription->cancellation_reason = $cancelReason;
-        } else {
-            $musoraSubscription->total_cycles_paid = $musoraSubscription->total_cycles_paid + 1;
         }
 
         $musoraSubscription->save();

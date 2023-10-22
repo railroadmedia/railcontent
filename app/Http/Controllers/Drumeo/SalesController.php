@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Drumeo;
 
 use App\Http\Controllers\BaseController;
 use App\Listeners\OrderEventListener;
+use App\Modules\Ecommerce\Services\AccessCodeService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\DatabaseManager;
@@ -12,7 +13,6 @@ use Illuminate\Support\Facades\Mail;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 
 use Railroad\Ecommerce\Entities\User;
-use Railroad\Ecommerce\Services\AccessCodeService;
 use Railroad\Ecommerce\Services\UserProductService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -125,6 +125,13 @@ class SalesController extends BaseController
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
+    }
+    public function promoBag()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.subscription-bag', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
     }
     public function restart()
     {

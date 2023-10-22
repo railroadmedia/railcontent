@@ -7,10 +7,9 @@ use Exception;
 class RevenueCatApiGateway
 {
     /**
-
-    /**
-     * @param string $customerIoAppApiKey
-     * @param string $customerId
+     * @param $appUserId
+     * @return mixed
+     * @throws Exception
      */
     public function getSubscriber(
         $appUserId
@@ -23,8 +22,7 @@ class RevenueCatApiGateway
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 
         $headers = [];
-        $headers[] = 'Authorization: Bearer appl_HhuXJEzLSKLbTcXMORRLIPzAEXx';
-            //.config('ecommerce.revenuecat.'.$platform)[$app];
+        $headers[] = 'Authorization: Bearer '.config('ecommerce.revenuecat.ios')['Musora'];
         $headers[] = 'Content-Type: application/json';
         $headers[] = 'Accept: application/json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);

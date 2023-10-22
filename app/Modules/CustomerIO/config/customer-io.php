@@ -268,6 +268,16 @@ return [
                     'drumeo',
                 ],
             ],
+            'Drumeo Giveaway' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
             'Drumeo Awards Giveaway' => [
                 'custom_attributes' => [
                 ],
@@ -415,6 +425,16 @@ return [
                 ],
                 'events' => [
                     'pianote_prospect_blog-signup',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Easy Classical Songs' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_easy-classical-songs',
                 ],
                 'accounts_to_sync' => [
                     'pianote',

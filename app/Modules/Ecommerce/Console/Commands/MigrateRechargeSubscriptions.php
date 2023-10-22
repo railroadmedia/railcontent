@@ -4,70 +4,178 @@ namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Models\Subscription;
 use Carbon\CarbonInterval;
+use Exception;
+use Illuminate\Support\Facades\Storage;
 use Signifly\Shopify\Shopify;
 use Carbon\Carbon;
 
 class MigrateRechargeSubscriptions extends Command
 {
-    protected $signature = 'ecommerce:MigrateRechargeSubscriptions';
+    use HandlesMaskedEmailAddress;
+
+    protected $signature = 'ecommerce:MigrateRechargeSubscriptions {fileName} {startIndex=0} {endIndex=100000} {--skipHeader} {--test}';
+
+    protected function getClassName(): string
+    {
+        return "MigrateRechargeSubscriptions";
+    }
+
+    protected function appendToFile($filename, string $data)
+    {
+        if (app()->environment("local", "development")) {
+            $storageResult = Storage::append($filename, $data);
+        } else {
+            $storageResult = Storage::disk('musora_web_platform_s3')->append($filename, $data);
+        }
+
+        if (!$storageResult) {
+            throw new Exception(sprintf("%s: Failed to write .jsonl file", $this->getClassName()));
+        }
+    }
 
     public function handle(Shopify $shopify, RechargeGateway $rechargeGateway)
     {
         $this->withExecutionTime(function () use ($shopify, $rechargeGateway) {
-            $subscriptions = Subscription::query()
-                ->where('user_id', '=', '577652')
+            $fileName = $this->argument('fileName');
+            $isTest = $this->option('test');
+
+            $this->info('Loading Subscriptions');
+            $subscriptionsQuery = Subscription::query()->with('product')
                 ->where('is_active', 1)
-                ->get();
+                ->where('type', 'subscription')
+                ->where('paid_until', '>', Carbon::now());
 
-            $data = [];
-            foreach ($subscriptions as $subscription) {
-                $product = $subscription->product;
-                $variantId = $product->shopify_id;
-                //TODO:Check to make sure product has a shopify id
-                $variant = $shopify->getVariant($variantId);
-                $productId = $variant->product_id;
+            if ($isTest) {
+                $subscriptionsQuery->where('paid_until', '<', Carbon::now()->addDays(20));
+            }
+            $subscriptions = $subscriptionsQuery->get();
+            $count = $subscriptions->count();
+            $this->info("Found $count subscriptions");
 
-                $data[] = [
-                    "external_product_id" => $productId,
-                    "external_variant_id" => $variantId,
-                    "external_product_name" => $product->name,
-                    "external_variant_name" => "",
-                    "quantity" => 1,
-                    "recurring_price" => $subscription->total_price,
-                    "charge_interval_unit_type" => $this->getIntervalUnit($subscription),
-                    "charge_interval_frequency" => $this->getIntervalCount($subscription),
-                    "shipping_interval_unit_type" => $this->getIntervalUnit($subscription),
-                    "shipping_interval_frequency" => $this->getIntervalCount($subscription),
-                    "charge_on_day_of_month" => "",
-                    "customer_created_at" => "",
-                    "last_charge_date" => "",
-                    "next_charge_date" => $this->getNextChargeDate($subscription),
-                    "customer_stripe_id" => $subscription->paymentMethod?->creditCard->external_customer_id,
-                    "stripe_payment_method_id" => $subscription->paymentMethod?->creditCard->external_id,
-                    "paypal_billing_agrement_id" => $subscription->paymentMethod->paypal_billing_agreement_id,
-                    "shipping_email" => $subscription->user->email,
-                    "shipping_first_name" => $subscription->paymentMethod->address->first_name,
-                    "shipping_last_name" => $subscription->paymentMethod->address->last_name ?? "N/A",
-                    "shipping_address_1" => $subscription->paymentMethod->address->street_line_1 ?? "N/A",
-                    "shipping_address_2" => $subscription->paymentMethod->address->street_line_2,
-                    "shipping_city" => $subscription->paymentMethod->address->city ?? "N/A",
-                    "shipping_province" => "BC",
-                    "shipping_zip" => "V2T 6H2",
-                    "shipping_country" => "Canada",
-                    "shipping_phone" => "",
-                    "status" => "active"
+
+            $skipHeader = $this->option('skipHeader');
+            if (!$skipHeader) {
+                $columns = [
+                    'external_product_id',
+                    'external_variant_id',
+                    'external_product_name',
+                    'external_variant_name',
+                    'quantity',
+                    'recurring_price',
+                    'charge_interval_unit_type',
+                    'charge_interval_frequency',
+                    'shipping_interval_unit_type',
+                    'shipping_interval_frequency',
+                    'charge_on_day_of_month',
+                    'customer_created_at',
+                    'last_charge_date',
+                    'next_charge_date',
+                    'customer_stripe_id',
+                    'stripe_payment_method_id',
+                    'paypal_billing_agrement_id',
+                    'shipping_email',
+                    'shipping_first_name',
+                    'shipping_last_name',
+                    'shipping_address_1',
+                    'shipping_address_2',
+                    'shipping_city',
+                    'shipping_province',
+                    'shipping_zip',
+                    'shipping_country',
+                    'shipping_phone',
+                    'status'
                 ];
+                $data = implode(',', $columns);
+                $this->appendToFile($fileName, $data);
             }
 
+            $this->info('Loading Product Information');
+            $productIds = $subscriptions->pluck('product.shopify_id')->unique()->mapWithKeys(
+                function ($id) use ($shopify) {
+                    try {
+                        $variantId = $shopify->getVariant($id)?->product_id ?? 0;
+                    } catch (\Exception $ex) {
+                        $variantId = 0;
+                    }
+                    return [$id => $variantId];
+                }
+            )->toArray();
 
-            $export = join(',', array_keys($data[0]));
-            foreach ($data as $d) {
-                $export .= "\n" . join(',', array_values($d));
+            $startIndex = $this->argument('startIndex');
+            $endIndex = $this->argument('endIndex');
+            $this->info("Creating csv $fileName");
+            $i = 0;
+            $chunk = 1000;
+            $chunks = $subscriptions->chunk($chunk);
+            foreach ($chunks as $subs) {
+                $data = "";
+                $i2 = $i + $chunk;
+                $this->info("Processing chunk $i - $i2");
+                foreach ($subs as $subscription) {
+                    if ($i < $startIndex || $i > $endIndex) {
+                        $i++;
+                        continue;
+                    }
+                    $product = $subscription->product;
+                    $variantId = $product?->shopify_id ?? 0;
+                    //TODO:Check to make sure product has a shopify id
+                    $productId = $productIds[$variantId] ?? 0;
+                    $i++;
+                    if (!$productId) {
+                        $this->info(
+                            "No product found for subscription: $subscription->id Product:$product?->id $product?->name $variantId"
+                        );
+                        continue;
+                    }
+                    if (!$subscription->user) {
+                        $this->info("No user found for subscription: $subscription->id User:$subscription->user_id");
+                        continue;
+                    }
+
+                    $d = [
+                        "external_product_id" => $productId,
+                        "external_variant_id" => $variantId,
+                        "external_product_name" => $product->name,
+                        "external_variant_name" => "",
+                        "quantity" => 1,
+                        "recurring_price" => $subscription->total_price,
+                        "charge_interval_unit_type" => $this->getIntervalUnit($subscription),
+                        "charge_interval_frequency" => $this->getIntervalCount($subscription),
+                        "shipping_interval_unit_type" => $this->getIntervalUnit($subscription),
+                        "shipping_interval_frequency" => $this->getIntervalCount($subscription),
+                        "charge_on_day_of_month" => "",
+                        "customer_created_at" => "",
+                        "last_charge_date" => "",
+                        "next_charge_date" => $this->getNextChargeDate($subscription),
+                        "customer_stripe_id" => !app()->isProduction() ? '' :
+                            $subscription->paymentMethod?->creditCard->external_customer_id ?? "",
+                        "stripe_payment_method_id" => !app()->isProduction() ? '' :
+                            $subscription->paymentMethod?->creditCard->external_id ?? "",
+                        "paypal_billing_agrement_id" => !app()->isProduction() ? '' :
+                            $subscription->paymentMethod->paypalBillingAgreement?->external_id ?? "",
+                        "shipping_email" => $this->getEmailForShopify($subscription->user->email),
+                        "shipping_first_name" => $subscription->paymentMethod->address->first_name ?? "",
+                        "shipping_last_name" => $subscription->paymentMethod->address->last_name ?? "",
+                        "shipping_address_1" => "31265 Wheel Ave",
+                        "shipping_address_2" => "#107",
+                        "shipping_city" => "Abbotsford",
+                        "shipping_province" => "BC",
+                        "shipping_zip" => "V2T 6H2",
+                        "shipping_country" => "Canada",
+                        "shipping_phone" => '',
+                        "status" => "active"
+                    ];
+                    $data .= (!empty($data) ? "\n" : "") . implode(',', $d);
+                }
+                if ($data) {
+                    $this->appendToFile($fileName, $data);
+                }
             }
 
-            $this->info($export);
+            $this->info("Created csv $fileName");
         });
     }
 
@@ -86,9 +194,7 @@ class MigrateRechargeSubscriptions extends Command
     private function getIntervalCount(Subscription $subscription)
     {
         if ($subscription->interval_type == 'month') {
-            if ($subscription->interval_count == 1) {
-                return 1;
-            }
+            return $subscription->interval_count;
         }
         if ($subscription->interval_type == 'year') {
             if ($subscription->interval_count == 1) {
@@ -103,8 +209,7 @@ class MigrateRechargeSubscriptions extends Command
 
     private function getNextChargeDate(Subscription $subscription)
     {
-        $interval = CarbonInterval::make($subscription->interval_count.$subscription->interval_type );
-        $nextInterval = Carbon::parse($subscription->start_date)->add($interval);
+        $nextInterval = Carbon::parse($subscription->paid_until);
         return $nextInterval->isoFormat('YYYY-MM-DD');
     }
 }

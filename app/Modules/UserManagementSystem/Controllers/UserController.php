@@ -171,13 +171,33 @@ class UserController extends Controller
      */
     public function read(Request $request, $id)
     {
-        $this->authorize('show-users');
+        //$this->authorize('show-users');
         $user = User::findOrFail($id);
 
         if ($user) {
+            $user['shopify_customer_url'] =
+                ($user->shopify_id) ?
+                    'https://admin.shopify.com/store/'.config('usora.shopify_store').'/customers/'.$user->shopify_id :
+                    '';
+            $user['revenuecat_customer_url'] =
+                ($user->revenuecat_origin_app_user_id) ?
+                    'https://app.revenuecat.com/customers/'.
+                    config('usora.revenuecat_project_id').
+                    '/'.
+                    $user->revenuecat_origin_app_user_id : '';
+
             return json_encode([
+<<<<<<< HEAD
                 "data" => ["attributes" => json_encode($user)],
             ]);
+=======
+                                   "data" => [
+                                       "id" => $user->id,
+                                       "type" => "user",
+                                       "attributes" => $user,
+                                   ],
+                               ]);
+>>>>>>> project-shopify
         } else {
             throw new NotFoundHttpException();
         }
@@ -196,6 +216,7 @@ class UserController extends Controller
         }
         try {
             $request->validate([
+<<<<<<< HEAD
                 'display_name' => [
                     Rule::unique(
                         config('user_management_system.database_connection_name') . '.usora_users'
@@ -206,6 +227,18 @@ class UserController extends Controller
                     'min:2',
                 ],
             ]);
+=======
+                                   'display_name' => [
+                                       Rule::unique(
+                                           config('user_management_system.database_connection_name').'.usora_users'
+                                       )
+                                           ->ignore($id),
+                                       'string',
+                                       'max:64',
+                                       'min:2',
+                                   ],
+                               ]);
+>>>>>>> project-shopify
         } catch (ValidationException $e) {
             $messagesByField =
                 $e->validator->getMessageBag()
@@ -305,23 +338,57 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('index-users');
+        //$this->authorize('index-users');
         $searchTerm = $request->get('search_term');
+        $limit = $request->get('per_page', 25);
+        $skip = ($request->get('page', 1) - 1) * $limit;
+
 
         $users =
             User::query()
-                ->where('displayName', 'LIKE', "%{$searchTerm}%")
+                ->where('display_name', 'LIKE', "%{$searchTerm}%")
                 ->orWhere('email', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('firstName', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('lastName', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('phoneNumber', 'LIKE', "%{$searchTerm}%")
-                ->limit($request->get('per_page', 25))
+                ->orWhere('first_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('phone_number', 'LIKE', "%{$searchTerm}%")
+                ->skip($skip)
+                ->take($limit)
                 ->orderBy($request->get('sort', 'createdAt'))
                 ->get();
+        $totalResults =
+            User::query()
+                ->where('display_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('email', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('first_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('phone_number', 'LIKE', "%{$searchTerm}%")
+                ->count();
+        $results = [];
+        foreach ($users as $user) {
+            $results[] = [
+                "id" => $user->id,
+                "type" => "user",
+                "attributes" => $user,
+            ];
+        }
 
         return json_encode([
+<<<<<<< HEAD
             "data" => json_encode($users),
         ]);
+=======
+                               "data" => $results,
+                               "meta" => [
+                                   "pagination" => [
+                                       "total" => $totalResults,
+                                       "per_page" => $limit,
+                                       "current_page" => 1,
+                                       "total_pages" => ceil($totalResults / $limit),
+                                       "links" => [],
+                                   ],
+                               ],
+                           ]);
+>>>>>>> project-shopify
     }
 
     /**

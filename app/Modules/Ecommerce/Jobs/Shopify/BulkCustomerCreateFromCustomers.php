@@ -4,14 +4,17 @@ namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Models\ShopifySync;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\FindsCustomers;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\StagesUploadToShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsShopifyCustomer;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Railroad\Ecommerce\Entities\Customer;
@@ -39,7 +42,20 @@ use Signifly\Shopify\Shopify;
  */
 class BulkCustomerCreateFromCustomers implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, SyncsShopifyCustomer, StagesUploadToShopify, FindsCustomers;
+    use Batchable;
+    use Dispatchable;
+    use FindsCustomers;
+    use HandlesMaskedEmailAddress;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+    use StagesUploadToShopify;
+    use SyncsShopifyCustomer;
+
+    public function middleware(): array
+    {
+        return [new SkipIfBatchCancelled];
+    }
 
     protected CustomerRepository $customerRepository;
     protected AddressRepository $addressRepository;
@@ -80,6 +96,11 @@ class BulkCustomerCreateFromCustomers implements ShouldQueue
 
             // find any of our Customers with the same email address
             $customers = $this->getCustomersForEmail($email);
+            if ($customers->isEmpty()){
+                $this->logError(sprintf("%s: No customers found with email address %s ... even though it's the".
+                    " email address of a customer...?", $this->getClassName(), $email));
+                return;
+            }
             $customersData[] = json_encode($this->createCustomerData($customers));
         });
 
@@ -105,7 +126,7 @@ class BulkCustomerCreateFromCustomers implements ShouldQueue
         });
 
         $customerData = [
-            "email" => $customers->first()->getEmail(),
+            "email" => $this->getEmailForShopify($customers->first()->getEmail()),
             "note" => $this->getCustomerValueFor($customers, "getNote"),
             "phone" => $this->getPhoneNumberForCustomer($customers),
             // "tags" => "",

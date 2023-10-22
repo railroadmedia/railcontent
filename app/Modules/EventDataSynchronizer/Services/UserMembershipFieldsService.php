@@ -44,6 +44,13 @@ class UserMembershipFieldsService
 
     public function syncUserIds(array $userIds): bool
     {
+        if (config('shopify.enabled')) {
+            foreach ($userIds as $userId) {
+                $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId);
+                $this->syncUserAccess($userAccessPermissions);
+            }
+            return true;
+        }
         $qb = $this->userProductRepository->createQueryBuilder('up');
 
         $qb->select(['up', 'p'])
@@ -82,20 +89,19 @@ class UserMembershipFieldsService
     {
         $userId = $userAccessPermissions->getUserId();
 
-
+        //This code is difficult to understand and should be thoroughly understood before changing it
+        //membership expiration date comes from both plus and basic permissions combined
+        $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate();
+        //access level comes from plus or basic permissions
         $plusMembershipExpirationDate = $userAccessPermissions->getPlusMembershipExpirationDate();
         $basicMembershipExpirationDate = $userAccessPermissions->getBasicMembershipExpirationDate();
 
-        $membershipExpirationDate = max([$plusMembershipExpirationDate, $basicMembershipExpirationDate]);
-
         $membershipLevel = null;
-
         if ($plusMembershipExpirationDate > Carbon::now()) {
             $membershipLevel = 'plus';
         } elseif ($basicMembershipExpirationDate > Carbon::now()) {
             $membershipLevel = 'basic';
         }
-
 
         $isLifetimeMember = $userAccessPermissions->getIsLifetimeMember();
         $isDrumeoLifetimeMember = $userAccessPermissions->getIsDrumeoLifetimeMember();

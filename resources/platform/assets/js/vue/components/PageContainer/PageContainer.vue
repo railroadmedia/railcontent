@@ -242,7 +242,7 @@ onUpdated(() => {
 </script>
 
 <template>
-  <main class="tw-min-h-screen tw-w-screen">
+  <main class="tw-min-h-screen" :class="isOnboarding ? 'tw-w-full' : 'tw-w-screen'">
     <sprite-sheet></sprite-sheet>
     <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" :slideClass="notification.slideClass" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed" @onClose="handleNotificationClear" />
     <ConfirmationModal
@@ -269,7 +269,7 @@ onUpdated(() => {
     />
 
     <!-- Page Container -->
-    <div class="
+    <div v-if="!isOnboarding" class="
         tw-flex tw-flex-row tw-w-full tw-h-screen tw-transition-colors
         dark:tw-bg-[#000C17] tw-bg-[#F9F9F9]
         tw-overflow-hidden
@@ -281,7 +281,7 @@ onUpdated(() => {
         :forceSidebarHidden="forceSidebarHidden" :user-id="userId" />
 
       <!-- Content Container -->
-      <main class="
+      <main v-if="!isOnboarding" class="
           tw-flex
           tw-justify-between
           tw-w-full
@@ -315,5 +315,8 @@ onUpdated(() => {
         </Transition>
       </main>
     </div>
+
+    <!-- Onboarding Slot -->
+    <slot v-if="isOnboarding" :is-dark-mode="isDarkModeSelected" />
   </main>
 </template>

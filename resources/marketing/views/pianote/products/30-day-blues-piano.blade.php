@@ -249,7 +249,8 @@
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>
+{{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
+                            <span class="join sold-out medium w-full">SOLD OUT</span>
 {{--                                <a href="#final" class="join medium w-full anchor-slide">ENROLL NOW</a>--}}
 {{--                            <p class="opacity-70 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">--}}
 {{--                                <a href="https://www.musora.com/pianote/enrollment/30-day-blues-piano">Pianote Members register for free here.</a>--}}
@@ -600,7 +601,8 @@
 {{--                <strong class="font-black"><i class="fas fa-arrow-down"></i> CHOOSE YOUR BUNDLE <i class="fas fa-arrow-down"></i></strong>--}}
 {{--            </p>--}}
 
-            <span class="join sold-out medium w-full max-w-xs align-middle mt-7" data-open="waitlistModal">JOIN WAITLIST</span>
+{{--            <span class="join sold-out medium w-full max-w-xs align-middle mt-7" data-open="waitlistModal">JOIN WAITLIST</span>--}}
+            <span class="join sold-out medium w-full max-w-xs align-middle mt-7">SOLD OUT</span>
 {{--            <div class="grid md:grid-cols-2 gap-2 lg:gap-4 items-start justify-center px-4 mx-auto max-w-md md:max-w-3xl text-black">--}}
 {{--                <div class="bg-white rounded-xl border border-pianote py-8 px-4 mb-8 md:mb-0">--}}
 {{--                    <div class="text-center -mt-11">--}}
@@ -699,25 +701,6 @@
             </div>
         </div>
     </section>
-
-    <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none" id="waitlistModal" style="max-width: 560px;" data-reveal data-reset-on-close="false">
-        <div class="p-5 sm:p-7">
-            {{--            <img class="h-14 sm:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/new-piano-players-start-here-logo-2+1.png">--}}
-            <h3 class="leading-tight my-4"><strong>Join The Waitlist!</strong></h3>
-            <p class="mb-4">
-                Enter your email below to get notified when the next <br class="hidden sm:inline">
-                edition of 30-Day Blues Piano is announced. </p>
-
-            @include("pianote._partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-                "formName" => 'Easy Chords Waitlist',
-                "formId" => "Pianote - Engagement - Trigger - Easy Chords Waitlist - Web Form",
-                "buttonText" => "Let Me Know ",
-                "stacked" => true,
-                "noSocial" => true,
-            ])
-        </div>
-    </div>
 
     @include('_partials.components.video-modal',[
         'name' => 'demoVid',

@@ -36,7 +36,12 @@ use Signifly\Shopify\Shopify;
  */
 class PollBulkOperationCustomer implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, PollsShopifyBulkOperation, LogsShopify;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use LogsShopify;
+    use PollsShopifyBulkOperation;
+    use Queueable;
+    use SerializesModels;
 
     // 14 minutes
     protected const TIMEOUT = 840;
@@ -107,6 +112,6 @@ class PollBulkOperationCustomer implements ShouldQueue
      */
     protected function getClassName(): string
     {
-        return "SyncBulkCustomersToShopify";
+        return $this->resourceType === User::class ? "SyncBulkUsersToShopify" : "SyncBulkCustomersToShopify";
     }
 }

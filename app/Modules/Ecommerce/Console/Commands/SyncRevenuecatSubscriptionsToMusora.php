@@ -8,6 +8,7 @@ use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\Ecommerce\Services\UserProductService;
+use Carbon\Carbon;
 
 class SyncRevenuecatSubscriptionsToMusora extends Command
 {
@@ -23,6 +24,7 @@ class SyncRevenuecatSubscriptionsToMusora extends Command
         $userId = $this->argument('userId');
         $user = $revenueCatService->getUser(null, $userId);
         $subscriber = $revenueCatService->getSubscriber($userId);
+
         $revenueCatSubscriptions = (json_decode(json_encode($subscriber->subscriptions), true));
 
         foreach ($revenueCatSubscriptions as $product => $subscriptionData) {
@@ -38,6 +40,7 @@ class SyncRevenuecatSubscriptionsToMusora extends Command
                         $musoraProduct->pluck('id')
                             ->toArray()
                     )
+                    ->orderBy('created_at', 'desc')
                     ->first();
 
             if (!$musoraSubscription) {
@@ -56,8 +59,8 @@ class SyncRevenuecatSubscriptionsToMusora extends Command
                 //update subscription
                 $subscriptionService->updateSubscription(
                     $musoraSubscription,
-                    $subscriptionData['expires_date'],
-                    $subscriptionData['unsubscribe_detected_at']
+                    Carbon::create($subscriptionData['expires_date'])->getTimestampMs(),
+                    Carbon::create($subscriptionData['unsubscribe_detected_at'])->getTimestampMs(),
                 );
 
                 //update user product

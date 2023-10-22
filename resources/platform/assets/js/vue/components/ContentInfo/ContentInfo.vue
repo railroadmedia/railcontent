@@ -10,7 +10,7 @@ import { onMounted, ref } from 'vue';
         },
         userId: {
             type: String,
-            default: 0,
+            default: '',
         },
         breadcrumbs: {
             type: [Array, Object],
