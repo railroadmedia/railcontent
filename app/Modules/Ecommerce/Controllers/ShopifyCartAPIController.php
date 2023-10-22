@@ -133,7 +133,7 @@ class ShopifyCartAPIController extends Controller
 
     public function serveShopifyCartCustomizationScriptTagFile(Request $request)
     {
-        $response = Response::make(file_get_contents(public_path('shopify_checkout_account_creation_link_injection_script.js')), 200);
+        $response = Response::make(file_get_contents(base_path('shopify_checkout_account_creation_link_injection_script.js')), 200);
         $response->header('Content-Type', 'application/javascript');
 
         return $response;
