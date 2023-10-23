@@ -45,9 +45,7 @@
     <header class="py-12 sm:py-20 bg-no-repeat" style="background-color:#00101D;">
         <div class="container mx-auto max-w-4xl">
             <div class="flex flex-wrap">
-                <div class="w-full md:w-4/12 lg:w-5/12 md:order-1 flex justify-center items-center">
-                    <i class="fas fa-play play-button autoplay-video my-20 md:mt-0" data-open="trailer"></i>
-                </div>
+                <div class="w-full md:w-4/12 lg:w-5/12 md:order-1 flex justify-center items-center my-20 md:mt-0"></div>
                 <div class="w-full md:w-8/12 lg:w-7/12 mx-auto sm:pl-8 md:pl-14 lg:pl-0 text-center md:text-left px-4 sm:px-0">
                     <img class="h-36 md:h-40 lg:h-44 mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="logo">
                     <div class="md:max-w-md">
@@ -95,20 +93,13 @@
                 <img class="rounded-xl mb-6 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-feature.jpg" alt="gallery feature">
             </picture>
 
-            <img class="hidden md:inline-block rounded-xl mb-10 shadow-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery.jpg" alt="gallery">
+            <img class="hidden md:inline-block rounded-xl shadow-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery.jpg" alt="gallery">
 
             <div class="md:hidden">
                 <img class="rounded-xl shadow-md mb-4" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-01-m.jpg" alt="gallery 1">
                 <img class="rounded-xl shadow-md mb-4" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-02-m.jpg" alt="gallery 2">
                 <img class="rounded-xl shadow-md mb-4" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-03-m.jpg" alt="gallery 3">
-                <img class="rounded-xl shadow-md mb-8" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-04-m.jpg" alt="gallery 4">
-            </div>
-
-            <div class="rounded-xl py-6 md:py-10 shadow-md px-8" style="background: #FFF6F6;">
-                <div class="justify-center mx-auto md:flex md:items-center text-center md:text-left">
-                    <img class="mb-2 sm:mb-0 h-10 sm:h-14 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/roland_logo.svg">
-                    <p class="w-full sm:w-auto leading-tight pl-3 sm:pl-5 m-0"><strong>This free Roland FP-30X digital piano has been<br> generously donated by our partners at Roland.</strong></p>
-                </div>
+                <img class="rounded-xl shadow-md" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-04-m.jpg" alt="gallery 4">
             </div>
         </div>
     </section>
