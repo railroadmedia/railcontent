@@ -194,8 +194,8 @@ if (Shopify.checkout.customer_id && Shopify.checkout.email && Shopify.checkout.l
     var currentScriptUrlWithoutPath = currentScriptUrl.protocol + '//' + currentScriptUrl.host;
     var urlToAccountSetupPage = currentScriptUrlWithoutPath + '/user-management-system/create-account' +
         "?" +
-        "email=" + encodeURI(emailAddress) +
-        "&verification_token=" + encodeURI(musoraVerificationHash);
+        "email=" + encodeURIComponent(emailAddress) +
+        "&verification_token=" + encodeURIComponent(musoraVerificationHash);
 
     // check for digital items (only display if there are some)
     var hasDigitalItem = false;
