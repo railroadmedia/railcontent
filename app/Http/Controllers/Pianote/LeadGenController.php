@@ -117,7 +117,7 @@ class LeadGenController extends BaseController
     }
     public function giveaway()
     {
-        return view('pianote.lead-gen.giveaway', ['theme' => 'pianote']);
+        return view('pianote.lead-gen.giveaway', ['theme' => 'pianote', 'recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function beginnerBootcamp(Request $request, $domain, $page = null)
