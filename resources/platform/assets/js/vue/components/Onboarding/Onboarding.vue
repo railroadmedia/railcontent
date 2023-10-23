@@ -48,9 +48,9 @@ const { userId, userDisplayName, userProfilePictureUrl } = storeToRefs(userStore
 
 const currentStep = ref(0)
 const info = ref(getInitialInfo({
-    userId,
-    userDisplayName,
-    userProfilePictureUrl,
+    userId: userId.value,
+    userDisplayName: userDisplayName.value,
+    userProfilePictureUrl: userProfilePictureUrl.value,
     ...props,
     instrument: brandInstrument[props.selectedBrand],
 }))
