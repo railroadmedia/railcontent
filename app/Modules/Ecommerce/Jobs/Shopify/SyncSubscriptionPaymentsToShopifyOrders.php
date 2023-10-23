@@ -587,11 +587,9 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             $purchaserEmail = $purchaser->getEmail();
         }
 
-        // the payment and subscription can each have a note, so build one out of both
+        // the payment and subscription can each have a note, but we don't want to duplicate subscription notes across
+        // all entries, so only include the payment note
         $spNotes = [];
-        if ($subscription->getNote()) {
-            $spNotes[] = "Subscription: " . $subscription->getNote();
-        }
         if ($payment->getNote()) {
             $spNotes[] = "Payment: " . $payment->getNote();
         }
