@@ -2,6 +2,7 @@
     <div>
         <CollectionFilterWrapper v-if="showFilter" :filterable-values="filterableValues" :tab-options="tabOptionData"
             :pre-loaded-content="preLoadedContent" />
+        <h1 v-else class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-my-7">All {{ title }}</h1>
 
         <transition appear name="fade">
             <CollectionResults>
@@ -72,6 +73,10 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
+    title: {
+        type: String,
+        default: () => '',
+    },
 });
 
 const collectionStore = useCollectionStore();
@@ -99,7 +104,11 @@ const includedTypes = computed(() => {
 })
 
 const isList = computed(() => {
-    return isCourse.value || isQuickTips.value || isStudentFocus.value || isQAndA.value || isRudiment.value;
+    return !isPlayAlong.value && !isRoutine.value;
+})
+
+const isBootCamps = computed(() => {
+    return props.collectionType === 'boot-camps';
 })
 
 const isCoach = computed(() => {
@@ -110,16 +119,16 @@ const isCourse = computed(() => {
     return props.collectionType === 'course';
 })
 
-const isStudentFocus = computed(() => {
-    return props.collectionType === 'student-focus';
-})
-
 const isPlayAlong = computed(() => {
     return props.collectionType === 'play-along';
 })
 
-const isQAndA = computed(() => {
-    return props.collectionType === 'question-and-answer';
+const isSolos = computed(() => {
+    return props.collectionType === 'solos';
+});
+
+const isStudentFocus = computed(() => {
+    return props.collectionType === 'student-focus';
 })
 
 const isQuickTips = computed(() => {
@@ -135,7 +144,7 @@ const isRudiment = computed(() => {
 })
 
 const showFilter = computed(() => {
-    return !isRoutine.value;
+    return isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value;
 })
 
 const getTabOptions = computed(() => {
@@ -151,14 +160,6 @@ const getTabOptions = computed(() => {
             { key: 'instructors', value: 'Instructors' },
             { key: 'genres', value: 'Genres' },
         ];
-    } else if (isQAndA.value) {
-        return [
-            { key: 'allLessons', value: 'All Lessons' },
-        ];
-    } else if (isRoutine.value) {
-        return [
-            { key: 'routines', value: 'Routines' },
-        ];
     } else if (isRudiment.value) {
         return [
             { key: 'all', value: 'All' },
@@ -167,13 +168,10 @@ const getTabOptions = computed(() => {
             { key: 'paradiddles', value: 'Paradiddles' },
             { key: 'rolls', value: 'Rolls' },
         ];
-    } else if (isPlayAlong.value) {
-        return [
-            { key: 'allPlayAlongs', value: 'All Play-Alongs' },
-        ];
     }
+
     return [
-        { key: 'lessons', value: 'Lessons' },
+        { key: `all${props.title.replace(' ', '').toLowerCase()}`, value: `All ${props.title}` },
     ]
 });
 
