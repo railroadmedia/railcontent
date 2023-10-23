@@ -340,12 +340,12 @@
 
     @include('musora._partials._lets-chat')
 
-{{--    <section class="py-12 sm:py-16 lg:py-20 px-5 relative overflow-hidden text-white text-center" style="background-color:#000C17;">--}}
-{{--        <div class="container mx-auto max-w-xl relative z-0">--}}
-{{--            <h3 style="color:#FFAE00;"><strong>Studio Grant Title</strong></h3>--}}
-{{--            <p class="max-w-2xl my-4 leading-normal">Lorem ipsum</p>--}}
-{{--            <a class="btn-primary btn-small text-drumeo bg-white pb-6 rounded-full text-sm inline-block" target="_blank" href="{{ get_musora_brand_base_url() }}/contact">Learn More</a>--}}
-{{--        </div>--}}
-{{--    </section>--}}
+    <section class="py-12 sm:py-16 lg:py-20 px-5 relative overflow-hidden text-center">
+        <div class="container mx-auto max-w-3xl relative z-0">
+            <img class="h-8 sm:h-12" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/musora/membership/homepage/2023/creative-bc-logo.png">
+            <h6 class="mx-auto my-5 leading-normal">Supported by Creative BC and <br class="sm:hidden">the Province of British Columbia</h6>
+            <a class="btn-primary btn-small text-black bg-musora mb-0 hover:opacity-90 rounded-full h-auto inline-block min-h-0" target="_blank" href="https://creativebc.com/">Learn More</a>
+        </div>
+    </section>
 
 @stop

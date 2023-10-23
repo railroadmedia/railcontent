@@ -6,15 +6,13 @@ import HamburguerButton from "./HamburguerButton.vue";
 import BrandSelector from "./BrandSelector.vue";
 import UserIcon from "./UserIcon.vue";
 import SearchModal from "../SearchModal/SearchModal.vue"
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '../../../stores/user';
+
 const props = defineProps({
-  brand: String,
   isSidebarHidden: Boolean,
   isSidebarCollapsed: Boolean,
   isDarkModeSelected: Boolean,
-  canReferNewStudents: {
-      type: Boolean,
-      default: true
-  },
   hasNotifications: {
     type: Boolean,
     default: false
@@ -22,15 +20,6 @@ const props = defineProps({
   isLive: {
     type: Boolean,
     default: false
-  },
-  userName: {
-    type: String
-  },
-  userAvatar: {
-    type: String
-  },
-  accountUrl: {
-    type: String
   }
 });
 const emit = defineEmits([
@@ -42,6 +31,9 @@ const showSearchModal = ref(false);
 const toggleSearchModal = (val) => {
   showSearchModal.value = val;
 }
+const userStore = useUserStore();
+const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl, brand } = storeToRefs(userStore)
+
 </script>
 
 <template>
@@ -115,7 +107,7 @@ const toggleSearchModal = (val) => {
       </button>
 
       <!-- Invite a Friend -->
-      <a v-if="canReferNewStudents"
+      <a v-if="isUserAMember"
         :href="`/${ brand }/referral/invite-a-friend`"
         class="tw-shrink-0 tw-w-[40px] sm:tw-w-[58px] tw-h-full tw-flex tw-items-center tw-mr-1 tw-justify-center hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
         title="Invite a Friend"
@@ -129,9 +121,9 @@ const toggleSearchModal = (val) => {
 
       <UserIcon
         :brand="brand"
-        :userAvatar="userAvatar"
-        :user-name="userName"
-        :account-url="accountUrl"
+        :userAvatar="userProfilePictureUrl"
+        :user-name="userDisplayName"
+        :account-url="userDashboardUrl"
         :has-notifications="hasNotifications"
         :isDarkModeSelected="isDarkModeSelected"
         @onColorModeToggle="emit('onColorModeToggle')"
