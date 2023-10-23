@@ -291,6 +291,10 @@ if (!function_exists('assembleUserAttributes')) {
      * @return array
      */
     function assembleUserAttributes($userObject) {
+        if (empty($userObject)) {
+            return [];
+        }
+        
         $userData = method_exists($userObject, 'toArray') ? $userObject->toArray() : [];
 
         $methodsToCall = ['getDashboardUrl', 'isAMember'];
