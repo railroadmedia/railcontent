@@ -69,7 +69,7 @@ class UserController extends Controller
 
         $verificationToken = $request->get('verification_token');
 
-        if ($verificationToken !== md5($email . config('shopify.accountCreationSecretKey'))) {
+        if (strtolower($verificationToken) !== strtolower(md5($email . config('shopify.accountCreationSecretKey')))) {
             throw new AuthorizationException('Invalid verification_token.', 403);
         }
 
