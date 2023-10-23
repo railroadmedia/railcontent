@@ -44,11 +44,11 @@ trait HandlesShopifyRateLimit
             $this->rateLimitSleepTime = $this->getRateLimitSleepTime();
         }
 
-        Log::info(sprintf("%s: Shopify API Call Limit: %s", $this->getClassName(), $limit));
         $current = intval(Str::before($limit, "/"));
         $max = intval(Str::after($limit, "/"));
 
         if ($max - $current <= $this->rateLimitThreshold) {
+            Log::info(sprintf("%s: Shopify API Call Limit: %s", $this->getClassName(), $limit));
             $this->logWarning(
                 sprintf(
                     "%s: About to hit API rate limit. Sleeping for %s %s...",
