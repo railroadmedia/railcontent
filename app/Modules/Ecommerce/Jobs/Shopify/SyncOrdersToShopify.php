@@ -766,6 +766,16 @@ class SyncOrdersToShopify implements ShouldQueue
             // "tags" => "",
         ];
 
+        // record a note that this order was migrated from the old system, including the order ID, and put it first
+        $migrateNote = Str::of(
+            sprintf("Imported from the old ecommerce system: order ID %s.", $order->getId())
+        );
+        if (empty($order->getNote())) {
+            $notesStr = $migrateNote;
+        } else {
+            $notesStr = $migrateNote->newLine()->append($order->getNote());
+        }
+
         // record a note if there were any refunds
         $refundNotes = null;
         $refunds = $this->getRefundsForOrder($order);
@@ -796,15 +806,10 @@ class SyncOrdersToShopify implements ShouldQueue
 
             $refundNotes = $refundNotes->value();
         }
-        if (empty($order->getNote())) {
-            $notes = $refundNotes;
-        } else {
-            $notes = Str::of($order->getNote())->newLine()->append($refundNotes)->value();
-        }
 
-        if ($notes) {
-            $orderData["note"] = $notes;
-        }
+        $notesStr = $notesStr->newLine()->append($refundNotes);
+
+        $orderData["note"] = $notesStr->value();
 
         if ($withMetafields) {
             // refer to https://shopify.dev/docs/apps/custom-data/metafields/types
