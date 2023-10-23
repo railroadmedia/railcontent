@@ -1,5 +1,7 @@
 @php
-$isOnboarding = str_contains(request()->url(), '/onboarding')
+use Illuminate\Support\Str;
+$isOnboarding = str_contains(request()->url(), '/onboarding');
+$userData = assembleUserAttributes(user());
 @endphp
 
 <!DOCTYPE html>
@@ -9,6 +11,7 @@ $isOnboarding = str_contains(request()->url(), '/onboarding')
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
+        <meta name="robots" content="noindex">
         {!! \App\Analytics\Tracker::trackPageView() !!}
         @yield('meta')
 
@@ -48,22 +51,15 @@ $isOnboarding = str_contains(request()->url(), '/onboarding')
                 <app-container
                     :vue-router="false"
                     brand="{{ $brand }}"
+                    :user="{{ json_encode($userData) }}"
+                    csrf_token="{{ csrf_token() }}"
                 >
                     <page-container
-                        csrf_token="{{ csrf_token() }}"
-                        brand="{{ $brand }}"
                         :is-live="{{ json_encode(isLive()) }}"
                         :is-onboarding="{{ json_encode($isOnboarding) }}"
                         search-url=""
                         :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}mostRecentPlaylists
                         :most-recent-playlists="{{ json_encode($mostRecentPlaylists) }}" {{-- Preloaded Content --}}
-                        @if(!empty( user() ))
-                            user-name="{{ user()->display_name }}"
-                            user-avatar="{{ user()->profile_picture_url }}"
-                            user-id="{{ user()->id }}"
-                            account-url="{{ user()->getDashboardUrl() }}"
-                            :can-refer-new-students="{{ json_encode(user()->isAMember()) }}"
-                        @endif
                         @if(!empty( $hasUnreadNotifications ))
                             :has-notifications="{{ json_encode($hasUnreadNotifications) }}"
                         @endif

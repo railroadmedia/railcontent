@@ -33,7 +33,6 @@
     @include("drumeo.sales.partials._nav", [
             "hideJoin" => true,
             "subscriptionVersion" => true,
-            "fullSubscriptionVersion" => true,
         ])
     <section class="text-center text-white px-4 sm:px-6 py-2 sm:py-6 lg:py-8 bg-cover bg-center" style="background-color: #0f4783;background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/festival/vdf/header-banner.jpg);">
         <div class="container max-w-6xl mx-auto">

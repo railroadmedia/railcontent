@@ -160,9 +160,9 @@
     @endif
 
     @if($hasStartedLessons && $lessonType !== 'routine')
-        <section class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+        <section class="tw-container tw-mx-auto dark:tw-text-white lg:tw-px-4">
             <!-- Section Title -->
-            <div class="tw-flex tw-items-center tw-mt-5 tw-mb-4 tw-w-full tw-justify-between">
+            <div class="tw-flex tw-items-center tw-mt-5 tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
                 <a href="/{{ $brand }}/lesson-history/in-progress" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                     <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">In Progress</h2>
                 </a>
@@ -173,29 +173,18 @@
                     See All
                 </a>
             </div>
-
-            <div id="inProgress"
-                class="tw-flex tw-flex-row tw-pb-2 tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457] feature-catalogue six-cards-row">
+            <div>
                 <transition appear name="fade">
-                    <content-catalogue
-                        catalogue-type="grid"
+                    <catalogue-card-container
                         theme-color="{{ $brand }}"
-                        :pre-loaded-content="{{ $startedLessons }}"
-                        user-id="{{ auth()->id() }}"
+                        catalogue-type="grid"
                         no-results-message="Looks like you haven't started any lessons.
             Once you watch a video, it will show up here for you to access later."
                         :six-wide="true"
                         :show-filter="false"
+                        :pre-loaded-content="{{ $startedLessons }}"
                     >
-                        <div class="flex flex-row nmh-1">
-                            @for($i = 0; $i < 6; $i++)
-                                @include('partials.bladesora.members.skeletons.card-item', [
-                                    "thumbnailType" => $lessonType === 'song' ? 'square' : 'widescreen',
-                                    "cardClass" => "six-wide",
-                                ])
-                            @endfor
-                        </div>
-                    </content-catalogue>
+                    </catalogue-card-container>
                 </transition>
             </div>
         </section>

@@ -26,6 +26,9 @@ class LeadGenController extends BaseController
     public function subscribed() {
         return view('guitareo.lead-gen.pages.subscribed');
     }
+    public function preferences() {
+        return view('guitareo.lead-gen.pages.preferences');
+    }
     public function weeklyemail() {
         return view('guitareo.lead-gen.pages.weekly-email', ['recaptchaKey'=>config('recaptcha.key')]);
     }

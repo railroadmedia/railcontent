@@ -18,6 +18,12 @@ class LeadGenController extends BaseController
                 return view('drumeo.lead-gen.100-songs.signup', ['theme'=> 'drumeo', 'recaptchaKey'=>config('recaptcha.key')]);
             case 'unlocked':
                 return view('drumeo.lead-gen.100-songs.unlocked');
+            case 'thank-you':
+                return view('drumeo.lead-gen.100-songs.thank-you', ['theme'=> 'drumeo', 'month' => true]);
+            case 'ty-annual':
+                return view('drumeo.lead-gen.100-songs.ty-annual', ['theme'=> 'drumeo', 'month' => true]);
+            case 'ty-monthly':
+                return view('drumeo.lead-gen.100-songs.ty-monthly', ['theme'=> 'drumeo', 'month' => true]);
         }
 
         throw new NotFoundHttpException();
@@ -47,11 +53,6 @@ class LeadGenController extends BaseController
     public function dtmeTestimonials(Request $request, $domain, $page = null)
     {
         return view('drumeo.products.dtme-testimonials');
-    }
-
-    public function fasterNeon()
-    {
-        return view('drumeo.lead-gen.faster.signup-neon', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function gavinsGrooves()
@@ -266,7 +267,7 @@ class LeadGenController extends BaseController
             return view('drumeo.lead-gen.blog-forms.'.$page, ['recaptchaKey'=>config('recaptcha.key')]);
         }
         else {
-            return view('drumeo.lead-gen.pages.'.$page);
+            return view('drumeo.lead-gen.pages.'.$page, ['theme' => 'drumeo']);
         }
 
         throw new NotFoundHttpException();
@@ -292,6 +293,10 @@ class LeadGenController extends BaseController
         return view('drumeo.lead-gen.pages.teach-a-beginner-lessons');
     }
 
+    public function giveaway()
+    {
+        return view('drumeo.lead-gen.pages.giveaway', ['recaptchaKey'=>config('recaptcha.key')]);
+    }
     public function weeklyEmail()
     {
         return view('drumeo.lead-gen.blog-forms.weekly-email', ['recaptchaKey'=>config('recaptcha.key')]);

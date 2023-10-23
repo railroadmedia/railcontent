@@ -268,6 +268,26 @@ return [
                     'drumeo',
                 ],
             ],
+            'Drumeo Giveaway' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Drumeo Giveaway Rafflepress' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_rafflepress-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
             'Drumeo Awards Giveaway' => [
                 'custom_attributes' => [
                 ],
@@ -410,11 +430,31 @@ return [
                     'pianote',
                 ],
             ],
+            'Beautiful Christmas Classics' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_beautiful-christmas-classics',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Blog Signup' => [
                 'custom_attributes' => [
                 ],
                 'events' => [
                     'pianote_prospect_blog-signup',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Easy Classical Songs' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_easy-classical-songs',
                 ],
                 'accounts_to_sync' => [
                     'pianote',
@@ -605,6 +645,66 @@ return [
                 ],
                 'events' => [
                     'pianote_prospect_personality-quiz-scientist',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Pianote Webinar' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_webinar-registrations',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Pianote webinar Joined' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_webinar-joined',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Pianote Webinar Watched' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_webinar-watched',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Pianote Webinar Replay Watched' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_webinar-replay-watched',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Pianote Webinar Missed' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_webinar-missed',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Pianote Webinar Finished' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_webinar-finished',
                 ],
                 'accounts_to_sync' => [
                     'pianote',

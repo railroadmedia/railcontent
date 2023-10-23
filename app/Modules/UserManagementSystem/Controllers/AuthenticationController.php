@@ -167,6 +167,7 @@ class AuthenticationController extends Controller
 
             $token = $user->createToken($request->get('device_name'));
             $user->withAccessToken($token);
+            $user['login_as_users'] = user()->hasRole('login_as_users');
 
             return response()->json(['token' => $token->plainTextToken, 'user' => $user]);
         }

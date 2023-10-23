@@ -47,7 +47,7 @@
             text-rendering: auto;
             opacity: 1;
             line-height: 1;
-            font-family: "Font Awesome 5 Pro";
+            font-family: "Font Awesome 6 Pro";
             font-weight: 300;
             color: #f61a30;
             font-size: 28px;
@@ -116,7 +116,7 @@
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#F2EFED;">
         <div class="container max-w-4xl mx-auto">
-            <h3 class="text-center"><strong>Original & Simplified <br class="inline sm:hidden"> Arrangments of Every Piece</strong></h3>
+            <h3 class="text-center"><strong>Original & Simplified <br class="inline sm:hidden"> Arrangements of Every Piece</strong></h3>
             <p class="leading-normal mt-4 sm:mt-5 mb-7 sm:mb-10">
                 <span class="text-pianote"><em>Because these pieces should<br class="inline sm:hidden"> not be reserved for the pros.</em></span>
                 <br><br>
@@ -140,7 +140,7 @@
     <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book-bg.jpg);">
         <h3 class="leading-tight"><strong>Take A Look Inside.</strong></h3>
         <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative" style="bottom:-7px"></i> <em>Click to see inside the book!</em> <i class="fa-light fa-arrow-turn-down ml-1 relative" style="bottom:-7px"></i></p>
-        <a target="_blank" href="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Classical-Piano-Book-1-14.pdf" class="relative">
+        <a target="_blank" href="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/tmbcpp-preview.pdf" class="relative">
             <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
             <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=2500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
         </a>

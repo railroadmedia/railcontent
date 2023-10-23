@@ -71,8 +71,8 @@
             "firstPoint" => "Unlimited singing lessons.",
             "thirdPoint" => "Direct access to vocal coaches.",
             "fifthPoint" => "Lesson access for guitar, piano, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-30-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial&referralCode=$referralCode",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[singeo-monthly-recurring-30-day-trial-membership]=1&redirect=/order&locked=true&referralCode=$referralCode",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-30-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial&referralCode=" . $referralCode,
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[singeo-monthly-recurring-30-day-trial-membership]=1&redirect=/order&locked=true&referralCode=" . $referralCode,
         ])
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'singing',

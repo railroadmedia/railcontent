@@ -44,6 +44,7 @@
         </div>
     </header>
 
+
     @if(Session::has('addedProducts'))
         <section class="added-to-cart-background clearfix">
             <div class="float-left w-full px-2 md:px-3 check">
@@ -102,34 +103,6 @@
 
 
     <div class="white-box">
-{{--        @include('_partials.layout.holiday.bundle-cards', [--}}
-{{--            "header" => 'Join Drumeo And Save 20%<br class="sm:hidden"> + Choose Your Bonus Bundle',--}}
-{{--        ])--}}
-
-{{--        <section class="bundles" x-show="filter === 'all'">--}}
-{{--            <div class="container mx-auto">--}}
-{{--                <div class="float-left w-full px-2 md:px-3 card-wrap">--}}
-{{--                    <div>--}}
-{{--                        <a href="/drumshop/5-for-3-bundle/" class="flex flex-row text-white rounded-xl mx-auto mb-5 sm:mb-10 overflow-hidden relative w-full sm:text-left px-3 md:px-5 lg:px-[13%] pt-40 pb-5 sm:py-7 lg:py-8">--}}
-{{--                            <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">--}}
-
-{{--                                <img class="h-20 sm:h-24 md:h-28 lg:h-32" src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-logo-stacked.png"><br>--}}
-{{--                                <p class="leading-tight my-3 text-xs italic">A 5-Year Membership for the price of 3, and more!</p>--}}
-{{--                                <h4 class="inline-block leading-none"><strong>--}}
-{{--                                        <span class="opacity-60">Was <s>$2270</s></span>&nbsp; <span class="text-promo">Now $720</span></strong></h4><br>--}}
-{{--                                <div class="join white smaller mt-3 w-full bg-[#24CE7C] text-white p-[10px] md:max-w-md w-full text-[15px] lg:text-[17px]">See The Deal &raquo;</div><br>--}}
-{{--                            </div>--}}
-{{--                            <p class="absolute z-20 top-0 left-0 text-black rounded-br-xl bg-promo uppercase py-1.5 px-2.5 leading-none text-xs font-roboto"><i class="fas fa-star"></i> <strong>SAVE 20%</strong></p>--}}
-{{--                            <div class="hidden lg:block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#05b4d7;background-image:url(https://www.musora.com/musora-cdn/image/width=3050,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-shop3.jpg);"></div>--}}
-{{--                            <div class="hidden sm:block lg:hidden absolute inset-0 z-0 bg-cover bg-center" style="background-color:#05b4d7;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-shop3.jpg);"></div>--}}
-{{--                            <div class="block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-color:#05b4d7;background-image:url(https://www.musora.com/musora-cdn/image/width=800,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-shop-m3.jpg);"></div>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-{{--            </div>--}}
-{{--        </section>--}}
-
         {{--  LESSONS  --}}
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
@@ -327,13 +300,5 @@
 
 @section('layout-footer')
     @include("drumeo.sales.partials._footer")
-@endsection
-
-@section('layout-scripts')
-    @parent
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2023-07-31 23:59:59',
-        'promoVersion' => true
-    ])
 @endsection
 

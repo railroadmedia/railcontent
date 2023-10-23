@@ -47,6 +47,7 @@ class UserDelete extends Command
                 'mentor_students',
                 'onboarding_answer_history',
                 'onboarding_experience',
+                'onboarding_goals',
                 'onboarding_gears',
                 'onboarding_genres',
                 'onboarding_topics',

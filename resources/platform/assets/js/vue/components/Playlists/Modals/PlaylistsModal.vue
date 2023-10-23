@@ -8,6 +8,9 @@
     import UnpinModal from './UnpinModal/UnpinModal.vue';
     import RenameItem from './RenameItem.vue';
     import ShareModal from './ShareModal.vue';
+    import { useUserStore } from '../../../../stores/user';
+    const userStore = useUserStore();
+    const { brand } = storeToRefs(userStore)
 
     const emit = defineEmits(['onClosePlaylistsModal']);
 
@@ -20,10 +23,6 @@
                 data: {},
                 index: null
             })
-        },
-        brand: {
-            type: String,
-            default: 'drumeo'
         }
     });
 

@@ -3,23 +3,23 @@
         <div id="cart-sidebar-overlay" @click.stop.prevent="closeCartSidebar" :class="{active: active}">
         </div>
         <section id="cart-sidebar" :class="{active: active}">
-            <div class="top relative py-2 pr-4">
+            <div class="top relative mb-2">
                 <h3 class="mb-0 leading-tight"><strong>Your Cart</strong></h3>
                 <a
                     href="#"
-                    class="close absolute text-gray-400 absolute top-0 right-0 mr-3"
+                    class="close absolute text-gray-400 absolute top-0 right-0"
                     style="font-size: 16px !important;"
                     @click.stop.prevent="closeCartSidebar"
                     aria-label="close"
                 ><i class="fas fa-times fa-2x"></i></a>
             </div>
-            <div class="csb-guarantee pb-4 pr-4">
+            <div class="csb-guarantee mb-4">
                 <p class="text-xs text-gray-500">
                     <i class="fas fa-circle-check mr-1.5" :class="'text-' + brand"></i>
                     <span>All of our lessons are backed by a 90-day guarantee.</span>
                 </p>
             </div>
-            <div id="csb-products-container" class="relative overflow-hidden border-b border-t border-gray-300 mr-3" style="height:345px" v-show="cartItems">
+            <div id="csb-products-container" class="relative overflow-hidden border-b border-t border-gray-300" style="height:345px" v-show="cartItems">
                 <div class="csb-products-inner" style="height:345px" ref="simplebar">
                     <div class="csb-products-wrapper max-h-full">
                         <cart-item
@@ -46,15 +46,15 @@
                     </div>
                 </div>
             </div>
-            <div class="csb-remove-all-items py-3 pr-2" v-show="cartItems" @click.stop.prevent="clearCart">
-              <p class="leading-tight cursor-pointer text-sm text-gray-500 text-center w-full pb-3 border-b border-gray-300">
+            <div class="csb-remove-all-items py-3 border-b border-gray-300 text-center" v-show="cartItems" @click.stop.prevent="clearCart">
+              <p class="leading-tight cursor-pointer text-gray-500 w-full">
                   <u>Remove all items from cart</u>
               </p>
             </div>
-            <div class="summary-container text-sm py-5 pr-3">
+            <div class="summary-container text-sm my-5">
                 <div class="summary-row flex justify-between">
-                    <p class="summary text-sm">Subtotal</p>
-                    <p v-if="subTotalBeforeDiscounts() !== subTotalAfterDiscounts()" class="text-sm due">
+                    <p class="summary mx-0">Subtotal</p>
+                    <p v-if="subTotalBeforeDiscounts() !== subTotalAfterDiscounts()" class="mx-0 due">
                         <strong>
                         <span v-if="cartTotals">
                             <s style="font-weight: normal; color: #666;">${{ parseTotal(subTotalBeforeDiscounts()) }}</s>
@@ -62,28 +62,28 @@
                         </span>
                         </strong>
                     </p>
-                    <p v-if="subTotalBeforeDiscounts() === subTotalAfterDiscounts()" class="text-sm due">
+                    <p v-if="subTotalBeforeDiscounts() === subTotalAfterDiscounts()" class="mx-0 due">
                         <strong>
                         <span v-if="cartTotals">${{ parseTotal(subTotalAfterDiscounts()) }}</span>
                         </strong>
                     </p>
                 </div>
                 <div v-if="sumOfDiscounts() > 0" class="summary-row flex justify-between">
-                    <p class="summary text-sm">My Savings</p>
-                    <p class="savings text-red-600 text-sm">
+                    <p class="summary mx-0">My Savings</p>
+                    <p class="savings text-red-600 mx-0">
                         <span v-if="cartTotals">-${{ parseTotal(sumOfDiscounts()) }}</span>
                     </p>
                 </div>
                 <div v-if="cartRequiresShippingAddress" class="summary-row flex justify-between">
-                    <p class="summary text-sm">Shipping</p>
-                    <p class="deferred text-sm"><em>{{shippingCostMessage }}</em></p>
+                    <p class="summary mx-0">Shipping</p>
+                    <p class="deferred mx-0"><em>{{shippingCostMessage }}</em></p>
                 </div>
                 <div class="summary-row flex justify-between">
-                    <p class="summary text-sm">Tax</p>
-                    <p class="deferred text-sm"><em>Calculated at checkout</em></p>
+                    <p class="summary mx-0">Tax</p>
+                    <p class="deferred mx-0"><em>Calculated at checkout</em></p>
                 </div>
             </div>
-            <div class="checkout mr-3 text-center">
+            <div class="checkout text-center">
                 <a :href="checkoutUrl" :class="brand"><i class="fas fa-lock mr-2"></i>checkout</a>
             </div>
 <!--            <div v-if="!locked" class="recommended-title">-->
@@ -474,7 +474,7 @@ export default {
     -o-transition: all 0.1s;
     height: 100vh;
     overflow: auto;
-    padding: 20px 5px 20px 20px;
+    padding: 20px;
     background: #FCFCFC;
     @include xSmallOnly {
         width: 95%;
