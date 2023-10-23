@@ -7,7 +7,7 @@
         <transition appear name="fade">
             <CollectionResults>
                 <CoachesGridCatalogue v-if="isCoach" :content="collectionStore.data" :brand="collectionStore.brand" />
-                <ListCatalogue v-else-if="isList" :content="collectionStore.data"
+                <ListCatalogue v-else-if="isList" :content="collectionStore.data" :force-wide-thumbs="isStudentReview"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <RoutinesCatalogue v-else-if="isRoutine" :content="collectionStore.data"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
@@ -107,6 +107,10 @@ const isList = computed(() => {
     return !isPlayAlong.value && !isRoutine.value;
 })
 
+const isArchives = computed(() => {
+    return props.collectionType === 'recording';
+})
+
 const isBootCamps = computed(() => {
     return props.collectionType === 'boot-camps';
 })
@@ -127,8 +131,16 @@ const isSolos = computed(() => {
     return props.collectionType === 'solos';
 });
 
+const isSongTutorial = computed(() => {
+    return props.collectionType === 'song-tutorial';
+})
+
 const isStudentFocus = computed(() => {
     return props.collectionType === 'student-focus';
+})
+
+const isStudentReview = computed(() => {
+    return props.collectionType === 'student-review';
 })
 
 const isQuickTips = computed(() => {
@@ -144,7 +156,7 @@ const isRudiment = computed(() => {
 })
 
 const showFilter = computed(() => {
-    return isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value;
+    return isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value;
 })
 
 const getTabOptions = computed(() => {
@@ -203,6 +215,8 @@ const tabData = computed(() => {
 })
 
 onMounted(() => {
+    console.log(props.collectionType)
+
     collectionStore.setDefaults({
         brand: props.brand,
         data: props.preLoadedContent?.data || [],
