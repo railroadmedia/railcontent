@@ -3,7 +3,6 @@
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
-use App\Modules\Ecommerce\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
@@ -13,13 +12,14 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
+use Modules\UserManagementSystem\Models\User;
 
 /**
  * This job acts as a manager between the dispatching command and the syncing jobs.
- * There are too many orders for the dispatcher to create all the syncing jobs fast enough, so we use this job to
+ * There could be too many users for the dispatcher to create all the syncing jobs fast enough, so we use this job to
  * take the large chunk of jobs, and further break that down into smaller chunks to pass along to the syncing jobs.
  */
-class SyncOrdersToShopifyJobManager implements ShouldQueue
+class SyncUsersToShopifyJobManager implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;
@@ -59,31 +59,21 @@ class SyncOrdersToShopifyJobManager implements ShouldQueue
      */
     public function handle(): void
     {
-        $orders = Order::query()
+        $users = User::query()
             ->whereBetween("id", [$this->startAtId, $this->endAtId])
             ->where(function (Builder $q) {
                 $q->when(!$this->fresh, function (Builder $q) {
                     return $q->whereNull("shopify_id")
-                        ->orWhereDate("updated_at", ">", $this->lastSyncAt)
-
-                        // we also need to check if any of the order's order items or order item fulfillments need to be synced
-                        ->orWhereHas("orderItems", function (Builder $oiq) {
-                            $oiq->whereNull("shopify_id")
-                                ->orWhereDate("updated_at", ">", $this->lastSyncAt);
-                        })
-                        ->orWhereHas("orderItemFullfillments", function (Builder $oifq) {
-                            $oifq->whereNull("shopify_id")
-                                ->orWhereDate("updated_at", ">", $this->lastSyncAt);
-                        });
+                        ->orWhereDate("updated_at", ">", $this->lastSyncAt);
                 });
             })
             ->select("id");
 
         $this->logDebug(
             sprintf(
-                "%s: running batch for %s orders: %s - %s",
+                "%s: running batch for %s users: %s - %s",
                 $this->getClassName(),
-                $orders->count(),
+                $users->count(),
                 $this->startAtId,
                 $this->endAtId
             )
@@ -91,13 +81,13 @@ class SyncOrdersToShopifyJobManager implements ShouldQueue
 
         $batchSize = 25;
         $jobs = [];
-        // step through the chunks of order ids to sync, and add a job to process each chunk
-        $orders->chunk($batchSize, function ($orderIds) use (&$jobs) {
-            $firstOrderId = $orderIds->first()->id;
-            $lastOrderId = $orderIds->last()->id;
-            $jobs[] = new SyncOrdersToShopify(
-                $firstOrderId,
-                $lastOrderId,
+        // step through the chunks of user ids to sync, and add a job to process each chunk
+        $users->chunk($batchSize, function ($userIds) use (&$jobs) {
+            $firstUserId = $userIds->first()->id;
+            $lastUserId = $userIds->last()->id;
+            $jobs[] = new SyncUsersToShopify(
+                $firstUserId,
+                $lastUserId,
                 $this->lastSyncAt,
                 $this->simulate,
                 $this->fresh
@@ -112,6 +102,6 @@ class SyncOrdersToShopifyJobManager implements ShouldQueue
      */
     protected function getClassName(): string
     {
-        return "SyncOrdersToShopifyJobManager";
+        return "SyncUsersToShopifyJobManager";
     }
 }

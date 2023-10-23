@@ -239,4 +239,8 @@ class Product extends Model
     {
         return in_array($this->type, self::DIGITAL_PRODUCT_TYPES);
     }
+
+    public function isTrial(): bool{
+        return str_contains(strtolower($this->sku), 'trial');
+    }
 }

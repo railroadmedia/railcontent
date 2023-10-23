@@ -245,7 +245,7 @@ class SyncOrdersToShopify implements ShouldQueue
                             self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_ORDER,
                             self::RESULTS_MODEL_ID => $order->getId(),
                             self::RESULTS_ACTION => "SKIPPED",
-                            self::RESULTS_FAIL_MESSAGE => "User has not been synced to Shopify"
+                            self::RESULTS_FAIL_MESSAGE => "User $user->id has not been synced to Shopify"
                         ];
                         $skip = true;
                     }
@@ -272,7 +272,7 @@ class SyncOrdersToShopify implements ShouldQueue
                             self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_ORDER,
                             self::RESULTS_MODEL_ID => $order->getId(),
                             self::RESULTS_ACTION => "SKIPPED",
-                            self::RESULTS_FAIL_MESSAGE => "Customer has not been synced to Shopify"
+                            self::RESULTS_FAIL_MESSAGE => "Customer {$customer->getId()} has not been synced to Shopify"
                         ];
                         $skip = true;
                     }
@@ -888,6 +888,7 @@ class SyncOrdersToShopify implements ShouldQueue
                 &$orderItemsData,
                 &$refundAmount
             ) {
+                $price = $orderItem->product->isTrial() ? 0 : $orderItem->initial_price ?? 0;
                 $data = [
                     // include the shopify_id, if we have one, so we know if we're updating or creating - shopify will just ignore this
                     "shopify_id" => $orderItem->shopify_id,
@@ -895,7 +896,7 @@ class SyncOrdersToShopify implements ShouldQueue
                     "ecommerce_order_item_id" => $orderItem->id,
                     "fulfillable_quantity" => $orderItem->quantity,
                     "fulfillment_service" => "manual",
-                    "price" => number_format($orderItem->initial_price ?? 0, 2, '.', ''),
+                    "price" => number_format($price, 2, '.', ''),
                     "quantity" => $orderItem->quantity,
                     "requires_shipping" => $orderItem->weight > 0,
                     "sku" => $orderItem->product->sku,
