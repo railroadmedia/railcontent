@@ -115,7 +115,7 @@ class UserAccessPermissionsService
         event(new UserAccessPermissionsUpdated($accessPermissions));
     }
 
-    public function syncShopifyOrders(User $user, $orders, $products): void
+    public function syncShopifyOrders(User $user, $orders, $products, $skipRechargeSync = false): void
     {
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
         $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($user->id);
@@ -133,11 +133,11 @@ class UserAccessPermissionsService
 
         $this->ensureUserProductAccess(
             $user,
-            $contentPermissionsLookup
+            $contentPermissionsLookup,
         );
 
         $accessPermissions = $this->getUserAccessPermissions($user->id);
-        event(new UserAccessPermissionsUpdated($accessPermissions));
+        event(new UserAccessPermissionsUpdated($accessPermissions, $skipRechargeSync));
     }
 
     private function syncShopifyOrder(
@@ -172,7 +172,7 @@ class UserAccessPermissionsService
                     $accessPermission = $this->createUserAccessPermission(
                         $user,
                         $contentPermission->id,
-                        Carbon::parse($order->createdAt),
+                        Carbon::parse($order->processedAt),
                         $source,
                         $hash,
                         $product,

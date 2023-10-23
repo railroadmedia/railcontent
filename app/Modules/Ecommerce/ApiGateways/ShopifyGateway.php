@@ -35,7 +35,7 @@ class ShopifyGateway
                     nodes {
                         ... on Order {
                             id
-                            createdAt
+                            processedAt
                             cancelledAt
                             brand: metafield(namespace: "$musoraNamespace", key: "$brandFieldKey") {
                                 value

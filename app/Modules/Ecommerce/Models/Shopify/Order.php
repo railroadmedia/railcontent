@@ -15,7 +15,7 @@ class Order
     public ?string $brand;
     public ShopifyPaymentSourceEnum $paymentSourceEnum;
     public Collection $lineItems;
-    public ?Carbon $createdAt;
+    public ?Carbon $processedAt;
     public ?Carbon $cancelledAt;
 
     public function __construct(
@@ -27,7 +27,7 @@ class Order
         $this->paymentSourceEnum = ShopifyPaymentSourceEnum::tryFrom(
             $graphGLResponse->paymentSource?->value
         ) ?? ShopifyPaymentSourceEnum::Web;
-        $this->createdAt = $graphGLResponse->createdAt ? Carbon::parse($graphGLResponse->createdAt) : null;
+        $this->processedAt = $graphGLResponse->processedAt ? Carbon::parse($graphGLResponse->processedAt) : null;
         $this->cancelledAt = $graphGLResponse->cancelledAt ? Carbon::parse($graphGLResponse->cancelledAt) : null;
         $this->lineItems = collect($graphGLResponse->lineItems->nodes)->map(function ($item) {
             return new OrderLineItem($item);

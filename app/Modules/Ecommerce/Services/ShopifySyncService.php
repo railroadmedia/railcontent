@@ -53,7 +53,7 @@ class ShopifySyncService
         $this->shopifyGateway = $shopifyGateway;
     }
 
-    public function syncCustomer($shopifyCustomerId, $email = ''): void
+    public function syncCustomer($shopifyCustomerId, $email = '', $skipRechargeSync = false): void
     {
         if (!config('shopify.enabled') || !$shopifyCustomerId) {
             return;
@@ -66,7 +66,7 @@ class ShopifySyncService
             $count = $orders->count();
             Log::debug("Customer $shopifyCustomerId: Found $count orders");
             $user = $this->getUser($shopifyCustomerId, $email);
-            $this->userAccessPermissionsService->syncShopifyOrders($user, $orders, $products);
+            $this->userAccessPermissionsService->syncShopifyOrders($user, $orders, $products, $skipRechargeSync);
         };
     }
 
