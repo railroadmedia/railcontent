@@ -59,11 +59,9 @@ trait SyncsAddressData
                     "address1" => $localAddress->getStreetLine1(),
                     "address2" => $localAddress->getStreetLine2(),
                     "city" => $localAddress->getCity(),
-                    "country" => $localAddress->getCountry(),
                     "first_name" => $localAddress->getFirstName(),
                     "last_name" => $localAddress->getLastName(),
                     "name" => "{$localAddress->getFirstName()} {$localAddress->getLastName()}",
-                    "province" => $localAddress->getRegion(),
                     "zip" => $localAddress->getZip()
                 ];
                 // compare the local data against Shopify's (ignoring case)
@@ -74,6 +72,31 @@ trait SyncsAddressData
                         break;
                     }
                 };
+
+                // we store region and country in either short code or full name, so compare those separately,
+                // and add them to the address data after the main comparison
+                $localAddressData["country"] = $localAddress->getCountry();
+                if (!in_array(
+                    strtoupper($localAddressData["country"]),
+                    [
+                        strtoupper($shopifyAddressData["country_code"]),
+                        strtoupper($shopifyAddressData["country_name"])
+                    ]
+                )
+                ){
+                    $isDifferent = true;
+                }
+                $localAddressData["province"] = $localAddress->getRegion();
+                if (!in_array(
+                    strtoupper($localAddressData["province"]),
+                    [
+                        strtoupper($shopifyAddressData["province_code"]),
+                        strtoupper($shopifyAddressData["province"])
+                    ]
+                )
+                ){
+                    $isDifferent = true;
+                }
 
                 // if we have some changes, return our values, plus the shopify ID (so it knows what to update)
                 if ($isDifferent) {

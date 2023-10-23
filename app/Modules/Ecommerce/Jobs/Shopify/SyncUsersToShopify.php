@@ -239,7 +239,17 @@ class SyncUsersToShopify implements ShouldQueue
         );
         $isCreating = $fresh || (is_null($user->shopify_id) && $alreadySyncedUserCustomers->isEmpty());
 
-        // TODO SRR-114: if !$isCreating, check if update is required
+        // if we're going to update the user, and we don't have any updates that Shopify needs, record it as skipped and move on
+        if (!$isCreating && !$this->checkForWantedUpdates($user, $userCustomers)) {
+            $this->results[] = [
+                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_USER,
+                self::RESULTS_MODEL_ID => $user->id,
+                self::RESULTS_ACTION => "SKIPPED",
+                self::RESULTS_FAIL_MESSAGE => "No local updates required syncing"
+            ];
+            return;
+        }
 
         // STEP 3: build up the data structure
         $postData = $this->createCustomerDataForUser($user, $isCreating);
@@ -318,6 +328,38 @@ class SyncUsersToShopify implements ShouldQueue
                 self::RESULTS_SHOPIFY_ID => $shopifyCustomerId
             ];
         });
+    }
+
+    /**
+     * Compare our data for the given user, and its addresses if necessary, against the data in Shopify,
+     * to identify if we need to sync up our changes or not.
+     *
+     * @param  User  $user
+     * @param  Collection<Customer>  $userCustomers
+     * @return bool whether the user has updates that Shopify needs
+     */
+    protected function checkForWantedUpdates(User $user, Collection $userCustomers): bool
+    {
+        // there are only a few attributes that we care about for the user
+        $userKeys = ["email", "first_name", "last_name", "note", "phone"];
+
+        // get the user's data from Shopify, so we can compare our values
+        $userDataResponse = $this->shopify->getCustomer($user->shopify_id);
+        $this->handleRateLimit();
+        $shopifyUserData = collect($userDataResponse->getAttributes())->only($userKeys);
+        $localUserData = collect($this->createCustomerDataForUser($user, false))->only($userKeys);
+        $userChanges = $localUserData->diff($shopifyUserData)->merge($shopifyUserData->diff($localUserData));
+        if ($userChanges->isNotEmpty()) {
+            return true;
+        }
+
+        // if there's no change in the user, then we need to check their addresses
+        // DEV NOTE: address setting is really messy and complicated, so we'll just reuse the existing code, even though
+        // it will be a little bit worse performance since we'll run it again when actually syncing, but it's worth the
+        // tradeoff
+        $changes = $this->updateAddressesDataForUser($user, $userCustomers);
+
+        return $changes->isNotEmpty();
     }
 
     /**
@@ -509,7 +551,7 @@ class SyncUsersToShopify implements ShouldQueue
      *
      * @param  User  $user
      * @param  Collection<Customer>  $userCustomers
-     * @return Collection
+     * @return Collection formatted data for addresses to update
      */
     private function updateAddressesDataForUser(User $user, Collection $userCustomers): Collection
     {
