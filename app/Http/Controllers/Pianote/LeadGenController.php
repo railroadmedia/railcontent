@@ -115,6 +115,10 @@ class LeadGenController extends BaseController
     {
         return view('pianote.lead-gen.song-secrets.thank-you', ['theme' => 'pianote']);
     }
+    public function giveaway()
+    {
+        return view('pianote.lead-gen.giveaway', ['theme' => 'pianote']);
+    }
 
     public function beginnerBootcamp(Request $request, $domain, $page = null)
     {
