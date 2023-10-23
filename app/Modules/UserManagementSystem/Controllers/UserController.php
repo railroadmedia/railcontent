@@ -177,31 +177,29 @@ class UserController extends Controller
         if ($user) {
             $user['shopify_customer_url'] =
                 ($user->shopify_id) ?
-                    'https://admin.shopify.com/store/'.config('usora.shopify_store').'/customers/'.$user->shopify_id :
+                    'https://admin.shopify.com/store/' . config(
+                        'usora.shopify_store'
+                    ) . '/customers/' . $user->shopify_id :
                     '';
             $user['revenuecat_customer_url'] =
                 ($user->revenuecat_origin_app_user_id) ?
-                    'https://app.revenuecat.com/customers/'.
-                    config('usora.revenuecat_project_id').
-                    '/'.
+                    'https://app.revenuecat.com/customers/' .
+                    config('usora.revenuecat_project_id') .
+                    '/' .
                     $user->revenuecat_origin_app_user_id : '';
 
             return json_encode([
-<<<<<<< HEAD
-                "data" => ["attributes" => json_encode($user)],
+                "data" => [
+                    "id" => $user->id,
+                    "type" => "user",
+                    "attributes" => $user,
+                ],
             ]);
-=======
-                                   "data" => [
-                                       "id" => $user->id,
-                                       "type" => "user",
-                                       "attributes" => $user,
-                                   ],
-                               ]);
->>>>>>> project-shopify
         } else {
             throw new NotFoundHttpException();
         }
     }
+
 
     /**
      * @param Request $request
@@ -216,7 +214,6 @@ class UserController extends Controller
         }
         try {
             $request->validate([
-<<<<<<< HEAD
                 'display_name' => [
                     Rule::unique(
                         config('user_management_system.database_connection_name') . '.usora_users'
@@ -227,18 +224,6 @@ class UserController extends Controller
                     'min:2',
                 ],
             ]);
-=======
-                                   'display_name' => [
-                                       Rule::unique(
-                                           config('user_management_system.database_connection_name').'.usora_users'
-                                       )
-                                           ->ignore($id),
-                                       'string',
-                                       'max:64',
-                                       'min:2',
-                                   ],
-                               ]);
->>>>>>> project-shopify
         } catch (ValidationException $e) {
             $messagesByField =
                 $e->validator->getMessageBag()
@@ -373,22 +358,17 @@ class UserController extends Controller
         }
 
         return json_encode([
-<<<<<<< HEAD
-            "data" => json_encode($users),
+            "data" => $results,
+            "meta" => [
+                "pagination" => [
+                    "total" => $totalResults,
+                    "per_page" => $limit,
+                    "current_page" => 1,
+                    "total_pages" => ceil($totalResults / $limit),
+                    "links" => [],
+                ],
+            ],
         ]);
-=======
-                               "data" => $results,
-                               "meta" => [
-                                   "pagination" => [
-                                       "total" => $totalResults,
-                                       "per_page" => $limit,
-                                       "current_page" => 1,
-                                       "total_pages" => ceil($totalResults / $limit),
-                                       "links" => [],
-                                   ],
-                               ],
-                           ]);
->>>>>>> project-shopify
     }
 
     /**
