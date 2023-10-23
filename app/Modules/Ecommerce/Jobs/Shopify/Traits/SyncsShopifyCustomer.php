@@ -445,7 +445,7 @@ trait SyncsShopifyCustomer
     {
         $failures = collect();
         $shopifyCustomers = $this->shopify->getCustomers(["email" => $this->getEmailForShopify($email)]);
-        $shopifyAttributes = $shopifyCustomers->first()->getAttributes() ?? null;
+        $shopifyAttributes = $shopifyCustomers->first()?->getAttributes() ?? null;
 
         // this shouldn't be possible, but check just in case
         if (is_null($shopifyAttributes)) {
@@ -453,7 +453,7 @@ trait SyncsShopifyCustomer
                 sprintf(
                     "The email address %s was already in use in Shopify, but no customers were found".
                     " when attempting to retrieve it from Shopify",
-                    $email
+                    $this->getEmailForShopify($email)
                 )
             );
             return $failures;
