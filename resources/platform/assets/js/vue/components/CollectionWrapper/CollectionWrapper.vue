@@ -2,11 +2,12 @@
     <div>
         <CollectionFilterWrapper v-if="showFilter" :filterable-values="filterableValues" :tab-options="tabOptionData"
             :pre-loaded-content="preLoadedContent" />
+        <h1 v-else class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-my-7">All {{ title }}</h1>
 
         <transition appear name="fade">
             <CollectionResults>
                 <CoachesGridCatalogue v-if="isCoach" :content="collectionStore.data" :brand="collectionStore.brand" />
-                <ListCatalogue v-else-if="isList" :content="collectionStore.data"
+                <ListCatalogue v-else-if="isList" :content="collectionStore.data" :force-wide-thumbs="isStudentReview"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <RoutinesCatalogue v-else-if="isRoutine" :content="collectionStore.data"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
@@ -72,6 +73,10 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
+    title: {
+        type: String,
+        default: () => '',
+    },
 });
 
 const collectionStore = useCollectionStore();
@@ -99,7 +104,15 @@ const includedTypes = computed(() => {
 })
 
 const isList = computed(() => {
-    return isCourse.value || isQuickTips.value || isStudentFocus.value || isQAndA.value || isRudiment.value;
+    return !isPlayAlong.value && !isRoutine.value;
+})
+
+const isArchives = computed(() => {
+    return props.collectionType === 'recording';
+})
+
+const isBootCamps = computed(() => {
+    return props.collectionType === 'boot-camps';
 })
 
 const isCoach = computed(() => {
@@ -110,16 +123,24 @@ const isCourse = computed(() => {
     return props.collectionType === 'course';
 })
 
-const isStudentFocus = computed(() => {
-    return props.collectionType === 'student-focus';
-})
-
 const isPlayAlong = computed(() => {
     return props.collectionType === 'play-along';
 })
 
-const isQAndA = computed(() => {
-    return props.collectionType === 'question-and-answer';
+const isSolos = computed(() => {
+    return props.collectionType === 'solos';
+});
+
+const isSongTutorial = computed(() => {
+    return props.collectionType === 'song-tutorial';
+})
+
+const isStudentFocus = computed(() => {
+    return props.collectionType === 'student-focus';
+})
+
+const isStudentReview = computed(() => {
+    return props.collectionType === 'student-review';
 })
 
 const isQuickTips = computed(() => {
@@ -135,7 +156,7 @@ const isRudiment = computed(() => {
 })
 
 const showFilter = computed(() => {
-    return !isRoutine.value;
+    return isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value;
 })
 
 const getTabOptions = computed(() => {
@@ -151,14 +172,6 @@ const getTabOptions = computed(() => {
             { key: 'instructors', value: 'Instructors' },
             { key: 'genres', value: 'Genres' },
         ];
-    } else if (isQAndA.value) {
-        return [
-            { key: 'allLessons', value: 'All Lessons' },
-        ];
-    } else if (isRoutine.value) {
-        return [
-            { key: 'routines', value: 'Routines' },
-        ];
     } else if (isRudiment.value) {
         return [
             { key: 'all', value: 'All' },
@@ -167,13 +180,10 @@ const getTabOptions = computed(() => {
             { key: 'paradiddles', value: 'Paradiddles' },
             { key: 'rolls', value: 'Rolls' },
         ];
-    } else if (isPlayAlong.value) {
-        return [
-            { key: 'allPlayAlongs', value: 'All Play-Alongs' },
-        ];
     }
+
     return [
-        { key: 'lessons', value: 'Lessons' },
+        { key: `all${props.title.replace(' ', '').toLowerCase()}`, value: `All ${props.title}` },
     ]
 });
 
@@ -205,6 +215,8 @@ const tabData = computed(() => {
 })
 
 onMounted(() => {
+    console.log(props.collectionType)
+
     collectionStore.setDefaults({
         brand: props.brand,
         data: props.preLoadedContent?.data || [],

@@ -87,7 +87,6 @@ Route::domain('{musoraDomain}')
                         'student-collaborations',
                         'live-streams',
                         'solos',
-                        'boot-amps',
                         'gear-guides',
                         'performances',
                         'in-rhythm',
@@ -103,7 +102,6 @@ Route::domain('{musoraDomain}')
                         'exploring-beats',
                         'sonor-drums',
                         'rudiments',
-                        'boot-camps',
                         'song-tutorials',
                         'drum-fest-international-2022',
                     ])
