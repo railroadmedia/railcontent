@@ -584,7 +584,7 @@ return [
                 'custom_attributes' => [
                 ],
                 'events' => [
-                    'pianote_prospect_fp30-giveaway',
+                    'pianote_prospect_giveaway-2023',
                 ],
                 'accounts_to_sync' => [
                     'pianote',
