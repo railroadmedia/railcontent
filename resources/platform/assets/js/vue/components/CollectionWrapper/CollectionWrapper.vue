@@ -1,11 +1,12 @@
 <template>
     <div>
-        <CollectionFilterWrapper v-if="showFilter" :filterable-values="filterableValues" :tab-options="tabOptionData"
-            :pre-loaded-content="preLoadedContent" :on-filter-change="handleFilterChange" :on-search-change="handleSearchChange" />
-        <h1 v-else class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-my-7">All {{ title }}</h1>
+        <CollectionFilterWrapper
+            :active-tab="filter.activeTab" :filterable-values="filterableValues" :hide-filter="!showFilter" :pre-loaded-content="preLoadedContent" :selected-filters="tabData[filter.activeTab] && tabData[filter.activeTab].included_fields" :selected-sort="tabData[filter.activeTab] && tabData[filter.activeTab].sort" :search-term="tabData[filter.activeTab] && tabData[filter.activeTab].searchTerm" :tab-options="tabOptionData"
+            @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
+        />
 
         <transition appear name="fade">
-            <CollectionResults>
+            <CollectionResults :current-page="filter.currentPage" :loading="loading" :total-pages="totalPages" @on-load-more="collectionStore.loadMore">
                 <CoachesGridCatalogue v-if="isCoach" :content="data" :brand="brand" />
                 <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
@@ -80,7 +81,7 @@ const props = defineProps({
 const collectionStore = useCollectionStore();
 const userStore = useUserStore();
 
-const { data, totalResults } = storeToRefs(collectionStore);
+const { data, currentPage, filter, loading, totalPages, tabData } = storeToRefs(collectionStore);
 const { brand } = storeToRefs(userStore);
 
 const request_params = computed(() => {
@@ -90,16 +91,21 @@ const request_params = computed(() => {
         required_user_states: props.requiredUserStates,
         included_types: includedTypes.value,
         include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
-        included_fields: props.included_fields || [],
         limit: props.limit,
     };
 })
 
 const includedTypes = computed(() => {
-    let types = [props.collectionType];
+    let types = [];
 
-    if (isQuickTips.value) {
-        types.push('boot-camps');
+    if (isCoach.value) {
+        types.push('instructor');
+    } else {
+        types.push(props.collectionType);
+
+        if (isQuickTips.value) {
+            types.push('boot-camps');
+        }
     }
 
     return types;
@@ -198,7 +204,7 @@ const getFirstTabOption = computed(() => {
     return tabOptionData.value[0]
 })
 
-const tabData = computed(() => {
+const getTabData = computed(() => {
     const tabDataMap = {};
 
     tabOptionData.value.forEach(tab => {
@@ -208,6 +214,7 @@ const tabData = computed(() => {
         }
         tabDataMap[tab.key] = {
             endpoint,
+            included_fields: props.included_fields || [],
             searchTerm: '',
             sort: isCoach.value ? 'slug' : '-published_on',
         };
@@ -216,11 +223,12 @@ const tabData = computed(() => {
     return tabDataMap;
 })
 
-const handleFilterChange = (param) => {
-    collectionStore.applyFilter(param);
+const handleFilterChange = (category, item) => {
+    collectionStore.applyFilter(`${category},${item.value}`);
 }
 
 const handleSearchChange = (value) => {
+    console.log('in wrapper', value)
     collectionStore.setSearchTerm(value)
 }
 
@@ -234,6 +242,7 @@ const handleTabChange = (tab) => {
 
 onMounted(() => {
     console.log(props.collectionType)
+    console.log(props.title)
 
     collectionStore.setDefaults({
         data: props.preLoadedContent?.data || [],
@@ -242,7 +251,7 @@ onMounted(() => {
             params: { ...request_params.value },
             [isCoach.value ? 'term' : 'title']: '',
         },
-        tabData: tabData.value,
+        tabData: getTabData.value,
         totalPages: props.preLoadedContent ? Math.ceil(props.preLoadedContent.meta.totalResults / props.limit) : 0,
         totalResults: props.preLoadedContent?.meta.totalResults || 0,
     })
