@@ -444,6 +444,28 @@
                                     'comment' => 'An absolutely fabulous program… for yourself, your son, your daughter or otherwise. <strong>Filled with great energy, and sound fundamentals.</strong> 🤩 If you’re thinking about it - don’t think, just do! ⚡️',
                                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/evan.jpg',
                                 ],
-                            ]
+                            ],
+        "practiceItems" => [
+            [
+                "icon" =>
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/5000-songs-icon.svg",
+                "title" => "Know exactly what to practice.",
+                "desc" =>
+                "30-Day Drummer gives you guided play-along workouts every day for thirty days. You’ll know exactly what to work on every time you sit at the drums or practice pad.",
+            ],
+            [
+                "icon" =>
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/tempo-icon.svg",
+                "title" => "Focused practice time.",
+                "desc" =>
+                "Each exercise includes a countdown timer that tells you exactly how long to practice for. This means you can turn off all distractions and focus on your drumming.",
+            ],
+            [
+                "icon" =>
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/loop-icon.svg",
+                "title" => "Lifetime access.",
+                "desc" =>
+                "30-Day Drummer can become part of your practice routine forever. You’ll have lifetime access to ALL the workouts and Q&A sessions from your class to access anytime you like.",
+            ],]
     ];
     ?>
