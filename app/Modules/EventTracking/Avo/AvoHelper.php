@@ -3,7 +3,6 @@
 namespace App\Modules\EventTracking\Avo;
 
 use App\Modules\EventTracking\Services\CustomerIoService;
-use Jenssegers\Agent\Agent;
 
 class AvoHelper
 {
@@ -20,9 +19,9 @@ class AvoHelper
             return 'pianote-app';
         } elseif (str_contains(strtolower($userAgent), 'musoraapp')) {
             return 'musora-app';
-        } else {
-            return 'web';
         }
+
+        return 'web';
     }
 
     /**
@@ -30,15 +29,15 @@ class AvoHelper
      */
     public static function getRequestOS(): string
     {
-        $userAgent = request()?->userAgent() ?? '';
+        $userAgent = strtolower(request()?->userAgent()) ?? '';
 
-        $agent = new Agent();
+        if (str_contains($userAgent, 'ios') || str_contains($userAgent, 'iphone') || str_contains($userAgent, 'ipad')) {
+            return 'ios';
+        } elseif (str_contains(strtolower($userAgent), 'android')) {
+            return 'android';
+        }
 
-        return match (strtolower($agent->platform($userAgent))) {
-            'ios' => 'ios',
-            'androidos' => 'android',
-            default => 'web'
-        };
+        return 'web';
     }
 
     /**
@@ -47,7 +46,6 @@ class AvoHelper
      */
     public static function defaultEventProperties(array $properties = []): array
     {
-
         $defaultProperties = [
             'user_id_' => userIdString(),
             'platform' => self::getRequestPlatform(),

@@ -23,9 +23,9 @@ class EventTrackerListener
          *        get rid of the customer_io_customer
          */
 
-        // wait for the original CustomerIoService to create the user profile
-        sleep(5);
-
-        Avo::account_created(AvoHelper::defaultEventProperties());
+        // @TODO EVENT TRACKING: enable Avo event trigger here when migration from CustomerIO is done.
+        // The Avo event trigger is being executed in the CustomerIoSyncNewUserByEmail job. That logic is going to be
+        // migrated to this function when migrating the CustomerIO setup.
+        // Avo::account_created(AvoHelper::defaultEventProperties());
     }
 }
