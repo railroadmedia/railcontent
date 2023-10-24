@@ -6,16 +6,14 @@
 @section('title', 'Weekly Email')
 
 @section('subtitle')
-    <h5 class="leading-tight mb-2 md:mb-4">
-        <strong class="inline-block mb-2">Drumming secrets you won't <br class="sm:hidden"> find anywhere else.</strong><br>
-        Get insider tips, viral videos and <br class="sm:hidden"> Drumeo deals right to your inbox.</h5>
+    <h5 class="leading-normal mb-3 md:mb-4">Enjoying this article? Enter your email address to get free drum lessons, <br class="hidden sm:inline">
+        interviews, and updates from around the drumming world:</h5>
 @endsection
 
 @section('form')
     @include("drumeo.lead-gen.partials.sign-up-form", [
         "recaptchaKey" => $recaptchaKey,
         "formId" => "Drumeo - Engagement - Trigger - Blog Signup - WebForm",
-        "inputText" => "Enter Your Email",
         "buttonText" => "Join The Drum Club",
         "minimalForm" => true,
     ])

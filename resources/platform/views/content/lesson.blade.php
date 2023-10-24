@@ -1,3 +1,10 @@
+@php
+    $hasRelatedLessons = false;
+    if(count(json_decode($relatedLessons)->data) > 1 && $lessonContent['id'] !== json_decode($relatedLessons)->data[0]->id){
+        $hasRelatedLessons = true;
+    }
+@endphp
+
 @extends('partials.layout', ['forceHideSidebar' => false])
 
 @section('meta')
@@ -15,7 +22,7 @@
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
     {{-- TODO: RT integration --}}
 
-    <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row">
+    <div class="tw-flex tw-w-full {{ $hasRelatedLessons ? 'tw-max-w-[1703px]' : 'tw-max-w-[1450px]' }} tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row">
 
         <div class="tw-flex tw-flex-col tw-w-full">
 
@@ -256,7 +263,7 @@
         </div>
 
         {{-- Related Lessons Section --}}
-        @if(count(json_decode($relatedLessons)->data) > 1 && $lessonContent['id'] !== json_decode($relatedLessons)->data[0]->id)
+        @if($hasRelatedLessons)
             <div class="">
                 <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
                     <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">

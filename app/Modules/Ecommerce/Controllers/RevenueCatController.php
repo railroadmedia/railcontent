@@ -11,21 +11,26 @@ use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
-use Modules\Ecommerce\Services\PaymentService;
+use App\Modules\Ecommerce\Services\PaymentService;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Gateways\RevenueCatGateway;
 
 class RevenueCatController extends Controller
 {
+    use ValidatesRequests;
+
     private RevenueCatService $revenueCatService;
     private SubscriptionService $subscriptionService;
     private UserProductService $userProductService;
     private ShopifySyncService $shopifySyncService;
     private PaymentService $paymentService;
+
+    const SUBSCRIPTION_REVOKED = 12;
 
     /**
      * @param RevenueCatService $revenueCatService
@@ -63,6 +68,8 @@ class RevenueCatController extends Controller
             return response()->json('Invalid token');
         }
         if (config('ecommerce.revenuecat_only') !== true) {
+            Log::debug('revenuecat_only flag disabled');
+
             return response()->json();
         }
 
@@ -90,7 +97,10 @@ class RevenueCatController extends Controller
                     //TBD
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
                     Log::error(
-                        'RevenueCatController processNotification::INITIAL_PURCHASE - user not found email: ' . $email . ' original_app_user_id: ' . $data['event']['original_app_user_id']
+                        'RevenueCatController processNotification::INITIAL_PURCHASE - user not found email: ' .
+                        $email .
+                        ' original_app_user_id: ' .
+                        $data['event']['original_app_user_id']
                     );
                     break;
                 }
@@ -102,13 +112,12 @@ class RevenueCatController extends Controller
                 $productId = $this->getProductId($data['event']['product_id']);
 
                 //get Musora product
-                $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
+                $musoraProduct = $this->getMusoraProducts($type, $data['event'], $productId)->first();
 
                 if (config('shopify.enabled')) {
                     $processedAt = Carbon::parse($data['event']['purchased_at_ms']);
                     if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
-                        $musoraProduct = $musoraProducts?->first();
-                        if(!$musoraProduct){
+                        if (!$musoraProduct) {
                             Log::error(
                                 "RevenueCatController processNotification::RENEWAL - musora product not found: $productId"
                             );
@@ -139,7 +148,7 @@ class RevenueCatController extends Controller
                         $musoraSubscription = $this->subscriptionService->createSubscription(
                             $user->id,
                             $data['event']['expiration_at_ms'],
-                            $musoraProducts,
+                            $musoraProduct,
                             $type,
                             $data['event']['purchased_at_ms']
                         );
@@ -181,7 +190,10 @@ class RevenueCatController extends Controller
                     //TBD
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
                     Log::error(
-                        'RevenueCatController processNotification::RENEWAL - user not found email: ' . $email . ' original_app_user_id: ' . $data['event']['original_app_user_id']
+                        'RevenueCatController processNotification::RENEWAL - user not found email: ' .
+                        $email .
+                        ' original_app_user_id: ' .
+                        $data['event']['original_app_user_id']
                     );
                     break;
                 }
@@ -199,7 +211,7 @@ class RevenueCatController extends Controller
                     $processedAt = Carbon::parse($data['event']['purchased_at_ms']);
                     if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
                         $musoraProduct = $musoraProducts?->first();
-                        if(!$musoraProduct){
+                        if (!$musoraProduct) {
                             Log::error(
                                 "RevenueCatController processNotification::RENEWAL - musora product not found: $productId"
                             );
@@ -270,7 +282,10 @@ class RevenueCatController extends Controller
                     //TBD
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
                     Log::error(
-                        'RevenueCatController processNotification::PRODUCT_CHANGE - user not found email: ' . $email . ' original_app_user_id: ' . $data['event']['original_app_user_id']
+                        'RevenueCatController processNotification::PRODUCT_CHANGE - user not found email: ' .
+                        $email .
+                        ' original_app_user_id: ' .
+                        $data['event']['original_app_user_id']
                     );
                     break;
                 }
@@ -336,7 +351,10 @@ class RevenueCatController extends Controller
                 if (!$user) {
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
                     Log::error(
-                        'RevenueCatController processNotification::CANCELLATION - user not found email: ' . $email . ' original_app_user_id: ' . $data['event']['original_app_user_id']
+                        'RevenueCatController processNotification::CANCELLATION - user not found email: ' .
+                        $email .
+                        ' original_app_user_id: ' .
+                        $data['event']['original_app_user_id']
                     );
                     break;
                 }
@@ -429,7 +447,10 @@ class RevenueCatController extends Controller
                 if (!$user) {
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
                     Log::error(
-                        'RevenueCatController processNotification::EXPIRATION - user not found email: ' . $email . ' original_app_user_id: ' . $data['event']['original_app_user_id']
+                        'RevenueCatController processNotification::EXPIRATION - user not found email: ' .
+                        $email .
+                        ' original_app_user_id: ' .
+                        $data['event']['original_app_user_id']
                     );
                     break;
                 }
@@ -627,6 +648,19 @@ class RevenueCatController extends Controller
         Log::debug('Redirect ecommerce purchase IOS to RevenueCat API:::' . $request->input('data.attributes.email'));
         Log::debug(var_export($request->all(), true));
 
+        if (!\user()) {
+            $this->validate($request, [
+                'data.attributes.email' => 'required|email',
+                'data.attributes.password' => 'required',
+            ]);
+        }
+
+        $email = null;
+        if (\user()) {
+            $user = user();
+            $email = $user->getEmail();
+        }
+        Log::debug('Purchase RevenueCat API for email :::' . $request->input('data.attributes.email') ?? $email);
         $revenuecatPurchase = $this->revenueCatGateway->purchase(
             $request->input('data.attributes.receipt'),
             null,
@@ -634,26 +668,30 @@ class RevenueCatController extends Controller
             $request->input('data.attributes.price'),
             $request->input('data.attributes.currency'),
             $request->has('data.attributes.app') ? $request->input('data.attributes.app') : 'Musora',
-            $request->input('data.attributes.email'),
+            $request->input('data.attributes.email') ?? $email,
         );
+
         $apiResponse = json_decode($revenuecatPurchase);
         Log::debug('RevenueCat API response');
         Log::debug(var_export($apiResponse, true));
 
         $user = $this->revenueCatService->syncSubscriber(
             $apiResponse->subscriber->original_app_user_id,
-            $request->input('data.attributes.email'),
+            $request->input('data.attributes.email') ?? $email,
             true
         );
-        $parts = explode('@', $request->input('data.attributes.email'));
-        $user->display_name = $parts[0] . rand(10000, 99999);
-        $user->setPassword($request->input('data.attributes.password'));
-        $user->save();
+
+        if (!\user()) {
+            $parts = explode('@', $request->input('data.attributes.email'));
+            $user->display_name = $parts[0] . rand(10000, 99999);
+            $user->setPassword($request->input('data.attributes.password'));
+            $user->save();
+        }
 
         //update Revenuecat subscriber attribute
         $this->revenueCatGateway->updateSubscriberAttribute(
             $user->id,
-            ['email' => $request->input('data.attributes.email')],
+            ['email' => $request->input('data.attributes.email') ?? $email],
             'ios'
         );
 
@@ -664,7 +702,7 @@ class RevenueCatController extends Controller
             $request->input('data.attributes.price'),
             $request->input('data.attributes.currency'),
             $request->has('data.attributes.app') ? $request->input('data.attributes.app') : 'Musora',
-            $request->input('data.attributes.email'),
+            $request->input('data.attributes.email') ?? $email,
             $user->id
         );
 
@@ -674,7 +712,7 @@ class RevenueCatController extends Controller
         $userAuthToken = $token->plainTextToken;
         $attributes = [
             'receipt' => $request->input('data.attributes.receipt'),
-            'email' => $request->input('data.attributes.email'),
+            'email' => $request->input('data.attributes.email') ?? $email,
             'brand' => 'pianote',
             'valid' => true,
             'validation_error' => null,
@@ -702,6 +740,18 @@ class RevenueCatController extends Controller
     {
         Log::debug('Redirect ecommerce purchase Google to RevenueCat API');
         Log::debug(var_export($request->all(), true));
+        if (!\user()) {
+            $this->validate($request, [
+                'data.attributes.email' => 'required|email',
+                'data.attributes.password' => 'required',
+            ]);
+        }
+
+        $email = null;
+        if (\user()) {
+            $user = user();
+            $email = $user->getEmail();
+        }
 
         $revenuecatPurchase = $this->revenueCatGateway->purchase(
             $request->input('data.attributes.purchase_token'),
@@ -710,7 +760,7 @@ class RevenueCatController extends Controller
             $request->input('data.attributes.price'),
             $request->input('data.attributes.currency'),
             $request->has('data.attributes.app') ? $request->input('data.attributes.app') : 'Musora',
-            $request->input('data.attributes.email'),
+            $request->input('data.attributes.email') ?? $email,
         );
         $apiResponse = json_decode($revenuecatPurchase);
         Log::debug('RevenueCat API response');
@@ -718,18 +768,20 @@ class RevenueCatController extends Controller
 
         $user = $this->revenueCatService->syncSubscriber(
             $apiResponse->subscriber->original_app_user_id,
-            $request->input('data.attributes.email'),
+            $request->input('data.attributes.email') ?? $email,
             true
         );
-        $parts = explode('@', $request->input('data.attributes.email'));
-        $user->display_name = $parts[0] . rand(10000, 99999);
-        $user->setPassword($request->input('data.attributes.password'));
-        $user->save();
+        if (!user()) {
+            $parts = explode('@', $request->input('data.attributes.email'));
+            $user->display_name = $parts[0] . rand(10000, 99999);
+            $user->setPassword($request->input('data.attributes.password'));
+            $user->save();
+        }
 
         //update Revenuecat subscriber attribute
         $this->revenueCatGateway->updateSubscriberAttribute(
             $user->id,
-            ['email' => $request->input('data.attributes.email')],
+            ['email' => $request->input('data.attributes.email') ?? $email],
             'android'
         );
 
@@ -740,7 +792,7 @@ class RevenueCatController extends Controller
             $request->input('data.attributes.price'),
             $request->input('data.attributes.currency'),
             $request->has('data.attributes.app') ? $request->input('data.attributes.app') : 'Musora',
-            $request->input('data.attributes.email'),
+            $request->input('data.attributes.email') ?? $email,
             $user->id
         );
 
@@ -752,7 +804,7 @@ class RevenueCatController extends Controller
             'purchase_token' => $request->input('data.attributes.purchase_token'),
             'package_name' => $request->input('data.attributes.package_name'),
             'product_id' => $request->input('data.attributes.product_id'),
-            'email' => $request->input('data.attributes.email'),
+            'email' => $request->input('data.attributes.email') ?? $email,
             'brand' => 'pianote',
             'valid' => true,
             'validation_error' => null,
@@ -1072,5 +1124,55 @@ class RevenueCatController extends Controller
             'google' => $user->has_google_subscription = false
         };
         $user->save();
+    }
+
+    public function processGoogleNotifications(Request $request)
+    {
+        Log::debug('Processing Google Play notifications ');
+        Log::debug(var_export($request->input(), true));
+
+        $message = $request->get('message');
+
+        if ($message) {
+            $encodedData = $message['data'];
+
+            $data = json_decode(base64_decode($encodedData));
+            Log::debug(var_export($data, true));
+            // we should return something for test notifications
+            if (!empty($data->testNotification)) {
+                return response()->json();
+            }
+
+            $subscriptionNotification = $data->subscriptionNotification;
+            $app = ($data->packageName == 'com.pianote2') ? 'Pianote' : (($data->packageName == 'com.drumeo') ? 'Drumeo' : 'Musora');
+
+            if (strtolower($subscriptionNotification->notificationType) == self::SUBSCRIPTION_REVOKED) {
+                $revenuecatPurchase = $this->revenueCatGateway->purchase(
+                    $subscriptionNotification->purchaseToken,
+                    $subscriptionNotification->subscriptionId,
+                    'android',
+                    null,
+                    null,
+                    $app
+                );
+                $apiResponse = json_decode($revenuecatPurchase);
+
+                Log::debug(
+                    'Should revoke ' .
+                    $subscriptionNotification->subscriptionId .
+                    ' for ' .
+                    $apiResponse->subscriber->original_app_user_id .
+                    ' on Revenuecat(user access revoked from Google Play Console)'
+                );
+
+                $this->revenueCatService->revoke(
+                    $apiResponse->subscriber->original_app_user_id,
+                    $subscriptionNotification->subscriptionId,
+                    'android'
+                );
+            }
+        }
+
+        return response()->json();
     }
 }
