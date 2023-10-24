@@ -22,11 +22,11 @@ export const useCollectionStore = defineStore({
     },
     actions:{
         async applyFilter(param){
-            const index = this.filter.params.included_types.findIndex(p => p === param);
-            if (index === -1){
-                this.filter.params.included_types.push(param)
+            const index = this.tabData[this.filter.activeTab].included_fields.findIndex(p => p === param);
+            if (index === -1 || !index){
+                this.tabData[this.filter.activeTab].included_fields.push(param);
             } else {
-                this.filter.params.included_types.splice(index,1);
+                this.filter.params.included_fields.splice(index,1);
             }
 
             this.getData();
@@ -45,6 +45,7 @@ export const useCollectionStore = defineStore({
                                 page: this.filter.currentPage,
                                 sort: this.tabData[this.filter.activeTab].sort,
                                 ...this.filter.params,
+                                included_fields: this.tabData[this.filter.activeTab].included_fields,
                                 [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.tabData[this.filter.activeTab].searchTerm,
                         },
                     })
