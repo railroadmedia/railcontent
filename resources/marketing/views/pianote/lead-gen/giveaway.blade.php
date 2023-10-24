@@ -4,8 +4,8 @@
     <title>Win a Roland FP-30X Digital Piano | Pianote</title>
     <meta property="og:title" content="Win a Roland FP-30X Digital Piano | Pianote">
 
-    <meta name="description" content="Want a free piano? Simply enter your email address before November 21st to secure your chance to win.">
-    <meta property="og:description" content="Want a free piano? Simply enter your email address before November 21st to secure your chance to win.">
+    <meta name="description" content="Want a free piano? Simply enter your email address before November 20th to secure your chance to win.">
+    <meta property="og:description" content="Want a free piano? Simply enter your email address before November 20th to secure your chance to win.">
 
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/roland-share.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/giveaway">
@@ -18,21 +18,11 @@
     <style>
         header {
             background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/header-m.jpg');
-            background-size: cover;
-            background-position: center;
         }
 
         @media (min-width:768px) {
             header {
                 background-image:url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/header.jpg');
-                background-size: cover;
-                background-position: center;
-            }
-        }
-
-        @media (min-width:1024px) {
-            header {
-                background-size: 1700px;
             }
         }
 
@@ -42,18 +32,25 @@
 @section('global-body')
     @include('pianote.sales.partials._nav')
 
-    <header class="py-12 sm:py-20 bg-no-repeat" style="background-color:#00101D;">
+    <header class="py-8 sm:py-12 bg-no-repeat text-white bg-cover bg-center" style="background-color:#00101D;">
         <div class="container mx-auto max-w-4xl">
             <div class="flex flex-wrap">
-                <div class="w-full md:w-4/12 lg:w-5/12 md:order-1 flex justify-center items-center">
-                    <i class="fas fa-play play-button autoplay-video my-20 md:mt-0" data-open="trailer"></i>
+                <div class="w-full md:w-4/12 lg:w-4/12 md:order-1 flex justify-center items-center mt-20 sm:mt-0">
+
                 </div>
-                <div class="w-full md:w-8/12 lg:w-7/12 mx-auto sm:pl-8 md:pl-14 lg:pl-0 text-center md:text-left px-4 sm:px-0">
+                <div class="w-full md:w-8/12 lg:w-8/12 mx-auto sm:pl-8 md:pl-14 lg:pl-0 text-center md:text-left px-4 sm:px-0">
                     <img class="h-36 md:h-40 lg:h-44 mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="logo">
-                    <div class="md:max-w-md">
+                    <div class="md:max-w-lg">
                         <p class="mb-4" style="color:#D0E2E7;">
-                            Want a free piano? Simply enter your email address before <span class="text-white font-extrabold">November 21st</span> to secure your chance to win. No purchase necessary. No age restrictions. No location restrictions.
+                            Want a free piano? Simply enter your email address before <span class="text-white font-extrabold">November 20th</span> to secure your chance to win. No purchase necessary. No age restrictions. No location restrictions.
                         </p>
+                        @include('pianote._partials.sign-up-form', [
+                    "recaptchaKey" => $recaptchaKey,
+                        "formId" => "Pianote - Engagement - Trigger - FP30 Giveaway - Web Form2",
+                        "formName" => 'FP30 Giveaway',
+                            "stacked" => true,
+                            "buttonText" => "I WANT TO WIN!",
+                        ])
                     </div>
                 </div>
             </div>
@@ -95,20 +92,13 @@
                 <img class="rounded-xl mb-6 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-feature.jpg" alt="gallery feature">
             </picture>
 
-            <img class="hidden md:inline-block rounded-xl mb-10 shadow-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery.jpg" alt="gallery">
+            <img class="hidden md:inline-block rounded-xl shadow-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery.jpg" alt="gallery">
 
             <div class="md:hidden">
                 <img class="rounded-xl shadow-md mb-4" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-01-m.jpg" alt="gallery 1">
                 <img class="rounded-xl shadow-md mb-4" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-02-m.jpg" alt="gallery 2">
                 <img class="rounded-xl shadow-md mb-4" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-03-m.jpg" alt="gallery 3">
-                <img class="rounded-xl shadow-md mb-8" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-04-m.jpg" alt="gallery 4">
-            </div>
-
-            <div class="rounded-xl py-6 md:py-10 shadow-md px-8" style="background: #FFF6F6;">
-                <div class="justify-center mx-auto md:flex md:items-center text-center md:text-left">
-                    <img class="mb-2 sm:mb-0 h-10 sm:h-14 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/roland_logo.svg">
-                    <p class="w-full sm:w-auto leading-tight pl-3 sm:pl-5 m-0"><strong>This free Roland FP-30X digital piano has been<br> generously donated by our partners at Roland.</strong></p>
-                </div>
+                <img class="rounded-xl shadow-md" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-04-m.jpg" alt="gallery 4">
             </div>
         </div>
     </section>
@@ -165,7 +155,7 @@
                 </div>
             </div>
             <div class="inline-block italic text-pianote py-4 px-6" style="background:#111F29;">
-                The winner will be announced during a LIVE event on November 22nd!
+                The winner will be announced during a LIVE event on November 20th!
             </div>
         </div>
     </section>
@@ -184,7 +174,14 @@
 
     <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/footer.jpg">
         <div class="mx-auto max-w-md md:max-w-2xl">
-            <img class="h-32 sm:h-36 md:h-44 lg:h-52 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="title image">
+            <img class="h-32 sm:h-36 md:h-44 lg:h-52 mb-12 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="title image">
+
+            @include('pianote._partials.sign-up-form', [
+        "recaptchaKey" => $recaptchaKey,
+            "formId" => "Pianote - Engagement - Trigger - FP30 Giveaway - Web Form",
+            "formName" => 'FP30 Giveaway',
+                "buttonText" => "I WANT TO WIN!",
+            ])
 
         </div>
     </section>

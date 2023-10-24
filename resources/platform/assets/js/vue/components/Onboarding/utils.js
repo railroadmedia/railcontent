@@ -50,12 +50,12 @@ const getSavedGoals = (goals) => {
   return multiSelectMap;
 };
 
-export const getInitialInfo = ({ userId, userName, userAvatar, selectedGear, selectedTopics, selectedGenres, selectedExperience, configOptions, instrument, selectedGoals }) => {
+export const getInitialInfo = ({ userId, userDisplayName, userProfilePictureUrl, selectedGear, selectedTopics, selectedGenres, selectedExperience, configOptions, instrument, selectedGoals }) => {
   return ({
       user: {
           id: userId,
-          name: userName || null,
-          avatarUrl: userAvatar || null
+          name: userDisplayName || null,
+          userProfilePictureUrl: userProfilePictureUrl || null
       },
       instrument: instrument || 'default',
       instrumentTypes: getSavedMultiSelect({ options: selectedGear, plural: 'gears', singular: 'gear', configOptions }),

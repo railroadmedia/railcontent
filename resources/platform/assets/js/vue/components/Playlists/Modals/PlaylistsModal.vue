@@ -8,7 +8,11 @@
     import UnpinModal from './UnpinModal/UnpinModal.vue';
     import RenameItem from './RenameItem.vue';
     import ShareModal from './ShareModal.vue';
-
+    import { storeToRefs } from 'pinia'
+    import { useUserStore } from '../../../../stores/user';
+    const userStore = useUserStore();
+    const { brand } = storeToRefs(userStore);
+    
     const emit = defineEmits(['onClosePlaylistsModal']);
 
     const props = defineProps({
@@ -20,10 +24,6 @@
                 data: {},
                 index: null
             })
-        },
-        brand: {
-            type: String,
-            default: 'drumeo'
         }
     });
 
@@ -54,7 +54,7 @@
             <CreatePlaylist mode="duplicate" @onCloseModal="() => emit('onClosePlaylistsModal')" :brand="brand" :playlist="modalProps.data" :modalProps="modalProps" v-if="modalProps.modalType === 'duplicate'"  />
             <CreatePlaylist mode="edit" @onCloseModal="() => emit('onClosePlaylistsModal')" :brand="brand" :playlist="modalProps.data" :modalProps="modalProps" v-if="modalProps.modalType === 'edit'"  />
 
-            <ShareModal mode="share" @onCloseModal="() => emit('onClosePlaylistsModal')" :brand="brand" :data="modalProps.data" v-if="modalProps.modalType === 'share'"  /> 
+            <ShareModal mode="share" @onCloseModal="() => emit('onClosePlaylistsModal')" :brand="brand" :data="modalProps.data" v-if="modalProps.modalType === 'share'"  />
 
             <DeleteModal v-if="modalProps.modalType === 'remove'"
                          @onCloseModal="() => emit('onClosePlaylistsModal')"

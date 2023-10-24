@@ -1,3 +1,6 @@
+@php
+$userData = assembleUserAttributes(user());
+@endphp
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
@@ -40,20 +43,16 @@
             <app-container
                 :vue-router="false"
                 brand="{{ $brand }}"
+                :user="{{ json_encode($userData) }}"
+                csrf_token="{{ csrf_token() }}"
             >
                 @if(!empty(current_user()))
                     <input id="currentUserId" type="hidden" value="{{ current_user()->getId() }}">
                 @endif
 
                 <page-container 
-                    csrf_token="{{ csrf_token() }}"
-                    brand="{{ $brand }}" 
                     :is-live="{{ !empty($coachEvent) }}"
                     :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}
-                    user-name="{{ user()->display_name }}"
-                    user-avatar="{{ user()->profile_picture_url }}"
-                    user-id="{{ user()->id }}"
-                    account-url="{{ user()->getDashboardUrl() }}"
                     search-url=""
                     @if(!empty( $hasUnreadNotifications ))
                         :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
