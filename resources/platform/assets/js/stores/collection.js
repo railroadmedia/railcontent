@@ -21,6 +21,16 @@ export const useCollectionStore = defineStore({
         }
     },
     actions:{
+        async applyFilter(param){
+            const index = this.filter.params.included_types.findIndex(p => p === param);
+            if (index === -1){
+                this.filter.params.included_types.push(param)
+            } else {
+                this.filter.params.included_types.splice(index,1);
+            }
+
+            this.getData();
+        },
         async fetchData(){
             const userStore = useUserStore();
 
