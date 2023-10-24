@@ -78,6 +78,8 @@
         },
     });
 
+    const emit = defineEmits(['on-filter-change', 'on-search-change', 'on-sort-change', 'on-tab-change'])
+
     const collectionStore = useCollectionStore();
 
     const isMobile = ref(true);
@@ -101,12 +103,12 @@
     }
 
     const handleSearch = (value) => {
-        collectionStore.setSearchTerm(value);
-        collectionStore.getData();
+        emit('on-search-change', value);
+        // collectionStore.setSearchTerm(value);
     }
 
     const handleFilterChange = (selection) => {
-
+        emit('on-filter-change', selection);
     }
 
     const getFilterColumns = () => {
@@ -121,11 +123,13 @@
     }
 
     const handleSort = (item) => {
-        collectionStore.sortData(item);
+        emit('on-sort-change', item);
+        // collectionStore.sortData(item);
     }
 
     const tabClick = (tab) => {
-        collectionStore.switchTab(tab);
+        emit('on-tab-change', tab);
+        // collectionStore.switchTab(tab);
     }
 
     onMounted(()=>{
