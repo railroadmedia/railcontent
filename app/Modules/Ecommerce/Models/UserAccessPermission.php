@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $time_months
  * @property integer $time_lifetime
  * @property UserAccessPermissionsStatusEnum $status
+ * @property Carbon $revoked_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
@@ -69,6 +70,28 @@ class UserAccessPermission extends Model
             }
         }
         return $duration;
+    }
+
+    public function getDisplaySource(): string
+    {
+        switch (UserAccessPermissionsSourceEnum::tryFrom($this->source)) {
+            case UserAccessPermissionsSourceEnum::Apple:
+                return 'Apple Subscription';
+            case UserAccessPermissionsSourceEnum::Google:
+                return 'Google Subscription';
+            case UserAccessPermissionsSourceEnum::Web:
+                return 'Web';
+            case UserAccessPermissionsSourceEnum::AccessCode:
+                return 'Access Code';
+            case UserAccessPermissionsSourceEnum::Challenges:
+                return 'Challenge Enrollment';
+            case UserAccessPermissionsSourceEnum::Migration:
+                return 'Migration';
+            case UserAccessPermissionsSourceEnum::Manual:
+                return 'Manual';
+            default:
+                return 'Unknown';
+        }
     }
 
 }

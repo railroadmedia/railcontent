@@ -5,6 +5,7 @@ namespace App\Modules\EventDataSynchronizer\Listeners;
 
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\Ecommerce\Services\SubscriptionService;
+use Log;
 
 class SubscriptionSyncListener
 {
@@ -20,7 +21,17 @@ class SubscriptionSyncListener
 
     public function handleUserAccessPermissionsUpdated(UserAccessPermissionsUpdated $userAccessPermissionsUpdated): void
     {
-        $this->subscriptionService->syncSubscriptionData($userAccessPermissionsUpdated->getUserAccessPermissions());
+        try {
+            if ($userAccessPermissionsUpdated->getSkipRechargeSync()) {
+                return;
+            }
+            //TODO: Move to a job
+            $this->subscriptionService->syncSubscriptionData($userAccessPermissionsUpdated->getUserAccessPermissions());
+        } catch (\Throwable $e) {
+            $userId = $userAccessPermissionsUpdated->getUserId();
+            Log::error("Error syncing subscriptions for user: $userId");
+            Log::error($e);
+        }
     }
 
 }

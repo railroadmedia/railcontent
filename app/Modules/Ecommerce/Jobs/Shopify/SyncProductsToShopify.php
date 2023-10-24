@@ -1,221 +1,109 @@
 <?php
 
-namespace App\Modules\Ecommerce\Console\Commands;
+namespace App\Modules\Ecommerce\Jobs\Shopify;
 
-use App\Console\Commands\Infrastructure\Command;
-use App\Modules\Ecommerce\Console\Commands\Traits\SyncsToShopify;
+use App\Models\ShopifySync;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesShopifyRateLimit;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsToShopify;
+use Carbon\Carbon;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Exception;
+use Illuminate\Bus\Batchable;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\RepositoryBase;
-use Signifly\Shopify\REST\Resources\ApiResource;
 use Signifly\Shopify\REST\Resources\ProductResource;
 use Signifly\Shopify\REST\Resources\VariantResource;
 use Signifly\Shopify\Shopify;
 
-class SyncProductsToShopify extends Command
+class SyncProductsToShopify implements ShouldQueue
 {
+    use Batchable;
+    use Dispatchable;
+    use HandlesShopifyRateLimit;
+    use InteractsWithQueue;
+    use LogsShopify;
+    use Queueable;
+    use SerializesModels;
     use SyncsToShopify;
 
-    private const METAFIELD_NAMESPACE = "products";
-    private const METAFIELD_KEY = "_id";
-    private const METAFIELD_TYPE = "number_integer";
+    /**
+     * The number of seconds the job can run before timing out.
+     *
+     * @var int
+     */
+    public $timeout = 840; // 14 minutes
     private const SIZE_OPTION_NAME = "Size";
     private const SIZE_OPTION_KEY = "option1";
-
-    // running collection of the Shopify IDs returned in this run, so we can record it
     private const SIZE_STRINGS = ["XS", "S", "M", "L", "XL", "XXL", "XXXL", "XXXXL"];
-    // products that have been synced as part of a group, and should be skipped when encountered in the loop
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'shopify:sync-products
-                            {--limit= : (Optional) The number of products to limit this run to}
-                            {--fresh : Sync all products, not just those that need it}
-                            {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Sync our products up to Shopify';
     protected Shopify $shopify;
     protected ProductRepository $productRepository;
     protected EcommerceEntityManager $entityManager;
     protected Collection $shopifyIds;
+    // products that have been synced as part of a group, and should be skipped when encountered in the loop
     protected Collection $productsToSkip;
     // rows for displaying the results in a table
-    protected array $tableRows;
+    protected array $results = [];
+
+    public function middleware(): array
+    {
+        return [new SkipIfBatchCancelled];
+    }
+
+    public function __construct(
+        protected int $startAtId,
+        protected int $endAtId,
+        protected int $locationId,
+        protected Carbon $lastSyncAt,
+        protected bool $simulate,
+        protected bool $fresh)
+    {
+        $this->shopifyIds = collect();
+        $this->productsToSkip = collect();
+    }
+
 
     /**
-     * Execute the console command.
+     * Execute the job
      *
      * @param  Shopify  $shopify
      * @param  ProductRepository  $productRepository
      * @param  EcommerceEntityManager  $entityManager
-     * @return int
+     * @return void
+     * @throws Exception
      */
     public function handle(
-        Shopify $shopify,
-        ProductRepository $productRepository,
-        EcommerceEntityManager $entityManager
-    ): int {
+            Shopify $shopify,
+            ProductRepository $productRepository,
+            EcommerceEntityManager $entityManager
+    ): void
+    {
+        // set DI instances that we'll need
         $this->shopify = $shopify;
         $this->productRepository = $productRepository;
         $this->entityManager = $entityManager;
 
-        $this->shopifyIds = collect();
-        $this->productsToSkip = collect();
-
-        $this->tableRows = [];
-
-        return $this->sync();
+        $this->logDebug(sprintf("%s: running batch for products %s - %s", $this->getClassName(), $this->startAtId, $this->endAtId));
+        $this->sync();
     }
 
-    /**
-     * @inheritDoc
-     * @throws Exception
-     */
-    protected function syncResource(bool $simulate, bool $fresh): Collection
-    {
-        // STEP 1: get the location, so we can use it for the inventory
-        /** @var ApiResource $location */
-        $location = $this->shopify->getLocations()?->first() ?: null;
-        if (empty($location)) {
-            throw new Exception("No location found! Please set up a location inside the Shopify store to proceed.");
-        }
-
-        // STEP 2: get all the products that need to be synced
-        $limit = $this->getLimit();
-        $products = is_null($limit) ? $this->getEcommerceEntities($fresh) : $this->getEcommerceEntities($fresh)->take(
-            $limit
-        );
-
-        $this->info("Found {$products->count()} products to be synced");
-
-        $bar = $this->output->createProgressBar($products->count());
-        $bar->start();
-
-        $simulatedShopifyId = 0;
-        $products->each(function (Product $product) use ($fresh, $bar, $simulate, $location, &$simulatedShopifyId) {
-            // STEP 3: check if this product was already completed as part of a group
-            if ($this->productsToSkip->contains($product->getId())) {
-                $bar->advance();
-                return;
-            }
-
-            // STEP 4: determine if updating or creating
-            // this product could be part of a group, so first check if it should be one of many options
-            $options = $this->getProductOptions($product);
-            if ($options->isEmpty()) {
-                $isCreating = $fresh || is_null($product->getShopifyId());
-            } else {
-                $isAllNew = $options
-                    ->filter(fn(Product $productOption) => !is_null($productOption->getShopifyId()))
-                    ->isEmpty();
-                $isCreating = $fresh || $isAllNew;
-            }
-
-            // STEP 5: build up the data structure depending on product type
-            $postData = $this->buildPostData($product, $location, $isCreating, $options);
-
-            // STEP 6: send the data to Shopify
-            if ($simulate) {
-                $this->simulateSendToShopify($product, $postData, $simulatedShopifyId);
-            } else {
-                if ($isCreating) {
-                    $productResource = $this->shopify->createProduct($postData);
-                } else {
-                    if ($options->isEmpty()) {
-                        // this is just a simple product with no options, so it exists in shopify as the only variant
-                        $variant = $this->shopify->getVariant($product->getShopifyId());
-                    } else {
-                        // this product of ours may not yet be in shopify, so get the first in the group that has a shopify id
-                        $existingVariant = $options
-                            ->filter(fn(Product $productOption) => !is_null($productOption->getShopifyId()))
-                            ->first();
-                        $variant = $this->shopify->getVariant($existingVariant->getShopifyId());
-                    }
-                    $productID = $variant->getAttributes()["product_id"];
-
-                    // remove the variants data so that we can set it separately afterwards
-                    if (array_key_exists("variants", $postData)) {
-                        $variantData = $postData["variants"];
-                        unset($postData["variants"]);
-                    } else {
-                        $variantData = null;
-                    }
-
-                    $productResource = $this->shopify->updateProduct($productID, $postData);
-
-                    // we have to send all variants, so call Shopify to update each one
-                    if (!is_null($variantData)) {
-                        if ($options->isEmpty()) {
-                            // just the one product and variant, so grab the first
-                            $this->shopify->updateVariant($product->getShopifyId(), $variantData[0]);
-                        } else {
-                            // we have multiple, so update or create each one
-                            foreach ($variantData as $variantDatum) {
-                                if (array_key_exists("id", $variantDatum)) {
-                                    $this->shopify->updateVariant($variantDatum["id"], $variantDatum);
-                                } else {
-                                    $variantResource = $this->shopify->createVariant(
-                                        $productResource->getAttributes()["id"],
-                                        $variantDatum
-                                    );
-                                    $inventoryItemId = $variantResource->getAttributes()["inventory_item_id"];
-                                    // we can now set the variant's inventory
-                                    $this->shopify->adjustInventoryLevel(
-                                        $inventoryItemId,
-                                        $location->getAttributes()["id"],
-                                        $product->getStockAvailability()
-                                    );
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // STEP 7: record each variant back into our system and log
-                $variants = $productResource->getVariants();
-                if ($variants->count() === 1) {
-                    // this is the only variant, so just record this variant as the product
-                    $variantData = $variants->first();
-                    $this->tableRows[] = $this->recordShopifyId($variantData, $product);
-                } else {
-                    $variants->each(function (VariantResource $variantData) {
-                        $this->tableRows[] = $this->recordShopifyId($variantData, null);
-                    });
-                }
-            }
-
-            $bar->advance();
-        })->chunk(100);
-
-        $bar->finish();
-        $this->newLine();
-
-        $this->table(["Product ID", "sku", "Shopify Variant ID"], $this->tableRows);
-
-        return $this->shopifyIds;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function getLimit(): ?int
-    {
-        return $this->option("limit");
-    }
 
     /**
      * Get all the Products that make up the related options for this Product,
@@ -288,7 +176,6 @@ class SyncProductsToShopify extends Command
      * Build up the data structure to send to Shopify, depending on product type and whether it has options or not
      *
      * @param  Product  $product
-     * @param  ApiResource  $location
      * @param  bool  $isCreating
      * @param  Collection  $options
      * @return array
@@ -296,25 +183,24 @@ class SyncProductsToShopify extends Command
      */
     private function buildPostData(
         Product $product,
-        ApiResource $location,
         bool $isCreating,
         Collection $options
     ): array {
         if ($product->getType() === Product::TYPE_DIGITAL_SUBSCRIPTION || $product->getType(
             ) === Product::TYPE_DIGITAL_ONE_TIME) {
             if ($isCreating) {
-                return $this->createProductData($product, $location->getAttributes()["id"]);
+                return $this->createProductData($product, $this->locationId);
             }
             return $this->updateProductData($product);
         } elseif ($product->getType() === Product::TYPE_PHYSICAL_ONE_TIME) {
             if ($isCreating) {
                 if ($options->isNotEmpty()) {
-                    return $this->createProductDataWithOptions($options, $location->getAttributes()["id"]);
+                    return $this->createProductDataWithOptions($options, $this->locationId);
                 }
-                return $this->createProductData($product, $location->getAttributes()["id"]);
+                return $this->createProductData($product, $this->locationId);
             } else {
                 if ($options->isNotEmpty()) {
-                    return $this->updateProductDataWithOptions($options, $location->getAttributes()["id"]);
+                    return $this->updateProductDataWithOptions($options, $this->locationId);
                 }
                 return $this->updateProductData($product);
             }
@@ -465,10 +351,10 @@ class SyncProductsToShopify extends Command
             // we can use meta fields for stuff like our product id, etc
             $variantData["metafields"] = [
                 [
-                    "key" => self::METAFIELD_KEY,
-                    "value" => $product->getId(),
-                    "type" => self::METAFIELD_TYPE,
-                    "namespace" => self::METAFIELD_NAMESPACE
+                    "key" => ShopifyMetafieldKey::Id->value,
+                    "value" => (string)$product->getId(),
+                    "type" => ShopifyMetafieldTypes::integer->value,
+                    "namespace" => ShopifyMetafieldNamespace::Model_Products->value
                 ]
             ];
         }
@@ -515,8 +401,10 @@ class SyncProductsToShopify extends Command
     {
         // first, we need to get the existing product from Shopify, so we know what to update
         $shopifyVariantId = $product->getShopifyId();
+        $this->handleRateLimit();
         $shopifyVariant = $this->shopify->getVariant($shopifyVariantId);
         $shopifyProductId = $shopifyVariant->getAttributes()["product_id"];
+        $this->handleRateLimit();
         $shopifyProduct = $this->shopify->getProduct($shopifyProductId);
 
         // build up the common data for updating the product
@@ -680,8 +568,10 @@ class SyncProductsToShopify extends Command
             ->first()
             ->getShopifyId();
 
+        $this->handleRateLimit();
         $shopifyVariant = $this->shopify->getVariant($shopifyVariantId);
         $shopifyProductId = $shopifyVariant->getAttributes()["product_id"];
+        $this->handleRateLimit();
         $shopifyProduct = $this->shopify->getProduct($shopifyProductId);
         // build up the common data for updating the product
         $postData = $this->formatUpdateProductData($latestProduct, $shopifyProduct);
@@ -698,6 +588,7 @@ class SyncProductsToShopify extends Command
         // and we're not going to change the name
 
         // check all the existing variants to see if we changed anything
+        $this->handleRateLimit();
         $allShopifyVariants = $this->shopify->getVariants($shopifyProductId);
         // track so we can check for any missing
         $matchedProductOptions = collect();
@@ -710,7 +601,7 @@ class SyncProductsToShopify extends Command
                 $matched = $productOptions->filter(fn(Product $product) => $product->getShopifyId() == $shopifyVariantId
                 )->first();
                 if (is_null($matched)) {
-                    $this->error(
+                    $this->logError(
                         sprintf(
                             "Failed to retrieve Product from Shopify metafield: %s. Cannot update variant!",
                             $shopifyVariantId
@@ -793,9 +684,9 @@ class SyncProductsToShopify extends Command
                     $metafields = collect($variantData["metafields"]);
                     $productIdMetafield = $metafields->filter(
                         fn(array $fields) => array_key_exists("namespace", $fields)
-                            && $fields["namespace"] === self::METAFIELD_NAMESPACE
+                            && $fields["namespace"] === ShopifyMetafieldNamespace::Model_Products->value
                             && array_key_exists("key", $fields)
-                            && $fields["key"] === self::METAFIELD_KEY
+                            && $fields["key"] === ShopifyMetafieldKey::Id->value
                     );
                     // we were able to find one, so that means this is a variant for an existing product in Shopify
                     $productId = $productIdMetafield->first()["value"];
@@ -803,17 +694,17 @@ class SyncProductsToShopify extends Command
                     // we didn't have metafields, so this would be a new product in Shopify
                     $productId = $postData["id"];
                 }
-                $this->tableRows[] = [$productId, $variantData["sku"] ?? "n/a", ++$simulatedShopifyId];
+                $this->results[] = [$productId, $variantData["sku"] ?? "n/a", ++$simulatedShopifyId];
             }
         } else {
             // this is a simple product with no options or additional variants
-            $this->tableRows[] = [$postData["id"], $postData["sku"] ?? $product->getSku(), ++$simulatedShopifyId];
+            $this->results[] = [$postData["id"], $postData["sku"] ?? $product->getSku(), ++$simulatedShopifyId];
         }
     }
 
     /**
      * Record the shopify ID of the variant on our Product entry,
-     * and return the formatted array to print out in our display table
+     * and return the formatted array to print out in our log
      *
      * @param  VariantResource  $variantData
      * @param  Product|null  $product
@@ -829,15 +720,16 @@ class SyncProductsToShopify extends Command
         // no product is given if this variant data is one of many variants for a product
         if (is_null($product)) {
             // get the metafield with our ID record
+            $this->handleRateLimit();
             $variantMetaFields = $this->shopify->getVariantMetafields(
                 $shopifyId,
-                ["namespace" => self::METAFIELD_NAMESPACE, "key" => self::METAFIELD_KEY]
+                ["namespace" => ShopifyMetafieldNamespace::Model_Products->value, "key" => ShopifyMetafieldKey::Id->value]
             );
             $productId = $variantMetaFields->first()?->getAttributes()["value"] ?? null;
             try {
                 $product = $this->productRepository->findProduct($productId, [0, 1]);
             } catch (NonUniqueResultException $e) {
-                $this->error(
+                $this->logError(
                     sprintf(
                         "Failed to retrieve Product for ID %s, from Shopify metafield: %s",
                         $shopifyId,
@@ -849,11 +741,11 @@ class SyncProductsToShopify extends Command
         }
 
         if (is_null($product)) {
-            $this->error(sprintf("Product could not be found for ID %s, from Shopify metafield", $shopifyId));
+            $this->logError(sprintf("Product could not be found for ID %s, from Shopify metafield", $shopifyId));
             return ["ERROR", $variantData->sku, $shopifyId];
         }
 
-        if ($product->getShopifyId() !== $shopifyId) {
+        if ($this->getIsFresh() || $product->getShopifyId() !== $shopifyId) {
             // grab the eloquent model, so we can update it
             $productModel = \App\Modules\Ecommerce\Models\Product::find($product->getId());
             $productModel->shopify_id = $shopifyId;
@@ -868,17 +760,9 @@ class SyncProductsToShopify extends Command
     /**
      * @inheritDoc
      */
-    protected function getShopifyResourceClass(): string
+    protected function getClassName(): string
     {
-        return ProductResource::class;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function getSyncResource(): string
-    {
-        return "product";
+        return "SyncProductsToShopify";
     }
 
     /**
@@ -886,7 +770,7 @@ class SyncProductsToShopify extends Command
      */
     protected function getIsSimulation(): bool
     {
-        return $this->option("execute") == false;
+        return $this->simulate;
     }
 
     /**
@@ -894,14 +778,157 @@ class SyncProductsToShopify extends Command
      */
     protected function getIsFresh(): bool
     {
-        return $this->option("fresh");
+        return $this->fresh;
     }
 
     /**
      * @inheritDoc
      */
-    protected function getEcommerceEntityRepository(): RepositoryBase
+    protected function getLimit(): ?int
+    {
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getSyncResource(): string
+    {
+        return ShopifySync::RESOURCE_PRODUCT;
+    }
+
+    /**
+     * @inheritDoc
+     * @throws Exception
+     */
+    protected function syncResource(bool $simulate, bool $fresh): Collection
+    {
+        // STEP 1: get all the products that need to be synced
+        $products = $this->getEcommerceEntities($fresh, $this->startAtId, $this->endAtId);
+
+        $simulatedShopifyId = 0;
+        $products->each(function (Product $product) use ($fresh, $simulate, &$simulatedShopifyId) {
+            // STEP 2: check if this product was already completed as part of a group
+            if ($this->productsToSkip->contains($product->getId())) {
+                return;
+            }
+
+            // STEP 3: determine if updating or creating
+            // this product could be part of a group, so first check if it should be one of many options
+            $options = $this->getProductOptions($product);
+            if ($options->isEmpty()) {
+                $isCreating = $fresh || is_null($product->getShopifyId());
+            } else {
+                $isAllNew = $options
+                    ->filter(fn(Product $productOption) => !is_null($productOption->getShopifyId()))
+                    ->isEmpty();
+                $isCreating = $fresh || $isAllNew;
+            }
+
+            // STEP 4: build up the data structure depending on product type
+            $postData = $this->buildPostData($product, $isCreating, $options);
+
+            // STEP 5: send the data to Shopify
+            if ($simulate) {
+                $this->simulateSendToShopify($product, $postData, $simulatedShopifyId);
+            } else {
+                if ($isCreating) {
+                    $productResource = $this->shopify->createProduct($postData);
+                } else {
+                    if ($options->isEmpty()) {
+                        // this is just a simple product with no options, so it exists in shopify as the only variant
+                        $variant = $this->shopify->getVariant($product->getShopifyId());
+                    } else {
+                        // this product of ours may not yet be in shopify, so get the first in the group that has a shopify id
+                        $existingVariant = $options
+                            ->filter(fn(Product $productOption) => !is_null($productOption->getShopifyId()))
+                            ->first();
+                        $variant = $this->shopify->getVariant($existingVariant->getShopifyId());
+                    }
+                    $productID = $variant->getAttributes()["product_id"];
+
+                    // remove the variants data so that we can set it separately afterwards
+                    if (array_key_exists("variants", $postData)) {
+                        $variantData = $postData["variants"];
+                        unset($postData["variants"]);
+                    } else {
+                        $variantData = null;
+                    }
+
+                    $this->handleRateLimit();
+                    $productResource = $this->shopify->updateProduct($productID, $postData);
+
+                    // we have to send all variants, so call Shopify to update each one
+                    if (!is_null($variantData)) {
+                        if ($options->isEmpty()) {
+                            // just the one product and variant, so grab the first
+                            $this->handleRateLimit();
+                            $this->shopify->updateVariant($product->getShopifyId(), $variantData[0]);
+                        } else {
+                            // we have multiple, so update or create each one
+                            foreach ($variantData as $variantDatum) {
+                                $this->handleRateLimit();
+                                if (array_key_exists("id", $variantDatum)) {
+                                    $this->shopify->updateVariant($variantDatum["id"], $variantDatum);
+                                } else {
+                                    $variantResource = $this->shopify->createVariant(
+                                        $productResource->getAttributes()["id"],
+                                        $variantDatum
+                                    );
+                                    $inventoryItemId = $variantResource->getAttributes()["inventory_item_id"];
+                                    // we can now set the variant's inventory
+                                    $this->handleRateLimit();
+                                    $this->shopify->adjustInventoryLevel(
+                                        $inventoryItemId,
+                                        $this->locationId,
+                                        $product->getStockAvailability()
+                                    );
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // STEP 6: record each variant back into our system and log
+                $variants = $productResource->getVariants();
+                if ($variants->count() === 1) {
+                    // this is the only variant, so just record this variant as the product
+                    $variantData = $variants->first();
+                    $this->results[] = $this->recordShopifyId($variantData, $product);
+                } else {
+                    $variants->each(function (VariantResource $variantData) {
+                        $this->results[] = $this->recordShopifyId($variantData, null);
+                    });
+                }
+            }
+
+            $this->handleRateLimit();
+        });
+
+        $this->logInfo(sprintf("%s: results for syncing products to Shopify job %s of %s:",
+            $this->getClassName(), $this->batch()->processedJobs()+1, $this->batch()->totalJobs));
+
+        foreach($this->results as $result) {
+            $this->logInfo(sprintf("Product ID %s (sku %s): Shopify Variant ID %s",
+                $result[0], $result[1], $result[2]));
+        }
+
+        return $this->shopifyIds;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getEcommerceEntityRepository(): RepositoryBase|EntityRepository
     {
         return $this->productRepository;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getLastSyncAtOverride(): null|Carbon
+    {
+        return $this->lastSyncAt;
     }
 }

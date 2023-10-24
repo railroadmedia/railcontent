@@ -109,6 +109,7 @@ class Product extends Model
     const DIGITAL_ACCESS_TIME_TYPE_ONE_TIME = 'one time';
     const DIGITAL_ACCESS_TIME_TYPE_LIFETIME = 'lifetime';
 
+    const DIGITAL_PRODUCT_TYPES = [self::TYPE_DIGITAL_SUBSCRIPTION, self::TYPE_DIGITAL_ONE_TIME];
 
     const MEMBERSHIP_DIGITAL_ACCESS_TYPES = [DigitalAccessType::Plus, DigitalAccessType::Basic];
 
@@ -190,7 +191,7 @@ class Product extends Model
 
     public function isLifeTime()
     {
-        return $this->digital_access_time_type == self::DIGITAL_ACCESS_TIME_TYPE_LIFETIME;
+        return $this->digital_access_time_interval_type == null || $this->digital_access_time_type == self::DIGITAL_ACCESS_TIME_TYPE_LIFETIME;
     }
 
     public function getContentPermissions($permissionsLookup): Collection
@@ -198,8 +199,8 @@ class Product extends Model
         $permissionNames = collect($this->getDigitalAccessPermissionNames());
         return $permissionNames->map(function ($permissionName) use ($permissionsLookup) {
             $brand = $this->brand;
-            $keyBrand = $brand.'_'.$permissionName;
-            $keyGeneral = 'musora_'.$permissionName;
+            $keyBrand = $brand . '_' . $permissionName;
+            $keyGeneral = 'musora_' . $permissionName;
             $permission = $permissionsLookup[$keyBrand] ?? $permissionsLookup[$keyGeneral] ?? null;
             if (!$permission) {
                 Log::error(
@@ -220,5 +221,26 @@ class Product extends Model
         return is_array($this->digital_access_permission_names) ? $this->digital_access_permission_names : json_decode(
             $this->digital_access_permission_names
         );
+    }
+
+    /**
+     * @return int
+     */
+    public function getStockAvailability(): int
+    {
+        if ($this->min_stock_level === null || $this->stock === null) {
+            return 1000000;
+        }
+
+        return intval($this->stock) - intval($this->min_stock_level);
+    }
+
+    public function isDigital(): bool
+    {
+        return in_array($this->type, self::DIGITAL_PRODUCT_TYPES);
+    }
+
+    public function isTrial(): bool{
+        return str_contains(strtolower($this->sku), 'trial');
     }
 }

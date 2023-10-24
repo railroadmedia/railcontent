@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Platform;
 
 use App\Modules\Content\Services\CohortService;
+use App\Modules\Content\Services\ContentPermissionsService;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
+use App\Modules\Ecommerce\Services\ProductService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
@@ -21,7 +23,6 @@ use Throwable;
 
 class CohortPackController
 {
-
     private ProductRepository $productRepository;
     private UserProductService $userProductService;
     private CohortService $cohortService;
@@ -29,6 +30,8 @@ class CohortPackController
     private EcommerceUserProductService $ecommerceUserProductService;
 
     private UserAccessPermissionsService $userAccessPermissionsService;
+    private ProductService $productService;
+    private ContentPermissionsService $contentPermissionsService;
 
     public function __construct(
         UserProductService $userProductService,
@@ -37,6 +40,8 @@ class CohortPackController
         CohortService $cohortService,
         ContentService $contentService,
         UserAccessPermissionsService $userAccessPermissionsService,
+        ProductService $productService,
+        ContentPermissionsService $contentPermissionsService,
     ) {
         $this->userProductService = $userProductService;
         $this->ecommerceUserProductService = $ecommerceUserProductService;
@@ -44,6 +49,8 @@ class CohortPackController
         $this->cohortService = $cohortService;
         $this->contentService = $contentService;
         $this->userAccessPermissionsService = $userAccessPermissionsService;
+        $this->productService = $productService;
+        $this->contentPermissionsService = $contentPermissionsService;
     }
 
     /**
@@ -61,14 +68,22 @@ class CohortPackController
         }
 
         $productId = $cohort['product_id'];
-        $product = $this->productRepository->findProduct($productId);
+        $product = $this->productService->getById($productId);
 
-        $hasProduct = user() && $this->userProductService->hasProductNotCached(user()?->id, $productId);
-        $nPackOwners = $this->userProductService->getNumberProductOwners($productId);
+        if (!config('shopify.enabled')) {
+            $hasProduct = user() && $this->userProductService->hasProductNotCached(user()?->id, $productId);
+            $nPackOwners = $this->userProductService->getNumberProductOwners($productId);
+        } else {
+            $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
+            $permissionID =
+                $product->getContentPermissions($contentPermissionsLookup)
+                    ->first()->id ?? null;
+            $hasProduct = user() && $this->userAccessPermissionsService->hasPermission(user()?->id, $permissionID);
+            $nPackOwners = $this->userAccessPermissionsService->getNumberPermissionOwners($permissionID);
+        }
         $registerButtonUrl =
             (!$hasProduct) ?
-                url()->route('platform.cohort.register', ['brand' => brand(), 'product' => $product->getSku()]) :
-                '#final';
+                url()->route('platform.cohort.register', ['brand' => brand(), 'product' => $product->sku]) : '#final';
 
         $enrollmentClosed = $cohort['enrollmentClosed'];
 
@@ -130,22 +145,25 @@ class CohortPackController
      * @throws ORMException
      * @throws Throwable
      */
-    private function registerForProductPack(string $sku, string $successMessage, Request $request)
-    : JsonResponse|RedirectResponse {
+    private function registerForProductPack(
+        string $sku,
+        string $successMessage,
+        Request $request
+    ): JsonResponse|RedirectResponse {
         if (user()?->isAMember()) {
             $user = new User(user()->id, user()->email, user()->getMembershipExpirationDate());
-
-            /** @var Product $product */
-            $product = $this->productRepository->bySku($sku);
-
             if (config('shopify.enabled')) {
-                $this->userAccessPermissionsService->AddUserAccessPermissionsForProducts(
+                $product = $this->productService->getBySku($sku);
+                $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
                     $user->getId(),
-                    [$product->getId()],
+                    [$product->id],
                     Carbon::now(),
+                    '',
                     UserAccessPermissionsSourceEnum::Challenges
                 );
             } else {
+                /** @var Product $product */
+                $product = $this->productRepository->bySku($sku);
                 $this->ecommerceUserProductService->assignUserProduct($user, $product, null, 1);
             }
 

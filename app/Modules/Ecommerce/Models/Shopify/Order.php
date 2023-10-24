@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Modules\Ecommerce\Models\Shopify;
+
+use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
+use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
+
+class Order
+{
+    public string $gid;
+
+    public int $id;
+    public ?string $brand;
+    public ShopifyPaymentSourceEnum $paymentSourceEnum;
+    public Collection $lineItems;
+    public ?Carbon $processedAt;
+    public ?Carbon $cancelledAt;
+
+    public function __construct(
+        $graphGLResponse
+    ) {
+        $this->gid = $graphGLResponse->id;
+        $this->id = str_replace('gid://shopify/Order/', '', $graphGLResponse->id);
+        $this->brand = $graphGLResponse->brand?->value;
+        $this->paymentSourceEnum = ShopifyPaymentSourceEnum::tryFrom(
+            $graphGLResponse->paymentSource?->value
+        ) ?? ShopifyPaymentSourceEnum::Web;
+        $this->processedAt = $graphGLResponse->processedAt ? Carbon::parse($graphGLResponse->processedAt) : null;
+        $this->cancelledAt = $graphGLResponse->cancelledAt ? Carbon::parse($graphGLResponse->cancelledAt) : null;
+        $this->lineItems = collect($graphGLResponse->lineItems->nodes)->map(function ($item) {
+            return new OrderLineItem($item);
+        });
+    }
+
+    public function getPaymentSourceEnum(): UserAccessPermissionsSourceEnum
+    {
+        switch ($this->paymentSourceEnum) {
+            case ShopifyPaymentSourceEnum::Apple:
+                return UserAccessPermissionsSourceEnum::Apple;
+            case ShopifyPaymentSourceEnum::Google:
+                return UserAccessPermissionsSourceEnum::Google;
+            case ShopifyPaymentSourceEnum::Web:
+            default:
+                return UserAccessPermissionsSourceEnum::Web;
+        }
+    }
+}

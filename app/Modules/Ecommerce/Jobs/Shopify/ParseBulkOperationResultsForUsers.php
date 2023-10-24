@@ -65,7 +65,7 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
     protected AddressRepository $addressRepository;
     protected EcommerceEntityManager $entityManager;
 
-    public function __construct(protected string $sourceFilename, protected string $resultsFilename, protected bool $useMaskedEmail, protected ShopifySync $shopifySync)
+    public function __construct(protected string $sourceFilename, protected string $resultsFilename, protected ShopifySync $shopifySync)
     {
     }
 
@@ -316,13 +316,5 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
     protected function getEntityManager(): EcommerceEntityManager
     {
         return $this->entityManager;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function getIsUsingMask(): bool
-    {
-        return $this->useMaskedEmail;
     }
 }

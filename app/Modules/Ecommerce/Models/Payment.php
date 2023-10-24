@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Models;
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -27,10 +28,26 @@ class Payment extends Model
 
     public const TYPE_APPLE_SUBSCRIPTION_RENEWAL = 'apple_subscription_renewal';
     public const TYPE_GOOGLE_SUBSCRIPTION_RENEWAL = 'google_subscription_renewal';
+    public const TYPE_INITIAL_ORDER = 'initial_order';
+    public const TYPE_PAYMENT_PLAN = 'payment_plan';
+    public const TYPE_PAYPAL_SUBSCRIPTION_RENEWAL = 'paypal_subscription_renewal';
+    public const TYPE_SUBSCRIPTION_RENEWAL = 'subscription_renewal';
     public const STATUS_PAID = 'paid';
+    public const STATUS_FAILED = 'failed';
+    public const STATUS_REFUNDED = 'refunded';
 
     protected $table = 'ecommerce_payments';
     protected $primaryKey = 'id';
+
+    public function orders(): BelongsToMany
+    {
+        return $this->belongsToMany(Order::class, "ecommerce_order_payments");
+    }
+
+    public function orderPayments(): HasMany
+    {
+        return $this->hasMany(OrderPayment::class);
+    }
 
     public function refunds(): HasMany
     {

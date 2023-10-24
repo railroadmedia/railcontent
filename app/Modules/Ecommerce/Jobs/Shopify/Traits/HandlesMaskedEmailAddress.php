@@ -10,16 +10,9 @@ trait HandlesMaskedEmailAddress
     protected string $fakeSuffix = ".ex";
 
     /**
-     * Are we using masked email addresses with Shopify?
-     *
-     * @return bool
-     */
-    abstract protected function getIsUsingMask(): bool;
-
-    /**
      * Get the unmasked value of the given email address from Shopify
      *
-     * @param string $email
+     * @param  string  $email
      * @return string
      */
     protected function getEmailFromShopify(string $email): string
@@ -36,15 +29,25 @@ trait HandlesMaskedEmailAddress
     }
 
     /**
+     * Are we using masked email addresses with Shopify?
+     *
+     * @return bool
+     */
+    protected function getIsUsingMask(): bool
+    {
+        return !app()->isProduction();
+    }
+
+    /**
      * Get the masked value of the given email address, to send to Shopify
      *
-     * @param string $email
+     * @param  string  $email
      * @return string
      */
     protected function getEmailForShopify(string $email): string
     {
         if ($this->getIsUsingMask()) {
-            return $email . $this->fakeSuffix;
+            return $email.$this->fakeSuffix;
         }
         return $email;
     }

@@ -3,16 +3,21 @@
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Models\ShopifySync;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\FindsCustomers;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\StagesUploadToShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsShopifyCustomer;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Modules\UserManagementSystem\Models\User;
@@ -43,7 +48,20 @@ use Signifly\Shopify\Shopify;
  */
 class BulkCustomerCreateFromUsers implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, SyncsShopifyCustomer, StagesUploadToShopify, FindsCustomers, HandlesMaskedEmailAddress;
+    use Batchable;
+    use Dispatchable;
+    use FindsCustomers;
+    use HandlesMaskedEmailAddress;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+    use StagesUploadToShopify;
+    use SyncsShopifyCustomer;
+
+    public function middleware(): array
+    {
+        return [new SkipIfBatchCancelled];
+    }
 
     protected CustomerRepository $customerRepository;
     protected AddressRepository $addressRepository;
@@ -52,10 +70,9 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
     /**
      * @param int $firstUserId the id of the first user to find in this batch
      * @param int $batchSize the number of users to get in this batch and create Shopify Customers for
-     * @param bool $useMaskedEmail are we using masked email addresses?
      * @param bool $execute are we executing this process, or simulating?
      */
-    public function __construct(protected int $firstUserId, protected int $batchSize, protected bool $useMaskedEmail, protected bool $execute)
+    public function __construct(protected int $firstUserId, protected int $batchSize, protected bool $execute)
     {
     }
 
@@ -159,10 +176,10 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
         // we can use meta fields for stuff like our user id, etc
         $customerData["metafields"] = [
             [
-                "key" => "_id",
+                "key" => ShopifyMetafieldKey::Id->value,
                 "value" => (string)$user->id,
-                "type" => "number_integer",
-                "namespace" => "users"
+                "type" => ShopifyMetafieldTypes::integer->value,
+                "namespace" => ShopifyMetafieldNamespace::Model_Users->value
             ]
         ];
 
@@ -228,13 +245,5 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
     protected function getCustomerRepository(): CustomerRepository
     {
         return $this->customerRepository;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function getIsUsingMask(): bool
-    {
-        return $this->useMaskedEmail;
     }
 }

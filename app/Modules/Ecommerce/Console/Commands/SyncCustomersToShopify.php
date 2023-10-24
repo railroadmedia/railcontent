@@ -2,21 +2,38 @@
 
 namespace App\Modules\Ecommerce\Console\Commands;
 
+use App\Console\Commands\Infrastructure\Command;
+use App\Models\ShopifySync;
+use App\Modules\Ecommerce\Console\Commands\Traits\SyncsToShopify;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\FindsCustomers;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesShopifyRateLimit;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\SavesShopifyIdOnAddresses;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsAddressData;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsShopifyCustomer;
+use Carbon\Carbon;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Exception\ORMException;
 use Illuminate\Support\Collection;
 use Railroad\Ecommerce\Entities\Customer;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Ecommerce\Repositories\AddressRepository;
 use Railroad\Ecommerce\Repositories\CustomerRepository;
+use Railroad\Ecommerce\Repositories\RepositoryBase;
 use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\REST\Resources\ApiResource;
 use Signifly\Shopify\REST\Resources\CustomerResource;
 use Signifly\Shopify\Shopify;
 
-class SyncCustomersToShopify extends SyncCustomersToShopifyBaseCommand
+class SyncCustomersToShopify extends Command
 {
+    use FindsCustomers;
+    use HandlesMaskedEmailAddress;
+    use HandlesShopifyRateLimit;
+    use SavesShopifyIdOnAddresses;
+    use SyncsAddressData;
     use SyncsShopifyCustomer;
+    use SyncsToShopify;
 
     /**
      * The name and signature of the console command.
@@ -25,9 +42,9 @@ class SyncCustomersToShopify extends SyncCustomersToShopifyBaseCommand
      */
     protected $signature = 'shopify:sync-customers
                             {--limit= : (Optional) The number of customers to limit this run to.}
-                            {--no-email-mask : Do not mask customer Email addresses. Without this flag, email addresses will be masked in Shopify. }
+                            {--since= : (Optional) The ISO 8601 date time to sync all changes since. e.g. 2023-10-13T17:03:25+00:00}
                             {--fresh : Sync all customers, not just those that need it}
-                            {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
+                            {--execute : Execute this sync to Shopify. Without this flag, it will be simulated.}';
 
     /**
      * The console command description.
@@ -35,6 +52,23 @@ class SyncCustomersToShopify extends SyncCustomersToShopifyBaseCommand
      * @var string
      */
     protected $description = 'Sync our customers up to Shopify. To be run AFTER sync-users.';
+
+    protected AddressRepository $addressRepository;
+    protected CustomerRepository $customerRepository;
+    protected EcommerceEntityManager $entityManager;
+    protected Shopify $shopify;
+
+    // the date and time that the last sync for this entity was performed
+    protected Carbon $lastSyncAt;
+
+    // running collection of the Shopify IDs returned in this run, so we can record it
+    protected Collection $shopifyIds;
+
+    // header for the results table display
+    protected array $tableHeader = [];
+
+    // rows for displaying the results in a table
+    protected array $tableRows = [];
 
     /**
      * Execute the console command.
@@ -76,6 +110,14 @@ class SyncCustomersToShopify extends SyncCustomersToShopifyBaseCommand
         });
 
         return self::SUCCESS;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getIsFresh(): bool
+    {
+        return $this->option("fresh");
     }
 
     /**
@@ -185,7 +227,13 @@ class SyncCustomersToShopify extends SyncCustomersToShopifyBaseCommand
                                     : $this->updateAddressesDataForCustomers($customersCollection, $shopifyCustomerId);
 
                                 // STEP 6: send it to Shopify, if there are any
-                                $this->sendAddressDataToShopify($addressesData, $shopifyCustomerId);
+                                $errors = $this->sendAddressDataToShopify(
+                                    $addressesData,
+                                    $shopifyCustomerId,
+                                    $this->shopifyIds
+                                );
+                                $this->handleRateLimit();
+                                $errors->each(fn($errorMessage) => $this->error($errorMessage));
                             } catch (ORMException $e) {
                                 $this->error(
                                     sprintf(
@@ -274,6 +322,14 @@ class SyncCustomersToShopify extends SyncCustomersToShopifyBaseCommand
     }
 
     /**
+     * @inheritDoc
+     */
+    protected function getIsSimulation(): bool
+    {
+        return $this->option("execute") == false;
+    }
+
+    /**
      * Send the data to Shopify to create or update a customer. Allowing up to 2 attempts, so that we can retry
      * after certain validation failures.
      *
@@ -303,23 +359,37 @@ class SyncCustomersToShopify extends SyncCustomersToShopifyBaseCommand
                     $customersCollection,
                     "getShopifyId"
                 );
+                $this->handleRateLimit();
                 $customerResource = $this->shopify->updateCustomer(
                     $existingCustomerShopifyId,
                     $postData
                 );
             }
+            $this->handleRateLimit();
         } catch (ValidationException $exception) {
             // we can have edge cases where the customer was created in Shopify, but we didn't record their shopify_id,
             // so check for that error and record Shopify's id on our records
             $errors = collect($exception->errors);
             if (collect($errors->get("email"))->contains("has already been taken")) {
-                $this->linkExistingCustomer($customerEmail);
-                $this->tableRows[] = [
-                    $customerEmail,
-                    "Customer",
-                    "<error>EMAIL EXISTING</error>",
-                    "Email account already taken. Shopify ID recorded locally."
-                ];
+                $failures = $this->linkExistingCustomer($customerEmail);
+                $this->handleRateLimit();
+                if ($failures->isNotEmpty()) {
+                    $failures->each(
+                        fn($failureMessage) => $this->tableRows[] = [
+                            $customerEmail,
+                            "",
+                            "<error>FAILED</error>",
+                            $failureMessage
+                        ]
+                    );
+                } else {
+                    $this->tableRows[] = [
+                        $customerEmail,
+                        "Customer",
+                        "<error>EMAIL EXISTING</error>",
+                        "Email account already taken. Shopify ID recorded locally."
+                    ];
+                }
                 return null;
             }
 
@@ -415,13 +485,20 @@ class SyncCustomersToShopify extends SyncCustomersToShopifyBaseCommand
 
         // first, get the address information from Shopify
         $shopifyAddressesResponse = $this->shopify->getCustomerAddresses($shopifyCustomerId);
+        $this->handleRateLimit();
         $shopifyAddresses = $shopifyAddressesResponse->map(fn(ApiResource $apiResource) => $apiResource->getAttributes()
         );
         // keep track of the local addresses that we've checked, so we know not to check if they're new
         $checkedLocalAddressIds = collect();
 
         // get data for all the addresses that need to be updated
-        $this->addDataForUpdatedAddresses($shopifyCustomerId, $shopifyAddresses, $checkedLocalAddressIds, $addressData);
+        $updateFailures = $this->addDataForUpdatedAddresses(
+            $shopifyCustomerId,
+            $shopifyAddresses,
+            $checkedLocalAddressIds,
+            $addressData
+        );
+        $updateFailures->each(fn($failureMessage) => $this->error($failureMessage));
 
         // next, check for any additional addresses that the user has, that haven't yet been synced up to Shopify
         $allLocalAddressData = $this->createAddressesDataForCustomers($customers);
@@ -445,5 +522,70 @@ class SyncCustomersToShopify extends SyncCustomersToShopifyBaseCommand
     protected function getClassName(): string
     {
         return "SyncCustomersToShopify";
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getCustomerRepository(): CustomerRepository
+    {
+        return $this->customerRepository;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getAddressRepository(): AddressRepository
+    {
+        return $this->addressRepository;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getEntityManager(): EcommerceEntityManager
+    {
+        return $this->entityManager;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getSyncResource(): string
+    {
+        return ShopifySync::RESOURCE_CUSTOMER;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function syncResource(bool $simulate, bool $fresh): Collection
+    {
+        // we do not use the SyncsToShopify sync() here. We need to run through all applicable Customers,
+        // rather than just one entity. That, combined with the huge number of Customers in our
+        // database, leads to a unique situation for syncing up to Shopify Customers.
+        // All of that is done in the handle function, and so this function is never used.
+
+        return collect();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getEcommerceEntityRepository(): RepositoryBase|EntityRepository
+    {
+        return $this->customerRepository;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getLastSyncAtOverride(): null|Carbon
+    {
+        $override = $this->option("since");
+        if (!is_null($override)) {
+            return new Carbon($override);
+        }
+        return null;
     }
 }

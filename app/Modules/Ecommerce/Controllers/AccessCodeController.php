@@ -24,26 +24,19 @@ class AccessCodeController extends Controller
      */
     private UserProviderInterface $userProvider;
 
-/**
-     * @var UserAccessPermissionsService
-     */
-    private UserAccessPermissionsService $userAccessPermissionsService;
 
     /**
      * AccessCodeController constructor.
      *
      * @param AccessCodeService $accessCodeService
      * @param UserProviderInterface $userProvider
-     * @param UserAccessPermissionsService $userAccessPermissionsService
      */
     public function __construct(
         AccessCodeService $accessCodeService,
         UserProviderInterface $userProvider,
-        UserAccessPermissionsService $userAccessPermissionsService,
     ) {
         $this->accessCodeService = $accessCodeService;
         $this->userProvider = $userProvider;
-        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
     /**
@@ -74,20 +67,6 @@ class AccessCodeController extends Controller
         }
 
         $rawAccessCode = $request->get('access_code');
-
-        $productIds = $this->accessCodeService->getAccessCodeProducts($rawAccessCode);
-
-        /*
-         * SRR-37: Update user permissions
-         */
-        if (config('shopify.enabled')) {
-            $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
-                $user->getId(),
-                $productIds,
-                Carbon::now(),
-                UserAccessPermissionsSourceEnum::AccessCode,
-            );
-        }
 
         $accessCode = $this->accessCodeService->claim($rawAccessCode, $user, $request->get('context'));
 

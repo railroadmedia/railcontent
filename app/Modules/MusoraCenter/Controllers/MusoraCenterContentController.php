@@ -2,8 +2,8 @@
 
 namespace App\Modules\MusoraCenter\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class MusoraCenterContentController extends Controller
 {

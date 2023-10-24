@@ -2,8 +2,16 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
+use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Models\Product;
+use App\Modules\UserManagementSystem\Services\UserService;
+use App\Providers\EcommerceUserProvider;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
@@ -11,20 +19,28 @@ use Signifly\Shopify\Shopify;
 
 class ShopifySyncService
 {
+    use HandlesMaskedEmailAddress;
+
     private Shopify $shopify;
     private RechargeGateway $recharge;
     private UserProductService $userProductService;
     private ProductService $productService;
     private UserAccessPermissionsService $userAccessPermissionsService;
     private ShopifyCustomerService $shopifyCustomerService;
+    private UserService $userService;
+    private EcommerceUserProvider $ecommerceUserProvider;
+    private ShopifyGateway $shopifyGateway;
 
     public function __construct(
         Shopify $shopify,
+        ShopifyGateway $shopifyGateway,
         RechargeGateway $recharge,
         UserAccessPermissionsService $userAccessPermissionsService,
         ProductService $productService,
         UserProductService $userProductService,
         ShopifyCustomerService $shopifyCustomerService,
+        UserService $userService,
+        EcommerceUserProvider $ecommerceUserProvider,
     ) {
         $this->shopify = $shopify;
         $this->recharge = $recharge;
@@ -32,37 +48,50 @@ class ShopifySyncService
         $this->productService = $productService;
         $this->userAccessPermissionsService = $userAccessPermissionsService;
         $this->shopifyCustomerService = $shopifyCustomerService;
+        $this->userService = $userService;
+        $this->ecommerceUserProvider = $ecommerceUserProvider;
+        $this->shopifyGateway = $shopifyGateway;
     }
 
-    public function syncCustomer($shopifyCustomerId)
-    : void {
+    public function syncCustomer($shopifyCustomerId, $email = '', $skipRechargeSync = false): void
+    {
+        if (!config('shopify.enabled') || !$shopifyCustomerId) {
+            return;
+        }
+        Log::debug("Customer $shopifyCustomerId: GetCustomerOrders");
+        $orders = $this->shopifyGateway->getCustomerOrders($shopifyCustomerId);
+        $skus = $orders->pluck('lineItems')->flatten(1)->pluck('sku')->unique()->toArray();
+        $products = $this->productService->getProductsBySkus($skus);
+        if ($products->contains(fn(Product $product) => $product->isDigital())) {
+            $count = $orders->count();
+            Log::debug("Customer $shopifyCustomerId: Found $count orders");
+            $user = $this->getUser($shopifyCustomerId, $email);
+            $this->userAccessPermissionsService->syncShopifyOrders($user, $orders, $products, $skipRechargeSync);
+        };
+    }
+
+    public function syncCustomerByEmail($email)
+    {
         if (!config('shopify.enabled')) {
             return;
         }
-        $userId = $this->getUserIdFromShopifyCustomerId($shopifyCustomerId);
-        if (!$userId) {
-            throw new \Exception("User not found for shopify customer id $shopifyCustomerId");
+        $customers = $this->shopify->getCustomers(['email' => $email]);
+        $customer = collect($customers)->first(fn($item) => $item->email === $email);
+        if (!$customer) {
+            throw new \Exception("Shopify customer not found for email: $email");
         }
-        $orders = $this->shopify->getCustomerOrders($shopifyCustomerId, ['status' => 'any']);
-        $this->userAccessPermissionsService->syncShopifyOrders($userId, $orders);
+        $this->syncCustomer($customer->id, $email);
     }
 
-    private function getUserIdFromShopifyCustomerId($shopifyCustomerId)
-    {
-        $user = User::query()->where('shopify_id', '=', $shopifyCustomerId)->first('id');
-        return $user->id ?? null;
-    }
-
-    /**
-     * @param User $user
-     * @param int[] $productIds
-     * @param string $brand
-     * @param float $price
-     * @param float|null $tax
-     * @return void
-     */
-    public function syncOrder(User $user, array $productIds, string $brand, Carbon $processedAt, float $price, ?float $tax)
-    : void {
+    public function syncOrder(
+        User $user,
+        array $productIds,
+        string $brand,
+        Carbon $processedAt,
+        float $price,
+        ?float $tax,
+        ShopifyPaymentSourceEnum $paymentSource
+    ): void {
         if (!config('shopify.enabled')) {
             return;
         }
@@ -78,7 +107,16 @@ class ShopifySyncService
 
         Log::debug("User ID: $user->id; Customer Shopify ID: $customerShopifyId. Creating Shopify order payload");
         // STEP 2: create shopify order data
-        $postData = $this->createOrderData($customerShopifyId, $user->email, $productIds, $brand, $processedAt, $price, $tax);
+        $postData = $this->createOrderData(
+            $customerShopifyId,
+            $user->email,
+            $productIds,
+            $brand,
+            $processedAt,
+            $price,
+            $tax,
+            $paymentSource
+        );
 
         Log::debug("User ID: $user->id; Customer Shopify ID: $customerShopifyId. Pushing order to Shopify");
         // STEP 3: push order to shopify
@@ -103,15 +141,13 @@ class ShopifySyncService
      * @param Carbon $processedAt
      * @return bool
      */
-    public function orderExistsForProcessDate(?int $shopifyCustomerId, Carbon $processedAt)
-    : bool {
+    public function doesOrderExist(?int $shopifyCustomerId, Carbon $processedAt): bool
+    {
         if (!$shopifyCustomerId) {
             return false;
         }
 
-        $orders =
-            $this->shopify->getCustomerOrders($shopifyCustomerId, ['status' => 'any', 'processed_at' => $processedAt]);
-        return $orders->count() > 0;
+        return $this->shopifyGateway->doesOrderExist($shopifyCustomerId, $processedAt);
     }
 
     /**
@@ -121,6 +157,7 @@ class ShopifySyncService
      * @param string $email
      * @param int[] $productIds
      * @param string $brand
+     * @param Carbon $processedAt
      * @param float $price
      * @param float $tax
      * @return array
@@ -132,22 +169,35 @@ class ShopifySyncService
         string $brand,
         Carbon $processedAt,
         float $price,
-        float $tax
-    )
-    : array {
+        float $tax,
+        ShopifyPaymentSourceEnum $paymentSource
+    ): array {
         $data = [
             "customer" => ["id" => $customerShopifyId],
-            "email" => $email,
+            "email" => $this->getEmailForShopify($email),
             "processed_at" => $processedAt,
-            "source_name" => $brand,
-            "subtotal_price" => number_format($price, 2),
+            "subtotal_price" => number_format($price, 2, '.', ''),
             "total_outstanding" => "0.00",
-            "total_price" => number_format($price + ($tax ?? 0), 2),
+            "total_price" => number_format($price + ($tax ?? 0), 2, '.', ''),
             "line_items" => $this->createOrderItems($productIds, $price),
+            "metafields" => [
+                [
+                    "key" => ShopifyMetafieldKey::Brand->value,
+                    "value" => $brand,
+                    "type" => ShopifyMetafieldTypes::single_line_text_field->value,
+                    "namespace" => ShopifyMetafieldNamespace::Musora->value
+                ],
+                [
+                    "key" => ShopifyMetafieldKey::PaymentSource->value,
+                    "value" => $paymentSource->value,
+                    "type" => ShopifyMetafieldTypes::single_line_text_field->value,
+                    "namespace" => ShopifyMetafieldNamespace::Musora->value
+                ]
+            ]
         ];
 
         if ($tax) {
-            $data['total_tax'] = number_format($tax, 2);
+            $data['total_tax'] = number_format($tax, 2, '.', '');
         }
 
         return $data;
@@ -160,8 +210,8 @@ class ShopifySyncService
      * @param float $price
      * @return array
      */
-    private function createOrderItems(array $productIds, float $price)
-    : array {
+    private function createOrderItems(array $productIds, float $price): array
+    {
         return Product::whereIn('id', $productIds)
             ->get()
             ->map(
@@ -176,5 +226,26 @@ class ShopifySyncService
                     "vendor" => $product->brand,
                 ]
             )->all();
+    }
+
+    public function getUser(
+        int $shopifyCustomerId,
+        ?string $email = null
+    ): ?User {
+        $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
+        if ($user) {
+            return $user;
+        }
+        if ($email) {
+            $user = $this->userService->getByEmailOrNull($email);
+            if ($user) {
+                return $user;
+            }
+            return $this->userService->createUser(
+                $email,
+                config('user_management_system.default_user_password')
+            );
+        }
+        throw new \Exception("User not found for shopify customer id $shopifyCustomerId");
     }
 }
