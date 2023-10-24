@@ -468,16 +468,29 @@ class ContentQueryBuilder extends QueryBuilder
         // set the joins first, then we'll add the where's after
         foreach ($includedFieldsGroupedByTable as $name => $includedFieldDataGrouped) {
             if ($includedFieldDataGrouped[0]['is_content_column']) {
-                $this->where(
-                    'railcontent_content.' . $includedFieldDataGrouped[0]['name'],
-                    $includedFieldDataGrouped[0]['operator'],
-                    is_numeric($includedFieldDataGrouped[0]['value']) ?
-                        DB::raw($includedFieldDataGrouped[0]['value']) : DB::raw(
-                        DB::connection()
-                            ->getPdo()
-                            ->quote($includedFieldDataGrouped[0]['value'])
-                    )
-                );
+                $whereInArray = [];
+
+                foreach ($includedFieldDataGrouped as $includedFieldData) {
+                    $whereInArray[] = $includedFieldData['value'];
+                }
+
+                if(count($whereInArray) > 1) {
+                    $this->whereIn(
+                        'railcontent_content.' . $includedFieldDataGrouped[0]['name'],
+                        $whereInArray
+                    );
+                }else {
+                    $this->where(
+                        'railcontent_content.'.$includedFieldDataGrouped[0]['name'],
+                        $includedFieldDataGrouped[0]['operator'],
+                        is_numeric($includedFieldDataGrouped[0]['value']) ?
+                            DB::raw($includedFieldDataGrouped[0]['value']) : DB::raw(
+                            DB::connection()
+                                ->getPdo()
+                                ->quote($includedFieldDataGrouped[0]['value'])
+                        )
+                    );
+                }
             } elseif (!empty($includedFieldDataGrouped[0]['associated_table'])) {
                 $this->leftJoin(
                     $includedFieldDataGrouped[0]['associated_table']['table'].
