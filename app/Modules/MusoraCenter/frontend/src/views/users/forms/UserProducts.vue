@@ -48,9 +48,6 @@
             :headers="headings"
             :items="userAccessPermissions"
             :items-per-page="5"
-            must-sort
-            sort-desc
-            sort-by="created_at"
         >
             <template
                 v-slot:item="{ item }"
@@ -302,54 +299,47 @@ export default {
                     text: 'Brand',
                     align: 'center',
                     sortable: true,
-                    value: 'attributes.brand',
                     width: 100,
                 },
                 {
                     text: 'Name',
                     align: 'left',
                     sortable: true,
-                    value: 'attributes.name',
                 },
                 {
                     text: 'Duration',
                     align: 'left',
                     sortable: true,
-                    value: 'attributes.duration',
                     width: 150,
                 },
                 {
                     text: 'Active From',
                     align: 'left',
                     sortable: true,
-                    value: 'attributes.created_at',
                     width: 190,
                 },
                 {
                     text: 'Expires On',
                     align: 'left',
-                    sortable: false,
+                    sortable: true,
                     width: 190,
                 },
                 {
                     text: 'Source',
                     align: 'left',
                     sortable: true,
-                    value: 'attributes.source',
                     width: 150,
                 },
                 {
                     text: 'Status',
                     align: 'left',
                     sortable: true,
-                    value: 'attributes.status',
                     width: 100,
                 },
                 {
                     text: 'Actions',
                     align: 'center',
                     sortable: true,
-                    value: 'attributes.actions',
                     width: 120,
                 },
             ],
