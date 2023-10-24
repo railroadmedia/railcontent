@@ -481,10 +481,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     public function getIsAMemberAttribute()
     {
-        //if(!isset($this->attributes['is_a_member'])) {
+        if(!isset($this->attributes['is_a_member'])) {
             $this->attributes['is_a_member'] = $this->is_lifetime_member ||
                 (!empty($this->membership_expiration_date) && $this->membership_expiration_date > Carbon::now());
-       // }
+        }
 
         return $this->attributes['is_a_member'];
     }
