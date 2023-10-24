@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper v-if="showFilter" :filterable-values="filterableValues" :tab-options="tabOptionData"
-            :pre-loaded-content="preLoadedContent" />
+            :pre-loaded-content="preLoadedContent" :on-filter-change="handleFilterChange" :on-search-change="handleSearchChange" />
         <h1 v-else class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-my-7">All {{ title }}</h1>
 
         <transition appear name="fade">
@@ -158,7 +158,7 @@ const isRudiment = computed(() => {
 })
 
 const showFilter = computed(() => {
-    return isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value;
+    return isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value || isCoach.value;
 })
 
 const getTabOptions = computed(() => {
@@ -216,11 +216,26 @@ const tabData = computed(() => {
     return tabDataMap;
 })
 
+const handleFilterChange = (param) => {
+    collectionStore.applyFilter(param);
+}
+
+const handleSearchChange = (value) => {
+    collectionStore.setSearchTerm(value)
+}
+
+const handleSortChange = (item) => {
+    collectionStore.sortData(item);
+}
+
+const handleTabChange = (tab) => {
+    collectionStore.switchTab(tab);
+}
+
 onMounted(() => {
     console.log(props.collectionType)
 
     collectionStore.setDefaults({
-        brand: brand.value,
         data: props.preLoadedContent?.data || [],
         filter: {
             activeTab: getFirstTabOption.value.key,
