@@ -6,14 +6,14 @@
         />
 
         <transition appear name="fade">
-            <CollectionResults :current-page="filter.currentPage" :loading="loading" :total-pages="totalPages" @on-load-more="collectionStore.loadMore">
+            <CollectionResults :current-page="tabData[filter.activeTab] && tabData[filter.activeTab].currentPage" :loading="loading" :total-pages="tabData[filter.activeTab] && tabData[filter.activeTab].totalPages" @on-load-more="collectionStore.loadMore">
                 <CoachesGridCatalogue v-if="isCoach" :content="data" :brand="brand" />
                 <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <RoutinesCatalogue v-else-if="isRoutine" :content="data"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
-                    :total-results="totalResults" />
+                    :total-results="tabData[filter.activeTab] && tabData[filter.activeTab].totalResults" />
             </CollectionResults>
         </transition>
     </div>
@@ -217,6 +217,9 @@ const getTabData = computed(() => {
             included_fields: props.included_fields || [],
             searchTerm: '',
             sort: isCoach.value ? 'slug' : '-published_on',
+            currentPage: 1,
+            totalPages: props.preLoadedContent ? Math.ceil(props.preLoadedContent.meta.totalResults / props.limit) : 0,
+            totalResults: props.preLoadedContent?.meta.totalResults || 0,
         };
     });
 
@@ -228,7 +231,6 @@ const handleFilterChange = (category, item) => {
 }
 
 const handleSearchChange = (value) => {
-    console.log('in wrapper', value)
     collectionStore.setSearchTerm(value)
 }
 
@@ -252,8 +254,6 @@ onMounted(() => {
             [isCoach.value ? 'term' : 'title']: '',
         },
         tabData: getTabData.value,
-        totalPages: props.preLoadedContent ? Math.ceil(props.preLoadedContent.meta.totalResults / props.limit) : 0,
-        totalResults: props.preLoadedContent?.meta.totalResults || 0,
     })
 })
 </script>
