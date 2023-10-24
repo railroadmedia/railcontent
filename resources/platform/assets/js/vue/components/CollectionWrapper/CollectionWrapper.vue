@@ -6,13 +6,13 @@
 
         <transition appear name="fade">
             <CollectionResults>
-                <CoachesGridCatalogue v-if="isCoach" :content="collectionStore.data" :brand="collectionStore.brand" />
-                <ListCatalogue v-else-if="isList" :content="collectionStore.data" :force-wide-thumbs="isStudentReview"
+                <CoachesGridCatalogue v-if="isCoach" :content="data" :brand="brand" />
+                <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
-                <RoutinesCatalogue v-else-if="isRoutine" :content="collectionStore.data"
+                <RoutinesCatalogue v-else-if="isRoutine" :content="data"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
-                <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="collectionStore.data" ref="playAlongsVueInstance"
-                    :total-results="collectionStore.totalResults" />
+                <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
+                    :total-results="totalResults" />
             </CollectionResults>
         </transition>
     </div>
@@ -28,12 +28,10 @@ import ListCatalogue from "../../vuesora/views/catalogues/ListCatalogue";
 import UserCatalogueEvents from "../../vuesora/mixins/UserCatalogueEvents";
 import RoutinesCatalogue from "../../vuesora/views/catalogues/RoutinesCatalogue";
 import PlayAlongs from "../../vuesora/views/play-alongs/PlayAlongs";
+import {storeToRefs} from "pinia";
+import { useUserStore } from "../../../stores/user";
 
 const props = defineProps({
-    brand: {
-        type: String,
-        default: '',
-    },
     collectionType: {
         default: '',
     },
@@ -80,6 +78,10 @@ const props = defineProps({
 });
 
 const collectionStore = useCollectionStore();
+const userStore = useUserStore();
+
+const { data, totalResults } = storeToRefs(collectionStore);
+const { brand } = storeToRefs(userStore);
 
 const request_params = computed(() => {
     return {
@@ -218,7 +220,7 @@ onMounted(() => {
     console.log(props.collectionType)
 
     collectionStore.setDefaults({
-        brand: props.brand,
+        brand: brand.value,
         data: props.preLoadedContent?.data || [],
         filter: {
             activeTab: getFirstTabOption.value.key,

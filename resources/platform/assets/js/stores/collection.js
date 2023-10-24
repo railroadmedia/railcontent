@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia';
 import axios from "axios";
+import { useUserStore } from "./user";
 
 export const useCollectionStore = defineStore({
     id: 'Collection',
     state: () => {
         return {
-            brand: '',
             data: [],
             fetching: false,
             filter: {
@@ -22,13 +22,15 @@ export const useCollectionStore = defineStore({
     },
     actions:{
         async fetchData(){
+            const userStore = useUserStore();
+
             try {
                 const response = await axios
                     .get(
                         this.tabData[this.filter.activeTab].endpoint,
                         {
                             params: {
-                                brand: this.brand,
+                                brand: userStore.brand,
                                 limit: this.filter.limit,
                                 page: this.filter.currentPage,
                                 sort: this.tabData[this.filter.activeTab].sort,
@@ -85,10 +87,6 @@ export const useCollectionStore = defineStore({
         setDefaults(defaults){
           if(defaults.data){
               this.data = defaults.data;
-          }
-
-          if(defaults.brand){
-              this.brand = defaults.brand;
           }
 
           if(defaults.filter){
