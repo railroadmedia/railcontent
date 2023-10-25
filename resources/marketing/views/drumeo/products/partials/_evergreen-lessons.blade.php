@@ -1,3 +1,5 @@
+<section class="m-0" style="background: #00101D;">
+
 <h3 class="text-center text-white text-2xl md:text-5xl font-extrabold font-['Open Sans'] leading-10 pt-12 md:pt-20">
     {{ $title }}
 </h3>
@@ -60,3 +62,4 @@
     </div>
 
 </div>
+</section>

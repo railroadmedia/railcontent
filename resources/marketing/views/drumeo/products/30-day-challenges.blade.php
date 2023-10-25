@@ -237,71 +237,8 @@
             ])
 
  <!-- Header Section -->
- 
-    <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
-        <div class="container max-w-5xl mx-auto">
-            <div class="flex flex-col sm:flex-nowrap items-center">
-                <div class="w-full sm:w-7/12 text-center">
-                    <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/30_day_drummer_logo.svg" alt="30DD logo season3 logo">
-                    <h1 class="rotater-text overflow-hidden"><strong>
-                            <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
-
-                            <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
-
-                            <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
-
-                            <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
-
-                            <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
-                        </strong></h1>
-
-                    <h2 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h2>
-
-                    <p class="hidden lg:inline">
-                        <i class="fas fa-check text-drumeo"></i> Improve Your Skills
-                        <i class="ml-2 fas fa-check text-drumeo"></i> Drum Every Day
-                        <i class="ml-2 fas fa-check text-drumeo"></i> Learn By Doing</p>
-                    <div class="flex inline lg:hidden my-3">
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Improve<br> Your Skills</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Drum<br> Every Day</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Learn<br> By Doing</p>
-                    </div>
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video lazyload" style="padding-bottom: 63%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30DD2_header_thumb_no_badge_m.jpg" data-open="trailer">
-
-                    </div>
-                    
-                </div>
-                <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-cover bg-top bg-no-repeat cursor-pointer autoplay-video lazyload" style="padding-bottom: 98%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30DD2_header_no_badge_thumb.jpg" data-open="trailer">
-                        <div class="join white smaller absolute {{-- bottom-1 --}} bottom-2 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
-                    </div>
-                </div>
-                <div class="flex w-full flex-col items-center mt-6 sm:mt-5 lg:mt-10">
-                        <div class="w-full sm:w-1/2 text-center sm:pr-2 my-1">
-                               <a href="#final" class="join blue medium w-full anchor-slide">GET STARTED</a>
-                        </div>
-                        <div class="w-full sm:w-1/2 lg:pb-5 my-1 text-center">
-                            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined student profiles">
-                            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
-                        </div>
-                    </div>
-            </div>       
-        </div>
-    </header>
-
-
     @include('drumeo.products.partials._evergreen-header', [
-    'logo' => 'https://www.musora.com/musora-cdn/image/width=440,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/30_day_drummer_logo.svg',
+    'logoHeader' => 'https://www.musora.com/musora-cdn/image/width=440,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/30_day_drummer_logo.svg',
     'logoAlt' => '30 day drummer logo',
     'rotatingText' => ['Learn the drums', 'Improve your timing', 'Boost your creativity'],
     'subtitle' => 'with daily guided workouts.',
@@ -316,90 +253,8 @@
     'students' => 'drummers'
 ])
 
+
  <!-- Lessons Section -->
-<section class="m-0" style="background: #00101D;">
-    {{-- <h3 class="text-center text-white text-2xl md:text-5xl font-extrabold font-['Open Sans'] leading-10 pt-12 md:pt-20">
-            Learn the drums by actually playing the drums.</h3>
-
-        <div class="container max-w-6xl mx-auto p-4 md:p-6 lg:flex">
-            <!-- Left Column -->
-            <div class="lg:w-4/6 py-2 md:p-4">
-                <!-- Video -->
-                <div class="w-full">
-                    <img class="rounded-xl"
-                        src="https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/shop/30-day-challenges/drum-challenges.jpeg" />
-                </div>
-
-                <div class="mt-4 md:py-4 text-white font-sans text-15 font-normal font-light leading-35 hidden md:block">
-                    <p>Welcome to 30-Day Drummer! At this point, you should have all the equipment you need to get started,
-                        know how to set up your gear, and be ready to have some fun playing the drums with Domino. In this
-                        first lesson and 10-minute workout, she will teach you the beginnings of the most popular drum beat
-                        of all time. And you will have fun doing it!</p>
-                    <p class="pt-10">Instructor: <strong>Domino Santantonio</strong></p>
-                    <p class="pt-2">Lesson Length: <strong>30 video lessons</strong></p>
-                </div>
-            </div>
-
-            <!-- Right Column -->
-            <div class="lg:w-2/6 py-2 md:p-4">
-                <div class="h-14 flex flex-row rounded-lg mb-2 px-6 py-4" style="background: #eff7ff;"> <svg
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path
-                            d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7363 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM10 16.5V7.5L16 12L10 16.5Z"
-                            fill="#0B76DB" />
-                    </svg>
-                    <div class="text-base font-normal font-light leading-7 px-2"> Course Kick-Off</div>
-                </div>
-                <div class="h-14 flex flex-row rounded-lg my-2 px-6 py-4" style="background: #eff7ff;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none">
-                        <path
-                            d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7363 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM10 16.5V7.5L16 12L10 16.5Z"
-                            fill="#0B76DB" />
-                    </svg>
-                    <div class="text-base font-normal font-light leading-7 px-2">Setup</div>
-                </div>
-                <p class="text-white font-sans text-15 font-semibold leading-35">Course Lessons</p>
-                @php
-                    $lessons = ['Day 1 - Introduction', 'Day 2 - Basics of Drumming', 'Day 3 - Rhythms and Patterns', 'Day 4 - Advanced Techniques', 'Day 5 - Grooves and Fills', 'Day 6 - Introduction', 'Day 7 - Basics of Drumming', 'Day 8 - Rhythms and Patterns', 'Day 9 - Advanced Techniques', 'Day 10 - Grooves and Fills'];
-                @endphp
-                <!-- Container with scroll  -->
-                <div x-data="{ isOpen: [] }" class="h-80 overflow-y-scroll rounded-lg">
-                    @foreach ($lessons as $i => $lesson)
-                        <div x-data="{ open: false }"
-                            class="rounded-lg bg-white shadow text-base font-normal font-light leading-7 my-1">
-                            <button @click="open = !open"
-                                class="rounded-lg flex w-full items-center justify-between px-6 py-4"
-                                style="background: #eff7ff;">
-                                <span>Day {{ $i + 1 }}</span>
-                                                <!-- Arrow down problem  -->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" 
-                                    fill="none" x-show="!open" x-blind:class="{'rotate-90': open}">
-                                    <path d="M10.59 0.59L6 5.17L1.41 0.590001L-5.24537e-07 2L6 8L12 2L10.59 0.59Z"
-                                        fill="#0B76DB" />
-                                </svg>
-                            </button>
-                            <div x-show="open" x-cloak>
-                                <div class="px-6 pb-4 bg-blue-50 rounded-lg">
-                                    {{$lessons[$i]}}
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-
-            <!-- Paragraphs for mobile -->
-            <div class="mt-4 p-4 text-white font-sans text-15 font-normal font-light leading-35 md:hidden">
-                <p>Welcome to 30-Day Drummer! At this point, you should have all the equipment you need to get started, know
-                    how to set up your gear, and be ready to have some fun playing the drums with Domino. In this first lesson
-                    and 10-minute workout, she will teach you the beginnings of the most popular drum beat of all time. And you will
-                    have fun doing it!</p>
-                <p class="pt-10">Instructor: <strong>Domino Santantonio</strong></p>
-                <p class="pt-2">Lesson Length: <strong>30 video lessons</strong></p>
-            </div>
-        </div> --}}
-
 @php
 $lessons = ['Day 1 - Introduction', 'Day 2 - Basics of Drumming', 'Day 3 - Rhythms and Patterns', 'Day 4 - Advanced Techniques', 'Day 5 - Grooves and Fills', 'Day 6 - Introduction', 'Day 7 - Basics of Drumming', 'Day 8 - Rhythms and Patterns', 'Day 9 - Advanced Techniques', 'Day 10 - Grooves and Fills'];
 @endphp
@@ -412,19 +267,13 @@ $lessons = ['Day 1 - Introduction', 'Day 2 - Basics of Drumming', 'Day 3 - Rhyth
     'descriptionMobile' => 'Welcome to 30-Day Drummer! At this point, you should have all the equipment you need to get started, know how to set up your gear, and be ready to have some fun playing the drums with Domino. In this first lesson and 10-minute workout, she will teach you the beginnings of the most popular drum beat of all time. And you will have fun doing it!',
     'features' => [
         'Course Kick-Off',
-        'Setup',
     ],
     'lessonTitle' => 'Course Lessons',
     'instructor' => ' Domino Santantonio',
     'course' => ' 30 video lessons',
     'lessons' => $lessons,
-    'fill' => '#0B76DB', // icons color
+    'fill' => 'red', // icons color
 ])
-
-
-
-        
-</section>
 
 <!-- Songs subsection -->
 <section class="bg-slate-900">
@@ -469,7 +318,6 @@ $lessons = ['Day 1 - Introduction', 'Day 2 - Basics of Drumming', 'Day 3 - Rhyth
     </div>
 </section>
        
-
  <!-- What you will learn section-->
 @php
 $items = [
@@ -481,8 +329,7 @@ $items = [
         ]
 @endphp
 
-
-<section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+<section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 bg-blue-50">
     <div class="container max-w-4xl mx-auto">
         <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
             <img class="h-28 sm:h-36 lg:h-48 lazyload"
@@ -501,7 +348,7 @@ $items = [
                     <ul>
         </div>
 
-        <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+        <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">GET STARTED</a><br>
         <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload"
             data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png"
             alt="joined student profiles">
@@ -510,12 +357,9 @@ $items = [
     </div>
 </section>
 
-
-
-
  <!-- Meet your teacher section -->
 
-<section class="text-center px-6 md:px-5 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
+<section class="text-center px-6 md:px-5 py-10 sm:py-14 lg:py-20 bg-white">
         <div class="container max-w-5xl mx-auto mb-14 lg:mb-16">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
                 <div class="w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
@@ -560,19 +404,12 @@ $items = [
 
  <!-- Testimonials section -->
 
-<section class="pt-16 md:pt-32 pb-44 md:pb-64"
-    style="background: linear-gradient(rgba(11, 118, 219, 1), rgba(7, 74, 137, 1))">
-    <div class="text-center text-white">
-        <h2 class="leading-tight text-2xl md:text-5xl mb-4"><strong>Trusted by drummers everywhere.</strong></h2>
-        <a class="inline-block w-full" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank"
-            onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
-            <img alt="shopper approved image" class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/shopper-approved.png"
-                loading="lazy" onload="this.classList.remove('opacity-0')">
-        </a>
+@php
+$testimonials = $drumeo['testimonialsShopVersion'];
+@endphp
 
-        @include('drumeo.products.partials._social-icons-testimonials', [
-            'socialIcons' => [
+@include('drumeo.products.partials._evergreen-testimonials', [
+    'socialIcons' => [
                 [
                     'url' => 'https://www.youtube.com/freedrumlessons/',
                     'label' => 'youtube',
@@ -595,76 +432,17 @@ $items = [
                     'countLabel' => 'Followers',
                 ],
             ],
-        ])
-    </div>
+        'bgColor' => 'linear-gradient(rgba(11, 118, 219, 1), rgba(7, 74, 137, 1))',
+        'title' => "Trusted by drummers everywhere.",
+        'showTop'=> true,
+        'shopBottom' => true,
+        'subHeader' => '17,000+ Drummers Agree...',
+        'description' => '30-Day Drummer works. By focusing on playing with real music right from day one, you’ll learn the skills to play hundreds of songs on the drums in just thirty days. Check out what students are saying:'
+])
 
-
-    <h3 class="mb-4 text-center text-white"><strong>17,000+ Drummers Agree...</strong></h3>
-    <p class="text-white mb-2 md:mb-3 px-4 lg:px-0 text-center">30-Day Drummer works. By focusing on playing with real
-        music right from day one, you’ll learn the <br class="hidden lg:inline">skills to play hundreds of songs on the
-        drums in just thirty days. Check out what students are saying:</p>
-        <!-- carousel -->
-
-    <div class="max-w-5xl mx-auto px-5 sm:px-6 mb-10 sm:mb-0">
-        <div x-data="{
-            init() {
-                new Splide(this.$refs.splide, {
-                    classes: {
-                        arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
-                        prev: 'hidden',
-                        next: 'splide__arrow--next hidden sm:flex mb-16',
-                        pagination: 'splide__pagination -bottom-10',
-                    },
-                    perPage: 2.5,
-                    perMove: 1,
-                    type: 'loop',
-                    focus: 0,
-                    interval: 2000,
-                    breakpoints: {
-                        800: {
-                            perPage: 2.5,
-                        },
-                        769: {
-                            perPage: 1.5,
-                            drag: 'free',
-                            snap: false,
-                        },
-                    },
-                }).mount()
-            },
-        }">
-            <div x-ref="splide" class="splide sm:mb-9">
-                <div class="splide__track">
-                    <ul class="splide__list items-start" style="padding-top: 60px !important;">
-
-                @php
-                $testimonials = $drumeo['testimonialsShopVersion'];
-                @endphp
-
-                        @foreach ($testimonials as $testimonial)
-                            <li class="splide__slide bg-[#F4F8FB] rounded-xl pb-6 px-8 mr-4 text-center">
-                                <div class="-mt-10 mb-6">
-                                    <img class="rounded-full w-[90px] h-[90px] object-cover lazyload"
-                                        data-src="https://www.musora.com/musora-cdn/image/width=130,quality=95/{{ $testimonial['img'] }}"
-                                        alt="{{ $testimonial['name'] }} avatar" />
-                                </div>
-                                <h6 class="mb-1 font-extrabold">{{ $testimonial['name'] }}</h6>
-                                <p><i>30-Day Drummer Student</i></p>
-                                <img class="my-4"
-                                    src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/stars.svg"
-                                    alt="stars" />
-                                <p class="mb-6">“{!! $testimonial['comment'] !!}”</p>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
  <!-- End of Testimonials section -->
 
-  <!-- Guarantee section -->
+<!-- Guarantee section -->
 <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
     style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));">
 </div>
@@ -689,44 +467,30 @@ $items = [
     </div>
 </section>
 
-
  <!-- Learn the drum section -->
-<section class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #eff7ff;">
-    <div class="container max-w-6xl mx-auto">
-        <div class="flex flex-col md:flex-row items-center">
-            <!-- Left Column -->
-            <div class="w-full md:w-6/12 text-center lg:text-left mb-5 md:mb-0">
-                <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/30_day_drummer_logo.svg" alt="30DD logo season3 logo">
-                <h1><strong>Learn the drums with daily guided workouts.</strong></h1>
-                <div class="text-base text-center md:text-left md:text-xl font-normal leading-10 py-3 md:py-5">
-                    <ul>
-                        <li><i class="fas fa-check text-drumeo"></i> Guided drum lessons for 30 days.</li>
-                        <li><i class="fas fa-check text-drumeo"></i> Practice the right things for 10 min/day.</li>
-                        <li><i class="fas fa-check text-drumeo"></i> Learn on your own schedule.</li>
-                        <li><i class="fas fa-check text-drumeo"></i> Play your favorite songs.</li>
-                        <li class="font-bold" style="color: #0B76DB"><i class="fas fa-check text-drumeo"></i> 90-day money-back guarantee.</li>
-                    </ul>
-                </div>
-                <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
-                    <div class="w-full  sm:w-1/2 text-center sm:pr-2 my-1">
-                        <a href="#final" class="join blue medium w-full anchor-slide">GET STARTED</a>
-                    </div>
-                    <div class="w-full sm:w-1/2 py-2 md:py-0">
-                        <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined student profiles">
-                        <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} drummers who have already registered.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Right Column -->
-            <div class="w-full md:w-6/12 px-3">
-                <img src="https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/shop/30-day-challenges/drum-challenges.jpeg" alt="drummer" class="rounded-2xl">
-            </div>
-        </div>
-    </div>
-</section>
+@php
+$points = [
+            'Guided drum lessons for 30 days.',
+            'Practice the right things for 10 min/day.',
+            'Learn on your own schedule.',
+            'Play your favorite songs.',
+            '90-day money-back guarantee.'
+        ]
+@endphp
 
-
-
+@include('drumeo.products.partials._evergreen-learn', [
+    'logo' => 'https://www.musora.com/musora-cdn/image/width=440,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/30_day_drummer_logo.svg',
+    'logoAlt' => '30DD logo season3 logo',
+    'title' => 'Learn the drums with daily guided workouts.',
+    'points' => $points,
+    'buttonTxt' => 'Get Started',
+    'brandTitle' => 'drumeo',
+    'studentProfilesImage' => 'https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png',
+    'profileImageAlt' => 'student profile image',
+    'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/shop/30-day-challenges/drum-challenges.jpeg',
+    'students' => 'drummers',
+    'numStudents' => number_format($nPackOwners ?? 0),
+])
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container mx-auto relative z-10 max-w-5xl">

@@ -1,0 +1,79 @@
+<section class="pt-16 md:pt-32 pb-44 md:pb-64" style="background: {{ $bgColor }}">
+        <!-- top part-->
+    @if (!empty($showTop))
+    <div class="text-center text-white">
+        <h2 class="leading-tight text-2xl md:text-5xl mb-4"><strong>{{ $title }}</strong></h2>
+        <a class="inline-block w-full" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank"
+            onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+            <img alt="shopper approved image" class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity opacity-0"
+                src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/shopper-approved.png"
+                loading="lazy" onload="this.classList.remove('opacity-0')">
+        </a>
+
+        @include('drumeo.products.partials._social-icons-testimonials', [
+            'socialIcons' => $socialIcons,
+        ])
+    </div>
+    @endif
+    <!-- bottom part-->
+@if (!empty($showBottom))
+    <div class="container max-w-5xl mx-auto">
+        <h3 class="mb-4 text-center text-white"><strong>{{ $subHeader }}</strong></h3>
+        <p class="text-white text-base sm:text-2xl mb-2 md:mb-3 px-4 lg:px-0 text-center">{{ $description }}</p>
+    </div>
+    <!-- carousel -->
+
+    <div class="max-w-5xl mx-auto px-5 sm:px-6 mb-10 sm:mb-0">
+        <div x-data="{
+            init() {
+                new Splide(this.$refs.splide, {
+                    classes: {
+                        arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
+                        prev: 'hidden',
+                        next: 'splide__arrow--next hidden sm:flex mb-16',
+                        pagination: 'splide__pagination -bottom-10',
+                    },
+                    perPage: 2.5,
+                    perMove: 1,
+                    type: 'loop',
+                    focus: 0,
+                    interval: 2000,
+                    breakpoints: {
+                        800: {
+                            perPage: 2.5,
+                        },
+                        769: {
+                            perPage: 1.5,
+                            drag: 'free',
+                            snap: false,
+                        },
+                    },
+                }).mount()
+            },
+        }">
+            <div x-ref="splide" class="splide sm:mb-9">
+                <div class="splide__track">
+                    <ul class="splide__list items-start" style="padding-top: 60px !important;">
+
+                        @foreach ($testimonials as $testimonial)
+                            <li class="splide__slide bg-[#F4F8FB] rounded-xl pb-6 px-8 mr-4 text-center">
+                                <div class="-mt-10 mb-6">
+                                    <img class="rounded-full w-[90px] h-[90px] object-cover lazyload"
+                                        data-src="https://www.musora.com/musora-cdn/image/width=130,quality=95/{{ $testimonial['img'] }}"
+                                        alt="{{ $testimonial['name'] }} avatar" />
+                                </div>
+                                <h6 class="mb-1 font-extrabold">{{ $testimonial['name'] }}</h6>
+                                <p><i>30-Day Drummer Student</i></p>
+                                <img class="my-4"
+                                    src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/stars.svg"
+                                    alt="stars" />
+                                <p class="mb-6">“{!! $testimonial['comment'] !!}”</p>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+</section>
