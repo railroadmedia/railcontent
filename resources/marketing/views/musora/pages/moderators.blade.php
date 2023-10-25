@@ -1,11 +1,11 @@
 @extends('musora._partials.layout')
 
 @section('head-includes')
-    <title>6 Reasons Online Music Lessons Will Help Your Learn Faster | Musora</title>
-    <meta property="og:title" content="6 Reasons Online Music Lessons Will Help Your Learn Faster | Musora">
+    <title>Moderators at Musora</title>
+    <meta property="og:title" content="Moderators at Musora">
 
-    <meta name="description" content="Online music lessons have grown in popularity because they work!">
-    <meta property="og:description" content="Online music lessons have grown in popularity because they work!">
+    <meta name="description" content="Want to find out more about our awesome Musora Mod team? Let's get in touch!">
+    <meta property="og:description" content="Want to find out more about our awesome Musora Mod team? Let's get in touch!">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
@@ -107,17 +107,18 @@
         p strong {
             font-weight:900;
         }
+        .contact-form p {
+            margin:0;
+        }
     </style>
 @endsection
 
-@section('body-class', 'dark')
-
 <!-- Main -->
 @section('layout-body')
-    <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative overflow-hidden" style="background:linear-gradient(to bottom, #fff 40%, #F1EFED);">
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-16 lg:py-20 relative overflow-hidden" style="background:linear-gradient(to bottom, #fff 40%, #F1EFED);">
         <div class="container max-w-xs sm:max-w-6xl mx-auto relative z-20">
             <img
-                class="h-44 mb-3 sm:mb-4 transition-opacity opacity-0"
+                class="h-36 sm:h-40 lg:h-44 mb-3 sm:mb-4 transition-opacity opacity-0"
                 src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/logo.svg"
                 alt="logo"
                 loading="lazy"
@@ -125,21 +126,21 @@
             >
             <br>
             <h1 class="relative w-auto inline-block text-3xl sm:text-4xl lg:text-5xl">
-                <strong>Moderators at Musora</strong>
+                <strong>Moderators<br class="sm:hidden"> at Musora</strong>
             </h1>
             <h6 class="leading-relaxed mt-2 mb-7 sm:mb-14 px-5 sm:px-0 max-w-xs sm:max-w-full">
-                Want to find out more about our awesome <br class="sm:hidden">
+                Want to find out more about our awesome
                 Musora Mod team? Let's get in touch!</h6>
-            <a class="sm:mx-1 w-full sm:w-56 join musora-gold smaller" href="/choose-plan">Ask A Question <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
+            <a class="sm:mx-1 w-full sm:w-56 join musora-gold smaller anchor-slide" href="#final">Ask A Question <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
-            <h2 class="relative w-auto inline-block mb-5 sm:mb-8">
-                <strong>Musora Moderator Team</strong>
+            <h2 class="relative w-auto inline-block mb-4 sm:mb-8">
+                <strong>Musora<br class="sm:hidden"> Moderator Team</strong>
             </h2>
-            <img class="my-5 h-64 inline sm:hidden"
-                src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-top-m.png"
+            <img class="mb-5 h-58 inline sm:hidden"
+                src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-top-m2.png"
                 alt="learn playing image"
                 fetchpriority="high"
             >
@@ -152,105 +153,155 @@
                 <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-top.png"
+                    src="https://www.musora.com/musora-cdn/image/width=910,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-top2.png"
                     alt="learn playing image"
                 >
             </div>
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20">
-        <div class="container max-w-5xl mx-auto">
+    <section class="text-center px-4 sm:px-6 py-12 sm:py-14 lg:py-20">
+        <div class="container max-w-4xl mx-auto">
             <h2 class="leading-tight"><strong>So, what makes an<br> awesome Musora Mod?</strong></h2>
-            <h6 class="uppercase mt-2 mb-8 sm:mb-10 opacity-50">It’s someone who:</h6>
+            <p class="uppercase mt-2 mb-8 sm:mb-10 opacity-50">It’s someone who:</p>
 
-            <div class="flex flex-wrap items-start justify-center mb-2 sm:mb-6">
-                <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/4 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 max-w-xs sm:max-w-full bg-[#f2f0ee] rounded-xl">
-                    <div class="w-1/3 sm:w-full">
-                        <i class="fas fa-music text-musora"></i>
+            <div class="grid grid-cols-1 sm:grid-cols-4 sm:gap-4">
+                <div class="flex sm:flex-wrap items-center py-4 sm:pt-0 sm:pb-5 px-3 sm:px-5 mb-2 sm:mb-0 w-full bg-[#f2f0ee] rounded-xl">
+                    <div class="w-12 sm:w-full flex-shrink-0 sm:-mt-7 sm:mb-3">
+                        <h1><i class="fas fa-music text-musora"></i></h1>
                     </div>
-                    <div class="w-2/3 sm:w-full pl-3 sm:pl-0">
-                        <p class="leading-normal">Keeps rocking their musical journey.</p>
-                    </div>
-                </div>
-                <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/4 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 max-w-xs sm:max-w-full bg-[#f2f0ee] rounded-xl">
-                    <div class="w-1/3 sm:w-full">
-                        <i class="fas fa-party-horn text-musora"></i>
-                    </div>
-                    <div class="w-2/3 sm:w-full pl-3 sm:pl-0">
-                        <p class="leading-normal">Spreads good vibes like confetti.</p>
+                    <div class="sm:w-full pl-3 sm:pl-0 text-left sm:text-center">
+                        <p class="leading-normal"><strong>Keeps rocking</strong> their musical journey.</p>
                     </div>
                 </div>
-                <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/4 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 max-w-xs sm:max-w-full bg-[#f2f0ee] rounded-xl">
-                    <div class="w-1/3 sm:w-full">
-                        <i class="fas fa-star text-musora"></i>
+                <div class="flex sm:flex-wrap items-center py-4 sm:pt-0 sm:pb-5 px-3 sm:px-5 mb-2 sm:mb-0 w-full bg-[#f2f0ee] rounded-xl">
+                    <div class="w-12 sm:w-full flex-shrink-0 sm:-mt-7 sm:mb-3">
+                        <h1><i class="fas fa-party-horn text-musora"></i></h1>
                     </div>
-                    <div class="w-2/3 sm:w-full pl-3 sm:pl-0">
-                        <p class="leading-normal">Dives into Collabs, Recitals, and Student Focus like a true performer.</p>
+                    <div class="sm:w-full pl-3 sm:pl-0 text-left sm:text-center">
+                        <p class="leading-normal">Spreads good vibes <strong>like confetti</strong>.</p>
                     </div>
                 </div>
-                <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/4 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 max-w-xs sm:max-w-full bg-[#f2f0ee] rounded-xl">
-                    <div class="w-1/3 sm:w-full">
-                        <i class="fas fa-heart text-musora"></i>
+                <div class="flex sm:flex-wrap items-center py-4 sm:pt-0 sm:pb-5 px-3 sm:px-5 mb-2 sm:mb-0 w-full bg-[#f2f0ee] rounded-xl">
+                    <div class="w-12 sm:w-full flex-shrink-0 sm:-mt-7 sm:mb-3">
+                        <h1><i class="fas fa-star text-musora"></i></h1>
                     </div>
-                    <div class="w-2/3 sm:w-full pl-3 sm:pl-0">
-                        <p class="leading-normal">Has a passion for sharing the magic of music and supporting fellow musicians.</p>
+                    <div class="sm:w-full pl-3 sm:pl-0 text-left sm:text-center">
+                        <p class="leading-normal">Dives into Collabs, Recitals, and Student Focus <strong>like a true performer</strong>.</p>
+                    </div>
+                </div>
+                <div class="flex sm:flex-wrap items-center py-4 sm:pt-0 sm:pb-5 px-3 sm:px-5 mb-2 sm:mb-0 w-full bg-[#f2f0ee] rounded-xl">
+                    <div class="w-12 sm:w-full flex-shrink-0 sm:-mt-7 sm:mb-3">
+                        <h1><i class="fas fa-heart text-musora"></i></h1>
+                    </div>
+                    <div class="sm:w-full pl-3 sm:pl-0 text-left sm:text-center">
+                        <p class="leading-normal"><strong>Has a passion for sharing</strong> the magic of music and supporting fellow musicians.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f2f0ee;">
-        <div class="container max-w-5xl mx-auto">
-
-            <h2 class="leading-tight"><strong>What do our funky Mods do?</strong></h2>
-            <picture class="w-full sm:w-56 flex-shrink-0">
-                <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-01.jpg">
-                <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-01-m.jpg"
-                >
-            </picture>
-            <p>🌐 They create a harmonious forum where everyone thrives.</p>
-            <p>⏰ They keep the groove going by responding to questions and messages.</p>
-            <p>🤝 They lend a helping hand to students in need or guide them to the right resources.</p>
-
-            <picture class="w-full sm:w-56 flex-shrink-0">
-                <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-02.jpg">
-                <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-02-m.jpg"
-                >
-            </picture>
-            <p>🐛 They sniff out page errors and send them our way for a quick fix.</p>
-            <p>🔎 They get an exclusive backstage pass to test new features and products.</p>
-            <p>📣 They become ambassadors, spreading the word about Musora to our groovy community.</p>
-
-            <picture class="w-full sm:w-56 flex-shrink-0">
-                <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-03.jpg">
-                <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-03-m.jpg"
-                >
-            </picture>
-            <p>✨ They handle all student interactions with respect and follow Musora's code of conduct.</p>
-            <p>📚 They take the time to become familiar with every nook and cranny of the Musora Platform.</p>
-            <p>⏱️ They dedicate a flexible amount of time each month, like a true stage magician.</p>
-
-        </div>
-    </section>
     <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
-        <div class="container max-w-5xl mx-auto">
-            And what's in it for our sensational Moderators? Check out these perks:
-            🎁 A special Welcome Package that will make their musical hearts sing.
-            🎵 A full Musora+ Membership, like a golden ticket to a jam-packed concert.
-            🎖️ A unique avatar or badge that proudly showcases their Moderator Status.
-            🛍️ A shopping spree valued at $240 USD to score some groovy Musora merchandise.
-            🎟️ Priority access to our electric In Person Live Events, so they're always first in line.
-            👀 Exclusive early access to check out the latest Musora merchandise and gear.
+        <div class="container max-w-4xl mx-auto">
 
+            <h2 class="leading-tight mb-8 sm:mb-10"><strong>What do our funky<br class="sm:hidden"> Mods do?</strong></h2>
+            <div class="flex flex-wrap sm:flex-nowrap text-left items-center mb-5 sm:mb-7 lg:mb-10">
+                <picture class="w-full sm:w-72 flex-shrink-0">
+                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-01.jpg">
+                    <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
+                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-01-m.jpg"
+                    >
+                </picture>
+                <div class="sm:pl-5 lg:pl-8">
+                    <p class="leading-tight mb-5"><i class="fas fa-messages text-musora bg-musora-black rounded-full w-9 h-9 text-center align-middle mr-2 leading-9"></i> They create a <strong>harmonious forum</strong> where everyone thrives.</p>
+                    <p class="leading-tight mb-5"><i class="fas fa-question text-musora bg-musora-black rounded-full w-9 h-9 text-center align-middle mr-2 leading-9"></i> They <strong>keep the groove going</strong> by responding to questions and messages.</p>
+                    <p class="leading-tight mb-5"><i class="fas fa-hand text-musora bg-musora-black rounded-full w-9 h-9 text-center align-middle mr-2 leading-9"></i> They <strong>lend a helping hand</strong> to students in need or guide them to the right resources.</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap sm:flex-nowrap text-left items-center mb-5 sm:mb-7 lg:mb-10">
+                <picture class="w-full sm:w-72 flex-shrink-0 sm:order-1">
+                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-03.jpg">
+                    <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
+                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-03-m.jpg"
+                    >
+                </picture>
+                <div class="sm:pr-5 lg:pr-8">
+                    <p class="leading-tight mb-5"><i class="fas fa-magnifying-glass text-musora bg-musora-black rounded-full w-9 h-9 text-center align-middle mr-2 leading-9"></i> They <strong>sniff out page errors</strong> and send them our way for a quick fix.</p>
+                    <p class="leading-tight mb-5"><i class="fas fa-star text-musora bg-musora-black rounded-full w-9 h-9 text-center align-middle mr-2 leading-9"></i> They get an <strong>exclusive backstage pass</strong> to test new features and products.</p>
+                    <p class="leading-tight mb-5"><i class="fas fa-megaphone text-musora bg-musora-black rounded-full w-9 h-9 text-center align-middle mr-2 leading-9"></i> They <strong>become ambassadors</strong>, spreading the word about Musora to our groovy community.</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap sm:flex-nowrap text-left items-center">
+                <picture class="w-full sm:w-72 flex-shrink-0">
+                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-02.jpg">
+                    <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-02-m.jpg"
+                    >
+                </picture>
+                <div class="sm:pl-5 lg:pl-8">
+                    <p class="leading-tight mb-5"><i class="fas fa-handshake-simple text-musora bg-musora-black rounded-full w-9 h-9 text-center align-middle mr-2 leading-9"></i> They handle all student interactions <strong>with respect</strong> and follow Musora's code of conduct.</p>
+                    <p class="leading-tight mb-5"><i class="fas fa-book text-musora bg-musora-black rounded-full w-9 h-9 text-center align-middle mr-2 leading-9"></i> They <strong>take the time to become familiar</strong> with every nook and cranny of the Musora Platform.</p>
+                    <p class="leading-tight mb-5"><i class="fas fa-clock text-musora bg-musora-black rounded-full w-9 h-9 text-center align-middle mr-2 leading-9"></i> ️They <strong>dedicate a flexible amount of time</strong> each month, like a true stage magician.</p>
+                </div>
+            </div>
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
-            <img class="my-5 h-64 inline sm:hidden"
-                src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-bottom-m.png"
+            <h2 class="leading-tight"><strong>
+                    And what's in it for our <br> sensational Moderators?</strong></h2>
+            <p class="uppercase mt-2 mb-8 sm:mb-10 opacity-50">Check out these perks:</p>
+
+
+            @php
+                $songItems = [
+                    [
+                        'icon' => 'fa-gift',
+                        'desc' => '<strong>A special Welcome Package</strong> that will make their musical hearts sing.',
+                    ],
+                    [
+                        'icon' => 'fa-money-bill-wave',
+                        'desc' => '<strong>A shopping spree</strong> valued at $240 USD to score some groovy Musora merchandise.',
+                    ],
+                    [
+                        'icon' => 'fa-ticket',
+                        'desc' => '<strong>A full Musora+ Membership</strong>, like a golden ticket to a jam-packed concert.',
+                    ],
+                    [
+                        'icon' => 'fa-star',
+                        'desc' => "<strong>Priority access</strong> to our electric In Person Live Events, so they're always first in line.",
+                    ],
+                    [
+                        'icon' => 'fa-certificate',
+                        'desc' => '<strong>A unique avatar or badge</strong> that proudly showcases their Moderator Status.',
+                    ],
+                    [
+                        'icon' => 'fa-tshirt',
+                        'desc' => '<strong>Exclusive early access</strong> to check out the latest Musora merchandise and gear.',
+                    ],
+                ];
+            @endphp
+            <div class="flex flex-wrap">
+                @foreach ($songItems as $songItem)
+                    <div class="w-full sm:w-1/2 mb-6 lg:mb-8">
+                        <div class="flex sm:px-5">
+                            <div class="w-14 flex-shrink-0">
+                                <i class="fas {!! $songItem['icon'] !!} text-3xl sm:text-4xl text-musora"></i>
+                            </div>
+                            <div class="text-left pl-3">
+                                <p>{!! $songItem['desc'] !!}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+
+        </div>
+    </section>
+    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
+        <div class="container max-w-4xl mx-auto">
+            <img class="mb-5 h-40 inline sm:hidden"
+                src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-bottom-m2.png"
                 alt="learn playing image"
                 fetchpriority="high"
             >
@@ -258,22 +309,24 @@
                 <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-bottom.png"
+                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-bottom2.png"
                     alt="learn playing image"
                 >
-                <p class="leading-normal max-w-xl pl-7 mx-0">Want to dive deeper into the world of our maestro Mod team that brings the sweet harmony to our musical community? Don't miss your cue, let's connect and make some magical music together! Fill out the form below and let’s chat!
+                <p class="leading-normal max-w-xl sm:pl-7 lg:pl-10 mx-0">Want to dive deeper into the world of our maestro Mod team that brings the sweet harmony to our musical community? Don't miss your cue, let's connect and make some magical music together! Fill out the form below and let’s chat!
                     <br><br>
                     Keep on jammin’!<br>
                     The Musora Team 🎶</p>
             </div>
         </div>
     </section>
-    <section class="text-center text-white px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#0c1524;">
-        <div class="container max-w-5xl mx-auto">
 
-            <h2 class="leading-tight"><strong>So, what makes an<br> awesome Musora Mod?</strong></h2>
-            <h6 class="uppercase mt-2 mb-8 sm:mb-10 opacity-50">It’s someone who:</h6>
-            <div class="max-w-3xl mx-auto text-left">
+    <div id="final" class="anchor"></div>
+    <section class="text-center px-5 sm:px-8 py-12 sm:py-14 lg:py-20">
+        <div class="container max-w-4xl mx-auto">
+
+            <h2 class="leading-tight"><strong>Send us a question!</strong></h2>
+            <h6 class="mt-2 mb-8 sm:mb-10">Want to find out more about our awesome Musora Mod team? Let's get in touch!</h6>
+            <div class="max-w-3xl mx-auto text-left contact-form">
                 <contact-email-form-marketing
                     brand="drumeo"
                     captchakey="6LfwMZ4dAAAAALEGLsEUwAqrJLLnec_sSbl72Oqx"

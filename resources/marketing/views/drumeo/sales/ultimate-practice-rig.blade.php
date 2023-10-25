@@ -1,12 +1,6 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
-        <script type="text/JavaScript">
-            function Redirect() { window.location = "https://www.drumeo.com/lp"; }
-            Redirect();
-        </script>
-    @endif
     <title>Drumeo | Reach your drumming goals.</title>
     <meta property="og:title" content="Drumeo | Reach your drumming goals.">
     <meta property="og:url" content="https://www.drumeo.com/">
@@ -118,6 +112,15 @@
                 display:block!important;
             }
         @endif
+        .join.musora {
+            background-color:#FFAE00;
+            color:#000;
+        }
+
+        .join.musora:hover, .join.musora:focus {
+            background:#FFAE00;
+            color:#000;
+        }
     </style>
 @stop
 
@@ -153,35 +156,31 @@
         ])
     @endif
 
-    <section class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-white text-center customize px-4 lg:px-6" style="background:#173c59 url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/promo-order-bg.jpg) center center/cover;">
-        <div class="container mx-auto max-w-6xl relative z-50">
-            <div class="w-full">
-                <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
-                    <div class=" inline-block relative w-full group" style="padding-bottom: 39.5%;perspective: 1000px;">
-                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
-                            <div class=" {{--border-2 border-promo--}} front absolute z-20  w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=950,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/lessons-stickbag-option.png);"></div>
-                            </div>
-                        </div>
-                    </div>
+    <section class="text-center px-5 sm:px-6 py-8 lg:py-10 text-white relative" style="background: linear-gradient(to bottom, #0b75da, #063968);">
+        <div class="container max-w-4xl mx-auto">
+            <img class="mb-5 h-32 inline sm:hidden"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/620x0/filters:quality(95)/marketing/drumeo/promos/october/oct-home-promo2.png"
+                alt="learn playing image"
+                fetchpriority="high"
+            >
+            <div class="sm:text-left flex flex-wrap sm:flex-nowrap justify-center items-center">
+                <img class="h-32 lg:h-44 hidden sm:inline transition-opacity opacity-0"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/october/oct-home-promo2.png"
+                    alt="learn playing image"
+                >
+                <div class="sm:pl-5 lg:pl-8 mx-0">
+                    <h3><strong>Get unlimited drum lessons + a free practice rig & more!</strong></h3>
+                    <p class="leading-tight text-musora my-2">Join Drumeo and get a QuietPad, drumsticks, and our brand NEW PadStand so you can practice anywhere. It’s the ultimate drummer’s practice rig!</p>
+                    <h3 class="leading-tight"><strong>$16.67/month</strong></h3>
+                    <p class="leading-tight text-sm mb-2"><em>Billed at $200 per year</em></p>
+                    <a class="join smaller musora w-full max-w-xs" href="/ecommerce/add-to-cart?locked=true&promo-code=special&product-array=DLM-1-year:1,padstand:1,quietpad:1,rudiments-poster:1,Drumeo-VaterSticks:1,drum-technique-made-easy-pack:1,GHFAL-DIGI:1">Get Started &raquo;</a>
                 </div>
-                <br>
-                <h2 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Get unlimited drum lessons<br class="hidden sm:inline"> + a free StickBag & more!</strong></h2>
-
-                <p class="leading-tight mt-4 sm:mt-5 mb-2"><span class="text-musora">Join Drumeo and get a Drumeo StickBag, a brushes sleeve, <br class="hidden sm:inline">
-                        a premium drum key, and 6 pairs of 5A drumsticks.</span></p>
-
-                <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>$20/month</strong></h3>
-                <p class="leading-tight opacity-70 text-sm"><em>Billed at $240 per year.</em></p>
-
-                @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;"
-                        href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6">GET STARTED</a>
-                @endif
             </div>
-            <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
         </div>
     </section>
+
     @php
         $bubble1 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/dorothea-taylor.png';
         $bubble2 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/todd-sucherman.png';
@@ -244,31 +243,24 @@
     @endif
 
 
-    <section class="text-center px-5 sm:px-6 pt-72 pb-10 sm:py-14 lg:py-20 relative">
-        <div class="inset-0 hidden sm:block absolute" style="background: url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/promo-image.jpg) center center/cover;"></div>
-        <div class="inset-0 sm:hidden block absolute" style="background: url(https://www.musora.com/musora-cdn/image/width=800,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/promo-image-m.jpg) center -20px/cover;"></div>
+    <section class="text-center px-5 sm:px-8 pt-72 pb-10 sm:py-14 lg:py-20 relative">
+        <div class="inset-0 hidden sm:block absolute" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/october/padstand-promo.jpg') 66% center/cover;"></div>
+        <div class="inset-0 sm:hidden block absolute" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/october/padstand-promo-m.jpg') center -10px/cover;"></div>
         <div class="container max-w-5xl mx-auto relative z-10">
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-start items-start">
                 <div class="max-w-lg lg:max-w-xl sm:pr-5 lg:pr-8 mx-0">
-                    <h2><strong>Pack like a pro.</strong></h2>
-                    <p class="leading-tight text-drumeo mt-1 mb-4 sm:mb-6"><em>The ultimate drummer’s StickBag is here.</em></p>
-                    <p class="leading-normal">We’re excited to announce the launch of the brand NEW Drumeo StickBag!
+                    <h2 class="leading-tight"><strong>Somebody had to do it. </strong></h2>
+                    <p class="leading-normal my-4 sm:my-6">For years, you’ve balanced your practice pad on your lap, coffee table, or worse…
                         <br><br>
-                        Crafted with input from gigging pros, the Drumeo StickBag features thoughtful details that will help you organize your tools and even save you mid-song.
+                        A standard snare stand with claws overhanging like a bad overbite 😬.
                         <br><br>
-                        We’re so excited that we’re giving you a NEW StickBag loaded with 6 pairs of sticks FREE with your annual Drumeo Membership.
+                        So we engineered a custom practice pad stand that fits any pad perfectly – so you can practice with perfect posture and technique even when you’re not at the kit.
                         <br><br>
-                        You’ll have unlimited drum lessons & songs for a year PLUS enough sticks to fuel your next breakthrough.
+                        To celebrate the brand new Drumeo PadStand, we’ve created a bundle that includes everything you need to practice anywhere, anytime: <strong>The Ultimate Drummer’s Practice Rig</strong>.
                         <br><br>
-                        Click below for your best year on the drums yet.
-                        <br>
-
-                        @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                        <a class="join drumeo smaller my-3 w-1/2" href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6">GET Started &raquo;</a>
-                        @endif
-                        <br>
-                        <em>Free worldwide shipping!</em>
+                        Scroll down to lock up your NEW practice rig + unlimited lessons for a year.
                     </p>
+                    <a class="join smaller drumeo w-full max-w-xs" href="/ecommerce/add-to-cart?locked=true&promo-code=special&product-array=DLM-1-year:1,padstand:1,quietpad:1,rudiments-poster:1,Drumeo-VaterSticks:1,drum-technique-made-easy-pack:1,GHFAL-DIGI:1">Get Started &raquo;</a>
                 </div>
             </div>
         </div>
@@ -625,30 +617,29 @@
         <div class="container mx-auto max-w-6xl relative z-50">
             <div class="w-full">
                 <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
-                    <div class=" inline-block relative w-full group" style="padding-bottom: 39.5%;perspective: 1000px;">
+                    <div class=" inline-block relative w-full group" style="padding-bottom: 46%;perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div class=" {{--border-2 border-promo--}} front absolute z-20  w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=950,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/lessons-stickbag-option.png);"></div>
+                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/990x0/filters:quality(95)/marketing/drumeo/promos/october/oct-home-promo2.png');"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <br>
-                <h2 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Get unlimited drum lessons<br class="hidden sm:inline"> + a free StickBag & more!</strong></h2>
 
-                <p class="leading-tight mt-4 sm:mt-5 mb-2"><span class="text-musora">Join Drumeo and get a Drumeo StickBag, a brushes sleeve, <br class="hidden sm:inline">
-                        a premium drum key, and 6 pairs of 5A drumsticks.</span></p>
+                <h2 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Get unlimited drum lessons +<br class="hidden sm:inline"> a free practice rig & more!</strong></h2>
 
-                <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>$20/month</strong></h3>
-                <p class="leading-tight opacity-70 text-sm"><em>Billed at $240 per year.</em></p>
+                <p class="leading-tight mt-4 sm:mt-5 mb-2"><span class="text-musora">
+                        Join Drumeo and get a QuietPad, drumsticks, and our brand NEW PadStand  <br class="hidden sm:inline">
+                        so you can practice anywhere. It’s the ultimate drummer’s practice rig!</span></p>
 
-                @if(Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>$16.67/month</strong></h3>
+                <p class="leading-tight opacity-70 text-sm"><em>Billed at $200 per year.</em></p>
+
                 <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;"
-                        href="/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,stickbag:1,Drumeo-VaterSticks:6"
+                        href="/ecommerce/add-to-cart?locked=true&promo-code=special&product-array=DLM-1-year:1,padstand:1,quietpad:1,rudiments-poster:1,Drumeo-VaterSticks:1,drum-technique-made-easy-pack:1,GHFAL-DIGI:1"
                 >GET STARTED</a>
-                    @endif
             </div>
-            <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
         </div>
     </section>
 

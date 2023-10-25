@@ -31,7 +31,7 @@ const props = defineProps({
     default: null
   },
   userId: {
-    type: String,
+    type: Number,
     default: null
   }
 });

@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Console\Commands;
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
+use App\Modules\Ecommerce\Services\PaymentService;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\Ecommerce\Services\UserProductService;
@@ -19,7 +20,8 @@ class SyncRevenuecatSubscriptionsToMusora extends Command
     public function handle(
         RevenueCatService $revenueCatService,
         SubscriptionService $subscriptionService,
-        UserProductService $userProductService
+        UserProductService $userProductService,
+        PaymentService $paymentService
     ) {
         $userId = $this->argument('userId');
         $user = $revenueCatService->getUser(null, $userId);
@@ -65,6 +67,16 @@ class SyncRevenuecatSubscriptionsToMusora extends Command
 
                 //update user product
                 $userProductService->assignUserProduct($user->id,  $musoraSubscription->product_id, $musoraSubscription->paid_until);
+            }
+
+            if ($subscriptionData['period_type'] != 'trial') {
+                $paymentService->create(
+                    $musoraSubscription,
+                    $type,
+                    Carbon::create($subscriptionData['purchase_date'])
+                        ->getTimestampMs(),
+                    $subscriptionData['store_transaction_id']
+                );
             }
         }
 

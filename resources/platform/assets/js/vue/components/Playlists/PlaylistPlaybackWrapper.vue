@@ -254,7 +254,7 @@ const props = defineProps({
 });
 
 const state = reactive({
-    assignmentCollapsed: false,
+    assignmentCollapsed: true,
 });
 
 //Pinia Stores

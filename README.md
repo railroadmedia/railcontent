@@ -276,6 +276,11 @@ To run artisan commands including migrate on any vapor environment use the follo
 'web-staging-one' with whatever environment you wish to run it on:  
 `r vapor command web-staging-one --command="php artisan migrate"`
 
+## GitHub Actions Secrets  
+Such as 'COMPOSER_AUTH_JSON' can be found here: https://github.com/organizations/railroadmedia/settings/secrets/actions  
+The template for our COMPOSER_AUTH_JSON value is in 1 pass under: 
+'Composer auth.json File For CI Deployments (needs GH token added)'  
+
 # How To Update Environment Variables On Vapor Cloud Environments
 
 ## Overview & Reasoning

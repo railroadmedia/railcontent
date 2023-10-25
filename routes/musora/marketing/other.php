@@ -11,6 +11,10 @@ Route::domain('{musoraDomain}')
     ->group(function () {
         Route::get('/', [MarketingController::class, 'homepage']);
         Route::get('6-reasons', [MarketingController::class, 'sixReasons']);
+        Route::get('6-reasons/drums', [MarketingController::class, 'sixReasonsDrums']);
+        Route::get('6-reasons/piano', [MarketingController::class, 'sixReasonsPiano']);
+        Route::get('6-reasons/guitar', [MarketingController::class, 'sixReasonsGuitar']);
+        Route::get('6-reasons/singing', [MarketingController::class, 'sixReasonsSinging']);
 //        Route::get('/handbook', [MarketingController::class, 'handbook']);
         Route::get('about', [MarketingController::class, 'about']);
         Route::get('contact', [MarketingController::class, 'contact']);
@@ -18,6 +22,7 @@ Route::domain('{musoraDomain}')
         Route::get('privacy-policy', [MarketingController::class, 'privacy']);
         Route::get('preferences', [MarketingController::class, 'preferences']);
         Route::get('careers', [MarketingController::class, 'careers']);
+        Route::get('careers-pinpoint', [MarketingController::class, 'careersPP']);
         Route::get('ambassador', [MarketingController::class, 'ambassador']);
         Route::get('brand', [MarketingController::class, 'brand']);
         Route::get('unified-2022', [MarketingController::class, 'unified2022']);
