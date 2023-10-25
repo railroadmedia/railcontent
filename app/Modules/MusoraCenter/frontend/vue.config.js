@@ -1,6 +1,8 @@
+const ASSET_URL = process.env.NODE_ENV === 'production' ? 'https://d15lhc6p38kxp4.cloudfront.net/2a5c99f3-38fa-4ef6-9d08-f0a3c0bd1208' : '';
 
 module.exports = {
-    publicPath: 'https://d15lhc6p38kxp4.cloudfront.net/2a5c99f3-38fa-4ef6-9d08-f0a3c0bd1208/vendor/musora-center/dist/' ,
+    //publicPath: ASSET_URL + '/vendor/musora-center/dist/' ,
+    publicPath: '/vendor/musora-center/dist/' ,
     outputDir: process.env.NODE_ENV === 'production'
         ? '../public/dist/'
         : '../public/dist/js',

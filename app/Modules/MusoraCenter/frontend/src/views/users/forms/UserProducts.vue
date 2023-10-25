@@ -25,25 +25,25 @@
                     <span>Add User Access Permission</span>
                 </v-tooltip>
             </v-toolbar-items>
-            <!--
-                <template v-slot:extension>
-                    <v-row class="pt-2">
-                        <v-col
-                            cols="12" md="4" sm="12"
-                            class="column"
+            <!-- Members Dropdown -->
+            <template v-slot:extension>
+                <v-row class="pt-2">
+                    <v-col
+                        cols="12" md="4" sm="12"
+                        class="column"
+                    >
+                        <v-select
+                            v-model="$_field"
+                            label="Products and Memberships"
+                            color="white"
+                            :items="['Plus, Basic, and Lifetime Memberships', 'Non Membership Products', 'All']"
+                            clearable
                         >
-                            <v-select
-                                v-model="$_field"
-                                label="Products and Memberships"
-                                color="white"
-                                :items="['Plus, Basic, and Lifetime Memberships', 'Non Membership Products', 'All']"
-                                clearable
-                            >
-                            </v-select>
-                        </v-col>
-                    </v-row>
-                </template>
-            -->
+                        </v-select>
+                    </v-col>
+                </v-row>
+            </template>
+            
         </v-toolbar>
 
         <v-data-table
