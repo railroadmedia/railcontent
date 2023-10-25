@@ -102,17 +102,13 @@
     ])
 
 
-    <div class="px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
+    <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         {{--  LESSONS  --}}
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
-            <ul class="container mx-auto fixed-cards">
-                <li>
-                    <h1 class="px-2 md:px-3">
-                        <div class="heading-icon"><i class="fas fa-video"></i></div>
-                        Online Drum Lessons
-                    </h1>
-                </li>
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Online Drum Lessons</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
                 {{-- Drumeo annual membership --}}
                 @include('musora.shop._shop-card-alt', [
                      "itemURL" => "/",
@@ -160,7 +156,8 @@
                     "category" => "card",
                     'soldOut' => false,
                 ])
-            </ul>
+            </div>
+            </div>
         </section>
 
         {{--   ACCESSORIES     --}}
