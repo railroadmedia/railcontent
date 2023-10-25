@@ -3,6 +3,7 @@
 namespace App\Modules\MusoraApi\Controllers\V1;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
+use App\Modules\EventTracking\Services\CustomerIoService;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Avo;
 use Exception;
@@ -22,10 +23,12 @@ use Modules\UserManagementSystem\Models\OnboardingTopic;
 class OnboardingController extends Controller
 {
     private OnboardingService $onboardingService;
+    private CustomerIoService $customerIoService;
 
-    public function __construct(OnboardingService $onboardingService)
+    public function __construct(OnboardingService $onboardingService, CustomerIoService $customerIoService)
     {
         $this->onboardingService = $onboardingService;
+        $this->customerIoService = $customerIoService;
     }
 
     /**
@@ -184,6 +187,7 @@ class OnboardingController extends Controller
      *
      * @param Request $request
      * @return Response|Application|ResponseFactory
+     * @throws \Throwable
      */
     public function goals(Request $request): Response|Application|ResponseFactory
     {
@@ -204,6 +208,8 @@ class OnboardingController extends Controller
         $onboardingAnswerHistory->brand = $brand;
         $onboardingAnswerHistory->user_id = user()->id;
         $onboardingAnswerHistory->save();
+
+        $this->customerIoService->updateUserAttributes(user(), ['has_completed_onboarding' => true]);
 
         Avo::onboarding_goals_step_completed(
             AvoHelper::defaultEventProperties([
