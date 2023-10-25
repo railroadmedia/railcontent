@@ -42,9 +42,7 @@ class UserController extends Controller
     {
         try {
             $validationRules = [
-                'email' => 'email|max:255|unique:' .
-                    config('user_management_system.database_connection_name') .
-                    '.usora_users',
+                'email' => 'email|max:255',
                 'password' => 'required|string|min:8|max:128',
             ];
 
@@ -73,11 +71,12 @@ class UserController extends Controller
             throw new AuthorizationException('Invalid verification_token.', 403);
         }
 
-        $user = new User;
+        $user = User::where('email', $email)->first() ?? new User();
         $parts = explode('@', $email);
 
         $user->email = $email;
         $user->setPassword($password);
+        $this->requires_password_update = false;
         $user->display_name = $parts[0] . rand(10000, 99999);
         $user->save();
 
