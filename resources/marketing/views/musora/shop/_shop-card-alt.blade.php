@@ -1,4 +1,4 @@
-<a class="text-black pb-2 md:pb-3 hover:opacity-90 transition-opacity" data-price="{{ floatVal($price) }}" data-category="{{ $category }}"
+<a class="product-wrap text-black pb-2 md:pb-3 hover:opacity-90 transition-opacity" data-price="{{ floatVal($price) }}" data-category="{{ $category }}"
         @if(!empty($itemURL)) href="{{ ($itemURL === '/drumshop/' || $itemURL === '/shop/') ? '/' : $itemURL }}" @if(!empty($externalURL)) target="_blank" @endif @endif>
     <div class="overflow-hidden rounded-lg relative bg-cover bg-top mb-3 border border-gray-300" style="padding-bottom: 100%;background-image:url('https://www.musora.com/musora-cdn/image/width=520,quality=95/{{ $thumbnail }}');">
         @if (!empty($badgeText))
