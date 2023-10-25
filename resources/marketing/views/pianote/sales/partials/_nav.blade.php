@@ -12,7 +12,7 @@
     </div>
 
     @if(!empty($checkoutVersion))
-        <div class="button-wrap">
+        <div class="button-wrap text-white">
             <a href="{{ get_legacy_brand_base_url('pianote') }}/shop" class="join outline-button">Shop</a>
         </div>
     @endif

@@ -831,7 +831,7 @@ class RevenueCatController extends Controller
             if (user() && $user->id == user()->id) {
                 $token = $user->createToken('ios');
                 $userAuthToken = $token->plainTextToken;
-
+                Log::debug('Old ecommerce restore IOS to RevenueCat API response :: token for userId '.$user->id);
                 return response()->json([
                                             'success' => true,
                                             'token' => $userAuthToken,
@@ -839,14 +839,16 @@ class RevenueCatController extends Controller
                                             'userId' => $user->id,
                                         ]);
             }
-
+            Log::debug('Old ecommerce restore IOS to RevenueCat API response :: shouldLogin for email '.$user->email);
             return response()->json([
                                         'shouldLogin' => true,
                                         'email' => $user->email,
                                     ]);
         } else {
+            Log::debug('Old ecommerce restore IOS to RevenueCat API response :: shouldCreateAccount for purchase '.$receipt);
             return response()->json([
                                         'shouldCreateAccount' => true,
+                                        'purchase' => $receipt,
                                     ]);
         }
     }
