@@ -115,11 +115,11 @@ class RevenueCatController extends Controller
                 $musoraProduct = $this->getMusoraProducts($type, $data['event'], $productId)->first();
 
                 if (config('shopify.enabled')) {
-                    $processedAt = Carbon::parse($data['event']['purchased_at_ms']);
+                    $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
                     if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
                         if (!$musoraProduct) {
                             Log::error(
-                                "RevenueCatController processNotification::RENEWAL - musora product not found: $productId"
+                                "RevenueCatController processNotification::INITIAL_PURCHASE - musora product not found: $productId"
                             );
                             break;
                         }
@@ -142,7 +142,8 @@ class RevenueCatController extends Controller
                         $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
 
                     //check if already exists Musora subscription
-                    $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProducts);
+                    $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
+
                     if (!$musoraSubscription) {
                         //create Musora subscription
                         $musoraSubscription = $this->subscriptionService->createSubscription(
@@ -208,7 +209,7 @@ class RevenueCatController extends Controller
                 $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
 
                 if (config('shopify.enabled')) {
-                    $processedAt = Carbon::parse($data['event']['purchased_at_ms']);
+                    $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
                     if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
                         $musoraProduct = $musoraProducts?->first();
                         if (!$musoraProduct) {
