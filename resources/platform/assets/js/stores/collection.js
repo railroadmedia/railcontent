@@ -116,6 +116,7 @@ export const useCollectionStore = defineStore({
         },
         setSearchTerm(term){
             this.tabData[this.filter.activeTab].searchTerm = term;
+            this.tabData[this.filter.activeTab].currentPage = 1;
             this.getData();
         },
         sortData(item){
