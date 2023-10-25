@@ -1,16 +1,15 @@
 import { defineStore } from 'pinia';
 import axios from "axios";
+import { useUserStore } from "./user";
 
 export const useCollectionStore = defineStore({
     id: 'Collection',
     state: () => {
         return {
-            brand: '',
             data: [],
             fetching: false,
             filter: {
                 activeTab: '',
-                currentPage: 1,
                 limit: 10,
                 params: {},
             },
@@ -21,18 +20,31 @@ export const useCollectionStore = defineStore({
         }
     },
     actions:{
+        async applyFilter(param){
+            const index = this.tabData[this.filter.activeTab].included_fields.findIndex(p => p === param);
+            if (index === -1 || !index){
+                this.tabData[this.filter.activeTab].included_fields.push(param);
+            } else {
+                this.filter.params.included_fields.splice(index,1);
+            }
+
+            this.getData();
+        },
         async fetchData(){
+            const userStore = useUserStore();
+
             try {
                 const response = await axios
                     .get(
                         this.tabData[this.filter.activeTab].endpoint,
                         {
                             params: {
-                                brand: this.brand,
+                                brand: userStore.brand,
                                 limit: this.filter.limit,
-                                page: this.filter.currentPage,
+                                page: this.tabData[this.filter.activeTab].currentPage,
                                 sort: this.tabData[this.filter.activeTab].sort,
                                 ...this.filter.params,
+                                included_fields: this.tabData[this.filter.activeTab].included_fields,
                                 [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.tabData[this.filter.activeTab].searchTerm,
                         },
                     })
@@ -48,7 +60,6 @@ export const useCollectionStore = defineStore({
         async getData(replace = true, displayLoading = true){
             this.loading = displayLoading;
             this.fetching = true;
-            if (replace) this.filter.currentPage = 1;
 
             const response = await this.fetchData();
             this.setData(response, replace);
@@ -63,7 +74,7 @@ export const useCollectionStore = defineStore({
         },
         loadMore(){
             if (!this.fetching){
-                this.filter.currentPage++;
+                this.tabData[this.filter.activeTab].currentPage++;
                 this.getData(false , false);
             }
         },
@@ -71,12 +82,12 @@ export const useCollectionStore = defineStore({
             if(response){
                 if(replace){
                     this.data = [...response.data.data];
-                    this.totalPages = Math.ceil(
+                    this.tabData[this.filter.activeTab].totalPages = Math.ceil(
                         response.data.meta.totalResults / this.filter.limit
                     );
                 } else {
                     this.data = [...this.data, ...response.data.data];
-                    this.totalResults = response.data.meta.totalResults;
+                    this.tabData[this.filter.activeTab].totalResults = response.data.meta.totalResults;
                 }
             }
 
@@ -87,24 +98,12 @@ export const useCollectionStore = defineStore({
               this.data = defaults.data;
           }
 
-          if(defaults.brand){
-              this.brand = defaults.brand;
-          }
-
           if(defaults.filter){
               this.filter = {...this.filter, ...defaults.filter};
           }
 
           if(defaults.tabData){
               this.tabData = {...defaults.tabData};
-          }
-
-          if(defaults.totalPages){
-            this.totalPages = defaults.totalPages;
-          }
-
-          if(defaults.totalResults){
-            this.totalResults = defaults.totalResults;
           }
         },
         setParams(){
@@ -117,6 +116,7 @@ export const useCollectionStore = defineStore({
         },
         setSearchTerm(term){
             this.tabData[this.filter.activeTab].searchTerm = term;
+            this.tabData[this.filter.activeTab].currentPage = 1;
             this.getData();
         },
         sortData(item){
@@ -128,19 +128,14 @@ export const useCollectionStore = defineStore({
             this.tabData[this.filter.activeTab] = {
                 ...this.tabData[this.filter.activeTab],
                 data: [...this.data],
-                currentPage: this.filter.currentPage,
-                totalPages: this.totalPages,
             }
 
             if(this.tabData[tab].data){
                 this.filter.activeTab = tab;
                 this.data = ([...this.tabData[this.filter.activeTab].data]);
-                this.filter.currentPage = this.tabData[tab].currentPage;
-                this.totalPages = this.tabData[tab].totalPages;
 
             } else {
                 this.filter.activeTab = tab;
-                this.filter.currentPage = 1;
                 this.getData();
             }
         },

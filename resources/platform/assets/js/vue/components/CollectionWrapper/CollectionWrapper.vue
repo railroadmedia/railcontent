@@ -1,18 +1,19 @@
 <template>
     <div>
-        <CollectionFilterWrapper v-if="showFilter" :filterable-values="filterableValues" :tab-options="tabOptionData"
-            :pre-loaded-content="preLoadedContent" />
-        <h1 v-else class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-my-7">All {{ title }}</h1>
+        <CollectionFilterWrapper
+            :active-tab="filter.activeTab" :filterable-values="filterableValues" :hide-filter="!showFilter" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData"
+            @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
+        />
 
         <transition appear name="fade">
-            <CollectionResults>
-                <CoachesGridCatalogue v-if="isCoach" :content="collectionStore.data" :brand="collectionStore.brand" />
-                <ListCatalogue v-else-if="isList" :content="collectionStore.data" :force-wide-thumbs="isStudentReview"
+            <CollectionResults :current-page="getCurrentPage" :loading="loading" :total-pages="getTotalPages" @on-load-more="collectionStore.loadMore">
+                <CoachesGridCatalogue v-if="isCoach" :content="data" :brand="brand" />
+                <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
-                <RoutinesCatalogue v-else-if="isRoutine" :content="collectionStore.data"
+                <RoutinesCatalogue v-else-if="isRoutine" :content="data"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
-                <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="collectionStore.data" ref="playAlongsVueInstance"
-                    :total-results="collectionStore.totalResults" />
+                <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
+                    :total-results="getTotalResults" />
             </CollectionResults>
         </transition>
     </div>
@@ -28,12 +29,10 @@ import ListCatalogue from "../../vuesora/views/catalogues/ListCatalogue";
 import UserCatalogueEvents from "../../vuesora/mixins/UserCatalogueEvents";
 import RoutinesCatalogue from "../../vuesora/views/catalogues/RoutinesCatalogue";
 import PlayAlongs from "../../vuesora/views/play-alongs/PlayAlongs";
+import {storeToRefs} from "pinia";
+import { useUserStore } from "../../../stores/user";
 
 const props = defineProps({
-    brand: {
-        type: String,
-        default: '',
-    },
     collectionType: {
         default: '',
     },
@@ -80,6 +79,10 @@ const props = defineProps({
 });
 
 const collectionStore = useCollectionStore();
+const userStore = useUserStore();
+
+const { data, currentPage, filter, loading, totalPages, tabData } = storeToRefs(collectionStore);
+const { brand } = storeToRefs(userStore);
 
 const request_params = computed(() => {
     return {
@@ -88,25 +91,27 @@ const request_params = computed(() => {
         required_user_states: props.requiredUserStates,
         included_types: includedTypes.value,
         include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
-        included_fields: props.included_fields || [],
         limit: props.limit,
     };
 })
 
 const includedTypes = computed(() => {
-    let types = [props.collectionType];
+    let types = [];
 
-    if (isQuickTips.value) {
-        types.push('boot-camps');
+    if (isCoach.value) {
+        types.push('instructor');
+    } else {
+        types.push(props.collectionType);
+
+        if (isQuickTips.value) {
+            types.push('boot-camps');
+        }
     }
 
     return types;
 })
 
-const isList = computed(() => {
-    return !isPlayAlong.value && !isRoutine.value;
-})
-
+//Collection type reactives
 const isArchives = computed(() => {
     return props.collectionType === 'recording';
 })
@@ -155,10 +160,17 @@ const isRudiment = computed(() => {
     return props.collectionType === 'rudiment';
 })
 
-const showFilter = computed(() => {
-    return isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value;
+//List view reactvie
+const isList = computed(() => {
+    return !isPlayAlong.value && !isRoutine.value;
 })
 
+//Filter state reactive
+const showFilter = computed(() => {
+    return isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value || isCoach.value;
+})
+
+//Tab options reactives
 const getTabOptions = computed(() => {
     if (isCourse.value) {
         return [
@@ -187,7 +199,6 @@ const getTabOptions = computed(() => {
     ]
 });
 
-
 const tabOptionData = computed(() => {
     return props.tabOptions.length > 0 ? props.tabOptions : getTabOptions.value;
 })
@@ -196,7 +207,7 @@ const getFirstTabOption = computed(() => {
     return tabOptionData.value[0]
 })
 
-const tabData = computed(() => {
+const getTabData = computed(() => {
     const tabDataMap = {};
 
     tabOptionData.value.forEach(tab => {
@@ -206,28 +217,75 @@ const tabData = computed(() => {
         }
         tabDataMap[tab.key] = {
             endpoint,
+            included_fields: props.included_fields || [],
             searchTerm: '',
             sort: isCoach.value ? 'slug' : '-published_on',
+            currentPage: 1,
+            totalPages: props.preLoadedContent ? Math.ceil(props.preLoadedContent.meta.totalResults / props.limit) : 0,
+            totalResults: props.preLoadedContent?.meta.totalResults || 0,
         };
     });
 
     return tabDataMap;
 })
 
+//prop reactives
+const activeTabData = computed(() => {
+    return tabData.value[filter.value.activeTab];
+})
+
+const getSelectedFilters = computed(() => {
+    return activeTabData.value && activeTabData.value.included_fields;
+})
+
+const getSelectedSort = computed(() => {
+    return activeTabData.value && activeTabData.value.sort;
+})
+
+const getSearchTerm = computed(() => {
+    return activeTabData.value && activeTabData.value.searchTerm;
+})
+
+const getCurrentPage = computed(() => {
+    return activeTabData.value && activeTabData.value.currentPage;
+})
+
+const getTotalPages = computed(() => {
+    return activeTabData.value && activeTabData.value.totalPages;
+})
+
+const getTotalResults = computed(() => {
+    return activeTabData.value && activeTabData.value.totalResults;
+})
+
+const handleFilterChange = (category, item) => {
+    collectionStore.applyFilter(`${category},${item.value}`);
+}
+
+const handleSearchChange = (value) => {
+    collectionStore.setSearchTerm(value)
+}
+
+const handleSortChange = (item) => {
+    collectionStore.sortData(item);
+}
+
+const handleTabChange = (tab) => {
+    collectionStore.switchTab(tab);
+}
+
 onMounted(() => {
     console.log(props.collectionType)
+    console.log(props.title)
 
     collectionStore.setDefaults({
-        brand: props.brand,
         data: props.preLoadedContent?.data || [],
         filter: {
             activeTab: getFirstTabOption.value.key,
             params: { ...request_params.value },
             [isCoach.value ? 'term' : 'title']: '',
         },
-        tabData: tabData.value,
-        totalPages: props.preLoadedContent ? Math.ceil(props.preLoadedContent.meta.totalResults / props.limit) : 0,
-        totalResults: props.preLoadedContent?.meta.totalResults || 0,
+        tabData: getTabData.value,
     })
 })
 </script>

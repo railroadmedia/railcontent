@@ -4,13 +4,13 @@
 
         <transition name="show-from-bottom">
             <div
-                v-show="collectionStore.loading "
+                v-show="loading "
                 id="loadingDialog"
                 class="flex flex-row align-center"
             >
                 <div
                     class="loading-spinner corners-10 shadow pa flex-center"
-                    :class="`bg-${collectionStore.brand}`"
+                    :class="`bg-${brand}`"
                 >
                     <i class="fas fa-spinner fa-spin text-white"></i>
                     <p class="tw-text-xs text-white">Loading Please Wait...</p>
@@ -24,6 +24,27 @@
     import { onMounted, onUnmounted } from "vue";
     import { useCollectionStore } from "../../../stores/collection";
 
+    const props = defineProps({
+        brand: {
+            type: String,
+            default: 'drumeo',
+        },
+        currentPage: {
+            type: Number,
+            default: 1,
+        },
+        loading: {
+            type: Boolean,
+            default: false,
+        },
+        totalPages: {
+            type: Number,
+            default: 1,
+        },
+    });
+
+    const emit = defineEmits(['onLoadMore'])
+
     const collectionStore = useCollectionStore();
 
     const infiniteScrollEventHandler = () => {
@@ -31,8 +52,8 @@
         const scroll_position = scrollEl.scrollTop + scrollEl.offsetHeight;
         const scroll_buffer = scrollEl.scrollHeight * 0.9;
 
-        if (scroll_position >= scroll_buffer && collectionStore.filter.currentPage < collectionStore.totalPages) {
-            collectionStore.loadMore();
+        if (scroll_position >= scroll_buffer && props.currentPage < props.totalPages) {
+            emit('onLoadMore');
         }
     }
 

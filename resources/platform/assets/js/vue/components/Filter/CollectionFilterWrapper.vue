@@ -1,54 +1,76 @@
 <template>
     <div>
         <filter-controls
-            :search-term="state.searchTerm"
+            :hide-filter="hideFilter"
+            :search-term="searchTerm"
             :is-collapsed="isCollapsed"
-            :selected-sort="collectionStore.tabData[collectionStore.filter.activeTab] && collectionStore.tabData[collectionStore.filter.activeTab].sort"
+            :selected-sort="selectedSort"
             :tab-options="tabOptions"
-            :active-tab="collectionStore.filter.activeTab"
+            :active-tab="activeTab"
             :hide-filter-icon="state.multiSelectColumns.length === 0"
             @on-toggle-collapse="handleToggleCollapse"
-            @on-search-submit="handleSearch"
-            @on-sort="handleSort"
-            @on-filter-tab-click="(value) => tabClick(value)"
+            @on-search-submit="value => emit('onSearchChange', value)"
+            @on-sort="item => emit('onSortChange', item)"
+            @on-filter-tab-click="tab => emit('onTabChange', tab)"
         >
             <slot name="viewToggleButton"></slot>
         </filter-controls>
-        <filter-options
-            v-if="!isCollapsed && isMobile"
-            :multi-select-columns="state.multiSelectColumns"
-            :single-select-columns="singleSelectColumns"
-            :selected-filters="state.selectedFilters"
-            @on-filter-click-handle="(selection) => handleFilterChange(selection)"
-        />
-        <filter-options-modal
-            v-if="!isCollapsed && !isMobile"
-            :is-collapsed-mobile="isCollapsed"
-            :selected-filters="state.selectedFilters"
-            :multi-select-columns="state.multiSelectColumns"
-            :single-select-columns="singleSelectColumns"
-            @onClose="handleToggleCollapse"
-            @handle-filter-click="(selection) => handleFilterChange(selection)"
-        />
+        <template v-if="!hideFilter">
+            <filter-options
+                v-if="!isCollapsed && isMobile"
+                :multi-select-columns="state.multiSelectColumns"
+                :single-select-columns="singleSelectColumns"
+                :selected-filters="selectedFilters"
+                @on-filter-click-handle="(category, item) => emit('onFilterChange', category, item)"
+            />
+            <filter-options-modal
+                v-if="!isCollapsed && !isMobile"
+                :is-collapsed-mobile="isCollapsed"
+                :selected-filters="selectedFilters"
+                :multi-select-columns="state.multiSelectColumns"
+                :single-select-columns="singleSelectColumns"
+                @onClose="handleToggleCollapse"
+                @handle-filter-click="(category, item) => emit('onFilterChange', category, item)"
+            />
+        </template>
     </div>
 </template>
 
 <script setup>
     import { onMounted, onUnmounted, reactive, ref } from 'vue';
-    import { useCollectionStore } from "../../../stores/collection";
     import ContentHelpers from '../../vuesora/assets/js/helper-functions/content.js';
     import FilterOptions from './FilterOptions.vue';
     import FilterOptionsModal from './FilterOptionsModal.vue';
     import FilterControls from './FilterControls.vue';
 
     const props = defineProps({
+        activeTab: {
+            type: String,
+            default: '',
+        },
         filterableValues: {
             type: Array,
             default: () => [],
         },
+        hideFilter: {
+            type: Boolean,
+            default: false,
+        },
         preLoadedContent: {
             type: Object,
             default: () => ({}),
+        },
+        selectedFilters: {
+            type: Array,
+            default: () => [],
+        },
+        selectedSort: {
+            type: String,
+            default: '',
+        },
+        searchTerm: {
+            type: String,
+            default: '',
         },
         singleSelectColumns: {
             type: Array,
@@ -78,7 +100,7 @@
         },
     });
 
-    const collectionStore = useCollectionStore();
+    const emit = defineEmits(['onFilterChange', 'onSearchChange', 'onSortChange', 'onTabChange'])
 
     const isMobile = ref(true);
     const isCollapsed = ref(true);
@@ -100,15 +122,6 @@
         }
     }
 
-    const handleSearch = (value) => {
-        collectionStore.setSearchTerm(value);
-        collectionStore.getData();
-    }
-
-    const handleFilterChange = (selection) => {
-
-    }
-
     const getFilterColumns = () => {
         let filters = [];
         for (const value of props.filterableValues){
@@ -118,14 +131,6 @@
             });
         }
         state.multiSelectColumns = filters;
-    }
-
-    const handleSort = (item) => {
-        collectionStore.sortData(item);
-    }
-
-    const tabClick = (tab) => {
-        collectionStore.switchTab(tab);
     }
 
     onMounted(()=>{

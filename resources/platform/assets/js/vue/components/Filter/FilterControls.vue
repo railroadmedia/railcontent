@@ -3,7 +3,7 @@
         <div class="tw-flex tw-grow tw-relative tw-items-center tw-mb-[18px]">
             <!-- Filter Tabs -->
             <filter-tabs v-if="tabOptions.length > 0" :active-tab="activeTab" :tab-options="tabOptions" @onTabClick="handleTabClick" />
-            <div class="tw-flex tw-grow tw-justify-end md:tw-hidden">
+            <div v-if="!hideFilter" class="tw-flex tw-grow tw-justify-end md:tw-hidden">
                 <button @click="handleOpenDropdown"
                     class="tw-flex tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
                     <musora-icon :icon-name="sortIcon()" class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
@@ -19,7 +19,7 @@
                 <slot></slot>
             </div>
         </div>
-        <div class="tw-flex tw-grow tw-justify-end tw-relative">
+        <div v-if="!hideFilter" class="tw-flex tw-grow tw-justify-end tw-relative">
             <filter-search :search-term="searchTerm" @on-submit="handleSubmit"></filter-search>
             <template v-if="!hideFilterIcon">
                 <button v-if="!isCollapsed" @click="() => emit('onToggleCollapse')"
@@ -53,6 +53,10 @@
         activeTab: {
             type: String,
             default: '',
+        },
+        hideFilter: {
+            type: Boolean,
+            default: false,
         },
         searchTerm: {
             type: String,

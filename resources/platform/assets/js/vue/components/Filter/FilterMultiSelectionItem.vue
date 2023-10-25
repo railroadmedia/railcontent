@@ -9,7 +9,7 @@
         </div>
         <div :class="isCollapsed ? 'tw-hidden lg:tw-block' : 'tw-pb-6 lg:tw-pb-0'">
             <li v-for="item in column.items" class="tw-flex tw-justify-between tw-items-center tw-mb-2 tw-px-4 md:tw-px-0" :class="isSelected(item.value) ? 'tw-font-bold' : ''" >
-                {{ item.key }} <input class="tw-border tw-border-[#D1D5DB] dark:tw-border-[#445F74] tw-rounded dark:tw-bg-[#002039] checked:tw-bg-[#FFAE00] checked:dark:tw-bg-[#FFAE00] tw-cursor-pointer" type="checkbox" @click="$emit('clickColumnItem', column.category, item)" :checked="isSelected(item.value)" />
+                {{ item.key }} <input class="tw-border tw-border-[#D1D5DB] dark:tw-border-[#445F74] tw-rounded dark:tw-bg-[#002039] checked:tw-bg-[#FFAE00] checked:dark:tw-bg-[#FFAE00] tw-cursor-pointer" type="checkbox" @click="$emit('clickColumnItem', column.category, item)" :checked="isSelected(column.category, item.value)" />
             </li>
         </div>
     </ul>
@@ -23,9 +23,9 @@
             type: Object,
             default: {},
         },
-        selectedFilters: {
-            type: Object,
-            default: {},
+        selectedFilters:{
+            type: Array,
+            default: () => [],
         },
     })
 
@@ -35,8 +35,8 @@
         isCollapsed.value = !isCollapsed.value;
     }
 
-    const isSelected = (value) => {
-        return props.selectedFilters[props.column.category] && props.selectedFilters[props.column.category].find((f)=> f === value) ? true : false;
+    const isSelected = (category, value) => {
+        return props.selectedFilters.find(filter => filter === `${category},${value}`);
     }
 </script>
 
