@@ -51,12 +51,10 @@
             </video>
         </div>
     </div>
-<div class="bg-contain w-80">    <img src="{{ $bgImageRight }}" alt={{$subtitle}} class="hidden md:inline lg:inline xl:inline">
+<div class="bg-contain w-80">    
+    <img src="{{ $bgImageRight }}" alt={{$subtitle}} class="hidden md:inline lg:inline xl:inline">
 </div>
 </div>
-   
-
-
     <div class="flex w-full flex-col items-center mt-6 sm:mt-5 lg:mt-10">
                 <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 text-center sm:pr-2 my-1">
                     <a href="#final" class="join blue medium w-full anchor-slide">{{ $buttonText }}</a>

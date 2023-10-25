@@ -24,19 +24,14 @@
             </div>
         @endforeach
 
-        <p class="font-black leading-tight pt-5">{{ $lessonTitle }}</p>
+        <p class="font-black leading-tight">{{ $lessonTitle }}</p>
 
-        <div x-data="{ isOpen: [] }" class="h-72 overflow-y-scroll rounded-lg text-black">
+        <div x-data="{ isOpen: [] }" class="h-80 overflow-y-scroll rounded-lg text-black">
             @foreach ($lessons as $i => $lesson)
                 <div x-data="{ open: false }"
-<<<<<<< HEAD
-                    class="rounded-lg bg-white shadow my-1">
-                    <button
-=======
                     class="rounded-lg bg-white shadow my-1 mb-1.5">
-                    <button @click="open = !open"
->>>>>>> ba78852f6 (Updated style)
-                        class="rounded-lg flex w-full items-center justify-between px-6 py-4"
+                    <button
+                        class="rounded-lg flex w-full items-center justify-between px-6 py-3.5"
                         style="background: #eff7ff;"
                             x-on:click="open = !open;"
                     >
@@ -44,7 +39,7 @@
                         <div
                                 class="ml-auto text-{{ $brand }} cursor-pointer"
                         >
-                            <i class="fas fa-plus transform transition-all duration-300 text-2xl" x-bind:class="{ 'rotate-45': open }"></i>
+                            <i class="fas fa-angle-down transform transition-all duration-300 text-2xl" x-bind:class="{ 'rotate-180': open }"></i>
                         </div>
                     </button>
                     <div x-cloak
@@ -59,7 +54,7 @@
         </div>
     </div>
 
-    <p class="mt-4 p-4 leading-tight block md:hidden">
+    <p class="mt-4 p-4 leading-tight md:hidden">
         {{ $descriptionMobile }}
         <span class="pt-10">Instructor: <strong> {{$instructor}}</strong></span>
         <span class="pt-2">Lesson Length: <strong> {{$course}}</strong></span>
