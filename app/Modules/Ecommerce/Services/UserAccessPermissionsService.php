@@ -390,8 +390,9 @@ class UserAccessPermissionsService
         }
         $userAccessPermission->save();
 
+        usleep(1000);
         $accessPermissions = $this->getUserAccessPermissions($userId);
-        if (!$accessPermissions->getCollection()->get('id', $userAccessPermission->id)) {
+        if (!$accessPermissions->getCollection()->contains('id', $userAccessPermission->id)) {
             Log::error("Permission does not exist in database.");
         }
         event(new UserAccessPermissionsUpdated($accessPermissions));
