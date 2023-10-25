@@ -1,19 +1,19 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :active-tab="filter.activeTab" :filterable-values="filterableValues" :hide-filter="!showFilter" :pre-loaded-content="preLoadedContent" :selected-filters="tabData[filter.activeTab] && tabData[filter.activeTab].included_fields" :selected-sort="tabData[filter.activeTab] && tabData[filter.activeTab].sort" :search-term="tabData[filter.activeTab] && tabData[filter.activeTab].searchTerm" :tab-options="tabOptionData"
+            :active-tab="filter.activeTab" :filterable-values="filterableValues" :hide-filter="!showFilter" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData"
             @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
         />
 
         <transition appear name="fade">
-            <CollectionResults :current-page="tabData[filter.activeTab] && tabData[filter.activeTab].currentPage" :loading="loading" :total-pages="tabData[filter.activeTab] && tabData[filter.activeTab].totalPages" @on-load-more="collectionStore.loadMore">
+            <CollectionResults :current-page="getCurrentPage" :loading="loading" :total-pages="getTotalPages" @on-load-more="collectionStore.loadMore">
                 <CoachesGridCatalogue v-if="isCoach" :content="data" :brand="brand" />
                 <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <RoutinesCatalogue v-else-if="isRoutine" :content="data"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
-                    :total-results="tabData[filter.activeTab] && tabData[filter.activeTab].totalResults" />
+                    :total-results="getTotalResults" />
             </CollectionResults>
         </transition>
     </div>
@@ -111,10 +111,7 @@ const includedTypes = computed(() => {
     return types;
 })
 
-const isList = computed(() => {
-    return !isPlayAlong.value && !isRoutine.value;
-})
-
+//Collection type reactives
 const isArchives = computed(() => {
     return props.collectionType === 'recording';
 })
@@ -163,10 +160,17 @@ const isRudiment = computed(() => {
     return props.collectionType === 'rudiment';
 })
 
+//List view reactvie
+const isList = computed(() => {
+    return !isPlayAlong.value && !isRoutine.value;
+})
+
+//Filter state reactive
 const showFilter = computed(() => {
     return isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value || isCoach.value;
 })
 
+//Tab options reactives
 const getTabOptions = computed(() => {
     if (isCourse.value) {
         return [
@@ -194,7 +198,6 @@ const getTabOptions = computed(() => {
         { key: `all${props.title.replace(' ', '').toLowerCase()}`, value: `All ${props.title}` },
     ]
 });
-
 
 const tabOptionData = computed(() => {
     return props.tabOptions.length > 0 ? props.tabOptions : getTabOptions.value;
@@ -224,6 +227,35 @@ const getTabData = computed(() => {
     });
 
     return tabDataMap;
+})
+
+//prop reactives
+const activeTabData = computed(() => {
+    return tabData.value[filter.value.activeTab];
+})
+
+const getSelectedFilters = computed(() => {
+    return activeTabData.value && activeTabData.value.included_fields;
+})
+
+const getSelectedSort = computed(() => {
+    return activeTabData.value && activeTabData.value.sort;
+})
+
+const getSearchTerm = computed(() => {
+    return activeTabData.value && activeTabData.value.searchTerm;
+})
+
+const getCurrentPage = computed(() => {
+    return activeTabData.value && activeTabData.value.currentPage;
+})
+
+const getTotalPages = computed(() => {
+    return activeTabData.value && activeTabData.value.totalPages;
+})
+
+const getTotalResults = computed(() => {
+    return activeTabData.value && activeTabData.value.totalResults;
 })
 
 const handleFilterChange = (category, item) => {
