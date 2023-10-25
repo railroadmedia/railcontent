@@ -25,29 +25,34 @@
                     <span>Add User Access Permission</span>
                 </v-tooltip>
             </v-toolbar-items>
-            <template v-slot:extension>
-                <v-row class="pt-2">
-                    <v-col
-                        cols="12" md="4" sm="12"
-                        class="column"
-                    >
-                        <v-select
-                            v-model="$_field"
-                            label="Products and Memberships"
-                            color="white"
-                            :items="['Plus, Basic, and Lifetime Memberships', 'Non Membership Products', 'All']"
-                            clearable
+            <!--
+                <template v-slot:extension>
+                    <v-row class="pt-2">
+                        <v-col
+                            cols="12" md="4" sm="12"
+                            class="column"
                         >
-                        </v-select>
-                    </v-col>
-                </v-row>
-            </template>
+                            <v-select
+                                v-model="$_field"
+                                label="Products and Memberships"
+                                color="white"
+                                :items="['Plus, Basic, and Lifetime Memberships', 'Non Membership Products', 'All']"
+                                clearable
+                            >
+                            </v-select>
+                        </v-col>
+                    </v-row>
+                </template>
+            -->
         </v-toolbar>
 
         <v-data-table
             :headers="headings"
             :items="userAccessPermissions"
             :items-per-page="5"
+            must-sort
+            sort-desc
+            sort-by="expiration_time"
         >
             <template
                 v-slot:item="{ item }"
@@ -56,7 +61,6 @@
                     <td class="text-center">
                         <v-custom-brand-icon :brand="item.brand"></v-custom-brand-icon>
                     </td>
-
                     <td class="text-left">
                         {{ item.permission_name }}
                     </td>
@@ -66,19 +70,15 @@
                     <td class="text-left">
                         {{ getStartDate(item.start_time) }}
                     </td>
-
                     <td class="text-left">
                         {{ getActiveUntil(item.expiration_time) }}
                     </td>
-
                     <td class="text-left">
                         {{ item.source }}
                     </td>
-
                     <td class="text-left">
                         {{ item.status }}
                     </td>
-
                     <td class="text-center">
                         <v-tooltip top>
                             <template v-slot:activator="{ on }">
@@ -96,7 +96,6 @@
                                     </v-icon>
                                 </v-btn>
                             </template>
-
                             <span>Edit User Access Permission</span>
                         </v-tooltip>
 
