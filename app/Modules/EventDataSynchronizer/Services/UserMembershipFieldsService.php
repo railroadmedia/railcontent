@@ -5,6 +5,7 @@ namespace App\Modules\EventDataSynchronizer\Services;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Carbon\Carbon;
+use Log;
 use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Entities\UserProduct;
 use Railroad\Ecommerce\Repositories\ProductRepository;
@@ -88,6 +89,15 @@ class UserMembershipFieldsService
     public function syncUserAccess(UserAccessPermissionsCollection $userAccessPermissions): bool
     {
         $userId = $userAccessPermissions->getUserId();
+        Log::debug("syncUserAccess $userId");
+        Log::debug(
+            print_r(
+                $userAccessPermissions->getCollection()->map(function ($item) {
+                    return "$item->id $item->permission_id $item->start_time";
+                })->toArray(),
+                true
+            )
+        );
 
         //This code is difficult to understand and should be thoroughly understood before changing it
         //membership expiration date comes from both plus and basic permissions combined
