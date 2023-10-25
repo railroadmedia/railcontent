@@ -42,7 +42,8 @@ class UserAccessPermissionsService
 
     private function getUserAccessPermissionsQuery(int $userId, array $filterPermissionIds = [])
     {
-        $query = UserAccessPermission::query()->where('user_id', '=', $userId);
+        //force using write db so we have latest data for query
+        $query = UserAccessPermission::on('musora_laravel_mysql::write')->where('user_id', '=', $userId);
         if ($filterPermissionIds) {
             $query = $query->whereIn('permission_id', $filterPermissionIds);
         }
@@ -390,7 +391,6 @@ class UserAccessPermissionsService
         }
         $userAccessPermission->save();
 
-        sleep(1);
         $accessPermissions = $this->getUserAccessPermissions($userId);
         if (!$accessPermissions->getCollection()->contains('id', $userAccessPermission->id)) {
             Log::error("Permission does not exist in database.");
