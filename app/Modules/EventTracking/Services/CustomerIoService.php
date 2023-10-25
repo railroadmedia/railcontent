@@ -23,15 +23,15 @@ class CustomerIoService
             ->orderBy('updated_at', 'desc')->get();
 
         return [
-            'musora' => $profiles->filter(fn($profile) => $profile->workspace_name === 'musora')->first(
+            'cio_id_musora' => $profiles->filter(fn($profile) => $profile->workspace_name === 'musora')->first(
                 )?->uuid ?? null,
-            'drumeo' => $profiles->filter(fn($profile) => $profile->workspace_name === 'drumeo')->first(
+            'cio_id_drumeo' => $profiles->filter(fn($profile) => $profile->workspace_name === 'drumeo')->first(
                 )?->uuid ?? null,
-            'pianote' => $profiles->filter(fn($profile) => $profile->workspace_name === 'pianote')->first(
+            'cio_id_pianote' => $profiles->filter(fn($profile) => $profile->workspace_name === 'pianote')->first(
                 )?->uuid ?? null,
-            'singeo' => $profiles->filter(fn($profile) => $profile->workspace_name === 'singeo')->first(
+            'cio_id_singeo' => $profiles->filter(fn($profile) => $profile->workspace_name === 'singeo')->first(
                 )?->uuid ?? null,
-            'guitareo' => $profiles->filter(fn($profile) => $profile->workspace_name === 'guitareo')->first(
+            'cio_id_guitareo' => $profiles->filter(fn($profile) => $profile->workspace_name === 'guitareo')->first(
                 )?->uuid ?? null
         ];
     }
