@@ -10,9 +10,9 @@
                     <ul>
                         @foreach ($points as $index => $point)
                             @if ($loop->last)
-                                <li class="text-{{ $brandTitle }} font-bold"><i class="fas fa-star text-{{ $brandTitle }}"></i> {{ $point }}</li>
+                                <li class="text-{{ $brand }} font-bold"><i class="fas fa-sharp fa-solid fa-certificate"></i> {{ $point }}</li>
                             @else
-                                <li><i class="fas fa-check text-{{ $brandTitle }}"></i> {{ $point }}</li>
+                                <li><i class="fas fa-check text-{{ $brand }}"></i> {{ $point }}</li>
                             @endif
                         @endforeach
                     </ul>
@@ -22,7 +22,7 @@
                     <div class="w-full md:w-1/2 text-center sm:pr-2 my-1">
                         {{-- <a href="#final" class="join blue medium w-full anchor-slide">{{ $buttonTxt }}</a> --}}
                         <a x-data="{ isHovered: false }" href="#final"
-                            class="medium w-full anchor-slide text-white cursor-pointer text-center user-select-none bg-{{ $brandTitle }} rounded-full outline-none py-4 px-14 font-bebas font-semibold text-2xl tracking-wider text-uppercase text-decoration-none transition duration-300 inline-block"
+                            class="medium w-full anchor-slide text-white cursor-pointer text-center user-select-none bg-{{ $brand }} rounded-full outline-none py-4 px-14 font-bebas font-semibold text-2xl tracking-wider text-uppercase text-decoration-none transition duration-300 inline-block"
                             @mouseenter="isHovered = true" @mouseleave="isHovered = false"
                             :style="{ filter: isHovered ? 'brightness(120%)' : 'brightness(100%)' }">
                             {{ $buttonTxt }}

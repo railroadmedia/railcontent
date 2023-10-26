@@ -4,27 +4,29 @@
     {{ $title }}
 </h2>
 
-<div class="container max-w-6xl mx-auto p-4 md:p-6 lg:flex">
+<div class="container max-w-6xl mx-auto p-4 md:p-6 lg:flex leading-normal">
     <div class="lg:w-4/6 py-2 md:p-4">
         <div class="w-full">
             <img class="rounded-xl" src="{{ $image }}" />
         </div>
 
-        <div class="mt-4 md:py-4 leading-tight hidden md:block">
+        <div class="mt-4 md:py-4 hidden md:block">
           <p>{{ $descriptionDesktop }}  <strong>{{ $descriptionBold }} </strong></p>
         <p class="pt-10">Instructor: <strong> {{$instructor}}</strong></p>
         <p class="pt-2">Lesson Length: <strong> {{$course}}</strong></p>
         </div>
     </div>
 
-    <div class="lg:w-2/6 py-2 md:p-4">
+    <div class="lg:w-2/6 py-2 md:p-4 text-black text-base">
         @foreach ($features as $feature)
-            <div class="h-14 flex flex-row rounded-lg mb-2 px-6 py-4 text-black" style="background: #eff7ff;">
-                <p class="leading-tight mx-0"><i class="fas fa-play-circle text-2xl leading-none text-{{ $brand }} mr-2 align-middle"></i> {{ $feature }}</p>
+            <div class="rounded-lg mb-2 px-6 py-4 bg-blue-50">
+                <p class="flex items-center"><i class="fas fa-play-circle text-2xl text-{{ $brand }} mr-2"></i> {{ $feature }}</p>
             </div>
         @endforeach
 
-        <p class="font-black leading-tight">{{ $lessonTitle }}</p>
+           
+              <p class="text-white pt-3"><strong>{{ $lessonTitle }}</strong></p>
+
 
         <div x-data="{ isOpen: [] }" class="h-80 overflow-y-scroll rounded-lg text-black">
             @foreach ($lessons as $i => $lesson)
@@ -54,10 +56,10 @@
         </div>
     </div>
 
-    <p class="mt-4 p-4 leading-tight md:hidden">
+    <p class="mt-4 p-4 md:hidden">
         {{ $descriptionMobile }}
-        <span class="pt-10">Instructor: <strong> {{$instructor}}</strong></span>
-        <span class="pt-2">Lesson Length: <strong> {{$course}}</strong></span>
+        <span class="block pt-10">Instructor: <strong> {{$instructor}}</strong></span>
+        <span class="block pt-2">Lesson Length: <strong> {{$course}}</strong></span>
     </p>
 
 </div>

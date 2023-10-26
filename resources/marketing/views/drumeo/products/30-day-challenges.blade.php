@@ -267,12 +267,12 @@ $lessons = ['Day 1 - Introduction', 'Day 2 - Basics of Drumming', 'Day 3 - Rhyth
     'descriptionMobile' => 'Welcome to 30-Day Drummer! At this point, you should have all the equipment you need to get started, know how to set up your gear, and be ready to have some fun playing the drums with Domino. In this first lesson and 10-minute workout, she will teach you the beginnings of the most popular drum beat of all time. And you will have fun doing it!',
     'features' => [
         'Course Kick-Off',
+        'Setup'
     ],
     'lessonTitle' => 'Course Lessons',
     'instructor' => ' Domino Santantonio',
     'course' => ' 30 video lessons',
     'lessons' => $lessons,
-    'fill' => 'red', // icons color
 ])
 
 <!-- Songs subsection -->
@@ -293,7 +293,7 @@ $lessons = ['Day 1 - Introduction', 'Day 2 - Basics of Drumming', 'Day 3 - Rhyth
                             <div class="w-1/5 sm:w-full text-left sm:text-center">
                                 <img alt="point icon" src="{{ $songItem['icon'] }}" class="h-6 sm:h-10">
                             </div>
-                            <div class="text-left sm:text-center w-4/5">
+                            <div class="w-4/5 text-left sm:text-center">
                                 <p class="mb-1 sm:my-2 text-lg md:text-xl">
                                     <strong>{!! $songItem['title'] !!}</strong>
                                 </p>
@@ -367,8 +367,8 @@ $items = [
                     <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=100/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/coach-image.png" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 130%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
-
                 <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
+                   
                     <h6 class="uppercase text-drumeo leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
                     <h2 class="text-center sm:text-left"><strong>Domino Santantonio</strong></h2>
                     <h6 class="leading-normal mt-4 lg:mt-6">Domino Santantonio is one of the world’s most viewed drummers.
@@ -398,7 +398,6 @@ $items = [
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -483,7 +482,6 @@ $points = [
     'title' => 'Learn the drums with daily guided workouts.',
     'points' => $points,
     'buttonTxt' => 'Get Started',
-    'brandTitle' => 'drumeo',
     'studentProfilesImage' => 'https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png',
     'profileImageAlt' => 'student profile image',
     'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/shop/30-day-challenges/drum-challenges.jpeg',
