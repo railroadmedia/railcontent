@@ -335,7 +335,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >
@@ -386,7 +386,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >
@@ -436,7 +436,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >
@@ -486,7 +486,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >
@@ -536,7 +536,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >
@@ -586,7 +586,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >
@@ -636,7 +636,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >
@@ -782,7 +782,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >
