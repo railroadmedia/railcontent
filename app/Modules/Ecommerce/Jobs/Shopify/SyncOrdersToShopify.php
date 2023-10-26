@@ -836,6 +836,16 @@ class SyncOrdersToShopify implements ShouldQueue
             ];
         }
 
+        if ($order->getShippingDue()) {
+            $orderData["shipping_lines"] = [
+                [
+                    "code" => "N/A",
+                    "title" => "MC Shipping",
+                    "price" => number_format($order->getShippingDue(), 2, '.', '')
+                ]
+            ];
+        }
+
         // the proper addresses should already have been synced by the user/customer, so only use it if Shopify has it
         if ($order->getBillingAddress()?->getShopifyId()) {
             $orderData["billing_address"] = ["id" => $order->getBillingAddress()->getShopifyId()];
