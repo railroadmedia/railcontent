@@ -32,6 +32,7 @@ use Railroad\Ecommerce\Entities\OrderItemFulfillment;
 use Railroad\Ecommerce\Entities\Payment;
 use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Entities\Refund;
+use Railroad\Ecommerce\Entities\Structures\Address as AddressStructure;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Ecommerce\Repositories\CustomerRepository;
 use Railroad\Ecommerce\Repositories\OrderItemRepository;
@@ -40,6 +41,7 @@ use Railroad\Ecommerce\Repositories\PaymentRepository;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\RefundRepository;
 use Railroad\Ecommerce\Repositories\RepositoryBase;
+use Railroad\Ecommerce\Services\TaxService;
 use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\REST\Resources\ApiResource;
 use Signifly\Shopify\Shopify;
@@ -88,6 +90,7 @@ class SyncOrdersToShopify implements ShouldQueue
     protected RefundRepository $refundRepository;
 
     protected EcommerceEntityManager $entityManager;
+    protected TaxService $taxService;
     protected Collection $shopifyIds;
     protected array $results = [];
 
@@ -131,7 +134,8 @@ class SyncOrdersToShopify implements ShouldQueue
         PaymentRepository $paymentRepository,
         ProductRepository $productRepository,
         RefundRepository $refundRepository,
-        EcommerceEntityManager $entityManager
+        EcommerceEntityManager $entityManager,
+        TaxService $taxService
     ): void {
         // set DI instances that we'll need
         $this->shopify = $shopify;
@@ -142,6 +146,7 @@ class SyncOrdersToShopify implements ShouldQueue
         $this->productRepository = $productRepository;
         $this->refundRepository = $refundRepository;
         $this->entityManager = $entityManager;
+        $this->taxService = $taxService;
 
         $this->logDebug(
             sprintf("%s: running batch for orders %s - %s", $this->getClassName(), $this->startAtId, $this->endAtId)
@@ -233,7 +238,7 @@ class SyncOrdersToShopify implements ShouldQueue
                 $this->createSyncLogIfExecuting();
             }
 
-            // TODO: remove this check once all users/customers have been synced
+            // safety check that the users/customers have been synced
             $skip = false;
             if (!is_null($order->getUser())) {
                 // the user is returned with only their id and email, so get the id and get a fresh copy
@@ -830,12 +835,6 @@ class SyncOrdersToShopify implements ShouldQueue
             ];
         }
 
-        if ($order->getTaxesDue()) {
-            $orderData["tax_lines"] = [
-                ["price" => number_format($order->getTaxesDue(), 2, '.', '')]
-            ];
-        }
-
         if ($order->getShippingDue()) {
             $orderData["shipping_lines"] = [
                 [
@@ -963,12 +962,47 @@ class SyncOrdersToShopify implements ShouldQueue
                     $data["applied_discounts"] = $discounts;
                 }
 
+                $taxesData = $this->getTaxesData($orderItem->id, $price);
+                if (!empty($taxesData)) {
+                    $data["tax_lines"] = [$taxesData];
+                }
+
                 $orderItemsData[] = $data;
             }
         );
 
-
         return $orderItemsData;
+    }
+
+    /**
+     * Build the array of the taxes data for the order item
+     *
+     * @param  int  $orderItemId
+     * @param  float  $price
+     * @return array
+     * @throws Exception
+     */
+    protected function getTaxesData(int $orderItemId, float $price): array
+    {
+        $orderItem = $this->orderItemRepository->find($orderItemId);
+        $order = $orderItem->getOrder();
+        $address = $order->getBillingAddress()?->toStructure() ?? new AddressStructure();
+
+        $taxPrice = $this->taxService->getTaxesDueTotal(
+            $price,
+            $order->getShippingDue() ?? 0.0,
+            $address
+        );
+
+        $taxRate = $this->taxService->getProductTaxRate($address);
+        if (!$taxPrice) {
+            return [];
+        }
+
+        return [
+            "price" => number_format($taxPrice, 2, '.', ''),
+            "rate" => $taxRate
+        ];
     }
 
     /**
