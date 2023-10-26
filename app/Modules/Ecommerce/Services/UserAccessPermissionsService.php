@@ -18,6 +18,8 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
+use Railroad\Ecommerce\Services\UserProductService as EcommerceUserProductService;
+
 
 class UserAccessPermissionsService
 {
@@ -236,7 +238,7 @@ class UserAccessPermissionsService
                     ->toArray();
             return $userAccessPermissions->hasUserOwnedPermissions($permissionIds);
         }
-        $userProductService = app(UserProductService::class);
+        $userProductService = app(EcommerceUserProductService::class);
 
         return $userProductService->userHadOrHasAnyDigitalProductsForBrand(
             new EcommerceUser($user->id, $user->email),
