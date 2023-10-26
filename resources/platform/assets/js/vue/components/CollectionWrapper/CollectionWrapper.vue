@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :active-tab="filter.activeTab" :filterable-values="filterableValues" :hide-filter="!showFilter" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData"
+            :active-tab="filter.activeTab" :filterable-values="filterableValues" :hide-filter="!showFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
         />
 

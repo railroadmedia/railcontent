@@ -18,7 +18,7 @@
         <div>
             <FilterPills :selected-filters="selectedFilters" @cancel-filter="(category, item) => emit('onFilterChange', category, item)" @clear-filter="emit('OnClearFilter')" />
         </div>
-        <template v-if="!hideFilter">
+        <div v-if="!hideFilter" class="tw-relative">
             <FilterOptions
                 v-if="!isCollapsed && isMobile"
                 :multi-select-columns="state.multiSelectColumns"
@@ -35,7 +35,9 @@
                 @onClose="handleToggleCollapse"
                 @handle-filter-click="(category, key) => emit('onFilterChange', category, key)"
             />
-        </template>
+
+            <div v-if="loading" class="tw-absolute tw-inset-0 dark:tw-bg-[#000C17]/30 tw-bg-[#F9F9F9]/30 tw-z-50"></div>
+        </div>
     </div>
 </template>
 
@@ -57,6 +59,10 @@
             default: () => [],
         },
         hideFilter: {
+            type: Boolean,
+            default: false,
+        },
+        loading: {
             type: Boolean,
             default: false,
         },
