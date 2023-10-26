@@ -16,7 +16,7 @@
 @endsection
 
 @section('layout-body')
-    <div class="shipping-delay p-2 z-50">
+    <div class="shipping-delay p-2 z-40">
         <div class="delay-bar text-center">
             <div class="container mx-auto">
                 <p class="cursor-pointer hover:underline" @click="shippingModal = true;"><i class="fas fa-truck"></i> <strong>FREE SHIPPING OVER $150</strong></p>
