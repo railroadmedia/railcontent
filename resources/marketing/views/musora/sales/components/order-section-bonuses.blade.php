@@ -6,7 +6,7 @@
         @endif
 >
 <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
-        @if(empty($bgColor)) style="background:url(https://dpwjbsxqtam5n.cloudfront.net/sales/2023/order-bg-tile-2.png) center center/160px;" @endif >
+        @if(empty($bgColor)) style="background:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/assets/order-bg-tile-2.png) center center/160px;" @endif >
     <div class="container mx-auto relative z-50 @if(!empty($max5)) max-w-5xl @else max-w-6xl @endif">
         <div class="w-full">
             @if(!empty($promoLogo))
@@ -118,34 +118,34 @@
                 @if($theme !== 'drumeo')
                     <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
                         <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
-                            src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-bonus.jpg">
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/assets/drumeo-bonus.jpg">
                         <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
-                            src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-bonus-m.jpg">
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/assets/drumeo-bonus-m.jpg">
                         <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">DRUM LESSONS INCLUDED</p>
                     </div>
                 @endif
                 @if($theme !== 'pianote')
                     <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
                         <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
-                            src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/pianote-bonus.jpg">
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/assets/pianote-bonus.jpg">
                         <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
-                            src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/pianote-bonus-m.jpg">
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/assets/pianote-bonus-m.jpg">
                         <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">PIANO LESSONS INCLUDED</p>
                     </div>
                 @endif
                 @if($theme !== 'guitareo')
                     <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
                         <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
-                            src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guitareo-bonus.jpg">
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/assets/guitareo-bonus.jpg">
                         <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
-                            src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guitareo-bonus-m.jpg">
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/assets/guitareo-bonus-m.jpg">
                         <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">GUITAR LESSONS INCLUDED</p>
                     </div>
                 @endif
                 @if($theme !== 'singeo')
                     <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
                         <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
-                            src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/singeo-bonus.jpg">
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/assets/singeo-bonus.jpg">
                         <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
                             src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/singeo-bonus-m.jpg">
                         <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">SINGING LESSONS INCLUDED</p>
