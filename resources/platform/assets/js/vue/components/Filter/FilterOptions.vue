@@ -18,8 +18,8 @@
             default: [],
         },
         selectedFilters:{
-            type: Array,
-            default: () => [],
+            type: Object,
+            default: () => ({}),
         },
         singleSelectColumns: {
             type: Array,

@@ -12,6 +12,7 @@ export const useCollectionStore = defineStore({
                 activeTab: '',
                 limit: 10,
                 params: {},
+                fields: {},
             },
             loading: false,
             tabData: {},
@@ -20,14 +21,26 @@ export const useCollectionStore = defineStore({
         }
     },
     actions:{
-        async applyFilter(param){
-            const index = this.tabData[this.filter.activeTab].included_fields.findIndex(p => p === param);
-            if (index === -1 || !index){
-                this.tabData[this.filter.activeTab].included_fields.push(param);
+        async applyFilter(category, item){
+            if(this.filter.fields[category]){
+                const index = this.filter.fields[category].findIndex(p => p.key === item.key);
+
+                if (index === -1){
+                    this.filter.fields[category].push(item);
+                } else {
+                    this.filter.fields[category].splice(index, 1);
+                }
             } else {
-                this.filter.params.included_fields.splice(index,1);
+                this.filter.fields[category] = [item];
             }
 
+            this.tabData[this.filter.activeTab].currentPage = 1;
+            this.getData();
+        },
+        async clearFilter(){
+            this.filter.fields = {};
+
+            this.tabData[this.filter.activeTab].currentPage = 1;
             this.getData();
         },
         async fetchData(){
@@ -44,7 +57,7 @@ export const useCollectionStore = defineStore({
                                 page: this.tabData[this.filter.activeTab].currentPage,
                                 sort: this.tabData[this.filter.activeTab].sort,
                                 ...this.filter.params,
-                                included_fields: this.tabData[this.filter.activeTab].included_fields,
+                                included_fields: this.getIncludedFields(),
                                 [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.tabData[this.filter.activeTab].searchTerm,
                         },
                     })
@@ -64,6 +77,19 @@ export const useCollectionStore = defineStore({
             const response = await this.fetchData();
             this.setData(response, replace);
             this.fetching = false;
+        },
+        getIncludedFields(){
+            let fields = [...this.filter.params.included_fields];
+
+            if(Object.keys(this.filter.fields).length > 0){
+                Object.keys(this.filter.fields).forEach((category) => {
+                    this.filter.fields[category].forEach((item) => {
+                        fields.push(`${category},${item.key}`);
+                    })
+                })
+            }
+
+            return fields;
         },
         getParams(){
             const params = new URLSearchParams(window.location.search);

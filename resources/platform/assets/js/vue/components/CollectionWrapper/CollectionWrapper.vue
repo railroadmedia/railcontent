@@ -2,7 +2,7 @@
     <div>
         <CollectionFilterWrapper
             :active-tab="filter.activeTab" :filterable-values="filterableValues" :hide-filter="!showFilter" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData"
-            @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
+            @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
         />
 
         <transition appear name="fade">
@@ -92,6 +92,7 @@ const request_params = computed(() => {
         included_types: includedTypes.value,
         include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
         limit: props.limit,
+        included_fields: props.included_fields || [],
     };
 })
 
@@ -217,7 +218,6 @@ const getTabData = computed(() => {
         }
         tabDataMap[tab.key] = {
             endpoint,
-            included_fields: props.included_fields || [],
             searchTerm: '',
             sort: isCoach.value ? 'slug' : '-published_on',
             currentPage: 1,
@@ -235,7 +235,7 @@ const activeTabData = computed(() => {
 })
 
 const getSelectedFilters = computed(() => {
-    return activeTabData.value && activeTabData.value.included_fields;
+    return filter.value.fields;
 })
 
 const getSelectedSort = computed(() => {
@@ -258,8 +258,12 @@ const getTotalResults = computed(() => {
     return activeTabData.value && activeTabData.value.totalResults;
 })
 
+const handleClearFilter = () => {
+    collectionStore.clearFilter();
+}
+
 const handleFilterChange = (category, item) => {
-    collectionStore.applyFilter(`${category},${item.value}`);
+    collectionStore.applyFilter(category, item);
 }
 
 const handleSearchChange = (value) => {
