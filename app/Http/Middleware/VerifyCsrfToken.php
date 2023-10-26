@@ -19,5 +19,6 @@ class VerifyCsrfToken extends Middleware
         '*/songs',
         '/ecommerce/access-codes*',
         '/ecommerce/user-access-permission*',
+        '/ecommerce/revenuecat/webhook/notification',
     ];
 }
