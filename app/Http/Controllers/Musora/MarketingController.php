@@ -13,7 +13,23 @@ class MarketingController extends BaseController
     }
     public function sixReasons()
     {
-        return view('musora.pages.6-reasons', ['theme' => 'musora']);
+        return view('musora.pages.6-reasons', ['theme' => 'musora', 'version' => 'musora']);
+    }
+    public function sixReasonsDrums()
+    {
+        return view('musora.pages.6-reasons', ['theme' => 'musora', 'version' => 'drums']);
+    }
+    public function sixReasonsPiano()
+    {
+        return view('musora.pages.6-reasons', ['theme' => 'musora', 'version' => 'piano']);
+    }
+    public function sixReasonsGuitar()
+    {
+        return view('musora.pages.6-reasons', ['theme' => 'musora', 'version' => 'guitar']);
+    }
+    public function sixReasonsSinging()
+    {
+        return view('musora.pages.6-reasons', ['theme' => 'musora', 'version' => 'singing']);
     }
     public function moderators()
     {
@@ -42,6 +58,11 @@ class MarketingController extends BaseController
     public function careers()
     {
         return view('musora.pages.careers');
+    }
+
+    public function careersPP()
+    {
+        return view('musora.pages.careers-pinpoint');
     }
 
     public function contact()

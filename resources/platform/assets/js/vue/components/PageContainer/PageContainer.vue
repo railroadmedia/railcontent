@@ -1,6 +1,6 @@
 <script setup>
 import { ref, provide, onBeforeMount, onMounted, onUnmounted, onUpdated } from "vue";
-import { storeToRefs  } from 'pinia';
+import { storeToRefs } from 'pinia';
 import { useNotificationStore } from '../../../stores/notification';
 import { useConfirmationStore } from '../../../stores/confirmation';
 import { usePlaylistsStore } from '../../../stores/playlists';
@@ -16,10 +16,6 @@ import { setEndpointPrefix } from "../../utils"
 import PlaylistsModal from "../Playlists/Modals/PlaylistsModal.vue";
 
 const props = defineProps({
-  brand: {
-    type: String,
-    default: 'drumeo'
-  },
   isLive: {
     type: Boolean,
     default: false
@@ -27,18 +23,6 @@ const props = defineProps({
   hasNotifications: {
     type: Boolean,
     default: false
-  },
-  userName: {
-    type: String
-  },
-  userId: {
-    type: String
-  },
-  userAvatar: {
-    type: String
-  },
-  accountUrl: {
-    type: String
   },
   searchUrl: {
     type: String
@@ -50,25 +34,17 @@ const props = defineProps({
   adminMessage: {
     type: String,
   },
-  canReferNewStudents: {
-      type: Boolean,
-      default: true
-  },
   isOnboarding: {
-      type: Boolean,
-      default: false
+    type: Boolean,
+    default: false
   },
   playlists: {
     type: Array,
     default: [],
   },
-  mostRecentPlaylists:{
+  mostRecentPlaylists: {
     type: Array,
     default: []
-  },
-  csrf_token: {
-      type: String,
-      required: true
   }
 });
 
@@ -81,11 +57,6 @@ const { modalOpen: playlistModalProps } = storeToRefs(playlistsStore);
 const isDarkModeSelected = ref(false);
 
 provide('isDarkModeSelected', isDarkModeSelected);
-provide('userAvatar', props.userAvatar);
-provide('userName', props.userName);
-provide('userId', props.userId);
-provide('csrf_token', props.csrf_token);
-provide('isSidebarCollapsed', pageContainerStore.isSidebarCollapsed);
 
 const setDarkMode = (isSelected) => {
   const body = document.getElementById("app-body");
@@ -213,11 +184,11 @@ const onResize = (e) => {
     pageContainerStore.isSidebarHidden = true;
     pageContainerStore.isSidebarCollapsed = false;
   } else {
-      pageContainerStore.isSidebarHidden = false;
+    pageContainerStore.isSidebarHidden = false;
 
-      if(playlistsStore.playerExpanded) {
-        pageContainerStore.isSidebarCollapsed = true;
-      }
+    if (playlistsStore.playerExpanded) {
+      pageContainerStore.isSidebarCollapsed = true;
+    }
   }
 }
 
@@ -244,29 +215,19 @@ onUpdated(() => {
 <template>
   <main class="tw-min-h-screen" :class="isOnboarding ? 'tw-w-full' : 'tw-w-screen'">
     <sprite-sheet></sprite-sheet>
-    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" :slideClass="notification.slideClass" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed" @onClose="handleNotificationClear" />
-    <ConfirmationModal
-      v-if="confirmation.title"
-      :brand="brand"
-      modalId="confirmation-modal"
-      @onClose="handleCloseConfirmationModal"
-      :title="confirmation.title"
-      :subtitle="confirmation.subtitle"
-      :submitLabel="confirmation.submitLabel"
-      :hideCancel="confirmation.hideCancel"
-      @onCancel="handleCloseConfirmationModal"
-      @onSubmit="handleSubmit"
-    />
-    <PlaylistsModal @onClosePlaylistsModal="handleClosePlaylistModal" key="playlists-modal-key" v-if="pageContainerStore.isPlaylistModalOpen" :modalProps="playlistModalProps" :brand="brand"></PlaylistsModal>
+    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError"
+      :slideClass="notification.slideClass" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
+      @onClose="handleNotificationClear" />
+    <ConfirmationModal v-if="confirmation.title" modalId="confirmation-modal" @onClose="handleCloseConfirmationModal"
+      :title="confirmation.title" :subtitle="confirmation.subtitle" :submitLabel="confirmation.submitLabel"
+      :hideCancel="confirmation.hideCancel" @onCancel="handleCloseConfirmationModal" @onSubmit="handleSubmit" />
+    <PlaylistsModal @onClosePlaylistsModal="handleClosePlaylistModal" key="playlists-modal-key"
+      v-if="pageContainerStore.isPlaylistModalOpen" :modalProps="playlistModalProps"></PlaylistsModal>
 
-    <Navbar v-if="!isOnboarding" :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications"
-      :user-name="userName" :userAvatar="userAvatar" :account-url="accountUrl" :isSidebarHidden="pageContainerStore.isSidebarHidden"
-      :isDarkModeSelected="isDarkModeSelected" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
-      :canReferNewStudents="canReferNewStudents"
-      :is-live="isLive"
-      @onCollapseSidebar="onCollapseSidebar"
-      @onColorModeToggle="onColorModeToggle"
-    />
+    <Navbar v-if="!isOnboarding" :forceSidebarHidden="forceSidebarHidden" :has-notifications="hasNotifications"
+      :isSidebarHidden="pageContainerStore.isSidebarHidden" :isDarkModeSelected="isDarkModeSelected"
+      :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed" :is-live="isLive" @onCollapseSidebar="onCollapseSidebar"
+      @onColorModeToggle="onColorModeToggle" />
 
     <!-- Page Container -->
     <div v-if="!isOnboarding" class="
@@ -276,9 +237,9 @@ onUpdated(() => {
       ">
 
       <!-- Sidebar -->
-      <Sidebar v-if="!isOnboarding" :brand="brand" :isLive="isLive" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
+      <Sidebar v-if="!isOnboarding" :isLive="isLive" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
         :isSidebarHidden="pageContainerStore.isSidebarHidden" @onCollapseSidebar="onCollapseSidebar"
-        :forceSidebarHidden="forceSidebarHidden" :user-id="userId" />
+        :forceSidebarHidden="forceSidebarHidden" />
 
       <!-- Content Container -->
       <main v-if="!isOnboarding" class="
@@ -294,7 +255,8 @@ onUpdated(() => {
           tw-overflow-x-hidden
           tw-scroll-smooth
         " id="content-container">
-        <h2 v-if="adminMessage && adminMessage.length" class="tw-text-[18px] tw-w-full tw-bg-yellow-200 tw-p-[20px] tw-text-center">
+        <h2 v-if="adminMessage && adminMessage.length"
+          class="tw-text-[18px] tw-w-full tw-bg-yellow-200 tw-p-[20px] tw-text-center">
           {{ adminMessage }}
         </h2>
         <!-- Content -->
@@ -303,11 +265,12 @@ onUpdated(() => {
         </section>
 
         <!-- Footer -->
-        <Footer :brand="brand" />
+        <Footer />
 
         <!-- Sidebar Content Wrapper -->
         <Transition name="fade">
-          <div v-if="!pageContainerStore.isSidebarCollapsed && !pageContainerStore.isSidebarHidden" @click="pageContainerStore.isSidebarHidden = true" class="
+          <div v-if="!pageContainerStore.isSidebarCollapsed && !pageContainerStore.isSidebarHidden"
+            @click="pageContainerStore.isSidebarHidden = true" class="
               tw-fixed
               lg:tw-hidden
               tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-10 tw-bg-black/30

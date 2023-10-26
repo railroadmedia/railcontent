@@ -245,7 +245,7 @@ class SyncOrdersToShopify implements ShouldQueue
                             self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_ORDER,
                             self::RESULTS_MODEL_ID => $order->getId(),
                             self::RESULTS_ACTION => "SKIPPED",
-                            self::RESULTS_FAIL_MESSAGE => "User has not been synced to Shopify"
+                            self::RESULTS_FAIL_MESSAGE => "User $user->id has not been synced to Shopify"
                         ];
                         $skip = true;
                     }
@@ -272,7 +272,7 @@ class SyncOrdersToShopify implements ShouldQueue
                             self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_ORDER,
                             self::RESULTS_MODEL_ID => $order->getId(),
                             self::RESULTS_ACTION => "SKIPPED",
-                            self::RESULTS_FAIL_MESSAGE => "Customer has not been synced to Shopify"
+                            self::RESULTS_FAIL_MESSAGE => "Customer {$customer->getId()} has not been synced to Shopify"
                         ];
                         $skip = true;
                     }
@@ -766,6 +766,16 @@ class SyncOrdersToShopify implements ShouldQueue
             // "tags" => "",
         ];
 
+        // record a note that this order was migrated from the old system, including the order ID, and put it first
+        $migrateNote = Str::of(
+            sprintf("Imported from the old ecommerce system: order ID %s.", $order->getId())
+        );
+        if (empty($order->getNote())) {
+            $notesStr = $migrateNote;
+        } else {
+            $notesStr = $migrateNote->newLine()->append($order->getNote());
+        }
+
         // record a note if there were any refunds
         $refundNotes = null;
         $refunds = $this->getRefundsForOrder($order);
@@ -796,15 +806,10 @@ class SyncOrdersToShopify implements ShouldQueue
 
             $refundNotes = $refundNotes->value();
         }
-        if (empty($order->getNote())) {
-            $notes = $refundNotes;
-        } else {
-            $notes = Str::of($order->getNote())->newLine()->append($refundNotes)->value();
-        }
 
-        if ($notes) {
-            $orderData["note"] = $notes;
-        }
+        $notesStr = $notesStr->newLine()->append($refundNotes);
+
+        $orderData["note"] = $notesStr->value();
 
         if ($withMetafields) {
             // refer to https://shopify.dev/docs/apps/custom-data/metafields/types
@@ -888,6 +893,7 @@ class SyncOrdersToShopify implements ShouldQueue
                 &$orderItemsData,
                 &$refundAmount
             ) {
+                $price = $orderItem->product->isTrial() ? 0 : $orderItem->initial_price ?? 0;
                 $data = [
                     // include the shopify_id, if we have one, so we know if we're updating or creating - shopify will just ignore this
                     "shopify_id" => $orderItem->shopify_id,
@@ -895,7 +901,7 @@ class SyncOrdersToShopify implements ShouldQueue
                     "ecommerce_order_item_id" => $orderItem->id,
                     "fulfillable_quantity" => $orderItem->quantity,
                     "fulfillment_service" => "manual",
-                    "price" => number_format($orderItem->initial_price ?? 0, 2, '.', ''),
+                    "price" => number_format($price, 2, '.', ''),
                     "quantity" => $orderItem->quantity,
                     "requires_shipping" => $orderItem->weight > 0,
                     "sku" => $orderItem->product->sku,

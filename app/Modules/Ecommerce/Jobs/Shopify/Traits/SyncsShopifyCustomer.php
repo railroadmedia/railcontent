@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Jobs\Shopify\Traits;
 
 use App\Models\ShopifySync;
 use App\Modules\Ecommerce\Jobs\Shopify\PollBulkOperationCustomer;
+use Doctrine\ORM\Exception\ORMException;
 use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
@@ -430,6 +431,97 @@ trait SyncsShopifyCustomer
             .       ' userErrors { field message }'
             .   ' }'
             . ' }';
+    }
+
+    /**
+     * Query Shopify for a customer with the given email address. If found, get our user and/or customers with the
+     * same email address, and store the shopify_id to link them to the Shopify customer.
+     * Use the Shopify customer's addresses to set the shopify_id for our user/customer's addresses as well.
+     *
+     * @param  string  $email
+     * @return Collection notices for any failures
+     */
+    protected function linkExistingCustomer(string $email): Collection
+    {
+        $failures = collect();
+        $shopifyCustomers = $this->shopify->getCustomers(["email" => $this->getEmailForShopify($email)]);
+        $shopifyAttributes = $shopifyCustomers->first()?->getAttributes() ?? null;
+
+        // this shouldn't be possible, but check just in case
+        if (is_null($shopifyAttributes)) {
+            $failures->push(
+                sprintf(
+                    "The email address %s was already in use in Shopify, but no customers were found".
+                    " when attempting to retrieve it from Shopify",
+                    $this->getEmailForShopify($email)
+                )
+            );
+            return $failures;
+        }
+
+        $shopifyCustomerId = $shopifyAttributes["id"];
+        // find all of our users and customers with that email address, and store the shopify_id
+        $user = User::query()->firstWhere("email", $email);
+
+        if (!is_null($user)) {
+            $user->shopify_id = $shopifyCustomerId;
+            $user->saveWithoutUpdatedAt();
+        }
+        $customers = $this->getCustomersForEmail($email);
+        try {
+            $customers->each(function (Customer $customer) use ($shopifyCustomerId) {
+                // grab the eloquent model, so we can update it
+                $customerModel = \App\Modules\Ecommerce\Models\Customer::find($customer->getId());
+                $customerModel->shopify_id = $shopifyCustomerId;
+                $customerModel->saveWithoutUpdatedAt();
+                // refresh the doctrine model to get the change
+                $this->entityManager->refresh($customer);
+            });
+        } catch (ORMException $e) {
+            $failures->push(
+                sprintf(
+                    "Failed to store shopify_id %s on customers with email address %s: %s",
+                    $shopifyCustomerId,
+                    $email,
+                    $e->getMessage()
+                )
+            );
+        }
+
+        // find any addresses for our user and/or customers that match Shopify's, and store the shopify_id
+        collect($shopifyAttributes["addresses"])->each(function (array $addressData) use ($failures, $email, $customers, $user) {
+            $matchedAddresses = $this->findAddressesWithMatchingData(
+                $user->id ?? null,
+                $customers,
+                $addressData["first_name"],
+                $addressData["last_name"],
+                $addressData["address1"],
+                $addressData["address2"],
+                $addressData["city"],
+                $addressData["province"],
+                $addressData["province_code"],
+                $addressData["zip"],
+                $addressData["country"],
+                $addressData["country_code"]
+            );
+            if ($matchedAddresses->isNotEmpty()) {
+                $addressShopifyId = $addressData["id"];
+                try {
+                    $this->storeShopifyId($matchedAddresses, $addressShopifyId);
+                } catch (ORMException $e) {
+                    $failures->push(
+                        sprintf(
+                            "Failed to store shopify_id %s on address(es) for user or customer with email".
+                            " address %s: %s",
+                            $addressShopifyId,
+                            $email,
+                            $e->getMessage()
+                        )
+                    );
+                }
+            }
+        });
+        return $failures;
     }
 
     /**

@@ -5,31 +5,54 @@
             dark
             :color="brandColor"
         >
-            <v-toolbar-title>User Access Permissions</v-toolbar-title>
-
+            <v-toolbar-title>
+                User Access Permissions
+            </v-toolbar-title>
             <v-spacer></v-spacer>
-
-            <v-tooltip left>
-                <template v-slot:activator="{ on }">
-                    <v-btn
-                        icon
-                        text
-                        class="mx-0"
-                        v-on="on"
-                        @click="openEditForm(0)"
-                    >
-                        <v-icon>add</v-icon>
-                    </v-btn>
+            <v-toolbar-items>
+                <v-tooltip left>
+                    <template v-slot:activator="{ on }">
+                        <v-btn
+                            icon
+                            text
+                            class="mx-0"
+                            v-on="on"
+                            @click="openEditForm(0)"
+                        >
+                            <v-icon>add</v-icon>
+                        </v-btn>
+                    </template>
+                    <span>Add User Access Permission</span>
+                </v-tooltip>
+            </v-toolbar-items>
+            <!--
+                <template v-slot:extension>
+                    <v-row class="pt-2">
+                        <v-col
+                            cols="12" md="4" sm="12"
+                            class="column"
+                        >
+                            <v-select
+                                v-model="$_field"
+                                label="Products and Memberships"
+                                color="white"
+                                :items="['Plus, Basic, and Lifetime Memberships', 'Non Membership Products', 'All']"
+                                clearable
+                            >
+                            </v-select>
+                        </v-col>
+                    </v-row>
                 </template>
-
-                <span>Add User Access Permission</span>
-            </v-tooltip>
+            -->
         </v-toolbar>
 
         <v-data-table
             :headers="headings"
             :items="userAccessPermissions"
             :items-per-page="5"
+            must-sort
+            sort-desc
+            sort-by="expiration_time"
         >
             <template
                 v-slot:item="{ item }"
@@ -38,7 +61,6 @@
                     <td class="text-center">
                         <v-custom-brand-icon :brand="item.brand"></v-custom-brand-icon>
                     </td>
-
                     <td class="text-left">
                         {{ item.permission_name }}
                     </td>
@@ -48,19 +70,15 @@
                     <td class="text-left">
                         {{ getStartDate(item.start_time) }}
                     </td>
-
                     <td class="text-left">
                         {{ getActiveUntil(item.expiration_time) }}
                     </td>
-
                     <td class="text-left">
                         {{ item.source }}
                     </td>
-
                     <td class="text-left">
                         {{ item.status }}
                     </td>
-
                     <td class="text-center">
                         <v-tooltip top>
                             <template v-slot:activator="{ on }">
@@ -78,7 +96,6 @@
                                     </v-icon>
                                 </v-btn>
                             </template>
-
                             <span>Edit User Access Permission</span>
                         </v-tooltip>
 
@@ -243,6 +260,7 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
+import api from '../../../api/content';
 import JsonApiMethods from '../../../mixins/json-api-methods';
 import brandColors from '../../../api/mixins.js';
 import Utils from '../../../api/utils';
@@ -272,53 +290,64 @@ export default {
             dialog: false,
             datepicker: false,
             pausedUntilDatepicker: false,
+            field: null,
+            selectedFilterValues: [],
+            fieldsFiltersValues: [],
             headings: [
                 {
                     text: 'Brand',
                     align: 'center',
-                    sortable: false,
+                    sortable: true,
                     width: 100,
+                    value: 'brand',
                 },
                 {
                     text: 'Name',
                     align: 'left',
-                    sortable: false,
+                    sortable: true,
+                    value: 'permission_name',
                 },
                 {
                     text: 'Duration',
                     align: 'left',
-                    sortable: false,
+                    sortable: true,
                     width: 150,
+                    value: 'duration',
                 },
                 {
                     text: 'Active From',
                     align: 'left',
-                    sortable: false,
+                    sortable: true,
                     width: 190,
+                    value: 'start_time',
                 },
                 {
                     text: 'Expires On',
                     align: 'left',
-                    sortable: false,
+                    sortable: true,
                     width: 190,
+                    value: 'expiration_time',
                 },
                 {
                     text: 'Source',
                     align: 'left',
-                    sortable: false,
+                    sortable: true,
                     width: 150,
+                    value: 'source',
                 },
                 {
                     text: 'Status',
                     align: 'left',
-                    sortable: false,
+                    sortable: true,
                     width: 100,
+                    value: 'status'
                 },
                 {
                     text: 'Actions',
                     align: 'center',
                     sortable: false,
                     width: 120,
+                    
                 },
             ],
             editingUserAccessPermission: this.getDefaultUserAccessPermission(),
@@ -379,6 +408,16 @@ export default {
                 this.$set(this.editingUserAccessPermission, 'start_date', value);
             },
         },
+
+        $_field: {
+            get() {
+                return this.field;
+            },
+            set(value) {
+                this.field = value;
+                this.selectedFilterValues = this.fieldsFiltersValues[this.field];
+            },
+        },
     },
     mounted() {
         PermissionsApi.getPermissions({
@@ -388,6 +427,8 @@ export default {
                  const options = response.data.data;
                  this.permissionsOptions = Utils.dynamicSort(options, 'name');
             });
+
+        this.getFieldFiltersValues();
     },
     methods: {
         ...mapActions('permissions', [
@@ -416,6 +457,14 @@ export default {
             }
 
             return '-';
+        },
+
+        getFieldFiltersValues() {
+            api
+                .getFieldFiltersValues()
+                .then((response) => {
+                    this.fieldsFiltersValues = response;
+                });
         },
 
         openEditForm(id) {

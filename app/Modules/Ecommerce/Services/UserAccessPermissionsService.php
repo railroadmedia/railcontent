@@ -18,6 +18,8 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
+use Railroad\Ecommerce\Services\UserProductService as EcommerceUserProductService;
+
 
 class UserAccessPermissionsService
 {
@@ -42,7 +44,8 @@ class UserAccessPermissionsService
 
     private function getUserAccessPermissionsQuery(int $userId, array $filterPermissionIds = [])
     {
-        $query = UserAccessPermission::query()->where('user_id', '=', $userId);
+        //force using write db so we have latest data for query
+        $query = UserAccessPermission::on('musora_laravel_mysql::write')->where('user_id', '=', $userId);
         if ($filterPermissionIds) {
             $query = $query->whereIn('permission_id', $filterPermissionIds);
         }
@@ -115,7 +118,7 @@ class UserAccessPermissionsService
         event(new UserAccessPermissionsUpdated($accessPermissions));
     }
 
-    public function syncShopifyOrders(User $user, $orders, $products): void
+    public function syncShopifyOrders(User $user, $orders, $products, $skipRechargeSync = false): void
     {
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
         $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($user->id);
@@ -133,11 +136,11 @@ class UserAccessPermissionsService
 
         $this->ensureUserProductAccess(
             $user,
-            $contentPermissionsLookup
+            $contentPermissionsLookup,
         );
 
         $accessPermissions = $this->getUserAccessPermissions($user->id);
-        event(new UserAccessPermissionsUpdated($accessPermissions));
+        event(new UserAccessPermissionsUpdated($accessPermissions, $skipRechargeSync));
     }
 
     private function syncShopifyOrder(
@@ -172,7 +175,7 @@ class UserAccessPermissionsService
                     $accessPermission = $this->createUserAccessPermission(
                         $user,
                         $contentPermission->id,
-                        Carbon::parse($order->createdAt),
+                        Carbon::parse($order->processedAt),
                         $source,
                         $hash,
                         $product,
@@ -235,7 +238,7 @@ class UserAccessPermissionsService
                     ->toArray();
             return $userAccessPermissions->hasUserOwnedPermissions($permissionIds);
         }
-        $userProductService = app(UserProductService::class);
+        $userProductService = app(EcommerceUserProductService::class);
 
         return $userProductService->userHadOrHasAnyDigitalProductsForBrand(
             new EcommerceUser($user->id, $user->email),
@@ -390,7 +393,11 @@ class UserAccessPermissionsService
         }
         $userAccessPermission->save();
 
-        event(new UserAccessPermissionsUpdated($this->getUserAccessPermissions($userId)));
+        $accessPermissions = $this->getUserAccessPermissions($userId);
+        if (!$accessPermissions->getCollection()->contains('id', $userAccessPermission->id)) {
+            Log::error("Permission does not exist in database.");
+        }
+        event(new UserAccessPermissionsUpdated($accessPermissions));
         return $userAccessPermission;
     }
 

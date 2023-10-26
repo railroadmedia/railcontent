@@ -22,6 +22,9 @@ class SubscriptionSyncListener
     public function handleUserAccessPermissionsUpdated(UserAccessPermissionsUpdated $userAccessPermissionsUpdated): void
     {
         try {
+            if ($userAccessPermissionsUpdated->getSkipRechargeSync()) {
+                return;
+            }
             //TODO: Move to a job
             $this->subscriptionService->syncSubscriptionData($userAccessPermissionsUpdated->getUserAccessPermissions());
         } catch (\Throwable $e) {

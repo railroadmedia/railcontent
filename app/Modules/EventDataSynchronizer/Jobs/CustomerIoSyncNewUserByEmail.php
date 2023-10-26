@@ -2,10 +2,9 @@
 
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Exception;
 use App\Modules\CustomerIO\Services\CustomerIoService;
-use Railroad\Ecommerce\Entities\User as EcommerceUser;
-use Railroad\Ecommerce\Services\UserProductService;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use Modules\UserManagementSystem\Models\User;
 use App\Modules\UserManagementSystem\Services\UserService;
@@ -16,7 +15,7 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
     /**
      * @var User
      */
-    private $user;
+    private User $user;
 
     public function __construct(User $user)
     {
@@ -24,14 +23,17 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
     }
 
     /**
-     * @param  CustomerIoService  $customerIoService
-     * @throws \Throwable
+     * @param CustomerIoService $customerIoService
+     * @param CustomerIoSyncService $customerIoSyncService
+     * @param UserService $userService
+     * @param UserAccessPermissionsService $userAccessPermissionsService
+     * @throws Throwable
      */
     public function handle(
         CustomerIoService $customerIoService,
         CustomerIoSyncService $customerIoSyncService,
         UserService $userService,
-        UserProductService $userProductService
+        UserAccessPermissionsService $userAccessPermissionsService
     ) {
         try {
             $this->user = $userService->GetByIdOrNull($this->user->id);
@@ -44,8 +46,8 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
                 $syncThisWorkspace = false;
 
                 foreach ($brands as $brand) {
-                    if ($userProductService->userHadOrHasAnyDigitalProductsForBrand(
-                            new EcommerceUser($this->user->id, $this->user->email),
+                    if ($userAccessPermissionsService->userHadOrHasAnyDigitalProductsForBrand(
+                            $this->user,
                             $brand
                         ) || $accountNameToSyncAllBrand == $brand) {
                         $syncThisWorkspace = true;
@@ -71,13 +73,13 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
     /**
      * The job failed to process.
      *
-     * @param  Throwable  $exception
+     * @param Throwable $exception
      */
     public function failed(Throwable $exception)
     {
         error_log(
-            'Error on CustomerIoSyncNewUserByEmail job trying to sync user to customer.io. User ID: '.
-            $this->user->id.' - lookupEmail: '.$this->user->email
+            'Error on CustomerIoSyncNewUserByEmail job trying to sync user to customer.io. User ID: ' .
+            $this->user->id . ' - lookupEmail: ' . $this->user->email
         );
 
         error_log($exception);

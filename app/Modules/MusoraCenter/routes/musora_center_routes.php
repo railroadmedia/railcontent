@@ -5,7 +5,7 @@ Route::get(
     '/content-redirect/{id}',
     [
         'as' => 'content.redirect.id',
-        'uses' => 'ContentRedirectController@redirectToId'
+        'uses' => \App\Modules\MusoraCenter\Controllers\ContentRedirectController::class . '@redirectToId'
     ]
 );
 
@@ -19,7 +19,7 @@ Route::group(
             '/',
             [
                 'as' => 'content.index',
-                'uses' => 'MusoraCenterContentController@index'
+                'uses' => \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@index'
             ]
         );
 
@@ -27,7 +27,7 @@ Route::group(
             '/videos',
             [
                 'as' => 'content.videos',
-                'uses' => 'MusoraCenterContentController@videos'
+                'uses' => \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@videos'
             ]
         );
 
@@ -35,7 +35,7 @@ Route::group(
             '/{brand}',
             [
                 'as' => 'content.brand',
-                'uses' => 'MusoraCenterContentController@brand'
+                'uses' => \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@brand'
             ]
         );
 
@@ -43,7 +43,7 @@ Route::group(
             '/{brand}/{type}',
             [
                 'as' => 'content.brand.type',
-                'uses' => 'MusoraCenterContentController@type'
+                'uses' => \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@type'
             ]
         );
 
@@ -51,7 +51,7 @@ Route::group(
             '/{brand}/{type}/store',
             [
                 'as' => 'content.brand.type.store',
-                'uses' => 'MusoraCenterContentController@store'
+                'uses' => \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@store'
             ]
         );
 
@@ -59,7 +59,7 @@ Route::group(
             '/{brand}/{type}/edit/{id}',
             [
                 'as' => 'content.brand.type.edit',
-                'uses' => 'MusoraCenterContentController@edit'
+                'uses' => \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@edit'
             ]
         );
     }
@@ -72,7 +72,6 @@ Route::group(
         'middleware' => ['web_or_api_authenticated', 'musora-center-admin']
     ],
     function () {
-
         Route::get(
             '/',
             [
@@ -89,7 +88,7 @@ Route::get(
     '/invoice/{paymentId}',
     [
         'as' => 'invoice.show',
-        'uses' => 'InvoiceController@show'
+        'uses' => \App\Modules\MusoraCenter\Controllers\InvoiceController::class . '@show'
     ]
 );
 

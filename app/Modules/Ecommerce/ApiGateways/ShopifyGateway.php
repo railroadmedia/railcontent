@@ -35,7 +35,7 @@ class ShopifyGateway
                     nodes {
                         ... on Order {
                             id
-                            createdAt
+                            processedAt
                             cancelledAt
                             brand: metafield(namespace: "$musoraNamespace", key: "$brandFieldKey") {
                                 value
@@ -138,9 +138,9 @@ class ShopifyGateway
         $current = $lastQueryCost->throttleStatus->currentlyAvailable;
         $max = $lastQueryCost->throttleStatus->maximumAvailable;
         $percentageUsed = round(($max - $current) / $max * 100, 1);
-        Log::debug("Shopify Graph QL availability: $current/$max ($percentageUsed%)");
 
         if ($percentageUsed > $rateLimitThresholdPercentage) {
+            Log::debug("Shopify Graph QL availability: $current/$max ($percentageUsed%)");
             Log::warning(
                 sprintf(
                     "About to hit Shopify Graph QL API rate limit. Sleeping for %s %s...",

@@ -6,8 +6,9 @@ use App\Modules\Ecommerce\ApiGateways\RevenueCatApiGateway;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use Carbon\Carbon;
-use Modules\Ecommerce\Services\PaymentService;
+use App\Modules\Ecommerce\Services\PaymentService;
 use Modules\UserManagementSystem\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class RevenueCatService
 {
@@ -169,5 +170,33 @@ class RevenueCatService
         }
 
         return $user;
+    }
+
+
+    /**
+     * @param $userId
+     * @param $productIdentifier
+     * @param $platform
+     * @param string $app
+     * @return string
+     */
+    public function revoke(
+        $userId,
+        $productIdentifier,
+        $platform,
+        $app = 'Musora'
+    ) {
+        Log::debug(
+            'Call revoke API '.
+            $productIdentifier.
+            ' for '.
+            $userId.
+            ' on Revenuecat(user access revoked from Google Play Console)'
+        );
+
+        $results =  $this->revenueCatApiGateway->revoke($userId, $productIdentifier, $platform, $app);
+        Log::debug(print_r($results, true));
+
+        return $results;
     }
 }

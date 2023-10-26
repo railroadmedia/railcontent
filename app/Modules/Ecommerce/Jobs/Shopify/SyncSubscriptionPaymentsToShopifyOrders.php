@@ -587,15 +587,13 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             $purchaserEmail = $purchaser->getEmail();
         }
 
-        // the payment and subscription can each have a note, so build one out of both
+        // the payment and subscription can each have a note, but we don't want to duplicate subscription notes across
+        // all entries, so only include the payment note
         $spNotes = [];
-        if ($subscription->getNote()) {
-            $spNotes[] = "Subscription: " . $subscription->getNote();
-        }
         if ($payment->getNote()) {
             $spNotes[] = "Payment: " . $payment->getNote();
         }
-        $note = implode(PHP_EOL, $spNotes) ?: null;
+        $spNote = implode(PHP_EOL, $spNotes) ?: null;
         /*
          * DEV NOTE: the documentation at https://shopify.dev/docs/api/admin-rest/2023-07/resources/order state that the
          * currency field is read-only, but it actually is still functional for legacy purposes (for now), and is currently
@@ -635,6 +633,16 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                     ]
                 )
         ];
+
+        // record a note that this was migrated from the old system, including the subscription payment ID, and put it first
+        $migrateNote = Str::of(
+            sprintf("Imported from the old ecommerce system: subscription payment ID %s.", $subscriptionPayment->getId())
+        );
+        if (empty($spNote)) {
+            $notesStr = $migrateNote;
+        } else {
+            $notesStr = $migrateNote->newLine()->append($spNote);
+        }
 
         // record a note if there were any refunds
         $refundNotes = null;
@@ -679,15 +687,9 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             $refundNotes = $refundNotes->value();
         }
 
-        if (empty($note)) {
-            $note = $refundNotes;
-        } else {
-            $note = Str::of($note)->newLine()->append($refundNotes)->value();
-        }
+        $notesStr = $notesStr->newLine()->append($refundNotes);
 
-        if ($note) {
-            $orderData["note"] = $note;
-        }
+        $orderData["note"] = $notesStr->value();
 
         if ($subscription->getTax()) {
             $orderData["tax_lines"] = [

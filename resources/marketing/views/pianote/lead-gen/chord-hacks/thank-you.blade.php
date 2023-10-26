@@ -82,7 +82,7 @@
             <h5 class="mb-4">
                 Start playing the piano with a  <br class="inline sm:hidden">
                 free trial to Pianote.</h5>
-            <a class="join pianote smaller anchor-slide" href="#customize-anchor">FREE FOR 30 DAYS <i class="fas fa-arrow-right"></i></a>
+            <a class="join pianote smaller anchor-slide" href="#customize-anchor">Get Started <i class="fas fa-arrow-right"></i></a>
         </div>
     </section>
 
@@ -228,17 +228,38 @@
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
     ])
-    <div id="customize-anchor" class="anchor anchor-slide"></div>
-    @include('musora.sales.components.card-selection-section', [
-        "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo-light.svg",
-        "logo" => "https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png",
-        "songs" => "1000+ popular songs.",
-        "firstPoint" => "Unlimited piano lessons.",
-        "thirdPoint" => "Direct access to real teachers.",
-        "fifthPoint" => "Lesson access for singing, guitar, and drums.",
-        "plusAnnualLink" => "/chord-hacks/ty-annual",
-        "plusMonthlyLink" => "/chord-hacks/ty-monthly",
-    ])
+    <div class="unstick-trigger block"></div>
+    <div id="customize-anchor" class="anchor"></div>
+    <div id="order" class="anchor"></div>
+
+
+    <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
+        style="background: linear-gradient(to right, #08203a, #0c1524);">
+        <div class="container mx-auto max-w-6xl relative z-50">
+            <div class="w-full">
+                <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
+                    <div class=" inline-block relative w-full group" style="padding-bottom: 33%;perspective: 1000px;">
+                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
+                            <div class=" {{--border-2 border-promo--}} front absolute z-20  w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
+                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/cas-order-promo.png);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <h2 class="leading-tight mb-2"><strong>Try Pianote for 7 days & get<br class="hidden sm:inline"> a FREE Chords & Scales book.</strong></h2>
+
+                <p class="leading-tight mt-4 sm:mt-5 mb-2"><span class="text-musora">Click below to start your free 7-day trial. Your annual membership will<br class="hidden sm:inline"> continue on {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} (after your free trial).</span></p>
+
+                <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Free for 7 days</strong></h3>
+                <p class="leading-tight opacity-70 text-sm"><em>Then billed at $240 per year. Save 33%.</em></p>
+                <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL:1,piano-chords-and-scales-guide:1&promo-code=annual-trial&redirect=/order&locked=true">CLICK HERE TO GET STARTED</a>
+            </div>
+            <a class="inline-block text-pianote mt-2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true"><p class="leading-tight"><strong><u>Or start a Monthly Plan for<br class="sm:hidden"> $30/month (no bonuses)</u></strong></p></a>
+            <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
+        </div>
+    </section>
+
     @include('musora.sales.components.trial-explanation', [
         'instrument' => 'piano',
     ])
