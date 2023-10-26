@@ -75,6 +75,11 @@ class UserProductToUserContentPermissionListener
             'permission_id'
         );
 
+
+        $toDeleteIds = $existingUserPermissions->where(function ($item, $key) use ($permissionIds) {
+            return !in_array($key, $permissionIds);
+        })->pluck('id')->toArray();
+
         foreach ($permissionIds as $permissionId) {
             list($startDate, $expirationDate) = $userAccessPermissions->getActiveDates($permissionId);
             $userPermission = $existingUserPermissions[$permissionId] ?? null;
@@ -91,6 +96,8 @@ class UserProductToUserContentPermissionListener
                 $userPermission->save();
             }
         }
+
+        UserPermission::query()->whereIn('id', $toDeleteIds)->delete();
     }
 
     /**
