@@ -21,27 +21,37 @@ export const useCollectionStore = defineStore({
         }
     },
     actions:{
-        async applyFilter(category, item){
-            if(this.filter.fields[category]){
-                const index = this.filter.fields[category].findIndex(p => p.key === item.key);
-
-                if (index === -1){
-                    this.filter.fields[category].push(item);
-                } else {
-                    this.filter.fields[category].splice(index, 1);
-                }
+        async applyFilter(category, item, clear = false){
+            if(clear){
+                this.filter.fields = {};
             } else {
-                this.filter.fields[category] = [item];
+                if(this.filter.fields[category]){
+                    const index = this.filter.fields[category].findIndex(p => p.key === item.key);
+
+                    if (index === -1){
+                        this.filter.fields[category].push(item);
+                    } else {
+                        this.filter.fields[category].splice(index, 1);
+                        
+                        if(this.filter.fields[category].length === 0){
+                            delete this.filter.fields[category];
+                        }
+                    }
+                } else {
+                    this.filter.fields[category] = [item];
+                }
             }
 
-            this.tabData[this.filter.activeTab].currentPage = 1;
+            //set active tab's filter applied to true and all others to false
+            this.tabData[this.filter.activeTab].filterApplied = true;
+            Object.keys(this.tabData).length > 0 && Object.keys(this.tabData).forEach((tab) => {
+                this.tabData[tab].filterApplied = false;
+            })
+
             this.getData();
         },
         async clearFilter(){
-            this.filter.fields = {};
-
-            this.tabData[this.filter.activeTab].currentPage = 1;
-            this.getData();
+            this.applyFilter(null, null, true);
         },
         async fetchData(){
             const userStore = useUserStore();
@@ -74,8 +84,11 @@ export const useCollectionStore = defineStore({
             this.loading = displayLoading;
             this.fetching = true;
 
+            if(replace) this.tabData[this.filter.activeTab].currentPage = 1;
+
             const response = await this.fetchData();
             this.setData(response, replace);
+
             this.fetching = false;
         },
         getIncludedFields(){
@@ -156,13 +169,12 @@ export const useCollectionStore = defineStore({
                 data: [...this.data],
             }
 
-            if(this.tabData[tab].data){
-                this.filter.activeTab = tab;
+            this.filter.activeTab = tab;
+            if(this.tabData[tab].filterApplied){
                 this.data = ([...this.tabData[this.filter.activeTab].data]);
-
             } else {
-                this.filter.activeTab = tab;
                 this.getData();
+                this.tabData[tab].filterApplied = true;
             }
         },
     },
