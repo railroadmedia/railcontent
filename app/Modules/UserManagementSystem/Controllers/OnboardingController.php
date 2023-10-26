@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Controllers;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
+use App\Modules\EventTracking\Services\CustomerIoService;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Avo;
 use Illuminate\Http\Request;
@@ -20,10 +21,12 @@ class OnboardingController extends Controller
 {
 
     private OnboardingService $onboardingService;
+    private CustomerIoService $customerIoService;
 
-    public function __construct(OnboardingService $onboardingService)
+    public function __construct(OnboardingService $onboardingService, CustomerIoService $customerIoService)
     {
         $this->onboardingService = $onboardingService;
+        $this->customerIoService = $customerIoService;
         $this->middleware('deprecated:2023-10-16');
     }
 
@@ -163,6 +166,7 @@ class OnboardingController extends Controller
     /**
      *
      * @param Request $request
+     * @throws \Throwable
      */
     public function goals(Request $request)
     {
@@ -182,6 +186,8 @@ class OnboardingController extends Controller
         $onboardingAnswerHistory->brand = $request->brand;
         $onboardingAnswerHistory->user_id = user()->id;
         $onboardingAnswerHistory->save();
+
+        $this->customerIoService->updateUserAttributes(user(), ['has_completed_onboarding' => true]);
 
         Avo::onboarding_goals_step_completed(
             AvoHelper::defaultEventProperties([

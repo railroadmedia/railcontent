@@ -10,7 +10,7 @@ class RudderDestination
 {
     private bool $enabled = false;
 
-    function make(): void
+    public function make(): void
     {
         $key = env('RUDDERSTACK_WRITE_KEY');
         if ($key) {
@@ -34,12 +34,16 @@ class RudderDestination
         }
     }
 
-    function log_event($user_id, $name, $properties): void
+    /**
+     * @throws RudderException
+     */
+    public function log_event($user_id, $name, $properties): void
     {
         if (!$this->enabled) {
             Log::error("Rudderstack disabled, event $name not logged.");
             return;
         }
+
         Rudder::track(array(
             "userId" => $user_id,
             "event" => $name,
@@ -50,7 +54,13 @@ class RudderDestination
     /**
      * @throws RudderException
      */
-    function set_user_properties($user_id, $array){
+    public function set_user_properties($user_id, $array): void
+    {
+        if (!$this->enabled) {
+            Log::error("Rudderstack disabled, user properties not set.");
+            return;
+        }
+
         Rudder::identify([
             'userId' => $user_id,
             'traits' => $array

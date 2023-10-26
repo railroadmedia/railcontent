@@ -3,6 +3,7 @@
 namespace App\Modules\MusoraApi\Controllers\V1;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
+use App\Modules\EventTracking\Services\CustomerIoService;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Avo;
 use Exception;
@@ -14,18 +15,20 @@ use Illuminate\Routing\ResponseFactory;
 use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Models\OnboardingAnswerHistory;
 use Modules\UserManagementSystem\Models\OnboardingExperience;
-use Modules\UserManagementSystem\Models\OnboardingGoals;
 use Modules\UserManagementSystem\Models\OnboardingGear;
-use Modules\UserManagementSystem\Models\OnboardingTopic;
 use Modules\UserManagementSystem\Models\OnboardingGenre;
+use Modules\UserManagementSystem\Models\OnboardingGoals;
+use Modules\UserManagementSystem\Models\OnboardingTopic;
 
 class OnboardingController extends Controller
 {
     private OnboardingService $onboardingService;
+    private CustomerIoService $customerIoService;
 
-    public function __construct(OnboardingService $onboardingService)
+    public function __construct(OnboardingService $onboardingService, CustomerIoService $customerIoService)
     {
         $this->onboardingService = $onboardingService;
+        $this->customerIoService = $customerIoService;
     }
 
     /**
@@ -184,6 +187,7 @@ class OnboardingController extends Controller
      *
      * @param Request $request
      * @return Response|Application|ResponseFactory
+     * @throws \Throwable
      */
     public function goals(Request $request): Response|Application|ResponseFactory
     {
@@ -204,6 +208,8 @@ class OnboardingController extends Controller
         $onboardingAnswerHistory->brand = $brand;
         $onboardingAnswerHistory->user_id = user()->id;
         $onboardingAnswerHistory->save();
+
+        $this->customerIoService->updateUserAttributes(user(), ['has_completed_onboarding' => true]);
 
         Avo::onboarding_goals_step_completed(
             AvoHelper::defaultEventProperties([
@@ -271,7 +277,7 @@ class OnboardingController extends Controller
 
         Avo::onboarding_about_step_completed(
             AvoHelper::defaultEventProperties([
-                'is_skipped' => $request->get('skipped'),
+                'is_skipped' => $request->get('skipped')
             ])
         );
 
@@ -297,7 +303,7 @@ class OnboardingController extends Controller
         Avo::onboarding_skipped(
             AvoHelper::defaultEventProperties([
                 'step_skipped' => strtolower($skippedStep),
-                'brand' => $brand,
+                'brand' => $brand
             ])
         );
 
@@ -322,7 +328,7 @@ class OnboardingController extends Controller
         $this->onboardingService->saveInstrument($instrument);
         Avo::onboarding_instrument_step_completed(
             AvoHelper::defaultEventProperties([
-                'brand' => $this->onboardingService->getBrandFromInstrument($instrument),
+                'brand' => $this->onboardingService->getBrandFromInstrument($instrument)
             ])
         );
 

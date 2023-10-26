@@ -2,6 +2,8 @@
 
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
+use App\Modules\EventTracking\Avo\AvoHelper;
+use Avo;
 use Exception;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
@@ -24,7 +26,7 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
     }
 
     /**
-     * @param  CustomerIoService  $customerIoService
+     * @param CustomerIoService $customerIoService
      * @throws \Throwable
      */
     public function handle(
@@ -63,6 +65,11 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
                     );
                 }
             }
+
+            /*
+             * @TODO EVENT TRACKING: move this to the new event tracking when migration is completed
+             */
+            Avo::account_created(AvoHelper::defaultEventProperties());
         } catch (Exception $exception) {
             $this->failed($exception);
         }
@@ -71,13 +78,13 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
     /**
      * The job failed to process.
      *
-     * @param  Throwable  $exception
+     * @param Throwable $exception
      */
     public function failed(Throwable $exception)
     {
         error_log(
-            'Error on CustomerIoSyncNewUserByEmail job trying to sync user to customer.io. User ID: '.
-            $this->user->id.' - lookupEmail: '.$this->user->email
+            'Error on CustomerIoSyncNewUserByEmail job trying to sync user to customer.io. User ID: ' .
+            $this->user->id . ' - lookupEmail: ' . $this->user->email
         );
 
         error_log($exception);
