@@ -103,7 +103,6 @@
 
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
-        {{--  LESSONS  --}}
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container">
@@ -160,16 +159,11 @@
             </div>
         </section>
 
-        {{--   ACCESSORIES     --}}
         <div id="accessories" class="anchor"></div>
         <section class="grid-view category-section" data-category="accessories" x-show="filter === 'accessories' || filter === 'all'">
-            <ul class="container mx-auto fixed-cards">
-                <li>
-                    <h1 class="px-2 md:px-3">
-                        <div class="heading-icon"><i class="fas fa-suitcase"></i></div>
-                        Accessories
-                    </h1>
-                </li>
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Accessories</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
                 @foreach($accessories as $accessory)
                     @include('musora.shop._shop-card-alt', [
                         "sku" => $accessory->sku,
@@ -186,50 +180,15 @@
                         "size_case_sensitive" => $accessory->size_case_sensitive,
                     ])
                 @endforeach
-            </ul>
+                </div>
+            </div>
         </section>
 
-        {{--   HATS     --}}
-{{--        <div id="hats" class="anchor"></div>--}}
-{{--        <section class="grid-view category-section" data-category="hats" x-show="filter === 'clothing' || filter === 'all'">--}}
-{{--            <ul class="container mx-auto fixed-cards">--}}
-{{--                <li>--}}
-{{--                    <h1 class="px-2 md:px-3">--}}
-{{--                        <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hat.svg" alt="hat icon"></div>--}}
-{{--                        Hats--}}
-{{--                    </h1>--}}
-{{--                </li>--}}
-
-{{--                @foreach($hats as $hat)--}}
-{{--                    @include('musora.shop._shop-card-alt', [--}}
-{{--                         "sku" => $hat->sku,--}}
-{{--                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),--}}
-{{--                         "badgeText" => $hat->badge_text,--}}
-{{--                         "thumbnail" => $hat->thumbnail,--}}
-{{--                         "title" => $hat->name,--}}
-{{--                         "cardDescription" => $hat->short_desc,--}}
-{{--                         "fullPrice" => $hat->price,--}}
-{{--                         "price" => $hat->discounted_price,--}}
-{{--                         "sizes" => $hat->sizes,--}}
-{{--                         "soldOut" => isset($products[$hat->sku]) ? $products[$hat->sku]->getStockAvailability() === 0 : $hat->sold_out,--}}
-{{--                         "category" => strtolower($hat->productType->name),--}}
-{{--                         "size_case_sensitive" => $hat->size_case_sensitive,--}}
-{{--                    ])--}}
-{{--                @endforeach--}}
-
-{{--            </ul>--}}
-{{--        </section>--}}
-
-        {{--   SHIRTS     --}}
         <div id="shirts" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
-            <ul class="container mx-auto fixed-cards">
-                <li>
-                    <h1 class="px-2 md:px-3">
-                        <div class="heading-icon"><i class="fas fa-tshirt"></i></div>
-                        Shirts
-                    </h1>
-                </li>
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Shirts</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
 
                 @foreach($shirts as $shirt)
                     @include('musora.shop._shop-card-alt', [
@@ -261,19 +220,17 @@
                      "externalURL" => true,
                      'soldOut' => false,
                 ])
-            </ul>
+                </div>
+            </div>
         </section>
 
         {{--   HOODIES     --}}
         <div id="hoodies" class="anchor"></div>
         <section class="grid-view category-section" data-category="hoodies" x-show="filter === 'clothing' || filter === 'all'">
-            <ul class="container mx-auto fixed-cards">
-                <li>
-                    <h1 class="px-2 md:px-3">
-                        <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hoodie.svg" alt="hoodie icon"></div>
-                        Hoodies
-                    </h1>
-                </li>
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Hoodies</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+
                 @foreach($hoodies as $hoodie)
                     @include('musora.shop._shop-card-alt', [
                          "sku" => $hoodie->sku,
@@ -290,7 +247,8 @@
                          "size_case_sensitive" => $hoodie->size_case_sensitive,
                     ])
                 @endforeach
-            </ul>
+                </div>
+            </div>
         </section>
     </div>
 @endsection

@@ -13,7 +13,7 @@
 
         @if(!empty($sku) && (empty($sizes) || count($sizes) === 0))
         <p
-                class="online-atc vue-add-to-cart add-to-cart-button text-black bg-white rounded-full absolute top-0 right-0 m-2 z-20 px-1.5 py-1 text-sm"
+                class="online-atc vue-add-to-cart add-to-cart-button text-black bg-white rounded-full absolute top-0 right-0 m-2 z-20 px-1.5 py-1 text-sm shadow-md"
                 @if($theme !== 'musora')href="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1" @else @click="orderModal = true" @endif
                 data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1" value="?products[{{ $sku }}]=1"
                 data-product-json='{ "{{$sku}}": 1 }'
