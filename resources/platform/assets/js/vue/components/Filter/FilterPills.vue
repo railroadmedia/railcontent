@@ -39,7 +39,6 @@
     }
 
     const showPills = computed(() => {
-        console.log(Object.keys(props.selectedFilters).length)
         return Object.keys(props.selectedFilters).length !== 0;
     })
 </script>
