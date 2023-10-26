@@ -1,6 +1,6 @@
 <template>
     <div>
-        <filter-controls
+        <FilterControls
             :hide-filter="hideFilter"
             :search-term="searchTerm"
             :is-collapsed="isCollapsed"
@@ -14,23 +14,26 @@
             @on-filter-tab-click="tab => emit('onTabChange', tab)"
         >
             <slot name="viewToggleButton"></slot>
-        </filter-controls>
+        </FilterControls>
+        <div>
+            <FilterPills :selected-filters="selectedFilters" @cancel-filter="(category, item) => emit('onFilterChange', category, item)" @clear-filter="emit('OnClearFilter')" />
+        </div>
         <template v-if="!hideFilter">
-            <filter-options
+            <FilterOptions
                 v-if="!isCollapsed && isMobile"
                 :multi-select-columns="state.multiSelectColumns"
                 :single-select-columns="singleSelectColumns"
                 :selected-filters="selectedFilters"
                 @on-filter-click-handle="(category, item) => emit('onFilterChange', category, item)"
             />
-            <filter-options-modal
+            <FilterOptionsModal
                 v-if="!isCollapsed && !isMobile"
                 :is-collapsed-mobile="isCollapsed"
                 :selected-filters="selectedFilters"
                 :multi-select-columns="state.multiSelectColumns"
                 :single-select-columns="singleSelectColumns"
                 @onClose="handleToggleCollapse"
-                @handle-filter-click="(category, item) => emit('onFilterChange', category, item)"
+                @handle-filter-click="(category, key) => emit('onFilterChange', category, key)"
             />
         </template>
     </div>
@@ -42,6 +45,7 @@
     import FilterOptions from './FilterOptions.vue';
     import FilterOptionsModal from './FilterOptionsModal.vue';
     import FilterControls from './FilterControls.vue';
+    import FilterPills from './FilterPills.vue';
 
     const props = defineProps({
         activeTab: {
@@ -61,8 +65,8 @@
             default: () => ({}),
         },
         selectedFilters: {
-            type: Array,
-            default: () => [],
+            type: Object,
+            default: () => ({}),
         },
         selectedSort: {
             type: String,

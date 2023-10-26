@@ -1,10 +1,10 @@
 <template>
-    <ul v-if="Object.keys(activeFilters).length" class="tw-flex tw-flex-wrap tw-gap-4 tw-text-sm tw-mb-5 tw-px-4 md:tw-px-0">
-        <template v-for="key in Object.keys(activeFilters)">
-            <li class="tw-flex tw-items-center tw-p-2 tw-rounded tw-border dark:tw-border-[#223F57] tw-bg-[#F2F2F2] dark:tw-bg-[#002039] dark:tw-text-white tw-font-semibold" v-for="filter in activeFilters[key]">
-                {{ filter }}
+    <ul v-if="Object.keys(selectedFilters).length" class="tw-flex tw-flex-wrap tw-gap-4 tw-text-sm tw-mb-5 tw-px-4 md:tw-px-0">
+        <template v-for="category in Object.keys(selectedFilters)">
+            <li class="tw-flex tw-items-center tw-p-2 tw-rounded tw-border dark:tw-border-[#223F57] tw-bg-[#F2F2F2] dark:tw-bg-[#002039] dark:tw-text-white tw-font-semibold" v-for="item in selectedFilters[category]">
+                {{ item.value }}
                 <button class="tw-text-[#000C17] dark:tw-text-white">
-                    <XIcon class="tw-h-[20px] tw-w-[20px] tw-ml-1" @click="handleCancel(key, filter)" />
+                    <XIcon class="tw-h-[20px] tw-w-[20px] tw-ml-1" @click="handleCancel(category, item)" />
                 </button>
             </li>
         </template>
@@ -21,7 +21,7 @@
     import { XIcon } from "@heroicons/vue/solid";
 
     const props = defineProps({
-        activeFilters: {
+        selectedFilters: {
             type: Object,
             default: {},
         },
