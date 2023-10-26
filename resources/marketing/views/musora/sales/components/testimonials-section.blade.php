@@ -78,7 +78,7 @@
                                     <div class="relative mb-2 w-full overflow-hidden rounded-xl cursor-pointer" style="padding-bottom: 66%;"
                                         x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
                                     >
-                                        <div class="absolute inset-0 bg-cover bg-top" style="background-image:url(https://www.musora.com/musora-cdn/image/width=500,quality=95/{{$testimonial['image']}});"></div>
+                                        <div class="absolute inset-0 bg-cover bg-top" style="background-image:url({{$testimonial['image']}});"></div>
                                         <div class="absolute inset-0 flex justify-center align-center">
                                             <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if(!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
                                         </div>
@@ -124,7 +124,7 @@
                         <div class="relative mb-2 w-full overflow-hidden rounded-xl cursor-pointer" style="padding-bottom: 66%;"
                             x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
                         >
-                            <div class="absolute inset-0 bg-cover bg-top" style="background-image:url(https://www.musora.com/musora-cdn/image/width=500,quality=95/{{$testimonial['image']}});"></div>
+                            <div class="absolute inset-0 bg-cover bg-top" style="background-image:url({{$testimonial['image']}});"></div>
                             <div class="absolute inset-0 flex justify-center align-center">
                                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if(!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
                             </div>

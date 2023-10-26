@@ -237,62 +237,62 @@
 
         @php
             $testimonials = [
-                [
-                'title' => "I’m lightyears ahead of where I was.",
-                'description' => "I’ve come so far in such a short period of time. I’ve gone from not even knowing what palm muting was to noodling with the E & A string pentatonic shapes and creating melodies with it – and using it to work on my vibrato, slides, and bends. And I’ve gained priceless info like knowing where to place chords, start power chords, and scale shapes.<br><br>Having the breakthroughs I’ve had so far has brought me confidence and kept me sane while the world is seemingly not – and made me believe there is still a bright future ahead. As I progress, I feel supported towards achieving my goals of jamming with others and using my love for writing to start telling stories through music. All in due time.<br><br>I’m lightyears ahead of where I was at. And no matter where I go, or however tough things get, I’ll always have one of my guitars in the passenger seat and we’ll always be there for each other. The life long journey has begun!",
-                'name' => 'Ërlik Sörensen',
-                'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2022/testimonials/erliksorensen.jpg',
-                'location' => 'British Columbia, Canada',
-                ],
-                [
-                'title' => "The frustration is over.",
-                'description' => "I’m already playing things that were a nightmare to me before. Strumming patterns, smoothly changing chords, and improvisation of different scales. I’m even playing songs using my own chord progressions and pentatonic scales. I’m enjoying listening to myself play and proud of my progress!<br><br>The frustration is over. Guitareo has what a guitarist wants and it’s been a fun and easy learning experience.",
-                'name' => 'Vetriselvi Senguttuvan',
-                'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2022/testimonials/vetriselvisenguttuvan.jpg',
-                'location' => 'India',
-                ],
-                [
-                'title' => "I’ve never felt so much JOY playing the guitar.",
-                'description' => "When I finished the first lesson, I had a feeling of joy that I’ve never had before when playing guitar. I'm experimenting a lot more and improving my technique. The goal-based learning makes each set of lessons more entertaining and a feeling of accomplishment when completed.",
-                'name' => 'Jamie K',
-                'image' => 'https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/testimonials/jamie-nova-scotia.jpg',
-                'location' => 'Nova Scotia, Canada',
-                ],
-                [
-                'title' => "I finally feel like I’m able to learn the guitar.",
-                'description' => "Guitareo focuses on smaller tasks and achievements along the way to make you feel like you’re improving. In level four of GuitarQuest, I played the G chord for the first time without any pain in my hands. I finally feel like I’ll really be able to learn the guitar and succeed! This course is SO much fun and keeps me motivated!",
-                'name' => 'Patrizia K',
-                'image' => 'https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/testimonials/patrizia-germany.jpg',
-                'location' => 'Germany',
-                ],
-                [
-                'title' => "I like the sincerity, knowledge, and positivity.",
-                'description' => "The internet is a nice resource for ideas, methods, tips, and tricks, but there is no linear method. I have to create one on my own, and I don’t want to teach guitar. I want to play.<br><br>So I joined Guitareo because I like the sincerity, knowledge, and positivity. Nate introduced me to the Million Dollar Progression. And Ayla showed me how to solo using backing tracks. They got me started on my journey and gave me confidence. Now I’m excited to practice. My Fender Hellcat seems to fit into my hands and against my body like it didn’t before. And I can actually say “I’m a guitarist!” Well, how about that!",
-                'name' => 'Jim McKenna',
-                'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2022/testimonials/jimmckenna.jpg',
-                'location' => 'Illinois, USA',
-                ],
-                [
-                'title' => "I’ve started making my own melodies.",
-                'description' => "Guitareo has been fun and motivated me to try more. I like how we start making melodies quickly along with helpful background information on chords and notes. I love seeing other students post their melodies — it’s so much fun to listen to others!",
-                'name' => 'Jan M',
-                'image' => 'https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/testimonials/jan-berlin-germany.jpg',
-                'location' => 'Germany',
-                ],
-                [
-                'title' => "I feel happy and more confident while playing. ",
-                'description' => "I had classical guitar lessons 15 years ago and since then I’ve wanted to play acoustic and electric guitar. I’ve been trying to figure them out on my own and it was frustrating – trying to play pentatonics, or mute strings. And then I found out about Guitareo!<br><br>I feel happy and more confident while playing, even though it’s pretty early. I played my first song with mini barre chords and actually enjoyed it. I’ve never done that before! And I even sent a video playing a punk play-along song to a friend (and I normally never play guitar in front of friends). I would definitely recommend Guitareo. You have done really good work and I personally thank you for that!",
-                'name' => 'Athina Katri',
-                'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2022/testimonials/athinakatri.jpg',
-                'location' => 'Greece',
-                ],
-                [
-                'title' => "I’m holding my own while still having fun!",
-                'description' => "I was skeptical at first. I’ve seen online lesson sites that are really bad, so I started with a monthly subscription. After going through the beginner lessons, I saw that Guitareo was totally different from other sites. I’ve had a guitar for years and struggled to play anything more than G, C, and D – and I always had trouble learning new chords and progressions. Guitareo’s lessons helped me advance and have more fun playing the guitar.<br><br>I have broken through doors that were closed to me several times. Things that I’ve struggled with for years have been explained in ways that make sense – and the Guitareo instructors have helped me become more comfortable. Now I’m able to sit in with friends that are way better players than me and hold my own while still having fun!",
-                'name' => 'WJ Williams',
-                'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2022/testimonials/williamwilliams.jpg',
-                'location' => 'Georgia, USA',
-                ],
+               [
+            'title' => "I’m lightyears ahead of where I was.",
+            'description' => "I’ve come so far in such a short period of time. I’ve gone from not even knowing what palm muting was to noodling with the E & A string pentatonic shapes and creating melodies with it – and using it to work on my vibrato, slides, and bends. And I’ve gained priceless info like knowing where to place chords, start power chords, and scale shapes.<br><br>Having the breakthroughs I’ve had so far has brought me confidence and kept me sane while the world is seemingly not – and made me believe there is still a bright future ahead. As I progress, I feel supported towards achieving my goals of jamming with others and using my love for writing to start telling stories through music. All in due time.<br><br>I’m lightyears ahead of where I was at. And no matter where I go, or however tough things get, I’ll always have one of my guitars in the passenger seat and we’ll always be there for each other. The life long journey has begun!",
+            'name' => 'Ërlik Sörensen',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/marketing/guitareo/membership/homepage/2023/testimonials/erliksorensen.jpg',
+            'location' => 'British Columbia, Canada',
+            ],
+            [
+            'title' => "The frustration is over.",
+            'description' => "I’m already playing things that were a nightmare to me before. Strumming patterns, smoothly changing chords, and improvisation of different scales. I’m even playing songs using my own chord progressions and pentatonic scales. I’m enjoying listening to myself play and proud of my progress!<br><br>The frustration is over. Guitareo has what a guitarist wants and it’s been a fun and easy learning experience.",
+            'name' => 'Vetriselvi Senguttuvan',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/marketing/guitareo/membership/homepage/2023/testimonials/vetriselvisenguttuvan.jpg',
+            'location' => 'India',
+            ],
+            [
+            'title' => "I’ve never felt so much JOY playing the guitar.",
+            'description' => "When I finished the first lesson, I had a feeling of joy that I’ve never had before when playing guitar. I'm experimenting a lot more and improving my technique. The goal-based learning makes each set of lessons more entertaining and a feeling of accomplishment when completed.",
+            'name' => 'Jamie K',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/marketing/guitareo/membership/homepage/2023/testimonials/jamie-nova-scotia.jpg',
+            'location' => 'Nova Scotia, Canada',
+            ],
+            [
+            'title' => "I finally feel like I’m able to learn the guitar.",
+            'description' => "Guitareo focuses on smaller tasks and achievements along the way to make you feel like you’re improving. In level four of GuitarQuest, I played the G chord for the first time without any pain in my hands. I finally feel like I’ll really be able to learn the guitar and succeed! This course is SO much fun and keeps me motivated!",
+            'name' => 'Patrizia K',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/marketing/guitareo/membership/homepage/2023/testimonials/patrizia-germany.jpg',
+            'location' => 'Germany',
+            ],
+            [
+            'title' => "I like the sincerity, knowledge, and positivity.",
+            'description' => "The internet is a nice resource for ideas, methods, tips, and tricks, but there is no linear method. I have to create one on my own, and I don’t want to teach guitar. I want to play.<br><br>So I joined Guitareo because I like the sincerity, knowledge, and positivity. Nate introduced me to the Million Dollar Progression. And Ayla showed me how to solo using backing tracks. They got me started on my journey and gave me confidence. Now I’m excited to practice. My Fender Hellcat seems to fit into my hands and against my body like it didn’t before. And I can actually say “I’m a guitarist!” Well, how about that!",
+            'name' => 'Jim McKenna',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/marketing/guitareo/membership/homepage/2023/testimonials/jimmckenna.jpg',
+            'location' => 'Illinois, USA',
+            ],
+            [
+            'title' => "I’ve started making my own melodies.",
+            'description' => "Guitareo has been fun and motivated me to try more. I like how we start making melodies quickly along with helpful background information on chords and notes. I love seeing other students post their melodies — it’s so much fun to listen to others!",
+            'name' => 'Jan M',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/marketing/guitareo/membership/homepage/2023/testimonials/jan-berlin-germany.jpg',
+            'location' => 'Germany',
+            ],
+            [
+            'title' => "I feel happy and more confident while playing. ",
+            'description' => "I had classical guitar lessons 15 years ago and since then I’ve wanted to play acoustic and electric guitar. I’ve been trying to figure them out on my own and it was frustrating – trying to play pentatonics, or mute strings. And then I found out about Guitareo!<br><br>I feel happy and more confident while playing, even though it’s pretty early. I played my first song with mini barre chords and actually enjoyed it. I’ve never done that before! And I even sent a video playing a punk play-along song to a friend (and I normally never play guitar in front of friends). I would definitely recommend Guitareo. You have done really good work and I personally thank you for that!",
+            'name' => 'Athina Katri',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/marketing/guitareo/membership/homepage/2023/testimonials/athinakatri.jpg',
+            'location' => 'Greece',
+            ],
+            [
+            'title' => "I’m holding my own while still having fun!",
+            'description' => "I was skeptical at first. I’ve seen online lesson sites that are really bad, so I started with a monthly subscription. After going through the beginner lessons, I saw that Guitareo was totally different from other sites. I’ve had a guitar for years and struggled to play anything more than G, C, and D – and I always had trouble learning new chords and progressions. Guitareo’s lessons helped me advance and have more fun playing the guitar.<br><br>I have broken through doors that were closed to me several times. Things that I’ve struggled with for years have been explained in ways that make sense – and the Guitareo instructors have helped me become more comfortable. Now I’m able to sit in with friends that are way better players than me and hold my own while still having fun!",
+            'name' => 'WJ Williams',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/marketing/guitareo/membership/homepage/2023/testimonials/williamwilliams.jpg',
+            'location' => 'Georgia, USA',
+            ],
             ]
         @endphp
         @include('musora.sales.components.testimonials-section', [

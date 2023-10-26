@@ -1,7 +1,7 @@
 <nav class="top-bar">
     <div class="logo">
         <a href="{{ get_legacy_brand_base_url('pianote') }}">
-            <img src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png" alt="Pianote">
+            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png" alt="Pianote">
         </a>
     </div>
 
