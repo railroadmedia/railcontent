@@ -607,7 +607,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             "currency" => $currency,
             "customer" => ["id" => $purchaserId],
             "email" => $this->getEmailForShopify($purchaserEmail),
-            "processed_at" => (new Carbon($subscriptionPayment->getCreatedAt()))->toIso8601String(),
+            "processed_at" => (new Carbon($payment->getCreatedAt()))->toIso8601String(),
             // "tags" => "",
             // refer to https://shopify.dev/docs/apps/custom-data/metafields/types
             // we can use meta fields for stuff like our subscription payment id, etc
