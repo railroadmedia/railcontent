@@ -21,16 +21,17 @@ export const useCollectionStore = defineStore({
         }
     },
     actions: {
-        applyFilter (category, item) {
-            this.updateFilterFields(category, item);
+        applyFilter (category, item, clear= false) {
+            if (clear) this.resetFilterFields();
+            else this.updateFilterFields(category, item);
+
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.getData();
         },
 
         clearFilter () {
-            this.resetFilterFields();
-            this.setAllTabsToFilterNotApplied();
+            this.applyFilter(null, null, true);
             this.getData();
         },
 
