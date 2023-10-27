@@ -32,7 +32,7 @@ class MigrateRechargeSubscriptions extends Command
         }
 
         if (!$storageResult) {
-            throw new Exception(sprintf("%s: Failed to write .jsonl file", $this->getClassName()));
+            throw new Exception(sprintf("%s: Failed to write %s", $this->getClassName(), $filename));
         }
     }
 
