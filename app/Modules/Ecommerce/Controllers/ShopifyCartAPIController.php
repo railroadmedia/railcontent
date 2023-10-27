@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Signifly\Shopify\Shopify;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ShopifyCartAPIController extends Controller
 {
@@ -103,8 +104,70 @@ class ShopifyCartAPIController extends Controller
 
     public function updateCartQuantity(Request $request)
     {
-        // todo
-        return response("Yes!");
+        $productSkuToUpdate = $request->segment(4);
+        $newQuantity = $request->segment(5);
+
+        $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
+
+        if (empty($existingShopifyCartId)) {
+            throw new NotFoundHttpException();
+        }
+
+        $shopifyCartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
+
+        $productSKUVariantId =
+            $this->shopifyStoreFrontAPIService->getProductVariantIdsFromSKUs([$productSkuToUpdate]
+            )[$productSkuToUpdate] ?? null;
+
+        if (empty($shopifyCartData['lines']['edges']) || empty($productSKUVariantId)) {
+            throw new NotFoundHttpException();
+        }
+
+        $merchandiseLineItemId = null;
+
+        if (!empty($shopifyCartData['lines']['edges'])) {
+            foreach ($shopifyCartData['lines']['edges'] as $edge) {
+                $shopifyLineItemData = $edge['node'];
+
+                if (empty($shopifyLineItemData)) {
+                    continue;
+                }
+
+                if ($shopifyLineItemData['merchandise']['id'] == $productSKUVariantId) {
+                    $merchandiseLineItemId = $shopifyLineItemData['id'];
+                }
+            }
+        }
+
+        if (empty($merchandiseLineItemId)) {
+            throw new NotFoundHttpException();
+        }
+
+        $cartData = $this->shopifyStoreFrontAPIService->updateCartItemQuantity(
+            $existingShopifyCartId,
+            $merchandiseLineItemId,
+            $newQuantity
+        );
+
+        Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
+
+        $responseData = $this->createLegacyCartResponseDataFromShopifyCartData($cartData);
+
+        if ($request->expectsJson()) {
+            return response()->json($responseData, 200);
+        }
+
+        $redirectResponse =
+            $request->get('redirect') ? redirect()->away($request->get('redirect')) : redirect()->to(
+                config('ecommerce.post_add_to_cart_redirect', '/order')
+            );
+
+        $redirectResponse->with('cart', $responseData['meta']['cart'] ?? []);
+        $redirectResponse->with('referralCode', $request->get('referralCode'));
+
+        session()->put('bonuses', []);
+
+        return $redirectResponse;
     }
 
     public function deleteAllCartItems(Request $request)
@@ -133,7 +196,10 @@ class ShopifyCartAPIController extends Controller
 
     public function serveShopifyCartCustomizationScriptTagFile(Request $request)
     {
-        $response = Response::make(file_get_contents(base_path('shopify_checkout_account_creation_link_injection_script.js')), 200);
+        $response = Response::make(
+            file_get_contents(base_path('shopify_checkout_account_creation_link_injection_script.js')),
+            200
+        );
         $response->header('Content-Type', 'application/javascript');
 
         return $response;

@@ -287,6 +287,66 @@ class ShopifyStoreFrontAPIService
 
     /**
      * @param $cartId
+     * @param $merchandiseLineItemId
+     * @param $newQuantity
+     * @return array
+     * @throws HttpRequestException
+     * @throws MissingArgumentException
+     */
+    public function updateCartItemQuantity(
+        $cartId,
+        $merchandiseLineItemId,
+        $newQuantity
+    ): array {
+        $updateCartInputLineArray = [
+            [
+                'quantity' => (integer) $newQuantity,
+                'id' => $merchandiseLineItemId
+            ]
+        ];
+
+        $updateCartInputLineString = $this->jsonStringToGraphQLObjectString(
+            json_encode($updateCartInputLineArray, JSON_UNESCAPED_SLASHES)
+        );
+
+        $cartString = self::cartGraphQLReturnDataString;
+        $userErrorString = self::userErrorsGraphQLReturnDataString;
+
+        $cartData = $this->storefrontClient->query(
+            <<<GRAPHQL
+                mutation {
+                    cartLinesUpdate(
+                        cartId: "$cartId",
+                        lines: $updateCartInputLineString
+                    ) {
+                    $cartString
+                    $userErrorString
+                }
+            }
+            GRAPHQL,
+        );
+
+        $responseBody = $cartData->getBody()->getContents();
+
+        $responseCode = $cartData->getStatusCode();
+
+        $jsonResponse = json_decode($responseBody, true);
+
+        $responseCartData = $jsonResponse["data"]["cartLinesUpdate"]["cart"] ?? [];
+
+        if ($responseCode !== 200 || empty($responseCartData)) {
+            throw new Exception(
+                "Shopify API call (cartLinesUpdate) error: " .
+                "HTTP status code: $responseCode - " .
+                "HTTP response body: $responseBody"
+            );
+        }
+
+        return $jsonResponse["data"]["cartLinesUpdate"]["cart"];
+    }
+
+    /**
+     * @param $cartId
      * @param array $productVariantIdsToAddToCart
      * @return array
      * @throws HttpRequestException

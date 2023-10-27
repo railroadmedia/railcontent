@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Middleware;
 use App\Modules\Ecommerce\Controllers\ShopifyCartAPIController;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class RedirectLegacyCartRequestsToShopifyControllers
 {
@@ -17,6 +18,18 @@ class RedirectLegacyCartRequestsToShopifyControllers
             $routeAction = array_merge($route->getAction(), [
                 'uses' => ShopifyCartAPIController::class . '@createOrAddToCart',
                 'controller' => ShopifyCartAPIController::class . '@createOrAddToCart',
+            ]);
+
+            $route->setAction($routeAction);
+            $route->controller = false;
+        }
+
+        if ((Str::startsWith($request->path(), 'ecommerce/json/update-product-quantity') && $request->method() == 'PATCH')) {
+            $route = $request->route();
+
+            $routeAction = array_merge($route->getAction(), [
+                'uses' => ShopifyCartAPIController::class . '@updateCartQuantity',
+                'controller' => ShopifyCartAPIController::class . '@updateCartQuantity',
             ]);
 
             $route->setAction($routeAction);
