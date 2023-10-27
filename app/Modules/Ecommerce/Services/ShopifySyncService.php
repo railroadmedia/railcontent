@@ -67,7 +67,13 @@ class ShopifySyncService
             Log::debug("Customer $shopifyCustomerId: Found $count orders");
             $user = $this->getUser($shopifyCustomerId, $email);
             $this->userAccessPermissionsService->syncShopifyOrders($user, $orders, $products, $skipRechargeSync);
-        };
+        } else {
+            Log::debug("Customer $shopifyCustomerId: No digital products found");
+            $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
+            if ($user) {
+                $this->userAccessPermissionsService->syncUser($user, $skipRechargeSync);
+            }
+        }
     }
 
     public function syncCustomerByEmail($email)
@@ -90,7 +96,8 @@ class ShopifySyncService
         Carbon $processedAt,
         float $price,
         ?float $tax,
-        ShopifyPaymentSourceEnum $paymentSource
+        ShopifyPaymentSourceEnum $paymentSource,
+        ?string $currency
     ): void {
         if (!config('shopify.enabled')) {
             return;
@@ -115,7 +122,8 @@ class ShopifySyncService
             $processedAt,
             $price,
             $tax,
-            $paymentSource
+            $paymentSource,
+            $currency
         );
 
         Log::debug("User ID: $user->id; Customer Shopify ID: $customerShopifyId. Pushing order to Shopify");
@@ -170,7 +178,8 @@ class ShopifySyncService
         Carbon $processedAt,
         float $price,
         float $tax,
-        ShopifyPaymentSourceEnum $paymentSource
+        ShopifyPaymentSourceEnum $paymentSource,
+        ?string $currency
     ): array {
         $data = [
             "customer" => ["id" => $customerShopifyId],
@@ -180,6 +189,7 @@ class ShopifySyncService
             "total_outstanding" => "0.00",
             "total_price" => number_format($price + ($tax ?? 0), 2, '.', ''),
             "line_items" => $this->createOrderItems($productIds, $price),
+            "currency" => $currency ?? 'USD',
             "metafields" => [
                 [
                     "key" => ShopifyMetafieldKey::Brand->value,

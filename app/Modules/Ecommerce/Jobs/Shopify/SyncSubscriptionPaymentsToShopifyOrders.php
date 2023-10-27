@@ -26,14 +26,18 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\Ecommerce\Entities\Address;
 use Railroad\Ecommerce\Entities\Payment;
 use Railroad\Ecommerce\Entities\Refund;
+use Railroad\Ecommerce\Entities\Structures\Address as AddressStructure;
+use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Entities\SubscriptionPayment;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Ecommerce\Repositories\CustomerRepository;
 use Railroad\Ecommerce\Repositories\RefundRepository;
 use Railroad\Ecommerce\Repositories\RepositoryBase;
 use Railroad\Ecommerce\Repositories\SubscriptionPaymentRepository;
+use Railroad\Ecommerce\Services\TaxService;
 use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\REST\Resources\ApiResource;
 use Signifly\Shopify\Shopify;
@@ -80,6 +84,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     protected SubscriptionPaymentRepository $subscriptionPaymentRepository;
 
     protected EcommerceEntityManager $entityManager;
+    protected TaxService $taxService;
     protected Collection $shopifyIds;
     protected array $results = [];
 
@@ -116,7 +121,8 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         CustomerRepository $customerRepository,
         RefundRepository $refundRepository,
         SubscriptionPaymentRepository $subscriptionPaymentRepository,
-        EcommerceEntityManager $entityManager
+        EcommerceEntityManager $entityManager,
+        TaxService $taxService
     ): void {
         // set DI instances that we'll need
         $this->shopify = $shopify;
@@ -124,6 +130,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         $this->refundRepository = $refundRepository;
         $this->subscriptionPaymentRepository = $subscriptionPaymentRepository;
         $this->entityManager = $entityManager;
+        $this->taxService = $taxService;
 
         $this->logDebug(
             sprintf(
@@ -211,7 +218,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                 $this->createSyncLogIfExecuting();
             }
 
-            // TODO: remove this check once all users/customers have been synced
+            // safety check that the users/customers have been synced
             $user = $subscriptionPayment->getSubscription()->getUser();
             $customer = $subscriptionPayment->getSubscription()->getCustomer();
             $skip = false;
@@ -607,7 +614,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             "currency" => $currency,
             "customer" => ["id" => $purchaserId],
             "email" => $this->getEmailForShopify($purchaserEmail),
-            "processed_at" => (new Carbon($subscriptionPayment->getCreatedAt()))->toIso8601String(),
+            "processed_at" => (new Carbon($payment->getCreatedAt()))->toIso8601String(),
             // "tags" => "",
             // refer to https://shopify.dev/docs/apps/custom-data/metafields/types
             // we can use meta fields for stuff like our subscription payment id, etc
@@ -636,7 +643,10 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
 
         // record a note that this was migrated from the old system, including the subscription payment ID, and put it first
         $migrateNote = Str::of(
-            sprintf("Imported from the old ecommerce system: subscription payment ID %s.", $subscriptionPayment->getId())
+            sprintf(
+                "Imported from the old ecommerce system: subscription payment ID %s.",
+                $subscriptionPayment->getId()
+            )
         );
         if (empty($spNote)) {
             $notesStr = $migrateNote;
@@ -691,12 +701,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
 
         $orderData["note"] = $notesStr->value();
 
-        if ($subscription->getTax()) {
-            $orderData["tax_lines"] = [
-                ["price" => $subscription->getTax()]
-            ];
-        }
-
         // the proper addresses should already have been synced by the user/customer, so only use it if Shopify has it
         try {
             $address = $payment->getPaymentMethod()?->getBillingAddress() ?? null;
@@ -705,6 +709,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             }
         } catch (EntityNotFoundException $e) {
             $this->logError(sprintf("%s: %s", $this->getClassName(), $e->getMessage()));
+            $address = null;
         }
 
         // Shopify expects a line item to represent the product purchased,
@@ -743,6 +748,11 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             $lineItem["applied_discounts"] = $discounts;
         }
 
+        $taxesData = $this->getTaxesData($subscription, $address);
+        if (!empty($taxesData)) {
+            $lineItem["tax_lines"] = [$taxesData];
+        }
+
         // Shopify expects an array of line items so nest our data inside another array
         $orderData["line_items"] = array($lineItem);
 
@@ -762,6 +772,57 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             Payment::TYPE_GOOGLE_SUBSCRIPTION_RENEWAL => ShopifyPaymentSourceEnum::Google,
             default => ShopifyPaymentSourceEnum::Web,
         };
+    }
+
+    /**
+     * Get a collection of refunds for this subscription payment
+     *
+     * @param  SubscriptionPayment  $subscriptionPayment
+     * @return Collection
+     */
+    private function getRefundsForSubscriptionPayment(SubscriptionPayment $subscriptionPayment): Collection
+    {
+        $refunds = $this->refundRepository->getPaymentsRefunds([$subscriptionPayment->getPayment()]);
+        if (empty($refunds)) {
+            return collect();
+        }
+
+        return collect($refunds);
+    }
+
+    /**
+     * Build the array of the taxes data for the subscription's line item
+     *
+     * @param  Subscription  $subscription
+     * @param  Address|null  $address
+     * @return array
+     * @throws Exception
+     */
+    protected function getTaxesData(Subscription $subscription, ?Address $address): array
+    {
+        $addressStruct = $address?->toStructure() ?? new AddressStructure();
+
+        // using the logic from vendor/railroad/ecommerce/src/Transformers/SubscriptionTransformer.php
+        $subscriptionPricePerPayment = round($subscription->getTotalPrice(), 2);
+        // if it's a payment plan, remove the finance charge per payment, so it doesn't get taxed
+        if (!empty($subscription->getOrder()) &&
+            $subscription->getType() == Subscription::TYPE_PAYMENT_PLAN &&
+            $subscription->getTotalCyclesDue() >= 1) {
+            $price = round(($subscription->getOrder()->getFinanceDue() / $subscription->getTotalCyclesDue()), 2);
+        } else {
+            $price = $subscriptionPricePerPayment;
+        }
+
+        $taxPrice = $this->taxService->getTaxesDueTotal($price, 0, $addressStruct);
+        $taxRate = $this->taxService->getProductTaxRate($addressStruct);
+        if (!$taxPrice) {
+            return [];
+        }
+
+        return [
+            "price" => number_format($taxPrice, 2, '.', ''),
+            "rate" => $taxRate
+        ];
     }
 
     /**
@@ -935,22 +996,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         $fulfillmentRecords[] = $record;
 
         return $fulfillmentRecords;
-    }
-
-    /**
-     * Get a collection of refunds for this subscription payment
-     *
-     * @param SubscriptionPayment $subscriptionPayment
-     * @return Collection
-     */
-    private function getRefundsForSubscriptionPayment(SubscriptionPayment $subscriptionPayment): Collection
-    {
-        $refunds = $this->refundRepository->getPaymentsRefunds([$subscriptionPayment->getPayment()]);
-        if (empty($refunds)) {
-            return collect();
-        }
-
-        return collect($refunds);
     }
 
     /**
