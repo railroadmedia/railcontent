@@ -7,6 +7,7 @@ use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use Carbon\Carbon;
 use App\Modules\Ecommerce\Services\PaymentService;
+use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Models\User;
 use Illuminate\Support\Facades\Log;
 
@@ -167,6 +168,7 @@ class RevenueCatService
             $user->display_name = $parts[0].rand(10000, 99999);
             $user->revenuecat_origin_app_user_id = $appUserId;
             $user->save();
+            event(new UserCreated($user));
         } elseif ($user) {
             $user->revenuecat_origin_app_user_id = $appUserId;
             $user->save();
