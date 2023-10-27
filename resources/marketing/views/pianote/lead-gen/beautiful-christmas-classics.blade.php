@@ -228,10 +228,9 @@
         </div>
     </section>
 
-
     @include('_partials.components.video-modal',[
         'name' => 'sampleLesson',
-        'video' => '806957290',
+        'video' => '877678289',
         'vimeo' => true,
     ])
 @stop
