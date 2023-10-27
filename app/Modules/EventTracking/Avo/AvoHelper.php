@@ -11,13 +11,13 @@ class AvoHelper
      */
     public static function getRequestPlatform(): string
     {
-        $userAgent = request()?->userAgent() ?? '';
+        $userAgent = strtolower(request()?->userAgent()) ?? '';
 
-        if (str_contains(strtolower($userAgent), 'drumeo')) {
+        if (str_contains($userAgent, 'drumeo')) {
             return 'drumeo-app';
-        } elseif (str_contains(strtolower($userAgent), 'pianote')) {
+        } elseif (str_contains($userAgent, 'pianote')) {
             return 'pianote-app';
-        } elseif (str_contains(strtolower($userAgent), 'musoraapp')) {
+        } elseif (str_contains($userAgent, 'musora')) {
             return 'musora-app';
         }
 
