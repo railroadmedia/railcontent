@@ -13,6 +13,7 @@ use App\Modules\Ecommerce\Models\Product;
 use App\Modules\UserManagementSystem\Services\UserService;
 use App\Providers\EcommerceUserProvider;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 use Signifly\Shopify\Shopify;
@@ -257,5 +258,15 @@ class ShopifySyncService
             );
         }
         throw new \Exception("User not found for shopify customer id $shopifyCustomerId");
+    }
+
+    /**
+     * @param int $shopifyCustomerId
+     * @return Collection
+     */
+    public function getOwnedProducts(int $shopifyCustomerId): Collection
+    {
+        $orders = $this->shopifyGateway->getCustomerOrders($shopifyCustomerId);
+        return $orders->pluck('lineItems')->flatten(1);
     }
 }

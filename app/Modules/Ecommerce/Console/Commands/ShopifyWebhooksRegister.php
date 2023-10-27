@@ -10,7 +10,8 @@ use Signifly\Shopify\Webhooks\Webhook;
 class ShopifyWebhooksRegister extends Command
 {
     public const WEBHOOKS = [
-        'orders/updated' => 'shopify.webhook.order.update'
+        'orders/updated' => 'shopify.webhook.order.update',
+        'orders/create' => 'shopify.webhook.order.create'
     ];
 
     protected $signature = 'ecommerce:registerShopifyWebhook {customBaseURL?}';

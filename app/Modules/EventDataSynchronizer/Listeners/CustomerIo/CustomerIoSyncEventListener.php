@@ -882,14 +882,10 @@ class CustomerIoSyncEventListener
     public function syncOrder($order, $payment, $onlyMusoraEvent = false)
     {
         try {
-            if (!empty($order) && !empty(
-                $order->getUser()
-                )) {
+            if (!empty($order) && !empty($order->getUser())) {
                 $productIds = [];
 
-                foreach (
-                    $order->getOrderItems() as $orderItem
-                ) {
+                foreach ($order->getOrderItems() as $orderItem) {
                     $productIds[] =
                         $orderItem->getProduct()
                             ->getId();
@@ -1354,10 +1350,12 @@ class CustomerIoSyncEventListener
     }
 
     // CMT-77 August Referral Contest
+
     /**
      * @param ReferralClaimed $referralClaimed
      */
-    public function handleAugustContestReferralClaimed(AugustContestReferralClaimed $referralClaimed) {
+    public function handleAugustContestReferralClaimed(AugustContestReferralClaimed $referralClaimed)
+    {
         $referrer = $referralClaimed->getReferrer();
         $referrerEmail = $this->userService->getByIdOrNull($referrer->user_id)?->getEmail();
         dispatch(

@@ -32,4 +32,20 @@ class ShopifyWebHookController extends Controller
         }
     }
 
+    public function orderCreated(Request $request)
+    {
+        try {
+            Log::debug('Shopify order created webhook received');
+            //Log::debug(print_r($request->all(), true));
+
+            $shopifyCustomerId = $request->get('customer')['id'];
+            $email = $request->get('customer')['email'];
+            Log::debug("Shopify customer id: $shopifyCustomerId email: $email");
+            $this->shopifySyncService->syncCustomer($shopifyCustomerId, $email);
+            event(new OrderPlaced($request->all()));
+        } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
+        }
+    }
 }
