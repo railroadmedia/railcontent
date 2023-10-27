@@ -57,7 +57,9 @@
             <template
                 v-slot:item="{ item }"
             >
-                <tr>
+
+                <tr :class="[ isActiveSubscription(item) ? 'active-subscription' : '']"
+                >
                     <td class="text-center">
                         <v-custom-brand-icon :brand="item.brand"></v-custom-brand-icon>
                     </td>
@@ -435,6 +437,23 @@ export default {
             'getPermissions',
         ]),
 
+        isActiveSubscription(item) {
+            console.log(item)
+            //convert item.expiration_time to date object
+            const dateString = item.expiration_time;
+            const dateToCheck = new Date(dateString);
+            const today = new Date();
+            //Remove time
+            dateToCheck.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0);
+            //Compare Values
+            const subscriptionIsCurrent = dateToCheck > today;
+            if(item.status === "active" && subscriptionIsCurrent) {
+                return true;
+            }
+            return false;
+        },   
+
         getDefaultUserAccessPermission() {
             return {
                 id: 0,
@@ -551,3 +570,11 @@ export default {
     },
 };
 </script>
+<style>
+    .active-subscription {
+        background-color: rgba(0,255,0,.15) !important;
+    }
+    .active-subscription:hover {
+        background-color: rgba(0,255,0,.25) !important;
+    }
+</style>
