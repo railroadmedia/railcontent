@@ -4,31 +4,29 @@
     {{ $title }}
 </h2>
 
-<div class="container max-w-6xl mx-auto p-4 md:p-6 lg:flex leading-normal">
-    <div class="lg:w-4/6 py-2 md:p-4">
+<div class="container max-w-5xl mx-auto p-4 md:p-6 md:flex leading-normal">
+    <div class="md:w-2/3 lg:w-4/6 py-2 md:p-4">
         <div class="w-full">
             <img class="rounded-xl" src="{{ $image }}" />
         </div>
 
         <div class="mt-4 md:py-4 hidden md:block">
-          <p>{{ $descriptionDesktop }}  <strong>{{ $descriptionBold }} </strong></p>
+        <p>{{ $descriptionDesktop }}  <strong>{{ $descriptionBold }} </strong></p>
         <p class="pt-10">Instructor: <strong> {{$instructor}}</strong></p>
         <p class="pt-2">Lesson Length: <strong> {{$course}}</strong></p>
         </div>
     </div>
 
-    <div class="lg:w-2/6 py-2 md:p-4 text-black text-base">
+    <div class="py-2 md:p-4 text-black text-base">
         @foreach ($features as $feature)
-            <div class="rounded-lg mb-2 px-6 py-4 bg-blue-50">
-                <p class="flex items-center"><i class="fas fa-play-circle text-2xl text-{{ $brand }} mr-2"></i> {{ $feature }}</p>
+            <div class="rounded-lg mb-2 px-6 py-3 bg-blue-50">
+                <p class="flex items-center"><i class="fas fa-play-circle text-xl text-{{ $brand }} mr-2"></i> {{ $feature }}</p>
             </div>
         @endforeach
 
-           
-              <p class="text-white pt-3"><strong>{{ $lessonTitle }}</strong></p>
+            <p class="text-white pt-3"><strong>{{ $lessonTitle }}</strong></p>
 
-
-        <div x-data="{ isOpen: [] }" class="h-80 overflow-y-scroll rounded-lg text-black">
+        <div x-data="{ isOpen: [] }" class="h-72 overflow-y-scroll rounded-lg text-black">
             @foreach ($lessons as $i => $lesson)
                 <div x-data="{ open: false }"
                     class="rounded-lg bg-white shadow my-1 mb-1.5">
@@ -37,11 +35,11 @@
                         style="background: #eff7ff;"
                             x-on:click="open = !open;"
                     >
-                        <p class="leading-tight mx-0">Day {{ $i + 1 }}</p>
+                        <p class="mx-0">Day {{ $i + 1 }}</p>
                         <div
                                 class="ml-auto text-{{ $brand }} cursor-pointer"
                         >
-                            <i class="fas fa-angle-down transform transition-all duration-300 text-2xl" x-bind:class="{ 'rotate-180': open }"></i>
+                            <i class="fas fa-angle-down transform transition-all duration-300" x-bind:class="{ 'rotate-180': open }"></i>
                         </div>
                     </button>
                     <div x-cloak
