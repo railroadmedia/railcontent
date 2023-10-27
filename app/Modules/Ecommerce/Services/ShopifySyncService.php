@@ -67,7 +67,13 @@ class ShopifySyncService
             Log::debug("Customer $shopifyCustomerId: Found $count orders");
             $user = $this->getUser($shopifyCustomerId, $email);
             $this->userAccessPermissionsService->syncShopifyOrders($user, $orders, $products, $skipRechargeSync);
-        };
+        } else {
+            Log::debug("Customer $shopifyCustomerId: No digital products found");
+            $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
+            if ($user) {
+                $this->userAccessPermissionsService->syncUser($user, $skipRechargeSync);
+            }
+        }
     }
 
     public function syncCustomerByEmail($email)

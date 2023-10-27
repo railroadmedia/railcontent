@@ -118,6 +118,13 @@ class UserAccessPermissionsService
         event(new UserAccessPermissionsUpdated($accessPermissions));
     }
 
+    public function syncUser(User $user, $skipRechargeSync = false): void
+    {
+        //users may have legacy data that needs to be synced
+        $accessPermissions = $this->getUserAccessPermissions($user->id);
+        event(new UserAccessPermissionsUpdated($accessPermissions, $skipRechargeSync));
+    }
+
     public function syncShopifyOrders(User $user, $orders, $products, $skipRechargeSync = false): void
     {
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
