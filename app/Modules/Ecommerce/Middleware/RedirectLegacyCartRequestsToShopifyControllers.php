@@ -28,8 +28,8 @@ class RedirectLegacyCartRequestsToShopifyControllers
             $route = $request->route();
 
             $routeAction = array_merge($route->getAction(), [
-                'uses' => ShopifyCartAPIController::class . '@updateCartQuantity',
-                'controller' => ShopifyCartAPIController::class . '@updateCartQuantity',
+                'uses' => ShopifyCartAPIController::class . '@updateCartItemQuantity',
+                'controller' => ShopifyCartAPIController::class . '@updateCartItemQuantity',
             ]);
 
             $route->setAction($routeAction);
@@ -40,8 +40,20 @@ class RedirectLegacyCartRequestsToShopifyControllers
             $route = $request->route();
 
             $routeAction = array_merge($route->getAction(), [
-                'uses' => ShopifyCartAPIController::class . '@updateCartItemQuantity',
-                'controller' => ShopifyCartAPIController::class . '@updateCartItemQuantity',
+                'uses' => ShopifyCartAPIController::class . '@deleteCartItem',
+                'controller' => ShopifyCartAPIController::class . '@deleteCartItem',
+            ]);
+
+            $route->setAction($routeAction);
+            $route->controller = false;
+        }
+
+        if ($request->path() == 'ecommerce/json/clear-cart' && $request->method() == 'DELETE') {
+            $route = $request->route();
+
+            $routeAction = array_merge($route->getAction(), [
+                'uses' => ShopifyCartAPIController::class . '@deleteAllCartItems',
+                'controller' => ShopifyCartAPIController::class . '@deleteAllCartItems',
             ]);
 
             $route->setAction($routeAction);

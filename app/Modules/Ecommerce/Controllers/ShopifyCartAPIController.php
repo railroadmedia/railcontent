@@ -55,6 +55,34 @@ class ShopifyCartAPIController extends Controller
 
             Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
         } else {
+            // clear the cart if locked=true
+            if ($request->get('locked') == 'true') {
+                $shopifyCartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
+
+                $merchandiseLineItemIdsToDelete = [];
+
+                if (!empty($shopifyCartData['lines']['edges'])) {
+                    foreach ($shopifyCartData['lines']['edges'] as $edge) {
+                        $shopifyLineItemData = $edge['node'];
+
+                        if (empty($shopifyLineItemData)) {
+                            continue;
+                        }
+
+                        $merchandiseLineItemIdsToDelete[] = $shopifyLineItemData['id'];
+                    }
+                }
+
+                if (empty($merchandiseLineItemIdsToDelete)) {
+                    throw new NotFoundHttpException();
+                }
+
+                $cartData = $this->shopifyStoreFrontAPIService->removeCartItems(
+                    $existingShopifyCartId,
+                    $merchandiseLineItemIdsToDelete
+                );
+            }
+
             $cartData = $this->shopifyStoreFrontAPIService->addToCart(
                 $existingShopifyCartId,
                 $productVariantIdsAndQuantitiesToAdd
@@ -210,9 +238,9 @@ class ShopifyCartAPIController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $cartData = $this->shopifyStoreFrontAPIService->removeCartItem(
+        $cartData = $this->shopifyStoreFrontAPIService->removeCartItems(
             $existingShopifyCartId,
-            $merchandiseLineItemId
+            [$merchandiseLineItemId]
         );
 
         Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
@@ -238,8 +266,56 @@ class ShopifyCartAPIController extends Controller
 
     public function deleteAllCartItems(Request $request)
     {
-        // todo
-        return response("Yes!");
+        $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
+
+        if (empty($existingShopifyCartId)) {
+            throw new NotFoundHttpException();
+        }
+
+        $shopifyCartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
+
+        $merchandiseLineItemIdsToDelete = [];
+
+        if (!empty($shopifyCartData['lines']['edges'])) {
+            foreach ($shopifyCartData['lines']['edges'] as $edge) {
+                $shopifyLineItemData = $edge['node'];
+
+                if (empty($shopifyLineItemData)) {
+                    continue;
+                }
+
+                $merchandiseLineItemIdsToDelete[] = $shopifyLineItemData['id'];
+            }
+        }
+
+        if (empty($merchandiseLineItemIdsToDelete)) {
+            throw new NotFoundHttpException();
+        }
+
+        $cartData = $this->shopifyStoreFrontAPIService->removeCartItems(
+            $existingShopifyCartId,
+            $merchandiseLineItemIdsToDelete
+        );
+
+        Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
+
+        $responseData = $this->createLegacyCartResponseDataFromShopifyCartData($cartData);
+
+        if ($request->expectsJson()) {
+            return response()->json($responseData, 200);
+        }
+
+        $redirectResponse =
+            $request->get('redirect') ? redirect()->away($request->get('redirect')) : redirect()->to(
+                config('ecommerce.post_add_to_cart_redirect', '/order')
+            );
+
+        $redirectResponse->with('cart', $responseData['meta']['cart'] ?? []);
+        $redirectResponse->with('referralCode', $request->get('referralCode'));
+
+        session()->put('bonuses', []);
+
+        return $redirectResponse;
     }
 
     public function redirectToShopifyOrderForm(Request $request)

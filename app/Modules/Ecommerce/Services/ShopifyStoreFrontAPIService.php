@@ -352,11 +352,11 @@ class ShopifyStoreFrontAPIService
      * @throws HttpRequestException
      * @throws MissingArgumentException
      */
-    public function removeCartItem(
+    public function removeCartItems(
         $cartId,
-        $merchandiseLineItemId
+        $merchandiseLineItemIds
     ): array {
-        $removeCartInputLineArray = [$merchandiseLineItemId];
+        $removeCartInputLineArray = $merchandiseLineItemIds;
 
         $removeCartInputLineString = $this->jsonStringToGraphQLObjectString(
             json_encode($removeCartInputLineArray, JSON_UNESCAPED_SLASHES)
