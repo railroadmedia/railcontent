@@ -709,6 +709,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             }
         } catch (EntityNotFoundException $e) {
             $this->logError(sprintf("%s: %s", $this->getClassName(), $e->getMessage()));
+            $address = null;
         }
 
         // Shopify expects a line item to represent the product purchased,
