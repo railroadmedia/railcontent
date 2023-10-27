@@ -1,7 +1,6 @@
-const ASSET_URL = process.env.VUE_APP_ASSET_BASE || '/';
 
 module.exports = {
-    publicPath: ASSET_URL + 'vendor/musora-center/dist/' ,
+    publicPath: '/vendor/musora-center/dist/' ,
     outputDir: process.env.NODE_ENV === 'production'
         ? '../public/dist/'
         : '../public/dist/js',
