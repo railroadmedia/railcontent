@@ -45,7 +45,7 @@ class MigrateRechargeSubscriptions extends Command
             $this->info('Loading Subscriptions');
             $subscriptionsQuery = Subscription::query()->with('product')
                 ->where('is_active', 1)
-                ->where('type', 'subscription')
+                ->where('type', Subscription::TYPE_SUBSCRIPTION)
                 ->where('paid_until', '>', Carbon::now());
 
             if ($isTest) {
