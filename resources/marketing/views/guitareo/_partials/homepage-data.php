@@ -38,7 +38,7 @@
                 'desc' => 'Develop your core skills, techniques, and musicality to play confidently in any setting. ',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'marketing/guitareo/membership/homepage/2023/method.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/method.jpg',
                     ],
                 ]
             ],
@@ -48,7 +48,7 @@
                 'desc' => 'You\'ll always have on-screen assignments and practice tools to help you see results.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'marketing/guitareo/membership/homepage/2023/practical-assignments.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/practical-assignments.jpg',
                     ],
                 ]
             ],
@@ -58,7 +58,7 @@
                 'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'marketing/guitareo/membership/homepage/2023/guided-workouts.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guided-workouts.jpg',
                     ],
                 ]
             ],
@@ -68,7 +68,7 @@
                 'desc' => 'The best guitarists are here – including Grammy Award winners and touring musicians.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'marketing/guitareo/membership/homepage/2023/coaches-thumb2.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/coaches-thumb2.jpg',
                     ],
                 ]
             ],
@@ -78,7 +78,7 @@
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime. ',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'marketing/guitareo/membership/homepage/2023/downloadable-videos.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/downloadable-videos.jpg',
                     ],
                 ]
             ],
@@ -88,7 +88,7 @@
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global guitar community. ',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'marketing/guitareo/membership/homepage/2023/personalized-support.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/personalized-support.jpg',
                     ],
                 ]
             ],
