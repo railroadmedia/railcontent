@@ -121,7 +121,6 @@ class MigrateRechargeSubscriptions extends Command
                     }
                     $product = $subscription->product;
                     $variantId = $product?->shopify_id ?? 0;
-                    //TODO:Check to make sure product has a shopify id
                     $productId = $productIds[$variantId] ?? 0;
                     $i++;
                     if (!$productId) {

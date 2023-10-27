@@ -16,7 +16,7 @@ class RechargeGateway
 
     public function __construct()
     {
-        $this->access_token = env('RECHARGE_ACCESS_TOKEN');
+        $this->access_token = config('shopify.recharge.access_token');
     }
 
 
@@ -168,7 +168,7 @@ class RechargeGateway
                 continue;
             }
 
-            if (isset($result->warning) && $result->warning = "too many requests") {
+            if (isset($result->warning) && $result->warning == "too many requests") {
                 Log::warning('[Recharge\API] Sleeping for 1 seconds (Too Many Requests / Method 2)');
                 sleep(1);
                 $retry = true;
@@ -176,7 +176,7 @@ class RechargeGateway
             }
 
             if (isset($returnInfo['HTTP_CODE']) && strpos($returnInfo['HTTP_CODE'], 'HTTP/1.1 409 CONFLICT') > -1) {
-                Log::warning('[Recharge\API] Sleeping for 2 seconds (409 Conflict)');
+                Log::warning('[Recharge\API] Sleeping for 1 seconds (409 Conflict)');
                 sleep(1);
                 $retry = true;
                 continue;
