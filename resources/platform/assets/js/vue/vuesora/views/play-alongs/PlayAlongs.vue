@@ -166,16 +166,6 @@ export default {
             default: () => '/railcontent/content',
         },
 
-        showFilters: {
-            type: Boolean,
-            default: () => true,
-        },
-
-        showPagination: {
-            type: Boolean,
-            default: () => true,
-        },
-
         useUrlParams: {
             type: Boolean,
             default: () => true,
@@ -351,33 +341,6 @@ export default {
                             }
                         });
                     }
-                });
-        },
-
-        searchContent() {
-            this.loading = true;
-
-            return ContentService.search({
-                ...this.filterQueryObject,
-                term: this.searchTerm,
-                brand: this.brand,
-                included_types: ['play-along'],
-                statuses: ['published'],
-                include_future: 0,
-            })
-                .then((response) => {
-                    if (response) {
-                        this.content = response.data.data;
-                        this.page = response.data.meta.page;
-                        this.totalResults = response.data.meta.totalResults;
-                        this.filterOptions = this.getFilterOptions(response.data.meta.filterOptions);
-                    }
-                }).catch((e) => {
-                    console.log('ERROR',e);
-                }).finally(() => {
-                    this.$nextTick(() => {
-                        this.loading = false;
-                    });
                 });
         },
 
@@ -810,14 +773,6 @@ export default {
             return this.getContent();
         },
 
-        handleTriggerSearch() {
-            if (this.useUrlParams) {
-                this.updatePageUrl();
-            }
-
-            return this.searchContent();
-        },
-
         handleContentSort(event) {
             this.sort = event.target.value;
 
@@ -962,7 +917,7 @@ export default {
         },
 
         completedEventHandler(id) {
-            const contentToComplete = this.content.find(item => item.id === id);
+            const contentToComplete = this.preLoadedContent.find(item => item.id === id);
 
             if (contentToComplete.completed === true) {
                 ContentService.resetContentProgress(id);
