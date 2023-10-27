@@ -36,6 +36,18 @@ class RedirectLegacyCartRequestsToShopifyControllers
             $route->controller = false;
         }
 
+        if ((Str::startsWith($request->path(), 'ecommerce/json/remove-from-cart') && $request->method() == 'DELETE')) {
+            $route = $request->route();
+
+            $routeAction = array_merge($route->getAction(), [
+                'uses' => ShopifyCartAPIController::class . '@updateCartItemQuantity',
+                'controller' => ShopifyCartAPIController::class . '@updateCartItemQuantity',
+            ]);
+
+            $route->setAction($routeAction);
+            $route->controller = false;
+        }
+
         if ($request->path() == 'ecommerce/json/cart' && $request->method() == 'GET') {
             $route = $request->route();
 

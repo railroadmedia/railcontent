@@ -347,6 +347,59 @@ class ShopifyStoreFrontAPIService
 
     /**
      * @param $cartId
+     * @param $merchandiseLineItemId
+     * @return array
+     * @throws HttpRequestException
+     * @throws MissingArgumentException
+     */
+    public function removeCartItem(
+        $cartId,
+        $merchandiseLineItemId
+    ): array {
+        $removeCartInputLineArray = [$merchandiseLineItemId];
+
+        $removeCartInputLineString = $this->jsonStringToGraphQLObjectString(
+            json_encode($removeCartInputLineArray, JSON_UNESCAPED_SLASHES)
+        );
+
+        $cartString = self::cartGraphQLReturnDataString;
+        $userErrorString = self::userErrorsGraphQLReturnDataString;
+
+        $cartData = $this->storefrontClient->query(
+            <<<GRAPHQL
+                mutation {
+                    cartLinesRemove(
+                        cartId: "$cartId",
+                        lineIds: $removeCartInputLineString
+                    ) {
+                    $cartString
+                    $userErrorString
+                }
+            }
+            GRAPHQL,
+        );
+
+        $responseBody = $cartData->getBody()->getContents();
+
+        $responseCode = $cartData->getStatusCode();
+
+        $jsonResponse = json_decode($responseBody, true);
+
+        $responseCartData = $jsonResponse["data"]["cartLinesRemove"]["cart"] ?? [];
+
+        if ($responseCode !== 200 || empty($responseCartData)) {
+            throw new Exception(
+                "Shopify API call (cartLinesRemove) error: " .
+                "HTTP status code: $responseCode - " .
+                "HTTP response body: $responseBody"
+            );
+        }
+
+        return $jsonResponse["data"]["cartLinesRemove"]["cart"];
+    }
+
+    /**
+     * @param $cartId
      * @param array $productVariantIdsToAddToCart
      * @return array
      * @throws HttpRequestException

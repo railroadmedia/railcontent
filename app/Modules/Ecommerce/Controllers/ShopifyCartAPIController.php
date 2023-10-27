@@ -36,14 +36,14 @@ class ShopifyCartAPIController extends Controller
     public function createOrAddToCart(Request $request)
     {
         $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
-        $productsToAdd = $request->get('products', []); // $products = ['product-sku' => quantity, ...]
+        $productSKUsAndQuantities = $request->get('products', []); // $products = ['product-sku' => quantity, ...]
 
         $productSKUsVariantIds =
-            $this->shopifyStoreFrontAPIService->getProductVariantIdsFromSKUs(array_keys($productsToAdd));
+            $this->shopifyStoreFrontAPIService->getProductVariantIdsFromSKUs(array_keys($productSKUsAndQuantities));
 
         $productVariantIdsAndQuantitiesToAdd = [];
 
-        foreach ($productsToAdd as $productSKUToAdd => $quantityToAdd) {
+        foreach ($productSKUsAndQuantities as $productSKUToAdd => $quantityToAdd) {
             $productVariantIdsAndQuantitiesToAdd[$productSKUsVariantIds[$productSKUToAdd]] = (integer)$quantityToAdd;
         }
 
@@ -81,7 +81,7 @@ class ShopifyCartAPIController extends Controller
 
         $addedProducts = [];
 
-        foreach ($productsToAdd as $productSKUToAdd => $quantityToAdd) {
+        foreach ($productSKUsAndQuantities as $productSKUToAdd => $quantityToAdd) {
             foreach ($responseData['meta']['cart']['items'] as $cartLineItem) {
                 if ($cartLineItem['sku'] == $productSKUToAdd) {
                     $addedProducts[] = [
@@ -102,9 +102,9 @@ class ShopifyCartAPIController extends Controller
         return $redirectResponse;
     }
 
-    public function updateCartQuantity(Request $request)
+    public function updateCartItemQuantity(Request $request)
     {
-        $productSkuToUpdate = $request->segment(4);
+        $productSku = $request->segment(4);
         $newQuantity = $request->segment(5);
 
         $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
@@ -116,8 +116,8 @@ class ShopifyCartAPIController extends Controller
         $shopifyCartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
 
         $productSKUVariantId =
-            $this->shopifyStoreFrontAPIService->getProductVariantIdsFromSKUs([$productSkuToUpdate]
-            )[$productSkuToUpdate] ?? null;
+            $this->shopifyStoreFrontAPIService->getProductVariantIdsFromSKUs([$productSku]
+            )[$productSku] ?? null;
 
         if (empty($shopifyCartData['lines']['edges']) || empty($productSKUVariantId)) {
             throw new NotFoundHttpException();
@@ -147,6 +147,72 @@ class ShopifyCartAPIController extends Controller
             $existingShopifyCartId,
             $merchandiseLineItemId,
             $newQuantity
+        );
+
+        Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
+
+        $responseData = $this->createLegacyCartResponseDataFromShopifyCartData($cartData);
+
+        if ($request->expectsJson()) {
+            return response()->json($responseData, 200);
+        }
+
+        $redirectResponse =
+            $request->get('redirect') ? redirect()->away($request->get('redirect')) : redirect()->to(
+                config('ecommerce.post_add_to_cart_redirect', '/order')
+            );
+
+        $redirectResponse->with('cart', $responseData['meta']['cart'] ?? []);
+        $redirectResponse->with('referralCode', $request->get('referralCode'));
+
+        session()->put('bonuses', []);
+
+        return $redirectResponse;
+    }
+
+    public function deleteCartItem(Request $request)
+    {
+        $productSku = $request->segment(4);
+
+        $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
+
+        if (empty($existingShopifyCartId)) {
+            throw new NotFoundHttpException();
+        }
+
+        $shopifyCartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
+
+        $productSKUVariantId =
+            $this->shopifyStoreFrontAPIService->getProductVariantIdsFromSKUs([$productSku]
+            )[$productSku] ?? null;
+
+        if (empty($shopifyCartData['lines']['edges']) || empty($productSKUVariantId)) {
+            throw new NotFoundHttpException();
+        }
+
+        $merchandiseLineItemId = null;
+
+        if (!empty($shopifyCartData['lines']['edges'])) {
+            foreach ($shopifyCartData['lines']['edges'] as $edge) {
+                $shopifyLineItemData = $edge['node'];
+
+                if (empty($shopifyLineItemData)) {
+                    continue;
+                }
+
+                if ($shopifyLineItemData['merchandise']['id'] == $productSKUVariantId) {
+                    $merchandiseLineItemId = $shopifyLineItemData['id'];
+                }
+            }
+        }
+
+        if (empty($merchandiseLineItemId)) {
+            throw new NotFoundHttpException();
+        }
+
+        $cartData = $this->shopifyStoreFrontAPIService->removeCartItem(
+            $existingShopifyCartId,
+            $merchandiseLineItemId
         );
 
         Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
