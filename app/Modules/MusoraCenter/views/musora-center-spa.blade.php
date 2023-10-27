@@ -7,7 +7,7 @@
        <title>Musora Center</title>
        <link rel="icon" href="{{ asset('vendor/musora-center/dist/favicon.ico') }}">
        <link href="https://fonts.googleapis.com/css?family=Roboto:100:300,400,500,700,900|Material+Icons" rel="stylesheet">
-       <link rel="stylesheet" href="{{ asset('vendor/musora-center/dist/icons.css') }}">
+       <link rel="stylesheet" href="{{ asset('vendor/musora-center/dist/icons/icons.css') }}">
        <link href="{{ asset('vendor/musora-center/dist/js/app.js') }}" rel="preload" as="script">
 </head>
 <body>
