@@ -221,6 +221,12 @@
                 margin-bottom: -80px;
             }
         }
+
+        @media (max-width: 638px) { 
+            .dropdown-box {
+            background: linear-gradient(rgba(10, 31, 52, 1), rgba(10, 31, 52, 0));
+            }
+        }
     </style>
     <?php \App\Analytics\Tracker::trackProductImpression('30-day-drummer-2'); ?>
 @stop()
@@ -282,47 +288,11 @@ $lessons = ['Day 1 - Introduction', 'Day 2 - Basics of Drumming', 'Day 3 - Rhyth
 ])
 
 <!-- Songs subsection -->
-<section class="bg-slate-900">
- <div class="container max-w-6xl mx-auto px-4 lg:px-0 lg:flex">
 
-        @php
-            $songItems = $drumeo['practiceItems'];
-        @endphp
+@include('drumeo.products.partials._evergreen-dropdown', [
+    'bgClass' => 'bg-slate-900', 
+    'songItems' => $drumeo['practiceItems']])
 
-        <div x-data="{ openItem: null }" class="text-center text-white w-full sm:w-auto pt-6 lg:mt-0 mx-auto px-4 pb-16 md:pb-28">
-            <div class="flex flex-wrap items-top">
-                @foreach ($songItems as $i => $songItem)
-                    <div class="w-full sm:w-1/3 h-34 flex sm:items-start px-6 py-6 mb-6 lg:my-6 bg-gradient-to-b from-slate-900 to-slate-900 rounded-lg sm:bg-none"
-                        x-bind:class="{ 'bg-gradient-mobile': openItem === {{ $i }} }">
-                        <div @click="openItem === {{ $i }} ? openItem = null : openItem = {{ $i }}"
-                            class="flex sm:inline-block cursor-pointer w-full">
-                            <div class="w-1/5 sm:w-full text-left sm:text-center">
-                                <img alt="point icon" src="{{ $songItem['icon'] }}" class="h-6 sm:h-10">
-                            </div>
-                            <div class="w-4/5 text-left sm:text-center">
-                                <p class="mb-1 sm:my-2 text-lg md:text-xl">
-                                    <strong>{!! $songItem['title'] !!}</strong>
-                                </p>
-                                <div class="text-base md:text-lg hidden sm:block">
-                                    {!! $songItem['desc'] !!}
-                                </div>
-                                <div x-show="openItem === {{ $i }}" x-cloak
-                                    class="text-sm md:hidden text-lg bg-gradient-to-b from-slate-900 to-slate-900 md:bg-none">
-                                    {!! $songItem['desc'] !!}
-                                </div>
-                            </div>
-                        </div>
-                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/shop/30-day-challenges/plus.svg"
-                            alt="plus icon" calt="plus icon" class="w-5 h-5 sm:hidden inline cursor-pointer"
-                            x-bind:class="{ 'hidden': openItem === {{ $i }} }"
-                            @click="openItem = (openItem === {{ $i }} ? null : {{ $i }})">
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        
-    </div>
-</section>
        
  <!-- What you will learn section-->
 @php
@@ -335,7 +305,7 @@ $items = [
         ]
 @endphp
 
-<section class="text-center px-5 sm:px-6 sm:py-10 sm:py-14 lg:py-20 bg-blue-50">
+<section class="text-center px-5 py-4 sm:px-6 sm:py-10 md:py-14 lg:py-20 bg-blue-50">
     <div class="container max-w-4xl mx-auto">
         <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
             <img class="h-28 sm:h-36 lg:h-48 lazyload"
@@ -389,8 +359,6 @@ $items = [
 
                 <div class="text-white text-left z-10 sm:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow"
                     style="background-color:#00101d; border: 1px solid #00101d">
-
-
                     <h6 class="uppercase text-drumeo leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
                     <h2 class="text-center sm:text-left"><strong>Domino Santantonio</strong></h2>
                     <h6 class="leading-normal mt-4 lg:mt-6">Domino Santantonio is one of the world’s most viewed

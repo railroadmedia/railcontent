@@ -1,4 +1,4 @@
-<section class="m-0 text-white" style="background: #00101D;">
+<section class="m-0 text-white" style="background: #00101D; border: 1px solid #00101D">
 
 <h2 class="text-center font-black leading-tight pt-12 md:pt-20">
     {{ $title }}
