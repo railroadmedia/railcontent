@@ -25,25 +25,25 @@
                     <span>Add User Access Permission</span>
                 </v-tooltip>
             </v-toolbar-items>
-            <!--
-                <template v-slot:extension>
-                    <v-row class="pt-2">
-                        <v-col
-                            cols="12" md="4" sm="12"
-                            class="column"
+            <!-- Members Dropdown -->
+            <template v-slot:extension>
+                <v-row class="pt-2">
+                    <v-col
+                        cols="12" md="4" sm="12"
+                        class="column"
+                    >
+                        <v-select
+                            v-model="$_field"
+                            label="Products and Memberships"
+                            color="white"
+                            :items="['Plus, Basic, and Lifetime Memberships', 'Non Membership Products', 'All']"
+                            clearable
                         >
-                            <v-select
-                                v-model="$_field"
-                                label="Products and Memberships"
-                                color="white"
-                                :items="['Plus, Basic, and Lifetime Memberships', 'Non Membership Products', 'All']"
-                                clearable
-                            >
-                            </v-select>
-                        </v-col>
-                    </v-row>
-                </template>
-            -->
+                        </v-select>
+                    </v-col>
+                </v-row>
+            </template>
+            
         </v-toolbar>
 
         <v-data-table
@@ -57,7 +57,9 @@
             <template
                 v-slot:item="{ item }"
             >
-                <tr>
+
+                <tr :class="[ isActiveSubscription(item) ? 'active-subscription' : '']"
+                >
                     <td class="text-center">
                         <v-custom-brand-icon :brand="item.brand"></v-custom-brand-icon>
                     </td>
@@ -435,6 +437,23 @@ export default {
             'getPermissions',
         ]),
 
+        isActiveSubscription(item) {
+            console.log(item)
+            //convert item.expiration_time to date object
+            const dateString = item.expiration_time;
+            const dateToCheck = new Date(dateString);
+            const today = new Date();
+            //Remove time
+            dateToCheck.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0);
+            //Compare Values
+            const subscriptionIsCurrent = dateToCheck > today;
+            if(item.status === "active" && subscriptionIsCurrent) {
+                return true;
+            }
+            return false;
+        },   
+
         getDefaultUserAccessPermission() {
             return {
                 id: 0,
@@ -551,3 +570,11 @@ export default {
     },
 };
 </script>
+<style>
+    .active-subscription {
+        background-color: rgba(0,255,0,.15) !important;
+    }
+    .active-subscription:hover {
+        background-color: rgba(0,255,0,.25) !important;
+    }
+</style>
