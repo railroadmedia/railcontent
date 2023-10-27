@@ -123,7 +123,8 @@ class RevenueCatController extends Controller
                             );
                             break;
                         }
-                        $price = $data['event']['price'] ?? $musoraProduct->price;
+                        $price = $data['event']['price_in_purchased_currency'] ?? $musoraProduct->price;
+                        $currency = $data['event']['currency'];
                         $this->shopifySyncService->syncOrder(
                             $user,
                             [$musoraProduct->id],
@@ -132,7 +133,8 @@ class RevenueCatController extends Controller
                             $price,
                             $this->calculateTaxAmount($price, $data['event']['tax_percentage']),
                             $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
-                                : ShopifyPaymentSourceEnum::Google
+                                : ShopifyPaymentSourceEnum::Google,
+                            $currency
                         );
                         $this->setUserSubscription($user, $type);
                     }
@@ -218,7 +220,8 @@ class RevenueCatController extends Controller
                             );
                             break;
                         }
-                        $price = $data['event']['price'] ?? $musoraProduct->price;
+                        $price = $data['event']['price_in_purchased_currency'] ?? $musoraProduct->price;
+                        $currency = $data['event']['currency'];
                         $this->shopifySyncService->syncOrder(
                             $user,
                             [$musoraProduct->id],
@@ -227,7 +230,8 @@ class RevenueCatController extends Controller
                             $price,
                             $this->calculateTaxAmount($price, $data['event']['tax_percentage']),
                             $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
-                                : ShopifyPaymentSourceEnum::Google
+                                : ShopifyPaymentSourceEnum::Google,
+                            $currency
                         );
 
                         $this->setUserSubscription($user, $type);
@@ -696,7 +700,7 @@ class RevenueCatController extends Controller
         );
 
         $apiResponse = json_decode($revenuecatPurchase);
-        Log::debug('RevenueCat API response');
+        Log::debug('RevenueCat API response after purchase');
         Log::debug(var_export($apiResponse, true));
 
         $user = $this->revenueCatService->syncSubscriber(
