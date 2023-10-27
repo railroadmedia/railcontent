@@ -32,7 +32,7 @@ class MigrateRechargeSubscriptions extends Command
         }
 
         if (!$storageResult) {
-            throw new Exception(sprintf("%s: Failed to write .jsonl file", $this->getClassName()));
+            throw new Exception(sprintf("%s: Failed to write %s", $this->getClassName(), $filename));
         }
     }
 
@@ -45,7 +45,7 @@ class MigrateRechargeSubscriptions extends Command
             $this->info('Loading Subscriptions');
             $subscriptionsQuery = Subscription::query()->with('product')
                 ->where('is_active', 1)
-                ->where('type', 'subscription')
+                ->where('type', Subscription::TYPE_SUBSCRIPTION)
                 ->where('paid_until', '>', Carbon::now());
 
             if ($isTest) {
@@ -121,7 +121,6 @@ class MigrateRechargeSubscriptions extends Command
                     }
                     $product = $subscription->product;
                     $variantId = $product?->shopify_id ?? 0;
-                    //TODO:Check to make sure product has a shopify id
                     $productId = $productIds[$variantId] ?? 0;
                     $i++;
                     if (!$productId) {

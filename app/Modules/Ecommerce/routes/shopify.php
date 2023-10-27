@@ -1,12 +1,12 @@
 <?php
 
 use App\Modules\Ecommerce\Controllers\ShopifyWebHookController;
-use App\Modules\Ecommerce\Middleware\WebhookVerify;
+use App\Modules\Ecommerce\Middleware\ShopifyWebhookVerify;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('ecommerce/shopify')->group(function () {
     Route::prefix('webhook')
-        ->middleware(WebhookVerify::class)
+        ->middleware(ShopifyWebhookVerify::class)
         ->group(function () {
             Route::post(
                 'order/update',

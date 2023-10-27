@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Services;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use Doctrine\ORM\Exception\ORMException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
@@ -17,6 +18,8 @@ use Signifly\Shopify\Shopify;
 
 class ShopifyCustomerService
 {
+    use HandlesMaskedEmailAddress;
+
     private Shopify $shopify;
     private CustomerRepository $customerRepository;
     private EcommerceEntityManager $entityManager;
@@ -129,7 +132,7 @@ class ShopifyCustomerService
     : array {
         $customerData = [
             "currency" => "USD",
-            "email" => $user->getEmail(),
+            "email" => $this->getEmailForShopify($user->getEmail()),
             "first_name" => $user->first_name,
             "last_name" => $user->last_name,
             "note" => $user->support_note,

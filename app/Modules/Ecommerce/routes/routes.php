@@ -24,6 +24,11 @@ Route::prefix(config('ecommerce.route_prefix'))
         )
             ->middleware([\Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class]);
 
+        Route::post(
+            'revenuecat/signup',
+            \App\Modules\Ecommerce\Controllers\RevenueCatController::class.'@signupRevenuecat'
+        )
+            ->middleware([\Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class]);
         /*
 * ACCESS CODES
 */

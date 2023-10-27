@@ -6,11 +6,11 @@ use Closure;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Log;
 
-class WebhookVerify
+class ShopifyWebhookVerify
 {
     public function handle($request, Closure $next)
     {
-        $secret = env('SHOPIFY_WEBHOOK_SECRET');
+        $secret = config('shopify.webhooks.secret');
         if (!$secret) {
             Log::warning('SHOPIFY_WEBHOOK_SECRET not set in .env file.  Endpoints not protected.');
             return $next($request);

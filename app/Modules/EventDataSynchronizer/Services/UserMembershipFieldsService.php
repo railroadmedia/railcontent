@@ -5,6 +5,7 @@ namespace App\Modules\EventDataSynchronizer\Services;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Carbon\Carbon;
+use Log;
 use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Entities\UserProduct;
 use Railroad\Ecommerce\Repositories\ProductRepository;
