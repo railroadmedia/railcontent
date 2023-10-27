@@ -5,11 +5,11 @@
         <div class="text-center md:text-left md:flex justify-center items-center">
 
             <picture class="max-w-md lg:max-w-2xl order-1 w-full">
-                <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1300,quality=95/{!! $image !!}">
+                <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/{!! $image !!}">
                 <img class="w-full transition-opacity opacity-0 mb-6 md:mb-0 lg:-mt-11 lg:-mb-4 "
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=650,quality=95/{!! $image !!}"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/650x0/filters:quality(95)/{!! $image !!}"
                     alt="device image"
                 >
             </picture>
@@ -19,13 +19,13 @@
                 <a class="inline-block" href="{!! $appleUrl !!}" target="_blank">
                     <img
                         class="h-8 md:h-10 m-1"
-                        src="https://www.musora.com/musora-cdn/image/width=260,quality=95/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/download-on-app-store-button.png"
                         alt="app store icon"
                     ></a>
                 <a class="inline-block" href="{!! $googleUrl !!}" target="_blank">
                     <img
                         class="h-8 md:h-10 m-1"
-                        src="https://www.musora.com/musora-cdn/image/width=260,quality=95/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/google-play-button.png"
                         alt="google play icon"
                     >
                 </a>

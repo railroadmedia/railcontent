@@ -146,7 +146,7 @@
         <div class="px-3 py-6 sm:py-10">
             <div class="container mx-auto clearfix" style="max-width:920px">
                 <div class="text-left lesson-text">
-                    <h4 class="mb-1 sm:mb-3"><strong>Assets</strong></h4>
+                    <h4 class="mb-1 sm:mb-3"><strong>Resources</strong></h4>
                     @foreach($leadgen->assets as $key => $asset)
                         @php
                             $bodyData = $bodyData.'soundsliceModal'.($key+21).': false,';
