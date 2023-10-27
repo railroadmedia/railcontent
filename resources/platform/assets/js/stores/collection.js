@@ -20,40 +20,57 @@ export const useCollectionStore = defineStore({
             totalResults: 0,
         }
     },
-    actions:{
-        async applyFilter(category, item, clear = false){
-            if(clear){
-                this.filter.fields = {};
-            } else {
-                if(this.filter.fields[category]){
-                    const index = this.filter.fields[category].findIndex(p => p.key === item.key);
-
-                    if (index === -1){
-                        this.filter.fields[category].push(item);
-                    } else {
-                        this.filter.fields[category].splice(index, 1);
-                        
-                        if(this.filter.fields[category].length === 0){
-                            delete this.filter.fields[category];
-                        }
-                    }
-                } else {
-                    this.filter.fields[category] = [item];
-                }
-            }
-
-            //set active tab's filter applied to true and all others to false
-            this.tabData[this.filter.activeTab].filterApplied = true;
-            Object.keys(this.tabData).length > 0 && Object.keys(this.tabData).forEach((tab) => {
-                this.tabData[tab].filterApplied = false;
-            })
-
+    actions: {
+        applyFilter (category, item) {
+            this.updateFilterFields(category, item);
+            this.setAllTabsToFilterNotApplied();
+            this.setActiveTabToFilterApplied();
             this.getData();
         },
-        async clearFilter(){
-            this.applyFilter(null, null, true);
+
+        clearFilter () {
+            this.resetFilterFields();
+            this.setAllTabsToFilterNotApplied();
+            this.getData();
         },
-        async fetchData(){
+
+        updateFilterFields (category, item) {
+            const existingCategory = this.filter.fields[category];
+
+            if (!existingCategory) {
+                this.filter.fields[category] = [item];
+                return;
+            }
+
+            const itemIndex = existingCategory.findIndex(p => p.key === item.key);
+
+            if (itemIndex === -1) {
+                existingCategory.push(item);
+            } else {
+                existingCategory.splice(itemIndex, 1);
+
+                if (existingCategory.length === 0) {
+                    delete this.filter.fields[category];
+                }
+            }
+        },
+
+        resetFilterFields () {
+            this.filter.fields = {};
+        },
+
+        setAllTabsToFilterNotApplied () {
+            Object.keys(this.tabData).forEach(tab => {
+                this.tabData[tab].filterApplied = false;
+            });
+        },
+
+        setActiveTabToFilterApplied () {
+            if (this.tabData[this.filter.activeTab]) {
+                this.tabData[this.filter.activeTab].filterApplied = true;
+            }
+        },
+        async fetchData () {
             const userStore = useUserStore();
 
             try {
@@ -69,8 +86,8 @@ export const useCollectionStore = defineStore({
                                 ...this.filter.params,
                                 included_fields: this.getIncludedFields(),
                                 [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.tabData[this.filter.activeTab].searchTerm,
-                        },
-                    })
+                            },
+                        })
                 return response;
             } catch (e) {
                 console.error(e);
@@ -80,21 +97,21 @@ export const useCollectionStore = defineStore({
                 })
             }
         },
-        async getData(replace = true, displayLoading = true){
+        async getData (replace = true, displayLoading = true) {
             this.loading = displayLoading;
             this.fetching = true;
 
-            if(replace) this.tabData[this.filter.activeTab].currentPage = 1;
+            if (replace) this.tabData[this.filter.activeTab].currentPage = 1;
 
             const response = await this.fetchData();
             this.setData(response, replace);
 
             this.fetching = false;
         },
-        getIncludedFields(){
+        getIncludedFields () {
             let fields = [...this.filter.params.included_fields];
 
-            if(Object.keys(this.filter.fields).length > 0){
+            if (Object.keys(this.filter.fields).length > 0) {
                 Object.keys(this.filter.fields).forEach((category) => {
                     this.filter.fields[category].forEach((item) => {
                         fields.push(`${category},${item.key}`);
@@ -104,22 +121,22 @@ export const useCollectionStore = defineStore({
 
             return fields;
         },
-        getParams(){
+        getParams () {
             const params = new URLSearchParams(window.location.search);
 
             if (params.get('term')) this.tabData[this.filter.activeTab].searchTerm = params.get('term') || '';
             this.tabData[this.filter.activeTab].sort = params.get('sort') || 'slug';
 
         },
-        loadMore(){
-            if (!this.fetching){
+        loadMore () {
+            if (!this.fetching) {
                 this.tabData[this.filter.activeTab].currentPage++;
-                this.getData(false , false);
+                this.getData(false, false);
             }
         },
-        setData(response, replace){
-            if(response){
-                if(replace){
+        setData (response, replace) {
+            if (response) {
+                if (replace) {
                     this.data = [...response.data.data];
                     this.tabData[this.filter.activeTab].totalPages = Math.ceil(
                         response.data.meta.totalResults / this.filter.limit
@@ -132,20 +149,20 @@ export const useCollectionStore = defineStore({
 
             this.loading = false;
         },
-        setDefaults(defaults){
-          if(defaults.data){
-              this.data = defaults.data;
-          }
+        setDefaults (defaults) {
+            if (defaults.data) {
+                this.data = defaults.data;
+            }
 
-          if(defaults.filter){
-              this.filter = {...this.filter, ...defaults.filter};
-          }
+            if (defaults.filter) {
+                this.filter = { ...this.filter, ...defaults.filter };
+            }
 
-          if(defaults.tabData){
-              this.tabData = {...defaults.tabData};
-          }
+            if (defaults.tabData) {
+                this.tabData = { ...defaults.tabData };
+            }
         },
-        setParams(){
+        setParams () {
             const url = new URL(window.location.origin + window.location.pathname);
 
             url.searchParams.set(this.filter.hasOwnProperty('term') ? 'term' : 'title', this.tabData[this.filter.activeTab].searchTerm);
@@ -153,16 +170,16 @@ export const useCollectionStore = defineStore({
 
             window.history.pushState({}, '', url);
         },
-        setSearchTerm(term){
+        setSearchTerm (term) {
             this.tabData[this.filter.activeTab].searchTerm = term;
             this.tabData[this.filter.activeTab].currentPage = 1;
             this.getData();
         },
-        sortData(item){
+        sortData (item) {
             this.tabData[this.filter.activeTab].sort = item;
             this.getData();
         },
-        switchTab(tab){
+        switchTab (tab) {
             //Save page data
             this.tabData[this.filter.activeTab] = {
                 ...this.tabData[this.filter.activeTab],
@@ -170,7 +187,7 @@ export const useCollectionStore = defineStore({
             }
 
             this.filter.activeTab = tab;
-            if(this.tabData[tab].filterApplied){
+            if (this.tabData[tab].filterApplied) {
                 this.data = ([...this.tabData[this.filter.activeTab].data]);
             } else {
                 this.getData();
