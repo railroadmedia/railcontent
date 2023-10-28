@@ -29,6 +29,7 @@ import CohortBanner from './vue/components/CohortBanner/CohortBanner.vue';
 import ContentInfo from './vue/components/ContentInfo/ContentInfo';
 import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWrapper';
 import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper';
+import ChildCollectionPage from './vue/components/CollectionPage/ChildCollectionPage';
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -262,6 +263,7 @@ app.component('AppContainer', AppContainer)
     .component('ContentInfo', ContentInfo)
     .component('CollectionFilterWrapper', CollectionFilterWrapper)
     .component('CollectionWrapper', CollectionWrapper)
+    .component('ChildCollectionPage', ChildCollectionPage)
 
     .component('PlaylistPlaybackWrapper', defineAsyncComponent(() =>
         import(
@@ -464,10 +466,10 @@ app.component('AppContainer', AppContainer)
             `./vue/components/Playlists/Playlist/PlaylistCatalog.vue`
         )
     ))
-    .component('PlaylistBreadcrumb', defineAsyncComponent(() =>
+    .component('Breadcrumb', defineAsyncComponent(() =>
         import(
-            /* webpackChunkName: "playlist-breadcrumb" */
-            `./vue/components/Playlists/Breadcrumb.vue`
+            /* webpackChunkName: "breadcrumb" */
+            `./vue/components/Breadcrumb/Breadcrumb.vue`
         )
     ))
     .component('PlaylistCollectionHeader', defineAsyncComponent(() =>
