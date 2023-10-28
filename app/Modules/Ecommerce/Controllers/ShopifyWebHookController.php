@@ -62,18 +62,18 @@ class ShopifyWebHookController extends Controller
         $brand = $order[ShopifyMetafieldNamespace::Musora->value . '.' . ShopifyMetafieldKey::Brand->value] ?? 'musora';
         $data = [
             'checkout_token' => $order['checkout_token'],
-            'processed_at' => $order['processed_at'],
             'order_id' => $order['id'],
             'subtotal' => $order['subtotal_price'],
             'total' => $order['total_price'],
-            'currency' => $order['currency'],
-            'tax' => $order['total_tax'],
             'revenue' => intval($order['total_price']) + intval($order['total_discounts']),
             'shipping' => $order['total_shipping_price_set']['shop_money']['amount'],
+            'tax' => $order['total_tax'],
             'discount' => $order['total_discounts'],
-            'brand' => $brand,
-            'promo_code' => $order['discount_codes'],
+            'discount_codes' => $order['discount_codes'],
+            'currency' => $order['currency'],
             'products' => $this->getProductList($order['line_items']),
+            'brand' => $brand,
+            'timestamp' => Carbon::parse($order['processed_at'])->timestamp,
         ];
 
         dispatch(
