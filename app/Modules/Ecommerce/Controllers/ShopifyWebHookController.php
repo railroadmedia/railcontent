@@ -49,7 +49,6 @@ class ShopifyWebHookController extends Controller
 
 
             $this->handleOrderCreatedEventTracking($request->all());
-
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
@@ -60,7 +59,7 @@ class ShopifyWebHookController extends Controller
     {
         $user = User::query()->where('shopify_id', $order['customer']['id'])->first();
 
-        $brand = $order[ShopifyMetafieldNamespace::Musora . '.' . ShopifyMetafieldKey::Brand] ?? 'musora';
+        $brand = $order[ShopifyMetafieldNamespace::Musora->value . '.' . ShopifyMetafieldKey::Brand->value] ?? 'musora';
         $data = [
             'checkout_token' => $order['checkout_token'],
             'processed_at' => $order['processed_at'],
