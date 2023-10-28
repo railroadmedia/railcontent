@@ -23,7 +23,7 @@ class CustomerIoSyncOrderPlaced extends CustomerIoBaseJob
     public function handle(ShopifySyncService $shopifySyncService): void
     {
         $order = $this->order;
-        $user = User::query()->where('shopify_customer_id', $order['customer']['id'])->first();
+        $user = User::query()->where('shopify_id', $order['customer']['id'])->first();
 
         $ownedProducts = $shopifySyncService
             ->getOwnedProducts($order['customer']['id'])
