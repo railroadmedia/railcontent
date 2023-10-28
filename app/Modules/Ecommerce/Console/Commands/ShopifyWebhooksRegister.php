@@ -19,7 +19,7 @@ class ShopifyWebhooksRegister extends Command
 
     public array $webHookFields = [
 
-    ]
+    ];
 
     protected $signature = 'ecommerce:registerShopifyWebhook {customBaseURL?}';
 
@@ -73,6 +73,7 @@ class ShopifyWebhooksRegister extends Command
                 $data['fields'] = $this->webHookFields[$topic];
                 $data['metafield_namespaces'] = [ShopifyMetafieldNamespace::Musora->value];
             }
+
             $result = $shopify->createWebhook($data);
             $this->info("Webhooks registered: $url $topic");
         } catch (\Exception $e) {
