@@ -1,27 +1,54 @@
-<a class="product-wrap text-black pb-2 md:pb-3 hover:opacity-90 transition-opacity" data-price="{{ floatVal($price) }}" data-category="{{ $category }}"
-        @if(!empty($itemURL)) href="{{ ($itemURL === '/drumshop/' || $itemURL === '/shop/') ? '/' : $itemURL }}" @if(!empty($externalURL)) target="_blank" @endif @endif>
+<a class="product-wrap relative text-black pb-2 md:pb-3 hover:opacity-90 transition-opacity" data-price="{{ floatVal($price) }}" data-category="{{ $category }}"
+        @if(!empty($itemURL)) href="{{ ($itemURL === '/drumshop/' || $itemURL === '/shop/') ? '/' : $itemURL }}" @if(!empty($externalURL)) target="_blank" @endif @endif
+        x-data="{ open: false }">
+    @if(!empty($sizes) && count($sizes) > 0)
+       <div x-cloak x-bind:class="open ? 'max-h-[1000px] p-3 pb-2' : 'max-h-0'" x-on:click.outside="open = false"
+               class="transition-opacity transition-transform duration-200 overflow-hidden absolute top-0 left-0 right-0 z-40 rounded-lg"
+       style="background:rgba(0, 0, 0, 0.8);">
+            @foreach($sizes as $size)
+               @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() !== 0)
+                    <p class="online-atc vue-add-to-cart add-to-cart-button text-black bg-white rounded-full mb-1 z-20 px-2 py-1 text-sm shadow-md font-black hover:opacity-90"
+
+                            value="?products[{!! $sku !!}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1"
+                            data-product-json='{ "{!! $sku !!}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1 }'
+                            @if($theme !== 'musora') href="/ecommerce/add-to-cart?go-back-to-shop=true" @endif
+                    @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
+                    @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
+                    >
+                        {{ $size->name }}
+                    </p>
+               @endif
+            @endforeach
+        </div>
+    @endif
     <div class="overflow-hidden rounded-lg relative bg-cover bg-top mb-3 border border-gray-300" style="padding-bottom: 100%;background-image:url('https://www.musora.com/musora-cdn/image/width=520,quality=95/{{ $thumbnail }}');">
         @if (!empty($badgeText))
-            <span class="top-left-badge bg-promo">
-                                {!! $badgeText !!}
-                            </span>
+            <p class="absolute top-0 left-0 rounded-br-md bg-promo font-black leading-none uppercase py-1 px-2 w-auto inline-block text-xs">
+                {!! $badgeText !!}
+            </p>
         @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
-            <span class="top-left-badge bg-promo">
-                                Save {{ round(100 - (100 * ($price / $fullPrice))) }}%
-                            </span>
+            <p class="absolute top-0 left-0 rounded-br-md bg-promo font-black leading-none uppercase py-1 px-2 w-auto inline-block text-xs">
+                Save {{ round(100 - (100 * ($price / $fullPrice))) }}%
+            </p>
         @endif
-
-        @if(!empty($sku) && (empty($sizes) || count($sizes) === 0))
-        <p
-                class="online-atc vue-add-to-cart add-to-cart-button text-black bg-white rounded-full absolute top-0 right-0 m-2 z-20 px-1.5 py-1 text-sm shadow-md"
-                @if($theme !== 'musora')href="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1" @else @click="orderModal = true" @endif
-                data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1" value="?products[{{ $sku }}]=1"
-                data-product-json='{ "{{$sku}}": 1 }'
-                @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
-        @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
-        >
-            <i class="fas fa-cart-plus"></i>
-        </p>
+        @if(!$soldOut)
+            @if(!empty($sizes) && count($sizes) > 0)
+                <p class="online-atc vue-add-to-cart add-to-cart-button text-black bg-white rounded-full absolute top-0 right-0 m-2 z-20 px-1.5 py-1 text-sm shadow-md"
+                        x-on:click="open = !open;"
+                ><i class="fas fa-cart-plus"></i></p>
+            @elseif(!empty($sku) && (empty($sizes) || count($sizes) === 0))
+                <p
+                    class="online-atc vue-add-to-cart add-to-cart-button text-black bg-white rounded-full absolute top-0 right-0 m-2 z-20 px-1.5 py-1 text-sm shadow-md"
+                    href="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
+                    data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
+                    value="?products[{{ $sku }}]=1"
+                    data-product-json='{ "{{$sku}}": 1 }'
+                    @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
+                    @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
+                >
+                    <i class="fas fa-cart-plus"></i>
+                </p>
+            @endif
         @endif
 
         @if(!empty($packLogo))
@@ -36,16 +63,16 @@
     @if(!empty($packAuthor))
         <p class="leading-tight text-sm mb-1">{{ $packAuthor }}</p>
     @endif
-    @if(round(100 - (100 * ($price / $fullPrice))) > 1)
-        <p class="leading-tight"><s>WAS ${{ floatVal($fullPrice) }}</s>
-            <strong class="text-{{ $theme }} font-extrabold"> NOW
-                @if(number_format($price, 2) == intval($price))
-                    ${{  floatVal($price)  }}
-                @else
-                    ${{  number_format($price, 2)  }}
-                @endif
-            </strong></p>
-    @else
-        <p><strong class="leading-tight text-{{ $theme }} font-black">${{  floatVal($price)  }}</strong></p>
-    @endif
+    <p class="leading-tight">
+        @if(round(100 - (100 * ($price / $fullPrice))) > 1)
+            <s class="opacity-60">${{ floatVal($fullPrice) }}</s>
+        @endif
+        <strong class="text-{{ $theme }} font-extrabold">
+            @if(number_format($price, 2) == intval($price))
+                ${{  floatVal($price)  }}
+            @else
+                ${{  number_format($price, 2)  }}
+            @endif
+        </strong>
+    </p>
 </a>
