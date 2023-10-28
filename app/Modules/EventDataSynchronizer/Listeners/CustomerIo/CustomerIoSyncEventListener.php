@@ -2,8 +2,12 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners\CustomerIo;
 
+use App\Modules\Ecommerce\Collections\OrderCollection;
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\Ecommerce\Events\UserProductsUpdated;
+use App\Modules\Ecommerce\Models\Product;
+use App\Modules\Ecommerce\Models\Shopify\Order;
+use App\Modules\Ecommerce\Models\Shopify\OrderLineItem;
 use App\Modules\EventDataSynchronizer\Events\FirstActivityPerDay;
 use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
 use App\Modules\EventDataSynchronizer\Events\UTMLinks;
@@ -17,6 +21,7 @@ use App\Modules\EventDataSynchronizer\Jobs\CustomerIoTriggerEvent;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserCreated;
@@ -350,9 +355,11 @@ class CustomerIoSyncEventListener
             $userId = $userAccessPermissionsUpdated->getUserId();
             $user = $this->userService->getByIdOrNull($userId);
 
+            $data = $this->getCustomerIoDataFromOrders($userAccessPermissionsUpdated->getOrderCollection());
+
             if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                 dispatch(
-                    (new CustomerIoSyncUserByUserId($user))->delay(
+                    (new CustomerIoSyncUserByUserId($user, $data))->delay(
                         Carbon::now()
                             ->addSeconds(3)
                     )
@@ -1409,6 +1416,64 @@ class CustomerIoSyncEventListener
                         ->addSeconds(3)
                 )
         );
+    }
+
+    private function getCustomerIoDataFromOrders(OrderCollection $orderCollection): array
+    {
+        $attributes = [];
+
+        $membershipOrderItemsLookup = $orderCollection->getOrders()->flatMap(function ($order) {
+            /** @var Order $order */
+            return $order->lineItems->filter(function ($orderLineItem) {
+                /** @var OrderLineItem $orderLineItem */
+                return $orderLineItem->product->isDigital() && $orderLineItem->product->isMembershipProduct();
+            });
+        })->groupBy(function ($orderLineItem) {
+            /** @var OrderLineItem $orderLineItem */
+            return $orderLineItem->product->brand;
+        });
+
+        $packsOrderItemLookup = $orderCollection->getOrders()->flatMap(function ($order) {
+            /** @var Order $order */
+            return $order->lineItems->filter(function ($orderLineItem) {
+                /** @var OrderLineItem $orderLineItem */
+                return $orderLineItem->product->isDigital() && $orderLineItem->product->isPack();
+            });
+        })->groupBy(function ($orderLineItem) {
+            /** @var OrderLineItem $orderLineItem */
+            return $orderLineItem->product->brand;
+        });
+
+        $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
+
+        foreach ($brands as $brand) {
+            $orderItems = ($membershipOrderItemsLookup[$brand] ?? collect())->sort(function ($orderLineItem) {
+                /** @var OrderLineItem $orderLineItem */
+                return $orderLineItem->order->processedAt->timestamp;
+            });
+
+            $first = $orderItems->first();
+            $attributes[$brand . '_membership_first-access-start-date'] = $first ? $first->order->processedAt->timestamp : null;
+            $last = $orderItems->last();
+            $attributes[$brand . '_membership_latest-access-start-date'] = $last ? $last->order->processedAt->timestamp : null;
+
+            $packs = $packsOrderItemLookup[$brand] ?? collect();
+            $attributes[$brand . '_owned_pack_product_ids'] = implode(
+                ', ',
+                $packs->map(function ($item) {
+                    /** @var OrderLineItem $item */
+                    return "_" . $item->product->id . "_";
+                })->toArray()
+            );
+            $attributes[$brand . '_owned_pack_product_skus'] = implode(
+                ', ',
+                $packs->map(function ($item) {
+                    /** @var OrderLineItem $item */
+                    return "_" . $item->product->sku . "_";
+                })->toArray()
+            );
+        }
+        return $attributes;
     }
 
 }

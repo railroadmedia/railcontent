@@ -132,6 +132,11 @@ class Product extends Model
         return in_array($this->getDigitalAccessTypeAsEnum(), Product::MEMBERSHIP_DIGITAL_ACCESS_TYPES);
     }
 
+    public function isPack(): bool
+    {
+        return $this->digital_access_type == Product::DIGITAL_ACCESS_TYPE_SPECIFIC_CONTENT_ACCESS;
+    }
+
     public function getDigitalAccessTypeAsEnum(): ?DigitalAccessType
     {
         return DigitalAccessType::tryFrom($this->digital_access_type);

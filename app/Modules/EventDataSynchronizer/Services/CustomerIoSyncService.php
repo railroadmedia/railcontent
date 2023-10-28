@@ -70,18 +70,27 @@ class CustomerIoSyncService
     {
         if (config('shopify.enabled')) {
             $membershipAccessAttributes = $this->getUsersMembershipAccessAttributes($user, $brands);
+            $contentFollowAttributes = $this->getUsersContentFollowAttributes($user);
+
+            return array_merge(
+                $this->getUsersMusoraProfileAttributes($user),
+                $membershipAccessAttributes,
+                $contentFollowAttributes,
+            );
         } else {
             $membershipAccessAttributes = $this->getUsersMembershipAccessAttributesDeprecated($user, $brands);
-        }
-        $contentFollowAttributes = $this->getUsersContentFollowAttributes($user);
 
-        return array_merge(
-            $this->getUsersMusoraProfileAttributes($user),
-            $membershipAccessAttributes,
-            $this->getUsersSubscriptionAttributes($user, $membershipAccessAttributes, $brands),
-            $this->getUsersProductOwnershipStrings($user, $brands),
-            $contentFollowAttributes,
-        );
+            $contentFollowAttributes = $this->getUsersContentFollowAttributes($user);
+
+            return array_merge(
+                $this->getUsersMusoraProfileAttributes($user),
+                $membershipAccessAttributes,
+                $this->getUsersSubscriptionAttributes($user, $membershipAccessAttributes, $brands),
+                $this->getUsersProductOwnershipStrings($user, $brands),
+                $contentFollowAttributes,
+            );
+        }
+
     }
 
     /**
@@ -117,16 +126,14 @@ class CustomerIoSyncService
     private function getUsersMembershipAccessAttributes(User $user, mixed $brands): array
     {
         $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($user->id);
-        //Log::error("Customer IO attributes Not implemented");
-        return [];
-//        $isAppSignup = false;
-//        $attributes = [];
-//        foreach ($brands as $brand) {
-//            $attributes += [
-//                $brand . "_membership_access-expiration-date" => $user->membership_expiration_date,
-//                $brand . "_membership_latest-access-start-date" => "',
+        $isAppSignup = false;
+        $attributes = [];
+        foreach ($brands as $brand) {
+            $attributes += [
+                $brand . "_membership_access-expiration-date" => $user->membership_expiration_date,
+//                $brand . "_membership_latest-access-start-date" => '',
 //                $brand . "_membership_first-access-start-date" => '',
-//                $brand . "_membership_is_lifetime" => $user->is_lifetime_member,
+                $brand . "_membership_is_lifetime" => $user->is_lifetime_member,
 //                $brand . "_membership_latest-access-type" => '',
 //                $brand . "_membership_status" => '',
 //                $brand . "_membership_latest-access-product-id" => '',
@@ -141,12 +148,12 @@ class CustomerIoSyncService
 //                $brand . '_membership_subscription_first-start-date' => '',
 //                $brand . '_membership_subscription_trial-type' => '',
 //                $brand . '_user_payment_primary-method-expiration-date' => '',
-//                $brand . '_membership_subscription_source_app-store' => $user->hasMobileMembership(),
+                $brand . '_membership_subscription_source_app-store' => $user->hasMobileMembership(),
 //                $brand . '_owned_pack_product_skus' => '',
 //                $brand . '_owned_pack_product_ids' => '',
-//            ];
-//        }
-//        return $attributes;
+            ];
+        }
+        return $attributes;
     }
 
 

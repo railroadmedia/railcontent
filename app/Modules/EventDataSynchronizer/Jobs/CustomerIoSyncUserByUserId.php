@@ -21,10 +21,12 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
      * @var User
      */
     private $user;
+    private array $data;
 
-    public function __construct(User $user)
+    public function __construct(User $user, array $data = [])
     {
         $this->user = $user;
+        $this->data = $data;
     }
 
     /**
@@ -56,7 +58,9 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
 
                 if ($syncThisWorkspace) {
                     $customerAttributes = $customerIoSyncService->getUsersCustomAttributes($this->user, $brands);
-
+                    if ($this->data ) {
+                        array_merge($customerAttributes, $this->data );
+                    }
                     $customerIoService->createOrUpdateCustomerByUserId(
                         $this->user->id,
                         $accountName,

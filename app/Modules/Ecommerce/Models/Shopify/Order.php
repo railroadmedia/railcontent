@@ -6,6 +6,7 @@ use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 
 class Order
 {
@@ -18,9 +19,8 @@ class Order
     public ?Carbon $processedAt;
     public ?Carbon $cancelledAt;
 
-    public function __construct(
-        $graphGLResponse
-    ) {
+    public function __construct($graphGLResponse)
+    {
         $this->gid = $graphGLResponse->id;
         $this->id = str_replace('gid://shopify/Order/', '', $graphGLResponse->id);
         $this->brand = $graphGLResponse->brand?->value;
@@ -30,7 +30,7 @@ class Order
         $this->processedAt = $graphGLResponse->processedAt ? Carbon::parse($graphGLResponse->processedAt) : null;
         $this->cancelledAt = $graphGLResponse->cancelledAt ? Carbon::parse($graphGLResponse->cancelledAt) : null;
         $this->lineItems = collect($graphGLResponse->lineItems->nodes)->map(function ($item) {
-            return new OrderLineItem($item);
+            return new OrderLineItem($this, $item);
         });
     }
 
@@ -45,5 +45,20 @@ class Order
             default:
                 return UserAccessPermissionsSourceEnum::Web;
         }
+    }
+
+    public function setProducts(Collection $productLookup): void
+    {
+        $this->lineItems->each(function ($lineItem) use ($productLookup) {
+            /** @var OrderLineItem $lineItem */
+            $product = $productLookup[$lineItem->sku] ?? null;
+            if (!$product) {
+                Log::warning(
+                    "Product $lineItem->sku does not exist.  Fix issue and resync order: $this->id"
+                );
+                return;
+            }
+            $lineItem->setProduct($product);
+        });
     }
 }

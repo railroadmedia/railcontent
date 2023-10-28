@@ -3,11 +3,13 @@
 namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Content\Services\ContentPermissionsService;
+use App\Modules\Ecommerce\Collections\OrderCollection;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\Ecommerce\Models\Shopify\Order;
+use App\Modules\Ecommerce\Models\Shopify\OrderLineItem;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\UserProduct;
@@ -115,28 +117,30 @@ class UserAccessPermissionsService
         }
 
         $accessPermissions = $this->getUserAccessPermissions($userId);
-        event(new UserAccessPermissionsUpdated($accessPermissions));
+        if (config('shopify.enabled')) {
+            event(new UserAccessPermissionsUpdated($accessPermissions));
+        }
     }
 
-    public function syncUser(User $user, $skipRechargeSync = false): void
+    public function syncUser(User $user): void
     {
         //users may have legacy data that needs to be synced
         $accessPermissions = $this->getUserAccessPermissions($user->id);
-        event(new UserAccessPermissionsUpdated($accessPermissions, $skipRechargeSync));
+        if (config('shopify.enabled')) {
+            event(new UserAccessPermissionsUpdated($accessPermissions));
+        }
     }
 
-    public function syncShopifyOrders(User $user, $orders, $products, $skipRechargeSync = false): void
+    public function syncShopifyOrders(User $user, OrderCollection $orderCollection): void
     {
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
         $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($user->id);
-        $productLookup = $products->keyBy('sku');
 
-        foreach ($orders->sortBy('created_at') as $order) {
+        foreach ($orderCollection->getOrders()->sortBy('created_at') as $order) {
             $this->syncShopifyOrder(
                 $user,
                 $order,
                 $existingAccessPermissionsLookup,
-                $productLookup,
                 $contentPermissionsLookup
             );
         }
@@ -147,30 +151,23 @@ class UserAccessPermissionsService
         );
 
         $accessPermissions = $this->getUserAccessPermissions($user->id);
-        event(new UserAccessPermissionsUpdated($accessPermissions, $skipRechargeSync));
+        if (config('shopify.enabled')) {
+            event(new UserAccessPermissionsUpdated($accessPermissions, $orderCollection));
+        }
     }
 
     private function syncShopifyOrder(
         User $user,
         Order $order,
         Collection $existingAccessPermissionsLookup,
-        Collection $productLookup,
         Collection $contentPermissionsLookup
     ): bool {
         $shopifyOrderId = $order->id;
 
         $wasUpdated = false;
         foreach ($order->lineItems as $lineItem) {
-            $sku = $lineItem->sku;
-            /** @var Product $product */
-            $product = $productLookup[$sku] ?? null;
-            if (!$product) {
-                Log::warning(
-                    "Product $sku does not exist.  Fix issue and resync user: $user->id email: $user->email order: $shopifyOrderId"
-                );
-                continue;
-            }
-            $contentPermissions = $product->getContentPermissions($contentPermissionsLookup);
+            /** @var OrderLineItem $lineItem */
+            $contentPermissions = $lineItem->product->getContentPermissions($contentPermissionsLookup);
 
             foreach ($contentPermissions as $contentPermission) {
                 $hash = sha1("$shopifyOrderId.$lineItem->id.$contentPermission->id");
@@ -185,7 +182,7 @@ class UserAccessPermissionsService
                         Carbon::parse($order->processedAt),
                         $source,
                         $hash,
-                        $product,
+                        $lineItem->product,
                         $status
                     );
                     if ($accessPermission == null) {
@@ -200,7 +197,7 @@ class UserAccessPermissionsService
                 }
             }
             $this->handleBonusMembershipPermission(
-                $product,
+                $lineItem->product,
                 $user,
                 $order->getPaymentSourceEnum(),
                 $shopifyOrderId . $lineItem->id,
@@ -404,7 +401,9 @@ class UserAccessPermissionsService
         if (!$accessPermissions->getCollection()->contains('id', $userAccessPermission->id)) {
             Log::error("Permission does not exist in database.");
         }
-        event(new UserAccessPermissionsUpdated($accessPermissions));
+        if (config('shopify.enabled')) {
+            event(new UserAccessPermissionsUpdated($accessPermissions));
+        }
         return $userAccessPermission;
     }
 

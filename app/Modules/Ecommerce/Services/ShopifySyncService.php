@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
+use App\Modules\Ecommerce\Collections\OrderCollection;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
@@ -54,9 +55,9 @@ class ShopifySyncService
         $this->shopifyGateway = $shopifyGateway;
     }
 
-    public function syncCustomer($shopifyCustomerId, $email = '', $skipRechargeSync = false): void
+    public function syncCustomer($shopifyCustomerId, $email = ''): void
     {
-        if (!config('shopify.enabled') || !$shopifyCustomerId) {
+        if (!$shopifyCustomerId) {
             return;
         }
         Log::debug("Customer $shopifyCustomerId: GetCustomerOrders");
@@ -67,12 +68,13 @@ class ShopifySyncService
             $count = $orders->count();
             Log::debug("Customer $shopifyCustomerId: Found $count orders");
             $user = $this->getUser($shopifyCustomerId, $email);
-            $this->userAccessPermissionsService->syncShopifyOrders($user, $orders, $products, $skipRechargeSync);
+            $orderCollection = new OrderCollection($orders, $products);
+            $this->userAccessPermissionsService->syncShopifyOrders($user, $orderCollection);
         } else {
             Log::debug("Customer $shopifyCustomerId: No digital products found");
             $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
             if ($user) {
-                $this->userAccessPermissionsService->syncUser($user, $skipRechargeSync);
+                $this->userAccessPermissionsService->syncUser($user);
             }
         }
     }
