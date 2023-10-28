@@ -25,7 +25,7 @@ class ShopifyWebhooksRegister extends Command
 
     public function __construct()
     {
-        $this->webHookFields['ordesr/create'] = [
+        $this->webHookFields['orders/create'] = [
             'id',
             'customer',
             'line_items',
