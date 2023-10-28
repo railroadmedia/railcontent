@@ -287,15 +287,44 @@ class UserDelete extends Command
             $connection = $this->databaseManager->connection(config('usora.database_connection_name'));
 
             // this MIGHT be a way to clean things up more, but it's a bit too aggressive
-            // $trialProductIds = $connection->table('ecommerce_products')
-            //     ->select(['ecommerce_products.id'])
-            //     ->where("sku", "like", "%trial%")
-            //     ->get()
-            //     ->pluck("id");
+            $trialProductIds = $connection->table('ecommerce_products')
+                ->select(['ecommerce_products.id'])
+                ->where("sku", "like", "%trial%")
+                ->get()
+                ->pluck("id");
 
             $usersToDelete = $connection->table('usora_users')
                 ->select(['usora_users.id', 'usora_users.email'])
-                ->join('ecommerce_subscriptions', 'ecommerce_subscriptions.user_id', '=', 'usora_users.id')
+                // remove any that have a successful subscription payment
+                ->join('ecommerce_subscriptions', function (JoinClause $join) {
+                    $join->join(
+                        'ecommerce_subscription_payments',
+                        'ecommerce_subscription_payments.subscription_id',
+                        '=',
+                        'ecommerce_subscriptions.id'
+                    )
+                        ->on('ecommerce_subscriptions.user_id', '=', 'usora_users.id')
+                        ->whereNotIn('ecommerce_subscriptions.id', function (Builder $q) {
+                            $q->select('subscription_id')
+                                ->from('ecommerce_subscription_payments')
+                                ->whereColumn(
+                                    'subscription_id',
+                                    '=',
+                                    'ecommerce_subscriptions.id'
+                                )
+                                ->whereNotIn('payment_id', function ($paymentQ) {
+                                    $paymentQ->select('id')
+                                        ->from('ecommerce_payments')
+                                        ->where('total_paid', '>', 0)
+                                        ->whereColumn(
+                                            'id',
+                                            '=',
+                                            'ecommerce_subscription_payments.payment_id'
+                                        );
+                                });
+                        });
+                })
+
                 // remove any that have a successful payment
                 ->join('ecommerce_user_payment_methods', function (JoinClause $join) {
                     $join->leftJoin(
@@ -319,8 +348,7 @@ class UserDelete extends Command
                 ->where(function (Builder $query) {
                     $query->whereRaw($this->databaseManager->raw('last_used_brand is null or email LIKE "%data%"'));
                 })
-                ->where('ecommerce_subscriptions.product_id', '=', 488)
-                // ->whereIn('ecommerce_subscriptions.product_id', $trialProductIds)
+                ->whereIn('ecommerce_subscriptions.product_id', $trialProductIds)
                 ->orderBy('usora_users.id', 'desc')
                 ->when(!is_null($startingId), function (Builder $q) use ($startingId) {
                     return $q->where('usora_users.id', '>=', $startingId);
