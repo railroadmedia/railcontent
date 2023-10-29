@@ -7,10 +7,11 @@
             @foreach ($gridItems as $key => $gridItem)
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0 max-w-xs sm:max-w-full">
                     <picture class="w-1/3 sm:w-full">
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/{{ $gridItem['image'] }}">
+                        <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/{{ $gridItem['image'] }}">
+
                         <img
-                            class=" rounded-xl mb-3 transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=220,quality=95/{{ $gridItem['image'] }}"
+                            class="rounded-xl mb-3 transition-opacity opacity-0"
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/220x0/filters:quality(95)/{{ $gridItem['image'] }}"
                             alt="grid{{$key+1}}"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"

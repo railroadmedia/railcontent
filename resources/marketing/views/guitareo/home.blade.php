@@ -5,7 +5,7 @@
 
     <!-- Hero Component -->
     @component('_partials.components.hero-section', [
-        "backgroundImage" => "https://d3fzm1tzeyr5n3.cloudfront.net/guitareo/homepage/guitareo-hero.jpg",
+        "backgroundImage" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-hero.jpg",
         "gradientClasses" => "from-[#032829] to-[#032829]"
     ])
         @slot('content')

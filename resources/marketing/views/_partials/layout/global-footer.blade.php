@@ -36,11 +36,11 @@
                     <div class="flex">
                         {{-- App Store Link --}}
                         <a style="width: 48%;max-width:130px; display: inline-block; margin-right: 2%; margin-top: 10px;" href="https://itunes.apple.com/us/app/musora/id1619053766?ls=1" target="_blank">
-                            <img src="https://www.musora.com/musora-cdn/image/width=260,quality=95/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png">
+                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/download-on-app-store-button.png">
                         </a>
                         {{-- Google Play Store Link--}}
                         <a style="width: 48%;max-width:130px; display: inline-block; margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.musoraapp" target="_blank">
-                            <img src="https://www.musora.com/musora-cdn/image/width=260,quality=95/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png">
+                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/google-play-button.png">
                         </a>
                     </div>
                 </div>
