@@ -267,7 +267,7 @@ class UserDelete extends Command
     /**
      * Execute the command
      *
-     * @param  DatabaseManager  $databaseManager
+     * @param DatabaseManager $databaseManager
      * @return void
      */
     public function handle(DatabaseManager $databaseManager): void
@@ -295,60 +295,49 @@ class UserDelete extends Command
 
             $usersToDelete = $connection->table('usora_users')
                 ->select(['usora_users.id', 'usora_users.email'])
-                // remove any that have a successful subscription payment
-                ->join('ecommerce_subscriptions', function (JoinClause $join) {
-                    $join->join(
-                        'ecommerce_subscription_payments',
-                        'ecommerce_subscription_payments.subscription_id',
-                        '=',
-                        'ecommerce_subscriptions.id'
-                    )
-                        ->on('ecommerce_subscriptions.user_id', '=', 'usora_users.id')
-                        ->whereNotIn('ecommerce_subscriptions.id', function (Builder $q) {
-                            $q->select('subscription_id')
-                                ->from('ecommerce_subscription_payments')
-                                ->whereColumn(
-                                    'subscription_id',
-                                    '=',
-                                    'ecommerce_subscriptions.id'
-                                )
-                                ->whereNotIn('payment_id', function ($paymentQ) {
-                                    $paymentQ->select('id')
-                                        ->from('ecommerce_payments')
-                                        ->where('total_paid', '>', 0)
-                                        ->whereColumn(
-                                            'id',
-                                            '=',
-                                            'ecommerce_subscription_payments.payment_id'
-                                        );
-                                });
-                        });
-                })
-
-                // remove any that have a successful payment
-                ->join('ecommerce_user_payment_methods', function (JoinClause $join) {
-                    $join->leftJoin(
-                        'ecommerce_payments',
-                        'ecommerce_payments.payment_method_id',
-                        '=',
-                        'ecommerce_user_payment_methods.payment_method_id'
-                    )
-                        ->on('ecommerce_user_payment_methods.user_id', '=', 'usora_users.id')
-                        ->whereNotIn('ecommerce_user_payment_methods.payment_method_id', function (Builder $q) {
-                            $q->select('payment_method_id')
-                                ->from('ecommerce_payments')
-                                ->where('total_paid', '>', 0)
-                                ->whereColumn(
-                                    'payment_method_id',
-                                    '=',
-                                    'ecommerce_user_payment_methods.payment_method_id'
-                                );
-                        });
-                })
+                ->join('ecommerce_subscriptions', 'ecommerce_subscriptions.user_id', '=', 'usora_users.id')
+                ->join('ecommerce_products', 'ecommerce_products.id', '=', 'ecommerce_subscriptions.product_id')
                 ->where(function (Builder $query) {
                     $query->whereRaw($this->databaseManager->raw('last_used_brand is null or email LIKE "%data%"'));
                 })
-                ->whereIn('ecommerce_subscriptions.product_id', $trialProductIds)
+                ->whereNotExists(function (Builder $query) {
+                    $query->select($this->databaseManager->raw(1))
+                        ->from('ecommerce_payments')
+                        ->join(
+                            'ecommerce_payment_methods',
+                            'ecommerce_payment_methods.id',
+                            '=',
+                            'ecommerce_payments.payment_method_id'
+                        )
+                        ->join(
+                            'ecommerce_user_payment_methods',
+                            'ecommerce_user_payment_methods.payment_method_id',
+                            '=',
+                            'ecommerce_payments.id'
+                        )
+                        ->whereColumn('ecommerce_user_payment_methods.user_id', '=', 'usora_users.id')
+                        ->where('ecommerce_payments.total_paid', '>', 0);
+                })
+                ->whereNotExists(function (Builder $query) {
+                    $query->select($this->databaseManager->raw(1))
+                        ->from('ecommerce_payments')
+                        ->join(
+                            'ecommerce_subscription_payments',
+                            'ecommerce_subscription_payments.payment_id',
+                            '=',
+                            'ecommerce_payments.id'
+                        )
+                        ->join(
+                            'ecommerce_subscriptions',
+                            'ecommerce_subscriptions.id',
+                            '=',
+                            'ecommerce_subscription_payments.subscription_id'
+                        )
+                        ->whereColumn('ecommerce_subscriptions.user_id', '=', 'usora_users.id')
+                        ->where('ecommerce_payments.total_paid', '>', 0);
+                })
+                ->where('ecommerce_products.sku', "like", "%trial%")
+                ->where('usora_users.created_at', '>', '2023-01-01')
                 ->orderBy('usora_users.id', 'desc')
                 ->when(!is_null($startingId), function (Builder $q) use ($startingId) {
                     return $q->where('usora_users.id', '>=', $startingId);
@@ -360,8 +349,8 @@ class UserDelete extends Command
             // because of the groupBy, we can't get the count unless we get the results, which defeats the purpose of
             // chunking, so we'll use the trick from pratimroy1990 in https://laracasts.com/discuss/channels/eloquent/eloquent-groupby-count-always-returns-1
             $count = DB::table(DB::raw("({$usersToDelete->toSql()}) as query"))->mergeBindings($usersToDelete)->count();
-
-            $this->info('Found '.$count.' users to delete');
+            $query = $usersToDelete->toSql();
+            $this->info('Found ' . $count . ' users to delete');
 
             // chunk doesn't use a limit set in the query, so we'll work around that by keeping track of the count internally
             $userCount = !is_null($limit) ? min($limit, $count) : $count;
@@ -398,13 +387,13 @@ class UserDelete extends Command
             });
         });
 
-        $this->info('Deleting users: '.$this->deletedUserIds->implode(', '));
+        $this->info('Deleting users: ' . $this->deletedUserIds->implode(', '));
     }
 
     /**
      * Delete the users from CustomerIO, using their provided IDs
      *
-     * @param  array  $userIds
+     * @param array $userIds
      * @return void
      */
     protected function deleteFromCustomerIo(array $userIds): void
@@ -422,9 +411,9 @@ class UserDelete extends Command
     /**
      * Delete the users from all our defined tables, using their provided IDs
      *
-     * @param  array  $batchUserIds
-     * @param  int  $batchIndex
-     * @param  int  $batchTotal
+     * @param array $batchUserIds
+     * @param int $batchIndex
+     * @param int $batchTotal
      * @return void
      */
     protected function deleteFromDatabase(array $batchUserIds, int $batchIndex, int $batchTotal): void
@@ -445,7 +434,7 @@ class UserDelete extends Command
                             foreach ($rows as $row) {
                                 $id = property_exists($row, 'id') ? $row->id : '';
                                 $this->info(
-                                    "Deleting (simulate): $databaseConnectionName.$tableName id: $id $userIdColumn:".$row->{$userIdColumn}
+                                    "Deleting (simulate): $databaseConnectionName.$tableName id: $id $userIdColumn:" . $row->{$userIdColumn}
                                 );
                             }
                         } else {
@@ -475,11 +464,11 @@ class UserDelete extends Command
             }
 
             $this->totalUsersDeleted += count($batchUserIds);
-            $this->info('Finished batch '.$batchIndex.' out of '.$batchTotal);
-            $this->info('Total rows deleted: '.$this->totalRowsDeleted);
-            $this->info('Total users deleted: '.$this->totalUsersDeleted);
+            $this->info('Finished batch ' . $batchIndex . ' out of ' . $batchTotal);
+            $this->info('Total rows deleted: ' . $this->totalRowsDeleted);
+            $this->info('Total users deleted: ' . $this->totalUsersDeleted);
         } catch (\Exception $e) {
-            $this->info("Error deleting users: ".implode(', ', $batchUserIds));
+            $this->info("Error deleting users: " . implode(', ', $batchUserIds));
             Log::error($e);
         }
     }
