@@ -286,13 +286,6 @@ class UserDelete extends Command
         $this->withExecutionTime(function () use ($limit, $startingId) {
             $connection = $this->databaseManager->connection(config('usora.database_connection_name'));
 
-            // this MIGHT be a way to clean things up more, but it's a bit too aggressive
-            $trialProductIds = $connection->table('ecommerce_products')
-                ->select(['ecommerce_products.id'])
-                ->where("sku", "like", "%trial%")
-                ->get()
-                ->pluck("id");
-
             $usersToDelete = $connection->table('usora_users')
                 ->select(['usora_users.id', 'usora_users.email'])
                 ->join('ecommerce_subscriptions', 'ecommerce_subscriptions.user_id', '=', 'usora_users.id')
@@ -337,6 +330,7 @@ class UserDelete extends Command
                         ->where('ecommerce_payments.total_paid', '>', 0);
                 })
                 ->where('ecommerce_products.sku', "like", "%trial%")
+                // last_used_brand was only added for unified launch in dec 2022, so restricting it to only delete users after that
                 ->where('usora_users.created_at', '>', '2023-01-01')
                 ->orderBy('usora_users.id', 'desc')
                 ->when(!is_null($startingId), function (Builder $q) use ($startingId) {
@@ -349,7 +343,6 @@ class UserDelete extends Command
             // because of the groupBy, we can't get the count unless we get the results, which defeats the purpose of
             // chunking, so we'll use the trick from pratimroy1990 in https://laracasts.com/discuss/channels/eloquent/eloquent-groupby-count-always-returns-1
             $count = DB::table(DB::raw("({$usersToDelete->toSql()}) as query"))->mergeBindings($usersToDelete)->count();
-            $query = $usersToDelete->toSql();
             $this->info('Found ' . $count . ' users to delete');
 
             // chunk doesn't use a limit set in the query, so we'll work around that by keeping track of the count internally
