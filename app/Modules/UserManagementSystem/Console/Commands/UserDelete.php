@@ -336,8 +336,8 @@ class UserDelete extends Command
                 ->when(!is_null($startingId), function (Builder $q) use ($startingId) {
                     return $q->where('usora_users.id', '>=', $startingId);
                 })
-                // users could actively be on a free trial right now, so don't take any created in the past 7 days
-                ->whereDate('usora_users.created_at', '<', Carbon::today()->subDays(7))
+                // users could actively be on a free trial right now, make sure they are expired
+                ->whereDate('usora_users.membership_expiration_date', '<', Carbon::today())
                 ->groupBy('usora_users.id');
 
             // because of the groupBy, we can't get the count unless we get the results, which defeats the purpose of
