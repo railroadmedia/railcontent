@@ -29,7 +29,8 @@ return [
         '*.drumeo.com',
         '*.pianote.com',
         '*.guitareo.com',
-        '*.singeo.com'
+        '*.singeo.com',
+        'cdn.shopify.com'
     ],
 
     'allowed_origins_patterns' => [],
