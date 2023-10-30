@@ -48,7 +48,6 @@ class ShopController extends BaseController
         $featured = $products->whereIn('id', [95, 97, 98, 100]);
 
         return view('drumeo.drumshop.shop', [
-            'allProducts' => $products,
             'lessons' => $lessons,
             'accessories' => $accessories,
             'hats' => $hats,
