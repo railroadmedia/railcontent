@@ -33,13 +33,12 @@
                         class="column"
                     >
                         <v-select
-                            v-model="$_field"
-                            label="Products and Memberships"
-                            color="white"
-                            :items="['Plus, Basic, and Lifetime Memberships', 'Non Membership Products', 'All']"
-                            clearable
-                        >
-                        </v-select>
+                            v-model="selectedProductType"
+                            :items="productOptions"
+                            item-text="text"
+                            item-value="value"
+                            label="Select Membership"
+                        ></v-select>
                     </v-col>
                 </v-row>
             </template>
@@ -48,7 +47,7 @@
 
         <v-data-table
             :headers="headings"
-            :items="userAccessPermissions"
+            :items="filteredPermissions"
             :items-per-page="5"
             must-sort
             sort-desc
@@ -60,6 +59,7 @@
 
                 <tr :class="[ isActiveSubscription(item) ? 'active-subscription' : '']"
                 >
+                    <!-- <p>{{ item }}</p> -->
                     <td class="text-center">
                         <v-custom-brand-icon :brand="item.brand"></v-custom-brand-icon>
                     </td>
@@ -117,7 +117,6 @@
                                     </v-icon>
                                 </v-btn>
                             </template>
-
                             <span>Expire</span>
                         </v-tooltip>
                     </td>
@@ -292,9 +291,12 @@ export default {
             dialog: false,
             datepicker: false,
             pausedUntilDatepicker: false,
-            field: null,
-            selectedFilterValues: [],
-            fieldsFiltersValues: [],
+            selectedProductType: 'all', //Default
+            productOptions: [
+                { text: 'All', value: 'all' },
+                { text: 'Plus, Basic, and Lifetime Memberships', value: 1 },
+                { text: 'Non Membership Products', value: 0 },
+            ],
             headings: [
                 {
                     text: 'Brand',
@@ -357,6 +359,20 @@ export default {
         };
     },
     computed: {
+        filteredPermissions() {
+            if (this.selectedProductType === 'all') {
+                return this.userAccessPermissions;
+            } else if (this.selectedProductType === 1) {
+                return this.userAccessPermissions.filter(permission =>
+                    permission.time_lifetime === 1 || permission.permission_name.includes("Membership")
+                );
+            } else if (this.selectedProductType === 0) {
+                return this.userAccessPermissions.filter(permission =>
+                    permission.time_lifetime === 0 && !permission.permission_name.includes("Membership")
+                );
+            }
+        },
+
         $_permission_id: {
             get() {
                 return this.editingUserAccessPermission.permission_id;
@@ -410,16 +426,6 @@ export default {
                 this.$set(this.editingUserAccessPermission, 'start_date', value);
             },
         },
-
-        $_field: {
-            get() {
-                return this.field;
-            },
-            set(value) {
-                this.field = value;
-                this.selectedFilterValues = this.fieldsFiltersValues[this.field];
-            },
-        },
     },
     mounted() {
         PermissionsApi.getPermissions({
@@ -429,8 +435,6 @@ export default {
                  const options = response.data.data;
                  this.permissionsOptions = Utils.dynamicSort(options, 'name');
             });
-
-        this.getFieldFiltersValues();
     },
     methods: {
         ...mapActions('permissions', [
@@ -476,14 +480,6 @@ export default {
             }
 
             return '-';
-        },
-
-        getFieldFiltersValues() {
-            api
-                .getFieldFiltersValues()
-                .then((response) => {
-                    this.fieldsFiltersValues = response;
-                });
         },
 
         openEditForm(id) {
