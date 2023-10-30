@@ -149,6 +149,12 @@ class ShopifyCustomerService
                     "type" => ShopifyMetafieldTypes::integer->value,
                     "namespace" => ShopifyMetafieldNamespace::Model_Users->value,
                 ],
+                [
+                    "key" => ShopifyMetafieldKey::IsMusoraAccountSetUp->value,
+                    "value" => "true",
+                    "type" => ShopifyMetafieldTypes::boolean->value,
+                    "namespace" => ShopifyMetafieldNamespace::Musora->value
+                ]
             ];
         }
 
