@@ -24,7 +24,7 @@ environments:
         queue-tmp-storage: 1024
         queues:
           - musora-web-platform-production: 50
-          - commandmusora-web-platform-production: 5
+          - commandmusora-web-platform-production: 20
         cache: musora-production-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
