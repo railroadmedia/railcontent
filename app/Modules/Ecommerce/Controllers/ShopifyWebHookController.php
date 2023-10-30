@@ -60,7 +60,7 @@ class ShopifyWebHookController extends Controller
         try {
             Log::debug('Shopify refund created webhook received');
 
-            $orderId = $request->get('id');
+            $orderId = $request->get('order_id');
             Log::info("Shopify refund created webhook received for order id: $orderId");
 
             $order = $this->shopifySyncService->getOrder($orderId);
