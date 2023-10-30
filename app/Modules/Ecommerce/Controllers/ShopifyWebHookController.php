@@ -48,14 +48,33 @@ class ShopifyWebHookController extends Controller
             Log::debug("Shopify customer id: $shopifyCustomerId email: $email");
 
 
-            $this->handleOrderCreatedEventTracking($request->all());
+            $this->handleOrderEventTracking($request->all(), 'Order Placed');
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
         }
     }
 
-    private function handleOrderCreatedEventTracking($order): void
+    public function refundCreated(Request $request): void
+    {
+        try {
+            Log::debug('Shopify refund created webhook received');
+
+            $shopifyCustomerId = $request->get('customer')['id'];
+            $orderId = $request->get('id');
+            $email = $request->get('customer')['email'];
+            Log::debug("Shopify customer id: $shopifyCustomerId email: $email");
+
+            $order = $this->shopifySyncService->getOrder($orderId);
+
+            $this->handleOrderEventTracking($order->getAttributes(), 'Order Refunded');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
+        }
+    }
+
+    private function handleOrderEventTracking($order, string $eventName): void
     {
         $user = User::query()->where('shopify_id', $order['customer']['id'])->first();
 
@@ -80,7 +99,7 @@ class ShopifyWebHookController extends Controller
             new CustomerIoCreateEventByUserId(
                 $user->id,
                 $brand,
-                'Order Placed',
+                $eventName,
                 $data,
                 null,
                 $order['processed_at'],
@@ -92,7 +111,7 @@ class ShopifyWebHookController extends Controller
                 new CustomerIoCreateEventByUserId(
                     $user->id,
                     'musora',
-                    'Order Placed',
+                    $eventName,
                     $data,
                     null,
                     $order['processed_at'],
@@ -103,7 +122,6 @@ class ShopifyWebHookController extends Controller
         // @TODO EVENT TRACKING: move to avo when migration is completed
         // Avo::order_placed($data);
     }
-
 
     private function getProductList(array $lineItems = []): array
     {
