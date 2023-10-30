@@ -107,27 +107,25 @@
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Featured</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
-                @foreach($allProducts as $key => $feat)
-                    @if($feat->sku === 'quietkick' || $feat->sku === 'practicepad' || $feat->sku === 'quietpad' || $feat->sku === 'drumeo-eardrums')
-                        @include('musora.shop._shop-card-alt', [
-                            "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $feat->slug ),
-                            "sku" => $feat->sku === 'drumeo' ? null : $feat->sku,
-                            "badgeText" => $feat->badge_text,
-                            "thumbnail" => $feat->thumbnail,
-                            "packLogo" => $feat->thumbnail_logo,
-                            "title" => $feat->name,
-                            "packAuthor" => $feat->instructor_name,
-                            "cardDescription" => $feat->short_desc,
-                            "fullPrice" => $feat->price,
-                            "price" => $feat->discounted_price,
-                            "category" => strtolower($feat->productType->name),
-                            "buttonText" => $feat->sku === 'drumeo' || $feat->sku === 'pianote' || $feat->sku === 'singeo' || $feat->sku === 'guitareo' ? 'see the deal' : null,
-                            "soldOut" => $feat->sold_out,
-                            "includedEdge" => $feat->included_edge,
-                            "sizes" => $feat->sizes,
-                            'FCP' => $key < 4 ? true : null,
-                        ])
-                    @endif
+                @foreach($featured as $key => $feat)
+                    @include('musora.shop._shop-card-alt', [
+                        "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $feat->slug ),
+                        "sku" => $feat->sku === 'drumeo' ? null : $feat->sku,
+                        "badgeText" => $feat->badge_text,
+                        "thumbnail" => $feat->thumbnail,
+                        "packLogo" => $feat->thumbnail_logo,
+                        "title" => $feat->name,
+                        "packAuthor" => $feat->instructor_name,
+                        "cardDescription" => $feat->short_desc,
+                        "fullPrice" => $feat->price,
+                        "price" => $feat->discounted_price,
+                        "category" => strtolower($feat->productType->name),
+                        "buttonText" => $feat->sku === 'drumeo' || $feat->sku === 'pianote' || $feat->sku === 'singeo' || $feat->sku === 'guitareo' ? 'see the deal' : null,
+                        "soldOut" => $feat->sold_out,
+                        "includedEdge" => $feat->included_edge,
+                        "sizes" => $feat->sizes,
+                        'FCP' => $key < 4 ? true : null,
+                    ])
                 @endforeach
             </div>
             </div>
