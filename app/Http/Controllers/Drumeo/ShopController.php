@@ -46,6 +46,7 @@ class ShopController extends BaseController
         });
 
         return view('drumeo.drumshop.shop', [
+            'allProducts' => $products,
             'lessons' => $lessons,
             'accessories' => $accessories,
             'hats' => $hats,
