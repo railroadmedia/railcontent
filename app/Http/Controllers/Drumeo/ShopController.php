@@ -45,6 +45,8 @@ class ShopController extends BaseController
             return $value->productType->name === 'Hoodies';
         });
 
+        $featured = $products->whereIn('id', [95, 97, 98, 100]);
+
         return view('drumeo.drumshop.shop', [
             'allProducts' => $products,
             'lessons' => $lessons,
@@ -53,7 +55,8 @@ class ShopController extends BaseController
             'shirts' => $shirts,
             'hoodies' => $hoodies,
             'theme' => 'drumeo',
-            'category' => $request->category
+            'category' => $request->category,
+            'featured' => $featured
         ]);
     }
 
