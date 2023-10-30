@@ -151,14 +151,18 @@ class RevenueCatService
      * @param null $value
      * @param $appUserId
      * @param false $createIfNotExists
+     * @param array $aliases
      * @return User|null
      */
-    public function getUser($value = null, $appUserId, $createIfNotExists = false)
+    public function getUser($value = null, $appUserId, $createIfNotExists = false, $aliases = [])
     : ?User {
+        if(empty($aliases)){
+            $aliases = [$appUserId];
+        }
         $user =
             User::query()
                 ->where('email', $value)
-                ->orWhere('revenuecat_origin_app_user_id', $appUserId)
+                ->orWhereIn('revenuecat_origin_app_user_id', $aliases)
                 ->first();
         if (!$user && $createIfNotExists && $value) {
             $parts = explode('@', $value);

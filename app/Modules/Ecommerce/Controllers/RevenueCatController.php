@@ -90,7 +90,8 @@ class RevenueCatController extends Controller
                 $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
                     $data['event']['original_app_user_id'],
-                    true
+                    true,
+                    $data['event']['aliases'],
                 );
 
                 if (!$user) {
@@ -112,7 +113,8 @@ class RevenueCatController extends Controller
                 $productId = $this->getProductId($data['event']['product_id']);
 
                 //get Musora product
-                $musoraProduct = $this->getMusoraProducts($type, $data['event'], $productId)->first();
+                $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
+                $musoraProduct = $musoraProducts->first();
 
                 if (config('shopify.enabled')) {
                     $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
@@ -144,7 +146,7 @@ class RevenueCatController extends Controller
                         $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
 
                     //check if already exists Musora subscription
-                    $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
+                    $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProducts);
 
                     if (!$musoraSubscription) {
                         //create Musora subscription
@@ -187,7 +189,8 @@ class RevenueCatController extends Controller
                 $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
                     $data['event']['original_app_user_id'],
-                    true
+                    true,
+                    $data['event']['aliases']
                 );
                 if (!$user) {
                     //TBD
@@ -281,7 +284,7 @@ class RevenueCatController extends Controller
                 // get Musora user
                 $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
-                    $data['event']['original_app_user_id']
+                    $data['event']['original_app_user_id'], false, $data['event']['aliases']
                 );
                 if (!$user) {
                     //TBD
@@ -351,7 +354,7 @@ class RevenueCatController extends Controller
             case 'CANCELLATION':
                 $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
-                    $data['event']['original_app_user_id']
+                    $data['event']['original_app_user_id'], false,  $data['event']['aliases']
                 );
                 if (!$user) {
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
@@ -447,7 +450,7 @@ class RevenueCatController extends Controller
             case 'EXPIRATION':
                 $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
-                    $data['event']['original_app_user_id']
+                    $data['event']['original_app_user_id'], false, $data['event']['aliases']
                 );
                 if (!$user) {
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
