@@ -256,8 +256,8 @@
     'subtitle' => 'with daily guided workouts.',
     'checklist' => ['Improve Your Skills', 'Drum Every Day', 'Learn By Doing'],
     'brandTitle' => 'drumeo',
-    'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/products/30-days-drummer/header-right-collage.png',
-    'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/products/30-days-drummer/header-left-collage.png',
+    'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/header-right-collage.png',
+    'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/header-left-collage.png',
     'video' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/video-reel.mp4',
     'buttonText' => 'GET STARTED',
     'studentProfilesImage' => 'https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png',
@@ -273,7 +273,7 @@ $lessons = ['Day 1 - Introduction', 'Day 2 - Basics of Drumming', 'Day 3 - Rhyth
 
 @include('drumeo.products.partials._evergreen-lessons', [
     'title' => 'Learn the drums by actually playing the drums.',
-    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/30-days-drummer/drum-challenges.jpeg',
+    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/drum-challenges.jpeg',
     'descriptionDesktop' => '30-Day Drummer is a NEW way to learn the drums – where you learn by actually playing the drums. By focusing on timing & coordination, you’ll build your skills over thirty days following daily guided workouts with your instructor, Domino Santantonio.',
     'descriptionBold' => 'And the best part is you only need 10 minutes per day.',
     'descriptionMobile' => 'Welcome to 30-Day Drummer! At this point, you should have all the equipment you need to get started, know how to set up your gear, and be ready to have some fun playing the drums with Domino. In this first lesson and 10-minute workout, she will teach you the beginnings of the most popular drum beat of all time. And you will have fun doing it!',
@@ -486,7 +486,7 @@ $points = [
     'buttonTxt' => 'Get Started',
     'studentProfilesImage' => 'https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png',
     'profileImageAlt' => 'student profile image',
-    'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/30-days-drummer/order-collage.png',
+    'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/order-collage.png',
     'students' => 'drummers',
     'numStudents' => number_format($nPackOwners ?? 0),
 ])
