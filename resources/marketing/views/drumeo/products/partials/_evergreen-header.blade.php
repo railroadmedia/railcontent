@@ -1,4 +1,4 @@
-<header class="px-5 sm:px-6 pt-6 md:pt-9 pb-12 md:pb-18" style="background: linear-gradient(rgba(239, 247, 255, 1) 50%, #ffffff 50%)">
+<header class="px-5 sm:px-6 md:px-0 pt-6 md:pt-9 pb-12 md:pb-18" style="background: linear-gradient(rgba(239, 247, 255, 1) 50%, #ffffff 50%)">
     <div class="container max-w-5xl mx-auto">
         <div class="flex flex-col sm:flex-nowrap items-center">
             <div class="w-full sm:w-7/12 text-center">
@@ -36,37 +36,41 @@
         </div>
     </div>
 
-<section class="text-center px-4 sm:px-6 py-5 sm:py-8 lg:py-6">
-
-<div class="md:flex md:items-center md:justify-between">
-    <div class="bg-contain w-80"> <img src="{{ $bgImageLeft }}" alt={{$subtitle}} class="hidden md:inline lg:inline xl:inline"></div>
-   
-    
-    <div class="container max-w-3xl mx-6">
-        <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" data-open="trailer">
-            <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-            <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload"
-                data-src="{{ $video }}"
-                type="video/mp4" autoplay loop playsinline muted>
-            </video>
+<section class="md:w-full text-center px-4 sm:px-6 py-5 sm:py-8 lg:py-6">
+    <div class="md:flex md:items-center md:justify-between">
+        <div class="bg-contain relative md:w-2/3 left-0" style="clip-path: polygon(33.33% 0, 100% 0, 100% 100%, 33.33% 100%); max-width: 66.67%;">
+            <img src="{{ $bgImageLeft }}" alt="{{ $subtitle }}" class="hidden md:inline lg:inline xl:inline">
+        </div>
+        
+        <div class="container max-w-2xl mx-6">
+            <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" data-open="trailer">
+                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
+                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload"
+                    data-src="{{ $video }}"
+                    type="video/mp4" autoplay loop playsinline muted>
+                </video>
+            </div>
+        </div>
+        <div class="bg-contain relative md:w-2/3 right-0" style="clip-path: polygon(0 0, 66.67% 0, 66.67% 100%, 0 100%); max-width: 66.67%;">
+            <img src="{{ $bgImageRight }}" alt="{{ $subtitle }}" class="hidden md:inline lg:inline xl:inline">
         </div>
     </div>
-<div class="bg-contain w-80">    
-    <img src="{{ $bgImageRight }}" alt={{$subtitle}} class="hidden md:inline lg:inline xl:inline">
-</div>
-</div>
     <div class="flex w-full flex-col items-center mt-6 sm:mt-5 lg:mt-10">
-                <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 text-center sm:pr-2 my-1">
-                    <a href="#final" class="join blue medium w-full anchor-slide">{{ $buttonText }}</a>
-                </div>
-                <div class="w-full sm:w-1/2 lg:pb-5 my-1 text-center text-xs">
-                    <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload"
-                        data-src="{{ $studentProfilesImage }}" alt="joined student profiles">
-                    <p class="inline-block leading-tight text-sm align-middle">Join {{ $numStudents }} {{$students}} who<br>
-                        have already registered.</p>
-                </div>
-            </div>
+        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 text-center sm:pr-2 my-1">
+            <a href="#final" class="join blue medium w-full anchor-slide">{{ $buttonText }}</a>
+        </div>
+        <div class="w-full sm:w-1/2 lg:pb-5 my-1 text-center text-xs">
+            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload"
+                data-src="{{ $studentProfilesImage }}" alt="joined student profiles">
+            <p class="inline-block leading-tight text-sm align-middle">Join {{ $numStudents }} {{ $students }} who<br>
+                have already registered.</p>
+        </div>
+    </div>
 </section>
+
+
+
+
 </header>
 
 
