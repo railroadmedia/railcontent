@@ -156,5 +156,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(\Railroad\Railnotifications\Contracts\RailforumProviderInterface::class, function ($app) {
             return $app->make(RailnotificationsForumProvider::class);
         });
+
+        // handle host forwarding (ngrok, etc)
+        if (app()->environment('local', 'development') && isset($_SERVER['HTTP_X_FORWARDED_HOST']) ) {
+            // without this, we get errors for the manifest (and probably other things) because of CORS and the different domains with ngrok and the app
+            $this->app['url']->forceRootUrl($_SERVER['HTTP_X_FORWARDED_PROTO'].'://'.$_SERVER['HTTP_X_FORWARDED_HOST']);
+        }
     }
 }
