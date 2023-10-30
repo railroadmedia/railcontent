@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2677f7874827e9bfa837cb31b5358761",
+    "content-hash": "790d89e3d70e8a3a417556c518556c0e",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8268,16 +8268,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "dev-srr-misc",
+            "version": "v5.0.112",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "1a986c03ac451e14c6b135ab79a96a468a7935e3"
+                "reference": "df1d4d217c0e625982f89057c632b1d27118516d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/1a986c03ac451e14c6b135ab79a96a468a7935e3",
-                "reference": "1a986c03ac451e14c6b135ab79a96a468a7935e3",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/df1d4d217c0e625982f89057c632b1d27118516d",
+                "reference": "df1d4d217c0e625982f89057c632b1d27118516d",
                 "shasum": ""
             },
             "require": {
@@ -8315,9 +8315,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/srr-misc"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.112"
             },
-            "time": "2023-10-29T18:17:48+00:00"
+            "time": "2023-10-30T15:53:41+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -17202,12 +17202,6 @@
     ],
     "aliases": [
         {
-            "package": "railroad/ecommerce",
-            "version": "dev-srr-misc",
-            "alias": "v5.0.102",
-            "alias_normalized": "5.0.102.0"
-        },
-        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
@@ -17216,7 +17210,6 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/ecommerce": 20,
         "railroad/railanalytics": 20
     },
     "prefer-stable": true,
