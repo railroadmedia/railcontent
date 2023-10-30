@@ -355,7 +355,10 @@ class CustomerIoSyncEventListener
             $userId = $userAccessPermissionsUpdated->getUserId();
             $user = $this->userService->getByIdOrNull($userId);
 
-            $data = $this->getCustomerIoDataFromOrders($userAccessPermissionsUpdated->getOrderCollection());
+            $data = $this->getCustomerIoDataFromOrders(
+                $userAccessPermissionsUpdated->getOrderCollection(),
+                $userAccessPermissionsUpdated->getCurrentSubscription()
+            );
 
             if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                 dispatch(
@@ -1418,30 +1421,42 @@ class CustomerIoSyncEventListener
         );
     }
 
-    private function getCustomerIoDataFromOrders(OrderCollection $orderCollection): array
+    private function getCustomerIoDataFromOrders(?OrderCollection $orderCollection, $currentSubscription): array
     {
+        $attributes = $this->getOrderAttributes($orderCollection);
+        $attirubtes = array_merge($attributes, $this->getSubscriptionAttributes($currentSubscription));
+        return $attributes;
+    }
+
+    public function getOrderAttributes(?OrderCollection $orderCollection): array
+    {
+        if (!$orderCollection) {
+            return [];
+        }
         $attributes = [];
 
         $membershipOrderItemsLookup = $orderCollection->getOrders()->flatMap(function ($order) {
             /** @var Order $order */
             return $order->lineItems->filter(function ($orderLineItem) {
                 /** @var OrderLineItem $orderLineItem */
-                return $orderLineItem->product->isDigital() && $orderLineItem->product->isMembershipProduct();
+                return $orderLineItem->product && $orderLineItem->product->isDigital(
+                    ) && $orderLineItem->product->isMembershipProduct();
             });
         })->groupBy(function ($orderLineItem) {
             /** @var OrderLineItem $orderLineItem */
-            return $orderLineItem->product->brand;
+            return $orderLineItem->product && $orderLineItem->product->brand;
         });
 
         $packsOrderItemLookup = $orderCollection->getOrders()->flatMap(function ($order) {
             /** @var Order $order */
             return $order->lineItems->filter(function ($orderLineItem) {
                 /** @var OrderLineItem $orderLineItem */
-                return $orderLineItem->product->isDigital() && $orderLineItem->product->isPack();
+                return $orderLineItem->product && $orderLineItem->product->isDigital(
+                    ) && $orderLineItem->product->isPack();
             });
         })->groupBy(function ($orderLineItem) {
             /** @var OrderLineItem $orderLineItem */
-            return $orderLineItem->product->brand;
+            return $orderLineItem->product && $orderLineItem->product->brand;
         });
 
         $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
@@ -1473,6 +1488,18 @@ class CustomerIoSyncEventListener
                 })->toArray()
             );
         }
+        return $attributes;
+    }
+
+    private function getSubscriptionAttributes($currentSubscription): array
+    {
+        if (!$currentSubscription) {
+            return [];
+        }
+        $attributes = [];
+
+        Log::debug(print_r($currentSubscription, true));
+
         return $attributes;
     }
 

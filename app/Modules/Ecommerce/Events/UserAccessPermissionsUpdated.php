@@ -9,14 +9,17 @@ use Illuminate\Support\Collection;
 class UserAccessPermissionsUpdated
 {
     private UserAccessPermissionsCollection $userAccessPermissions;
-    private OrderCollection $orders;
+    private ?OrderCollection $orders;
+    private $currentSubscription;
 
     public function __construct(
         UserAccessPermissionsCollection $userAccessPermissions,
-        OrderCollection $orders = null
+        ?OrderCollection $orders,
+        $currentSubscription
     ) {
         $this->userAccessPermissions = $userAccessPermissions;
         $this->orders = $orders;
+        $this->currentSubscription = $currentSubscription;
     }
 
     public function getUserAccessPermissions(): UserAccessPermissionsCollection
@@ -29,9 +32,14 @@ class UserAccessPermissionsUpdated
         return $this->userAccessPermissions->getUserId();
     }
 
-    public function getOrderCollection(): OrderCollection
+    public function getOrderCollection(): ?OrderCollection
     {
         return $this->orders;
+    }
+
+    public function getCurrentSubscription()
+    {
+        return $this->currentSubscription;
     }
 
 }

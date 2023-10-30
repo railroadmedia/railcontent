@@ -13,18 +13,15 @@ use Carbon\Carbon;
 class SubscriptionService
 {
 
-    private UserAccessPermissionsService $userAccessPermissionsService;
     private ProductService $productService;
     private RechargeGateway $recharge;
     private UserService $userService;
 
     public function __construct(
-        UserAccessPermissionsService $userAccessPermissionsService,
         ProductService $productService,
         RechargeGateway $recharge,
         UserService $userService
     ) {
-        $this->userAccessPermissionsService = $userAccessPermissionsService;
         $this->productService = $productService;
         $this->recharge = $recharge;
         $this->userService = $userService;
