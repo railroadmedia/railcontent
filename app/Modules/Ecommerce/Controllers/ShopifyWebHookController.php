@@ -105,7 +105,7 @@ class ShopifyWebHookController extends Controller
         }
 
         // @TODO EVENT TRACKING: move to avo when migration is completed
-        // Avo::order_refunded($data);
+        // Avo::order_placed($data);
     }
 
 
@@ -128,7 +128,7 @@ class ShopifyWebHookController extends Controller
         )->delay(Carbon::now()->addSeconds(30));
 
         // @TODO EVENT TRACKING: move to avo when migration is completed
-        // Avo::order_placed($data);
+        // Avo::order_refunded($data);
     }
 
     private function getProductList(array $lineItems = []): array
