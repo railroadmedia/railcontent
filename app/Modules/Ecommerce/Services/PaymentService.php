@@ -4,7 +4,7 @@ namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\Models\Payment;
 use Carbon\Carbon;
-use Modules\Ecommerce\Models\SubscriptionPayment;
+use App\Modules\Ecommerce\Models\SubscriptionPayment;
 
 class PaymentService
 {

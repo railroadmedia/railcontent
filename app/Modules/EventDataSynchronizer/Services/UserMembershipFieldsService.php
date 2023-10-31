@@ -2,7 +2,10 @@
 
 namespace App\Modules\EventDataSynchronizer\Services;
 
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Carbon\Carbon;
+use Log;
 use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Entities\UserProduct;
 use Railroad\Ecommerce\Repositories\ProductRepository;
@@ -13,6 +16,8 @@ use Railroad\Railcontent\Services\ContentService;
 
 class UserMembershipFieldsService
 {
+
+
     protected SubscriptionRepository $subscriptionRepository;
     protected UserProductRepository $userProductRepository;
     protected ProductRepository $productRepository;
@@ -20,23 +25,33 @@ class UserMembershipFieldsService
     private UserProviderInterface $userProvider;
 
     private $instructorsCache = null;
+    private UserAccessPermissionsService $userAccessPermissionsService;
 
     public function __construct(
         SubscriptionRepository $subscriptionRepository,
         UserProductRepository $userProductRepository,
         ProductRepository $productRepository,
         ContentService $contentService,
-        UserProviderInterface $userProvider
+        UserProviderInterface $userProvider,
+        UserAccessPermissionsService $userAccessPermissionsService
     ) {
         $this->subscriptionRepository = $subscriptionRepository;
         $this->userProductRepository = $userProductRepository;
         $this->productRepository = $productRepository;
         $this->contentService = $contentService;
         $this->userProvider = $userProvider;
+        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
     public function syncUserIds(array $userIds): bool
     {
+        if (config('shopify.enabled')) {
+            foreach ($userIds as $userId) {
+                $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId);
+                $this->syncUserAccess($userAccessPermissions);
+            }
+            return true;
+        }
         $qb = $this->userProductRepository->createQueryBuilder('up');
 
         $qb->select(['up', 'p'])
@@ -71,12 +86,54 @@ class UserMembershipFieldsService
         return true;
     }
 
-    /**
-     * @param $userId
-     * @return bool
-     */
+    public function syncUserAccess(UserAccessPermissionsCollection $userAccessPermissions): bool
+    {
+        $userId = $userAccessPermissions->getUserId();
+
+        //This code is difficult to understand and should be thoroughly understood before changing it
+        //membership expiration date comes from both plus and basic permissions combined
+        $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate();
+        //access level comes from plus or basic permissions
+        $plusMembershipExpirationDate = $userAccessPermissions->getPlusMembershipExpirationDate();
+        $basicMembershipExpirationDate = $userAccessPermissions->getBasicMembershipExpirationDate();
+
+        $membershipLevel = null;
+        if ($plusMembershipExpirationDate > Carbon::now()) {
+            $membershipLevel = 'plus';
+        } elseif ($basicMembershipExpirationDate > Carbon::now()) {
+            $membershipLevel = 'basic';
+        }
+
+        $isLifetimeMember = $userAccessPermissions->getIsLifetimeMember();
+        $isDrumeoLifetimeMember = $userAccessPermissions->getIsDrumeoLifetimeMember();
+        $ownsPacks = $this->userAccessPermissionsService->getOwnsPacks($userAccessPermissions);
+
+
+        $accessLevel = $this->getAccessLevelName(
+            $userId,
+            $isLifetimeMember,
+            !empty($representingUserProduct) && $representingUserProduct->isValid(),
+            $membershipExpirationDate,
+            $ownsPacks
+        );
+
+        return $this->userProvider->saveMembershipData(
+            $userId,
+            $membershipExpirationDate,
+            $isLifetimeMember,
+            $accessLevel,
+            $ownsPacks,
+            $membershipLevel,
+            $isDrumeoLifetimeMember
+        );
+    }
+
     public function sync($userId, array $userProducts = null, array $associatedCoaches = null): bool
     {
+        if (config('shopify.enabled')) {
+            $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId);
+            return $this->syncUserAccess($userAccessPermissions);
+        }
         if (!isset($userProducts)) {
             $userProducts = $this->userProductRepository->getAllUsersProducts($userId);
         }
@@ -91,7 +148,8 @@ class UserMembershipFieldsService
             $isLifetimeMember = $representingUserProduct->isValid() &&
                 $representingUserProduct->getProduct()->getDigitalAccessTimeType() ==
                 Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME;
-            $isDrumeoLifetimeMember = (is_null($membershipExpirationDate) && ($representingUserProduct->getProduct()->getId() == 141));
+            $isDrumeoLifetimeMember = (is_null($membershipExpirationDate) && ($representingUserProduct->getProduct(
+                    )->getId() == 141));
         } else {
             $membershipExpirationDate = null;
             $isLifetimeMember = false;
@@ -123,21 +181,18 @@ class UserMembershipFieldsService
         $membershipLevel = null;
 
         foreach ($userProducts as $userProduct) {
-            if ($userProduct->getProduct()->getDigitalAccessType(
-                ) == Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS &&
+            if ($userProduct->getProduct()->getDigitalAccessType() == Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS &&
                 $userProduct->isValid()) {
                 $membershipLevel = 'plus';
                 break;
             }
 
-            if ($userProduct->getProduct()->getDigitalAccessType(
-                ) == 'basic content access' &&
+            if ($userProduct->getProduct()->getDigitalAccessType() == 'basic content access' &&
                 $userProduct->isValid()) {
                 $membershipLevel = 'basic';
             }
 
-            if ($userProduct->getProduct()->getDigitalAccessType(
-                ) == 'songs content access' &&
+            if ($userProduct->getProduct()->getDigitalAccessType() == 'songs content access' &&
                 $userProduct->isValid()) {
                 $membershipLevel = 'plus';
                 break;
@@ -167,9 +222,9 @@ class UserMembershipFieldsService
         foreach ($usersProducts as $userProductIndex => $userProduct) {
             // make sure the product is a membership product
             if (($userProduct->getProduct()->getDigitalAccessType() !==
-                Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS &&
-                $userProduct->getProduct()->getDigitalAccessType() !==
-                'basic content access') ||
+                    Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS &&
+                    $userProduct->getProduct()->getDigitalAccessType() !==
+                    'basic content access') ||
                 $userProduct->getUser()->getId() !== $userId) {
                 continue;
             }
@@ -185,7 +240,8 @@ class UserMembershipFieldsService
             if (empty($eligibleUserProduct->getExpirationDate()) &&
                 $eligibleUserProduct->getProduct()->getDigitalAccessTimeType() ==
                 Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME &&
-                (empty($latestMembershipUserProductToSync) || $latestMembershipUserProductToSync->getProduct()->getBrand() != "drumeo")
+                (empty($latestMembershipUserProductToSync) || $latestMembershipUserProductToSync->getProduct(
+                    )->getBrand() != "drumeo")
             ) {
                 //prioritize drumeo over other lifetimes because they get some songs access
                 $latestMembershipUserProductToSync = $eligibleUserProduct;

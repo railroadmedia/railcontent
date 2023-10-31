@@ -5,7 +5,7 @@
         <img class="h-28 md:h-32 -mt-14 md:-mt-16 mb-5 sm:mb-8 transition-opacity opacity-0"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
-            src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{!! $badge !!}" alt="guarantee-badge">
+            src={!! $badge !!} alt="guarantee-badge">
         <h3 class="leading-tight">{!! $header !!}</h3>
         <p class="leading-normal md:leading-loose my-4 sm:my-7 max-w-4xl mx-auto">{!! $desc !!}</p>
         <div class="flex flex-wrap items-start justify-center">

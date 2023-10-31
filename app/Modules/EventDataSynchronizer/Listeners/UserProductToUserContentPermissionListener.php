@@ -2,61 +2,38 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners;
 
+use App\Modules\Content\Models\UserPermission;
+use App\Modules\Content\Services\ContentPermissionsService;
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
+use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
+use App\Modules\Ecommerce\Models\UserProduct;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
+use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Railroad\Ecommerce\Events\Subscriptions\CommandSubscriptionRenewFailed;
 use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
 use Railroad\Ecommerce\Events\UserProducts\UserProductDeleted;
 use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
-use Railroad\Ecommerce\Repositories\ProductRepository;
-use Railroad\Ecommerce\Repositories\UserProductRepository;
 use Railroad\Railcontent\Helpers\CacheHelper;
-use Railroad\Railcontent\Repositories\PermissionRepository;
-use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Resora\Events\Created;
 use Railroad\Resora\Events\Updated;
 
 class UserProductToUserContentPermissionListener
 {
-    /**
-     * @var UserProductRepository
-     */
-    private $userProductRepository;
+    private UserProductService $userProductService;
+    private ContentPermissionsService $contentPermissionsService;
+    private UserAccessPermissionsService $userAccessPermissionsService;
 
-    /**
-     * @var ProductRepository
-     */
-    private $productRepository;
-
-    /**
-     * @var PermissionRepository
-     */
-    private $permissionRepository;
-
-    /**
-     * @var UserPermissionsRepository
-     */
-    private $userPermissionsRepository;
-
-    /**
-     * UserSubscriptionUserToContentPermissionListener constructor.
-     *
-     * @param UserProductRepository $userProductRepository
-     * @param ProductRepository $productRepository
-     * @param PermissionRepository $permissionRepository
-     * @param UserPermissionsRepository $userPermissionsRepository
-     */
     public function __construct(
-        UserProductRepository $userProductRepository,
-        ProductRepository $productRepository,
-        PermissionRepository $permissionRepository,
-        UserPermissionsRepository $userPermissionsRepository
+        UserProductService $userProductService,
+        ContentPermissionsService $contentPermissionsService,
+        UserAccessPermissionsService $userAccessPermissionsService
     ) {
-        $this->userProductRepository = $userProductRepository;
-        $this->productRepository = $productRepository;
-        $this->permissionRepository = $permissionRepository;
-        $this->userPermissionsRepository = $userPermissionsRepository;
+        $this->userProductService = $userProductService;
+        $this->contentPermissionsService = $contentPermissionsService;
+        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
     /**
@@ -81,6 +58,46 @@ class UserProductToUserContentPermissionListener
     public function handleDeleted(UserProductDeleted $deletedEvent)
     {
         $this->syncUserId($deletedEvent->getUserProduct()->getUser()->getId());
+    }
+
+    public function handleUserAccessPermissionsUpdated(UserAccessPermissionsUpdated $userAccessPermissionsUpdated): void
+    {
+        $this->syncContentPermissions(
+            $userAccessPermissionsUpdated->getUserId(),
+            $userAccessPermissionsUpdated->getUserAccessPermissions()
+        );
+    }
+
+    public function syncContentPermissions(int $userId, UserAccessPermissionsCollection $userAccessPermissions): void
+    {
+        $permissionIds = $userAccessPermissions->getActivePermissionIds();
+        $existingUserPermissions = $this->contentPermissionsService->getUserPermissions($userId)->keyBy(
+            'permission_id'
+        );
+
+
+        $toDeleteIds = $existingUserPermissions->where(function ($item, $key) use ($permissionIds) {
+            return !in_array($key, $permissionIds);
+        })->pluck('id')->toArray();
+
+        foreach ($permissionIds as $permissionId) {
+            list($startDate, $expirationDate) = $userAccessPermissions->getActiveDates($permissionId);
+            $userPermission = $existingUserPermissions[$permissionId] ?? null;
+            if (!$userPermission) {
+                $userPermission = new UserPermission();
+                $userPermission->user_id = $userId;
+                $userPermission->permission_id = $permissionId;
+                $userPermission->created_on = Carbon::now();
+            }
+            if ($userPermission->start_date != $startDate || $userPermission->expiration_date != $expirationDate) {
+                $userPermission->start_date = $startDate;
+                $userPermission->expiration_date = $expirationDate;
+                $userPermission->updated_on = Carbon::now();
+                $userPermission->save();
+            }
+        }
+
+        UserPermission::query()->whereIn('id', $toDeleteIds)->delete();
     }
 
     /**
@@ -110,17 +127,50 @@ class UserProductToUserContentPermissionListener
 
     public function syncUserId($userId)
     {
-        $allUsersProducts = $this->userProductRepository->getAllUsersProducts($userId);
-        $permissions = $this->permissionRepository->getAll();
-        $permissionsLookup = [];
-        foreach ($permissions as $permission) {
-            $key = $permission['brand'] . '_' . $permission['name'];
-            $permissionsLookup[$key] = $permission;
+        if (config('shopify.enabled')) {
+            $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId);
+            $this->syncContentPermissions($userId, $userAccessPermissions);
+            return;
         }
+        $userPermissions = $this->buildUserPermissionsList($userId);
+        $existingPermissions = UserPermission::query()->where('user_id', '=', $userId)
+            ->whereIn('permission_id', array_keys($userPermissions))->get()->keyBy('permission_id');
+
+        foreach ($userPermissions as $permissionId => $dates) {
+            $expirationDate = $dates['expiration_date'];
+            $startDate = $dates['start_date'] ?? Carbon::now();
+
+            $existingPermission = $existingPermissions[$permissionId] ?? null;
+            $now = Carbon::now();
+            if (!$existingPermission) {
+                $existingPermission = new UserPermission();
+                $existingPermission->user_id = $userId;
+                $existingPermission->permission_id = $permissionId;
+                $existingPermission->created_on = $now;
+            } elseif ($existingPermission->start_date == $startDate && $existingPermission->expiration_date == $expirationDate) {
+                continue; //no changes necessary save a query
+            }
+            $existingPermission->start_date = $startDate;
+            $existingPermission->expiration_date = $expirationDate;
+            $existingPermissions->updated_on = $now;
+            $existingPermission->save();
+        }
+        // clear the railcontent cache
+        CacheHelper::deleteUserFields([ConfigService::$redisPrefix . ':userId_' . $userId,], 'content');
+    }
+
+    private function buildUserPermissionsList(int $userId): array
+    {
+        $userProducts = $this->userProductService->getUserProductsQuery($userId)->with('product')->get();
+        $permissionsLookup = $this->contentPermissionsService->getAll()->keyBy(function ($permission) {
+            return $permission->brand . '_' . $permission->name;
+        });
         $permissionsToCreate = [];
 
-        foreach ($allUsersProducts as $allUsersProduct) {
-            $permissionNames = $allUsersProduct->getProduct()->getDigitalAccessPermissionNames();
+        /** @var UserProduct $userProduct */
+        foreach ($userProducts as $userProduct) {
+            $product = $userProduct->product;
+            $permissionNames = $product->getDigitalAccessPermissionNames();
 
             if (empty($permissionNames)) {
                 continue;
@@ -128,91 +178,27 @@ class UserProductToUserContentPermissionListener
 
             foreach ($permissionNames as $permissionName) {
                 // we need to check by brand as well since some permissions across brands have the same name
-                $brand = $allUsersProduct->getProduct()->getBrand();
+                $brand = $product->brand;
                 $keyBrand = $brand . '_' . $permissionName;
                 $keyGeneral = 'musora_' . $permissionName;
                 $permission = $permissionsLookup[$keyBrand] ?? $permissionsLookup[$keyGeneral] ?? null;
                 if (!$permission) {
-                    $productName = $allUsersProduct->getProduct()->getId() . ' - ' .
-                        $allUsersProduct->getProduct()->getName();
                     Log::error(
-                        "Permission $brand - $permissionName does not exist.  Fix issue with product $productName and resync."
+                        "Permission $brand - $permissionName does not exist.  Fix issue with product $product->id - $product->name and resync."
                     );
                     continue;
                 }
                 $permissionId = $permission['id'];
 
-                if (!array_key_exists($permissionId, $permissionsToCreate)) {
+                if (!array_key_exists($permissionId, $permissionsToCreate)
+                    || $permissionsToCreate[$permissionId]['expiration_date'] < $userProduct->expiration_date) {
                     $permissionsToCreate[$permissionId] = [
-                        'expiration_date' => $allUsersProduct->getExpirationDate(),
-                        'start_date' => $allUsersProduct->getStartDate(),
+                        'expiration_date' => $userProduct->expiration_date,
+                        'start_date' => $userProduct->start_date,
                     ];
-                } elseif ($allUsersProduct->getExpirationDate() === null) {
-                    $permissionsToCreate[$permissionId] = [
-                        'expiration_date' => $allUsersProduct->getExpirationDate(),
-                        'start_date' => $allUsersProduct->getStartDate(),
-                    ];
-                } elseif (isset($permissionsToCreate[$permissionId]) &&
-                    $permissionsToCreate[$permissionId] !== null &&
-                    !empty($permissionsToCreate[$permissionId]['expiration_date'])) {
-                    if ($permissionsToCreate[$permissionId]['expiration_date'] < $allUsersProduct->getExpirationDate(
-                        )) {
-                        $permissionsToCreate[$permissionId] = [
-                            'expiration_date' => $allUsersProduct->getExpirationDate(),
-                            'start_date' => $allUsersProduct->getStartDate(),
-                        ];;
-                    }
                 }
             }
         }
-
-        foreach ($permissionsToCreate as $permissionId => $dates) {
-            $expirationDate = $dates['expiration_date'];
-            $startDate = $dates['start_date'] ?? Carbon::now()->toDateTimeString();
-
-            $existingPermission =
-                $this->userPermissionsRepository->getIdByPermissionAndUser(
-                    $userId,
-                    $permissionId
-                )[0] ?? null;
-
-            if (!empty($expirationDate)) {
-                $expirationDate = $expirationDate->toDateTimeString();
-            }
-
-            if (empty($existingPermission)) {
-                $this->userPermissionsRepository->create(
-                    [
-                        'user_id' => $userId,
-                        'permission_id' => $permissionId,
-                        'start_date' => $startDate,
-                        'expiration_date' => $expirationDate,
-                        'created_on' => Carbon::now()
-                            ->toDateTimeString(),
-                    ]
-                );
-            } elseif ($existingPermission['expiration_date'] != $expirationDate ||
-                $existingPermission['start_date'] > $startDate) {
-                $this->userPermissionsRepository->update(
-                    $existingPermission['id'],
-                    [
-                        'user_id' => $userId,
-                        'permission_id' => $permissionId,
-                        'expiration_date' => $expirationDate,
-                        'start_date' => $startDate,
-                        'updated_on' => Carbon::now()
-                            ->toDateTimeString(),
-                    ]
-                );
-            }
-        }
-
-        // clear the railcontent cache
-        CacheHelper::deleteUserFields(
-            [
-                ConfigService::$redisPrefix . ':userId_' . $userId,
-            ],
-            'content'
-        );
+        return $permissionsToCreate;
     }
 }

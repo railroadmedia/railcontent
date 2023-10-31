@@ -2,24 +2,96 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
+use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
+use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Models\Subscription;
+use App\Modules\UserManagementSystem\Services\UserService;
+use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
 class SubscriptionService
 {
-    public function getFirstSubscriptionBrand(int $userId, array $brands)
-    : string {
-        $result =
-            Subscription::query()
-                ->whereIn('brand', $brands)
-                ->fromUser($userId)
-                ->orderBy('created_at')
-                ->first('brand');
 
+    private UserAccessPermissionsService $userAccessPermissionsService;
+    private ProductService $productService;
+    private RechargeGateway $recharge;
+    private UserService $userService;
+
+    public function __construct(
+        UserAccessPermissionsService $userAccessPermissionsService,
+        ProductService $productService,
+        RechargeGateway $recharge,
+        UserService $userService
+    ) {
+        $this->userAccessPermissionsService = $userAccessPermissionsService;
+        $this->productService = $productService;
+        $this->recharge = $recharge;
+        $this->userService = $userService;
+    }
+
+    public function getFirstSubscriptionBrand(int $userId, array $brands): string
+    {
+        $result = Subscription::query()
+            ->whereIn('brand', $brands)
+            ->fromUser($userId)
+            ->orderBy('created_at')
+            ->first('brand');
         return $result['brand'] ?? '';
     }
 
-    /**
+    public function syncSubscriptionData(UserAccessPermissionsCollection $userAccessPermissions): void
+    {
+        $user = $this->userService->getByIdOrNull($userAccessPermissions->getUserId());
+        if (!$user->shopify_id) {
+            // User doesn't have any subscriptions from Shopify to be synced.
+            return;
+        }
+        $subscriptions = $this->recharge->getSubscriptions($user->shopify_id);
+        $shopifyVariantIds = $subscriptions->pluck('shopify_variant_id')->toArray();
+        $productLookup = $this->productService->getProductsByShopifyIds($shopifyVariantIds)
+            ->keyBy('shopify_id');
+
+        $membershipSubscriptions = $subscriptions->filter(function ($subscription) use ($productLookup) {
+            $product = $productLookup[$subscription->shopify_variant_id] ?? null;
+            if (!$product) {
+                Log::error("Product not found for recharge subscription $subscription->id");
+                return false;
+            }
+            return $product->isMembershipProduct() && $subscription->status == RechargeSubscriptionStatusEnum::Active;
+        });
+
+        $isLifetimeMember = $userAccessPermissions->getIsLifetimeMember();
+
+        if ($isLifetimeMember) {
+            foreach ($membershipSubscriptions as $membershipSubscription) {
+                $this->recharge->cancelSubscription($membershipSubscription, 'Lifetime Member');
+            }
+        } elseif ($membershipSubscriptions->count() > 1) {
+            $mostRecentSubscription = $subscriptions->sortByDesc('created_at')->first();
+
+            foreach ($membershipSubscriptions as $membershipSubscription) {
+                if ($membershipSubscription->id != $mostRecentSubscription->id) {
+                    $this->recharge->cancelSubscription($membershipSubscription, 'Duplicate Subscription');
+                }
+            }
+
+            $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate();
+
+            $this->recharge->updateSubscriptionNextChargeDate($mostRecentSubscription, $membershipExpirationDate);
+        }
+
+        // SRR-82 set the subscription type when the user has a Recharge subscription
+        if (!$isLifetimeMember && $membershipSubscriptions->count() > 0) {
+            $user->has_recharge_subscription = true;
+            $user->save();
+        } else {
+            $user->has_recharge_subscription = false;
+            $user->save();
+        }
+    }
+
+        /**
      * @param $userId
      * @param $expiresDate
      * @param $musoraProduct

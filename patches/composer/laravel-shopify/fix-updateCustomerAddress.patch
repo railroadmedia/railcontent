@@ -1,0 +1,36 @@
+diff --git a/src/REST/Actions/ManagesCustomers.php b/src/REST/Actions/ManagesCustomers.php
+index e300e2b..e284e25 100644
+--- a/src/REST/Actions/ManagesCustomers.php
++++ b/src/REST/Actions/ManagesCustomers.php
+@@ -97,7 +97,7 @@ trait ManagesCustomers
+ 
+     public function updateCustomerAddress($customerId, $addressId, $data): ApiResource
+     {
+-        return $this->updateResource('addresses', $addressId, $data, ['customers', $customerId]);
++        return $this->updateResource('addresses', $addressId, $data, ['customers', $customerId], 'customer_address');
+     }
+ 
+     public function deleteCustomerAddress($customerId, $addressId): void
+diff --git a/src/Support/MakesHttpRequests.php b/src/Support/MakesHttpRequests.php
+index ae8d373..a6570d8 100644
+--- a/src/Support/MakesHttpRequests.php
++++ b/src/Support/MakesHttpRequests.php
+@@ -102,13 +102,17 @@ trait MakesHttpRequests
+         return new $resourceClass($response[$key], $this);
+     }
+ 
+-    protected function updateResource(string $resource, $resourceId, array $data, array $uriPrefix = []): ApiResource
++    protected function updateResource(string $resource, $resourceId, array $data, array $uriPrefix = [], string $responseKey = null): ApiResource
+     {
+         $key = Str::singular($resource);
+         $resourceClass = $this->resourceClassFor($resource);
+ 
+         $response = $this->put(implode('/', [...$uriPrefix, "{$resource}/{$resourceId}.json"]), [$key => $data]);
+ 
++        if (! empty($responseKey)) {
++            $key = $responseKey;
++        }
++
+         return new $resourceClass($response[$key], $this);
+     }
+ 

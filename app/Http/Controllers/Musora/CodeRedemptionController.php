@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Musora;
 
 use App\Http\Controllers\BaseController;
+use App\Modules\Ecommerce\Services\AccessCodeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Railroad\Ecommerce\Services\AccessCodeService;
 
 class CodeRedemptionController extends BaseController
 {

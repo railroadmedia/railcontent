@@ -1,0 +1,23 @@
+{
+  "extends": ["plugin:vue/recommended", "airbnb-base"],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "indent": ["error", 4],
+    "vue/html-indent": ["error", 4],
+    "no-underscore-dangle": "off",
+    "vue/html-self-closing": "off",
+    "consistent-return": "off",
+    "max-len": ["warn", 120],
+    "no-trailing-spaces": "off",
+    "camelcase": "off",
+    "vuetify/no-deprecated-classes": "error",
+    "vuetify/grid-unknown-attributes": "error",
+    "vuetify/no-legacy-grid": "error"
+  },
+  "plugins": [
+    "vue",
+    "vuetify"
+  ]
+}
