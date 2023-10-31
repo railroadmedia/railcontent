@@ -252,11 +252,16 @@ class ShopifySyncService
         if ($email) {
             $user = $this->userService->getByEmailOrNull($email);
             if ($user) {
+                if ($user->shopify_id != $shopifyCustomerId) {
+                    $user->shopify_id = $shopifyCustomerId;
+                    $user->save();
+                }
                 return $user;
             }
             return $this->userService->createUser(
                 $email,
-                config('user_management_system.default_user_password')
+                config('user_management_system.default_user_password'),
+                shopifyCustomerId: $shopifyCustomerId
             );
         }
         throw new \Exception("User not found for shopify customer id $shopifyCustomerId");
