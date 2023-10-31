@@ -10,8 +10,11 @@ export const useCollectionStore = defineStore({
             fetching: false,
             filter: {
                 activeTab: '',
+                includedFields: [],
                 limit: 10,
                 params: {},
+                searchTerm: '',
+                sort: 'slug',
             },
             loading: false,
             tabData: {},
@@ -19,18 +22,44 @@ export const useCollectionStore = defineStore({
             totalResults: 0,
         }
     },
-    actions:{
-        async applyFilter(param){
-            const index = this.tabData[this.filter.activeTab].included_fields.findIndex(p => p === param);
-            if (index === -1 || !index){
-                this.tabData[this.filter.activeTab].included_fields.push(param);
-            } else {
-                this.filter.params.included_fields.splice(index,1);
-            }
-
+    actions: {
+        applyFilter (param) {
+            this.updateIncludedFields(param);
+            this.setAllTabsToFilterNotApplied();
+            this.setActiveTabToFilterApplied();
             this.getData();
         },
-        async fetchData(){
+
+        clearFilter () {
+            this.resetFilterFields();
+            this.setAllTabsToFilterNotApplied();
+            this.setActiveTabToFilterApplied();
+            this.getData();
+        },
+
+        updateIncludedFields (param) {
+            const itemIndex = this.filter.includedFields.findIndex(f => f === param);
+
+            if (itemIndex === -1) this.filter.includedFields.push(param);
+            else this.filter.includedFields.splice(itemIndex, 1);
+        },
+
+        resetFilterFields () {
+            this.filter.includedFields = [];
+        },
+
+        setAllTabsToFilterNotApplied () {
+            Object.keys(this.tabData).forEach(tab => {
+                this.tabData[tab].filterApplied = false;
+            });
+        },
+
+        setActiveTabToFilterApplied () {
+            if (this.tabData[this.filter.activeTab]) {
+                this.tabData[this.filter.activeTab].filterApplied = true;
+            }
+        },
+        async fetchData () {
             const userStore = useUserStore();
 
             try {
@@ -42,12 +71,12 @@ export const useCollectionStore = defineStore({
                                 brand: userStore.brand,
                                 limit: this.filter.limit,
                                 page: this.tabData[this.filter.activeTab].currentPage,
-                                sort: this.tabData[this.filter.activeTab].sort,
+                                sort: this.filter.sort,
                                 ...this.filter.params,
-                                included_fields: this.tabData[this.filter.activeTab].included_fields,
-                                [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.tabData[this.filter.activeTab].searchTerm,
-                        },
-                    })
+                                included_fields: this.filter.includedFields,
+                                [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm,
+                            },
+                        })
                 return response;
             } catch (e) {
                 console.error(e);
@@ -57,30 +86,35 @@ export const useCollectionStore = defineStore({
                 })
             }
         },
-        async getData(replace = true, displayLoading = true){
+        async getData (replace = true, displayLoading = true) {
             this.loading = displayLoading;
             this.fetching = true;
 
+            if (replace) this.tabData[this.filter.activeTab].currentPage = 1;
+
             const response = await this.fetchData();
             this.setData(response, replace);
+            this.setURLParams();
             this.fetching = false;
         },
-        getParams(){
+        getURLParams () {
             const params = new URLSearchParams(window.location.search);
 
-            if (params.get('term')) this.tabData[this.filter.activeTab].searchTerm = params.get('term') || '';
-            this.tabData[this.filter.activeTab].sort = params.get('sort') || 'slug';
-
-        },
-        loadMore(){
-            if (!this.fetching){
-                this.tabData[this.filter.activeTab].currentPage++;
-                this.getData(false , false);
+            if (params.get('term')) this.filter.searchTerm = params.get('term');
+            if (params.get('sort')) this.filter.sort = params.get('sort');
+            if (params.getAll('included_fields[]').length > 0) {
+                this.filter.includedFields = params.getAll('included_fields[]');
             }
         },
-        setData(response, replace){
-            if(response){
-                if(replace){
+        loadMore () {
+            if (!this.fetching) {
+                this.tabData[this.filter.activeTab].currentPage++;
+                this.getData(false, false);
+            }
+        },
+        setData (response, replace) {
+            if (response) {
+                if (replace) {
                     this.data = [...response.data.data];
                     this.tabData[this.filter.activeTab].totalPages = Math.ceil(
                         response.data.meta.totalResults / this.filter.limit
@@ -93,50 +127,58 @@ export const useCollectionStore = defineStore({
 
             this.loading = false;
         },
-        setDefaults(defaults){
-          if(defaults.data){
-              this.data = defaults.data;
-          }
+        setDefaults (defaults) {
+            if (defaults.data) {
+                this.data = defaults.data;
+            }
 
-          if(defaults.filter){
-              this.filter = {...this.filter, ...defaults.filter};
-          }
+            if (defaults.filter) {
+                this.filter = { ...this.filter, ...defaults.filter };
+            }
 
-          if(defaults.tabData){
-              this.tabData = {...defaults.tabData};
-          }
+            if (defaults.tabData) {
+                this.tabData = { ...defaults.tabData };
+            }
         },
-        setParams(){
+        setURLParams () {
             const url = new URL(window.location.origin + window.location.pathname);
 
-            url.searchParams.set(this.filter.hasOwnProperty('term') ? 'term' : 'title', this.tabData[this.filter.activeTab].searchTerm);
-            url.searchParams.set('sort', this.tabData[this.filter.activeTab].sort);
+            url.searchParams.set(this.filter.hasOwnProperty('term') ? 'term' : 'title', this.filter.searchTerm);
+            url.searchParams.set('sort', this.filter.sort);
+
+            if (this.filter.includedFields.length > 0) {
+                this.filter.includedFields.map((field) => {
+                    url.searchParams.append('included_fields[]', field);
+                })
+            }
 
             window.history.pushState({}, '', url);
         },
-        setSearchTerm(term){
-            this.tabData[this.filter.activeTab].searchTerm = term;
-            this.tabData[this.filter.activeTab].currentPage = 1;
+        setSearchTerm (term) {
+            this.filter.searchTerm = term;
+            this.setAllTabsToFilterNotApplied();
+            this.setActiveTabToFilterApplied();
             this.getData();
         },
-        sortData(item){
-            this.tabData[this.filter.activeTab].sort = item;
+        sortData (item) {
+            this.filter.sort = item;
+            this.setAllTabsToFilterNotApplied();
+            this.setActiveTabToFilterApplied();
             this.getData();
         },
-        switchTab(tab){
+        switchTab (tab) {
             //Save page data
             this.tabData[this.filter.activeTab] = {
                 ...this.tabData[this.filter.activeTab],
                 data: [...this.data],
             }
 
-            if(this.tabData[tab].data){
-                this.filter.activeTab = tab;
+            this.filter.activeTab = tab;
+            if (this.tabData[tab].filterApplied) {
                 this.data = ([...this.tabData[this.filter.activeTab].data]);
-
             } else {
-                this.filter.activeTab = tab;
                 this.getData();
+                this.tabData[tab].filterApplied = true;
             }
         },
     },

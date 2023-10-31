@@ -1,8 +1,8 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :active-tab="filter.activeTab" :filterable-values="filterableValues" :hide-filter="!showFilter" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData"
-            @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
+            :active-tab="filter.activeTab" :filterable-values="filterableValues" :hide-filter="!showFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData"
+            @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
         />
 
         <transition appear name="fade">
@@ -43,10 +43,6 @@ const props = defineProps({
     includeFutureScheduledContentOnly: {
         type: Boolean,
         default: () => false,
-    },
-    includedFields: {
-        type: Array,
-        default: () => [],
     },
     limit: {
         type: String,
@@ -222,7 +218,6 @@ const getTabData = computed(() => {
         }
         tabDataMap[tab.key] = {
             endpoint,
-            included_fields: props.included_fields || [],
             searchTerm: '',
             sort: isCoach.value ? 'slug' : '-published_on',
             currentPage: 1,
@@ -240,15 +235,15 @@ const activeTabData = computed(() => {
 })
 
 const getSelectedFilters = computed(() => {
-    return activeTabData.value && activeTabData.value.included_fields;
+    return filter.value.includedFields;
 })
 
 const getSelectedSort = computed(() => {
-    return activeTabData.value && activeTabData.value.sort;
+    return filter.value.sort;
 })
 
 const getSearchTerm = computed(() => {
-    return activeTabData.value && activeTabData.value.searchTerm;
+    return filter.value.searchTerm;
 })
 
 const getCurrentPage = computed(() => {
@@ -263,8 +258,12 @@ const getTotalResults = computed(() => {
     return activeTabData.value && activeTabData.value.totalResults;
 })
 
-const handleFilterChange = (category, item) => {
-    collectionStore.applyFilter(`${category},${item.value}`);
+const handleClearFilter = () => {
+    collectionStore.clearFilter();
+}
+
+const handleFilterChange = (param) => {
+    collectionStore.applyFilter(param);
 }
 
 const handleSearchChange = (value) => {
@@ -292,5 +291,7 @@ onMounted(() => {
         },
         tabData: getTabData.value,
     })
+
+    collectionStore.getURLParams();
 })
 </script>

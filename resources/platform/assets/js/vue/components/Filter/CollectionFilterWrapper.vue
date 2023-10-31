@@ -1,6 +1,6 @@
 <template>
     <div>
-        <filter-controls
+        <FilterControls
             :hide-filter="hideFilter"
             :search-term="searchTerm"
             :is-collapsed="isCollapsed"
@@ -14,25 +14,30 @@
             @on-filter-tab-click="tab => emit('onTabChange', tab)"
         >
             <slot name="viewToggleButton"></slot>
-        </filter-controls>
-        <template v-if="!hideFilter">
-            <filter-options
+        </FilterControls>
+        <div>
+            <FilterPills :multi-select-columns="state.multiSelectColumns" :selected-filters="selectedFilters" @cancel-filter="param => emit('onFilterChange', param)" @clear-filter="emit('OnClearFilter')" />
+        </div>
+        <div v-if="!hideFilter" class="tw-relative">
+            <FilterOptions
                 v-if="!isCollapsed && isMobile"
                 :multi-select-columns="state.multiSelectColumns"
                 :single-select-columns="singleSelectColumns"
                 :selected-filters="selectedFilters"
-                @on-filter-click-handle="(category, item) => emit('onFilterChange', category, item)"
+                @on-filter-click-handle="param => emit('onFilterChange', param)"
             />
-            <filter-options-modal
+            <FilterOptionsModal
                 v-if="!isCollapsed && !isMobile"
                 :is-collapsed-mobile="isCollapsed"
                 :selected-filters="selectedFilters"
                 :multi-select-columns="state.multiSelectColumns"
                 :single-select-columns="singleSelectColumns"
                 @onClose="handleToggleCollapse"
-                @handle-filter-click="(category, item) => emit('onFilterChange', category, item)"
+                @handle-filter-click="param => emit('onFilterChange', param)"
             />
-        </template>
+
+            <div v-if="loading" class="tw-absolute tw-inset-0 dark:tw-bg-[#000C17]/30 tw-bg-[#F9F9F9]/30 tw-z-50"></div>
+        </div>
     </div>
 </template>
 
@@ -42,6 +47,7 @@
     import FilterOptions from './FilterOptions.vue';
     import FilterOptionsModal from './FilterOptionsModal.vue';
     import FilterControls from './FilterControls.vue';
+    import FilterPills from './FilterPills.vue';
 
     const props = defineProps({
         activeTab: {
@@ -56,13 +62,17 @@
             type: Boolean,
             default: false,
         },
+        loading: {
+            type: Boolean,
+            default: false,
+        },
         preLoadedContent: {
             type: Object,
             default: () => ({}),
         },
         selectedFilters: {
-            type: Array,
-            default: () => [],
+            type: Object,
+            default: () => ({}),
         },
         selectedSort: {
             type: String,
