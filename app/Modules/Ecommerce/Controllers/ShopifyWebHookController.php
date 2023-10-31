@@ -124,10 +124,6 @@ class ShopifyWebHookController extends Controller
             ->toArray();
     }
 
-    /**
-     * @param $order
-     * @return string
-     */
     public function getBrandFromOrder($order): string
     {
         $brand = $order[ShopifyMetafieldNamespace::Musora->value . '.' . ShopifyMetafieldKey::Brand->value];
