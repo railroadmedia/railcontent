@@ -1,6 +1,6 @@
 <template>
     <div class="lg:tw-flex tw-flex-wrap lg:tw-gap-14 tw-text-[#000C17] dark:tw-text-white">
-        <filter-multi-selection-item v-for="column in multiSelectColumns" :column="column" @click-column-item="(category, item) => emit('onFilterClickHandle',category, item)" :selected-filters="selectedFilters">
+        <filter-multi-selection-item v-for="column in multiSelectColumns" :column="column" @click-column-item="param => emit('onFilterClickHandle', param)" :selected-filters="selectedFilters">
         </filter-multi-selection-item>
         <filter-single-selection-item v-for="column in singleSelectColumns" :column="column" @single-select="singleSelect" :selected-value="selectedOption[column.category] ? selectedOption[column.category].value : ''">
         </filter-single-selection-item>
