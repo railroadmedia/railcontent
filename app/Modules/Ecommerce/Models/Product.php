@@ -332,7 +332,7 @@ class Product extends Model
                 new MetaField(
                     ShopifyMetafieldKey::DigitalAccessTimeIntervalLength,
                     (string)$this->digital_access_time_interval_length,
-                    ShopifyMetafieldTypes::single_line_text_field,
+                    ShopifyMetafieldTypes::integer,
                     ShopifyMetafieldNamespace::Model_Products
                 )
             );
