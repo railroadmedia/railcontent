@@ -250,7 +250,7 @@
 
  <!-- Header Section -->
     @include('drumeo.products.partials._evergreen-header', [
-    'logoHeader' => 'https://www.musora.com/musora-cdn/image/width=440,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/30_day_drummer_logo.svg',
+    'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30_day_drummer_logo.png',
     'logoAlt' => '30 day drummer logo',
     'rotatingText' => ['Learn the drums', 'Improve your timing', 'Boost your creativity'],
     'subtitle' => 'with daily guided workouts.',
@@ -268,7 +268,7 @@
 
  <!-- Lessons Section -->
 @php
-$lessons = ['Day 1 - Introduction', 'Day 2 - Basics of Drumming', 'Day 3 - Rhythms and Patterns', 'Day 4 - Advanced Techniques', 'Day 5 - Grooves and Fills', 'Day 6 - Introduction', 'Day 7 - Basics of Drumming', 'Day 8 - Rhythms and Patterns', 'Day 9 - Advanced Techniques', 'Day 10 - Grooves and Fills'];
+$lessons = ['Day 1 (Your First Drum Beat - Lesson & W...', 'Your First Drum Beat - Workout 2', 'Your First Drum Beat - Workout 3', 'Your First Drum Beat - Workout 4', 'Your First Drum Beat - Workout 5', 'Your First Drum Beat - Workout 6', 'Your First Drum Beat - Workout 7', 'Your First Drum Beat - Workout 8', 'Your First Drum Beat - Workout 9', 'Your First Drum Beat - Workout 10'];
 @endphp
 
 @include('drumeo.products.partials._evergreen-lessons', [
@@ -288,7 +288,6 @@ $lessons = ['Day 1 - Introduction', 'Day 2 - Basics of Drumming', 'Day 3 - Rhyth
 ])
 
 <!-- Songs subsection -->
-
 @include('drumeo.products.partials._evergreen-dropdown', [
     'bgClass' => 'bg-slate-900', 
     'songItems' => $drumeo['practiceItems']])
@@ -305,46 +304,26 @@ $items = [
         ]
 @endphp
 
-<section class="text-center px-5 py-4 sm:px-6 sm:py-10 md:py-14 lg:py-20 bg-blue-50">
-    <div class="container max-w-4xl mx-auto">
-        <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-            <img class="h-28 sm:h-36 lg:h-48 lazyload"
-                data-src="https://www.musora.com/musora-cdn/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png"
-                alt="logo">
-            <h4 class="leading-loose text-left">
-                <ul>
-                    @foreach ($items as $item)
-                        <li
-                            class="text-base md:text-3xl font-normal capitalize leading-tight md:leading-loose my-4 md:my-8">
-                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/shop/30-day-challenges/icon-park-solid_check-one.svg"
-                                alt="check icon" class="w-3 md:w-7 h-3 md:h-7">
-                            {{ $item }}
-                        </li>
-                    @endforeach
-                    <ul>
-        </div>
-
-        <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">GET STARTED</a><br>
-        <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload"
-            data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png"
-            alt="joined student profiles">
-        <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join
-            {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
-    </div>
-</section>
+<!-- Get started-->
+@include('drumeo.products.partials._evergreen-get-started', [
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30_day_drummer_logo.png', 
+    'items' => $items,
+    'buttonText' => 'GET STARTED',
+    'studentProfilesImage' => 'https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png',
+    'numStudents' =>  number_format($nPackOwners ?? 0),
+    'students' => 'drummers'])
 
  <!-- Meet your teacher section -->
-
 <section class="teacher-block text-center sm:px-6 md:px-5 pt-10 sm:py-10 sm:py-14 lg:py-20 bg-white">
 
     <div class="container max-w-5xl mx-auto sm:mb-14 lg:mb-16">
         <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
             <div class="w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
                 <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0"
-                    src="https://www.musora.com/musora-cdn/image/width=550,quality=100/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/coach-image.png"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/coach-image.png"
                     loading="lazy" onload="this.classList.remove('opacity-0')">
                 <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0"
-                    src="https://www.musora.com/musora-cdn/image/width=550,quality=100/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/coach-image.png"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/coach-image.png"
                     loading="lazy" onload="this.classList.remove('opacity-0')">
                 <img class="absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0"
                     style="width: 130%;transform: translate(-44%, -7%);"
@@ -436,6 +415,7 @@ $testimonials = $drumeo['testimonialsShopVersion'];
         'bgColor' => 'linear-gradient(rgba(11, 118, 219, 1), rgba(7, 74, 137, 1))',
         'title' => "Trusted by drummers everywhere.",
         'showBottom' => true,
+        'showTop' => true,
         'subHeader' => '17,000+ Drummers Agree...',
         'description' => '30-Day Drummer works. By focusing on playing with real music right from day one, you’ll learn the skills to play hundreds of songs on the drums in just thirty days. Check out what students are saying:',
 ])
@@ -479,7 +459,7 @@ $points = [
 @endphp
 
 @include('drumeo.products.partials._evergreen-learn', [
-    'logo' => 'https://www.musora.com/musora-cdn/image/width=440,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/30_day_drummer_logo.svg',
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30_day_drummer_logo.png',
     'logoAlt' => '30DD logo season3 logo',
     'title' => 'Learn the drums with daily guided workouts.',
     'points' => $points,

@@ -20,13 +20,13 @@
 
                 <div class="flex flex-wrap flex-col sm:flex-nowrap md:flex-row lg:flex-row items-center mt-6 sm:mt-5 lg:mt-10">
                     <div class="w-full sm:w-1/2 md:w-1/2 text-center sm:pr-2 my-1">
-                        <a href="#final" class="join blue medium w-full anchor-slide">{{ $buttonTxt }}</a>
-                        {{-- <a x-data="{ isHovered: false }" href="#final"
+                        {{-- <a href="#final" class="join blue medium w-full anchor-slide">{{ $buttonTxt }}</a> --}}
+                        <a x-data="{ isHovered: false }" href="#final"
                             class="medium w-full anchor-slide text-white cursor-pointer text-center user-select-none bg-{{ $brand }} rounded-full outline-none py-2 px-14 md:py-3 font-bebas text-xl md:text-2xl tracking-wider text-uppercase text-decoration-none transition duration-300 inline-block"
                             @mouseenter="isHovered = true" @mouseleave="isHovered = false"
                             :style="{ filter: isHovered ? 'brightness(120%)' : 'brightness(100%)' }">
                             {{ $buttonTxt }}
-                        </a> --}}
+                        </a>
                     </div>
                     <div class="w-full sm:flex sm:w-1/2 py-2 md:py-0">
                         <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload"

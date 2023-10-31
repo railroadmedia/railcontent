@@ -1,4 +1,4 @@
-<section class="pt-16 md:pt-32 pb-44 md:pb-64" style="background: {{ $bgColor }}">
+<section class="pt-16 md:pt-32 pb-40 md:pb-50" style="background: {{ $bgColor }}">
         <!-- top part-->
     @if (!empty($showTop))
     <div class="text-center text-white">
@@ -6,7 +6,10 @@
         <a class="inline-block w-full" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank"
             onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
             <img alt="shopper approved image" class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/shopper-approved.png"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/assets/shopper-approved-white.svg"
+                loading="lazy" onload="this.classList.remove('opacity-0')">
+            <img alt="stars" class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity opacity-0"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/assets/five-stars.svg"
                 loading="lazy" onload="this.classList.remove('opacity-0')">
         </a>
 

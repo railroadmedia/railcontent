@@ -4,7 +4,7 @@
     {{ $title }}
 </h2>
 
-<div class="container max-w-5xl mx-auto p-4 md:p-6 md:flex leading-normal">
+<div class="container max-w-6xl mx-auto p-4 md:p-6 md:flex leading-normal">
     <div class="md:w-2/3 lg:w-4/6 py-2 md:p-4">
         <div class="w-full">
             <img class="rounded-xl" src="{{ $image }}" />
@@ -17,25 +17,25 @@
         </div>
     </div>
 
-    <div class="py-2 md:p-4 text-black text-base">
+    <div class="py-2 md:py-4 text-black text-sm">
         @foreach ($features as $feature)
-            <div class="rounded-lg mb-2 px-6 py-3 bg-blue-50">
+            <div class="rounded-lg mb-2 px-4 py-3 bg-blue-50">
                 <p class="flex items-center"><i class="fas fa-play-circle text-xl text-{{ $brand }} mr-2"></i> {{ $feature }}</p>
             </div>
         @endforeach
 
             <p class="text-white pt-3"><strong>{{ $lessonTitle }}</strong></p>
 
-        <div x-data="{ isOpen: [] }" class="h-72 overflow-y-scroll rounded-lg text-black">
+        <div x-data="{ isOpen: [] }" class="h-72 overflow-y-scroll rounded-lg text-black leading-tight">
             @foreach ($lessons as $i => $lesson)
                 <div x-data="{ open: false }"
-                    class="rounded-lg bg-white shadow my-1 mb-1.5">
+                    class="rounded-lg bg-white shadow mb-1.5">
                     <button
-                        class="rounded-lg flex w-full items-center justify-between px-6 py-3.5"
+                        class="rounded-lg flex w-full items-center justify-between px-4 py-3.5"
                         style="background: #eff7ff;"
                             x-on:click="open = !open;"
                     >
-                        <p class="mx-0">Day {{ $i + 1 }}</p>
+                        <p class="mx-0">{{$lesson}}</p>
                         <div
                                 class="ml-auto text-{{ $brand }} cursor-pointer"
                         >
@@ -45,7 +45,7 @@
                     <div x-cloak
                             class="transition-all duration-200 overflow-hidden"
                             x-bind:class="open ? 'max-h-[2000px]' : 'max-h-0'">
-                        <div class="px-6 pb-4 bg-blue-50 rounded-lg">
+                        <div class="px-4 pb-4 bg-blue-50 rounded-lg">
                             {{ $lessons[$i] }}
                         </div>
                     </div>

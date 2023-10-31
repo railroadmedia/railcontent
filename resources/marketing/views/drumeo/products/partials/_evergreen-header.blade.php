@@ -42,7 +42,7 @@
             <img src="{{ $bgImageLeft }}" alt="{{ $subtitle }}" class="hidden md:inline lg:inline xl:inline" style="margin: 0 0 0 -80px">
         </div>
         
-        <div class="container max-w-3xl mx-6">
+        <div class="container max-w-3xl">
             <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" data-open="trailer">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
                 <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload"
