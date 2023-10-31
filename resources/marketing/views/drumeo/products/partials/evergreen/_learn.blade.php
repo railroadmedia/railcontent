@@ -1,4 +1,4 @@
-<section class="md:pl-24 px-5 sm:px-0 py-10 sm:py-14 lg:py-20" style="background: #eff7ff;">
+<section class="md:pl-24 px-5 sm:px-0 py-10 sm:py-14 lg:py-20 relative" style="background: #eff7ff;">
     <div class="w-full flex flex-col md:flex-row items-center">
 
             <!-- Left Column -->

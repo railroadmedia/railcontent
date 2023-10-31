@@ -49,7 +49,7 @@
                     type="video/mp4" autoplay loop playsinline muted>
                 </video>
             </div>
-            <div class="absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 px-4 lg:px-8 hidden sm:block">
+            <div class="absolute top-1/2 right-0 transform translate-x-full -translate-y-1/2 px-4 lg:px-8 hidden sm:block">
                 <img src="{{ $bgImageRight }}" alt="{{ $subtitle }}" class="h-56 lg:h-72">
             </div>
         </div>
