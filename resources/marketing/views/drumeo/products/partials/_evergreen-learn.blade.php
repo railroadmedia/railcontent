@@ -1,8 +1,8 @@
-<section class="md:ml-24 px-5 sm:px-0 py-10 sm:py-14 lg:py-20" style="background: #eff7ff;">
-    <div class="container w-full ml-auto">
-        <div class="flex flex-col md:flex-row items-center">
+<section class="md:pl-24 px-5 sm:px-0 py-10 sm:py-14 lg:py-20" style="background: #eff7ff;">
+    <div class="w-full flex flex-col md:flex-row items-center">
+        
             <!-- Left Column -->
-            <div class="md:w-6/12 lg:w-4/12 text-center lg:text-left mb-5 md:mb-0">
+            <div class="md:w-7/12 lg:w-6/12 text-center lg:text-left mb-5 md:mb-0 md:pl-24">
                 <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="{{ $logo }}"
                     alt="{{ $logoAlt }}">
                 <h1 class="py-2"><strong>{{ $title }}</strong></h1>
@@ -37,10 +37,10 @@
                 </div>
             </div>
             <!-- Right Column (hidden on Mobile) -->
-            <div class="md:w-6/12 lg:w-8-12 px-3 hidden sm:block">
+            <div class="md:w-5/12 lg:w-6/12 hidden md:block">
                 <img src="{{ $mainImage }}" alt="{{ $students }}" class="rounded-2xl">
             </div>
-        </div>
+        
 
     </div>
 </section>

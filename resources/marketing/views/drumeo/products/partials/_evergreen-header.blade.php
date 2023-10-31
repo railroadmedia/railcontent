@@ -36,13 +36,13 @@
         </div>
     </div>
 
-<section class="md:w-full text-center px-4 sm:px-6 py-5 sm:py-8 lg:py-6">
+<section class="md:w-full text-center px-4 sm:px-0 py-5 sm:py-8 lg:py-6">
     <div class="md:flex md:items-center md:justify-between">
-        <div class="bg-contain relative md:w-2/3 left-0" style="clip-path: polygon(33.33% 0, 100% 0, 100% 100%, 33.33% 100%); max-width: 66.67%;">
-            <img src="{{ $bgImageLeft }}" alt="{{ $subtitle }}" class="hidden md:inline lg:inline xl:inline">
+        <div style="width: 800px; overflow: hidden;">
+            <img src="{{ $bgImageLeft }}" alt="{{ $subtitle }}" class="hidden md:inline lg:inline xl:inline" style="margin: 0 0 0 -80px">
         </div>
         
-        <div class="container max-w-2xl mx-6">
+        <div class="container max-w-3xl mx-6">
             <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" data-open="trailer">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
                 <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload"
@@ -51,8 +51,8 @@
                 </video>
             </div>
         </div>
-        <div class="bg-contain relative md:w-2/3 right-0" style="clip-path: polygon(0 0, 66.67% 0, 66.67% 100%, 0 100%); max-width: 66.67%;">
-            <img src="{{ $bgImageRight }}" alt="{{ $subtitle }}" class="hidden md:inline lg:inline xl:inline">
+        <div style="width: 800px; overflow: hidden;">
+            <img src="{{ $bgImageRight }}" alt="{{ $subtitle }}" class="hidden md:inline lg:inline xl:inline" style="margin: 0 0 0 36px">
         </div>
     </div>
     <div class="flex w-full flex-col items-center mt-6 sm:mt-5 lg:mt-10">

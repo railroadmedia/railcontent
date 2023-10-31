@@ -7,7 +7,7 @@
                         <div @click="openItem === {{ $i }} ? openItem = null : openItem = {{ $i }}"
                             class="flex sm:inline-block cursor-pointer w-full">
                             <div class="pr-3 sm:w-full text-left sm:text-center">
-                                <img alt="point icon" src="{{ $songItem['icon'] }}" class="h-6 sm:h-10">
+                                <i class="{{ $songItem['icon'] }} h-6 sm:h-10 text-{{$brand}} text-xl sm:text-4xl"></i>
                             </div>
                             <div class="w-4/5 sm:w-full text-left sm:text-center">
                                 <p class="mb-1 sm:my-2 text-lg md:text-xl">
