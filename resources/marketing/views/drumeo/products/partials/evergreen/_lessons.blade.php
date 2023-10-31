@@ -1,14 +1,12 @@
 <section class="m-0 text-white" style="background: #00101D; border: 1px solid #00101D">
 
-<h2 class="text-center leading-tight pt-12 md:pt-20 px-4">
-   <strong>{{ $title }}</strong> 
+<h2 class="text-center leading-tight pt-12 md:pt-20 px-4 mb-6">
+   <strong>{{ $title }}</strong>
 </h2>
 
-<div class="container max-w-6xl mx-auto p-4 md:p-6 md:flex leading-normal">
-    <div class="md:w-2/3 lg:w-4/6 py-2 md:p-4">
-        <div class="w-full">
-            <img class="rounded-xl" src="{{ $image }}" />
-        </div>
+<div class="container max-w-5xl mx-auto px-4 md:px-6 md:flex leading-normal">
+    <div class="md:w-2/3 lg:w-8/12 md:pr-4 flex-shrink-0">
+        <img class="rounded-xl" src="{{ $image }}" />
 
         <div class="mt-4 md:py-4 hidden md:block">
         <p>{{ $descriptionDesktop }}  <strong>{{ $descriptionBold }} </strong></p>
@@ -17,7 +15,7 @@
         </div>
     </div>
 
-    <div class="py-2 md:py-4 text-black text-sm">
+    <div class="text-black">
         @foreach ($features as $feature)
             <div class="rounded-lg mb-2 px-4 py-3 bg-blue-50">
                 <p class="flex items-center"><i class="fas fa-play-circle text-xl text-{{ $brand }} mr-2"></i> {{ $feature }}</p>
@@ -35,7 +33,7 @@
                         style="background: #eff7ff;"
                             x-on:click="open = !open;"
                     >
-                        <p class="mx-0">{{$lesson}}</p>
+                        <p class="mx-0 truncate">{{$lesson}}</p>
                         <div
                                 class="ml-auto text-{{ $brand }} cursor-pointer"
                         >

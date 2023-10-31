@@ -215,14 +215,14 @@
                 right: -100px;
             }
         }
-        
+
         @media (max-width: 767px) {
            .teacher-block {
                 margin-bottom: -80px;
             }
         }
 
-        @media (max-width: 638px) { 
+        @media (max-width: 638px) {
             .dropdown-box {
             background: linear-gradient(rgba(10, 31, 52, 1), rgba(10, 31, 52, 0));
             }
@@ -249,7 +249,7 @@
             ])
 
  <!-- Header Section -->
-    @include('drumeo.products.partials._evergreen-header', [
+    @include('drumeo.products.partials.evergreen._header', [
     'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30_day_drummer_logo.png',
     'logoAlt' => '30 day drummer logo',
     'rotatingText' => ['Learn the drums', 'Improve your timing', 'Boost your creativity'],
@@ -271,7 +271,7 @@
 $lessons = ['Day 1 (Your First Drum Beat - Lesson & W...', 'Your First Drum Beat - Workout 2', 'Your First Drum Beat - Workout 3', 'Your First Drum Beat - Workout 4', 'Your First Drum Beat - Workout 5', 'Your First Drum Beat - Workout 6', 'Your First Drum Beat - Workout 7', 'Your First Drum Beat - Workout 8', 'Your First Drum Beat - Workout 9', 'Your First Drum Beat - Workout 10'];
 @endphp
 
-@include('drumeo.products.partials._evergreen-lessons', [
+@include('drumeo.products.partials.evergreen._lessons', [
     'title' => 'Learn the drums by actually playing the drums.',
     'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/drum-challenges.jpeg',
     'descriptionDesktop' => '30-Day Drummer is a NEW way to learn the drums – where you learn by actually playing the drums. By focusing on timing & coordination, you’ll build your skills over thirty days following daily guided workouts with your instructor, Domino Santantonio.',
@@ -288,11 +288,11 @@ $lessons = ['Day 1 (Your First Drum Beat - Lesson & W...', 'Your First Drum Beat
 ])
 
 <!-- Songs subsection -->
-@include('drumeo.products.partials._evergreen-dropdown', [
-    'bgClass' => 'bg-slate-900', 
+@include('drumeo.products.partials.evergreen._dropdown', [
+    'bgClass' => 'bg-slate-900',
     'songItems' => $drumeo['practiceItems']])
 
-       
+
  <!-- What you will learn section-->
 @php
 $items = [
@@ -305,8 +305,8 @@ $items = [
 @endphp
 
 <!-- Get started-->
-@include('drumeo.products.partials._evergreen-get-started', [
-    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30_day_drummer_logo.png', 
+@include('drumeo.products.partials.evergreen._get-started', [
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30_day_drummer_logo.png',
     'items' => $items,
     'buttonText' => 'GET STARTED',
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
@@ -388,7 +388,7 @@ $items = [
 $testimonials = $drumeo['testimonialsShopVersion'];
 @endphp
 
-@include('drumeo.products.partials._evergreen-testimonials', [
+@include('drumeo.products.partials.evergreen._testimonials', [
     'socialIcons' => [
                 [
                     'url' => 'https://www.youtube.com/freedrumlessons/',
@@ -457,7 +457,7 @@ $points = [
         ]
 @endphp
 
-@include('drumeo.products.partials._evergreen-learn', [
+@include('drumeo.products.partials.evergreen._learn', [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30_day_drummer_logo.png',
     'logoAlt' => '30DD logo',
     'title' => 'Learn the drums with daily guided workouts.',
@@ -480,7 +480,7 @@ $points = [
                     "title" => "Why do I need to register if I get it for free as a member?",
                     "desc" => "It’s a 30-day course and it only works if you’re actively participating. So we wanted to make sure you raised your hand to enroll in the journey.<br><br>This isn’t a “watch a lesson, go do something else for 10 days, watch another” type of routine. So we’re asking for a commitment from anybody who participates.",
                     ])
-                @endif 
+                @endif
                 @include('_partials.components.question-dropdown', [
                 "title" => "Do I need to attend the lessons live?",
                 "desc" => "The weekday workouts are pre-recorded videos you can access on your own schedule – and the weekly live Q&A sessions are totally optional, and they’ll also include a recording that you can watch or re-watch anytime.",
