@@ -44,10 +44,6 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
-    includedFields: {
-        type: Array,
-        default: () => [],
-    },
     limit: {
         type: String,
         default: () => "10",
@@ -92,7 +88,6 @@ const request_params = computed(() => {
         included_types: includedTypes.value,
         include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
         limit: props.limit,
-        included_fields: props.included_fields || [],
     };
 })
 
@@ -235,15 +230,15 @@ const activeTabData = computed(() => {
 })
 
 const getSelectedFilters = computed(() => {
-    return filter.value.fields;
+    return filter.value.includedFields;
 })
 
 const getSelectedSort = computed(() => {
-    return activeTabData.value && activeTabData.value.sort;
+    return filter.value.sort;
 })
 
 const getSearchTerm = computed(() => {
-    return activeTabData.value && activeTabData.value.searchTerm;
+    return filter.value.searchTerm;
 })
 
 const getCurrentPage = computed(() => {
@@ -262,8 +257,8 @@ const handleClearFilter = () => {
     collectionStore.clearFilter();
 }
 
-const handleFilterChange = (category, item) => {
-    collectionStore.applyFilter(category, item);
+const handleFilterChange = (param) => {
+    collectionStore.applyFilter(param);
 }
 
 const handleSearchChange = (value) => {
@@ -291,5 +286,7 @@ onMounted(() => {
         },
         tabData: getTabData.value,
     })
+
+    collectionStore.getURLParams();
 })
 </script>

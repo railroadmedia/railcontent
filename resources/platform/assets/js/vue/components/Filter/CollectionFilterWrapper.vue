@@ -16,7 +16,7 @@
             <slot name="viewToggleButton"></slot>
         </FilterControls>
         <div>
-            <FilterPills :selected-filters="selectedFilters" @cancel-filter="(category, item) => emit('onFilterChange', category, item)" @clear-filter="emit('OnClearFilter')" />
+            <FilterPills :multi-select-columns="state.multiSelectColumns" :selected-filters="selectedFilters" @cancel-filter="param => emit('onFilterChange', param)" @clear-filter="emit('OnClearFilter')" />
         </div>
         <div v-if="!hideFilter" class="tw-relative">
             <FilterOptions
@@ -24,7 +24,7 @@
                 :multi-select-columns="state.multiSelectColumns"
                 :single-select-columns="singleSelectColumns"
                 :selected-filters="selectedFilters"
-                @on-filter-click-handle="(category, item) => emit('onFilterChange', category, item)"
+                @on-filter-click-handle="param => emit('onFilterChange', param)"
             />
             <FilterOptionsModal
                 v-if="!isCollapsed && !isMobile"
@@ -33,7 +33,7 @@
                 :multi-select-columns="state.multiSelectColumns"
                 :single-select-columns="singleSelectColumns"
                 @onClose="handleToggleCollapse"
-                @handle-filter-click="(category, key) => emit('onFilterChange', category, key)"
+                @handle-filter-click="param => emit('onFilterChange', param)"
             />
 
             <div v-if="loading" class="tw-absolute tw-inset-0 dark:tw-bg-[#000C17]/30 tw-bg-[#F9F9F9]/30 tw-z-50"></div>
