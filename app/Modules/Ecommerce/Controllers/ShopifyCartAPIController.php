@@ -2,7 +2,7 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
-use App\Modules\Ecommerce\Services\ShopifyStoreFrontAPIService;
+use App\Modules\Ecommerce\Services\ShopifyAPIService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cookie;
@@ -13,11 +13,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ShopifyCartAPIController extends Controller
 {
-    private ShopifyStoreFrontAPIService $shopifyStoreFrontAPIService;
+    private ShopifyAPIService $shopifyStoreFrontAPIService;
 
     private const SHOPIFY_CART_ID_SESSION_KEY = 'shopify_session_cart_id';
 
-    public function __construct(ShopifyStoreFrontAPIService $shopifyStoreFrontAPIService)
+    public function __construct(ShopifyAPIService $shopifyStoreFrontAPIService)
     {
         $this->shopifyStoreFrontAPIService = $shopifyStoreFrontAPIService;
     }

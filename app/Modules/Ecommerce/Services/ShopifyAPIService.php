@@ -10,7 +10,7 @@ use Shopify\Context;
 use Shopify\Exception\HttpRequestException;
 use Shopify\Exception\MissingArgumentException;
 
-class ShopifyStoreFrontAPIService
+class ShopifyAPIService
 {
     public Storefront $storefrontClient;
     public Graphql $adminClient;
@@ -300,7 +300,7 @@ class ShopifyStoreFrontAPIService
     ): array {
         $updateCartInputLineArray = [
             [
-                'quantity' => (integer) $newQuantity,
+                'quantity' => (integer)$newQuantity,
                 'id' => $merchandiseLineItemId
             ]
         ];
@@ -496,6 +496,48 @@ class ShopifyStoreFrontAPIService
         }
 
         return $productSKUsVariantIds;
+    }
+
+    /**
+     * Based on: https://shopify.dev/docs/api/multipass
+     *
+     * @param $userEmail
+     * @param null $redirectToUrl
+     * @return string
+     */
+    public function generateMultipassToken($userEmail, $redirectToUrl = null)
+    {
+        $customerDataHash = ['email' => $userEmail];
+
+        $keyMaterial = hash("sha256", config('shopify.multipassSecretKey'), true);
+        $encryptionKey = substr($keyMaterial, 0, 16);
+        $signatureKey = substr($keyMaterial, 16, 16);
+
+        // Store the current time in ISO8601 format.
+        // The token will only be valid for a small timeframe around this timestamp.
+        $customerDataHash["created_at"] = date("c");
+
+        // Tell Shopify to redirect to a URL after it authenticates
+        if (!empty($redirectToUrl)) {
+            $customerDataHash["return_to"] = $redirectToUrl;
+        }
+
+        // Serialize the customer data to JSON and encrypt it
+        // Use a random IV
+        $iv = openssl_random_pseudo_bytes(16);
+
+        // Use IV as first block of ciphertext
+        $cipherText = $iv . openssl_encrypt(
+                json_encode($customerDataHash),
+                "AES-128-CBC",
+                $encryptionKey,
+                OPENSSL_RAW_DATA,
+                $iv
+            );
+
+        // Create a signature (message authentication code) of the ciphertext
+        // and encode everything using URL-safe Base64 (RFC 4648)
+        return strtr(base64_encode($cipherText . hash_hmac("sha256", $cipherText, $signatureKey, true)), '+/', '-_');
     }
 
     private function jsonStringToGraphQLObjectString($jsonString)
