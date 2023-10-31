@@ -73,7 +73,9 @@ class SyncProductsToShopify implements ShouldQueue
         protected int $locationId,
         protected Carbon $lastSyncAt,
         protected bool $simulate,
-        protected bool $fresh)
+        protected bool $fresh,
+        protected int $batchIndex
+    )
     {
         $this->shopifyIds = collect();
         $this->productsToSkip = collect();
@@ -100,7 +102,7 @@ class SyncProductsToShopify implements ShouldQueue
         $this->productRepository = $productRepository;
         $this->entityManager = $entityManager;
 
-        $this->logDebug(sprintf("%s: running batch for products %s - %s", $this->getClassName(), $this->startAtId, $this->endAtId));
+        $this->logDebug(sprintf("%s: running batch %s for products %s - %s", $this->getClassName(), $this->batchIndex, $this->startAtId, $this->endAtId));
         $this->sync();
     }
 
@@ -812,6 +814,25 @@ class SyncProductsToShopify implements ShouldQueue
             if ($options->isEmpty()) {
                 $isCreating = $fresh || is_null($product->getShopifyId());
             } else {
+                // DEV NOTE: because the products could have been split across multiple jobs, another job could also be
+                // attempting to create/update the same collection of products, so if the options includes a product
+                // whose ID is before this job's startAtId, we'll assume that the whole collection was already done in
+                // an earlier job
+                /** @var Product $lowestProduct */
+                $lowestProduct = $options->sortBy(fn(Product $product) => $product->getId())->first();
+                $lowestId = $lowestProduct->getId();
+                if ($lowestId < $this->startAtId && $this->batchIndex > 1) {
+                    $this->logWarning(sprintf("%s: Found product ID %s (sku %s) as part of a collection of options "
+                     . "in batch %s. This should have been already synced in an earlier batch and has been skipped.",
+                        $this->getClassName(),
+                        $lowestId,
+                        $lowestProduct->getSku(),
+                        $this->batchIndex
+                    ));
+                    return;
+                }
+
+
                 $isAllNew = $options
                     ->filter(fn(Product $productOption) => !is_null($productOption->getShopifyId()))
                     ->isEmpty();
