@@ -5,7 +5,7 @@
                 <i class="{{ $icon['iconClass'] }} text-4xl"></i>
             </a>
             <h2 class="my-1 sm:my-2 text-white text-4xl md:text-5xl"><strong>{{ $icon['count'] }}</strong></h2>
-            <p class="uppercase text-base md:text-lg">{{ $icon['countLabel'] }}</p>
+            <p class="uppercase">{{ $icon['countLabel'] }}</p>
         </div>
     @endforeach
 </div>

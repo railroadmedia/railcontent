@@ -10,7 +10,7 @@
     <meta property="og:title" content="30-Day Drummer | Drumeo">
     <meta name="description" content="Learn the drums with daily guided workouts.">
     <meta property="og:description" content="Learn the drums with daily guided workouts.">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30DD2-share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -351,9 +351,7 @@ $items = [
     </div>
 </section>
 
-
  <!-- Testimonials section -->
-
 @php
 $testimonials = $drumeo['testimonialsShopVersion'];
 @endphp
