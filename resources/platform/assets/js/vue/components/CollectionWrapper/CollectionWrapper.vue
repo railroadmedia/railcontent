@@ -83,6 +83,7 @@ const { brand } = storeToRefs(userStore);
 const request_params = computed(() => {
     return {
         required_fields: props.requiredFields,
+        included_fields: props.includedFields,
         statuses: props.statuses,
         required_user_states: props.requiredUserStates,
         included_types: includedTypes.value,
@@ -118,6 +119,10 @@ const isBootCamps = computed(() => {
 
 const isCoach = computed(() => {
     return props.collectionType === 'coach';
+})
+
+const isSong = computed(() => {
+    return props.collectionType === 'song';
 })
 
 const isCourse = computed(() => {
@@ -163,7 +168,7 @@ const isList = computed(() => {
 
 //Filter state reactive
 const showFilter = computed(() => {
-    return isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value || isCoach.value;
+    return isSong.value || isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value || isCoach.value;
 })
 
 //Tab options reactives
