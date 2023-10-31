@@ -389,6 +389,7 @@ class UserAccessPermissionsService
         $userAccessPermission->start_time = $startTime;
         $userAccessPermission->time_days = $timeDays;
         $userAccessPermission->time_months = $timeMonths;
+        $userAccessPermission->time_minutes = 0;
         $userAccessPermission->time_lifetime = $lifetime ?? 0;
         $userAccessPermission->status = $status;
         if ($revokedAt) {
