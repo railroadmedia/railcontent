@@ -346,17 +346,10 @@ class SyncProductsToShopify implements ShouldQueue
         if ($locationId) {
             $variantData["location_id"] = $locationId;
         }
+        // grab the eloquent model, so we can get its metafields
+        $productModel = \App\Modules\Ecommerce\Models\Product::find($product->getId());
         if ($withMetafields) {
-            // refer to https://shopify.dev/docs/apps/custom-data/metafields/types
-            // we can use meta fields for stuff like our product id, etc
-            $variantData["metafields"] = [
-                [
-                    "key" => ShopifyMetafieldKey::Id->value,
-                    "value" => (string)$product->getId(),
-                    "type" => ShopifyMetafieldTypes::integer->value,
-                    "namespace" => ShopifyMetafieldNamespace::Model_Products->value
-                ]
-            ];
+            $variantData["metafields"] = $productModel->getMetafieldsForShopify();
         }
         if ($sizeOptionName) {
             $variantData[$sizeOptionName] = $this->getSizeFromProductSku($product);

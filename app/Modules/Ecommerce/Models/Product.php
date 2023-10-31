@@ -5,6 +5,11 @@ namespace App\Modules\Ecommerce\Models;
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\Ecommerce\database\factories\ProductFactory;
 use App\Modules\Ecommerce\Enums\DigitalAccessType;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
+use App\Modules\Ecommerce\Models\Shopify\MetaField;
+use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
 use Carbon\Carbon;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -95,6 +100,7 @@ class Product extends Model
 {
     use CanSaveWithoutUpdatedAt;
     use HasFactory;
+    use HasShopifyMetafields;
     use SoftDeletes;
 
     const TYPE_DIGITAL_SUBSCRIPTION = 'digital subscription';
@@ -247,5 +253,22 @@ class Product extends Model
 
     public function isTrial(): bool{
         return str_contains(strtolower($this->sku), 'trial');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getMetafieldsForShopify(): array
+    {
+        return [
+            MetaField::getStructureForShopify(
+                new MetaField(
+                    ShopifyMetafieldKey::Id,
+                    (string)$this->id,
+                    ShopifyMetafieldTypes::integer,
+                    ShopifyMetafieldNamespace::Model_Products
+                )
+            )
+        ];
     }
 }
