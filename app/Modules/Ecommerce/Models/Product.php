@@ -284,7 +284,7 @@ class Product extends Model
         }
 
         if ($this->fulfillment_sku) {
-            MetaField::getStructureForShopify(
+            $metafields[] = MetaField::getStructureForShopify(
                 new MetaField(
                     ShopifyMetafieldKey::FulfillmentSKU,
                     $this->fulfillment_sku,
@@ -295,7 +295,7 @@ class Product extends Model
         }
 
         if ($this->digital_access_type) {
-            MetaField::getStructureForShopify(
+            $metafields[] = MetaField::getStructureForShopify(
                 new MetaField(
                     ShopifyMetafieldKey::DigitalAccessType,
                     $this->digital_access_type,
@@ -306,7 +306,7 @@ class Product extends Model
         }
 
         if ($this->digital_access_time_type) {
-            MetaField::getStructureForShopify(
+            $metafields[] = MetaField::getStructureForShopify(
                 new MetaField(
                     ShopifyMetafieldKey::DigitalAccessTimeType,
                     $this->digital_access_time_type,
@@ -317,7 +317,7 @@ class Product extends Model
         }
 
         if ($this->digital_access_time_interval_type) {
-            MetaField::getStructureForShopify(
+            $metafields[] = MetaField::getStructureForShopify(
                 new MetaField(
                     ShopifyMetafieldKey::DigitalAccessTimeIntervalType,
                     $this->digital_access_time_interval_type,
@@ -328,7 +328,7 @@ class Product extends Model
         }
 
         if ($this->digital_access_time_interval_length) {
-            MetaField::getStructureForShopify(
+            $metafields[] = MetaField::getStructureForShopify(
                 new MetaField(
                     ShopifyMetafieldKey::DigitalAccessTimeIntervalLength,
                     (string)$this->digital_access_time_interval_length,
