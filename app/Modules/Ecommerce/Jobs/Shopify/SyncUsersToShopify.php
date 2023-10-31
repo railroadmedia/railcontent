@@ -387,10 +387,10 @@ class SyncUsersToShopify implements ShouldQueue
      * new Customers to be made after a User already exists with the same email address.
      *
      * @param  User  $user
-     * @param  bool  $withMetafields
+     * @param  bool  $isCreating
      * @return array
      */
-    private function createCustomerDataForUser(User $user, bool $withMetafields): array
+    private function createCustomerDataForUser(User $user, bool $isCreating): array
     {
         $customerData = [
             "currency" => "USD",
@@ -402,23 +402,25 @@ class SyncUsersToShopify implements ShouldQueue
             // "tags" => "",
         ];
 
-        if ($withMetafields) {
-            // refer to https://shopify.dev/docs/apps/custom-data/metafields/types
-            // we can use meta fields for stuff like our user id, etc
-            $customerData["metafields"] = [
-                [
-                    "key" => ShopifyMetafieldKey::Id->value,
-                    "value" => (string)$user->id,
-                    "type" => ShopifyMetafieldTypes::integer->value,
-                    "namespace" => ShopifyMetafieldNamespace::Model_Users->value
-                ],
-                [
-                    "key" => ShopifyMetafieldKey::IsMusoraAccountSetUp->value,
-                    "value" => "true",
-                    "type" => ShopifyMetafieldTypes::boolean->value,
-                    "namespace" => ShopifyMetafieldNamespace::Musora->value
-                ]
-            ];
+        if ($isCreating) {
+            $customerData["metafields"] = $user->getMetafieldsForShopify();
+        } else {
+            try {
+                $newMetafields = $user->getNewMetafieldsForShopify();
+                $this->handleRateLimit();
+                if (!empty($newMetafields)) {
+                    $customerData["metafields"] = $newMetafields;
+                }
+            } catch (Exception $exception) {
+                $this->logError(
+                    sprintf(
+                        "%s: Failed to find new metafields to send to Shopify for updating user with email address %s: %s",
+                        $this->getClassName(),
+                        $user->email,
+                        $exception->getMessage()
+                    )
+                );
+            }
         }
 
         return $customerData;
