@@ -32,6 +32,8 @@ class UserAccessPermissionsService
     private UserProductService $userProductService;
     private UserService $userService;
 
+    public static $timeMinutes = false;
+
     function __construct(
         ProductService $productService,
         ContentPermissionsService $contentPermissionsService,
@@ -483,8 +485,9 @@ class UserAccessPermissionsService
         $accessPermission->source = $source;
         $accessPermission->source_hash = $hash;
         $accessPermission->start_time = $startTime;
-        $accessPermission->time_days = $days;
-        $accessPermission->time_months = $months;
+        $accessPermission->time_days = (self::$timeMinutes) ? 0 : $days;
+        $accessPermission->time_months = (self::$timeMinutes) ? 0 : $months;
+        $accessPermission->time_minutes = (self::$timeMinutes) ? self::$timeMinutes : 0;
         $accessPermission->time_lifetime = $isLifeTime;
         $accessPermission->status = $status;
         try {
