@@ -16,7 +16,7 @@
                 </h1>
                 <h2 class="-mt-3 sm:-mt-1 lg:mt-0 mb-4">{{ $subtitle }}</h2>
                 @foreach ($checklist as $item)
-                    <p class="hidden lg:inline p-2 text-lg leading-10">
+                    <p class="hidden lg:inline p-2 text-lg leading-tight">
                         <i class="fas fa-check-circle text-{{ $brandTitle }}"></i> {{ $item }}
                     </p>
                 @endforeach

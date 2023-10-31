@@ -216,12 +216,6 @@
             }
         }
 
-        @media (max-width: 767px) {
-           .teacher-block {
-                margin-bottom: -80px;
-            }
-        }
-
         @media (max-width: 638px) {
             .dropdown-box {
             background: linear-gradient(rgba(10, 31, 52, 1), rgba(10, 31, 52, 0));
@@ -316,64 +310,40 @@ $items = [
  <!-- Meet your teacher section -->
 <section class="teacher-block text-center sm:px-6 md:px-5 pt-10 sm:py-10 sm:py-14 lg:py-20 bg-white">
 
-    <div class="container max-w-5xl mx-auto sm:mb-14 lg:mb-16">
+    <div class="container max-w-5xl mx-auto">
         <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
             <div class="w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
-                <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/coach-image.png"
-                    loading="lazy" onload="this.classList.remove('opacity-0')">
-                <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/coach-image.png"
-                    loading="lazy" onload="this.classList.remove('opacity-0')">
-                <img class="absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0"
-                    style="width: 130%;transform: translate(-44%, -7%);"
-                    src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png"
-                    alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=100/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/coach-image.png" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=100/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/coach-image.png" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 130%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
 
-            <div class="z-10 relative bottom-5">
-                <div class="h-20 -mt-5 sm:-mt-10 relative sm:hidden"
-                    style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #00101d calc(50% + 1px));">
-                </div>
-
-                <div class="text-white text-left z-10 sm:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow"
-                    style="background-color:#00101d; border: 1px solid #00101d">
-                    <h6 class="uppercase text-drumeo leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
-                    <h2 class="text-center sm:text-left"><strong>Domino Santantonio</strong></h2>
-                    <h6 class="leading-normal mt-4 lg:mt-6">Domino Santantonio is one of the world’s most viewed
-                        drummers.
-                        <br><br>
-                        And she’s achieved this with her engaging & supportive style of drumming – always smiling and
-                        reminding you why playing the drums is so fun & healthy. Who better to jumpstart your drumming
-                        progress?
-                        <br><br>
-                        Plus, Domino is also your personal guide through the course.
-                        <br><br>
-                        At the end of every week, you’ll have a Q&A session with Domino where you can ask her any
-                        questions you had during the lessons.
-                    </h6>
-                    <div class="flex justify-between text-center mt-7 lg:mt-10">
-                        <div class="">
-                            <img class="h-6 sm:h-8 lazyload"
-                                data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg"
-                                alt="tiktok icon">
-                            <h3 class="mt-2"><strong>1.6M</strong></h3>
-                            <p class="uppercase opacity-70 text-sm">Followers</p>
-                        </div>
-                        <div class="">
-                            <img class="h-6 sm:h-8 lazyload"
-                                data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg"
-                                alt="youtube icon">
-                            <h3 class="mt-2"><strong>19M</strong></h3>
-                            <p class="uppercase opacity-70 text-sm">views</p>
-                        </div>
-                        <div class="">
-                            <img class="h-6 sm:h-8 lazyload"
-                                data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg"
-                                alt="insta icon">
-                            <h3 class="mt-2"><strong>461k</strong></h3>
-                            <p class="uppercase opacity-70 text-sm">followers</p>
-                        </div>
+            <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
+                <h6 class="uppercase text-drumeo leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
+                <h2 class="text-center sm:text-left"><strong>Domino Santantonio</strong></h2>
+                <h6 class="leading-normal mt-4 lg:mt-6">Domino Santantonio is one of the world’s most viewed drummers.
+                    <br><br>
+                    And she’s achieved this with her engaging & supportive style of drumming – always smiling and reminding you why playing the drums is so fun & healthy. Who better to jumpstart your drumming progress?
+                    <br><br>
+                    Plus, Domino is also your personal guide through the course.
+                    <br><br>
+                    At the end of every week, you’ll have a Q&A session with Domino where you can ask her any questions you had during the lessons.
+                </h6>
+                <div class="flex justify-between text-center mt-7 lg:mt-10">
+                    <div class="">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
+                        <h3 class="mt-2"><strong>1.6M</strong></h3>
+                        <p class="uppercase opacity-70 text-sm">Followers</p>
+                    </div>
+                    <div class="">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
+                        <h3 class="mt-2"><strong>19M</strong></h3>
+                        <p class="uppercase opacity-70 text-sm">views</p>
+                    </div>
+                    <div class="">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
+                        <h3 class="mt-2"><strong>461k</strong></h3>
+                        <p class="uppercase opacity-70 text-sm">followers</p>
                     </div>
                 </div>
             </div>

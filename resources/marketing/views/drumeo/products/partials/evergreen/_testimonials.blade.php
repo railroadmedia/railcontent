@@ -2,7 +2,7 @@
         <!-- top part-->
     @if (!empty($showTop))
     <div class="text-center text-white">
-        <h2 class="leading-tight text-2xl md:text-5xl mb-4"><strong>{{ $title }}</strong></h2>
+        <h2 class="leading-tight mb-4"><strong>{{ $title }}</strong></h2>
         <a class="inline-block w-full" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank"
             onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
             <img alt="shopper approved image" class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity opacity-0"
@@ -21,8 +21,8 @@
     <!-- bottom part-->
 @if (!empty($showBottom))
     <div class="container max-w-5xl mx-auto">
-        <h3 class="mb-4 text-center text-white"><strong>{{ $subHeader }}</strong></h3>
-        <p class="text-white text-base sm:text-2xl mb-2 md:mb-3 px-4 lg:px-0 text-center">{{ $description }}</p>
+        <h2 class="mb-4 text-center text-white"><strong>{{ $subHeader }}</strong></h2>
+        <h5 class="leading-tight text-white mb-2 md:mb-3 px-4 lg:px-0 text-center">{{ $description }}</h5>
     </div>
     <!-- carousel -->
 
