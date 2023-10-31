@@ -1446,7 +1446,10 @@ class CustomerIoSyncEventListener
             });
         })->groupBy(function ($orderLineItem) {
             /** @var OrderLineItem $orderLineItem */
-            return $orderLineItem->product && $orderLineItem->product->brand;
+            if ($orderLineItem->product) {
+                return $orderLineItem->product->brand;
+            }
+            return 'unknown';
         });
 
         $packsOrderItemLookup = $orderCollection->getOrders()->flatMap(function ($order) {
