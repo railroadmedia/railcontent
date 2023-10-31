@@ -40,6 +40,12 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
             $accountNameBrandsToSync = config('event-data-synchronizer.customer_io_account_name_brands_to_sync', []);
             $accountNameToSyncAllBrand = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
 
+            $userAccessPermissions = null;
+            if (config('shopify.enabled')) {
+                $userAccessPermissions = $userAccessPermissionsService->getUserAccessPermissions($this->user->id);
+            }
+
+
             foreach ($accountNameBrandsToSync as $accountName => $brands) {
                 // in order for this user to be synced to a specific workspace, they must have at least 1 product
                 // from any of the brands which are configured to be synced to the workspace.
@@ -48,7 +54,8 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
                 foreach ($brands as $brand) {
                     if ($userAccessPermissionsService->userHadOrHasAnyDigitalProductsForBrand(
                             $this->user,
-                            $brand
+                            $brand,
+                            $userAccessPermissions
                         ) || $accountNameToSyncAllBrand == $brand) {
                         $syncThisWorkspace = true;
                     }
