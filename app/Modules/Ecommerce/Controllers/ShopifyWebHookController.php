@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Controllers;
 
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoCreateEventByUserId;
 use Carbon\Carbon;
@@ -59,7 +60,7 @@ class ShopifyWebHookController extends Controller
     {
         $user = User::query()->where('shopify_id', $order['customer']['id'])->first();
 
-        $brand = $order[ShopifyMetafieldNamespace::Musora->value . '.' . ShopifyMetafieldKey::Brand->value] ?? 'musora';
+        $brand = $this->getBrandFromOrder($order);
         $data = [
             'checkout_token' => $order['checkout_token'],
             'order_id' => $order['id'],
@@ -121,5 +122,21 @@ class ShopifyWebHookController extends Controller
                 ];
             })
             ->toArray();
+    }
+
+    /**
+     * @param $order
+     * @return string
+     */
+    public function getBrandFromOrder($order): string
+    {
+        $brand = $order[ShopifyMetafieldNamespace::Musora->value . '.' . ShopifyMetafieldKey::Brand->value];
+        if ($brand) {
+            return $brand;
+        }
+
+        $product = Product::where('sku', $order['line_items'][0]['sku'])->first() ?? null;
+
+        return $product->brand ?? 'musora';
     }
 }
