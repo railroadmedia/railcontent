@@ -5,7 +5,7 @@
                 @foreach ($songItems as $i => $songItem)
                     <div class="dropdown-box w-full sm:w-1/3 h-34 flex sm:items-start px-6 py-6 mb-6 rounded-xl lg:my-6">
                         <div @click="openItem === {{ $i }} ? openItem = null : openItem = {{ $i }}"
-                            class="flex sm:inline-block cursor-pointer w-full">
+                            class="flex sm:inline-block cursor-pointer sm:cursor-default w-full">
                             <div class="pr-3 sm:w-full text-left sm:text-center">
                                 <i class="{{ $songItem['icon'] }} h-6 sm:h-10 text-{{$brand}} text-xl sm:text-4xl"></i>
                             </div>
