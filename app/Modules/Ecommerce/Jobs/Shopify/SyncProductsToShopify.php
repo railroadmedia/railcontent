@@ -320,7 +320,7 @@ class SyncProductsToShopify implements ShouldQueue
      *
      * @param  Product  $product
      * @param  int|null  $locationId
-     * @param  bool  $withMetafields
+     * @param  bool  $isCreating
      * @param  string|null  $sizeOptionName
      * @param  bool  $includeInventory
      * @return array
@@ -328,13 +328,13 @@ class SyncProductsToShopify implements ShouldQueue
     private function createVariantData(
         Product $product,
         ?int $locationId,
-        bool $withMetafields,
+        bool $isCreating,
         ?string $sizeOptionName,
         bool $includeInventory = true
     ): array {
         $variantData = [
-            "compare_at_price" => number_format($product->getPrice(), 2),
-            "price" => number_format($product->getPrice(), 2),
+            "compare_at_price" => number_format($product->getPrice(), 2, ".", ""),
+            "price" => number_format($product->getPrice(), 2, ".", ""),
             "sku" => $product->getSku(),
             "weight" => $product->getWeight(),
             "weight_unit" => "lb",
@@ -350,8 +350,26 @@ class SyncProductsToShopify implements ShouldQueue
         }
         // grab the eloquent model, so we can get its metafields
         $productModel = \App\Modules\Ecommerce\Models\Product::find($product->getId());
-        if ($withMetafields) {
+        if ($isCreating) {
             $variantData["metafields"] = $productModel->getMetafieldsForShopify();
+        } else {
+            try {
+                $newMetafields = $productModel->getNewMetafieldsForShopify();
+                $this->handleRateLimit();
+                if (!empty($newMetafields)) {
+                    $variantData["metafields"] = $newMetafields;
+                }
+            } catch (Exception $exception) {
+                $this->logError(
+                    sprintf(
+                        "%s: Failed to find new metafields to send to Shopify for updating product %s (sku %s): %s",
+                        $this->getClassName(),
+                        $productModel->id,
+                        $productModel-> sku,
+                        $exception->getMessage()
+                    )
+                );
+            }
         }
         if ($sizeOptionName) {
             $variantData[$sizeOptionName] = $this->getSizeFromProductSku($product);
@@ -396,11 +414,11 @@ class SyncProductsToShopify implements ShouldQueue
     {
         // first, we need to get the existing product from Shopify, so we know what to update
         $shopifyVariantId = $product->getShopifyId();
-        $this->handleRateLimit();
         $shopifyVariant = $this->shopify->getVariant($shopifyVariantId);
         $shopifyProductId = $shopifyVariant->getAttributes()["product_id"];
         $this->handleRateLimit();
         $shopifyProduct = $this->shopify->getProduct($shopifyProductId);
+        $this->handleRateLimit();
 
         // build up the common data for updating the product
         $postData = $this->formatUpdateProductData($product, $shopifyProduct);
@@ -477,8 +495,15 @@ class SyncProductsToShopify implements ShouldQueue
     {
         $updated = [];
         $variantData = collect($this->createVariantData($product, null, false, null, false));
+        // we need to exclude the metafields, since the entries to add were already done in createVariantData()
+        $variantDataUpdatedMetafields = $variantData->only("metafields");
+        $variantData->forget("metafields");
+
         $shopifyVariantAttributes = collect($shopifyVariant->getAttributes())->only($variantData->keys());
         $variantChanges = $variantData->diff($shopifyVariantAttributes);
+        if ($variantDataUpdatedMetafields) {
+            $variantChanges = $variantChanges->merge($variantDataUpdatedMetafields);
+        }
         if ($variantChanges->isNotEmpty()) {
             // be sure to supply the variant's ID, otherwise Shopify would end up replacing the existing one
             $updated = array_merge(["id" => $product->getShopifyId()], $variantChanges->toArray());
@@ -674,22 +699,7 @@ class SyncProductsToShopify implements ShouldQueue
             // this is sending options (has variants data)
             foreach ($postData["variants"] as $variantData) {
                 // make a new entry for each variant
-                if (array_key_exists("metafields", $variantData)) {
-                    // try to get our internal Product ID from the metafields
-                    $metafields = collect($variantData["metafields"]);
-                    $productIdMetafield = $metafields->filter(
-                        fn(array $fields) => array_key_exists("namespace", $fields)
-                            && $fields["namespace"] === ShopifyMetafieldNamespace::Model_Products->value
-                            && array_key_exists("key", $fields)
-                            && $fields["key"] === ShopifyMetafieldKey::Id->value
-                    );
-                    // we were able to find one, so that means this is a variant for an existing product in Shopify
-                    $productId = $productIdMetafield->first()["value"];
-                } else {
-                    // we didn't have metafields, so this would be a new product in Shopify
-                    $productId = $postData["id"];
-                }
-                $this->results[] = [$productId, $variantData["sku"] ?? "n/a", ++$simulatedShopifyId];
+                $this->results[] = [$postData["id"], $variantData["sku"] ?? "n/a", ++$simulatedShopifyId];
             }
         } else {
             // this is a simple product with no options or additional variants

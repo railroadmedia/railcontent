@@ -61,7 +61,7 @@ trait HasShopifyMetafields
 
         return match (get_class($this)) {
             User::class => $shopify->getCustomerMetafields($this->shopify_id),
-            Product::class => $shopify->getProductMetafields($this->shopify_id),
+            Product::class => $shopify->getVariantMetafields($this->shopify_id),
             default => throw new Exception("No method defined to get metafields from Shopify")
         };
     }

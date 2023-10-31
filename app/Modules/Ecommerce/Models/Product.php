@@ -260,15 +260,84 @@ class Product extends Model
      */
     public function getMetafieldsForShopify(): array
     {
-        return [
-            MetaField::getStructureForShopify(
+        // some of our metafields are only set for certain product (e.g. digital_access_type only on digital products),
+        // so build up the array of entries that are only set
+        $metafields = [];
+        $metafields[] = MetaField::getStructureForShopify(
+            new MetaField(
+                ShopifyMetafieldKey::Id,
+                (string)$this->id,
+                ShopifyMetafieldTypes::integer,
+                ShopifyMetafieldNamespace::Model_Products
+            )
+        );
+
+        if ($this->inventory_control_sku) {
+            $metafields[] = MetaField::getStructureForShopify(
                 new MetaField(
-                    ShopifyMetafieldKey::Id,
-                    (string)$this->id,
-                    ShopifyMetafieldTypes::integer,
+                    ShopifyMetafieldKey::InventoryControlSKU,
+                    $this->inventory_control_sku,
+                    ShopifyMetafieldTypes::single_line_text_field,
                     ShopifyMetafieldNamespace::Model_Products
                 )
-            )
-        ];
+            );
+        }
+
+        if ($this->fulfillment_sku) {
+            MetaField::getStructureForShopify(
+                new MetaField(
+                    ShopifyMetafieldKey::FulfillmentSKU,
+                    $this->fulfillment_sku,
+                    ShopifyMetafieldTypes::single_line_text_field,
+                    ShopifyMetafieldNamespace::Model_Products
+                )
+            );
+        }
+
+        if ($this->digital_access_type) {
+            MetaField::getStructureForShopify(
+                new MetaField(
+                    ShopifyMetafieldKey::DigitalAccessType,
+                    $this->digital_access_type,
+                    ShopifyMetafieldTypes::single_line_text_field,
+                    ShopifyMetafieldNamespace::Model_Products
+                )
+            );
+        }
+
+        if ($this->digital_access_time_type) {
+            MetaField::getStructureForShopify(
+                new MetaField(
+                    ShopifyMetafieldKey::DigitalAccessTimeType,
+                    $this->digital_access_time_type,
+                    ShopifyMetafieldTypes::single_line_text_field,
+                    ShopifyMetafieldNamespace::Model_Products
+                )
+            );
+        }
+
+        if ($this->digital_access_time_interval_type) {
+            MetaField::getStructureForShopify(
+                new MetaField(
+                    ShopifyMetafieldKey::DigitalAccessTimeIntervalType,
+                    $this->digital_access_time_interval_type,
+                    ShopifyMetafieldTypes::single_line_text_field,
+                    ShopifyMetafieldNamespace::Model_Products
+                )
+            );
+        }
+
+        if ($this->digital_access_time_interval_length) {
+            MetaField::getStructureForShopify(
+                new MetaField(
+                    ShopifyMetafieldKey::DigitalAccessTimeIntervalLength,
+                    (string)$this->digital_access_time_interval_length,
+                    ShopifyMetafieldTypes::single_line_text_field,
+                    ShopifyMetafieldNamespace::Model_Products
+                )
+            );
+        }
+
+        return $metafields;
     }
 }
