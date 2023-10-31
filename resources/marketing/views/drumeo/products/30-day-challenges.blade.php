@@ -415,12 +415,11 @@ $testimonials = $drumeo['testimonialsShopVersion'];
         'bgColor' => 'linear-gradient(rgba(11, 118, 219, 1), rgba(7, 74, 137, 1))',
         'title' => "Trusted by drummers everywhere.",
         'showBottom' => true,
-        'showTop' => true,
         'subHeader' => '17,000+ Drummers Agree...',
         'description' => '30-Day Drummer works. By focusing on playing with real music right from day one, you’ll learn the skills to play hundreds of songs on the drums in just thirty days. Check out what students are saying:',
 ])
 
- <!-- End of Testimonials section -->
+<!-- End of Testimonials section -->
 
 <!-- Guarantee section -->
 <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"

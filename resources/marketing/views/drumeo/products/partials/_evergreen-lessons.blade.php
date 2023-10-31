@@ -1,7 +1,7 @@
 <section class="m-0 text-white" style="background: #00101D; border: 1px solid #00101D">
 
-<h2 class="text-center font-black leading-tight pt-12 md:pt-20">
-    {{ $title }}
+<h2 class="text-center leading-tight pt-12 md:pt-20 px-4">
+   <strong>{{ $title }}</strong> 
 </h2>
 
 <div class="container max-w-6xl mx-auto p-4 md:p-6 md:flex leading-normal">
@@ -26,7 +26,7 @@
 
             <p class="text-white pt-3"><strong>{{ $lessonTitle }}</strong></p>
 
-        <div x-data="{ isOpen: [] }" class="h-72 overflow-y-scroll rounded-lg text-black leading-tight">
+        <div x-data="{ isOpen: [] }" class="h-72 overflow-y-scroll rounded-lg">
             @foreach ($lessons as $i => $lesson)
                 <div x-data="{ open: false }"
                     class="rounded-lg bg-white shadow mb-1.5">
