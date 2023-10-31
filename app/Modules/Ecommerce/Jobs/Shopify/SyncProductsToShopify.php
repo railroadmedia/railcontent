@@ -415,8 +415,8 @@ class SyncProductsToShopify implements ShouldQueue
         // first, we need to get the existing product from Shopify, so we know what to update
         $shopifyVariantId = $product->getShopifyId();
         $shopifyVariant = $this->shopify->getVariant($shopifyVariantId);
-        $shopifyProductId = $shopifyVariant->getAttributes()["product_id"];
         $this->handleRateLimit();
+        $shopifyProductId = $shopifyVariant->getAttributes()["product_id"];
         $shopifyProduct = $this->shopify->getProduct($shopifyProductId);
         $this->handleRateLimit();
 
@@ -588,11 +588,11 @@ class SyncProductsToShopify implements ShouldQueue
             ->first()
             ->getShopifyId();
 
-        $this->handleRateLimit();
         $shopifyVariant = $this->shopify->getVariant($shopifyVariantId);
-        $shopifyProductId = $shopifyVariant->getAttributes()["product_id"];
         $this->handleRateLimit();
+        $shopifyProductId = $shopifyVariant->getAttributes()["product_id"];
         $shopifyProduct = $this->shopify->getProduct($shopifyProductId);
+        $this->handleRateLimit();
         // build up the common data for updating the product
         $postData = $this->formatUpdateProductData($latestProduct, $shopifyProduct);
 
@@ -608,8 +608,8 @@ class SyncProductsToShopify implements ShouldQueue
         // and we're not going to change the name
 
         // check all the existing variants to see if we changed anything
-        $this->handleRateLimit();
         $allShopifyVariants = $this->shopify->getVariants($shopifyProductId);
+        $this->handleRateLimit();
         // track so we can check for any missing
         $matchedProductOptions = collect();
         $variantsData = [];
@@ -725,11 +725,11 @@ class SyncProductsToShopify implements ShouldQueue
         // no product is given if this variant data is one of many variants for a product
         if (is_null($product)) {
             // get the metafield with our ID record
-            $this->handleRateLimit();
             $variantMetaFields = $this->shopify->getVariantMetafields(
                 $shopifyId,
                 ["namespace" => ShopifyMetafieldNamespace::Model_Products->value, "key" => ShopifyMetafieldKey::Id->value]
             );
+            $this->handleRateLimit();
             $productId = $variantMetaFields->first()?->getAttributes()["value"] ?? null;
             try {
                 $product = $this->productRepository->findProduct($productId, [0, 1]);
@@ -879,19 +879,18 @@ class SyncProductsToShopify implements ShouldQueue
                         $variantData = null;
                     }
 
-                    $this->handleRateLimit();
                     $productResource = $this->shopify->updateProduct($productID, $postData);
+                    $this->handleRateLimit();
 
                     // we have to send all variants, so call Shopify to update each one
                     if (!is_null($variantData)) {
                         if ($options->isEmpty()) {
                             // just the one product and variant, so grab the first
-                            $this->handleRateLimit();
                             $this->shopify->updateVariant($product->getShopifyId(), $variantData[0]);
+                            $this->handleRateLimit();
                         } else {
                             // we have multiple, so update or create each one
                             foreach ($variantData as $variantDatum) {
-                                $this->handleRateLimit();
                                 if (array_key_exists("id", $variantDatum)) {
                                     $this->shopify->updateVariant($variantDatum["id"], $variantDatum);
                                 } else {
@@ -899,15 +898,16 @@ class SyncProductsToShopify implements ShouldQueue
                                         $productResource->getAttributes()["id"],
                                         $variantDatum
                                     );
+                                    $this->handleRateLimit();
                                     $inventoryItemId = $variantResource->getAttributes()["inventory_item_id"];
                                     // we can now set the variant's inventory
-                                    $this->handleRateLimit();
                                     $this->shopify->adjustInventoryLevel(
                                         $inventoryItemId,
                                         $this->locationId,
                                         $product->getStockAvailability()
                                     );
                                 }
+                                $this->handleRateLimit();
                             }
                         }
                     }
