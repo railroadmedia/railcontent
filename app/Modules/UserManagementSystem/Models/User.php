@@ -4,8 +4,13 @@ namespace Modules\UserManagementSystem\Models;
 
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\CustomerIO\Models\Customer;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Models\Address;
+use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Subscription;
+use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
 use App\Modules\Notifications\Models\NotificationSettings;
@@ -235,6 +240,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 {
     use HasFactory;
     use HasApiTokens;
+    use HasShopifyMetafields;
     use HasRoles;
     use Authorizable;
     use CanSaveWithoutUpdatedAt;
@@ -892,5 +898,30 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     public function hasMobileMembership(): bool {
         return $this->has_apple_subscription || $this->has_google_subscription;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getMetafieldsForShopify(): array
+    {
+        return [
+            MetaField::getStructureForShopify(
+                new MetaField(
+                    ShopifyMetafieldKey::Id,
+                    (string)$this->id,
+                    ShopifyMetafieldTypes::integer,
+                    ShopifyMetafieldNamespace::Model_Users
+                )
+            ),
+            MetaField::getStructureForShopify(
+                new MetaField(
+                    ShopifyMetafieldKey::IsMusoraAccountSetUp,
+                    "true",
+                    ShopifyMetafieldTypes::boolean,
+                    ShopifyMetafieldNamespace::Musora
+                )
+            )
+        ];
     }
 }
