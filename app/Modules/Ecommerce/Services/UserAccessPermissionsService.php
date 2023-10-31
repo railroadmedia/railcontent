@@ -497,14 +497,14 @@ class UserAccessPermissionsService
     {
         if (config('shopify.enabled')) {
             $accessPermissions = $this->getUserAccessPermissions($userId);
-            $currentSubscription = null;
+            $subscriptions = null;
             try {
-                $currentSubscription = $this->subscriptionService->syncSubscriptionData($accessPermissions);
+                $subscriptions = $this->subscriptionService->syncSubscriptionData($accessPermissions);
             } catch (\Throwable $e) {
                 Log::error("Error syncing subscriptions for user: $userId");
                 Log::error($e);
             }
-            event(new UserAccessPermissionsUpdated($accessPermissions, $orderCollection, $currentSubscription));
+            event(new UserAccessPermissionsUpdated($accessPermissions, $orderCollection, $subscriptions));
         }
     }
 }

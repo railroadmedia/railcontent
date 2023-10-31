@@ -10,16 +10,16 @@ class UserAccessPermissionsUpdated
 {
     private UserAccessPermissionsCollection $userAccessPermissions;
     private ?OrderCollection $orders;
-    private $currentSubscription;
+    private $subscriptions;
 
     public function __construct(
         UserAccessPermissionsCollection $userAccessPermissions,
         ?OrderCollection $orders,
-        $currentSubscription
+        $subscriptions
     ) {
         $this->userAccessPermissions = $userAccessPermissions;
         $this->orders = $orders;
-        $this->currentSubscription = $currentSubscription;
+        $this->subscriptions = $subscriptions;
     }
 
     public function getUserAccessPermissions(): UserAccessPermissionsCollection
@@ -37,9 +37,9 @@ class UserAccessPermissionsUpdated
         return $this->orders;
     }
 
-    public function getCurrentSubscription()
+    public function getSubscriptions()
     {
-        return $this->currentSubscription;
+        return $this->subscriptions;
     }
 
 }

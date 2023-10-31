@@ -80,7 +80,7 @@ class ShopifyWebHookController extends Controller
             new CustomerIoCreateEventByUserId(
                 $user->id,
                 $brand,
-                'Order Placed',
+                'musora_user_order',
                 $data,
                 null,
                 $order['processed_at'],
@@ -92,7 +92,7 @@ class ShopifyWebHookController extends Controller
                 new CustomerIoCreateEventByUserId(
                     $user->id,
                     'musora',
-                    'Order Placed',
+                    "{brand}_user_order",
                     $data,
                     null,
                     $order['processed_at'],

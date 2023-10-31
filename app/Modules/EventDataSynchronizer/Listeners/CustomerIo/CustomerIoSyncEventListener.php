@@ -3,9 +3,11 @@
 namespace App\Modules\EventDataSynchronizer\Listeners\CustomerIo;
 
 use App\Modules\Ecommerce\Collections\OrderCollection;
+use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\Ecommerce\Events\UserProductsUpdated;
 use App\Modules\Ecommerce\Models\Product;
+use App\Modules\Ecommerce\Models\Recharge\Subscription as RechargeSubscription;
 use App\Modules\Ecommerce\Models\Shopify\Order;
 use App\Modules\Ecommerce\Models\Shopify\OrderLineItem;
 use App\Modules\EventDataSynchronizer\Events\FirstActivityPerDay;
@@ -357,7 +359,7 @@ class CustomerIoSyncEventListener
 
             $data = $this->getCustomerIoDataFromOrders(
                 $userAccessPermissionsUpdated->getOrderCollection(),
-                $userAccessPermissionsUpdated->getCurrentSubscription()
+                $userAccessPermissionsUpdated->getSubscriptions()
             );
 
             if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
@@ -1421,10 +1423,10 @@ class CustomerIoSyncEventListener
         );
     }
 
-    private function getCustomerIoDataFromOrders(?OrderCollection $orderCollection, $currentSubscription): array
+    private function getCustomerIoDataFromOrders(?OrderCollection $orderCollection, $subscriptions): array
     {
         $attributes = $this->getOrderAttributes($orderCollection);
-        $attirubtes = array_merge($attributes, $this->getSubscriptionAttributes($currentSubscription));
+        $attirubtes = array_merge($attributes, $this->getSubscriptionAttributes($subscriptions));
         return $attributes;
     }
 
@@ -1491,16 +1493,78 @@ class CustomerIoSyncEventListener
         return $attributes;
     }
 
-    private function getSubscriptionAttributes($currentSubscription): array
+    private function getSubscriptionAttributes($subscriptions): array
     {
-        if (!$currentSubscription) {
+        if (!$subscriptions) {
             return [];
         }
         $attributes = [];
 
-        Log::debug(print_r($currentSubscription, true));
+        $subscriptionsByBrand = $subscriptions->groupBy(function ($subscription) {
+            /** @var RechargeSubscription $subscription */
+            return $subscription->product->brand;
+        });
 
+
+        $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
+
+        foreach ($brands as $brand) {
+            $brandSubscriptions = ($subscriptionsByBrand[$brand] ?? collect())->sortBy('createdAt');
+            /** @var RechargeSubscription $first */
+            $first = $brandSubscriptions->first() ?? null;
+            /** @var RechargeSubscription $latest */
+            $latest = $brandSubscriptions->last() ?? null;
+
+
+            $attributes[$brand . '_membership_status'] = $latest ? $this->getSubscriptionStatus($latest) : "";
+            $attributes[$brand . '_membership_subscription_type'] = $latest ?
+                $latest->product->subscription_interval_count . "_" . $latest->product->subscription_interval_type : "";
+            $attributes[$brand . '_membership_subscription_renewal-date'] = $latest?->nextChargeScheduledAt->timestamp ?? "";
+            $attributes[$brand . '_membership_subscription_cancellation-date'] = $latest?->cancelledAt?->timestamp ?? "";
+            $attributes[$brand . '_membership_subscription_cancellation-reason'] = $latest?->cancellationReason ?? "";
+            $attributes[$brand . '_membership_subscription_latest-start-date'] = $latest?->createdAt?->timestamp ?? "";
+            $attributes[$brand . '_membership_subscription_first-start-date'] = $first?->createdAt?->timestamp ?? "";
+            $attributes[$brand . '_membership_subscription_trial-type'] = $latest ? $this->getTrialType($latest) : "";
+        }
         return $attributes;
     }
 
+    public function getSubscriptionStatus(RechargeSubscription $subscription): string
+    {
+        return match ($subscription->status) {
+            RechargeSubscriptionStatusEnum::Active->value => 'active',
+            RechargeSubscriptionStatusEnum::Cancelled->value => 'cancelled',
+            RechargeSubscriptionStatusEnum::Expired->value => 'expired',
+            default => 'unknown',
+        };
+    }
+
+    private function getTrialType(RechargeSubscription $latest): string
+    {
+        if (!$latest->product->isTrial()) {
+            return "";
+        }
+        $interval = match ($latest->product->subscription_interval_type) {
+            "month" => "monthly",
+            "year" => "annual",
+            default => "unknown",
+        };
+
+        $days = 0;
+        if (str_contains(strtolower($latest->product->sku), "7-day")
+            || $latest->product->sku == "PIANOTE-MEMBERSHIP-TRIAL") {
+            $days = 7;
+        }
+        if (str_contains(strtolower($latest->product->sku), "30-day")
+            || str_contains(strtolower($latest->product->sku), "1-month")) {
+            $days = 30;
+        }
+
+        if ($days == 0 || $interval == "unknown") {
+            Log::error("Unable to parse trial type for product: " . $latest->product->id);
+            return "";
+        }
+
+        return $interval . "_" . $days . "_days_free";
+    }
 }

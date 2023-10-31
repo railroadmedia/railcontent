@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Services;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
+use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Illuminate\Support\Facades\Log;
@@ -37,45 +38,59 @@ class SubscriptionService
         return $result['brand'] ?? '';
     }
 
-    public function syncSubscriptionData(UserAccessPermissionsCollection $userAccessPermissions): void
+    public function syncSubscriptionData(UserAccessPermissionsCollection $userAccessPermissions)
     {
         $user = $this->userService->getByIdOrNull($userAccessPermissions->getUserId());
         if (!$user->shopify_id) {
             // User doesn't have any subscriptions from Shopify to be synced.
-            return;
+            return null;
         }
         $subscriptions = $this->recharge->getSubscriptions($user->shopify_id);
-        $shopifyVariantIds = $subscriptions->pluck('shopify_variant_id')->toArray();
-        $productLookup = $this->productService->getProductsByShopifyIds($shopifyVariantIds)
-            ->keyBy('shopify_id');
+        $subscriptionSkus = $subscriptions->pluck('sku')->toArray();
+        $productLookup = $this->productService->getProductsBySkus($subscriptionSkus)
+            ->keyBy('sku');
 
-        $membershipSubscriptions = $subscriptions->filter(function ($subscription) use ($productLookup) {
-            $product = $productLookup[$subscription->shopify_variant_id] ?? null;
+        $subscriptions->each(function ($subscription) use ($productLookup) {
+            /** @var Product $product */
+            /** @var Subscription $subscription */
+            $product = $productLookup[$subscription->sku] ?? null;
             if (!$product) {
-                Log::error("Product not found for recharge subscription $subscription->id");
-                return false;
+                Log::error("Product $subscription->sku not found for recharge subscription $subscription->id");
+                return;
             }
-            return $product->isMembershipProduct() && $subscription->status == RechargeSubscriptionStatusEnum::Active;
+            $subscription->setProduct($product);
+        });
+
+        $membershipSubscriptions = $subscriptions->filter(function ($subscription) {
+            /** @var Subscription $subscription */
+            return $subscription->product->isMembershipProduct();
+        });
+
+        $activeMembershipSubscriptions = $subscriptions->filter(function ($subscription) {
+            /** @var Subscription $subscription */
+            return $subscription->status == RechargeSubscriptionStatusEnum::Active->value;
         });
 
         $isLifetimeMember = $userAccessPermissions->getIsLifetimeMember();
 
+        /** @var Subscription $mostRecentActiveSubscription */
+        $mostRecentActiveSubscription = null;
         if ($isLifetimeMember) {
-            foreach ($membershipSubscriptions as $membershipSubscription) {
-                $this->recharge->cancelSubscription($membershipSubscription, 'Lifetime Member');
+            foreach ($activeMembershipSubscriptions as $activeMembershipSubscription) {
+                $this->recharge->cancelSubscription($activeMembershipSubscription, 'Lifetime Member');
             }
         } elseif ($membershipSubscriptions->count() > 1) {
-            $mostRecentSubscription = $subscriptions->sortByDesc('created_at')->first();
+            $mostRecentActiveSubscription = $activeMembershipSubscriptions->sortByDesc('createdAt')->first();
 
-            foreach ($membershipSubscriptions as $membershipSubscription) {
-                if ($membershipSubscription->id != $mostRecentSubscription->id) {
-                    $this->recharge->cancelSubscription($membershipSubscription, 'Duplicate Subscription');
+            foreach ($activeMembershipSubscriptions as $activeMembershipSubscription) {
+                if ($activeMembershipSubscription->id != $mostRecentActiveSubscription->id) {
+                    $this->recharge->cancelSubscription($activeMembershipSubscription, 'Duplicate Subscription');
                 }
             }
 
             $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate();
 
-            $this->recharge->updateSubscriptionNextChargeDate($mostRecentSubscription, $membershipExpirationDate);
+            $this->recharge->updateSubscriptionNextChargeDate($mostRecentActiveSubscription, $membershipExpirationDate);
         }
 
         // SRR-82 set the subscription type when the user has a Recharge subscription
@@ -86,9 +101,10 @@ class SubscriptionService
             $user->has_recharge_subscription = false;
             $user->save();
         }
+        return $membershipSubscriptions;
     }
 
-        /**
+    /**
      * @param $userId
      * @param $expiresDate
      * @param $musoraProduct
@@ -112,7 +128,7 @@ class SubscriptionService
         $musoraSubscription->apple_expiration_date = Carbon::createFromTimestampMs($expiresDate);
         $musoraSubscription->product_id = $musoraProduct->id;
         $musoraSubscription->brand = $musoraProduct->brand;
-        $musoraSubscription->type = $type.'_subscription';
+        $musoraSubscription->type = $type . '_subscription';
         $musoraSubscription->start_date = Carbon::createFromTimestampMs($purchasedAtMs);
         $musoraSubscription->created_at = Carbon::now();
         $musoraSubscription->total_cycles_paid = 1;
@@ -153,7 +169,9 @@ class SubscriptionService
         $musoraSubscription->cancellation_reason = null;
 
         if ($unsubscribeDate || $cancelReason) {
-            $musoraSubscription->canceled_on = ($unsubscribeDate)?Carbon::createFromTimestampMs($unsubscribeDate):null;
+            $musoraSubscription->canceled_on = ($unsubscribeDate) ? Carbon::createFromTimestampMs(
+                $unsubscribeDate
+            ) : null;
             $musoraSubscription->cancellation_reason = $cancelReason;
         }
 
