@@ -106,28 +106,64 @@
         <section class="grid-view category-section" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Featured</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
-                @foreach($featured as $key => $feat)
-                    @include('musora.shop._shop-card-alt', [
-                        "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $feat->slug ),
-                        "sku" => $feat->sku === 'drumeo' ? null : $feat->sku,
-                        "badgeText" => $feat->badge_text,
-                        "thumbnail" => $feat->thumbnail,
-                        "packLogo" => $feat->thumbnail_logo,
-                        "title" => $feat->name,
-                        "packAuthor" => $feat->instructor_name,
-                        "cardDescription" => $feat->short_desc,
-                        "fullPrice" => $feat->price,
-                        "price" => $feat->discounted_price,
-                        "category" => strtolower($feat->productType->name),
-                        "buttonText" => $feat->sku === 'drumeo' || $feat->sku === 'pianote' || $feat->sku === 'singeo' || $feat->sku === 'guitareo' ? 'see the deal' : null,
-                        "soldOut" => $feat->sold_out,
-                        "includedEdge" => $feat->included_edge,
-                        "sizes" => $feat->sizes,
-                        'FCP' => $key < 4 ? true : null,
-                    ])
-                @endforeach
-            </div>
+                <div
+                    x-data="{
+                init() {
+                    new Splide(this.$refs.splide, {
+                        classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next hidden sm:flex mb-16',
+                                pagination: 'hidden',
+                        },
+                        perPage: 3.5,
+                        perMove: 1,
+                        type: 'loop',
+                        focus: 0,
+                        interval: 2000,
+                        breakpoints: {
+                            1023: {
+                                perPage: 2.5,
+                            },
+                            767: {
+                                perPage: 1.5,
+                                drag   : 'free',
+                                snap   : false,
+                            },
+                        },
+                    }).mount()
+                },
+            }"
+                >
+                    <div x-ref="splide" class="splide text-left">
+                        <div class="splide__track pb-8">
+                            <ul class="splide__list items-start">
+                                @foreach($featured as $key => $feat)
+                                    <li class="splide__slide px-1">
+                                        @include('musora.shop._shop-card-alt', [
+                                            "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $feat->slug ),
+                                            "sku" => $feat->sku === 'drumeo' ? null : $feat->sku,
+                                            "badgeText" => $feat->badge_text,
+                                            "thumbnail" => $feat->thumbnail,
+                                            "packLogo" => $feat->thumbnail_logo,
+                                            "title" => $feat->name,
+                                            "packAuthor" => $feat->instructor_name,
+                                            "cardDescription" => $feat->short_desc,
+                                            "fullPrice" => $feat->price,
+                                            "price" => $feat->discounted_price,
+                                            "category" => strtolower($feat->productType->name),
+                                            "buttonText" => $feat->sku === 'drumeo' || $feat->sku === 'pianote' || $feat->sku === 'singeo' || $feat->sku === 'guitareo' ? 'see the deal' : null,
+                                            "soldOut" => $feat->sold_out,
+                                            "includedEdge" => $feat->included_edge,
+                                            "sizes" => $feat->sizes,
+                                            'FCP' => $key < 4 ? true : null,
+                                        ])
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
