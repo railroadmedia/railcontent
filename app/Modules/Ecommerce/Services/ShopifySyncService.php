@@ -14,9 +14,11 @@ use App\Modules\Ecommerce\Models\Product;
 use App\Modules\UserManagementSystem\Services\UserService;
 use App\Providers\EcommerceUserProvider;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
+use Signifly\Shopify\REST\Resources\OrderResource;
 use Signifly\Shopify\Shopify;
 
 class ShopifySyncService
@@ -87,7 +89,7 @@ class ShopifySyncService
         $customers = $this->shopify->getCustomers(['email' => $email]);
         $customer = collect($customers)->first(fn($item) => $item->email === $email);
         if (!$customer) {
-            throw new \Exception("Shopify customer not found for email: $email");
+            throw new Exception("Shopify customer not found for email: $email");
         }
         $this->syncCustomer($customer->id, $email);
     }
@@ -139,7 +141,7 @@ class ShopifySyncService
         // STEP 4: sync user products
         try {
             $this->syncCustomer($customerShopifyId);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
         }
@@ -264,7 +266,7 @@ class ShopifySyncService
                 shopifyCustomerId: $shopifyCustomerId
             );
         }
-        throw new \Exception("User not found for shopify customer id $shopifyCustomerId");
+        throw new Exception("User not found for shopify customer id $shopifyCustomerId");
     }
 
     /**
@@ -275,5 +277,13 @@ class ShopifySyncService
     {
         $orders = $this->shopifyGateway->getCustomerOrders($shopifyCustomerId);
         return $orders->pluck('lineItems')->flatten(1);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getOrder(int $orderId): OrderResource
+    {
+        return $this->shopify->getOrder($orderId);
     }
 }

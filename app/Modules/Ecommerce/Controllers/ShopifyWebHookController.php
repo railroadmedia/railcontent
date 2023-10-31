@@ -56,26 +56,29 @@ class ShopifyWebHookController extends Controller
         }
     }
 
+    public function refundCreated(Request $request): void
+    {
+        try {
+            Log::debug('Shopify refund created webhook received');
+
+            $orderId = $request->get('order_id');
+            Log::info("Shopify refund created webhook received for order id: $orderId");
+
+            $order = $this->shopifySyncService->getOrder($orderId);
+
+            $this->handleOrderRefundEventTracking($order->getAttributes());
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
+        }
+    }
+
     private function handleOrderCreatedEventTracking($order): void
     {
         $user = User::query()->where('shopify_id', $order['customer']['id'])->first();
 
         $brand = $this->getBrandFromOrder($order);
-        $data = [
-            'checkout_token' => $order['checkout_token'],
-            'order_id' => $order['id'],
-            'subtotal' => $order['subtotal_price'],
-            'total' => $order['total_price'],
-            'revenue' => intval($order['total_price']) + intval($order['total_discounts']),
-            'shipping' => $order['total_shipping_price_set']['shop_money']['amount'],
-            'tax' => $order['total_tax'],
-            'discount' => $order['total_discounts'],
-            'discount_codes' => $order['discount_codes'],
-            'currency' => $order['currency'],
-            'products' => $this->getProductList($order['line_items']),
-            'brand' => $brand,
-            'timestamp' => Carbon::parse($order['processed_at'])->timestamp,
-        ];
+        $data = $this->getOrderEventData($order, $brand);
 
         dispatch(
             new CustomerIoCreateEventByUserId(
@@ -106,6 +109,28 @@ class ShopifyWebHookController extends Controller
     }
 
 
+    private function handleOrderRefundEventTracking($order): void
+    {
+        $user = User::query()->where('shopify_id', $order['customer']['id'])->first();
+
+        $brand = $this->getBrandFromOrder($order);
+        $data = $this->getOrderEventData($order, $brand);
+
+        dispatch(
+            new CustomerIoCreateEventByUserId(
+                $user->id,
+                'musora',
+                'musora_user_refund',
+                $data,
+                null,
+                $order['processed_at'],
+            )
+        )->delay(Carbon::now()->addSeconds(30));
+
+        // @TODO EVENT TRACKING: move to avo when migration is completed
+        // Avo::order_refunded($data);
+    }
+
     private function getProductList(array $lineItems = []): array
     {
         return collect($lineItems)
@@ -134,5 +159,24 @@ class ShopifyWebHookController extends Controller
         $product = Product::where('sku', $order['line_items'][0]['sku'])->first() ?? null;
 
         return $product->brand ?? 'musora';
+    }
+
+    private function getOrderEventData($order, string $brand): array
+    {
+        return [
+            'checkout_token' => $order['checkout_token'],
+            'order_id' => $order['id'],
+            'subtotal' => $order['subtotal_price'],
+            'total' => $order['total_price'],
+            'revenue' => intval($order['total_price']) + intval($order['total_discounts']),
+            'shipping' => $order['total_shipping_price_set']['shop_money']['amount'],
+            'tax' => $order['total_tax'],
+            'discount' => $order['total_discounts'],
+            'discount_codes' => $order['discount_codes'],
+            'currency' => $order['currency'],
+            'products' => $this->getProductList($order['line_items']),
+            'brand' => $brand,
+            'timestamp' => Carbon::parse($order['processed_at'])->timestamp,
+        ];
     }
 }
