@@ -364,11 +364,11 @@ export default {
                 return this.userAccessPermissions;
             } else if (this.selectedProductType === 1) {
                 return this.userAccessPermissions.filter(permission =>
-                    permission.permission_name.includes("Membership")
+                    permission.permission_name.includes("Member")
                 );
             } else if (this.selectedProductType === 0) {
                 return this.userAccessPermissions.filter(permission =>
-                    !permission.permission_name.includes("Membership")
+                    !permission.permission_name.includes("Member")
                 );
             }
         },
