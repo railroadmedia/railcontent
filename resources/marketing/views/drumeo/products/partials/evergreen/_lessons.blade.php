@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <div class="text-black">
+    <div class="text-black md:w-1/3">
         @foreach ($features as $feature)
             <div class="rounded-lg mb-2 px-4 py-3 bg-blue-50">
                 <p class="flex items-center"><i class="fas fa-play-circle text-xl text-{{ $brand }} mr-2"></i> {{ $feature }}</p>
