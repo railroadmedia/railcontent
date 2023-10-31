@@ -364,11 +364,11 @@ export default {
                 return this.userAccessPermissions;
             } else if (this.selectedProductType === 1) {
                 return this.userAccessPermissions.filter(permission =>
-                    permission.time_lifetime === 1 || permission.permission_name.includes("Membership")
+                    permission.permission_name.includes("Membership")
                 );
             } else if (this.selectedProductType === 0) {
                 return this.userAccessPermissions.filter(permission =>
-                    permission.time_lifetime === 0 && !permission.permission_name.includes("Membership")
+                    !permission.permission_name.includes("Membership")
                 );
             }
         },
@@ -442,7 +442,6 @@ export default {
         ]),
 
         isActiveSubscription(item) {
-            console.log(item)
             //convert item.expiration_time to date object
             const dateString = item.expiration_time;
             const dateToCheck = new Date(dateString);
