@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Controllers;
 
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoCreateEventByUserId;
 use Carbon\Carbon;
@@ -48,7 +49,7 @@ class ShopifyWebHookController extends Controller
             Log::debug("Shopify customer id: $shopifyCustomerId email: $email");
 
 
-            $this->handleOrderEventTracking($request->all(), 'Order Placed');
+            $this->handleOrderCreatedEventTracking($request->all());
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
@@ -65,39 +66,25 @@ class ShopifyWebHookController extends Controller
 
             $order = $this->shopifySyncService->getOrder($orderId);
 
-            $this->handleOrderEventTracking($order->getAttributes(), 'Order Refunded');
+            $this->handleOrderRefundEventTracking($order->getAttributes());
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
         }
     }
 
-    private function handleOrderEventTracking($order, string $eventName): void
+    private function handleOrderCreatedEventTracking($order): void
     {
         $user = User::query()->where('shopify_id', $order['customer']['id'])->first();
 
-        $brand = $order[ShopifyMetafieldNamespace::Musora->value . '.' . ShopifyMetafieldKey::Brand->value] ?? 'musora';
-        $data = [
-            'checkout_token' => $order['checkout_token'],
-            'order_id' => $order['id'],
-            'subtotal' => $order['subtotal_price'],
-            'total' => $order['total_price'],
-            'revenue' => intval($order['total_price']) + intval($order['total_discounts']),
-            'shipping' => $order['total_shipping_price_set']['shop_money']['amount'],
-            'tax' => $order['total_tax'],
-            'discount' => $order['total_discounts'],
-            'discount_codes' => $order['discount_codes'],
-            'currency' => $order['currency'],
-            'products' => $this->getProductList($order['line_items']),
-            'brand' => $brand,
-            'timestamp' => Carbon::parse($order['processed_at'])->timestamp,
-        ];
+        $brand = $this->getBrandFromOrder($order);
+        $data = $this->getOrderEventData($order, $brand);
 
         dispatch(
             new CustomerIoCreateEventByUserId(
                 $user->id,
                 $brand,
-                $eventName,
+                'musora_user_order',
                 $data,
                 null,
                 $order['processed_at'],
@@ -109,13 +96,36 @@ class ShopifyWebHookController extends Controller
                 new CustomerIoCreateEventByUserId(
                     $user->id,
                     'musora',
-                    $eventName,
+                    $brand . "_user_order",
                     $data,
                     null,
                     $order['processed_at'],
                 )
             )->delay(Carbon::now()->addSeconds(30));
         }
+
+        // @TODO EVENT TRACKING: move to avo when migration is completed
+        // Avo::order_refunded($data);
+    }
+
+
+    private function handleOrderRefundEventTracking($order): void
+    {
+        $user = User::query()->where('shopify_id', $order['customer']['id'])->first();
+
+        $brand = $this->getBrandFromOrder($order);
+        $data = $this->getOrderEventData($order, $brand);
+
+        dispatch(
+            new CustomerIoCreateEventByUserId(
+                $user->id,
+                'musora',
+                'musora_user_refund',
+                $data,
+                null,
+                $order['processed_at'],
+            )
+        )->delay(Carbon::now()->addSeconds(30));
 
         // @TODO EVENT TRACKING: move to avo when migration is completed
         // Avo::order_placed($data);
@@ -137,5 +147,36 @@ class ShopifyWebHookController extends Controller
                 ];
             })
             ->toArray();
+    }
+
+    public function getBrandFromOrder($order): string
+    {
+        $brand = $order[ShopifyMetafieldNamespace::Musora->value . '.' . ShopifyMetafieldKey::Brand->value];
+        if ($brand) {
+            return $brand;
+        }
+
+        $product = Product::where('sku', $order['line_items'][0]['sku'])->first() ?? null;
+
+        return $product->brand ?? 'musora';
+    }
+
+    private function getOrderEventData($order, string $brand): array
+    {
+        return [
+            'checkout_token' => $order['checkout_token'],
+            'order_id' => $order['id'],
+            'subtotal' => $order['subtotal_price'],
+            'total' => $order['total_price'],
+            'revenue' => intval($order['total_price']) + intval($order['total_discounts']),
+            'shipping' => $order['total_shipping_price_set']['shop_money']['amount'],
+            'tax' => $order['total_tax'],
+            'discount' => $order['total_discounts'],
+            'discount_codes' => $order['discount_codes'],
+            'currency' => $order['currency'],
+            'products' => $this->getProductList($order['line_items']),
+            'brand' => $brand,
+            'timestamp' => Carbon::parse($order['processed_at'])->timestamp,
+        ];
     }
 }

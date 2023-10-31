@@ -31,17 +31,20 @@ class UserAccessPermissionsService
     private ?array $cachedPackPermissionIds = null;
     private UserProductService $userProductService;
     private UserService $userService;
+    private SubscriptionService $subscriptionService;
 
     function __construct(
         ProductService $productService,
         ContentPermissionsService $contentPermissionsService,
         UserProductService $userProductService,
-        UserService $userService
+        UserService $userService,
+        SubscriptionService $subscriptionService
     ) {
         $this->productService = $productService;
         $this->contentPermissionsService = $contentPermissionsService;
         $this->userProductService = $userProductService;
         $this->userService = $userService;
+        $this->subscriptionService = $subscriptionService;
     }
 
     private function getUserAccessPermissionsQuery(int $userId, array $filterPermissionIds = [])
@@ -116,19 +119,12 @@ class UserAccessPermissionsService
             );
         }
 
-        $accessPermissions = $this->getUserAccessPermissions($userId);
-        if (config('shopify.enabled')) {
-            event(new UserAccessPermissionsUpdated($accessPermissions));
-        }
+        $this->handleUserPermissionsUpdatedEvent($userId);
     }
 
     public function syncUser(User $user): void
     {
-        //users may have legacy data that needs to be synced
-        $accessPermissions = $this->getUserAccessPermissions($user->id);
-        if (config('shopify.enabled')) {
-            event(new UserAccessPermissionsUpdated($accessPermissions));
-        }
+        $this->handleUserPermissionsUpdatedEvent($user->id);
     }
 
     public function syncShopifyOrders(User $user, OrderCollection $orderCollection): void
@@ -150,10 +146,8 @@ class UserAccessPermissionsService
             $contentPermissionsLookup,
         );
 
-        $accessPermissions = $this->getUserAccessPermissions($user->id);
-        if (config('shopify.enabled')) {
-            event(new UserAccessPermissionsUpdated($accessPermissions, $orderCollection));
-        }
+
+        $this->handleUserPermissionsUpdatedEvent($user->id, $orderCollection);
     }
 
     private function syncShopifyOrder(
@@ -166,6 +160,9 @@ class UserAccessPermissionsService
 
         $wasUpdated = false;
         foreach ($order->lineItems as $lineItem) {
+            if (!$lineItem->product) {
+                continue;
+            }
             /** @var OrderLineItem $lineItem */
             $contentPermissions = $lineItem->product->getContentPermissions($contentPermissionsLookup);
 
@@ -397,13 +394,8 @@ class UserAccessPermissionsService
         }
         $userAccessPermission->save();
 
-        $accessPermissions = $this->getUserAccessPermissions($userId);
-        if (!$accessPermissions->getCollection()->contains('id', $userAccessPermission->id)) {
-            Log::error("Permission does not exist in database.");
-        }
-        if (config('shopify.enabled')) {
-            event(new UserAccessPermissionsUpdated($accessPermissions));
-        }
+        $this->handleUserPermissionsUpdatedEvent($userId);
+
         return $userAccessPermission;
     }
 
@@ -499,5 +491,20 @@ class UserAccessPermissionsService
             throw $e;
         }
         return $accessPermission;
+    }
+
+    public function handleUserPermissionsUpdatedEvent(int $userId, OrderCollection $orderCollection = null): void
+    {
+        if (config('shopify.enabled')) {
+            $accessPermissions = $this->getUserAccessPermissions($userId);
+            $subscriptions = null;
+            try {
+                $subscriptions = $this->subscriptionService->syncSubscriptionData($accessPermissions);
+            } catch (\Throwable $e) {
+                Log::error("Error syncing subscriptions for user: $userId");
+                Log::error($e);
+            }
+            event(new UserAccessPermissionsUpdated($accessPermissions, $orderCollection, $subscriptions));
+        }
     }
 }
