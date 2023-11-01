@@ -29,7 +29,6 @@ Route::domain('{pianoteDomain}')
                 Route::get('/the-power-of-chords-giveaway', [SalesController::class, 'PowerOfChordsGiveaway'] );
                 Route::get('/worship-piano', [SalesController::class, 'worshippiano'] );
                 Route::get('/beautiful-beginner-bundle', [SalesController::class, 'beautifulBeginnerBundle'] );
-                Route::get('/5-for-3-bundle', [SalesController::class, 'fiveforthreeBundle'] );
                 Route::get('/metronome', [SalesController::class, 'metronome'] );
             }
         );
