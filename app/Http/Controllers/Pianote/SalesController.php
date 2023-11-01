@@ -238,6 +238,10 @@ class SalesController extends BaseController
     {
         return view('pianote.products.metronome', ['theme' => 'pianote']);
     }
+    public function metronomePrestige()
+    {
+        return view('pianote.products.prestige-metronome', ['theme' => 'pianote', 'recaptchaKey'=>config('recaptcha.key')]);
+    }
     public function christmasSongbook()
     {
         return view('pianote.products.christmas-songbook', ['theme' => 'pianote']);
