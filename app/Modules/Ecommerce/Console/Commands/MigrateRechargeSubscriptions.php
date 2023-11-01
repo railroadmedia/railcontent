@@ -43,7 +43,7 @@ class MigrateRechargeSubscriptions extends Command
             $isTest = $this->option('test');
 
             $this->info('Loading Subscriptions');
-            $subscriptionsQuery = Subscription::query()->with('product')
+            $subscriptionsQuery = Subscription::query()->with('product')->with('user')
                 ->where('is_active', 1)
                 ->where('type', Subscription::TYPE_SUBSCRIPTION)
                 ->where('paid_until', '>', Carbon::now());
@@ -156,8 +156,8 @@ class MigrateRechargeSubscriptions extends Command
                         "paypal_billing_agrement_id" => !app()->isProduction() ? '' :
                             $subscription->paymentMethod->paypalBillingAgreement?->external_id ?? "",
                         "shipping_email" => $this->getEmailForShopify($subscription->user->email),
-                        "shipping_first_name" => $subscription->paymentMethod->address->first_name ?? "",
-                        "shipping_last_name" => $subscription->paymentMethod->address->last_name ?? "",
+                        "shipping_first_name" => $subscription?->user->first_name ?? $subscription->paymentMethod->address->first_name ?? "",
+                        "shipping_last_name" => $subscription?->user->last_name ?? $subscription->paymentMethod->address->last_name ?? "N/A",
                         "shipping_address_1" => "31265 Wheel Ave",
                         "shipping_address_2" => "#107",
                         "shipping_city" => "Abbotsford",

@@ -12,4 +12,12 @@ enum ShopifyMetafieldKey: string
     case IsMusoraAccountSetUp = 'is_musora_account_set_up';
     case Brand = 'brand';
     case PaymentSource = 'payment_source';
+
+    case InventoryControlSKU = 'inventory_control_sku';
+
+    case FulfillmentSKU = 'fulfillment_sku';
+    case DigitalAccessType = 'digital_access_type';
+    case DigitalAccessTimeType = 'digital_access_time_type';
+    case DigitalAccessTimeIntervalType = 'digital_access_time_interval_type';
+    case DigitalAccessTimeIntervalLength = 'digital_access_time_interval_length';
 }

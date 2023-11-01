@@ -83,7 +83,7 @@ class SyncProductsToShopifyDispatcher extends Command
             $tally = 0;
             $products->chunk(
                 $batchSize,
-                function ($productIds) use (
+                function ($productIds, $batchIndex) use (
                     $limit,
                     &$isAtLimit,
                     $batchSize,
@@ -108,19 +108,35 @@ class SyncProductsToShopifyDispatcher extends Command
                     $firstProductId = $productIds->first()->id;
                     $lastProductId = $productIds->last()->id;
                     $jobs[] = new SyncProductsToShopify(
-                        $firstProductId, $lastProductId, $locationId, $this->getDateTimeOfLastSync(), $simulate, $fresh
+                        $firstProductId,
+                        $lastProductId,
+                        $locationId,
+                        $this->getDateTimeOfLastSync(),
+                        $simulate,
+                        $fresh,
+                        $batchIndex
                     );
                 }
             );
         } else {
             // step through the chunks of product ids to sync, and add a job to process each chunk
-            $products->chunk($batchSize, function ($productIds) use ($simulate, $fresh, $locationId, &$jobs) {
-                $firstProductId = $productIds->first()->id;
-                $lastProductId = $productIds->last()->id;
-                $jobs[] = new SyncProductsToShopify($firstProductId, $lastProductId, $locationId, $this->getDateTimeOfLastSync(), $simulate, $fresh);
-            });
+            $products->chunk(
+                $batchSize,
+                function ($productIds, $batchIndex) use ($simulate, $fresh, $locationId, &$jobs) {
+                    $firstProductId = $productIds->first()->id;
+                    $lastProductId = $productIds->last()->id;
+                    $jobs[] = new SyncProductsToShopify(
+                        $firstProductId,
+                        $lastProductId,
+                        $locationId,
+                        $this->getDateTimeOfLastSync(),
+                        $simulate,
+                        $fresh,
+                        $batchIndex
+                    );
+                }
+            );
         }
-
         $startAt = Carbon::now();
         $batch = Bus::batch($jobs)
             ->then(function (Batch $batch) use ($startAt) {
