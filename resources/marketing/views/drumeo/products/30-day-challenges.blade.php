@@ -10,7 +10,7 @@
     <meta property="og:title" content="30-Day Drummer | Drumeo">
     <meta name="description" content="Learn the drums with daily guided workouts.">
     <meta property="og:description" content="Learn the drums with daily guided workouts.">
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30DD2-share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30DD2-share-image.jpg">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -259,22 +259,41 @@
     'students' => 'drummers'
 ])
 
-
  <!-- Lessons Section -->
 @php
 $lessons = ['Day 1 (Your First Drum Beat - Lesson & W...', 'Your First Drum Beat - Workout 2', 'Your First Drum Beat - Workout 3', 'Your First Drum Beat - Workout 4', 'Your First Drum Beat - Workout 5', 'Your First Drum Beat - Workout 6', 'Your First Drum Beat - Workout 7', 'Your First Drum Beat - Workout 8', 'Your First Drum Beat - Workout 9', 'Your First Drum Beat - Workout 10'];
+
+$features = [
+    [
+        'title' => 'Course Kick-Off',
+        'posterImage' => 'https://i.vimeocdn.com/video/1708757353-79d71daade4ab3ad8e9972901dcc2f0ec7622e92750c30791c3aa0b61b19a8ca-d?mw=1000&mh=1000&q=70',
+        'dataOpen' => 'kick-off',
+        'videoId' => 850695588,
+    ],
+    [
+        'title' => 'Setup',
+        'posterImage' => 'https://i.vimeocdn.com/video/1708754455-64e0e1a12f933556fcfa50092c4215e3dc1450b33734d888f85c8b2bf861df09-d?mw=1000&mh=1000&q=70',
+        'dataOpen' => 'setup',
+        'videoId' => 852833927
+    ],
+];
 @endphp
+
+@foreach ($features as $feature)
+    @include('drumeo.sales.partials._video-modal', [
+        'modalId' => $feature['dataOpen'],
+        'video' => '//player.vimeo.com/video/' . $feature['videoId'],
+        'title' => $feature['dataOpen'],
+    ])
+@endforeach
+
 
 @include('drumeo.products.partials.evergreen._lessons', [
     'title' => 'Learn the drums by actually playing the drums.',
-    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/drum-challenges.jpeg',
     'descriptionDesktop' => '30-Day Drummer is a NEW way to learn the drums – where you learn by actually playing the drums. By focusing on timing & coordination, you’ll build your skills over thirty days following daily guided workouts with your instructor, Domino Santantonio.',
     'descriptionBold' => 'And the best part is you only need 10 minutes per day.',
     'descriptionMobile' => 'Welcome to 30-Day Drummer! At this point, you should have all the equipment you need to get started, know how to set up your gear, and be ready to have some fun playing the drums with Domino. In this first lesson and 10-minute workout, she will teach you the beginnings of the most popular drum beat of all time. And you will have fun doing it!',
-    'features' => [
-        'Course Kick-Off',
-        'Setup'
-    ],
+    'features' => $features,
     'lessonTitle' => 'Course Lessons',
     'instructor' => ' Domino Santantonio',
     'course' => ' 30 video lessons',
@@ -504,6 +523,8 @@ $points = [
         "video" => '//player.vimeo.com/video/852777053?h=87d3e7a97a&autoplay=1',
         "title" => 'trailer'
     ])
+
+    
 
     @include("drumeo.sales.partials._footer")
 

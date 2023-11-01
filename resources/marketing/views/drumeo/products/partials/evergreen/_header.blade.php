@@ -16,7 +16,7 @@
                 </h1>
                 <h2 class="-mt-3 sm:-mt-1 lg:mt-0 mb-4">{{ $subtitle }}</h2>
                 @foreach ($checklist as $item)
-                    <p class="hidden lg:inline p-2 text-lg leading-tight">
+                    <p class="hidden lg:inline p-2 text-lg leading-10">
                         <i class="fas fa-check-circle text-{{ $brandTitle }}"></i> {{ $item }}
                     </p>
                 @endforeach
@@ -26,7 +26,7 @@
                             $firstWord = strtok($item, ' '); // to get the first word
                             $restOfWords = substr($item, strlen($firstWord)); // to get other part of phrase
                         @endphp
-                        <p class="w-1/3 text-base leading-tight">
+                        <p class="w-1/3 leading-tight">
                             <i class="fas fa-check-circle text-{{ $brandTitle }}"></i><br/>
                             {{ $firstWord }}<br/>{{ $restOfWords }}
                         </p>
@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="flex w-full flex-col items-center mt-6 sm:mt-5 lg:mt-10">
-            <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 text-center sm:pr-2 my-1">
+            <div class="w-full sm:w-1/2 md:w-1/3 text-center sm:pr-2 my-1">
                 <a href="#final" class="join blue medium w-full anchor-slide">{{ $buttonText }}</a>
             </div>
             <div class="w-full sm:w-1/2 lg:pb-5 my-1 text-center text-xs">
