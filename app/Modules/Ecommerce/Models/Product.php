@@ -148,19 +148,12 @@ class Product extends Model
         return DigitalAccessType::tryFrom($this->digital_access_type);
     }
 
-    public function calculateExpirationDate(Carbon $startedAt)
-    {
-        if ($this->digital_access_time_type == Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME) {
-            return Carbon::maxValue();
-        }
-        $days = $this->getMembershipTimeDays();
-        $months = $this->getMembershipTimeMonths();
-
-        return $startedAt->clone()->addDays($days)->addMonths($months);
-    }
-
     public function getMembershipTimeDays(): ?int
     {
+        if ($this->isTrial()) {
+            return $this->getTrialDays();
+        }
+
         switch ($this->digital_access_time_interval_type) {
             case 'days':
                 return $this->digital_access_time_interval_length ?? 0;
@@ -181,6 +174,9 @@ class Product extends Model
 
     public function getMembershipTimeMonths(): ?int
     {
+        if ($this->isTrial()) {
+            return 0;
+        }
         switch ($this->digital_access_time_interval_type) {
             case 'days':
             case '':
@@ -251,7 +247,8 @@ class Product extends Model
         return in_array($this->type, self::DIGITAL_PRODUCT_TYPES);
     }
 
-    public function isTrial(): bool{
+    public function isTrial(): bool
+    {
         return str_contains(strtolower($this->sku), 'trial');
     }
 
@@ -339,5 +336,18 @@ class Product extends Model
         }
 
         return $metafields;
+    }
+
+    public function getTrialDays(): int
+    {
+        if (str_contains(strtolower($this->sku), "7-day")
+            || $this->sku == "PIANOTE-MEMBERSHIP-TRIAL") {
+            return 7;
+        }
+        if (str_contains(strtolower($this->sku), "30-day")
+            || str_contains(strtolower($this->sku), "1-month")) {
+            return 30;
+        }
+        return 0;
     }
 }
