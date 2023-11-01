@@ -187,12 +187,12 @@ if (md5('hello') != '5d41402abc4b2a76b9719d911017c592') {
 if (Shopify.checkout.customer_id && Shopify.checkout.email && Shopify.checkout.line_items) {
 
     // get email address from element
-    var emailAddress = Shopify.checkout.email;
-    var musoraAccountCreationKey = atob('bXVzb3JhX3Nob3BpZnlfY2xhaW1fa2V5XzY4NzY5NzI3MzQ5NjcyNzM2');
-    var musoraVerificationHash = md5(emailAddress + musoraAccountCreationKey);
-    var currentScriptUrl = new URL(document.currentScript.src);
-    var currentScriptUrlWithoutPath = currentScriptUrl.protocol + '//' + currentScriptUrl.host;
-    var urlToAccountSetupPage = currentScriptUrlWithoutPath + '/user-management-system/create-account' +
+    const emailAddress = Shopify.checkout.email;
+    const musoraAccountCreationKey = atob('bXVzb3JhX3Nob3BpZnlfY2xhaW1fa2V5XzY4NzY5NzI3MzQ5NjcyNzM2');
+    const musoraVerificationHash = md5(emailAddress + musoraAccountCreationKey);
+    const currentScriptUrl = new URL(document.currentScript.src);
+    const currentScriptUrlWithoutPath = currentScriptUrl.protocol + '//' + currentScriptUrl.host;
+    const urlToAccountSetupPage = currentScriptUrlWithoutPath + '/user-management-system/create-account' +
         "?" +
         "email=" + encodeURIComponent(emailAddress) +
         "&verification_token=" + encodeURIComponent(musoraVerificationHash);
@@ -211,5 +211,14 @@ if (Shopify.checkout.customer_id && Shopify.checkout.email && Shopify.checkout.l
         'beforebegin',
         '<div style="margin-bottom: 30px;"><a href="' + urlToAccountSetupPage + '" style="font-size: 16pt; font-weight: bold;">Next Step: Click here to set up your new Musora account.</a></div>'
     );
+
+    // change logout link to go to musora logout then back to shopify logout
+    const shopifyLogOutLinkElement = document.querySelector('a[href*="logout"]');
+    const shopifyLogOutLinkUrl = shopifyLogOutLinkElement.href;
+
+    const urlToLogOutPage = currentScriptUrlWithoutPath + '/user-management-system/logout/cookie?redirect_to=' +
+        encodeURIComponent(shopifyLogOutLinkUrl);
+
+    shopifyLogOutLinkElement.href = urlToLogOutPage;
 }
 
