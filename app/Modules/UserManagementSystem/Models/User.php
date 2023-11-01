@@ -102,7 +102,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property bool|false $has_recharge_subscription
  * @property bool|false $has_apple_subscription
  * @property bool|false $has_google_subscription
- * @property bool|false $cio_synced_workspaces
+ * @property int $cio_synced_workspaces
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @method static Builder|User newModelQuery()

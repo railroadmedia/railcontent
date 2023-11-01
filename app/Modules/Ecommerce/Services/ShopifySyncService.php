@@ -69,7 +69,7 @@ class ShopifySyncService
         if ($products->contains(fn(Product $product) => $product->isDigital())) {
             $count = $orders->count();
             Log::debug("Customer $shopifyCustomerId: Found $count orders");
-            $user = $this->getUser($shopifyCustomerId, $email);
+            $user = $this->getOrCreateUser($shopifyCustomerId, $email);
             $orderCollection = new OrderCollection($orders, $products);
             $this->updateUserData($orderCollection, $shopifyCustomerId, $user);
             $this->userAccessPermissionsService->syncShopifyOrders($user, $orderCollection);
@@ -245,10 +245,10 @@ class ShopifySyncService
             )->all();
     }
 
-    public function getUser(
+    public function getOrCreateUser(
         int $shopifyCustomerId,
         ?string $email = null
-    ): ?User {
+    ): User {
         $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
         if ($user) {
             return $user;
@@ -285,7 +285,7 @@ class ShopifySyncService
         return $this->shopify->getOrder($orderId);
     }
 
-    public function updateUserData(OrderCollection $orders, int $shopifyCustomerId, ?User $user): void
+    public function updateUserData(OrderCollection $orders, int $shopifyCustomerId, User $user): void
     {
         $orderBrands = $orders->getOrderBrands();
         $user->shopify_id = $shopifyCustomerId;

@@ -229,7 +229,7 @@ class UserAccessPermissionsService
         return $userAccessPermissions->doesUserOwnPermissions($this->cachedPackPermissionIds);
     }
 
-    public function syncCustomerIOWorkspace(User $user, $brand): bool
+    public function shouldSyncCustomerIOWorkspace(User $user, $brand): bool
     {
         if (config('shopify.enabled')) {
             return $user->shouldSyncCustomerIoWorkspace($brand);
