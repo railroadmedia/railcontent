@@ -247,7 +247,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     use CanSaveWithoutUpdatedAt;
 
 
-
     const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_DRUMEO = 1;
     const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_PIANOTE = 2;
     const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_GUITAREO = 4;
@@ -936,12 +935,24 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         ];
     }
 
-        public function setCustomerIOSyncedWorkspaces(array $workspaces): void
+    public function setCustomerIOSyncedWorkspaces(array $workspaces): void
     {
-        $this->setCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_DRUMEO, in_array('drumeo', $workspaces));
-        $this->setCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_PIANOTE, in_array('pianote', $workspaces));
-        $this->setCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_GUITAREO, in_array('guitareo', $workspaces));
-        $this->setCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_SINGEO, in_array('singeo', $workspaces));
+        $this->setCustomerIOSyncedWorkspaceFlag(
+            self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_DRUMEO,
+            in_array('drumeo', $workspaces)
+        );
+        $this->setCustomerIOSyncedWorkspaceFlag(
+            self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_PIANOTE,
+            in_array('pianote', $workspaces)
+        );
+        $this->setCustomerIOSyncedWorkspaceFlag(
+            self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_GUITAREO,
+            in_array('guitareo', $workspaces)
+        );
+        $this->setCustomerIOSyncedWorkspaceFlag(
+            self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_SINGEO,
+            in_array('singeo', $workspaces)
+        );
     }
 
     public function shouldSyncCustomerIoWorkspace(string $brand): bool
