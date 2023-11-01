@@ -240,6 +240,13 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     use Authorizable;
     use CanSaveWithoutUpdatedAt;
 
+
+
+    const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_DRUMEO = 1;
+    const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_PIANOTE = 2;
+    const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_GUITAREO = 4;
+    const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_SINGEO = 8;
+
     private ?NotificationSettings $notificationSettingsLookup = null;
 
     protected $hidden = ['password', 'session_salt'];
@@ -898,31 +905,25 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->has_apple_subscription || $this->has_google_subscription;
     }
 
-
-    const FLAG_DRUMEO = 1;
-    const FLAG_PIANOTE = 2;
-    const FLAG_GUITAREO = 4;
-    const FLAG_SINGEO = 8;
-
     public function setCustomerIOSyncedWorkspaces(array $workspaces): void
     {
-        $this->setCustomerIOSyncedWorkspaceFlag(self::FLAG_DRUMEO, in_array('drumeo', $workspaces));
-        $this->setCustomerIOSyncedWorkspaceFlag(self::FLAG_PIANOTE, in_array('pianote', $workspaces));
-        $this->setCustomerIOSyncedWorkspaceFlag(self::FLAG_GUITAREO, in_array('guitareo', $workspaces));
-        $this->setCustomerIOSyncedWorkspaceFlag(self::FLAG_SINGEO, in_array('singeo', $workspaces));
+        $this->setCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_DRUMEO, in_array('drumeo', $workspaces));
+        $this->setCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_PIANOTE, in_array('pianote', $workspaces));
+        $this->setCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_GUITAREO, in_array('guitareo', $workspaces));
+        $this->setCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_SINGEO, in_array('singeo', $workspaces));
     }
 
     public function shouldSyncCustomerIoWorkspace(string $brand): bool
     {
         switch ($brand) {
             case 'drumeo':
-                return $this->hasCustomerIOSyncedWorkspaceFlag(self::FLAG_DRUMEO);
+                return $this->hasCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_DRUMEO);
             case 'pianote':
-                return $this->hasCustomerIOSyncedWorkspaceFlag(self::FLAG_PIANOTE);
+                return $this->hasCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_PIANOTE);
             case 'guitareo':
-                return $this->hasCustomerIOSyncedWorkspaceFlag(self::FLAG_GUITAREO);
+                return $this->hasCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_GUITAREO);
             case 'singeo':
-                return $this->hasCustomerIOSyncedWorkspaceFlag(self::FLAG_SINGEO);
+                return $this->hasCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_SINGEO);
             case 'musora':
                 return true;
             default:
@@ -941,9 +942,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     private function hasCustomerIOSyncedWorkspaceFlag(int $flag): bool
     {
-        $test = decbin($this->cio_synced_workspaces);
-        $test2 = $this->cio_synced_workspaces & $flag;
-
         return ($this->cio_synced_workspaces & $flag) === $flag;
     }
 }
