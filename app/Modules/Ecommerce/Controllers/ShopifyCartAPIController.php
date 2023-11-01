@@ -333,6 +333,19 @@ class ShopifyCartAPIController extends Controller
             $checkoutURL = str_replace('musora.com', brand() . '.com', $checkoutURL);
         }
 
+        // If the user is logged in always send them to the multipass auth url first and
+        // redirect them to the checkout after it authenticates them.
+        if (!empty(user())) {
+            $shopifyMultipassToken = $this->shopifyStoreFrontAPIService->generateMultipassToken(
+                user()->getEmail(),
+                $checkoutURL
+            );
+
+            $multipassLoginUrl = config('shopify.hostName') . '/account/login/multipass/' . $shopifyMultipassToken;
+
+            return redirect()->away($multipassLoginUrl);
+        }
+
         return redirect()->away($checkoutURL);
     }
 

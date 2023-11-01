@@ -11,6 +11,28 @@ class RedirectLegacyCartRequestsToShopifyControllers
 {
     public function handle(Request $request, Closure $next)
     {
+        $requestURL = $request->getUri();
+        $parse = parse_url($requestURL);
+        $parse['path'] = $parse['path'] ?? '';
+        $parse['query'] = $parse['query'] ?? '';
+        $brandDomains = ['drumeo.com', 'pianote.com', 'guitareo.com', 'singeo.com'];
+
+        // always redirect brand domains to musora domain so sessions are always on musora.com
+        if (($request->path() == 'ecommerce/json/add-to-cart' && $request->method() == 'PUT') ||
+            ($request->path() == 'ecommerce/add-to-cart' && $request->method() == 'GET') ||
+            (Str::startsWith($request->path(), 'ecommerce/json/update-product-quantity') && $request->method(
+                ) == 'PATCH') ||
+            (Str::startsWith($request->path(), 'ecommerce/json/remove-from-cart') && $request->method() == 'DELETE') ||
+            ($request->path() == 'ecommerce/json/clear-cart' && $request->method() == 'DELETE') ||
+            ($request->path() == 'ecommerce/json/cart' && $request->method() == 'GET') ||
+            (in_array($this->getHostDomainFromFullDomain($parse['host']), $brandDomains) &&
+                Str::startsWith($request->path(), 'order') &&
+                $request->method() == 'GET')) {
+            if (Str::endsWith($parse['host'], $brandDomains)) {
+                return redirect()->away(Str::replace($brandDomains, 'musora.com', $requestURL));
+            }
+        }
+
         if (($request->path() == 'ecommerce/json/add-to-cart' && $request->method() == 'PUT') ||
             ($request->path() == 'ecommerce/add-to-cart' && $request->method() == 'GET')) {
             $route = $request->route();
@@ -24,7 +46,8 @@ class RedirectLegacyCartRequestsToShopifyControllers
             $route->controller = false;
         }
 
-        if ((Str::startsWith($request->path(), 'ecommerce/json/update-product-quantity') && $request->method() == 'PATCH')) {
+        if ((Str::startsWith($request->path(), 'ecommerce/json/update-product-quantity') && $request->method(
+            ) == 'PATCH')) {
             $route = $request->route();
 
             $routeAction = array_merge($route->getAction(), [
@@ -73,5 +96,18 @@ class RedirectLegacyCartRequestsToShopifyControllers
         }
 
         return $next($request);
+    }
+
+    /**
+     * Removes subdomain from url if it exists: converts 'www.musora.com' to 'musora.com'
+     * @return string
+     */
+    private function getHostDomainFromFullDomain($hostWithSubdomain)
+    {
+        $array = explode(".", $hostWithSubdomain);
+
+        return (array_key_exists(count($array) - 2, $array) ? $array[count($array) - 2] : "") . "." . $array[count(
+                $array
+            ) - 1];
     }
 }
