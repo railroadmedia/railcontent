@@ -69,9 +69,11 @@ class ShopifySyncService
         if ($products->contains(fn(Product $product) => $product->isDigital())) {
             $count = $orders->count();
             Log::debug("Customer $shopifyCustomerId: Found $count orders");
-            $user = $this->getUser($shopifyCustomerId, $email);
+            $user = $this->getOrCreateUser($shopifyCustomerId, $email);
             $orderCollection = new OrderCollection($orders, $products);
+            $this->updateUserData($orderCollection, $shopifyCustomerId, $user);
             $this->userAccessPermissionsService->syncShopifyOrders($user, $orderCollection);
+
         } else {
             Log::debug("Customer $shopifyCustomerId: No digital products found");
             $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
@@ -243,10 +245,10 @@ class ShopifySyncService
             )->all();
     }
 
-    public function getUser(
+    public function getOrCreateUser(
         int $shopifyCustomerId,
         ?string $email = null
-    ): ?User {
+    ): User {
         $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
         if ($user) {
             return $user;
@@ -254,10 +256,6 @@ class ShopifySyncService
         if ($email) {
             $user = $this->userService->getByEmailOrNull($email);
             if ($user) {
-                if ($user->shopify_id != $shopifyCustomerId) {
-                    $user->shopify_id = $shopifyCustomerId;
-                    $user->save();
-                }
                 return $user;
             }
             return $this->userService->createUser(
@@ -285,5 +283,13 @@ class ShopifySyncService
     public function getOrder(int $orderId): OrderResource
     {
         return $this->shopify->getOrder($orderId);
+    }
+
+    public function updateUserData(OrderCollection $orders, int $shopifyCustomerId, User $user): void
+    {
+        $orderBrands = $orders->getOrderBrands();
+        $user->shopify_id = $shopifyCustomerId;
+        $user->setCustomerIOSyncedWorkspaces($orderBrands);
+        $user->save();
     }
 }

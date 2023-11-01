@@ -229,16 +229,12 @@ class UserAccessPermissionsService
         return $userAccessPermissions->doesUserOwnPermissions($this->cachedPackPermissionIds);
     }
 
-    public function userHadOrHasAnyDigitalProductsForBrand(User $user, $brand): bool
+    public function shouldSyncCustomerIOWorkspace(User $user, $brand): bool
     {
         if (config('shopify.enabled')) {
-            $userAccessPermissions = $this->getUserAccessPermissions($user->id);
-            $permissionIds =
-                $this->contentPermissionsService->getByBrand($brand)
-                    ->pluck('id')
-                    ->toArray();
-            return $userAccessPermissions->hasUserOwnedPermissions($permissionIds);
+            return $user->shouldSyncCustomerIoWorkspace($brand);
         }
+        //TODO: remove post shopify
         $userProductService = app(EcommerceUserProductService::class);
 
         return $userProductService->userHadOrHasAnyDigitalProductsForBrand(
