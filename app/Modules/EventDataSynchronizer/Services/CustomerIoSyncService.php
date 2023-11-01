@@ -78,6 +78,7 @@ class CustomerIoSyncService
                 $contentFollowAttributes,
             );
         } else {
+            //TODO: remove post shopify
             $membershipAccessAttributes = $this->getUsersMembershipAccessAttributesDeprecated($user, $brands);
 
             $contentFollowAttributes = $this->getUsersContentFollowAttributes($user);
@@ -125,14 +126,12 @@ class CustomerIoSyncService
 
     private function getUsersMembershipAccessAttributes(User $user, mixed $brands): array
     {
-        $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($user->id);
-        $isAppSignup = false;
         $attributes = [];
         foreach ($brands as $brand) {
             $attributes += [
                 $brand . "_membership_access-expiration-date" => $user->membership_expiration_date,
-                $brand . "_membership_is_lifetime" => $user->is_lifetime_member ? "true" : "",
-                $brand . '_membership_subscription_source_app-store' => $user->hasMobileMembership() ? "true" : "",
+                $brand . "_membership_is_lifetime" => $user->is_lifetime_member ? "true" : "false",
+                //$brand . '_membership_subscription_source_app-store' => $user->hasMobileMembership() ? "true" : "",
             ];
         }
         return $attributes;
