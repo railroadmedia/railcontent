@@ -13,7 +13,7 @@
 @stop
 
 @section('body')
-    <header class="header text-center text-white py-10 md:py-18 px-4 bg-center bg-no-repeat relative" style="background-color:#010519; background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/order-bg.jpg);">
+    <header class="header text-center text-white py-10 md:py-20 px-4 bg-center bg-no-repeat relative" style="background-color:#010519; background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/order-bg.jpg);">
         <div class="container mx-auto relative z-10 max-w-4xl">
             <img class="h-16 md:h-24 lg:h-28" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/logo.png">
         </div>
