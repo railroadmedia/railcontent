@@ -229,9 +229,10 @@ class UserAccessPermissionsService
         return $userAccessPermissions->doesUserOwnPermissions($this->cachedPackPermissionIds);
     }
 
-    public function userHadOrHasAnyDigitalProductsForBrand(User $user, $brand, ?UserAccessPermissionsCollection $userAccessPermissions): bool
+    public function userHadOrHasAnyDigitalProductsForBrand(User $user, $brand): bool
     {
         if (config('shopify.enabled')) {
+            $userAccessPermissions = $this->getUserAccessPermissions($user->id);
             $permissionIds =
                 $this->contentPermissionsService->getByBrand($brand)
                     ->pluck('id')
