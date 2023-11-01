@@ -13,7 +13,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('usora_users', function (Blueprint $table) {
-            $table->tinyInteger('cio_synced_workspaces');
+            $table->tinyInteger('cio_synced_workspaces')->default(0);
         });
     }
 
