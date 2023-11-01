@@ -1635,4 +1635,102 @@ class ContentPagesController extends BaseController
 
         return view('content.comments');
     }
+
+    public function removeWithKey($array, $initKey) {
+        if(($key = array_search($initKey, $array)) !== false) {
+            unset($array[$key]);
+        }
+        return array_values($array);
+    }
+
+    public function slugToPhrase($slug) {
+        // Replace dashes with spaces
+        $phrase = str_replace('-', ' ', $slug);
+        
+        // Capitalize the first letter of each word
+        $phrase = ucwords($phrase);
+        
+        return $phrase;
+    }
+
+    public function artistSongs($route, Request $request, $brand, $artistSlug)
+    {   
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['songs'] ?? [];
+
+        $initialContent = $this->contentService->getFiltered(
+            $request->get('page', 1),
+            $request->get('limit', 12),
+            $request->get('sort', '-popularity'),
+            ['song'],
+            $request->get('slug_hierarchy', []),
+            $request->get('required_parent_ids', []),
+            ['artist,'.$this->slugToPhrase($artistSlug)],
+            $request->get('included_fields', []),
+            $request->get('required_user_states', []),
+            $request->get('included_user_states', []),
+        );
+
+        if ($initialContent->totalResults() === 0) {
+            throw new NotFoundHttpException();
+        }
+
+        $artistName = $initialContent->results()[0]->fetch('fields.artist.1');
+        $contentSubtitle = $initialContent->totalResults().' SONGS';
+        
+        $allowableFilters = $catalogueMeta['allowableFilters'];
+
+        $filterableValues = $this->removeWithKey($allowableFilters, 'artist');
+
+        return view('content.child-collection', [
+            'initialContent' => $initialContent->toResponseRawJson(),
+            'contentType' => 'song',
+            'collectionName' => $artistName,
+            'contentName' => 'Songs',
+            'contentTitle' => $artistName,
+            'contentSubtitle' => $contentSubtitle,
+            'goBackUrl' => '/'.$brand.'/songs',
+            'requiredFields' => ['artist,'.$artistName],
+            'filterableValues' => $allowableFilters,
+        ]);
+    }
+
+    public function genreContentByType($slug, Request $request, $brand, $genre, $contentTypeName)
+    {
+        $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$contentTypeName] ?? [];
+
+        //dd($lessonType);
+
+        $initialContent = $this->contentService->getFiltered( $request->get('page', 1),
+        $request->get('limit', 12),
+        $request->get('sort', '-popularity'),
+        [$lessonType],
+        $request->get('slug_hierarchy', []),
+        $request->get('required_parent_ids', []),
+        ['style,'.$genre],
+        $request->get('included_fields', []),
+        $request->get('required_user_states', []),
+        $request->get('included_user_states', []),);
+
+        if ($initialContent->totalResults() === 0) {
+            throw new NotFoundHttpException();
+        }
+
+        $contentTitle = ucwords($genre . ' ' . $contentTypeName);
+        $allowableFilters = $catalogueMeta['allowableFilters'];
+
+        $filterableValues = $this->removeWithKey($allowableFilters, 'style');
+
+        return view('content.child-collection', [
+            'initialContent' => $initialContent->toResponseRawJson(),
+            'contentType' => $lessonType,
+            'collectionName' => $genre,
+            'contentName' => $lessonType,
+            'contentTitle' => $contentTitle,
+            'contentSubtitle' => '',
+            'goBackUrl' => '/'.$brand.'/'.$contentTypeName,
+            'requiredFields' => ['style,'.$genre],
+            'filterableValues' => $filterableValues,
+        ]);
+    }
 }

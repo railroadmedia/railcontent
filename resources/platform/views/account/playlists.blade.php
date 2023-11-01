@@ -4,14 +4,14 @@
     <title>Playlists | Musora</title>
 @endsection
 
-@section('content')
-
-    <playlist-breadcrumb
+@section('content')   
+    {{-- Breadcrumb --}}
+    <breadcrumb
         brand="{{ $brand }}"
         last-level-url="/{{ $brand }}/playlists" 
         last-level-title="Playlists"
     >
-    </playlist-breadcrumb>
+    </breadcrumb>
 
     {{-- Playlist Header --}}
     <playlist-collection-header

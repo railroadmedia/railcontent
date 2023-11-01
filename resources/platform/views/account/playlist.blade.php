@@ -9,14 +9,14 @@
 @endsection
 
 @section('content')
-    {{-- Playlist Breadcrumb --}}
-    <playlist-breadcrumb
+    {{-- Breadcrumb --}}
+    <breadcrumb
         brand="{{ $brand }}"
         first-level-url="/{{ $brand }}/playlists" 
         first-level-title="Playlists"
         last-level-title="{{ $playlist['name'] }}"
     >
-    </playlist-breadcrumb>
+    </breadcrumb>
 
     {{-- Playlist Header --}}
     <playlist-header

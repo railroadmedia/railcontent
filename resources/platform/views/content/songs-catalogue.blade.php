@@ -110,9 +110,3 @@
         </transition>
     </div>
 @endsection
-<script>
-    import FilterWrapper from "../../assets/js/vue/components/Filter/FilterWrapper";
-    export default {
-        components: {FilterWrapper}
-    }
-</script>

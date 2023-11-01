@@ -61,6 +61,55 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->name('platform.subscribed-lessons');
 
+                Route::get('/{brand}/artists/{slug}', [ContentPagesController::class, 'artistSongs'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content.artist.show');
+
+                Route::get('/{brand}/genres/{genre}/{contentTypeName}', [ContentPagesController::class, 'genreContentByType'])
+                    ->whereIn('brand', all_brands())->whereIn('contentTypeName', [
+                        'lessons', // guitareo one-off page
+                        'routines', // singeo one-off page
+                        'courses',
+                        'songs',
+                        'quick-tips',
+                        'podcasts',
+                        'question-and-answer',
+                        'student-reviews',
+                        'boot-camps',
+                        'chords-and-scales',
+                        'bootcamps',
+                        'chords-scales',
+                        'library',
+                        'recording',
+                        'play-alongs',
+                        'archives',
+                        'spotlight',
+                        'the-history-of-electronic-drums',
+                        'backstage-secrets',
+                        'student-collaborations',
+                        'live-streams',
+                        'solos',
+                        'boot-amps',
+                        'gear-guides',
+                        'performances',
+                        'in-rhythm',
+                        'challenges',
+                        'on-the-road',
+                        'diy-drum-experiments',
+                        'rhythmic-adventures-of-captain-carson',
+                        'study-the-greats',
+                        'rhythms-from-another-planet',
+                        'tama-drums',
+                        'paiste-cymbals',
+                        'behind-the-scenes',
+                        'exploring-beats',
+                        'sonor-drums',
+                        'rudiments',
+                        'boot-camps',
+                        'song-tutorials',
+                        'drum-fest-international-2022',
+                    ])
+                    ->name('platform.content.genre.show');
 
                 Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
                     ->whereIn('brand', all_brands())
