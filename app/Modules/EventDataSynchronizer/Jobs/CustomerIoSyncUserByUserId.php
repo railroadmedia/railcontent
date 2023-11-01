@@ -50,16 +50,17 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
                 $syncThisWorkspace = false;
 
                 foreach ($brands as $brand) {
-                    if ($userAccessPermissionsService->userHadOrHasAnyDigitalProductsForBrand($this->user, $brand)
+                    if ($userAccessPermissionsService->syncCustomerIOWorkspace($this->user, $brand)
                         || $accountNameToSyncAllBrand == $brand) {
                         $syncThisWorkspace = true;
+                        break;
                     }
                 }
 
                 if ($syncThisWorkspace) {
                     $customerAttributes = $customerIoSyncService->getUsersCustomAttributes($this->user, $brands);
-                    if ($this->data ) {
-                        array_merge($customerAttributes, $this->data );
+                    if ($this->data) {
+                        $customerAttributes = array_merge($customerAttributes, $this->data);
                     }
                     $customerIoService->createOrUpdateCustomerByUserId(
                         $this->user->id,

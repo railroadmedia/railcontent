@@ -46,10 +46,8 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
                 $syncThisWorkspace = false;
 
                 foreach ($brands as $brand) {
-                    if ($userAccessPermissionsService->userHadOrHasAnyDigitalProductsForBrand(
-                            $this->user,
-                            $brand
-                        ) || $accountNameToSyncAllBrand == $brand) {
+                    if ($userAccessPermissionsService->syncCustomerIOWorkspace($this->user, $brand)
+                        || $accountNameToSyncAllBrand == $brand) {
                         $syncThisWorkspace = true;
                     }
                 }
