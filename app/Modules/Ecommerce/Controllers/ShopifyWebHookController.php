@@ -75,7 +75,7 @@ class ShopifyWebHookController extends Controller
 
     private function handleOrderCreatedEventTracking($order): void
     {
-        $user = User::query()->where('shopify_id', $order['customer']['id'])->first();
+        $user = $this->shopifySyncService->getUser($order['customer']['id'], $order['customer']['email']);
 
         $brand = $this->getBrandFromOrder($order);
         $data = $this->getOrderEventData($order, $brand);
