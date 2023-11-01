@@ -266,33 +266,6 @@
                             </div>
                         </a>
                     </div>
-
-                    <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                        <img class="h-16 absolute top-0 right-0 z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/products/christmas-songbook/free-shipping-badge.png">
-                        <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full text-dull-navy uppercase bg-pianote text-white" >BEST DEAL</p>
-                        <a href="/ecommerce/add-to-cart?locked=true&promo-code=special&product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,christmas-songbook:1,christmas-song-book-digital:1,piano-chords-and-scales-guide:1,new-piano-players-start-here:1,easy-chords:1"
-                            class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-pianote">
-                            <div class="bg-white px-3 py-6 md:py-9">
-                                <h4 class="mb-2 sm:mb-3"><strong>Holiday Bundle</strong></h4>
-                                <img class="h-28 lg:h-32 transition-opacity opacity-0"
-                                    loading="lazy"
-                                    onload="this.classList.remove('opacity-0')"
-                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/products/christmas-songbook/holiday-bundle.png"
-                                    alt="learn playing image"
-                                >
-                                <br>
-                                <h4 class="inline-block leading-tight"><s class="opacity-60">$532</s> <strong>$200</strong></h4>
-                                <p class="text-sm"><em>Join Pianote + Get the Book FREE</em></p>
-                                <div class="join my-5 smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Get Started</div>
-                                <p class="text-sm mb-1.5 text-pianote"><strong>Annual Pianote Membership</strong> ($240 value)</p>
-                                <p class="text-sm mb-1.5">Christmas Songbook ($49 value)</p>
-                                <p class="text-sm mb-1.5">Digital Book (10 songs) ($10 value)</p>
-                                <p class="text-sm mb-1.5">Chords & Scales Book ($39 value)</p>
-                                <p class="text-sm mb-1.5">New Piano Players Start Here ($97 value)</p>
-                                <p class="text-sm">Easy Chords ($97 value)</p>
-                            </div>
-                        </a>
-                    </div>
                 </div>
             @else
                 <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>

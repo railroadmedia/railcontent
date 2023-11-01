@@ -23,6 +23,7 @@ class SalesController extends BaseController
 
     public function home()
     {
+
         return view('pianote.sales.subscription', ['theme' => 'pianote']);
     }
     public function homeMonth()
@@ -35,7 +36,7 @@ class SalesController extends BaseController
     }
     public function trial()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true]);
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
     }
     public function trialSongs()
     {
@@ -170,11 +171,6 @@ class SalesController extends BaseController
         return view('pianote.products.beautiful-beginner-bundle', [ 'theme' => 'pianote' ]);
     }
 
-    public function buildYourBundle()
-    {
-        return view('pianote.products.build-your-bundle', [ 'theme' => 'pianote' ]);
-    }
-
     public function lifetime()
     {
         return view('pianote.shop.pages.lifetime', [ 'theme' => 'pianote' ]);
@@ -213,11 +209,6 @@ class SalesController extends BaseController
     public function PowerOfChords()
     {
         return view('pianote.products.the-power-of-chords');
-    }
-
-    public function PowerOfChordsBootcamp()
-    {
-        return view('pianote.products.the-power-of-chords-bootcamp');
     }
 
     public function PowerOfChordsGiveaway()
