@@ -95,6 +95,7 @@ const emit = defineEmits(["onChange", "onFocus", "onEnter"]);
 const onClear = (e) => {
   e.preventDefault();
   emit("onChange", '');
+  emit("onEnter", '');
   maskedValue.value = '';
 };
 
