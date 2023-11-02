@@ -9,9 +9,9 @@
                         <ul>
                             @foreach ($points as $index => $point)
                                 @if ($loop->last)
-                                    <li class="text-{{ $brand }}"><p><i class="fas fa-sharp fa-solid fa-certificate"></i> <strong>{{ $point }}</strong></p></li>
+                                    <li class="text-{{ $brand }}"><p class="pt-2"><i class="fas fa-sharp fa-solid fa-certificate pr-1"></i> <strong>{{ $point }}</strong></p></li>
                                 @else
-                                    <li><p><i class="fas fa-check text-{{ $brand }}"></i> {{ $point }}</p></li>
+                                    <li><p class="pt-2"><i class="fas fa-check text-{{ $brand }} pr-1"></i> {{ $point }}</p></li>
                                 @endif
                             @endforeach
                         </ul>

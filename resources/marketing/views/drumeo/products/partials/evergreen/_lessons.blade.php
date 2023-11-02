@@ -3,21 +3,22 @@
         <strong>{{ $title }}</strong>
     </h2>
 
-    {{-- <div class="container max-w-5xl mx-auto px-4 md:px-6 pb-12 md:flex leading-normal" x-data="{ posterImage: '{{ $features[0]['posterImage'] }}'}"> --}}
-    <div class="container max-w-5xl mx-auto px-4 md:px-6 md:flex leading-normal pb-6" x-data="{ posterImage: '{{ $features[0]['posterImage'] }}', dataOpen: 'kick-off' }">
+    <div class="container max-w-5xl mx-auto px-4 md:px-6 md:flex leading-normal pb-4 md:pb-8" x-data="{ posterImage: '{{ $features[0]['posterImage'] }}', videoPlayer: '{{ $features[0]['videoId'] }}' }">
 
         <div class="md:w-2/3 lg:w-8/12 md:pr-4 flex-shrink-0">
-            {{-- <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" data-open={{$features[0]['dataOpen']}}> --}}
-            <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" :data-open='dataOpen'>
+            <div class="aspect-16:9 cursor-pointer rounded-xl overflow-hidden w-full relative" x-data="{ open: false }">
 
-                <img :src="posterImage" class="rounded-xl object-cover w-full h-full absolute z-0" alt="Video Poster" />
-                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload"
-                    data-src="{{ $video }}"
-                    type="video/mp4" autoplay loop playsinline muted>
-                </video>
+                <img :src="posterImage" class="rounded-xl object-cover w-full h-full absolute z-0" alt="video poster" />
+                <button class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10" x-on:click="open = ! open" x-show="!open"></button>
+
+                <iframe class="absolute w-full h-full reset-on-close" :src="'//player.vimeo.com/video/' + videoPlayer + '?autoplay=0'" frameborder="0" allowfullscreen allow="autoplay" title="video" x-show="open"></iframe>
+
+                
             </div>
 
+
+
+            
             <div class="mt-4 md:py-4 hidden md:block">
                 <p>{{ $descriptionDesktop }} @if(isset($descriptionBold)) <strong>{{ $descriptionBold }}</strong> @endif</p>
                 <p class="pt-10">Instructor: <strong> {{ $instructor }}</strong></p>
@@ -27,14 +28,13 @@
 
         <div class="text-black md:w-1/3">
             @foreach ($features as $feature)
-                <button class="rounded-lg mb-2 px-4 py-3 bg-blue-50 w-full" 
-                        x-on:click="posterImage = '{{ $feature['posterImage'] }}'; dataOpen = '{{ $feature['dataOpen'] }}'">
-                        {{-- x-on:click="posterImage = '{{ $feature['posterImage'] }}'"> --}}
-                    <p class="flex items-center">
-                        <i class="fas fa-play-circle text-xl text-{{ $brand }} mr-2"></i> {{ $feature['title'] }}
-                    </p>
-                </button>
-            @endforeach
+        <button class="rounded-lg mb-2 px-4 py-3 bg-blue-50 w-full" 
+    x-on:click="posterImage = '{{ $feature['posterImage'] }}', videoPlayer = '{{ $feature['videoId'] }}', open = false">
+    <p class="flex items-center">
+        <i class="fas fa-play-circle text-xl text-{{ $brand }} mr-2"></i> {{ $feature['title'] }}
+    </p>
+</button>
+    @endforeach
 
             <p class="text-white pt-3"><strong>{{ $lessonTitle }}</strong></p>
             <div x-data="{ isOpen: [] }" class="h-72 overflow-y-scroll rounded-lg">

@@ -267,26 +267,15 @@ $features = [
     [
         'title' => 'Course Kick-Off',
         'posterImage' => 'https://i.vimeocdn.com/video/1708757353-79d71daade4ab3ad8e9972901dcc2f0ec7622e92750c30791c3aa0b61b19a8ca-d?mw=1000&mh=1000&q=70',
-        'dataOpen' => 'kick-off',
         'videoId' => 850695588,
     ],
     [
         'title' => 'Setup',
         'posterImage' => 'https://i.vimeocdn.com/video/1708754455-64e0e1a12f933556fcfa50092c4215e3dc1450b33734d888f85c8b2bf861df09-d?mw=1000&mh=1000&q=70',
-        'dataOpen' => 'setup',
         'videoId' => 852833927
     ],
 ];
 @endphp
-
-@foreach ($features as $feature)
-    @include('drumeo.sales.partials._video-modal', [
-        'modalId' => $feature['dataOpen'],
-        'video' => '//player.vimeo.com/video/' . $feature['videoId'],
-        'title' => $feature['dataOpen'],
-    ])
-@endforeach
-
 
 @include('drumeo.products.partials.evergreen._lessons', [
     'title' => 'Learn the drums by actually playing the drums.',
@@ -297,8 +286,7 @@ $features = [
     'lessonTitle' => 'Course Lessons',
     'instructor' => ' Domino Santantonio',
     'course' => ' 30 video lessons',
-    'lessons' => $lessons,
-    'video' => 'https://player.vimeo.com/video/' . $feature['videoId']
+    'lessons' => $lessons
 ])
 
 <!-- Songs subsection -->
@@ -453,7 +441,7 @@ $points = [
     'buttonTxt' => 'Get Started',
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'profileImageAlt' => 'student profile image',
-    'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/order-collage.png',
+    'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/order-collage.png',
     'students' => 'drummers',
     'numStudents' => number_format($nPackOwners ?? 0),
 ])
@@ -480,20 +468,6 @@ $points = [
         "video" => '//player.vimeo.com/video/852777053?h=87d3e7a97a&autoplay=1',
         "title" => 'trailer'
     ])
-
-    @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "kick-off",
-        "video" => '//player.vimeo.com/video/823873211?h=87d3e7a97a&autoplay=1',
-        "title" => 'kick-off'
-    ])
-
-    @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "setup",
-        "video" => '//player.vimeo.com/video/823873211?h=87d3e7a97a&autoplay=1',
-        "title" => 'setup'
-    ])
-
-    
 
     @include("drumeo.sales.partials._footer")
 

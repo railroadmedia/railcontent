@@ -246,20 +246,10 @@ $features = [
     [
         'title' => 'Course Kick-Off',
         'posterImage' => 'https://d1923uyy6spedc.cloudfront.net/30DayChops-Banner-1683560940.jpg',
-        'dataOpen' => 'kick-off',
         'videoId' => 823873211,
     ],
 ];
 @endphp
-
-@foreach ($features as $feature)
-    @include('drumeo.sales.partials._video-modal', [
-        'modalId' => $feature['dataOpen'],
-        'video' => '//player.vimeo.com/video/' . $feature['videoId'],
-        'title' => $feature['dataOpen'],
-    ])
-@endforeach
-
 
 @include('drumeo.products.partials.evergreen._lessons', [
     'title' => 'Learn the drums by actually playing the drums.',
@@ -269,9 +259,7 @@ $features = [
     'lessonTitle' => 'Course Lessons',
     'instructor' => ' Zack Grooves',
     'course' => ' 29 video lessons',
-    'lessons' => $lessons,
-    'video' => 'https://player.vimeo.com/video/' . $feature['videoId']
-
+    'lessons' => $lessons
 ])
 
 @php 
@@ -399,7 +387,7 @@ $testimonials = $drumeo['testimonialsShopVersion'];
             ],
         'bgColor' => 'linear-gradient(rgba(11, 118, 219, 1), rgba(7, 74, 137, 1))',
         'title' => "Trusted by drummers everywhere.",
-        'subTitle' => "Rated 5 stars by thousands by Drumeo students from around the world! See the reviews ››"
+        'subTitle' => "Rated 5 stars by thousands by Drumeo students from around the world! See the reviews ››",
         'showTop' => true,
 ])
 

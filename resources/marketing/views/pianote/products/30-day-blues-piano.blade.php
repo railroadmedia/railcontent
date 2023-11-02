@@ -251,25 +251,16 @@ $features = [
     [
         'title' => 'Course Kick-Off',
         'posterImage' => 'https://i.vimeocdn.com/video/1706069049-5c9a9ce3570e3622a46ed50a69adc9c95aadf315619524ec972daf689e6ad7d8-d?mw=1000&mh=1000&q=70',
-        'dataOpen' => 'kick-off',
         'videoId' => 851379131,
     ],
     [
         'title' => 'Blues Essentials',
         'posterImage' => 'https://i.vimeocdn.com/video/1706072524-8e70123f338ddd11d4ac00e8db3a4ba7c04bdfe4333b17a25270add04760991d-d?mw=1000&mh=1000&q=70',
-        'dataOpen' => 'essentials',
         'videoId' => 851379154,
     ],
 ];
 @endphp
 
-@foreach ($features as $feature)
-    @include('drumeo.sales.partials._video-modal', [
-        'modalId' => $feature['dataOpen'],
-        'video' => '//player.vimeo.com/video/' . $feature['videoId'],
-        'title' => $feature['dataOpen'],
-    ])
-@endforeach
 
 @include('drumeo.products.partials.evergreen._lessons', [
     'title' => 'Learn the drums by actually playing the drums.',
@@ -279,9 +270,7 @@ $features = [
     'lessonTitle' => 'Course Lessons',
     'instructor' => ' Kevin Castro',
     'course' => ' 32 video lessons',
-    'lessons' => $lessons,
-    'video' => 'https://player.vimeo.com/video/' . $feature['videoId']
-
+    'lessons' => $lessons
 ])
 
 @php 

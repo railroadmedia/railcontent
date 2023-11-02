@@ -278,13 +278,6 @@ $features = [
 ];
 @endphp
 
-@foreach ($features as $feature)
-    @include('drumeo.sales.partials._video-modal', [
-        'modalId' => $feature['dataOpen'],
-        'video' => '//player.vimeo.com/video/' . $feature['videoId'],
-        'title' => $feature['dataOpen'],
-    ])
-@endforeach
 
 
 @include('drumeo.products.partials.evergreen._lessons', [
