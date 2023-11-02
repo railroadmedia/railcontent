@@ -28,8 +28,6 @@ Route::domain('{drumeoDomain}')
             Route::get('/eardrums-members', [SalesController::class, 'eardrumsMembers'] );
             Route::get('/quietkick', [SalesController::class, 'quietKick'] );
             Route::get('/tone-control-kit', [SalesController::class, 'toneControl'] );
-            Route::get('/5-for-3-bundle', [SalesController::class, 'fiveforthreeBundle'] );
-
             Route::get('/{productslug}', [ShopController::class, 'product']);
         }
     );

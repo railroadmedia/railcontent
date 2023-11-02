@@ -6,6 +6,23 @@
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/marketing/parcel/drumeo/drum-shop.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+    <style>
+
+        .splide__arrow--next {
+            right: -12px;
+        }
+
+        @media (min-width: 1140px) {
+            .splide__arrow--next {
+                right: -50px;
+            }
+        }
+        .splide__arrow svg{
+            fill: #0B76DB !important;
+        }
+    </style>
 @endsection
 
 @section('body-data')
@@ -16,7 +33,7 @@
 @endsection
 
 @section('layout-body')
-    <div class="shipping-delay p-2 z-50">
+    <div class="shipping-delay p-2 z-40">
         <div class="delay-bar text-center">
             <div class="container mx-auto">
                 <p class="cursor-pointer hover:underline" @click="shippingModal = true;"><i class="fas fa-truck"></i> <strong>FREE SHIPPING OVER $150</strong></p>
@@ -49,9 +66,118 @@
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
+
     <script>
+        var Sorting = {
+            sortItems: function(sortValue, sortDirection){
+                var sortItems = [];
+
+                $('.product-wrap').each(function(){
+                    var thisItem = $(this),
+                        thisData = $(this).data(sortValue);
+
+                    sortItems.push({
+                        item: thisItem,
+                        data: thisData
+                    });
+                });
+
+                if(sortDirection === 'desc'){
+                    sortItems.sort(
+                        Sorting.dynamicSort('data')
+                    );
+                }
+                else {
+                    sortItems.sort(
+                        Sorting.dynamicSort('-data')
+                    );
+                }
+
+                $.each(sortItems, function(){
+                    var thisItem = $(this.item),
+                        lastItem = $(sortItems[sortItems.length - 1].item);
+
+                    thisItem.insertBefore(lastItem);
+                });
+            },
+            sortInSection: function(sortValue, sortDirection){
+                var sections = $('.category-section');
+
+                sections.each(function(){
+                    var sortItems = [];
+                    var sectionCards = $(this).find('.product-wrap');
+
+                    sectionCards.each(function(){
+                        var thisItem = $(this),
+                            thisData = $(this).data(sortValue);
+
+                        sortItems.push({
+                            item: thisItem,
+                            data: thisData
+                        });
+                    });
+
+                    if(sortDirection === 'desc'){
+                        sortItems.sort(
+                            Sorting.dynamicSort('data')
+                        );
+                    }
+                    else {
+                        sortItems.sort(
+                            Sorting.dynamicSort('-data')
+                        );
+                    }
+
+                    $.each(sortItems, function(){
+                        var thisItem = $(this.item),
+                            lastItem = $(sortItems[sortItems.length - 1].item);
+
+                        thisItem.insertBefore(lastItem);
+                    });
+                });
+            },
+            dynamicSort: function(property){
+                var sortOrder = 1;
+
+                if(property[0] === "-") {
+                    sortOrder = -1;
+                    property = property.substr(1);
+                }
+                return function (a,b) {
+                    var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+                    return result * sortOrder;
+                };
+            }
+        };
+
         $(function () {
-            $('.scalable-card').click(function (e) {
+            $('#sortOrder')
+                .change(function () {
+                    switch($(this).val()){
+                        case 'Price: Low to High':
+                            Sorting.sortItems('price', 'desc');
+                            break;
+                        case 'Price: High to Low':
+                            Sorting.sortItems('price', 'asc');
+                            break;
+                    }
+                });
+
+            $('#sortBySection')
+                .change(function () {
+                    switch($(this).val()){
+                        case 'Price: Low to High':
+                            Sorting.sortInSection('price', 'desc');
+                            break;
+                        case 'Price: High to Low':
+                            Sorting.sortInSection('price', 'asc');
+                            break;
+                    }
+                });
+        });
+
+        $(function () {
+            $('.product-wrap').click(function (e) {
                 e.stopPropagation();
                 if (!$(e.target).is('.pack-pick') && !$(e.target).is('option') && !$(e.target).is('a') && !$(e.target).is('button')) {
                     $(this).toggleClass('flipped');
@@ -83,4 +209,5 @@
             });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 @endsection

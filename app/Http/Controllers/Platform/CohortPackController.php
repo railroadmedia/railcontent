@@ -3,8 +3,15 @@
 namespace App\Http\Controllers\Platform;
 
 use App\Modules\Content\Services\CohortService;
+use App\Modules\Content\Services\ContentPermissionsService;
+use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
+use App\Modules\Ecommerce\Services\ProductService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
+use Doctrine\ORM\ORMException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Entities\User;
@@ -12,28 +19,38 @@ use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Services\UserProductService as EcommerceUserProductService;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
+use Throwable;
 
 class CohortPackController
 {
-
     private ProductRepository $productRepository;
     private UserProductService $userProductService;
-    private EcommerceUserProductService $ecommerceUserProductService;
     private CohortService $cohortService;
     private ContentService $contentService;
+    private EcommerceUserProductService $ecommerceUserProductService;
+
+    private UserAccessPermissionsService $userAccessPermissionsService;
+    private ProductService $productService;
+    private ContentPermissionsService $contentPermissionsService;
 
     public function __construct(
         UserProductService $userProductService,
         EcommerceUserProductService $ecommerceUserProductService,
         ProductRepository $productRepository,
         CohortService $cohortService,
-        ContentService $contentService
+        ContentService $contentService,
+        UserAccessPermissionsService $userAccessPermissionsService,
+        ProductService $productService,
+        ContentPermissionsService $contentPermissionsService,
     ) {
         $this->userProductService = $userProductService;
         $this->ecommerceUserProductService = $ecommerceUserProductService;
         $this->productRepository = $productRepository;
         $this->cohortService = $cohortService;
         $this->contentService = $contentService;
+        $this->userAccessPermissionsService = $userAccessPermissionsService;
+        $this->productService = $productService;
+        $this->contentPermissionsService = $contentPermissionsService;
     }
 
     /**
@@ -51,14 +68,22 @@ class CohortPackController
         }
 
         $productId = $cohort['product_id'];
-        $product = $this->productRepository->findProduct($productId);
+        $product = $this->productService->getById($productId);
 
-        $hasProduct = user() && $this->userProductService->hasProductNotCached(user()?->id, $productId);
-        $nPackOwners = $this->userProductService->getNumberProductOwners($productId);
+        if (!config('shopify.enabled')) {
+            $hasProduct = user() && $this->userProductService->hasProductNotCached(user()?->id, $productId);
+            $nPackOwners = $this->userProductService->getNumberProductOwners($productId);
+        } else {
+            $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
+            $permissionID =
+                $product->getContentPermissions($contentPermissionsLookup)
+                    ->first()->id ?? null;
+            $hasProduct = user() && $this->userAccessPermissionsService->hasPermission(user()?->id, $permissionID);
+            $nPackOwners = $this->userAccessPermissionsService->getNumberPermissionOwners($permissionID);
+        }
         $registerButtonUrl =
             (!$hasProduct) ?
-                url()->route('platform.cohort.register', ['brand' => brand(), 'product' => $product->getSku()]) :
-                '#final';
+                url()->route('platform.cohort.register', ['brand' => brand(), 'product' => $product->sku]) : '#final';
 
         $enrollmentClosed = $cohort['enrollmentClosed'];
 
@@ -77,12 +102,14 @@ class CohortPackController
         $cohort['conversation_url'] =
             $cohort['conversation_thread_id'] ?
                 url()->route('forums.jump-to-thread', ['threadId' => $cohort['conversation_thread_id']]) : '';
-        $cohort['timeline_image_url'] = config('railcontent.cohort_timeline_image_urls')[brand()] ?? config('railcontent.cohort_timeline_image_urls')['pianote'];
-
+        $cohort['timeline_image_url'] =
+            config('railcontent.cohort_timeline_image_urls')[brand()]
+            ??
+            config('railcontent.cohort_timeline_image_urls')['pianote'];
 
         $lists = $cohort->lists;
         foreach ($lists as $list) {
-            $list->description = preg_replace('/{'.'enrolled'.'}/', $nPackOwners, $list->description);
+            $list->description = preg_replace('/{' . 'enrolled' . '}/', $nPackOwners, $list->description);
         }
         $cohort->lists = $lists;
 
@@ -94,7 +121,7 @@ class CohortPackController
             'cohort' => $cohort,
             'enrollmentClosed' => $enrollmentClosed,
             'homeUrl' => url()->route('platform.home', ['brand' => brand()]),
-            'purchased' => $purchased
+            'purchased' => $purchased,
         ]);
     }
 
@@ -113,23 +140,38 @@ class CohortPackController
     /**
      * @param string $sku
      * @param string $successMessage
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Throwable
+     * @param Request $request
+     * @return JsonResponse|RedirectResponse
+     * @throws ORMException
+     * @throws Throwable
      */
-    private function registerForProductPack(string $sku, string $successMessage, Request $request)
-    {
+    private function registerForProductPack(
+        string $sku,
+        string $successMessage,
+        Request $request
+    ): JsonResponse|RedirectResponse {
         if (user()?->isAMember()) {
             $user = new User(user()->id, user()->email, user()->getMembershipExpirationDate());
+            if (config('shopify.enabled')) {
+                $product = $this->productService->getBySku($sku);
+                $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
+                    $user->getId(),
+                    [$product->id],
+                    Carbon::now(),
+                    '',
+                    UserAccessPermissionsSourceEnum::Challenges
+                );
+            } else {
+                /** @var Product $product */
+                $product = $this->productRepository->bySku($sku);
+                $this->ecommerceUserProductService->assignUserProduct($user, $product, null, 1);
+            }
 
-            /** @var Product $product */
-            $product = $this->productRepository->bySku($sku);
-            $this->ecommerceUserProductService->assignUserProduct($user, $product, null, 1);
             if ($request->expectsJson()) {
                 return response()->json(
                     [
                         'success' => true,
-                        'message' => $successMessage
+                        'message' => $successMessage,
                     ],
                     200
                 );

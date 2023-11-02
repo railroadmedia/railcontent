@@ -7,6 +7,7 @@ use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use Carbon\Carbon;
 use App\Modules\Ecommerce\Services\PaymentService;
+use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Models\User;
 use Illuminate\Support\Facades\Log;
 
@@ -67,7 +68,10 @@ class RevenueCatService
             foreach ($entitlements as $entitlement) {
                 $productIdentifier = $entitlement->product_identifier;
                 $subscriptionData = $subscriptions->$productIdentifier;
-                if (Carbon::parse($subscriptionData->expires_date) >= now()->subDays(5)) {
+                if (Carbon::parse($subscriptionData->expires_date) >= now()->subDays(config(
+                                                                                         'ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only',
+                                                                                         7
+                                                                                     ))) {
                     $active = true;
                 }
                 $type = (strtolower($subscriptionData->store) == 'app_store') ? 'apple' : 'google';
@@ -147,14 +151,18 @@ class RevenueCatService
      * @param null $value
      * @param $appUserId
      * @param false $createIfNotExists
+     * @param array $aliases
      * @return User|null
      */
-    public function getUser($value = null, $appUserId, $createIfNotExists = false)
+    public function getUser($value = null, $appUserId, $createIfNotExists = false, $aliases = [])
     : ?User {
+        if(empty($aliases)){
+            $aliases = [$appUserId];
+        }
         $user =
             User::query()
                 ->where('email', $value)
-                ->orWhere('revenuecat_origin_app_user_id', $appUserId)
+                ->orWhereIn('revenuecat_origin_app_user_id', $aliases)
                 ->first();
         if (!$user && $createIfNotExists && $value) {
             $parts = explode('@', $value);
@@ -164,6 +172,7 @@ class RevenueCatService
             $user->display_name = $parts[0].rand(10000, 99999);
             $user->revenuecat_origin_app_user_id = $appUserId;
             $user->save();
+            event(new UserCreated($user));
         } elseif ($user) {
             $user->revenuecat_origin_app_user_id = $appUserId;
             $user->save();

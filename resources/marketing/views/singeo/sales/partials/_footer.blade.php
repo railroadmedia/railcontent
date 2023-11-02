@@ -42,11 +42,11 @@
         display: inline-block;
         margin-right: 2%;
         margin-top: 10px;" href="https://apps.apple.com/us/app/musora/id1619053766?ppid=101a6930-1058-4aae-9584-1a25cec367a0" target="_blank">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="app store icon"></a>
+                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/download-on-app-store-button.png" alt="app store icon"></a>
             <a style="width: 48%;max-width:130px;
         display: inline-block;
         margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=singeo_previews" target="_blank">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="google play icon"></a>
+                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/google-play-button.png" alt="google play icon"></a>
         </div>
         <div class="footer-link-wrap">
             <h1>Resources</h1>

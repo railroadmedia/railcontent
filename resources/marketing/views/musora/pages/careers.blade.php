@@ -13,26 +13,133 @@
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
 
     <style>
-         .join.gradient-outline.fill-white {
-            /*background: white;*/
-            /*background-clip: padding-box;*/
-            color: #0b76db!important;
+        .join {
+            display:inline-block;
+            font:500 22px/1em 'Bebas Neue', sans-serif;
+            letter-spacing:0.1em;
+            text-transform:uppercase;
+            background:#0c1524;
+            border-radius:50px;
+            color:#fff;
+            padding:17px 7%;
+            outline:none;
+            cursor:pointer;
+            text-align:center;
+            user-select:none;
+            text-decoration:none;
+            transition:background-color 0.3s, color 0.3s, opacity 0.3s;
+            box-shadow:0 0 0 rgba(0, 0, 0, 0.35);
         }
-         .join.gradient-outline.fill-white:hover {
-            color: #fff!important;
+
+        @media (min-width:768px) {
+            .join {
+                font-size:30px;
+            }
         }
-        /*.join.gradient-outline:before {*/
-        /*    content:' ';*/
-        /*    position: absolute;*/
-        /*    top: 0;*/
-        /*    right: 0;*/
-        /*    bottom: 0;*/
-        /*    left: 0;*/
-        /*    z-index: -1;*/
-        /*    border-radius: inherit;*/
-        /*    background: linear-gradient(90deg,#03c8ac, #0976db, #9a01ee, #f61a30) no-repeat;*/
-        /*    margin: -2px;*/
-        /*}*/
+
+        .join:hover, .join:focus {
+            color:#fff;
+            background:#14233d;
+            box-shadow:0 0 7px rgba(0, 0, 0, 0.35);
+        }
+        .join i {
+            transition:all .3s;
+            position:relative;
+            right:0px;
+        }
+        .join:hover i {
+            right:-3px;
+        }
+
+        .join.white {
+            background:#fff;
+            color:#000;
+        }
+
+        .join.white:hover, .join.white:focus {
+            background:#eee;
+        }
+
+        .join.smaller {
+            padding:8px 30px;
+            font-size:16px;
+        }
+
+        @media (min-width:768px) {
+            .join.smaller {
+                font-size:18px;
+                padding:11px 30px;
+            }
+        }
+
+        .join.smaller.outline {
+            padding:8px 28px 6px;
+            font-size:16px;
+        }
+
+        @media (min-width:768px) {
+            .join.smaller.outline {
+                font-size:18px;
+                padding:10px 28px 8px;
+            }
+        }
+
+        .join.musora-gold {
+            background-color:#FFAE00;
+            color:#000;
+        }
+
+        .join.musora-gold:hover, .join.musora-gold:focus {
+            background:#FFAE00;
+            color:#000;
+        }
+
+        .join.outline {
+            background:transparent;
+            outline-style:none !important;
+            border:1px solid #fff;
+            color:#fff;
+            padding:6px 12px;
+        }
+
+        @media (min-width:768px) {
+            .join.outline {
+                border-width:2px;
+                padding:11px 30px;
+            }
+        }
+
+        .join.outline:hover, .join.outline:focus {
+            background:#fff;
+            color:#000;
+        }
+
+        .join.outline.black {
+            border-color:#000;
+            color:#000;
+        }
+        .join.outline.black:hover, .join.outline.black:focus {
+            background:#000;
+            color:#fff;
+        }
+        .join.outline.musora {
+            border-color:#0c1524;
+            color:#0c1524;
+        }
+
+        .join.outline.musora:hover, .join.outline.musora:focus {
+            background:#0c1524;
+            color:#fff;
+        }
+
+        .text-musora-black {
+            color:#0c1524;
+        }
+
+        .text-musora,
+        .text-musora-gold {
+            color:#FFAE00;
+        }
     </style>
 @endsection
 
@@ -45,8 +152,7 @@
             <a href="#process" class="anchor-slide"><h6 class="font-bebas mr-3 sm:mr-8 lg:mr-12">OUR HIRING PROCESS</h6></a>
             <a href="#perks" class="anchor-slide"><h6 class="font-bebas mr-3 sm:mr-0">OUR PERKS</h6></a>
         </div>
-        {{-- <a class="join gradient-outline fill-white smaller whitespace-nowrap anchor-slide relative" href="#join">APPLY NOW</a> --}}
-        <a class="join gradient-outline smaller whitespace-nowrap anchor-slide relative rounded-full bg-white text-musora hover:text-black py-2 px-3 md:py-3 md:px-5 text-sm tracking-widest font-medium border-2 border-musora" href="#join">APPLY NOW</a>
+        <a class="join smaller musora-gold whitespace-nowrap anchor-slide relative py-2 px-3 md:py-3 md:px-5 text-sm" href="#join">APPLY NOW</a>
     </div>
     <div class="w-full h-10 sm:h-12 lg:h-14"></div>
     <header class="pb-24 sm:pb-32 pt-32 sm:pt-40 text-white text-center relative" style="background-color:#0c1524;">
@@ -79,8 +185,8 @@
                 onload="this.classList.remove('opacity-0')"
                 alt="singeo logo"
             >
-            <h1 class="mt-2 mb-11"><strong>Careers at Musora</strong></h1>
-            <a class="join bg-musora text-black" href="#join">APPLY NOW</a>
+            <h1 class="mt-2 mb-5"><strong>Careers at Musora</strong></h1>
+            <a class="join smaller musora-gold" href="#join">APPLY NOW</a>
         </div>
     </header>
     <div id="values" class="anchor block relative invisible"></div>
@@ -154,10 +260,14 @@
 
             <div id="join" class="anchor block relative invisible"></div>
             <h3 class="mb-5 sm:mb-10"><strong>Join our team:</strong></h3>
+{{--            <div class="max-w-5xl mx-auto mb-14 sm:mb-20 xl:px-5">--}}
+{{--                <div class="w-full relative" style="height:370px;">--}}
+{{--                    <iframe class="absolute w-full h-full" src="/careers-pinpoint" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>--}}
+{{--                </div>--}}
+{{--            </div>--}}
             <div class="max-w-4xl mx-auto mb-14 sm:mb-20">
-                <div class="w-full relative" style="height:500px;">
+                <div class="w-full relative" style="height:600px;">
                     <iframe style="filter: invert(1) hue-rotate(30deg) saturate(1.5);" class="absolute w-full h-full rounded-lg" src="https://musoramediainc.bamboohr.com/careers/" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>
-{{--                    <iframe class="absolute w-full h-full rounded-lg" src="/careers-pinpoint" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>--}}
                 </div>
             </div>
 
@@ -167,7 +277,7 @@
                 right time, or there’s not an opening for what you do best — just click the <br class="hidden md:inline">
                 link below to join our talent pool for future opportunities.
             </p>
-            <a class="join bg-musora text-black" target="_blank" href="https://musoramediainc.bamboohr.com/careers/58">JOIN TALENT POOL <i class="fa-light fa-smile-plus"></i></a>
+            <a class="join smaller musora-gold text-black" target="_blank" href="https://musora.pinpointhq.com/en/postings/37e00d05-4dc8-47b3-97e8-68b7d1b4019e">JOIN TALENT POOL <i class="fa-light fa-smile-plus"></i></a>
         </div>
     </section>
     <section class="py-12 sm:py-16 lg:py-20 px-4 sm:px-5 relative">

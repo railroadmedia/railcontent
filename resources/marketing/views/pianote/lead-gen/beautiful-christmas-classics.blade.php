@@ -1,29 +1,3 @@
-@php
-    $lessons = [
-        [
-            'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/720x0/filters:quality(95)/marketing/drumeo/lead-gen/faster/the-tinder.jpg',
-            'title' => 'Away In A Manger',
-            'desc' => 'A beautiful, simple Christmas Carol that everybody knows and loves.',
-            'unlocked' => true,
-        ],
-        [
-            'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/720x0/filters:quality(95)/marketing/drumeo/lead-gen/faster/the-swiss-cheese.jpg',
-            'title' => 'What Child Is This?',
-            'desc' => 'A traditional Carol dating back to the 19th century. But still as beautiful and popular today.',
-        ],
-        [
-            'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/720x0/filters:quality(95)/marketing/drumeo/lead-gen/faster/double-trouble.jpg',
-            'title' => 'Jingle Bells',
-            'desc' => 'Bring the part this Christmas and play this favorite for your friends and family.',
-        ],
-        [
-            'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/720x0/filters:quality(95)/marketing/drumeo/lead-gen/faster/clavediddle.jpg',
-            'title' => 'Auld Lang Syne',
-            'desc' => 'Ready to ring in the new year? Now you can.',
-        ],
-    ];
-@endphp
-
 @extends('pianote.lead-gen.lead-gen-layout-tw')
 
 @section('meta')
@@ -113,6 +87,31 @@
                 downloadable music. It’s like learning the song with the teacher sitting right next to you.
             </p>
             <div class="grid sm:grid-cols-2 gap-6 items-stretch">
+                @php
+                    $lessons = [
+                        [
+                            'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/away.jpg',
+                            'title' => 'Away In A Manger',
+                            'desc' => 'A beautiful, simple Christmas Carol that everybody knows and loves.',
+                            'unlocked' => true,
+                        ],
+                        [
+                            'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/child.jpg',
+                            'title' => 'What Child Is This?',
+                            'desc' => 'A traditional Carol dating back to the 19th century. But still as beautiful and popular today.',
+                        ],
+                        [
+                            'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/jingle.jpg',
+                            'title' => 'Jingle Bells',
+                            'desc' => 'Bring the part this Christmas and play this favorite for your friends and family.',
+                        ],
+                        [
+                            'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/auld.jpg',
+                            'title' => 'Auld Lang Syne',
+                            'desc' => 'Ready to ring in the new year? Now you can.',
+                        ],
+                    ];
+                @endphp
                 @foreach($lessons as $key => $lesson)
                     <div class="rounded-xl overflow-hidden" style="background: #F6F8FC; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
                         <div class="relative">
@@ -229,10 +228,9 @@
         </div>
     </section>
 
-
     @include('_partials.components.video-modal',[
         'name' => 'sampleLesson',
-        'video' => '806957290',
+        'video' => '877678289',
         'vimeo' => true,
     ])
 @stop

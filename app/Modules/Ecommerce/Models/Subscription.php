@@ -8,38 +8,26 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\UserManagementSystem\Models\User;
 
 /**
  * Class Subscription
  *
  * @package App\Modules\Ecommerce\Models
- * @property integer $id
+ * @property int $id
  * @property string $brand
  * @property string $type
- * @property integer $user_id
- * @property ?integer $customer_id
- * @property integer $order_id
- * @property integer $product_id
+ * @property int $user_id
+ * @property ?int $customer_id
+ * @property int $order_id
+ * @property int $product_id
  * @property bool $is_active
  * @property bool $stopped
  * @property Carbon $start_date
  * @property Carbon $paid_until
  * @property Carbon $canceled_on
  * @property string $cancellation_reason
- * @property string note
- * @property float total_price
- * @property float tax
- * @property string currency
- * @property string interval_type
- * @property int interval_count
- * @property ?int total_cycles_due
- * @property int total_cycles_paid
- * @property int renewal_attempt
- * @property ?int payment_method_id
- * @property Carbon apple_expiration_date
- * @property string external_app_store_id
- * @property string paypal_recurring_profile_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
@@ -59,6 +47,7 @@ use Modules\UserManagementSystem\Models\User;
  * @property string|null $paypal_recurring_profile_id
  * @property int|null $failed_payment_id
  * @property-read User|null $user
+ * @property ?PaymentMethod $paymentMethod
  * @method static \App\Modules\Ecommerce\database\factories\SubscriptionFactory factory(...$parameters)
  * @method static Builder|Subscription fromUser(int $userId)
  * @method static Builder|Subscription newModelQuery()
@@ -100,6 +89,7 @@ use Modules\UserManagementSystem\Models\User;
 class Subscription extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     const TYPE_SUBSCRIPTION = 'subscription';
     const TYPE_APPLE_SUBSCRIPTION = 'apple_subscription';
@@ -122,6 +112,11 @@ class Subscription extends Model
 
     protected $primaryKey = 'id';
 
+    protected static function newFactory(): SubscriptionFactory
+    {
+        return SubscriptionFactory::new();
+    }
+
     public function scopeFromUser(Builder $query, int $userId): Builder
     {
         return $query->where('user_id', '=', $userId);
@@ -132,11 +127,6 @@ class Subscription extends Model
         return $query->where('canceled_on', 'is', null);
     }
 
-    protected static function newFactory(): SubscriptionFactory
-    {
-        return SubscriptionFactory::new();
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -145,6 +135,11 @@ class Subscription extends Model
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class, 'payment_method_id');
     }
 
     public function getIntervalType(): SubscriptionIntervalType

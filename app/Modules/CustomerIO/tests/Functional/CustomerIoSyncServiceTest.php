@@ -53,7 +53,7 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
         $this->createLifetimeProduct($user);
         $user->refresh();
 
-        $this->customerIoSyncService->getUsersMembershipAccessAttributes($user);
+        $this->customerIoSyncService->getUsersMembershipAccessAttributesDeprecated($user);
 
         $lifetimeAccess = $this->getLifetimeMembershipAccessAttributes($user);
         $lifetimeMemberships = $this->getTrueLifetimeMembershipAccessAttributes($lifetimeAccess);
@@ -195,7 +195,7 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
      */
     private function getLifetimeMembershipAccessAttributes(User $user): Collection
     {
-        $membershipAccessAttributes = collect($this->customerIoSyncService->getUsersMembershipAccessAttributes($user));
+        $membershipAccessAttributes = collect($this->customerIoSyncService->getUsersMembershipAccessAttributesDeprecated($user));
         return $membershipAccessAttributes->filter(function ($value, $key) {
             return Str::endsWith($key, "membership_is_lifetime");
         });

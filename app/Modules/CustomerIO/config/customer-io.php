@@ -278,6 +278,16 @@ return [
                     'drumeo',
                 ],
             ],
+            'Drumeo Drumset Giveaway' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_drumset-giveaway-2023',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
             'Drumeo Giveaway Rafflepress' => [
                 'custom_attributes' => [
                 ],
@@ -330,6 +340,16 @@ return [
             ],
         ],
         'pianote' => [
+            'Metronome Notice' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_metronome-notice',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Blues Piano Bootcamp' => [
                 'custom_attributes' => [
                 ],
@@ -584,7 +604,7 @@ return [
                 'custom_attributes' => [
                 ],
                 'events' => [
-                    'pianote_prospect_fp30-giveaway',
+                    'pianote_prospect_giveaway-2023',
                 ],
                 'accounts_to_sync' => [
                     'pianote',

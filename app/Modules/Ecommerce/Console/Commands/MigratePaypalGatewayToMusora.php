@@ -6,7 +6,7 @@ use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Ecommerce\Models\CreditCard;
 use App\Modules\Ecommerce\Models\Payment;
 use App\Modules\Ecommerce\Models\PaymentMethod;
-use App\Modules\Ecommerce\Models\PaypalBillingAgreements;
+use App\Modules\Ecommerce\Models\PaypalBillingAgreement;
 use App\Modules\Ecommerce\Models\StripeCustomer;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\UserPaymentMethod;
@@ -27,7 +27,7 @@ class MigratePaypalGatewayToMusora extends Command
         $userId = $this->argument('id') ?? 0;
         $toUserId = $this->argument('toId') ?? 9999999;
         $this->withExecutionTime(function () use ($userId, $toUserId) {
-            $query = PaypalBillingAgreements::query()
+            $query = PaypalBillingAgreement::query()
                 ->orderBy('id')
                 ->where('id', '>=', $userId)
                 ->where('id', '<=', $toUserId)
