@@ -159,7 +159,7 @@ class UserProductToUserContentPermissionListener
         CacheHelper::deleteUserFields([ConfigService::$redisPrefix . ':userId_' . $userId,], 'content');
     }
 
-    private function buildUserPermissionsList(int $userId): array
+    public function buildUserPermissionsList(int $userId): array
     {
         $userProducts = $this->userProductService->getUserProductsQuery($userId)->with('product')->get();
         $permissionsLookup = $this->contentPermissionsService->getAll()->keyBy(function ($permission) {

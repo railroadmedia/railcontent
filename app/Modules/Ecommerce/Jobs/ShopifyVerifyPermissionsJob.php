@@ -10,6 +10,7 @@ use App\Modules\Ecommerce\Enums\SubscriptionIntervalType;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
+use App\Modules\EventDataSynchronizer\Listeners\UserProductToUserContentPermissionListener;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -53,6 +54,9 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
     {
         $this->userAccessPermissionsService = app(UserAccessPermissionsService::class);
         $this->contentPermissionsService = app(ContentPermissionsService::class);
+        /** @var UserProductToUserContentPermissionListener $cs */
+        $cs = app()->make(UserProductToUserContentPermissionListener::class);
+
         foreach ($items as $user) {
             /** @var User $item */
             try {
@@ -60,42 +64,56 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
 
                 $newExpirationDate = $userAccessPermissions->getMembershipExpirationDate();
                 $oldExpirationDate = $user->membership_expiration_date;
-
+                if ($oldExpirationDate == null && $user->isALifetimeMember()) {
+                    $oldExpirationDate = Carbon::maxValue();
+                }
                 $diff = $newExpirationDate?->diffInDays($oldExpirationDate);
                 Log::info("$user->id:Verifying user permissions");
-                if ($diff == null || $diff > 0) {
+                if (is_null($diff) || $diff > 0) {
                     Log::warning("$user->id:$oldExpirationDate -> $newExpirationDate ($diff)");
                 }
 
                 $permissionIds = $userAccessPermissions->getActivePermissionIds();
-                $existingUserPermissions = $this->contentPermissionsService->getUserPermissions($user->id)->keyBy(
-                    'permission_id'
-                );
+//                $existingUserPermissions = $this->contentPermissionsService->getUserPermissions($user->id)->keyBy(
+//                    'permission_id'
+//                );
 
-                $toDeleteIds = $existingUserPermissions->where(function ($item, $key) use ($permissionIds) {
-                    return !in_array($key, $permissionIds);
-                })->pluck('id')->toArray();
+                $permissions = $cs->buildUserPermissionsList($user->id);
+
+
+                $toDeleteIds = collect($permissions)->where(function ($item, $key) use ($permissionIds) {
+                    return !in_array($key, $permissionIds) && $item['expiration_date'] >= Carbon::now();
+                })->keys()->toArray();
+
 
                 foreach ($permissionIds as $permissionId) {
                     list($startDate, $expirationDate) = $userAccessPermissions->getActiveDates($permissionId);
                     /** @var UserPermission $userPermission */
-                    $userPermission = $existingUserPermissions[$permissionId] ?? null;
+                    $userPermission = $permissions[$permissionId] ?? null;
                     if ($userPermission == null) {
                         Log::warning(
                             "$user->id:User permission not found for user:$user->id, permission:$permissionId ($startDate - $expirationDate)"
                         );
+                        continue;
                     }
-                    $diffStart = $startDate?->diffInDays($userPermission->start_date);
-                    $diffExpiration = $expirationDate?->diffInDays($userPermission->expiration_date);
-                    if ($diffStart == null || $diffStart > 0) {
-                        Log::warning("$user->id:$permissionId $oldExpirationDate -> $newExpirationDate ($diffStart)");
+
+                    $oldStartDate = $userPermission['start_date'];
+                    $oldExpirationDate = $userPermission['expiration_date'] ?? Carbon::maxValue();
+                    $diffStart = $oldStartDate ? $startDate?->diffInDays($oldStartDate) : null;
+                    $diffExpiration = $oldExpirationDate ? $expirationDate?->diffInDays($oldExpirationDate) : null;
+                    if ($startDate > Carbon::now()) {
+                        Log::warning("$user->id:$permissionId start date in the future");
                     }
-                    if ($diffExpiration == null || $diffExpiration > 0) {
-                        Log::warning("$user->id:$permissionId $oldExpirationDate -> $newExpirationDate ($diffExpiration)");
+                    if (is_null($diffExpiration) || $diffExpiration > 0) {
+                        Log::warning(
+                            "$user->id:$permissionId $oldExpirationDate -> $expirationDate ($diffExpiration)"
+                        );
                     }
                 }
 
-                Log::warning("$user->id:Deleting user permissions:" . implode(',', $toDeleteIds));
+                if (count($toDeleteIds) > 0) {
+                    Log::warning("$user->id:Deleting user permissions:" . implode(',', $toDeleteIds));
+                }
             } catch (\Throwable $ex) {
                 Log::error("$user->id:Error verifying user permissions");
                 Log::error($ex);

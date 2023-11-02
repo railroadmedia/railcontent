@@ -58,6 +58,10 @@ class ShopifySyncService
     public function syncCustomer($shopifyCustomerId, $email = ''): void
     {
         if (!$shopifyCustomerId) {
+            $user = $this->userService->getByEmailOrNull($email);
+            if ($user) {
+                $this->userAccessPermissionsService->syncUser($user);
+            }
             return;
         }
         Log::debug("Customer $shopifyCustomerId: GetCustomerOrders");
@@ -81,11 +85,9 @@ class ShopifySyncService
 
     public function syncCustomerByEmail($email)
     {
-        if (!config('shopify.enabled')) {
-            return;
-        }
-        $customers = $this->shopify->getCustomers(['email' => $email]);
-        $customer = collect($customers)->first(fn($item) => $item->email === $email);
+        $emailShopify = $this->getEmailForShopify($email);
+        $customers = $this->shopify->getCustomers(['email' => $emailShopify]);
+        $customer = collect($customers)->first(fn($item) => $item->email === $emailShopify);
         if (!$customer) {
             throw new \Exception("Shopify customer not found for email: $email");
         }
