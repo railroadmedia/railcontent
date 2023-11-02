@@ -41,12 +41,10 @@ Route::domain('{singeoDomain}')
     Route::get('/preferences', [SalesController::class, 'preferences']);
     Route::get('/lets-sing-a-song', [SalesController::class, 'letssingasong']);
     Route::get('/welcome-party', [SalesController::class, 'welcomeparty']);
-    Route::get('/shop/singing-starter-kit', [SalesController::class, 'singingstarterkit']);
     Route::get('/singingstarterkit', [SalesController::class, 'singingstarterkitalt']);
     Route::get('/singing-starter-kit-discount', [SalesController::class, 'singingstarterkitdiscount']);
     Route::get('/singing-starter-kit-shyv-discount', [SalesController::class, 'singingstarterkitshyvdiscount']);
     Route::get('/recitals', [SalesController::class, 'recitals']);
-    Route::get('/beautiful-harmonies', [SalesController::class, 'beautifulharmonies']);
     Route::get('/lifetime-members-masterclass', [SalesController::class, 'lifetimeMasterclass']);
 
     Route::group(['prefix' => 'beginner-vocal-bootcamp'],
