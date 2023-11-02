@@ -132,7 +132,9 @@ class UserProductToUserContentPermissionListener
             $this->syncContentPermissions($userId, $userAccessPermissions);
             return;
         }
+        Log::info('Syncing user permissions for user id: ' . $userId);
         $userPermissions = $this->buildUserPermissionsList($userId);
+        Log::info('Found ' . count($userPermissions) . ' permissions to sync for user id: ' . $userId);
         $existingPermissions = UserPermission::query()->where('user_id', '=', $userId)
             ->whereIn('permission_id', array_keys($userPermissions))->get()->keyBy('permission_id');
 
@@ -143,11 +145,13 @@ class UserProductToUserContentPermissionListener
             $existingPermission = $existingPermissions[$permissionId] ?? null;
             $now = Carbon::now();
             if (!$existingPermission) {
+                Log::info('Creating new permission for user id: ' . $userId . ' permission id: ' . $permissionId);
                 $existingPermission = new UserPermission();
                 $existingPermission->user_id = $userId;
                 $existingPermission->permission_id = $permissionId;
                 $existingPermission->created_on = $now;
             } elseif ($existingPermission->start_date == $startDate && $existingPermission->expiration_date == $expirationDate) {
+                Log::info('Permission already exists for user id: ' . $userId . ' permission id: ' . $permissionId);
                 continue; //no changes necessary save a query
             }
             $existingPermission->start_date = $startDate;
@@ -155,6 +159,7 @@ class UserProductToUserContentPermissionListener
             $existingPermissions->updated_on = $now;
             $existingPermission->save();
         }
+        Log::info('Finished syncing user permissions for user id: ' . $userId);
         // clear the railcontent cache
         CacheHelper::deleteUserFields([ConfigService::$redisPrefix . ':userId_' . $userId,], 'content');
     }
