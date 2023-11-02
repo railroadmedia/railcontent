@@ -73,14 +73,9 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
      *
      * @param Throwable $exception
      */
-    public function failed(Throwable $exception)
+    public function failed(Throwable $exception): void
     {
-        error_log(
-            'Error on CustomerIoSyncNewUserByEmail job trying to sync user to customer.io. User ID: ' .
-            $this->user->id . ' - lookupEmail: ' . $this->user->email
-        );
-
-        error_log($exception);
+        \Log::error('CustomerIoSyncNewUserByEmail job failed for user: ' . $this->user->id);
 
         parent::failed($exception);
     }
