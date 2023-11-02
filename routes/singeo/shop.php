@@ -6,8 +6,14 @@ use App\Http\Controllers\Singeo\ShopController;
 Route::domain('{singeoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
-    Route::get('/shop', [ShopController::class, 'shop']);
+        Route::group(['prefix' => 'shop' ],
+            function () {
+            }
+        );
 
-    Route::get('/shop/{productslug}', [ShopController::class, 'product']);
+        Route::get('/{category}', [ShopController::class, 'shop'])
+            ->whereIn('category', ['shop', 'lessons', 'accessories', 'clothing']);;
+
+        Route::get('/shop/{productslug}', [ShopController::class, 'product']);
 });
 
