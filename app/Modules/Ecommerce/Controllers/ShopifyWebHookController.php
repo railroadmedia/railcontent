@@ -119,7 +119,7 @@ class ShopifyWebHookController extends Controller
         dispatch(
             new CustomerIoCreateEventByUserId(
                 $user->id,
-                'musora',
+                $brand,
                 'musora_user_refund',
                 $data,
                 null,
