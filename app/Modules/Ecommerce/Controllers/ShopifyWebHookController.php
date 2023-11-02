@@ -95,7 +95,7 @@ class ShopifyWebHookController extends Controller
             dispatch(
                 new CustomerIoCreateEventByUserId(
                     $user->id,
-                    'musora',
+                    $brand,
                     $brand . "_user_order",
                     $data,
                     null,
