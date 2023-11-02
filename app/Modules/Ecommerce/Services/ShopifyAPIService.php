@@ -462,11 +462,24 @@ class ShopifyAPIService
         $productData = $this->adminClient->query(
             <<<GRAPHQL
                 query {
-                    productVariants(first: 100, query: "$productsQueryString") {
+                    productVariants(first: 20, query: "$productsQueryString") {
                         edges {
                             node {
                                 id
                                 sku
+                                sellingPlanGroups(first: 1) {
+                                	edges {
+                                		node {
+                                			sellingPlans(first: 1) {
+                                				edges {
+                                		            node {
+                                		                id
+                                			        }
+                                			    }
+                                			}
+                                		}
+                                	}
+                                }
                             }
                         }
                     }
