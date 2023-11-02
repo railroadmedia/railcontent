@@ -160,7 +160,7 @@ class ShopifyAPIService
     }
 
     /**
-     * @param array $productVariantIdsToAddToCart // ex: [ 'variant_id_1' => quantity, 'variant_id_2' => quantity ]
+     * @param array $productVariantIdsToAddToCart // ex: [ 'variant_id_1' => ['quantity' => 1, 'sellingPlanId' => 123], 'variant_id_2' => ['quantity' => 1, 'sellingPlanId' => 123] ]
      * @param array $discountCodesToAddToCard
      * @return array
      * @throws MissingArgumentException
@@ -168,16 +168,22 @@ class ShopifyAPIService
      * @throws Exception
      */
     public function createCart(
-        array $productVariantIdsToAddToCart = [],
+        array $productVariantIdsAndSellingPlanIdsToAddToCart = [],
         array $discountCodesToAddToCard = []
     ): array {
         $createCartInputLineArray = [];
 
-        foreach ($productVariantIdsToAddToCart as $productVariantIdToAddToCart => $quantity) {
-            $createCartInputLineArray[] = [
-                'quantity' => $quantity,
+        foreach ($productVariantIdsAndSellingPlanIdsToAddToCart as $productVariantIdToAddToCart => $quantityAndSellingPlanId) {
+            $createCartInputLineItem = [
+                'quantity' => (integer)$quantityAndSellingPlanId['quantity'],
                 'merchandiseId' => $productVariantIdToAddToCart
             ];
+
+            if (!empty($quantityAndSellingPlanId['sellingPlanId'])) {
+                $createCartInputLineItem['sellingPlanId'] = $quantityAndSellingPlanId['sellingPlanId'];
+            }
+
+            $createCartInputLineArray[] = $createCartInputLineItem;
         }
 
         $createCartInputLineString = $this->jsonStringToGraphQLObjectString(
@@ -227,23 +233,28 @@ class ShopifyAPIService
 
     /**
      * @param $cartId
-     * @param array $productVariantIdsToAddToCart
+     * @param array $productVariantIdsAndSellingPlanIdsToAddToCart
      * @return array
      * @throws HttpRequestException
      * @throws MissingArgumentException
-     * @throws Exception
      */
     public function addToCart(
         $cartId,
-        array $productVariantIdsToAddToCart = []
+        array $productVariantIdsAndSellingPlanIdsToAddToCart = []
     ): array {
         $createCartInputLineArray = [];
 
-        foreach ($productVariantIdsToAddToCart as $productVariantIdToAddToCart => $quantity) {
-            $createCartInputLineArray[] = [
-                'quantity' => $quantity,
+        foreach ($productVariantIdsAndSellingPlanIdsToAddToCart as $productVariantIdToAddToCart => $quantityAndSellingPlanId) {
+            $createCartInputLineItem = [
+                'quantity' => (integer)$quantityAndSellingPlanId['quantity'],
                 'merchandiseId' => $productVariantIdToAddToCart
             ];
+
+            if (!empty($quantityAndSellingPlanId['sellingPlanId'])) {
+                $createCartInputLineItem['sellingPlanId'] = $quantityAndSellingPlanId['sellingPlanId'];
+            }
+
+            $createCartInputLineArray[] = $createCartInputLineItem;
         }
 
         $createCartInputLineString = $this->jsonStringToGraphQLObjectString(
@@ -509,6 +520,89 @@ class ShopifyAPIService
         }
 
         return $productSKUsVariantIds;
+    }
+
+    /**
+     * This accepts either Shopify product SKUs or product variant SKUs.
+     *
+     * @param array $productSKUs
+     * @return array
+     * @throws HttpRequestException
+     * @throws MissingArgumentException
+     */
+    public function getProductsVariantsWithSellingPlansFromSKUs(array $productSKUs)
+    {
+        $productSKUsQueryStrings = [];
+
+        foreach ($productSKUs as $productSKU) {
+            $productSKUsQueryStrings[] = "(sku:$productSKU)";
+        }
+
+        $productsQueryString = implode(' OR ', $productSKUsQueryStrings);
+
+        $productData = $this->adminClient->query(
+            <<<GRAPHQL
+                query {
+                    productVariants(first: 20, query: "$productsQueryString") {
+                        edges {
+                            node {
+                                id
+                                sku
+                                availableForSale
+                                barcode
+                                requiresShipping
+                                title
+                                weight
+                                weightUnit
+                                sellingPlanGroups(first: 1) {
+                                	edges {
+                                		node {
+                                			sellingPlans(first: 1) {
+                                				edges {
+                                		            node {
+                                		                id
+                                		                description
+                                		                name
+                                		                options
+                                		                position
+                                			        }
+                                			    }
+                                			}
+                                		}
+                                	}
+                                }
+                            }
+                        }
+                    }
+                }
+            GRAPHQL
+        );
+
+        $responseBody = $productData->getBody()->getContents();
+        $responseCode = $productData->getStatusCode();
+
+        $jsonResponse = json_decode($responseBody, true);
+
+        $responseProductVariantData = $jsonResponse["data"]["productVariants"]["edges"] ?? [];
+
+        if ($responseCode !== 200 || empty($responseProductVariantData)) {
+            throw new Exception(
+                "Shopify API call (productVariants) error: " .
+                "HTTP status code: $responseCode - " .
+                "HTTP response body: $responseBody"
+            );
+        }
+
+        $productsData = [];
+
+        // always only return the first selling plan
+        foreach ($jsonResponse["data"]["productVariants"]["edges"] as $edge) {
+            $edge['node']['sellingPlan'] = $edge['node']['sellingPlanGroups']['edges'][0]['node']['sellingPlans']['edges'][0]['node'] ?? null;
+            unset($edge['node']['sellingPlanGroups']);
+            $productsData[$edge['node']['sku']] = $edge['node'];
+        }
+
+        return $productsData;
     }
 
     /**

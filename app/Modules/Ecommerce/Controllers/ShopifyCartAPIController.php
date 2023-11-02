@@ -38,13 +38,19 @@ class ShopifyCartAPIController extends Controller
         $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
         $productSKUsAndQuantities = $request->get('products', []); // $products = ['product-sku' => quantity, ...]
 
-        $productSKUsVariantIds =
-            $this->shopifyStoreFrontAPIService->getProductVariantIdsFromSKUs(array_keys($productSKUsAndQuantities));
+        $productsWithSellingPlans =
+            $this->shopifyStoreFrontAPIService->getProductsVariantsWithSellingPlansFromSKUs(
+                array_keys($productSKUsAndQuantities)
+            );
 
         $productVariantIdsAndQuantitiesToAdd = [];
 
         foreach ($productSKUsAndQuantities as $productSKUToAdd => $quantityToAdd) {
-            $productVariantIdsAndQuantitiesToAdd[$productSKUsVariantIds[$productSKUToAdd]] = (integer)$quantityToAdd;
+            $productVariantIdsAndQuantitiesToAdd[$productsWithSellingPlans[$productSKUToAdd]['id']] =
+                [
+                    'quantity' => (integer)$quantityToAdd,
+                    'sellingPlanId' => $productsWithSellingPlans[$productSKUToAdd]['sellingPlan']['id'] ?? null
+                ];
         }
 
         if (empty($existingShopifyCartId)) {
@@ -73,14 +79,12 @@ class ShopifyCartAPIController extends Controller
                     }
                 }
 
-                if (empty($merchandiseLineItemIdsToDelete)) {
-                    throw new NotFoundHttpException();
+                if (!empty($merchandiseLineItemIdsToDelete)) {
+                    $cartData = $this->shopifyStoreFrontAPIService->removeCartItems(
+                        $existingShopifyCartId,
+                        $merchandiseLineItemIdsToDelete
+                    );
                 }
-
-                $cartData = $this->shopifyStoreFrontAPIService->removeCartItems(
-                    $existingShopifyCartId,
-                    $merchandiseLineItemIdsToDelete
-                );
             }
 
             $cartData = $this->shopifyStoreFrontAPIService->addToCart(
