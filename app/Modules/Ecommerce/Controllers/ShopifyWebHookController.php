@@ -87,9 +87,9 @@ class ShopifyWebHookController extends Controller
                 'musora_user_order',
                 $data,
                 null,
-                $order['processed_at'],
+                Carbon::parse($order['processed_at'])->timestamp
             )
-        )->delay(Carbon::now()->addSeconds(30));
+        )->delay(Carbon::now()->addSeconds(3));
 
         if ($brand !== 'musora') {
             dispatch(
@@ -99,9 +99,9 @@ class ShopifyWebHookController extends Controller
                     $brand . "_user_order",
                     $data,
                     null,
-                    $order['processed_at'],
+                    Carbon::parse($order['processed_at'])->timestamp
                 )
-            )->delay(Carbon::now()->addSeconds(30));
+            )->delay(Carbon::now()->addSeconds(3));
         }
 
         // @TODO EVENT TRACKING: move to avo when migration is completed
@@ -123,9 +123,9 @@ class ShopifyWebHookController extends Controller
                 'musora_user_refund',
                 $data,
                 null,
-                $order['processed_at'],
+                null
             )
-        )->delay(Carbon::now()->addSeconds(30));
+        )->delay(Carbon::now()->addSeconds(3));
 
         // @TODO EVENT TRACKING: move to avo when migration is completed
         // Avo::order_refunded($data);
