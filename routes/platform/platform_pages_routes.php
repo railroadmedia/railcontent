@@ -3,6 +3,7 @@
 use App\Http\Controllers\Platform\CoachPagesController;
 use App\Http\Controllers\Platform\CohortPackController;
 use App\Http\Controllers\Platform\ContentPagesController;
+use App\Http\Controllers\Platform\WorkoutsPageController;
 use App\Http\Controllers\Platform\ExpiredMemberController;
 use App\Http\Controllers\Platform\ForumPagesController;
 use App\Http\Controllers\Platform\HomePageController;
@@ -155,6 +156,11 @@ Route::domain('{musoraDomain}')
                         'drum-fest-international-2022',
                     ])
                     ->name('platform.content-type-catalog');
+                
+
+                Route::get('/{brand}/workouts', [WorkoutsPageController::class, 'showWorkoutsPage'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.workouts');
 
                 Route::get('/{brand}/shows', [ContentPagesController::class, 'shows'])
                     ->whereIn('brand', ['drumeo'])
