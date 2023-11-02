@@ -15,7 +15,7 @@
     "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=1ad34e2c5b5fd4c0401fd8e49825c861",
     "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=ef08fa7b3db613602e57a12bd4dcb065",
     "/platform/js/order-form.js": "/platform/js/order-form.js?id=2e17eeb0b5bcf1f9449b83b79d02997f",
-    "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=afbf993aff0d79c0241f1ed57d399c4b",
+    "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=d985c3b4621fdc0e984dd82ffb8154c3",
     "/platform/js/text-editor-component.js": "/platform/js/text-editor-component.js?id=fa67bef8c130110ff82a2570450f2512",
     "/platform/js/contact-member-form.js": "/platform/js/contact-member-form.js?id=ae2600fe78088737df36f5de425b13a2",
     "/platform/js/cart-sidebar.js": "/platform/js/cart-sidebar.js?id=739299bc3d55c6407174bbe7fa584a82",
@@ -30,11 +30,12 @@
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=ffacc3c31d902671d23b7f76f78ac6f9",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=615b828a5c5d567a25c31dddfbfbc02b",
     "/platform/js/playlist-header.js": "/platform/js/playlist-header.js?id=bb258118897635808a48dfc5673b5572",
-    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=0c911d1adfc69bd085b3fa94fbafda94",
+    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=7c09e07bed81863fde4264b083de8482",
     "/platform/js/playlist-collection-header.js": "/platform/js/playlist-collection-header.js?id=103e4f13db3bc7f330ab41e59d8ae53e",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=e2082f7ad4786ce50ed2fc5843c742d7",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=b06c413be0cbc92f51079e8948ccc276",
     "/platform/css/app.css": "/platform/css/app.css?id=0a13f714627440bf4d91480db8535234",
     "/marketing/css/app.css": "/marketing/css/app.css?id=e949a8fb738f8feb6a020d8cd763a605",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=2b3b9cc03b8d20ba5c2bc71921d9b54b"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=2b3b9cc03b8d20ba5c2bc71921d9b54b",
+    "/platform/js/playlist-breadcrumb.js": "/platform/js/playlist-breadcrumb.js?id=627a1b532767295f5d170bc12a3ba10e"
 }

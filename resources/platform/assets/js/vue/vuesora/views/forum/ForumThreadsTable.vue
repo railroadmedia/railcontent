@@ -4,20 +4,20 @@
 
         <!-- Forum Tabs -->
         <div v-if="!onlyFollowed && showTabs"
-            class="tw-flex tw-px-4">
+             class="tw-flex tw-px-4">
             <div class="tw-flex tw-flex-col tw-mb-6">
                 <div class="tw-flex">
                     <a class="tw-no-underline tw-mr-6"
-                        :href="currentUrl"
-                        :class="[!isFollowedSection ? 'tw-text-[#00101D] dark:tw-text-white' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]' ]"
+                       :href="currentUrl"
+                       :class="[!isFollowedSection ? 'tw-text-[#00101D] dark:tw-text-white' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]' ]"
                     >
                         <h3 class="tw-text-3xl tw-font-bold tw-cursor-pointer">
                             All Threads
                         </h3>
                     </a>
                     <a class="tw-no-underline"
-                        :href=" currentUrl + '?followed=true' "
-                        :class="[isFollowedSection ? 'tw-text-[#00101D] dark:tw-text-white' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]', {'hide': searching}]"
+                       :href=" currentUrl + '?followed=true' "
+                       :class="[isFollowedSection ? 'tw-text-[#00101D] dark:tw-text-white' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]', {'hide': searching}]"
                     >
                         <h3 class="tw-text-3xl tw-font-bold tw-cursor-pointer">
                             Followed
@@ -33,7 +33,7 @@
         >
             <div class="tw-flex tw-flex-col tw-mb-6">
                 <div class="tw-no-underline tw-mr-6 tw-text-[#00101D] dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-2"
-                        :class="[ brandBorderColor ]"
+                     :class="[ brandBorderColor ]"
                 >
                     <h3 class="tw-text-3xl tw-font-bold tw-cursor-pointer">
                         All New Threads
@@ -42,19 +42,85 @@
             </div>
         </div>
 
-<!--        <FilterWrapper-->
-<!--            :search-term="searchTerm"-->
-<!--            @handle-search-change="handleSearchChange"-->
-<!--            @handle-search-submit="getSearchResults"-->
-<!--        />-->
-
+        <!-- Search -->
         <div class="tw-flex tw-px-2 ">
             <div class="tw-flex tw-flex-col tw-mb-6 tw-w-full">
+                <div class="tw-flex tw-flex-wrap">
+
+                    <template v-if="!onlyFollowed && !searching">
+                        <!-- Filter -->
+                        <div class="flex tw-ml-0 form-group tw-w-full md:tw-w-1/3 md:tw-pr-10">
+                            <div
+                                class="form-group xs-12 tw-w-full">
+                                <select
+                                    id="threadSort"
+                                    v-model="filterInterface"
+                                    class="has-input tw-text-[#00101D] dark:tw-text-white tw-pb-0 tw-bg-white dark:tw-bg-transparent"
+                                >
+                                    <option
+                                        v-for="option in filterOptions"
+                                        :key="option.label"
+                                        :value="option.value"
+                                        class="tw-text-[#00101D]"
+                                    >
+                                        {{ option.label }}
+                                    </option>
+                                </select>
+                                <label
+                                    for="threadSort"
+                                    :class="brand"
+                                >Sort By... </label>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- Search Bar -->
+                    <div class="tw-flex tw-w-full tw-mb-4 tw-order-first md:tw-order-last"
+                         :class="[!onlyFollowed && !searching ? 'md:tw-w-2/3' : '']"
+                    >
+                        <div class="tw-flex tw-flex-col tw-w-full tw-w-full tw-mr-3 form-group">
+                            <input
+                                id="threadSearch"
+                                class="dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74] tw-pb-0"
+                                :class="{ 'has-input': searchTerm.length }"
+                                ref="searchInput"
+                                v-model.lazy="searchInterface"
+                                type="text"
+                            >
+                            <label
+                                for="threadSearch"
+                                class="dark:tw-text-[#9EC0DC]"
+                                :class="brand"
+                            >Search</label>
+
+                            <span
+                                v-if="searching"
+                                id="clearSearch"
+                                class="tw-px-4 tw-py-3 tw-cursor-pointer tw-absolute tw-right-0"
+                                @click="clearSearch"
+                            >
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="tw-flex tw-flex-col">
+                            <button
+                                class="tw-btn-primary tw-px-4 sm:tw-px-5 lg:tw-px-12"
+                                :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
+                                @click="$refs.searchInput.blur()"
+                            >
+                                <i class="fas fa-search sm:tw-mr-1 tw-text-sm"></i>
+                                <span class="tw-hidden sm:tw-inline-flex">Search</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <p
                     v-if="searching"
                     class="tiny font-italic text-grey-4 dark:tw-text-[#9EC0DC] tw-mt-2 tw-ml-6"
                 >
-                    Showing results for <span class="tw-font-bold tw-text-black dark:tw-text-white">"{{ searchResultTerm }}"</span> in All Forums.
+                    Showing results for <span class="tw-font-bold tw-text-black dark:tw-text-white">"{{ searchInterface }}"</span> in All Forums.
                 </p>
             </div>
         </div>
@@ -86,7 +152,7 @@
 
             <!-- Threads Table Header -->
             <div v-if="pinnedThreads.length !== 0 || threadsArray.length !== 0"
-                class="tw-flex tw-bg-gray-200 dark:tw-bg-[#002039] tw-h-10 tw-w-full tw-items-center tw-rounded-t-lg"
+                 class="tw-flex tw-bg-gray-200 dark:tw-bg-[#002039] tw-h-10 tw-w-full tw-items-center tw-rounded-t-lg"
             >
                 <div class="tw-uppercase tw-text-gray-500 dark:tw-text-white tw-text-sm tw-font-bold tw-pl-8 tw-w-full lg:tw-w-9/12">
                     Thread Details
@@ -161,7 +227,6 @@ import ForumSearchResult from './_ForumSearchResult.vue';
 import Pagination from '../../components/Pagination.vue';
 import ClearableFilter from '../../components/ClearableFilter.vue';
 import ForumService from '../../assets/js/services/forums';
-// import FilterWrapper from "../../../components/Filter/FilterWrapper.vue";
 
 export default {
     name: 'ForumThreadsTable',
@@ -202,12 +267,12 @@ export default {
             default: () => true,
         },
         latestThreadsUrl: {
-          type: String,
-          default: () => '/threads/latest',
+            type: String,
+            default: () => '/threads/latest',
         },
         searchJsonResultsEndpointUrl: {
-          type: String,
-          default: () => '/threads/latest',
+            type: String,
+            default: () => '/threads/latest',
         },
     },
     data() {
@@ -234,7 +299,6 @@ export default {
             ],
             loading: false,
             searching: false,
-            searchResultTerm: '',
             searchResults: [],
             searchResultsCount: 0,
             searchResultsPage: 1,
@@ -360,7 +424,6 @@ export default {
             ).then((data) => {
                 this.loading = false;
                 this.searching = true;
-                this.searchResultTerm = this.searchTerm;
                 this.searchResults = data.results;
                 this.searchResultsCount = data.count;
             });
@@ -371,10 +434,6 @@ export default {
                 .then((data) => {
                     this.threadsArray = data;
                 });
-        },
-
-        handleSearchChange(value) {
-            this.searchTerm = value;
         },
 
         handlePageChange(payload) {
