@@ -6,18 +6,22 @@
                 <img class="h-20 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="{{ $logoHeader }}"
                     alt="{{ $logoAlt }}">
                 <h1 class="rotater-text overflow-hidden">
-                    <strong>
+                <strong>
+                    @if(isset($rotatingText) && $rotatingText)
                         @for ($i = 0; $i < 12; $i++)
-                            @foreach ($rotatingText as $text)
-                                <span class="relative nowrap delay-1000 ease-in-out">{{ $text }}</span><br>
+                            @foreach ($rotatingText as $textItem)
+                                <span class="relative nowrap delay-1000 ease-in-out">{{ $textItem }}</span><br>
                             @endforeach
                         @endfor
-                    </strong>
+                    @elseif(isset($text))
+                        <span>{{ $text }}</span>
+                    @endif
+                </strong>
                 </h1>
                 <h2 class="-mt-3 sm:-mt-1 lg:mt-0 mb-4">{{ $subtitle }}</h2>
                 @foreach ($checklist as $item)
                     <p class="hidden lg:inline p-2 text-lg leading-10">
-                        <i class="fas fa-check-circle text-{{ $brandTitle }}"></i> {{ $item }}
+                        <i class="fas fa-check-circle text-{{ $brand }}"></i> {{ $item }}
                     </p>
                 @endforeach
                 <div class="flex inline lg:hidden my-3">
@@ -27,7 +31,7 @@
                             $restOfWords = substr($item, strlen($firstWord)); // to get other part of phrase
                         @endphp
                         <p class="w-1/3 leading-tight">
-                            <i class="fas fa-check-circle text-{{ $brandTitle }}"></i><br/>
+                            <i class="fas fa-check-circle text-{{ $brand }}"></i><br/>
                             {{ $firstWord }}<br/>{{ $restOfWords }}
                         </p>
                     @endforeach

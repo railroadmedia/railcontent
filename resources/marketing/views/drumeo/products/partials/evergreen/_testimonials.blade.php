@@ -3,7 +3,9 @@
     @if (!empty($showTop))
     <div class="text-center text-white">
         <h2 class="leading-tight mb-4"><strong>{{ $title }}</strong></h2>
-        <a class="inline-block w-full" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank"
+            @if (isset($subTitle))
+                <p>{{ $subTitle }}</p>
+            @endif        <a class="inline-block w-full pt-4" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank"
             onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
             <img alt="shopper approved image" class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity opacity-0"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/assets/shopper-approved-white.svg"

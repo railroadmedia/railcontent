@@ -298,6 +298,7 @@ $features = [
     'instructor' => ' Domino Santantonio',
     'course' => ' 30 video lessons',
     'lessons' => $lessons,
+    'video' => 'https://player.vimeo.com/video/' . $feature['videoId']
 ])
 
 <!-- Songs subsection -->
@@ -456,50 +457,6 @@ $points = [
     'students' => 'drummers',
     'numStudents' => number_format($nPackOwners ?? 0),
 ])
-
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2 class="text-2xl font-extrabold md:text-4xl leading-relaxed md:leading-10" >Still Have Questions?</h2>
-            <div class="max-w-6xl mt-4 sm:mt-10 px-4">
-                @if(is_current_user_a_member())
-                    @include('_partials.components.question-dropdown', [
-                    "num" => "?",
-                    "title" => "Why do I need to register if I get it for free as a member?",
-                    "desc" => "It’s a 30-day course and it only works if you’re actively participating. So we wanted to make sure you raised your hand to enroll in the journey.<br><br>This isn’t a “watch a lesson, go do something else for 10 days, watch another” type of routine. So we’re asking for a commitment from anybody who participates.",
-                    ])
-                @endif
-                @include('_partials.components.question-dropdown', [
-                "title" => "Do I need to attend the lessons live?",
-                "desc" => "The weekday workouts are pre-recorded videos you can access on your own schedule – and the weekly live Q&A sessions are totally optional, and they’ll also include a recording that you can watch or re-watch anytime.",
-                'num' => '?'
-                ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "How much time per week will this course require?",
-                "desc" => "30-Day Drummer gives you guided daily drum workouts for thirty days – with flex days built in for when life happens. With each workout being 10-15 minutes, you can miss a workout and make it up the next day or later in the week.",
-                'num' => '?'
-                ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "What devices can I access the course on?",
-                "desc" => "30-Day Drummer is available on your laptop, tablet, or phone. You’ll also have access through the Musora app after you’ve completed your purchase of the course.",
-                'num' => '?'
-                ])
-            </div>
-            <div class="inline-block w-full px-3 md:px-4 my-5" style="color:#2a2f34;">
-                <p><strong>Any other questions?</strong><br class="inline-block md:hidden"> Call us toll-free at
-                    <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
-                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
-            </div>
-            <div class="inline-block w-full px-3 md:px-4 mb-10" style="color:#2a2f34;">
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
-            </div>
-        </div>
-    </section>
-
-
     {{-- @component('_partials.components.modal', ['name' => 'waitlistModal'])
         @slot('content')
             <div class="relative overflow-y-visible max-w-md px-4 md:px-5 lg:px-7 py-5 md:py-7 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
@@ -522,6 +479,18 @@ $points = [
         'modalId' => "trailer",
         "video" => '//player.vimeo.com/video/852777053?h=87d3e7a97a&autoplay=1',
         "title" => 'trailer'
+    ])
+
+    @include('drumeo.sales.partials._video-modal',[
+        'modalId' => "kick-off",
+        "video" => '//player.vimeo.com/video/823873211?h=87d3e7a97a&autoplay=1',
+        "title" => 'kick-off'
+    ])
+
+    @include('drumeo.sales.partials._video-modal',[
+        'modalId' => "setup",
+        "video" => '//player.vimeo.com/video/823873211?h=87d3e7a97a&autoplay=1',
+        "title" => 'setup'
     ])
 
     

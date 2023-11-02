@@ -223,7 +223,6 @@
     'rotatingText' => ['Learn drum chops', 'Improve your speed', 'Boost your creativity'],
     'subtitle' => 'in just 30 days',
     'checklist' => ['Learn By Doing', 'Play Every Day', 'Guaranteed Results'],
-    'brandTitle' => 'drumeo',
     'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/header-right-collage.png',
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/header-left-collage.png',
     'video' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/30dc.mp4',
@@ -246,7 +245,7 @@ for ($day = 1; $day <= $totalDays; $day++) {
 $features = [
     [
         'title' => 'Course Kick-Off',
-        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/drum-challenges.jpeg',
+        'posterImage' => 'https://d1923uyy6spedc.cloudfront.net/30DayChops-Banner-1683560940.jpg',
         'dataOpen' => 'kick-off',
         'videoId' => 823873211,
     ],
@@ -265,12 +264,14 @@ $features = [
 @include('drumeo.products.partials.evergreen._lessons', [
     'title' => 'Learn the drums by actually playing the drums.',
     'descriptionDesktop' => "We've all gazed in amazement at the incredible chops some of the best drummers in the world are capable of pulling off. Whether on social media or on stage, their facility is undeniable and something we just can't help marveling at. Ready to be the drummer people marvel at? Welcome to 30-Day Chops!",
-    'descriptionMobile' => 'Welcome to 30-Day Drummer! At this point, you should have all the equipment you need to get started, know how to set up your gear, and be ready to have some fun playing the drums with Domino. In this first lesson and 10-minute workout, she will teach you the beginnings of the most popular drum beat of all time. And you will have fun doing it!',
+    'descriptionMobile' => "We've all gazed in amazement at the incredible chops some of the best drummers in the world are capable of pulling off. Whether on social media or on stage, their facility is undeniable and something we just can't help marveling at. Ready to be the drummer people marvel at? Welcome to 30-Day Chops!",
     'features' => $features,
     'lessonTitle' => 'Course Lessons',
     'instructor' => ' Zack Grooves',
     'course' => ' 29 video lessons',
     'lessons' => $lessons,
+    'video' => 'https://player.vimeo.com/video/' . $feature['videoId']
+
 ])
 
 @php 
@@ -364,12 +365,6 @@ $items = [
                     </div>
                 </div>
             </div>
-                <a
-                   href="#final"
-                   class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">GET STARTED</a><br> 
-
-            <img class="h-7 mr-1 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/drummers.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
         </div>
     </section>
 
@@ -404,20 +399,15 @@ $testimonials = $drumeo['testimonialsShopVersion'];
             ],
         'bgColor' => 'linear-gradient(rgba(11, 118, 219, 1), rgba(7, 74, 137, 1))',
         'title' => "Trusted by drummers everywhere.",
+        'subTitle' => "Rated 5 stars by thousands by Drumeo students from around the world! See the reviews ››"
         'showTop' => true,
-        'subHeader' => '17,000+ Drummers Agree...',
-        'description' => '30-Day Drummer works. By focusing on playing with real music right from day one, you’ll learn the skills to play hundreds of songs on the drums in just thirty days. Check out what students are saying:',
 ])
 
-
-    
-
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));"></div>
-    <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34;">
+    <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34; border: 1px solid #2a2f34">
         <div class="container max-w-4xl mx-auto">
-            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=410,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png" alt="guarantee badge" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png" alt="guarantee badge" loading="lazy" onload="this.classList.remove('opacity-0')">
             <h2 class="my-4 sm:my-6 lg:my-8"><strong>Your favorite drum<br class="inline sm:hidden"> course, guaranteed.</strong></h2>
-
             <h6 class="leading-normal">30-Day Chops is a NEW way to learn the drums – and for less than a month of private lessons, you’ll enjoy frustration-free progress to improve your speed, control, and creativity.
                 <br><br>
                 We think it’ll be your favorite drum course ever –
@@ -428,63 +418,32 @@ $testimonials = $drumeo['testimonialsShopVersion'];
     </section>
     
 
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2><strong>Still have questions?</strong></h2>
-            <div class="max-w-6xl mt-4 sm:mt-10 px-4">
+<!-- Learn section -->
+@php
+$points = [
+            'Guided drum lessons for 30 days.',
+            'Practice the right things for 10 min/day.',
+            'Learn on your own schedule.',
+            'Play your favorite songs.',
+            '90-day money-back guarantee.'
+        ]
+@endphp
 
-            @include('_partials.components.question-dropdown', [
-            "num" => "?",
-            "title" => "Do I need to attend the lessons live?",
-            "desc" => "The weekday workouts are pre-recorded videos you can access on your own schedule – and the weekly live Q&A sessions are optional. Plus, you’ll be sent a recording so you can watch anytime.",
-            ])
+@include('drumeo.products.partials.evergreen._learn', [
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/logo.svg',
+    'logoAlt' => '30DC logo',
+    'title' => 'Improve your chops in just 30 days.',
+    'points' => $points,
+    'buttonTxt' => 'Get Started',
+    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
+    'profileImageAlt' => 'student profile image',
+    'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/order-collage.png',
+    'students' => 'drummers',
+    'numStudents' => number_format($nPackOwners ?? 0),
+])
 
-            @include('_partials.components.question-dropdown', [
-            "num" => "?",
-            "title" => "What if I’m going to miss a day (or two, or more)?",
-            "desc" => "That’s totally fine. The course is meant to be flexible – there are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session to catch up.",
-            ])
 
-            @include('_partials.components.question-dropdown', [
-            "num" => "?",
-            "title" => "How much time per week will this course require?",
-            "desc" => "30-Day Chops gives you guided daily chop workouts for thirty days. The minimum time required adds up to 60 minutes per week – but you can spend 2+ hours or more including the live session if you’re feeling motivated.",
-            ])
-
-            @include('_partials.components.question-dropdown', [
-            "num" => "?",
-            "title" => "Does it work on acoustic AND electronic drums?",
-            "desc" => "Yes. 30-Day Chops is built for the intermediate-to-advanced drummer looking to improve their skills. You can complete all Zack’s exercises on either acoustic or electronic and see the full effects on your playing.",
-            ])
-
-            @include('_partials.components.question-dropdown', [
-            "num" => "?",
-            "title" => "Is this a continuation of 30-Day Drummer?",
-            "desc" => "Not exactly. 30-Day Drummer was our first-ever thirty day cohort designed to help beginners establish a solid groove. 30-Day Chops moves on to complex linear patterns around the kit. It’s very possible for an ambitious beginner to work through it – but the curriculums are not related.",
-            ])
-
-            @include('_partials.components.question-dropdown', [
-            "num" => "?",
-            "title" => "What devices can I access the course on?",
-            "desc" => "30-Day Chops is available on your laptop, tablet, or phone. You’ll also have access through the Musora app after you’ve completed your purchase online.",
-            ])
-</div>
-<div class="inline-block w-full px-3 md:px-4 my-5" style="color:#2a2f34;">
-    <p><strong>Any other questions?</strong><br class="inline-block md:hidden"> Call us toll-free at
-        <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
-        <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
-</div>
-<div class="inline-block w-full px-3 md:px-4 mb-10" style="color:#2a2f34;">
-    <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
-    <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
-    <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
-    <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
-    <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
-</div>
-</div>
-</section>
-
-    @component('_partials.components.modal', ['name' => 'waitlistModal'])
+    {{-- @component('_partials.components.modal', ['name' => 'waitlistModal'])
         @slot('content')
             <div class="relative overflow-y-visible max-w-md px-4 md:px-5 lg:px-7 py-5 md:py-7 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
                 <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
@@ -500,7 +459,7 @@ $testimonials = $drumeo['testimonialsShopVersion'];
                 ])
             </div>
         @endslot
-    @endcomponent
+    @endcomponent --}}
 @include('drumeo.sales.partials._video-modal',[
 'modalId' => "trailer",
 "video" => '//player.vimeo.com/video/825206369?h=e8d828248a&autoplay=1',

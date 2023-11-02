@@ -249,7 +249,6 @@
     'rotatingText' => ['Learn the drums', 'Improve your timing', 'Boost your creativity'],
     'subtitle' => 'with daily guided workouts.',
     'checklist' => ['Improve Your Skills', 'Drum Every Day', 'Learn By Doing'],
-    'brandTitle' => 'drumeo',
     'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/header-right-collage.png',
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/header-left-collage.png',
     'video' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/video-reel.mp4',
