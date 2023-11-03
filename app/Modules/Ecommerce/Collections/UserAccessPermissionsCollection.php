@@ -36,7 +36,7 @@ class UserAccessPermissionsCollection
         return $this->userId;
     }
 
-    public function getActiveDates(int|array $permissions): array
+    public function getActiveDates(int|array $permissions, $includeBuffer = true): array
     {
         if (is_integer($permissions)) {
             $userAccessPermissions = $this->permissionIdLookup[$permissions] ?? collect();
@@ -69,7 +69,7 @@ class UserAccessPermissionsCollection
             $userAccessPermission->actualStartTime = $tempStartDate;
             $userAccessPermission->actualExpirationTime = $expirationDate;
         }
-        if ($expirationDate) {
+        if ($expirationDate && $includeBuffer) {
             $expirationDate->addDays(config('ecommerce.days_before_access_revoked_after_expiry', 7));
         }
         if ($expirationDate > Carbon::maxValue()) {
@@ -78,12 +78,12 @@ class UserAccessPermissionsCollection
         return array($startDate, $expirationDate);
     }
 
-    public function getMembershipExpirationDate(): ?Carbon
+    public function getMembershipExpirationDate($includeBuffer = true): ?Carbon
     {
         list($startDate, $endDate) = $this->getActiveDates([
             self::MusoraPlusMembershipPermission,
             self::MusoraBasicMembershipPermission
-        ]);
+        ], $includeBuffer);
         return $endDate;
     }
 

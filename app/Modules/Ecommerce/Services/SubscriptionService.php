@@ -88,7 +88,7 @@ class SubscriptionService
                 }
             }
 
-            $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate();
+            $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate(includeBuffer: false);
 
             $this->recharge->updateSubscriptionNextChargeDate($mostRecentActiveSubscription, $membershipExpirationDate);
         }
