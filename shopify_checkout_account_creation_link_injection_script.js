@@ -193,7 +193,7 @@ if (Shopify.checkout.customer_id && Shopify.checkout.email && Shopify.checkout.l
     let currentScriptUrl = new URL('https://app-staging-one.musora.com/test');
 
     if (document.currentScript) {
-        currentScriptUrl = new URL(document.currentScript.src ?? 'https://app-staging-one.musora.com/test');
+        currentScriptUrl = new URL(document.currentScript.src);
     }
 
     const currentScriptUrlWithoutPath = currentScriptUrl.protocol + '//' + currentScriptUrl.host;
@@ -220,7 +220,7 @@ if (Shopify.checkout.customer_id && Shopify.checkout.email && Shopify.checkout.l
         '&redirect=' + encodeURIComponent('/' + brand);
 
     // check if account exists first
-    fetch("https://dev.musora.com:8443/user-management-system/is-email-unique" + "?email=" + encodeURIComponent(emailAddress), {
+    fetch(currentScriptUrlWithoutPath + "/user-management-system/is-email-unique" + "?email=" + encodeURIComponent(emailAddress), {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
