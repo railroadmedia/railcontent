@@ -222,6 +222,23 @@
             }
         }
     </style>
+    <style>
+        /* width */
+        .overflow-y-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        /* Track */
+        .overflow-y-scroll::-webkit-scrollbar-track {
+            background: #00101D;
+        }
+
+        /* Handle */
+        .overflow-y-scroll::-webkit-scrollbar-thumb {
+            background:#25425c;
+            border-radius:100px;
+        }
+    </style>
     <?php \App\Analytics\Tracker::trackProductImpression('30-day-drummer-2'); ?>
 @stop()
 

@@ -13,12 +13,12 @@
 
                 <iframe class="absolute w-full h-full reset-on-close" :src="'//player.vimeo.com/video/' + videoPlayer + '?autoplay=0'" frameborder="0" allowfullscreen allow="autoplay" title="video" x-show="open"></iframe>
 
-                
+
             </div>
 
 
 
-            
+
             <div class="mt-4 md:py-4 hidden md:block">
                 <p>{{ $descriptionDesktop }} @if(isset($descriptionBold)) <strong>{{ $descriptionBold }}</strong> @endif</p>
                 <p class="pt-10">Instructor: <strong> {{ $instructor }}</strong></p>
@@ -28,7 +28,7 @@
 
         <div class="text-black md:w-1/3">
             @foreach ($features as $feature)
-        <button class="rounded-lg mb-2 px-4 py-3 bg-blue-50 w-full" 
+        <button class="rounded-lg mb-2 px-4 py-3 bg-blue-50 w-full"
     x-on:click="posterImage = '{{ $feature['posterImage'] }}', videoPlayer = '{{ $feature['videoId'] }}', open = false">
     <p class="flex items-center">
         <i class="fas fa-play-circle text-xl text-{{ $brand }} mr-2"></i> {{ $feature['title'] }}
@@ -37,22 +37,25 @@
     @endforeach
 
             <p class="text-white pt-3"><strong>{{ $lessonTitle }}</strong></p>
-            <div x-data="{ isOpen: [] }" class="h-72 overflow-y-scroll rounded-lg">
-                @foreach ($lessons as $i => $lesson)
-                    <div x-data="{ open: false }" class="rounded-lg bg-white shadow mb-1.5">
-                        <button class="rounded-lg flex w-full items-center justify-between px-4 py-3.5" style="background: #eff7ff;" x-on:click="open = !open;">
-                            <p class="mx-0 truncate">{{ $lesson }}</p>
-                            <div class="ml-auto text-{{ $brand }} cursor-pointer">
-                                <i class="fas fa-angle-down transform transition-all duration-300" x-bind:class="{ 'rotate-180': open }"></i>
-                            </div>
-                        </button>
-                        <div x-cloak class="transition-all duration-200 overflow-hidden" x-bind:class="open ? 'max-h-[2000px]' : 'max-h-0'">
-                            <div class="px-4 pb-4 bg-blue-50 rounded-lg">
-                                {{ $lessons[$i] }}
+            <div class="relative">
+                <div x-data="{ isOpen: [] }" class="h-72 overflow-y-scroll pb-5">
+                    @foreach ($lessons as $i => $lesson)
+                        <div x-data="{ open: false }" class="rounded-lg bg-white shadow mb-1.5">
+                            <button class="rounded-lg flex w-full items-center justify-between px-4 py-3.5" style="background: #eff7ff;" x-on:click="open = !open;">
+                                <p class="mx-0 truncate">{{ $lesson }}</p>
+                                <div class="ml-auto text-{{ $brand }} cursor-pointer">
+                                    <i class="fas fa-angle-down transform transition-all duration-300" x-bind:class="{ 'rotate-180': open }"></i>
+                                </div>
+                            </button>
+                            <div x-cloak class="transition-all duration-200 overflow-hidden" x-bind:class="open ? 'max-h-[2000px]' : 'max-h-0'">
+                                <div class="px-4 pb-4 bg-blue-50 rounded-lg">
+                                    {{ $lessons[$i] }}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+                <div class="absolute h-5 bottom-0 left-0 right-0 z-10" style="background: linear-gradient(to bottom, transparent, #00101d);"></div>
             </div>
         </div>
 
