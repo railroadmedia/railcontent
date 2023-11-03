@@ -79,7 +79,7 @@
                         <br><br>
                         And all this performance comes wrapped in a compact case that will fit any living situation while being light enough to move easily when needed.
                         <br><br>
-                        The Roland FP-30X retails for $899.99. But it can be yours for FREE.
+                        The Roland FP-30X retails for $699. But it can be yours for FREE.
                     </p>
                 </div>
                 <div class="w-5/12 justify-center pl-8">
