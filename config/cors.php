@@ -30,7 +30,8 @@ return [
         '*.pianote.com',
         '*.guitareo.com',
         '*.singeo.com',
-        'cdn.shopify.com'
+        'cdn.shopify.com',
+        '*'
     ],
 
     'allowed_origins_patterns' => [],

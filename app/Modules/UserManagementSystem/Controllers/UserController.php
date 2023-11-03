@@ -414,10 +414,10 @@ class UserController extends Controller
                 ->first();
 
         if ($user) {
-            return response()->json(['unique' => false]);
+            return response()->json(['unique' => false, 'is_musora_account_set_up' => $user->is_musora_account_set_up ?? false]);
         }
 
-        return response()->json(['unique' => true]);
+        return response()->json(['unique' => true, 'is_musora_account_set_up' => false]);
     }
 
     /**

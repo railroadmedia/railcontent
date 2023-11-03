@@ -190,12 +190,13 @@ if (Shopify.checkout.customer_id && Shopify.checkout.email && Shopify.checkout.l
     const emailAddress = Shopify.checkout.email;
     const musoraAccountCreationKey = atob('bXVzb3JhX3Nob3BpZnlfY2xhaW1fa2V5XzY4NzY5NzI3MzQ5NjcyNzM2');
     const musoraVerificationHash = md5(emailAddress + musoraAccountCreationKey);
-    const currentScriptUrl = new URL(document.currentScript.src);
+    let currentScriptUrl = new URL('https://app-staging-one.musora.com/test');
+
+    if (document.currentScript) {
+        currentScriptUrl = new URL(document.currentScript.src ?? 'https://app-staging-one.musora.com/test');
+    }
+
     const currentScriptUrlWithoutPath = currentScriptUrl.protocol + '//' + currentScriptUrl.host;
-    const urlToAccountSetupPage = currentScriptUrlWithoutPath + '/user-management-system/create-account' +
-        "?" +
-        "email=" + encodeURIComponent(emailAddress) +
-        "&verification_token=" + encodeURIComponent(musoraVerificationHash);
 
     // check for digital items (only display if there are some)
     var hasDigitalItem = false;
@@ -206,19 +207,56 @@ if (Shopify.checkout.customer_id && Shopify.checkout.email && Shopify.checkout.l
         }
     });
 
-    // insert link element
-    document.querySelector('body > div.content > div > div > main > div.step > div.step__sections > div:nth-child(2) > div > div:nth-child(1)').insertAdjacentHTML(
-        'beforebegin',
-        '<div style="margin-bottom: 30px;"><a href="' + urlToAccountSetupPage + '" style="font-size: 16pt; font-weight: bold;"><img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x60/shopify/checkout-thank-you-account-creation-image.png" alt="Create Your Account Here"></a></div>'
-    );
+    var brand = 'drumeo';
+
+    Shopify.checkout.line_items.forEach((lineItem) => {
+        brand = lineItem.vendor.toLowerCase();
+    });
+
+    const urlToAccountSetupPage = currentScriptUrlWithoutPath + '/user-management-system/create-account' +
+        "?" +
+        "email=" + encodeURIComponent(emailAddress) +
+        "&verification_token=" + encodeURIComponent(musoraVerificationHash) +
+        '&redirect=' + encodeURIComponent('/' + brand);
+
+    // check if account exists first
+    fetch("https://dev.musora.com:8443/user-management-system/is-email-unique" + "?email=" + encodeURIComponent(emailAddress), {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+    }).then(response => response.json())
+        .then(json => {
+            if (json.unique === false && json.musora_is_account_setup === true) {
+                // insert link for users who already have an account element
+                document.querySelector('body > div.content > div > div > main > div.step > div.step__sections > div:nth-child(2) > div > div:nth-child(1)').insertAdjacentHTML(
+                    'beforebegin',
+                    '<div style="margin-bottom: 30px;"><a href="' + currentScriptUrlWithoutPath + '/' + brand +
+                    '" style="font-size: 16pt; font-weight: bold;"><img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x60/shopify/checkout-thank-you-click-here-to-access-lessons.png" alt="Access Your Lessons Here"></a></div>'
+                );
+            } else {
+                // insert link for new accounts
+                document.querySelector('body > div.content > div > div > main > div.step > div.step__sections > div:nth-child(2) > div > div:nth-child(1)').insertAdjacentHTML(
+                    'beforebegin',
+                    '<div style="margin-bottom: 30px;"><a href="' + urlToAccountSetupPage + '" style="font-size: 16pt; font-weight: bold;"><img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x60/shopify/checkout-thank-you-account-creation-image.png" alt="Create Your Account Here"></a></div>'
+                );
+            }
+        });
+
+
 
     // change logout link to go to musora logout then back to shopify logout
     const shopifyLogOutLinkElement = document.querySelector('a[href*="logout"]');
-    const shopifyLogOutLinkUrl = shopifyLogOutLinkElement.href;
 
-    const urlToLogOutPage = currentScriptUrlWithoutPath + '/user-management-system/logout/cookie?redirect_to=' +
-        encodeURIComponent(shopifyLogOutLinkUrl);
+    if (shopifyLogOutLinkElement) {
+        const shopifyLogOutLinkUrl = shopifyLogOutLinkElement.href;
 
-    shopifyLogOutLinkElement.href = urlToLogOutPage;
+        const urlToLogOutPage = currentScriptUrlWithoutPath + '/user-management-system/logout/cookie?redirect_to=' +
+            encodeURIComponent(shopifyLogOutLinkUrl);
+
+        shopifyLogOutLinkElement.href = urlToLogOutPage;
+    }
 }
 
