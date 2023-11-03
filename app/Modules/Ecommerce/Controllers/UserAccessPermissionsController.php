@@ -29,7 +29,7 @@ class UserAccessPermissionsController extends Controller
 
         return UserAccessPermissionResource::collection(
             $userAccessPermissions->getCollection()
-                ->sortBy('actualStartTime')
+                ->sortBy($request->get('order_by_column','actualExpirationTime'), SORT_REGULAR, $request->get('order_by_direction','desc'))
         );
     }
 
