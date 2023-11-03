@@ -103,7 +103,7 @@
 
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
-        <section class="grid-view category-section" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
+        <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Featured</strong></h5>
                 <div
