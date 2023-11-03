@@ -130,32 +130,35 @@
 
     {{-- diagonal line --}}
     <div class="relative h-5 sm:h-10 -mb-5 sm:-mb-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #FFF7F7 calc(50% + 1px));"></div>
-    <section class="pb-20 px-4 md:px-6" style="background: #010C15;">
-        <div class="max-w-md md:max-w-4xl mx-auto text-center">
+    <section class="pb-20 px-5 md:px-6" style="background: #010C15;">
+        <div class="max-w-md md:max-w-2xl mx-auto text-center">
             <img class="h-28 relative z-10 mb-12 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/caution_icon.svg" alt="caution icon">
-            <h3 class="text-white font-extrabold leading-normal mb-6">
+            <h3 class="text-white font-extrabold leading-normal">
                 We don’t believe in fine print, so here’s <br class="hidden sm:inline">everything you need to know:
             </h3>
-            <div class="flex flex-wrap justify-center text-left mb-10 md:mb-16">
-                <div class="flex w-full sm:w-1/2 px-4 md:px-6 mb-4 md:mb-6" style="color:#D0E2E7;">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center text-left my-8 md:my-12" style="color:#D0E2E7;">
+                <div class="flex">
                     <i class="fas fa-check pt-1 mr-2" style="color:#D7182B"></i>
-                    No purchase necessary and there are no age restrictions.
+                    No purchase necessary <br class="hidden sm:inline">
+                    and there are no age restrictions.
                 </div>
-                <div class="flex w-full sm:w-1/2 px-4 md:px-6 mb-4 md:mb-6" style="color:#D0E2E7;">
+                <div class="flex">
                     <i class="fas fa-check pt-1 mr-2" style="color:#D7182B"></i>
-                    No location restrictions. We’ll ship it anywhere in the world.
+                    No location restrictions.<br class="hidden sm:inline">
+                    We’ll ship it anywhere in the world.
                 </div>
-                <div class="flex w-full sm:w-1/2 px-4 md:px-6 mb-4 md:mb-6" style="color:#D0E2E7;">
+                <div class="flex">
                     <i class="fas fa-check pt-1 mr-2" style="color:#D7182B"></i>
-                    No sneaky shipping fees. We’ll take care of it.
+                    No sneaky shipping fees.<br class="hidden sm:inline">
+                    We’ll take care of it. (VAT may apply)
                 </div>
-                <div class="flex w-full sm:w-1/2 px-4 md:px-6" style="color:#D0E2E7;">
+                <div class="flex">
                     <i class="fas fa-check pt-1 mr-2" style="color:#D7182B"></i>
                     One email entry per person.
                 </div>
             </div>
             <div class="inline-block italic text-pianote py-4 px-6" style="background:#111F29;">
-                The winner will be announced during a LIVE event on November 20th!
+                The winner will be announced during a LIVE event on November 21st!
             </div>
         </div>
     </section>
