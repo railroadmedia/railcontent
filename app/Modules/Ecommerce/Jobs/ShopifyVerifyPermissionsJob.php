@@ -57,9 +57,15 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
         /** @var UserProductToUserContentPermissionListener $cs */
         $cs = app()->make(UserProductToUserContentPermissionListener::class);
 
+        $totalProcessed = 0;
+        $totalPassed = 0;
+        $totalPercentagePassed = 0;
+
+        $unifiedLaunchDate = Carbon::parse(config('ecommerce.launch_dates.unified'));
         foreach ($items as $user) {
             /** @var User $item */
             try {
+                $potentialIssue = false;
                 $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($user->id);
 
                 $newExpirationDate = $userAccessPermissions->getMembershipExpirationDate();
@@ -68,8 +74,10 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
                     $oldExpirationDate = Carbon::maxValue();
                 }
                 $diff = $newExpirationDate?->diffInDays($oldExpirationDate);
-                Log::info("$user->id:Verifying user permissions");
-                if (is_null($diff) || $diff > 0) {
+                Log::info("$user->id:Verifying user permissions ($totalPercentagePassed%)");
+                if (($oldExpirationDate > $unifiedLaunchDate || $newExpirationDate > $unifiedLaunchDate)
+                    and (is_null($diff) || $diff > 0)) {
+                    $potentialIssue = true;
                     Log::warning("$user->id:$oldExpirationDate -> $newExpirationDate ($diff)");
                 }
 
@@ -91,6 +99,7 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
                     /** @var UserPermission $userPermission */
                     $userPermission = $permissions[$permissionId] ?? null;
                     if ($userPermission == null) {
+                        $potentialIssue = true;
                         Log::warning(
                             "$user->id:User permission not found for user:$user->id, permission:$permissionId ($startDate - $expirationDate)"
                         );
@@ -102,9 +111,16 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
                     $diffStart = $oldStartDate ? $startDate?->diffInDays($oldStartDate) : null;
                     $diffExpiration = $oldExpirationDate ? $expirationDate?->diffInDays($oldExpirationDate) : null;
                     if ($startDate > Carbon::now()) {
-                        Log::warning("$user->id:$permissionId start date in the future");
+                        $potentialIssue = true;
+                        Log::warning(
+                            "$user->id:$permissionId start date in the future $oldStartDate -> $startDate ($diffStart)"
+                        );
                     }
-                    if (is_null($diffExpiration) || $diffExpiration > 0) {
+                    if (($oldExpirationDate > $unifiedLaunchDate || $expirationDate > $unifiedLaunchDate)
+                        and (is_null($diffExpiration)
+                            || $diffExpiration > 2 //trials changed form 5 to 7 days
+                            || $diffExpiration < 0)) {
+                        $potentialIssue = true;
                         Log::warning(
                             "$user->id:$permissionId $oldExpirationDate -> $expirationDate ($diffExpiration)"
                         );
@@ -112,12 +128,19 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
                 }
 
                 if (count($toDeleteIds) > 0) {
+                    $potentialIssue = true;
                     Log::warning("$user->id:Deleting user permissions:" . implode(',', $toDeleteIds));
                 }
             } catch (\Throwable $ex) {
+                $potentialIssue = true;
                 Log::error("$user->id:Error verifying user permissions");
                 Log::error($ex);
             }
+            if (!$potentialIssue) {
+                $totalPassed++;
+            }
+            $totalProcessed++;
+            $totalPercentagePassed = round($totalPassed / $totalProcessed * 100, 2);
         }
         return true;
     }

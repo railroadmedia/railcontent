@@ -49,6 +49,11 @@ class ShopifyGateway
                                     sku
                                 }
                             }
+                            totalPriceSet {
+                                shopMoney {
+                                    amount
+                                }
+                            }
                         }
                     }
                     pageInfo {

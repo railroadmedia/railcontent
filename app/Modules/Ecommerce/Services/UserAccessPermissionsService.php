@@ -125,12 +125,6 @@ class UserAccessPermissionsService
     public function syncUser(User $user): void
     {
         //users may have legacy data that needs to be synced
-        $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
-        $this->ensureUserProductAccess(
-            $user,
-            $contentPermissionsLookup,
-        );
-
         $accessPermissions = $this->getUserAccessPermissions($user->id);
         if (config('shopify.enabled')) {
             event(new UserAccessPermissionsUpdated($accessPermissions));
@@ -169,6 +163,7 @@ class UserAccessPermissionsService
         Collection $contentPermissionsLookup
     ): bool {
         $shopifyOrderId = $order->id;
+        $status = $order->getPermissionStatusFromOrder();
 
         $wasUpdated = false;
         foreach ($order->lineItems as $lineItem) {
@@ -180,7 +175,6 @@ class UserAccessPermissionsService
                 $source = $order->getPaymentSourceEnum();
                 $accessPermission = $existingAccessPermissionsLookup["$source->value.$hash"] ?? null;
 
-                $status = $this->getPermissionStatusFromOrder($order);
                 if (!$accessPermission) {
                     $accessPermission = $this->createUserAccessPermission(
                         $user,
@@ -211,14 +205,6 @@ class UserAccessPermissionsService
             );
         }
         return $wasUpdated;
-    }
-
-    private function getPermissionStatusFromOrder(Order $order): UserAccessPermissionsStatusEnum
-    {
-        if ($order->cancelledAt) {
-            return UserAccessPermissionsStatusEnum::Revoked;
-        }
-        return UserAccessPermissionsStatusEnum::Active;
     }
 
     public function getOwnsPacks(UserAccessPermissionsCollection $userAccessPermissions): bool
