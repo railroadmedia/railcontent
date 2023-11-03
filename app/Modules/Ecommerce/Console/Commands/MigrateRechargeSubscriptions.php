@@ -104,13 +104,13 @@ class MigrateRechargeSubscriptions extends Command
 
 
             $productIds = $mappedProducts->mapWithKeys(
-                function ($product, $id) use ($shopify) {
+                function ($product) use ($shopify) {
                     try {
                         $variantId = $shopify->getVariant($product->shopify_id)?->product_id ?? 0;
                     } catch (\Exception $ex) {
                         $variantId = 0;
                     }
-                    return [$id => $variantId];
+                    return [$product->shopify_id => $variantId];
                 }
             )->toArray();
 
@@ -129,7 +129,7 @@ class MigrateRechargeSubscriptions extends Command
                         $i++;
                         continue;
                     }
-                    $product = $subscription->product;
+                    $product = $subscription->product->getFullProductForTrial();
                     $variantId = $product?->shopify_id ?? 0;
                     $productId = $productIds[$variantId] ?? 0;
                     $i++;
