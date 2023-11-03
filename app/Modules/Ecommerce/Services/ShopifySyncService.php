@@ -91,7 +91,8 @@ class ShopifySyncService
         $customers = $this->shopify->getCustomers(['email' => $email]);
         $customer = collect($customers)->first(fn($item) => $item->email === $email);
         if (!$customer) {
-            throw new Exception("Shopify customer not found for email: $email");
+            Log::warning("Customer with email $email not found in Shopify");
+            return;
         }
         $this->syncCustomer($customer->id, $email);
     }
