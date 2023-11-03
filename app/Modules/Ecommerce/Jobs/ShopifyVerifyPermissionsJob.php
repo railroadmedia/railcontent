@@ -63,7 +63,7 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
 
         $unifiedLaunchDate = Carbon::parse(config('ecommerce.launch_dates.unified'));
         foreach ($items as $user) {
-            /** @var User $item */
+            /** @var User $user */
             try {
                 $potentialIssue = false;
                 $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($user->id);
