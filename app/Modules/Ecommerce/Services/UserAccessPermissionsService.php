@@ -125,6 +125,12 @@ class UserAccessPermissionsService
     public function syncUser(User $user): void
     {
         //users may have legacy data that needs to be synced
+        $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
+        $this->ensureUserProductAccess(
+            $user,
+            $contentPermissionsLookup,
+        );
+
         $accessPermissions = $this->getUserAccessPermissions($user->id);
         if (config('shopify.enabled')) {
             event(new UserAccessPermissionsUpdated($accessPermissions));

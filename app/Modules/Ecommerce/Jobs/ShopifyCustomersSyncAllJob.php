@@ -49,7 +49,7 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
         $shopifySyncService = app(ShopifySyncService::class);
         foreach ($items as $item) {
             try {
-                $shopifySyncService->syncCustomer($item->shopify_id);
+                $shopifySyncService->syncCustomerByEmail($item->email);
             } catch (\Throwable $ex) {
                 Log::error("Error syncing shopify customer $item->shopify_id: user:$item->id");
                 Log::error($ex);
