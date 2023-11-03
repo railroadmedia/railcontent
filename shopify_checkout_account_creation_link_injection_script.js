@@ -209,7 +209,7 @@ if (Shopify.checkout.customer_id && Shopify.checkout.email && Shopify.checkout.l
     // insert link element
     document.querySelector('body > div.content > div > div > main > div.step > div.step__sections > div:nth-child(2) > div > div:nth-child(1)').insertAdjacentHTML(
         'beforebegin',
-        '<div style="margin-bottom: 30px;"><a href="' + urlToAccountSetupPage + '" style="font-size: 16pt; font-weight: bold;">Next Step: Click here to set up your new Musora account.</a></div>'
+        '<div style="margin-bottom: 30px;"><a href="' + urlToAccountSetupPage + '" style="font-size: 16pt; font-weight: bold;"><img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x60/shopify/checkout-thank-you-account-creation-image.png" alt="Create Your Account Here"></a></div>'
     );
 
     // change logout link to go to musora logout then back to shopify logout
