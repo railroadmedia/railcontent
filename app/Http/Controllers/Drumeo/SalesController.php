@@ -435,9 +435,4 @@ class SalesController extends BaseController
     {
         return view('drumeo.drumshop.pages.drumming-system', ['theme' => 'drumeo']);
     }
-
-    public function fiveforthreeBundle()
-    {
-        return view('drumeo.drumshop.pages.5-for-3-bundle', ['theme' => 'drumeo']);
-    }
 }

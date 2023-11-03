@@ -161,25 +161,16 @@
         </div>
     @endif
 
-    @include('guitareo.shop._partials._catalogue-filters', [
-        "all" => true,
+    @include('drumeo.drumshop._partials._catalogue-filters', [
         "noClothing" => true
     ])
-    <div class="white-box">
-        {{--        @include('_partials.layout.holiday.bundle-cards')--}}
-
-        {{--    LESSONS    --}}
+    <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
-            <ul class="container mx-auto fixed-cards text-center lg:text-left">
-                <li>
-                    <h1 class="float-left px-2 md:px-3 w-full">
-                        <div class="heading-icon text-guitareo"><i class="fas fa-video"></i></div>
-                        Guitar Lessons
-                    </h1>
-                </li>
-
-                @include('musora.shop._shop-card', [
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Guitar Lessons</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                    @include('musora.shop._shop-card-alt', [
                      "itemURL" => "/",
                      "sku" => null,
                      "thumbnail" => "https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-membership-shop.jpg",
@@ -195,7 +186,7 @@
                 ])
 
                 @foreach($lessons as $key => $lesson)
-                    @include('musora.shop._shop-card', [
+                    @include('musora.shop._shop-card-alt', [
                             "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
                             "thumbnail" => $lesson->thumbnail,
@@ -212,21 +203,18 @@
                             'FCP' => $key < 4 ? true : null,
                     ])
                 @endforeach
-            </ul>
+            </div>
+            </div>
         </section>
 
         {{--   ACCESSORIES     --}}
         <div id="accessories" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'accessories' || filter === 'all'">
-            <ul class="container mx-auto fixed-cards">
-                <li>
-                    <h1 class="float-left px-2 md:px-3 w-full">
-                        <div class="heading-icon text-guitareo"><i class="fas fa-mug-hot"></i></div>
-                        Accessories
-                    </h1>
-                </li>
-                @foreach($accessories as $accessory)
-                    @include('musora.shop._shop-card', [
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Accessories</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                    @foreach($accessories as $accessory)
+                    @include('musora.shop._shop-card-alt', [
                             "sku" => (str_contains($accessory->sku, 'member') || str_contains($accessory->sku, 'products')) ? '' : $accessory->sku,
                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
                             "thumbnail" => $accessory->thumbnail,
@@ -241,7 +229,8 @@
                             "size_case_sensitive" => $accessory->size_case_sensitive,
                     ])
                 @endforeach
-            </ul>
+            </div>
+            </div>
         </section>
 
     </div>
@@ -274,12 +263,4 @@
 
 @section('layout-footer')
     @include("guitareo.sales.partials._footer")
-@endsection
-
-@section('layout-scripts')
-    @parent
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2023-07-31 23:59:59',
-        'promoVersion' => true
-    ])
 @endsection

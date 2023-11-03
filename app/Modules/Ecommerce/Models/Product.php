@@ -12,6 +12,7 @@ use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
 use Carbon\Carbon;
 use Eloquent;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -350,4 +351,73 @@ class Product extends Model
         }
         return 0;
     }
+
+    /**
+     * Get the full product corresponding to this trial product.
+     * If this product is not a trial, it will return itself.
+     *
+     * @return $this|self
+     * @throws Exception
+     */
+    public function getFullProductForTrial(): self
+    {
+        if (!$this->isTrial()) {
+            return $this;
+        }
+
+        $fullProductSku = self::trialToFullProductSkuMap($this);
+        if (is_null($fullProductSku)) {
+            throw new Exception(sprintf("No full product found for trial product %s (%s)", $this->id, $this->sku));
+        }
+
+        $fullProductBySku = self::where("sku", $fullProductSku)->get();
+
+        if ($fullProductBySku->isEmpty()) {
+            throw new Exception(sprintf("No product found for sku %s", $fullProductSku));
+        }
+
+        if ($fullProductBySku->count() > 1) {
+            throw new Exception(sprintf("Multiple products found for sku %s", $fullProductSku));
+        }
+
+        return $fullProductBySku->first();
+    }
+
+    /**
+     * Get the sku of the full product corresponding to the given trial product's sku
+     *
+     * @param  Product  $product
+     * @return string|null
+     */
+    public static function trialToFullProductSkuMap(self $product): ?string
+    {
+        if (!$product->isTrial()) {
+            return null;
+        }
+
+        return match ($product->sku) {
+            'PIANOTE-MEMBERSHIP-TRIAL', 'PIANOTE-MEMBERSHIP-TRIAL-30-DAY' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+            'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL', 'PIANOTE-MEMBERSHIP-TRIAL-30-DAY-ANNUAL' => 'PIANOTE-MEMBERSHIP-1-YEAR',
+            'guitareo-monthly-recurring-30-day-trial-membership', 'GUITAREO-7-DAY-TRIAL-ONE-TIME', 'guitareo-monthly-recurring-7-day-trial-membership' => 'GUITAREO-1-MONTH-MEMBERSHIP',
+            'guitareo-annual-recurring-7-day-trial-membership', 'guitareo-annual-recurring-30-day-trial-membership' => 'GUITAREO-1-YEAR-MEMBERSHIP',
+            'DLM-Trial-1-month', 'DLM-Trial-30-Day' => 'DLM-1-month',
+            'DLM-Trial-Annual-30-Day', 'DLM-Trial-Annual-7-Day' => 'DLM-1-year',
+            'singeo-monthly-recurring-30-day-trial-membership', 'singeo-monthly-recurring-7-day-trial-membership' => 'singeo-monthly-recurring-membership',
+            'singeo-annual-recurring-30-day-trial-membership', 'singeo-annual-recurring-7-day-trial-membership' => 'singeo-annual-recurring-membership',
+            'musora-annual-recurring-7-day-trial-membership', 'musora-annual-recurring-30-day-trial-membership' => 'musora-annual-recurring-membership',
+            'musora-monthly-recurring-7-day-trial-membership', 'musora-monthly-recurring-30-day-trial-membership' => 'musora-monthly-recurring-membership',
+            'drumeo-base-annual-recurring-7-day-trial-membership' => 'drumeo-base-annual-recurring-membership',
+            'drumeo-base-monthly-recurring-7-day-trial-membership' => 'drumeo-base-monthly-recurring-membership',
+            'pianote-base-annual-recurring-7-day-trial-membership' => 'pianote-base-annual-recurring-membership',
+            'pianote-base-monthly-recurring-7-day-trial-membership' => 'pianote-base-monthly-recurring-membership',
+            'guitareo-base-annual-recurring-7-day-trial-membership' => 'guitareo-base-annual-recurring-membership',
+            'guitareo-base-monthly-recurring-7-day-trial-membership' => 'guitareo-base-monthly-recurring-membership',
+            'singeo-base-annual-recurring-7-day-trial-membership' => 'singeo-base-annual-recurring-membership',
+            'singeo-base-monthly-recurring-7-day-trial-membership' => 'singeo-base-monthly-recurring-membership',
+            'musora-base-annual-recurring-7-day-trial-membership' => 'musora-base-annual-recurring-membership',
+            'musora-base-monthly-recurring-7-day-trial-membership' => 'musora-base-monthly-recurring-membership',
+            default => null,
+        };
+    }
+
 }
