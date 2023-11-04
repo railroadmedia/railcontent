@@ -201,6 +201,7 @@
 @section('body-data')
     x-data="{
     waitlistModal: false,
+    trailer: false,
     }"
 @endsection
 
@@ -225,8 +226,10 @@
     'checklist' => ['Learn By Doing', 'Play Every Day', 'Guaranteed Results'],
     'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/header-right-collage.png',
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/header-left-collage.png',
-    'video' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/30dc.mp4',
+    'isVideo' => true,
+    'mediaSource' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/30dc.mp4',
     'buttonText' => 'GET STARTED',
+    'buttonLink' => "/ecommerce/add-to-cart?products[30-day-chops]=1&products[Drumeo-VaterSticks]=1&locked=true",
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
     'students' => 'drummers'
@@ -311,6 +314,7 @@ $items = [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/logo.svg',
     'items' => $items,
     'buttonText' => 'GET STARTED',
+    'buttonLink' => "/ecommerce/add-to-cart?products[30-day-chops]=1&products[Drumeo-VaterSticks]=1&locked=true",
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
     'students' => 'drummers'])
@@ -423,6 +427,7 @@ $points = [
     'title' => 'Improve your chops in just 30 days.',
     'points' => $points,
     'buttonTxt' => 'Get Started',
+    'buttonLink' => "/ecommerce/add-to-cart?products[30-day-chops]=1&products[Drumeo-VaterSticks]=1&locked=true",
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'profileImageAlt' => 'student profile image',
     'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/order-collage.png',
@@ -448,31 +453,19 @@ $points = [
             </div>
         @endslot
     @endcomponent --}}
-@include('drumeo.sales.partials._video-modal',[
-'modalId' => "trailer",
-"video" => '//player.vimeo.com/video/825206369?h=e8d828248a&autoplay=1',
-"title" => 'trailer'
-])
-@include('drumeo.sales.partials._video-modal',[
-'modalId' => "aaron",
-"video" => '//player.vimeo.com/video/823878266?h=c6a0279ff5&autoplay=1',
-"title" => 'aaron'
-])
-@include('drumeo.sales.partials._video-modal',[
-'modalId' => "anika",
-"video" => '//player.vimeo.com/video/823878240?h=9d697640d7&autoplay=1',
-"title" => 'anika'
-])
-@include('drumeo.sales.partials._video-modal',[
-'modalId' => "larnell",
-"video" => '//player.vimeo.com/video/823878300?h=dec74dc718&autoplay=1',
-"title" => 'larnell'
-])
 
-@include('_partials.components.countdown',[
-'countdownDate' => '2023-06-05 00:00:00',
-'promoVersion' => false
-])
+<!-- trailer for header section -->
+
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '825206369',
+        'vimeo' => true,
+    ])
+
+    @include('_partials.components.countdown',[
+    'countdownDate' => '2023-06-05 00:00:00',
+    'promoVersion' => false
+    ])
 
     @include("drumeo.sales.partials._footer")
 

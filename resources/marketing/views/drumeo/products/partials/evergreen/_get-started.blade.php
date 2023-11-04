@@ -13,7 +13,7 @@
                 </ul>
         </div>
 
-        <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">{{$buttonText}}</a><br>
+        <a href={{$buttonLink}} class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">{{$buttonText}}</a><br>
         <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" alt="joined student profiles" data-src={{$studentProfilesImage}}>
         <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join
             {{ $numStudents }} {{$students}} who<br> have already registered.</p>

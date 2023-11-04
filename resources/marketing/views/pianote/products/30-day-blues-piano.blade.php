@@ -205,8 +205,7 @@
 
 @section('body-data')
     x-data ='{
-    trailer : false,
-    demoVid : false,
+        trailer : false,
     }'
 @endsection
 
@@ -222,7 +221,7 @@
     ])
 
 <!-- Header Section -->
-    @include('drumeo.products.partials.evergreen._header', [
+    @include('pianote.products.partials._header-evergreen', [
     'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png',
     'logoAlt' => '30 day blues logo',
     'text' => 'Learn the Blues',
@@ -230,12 +229,14 @@
     'checklist' => ['Learn By Doing', 'Play Every Day', 'Perfect For Beginners'],
     'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/header-right-collage.png',
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/header-left-collage.png',
-    'video' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/30dc.mp4',
+    'mediaSource' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/video-thumb-header.png',
     'buttonText' => 'GET STARTED',
+    'buttonLink' => "/ecommerce/add-to-cart?product-array=30-day-blues-piano:1&redirect=/order&locked=true",
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
     'students' => 'piano players'
 ])
+
 
  <!-- Lessons Section -->
 @php
@@ -263,7 +264,7 @@ $features = [
 
 
 @include('drumeo.products.partials.evergreen._lessons', [
-    'title' => 'Learn the drums by actually playing the drums.',
+    'title' => 'Learn the piano by actually playing the piano.',
     'descriptionDesktop' => "Welcome to 30-Day Blues Piano! Join Kevin and jump into the world of blues piano. This is where you will gather all the knowledge that you need to build a foundation for blues, but also develop your skills in improvisation. Get ready to have some fun so you can be the blues player that you always wanted to be.",
     'descriptionMobile' => 'Welcome to 30-Day Blues Piano! Join Kevin and jump into the world of blues piano. This is where you will gather all the knowledge that you need to build a foundation for blues, but also develop your skills in improvisation. Get ready to have some fun so you can be the blues player that you always wanted to be.',
     'features' => $features,
@@ -321,6 +322,7 @@ $items = [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png',
     'items' => $items,
     'buttonText' => 'GET STARTED',
+    'buttonLink' => "/ecommerce/add-to-cart?product-array=30-day-blues-piano:1&redirect=/order&locked=true",
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
     'students' => 'piano players'])
@@ -405,7 +407,7 @@ $items = [
 <!-- Learn section -->
 @php
 $points = [
-            'Guided drum lessons for 30 days.',
+            'Guided piano lessons for 30 days.',
             'Practice the right things for 10 min/day.',
             'Learn on your own schedule.',
             'Play your favorite songs.',
@@ -419,6 +421,7 @@ $points = [
     'title' => 'Learn the blues by playing the blues',
     'points' => $points,
     'buttonTxt' => 'Get Started',
+    'buttonLink' => "/ecommerce/add-to-cart?product-array=30-day-blues-piano:1&redirect=/order&locked=true",
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'profileImageAlt' => 'student profile image',
     'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/30-day-blues/order-collage.png',
@@ -426,21 +429,18 @@ $points = [
     'numStudents' => number_format($nPackOwners ?? 0),
 ])
     
-    {{-- @include('_partials.components.video-modal',[
-        'name' => 'demoVid',
-        'video' => '852836211',
-        'vimeo' => true,
-    ]) --}}
-    {{-- @include('_partials.components.video-modal',[
+    @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '852795615',
         'vimeo' => true,
-    ]) --}}
+    ])
+
 
     {{-- @include('_partials.components.countdown',[
         'countdownDate' => '2023-09-01 00:00:00',
         'promoVersion' => false
     ]) --}}
+
     @include("pianote.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

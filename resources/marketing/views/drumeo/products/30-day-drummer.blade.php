@@ -228,6 +228,7 @@
 @section('body-data')
     x-data="{
     waitlistModal: false,
+    trailer: false,
     }"
 @endsection
 
@@ -252,8 +253,10 @@
     'brandTitle' => 'drumeo',
     'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/header-right-collage.png',
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/header-left-collage.png',
-    'video' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/video-reel.mp4',
+    'isVideo' => true,
+    'mediaSource' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/video-reel.mp4',
     'buttonText' => 'GET STARTED',
+    'buttonLink' => '/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_30-days:1&redirect=/order&locked=true',
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
     'students' => 'drummers'
@@ -311,6 +314,7 @@ $items = [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30_day_drummer_logo.png',
     'items' => $items,
     'buttonText' => 'GET STARTED',
+    'buttonLink' => '/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_30-days:1&redirect=/order&locked=true',
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
     'students' => 'drummers'])
@@ -439,6 +443,7 @@ $points = [
     'title' => 'Learn the drums with daily guided workouts.',
     'points' => $points,
     'buttonTxt' => 'Get Started',
+    'buttonLink' => '/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_30-days:1&redirect=/order&locked=true',
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'profileImageAlt' => 'student profile image',
     'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/order-collage.png',
@@ -463,18 +468,18 @@ $points = [
         @endslot
     @endcomponent --}}
 
-    @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/852777053?h=87d3e7a97a&autoplay=1',
-        "title" => 'trailer'
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '852777053',
+        'vimeo' => true,
     ])
 
     @include("drumeo.sales.partials._footer")
 
-    @include('_partials.components.countdown',[
+    {{-- @include('_partials.components.countdown',[
         'countdownDate' => '2023-09-04 00:00:00',
         'promoVersion' => false
-    ])
+    ]) --}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>

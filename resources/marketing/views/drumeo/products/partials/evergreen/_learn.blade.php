@@ -17,7 +17,7 @@
                         </ul>
                         <div class="flex flex-wrap flex-col sm:flex-nowrap lg:flex-row items-center mt-6 sm:mt-5 lg:mt-10">
                     <div class="w-full sm:w-2/3 text-center sm:pr-2 my-1">
-                        <a href="#final" class="join blue medium w-full anchor-slide">{{ $buttonTxt }}</a>
+                        <a href={{$buttonLink}} class="join blue medium w-full anchor-slide">{{ $buttonTxt }}</a>
                     </div>
                     <div class="w-full sm:w-2/3 sm:flex py-2 md:py-0 items-center">
                         <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload"
