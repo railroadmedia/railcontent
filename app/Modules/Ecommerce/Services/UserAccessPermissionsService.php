@@ -124,6 +124,11 @@ class UserAccessPermissionsService
 
     public function syncUser(User $user): void
     {
+        $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
+        $this->ensureUserProductAccess(
+            $user,
+            $contentPermissionsLookup,
+        );
         $this->handleUserPermissionsUpdatedEvent($user->id);
     }
 
