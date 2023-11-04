@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Platform;
 use App\Modules\Ecommerce\Services\ShopifyAPIService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
+use Illuminate\Support\Facades\Auth;
 
 class LoginPageController extends BaseController
 {
@@ -24,35 +25,18 @@ class LoginPageController extends BaseController
         // 3. pass both values through login form to auth endpoint
         // 4. auth endpoint should log in redirect back to checkout_url with encoded json for shopify: https://shopify.dev/docs/api/multipass
 
-        // If user is already logged in and it's a shopify multipass request,
-        // redirect straight back to shopify checkout_url or referrer with the encoded json.
-
-
-        if (!empty(user())) {
-            if ($request->get('shopify_mulitpass', 0) == 1) {
-                if (!empty($request->get('checkout_url'))) {
-                    $shopifyRedirectUrl = config('shopify.hostName') . $request->get('checkout_url');
-                } else {
-                    $shopifyRedirectUrl = $request->get(
-                        'referrer',
-                        $request->headers->get('referer', 'https://www.musora.com')
-                    );
-                }
-
-                $shopifyMultipassToken = $this->shopifyAPIService->generateMultipassToken(
-                    user()->getEmail(),
-                    $shopifyRedirectUrl
-                );
-
-                $multipassLoginUrl = config('shopify.hostName') . '/account/login/multipass/' . $shopifyMultipassToken;
-
-                return redirect()->away($multipassLoginUrl);
-            }
-
+        // only redirect already logged in users to the platform if its not a multipass request.
+        if (!empty(user()) && $request->get('shopify_mulitpass', 0) != 1) {
             return redirect()->route('platform.home-redirect');
         }
 
         if ($request->get('shopify_mulitpass', 0) == 1) {
+            // If there is a logged in user and its a multipass request, always log the user out and force the
+            // person to log in using the form. We must do this otherwise people cannot log out via Shopify.
+            if (!empty(user())) {
+                Auth::logout();
+            }
+
             return view(
                 'pages.login',
                 [
