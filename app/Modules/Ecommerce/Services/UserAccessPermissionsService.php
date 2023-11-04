@@ -274,6 +274,7 @@ class UserAccessPermissionsService
                     UserAccessPermissionsStatusEnum::Active,
                     $days,
                     0,
+                    null,
                     $isLifeTime
                 );
 
