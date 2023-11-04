@@ -76,9 +76,11 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
                 $diff = $newExpirationDate?->diffInDays($oldExpirationDate);
                 Log::info("$user->id:Verifying user permissions ($totalPercentagePassed%)");
                 if (($oldExpirationDate > $unifiedLaunchDate || $newExpirationDate > $unifiedLaunchDate)
-                    and (is_null($diff) || $diff > 0)) {
+                    and (is_null($diff)
+                        || $diff > 2 //buffer changed form 5 to 7 days
+                        || $diff < 0)) {
                     $potentialIssue = true;
-                    Log::warning("$user->id:$oldExpirationDate -> $newExpirationDate ($diff)");
+                    Log::warning("$user->id:membership $oldExpirationDate -> $newExpirationDate ($diff)");
                 }
 
                 $permissionIds = $userAccessPermissions->getActivePermissionIds();
@@ -118,7 +120,7 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
                     }
                     if (($oldExpirationDate > $unifiedLaunchDate || $expirationDate > $unifiedLaunchDate)
                         and (is_null($diffExpiration)
-                            || $diffExpiration > 2 //trials changed form 5 to 7 days
+                            || $diffExpiration > 2 //buffer changed form 5 to 7 days
                             || $diffExpiration < 0)) {
                         $potentialIssue = true;
                         Log::warning(

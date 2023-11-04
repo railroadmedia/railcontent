@@ -77,6 +77,9 @@ class ShopifySyncService
         } else {
             Log::debug("Customer $shopifyCustomerId: No digital products found");
             $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
+            if (!$user) {
+                $user = $this->userService->getByEmailOrNull($email);
+            }
             if ($user) {
                 $this->userAccessPermissionsService->syncUser($user);
             }
