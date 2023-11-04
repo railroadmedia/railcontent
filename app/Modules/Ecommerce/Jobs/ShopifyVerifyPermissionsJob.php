@@ -61,7 +61,6 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
         $totalPassed = 0;
         $totalPercentagePassed = 0;
 
-        $unifiedLaunchDate = Carbon::parse(config('ecommerce.launch_dates.unified'));
         foreach ($items as $user) {
             /** @var User $user */
             try {
@@ -75,10 +74,11 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
                 }
                 $diff = $newExpirationDate?->diffInDays($oldExpirationDate);
                 Log::info("$user->id:Verifying user permissions ($totalPercentagePassed%)");
-                if (($oldExpirationDate > $unifiedLaunchDate || $newExpirationDate > $unifiedLaunchDate)
+                if (($oldExpirationDate > Carbon::now() || $newExpirationDate > Carbon::now())
                     and (is_null($diff)
                         || $diff > 2 //buffer changed form 5 to 7 days
-                        || $diff < 0)) {
+                        || $diff < 0)
+                    and ($oldExpirationDate > Carbon::now() || $newExpirationDate > Carbon::now())) {
                     $potentialIssue = true;
                     Log::warning("$user->id:membership $oldExpirationDate -> $newExpirationDate ($diff)");
                 }
@@ -101,10 +101,12 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
                     /** @var UserPermission $userPermission */
                     $userPermission = $permissions[$permissionId] ?? null;
                     if ($userPermission == null) {
-                        $potentialIssue = true;
-                        Log::warning(
-                            "$user->id:User permission not found for user:$user->id, permission:$permissionId ($startDate - $expirationDate)"
-                        );
+                        if ($expirationDate > Carbon::now()) {
+                            $potentialIssue = true;
+                            Log::warning(
+                                "$user->id:User permission not found for user:$user->id, permission:$permissionId ($startDate - $expirationDate)"
+                            );
+                        }
                         continue;
                     }
 
@@ -118,7 +120,11 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
                             "$user->id:$permissionId start date in the future $oldStartDate -> $startDate ($diffStart)"
                         );
                     }
-                    if (($oldExpirationDate > $unifiedLaunchDate || $expirationDate > $unifiedLaunchDate)
+                    if ($permissionId == 1 && $expirationDate == Carbon::maxValue(
+                        ) && $user->is_drumeo_lifetime_member) {
+                        continue;
+                    }
+                    if (($oldExpirationDate > Carbon::now() || $expirationDate > Carbon::now())
                         and (is_null($diffExpiration)
                             || $diffExpiration > 2 //buffer changed form 5 to 7 days
                             || $diffExpiration < 0)) {
@@ -133,7 +139,8 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
                     $potentialIssue = true;
                     Log::warning("$user->id:Deleting user permissions:" . implode(',', $toDeleteIds));
                 }
-            } catch (\Throwable $ex) {
+            } catch
+            (\Throwable $ex) {
                 $potentialIssue = true;
                 Log::error("$user->id:Error verifying user permissions");
                 Log::error($ex);

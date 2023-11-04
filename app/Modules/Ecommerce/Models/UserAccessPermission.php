@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $time_days
  * @property integer $time_months
  * @property integer $time_lifetime
+ * @property ?Carbon $time_fixed
  * @property UserAccessPermissionsStatusEnum $status
  * @property Carbon $revoked_at
  * @property Carbon $created_at
@@ -39,9 +40,11 @@ class UserAccessPermission extends Model
         if ($this->time_lifetime) {
             return 'Forever';
         }
-        return Carbon::parse($this->start_time)->addDays($this->time_days)->addMonths(
-            $this->time_months
-        )->toDateTimeString();
+        return $this->time_fixed ? Carbon::parse($this->time_fixed)->toDateTimeString() :
+            Carbon::parse($this->start_time)
+                ->addDays($this->time_days)
+                ->addMonths($this->time_months)
+                ->toDateTimeString();
     }
 
     //These properties are calculated through the UserAccessPermissionsCollection determineActiveTimes method

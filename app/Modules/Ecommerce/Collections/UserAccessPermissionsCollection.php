@@ -64,10 +64,10 @@ class UserAccessPermissionsCollection
                 && $userAccessPermission->start_time > $unifiedLaunchDate; //do not aggregate permissions before unified launch
             $startDate = $aggregatePrevious ? $startDate : Carbon::parse($userAccessPermission->start_time);
             $tempStartDate = $aggregatePrevious ? $expirationDate : Carbon::parse($userAccessPermission->start_time);
-
-            $expirationDate = $tempStartDate->clone()
-                ->addDays($userAccessPermission->time_days)
-                ->addMonths($userAccessPermission->time_months);
+            $expirationDate = $userAccessPermission->time_fixed ? Carbon::parse($userAccessPermission->time_fixed)
+                : $tempStartDate->clone()
+                    ->addDays($userAccessPermission->time_days)
+                    ->addMonths($userAccessPermission->time_months);
             $userAccessPermission->actualStartTime = $tempStartDate;
             $userAccessPermission->actualExpirationTime = $expirationDate;
         }

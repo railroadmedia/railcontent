@@ -381,6 +381,7 @@ class UserAccessPermissionsService
         $userAccessPermission->time_days = $timeDays;
         $userAccessPermission->time_months = $timeMonths;
         $userAccessPermission->time_lifetime = $lifetime ?? 0;
+        $userAccessPermission->time_fixed = null;
         $userAccessPermission->status = $status;
         if ($revokedAt) {
             $userAccessPermission->revoked_at = $revokedAt;
@@ -403,8 +404,10 @@ class UserAccessPermissionsService
         Collection $existingAccessPermissionsLookup
     ) {
         if ($product->digital_membership_access_expiration_date
+            && $product->digital_membership_access_expiration_date > Carbon::now()
             && $user
-            && $user->membership_expiration_date < $product->digital_membership_access_expiration_date) {
+            && $user->membership_expiration_date < $product->digital_membership_access_expiration_date
+        ) {
             $hash = sha1("$sourceId.$product->id.bonus");
             if ($existingAccessPermissionsLookup["$source->value.$hash"] ?? null) {
                 return;
@@ -412,7 +415,6 @@ class UserAccessPermissionsService
             $membershipExpirationDate = Carbon::parse($user->membership_expiration_date)
                 ->addDays(-config('ecommerce.days_before_access_revoked_after_expiry', 7));
             $digitalMembershipAccessExpirationDate = Carbon::parse($product->digital_membership_access_expiration_date);
-            $timeDays = $membershipExpirationDate->diffInDays($digitalMembershipAccessExpirationDate) + 1;
             $this->createUserAccessPermission(
                 $user,
                 UserAccessPermissionsCollection::MusoraPlusMembershipPermission,
@@ -421,8 +423,9 @@ class UserAccessPermissionsService
                 $hash,
                 $product,
                 UserAccessPermissionsStatusEnum::Active,
-                $timeDays,
                 0,
+                0,
+                $digitalMembershipAccessExpirationDate,
                 false
             );
         }
@@ -451,6 +454,7 @@ class UserAccessPermissionsService
         UserAccessPermissionsStatusEnum $status,
         ?int $days = null,
         ?int $months = null,
+        ?Carbon $fixed = null,
         ?bool $isLifeTime = null
     ): ?UserAccessPermission {
         if (!isset($days)) {
@@ -474,6 +478,7 @@ class UserAccessPermissionsService
         $accessPermission->time_days = $days;
         $accessPermission->time_months = $months;
         $accessPermission->time_lifetime = $isLifeTime;
+        $accessPermission->time_fixed = $fixed;
         $accessPermission->status = $status;
         try {
             $accessPermission->save();
