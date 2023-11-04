@@ -261,10 +261,13 @@ class UserAccessPermissionsService
             if ($userAccessExpirationDate < $expirationDate) {
                 $days = $isLifeTime ? 0 : ($expirationDate->diffInDays($userAccessExpirationDate) + 1);
                 //User products not synced with orders Add manual permission to fix missing access
+                $startDate = $userAccessExpirationDate->subDays(
+                    config('ecommerce.days_before_access_revoked_after_expiry', 7)
+                );
                 $accessPermission = $this->createUserAccessPermission(
                     $user,
                     $permissionId,
-                    $userAccessExpirationDate,
+                    $startDate,
                     UserAccessPermissionsSourceEnum::Migration,
                     '',
                     new Product(),
