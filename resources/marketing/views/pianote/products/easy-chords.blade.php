@@ -574,7 +574,7 @@ $points = [
 @endphp
 
 @include('drumeo.products.partials.evergreen._learn', [
-    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png',
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/easy-chords/new-piano-players-start-here-logo-2.jpg',
     'logoAlt' => '30 day easy chords logo',
     'title' => '30 days to better piano chords',
     'points' => $points,
