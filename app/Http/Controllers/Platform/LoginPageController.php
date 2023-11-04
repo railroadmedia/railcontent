@@ -30,6 +30,30 @@ class LoginPageController extends BaseController
             return redirect()->route('platform.home-redirect');
         }
 
+        // if the user just logged in and it's a multipass request, redirect back to shopify multipass/checkout url
+        if (!empty(user()) &&
+            $request->get('shopify_mulitpass', 0) == 1 &&
+            $request->get('redirect_to_multipass', 0) == 1) {
+            
+            if (!empty($request->get('checkout_url'))) {
+                $shopifyRedirectUrl = config('shopify.hostName') . $request->get('checkout_url');
+            } else {
+                $shopifyRedirectUrl = $request->get(
+                    'referrer',
+                    $request->headers->get('referer', 'https://www.musora.com')
+                );
+            }
+
+            $shopifyMultipassToken = $this->shopifyAPIService->generateMultipassToken(
+                user()->getEmail(),
+                $shopifyRedirectUrl
+            );
+
+            $multipassLoginUrl = config('shopify.hostName') . '/account/login/multipass/' . $shopifyMultipassToken;
+
+            return redirect()->away($multipassLoginUrl);
+        }
+
         if ($request->get('shopify_mulitpass', 0) == 1) {
             // If there is a logged in user and its a multipass request, always log the user out and force the
             // person to log in using the form. We must do this otherwise people cannot log out via Shopify.
@@ -44,6 +68,7 @@ class LoginPageController extends BaseController
                         'login',
                         [
                             'shopify_mulitpass' => 1,
+                            'redirect_to_multipass' => 1,
                             'checkout_url' => $request->get('checkout_url'),
                             'referrer' => $request->headers->get('referer', 'https://www.musora.com')
                         ]
