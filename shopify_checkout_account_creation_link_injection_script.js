@@ -190,18 +190,6 @@ if (document.currentScript) {
 
 const currentScriptUrlWithoutPath = currentScriptUrl.protocol + '//' + currentScriptUrl.host;
 
-// change logout link to go to musora logout then back to shopify logout
-window.addEventListener('load', function () {
-    const shopifyLogOutLinkElement = document.querySelector('a[href*="logout"]');
-
-    if (shopifyLogOutLinkElement) {
-        const shopifyLogOutLinkUrl = shopifyLogOutLinkElement.href;
-
-        shopifyLogOutLinkElement.href = currentScriptUrlWithoutPath + '/user-management-system/logout/cookie?redirect_to=' +
-            encodeURIComponent(shopifyLogOutLinkUrl);
-    }
-});
-
 // if there is a customer it's the thankyou page and the customer
 // is viewing their own order, show account setup/access buttons
 if (Shopify.checkout.customer_id && Shopify.checkout.email && Shopify.checkout.line_items) {
