@@ -38,6 +38,7 @@ class UserAccessPermissionsCollection
 
     public function getActiveDates(int|array $permissions, $includeBuffer = true): array
     {
+        $unifiedLaunchDate = Carbon::parse(config('ecommerce.launch_dates.unified'));
         if (is_integer($permissions)) {
             $userAccessPermissions = $this->permissionIdLookup[$permissions] ?? collect();
         } else {
@@ -58,10 +59,11 @@ class UserAccessPermissionsCollection
                 $userAccessPermission->actualExpirationTime = Carbon::parse($userAccessPermission->revoked_at);
                 continue;
             }
-            $startDate = $expirationDate != null && $expirationDate > $userAccessPermission->start_time
-                ? $startDate : Carbon::parse($userAccessPermission->start_time);
-            $tempStartDate = $expirationDate != null && $expirationDate > $userAccessPermission->start_time
-                ? $expirationDate : Carbon::parse($userAccessPermission->start_time);
+            $aggregatePrevious = $expirationDate != null
+                && $expirationDate > $userAccessPermission->start_time
+                && $userAccessPermission->start_time > $unifiedLaunchDate; //do not aggregate permissions before unified launch
+            $startDate = $aggregatePrevious ? $startDate : Carbon::parse($userAccessPermission->start_time);
+            $tempStartDate = $aggregatePrevious ? $expirationDate : Carbon::parse($userAccessPermission->start_time);
 
             $expirationDate = $tempStartDate->clone()
                 ->addDays($userAccessPermission->time_days)

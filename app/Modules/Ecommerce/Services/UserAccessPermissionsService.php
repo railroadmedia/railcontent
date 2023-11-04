@@ -157,6 +157,7 @@ class UserAccessPermissionsService
         Collection $contentPermissionsLookup
     ): bool {
         $shopifyOrderId = $order->id;
+        $status = $order->getPermissionStatusFromOrder();
 
         $wasUpdated = false;
         foreach ($order->lineItems as $lineItem) {
@@ -171,7 +172,6 @@ class UserAccessPermissionsService
                 $source = $order->getPaymentSourceEnum();
                 $accessPermission = $existingAccessPermissionsLookup["$source->value.$hash"] ?? null;
 
-                $status = $this->getPermissionStatusFromOrder($order);
                 if (!$accessPermission) {
                     $accessPermission = $this->createUserAccessPermission(
                         $user,
@@ -202,14 +202,6 @@ class UserAccessPermissionsService
             );
         }
         return $wasUpdated;
-    }
-
-    private function getPermissionStatusFromOrder(Order $order): UserAccessPermissionsStatusEnum
-    {
-        if ($order->cancelledAt) {
-            return UserAccessPermissionsStatusEnum::Revoked;
-        }
-        return UserAccessPermissionsStatusEnum::Active;
     }
 
     public function getOwnsPacks(UserAccessPermissionsCollection $userAccessPermissions): bool
