@@ -66,6 +66,12 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
             try {
                 $potentialIssue = false;
                 $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($user->id);
+                $permissions = $cs->buildUserPermissionsList($user->id);
+
+                if ($userAccessPermissions->getCollection()->count() == 0 && count($permissions) > 0) {
+                    Log::info("$user->id:Verification skipped.");
+                    continue;
+                }
 
                 $newExpirationDate = $userAccessPermissions->getMembershipExpirationDate();
                 $oldExpirationDate = $user->membership_expiration_date;
@@ -87,8 +93,6 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
 //                $existingUserPermissions = $this->contentPermissionsService->getUserPermissions($user->id)->keyBy(
 //                    'permission_id'
 //                );
-
-                $permissions = $cs->buildUserPermissionsList($user->id);
 
 
                 $toDeleteIds = collect($permissions)->where(function ($item, $key) use ($permissionIds) {
