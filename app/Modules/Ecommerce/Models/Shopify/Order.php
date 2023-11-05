@@ -20,6 +20,8 @@ class Order
     public ?Carbon $processedAt;
     public ?Carbon $cancelledAt;
 
+    private float $totalPaid;
+
     public function __construct($graphGLResponse)
     {
         $this->gid = $graphGLResponse->id;
@@ -33,6 +35,7 @@ class Order
         $this->lineItems = collect($graphGLResponse->lineItems->nodes)->map(function ($item) {
             return new OrderLineItem($this, $item);
         });
+        $this->totalPaid = $graphGLResponse->totalPriceSet->shopMoney->amount;
     }
 
     public function getPaymentSourceEnum(): UserAccessPermissionsSourceEnum
@@ -66,6 +69,12 @@ class Order
     public function getPermissionStatusFromOrder(): UserAccessPermissionsStatusEnum
     {
         if ($this->cancelledAt) {
+            return UserAccessPermissionsStatusEnum::Revoked;
+        }
+        if ($this->processedAt < config('ecommerce.launch_dates.shopify')
+            && !$this->isTrialOrder()
+            && $this->totalPaid == 0) {
+            //case for migration data that was refunded does not actually use refunds/cancellations
             return UserAccessPermissionsStatusEnum::Revoked;
         }
         return UserAccessPermissionsStatusEnum::Active;
