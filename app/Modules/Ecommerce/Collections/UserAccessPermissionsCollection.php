@@ -49,6 +49,7 @@ class UserAccessPermissionsCollection
             ->sortBy('start_time');
         $expirationDate = null;
         $startDate = null;
+        $canAggregate = false;
         /** @var UserAccessPermission $userAccessPermission */
         foreach ($userAccessPermissions as $userAccessPermission) {
             if ($userAccessPermission->time_lifetime && $userAccessPermission->status != 'revoked') {
@@ -61,7 +62,8 @@ class UserAccessPermissionsCollection
             }
             $aggregatePrevious = $expirationDate != null
                 && $expirationDate > $userAccessPermission->start_time
-                && $userAccessPermission->start_time > $unifiedLaunchDate; //do not aggregate permissions before unified launch
+                && $canAggregate; //do not aggregate permissions before unified launch
+            $canAggregate = $userAccessPermission->start_time > $unifiedLaunchDate;
             $startDate = $aggregatePrevious ? $startDate : Carbon::parse($userAccessPermission->start_time);
             $tempStartDate = $aggregatePrevious ? $expirationDate : Carbon::parse($userAccessPermission->start_time);
             $expirationDate = $userAccessPermission->time_fixed ? Carbon::parse($userAccessPermission->time_fixed)
