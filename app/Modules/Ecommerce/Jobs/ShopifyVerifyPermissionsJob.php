@@ -120,14 +120,18 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
                             "$user->id:$permissionId start date in the future $oldStartDate -> $startDate ($diffStart)"
                         );
                     }
-                    if ($permissionId == 1 && $expirationDate == Carbon::maxValue(
-                        ) && $user->is_drumeo_lifetime_member) {
-                        continue;
-                    }
                     if (($oldExpirationDate > Carbon::now() || $expirationDate > Carbon::now())
                         and (is_null($diffExpiration)
                             || $diffExpiration > 2 //buffer changed form 5 to 7 days
                             || $diffExpiration < 0)) {
+                        if ($permissionId == 1 && $expirationDate == Carbon::maxValue(
+                            ) && $user->is_drumeo_lifetime_member) {
+                            continue;
+                        }
+                        if ($permissionId == 77 && $expirationDate == Carbon::maxValue() && $user->is_lifetime_member) {
+                            continue;
+                        }
+
                         $potentialIssue = true;
                         Log::warning(
                             "$user->id:$permissionId $oldExpirationDate -> $expirationDate ($diffExpiration)"
