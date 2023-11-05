@@ -132,7 +132,7 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
                             ) && $user->is_drumeo_lifetime_member) {
                             continue;
                         }
-                        if (in_array($permissionId, [73, 77, 92]) && $expirationDate == Carbon::maxValue() && $user->is_lifetime_member) {
+                        if ($permissionId == 77 && $expirationDate == Carbon::maxValue() && $user->is_lifetime_member) {
                             continue;
                         }
 

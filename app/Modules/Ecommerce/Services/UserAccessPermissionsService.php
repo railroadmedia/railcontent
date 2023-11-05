@@ -256,13 +256,14 @@ class UserAccessPermissionsService
             $expirationDate = $isLifeTime ? Carbon::maxValue() : Carbon::parse($dates['expiration_date']);
 
             [, $userAccessExpirationDate] = $userAccessPermissions->getActiveDates($permissionId);
-            if ($userAccessExpirationDate < Carbon::now()) {
-                $userAccessExpirationDate = Carbon::now();
+            $userAccessExpirationDateOrNow = $userAccessExpirationDate?->clone();
+            if ($userAccessExpirationDateOrNow < Carbon::now()) {
+                $userAccessExpirationDateOrNow = Carbon::now();
             }
-            if ($userAccessExpirationDate < $expirationDate) {
-                $days = $isLifeTime ? 0 : ($expirationDate->diffInDays($userAccessExpirationDate) + 1);
+            if ($userAccessExpirationDateOrNow < $expirationDate) {
+                $days = $isLifeTime ? 0 : ($expirationDate->diffInDays($userAccessExpirationDateOrNow) + 1);
                 //User products not synced with orders Add manual permission to fix missing access
-                $startDate = $userAccessExpirationDate->subDays(
+                $startDate = $userAccessExpirationDateOrNow->subDays(
                     config('ecommerce.days_before_access_revoked_after_expiry', 7)
                 );
                 $accessPermission = $this->createUserAccessPermission(
@@ -282,12 +283,11 @@ class UserAccessPermissionsService
                 if ($accessPermission) {
                     $wasUpdated = true;
                 }
-            } elseif ($expirationDate < Carbon::now() && $userAccessExpirationDate > Carbon::now()) {
+            } elseif ($userAccessExpirationDate < Carbon::now() && $expirationDate > Carbon::now()) {
                 //permission was revoked
                 $userAccessPermissions->getCollection()->where('permission_id', $permissionId)->each(
                     function (UserAccessPermission $userAccessPermission) {
-                        if ($userAccessPermission->source != UserAccessPermissionsSourceEnum::Migration
-                            && $userAccessPermission->actualExpirationTime > Carbon::now()) {
+                        if ($userAccessPermission->actualExpirationTime > Carbon::now()) {
                             $userAccessPermission->status = UserAccessPermissionsStatusEnum::Revoked;
                             $userAccessPermission->save();
                         }
