@@ -121,7 +121,7 @@ class UserAccessPermissionsService
             );
         }
 
-        $this->handleUserPermissionsUpdatedEvent($userId);
+        $this->handleUserPermissionsUpdatedEvent($user);
     }
 
     public function syncUser(User $user): void
@@ -131,7 +131,7 @@ class UserAccessPermissionsService
             $user,
             $contentPermissionsLookup,
         );
-        $this->handleUserPermissionsUpdatedEvent($user->id);
+        $this->handleUserPermissionsUpdatedEvent($user);
     }
 
     public function syncShopifyOrders(User $user, OrderCollection $orderCollection): void
@@ -154,7 +154,7 @@ class UserAccessPermissionsService
         );
 
 
-        $this->handleUserPermissionsUpdatedEvent($user->id, $orderCollection);
+        $this->handleUserPermissionsUpdatedEvent($user, $orderCollection);
     }
 
     private function syncShopifyOrder(
@@ -395,7 +395,9 @@ class UserAccessPermissionsService
         }
         $userAccessPermission->save();
 
-        $this->handleUserPermissionsUpdatedEvent($userId);
+        $user = $this->userService->getByIdOrNull($userId);
+
+        $this->handleUserPermissionsUpdatedEvent($user);
 
         return $userAccessPermission;
     }
@@ -499,18 +501,40 @@ class UserAccessPermissionsService
         return $accessPermission;
     }
 
-    public function handleUserPermissionsUpdatedEvent(int $userId, OrderCollection $orderCollection = null): void
+    private function handleUserPermissionsUpdatedEvent(User $user, OrderCollection $orderCollection = null): void
     {
         if (config('shopify.enabled')) {
-            $accessPermissions = $this->getUserAccessPermissions($userId);
+            $accessPermissions = $this->getUserAccessPermissions($user->id);
+            $shouldSyncCIOWorkspaces = $this->getShouldSyncCustomerIOWorkspace(
+                $orderCollection,
+                $accessPermissions
+            );
+            $user->setCustomerIOSyncedWorkspaces($shouldSyncCIOWorkspaces);
+            $user->save();
+
             $subscriptions = null;
             try {
                 $subscriptions = $this->subscriptionService->syncSubscriptionData($accessPermissions);
             } catch (\Throwable $e) {
-                Log::error("Error syncing subscriptions for user: $userId");
+                Log::error("Error syncing subscriptions for user: $user->id");
                 Log::error($e);
             }
             event(new UserAccessPermissionsUpdated($accessPermissions, $orderCollection, $subscriptions));
         }
+    }
+
+    private function getShouldSyncCustomerIOWorkspace(
+        ?OrderCollection $orderCollection,
+        UserAccessPermissionsCollection $accessPermissions
+    ): array {
+        $contentPermissions = $this->contentPermissionsService->getAll();
+        $brands = $contentPermissions->whereIn('id', $accessPermissions->getActivePermissionIds())->pluck(
+            'brand'
+        )->unique()->toArray();
+        if ($orderCollection) {
+            $orderBrands = $orderCollection->getOrderBrands();
+            $brands = array_unique(array_merge($brands, $orderBrands));
+        };
+        return $brands;
     }
 }

@@ -75,7 +75,7 @@ class ShopifySyncService
             Log::debug("Customer $shopifyCustomerId: Found $count orders");
             $user = $this->getOrCreateUser($shopifyCustomerId, $email);
             $orderCollection = new OrderCollection($orders, $products);
-            $this->updateUserData($orderCollection, $shopifyCustomerId, $user);
+            $this->updateUserData($shopifyCustomerId, $user);
             $this->userAccessPermissionsService->syncShopifyOrders($user, $orderCollection);
 
         } else {
@@ -291,11 +291,9 @@ class ShopifySyncService
         return $this->shopify->getOrder($orderId);
     }
 
-    public function updateUserData(OrderCollection $orders, int $shopifyCustomerId, User $user): void
+    public function updateUserData(int $shopifyCustomerId, User $user): void
     {
-        $orderBrands = $orders->getOrderBrands();
         $user->shopify_id = $shopifyCustomerId;
-        $user->setCustomerIOSyncedWorkspaces($orderBrands);
         $user->save();
     }
 }
