@@ -80,13 +80,9 @@ class UserController extends Controller
         $user->display_name = $parts[0] . rand(10000, 99999);
         $user->save();
 
-        $newUser =
-            User::where('email', $user->email)
-                ->first();;
+        event(new UserCreated($user));
 
-        event(new UserCreated($newUser));
-
-        Auth::loginUsingId($newUser->getId());
+        Auth::loginUsingId($user->getId());
 
         return $request->has('redirect') ?
             redirect()
