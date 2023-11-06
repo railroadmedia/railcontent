@@ -297,21 +297,9 @@ class ShopifySyncService
         $user->save();
     }
 
-    public function ensureUserSynced(User $user)
+    public function syncUser(User $user)
     {
-        $shopifyCustomer = $this->getShopifyCustomer($user->email);
-        if ($shopifyCustomer && $user->isAccountSetup()) {
-            $customerData = [];
-            $customerData["metafields"] = [
-                [
-                    "key" => ShopifyMetafieldKey::Id->value,
-                    "value" => (string)$user->id,
-                    "type" => ShopifyMetafieldTypes::integer->value,
-                    "namespace" => ShopifyMetafieldNamespace::Model_Users->value,
-                ],
-            ];
-            $this->shopify->updateCustomer($shopifyCustomer->id, $customerData);
-        }
+        $this->shopifyCustomerService->createShopifyCustomer($user);
     }
 
     public function getShopifyCustomer($email): mixed
