@@ -35,11 +35,11 @@
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/rudiments-book/rudiments-book.png"
                     alt="rudiments book">
                 <h2 class="text-center py-10 text-3xl md:text-6xl"><strong>Choose your platform</strong></h2>
-                <div class="flex-row items-center text-white text-xl sm:text-2xl leading-loose">
+                <div class="flex-row items-center text-white leading-loose">
                     <div class="flex justify-center">
                         <a href="https://music.apple.com/ca/artist/drumeo/1707098843" target="_blank"
                             x-data="{ isHovered: false }">
-                            <button class="text-white rounded-full w-40 sm:w-48 md:w-72 h-12 sm:h-16 mx-2"
+                            <button class="text-xl sm:text-2xl rounded-full w-40 sm:w-48 md:w-72 h-12 sm:h-16 mx-2"
                                 style="background: #2EBD59" @mouseenter="isHovered = true" @mouseleave="isHovered = false"
                                 :style="{ filter: isHovered ? 'brightness(120%)' : 'brightness(100%)' }">
                                 <i class="fas fa-brands fa-spotify text-white"></i> <strong> Spotify </strong>
@@ -48,7 +48,7 @@
 
                         <a href="https://open.spotify.com/artist/7pxX1NadzHWfzSXyAPO2ha" target="_blank"
                             x-data="{ isHovered: false }">
-                            <button class="bg-black uppercase rounded-full w-40 sm:w-48 md:w-72 h-12 sm:h-16 mx-2"
+                            <button class="bg-black text-xl sm:text-2xl uppercase rounded-full w-40 sm:w-48 md:w-72 h-12 sm:h-16 mx-2"
                                 style="background: #000000" @mouseenter="isHovered = true" @mouseleave="isHovered = false"
                                 :style="{ 'background-color': isHovered ? '#323232' : '#000000' }">
                                 <i class="fas fa-brands fa-apple"></i> <strong> Music </strong>
