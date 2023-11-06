@@ -158,7 +158,7 @@
                 </div>
             </div>
             <div class="inline-block italic text-pianote py-4 px-6" style="background:#111F29;">
-                The winner will be announced during a LIVE event on November 21st!
+                The winner will be announced during a LIVE event on November 20th!
             </div>
         </div>
     </section>
