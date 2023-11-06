@@ -78,6 +78,7 @@ class CustomerIoSyncService
                 $contentFollowAttributes,
             );
         } else {
+            //TODO: remove post shopify
             $membershipAccessAttributes = $this->getUsersMembershipAccessAttributesDeprecated($user, $brands);
 
             $contentFollowAttributes = $this->getUsersContentFollowAttributes($user);
@@ -125,32 +126,12 @@ class CustomerIoSyncService
 
     private function getUsersMembershipAccessAttributes(User $user, mixed $brands): array
     {
-        $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($user->id);
-        $isAppSignup = false;
         $attributes = [];
         foreach ($brands as $brand) {
             $attributes += [
                 $brand . "_membership_access-expiration-date" => $user->membership_expiration_date,
-//                $brand . "_membership_latest-access-start-date" => '',
-//                $brand . "_membership_first-access-start-date" => '',
                 $brand . "_membership_is_lifetime" => $user->is_lifetime_member ? "true" : "false",
-//                $brand . "_membership_latest-access-type" => '',
-//                $brand . "_membership_status" => '',
-//                $brand . "_membership_latest-access-product-id" => '',
-//                $brand . '_membership_subscription_type' => '',
-//                $brand . '_membership_subscription-rate-cents' => '',
-//                $brand . '_membership_subscription-currency' => '',
-//                $brand . '_membership_subscription_renewal-date' => '',
-//                $brand . '_retention_failed-billing_membership_subscription-renewal-attempts' => '',
-//                $brand . '_membership_subscription_cancellation-date' => '',
-//                $brand . '_membership_subscription_cancellation-reason' => '',
-//                $brand . '_membership_subscription_latest-start-date' => '',
-//                $brand . '_membership_subscription_first-start-date' => '',
-//                $brand . '_membership_subscription_trial-type' => '',
-//                $brand . '_user_payment_primary-method-expiration-date' => '',
-                $brand . '_membership_subscription_source_app-store' => $user->hasMobileMembership() ? "true" : "false",
-//                $brand . '_owned_pack_product_skus' => '',
-//                $brand . '_owned_pack_product_ids' => '',
+                //$brand . '_membership_subscription_source_app-store' => $user->hasMobileMembership() ? "true" : "",
             ];
         }
         return $attributes;

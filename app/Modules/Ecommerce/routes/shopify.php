@@ -13,5 +13,8 @@ Route::prefix('ecommerce/shopify')->group(function () {
 
             Route::post('order/create', [ShopifyWebHookController::class, 'orderCreated'])
                 ->name('shopify.webhook.order.create');
+
+            Route::post('refunds/create', [ShopifyWebHookController::class, 'refundCreated'])
+                ->name('shopify.webhook.refund.create');
         });
 });
