@@ -840,7 +840,7 @@ class CustomerIoSyncEventListener
             dispatch(
                 (new CustomerIoCreateEventByUserId(
                     $activityEvent->getUserId(),
-                    config('event-data-syncrhonizer.customer_io_account_to_sync_all_brands'),
+                    config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
                     'musora_members_area_activity',
                     [
                         'brands' => $activityEvent->getBrands()
