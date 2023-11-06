@@ -6,6 +6,7 @@ use App;
 use App\Http\Controllers\BaseController;
 use App\Modules\Crux\ProductAccessMap;
 use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\Ecommerce\Services\ShopifyAPIService;
 use Carbon\Carbon;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -106,6 +107,7 @@ class ProfileSettingsPagesController extends BaseController
     private CustomerIoService $customerIoService;
     private ProductRepository $productRepository;
     private UpgradeService $upgradeService;
+    private ShopifyAPIService $shopifyAPIService;
 
     /**
      * @param NotificationSettingsService $notificationSettingsService
@@ -125,7 +127,8 @@ class ProfileSettingsPagesController extends BaseController
         MembershipActionRepository $membershipActionRepository,
         CustomerIoService $customerIoService,
         ProductRepository $productRepository,
-        UpgradeService $upgradeService
+        UpgradeService $upgradeService,
+        ShopifyAPIService $shopifyAPIService
     ) {
         $this->notificationSettingsService = $notificationSettingsService;
         $this->userSignaturesRepository = $userSignaturesRepository;
@@ -142,6 +145,7 @@ class ProfileSettingsPagesController extends BaseController
         $this->customerIoService = $customerIoService;
         $this->productRepository = $productRepository;
         $this->upgradeService = $upgradeService;
+        $this->shopifyAPIService = $shopifyAPIService;
     }
 
     // ------------------------------------------ "top-level" public methods -------------------------------------------
@@ -218,113 +222,14 @@ class ProfileSettingsPagesController extends BaseController
     {
         $user = user();
 
-        $paymentMethods = $this->paymentMethodRepository->getAllUsersPaymentMethods(
-            $user->id,
-            $request,
-            brand()
-        );
-
-        $paymentMethodsJson = ResponseService::paymentMethod(
-            $paymentMethods
-        )
-            ->respond()
-            ->getContent();
-
-        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.musora.stripe_publishable_key');
-
-        $membershipProductIds = ProductModel::query()
-            ->where([
-                'type' => 'digital subscription',
-                'digital_access_type' => 'all content access',
-                'digital_access_time_type' => 'recurring'
-            ])
-            ->get(['id'])
-            ->pluck('id')
-            ->toArray();
-
-        $currentSubscription = $this->subscriptionRepository->getUserSubscriptionForProducts(
-            $user->id,
-            $membershipProductIds
-        );
-
-        $existingSubscriptionActive = false;
-
-        if (!empty($currentSubscription) && $currentSubscription->getIsActive()) {
-            $existingSubscriptionActive = true;
-        }
-
-        if (!empty($currentSubscription) && !empty($currentSubscription->getProduct())) {
-            $this->cartService->refreshCart();
-
-            $this->cartService->clearCart();
-
-            $this->cartService->addToCart(
-                $currentSubscription->getProduct()
-                    ->getSku(),
-                1,
-                true
-            );
-
-            try {
-                if (!empty($currentSubscription->getPaymentMethod()) && !empty(
-                    $currentSubscription->getPaymentMethod()
-                        ->getBillingAddress()
-                    )) {
-                    $this->cartService->getCart()
-                        ->setBillingAddress(
-                            $currentSubscription->getPaymentMethod()
-                                ->getBillingAddress()
-                                ->toStructure()
-                        );
-                }
-            } catch (Throwable $throwable) {
-            }
-
-            // if current sub price less than product standard price, set "override to display" price
-
-            $subProductDefaultPrice = $currentSubscription->getProduct()->getPrice();
-            $subCurrentPrice = $currentSubscription->getTotalPrice(); // same as $subTransformed['total_price'] below
-
-            if ($subProductDefaultPrice !== $subCurrentPrice) {
-                $subTransformed = $this->subscriptionTransformer->transform($currentSubscription);
-
-                foreach ($this->cartService->getCart()->getItems() as $cartItem) {
-                    $cartItem->setDueOverride($subTransformed['total_price']);
-                }
-            }
-        }
-
-        $payments = $this->paymentRepository->getAllUsersPayments($user->id, false, brand());
-
-        // sort by date
-        usort(
-            $payments,
-            function (Payment $a, Payment $b) {
-                return $a->getCreatedAt() < $b->getCreatedAt();
-            }
-        );
-
-        if ($user->is_lifetime_member) {
-            $currentSubscription = null;
-        }
+        $shopifyOrders = $this->shopifyAPIService->getAllCustomersOrders($user->email);
 
         return view(
             'account.settings.payments',
             [
                 'sections' => $this->settingSections('payments'),
-                'paymentMethodsJson' => $paymentMethodsJson,
-                'stripePublishableKey' => $stripePublishableKey,
-                'countries' => json_encode(array_values(CountryListService::allWithCommonDuplicatedAtTop())),
-                'provinces' => json_encode(array_keys(config('ecommerce.tax_rates_and_options.canada'))),
-                'cartJson' => json_encode($this->cartService->toArray()),
-                'currentSubscription' => $currentSubscription,
-                'existingSubscriptionActive' => $existingSubscriptionActive,
                 'currentUser' => $user,
-                'payments' => $payments,
-                'displayOverrideTax' => $displayOverrideTax ?? false,
-                // todo: remove from here and vuesora because now obsolete
-                'displayOverridePrice' => $displayOverridePrice ?? false,
-                // todo: remove from here and vuesora because now obsolete
+                'shopifyOrders' => $shopifyOrders,
             ]
         );
     }
@@ -577,6 +482,8 @@ class ProfileSettingsPagesController extends BaseController
         $showManageSongsButton = !user()->isAdmin()
             && ($isLifetime || $this->upgradeService->getCurrentSubscription() != null);
 
+        $shopifyCustomerAccessToken = $this->shopifyAPIService->getCustomerAccessTokenFromMultipass(user()->getEmail());
+
         return view(
             'account.settings.account',
             [
@@ -600,6 +507,7 @@ class ProfileSettingsPagesController extends BaseController
                 'currentTier' => $currentTier,
                 'upgradeCost' => $proratedUpgradeCost,
                 'showSongsUpgradeButton' => $showManageSongsButton,
+                'shopifyCustomerAccessToken' => $shopifyCustomerAccessToken,
             ]
         );
     }

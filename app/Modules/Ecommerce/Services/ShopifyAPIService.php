@@ -647,6 +647,132 @@ class ShopifyAPIService
         return strtr(base64_encode($cipherText . hash_hmac("sha256", $cipherText, $signatureKey, true)), '+/', '-_');
     }
 
+    public function getCustomerAccessTokenFromMultipass($userEmail)
+    {
+        $multipassToken = $this->generateMultipassToken($userEmail);
+
+        $cartData = $this->storefrontClient->query(
+            <<<GRAPHQL
+                mutation {
+                    customerAccessTokenCreateWithMultipass(
+                        multipassToken: "$multipassToken",
+                    ) {
+                    customerAccessToken {
+                      accessToken
+                    }
+                    customerUserErrors {
+                        code
+                        field
+                        message
+                    }
+                }
+            }
+            GRAPHQL,
+        );
+
+        $responseBody = $cartData->getBody()->getContents();
+
+        $responseCode = $cartData->getStatusCode();
+
+        $jsonResponse = json_decode($responseBody, true);
+
+        $accessToken = $jsonResponse["data"]["customerAccessTokenCreateWithMultipass"]["customerAccessToken"]["accessToken"] ?? '';
+
+        if ($responseCode !== 200 || empty($accessToken)) {
+            throw new Exception(
+                "Shopify API call (cartLinesRemove) error: " .
+                "HTTP status code: $responseCode - " .
+                "HTTP response body: $responseBody"
+            );
+        }
+
+        return $accessToken;
+    }
+
+    public function getAllCustomersOrders($userEmail)
+    {
+        $customerAccessToken = $this->getCustomerAccessTokenFromMultipass($userEmail);
+
+        $orderData = $this->storefrontClient->query(
+            <<<GRAPHQL
+            query {
+              customer(customerAccessToken: "$customerAccessToken") {
+                id
+                orders(first: 40, sortKey: PROCESSED_AT) {
+                    edges {
+                        node {
+                            cancelReason
+                            canceledAt
+                            currencyCode
+                            customerLocale
+                            customerUrl
+                            edited
+                            email
+                            financialStatus
+                            fulfillmentStatus
+                            id
+                            name
+                            orderNumber
+                            phone
+                            processedAt
+                            statusUrl
+                            lineItems(first: 15) {
+                                edges {
+                                    node {
+                                        currentQuantity
+                                        quantity
+                                        title
+                                    }
+                                }
+                            }
+                            totalPrice {
+                                amount
+                            }
+                        }
+                    }
+                }
+              }
+            }
+
+            GRAPHQL
+        );
+
+        $responseBody = $orderData->getBody()->getContents();
+        $responseCode = $orderData->getStatusCode();
+
+        $jsonResponse = json_decode($responseBody, true);
+
+        $responseOrdersData = $jsonResponse["data"]["customer"]["orders"]["edges"] ?? [];
+
+        if ($responseCode !== 200) {
+            throw new Exception(
+                "Shopify API call (orders) error: " .
+                "HTTP status code: $responseCode - " .
+                "HTTP response body: $responseBody"
+            );
+        }
+
+        $allOrdersData = [];
+
+        // always only return the first selling plan
+        foreach ($responseOrdersData as $ordersDataNode) {
+            $orderData = $ordersDataNode['node'];
+
+            $itemTitlesArray = [];
+
+            foreach ($orderData['lineItems']['edges'] as $lineItemNode) {
+                $lineItemProductData = $lineItemNode['node'];
+                $itemTitlesArray[] = $lineItemProductData['title'];
+            }
+
+            $orderData['itemsProductTitlesString'] = implode(', ', $itemTitlesArray);
+            $orderData['totalPrice'] = $orderData['totalPrice']['amount'];
+            $allOrdersData[] = $orderData;
+        }
+
+        return $allOrdersData;
+    }
+
     private function jsonStringToGraphQLObjectString($jsonString)
     {
         return preg_replace('/"([^"]+)"\s*:\s*/', '$1:', $jsonString);
