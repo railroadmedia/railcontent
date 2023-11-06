@@ -2,7 +2,8 @@
     <div class="text-editor-container tw-flex tw-flex-col tw-w-full" v-if="renderTinyMCE">
         <input v-model="contentInterface" type="hidden" :name="fieldKey" class="">
         <tinymce-editor v-model="contentInterface" api-key="g84168rl7b45du7fji2nive374o541mhtmzogyolgqng97xc"
-            :init="initObject" @change="handleInput"></tinymce-editor>
+            :init="initObject" @change="handleInput" :placeholder="placeholder"
+        ></tinymce-editor>
     </div>
 </template>
 <script>
@@ -41,7 +42,11 @@ export default {
         isReplySection: {
             type: Boolean,
             default: false,
-        }
+        },
+        placeholder: {
+            type: String,
+            default: () => '',
+        },
     },
 
     data() {
@@ -81,7 +86,7 @@ export default {
                 body_class: `${this.isDarkMode ? 'tw-dark' : ''}`,
                 branding: false,
                 content_id: '#textEditor',
-                content_style: `body.tw-dark { color: white } body { font-family: sans-serif; font-size:16px; font-weight:400; } p { margin:0; } blockquote { margin: 0 0 0 1em !important; padding: 10px 30px !important; border-radius: 7px; border-left: 3px solid;} blockquote.pianote { border-color: #F61A30 !important; background-color: rgb(246 26 48 / 5%); } blockquote.drumeo { border-color: #0B76DB !important; background-color: rgb(11 118 219 / 5%); } blockquote.guitareo { border-color: #00C9AC !important; background-color: rgb(0 201 172 / 5%); } blockquote.singeo { border-color: #8300E9 !important; background-color: rgb(131 0 233 / 5%) } .quote-heading em { text-transform:uppercase; } span.post-id { display:none; }`,
+                content_style: `body.tw-dark { color: white } body { font-family: sans-serif; font-size:16px; font-weight:400; } p { margin:0; } blockquote { margin: 0 0 0 1em !important; padding: 10px 30px !important; border-radius: 7px; border-left: 3px solid;} blockquote.pianote { border-color: #F61A30 !important; background-color: rgb(246 26 48 / 5%); } blockquote.drumeo { border-color: #0B76DB !important; background-color: rgb(11 118 219 / 5%); } blockquote.guitareo { border-color: #00C9AC !important; background-color: rgb(0 201 172 / 5%); } blockquote.singeo { border-color: #8300E9 !important; background-color: rgb(131 0 233 / 5%) } .quote-heading em { text-transform:uppercase; } span.post-id { display:none; } body.tw-dark.mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before { color: #9EC0DC; } body.mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before { color: #223F57; } `,
                 convert_urls: false,
                 default_link_target: '_blank',
                 elementpath: false,
@@ -129,4 +134,10 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+    .mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before {
+        color: red;
+    }
+</style>
 
