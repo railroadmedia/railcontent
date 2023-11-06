@@ -1,4 +1,4 @@
-<section class="pt-16 md:pt-32 pb-40 md:pb-50" style="background: {{ $bgColor }}">
+<section class="pt-14 md:pt-28 pb-40 md:pb-50" style="background: {{ $bgColor }}">
         <!-- top part-->
     @if (!empty($showTop))
     <div class="text-center text-white">
@@ -22,9 +22,9 @@
     @endif
     <!-- bottom part-->
 @if (!empty($showBottom))
-    <div class="container max-w-5xl mx-auto">
-        <h2 class="mb-4 text-center text-white"><strong>{{ $subHeader }}</strong></h2>
-        <h5 class="leading-tight text-white mb-2 md:mb-3 px-4 lg:px-0 text-center">{{ $description }}</h5>
+    <div class="container max-w-5xl mx-auto text-center text-white px-4">
+        <h1 class="p-4"><strong>{{ $subHeader }}</strong></h1>
+        <h4 class="py-2 md:py-4 leading-tight">{{ $description }}</h4>
     </div>
     <!-- carousel -->
 
@@ -61,19 +61,24 @@
                     <ul class="splide__list items-start" style="padding-top: 60px !important;">
 
                         @foreach ($testimonials as $testimonial)
-                            <li class="splide__slide bg-[#F4F8FB] rounded-xl pb-6 px-8 mr-4 text-center">
-                                <div class="-mt-10 mb-6">
-                                    <img class="rounded-full w-[90px] h-[90px] object-cover lazyload"
-                                        data-src="https://www.musora.com/musora-cdn/image/width=130,quality=95/{{ $testimonial['img'] }}"
-                                        alt="{{ $testimonial['name'] }} avatar" />
-                                </div>
-                                <h6 class="mb-1 font-extrabold">{{ $testimonial['name'] }}</h6>
-                                <p><i>30-Day Drummer Student</i></p>
-                                <img class="my-4"
-                                    src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/stars.svg"
-                                    alt="stars" />
-                                <p class="mb-6">“{!! $testimonial['comment'] !!}”</p>
-                            </li>
+                        <li class="splide__slide bg-[#F4F8FB] rounded-xl pb-6 px-8 mr-4 text-center">
+                            <div class="-mt-10 mb-6">
+                                <img class="rounded-full w-[90px] h-[90px] object-cover lazyload"
+                                    data-src="https://www.musora.com/musora-cdn/image/width=130,quality=95/{{ $testimonial['img'] }}"
+                                    alt="{{ $testimonial['name'] }} avatar" />
+                            </div>
+                            <h6 class="mb-1"> <strong>{{ $testimonial['name'] }}</strong> </h6>
+                            @if (isset($students))
+                                <p><i>{{ $students }}</i></p>
+                            @endif
+                            @if (isset($location))
+                                <p><i>{{ $location }}</i></p>
+                            @endif
+                            <img class="my-4"
+                                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/stars.svg"
+                                alt="stars" />
+                            <p class="mb-6">“{!! $testimonial['comment'] !!}”</p>
+                        </li>
                         @endforeach
                     </ul>
                 </div>

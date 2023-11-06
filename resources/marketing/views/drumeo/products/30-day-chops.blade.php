@@ -423,7 +423,7 @@ $points = [
 
 @include('drumeo.products.partials.evergreen._learn', [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/logo.svg',
-    'logoAlt' => '30DC logo',
+    'logoAlt' => '30 day chops logo',
     'title' => 'Improve your chops in just 30 days.',
     'points' => $points,
     'buttonTxt' => 'Get Started',

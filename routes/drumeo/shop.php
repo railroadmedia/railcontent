@@ -20,7 +20,6 @@ Route::domain('{drumeoDomain}')
                 ]);
 
             Route::get('/30-day-drummer', [SalesController::class, 'thirtyDayDrummer'] );
-            Route::get('/30-day-challenges', [SalesController::class, 'thirtyDayChallenges']);
             Route::get('/30-day-drummer/deal', [SalesController::class, 'thirtyDayDrummerDeal'] );
             Route::get('/30-day-chops', [SalesController::class, 'thirtyDayChops'] );
             Route::get('/30-day-chops/deal', [SalesController::class, 'thirtyDayChopsDeal'] );

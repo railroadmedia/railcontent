@@ -366,6 +366,7 @@ $items = [
  <!-- Testimonials section -->
 @php
 $testimonials = $drumeo['testimonialsShopVersion'];
+$students = '30-Day Drummer Student'
 @endphp
 
 @include('drumeo.products.partials.evergreen._testimonials', [

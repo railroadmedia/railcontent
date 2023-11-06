@@ -221,7 +221,7 @@
     ])
 
 <!-- Header Section -->
-    @include('pianote.products.partials._header-evergreen', [
+    @include('drumeo.products.partials.evergreen._header', [
     'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png',
     'logoAlt' => '30 day blues logo',
     'text' => 'Learn the Blues',

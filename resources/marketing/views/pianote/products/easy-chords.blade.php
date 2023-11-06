@@ -246,6 +246,25 @@
         .image-modal-arrow-right::before {
             content: "\f105";
         }
+
+         /*  Carousel   */
+        .splide__pagination__page.is-active {
+            background: white;
+            transform: none !important;
+        }
+        .splide__arrow svg{
+            fill: #f61a30 !important;
+        }
+
+        .splide__arrow--next {
+            right: -12px;
+        }
+
+        @media (min-width: 1140px) {
+            .splide__arrow--next {
+                right: -100px;
+            }
+        }
     </style>
 @stop()
 
@@ -269,7 +288,7 @@
 
 <!-- Header Section -->
     @include('drumeo.products.partials.evergreen._header', [
-    'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/easy-chords/easy-chords-logo-dark.jpg',
+    'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/products/easy-chords/easy-chords-logo.png',
     'logoAlt' => '30 day easy chords logo',
     'text' => '30 days to',
     'subtitle' => 'better piano chords.',
@@ -367,7 +386,7 @@ $items = [
 
 <!-- Get started-->
 @include('drumeo.products.partials.evergreen._get-started', [
-    'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png',
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/products/easy-chords/easy-chords-logo.png',
     'items' => $items,
     'buttonText' => 'GET STARTED',
     'buttonLink' => "/ecommerce/add-to-cart?products[easy-chords]=1&locked=true",
@@ -376,8 +395,7 @@ $items = [
     'students' => 'piano players'])
 
 
-
-
+ <!-- Meet your teacher section -->
     <section class="text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40" style="background-color:#f4f8fb;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
@@ -414,50 +432,36 @@ $items = [
                     </p>
                     <img class="float-right h-12 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/lisa-witt-signature.png" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
-            </div>
+            </div>            
+        </div>
+    </section>
 
 <!-- Testimonials section -->
-
 @php 
 $testimonials = [
                                 [
-                                    'season' => '1',
-                                    'name' => 'Erin W.',
-                                    'comment' => '<strong>I am shocked at how much I learned in these last 30 days.</strong> My husbands a drummer so he watched me go from knowing NOTHING to being able to make it through a song.',
-                                    'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1678130486-572603.jpg',
+                                    'name' => 'Jess Ripley',
+                                    'comment' => 'Pianote is an insanely encouraging and supportive community run by an insanely encouraging and supportive team. Sincerely, I’m blown away by the program you’ve created. I sat down one day and it just clicked. From then on, I’ve felt VERY encouraged to keep learning and practicing. It’s fulfilling and fun to see myself progress and achieve goals. Now I’m playing with both hands at the same time with confidence – and I’ve started playing along with more backing tracks and making up my own songs.',
+                                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jessripley.jpg',
                                 ],
                                 [
-                                    'season' => '1',
-                                    'name' => 'Kristyn T.',
-                                    'comment' => '<b>I\'m SOO EXCITED to have actually learned my first entire song ever!!!</b>  Such a HIGH!!!  Domino is like having a dear sweet encouraging friend and mentor to work with daily! ',
-                                    'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1679111185-496776.jpg',
+                                    'name' => 'Serena Dorward',
+                                    'comment' => 'I decided to sign up with Pianote not only to re-learn how to play the piano, but also because my mental health was really suffering and I needed something positive to focus on that was just for ME. I knew almost immediately that this was the answer I had been looking for. It felt like the heaviness on my shoulders got a bit lighter after every piano session.  And even though the lessons are virtual, it was like Lisa was right there beside me cheering me on. I was blown away by how quickly I progressed with a few tutorials from Lisa. My overall confidence improved, especially with improvisation. Now I know all these little tricks (fills & riffs) and how to play inversions and practice chords in ways that sound so lovely.  If I had been taught this way as a child, I probably never would have quit.',
+                                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/serenadorward.jpg',
                                 ],
                                 [
-                                    'season' => '1',
-                                    'name' => 'Tobias W.',
+                                    'name' => 'Jayde McIntosh',
                                     'comment' => 'The idea behind this format is really great. These short sessions can easily be fit into everyday life, no need to think or prepare what\'s next. <strong>It keeps the guesswork out of learning the drums so you can focus on the most important part: Playing the drums and having fun.</strong>',
                                     'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1669379419-276550.jpg',
                                 ],
                                 [
-                                    'season' => '1',
-                                    'name' => 'Stephiekitty (Estephania E.)',
-                                    'comment' => 'I never thought I’d be a drummer but here I am! I went from zero to hero all thanks to Domino and Drumeo! I would have never tried drums had it not been for this 30 day drummer program💕🥁🎵🎶',
-                                    'img' => 'https://dzryyo1we6bm3.cloudfront.net/avatars/526989_1660712845376-1660712847-526989.jpg',
-                                ],
-                                [
-                                    'season' => '1',
-                                    'name' => 'Monique G.',
-                                    'comment' => 'I\'m thrilled that I\'m back behind a drum kit after 30 years and not only loving it, but genuinely understanding it. Thank you, thank you, thank you! 🥁',
-                                    'img' => 'https://dzryyo1we6bm3.cloudfront.net/avatars/528540_1661460541688-1661460545-528540.jpg',
-                                ],
-                                [
-                                    'season' => '2',
-                                    'name' => 'Alan C.',
-                                    'comment' => '<strong>Five weeks ago I didn\'t own a drum kit – Today I played a whole song twice!</strong> I wouldn\'t have believed it possible if I hadn\'t just experienced it. Big thanks to Domino and all at Drumeo',
-                                    'img' => 'https://dzryyo1we6bm3.cloudfront.net/avatars/412320_1662361641020-1662361646-412320.jpg',
+                                    'name' => 'Ian Kershaw',
+                                    'comment' => 'When I signed up for Pianote, I knew I was going to get Lisa’s great energy, the Method, the courses, the bootcamps, and the student reviews. But my breakthrough came when I realized that sitting behind all of this is such a fantastic and welcoming, supportive student community. It’s this community – as well as the teachers and the rest of the Pianote team – that really actively encourages you to share your progress and practice. And it doesn’t have to be perfect. And that really does encourage you to practice more. And it’s in that sharing and practice that the real breakthroughs come. Thank you!',
+                                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/iankershaw.jpg',
                                 ]
-            
-                            ]
+];
+
+$students = "Pianote Student"
 @endphp
 
 @include('drumeo.products.partials.evergreen._testimonials', [
@@ -485,78 +489,22 @@ $testimonials = [
                 ],
             ],
         'bgColor' => 'linear-gradient(rgba(246, 26, 48, 1), rgba(161, 0, 0, 1))',
-        'subHeader'=> 'What students are saying about Lisa and her teaching style:',
+        'subHeader'=> 'What students are saying about Lisa',
         'description' => 'Easy Chords works. By focusing on playing with real music right from day one, you’ll learn the skills to play hundreds of songs on the piano in just thirty days. Check out what students are saying:',
         'showBottom' => true,
 ])
 
 
-
-
-
-
-            <h3 class="leading-tight mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What students are saying about<br class="inline lg:hidden"> Lisa and her teaching style:</strong></h3>
-            <div class="flex flex-wrap text-left">
-
-                @php
-                    $testimonials = [
-                        [
-                        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jessripley.jpg',
-                        'title' => "I’m blown away by the program you’ve created.",
-                        'description' => "Pianote is an insanely encouraging and supportive community run by an insanely encouraging and supportive team. Sincerely, I’m blown away by the program you’ve created.<br><br>I sat down one day and it just clicked. From then on, I’ve felt VERY encouraged to keep learning and practicing. It’s fulfilling and fun to see myself progress and achieve goals. Now I’m playing with both hands at the same time with confidence – and I’ve started playing along with more backing tracks and making up my own songs.",
-                        'name' => 'Jess Ripley',
-                        'location' => 'California, USA',
-                        ],
-                        [
-                        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/serenadorward.jpg',
-                        'title' => "If I was taught this way as a child, I would have never quit.",
-                        'description' => "I decided to sign up with Pianote not only to re-learn how to play the piano, but also because my mental health was really suffering and I needed something positive to focus on that was just for ME. I knew almost immediately that this was the answer I had been looking for. It felt like the heaviness on my shoulders got a bit lighter after every piano session.  And even though the lessons are virtual, it was like Lisa was right there beside me cheering me on.<br><br>I was blown away by how quickly I progressed with a few tutorials from Lisa. My overall confidence improved, especially with improvisation. Now I know all these little tricks (fills & riffs) and how to play inversions and practice chords in ways that sound so lovely.  If I had been taught this way as a child, I probably never would have quit.",
-                        'name' => 'Serena Dorward',
-                        'location' => 'Ontario, Canada',
-                        ],
-                        [
-                        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jaydemcintosh.jpg',
-                        'title' => "I’ve had to give up on a lot of my dreams. Then I discovered Pianote.",
-                        'description' => "I’ve been chronically ill for the last six years, which means I’ve had to give up on a lot of my dreams and goals.<br><br>During my health journey, my interest in piano and my connection to music really arose – but it also seemed impossible. I had no prior music knowledge and couldn’t even get out of bed some days. This is when I discovered Pianote and they’ve been amazing.<br><br>I have to work at a very slow pace due to my health, but I’ve already learned so many basics. I can play some of my all-time favorite songs – and it’s just so awesome to know I can learn from home and accomplish one of my dreams. I’m so excited to keep learning and I recommend Pianote so much.",
-                        'name' => 'Jayde McIntosh',
-                        'video' => '660596722',
-                        'location' => 'Australia',
-                        ],
-                        [
-                        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/iankershaw.jpg',
-                        'title' => "Such a fantastic and welcoming student community.",
-                        'description' => "When I signed up for Pianote, I knew I was going to get Lisa’s great energy, the Method, the courses, the bootcamps, and the student reviews.<br><br>But my breakthrough came when I realized that sitting behind all of this is such a fantastic and welcoming, supportive student community. It’s this community – as well as the teachers and the rest of the Pianote team – that really actively encourages you to share your progress and practice. And it doesn’t have to be perfect. And that really does encourage you to practice more. And it’s in that sharing and practice that the real breakthroughs come. Thank you!",
-                        'name' => 'Ian Kershaw',
-                        'video' => '660596700',
-                        'location' => 'United Kingdom',
-                        ],
-                    ]
-                @endphp
-                @foreach ($testimonials as $key => $testimonial)
-                    <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
-                        <div class="sm:flex items-start p-5 bg-white rounded-lg">
-                            <img class="h-14 sm:h-16 lg:h-20 rounded-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=160,quality=95/{{ $testimonial['image'] }}" alt="testimonial {{ $key }}" loading="lazy" onload="this.classList.remove('opacity-0')">
-                            <p class="sm:pl-4"><strong>{{ $testimonial['name'] }}</strong><br>
-                                <em class="leading-tight inline-block mb-1 opacity-60">{{ $testimonial['location'] }}</em><br>
-                                “{!! $testimonial['description']  !!}”
-                            </p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    <div class="h-10 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));"></div>
+    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));"></div>
     <section class="text-white text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#2a2f34;">
-        <div class="container max-w-3xl mx-auto">
+        <div class="container max-w-3xl mx-auto leading-normal">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=410,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png" alt="guarantee badge" loading="lazy" onload="this.classList.remove('opacity-0')">
             <h3 class="my-4 sm:my-6 lg:my-8"><strong>The guarantee that lasts<br class="inline sm:hidden"> longer than the course.</strong></h3>
-            <p class="leading-normal">Easy Chords will make you a better piano player in just 30 days. And we’re so confident that you’ll love the results, you’ll have 90 days to put us to the test.
-                That’s enough time to go through the course 3x over before deciding if it’s worth the money.
+            <p class="pt-2">Easy Chords will make you a better piano player in just 30 days. And we’re so confident that you’ll love the results, you’ll have 90 days to put us to the test.
+               </p>
+            <p class="pt-4">That’s enough time to go through the course 3x over before deciding if it’s worth the money.
                 Because if you’re not happy with the results, then you shouldn’t have to pay.
-                Simply let us know within 90 days and you’ll receive all your hard-earned money back. It’s our promise.
-            </p>
+                Simply let us know within 90 days and you’ll receive all your hard-earned money back. It’s our promise.</p>
 
         </div>
     </section>
@@ -574,7 +522,7 @@ $points = [
 @endphp
 
 @include('drumeo.products.partials.evergreen._learn', [
-    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/easy-chords/new-piano-players-start-here-logo-2.jpg',
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/products/easy-chords/easy-chords-logo.png',
     'logoAlt' => '30 day easy chords logo',
     'title' => '30 days to better piano chords',
     'points' => $points,
@@ -586,9 +534,6 @@ $points = [
     'students' => 'piano players',
     'numStudents' => number_format($nPackOwners ?? 0),
 ])
-
-    
-
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
@@ -605,6 +550,8 @@ $points = [
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+
 
         <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
         <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
