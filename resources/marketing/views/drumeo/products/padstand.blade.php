@@ -132,15 +132,15 @@
                         <strong>Only ${{ floatval($productPrices['padstand']->discounted_price) }}</strong>
                     @endif
                 </h3>
-                <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
+                <div class="mt-5 sm:mt-7 w-full max-w-xl mx-auto">
                     <div class="sm:w-5/12 join smaller outline"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     @if( $products['padstand']->getStockAvailability() > 1 && !empty($products['padstand']->getStockAvailability()))
-                        <a class="w-5/12 join smaller blue" href="#customize-anchor">Order Now</a>
+                        <a class="w-5/12 join smaller blue" href="/ecommerce/add-to-cart?locked=true&product-array=padstand:1">Order Now</a>
                     @else
                         <a class="join smaller sold-out">SOLD OUT</a>
                     @endif
                 </div>
-                <h6 class="text-sm leading-tight"><em>or get it free with an Annual Drumeo Membership.</em></h6>
+                <h6 class="text-sm leading-tight mt-2"><em>or get it free with an Annual Drumeo Membership.</em></h6>
             </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to right, rgba(7,23,43,0.85), rgba(26,32,38,0.85));"></div>
@@ -377,8 +377,11 @@
                                     <p class="text-sm">1 Drumeo PadStand<sup>NEW</sup></p>
                                 </div>
                             </a>
+
                         </div>
                     </div>
+                    <br>
+                    <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[padstand]=1&locked=true"><h4><strong><u>Or get it FREE when you join Drumeo.</u></strong></h4></a>
                 @else
                     <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>
                 @endif
