@@ -8,6 +8,7 @@ use Datetime;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Exception;
+use Log;
 use Railroad\Ecommerce\Entities\AccessCode;
 use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Entities\Subscription;
@@ -360,6 +361,11 @@ class AccessCodeService
         $this->entityManager->flush();
 
         event(new AccessCodeClaimed($accessCode, $user, $context));
+
+        Log::info('Access code claimed', [
+            'access_code' => $accessCode->getCode(),
+            'user_id' => $user->getId(),
+        ]);
 
         return $accessCode;
     }

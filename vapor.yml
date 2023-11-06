@@ -22,7 +22,9 @@ environments:
         tmp-storage: 1024
         cli-tmp-storage: 1024
         queue-tmp-storage: 1024
-        queue-concurrency: 50
+        queues:
+          - musora-web-platform-production: 50
+          - commandmusora-web-platform-production: 20
         cache: musora-production-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
@@ -49,6 +51,9 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
+        queues:
+          - musora-web-platform-pre-production
+          - commandmusora-web-platform-pre-production: 20
         cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
@@ -76,7 +81,9 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
-        queue-concurrency: 10
+        queues:
+          - musora-web-platform-beta-testing: 10
+          - commandmusora-web-platform-beta-testing: 20
         cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'

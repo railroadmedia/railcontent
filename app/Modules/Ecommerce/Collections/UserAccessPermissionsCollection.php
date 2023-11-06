@@ -36,8 +36,9 @@ class UserAccessPermissionsCollection
         return $this->userId;
     }
 
-    public function getActiveDates(int|array $permissions): array
+    public function getActiveDates(int|array $permissions, $includeBuffer = true): array
     {
+        $unifiedLaunchDate = Carbon::parse(config('ecommerce.launch_dates.unified'));
         if (is_integer($permissions)) {
             $userAccessPermissions = $this->permissionIdLookup[$permissions] ?? collect();
         } else {
@@ -48,6 +49,7 @@ class UserAccessPermissionsCollection
             ->sortBy('start_time');
         $expirationDate = null;
         $startDate = null;
+        $canAggregate = false;
         /** @var UserAccessPermission $userAccessPermission */
         foreach ($userAccessPermissions as $userAccessPermission) {
             if ($userAccessPermission->time_lifetime && $userAccessPermission->status != 'revoked') {
@@ -58,19 +60,21 @@ class UserAccessPermissionsCollection
                 $userAccessPermission->actualExpirationTime = Carbon::parse($userAccessPermission->revoked_at);
                 continue;
             }
-            $startDate = $expirationDate != null && $expirationDate > $userAccessPermission->start_time
-                ? $startDate : Carbon::parse($userAccessPermission->start_time);
-            $tempStartDate = $expirationDate != null && $expirationDate > $userAccessPermission->start_time
-                ? $expirationDate : Carbon::parse($userAccessPermission->start_time);
-
-            $expirationDate = $tempStartDate->clone()
-                ->addMinutes($userAccessPermission->time_minutes)
-                ->addDays($userAccessPermission->time_days)
-                ->addMonths($userAccessPermission->time_months);
+            $aggregatePrevious = $expirationDate != null
+                && $expirationDate > $userAccessPermission->start_time
+                && $canAggregate; //do not aggregate permissions before unified launch
+            $canAggregate = $userAccessPermission->start_time > $unifiedLaunchDate;
+            $startDate = $aggregatePrevious ? $startDate : Carbon::parse($userAccessPermission->start_time);
+            $tempStartDate = $aggregatePrevious ? $expirationDate : Carbon::parse($userAccessPermission->start_time);
+            $expirationDate = $userAccessPermission->time_fixed ? Carbon::parse($userAccessPermission->time_fixed)
+                : $tempStartDate->clone()
+                    ->addMinutes($userAccessPermission->time_minutes)
+                    ->addDays($userAccessPermission->time_days)
+                    ->addMonths($userAccessPermission->time_months);
             $userAccessPermission->actualStartTime = $tempStartDate;
             $userAccessPermission->actualExpirationTime = $expirationDate;
         }
-        if ($expirationDate) {
+        if ($expirationDate && $includeBuffer) {
             $expirationDate->addDays(config('ecommerce.days_before_access_revoked_after_expiry', 7));
         }
         if ($expirationDate > Carbon::maxValue()) {
@@ -79,12 +83,12 @@ class UserAccessPermissionsCollection
         return array($startDate, $expirationDate);
     }
 
-    public function getMembershipExpirationDate(): ?Carbon
+    public function getMembershipExpirationDate($includeBuffer = true): ?Carbon
     {
         list($startDate, $endDate) = $this->getActiveDates([
             self::MusoraPlusMembershipPermission,
             self::MusoraBasicMembershipPermission
-        ]);
+        ], $includeBuffer);
         return $endDate;
     }
 

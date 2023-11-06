@@ -50,7 +50,7 @@
                 'desc' => 'Turn your desire to sing into passionate practice with useful lessons and exercises.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'marketing/singeo/membership/homepage/2023/method.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/method.jpg',
                     ],
                 ]
             ],
@@ -60,7 +60,7 @@
                 'desc' => 'You\'ll always have on-screen assignments and practice tools to guide you along the way.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'marketing/singeo/membership/homepage/2023/practical-assignments.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/practical-assignments.jpg',
                     ],
                 ]
             ],
@@ -70,7 +70,7 @@
                 'desc' => 'Access our quick warm-up routines to fit any schedule, ranging from 5 to 20 minutes.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'marketing/singeo/membership/homepage/2023/guided-workouts.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/guided-workouts.jpg',
                     ],
                 ]
             ],
@@ -80,7 +80,7 @@
                 'desc' => 'Gain insights from vocal coaches, Grammy-Award winners, and chart-topping performers.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'marketing/singeo/membership/homepage/2023/world-class-teachers.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/world-class-teachers.jpg',
                     ],
                 ]
             ],
@@ -90,7 +90,7 @@
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'marketing/singeo/membership/homepage/2023/downloadable-videos.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/downloadable-videos.jpg',
                     ],
                 ]
             ],
@@ -100,7 +100,7 @@
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global singing community.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'marketing/singeo/membership/homepage/2023/personalized-support.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/personalized-support.jpg',
                     ],
                 ]
             ],

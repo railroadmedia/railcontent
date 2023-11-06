@@ -351,7 +351,7 @@ class UserDelete extends Command
             $isAtLimit = false;
             $tally = 0;
             $batchIndex = 0;
-            $batchTotal = $userCount / $batchSize;
+            $batchTotal = ceil($userCount / $batchSize);
 
             $usersToDelete->chunk($batchSize, function (Collection $userDataChunk) use (
                 $userCount,

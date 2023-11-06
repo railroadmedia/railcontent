@@ -36,7 +36,7 @@
                 "lessonInfo" => [
                     [
                         "thumb" =>
-                        "marketing/drumeo/membership/homepage/2023/10-level-cirriculum.jpg",
+                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/10-level-cirriculum.jpg",
                     ],
                 ],
             ],
@@ -49,7 +49,7 @@
                 "lessonInfo" => [
                     [
                         "thumb" =>
-                        "marketing/drumeo/membership/homepage/2023/practical-assignments.jpg",
+                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/practical-assignments.jpg",
                     ],
                 ],
             ],
@@ -62,7 +62,7 @@
                 "lessonInfo" => [
                     [
                         "thumb" =>
-                        "marketing/drumeo/membership/homepage/2023/guided-workouts2.jpg",
+                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guided-workouts2.jpg",
                     ],
                 ],
             ],
@@ -75,7 +75,7 @@
                 "lessonInfo" => [
                     [
                         "thumb" =>
-                        "marketing/drumeo/membership/homepage/2023/world-class-teachers.jpg",
+                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/world-class-teachers.jpg",
                     ],
                 ],
             ],
@@ -88,7 +88,7 @@
                 "lessonInfo" => [
                     [
                         "thumb" =>
-                        "marketing/drumeo/membership/homepage/2023/downloadable-videos.jpg",
+                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/downloadable-videos.jpg",
                     ],
                 ],
             ],
@@ -101,7 +101,7 @@
                 "lessonInfo" => [
                     [
                         "thumb" =>
-                        "marketing/drumeo/membership/homepage/2023/personalized-support.jpg",
+                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/personalized-support.jpg",
                     ],
                 ],
             ],

@@ -153,7 +153,7 @@
             <p class="leading-normal mt-2 mb-5">
                 For years, you’ve balanced your practice pad on your lap, coffee table, or worse…<br class="hidden sm:inline">
                 A standard snare stand with claws overhanging like a bad overbite 😬.<br class="hidden sm:inline">
-                So we engineered a custom stand that fits any practice pad perfectly:</p>
+                So we engineered a custom stand that fits a practice pad perfectly:</p>
             @php
                 $gridItems = [
                     [
@@ -280,10 +280,10 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f6f8fc calc(50% + 1px));"></div>
     <section class="text-center px-5 py-10 md:py-20 lg:py-24" style="background-color:#f6f8fc;">
         <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2><strong>Works with ANY practice pad.</strong></h2>
+            <h2><strong>Works with ALL 12” practice pads.</strong></h2>
             <h6 class="leading-tight mt-2 mb-5 sm:mb-10">
-                The Drumeo PadStand can be used with a QuietPad, P4, or any other branded <br class="hidden sm:inline">
-                practice pad. Simply tighten the basket for the perfect fit. </h6>
+                The Drumeo PadStand can be used with a QuietPad, P4, or any other 12” or<br class="hidden sm:inline">
+                smaller practice pad. Simply tighten the basket for the perfect fit.</h6>
             @php
                 $slides = [
                  [
@@ -431,7 +431,7 @@
             </div>
         </div>
     </section>
-    
+
     <div
         x-show="trailer"
         style="display: none;z-index: 2147483002;"
