@@ -50,16 +50,17 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
                 $syncThisWorkspace = false;
 
                 foreach ($brands as $brand) {
-                    if ($userAccessPermissionsService->userHadOrHasAnyDigitalProductsForBrand($this->user, $brand)
+                    if ($userAccessPermissionsService->shouldSyncCustomerIOWorkspace($this->user, $brand)
                         || $accountNameToSyncAllBrand == $brand) {
                         $syncThisWorkspace = true;
+                        break;
                     }
                 }
 
                 if ($syncThisWorkspace) {
                     $customerAttributes = $customerIoSyncService->getUsersCustomAttributes($this->user, $brands);
-                    if ($this->data ) {
-                        array_merge($customerAttributes, $this->data );
+                    if ($this->data) {
+                        $customerAttributes = array_merge($customerAttributes, $this->data);
                     }
                     $customerIoService->createOrUpdateCustomerByUserId(
                         $this->user->id,
@@ -80,15 +81,9 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
      *
      * @param Throwable $exception
      */
-    public function failed(Throwable $exception)
+    public function failed(Throwable $exception): void
     {
-        error_log(
-            'Error on CustomerIoSyncUserById job trying to sync user to customer.io. User ID: ' .
-            $this->user->id . ' - lookupEmail: ' . $this->user->email
-        );
-
-        error_log($exception);
-
+        Log::error('CustomerIoSyncUserByUserId job failed for user: ' . $this->user->id);
         parent::failed($exception);
     }
 }

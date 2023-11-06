@@ -31,17 +31,22 @@ class UserAccessPermissionsService
     private ?array $cachedPackPermissionIds = null;
     private UserProductService $userProductService;
     private UserService $userService;
+    private SubscriptionService $subscriptionService;
+
+    public static $timeMinutes = false;
 
     function __construct(
         ProductService $productService,
         ContentPermissionsService $contentPermissionsService,
         UserProductService $userProductService,
-        UserService $userService
+        UserService $userService,
+        SubscriptionService $subscriptionService
     ) {
         $this->productService = $productService;
         $this->contentPermissionsService = $contentPermissionsService;
         $this->userProductService = $userProductService;
         $this->userService = $userService;
+        $this->subscriptionService = $subscriptionService;
     }
 
     private function getUserAccessPermissionsQuery(int $userId, array $filterPermissionIds = [])
@@ -116,19 +121,17 @@ class UserAccessPermissionsService
             );
         }
 
-        $accessPermissions = $this->getUserAccessPermissions($userId);
-        if (config('shopify.enabled')) {
-            event(new UserAccessPermissionsUpdated($accessPermissions));
-        }
+        $this->handleUserPermissionsUpdatedEvent($user);
     }
 
     public function syncUser(User $user): void
     {
-        //users may have legacy data that needs to be synced
-        $accessPermissions = $this->getUserAccessPermissions($user->id);
-        if (config('shopify.enabled')) {
-            event(new UserAccessPermissionsUpdated($accessPermissions));
-        }
+        $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
+        $this->ensureUserProductAccess(
+            $user,
+            $contentPermissionsLookup,
+        );
+        $this->handleUserPermissionsUpdatedEvent($user);
     }
 
     public function syncShopifyOrders(User $user, OrderCollection $orderCollection): void
@@ -150,10 +153,8 @@ class UserAccessPermissionsService
             $contentPermissionsLookup,
         );
 
-        $accessPermissions = $this->getUserAccessPermissions($user->id);
-        if (config('shopify.enabled')) {
-            event(new UserAccessPermissionsUpdated($accessPermissions, $orderCollection));
-        }
+
+        $this->handleUserPermissionsUpdatedEvent($user, $orderCollection);
     }
 
     private function syncShopifyOrder(
@@ -163,9 +164,13 @@ class UserAccessPermissionsService
         Collection $contentPermissionsLookup
     ): bool {
         $shopifyOrderId = $order->id;
+        $status = $order->getPermissionStatusFromOrder();
 
         $wasUpdated = false;
         foreach ($order->lineItems as $lineItem) {
+            if (!$lineItem->product) {
+                continue;
+            }
             /** @var OrderLineItem $lineItem */
             $contentPermissions = $lineItem->product->getContentPermissions($contentPermissionsLookup);
 
@@ -174,7 +179,6 @@ class UserAccessPermissionsService
                 $source = $order->getPaymentSourceEnum();
                 $accessPermission = $existingAccessPermissionsLookup["$source->value.$hash"] ?? null;
 
-                $status = $this->getPermissionStatusFromOrder($order);
                 if (!$accessPermission) {
                     $accessPermission = $this->createUserAccessPermission(
                         $user,
@@ -207,14 +211,6 @@ class UserAccessPermissionsService
         return $wasUpdated;
     }
 
-    private function getPermissionStatusFromOrder(Order $order): UserAccessPermissionsStatusEnum
-    {
-        if ($order->cancelledAt) {
-            return UserAccessPermissionsStatusEnum::Revoked;
-        }
-        return UserAccessPermissionsStatusEnum::Active;
-    }
-
     public function getOwnsPacks(UserAccessPermissionsCollection $userAccessPermissions): bool
     {
         if (!$this->cachedPackPermissionIds) {
@@ -232,16 +228,12 @@ class UserAccessPermissionsService
         return $userAccessPermissions->doesUserOwnPermissions($this->cachedPackPermissionIds);
     }
 
-    public function userHadOrHasAnyDigitalProductsForBrand(User $user, $brand): bool
+    public function shouldSyncCustomerIOWorkspace(User $user, $brand): bool
     {
         if (config('shopify.enabled')) {
-            $userAccessPermissions = $this->getUserAccessPermissions($user->id);
-            $permissionIds =
-                $this->contentPermissionsService->getByBrand($brand)
-                    ->pluck('id')
-                    ->toArray();
-            return $userAccessPermissions->hasUserOwnedPermissions($permissionIds);
+            return $user->shouldSyncCustomerIoWorkspace($brand);
         }
+        //TODO: remove post shopify
         $userProductService = app(EcommerceUserProductService::class);
 
         return $userProductService->userHadOrHasAnyDigitalProductsForBrand(
@@ -271,16 +263,20 @@ class UserAccessPermissionsService
             if ($userAccessExpirationDate < $expirationDate) {
                 $days = $isLifeTime ? 0 : ($expirationDate->diffInDays($userAccessExpirationDate) + 1);
                 //User products not synced with orders Add manual permission to fix missing access
+                $startDate = $userAccessExpirationDate->subDays(
+                    config('ecommerce.days_before_access_revoked_after_expiry', 7)
+                );
                 $accessPermission = $this->createUserAccessPermission(
                     $user,
                     $permissionId,
-                    $userAccessExpirationDate,
+                    $startDate,
                     UserAccessPermissionsSourceEnum::Migration,
                     '',
                     new Product(),
                     UserAccessPermissionsStatusEnum::Active,
                     $days,
                     0,
+                    null,
                     $isLifeTime
                 );
 
@@ -387,7 +383,9 @@ class UserAccessPermissionsService
         $userAccessPermission->start_time = $startTime;
         $userAccessPermission->time_days = $timeDays;
         $userAccessPermission->time_months = $timeMonths;
+        $userAccessPermission->time_minutes = 0;
         $userAccessPermission->time_lifetime = $lifetime ?? 0;
+        $userAccessPermission->time_fixed = null;
         $userAccessPermission->status = $status;
         if ($revokedAt) {
             $userAccessPermission->revoked_at = $revokedAt;
@@ -397,13 +395,10 @@ class UserAccessPermissionsService
         }
         $userAccessPermission->save();
 
-        $accessPermissions = $this->getUserAccessPermissions($userId);
-        if (!$accessPermissions->getCollection()->contains('id', $userAccessPermission->id)) {
-            Log::error("Permission does not exist in database.");
-        }
-        if (config('shopify.enabled')) {
-            event(new UserAccessPermissionsUpdated($accessPermissions));
-        }
+        $user = $this->userService->getByIdOrNull($userId);
+
+        $this->handleUserPermissionsUpdatedEvent($user);
+
         return $userAccessPermission;
     }
 
@@ -415,8 +410,10 @@ class UserAccessPermissionsService
         Collection $existingAccessPermissionsLookup
     ) {
         if ($product->digital_membership_access_expiration_date
+            && $product->digital_membership_access_expiration_date > Carbon::now()
             && $user
-            && $user->membership_expiration_date < $product->digital_membership_access_expiration_date) {
+            && $user->membership_expiration_date < $product->digital_membership_access_expiration_date
+        ) {
             $hash = sha1("$sourceId.$product->id.bonus");
             if ($existingAccessPermissionsLookup["$source->value.$hash"] ?? null) {
                 return;
@@ -424,7 +421,6 @@ class UserAccessPermissionsService
             $membershipExpirationDate = Carbon::parse($user->membership_expiration_date)
                 ->addDays(-config('ecommerce.days_before_access_revoked_after_expiry', 7));
             $digitalMembershipAccessExpirationDate = Carbon::parse($product->digital_membership_access_expiration_date);
-            $timeDays = $membershipExpirationDate->diffInDays($digitalMembershipAccessExpirationDate) + 1;
             $this->createUserAccessPermission(
                 $user,
                 UserAccessPermissionsCollection::MusoraPlusMembershipPermission,
@@ -433,8 +429,9 @@ class UserAccessPermissionsService
                 $hash,
                 $product,
                 UserAccessPermissionsStatusEnum::Active,
-                $timeDays,
                 0,
+                0,
+                $digitalMembershipAccessExpirationDate,
                 false
             );
         }
@@ -463,6 +460,7 @@ class UserAccessPermissionsService
         UserAccessPermissionsStatusEnum $status,
         ?int $days = null,
         ?int $months = null,
+        ?Carbon $fixed = null,
         ?bool $isLifeTime = null
     ): ?UserAccessPermission {
         if (!isset($days)) {
@@ -483,9 +481,11 @@ class UserAccessPermissionsService
         $accessPermission->source = $source;
         $accessPermission->source_hash = $hash;
         $accessPermission->start_time = $startTime;
-        $accessPermission->time_days = $days;
-        $accessPermission->time_months = $months;
+        $accessPermission->time_days = (self::$timeMinutes) ? 0 : $days;
+        $accessPermission->time_months = (self::$timeMinutes) ? 0 : $months;
+        $accessPermission->time_minutes = (self::$timeMinutes) ? self::$timeMinutes : 0;
         $accessPermission->time_lifetime = $isLifeTime;
+        $accessPermission->time_fixed = $fixed;
         $accessPermission->status = $status;
         try {
             $accessPermission->save();
@@ -499,5 +499,42 @@ class UserAccessPermissionsService
             throw $e;
         }
         return $accessPermission;
+    }
+
+    private function handleUserPermissionsUpdatedEvent(User $user, OrderCollection $orderCollection = null): void
+    {
+        if (config('shopify.enabled')) {
+            $accessPermissions = $this->getUserAccessPermissions($user->id);
+            $shouldSyncCIOWorkspaces = $this->getShouldSyncCustomerIOWorkspace(
+                $orderCollection,
+                $accessPermissions
+            );
+            $user->setCustomerIOSyncedWorkspaces($shouldSyncCIOWorkspaces);
+            $user->save();
+
+            $subscriptions = null;
+            try {
+                $subscriptions = $this->subscriptionService->syncSubscriptionData($accessPermissions);
+            } catch (\Throwable $e) {
+                Log::error("Error syncing subscriptions for user: $user->id");
+                Log::error($e);
+            }
+            event(new UserAccessPermissionsUpdated($accessPermissions, $orderCollection, $subscriptions));
+        }
+    }
+
+    private function getShouldSyncCustomerIOWorkspace(
+        ?OrderCollection $orderCollection,
+        UserAccessPermissionsCollection $accessPermissions
+    ): array {
+        $contentPermissions = $this->contentPermissionsService->getAll();
+        $brands = $contentPermissions->whereIn('id', $accessPermissions->getActivePermissionIds())->pluck(
+            'brand'
+        )->unique()->toArray();
+        if ($orderCollection) {
+            $orderBrands = $orderCollection->getOrderBrands();
+            $brands = array_unique(array_merge($brands, $orderBrands));
+        };
+        return $brands;
     }
 }

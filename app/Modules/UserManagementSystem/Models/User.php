@@ -107,6 +107,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property bool|false $has_recharge_subscription
  * @property bool|false $has_apple_subscription
  * @property bool|false $has_google_subscription
+ * @property int $cio_synced_workspaces
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @method static Builder|User newModelQuery()
@@ -244,6 +245,12 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     use HasRoles;
     use Authorizable;
     use CanSaveWithoutUpdatedAt;
+
+
+    const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_DRUMEO = 1;
+    const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_PIANOTE = 2;
+    const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_GUITAREO = 4;
+    const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_SINGEO = 8;
 
     private ?NotificationSettings $notificationSettingsLookup = null;
 
@@ -876,8 +883,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     public function getCustomerIOId()
     {
-        foreach ($this->customerIO as $customerIOData){
-            if($customerIOData->workspace_name == 'musora'){
+        foreach ($this->customerIO as $customerIOData) {
+            if ($customerIOData->workspace_name == 'musora') {
                 return $customerIOData->uuid;
             }
         }
@@ -886,7 +893,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     public function shippingAddresses(): HasMany
     {
-        return $this->hasMany(Address::class, "user_id"
+        return $this->hasMany(
+            Address::class,
+            "user_id"
         )->where("type", Address::SHIPPING_TYPE);
     }
 
@@ -896,7 +905,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             ->where("type", Address::BILLING_TYPE);
     }
 
-    public function hasMobileMembership(): bool {
+    public function hasMobileMembership(): bool
+    {
         return $this->has_apple_subscription || $this->has_google_subscription;
     }
 
@@ -923,5 +933,57 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
                 )
             )
         ];
+    }
+
+    public function setCustomerIOSyncedWorkspaces(array $workspaces): void
+    {
+        $this->setCustomerIOSyncedWorkspaceFlag(
+            self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_DRUMEO,
+            in_array('drumeo', $workspaces)
+        );
+        $this->setCustomerIOSyncedWorkspaceFlag(
+            self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_PIANOTE,
+            in_array('pianote', $workspaces)
+        );
+        $this->setCustomerIOSyncedWorkspaceFlag(
+            self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_GUITAREO,
+            in_array('guitareo', $workspaces)
+        );
+        $this->setCustomerIOSyncedWorkspaceFlag(
+            self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_SINGEO,
+            in_array('singeo', $workspaces)
+        );
+    }
+
+    public function shouldSyncCustomerIoWorkspace(string $brand): bool
+    {
+        switch ($brand) {
+            case 'drumeo':
+                return $this->hasCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_DRUMEO);
+            case 'pianote':
+                return $this->hasCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_PIANOTE);
+            case 'guitareo':
+                return $this->hasCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_GUITAREO);
+            case 'singeo':
+                return $this->hasCustomerIOSyncedWorkspaceFlag(self::FLAG_CUSTOMERIO_SYNCED_WORKSPACES_SINGEO);
+            case 'musora':
+                return true;
+            default:
+                throw new Exception("shouldSyncCustomerIoWorkspace not implemented for brand: {$brand}");
+        }
+    }
+
+    private function setCustomerIOSyncedWorkspaceFlag(int $flag, bool $set): void
+    {
+        if ($set) {
+            $this->cio_synced_workspaces |= $flag;
+        } else {
+            $this->cio_synced_workspaces &= ~$flag;
+        }
+    }
+
+    private function hasCustomerIOSyncedWorkspaceFlag(int $flag): bool
+    {
+        return ($this->cio_synced_workspaces & $flag) === $flag;
     }
 }

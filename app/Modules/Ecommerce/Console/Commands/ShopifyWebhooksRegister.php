@@ -14,7 +14,8 @@ class ShopifyWebhooksRegister extends Command
 {
     public const WEBHOOKS = [
         'orders/updated' => 'shopify.webhook.order.update',
-        'orders/create' => 'shopify.webhook.order.create'
+        'orders/create' => 'shopify.webhook.order.create',
+        'refunds/create' => 'shopify.webhook.refund.create',
     ];
 
     public array $webHookFields = [

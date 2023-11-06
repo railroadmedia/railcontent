@@ -12,7 +12,6 @@ use App\Modules\EventDataSynchronizer\Console\Commands\SyncPoints;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncUserTotalXp;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserContentProductPermissionsResyncTool;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipOwnedProductSyncTool;
-use App\Modules\EventDataSynchronizer\Listeners\SubscriptionSyncListener;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Railroad\Ecommerce\Events\AccessCodeClaimed;
@@ -115,7 +114,6 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
             UserProductToUserContentPermissionListener::class . '@handleUserAccessPermissionsUpdated',
             HelpScoutEventListener::class . '@handleUserAccessPermissionsUpdated',
             UserMembershipFieldsListener::class . '@handleUserAccessPermissionsUpdated',
-            SubscriptionSyncListener::class . '@handleUserAccessPermissionsUpdated',
         ],
         SubscriptionCreated::class => [
             CustomerIoSyncEventListener::class . '@handleSubscriptionCreated',
