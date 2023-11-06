@@ -18,11 +18,15 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
 {
     private int $skip;
     private int $take;
+    private int $startId;
+    private int $endId;
 
-    public function __construct(int $skip, int $take)
+    public function __construct(int $skip, int $take, ?int $startId = null, ?int $endId = null)
     {
         $this->skip = $skip;
         $this->take = $take;
+        $this->startId = $startId;
+        $this->endId = $endId;
     }
 
     function getSkip(): int
@@ -37,7 +41,14 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
 
     function getQuery(): Builder
     {
-        return User::query()->whereNotNull('shopify_id');
+        $query = User::query()->whereNotNull('shopify_id');
+        if ($this->startId) {
+            $query = $query->where('id', '>=', $this->startId);
+        }
+        if ($this->endId) {
+            $query = $query->where('id', '<=', $this->endId);
+        }
+        return $query;
     }
 
     function handleItem($item): void
