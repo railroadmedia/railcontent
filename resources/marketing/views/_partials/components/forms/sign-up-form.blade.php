@@ -87,7 +87,7 @@
 <script>
     function recaptchaSubmit{{$cleanFormId}}(token) {
         const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        const userEmail = document.getElementById('sign-up-email');
+        const userEmail = document.getElementById('{{ $cleanFormId }}').querySelector('input[type=email]');
 
         if(userEmail.value.match(emailFormat)){
             document.getElementById("{{$cleanFormId}}").submit();
