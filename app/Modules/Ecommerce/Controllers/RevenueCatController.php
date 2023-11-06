@@ -9,6 +9,7 @@ use App\Modules\Ecommerce\Models\UserProduct;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -31,6 +32,7 @@ class RevenueCatController extends Controller
     private PaymentService $paymentService;
 
     const SUBSCRIPTION_REVOKED = 12;
+    const SANDBOX_ENVIRONMENT = 'SANDBOX';
 
     /**
      * @param RevenueCatService $revenueCatService
@@ -118,6 +120,7 @@ class RevenueCatController extends Controller
 
                 if (config('shopify.enabled')) {
                     $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
+                    $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
                     if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
                         if (!$musoraProduct) {
                             Log::error(
@@ -127,6 +130,11 @@ class RevenueCatController extends Controller
                         }
                         $price = $data['event']['price_in_purchased_currency'] ?? $musoraProduct->price;
                         $currency = $data['event']['currency'];
+
+                        if($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
+                            UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
+                        }
+
                         $this->shopifySyncService->syncOrder(
                             $user,
                             [$musoraProduct->id],
@@ -215,6 +223,7 @@ class RevenueCatController extends Controller
 
                 if (config('shopify.enabled')) {
                     $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
+                    $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
                     if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
                         $musoraProduct = $musoraProducts?->first();
                         if (!$musoraProduct) {
@@ -225,6 +234,9 @@ class RevenueCatController extends Controller
                         }
                         $price = $data['event']['price_in_purchased_currency'] ?? $musoraProduct->price;
                         $currency = $data['event']['currency'];
+                        if($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
+                            UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
+                        }
                         $this->shopifySyncService->syncOrder(
                             $user,
                             [$musoraProduct->id],

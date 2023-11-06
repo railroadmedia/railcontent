@@ -68,6 +68,7 @@ class UserAccessPermissionsCollection
             $tempStartDate = $aggregatePrevious ? $expirationDate : Carbon::parse($userAccessPermission->start_time);
             $expirationDate = $userAccessPermission->time_fixed ? Carbon::parse($userAccessPermission->time_fixed)
                 : $tempStartDate->clone()
+                    ->addMinutes($userAccessPermission->time_minutes)
                     ->addDays($userAccessPermission->time_days)
                     ->addMonths($userAccessPermission->time_months);
             $userAccessPermission->actualStartTime = $tempStartDate;
