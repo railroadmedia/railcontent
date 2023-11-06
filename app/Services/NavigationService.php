@@ -59,14 +59,14 @@ class NavigationService
                         'path' => '/'.brand().'/method/drumeo-method/241247',
                         'icon' => 'method',
                     ],
-                    'songs' => [
+                    [
                         'name' => 'Songs',
                         'path' => '/'.brand().'/songs',
                         'icon' => 'headphones',
                     ],
                     [
-                        'name' => 'Coaches',
-                        'path' => '/'.brand().'/coaches',
+                        'name' => 'Workouts',
+                        'path' => '/'.brand().'/workouts',
                         'icon' => 'whistle',
                     ],
                 ],
@@ -116,6 +116,11 @@ class NavigationService
                         'path' => '/'.brand().'/shows',
                         'icon' => 'shows',
                     ],
+                    [
+                        'name' => 'Coaches',
+                        'path' => '/'.brand().'/coaches',
+                        'icon' => 'academic-cap',
+                    ],
                 ],
                 [ // section
                     [
@@ -145,14 +150,14 @@ class NavigationService
                         'path' => '/'.brand().'/method/pianote-method/276693',
                         'icon' => 'method',
                     ],
-                    'songs' => [
+                    [
                         'name' => 'Songs',
                         'path' => '/'.brand().'/songs',
                         'icon' => 'headphones',
                     ],
                     [
-                        'name' => 'Coaches',
-                        'path' => '/'.brand().'/coaches',
+                        'name' => 'Workouts',
+                        'path' => '/'.brand().'/workouts',
                         'icon' => 'whistle',
                     ],
                 ],
@@ -202,6 +207,11 @@ class NavigationService
                         'path' => '/'.brand().'/bootcamps',
                         'icon' => 'keys',
                     ],
+                    [
+                        'name' => 'Coaches',
+                        'path' => '/'.brand().'/coaches',
+                        'icon' => 'academic-cap',
+                    ],
                 ],
                 [ // section
                     [
@@ -231,14 +241,14 @@ class NavigationService
                         'path' => '/'.brand().'/method/guitareo-method/333652',
                         'icon' => 'method',
                     ],
-                    'songs' => [
+                    [
                         'name' => 'Songs',
                         'path' => '/'.brand().'/songs',
                         'icon' => 'headphones',
                     ],
                     [
-                        'name' => 'Coaches',
-                        'path' => '/'.brand().'/coaches',
+                        'name' => 'Workouts',
+                        'path' => '/'.brand().'/workouts',
                         'icon' => 'whistle',
                     ],
                 ],
@@ -298,6 +308,11 @@ class NavigationService
                         'path' => '/'.brand().'/archives',
                         'icon' => 'archives',
                     ],
+                    [
+                        'name' => 'Coaches',
+                        'path' => '/'.brand().'/coaches',
+                        'icon' => 'academic-cap',
+                    ],
                 ],
                 [ // section
                     [
@@ -327,14 +342,14 @@ class NavigationService
                         'path' => '/'.brand().'/method/singeo-method/308514',
                         'icon' => 'method',
                     ],
-                    'songs' => [
+                    [
                         'name' => 'Songs',
                         'path' => '/'.brand().'/songs',
                         'icon' => 'headphones',
                     ],
                     [
-                        'name' => 'Coaches',
-                        'path' => '/'.brand().'/coaches',
+                        'name' => 'Workouts',
+                        'path' => '/'.brand().'/workouts',
                         'icon' => 'whistle',
                     ],
                 ],
@@ -368,6 +383,11 @@ class NavigationService
                         'name' => 'Routines',
                         'path' => '/'.brand().'/routines',
                         'icon' => 'routines',
+                    ],
+                    [
+                        'name' => 'Coaches',
+                        'path' => '/'.brand().'/coaches',
+                        'icon' => 'academic-cap',
                     ],
                 ],
                 [ // section
