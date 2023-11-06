@@ -15,6 +15,7 @@ class EcommerceEventListener
     }
 
     public function handleUserCreated(UserCreated $userCreated) {
+        $this->shopifySyncService->ensureUserSynced($userCreated->getUser());
         $this->shopifySyncService->syncCustomerByEmail($userCreated->getUser()->email);
     }
 }

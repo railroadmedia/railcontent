@@ -81,8 +81,7 @@ class ShopifySyncService
         if (!config('shopify.enabled')) {
             return;
         }
-        $customers = $this->shopify->getCustomers(['email' => $email]);
-        $customer = collect($customers)->first(fn($item) => $item->email === $email);
+        $customer = $this->getShopifyCustomer($email);
         if (!$customer) {
             throw new \Exception("Shopify customer not found for email: $email");
         }
@@ -257,5 +256,29 @@ class ShopifySyncService
             );
         }
         throw new \Exception("User not found for shopify customer id $shopifyCustomerId");
+    }
+
+    public function ensureUserSynced(User $user)
+    {
+        $shopifyCustomer = $this->getShopifyCustomer($user->email);
+        if ($shopifyCustomer && $user->isAccountSetup()) {
+            $customerData = [];
+            $customerData["metafields"] = [
+                [
+                    "key" => ShopifyMetafieldKey::Id->value,
+                    "value" => (string)$user->id,
+                    "type" => ShopifyMetafieldTypes::integer->value,
+                    "namespace" => ShopifyMetafieldNamespace::Model_Users->value,
+                ],
+            ];
+            $this->shopify->updateCustomer($shopifyCustomer->id, $customerData);
+        }
+    }
+
+    public function getShopifyCustomer($email): mixed
+    {
+        $customers = $this->shopify->getCustomers(['email' => $email]);
+        $customer = collect($customers)->first(fn($item) => $item->email === $email);
+        return $customer;
     }
 }

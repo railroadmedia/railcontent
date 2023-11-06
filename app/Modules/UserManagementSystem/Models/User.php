@@ -907,4 +907,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return $this->requires_password_update;
     }
+
+    public function isAccountSetup(): bool
+    {
+        return !$this->requires_password_update;
+    }
 }
