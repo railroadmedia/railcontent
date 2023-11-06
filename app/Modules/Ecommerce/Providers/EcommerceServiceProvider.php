@@ -3,16 +3,21 @@
 namespace App\Modules\Ecommerce\Providers;
 
 use App\Modules\Ecommerce\Listeners\EcommerceEventListener;
+use App\Modules\Ecommerce\Listeners\Shopify\ShopifyEventListener;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
+use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Events\User\UserCreated;
+use Modules\UserManagementSystem\Events\User\UserUpdated;
 
 class EcommerceServiceProvider extends EventServiceProvider
 {
     protected $listen = [
         UserCreated::class => [
             EcommerceEventListener::class . '@handleUserCreated',
+        ],
+        UserUpdated::class => [
+            ShopifyEventListener::class . '@handleUserUpdated',
         ],
     ];
 
