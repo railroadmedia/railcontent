@@ -172,16 +172,7 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
             // "tags" => "",
         ];
 
-        // refer to https://shopify.dev/docs/apps/custom-data/metafields/types
-        // we can use meta fields for stuff like our user id, etc
-        $customerData["metafields"] = [
-            [
-                "key" => ShopifyMetafieldKey::Id->value,
-                "value" => (string)$user->id,
-                "type" => ShopifyMetafieldTypes::integer->value,
-                "namespace" => ShopifyMetafieldNamespace::Model_Users->value
-            ]
-        ];
+        $customerData["metafields"] = $user->getMetafieldsForShopify();
 
         $customerData["addresses"] = $this->createAddressesData($user, $userCustomers);
 

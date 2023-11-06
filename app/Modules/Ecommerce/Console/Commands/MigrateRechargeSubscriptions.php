@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Console\Commands;
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
+use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use Carbon\CarbonInterval;
 use Exception;
@@ -43,7 +44,7 @@ class MigrateRechargeSubscriptions extends Command
             $isTest = $this->option('test');
 
             $this->info('Loading Subscriptions');
-            $subscriptionsQuery = Subscription::query()->with('product')
+            $subscriptionsQuery = Subscription::query()->with('product')->with('user')
                 ->where('is_active', 1)
                 ->where('type', Subscription::TYPE_SUBSCRIPTION)
                 ->where('paid_until', '>', Carbon::now());
@@ -93,14 +94,23 @@ class MigrateRechargeSubscriptions extends Command
             }
 
             $this->info('Loading Product Information');
-            $productIds = $subscriptions->pluck('product.shopify_id')->unique()->mapWithKeys(
-                function ($id) use ($shopify) {
+            $products = $subscriptions->pluck('product')->unique();
+            $mappedProducts = $products->mapWithKeys(function ($product) {
+                /** @var Product $product */
+                return [$product->id => $product->getFullProductForTrial()];
+            });
+
+
+
+
+            $productIds = $mappedProducts->mapWithKeys(
+                function ($product) use ($shopify) {
                     try {
-                        $variantId = $shopify->getVariant($id)?->product_id ?? 0;
+                        $variantId = $shopify->getVariant($product->shopify_id)?->product_id ?? 0;
                     } catch (\Exception $ex) {
                         $variantId = 0;
                     }
-                    return [$id => $variantId];
+                    return [$product->shopify_id => $variantId];
                 }
             )->toArray();
 
@@ -119,7 +129,7 @@ class MigrateRechargeSubscriptions extends Command
                         $i++;
                         continue;
                     }
-                    $product = $subscription->product;
+                    $product = $subscription->product->getFullProductForTrial();
                     $variantId = $product?->shopify_id ?? 0;
                     $productId = $productIds[$variantId] ?? 0;
                     $i++;
@@ -156,8 +166,8 @@ class MigrateRechargeSubscriptions extends Command
                         "paypal_billing_agrement_id" => !app()->isProduction() ? '' :
                             $subscription->paymentMethod->paypalBillingAgreement?->external_id ?? "",
                         "shipping_email" => $this->getEmailForShopify($subscription->user->email),
-                        "shipping_first_name" => $subscription->paymentMethod->address->first_name ?? "",
-                        "shipping_last_name" => $subscription->paymentMethod->address->last_name ?? "",
+                        "shipping_first_name" => $subscription?->user->first_name ?? $subscription->paymentMethod->address->first_name ?? "",
+                        "shipping_last_name" => $subscription?->user->last_name ?? $subscription->paymentMethod->address->last_name ?? "N/A",
                         "shipping_address_1" => "31265 Wheel Ave",
                         "shipping_address_2" => "#107",
                         "shipping_city" => "Abbotsford",

@@ -25,30 +25,29 @@
                     <span>Add User Access Permission</span>
                 </v-tooltip>
             </v-toolbar-items>
-            <!--
-                <template v-slot:extension>
-                    <v-row class="pt-2">
-                        <v-col
-                            cols="12" md="4" sm="12"
-                            class="column"
-                        >
-                            <v-select
-                                v-model="$_field"
-                                label="Products and Memberships"
-                                color="white"
-                                :items="['Plus, Basic, and Lifetime Memberships', 'Non Membership Products', 'All']"
-                                clearable
-                            >
-                            </v-select>
-                        </v-col>
-                    </v-row>
-                </template>
-            -->
+            <!-- Members Dropdown -->
+            <template v-slot:extension>
+                <v-row class="pt-2">
+                    <v-col
+                        cols="12" md="4" sm="12"
+                        class="column"
+                    >
+                        <v-select
+                            v-model="selectedProductType"
+                            :items="productOptions"
+                            item-text="text"
+                            item-value="value"
+                            label="Select Membership"
+                        ></v-select>
+                    </v-col>
+                </v-row>
+            </template>
+            
         </v-toolbar>
 
         <v-data-table
             :headers="headings"
-            :items="userAccessPermissions"
+            :items="filteredPermissions"
             :items-per-page="5"
             must-sort
             sort-desc
@@ -57,7 +56,10 @@
             <template
                 v-slot:item="{ item }"
             >
-                <tr>
+
+                <tr :class="[ isActiveSubscription(item) ? 'active-subscription' : '']"
+                >
+                    <!-- <p>{{ item }}</p> -->
                     <td class="text-center">
                         <v-custom-brand-icon :brand="item.brand"></v-custom-brand-icon>
                     </td>
@@ -115,7 +117,6 @@
                                     </v-icon>
                                 </v-btn>
                             </template>
-
                             <span>Expire</span>
                         </v-tooltip>
                     </td>
@@ -290,9 +291,12 @@ export default {
             dialog: false,
             datepicker: false,
             pausedUntilDatepicker: false,
-            field: null,
-            selectedFilterValues: [],
-            fieldsFiltersValues: [],
+            selectedProductType: 'all', //Default
+            productOptions: [
+                { text: 'All', value: 'all' },
+                { text: 'Plus, Basic, and Lifetime Memberships', value: 1 },
+                { text: 'Non Membership Products', value: 0 },
+            ],
             headings: [
                 {
                     text: 'Brand',
@@ -355,6 +359,20 @@ export default {
         };
     },
     computed: {
+        filteredPermissions() {
+            if (this.selectedProductType === 'all') {
+                return this.userAccessPermissions;
+            } else if (this.selectedProductType === 1) {
+                return this.userAccessPermissions.filter(permission =>
+                    permission.permission_name.includes("Member") || permission.permission_name.includes("Edge")
+                );
+            } else if (this.selectedProductType === 0) {
+                return this.userAccessPermissions.filter(permission =>
+                    !permission.permission_name.includes("Member") && !permission.permission_name.includes("Edge")
+                );
+            }
+        },
+
         $_permission_id: {
             get() {
                 return this.editingUserAccessPermission.permission_id;
@@ -408,16 +426,6 @@ export default {
                 this.$set(this.editingUserAccessPermission, 'start_date', value);
             },
         },
-
-        $_field: {
-            get() {
-                return this.field;
-            },
-            set(value) {
-                this.field = value;
-                this.selectedFilterValues = this.fieldsFiltersValues[this.field];
-            },
-        },
     },
     mounted() {
         PermissionsApi.getPermissions({
@@ -427,13 +435,27 @@ export default {
                  const options = response.data.data;
                  this.permissionsOptions = Utils.dynamicSort(options, 'name');
             });
-
-        this.getFieldFiltersValues();
     },
     methods: {
         ...mapActions('permissions', [
             'getPermissions',
         ]),
+
+        isActiveSubscription(item) {
+            //convert item.expiration_time to date object
+            const dateString = item.expiration_time;
+            const dateToCheck = new Date(dateString);
+            const today = new Date();
+            //Remove time
+            dateToCheck.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0);
+            //Compare Values
+            const subscriptionIsCurrent = dateToCheck > today;
+            if(item.status === "active" && subscriptionIsCurrent) {
+                return true;
+            }
+            return false;
+        },   
 
         getDefaultUserAccessPermission() {
             return {
@@ -457,14 +479,6 @@ export default {
             }
 
             return '-';
-        },
-
-        getFieldFiltersValues() {
-            api
-                .getFieldFiltersValues()
-                .then((response) => {
-                    this.fieldsFiltersValues = response;
-                });
         },
 
         openEditForm(id) {
@@ -551,3 +565,11 @@ export default {
     },
 };
 </script>
+<style>
+    .active-subscription {
+        background-color: rgba(0,255,0,.15) !important;
+    }
+    .active-subscription:hover {
+        background-color: rgba(0,255,0,.25) !important;
+    }
+</style>

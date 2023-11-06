@@ -9,6 +9,7 @@ use App\Modules\Ecommerce\Models\UserProduct;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -31,6 +32,7 @@ class RevenueCatController extends Controller
     private PaymentService $paymentService;
 
     const SUBSCRIPTION_REVOKED = 12;
+    const SANDBOX_ENVIRONMENT = 'SANDBOX';
 
     /**
      * @param RevenueCatService $revenueCatService
@@ -90,7 +92,8 @@ class RevenueCatController extends Controller
                 $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
                     $data['event']['original_app_user_id'],
-                    true
+                    true,
+                    $data['event']['aliases'],
                 );
 
                 if (!$user) {
@@ -112,10 +115,12 @@ class RevenueCatController extends Controller
                 $productId = $this->getProductId($data['event']['product_id']);
 
                 //get Musora product
-                $musoraProduct = $this->getMusoraProducts($type, $data['event'], $productId)->first();
+                $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
+                $musoraProduct = $musoraProducts->first();
 
                 if (config('shopify.enabled')) {
                     $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
+                    $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
                     if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
                         if (!$musoraProduct) {
                             Log::error(
@@ -125,6 +130,11 @@ class RevenueCatController extends Controller
                         }
                         $price = $data['event']['price_in_purchased_currency'] ?? $musoraProduct->price;
                         $currency = $data['event']['currency'];
+
+                        if($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
+                            UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
+                        }
+
                         $this->shopifySyncService->syncOrder(
                             $user,
                             [$musoraProduct->id],
@@ -144,7 +154,7 @@ class RevenueCatController extends Controller
                         $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
 
                     //check if already exists Musora subscription
-                    $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
+                    $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProducts);
 
                     if (!$musoraSubscription) {
                         //create Musora subscription
@@ -187,7 +197,8 @@ class RevenueCatController extends Controller
                 $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
                     $data['event']['original_app_user_id'],
-                    true
+                    true,
+                    $data['event']['aliases']
                 );
                 if (!$user) {
                     //TBD
@@ -212,6 +223,7 @@ class RevenueCatController extends Controller
 
                 if (config('shopify.enabled')) {
                     $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
+                    $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
                     if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
                         $musoraProduct = $musoraProducts?->first();
                         if (!$musoraProduct) {
@@ -222,6 +234,9 @@ class RevenueCatController extends Controller
                         }
                         $price = $data['event']['price_in_purchased_currency'] ?? $musoraProduct->price;
                         $currency = $data['event']['currency'];
+                        if($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
+                            UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
+                        }
                         $this->shopifySyncService->syncOrder(
                             $user,
                             [$musoraProduct->id],
@@ -281,7 +296,7 @@ class RevenueCatController extends Controller
                 // get Musora user
                 $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
-                    $data['event']['original_app_user_id']
+                    $data['event']['original_app_user_id'], false, $data['event']['aliases']
                 );
                 if (!$user) {
                     //TBD
@@ -351,7 +366,7 @@ class RevenueCatController extends Controller
             case 'CANCELLATION':
                 $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
-                    $data['event']['original_app_user_id']
+                    $data['event']['original_app_user_id'], false,  $data['event']['aliases']
                 );
                 if (!$user) {
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
@@ -447,7 +462,7 @@ class RevenueCatController extends Controller
             case 'EXPIRATION':
                 $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
-                    $data['event']['original_app_user_id']
+                    $data['event']['original_app_user_id'], false, $data['event']['aliases']
                 );
                 if (!$user) {
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
@@ -963,7 +978,7 @@ class RevenueCatController extends Controller
             if (user() && $user->id == user()->id) {
                 $token = $user->createToken('ios');
                 $userAuthToken = $token->plainTextToken;
-
+                Log::debug('Old ecommerce restore IOS to RevenueCat API response :: token for userId '.$user->id);
                 return response()->json([
                                             'success' => true,
                                             'token' => $userAuthToken,
@@ -971,14 +986,16 @@ class RevenueCatController extends Controller
                                             'userId' => $user->id,
                                         ]);
             }
-
+            Log::debug('Old ecommerce restore IOS to RevenueCat API response :: shouldLogin for email '.$user->email);
             return response()->json([
                                         'shouldLogin' => true,
                                         'email' => $user->email,
                                     ]);
         } else {
+            Log::debug('Old ecommerce restore IOS to RevenueCat API response :: shouldCreateAccount for purchase '.$receipt);
             return response()->json([
                                         'shouldCreateAccount' => true,
+                                        'purchase' => $receipt,
                                     ]);
         }
     }

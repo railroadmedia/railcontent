@@ -9,7 +9,9 @@
     "patch": "npm version patch; npm run build",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
-    "watch": "vue-cli-service build --watch --mode dev"
+    "watch": "vue-cli-service build --watch --mode dev",
+    "build-mc": "npm run build;r mwp artisan vendor:publish --tag=public --force",
+    "dev-mc": "npm run dev;r mwp artisan vendor:publish --tag=public --force"
   },
   "dependencies": {
     "@musora/helper-functions": "^0.1.28",

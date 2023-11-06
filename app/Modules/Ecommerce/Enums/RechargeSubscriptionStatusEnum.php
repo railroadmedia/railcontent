@@ -7,7 +7,7 @@ namespace App\Modules\Ecommerce\Enums;
  */
 enum RechargeSubscriptionStatusEnum: string
 {
-    case Active = 'active';
-    case Cancelled = 'cancelled';
-    case Expired = 'expired';
+    case Active = 'ACTIVE';
+    case Cancelled = 'CANCELLED';
+    case Expired = 'EXPIRED';
 }

@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
+use App\Modules\Ecommerce\Collections\OrderCollection;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
@@ -13,8 +14,11 @@ use App\Modules\Ecommerce\Models\Product;
 use App\Modules\UserManagementSystem\Services\UserService;
 use App\Providers\EcommerceUserProvider;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
+use Signifly\Shopify\REST\Resources\OrderResource;
 use Signifly\Shopify\Shopify;
 
 class ShopifySyncService
@@ -53,9 +57,13 @@ class ShopifySyncService
         $this->shopifyGateway = $shopifyGateway;
     }
 
-    public function syncCustomer($shopifyCustomerId, $email = '', $skipRechargeSync = false): void
+    public function syncCustomer($shopifyCustomerId, $email = ''): void
     {
-        if (!config('shopify.enabled') || !$shopifyCustomerId) {
+        if (!$shopifyCustomerId) {
+            $user = $this->userService->getByEmailOrNull($email);
+            if ($user) {
+                $this->userAccessPermissionsService->syncUser($user);
+            }
             return;
         }
         Log::debug("Customer $shopifyCustomerId: GetCustomerOrders");
@@ -65,25 +73,31 @@ class ShopifySyncService
         if ($products->contains(fn(Product $product) => $product->isDigital())) {
             $count = $orders->count();
             Log::debug("Customer $shopifyCustomerId: Found $count orders");
-            $user = $this->getUser($shopifyCustomerId, $email);
-            $this->userAccessPermissionsService->syncShopifyOrders($user, $orders, $products, $skipRechargeSync);
+            $user = $this->getOrCreateUser($shopifyCustomerId, $email);
+            $orderCollection = new OrderCollection($orders, $products);
+            $this->updateUserData($shopifyCustomerId, $user);
+            $this->userAccessPermissionsService->syncShopifyOrders($user, $orderCollection);
+
         } else {
             Log::debug("Customer $shopifyCustomerId: No digital products found");
             $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
+            if (!$user) {
+                $user = $this->userService->getByEmailOrNull($email);
+            }
             if ($user) {
-                $this->userAccessPermissionsService->syncUser($user, $skipRechargeSync);
+                $this->userAccessPermissionsService->syncUser($user);
             }
         }
     }
 
     public function syncCustomerByEmail($email)
     {
-        if (!config('shopify.enabled')) {
-            return;
-        }
-        $customer = $this->getShopifyCustomer($email);
+        $emailShopify = $this->getEmailForShopify($email);
+        $customers = $this->shopify->getCustomers(['email' => $emailShopify]);
+        $customer = collect($customers)->first(fn($item) => $item->email === $emailShopify);
         if (!$customer) {
-            throw new \Exception("Shopify customer not found for email: $email");
+            Log::warning("Customer with email $email not found in Shopify");
+            return;
         }
         $this->syncCustomer($customer->id, $email);
     }
@@ -135,7 +149,7 @@ class ShopifySyncService
         // STEP 4: sync user products
         try {
             $this->syncCustomer($customerShopifyId);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
         }
@@ -237,10 +251,10 @@ class ShopifySyncService
             )->all();
     }
 
-    public function getUser(
+    public function getOrCreateUser(
         int $shopifyCustomerId,
         ?string $email = null
-    ): ?User {
+    ): User {
         $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
         if ($user) {
             return $user;
@@ -252,10 +266,35 @@ class ShopifySyncService
             }
             return $this->userService->createUser(
                 $email,
-                config('user_management_system.default_user_password')
+                config('user_management_system.default_user_password'),
+                shopifyCustomerId: $shopifyCustomerId
             );
         }
-        throw new \Exception("User not found for shopify customer id $shopifyCustomerId");
+        throw new Exception("User not found for shopify customer id $shopifyCustomerId");
+    }
+
+    /**
+     * @param int $shopifyCustomerId
+     * @return Collection
+     */
+    public function getOwnedProducts(int $shopifyCustomerId): Collection
+    {
+        $orders = $this->shopifyGateway->getCustomerOrders($shopifyCustomerId);
+        return $orders->pluck('lineItems')->flatten(1);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getOrder(int $orderId): OrderResource
+    {
+        return $this->shopify->getOrder($orderId);
+    }
+
+    public function updateUserData(int $shopifyCustomerId, User $user): void
+    {
+        $user->shopify_id = $shopifyCustomerId;
+        $user->save();
     }
 
     public function ensureUserSynced(User $user)

@@ -249,14 +249,13 @@ export default {
             height: 80px;
         }
         a {
-            display: inline-block;
             text-decoration: none;
             .item-thumbnail {
                 object-fit: cover;
                 object-position: center;
                 border-radius: 5px;
                 max-width: 100%;
-                height: auto;
+                height: 100%;
             }
         }
         .item-logo {

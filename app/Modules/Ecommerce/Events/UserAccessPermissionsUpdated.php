@@ -2,17 +2,24 @@
 
 namespace App\Modules\Ecommerce\Events;
 
+use App\Modules\Ecommerce\Collections\OrderCollection;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
+use Illuminate\Support\Collection;
 
 class UserAccessPermissionsUpdated
 {
     private UserAccessPermissionsCollection $userAccessPermissions;
-    private bool $skipRechargeSync = false;
+    private ?OrderCollection $orders;
+    private $subscriptions;
 
-    public function __construct(UserAccessPermissionsCollection $userAccessPermissions, bool $skipRechargeSync = false)
-    {
+    public function __construct(
+        UserAccessPermissionsCollection $userAccessPermissions,
+        ?OrderCollection $orders,
+        $subscriptions
+    ) {
         $this->userAccessPermissions = $userAccessPermissions;
-        $this->skipRechargeSync = $skipRechargeSync;
+        $this->orders = $orders;
+        $this->subscriptions = $subscriptions;
     }
 
     public function getUserAccessPermissions(): UserAccessPermissionsCollection
@@ -25,9 +32,14 @@ class UserAccessPermissionsUpdated
         return $this->userAccessPermissions->getUserId();
     }
 
-    public function getSkipRechargeSync(): bool
+    public function getOrderCollection(): ?OrderCollection
     {
-        return $this->skipRechargeSync;
+        return $this->orders;
+    }
+
+    public function getSubscriptions()
+    {
+        return $this->subscriptions;
     }
 
 }

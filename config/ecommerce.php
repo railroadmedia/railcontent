@@ -8,7 +8,10 @@ return [
     'available_brands' => ['drumeo', 'pianote', 'guitareo', 'singeo', 'musora'],
 
     // database
-    'database_connection_name' => env('USER_MANAGEMENT_SYSTEM_DATABASE_CONNECTION_NAME','musora_laravel_mysql_writer_only'),
+    'database_connection_name' => env(
+        'USER_MANAGEMENT_SYSTEM_DATABASE_CONNECTION_NAME',
+        'musora_laravel_mysql_writer_only'
+    ),
     'database_name' => env('DB_MUSORA_LARAVEL_MYSQL_DATABASE_NAME'),
     'database_user' => env('DB_MUSORA_LARAVEL_MYSQL_USER_NAME'),
     'database_password' => env('DB_MUSORA_LARAVEL_MYSQL_PASSWORD'),
@@ -19,7 +22,7 @@ return [
 
     // unique user validation database info
     'database_info_for_unique_user_email_validation' => [
-        'database_connection_name' => env('DB_DEFAULT_CONNECTION_NAME','musora_laravel_mysql'),
+        'database_connection_name' => env('DB_DEFAULT_CONNECTION_NAME', 'musora_laravel_mysql'),
         'table' => 'usora_users',
         'email_column' => 'email',
     ],
@@ -364,19 +367,19 @@ return [
         ],
 
         'google_play_store' => [
-            'credentials' =>  __DIR__ . '/../google-play-api.json',
+            'credentials' => __DIR__ . '/../google-play-api.json',
             'application_name' => 'com.musoraapp',
             'scope' => ['https://www.googleapis.com/auth/androidpublisher'],
             'Drumeo' => [
-                'credentials' =>  __DIR__ . '/../drumeo-google-play-api.json',
+                'credentials' => __DIR__ . '/../drumeo-google-play-api.json',
                 'application_name' => 'com.drumeo',
             ],
             'Pianote' => [
-                'credentials' =>  __DIR__ . '/../pianote-google-play-api.json',
+                'credentials' => __DIR__ . '/../pianote-google-play-api.json',
                 'application_name' => 'com.pianote',
             ],
             'Musora' => [
-                'credentials' =>  __DIR__ . '/../google-play-api.json',
+                'credentials' => __DIR__ . '/../google-play-api.json',
                 'application_name' => 'com.musoraapp',
             ]
         ],
@@ -794,7 +797,7 @@ return [
 
     'subscription_renewal_date' => 1,
     'failed_payments_before_de_activation' => 1,
-    'days_before_access_revoked_after_expiry_in_app_purchases_only' => 0,
+    'days_before_access_revoked_after_expiry_in_app_purchases_only' => 7,
     'days_before_access_revoked_after_expiry' => 7,
 
     'password_creation_rules' => 'min:8|max:128', // also defined in usora
@@ -1025,24 +1028,33 @@ return [
     // exchangerate-api.com
     'exchange_rate_api_token' => '89916546525703af0b7e1f9a',
 
-    'annual_product_skus' => ['DLM-1-year', 'PIANOTE-MEMBERSHIP-1-YEAR', 'GUITAREO-1-YEAR-MEMBERSHIP', 'singeo-annual-recurring-membership'],
+    'annual_product_skus' => [
+        'DLM-1-year',
+        'PIANOTE-MEMBERSHIP-1-YEAR',
+        'GUITAREO-1-YEAR-MEMBERSHIP',
+        'singeo-annual-recurring-membership'
+    ],
 
-    'revenuecat'=>[
+    'revenuecat' => [
         'ios' => [
-            'Musora' => env('REVENUE_KEY_IOS_MUSORA','appl_LdpPMmTZTRLwFbTzlOHiaqWxdSd'),
-            'Drumeo' => env('REVENUE_KEY_IOS_DRUMEO','appl_EuubnDghYEbJYsBEZQapZXHaMoU'),
-            'Pianote' => env('REVENUE_KEY_IOS_PIANOTE','appl_NODWOEDlBZjSbygaiqaOuRUVhWF'),
-            ],
+            'Musora' => env('REVENUE_KEY_IOS_MUSORA', 'appl_LdpPMmTZTRLwFbTzlOHiaqWxdSd'),
+            'Drumeo' => env('REVENUE_KEY_IOS_DRUMEO', 'appl_EuubnDghYEbJYsBEZQapZXHaMoU'),
+            'Pianote' => env('REVENUE_KEY_IOS_PIANOTE', 'appl_NODWOEDlBZjSbygaiqaOuRUVhWF'),
+        ],
         'android' =>
             [
-                'Musora' => env('REVENUE_KEY_ANDROID_MUSORA','goog_ZpwzTsZCbSVzcMIszJVEBkiaXyc'),
-                'Drumeo' => env('REVENUE_KEY_ANDROID_DRUMEO','goog_zPhmTIpXDeEztASiWPFtVniEPoW'),
-                'Pianote' => env('REVENUE_KEY_ANDROID_PIANOTE','goog_pBHeWlebBxUzBrXzJHkIiHbPrrK'),
+                'Musora' => env('REVENUE_KEY_ANDROID_MUSORA', 'goog_ZpwzTsZCbSVzcMIszJVEBkiaXyc'),
+                'Drumeo' => env('REVENUE_KEY_ANDROID_DRUMEO', 'goog_zPhmTIpXDeEztASiWPFtVniEPoW'),
+                'Pianote' => env('REVENUE_KEY_ANDROID_PIANOTE', 'goog_pBHeWlebBxUzBrXzJHkIiHbPrrK'),
             ]
     ],
     'sync_revenue_cat' => env('SYNC_REVENUE_CAT', true),
     'bonus_membership_product_id' => 732,
     'revenuecat_webhook_token' => env('REVENUECAT_WEBHOOK_TOKEN'),
-    'revenuecat_only'=> env('REVENUECAT_ONLY',true),
+    'revenuecat_only' => env('REVENUECAT_ONLY', true),
     'revenuecat_secret_key' => env('REVENUECAT_SECRET_KEY'),
+    'launch_dates' => [
+        'unified' => '2022-01-01',
+        'shopify' => '2023-11-08',
+    ],
 ];

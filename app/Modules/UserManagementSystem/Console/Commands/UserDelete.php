@@ -4,15 +4,27 @@ namespace App\Modules\UserManagementSystem\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoDeleteUser;
+use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class UserDelete extends Command
 {
-    protected $signature = 'user:delete {--execute}';
+    protected $signature = 'user:delete
+                            {--startingId= : (Optional) The user Id to start processing at}
+                            {--limit= : (Optional) The number of users to limit this run to.}
+                            {--execute : Execute the deletion from the database. Without this flag, it will be simulated. }';
+
     protected $description = 'Completely remove a user from the database.';
 
-    private $simulate = false;
+    private bool $simulate = false;
+    private int $totalRowsDeleted = 0;
+    private int $totalUsersDeleted = 0;
+    private Collection $deletedUserIds;
     private DatabaseManager $databaseManager;
 
     // Should review this query for future use
@@ -252,68 +264,134 @@ class UserDelete extends Command
         ],
     ];
 
+    /**
+     * Execute the command
+     *
+     * @param DatabaseManager $databaseManager
+     * @return void
+     */
     public function handle(DatabaseManager $databaseManager): void
     {
+        $this->deletedUserIds = collect();
         $this->simulate = $this->option('execute') == false;
         if ($this->simulate) {
             $this->info(
                 "Executing in simulation mode. No changes will be made to the database.  Use --execute to run for real."
             );
         }
+        $startingId = $this->option("startingId");
+        $limit = $this->option("limit");
+
         $this->databaseManager = $databaseManager;
-        $this->withExecutionTime(function () {
+        $this->withExecutionTime(function () use ($limit, $startingId) {
             $connection = $this->databaseManager->connection(config('usora.database_connection_name'));
 
             $usersToDelete = $connection->table('usora_users')
                 ->select(['usora_users.id', 'usora_users.email'])
                 ->join('ecommerce_subscriptions', 'ecommerce_subscriptions.user_id', '=', 'usora_users.id')
-                ->where(function ($query) {
+                ->join('ecommerce_products', 'ecommerce_products.id', '=', 'ecommerce_subscriptions.product_id')
+                ->where(function (Builder $query) {
                     $query->whereRaw($this->databaseManager->raw('last_used_brand is null or email LIKE "%data%"'));
                 })
-                ->where('ecommerce_subscriptions.product_id', '=', 488)
+                ->whereNotExists(function (Builder $query) {
+                    $query->select($this->databaseManager->raw(1))
+                        ->from('ecommerce_payments')
+                        ->join(
+                            'ecommerce_payment_methods',
+                            'ecommerce_payment_methods.id',
+                            '=',
+                            'ecommerce_payments.payment_method_id'
+                        )
+                        ->join(
+                            'ecommerce_user_payment_methods',
+                            'ecommerce_user_payment_methods.payment_method_id',
+                            '=',
+                            'ecommerce_payments.id'
+                        )
+                        ->whereColumn('ecommerce_user_payment_methods.user_id', '=', 'usora_users.id')
+                        ->where('ecommerce_payments.total_paid', '>', 0);
+                })
+                ->whereNotExists(function (Builder $query) {
+                    $query->select($this->databaseManager->raw(1))
+                        ->from('ecommerce_payments')
+                        ->join(
+                            'ecommerce_subscription_payments',
+                            'ecommerce_subscription_payments.payment_id',
+                            '=',
+                            'ecommerce_payments.id'
+                        )
+                        ->join(
+                            'ecommerce_subscriptions',
+                            'ecommerce_subscriptions.id',
+                            '=',
+                            'ecommerce_subscription_payments.subscription_id'
+                        )
+                        ->whereColumn('ecommerce_subscriptions.user_id', '=', 'usora_users.id')
+                        ->where('ecommerce_payments.total_paid', '>', 0);
+                })
+                ->where('ecommerce_products.sku', "like", "%trial%")
+                // last_used_brand was only added for unified launch in dec 2022, so restricting it to only delete users after that
+                ->where('usora_users.created_at', '>', '2023-01-01')
                 ->orderBy('usora_users.id', 'desc')
-                ->get();
+                ->when(!is_null($startingId), function (Builder $q) use ($startingId) {
+                    return $q->where('usora_users.id', '>=', $startingId);
+                })
+                // users could actively be on a free trial right now, make sure they are expired
+                ->whereDate('usora_users.membership_expiration_date', '<', Carbon::today())
+                ->groupBy('usora_users.id');
 
-            $count = $usersToDelete->count();
+            // because of the groupBy, we can't get the count unless we get the results, which defeats the purpose of
+            // chunking, so we'll use the trick from pratimroy1990 in https://laracasts.com/discuss/channels/eloquent/eloquent-groupby-count-always-returns-1
+            $count = DB::table(DB::raw("({$usersToDelete->toSql()}) as query"))->mergeBindings($usersToDelete)->count();
             $this->info('Found ' . $count . ' users to delete');
 
-            // check if they have any successful payments first
-            foreach ($usersToDelete as $userToDeleteIndex => $userToDelete) {
-                $payments = $connection->table('ecommerce_payments')
-                    ->leftJoin(
-                        'ecommerce_payment_methods',
-                        'ecommerce_payment_methods.id',
-                        '=',
-                        'ecommerce_payments.payment_method_id'
-                    )
-                    ->leftJoin(
-                        'ecommerce_user_payment_methods',
-                        'ecommerce_user_payment_methods.payment_method_id',
-                        '=',
-                        'ecommerce_payment_methods.id'
-                    )
-                    ->where('ecommerce_user_payment_methods.user_id', $userToDelete->id)
-                    ->get();
+            // chunk doesn't use a limit set in the query, so we'll work around that by keeping track of the count internally
+            $userCount = !is_null($limit) ? min($limit, $count) : $count;
+            $batchSize = 10;
+            $isAtLimit = false;
+            $tally = 0;
+            $batchIndex = 0;
+            $batchTotal = ceil($userCount / $batchSize);
 
-                foreach ($payments as $payment) {
-                    if ($payment->total_paid > 0) {
-                        $this->info(
-                            'Warning, user ID: ' . $userToDelete->id . ' had a successful payment. Skipping...'
-                        );
-                        unset($usersToDelete[$userToDeleteIndex]);
-                    }
+            $usersToDelete->chunk($batchSize, function (Collection $userDataChunk) use (
+                $userCount,
+                $batchSize,
+                &$isAtLimit,
+                &$tally,
+                &$batchIndex,
+                $batchTotal
+            ) {
+                // do the internal limit tracking
+                if ($isAtLimit) {
+                    return false;
                 }
-            }
+                $tally += $batchSize;
+                $remaining = $userCount - $tally;
+                if ($remaining <= 0) {
+                    $isAtLimit = true;
+                }
+                ++$batchIndex;
 
-            $this->deleteUserIds($usersToDelete->pluck('id')->toArray());
+                $userIds = $userDataChunk->pluck("id")->toArray();
+                $this->deleteFromCustomerIo($userIds);
+                $this->deleteFromDatabase($userIds, $batchIndex, $batchTotal);
+
+                $this->deletedUserIds = $this->deletedUserIds->push(...$userIds);
+            });
         });
+
+        $this->info('Deleting users: ' . $this->deletedUserIds->implode(', '));
     }
 
-    public function deleteUserIds(array $allUserIds)
+    /**
+     * Delete the users from CustomerIO, using their provided IDs
+     *
+     * @param array $userIds
+     * @return void
+     */
+    protected function deleteFromCustomerIo(array $userIds): void
     {
-        $this->info('Deleting users: ' . implode(', ', $allUserIds));
-
-        foreach ($allUserIds as $userId) {
+        foreach ($userIds as $userId) {
             if ($this->simulate) {
                 $this->info("Simulating delete user $userId from customer IO");
             } else {
@@ -321,65 +399,70 @@ class UserDelete extends Command
                 dispatch_sync(new CustomerIoDeleteUser($userId));
             }
         }
+    }
 
-        $totalRowsDeleted = 0;
-        $totalUsersDeleted = 0;
-        $batch = array_chunk($allUserIds, 10);
+    /**
+     * Delete the users from all our defined tables, using their provided IDs
+     *
+     * @param array $batchUserIds
+     * @param int $batchIndex
+     * @param int $batchTotal
+     * @return void
+     */
+    protected function deleteFromDatabase(array $batchUserIds, int $batchIndex, int $batchTotal): void
+    {
+        try {
+            foreach ($this->databaseTablesUserIdColumnsMap as $databaseConnectionName => $tablesColumns) {
+                foreach ($tablesColumns as $userIdColumn => $tableNames) {
+                    foreach ($tableNames as $tableName) {
+                        $query = $this->databaseManager
+                            ->connection($databaseConnectionName)
+                            ->table($tableName)
+                            ->whereIn($userIdColumn, $batchUserIds);
 
-        foreach ($batch as $batchIndex => $batchUserIds) {
-            try {
-                foreach ($this->databaseTablesUserIdColumnsMap as $databaseConnectionName => $tablesColumns) {
-                    foreach ($tablesColumns as $userIdColumn => $tableNames) {
-                        foreach ($tableNames as $tableName) {
-                            $query = $this->databaseManager
-                                ->connection($databaseConnectionName)
-                                ->table($tableName)
-                                ->whereIn($userIdColumn, $batchUserIds);
+                        if ($this->simulate) {
+                            $rows = $query->get();
+                            $this->totalRowsDeleted += $rows->count();
 
-                            if ($this->simulate) {
-                                $rows = $query->get();
-                                $totalRowsDeleted += $rows->count();
-
-                                foreach ($rows as $row) {
-                                    $id = property_exists($row, 'id') ? $row->id : '';
-                                    $this->info(
-                                        "Deleting (simulate): $databaseConnectionName.$tableName id: $id $userIdColumn:" . $row->{$userIdColumn}
-                                    );
-                                }
-                            } else {
-                                $this->info("Deleting from table: $databaseConnectionName.$tableName");
-
-                                $totalRowsDeleted += $query->delete();
-
-                                usleep(100000);
+                            foreach ($rows as $row) {
+                                $id = property_exists($row, 'id') ? $row->id : '';
+                                $this->info(
+                                    "Deleting (simulate): $databaseConnectionName.$tableName id: $id $userIdColumn:" . $row->{$userIdColumn}
+                                );
                             }
+                        } else {
+                            $this->info("Deleting from table: $databaseConnectionName.$tableName");
+
+                            $this->totalRowsDeleted += $query->delete();
+
+                            usleep(100000);
                         }
                     }
                 }
-
-// finally delete from the usora users table
-                $query = $this->databaseManager->connection('musora_laravel_mysql_writer_only')->table(
-                    'usora_users'
-                )->WhereIn('id', $batchUserIds);
-
-                if ($this->simulate) {
-                    $userRows = $query->get();
-                    $totalRowsDeleted += $userRows->count();
-                    foreach ($userRows as $userRow) {
-                        $this->info("Deleting (simulate): usora_users id: $userRow->id email: $userRow->email");
-                    }
-                } else {
-                    $totalRowsDeleted += $query->delete();
-                }
-
-                $totalUsersDeleted += count($batchUserIds);
-                $this->info('Finished batch ' . $batchIndex + 1 . ' out of ' . count($batch));
-                $this->info('Total rows deleted: ' . $totalRowsDeleted);
-                $this->info('Total users deleted: ' . $totalUsersDeleted);
-            } catch (\Exception $e) {
-                $this->info("Error deleting users: " . implode(', ', $batchUserIds));
-                Log::error($e);
             }
+
+            // finally delete from the usora users table
+            $query = $this->databaseManager->connection('musora_laravel_mysql_writer_only')->table(
+                'usora_users'
+            )->WhereIn('id', $batchUserIds);
+
+            if ($this->simulate) {
+                $userRows = $query->get();
+                $this->totalRowsDeleted += $userRows->count();
+                foreach ($userRows as $userRow) {
+                    $this->info("Deleting (simulate): usora_users id: $userRow->id email: $userRow->email");
+                }
+            } else {
+                $this->totalRowsDeleted += $query->delete();
+            }
+
+            $this->totalUsersDeleted += count($batchUserIds);
+            $this->info('Finished batch ' . $batchIndex . ' out of ' . $batchTotal);
+            $this->info('Total rows deleted: ' . $this->totalRowsDeleted);
+            $this->info('Total users deleted: ' . $this->totalUsersDeleted);
+        } catch (\Exception $e) {
+            $this->info("Error deleting users: " . implode(', ', $batchUserIds));
+            Log::error($e);
         }
     }
 }

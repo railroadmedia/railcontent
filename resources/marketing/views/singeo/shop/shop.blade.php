@@ -13,6 +13,10 @@
     <meta property="og:url" content="https://www.singeo.com/shop/">
 @endsection
 
+@section('x-data')
+    filter: '{{ $category !== 'shop' ? $category : 'all' }}',
+@endsection
+
 @section('layout-header')
     @include("singeo.sales.partials._nav", [
         "cartVersion" => true,
@@ -34,161 +38,132 @@
         </div>
     </header>
 
-
-    {{--    @if(Session::has('addedProducts'))--}}
-    {{--        <section class="py-6 md:py-10">--}}
-    {{--            <div class="max-w-4xl mx-auto">--}}
-    {{--                <div class="w-full px-2 md:px-3">--}}
-    {{--                    <h4 class="text-green-400 mb-3 md:mb-4"><strong><i class="fas fa-check mr-1"></i> Added to Cart</strong></h4>--}}
-    {{--                </div>--}}
-    {{--                <div class="flex flex-wrap">--}}
-    {{--                    <div class="w-full px-2 md:px-3 md:w-2/3">--}}
-    {{--                        @foreach(Session::get('addedProducts') as $addedProduct)--}}
-    {{--                            <div class="flex items-center float-left w-full px-2 md:px-3 mb-3">--}}
-    {{--                                <img class="rounded-full h-20 md:h-36 border-2 border-gray-300" src="{{ $addedProduct['thumbnail'] }}">--}}
-    {{--                                <div class="flex-shrink pl-3 md:pl-4">--}}
-    {{--                                    <h5 class="leading-tight"><strong>{{ $addedProduct['name'] }}</strong></h5>--}}
-    {{--                                    <p class="leading-normal">{{ $addedProduct['description'] }}</p>--}}
-    {{--                                </div>--}}
-    {{--                            </div>--}}
-    {{--                        @endforeach--}}
-    {{--                    </div>--}}
-    {{--                    <div class="w-full px-2 md:px-3 md:w-1/3 md:text-center">--}}
-    {{--                        <p class="mb-2">--}}
-    {{--                            Cart Subtotal({{ Session::get('cartNumberOfItems') }}):--}}
-    {{--                            <strong>${{ number_format(Session::get('cartSubTotal'), 2, '.', ',') }}</strong>--}}
-    {{--                        </p>--}}
-    {{--                        <a href="{{ get_musora_brand_base_url() }}/order/{{ $brand }}" class="join smaller"><i class="fas fa-cart-plus"></i> Proceed to Checkout</a>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        </section>--}}
-    {{--    @endif--}}
-
-    @if(Session::has('success-message') ||
-    Session::has('warning-message') ||
-    Session::has('error-message'))
-        <div class="container mx-auto clearfix">
-            <div class="float-left w-full px-2 md:px-3 no-padding">
-                @if(Session::has('success-message'))
-                    <div class="alert alert-success">
-                        <strong>Success: </strong> {{ Session::get('success-message') }}
-                    </div>
-                @endif
-
-                @if(Session::has('warning-message'))
-                    <div class="alert alert-warning">
-                        <strong>Warning: </strong> {{ Session::get('warning-message') }}
-                    </div>
-                @endif
-
-                @if(Session::has('error-message'))
-                    <div class="alert alert-danger">
-                        <strong>Error: </strong> {{ Session::get('error-message') }}
-                    </div>
-                @endif
+    @if(Session::has('addedProducts'))
+        <section class="added-to-cart-background clearfix">
+            <div class="float-left px-2 md:px-3 w-full check">
+                <h2><i class="fas fa-check"></i>Added to Cart</h2>
             </div>
-        </div>
-    @endif
-    <div class="white-box">
-        <section class="bundles">
-            <div class="container mx-auto fixed-cards">
-                {{--                <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">--}}
-                {{--                    <a href="/shop/bundle-unlimited" class="bundle-card lg:pb-1">--}}
-                {{--                        <span class="top-left-badge text-white bg-promo"><i class="fas fa-star"></i> $538 IN FREE BONUSES</span>--}}
-                {{--                        <div class="bg-center bg-cover pb-40 sm:pb-56 xl:pb-64" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/unlimited-lessons.png);"></div>--}}
-                {{--                        <div class="float-left w-full px-2 md:px-3">--}}
-                {{--                            <p><strong>Singeo Membership + 5 Bonuses </strong><br>--}}
-                {{--                                <em>Singeo Annual Membership<br class="hidden lg:inline"> + Starter Kit + Practice Poster + Guitar/Piano Lessons & More!</em>--}}
-                {{--                                <span class="price"><s class="opacity-30">$778</s> <strong class="linear-purple">${{ Prices::$plusSubscriptionAnnual }}</strong></span>--}}
-                {{--                            </p>--}}
-                {{--                            <span class="join" style="background:linear-gradient(180deg, #8300E9 0%, #03017C 100%);">See The Deal &raquo;</span>--}}
-                {{--                        </div>--}}
-                {{--                    </a>--}}
-                {{--                </div>--}}
-                <div class="float-left w-full px-2 card-wrap">
-                    <a href="/shop/singing-starter-kit" class="flex flex-row text-white rounded-xl mb-3 md:mb-5 overflow-hidden relative w-full sm:text-left px-5 sm:px-8 lg:px-16 py-10 sm:py-7 lg:py-10">
-                        <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
-                            <img class="h-20 md:h-16 lg:h-28" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/logo.png" alt="essential bundle logo"><br>
-                            <h6 class="leading-tight my-4 lg:my-5">
-                                Everything you need to<br class="lg:hidden">
-                                <b>start singing now.</b>
-                            </h6>
-                            <div class="join white smaller w-full" style="background:#D46A7D;color:white;">only <!--<s style="color:#C4C4C4;">${{ floatval($productPrices['singing-starter-kit']->price) }}</s>--> ${{ floatval($productPrices['singing-starter-kit']->discounted_price) }} &raquo;</div><br>
+            <div class="float-left px-2 md:px-3 w-full product-info">
+                <div class="float-left px-2 md:px-3 w-full md:w-8/12 product">
+                    @foreach(Session::get('addedProducts') as $addedProduct)
+                        <div class="float-left px-2 md:px-3 w-full" style="padding:0;margin-bottom:15px;">
+                            <img src="{{ $addedProduct['thumbnail'] }}">
+                            <h4>{{ $addedProduct['name'] }}</h4>
+                            <p>{{ $addedProduct['description'] }}</p>
                         </div>
-                        <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover" style="background-position:60% 0;background-color:#291618;background-image:url(https://www.musora.com/musora-cdn/image/width=3000,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/singing-starter-kit-banner.jpg);"></div>
-                        <div class="inline-block sm:hidden absolute inset-0 z-0" style="background-color:#291618;"></div>
-                    </a>
+                    @endforeach
                 </div>
+                <div class="float-left px-2 md:px-3 w-full md:w-4/12 checkout">
+                    <h5>
+                        Cart Subtotal({{ Session::get('cartNumberOfItems') }}):
+                        <strong>${{ Session::get('cartSubTotal') }}</strong>
+                    </h5>
+                    <a href="{{ get_musora_brand_base_url() }}/order/{{ $brand }}" class="checkout-button"><i class="fas fa-cart-plus"></i> Checkout</a>
+                </div>
+            </div>
+        </section>
+    @endif
 
-                <div class="float-left w-full px-2 card-wrap">
-                    <a href="/beautiful-harmonies" class="flex flex-row-reverse text-white rounded-xl mb-5 overflow-hidden relative w-full sm:text-left px-4 sm:px-8 xl:px-14 py-10 sm:py-7 lg:py-10 margin-per">
-                        <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
-                            <img class="h-20 md:h-16 lg:h-28" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/essential-logo.png" alt="essential bundle logo"><br>
-                            <h6 class="leading-tight my-4 lg:my-5">
-                                Take your singing skills <br class="lg:hidden">
-                                to the <b>next level.</b>
-                            </h6>
-                            <div class="join white smaller w-full" style="background:white;color:#2B384D;">only <!--<s style="color:#C4C4C4;">${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price) }}</s>--> ${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price) }} &raquo;</div><br>
-                        </div>
-                        <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#2b374d;background-image:url(https://www.musora.com/musora-cdn/image/width=3000,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/beautiful-harmonies-banner.jpg);"></div>
-                        <div class="inline-block sm:hidden absolute inset-0 z-0" style="background-color:#2b374d;"></div>
-                    </a>
+    @include('drumeo.drumshop._partials._catalogue-filters')
+    <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
+        <div id="lessons" class="anchor"></div>
+        <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Piano Lessons</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+
+                    @include('musora.shop._shop-card-alt', [
+                         "itemURL" => "/",
+                         "sku" => null,
+                         "thumbnail" => "https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-membership-shop.jpg",
+                         "title" => "Singeo Membership",
+                         "packAuthor" => "Lisa Witt",
+                         "cardDescription" => "Improve your vocal range, strength, and control with step-by-step lessons and unlimited personal support.",
+                         "specialPrice" => "7-Day Free Trial",
+                         "fullPrice" => 240,
+                         "price" => 240,
+                         "category" => "lessons",
+                         "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
+                         'soldOut' => false,
+                    ])
+
+                    @foreach($lessons as $key => $lesson)
+                        @include('musora.shop._shop-card-alt', [
+                                "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
+                                "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
+                                "thumbnail" => $lesson->thumbnail,
+                                "packLogo" => $lesson->thumbnail_logo,
+                                "title" => $lesson->name,
+                                "packAuthor" => $lesson->instructor_name,
+                                "cardDescription" => $lesson->short_desc,
+                                "fullPrice" => $lesson->price,
+                                "price" => $lesson->discounted_price,
+                                "category" => strtolower($lesson->productType->name),
+                                "soldOut" => $lesson->sold_out,
+                                "includedMembership" => $lesson->included_edge,
+                                "badgeText" => $lesson->badge_text,
+                                'FCP' => $key < 4 ? true : null,
+                        ])
+                    @endforeach
                 </div>
             </div>
         </section>
 
-        <section class="grid-view category-section" data-category="lessons">
-            <ul class="container mx-auto fixed-cards">
+        {{--   ACCESSORIES     --}}
+        <div id="accessories" class="anchor"></div>
+        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'accessories' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Accessories</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                    @foreach($accessories as $accessory)
+                        @include('musora.shop._shop-card-alt', [
+                                "sku" => (str_contains($accessory->sku, 'member') || str_contains($accessory->sku, 'products')) ? '' : $accessory->sku,
+                                "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
+                                "thumbnail" => $accessory->thumbnail,
+                                "badgeText" => $accessory->badge_text,
+                                "title" => $accessory->name,
+                                "cardDescription" => $accessory->short_desc,
+                                "fullPrice" => $accessory->price,
+                                "sizes" => $accessory->sizes,
+                                "price" => $accessory->discounted_price,
+                                "category" => strtolower($accessory->productType->name),
+                                "soldOut" => isset($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,
+                                "size_case_sensitive" => $accessory->size_case_sensitive,
+                        ])
+                    @endforeach
+                </div>
+            </div>
+        </section>
 
-                @include('musora.shop._shop-card', [
-                     "itemURL" => "/",
-                     "sku" => null,
-                     "thumbnail" => "https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-membership-shop.jpg",
-                     "title" => "Singeo Membership",
-                     "packAuthor" => "Lisa Witt",
-                     "cardDescription" => "Improve your vocal range, strength, and control with step-by-step lessons and unlimited personal support.",
-                     "specialPrice" => "7-Day Free Trial",
-                     "fullPrice" => 240,
-                     "price" => 240,
-                     "category" => "lessons",
-                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
-                     'soldOut' => false,
-                ])
-                @foreach($items as $key => $item)
-                    @include('musora.shop._shop-card', [
-                            "sku" => $item->sku,
-                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
-                            "thumbnail" => $item->thumbnail,
-                            "packLogo" => $item->thumbnail_logo,
-                            "badgeText" => $item->badge_text,
-                            "title" => $item->name,
-                            "packAuthor" => $item->instructor_name ?? 'Singeo',
-                            "cardDescription" => $item->short_desc,
-                            "fullPrice" => $item->price,
-                            "price" => $item->discounted_price,
-                            "category" => strtolower($item->productType->name),
-                            "includedEdge" => $item->included_edge,
-                            "sizes" => $item->sizes,
-                            "soldOut" => (isset($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
-                            "size_case_sensitive" => $item->size_case_sensitive,
-                            'FCP' => $key < 4 ? true : null,
-                    ])
-                @endforeach
+        {{--   SHIRTS     --}}
+        <div id="shirts" class="anchor"></div>
+        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Clothing</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
 
-            </ul>
+                    @foreach($shirts as $shirt)
+                        @include('musora.shop._shop-card-alt', [
+                            "sku" => $shirt->sku,
+                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
+                            "thumbnail" => $shirt->thumbnail,
+                            "badgeText" => $shirt->badge_text,
+                            "title" => $shirt->name,
+                            "cardDescription" => $shirt->short_desc,
+                            "fullPrice" => $shirt->price,
+                            "price" => $shirt->discounted_price,
+                            "category" => strtolower($shirt->productType->name),
+                            "sizes" => $shirt->sizes,
+                            "soldOut" => isset($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
+                            "size_case_sensitive" => $shirt->size_case_sensitive,
+                        ])
+                    @endforeach
+                </div>
+            </div>
         </section>
     </div>
 @endsection
 
 @section('layout-footer')
     @include("singeo.sales.partials._footer")
-@endsection
-
-@section('layout-scripts')
-    @parent
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2023-07-31 23:59:59',
-        'promoVersion' => true
-    ])
 @endsection

@@ -69,62 +69,30 @@
         </section>
     @endif
 
-    @include('pianote.shop._partials._catalogue-filters', [
-        "all" => true
-    ])
-    <div class="white-box">
-{{--                @include('_partials.layout.holiday.bundle-cards', [--}}
-{{--                    "header" => 'Join Pianote + Choose <br class="sm:hidden"> Your Bonus Bundle',--}}
-{{--                ])--}}
-
-        {{--        <section class="bundles">--}}
-        {{--            <div class="container mx-auto">--}}
-        {{--                <div class="w-full card-wrap mb-5">--}}
-        {{--                    <a href="/shop/book-bundle/" class="w-full --}}{{--py-20 sm:py-28 lg:py-40--}}{{-- py-5 lg:py-8 px-4 sm:px-6 lg:px-20 banner-product overflow-hidden bg-cover bg-center sm:bg-right" style="background-color:#ca1176;background-image:url(https://www.musora.com/musora-cdn/image/width=2500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/just-the-books-shop-no-classic.jpg);">--}}
-        {{--                        <span class="top-left-badge text-white bg-promo z-10"><i class="fas fa-star"></i> SAVE {{ round(100 - (100 * (59 / 145))) }}%</span>--}}
-        {{--                        <div class="text-wrap relative z-10">--}}
-        {{--                            <img class="h-24 lg:h-32 relative z-10" src="https://www.musora.com/musora-cdn/image/width=1600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/just-the-books-bundle-white.png">--}}
-        {{--                            <p class="my-2">--}}
-        {{--                                Chords & Scales Book + Practice Planner + Christmas<br class="hidden sm:inline">--}}
-        {{--                                Songbook + Chords Poster + Scales Poster</p>--}}
-        {{--                            <h4 class="inline-block leading-none"><strong>--}}
-        {{--                                    <s class="opacity-60">$145</s>&nbsp; ${{  }}</strong></h4><br>--}}
-        {{--                            <span class="join smaller mt-2 lg:mt-3" style="background-color:#000;">See The Deal &raquo;</span>--}}
-        {{--                        </div>--}}
-        {{--                        --}}{{--                <div class="absolute top-0 left-0 right-0 bottom-0 z-0 hidden md:block" style="background:linear-gradient(to right, rgba(18,139,165,0.4) 25%, #003643);"></div>--}}
-        {{--                        <div class="absolute top-0 left-0 right-0 bottom-0 z-0 block md:hidden" style="background:linear-gradient(to bottom, rgba(203,19,117,0.5), #7100a1);"></div>--}}
-        {{--                    </a>--}}
-        {{--                </div>--}}
-        {{--            </div>--}}
-        {{--        </section>--}}
-
-        {{--    LESSONS    --}}
+    @include('drumeo.drumshop._partials._catalogue-filters')
+    <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
-            <ul class="container mx-auto fixed-cards text-center lg:text-left">
-                <li>
-                    <h1 class="float-left px-2 md:px-3 w-full">
-                        <div class="heading-icon text-pianote"><i class="fas fa-video"></i></div>
-                        Piano Lessons
-                    </h1>
-                </li>
-                @include('musora.shop._shop-card', [
-                     "itemURL" => "/",
-                     "sku" => null,
-                     "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
-                     "title" => "Pianote Membership",
-                     "packAuthor" => "Lisa Witt",
-                     "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",
-                     "specialPrice" => "7-Day Free Trial",
-                     "fullPrice" => 240,
-                     "price" => 240,
-                     "category" => "lessons",
-                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
-                     'soldOut' => false,
-                ])
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Piano Lessons</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                    @include('musora.shop._shop-card-alt', [
+                          "itemURL" => "/",
+                          "sku" => null,
+                          "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
+                          "title" => "Pianote Membership",
+                          "packAuthor" => "Lisa Witt",
+                          "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",
+                          "specialPrice" => "7-Day Free Trial",
+                          "fullPrice" => 240,
+                          "price" => 240,
+                          "category" => "lessons",
+                          "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
+                          'soldOut' => false,
+                     ])
 
                 @foreach($lessons as $key => $lesson)
-                    @include('musora.shop._shop-card', [
+                    @include('musora.shop._shop-card-alt', [
                             "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
                             "thumbnail" => $lesson->thumbnail,
@@ -141,21 +109,18 @@
                             'FCP' => $key < 4 ? true : null,
                     ])
                 @endforeach
-            </ul>
+            </div>
+            </div>
         </section>
 
         {{--   ACCESSORIES     --}}
         <div id="accessories" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'accessories' || filter === 'all'">
-            <ul class="container mx-auto fixed-cards">
-                <li>
-                    <h1 class="float-left px-2 md:px-3 w-full">
-                        <div class="heading-icon text-pianote"><i class="fas fa-mug-hot"></i></div>
-                        Accessories
-                    </h1>
-                </li>
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Accessories</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
                 @foreach($accessories as $accessory)
-                    @include('musora.shop._shop-card', [
+                    @include('musora.shop._shop-card-alt', [
                             "sku" => (str_contains($accessory->sku, 'member') || str_contains($accessory->sku, 'products')) ? '' : $accessory->sku,
                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
                             "thumbnail" => $accessory->thumbnail,
@@ -170,22 +135,19 @@
                             "size_case_sensitive" => $accessory->size_case_sensitive,
                     ])
                 @endforeach
-            </ul>
+            </div>
+            </div>
         </section>
 
         {{--   HATS     --}}
         <div id="hats" class="anchor"></div>
         <section class="grid-view category-section" data-category="hats" x-show="filter === 'clothing' || filter === 'all'">
-            <ul class="container mx-auto fixed-cards">
-                <li>
-                    <h1 class="px-2 md:px-3">
-                        <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hat.svg" alt="hat icon" style="filter: invert()sepia()brightness(.5)hue-rotate(-70deg)saturate(37);"></div>
-                        Hats
-                    </h1>
-                </li>
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Hats</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
 
-                @foreach($hats as $hat)
-                    @include('musora.shop._shop-card', [
+                    @foreach($hats as $hat)
+                    @include('musora.shop._shop-card-alt', [
                          "sku" => $hat->sku,
                          "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
                          "badgeText" => $hat->badge_text,
@@ -201,21 +163,19 @@
                     ])
                 @endforeach
 
-            </ul>
+            </div>
+            </div>
         </section>
 
         {{--   SHIRTS     --}}
         <div id="shirts" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
-            <ul class="container mx-auto fixed-cards">
-                <li>
-                    <h1 class="float-left px-2 md:px-3 w-full">
-                        <div class="heading-icon text-pianote"><i class="fas fa-tshirt"></i></div>
-                        Shirts
-                    </h1>
-                </li>
-                @foreach($shirts as $shirt)
-                    @include('musora.shop._shop-card', [
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Shirts</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+
+                    @foreach($shirts as $shirt)
+                    @include('musora.shop._shop-card-alt', [
                         "sku" => $shirt->sku,
                         "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
                         "thumbnail" => $shirt->thumbnail,
@@ -230,21 +190,19 @@
                         "size_case_sensitive" => $shirt->size_case_sensitive,
                     ])
                 @endforeach
-            </ul>
+            </div>
+            </div>
         </section>
 
         {{--   HOODIES     --}}
         <div id="hoodies" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
-            <ul class="container mx-auto fixed-cards">
-                <li>
-                    <h1 class="float-left px-2 md:px-3 w-full">
-                        <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hoodie.svg" alt="hoodie icon" style="filter: invert()sepia()brightness(.5)hue-rotate(-70deg)saturate(37);"></div>
-                        Hoodies
-                    </h1>
-                </li>
-                @foreach($hoodies as $hoodie)
-                    @include('musora.shop._shop-card', [
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Hoodies</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+
+                    @foreach($hoodies as $hoodie)
+                    @include('musora.shop._shop-card-alt', [
                         "sku" => $hoodie->sku,
                         "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
                         "thumbnail" => $hoodie->thumbnail,
@@ -260,7 +218,8 @@
                     ])
                 @endforeach
 
-            </ul>
+            </div>
+            </div>
         </section>
     </div>
 @endsection
@@ -268,12 +227,3 @@
 @section('layout-footer')
     @include('pianote.sales.partials._footer')
 @endsection
-
-@section('layout-scripts')
-    @parent
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2023-07-31 23:59:59',
-        'promoVersion' => true
-    ])
-@endsection
-

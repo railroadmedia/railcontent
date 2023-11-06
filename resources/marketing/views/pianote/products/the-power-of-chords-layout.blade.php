@@ -348,9 +348,11 @@
                     <div class="hidden md:flex">
                         <div class="flex-1 relative">
                             <a class="join small w-full text-base" href="@yield('order-link')">get started</a>
-                            {{--<div class="text-pianote absolute -bottom-6 left-0 right-0 text-xs text-center">--}}
-                                {{--LAUNCH SPECIAL - SAVE {{ round(100 - (100 * (floatval($productPrices['the-power-of-chords']->discounted_price) / floatval($productPrices['the-power-of-chords']->price)))) }}%--}}
-                            {{--</div>--}}
+                            @if(floatval($productPrices['the-power-of-chords']->price) > $productPrice)
+                                <div class="text-pianote absolute -bottom-6 left-0 right-0 text-xs text-center">
+                                    SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['the-power-of-chords']->price)))) }}%
+                                </div>
+                            @endif
                         </div>
                         <div class="flex-1 flex items-center pl-2">
                             <img class="h-6 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/profiles.png" alt="profiles">

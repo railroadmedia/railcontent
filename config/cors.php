@@ -31,7 +31,7 @@ return [
         '*.guitareo.com',
         '*.singeo.com',
         'cdn.shopify.com',
-        '*'
+        '*',
     ],
 
     'allowed_origins_patterns' => [],

@@ -1,5 +1,6 @@
+
 module.exports = {
-    publicPath: 'vendor/musora-center/dist/' ,
+    publicPath: '/vendor/musora-center/dist/' ,
     outputDir: process.env.NODE_ENV === 'production'
         ? '../public/dist/'
         : '../public/dist/js',

@@ -126,8 +126,6 @@ export default {
 </script>
 
 <style>
-    @import '~@musora/icons/dist/icons.css';
-
     body .application.theme--light {
         background:#e4e4e4;
     }
