@@ -325,7 +325,7 @@ class ProfileSettingsPagesController extends BaseController
                 'user' => user(),
                 'sections' => $this->settingSections('account'),
                 'shopifyCustomerAccessToken' => $shopifyCustomerAccessToken,
-                'isLifetime' => $isLifetime,
+                'isLifetimeMember' => $isLifetime,
                 'membershipExpirationDate' => $membershipExpirationDate,
                 'membershipLevel' => $membershipLevel,
                 'allPackPermissionNames' => $allPackPermissionNames,

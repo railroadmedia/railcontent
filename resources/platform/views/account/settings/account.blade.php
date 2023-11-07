@@ -27,7 +27,10 @@
                     .then(session => {
                         console.log(session);
                         return session;
-                    });
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
             },
         });
 
@@ -42,7 +45,9 @@
                     console.log(portal);
                     document.getElementById('rcPortal').src = portal;
                 })
-            });
+            }).catch(error => {
+            console.log(error);
+        });
     </script>
 @endsection
 
