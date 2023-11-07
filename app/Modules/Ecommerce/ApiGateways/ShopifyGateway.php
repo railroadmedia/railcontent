@@ -81,8 +81,7 @@ class ShopifyGateway
         return $orders;
     }
 
-    public function doesOrderExist(int $shopifyCustomerId, Carbon $processedAt): bool
-    {
+    public function getCustomerOrderByProcessAtDate(int $shopifyCustomerId, Carbon $processedAt) {
         // DEV NOTE: we must supply the datetime as a properly formatted string, and for some reason Shopify isn't
         // taking the full datetime string into account when querying processed_at:\"$processedAtString\", and instead
         // only uses the date. So as a workaround, just check >= and <=.
@@ -92,14 +91,20 @@ class ShopifyGateway
                  orders(first:1, query:"customer_id:$shopifyCustomerId AND processed_at:>=\"$processedAtString\" AND processed_at:<=\"$processedAtString\""){
                     nodes {
                         ... on Order {
-                            id
+                            id,
+                            legacyResourceId
                         }
                     }
                 }
             }
             GQL;
         $responseBody = $this->executeQuery($gql);
-        return count($responseBody->data->orders->nodes);
+        return $responseBody->data->orders->nodes;
+    }
+
+    public function doesOrderExist(int $shopifyCustomerId, Carbon $processedAt): bool
+    {
+        return count($this->getCustomerOrderByProcessAtDate($shopifyCustomerId, $processedAt));
     }
 
     public function executeQuery(string $gql): mixed
