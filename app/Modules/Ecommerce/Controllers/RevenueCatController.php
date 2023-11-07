@@ -389,6 +389,12 @@ class RevenueCatController extends Controller
                 $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
 
                 if (config('shopify.enabled') && $user->shopify_id) {
+                    if (!$data['event']['purchased_at_ms']) {
+                        Log::warning(
+                            'RevenueCatController processNotification::CANCELLATION - purchased_at_ms not found'
+                        );
+                        break;
+                    }
                     $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
                     $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
                     if ($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {

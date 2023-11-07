@@ -91,7 +91,8 @@ class ShopifyGateway
                  orders(first:1, query:"customer_id:$shopifyCustomerId AND processed_at:>=\"$processedAtString\" AND processed_at:<=\"$processedAtString\""){
                     nodes {
                         ... on Order {
-                            id
+                            id,
+                            legacyResourceId
                         }
                     }
                 }
