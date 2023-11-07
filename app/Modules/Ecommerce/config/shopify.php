@@ -5,6 +5,7 @@ return [
     'apiKey' => ENV('SHOPIFY_APP_API_KEY'),
     'apiSecretKey' => ENV('SHOPIFY_APP_API_SECRET'),
     'hostName' => ENV('SHOPIFY_APP_HOST_NAME'),
+    'domain' => ENV('SHOPIFY_DOMAIN'),
     'privateAppStorefrontAccessToken' => ENV('SHOPIFY_APP_STOREFRONT_ACCESS_TOKEN'),
     'privateAppAdminAccessToken' => ENV('SHOPIFY_APP_ADMIN_API_ACCESS_TOKEN'),
     'apiVersion' => ENV('SHOPIFY_APP_API_VERSION'),

@@ -15,7 +15,7 @@
     <script type="text/javascript">
         recharge.init({
             // optional when in a shopify environment
-            storeIdentifier: '{{ config('shopify.hostName') }}',
+            storeIdentifier: '{{ config('shopify.domain') }}',
             // required for API access
             storefrontAccessToken: '{{ config('shopify.rechargeStoreFrontAccessToken') }}',
             // retry middleware function if/when Recharge session expires
@@ -43,7 +43,7 @@
                 console.log(session);
                 recharge.customer.getCustomerPortalAccess(session).then(portal => {
                     console.log(portal);
-                    document.getElementById('rcPortal').src = portal;
+                    document.getElementById('rcPortal').src = portal.portal_url;
                 })
             }).catch(error => {
             console.log(error);
