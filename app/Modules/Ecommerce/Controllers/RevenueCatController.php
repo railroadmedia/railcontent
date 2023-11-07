@@ -388,22 +388,23 @@ class RevenueCatController extends Controller
                 //get Musora product
                 $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
 
-                if (config('shopify.enabled') && $user->shopify_id) {
-                    if (!$data['event']['purchased_at_ms']) {
-                        Log::warning(
-                            'RevenueCatController processNotification::CANCELLATION - purchased_at_ms not found'
+                if (config('shopify.enabled')) {
+                    if ($user->shopify_id && $data['event']['cancel_reason'] == 'CUSTOMER_SUPPORT') {
+                        if (!$data['event']['purchased_at_ms']) {
+                            Log::warning(
+                                'RevenueCatController processNotification::CANCELLATION - purchased_at_ms not found'
+                            );
+                            break;
+                        }
+                        $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
+                        $orderId = $this->shopifySyncService->getCustomerOrderIdByProcessedAtDate(
+                            $user->shopify_id,
+                            $processedAt
                         );
-                        break;
-                    }
-                    $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
-                    $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
-                    if ($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
-                        UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
-                    }
-                    $orderId = $this->shopifySyncService->getCustomerOrderIdByProcessedAtDate($user->shopify_id, $processedAt);
-                    if ($orderId) {
-                        $this->shopifySyncService->cancelOrder($user->shopify_id, $user->email, $orderId);
-                        $this->unsetUserSubscription($user, $type);
+                        if ($orderId) {
+                            $this->shopifySyncService->cancelOrder($user->shopify_id, $user->email, $orderId);
+                            $this->unsetUserSubscription($user, $type);
+                        }
                     }
                 } else {
                     //get RevenueCat subscription
