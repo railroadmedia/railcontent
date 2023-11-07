@@ -160,7 +160,7 @@
         @endslot
     @endcomponent
 
-    <section class="content-section two-sides text-center">
+    <section class="content-section two-sides text-center" style="background:#fff!important;color:#000!important;">
         <div class="row">
             <h2><strong>One traditional side.<br class="hide-for-medium"> One quiet side.</strong></h2>
             <h5>The portable, double-sided practice pad<br class="hide-for-medium"> with different <br class="show-for-medium-only">volumes so you can<br class="hide-for-medium"> practice late into the night.</h5>
