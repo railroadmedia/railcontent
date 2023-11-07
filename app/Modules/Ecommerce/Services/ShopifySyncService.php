@@ -73,6 +73,7 @@ class ShopifySyncService
         if ($products->contains(fn(Product $product) => $product->isDigital())) {
             $count = $orders->count();
             Log::debug("Customer $shopifyCustomerId: Found $count orders");
+
             $user = $this->getOrCreateUser($shopifyCustomerId, $email);
             $orderCollection = new OrderCollection($orders, $products);
             $this->updateUserData($shopifyCustomerId, $user);
@@ -311,14 +312,15 @@ class ShopifySyncService
     public function syncUser(User $user)
     {
         Log::debug("Shopify: syncing user $user->id");
-        $customerResource = $this->getShopifyCustomer($user->getEmail());
+        $customerResource = $this->getShopifyCustomer($user->email);
 
+        $shopifyCustomerId = $customerResource['id'];
         $customerData = [];
         $customerData["metafields"] = $user->getMetafieldsForShopify();
-        $customerResource = $this->shopify->updateCustomer($customerResource->id, $customerData);
+        $this->shopify->updateCustomer($shopifyCustomerId, $customerData);
 
         // record the shopify ID on the User
-        $user->shopify_id = $customerResource->id;
+        $user->shopify_id = $shopifyCustomerId;
         $user->saveWithoutUpdatedAt();
     }
 
