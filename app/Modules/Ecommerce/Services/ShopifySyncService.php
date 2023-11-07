@@ -290,10 +290,10 @@ class ShopifySyncService
         return $this->shopify->getOrder($orderId);
     }
 
-    public function getCustomerOrderIdByProcessedAtDate(int $shopifyCustomerId, Carbon $processedAt): int
+    public function getCustomerOrderIdByProcessedAtDate(int $shopifyCustomerId, Carbon $processedAt): int|null
     {
         $orders = $this->shopifyGateway->getCustomerOrderByProcessAtDate($shopifyCustomerId, $processedAt);
-        return collect($orders)->first()->legacyResourceId;
+        return collect($orders)->first()?->legacyResourceId ?? null;
     }
 
     public function updateUserData(int $shopifyCustomerId, User $user): void

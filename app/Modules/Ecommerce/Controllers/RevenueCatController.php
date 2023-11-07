@@ -388,7 +388,8 @@ class RevenueCatController extends Controller
                 //get Musora product
                 $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
 
-                if (config('shopify.enabled') && $user->shopify_id) {
+                if (config('shopify.enabled') && $user->shopify_id && $data['event']['cancel_reason'] == 'CUSTOMER_SUPPORT') {
+
                     if (!$data['event']['purchased_at_ms']) {
                         Log::warning(
                             'RevenueCatController processNotification::CANCELLATION - purchased_at_ms not found'
