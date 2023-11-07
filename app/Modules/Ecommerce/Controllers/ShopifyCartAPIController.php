@@ -15,7 +15,7 @@ class ShopifyCartAPIController extends Controller
 {
     private ShopifyAPIService $shopifyStoreFrontAPIService;
 
-    private const SHOPIFY_CART_ID_SESSION_KEY = 'shopify_session_cart_id';
+    public const SHOPIFY_CART_ID_SESSION_KEY = 'shopify_session_cart_id';
 
     public function __construct(ShopifyAPIService $shopifyStoreFrontAPIService)
     {
