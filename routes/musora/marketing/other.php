@@ -38,6 +38,8 @@ Route::domain('{musoraDomain}')
         Route::get('community', [MarketingController::class, 'community']);
         Route::get('choose-plan', [MarketingController::class, 'choosePlan'] );
 
+        Route::get('/drum-faster', [MarketingController::class, 'faster']);
+
         Route::get('redeem', [CodeRedemptionController::class, 'renderNewAccountRedeemPage']);
         Route::get('friends', [CodeRedemptionController::class, 'friends']);
         Route::get('friends2', [CodeRedemptionController::class, 'friends2']);
