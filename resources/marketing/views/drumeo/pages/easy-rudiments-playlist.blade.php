@@ -25,24 +25,24 @@
         'scrollToJoin' => true,
     ])
 
-    <div class="flex flex-col min-h-screen">
-        <section class="container max-w-5xl mx-auto bg-slate-50 w-full mb-20">
-            <div class="flex flex-col items-center pt-20">
+    <div class="flex flex-col min-h-screen" style="background: #F6F8FC">
+        <section class="container max-w-5xl mx-auto w-full py-20">
+            <div class="flex flex-col items-center">
                 <img class='w-28 sm:w-48'
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-blue.png"
                     alt="logo drumeo">
                 <img class="w-60 sm:w-96"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/rudiments-book/rudiments-book.png"
                     alt="rudiments book">
-                <h2 class="text-center py-10 text-3xl md:text-6xl"><strong>Choose your platform</strong></h2>
+                <h1 class="text-center py-10"><strong>Choose your platform</strong></h1>
                 <div class="flex-row items-center text-white leading-loose">
                     <div class="flex justify-center">
                         <a href="https://music.apple.com/ca/artist/drumeo/1707098843" target="_blank"
                             x-data="{ isHovered: false }">
                             <button class="text-xl sm:text-2xl rounded-full w-40 sm:w-56 md:w-72 h-12 sm:h-16 mx-2"
                                 style="background: #2EBD59" @mouseenter="isHovered = true" @mouseleave="isHovered = false"
-                                :style="{ filter: isHovered ? 'brightness(120%)' : 'brightness(100%)' }">
-                                <i class="fas fa-brands fa-spotify text-white"></i> <strong> Spotify </strong>
+                                :style="{ filter: isHovered ? 'brightness(120%)' : 'brightness(100%)' }" aria-label="Open Spotify in a new window">
+                                <i class="fa-brands fa-spotify sm:text-3xl" aria-hidden="true"></i> <strong> Spotify </strong>
                             </button>
                         </a>
 
@@ -50,8 +50,8 @@
                             x-data="{ isHovered: false }">
                             <button class="bg-black text-xl sm:text-2xl uppercase rounded-full w-40 sm:w-56 md:w-72 h-12 sm:h-16 mx-2"
                                 style="background: #000000" @mouseenter="isHovered = true" @mouseleave="isHovered = false"
-                                :style="{ 'background-color': isHovered ? '#323232' : '#000000' }">
-                                <i class="fas fa-brands fa-apple"></i> <strong> Music </strong>
+                                :style="{ 'background-color': isHovered ? '#323232' : '#000000' }" aria-label="Open Apple Music in a new window">
+                                <i class="fa-brands fa-apple sm:text-3xl" aria-hidden="true"></i> <strong> Music </strong>
                             </button>
                         </a>
                     </div>
