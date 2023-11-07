@@ -77,7 +77,6 @@ class ShopifySyncService
             $orderCollection = new OrderCollection($orders, $products);
             $this->updateUserData($shopifyCustomerId, $user);
             $this->userAccessPermissionsService->syncShopifyOrders($user, $orderCollection);
-
         } else {
             Log::debug("Customer $shopifyCustomerId: No digital products found");
             $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
@@ -299,7 +298,15 @@ class ShopifySyncService
 
     public function syncUser(User $user)
     {
-        $this->shopifyCustomerService->createShopifyCustomer($user);
+        Log::debug("Shopify: syncing user $user->id");
+        $customerResource = $this->getShopifyCustomer($user->getEmail());
+
+        $data = $user->getMetafieldsForShopify();
+        $customerResource = $this->shopify->updateCustomer($customerResource->id, $data);
+
+        // record the shopify ID on the User
+        $user->shopify_id = $customerResource->id;
+        $user->saveWithoutUpdatedAt();
     }
 
     public function getShopifyCustomer($email): mixed
