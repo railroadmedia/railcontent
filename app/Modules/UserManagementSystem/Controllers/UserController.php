@@ -147,8 +147,8 @@ class UserController extends Controller
         event(new UserCreated($user));
 
         try {
-            $referralCode = Session::get('referral_code');
-            $productSku = Session::get('referral_code_product_sku');
+            $referralCode = Session::pull('referral_code');
+            $productSku = Session::pull('referral_code_product_sku');
             if ($referralCode && $productSku) {
                 $this->applyReferral(
                     $referralCode,
