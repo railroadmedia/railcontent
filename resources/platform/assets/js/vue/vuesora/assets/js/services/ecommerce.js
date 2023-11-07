@@ -4,6 +4,35 @@ import ErrorHandler from './_error-handler';
 export default {
 
     /**
+     * Returns the endpoint domain url for the current environment, always returns musora domain.
+     * All ecommerce requests should always go to the musora domain as of the Shopify migration launch.
+     *
+     * Ex: https://www.drumeo.com
+     *
+     * @returns {string}
+     */
+    getEndpointURLWithoutPath() {
+        let brandedEndpoint = "https://www.musora.com";
+
+        if (origin.includes('dev')) {
+            brandedEndpoint = `https://${location.hostname}:${location.port}`;
+        } else {
+            brandedEndpoint = 'https://' + location.hostname;
+        }
+
+        console.log(brandedEndpoint);
+
+        brandedEndpoint = brandedEndpoint.replace('drumeo.com', 'musora.com');
+        brandedEndpoint = brandedEndpoint.replace('pianote.com', 'musora.com');
+        brandedEndpoint = brandedEndpoint.replace('guitareo.com', 'musora.com');
+        brandedEndpoint = brandedEndpoint.replace('singeo.com', 'musora.com');
+
+        console.log(brandedEndpoint);
+
+        return brandedEndpoint.replace(/^\/|\/$/g, '');
+    },
+
+    /**
      * Request to check if new account email is exists
      *
      * @param {Object} email
@@ -27,7 +56,7 @@ export default {
      * @returns {Promise}
      */
     submitOrder(url, payload) {
-        return axios.put(url+'/ecommerce/json/order-form/submit', payload);
+        return axios.put(this.getEndpointURLWithoutPath()+'/ecommerce/json/order-form/submit', payload);
     },
 
     /**
@@ -39,7 +68,7 @@ export default {
      * @returns {Promise}
      */
     addCartItems(url, payload) {
-        return axios.put(url+'/ecommerce/json/add-to-cart', payload);
+        return axios.put(this.getEndpointURLWithoutPath()+'/ecommerce/json/add-to-cart', payload);
     },
 
     /**
@@ -58,7 +87,7 @@ export default {
             quantity,
         }
     ) {
-        return axios.patch(url+`/ecommerce/json/update-product-quantity/${productSku}/${quantity}`)
+        return axios.patch(this.getEndpointURLWithoutPath()+`/ecommerce/json/update-product-quantity/${productSku}/${quantity}`)
     },
 
     /**
@@ -70,7 +99,7 @@ export default {
      * @returns {Promise}
      */
     removeCartItem(url, { productSku }) {
-        return axios.delete(url+`/ecommerce/json/remove-from-cart/${productSku}`)
+        return axios.delete(this.getEndpointURLWithoutPath()+`/ecommerce/json/remove-from-cart/${productSku}`)
             .then(response => response)
             .catch(ErrorHandler);
     },
@@ -83,7 +112,7 @@ export default {
      * @returns {Promise}
      */
     clearCart(url) {
-        return axios.delete(url+`/ecommerce/json/clear-cart`)
+        return axios.delete(this.getEndpointURLWithoutPath()+`/ecommerce/json/clear-cart`)
             .then(response => response)
             .catch(ErrorHandler);
     },
@@ -153,7 +182,7 @@ export default {
      * @returns {Promise}
      */
     updateNumberOfPayments(url, numberOfPayments) {
-        return axios.put(url+`/ecommerce/json/update-number-of-payments/${numberOfPayments}`)
+        return axios.put(this.getEndpointURLWithoutPath()+`/ecommerce/json/update-number-of-payments/${numberOfPayments}`)
             .then(response => response)
             .catch(ErrorHandler);
     },
@@ -213,7 +242,7 @@ export default {
      * @returns {Promise}
      */
     setPaymentMethodAsDefault(url, payment_method_id) {
-        return axios.patch(url+'/ecommerce/payment-method/set-default', {
+        return axios.patch(this.getEndpointURLWithoutPath()+'/ecommerce/payment-method/set-default', {
             id: payment_method_id,
         })
             .then(response => response)

@@ -3,12 +3,14 @@
 namespace Modules\UserManagementSystem\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Events\User\UserCreated;
@@ -36,6 +38,59 @@ class UserController extends Controller
         $this->middleware([ConvertEmptyStringsToNull::class]);
     }
 
+    public function createUserWithVerificationToken(Request $request)
+    {
+        try {
+            $validationRules = [
+                'email' => 'email|max:255',
+                'password' => 'required|string|min:8|max:128',
+            ];
+
+            $this->validate(
+                $request,
+                $validationRules
+            );
+        } catch (ValidationException $exception) {
+            return redirect()
+                ->back()
+                ->withErrors($exception->errors());
+        }
+
+        $email = $request->get('email');
+        $password = $request->get('password');
+
+        // This must be generated passed so that someone can't claim someone else's email.
+        // It must be generated via md5 with the email string and special key combined.
+        // md5('email' . config('shopify.accountCreationSecretKey'))
+        // On the shopify side, we'll generate the link to this claim page and include the key in the url params. This
+        // ensures that only a person with the special link can claim that email address.
+
+        $verificationToken = $request->get('verification_token');
+
+        if (strtolower($verificationToken) !== strtolower(md5($email . config('shopify.accountCreationSecretKey')))) {
+            throw new AuthorizationException('Invalid verification_token.', 403);
+        }
+
+        $user = User::where('email', $email)->first() ?? new User();
+        $parts = explode('@', $email);
+
+        $user->email = $email;
+        $user->setPassword($password);
+        $this->requires_password_update = false;
+        $user->display_name = $parts[0] . rand(10000, 99999);
+        $user->save();
+
+        event(new UserCreated($user));
+
+        Auth::loginUsingId($user->getId());
+
+        return $request->has('redirect') ?
+            redirect()
+                ->away($request->get('redirect')) :
+            redirect()
+                ->to(config('ecommerce.post_purchase_redirect_digital_items'));
+    }
+
     /**
      * @param Request $request
      */
@@ -46,12 +101,12 @@ class UserController extends Controller
 
         try {
             $validationRules = [
-                'email' => 'email|max:255|unique:'.
-                    config('user_management_system.database_connection_name').
+                'email' => 'email|max:255|unique:' .
+                    config('user_management_system.database_connection_name') .
                     '.usora_users',
                 'password' => 'required|string|min:8|max:128',
-                'display_name' => 'required|string|max:64|min:2|unique:'.
-                    config('user_management_system.database_connection_name').
+                'display_name' => 'required|string|max:64|min:2|unique:' .
+                    config('user_management_system.database_connection_name') .
                     '.usora_users',
             ];
 
@@ -62,8 +117,8 @@ class UserController extends Controller
         } catch (ValidationException $exception) {
             if ($isJson) {
                 return json_encode([
-                                       "errors" => $exception->errors(),
-                                   ]);
+                    "errors" => $exception->errors(),
+                ]);
             }
 
             return $request->has('redirect') ?
@@ -100,8 +155,8 @@ class UserController extends Controller
                     ->with($message);
         } else {
             return json_encode([
-                                   "data" => ["attributes" => json_encode($user)],
-                               ]);
+                "data" => ["attributes" => json_encode($user)],
+            ]);
         }
     }
 
@@ -117,26 +172,29 @@ class UserController extends Controller
         if ($user) {
             $user['shopify_customer_url'] =
                 ($user->shopify_id) ?
-                    'https://admin.shopify.com/store/'.config('usora.shopify_store').'/customers/'.$user->shopify_id :
+                    'https://admin.shopify.com/store/' . config(
+                        'usora.shopify_store'
+                    ) . '/customers/' . $user->shopify_id :
                     '';
             $user['revenuecat_customer_url'] =
                 ($user->revenuecat_origin_app_user_id) ?
-                    'https://app.revenuecat.com/customers/'.
-                    config('usora.revenuecat_project_id').
-                    '/'.
+                    'https://app.revenuecat.com/customers/' .
+                    config('usora.revenuecat_project_id') .
+                    '/' .
                     $user->revenuecat_origin_app_user_id : '';
 
             return json_encode([
-                                   "data" => [
-                                       "id" => $user->id,
-                                       "type" => "user",
-                                       "attributes" => $user,
-                                   ],
-                               ]);
+                "data" => [
+                    "id" => $user->id,
+                    "type" => "user",
+                    "attributes" => $user,
+                ],
+            ]);
         } else {
             throw new NotFoundHttpException();
         }
     }
+
 
     /**
      * @param Request $request
@@ -151,16 +209,16 @@ class UserController extends Controller
         }
         try {
             $request->validate([
-                                   'display_name' => [
-                                       Rule::unique(
-                                           config('user_management_system.database_connection_name').'.usora_users'
-                                       )
-                                           ->ignore($id),
-                                       'string',
-                                       'max:64',
-                                       'min:2',
-                                   ],
-                               ]);
+                'display_name' => [
+                    Rule::unique(
+                        config('user_management_system.database_connection_name') . '.usora_users'
+                    )
+                        ->ignore($id),
+                    'string',
+                    'max:64',
+                    'min:2',
+                ],
+            ]);
         } catch (ValidationException $e) {
             $messagesByField =
                 $e->validator->getMessageBag()
@@ -215,8 +273,8 @@ class UserController extends Controller
                     ->with($message);
         } else {
             return json_encode([
-                                   "data" => ["attributes" => json_encode($user)],
-                               ]);
+                "data" => ["attributes" => json_encode($user)],
+            ]);
         }
     }
 
@@ -250,8 +308,8 @@ class UserController extends Controller
                     ->with($message);
         } else {
             return json_encode([
-                                   "data" => ["attributes" => json_encode($user)],
-                               ]);
+                "data" => ["attributes" => json_encode($user)],
+            ]);
         }
     }
 
@@ -295,17 +353,17 @@ class UserController extends Controller
         }
 
         return json_encode([
-                               "data" => $results,
-                               "meta" => [
-                                   "pagination" => [
-                                       "total" => $totalResults,
-                                       "per_page" => $limit,
-                                       "current_page" => 1,
-                                       "total_pages" => ceil($totalResults / $limit),
-                                       "links" => [],
-                                   ],
-                               ],
-                           ]);
+            "data" => $results,
+            "meta" => [
+                "pagination" => [
+                    "total" => $totalResults,
+                    "per_page" => $limit,
+                    "current_page" => 1,
+                    "total_pages" => ceil($totalResults / $limit),
+                    "links" => [],
+                ],
+            ],
+        ]);
     }
 
     /**
@@ -352,10 +410,10 @@ class UserController extends Controller
                 ->first();
 
         if ($user) {
-            return response()->json(['unique' => false]);
+            return response()->json(['unique' => false, 'is_musora_account_set_up' => $user->isAccountSetup()]);
         }
 
-        return response()->json(['unique' => true]);
+        return response()->json(['unique' => true, 'is_musora_account_set_up' => false]);
     }
 
     /**
@@ -374,14 +432,14 @@ class UserController extends Controller
         $brand = brand();
 
         ReportedUser::firstOrNew([
-                                     'user_id' => $id,
-                                     'reporter_id' => $currentUser['id'],
-                                     "created_on" => Carbon::now()
-                                         ->toDateTimeString(),
-                                 ])
+            'user_id' => $id,
+            'reporter_id' => $currentUser['id'],
+            "created_on" => Carbon::now()
+                ->toDateTimeString(),
+        ])
             ->save();
 
-        $input['subject'] = 'User reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
+        $input['subject'] = 'User reported by ' . $currentUser['display_name'] . " (" . $currentUser['email'] . ")";
         $input['sender-address'] = config('mailora.report-sender-address');
         $input['sender-name'] = config('mailora.report-sender-name');
         $input['lines'] = ['The following user has been reported:'];
@@ -392,25 +450,25 @@ class UserController extends Controller
             'userId' => $user['id'],
         ]);
 
-        $input['alert'] = 'User reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
+        $input['alert'] = 'User reported by ' . $currentUser['display_name'] . " (" . $currentUser['email'] . ")";
 
-        $input['logo'] = config('mailora.'.$brand.'.logo-link');
+        $input['logo'] = config('mailora.' . $brand . '.logo-link');
         $input['type'] = 'layouts/inline/alert';
-        $input['recipient'] = config('mailora.'.$brand.'.report-user-recipient');
+        $input['recipient'] = config('mailora.' . $brand . '.report-user-recipient');
 
         try {
             $this->mailService->sendSecure($input);
         } catch (\Exception $exception) {
             return response()->json([
-                                        "success" => false,
-                                        "message" => $exception->getMessage(),
-                                    ], 500);
+                "success" => false,
+                "message" => $exception->getMessage(),
+            ], 500);
         }
 
         return response()->json([
-                                    "success" => true,
-                                    "message" => "The user profile was reported",
-                                ], 200);
+            "success" => true,
+            "message" => "The user profile was reported",
+        ], 200);
     }
 
     /**
@@ -426,17 +484,17 @@ class UserController extends Controller
 
         $currentUser = user();
         $blocked = BlockedUser::firstOrNew([
-                                               'user_id' => $id,
-                                               'blocker_id' => $currentUser['id'],
-                                               "created_on" => Carbon::now()
-                                                   ->toDateTimeString(),
-                                           ])
+            'user_id' => $id,
+            'blocker_id' => $currentUser['id'],
+            "created_on" => Carbon::now()
+                ->toDateTimeString(),
+        ])
             ->save();
 
         return response()->json([
-                                    "success" => $blocked,
-                                    "message" => $user['display_name']." was blocked",
-                                ], 200);
+            "success" => $blocked,
+            "message" => $user['display_name'] . " was blocked",
+        ], 200);
     }
 
     /**
@@ -457,9 +515,9 @@ class UserController extends Controller
                 ->delete();
 
         return response()->json([
-                                    "success" => $unblock > 0,
-                                    "message" => $user['display_name']." was unblocked",
-                                ], 200);
+            "success" => $unblock > 0,
+            "message" => $user['display_name'] . " was unblocked",
+        ], 200);
     }
 
     /**
@@ -487,14 +545,14 @@ class UserController extends Controller
                 ->get();
 
         return response()->json([
-                                    "data" => $users,
-                                    "meta" => [
-                                        "totalResulsts" => BlockedUser::where('blocker_id', '=', $currentUser['id'])
-                                            ->count(),
-                                        "page" => $request->get('page', 1),
-                                        "limit" => $request->get('limit', 2),
-                                    ],
-                                ], 200);
+            "data" => $users,
+            "meta" => [
+                "totalResulsts" => BlockedUser::where('blocker_id', '=', $currentUser['id'])
+                    ->count(),
+                "page" => $request->get('page', 1),
+                "limit" => $request->get('limit', 2),
+            ],
+        ], 200);
     }
 
     /**
@@ -510,7 +568,7 @@ class UserController extends Controller
                 ->first();
 
         return response()->json([
-                                    "reported" => $reported ? true : false,
-                                ], 200);
+            "reported" => $reported ? true : false,
+        ], 200);
     }
 }

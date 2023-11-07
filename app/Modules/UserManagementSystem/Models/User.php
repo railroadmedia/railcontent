@@ -108,6 +108,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property bool|false $has_apple_subscription
  * @property bool|false $has_google_subscription
  * @property int $cio_synced_workspaces
+ * @property bool|false $requires_password_update
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @method static Builder|User newModelQuery()
@@ -766,7 +767,12 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function setPassword($password, $hash = true)
     {
-        $this->password = $hash ? Hash::make($password) : $password;
+        $this->password = $hash ? $this->getHashedPassword($password) : $password;
+    }
+
+    private function getHashedPassword($password)
+    {
+        return Hash::make($password);
     }
 
     public function onboardingGear()
@@ -985,5 +991,15 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     private function hasCustomerIOSyncedWorkspaceFlag(int $flag): bool
     {
         return ($this->cio_synced_workspaces & $flag) === $flag;
+    }
+
+    public function doesRequirePasswordUpdate(): bool
+    {
+        return $this->requires_password_update;
+    }
+
+    public function isAccountSetup(): bool
+    {
+        return !$this->requires_password_update;
     }
 }

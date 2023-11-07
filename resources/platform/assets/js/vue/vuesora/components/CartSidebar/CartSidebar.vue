@@ -192,8 +192,17 @@ export default {
     },
     methods: {
         buildInitialCartData() {
-
             this.updateCartData(this.cartData);
+
+            let urlParams = new URLSearchParams(window.location.search);
+
+            if (urlParams.get('open-cart') === '1') {
+                this.loading = true;
+
+                setTimeout(() => {
+                    this.openCartSidebar();
+                }, 500);
+            }
         },
         openCartSidebar() {
             this.active = true;

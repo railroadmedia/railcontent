@@ -15,13 +15,13 @@ Route::group(
         'middleware' => ['auth', 'admin-only']
     ],
     function () {
-        Route::get(
-            '/',
-            [
-                'as' => 'content.index',
-                'uses' => \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@index'
-            ]
-        );
+//        Route::get(
+//            '/',
+//            [
+//                'as' => 'content.index',
+//                'uses' => \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@index'
+//            ]
+//        );
 
         Route::get(
             '/videos',
