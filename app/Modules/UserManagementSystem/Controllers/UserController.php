@@ -64,13 +64,7 @@ class UserController extends Controller
         /**
          * @var $referrer Referrer
          */
-        $referrer = Referrer::query()->where('referral_code', $referralCode)->first();
-
-        if (empty($referrer)) {
-            throw new Exception(
-                'Error finding referrer for referral code: ' . $referralCode
-            );
-        }
+        $referrer = Referrer::query()->where('referral_code', $referralCode)->firstOrFail();
 
         $brand = $referrer->brand;
         $productToAssign = Product::whereSku($productSku)->first();
