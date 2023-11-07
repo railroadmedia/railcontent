@@ -112,7 +112,7 @@ class Avo
                 try {
                     $ch = curl_init('https://api.avo.app/i');
                     $data = [
-                        'ac' => 'ru41YuJkbmglyzBr2vzj',
+                        'ac' => 'Rats5nk7QHEoXSetVDzj',
                         'br' => 'ycp3d9CRQ',
                         'en' => self::$__AVO_ENV__,
                         'ev' => $event_id,
@@ -149,7 +149,7 @@ class Avo
                 try {
                     $ch = curl_init('https://api.avo.app/i');
                     $data = [
-                        'ac' => 'ru41YuJkbmglyzBr2vzj',
+                        'ac' => 'Rats5nk7QHEoXSetVDzj',
                         'br' => 'ycp3d9CRQ',
                         'en' => self::$__AVO_ENV__,
                         'ty' => $type,
@@ -234,15 +234,6 @@ class Avo
          return $messages;
      }
 
-     private static function _assert_cio_id_guitareo_optional($cio_id_guitareo, $label_ = NULL)
-     {
-         $messages = [];
-         if (isset($cio_id_guitareo)) {
-             $messages = array_merge($messages, self::_avo_assert_string('9jUzgBMDO', isset($label_) ? 'cio_id_guitareo' . ':' . $label_ : 'cio_id_guitareo', $cio_id_guitareo));
-         }
-         return $messages;
-     }
-
      private static function _assert_gear_list($gear_list, $label_ = NULL)
      {
          $messages = [];
@@ -308,15 +299,6 @@ class Avo
          return $messages;
      }
 
-     private static function _assert_cio_id_singeo_optional($cio_id_singeo, $label_ = NULL)
-     {
-         $messages = [];
-         if (isset($cio_id_singeo)) {
-             $messages = array_merge($messages, self::_avo_assert_string('eFucK_Ilt', isset($label_) ? 'cio_id_singeo' . ':' . $label_ : 'cio_id_singeo', $cio_id_singeo));
-         }
-         return $messages;
-     }
-
      private static function _assert_os($os, $label_ = NULL)
      {
          $messages = [];
@@ -336,24 +318,6 @@ class Avo
          return $messages;
      }
 
-     private static function _assert_cio_id_drumeo_optional($cio_id_drumeo, $label_ = NULL)
-     {
-         $messages = [];
-         if (isset($cio_id_drumeo)) {
-             $messages = array_merge($messages, self::_avo_assert_string('m71bLGSgl', isset($label_) ? 'cio_id_drumeo' . ':' . $label_ : 'cio_id_drumeo', $cio_id_drumeo));
-         }
-         return $messages;
-     }
-
-     private static function _assert_cio_id_pianote_optional($cio_id_pianote, $label_ = NULL)
-     {
-         $messages = [];
-         if (isset($cio_id_pianote)) {
-             $messages = array_merge($messages, self::_avo_assert_string('mT5Gx2vFz', isset($label_) ? 'cio_id_pianote' . ':' . $label_ : 'cio_id_pianote', $cio_id_pianote));
-         }
-         return $messages;
-     }
-
      private static function _assert_platform($platform, $label_ = NULL)
      {
          $messages = [];
@@ -364,13 +328,6 @@ class Avo
              $platform !== 'web') {
              array_push($messages, ['tag' => 'expectedStringMatch', 'propertyId' => 'nl9EAj7rv8', 'message' => (isset($label_) ? 'platform' . ': ' . $label_ : 'platform') . " should match one of the following values [ drumeo-app | musora-app | pianote-app | web ] but you provided the value {$platform}"]);
          }
-         return $messages;
-     }
-
-     private static function _assert_cio_id_musora($cio_id_musora, $label_ = NULL)
-     {
-         $messages = [];
-         $messages = array_merge($messages, self::_avo_assert_string('rOAkB_jgLw', isset($label_) ? 'cio_id_musora' . ':' . $label_ : 'cio_id_musora', $cio_id_musora));
          return $messages;
      }
 
@@ -388,14 +345,9 @@ class Avo
              $messages = [];
              $messages = array_merge($messages, self::_assert_os($properties['os']));
              $messages = array_merge($messages, self::_assert_platform($properties['platform']));
-             $messages = array_merge($messages, self::_assert_cio_id_drumeo_optional($properties['cio_id_drumeo']));
-             $messages = array_merge($messages, self::_assert_cio_id_guitareo_optional($properties['cio_id_guitareo']));
-             $messages = array_merge($messages, self::_assert_cio_id_musora($properties['cio_id_musora']));
-             $messages = array_merge($messages, self::_assert_cio_id_pianote_optional($properties['cio_id_pianote']));
-             $messages = array_merge($messages, self::_assert_cio_id_singeo_optional($properties['cio_id_singeo']));
              $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
              // debug console in Avo
-             self::_invoke('FeaHCzH-x', '07300d54d1156edb56d4f250a5852d51116d182661064870233975fa6110d0c1', $messages);
+             self::_invoke('FeaHCzH-x', '50a7acd3a7e970df0bb287d5164d30756f37a3f373ad364c81eebc1fb701208d', $messages);
              if (self::$__STRICT__) {
                  // throw exception if messages is not empty
                  if (count($messages) > 0) {
@@ -414,11 +366,6 @@ class Avo
              self::$__LOGGER__->info("[avo] Event sent: 'Onboarding Started', Event props: ". print_r(array_filter([
              'os' => $properties['os'],
              'platform' => $properties['platform'],
-             'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-             'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-             'cio_id_musora' => $properties['cio_id_musora'],
-             'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-             'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
              ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
          }
 
@@ -426,11 +373,6 @@ class Avo
          self::$rudder_stackDestination->log_event($properties['user_id_'], 'Onboarding Started', [
          'os' => $properties['os'],
          'platform' => $properties['platform'],
-         'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-         'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-         'cio_id_musora' => $properties['cio_id_musora'],
-         'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-         'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
          ]);
      }
 
@@ -441,15 +383,10 @@ class Avo
              $messages = [];
              $messages = array_merge($messages, self::_assert_os($properties['os']));
              $messages = array_merge($messages, self::_assert_platform($properties['platform']));
-             $messages = array_merge($messages, self::_assert_cio_id_drumeo_optional($properties['cio_id_drumeo']));
-             $messages = array_merge($messages, self::_assert_cio_id_guitareo_optional($properties['cio_id_guitareo']));
-             $messages = array_merge($messages, self::_assert_cio_id_musora($properties['cio_id_musora']));
-             $messages = array_merge($messages, self::_assert_cio_id_pianote_optional($properties['cio_id_pianote']));
-             $messages = array_merge($messages, self::_assert_cio_id_singeo_optional($properties['cio_id_singeo']));
              $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
              $messages = array_merge($messages, self::_assert_account_created_at($properties['account_created_at']));
              // debug console in Avo
-             self::_invoke('P07BEO3Z8', '812043509dc69a0f2200b544c5a837bdeaeef864a08dab8037b11cf1b2931216', $messages);
+             self::_invoke('P07BEO3Z8', '4e21a27ee9f8d9f857f1ec1a82ea61ba623de792a1f91a9d6990675451dd4689', $messages);
              if (self::$__STRICT__) {
                  // throw exception if messages is not empty
                  if (count($messages) > 0) {
@@ -468,11 +405,6 @@ class Avo
              self::$__LOGGER__->info("[avo] Event sent: 'Account Created', Event props: ". print_r(array_filter([
              'os' => $properties['os'],
              'platform' => $properties['platform'],
-             'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-             'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-             'cio_id_musora' => $properties['cio_id_musora'],
-             'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-             'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
              ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter(
              [
                  'account_created_at' => $properties['account_created_at'],
@@ -487,11 +419,6 @@ class Avo
          self::$rudder_stackDestination->log_event($properties['user_id_'], 'Account Created', [
          'os' => $properties['os'],
          'platform' => $properties['platform'],
-         'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-         'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-         'cio_id_musora' => $properties['cio_id_musora'],
-         'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-         'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
          ]);
      }
 
@@ -502,15 +429,10 @@ class Avo
              $messages = [];
              $messages = array_merge($messages, self::_assert_os($properties['os']));
              $messages = array_merge($messages, self::_assert_platform($properties['platform']));
-             $messages = array_merge($messages, self::_assert_cio_id_drumeo_optional($properties['cio_id_drumeo']));
-             $messages = array_merge($messages, self::_assert_cio_id_guitareo_optional($properties['cio_id_guitareo']));
-             $messages = array_merge($messages, self::_assert_cio_id_musora($properties['cio_id_musora']));
-             $messages = array_merge($messages, self::_assert_cio_id_pianote_optional($properties['cio_id_pianote']));
-             $messages = array_merge($messages, self::_assert_cio_id_singeo_optional($properties['cio_id_singeo']));
              $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
              $messages = array_merge($messages, self::_assert_is_skipped($properties['is_skipped']));
              // debug console in Avo
-             self::_invoke('TPjrjI22JG', '153cb531222f5283f502d2916692c2e24cb13786aa28ac8fbeb483ee4b643ece', $messages);
+             self::_invoke('TPjrjI22JG', '3facb16f8a1e5538f4c4d0309b4ef008ea95f16abf613d6579a1961abe2c5b8b', $messages);
              if (self::$__STRICT__) {
                  // throw exception if messages is not empty
                  if (count($messages) > 0) {
@@ -529,11 +451,6 @@ class Avo
              self::$__LOGGER__->info("[avo] Event sent: 'Onboarding About Step Completed', Event props: ". print_r(array_filter([
              'os' => $properties['os'],
              'platform' => $properties['platform'],
-             'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-             'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-             'cio_id_musora' => $properties['cio_id_musora'],
-             'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-             'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
              'is_skipped' => $properties['is_skipped'],
              ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
          }
@@ -542,11 +459,6 @@ class Avo
          self::$rudder_stackDestination->log_event($properties['user_id_'], 'Onboarding About Step Completed', [
          'os' => $properties['os'],
          'platform' => $properties['platform'],
-         'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-         'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-         'cio_id_musora' => $properties['cio_id_musora'],
-         'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-         'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
          'is_skipped' => $properties['is_skipped'],
          ]);
      }
@@ -558,15 +470,10 @@ class Avo
              $messages = [];
              $messages = array_merge($messages, self::_assert_os($properties['os']));
              $messages = array_merge($messages, self::_assert_platform($properties['platform']));
-             $messages = array_merge($messages, self::_assert_cio_id_drumeo_optional($properties['cio_id_drumeo']));
-             $messages = array_merge($messages, self::_assert_cio_id_guitareo_optional($properties['cio_id_guitareo']));
-             $messages = array_merge($messages, self::_assert_cio_id_musora($properties['cio_id_musora']));
-             $messages = array_merge($messages, self::_assert_cio_id_pianote_optional($properties['cio_id_pianote']));
-             $messages = array_merge($messages, self::_assert_cio_id_singeo_optional($properties['cio_id_singeo']));
              $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
              $messages = array_merge($messages, self::_assert_brand($properties['brand']));
              // debug console in Avo
-             self::_invoke('m-5bPn9dHs', '33a72163789708e6dc1114a16e2404c4390d0c1505e1e1ff31ee10865058cc1c', $messages);
+             self::_invoke('m-5bPn9dHs', '140278ab3cf2c96c935a1aa57ea56a901e7707d1c0f9a1dd3249f53d052df1a3', $messages);
              if (self::$__STRICT__) {
                  // throw exception if messages is not empty
                  if (count($messages) > 0) {
@@ -585,11 +492,6 @@ class Avo
              self::$__LOGGER__->info("[avo] Event sent: 'Onboarding Instrument Step Completed', Event props: ". print_r(array_filter([
              'os' => $properties['os'],
              'platform' => $properties['platform'],
-             'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-             'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-             'cio_id_musora' => $properties['cio_id_musora'],
-             'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-             'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
              'brand' => $properties['brand'],
              ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
          }
@@ -598,11 +500,6 @@ class Avo
          self::$rudder_stackDestination->log_event($properties['user_id_'], 'Onboarding Instrument Step Completed', [
          'os' => $properties['os'],
          'platform' => $properties['platform'],
-         'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-         'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-         'cio_id_musora' => $properties['cio_id_musora'],
-         'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-         'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
          'brand' => $properties['brand'],
          ]);
      }
@@ -614,16 +511,11 @@ class Avo
              $messages = [];
              $messages = array_merge($messages, self::_assert_os($properties['os']));
              $messages = array_merge($messages, self::_assert_platform($properties['platform']));
-             $messages = array_merge($messages, self::_assert_cio_id_drumeo_optional($properties['cio_id_drumeo']));
-             $messages = array_merge($messages, self::_assert_cio_id_guitareo_optional($properties['cio_id_guitareo']));
-             $messages = array_merge($messages, self::_assert_cio_id_musora($properties['cio_id_musora']));
-             $messages = array_merge($messages, self::_assert_cio_id_pianote_optional($properties['cio_id_pianote']));
-             $messages = array_merge($messages, self::_assert_cio_id_singeo_optional($properties['cio_id_singeo']));
              $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
              $messages = array_merge($messages, self::_assert_gear_list($properties['gear_list']));
              $messages = array_merge($messages, self::_assert_brand($properties['brand']));
              // debug console in Avo
-             self::_invoke('aPa8PWuKjC', '721d35f3d33e3a3848009044cc1cb0f2e514edb8ca41c1239acc19a8bdaa53ce', $messages);
+             self::_invoke('aPa8PWuKjC', 'bb4f5edc2d282af4e03335f4a982d975ed27aba58142ccfc86c43d78298a8387', $messages);
              if (self::$__STRICT__) {
                  // throw exception if messages is not empty
                  if (count($messages) > 0) {
@@ -642,11 +534,6 @@ class Avo
              self::$__LOGGER__->info("[avo] Event sent: 'Onboarding Gear Step Completed', Event props: ". print_r(array_filter([
              'os' => $properties['os'],
              'platform' => $properties['platform'],
-             'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-             'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-             'cio_id_musora' => $properties['cio_id_musora'],
-             'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-             'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
              'gear_list' => $properties['gear_list'],
              'brand' => $properties['brand'],
              ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
@@ -656,11 +543,6 @@ class Avo
          self::$rudder_stackDestination->log_event($properties['user_id_'], 'Onboarding Gear Step Completed', [
          'os' => $properties['os'],
          'platform' => $properties['platform'],
-         'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-         'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-         'cio_id_musora' => $properties['cio_id_musora'],
-         'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-         'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
          'gear_list' => $properties['gear_list'],
          'brand' => $properties['brand'],
          ]);
@@ -673,16 +555,11 @@ class Avo
              $messages = [];
              $messages = array_merge($messages, self::_assert_os($properties['os']));
              $messages = array_merge($messages, self::_assert_platform($properties['platform']));
-             $messages = array_merge($messages, self::_assert_cio_id_drumeo_optional($properties['cio_id_drumeo']));
-             $messages = array_merge($messages, self::_assert_cio_id_guitareo_optional($properties['cio_id_guitareo']));
-             $messages = array_merge($messages, self::_assert_cio_id_musora($properties['cio_id_musora']));
-             $messages = array_merge($messages, self::_assert_cio_id_pianote_optional($properties['cio_id_pianote']));
-             $messages = array_merge($messages, self::_assert_cio_id_singeo_optional($properties['cio_id_singeo']));
              $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
              $messages = array_merge($messages, self::_assert_experience_level($properties['experience_level']));
              $messages = array_merge($messages, self::_assert_brand($properties['brand']));
              // debug console in Avo
-             self::_invoke('QGsppNv0OJ', 'abf4c0dd5943d86063a4432e385b430d96970d0725e6b0c5999198c46aa49aa3', $messages);
+             self::_invoke('QGsppNv0OJ', '94da6e7c64f37f4d0c1c2cf2570bde9e5a57d1ae5d4fe9e35678b44f19433d39', $messages);
              if (self::$__STRICT__) {
                  // throw exception if messages is not empty
                  if (count($messages) > 0) {
@@ -701,11 +578,6 @@ class Avo
              self::$__LOGGER__->info("[avo] Event sent: 'Onboarding Experience Step Completed', Event props: ". print_r(array_filter([
              'os' => $properties['os'],
              'platform' => $properties['platform'],
-             'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-             'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-             'cio_id_musora' => $properties['cio_id_musora'],
-             'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-             'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
              'experience_level' => $properties['experience_level'],
              'brand' => $properties['brand'],
              ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
@@ -715,11 +587,6 @@ class Avo
          self::$rudder_stackDestination->log_event($properties['user_id_'], 'Onboarding Experience Step Completed', [
          'os' => $properties['os'],
          'platform' => $properties['platform'],
-         'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-         'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-         'cio_id_musora' => $properties['cio_id_musora'],
-         'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-         'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
          'experience_level' => $properties['experience_level'],
          'brand' => $properties['brand'],
          ]);
@@ -732,16 +599,11 @@ class Avo
              $messages = [];
              $messages = array_merge($messages, self::_assert_os($properties['os']));
              $messages = array_merge($messages, self::_assert_platform($properties['platform']));
-             $messages = array_merge($messages, self::_assert_cio_id_drumeo_optional($properties['cio_id_drumeo']));
-             $messages = array_merge($messages, self::_assert_cio_id_guitareo_optional($properties['cio_id_guitareo']));
-             $messages = array_merge($messages, self::_assert_cio_id_musora($properties['cio_id_musora']));
-             $messages = array_merge($messages, self::_assert_cio_id_pianote_optional($properties['cio_id_pianote']));
-             $messages = array_merge($messages, self::_assert_cio_id_singeo_optional($properties['cio_id_singeo']));
              $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
              $messages = array_merge($messages, self::_assert_genre_list($properties['genre_list']));
              $messages = array_merge($messages, self::_assert_brand($properties['brand']));
              // debug console in Avo
-             self::_invoke('t9Z83FSnYD', '6aef79e7b98a97a4956b27022560e0cfaddb293ccf768facc234a0038aab048a', $messages);
+             self::_invoke('t9Z83FSnYD', 'acd426de7b074dfd249500ea84ba565120812262089d377f2d49108a08aae9f4', $messages);
              if (self::$__STRICT__) {
                  // throw exception if messages is not empty
                  if (count($messages) > 0) {
@@ -760,11 +622,6 @@ class Avo
              self::$__LOGGER__->info("[avo] Event sent: 'Onboarding Genres Step Completed', Event props: ". print_r(array_filter([
              'os' => $properties['os'],
              'platform' => $properties['platform'],
-             'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-             'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-             'cio_id_musora' => $properties['cio_id_musora'],
-             'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-             'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
              'genre_list' => $properties['genre_list'],
              'brand' => $properties['brand'],
              ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
@@ -774,11 +631,6 @@ class Avo
          self::$rudder_stackDestination->log_event($properties['user_id_'], 'Onboarding Genres Step Completed', [
          'os' => $properties['os'],
          'platform' => $properties['platform'],
-         'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-         'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-         'cio_id_musora' => $properties['cio_id_musora'],
-         'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-         'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
          'genre_list' => $properties['genre_list'],
          'brand' => $properties['brand'],
          ]);
@@ -791,16 +643,11 @@ class Avo
              $messages = [];
              $messages = array_merge($messages, self::_assert_os($properties['os']));
              $messages = array_merge($messages, self::_assert_platform($properties['platform']));
-             $messages = array_merge($messages, self::_assert_cio_id_drumeo_optional($properties['cio_id_drumeo']));
-             $messages = array_merge($messages, self::_assert_cio_id_guitareo_optional($properties['cio_id_guitareo']));
-             $messages = array_merge($messages, self::_assert_cio_id_musora($properties['cio_id_musora']));
-             $messages = array_merge($messages, self::_assert_cio_id_pianote_optional($properties['cio_id_pianote']));
-             $messages = array_merge($messages, self::_assert_cio_id_singeo_optional($properties['cio_id_singeo']));
              $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
              $messages = array_merge($messages, self::_assert_brand($properties['brand']));
              $messages = array_merge($messages, self::_assert_topic_list($properties['topic_list']));
              // debug console in Avo
-             self::_invoke('ynS7ECZHra', '2f1bcae9b4768b72aef9af68a86724af95f6747be4b62b461c12db66d86fe406', $messages);
+             self::_invoke('ynS7ECZHra', '160e0c52d7db6998ea1f974eacb3a0f72f69a208da4aa8b81146ffe4c8d9b0b3', $messages);
              if (self::$__STRICT__) {
                  // throw exception if messages is not empty
                  if (count($messages) > 0) {
@@ -819,11 +666,6 @@ class Avo
              self::$__LOGGER__->info("[avo] Event sent: 'Onboarding Topics Step Completed', Event props: ". print_r(array_filter([
              'os' => $properties['os'],
              'platform' => $properties['platform'],
-             'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-             'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-             'cio_id_musora' => $properties['cio_id_musora'],
-             'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-             'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
              'brand' => $properties['brand'],
              'topic_list' => $properties['topic_list'],
              ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
@@ -833,11 +675,6 @@ class Avo
          self::$rudder_stackDestination->log_event($properties['user_id_'], 'Onboarding Topics Step Completed', [
          'os' => $properties['os'],
          'platform' => $properties['platform'],
-         'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-         'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-         'cio_id_musora' => $properties['cio_id_musora'],
-         'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-         'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
          'brand' => $properties['brand'],
          'topic_list' => $properties['topic_list'],
          ]);
@@ -850,16 +687,11 @@ class Avo
              $messages = [];
              $messages = array_merge($messages, self::_assert_os($properties['os']));
              $messages = array_merge($messages, self::_assert_platform($properties['platform']));
-             $messages = array_merge($messages, self::_assert_cio_id_drumeo_optional($properties['cio_id_drumeo']));
-             $messages = array_merge($messages, self::_assert_cio_id_guitareo_optional($properties['cio_id_guitareo']));
-             $messages = array_merge($messages, self::_assert_cio_id_musora($properties['cio_id_musora']));
-             $messages = array_merge($messages, self::_assert_cio_id_pianote_optional($properties['cio_id_pianote']));
-             $messages = array_merge($messages, self::_assert_cio_id_singeo_optional($properties['cio_id_singeo']));
              $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
              $messages = array_merge($messages, self::_assert_step_skipped($properties['step_skipped']));
              $messages = array_merge($messages, self::_assert_brand($properties['brand']));
              // debug console in Avo
-             self::_invoke('JDGGcLaq4', 'b567804dcfcce4bdbf98810c477f6b3a3aea030f640d18b3b81328c24d03e449', $messages);
+             self::_invoke('JDGGcLaq4', 'cd27646ba31d3a79ad34c8d4d2e7e41cfd4083ec7ed05030aa82089df3e8c478', $messages);
              if (self::$__STRICT__) {
                  // throw exception if messages is not empty
                  if (count($messages) > 0) {
@@ -878,11 +710,6 @@ class Avo
              self::$__LOGGER__->info("[avo] Event sent: 'Onboarding Skipped', Event props: ". print_r(array_filter([
              'os' => $properties['os'],
              'platform' => $properties['platform'],
-             'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-             'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-             'cio_id_musora' => $properties['cio_id_musora'],
-             'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-             'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
              'step_skipped' => $properties['step_skipped'],
              'brand' => $properties['brand'],
              ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
@@ -892,11 +719,6 @@ class Avo
          self::$rudder_stackDestination->log_event($properties['user_id_'], 'Onboarding Skipped', [
          'os' => $properties['os'],
          'platform' => $properties['platform'],
-         'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-         'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-         'cio_id_musora' => $properties['cio_id_musora'],
-         'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-         'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
          'step_skipped' => $properties['step_skipped'],
          'brand' => $properties['brand'],
          ]);
@@ -909,17 +731,12 @@ class Avo
              $messages = [];
              $messages = array_merge($messages, self::_assert_os($properties['os']));
              $messages = array_merge($messages, self::_assert_platform($properties['platform']));
-             $messages = array_merge($messages, self::_assert_cio_id_drumeo_optional($properties['cio_id_drumeo']));
-             $messages = array_merge($messages, self::_assert_cio_id_guitareo_optional($properties['cio_id_guitareo']));
-             $messages = array_merge($messages, self::_assert_cio_id_musora($properties['cio_id_musora']));
-             $messages = array_merge($messages, self::_assert_cio_id_pianote_optional($properties['cio_id_pianote']));
-             $messages = array_merge($messages, self::_assert_cio_id_singeo_optional($properties['cio_id_singeo']));
              $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
              $messages = array_merge($messages, self::_assert_has_completed_onboarding($properties['has_completed_onboarding']));
              $messages = array_merge($messages, self::_assert_brand($properties['brand']));
              $messages = array_merge($messages, self::_assert_goals_list($properties['goals_list']));
              // debug console in Avo
-             self::_invoke('QBhZxvp8po', 'a89211d0f54bc0530f60c4c1a0e13465b63c25501f7417026d6f0b8c9437dfbb', $messages);
+             self::_invoke('QBhZxvp8po', '80422d0a8b0199dd3af10682a58eecb83731d6dcdc883173f7e0fc45f0b27742', $messages);
              if (self::$__STRICT__) {
                  // throw exception if messages is not empty
                  if (count($messages) > 0) {
@@ -938,11 +755,6 @@ class Avo
              self::$__LOGGER__->info("[avo] Event sent: 'Onboarding Goals Step Completed', Event props: ". print_r(array_filter([
              'os' => $properties['os'],
              'platform' => $properties['platform'],
-             'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-             'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-             'cio_id_musora' => $properties['cio_id_musora'],
-             'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-             'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
              'brand' => $properties['brand'],
              'goals_list' => $properties['goals_list'],
              ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter(
@@ -959,11 +771,6 @@ class Avo
          self::$rudder_stackDestination->log_event($properties['user_id_'], 'Onboarding Goals Step Completed', [
          'os' => $properties['os'],
          'platform' => $properties['platform'],
-         'cio_id_drumeo' => isset($properties['cio_id_drumeo']) ? $properties['cio_id_drumeo'] : null,
-         'cio_id_guitareo' => isset($properties['cio_id_guitareo']) ? $properties['cio_id_guitareo'] : null,
-         'cio_id_musora' => $properties['cio_id_musora'],
-         'cio_id_pianote' => isset($properties['cio_id_pianote']) ? $properties['cio_id_pianote'] : null,
-         'cio_id_singeo' => isset($properties['cio_id_singeo']) ? $properties['cio_id_singeo'] : null,
          'brand' => $properties['brand'],
          'goals_list' => $properties['goals_list'],
          ]);

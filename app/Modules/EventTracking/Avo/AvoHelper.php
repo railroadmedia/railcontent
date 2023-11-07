@@ -2,8 +2,6 @@
 
 namespace App\Modules\EventTracking\Avo;
 
-use App\Modules\EventTracking\Services\CustomerIoService;
-
 class AvoHelper
 {
     /**
@@ -52,10 +50,7 @@ class AvoHelper
             'os' => self::getRequestOS()
         ];
 
-        $customerIoService = new CustomerIoService();
-        $customerIoIds = $customerIoService->getCioIdsForUser(user());
-
-        return array_merge($defaultProperties, $properties, $customerIoIds);
+        return array_merge($defaultProperties, $properties);
     }
 
 }
