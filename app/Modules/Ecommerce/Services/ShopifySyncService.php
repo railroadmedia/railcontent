@@ -301,8 +301,9 @@ class ShopifySyncService
         Log::debug("Shopify: syncing user $user->id");
         $customerResource = $this->getShopifyCustomer($user->getEmail());
 
-        $data = $user->getMetafieldsForShopify();
-        $customerResource = $this->shopify->updateCustomer($customerResource->id, $data);
+        $customerData = [];
+        $customerData["metafields"] = $user->getMetafieldsForShopify();
+        $customerResource = $this->shopify->updateCustomer($customerResource->id, $customerData);
 
         // record the shopify ID on the User
         $user->shopify_id = $customerResource->id;
