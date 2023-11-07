@@ -426,7 +426,7 @@ $points = [
     'logoAlt' => '30 day chops logo',
     'title' => 'Improve your chops in just 30 days.',
     'points' => $points,
-    'buttonTxt' => 'Get Started',
+    'buttonText' => 'Get Started',
     'buttonLink' => "/ecommerce/add-to-cart?products[30-day-chops]=1&products[Drumeo-VaterSticks]=1&locked=true",
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'profileImageAlt' => 'student profile image',

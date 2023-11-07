@@ -420,7 +420,7 @@ $points = [
     'logoAlt' => '30 day blues logo',
     'title' => 'Learn the blues by playing the blues',
     'points' => $points,
-    'buttonTxt' => 'Get Started',
+    'buttonText' => 'Get Started',
     'buttonLink' => "/ecommerce/add-to-cart?product-array=30-day-blues-piano:1&redirect=/order&locked=true",
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'profileImageAlt' => 'student profile image',

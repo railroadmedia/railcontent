@@ -65,8 +65,14 @@
         </div>
         <div class="flex w-full flex-col items-center mt-6 sm:mt-5 lg:mt-10">
 
-            <a href={{ $buttonLink }}
-                class="join blue medium w-full sm:w-1/2 lg:w-3/5 anchor-slide" role="button">{{ $buttonText }}</a>
+            {{-- <a href={{ $buttonLink }}
+                class="join blue medium w-full sm:w-1/2 lg:w-3/5 anchor-slide" role="button">{{ $buttonText }}</a> --}}
+
+                @include('drumeo.products.partials.evergreen._button', [
+                        'link' => $buttonLink,
+                        'buttonClass' => 'text-white font-bebas tracking-widest',
+                        'buttonText' => $buttonText,
+                    ])
             <div class="w-full md:w-1/2 text-center p-4">
                 <img class="h-7 mr-2 lazyload" data-src="{{ $studentProfilesImage }}"
                     alt="Joined student profiles">

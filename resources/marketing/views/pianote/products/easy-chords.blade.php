@@ -526,7 +526,7 @@ $points = [
     'logoAlt' => '30 day easy chords logo',
     'title' => '30 days to better piano chords',
     'points' => $points,
-    'buttonTxt' => 'Get Started',
+    'buttonText' => 'Get Started',
     'buttonLink' => "/ecommerce/add-to-cart?products[easy-chords]=1&locked=true",
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'profileImageAlt' => 'student profile image',

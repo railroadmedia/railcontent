@@ -250,7 +250,6 @@
     'rotatingText' => ['Learn the drums', 'Improve your timing', 'Boost your creativity'],
     'subtitle' => 'with daily guided workouts.',
     'checklist' => ['Improve Your Skills', 'Drum Every Day', 'Learn By Doing'],
-    'brandTitle' => 'drumeo',
     'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/header-right-collage.png',
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/header-left-collage.png',
     'isVideo' => true,
@@ -443,7 +442,7 @@ $points = [
     'logoAlt' => '30DD logo',
     'title' => 'Learn the drums with daily guided workouts.',
     'points' => $points,
-    'buttonTxt' => 'Get Started',
+    'buttonText' => 'Get Started',
     'buttonLink' => '/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_30-days:1&redirect=/order&locked=true',
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'profileImageAlt' => 'student profile image',
@@ -493,7 +492,7 @@ $points = [
     <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
 
 
-    <script>
+    {{-- <script>
         $(document).ready(function () {
             $(document).foundation();
             $('.comparison tr td:nth-child(3)').on('click', function(){
@@ -509,7 +508,7 @@ $points = [
                 $(this).parents().find('table').addClass('private');
             });
         });
-    </script>
+    </script> --}}
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
