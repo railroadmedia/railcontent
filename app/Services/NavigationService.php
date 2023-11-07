@@ -67,7 +67,7 @@ class NavigationService
                     [
                         'name' => 'Workouts',
                         'path' => '/'.brand().'/workouts',
-                        'icon' => 'whistle',
+                        'icon' => 'leaderboard',
                     ],
                 ],
                 [ // section
@@ -119,7 +119,7 @@ class NavigationService
                     [
                         'name' => 'Coaches',
                         'path' => '/'.brand().'/coaches',
-                        'icon' => 'academic-cap',
+                        'icon' => 'whistle',
                     ],
                 ],
                 [ // section
@@ -158,7 +158,7 @@ class NavigationService
                     [
                         'name' => 'Workouts',
                         'path' => '/'.brand().'/workouts',
-                        'icon' => 'whistle',
+                        'icon' => 'leaderboard',
                     ],
                 ],
                 [ // section
@@ -210,7 +210,7 @@ class NavigationService
                     [
                         'name' => 'Coaches',
                         'path' => '/'.brand().'/coaches',
-                        'icon' => 'academic-cap',
+                        'icon' => 'whistle',
                     ],
                 ],
                 [ // section
@@ -249,7 +249,7 @@ class NavigationService
                     [
                         'name' => 'Workouts',
                         'path' => '/'.brand().'/workouts',
-                        'icon' => 'whistle',
+                        'icon' => 'leaderboard',
                     ],
                 ],
                 [ // section
@@ -311,7 +311,7 @@ class NavigationService
                     [
                         'name' => 'Coaches',
                         'path' => '/'.brand().'/coaches',
-                        'icon' => 'academic-cap',
+                        'icon' => 'whistle',
                     ],
                 ],
                 [ // section
@@ -350,7 +350,7 @@ class NavigationService
                     [
                         'name' => 'Workouts',
                         'path' => '/'.brand().'/workouts',
-                        'icon' => 'whistle',
+                        'icon' => 'leaderboard',
                     ],
                 ],
                 [ // section
@@ -387,7 +387,7 @@ class NavigationService
                     [
                         'name' => 'Coaches',
                         'path' => '/'.brand().'/coaches',
-                        'icon' => 'academic-cap',
+                        'icon' => 'whistle',
                     ],
                 ],
                 [ // section
