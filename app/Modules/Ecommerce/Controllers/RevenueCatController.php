@@ -379,23 +379,27 @@ class RevenueCatController extends Controller
                     break;
                 }
 
-                if (!config('shopify_enabled')) {
-                    //store type
-                    $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
+                //store type
+                $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
 
-                    //productId
-                    $productId = $this->getProductId($data['event']['product_id']);
+                //productId
+                $productId = $this->getProductId($data['event']['product_id']);
 
-                    //get Musora product
-                    $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
+                //get Musora product
+                $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
 
-                    /*
-                     * @todo Shopify
-                     *      - update membership times
-                     * @todo CustomerIO:
-                     *      - Push cancellation data for user
-                     */
-
+                if (config('shopify.enabled') && $user->shopify_id) {
+                    $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
+                    $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
+                    if ($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
+                        UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
+                    }
+                    $orderId = $this->shopifySyncService->getCustomerOrderIdByProcessedAtDate($user->shopify_id, $processedAt);
+                    if ($orderId) {
+                        $this->shopifySyncService->cancelOrder($user->shopify_id, $user->email, $orderId);
+                        $this->unsetUserSubscription($user, $type);
+                    }
+                } else {
                     //get RevenueCat subscription
                     $currentRevenueCatSubscription =
                         $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);

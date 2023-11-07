@@ -291,9 +291,22 @@ class ShopifySyncService
         return $this->shopify->getOrder($orderId);
     }
 
+    public function getCustomerOrderIdByProcessedAtDate(int $shopifyCustomerId, Carbon $processedAt): int
+    {
+        $orders = $this->shopifyGateway->getCustomerOrderByProcessAtDate($shopifyCustomerId, $processedAt);
+        $id = collect($orders)->first()->id;
+        return intVal(str_replace('gid://shopify/Order/', '', $id));
+    }
+
     public function updateUserData(int $shopifyCustomerId, User $user): void
     {
         $user->shopify_id = $shopifyCustomerId;
         $user->save();
+    }
+
+    public function cancelOrder(int $shopifyCustomerId, string $email, int $orderId): void
+    {
+        $this->shopify->cancelOrder($orderId);
+        $this->syncCustomer($shopifyCustomerId, $email);
     }
 }
