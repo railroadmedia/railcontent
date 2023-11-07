@@ -66,7 +66,7 @@
 
                 <div class="tw-flex tw-flex-col tw-grow tw-w-full">
                     <text-editor :fieldKey="contentId + '-comment-text-editor'" ref="textEditor" v-model="commentInterface"
-                                 @input="handleInput" :height="150"></text-editor>
+                                 @input="handleInput" :height="150" placeholder="Share your thoughts..."></text-editor>
 
                     <div class="tw-flex tw-flex-row tw-justify-end mv-1">
                         <button class="btn collapse-150" :disabled="loading" dusk="submit-comment" @click="postComment">
@@ -364,9 +364,3 @@ export default {
     },
 };
 </script>
-
-<style scoped>
-.pinned {
-    scroll-margin-top: 80px;
-}
-</style>
