@@ -37,7 +37,7 @@
                 <h1 class="text-center my-8"><strong>Choose your platform</strong></h1>
                 <div class="flex-row items-center text-white leading-loose">
                     <div class="flex justify-center">
-                        <a href="https://music.apple.com/ca/artist/drumeo/1707098843" target="_blank"
+                        <a href="https://open.spotify.com/artist/7pxX1NadzHWfzSXyAPO2ha" target="_blank"
                             x-data="{ isHovered: false }">
                             <button class="text-xl sm:text-2xl rounded-full w-40 sm:w-56 md:w-72 h-12 sm:h-16 mx-2"
                                 style="background: #2EBD59" @mouseenter="isHovered = true" @mouseleave="isHovered = false"
@@ -46,7 +46,7 @@
                             </button>
                         </a>
 
-                        <a href="https://open.spotify.com/artist/7pxX1NadzHWfzSXyAPO2ha" target="_blank"
+                        <a href="https://music.apple.com/ca/artist/drumeo/1707098843" target="_blank"
                             x-data="{ isHovered: false }">
                             <button class="bg-black text-xl sm:text-2xl uppercase rounded-full w-40 sm:w-56 md:w-72 h-12 sm:h-16 mx-2"
                                 style="background: #000000" @mouseenter="isHovered = true" @mouseleave="isHovered = false"
