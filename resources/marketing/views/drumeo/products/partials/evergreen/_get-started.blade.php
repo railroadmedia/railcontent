@@ -7,15 +7,15 @@
                 <ul class="pl-6">
                     @foreach ($items as $item)
                         <li>
-                          <h4 class="leading-loose text-left"><i class="fas fa-sharp fa-solid fa-circle-check text-{{$brand}} mr-5"></i>{{ $item }}</h4>
+                          <h4 class="leading-loose text-left"><i class="fas fa-sharp fa-solid fa-circle-check text-{{$brand}} mr-5" aria-hidden="true"></i>{{ $item }}</h4>
                         </li>
                     @endforeach
                 </ul>
         </div>
 
-        <a href={{$buttonLink}} class="join blue medium w-full sm:w-1/2 lg:w-3/5 mt-6 sm:mt-12 mb-3 anchor-slide">{{$buttonText}}</a><br>
-        <img class="h-7 mr-1 mb-5 lazyload" alt="joined student profiles" data-src={{$studentProfilesImage}}>
-        <p class="inline-block leading-tight text-sm align-middle mb-5">Join
-            {{ $numStudents }} {{$students}} who<br> have already registered.</p>
+        <a href={{$buttonLink}} class="join blue medium w-full sm:w-1/2 lg:w-3/5 mt-6 sm:mt-12 mb-3 anchor-slide" role="button">{{$buttonText}}</a><br>
+        <img class="h-7 mr-2 lazyload" alt="Joined Student Profiles" data-src={{$studentProfilesImage}}>
+        <span class="inline-block align-middle leading-tight text-xs">Join
+            {{ $numStudents }} {{$students}} who<br> have already registered.</span>
     </div>
 </section>

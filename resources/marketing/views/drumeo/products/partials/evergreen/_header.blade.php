@@ -20,9 +20,9 @@
                 </h1>
                 <h2 class="-mt-3 sm:-mt-1 lg:mt-0 mb-4">{{ $subtitle }}</h2>
                 @foreach ($checklist as $item)
-                    <p class="hidden lg:inline p-2 text-lg leading-10">
-                        <i class="fas fa-check-circle text-{{ $brand }}"></i> {{ $item }}
-                    </p>
+                    <h6 class="hidden lg:inline p-2 leading-loose">
+                        <i class="fas fa-check-circle text-{{ $brand }}" aria-hidden="true"></i> {{ $item }}
+                    </h6>
                 @endforeach
                 <div class="flex inline lg:hidden my-3">
                     @foreach ($checklist as $item)
@@ -31,7 +31,7 @@
                             $restOfWords = substr($item, strlen($firstWord)); // to get other part of phrase
                         @endphp
                         <p class="w-1/2 leading-tight">
-                            <i class="fas fa-check-circle text-{{ $brand }}"></i><br />
+                            <i class="fas fa-check-circle text-{{ $brand }}" aria-hidden="true"></i><br />
                             {{ $firstWord }}<br />{{ $restOfWords }}
                         </p>
                     @endforeach
@@ -46,7 +46,7 @@
             </div>
 
             <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
-                x-on:click="trailer = true;">
+                x-on:click="trailer = true;" role="button">
                 <i
                     class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
                 @if (isset($isVideo))
@@ -66,14 +66,13 @@
         <div class="flex w-full flex-col items-center mt-6 sm:mt-5 lg:mt-10">
 
             <a href={{ $buttonLink }}
-                class="join blue medium w-full sm:w-1/2 lg:w-3/5 anchor-slide">{{ $buttonText }}</a>
-
-            <div class="w-full sm:w-1/2 lg:pb-5 my-1 text-center text-xs">
-                <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="{{ $studentProfilesImage }}"
-                    alt="joined student profiles">
-                <p class="inline-block leading-tight text-sm align-middle">Join {{ $numStudents }}
+                class="join blue medium w-full sm:w-1/2 lg:w-3/5 anchor-slide" role="button">{{ $buttonText }}</a>
+            <div class="w-full md:w-1/2 text-center p-4">
+                <img class="h-7 mr-2 lazyload" data-src="{{ $studentProfilesImage }}"
+                    alt="Joined student profiles">
+                <span class="inline-block align-middle text-xs leading-tight py-2">Join {{ $numStudents }}
                     {{ $students }} who<br> have already registered.
-                </p>
+                </span>
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 <section class="px-3 sm:px-0 text-center customize relative z-50 overflow-hidden lazyload" style="background: #eff7ff;">
-        <div class="container max-w-6xl mx-auto relative z-50" style="background: #eff7ff;" data-bg={{ $mainImage }}>
+        <div class="container max-w-6xl mx-auto relative z-50 py-4" style="background: #eff7ff;" data-bg={{ $mainImage }}>
             <div class="flex flex-wrap items-center px-4 sm:px-6 py-10">
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5" style="background: #eff7ff;">
                     <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="{{ $logo }}"
@@ -17,13 +17,13 @@
                         </ul>
                         <div class="flex flex-wrap flex-col sm:flex-nowrap lg:flex-row items-center mt-6 sm:mt-5 lg:mt-10">
                     <div class="w-full sm:w-2/3 text-center sm:pr-2 my-1">
-                        <a href={{$buttonLink}} class="join blue medium w-full anchor-slide">{{ $buttonTxt }}</a>
+                        <a href={{$buttonLink}} class="join blue medium w-full anchor-slide" role="button">{{ $buttonTxt }}</a>
                     </div>
                     <div class="w-full sm:w-2/3 sm:flex py-2 md:py-0 items-center">
-                        <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload"
+                        <img class="h-7 mr-2 lazyload"
                             data-src="{{ $studentProfilesImage }}" alt="{{ $profileImageAlt }}">
-                        <p class="inline-block leading-tight text-xs align-middle">Join {{ $numStudents }}
-                            {{ $students }} who have already registered.</p>
+                        <span class="inline-block align-middle leading-tight text-xs py-2">Join {{ $numStudents }}
+                            {{ $students }} who have already registered.</span>
                     </div>
                 </div>
                 </div>
