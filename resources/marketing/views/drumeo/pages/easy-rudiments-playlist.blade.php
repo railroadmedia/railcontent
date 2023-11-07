@@ -1,13 +1,13 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <title>Easy Rudiment Playlist | Drumeo</title>
-    <meta property="og:title" content="Easy Rudiment Playlist | Drumeo">
+    <title>Easy Rudiments | Drumeo</title>
+    <meta property="og:title" content="Easy Rudiments | Drumeo">
 
-    <meta name="description" content="Save on your Drumeo Membership + get FREE bonuses.">
-    <meta property="og:description" content="Save on your Drumeo Membership + get FREE bonuses.">
+    <meta name="description" content="The 15 Rudiments You Actually Need To Know (And How To Learn Them Quickly)">
+    <meta property="og:description" content="The 15 Rudiments You Actually Need To Know (And How To Learn Them Quickly)">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/share-image-drumeo.jpg">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -25,16 +25,16 @@
         'scrollToJoin' => true,
     ])
 
-    <div class="flex flex-col min-h-screen" style="background: #F6F8FC">
-        <section class="container max-w-5xl mx-auto w-full py-20">
+    <div class="flex flex-col pt-24 pb-40" style="background: #F6F8FC">
+        <section class="container max-w-5xl mx-auto w-full">
             <div class="flex flex-col items-center">
-                <img class='w-28 sm:w-48'
+                <img class='w-28 sm:w-48 mb-2'
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-blue.png"
                     alt="logo drumeo">
-                <img class="w-60 sm:w-96"
+                <img class="w-60 sm:w-96 sm:px-5"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/rudiments-book/rudiments-book.png"
                     alt="rudiments book">
-                <h1 class="text-center py-10"><strong>Choose your platform</strong></h1>
+                <h1 class="text-center my-8"><strong>Choose your platform</strong></h1>
                 <div class="flex-row items-center text-white leading-loose">
                     <div class="flex justify-center">
                         <a href="https://music.apple.com/ca/artist/drumeo/1707098843" target="_blank"
