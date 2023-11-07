@@ -1426,7 +1426,7 @@ class CustomerIoSyncEventListener
     private function getCustomerIoDataFromOrders(?OrderCollection $orderCollection, $subscriptions): array
     {
         $attributes = $this->getOrderAttributes($orderCollection);
-        $attirubtes = array_merge($attributes, $this->getSubscriptionAttributes($subscriptions));
+        $attributes = array_merge($attributes, $this->getSubscriptionAttributes($subscriptions));
         return $attributes;
     }
 
