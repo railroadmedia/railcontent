@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Platform;
 
+use App\Modules\Ecommerce\Controllers\ShopifyCartAPIController;
 use App\Modules\Ecommerce\Services\ShopifyAPIService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginPageController extends BaseController
 {
@@ -30,18 +32,26 @@ class LoginPageController extends BaseController
             return redirect()->route('platform.home-redirect');
         }
 
+        // always set checkout url to current session cart checkout url if its not in the url params
+        if ($request->get('shopify_mulitpass', 0) == 1 && empty($request->get('checkout_url'))) {
+            $existingShopifyCartId = Session::get(ShopifyCartAPIController::SHOPIFY_CART_ID_SESSION_KEY);
+
+            if (!empty($existingShopifyCartId)) {
+                $cartData = $this->shopifyAPIService->getCart($existingShopifyCartId);
+                $request['checkout_url'] = parse_url($cartData['checkoutUrl'], PHP_URL_PATH);
+            }
+        }
+
         // if the user just logged in and it's a multipass request, redirect back to shopify multipass/checkout url
         if (!empty(user()) &&
             $request->get('shopify_mulitpass', 0) == 1 &&
             $request->get('redirect_to_multipass', 0) == 1) {
-            
+
             if (!empty($request->get('checkout_url'))) {
                 $shopifyRedirectUrl = config('shopify.hostName') . $request->get('checkout_url');
             } else {
-                $shopifyRedirectUrl = $request->get(
-                    'referrer',
-                    $request->headers->get('referer', 'https://www.musora.com')
-                );
+                // fallback if all else fails
+                $shopifyRedirectUrl = 'https://www.drumeo.com/shop';
             }
 
             $shopifyMultipassToken = $this->shopifyAPIService->generateMultipassToken(
