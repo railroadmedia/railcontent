@@ -10,7 +10,7 @@
     <meta property="og:description" content="We can’t wait to see your submission. Don’t be shy! Submit today!">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/recitals/share-image-winter.png">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.jpg">
 
     <style>
         html {
@@ -21,7 +21,7 @@
 
 <!-- Main -->
 @section('layout-body')
-    <div class="promo-banner py-1 mt-10 md:mt-4 lg:mt-0 hidden md:block bg-musora">
+    <div class="promo-banner py-1 mt-10 md:mt-0 hidden md:block bg-musora">
         <div class="container mx-auto relative z-10">
             <div class="text text-center flex justify-center items-center">
                 <p class="leading-tight">
@@ -32,7 +32,7 @@
     </div>
     <section class="text-center text-white py-5 md:py-10 lg:py-16 px-5 md:px-7" style="background:#00101d ;">
         <div class="container mx-auto max-w-5xl">
-            <img class="h-24 sm:h-32 lg:h-40 mb-3" src="https://dmmior4id2ysr.cloudfront.net/recitals/winter-recitals-logo.png" alt="recital logo">
+            <img class="h-32 sm:h-48 lg:h-52 mb-3" src="https://dmmior4id2ysr.cloudfront.net/recitals/winter-logo-23.png" alt="recital logo">
             <h3 class="leading-tight"><strong>Be a part of the first ever <br>Musora Winter Recital!</strong></h3>
             <a class="btn-primary anchor-slide mt-5 mb-10 md:mt-7 md:mb-20 bg-musora text-black border-none hover:opacity-90" href="#form">Submit Now &raquo;</a>
             <div class="flex flex-wrap items-center justify-center mx-auto max-w-4xl">
@@ -57,7 +57,7 @@
             </div>
         </div>
     </section>
-    <section class="py-5 md:py-6 lg:py-8" style="background:linear-gradient(74.85deg, rgba(0, 201, 172, 0.1) 0%, rgba(11, 118, 219, 0.1) 32.1%, rgba(131, 0, 233, 0.1) 64.2%, rgba(246, 26, 48, 0.1) 90.64%);">
+    <section class="py-5 md:py-6 lg:py-8" style="background:#f6f8fc;">
         <div class="container mx-auto max-w-3xl">
             <div id="form" class="anchor"></div>
             <iframe class="google-form w-full" src="https://docs.google.com/forms/d/e/1FAIpQLSdCE27g48yJ4MECweLJD5RZl5TUSid_N-2WMK6Q4G4DFEy2iA/viewform?embedded=true" height="690" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
