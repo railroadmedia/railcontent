@@ -22,6 +22,7 @@ class ShopifyWebhookVerify
         if (hash_equals($calculated_hmac, $hmac_header)) {
             return $next($request);
         } else {
+            Log::warning('Invalid shopify webhook request.');
             throw new AuthenticationException("Invalid shopify webhook request.");
         }
     }

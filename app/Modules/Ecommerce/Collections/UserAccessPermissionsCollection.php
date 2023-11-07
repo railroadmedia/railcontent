@@ -6,6 +6,7 @@ use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class UserAccessPermissionsCollection
 {
@@ -90,6 +91,40 @@ class UserAccessPermissionsCollection
             self::MusoraBasicMembershipPermission
         ], $includeBuffer);
         return $endDate;
+    }
+
+    /**
+     * @return string|void
+     */
+    public function getMembershipLevel()
+    {
+        if ($this->getIsLifetimeMember()) {
+            return 'lifetime';
+        }
+
+        if (!empty($this->getPlusMembershipExpirationDate())) {
+            return 'plus';
+        }
+
+        if (!empty($this->getBasicMembershipExpirationDate())) {
+            return 'basic';
+        }
+
+        return 'none';
+    }
+
+    public function getAllNonMembershipPermissionNames()
+    {
+        $permissionNames = [];
+
+        foreach ($this->getCollection()->all() as $userAccessPermission) {
+            if (!Str::contains($userAccessPermission->permission->name, 'membership', true) &&
+                !Str::contains($userAccessPermission->permission->name, 'edge', true)) {
+                $permissionNames[] = $userAccessPermission->permission->name;
+            }
+        }
+
+        return $permissionNames;
     }
 
     public function getPlusMembershipExpirationDate(): ?Carbon

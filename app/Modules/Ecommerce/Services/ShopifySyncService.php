@@ -77,7 +77,6 @@ class ShopifySyncService
             $orderCollection = new OrderCollection($orders, $products);
             $this->updateUserData($shopifyCustomerId, $user);
             $this->userAccessPermissionsService->syncShopifyOrders($user, $orderCollection);
-
         } else {
             Log::debug("Customer $shopifyCustomerId: No digital products found");
             $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
@@ -307,5 +306,26 @@ class ShopifySyncService
     {
         $this->shopify->cancelOrder($orderId);
         $this->syncCustomer($shopifyCustomerId, $email);
+    }
+
+    public function syncUser(User $user)
+    {
+        Log::debug("Shopify: syncing user $user->id");
+        $customerResource = $this->getShopifyCustomer($user->getEmail());
+
+        $customerData = [];
+        $customerData["metafields"] = $user->getMetafieldsForShopify();
+        $customerResource = $this->shopify->updateCustomer($customerResource->id, $customerData);
+
+        // record the shopify ID on the User
+        $user->shopify_id = $customerResource->id;
+        $user->saveWithoutUpdatedAt();
+    }
+
+    public function getShopifyCustomer($email): mixed
+    {
+        $customers = $this->shopify->getCustomers(['email' => $email]);
+        $customer = collect($customers)->first(fn($item) => $item->email === $email);
+        return $customer;
     }
 }
