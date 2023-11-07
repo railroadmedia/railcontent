@@ -2,7 +2,9 @@
 
 namespace Modules\UserManagementSystem\Controllers;
 
+use App\Modules\Ecommerce\Models\Product;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
@@ -13,13 +15,23 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
+use Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserDeleted;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\ReportedUser;
 use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\Ecommerce\Entities\Structures\Purchaser;
+use Railroad\Ecommerce\Events\AugustContestReferralClaimed;
 use Railroad\Mailora\Services\MailService;
+use Railroad\Referral\Exceptions\NotFoundException;
+use Railroad\Referral\Exceptions\ReferralException;
+use Railroad\Referral\Exceptions\SaasquatchException;
+use Railroad\Referral\Exceptions\SaasquatchUserExistsException;
+use Railroad\Referral\Models\Referrer;
+use Railroad\Referral\Services\SaasquatchService;
+use Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends Controller
@@ -28,15 +40,61 @@ class UserController extends Controller
     use AuthorizesRequests;
 
     private MailService $mailService;
+    private SaasquatchService $saasquatchService;
 
     /**
      * UserController constructor.
      */
-    public function __construct(MailService $mailService)
+    public function __construct(MailService $mailService, SaasquatchService $saasquatchService)
     {
         $this->mailService = $mailService;
+        $this->saasquatchService = $saasquatchService;
         $this->middleware([ConvertEmptyStringsToNull::class]);
     }
+
+    /**
+     * @throws SaasquatchUserExistsException
+     * @throws ReferralException
+     * @throws SaasquatchException
+     * @throws NotFoundException
+     * @throws Exception
+     */
+    private function applyReferral(string $referralCode, User $user, string $productSku): void
+    {
+        /**
+         * @var $referrer Referrer
+         */
+        $referrer = Referrer::query()->where('referral_code', $referralCode)->firstOrFail();
+
+        $brand = $referrer->brand;
+        $productToAssign = Product::whereSku($productSku)->first();
+
+        if (empty($productToAssign)) {
+            throw new Exception(
+                'Error assigning product to user trying to claim a referral. ' .
+                'Could not find product with configured SKU, ' . $productSku
+            );
+        }
+
+        // increase the referrers referral count for this program and code and add this claimers user id to the column
+        $referrer->referrals_performed += 1;
+
+        $claimedUserIds = $referrer->claimed_user_ids;
+        $claimedUserIds[] = $user->id;
+
+        $referrer->claimed_user_ids = $claimedUserIds;
+
+        $referrer->save();
+
+        $this->saasquatchService->applyReferralCode($user->getId(), $referrer->referral_code, $brand);
+
+        event(new AugustContestReferralClaimed($referrer, $productToAssign->id, $user->getId()));
+        info(
+            "Applied referral code $referralCode for user " . $user->getId(
+            ) . " and triggered event AugustContestReferralClaimed."
+        );
+    }
+
 
     public function createUserWithVerificationToken(Request $request)
     {
@@ -81,6 +139,22 @@ class UserController extends Controller
         $user->save();
 
         event(new UserCreated($user));
+
+        try {
+            $referralCode = Session::pull('referral_code');
+            $productSku = Session::pull('referral_code_product_sku');
+            if ($referralCode && $productSku) {
+                $this->applyReferral(
+                    $referralCode,
+                    $user,
+                    $productSku,
+                );
+            }
+        } catch (Exception $e) {
+            // don't block the user from creating an account if the referral code fails
+            Log::error("Error applying referral code for user $user->id: " . $e->getMessage());
+        }
+
 
         Auth::loginUsingId($user->getId());
 

@@ -95,6 +95,11 @@ class ShopifyCartAPIController extends Controller
             Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
         }
 
+        if ($request->get('referralCode')) {
+            Session::put('referral_code', $request->get('referralCode'));
+            Session::put('referral_code_product_sku', array_keys($productSKUsAndQuantities)[0]);
+        }
+
         $responseData = $this->createLegacyCartResponseDataFromShopifyCartData($cartData);
 
         if ($request->expectsJson()) {
