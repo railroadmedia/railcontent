@@ -337,11 +337,6 @@ class SalesController extends BaseController
         return view('drumeo.sales.pages.tom-sawyer');
     }
 
-    public function drumFest()
-    {
-        return view('drumeo.sales.pages.drumfest');
-    }
-
     public function awards()
     {
         return view('drumeo.lead-gen.pages.awards');
