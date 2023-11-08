@@ -4,6 +4,25 @@
     <title>Create Your Account | Musora</title>
 @endsection
 
+@section('layout-scripts')
+<script>
+function handlePasswordChange() {
+  var passwordInput = document.getElementById('loginPassword');
+  var createAccountButton = document.getElementById('createAccountButton');
+
+  if (passwordInput.value.length >= 8) {
+    createAccountButton.disabled = false;
+    createAccountButton.classList.remove('tw-btn-secondary', 'tw-text-[#445F74]');
+    createAccountButton.classList.add('tw-btn-primary', 'tw-text-black', 'tw-bg-white');
+  } else {
+    createAccountButton.disabled = true;
+    createAccountButton.classList.remove('tw-btn-primary', 'tw-text-black', 'tw-bg-white');
+    createAccountButton.classList.add('tw-btn-secondary', 'tw-text-[#445F74]');
+  }
+}
+</script>
+@endsection
+
 @section('content')
     <div class="tw-w-full tw-h-[100vh] tw-bg-[#000C17] tw-z-0">
         <img
@@ -54,7 +73,7 @@
                                 <label for="loginPassword"
                                        class="tw-text-sm tw-px-[13px] tw-pb-[5px] loginPassword-label dark:tw-text-[#9EC0DC]">Password (minimum of 8 characters)</label>
                                 <div class="tw-flex tw-relative">
-                                    <input data-maska="" data-maska-tokens=""
+                                    <input oninput="handlePasswordChange()"
                                            placeholder="Enter a new account password..."
                                            id="loginPassword"
                                            class="tw-text-[#00101D] tw-border-[#D1D5DB] dark:tw-bg-[#00101D] dark:tw-border-[#445F74] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none tw-w-full tw-h-[50px] tw-text-[#00101D]"
@@ -76,8 +95,8 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="tw-mb-[20px] tw-mx-4 tw-btn-secondary tw-text-[#445F74] tw-mt-4"
-                                dusk="submit-button"> <!----><span>Create Account</span></button>
+                        <button id="createAccountButton" disabled type="submit" class="tw-mb-[20px] tw-mx-4 tw-btn-secondary tw-text-[#445F74] tw-mt-4"
+                                dusk="disabled-submit-button"> <!----><span>Create Account</span></button>
                         <button id="hidden-submit" type="submit" hidden="">Submit</button>
                 </section><!----></div>
         </div>
