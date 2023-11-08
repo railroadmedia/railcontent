@@ -135,8 +135,8 @@
         "songs" => "Thousands of popular songs.",
         "firstPoint" => "Learn piano, guitar, drums, & singing.",
         "thirdPoint" => "Unlimited personal support",
-        "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-30-day-trial-membership]=1&locked=true&referralCode=" . $referralCode,
-        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[musora-monthly-recurring-30-day-trial-membership]=1&locked=true&referralCode=" . $referralCode,
+        "plusAnnualLink" => "/ecommerce/shopify/cart/add-to-cart?products[musora-annual-recurring-30-day-trial-membership]=1&locked=true&referralCode=" . $referralCode,
+        "plusMonthlyLink" => "/ecommerce/shopify/cart/add-to-cart?products[musora-monthly-recurring-30-day-trial-membership]=1&locked=true&referralCode=" . $referralCode,
     ])
 
     @include('musora.sales.components.trial-explanation', [

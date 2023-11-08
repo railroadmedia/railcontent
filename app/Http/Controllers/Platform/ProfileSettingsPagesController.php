@@ -6,6 +6,8 @@ use App;
 use App\Http\Controllers\BaseController;
 use App\Modules\Crux\ProductAccessMap;
 use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\Ecommerce\Services\ShopifyAPIService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Carbon\Carbon;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -106,6 +108,8 @@ class ProfileSettingsPagesController extends BaseController
     private CustomerIoService $customerIoService;
     private ProductRepository $productRepository;
     private UpgradeService $upgradeService;
+    private ShopifyAPIService $shopifyAPIService;
+    private UserAccessPermissionsService $userAccessPermissionsService;
 
     /**
      * @param NotificationSettingsService $notificationSettingsService
@@ -125,7 +129,9 @@ class ProfileSettingsPagesController extends BaseController
         MembershipActionRepository $membershipActionRepository,
         CustomerIoService $customerIoService,
         ProductRepository $productRepository,
-        UpgradeService $upgradeService
+        UpgradeService $upgradeService,
+        ShopifyAPIService $shopifyAPIService,
+        UserAccessPermissionsService $userAccessPermissionsService
     ) {
         $this->notificationSettingsService = $notificationSettingsService;
         $this->userSignaturesRepository = $userSignaturesRepository;
@@ -142,6 +148,8 @@ class ProfileSettingsPagesController extends BaseController
         $this->customerIoService = $customerIoService;
         $this->productRepository = $productRepository;
         $this->upgradeService = $upgradeService;
+        $this->shopifyAPIService = $shopifyAPIService;
+        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
     // ------------------------------------------ "top-level" public methods -------------------------------------------
@@ -218,113 +226,14 @@ class ProfileSettingsPagesController extends BaseController
     {
         $user = user();
 
-        $paymentMethods = $this->paymentMethodRepository->getAllUsersPaymentMethods(
-            $user->id,
-            $request,
-            brand()
-        );
-
-        $paymentMethodsJson = ResponseService::paymentMethod(
-            $paymentMethods
-        )
-            ->respond()
-            ->getContent();
-
-        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.musora.stripe_publishable_key');
-
-        $membershipProductIds = ProductModel::query()
-            ->where([
-                'type' => 'digital subscription',
-                'digital_access_type' => 'all content access',
-                'digital_access_time_type' => 'recurring'
-            ])
-            ->get(['id'])
-            ->pluck('id')
-            ->toArray();
-
-        $currentSubscription = $this->subscriptionRepository->getUserSubscriptionForProducts(
-            $user->id,
-            $membershipProductIds
-        );
-
-        $existingSubscriptionActive = false;
-
-        if (!empty($currentSubscription) && $currentSubscription->getIsActive()) {
-            $existingSubscriptionActive = true;
-        }
-
-        if (!empty($currentSubscription) && !empty($currentSubscription->getProduct())) {
-            $this->cartService->refreshCart();
-
-            $this->cartService->clearCart();
-
-            $this->cartService->addToCart(
-                $currentSubscription->getProduct()
-                    ->getSku(),
-                1,
-                true
-            );
-
-            try {
-                if (!empty($currentSubscription->getPaymentMethod()) && !empty(
-                    $currentSubscription->getPaymentMethod()
-                        ->getBillingAddress()
-                    )) {
-                    $this->cartService->getCart()
-                        ->setBillingAddress(
-                            $currentSubscription->getPaymentMethod()
-                                ->getBillingAddress()
-                                ->toStructure()
-                        );
-                }
-            } catch (Throwable $throwable) {
-            }
-
-            // if current sub price less than product standard price, set "override to display" price
-
-            $subProductDefaultPrice = $currentSubscription->getProduct()->getPrice();
-            $subCurrentPrice = $currentSubscription->getTotalPrice(); // same as $subTransformed['total_price'] below
-
-            if ($subProductDefaultPrice !== $subCurrentPrice) {
-                $subTransformed = $this->subscriptionTransformer->transform($currentSubscription);
-
-                foreach ($this->cartService->getCart()->getItems() as $cartItem) {
-                    $cartItem->setDueOverride($subTransformed['total_price']);
-                }
-            }
-        }
-
-        $payments = $this->paymentRepository->getAllUsersPayments($user->id, false, brand());
-
-        // sort by date
-        usort(
-            $payments,
-            function (Payment $a, Payment $b) {
-                return $a->getCreatedAt() < $b->getCreatedAt();
-            }
-        );
-
-        if ($user->is_lifetime_member) {
-            $currentSubscription = null;
-        }
+        $shopifyOrders = $this->shopifyAPIService->getAllCustomersOrders($user->email);
 
         return view(
             'account.settings.payments',
             [
                 'sections' => $this->settingSections('payments'),
-                'paymentMethodsJson' => $paymentMethodsJson,
-                'stripePublishableKey' => $stripePublishableKey,
-                'countries' => json_encode(array_values(CountryListService::allWithCommonDuplicatedAtTop())),
-                'provinces' => json_encode(array_keys(config('ecommerce.tax_rates_and_options.canada'))),
-                'cartJson' => json_encode($this->cartService->toArray()),
-                'currentSubscription' => $currentSubscription,
-                'existingSubscriptionActive' => $existingSubscriptionActive,
                 'currentUser' => $user,
-                'payments' => $payments,
-                'displayOverrideTax' => $displayOverrideTax ?? false,
-                // todo: remove from here and vuesora because now obsolete
-                'displayOverridePrice' => $displayOverridePrice ?? false,
-                // todo: remove from here and vuesora because now obsolete
+                'shopifyOrders' => $shopifyOrders,
             ]
         );
     }
@@ -392,214 +301,34 @@ class ProfileSettingsPagesController extends BaseController
     public function account(Request $request, $domain, $brand)
     {
         $userId = auth()->id();
-        $ecommerceUser = $this->userProvider->getCurrentUser();
-        $now = Carbon::now();
-        $accessIsFromAppPurchase = false;
-        $isLifetime = false;
 
-        // ---------------------------- determine all owned digital non-membership products ----------------------------
+        $permissions = $this->userAccessPermissionsService->getUserAccessPermissionsList($userId, 1, 50);
 
-        $subscriptionInfo = $this->subscriptionInfo(user()->getId());
+        // is lifetime
+        $isLifetime = $permissions->getIsLifetimeMember();
 
-        $userProductsDigitalAccessTypeSpecific = $subscriptionInfo['userProductsDigitalAccessTypeSpecific'];
-        $pausedSubscriptionStartDate = $subscriptionInfo['pausedSubscriptionStartDate'];
-        $activeAllContentAccessExpiryDate = $subscriptionInfo['activeAllContentAccessExpiryDate'];
-        $hasHadMembership = $subscriptionInfo['hasHadMembership'];
-        $userProducts = $subscriptionInfo['userProducts'];
-        $activeMembershipProducts = $subscriptionInfo['activeMembershipProducts'];
+        // membership expiration date
+        $membershipExpirationDate = $permissions->getMembershipExpirationDate();
 
-        // --------------------------------------- get the active subscription -----------------------------------------
+        // membership level
+        $membershipLevel = $permissions->getMembershipLevel();
 
-        $activeSubscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
+        // all pack permissions
+        $allPackPermissionNames = $permissions->getAllNonMembershipPermissionNames();
 
-        if (!$activeSubscription) {
-            if ($activeAllContentAccessExpiryDate > Carbon::now()) {
-                $membershipWithoutSubscription = true;
-            }
-        } elseif ($activeSubscription->getType() == 'payment plan') {
-            // this shouldn't happen, but when it does at least with this here it won't break things.
-            //  todo: abstract this reduce to redundancy as this is duplicated elsewhere in this class
-            $activeSubscriptions = [];
-            $subscriptionsForUser = $this->subscriptionRepository->getSubscriptionsForUsers([$ecommerceUser->getId()]);
-            foreach ($subscriptionsForUser as $sub) {
-                if ($sub->getIsActive()) {
-                    $activeSubscriptions[] = $sub;
-                }
-            }
-            if (count($activeSubscriptions) === 1) {
-                $activeSubscription = reset($activeSubscriptions);
-                error_log(
-                    'subscriptionRepository->getUserActiveSubscription returned a payment plan rather than a ' .
-                    'subscription for user ' . user()->getId() . '. However all was okay because subscriptionReposit' .
-                    'ory->getSubscriptionsForUsers() returned a sufficient substitute.'
-                );
-            } else {
-                error_log(
-                    'subscriptionRepository->getUserActiveSubscription returned a payment plan rather than a ' .
-                    'subscription for user ' . user()->getId() . '. A hacky fix that calls subscriptionRepository->g' .
-                    'etSubscriptionsForUsers() did not work though because instead of one result it returned ' .
-                    count($activeSubscriptions) . '.'
-                );
-                $this->returnRedirect(
-                    false,
-                    'We\'re sorry, but there\'s been a system error on our end. Please contact Support to expedite ' .
-                    'a solution. (Error code: 4d6c64)'
-                );
-            }
-        }
-
-        // ---------------------------------- have they had a membership previously? ----------------------------------
-
-        $subscriptions = $this->subscriptionRepository->getSubscriptionsForUsers([$userId]);
-
-        foreach ($subscriptions as $subscription) {
-            $isCorrectType = $subscription->getType() == 'subscription';
-
-            $subscriptionProduct = $subscription->getProduct();
-
-            if ($subscriptionProduct) {
-                $subscriptionProductId = $subscriptionProduct->getId();
-                $productsGrantingAllContentAccessIdsOnly = ProductAccessMap::productsGrantingAllContentAccessIdsOnly();
-
-                if ($isCorrectType && in_array($subscriptionProductId, $productsGrantingAllContentAccessIdsOnly)) {
-                    $hasHadMembership = true;
-                    $membershipSubscriptions[] = $subscription;
-                }
-            } else {
-                error_log('subscription ' . $subscription->getId() . ' doesn\'t have a product attached');
-            }
-        }
-
-
-        // --------------------------------------------- is lifetime member --------------------------------------------
-
-        foreach ($userProducts as $userProduct) {
-            if (in_array($userProduct->getProduct()->getId(), [7, 8, 22, 141, 412])) {
-                $isLifetime = true;
-            }
-        }
-
-
-        // --------------------- is their current access remaining from a cancelled subscription? ----------------------
-
-        $noMembershipSubscriptionNowButHadOnePreviously = empty($activeSubscription) && !empty($membershipSubscriptions);
-
-        if ($noMembershipSubscriptionNowButHadOnePreviously && !$isLifetime) {
-            usort($subscriptions, function ($x, $y) {
-                /**
-                 * @var $x Subscription
-                 * @var $y Subscription
-                 */
-                if ($x->getPaidUntil() === $y->getPaidUntil()) {
-                    $xCancelledOn = $x->getCanceledOn() ?? null;
-                    $yCancelledOn = $y->getCanceledOn() ?? null;
-                    if ($xCancelledOn === $yCancelledOn) {
-                        return 0;
-                    }
-                    return $xCancelledOn < $yCancelledOn ? -1 : 1;
-                }
-                return $x->getPaidUntil() < $y->getPaidUntil() ? -1 : 1;
-            });
-
-            $mostRecentSubscription = end($subscriptions);
-            $mostRecentSubscriptionCancelledOn = $mostRecentSubscription->getCanceledOn() ?? null;
-        }
-
-        // ------------------------------------------ access from app purchase -----------------------------------------
-
-        if ($activeSubscription) {
-            // if the student's subscription is administered via a mobile app, we don't offer the same controls and
-            // instead direct them to the Apple's or Google's pages on the matter.
-            if (
-                $activeSubscription->getType() == 'apple_subscription' ||
-                $activeSubscription->getType() == 'google_subscription'
-            ) {
-                $accessIsFromAppPurchase = true;
-            }
-
-            // if the student is an active monthly subscriber we present an offer to upgrade to an annual membership
-            if ($activeSubscription->getType() == 'subscription') {
-                if ($activeSubscription->getIntervalType() == 'month') {
-                    if ($activeSubscription->getIntervalCount() == 1) {
-                        $multiplyFactor = 12;
-                    } elseif ($activeSubscription->getIntervalCount() == 3) {
-                        $multiplyFactor = 4;
-                    } elseif ($activeSubscription->getIntervalCount() == 6) {
-                        $multiplyFactor = 2;
-                    } elseif ($activeSubscription->getIntervalCount() == 2) {
-                        $multiplyFactor = 6;
-                    }
-
-                    if ($multiplyFactor ?? false) {
-                        $offerUpgradeToAnnualPrice = ProductAccessMap::annualSubscriptionPrice();
-                        $currentMonthlySubPricePerYear = $activeSubscription->getTotalPrice() * $multiplyFactor;
-                        $savingsFactor = 1 - ($offerUpgradeToAnnualPrice / $currentMonthlySubPricePerYear);
-                        $savingsPercentageRaw = $savingsFactor * 100;
-
-                        if ($savingsPercentageRaw > self::MINIMUM_SAVINGS_TO_PRESENT_ANNUAL_UPGRADE_OFFER) {
-                            $offerUpgradeToAnnualShowToStudent = true;
-                            $offerUpgradeToAnnualPercentSaved = round($savingsPercentageRaw);
-                        }
-                    }
-                }
-            }
-        }
-
-        // -------------------------------------------------------------------------------------------------------------
-
-        $urlParamsByBrandForTrial = [
-            'drumeo' => 'products[DLM-Trial-1-month]=1&locked=true',
-            'pianote' => 'products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=%2Forder&locked=true',
-            'guitareo' => 'products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=%2Forder&locked=true',
-            'singeo' => 'products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=%2Forder&locked=true',
-        ];
-
-        if ($urlParamsByBrandForTrial[$brand]) {
-            $urlParams = $urlParamsByBrandForTrial[$brand];
-            $addToCartUrlTrial = 'https://' . $brand . '.com/ecommerce/add-to-cart?' . $urlParams;
-            if ($brand == 'drumeo') {
-                $addToCartUrlTrial = 'https://drumeo.com/ecommerce/add-to-cart?' . $urlParams;
-            }
-        } else {
-            $addToCartUrlTrial = 'https://musora.com/';
-        }
-
-        $salesPage['drumeo'] = 'https://www.drumeo.com/lp';
-        $salesPage['pianote'] = 'https://www.pianote.com/lp';
-        $salesPage['guitareo'] = 'https://www.guitareo.com/lp';
-        $salesPage['singeo'] = 'https://www.singeo.com/lp';
-        $salesPageUrl = $salesPage[$brand] ?? $salesPage['drumeo'];
-
-        // -------------------------------------------------------------------------------------------------------------
-
-        $currentTier = $this->upgradeService->getSubscriptionMembershipTier($isLifetime)->value;
-        $proratedUpgradeCost = $this->upgradeService->getProratedUpgradeCost();
-        $showManageSongsButton = !user()->isAdmin()
-            && ($isLifetime || $this->upgradeService->getCurrentSubscription() != null);
+        // recharge UI
+        $shopifyCustomerAccessToken = $this->shopifyAPIService->getCustomerAccessTokenFromMultipass(user()->getEmail());
 
         return view(
             'account.settings.account',
             [
                 'user' => user(),
                 'sections' => $this->settingSections('account'),
-                'userProductsDigitalAccessTypeSpecific' => $userProductsDigitalAccessTypeSpecific,
-                'activeAllContentAccessExpiryDate' => $activeAllContentAccessExpiryDate,
-                'isLifetime' => $isLifetime,
-                'pausedSubscriptionStartDate' => $pausedSubscriptionStartDate,
-                'accessIsFromAppPurchase' => $accessIsFromAppPurchase,
-                'subscription' => $activeSubscription,
-                'activeMembershipProducts' => $activeMembershipProducts,
-                'hasHadMembership' => $hasHadMembership,
-                'now' => $now,
-                'addToCartUrlTrial' => $addToCartUrlTrial,
-                'salesPageUrl' => $salesPageUrl,
-                'mostRecentSubscriptionCancelledOn' => $mostRecentSubscriptionCancelledOn ?? null,
-                'offerUpgradeToAnnualShowToStudent' => $offerUpgradeToAnnualShowToStudent ?? false,
-                'offerUpgradeToAnnualPercentSaved' => $offerUpgradeToAnnualPercentSaved ?? null,
-                'membershipWithoutSubscription' => $membershipWithoutSubscription ?? false,
-                'currentTier' => $currentTier,
-                'upgradeCost' => $proratedUpgradeCost,
-                'showSongsUpgradeButton' => $showManageSongsButton,
+                'shopifyCustomerAccessToken' => $shopifyCustomerAccessToken,
+                'isLifetimeMember' => $isLifetime,
+                'membershipExpirationDate' => $membershipExpirationDate,
+                'membershipLevel' => $membershipLevel,
+                'allPackPermissionNames' => $allPackPermissionNames,
             ]
         );
     }

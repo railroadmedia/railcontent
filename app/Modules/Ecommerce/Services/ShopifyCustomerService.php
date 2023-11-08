@@ -2,11 +2,9 @@
 
 namespace App\Modules\Ecommerce\Services;
 
-use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
-use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
-use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use Doctrine\ORM\Exception\ORMException;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
@@ -119,16 +117,16 @@ class ShopifyCustomerService
     }
 
     /**
-     * Create the data to post to Shopify to create a Customer from our User
+     * Create the data to post to Shopify to create or update a Customer from our User
      *
      * DEV NOTE: we don't bother looking at the user's customers because our system doesn't allow for
      * new Customers to be made after a User already exists with the same email address.
      *
      * @param User $user
-     * @param bool $withMetafields
+     * @param bool $isCreating
      * @return array
      */
-    private function createCustomerDataForUser(User $user, bool $withMetafields)
+    private function createCustomerDataForUser(User $user, bool $isCreating)
     : array {
         $customerData = [
             "currency" => "USD",
@@ -139,10 +137,24 @@ class ShopifyCustomerService
             // "tags" => "",
         ];
 
-        if ($withMetafields) {
+        if ($isCreating) {
             $customerData["metafields"] = $user->getMetafieldsForShopify();
+        } else {
+            try {
+                $newMetafields = $user->getNewMetafieldsForShopify();
+            } catch (Exception $exception) {
+                Log::error(sprintf(
+                        "Failed to find new metafields to send to Shopify for updating user %s (%s): %s",
+                        $user->id,
+                        $user->email,
+                        $exception->getMessage()
+                    )
+                );
+            }
+            if (!empty($newMetafields)) {
+                $customerData["metafields"] = $newMetafields;
+            }
         }
-
         return $customerData;
     }
 

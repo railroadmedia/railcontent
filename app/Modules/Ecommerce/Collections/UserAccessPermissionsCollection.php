@@ -6,6 +6,7 @@ use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class UserAccessPermissionsCollection
 {
@@ -57,7 +58,16 @@ class UserAccessPermissionsCollection
             }
             if ($userAccessPermission->status == 'revoked') {
                 $userAccessPermission->actualStartTime = Carbon::parse($userAccessPermission->start_time);
-                $userAccessPermission->actualExpirationTime = Carbon::parse($userAccessPermission->revoked_at);
+                $calculatedExpiration = $userAccessPermission->time_fixed ? Carbon::parse(
+                    $userAccessPermission->time_fixed
+                )
+                    : Carbon::parse($userAccessPermission->start_time)->clone()
+                        ->addMinutes($userAccessPermission->time_minutes)
+                        ->addDays($userAccessPermission->time_days)
+                        ->addMonths($userAccessPermission->time_months);
+                $revokedAt = Carbon::parse($userAccessPermission->revoked_at);
+
+                $userAccessPermission->actualExpirationTime = min($revokedAt, $calculatedExpiration);
                 continue;
             }
             $aggregatePrevious = $expirationDate != null
@@ -90,6 +100,40 @@ class UserAccessPermissionsCollection
             self::MusoraBasicMembershipPermission
         ], $includeBuffer);
         return $endDate;
+    }
+
+    /**
+     * @return string|void
+     */
+    public function getMembershipLevel()
+    {
+        if ($this->getIsLifetimeMember()) {
+            return 'lifetime';
+        }
+
+        if (!empty($this->getPlusMembershipExpirationDate())) {
+            return 'plus';
+        }
+
+        if (!empty($this->getBasicMembershipExpirationDate())) {
+            return 'basic';
+        }
+
+        return 'none';
+    }
+
+    public function getAllNonMembershipPermissionNames()
+    {
+        $permissionNames = [];
+
+        foreach ($this->getCollection()->all() as $userAccessPermission) {
+            if (!Str::contains($userAccessPermission->permission->name, 'membership', true) &&
+                !Str::contains($userAccessPermission->permission->name, 'edge', true)) {
+                $permissionNames[] = $userAccessPermission->permission->name;
+            }
+        }
+
+        return $permissionNames;
     }
 
     public function getPlusMembershipExpirationDate(): ?Carbon

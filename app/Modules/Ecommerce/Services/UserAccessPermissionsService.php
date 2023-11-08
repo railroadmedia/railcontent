@@ -230,10 +230,10 @@ class UserAccessPermissionsService
 
     public function shouldSyncCustomerIOWorkspace(User $user, $brand): bool
     {
-        if (config('shopify.enabled')) {
+        if (config('shopify.enabled') && $user->cio_synced_workspaces) {
             return $user->shouldSyncCustomerIoWorkspace($brand);
         }
-        //TODO: remove post shopify
+        //TODO: remove post shopify and $user->cio_synced_workspaces check above
         $userProductService = app(EcommerceUserProductService::class);
 
         return $userProductService->userHadOrHasAnyDigitalProductsForBrand(

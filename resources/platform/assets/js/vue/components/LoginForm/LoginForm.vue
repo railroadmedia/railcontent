@@ -66,6 +66,13 @@ onBeforeMount(() => {
   if(localStorage.getItem("lastEmailUsed") && props.errors.length) {
     emailInput.value = localStorage.getItem("lastEmailUsed");
   }
+
+  let urlParams = new URLSearchParams(window.location.search);
+
+  if(urlParams.has('email')) {
+      emailInput.value = urlParams.get('email');
+  }
+
 });
 </script>
 
@@ -148,7 +155,7 @@ onBeforeMount(() => {
           </template>
           </InputLabel>
         </div>
-        
+
         <LoginButton :disabled="!passwordInput.length || !emailInput.length || isLoading" type="button" @on-button-click="handleButtonClick">
           <span class="tw-flex tw-justify-center tw-items-center" v-if="isLoading"><LoadingSpinner /> SIGNING IN</span>
           <span v-if="!isLoading">SIGN IN</span>
