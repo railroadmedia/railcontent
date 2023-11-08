@@ -38,18 +38,16 @@
             <p class="text-white pt-3"><strong>{{ $lessonTitle }}</strong></p>
             <div class="relative">
                 <div x-data="{ isOpen: [] }" class="h-72 overflow-y-scroll pb-5">
-                    @foreach ($lessons as $i => $lesson)
+                    @foreach ($lessons as $lesson)
                         <div x-data="{ open: false }" class="rounded-lg bg-white shadow mb-1.5">
                             <button class="rounded-lg flex w-full items-center justify-between px-4 py-3.5" style="background: #eff7ff;" x-on:click="open = !open;">
-                                <p class="mx-0 truncate">{{ $lesson }}</p>
+                                <p class="mx-0 truncate">{{ $lesson['title'] }}</p>
                                 <div class="ml-auto text-{{ $brand }} cursor-pointer">
                                     <i class="fas fa-angle-down transform transition-all duration-300" x-bind:class="{ 'rotate-180': open }"></i>
                                 </div>
                             </button>
                             <div x-cloak class="transition-all duration-200 overflow-hidden" x-bind:class="open ? 'max-h-[2000px]' : 'max-h-0'">
-                                <div class="px-4 pb-4 bg-blue-50 rounded-lg">
-                                    {{ $lessons[$i] }}
-                                </div>
+                                   <p class="px-4 pb-4 bg-blue-50 rounded-lg leading-tight">{{ $lesson['description'] }}</p> 
                             </div>
                         </div>
                     @endforeach

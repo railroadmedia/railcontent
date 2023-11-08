@@ -308,13 +308,6 @@
 <!-- Lessons Section -->
 @php
 
-$totalDays = 31;
-$lessons = [];
-
-for ($day = 1; $day <= $totalDays; $day++) {
-     $lessons[] = "Day " . $day;
-}
-
 $features = [
     [
         'title' => 'Course Kick-Off',
@@ -325,6 +318,29 @@ $features = [
         'title' => 'Let’s Get Started',
         'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/easy-chords/start-lesson-poster.jpg',
         'videoId' => 824211328,
+    ],
+];
+
+$lessons = [
+    [
+        'title' => 'Day 1 (Your First Drum Beat - Lesson & Workout 1)',
+        'description' => "In your first week, you'll get one short lesson and five 10-minute workouts where Domino will teach you the beginnings of the most popular drum beat of all time and help you build the muscle memory to learn it and play it!"
+    ],
+    [
+        'title' => 'Your First Drum Beat - Workout 2',
+        'description' => 'Practice your drumming skills with Workout 2.'
+    ],
+    [
+        'title' => 'Your First Drum Beat - Workout 2',
+        'description' => 'Practice your drumming skills with Workout 2.'
+    ],
+    [
+        'title' => 'Your First Drum Beat - Workout 2',
+        'description' => 'Practice your drumming skills with Workout 2.'
+    ],
+    [
+        'title' => 'Your First Drum Beat - Workout 2',
+        'description' => 'Practice your drumming skills with Workout 2.'
     ],
 ];
 @endphp

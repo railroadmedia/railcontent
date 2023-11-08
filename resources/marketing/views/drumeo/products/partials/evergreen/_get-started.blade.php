@@ -14,11 +14,13 @@
             </div>
             {{-- <a href={{$buttonLink}} class="join blue medium w-full sm:w-1/2 md:w-1/3 lg:w-3/5 mt-6 sm:mt-12 mb-3 anchor-slide" role="button">{{$buttonText}}</a><br> --}}
             <div class="w-full flex flex-col items-center pt-4">
-                    @include('drumeo.products.partials.evergreen._button', [
-                        'link' => $buttonLink,
-                        'buttonClass' => 'text-white font-bebas tracking-widest',
-                        'buttonText' => $buttonText,
-                    ])
+                   <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/5">
+            @include('drumeo.products.partials.evergreen._button', [
+                'link' => $buttonLink,
+                'buttonClass' => 'text-white font-bebas tracking-widest',
+                'buttonText' => $buttonText,
+            ])
+</div>
                 <div class="flex flex-row items-center py-2">
                     <img class="h-7 mr-2 lazyload" alt="Joined Student Profiles" data-src={{ $studentProfilesImage }}>
                     <span class="inline-block align-middle leading-tight text-xs">Join

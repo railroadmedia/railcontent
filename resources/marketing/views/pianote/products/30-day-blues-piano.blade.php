@@ -241,12 +241,28 @@
  <!-- Lessons Section -->
 @php
 
-$totalDays = 32;
-$lessons = [];
-
-for ($day = 1; $day <= $totalDays; $day++) {
-     $lessons[] = "Day " . $day;
-}
+$lessons = [
+    [
+        'title' => 'Day 1 (Your First Drum Beat - Lesson & Workout 1)',
+        'description' => "In your first week, you'll get one short lesson and five 10-minute workouts where Domino will teach you the beginnings of the most popular drum beat of all time and help you build the muscle memory to learn it and play it!"
+    ],
+    [
+        'title' => 'Your First Drum Beat - Workout 2',
+        'description' => 'Practice your drumming skills with Workout 2.'
+    ],
+    [
+        'title' => 'Your First Drum Beat - Workout 2',
+        'description' => 'Practice your drumming skills with Workout 2.'
+    ],
+    [
+        'title' => 'Your First Drum Beat - Workout 2',
+        'description' => 'Practice your drumming skills with Workout 2.'
+    ],
+    [
+        'title' => 'Your First Drum Beat - Workout 2',
+        'description' => 'Practice your drumming skills with Workout 2.'
+    ],
+];
 
 $features = [
     [
@@ -333,8 +349,8 @@ $items = [
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
                 <div class="w-52 sm:w-64 lg:w-72 relative -mb-8 sm:mb-0 sm:-mr-8">
-                    <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/coach-profile-m2.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/coach-profile.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/coach-profile-m2.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/coach-profile.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 150%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
 

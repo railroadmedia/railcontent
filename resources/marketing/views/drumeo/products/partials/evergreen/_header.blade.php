@@ -21,7 +21,8 @@
                 <h2 class="-mt-3 sm:-mt-1 lg:mt-0 mb-4">{{ $subtitle }}</h2>
                 @foreach ($checklist as $item)
                     <h6 class="hidden lg:inline p-2 leading-loose">
-                        <i class="fas fa-check-circle text-{{ $brand }}" aria-hidden="true"></i> {{ $item }}
+                        <i class="fas fa-check-circle text-{{ $brand }}" aria-hidden="true"></i>
+                        {{ $item }}
                     </h6>
                 @endforeach
                 <div class="flex inline lg:hidden my-3">
@@ -67,19 +68,29 @@
 
             {{-- <a href={{ $buttonLink }}
                 class="join blue medium w-full sm:w-1/2 lg:w-3/5 anchor-slide" role="button">{{ $buttonText }}</a> --}}
-
-                @include('drumeo.products.partials.evergreen._button', [
-                        'link' => $buttonLink,
-                        'buttonClass' => 'text-white font-bebas tracking-widest',
-                        'buttonText' => $buttonText,
-                    ])
+<div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/5">
+            @include('drumeo.products.partials.evergreen._button', [
+                'link' => $buttonLink,
+                'buttonClass' => 'text-white font-bebas tracking-widest',
+                'buttonText' => $buttonText,
+            ])
+</div>
             <div class="w-full md:w-1/2 text-center p-4">
-                <img class="h-7 mr-2 lazyload" data-src="{{ $studentProfilesImage }}"
-                    alt="Joined student profiles">
+                <img class="h-7 mr-2 lazyload" data-src="{{ $studentProfilesImage }}" alt="Joined student profiles">
                 <span class="inline-block align-middle text-xs leading-tight py-2">Join {{ $numStudents }}
                     {{ $students }} who<br> have already registered.
                 </span>
             </div>
+            @if (!empty($price) || !empty($enrollmentLink) || !empty($brandTitle))
+                <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-{{ $brand }}">
+                    @if (!empty($price))
+                        <a href={{ $enrollmentLink }}>{{ $price }} or get it free with a {{ $brandTitle }}
+                            Membership.</a>
+                    @else
+                        <a href={{ $enrollmentLink }}>Get it free with a {{ $brandTitle }} Membership.</a>
+                    @endif
+                </p>
+            @endif
         </div>
     </div>
 </header>

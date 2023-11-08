@@ -263,18 +263,51 @@
 
  <!-- Lessons Section -->
 @php
-$lessons = ['Day 1 (Your First Drum Beat - Lesson & W...', 'Your First Drum Beat - Workout 2', 'Your First Drum Beat - Workout 3', 'Your First Drum Beat - Workout 4', 'Your First Drum Beat - Workout 5', 'Your First Drum Beat - Workout 6', 'Your First Drum Beat - Workout 7', 'Your First Drum Beat - Workout 8', 'Your First Drum Beat - Workout 9', 'Your First Drum Beat - Workout 10'];
+
+$lessons = [
+    [
+        'title' => 'Day 1 (Your First Drum Beat - Lesson & Workout 1)',
+        'description' => "In your first week, you'll get one short lesson and five 10-minute workouts where Domino will teach you the beginnings of the most popular drum beat of all time and help you build the muscle memory to learn it and play it!"
+    ],
+    [
+        'title' => 'Your First Drum Beat - Workout 2',
+        'description' => 'Practice your drumming skills with Workout 2.'
+    ],
+    [
+        'title' => 'Your First Drum Beat - Workout 2',
+        'description' => 'Practice your drumming skills with Workout 2.'
+    ],
+    [
+        'title' => 'Your First Drum Beat - Workout 2',
+        'description' => 'Practice your drumming skills with Workout 2.'
+    ],
+    [
+        'title' => 'Your First Drum Beat - Workout 2',
+        'description' => 'Practice your drumming skills with Workout 2.'
+    ],
+];
+
 
 $features = [
     [
         'title' => 'Course Kick-Off',
-        'posterImage' => 'https://i.vimeocdn.com/video/1708757353-79d71daade4ab3ad8e9972901dcc2f0ec7622e92750c30791c3aa0b61b19a8ca-d?mw=1000&mh=1000&q=70',
-        'videoId' => 850695588,
+        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/kick-off-30d-drummer.jpeg',
+        'videoId' => 850695588, //738756003
     ],
     [
-        'title' => 'Setup',
-        'posterImage' => 'https://i.vimeocdn.com/video/1708754455-64e0e1a12f933556fcfa50092c4215e3dc1450b33734d888f85c8b2bf861df09-d?mw=1000&mh=1000&q=70',
-        'videoId' => 852833927
+        'title' => 'Acoustic Kit Setup',
+        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/acoustic-kit-setup.jpeg',
+        'videoId' => 852833927 //738759733
+    ],
+    [
+        'title' => 'Electronic Kit Setup',
+        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/electronic-kit-setup.jpeg',
+        'videoId' => 738756159
+    ],
+    [
+        'title' => 'Practice Pad Setup',
+        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/practice-pad-setup.jpeg',
+        'videoId' => 738756159
     ],
 ];
 @endphp
@@ -287,9 +320,35 @@ $features = [
     'features' => $features,
     'lessonTitle' => 'Course Lessons',
     'instructor' => ' Domino Santantonio',
-    'course' => ' 30 video lessons',
+    'course' => ' 30 Days (20 Workouts + 4 Q&As)',
     'lessons' => $lessons
 ])
+
+@php 
+$practiceItems = [
+            [
+                "icon" =>
+                "fa-sharp fa-regular fa-music",
+                "title" => "Know exactly what to practice.",
+                "desc" =>
+                "30-Day Drummer gives you guided play-along workouts every day for thirty days. You’ll know exactly what to work on every time you sit at the drums or practice pad.",
+            ],
+            [
+                "icon" =>
+                "fas fa-regular fa-clock",
+                "title" => "Focused practice time.",
+                "desc" =>
+                "Each exercise includes a countdown timer that tells you exactly how long to practice for. This means you can turn off all distractions and focus on your drumming.",
+            ],
+            [
+                "icon" =>
+                "fas fa-regular fa-infinity",
+                "title" => "Lifetime access.",
+                "desc" =>
+                "30-Day Drummer can become part of your practice routine forever. You’ll have lifetime access to ALL the workouts and Q&A sessions from your class to access anytime you like.",
+            ],
+            ]
+@endphp
 
 <!-- Songs subsection -->
 @include('drumeo.products.partials.evergreen._dropdown', [
@@ -450,23 +509,6 @@ $points = [
     'students' => 'drummers',
     'numStudents' => number_format($nPackOwners ?? 0),
 ])
-    {{-- @component('_partials.components.modal', ['name' => 'waitlistModal'])
-        @slot('content')
-            <div class="relative overflow-y-visible max-w-md px-4 md:px-5 lg:px-7 py-5 md:py-7 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
-                <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
-                <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
-                    next edition of 30-Day Drummer is announced. </p>
-                @include("drumeo.lead-gen.partials.sign-up-form", [
-                        "recaptchaKey" => $recaptchaKey,
-                    "formName" => '30 Day Chops Waitlist',
-                    "formId" => "Drumeo - Engagement - Trigger - 30 Day Chops Waitlist - Web Form",
-                    "buttonText" => "Let Me Know ",
-                    "stacked" => true,
-                    "noSocial" => true,
-                ])
-            </div>
-        @endslot
-    @endcomponent --}}
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
@@ -492,23 +534,6 @@ $points = [
     <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
 
 
-    {{-- <script>
-        $(document).ready(function () {
-            $(document).foundation();
-            $('.comparison tr td:nth-child(3)').on('click', function(){
-                $(this).parents().find('table').removeClass('private books online');
-                $(this).parents().find('table').addClass('online');
-            });
-            $('.comparison tr td:nth-child(4)').on('click', function(){
-                $(this).parents().find('table').removeClass('private books online');
-                $(this).parents().find('table').addClass('books');
-            });
-            $('.comparison tr td:nth-child(5)').on('click', function(){
-                $(this).parents().find('table').removeClass('private books online');
-                $(this).parents().find('table').addClass('private');
-            });
-        });
-    </script> --}}
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
