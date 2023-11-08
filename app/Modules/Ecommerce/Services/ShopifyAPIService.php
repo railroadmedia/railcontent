@@ -484,7 +484,7 @@ class ShopifyAPIService
 
         $responseCartData = $jsonResponse["data"]["cart"] ?? [];
 
-        if ($responseCode !== 200 || empty($responseCartData)) {
+        if ($responseCode !== 200) {
             throw new Exception(
                 "Shopify API call (cart) error: " .
                 "HTTP status code: $responseCode - " .
@@ -492,7 +492,7 @@ class ShopifyAPIService
             );
         }
 
-        return $jsonResponse["data"]["cart"];
+        return $jsonResponse["data"]["cart"] ?? [];
     }
 
     /**
@@ -820,7 +820,12 @@ class ShopifyAPIService
     private function applySpecialDiscountCodesAndRules($cartId)
     {
         $cartData = $this->getCart($cartId);
-        $currentDiscountCodes = collect($cartData['discountCodes'])->pluck('code')->toArray();
+
+        if (empty($cartData)) {
+            return true;
+        }
+
+        $currentDiscountCodes = collect($cartData['discountCodes'] ?? [])->pluck('code')->toArray();
         $applyAnnualMembershipDiscountCode = false;
         $freeWithAnnualDiscountCode = config('shopify.freeWithAnnualDiscountCode');
 

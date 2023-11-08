@@ -37,6 +37,8 @@ class ShopifyCartAPIController extends Controller
     public function createOrAddToCart(Request $request)
     {
         $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
+        $existingCart = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
+
         $productSKUsAndQuantities = $request->get('products', []); // $products = ['product-sku' => quantity, ...]
 
         $productsWithSellingPlans =
@@ -54,7 +56,7 @@ class ShopifyCartAPIController extends Controller
                 ];
         }
 
-        if (empty($existingShopifyCartId)) {
+        if (empty($existingShopifyCartId) || empty($existingCart)) {
             $cartData = $this->shopifyStoreFrontAPIService->createCart(
                 $productVariantIdsAndQuantitiesToAdd,
                 ['my-discount01']
@@ -332,6 +334,10 @@ class ShopifyCartAPIController extends Controller
         $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
 
         $cartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
+
+        if (empty($cartData)) {
+            return redirect()->back();
+        }
 
         $checkoutURL = $cartData['checkoutUrl'];
 
