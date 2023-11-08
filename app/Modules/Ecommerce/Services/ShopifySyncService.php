@@ -316,7 +316,7 @@ class ShopifySyncService
 
         $shopifyCustomerId = $customerResource['id'];
         $customerData = [];
-        $customerData["metafields"] = $user->getMetafieldsForShopify();
+        $customerData["metafields"] = $user->getNewMetafieldsForShopify();
         $this->shopify->updateCustomer($shopifyCustomerId, $customerData);
 
         // record the shopify ID on the User
