@@ -134,8 +134,14 @@ class UserAccessPermissionsService
         $this->handleUserPermissionsUpdatedEvent($user);
     }
 
-    public function syncShopifyOrders(User $user, OrderCollection $orderCollection): void
-    {
+    public function syncShopifyOrders(
+        User $user,
+        OrderCollection $orderCollection,
+        $isRebuildingPermissions = false
+    ): void {
+        if ($isRebuildingPermissions) {
+            $this->removeExistingPermissions($user);
+        }
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
         $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($user->id);
 
@@ -536,5 +542,19 @@ class UserAccessPermissionsService
             $brands = array_unique(array_merge($brands, $orderBrands));
         };
         return $brands;
+    }
+
+    public function removeExistingPermissions(User $user): void
+    {
+        $rebuildSources = [
+            UserAccessPermissionsSourceEnum::Web->value,
+            UserAccessPermissionsSourceEnum::Apple->value,
+            UserAccessPermissionsSourceEnum::Google->value,
+            UserAccessPermissionsSourceEnum::Migration->value
+        ];
+
+        UserAccessPermission::on('musora_laravel_mysql::write')
+            ->where('user_id', '=', $user->id)
+            ->whereIn('source', $rebuildSources)->delete();
     }
 }

@@ -57,7 +57,7 @@ class ShopifySyncService
         $this->shopifyGateway = $shopifyGateway;
     }
 
-    public function syncCustomer($shopifyCustomerId, $email = ''): void
+    public function syncCustomer($shopifyCustomerId, $email = '', bool $isRebuildingPermissions = false): void
     {
         if (!$shopifyCustomerId) {
             $user = $this->userService->getByEmailOrNull($email);
@@ -77,7 +77,7 @@ class ShopifySyncService
             $user = $this->getOrCreateUser($shopifyCustomerId, $email);
             $orderCollection = new OrderCollection($orders, $products);
             $this->updateUserData($shopifyCustomerId, $user);
-            $this->userAccessPermissionsService->syncShopifyOrders($user, $orderCollection);
+            $this->userAccessPermissionsService->syncShopifyOrders($user, $orderCollection, $isRebuildingPermissions);
         } else {
             Log::debug("Customer $shopifyCustomerId: No digital products found");
             $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
