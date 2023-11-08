@@ -1426,7 +1426,7 @@ class CustomerIoSyncEventListener
     private function getCustomerIoDataFromOrders(?OrderCollection $orderCollection, $subscriptions): array
     {
         $attributes = $this->getOrderAttributes($orderCollection);
-        $attirubtes = array_merge($attributes, $this->getSubscriptionAttributes($subscriptions));
+        $attributes = array_merge($attributes, $this->getSubscriptionAttributes($subscriptions));
         return $attributes;
     }
 
@@ -1456,12 +1456,16 @@ class CustomerIoSyncEventListener
             /** @var Order $order */
             return $order->lineItems->filter(function ($orderLineItem) {
                 /** @var OrderLineItem $orderLineItem */
-                return $orderLineItem->product && $orderLineItem->product->isDigital(
-                    ) && $orderLineItem->product->isPack();
+                return $orderLineItem->product
+                    && $orderLineItem->product->isDigital()
+                    && $orderLineItem->product->isPack();
             });
         })->groupBy(function ($orderLineItem) {
             /** @var OrderLineItem $orderLineItem */
-            return $orderLineItem->product && $orderLineItem->product->brand;
+            if ($orderLineItem->product) {
+                return $orderLineItem->product->brand;
+            }
+            return 'unknown';
         });
 
         $brands = config('event-data-synchronizer.customer_io_brands_to_sync');

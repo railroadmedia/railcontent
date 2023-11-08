@@ -101,8 +101,6 @@ class MigrateRechargeSubscriptions extends Command
             });
 
 
-
-
             $productIds = $mappedProducts->mapWithKeys(
                 function ($product) use ($shopify) {
                     try {
@@ -219,6 +217,9 @@ class MigrateRechargeSubscriptions extends Command
     private function getNextChargeDate(Subscription $subscription)
     {
         $nextInterval = Carbon::parse($subscription->paid_until);
+        if ($nextInterval < Carbon::parse('2023-11-09')) {
+            $nextInterval->addDay();
+        }
         return $nextInterval->isoFormat('YYYY-MM-DD');
     }
 }

@@ -68,20 +68,22 @@ class RevenueCatService
             foreach ($entitlements as $entitlement) {
                 $productIdentifier = $entitlement->product_identifier;
                 $subscriptionData = $subscriptions->$productIdentifier;
-                if (Carbon::parse($subscriptionData->expires_date) >= now()->subDays(config(
-                                                                                         'ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only',
-                                                                                         7
-                                                                                     ))) {
+                if (Carbon::parse($subscriptionData->expires_date) >= now()->subDays(
+                        config(
+                            'ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only',
+                            7
+                        )
+                    )) {
                     $active = true;
                 }
                 $type = (strtolower($subscriptionData->store) == 'app_store') ? 'apple' : 'google';
-                $store = $type.'_store';
+                $store = $type . '_store';
                 if ($subscriptionData->period_type == 'trial') {
-                    $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]];
+                    $productsMap = [config('ecommerce.' . $store . '_products_map_trial')[$productIdentifier]];
                 } else {
                     $productsMap = array_merge(
-                        [config('ecommerce.'.$store.'_products_map')[$productIdentifier]],
-                        [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]]
+                        [config('ecommerce.' . $store . '_products_map')[$productIdentifier]],
+                        [config('ecommerce.' . $store . '_products_map_trial')[$productIdentifier]]
                     );
                 }
 
@@ -94,7 +96,7 @@ class RevenueCatService
                     $musoraSubscription =
                         Subscription::query()
                             ->where('user_id', '=', $userId)
-                            ->where('type', '=', $type.'_subscription')
+                            ->where('type', '=', $type . '_subscription')
                             ->whereIn(
                                 'product_id',
                                 $musoraProduct->pluck('id')
@@ -154,13 +156,13 @@ class RevenueCatService
      * @param array $aliases
      * @return User|null
      */
-    public function getUser($value = null, $appUserId, $createIfNotExists = false, $aliases = [])
-    : ?User {
-        if(empty($aliases)){
+    public function getUser($value = null, $appUserId, $createIfNotExists = false, $aliases = []): ?User
+    {
+        if (empty($aliases)) {
             $aliases = [$appUserId];
         }
         $user =
-            User::query()
+            User::on('musora_laravel_mysql::write')
                 ->where('email', $value)
                 ->orWhereIn('revenuecat_origin_app_user_id', $aliases)
                 ->first();
@@ -169,7 +171,7 @@ class RevenueCatService
             $user = new User;
             $user->email = $value;
             $user->setPassword($value);
-            $user->display_name = $parts[0].rand(10000, 99999);
+            $user->display_name = $parts[0] . rand(10000, 99999);
             $user->revenuecat_origin_app_user_id = $appUserId;
             $user->save();
             event(new UserCreated($user));
@@ -196,14 +198,14 @@ class RevenueCatService
         $app = 'Musora'
     ) {
         Log::debug(
-            'Call revoke API '.
-            $productIdentifier.
-            ' for '.
-            $userId.
+            'Call revoke API ' .
+            $productIdentifier .
+            ' for ' .
+            $userId .
             ' on Revenuecat(user access revoked from Google Play Console)'
         );
 
-        $results =  $this->revenueCatApiGateway->revoke($userId, $productIdentifier, $platform, $app);
+        $results = $this->revenueCatApiGateway->revoke($userId, $productIdentifier, $platform, $app);
         Log::debug(print_r($results, true));
 
         return $results;
