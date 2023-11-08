@@ -90,17 +90,6 @@ class UserAccessPermissionsCollection
         if ($expirationDate > Carbon::maxValue()) {
             $expirationDate = Carbon::maxValue();
         }
-        if (!$expirationDate) {
-            //if expiration date cannot be determined from active permissions use revoked ones
-            //this case if to handle isEdgeExpired on mobile which needs an membership in the past
-            foreach ($userAccessPermissions as $userAccessPermission) {
-                if ($userAccessPermission->status == 'revoked') {
-                    $expirationDate =
-                }
-            }
-        }
-
-
         return array($startDate, $expirationDate);
     }
 
