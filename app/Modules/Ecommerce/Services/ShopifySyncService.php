@@ -57,7 +57,7 @@ class ShopifySyncService
         $this->shopifyGateway = $shopifyGateway;
     }
 
-    public function syncCustomer($shopifyCustomerId, $email = ''): void
+    public function syncCustomer($shopifyCustomerId, $email = '', bool $isRebuildingPermissions = false): void
     {
         if (!$shopifyCustomerId) {
             $user = $this->userService->getByEmailOrNull($email);
@@ -73,11 +73,11 @@ class ShopifySyncService
         if ($products->contains(fn(Product $product) => $product->isDigital())) {
             $count = $orders->count();
             Log::debug("Customer $shopifyCustomerId: Found $count orders");
+
             $user = $this->getOrCreateUser($shopifyCustomerId, $email);
             $orderCollection = new OrderCollection($orders, $products);
             $this->updateUserData($shopifyCustomerId, $user);
-            $this->userAccessPermissionsService->syncShopifyOrders($user, $orderCollection);
-
+            $this->userAccessPermissionsService->syncShopifyOrders($user, $orderCollection, $isRebuildingPermissions);
         } else {
             Log::debug("Customer $shopifyCustomerId: No digital products found");
             $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
@@ -267,7 +267,8 @@ class ShopifySyncService
             return $this->userService->createUser(
                 $email,
                 config('user_management_system.default_user_password'),
-                shopifyCustomerId: $shopifyCustomerId
+                shopifyCustomerId: $shopifyCustomerId,
+                requiresPasswordUpdate: true
             );
         }
         throw new Exception("User not found for shopify customer id $shopifyCustomerId");
@@ -291,9 +292,43 @@ class ShopifySyncService
         return $this->shopify->getOrder($orderId);
     }
 
+    public function getCustomerOrderIdByProcessedAtDate(int $shopifyCustomerId, Carbon $processedAt): int|null
+    {
+        $orders = $this->shopifyGateway->getCustomerOrderByProcessAtDate($shopifyCustomerId, $processedAt);
+        return collect($orders)->first()?->legacyResourceId ?? null;
+    }
+
     public function updateUserData(int $shopifyCustomerId, User $user): void
     {
         $user->shopify_id = $shopifyCustomerId;
         $user->save();
+    }
+
+    public function cancelOrder(int $shopifyCustomerId, string $email, int $orderId): void
+    {
+        $this->shopify->cancelOrder($orderId);
+        $this->syncCustomer($shopifyCustomerId, $email);
+    }
+
+    public function syncUser(User $user)
+    {
+        Log::debug("Shopify: syncing user $user->id");
+        $customerResource = $this->getShopifyCustomer($user->email);
+
+        $shopifyCustomerId = $customerResource['id'];
+        $customerData = [];
+        $customerData["metafields"] = $user->getNewMetafieldsForShopify();
+        $this->shopify->updateCustomer($shopifyCustomerId, $customerData);
+
+        // record the shopify ID on the User
+        $user->shopify_id = $shopifyCustomerId;
+        $user->saveWithoutUpdatedAt();
+    }
+
+    public function getShopifyCustomer($email): mixed
+    {
+        $customers = $this->shopify->getCustomers(['email' => $email]);
+        $customer = collect($customers)->first(fn($item) => $item->email === $email);
+        return $customer;
     }
 }

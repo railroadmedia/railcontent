@@ -16,7 +16,6 @@
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <style>
-
         .text-dull-navy {
             color:#13618B;
         }
@@ -29,19 +28,27 @@
     ])
 
     <header class="text-white px-5 sm:px-6 pt-72 pb-10 sm:py-20 lg:py-24 relative" style="background-color:#013350;">
-        <div class="inset-0 absolute z-0 bg-top bg-cover block sm:hidden" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/header-bg-m.jpg')"></div>
+        <div class="inset-0 absolute z-0 bg-top block sm:hidden" style="background-size: 365px;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/header-bg-m.jpg')"></div>
         <div class="inset-0 absolute z-0 bg-top bg-cover hidden sm:block" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/header-bg.jpg')"></div>
         <div class="container max-w-4xl mx-auto relative z-10">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-5/12 text-center lg:text-left">
                     <img class="hidden sm:inline-block h-24 lg:h-32" alt="logo" fetchpriority="high"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/logo.png">
-                    <p class="leading-normal my-4 sm:my-6">The 15 Rudiments You Actually Need To Know (And How To Learn Them Quickly)</p>
-                    <p class="text-musora">LAUNCH SPECIAL</p>
+                    <h6 class="leading-normal my-4 sm:my-6">
+                        The 15 Rudiments You Actually Need To<br class="sm:hidden">
+                        Know (And How To Learn Them Quickly)</h6>
+                    <h6 class="leading-normal text-musora">LAUNCH SPECIAL</h6>
                     <h3 class="mb-4 sm:mb-6">
                         @if(floatval($productPrices['easy-rudiments-book']->price) > floatval($productPrices['easy-rudiments-book']->discounted_price))
                             <s class="opacity-60">${{ floatval($productPrices['easy-rudiments-book']->price) }}</s>
-                            <strong>${{ floatval($productPrices['easy-rudiments-book']->discounted_price) }}</strong>
+                            <strong>
+                                @if(number_format(floatval($productPrices['easy-rudiments-book']->discounted_price), 2) == intval(floatval($productPrices['easy-rudiments-book']->discounted_price)))
+                                    ${{  floatVal(floatval($productPrices['easy-rudiments-book']->discounted_price))  }}
+                                @else
+                                    ${{  number_format(floatval($productPrices['easy-rudiments-book']->discounted_price), 2)  }}
+                                @endif
+                            </strong>
                             <span class="text-musora">(SAVE {{ round(100 - (100 * (floatval($productPrices['easy-rudiments-book']->discounted_price) / floatval($productPrices['easy-rudiments-book']->price)))) }}%)</span>
                         @else
                             <strong>${{ floatval($productPrices['easy-rudiments-book']->discounted_price) }}</strong>
@@ -52,12 +59,11 @@
             </div>
         </div>
     </header>
-    <section class="text-left px-5 sm:px-6 py-8 sm:py-10 lg:py-14 bg-white relative">
-        <div class="inset-0 absolute z-0 bg-top bg-cover block sm:hidden" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/content-bg-m.jpg')"></div>
-        <div class="inset-0 absolute z-0 bg-cover hidden sm:block" style="background-position:58% 50%;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/content-bg.jpg')"></div>
+    <section class="text-left sm:px-6 pt-8 sm:py-10 lg:py-14 bg-white relative">
+        <div class="inset-0 absolute z-0 bg-cover hidden sm:block mx-auto" style="max-width: 1700px;background-position:58% 50%;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/content-bg.jpg')"></div>
         <div class="container max-w-5xl mx-auto relative z-10">
             <div class="flex flex-wrap sm:flex-nowrap items-start lg:items-center">
-                <div class="w-full sm:w-2/3 mb-24 sm:mb-0 sm:pr-10 lg:pr-12">
+                <div class="w-full sm:w-2/3 px-5 sm:pl-0 sm:pr-10 lg:pr-12">
                     <h4 class="leading-tight mb-3 sm:mb-6"><strong>Rudiments are boring.</strong></h4>
                     <p class="leading-normal">Well, they can be. Especially when all you see are 40 random dots on a page and no way to connect them to actually playing music.
                         <br><br>
@@ -75,9 +81,9 @@
                         </ul>
                         <p class="leading-normal">It’s all the info you need to start using rudiments to actually improve your drumming.</p>
                 </div>
-                <div class="w-full sm:w-1/3 sm:pl-5 lg:pl-14 justify-center">
-                    <p class="leading-normal mb-3 sm:mb-5 w-auto"><strong>Meet The Fab 15:</strong></p>
-                    <ol class="pl-6 list-decimal w-auto">
+                <div class="w-full sm:w-1/3 px-5 pt-14 pb-8 sm:py-0 sm:pr-0 sm:pl-5 lg:pl-14 justify-center relative">
+                    <p class="leading-normal mb-3 sm:mb-5 w-auto relative z-10"><strong>Meet The Fab 15:</strong></p>
+                    <ol class="pl-6 list-decimal w-auto relative z-10">
                         <li class="leading-none mb-3">Single Stroke Roll</li>
                         <li class="leading-none mb-3">Multiple Bounce Roll</li>
                         <li class="leading-none mb-3">Double Stroke Roll</li>
@@ -94,23 +100,24 @@
                         <li class="leading-none mb-3">Flam Accent</li>
                         <li class="leading-none mb-3">Swiss Army Triplet</li>
                     </ol>
+                    <div class="inset-0 absolute z-0 bg-bottom block sm:hidden" style="background-size: 370px;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/content-bg-m.jpg')"></div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="text-center text-white py-10 sm:py-14 lg:py-20 bg-cover bg-center" style="background-color:#013350;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/demo-bg.jpg');">
+    <section class="text-center text-white py-7 sm:py-14 lg:py-20 bg-cover bg-center" style="background-color:#013350;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/demo-bg.jpg');">
         <h3 class="leading-tight"><strong>Take A Look Inside.</strong></h3>
         <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative" style="bottom:-7px"></i> <em>Click to see inside the book!</em> <i class="fa-light fa-arrow-turn-down ml-1 relative" style="bottom:-7px"></i></p>
-        <div class="max-w-xs sm:max-w-md mx-auto">
+        <div class="max-w-xs sm:max-w-md mx-auto px-16 sm:px-0">
             <a target="_blank" href="https://d21q7xesnoiieh.cloudfront.net/marketing/drumeo/products/easy-rudiments/preview-christmas-songbook.pdf">
                 <div class="w-full bg-center bg-cover" style="padding-bottom:135%;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/book-cover2.webp');"></div>
             </a>
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f1f7fe;">
-        <div class="container max-w-5xl mx-auto mb-16 lg:mb-5">
+        <div class="container max-w-5xl mx-auto mb-16 lg:mb-5" x-data="{ open: false }">
             <h3 class="mb-5 sm:mb-8 lg:mb-10"><strong>See what drummers are saying:</strong></h3>
-            <div class="flex flex-wrap text-left">
+            <div class="flex flex-wrap text-left overflow-hidden relative" x-bind:class="open ? 'max-h-full' : 'max-h-[670px] sm:max-h-[580px] lg:max-h-full'">
                 @php
                     $testimonials = [
                         [
@@ -163,8 +170,9 @@
                         </div>
                     </div>
                 @endforeach
-
+                <div class="absolute bottom-0 left-0 right-0 h-16 z-10 lg:hidden" x-bind:class="{ 'hidden': open }" style="background:linear-gradient(to bottom, transparent, #f1f7fe);"></div>
             </div>
+            <div class="join drumeo outline smaller lg:hidden" x-on:click="open = !open;" x-bind:class="{ 'hidden': open }">Show All</div>
         </div>
     </section>
     <div id="final" class="anchor"></div>
@@ -177,12 +185,20 @@
                 <div class="w-full sm:w-1/2 text-center lg:text-left sm:pr-5">
                     <img class="hidden sm:inline-block h-24 lg:h-32" alt="logo" fetchpriority="high"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/logo.png">
-                    <p class="leading-normal my-4 sm:my-6">The 15 Rudiments You Actually Need To Know (And How To Learn Them Quickly)</p>
-                    <p class="text-musora">LAUNCH SPECIAL</p>
+                    <h6 class="leading-normal my-4 sm:my-6">
+                        The 15 Rudiments You Actually Need To<br class="sm:hidden">
+                        Know (And How To Learn Them Quickly)</h6>
+                    <h6 class="leading-normal text-musora">LAUNCH SPECIAL</h6>
                     <h3 class="mb-4 sm:mb-6">
                         @if(floatval($productPrices['easy-rudiments-book']->price) > floatval($productPrices['easy-rudiments-book']->discounted_price))
                             <s class="opacity-60">${{ floatval($productPrices['easy-rudiments-book']->price) }}</s>
-                            <strong>${{ floatval($productPrices['easy-rudiments-book']->discounted_price) }}</strong>
+                            <strong>
+                                @if(number_format(floatval($productPrices['easy-rudiments-book']->discounted_price), 2) == intval(floatval($productPrices['easy-rudiments-book']->discounted_price)))
+                                    ${{  floatVal(floatval($productPrices['easy-rudiments-book']->discounted_price))  }}
+                                @else
+                                    ${{  number_format(floatval($productPrices['easy-rudiments-book']->discounted_price), 2)  }}
+                                @endif
+                            </strong>
                             <span class="text-musora">(SAVE {{ round(100 - (100 * (floatval($productPrices['easy-rudiments-book']->discounted_price) / floatval($productPrices['easy-rudiments-book']->price)))) }}%)</span>
                         @else
                             <strong>${{ floatval($productPrices['easy-rudiments-book']->discounted_price) }}</strong>

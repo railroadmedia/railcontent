@@ -268,12 +268,7 @@
         <div class="flex flex-wrap justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-7 mx-auto text-center">
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                 <a class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group"
-
-{{--                    @if(!empty($memberVersion))--}}
-{{--                        href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-headphones' => 1], 'redirect' => '/order', 'locked' => 'false', 'promo-code' => 'members-special']) }}"--}}
-{{--                    @else--}}
 {{--                        href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-headphones' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"--}}
-{{--                    @endif--}}
                 >
                     <p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl font-extrabold uppercase" style="background: linear-gradient(180deg, #F51A30 0%, #9A1120 64.29%);">
                         LAUNCH SPECIAL

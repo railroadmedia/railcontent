@@ -74,7 +74,7 @@
                             :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                             :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'" :data-content-id="item.id"
                             :data-content-type="item.type"
-                            @click.prevent="showDropdown ? state.dropdownOpen = !state.dropdownOpen : $emit('addToList', { content_id: item.id, type: item.type, name: mappedData.color_title, description: mappedData.black_title, thumbnail_url: mappedData.thumbnail })">
+                            @click.prevent="showDropdown ? state.dropdownOpen = !state.dropdownOpen : $emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.black_title, thumbnail_url: mappedData.thumbnail })">
                             <svg v-if="showDropdown" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.5 5.20768L12.5 5.2181M12.5 12.4993L12.5 12.5098M12.5 19.791L12.5 19.8014M12.5 6.24935C11.9247 6.24935 11.4583 5.78298 11.4583 5.20768C11.4583 4.63239 11.9247 4.16602 12.5 4.16602C13.0753 4.16602 13.5417 4.63239 13.5417 5.20768C13.5417 5.78298 13.0753 6.24935 12.5 6.24935ZM12.5 13.541C11.9247 13.541 11.4583 13.0746 11.4583 12.4993C11.4583 11.9241 11.9247 11.4577 12.5 11.4577C13.0753 11.4577 13.5417 11.9241 13.5417 12.4993C13.5417 13.0746 13.0753 13.541 12.5 13.541ZM12.5 20.8327C11.9247 20.8327 11.4583 20.3663 11.4583 19.791C11.4583 19.2157 11.9247 18.7493 12.5 18.7493C13.0753 18.7493 13.5417 19.2157 13.5417 19.791C13.5417 20.3663 13.0753 20.8327 12.5 20.8327Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -92,7 +92,7 @@
                             :is-open="state.dropdownOpen"
                             :dropdownOptions="dropdownOptions"
                             @closeDropdown="state.dropdownOpen = false"
-                            @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.color_title, description: mappedData.black_title, thumbnail_url: mappedData.thumbnail })"
+                            @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.black_title, thumbnail_url: mappedData.thumbnail })"
                             @progressReset="emitResetProgress({content_id: item.id})"
                         />
                     </div>

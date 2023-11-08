@@ -109,10 +109,12 @@ class UserMembershipFieldsService
         $ownsPacks = $this->userAccessPermissionsService->getOwnsPacks($userAccessPermissions);
 
 
+        $isAMember = $membershipExpirationDate > Carbon::now();
+
         $accessLevel = $this->getAccessLevelName(
             $userId,
             $isLifetimeMember,
-            !empty($representingUserProduct) && $representingUserProduct->isValid(),
+            $isAMember,
             $membershipExpirationDate,
             $ownsPacks
         );

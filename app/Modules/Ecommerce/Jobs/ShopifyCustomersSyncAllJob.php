@@ -20,13 +20,15 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
     private int $take;
     private int $startId;
     private int $endId;
+    private bool $isRebuildingPermissions;
 
-    public function __construct(int $skip, int $take, ?int $startId = null, ?int $endId = null)
+    public function __construct(int $skip, int $take, int $startId, int $endId, $isRebuildingPermissions = false)
     {
         $this->skip = $skip;
         $this->take = $take;
         $this->startId = $startId;
         $this->endId = $endId;
+        $this->isRebuildingPermissions = $isRebuildingPermissions;
     }
 
     function getSkip(): int
@@ -60,7 +62,7 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
         $shopifySyncService = app(ShopifySyncService::class);
         foreach ($items as $item) {
             try {
-                $shopifySyncService->syncCustomer($item->shopify_id);
+                $shopifySyncService->syncCustomer($item->shopify_id, isRebuildingPermissions:  $this->isRebuildingPermissions);
             } catch (\Throwable $ex) {
                 Log::error("Error syncing shopify customer $item->shopify_id: user:$item->id");
                 Log::error($ex);

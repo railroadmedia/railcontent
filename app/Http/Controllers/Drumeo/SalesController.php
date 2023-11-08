@@ -337,11 +337,6 @@ class SalesController extends BaseController
         return view('drumeo.sales.pages.tom-sawyer');
     }
 
-    public function drumFest()
-    {
-        return view('drumeo.sales.pages.drumfest');
-    }
-
     public function awards()
     {
         return view('drumeo.lead-gen.pages.awards');
@@ -427,5 +422,10 @@ class SalesController extends BaseController
     public function drummingSystem()
     {
         return view('drumeo.drumshop.pages.drumming-system', ['theme' => 'drumeo']);
+    }
+
+    public function easyRudimentsPlaylist()
+    {
+        return view('drumeo.pages.easy-rudiments-playlist', ['theme' => 'drumeo']);
     }
 }
