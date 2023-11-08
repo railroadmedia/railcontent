@@ -572,7 +572,7 @@ class RevenueCatController extends Controller
             $productsMap = [config('ecommerce.'.$store.'_products_map')[$productId]];
         }
 
-        if ($event['type'] != 'INITIAL_PURCHASE') {
+        if ($event['type'] != 'INITIAL_PURCHASE' && $event['type'] != 'RENEWAL') {
             $productsMap = array_merge(
                 [config('ecommerce.' . $store . '_products_map')[$productId]],
                 [config('ecommerce.' . $store . '_products_map_trial')[$productId]]
