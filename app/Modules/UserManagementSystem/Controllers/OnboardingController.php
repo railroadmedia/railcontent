@@ -39,20 +39,20 @@ class OnboardingController extends Controller
 
         $verificationToken = $request->get('verification_token');
 
-        if (strtolower($verificationToken) !== strtolower(md5($email . config('shopify.accountCreationSecretKey')))) {
-            throw new AuthorizationException('Invalid verification_token.', 403);
-        }
+        // if (strtolower($verificationToken) !== strtolower(md5($email . config('shopify.accountCreationSecretKey')))) {
+        //     throw new AuthorizationException('Invalid verification_token.', 403);
+        // }
 
-        if (user() && user()->getEmail() == $email && !user()->doesRequirePasswordUpdate()) {
-            return redirect()->to('/members');
-        }
+        // if (user() && user()->getEmail() == $email && !user()->doesRequirePasswordUpdate()) {
+        //     return redirect()->to('/members');
+        // }
 
-        $user = User::query()->where('email', $email)->first() ?? null;
+        // $user = User::query()->where('email', $email)->first() ?? null;
 
-        if ($user && !$user->doesRequirePasswordUpdate()) {
-            Auth::logout();
-            return redirect()->route('login', ['email' => $email]);
-        }
+        // if ($user && !$user->doesRequirePasswordUpdate()) {
+        //     Auth::logout();
+        //     return redirect()->route('login', ['email' => $email]);
+        // }
 
         return view('pages.account-creation', ['email' => $email, 'verificationToken' => $verificationToken]);
     }
