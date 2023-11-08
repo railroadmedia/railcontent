@@ -16,6 +16,7 @@ class ShopifyCartAPIController extends Controller
     private ShopifyAPIService $shopifyStoreFrontAPIService;
 
     public const SHOPIFY_CART_ID_SESSION_KEY = 'shopify_session_cart_id';
+    public const SHOPIFY_CART_LOCKED_SESSION_KEY = 'shopify_session_cart_locked';
 
     public function __construct(ShopifyAPIService $shopifyStoreFrontAPIService)
     {
@@ -59,32 +60,21 @@ class ShopifyCartAPIController extends Controller
                 ['my-discount01']
             );
 
+            if ($request->get('locked') == 'true') {
+                Session::put(self::SHOPIFY_CART_LOCKED_SESSION_KEY, true);
+            }
+
             Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
         } else {
-            // clear the cart if locked=true
+            // clear the cart if locked=true or it was locked previously
+            if (Session::get(self::SHOPIFY_CART_LOCKED_SESSION_KEY, false) == true ||
+                $request->get('locked') == 'true') {
+                Session::forget(self::SHOPIFY_CART_LOCKED_SESSION_KEY);
+                $this->shopifyStoreFrontAPIService->clearCart($existingShopifyCartId);
+            }
+
             if ($request->get('locked') == 'true') {
-                $shopifyCartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
-
-                $merchandiseLineItemIdsToDelete = [];
-
-                if (!empty($shopifyCartData['lines']['edges'])) {
-                    foreach ($shopifyCartData['lines']['edges'] as $edge) {
-                        $shopifyLineItemData = $edge['node'];
-
-                        if (empty($shopifyLineItemData)) {
-                            continue;
-                        }
-
-                        $merchandiseLineItemIdsToDelete[] = $shopifyLineItemData['id'];
-                    }
-                }
-
-                if (!empty($merchandiseLineItemIdsToDelete)) {
-                    $cartData = $this->shopifyStoreFrontAPIService->removeCartItems(
-                        $existingShopifyCartId,
-                        $merchandiseLineItemIdsToDelete
-                    );
-                }
+                Session::put(self::SHOPIFY_CART_LOCKED_SESSION_KEY, true);
             }
 
             $cartData = $this->shopifyStoreFrontAPIService->addToCart(
@@ -148,6 +138,11 @@ class ShopifyCartAPIController extends Controller
 
         if (empty($existingShopifyCartId)) {
             throw new NotFoundHttpException();
+        }
+
+        if (Session::get(self::SHOPIFY_CART_LOCKED_SESSION_KEY, false) == true) {
+            Session::forget(self::SHOPIFY_CART_LOCKED_SESSION_KEY);
+            $this->shopifyStoreFrontAPIService->clearCart($existingShopifyCartId);
         }
 
         $shopifyCartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
@@ -215,6 +210,11 @@ class ShopifyCartAPIController extends Controller
 
         if (empty($existingShopifyCartId)) {
             throw new NotFoundHttpException();
+        }
+
+        if (Session::get(self::SHOPIFY_CART_LOCKED_SESSION_KEY, false) == true) {
+            Session::forget(self::SHOPIFY_CART_LOCKED_SESSION_KEY);
+            $this->shopifyStoreFrontAPIService->clearCart($existingShopifyCartId);
         }
 
         $shopifyCartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
@@ -380,6 +380,7 @@ class ShopifyCartAPIController extends Controller
                         "tax" => (float)($shopifyCartData['cost']['totalTaxAmount']['amount'] ?? 0),
                         "due" => (float)($shopifyCartData['cost']['totalAmount']['amount'] ?? 0),
                     ],
+                    'locked' => Session::get(self::SHOPIFY_CART_LOCKED_SESSION_KEY, false),
                 ]
             ]
         ];

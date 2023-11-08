@@ -237,6 +237,40 @@ class ShopifyAPIService
 
     /**
      * @param $cartId
+     * @return true
+     * @throws HttpRequestException
+     * @throws MissingArgumentException
+     */
+    public function clearCart($cartId)
+    {
+        $shopifyCartData = $this->getCart($cartId);
+
+        $merchandiseLineItemIdsToDelete = [];
+
+        if (!empty($shopifyCartData['lines']['edges'])) {
+            foreach ($shopifyCartData['lines']['edges'] as $edge) {
+                $shopifyLineItemData = $edge['node'];
+
+                if (empty($shopifyLineItemData)) {
+                    continue;
+                }
+
+                $merchandiseLineItemIdsToDelete[] = $shopifyLineItemData['id'];
+            }
+        }
+
+        if (!empty($merchandiseLineItemIdsToDelete)) {
+            $this->removeCartItems(
+                $cartId,
+                $merchandiseLineItemIdsToDelete
+            );
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $cartId
      * @param array $productVariantIdsAndSellingPlanIdsToAddToCart
      * @return array
      * @throws HttpRequestException
@@ -864,7 +898,7 @@ class ShopifyAPIService
 
         if ($responseCode !== 200 || empty($responseCartData)) {
             throw new Exception(
-                "Shopify API call (cartLinesRemove) error: " .
+                "Shopify API call (cartDiscountCodesUpdate) error: " .
                 "HTTP status code: $responseCode - " .
                 "HTTP response body: $responseBody"
             );
