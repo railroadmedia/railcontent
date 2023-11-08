@@ -7,7 +7,6 @@
 @section('layout-scripts')
 <script>
 function handlePasswordChange() {
-    console.log('aaaaaaaa');
   var passwordInput = document.getElementById('loginPassword');
   var createAccountButton = document.getElementById('createAccountButton');
 
