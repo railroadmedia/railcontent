@@ -830,7 +830,7 @@ class ShopifyAPIService
             $product = $lineItemData['merchandise']['product'];
 
             if (strtolower($product['productType']) == 'digital subscription' &&
-                $lineItemData['cost']['totalAmount'] > 100) {
+                (float)$lineItemData['cost']['totalAmount'] > 100) {
                 $applyAnnualMembershipDiscountCode = true;
             }
         }
@@ -841,7 +841,7 @@ class ShopifyAPIService
             $merchandise = $lineItemData['merchandise'];
             $product = $lineItemData['merchandise']['product'];
 
-            if ($lineItemData['quantity'] > 1) {
+            if ((integer)$lineItemData['quantity'] > 1) {
                 $applyAnnualMembershipDiscountCode = false;
             }
         }
