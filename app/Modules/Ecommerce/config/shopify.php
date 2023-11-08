@@ -13,4 +13,5 @@ return [
     'accountCreationSecretKey' => 'musora_shopify_claim_key_68769727349672736',
     'multipassSecretKey' => ENV('SHOPIFY_MULTIPASS_SECRET_KEY'),
     'rechargeStoreFrontAccessToken' => ENV('RECHARGE_STOREFRONT_ACCESS_TOKEN'),
+    'freeWithAnnualDiscountCode' => 'FREE-W-ANNUAL-6702',
 ];

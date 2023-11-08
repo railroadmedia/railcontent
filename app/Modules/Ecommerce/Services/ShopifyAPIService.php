@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\DataTransferObjects\ShopifyCartDTO;
 use Exception;
+use Illuminate\Support\Arr;
 use Shopify\Clients\Graphql;
 use Shopify\Clients\Storefront;
 use Shopify\Context;
@@ -103,6 +104,7 @@ class ShopifyAPIService
                                     product {
                                         id
                                         title
+                                        productType
                                         description
                                     }
                                 }
@@ -228,7 +230,9 @@ class ShopifyAPIService
             );
         }
 
-        return $jsonResponse["data"]["cartCreate"]["cart"];
+        $cartData = $this->applySpecialDiscountCodesAndRules($responseCartData['id']);
+
+        return $cartData;
     }
 
     /**
@@ -293,7 +297,9 @@ class ShopifyAPIService
             );
         }
 
-        return $jsonResponse["data"]["cartLinesAdd"]["cart"];
+        $cartData = $this->applySpecialDiscountCodesAndRules($cartId);
+
+        return $cartData;
     }
 
     /**
@@ -353,7 +359,9 @@ class ShopifyAPIService
             );
         }
 
-        return $jsonResponse["data"]["cartLinesUpdate"]["cart"];
+        $cartData = $this->applySpecialDiscountCodesAndRules($cartId);
+
+        return $cartData;
     }
 
     /**
@@ -406,7 +414,9 @@ class ShopifyAPIService
             );
         }
 
-        return $jsonResponse["data"]["cartLinesRemove"]["cart"];
+        $cartData = $this->applySpecialDiscountCodesAndRules($cartId);
+
+        return $cartData;
     }
 
     /**
@@ -771,6 +781,96 @@ class ShopifyAPIService
         }
 
         return $allOrdersData;
+    }
+
+    private function applySpecialDiscountCodesAndRules($cartId)
+    {
+        $cartData = $this->getCart($cartId);
+        $currentDiscountCodes = collect($cartData['discountCodes'])->pluck('code')->toArray();
+        $applyAnnualMembershipDiscountCode = false;
+        $freeWithAnnualDiscountCode = config('shopify.freeWithAnnualDiscountCode');
+
+        foreach ($cartData['lines']['edges'] as $lineItemNode) {
+            $lineItemData = $lineItemNode['node'];
+            $merchandise = $lineItemData['merchandise'];
+            $product = $lineItemData['merchandise']['product'];
+
+            if (strtolower($product['productType']) == 'digital subscription' &&
+                $lineItemData['cost']['totalAmount'] > 100) {
+                $applyAnnualMembershipDiscountCode = true;
+            }
+        }
+
+        // don't set if there are any quantities more than 1 or total cart items is more than 10;
+        foreach ($cartData['lines']['edges'] as $lineItemNode) {
+            $lineItemData = $lineItemNode['node'];
+            $merchandise = $lineItemData['merchandise'];
+            $product = $lineItemData['merchandise']['product'];
+
+            if ($lineItemData['quantity'] > 1) {
+                $applyAnnualMembershipDiscountCode = false;
+            }
+        }
+
+        // don't set if there are any quantities more than 1 or total cart items is more than 10;
+        if (count($cartData['lines']['edges']) > 10) {
+            $applyAnnualMembershipDiscountCode = false;
+        }
+
+        if ($applyAnnualMembershipDiscountCode) {
+            // apply code
+            $currentDiscountCodes[] = $freeWithAnnualDiscountCode;
+        } else {
+            if (($key = array_search($freeWithAnnualDiscountCode, $currentDiscountCodes)) !== false) {
+                unset($currentDiscountCodes[$key]);
+            }
+        }
+
+        return $this->applyDiscountCode($cartId, $currentDiscountCodes);
+    }
+
+    private function applyDiscountCode($cartId, array $discountCodes)
+    {
+        $addDiscountCodeInputLineArray = $discountCodes;
+
+        $addDiscountCodeInputLineString = $this->jsonStringToGraphQLObjectString(
+            json_encode($addDiscountCodeInputLineArray, JSON_UNESCAPED_SLASHES)
+        );
+
+        $cartString = self::cartGraphQLReturnDataString;
+        $userErrorString = self::userErrorsGraphQLReturnDataString;
+
+        $cartData = $this->storefrontClient->query(
+            <<<GRAPHQL
+                mutation {
+                    cartDiscountCodesUpdate(
+                        cartId: "$cartId",
+                        discountCodes: $addDiscountCodeInputLineString
+                    ) {
+                    $cartString
+                    $userErrorString
+                }
+            }
+            GRAPHQL,
+        );
+
+        $responseBody = $cartData->getBody()->getContents();
+
+        $responseCode = $cartData->getStatusCode();
+
+        $jsonResponse = json_decode($responseBody, true);
+
+        $responseCartData = $jsonResponse["data"]["cartDiscountCodesUpdate"]["cart"] ?? [];
+
+        if ($responseCode !== 200 || empty($responseCartData)) {
+            throw new Exception(
+                "Shopify API call (cartLinesRemove) error: " .
+                "HTTP status code: $responseCode - " .
+                "HTTP response body: $responseBody"
+            );
+        }
+
+        return $jsonResponse["data"]["cartDiscountCodesUpdate"]["cart"];
     }
 
     private function jsonStringToGraphQLObjectString($jsonString)

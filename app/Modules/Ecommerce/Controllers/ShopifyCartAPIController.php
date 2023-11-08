@@ -62,30 +62,30 @@ class ShopifyCartAPIController extends Controller
             Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
         } else {
             // clear the cart if locked=true
-//            if ($request->get('locked') == 'true') {
-//                $shopifyCartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
-//
-//                $merchandiseLineItemIdsToDelete = [];
-//
-//                if (!empty($shopifyCartData['lines']['edges'])) {
-//                    foreach ($shopifyCartData['lines']['edges'] as $edge) {
-//                        $shopifyLineItemData = $edge['node'];
-//
-//                        if (empty($shopifyLineItemData)) {
-//                            continue;
-//                        }
-//
-//                        $merchandiseLineItemIdsToDelete[] = $shopifyLineItemData['id'];
-//                    }
-//                }
-//
-//                if (!empty($merchandiseLineItemIdsToDelete)) {
-//                    $cartData = $this->shopifyStoreFrontAPIService->removeCartItems(
-//                        $existingShopifyCartId,
-//                        $merchandiseLineItemIdsToDelete
-//                    );
-//                }
-//            }
+            if ($request->get('locked') == 'true') {
+                $shopifyCartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
+
+                $merchandiseLineItemIdsToDelete = [];
+
+                if (!empty($shopifyCartData['lines']['edges'])) {
+                    foreach ($shopifyCartData['lines']['edges'] as $edge) {
+                        $shopifyLineItemData = $edge['node'];
+
+                        if (empty($shopifyLineItemData)) {
+                            continue;
+                        }
+
+                        $merchandiseLineItemIdsToDelete[] = $shopifyLineItemData['id'];
+                    }
+                }
+
+                if (!empty($merchandiseLineItemIdsToDelete)) {
+                    $cartData = $this->shopifyStoreFrontAPIService->removeCartItems(
+                        $existingShopifyCartId,
+                        $merchandiseLineItemIdsToDelete
+                    );
+                }
+            }
 
             $cartData = $this->shopifyStoreFrontAPIService->addToCart(
                 $existingShopifyCartId,

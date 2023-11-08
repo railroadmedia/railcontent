@@ -43,7 +43,7 @@
                 console.log(session);
                 recharge.customer.getCustomerPortalAccess(session).then(portal => {
                     console.log(portal);
-                    document.getElementById('rcPortal').src = portal.portal_url;
+                    document.getElementById('rcPortal').src = portal.portal_url.replace('schedule', 'subscriptions');
                 })
             }).catch(error => {
             console.log(error);
@@ -115,17 +115,10 @@
                 {{-- ================================= Subscription Info Section ================================= --}}
                 {{-- ============================================================================================= --}}
 
-                <div
-                    class="tw-flex tw-flex-wrap tw-border-0 tw-border-t tw-border-b tw-border-gray-300 dark:tw-border-[#223F57] tw-border-solid">
-                    <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-pb-3">
-                        <h1 class="tw-text-2xl tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-text-[#00101D]">
-                            Manage Your Subscription
-                        </h1>
-                    </div>
-
+                <div>
                     <iframe id="rcPortal"
                             src=""
-                            width=100% height=800px></iframe>
+                            width=100% height=850px></iframe>
 
                 </div>
 
