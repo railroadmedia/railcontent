@@ -22,27 +22,28 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav")
 
-    <header class="px-4 py-8 sm:py-12 bg-no-repeat text-white bg-cover bg-center overflow-hidden" style="background:linear-gradient(to right, #022444 50%, #000);">
+    <header class="px-4 py-7 sm:py-9 lg:py-12 bg-no-repeat text-white bg-cover bg-center overflow-hidden" style="background:linear-gradient(to right, #022444 50%, #000);">
         <div class="container mx-auto max-w-4xl">
             <div class="flex flex-wrap items-center">
+                <img class="mx-auto h-24 sm:hidden lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-logo.png" alt="logo">
+                <div class="flex inline-block sm:hidden my-4 text-sm text-center">
+                    <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> No purchase necessary.</p>
+                    <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> No age restrictions.</p>
+                    <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> No location restrictions.</p>
+                </div>
                 <div class="w-full sm:w-5/12 sm:order-1 flex mb-5 sm:mb-0">
                     <img class="mx-0 sm:max-w-lg lg:max-w-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/header-drum-kit.png">
                 </div>
-                <div class="w-full sm:w-7/12 mx-auto sm:pl-8 sm:pl-14 lg:pl-0 text-center sm:text-left px-4 sm:px-0">
-                    <img class="h-24 sm:h-32 lg:h-36 mb-2 lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-logo.png" alt="logo">
+                <div class="w-full sm:w-7/12 mx-auto sm:px-5 lg:pl-0 text-center sm:text-left px-4 sm:px-0">
+                    <img class="hidden sm:inline-block h-28 lg:h-32 mb-3 lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-logo.png" alt="logo">
                     <p class="mb-4">
                         Want a free drum set? Simply enter your email address before <span class="text-white font-extrabold">November 20th</span> to secure your chance to win.
                     </p>
 
-                    <p class="hidden lg:inline-block mb-3 text-sm">
-                        <i class="fas fa-check-circle text-drumeo"></i> No purchase necessary.
-                        <i class="ml-2 fas fa-check-circle text-drumeo"></i> No age restrictions.
-                        <i class="ml-2 fas fa-check-circle text-drumeo"></i> No location restrictions.</p>
-                    <div class="flex inline-block lg:hidden mb-3 text-sm">
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> No purchase necessary.</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> No age restrictions.</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> No location restrictions.</p>
-                    </div>
+                    <p class="hidden sm:inline-block mb-3 text-sm">
+                        <i class="fas fa-check-circle text-drumeo"></i> No age restrictions.<br class="lg:hidden">
+                        <i class="lg:ml-2 fas fa-check-circle text-drumeo"></i> No purchase necessary.<br class="lg:hidden">
+                        <i class="lg:ml-2 fas fa-check-circle text-drumeo"></i> No location restrictions.</p>
                     @include("drumeo.lead-gen.partials.sign-up-form", [
                 "recaptchaKey" => $recaptchaKey,
             "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway - Web Form",
