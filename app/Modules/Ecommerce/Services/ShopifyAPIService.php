@@ -868,7 +868,7 @@ class ShopifyAPIService
         $addDiscountCodeInputLineArray = $discountCodes;
 
         $addDiscountCodeInputLineString = $this->jsonStringToGraphQLObjectString(
-            json_encode($addDiscountCodeInputLineArray, JSON_UNESCAPED_SLASHES)
+            json_encode(array_values($addDiscountCodeInputLineArray), JSON_UNESCAPED_SLASHES)
         );
 
         $cartString = self::cartGraphQLReturnDataString;
