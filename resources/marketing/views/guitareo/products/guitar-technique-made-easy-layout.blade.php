@@ -119,7 +119,7 @@
                 @hasSection('button-change')
                     @yield('button-change')
                 @else
-                    <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GTME-OCT-2018-SEMESTER' => 1], 'redirect' => '/order']) }}" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[GTME-OCT-2018-SEMESTER]=1&redirect=/order" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
                 @endif
 
                 <p class="price-info">
@@ -149,7 +149,7 @@
     {{--<section class="featured-product">--}}
         {{--<div class="noise-wrap">--}}
             {{--<div class="row">--}}
-                {{--<a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GTME-OCT-2018-SEMESTER' => 1], 'redirect' => '/order']) }}">--}}
+                {{--<a href="/ecommerce/add-to-cart?products[GTME-OCT-2018-SEMESTER]=1&redirect=/order">--}}
                     {{--<img class="logo animated tada delay-2s" src="https://d122ay5chh2hr5.cloudfront.net/sales/promos/april/guitar-month-logo.png">--}}
                     {{--<br>--}}
                     {{--<div class="text">--}}
@@ -686,7 +686,7 @@
                 @hasSection('button-change')
                     @yield('button-change')
                 @else
-                    <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GTME-OCT-2018-SEMESTER' => 1], 'redirect' => '/order']) }}" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[GTME-OCT-2018-SEMESTER]=1&redirect=/order" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
                 @endif
 
                 <h6 style="margin-top: 15px;">

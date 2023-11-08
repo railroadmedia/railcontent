@@ -69,7 +69,7 @@
                     {{--<h2>THE <strong>FASTER WAY</strong><br class="hide-for-medium"> TO LEARN GUITAR</h2>--}}
                 {{--</div>--}}
                 <p><strong>Transform your guitar playing with the <br class="show-for-medium">ULTIMATE Encyclopedia of Guitar Lessons</strong></p>
-                <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GUITAR-SYSTEM' => 1],'redirect' => '/order']) }}" class="join" data-product-json='{"GUITAR-SYSTEM": 1}'>Get Started &raquo;</a>
+                <a href="/ecommerce/add-to-cart?products[GUITAR-SYSTEM]=1&redirect=/order" class="join" data-product-json='{"GUITAR-SYSTEM": 1}'>Get Started &raquo;</a>
                 <p class="price-info">
                     @if(floatval($productPrices['GUITAR-SYSTEM']->price) > floatval($productPrices['GUITAR-SYSTEM']->discounted_price))
                         <s>NORMALLY ${{ floatval($productPrices['GUITAR-SYSTEM']->price) }}.</s> &nbsp;<strong><u>ONLY ${{ floatval($productPrices['GUITAR-SYSTEM']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['GUITAR-SYSTEM']->discounted_price) / floatval($productPrices['GUITAR-SYSTEM']->price)))) }}%)
@@ -95,7 +95,7 @@
     {{--<section class="featured-product">--}}
         {{--<div class="noise-wrap">--}}
             {{--<div class="row">--}}
-                {{--<a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GUITAR-SYSTEM' => 1], 'redirect' => '/order']) }}">--}}
+                {{--<a href="/ecommerce/add-to-cart?products[GUITAR-SYSTEM]=1&redirect=/order">--}}
                     {{--<img class="logo animated tada delay-2s" src="https://d122ay5chh2hr5.cloudfront.net/sales/promos/april/guitar-month-logo.png">--}}
                     {{--<br>--}}
                     {{--<div class="text">--}}
@@ -431,8 +431,7 @@
             {{--<img class="logo edge" src="https://d122ay5chh2hr5.cloudfront.net/sales/promos/cyber-monday/logo.png"><br>--}}
             <img class="logo mx-auto" src="https://d122ay5chh2hr5.cloudfront.net/tripwire/gs-logo.png" alt="GS logo">
             <h2>The Ultimate Encyclopedia <br>Of Guitar Lessons</h2>
-            <a href="{{ url()->route('shopping-cart.add-to-cart',
-                ['products' => ['GUITAR-SYSTEM' => 1], 'redirect' => '/order']) }}" class="join" data-product-json='{"GUITAR-SYSTEM": 1}'>Get Started &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[GUITAR-SYSTEM]=1&redirect=/order" class="join" data-product-json='{"GUITAR-SYSTEM": 1}'>Get Started &raquo;</a>
             <p class="breakdown">
                 @if(floatval($productPrices['GUITAR-SYSTEM']->price) > floatval($productPrices['GUITAR-SYSTEM']->discounted_price))
                     <s style="opacity: 0.6;">NORMALLY ${{ floatval($productPrices['GUITAR-SYSTEM']->price) }}.</s> &nbsp;<strong><u>ONLY ${{ floatval($productPrices['GUITAR-SYSTEM']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['GUITAR-SYSTEM']->discounted_price) / floatval($productPrices['GUITAR-SYSTEM']->price)))) }}%)
