@@ -125,6 +125,8 @@ const skillLevelColor = computed(() => {
             return 'tw-bg-[#F06314]';
         case 'Expert':
             return 'tw-bg-[#B91C1C]';
+        default:
+            return 'tw-bg-[#22C55E]';
     }
 });
 
