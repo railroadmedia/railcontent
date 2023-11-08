@@ -1,13 +1,13 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <title>Win a Roland FP-30X Digital Piano | Pianote</title>
-    <meta property="og:title" content="Win a Roland FP-30X Digital Piano | Pianote">
+    <title>Win a Yamaha Stage Custom Drum Set | Drumeo</title>
+    <meta property="og:title" content="Win a Yamaha Stage Custom Drum Set | Drumeo">
 
-    <meta name="description" content="Want a free piano? Simply enter your email address before November 20th to secure your chance to win.">
-    <meta property="og:description" content="Want a free piano? Simply enter your email address before November 20th to secure your chance to win.">
+    <meta name="description" content="Want a free drum set? Simply enter your email address before November 20th to secure your chance to win.">
+    <meta property="og:description" content="Want a free drum set? Simply enter your email address before November 20th to secure your chance to win.">
 
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/share-image2.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -15,57 +15,41 @@
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
-
-
-    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-learn-songs.css') }}" rel="stylesheet">
-    <style>
-        header {
-            background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/header-m.jpg');
-        }
-
-        @media (min-width:768px) {
-            header {
-                background-image:url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/header.jpg');
-            }
-        }
-
-    </style>
 @endsection
 
 @section('global-body')
     @include("drumeo.sales.partials._nav")
 
-    <header class="py-8 sm:py-12 bg-no-repeat text-white bg-cover bg-center" style="background-color:#00101D;">
+    <header class="px-4 py-8 sm:py-12 bg-no-repeat text-white bg-cover bg-center overflow-hidden" style="background:linear-gradient(to right, #022444 50%, #000);">
         <div class="container mx-auto max-w-4xl">
-            <div class="flex flex-wrap">
-                <div class="w-full md:w-4/12 lg:w-4/12 md:order-1 flex justify-center items-center mt-20 sm:mt-0">
-
+            <div class="flex flex-wrap items-center">
+                <div class="w-full sm:w-5/12 sm:order-1 flex mb-5 sm:mb-0">
+                    <img class="mx-0 sm:max-w-lg lg:max-w-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/header-drum-kit.png">
                 </div>
-                <div class="w-full md:w-8/12 lg:w-8/12 mx-auto sm:pl-8 md:pl-14 lg:pl-0 text-center md:text-left px-4 sm:px-0">
-                    <img class="h-36 md:h-40 lg:h-44 mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="logo">
-                    <div class="md:max-w-lg">
-                        <p class="mb-4" style="color:#D0E2E7;">
-                            Want a free drum set? Simply enter your email address before <span class="text-white font-extrabold">November 20th</span> to secure your chance to win.
-                        </p>
+                <div class="w-full sm:w-7/12 mx-auto sm:pl-8 sm:pl-14 lg:pl-0 text-center sm:text-left px-4 sm:px-0">
+                    <img class="h-24 sm:h-32 lg:h-36 mb-2 lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-logo.png" alt="logo">
+                    <p class="mb-4">
+                        Want a free drum set? Simply enter your email address before <span class="text-white font-extrabold">November 20th</span> to secure your chance to win.
+                    </p>
 
-                        <p class="hidden lg:inline">
-                            <i class="fas fa-check text-drumeo"></i> No purchase necessary.
-                            <i class="ml-2 fas fa-check text-drumeo"></i> No age restrictions.
-                            <i class="ml-2 fas fa-check text-drumeo"></i> No location restrictions.</p>
-                        <div class="flex inline lg:hidden">
-                            <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> No purchase necessary.</p>
-                            <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> No age restrictions.</p>
-                            <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> No location restrictions.</p>
-                        </div>
-                        @include("drumeo.lead-gen.partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-                        "formId" => "Pianote - Engagement - Trigger - FP30 Giveaway - Web Form2",
-                        "formName" => 'FP30 Giveaway',
-                            "stacked" => true,
-                            "buttonText" => "I WANT TO WIN!",
-                        ])
+                    <p class="hidden lg:inline-block mb-3 text-sm">
+                        <i class="fas fa-check-circle text-drumeo"></i> No purchase necessary.
+                        <i class="ml-2 fas fa-check-circle text-drumeo"></i> No age restrictions.
+                        <i class="ml-2 fas fa-check-circle text-drumeo"></i> No location restrictions.</p>
+                    <div class="flex inline-block lg:hidden mb-3 text-sm">
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> No purchase necessary.</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> No age restrictions.</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> No location restrictions.</p>
                     </div>
+                    @include("drumeo.lead-gen.partials.sign-up-form", [
+                "recaptchaKey" => $recaptchaKey,
+            "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway - Web Form",
+            "formName" => 'Drumeo Drumset Giveaway',
+                        "stacked" => true,
+                        "buttonText" => "I WANT TO WIN!",
+                    ])
                 </div>
             </div>
         </div>
@@ -73,14 +57,13 @@
 
     <section class="px-4 md:px-6 py-12 md:py-20">
         <div class="max-w-md md:max-w-4xl mx-auto">
-            <div class="md:flex md:flex-wrap md:items-center mb-6 md:mb-20">
-                <div class="w-full mb-4 md:mb-8 text-center">
-                    <h4 class="font-extrabold leading-normal" style="color:#2A2F34;">
+            <div class="md:flex md:flex-wrap md:items-center">
+                <div class="w-full mb-4 sm:mb-8 text-center">
+                    <h3 class="font-extrabold leading-normal" style="color:#2A2F34;">
                         5-Piece Drum Kit with Hardware and Cymbals
-                    </h4>
+                    </h3>
                 </div>
-                <div class="w-full md:w-7/12 md:pr-7">
-                    <img class="lazyload md:hidden rounded-xl mb-6" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/intro-m.jpg" alt="intro image">
+                <div class="w-full sm:w-5/12 mb-5 sm:mb-0">
                     <p>
                         This kit has you covered.
                         <br><br>
@@ -93,15 +76,39 @@
                         <strong>But you’ll have a chance to win it FREE.</strong>
                     </p>
                 </div>
-                <div class="w-full md:w-5/12 justify-center md:pl-8">
-                    <picture>
-                        <source media="(min-width:768px)" srcset="https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-feature.jpg">
-                        <img class="rounded-xl mb-6 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-feature.jpg" alt="gallery feature">
-                    </picture>
-
-                    <img class="rounded-xl shadow-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery.jpg" alt="gallery">
+                <div class="w-full sm:w-7/12 justify-center sm:pl-8">
+                    <img class="hidden sm:inline-block lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/gallery.png" alt="gallery feature">
+                    <img class="sm:hidden inline-block lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/gallery-m.png" alt="gallery feature">
 
                 </div>
+            </div>
+            <div class="py-5 sm:py-8 px-4 sm:px-10 rounded-xl mt-6 sm:mt-10 max-w-2xl mx-auto" style="background-color:#f6f8fc;">
+                <p class="leading-tight text-drumeo tracking-widest mb-3">THE SPECS</p>
+                <p><strong>Yamaha Stage Custom Birch Drums:</strong></p>
+                <div class="flex flex-wrap sm:flex-nowrap justify-between">
+                    <p class="mx-0 w-1/2 sm:w-auto"><strong>Bass Drum:</strong><br> 22x___</p>
+                    <p class="mx-0 w-1/2 sm:w-auto"><strong>Snare Drum:</strong><br> 14x___</p>
+                    <p class="mx-0 w-1/2 sm:w-auto"><strong>Tom 1:</strong><br> 10x___</p>
+                    <p class="mx-0 w-1/2 sm:w-auto"><strong>Tom 2:</strong><br> 12x___</p>
+                    <p class="mx-0 w-1/2 sm:w-auto"><strong>Tom 3:</strong><br> 14x___</p>
+                </div>
+                <hr class="my-8">
+                <p><strong>Yamaha Hardware Package:</strong></p>
+                <div class="flex flex-wrap sm:flex-nowrap justify-between">
+                    <p class="mx-0 w-full sm:w-auto"><i class="fas fa-check text-drumeo mr-2"></i> Hi-Hat</p>
+                    <p class="mx-0 w-full sm:w-auto"><i class="fas fa-check text-drumeo mr-2"></i> 2 Cymbal Stands</p>
+                    <p class="mx-0 w-full sm:w-auto"><i class="fas fa-check text-drumeo mr-2"></i> Kick Pedal</p>
+                    <p class="mx-0 w-full sm:w-auto"><i class="fas fa-check text-drumeo mr-2"></i> Drum Throne</p>
+                </div>
+                <hr class="my-8">
+                <p><strong>Sabian B8 Performance Cymbals:</strong></p>
+                <div class="flex flex-wrap sm:flex-nowrap justify-between">
+                    <p class="mx-0 w-full sm:w-auto"><i class="fas fa-check text-drumeo mr-2"></i> 14” Hi-Hats</p>
+                    <p class="mx-0 w-full sm:w-auto"><i class="fas fa-check text-drumeo mr-2"></i> 16” Crash</p>
+                    <p class="mx-0 w-full sm:w-auto"><i class="fas fa-check text-drumeo mr-2"></i> 20” Ride</p>
+                </div>
+                <hr class="my-8">
+                <p class="text-drumeo"><em>*Drum color and configuration subject to availability in the winner’s region.</em></p>
             </div>
         </div>
     </section>
@@ -112,11 +119,11 @@
                 You’ve won a drum set. <br>
                 Now learn how to play it…
             </h4>
-            <div class="max-w-md md:max-w-4xl mx-auto md:flex md:items-center text-center md:text-left">
-                <div class="md:w-1/3 mb-6 md:mb-0">
-                    <img class="lazyload h-96" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/ui.png" alt="ui image">
+            <div class="max-w-md md:max-w-4xl mx-auto sm:flex md:items-center text-center md:text-left">
+                <div class="mb-6 md:mb-0 flex-shrink-0">
+                    <img class="lazyload h-80 lg:h-96" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/mobile-membership.png" alt="ui image">
                 </div>
-                <div class="md:w-2/3 lg:pl-6">
+                <div class="md:w-2/3 flex-grow sm:pl-6">
                     <p class="leading-normal">
                         A drum set isn't just a piece of furniture, you know.
                         <br><br>
@@ -173,7 +180,7 @@
         </div>
     </section>
 
-    <section class="text-center px-6 sm:px-4 py-8 md:py-10 lg:py-12">
+    <section class="text-center px-6 sm:px-6 py-8 md:py-10 lg:py-12">
         <div class="container mx-auto max-w-3xl">
             <h3 class="mb-5 sm:mb-7"><strong>Why do I need to give<br class="inline sm:hidden"> my email address?</strong></h3>
             <p>We want the winner to be someone who really wants and will use this free drum set. After all, that’s what it’s for. So getting an email address lets us know you’re a real person!
@@ -183,14 +190,14 @@
         </div>
     </section>
 
-    <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/footer.jpg">
+    <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/order-bg.jpg">
         <div class="mx-auto max-w-md md:max-w-2xl">
-            <img class="h-32 sm:h-36 md:h-44 lg:h-52 mb-12 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="title image">
+            <img class="h-32 sm:h-36 md:h-44 lg:h-48 mb-5 sm:mb-12 lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/650x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-logo.png" alt="title image">
 
             @include("drumeo.lead-gen.partials.sign-up-form", [
             "recaptchaKey" => $recaptchaKey,
-            "formId" => "Pianote - Engagement - Trigger - FP30 Giveaway - Web Form",
-            "formName" => 'FP30 Giveaway',
+            "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway - Web Form",
+            "formName" => 'Drumeo Drumset Giveaway',
                 "buttonText" => "I WANT TO WIN!",
             ])
 

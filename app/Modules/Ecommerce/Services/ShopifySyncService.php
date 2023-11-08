@@ -267,7 +267,8 @@ class ShopifySyncService
             return $this->userService->createUser(
                 $email,
                 config('user_management_system.default_user_password'),
-                shopifyCustomerId: $shopifyCustomerId
+                shopifyCustomerId: $shopifyCustomerId,
+                requiresPasswordUpdate: true
             );
         }
         throw new Exception("User not found for shopify customer id $shopifyCustomerId");

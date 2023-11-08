@@ -31,6 +31,12 @@
                 'credit' => ' Multi-Instrumentalist',
             ],
             [
+                'desc' => 'Incredibly thorough online piano course that seeks to help you learn at your speed.',
+                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/as-logo.png',
+                'name' => 'American Songwriter',
+                'credit' => 'Music Magazine',
+            ],
+            [
                 'desc' => 'You should check out Pianote. If you’re a beginner or intermediate, this is ideal for you!',
                 'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/feature-testimonial-ali.jpg',
                 'name' => 'Ali Spagnola',
