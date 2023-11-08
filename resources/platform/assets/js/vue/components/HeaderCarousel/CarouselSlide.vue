@@ -1,7 +1,7 @@
 <script setup>
 import ModalRenderer from "../Modal/ModalRenderer";
 import { XIcon } from "@heroicons/vue/solid";
-import { ref } from "vue";
+import {computed, ref} from "vue";
 
 const props = defineProps({
   brand: {
@@ -104,10 +104,30 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  skillLevel: {
+    type: String,
+    default: ''
+  },
 });
 
 const primaryVideoModal = ref(false);
 const secondaryVideoModal = ref(false);
+
+const skillLevelColor = computed(() => {
+    switch (props.skillLevel) {
+        case 'Novice':
+            return 'tw-bg-[#22C55E]';
+        case 'Beginner':
+            return 'tw-bg-[#0B76DB]';
+        case 'Intermediate':
+            return 'tw-bg-[#EAB308]';
+        case 'Advanced':
+            return 'tw-bg-[#F06314]';
+        case 'Expert':
+            return 'tw-bg-[#B91C1C]';
+    }
+});
+
 
 </script>
 
@@ -152,6 +172,9 @@ const secondaryVideoModal = ref(false);
           </h2>
             <!-- Logo -->
             <img v-if="logo" class="tw-h-24 md:tw-h-28 3xl:tw-h-32 mb-1 tw-mr-auto" :src="`https://www.musora.com/musora-cdn/image/width=800,quality=95/${logo}`" alt="pack logo" />
+          <div v-if="isFeatured && skillLevel" class="tw-flex tw-items-center tw-font-semibold md:tw-text-lg">
+              <div class="tw-inline-block tw-w-[9px] tw-h-[9px] tw-rounded-full tw-mr-2" :class="skillLevelColor"></div> {{ skillLevel }}
+          </div>
           <p :class="`tw-hidden xl:tw-block xl:tw-line-clamp-3 tw-text-lg tw-max-w-[520px] ${ descriptionColor && `tw-text-${descriptionColor}` }`" v-html="description"></p>
           <!-- CTA -->
             <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
