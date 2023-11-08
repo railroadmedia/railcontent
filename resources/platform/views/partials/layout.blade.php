@@ -47,6 +47,7 @@ $userData = assembleUserAttributes(user());
 
         {{-- App Container --}}
         <div id="app" class="flex-1">
+            
             @if(empty($noContainer) || !$noContainer)
                 <app-container
                     :vue-router="false"
