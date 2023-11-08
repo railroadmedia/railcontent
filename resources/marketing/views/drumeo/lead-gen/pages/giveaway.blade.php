@@ -86,11 +86,11 @@
                 <p class="leading-tight text-drumeo tracking-widest mb-3">THE SPECS</p>
                 <p><strong>Yamaha Stage Custom Birch Drums:</strong></p>
                 <div class="flex flex-wrap sm:flex-nowrap justify-between">
-                    <p class="mx-0 w-1/2 sm:w-auto"><strong>Bass Drum:</strong><br> 22x___</p>
-                    <p class="mx-0 w-1/2 sm:w-auto"><strong>Snare Drum:</strong><br> 14x___</p>
-                    <p class="mx-0 w-1/2 sm:w-auto"><strong>Tom 1:</strong><br> 10x___</p>
-                    <p class="mx-0 w-1/2 sm:w-auto"><strong>Tom 2:</strong><br> 12x___</p>
-                    <p class="mx-0 w-1/2 sm:w-auto"><strong>Tom 3:</strong><br> 14x___</p>
+                    <p class="mx-0 w-1/2 sm:w-auto"><strong>Bass Drum:</strong><br> 22x17</p>
+                    <p class="mx-0 w-1/2 sm:w-auto"><strong>Snare Drum:</strong><br> 14x5.5</p>
+                    <p class="mx-0 w-1/2 sm:w-auto"><strong>Tom 1:</strong><br> 10x7</p>
+                    <p class="mx-0 w-1/2 sm:w-auto"><strong>Tom 2:</strong><br> 12x8</p>
+                    <p class="mx-0 w-1/2 sm:w-auto"><strong>Tom 3:</strong><br> 14x15</p>
                 </div>
                 <hr class="my-8">
                 <p><strong>Yamaha Hardware Package:</strong></p>
