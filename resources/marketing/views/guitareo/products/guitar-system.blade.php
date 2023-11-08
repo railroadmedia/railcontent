@@ -92,27 +92,6 @@
     </header>
 
 
-    {{--<section class="featured-product">--}}
-        {{--<div class="noise-wrap">--}}
-            {{--<div class="row">--}}
-                {{--<a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GUITAR-SYSTEM' => 1], 'redirect' => '/order']) }}">--}}
-                    {{--<img class="logo animated tada delay-2s" src="https://d122ay5chh2hr5.cloudfront.net/sales/promos/april/guitar-month-logo.png">--}}
-                    {{--<br>--}}
-                    {{--<div class="text">--}}
-                        {{--<p class="text-left" style="max-width:510px">It’s Guitar Month! And we’re celebrating by giving you a {{ round(100 - (100 * (floatval($productPrices['GUITAR-SYSTEM']->discounted_price) / floatval($productPrices['GUITAR-SYSTEM']->price)))) }}% discount on our most popular training pack where you’ll learn ANYTHING you want on guitar.--}}
-                            {{--<br><br>--}}
-                            {{--Yes, anything!--}}
-                            {{--<br><br>--}}
-                            {{--The Guitar System is the ultimate encyclopedia of guitar lessons — and it’s an affordable solution to reach your goals. So hey, why not join us and reach your goals?--}}
-                            {{--<br><br>--}}
-                            {{--<u>Just click here to get started</u> — and join in the celebration by playing and creating the music you love.--}}
-                            {{--<br></p>--}}
-                        {{--<div class="join">Get Started &raquo;</div>--}}
-                    {{--</div>--}}
-                {{--</a>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</section>--}}
 
     <section class="lesson-breakdown">
         <div class="row">

@@ -331,11 +331,6 @@
                 By the end, you’ll be playing comfortable in ANY key on the piano. That means any song, key signature or chord won’t be intimidating or challenging.
                 <br><br>
                 You’ll know them all.</p>
-
-            {{--<a href="{{ url()->route('shopping-cart.add-to-cart',--}}
-    {{--['products' => ['piano-technique-made-easy' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"--}}
-                    {{--class="join smaller">Get Started &raquo;</a>--}}
-
         </div>
     </section>
 

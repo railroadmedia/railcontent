@@ -730,7 +730,7 @@
 {{--                            <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>--}}
 {{--                            <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money-Back Guarantee</p>--}}
 {{--                    </a>--}}
-{{--                    <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,easy-chords:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,100-days-of-practice-poster:1,the-power-of-chords:1,piano-riffs-and-fills:1&redirect=/order&locked=true"--}}
+{{--                    <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[easy-chords]=1&products[piano-chords-and-scales-guide]=1&products[poster-chords]=1&products[poster-scales]=1&products[pianote-practice-planner]=1&products[100-days-of-practice-poster]=1&products[the-power-of-chords]=1&products[piano-riffs-and-fills]=1&redirect=/order&locked=true"--}}
 {{--                        class="px-5 sm:px-10 py-5 sm:py-7 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"--}}
 {{--                        style="background-color:#dde9f9;background-image:url(https://www.musora.com/musora-cdn/image/width=380,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/order-bg.jpg);"--}}
 {{--                    >--}}

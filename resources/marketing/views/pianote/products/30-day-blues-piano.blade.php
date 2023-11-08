@@ -574,7 +574,7 @@
                     </div>
                     <h4 class="mt-2 mb-4 sm:my-4 lg:my-5"><strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong></h4>
                     <span class="join sold-out medium w-full align-middle">SOLD OUT</span>
-{{--                    /ecommerce/add-to-cart?product-array=30-day-blues-piano:1&promo-code=special&redirect=/order&locked=true--}}
+{{--                    /ecommerce/add-to-cart?products[30-day-blues-piano]=1&promo-code=special&redirect=/order&locked=true--}}
                 </div>
 
             </div>
