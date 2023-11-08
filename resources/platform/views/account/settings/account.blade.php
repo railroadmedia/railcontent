@@ -117,7 +117,7 @@
                 
                 <div class="tw-flex tw-flex-col pa-3">
                     {{-- TEMPORARY MESSAGE --}}
-                    <div class="tw-full tw-flex tw-p-4 tw-my-4 tw-rounded-lg tw-bg-red-100 tw-text-red-800 tw-font-semibold">
+                    <div class="tw-full tw-flex tw-p-4 tw-mb-4 tw-rounded-lg tw-bg-red-100 tw-text-red-800 tw-font-semibold">
                         <p>
                             Hello! 👋 We are doing a quick systems update today that will impact this page. For help with managing 
                             your subscription in the interim, please <a href="/{{$brand}}/support#contactPageApp" class="tw-underline tw-text-current">contact our support team</a>!
