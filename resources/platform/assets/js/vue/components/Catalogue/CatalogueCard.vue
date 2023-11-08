@@ -92,7 +92,7 @@
                             :is-open="state.dropdownOpen"
                             :dropdownOptions="dropdownOptions"
                             @closeDropdown="state.dropdownOpen = false"
-                            @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.color_title, description: mappedData.black_title, thumbnail_url: mappedData.thumbnail })"
+                            @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.black_title, thumbnail_url: mappedData.thumbnail })"
                             @progressReset="emitResetProgress({content_id: item.id})"
                         />
                     </div>
