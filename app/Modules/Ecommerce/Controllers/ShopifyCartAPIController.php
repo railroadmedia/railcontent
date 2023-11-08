@@ -398,7 +398,7 @@ class ShopifyCartAPIController extends Controller
                     "sku" => $shopifyLineItemData['merchandise']['sku'],
                     "name" => $shopifyLineItemData['merchandise']['product']['title'],
                     "quantity" => $shopifyLineItemData['quantity'],
-                    "thumbnail_url" => $shopifyLineItemData['merchandise']['image']['url'],
+                    "thumbnail_url" => $shopifyLineItemData['merchandise']['image']['url'] ?? '',
                     "description" => $shopifyLineItemData['merchandise']['product']['description'],
                     "price_before_discounts" => (float)$shopifyLineItemData['cost']['subtotalAmount']['amount'],
                     "price_after_discounts" => (float)$shopifyLineItemData['cost']['totalAmount']['amount'],
