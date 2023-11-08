@@ -42,12 +42,13 @@ class OnboardingController extends Controller
             throw new AuthorizationException('Invalid verification_token.', 403);
         }
 
-        if (user() && user()->getEmail() == $email && user()->doesRequirePasswordUpdate()) {
+        if (user() && user()->getEmail() == $email && !user()->doesRequirePasswordUpdate()) {
             return redirect()->to('/members');
         }
 
         $user = User::query()->where('email', $email)->first() ?? null;
-        if ($user && $user->doesRequirePasswordUpdate()) {
+
+        if ($user && !$user->doesRequirePasswordUpdate()) {
             return redirect()->route('login', ['email' => $email]);
         }
 
