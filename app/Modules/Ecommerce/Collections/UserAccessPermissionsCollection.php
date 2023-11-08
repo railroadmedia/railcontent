@@ -58,7 +58,16 @@ class UserAccessPermissionsCollection
             }
             if ($userAccessPermission->status == 'revoked') {
                 $userAccessPermission->actualStartTime = Carbon::parse($userAccessPermission->start_time);
-                $userAccessPermission->actualExpirationTime = Carbon::parse($userAccessPermission->revoked_at);
+                $calculatedExpiration = $userAccessPermission->time_fixed ? Carbon::parse(
+                    $userAccessPermission->time_fixed
+                )
+                    : Carbon::parse($userAccessPermission->start_time)->clone()
+                        ->addMinutes($userAccessPermission->time_minutes)
+                        ->addDays($userAccessPermission->time_days)
+                        ->addMonths($userAccessPermission->time_months);
+                $revokedAt = Carbon::parse($userAccessPermission->revoked_at);
+
+                $userAccessPermission->actualExpirationTime = min($revokedAt, $calculatedExpiration);
                 continue;
             }
             $aggregatePrevious = $expirationDate != null
@@ -81,6 +90,17 @@ class UserAccessPermissionsCollection
         if ($expirationDate > Carbon::maxValue()) {
             $expirationDate = Carbon::maxValue();
         }
+        if (!$expirationDate) {
+            //if expiration date cannot be determined from active permissions use revoked ones
+            //this case if to handle isEdgeExpired on mobile which needs an membership in the past
+            foreach ($userAccessPermissions as $userAccessPermission) {
+                if ($userAccessPermission->status == 'revoked') {
+                    $expirationDate =
+                }
+            }
+        }
+
+
         return array($startDate, $expirationDate);
     }
 
