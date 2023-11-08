@@ -6,6 +6,7 @@ use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Models\OnboardingAnswerHistory;
 use Modules\UserManagementSystem\Models\OnboardingExperience;
@@ -49,6 +50,7 @@ class OnboardingController extends Controller
         $user = User::query()->where('email', $email)->first() ?? null;
 
         if ($user && !$user->doesRequirePasswordUpdate()) {
+            Auth::logout();
             return redirect()->route('login', ['email' => $email]);
         }
 
