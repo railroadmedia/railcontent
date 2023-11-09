@@ -37,7 +37,7 @@ return [
     'exclusion_regex_paths'=> [
         '/members\/live\-poll/',
         '/members\/user\-video\-session\/store/',
-        //'/railtracker\/media\-playback\-sessions*/',
+        '/railtracker\/media\-playback\-sessions*/',
         '/musora\-api\/v1\/media*/',
         '/members\/live\/are\-we\-live\-poll*/',
         '/menu\-api*/',
