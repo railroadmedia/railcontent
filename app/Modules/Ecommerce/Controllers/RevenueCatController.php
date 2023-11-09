@@ -128,8 +128,7 @@ class RevenueCatController extends Controller
                             );
                             break;
                         }
-                        $price = $data['event']['price_in_purchased_currency'] ?? $musoraProduct->price;
-                        $currency = $data['event']['currency'];
+                        $price = $data['event']['price'] ?? $musoraProduct->price;
 
                         if($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
                             UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
@@ -144,7 +143,7 @@ class RevenueCatController extends Controller
                             $this->calculateTaxAmount($price, $data['event']['tax_percentage']),
                             $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
                                 : ShopifyPaymentSourceEnum::Google,
-                            $currency
+                            null //defaults to USD
                         );
                         $this->setUserSubscription($user, $type);
                     }
@@ -232,8 +231,7 @@ class RevenueCatController extends Controller
                             );
                             break;
                         }
-                        $price = $data['event']['price_in_purchased_currency'] ?? $musoraProduct->price;
-                        $currency = $data['event']['currency'];
+                        $price = $data['event']['price'] ?? $musoraProduct->price;
                         if($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
                             UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
                         }
@@ -246,7 +244,7 @@ class RevenueCatController extends Controller
                             $this->calculateTaxAmount($price, $data['event']['tax_percentage']),
                             $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
                                 : ShopifyPaymentSourceEnum::Google,
-                            $currency
+                            null //defaults to USD
                         );
 
                         $this->setUserSubscription($user, $type);
