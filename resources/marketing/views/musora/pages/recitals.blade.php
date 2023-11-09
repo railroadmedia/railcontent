@@ -33,7 +33,7 @@
     <section class="text-center text-white py-5 md:py-10 lg:py-16 px-5 md:px-7" style="background:#00101d ;">
         <div class="container mx-auto max-w-5xl">
             <img class="h-32 sm:h-48 lg:h-52 mb-3" src="https://dmmior4id2ysr.cloudfront.net/recitals/winter-logo-23.png" alt="recital logo">
-            <h3 class="leading-tight"><strong>Be a part of the first ever <br>Musora Winter Recital!</strong></h3>
+            <h3 class="leading-tight"><strong>Be a part of the<br class="sm:hidden"> Musora Winter Recital!</strong></h3>
             <a class="btn-primary anchor-slide mt-5 mb-10 md:mt-7 md:mb-20 bg-musora text-black border-none hover:opacity-90" href="#form">Submit Now &raquo;</a>
             <div class="flex flex-wrap items-center justify-center mx-auto max-w-4xl">
                 <div class="flex flex-wrap items-start flex-image mx-auto w-full md:w-2/5 lg:w-5/12 md:order-1 mb-5 md:mb-0 justify-center">
