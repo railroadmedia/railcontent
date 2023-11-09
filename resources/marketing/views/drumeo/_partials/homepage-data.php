@@ -271,42 +271,42 @@
         "songItems" => [
             [
                 "icon" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/5000-songs-icon.svg",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/5000-songs-icon.svg",
                 "title" => "5000+ popular songs.",
                 "desc" =>
                 "Get note-for-note song breakdowns for every style, era, and skill level.",
             ],
             [
                 "icon" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/tempo-icon.svg",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/tempo-icon.svg",
                 "title" => "Find the perfect tempo.",
                 "desc" =>
                 "Slow down or speed up any section of a song to hear every note.",
             ],
             [
                 "icon" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/loop-icon.svg",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/loop-icon.svg",
                 "title" => "Loop the trouble spots.",
                 "desc" =>
                 "No more pausing and rewinding that tricky fill. Loop it over and over again!",
             ],
             [
                 "icon" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/no-drums-icon.svg",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/no-drums-icon.svg",
                 "title" => "Remove the drums.",
                 "desc" =>
                 "Magically remove the original drums to make each song uniquely yours.",
             ],
             [
                 "icon" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/play-it-right-icon.svg",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/play-it-right-icon.svg",
                 "title" => "Play it right the first time.",
                 "desc" =>
                 "Get perfect notation and learn to play accurately from the get-go.",
             ],
             [
                 "icon" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/devices-icon.svg",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/devices-icon.svg",
                 "title" => "Take your songs anywhere.",
                 "desc" =>
                 "Accessible on any device, or printable,so you can play any song, any time.",

@@ -21,7 +21,7 @@
                             @endif
                         @endforeach
                     </ul>
-                    <div class="flex flex-wrap flex-col sm:flex-nowrap lg:flex-row items-center mt-6 sm:mt-5 lg:mt-10">
+                    <div class="flex flex-wrap flex-col sm:flex-nowrap md:flex-row items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full md:w-2/3 text-center sm:pr-2 my-1">
                             {{-- <a href={{$buttonLink}} class="join blue medium w-full anchor-slide" role="button">{{ $buttonText }}</a> --}}
 
