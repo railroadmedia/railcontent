@@ -2,8 +2,11 @@
 
 namespace App\Modules\Ecommerce\Gateways;
 
+use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
+use App\Modules\Ecommerce\Models\Recharge\Subscription;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Collection;
 use Log;
 
 class RechargeGateway
@@ -252,7 +255,7 @@ class RechargeGateway
         );
     }
 
-    public function getSubscriptions($shopifyCustomerId)
+    public function getSubscriptions($shopifyCustomerId) : Collection
     {
         $response = $this->call('GET', '/subscriptions', [
             'shopify_customer_id' => $shopifyCustomerId,
@@ -261,7 +264,9 @@ class RechargeGateway
         try {
             return collect(
                 $response?->subscriptions
-            );
+            )->map(function($subscription) {
+                return new Subscription($subscription);
+            });
         } catch (Exception $e) {
             Log::error("RechargeGateway:getSubscriptions: " . $e->getMessage());
             Log::error(print_r($response, true));
@@ -270,7 +275,7 @@ class RechargeGateway
     }
 
     public function cancelSubscription(
-        $subscription,
+      Subscription $subscription,
         $cancelReason,
         $cancelReasonComments = '',
         $sendEmail = true
@@ -280,6 +285,10 @@ class RechargeGateway
             'cancellation_reason_comments' => $cancelReasonComments,
             'send_email' => $sendEmail
         ]);
+        $subscription->status = RechargeSubscriptionStatusEnum::Cancelled->value;
+        $subscription->cancellationReason = $cancelReason;
+        $subscription->createdAt = Carbon::now();
+
     }
 
     public function updateSubscriptionNextChargeDate($subscription, Carbon $nextChargeDate): void

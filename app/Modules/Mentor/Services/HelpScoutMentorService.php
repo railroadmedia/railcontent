@@ -41,12 +41,17 @@ class HelpScoutMentorService
         $this->helpScoutWebHookService->unregister($url);
     }
 
-    public function newHelpScoutConversation(int $conversationId, int $helpScoutCustomerId, $helpScoutEmail, int $mailboxId): void
-    {
-        Log::debug("");
-        Log::debug("New help scout conversation $conversationId from customer $helpScoutCustomerId $helpScoutEmail mailbox $mailboxId");
+    public function newHelpScoutConversation(
+        int $conversationId,
+        int $helpScoutCustomerId,
+        $helpScoutEmail,
+        int $mailboxId
+    ): void {
+        Log::debug(
+            "New help scout conversation $conversationId from customer $helpScoutCustomerId $helpScoutEmail mailbox $mailboxId"
+        );
 
-        if(!in_array($mailboxId, config('mentor.helpscout_mailboxes'))){
+        if (!in_array($mailboxId, config('mentor.helpscout_mailboxes'))) {
             Log::debug("Not watching helpscout mailbox $mailboxId");
             return;
         }
@@ -59,13 +64,13 @@ class HelpScoutMentorService
             Log::info("Unable to find user for helpscout customer $helpScoutCustomerId $helpScoutEmail");
             return;
         }
-        Log::debug("User Id: $userId");
         $mentorUserId = $this->mentorService->getMentorIdByStudent($userId);
         if (!$mentorUserId) {
             Log::info("User $userId has no assigned mentor");
             return;
         }
         $mentorHelpScoutUserId = $this->helpScoutUserService->getHelpScoutUserIdFromUserId($mentorUserId);
+        Log::debug("Assigning conversation $conversationId (user:$userId) to mentor $mentorUserId (helpscout:$mentorHelpScoutUserId)");
         $this->helpScoutUserService->updateConversationAssignedUser($conversationId, $mentorHelpScoutUserId);
     }
 

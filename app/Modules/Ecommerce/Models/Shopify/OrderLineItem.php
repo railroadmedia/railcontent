@@ -9,7 +9,7 @@ class OrderLineItem
     public string $gid;
     public int $id;
     public string $sku;
-    public Product $product;
+    public ?Product $product = null;
     public Order $order;
 
     public function __construct(

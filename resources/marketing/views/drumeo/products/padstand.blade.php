@@ -132,15 +132,15 @@
                         <strong>Only ${{ floatval($productPrices['padstand']->discounted_price) }}</strong>
                     @endif
                 </h3>
-                <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
+                <div class="mt-5 sm:mt-7 w-full max-w-xl mx-auto">
                     <div class="sm:w-5/12 join smaller outline"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     @if( $products['padstand']->getStockAvailability() > 1 && !empty($products['padstand']->getStockAvailability()))
-                        <a class="w-5/12 join smaller blue" href="#customize-anchor">Order Now</a>
+                        <a class="w-5/12 join smaller blue" href="/ecommerce/add-to-cart?locked=true&product-array=padstand:1">Order Now</a>
                     @else
                         <a class="join smaller sold-out">SOLD OUT</a>
                     @endif
                 </div>
-                <h6 class="text-sm leading-tight"><em>or get it free with an Annual Drumeo Membership.</em></h6>
+                <h6 class="text-sm leading-tight mt-2"><em>or get it free with an Annual Drumeo Membership.</em></h6>
             </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to right, rgba(7,23,43,0.85), rgba(26,32,38,0.85));"></div>
@@ -153,7 +153,7 @@
             <p class="leading-normal mt-2 mb-5">
                 For years, you’ve balanced your practice pad on your lap, coffee table, or worse…<br class="hidden sm:inline">
                 A standard snare stand with claws overhanging like a bad overbite 😬.<br class="hidden sm:inline">
-                So we engineered a custom stand that fits any practice pad perfectly:</p>
+                So we engineered a custom stand that fits a practice pad perfectly:</p>
             @php
                 $gridItems = [
                     [
@@ -280,10 +280,10 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f6f8fc calc(50% + 1px));"></div>
     <section class="text-center px-5 py-10 md:py-20 lg:py-24" style="background-color:#f6f8fc;">
         <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2><strong>Works with ANY practice pad.</strong></h2>
+            <h2><strong>Works with ALL 12” practice pads.</strong></h2>
             <h6 class="leading-tight mt-2 mb-5 sm:mb-10">
-                The Drumeo PadStand can be used with a QuietPad, P4, or any other branded <br class="hidden sm:inline">
-                practice pad. Simply tighten the basket for the perfect fit. </h6>
+                The Drumeo PadStand can be used with a QuietPad, P4, or any other 12” or<br class="hidden sm:inline">
+                smaller practice pad. Simply tighten the basket for the perfect fit.</h6>
             @php
                 $slides = [
                  [
@@ -377,38 +377,11 @@
                                     <p class="text-sm">1 Drumeo PadStand<sup>NEW</sup></p>
                                 </div>
                             </a>
-                        </div>
-                        <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                            <img class="h-16 absolute top-0 right-0 z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/shop/stickbag/free-shipping-icon.svg">
-                            <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-drumeo uppercase" >LAUNCH SPECIAL</p>
-                            <a href="/ultimate-practice-rig"
-                                class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo">
-                                <div class="bg-white px-3 py-6 md:py-9">
-                                    <h4 class="mb-2 sm:mb-3"><strong>Ultimate Practice Rig</strong></h4>
-                                    <img class="h-24 transition-opacity opacity-0"
-                                            loading="lazy"
-                                            onload="this.classList.remove('opacity-0')"
-                                            src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/october/oct-home-promo2.png"
-                                            alt="learn playing image"
-                                    >
-                                    <br>
-                                    <h4 class="inline-block leading-tight"><strong>Free PadStand</strong></h4>
-                                    <p class="text-sm"><em>with annual Drumeo Membership</em></p>
-                                    <div class="join my-5 drumeo smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Learn More</div>
-                                    <p class="text-sm mb-1.5 text-drumeo"><strong>Annual Drumeo Membership</strong> ($200/yr)</p>
-                                    <p class="text-sm mb-1.5"><strong>The world's best drum lessons.</strong></p>
-                                    <p class="text-sm mb-1.5"><strong>5000+ popular songs</strong></p>
-                                    <p class="text-sm mb-1.5"><strong>Unlimited Personal Support</strong></p>
-                                    <p class="text-sm mb-1.5">1 PadStand<sup>NEW</sup></p>
-                                    <p class="text-sm mb-1.5">1 QuietPad</p>
-                                    <p class="text-sm mb-1.5">1 Rudiment Poster</p>
-                                    <p class="text-sm mb-1.5">5A Drumsticks</p>
-                                    <p class="text-sm mb-1.5">Drum Techniques Made Easy</p>
-                                    <p class="text-sm">Great Hands For A Lifetime</p>
-                                </div>
-                            </a>
+
                         </div>
                     </div>
+                    <br>
+                    <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[padstand]=1&locked=true"><h4><strong><u>Or get it FREE when you join Drumeo.</u></strong></h4></a>
                 @else
                     <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>
                 @endif
@@ -431,7 +404,7 @@
             </div>
         </div>
     </section>
-    
+
     <div
         x-show="trailer"
         style="display: none;z-index: 2147483002;"

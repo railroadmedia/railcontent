@@ -62,7 +62,10 @@
                 perPage: 1,
                 perMove: 1,
                 type: 'loop',
-                interval: 2000,
+                autoplay: true,
+                pauseOnHover: true,
+                pauseOnFocus: true,
+                interval: 3000,
             ",
         ])
             @slot('content')

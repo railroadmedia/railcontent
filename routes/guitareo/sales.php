@@ -48,6 +48,6 @@ Route::domain('{guitareoDomain}')
     Route::get('/shop/rhythm-and-groove', [SalesController::class, 'rhythmAndGroove']);
     Route::get('/{page?}', SalesController::class . '@products')
         ->whereIn('page', [
-            'guitar-technique-made-easy-discount', 'guitar-technique-made-easy-beginner', '500-songs-discount'
+            'guitar-technique-made-easy-beginner', '500-songs-discount'
         ]);
 });

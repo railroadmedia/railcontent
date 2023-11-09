@@ -17,6 +17,7 @@ use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsToShopify;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Exception\ORMException;
+use Exception;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -240,13 +241,24 @@ class SyncUsersToShopify implements ShouldQueue
         $isCreating = $fresh || (is_null($user->shopify_id) && $alreadySyncedUserCustomers->isEmpty());
 
         // if we're going to update the user, and we don't have any updates that Shopify needs, record it as skipped and move on
-        if (!$isCreating && !$this->checkForWantedUpdates($user, $userCustomers)) {
+        try {
+            if (!$isCreating && !$this->checkForWantedUpdates($user, $userCustomers)) {
+                $this->results[] = [
+                    self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                    self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_USER,
+                    self::RESULTS_MODEL_ID => $user->id,
+                    self::RESULTS_ACTION => "SKIPPED",
+                    self::RESULTS_FAIL_MESSAGE => "No local updates required syncing"
+                ];
+                return;
+            }
+        } catch (Exception $e) {
             $this->results[] = [
-                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
                 self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_USER,
                 self::RESULTS_MODEL_ID => $user->id,
-                self::RESULTS_ACTION => "SKIPPED",
-                self::RESULTS_FAIL_MESSAGE => "No local updates required syncing"
+                self::RESULTS_ACTION => "FAILED",
+                self::RESULTS_FAIL_MESSAGE => $e->getMessage()
             ];
             return;
         }
@@ -337,14 +349,20 @@ class SyncUsersToShopify implements ShouldQueue
      * @param  User  $user
      * @param  Collection<Customer>  $userCustomers
      * @return bool whether the user has updates that Shopify needs
+     * @throws Exception
      */
     protected function checkForWantedUpdates(User $user, Collection $userCustomers): bool
     {
         // there are only a few attributes that we care about for the user
         $userKeys = ["email", "first_name", "last_name", "note", "phone"];
 
-        // get the user's data from Shopify, so we can compare our values
-        $userDataResponse = $this->shopify->getCustomer($user->shopify_id);
+        // get the user (or existing customers)'s data from Shopify, so we can compare our values
+        $shopifyId = $user->shopify_id ?? $userCustomers->first()?->shopify_id ?? null;
+        // safety check, that shouldn't be possible
+        if (is_null($shopifyId)) {
+            throw new Exception("No Shopify ID found on existing user or customers");
+        }
+        $userDataResponse = $this->shopify->getCustomer($shopifyId);
         $this->handleRateLimit();
         $shopifyUserData = collect($userDataResponse->getAttributes())->only($userKeys);
         $localUserData = collect($this->createCustomerDataForUser($user, false))->only($userKeys);
@@ -369,10 +387,10 @@ class SyncUsersToShopify implements ShouldQueue
      * new Customers to be made after a User already exists with the same email address.
      *
      * @param  User  $user
-     * @param  bool  $withMetafields
+     * @param  bool  $isCreating
      * @return array
      */
-    private function createCustomerDataForUser(User $user, bool $withMetafields): array
+    private function createCustomerDataForUser(User $user, bool $isCreating): array
     {
         $customerData = [
             "currency" => "USD",
@@ -384,23 +402,25 @@ class SyncUsersToShopify implements ShouldQueue
             // "tags" => "",
         ];
 
-        if ($withMetafields) {
-            // refer to https://shopify.dev/docs/apps/custom-data/metafields/types
-            // we can use meta fields for stuff like our user id, etc
-            $customerData["metafields"] = [
-                [
-                    "key" => ShopifyMetafieldKey::Id->value,
-                    "value" => (string)$user->id,
-                    "type" => ShopifyMetafieldTypes::integer->value,
-                    "namespace" => ShopifyMetafieldNamespace::Model_Users->value
-                ],
-                [
-                    "key" => ShopifyMetafieldKey::IsMusoraAccountSetUp->value,
-                    "value" => "true",
-                    "type" => ShopifyMetafieldTypes::boolean->value,
-                    "namespace" => ShopifyMetafieldNamespace::Musora->value
-                ]
-            ];
+        if ($isCreating) {
+            $customerData["metafields"] = $user->getMetafieldsForShopify();
+        } else {
+            try {
+                $newMetafields = $user->getNewMetafieldsForShopify();
+                $this->handleRateLimit();
+                if (!empty($newMetafields)) {
+                    $customerData["metafields"] = $newMetafields;
+                }
+            } catch (Exception $exception) {
+                $this->logError(
+                    sprintf(
+                        "%s: Failed to find new metafields to send to Shopify for updating user with email address %s: %s",
+                        $this->getClassName(),
+                        $user->email,
+                        $exception->getMessage()
+                    )
+                );
+            }
         }
 
         return $customerData;

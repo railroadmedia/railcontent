@@ -16,8 +16,8 @@ export default {
     getUserAccessPermissions(user_id, {
         limit = 20,
         page = 1,
-        order_by_column = 'created_at',
-        order_by_direction = 'asc',
+        order_by_column = 'actualExpirationTime',
+        order_by_direction = 'desc',
     }) {
         return axios.get('/ecommerce/user-access-permissions', {
             params: {

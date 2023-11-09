@@ -10,6 +10,7 @@ use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesShopifyRateLimit;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsToShopify;
+use App\Modules\Ecommerce\Models\Product;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\ORMException;
@@ -583,6 +584,15 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             throw new Exception(sprintf("No product found for SubscriptionPayment %s", $subscriptionPayment->getId()));
         }
 
+        // get the eloquent model for the product, so we can use our improved functionality
+        $productModel = Product::find($product->getId());
+
+        // DEV NOTE: if the subscription payment is using a trial product (the user started a trial and continued it),
+        // then we need to use the corresponding full product
+        if ($productModel->isTrial()) {
+            $productModel = $productModel->getFullProductForTrial();
+        }
+
         // the user or customer is returned with only their id and email, so get the id and get a fresh copy
         if ($subscription->getUser()) {
             $purchaser = User::find($subscription->getUser()->getId());
@@ -721,11 +731,11 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                 "price" => number_format($subscription->getTotalPrice(), 2, '.', ''),
                 "quantity" => 1,
                 "requires_shipping" => false,
-                "sku" => $product->getSku(),
-                "title" => $product->getName(),
-                "variant_id" => $product->getShopifyId(),
+                "sku" => $productModel->sku,
+                "title" => $productModel->name,
+                "variant_id" => $productModel->shopify_id,
                 "variant_inventory_management" => "shopify",
-                "vendor" => $product->getBrand(),
+                "vendor" => $productModel->brand,
             ];
 
         // DEV NOTE:

@@ -20,7 +20,7 @@ class CustomerIoBaseJob implements ShouldQueue
      */
     public function failed(Throwable $exception)
     {
-        error_log($exception);
+        \Log::error($exception);
 
         $this->fail($exception);
     }

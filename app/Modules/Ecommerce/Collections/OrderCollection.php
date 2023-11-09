@@ -33,5 +33,10 @@ class OrderCollection
         return $this->products;
     }
 
+    public function getOrderBrands()
+    {
+        return $this->orders->pluck('lineItems')->flatten(1)->pluck('product.brand')->unique()->toArray();
+    }
+
 
 }
