@@ -342,7 +342,15 @@ class Product extends Model
     public function getTrialDays(): int
     {
         if (str_contains(strtolower($this->sku), "7-day")
-            || $this->sku == "PIANOTE-MEMBERSHIP-TRIAL") {
+            || in_array(
+                $this->sku,
+                [
+                    "PIANOTE-MEMBERSHIP-TRIAL",
+                    "DLM-Trial-1-month",
+                    "DLM-Trial-Best-Book-1-month"
+                ]
+            )
+        ) {
             return 7;
         }
         if (str_contains(strtolower($this->sku), "30-day")
