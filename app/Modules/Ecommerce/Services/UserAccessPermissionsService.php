@@ -205,7 +205,7 @@ class UserAccessPermissionsService
                     $accessPermission->status = $status;
                     $accessPermission->save();
                     $wasUpdated = true;
-                } elseif ($accessPermission->created_at < Carbon::parse('2023-11-10')) {
+                } elseif ($accessPermission->created_at < Carbon::parse('2023-11-9')) {
                     $expectedDays = $lineItem->product->getMembershipTimeDays();
                     $expectedMonths = $lineItem->product->getMembershipTimeMonths();
                     if ($accessPermission->time_days != $expectedDays || $accessPermission->time_months != $expectedMonths) {
