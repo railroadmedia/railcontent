@@ -56,10 +56,12 @@ class ShopifyCartAPIController extends Controller
                 ];
         }
 
+        $discountCodeToApply = $request->get('promo-code');
+
         if (empty($existingShopifyCartId) || empty($existingCart)) {
             $cartData = $this->shopifyStoreFrontAPIService->createCart(
                 $productVariantIdsAndQuantitiesToAdd,
-                ['my-discount01']
+                !empty($discountCodeToApply) ? [$discountCodeToApply] : []
             );
 
             if ($request->get('locked') == 'true') {
@@ -81,7 +83,8 @@ class ShopifyCartAPIController extends Controller
 
             $cartData = $this->shopifyStoreFrontAPIService->addToCart(
                 $existingShopifyCartId,
-                $productVariantIdsAndQuantitiesToAdd
+                $productVariantIdsAndQuantitiesToAdd,
+                !empty($discountCodeToApply) ? [$discountCodeToApply] : []
             );
 
             Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
