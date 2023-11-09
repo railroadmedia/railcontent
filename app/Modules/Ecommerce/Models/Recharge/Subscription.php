@@ -14,7 +14,7 @@ class Subscription
     public int $id;
     public ?Product $product;
     public string $status;
-    public string $sku;
+    public ?string $sku;
     public ?Carbon $nextChargeScheduledAt;
 
     public function __construct($subscriptionData)
