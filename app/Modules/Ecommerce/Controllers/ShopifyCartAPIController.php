@@ -75,6 +75,7 @@ class ShopifyCartAPIController extends Controller
                 $request->get('locked') == 'true') {
                 Session::forget(self::SHOPIFY_CART_LOCKED_SESSION_KEY);
                 $this->shopifyStoreFrontAPIService->clearCart($existingShopifyCartId);
+                $this->shopifyStoreFrontAPIService->applyDiscountCodes($existingShopifyCartId, []);
             }
 
             if ($request->get('locked') == 'true') {
@@ -148,6 +149,7 @@ class ShopifyCartAPIController extends Controller
         if (Session::get(self::SHOPIFY_CART_LOCKED_SESSION_KEY, false) == true) {
             Session::forget(self::SHOPIFY_CART_LOCKED_SESSION_KEY);
             $this->shopifyStoreFrontAPIService->clearCart($existingShopifyCartId);
+            $this->shopifyStoreFrontAPIService->applyDiscountCodes($existingShopifyCartId, []);
         }
 
         $shopifyCartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);

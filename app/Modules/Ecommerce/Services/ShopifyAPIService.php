@@ -883,7 +883,7 @@ class ShopifyAPIService
         return $this->applyDiscountCodes($cartId, $currentDiscountCodes);
     }
 
-    private function applyDiscountCodes($cartId, array $discountCodes)
+    public function applyDiscountCodes($cartId, array $discountCodes)
     {
         $addDiscountCodeInputLineArray = $discountCodes;
 
