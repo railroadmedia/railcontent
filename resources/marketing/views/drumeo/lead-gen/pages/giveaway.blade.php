@@ -197,7 +197,7 @@
 
             @include("drumeo.lead-gen.partials.sign-up-form", [
             "recaptchaKey" => $recaptchaKey,
-            "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway - Web Form",
+            "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway - Web Form2",
             "formName" => 'Drumeo Drumset Giveaway',
                 "buttonText" => "I WANT TO WIN!",
             ])

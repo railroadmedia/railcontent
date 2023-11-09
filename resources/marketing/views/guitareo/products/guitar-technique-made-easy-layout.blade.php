@@ -119,7 +119,7 @@
                 @hasSection('button-change')
                     @yield('button-change')
                 @else
-                    <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GTME-OCT-2018-SEMESTER' => 1], 'redirect' => '/order']) }}" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[GTME-OCT-2018-SEMESTER]=1&redirect=/order" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
                 @endif
 
                 <p class="price-info">
@@ -664,7 +664,7 @@
                 @hasSection('button-change')
                     @yield('button-change')
                 @else
-                    <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GTME-OCT-2018-SEMESTER' => 1], 'redirect' => '/order']) }}" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[GTME-OCT-2018-SEMESTER]=1&redirect=/order" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
                 @endif
 
                 <h6 style="margin-top: 15px;">

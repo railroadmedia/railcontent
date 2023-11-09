@@ -56,10 +56,12 @@ class ShopifyCartAPIController extends Controller
                 ];
         }
 
+        $discountCodeToApply = $request->get('promo-code');
+
         if (empty($existingShopifyCartId) || empty($existingCart)) {
             $cartData = $this->shopifyStoreFrontAPIService->createCart(
                 $productVariantIdsAndQuantitiesToAdd,
-                ['my-discount01']
+                !empty($discountCodeToApply) ? [$discountCodeToApply] : []
             );
 
             if ($request->get('locked') == 'true') {
@@ -73,6 +75,7 @@ class ShopifyCartAPIController extends Controller
                 $request->get('locked') == 'true') {
                 Session::forget(self::SHOPIFY_CART_LOCKED_SESSION_KEY);
                 $this->shopifyStoreFrontAPIService->clearCart($existingShopifyCartId);
+                $this->shopifyStoreFrontAPIService->applyDiscountCodes($existingShopifyCartId, []);
             }
 
             if ($request->get('locked') == 'true') {
@@ -81,7 +84,8 @@ class ShopifyCartAPIController extends Controller
 
             $cartData = $this->shopifyStoreFrontAPIService->addToCart(
                 $existingShopifyCartId,
-                $productVariantIdsAndQuantitiesToAdd
+                $productVariantIdsAndQuantitiesToAdd,
+                !empty($discountCodeToApply) ? [$discountCodeToApply] : []
             );
 
             Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
@@ -145,6 +149,7 @@ class ShopifyCartAPIController extends Controller
         if (Session::get(self::SHOPIFY_CART_LOCKED_SESSION_KEY, false) == true) {
             Session::forget(self::SHOPIFY_CART_LOCKED_SESSION_KEY);
             $this->shopifyStoreFrontAPIService->clearCart($existingShopifyCartId);
+            $this->shopifyStoreFrontAPIService->applyDiscountCodes($existingShopifyCartId, []);
         }
 
         $shopifyCartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
