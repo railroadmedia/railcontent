@@ -19,7 +19,7 @@ class RedirectLegacyCartRequestsToShopifyControllers
 
         // always redirect brand domains to musora domain so sessions are always on musora.com
         if (in_array($this->getHostDomainFromFullDomain($parse['host']), $brandDomains) &&
-            (in_array(trim($request->path(), '/'), ['order/drumeo', 'order/pianote', 'order/guitareo', 'order/singeo'])) &&
+            (in_array(trim($request->path(), '/'), ['order/drumeo', 'order/pianote', 'order/guitareo', 'order/singeo', 'order'])) &&
             $request->method() == 'GET' &&
             Str::endsWith($parse['host'], $brandDomains)) {
 
