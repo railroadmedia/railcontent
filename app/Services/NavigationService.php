@@ -67,7 +67,7 @@ class NavigationService
                     [
                         'name' => 'Workouts',
                         'path' => '/'.brand().'/workouts',
-                        'icon' => 'leaderboard',
+                        'icon' => 'workouts',
                     ],
                 ],
                 [ // section
@@ -158,7 +158,7 @@ class NavigationService
                     [
                         'name' => 'Workouts',
                         'path' => '/'.brand().'/workouts',
-                        'icon' => 'leaderboard',
+                        'icon' => 'workouts',
                     ],
                 ],
                 [ // section
@@ -249,7 +249,7 @@ class NavigationService
                     [
                         'name' => 'Workouts',
                         'path' => '/'.brand().'/workouts',
-                        'icon' => 'leaderboard',
+                        'icon' => 'workouts',
                     ],
                 ],
                 [ // section
@@ -350,7 +350,7 @@ class NavigationService
                     [
                         'name' => 'Workouts',
                         'path' => '/'.brand().'/workouts',
-                        'icon' => 'leaderboard',
+                        'icon' => 'workouts',
                     ],
                 ],
                 [ // section

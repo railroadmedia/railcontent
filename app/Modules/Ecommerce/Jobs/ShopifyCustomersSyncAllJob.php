@@ -21,14 +21,25 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
     private int $startId;
     private int $endId;
     private bool $isRebuildingPermissions;
+    /**
+     * @var false
+     */
+    private bool $skipEventSync;
 
-    public function __construct(int $skip, int $take, int $startId, int $endId, $isRebuildingPermissions = false)
-    {
+    public function __construct(
+        int $skip,
+        int $take,
+        int $startId,
+        int $endId,
+        $isRebuildingPermissions = false,
+        $skipEventSync = false
+    ) {
         $this->skip = $skip;
         $this->take = $take;
         $this->startId = $startId;
         $this->endId = $endId;
         $this->isRebuildingPermissions = $isRebuildingPermissions;
+        $this->skipEventSync = $skipEventSync;
     }
 
     function getSkip(): int
@@ -43,7 +54,7 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
 
     function getQuery(): Builder
     {
-        $query = User::query()->whereNotNull('shopify_id');
+        $query = User::query();
         if ($this->startId) {
             $query = $query->where('id', '>=', $this->startId);
         }
@@ -62,9 +73,13 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
         $shopifySyncService = app(ShopifySyncService::class);
         foreach ($items as $item) {
             try {
-                $shopifySyncService->syncCustomer($item->shopify_id, isRebuildingPermissions:  $this->isRebuildingPermissions);
+                $shopifySyncService->syncCustomerByUser(
+                    $item,
+                    isRebuildingPermissions: $this->isRebuildingPermissions,
+                    skipEventSync: $this->skipEventSync
+                );
             } catch (\Throwable $ex) {
-                Log::error("Error syncing shopify customer $item->shopify_id: user:$item->id");
+                Log::error("Error syncing shopify user $item->shopify_id: user:$item->id");
                 Log::error($ex);
             }
         }

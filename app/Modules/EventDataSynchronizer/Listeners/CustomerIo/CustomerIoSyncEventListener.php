@@ -1523,15 +1523,15 @@ class CustomerIoSyncEventListener
             $latest = $brandSubscriptions->last() ?? null;
 
 
-//            $attributes[$brand . '_membership_status'] = $latest ? $this->getSubscriptionStatus($latest) : "";
-//            $attributes[$brand . '_membership_subscription_type'] = $latest ?
-//                $latest->product->subscription_interval_count . "_" . $latest->product->subscription_interval_type : "";
-//            $attributes[$brand . '_membership_subscription_renewal-date'] = $latest?->nextChargeScheduledAt->timestamp ?? "";
-//            $attributes[$brand . '_membership_subscription_cancellation-date'] = $latest?->cancelledAt?->timestamp ?? "";
-//            $attributes[$brand . '_membership_subscription_cancellation-reason'] = $latest?->cancellationReason ?? "";
-//            $attributes[$brand . '_membership_subscription_latest-start-date'] = $latest?->createdAt?->timestamp ?? "";
-//            $attributes[$brand . '_membership_subscription_first-start-date'] = $first?->createdAt?->timestamp ?? "";
-//            $attributes[$brand . '_membership_subscription_trial-type'] = $latest ? $this->getTrialType($latest) : "";
+            $attributes[$brand . '_membership_status'] = $latest ? $this->getSubscriptionStatus($latest) : "";
+            $attributes[$brand . '_membership_subscription_type'] = $latest ?
+                $latest->product->subscription_interval_count . "_" . $latest->product->subscription_interval_type : "";
+            $attributes[$brand . '_membership_subscription_renewal-date'] = $latest?->nextChargeScheduledAt->timestamp ?? "";
+            $attributes[$brand . '_membership_subscription_cancellation-date'] = $latest?->cancelledAt?->timestamp ?? "";
+            $attributes[$brand . '_membership_subscription_cancellation-reason'] = $latest?->cancellationReason ?? "";
+            $attributes[$brand . '_membership_subscription_latest-start-date'] = $latest?->createdAt?->timestamp ?? "";
+            $attributes[$brand . '_membership_subscription_first-start-date'] = $first?->createdAt?->timestamp ?? "";
+            $attributes[$brand . '_membership_subscription_trial-type'] = $latest ? $this->getTrialType($latest) : "";
         }
         return $attributes;
     }

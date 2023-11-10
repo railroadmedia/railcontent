@@ -57,12 +57,29 @@ class ShopifySyncService
         $this->shopifyGateway = $shopifyGateway;
     }
 
-    public function syncCustomer($shopifyCustomerId, $email = '', bool $isRebuildingPermissions = false): void
+    public function syncCustomerByUser(User $user, bool $isRebuildingPermissions = false, bool $skipEventSync): void
     {
+        if ($user->shopify_id) {
+            $this->syncCustomer(
+                $user->shopify_id,
+                isRebuildingPermissions: $isRebuildingPermissions,
+                skipEventSync: $skipEventSync
+            );
+        } else {
+            $this->userAccessPermissionsService->syncUser($user, $skipEventSync);
+        }
+    }
+
+    public function syncCustomer(
+        $shopifyCustomerId,
+        $email = '',
+        bool $isRebuildingPermissions = false,
+        bool $skipEventSync = false
+    ): void {
         if (!$shopifyCustomerId) {
             $user = $this->userService->getByEmailOrNull($email);
             if ($user) {
-                $this->userAccessPermissionsService->syncUser($user);
+                $this->userAccessPermissionsService->syncUser($user, $skipEventSync);
             }
             return;
         }
@@ -77,7 +94,12 @@ class ShopifySyncService
             $user = $this->getOrCreateUser($shopifyCustomerId, $email);
             $orderCollection = new OrderCollection($orders, $products);
             $this->updateUserData($shopifyCustomerId, $user);
-            $this->userAccessPermissionsService->syncShopifyOrders($user, $orderCollection, $isRebuildingPermissions);
+            $this->userAccessPermissionsService->syncShopifyOrders(
+                $user,
+                $orderCollection,
+                $isRebuildingPermissions,
+                $skipEventSync
+            );
         } else {
             Log::debug("Customer $shopifyCustomerId: No digital products found");
             $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
@@ -85,7 +107,7 @@ class ShopifySyncService
                 $user = $this->userService->getByEmailOrNull($email);
             }
             if ($user) {
-                $this->userAccessPermissionsService->syncUser($user);
+                $this->userAccessPermissionsService->syncUser($user, $skipEventSync);
             }
         }
     }
@@ -93,8 +115,8 @@ class ShopifySyncService
     public function syncCustomerByEmail($email)
     {
         $emailShopify = $this->getEmailForShopify($email);
-        $customers = $this->shopify->getCustomers(['email' => $emailShopify]);
-        $customer = collect($customers)->first(fn($item) => $item->email === $emailShopify);
+        $customers = $this->shopify->getCustomers(['email' => $email]);
+        $customer = collect($customers)->first(fn($item) => $item->email === $email);
         if (!$customer) {
             Log::warning("Customer with email $email not found in Shopify");
             return;
