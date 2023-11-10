@@ -71,8 +71,12 @@ class UserMembershipSyncCustomJob extends BatchQueryJob
 
         foreach ($userIds as $userId) {
             $userAccessPermissions = $userAccessPermissionsService->getUserAccessPermissions($userId);
-            $userMembershipFieldsService->syncUserAccess($userAccessPermissions);
-            $userContentListenerService->syncContentPermissions($userId, $userAccessPermissions);
+            if ($userAccessPermissions->getCollection()->count() > 0) {
+                $userMembershipFieldsService->syncUserAccess($userAccessPermissions);
+                $userContentListenerService->syncContentPermissions($userId, $userAccessPermissions);
+            } else {
+                \Log::error("User $userId has no access permissions");
+            }
         }
 
 //        if ($this->syncCustomerIO) {
