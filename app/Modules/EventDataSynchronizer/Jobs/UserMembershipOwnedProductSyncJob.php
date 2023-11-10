@@ -3,7 +3,10 @@
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
 use App\Console\Commands\Infrastructure\BatchQueryJob;
+use App\Modules\Ecommerce\Models\UserAccessPermission;
 use App\Modules\Ecommerce\Models\UserProduct;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
+use App\Modules\EventDataSynchronizer\Listeners\UserProductToUserContentPermissionListener;
 use App\Modules\EventDataSynchronizer\Services\UserMembershipFieldsService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -13,17 +16,25 @@ class UserMembershipOwnedProductSyncJob extends BatchQueryJob
 {
     private int $skip;
     private int $take;
-    private int $productId;
+    private int $permissionId;
     private bool $syncCustomerIO;
-    private ?Carbon $purchasedAfter;
+    private ?Carbon $afterDate;
+    private bool $syncContentPermissions;
 
-    public function __construct(int $skip, int $take, int $productId, bool $syncCustomerIO, ?string $purchasedAfter)
-    {
+    public function __construct(
+        int $skip,
+        int $take,
+        int $permissionId,
+        ?string $afterDate,
+        bool $syncContentPermissions,
+        bool $syncCustomerIO
+    ) {
         $this->skip = $skip;
         $this->take = $take;
-        $this->productId = $productId;
+        $this->permissionId = $permissionId;
+        $this->afterDate = !empty($afterDate) ? new Carbon($afterDate) : null;
+        $this->syncContentPermissions = $syncContentPermissions;
         $this->syncCustomerIO = $syncCustomerIO;
-        $this->purchasedAfter = !empty($purchasedAfter) ? new Carbon($purchasedAfter) : null;
     }
 
     function getSkip(): int
@@ -38,12 +49,12 @@ class UserMembershipOwnedProductSyncJob extends BatchQueryJob
 
     function getQuery(): Builder
     {
-        $query = UserProduct::query()->select('user_id');
-        if ($this->productId) {
-            $query = $query->where('product_id', '=', $this->productId);
+        $query = UserAccessPermission::query()->select('user_id')->distinct();
+        if ($this->permissionId) {
+            $query = $query->where('permission_id', '=', $this->permissionId);
         }
-        if ($this->purchasedAfter) {
-            $query = $query->where('created_at', '>', $this->purchasedAfter);
+        if ($this->afterDate) {
+            $query = $query->where('start_time', '>', $this->afterDate);
         }
         return $query;
     }
@@ -56,11 +67,22 @@ class UserMembershipOwnedProductSyncJob extends BatchQueryJob
     {
         /** @var UserMembershipFieldsService $userMembershipFieldsService */
         $userMembershipFieldsService = app()->make(UserMembershipFieldsService::class);
+        /** @var UserProductToUserContentPermissionListener $userContentListenerService */
+        $userContentListenerService = app()->make(UserProductToUserContentPermissionListener::class);
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app()->make(UserAccessPermissionsService::class);
+
         $userIds = $items->map(function ($item) {
             return $item->user_id;
         })->toArray();
 
-        $userMembershipFieldsService->syncUserIds($userIds);
+        foreach ($userIds as $userId) {
+            $userAccessPermissions = $userAccessPermissionsService->getUserAccessPermissions($userId);
+            $userMembershipFieldsService->syncUserAccess($userAccessPermissions);
+            if ($this->syncContentPermissions) {
+                $userContentListenerService->syncContentPermissions($userId, $userAccessPermissions);
+            }
+        }
 
         if ($this->syncCustomerIO) {
             foreach ($userIds as $userId) {

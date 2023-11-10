@@ -30,7 +30,6 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\SessionDomains::class,
-        \App\Http\Middleware\LegacyBrandCartURLRedirects::class,
     ];
 
     /**
@@ -40,7 +39,6 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web_public' => [
-//            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -54,10 +52,10 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\SetContentPermissions::class,
             RedirectIfMobileRequest::class,
             LeadTrackerMiddleware::class,
+            \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
         ],
 
         'web_authenticated' => [
-//            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -72,6 +70,7 @@ class Kernel extends HttpKernel
             RedirectIfMobileRequest::class,
             LeadTrackerMiddleware::class,
             \App\Modules\EventDataSynchronizer\Middleware\UserActivitySyncMiddleware::class,
+            \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
         ],
 
         'web_member_only' => [
@@ -79,7 +78,6 @@ class Kernel extends HttpKernel
         ],
 
         'api_public' => [
-//            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -89,10 +87,10 @@ class Kernel extends HttpKernel
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
             \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
             \App\Http\Middleware\SetContentPermissions::class,
+            \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
         ],
 
         'api_authenticated' => [
-//            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -103,6 +101,7 @@ class Kernel extends HttpKernel
             \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
             \App\Http\Middleware\SetContentPermissions::class,
             BrandMiddleware::class,
+            \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
         ],
 
         // Do not add more middleware to these 2 without good reason!

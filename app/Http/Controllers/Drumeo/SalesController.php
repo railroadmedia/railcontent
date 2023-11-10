@@ -126,20 +126,6 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
     }
-    public function ultimatepracticerig()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.ultimate-practice-rig', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
-    }
-    public function restart()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.restart', ['products' => $products, 'theme' => 'drumeo']);
-    }
     public function choosePlanVDF()
     {
         $products = $this->productRepository->all();
@@ -342,11 +328,6 @@ class SalesController extends BaseController
         return view('drumeo.sales.pages.tom-sawyer');
     }
 
-    public function drumFest()
-    {
-        return view('drumeo.sales.pages.drumfest');
-    }
-
     public function awards()
     {
         return view('drumeo.lead-gen.pages.awards');
@@ -432,5 +413,10 @@ class SalesController extends BaseController
     public function drummingSystem()
     {
         return view('drumeo.drumshop.pages.drumming-system', ['theme' => 'drumeo']);
+    }
+
+    public function easyRudimentsPlaylist()
+    {
+        return view('drumeo.pages.easy-rudiments-playlist', ['theme' => 'drumeo']);
     }
 }

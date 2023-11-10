@@ -210,7 +210,7 @@
             <h6 class="leading-relaxed sm:mt-6 mb-4 sm:mb-7 px-5 sm:px-0 max-w-xs sm:max-w-full">
                 Find your musical flow with step-by-step lessons, <br class="hidden sm:inline">
                 thousands of songs, and unlimited personal support.</h6>
-            <a class="sm:mx-1 w-full sm:w-56 join musora-gold smaller" href="/choose-plan">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
+            <a class="sm:mx-1 w-full sm:w-64 join musora-gold smaller" href="/choose-plan">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
             <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
@@ -292,16 +292,14 @@
                 @endphp
                 @foreach ($gridItems as $key => $gridItem)
                     <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0 max-w-xs sm:max-w-full">
-                        <picture class="w-1/3 sm:w-full">
-                            <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/{{ $gridItem['image'] }}">
-                            <img
-                                class=" rounded-xl mb-3 transition-opacity opacity-0"
-                                src="https://www.musora.com/musora-cdn/image/width=200,quality=95/{{ $gridItem['image'] }}"
-                                alt="grid{{$key+1}}"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
+
+                        <div class="w-1/3 sm:w-full mb-3 rounded-xl overflow-hidden">
+                            <div
+                                class=" aspect-16:9 bg-cover bg-center"
+                                style="background-image:url('https://www.musora.com/musora-cdn/image/width=640,quality=95/{{ $gridItem['image'] }}')"
                             >
-                        </picture>
+                            </div>
+                        </div>
                         <div class="w-2/3 sm:w-full pl-3 sm:pl-0">
                             <p class="leading-tight mb-0.5"><strong class="font-black"><span class="border border-musora rounded-full px-2 py-0.5 inline-block">{{$key+1}}</span> {{ $gridItem['title'] }}</strong></p>
                             <p class="leading-normal text-sm">{{ $gridItem['desc'] }}</p>
@@ -425,17 +423,17 @@
                     <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/pianote-player2.png" alt="pianote player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
-            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'guitareo'">
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'guitareo'" style="display:none;">
                 <div style="padding-bottom:62.4%" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="guitareoSoundslice = true;" >
                     <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/guitareo-player2.png" alt="guitareo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
-            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'drumeo'">
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'drumeo'" style="display:none;">
                 <div style="padding-bottom:62.4%;" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="drumeoSoundslice = true;" >
                     <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/drumeo-player2.png" alt="drumeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
-            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'singeo'">
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'singeo'" style="display:none;">
                 <div style="padding-bottom:62.4%" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="singeoSoundslice = true;" >
                     <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/singeo-player2.png" alt="singeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
@@ -503,7 +501,7 @@
                 </div>
             </div>
             @if(empty($promoVersion))
-                <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline {{ $theme }} smaller">SEE SONGS LIST</a>
+                <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-72 join outline {{ $theme }} smaller">SEE SONGS LIST</a>
             @endif
             <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }}-gold smaller @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))

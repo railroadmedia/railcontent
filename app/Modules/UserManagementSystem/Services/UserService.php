@@ -38,7 +38,7 @@ class UserService
         return $user ?? null;
     }
 
-    public function createUser(string $email, string $password): User
+    public function createUser(string $email, string $password, ?int $shopifyCustomerId = null, bool $requiresPasswordUpdate = false): User
     {
         $parts = explode('@', $email);
 
@@ -46,6 +46,8 @@ class UserService
         $user->email = $email;
         $user->setPassword($password);
         $user->display_name = $parts[0] . rand(10000, 99999);
+        $user->shopify_id = $shopifyCustomerId;
+        $user->requires_password_update = $requiresPasswordUpdate;
         $user->save();
         event(new UserCreated($user));
         return $user;

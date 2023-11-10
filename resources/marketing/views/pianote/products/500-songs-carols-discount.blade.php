@@ -3,7 +3,7 @@
 @php $productPrice = 39 @endphp
 
 @section('order-link')
-    {{ url()->route('shopping-cart.add-to-cart', ['products' => ['500-songs-in-5-days' => 1], 'redirect' => '/order', 'locked' => 'true', 'promo-code' => 'learn-3-songs']) }}
+    /ecommerce/add-to-cart?products[500-songs-in-5-days]=1&redirect=/order&locked=true&promo-code=lead-discount2
 @endsection
 @section('header-text')
     Learn 100s more <strong>real songs</strong> on the piano. <br class="hidden-xs">

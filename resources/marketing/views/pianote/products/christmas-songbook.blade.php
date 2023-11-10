@@ -240,7 +240,7 @@
                         @if(floatval($productPrices['christmas-songbook']->price) > floatval($productPrices['christmas-songbook']->discounted_price))
                             <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >Save {{ round(100 - (100 * (floatval($productPrices['christmas-songbook']->discounted_price) / floatval($productPrices['christmas-songbook']->price)))) }}%</p>
                         @endif
-                        <a href="/ecommerce/add-to-cart?locked=true&product-array=christmas-songbook:1,christmas-song-book-digital:1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
+                        <a href="/ecommerce/add-to-cart?locked=true&products[christmas-songbook]=1&products[christmas-song-book-digital]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
                             <div class="bg-white px-3 py-6 md:py-9">
                                 <h4 class="mb-2 sm:mb-3"><strong>Book Only</strong></h4>
                                 <img class="h-28 lg:h-32 transition-opacity opacity-0"
@@ -296,10 +296,10 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
 
     <script>
         $(document).ready(function () {

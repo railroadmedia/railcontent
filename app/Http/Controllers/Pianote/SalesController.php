@@ -55,10 +55,6 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.chords-trial', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
     }
-    public function restart()
-    {
-        return view('pianote.sales.restart', ['theme' => 'pianote']);
-    }
     public function promoSS()
     {
         return view('pianote.sales.song-secrets-bonus', ['theme' => 'pianote', 'promoVersion' => 'true']);

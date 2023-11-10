@@ -11,8 +11,8 @@ use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoOrders;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncPoints;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncUserTotalXp;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserContentProductPermissionsResyncTool;
-use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipOwnedProductSyncTool;
-use App\Modules\EventDataSynchronizer\Listeners\SubscriptionSyncListener;
+use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipSyncByPermissions;
+use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipSyncCustom;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Railroad\Ecommerce\Events\AccessCodeClaimed;
@@ -115,7 +115,6 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
             UserProductToUserContentPermissionListener::class . '@handleUserAccessPermissionsUpdated',
             HelpScoutEventListener::class . '@handleUserAccessPermissionsUpdated',
             UserMembershipFieldsListener::class . '@handleUserAccessPermissionsUpdated',
-            SubscriptionSyncListener::class . '@handleUserAccessPermissionsUpdated',
         ],
         SubscriptionCreated::class => [
             CustomerIoSyncEventListener::class . '@handleSubscriptionCreated',
@@ -244,13 +243,12 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 SyncHelpScoutAsync::class,
                 SyncCustomerIoOldEvents::class,
                 SyncCustomerIoExistingDevices::class,
-                UserMembershipFieldsResyncTool::class,
-                UserMembershipOwnedProductSyncTool::class,
+                UserMembershipSyncByPermissions::class,
+                UserMembershipSyncCustom::class,
                 ProductOwnerUserFieldResyncTool::class,
                 SyncUserTotalXp::class,
                 IsDrumeoLifetimeUserFieldResyncTool::class,
                 CustomerIOSyncUser::class,
-                ExpiredProductResync::class,
                 MigrateMinutesWatchedPoints::class,
                 SyncPoints::class,
                 SyncCustomerIoOrders::class,

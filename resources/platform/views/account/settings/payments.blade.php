@@ -7,64 +7,31 @@
 @section('edit-forms')
     <div id="editForm" class="tw-flex tw-flex-col">
 
-        {{-- Coming Soon Message --}}
-        <div id="payment-methods-section">
-
-            <div class="tw-flex tw-flex-row pa-3 tw-pb-0 tw-flex-auto">
-                <h1 class="tw-text-2xl tw-tw-font-bold tw-text-[#00101D] dark:tw-text-white">Payment Details</h1>
-            </div>
-
-            <payment-methods
-                    theme-color="drumeo"
-                    :payment-methods="{{ $paymentMethodsJson }}"
-                    brand="{{ $brand }}"
-                    stripe-publishable-key="{{ $stripePublishableKey }}"
-                    :countries="{{ $countries }}"
-                    :provinces="{{ $provinces }}"
-                    :cart="{{ $cartJson }}"
-                    :has-subscription="{{ json_encode(!empty($currentSubscription)) }}"
-                    :is-active="{{ json_encode($existingSubscriptionActive) }}"
-                    :user-id="{{ $currentUser->getId() }}"
-                    display-override-price="{{ $displayOverridePrice }}"
-                    display-override-tax="{{ $displayOverrideTax }}"
-            ></payment-methods>
-        </div>
-
         <div class="flex flex-row pa-3 flex-auto">
             <div class="flex flex-column">
                 <div class="flex flex-row mb-3">
                     <h2 class="tw-font-bold tw-text-lg tw-text-[#00101D] dark:tw-text-white">Payment History</h2>
                 </div>
-                @if($payments)
-                    @foreach($payments as $payment)
-                        <a href="{{ url()->route('platform.profile.settings.payment-invoice', [user()->id, $payment->getId()]) }}"
+                @if($shopifyOrders)
+                    @foreach($shopifyOrders as $shopifyOrder)
+                        <a href="{{ $shopifyOrder['statusUrl'] }}"
                            class="flex flex-row flex-wrap mb-1 text-black no-decoration"
                            target="_blank">
-                            <div class="flex flex-column xs-12 md-6">
+                            <div class="flex flex-column xs-12 md-4">
                                 <div class="flex flex-row">
                                     <p class="tw-text-sm tw-font-bold tw-text-[#00101D] dark:tw-text-white">
                                         <i class="fal fa-file-pdf mr-1"></i>
-                                        {{ Carbon\Carbon::parse($payment->getCreatedAt())->format('F j, Y') }}
+                                        {{ Carbon\Carbon::parse($shopifyOrder['processedAt'])->format('F j, Y') }}
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex flex-column xs-12 md-6">
+                            <div class="flex flex-column xs-12 md-8">
                                 <div class="flex flex-row">
-                                    <div class="flex flex-column tw-text-xs tw-italic tw-uppercase align-h-left xs-6 tw-text-[#00101D] dark:tw-text-white">
-                                        @if (!empty($payment->getPaymentMethod()) &&
-                                        !empty($payment->getPaymentMethod()->getMethod()) &&
-                                        $payment->getExternalProvider() == 'stripe')
-                                            {{ $payment->getPaymentMethod()->getMethod()->getCompanyName() }} -
-                                            {{ $payment->getPaymentMethod()->getMethod()->getLastFourDigits() }}
-                                        @else
-                                            {{ $payment->getExternalProvider() == 'paypal' ? 'PayPal' : 'Other' }}
-                                        @endif
-                                    </div>
-                                    <div class="flex flex-column tw-text-xs tw-italic tw-uppercase align-h-center xs-3 tw-text-[#00101D] dark:tw-text-white">
-                                        {{ $payment->getType() }}
+                                    <div class="flex flex-column tw-text-xs tw-italic tw-uppercase align-h-center xs-6 tw-text-[#00101D] dark:tw-text-white">
+                                        {{ $shopifyOrder['itemsProductTitlesString'] }}
                                     </div>
                                     <div class="flex flex-column tw-text-xs tw-italic tw-uppercase align-h-right xs-3 tw-text-[#00101D] dark:tw-text-white">
-                                        ${{ number_format($payment->getTotalPaid(), 2, '.') }}
+                                        ${{ number_format($shopifyOrder['totalPrice'], 2, '.') }}
                                     </div>
                                 </div>
                             </div>

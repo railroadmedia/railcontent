@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Console\Commands;
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
+use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use Carbon\CarbonInterval;
 use Exception;
@@ -93,14 +94,21 @@ class MigrateRechargeSubscriptions extends Command
             }
 
             $this->info('Loading Product Information');
-            $productIds = $subscriptions->pluck('product.shopify_id')->unique()->mapWithKeys(
-                function ($id) use ($shopify) {
+            $products = $subscriptions->pluck('product')->unique();
+            $mappedProducts = $products->mapWithKeys(function ($product) {
+                /** @var Product $product */
+                return [$product->id => $product->getFullProductForTrial()];
+            });
+
+
+            $productIds = $mappedProducts->mapWithKeys(
+                function ($product) use ($shopify) {
                     try {
-                        $variantId = $shopify->getVariant($id)?->product_id ?? 0;
+                        $variantId = $shopify->getVariant($product->shopify_id)?->product_id ?? 0;
                     } catch (\Exception $ex) {
                         $variantId = 0;
                     }
-                    return [$id => $variantId];
+                    return [$product->shopify_id => $variantId];
                 }
             )->toArray();
 
@@ -119,7 +127,7 @@ class MigrateRechargeSubscriptions extends Command
                         $i++;
                         continue;
                     }
-                    $product = $subscription->product;
+                    $product = $subscription->product->getFullProductForTrial();
                     $variantId = $product?->shopify_id ?? 0;
                     $productId = $productIds[$variantId] ?? 0;
                     $i++;
@@ -209,6 +217,9 @@ class MigrateRechargeSubscriptions extends Command
     private function getNextChargeDate(Subscription $subscription)
     {
         $nextInterval = Carbon::parse($subscription->paid_until);
+        if ($nextInterval < Carbon::parse('2023-11-09')) {
+            $nextInterval->addDay();
+        }
         return $nextInterval->isoFormat('YYYY-MM-DD');
     }
 }

@@ -130,7 +130,7 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         return [
             'isEdge' => $user->isAMember(),
-            'isEdgeExpired' => $user->isAnExpiredMember(),
+            'isEdgeExpired' => !$user->membership_expiration_date || $user->isAnExpiredMember(),
             'edgeExpirationDate' => $user->membership_expiration_date,
             'isPackOnlyOwner' => $user->isPackOnlyOwner(),
             'isAppleAppSubscriber' => $isAppleAppSubscriber,
@@ -189,7 +189,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         if ($customerIoData && !empty($externalAttributes = $customerIoData->getExternalAttributes())) {
             $extraData = [
                 'cio_id' => $externalAttributes['cio_id'],
-                'customer_io_id' => $externalAttributes['id'],
+                'customer_io_id' => strval($externalAttributes['id']),
             ];
         }
 

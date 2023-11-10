@@ -31,6 +31,12 @@
                 'credit' => ' Multi-Instrumentalist',
             ],
             [
+                'desc' => 'Incredibly thorough online piano course that seeks to help you learn at your speed.',
+                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/as-logo.png',
+                'name' => 'American Songwriter',
+                'credit' => 'Music Magazine',
+            ],
+            [
                 'desc' => 'You should check out Pianote. If you’re a beginner or intermediate, this is ideal for you!',
                 'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/feature-testimonial-ali.jpg',
                 'name' => 'Ali Spagnola',
@@ -279,6 +285,13 @@
 
         ],
         "testimonials" => [
+            [
+                'image' => 'https://i.vimeocdn.com/video/1751887244-0d2cfa5acca4de78249d087c3eb3d9f1b32f9ba8bb8bf63ef1cf9fb8ec9c081b-d_500.jpg',
+                'title' => "Before Pianote, I didn't have goals. Now I can focus on certain skills.",
+                'description' => "Before Pianote, I didn't have goals. Now I can focus on certain skills.",
+                'name' => 'Tonya Hotz',
+                'video' => '882979587',
+            ],
             [
                 'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/iankershaw.jpg',
                 'title' => "Such a fantastic and welcoming student community.",

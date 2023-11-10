@@ -119,7 +119,7 @@
                 @hasSection('button-change')
                     @yield('button-change')
                 @else
-                    <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GTME-OCT-2018-SEMESTER' => 1], 'redirect' => '/order']) }}" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[GTME-OCT-2018-SEMESTER]=1&redirect=/order" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
                 @endif
 
                 <p class="price-info">
@@ -144,28 +144,6 @@
             </div>
         </div>
     </header>
-
-
-    {{--<section class="featured-product">--}}
-        {{--<div class="noise-wrap">--}}
-            {{--<div class="row">--}}
-                {{--<a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GTME-OCT-2018-SEMESTER' => 1], 'redirect' => '/order']) }}">--}}
-                    {{--<img class="logo animated tada delay-2s" src="https://d122ay5chh2hr5.cloudfront.net/sales/promos/april/guitar-month-logo.png">--}}
-                    {{--<br>--}}
-                    {{--<div class="text">--}}
-                        {{--<p class="text-left" style="max-width:510px">Celebrate Guitar Month right and brush up on your techniques.--}}
-                            {{--<br><br>--}}
-                            {{--Guitar Technique Made Easy will improve your existing skills and help you master new ones, for only <s>${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) }}</s> ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) }}! (Save {{ round(100 - (100 * (floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) / floatval($productPrices['GTME-OCT-2018-SEMESTER']->price)))) }}%)--}}
-                            {{--<br><br>--}}
-                            {{--Your guitar deserves to be played freely and effectively, and especially during its own dedicated month!--}}
-                            {{--<br></p>--}}
-
-                        {{--<div class="join">Get Started &raquo;</div>--}}
-                    {{--</div>--}}
-                {{--</a>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</section>--}}
 
     <section class="triple-benefits">
         <div class="row">
@@ -686,7 +664,7 @@
                 @hasSection('button-change')
                     @yield('button-change')
                 @else
-                    <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GTME-OCT-2018-SEMESTER' => 1], 'redirect' => '/order']) }}" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[GTME-OCT-2018-SEMESTER]=1&redirect=/order" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
                 @endif
 
                 <h6 style="margin-top: 15px;">

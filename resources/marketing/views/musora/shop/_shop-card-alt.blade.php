@@ -52,7 +52,7 @@
         @endif
 
         @if(!empty($packLogo))
-            <div class="z-20 absolute bottom-0 left-0 right-0 px-4 py-3">
+            <div class="z-20 absolute bottom-0 left-0 right-0 px-4 py-3 text-center">
                 <img class="w-auto h-auto" style="max-height:55px;" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/{{ $packLogo }}"
                         alt="{{ $title }} logo" @if(!empty($FCP)) fetchpriority="high" @endif >
             </div>

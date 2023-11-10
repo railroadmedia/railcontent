@@ -21,10 +21,7 @@
             <a href="/trial" target="_blank" class="download-button outline big">Learn More About Guitareo</a>
         </div>
         <div class="px-3 md:px-4 w-full lg:w-1/2">
-            <a href="{{ url()->route('shopping-cart.add-to-cart', [
-                'products' => ['GUITAREO-7-DAY-TRIAL-ONE-TIME' => 1],
-                'redirect' => '/order', 'locked' => 'true'
-            ]) }}" target="_blank" class="download-button big">
+            <a href="/ecommerce/add-to-cart?products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=/order&locked=true" target="_blank" class="download-button big">
                 Start A Free Guitareo Trial
             </a>
         </div>

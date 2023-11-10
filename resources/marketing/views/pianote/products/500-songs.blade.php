@@ -3,7 +3,7 @@
 @php $productPrice = floatval($productPrices['500-songs-in-5-days']->discounted_price) @endphp
 
 @section('order-link')
-    {{ url()->route('shopping-cart.add-to-cart', ['products' => ['500-songs-in-5-days' => 1], 'redirect' => '/order', 'locked' => 'true']) }}
+    /ecommerce/add-to-cart?products[500-songs-in-5-days]=1&redirect=/order&locked=true
 @endsection
 
 @section('topbar')

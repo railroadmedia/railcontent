@@ -7,7 +7,6 @@ use App\Modules\EventDataSynchronizer\Jobs\CustomerIoDeleteUser;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\Builder;
-use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -343,17 +342,29 @@ class UserDelete extends Command
             // because of the groupBy, we can't get the count unless we get the results, which defeats the purpose of
             // chunking, so we'll use the trick from pratimroy1990 in https://laracasts.com/discuss/channels/eloquent/eloquent-groupby-count-always-returns-1
             $count = DB::table(DB::raw("({$usersToDelete->toSql()}) as query"))->mergeBindings($usersToDelete)->count();
-            $this->info('Found ' . $count . ' users to delete');
+
 
             // chunk doesn't use a limit set in the query, so we'll work around that by keeping track of the count internally
             $userCount = !is_null($limit) ? min($limit, $count) : $count;
             $batchSize = 10;
+            $this->info('Found ' . $count . ' users to delete');
+            if ($limit && $userCount < $count) {
+                $limitInfo = 'Limiting to ' . $userCount;
+                // chunkById grabs the paginated IDs, so we can't break out of the loop if we have a smaller
+                // amount wanted inside the batch, so we'll just tell the user that it got increased
+                if ($userCount % $batchSize) {
+                    $batchedLimit = intval($userCount * ceil( $batchSize / $userCount));
+                    $limitInfo .= ', rounded up to ' . $batchedLimit . ' for batching.';
+                }
+                $this->info($limitInfo);
+            }
+
             $isAtLimit = false;
             $tally = 0;
             $batchIndex = 0;
             $batchTotal = ceil($userCount / $batchSize);
 
-            $usersToDelete->chunk($batchSize, function (Collection $userDataChunk) use (
+            $usersToDelete->chunkById($batchSize, function (Collection $userDataChunk) use (
                 $userCount,
                 $batchSize,
                 &$isAtLimit,
@@ -377,7 +388,7 @@ class UserDelete extends Command
                 $this->deleteFromDatabase($userIds, $batchIndex, $batchTotal);
 
                 $this->deletedUserIds = $this->deletedUserIds->push(...$userIds);
-            });
+            }, 'usora_users.id', 'id');
         });
 
         $this->info('Deleting users: ' . $this->deletedUserIds->implode(', '));

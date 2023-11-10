@@ -9,6 +9,7 @@ use App\Modules\Ecommerce\Models\UserProduct;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -31,6 +32,7 @@ class RevenueCatController extends Controller
     private PaymentService $paymentService;
 
     const SUBSCRIPTION_REVOKED = 12;
+    const SANDBOX_ENVIRONMENT = 'SANDBOX';
 
     /**
      * @param RevenueCatService $revenueCatService
@@ -118,6 +120,7 @@ class RevenueCatController extends Controller
 
                 if (config('shopify.enabled')) {
                     $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
+                    $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
                     if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
                         if (!$musoraProduct) {
                             Log::error(
@@ -125,8 +128,12 @@ class RevenueCatController extends Controller
                             );
                             break;
                         }
-                        $price = $data['event']['price_in_purchased_currency'] ?? $musoraProduct->price;
-                        $currency = $data['event']['currency'];
+                        $price = $data['event']['price'] ?? $musoraProduct->price;
+
+                        if($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
+                            UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
+                        }
+
                         $this->shopifySyncService->syncOrder(
                             $user,
                             [$musoraProduct->id],
@@ -136,7 +143,7 @@ class RevenueCatController extends Controller
                             $this->calculateTaxAmount($price, $data['event']['tax_percentage']),
                             $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
                                 : ShopifyPaymentSourceEnum::Google,
-                            $currency
+                            null //defaults to USD
                         );
                         $this->setUserSubscription($user, $type);
                     }
@@ -215,6 +222,7 @@ class RevenueCatController extends Controller
 
                 if (config('shopify.enabled')) {
                     $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
+                    $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
                     if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
                         $musoraProduct = $musoraProducts?->first();
                         if (!$musoraProduct) {
@@ -223,8 +231,10 @@ class RevenueCatController extends Controller
                             );
                             break;
                         }
-                        $price = $data['event']['price_in_purchased_currency'] ?? $musoraProduct->price;
-                        $currency = $data['event']['currency'];
+                        $price = $data['event']['price'] ?? $musoraProduct->price;
+                        if($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
+                            UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
+                        }
                         $this->shopifySyncService->syncOrder(
                             $user,
                             [$musoraProduct->id],
@@ -234,7 +244,7 @@ class RevenueCatController extends Controller
                             $this->calculateTaxAmount($price, $data['event']['tax_percentage']),
                             $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
                                 : ShopifyPaymentSourceEnum::Google,
-                            $currency
+                            null //defaults to USD
                         );
 
                         $this->setUserSubscription($user, $type);
@@ -367,23 +377,34 @@ class RevenueCatController extends Controller
                     break;
                 }
 
-                if (!config('shopify_enabled')) {
-                    //store type
-                    $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
+                //store type
+                $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
 
-                    //productId
-                    $productId = $this->getProductId($data['event']['product_id']);
+                //productId
+                $productId = $this->getProductId($data['event']['product_id']);
 
-                    //get Musora product
-                    $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
+                //get Musora product
+                $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
 
-                    /*
-                     * @todo Shopify
-                     *      - update membership times
-                     * @todo CustomerIO:
-                     *      - Push cancellation data for user
-                     */
-
+                if (config('shopify.enabled')) {
+                    if ($user->shopify_id && $data['event']['cancel_reason'] == 'CUSTOMER_SUPPORT') {
+                        if (!$data['event']['purchased_at_ms']) {
+                            Log::warning(
+                                'RevenueCatController processNotification::CANCELLATION - purchased_at_ms not found'
+                            );
+                            break;
+                        }
+                        $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
+                        $orderId = $this->shopifySyncService->getCustomerOrderIdByProcessedAtDate(
+                            $user->shopify_id,
+                            $processedAt
+                        );
+                        if ($orderId) {
+                            $this->shopifySyncService->cancelOrder($user->shopify_id, $user->email, $orderId);
+                            $this->unsetUserSubscription($user, $type);
+                        }
+                    }
+                } else {
                     //get RevenueCat subscription
                     $currentRevenueCatSubscription =
                         $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
@@ -549,7 +570,7 @@ class RevenueCatController extends Controller
             $productsMap = [config('ecommerce.'.$store.'_products_map')[$productId]];
         }
 
-        if ($event['type'] != 'INITIAL_PURCHASE') {
+        if ($event['type'] != 'INITIAL_PURCHASE' && $event['type'] != 'RENEWAL') {
             $productsMap = array_merge(
                 [config('ecommerce.' . $store . '_products_map')[$productId]],
                 [config('ecommerce.' . $store . '_products_map_trial')[$productId]]
