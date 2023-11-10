@@ -287,8 +287,8 @@
         "testimonials" => [
             [
                 'image' => 'https://i.vimeocdn.com/video/1751887244-0d2cfa5acca4de78249d087c3eb3d9f1b32f9ba8bb8bf63ef1cf9fb8ec9c081b-d_500.jpg',
-                'title' => "I can complete things. And I love being able to check the box.",
-                'description' => "I can complete things. And I love being able to check the box.",
+                'title' => "Before Pianote, I didn't have goals. Now I can focus on certain skills.",
+                'description' => "Before Pianote, I didn't have goals. Now I can focus on certain skills.",
                 'name' => 'Tonya Hotz',
                 'video' => '882979587',
             ],

@@ -315,11 +315,11 @@
         "testimonials" => [
             [
                 "image" =>
-                "https://i.vimeocdn.com/video/1751884369-4113545b989dbc7af5676f3fa796b70bd3165e22548b17606a73b8d4c7449edf-d_500.jpg",
+                "https://i.vimeocdn.com/video/1751944105-765a9cc9ef08e836de7b0c436c50e50aa828db3e7773409007e186cc071ec45b-d_500.jpg",
                 "name" => "Claudio Sanchez",
                 "video" => "877648411",
-                "title" => "I’m playing in two bands ready to play in front of people.",
-                "description" => "I’m playing in two bands ready to play in front of people.",
+                "title" => "Becoming a musician has completed a part of my life.",
+                "description" => "Becoming a musician has completed a part of my life.",
             ],
             [
                 "image" =>
