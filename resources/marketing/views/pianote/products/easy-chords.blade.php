@@ -286,6 +286,10 @@
         "noBreadcrumb" => true
     ])
 
+    @php
+            $registerButtonUrl = "/ecommerce/add-to-cart?products[easy-chords]=1&redirect=/order";
+    @endphp
+
 <!-- Header Section -->
     @include('drumeo.products.partials.evergreen._header', [
     'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/products/easy-chords/easy-chords-logo.png',
@@ -298,7 +302,7 @@
     'isVideo' => true,
     'mediaSource' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/trailer.mp4',
     'buttonText' => 'GET STARTED',
-    'buttonLink' => "/ecommerce/add-to-cart?products[easy-chords]=1&locked=true",
+    'buttonLink' =>  $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
     'students' => 'piano players'
@@ -323,62 +327,101 @@ $features = [
 
 $lessons = [
     [
-        'title' => 'Day 1 (Your First Drum Beat - Lesson & Workout 1)',
-        'description' => "In your first week, you'll get one short lesson and five 10-minute workouts where Domino will teach you the beginnings of the most popular drum beat of all time and help you build the muscle memory to learn it and play it!"
+        'title' => 'The Happiest Chord Progression - 5 Workouts',
+        'description' => "In week one, get introduced to the 1-5-6-4 progression and work up to your first first inversion."
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Pre-Recorded Q&A - Your Questions Answered',
+        'description' => "In this pre-recorded Q&A, Kevin Castro joins in to answer some of our students' excellent questions about the week's lessons."
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Week 1 - Rest & Review',
+        'description' => "Join Lisa as she reviews everything you've achieved this week, then have a rest (or maybe add a little extra practice!)"
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Moving With Confidence - 5 Workouts',
+        'description' => "In week two, you'll build deeper confidence with the 1st inversion chord and learn how to move smoothly through the Happiest Chord Progression."
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Pre-Recorded Q&A - Your Questions Answered - Part 2',
+        'description' => "In this pre-recorded Q&A, Lisa takes up questions on this challenging week. There's plenty to learn!"
+    ],
+    [
+        'title' => 'Week 2 - Rest & Review',
+        'description' => "Join Lisa as she reviews everything you've achieved this week, then have a rest (or maybe add a little extra practice!)"
+    ],
+    [
+        'title' => 'A New Chord Progression - 5 Workouts',
+        'description' => "In week three, the chords are the same but the order changes. You'll go from happy to dramatic with 2nd inversion chords."
+    ],
+    [
+        'title' => 'Pre-Recorded Q&A - Your Questions Answered - Part 3',
+        'description' => "In this pre-recorded Q&A, Lisa answers our students' questions and helps them past their sticking points."
+    ],
+    [
+        'title' => 'Week 3 - Rest & Review',
+        'description' => "Join Lisa as she reviews the week, shares where you can use what you've learned, and hints at where you can go next."
+    ],
+    [
+        'title' => 'Connecting The Dots - 5 Workouts',
+        'description' => "In week four, you'll pull together your moody progression with your root, 1st, and 2nd inversion chords. It's going to sound beauitful."
+    ],
+    [
+        'title' => 'Pre-Recorded Q&A - Your Questions Answered - Part 4',
+        'description' => "In this final pre-recorded Q&A, you'll find answers to questions from students just like you."
+    ],
+    [
+        'title' => 'Week 4 - Rest & Review',
+        'description' => "You've completed Easy Chords! Take a rest, but first watch this to find out where to go next."
+    ],
+    [
+        'title' => 'Easy Chords Celebration',
+        'description' => "Join Lisa and Kevin in this special celebration of everything you've achieved. You did it!"
     ],
 ];
 @endphp
 
 
 @include('drumeo.products.partials.evergreen._lessons', [
-    'title' => 'Learn the piano by actually playing the piano.',
-    'descriptionDesktop' => "Welcome to Easy Chords! Join Lisa and get excited about unlocking the magic of inversions. Inversion will take your from playing basic chords to making them sound amazing.",
-    'descriptionMobile' => "Welcome to Easy Chords! Join Lisa and get excited about unlocking the magic of inversions. Inversion will take your from playing basic chords to making them sound amazing.",
+    'title' => 'Move Beyond “Beginner” With Easy Chords',
+    'description' => "Every time you listen to a song (even classical ones!) you’re hearing chords. You can tell different stories with different kinds of chords and by changing their order around. That makes them powerful tools for pianists, and absolutely critical to playing with confidence.
+                    <br/><br/>
+                    But chords can get <em>complicated</em>. That’s why we made this course!
+                    <br/><br/>
+                    Let Lisa Witt guide you from knowing about chords to actually using them. In just 10 minutes a day for 30 days, you’ll learn popular progressions, chord inversions, and rhythms.
+                    <br/><br/>
+                    You’ll be amazed at your progress.
+                    And more importantly… <strong>you’re going to have so much FUN.</strong>",
     'features' => $features,
     'lessonTitle' => 'Course Lessons',
     'instructor' => ' Lisa Witt',
-    'course' => ' 31 video lessons',
-    'lessons' => $lessons
+    'course' => ' 30 Days (20 Workouts + 4 Q&As)',
+    'lessons' => $lessons,
 ])
+
 
 @php 
 $practiceItems = [
             [
                 "icon" =>
-                "fa-sharp fa-regular fa-music",
-                "title" => "Know exactly what to practice.",
+                "fa-regular fa-music",
+                "title" => "Never feel lost.",
                 "desc" =>
-                "Easy Chords gives you guided play-along workouts every day for thirty days. You’ll know exactly what to work on every time you sit at the piano.",
+                "The secret to progress is deliberate practice. But how do you know what to practice? Easy Chords makes it crystal clear: your lessons <em>are</em> your practice sessions. Just press play, follow along with Lisa, and make steady progress every day.",
             ],
             [
                 "icon" =>
-                "fas fa-regular fa-clock",
-                "title" => "Focused practice time.",
+                "fa-regular fa-clock",
+                "title" => "Stop wasting time.",
                 "desc" =>
-                "Each exercise includes a countdown timer that tells you exactly how long to practice for. This means you can turn off all distractions and focus on your playing.",
+                "Your time is valuable. So we made every lesson 10 minutes long and included a handy countdown timer so you can stay focused and get the most out of every second.",
             ],
             [
                 "icon" =>
-                "fas fa-regular fa-infinity",
+                "fa-regular fa-infinity",
                 "title" => "Lifetime access.",
                 "desc" =>
-                "Easy Chords can become part of your practice routine forever. You’ll have lifetime access to ALL the workouts and Q&A sessions from your class to access anytime you like.",
+                "Can’t finish Easy Chords in 30 days? No problem! Your purchase gives you lifetime access to ALL the lessons forever. So whether you finish it in 30 days and just want to revisit the material, or whether you just need a few more weeks to complete the course, Easy Chords will be there for you. For life.",
             ]
             ]
 @endphp
@@ -392,11 +435,9 @@ $practiceItems = [
 <!-- What you will learn section-->
 @php
 $items = [
-            'Daily guided Piano workouts',
-            'Weekly Q&A workshops',
-            'Flexible weekly schedule',
-            'Ongoing motivation & support',
-            'Guaranteed results'
+            '20 guided play-along lessons.',
+            'Lifetime access to watch & re-watch.',
+            '90 day money-back guarantee.'
         ]
 @endphp
 
@@ -405,10 +446,13 @@ $items = [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/products/easy-chords/easy-chords-logo.png',
     'items' => $items,
     'buttonText' => 'GET STARTED',
-    'buttonLink' => "/ecommerce/add-to-cart?products[easy-chords]=1&locked=true",
+    'buttonLink' =>  $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'piano players'])
+    'students' => 'piano players',
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
+    'brandTitle' => 'Pianote'])
 
 
  <!-- Meet your teacher section -->
@@ -506,7 +550,7 @@ $students = "Pianote Student"
             ],
         'bgColor' => 'linear-gradient(rgba(246, 26, 48, 1), rgba(161, 0, 0, 1))',
         'subHeader'=> 'What students are saying about Lisa',
-        'description' => 'Easy Chords works. By focusing on playing with real music right from day one, you’ll learn the skills to play hundreds of songs on the piano in just thirty days. Check out what students are saying:',
+        'description' => 'Easy Chords works. By focusing on playing with real music right from day one, you’ll learn the skills to play hundreds of songs on the piano in just 30 days. Check out what students are saying:',
         'showBottom' => true,
 ])
 
@@ -529,10 +573,8 @@ $students = "Pianote Student"
 <!-- Learn section -->
 @php
 $points = [
-            'Guided piano lessons for 30 days.',
-            'Practice the right things for 10 min/day.',
-            'Learn on your own schedule.',
-            'Play your favorite songs.',
+            '20 guided play-along lessons.',
+            'Lifetime access to watch & re-watch.',
             '90-day money-back guarantee.'
         ]
 @endphp
@@ -543,17 +585,20 @@ $points = [
     'title' => '30 days to better piano chords',
     'points' => $points,
     'buttonText' => 'Get Started',
-    'buttonLink' => "/ecommerce/add-to-cart?products[easy-chords]=1&locked=true",
+    'buttonLink' =>  $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'profileImageAlt' => 'student profile image',
     'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/easy-chords/order-collage.png',
     'students' => 'piano players',
     'numStudents' => number_format($nPackOwners ?? 0),
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
+    'brandTitle' => 'Pianote'
 ])
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '823788317',
+        'video' => '881061653',
         'vimeo' => true,
     ])
 
@@ -575,7 +620,7 @@ $points = [
         <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
 
 
-    <script>
+    {{-- <script>
         $(document).ready(function () {
             $(document).foundation();
             $('.comparison tr td:nth-child(3)').on('click', function(){
@@ -591,7 +636,7 @@ $points = [
                 $(this).parents().find('table').addClass('private');
             });
         })
-    </script>
+    </script> --}}
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>

@@ -220,6 +220,10 @@
         "noBreadcrumb" => true
     ])
 
+     @php
+            $registerButtonUrl = "/ecommerce/add-to-cart?products[30-day-blues-piano]=1&redirect=/order";
+    @endphp
+
 <!-- Header Section -->
     @include('drumeo.products.partials.evergreen._header', [
     'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png',
@@ -231,7 +235,7 @@
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/header-left-collage.png',
     'mediaSource' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/video-thumb-header.png',
     'buttonText' => 'GET STARTED',
-    'buttonLink' => "/ecommerce/add-to-cart?product-array=30-day-blues-piano:1&redirect=/order&locked=true",
+    'buttonLink' => $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
     'students' => 'piano players'
@@ -243,36 +247,64 @@
 
 $lessons = [
     [
-        'title' => 'Day 1 (Your First Drum Beat - Lesson & Workout 1)',
-        'description' => "In your first week, you'll get one short lesson and five 10-minute workouts where Domino will teach you the beginnings of the most popular drum beat of all time and help you build the muscle memory to learn it and play it!"
+        'title' => 'Blues Foundations - 5 mini-lessons + 5 workouts',
+        'description' => "In week one, you'll dive right into the 12-bar blues, develop some rhythm, and get both your hands playing."
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Your Questions Answered — Week #1',
+        'description' => "In this pre-recorded Q&A, Kevin answers questions about the 12-bar blues and rhythm lessons you've learned this week."
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Week #1 — Rest & Review',
+        'description' => "This is your day to take a break or get in some extra practice time!"
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Building Confidence & Adding Scales',
+        'description' => "Week two is all about building up your confidence with the blues progression and the rhythm you have been working on. You will also learn three different scales: pentatonic, major blues, and minor blues."
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Your Questions Answered — Week #2',
+        'description' => "In this pre-recorded Q&A, Kevin answers questions about everything you've learned this week."
+    ],
+    [
+        'title' => 'Week #2 — Rest & Review',
+        'description' => "This is your day to take a break or get in some extra practice time!"
+    ],
+    [
+        'title' => 'Blues Riffs & Fills',
+        'description' => "Week three has you learning some simple riffs that anyone can play, as well as some of the more iconic blues riffs and fills."
+    ],
+    [
+        'title' => 'Your Questions Answered — Week #3',
+        'description' => "In this pre-recorded Q&A, Kevin answers questions about riffs and fills!"
+    ],
+    [
+        'title' => 'Week #3 — Rest & Review',
+        'description' => "This is your day to take a break or get in some extra practice time!"
+    ],
+    [
+        'title' => 'Storytelling with Solos - 5 mini-lessons + 5 workouts',
+        'description' => "In this pre-recorded Q&A, Kevin answers questions about everything you've learned this week."
+    ],
+    [
+        'title' => 'Week #4 — Rest & Review',
+        'description' => "This is your day to take a break or get in some extra practice time!"
+    ],
+    [
+        'title' => '30-Day Blues Piano Celebration',
+        'description' => "You did it! Celebrate your completion of 30-Day Blues Piano with a special video."
     ],
 ];
 
 $features = [
     [
         'title' => 'Course Kick-Off',
-        'posterImage' => 'https://i.vimeocdn.com/video/1706069049-5c9a9ce3570e3622a46ed50a69adc9c95aadf315619524ec972daf689e6ad7d8-d?mw=1000&mh=1000&q=70',
+        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/kick-off-30-day-blues.jpg',
         'videoId' => 851379131,
     ],
     [
         'title' => 'Blues Essentials',
-        'posterImage' => 'https://i.vimeocdn.com/video/1706072524-8e70123f338ddd11d4ac00e8db3a4ba7c04bdfe4333b17a25270add04760991d-d?mw=1000&mh=1000&q=70',
+        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/essentials-30-day-blues.jpg',
         'videoId' => 851379154,
     ],
 ];
@@ -280,13 +312,20 @@ $features = [
 
 
 @include('drumeo.products.partials.evergreen._lessons', [
-    'title' => 'Learn the piano by actually playing the piano.',
-    'descriptionDesktop' => "Welcome to 30-Day Blues Piano! Join Kevin and jump into the world of blues piano. This is where you will gather all the knowledge that you need to build a foundation for blues, but also develop your skills in improvisation. Get ready to have some fun so you can be the blues player that you always wanted to be.",
-    'descriptionMobile' => 'Welcome to 30-Day Blues Piano! Join Kevin and jump into the world of blues piano. This is where you will gather all the knowledge that you need to build a foundation for blues, but also develop your skills in improvisation. Get ready to have some fun so you can be the blues player that you always wanted to be.',
+    'title' => 'Learn the Blues by PLAYING the Blues.',
+    'description' => "The Blues is <em>everywhere</em>. At least one of your favorite songs can be traced back to the Blues. Probably way <em>more</em> than one.
+                        <br><br>
+                        But the Blues is IMPOSSIBLE to learn, right? After all, there’s so much improvisation! How do you learn to make stuff up? Don’t you need to be <em>gifted</em>?
+                        <br><br>
+                        No way! All you need is a great teacher.
+                        <br><br>
+                        Give teacher Kevin Castro 30 days, and he’ll give you the essential skills you need to confidently play the Blues on your piano. In just 10 minutes a day, you’ll learn everything from the basic Blues structure and the most important scale, through to the Blues riffs and fills you’ll use to tell a musical story in the final week.
+                        <br><br>
+                        It’s all here. Let’s get bluesy!",
     'features' => $features,
     'lessonTitle' => 'Course Lessons',
     'instructor' => ' Kevin Castro',
-    'course' => ' 32 video lessons',
+    'course' => ' 30 Days (20 Workouts + 4 Q&As)',
     'lessons' => $lessons
 ])
 
@@ -294,24 +333,25 @@ $features = [
 $practiceItems = [
             [
                 "icon" =>
-                "fa-sharp fa-regular fa-music",
-                "title" => "Know exactly what to practice.",
+                "fa-regular fa-music",
+                "title" => "The PERFECT lesson, every time.",
                 "desc" =>
-                "30-Day Blues Piano gives you guided play-along workouts every day for thirty days. You’ll know exactly what to work on every time you sit at the piano.",
+                "Your job is simple: sit down to play. Kevin’s got your lesson and practice ready — all you need to do is follow along! Start where you are, be thrilled with where you end up.",
             ],
             [
                 "icon" =>
-                "fas fa-regular fa-clock",
-                "title" => "Focused practice time.",
+                "fa-regular fa-clock",
+                "title" => "Stop wasting time.",
                 "desc" =>
-                "Each exercise includes a countdown timer that tells you exactly how long to practice for. This means you can turn off all distractions and focus on your playing.",
+                "Your time is precious. So is your desire to learn something new. That’s why every lesson is only 10 minutes long and includes a handy countdown timer. Get better results in less time with greater focus.",
             ],
             [
                 "icon" =>
-                "fas fa-regular fa-infinity",
+                "fa-regular fa-infinity",
                 "title" => "Lifetime access.",
                 "desc" =>
-                "30-Day Blues Piano can become part of your practice routine forever. You’ll have lifetime access to ALL the workouts and Q&A sessions from your class to access anytime you like.",
+                "Oh no! You didn’t finish 30-Day Blues Piano in 30 days! Don’t worry. The course is yours for life. And that’s important, because learning should happen on your time. So whether you need a few extra weeks, or just want to revisit the course to focus on different skills, 30-Day Blues Piano will be there for you. For life.
+",
             ]
             ]
 @endphp
@@ -325,23 +365,24 @@ $practiceItems = [
 <!-- What you will learn section-->
 @php
 $items = [
-            'Daily guided Piano workouts',
-            'Weekly Q&A workshops',
-            'Flexible weekly schedule',
-            'Ongoing motivation & support',
-            'Guaranteed results'
+            '20 guided play-along lessons.',
+            'Lifetime access to watch & re-watch.',
+            '90 day money-back guarantee.',
         ]
 @endphp
 
 <!-- Get started-->
 @include('drumeo.products.partials.evergreen._get-started', [
-    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png',
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png',
     'items' => $items,
     'buttonText' => 'GET STARTED',
-    'buttonLink' => "/ecommerce/add-to-cart?product-array=30-day-blues-piano:1&redirect=/order&locked=true",
+    'buttonLink' => $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'piano players'])
+    'students' => 'piano players',
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
+    'brandTitle' => 'Pianote'])
 
 
  <!-- Meet your teacher section -->
@@ -423,10 +464,8 @@ $items = [
 <!-- Learn section -->
 @php
 $points = [
-            'Guided piano lessons for 30 days.',
-            'Practice the right things for 10 min/day.',
-            'Learn on your own schedule.',
-            'Play your favorite songs.',
+            '20 guided play-along lessons.',
+            'Lifetime access to watch & re-watch.',
             '90-day money-back guarantee.'
         ]
 @endphp
@@ -437,17 +476,19 @@ $points = [
     'title' => 'Learn the blues by playing the blues',
     'points' => $points,
     'buttonText' => 'Get Started',
-    'buttonLink' => "/ecommerce/add-to-cart?product-array=30-day-blues-piano:1&redirect=/order&locked=true",
+    'buttonLink' => $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'profileImageAlt' => 'student profile image',
     'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/30-day-blues/order-collage.png',
     'students' => 'piano players',
     'numStudents' => number_format($nPackOwners ?? 0),
-])
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
+    'brandTitle' => 'Pianote'])
     
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '852795615',
+        'video' => '879913986',
         'vimeo' => true,
     ])
 

@@ -70,7 +70,7 @@
     ])
 
     @php
-            $registerButtonUrl = "/ecommerce/add-to-cart?product-array=new-piano-players-start-here:1";
+            $registerButtonUrl = "/ecommerce/add-to-cart?products[new-piano-players-start-here]=1&redirect=/order";
     @endphp
 
 
@@ -78,7 +78,7 @@
     @include('drumeo.products.partials.evergreen._header', [
     'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/new-piano-players/new-piano-players-logo.png',
     'logoAlt' => '30 day new piano players logo',
-    'rotatingText' => ['Learn the piano', 'Play real songs', 'Sound beautiful'],    
+    'rotatingText' => ['Sound beautiful', 'Learn the piano', 'Play real songs'],    
     'subtitle' => 'in just 30 days.',
     'checklist' => ['Learn By Doing', 'Play Every Day', 'No Theory Required'],
     'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/header-right-collage.png',
@@ -109,37 +109,56 @@ $features = [
 
 $lessons = [
     [
-        'title' => 'Day 1 (Your First Drum Beat - Lesson & Workout 1)',
-        'description' => "In your first week, you'll get one short lesson and five 10-minute workouts where Domino will teach you the beginnings of the most popular drum beat of all time and help you build the muscle memory to learn it and play it!"
+        'title' => 'Your First Chord Progression - 1 Lesson + 5 Workouts',
+        'description' => "This week you'll learn your first chord progression! We'll take it one hand at a time and build up your confidence."
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Pre-Recorded Q&A - Your First Chord Progression',
+        'description' => "In this pre-recorded Q&A, we answer some of our students' excellent questions about the week's lessons."
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Real Chords - 1 Lesson + 5 Workouts',
+        'description' => "During your second week, you'll gain confidence in triads and the different hand movements needed to build real chords!"
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Pre-Recorded Q&A - Real Chords',
+        'description' => "In this pre-recorded Q&A, we answer some of our students' excellent questions about the week's lessons."
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Rhythm - 1 Lesson + 5 Workouts',
+        'description' => "In week three, you'll learn about quarter notes and half notes and use them to create beautiful musical patterns."
+    ],
+     [
+        'title' => 'Pre-Recorded Q&A - Rhythm',
+        'description' => "In this pre-recorded Q&A, we answer some of our students' excellent questions about the week's lessons."
+    ],
+     [
+        'title' => 'Making It Fancy - 1 Lesson + 5 Workouts',
+        'description' => "During your fourth week, you'll pull together everything you've learned and add a few sprinkles of fancy leading up to playing a song onyour own!"
+    ],
+     [
+        'title' => 'Pre-Recorded Q&A - Making It Fancy',
+        'description' => "In this pre-recorded Q&A, we answer some of our students' excellent questions about the week's lessons."
     ],
 ];
 @endphp
 
 
 @include('drumeo.products.partials.evergreen._lessons', [
-    'title' => 'Learn the piano by actually playing the piano.',
-    'descriptionDesktop' => "Learning to play the piano is a lot of fun when you get to practice with Lisa on a day-to-day basis. In the next few weeks, you will gain the skills you need to play songs like a pro. You'll go step-by-step, building on skills that you learn as you work through each day. This will be a lot of fun, so let's jump right in!",
-    'descriptionMobile' => "Learning to play the piano is a lot of fun when you get to practice with Lisa on a day-to-day basis. In the next few weeks, you will gain the skills you need to play songs like a pro. You'll go step-by-step, building on skills that you learn as you work through each day. This will be a lot of fun, so let's jump right in!",
+    'title' => 'Learn the piano in 30 days.',
+    'description' => "Piano lessons can be super intimidating. “So many keys! All that music theory! How do I even get my hands to play at the same time?!”
+    <br/> <br/>
+    New Piano Players Start Here is <em>different</em>. You just sit down, press play, and follow along as Lisa guides you through a daily 10-minute lesson. 
+     <br/> <br/>
+    No complicated theory. No need to read music. No frustration.
+      <br/> <br/>
+    Lisa focuses on the <em>fun</em> and gets you playing songs from day one. By the time you’re done, you’ll have a well-established piano playing habit, some very important skills, and the confidence that <strong>YES!</strong> 
+     <br/> <br/>
+    <strong><em>You</em> can play the piano.</strong>",
     'features' => $features,
     'lessonTitle' => 'Course Lessons',
     'instructor' => ' Lisa Witt',
-    'course' => ' 30 video lessons',
+    'course' => ' 30 Days (20 Workouts + 4 Q&As)',
     'lessons' => $lessons
 ])   
 
@@ -148,24 +167,24 @@ $lessons = [
 $practiceItems = [
             [
                 "icon" =>
-                "fa-sharp fa-regular fa-music",
+                "fa-regular fa-music",
                 "title" => "Know exactly what to practice.",
                 "desc" =>
-                "New Piano Players Start Here gives you guided play-along workouts every day for thirty days. You’ll know exactly what to work on every time you sit at the piano.",
+                "Log in. Press play. Follow along with Lisa through a daily 10-minute guided practice session. Do that for 30 days. <em>Easy, right?</em> You’ll never wonder what you’re supposed to do: Lisa will <em>tell</em> you.",
             ],
             [
                 "icon" =>
-                "fas fa-regular fa-clock",
-                "title" => "Focused practice time.",
+                "fa-regular fa-clock",
+                "title" => "Short, focused practice sessions.",
                 "desc" =>
-                "Each exercise includes a countdown timer that tells you exactly how long to practice for. This means you can turn off all distractions and focus on your playing.",
+                "Life is busy. It’s hard to juggle priorities. To help make sure you stick to your new piano habit, each short exercise includes a countdown timer so you know exactly how long you have left. That means you can comfortably shut out all distractions, focus on your playing, and make room for your own growth.",
             ],
             [
                 "icon" =>
-                "fas fa-regular fa-infinity",
+                "fa-regular fa-infinity",
                 "title" => "Lifetime access.",
                 "desc" =>
-                "New Piano Players Start can become part of your practice routine forever. You’ll have lifetime access to ALL the workouts and Q&A sessions from your class to access anytime you like.",
+                "“What if I don’t finish in 30 days?” New Piano Players Start Here is yours to keep. If it takes you a little longer, that’s okay! And if you feel like revisiting the lessons or coming back to some of the exercises, you can do that, too. You keep the course for life.",
             ]
             ]
 @endphp
@@ -179,11 +198,9 @@ $practiceItems = [
 <!-- What you will learn section-->
 @php
 $items = [
-            'Daily guided Piano workouts',
-            'Weekly Q&A workshops',
-            'Flexible weekly schedule',
-            'Ongoing motivation & support',
-            'Guaranteed results'
+            '20 guided play-along lessons.',
+            'Lifetime access to watch & re-watch.',
+            '90 day money-back guarantee.',
         ]
 @endphp
 
@@ -195,50 +212,47 @@ $items = [
     'buttonLink' => $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'piano players'])
+    'students' => 'piano players',
+     'price' => "$127",
+    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
+    'brandTitle' => 'Pianote'])
 
  <!-- Meet your teacher section -->
 
-    <section class="text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40" style="background-color:#f4f8fb;">
-        <div class="container max-w-5xl mx-auto">
+   <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+        <div class="container max-w-5xl mx-auto mb-14 lg:mb-16">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
-                <div class="w-52 sm:w-64 lg:w-72 relative -mb-8 sm:mb-0 sm:-mr-8">
-                    <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/coach-profile-m2.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/coach-profile.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 150%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <div class="w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
+                    <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/profile-pic.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/profile-pic.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 150%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                
                 </div>
+                    
+                    <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
 
-                <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-20 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
                     <h6 class="uppercase text-pianote leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
                     <h2 class="text-center sm:text-left"><strong>Lisa Witt</strong></h2>
-                    <p class="leading-normal mt-4 lg:mt-6">Piano chords changed my life.
+                    <p class="leading-normal mt-4 lg:mt-6">Lisa Witt might just be the happiest piano teacher on the
+                        internet.
                         <br><br>
-                        I grew up learning classical piano through the Royal Conservatory. I didn’t know what chords were, or how they were used in composition.
+                        With 20 years of teaching experience, her online lessons have helped millions of students around the
+                        world.
                         <br><br>
-                        I just had to read the notes on the page and play them.
-                        <br><br>
-                        That all changed the day I discovered chords and chord inversions.
-                        <br><br>
-                        Suddenly I could start improvising, creating my own rhythms and melodies, and eventually write my own music. Music became something I “created” rather than something I “played”.
-                        <br><br>
-                        Chords gave me the ability and confidence to do what we all dream of doing…
-                        <br><br>
-                        Sit down at the piano and “just play”.
-                        <br><br>
-                        If you’ve ever dreamt of playing popular songs for your family and friends without spending months learning every note. Or if you’ve ever wanted to explore improvisation and song-writing. Or if you just want to sit and play the keys and see what comes out…
-                        <br><br>
-                        You need to try Easy Chords.
-                        <br><br>
-                        Over 30 days, I’ll guide you through the stages I used to learn and feel comfortable playing piano chords. You’ll discover how chord inversions will transform your playing and make it easier to play the songs you love.
-                        <br><br>
-                        Come join me.
-                    </p>
-                    <img class="float-right h-12 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/lisa-witt-signature.png" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')">
-                </div>
-            </div>            
-        </div>
-    </section>
+                        But her true magic lies in her empathy and understanding of what it’s like to be a new piano player.
+                        She knows how it feels to struggle and she’ll show you how to overcome those challenges and approach
+                        the piano in a way that’s motivating, inspiring, and most of all - FUN!
+                        Start your piano journey with Lisa today.
 
+                    </p>
+                    <br />
+                    <img class="float-right h-12 transition-all opacity-0"
+                        src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/lisa-witt-signature.png"
+                        alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')">
+                </div>
+            </div>
+        </div>      
+    </section>
 @php
                     $testimonials = [
                         [
@@ -308,17 +322,19 @@ $items = [
                 <br><br>
                 If not, simply contact our friendly support team within those 90 days for a full refund.
             </p>
-
         </div>
     </section>
+
+
+
+
+
 
    <!-- Learn section -->
 @php
 $points = [
-            'Guided piano lessons for 30 days.',
-            'Practice the right things for 10 min/day.',
-            'Learn on your own schedule.',
-            'Play your favorite songs.',
+            '20 guided play-along lessons.',
+            'Lifetime access to watch & re-watch.',
             '90-day money-back guarantee.'
         ]
 @endphp
@@ -335,11 +351,14 @@ $points = [
     'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/new-piano-players/order-collage.png',
     'students' => 'piano players',
     'numStudents' => number_format($nPackOwners ?? 0),
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
+    'brandTitle' => 'Pianote'
 ])
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '798501810',
+        'video' => '879916161',
         'vimeo' => true,
     ])
 
@@ -357,7 +376,7 @@ $points = [
     <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
 
 
-    <script>
+    {{-- <script>
         $(document).ready(function () {
             $(document).foundation();
             $('.comparison tr td:nth-child(3)').on('click', function(){
@@ -373,7 +392,7 @@ $points = [
                 $(this).parents().find('table').addClass('private');
             });
         })
-    </script>
+    </script> --}}
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>

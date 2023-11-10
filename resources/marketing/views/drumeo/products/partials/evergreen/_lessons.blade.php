@@ -19,7 +19,7 @@
                     frameborder="0" allowfullscreen allow="autoplay" title="video" x-show="open"></iframe>
             </div>
             <div class="mt-4 md:py-4 hidden md:block">
-                <p>{{ $descriptionDesktop }} @if(isset($descriptionBold)) <strong>{{ $descriptionBold }}</strong> @endif</p>
+                <p> {!! $description !!} </p>
                 <p class="pt-10">Instructor: <strong> {{ $instructor }}</strong></p>
                 <p class="pt-2">Lesson Length: <strong> {{ $course }}</strong></p>
             </div>
@@ -57,7 +57,7 @@
         </div>
 
         <p class="mt-4 p-4 md:hidden">
-            {{ $descriptionMobile }}
+             <span> {!! $description !!} </span>
             <span class="block pt-10">Instructor: <strong> {{ $instructor }}</strong></span>
             <span class="block pt-2">Lesson Length: <strong> {{ $course }}</strong></span>
         </p>

@@ -40,7 +40,28 @@
                             <span class="inline-block align-middle leading-tight text-xs py-2">Join {{ $numStudents }}
                                 {{ $students }} who have already registered.</span>
                         </div>
+                        
                     </div>
+                    @if (!empty($price) || !empty($enrollmentLink) || !empty($brandTitle))
+                <p class="text-sm mb-5 sm:mb-0 hover:text-{{ $brand }} py-4 text-center">
+                    @if (!empty($price))
+                        <a href={{ $enrollmentLink }}>
+                            <span class="text-black text-2xl block">
+                                <strong>{{ $price }}</strong>
+                            </span>
+                            <span class="opacity-50 underline"> Or click here to get it free with a {{ $brandTitle }}
+                                Membership.</span>
+                        </a>
+                    @else
+                        <a href={{ $enrollmentLink }}>
+                            <span class="text-black leading-tight mb-1 md:mb-2">
+                                <strong>{{ $price }}</strong>
+                            </span>
+                            Get it free with a {{ $brandTitle }} Membership.
+                        </a>
+                    @endif
+                </p>
+            @endif
                 </div>
             </div>
             <div

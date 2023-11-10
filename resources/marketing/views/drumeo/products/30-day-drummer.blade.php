@@ -243,6 +243,10 @@
                 "noBreadcrumb" => true
             ])
 
+     @php
+            $registerButtonUrl = "/ecommerce/add-to-cart?products[30-day-drummer]=1&redirect=/order";
+    @endphp
+
  <!-- Header Section -->
     @include('drumeo.products.partials.evergreen._header', [
     'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30_day_drummer_logo.png',
@@ -255,10 +259,13 @@
     'isVideo' => true,
     'mediaSource' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/video-reel.mp4',
     'buttonText' => 'GET STARTED',
-    'buttonLink' => '/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_30-days:1&redirect=/order&locked=true',
+    'buttonLink' =>  $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'drummers'
+    'students' => 'drummers',
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
+    'brandTitle' => 'Drumeo'
 ])
 
  <!-- Lessons Section -->
@@ -266,24 +273,52 @@
 
 $lessons = [
     [
-        'title' => 'Day 1 (Your First Drum Beat - Lesson & Workout 1)',
+        'title' => 'Your First Drum Beat - 1 Lesson + 5 Workouts)',
         'description' => "In your first week, you'll get one short lesson and five 10-minute workouts where Domino will teach you the beginnings of the most popular drum beat of all time and help you build the muscle memory to learn it and play it!"
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Pre-Recorded Q&A - Your First Drum Beat',
+        'description' => 'Join Domino for a Q&A session focusing on the first week of 30-Day Drummer. In this lesson, she answers questions and gives advice on overcoming any challenges you might have faced so far!'
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Rest Day',
+        'description' => "Enjoy your day off! Feel free to use this day to rest before next week's lesson, or continue working on what you have learned in week one!"
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Doubling It Up - 1 Lesson + 5 Workouts',
+        'description' => "In week two, you will learn how to double what your right hand is playing, giving your drum groove a whole new sound!"
     ],
     [
-        'title' => 'Your First Drum Beat - Workout 2',
-        'description' => 'Practice your drumming skills with Workout 2.'
+        'title' => 'Pre-Recorded Q&A - Building Momentum',
+        'description' => "Join Domino & Kyle for a Q&A as well as three tips to help you maintain momentum (or get back on track) towards reaching your goals."
+    ],
+    [
+        'title' => 'Rest Day',
+        'description' => "Enjoy your day off! Feel free to use this day to rest before next week's lesson or continue working on what you have learned in week two!"
+    ],
+    [
+        'title' => 'Adding Fills & Crashes - 1 Lesson + 5 Workouts',
+        'description' => "In week three, you will learn how to add a crash cymbal to your groove PLUS play your first drum fill. "
+    ],
+    [
+        'title' => 'Pre-Recorded Q&A - Adding Fills & Crashes',
+        'description' => "Join Domino for a Q&A session focusing on the third week of 30-Day Drummer, where she answers questions from students and gives helpful advice to overcome any challenges you may be facing!"
+    ],
+     [
+        'title' => 'Rest Day',
+        'description' => "Enjoy your day off! Feel free to use this day to rest before next week's lesson or continue working on what you have learned in week three!"
+    ],
+     [
+        'title' => 'Your First Song - 1 Lesson + 5 Workouts',
+        'description' => "In the final week, you will learn to play your first song by assembling all of the parts you've learned so far -- playing the verse, chorus, bridge, and finally the entire track! "
+    ],
+     [
+        'title' => 'Pre-Recorded Q&A - Tips And Tricks To Play Your Favorite Songs',
+        'description' => "Now that you've learned how to play your first song, it's time to shift your attention to learning how to play your favorite songs with the help of Domino and Kyle!"
+    ],
+     [
+        'title' => 'Course Review',
+        'description' => "Domino will be issuing a challenge and sharing a few ideas about what you could do next in your drumming journey."
     ],
 ];
 
@@ -292,12 +327,12 @@ $features = [
     [
         'title' => 'Course Kick-Off',
         'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/kick-off-30d-drummer.jpeg',
-        'videoId' => 850695588, //738756003
+        'videoId' => 738756003, // 850695588 - season 3, 
     ],
     [
         'title' => 'Acoustic Kit Setup',
         'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/acoustic-kit-setup.jpeg',
-        'videoId' => 852833927 //738759733
+        'videoId' => 738759733 // 852833927 - season 3, 
     ],
     [
         'title' => 'Electronic Kit Setup',
@@ -314,9 +349,7 @@ $features = [
 
 @include('drumeo.products.partials.evergreen._lessons', [
     'title' => 'Learn the drums by actually playing the drums.',
-    'descriptionDesktop' => '30-Day Drummer is a NEW way to learn the drums – where you learn by actually playing the drums. By focusing on timing & coordination, you’ll build your skills over thirty days following daily guided workouts with your instructor, Domino Santantonio.',
-    'descriptionBold' => 'And the best part is you only need 10 minutes per day.',
-    'descriptionMobile' => 'Welcome to 30-Day Drummer! At this point, you should have all the equipment you need to get started, know how to set up your gear, and be ready to have some fun playing the drums with Domino. In this first lesson and 10-minute workout, she will teach you the beginnings of the most popular drum beat of all time. And you will have fun doing it!',
+    'description' => '30-Day Drummer is a NEW way to learn the drums – where you learn by actually playing the drums. By focusing on timing & coordination, you’ll build your skills over thirty days following daily guided workouts with your instructor, Domino Santantonio. <strong>And the best part is you only need 10 minutes per day.</strong>',
     'features' => $features,
     'lessonTitle' => 'Course Lessons',
     'instructor' => ' Domino Santantonio',
@@ -331,7 +364,7 @@ $practiceItems = [
                 "fa-sharp fa-regular fa-music",
                 "title" => "Know exactly what to practice.",
                 "desc" =>
-                "30-Day Drummer gives you guided play-along workouts every day for thirty days. You’ll know exactly what to work on every time you sit at the drums or practice pad.",
+                "30-Day Drummer gives you guided play-along workouts every day for 30 days. You’ll know exactly what to work on every time you sit at the drums or practice pad.",
             ],
             [
                 "icon" =>
@@ -345,7 +378,7 @@ $practiceItems = [
                 "fas fa-regular fa-infinity",
                 "title" => "Lifetime access.",
                 "desc" =>
-                "30-Day Drummer can become part of your practice routine forever. You’ll have lifetime access to ALL the workouts and Q&A sessions from your class to access anytime you like.",
+                "30-Day Drummer can become part of your practice routine forever. You’ll have lifetime access to ALL the workouts and Q&A sessions from your class anytime you like.",
             ],
             ]
 @endphp
@@ -359,11 +392,9 @@ $practiceItems = [
  <!-- What you will learn section-->
 @php
 $items = [
-            'Daily guided drum workouts ',
-            'Weekly LIVE Q&A workshops',
-            'Flexible weekly schedule',
-            'Ongoing motivation & support',
-            'Guaranteed results'
+            '20 guided play-along lessons. ',
+            'Lifetime access to watch & re-watch.',
+            '90 day money-back guarantee.',
         ]
 @endphp
 
@@ -372,10 +403,13 @@ $items = [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30_day_drummer_logo.png',
     'items' => $items,
     'buttonText' => 'GET STARTED',
-    'buttonLink' => '/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_30-days:1&redirect=/order&locked=true',
+    'buttonLink' =>  $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'drummers'])
+    'students' => 'drummers',
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
+    'brandTitle' => 'Drumeo'])
 
  <!-- Meet your teacher section -->
 <section class="teacher-block text-center sm:px-6 md:px-5 pt-10 sm:py-10 sm:py-14 lg:py-20 bg-white">
@@ -488,26 +522,27 @@ $students = '30-Day Drummer Student'
  <!-- Learn section -->
 @php
 $points = [
-            'Guided drum lessons for 30 days.',
-            'Practice the right things for 10 min/day.',
-            'Learn on your own schedule.',
-            'Play your favorite songs.',
+            '20 guided play-along lessons.',
+            'Lifetime access to watch & re-watch.',
             '90-day money-back guarantee.'
         ]
 @endphp
 
 @include('drumeo.products.partials.evergreen._learn', [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30_day_drummer_logo.png',
-    'logoAlt' => '30DD logo',
+    'logoAlt' => '30 day drummer logo',
     'title' => 'Learn the drums with daily guided workouts.',
     'points' => $points,
     'buttonText' => 'Get Started',
-    'buttonLink' => '/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_30-days:1&redirect=/order&locked=true',
+    'buttonLink' =>  $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'profileImageAlt' => 'student profile image',
     'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/order-collage.png',
     'students' => 'drummers',
     'numStudents' => number_format($nPackOwners ?? 0),
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
+    'brandTitle' => 'Drumeo'
 ])
 
     @include('_partials.components.video-modal',[

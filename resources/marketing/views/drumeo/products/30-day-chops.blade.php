@@ -216,7 +216,10 @@
                 "noBreadcrumb" => true
             ])
 
-    
+    @php
+            $registerButtonUrl = "/ecommerce/add-to-cart?products[30-day-chops]=1&products[Drumeo-VaterSticks]=1&redirect=/order";
+    @endphp
+
      <!-- Header Section -->
     @include('drumeo.products.partials.evergreen._header', [
     'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/logo.svg',
@@ -229,39 +232,86 @@
     'isVideo' => true,
     'mediaSource' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/30dc.mp4',
     'buttonText' => 'GET STARTED',
-    'buttonLink' => "/ecommerce/add-to-cart?products[30-day-chops]=1&products[Drumeo-VaterSticks]=1&locked=true",
+    'buttonLink' => $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'drummers'
+    'students' => 'drummers',
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
+    'brandTitle' => 'Drumeo'
 ])
 
  <!-- Lessons Section -->
 @php
 
-$totalDays = 29;
-$lessons = [];
-
-for ($day = 1; $day <= $totalDays; $day++) {
-     $lessons[] = "Day " . $day;
-}
 
 $features = [
     [
         'title' => 'Course Kick-Off',
-        'posterImage' => 'https://d1923uyy6spedc.cloudfront.net/30DayChops-Banner-1683560940.jpg',
+        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/kick-off-30-day-chops.jpg',
         'videoId' => 823873211,
+    ],
+];
+
+$lessons = [
+    [
+        'title' => 'Paradiddle Chops - 1 Lesson + 5 Workouts',
+        'description' => "In your first week, you'll get one short lesson and five 10-minute workouts where Zack will teach you what a paradiddle is, why it's a useful chop, and then learn some interesting ways to play it on the kit."
+    ],
+    [
+        'title' => 'Pre-Recorded Q&A - Applying Paradiddles To The Kit',
+        'description' => 'In this Pre-Recorded Q&A, Zack helps you overcome your paradiddle hurdles.'
+    ],
+    [
+        'title' => 'Rest & Review Day',
+        'description' => "Enjoy your day off! Feel free to use this day to rest before next week's lesson, or continue working on what you have learned in week one!"
+    ],
+    [
+        'title' => 'Doubles & Inverted Doubles - 1 Lesson + 5 Workouts',
+        'description' => "In week two, you'll learn what double and inverted double strokes are, and you'll practice playing the double stroke roll and inverted double strokes on the kit"
+    ],
+    [
+        'title' => 'Pre-Recorded Q&A - Applying Doubles To The Kit',
+        'description' => "In this Pre-Recorded Q&A, Zack answers the most common questions so far to keep you moving forward."
+    ],
+    [
+        'title' => 'Rest & Review Day',
+        'description' => "Enjoy your day off! Feel free to use this day to rest before next week's lesson, or continue working on what you have learned in week two!"
+    ],
+    [
+        'title' => 'Paradiddle-diddle Chops - 1 Lesson + 5 Workouts',
+        'description' => "In week three, Zack introduces you to his favorite rudiment: the paradiddle-diddle! You'll also practice get plenty of practice with it."
+    ],
+    [
+        'title' => 'Pre-Recorded Q&A - Applying Paradiddle-diddles To The Kit',
+        'description' => "In this Pre-Recorded Q&A, Zack takes questions about the paradiddle-diddle and offers tips and tricks to help nail them."
+    ],
+     [
+        'title' => 'Rest & Review Day',
+        'description' => "Enjoy your day off! Feel free to use this day to rest before next week's lesson, or continue working on what you have learned in week three!"
+    ],
+     [
+        'title' => 'Creative Combinations - 1 Lesson + 5 Workouts',
+        'description' => "In week four, you'll apply everything you've learned in the last three weeks in a series of mastery exercises."
+    ],
+     [
+        'title' => 'Pre-Recorded Q&A - Creative Combinations Around The Kit',
+        'description' => "In this Pre-Recorded Q&A, Zack takes all the questions his students have been having about the course and answers them."
+    ],
+     [
+        'title' => 'Course Review',
+        'description' => "You did it! You've made it through the whole journey. Congratulations!"
     ],
 ];
 @endphp
 
 @include('drumeo.products.partials.evergreen._lessons', [
-    'title' => 'Learn the drums by actually playing the drums.',
-    'descriptionDesktop' => "We've all gazed in amazement at the incredible chops some of the best drummers in the world are capable of pulling off. Whether on social media or on stage, their facility is undeniable and something we just can't help marveling at. Ready to be the drummer people marvel at? Welcome to 30-Day Chops!",
-    'descriptionMobile' => "We've all gazed in amazement at the incredible chops some of the best drummers in the world are capable of pulling off. Whether on social media or on stage, their facility is undeniable and something we just can't help marveling at. Ready to be the drummer people marvel at? Welcome to 30-Day Chops!",
+    'title' => 'Unlock your speed & creativity around the drums.',
+    'description' => '<strong>This is a first:</strong> a course dedicated to teaching you tasty linear drum chops one note at a time. We’re talking blistering groove & fill chops, just like your favorite drummers. For 30 days, play along with Zack Graybeal (aka “Zack Grooves”) and gain the skills to create your own patterns around the kit.',
     'features' => $features,
     'lessonTitle' => 'Course Lessons',
     'instructor' => ' Zack Grooves',
-    'course' => ' 29 video lessons',
+    'course' => ' 30 Days (20 Workouts + 4 Q&As)',
     'lessons' => $lessons
 ])
 
@@ -269,24 +319,24 @@ $features = [
 $practiceItems = [
             [
                 "icon" =>
-                "fa-sharp fa-regular fa-music",
+                "fa-regular fa-music",
                 "title" => "Know exactly what to practice.",
                 "desc" =>
-                "30-Day Chops gives you guided play-along workouts every day for thirty days. You’ll know exactly what to work on every time you sit at the drums or practice pad.",
+                "This is <em>key</em>. No more sitting at the kit trying to figure out how to get better. It’s simple: Zack shows you what to do. You do it. Every day. For 30 days. It’s foolproof.",
             ],
             [
                 "icon" =>
-                "fas fa-regular fa-clock",
-                "title" => "Focused practice time.",
+                "fa-regular fa-clock",
+                "title" => "Fits your schedule.",
                 "desc" =>
-                "Each exercise includes a countdown timer that tells you exactly how long to practice for. This means you can turn off all distractions and focus on your drumming.",
+                "Family, school, work. You’ve got a life and you need to fit your practice into it. That’s why every lesson is only 10-minutes long. Get in, get out, get <strong>better</strong>.",
             ],
             [
                 "icon" =>
-                "fas fa-regular fa-infinity",
+                "fa-regular fa-infinity",
                 "title" => "Lifetime access.",
                 "desc" =>
-                "30-Day Chops can become part of your practice routine forever. You’ll have lifetime access to ALL the workouts and Q&A sessions from your class to access anytime you like.",
+                "Learning is a lifetime thing. So why should 30-Day Chops be any different? You keep the course for life: every play-along, every chart, every lesson, yours to revisit again and again as often as you want.",
             ]
             ]
 @endphp
@@ -301,11 +351,9 @@ $practiceItems = [
  <!-- What you will learn section-->
 @php
 $items = [
-            'Daily guided drum workouts ',
-            'Weekly Q&A workshops',
-            'Flexible weekly schedule',
-            'Ongoing motivation & support',
-            'Guaranteed results'
+            '20 guided play-along lessons.',
+            'Lifetime access to watch & re-watch.',
+            '90 day money-back guarantee.',
         ]
 @endphp
 
@@ -314,10 +362,13 @@ $items = [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/logo.svg',
     'items' => $items,
     'buttonText' => 'GET STARTED',
-    'buttonLink' => "/ecommerce/add-to-cart?products[30-day-chops]=1&products[Drumeo-VaterSticks]=1&locked=true",
+    'buttonLink' => $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'drummers'])
+    'students' => 'drummers',
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
+    'brandTitle' => 'Drumeo'])
 
  <!-- Meet your teacher section -->
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
@@ -413,10 +464,8 @@ $testimonials = $drumeo['testimonialsShopVersion'];
 <!-- Learn section -->
 @php
 $points = [
-            'Guided drum lessons for 30 days.',
-            'Practice the right things for 10 min/day.',
-            'Learn on your own schedule.',
-            'Play your favorite songs.',
+            '20 guided play-along lessons.',
+            'Lifetime access to watch & re-watch.',
             '90-day money-back guarantee.'
         ]
 @endphp
@@ -427,32 +476,16 @@ $points = [
     'title' => 'Improve your chops in just 30 days.',
     'points' => $points,
     'buttonText' => 'Get Started',
-    'buttonLink' => "/ecommerce/add-to-cart?products[30-day-chops]=1&products[Drumeo-VaterSticks]=1&locked=true",
+    'buttonLink' => $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'profileImageAlt' => 'student profile image',
     'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/order-collage.png',
     'students' => 'drummers',
     'numStudents' => number_format($nPackOwners ?? 0),
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
+    'brandTitle' => 'Drumeo',
 ])
-
-
-    {{-- @component('_partials.components.modal', ['name' => 'waitlistModal'])
-        @slot('content')
-            <div class="relative overflow-y-visible max-w-md px-4 md:px-5 lg:px-7 py-5 md:py-7 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
-                <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
-                <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
-                    next edition of 30-Day Chops is announced. </p>
-                @include("drumeo.lead-gen.partials.sign-up-form", [
-                        "recaptchaKey" => $recaptchaKey,
-                    "formName" => '30 Day Chops Waitlist',
-                    "formId" => "Drumeo - Engagement - Trigger - 30 Day Chops Waitlist - Web Form",
-                    "buttonText" => "Let Me Know ",
-                    "stacked" => true,
-                    "noSocial" => true,
-                ])
-            </div>
-        @endslot
-    @endcomponent --}}
 
 <!-- trailer for header section -->
 
@@ -462,10 +495,6 @@ $points = [
         'vimeo' => true,
     ])
 
-    @include('_partials.components.countdown',[
-    'countdownDate' => '2023-06-05 00:00:00',
-    'promoVersion' => false
-    ])
 
     @include("drumeo.sales.partials._footer")
 
@@ -479,7 +508,7 @@ $points = [
     <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
 
 
-    <script>
+    {{-- <script>
         $(document).ready(function () {
             $(document).foundation();
             $('.comparison tr td:nth-child(3)').on('click', function(){
@@ -499,7 +528,7 @@ $points = [
                 $('#waitlistModal').foundation('open');
             @endif
         });
-    </script>
+    </script> --}}
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
