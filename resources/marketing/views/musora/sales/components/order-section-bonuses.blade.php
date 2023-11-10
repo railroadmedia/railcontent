@@ -13,7 +13,7 @@
             @if(!empty($promoLogo))
                 <div class="text-center">
                     <img
-                            class="h-12 lg:h-16 mb-6 transition-opacity opacity-0"
+                            class="h-14 sm:h-16 lg:h-20 mb-6 transition-opacity opacity-0"
                             src="{{ $promoLogo }}"
                             alt="Promo logo"
                             loading="lazy"
