@@ -355,13 +355,6 @@ class ShopifyCartAPIController extends Controller
 
         $checkoutURL = $cartData['checkoutUrl'];
 
-        // always use the checkout url for the current brand domain
-        // (must be configured properly in shopify for the store)
-        // if musora, do nothing
-        if (!empty(brand())) {
-            $checkoutURL = str_replace('musora.com', brand() . '.com', $checkoutURL);
-        }
-
         // If the user is logged in always send them to the multipass auth url first and
         // redirect them to the checkout after it authenticates them.
         if (!empty(user())) {
