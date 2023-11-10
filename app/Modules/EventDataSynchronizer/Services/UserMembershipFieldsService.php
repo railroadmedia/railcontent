@@ -97,8 +97,11 @@ class UserMembershipFieldsService
         $plusMembershipExpirationDate = $userAccessPermissions->getPlusMembershipExpirationDate();
         $basicMembershipExpirationDate = $userAccessPermissions->getBasicMembershipExpirationDate();
 
+        $songsOnlyExpirationDate = $userAccessPermissions->getSongsOnlyExpirationDate();
+
         $membershipLevel = null;
-        if ($plusMembershipExpirationDate > Carbon::now()) {
+        if ($plusMembershipExpirationDate > Carbon::now() ||
+            ($basicMembershipExpirationDate > Carbon::now() && $songsOnlyExpirationDate > Carbon::now())) {
             $membershipLevel = 'plus';
         } elseif ($basicMembershipExpirationDate > Carbon::now()) {
             $membershipLevel = 'basic';
