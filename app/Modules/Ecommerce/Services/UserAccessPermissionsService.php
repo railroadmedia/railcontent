@@ -124,20 +124,23 @@ class UserAccessPermissionsService
         $this->handleUserPermissionsUpdatedEvent($user);
     }
 
-    public function syncUser(User $user): void
+    public function syncUser(User $user, bool $skipEventSync = false): void
     {
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
         $this->ensureUserProductAccess(
             $user,
             $contentPermissionsLookup,
         );
-        $this->handleUserPermissionsUpdatedEvent($user);
+        if (!$skipEventSync) {
+            $this->handleUserPermissionsUpdatedEvent($user);
+        }
     }
 
     public function syncShopifyOrders(
         User $user,
         OrderCollection $orderCollection,
-        $isRebuildingPermissions = false
+        bool $isRebuildingPermissions = false,
+        bool $skipEventSync = false
     ): void {
         if ($isRebuildingPermissions) {
             $this->removeExistingPermissions($user);
@@ -160,7 +163,9 @@ class UserAccessPermissionsService
         );
 
 
-        $this->handleUserPermissionsUpdatedEvent($user, $orderCollection);
+        if (!$skipEventSync) {
+            $this->handleUserPermissionsUpdatedEvent($user, $orderCollection);
+        }
     }
 
     private function syncShopifyOrder(

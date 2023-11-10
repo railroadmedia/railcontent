@@ -2,13 +2,14 @@ import axios from 'axios';
 import ErrorHandler from '../error-handler';
 
 export default {
+
     /**
      * Get the current session cart
      *
      * @returns {Promise} - resolved promise with the response object
      */
     getCart(userId) {
-        return axios.get(`${this.getEndpointURLWithoutPath()}/ecommerce/json/cart?userid=${userId}`)
+        return axios.get(`/ecommerce/json/cart?userid=${userId}`)
             .then(response => response)
             .catch(ErrorHandler.push);
     },
@@ -30,7 +31,7 @@ export default {
         const products = {};
         products[sku] = quantity;
 
-        return axios.put(`${this.getEndpointURLWithoutPath()}/ecommerce/json/add-to-cart?userid=${userId}`, {
+        return axios.put(`/ecommerce/json/add-to-cart?userid=${userId}`, {
             products,
             locked,
         })
@@ -51,7 +52,7 @@ export default {
             skuQuantityQueryStringParams.push(`products[${element.sku}]=${element.quantity}`);
         });
 
-        return axios.get(`${this.getEndpointURLWithoutPath()}/ecommerce/add-to-cart?${skuQuantityQueryStringParams.join('&')}`)
+        return axios.get(`/ecommerce/add-to-cart?${skuQuantityQueryStringParams.join('&')}`)
             .then(response => response)
             .catch(ErrorHandler.push);
     },
@@ -67,7 +68,7 @@ export default {
         sku,
         quantity,
     }) {
-        return axios.patch(`${this.getEndpointURLWithoutPath()}/ecommerce/json/update-product-quantity/${sku}/${quantity}`)
+        return axios.patch(`/ecommerce/json/update-product-quantity/${sku}/${quantity}`)
             .then(response => response)
             .catch(ErrorHandler.push);
     },
@@ -79,7 +80,7 @@ export default {
      * @returns {Promise} - resolved promise with the response object
      */
     deleteItemFromCart(sku, userId) {
-        return axios.delete(`${this.getEndpointURLWithoutPath()}/ecommerce/json/remove-from-cart/${sku}?userId=${userId}`)
+        return axios.delete(`/ecommerce/json/remove-from-cart/${sku}?userId=${userId}`)
             .then(response => response)
             .catch(ErrorHandler.push);
     },
@@ -154,7 +155,7 @@ export default {
         brand,
         userId,
     }) {
-        return axios.put(`${this.getEndpointURLWithoutPath()}/ecommerce/session/address?${userId}`, {
+        return axios.put(`/ecommerce/session/address?${userId}`, {
             'shipping_address_id': shipping_address_id,
             'billing_address_id': billing_address_id,
             'billing_country': billing_country,

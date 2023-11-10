@@ -173,7 +173,7 @@
                     <br><br>
                     Supplies are limited, so grab yours today.
                     <br>
-                    <a class="join smaller musora my-3 w-1/2 anchor-slide" href="#customize-anchor">GET Started &raquo;</a>
+                    <a class="join smaller musora my-3 w-1/2 anchor-slide" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&products[poster-chords]=1&products[poster-scales]=1&promo-code=posters-trial&redirect=/order&locked=true">GET Started &raquo;</a>
                     <br>
                     <em>Free worldwide shipping!</em>
                 </p>
@@ -187,7 +187,7 @@
         </div>
     </section>
     <div class="sticky-trigger block"></div>
-    <a href="#customize-anchor"
+    <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&products[poster-chords]=1&products[poster-scales]=1&promo-code=posters-trial&redirect=/order&locked=true"
             class="promo-banner flex text-white items-center justify-center -mt-10 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide"style="background: linear-gradient(to bottom, #f41a30, #79080b);">
         {{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
         <h3 class="inline-block font-bebas text-musora mx-0 pr-3">* FREE POSTERS *</h3>
@@ -339,7 +339,7 @@
 
                     <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Free for 7 days</strong></h3>
                     <p class="leading-tight opacity-70 text-sm"><em>Then billed at $240 per year. Save 33%.</em></p>
-                    <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL:1,poster-chords:1,poster-scales:1&promo-code=annual-trial&redirect=/order&locked=true">CLICK HERE TO GET STARTED</a>
+                    <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&products[poster-chords]=1&products[poster-scales]=1&promo-code=posters-trial&redirect=/order&locked=true">CLICK HERE TO GET STARTED</a>
                 </div>
                     <a class="inline-block text-pianote mt-2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true"><p class="leading-tight"><strong><u>Or start a Monthly Plan for<br class="sm:hidden"> $30/month (no bonus posters)</u></strong></p></a>
                     <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>

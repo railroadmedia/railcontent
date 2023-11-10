@@ -238,7 +238,7 @@
                     <br><br>
                     At least you’ll get a free book!
                     <br>
-                    <a class="join smaller musora my-3 w-1/2" href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL:1,piano-chords-and-scales-guide:1&promo-code=annual-trial&redirect=/order&locked=true">GET Started &raquo;</a>
+                    <a class="join smaller musora my-3 w-1/2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&products[piano-chords-and-scales-guide]=1&promo-code=trial-book&redirect=/order&locked=true">GET Started &raquo;</a>
                     <br>
                     <em>Free worldwide shipping!</em>
                 </p>
@@ -341,7 +341,7 @@
 
                     <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Free for 7 days</strong></h3>
                     <p class="leading-tight opacity-70 text-sm"><em>Then billed at $240 per year. Save 33%.</em></p>
-                    <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL:1,piano-chords-and-scales-guide:1&promo-code=annual-trial&redirect=/order&locked=true">CLICK HERE TO GET STARTED</a>
+                    <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&products[piano-chords-and-scales-guide]=1&promo-code=trial-book&redirect=/order&locked=true">CLICK HERE TO GET STARTED</a>
                 </div>
                     <a class="inline-block text-pianote mt-2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true"><p class="leading-tight"><strong><u>Or start a Monthly Plan for<br class="sm:hidden"> $30/month (no bonuses)</u></strong></p></a>
                     <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>

@@ -232,14 +232,14 @@ if (Shopify.checkout.customer_id && Shopify.checkout.email && Shopify.checkout.l
         .then(json => {
             if (json.unique === false && json.musora_is_account_setup === true) {
                 // insert link for users who already have an account element
-                document.querySelector('body > div.content > div > div > main > div.step > div.step__sections > div:nth-child(2) > div > div:nth-child(1)').insertAdjacentHTML(
-                    'beforebegin',
-                    '<div style="margin-bottom: 30px;"><a href="' + currentScriptUrlWithoutPath + '/' + brand +
+                document.querySelector('#main-header').insertAdjacentHTML(
+                    'beforeend',
+                    '<div style="margin-top: 30px;"><a href="' + currentScriptUrlWithoutPath + '/' + brand +
                     '" style="font-size: 16pt; font-weight: bold;"><img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x60/shopify/checkout-thank-you-click-here-to-access-lessons.png" alt="Access Your Lessons Here"></a></div>'
                 );
             } else {
                 // insert link for new accounts
-                document.querySelector('body > div.content > div > div > main > div.step > div.step__sections > div:nth-child(2) > div > div:nth-child(1)').insertAdjacentHTML(
+                document.querySelector('#main-header').insertAdjacentHTML(
                     'beforebegin',
                     '<div style="margin-bottom: 30px;"><a href="' + urlToAccountSetupPage + '" style="font-size: 16pt; font-weight: bold;"><img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x60/shopify/checkout-thank-you-account-creation-image.png" alt="Create Your Account Here"></a></div>'
                 );

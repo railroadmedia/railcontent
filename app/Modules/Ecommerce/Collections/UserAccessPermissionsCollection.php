@@ -12,6 +12,7 @@ class UserAccessPermissionsCollection
 {
     const MusoraBasicMembershipPermission = 91;
     const MusoraPlusMembershipPermission = 92;
+    const SongsOnlyMembershipPermission = 94;
     const DrumeoLifetimePermission = 78;
     const LifetimePermissions = [self::DrumeoLifetimePermission, 88, 89, 90];
 
@@ -145,6 +146,12 @@ class UserAccessPermissionsCollection
     public function getBasicMembershipExpirationDate(): ?Carbon
     {
         list($startDate, $endDate) = $this->getActiveDates(self::MusoraBasicMembershipPermission);
+        return $endDate;
+    }
+
+    public function getSongsOnlyExpirationDate(): ?Carbon
+    {
+        list($startDate, $endDate) = $this->getActiveDates(self::SongsOnlyMembershipPermission);
         return $endDate;
     }
 

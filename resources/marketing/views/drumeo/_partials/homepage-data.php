@@ -1,4 +1,4 @@
-    <?php 
+    <?php
     $drumeo = [
         'slides' => [
             [
@@ -315,7 +315,15 @@
         "testimonials" => [
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/ed-koop.webp",
+                "https://i.vimeocdn.com/video/1751944105-765a9cc9ef08e836de7b0c436c50e50aa828db3e7773409007e186cc071ec45b-d_500.jpg",
+                "name" => "Claudio Sanchez",
+                "video" => "877648411",
+                "title" => "Becoming a musician has completed a part of my life.",
+                "description" => "Becoming a musician has completed a part of my life.",
+            ],
+            [
+                "image" =>
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/ed-koop.jpg",
                 "name" => "Ed Koop",
                 "video" => "342059271",
                 "title" => "I’m loving music more than I ever did before!",

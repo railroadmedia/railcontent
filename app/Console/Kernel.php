@@ -27,6 +27,7 @@ use App\Console\Commands\RepairUserProgressStartedOn;
 use App\Console\Commands\RepairVimeoDurations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
+use App\Console\Commands\SyncUsersToCIO;
 use App\Console\Commands\TestLessonsDescriptionUrls;
 use App\Console\Commands\MembershipFieldsSync;
 use App\Console\Commands\UpdateRoutinesFebruary2023;
@@ -73,6 +74,7 @@ class Kernel extends ConsoleKernel
         RepairUserProgressOnNPPSH::class,
         MigrateOldGuitareoDeletedSongs::class,
         RemoveRailTrackerData::class,
+        SyncUsersToCIO::class,
     ];
 
     /**
