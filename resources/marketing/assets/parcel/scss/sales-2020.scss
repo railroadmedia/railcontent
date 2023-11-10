@@ -254,12 +254,12 @@ img {
         }
 
         &.promo {
-            border-color: $promoColor;
-            color: $promoColor;
+            border-color: #FF006B;
+            color: #FF006B;
 
             &:hover,
             &:focus {
-                background: $promoColor;
+                background: #FF006B;
                 color: #fff;
             }
         }

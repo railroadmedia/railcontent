@@ -386,52 +386,6 @@
 
     <div id="customize-section" class="anchor"></div>
 
-    @php
-        $bonuses = [
-        [
-            'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/30-day-chops-masterclass.jpg',
-            'title' => 'Drumeo EarDrums',
-            'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
-
-],
-        [
-            'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
-            'title' => 'Drumeo EarDrums',
-            'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
-            'price' => floatval($productPrices['drumeo-eardrums']->price),
-            'online-ship' => "Free Shipping",
-            'shipping' => "no-shipping"
-        ],
-            [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
-            'title' => 'Drumeo Drumsticks',
-            'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
-            'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
-            'shipping' => true,
-            ],
-        [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/tdt.jpg',
-            'title' => "The Drummer's Toolbox Book",
-            'description' => '',
-            'price' => floatval($productPrices['the-drummers-toolbox-book']->price),
-            'shipping' => true,
-        ],
-        [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/rudiments_poster.jpg',
-            'title' => "40 Drum Rudiments",
-            'description' => '',
-            'price' => floatval($productPrices['rudiments-poster']->price),
-            'shipping' => true,
-        ],
-        ]
-    @endphp
-    @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-annual-2w-card.png',
-        'header' => 'Online drum lessons<br class="inline sm:hidden"> for all skill levels.',
-        'subDescription' => 'Start your Drumeo membership today and get:',
-        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[the-drummers-toolbox-book]=1&products[rudiments-poster]=1&locked=true&promo-code=special',
-    ])
 
     @include("drumeo.sales.partials._footer", [
             "minimal" => true

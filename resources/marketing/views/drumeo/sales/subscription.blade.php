@@ -151,6 +151,15 @@
         ])
     @endif
 
+    @include('_partials.layout.holiday.homepage-top-banner',[
+        'text' => '<span class="text-[#ff006b]">Save 38%</span> + get 10 free bonuses worth $1234'
+    ])
+
+    <div class="sticky-trigger block"></div>
+    @include('_partials.layout.holiday.sticky-bar', [
+        'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94',
+    ])
+
 
 
     @php
@@ -236,7 +245,7 @@
     @php
         $testimonials = $drumeo['testimonials'];
     @endphp
-    
+
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
@@ -358,4 +367,23 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     @yield('scripts')
+
+    <script>
+        $(document).ready(function () {
+            var stickyBar = $('.promo-banner');
+            $(window).scroll(function () {
+                var stickTrigger = $('.sticky-trigger').offset().top;
+                var unstickTrigger = $('.unstick-trigger').offset().top;
+                if ($(this).scrollTop() > (unstickTrigger - 115)) {
+                    stickyBar.removeClass('fixed mt-0');
+                }
+                if ($(this).scrollTop() < stickTrigger - 115) {
+                    stickyBar.removeClass('fixed mt-0');
+                }
+                if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
+                    stickyBar.addClass('fixed mt-0');
+                }
+            });
+        });
+    </script>
 @stop
