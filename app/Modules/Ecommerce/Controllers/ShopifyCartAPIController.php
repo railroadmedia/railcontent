@@ -56,12 +56,16 @@ class ShopifyCartAPIController extends Controller
                 ];
         }
 
-        $discountCodeToApply = $request->get('promo-code');
+        if (!empty($request->get('promo-code')) && is_string($request->get('promo-code'))) {
+            $discountCodesToApply = explode(',', $request->get('promo-code'));
+        } else {
+            $discountCodesToApply = [];
+        }
 
         if (empty($existingShopifyCartId) || empty($existingCart)) {
             $cartData = $this->shopifyStoreFrontAPIService->createCart(
                 $productVariantIdsAndQuantitiesToAdd,
-                !empty($discountCodeToApply) ? [$discountCodeToApply] : []
+                $discountCodesToApply
             );
 
             if ($request->get('locked') == 'true') {
@@ -338,6 +342,11 @@ class ShopifyCartAPIController extends Controller
     {
         $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
 
+        if (!empty($request->get('shopify-cart-id'))) {
+            $existingShopifyCartId = $request->get('shopify-cart-id');
+            Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $existingShopifyCartId);
+        }
+
         $cartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
 
         if (empty($cartData)) {
@@ -345,13 +354,6 @@ class ShopifyCartAPIController extends Controller
         }
 
         $checkoutURL = $cartData['checkoutUrl'];
-
-        // always use the checkout url for the current brand domain
-        // (must be configured properly in shopify for the store)
-        // if musora, do nothing
-        if (!empty(brand())) {
-            $checkoutURL = str_replace('musora.com', brand() . '.com', $checkoutURL);
-        }
 
         // If the user is logged in always send them to the multipass auth url first and
         // redirect them to the checkout after it authenticates them.
