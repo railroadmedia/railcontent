@@ -243,7 +243,7 @@
                 "noBreadcrumb" => true
             ])
 
-     @php
+    @php
             $registerButtonUrl = "/ecommerce/add-to-cart?products[30-day-drummer]=1&redirect=/order";
     @endphp
 
