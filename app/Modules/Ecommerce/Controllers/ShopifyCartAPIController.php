@@ -56,12 +56,16 @@ class ShopifyCartAPIController extends Controller
                 ];
         }
 
-        $discountCodeToApply = $request->get('promo-code');
+        if (!empty($request->get('promo-code')) && is_string($request->get('promo-code'))) {
+            $discountCodesToApply = explode(',', $request->get('promo-code'));
+        } else {
+            $discountCodesToApply = [];
+        }
 
         if (empty($existingShopifyCartId) || empty($existingCart)) {
             $cartData = $this->shopifyStoreFrontAPIService->createCart(
                 $productVariantIdsAndQuantitiesToAdd,
-                !empty($discountCodeToApply) ? [$discountCodeToApply] : []
+                $discountCodesToApply
             );
 
             if ($request->get('locked') == 'true') {
