@@ -57,6 +57,19 @@ class ShopifySyncService
         $this->shopifyGateway = $shopifyGateway;
     }
 
+    public function syncCustomerByUser(User $user, bool $isRebuildingPermissions = false, bool $skipEventSync): void
+    {
+        if ($user->shopify_id) {
+            $this->syncCustomer(
+                $user->shopify_id,
+                isRebuildingPermissions: $isRebuildingPermissions,
+                skipEventSync: $skipEventSync
+            );
+        } else {
+            $this->userAccessPermissionsService->syncUser($user, $skipEventSync);
+        }
+    }
+
     public function syncCustomer(
         $shopifyCustomerId,
         $email = '',
