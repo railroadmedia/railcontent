@@ -338,6 +338,11 @@ class ShopifyCartAPIController extends Controller
     {
         $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
 
+        if (!empty($request->get('shopify-cart-id'))) {
+            $existingShopifyCartId = $request->get('shopify-cart-id');
+            Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $existingShopifyCartId);
+        }
+
         $cartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
 
         if (empty($cartData)) {
