@@ -129,7 +129,7 @@ class CustomerIoSyncService
         $attributes = [];
         foreach ($brands as $brand) {
             $attributes += [
-                $brand . "_membership_access-expiration-date" => $user->membership_expiration_date,
+                $brand . "_membership_access-expiration-date" => Carbon::parse($user->membership_expiration_date)->timestamp,
                 $brand . "_membership_is_lifetime" => $user->is_lifetime_member ? "true" : "false",
                 //$brand . '_membership_subscription_source_app-store' => $user->hasMobileMembership() ? "true" : "",
             ];
