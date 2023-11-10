@@ -7,7 +7,10 @@ use App\Modules\Ecommerce\Jobs\ShopifyCustomersSyncAllJob;
 
 class ShopifyCustomerSyncAll extends Command
 {
-    protected $signature = 'ecommerce:ShopifyCustomerSyncAll {startId} {endId} {--rebuildPermissions} {--skipEventSync}';
+    protected $signature = 'ecommerce:ShopifyCustomerSyncAll {startId} {endId}
+    {--rebuildPermissions : removed existing shopify permissions before creating them}
+    {--skipEventSync : only pull data into user access permissions table, nothing else}';
+    protected $description = 'Sync shopfiy order data into user access permissions table';
 
     public function handle()
     {

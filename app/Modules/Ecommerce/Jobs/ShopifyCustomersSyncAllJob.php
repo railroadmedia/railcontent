@@ -54,7 +54,7 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
 
     function getQuery(): Builder
     {
-        $query = User::query()->whereNotNull('shopify_id');
+        $query = User::query();
         if ($this->startId) {
             $query = $query->where('id', '>=', $this->startId);
         }
@@ -73,13 +73,13 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
         $shopifySyncService = app(ShopifySyncService::class);
         foreach ($items as $item) {
             try {
-                $shopifySyncService->syncCustomer(
-                    $item->shopify_id,
+                $shopifySyncService->syncCustomerByUser(
+                    $item,
                     isRebuildingPermissions: $this->isRebuildingPermissions,
                     skipEventSync: $this->skipEventSync
                 );
             } catch (\Throwable $ex) {
-                Log::error("Error syncing shopify customer $item->shopify_id: user:$item->id");
+                Log::error("Error syncing shopify user $item->shopify_id: user:$item->id");
                 Log::error($ex);
             }
         }
