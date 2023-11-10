@@ -1,4 +1,4 @@
-    <?php 
+    <?php
     $drumeo = [
         'slides' => [
             [
@@ -313,6 +313,14 @@
             ],
         ],
         "testimonials" => [
+            [
+                "image" =>
+                "https://i.vimeocdn.com/video/1751884369-4113545b989dbc7af5676f3fa796b70bd3165e22548b17606a73b8d4c7449edf-d_500.jpg",
+                "name" => "Claudio Sanchez",
+                "video" => "877648411",
+                "title" => "I’m playing in two bands ready to play in front of people.",
+                "description" => "I’m playing in two bands ready to play in front of people.",
+            ],
             [
                 "image" =>
                 "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/ed-koop.jpg",
