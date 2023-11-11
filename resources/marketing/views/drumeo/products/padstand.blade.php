@@ -135,7 +135,7 @@
                 <div class="mt-5 sm:mt-7 w-full max-w-xl mx-auto">
                     <div class="sm:w-5/12 join smaller outline"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     @if( $products['padstand']->getStockAvailability() > 1 && !empty($products['padstand']->getStockAvailability()))
-                        <a class="w-5/12 join smaller blue" href="/ecommerce/add-to-cart?locked=true&product-array=padstand:1">Order Now</a>
+                        <a class="w-5/12 join smaller blue" href="/ecommerce/add-to-cart?locked=true&products[padstand]=1">Order Now</a>
                     @else
                         <a class="join smaller sold-out">SOLD OUT</a>
                     @endif
@@ -352,7 +352,7 @@
                                     Save {{ round(100 - (100 * (floatval($productPrices['padstand']->discounted_price) / floatval($productPrices['padstand']->price)))) }}%
                                 </p>
                             @endif
-                            <a href="/ecommerce/add-to-cart?locked=true&product-array=padstand:1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
+                            <a href="/ecommerce/add-to-cart?locked=true&products[padstand]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
                                 <div class="bg-white px-3 py-5 md:py-7">
                                     <h4 class="mb-2 sm:mb-3"><strong>PadStand Only</strong></h4>
                                     <img class="h-24 transition-opacity opacity-0"

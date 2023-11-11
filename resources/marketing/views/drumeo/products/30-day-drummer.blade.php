@@ -818,7 +818,7 @@
 {{--                        <img class="h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-1a.png" alt="Tier 1 pack" />--}}
 {{--                        <h2>--}}{{--<s class="text-[#ABB5C2] mr-2">$97</s>--}}{{--<strong>$97</strong></h2>--}}
 {{--                        <p class="italic mb-4 text-xs">One-time payment</p>--}}
-{{--                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_30-days:1&redirect=/order&locked=true" class="join bg-drumeo medium w-full mb-5">ENROLL NOW</a>--}}
+{{--                        <a href="/ecommerce/add-to-cart?products[30-day-drummer-3]=1&products[drumeo_access_30-days]=1&redirect=/order&locked=true" class="join bg-drumeo medium w-full mb-5">ENROLL NOW</a>--}}
 {{--                        <p class="inline-block text-left">--}}
 {{--                            <b>30-Day Drummer - Season 3</b><br/>--}}
 {{--                            <b class="text-drumeo">Bonus</b> 1-Month Drumeo Access--}}
@@ -834,7 +834,7 @@
 {{--                        <img class="h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-2a.png" alt="Tier 2 pack" />--}}
 {{--                        <h2>--}}{{--<s class="text-[#ABB5C2] mr-2">$147</s>--}}{{--<strong>$147</strong></h2>--}}
 {{--                        <p class="italic mb-4 text-xs">One-time payment</p>--}}
-{{--                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_90-days:1,quietpad:1,padstand:1,Drumeo-VaterSticks:1,Drumeo-Key:1&redirect=/order&locked=true" class="join medium w-full mb-5 bg-[#FFAE00]">ENROLL NOW</a>--}}
+{{--                        <a href="/ecommerce/add-to-cart?products[30-day-drummer-3]=1&products[drumeo_access_90-days]=1&products[quietpad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[Drumeo-Key]=1&redirect=/order&locked=true" class="join medium w-full mb-5 bg-[#FFAE00]">ENROLL NOW</a>--}}
 {{--                        <p class="inline-block text-left">--}}
 {{--                            <b>30-Day Drummer - Season 3</b><br/>--}}
 {{--                            <b class="text-musora">Bonus</b> 3-Month Drumeo Access<br>--}}
@@ -855,7 +855,7 @@
 {{--                        <img class="h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-3a.png" alt="Tier 3 pack" />--}}
 {{--                        <h2>--}}{{--<s class="text-[#ABB5C2] mr-2">$240</s>--}}{{--<strong>$240</strong></h2>--}}
 {{--                        <p class="italic mb-4 text-xs">Per year</p>--}}
-{{--                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,DLM-1-year:1,quietpad:1,padstand:1,Drumeo-VaterSticks:1,BeginnerBook:1,Drumeo-Key:1,independence-made-easy-pack:1,four-weeks-to-better-drum-fills:1,learn-songs-faster-pack:1&redirect=/order&locked=true" class="join blue medium w-full mb-5">ENROLL NOW</a>--}}
+{{--                        <a href="/ecommerce/add-to-cart?products[30-day-drummer-3]=1&products[DLM-1-year]=1&products[quietpad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[BeginnerBook]=1&products[Drumeo-Key]=1&products[independence-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&redirect=/order&locked=true" class="join blue medium w-full mb-5">ENROLL NOW</a>--}}
 {{--                        <p class="inline-block text-left">--}}
 {{--                            <b>Annual Drumeo Membership</b><br/>--}}
 {{--                            <b class="text-drumeo">Free</b> 30-Day Drummer - Season 3<br>--}}

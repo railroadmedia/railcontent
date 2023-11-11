@@ -36,7 +36,7 @@ Route::domain('{pianoteDomain}')
 
         Route::get('/{page?}', SalesController::class . '@products')
             ->whereIn('page', [
-                '500-songs-fb', '500-songs-discount', '500-songs-carols-discount', '500-songs-chord-discount', '500-songs-free-lesson'
+                '500-songs-discount', '500-songs-carols-discount', '500-songs-chord-discount', '500-songs-free-lesson'
             ]);
 
         Route::get('/{category}', [ShopController::class, 'shop'])
