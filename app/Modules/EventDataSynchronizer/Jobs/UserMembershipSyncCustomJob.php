@@ -46,9 +46,7 @@ class UserMembershipSyncCustomJob extends BatchQueryJob
             })
             ->whereIn('permission_id', [91, 92])
             ->where('usora_users.membership_expiration_date', '>', Carbon::now())
-            ->where('usora_users.access_level', '!=', 'lifetime')
-            ->where('railcontent_user_permissions.expiration_date', '>', '2023-11-01')
-            ->where('railcontent_user_permissions.expiration_date', '<', '2023-11-15');
+            ->where('usora_users.access_level', '!=', 'lifetime');
         return $query;
     }
 
