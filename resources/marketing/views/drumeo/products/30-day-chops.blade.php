@@ -217,7 +217,7 @@
             ])
 
     @php
-            $registerButtonUrl = "/ecommerce/add-to-cart?products[30-day-chops]=1&products[Drumeo-VaterSticks]=1&redirect=/order";
+            $registerButtonUrl = "/ecommerce/add-to-cart?products[30-day-chops]=1&redirect=/order";
     @endphp
 
      <!-- Header Section -->
@@ -315,7 +315,7 @@ $lessons = [
     'lessons' => $lessons
 ])
 
-@php 
+@php
 $practiceItems = [
             [
                 "icon" =>
@@ -341,7 +341,7 @@ $practiceItems = [
             ]
 @endphp
 
-   
+
 <!-- Songs subsection -->
 @include('drumeo.products.partials.evergreen._dropdown', [
     'bgClass' => 'bg-slate-900',
@@ -459,7 +459,7 @@ $testimonials = $drumeo['testimonialsShopVersion'];
 
         </div>
     </section>
-    
+
 
 <!-- Learn section -->
 @php

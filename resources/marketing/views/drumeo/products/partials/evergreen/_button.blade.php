@@ -5,9 +5,9 @@
                 <i class="{{ $iconClass }}" aria-hidden="true"></i>
             @endif
             @if (!empty($buttonText))
-                <strong>{{ $buttonText }}</strong>
+              {{ $buttonText }}
             @else
-                <strong>{{ $buttonText }}</strong>
+                {{ $buttonText }}
             @endif
             @if (!empty($iconClass) && $iconPosition === 'right')
                 <i class="{{ $iconClass }}" aria-hidden="true"></i>

@@ -28,25 +28,25 @@
                     </span>
                 </div>
             </div>
-             @if (!empty($price) || !empty($enrollmentLink) || !empty($brandTitle))
-                <p class="text-sm mb-5 sm:mb-0 hover:text-{{ $brand }}">
-                    @if (!empty($price))
-                        <a href={{ $enrollmentLink }}>
-                            <span class="text-black text-xl">
-                                <strong>{{ $price }}</strong>
-                            </span>
-                            <span class="opacity-50 underline"> or get it free with a {{ $brandTitle }}
-                                Membership.</span>
-                        </a>
-                    @else
-                        <a href={{ $enrollmentLink }}>
-                            <span class="text-black leading-tight text-center mb-1 md:mb-2">
-                                <strong>{{ $price }}</strong>
-                            </span>
-                            Get it free with a {{ $brandTitle }} Membership.
-                        </a>
-                    @endif
-                </p>
-            @endif
+{{--             @if (!empty($price) || !empty($enrollmentLink) || !empty($brandTitle))--}}
+{{--                <p class="text-sm mb-5 sm:mb-0 hover:text-{{ $brand }}">--}}
+{{--                    @if (!empty($price))--}}
+{{--                        <a href={{ $enrollmentLink }}>--}}
+{{--                            <span class="text-black text-xl">--}}
+{{--                                <strong>{{ $price }}</strong>--}}
+{{--                            </span>--}}
+{{--                            <span class="opacity-50 underline"> or get it free with a {{ $brandTitle }}--}}
+{{--                                Membership.</span>--}}
+{{--                        </a>--}}
+{{--                    @else--}}
+{{--                        <a href={{ $enrollmentLink }}>--}}
+{{--                            <span class="text-black leading-tight text-center mb-1 md:mb-2">--}}
+{{--                                <strong>{{ $price }}</strong>--}}
+{{--                            </span>--}}
+{{--                            Get it free with a {{ $brandTitle }} Membership.--}}
+{{--                        </a>--}}
+{{--                    @endif--}}
+{{--                </p>--}}
+{{--            @endif--}}
         </div>
     </section>
