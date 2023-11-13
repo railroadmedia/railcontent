@@ -1073,7 +1073,7 @@ export default {
 
         $_show_in_new_feed: {
             get() {
-                if (this.thisPost) {
+                if (this.thisPost && this.thisPost.show_in_new_feed) {
                     return this.thisPost.show_in_new_feed.value == 1
                       || this.thisPost.show_in_new_feed.value == "1";
                 }
@@ -1289,7 +1289,7 @@ export default {
 
         handleTopicChange(newArray) {
             const changedField = Utils.getDifferingArrayKeys(newArray, this.$_topic);
-            const val = changedField[changedField.length - 1].id || changedField[changedField.length - 1];
+            const val = changedField[changedField.length - 1].value || changedField[changedField.length - 1];
 
             api.handleArrayChange({
                 oldArray: this.$_topic,

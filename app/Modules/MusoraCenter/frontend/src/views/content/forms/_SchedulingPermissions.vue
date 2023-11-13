@@ -143,7 +143,7 @@ export default {
 
         $_live_event_youtube_id: {
             get() {
-                return this.thisPost.live_event_youtube_id.value;
+                return this.thisPost.live_event_youtube_id ? this.thisPost.live_event_youtube_id.value : null;
             },
             set(val) {
                 this.sendSetFieldRequest({
@@ -157,7 +157,7 @@ export default {
 
         $_live_event_start_time: {
             get() {
-                return this.thisPost.live_event_start_time.value || null;
+                return this.thisPost.live_event_start_time ? this.thisPost.live_event_start_time.value : null;
             },
             set(val) {
                 return this.thisPost.live_event_start_time.value = val;
@@ -166,7 +166,7 @@ export default {
 
         $_live_event_end_time: {
             get() {
-                return this.thisPost.live_event_end_time.value || null;
+                return this.thisPost.live_event_end_time ? this.thisPost.live_event_end_time.value : null;
             },
             set(val) {
                 this.thisPost.live_event_end_time.value = val;
