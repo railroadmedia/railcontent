@@ -137,15 +137,15 @@ class ShopifyAPIService
         // see: https://admin.shopify.com/store/musora-sandbox-staging/settings/apps/development/62166990849/overview
         // currently using a private app created from the shopify store admin area, not a partner app (yet!)
         Context::initialize(
-            apiKey: config('shopify.apiKey'),
-            apiSecretKey: config('shopify.apiSecretKey'),
-            scopes: config('shopify.scopes'),
-            hostName: config('shopify.hostName'),
+            apiKey: config('shopify.storefront.api_key'),
+            apiSecretKey: config('shopify.storefront.api_secret_key'),
+            scopes: config('shopify.storefront.scopes'),
+            hostName: config('shopify.storefront.host_name'),
             sessionStorage: $this->sessionService,
-            apiVersion: config('shopify.apiVersion'),
+            apiVersion: config('shopify.storefront.api_version'),
             isEmbeddedApp: true,
             isPrivateApp: true,
-            privateAppStorefrontAccessToken: config('shopify.privateAppStorefrontAccessToken'),
+            privateAppStorefrontAccessToken: config('shopify.storefront.access_token'),
         );
 
         $this->storefrontClient = new Storefront(
@@ -153,11 +153,11 @@ class ShopifyAPIService
             Context::$PRIVATE_APP_STOREFRONT_ACCESS_TOKEN
         );
 
-//        dd(config('shopify.privateAppAdminAccessToken'));
+//        dd(config('shopify.storefront.admin_access_token'));
 
         $this->adminClient = new Graphql(
             Context::$HOST_NAME,
-            config('shopify.privateAppAdminAccessToken')
+            config('shopify.storefront.admin_access_token')
         );
     }
 
@@ -675,7 +675,7 @@ class ShopifyAPIService
     {
         $customerDataHash = ['email' => $userEmail];
 
-        $keyMaterial = hash("sha256", config('shopify.multipassSecretKey'), true);
+        $keyMaterial = hash("sha256", config('shopify.multipass.secret_key'), true);
         $encryptionKey = substr($keyMaterial, 0, 16);
         $signatureKey = substr($keyMaterial, 16, 16);
 
@@ -842,7 +842,7 @@ class ShopifyAPIService
 
         $currentDiscountCodes = collect($cartData['discountCodes'] ?? [])->pluck('code')->toArray();
         $applyAnnualMembershipDiscountCode = false;
-        $freeWithAnnualDiscountCode = config('shopify.freeWithAnnualDiscountCode');
+        $freeWithAnnualDiscountCode = config('shopify.discount_codes.free_with_annual');
 
         foreach ($cartData['lines']['edges'] as $lineItemNode) {
             $lineItemData = $lineItemNode['node'];
