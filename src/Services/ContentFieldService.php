@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Services;
 use Railroad\Railcontent\Events\ContentFieldCreated;
 use Railroad\Railcontent\Events\ContentFieldDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
+use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\ElasticDataShouldUpdate;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentBpmRepository;
@@ -256,7 +257,6 @@ class ContentFieldService
     {
         if (in_array($data['key'], config('railcontent.contentColumnNamesForFields', []))) {
             $this->contentRepository->update($data['content_id'], [$data['key'] => $data['value']]);
-            // event(new ContentUpdated($id, $content, $data));
         } else {
             $key = ($data['key'] == 'instructor') ? 'instructor_id' : $data['key'];
             $repositoryName = RepositoryBase::REPOSITORYMAPPING[$data['key']] ?? null;
@@ -270,9 +270,10 @@ class ContentFieldService
             }
         }
 
-        $this->fieldRepository->createOrUpdateAndReposition($data['id'], $data);
+        $this->fieldRepository->createOrUpdateAndReposition($data['id'] ?? null, $data);
 
         $content = $this->contentService->getById($data['content_id']);
+        event(new ContentUpdated($data['content_id'], $content, $data));
 
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_'.$data['content_id']);
@@ -321,6 +322,27 @@ class ContentFieldService
         event(new ElasticDataShouldUpdate($contentId));
 
         return $content;
+    }
+
+    public function getByContentIdAndKey($contentId, $key, $value = null)
+    {
+        $field = $this->fieldRepository->query()
+                    ->where('content_id', $contentId)
+                    ->where('key', $key);
+        if($value){
+            $field = $field->where('value', $value);
+        }
+
+        return $field->first();
+    }
+
+    public function getByContentIdKeyAndValue($contentId, $key, $value = null)
+    {
+        return $this->fieldRepository->query()
+            ->where('content_id', $contentId)
+            ->where('key', $key)
+            ->where('value', $value)
+            ->first();
     }
 
 }
