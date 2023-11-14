@@ -154,6 +154,14 @@
             "joinUrl" => '/choose-plan',
         ])
     @endif
+    @include('_partials.layout.holiday.homepage-top-banner',[
+        'text' => '<span class="text-promo">Save 38%</span> + get 10 free<br class="sm:hidden"> bonuses worth $1234'
+    ])
+
+    <div class="sticky-trigger block"></div>
+    @include('_partials.layout.holiday.sticky-bar', [
+        'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94',
+    ])
 
     @php
         $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/rob-scallon.png';
@@ -223,7 +231,7 @@
     @php
         $testimonials = $guitareo['testimonials'];
     @endphp
-    
+
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by guitarists<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
@@ -285,11 +293,10 @@
                 ],
             ]
         @endphp
-        @include('musora.sales.components.order-section-bonuses', [
+        @include('musora.sales.components.order-section-bf', [
         'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-annual-2w-card.png',
-        'header' => 'Online guitar lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 3 bonuses<br class="inline sm:hidden"> worth $333',
-        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
+        'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/BF-drummers-logo-web.png',
+        'bonusSum' => '1234',
         'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&redirect=/order&locked=true&promo-code=special',
         'altButtonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true',
         ])

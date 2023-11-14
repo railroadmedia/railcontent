@@ -40,6 +40,23 @@
     <!-- End Google Tag Manager (noscript) -->
 
     @yield('global-body')
+    @if(Carbon\Carbon::create(2023, 11, 25, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        @include('_partials.components.countdown',[
+            'countdownDate' => '2023-11-25 00:00:00',
+            'promoVersion' => true
+        ])
+    @elseif(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        @include('_partials.components.countdown',[
+            'countdownDate' => '2023-11-27 00:00:00',
+            'promoVersion' => true
+        ])
+    @else
+        @include('_partials.components.countdown',[
+            'countdownDate' => '2023-11-28 00:00:00',
+            'promoVersion' => true
+        ])
+
+    @endif
     <script type="text/javascript">!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});</script>
     <script type="text/javascript">
         window.Beacon('init', '82b3c165-0840-4f45-aaeb-4775857c4b91')

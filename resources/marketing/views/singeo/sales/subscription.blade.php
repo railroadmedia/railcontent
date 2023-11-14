@@ -152,6 +152,14 @@
             "joinUrl" => '/choose-plan',
         ])
     @endif
+    @include('_partials.layout.holiday.homepage-top-banner',[
+        'text' => '<span class="text-promo">Save 38%</span> + get 10 free<br class="sm:hidden"> bonuses worth $1234'
+    ])
+
+    <div class="sticky-trigger block"></div>
+    @include('_partials.layout.holiday.sticky-bar', [
+        'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94',
+    ])
 
     @php
         $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/hailey-benedict.png';
@@ -292,10 +300,10 @@
             ]
         @endphp
 
-        @include('musora.sales.components.order-section-bonuses', [
+        @include('musora.sales.components.order-section-bf', [
         'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/singeo-annual-2w-card.png',
-        'header' => 'Online singing lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 2 bonuses<br class="inline sm:hidden"> worth $46',
+        'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/BF-drummers-logo-web.png',
+        'bonusSum' => '1234',
         'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&locked=true&redirect=/order&promo-code=special',
         'altButtonLink' => '/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true',
         ])
