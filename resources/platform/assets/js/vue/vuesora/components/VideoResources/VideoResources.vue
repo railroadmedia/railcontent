@@ -10,8 +10,8 @@
             <!-- Video CTAs -->
             <div id="cta-container" class="tw-flex tw-items-start tw-pt-3 tw-overflow-auto sm:tw-overflow-visible tw-no-scrollbar lg:tw-ml-4 tw-pb-40 -tw-mb-36 lg:-tw-mb-40 tw-relative" @scroll="ctaContainerScroll">
 
-                <div v-if="showLeftArrow" class="left-arrow tw-pl-2 tw-pr-6 tw-sticky tw-h-[32px] tw-top-3 tw-left-0 sm:tw-hidden tw-flex tw-items-center tw-z-50 -tw-mr-[42px]" @click="handleLeftArrow"><i class="fas fa-chevron-left dark:tw-text-white tw-text-[#18181B]"></i></div>
-                <div v-if="showRightArrow" class="right-arrow tw-pl-6 tw-pr-2 tw-sticky tw-h-[32px] tw-top-3 tw-left-[calc(100%-36px)] sm:tw-hidden tw-flex tw-items-center tw-z-50 -tw-mr-[42px]" @click="handleRightArrow"><i class="fas fa-chevron-right dark:tw-text-white tw-text-[#18181B] "></i></div>
+                <div v-if="showLeftArrow" class="left-arrow tw-pl-2 tw-pr-6 tw-sticky tw-h-[34px] tw-top-1 tw-left-0 sm:tw-hidden tw-flex tw-items-center tw-z-50 -tw-mr-[42px]" @click="handleLeftArrow"><i class="fas fa-chevron-left dark:tw-text-white tw-text-[#18181B]"></i></div>
+                <div v-if="showRightArrow" class="right-arrow tw-pl-6 tw-pr-2 tw-sticky tw-h-[34px] tw-top-1 tw-left-[calc(100%-36px)] sm:tw-hidden tw-flex tw-items-center tw-z-50 -tw-mr-[42px]" @click="handleRightArrow"><i class="fas fa-chevron-right dark:tw-text-white tw-text-[#18181B] "></i></div>
 
                 <!-- Info Button -->
                 <div v-if="showInfoButton" class="flex flex-column resource-button tw-pr-2">
