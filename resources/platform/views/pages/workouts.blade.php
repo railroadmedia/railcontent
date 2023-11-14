@@ -9,6 +9,7 @@
 
         <section>
             <h1>Featured Challenges</h1>
+            <header-carousel :preloaded-carousel="{{ $carousel }}" />
         <section>
         <br>
         <section>
