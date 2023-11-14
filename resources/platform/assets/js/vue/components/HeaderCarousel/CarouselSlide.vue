@@ -4,10 +4,6 @@ import { XIcon } from "@heroicons/vue/solid";
 import {computed, ref} from "vue";
 
 const props = defineProps({
-  brand: {
-    type: String,
-    default: "",
-  },
   topSubtitle: {
     type: String,
     default: "",

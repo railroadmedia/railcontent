@@ -7,10 +7,6 @@ import {
 import CarouselSlide from "./CarouselSlide.vue";
 
 const props = defineProps({
-  brand: {
-    type: String,
-    default: 'drumeo'
-  },
   preloadedCarousel: {
     type: Array,
     default: [],
@@ -93,7 +89,6 @@ onMounted(() => {
       :isPrevSlide="i === prevSlide"
       :key="slide.title"
       :animateDirection="animateDirection"
-      :brand="brand"
       :topSubtitle="slide.subtitle"
       :topSubtitleColor="slide.subtitle_color"
       :title="slide.title"
