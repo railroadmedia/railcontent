@@ -171,12 +171,10 @@ img {
 
     &.promo {
         background: $promoColor;
-        color: #000;
 
         &:hover,
         &:focus {
             background: lighten($promoColor, 10%);
-            color: #000;
         }
     }
 
@@ -254,12 +252,12 @@ img {
         }
 
         &.promo {
-            border-color: #FF006B;
-            color: #FF006B;
+            border-color: #fe006b;
+            color: #fe006b;
 
             &:hover,
             &:focus {
-                background: #FF006B;
+                background: #fe006b;
                 color: #fff;
             }
         }

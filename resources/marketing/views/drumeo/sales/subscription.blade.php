@@ -152,7 +152,7 @@
     @endif
 
     @include('_partials.layout.holiday.homepage-top-banner',[
-        'text' => '<span class="text-[#ff006b]">Save 38%</span> + get 10 free bonuses worth $1234'
+        'text' => '<span class="text-promo">Save 38%</span> + get 10 free<br class="sm:hidden"> bonuses worth $1234'
     ])
 
     <div class="sticky-trigger block"></div>
@@ -289,36 +289,73 @@
         @php
             $bonuses = [
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
-                'title' => 'Drumeo Drumsticks',
-                'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
-                'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
-                'shipping' => true,
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/p4.jpg',
+                    'title' => 'Practice Pad',
+                    'description' => '',
+                    'price' => floatval($productPrices['practicepad']->price),
+                    'shipping' => true,
                 ],
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/promos/black-friday/bundles/vertical-bg/rdm.jpg',
-                'title' => 'Rock Drumming Masterclass',
-                'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
-                'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
+                    'title' => 'Drumeo Drumsticks',
+                    'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
+                    'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
+                    'shipping' => true,
                 ],
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/promos/black-friday/bundles/vertical-bg/dtme.jpg',
-                'title' => 'Drum Technique Made Easy',
-                'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
-                'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg',
+                    'title' => 'Drum Technique Made Easy',
+                    'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
+                    'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
                 ],
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/promos/black-friday/bundles/vertical-bg/ime.jpg',
-                'title' => 'Independence Made Easy',
-                'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
-                'price' => floatval($productPrices['independence-made-easy-pack']->price),
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
+                    'title' => 'Better Drum Fills',
+                    'description' => 'The ultimate four-week crash course to playing more creative & musical drum fills.',
+                    'price' => floatval($productPrices['four-weeks-to-better-drum-fills']->price),
+                ],
+                [
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/tommy_card.jpg',
+                    'title' => 'Great Hands For A Lifetime',
+                    'description' => 'Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.',
+                    'price' => floatval($productPrices['GHFAL-DIGI']->price),
+                ],
+                [
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/sd.jpg',
+                    'title' => 'Successful Drumming',
+                    'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
+                    'price' => floatval($productPrices['SD-DIGI']->price),
+                ],
+                [
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/ime.jpg',
+                    'title' => 'Independence Made Easy',
+                    'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
+                    'price' => floatval($productPrices['independence-made-easy-pack']->price),
+                ],
+                [
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/rdm.jpg',
+                    'title' => 'Rock Drumming Masterclass',
+                    'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
+                    'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
+                ],
+                [
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eyd.jpg',
+                    'title' => 'Electrify Your Drumming',
+                    'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
+                    'price' => floatval($productPrices['electrify-your-drumming']->price),
+                ],
+                [
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/lsf.jpg',
+                    'title' => 'Learn Songs Faster',
+                    'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
+                    'price' => floatval($productPrices['learn-songs-faster-pack']->price),
                 ],
             ]
         @endphp
-        @include('musora.sales.components.order-section-bonuses', [
+        @include('musora.sales.components.order-section-bf', [
         'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/BF-drummers-logo-web.png',
         'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drumeo-annual-2w-card.png',
-        'header' => 'Online drum lessons for all skill levels.',
+        'bonusSum' => '1234',
         'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
         'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special',
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
