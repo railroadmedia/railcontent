@@ -102,7 +102,40 @@
     ])
 
 
+
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
+        @php
+            $bundles = [
+                [
+                    'slug' => '/drumshop/bundle-ultimate-lessons',
+                    'badgeText' => 'FREE QUIETPAD & DRUMSTICKS',
+                    'img' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/ultimate-lessons-shop-2.jpg',
+                    'title' => 'Drumeo Membership<br> + 10 Bonuses',
+                    'desc' => 'Drumeo Annual Membership<br class="inline md:hidden lg:inline"> + Practice Pad + Sticks + 8 Training Packs',
+                    'price' => 1468.94,
+                    'discountedPrice' => 240,
+                    'priceColor' => 'linear-gradient(to bottom, #04afec, #213472)',
+                    'buttonColor' => 'linear-gradient(to bottom, #04afec, #213472)',
+                    'visible' => 1,
+                ],
+                [
+                    'slug' => '/drumshop/bundle-perfect-gift',
+                    'badgeText' => 'FREE P4 & DRUMSTICKS',
+                    'img' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/perfect-gift-fb-share-image.jpg',
+                    'title' => 'Drumeo Access Card<br> + 2 Bonuses',
+                    'desc' => 'Drumeo Access Card<br class="inline md:hidden lg:inline"> + Practice Pad + Sticks',
+                    'price' => 331.95,
+                    'discountedPrice' => 240,
+                    'priceColor' => 'linear-gradient(to bottom, #01fdc0, #289077)',
+                    'buttonColor' => 'linear-gradient(to bottom, #01fdc0, #289077)',
+                    'visible' => 1,
+                ],
+            ];
+        @endphp
+        @include('_partials.layout.holiday.bundle-tiles', [
+            "header" => 'Save up to 86% with <br class="sm:hidden"> Black Friday Bundles',
+        ])
+
         <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Featured</strong></h5>
@@ -166,7 +199,6 @@
                 </div>
             </div>
         </section>
-
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container">

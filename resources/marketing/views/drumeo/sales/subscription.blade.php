@@ -152,14 +152,15 @@
     @endif
 
     @include('_partials.layout.holiday.homepage-top-banner',[
-        'text' => '<span class="text-promo">Save 38%</span> + get 10 free<br class="sm:hidden"> bonuses worth $1234'
+        'text' => '<span class="text-promo">Save 38%</span> + get 10 free<br class="sm:hidden"> bonuses worth $1228.94',
+        'fullPrice' => '1228.94',
+        'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=special',
     ])
 
     <div class="sticky-trigger block"></div>
     @include('_partials.layout.holiday.sticky-bar', [
         'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94',
     ])
-
 
 
     @php
@@ -175,7 +176,9 @@
        $slides = $drumeo['slides'];
     @endphp
 
-    @if(!empty($beginnerVersion))
+    @if(!empty($bfVersion))
+
+    @elseif(!empty($beginnerVersion))
         @include('musora.sales.components.header-section', [
             'header' => 'Learn beginner beats, fills<br> and songs on the drums.',
             'desc' => 'Try Drumeo’s award-winning online drum lessons for 7 days FREE:',
@@ -356,7 +359,7 @@
         'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drumeo-annual-2w-card.png',
         'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/BF-drummers-logo-web.png',
         'bonusSum' => '1234',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=special',
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
         ])
     @else
