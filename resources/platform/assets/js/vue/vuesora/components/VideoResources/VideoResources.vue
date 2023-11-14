@@ -8,7 +8,11 @@
         </h1>
       </div>
       <!-- Video CTAs -->
-      <div class="tw-flex tw-items-start tw-pt-3 tw-overflow-auto sm:tw-overflow-visible tw-no-scrollbar lg:tw-ml-4 tw-pb-40 -tw-mb-36 lg:-tw-mb-40">
+      <div id="cta-container" class="tw-flex tw-items-start tw-pt-3 tw-overflow-auto sm:tw-overflow-visible tw-no-scrollbar lg:tw-ml-4 tw-pb-40 -tw-mb-36 lg:-tw-mb-40 tw-relative" @scroll="ctaContainerScroll">
+
+          <div v-if="showLeftArrow" class="left-arrow tw-pl-2 tw-pr-6 tw-sticky tw-h-[32px] tw-top-3 tw-left-0 sm:tw-hidden tw-flex tw-items-center tw-z-50 -tw-mr-[42px]" @click="handleLeftArrow"><i class="fas fa-chevron-left dark:tw-text-white tw-text-[#18181B]"></i></div>
+          <div v-if="showRightArrow" class="right-arrow tw-pl-6 tw-pr-2 tw-sticky tw-h-[32px] tw-top-3 tw-left-[calc(100%-36px)] sm:tw-hidden tw-flex tw-items-center tw-z-50 -tw-mr-[42px]" @click="handleRightArrow"><i class="fas fa-chevron-right dark:tw-text-white tw-text-[#18181B] "></i></div>
+
         <!-- Info Button -->
         <div v-if="showInfoButton" class="flex flex-column resource-button tw-pr-2">
            <button
@@ -378,6 +382,8 @@ export default {
       completed: this.lesson.completed,
       openInfo: false,
       showMore: false,
+      showLeftArrow: false,
+      showRightArrow: false,
     };
   },
 
@@ -397,6 +403,12 @@ export default {
         this.resourceDropdown = false;
       }
     });
+
+    this.showRightArrowByDefault();
+    window.addEventListener('resize', this.showRightArrowByDefault);
+  },
+  unmounted() {
+      window.removeEventListener('resize', this.showRightArrowByDefault);
   },
   methods: {
     getCurrentTime() {
@@ -548,8 +560,59 @@ export default {
            return true;
        }
 
-       return false;
+       return false
     },
+    ctaContainerScroll(e){
+        const { scrollLeft, clientWidth, scrollWidth } = e.target;
+        if(scrollLeft < 25){
+            this.showLeftArrow = false;
+        } else {
+            this.showLeftArrow = true;
+        }
+
+        if(scrollLeft + clientWidth > scrollWidth - 15){
+            this.showRightArrow = false;
+        } else {
+            this.showRightArrow = true;
+        }
+    },
+    handleLeftArrow(){
+        const ctaContainer = document.getElementById('cta-container');
+        ctaContainer.scrollLeft = 0;
+        this.showLeftArrow = false;
+    },
+    handleRightArrow(){
+        const ctaContainer = document.getElementById('cta-container');
+        ctaContainer.scrollLeft = ctaContainer.scrollWidth - ctaContainer.clientWidth;
+        this.showRightArrow = false;
+    },
+    showRightArrowByDefault(){
+        const ctaContainer = document.getElementById('cta-container');
+
+        if(ctaContainer.scrollWidth > ctaContainer.clientWidth + 15){
+            this.showRightArrow = true;
+        } else {
+            this.showRightArrow = false;
+        }
+    }
   },
 };
 </script>
+
+<style scoped>
+    body.tw-dark .left-arrow {
+        background: linear-gradient(90deg, rgba(0,12,23,1) 50%, rgba(255,255,255,0) 100%);
+    }
+
+    body .left-arrow {
+        background: linear-gradient(90deg, rgba(249,249,249,1) 50%, rgba(255,255,255,0) 100%);
+    }
+
+    body.tw-dark .right-arrow {
+        background: linear-gradient(270deg, rgba(0,12,23,1) 50%, rgba(255,255,255,0) 100%);
+    }
+
+    body .right-arrow {
+        background: linear-gradient(270deg, rgba(249,249,249,1) 60%, rgba(255,255,255,0) 100%);
+    }
+</style>
