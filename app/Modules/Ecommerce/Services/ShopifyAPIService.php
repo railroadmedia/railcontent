@@ -272,13 +272,15 @@ class ShopifyAPIService
     /**
      * @param $cartId
      * @param array $productVariantIdsAndSellingPlanIdsToAddToCart
+     * @param array $discountCodesToApply
      * @return array
      * @throws HttpRequestException
      * @throws MissingArgumentException
      */
     public function addToCart(
         $cartId,
-        array $productVariantIdsAndSellingPlanIdsToAddToCart = []
+        array $productVariantIdsAndSellingPlanIdsToAddToCart = [],
+        array $discountCodesToApply = []
     ): array {
         $createCartInputLineArray = [];
 
@@ -322,6 +324,19 @@ class ShopifyAPIService
         $jsonResponse = json_decode($responseBody, true);
 
         $responseCartData = $jsonResponse["data"]["cartLinesAdd"]["cart"] ?? [];
+
+        if (!empty($discountCodesToApply)) {
+            // always merge with existing discount codes
+            $this->applyDiscountCodes(
+                $cartId,
+                array_unique(
+                    array_merge(
+                        $discountCodesToApply,
+                        collect($responseCartData['discountCodes'] ?? [])->pluck('code')->toArray()
+                    )
+                )
+            );
+        }
 
         if ($responseCode !== 200 || empty($responseCartData)) {
             throw new Exception(
@@ -865,10 +880,10 @@ class ShopifyAPIService
             }
         }
 
-        return $this->applyDiscountCode($cartId, $currentDiscountCodes);
+        return $this->applyDiscountCodes($cartId, $currentDiscountCodes);
     }
 
-    private function applyDiscountCode($cartId, array $discountCodes)
+    public function applyDiscountCodes($cartId, array $discountCodes)
     {
         $addDiscountCodeInputLineArray = $discountCodes;
 

@@ -189,7 +189,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         if ($customerIoData && !empty($externalAttributes = $customerIoData->getExternalAttributes())) {
             $extraData = [
                 'cio_id' => $externalAttributes['cio_id'],
-                'customer_io_id' => $externalAttributes['id'],
+                'customer_io_id' => strval($externalAttributes['id']),
             ];
         }
 

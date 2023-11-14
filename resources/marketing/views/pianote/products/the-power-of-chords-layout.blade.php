@@ -574,7 +574,7 @@
                     {{--<p  class="w-full px-4 pt-2 pb-4 -mb-3 bg-guitareo text-black rounded-t-2xl bg-pianote text-white">--}}
                             {{--<strong>LAUNCH SPECIAL</strong>--}}
                     {{--</p>--}}
-                    {{--<a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['the-power-of-chords' => 1, 'piano-chords-and-scales-guide' => 1], 'redirect' => '/order', 'locked' => 'true']) }}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 border border-gray-300 group">--}}
+                    {{--<a class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 border border-gray-300 group">--}}
                         {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
                             {{--<h5 class="leading-none mb-3">Power Of Chords</h5>--}}
                             {{--<h1 class="inline-block leading-none text-4xl lg:text-5xl">--}}
@@ -602,7 +602,7 @@
                         {{--style="background: #FFAE00;">--}}
                             {{--<strong>LIMITED TIME PIANOTE DEAL</strong>--}}
                     {{--</p>--}}
-                    {{--<a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['PIANOTE-MEMBERSHIP-1-YEAR' => 1, 'the-power-of-chords' => 1, '500-songs-in-5-days' => 1, 'piano-chords-and-scales-guide' => 1,], 'redirect' => '/order', 'locked' => 'true']) }}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 border border-gray-300 group">--}}
+                    {{--<a class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 border border-gray-300 group">--}}
                         {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
                             {{--<h5 class="leading-none mb-3">Power Of Chords + Pianote</h5>--}}
                             {{--<h1 class="inline-block leading-none text-4xl lg:text-5xl">--}}

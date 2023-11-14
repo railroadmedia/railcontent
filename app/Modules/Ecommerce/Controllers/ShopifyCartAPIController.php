@@ -56,10 +56,16 @@ class ShopifyCartAPIController extends Controller
                 ];
         }
 
+        if (!empty($request->get('promo-code')) && is_string($request->get('promo-code'))) {
+            $discountCodesToApply = explode(',', $request->get('promo-code'));
+        } else {
+            $discountCodesToApply = [];
+        }
+
         if (empty($existingShopifyCartId) || empty($existingCart)) {
             $cartData = $this->shopifyStoreFrontAPIService->createCart(
                 $productVariantIdsAndQuantitiesToAdd,
-                ['my-discount01']
+                $discountCodesToApply
             );
 
             if ($request->get('locked') == 'true') {
@@ -73,6 +79,7 @@ class ShopifyCartAPIController extends Controller
                 $request->get('locked') == 'true') {
                 Session::forget(self::SHOPIFY_CART_LOCKED_SESSION_KEY);
                 $this->shopifyStoreFrontAPIService->clearCart($existingShopifyCartId);
+                $this->shopifyStoreFrontAPIService->applyDiscountCodes($existingShopifyCartId, []);
             }
 
             if ($request->get('locked') == 'true') {
@@ -81,7 +88,8 @@ class ShopifyCartAPIController extends Controller
 
             $cartData = $this->shopifyStoreFrontAPIService->addToCart(
                 $existingShopifyCartId,
-                $productVariantIdsAndQuantitiesToAdd
+                $productVariantIdsAndQuantitiesToAdd,
+                !empty($discountCodeToApply) ? [$discountCodeToApply] : []
             );
 
             Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
@@ -145,6 +153,7 @@ class ShopifyCartAPIController extends Controller
         if (Session::get(self::SHOPIFY_CART_LOCKED_SESSION_KEY, false) == true) {
             Session::forget(self::SHOPIFY_CART_LOCKED_SESSION_KEY);
             $this->shopifyStoreFrontAPIService->clearCart($existingShopifyCartId);
+            $this->shopifyStoreFrontAPIService->applyDiscountCodes($existingShopifyCartId, []);
         }
 
         $shopifyCartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
@@ -333,6 +342,11 @@ class ShopifyCartAPIController extends Controller
     {
         $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
 
+        if (!empty($request->get('shopify-cart-id'))) {
+            $existingShopifyCartId = $request->get('shopify-cart-id');
+            Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $existingShopifyCartId);
+        }
+
         $cartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
 
         if (empty($cartData)) {
@@ -340,13 +354,6 @@ class ShopifyCartAPIController extends Controller
         }
 
         $checkoutURL = $cartData['checkoutUrl'];
-
-        // always use the checkout url for the current brand domain
-        // (must be configured properly in shopify for the store)
-        // if musora, do nothing
-        if (!empty(brand())) {
-            $checkoutURL = str_replace('musora.com', brand() . '.com', $checkoutURL);
-        }
 
         // If the user is logged in always send them to the multipass auth url first and
         // redirect them to the checkout after it authenticates them.

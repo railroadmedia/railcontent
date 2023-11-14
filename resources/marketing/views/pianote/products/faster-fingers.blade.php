@@ -37,7 +37,7 @@
                         class="hidden-sm hidden-md hidden-lg">and <strong>learn songs</strong> quickly!</h2>
             <a
                 class="join vue-add-to-cart"
-                href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['faster-fingers' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"
+                href="/ecommerce/add-to-cart?products[faster-fingers]=1&redirect=/order"
                 data-product-json='{"faster-fingers": 1}'
             >Get Started &raquo;</a>
             <p class="breakdown">
@@ -60,8 +60,7 @@
                     <iframe class="embed-responsive-item" id="vimeo" src="//player.vimeo.com/video/371759409" frameborder="0"
                             allowfullscreen allow="autoplay"></iframe>
                 </div>
-                <a href="{{ url()->route('shopping-cart.add-to-cart',
-                ['products' => ['faster-fingers' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"
+                <a href="/ecommerce/add-to-cart?products[faster-fingers]=1&redirect=/order"
                         class="join stop-play" data-dismiss="modal" aria-label="Close">Get Started</a>
             </div>
         </div>
@@ -128,7 +127,7 @@
                 </div>
             </div>
             <a
-                href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['faster-fingers' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"
+                href="/ecommerce/add-to-cart?products[faster-fingers]=1&redirect=/order"
                 class="join smaller vue-add-to-cart"
                 data-product-json='{"faster-fingers": 1}'
             >Get Started &raquo;</a>
@@ -248,7 +247,7 @@
                 </p>
             </div>
             <br class="hidden-xs"><br> <a
-                href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['faster-fingers' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"
+                href="/ecommerce/add-to-cart?products[faster-fingers]=1&redirect=/order"
                 class="join smaller vue-add-to-cart"
                 data-product-json='{"faster-fingers": 1}'
             >Get Started &raquo;</a>
@@ -378,7 +377,7 @@
             <h3>Play <strong>faster</strong>, make <strong>fewer mistakes</strong>, <br
                         class="hidden-sm hidden-md hidden-lg">and <strong>learn songs</strong> quickly!</h3>
             <a
-                href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['faster-fingers' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"
+                href="/ecommerce/add-to-cart?products[faster-fingers]=1&redirect=/order"
                 class="join vue-add-to-cart"
                 data-product-json='{"faster-fingers": 1}'
             >Play Faster Today &raquo;</a>

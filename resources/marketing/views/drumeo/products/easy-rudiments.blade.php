@@ -109,7 +109,7 @@
         <h3 class="leading-tight"><strong>Take A Look Inside.</strong></h3>
         <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative" style="bottom:-7px"></i> <em>Click to see inside the book!</em> <i class="fa-light fa-arrow-turn-down ml-1 relative" style="bottom:-7px"></i></p>
         <div class="max-w-xs sm:max-w-md mx-auto px-16 sm:px-0">
-            <a target="_blank" href="https://d21q7xesnoiieh.cloudfront.net/marketing/drumeo/products/easy-rudiments/preview-christmas-songbook.pdf">
+            <a target="_blank" href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/easy-rudiments/preview-easy-rudiment.pdf">
                 <div class="w-full bg-center bg-cover" style="padding-bottom:135%;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/book-cover2.webp');"></div>
             </a>
         </div>

@@ -38,7 +38,7 @@
             <h2>Start playing piano or <br class="hidden-sm hidden-md hidden-lg"> keyboard in your church.</h2>
             <a
                 class="join vue-add-to-cart"
-                href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['worship-piano' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"
+                href="/ecommerce/add-to-cart?products[worship-piano]=1&redirect=/order"
                 data-product-json='{"worship-piano": 1}'
             >Get Started &raquo;</a>
 
@@ -614,7 +614,7 @@
             <img class="logo lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/logo-text-white.png" alt="Worship piano logo">
             <h2>Start playing piano or<br class="hidden-sm hidden-md hidden-lg"> keyboard in your church.</h2>
             <a
-                href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['worship-piano' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"
+                href="/ecommerce/add-to-cart?products[worship-piano]=1&redirect=/order"
                 class="join vue-add-to-cart"
                 data-product-json='{"worship-piano": 1}'
             >Get Started &raquo;</a>

@@ -50,10 +50,16 @@ class SubscriptionService
         $productLookup = $this->productService->getProductsBySkus($subscriptionSkus)
             ->keyBy('sku');
 
-        $subscriptions->each(function ($subscription) use ($productLookup) {
+        //migrated recharge subscriptions do not have sku, so we need to get them by shopify variant id
+        //keep sku lookup around to make testing simpler
+        $shopifyVariantIds = $subscriptions->pluck('shopifyVariantId')->toArray();
+        $productIdsLookup = $this->productService->getProductsByShopifyIds($shopifyVariantIds)
+            ->keyBy('shopify_id');
+
+        $subscriptions->each(function ($subscription) use ($productLookup, $productIdsLookup) {
             /** @var Product $product */
             /** @var Subscription $subscription */
-            $product = $productLookup[$subscription->sku] ?? null;
+            $product = $productLookup[$subscription->sku] ?? $productIdsLookup[$subscription->shopifyVariantId] ?? null;
             if (!$product) {
                 Log::error("Product $subscription->sku not found for recharge subscription $subscription->id");
                 return;

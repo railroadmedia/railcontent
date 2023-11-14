@@ -124,20 +124,23 @@ class UserAccessPermissionsService
         $this->handleUserPermissionsUpdatedEvent($user);
     }
 
-    public function syncUser(User $user): void
+    public function syncUser(User $user, bool $skipEventSync = false): void
     {
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
         $this->ensureUserProductAccess(
             $user,
             $contentPermissionsLookup,
         );
-        $this->handleUserPermissionsUpdatedEvent($user);
+        if (!$skipEventSync) {
+            $this->handleUserPermissionsUpdatedEvent($user);
+        }
     }
 
     public function syncShopifyOrders(
         User $user,
         OrderCollection $orderCollection,
-        $isRebuildingPermissions = false
+        bool $isRebuildingPermissions = false,
+        bool $skipEventSync = false
     ): void {
         if ($isRebuildingPermissions) {
             $this->removeExistingPermissions($user);
@@ -160,7 +163,9 @@ class UserAccessPermissionsService
         );
 
 
-        $this->handleUserPermissionsUpdatedEvent($user, $orderCollection);
+        if (!$skipEventSync) {
+            $this->handleUserPermissionsUpdatedEvent($user, $orderCollection);
+        }
     }
 
     private function syncShopifyOrder(
@@ -183,6 +188,7 @@ class UserAccessPermissionsService
             foreach ($contentPermissions as $contentPermission) {
                 $hash = sha1("$shopifyOrderId.$lineItem->id.$contentPermission->id");
                 $source = $order->getPaymentSourceEnum();
+                /** @var UserAccessPermission $accessPermission */
                 $accessPermission = $existingAccessPermissionsLookup["$source->value.$hash"] ?? null;
 
                 if (!$accessPermission) {
@@ -204,6 +210,18 @@ class UserAccessPermissionsService
                     $accessPermission->status = $status;
                     $accessPermission->save();
                     $wasUpdated = true;
+                } elseif ($accessPermission->created_at < Carbon::parse('2023-11-9')) {
+                    $expectedDays = $lineItem->product->getMembershipTimeDays();
+                    $expectedMonths = $lineItem->product->getMembershipTimeMonths();
+                    if ($accessPermission->time_days != $expectedDays || $accessPermission->time_months != $expectedMonths) {
+                        Log::info(
+                            "$user->id: Fixing time for permission $accessPermission->permission_id days:$accessPermission->time_days -> $expectedDays months:$accessPermission->time_months -> $expectedMonths"
+                        );
+                        $accessPermission->time_days = $expectedDays;
+                        $accessPermission->time_months = $expectedMonths;
+                        $accessPermission->save();
+                        $wasUpdated = true;
+                    }
                 }
             }
             $this->handleBonusMembershipPermission(
