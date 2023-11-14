@@ -113,7 +113,7 @@ export default {
                     to: { name: 'content' },
                 },
                 {
-                    text: this.state.currentPost.title.value || this.state.currentPost.name.value,
+                    text: this.state.currentPost.title ? this.state.currentPost.title.value : (this.state.currentPost.name ? this.state.currentPost.name.value : ''),
                     disabled: true,
                 },
             ];
