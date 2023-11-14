@@ -359,7 +359,7 @@ $items = [
 
 <!-- Get started-->
 @include('drumeo.products.partials.evergreen._get-started', [
-    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/logo.svg',
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/logo-30d-chops-2.png',
     'items' => $items,
     'buttonText' => 'GET STARTED',
     'buttonLink' => $registerButtonUrl,
@@ -473,7 +473,7 @@ $points = [
 @include('drumeo.products.partials.evergreen._learn', [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/logo.svg',
     'logoAlt' => '30 day chops logo',
-    'title' => 'Improve your chops in just 30 days.',
+    'title' => 'Improve your chops <br class="md:hidden"> in just 30 days.',
     'points' => $points,
     'buttonText' => 'Get Started',
     'buttonLink' => $registerButtonUrl,

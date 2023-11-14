@@ -238,7 +238,8 @@
     'buttonLink' => $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'piano players'
+    'students' => 'piano players',
+    'extraClass' => 'h-20 sm:h-24 lg:h-32'
 ])
 
 
@@ -372,17 +373,73 @@ $items = [
 @endphp
 
 <!-- Get started-->
-@include('drumeo.products.partials.evergreen._get-started', [
-    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png',
-    'items' => $items,
-    'buttonText' => 'GET STARTED',
-    'buttonLink' => $registerButtonUrl,
-    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
-    'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'piano players',
-    'price' => "$127",
-    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
-    'brandTitle' => 'Pianote'])
+@php
+    $logo = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png';
+    $items = $items;
+    $buttonText = 'GET STARTED';
+    $buttonLink = $registerButtonUrl;
+    $studentProfilesImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png';
+    $numStudents = number_format($nPackOwners ?? 0);
+    $students = 'piano players';
+    $price = "$127";
+    $enrollmentLink = 'https://www.pianote.com/choose-plan';
+    $brandTitle = 'Pianote'
+@endphp
+
+    <section class="text-center px-5 sm:px-6 py-8 md:py-12 lg:py-20 bg-blue-50">
+        <div class="container max-w-4xl mx-auto">
+            <div class="flex flex-wrap sm:flex-nowrap items-center justify-center py-6">
+                <img class="h-32 sm:h-64 lg:h-72 py-4 lazyload" data-src={{ $logo }} alt="logo">
+                <ul class="pl-6">
+                    @foreach ($items as $item)
+                        <li>
+                            <h4 class="leading-loose text-left"><i
+                                    class="fas fa-sharp fa-solid fa-circle-check text-{{ $brand }} mr-5"
+                                    aria-hidden="true"></i>{{ $item }}</h4>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            {{-- <a href={{$buttonLink}} class="join blue medium w-full sm:w-1/2 md:w-1/3 lg:w-3/5 mt-6 sm:mt-12 mb-3 anchor-slide" role="button">{{$buttonText}}</a><br> --}}
+            <div class="w-full flex flex-col items-center pt-4">
+                   <div class="w-full sm:w-1/2 md:w-1/3">
+            @include('drumeo.products.partials.evergreen._button', [
+                'link' => $buttonLink,
+                'buttonClass' => 'text-white font-bebas tracking-widest',
+                'buttonText' => $buttonText,
+            ])
+</div>
+                <div class="flex flex-row items-center py-2">
+                    <img class="h-7 mr-2 lazyload" alt="Joined Student Profiles" data-src={{ $studentProfilesImage }}>
+                    <span class="inline-block align-middle leading-tight text-xs">Join
+                        {{ $numStudents }} {{ $students }} who<br> have already registered.
+                    </span>
+                </div>
+            </div>
+{{--             @if (!empty($price) || !empty($enrollmentLink) || !empty($brandTitle))--}}
+{{--                <p class="text-sm mb-5 sm:mb-0 hover:text-{{ $brand }}">--}}
+{{--                    @if (!empty($price))--}}
+{{--                        <a href={{ $enrollmentLink }}>--}}
+{{--                            <span class="text-black text-xl">--}}
+{{--                                <strong>{{ $price }}</strong>--}}
+{{--                            </span>--}}
+{{--                            <span class="opacity-50 underline"> or get it free with a {{ $brandTitle }}--}}
+{{--                                Membership.</span>--}}
+{{--                        </a>--}}
+{{--                    @else--}}
+{{--                        <a href={{ $enrollmentLink }}>--}}
+{{--                            <span class="text-black leading-tight text-center mb-1 md:mb-2">--}}
+{{--                                <strong>{{ $price }}</strong>--}}
+{{--                            </span>--}}
+{{--                            Get it free with a {{ $brandTitle }} Membership.--}}
+{{--                        </a>--}}
+{{--                    @endif--}}
+{{--                </p>--}}
+{{--            @endif--}}
+        </div>
+    </section>
+
+
 
 
  <!-- Meet your teacher section -->
@@ -390,8 +447,8 @@ $items = [
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
                 <div class="w-52 sm:w-64 lg:w-72 relative -mb-8 sm:mb-0 sm:-mr-8">
-                    <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/coach-profile-m2.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/coach-profile.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/coach-profile-m.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/coach-profile.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 150%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
 

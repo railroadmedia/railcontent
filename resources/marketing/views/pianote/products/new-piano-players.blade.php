@@ -206,7 +206,7 @@ $items = [
 
 <!-- Get started-->
 @include('drumeo.products.partials.evergreen._get-started', [
-    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/new-piano-players-logo.png',
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/logo-new-piano-players-2.png',
     'items' => $items,
     'buttonText' => 'GET STARTED',
     'buttonLink' => $registerButtonUrl,
@@ -352,7 +352,7 @@ $points = [
     'students' => 'piano players',
     'numStudents' => number_format($nPackOwners ?? 0),
     'price' => "$127",
-    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
+    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
     'brandTitle' => 'Pianote'
 ])
 

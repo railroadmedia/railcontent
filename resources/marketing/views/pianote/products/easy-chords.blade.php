@@ -592,7 +592,7 @@ $points = [
     'students' => 'piano players',
     'numStudents' => number_format($nPackOwners ?? 0),
     'price' => "$127",
-    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
+    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
     'brandTitle' => 'Pianote'
 ])
 
