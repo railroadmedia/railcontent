@@ -13,7 +13,7 @@
       dark:hover:tw-bg-[#002039]
     " :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : 'hover-bg-grey-7 hover-text-black']"
     :href="renderLink ? item.url : null">
-
+    
     <!-- LESSON NUMBERS -->
     <div v-if="showNumbers" class="
         tw-flex
@@ -281,7 +281,7 @@ export default {
     itemStyle() {
       const field = this.item.fields.find((field) => field.key === 'style');
       return field.value;
-    },
+    },  
 
     class_object() {
       return {
@@ -330,6 +330,9 @@ export default {
 
       return this.index;
     },
+  },
+  mounted(){
+    console.log(this.contentModel.list)
   },
   beforeDestroy() {
     this.contentModel = null;
