@@ -342,7 +342,7 @@ $points = [
 @include('drumeo.products.partials.evergreen._learn', [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/new-piano-players-logo.png',
     'logoAlt' => 'new piano players logo',
-    'title' => 'Learn the piano in just 30 days.',
+    'title' => 'Learn the piano <br class="md:hidden"> in just 30 days.',
     'points' => $points,
     'buttonText' => 'Get Started',
     'buttonLink' => $registerButtonUrl,

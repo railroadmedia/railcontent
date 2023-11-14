@@ -530,7 +530,7 @@ $points = [
 @include('drumeo.products.partials.evergreen._learn', [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png',
     'logoAlt' => '30 day blues logo',
-    'title' => 'Learn the blues by playing the blues',
+    'title' => 'Learn the blues <br class="md:hidden"> by playing the blues',
     'points' => $points,
     'buttonText' => 'Get Started',
     'buttonLink' => $registerButtonUrl,
@@ -540,7 +540,7 @@ $points = [
     'students' => 'piano players',
     'numStudents' => number_format($nPackOwners ?? 0),
     'price' => "$127",
-    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
+    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
     'brandTitle' => 'Pianote'])
     
     @include('_partials.components.video-modal',[
