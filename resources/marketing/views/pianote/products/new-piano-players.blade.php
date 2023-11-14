@@ -6,7 +6,7 @@
     <meta property="og:title" content="New Piano Players Start Here | Pianote">
     <meta name="description" content="Learn the piano. Play your favorite songs. Start sounding beautiful.">
     <meta property="og:description" content="Learn the piano. Play your favorite songs. Start sounding beautiful.">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/new-piano-players/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -15,6 +15,8 @@
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+
     <style>
         .timeline-container .timeline:after,
         .timeline-container:after {
@@ -29,8 +31,32 @@
             background-color:#eb1a2f;
 
         }
+        /*  Carousel   */
+        .splide__pagination__page.is-active {
+            background: white;
+            transform: none !important;
+        }
+        .splide__arrow svg{
+            fill: #f61a30 !important;
+        }
+
+        .splide__arrow--next {
+            right: -12px;
+        }
+
+        @media (min-width: 1140px) {
+            .splide__arrow--next {
+                right: -100px;
+            }
+        }
     </style>
 @stop()
+
+@section('body-data')
+    x-data="{
+    trailer: false,
+    }"
+@endsection
 
 @section('global-body')
     @include('pianote.sales.partials._nav', [
@@ -44,389 +70,246 @@
     ])
 
     @php
-            $registerButtonUrl = "/ecommerce/add-to-cart?products[new-piano-players-start-here]=1";
+            $registerButtonUrl = "/ecommerce/add-to-cart?products[new-piano-players-start-here]=1&redirect=/order";
     @endphp
 
-    <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
-        <div class="container max-w-5xl mx-auto">
-            <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <div class="w-full sm:w-7/12 text-center lg:text-left">
-                    <img class="h-14 sm:h-18 lg:h-20 -mb-2 sm:mb-0 lg:mb-3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
-                    <h1 class="rotater-text overflow-hidden"><strong>
-                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Learn the piano</span><br>
-                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Play real songs </span><br>
-                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Sound beautiful</span><br>
 
-                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Learn the piano</span><br>
-                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Play real songs </span><br>
-                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Sound beautiful</span><br>
+<!-- Header Section -->
+    @include('drumeo.products.partials.evergreen._header', [
+    'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/new-piano-players/new-piano-players-logo.png',
+    'logoAlt' => '30 day new piano players logo',
+    'rotatingText' => ['Sound beautiful', 'Learn the piano', 'Play real songs'],    
+    'subtitle' => 'in just 30 days.',
+    'checklist' => ['Learn By Doing', 'Play Every Day', 'No Theory Required'],
+    'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/header-right-collage.png',
+    'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/header-left-collage.png',
+    'mediaSource' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/header-image.png',
+    'buttonText' => 'GET STARTED',
+    'buttonLink' => $registerButtonUrl,
+    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
+    'numStudents' =>  number_format($nPackOwners ?? 0),
+    'students' => 'piano players'
+])
 
-                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Learn the piano</span><br>
-                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Play real songs </span><br>
-                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Sound beautiful</span><br>
+<!-- Lessons Section -->
+@php
 
-                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Learn the piano</span><br>
-                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Play real songs </span><br>
-                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Sound beautiful</span><br>
+$features = [
+    [
+        'title' => 'Course Kick-Off',
+        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/kick-off-new-players.jpg',
+        'videoId' => 797858259,
+    ],
+    [
+        'title' => 'Let’s Get Started',
+        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/get-started.jpg',
+        'videoId' => 797858281,
+    ],
+];
 
-                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Learn the piano</span><br>
-                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Play real songs </span><br>
-                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Sound beautiful</span><br>
-                        </strong></h1>
-                    <h2 class="-mt-3 sm:-mt-1 lg:mt-0">in just 30 days.</h2>
-
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Start your journey on the piano <br class="inline lg:hidden"> with 30 days of guided lessons.</strong></h6>
-
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video lazyload" style="padding-bottom: 75%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/header-thumb-m2.jpg" data-open="trailer">
-                        <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
-                    </div>
-
-                    <p class="hidden lg:inline">
-                        <i class="fas fa-check text-pianote"></i> Learn by doing
-                        <i class="ml-2 fas fa-check text-pianote"></i> Play every day
-                        <i class="ml-2 fas fa-check text-pianote"></i> No theory required</p>
-                    <div class="flex inline lg:hidden">
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> Learn  <br> by doing</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> Play  <br>every day</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> No theory <br> required</p>
-                    </div>
-
-                    <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
-                        <div class="w-full sm:w-1/2 text-center sm:pr-2">
-{{--                                <a href="{{ $registerButtonUrl }}" class="join medium w-full">Get Started</a>--}}
-                                <a class="join medium sold-out w-full">Sold Out</a>
-                        </div>
-                        <div class="w-full sm:w-1/2">
-                            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png" alt="joined student profiles">
-                            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/header-thumb2.jpg" data-open="trailer">
-                        <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-wrap sm:flex-nowrap text-center border rounded-lg border-gray-300 mt-8 lg:mt-12 mb-2 lg:mb-4">
-                <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
-                    <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
-                        <i class="far fa-fw mr-3 sm:mr-0 fa-calendar-day text-pianote text-2xl"></i>
-                        <p class="leading-tight mx-0"><strong class="font-black">Course Length</strong><br>
-                            <span class="text-sm">30 days.</span></p>
-                    </div>
-                    <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
-                        <i class="far fa-fw mr-3 sm:mr-0 fa-clock text-pianote text-2xl"></i>
-                        <p class="leading-tight mx-0"><strong class="font-black">Commitment</strong><br>
-                            <span class="text-sm">10 minutes per day.</span></p>
-                    </div>
-                    <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
-                        <i class="far fa-fw mr-3 sm:mr-0 fa-piano-keyboard text-pianote text-2xl"></i>
-                        <p class="leading-tight mx-0"><strong class="font-black">Skill Level</strong><br>
-                            <span class="text-sm">Beginner.</span></p>
-                    </div>
-                    <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3">
-                        <i class="far fa-fw mr-3 sm:mr-0 fa-trophy text-pianote text-2xl"></i>
-                        <p class="leading-tight mx-0"><strong class="font-black">Result</strong><br>
-                            <span class="text-sm">Play real songs on the <br> piano and sound beautiful.</span></p>
-                    </div>
-                </div>
-            </div>
-            <p class="opacity-50 text-center"><em> Learn the piano on YOUR schedule<br class="inline sm:hidden"> with lifetime access!</em></p>
-        </div>
-    </header>
-
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container max-w-4xl mx-auto">
-            <img class="h-56 inline sm:hidden lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/collage-intro-m.png" alt="collage intro">
-            <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>Learn the piano<br class="inline sm:hidden"> in 30 days.</strong></h2>
-            <div class="text-left flex flex-wrap sm:flex-nowrap">
-                <h6 class="leading-normal max-w-xl pr-7">You don’t learn by watching. You learn by doing.
-                    <br><br>
-                    So learn the piano <strong>by playing the piano.</strong> You’ll be playing a song from the very first lesson and you’ll follow along with 10-minute daily guided sessions that show you exactly what to play.
-                    <br><br>
-                    No complicated theory. No need to read music. No frustration.
-                    <br><br>
-                    All you have to do is press play and follow along. Plus, you’ll have access to real teachers who can answer your questions, help you stay motivated, and make sure you’re on track and having FUN on the piano.
-                    <br><br>
-                    So if you’re a new piano player and you’re wondering where to start…
-                    <br><br>
-                    <strong>Start here.</strong></h6>
-                <img class="h-96 hidden sm:inline lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/collage-intro-desktop.png" alt="collage intro">
-            </div>
-{{--            <a href="{{ $registerButtonUrl }}" class="join smaller">Get Started</a>--}}
-        </div>
-    </section>
-
-    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
-        <div class="container max-w-4xl mx-auto">
-            <img class="h-10 sm:h-20 mb-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1220,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/Just_Press_Play_logo.png" alt="just play logo">
-            <h6 class="leading-normal mb-20 lg:mb-28">New Piano Players Start Here is unlike any other way to learn the piano. From day 1 you’ll be playing a REAL song by following guided play-along lessons with your instructor, Lisa Witt.
-                <br><br>
-                This isn’t a video game. You’ll be building your skills every single day. And the best part…
-                <br><br>
-                It only takes 10 minutes a day.</h6>
-
-            @php
-                $gettings = [
-                    [
-                    'position' => 'left',
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/calendar2.jpg',
-                    'title' => 'Know exactly what to practice.',
-                    'desc' => 'You’ll never be left wondering what to do. Log in, press play, and follow along with daily 10-minute guided practice sessions for 30 days.',
-                    'special' => true,
-                    ],
-                    [
-                    'position' => 'right',
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/practice.jpg',
-                    'title' => 'Short, focused practice sessions.',
-                    'desc' => 'No wasted time, no distractions. Each session features a countdown timer so you can turn off the distractions and focus on playing.',
-                    ],
-                    [
-                    'position' => 'left',
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/progress.jpg',
-                    'title' => 'Smile in your first lesson.',
-                    'desc' => 'Play along with a professional backing track so you’ll sound (and feel) incredible as you’re learning. It’s a super motivating way to keep making progress.',
-                    ],
-                    [
-                    'position' => 'right',
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/q_a2.jpg',
-                    'title' => 'Your questions answered.',
-                    'desc' => 'You’ll have access to Lisa and the other teachers inside Pianote. So when you have questions, you’ll get answers. You’ll never be left alone to figure it out.',
-                    ],
-                    [
-                    'position' => 'left',
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/lifetime.jpg',
-                    'title' => 'Lifetime access.',
-                    'desc' => 'New Piano Players Start here is yours for life. Go through it as often as you like, you’ll keep access to ALL the lessons forever. There’s no membership or subscription.',
-                    ],
-                    [
-                    'position' => 'right',
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/skills.jpg',
-                    'title' => 'Skills to take you further.',
-                    'desc' => 'The skills you learn in New Piano Players Start Here go beyond the course. By the end you’ll have the building blocks to start playing hundreds of popular songs (literally)!',
-                    ],
-                ];
-            @endphp
-            <div class="timeline-container max-w-3xl lg:max-w-4xl mx-auto relative px-4 mt-5">
-                @foreach ($gettings as $key => $getting)
-                    @if($getting['position'] === 'right')
-                        <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 @if($key !== 5) md:mb-28 @else md:mb-0 @endif">
-                            <div class="content relative text-left sm:pl-10 md:pl-0">
-                                <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
-                                <p>{{ $getting['desc'] }}</p>
-                            </div>
-                            <img class="-mt-7 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
-                        </div>
-                    @else
-                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-28">
-                            @if(empty($getting['special']))
-                                <img class="-mt-7 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
-                            @else
-                                <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}"></div>
-                            @endif
-                            <div class="content relative text-left sm:pl-10 md:pl-0">
-                                <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
-                                <p>{{ $getting['desc'] }}</p>
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
-            </div>
-        </div>
-    </section>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background-color: #2a2f34;">
-        <div class="container max-w-3xl mx-auto">
-            <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-                <img class="filter saturate-0 invert h-20 sm:h-28 lg:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=760,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/new-piano-players-start-here-logo-stacked.svg" alt="new piano players start here logo">
-                <h4 class="leading-loose text-left">
-                    <i class="fas fa-check text-pianote mr-5"></i> Daily guided piano workouts<br>
-                    <i class="fas fa-check text-pianote mr-5"></i> Flexible weekly schedule<br>
-                    <i class="fas fa-check text-pianote mr-5"></i> Ongoing motivation & support<br>
-                    <i class="fas fa-check text-pianote mr-5"></i> Guaranteed results</h4>
-            </div>
-{{--            <a href="{{ $registerButtonUrl }}" class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">Get Started</a><br>--}}
-{{--            <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png" alt="joined profiles">--}}
-{{--            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>--}}
-
-        </div>
-    </section>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container max-w-6xl mx-auto">
-            <h2 class="mb-6 sm:mb-10 lg:mb-14"><img class="h-16 sm:h-24 -mb-2 sm:-mb-4 align-bottom  lazyload" data-src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo"> <strong>...is perfect for:</strong></h2>
-            <div class="flex flex-wrap text-left">
-                <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/new-piano-player.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon"><br>New Piano<br class="hidden sm:inline lg:hidden"> Players</strong></h6>
-                        <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
-                    </div>
-                    <p class="leading-normal mt-3">It’s right there in the name! If you’re just getting started, New Piano Players Start Here is perfect. From the very first lesson, you’ll be playing real music that sounds GOOD. </p>
-                </div>
-                <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/returning-piano-player.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon"><br>Returning<br class="hidden sm:inline lg:hidden"> Piano Players</strong></h6>
-                        <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
-                    </div>
-                    <p class="leading-normal mt-3">Been away a while? Come back to the piano and have FUN. Brush up on the foundations and play with confidence.</p>
-                </div>
-                <div class="w-full sm:w-1/3 px-2">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/classically-trained-player.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon"><br> Classically-Trained<br class="hidden sm:inline lg:hidden"> Piano Players</strong></h6>
-                        <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
-                    </div>
-                    <p class="leading-normal mt-3">Scared to break away from the safety of sheet music? New Piano Players Start Here will give you the confidence to trust your ear.</p>
-                </div>
-            </div>
+$lessons = [
+    [
+        'title' => 'Your First Chord Progression - 1 Lesson + 5 Workouts',
+        'description' => "This week you'll learn your first chord progression! We'll take it one hand at a time and build up your confidence."
+    ],
+    [
+        'title' => 'Pre-Recorded Q&A - Your First Chord Progression',
+        'description' => "In this pre-recorded Q&A, we answer some of our students' excellent questions about the week's lessons."
+    ],
+    [
+        'title' => 'Real Chords - 1 Lesson + 5 Workouts',
+        'description' => "During your second week, you'll gain confidence in triads and the different hand movements needed to build real chords!"
+    ],
+    [
+        'title' => 'Pre-Recorded Q&A - Real Chords',
+        'description' => "In this pre-recorded Q&A, we answer some of our students' excellent questions about the week's lessons."
+    ],
+    [
+        'title' => 'Rhythm - 1 Lesson + 5 Workouts',
+        'description' => "In week three, you'll learn about quarter notes and half notes and use them to create beautiful musical patterns."
+    ],
+     [
+        'title' => 'Pre-Recorded Q&A - Rhythm',
+        'description' => "In this pre-recorded Q&A, we answer some of our students' excellent questions about the week's lessons."
+    ],
+     [
+        'title' => 'Making It Fancy - 1 Lesson + 5 Workouts',
+        'description' => "During your fourth week, you'll pull together everything you've learned and add a few sprinkles of fancy leading up to playing a song onyour own!"
+    ],
+     [
+        'title' => 'Pre-Recorded Q&A - Making It Fancy',
+        'description' => "In this pre-recorded Q&A, we answer some of our students' excellent questions about the week's lessons."
+    ],
+];
+@endphp
 
 
-            <h2 class="mt-20 lg:mt-24 mb-3"><strong>Play more. Play better.</strong></h2>
-            <h6 class="leading-normal mb-11">For less than the cost of 2 private piano lessons, you’ll <br class="hidden sm:inline"> get 30 days of guided lessons to transform your playing.</h6>
+@include('drumeo.products.partials.evergreen._lessons', [
+    'title' => 'Learn the piano in 30 days.',
+    'description' => "Piano lessons can be super intimidating. “So many keys! All that music theory! How do I even get my hands to play at the same time?!”
+    <br/> <br/>
+    New Piano Players Start Here is <em>different</em>. You just sit down, press play, and follow along as Lisa guides you through a daily 10-minute lesson. 
+     <br/> <br/>
+    No complicated theory. No need to read music. No frustration.
+      <br/> <br/>
+    Lisa focuses on the <em>fun</em> and gets you playing songs from day one. By the time you’re done, you’ll have a well-established piano playing habit, some very important skills, and the confidence that <strong>YES!</strong> 
+     <br/> <br/>
+    <strong><em>You</em> can play the piano.</strong>",
+    'features' => $features,
+    'lessonTitle' => 'Course Lessons',
+    'instructor' => ' Lisa Witt',
+    'course' => ' 30 Days (20 Workouts + 4 Q&As)',
+    'lessons' => $lessons
+])   
 
-            <div class="relative">
-                <p class="inline sm:hidden leading-tight text-xs absolute top-0 right-0 -mt-8 w-2/5 animated infinite bounce slower"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
-                <table class="w-full mx-auto comparison max-w-4xl mx-auto mb-10 private">
-                    <tbody>
-                    <tr style="background-color:transparent!important;">
-                        <td></td>
-                        <td class="rounded-t-xl"><img class="h-8 sm:h-14 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=220,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/new-piano-players-start-here-logo-white.png" alt="new piano players start here logo"></td>
-                        <td class="cursor-pointer sm:cursor-default rounded-tl-xl"><strong>Private<br> Lessons</strong></td>
-                        <td class="cursor-pointer sm:cursor-default"><strong>Online<br> Courses</strong></td>
-                        <td class="cursor-pointer sm:cursor-default rounded-tr-xl"><strong>Piano<br> Books</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Style</td>
-                        <td>20 Play-Along Lessons</td>
-                        <td>In-Person</td>
-                        <td>Self-Directed</td>
-                        <td>Self-Directed</td>
-                    </tr>
-                    <tr>
-                        <td>Length</td>
-                        <td>30 Days</td>
-                        <td>Open Ended</td>
-                        <td>Open Ended</td>
-                        <td>Open Ended</td>
-                    </tr>
-                    <tr>
-                        <td>Access</td>
-                        <td>Lifetime Access</td>
-                        <td>One-Time</td>
-                        <td>Varies</td>
-                        <td>Lifetime</td>
-                    </tr>
-                    <tr>
-                        <td>Guarantee</td>
-                        <td>90 days</td>
-                        <td>No</td>
-                        <td>Varies</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td>Investment</td>
-                        <td class="rounded-b-xl">
-                            @if($productPrices['new-piano-players-start-here']->price > $productPrices['new-piano-players-start-here']->discounted_price)
-                                <s class="opacity-60">${{ floatval($productPrices['new-piano-players-start-here']->price) }}</s>
-                            @endif
-                            <strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong></td>
-                        <td class="rounded-bl-xl"><strong>$50-$100</strong><br> per lesson</td>
-                        <td><strong>$89-$270+</strong><br>&nbsp;</td>
-                        <td class="rounded-br-xl"><strong>$19-$49</strong><br>&nbsp;</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-    <section class="text-center px-5 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32" style="background-color:#f4f8fb;">
-        <div class="container max-w-5xl mx-auto">
+
+@php 
+$practiceItems = [
+            [
+                "icon" =>
+                "fa-regular fa-music",
+                "title" => "Know exactly what to practice.",
+                "desc" =>
+                "Log in. Press play. Follow along with Lisa through a daily 10-minute guided practice session. Do that for 30 days. <em>Easy, right?</em> You’ll never wonder what you’re supposed to do: Lisa will <em>tell</em> you.",
+            ],
+            [
+                "icon" =>
+                "fa-regular fa-clock",
+                "title" => "Short, focused practice sessions.",
+                "desc" =>
+                "Life is busy. It’s hard to juggle priorities. To help make sure you stick to your new piano habit, each short exercise includes a countdown timer so you know exactly how long you have left. That means you can comfortably shut out all distractions, focus on your playing, and make room for your own growth.",
+            ],
+            [
+                "icon" =>
+                "fa-regular fa-infinity",
+                "title" => "Lifetime access.",
+                "desc" =>
+                "“What if I don’t finish in 30 days?” New Piano Players Start Here is yours to keep. If it takes you a little longer, that’s okay! And if you feel like revisiting the lessons or coming back to some of the exercises, you can do that, too. You keep the course for life.",
+            ]
+            ]
+@endphp
+
+   
+<!-- Songs subsection -->
+@include('drumeo.products.partials.evergreen._dropdown', [
+    'bgClass' => 'bg-slate-900',
+    'songItems' => $practiceItems])
+
+<!-- What you will learn section-->
+@php
+$items = [
+            '20 guided play-along lessons.',
+            'Lifetime access to watch & re-watch.',
+            '90 day money-back guarantee.',
+        ]
+@endphp
+
+<!-- Get started-->
+@include('drumeo.products.partials.evergreen._get-started', [
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/new-piano-players-logo.png',
+    'items' => $items,
+    'buttonText' => 'GET STARTED',
+    'buttonLink' => $registerButtonUrl,
+    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
+    'numStudents' =>  number_format($nPackOwners ?? 0),
+    'students' => 'piano players',
+     'price' => "$127",
+    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
+    'brandTitle' => 'Pianote'])
+
+ <!-- Meet your teacher section -->
+
+   <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+        <div class="container max-w-5xl mx-auto mb-14 lg:mb-16">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
-                <img class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/profile_picture.jpg" alt="profile picture">
+                    <div class="w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
+                    <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/profile-pic.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/profile-pic.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 150%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                
+                </div>
+                    
+                    <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
 
-                <div class="text-white text-left rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
                     <h6 class="uppercase text-pianote leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
                     <h2 class="text-center sm:text-left"><strong>Lisa Witt</strong></h2>
-                    <h6 class="leading-normal mt-4 lg:mt-6">Lisa Witt might just be the happiest piano teacher on the internet.
+                    <p class="leading-normal mt-4 lg:mt-6">Lisa Witt might just be the happiest piano teacher on the
+                        internet.
                         <br><br>
-                        With 20 years of teaching experience, her online lessons have helped millions of students around the world.
+                        With 20 years of teaching experience, her online lessons have helped millions of students around the
+                        world.
                         <br><br>
-                        But her true magic lies in her empathy and understanding of what it’s like to be a new piano player. She knows how it feels to struggle and she’ll show you how to overcome those challenges and approach the piano in a way that’s motivating, inspiring, and most of all - FUN!
-                        <br><br>
+                        But her true magic lies in her empathy and understanding of what it’s like to be a new piano player.
+                        She knows how it feels to struggle and she’ll show you how to overcome those challenges and approach
+                        the piano in a way that’s motivating, inspiring, and most of all - FUN!
                         Start your piano journey with Lisa today.
-                    </h6>
-                    <div class="flex justify-between text-center mt-7 lg:mt-10">
-                        <div class="">
-                            <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
-                            <h3 class="mt-2"><strong>103M</strong></h3>
-                            <p class="uppercase opacity-70 text-sm">views</p>
-                        </div>
-                        <div class="">
-                            <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
-                            <h3 class="mt-2"><strong>175k</strong></h3>
-                            <p class="uppercase opacity-70 text-sm">followers</p>
-                        </div>
-                        <div class="">
-                            <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
-                            <h3 class="mt-2"><strong>55.8K</strong></h3>
-                            <p class="uppercase opacity-70 text-sm">Followers</p>
-                        </div>
-                    </div>
+
+                    </p>
+                    <br />
+                    <img class="float-right h-12 transition-all opacity-0"
+                        src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/lisa-witt-signature.png"
+                        alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
             </div>
-
-            <h3 class="mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What students are saying about Lisa and her teaching style.</strong></h3>
-            <div class="flex flex-wrap text-left">
-
-                @php
+        </div>      
+    </section>
+@php
                     $testimonials = [
                         [
-                        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jessripley.jpg',
-                        'title' => "I’m blown away by the program you’ve created.",
-                        'description' => "Pianote is an insanely encouraging and supportive community run by an insanely encouraging and supportive team. Sincerely, I’m blown away by the program you’ve created.<br><br>I sat down one day and it just clicked. From then on, I’ve felt VERY encouraged to keep learning and practicing. It’s fulfilling and fun to see myself progress and achieve goals. Now I’m playing with both hands at the same time with confidence – and I’ve started playing along with more backing tracks and making up my own songs.",
+                        'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jessripley.jpg',
+                        'comment' => "Pianote is an insanely encouraging and supportive community run by an insanely encouraging and supportive team. Sincerely, I’m blown away by the program you’ve created. I sat down one day and it just clicked. From then on, I’ve felt VERY encouraged to keep learning and practicing. It’s fulfilling and fun to see myself progress and achieve goals. Now I’m playing with both hands at the same time with confidence – and I’ve started playing along with more backing tracks and making up my own songs.",
                         'name' => 'Jess Ripley',
-                        'location' => 'California, USA',
                         ],
                         [
-                        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/serenadorward.jpg',
-                        'title' => "If I was taught this way as a child, I would have never quit.",
-                        'description' => "I decided to sign up with Pianote not only to re-learn how to play the piano, but also because my mental health was really suffering and I needed something positive to focus on that was just for ME. I knew almost immediately that this was the answer I had been looking for. It felt like the heaviness on my shoulders got a bit lighter after every piano session.  And even though the lessons are virtual, it was like Lisa was right there beside me cheering me on.<br><br>I was blown away by how quickly I progressed with a few tutorials from Lisa. My overall confidence improved, especially with improvisation. Now I know all these little tricks (fills & riffs) and how to play inversions and practice chords in ways that sound so lovely.  If I had been taught this way as a child, I probably never would have quit.",
+                        'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/serenadorward.jpg',
+                        'comment' => "I decided to sign up with Pianote not only to re-learn how to play the piano, but also because my mental health was really suffering and I needed something positive to focus on that was just for ME. I knew almost immediately that this was the answer I had been looking for. It felt like the heaviness on my shoulders got a bit lighter after every piano session.  And even though the lessons are virtual, it was like Lisa was right there beside me cheering me on. I was blown away by how quickly I progressed with a few tutorials from Lisa. My overall confidence improved, especially with improvisation. Now I know all these little tricks (fills & riffs) and how to play inversions and practice chords in ways that sound so lovely.  If I had been taught this way as a child, I probably never would have quit.",
                         'name' => 'Serena Dorward',
-                        'location' => 'Ontario, Canada',
                         ],
                         [
-                        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jaydemcintosh.jpg',
-                        'title' => "I’ve had to give up on a lot of my dreams. Then I discovered Pianote.",
-                        'description' => "I’ve been chronically ill for the last six years, which means I’ve had to give up on a lot of my dreams and goals.<br><br>During my health journey, my interest in piano and my connection to music really arose – but it also seemed impossible. I had no prior music knowledge and couldn’t even get out of bed some days. This is when I discovered Pianote and they’ve been amazing.<br><br>I have to work at a very slow pace due to my health, but I’ve already learned so many basics. I can play some of my all-time favorite songs – and it’s just so awesome to know I can learn from home and accomplish one of my dreams. I’m so excited to keep learning and I recommend Pianote so much.",
+                        'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jaydemcintosh.jpg',
+                        'comment' => "I’ve been chronically ill for the last six years, which means I’ve had to give up on a lot of my dreams and goals. During my health journey, my interest in piano and my connection to music really arose – but it also seemed impossible. I had no prior music knowledge and couldn’t even get out of bed some days. This is when I discovered Pianote and they’ve been amazing. I have to work at a very slow pace due to my health, but I’ve already learned so many basics. I can play some of my all-time favorite songs – and it’s just so awesome to know I can learn from home and accomplish one of my dreams. I’m so excited to keep learning and I recommend Pianote so much.",
                         'name' => 'Jayde McIntosh',
-                        'video' => '660596722',
-                        'location' => 'Australia',
                         ],
                         [
-                        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/iankershaw.jpg',
-                        'title' => "Such a fantastic and welcoming student community.",
-                        'description' => "When I signed up for Pianote, I knew I was going to get Lisa’s great energy, the Method, the courses, the bootcamps, and the student reviews.<br><br>But my breakthrough came when I realized that sitting behind all of this is such a fantastic and welcoming, supportive student community. It’s this community – as well as the teachers and the rest of the Pianote team – that really actively encourages you to share your progress and practice. And it doesn’t have to be perfect. And that really does encourage you to practice more. And it’s in that sharing and practice that the real breakthroughs come. Thank you!",
+                        'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/iankershaw.jpg',
+                        'comment' => "When I signed up for Pianote, I knew I was going to get Lisa’s great energy, the Method, the courses, the bootcamps, and the student reviews.<But my breakthrough came when I realized that sitting behind all of this is such a fantastic and welcoming, supportive student community. It’s this community – as well as the teachers and the rest of the Pianote team – that really actively encourages you to share your progress and practice. And it doesn’t have to be perfect. And that really does encourage you to practice more. And it’s in that sharing and practice that the real breakthroughs come. Thank you!",
                         'name' => 'Ian Kershaw',
-                        'video' => '660596700',
-                        'location' => 'United Kingdom',
                         ],
-                    ]
-//                @endphp
-                @foreach ($testimonials as $key => $testimonial)
-                    <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
-                        <div class="flex items-start p-5 bg-white rounded-lg">
-                            <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/{{ $testimonial['image'] }}" alt="testimonial {{ $key }}">
-                            <p class="pl-4"><strong>{{ $testimonial['name'] }}</strong><br>
-                                <em class="leading-tight inline-block mb-1 opacity-60">{{ $testimonial['location'] }}</em><br>
-                                “{!! $testimonial['description']  !!}”
-                            </p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    <div class="h-10 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));"></div>
+];
+                    $students = "Pianote Student"
+             @endphp
+
+@include('drumeo.products.partials.evergreen._testimonials', [
+    'socialIcons' => [
+                [
+                    'url' => 'https://www.youtube.com/pianolessonscom/',
+                    'label' => 'youtube',
+                    'iconClass' => 'fab fa-youtube',
+                    'count' => '1,450,000',
+                    'countLabel' => 'Subscribers',
+                ],
+                [
+                    'url' => 'https://facebook.com/pianoteofficial/',
+                    'label' => 'facebook',
+                    'iconClass' => 'fab fa-facebook-f',
+                    'count' => '560,000',
+                    'countLabel' => 'Likes',
+                ],
+                [
+                    'url' => 'https://instagram.com/pianoteofficial/',
+                    'label' => 'instagram',
+                    'iconClass' => 'fab fa-instagram',
+                    'count' => '239,000',
+                    'countLabel' => 'Followers',
+                ],
+            ],
+        'bgColor' => 'linear-gradient(rgba(246, 26, 48, 1), rgba(161, 0, 0, 1))',
+        'subHeader'=> 'What students are saying about Lisa',
+        'description' => 'New Piano Players Start Here  works. By focusing on playing with real music right from day one, you’ll learn the skills to play hundreds of songs on the piano in just thirty days. Check out what students are saying:',
+        'showBottom' => true,
+])
+
+
     <section class="text-white text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#2a2f34;">
         <div class="container max-w-4xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=410,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png" alt="guarantee badge">
@@ -439,87 +322,44 @@
                 <br><br>
                 If not, simply contact our friendly support team within those 90 days for a full refund.
             </p>
-
         </div>
     </section>
 
-    <div id="final" class="anchor"></div>
-    <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-12 sm:py-16 lg:py-24" style="background-color:#eff7ff;">
-        <div class="container mx-auto relative z-50">
-            <div class="flex flex-wrap items-center">
-                <div class="text-left w-full sm:w-7/12 xl:w-5/12 lg:pl-5">
-                    <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
-                    <h3 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
-                            20 Guided Play-Along Lessons.<br>
-                            Feedback From Real Teachers.<br>
-                            Lifetime Course Access.
-                        </strong></h3>
-                    <div class="w-full mx-auto sm:mx-0">
 
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Learn piano the easy & fun way.</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Click below to get started.</p>
 
-                        <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl">
-                            @if($productPrices['new-piano-players-start-here']->price > $productPrices['new-piano-players-start-here']->discounted_price)
-                                <s class="opacity-60">${{ floatval($productPrices['new-piano-players-start-here']->price) }}</s>
-                            @endif
-                            <strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong></h1>
-                        <a class="join medium sold-out w-1/2 align-middle">Sold Out</a>
-{{--                            <a class="join medium w-1/2 align-middle" href="{{ $registerButtonUrl }}">Get Started</a>--}}
-                    </div>
-                </div>
-                <div class="flex w-full justify-center sm:justify-start sm:order-1 sm:w-5/12 xl:w-7/12 sm:pl-5 lg:pl-7  mt-10 sm:mt-0">
-                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1800,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/collage.png" alt="collage">
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2><strong>Still have questions?</strong></h2>
-            <div class="max-w-6xl mt-4 sm:mt-10 px-4">
-                @include('_partials.components.question-dropdown', [
-                "title" => "What if I miss a day (or two)?",
-                "desc" => "That’s totally fine. The course is meant to be flexible if you miss a day here or there. There are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session if you ever need to catch up.",
-                "num" => '?',
-                ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "Do I need a digital piano or software?",
-                "desc" => "No! This course works with all pianos and keyboards. You don’t have to plug anything in and you don't need any fancy plugins or software. Simply click play on your lesson, and follow along!",
-                "num" => '?',
-                ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "How much time per week will this course require?",
-                "desc" => "New Piano Players Start Here gives you guided daily piano lessons for thirty days – with a few flex days built in for when life happens. Each lesson is only 10 minutes. We’ve made it short so you’re more likely to keep playing!",
-                "num" => '?',
-                ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "What devices can I access the course on?",
-                "desc" => "New Piano Players Start Here is available on your laptop, tablet, or phone. You’ll also have access through the Musora App after you’ve completed your purchase of the course.",
-                "num" => '?',
-                ])
-            </div>
-            <div class="inline-block w-full px-3 md:px-4 my-5" style="color:#2a2f34;">
-                <p><strong>Any other questions?</strong><br class="inline-block md:hidden"> Call us toll-free at
-                    <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
-                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
-            </div>
-            <div class="inline-block w-full px-3 md:px-4 mb-10" style="color:#2a2f34;">
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
-            </div>
-        </div>
-    </section>
 
-    @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/798501810?autoplay=1',
-        "title" => 'trailer'
+
+   <!-- Learn section -->
+@php
+$points = [
+            '20 guided play-along lessons.',
+            'Lifetime access to watch & re-watch.',
+            '90-day money-back guarantee.'
+        ]
+@endphp
+
+@include('drumeo.products.partials.evergreen._learn', [
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/new-piano-players-logo.png',
+    'logoAlt' => 'new piano players logo',
+    'title' => 'Learn the piano in just 30 days.',
+    'points' => $points,
+    'buttonText' => 'Get Started',
+    'buttonLink' => $registerButtonUrl,
+    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
+    'profileImageAlt' => 'student profile image',
+    'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/new-piano-players/order-collage.png',
+    'students' => 'piano players',
+    'numStudents' => number_format($nPackOwners ?? 0),
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
+    'brandTitle' => 'Pianote'
+])
+
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '879916161',
+        'vimeo' => true,
     ])
 
     @include("pianote.sales.partials._footer")
@@ -527,6 +367,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+
 
     <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
     <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
@@ -534,7 +376,7 @@
     <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
 
 
-    <script>
+    {{-- <script>
         $(document).ready(function () {
             $(document).foundation();
             $('.comparison tr td:nth-child(3)').on('click', function(){
@@ -550,7 +392,7 @@
                 $(this).parents().find('table').addClass('private');
             });
         })
-    </script>
+    </script> --}}
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>

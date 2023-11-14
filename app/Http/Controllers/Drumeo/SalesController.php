@@ -265,8 +265,6 @@ class SalesController extends BaseController
         return view('drumeo.lead-gen.pages.30-day-chops-deal', ['products' => $products, 'theme' => 'drumeo']);
     }
 
-
-
     /**
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
