@@ -12,7 +12,7 @@
     <div class="side-slide overflow-hidden rounded border border-solid" style="border-color: #CCD3D3;">
 {{--        @include('_partials.layout.holiday.shop-sidebar-banner')--}}
 
-        <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">
+        <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6" style="border-color: #CCD3D3;">
             @if(!empty($instructor))
                 <p class="instructor hidden lg:inline"><em>{{ $instructor }} </em></p>
             @endif
@@ -21,7 +21,7 @@
             @endif
 
             @if(isset($fullPrice) && isset($price) && ($fullPrice - $price) > 0)
-                <p class="text-center mx-auto mb-1 font-bold text-sm md:text-base" style="color:#10D05F">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</p>
+                {{-- <p class="text-center mx-auto mb-1 font-bold text-sm md:text-base" style="color:#10D05F">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</p> --}}
                 <h1 class="text-center text-3xl uppercase md:text-4xl" style="color:#F71B26;"><s class="opacity-40 text-2xl">${{ floatVal($fullPrice) }}</s>
                     @if(number_format($price, 2) == intval($price))
                         <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  floatVal($price)  }}</span></strong>
@@ -90,13 +90,10 @@
                     </a>
                 @endif
             @endif
-                <p class="italic text-center mx-auto my-0 text-xs" style="color:#858c93;">
-                    @if(!empty($freeShipping))
-                        <i class="fas fa-truck text-{{ $theme }}"></i> <strong class="text-{{ $theme }}">FREE SHIPPING!</strong><br>
-                    @endif
-                    You can also order by phone toll-free at<br class="hidden sm:inline">
-                    <a href="tel:+18004398921" class="text-{{ $theme }}">1-800-439-8921</a> or directly at
-                    <a href="tel:+16048557605" class="text-{{ $theme }}">1-604-855-7605</a>. </p>
+                <p>
+                <span><strong>New students only. </strong></span>
+                <br>Membership renews at $240/year. Cancel anytime.
+                </p>
         </div>
         @if(!empty($guaranteeBadge))
             <div class="hidden lg:flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">
@@ -117,6 +114,16 @@
                 <p class="text-sm text-left my-0 text-{{ $theme }}"><em>Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money-Back <br class="lg:hidden" /> Guarantee.</em></p>
             </div>
         @endif
+        {{-- @if (!empty($freeShipping))
+            <i class="fas fa-truck text-{{ $theme }}"></i> <strong class="text-{{ $theme }}">FREE
+                SHIPPING!</strong><br>
+        @endif --}}
+        <p class="italic text-center mx-auto my-0 text-xs" style="color:#858c93;"> You can also order by phone toll-free at 
+            <br class="hidden sm:inline">
+            <a href="tel:+18004398921" class="text-{{ $theme }}">1-800-439-8921</a> or directly at
+            <a href="tel:+16048557605" class="text-{{ $theme }}">1-604-855-7605</a>.
+        </p>
     </div>
+    
     </div>
 </div>
