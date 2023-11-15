@@ -2,10 +2,10 @@
     <div class="container max-w-6xl mx-auto relative z-50 py-4" style="background: #eff7ff;" data-bg={{ $mainImage }}>
         <div class="flex flex-wrap items-center px-4 sm:px-6 py-10">
             <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5" style="background: #eff7ff;">
-                <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="{{ $logo }}"
+                <img class="h-20 sm:h-24 lg:h-26 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="{{ $logo }}"
                     alt="{{ $logoAlt }}">
-                <h1 class="py-2"><strong>{{ $title }}</strong></h1>
-                <div class="text-center sm:text-left py-3 md:py-5">
+                <h1 class="py-6 sm:py-4"><strong>{!! $title !!}</strong></h1>
+                <div class="text-center sm:text-left md:py-5">
                     <ul>
                         @foreach ($points as $index => $point)
                             @if ($loop->last)

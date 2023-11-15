@@ -1,7 +1,7 @@
     <section class="text-center px-5 sm:px-6 py-8 md:py-12 lg:py-20 bg-blue-50">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center py-6">
-                <img class="h-28 sm:h-34 lg:h-46 lazyload" data-src={{ $logo }} alt="logo">
+                <img class="h-28 md:h-38 lg:h-40 py-4 lazyload" data-src={{ $logo }} alt="logo">
                 <ul class="pl-6">
                     @foreach ($items as $item)
                         <li>
@@ -14,7 +14,7 @@
             </div>
             {{-- <a href={{$buttonLink}} class="join blue medium w-full sm:w-1/2 md:w-1/3 lg:w-3/5 mt-6 sm:mt-12 mb-3 anchor-slide" role="button">{{$buttonText}}</a><br> --}}
             <div class="w-full flex flex-col items-center pt-4">
-                   <div class="w-full sm:w-1/2 md:w-1/3 xl:w-1/5">
+                   <div class="w-full sm:w-1/2 md:w-1/3">
             @include('drumeo.products.partials.evergreen._button', [
                 'link' => $buttonLink,
                 'buttonClass' => 'text-white font-bebas tracking-widest',

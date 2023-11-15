@@ -249,7 +249,7 @@
 
  <!-- Header Section -->
     @include('drumeo.products.partials.evergreen._header', [
-    'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30_day_drummer_logo.png',
+    'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/marketing/drumeo/products/30-day-drummer/30DayDrummerSeason3-Logo-10.png',
     'logoAlt' => '30 day drummer logo',
     'rotatingText' => ['Learn the drums', 'Improve your timing', 'Boost your creativity'],
     'subtitle' => 'with daily guided workouts.',
@@ -327,12 +327,12 @@ $features = [
     [
         'title' => 'Course Kick-Off',
         'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/kick-off-30d-drummer.jpeg',
-        'videoId' => 738756003, // 850695588 - season 3, 
+        'videoId' => 850695588, 
     ],
     [
         'title' => 'Acoustic Kit Setup',
         'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/acoustic-kit-setup.jpeg',
-        'videoId' => 738759733 // 852833927 - season 3, 
+        'videoId' => 852833927,
     ],
     [
         'title' => 'Electronic Kit Setup',
@@ -400,7 +400,7 @@ $items = [
 
 <!-- Get started-->
 @include('drumeo.products.partials.evergreen._get-started', [
-    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30_day_drummer_logo.png',
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30DayDrummerSeason3-Logo-10.png',
     'items' => $items,
     'buttonText' => 'GET STARTED',
     'buttonLink' =>  $registerButtonUrl,
@@ -529,9 +529,9 @@ $points = [
 @endphp
 
 @include('drumeo.products.partials.evergreen._learn', [
-    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30_day_drummer_logo.png',
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30DayDrummerSeason3-Logo-10.png',
     'logoAlt' => '30 day drummer logo',
-    'title' => 'Learn the drums with daily guided workouts.',
+    'title' => 'Learn the drums with <br class="md:hidden"> daily guided workouts.',
     'points' => $points,
     'buttonText' => 'Get Started',
     'buttonLink' =>  $registerButtonUrl,
