@@ -136,7 +136,7 @@
             <button v-if="item.type !== 'pack-bundle' && showMyListAction"
                 class="tw-flex-none tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
                 :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
-                :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'" :data-content-id="item.id"
+                title="More" :data-content-id="item.id"
                 :data-content-type="item.type" @click.prevent="handleShowDropdown(`${item.id}-action-btn`)">
                 <DotsHorizontalIcon class="tw-h-[24px] tw-w-[24px]" />
             </button>
