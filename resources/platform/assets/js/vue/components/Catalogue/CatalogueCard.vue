@@ -68,6 +68,7 @@
                         </span>
                         &nbsp;
                     </h6>
+                    <DifficultyLabel class="tw-text-xs" v-if="mappedData.difficulty" :difficulty="mappedData.difficulty" textCase="capitalize" />
                 </a>
                 <!-- Add to Playlist -->
                 <div :id="`${item.id}-action-btn`" class="tw-inline-flex tw-items-start tw-p-1 tw-relative">
@@ -154,6 +155,7 @@ import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '../../hooks/useCatalogueItem.js';
 import useThemeClasses from '../../hooks/useThemeClasses.js';
 import Dropdown from './Dropdown';
+import DifficultyLabel from '../DifficultyLabel/DifficultyLabel';
 import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
 
 const props = defineProps({
@@ -259,7 +261,13 @@ const handleShowDropdown = (className) => {
     state.dropdownOpen = !state.dropdownOpen;
 };
 
-const mappedData = computed(() => contentModel.value.card);
+const mappedData = computed(() => {
+    // const difficulties = ["BEGINNER", "INTERMEDIATE", "ADVANCED"];
+    // const randomIndex = Math.floor(Math.random() * difficulties.length);
+    
+    // contentModel.value.card.difficulty = difficulties[randomIndex];
+    return contentModel.value.card
+});
 
 const class_object = computed(() => ({
     'no-access': noAccess.value,
