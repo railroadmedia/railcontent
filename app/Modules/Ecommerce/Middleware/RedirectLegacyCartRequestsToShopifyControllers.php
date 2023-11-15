@@ -18,19 +18,21 @@ class RedirectLegacyCartRequestsToShopifyControllers
         $brandDomains = ['drumeo.com', 'pianote.com', 'guitareo.com', 'singeo.com'];
 
         // always redirect brand domains to musora domain so sessions are always on musora.com
-        if (($request->path() == 'ecommerce/json/add-to-cart' && $request->method() == 'PUT') ||
-            ($request->path() == 'ecommerce/add-to-cart' && $request->method() == 'GET') ||
-            (Str::startsWith($request->path(), 'ecommerce/json/update-product-quantity') && $request->method(
-                ) == 'PATCH') ||
-            (Str::startsWith($request->path(), 'ecommerce/json/remove-from-cart') && $request->method() == 'DELETE') ||
-            ($request->path() == 'ecommerce/json/clear-cart' && $request->method() == 'DELETE') ||
-            ($request->path() == 'ecommerce/json/cart' && $request->method() == 'GET') ||
-            (in_array($this->getHostDomainFromFullDomain($parse['host']), $brandDomains) &&
-                Str::startsWith($request->path(), 'order') &&
-                $request->method() == 'GET')) {
-            if (Str::endsWith($parse['host'], $brandDomains)) {
-                return redirect()->away(Str::replace($brandDomains, 'musora.com', $requestURL));
+        if (in_array($this->getHostDomainFromFullDomain($parse['host']), $brandDomains) &&
+            (in_array(trim($request->path(), '/'), ['order/drumeo', 'order/pianote', 'order/guitareo', 'order/singeo', 'order'])) &&
+            $request->method() == 'GET' &&
+            Str::endsWith($parse['host'], $brandDomains)) {
+
+            $musoraURL = Str::replace($brandDomains, 'musora.com', $requestURL);
+
+            // pass shopify cart id as well since we cannot share these session cookies across domains
+            $shopifyCartSessionId = session(ShopifyCartAPIController::SHOPIFY_CART_ID_SESSION_KEY);
+
+            if (!empty($shopifyCartSessionId)) {
+                $musoraURL = $musoraURL . '?shopify-cart-id=' . $shopifyCartSessionId;
             }
+
+            return redirect()->away($musoraURL);
         }
 
         if (($request->path() == 'ecommerce/json/add-to-cart' && $request->method() == 'PUT') ||
