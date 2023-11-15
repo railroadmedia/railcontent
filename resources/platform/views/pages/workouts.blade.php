@@ -5,6 +5,15 @@
 @endsection
 
 @section('content')
+
+    <!-- BREADCRUMBS -->
+    <breadcrumb
+        brand="{{ $brand }}"
+        first-level-url="/{{ $brand }}/workouts" 
+        first-level-title="Workouts"
+    >
+    </breadcrumb>
+
     <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white">
 
         <section>
