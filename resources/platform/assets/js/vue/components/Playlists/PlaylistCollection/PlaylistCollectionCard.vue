@@ -103,7 +103,7 @@
 </script>
 <template>
     <div class="tw-group tw-relative"
-         :class="isListView ? 'tw-h-[56px] tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825]' : `tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 ${isMiniCatalog ? 'tw-w-[205px] tw-min-w-[205px] lg:tw-w-auto lg:tw-min-w-0 tw-pr-[10px]' : ''}` "
+         :class="isListView ? 'tw-h-[56px] tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825]' : `tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 ${isMiniCatalog ? 'tw-w-[221px] tw-min-w-[221px] lg:tw-w-auto lg:tw-min-w-0 lg:[&:nth-child(11)]:tw-hidden lg:[&:nth-child(12)]:tw-hidden 2xl:[&:nth-child(11)]:tw-grid 2xl:[&:nth-child(12)]:tw-grid' : ''}` "
     >
         <!-- Playlist thumbnail -->
         <PlaylistThumbnail

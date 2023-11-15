@@ -616,7 +616,7 @@ class HomePageController extends BaseController
             'started',
             'updated_on',
             'desc',
-            6
+            8
         );
         $lessons = $this->contentService->getByIds(array_column($startedProgressRows, 'content_id'));
 
@@ -632,7 +632,7 @@ class HomePageController extends BaseController
             user()->id,
             'user-playlist',
             brand(),
-            8
+            12
         );
 
         $results =
