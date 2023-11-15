@@ -33,6 +33,9 @@ $userData = assembleUserAttributes(user());
 {{-- Notifications Container --}}
 <div id="notifications-container"></div>
 
+{{-- Dropdowns Container --}}
+<div id="dropdowns-container"></div>
+
 {{-- Modal Container --}}
 <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
 

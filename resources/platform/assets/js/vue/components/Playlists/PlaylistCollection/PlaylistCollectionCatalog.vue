@@ -6,6 +6,7 @@
     import PlaylistCollectionCard from './PlaylistCollectionCard.vue';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
     import Pagination from '../../../components/Pagination/Pagination.vue';
+import playlists from '../../../../services/playlists.js';
 
     //Inject
     const token = inject('csrf_token');
@@ -64,8 +65,7 @@
     //---------Lifecycle Methods---------//
 
     onMounted(()=> {
-        //load Playlists
-        if(props.playlistCount <= 10 && props.playlists.length <= 10) {
+        if(props.miniCatalog || props.playlistCount <= 10 && props.playlists.length <= 10) {
             playlistsStore.playlists = props.playlists;
         } else {
             const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -195,11 +195,11 @@
             </section>
             <section class="tw-w-full tw-block tw-overflow-x-auto lg:tw-overflow-x-hidden tw-no-scrollbar">
                 <div v-if="!playlistsStore.loadingPlaylists && miniCatalog && !state.isListView"
-                    class="tw-px-4 lg:tw-px-0 tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-nowrap lg:tw-auto-rows-[0] lg:tw-grid-rows-1 lg:tw-overflow-hidden lg:tw-grid lg:tw-grid-cols-5 2xl:tw-grid-cols-6 4xl:tw-grid-cols-8 xl:tw-gap-[12px] 2xl:tw-gap-[16px]"
+                    class="PlaylistMiniCatalogContainer tw-px-4 lg:tw-px-0 tw-w-full tw-gap-[6px] tw-relative tw-mb-5 tw-grid lg:tw-overflow-hidden tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-6 lg:tw-grid-cols-5 2xl:tw-grid-cols-6 xl:tw-gap-[12px] 2xl:tw-gap-[16px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full"
                 >
                 <!-- Mini Catalog -->
                     <playlist-collection-card
-                        v-for="listElement in playlistsStore.playlists.slice(0,8)"
+                        v-for="listElement in playlistsStore.playlists"
                         :key="listElement.id"
                         :listElement="listElement"
                         :isListView="false"
