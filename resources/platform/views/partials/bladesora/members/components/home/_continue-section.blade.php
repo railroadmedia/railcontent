@@ -1,6 +1,5 @@
 <section class="tw-flex tw-flex-row tw-mb-6 md:tw-mb-8">
     <div class="tw-flex tw-flex-col tw-w-full">
-
         <!-- Section Title -->
         <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
             <a href="{{ $continueUrl }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
@@ -17,23 +16,19 @@
         <div>
             <transition appear name="fade">
                 <catalogue-card-container
+                        :is-mini-view="{{ json_encode(true) }}"
                         theme-color="{{ $brand }}"
-                        :use-theme-color="true"
+                        :use-theme-color="{{ json_encode(true) }}"
                         content-endpoint="{{ $contentEndpoint ? $contentEndpoint : '/railcontent/content' }}"
                         catalogue-type="grid"
-                        no-results-icon="happy"
-                        no-results-message="You don’t have any lessons in progress. Any lessons you have started but not completed will show up here for you to access later."
                         limit="16"
-                        :lock-unowned="true"
-                        :six-wide="true"
-                        :force-wide-thumbs="true"
+                        :lock-unowned="{{ json_encode(true) }}"
                         :pre-loaded-content="{{ $startedContentJson }}"
-                        :show-dropdown="true"
-                        :extra-padding-bottom="true"
+                        :show-dropdown="{{ json_encode(true) }}"
+                        :extra-padding-bottom="{{ json_encode(true) }}"
                 >
                 </catalogue-card-container>
             </transition>
         </div>
-
     </div>
 </section>

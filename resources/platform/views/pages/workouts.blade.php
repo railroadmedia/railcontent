@@ -5,6 +5,14 @@
 @endsection
 
 @section('content')
+    <!-- BREADCRUMBS -->
+    <breadcrumb
+        brand="{{ $brand }}"
+        first-level-url="/{{ $brand }}/workouts" 
+        first-level-title="Workouts"
+    >
+    </breadcrumb>
+
     <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white tw-pt-6">
         <section>
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
@@ -75,9 +83,3 @@
         </section>
     </div>
 @endsection
-<script>
-    import MusoraIcon from "../../assets/js/vue/components/MusoraIcons/MusoraIcon";
-    export default {
-        components: {MusoraIcon}
-    }
-</script>

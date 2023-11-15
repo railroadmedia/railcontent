@@ -39,117 +39,133 @@
 @endsection
 
 @section('content')
-    @component('partials._header-banner',
-        ['backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',])
-        @slot('content')
-            <div class="tw-inline-tw-flex tw-w-full tw-flex-col tw-pr-4">
-                <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                    @if($catalogueMeta['name'] == 'Q&A')
-                        <musora-icon icon-name="light-bulb-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Routines')
-                        <musora-icon icon-name="routines-filled"
-                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Quick Tips')
-                        <musora-icon icon-name="light-bulb-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Songs')
-                        <musora-icon icon-name="headphones-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Bootcamps')
-                        <musora-icon icon-name="keys-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'The Pianote Podcast')
-                        <musora-icon icon-name="podcast-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Student Focus')
-                        <musora-icon icon-name="person-plus-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Q & A')
-                        <musora-icon icon-name="question-mark-circle"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Student Reviews')
-                        <musora-icon icon-name="person-plus-filled"
-                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Chords & Scales')
-                        <musora-icon icon-name="guitar-tabs-filled"
-                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Archives')
-                        <musora-icon icon-name="archives-filled"
-                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Play Alongs')
-                        <musora-icon icon-name="eigth-notes-filled"
-                                     class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
-                        </musora-icon>
-                    @elseif($catalogueMeta['name'] == 'New Content')
-                        <i class="fas fa-star tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
-                    @elseif($catalogueMeta['name'] == 'Subscribed')
-                        <i class="fas fa-bell tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
-                    @elseif($catalogueMeta['name'] == 'Song Tutorials')
-                        <musora-icon icon-name="play-progress-filled"
-                                class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
-                        </musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Rudiments')
-                        <musora-icon icon-name="drum-filled"
-                                     class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
-                        </musora-icon>
-                    @else
-                        <musora-icon icon-name="academic-cap-filled"
-                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @endif
-                    <span class="tw-text-32 tw-font-bold">{{ ucfirst($catalogueMeta['name']) }}</span>
-                </h1>
-                <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                    {{ $catalogueMeta['description'] }}
-                </p>
-            </div>
-        @endslot
+    <!-- BREADCRUMBS -->
+    @if($lessonType === 'challenges')
+        <breadcrumb
+            brand="{{ $brand }}"
+            first-level-url="/{{ $brand }}/workouts" 
+            first-level-title="Workouts"
+            second-level-url="/{{ $brand }}/workouts/challenges"
+            second-level-title="All {{ ucfirst($catalogueMeta['name']) }}"
+        >
+        </breadcrumb>
+        <br>
+        <br>
+    @endif
 
-        @slot('interactionSlot')
-            @if($lessonType === 'student-review' && $brand === 'singeo')
-                @include('partials._student-review-application-singeo')
-            @endif
-
-            @if($lessonType === 'student-review' && $brand === 'guitareo')
-                @include('partials._student-review-application-guitareo')
-            @endif
-
-            @if($lessonType === 'student-review' && $brand === 'pianote')
-                @include('partials._student-review-application-pianote')
-            @endif
-
-            @if($lessonType === 'student-focus' && $brand === 'drumeo')
-                @include('partials._student-focus-application-drumeo')
-            @endif
-
-            @if($catalogueMeta['name'] == 'Songs' && $brand === 'drumeo')
-                <div class="tw-flex tw-mt-4">
-                    <a
-                        @if(Carbon\Carbon::create(2023, 1, 15, 11, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                            href="/drumeo/forums/drumeo-songs/15/february-2023-song-request-voting-thread/14114?sortby_val=published_on"
+    @if($lessonType !== 'challenges')    
+        @component('partials._header-banner',
+            ['backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',])
+            @slot('content')
+                <div class="tw-inline-tw-flex tw-w-full tw-flex-col tw-pr-4">
+                    <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
+                        @if($catalogueMeta['name'] == 'Q&A')
+                            <musora-icon icon-name="light-bulb-filled"
+                                            class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Routines')
+                            <musora-icon icon-name="routines-filled"
+                                            class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Quick Tips')
+                            <musora-icon icon-name="light-bulb-filled"
+                                            class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Songs')
+                            <musora-icon icon-name="headphones-filled"
+                                            class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Bootcamps')
+                            <musora-icon icon-name="keys-filled"
+                                            class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'The Pianote Podcast')
+                            <musora-icon icon-name="podcast-filled"
+                                            class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Student Focus')
+                            <musora-icon icon-name="person-plus-filled"
+                                            class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Q & A')
+                            <musora-icon icon-name="question-mark-circle"
+                                            class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Student Reviews')
+                            <musora-icon icon-name="person-plus-filled"
+                                            class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Chords & Scales')
+                            <musora-icon icon-name="guitar-tabs-filled"
+                                            class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Archives')
+                            <musora-icon icon-name="archives-filled"
+                                            class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Play Alongs')
+                            <musora-icon icon-name="eigth-notes-filled"
+                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
+                            </musora-icon>
+                        @elseif($catalogueMeta['name'] == 'New Content')
+                            <i class="fas fa-star tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
+                        @elseif($catalogueMeta['name'] == 'Subscribed')
+                            <i class="fas fa-bell tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
+                        @elseif($catalogueMeta['name'] == 'Song Tutorials')
+                            <musora-icon icon-name="play-progress-filled"
+                                    class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
+                            </musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Rudiments')
+                            <musora-icon icon-name="drum-filled"
+                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
+                            </musora-icon>
                         @else
-                            href="/drumeo/forums/threads/drumeo-songs/15"
+                            <musora-icon icon-name="academic-cap-filled"
+                                            class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @endif
-                        class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600">
-                            Request A Song
-                        <span class="tw-text-4xl tw-ml-1 tw-leading-none tw-mt-0.5">»</span>
-                    </a>
+                        <span class="tw-text-32 tw-font-bold">{{ ucfirst($catalogueMeta['name']) }}</span>
+                    </h1>
+                    <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
+                        {{ $catalogueMeta['description'] }}
+                    </p>
                 </div>
-            @endif
+            @endslot
 
-            @if($catalogueMeta['name'] == 'Drumeo Monthly Collaborations' && $brand === 'drumeo')
-                @include('partials._student-collaboration-form')
-            @endif
+            @slot('interactionSlot')
+                @if($lessonType === 'student-review' && $brand === 'singeo')
+                    @include('partials._student-review-application-singeo')
+                @endif
 
-            @if($lessonType === 'question-and-answer')
-                @include('partials._ask-question-form')
-            @endif
+                @if($lessonType === 'student-review' && $brand === 'guitareo')
+                    @include('partials._student-review-application-guitareo')
+                @endif
 
-            @if($lessonType === 'routine')
-                @include('partials._routine-modal')
-            @endif
-        @endslot
-    @endcomponent
+                @if($lessonType === 'student-review' && $brand === 'pianote')
+                    @include('partials._student-review-application-pianote')
+                @endif
+
+                @if($lessonType === 'student-focus' && $brand === 'drumeo')
+                    @include('partials._student-focus-application-drumeo')
+                @endif
+
+                @if($catalogueMeta['name'] == 'Songs' && $brand === 'drumeo')
+                    <div class="tw-flex tw-mt-4">
+                        <a
+                            @if(Carbon\Carbon::create(2023, 1, 15, 11, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                                href="/drumeo/forums/drumeo-songs/15/february-2023-song-request-voting-thread/14114?sortby_val=published_on"
+                            @else
+                                href="/drumeo/forums/threads/drumeo-songs/15"
+                            @endif
+                            class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600">
+                                Request A Song
+                            <span class="tw-text-4xl tw-ml-1 tw-leading-none tw-mt-0.5">»</span>
+                        </a>
+                    </div>
+                @endif
+
+                @if($catalogueMeta['name'] == 'Drumeo Monthly Collaborations' && $brand === 'drumeo')
+                    @include('partials._student-collaboration-form')
+                @endif
+
+                @if($lessonType === 'question-and-answer')
+                    @include('partials._ask-question-form')
+                @endif
+
+                @if($lessonType === 'routine')
+                    @include('partials._routine-modal')
+                @endif
+            @endslot
+        @endcomponent
+    @endif
 
     @if(session()->has('success-message'))
         <div class="form-success-message container mt-3">

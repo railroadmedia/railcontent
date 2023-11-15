@@ -299,7 +299,7 @@
             <div class="flex flex-wrap items-center mb-7 sm:mb-10">
                 <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">
                     <a class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 mb-7 sm:mb-0 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2 sm:order-1"
-{{--                        href="/ecommerce/add-to-cart?product-array=the-power-of-chords:1,piano-riffs-and-fills:1,play-beautiful-piano:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1&redirect=/order&locked=true"--}}
+{{--                        href="/ecommerce/add-to-cart?products[the-power-of-chords]=1&products[piano-riffs-and-fills]=1&products[play-beautiful-piano]=1&products[piano-chords-and-scales-guide]=1&products[poster-chords]=1&products[poster-scales]=1&redirect=/order&locked=true"--}}
                     >
                         <h4 class="mb-5"><strong>The Beautiful Beginner Piano Bundle </strong></h4>
                         <h2 class="inline-block"><strong class="text-4xl"><s class="opacity-50">$260</s> ${{ 127 }}</strong></h2> <p class="inline-block text-xs">Only</p><br>
@@ -320,7 +320,7 @@
                             <i class="fas fa-check text-pianote mr-1"></i> 90-Day Guarantee</p>
                     </a>
                     <a class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;"
-{{--                        href="/ecommerce/add-to-cart?product-array=the-power-of-chords:1,piano-riffs-and-fills:1,play-beautiful-piano:1&redirect=/order&locked=true"--}}
+{{--                        href="/ecommerce/add-to-cart?products[the-power-of-chords]=1&products[piano-riffs-and-fills]=1&products[play-beautiful-piano]=1&redirect=/order&locked=true"--}}
                     >
                         <h4><strong>The Beautiful Beginner Piano Bundle </strong></h4>
                         <p class="text-sm mt-2 mb-5">(Digital-Only Verison)</p>
