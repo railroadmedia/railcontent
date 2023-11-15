@@ -279,6 +279,7 @@ class RevenueCatController extends Controller
                     );
                     break;
                 }
+                $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
                 $this->unsetUserSubscription($user, $type);
 
                 break;
