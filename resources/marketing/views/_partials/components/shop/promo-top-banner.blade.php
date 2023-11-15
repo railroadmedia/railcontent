@@ -1,4 +1,4 @@
-<header class="text-white text-center relative z-10 overflow-hidden px-5 sm:px-6 py-10 sm:py-12 bg-cover bg-top"
+<header class="text-white text-center relative z-10 overflow-hidden px-5 sm:px-6 py-8 sm:py-10 bg-cover bg-top"
     style="
     @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
             background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/header-bg.jpg');
@@ -12,10 +12,10 @@
                     'styles' => 'h-8 sm:h-10 mx-auto'
                 ])
             </a>
-            <h1 class="uppercase leading-none sm:leading-none text-5xl sm:text-6xl mt-2">
+            <h1 class="uppercase leading-none sm:leading-none text-5xl sm:text-6xl my-1.5">
                 <strong>{{ $theme }} SHOP</strong>
             </h1>
-            <h5 class="leading-tight my-4"><strong>{!! $text !!}</strong></h5>
+            <h5 class="leading-tight mb-4"><strong>{!! $text !!}</strong></h5>
             <div class="inline-flex flex-wrap mx-auto justify-center items-center text-musora">
                 <h5 class="leading-none m-0"><strong>DEALS END IN:</strong></h5>
                 <div class="h-12 mx-4 bg-musora" style="width:2px;"></div>
