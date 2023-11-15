@@ -129,10 +129,6 @@ class UserProductToUserContentPermissionListener
     {
         $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId);
         $this->syncContentPermissions($userId, $userAccessPermissions);
-
-        Log::info('Finished syncing user permissions for user id: ' . $userId);
-        // clear the railcontent cache
-        CacheHelper::deleteUserFields([ConfigService::$redisPrefix . ':userId_' . $userId,], 'content');
     }
 
     public function buildUserPermissionsList(int $userId): array
