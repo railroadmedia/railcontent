@@ -70,6 +70,12 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
+    @include('pianote._partials._promo-banner-no-tw', [
+        "name" => "Christmas Songbook",
+        "fullPrice" => floatval($productPrices['christmas-songbook']->price),
+        "price" => floatval($productPrices['christmas-songbook']->discounted_price),
+        "noBreadcrumb" => true
+    ])
     <header class="text-white px-5 sm:px-6 pt-96 pb-10 sm:py-20 lg:py-36 relative" style="background-color:#0f5e8a;">
         <div class="inset-0 absolute z-0 bg-top bg-cover block sm:hidden" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/products/christmas-songbook/header-m.png')"></div>
         <div class="inset-0 absolute z-0 bg-top bg-cover hidden sm:block" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/products/christmas-songbook/header.jpg')"></div>

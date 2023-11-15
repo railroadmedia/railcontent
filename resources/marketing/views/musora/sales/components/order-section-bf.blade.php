@@ -8,7 +8,7 @@
 <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
 {{--        @if(empty($bgColor)) style="background:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/assets/order-bg-tile-2.png) center center/160px;" @endif --}}
 >
-    <div class="container mx-auto relative z-50 @if(!empty($max5)) max-w-5xl @else max-w-6xl @endif">
+    <div class="container mx-auto relative z-50 max-w-4xl">
         <div class="w-full">
             @if(!empty($promoLogo))
                 <div class="text-center">

@@ -77,6 +77,12 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
+    @include('pianote._partials._promo-banner-no-tw', [
+        "name" => "Classical Piano Pieces",
+        "fullPrice" => floatval($productPrices['classical-piano-pieces']->price),
+        "price" => floatval($productPrices['classical-piano-pieces']->discounted_price),
+        "noBreadcrumb" => true
+    ])
     <header class="text-white px-5 sm:px-6 pt-72 pb-12 sm:py-20 lg:py-36 bg-top bg-no-repeat" style="background-color:#0e1623;">
         <div class="container max-w-3xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">

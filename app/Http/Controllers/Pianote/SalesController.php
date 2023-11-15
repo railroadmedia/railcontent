@@ -26,6 +26,11 @@ class SalesController extends BaseController
 
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }
+
+    public function homeBF()
+    {
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true', 'bfVersion' => 'true']);
+    }
     public function homeMonth()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'month' => true]);
@@ -70,27 +75,27 @@ class SalesController extends BaseController
 
     public function about()
     {
-        return view('pianote.sales.pages.about');
+        return view('pianote.sales.pages.about', ['theme' => 'pianote']);
     }
 
     public function app()
     {
-        return view('pianote.sales.pages.app');
+        return view('pianote.sales.pages.app', ['theme' => 'pianote']);
     }
 
     public function cookie()
     {
-        return view('pianote.sales.pages.cookie');
+        return view('pianote.sales.pages.cookie', ['theme' => 'pianote']);
     }
 
     public function terms()
     {
-        return view('pianote.sales.pages.terms');
+        return view('pianote.sales.pages.terms', ['theme' => 'pianote']);
     }
 
     public function privacy()
     {
-        return view('pianote.sales.pages.privacy');
+        return view('pianote.sales.pages.privacy', ['theme' => 'pianote']);
     }
 
     public function songs()
@@ -122,7 +127,7 @@ class SalesController extends BaseController
 
     public function giveaway()
     {
-        return view('pianote.lead-gen.giveaway');
+        return view('pianote.lead-gen.giveaway', ['theme' => 'pianote']);
     }
 
     public function products(Request $request, $domain, $page = null)
@@ -134,17 +139,17 @@ class SalesController extends BaseController
 
     public function fasterfingers()
     {
-        return view('pianote.products.faster-fingers');
+        return view('pianote.products.faster-fingers', ['theme' => 'pianote']);
     }
 
     public function worshippiano()
     {
-        return view('pianote.products.worship-piano');
+        return view('pianote.products.worship-piano', ['theme' => 'pianote']);
     }
 
     public function pianotechniquemadeeasy()
     {
-        return view('pianote.products.piano-technique-made-easy');
+        return view('pianote.products.piano-technique-made-easy', ['theme' => 'pianote']);
     }
 
     public function destupefyyourlefthand()
@@ -154,12 +159,12 @@ class SalesController extends BaseController
 
     public function playbeautifulpiano()
     {
-        return view('pianote.products.play-beautiful-piano');
+        return view('pianote.products.play-beautiful-piano', ['theme' => 'pianote']);
     }
 
     public function beginnerclassicalpiano()
     {
-        return view('pianote.products.beginner-classical-piano');
+        return view('pianote.products.beginner-classical-piano', ['theme' => 'pianote']);
     }
 
     public function beautifulBeginnerBundle()
@@ -172,19 +177,14 @@ class SalesController extends BaseController
         return view('pianote.shop.pages.lifetime', [ 'theme' => 'pianote' ]);
     }
 
-    public function lifetimeMembers()
-    {
-        return view('pianote.sales.pages.lifetime-members', [ 'theme' => 'pianote' ]);
-    }
-
     public function lisarecommends()
     {
-        return view('pianote.shop.lisa-recommends');
+        return view('pianote.shop.lisa-recommends', ['theme' => 'pianote']);
     }
 
     public function welcomeparty()
     {
-        return view('pianote.lead-gen.welcome-party');
+        return view('pianote.lead-gen.welcome-party', ['theme' => 'pianote']);
     }
 
     public function jesusMolina()
@@ -199,22 +199,22 @@ class SalesController extends BaseController
 
     public function songs500()
     {
-        return view('pianote.products.500-songs');
+        return view('pianote.products.500-songs', ['theme' => 'pianote']);
     }
 
     public function PowerOfChords()
     {
-        return view('pianote.products.the-power-of-chords');
+        return view('pianote.products.the-power-of-chords', ['theme' => 'pianote']);
     }
 
     public function PowerOfChordsGiveaway()
     {
-        return view('pianote.products.the-power-of-chords-giveaway');
+        return view('pianote.products.the-power-of-chords-giveaway', ['theme' => 'pianote']);
     }
 
     public function concertHeadphones()
     {
-        return view('pianote.products.concert-headphones');
+        return view('pianote.products.concert-headphones', ['theme' => 'pianote']);
     }
 
     public function concertHeadphonesMember()
@@ -224,7 +224,7 @@ class SalesController extends BaseController
 
     public function foundations()
     {
-        return view('pianote.products.foundation-books');
+        return view('pianote.products.foundation-books', ['theme' => 'pianote']);
     }
     public function classicalPianoPieces()
     {

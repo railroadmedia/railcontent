@@ -61,39 +61,40 @@
     @include('drumeo.drumshop._partials._catalogue-filters')
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
-
+{{--        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card.jpg',--}}
+{{--        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m.jpg',--}}
         @php
             $bundles = [
                 [
-                    'slug' => '/drumshop/ultimate-lessons-bundle',
-                    'desc' => 'Drumeo Discount<br class="sm:hidden"> + 10 Bonuses',
-                    'full' => true,
+                    'slug' => '/shop/ultimate-lessons-bundle',
+                    'desc' => 'Pianote Discount<br class="sm:hidden"> + 11 Bonuses',
                     'visible' => 1,
-                    'price' => 1467.94,
+                    'price' => 1103.65,
                     'discountedPrice' => 150,
-                    'buttonColor' => '#0A69D0',
+                    'buttonColor' => '#F61A30',
                     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card-m.jpg',
-                ],
-                [
-                    'slug' => '/drumshop/better-hands-bundle',
-                    'desc' => 'Easy Rudiments Book + QuietPad<br class="lg:hidden"> + Drumsticks + PadStand',
-                    'visible' => 1,
-                    'price' => 160.95,
-                    'discountedPrice' => 121.44,
-                    'buttonColor' => '#01AB5A',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-bundle-white.png',
-                    'bgColor' => '#00B15C, #033A2D',
+                    'bgColor' => '#F61A30, #600A13',
                 ],
                 [
                     'slug' => '/lifetime',
-                    'desc' => 'Unlimited drum lessons for life<br class="lg:hidden"> + more',
+                    'desc' => 'Unlimited pianote lessons for life<br class="lg:hidden"> + more',
                     'visible' => 1,
                     'price' => 1200,
-                    'buttonColor' => '#532700',
+                    'buttonColor' => '#000',
                     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
                     'bgColor' => '#FFAC00, #C75300',
+                ],
+                [
+                    'slug' => '/shop/metronome',
+                    'desc' => '',
+                    'full' => true,
+                    'visible' => 1,
+                    'price' => 79,
+                    'discountedPrice' => 59,
+                    'buttonColor' => '#F61A30',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card-logo.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card-m.jpg',
                 ],
             ];
         @endphp
@@ -101,6 +102,69 @@
             "header" => 'Save up to 86% with <br class="sm:hidden"> Black Friday Bundles',
         ])
 
+        <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Featured</strong></h5>
+                <div
+                    x-data="{
+                init() {
+                    new Splide(this.$refs.splide, {
+                        classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next hidden sm:flex mb-16',
+                                pagination: 'hidden',
+                        },
+                        perPage: 3.5,
+                        perMove: 1,
+                        type: 'loop',
+                        focus: 0,
+                        interval: 2000,
+                        breakpoints: {
+                            1023: {
+                                perPage: 2.5,
+                            },
+                            767: {
+                                perPage: 1.5,
+                                drag   : 'free',
+                                snap   : false,
+                            },
+                        },
+                    }).mount()
+                },
+            }"
+                >
+                    <div x-ref="splide" class="splide text-left">
+                        <div class="splide__track pb-8">
+                            <ul class="splide__list items-start">
+                                @foreach($featured as $key => $feat)
+                                    <li class="splide__slide px-1">
+                                        @include('musora.shop._shop-card-alt', [
+                                            "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $feat->slug ),
+                                            "sku" => $feat->sku === 'drumeo' ? null : $feat->sku,
+                                            "badgeText" => $feat->badge_text,
+                                            "thumbnail" => $feat->thumbnail,
+                                            "packLogo" => $feat->thumbnail_logo,
+                                            "title" => $feat->name,
+                                            "packAuthor" => $feat->instructor_name,
+                                            "cardDescription" => $feat->short_desc,
+                                            "fullPrice" => $feat->price,
+                                            "price" => $feat->discounted_price,
+                                            "category" => strtolower($feat->productType->name),
+                                            "buttonText" => $feat->sku === 'drumeo' || $feat->sku === 'pianote' || $feat->sku === 'singeo' || $feat->sku === 'guitareo' ? 'see the deal' : null,
+                                            "soldOut" => $feat->sold_out,
+                                            "includedEdge" => $feat->included_edge,
+                                            "sizes" => $feat->sizes,
+                                            'FCP' => $key < 4 ? true : null,
+                                        ])
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container">
