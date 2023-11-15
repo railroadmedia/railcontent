@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use App\Modules\Content\Services\CarouselService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -15,9 +16,10 @@ class WorkoutsPageController extends BaseController
     /**
      * @param ContentService $contentService
      */
-    public function __construct(ContentService $contentService)
+    public function __construct(ContentService $contentService, CarouselService $carouselService)
     {
         $this->contentService = $contentService;
+        $this->carouselService = $carouselService;
     }
 
     public function showWorkoutsPage(Request $request,  $domain, $brand)
@@ -65,6 +67,8 @@ class WorkoutsPageController extends BaseController
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$catalogName] ?? [];
         ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
 
+         $carousel = $this->carouselService->getCarouselSlides()->where('is_featured', 1);
+
         return view('pages.workouts',
                     [
                         "listLessons" => $workouts->toResponseRawJson(),
@@ -74,6 +78,7 @@ class WorkoutsPageController extends BaseController
                         "hasFeaturedChallenges" => $featuredChallenges->totalResults() > 0,
                         "lessonType" => $lessonType,
                         "catalogueMeta" => $catalogueMeta,
+                        'carousel' => $carousel,
                     ]);
     }
 }
