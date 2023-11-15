@@ -6,16 +6,19 @@
         background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/cm-header-bg.jpg');
     @endif
 ">
-    <div class="container mx-auto relative z-30 max-w-xl">
+    <div class="container mx-auto relative z-30 max-w-2xl">
             <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
                 @include($theme.'._partials.holiday-logo', [
-                    'styles' => 'h-14 sm:h-16 lg:h-20 mx-auto'
+                    'styles' => 'h-8 sm:h-10 mx-auto'
                 ])
             </a>
+            <h1 class="uppercase leading-none sm:leading-none text-5xl sm:text-6xl mt-2">
+                <strong>{{ $theme }} SHOP</strong>
+            </h1>
             <h5 class="leading-tight my-4"><strong>{!! $text !!}</strong></h5>
             <div class="inline-flex flex-wrap mx-auto justify-center items-center text-musora">
                 <h5 class="leading-none m-0"><strong>DEALS END IN:</strong></h5>
-                <div class="h-12 mx-2 sm:mx-4 bg-musora" style="width:2px;"></div>
+                <div class="h-12 mx-4 bg-musora" style="width:2px;"></div>
                 <div class="flex"  x-data="timer()" x-init="countdown()">
                     <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && day">
                         <div class="text-2xl sm:text-3xl font-extrabold" x-text="day">00</div>

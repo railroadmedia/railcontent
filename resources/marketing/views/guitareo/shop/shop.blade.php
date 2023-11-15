@@ -93,7 +93,7 @@
 
 @section('body')
     @include('_partials.components.shop.promo-top-banner',[
-        'text' => '<span class="text-promo">Save up to 80%</span> on guitar lessons, merch, & more.',
+        'text' => '<span class="text-promo">Save up to 80%</span> on guitar lessons,<br class="sm:hidden"> merch, & more.',
     ])
 
     @if(Session::has('addedProducts'))
