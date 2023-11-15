@@ -491,7 +491,7 @@ $points = [
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '825206369',
+        'video' => '884916500',
         'vimeo' => true,
     ])
 

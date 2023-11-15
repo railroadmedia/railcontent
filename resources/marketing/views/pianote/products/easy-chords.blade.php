@@ -456,7 +456,7 @@ $items = [
 
 
  <!-- Meet your teacher section -->
-    <section class="text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40" style="background-color:#f4f8fb;">
+    <section class="text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40" style="background-color:#ffffff;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
                 <div class="w-52 sm:w-64 lg:w-72 relative -mb-8 sm:mb-0 sm:-mr-8">
