@@ -182,12 +182,19 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.pages.upgrade-offer', ['products' => $products]);
     }
-    public function salesUpgradeLifetime()
+    public function salesLifetime()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
         return view('drumeo.sales.pages.lifetime', ['products' => $products, 'theme' => 'drumeo']);
+    }
+    public function salesUpgradeLifetime()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.pages.lifetime', ['products' => $products, 'theme' => 'drumeo', 'upgradeVersion' => true]);
     }
 
     public function Festival()

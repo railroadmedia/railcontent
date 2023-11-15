@@ -109,7 +109,13 @@
                 </div>
             </div>
             <div class="px-3 mx-auto w-full max-w-2xl">
-                <h2 class="leading-none mb-1"><strong>$1200</strong></h2>
+                <h2 class="leading-none mb-1">
+                    @if(!empty($upgradeVersion))
+                        <s class="opacity-60">$1200</s> <strong>$960</strong>
+                    @else
+                        <strong>$1200</strong>
+                    @endif
+                </h2>
                 <p class="leading-tight text-sm"><em>One time payment or choose a <br class="sm:hidden">payment plan on the next page.</em></p>
                 <a class="join smaller drumeo my-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
                 <p class="leading-tight text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>
@@ -179,7 +185,11 @@
                         </div>
 
                         <h4 class="uppercase w-full leading-normal">
-                            <span class="font-bold text-musora" style="text-transform:uppercase; display:inline-block;">$1200</span>
+                            @if(!empty($upgradeVersion))
+                                <s class="opacity-60">$1200</s> <strong>$960</strong>
+                            @else
+                                <strong>$1200</strong>
+                            @endif
                         </h4>
                     </div>
                 </div>
@@ -316,7 +326,13 @@
                 {{--<p style="max-width: 480px;color: #aaa;padding:0 15px;"><em>All digital bonuses are added to your account IMMEDIATELY  with your membership to Pianote, and they’re yours forever. </em></p>--}}
             </div>
 
-            <h2 class="leading-none mb-1"><strong>$1200</strong></h2>
+            <h2 class="leading-none mb-1">
+                @if(!empty($upgradeVersion))
+                    <s class="opacity-60">$1200</s> <strong>$960</strong>
+                @else
+                    <strong>$1200</strong>
+                @endif
+            </h2>
             <p class="leading-tight text-sm"><em>
                     One time payment or choose a <br class="sm:hidden">
                     payment plan on the next page.</em></p>

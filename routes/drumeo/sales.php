@@ -18,7 +18,8 @@ Route::domain('{drumeoDomain}')
     Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/student-only', [SalesController::class, 'promo'] );
     Route::get('/upgrade-offer', [SalesController::class, 'salesUpgrade'] );
-    Route::get('/lifetime', [SalesController::class, 'salesUpgradeLifetime'] );
+    Route::get('/lifetime', [SalesController::class, 'salesLifetime'] );
+    Route::get('/lifetime-upgrade', [SalesController::class, 'salesUpgradeLifetime'] );
     Route::get('/festival/', [SalesController::class, 'Festival'] );
     Route::get('/anniversary', [SalesController::class, 'home'] );
         Route::get('/vdf', [SalesController::class, 'choosePlanVDF'] );
