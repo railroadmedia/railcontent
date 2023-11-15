@@ -11,7 +11,7 @@ Route::domain('{drumeoDomain}')
         'uses' => \App\Http\Controllers\Musora\ReferralJoinController::class . '@join',
     ]);
     Route::get('/', [SalesController::class, 'home'] );
-    Route::get('/black-friday', [SalesController::class, 'homeBF'] );
+    Route::get('/ultimate-bundle', [SalesController::class, 'homeBF'] );
     Route::get('/new-year', [SalesController::class, 'promo'] );
     Route::get('/lp', [SalesController::class, 'promo'] );
     Route::get('/beginner', [SalesController::class, 'promo']);

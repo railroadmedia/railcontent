@@ -117,6 +117,12 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
+    @include('drumeo.products.partials.promo-banner', [
+        "name" => "Drumeo PadStand",
+        "fullPrice" => floatval($productPrices['padstand']->price),
+        "price" => floatval($productPrices['padstand']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">

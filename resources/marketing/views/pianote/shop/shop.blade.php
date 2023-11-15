@@ -28,20 +28,9 @@
 @endsection
 
 @section('body')
-    <header class="drum-shop-header">
-        <picture>
-            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg">
-            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg" alt="header background image" fetchpriority="high" />
-        </picture>
-        <div class="container mx-auto relative z-10">
-            <div class="px-2 md:px-3">
-                <div class="float-left px-2 md:px-3 w-full">
-                    <img class="h-12 sm:h-14 md:h-24 lg:h-28 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/pianote-shop-logo.png" alt="pianote logo" fetchpriority="high">
-                    <h3>GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!</h3>
-                </div>
-            </div>
-        </div>
-    </header>
+    @include('_partials.components.shop.promo-top-banner',[
+        'text' => '<span class="text-promo">Save up to 84%</span> on piano lessons, tools, & merch.',
+    ])
 
     @if(Session::has('addedProducts'))
         <section class="added-to-cart-background clearfix">
@@ -70,7 +59,48 @@
     @endif
 
     @include('drumeo.drumshop._partials._catalogue-filters')
+
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
+
+        @php
+            $bundles = [
+                [
+                    'slug' => '/drumshop/ultimate-lessons-bundle',
+                    'desc' => 'Drumeo Discount<br class="sm:hidden"> + 10 Bonuses',
+                    'full' => true,
+                    'visible' => 1,
+                    'price' => 1467.94,
+                    'discountedPrice' => 150,
+                    'buttonColor' => '#0A69D0',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card-m.jpg',
+                ],
+                [
+                    'slug' => '/drumshop/better-hands-bundle',
+                    'desc' => 'Easy Rudiments Book + QuietPad<br class="lg:hidden"> + Drumsticks + PadStand',
+                    'visible' => 1,
+                    'price' => 160.95,
+                    'discountedPrice' => 121.44,
+                    'buttonColor' => '#01AB5A',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-bundle-white.png',
+                    'bgColor' => '#00B15C, #033A2D',
+                ],
+                [
+                    'slug' => '/lifetime',
+                    'desc' => 'Unlimited drum lessons for life<br class="lg:hidden"> + more',
+                    'visible' => 1,
+                    'price' => 1200,
+                    'buttonColor' => '#532700',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
+                    'bgColor' => '#FFAC00, #C75300',
+                ],
+            ];
+        @endphp
+        @include('_partials.layout.holiday.bundle-tiles', [
+            "header" => 'Save up to 86% with <br class="sm:hidden"> Black Friday Bundles',
+        ])
+
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container">

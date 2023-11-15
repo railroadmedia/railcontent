@@ -29,21 +29,9 @@
 @endsection
 
 @section('body')
-    <header class="drum-shop-header relative">
-        <picture>
-            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg">
-            <img class="absolute w-full h-full left-0 top-0 object-cover object-center" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg" alt="header background" fetchpriority="high" />
-        </picture>
-
-        <div class="container mx-auto relative z-10">
-            <div class="px-2 md:px-3">
-                <img class="h-6 md:h-9" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo" fetchpriority="high">
-                <h1><strong>DRUM SHOP</strong></h1>
-                <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>
-            </div>
-        </div>
-    </header>
-
+    @include('_partials.components.shop.promo-top-banner',[
+        'text' => '<span class="text-promo">Save up to 86%</span> on drum lessons, tools, & merch.',
+    ])
 
     @if(Session::has('addedProducts'))
         <section class="added-to-cart-background clearfix">
@@ -107,28 +95,35 @@
         @php
             $bundles = [
                 [
-                    'slug' => '/drumshop/bundle-ultimate-lessons',
-                    'badgeText' => 'FREE QUIETPAD & DRUMSTICKS',
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/ultimate-lessons-shop-2.jpg',
-                    'title' => 'Drumeo Membership<br> + 10 Bonuses',
-                    'desc' => 'Drumeo Annual Membership<br class="inline md:hidden lg:inline"> + Practice Pad + Sticks + 8 Training Packs',
-                    'price' => 1468.94,
-                    'discountedPrice' => 240,
-                    'priceColor' => 'linear-gradient(to bottom, #04afec, #213472)',
-                    'buttonColor' => 'linear-gradient(to bottom, #04afec, #213472)',
+                    'slug' => '/drumshop/ultimate-lessons-bundle',
+                    'desc' => 'Drumeo Discount<br class="sm:hidden"> + 10 Bonuses',
+                    'full' => true,
                     'visible' => 1,
+                    'price' => 1467.94,
+                    'discountedPrice' => 150,
+                    'buttonColor' => '#0A69D0',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card-m.jpg',
                 ],
                 [
-                    'slug' => '/drumshop/bundle-perfect-gift',
-                    'badgeText' => 'FREE P4 & DRUMSTICKS',
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/perfect-gift-fb-share-image.jpg',
-                    'title' => 'Drumeo Access Card<br> + 2 Bonuses',
-                    'desc' => 'Drumeo Access Card<br class="inline md:hidden lg:inline"> + Practice Pad + Sticks',
-                    'price' => 331.95,
-                    'discountedPrice' => 240,
-                    'priceColor' => 'linear-gradient(to bottom, #01fdc0, #289077)',
-                    'buttonColor' => 'linear-gradient(to bottom, #01fdc0, #289077)',
+                    'slug' => '/drumshop/better-hands-bundle',
+                    'desc' => 'Easy Rudiments Book + QuietPad<br class="lg:hidden"> + Drumsticks + PadStand',
                     'visible' => 1,
+                    'price' => 160.95,
+                    'discountedPrice' => 121.44,
+                    'buttonColor' => '#01AB5A',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-bundle-white.png',
+                    'bgColor' => '#00B15C, #033A2D',
+                ],
+                [
+                    'slug' => '/lifetime',
+                    'desc' => 'Unlimited drum lessons for life<br class="lg:hidden"> + more',
+                    'visible' => 1,
+                    'price' => 1200,
+                    'buttonColor' => '#532700',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
+                    'bgColor' => '#FFAC00, #C75300',
                 ],
             ];
         @endphp
