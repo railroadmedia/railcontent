@@ -130,7 +130,6 @@ class UserProductToUserContentPermissionListener
         $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId);
         $this->syncContentPermissions($userId, $userAccessPermissions);
 
-        // TODO ADRIAN SRR-173, should this still be logged and cleared? it wasn't in the original logic.
         Log::info('Finished syncing user permissions for user id: ' . $userId);
         // clear the railcontent cache
         CacheHelper::deleteUserFields([ConfigService::$redisPrefix . ':userId_' . $userId,], 'content');

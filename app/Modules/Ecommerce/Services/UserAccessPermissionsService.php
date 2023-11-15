@@ -254,7 +254,7 @@ class UserAccessPermissionsService
 
     public function shouldSyncCustomerIOWorkspace(User $user, $brand): bool
     {
-        if (config('shopify.enabled') && $user->cio_synced_workspaces) {
+        if ($user->cio_synced_workspaces) {
             return $user->shouldSyncCustomerIoWorkspace($brand);
         }
         //TODO: remove post shopify and $user->cio_synced_workspaces check above
