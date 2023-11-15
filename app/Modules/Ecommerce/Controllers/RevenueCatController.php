@@ -279,51 +279,6 @@ class RevenueCatController extends Controller
                     );
                     break;
                 }
-
-                if (!config('shopify_enabled')) {
-                    //store type
-                    $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
-
-                    //productId
-                    $productId = $this->getProductId($data['event']['product_id']);
-
-                    //get Musora product
-                    $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
-
-                    //get RevenueCat subscription
-                    $currentRevenueCatSubscription =
-                        $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
-
-                    //get Musora subscription
-                    $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProducts);
-
-                    if (!$musoraSubscription) {
-                        //create Musora subscription
-                        $musoraSubscription = $this->subscriptionService->createSubscription(
-                            $user->id,
-                            $data['event']['expiration_at_ms'],
-                            $musoraProducts->first(),
-                            $type,
-                            $data['event']['purchased_at_ms']
-                        );
-
-                        //Assign user product
-                        $this->userProductService->assignUserProduct(
-                            $user->id,
-                            $musoraSubscription->product_id,
-                            $musoraSubscription->paid_until
-                        );
-                        break;
-                    }
-
-                    $this->subscriptionService->updateSubscription(
-                        $musoraSubscription,
-                        $data['event']['expiration_at_ms'],
-                        null,
-                        $data['event']['expiration_reason']
-                    );
-                }
-
                 $this->unsetUserSubscription($user, $type);
 
                 break;
