@@ -161,6 +161,10 @@ const isRudiment = computed(() => {
     return props.collectionType === 'rudiment';
 })
 
+const isChallengePart = computed(() => {
+    return props.collectionType === 'challenge-part';
+})
+
 //List view reactvie
 const isList = computed(() => {
     return !isPlayAlong.value && !isRoutine.value;
@@ -168,7 +172,7 @@ const isList = computed(() => {
 
 //Filter state reactive
 const showFilter = computed(() => {
-    return isSong.value || isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value || isCoach.value;
+    return isSong.value || isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value || isCoach.value || isChallengePart.value;
 })
 
 //Tab options reactives
