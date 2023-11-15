@@ -43,15 +43,6 @@ class UserMembershipFieldsService
         $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
-    public function syncUserIds(array $userIds): bool
-    {
-        foreach ($userIds as $userId) {
-            $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId);
-            $this->syncUserAccess($userAccessPermissions);
-        }
-        return true;
-    }
-
     public function syncUserAccess(UserAccessPermissionsCollection $userAccessPermissions): bool
     {
         $userId = $userAccessPermissions->getUserId();
@@ -63,8 +54,11 @@ class UserMembershipFieldsService
         $plusMembershipExpirationDate = $userAccessPermissions->getPlusMembershipExpirationDate();
         $basicMembershipExpirationDate = $userAccessPermissions->getBasicMembershipExpirationDate();
 
+        $songsOnlyExpirationDate = $userAccessPermissions->getSongsOnlyExpirationDate();
+
         $membershipLevel = null;
-        if ($plusMembershipExpirationDate > Carbon::now()) {
+        if ($plusMembershipExpirationDate > Carbon::now() ||
+            ($basicMembershipExpirationDate > Carbon::now() && $songsOnlyExpirationDate > Carbon::now())) {
             $membershipLevel = 'plus';
         } elseif ($basicMembershipExpirationDate > Carbon::now()) {
             $membershipLevel = 'basic';

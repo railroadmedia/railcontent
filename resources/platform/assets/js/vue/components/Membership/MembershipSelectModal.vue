@@ -222,8 +222,8 @@ onBeforeMount(() => {
                                     <h2 class="tw-leading-none tw-mb-3"><strong>Annual</strong></h2>
                                     <h4 class="tw-inline-block tw-leading-none"><strong>$3.33/month</strong></h4>
                                     <p class="tw-text-sm tw-mb-4"><em>Billed at $40 per year.</em></p>
-                                    <button @click="() => handleSelectedInterval('year')"
-                                        class="tw-btn-primary tw-bg-[#00101D]">PAY ANNUALLY</button>
+                                    <a href="/ecommerce/add-to-cart?products%5BLTM-songs-upgrade-recurring-membership%5D=1&locked=1"
+                                        class="tw-btn-primary tw-bg-[#00101D]">PAY ANNUALLY</a>
                                 </div>
                                 <div class="tw-grow tw-px-3 tw-pt-5 md:tw-pt-6 tw-pb-9 md:tw-pb-10"
                                     style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
@@ -232,8 +232,6 @@ onBeforeMount(() => {
                                             Membership.</strong></p>
                                     <p class="tw-mb-1"><strong>This subscription allows us to officially license work
                                             from its creators and compensate them for their work</strong></p>
-                                    <p class="tw-mb-1">You will be immediately charged $40 to your card on file, and
-                                        your subscription will renew again for $40 in 365 days.</p>
                                 </div>
                             </div>
                         </div>

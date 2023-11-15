@@ -286,6 +286,13 @@
         ],
         "testimonials" => [
             [
+                'image' => 'https://i.vimeocdn.com/video/1751887244-0d2cfa5acca4de78249d087c3eb3d9f1b32f9ba8bb8bf63ef1cf9fb8ec9c081b-d_500.jpg',
+                'title' => "Before Pianote, I didn't have goals. Now I can focus on certain skills.",
+                'description' => "Before Pianote, I didn't have goals. Now I can focus on certain skills.",
+                'name' => 'Tonya Hotz',
+                'video' => '882979587',
+            ],
+            [
                 'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/iankershaw.jpg',
                 'title' => "Such a fantastic and welcoming student community.",
                 'description' => "When I signed up for Pianote, I knew I was going to get Lisa’s great energy, the Method, the courses, the bootcamps, and the student reviews.<br><br>But my breakthrough came when I realized that sitting behind all of this is such a fantastic and welcoming, supportive student community. It’s this community – as well as the teachers and the rest of the Pianote team – that really actively encourages you to share your progress and practice. And it doesn’t have to be perfect. And that really does encourage you to practice more. And it’s in that sharing and practice that the real breakthroughs come. Thank you!",

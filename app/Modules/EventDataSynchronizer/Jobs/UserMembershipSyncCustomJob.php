@@ -3,6 +3,7 @@
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
 use App\Console\Commands\Infrastructure\BatchQueryJob;
+use App\Modules\Content\Models\UserPermission;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
 use App\Modules\Ecommerce\Models\UserProduct;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
@@ -12,29 +13,18 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\UserManagementSystem\Models\User;
 
-class UserMembershipOwnedProductSyncJob extends BatchQueryJob
+class UserMembershipSyncCustomJob extends BatchQueryJob
 {
     private int $skip;
     private int $take;
-    private int $permissionId;
-    private bool $syncCustomerIO;
-    private ?Carbon $afterDate;
-    private bool $syncContentPermissions;
+
 
     public function __construct(
         int $skip,
         int $take,
-        int $permissionId,
-        ?string $afterDate,
-        bool $syncContentPermissions,
-        bool $syncCustomerIO
     ) {
         $this->skip = $skip;
         $this->take = $take;
-        $this->permissionId = $permissionId;
-        $this->afterDate = !empty($afterDate) ? new Carbon($afterDate) : null;
-        $this->syncContentPermissions = $syncContentPermissions;
-        $this->syncCustomerIO = $syncCustomerIO;
     }
 
     function getSkip(): int
@@ -49,13 +39,14 @@ class UserMembershipOwnedProductSyncJob extends BatchQueryJob
 
     function getQuery(): Builder
     {
-        $query = UserAccessPermission::query()->select('user_id')->distinct();
-        if ($this->permissionId) {
-            $query = $query->where('permission_id', '=', $this->permissionId);
-        }
-        if ($this->afterDate) {
-            $query = $query->where('start_time', '>', $this->afterDate);
-        }
+        $query = UserPermission::query()->select('user_id')->distinct()
+            ->join('usora_users', function ($join) {
+                $join->on('usora_users.id', '=', 'railcontent_user_permissions.user_id')
+                    ->on('usora_users.membership_expiration_date', '>', 'railcontent_user_permissions.expiration_date');
+            })
+            ->whereIn('permission_id', [91, 92])
+            ->where('usora_users.membership_expiration_date', '>', Carbon::now())
+            ->where('usora_users.access_level', '!=', 'lifetime');
         return $query;
     }
 
@@ -78,22 +69,24 @@ class UserMembershipOwnedProductSyncJob extends BatchQueryJob
 
         foreach ($userIds as $userId) {
             $userAccessPermissions = $userAccessPermissionsService->getUserAccessPermissions($userId);
-            $userMembershipFieldsService->syncUserAccess($userAccessPermissions);
-            if ($this->syncContentPermissions) {
+            if ($userAccessPermissions->getCollection()->count() > 0) {
+                $userMembershipFieldsService->syncUserAccess($userAccessPermissions);
                 $userContentListenerService->syncContentPermissions($userId, $userAccessPermissions);
+            } else {
+                \Log::error("User $userId has no access permissions");
             }
         }
 
-        if ($this->syncCustomerIO) {
-            foreach ($userIds as $userId) {
-                $user = new User();
-                $user->id = $userId;
-                dispatch(
-                    (new CustomerIoSyncUserByUserId($user))
-                        ->delay(Carbon::now()->addSeconds(3))
-                );
-            }
-        }
+//        if ($this->syncCustomerIO) {
+//            foreach ($userIds as $userId) {
+//                $user = new User();
+//                $user->id = $userId;
+//                dispatch(
+//                    (new CustomerIoSyncUserByUserId($user))
+//                        ->delay(Carbon::now()->addSeconds(3))
+//                );
+//            }
+//        }
         return true;
     }
 }

@@ -44,7 +44,7 @@
     ])
 
     @php
-            $registerButtonUrl = "/ecommerce/add-to-cart?product-array=new-piano-players-start-here:1";
+            $registerButtonUrl = "/ecommerce/add-to-cart?products[new-piano-players-start-here]=1";
     @endphp
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
