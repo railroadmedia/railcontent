@@ -127,38 +127,10 @@ class UserProductToUserContentPermissionListener
 
     public function syncUserId($userId)
     {
-        if (config('shopify.enabled')) {
-            $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId);
-            $this->syncContentPermissions($userId, $userAccessPermissions);
-            return;
-        }
-        Log::info('Syncing user permissions for user id: ' . $userId);
-        $userPermissions = $this->buildUserPermissionsList($userId);
-        Log::info('Found ' . count($userPermissions) . ' permissions to sync for user id: ' . $userId);
-        $existingPermissions = UserPermission::query()->where('user_id', '=', $userId)
-            ->whereIn('permission_id', array_keys($userPermissions))->get()->keyBy('permission_id');
+        $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId);
+        $this->syncContentPermissions($userId, $userAccessPermissions);
 
-        foreach ($userPermissions as $permissionId => $dates) {
-            $expirationDate = $dates['expiration_date'];
-            $startDate = $dates['start_date'] ?? Carbon::now();
-
-            $existingPermission = $existingPermissions[$permissionId] ?? null;
-            $now = Carbon::now();
-            if (!$existingPermission) {
-                Log::info('Creating new permission for user id: ' . $userId . ' permission id: ' . $permissionId);
-                $existingPermission = new UserPermission();
-                $existingPermission->user_id = $userId;
-                $existingPermission->permission_id = $permissionId;
-                $existingPermission->created_on = $now;
-            } elseif ($existingPermission->start_date == $startDate && $existingPermission->expiration_date == $expirationDate) {
-                Log::info('Permission already exists for user id: ' . $userId . ' permission id: ' . $permissionId);
-                continue; //no changes necessary save a query
-            }
-            $existingPermission->start_date = $startDate;
-            $existingPermission->expiration_date = $expirationDate;
-            $existingPermissions->updated_on = $now;
-            $existingPermission->save();
-        }
+        // TODO ADRIAN SRR-173, should this still be logged and cleared? it wasn't in the original logic.
         Log::info('Finished syncing user permissions for user id: ' . $userId);
         // clear the railcontent cache
         CacheHelper::deleteUserFields([ConfigService::$redisPrefix . ':userId_' . $userId,], 'content');

@@ -68,30 +68,14 @@ class CustomerIoSyncService
      */
     public function getUsersCustomAttributes(User $user, array $brands = null)
     {
-        if (config('shopify.enabled')) {
-            $membershipAccessAttributes = $this->getUsersMembershipAccessAttributes($user, $brands);
-            $contentFollowAttributes = $this->getUsersContentFollowAttributes($user);
+        $membershipAccessAttributes = $this->getUsersMembershipAccessAttributes($user, $brands);
+        $contentFollowAttributes = $this->getUsersContentFollowAttributes($user);
 
-            return array_merge(
-                $this->getUsersMusoraProfileAttributes($user),
-                $membershipAccessAttributes,
-                $contentFollowAttributes,
-            );
-        } else {
-            //TODO: remove post shopify
-            $membershipAccessAttributes = $this->getUsersMembershipAccessAttributesDeprecated($user, $brands);
-
-            $contentFollowAttributes = $this->getUsersContentFollowAttributes($user);
-
-            return array_merge(
-                $this->getUsersMusoraProfileAttributes($user),
-                $membershipAccessAttributes,
-                $this->getUsersSubscriptionAttributes($user, $membershipAccessAttributes, $brands),
-                $this->getUsersProductOwnershipStrings($user, $brands),
-                $contentFollowAttributes,
-            );
-        }
-
+        return array_merge(
+            $this->getUsersMusoraProfileAttributes($user),
+            $membershipAccessAttributes,
+            $contentFollowAttributes,
+        );
     }
 
     /**

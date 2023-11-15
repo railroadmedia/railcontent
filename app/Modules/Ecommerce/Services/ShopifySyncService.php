@@ -112,9 +112,6 @@ class ShopifySyncService
         ShopifyPaymentSourceEnum $paymentSource,
         ?string $currency
     ): void {
-        if (!config('shopify.enabled')) {
-            return;
-        }
         Log::debug("Start syncing purchase for user $user->id");
         // STEP 1: Is user synced?
         $customerShopifyId = $user->shopify_id;

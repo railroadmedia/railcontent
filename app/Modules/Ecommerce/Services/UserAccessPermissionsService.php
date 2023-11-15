@@ -522,24 +522,22 @@ class UserAccessPermissionsService
 
     private function handleUserPermissionsUpdatedEvent(User $user, OrderCollection $orderCollection = null): void
     {
-        if (config('shopify.enabled')) {
-            $accessPermissions = $this->getUserAccessPermissions($user->id);
-            $shouldSyncCIOWorkspaces = $this->getShouldSyncCustomerIOWorkspace(
-                $orderCollection,
-                $accessPermissions
-            );
-            $user->setCustomerIOSyncedWorkspaces($shouldSyncCIOWorkspaces);
-            $user->save();
+        $accessPermissions = $this->getUserAccessPermissions($user->id);
+        $shouldSyncCIOWorkspaces = $this->getShouldSyncCustomerIOWorkspace(
+            $orderCollection,
+            $accessPermissions
+        );
+        $user->setCustomerIOSyncedWorkspaces($shouldSyncCIOWorkspaces);
+        $user->save();
 
-            $subscriptions = null;
-            try {
-                $subscriptions = $this->subscriptionService->syncSubscriptionData($accessPermissions);
-            } catch (\Throwable $e) {
-                Log::error("Error syncing subscriptions for user: $user->id");
-                Log::error($e);
-            }
-            event(new UserAccessPermissionsUpdated($accessPermissions, $orderCollection, $subscriptions));
+        $subscriptions = null;
+        try {
+            $subscriptions = $this->subscriptionService->syncSubscriptionData($accessPermissions);
+        } catch (\Throwable $e) {
+            Log::error("Error syncing subscriptions for user: $user->id");
+            Log::error($e);
         }
+        event(new UserAccessPermissionsUpdated($accessPermissions, $orderCollection, $subscriptions));
     }
 
     private function getShouldSyncCustomerIOWorkspace(

@@ -70,17 +70,12 @@ class CohortPackController
         $productId = $cohort['product_id'];
         $product = $this->productService->getById($productId);
 
-        if (!config('shopify.enabled')) {
-            $hasProduct = user() && $this->userProductService->hasProductNotCached(user()?->id, $productId);
-            $nPackOwners = $this->userProductService->getNumberProductOwners($productId);
-        } else {
-            $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
-            $permissionID =
-                $product->getContentPermissions($contentPermissionsLookup)
-                    ->first()->id ?? null;
-            $hasProduct = user() && $this->userAccessPermissionsService->hasPermission(user()?->id, $permissionID);
-            $nPackOwners = $this->userAccessPermissionsService->getNumberPermissionOwners($permissionID);
-        }
+        $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
+        $permissionID =
+            $product->getContentPermissions($contentPermissionsLookup)
+                ->first()->id ?? null;
+        $hasProduct = user() && $this->userAccessPermissionsService->hasPermission(user()?->id, $permissionID);
+        $nPackOwners = $this->userAccessPermissionsService->getNumberPermissionOwners($permissionID);
         $registerButtonUrl =
             (!$hasProduct) ?
                 url()->route('platform.cohort.register', ['brand' => brand(), 'product' => $product->sku]) : '#final';
@@ -152,20 +147,14 @@ class CohortPackController
     ): JsonResponse|RedirectResponse {
         if (user()?->isAMember()) {
             $user = new User(user()->id, user()->email, user()->getMembershipExpirationDate());
-            if (config('shopify.enabled')) {
-                $product = $this->productService->getBySku($sku);
-                $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
-                    $user->getId(),
-                    [$product->id],
-                    Carbon::now(),
-                    '',
-                    UserAccessPermissionsSourceEnum::Challenges
-                );
-            } else {
-                /** @var Product $product */
-                $product = $this->productRepository->bySku($sku);
-                $this->ecommerceUserProductService->assignUserProduct($user, $product, null, 1);
-            }
+            $product = $this->productService->getBySku($sku);
+            $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
+                $user->getId(),
+                [$product->id],
+                Carbon::now(),
+                '',
+                UserAccessPermissionsSourceEnum::Challenges
+            );
 
             if ($request->expectsJson()) {
                 return response()->json(
