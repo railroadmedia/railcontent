@@ -747,7 +747,15 @@ return [
                 'allowableFilters' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
-            ]
+            ],
+            'challenge-part' => [
+                'name' => 'Challenge Part',
+                'icon' => 'icon-courses',
+                'description' => "Tackle your next drumming goal with bite-sized courses from many of the world's best drummers. ",
+                'allowableFilters' => ['instructor','duration'],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'sortBy' => '-published_on',
+            ],
         ],
         'pianote' => [
             'all' => [
