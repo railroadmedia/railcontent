@@ -1008,4 +1008,26 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return !$this->requires_password_update;
     }
+
+    public function associatedContent(): HasMany
+    {
+        return $this->hasMany(Content::class, 'associated_user_id');
+    }
+
+    /**
+     * @return Attribute
+     */
+    public function isCoach(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return boolval(
+                    $this->associatedContent()
+                        ->where("is_coach", true)
+                        ->where("status", "published")
+                        ->count()
+                );
+            },
+        );
+    }
 }
