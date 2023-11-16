@@ -95,7 +95,7 @@
         @php
             $bundles = [
                 [
-                    'slug' => 'https://www.pianote.com/drumshop/ultimate-lessons-bundle',
+                    'slug' => 'https://www.drumeo.com/shop/ultimate-lessons-bundle',
                     'desc' => 'Drumeo Discount<br class="sm:hidden"> + 10 Bonuses',
                     'full' => true,
                     'visible' => 1,
@@ -107,7 +107,7 @@
                     'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card-m.jpg',
                 ],
                 [
-                    'slug' => 'https://www.pianote.com/drumshop/better-hands-bundle',
+                    'slug' => 'https://www.drumeo.com/shop/better-hands-bundle',
                     'desc' => 'Easy Rudiments Book + QuietPad<br> + Drumsticks + PadStand',
                     'visible' => 1,
                     'price' => 199.95,
