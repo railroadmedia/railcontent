@@ -266,13 +266,16 @@
     'price' => "$127",
     'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
     'brandTitle' => 'Drumeo',
-    'extraClass' => 'h-28 sm:h-36 lg:h-48'
 ])
 
  <!-- Lessons Section -->
 @php
 
 $lessons = [
+            [
+        'title' => 'Course Setup',
+        'description' => 'Get ready for the course with ANY setup including an acoustic kit, electronic kit, practice pad... or even pillows!',
+    ],
     [
         'title' => 'Your First Drum Beat',
         'description' => "In week 1, you'll learn the beginnings of the most popular drum beat of all-time through 1 lesson, 5 workouts, and 1 pre-recorded Q&A."
@@ -298,11 +301,6 @@ $features = [
         'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/kick-off-30d-drummer.jpeg',
         'videoId' => 738756003, //850695588
     ],
-    [
-        'title' => 'Course Setup',
-        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/acoustic-kit-setup.jpeg',
-        'videoId' => 0,
-    ]
 ];
 @endphp
 
@@ -316,7 +314,7 @@ $features = [
     'lessons' => $lessons
 ])
 
-@php 
+@php
 $practiceItems = [
             [
                 "icon" =>
@@ -381,7 +379,7 @@ $items = [
                 <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 130%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
 
-            <div class="text-white text-left z-10 sm:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
+            <div class="text-white text-left z-10 sm:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 sm:max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
                 <h6 class="uppercase text-drumeo leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
                 <h2 class="text-center sm:text-left"><strong>Domino Santantonio</strong></h2>
                 <h6 class="leading-normal mt-4 lg:mt-6">Domino Santantonio is one of the world’s most viewed drummers.
