@@ -8,7 +8,7 @@
     <!-- BREADCRUMBS -->
     <breadcrumb
         brand="{{ $brand }}"
-        first-level-url="/{{ $brand }}/workouts" 
+        first-level-url="/{{ $brand }}/workouts"
         first-level-title="Workouts"
     >
     </breadcrumb>
@@ -53,7 +53,6 @@
                 <div>
                     <transition appear name="fade">
                         <catalogue-card-container
-                            theme-color="{{ $brand }}"
                             catalogue-type="grid"
                             no-results-message="Looks like you haven't started any lessons.
             Once you watch a video, it will show up here for you to access later."
@@ -70,7 +69,6 @@
         <br>
         <section>
             <collection-wrapper
-                :brand="{{ json_encode($brand) }}"
                 :collection-type="{{ json_encode($lessonType) }}"
                 :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
                 :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"
@@ -79,7 +77,6 @@
                 :statuses="{{ json_encode($statuses ?? ['published']) }}"
                 :title="{{ json_encode($catalogueMeta['shortname'] ?? $catalogueMeta['name']) }}"
             />
-
         </section>
     </div>
 @endsection
