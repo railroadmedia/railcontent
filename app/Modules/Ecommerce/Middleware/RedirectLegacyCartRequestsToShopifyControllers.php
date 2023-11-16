@@ -95,6 +95,12 @@ class RedirectLegacyCartRequestsToShopifyControllers
 
             $route->setAction($routeAction);
             $route->controller = false;
+
+        }
+
+        if ($request->path() == 'ecommerce/json/order-form/submit' && $request->method() == 'PUT') {
+            // in case any users have an open session since before the Shopify switch, just 404 them when they try to order
+            return abort(404);
         }
 
         return $next($request);
