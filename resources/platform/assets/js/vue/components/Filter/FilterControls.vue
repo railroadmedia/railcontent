@@ -1,6 +1,6 @@
 <template>
     <div class="tw-flex tw-flex-col md:tw-flex-row tw-w-full tw-justify-between">
-        <div class="tw-flex tw-grow tw-relative tw-items-center tw-mb-[18px]">
+        <div class="tw-flex tw-grow tw-relative tw-items-center tw-mb-5">
             <!-- Filter Tabs -->
             <filter-tabs v-if="tabOptions.length > 0" :active-tab="activeTab" :tab-options="tabOptions" @onTabClick="handleTabClick" />
             <div v-if="!hideFilter" class="tw-flex tw-grow tw-justify-end md:tw-hidden">
@@ -28,12 +28,12 @@
                 </button>
                 <button v-else @click="() => emit('onToggleCollapse')"
                     class="tw-hidden md:tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[50px] tw-h-[50px] tw-border-[2px] tw-border-[#CBCBCD] hover:tw-border-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-bg-[#000C17] hover:dark:tw-bg-white tw-text-[#000C17] dark:tw-text-white hover:tw-text-white hover:dark:tw-text-[#000C17] ">
-                    <AdjustmentsIcon class="tw-w-[18px] tw-h-[18px] tw-rotate-90" />
+                    <AdjustmentsIcon class="tw-w-[25px] tw-h-[25px] tw-rotate-90" />
                 </button>
             </template>
             <button @click="handleOpenDropdown"
                 class="tw-hidden md:tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[50px] tw-h-[50px] tw-border-[2px] tw-border-[#CBCBCD] tw-bg-white dark:tw-bg-[#000C17] dark:tw-border-white tw-rounded-full">
-                <musora-icon :icon-name="sortIcon()" class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
+                <musora-icon :icon-name="sortIcon()" class="tw-w-[25px] tw-h-[25px] tw-text-black dark:tw-text-white" />
             </button>
             <FilterSortDropdown v-if="showDropdown" :sortOptions="sortOptions" :selected-sort="()=>selectedSort" @onClose="handleCloseDropdown"
                 @onSort="value => $emit('onSort', value)" />
