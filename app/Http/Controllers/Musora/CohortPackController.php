@@ -32,23 +32,6 @@ class CohortPackController
         $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
-    public function registerFor30DayDrummer2(Request $request)
-    {
-        $sku = "30-day-drummer-2";
-        $successMessage = 'Success! You have registered for 30-Day Drummer. Check your email for the details.';
-
-        return $this->registerForProductPack($sku, $successMessage);
-    }
-
-    public function registerNewPianoPlayersStartHere(Request $request)
-    {
-        $sku = "new-piano-players-start-here";
-        $successMessage =
-            'Success! You have registered for New Piano Players Start Here. Check your email for the details.';
-
-        return $this->registerForProductPack($sku, $successMessage);
-    }
-
     /**
      * @param string $sku
      * @param string $successMessage

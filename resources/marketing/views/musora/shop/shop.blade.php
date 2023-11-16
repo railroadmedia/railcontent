@@ -175,319 +175,81 @@
         </div>
     @endif
 
-    <section class="catalogue-filters clearfix w-full">
-        <div class="container mx-auto">
-            <div class="md:flex justify-between md:px-3 lg:px-2">
-                <div class="filter-wrap clearfix">
-                <span
-                    class="filter float-left px-2 md:px-3 w-1/2 md:w-auto border-black"
-                    x-bind:class="filter === 'type' && 'active'"
-                    x-on:click="filter = 'type'"
-                >
-                    Type
-                </span>
-                <span
-                    class="filter float-left px-2 md:px-3 w-1/2 md:w-auto border-black"
-                    x-bind:class="filter === 'brand' && 'active'"
-                    x-on:click="filter = 'brand'"
-                >
-                    Brand
-                </span>
-                </div>
-                <div class="select-wrap relative px-3 md:px-0">
-{{--                    <select id="sortBySection" data-filter-type="sort-order" class="catalogue-filter w-full">--}}
-{{--                        <option class="selectable-option" disabled selected>Sort By..</option>--}}
-{{--                        <option class="selectable-option">Price: Low to High</option>--}}
-{{--                        <option class="selectable-option">Price: High to Low</option>--}}
-{{--                    </select>--}}
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-    <div class="white-box">
-        <div x-cloak x-show="filter === 'brand'">
-            {{--   DRUMEO     --}}
-            <section class="grid-view category-section" data-category="drumeo">
-                <ul class="container mx-auto fixed-cards">
-                    <div id="drumeo"></div>
-                    <li>
-                        <h1 class="px-2 md:px-3">
-                            <div class="heading-icon text-drumeo"><i class="fas fa-drum"></i></div>
-                            Drumeo
-                        </h1>
-                    </li>
-
-                    @foreach($drumeo as $item){
-                        @include('musora.shop._shop-card', [
-                             "sku" => $item->sku,
-                             "itemURL" => get_legacy_brand_base_url(strtolower($item->brand->name)).($item->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
-                             "badgeText" => $item->badge_text,
-                             "thumbnail" => $item->thumbnail,
-                             "title" => $item->name,
-                             "cardDescription" => $item->short_desc,
-                             "fullPrice" => $item->price,
-                             "price" => $item->discounted_price,
-                             "sizes" => $item->sizes,
-                             "soldOut" => !empty($products[$item->sku]) ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
-                             "size_case_sensitive" => $item->size_case_sensitive,
-                             "category" => strtolower($item->productType->name),
-                        ])
-                    }
-                    @endforeach
-                </ul>
-            </section>
-
-            {{--   Pianote     --}}
-            <section class="grid-view category-section" data-category="pianote">
-                <ul class="container mx-auto fixed-cards">
-                    <div id="pianote"></div>
-                    <li>
-                        <h1 class="px-2 md:px-3">
-                            <div class="heading-icon text-pianote"><i class="fas fa-piano-keyboard"></i></div>
-                            Pianote
-                        </h1>
-                    </li>
-
-                    @foreach($pianote as $item){
-                        @include('musora.shop._shop-card', [
-                             "sku" => $item->sku,
-                             "itemURL" => get_legacy_brand_base_url(strtolower($item->brand->name)).($item->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
-                             "badgeText" => $item->badge_text,
-                             "thumbnail" => $item->thumbnail,
-                             "title" => $item->name,
-                             "cardDescription" => $item->short_desc,
-                             "fullPrice" => $item->price,
-                             "price" => $item->discounted_price,
-                             "sizes" => $item->sizes,
-                             "soldOut" => !empty($products[$item->sku]) ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
-                             "size_case_sensitive" => $item->size_case_sensitive,
-                             "category" => strtolower($item->productType->name),
-                        ])
-                    }
-                    @endforeach
-                </ul>
-            </section>
-
-            {{--   Guitareo     --}}
-            <section class="grid-view category-section" data-category="guitareo">
-                <ul class="container mx-auto fixed-cards">
-                    <div id="guitareo"></div>
-                    <li>
-                        <h1 class="px-2 md:px-3">
-                            <div class="heading-icon text-guitareo"><i class="fas fa-guitar"></i></div>
-                            Guitareo
-                        </h1>
-                    </li>
-
-                    @foreach($guitareo as $item){
-                        @include('musora.shop._shop-card', [
-                             "sku" => $item->sku,
-                             "itemURL" => get_legacy_brand_base_url(strtolower($item->brand->name)).($item->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
-                             "badgeText" => $item->badge_text,
-                             "thumbnail" => $item->thumbnail,
-                             "title" => $item->name,
-                             "cardDescription" => $item->short_desc,
-                             "fullPrice" => $item->price,
-                             "price" => $item->discounted_price,
-                             "sizes" => $item->sizes,
-                             "soldOut" => !empty($products[$item->sku]) ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
-                             "size_case_sensitive" => $item->size_case_sensitive,
-                             "category" => strtolower($item->productType->name),
-                        ])
-                    }
-                    @endforeach
-                </ul>
-            </section>
-
-            {{--   Singeo     --}}
-            <section class="grid-view category-section" data-category="singeo">
-                <ul class="container mx-auto fixed-cards">
-                    <div id="singeo"></div>
-                    <li>
-                        <h1 class="px-2 md:px-3">
-                            <div class="heading-icon text-singeo"><i class="fas fa-microphone-stand"></i></div>
-                            Singeo
-                        </h1>
-                    </li>
-
-                    @foreach($singeo as $item){
-                        @include('musora.shop._shop-card', [
-                             "sku" => $item->sku,
-                             "itemURL" => get_legacy_brand_base_url(strtolower($item->brand->name)).($item->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
-                             "badgeText" => $item->badge_text,
-                             "thumbnail" => $item->thumbnail,
-                             "title" => $item->name,
-                             "cardDescription" => $item->short_desc,
-                             "fullPrice" => $item->price,
-                             "price" => $item->discounted_price,
-                             "sizes" => $item->sizes,
-                             "soldOut" => !empty($products[$item->sku]) ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
-                             "size_case_sensitive" => $item->size_case_sensitive,
-                             "category" => strtolower($item->productType->name),
-                        ])
-                    }
-                    @endforeach
-                </ul>
-            </section>
-
-            {{--   Musora     --}}
-            <section class="grid-view category-section" data-category="musora">
-                <ul class="container mx-auto fixed-cards">
-                    <div id="musora"></div>
-                    <li>
-                        <h1 class="px-2 md:px-3">
-                            <div class="heading-icon text-black"><i class="fas fa-music"></i></div>
-                            Musora
-                        </h1>
-                    </li>
-
-                    @foreach($musora as $item){
-                        @include('musora.shop._shop-card', [
-                             "sku" => $item->sku,
-                             "itemURL" => get_legacy_brand_base_url(strtolower($item->brand->name)).($item->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
-                             "badgeText" => $item->badge_text,
-                             "thumbnail" => $item->thumbnail,
-                             "title" => $item->name,
-                             "cardDescription" => $item->short_desc,
-                             "fullPrice" => $item->price,
-                             "price" => $item->discounted_price,
-                             "sizes" => $item->sizes,
-                             "soldOut" => !empty($products[$item->sku]) ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
-                             "size_case_sensitive" => $item->size_case_sensitive,
-                             "category" => strtolower($item->productType->name),
-                        ])
-                    }
-                    @endforeach
-                </ul>
-            </section>
-        </div>
-
-        <div x-cloak x-show="filter === 'type'">
-            {{--   HOODIES & SWEATERS    --}}
+    <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
+        <div>
             <section class="grid-view category-section" data-category="hoodies">
-                <ul class="container mx-auto fixed-cards">
-                    <div id="hoodiessweaters"></div>
-                    <li>
-                        <h1 class="px-2 md:px-3">
-                            <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hoodie.svg" style="filter: invert(0%) sepia(4%) saturate(0%) hue-rotate(309deg) brightness(93%) contrast(107%);"></div>
-                            Hoodies & Sweaters
-                        </h1>
-                    </li>
-                    @foreach($hoodies as $hoodie){
-                        @include('musora.shop._shop-card', [
-                             "sku" => $hoodie->sku,
-                             "itemURL" => get_legacy_brand_base_url(strtolower($hoodie->brand->name)).($hoodie->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
-                             "badgeText" => $hoodie->badge_text,
-                             "thumbnail" => $hoodie->thumbnail,
-                             "title" => $hoodie->name,
-                             "cardDescription" => $hoodie->short_desc,
-                             "fullPrice" => $hoodie->price,
-                             "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
-                             "sizes" => $hoodie->sizes,
-                             "soldOut" => !empty($products[$hoodie->sku]) ? $products[$hoodie->sku]->getStockAvailability() === 0 : $hoodie->sold_out,
-                             "category" => strtolower($hoodie->productType->name),
-                             "size_case_sensitive" => $hoodie->size_case_sensitive,
-                        ])
-                    }
-                    @endforeach
-                </ul>
-            </section>
+                <div class="container mx-auto">
+                    <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Hoodies</strong></h5>
+                    <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
 
-            {{--   SHIRTS     --}}
+                        @foreach($hoodies as $hoodie)
+                            @include('musora.shop._shop-card-alt', [
+                                 "sku" => $hoodie->sku,
+                                 "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
+                                 "badgeText" => $hoodie->badge_text,
+                                 "thumbnail" => $hoodie->thumbnail,
+                                 "title" => $hoodie->name,
+                                 "cardDescription" => $hoodie->short_desc,
+                                 "fullPrice" => $hoodie->price,
+                                 "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
+                                 "sizes" => $hoodie->sizes,
+                                 "soldOut" => isset($products[$hoodie->sku]) ? $products[$hoodie->sku]->getStockAvailability() === 0 : $hoodie->sold_out,
+                                 "category" => strtolower($hoodie->productType->name),
+                                 "size_case_sensitive" => $hoodie->size_case_sensitive,
+                            ])
+                        @endforeach
+                    </div>
+                </div>
+            </section>
             <section class="grid-view category-section" data-category="shirts">
-                <ul class="container mx-auto fixed-cards">
-                    <div id="shirts"></div>
-                    <li>
-                        <h1 class="px-2 md:px-3">
-                            <div class="heading-icon text-black"><i class="fas fa-tshirt"></i></div>
-                            T-shirts
-                        </h1>
-                    </li>
+                <div class="container mx-auto">
+                    <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Shirts</strong></h5>
+                    <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
 
-                    @foreach($shirts as $shirt){
-                    @include('musora.shop._shop-card', [
-                         "sku" => $shirt->sku,
-                         "itemURL" => get_legacy_brand_base_url(strtolower($shirt->brand->name)).($shirt->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
-                         "badgeText" => $shirt->badge_text,
-                         "thumbnail" => $shirt->thumbnail,
-                         "title" => $shirt->name,
-                         "cardDescription" => $shirt->short_desc,
-                         "fullPrice" => $shirt->price,
-                         "price" => $shirt->discounted_price,
-                         "sizes" => $shirt->sizes,
-                         "soldOut" => !empty($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
-                         "size_case_sensitive" => $shirt->size_case_sensitive,
-                         "category" => strtolower($shirt->productType->name),
-                    ])
-                    }
-                    @endforeach
-                </ul>
+                        @foreach($shirts as $shirt)
+                            @include('musora.shop._shop-card-alt', [
+                                 "sku" => $shirt->sku,
+                                 "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
+                                 "badgeText" => $shirt->badge_text,
+                                 "thumbnail" => $shirt->thumbnail,
+                                 "title" => $shirt->name,
+                                 "cardDescription" => $shirt->short_desc,
+                                 "fullPrice" => $shirt->price,
+                                 "price" => $shirt->discounted_price,
+                                 "sizes" => $shirt->sizes,
+                                 "soldOut" => isset($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
+                                 "size_case_sensitive" => $shirt->size_case_sensitive,
+                                 "category" => strtolower($shirt->productType->name),
+                            ])
+                        @endforeach
+                    </div>
+                </div>
             </section>
-
-            {{--   HATS     --}}
             <section class="grid-view category-section" data-category="hats">
-                <ul class="container mx-auto fixed-cards">
-                    <div id="hats"></div>
-                    <li>
-                        <h1 class="px-2 md:px-3">
-                            <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hat.svg" alt="hat icon" style="filter: invert(0%) sepia(4%) saturate(0%) hue-rotate(309deg) brightness(93%) contrast(107%);"></div>
-                            Hats
-                        </h1>
-                    </li>
+                <div class="container mx-auto">
+                    <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Hats</strong></h5>
+                    <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
 
-                    @foreach($hats as $hat){
-                    @include('musora.shop._shop-card', [
-                         "sku" => $hat->sku,
-                         "itemURL" => get_legacy_brand_base_url(strtolower($hat->brand->name)).($hat->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
-                         "badgeText" => $hat->badge_text,
-                         "thumbnail" => $hat->thumbnail,
-                         "title" => $hat->name,
-                         "cardDescription" => $hat->short_desc,
-                         "fullPrice" => $hat->price,
-                         "price" => $hat->discounted_price,
-                         "sizes" => $hat->sizes,
-                         "soldOut" => !empty($products[$hat->sku]) ? $products[$hat->sku]->getStockAvailability() === 0 : $hat->sold_out,
-                         "category" => strtolower($hat->productType->name),
-                         "size_case_sensitive" => $hat->size_case_sensitive,
-                    ])
-                    }
-                    @endforeach
+                        @foreach($hats as $hat)
+                            @include('musora.shop._shop-card-alt', [
+                                 "sku" => $hat->sku,
+                                 "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
+                                 "badgeText" => $hat->badge_text,
+                                 "thumbnail" => $hat->thumbnail,
+                                 "title" => $hat->name,
+                                 "cardDescription" => $hat->short_desc,
+                                 "fullPrice" => $hat->price,
+                                 "price" => $hat->discounted_price,
+                                 "sizes" => $hat->sizes,
+                                 "soldOut" => isset($products[$hat->sku]) ? $products[$hat->sku]->getStockAvailability() === 0 : $hat->sold_out,
+                                 "category" => strtolower($hat->productType->name),
+                                 "size_case_sensitive" => $hat->size_case_sensitive,
+                            ])
+                        @endforeach
 
-                </ul>
+                    </div>
+                </div>
             </section>
-
-            {{--   ACCESSORIES     --}}
-{{--            <section class="grid-view category-section" data-category="accessories">--}}
-{{--                <ul class="container mx-auto fixed-cards">--}}
-{{--                    <div id="accessories"></div>--}}
-{{--                    <li>--}}
-{{--                        <h1 class="px-2 md:px-3">--}}
-{{--                            <div class="heading-icon text-black"><i class="fas fa-suitcase"></i></div>--}}
-{{--                            Accessories--}}
-{{--                        </h1>--}}
-{{--                    </li>--}}
-{{--                    @foreach($accessories as $accessory){--}}
-{{--                    @include('musora.shop._shop-card', [--}}
-{{--                        "sku" => $accessory->sku,--}}
-{{--                        "itemURL" => get_legacy_brand_base_url(strtolower($accessory->brand->name)).($accessory->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),--}}
-{{--                        "badgeText" => $accessory->badge_text,--}}
-{{--                        "thumbnail" => $accessory->thumbnail,--}}
-{{--                        "title" => $accessory->name,--}}
-{{--                        "cardDescription" => $accessory->short_desc,--}}
-{{--                        "fullPrice" => $accessory->price,--}}
-{{--                        "price" => $accessory->discounted_price,--}}
-{{--                        "sizes" => $accessory->sizes,--}}
-{{--                        "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,--}}
-{{--                        "category" => strtolower($accessory->productType->name),--}}
-{{--                        "size_case_sensitive" => $accessory->size_case_sensitive,--}}
-{{--                    ])--}}
-{{--                    }--}}
-{{--                    @endforeach--}}
-{{--                </ul>--}}
-{{--            </section>--}}
         </div>
     </div>
 

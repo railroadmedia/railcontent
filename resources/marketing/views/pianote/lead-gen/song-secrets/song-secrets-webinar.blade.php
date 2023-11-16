@@ -279,7 +279,7 @@
                 <h3 class="leading-tight"><strong>The Fastest Way to Play <br class="sm:hidden"> Popular Songs on the Piano</strong></h3>
                 <p class="leading-normal text-sm my-3 sm:my-5 max-w-xs sm:max-w-full sm:px-4 lg:px-0"><em>Proven strategies to help you play the songs you love on the piano - <u>no matter what your age or experience level!</u> It’s never too late to play the songs you love on the piano. I’ll show you how!</em></p>
                 <div @click="enroll = true;" class="join white medium">ENROLL NOW FOR FREE</div>
-                <p class="text-sm mt-3 max-w-xs sm:max-w-full"><em>Choose a day and time that suits you, or watch right now.<br class="hidden sm:inline-block"> (Live chat only available during the 10am sessions.)</em></p>
+
             </div>
         </div>
     </header>
