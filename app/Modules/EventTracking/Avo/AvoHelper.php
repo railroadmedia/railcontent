@@ -29,9 +29,12 @@ class AvoHelper
     {
         $userAgent = strtolower(request()?->userAgent()) ?? '';
 
-        if (str_contains($userAgent, 'ios') || str_contains($userAgent, 'iphone') || str_contains($userAgent, 'ipad')) {
+        if (str_contains($userAgent, 'ios')
+            || str_contains($userAgent, 'iphone')
+            || str_contains($userAgent, 'ipad')
+            || str_contains($userAgent, 'cfnetwork')) {
             return 'ios';
-        } elseif (str_contains(strtolower($userAgent), 'android')) {
+        } elseif (str_contains($userAgent, 'android')) {
             return 'android';
         }
 
