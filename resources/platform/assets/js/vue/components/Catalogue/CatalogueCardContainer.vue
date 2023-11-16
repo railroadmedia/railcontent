@@ -15,7 +15,7 @@
                     :item="item"
                     :content-type="item.type"
                     :brand="brand"
-                    :theme-color="themeColor"
+                    :theme-color="brand"
                     :use-theme-color="useThemeColor"
                     :user-id="userId"
                     :is-admin="isAdmin"
@@ -27,7 +27,7 @@
                     :display-inline="displayInline"
                     @addToList="addToList"
                     @progressReset="resetProgressEventHandler"
-                    :show-dropdown="showDropdown" 
+                    :show-dropdown="showDropdown"
                 />
             </div>
         </div>
@@ -47,6 +47,8 @@ import { ref } from 'vue'
 // In order for the horizontal scroll to work, you need to make parent container a block.
 import CatalogueCard from '../Catalogue/CatalogueCard.vue';
 import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
+import {storeToRefs} from "pinia";
+import { useUserStore} from "../../../stores/user";
 
 const props = defineProps({
     isMiniView: {
@@ -56,10 +58,6 @@ const props = defineProps({
     preLoadedContent: {
         type: [Array, Object],
         default: () => [],
-    },
-    themeColor: {
-        type: String,
-        default: () => 'drumeo',
     },
     useThemeColor: {
         type: Boolean,
@@ -115,6 +113,9 @@ const props = defineProps({
     },
 },
 );
+
+const userStore = useUserStore();
+const { brand } = storeToRefs(userStore);
 
 const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, content: props.preLoadedContent.data });
 const content = ref(props.preLoadedContent ? props.preLoadedContent.data : []);

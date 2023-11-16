@@ -68,6 +68,7 @@
                         </span>
                         &nbsp;
                     </h6>
+                    <!-- Difficulty Label -->
                     <DifficultyLabel class="tw-text-xs" v-if="mappedData.difficulty" :difficulty="mappedData.difficulty" textCase="capitalize" />
                 </a>
                 <!-- Add to Playlist -->
@@ -262,10 +263,10 @@ const handleShowDropdown = (className) => {
 };
 
 const mappedData = computed(() => {
-    // const difficulties = ["BEGINNER", "INTERMEDIATE", "ADVANCED"];
-    // const randomIndex = Math.floor(Math.random() * difficulties.length);
-    
-    // contentModel.value.card.difficulty = difficulties[randomIndex];
+    const difficulties = ["BEGINNER", "INTERMEDIATE", "ADVANCED"];
+    const randomIndex = Math.floor(Math.random() * difficulties.length);
+
+    contentModel.value.card.difficulty = difficulties[randomIndex];
     return contentModel.value.card
 });
 
