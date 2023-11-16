@@ -371,8 +371,8 @@ $items = [
     'brandTitle' => 'Drumeo'])
 
  <!-- Meet your teacher section -->
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container max-w-5xl mx-auto mb-14 lg:mb-16">
+    <section class="text-center sm:px-6 pt-10 sm:py-14 lg:py-20">
+        <div class="container max-w-5xl mx-auto lg:mb-16">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
                 <div class="w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
                     <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=100/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-profile-m2.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
