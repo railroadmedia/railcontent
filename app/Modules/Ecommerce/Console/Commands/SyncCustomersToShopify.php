@@ -14,6 +14,7 @@ use App\Modules\Ecommerce\Jobs\Shopify\Traits\SyncsShopifyCustomer;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Exception\ORMException;
+use Doctrine\ORM\QueryBuilder;
 use Illuminate\Support\Collection;
 use Railroad\Ecommerce\Entities\Customer;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
@@ -43,6 +44,7 @@ class SyncCustomersToShopify extends Command
     protected $signature = 'shopify:sync-customers
                             {--limit= : (Optional) The number of customers to limit this run to.}
                             {--since= : (Optional) The ISO 8601 date time to sync all changes since. e.g. 2023-10-13T17:03:25+00:00}
+                            {--email= : (Optional) email address to limit this sync to.}
                             {--fresh : Sync all customers, not just those that need it}
                             {--execute : Execute this sync to Shopify. Without this flag, it will be simulated.}';
 
@@ -587,5 +589,17 @@ class SyncCustomersToShopify extends Command
             return new Carbon($override);
         }
         return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function addAdditionalScope(QueryBuilder &$queryBuilder): void
+    {
+        $email = $this->option("email");
+        if ($email) {
+            $queryBuilder->andWhere($queryBuilder->expr()->eq('entity.email', ':email'))
+                ->setParameter("email", $email);
+        }
     }
 }

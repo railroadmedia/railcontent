@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Console\Commands\Traits;
 use App\Models\ShopifySync;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
@@ -174,6 +175,8 @@ trait SyncsToShopify
                 ->setParameter("endingId", $endAtId);
         }
 
+        $this->addAdditionalScope($qb);
+
         if ($this->getLimit()) {
             $qb->setMaxResults($this->getLimit());
         }
@@ -211,6 +214,14 @@ trait SyncsToShopify
      * @return Carbon|null
      */
     abstract protected function getLastSyncAtOverride(): null|Carbon;
+
+    /**
+     * Add any additional query scopes
+     *
+     * @param  QueryBuilder  $queryBuilder
+     * @return void
+     */
+    abstract protected function addAdditionalScope(QueryBuilder &$queryBuilder): void;
 
     /**
      * Get the optional limit to the number of entities to sync
