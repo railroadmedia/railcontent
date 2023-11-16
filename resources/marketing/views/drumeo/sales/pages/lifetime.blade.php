@@ -66,7 +66,8 @@
         ])
         <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #094073 50%, #000C16);">
             <div class="container mx-auto">
-                <h1 class="leading-none"><strong>Get drum lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
+                <h1 class="leading-none"><strong>A <span class="text-musora">Lifetime</span> Of Drum Lessons </strong></h1>
+                <h4 class="leading-tight">(plus your choice of sticks, in-ears, or a StickBag!)</h4>
                 <div class="w-full mx-auto my-4 sm:my-8 " style="max-width:920px;">
                     <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
                         <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/774477396" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>
@@ -88,25 +89,26 @@
         </section>
 
     <section class="text-center px-3 sm:px-5 py-10 md:py-14 lg:py-16 px-2 md:px-4 relative overflow-hidden">
-        <div class="container mx-auto max-w-4xl z-10 relative">
+        <div class="container mx-auto max-w-5xl z-10 relative">
             <h2 class="leading-tight mb-2"><strong>The Lifetime Advantage</strong></h2>
-            <p class="leading-tight"><em>You’ll have a lifetime of unlimited drum lessons for the <br class="hidden sm:inline lg:hidden"> price of 5 years of access to Drumeo ($1200 total).</em></p>
-            <img class="my-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/timeline.png">
-            <div class="flex flex-wrap sm:flex-nowrap items-start lg:items-center justify-center">
+            <p class="leading-tight mb-5"><em>You’ll have a lifetime of unlimited drum lessons for the <br class="hidden sm:inline lg:hidden"> price of 5 years of access to Drumeo ($1200 total).</em></p>
+            <img class="w-full max-w-3xl mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/timeline.png">
+            <div class="flex flex-wrap sm:flex-nowrap items-start justify-center">
                 <div class="order-1 sm:order-0 text-left sm:pr-5 lg:pr-7">
-                    <p class="leading-relaxed my-5">
-                        For the price of 5 years Drumeo access, you’ll get:
-                    </p>
-                    <ul class="leading-tight">
-                        <li><i class="fas fa-check text-drumeo mr-2"></i> Unlimited drum lessons for life</li>
-                        <li><i class="fas fa-check text-drumeo mr-2"></i> Your choice of 3 bonuses (see below)</li>
-                        <li><i class="fas fa-check text-drumeo mr-2"></i> Piano, guitar, and singing lessons included</li>
-                        <li><i class="fas fa-check text-drumeo mr-2"></i> An option to split payments over 1, 2 or 5 installments</li>
-                    </ul>
-                    <p class="leading-relaxed my-5">
-                        We know this invitation isn’t for everyone… but if you see yourself playing & learning the drums for 5 or more years, a Lifetime Membership gives you the <strong>best value</strong>.
+                    <p class="leading-relaxed">
+                        <em>“My soul is that of a drummer. I didn’t do it to become rich and famous. I did it because it was the love of my life.” – Ringo Starr</em>
                         <br><br>
-                        Scroll down to see everything included and click the button to explore payment options.
+                        If you feel like Ringo, we want to invite you to make a lifelong commitment to your drumming.
+                        <br><br>
+                        Drumeo Lifetime Memberships are back – for Black Friday ONLY!
+                        <br><br>
+                        This is your chance to make one final payment for your Drumeo Membership and then enjoy unlimited drum lessons, song breakdowns, and LIVE events with your favorite drummers for years to come.
+                        <br><br>
+                        <span class="bg-musora"><strong>And heads up:</strong> You can split the payment for 1, 2, or 5 installments. (You’ll see that option upon checkout.)</span>
+                        <br><br>
+                        You’ll also get to a free bonus of your choice: A brick of drumsticks, Drumeo EarDrums, OR the all new Drumeo StickBag.
+                        <br><br>
+                        Scroll down to see everything included with your Drumeo Lifetime Membership and we’ll see you with your little infinity badge around your name very soon!
                     </p>
                 </div>
                 <img

@@ -26,7 +26,7 @@
         [
             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/p4.jpg',
             'title' => 'Practice Pad',
-            'description' => '',
+            'description' => 'The most versatile practice pad in the world, featuring four playing surfaces on three different levels for simulating movement around the kit.',
             'price' => floatval($productPrices['practicepad']->price),
             'shipping' => true,
         ],

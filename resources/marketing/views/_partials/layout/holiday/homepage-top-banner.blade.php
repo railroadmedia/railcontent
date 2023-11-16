@@ -14,13 +14,13 @@ style="
                     'styles' => 'h-8 sm:h-10 mx-auto'
                 ])
             </a>
-            <h3 class="leading-tight my-4"><strong>{!! $text !!}</strong></h3>
+            <h3 class="leading-tight my-4"><strong>{!! $text2 !!}</strong></h3>
             <div class="w-full mx-auto my-8">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
                     <iframe class="absolute w-full h-full reset-on-close bg-black" src="//player.vimeo.com/video/{{ $vimeo }}" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
             </div>
-            <h3 class="leading-tight mb-3"><s class="opacity-60">${{ $fullPrice }}</s> <strong>$150</strong> <span class="text-promo">SAVE {{ round(100 - (100 * (150 / $fullPrice))) }}%</span> </h3>
+            <h3 class="leading-tight mb-3"><s class="opacity-60">$240</s> <strong>$150</strong> <span class="text-promo">SAVE {{ round(100 - (100 * (150 / 240))) }}%</span> </h3>
             <a class="join promo" href="{{ $orderUrl }}">GET STARTED &raquo;</a>
             <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
                 <div class="inline-block">
