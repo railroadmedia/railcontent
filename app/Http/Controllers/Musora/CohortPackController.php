@@ -63,18 +63,13 @@ class CohortPackController
 
             /** @var Product $product */
             $product = $this->productRepository->bySku($sku);
-            if (config('shopify.enabled')) {
-                $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
-                    $user->getId(),
-                    [$product->getId()],
-                    Carbon::now(),
-                    '',
-                    UserAccessPermissionsSourceEnum::Challenges
-                );
-            } else {
-                $this->userProductService->assignUserProduct($user, $product, null, 1);
-            }
-
+            $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
+                $user->getId(),
+                [$product->getId()],
+                Carbon::now(),
+                '',
+                UserAccessPermissionsSourceEnum::Challenges
+            );
             return redirect()
                 ->back()
                 ->with(
