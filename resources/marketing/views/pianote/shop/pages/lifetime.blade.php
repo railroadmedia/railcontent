@@ -115,7 +115,8 @@
                         <strong>$1200</strong>
                     @endif
                 </h2>
-                <p class="leading-tight text-sm"><em>One time payment or choose a <br class="sm:hidden">payment plan on the next page.</em></p>
+                <p class="leading-tight text-sm"><em>One time payment or choose a <br class="sm:hidden">
+                        payment plan below.</em></p>
                 <a class="join smaller drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
 {{--                <p class="leading-tight mt-4 text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
             </div>
@@ -259,7 +260,7 @@
                         <strong>$1200</strong>
                     @endif
                 </h2>
-                <p class="leading-tight text-sm">One time payment or choose a payment plan on the next page.</p>
+                <p class="leading-tight text-sm">One time payment or choose a payment plan below.</p>
                 <a class="join mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
 {{--                <p class="mt-4 md:mt-5 leading-tight text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
                 <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get 13 free Black Friday bonuses.</strong></h3>

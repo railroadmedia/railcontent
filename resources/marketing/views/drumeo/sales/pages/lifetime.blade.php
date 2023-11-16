@@ -80,7 +80,8 @@
                             <strong>$1200</strong>
                         @endif
                     </h2>
-                    <p class="leading-tight text-sm"><em>One time payment or choose a <br class="sm:hidden">payment plan on the next page.</em></p>
+                    <p class="leading-tight text-sm"><em>One time payment or choose a <br class="sm:hidden">
+                            payment plan below.</em></p>
                     <a class="join smaller drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
 {{--                    <p class="mt-4 leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
                 </div>
@@ -103,7 +104,7 @@
                         <br><br>
                         This is your chance to make one final payment for your Drumeo Membership and then enjoy unlimited drum lessons, song breakdowns, and LIVE events with your favorite drummers for years to come.
                         <br><br>
-                        <span class="bg-musora"><strong>And heads up:</strong> You can split the payment for 1, 2, or 5 installments. (You’ll see that option upon checkout.)</span>
+                        <span class="bg-musora"><strong>And heads up:</strong> You can split the payment for 3 installments. (You’ll see that option at the bottom of the page.)</span>
                         <br><br>
                         You’ll also get to a free bonus of your choice: A brick of drumsticks, Drumeo EarDrums, OR the all new Drumeo StickBag.
                         <br><br>
@@ -204,7 +205,7 @@
             </h2>
             <p class="leading-tight text-sm"><em>
                     One time payment or choose a <br class="sm:hidden">
-                    payment plan on the next page.</em></p>
+                    payment plan below.</em></p>
             <a
                 class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
                 style="padding: 20px 10px;"
