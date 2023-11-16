@@ -252,17 +252,20 @@ class OnboardingController extends Controller
     {
         $request->validate([
             'brand' => 'required',
-            'skippedStep' => 'required'
+            'skippedStep' => 'nullable'
         ]);
 
-        $userAttribute = $request->get('brand') . '_onboarding_skip_setup';
+        $brand = $request->get('brand');
+        $skippedStep = $request->get('skippedStep');
+
+        $userAttribute = $brand . '_onboarding_skip_setup';
         user()->{$userAttribute} = true;
         user()->save();
 
         Avo::onboarding_skipped(
             AvoHelper::defaultEventProperties([
-                'step_skipped' => strtolower($request->get('skippedStep')),
-                'brand' => $request->get('brand'),
+                'step_skipped' => $skippedStep ? strtolower($skippedStep) : null,
+                'brand' => $brand,
             ])
         );
 
