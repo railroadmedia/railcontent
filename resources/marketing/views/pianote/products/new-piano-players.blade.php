@@ -78,7 +78,7 @@
     @include('drumeo.products.partials.evergreen._header', [
     'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/new-piano-players/new-piano-players-logo.png',
     'logoAlt' => '30 day new piano players logo',
-    'rotatingText' => ['Sound beautiful', 'Learn the piano', 'Play real songs'],    
+    'rotatingText' => ['Sound beautiful', 'Learn the piano', 'Play real songs'],
     'subtitle' => 'in just 30 days.',
     'checklist' => ['Learn By Doing', 'Play Every Day', 'No Theory Required'],
     'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/header-right-collage.png',
@@ -135,11 +135,11 @@ $lessons = [
     'title' => 'Learn the piano in 30 days.',
     'description' => "Piano lessons can be super intimidating. “So many keys! All that music theory! How do I even get my hands to play at the same time?!”
     <br/> <br/>
-    New Piano Players Start Here is <em>different</em>. You just sit down, press play, and follow along as Lisa guides you through a daily 10-minute lesson. 
+    New Piano Players Start Here is <em>different</em>. You just sit down, press play, and follow along as Lisa guides you through a daily 10-minute lesson.
      <br/> <br/>
     No complicated theory. No need to read music. No frustration.
       <br/> <br/>
-    Lisa focuses on the <em>fun</em> and gets you playing songs from day one. By the time you’re done, you’ll have a well-established piano playing habit, some very important skills, and the confidence that <strong>YES!</strong> 
+    Lisa focuses on the <em>fun</em> and gets you playing songs from day one. By the time you’re done, you’ll have a well-established piano playing habit, some very important skills, and the confidence that <strong>YES!</strong>
      <br/> <br/>
     <strong><em>You</em> can play the piano.</strong>",
     'features' => $features,
@@ -147,10 +147,10 @@ $lessons = [
     'instructor' => ' Lisa Witt',
     'course' => ' 30 Days (20 Workouts + 4 Q&As)',
     'lessons' => $lessons
-])   
+])
 
 
-@php 
+@php
 $practiceItems = [
             [
                 "icon" =>
@@ -176,7 +176,7 @@ $practiceItems = [
             ]
 @endphp
 
-   
+
 <!-- Songs subsection -->
 @include('drumeo.products.partials.evergreen._dropdown', [
     'bgClass' => 'bg-slate-900',
@@ -213,10 +213,10 @@ $items = [
                     <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/profile-pic.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/profile-pic.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 150%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
-                
+
                 </div>
-                    
-                    <div class="text-white text-left z-10 sm:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
+
+                    <div class="text-white text-left z-10 sm:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 sm:max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
 
                     <h6 class="uppercase text-pianote leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
                     <h2 class="text-center sm:text-left"><strong>Lisa Witt</strong></h2>
@@ -238,7 +238,7 @@ $items = [
                         alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
             </div>
-        </div>      
+        </div>
     </section>
 @php
                     $testimonials = [
