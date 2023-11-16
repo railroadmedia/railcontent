@@ -88,7 +88,10 @@
     'buttonLink' => $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'piano players'
+    'students' => 'piano players',
+     'price' => "$127",
+    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
+    'brandTitle' => 'Pianote',
 ])
 
 <!-- Lessons Section -->
@@ -101,44 +104,28 @@ $features = [
         'videoId' => 797858259,
     ],
     [
-        'title' => 'Let’s Get Started',
+        'title' => 'Quick-Start Guide To The Piano',
         'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/get-started.jpg',
-        'videoId' => 797858281,
+        'videoId' => "",
     ],
 ];
 
 $lessons = [
     [
-        'title' => 'Your First Chord Progression - 1 Lesson + 5 Workouts',
-        'description' => "This week you'll learn your first chord progression! We'll take it one hand at a time and build up your confidence."
+        'title' => 'Your First Chord Progression',
+        'description' => "In week 1, you'll learn your first chord progression from start to finish and build your confidence through 1 lesson, 5 workouts, and a pre-recorded Q&A."
     ],
     [
-        'title' => 'Pre-Recorded Q&A - Your First Chord Progression',
-        'description' => "In this pre-recorded Q&A, we answer some of our students' excellent questions about the week's lessons."
+        'title' => 'Build Real Chords',
+        'description' => "In week 2, you'll learn triads and different hand movements needed to build real chords with 1 lesson, 5 workouts, and a pre-recorded Q&A. "
     ],
     [
-        'title' => 'Real Chords - 1 Lesson + 5 Workouts',
-        'description' => "During your second week, you'll gain confidence in triads and the different hand movements needed to build real chords!"
+        'title' => 'Create Beautiful Patterns',
+        'description' => "In week 3, you'll learn about quarter notes and half notes and use them to create patterns through 1 lesson, 5 workouts, and a pre-recorded Q&A. "
     ],
     [
-        'title' => 'Pre-Recorded Q&A - Real Chords',
-        'description' => "In this pre-recorded Q&A, we answer some of our students' excellent questions about the week's lessons."
-    ],
-    [
-        'title' => 'Rhythm - 1 Lesson + 5 Workouts',
-        'description' => "In week three, you'll learn about quarter notes and half notes and use them to create beautiful musical patterns."
-    ],
-     [
-        'title' => 'Pre-Recorded Q&A - Rhythm',
-        'description' => "In this pre-recorded Q&A, we answer some of our students' excellent questions about the week's lessons."
-    ],
-     [
-        'title' => 'Making It Fancy - 1 Lesson + 5 Workouts',
-        'description' => "During your fourth week, you'll pull together everything you've learned and add a few sprinkles of fancy leading up to playing a song onyour own!"
-    ],
-     [
-        'title' => 'Pre-Recorded Q&A - Making It Fancy',
-        'description' => "In this pre-recorded Q&A, we answer some of our students' excellent questions about the week's lessons."
+        'title' => 'Play Your First Song!',
+        'description' => "In week 4, you'll pull together everything you've learned and add a few sprinkles of fancy leading into playing a song on your own!"
     ],
 ];
 @endphp

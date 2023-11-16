@@ -239,7 +239,10 @@
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
     'students' => 'piano players',
-    'extraClass' => 'h-20 sm:h-24 lg:h-32'
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
+    'brandTitle' => 'Pianote',
+    'extraClass' => 'h-20 sm:h-24 lg:h-32',
 ])
 
 
@@ -248,52 +251,20 @@
 
 $lessons = [
     [
-        'title' => 'Blues Foundations - 5 mini-lessons + 5 workouts',
-        'description' => "In week one, you'll dive right into the 12-bar blues, develop some rhythm, and get both your hands playing."
-    ],
-    [
-        'title' => 'Your Questions Answered — Week #1',
-        'description' => "In this pre-recorded Q&A, Kevin answers questions about the 12-bar blues and rhythm lessons you've learned this week."
-    ],
-    [
-        'title' => 'Week #1 — Rest & Review',
-        'description' => "This is your day to take a break or get in some extra practice time!"
+        'title' => 'Blues Foundations',
+        'description' => "In week 1, you'll dive into the 12-bar blues, develop rhythm, and get both hands playing with 5 workouts and a pre-recorded Q&A."
     ],
     [
         'title' => 'Building Confidence & Adding Scales',
-        'description' => "Week two is all about building up your confidence with the blues progression and the rhythm you have been working on. You will also learn three different scales: pentatonic, major blues, and minor blues."
-    ],
-    [
-        'title' => 'Your Questions Answered — Week #2',
-        'description' => "In this pre-recorded Q&A, Kevin answers questions about everything you've learned this week."
-    ],
-    [
-        'title' => 'Week #2 — Rest & Review',
-        'description' => "This is your day to take a break or get in some extra practice time!"
+        'description' => "In week 2, you'll build confidence with the blues progression and rhythm through 5 workouts and a pre-recorded Q&A."
     ],
     [
         'title' => 'Blues Riffs & Fills',
-        'description' => "Week three has you learning some simple riffs that anyone can play, as well as some of the more iconic blues riffs and fills."
+        'description' => "In week 3, you'll learn simple riffs alongside iconic riffs and fills through 5 workouts and a pre-recorded Q&A."
     ],
     [
-        'title' => 'Your Questions Answered — Week #3',
-        'description' => "In this pre-recorded Q&A, Kevin answers questions about riffs and fills!"
-    ],
-    [
-        'title' => 'Week #3 — Rest & Review',
-        'description' => "This is your day to take a break or get in some extra practice time!"
-    ],
-    [
-        'title' => 'Storytelling with Solos - 5 mini-lessons + 5 workouts',
-        'description' => "In this pre-recorded Q&A, Kevin answers questions about everything you've learned this week."
-    ],
-    [
-        'title' => 'Week #4 — Rest & Review',
-        'description' => "This is your day to take a break or get in some extra practice time!"
-    ],
-    [
-        'title' => '30-Day Blues Piano Celebration',
-        'description' => "You did it! Celebrate your completion of 30-Day Blues Piano with a special video."
+        'title' => 'Storytelling With Solos',
+        'description' => "In week 4, everything you've learned will be brought together and you'll craft your story for your very own blues piano solo!"
     ],
 ];
 
@@ -306,7 +277,7 @@ $features = [
     [
         'title' => 'Blues Essentials',
         'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/essentials-30-day-blues.jpg',
-        'videoId' => 851379154,
+        'videoId' => "",
     ],
 ];
 @endphp
@@ -373,76 +344,20 @@ $items = [
 @endphp
 
 <!-- Get started-->
-@php
-    $logo = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png';
-    $items = $items;
-    $buttonText = 'GET STARTED';
-    $buttonLink = $registerButtonUrl;
-    $studentProfilesImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png';
-    $numStudents = number_format($nPackOwners ?? 0);
-    $students = 'piano players';
-    $price = "$127";
-    $enrollmentLink = 'https://www.pianote.com/choose-plan';
-    $brandTitle = 'Pianote'
-@endphp
 
-    <section class="text-center px-6 pb-4 md:py-6 bg-blue-50">
-        <div class="container max-w-4xl mx-auto">
-            <div class="flex flex-wrap sm:flex-nowrap items-center justify-center py-4">
-                <img class="h-32 md:h-64 lg:h-72 py-4 lazyload" data-src={{ $logo }} alt="logo">
-                <ul class="pl-6">
-                    @foreach ($items as $item)
-                        <li>
-                            <h4 class="leading-loose text-left"><i
-                                    class="fas fa-sharp fa-solid fa-circle-check text-{{ $brand }} mr-5"
-                                    aria-hidden="true"></i>{{ $item }}</h4>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-            {{-- <a href={{$buttonLink}} class="join blue medium w-full sm:w-1/2 md:w-1/3 lg:w-3/5 mt-6 sm:mt-12 mb-3 anchor-slide" role="button">{{$buttonText}}</a><br> --}}
-            <div class="w-full flex flex-col items-center">
-                   <div class="w-full sm:w-1/2 md:w-1/3">
-            @include('drumeo.products.partials.evergreen._button', [
-                'link' => $buttonLink,
-                'buttonClass' => 'text-white font-bebas tracking-widest',
-                'buttonText' => $buttonText,
-            ])
-</div>
-                <div class="flex flex-row items-center py-2">
-                     @if ($numStudents > 500)
-                    <img class="h-7 mr-2 lazyload" alt="Joined Student Profiles" data-src={{ $studentProfilesImage }}>
-                    <span class="inline-block align-middle leading-tight text-xs">Join
-                        {{ $numStudents }} {{ $students }} who<br> have already registered.
-                    </span>
-                    @endif
-                </div>
-            </div>
-{{--             @if (!empty($price) || !empty($enrollmentLink) || !empty($brandTitle))--}}
-{{--                <p class="text-sm mb-5 sm:mb-0 hover:text-{{ $brand }}">--}}
-{{--                    @if (!empty($price))--}}
-{{--                        <a href={{ $enrollmentLink }}>--}}
-{{--                            <span class="text-black text-xl">--}}
-{{--                                <strong>{{ $price }}</strong>--}}
-{{--                            </span>--}}
-{{--                            <span class="opacity-50 underline"> or get it free with a {{ $brandTitle }}--}}
-{{--                                Membership.</span>--}}
-{{--                        </a>--}}
-{{--                    @else--}}
-{{--                        <a href={{ $enrollmentLink }}>--}}
-{{--                            <span class="text-black leading-tight text-center mb-1 md:mb-2">--}}
-{{--                                <strong>{{ $price }}</strong>--}}
-{{--                            </span>--}}
-{{--                            Get it free with a {{ $brandTitle }} Membership.--}}
-{{--                        </a>--}}
-{{--                    @endif--}}
-{{--                </p>--}}
-{{--            @endif--}}
-        </div>
-    </section>
-
-
-
+@include('drumeo.products.partials.evergreen._get-started', [
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png',
+    'items' => $items,
+    'buttonText' => 'GET STARTED',
+    'buttonLink' =>  $registerButtonUrl,
+    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
+    'numStudents' =>  number_format($nPackOwners ?? 0),
+    'students' => 'piano players',
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
+    'brandTitle' => 'Pianote',
+    'extraClass' => 'h-32 md:h-64 lg:h-72 py-4'
+])
 
  <!-- Meet your teacher section -->
     <section class="text-center sm:px-6 pt-10 sm:pt-14 lg:pt-20 sm:pb-32 lg:pb-40">

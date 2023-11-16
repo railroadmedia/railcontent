@@ -34,36 +34,21 @@
                             </div>
                         </div>
 
-                        <div class="w-full md:w-2/3 sm:flex py-2 md:py-0 items-center">
+                        {{-- <div class="w-full md:w-2/3 sm:flex py-2 md:py-0 items-center">
                              @if ($numStudents > 500)
                             <img class="h-7 mr-2 lazyload" data-src="{{ $studentProfilesImage }}"
                                 alt="{{ $profileImageAlt }}">
                             <span class="inline-block align-middle leading-tight text-xs py-2">Join {{ $numStudents }}
                                 {{ $students }} who have already registered.</span>
                             @endif
-                        </div>
+                        </div> --}}
 
                     </div>
-{{--                    @if (!empty($price) || !empty($enrollmentLink) || !empty($brandTitle))--}}
-{{--                <p class="text-sm mb-5 sm:mb-0 hover:text-{{ $brand }} py-4 text-center">--}}
-{{--                    @if (!empty($price))--}}
-{{--                        <a href={{ $enrollmentLink }}>--}}
-{{--                            <span class="text-black text-2xl block">--}}
-{{--                                <strong>{{ $price }}</strong>--}}
-{{--                            </span>--}}
-{{--                            <span class="opacity-50 underline"> Or click here to get it free with a {{ $brandTitle }}--}}
-{{--                                Membership.</span>--}}
-{{--                        </a>--}}
-{{--                    @else--}}
-{{--                        <a href={{ $enrollmentLink }}>--}}
-{{--                            <span class="text-black leading-tight mb-1 md:mb-2">--}}
-{{--                                <strong>{{ $price }}</strong>--}}
-{{--                            </span>--}}
-{{--                            Get it free with a {{ $brandTitle }} Membership.--}}
-{{--                        </a>--}}
-{{--                    @endif--}}
-{{--                </p>--}}
-{{--            @endif--}}
+@include('drumeo.products.partials.evergreen._price-link', [
+            'price' => $price,
+            'enrollmentLink' => $enrollmentLink,
+            'brandTitle' => $brandTitle,
+        ])
                 </div>
             </div>
             <div

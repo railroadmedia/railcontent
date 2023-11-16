@@ -305,7 +305,10 @@
     'buttonLink' =>  $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'piano players'
+    'students' => 'piano players',
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
+    'brandTitle' => 'Pianote',
 ])
 
 
@@ -317,66 +320,25 @@ $features = [
         'title' => 'Course Kick-Off',
         'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/easy-chords/kick-off.jpg',
         'videoId' => 824209135,
-    ],
-    [
-        'title' => 'Let’s Get Started',
-        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/easy-chords/start-lesson-poster.jpg',
-        'videoId' => 824211328,
-    ],
+    ]
 ];
 
 $lessons = [
     [
-        'title' => 'The Happiest Chord Progression - 5 Workouts',
-        'description' => "In week one, get introduced to the 1-5-6-4 progression and work up to your first first inversion."
+        'title' => 'The Happiest Chord Progression',
+        'description' => "In week 1, you'll learn the 1-5-6-4 chord progression and work up to your first inversion with 5 workouts and a pre-recorded Q&A."
     ],
     [
-        'title' => 'Pre-Recorded Q&A - Your Questions Answered',
-        'description' => "In this pre-recorded Q&A, Kevin Castro joins in to answer some of our students' excellent questions about the week's lessons."
+        'title' => 'Moving With Confidence',
+        'description' => "In week 2, you'll build confidence with the 1st inversion chord and learn how to move smoothly with 5 workouts and a pre-recorded Q&A."
     ],
     [
-        'title' => 'Week 1 - Rest & Review',
-        'description' => "Join Lisa as she reviews everything you've achieved this week, then have a rest (or maybe add a little extra practice!)"
+        'title' => 'The Dramatic Chord Progression',
+        'description' => "In week 3, we'll shift from happy to dramatic with 2nd inversion chords through 5 workouts and a pre-recorded Q&A."
     ],
     [
-        'title' => 'Moving With Confidence - 5 Workouts',
-        'description' => "In week two, you'll build deeper confidence with the 1st inversion chord and learn how to move smoothly through the Happiest Chord Progression."
-    ],
-    [
-        'title' => 'Pre-Recorded Q&A - Your Questions Answered - Part 2',
-        'description' => "In this pre-recorded Q&A, Lisa takes up questions on this challenging week. There's plenty to learn!"
-    ],
-    [
-        'title' => 'Week 2 - Rest & Review',
-        'description' => "Join Lisa as she reviews everything you've achieved this week, then have a rest (or maybe add a little extra practice!)"
-    ],
-    [
-        'title' => 'A New Chord Progression - 5 Workouts',
-        'description' => "In week three, the chords are the same but the order changes. You'll go from happy to dramatic with 2nd inversion chords."
-    ],
-    [
-        'title' => 'Pre-Recorded Q&A - Your Questions Answered - Part 3',
-        'description' => "In this pre-recorded Q&A, Lisa answers our students' questions and helps them past their sticking points."
-    ],
-    [
-        'title' => 'Week 3 - Rest & Review',
-        'description' => "Join Lisa as she reviews the week, shares where you can use what you've learned, and hints at where you can go next."
-    ],
-    [
-        'title' => 'Connecting The Dots - 5 Workouts',
-        'description' => "In week four, you'll pull together your moody progression with your root, 1st, and 2nd inversion chords. It's going to sound beauitful."
-    ],
-    [
-        'title' => 'Pre-Recorded Q&A - Your Questions Answered - Part 4',
-        'description' => "In this final pre-recorded Q&A, you'll find answers to questions from students just like you."
-    ],
-    [
-        'title' => 'Week 4 - Rest & Review',
-        'description' => "You've completed Easy Chords! Take a rest, but first watch this to find out where to go next."
-    ],
-    [
-        'title' => 'Easy Chords Celebration',
-        'description' => "Join Lisa and Kevin in this special celebration of everything you've achieved. You did it!"
+        'title' => 'Playing Beautiful Chords',
+        'description' => "In week 4, you'll pull together your moody chord progression with your root, 1st, and 2nd inversion chords. It's going to sound beautiful!"
     ],
 ];
 @endphp
@@ -450,6 +412,9 @@ $items = [
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'numStudents' =>  number_format($nPackOwners ?? 0),
     'students' => 'piano players',
+    'price' => "$127",
+    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
+    'brandTitle' => 'Pianote',
     'price' => "$127",
     'enrollmentLink' => 'https://www.pianote.com/choose-plan',
     'brandTitle' => 'Pianote',

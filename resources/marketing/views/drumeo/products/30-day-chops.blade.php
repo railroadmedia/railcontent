@@ -255,52 +255,20 @@ $features = [
 
 $lessons = [
     [
-        'title' => 'Paradiddle Chops - 1 Lesson + 5 Workouts',
-        'description' => "In your first week, you'll get one short lesson and five 10-minute workouts where Zack will teach you what a paradiddle is, why it's a useful chop, and then learn some interesting ways to play it on the kit."
+        'title' => 'Paradiddle Chops',
+        'description' => "In week 1, you'll learn what a paradiddle is and apply it to interesting drum chops with 1 lesson, 5 workouts, and 1 pre-recorded Q&A. "
     ],
     [
-        'title' => 'Pre-Recorded Q&A - Applying Paradiddles To The Kit',
-        'description' => 'In this Pre-Recorded Q&A, Zack helps you overcome your paradiddle hurdles.'
+        'title' => 'Doubles & Inverted Doubles',
+        'description' => "In week 2, you'll learn double and inverted double strokes through 1 lesson, 5 workouts, and 1 pre-recorded Q&A."
     ],
     [
-        'title' => 'Rest & Review Day',
-        'description' => "Enjoy your day off! Feel free to use this day to rest before next week's lesson, or continue working on what you have learned in week one!"
+        'title' => 'Paradiddle-diddle Chops',
+        'description' => "In week 3, you'll learn Zack's favorite rudiment, the paradiddle-diddle, through 1 lesson, 5 workouts, and 1 pre-recorded Q&A. "
     ],
     [
-        'title' => 'Doubles & Inverted Doubles - 1 Lesson + 5 Workouts',
-        'description' => "In week two, you'll learn what double and inverted double strokes are, and you'll practice playing the double stroke roll and inverted double strokes on the kit"
-    ],
-    [
-        'title' => 'Pre-Recorded Q&A - Applying Doubles To The Kit',
-        'description' => "In this Pre-Recorded Q&A, Zack answers the most common questions so far to keep you moving forward."
-    ],
-    [
-        'title' => 'Rest & Review Day',
-        'description' => "Enjoy your day off! Feel free to use this day to rest before next week's lesson, or continue working on what you have learned in week two!"
-    ],
-    [
-        'title' => 'Paradiddle-diddle Chops - 1 Lesson + 5 Workouts',
-        'description' => "In week three, Zack introduces you to his favorite rudiment: the paradiddle-diddle! You'll also practice get plenty of practice with it."
-    ],
-    [
-        'title' => 'Pre-Recorded Q&A - Applying Paradiddle-diddles To The Kit',
-        'description' => "In this Pre-Recorded Q&A, Zack takes questions about the paradiddle-diddle and offers tips and tricks to help nail them."
-    ],
-     [
-        'title' => 'Rest & Review Day',
-        'description' => "Enjoy your day off! Feel free to use this day to rest before next week's lesson, or continue working on what you have learned in week three!"
-    ],
-     [
-        'title' => 'Creative Combinations - 1 Lesson + 5 Workouts',
-        'description' => "In week four, you'll apply everything you've learned in the last three weeks in a series of mastery exercises."
-    ],
-     [
-        'title' => 'Pre-Recorded Q&A - Creative Combinations Around The Kit',
-        'description' => "In this Pre-Recorded Q&A, Zack takes all the questions his students have been having about the course and answers them."
-    ],
-     [
-        'title' => 'Course Review',
-        'description' => "You did it! You've made it through the whole journey. Congratulations!"
+        'title' => 'Creative Combinations',
+        'description' => "In week 4, you'll apply everything you've learned in a series of mastery exercises designed around making your drum chops sound amazing!"
     ],
 ];
 @endphp

@@ -274,52 +274,20 @@
 
 $lessons = [
     [
-        'title' => 'Your First Drum Beat - 1 Lesson + 5 Workouts)',
-        'description' => "In your first week, you'll get one short lesson and five 10-minute workouts where Domino will teach you the beginnings of the most popular drum beat of all time and help you build the muscle memory to learn it and play it!"
+        'title' => 'Your First Drum Beat',
+        'description' => "In week 1, you'll learn the beginnings of the most popular drum beat of all-time through 1 lesson, 5 workouts, and 1 pre-recorded Q&A."
     ],
     [
-        'title' => 'Pre-Recorded Q&A - Your First Drum Beat',
-        'description' => 'Join Domino for a Q&A session focusing on the first week of 30-Day Drummer. In this lesson, she answers questions and gives advice on overcoming any challenges you might have faced so far!'
+        'title' => 'Doubling It Up',
+        'description' => "In week 2, you'll learn how to double what your right hand is playing with 1 lesson, 5 workouts, and 1 pre-recorded Q&A."
     ],
     [
-        'title' => 'Rest Day',
-        'description' => "Enjoy your day off! Feel free to use this day to rest before next week's lesson, or continue working on what you have learned in week one!"
+        'title' => 'Adding Fills & Crashes',
+        'description' => "In week 3, you'll learn how to add a crash cymbal to your groove PLUS play your first drum fill with 1 lesson, 5 workouts, and 1 pre-recorded Q&A. "
     ],
     [
-        'title' => 'Doubling It Up - 1 Lesson + 5 Workouts',
-        'description' => "In week two, you will learn how to double what your right hand is playing, giving your drum groove a whole new sound!"
-    ],
-    [
-        'title' => 'Pre-Recorded Q&A - Building Momentum',
-        'description' => "Join Domino & Kyle for a Q&A as well as three tips to help you maintain momentum (or get back on track) towards reaching your goals."
-    ],
-    [
-        'title' => 'Rest Day',
-        'description' => "Enjoy your day off! Feel free to use this day to rest before next week's lesson or continue working on what you have learned in week two!"
-    ],
-    [
-        'title' => 'Adding Fills & Crashes - 1 Lesson + 5 Workouts',
-        'description' => "In week three, you will learn how to add a crash cymbal to your groove PLUS play your first drum fill. "
-    ],
-    [
-        'title' => 'Pre-Recorded Q&A - Adding Fills & Crashes',
-        'description' => "Join Domino for a Q&A session focusing on the third week of 30-Day Drummer, where she answers questions from students and gives helpful advice to overcome any challenges you may be facing!"
-    ],
-     [
-        'title' => 'Rest Day',
-        'description' => "Enjoy your day off! Feel free to use this day to rest before next week's lesson or continue working on what you have learned in week three!"
-    ],
-     [
-        'title' => 'Your First Song - 1 Lesson + 5 Workouts',
-        'description' => "In the final week, you will learn to play your first song by assembling all of the parts you've learned so far -- playing the verse, chorus, bridge, and finally the entire track! "
-    ],
-     [
-        'title' => 'Pre-Recorded Q&A - Tips And Tricks To Play Your Favorite Songs',
-        'description' => "Now that you've learned how to play your first song, it's time to shift your attention to learning how to play your favorite songs with the help of Domino and Kyle!"
-    ],
-     [
-        'title' => 'Course Review',
-        'description' => "Domino will be issuing a challenge and sharing a few ideas about what you could do next in your drumming journey."
+        'title' => 'Play Your First Song!',
+        'description' => "In week 4, you'll learn to play your first song by assembling all the parts you've learned so far -- playing the verse, chorus, bridge, and finally the full track!"
     ],
 ];
 
@@ -328,23 +296,13 @@ $features = [
     [
         'title' => 'Course Kick-Off',
         'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/kick-off-30d-drummer.jpeg',
-        'videoId' => 850695588, 
+        'videoId' => 738756003, //850695588
     ],
     [
-        'title' => 'Acoustic Kit Setup',
+        'title' => 'Course Setup',
         'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/acoustic-kit-setup.jpeg',
-        'videoId' => 852833927,
-    ],
-    [
-        'title' => 'Electronic Kit Setup',
-        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/electronic-kit-setup.jpeg',
-        'videoId' => 738756159
-    ],
-    [
-        'title' => 'Practice Pad Setup',
-        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/practice-pad-setup.jpeg',
-        'videoId' => 738756159
-    ],
+        'videoId' => 0,
+    ]
 ];
 @endphp
 
