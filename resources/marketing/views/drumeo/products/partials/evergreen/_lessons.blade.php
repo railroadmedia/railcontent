@@ -37,7 +37,7 @@
 
             <p class="text-white pt-3"><strong>{{ $lessonTitle }}</strong></p>
             <div class="relative">
-                <div x-data="{ isOpen: [] }" class="h-72 overflow-y-scroll pb-5">
+                <div x-data="{ isOpen: [] }" class="h-70 overflow-y-scroll sm:pb-5">
                     @foreach ($lessons as $lesson)
                         <div x-data="{ open: false }" class="rounded-lg bg-white shadow mb-1.5">
                             <button class="rounded-lg flex w-full items-center justify-between px-4 py-3.5" style="background: #eff7ff;" x-on:click="open = !open;">
@@ -47,12 +47,12 @@
                                 </div>
                             </button>
                             <div x-cloak class="transition-all duration-200 overflow-hidden" x-bind:class="open ? 'max-h-[2000px]' : 'max-h-0'">
-                                   <p class="px-4 pb-4 bg-blue-50 rounded-lg leading-tight">{{ $lesson['description'] }}</p> 
+                                   <p class="px-4 pb-4 bg-blue-50 rounded-lg leading-tight text-xs">{{ $lesson['description'] }}</p> 
                             </div>
                         </div>
                     @endforeach
                 </div>
-                <div class="absolute h-5 bottom-0 left-0 right-0 z-10" style="background: linear-gradient(to bottom, transparent, #00101d);"></div>
+                <div class="absolute h-5 bottom-0 left-0 right-0 z-10 hidden" style="background: linear-gradient(to bottom, transparent, #00101d);"></div>
             </div>
         </div>
 
