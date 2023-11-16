@@ -160,107 +160,115 @@
     </section>
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
-    <section class="content-section text-center customize" style="background:linear-gradient(to bottom, #AF1F2D 50%, #180104);">
-        <div class="container mx-auto max-w-3xl">
-            <h2 class="leading-tight mb-5 md:mb-7 lg:mb-10" style="line-height: 1.4em;"><strong>Become a Lifetime Member today and get:
-                </strong></h2>
-            <div class="horizontal-bonuses mx-auto max-w-xs sm:max-w-md md:max-w-6xl" style="font-size: 0;">
-                <div class="w-full">
-                    <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-md mb-6">
-                        <div class="flip-div inline-block relative w-full group" style="padding-bottom: 47%;perspective: 1000px;">
-                            <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                <div class="front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                    <div class="h-full w-full bg-black bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/pianote-lifetime.png"></div>
-                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
-                                        <i class="fas fa-arrow-right text-4xl"></i><br>
-                                        <p class="text-sm"><strong>DETAILS</strong></p>
-                                    </div>
-                                </div>
-                                <div class="back absolute z-40 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                    <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                        <p class="leading-normal mx-auto text-sm">Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support. Learn piano online the easy way.</p>
-                                    </div>
-                                </div>
+    @php
+        $bonuses = [
+            [
+                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/b15d76f7-b3c5-4dcd-94c3-449cd60ed88e-metronome-cart.jpg',
+                'description' => 'Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner.',
+                'price' => floatval($productPrices['taktell-piccolo-metronome']->price),
+                'shipping' => true,
+            ],
+            [
+                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
+                'description' => 'Your encyclopedia of piano chords & scales.',
+                'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
+                'shipping' => true,
+            ],
+            [
+                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/5afe20b9-5f1c-4886-b932-9ee93ffc67f4-christmas-songbook-shop.jpg',
+                'title' => 'Christmas Songbook',
+                'description' => '14 beautiful Christmas Carols hand-picked and arranged for solo piano.',
+                'price' => 49,
+                'shipping' => true,
+            ],
+            [
+                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/christmas-songbook-card.jpg',
+                'description' => 'Play Your Favorite Christmas Songs on the Piano.',
+                'price' => floatval($productPrices['christmas-song-book-digital']->price),
+            ],
+            [
+                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/5307c3c2-d687-44d9-8da5-e8be784f8c86-classical-piano-pieces-shop-card.jpg',
+                'description' => 'Play Your Favorite Christmas Songs on the Piano.',
+                'price' => 49,
+                'shipping' => true,
+            ],
+            [
+                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d12dc645-94d9-4d80-a5dc-ae158815d604-Pianote-Poster-Bundle-shop.jpg',
+                'description' => 'Don’t learn Italian. Just look at this poster.',
+                'price' => floatval($productPrices['music-theory-posters']->price),
+                'shipping' => true,
+            ],
+            [
+                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
+                'description' => 'New to the piano? Start here! This play-along course is your first 30 days on the piano. You don’t need any previous experience or theory knowledge. Over 30 days, you’ll play along with your teacher for just 10 minutes a day! You’ll be amazing at what a little bit of consistent practice will do.',
+                'price' => 97,
+            ],
+            [
+                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
+                'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
+                'price' => 97,
+            ],
+            [
+                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d444aa7c-3c5f-4a3e-8d8b-36a98ac99da4-30DBluesPiano_cart.jpg',
+                'description' => 'Learn Blues Piano in 30 days with daily 10-minute lessons where you play along with a teacher. This is the new way of learning the blues.',
+                'price' => 97,
+            ],
+            [
+                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
+                'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
+                'price' => floatval($productPrices['piano-riffs-and-fills']->price),
+            ],
+            [
+                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/power_of_chords_card.jpg',
+                'description' => 'Play the music you love using the power of chords.',
+                'price' => floatval($productPrices['the-power-of-chords']->price),
+            ],
+            [
+                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
+                'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
+                'price' => floatval($productPrices['piano-technique-made-easy']->price),
+            ],
+            [
+                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/faster-fingers.jpg',
+                'description' => 'Boost your speed and confidence with this guided practice course.',
+                'price' => floatval($productPrices['faster-fingers']->price),
+            ],
+        ];
+        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[pianote-headphones]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[christmas-song-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1';
+    @endphp
+
+    <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
+        style="background:linear-gradient(to bottom, #AF1F2D, #180104);"
+    >
+        <div class="container mx-auto relative z-50 max-w-4xl">
+            <h3 class="leading-tight mb-5 md:mb-7 lg:mb-10" style="line-height: 1.4em;"><strong>Become a Lifetime Member today and get:</strong></h3>
+            <div class="w-full">
+                <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
+                    <div class=" inline-block relative w-full group" style="padding-bottom: 56%;perspective: 1000px;">
+                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
+                            <div class=" {{--border-2 border-musora--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
+                                <div class="h-full w-full bg-center bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/pianote-lifetime.png');"></div>
                             </div>
                         </div>
-
-                        <h4 class="uppercase w-full leading-normal">
-                            @if(!empty($upgradeVersion))
-                                <s class="opacity-60">$1200</s> <strong>$960</strong>
-                            @else
-                                <strong>$1200</strong>
-                            @endif
-                        </h4>
                     </div>
                 </div>
-
-                @php
-                    $bonuses = [
-
-                [
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/b15d76f7-b3c5-4dcd-94c3-449cd60ed88e-metronome-cart.jpg',
-                    'description' => 'Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner.',
-                    'price' => floatval($productPrices['taktell-piccolo-metronome']->price),
-                    'shipping' => true,
-                ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
-                    'description' => 'Your encyclopedia of piano chords & scales.',
-                    'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
-                    'shipping' => true,
-                ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/dynamics-poster.jpg',
-                    'description' => 'Don’t learn Italian. Just look at this poster.',
-                    'price' => floatval($productPrices['music-theory-posters']->price),
-                    'shipping' => true,
-                ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/christmas-songbook-card.jpg',
-                    'description' => 'Play Your Favorite Christmas Songs on the Piano.',
-                    'price' => floatval($productPrices['christmas-song-book-digital']->price),
-                    'shipping' => true,
-                ],
-                [
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
-                    'description' => 'New to the piano? Start here! This play-along course is your first 30 days on the piano. You don’t need any previous experience or theory knowledge. Over 30 days, you’ll play along with your teacher for just 10 minutes a day! You’ll be amazing at what a little bit of consistent practice will do.',
-                    'price' => 97,
-                ],
-                [
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
-                    'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
-                    'price' => 97,
-                ],
-                [
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d444aa7c-3c5f-4a3e-8d8b-36a98ac99da4-30DBluesPiano_cart.jpg',
-                    'description' => 'Learn Blues Piano in 30 days with daily 10-minute lessons where you play along with a teacher. This is the new way of learning the blues.',
-                    'price' => 97,
-                ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
-                    'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
-                    'price' => floatval($productPrices['piano-riffs-and-fills']->price),
-                ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/power_of_chords_card.jpg',
-                    'description' => 'Play the music you love using the power of chords.',
-                    'price' => floatval($productPrices['the-power-of-chords']->price),
-                ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
-                    'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
-                    'price' => floatval($productPrices['piano-technique-made-easy']->price),
-                ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/faster-fingers.jpg',
-                    'description' => 'Boost your speed and confidence with this guided practice course.',
-                    'price' => floatval($productPrices['faster-fingers']->price),
-                ],
-                    ]
-                @endphp
-                @foreach($bonuses as $key => $bonus)
+                <br>
+                <h2 class="leading-tight mt-4 sm:mt-6 mb-1">
+                    @if(!empty($upgradeVersion))
+                        <s class="opacity-60">$1200</s> <strong>$960</strong>
+                    @else
+                        <strong>$1200</strong>
+                    @endif
+                </h2>
+                <p class="leading-tight text-sm">One time payment or choose a payment plan on the next page.</p>
+                <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+                <p class="leading-tight text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>
+                <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get 13 free Black Friday bonuses.</strong></h3>
+            </div>
+            <div style="font-size:0px">
+                @foreach($bonuses as $bonus)
                     <div
-                        class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 w-1/2 md:w-1/4"
+                        class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 w-1/2 md:w-1/4 lg:w-1/5"
                         x-data="{
                         flipped: false,
                     }"
@@ -322,29 +330,11 @@
                         </p>
                     </div>
                 @endforeach
-
-                {{--<p style="max-width: 480px;color: #aaa;padding:0 15px;"><em>All digital bonuses are added to your account IMMEDIATELY  with your membership to Pianote, and they’re yours forever. </em></p>--}}
             </div>
-
-            <h2 class="leading-none mb-1">
-                @if(!empty($upgradeVersion))
-                    <s class="opacity-60">$1200</s> <strong>$960</strong>
-                @else
-                    <strong>$1200</strong>
-                @endif
-            </h2>
-            <p class="leading-tight text-sm"><em>
-                    One time payment or choose a <br class="sm:hidden">
-                    payment plan on the next page.</em></p>
-            <a
-                class="join bigger my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
-                style="padding: 20px 10px;"
-                href="products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[pianote-headphones]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[christmas-song-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true"
-                >GET STARTED &raquo;</a>
-            <p class="leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>
-
+            <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
         </div>
     </section>
+
     @php
         $faqs = [
             [
