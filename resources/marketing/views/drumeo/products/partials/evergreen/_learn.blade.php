@@ -1,6 +1,6 @@
 <section class="px-3 sm:px-0 text-center customize relative z-50 overflow-hidden lazyload" style="background: #eff7ff;">
     <div class="container max-w-6xl mx-auto relative z-50" style="background: #eff7ff;" data-bg={{ $mainImage }}>
-        <div class="flex flex-wrap items-center px-4 sm:px-6 pt-10">
+        <div class="flex flex-wrap items-center px-4 sm:px-6 pt-10 md:py-10 lg:py-20">
             <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5" style="background: #eff7ff;">
                 <img class="h-20 sm:h-24 lg:h-26 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="{{ $logo }}"
                     alt="{{ $logoAlt }}">

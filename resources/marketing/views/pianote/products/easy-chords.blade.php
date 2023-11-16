@@ -286,9 +286,17 @@
         "noBreadcrumb" => true
     ])
 
-    @php
-            $registerButtonUrl = "/ecommerce/add-to-cart?products[easy-chords]=1&redirect=/order";
-    @endphp
+        @php
+            $price = floatval($productPrices['easy-chords']->price);
+            $discountedPrice = floatval($productPrices['easy-chords']->discounted_price);
+            $enrollmentLink = 'https://www.pianote.com/choose-plan';
+            $brandTitle = 'Pianote';
+            $buttonText = 'GET STARTED';
+            $buttonLink = "/ecommerce/add-to-cart?products[easy-chords]=1&redirect=/order";
+            $studentProfilesImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png';
+            $numStudents =  number_format($nPackOwners ?? 0);
+            $students = 'piano players';
+        @endphp
 
 <!-- Header Section -->
     @include('drumeo.products.partials.evergreen._header', [
@@ -301,14 +309,6 @@
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/easy-chords/header-left-collage.png',
     'isVideo' => true,
     'mediaSource' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/trailer.mp4',
-    'buttonText' => 'GET STARTED',
-    'buttonLink' =>  $registerButtonUrl,
-    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
-    'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'piano players',
-    'price' => "$127",
-    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
-    'brandTitle' => 'Pianote',
 ])
 
 
@@ -407,17 +407,6 @@ $items = [
 @include('drumeo.products.partials.evergreen._get-started', [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/products/easy-chords/easy-chords-logo.png',
     'items' => $items,
-    'buttonText' => 'GET STARTED',
-    'buttonLink' =>  $registerButtonUrl,
-    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
-    'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'piano players',
-    'price' => "$127",
-    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
-    'brandTitle' => 'Pianote',
-    'price' => "$127",
-    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
-    'brandTitle' => 'Pianote',
     'extraClass' => 'h-20 md:h-24 lg:h-28 py-4'
 ])
 
@@ -551,16 +540,8 @@ $points = [
     'logoAlt' => '30 day easy chords logo',
     'title' => '30 days to better piano chords',
     'points' => $points,
-    'buttonText' => 'Get Started',
-    'buttonLink' =>  $registerButtonUrl,
-    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'profileImageAlt' => 'student profile image',
     'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/easy-chords/order-collage.png',
-    'students' => 'piano players',
-    'numStudents' => number_format($nPackOwners ?? 0),
-    'price' => "$127",
-    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
-    'brandTitle' => 'Pianote',
 ])
 
     @include('_partials.components.video-modal',[
