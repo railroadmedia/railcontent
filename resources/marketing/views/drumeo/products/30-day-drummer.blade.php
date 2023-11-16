@@ -265,7 +265,8 @@
     'students' => 'drummers',
     'price' => "$127",
     'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
-    'brandTitle' => 'Drumeo'
+    'brandTitle' => 'Drumeo',
+    'extraClass' => 'h-28 sm:h-36 lg:h-48'
 ])
 
  <!-- Lessons Section -->
@@ -422,7 +423,7 @@ $items = [
                 <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 130%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
 
-            <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
+            <div class="text-white text-left z-10 sm:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
                 <h6 class="uppercase text-drumeo leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
                 <h2 class="text-center sm:text-left"><strong>Domino Santantonio</strong></h2>
                 <h6 class="leading-normal mt-4 lg:mt-6">Domino Santantonio is one of the world’s most viewed drummers.
@@ -537,7 +538,7 @@ $points = [
     'buttonLink' =>  $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'profileImageAlt' => 'student profile image',
-    'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/order-collage.png',
+    'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/order-collage.png',
     'students' => 'drummers',
     'numStudents' => number_format($nPackOwners ?? 0),
     'price' => "$127",
@@ -547,7 +548,7 @@ $points = [
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '852777053',
+        'video' => '884916532',
         'vimeo' => true,
     ])
 

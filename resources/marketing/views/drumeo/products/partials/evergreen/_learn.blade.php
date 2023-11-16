@@ -1,11 +1,11 @@
 <section class="px-3 sm:px-0 text-center customize relative z-50 overflow-hidden lazyload" style="background: #eff7ff;">
-    <div class="container max-w-6xl mx-auto relative z-50 py-4" style="background: #eff7ff;" data-bg={{ $mainImage }}>
-        <div class="flex flex-wrap items-center px-4 sm:px-6 py-10">
+    <div class="container max-w-6xl mx-auto relative z-50" style="background: #eff7ff;" data-bg={{ $mainImage }}>
+        <div class="flex flex-wrap items-center px-4 sm:px-6 pt-10">
             <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5" style="background: #eff7ff;">
                 <img class="h-20 sm:h-24 lg:h-26 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="{{ $logo }}"
                     alt="{{ $logoAlt }}">
                 <h1 class="py-6 sm:py-4"><strong>{!! $title !!}</strong></h1>
-                <div class="text-center sm:text-left md:py-5">
+                <div class="text-center sm:text-left sm:pb-5">
                     <ul>
                         @foreach ($points as $index => $point)
                             @if ($loop->last)
@@ -35,10 +35,12 @@
                         </div>
 
                         <div class="w-full md:w-2/3 sm:flex py-2 md:py-0 items-center">
+                             @if ($numStudents > 500)
                             <img class="h-7 mr-2 lazyload" data-src="{{ $studentProfilesImage }}"
                                 alt="{{ $profileImageAlt }}">
                             <span class="inline-block align-middle leading-tight text-xs py-2">Join {{ $numStudents }}
                                 {{ $students }} who have already registered.</span>
+                            @endif
                         </div>
 
                     </div>
@@ -66,8 +68,11 @@
             </div>
             <div
                 class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0 hidden sm:block">
-                <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src={{ $mainImage }} alt="collage">
+                <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload pb-4" data-src={{ $mainImage }} alt="collage">
             </div>
         </div>
     </div>
+    <div class="w-full sm:hidden text-center py-8">
+                <img class="lazyload" data-src={{ $mainImage }} alt="collage">
+            </div>
 </section>

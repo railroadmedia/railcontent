@@ -386,10 +386,10 @@ $items = [
     $brandTitle = 'Pianote'
 @endphp
 
-    <section class="text-center px-5 sm:px-6 py-8 md:py-12 lg:py-20 bg-blue-50">
+    <section class="text-center px-6 pb-4 md:py-6 bg-blue-50">
         <div class="container max-w-4xl mx-auto">
-            <div class="flex flex-wrap sm:flex-nowrap items-center justify-center py-6">
-                <img class="h-32 sm:h-64 lg:h-72 py-4 lazyload" data-src={{ $logo }} alt="logo">
+            <div class="flex flex-wrap sm:flex-nowrap items-center justify-center py-4">
+                <img class="h-32 md:h-64 lg:h-72 py-4 lazyload" data-src={{ $logo }} alt="logo">
                 <ul class="pl-6">
                     @foreach ($items as $item)
                         <li>
@@ -401,7 +401,7 @@ $items = [
                 </ul>
             </div>
             {{-- <a href={{$buttonLink}} class="join blue medium w-full sm:w-1/2 md:w-1/3 lg:w-3/5 mt-6 sm:mt-12 mb-3 anchor-slide" role="button">{{$buttonText}}</a><br> --}}
-            <div class="w-full flex flex-col items-center pt-4">
+            <div class="w-full flex flex-col items-center">
                    <div class="w-full sm:w-1/2 md:w-1/3">
             @include('drumeo.products.partials.evergreen._button', [
                 'link' => $buttonLink,
@@ -410,10 +410,12 @@ $items = [
             ])
 </div>
                 <div class="flex flex-row items-center py-2">
+                     @if ($numStudents > 500)
                     <img class="h-7 mr-2 lazyload" alt="Joined Student Profiles" data-src={{ $studentProfilesImage }}>
                     <span class="inline-block align-middle leading-tight text-xs">Join
                         {{ $numStudents }} {{ $students }} who<br> have already registered.
                     </span>
+                    @endif
                 </div>
             </div>
 {{--             @if (!empty($price) || !empty($enrollmentLink) || !empty($brandTitle))--}}
@@ -443,7 +445,7 @@ $items = [
 
 
  <!-- Meet your teacher section -->
-    <section class="text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40">
+    <section class="text-center sm:px-6 pt-10 sm:pt-14 lg:pt-20 sm:pb-32 lg:pb-40">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
                 <div class="w-52 sm:w-64 lg:w-72 relative -mb-8 sm:mb-0 sm:-mr-8">
@@ -452,7 +454,7 @@ $items = [
                     <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 150%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
 
-                <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-20 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
+                <div class="text-white text-left z-10 sm:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
                     <h6 class="uppercase text-pianote leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
                     <h2 class="text-center sm:text-left"><strong>Kevin Castro</strong></h2>
                     <p class="leading-normal my-4 lg:my-6">Kevin Castro wouldn’t be a professional pianist without the Blues. In fact, it was a Blues improvisation that got him accepted into University.
@@ -472,6 +474,8 @@ $items = [
             </div>
         </div>
     </section>
+
+
 <!-- Testimonials section -->
 
 @include('drumeo.products.partials.evergreen._testimonials', [
@@ -536,7 +540,7 @@ $points = [
     'buttonLink' => $registerButtonUrl,
     'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'profileImageAlt' => 'student profile image',
-    'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/30-day-blues/order-collage.png',
+    'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/30-day-blues/order-collage.png',
     'students' => 'piano players',
     'numStudents' => number_format($nPackOwners ?? 0),
     'price' => "$127",

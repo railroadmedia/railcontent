@@ -1,7 +1,7 @@
-    <section class="text-center px-5 sm:px-6 py-8 md:py-12 lg:py-20 bg-blue-50">
+    <section class="text-center px-5 sm:px-6 p-4 md:py-10 lg:py-12 bg-blue-50">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center py-6">
-                <img class="h-28 md:h-38 lg:h-40 py-4 lazyload" data-src={{ $logo }} alt="logo">
+                <img class="{{ isset($extraClass) ? $extraClass . ' ' : '' }}h-28 md:h-38 lg:h-40 lazyload" data-src={{ $logo }} alt="logo">
                 <ul class="pl-6">
                     @foreach ($items as $item)
                         <li>
@@ -22,10 +22,12 @@
             ])
 </div>
                 <div class="flex flex-row items-center py-2">
+                     @if ($numStudents > 500)
                     <img class="h-7 mr-2 lazyload" alt="Joined Student Profiles" data-src={{ $studentProfilesImage }}>
                     <span class="inline-block align-middle leading-tight text-xs">Join
                         {{ $numStudents }} {{ $students }} who<br> have already registered.
                     </span>
+                    @endif
                 </div>
             </div>
 {{--             @if (!empty($price) || !empty($enrollmentLink) || !empty($brandTitle))--}}

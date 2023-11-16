@@ -3,9 +3,9 @@
         <strong>{{ $title }}</strong>
     </h2>
 
-    <div class="container max-w-5xl mx-auto px-4 md:px-6 md:flex leading-normal pb-4 md:pb-8" x-data="{ posterImage: '{{ $features[0]['posterImage'] }}', videoPlayer: '{{ $features[0]['videoId'] }}' }">
+    <div class="container max-w-5xl mx-auto px-4 md:px-6 md:flex leading-normal pb-6 md:pb-8" x-data="{ posterImage: '{{ $features[0]['posterImage'] }}', videoPlayer: '{{ $features[0]['videoId'] }}' }">
 
-        <div class="md:w-2/3 lg:w-8/12 md:pr-4 flex-shrink-0">
+        <div class="pb-4 md:w-2/3 lg:w-8/12 md:pr-4 flex-shrink-0">
             <div class="aspect-16:9 cursor-pointer rounded-xl overflow-hidden w-full relative" x-data="{ open: false, videoPlaying: false }">
                 <img :src="posterImage" class="rounded-xl object-cover w-full h-full absolute z-0"
                     alt="video poster" />
