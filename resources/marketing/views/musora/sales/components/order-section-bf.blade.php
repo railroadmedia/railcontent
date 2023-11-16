@@ -12,13 +12,9 @@
         <div class="w-full">
             @if(!empty($promoLogo))
                 <div class="text-center">
-                    <img
-                            class="h-14 sm:h-16 lg:h-20 mb-6 transition-opacity opacity-0"
-                            src="{{ $promoLogo }}"
-                            alt="Promo logo"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
-                    />
+                    @include($theme.'._partials.holiday-logo', [
+                    'styles' => 'h-14 sm:h-16 lg:h-20 mb-6 mx-auto'
+                ])
                 </div>
             @endif
             @if(!empty($promoHeader))
