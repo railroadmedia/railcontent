@@ -522,6 +522,11 @@ class ForumPagesController extends Controller
         }
 
 //        $users = User::query()->whereIn('id', $authorIds)->get()->keyBy('id');
+        $coaches = User::query()
+            ->whereIn('id', $authorIds)
+            ->get()
+            ->filter(fn(User $user) => $user->is_coach)
+            ->pluck('id');
 
         $mappedPosts = [];
 
@@ -537,7 +542,7 @@ class ForumPagesController extends Controller
                 'authorSignature' => $author['signature'],
                 'progressLevel' => $author['level_rank'],
                 "xp" => $author['xp_rank'],
-                "access_level" => $author['access_level'],
+                "access_level" => $coaches->contains($author['id']) ? "coach" : $author['access_level'],
                 "authorProfileUrl" => $author['associated_coach'] ? $author['associated_coach']['url'] : url()->route(
                     'platform.profile.dashboard',
                     [$post->author_id]
