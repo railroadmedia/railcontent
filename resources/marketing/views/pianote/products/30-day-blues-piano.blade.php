@@ -213,7 +213,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner-no-tw', [
+    @include('pianote._partials._promo-banner', [
         "name" => "30-Day Blues Piano",
         "fullPrice" => floatval($productPrices['new-piano-players-start-here']->price),
         "price" => floatval($productPrices['new-piano-players-start-here']->discounted_price),
@@ -330,7 +330,7 @@ $features = [
     'lessons' => $lessons
 ])
 
-@php 
+@php
 $practiceItems = [
             [
                 "icon" =>
@@ -357,7 +357,7 @@ $practiceItems = [
             ]
 @endphp
 
-   
+
 <!-- Songs subsection -->
 @include('drumeo.products.partials.evergreen._dropdown', [
     'bgClass' => 'bg-slate-900',
@@ -542,7 +542,7 @@ $points = [
     'price' => "$127",
     'enrollmentLink' => 'https://www.pianote.com/choose-plan',
     'brandTitle' => 'Pianote'])
-    
+
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '879913986',

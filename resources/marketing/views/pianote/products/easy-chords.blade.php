@@ -279,9 +279,9 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner-no-tw', [
+    @include('pianote._partials._promo-banner', [
         "name" => "Easy Chords",
-        "fullPrice" => floatval($productPrices['new-piano-players-start-here']->price), 
+        "fullPrice" => floatval($productPrices['new-piano-players-start-here']->price),
         "price" => floatval($productPrices['new-piano-players-start-here']->discounted_price),
         "noBreadcrumb" => true
     ])
@@ -307,7 +307,7 @@
     'numStudents' =>  number_format($nPackOwners ?? 0),
     'students' => 'piano players'
 ])
-    
+
 
 <!-- Lessons Section -->
 @php
@@ -400,7 +400,7 @@ $lessons = [
 ])
 
 
-@php 
+@php
 $practiceItems = [
             [
                 "icon" =>
@@ -426,7 +426,7 @@ $practiceItems = [
             ]
 @endphp
 
-   
+
 <!-- Songs subsection -->
 @include('drumeo.products.partials.evergreen._dropdown', [
     'bgClass' => 'bg-slate-900',
@@ -492,12 +492,12 @@ $items = [
                     </p>
                     <img class="float-right h-12 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/lisa-witt-signature.png" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
-            </div>            
+            </div>
         </div>
     </section>
 
 <!-- Testimonials section -->
-@php 
+@php
 $testimonials = [
                                 [
                                     'name' => 'Jess Ripley',
@@ -569,7 +569,7 @@ $students = "Pianote Student"
         </div>
     </section>
 
-   
+
 <!-- Learn section -->
 @php
 $points = [

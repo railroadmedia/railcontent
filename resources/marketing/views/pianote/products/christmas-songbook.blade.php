@@ -70,7 +70,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner-no-tw', [
+    @include('pianote._partials._promo-banner', [
         "name" => "Christmas Songbook",
         "fullPrice" => floatval($productPrices['christmas-songbook']->price),
         "price" => floatval($productPrices['christmas-songbook']->discounted_price),

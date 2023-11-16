@@ -97,8 +97,7 @@
 
 @section('global-body')
     @include('pianote.sales.partials._nav', [
-        "subscriptionVersion" => true,
-        "scrollToJoin" => true
+        "cartVersion" => true
     ])
     <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #AF1F2D 50%, #180104);">
         <div class="container mx-auto">
@@ -117,8 +116,8 @@
                     @endif
                 </h2>
                 <p class="leading-tight text-sm"><em>One time payment or choose a <br class="sm:hidden">payment plan on the next page.</em></p>
-                <a class="join smaller drumeo my-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
-                <p class="leading-tight text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>
+                <a class="join smaller drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
+{{--                <p class="leading-tight mt-4 text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
             </div>
         </div>
     </section>
@@ -261,8 +260,8 @@
                     @endif
                 </h2>
                 <p class="leading-tight text-sm">One time payment or choose a payment plan on the next page.</p>
-                <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-                <p class="leading-tight text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>
+                <a class="join mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+{{--                <p class="mt-4 md:mt-5 leading-tight text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
                 <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get 13 free Black Friday bonuses.</strong></h3>
             </div>
             <div style="font-size:0px">
@@ -415,4 +414,8 @@
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
 @stop

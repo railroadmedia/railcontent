@@ -61,8 +61,7 @@
 
 @section('global-body')
         @include("drumeo.sales.partials._nav", [
-            "subscriptionVersion" => true,
-            "scrollToJoin" => true
+        "cartVersion" => true
         ])
         <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #094073 50%, #000C16);">
             <div class="container mx-auto">
@@ -82,8 +81,8 @@
                         @endif
                     </h2>
                     <p class="leading-tight text-sm"><em>One time payment or choose a <br class="sm:hidden">payment plan on the next page.</em></p>
-                    <a class="join smaller drumeo my-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
-                    <p class="leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>
+                    <a class="join smaller drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
+{{--                    <p class="mt-4 leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
                 </div>
             </div>
         </section>
@@ -207,12 +206,12 @@
                     One time payment or choose a <br class="sm:hidden">
                     payment plan on the next page.</em></p>
             <a
-                class="join blue bigger my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
+                class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
                 style="padding: 20px 10px;"
                 :class="bonus !== 1 && 'sold-out'"
                 :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1'+query+'&locked=true' : '#customize-anchor'"
                 x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>
-            <p class="leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>
+{{--            <p class="mt-5 leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
 
         </div>
     </section>
@@ -300,4 +299,9 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+        <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
+        <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
+        <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
+        <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
+
 @stop

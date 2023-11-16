@@ -66,7 +66,7 @@
         @php
             $bundles = [
                 [
-                    'slug' => '/shop/ultimate-lessons-bundle',
+                    'slug' => 'https://www.pianote.com/shop/ultimate-lessons-bundle',
                     'desc' => 'Pianote Discount<br class="sm:hidden"> + 11 Bonuses',
                     'visible' => 1,
                     'price' => 1203,
