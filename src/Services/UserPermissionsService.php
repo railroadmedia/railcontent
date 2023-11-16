@@ -102,6 +102,18 @@ class UserPermissionsService
     }
 
     /**
+     * Call the method from repository that pull user permissions and return an array with the results
+     *
+     * @param null|int $userId
+     * @param bool $onlyActive
+     * @return array
+     */
+    public function userHasPermissionsWithFutureStartDate($userId = null)
+    {
+        return $this->userPermissionsRepository->userHasPermissionsWithFutureStartDate($userId);
+    }
+
+    /**
      * Delete user cache or set time to live based on user permission start date.
      * If the user permission should be active from current datetime we delete user cache keys
      * If the user permission should be active from a future datetime we set time to live for all user cache keys to
