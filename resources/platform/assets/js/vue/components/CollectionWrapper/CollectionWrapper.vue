@@ -14,6 +14,10 @@
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
                     :total-results="getTotalResults" />
+                <CatalogueCardContainer
+                    v-else-if="isChallengePart"
+                    :pre-loaded-content="preLoadedContent"
+                />
             </CollectionResults>
         </transition>
     </div>
@@ -31,6 +35,7 @@ import RoutinesCatalogue from "../../vuesora/views/catalogues/RoutinesCatalogue"
 import PlayAlongs from "../../vuesora/views/play-alongs/PlayAlongs";
 import {storeToRefs} from "pinia";
 import { useUserStore } from "../../../stores/user";
+import CatalogueCardContainer from "../Catalogue/CatalogueCardContainer";
 
 const props = defineProps({
     collectionType: {
@@ -165,9 +170,9 @@ const isChallengePart = computed(() => {
     return props.collectionType === 'challenge-part';
 })
 
-//List view reactvie
+//List view reactive
 const isList = computed(() => {
-    return !isPlayAlong.value && !isRoutine.value;
+    return !isPlayAlong.value && !isRoutine.value && !isChallengePart.value;
 })
 
 //Filter state reactive
@@ -175,7 +180,7 @@ const showFilter = computed(() => {
     return isSong.value || isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value || isCoach.value || isChallengePart.value;
 })
 
-//Tab options reactives
+//Tab options reactive
 const getTabOptions = computed(() => {
     if (isCourse.value) {
         return [
@@ -196,6 +201,14 @@ const getTabOptions = computed(() => {
             { key: 'flams', value: 'Flams' },
             { key: 'paradiddles', value: 'Paradiddles' },
             { key: 'rolls', value: 'Rolls' },
+        ];
+    } else if (isChallengePart.value) {
+        return [
+            { key: 'all', value: 'All' },
+            { key: '5minutes', value: '5 Minutes' },
+            { key: '10minutes', value: '10 Minutes' },
+            { key: '15minutes', value: '15+ Minutes' },
+            { key: 'instructors', value: 'Instructors' },
         ];
     }
 
