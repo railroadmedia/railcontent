@@ -14,6 +14,10 @@
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
                     :total-results="getTotalResults" />
+                <CatalogueCardContainer
+                    v-else-if="isChallengePart"
+                    :pre-loaded-content="preLoadedContent"
+                />
             </CollectionResults>
         </transition>
     </div>
@@ -31,6 +35,7 @@ import RoutinesCatalogue from "../../vuesora/views/catalogues/RoutinesCatalogue"
 import PlayAlongs from "../../vuesora/views/play-alongs/PlayAlongs";
 import {storeToRefs} from "pinia";
 import { useUserStore } from "../../../stores/user";
+import CatalogueCardContainer from "../Catalogue/CatalogueCardContainer";
 
 const props = defineProps({
     collectionType: {
@@ -167,7 +172,7 @@ const isChallengePart = computed(() => {
 
 //List view reactive
 const isList = computed(() => {
-    return !isPlayAlong.value && !isRoutine.value;
+    return !isPlayAlong.value && !isRoutine.value && !isChallengePart.value;
 })
 
 //Filter state reactive
