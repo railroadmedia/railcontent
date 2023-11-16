@@ -2,8 +2,6 @@
 
 return [
 
-    'enabled' => ENV('SHOPIFY_ENABLED', false),
-
     'credentials' => [
 
         /*
