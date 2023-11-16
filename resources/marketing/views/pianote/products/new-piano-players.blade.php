@@ -102,15 +102,14 @@ $features = [
         'title' => 'Course Kick-Off',
         'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/kick-off-new-players.jpg',
         'videoId' => 797858259,
-    ],
-    [
-        'title' => 'Quick-Start Guide To The Piano',
-        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/get-started.jpg',
-        'videoId' => "",
-    ],
+    ]
 ];
 
 $lessons = [
+    [
+        'title' => 'Quick-Start Guide To The Piano',
+        'description' => "Before we begin, we'll show you the note names and how to sit at the piano correctly. You've got this!"
+    ],
     [
         'title' => 'Your First Chord Progression',
         'description' => "In week 1, you'll learn your first chord progression from start to finish and build your confidence through 1 lesson, 5 workouts, and a pre-recorded Q&A."

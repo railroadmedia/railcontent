@@ -250,6 +250,10 @@
 @php
 
 $lessons = [
+        [
+        'title' => 'Blues Essentials',
+        'description' => "Before the course starts, Kevin shares some essential advice that will prepare you for success."
+],
     [
         'title' => 'Blues Foundations',
         'description' => "In week 1, you'll dive into the 12-bar blues, develop rhythm, and get both hands playing with 5 workouts and a pre-recorded Q&A."
@@ -273,12 +277,7 @@ $features = [
         'title' => 'Course Kick-Off',
         'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/kick-off-30-day-blues.jpg',
         'videoId' => 851379131,
-    ],
-    [
-        'title' => 'Blues Essentials',
-        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/essentials-30-day-blues.jpg',
-        'videoId' => "",
-    ],
+    ]
 ];
 @endphp
 

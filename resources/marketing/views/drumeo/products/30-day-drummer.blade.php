@@ -266,13 +266,16 @@
     'price' => "$127",
     'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
     'brandTitle' => 'Drumeo',
-    'extraClass' => 'h-28 sm:h-36 lg:h-48'
 ])
 
  <!-- Lessons Section -->
 @php
 
 $lessons = [
+            [
+        'title' => 'Course Setup',
+        'description' => 'Get ready for the course with ANY setup including an acoustic kit, electronic kit, practice pad... or even pillows!',
+    ],
     [
         'title' => 'Your First Drum Beat',
         'description' => "In week 1, you'll learn the beginnings of the most popular drum beat of all-time through 1 lesson, 5 workouts, and 1 pre-recorded Q&A."
@@ -298,11 +301,6 @@ $features = [
         'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/kick-off-30d-drummer.jpeg',
         'videoId' => 738756003, //850695588
     ],
-    [
-        'title' => 'Course Setup',
-        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/acoustic-kit-setup.jpeg',
-        'videoId' => 0,
-    ]
 ];
 @endphp
 
