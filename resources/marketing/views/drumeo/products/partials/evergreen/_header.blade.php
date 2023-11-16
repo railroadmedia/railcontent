@@ -66,21 +66,23 @@
         </div>
         <div class="flex w-full flex-col items-center mt-6 sm:mt-5 lg:mt-10">
 
-            {{-- <a href={{ $buttonLink }}
+    {{-- <a href={{ $buttonLink }}
                 class="join blue medium w-full sm:w-1/2 lg:w-3/5 anchor-slide" role="button">{{ $buttonText }}</a> --}}
-            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3">
-                @include('drumeo.products.partials.evergreen._button', [
-                    'link' => $buttonLink,
-                    'buttonClass' => 'text-white font-bebas tracking-widest',
-                    'buttonText' => $buttonText,
-                ])
-            </div>
-            <div class="w-full md:w-1/2 text-center pt-4">
-                <img class="h-7 mr-2 lazyload" data-src="{{ $studentProfilesImage }}" alt="Joined student profiles">
-                <span class="inline-block align-middle text-xs leading-tight py-2">Join {{ $numStudents }}
-                    {{ $students }} who<br> have already registered.
-                </span>
-            </div>
+    <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3">
+        @include('drumeo.products.partials.evergreen._button', [
+            'link' => $buttonLink,
+            'buttonClass' => 'text-white font-bebas tracking-widest',
+            'buttonText' => $buttonText,
+        ])
+    </div>
+    <div class="w-full md:w-1/2 text-center pt-4">
+        @if ($numStudents > 500)
+            <img class="h-7 mr-2 lazyload" data-src="{{ $studentProfilesImage }}" alt="Joined student profiles">
+            <span class="inline-block align-middle text-xs leading-tight py-2">Join {{ $numStudents }}
+                {{ $students }} who<br> have already registered.
+            </span>
+        @endif
+    </div>
 {{--            @if (!empty($price) || !empty($enrollmentLink) || !empty($brandTitle))--}}
 {{--                <p class="text-sm mb-5 sm:mb-0 hover:text-{{ $brand }}">--}}
 {{--                    @if (!empty($price))--}}
