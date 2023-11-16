@@ -30,17 +30,20 @@
 
   </div>
 </template>
-  
+
 <script setup>
 import { HomeIcon } from '@heroicons/vue/solid';
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '../../../stores/user';
 
 const props = defineProps({
-  brand: String,
   firstLevelUrl: String,
   firstLevelTitle: String,
   secondLevelUrl: String,
   secondLevelTitle: String,
   lastLevelTitle: String,
 });
+
+const userStore = useUserStore();
+const { brand } = storeToRefs(userStore);
 </script>
-  
