@@ -158,28 +158,28 @@ const secondaryVideoModal = ref(false);
                 <a
                     v-if="primaryCtaText && primaryCtaUrl && !primaryVideo"
                     :href="primaryCtaUrl"
-                    :class="`tw-flex-1 tw-text-center tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-1 md:tw-py-2 tw-px-2 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-md md:tw-text-xl tw-mr-2 tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2`"
+                    :class="`tw-text-center tw-font-bebas-neue tw-rounded-full tw-py-2 sm:tw-py-1 md:tw-py-2 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 md:tw-text-xl tw-mr-2 tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2 ${secondaryCtaText ? 'tw-flex-1 tw-px-2' : 'tw-px-6'}`"
                 >
                     {{ primaryCtaText }}
                 </a>
                 <span
                     v-if="primaryCtaText && primaryVideo"
                     @click="primaryVideoModal = true"
-                    :class="`tw-flex-1 tw-text-center tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-1 md:tw-py-2 tw-px-2 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-mr-2 tw-line-clamp-1 md:tw-inline-block tw-text-md md:tw-text-xl ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2 tw-cursor-pointer`"
+                    :class="`tw-text-center tw-font-bebas-neue tw-rounded-full tw-py-2 sm:tw-py-1 md:tw-py-2 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-mr-2 tw-line-clamp-1 md:tw-inline-block md:tw-text-xl ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2 tw-cursor-pointer ${secondaryCtaText ? 'tw-flex-1 tw-px-2' : 'tw-px-6'}`"
                 >
                     {{ primaryCtaText }}
                 </span>
                 <a
                     v-if="secondaryCtaText && secondaryCtaUrl && !secondaryVideo"
                     :href="secondaryCtaUrl"
-                    :class="`tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-1 md:tw-py-2 tw-px-2 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-md md:tw-text-xl tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2`"
+                    :class="`tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-py-2 sm:tw-py-1 md:tw-py-2 tw-px-2 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 md:tw-text-xl tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2`"
                 >
                     {{ secondaryCtaText }}
                 </a>
                 <span
                     v-if="secondaryCtaText && secondaryVideo"
                     @click="secondaryVideoModal = true"
-                    :class="`tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-1 md:tw-py-2 tw-px-2 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-md md:tw-text-xl tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2 tw-cursor-pointer`"
+                    :class="`tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-py-2 sm:tw-py-1 md:tw-py-2 tw-px-2 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 md:tw-text-xl tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2 tw-cursor-pointer`"
 
                 >
                     {{ secondaryCtaText }}

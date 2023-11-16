@@ -22896,6 +22896,9 @@ a:visited{
 .tw-max-w-\[520px\]{
   max-width: 520px !important;
 }
+.tw-max-w-\[450px\]{
+  max-width: 450px !important;
+}
 .tw-max-w-\[475px\]{
   max-width: 475px !important;
 }
@@ -22973,6 +22976,9 @@ a:visited{
 }
 .tw-flex-none{
   flex: none !important;
+}
+.tw-flex-1{
+  flex: 1 1 0% !important;
 }
 .tw-flex-shrink-0{
   flex-shrink: 0 !important;
@@ -24321,13 +24327,9 @@ a:visited{
   padding-left: 15px !important;
   padding-right: 15px !important;
 }
-.tw-py-0\.5{
-  padding-top: 0.125rem !important;
-  padding-bottom: 0.125rem !important;
-}
-.tw-py-0{
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
+.tw-py-1\.5{
+  padding-top: 0.375rem !important;
+  padding-bottom: 0.375rem !important;
 }
 .tw-py-\[8px\]{
   padding-top: 8px !important;
@@ -24356,6 +24358,14 @@ a:visited{
 .tw-px-\[40px\]{
   padding-left: 40px !important;
   padding-right: 40px !important;
+}
+.tw-py-0\.5{
+  padding-top: 0.125rem !important;
+  padding-bottom: 0.125rem !important;
+}
+.tw-py-0{
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
 }
 .tw-px-\[30px\]{
   padding-left: 30px !important;
@@ -24441,13 +24451,13 @@ a:visited{
   padding-left: 15px !important;
   padding-right: 15px !important;
 }
-.tw-py-0\.5{
-  padding-top: 0.125rem !important;
-  padding-bottom: 0.125rem !important;
+.tw-py-2{
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
 }
-.tw-py-0{
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
+.tw-px-2{
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
 }
 .tw-pt-8{
   padding-top: 2rem !important;
@@ -26450,6 +26460,9 @@ a:visited{
   .sm\:tw-max-w-md{
     max-width: 28rem !important;
   }
+  .sm\:tw-max-w-none{
+    max-width: none !important;
+  }
   .sm\:tw-flex-1{
     flex: 1 1 0% !important;
   }
@@ -26558,6 +26571,10 @@ a:visited{
     padding-top: 0.25rem !important;
     padding-bottom: 0.25rem !important;
   }
+  .sm\:tw-py-1\.5{
+    padding-top: 0.375rem !important;
+    padding-bottom: 0.375rem !important;
+  }
   .sm\:tw-px-6{
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
@@ -26597,6 +26614,10 @@ a:visited{
   .sm\:tw-py-1{
     padding-top: 0.25rem !important;
     padding-bottom: 0.25rem !important;
+  }
+  .sm\:tw-py-2{
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
   }
   .sm\:tw-pr-12{
     padding-right: 3rem !important;
@@ -27923,14 +27944,6 @@ a:visited{
     padding-left: 3.5rem !important;
     padding-right: 3.5rem !important;
   }
-  .lg\:tw-py-2\.5{
-    padding-top: 0.625rem !important;
-    padding-bottom: 0.625rem !important;
-  }
-  .lg\:tw-py-2{
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
-  }
   .lg\:tw-py-\[25px\]{
     padding-top: 25px !important;
     padding-bottom: 25px !important;
@@ -27970,14 +27983,6 @@ a:visited{
   .lg\:tw-px-14{
     padding-left: 3.5rem !important;
     padding-right: 3.5rem !important;
-  }
-  .lg\:tw-py-2\.5{
-    padding-top: 0.625rem !important;
-    padding-bottom: 0.625rem !important;
-  }
-  .lg\:tw-py-2{
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
   }
   .lg\:tw-pr-6{
     padding-right: 1.5rem !important;
