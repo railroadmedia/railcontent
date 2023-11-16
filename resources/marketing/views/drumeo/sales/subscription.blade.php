@@ -130,8 +130,8 @@
     @if(!empty($promoVersion))
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
             "scrollToJoin" => true,
-            "hideMenu" => true,
             "logoUrl" => Request::path(),
         ])
     @elseif(!empty($month))

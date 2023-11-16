@@ -132,6 +132,7 @@
     @if(!empty($promoVersion))
         @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
             "scrollToJoin" => true,
             "hideMenu" => true,
         ])
