@@ -41,15 +41,14 @@
 @section('content')
     <!-- BREADCRUMBS -->
     @if($lessonType === 'challenges')
+        <!-- BREADCRUMBS -->
         <breadcrumb
             brand="{{ $brand }}"
             first-level-url="/{{ $brand }}/workouts" 
             first-level-title="Workouts"
-            second-level-url="/{{ $brand }}/workouts/challenges"
-            second-level-title="All {{ ucfirst($catalogueMeta['name']) }}"
+            last-level-title="All {{ ucfirst($catalogueMeta['name']) }}"
         >
         </breadcrumb>
-        <br>
         <br>
     @endif
 

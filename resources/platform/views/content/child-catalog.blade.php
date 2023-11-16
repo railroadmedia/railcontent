@@ -4,39 +4,6 @@
     <title>{{ ucfirst($brand) }} {{ ucfirst($catalogueMeta['name']) }} | Musora</title>
 @endsection
 
-@section('layout-styles')
-    <style>
-        .search-button-col {
-            -webkit-box-tw-flex: 0;
-            -ms-tw-flex: 0 0 50px;
-            tw-flex: 0 0 50px;
-            max-width: 50px;
-            min-width: 50px;
-        }
-
-        button.btn.page-button {
-            margin: 0 3px;
-        }
-
-        button.btn.page-button > span {
-            border-width: 1px;
-            font-weight: 500;
-        }
-    </style>
-@endsection
-
-@section('layout-scripts')
-    @if($lessonType === 'student-review')
-        {{-- todo: script --}}
-        {{--        <script src="{{ mix('assets/members/js/student-review-form.js') }}"></script>--}}
-    @endif
-@endsection
-
-@section('review-modal-section')
-    @if($lessonType === 'student-review' || $lessonType === 'student-focus')
-        @include('partials._review-modal', ['brand' => $brand])
-    @endif
-@endsection
 
 @section('content')
     <!-- BREADCRUMBS -->
@@ -44,13 +11,9 @@
         brand="{{ $brand }}"
         first-level-url="/{{ $brand }}/workouts" 
         first-level-title="Workouts"
-        second-level-url="/{{ $brand }}/workouts/challenges"
-        second-level-title="All {{ ucfirst($catalogueMeta['name']) }}"
+        last-level-title="All {{ ucfirst($catalogueMeta['name']) }}"
     >
     </breadcrumb>
-    <br>
-    <br>
-
 
     @if(session()->has('success-message'))
         <div class="form-success-message container mt-3">

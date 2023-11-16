@@ -8,8 +8,8 @@
     <!-- BREADCRUMBS -->
     <breadcrumb
         brand="{{ $brand }}"
-        first-level-url="/{{ $brand }}/workouts"
-        first-level-title="Workouts"
+        last-level-url="/{{ $brand }}/workouts"
+        last-level-title="Workouts"
     >
     </breadcrumb>
 

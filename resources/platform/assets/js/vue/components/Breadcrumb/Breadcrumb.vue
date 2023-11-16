@@ -1,26 +1,33 @@
 <template>
   <div
-    class="tw-whitespace-nowrap tw-text-ellipsis tw-w-full tw-overflow-hidden tw-px-3 tw-text-black tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-flex tw-justify-center tw-items-center tw-w-full tw-h-[40px] dark:tw-bg-black tw-bg-[#e5e7eb] tw-text-center tw-uppercase tw-text-sm ">
+    class="tw-whitespace-nowrap tw-text-ellipsis tw-w-full tw-overflow-hidden tw-px-3 tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-flex tw-justify-center tw-items-center tw-w-full tw-h-[40px] dark:tw-bg-black tw-bg-[#e5e7eb] tw-text-center tw-uppercase tw-text-sm ">
+    <!-- Home -->
     <a :href="`/${brand}`"
-      class="tw-text-black tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] dark:hover:tw-text-white hover:tw-text-black">
+      class="tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] dark:hover:tw-text-white hover:tw-text-black">
       <HomeIcon class="tw-w-[14px] tw-h-[14px]" />
     </a>
+
+    <!-- Parent Pages -->
     <template v-if="firstLevelTitle">
-      &nbsp;/&nbsp;
-      <a class="tw-text-black tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-font-normal tw-text-sm dark:hover:tw-text-white hover:tw-text-black"
+      <span class="tw-font-bold">&nbsp;/&nbsp;</span>
+      <a class=" tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-text-sm dark:hover:tw-text-white hover:tw-text-black"
         :href="firstLevelUrl">{{ firstLevelTitle }}</a>
     </template>
     <template v-if="secondLevelTitle">
-      &nbsp;/&nbsp;
-      <a class="tw-w-auto tw-overflow-hidden tw-text-ellipsis tw-text-black tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-font-normal tw-text-sm dark:hover:tw-text-white hover:tw-text-black tw-font-bold lg:tw-font-normal"
-        :href="secondLevelUrl">{{ secondLevelTitle }}</a>
+      <span class="tw-font-bold">&nbsp;/&nbsp;</span>
+      <a class=" tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-text-sm dark:hover:tw-text-white hover:tw-text-black"
+        :href="secondLevelUrl">{{ secondLevelTitle }}
+      </a>
     </template>
-    <span v-if="lastLevelTitle" class="tw-w-auto tw-overflow-hidden tw-text-ellipsis tw-hidden lg:tw-inline">
-      &nbsp;/&nbsp;
-      <span class="tw-font-bold tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-text-sm">
+
+    <!-- Current Page -->
+    <template v-if="lastLevelTitle">
+      <span class="tw-font-bold">&nbsp;/&nbsp;</span>
+      <p class="tw-font-bold tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-text-sm tw-w-auto tw-overflow-hidden tw-text-ellipsis">
         {{ lastLevelTitle }}
-      </span>
-    </span>
+      </p>
+    </template>
+
   </div>
 </template>
   
