@@ -8,13 +8,13 @@
 <div class="w-full pt-4">
     @if (!empty($price) || !empty($enrollmentLink) || !empty($brandTitle))
         @if ($currentDate->isSameDay($blackFridayDate))
-            <strong> Only <span class="line-through">{{ $price }}</span> {{$discountedPrice}} For Black Friday (Save 61%)</strong>
+            <strong> Only <span class="line-through">{{ $price }}</span> {{ $discountedPrice }} For Black Friday (Save {{ round(100 - ($discountedPrice / $price) * 100) }}%)</strong>
         @elseif ($currentDate->isSameDay($cyberMondayDate))
-            <strong> Only <span class="line-through">{{ $price }}</span> {{$discountedPrice}} For Cyber Monday (Save 61%)</strong>
+            <strong> Only <span class="line-through">{{ $price }}</span> {{$discountedPrice}} For Cyber Monday (Save {{ round(100 - ($discountedPrice / $price) * 100) }}%)</strong>
         @elseif ($currentDate->isSameDay($christmasDate))
-            <strong> Only <span class="line-through">{{ $price }}</span>{{$discountedPrice}} For Christmas (Save 61%)</strong>
+            <strong> Only <span class="line-through">{{ $price }}</span>{{$discountedPrice}} For Christmas (Save {{ round(100 - ($discountedPrice / $price) * 100) }}%)</strong>
         @else
-            <p class="mb-5 sm:mb-0 hover:text-{{ $brand }}">
+            <p class="pb-5 sm:mb-0 hover:text-{{ $brand }}">
               
                     <a href={{ $enrollmentLink }}>
                         <span class="text-black">
