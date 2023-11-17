@@ -5,7 +5,10 @@ use App\Modules\Ecommerce\Controllers\ShopifyWebHookController;
 use App\Modules\Ecommerce\Middleware\ShopifyWebhookVerify;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('ecommerce/shopify')->group(function () {
+Route::prefix('ecommerce/shopify')
+    ->middleware(config('ecommerce.route_middleware_public_groups'))
+    ->group(function () {
+
     Route::prefix('webhook')
         ->middleware(ShopifyWebhookVerify::class)
         ->group(function () {
@@ -33,7 +36,7 @@ Route::prefix('ecommerce/shopify')->group(function () {
     );
 });
 
-Route::middleware(['web_public'])
+Route::middleware(config('ecommerce.route_middleware_public_groups'))
     ->group(function () {
         Route::get('/order/{brand?}', [\App\Modules\Ecommerce\Controllers\ShopifyCartAPIController::class, 'redirectToShopifyOrderForm'])
             ->name('redirect-to-shopify-order-form');

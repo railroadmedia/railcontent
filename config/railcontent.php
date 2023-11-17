@@ -1360,6 +1360,7 @@ return [
         'home_staff_pick_rating',
         'title',
         'xp',
+        'total_xp',
         'album',
         'artist',
         'chord_or_scale',

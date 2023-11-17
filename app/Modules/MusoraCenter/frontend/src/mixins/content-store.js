@@ -110,7 +110,8 @@ export default {
             delay = 4000,
             child = false,
         }) {
-            let fieldId = this.thisPost[key] === undefined ? null : this.thisPost[key].id;
+
+            let fieldId = (this.thisPost[key] === undefined || this.thisPost[key] === null) ? null : this.thisPost[key].id;
             const position = Array.isArray(this.thisPost[key]) ? this.thisPost[key].length + 1 : 1;
 
             if (multi && deleted) {
@@ -269,7 +270,7 @@ export default {
          * @returns {Boolean}
          */
         isDeleted(key, val) {
-            return this.thisPost[key] !== undefined && (this.thisPost[key].id !== null && val.length === 0);
+            return this.thisPost[key] !== null && this.thisPost[key] !== undefined  && (this.thisPost[key].value !== null && val.length === 0);
         },
 
         /**
