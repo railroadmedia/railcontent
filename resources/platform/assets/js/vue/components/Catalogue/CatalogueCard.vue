@@ -42,7 +42,7 @@
             <div class="tw-flex tw-w-full">
                 <a :href="renderLink ? item.url : null"
                     class="card-info tw-flex tw-flex-auto tw-flex-col tw-p-1 tw-rounded-lg"
-                    :class="displayInline ? 'tw-justify-center' : 'tw-py-2'">
+                    :class="displayInline ? 'tw-justify-center' : 'tw-pt-2'">
                     <!-- Coach Title -->
                     <div v-if="item.type !== 'song-part'">
                         <h5 class="tw-text-xs tw-font-normal tw-leading-none tw-text-[#3F3F46] tw-mb-1 tw-uppercase dark:tw-text-[#9EC0DC]"
