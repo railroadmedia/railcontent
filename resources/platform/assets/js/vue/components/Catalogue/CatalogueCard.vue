@@ -1,7 +1,54 @@
 <template>
-    <div v-if="!isMiniCard"
-        class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]"
-        :class="[class_object, displayInline ? 'tw-py-3' : 'tw-pb-2']">
+    <div :class="getWrapperClass">
+    <template v-if="isMiniCard">
+        <div class="tw-flex tw-items-center tw-w-full tw-h-full">
+        <!-- Thumbnail Image -->
+        <a :href="renderLink ? item.url : null" class="tw-flex-none tw-h-[70px] tw-w-[121px] tw-relative">
+            <div
+                class="tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[70px] tw-w-[121px] tw-justify-center tw-items-center tw-text-white tw-text-center">
+                <i class="fas" :class="thumbnailIcon"></i>
+                <p v-if="!isReleased" class="tw-text-sm text-white font-bold">
+                    {{ releaseDate }}
+                </p>
+            </div>
+            <img :src="mappedData.thumbnail" :alt="`${mappedData.color_title} thumbnail`"
+                class="tw-h-[70px] tw-w-[121px] tw-rounded-[5px]">
+        </a>
+
+        <!-- Instructor Name and Title -->
+        <a :href="renderLink ? item.url : null"
+            class="tw-flex tw-flex-col tw-justify-center tw-flex-grow tw-ml-[10px] tw-font-open-sans tw-h-[70px] tw-overflow-hidden">
+            <!-- Instructor Name -->
+            <div
+                class="tw-font-semibold tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-[10px] tw-uppercase tw-truncate tw-leading-[15px]">
+                {{ mappedData.color_title
+                }}</div>
+            <!-- Title -->
+            <div
+                class="tw-text-[#00101D] dark:tw-text-white tw-text-[12px] tw-line-clamp-2 tw-font-[700] tw-leading-[18px]">
+                {{
+                    mappedData.black_title }}</div>
+        </a>
+
+        <!-- Action Button -->
+        <div :id="`${item.id}-action-btn`" class="tw-inline-flex tw-items-start tw-p-1 tw-relative"
+            v-click-outside="() => { state.dropdownOpen = false }">
+            <button v-if="item.type !== 'pack-bundle' && showMyListAction"
+                class="tw-flex-none tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
+                :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'" title="More"
+                :data-content-id="item.id" :data-content-type="item.type"
+                @click.prevent="handleShowDropdown(`${item.id}-action-btn`)">
+                <DotsHorizontalIcon class="tw-h-[24px] tw-w-[24px]" />
+            </button>
+            <Dropdown v-if="showDropdown" :brand="brand" :item="item" :is-open="state.dropdownOpen"
+                :dropdownOptions="dropdownOptions" @closeDropdown="state.dropdownOpen = false"
+                :position="state.dropdownPosition"
+                @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })"
+                @progressReset="emitResetProgress({ content_id: item.id })" />
+        </div>
+    </div>
+    </template>
+    <template v-else>
         <div class="tw-flex" :class="displayInline ? 'tw-flex-row' : 'tw-flex-col'">
             <!-- Thumbnail Section -->
             <a :href="renderLink ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
@@ -101,54 +148,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div v-if="isMiniCard"
-        class="tw-group tw-flex tw-items-center tw-py-[4px] tw-h-[78px] tw-relative tw-w-[365px] lg:tw-w-auto tw-shrink-0">
-        <!-- Thumbnail Image -->
-        <a :href="renderLink ? item.url : null" class="tw-flex-none tw-h-[70px] tw-w-[121px] tw-relative">
-            <div
-                class="tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[70px] tw-w-[121px] tw-justify-center tw-items-center tw-text-white tw-text-center">
-                <i class="fas" :class="thumbnailIcon"></i>
-                <p v-if="!isReleased" class="tw-text-sm text-white font-bold">
-                    {{ releaseDate }}
-                </p>
-            </div>
-            <img :src="mappedData.thumbnail" :alt="`${mappedData.color_title} thumbnail`"
-                class="tw-h-[70px] tw-w-[121px] tw-rounded-[5px]">
-        </a>
-
-        <!-- Instructor Name and Title -->
-        <a :href="renderLink ? item.url : null"
-            class="tw-flex tw-flex-col tw-justify-center tw-flex-grow tw-ml-[10px] tw-font-open-sans tw-h-[70px] tw-overflow-hidden">
-            <!-- Instructor Name -->
-            <div
-                class="tw-font-semibold tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-[10px] tw-uppercase tw-truncate tw-leading-[15px]">
-                {{ mappedData.color_title
-                }}</div>
-            <!-- Title -->
-            <div
-                class="tw-text-[#00101D] dark:tw-text-white tw-text-[12px] tw-line-clamp-2 tw-font-[700] tw-leading-[18px]">
-                {{
-                    mappedData.black_title }}</div>
-        </a>
-
-        <!-- Action Button -->
-        <div :id="`${item.id}-action-btn`" class="tw-inline-flex tw-items-start tw-p-1 tw-relative"
-            v-click-outside="() => { state.dropdownOpen = false }">
-            <button v-if="item.type !== 'pack-bundle' && showMyListAction"
-                class="tw-flex-none tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
-                :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
-                title="More" :data-content-id="item.id"
-                :data-content-type="item.type" @click.prevent="handleShowDropdown(`${item.id}-action-btn`)">
-                <DotsHorizontalIcon class="tw-h-[24px] tw-w-[24px]" />
-            </button>
-            <Dropdown v-if="showDropdown" :brand="brand" :item="item" :is-open="state.dropdownOpen"
-                :dropdownOptions="dropdownOptions" @closeDropdown="state.dropdownOpen = false"
-                :position="state.dropdownPosition"
-                @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })"
-                @progressReset="emitResetProgress({ content_id: item.id })" />
-        </div>
-    </div>
+    </template>
+</div>
 </template>
 <script setup>
 import { computed, onBeforeUnmount, reactive, onMounted } from 'vue';
@@ -276,6 +277,15 @@ const class_object = computed(() => ({
     'bb-grey-1-1 dark:tw-border-[#223F57]': props.displayInline,
     'display-inline': props.displayInline,
 }));
+
+const getWrapperClass = computed(() => {
+    if (props.isMiniCard) {
+        return `tw-group tw-py-[4px] tw-h-[78px] tw-relative tw-w-[365px] lg:tw-w-auto tw-shrink-0`;
+    }
+    else {
+        return `tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px] ${class_object.value} ${props.displayInline ? 'tw-py-3' : 'tw-pb-2'}`;
+    }
+});
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);
 
