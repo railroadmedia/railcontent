@@ -49,6 +49,11 @@
                 right: -100px;
             }
         }
+         @media (max-width: 638px) {
+            .dropdown-box {
+            background: linear-gradient(180deg, #00101D 0%, rgba(0, 16, 29, 0) 100%);
+            }
+        }
     </style>
 @stop()
 

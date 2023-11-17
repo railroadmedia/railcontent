@@ -14,7 +14,7 @@
         @elseif ($currentDate->isSameDay($christmasDate))
             <strong> Only <span class="line-through">{{ $price }}</span>{{$discountedPrice}} For Christmas (Save 61%)</strong>
         @else
-            <p class="mb-5 sm:mb-0 hover:text-{{ $brand }}">
+            <p class="pb-5 sm:mb-0 hover:text-{{ $brand }}">
               
                     <a href={{ $enrollmentLink }}>
                         <span class="text-black">

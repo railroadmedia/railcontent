@@ -185,6 +185,14 @@
                 margin:25px 10px 0
             }
         }
+         @media (max-width: 638px) {
+            .dropdown-box {
+            background: linear-gradient(180deg, #00101D 0%, rgba(0, 16, 29, 0) 100%);
+            }
+        }
+         .container-video {
+    background: linear-gradient(3deg, white 50%, #EFF7FF 50%);
+}
     </style>
     <style>
         .timeline-container .timeline:after,
@@ -206,6 +214,7 @@
 @section('body-data')
     x-data ='{
         trailer : false,
+        testimonial: false,
     }'
 @endsection
 
@@ -343,13 +352,77 @@ $items = [
         ]
 @endphp
 
-<!-- Get started-->
+<!-- Get started with video section-->
+<section class="text-center bg-blue-50">
+    <div class="container max-w-4xl mx-auto px-6 pt-6">
+        <div class="flex flex-wrap sm:flex-nowrap items-center justify-center pb-4">
+            <img class="h-32 md:h-64 lg:h-72 py-4 lazyload p-2"
+                data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png"
+                alt="logo">
+            <ul class="pl-6">
+                @foreach ($items as $item)
+                    <li>
+                        <h4 class="leading-loose text-left"><i
+                                class="fas fa-sharp fa-solid fa-circle-check text-{{ $brand }} mr-5"
+                                aria-hidden="true"></i>{{ $item }}</h4>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+        {{-- <a href={{$buttonLink}} class="join blue medium w-full sm:w-1/2 md:w-1/3 lg:w-3/5 mt-6 sm:mt-12 mb-3 anchor-slide" role="button">{{$buttonText}}</a><br> --}}
+        <div class="w-full flex flex-col items-center">
+            <div class="w-full sm:w-1/2 md:w-1/3">
+                @include('drumeo.products.partials.evergreen._button', [
+                    'link' => $buttonLink,
+                    'buttonClass' => 'text-white font-bebas tracking-widest',
+                    'buttonText' => $buttonText,
+                ])
+            </div>
+            {{-- <div class="flex flex-row items-center py-2">
+                     @if ($numStudents > 500)
+                    <img class="h-7 mr-2 lazyload" alt="Joined Student Profiles" data-src={{ $studentProfilesImage }}>
+                    <span class="inline-block align-middle leading-tight text-xs">Join
+                        {{ $numStudents }} {{ $students }} who<br> have already registered.
+                    </span>
+                    @endif
+                </div> --}}
+        </div>
+        @include('drumeo.products.partials.evergreen._price-link', [
+            'price' => $price,
+            'enrollmentLink' => $enrollmentLink,
+            'brandTitle' => $brandTitle,
+        ])
+    </div>
+</section>
 
-@include('drumeo.products.partials.evergreen._get-started', [
-    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png',
-    'items' => $items,
-    'extraClass' => 'h-32 md:h-64 lg:h-72 py-4'
-])
+<section class="container-video">
+    <div class="container max-w-4xl mx-auto flex flex-col items-center md:pt-10 text-center px-6">
+        <h2 class="py-2"><strong>You’ll sound like THIS after 30 days…</strong></h2>
+        <p class="pb-2 md:pb-4">Hear what REAL 30-Day Blues Piano students sound like after completing the course:
+        </p>
+        <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
+            x-on:click="testimonial = true;" role="button">
+            <i
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
+
+
+            <img class="absolute inset-0 rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/testimonial-video-thumb.png"
+                alt="testimonial image" fetchpriority="high" />
+
+        </div>
+        <p class="py-2 md:py-6">Ready to sound this good?</p>
+
+        <div class="w-full sm:w-1/2 md:w-1/3">
+            @include('drumeo.products.partials.evergreen._button', [
+                'link' => $buttonLink,
+                'buttonClass' => 'text-white font-bebas tracking-widest',
+                'buttonText' => $buttonText,
+            ])
+        </div>
+    </div>
+</section>
+
 
  <!-- Meet your teacher section -->
     <section class="text-center sm:px-6 pt-10 sm:pt-14 lg:pt-20 sm:pb-32 lg:pb-40">
@@ -450,6 +523,12 @@ $points = [
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '879913986',
+        'vimeo' => true,
+    ])
+
+    @include('_partials.components.video-modal',[
+        'name' => 'testimonial',
+        'video' => '884499141',
         'vimeo' => true,
     ])
 
