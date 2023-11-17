@@ -269,7 +269,7 @@
                 ],
                 [
                 "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/pianote-05.png",
-                "title" => "5. Drum lessons that don’t break the bank.",
+                "title" => "5. Piano lessons that don’t break the bank.",
                 "description" => "Let's do some quick math. Typical private piano lessons will cost about $30 each – and if you're going once a week, that adds up to $1,560 each year (or $130 per month). Ouch.
     <br><br>
     A full year of Musora is only $240 – <strong>just $4.62/week, or $20/month.</strong>
