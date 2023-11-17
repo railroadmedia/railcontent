@@ -2,7 +2,7 @@
 //dd($usersList->results());
 @endphp
 
-<section class="tw-flex tw-flex-row tw-mb-6 md:tw-mb-8">
+<section class="tw-flex tw-flex-row tw-mb-[30px]">
     <div class="tw-flex tw-flex-col tw-grow tw-w-full">
 
         <!-- Section Title -->
