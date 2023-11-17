@@ -23,40 +23,18 @@
         </div>
     @endif
 
-    @if($hasStartedLessons && $lessonType !== 'routine')
-        <section class="tw-container tw-mx-auto dark:tw-text-white lg:tw-px-4">
-            <!-- Section Title -->
-            <div class="tw-flex tw-items-center tw-mt-5 tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
-                <a href="/{{ $brand }}/lesson-history/in-progress" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                    <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">In Progress</h2>
-                </a>
-                <a href="/{{ $brand }}/lesson-history/in-progress"
-                    aria-label="See All Subscribed Lessons"
-                    class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
-                >
-                    See All
-                </a>
-            </div>
-            <div>
-                <transition appear name="fade">
-                    <catalogue-card-container
-                        theme-color="{{ $brand }}"
-                        catalogue-type="grid"
-                        no-results-message="Looks like you haven't started any lessons.
-            Once you watch a video, it will show up here for you to access later."
-                        :six-wide="true"
-                        :show-filter="false"
-                        :pre-loaded-content="{{ $startedLessons }}"
-                    >
-                    </catalogue-card-container>
-                </transition>
-            </div>
-        </section>
-    @endif
-
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
-
+        <collection-wrapper
+            :brand="{{ json_encode($brand) }}"
+            :collection-type="{{ json_encode($lessonType) }}"
+            :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
+            :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"
+            :included-types="{{ json_encode(['course']) }}"
+            :pre-loaded-content="{{ $listLessons }}"
+            :statuses="{{ json_encode($statuses ?? ['published']) }}"
+            :title="{{ json_encode($catalogueMeta['shortname'] ?? $catalogueMeta['name']) }}"
+        ></collection-wrapper>
     </div>
 
 @endsection
