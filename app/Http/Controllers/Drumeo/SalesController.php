@@ -189,7 +189,7 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.pages.lifetime', ['products' => $products, 'theme' => 'drumeo']);
     }
-    public function salesUpgradeLifetime()
+    public function lifetimeDiscount()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);

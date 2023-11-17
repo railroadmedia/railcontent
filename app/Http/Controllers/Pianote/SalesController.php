@@ -177,7 +177,7 @@ class SalesController extends BaseController
         return view('pianote.shop.pages.lifetime', [ 'theme' => 'pianote' ]);
     }
 
-    public function lifetimeUpgrade()
+    public function lifetimeDiscount()
     {
         return view('pianote.shop.pages.lifetime', [ 'theme' => 'pianote', 'upgradeVersion' => true  ]);
     }
