@@ -89,7 +89,7 @@ class ShopifyCartAPIController extends Controller
             $cartData = $this->shopifyStoreFrontAPIService->addToCart(
                 $existingShopifyCartId,
                 $productVariantIdsAndQuantitiesToAdd,
-                !empty($discountCodeToApply) ? [$discountCodeToApply] : []
+                $discountCodesToApply
             );
 
             Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
