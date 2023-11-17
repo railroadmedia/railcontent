@@ -751,8 +751,16 @@ return [
             'challenge-part' => [
                 'name' => 'Challenge Part',
                 'icon' => 'icon-courses',
-                'description' => "Tackle your next drumming goal with bite-sized courses from many of the world's best drummers. ",
-                'allowableFilters' => ['instructor','duration'],
+                'description' => "... ",
+                'allowableFilters' => ['instructor','duration','style','difficulty'],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'sortBy' => '-published_on',
+            ],
+            'challenge' => [
+                'name' => 'Challenge',
+                'icon' => 'icon-courses',
+                'description' => "... ",
+                'allowableFilters' => ['instructor','duration','style','difficulty'],
                 'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
             ],

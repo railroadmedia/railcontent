@@ -162,6 +162,10 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->name('platform.workouts');
 
+                Route::get('/{brand}/workouts/challenges', [WorkoutsPageController::class, 'showChallengesPage'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.workouts.challenges');
+
                 Route::get('/{brand}/shows', [ContentPagesController::class, 'shows'])
                     ->whereIn('brand', ['drumeo'])
                     ->name('platform.shows');
