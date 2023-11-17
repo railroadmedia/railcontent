@@ -83,7 +83,7 @@
                             </button>
                         </div>
                         <input name="inf_form_xid" type="hidden" value="{{ str_replace('-', '', (str_replace(' ', '', 'Pianote - Engagement - Trigger - Metronome Notice - Web Form'))) }}"/>
-                        <input name="success_redirect" type="hidden" value="/thank-you"/>
+                        <input name="success_redirect" type="hidden" value="https://www.pianote.com/thank-you"/>
                     </form>
 
 
