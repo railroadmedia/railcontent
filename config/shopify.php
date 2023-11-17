@@ -93,5 +93,6 @@ return [
 
     'discount_codes' => [
         'free_with_annual' => 'FREE-W-ANNUAL-6702',
+        'free_with_lifetime' => 'FREE-W-LIFETIME-849',
     ]
 ];
