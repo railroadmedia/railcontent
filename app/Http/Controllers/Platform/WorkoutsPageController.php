@@ -125,4 +125,23 @@ class WorkoutsPageController extends BaseController
             "hasStartedLessons" => 0,
         ]);
     }
+
+    public function showWorkoutPage(Request $request, $domain, $brand, $slug, $id)
+    {
+        $contentToRenderAsLesson = $this->contentService->getById($id);
+        $relatedLessons = (new ContentFilterResultsEntity(['results' => []]))->toResponseRawJson();
+        $thisLessonJson =
+            (new ContentFilterResultsEntity(['results' => [$contentToRenderAsLesson], 'total_results' => 1]))->toResponseRawJson(
+            );
+
+        return view('content.lesson', [
+            "parentType" => $contentToRenderAsLessonParent['type'] ?? null,
+            "lessonType" => 'challenge-part',
+            "lessonContent" => $contentToRenderAsLesson,
+            "relatedLessons" => $relatedLessons,
+            "showEmail" => false,
+            "thisLessonJson" => $thisLessonJson,
+
+        ]);
+    }
 }
