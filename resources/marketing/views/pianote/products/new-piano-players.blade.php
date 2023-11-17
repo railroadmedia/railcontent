@@ -69,9 +69,17 @@
         "noBreadcrumb" => true
     ])
 
-    @php
-            $registerButtonUrl = "/ecommerce/add-to-cart?products[new-piano-players-start-here]=1&redirect=/order";
-    @endphp
+        @php
+            $price = floatval($productPrices['new-piano-players-start-here']->price);
+            $discountedPrice = floatval($productPrices['new-piano-players-start-here']->discounted_price);
+            $enrollmentLink = 'https://www.pianote.com/choose-plan';
+            $brandTitle = 'Pianote';
+            $buttonText = 'GET STARTED';
+            $buttonLink = "/ecommerce/add-to-cart?products[new-piano-players-start-here]=1&redirect=/order";
+            $studentProfilesImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png';
+            $numStudents =  number_format($nPackOwners ?? 0);
+            $students = 'piano players';
+        @endphp
 
 
 <!-- Header Section -->
@@ -84,14 +92,6 @@
     'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/header-right-collage.png',
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/header-left-collage.png',
     'mediaSource' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/header-image.png',
-    'buttonText' => 'GET STARTED',
-    'buttonLink' => $registerButtonUrl,
-    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
-    'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'piano players',
-     'price' => "$127",
-    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
-    'brandTitle' => 'Pianote',
 ])
 
 <!-- Lessons Section -->
@@ -102,7 +102,8 @@ $features = [
         'title' => 'Course Kick-Off',
         'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/kick-off-new-players.jpg',
         'videoId' => 797858259,
-    ]
+    ],
+
 ];
 
 $lessons = [
@@ -194,14 +195,7 @@ $items = [
 @include('drumeo.products.partials.evergreen._get-started', [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/logo-new-piano-players-2.png',
     'items' => $items,
-    'buttonText' => 'GET STARTED',
-    'buttonLink' => $registerButtonUrl,
-    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
-    'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'piano players',
-     'price' => "$127",
-    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
-    'brandTitle' => 'Pianote'])
+])
 
  <!-- Meet your teacher section -->
 
@@ -330,16 +324,8 @@ $points = [
     'logoAlt' => 'new piano players logo',
     'title' => 'Learn the piano <br class="md:hidden"> in just 30 days.',
     'points' => $points,
-    'buttonText' => 'Get Started',
-    'buttonLink' => $registerButtonUrl,
-    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png',
     'profileImageAlt' => 'student profile image',
     'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/new-piano-players/order-collage.png',
-    'students' => 'piano players',
-    'numStudents' => number_format($nPackOwners ?? 0),
-    'price' => "$127",
-    'enrollmentLink' => 'https://www.pianote.com/choose-plan',
-    'brandTitle' => 'Pianote'
 ])
 
     @include('_partials.components.video-modal',[

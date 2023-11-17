@@ -244,7 +244,15 @@
             ])
 
     @php
-            $registerButtonUrl = "/ecommerce/add-to-cart?products[30-day-drummer]=1&redirect=/order";
+            $price = floatval($productPrices['30-day-drummer-3']->price);
+            $discountedPrice = floatval($productPrices['30-day-drummer-3']->discounted_price);
+            $enrollmentLink = 'https://www.drumeo.com/choose-plan';
+            $brandTitle = 'Drumeo';
+            $buttonText = 'GET STARTED';
+            $buttonLink = "/ecommerce/add-to-cart?products[30-day-drummer-3]=1&redirect=/order";
+            $studentProfilesImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png';
+            $numStudents =  number_format($nPackOwners ?? 0);
+            $students = 'drummers';
     @endphp
 
  <!-- Header Section -->
@@ -258,21 +266,14 @@
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/header-left-collage.png',
     'isVideo' => true,
     'mediaSource' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/video-reel.mp4',
-    'buttonText' => 'GET STARTED',
-    'buttonLink' =>  $registerButtonUrl,
-    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
-    'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'drummers',
-    'price' => "$127",
-    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
-    'brandTitle' => 'Drumeo',
+    
 ])
 
  <!-- Lessons Section -->
 @php
 
 $lessons = [
-            [
+    [
         'title' => 'Course Setup',
         'description' => 'Get ready for the course with ANY setup including an acoustic kit, electronic kit, practice pad... or even pillows!',
     ],
@@ -359,14 +360,7 @@ $items = [
 @include('drumeo.products.partials.evergreen._get-started', [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/30DayDrummerSeason3-Logo-10.png',
     'items' => $items,
-    'buttonText' => 'GET STARTED',
-    'buttonLink' =>  $registerButtonUrl,
-    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
-    'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'drummers',
-    'price' => "$127",
-    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
-    'brandTitle' => 'Drumeo'])
+   ])
 
  <!-- Meet your teacher section -->
 <section class="teacher-block text-center sm:px-6 md:px-5 pt-10 sm:py-10 sm:py-14 lg:py-20 bg-white">
@@ -490,16 +484,8 @@ $points = [
     'logoAlt' => '30 day drummer logo',
     'title' => 'Learn the drums with <br class="md:hidden"> daily guided workouts.',
     'points' => $points,
-    'buttonText' => 'Get Started',
-    'buttonLink' =>  $registerButtonUrl,
-    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'profileImageAlt' => 'student profile image',
     'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/order-collage.png',
-    'students' => 'drummers',
-    'numStudents' => number_format($nPackOwners ?? 0),
-    'price' => "$127",
-    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
-    'brandTitle' => 'Drumeo'
 ])
 
     @include('_partials.components.video-modal',[

@@ -217,7 +217,15 @@
             ])
 
     @php
-            $registerButtonUrl = "/ecommerce/add-to-cart?products[30-day-chops]=1&redirect=/order";
+    $price = floatval($productPrices['30-day-chops']->price);
+    $discountedPrice = floatval($productPrices['30-day-chops']->discounted_price);
+    $buttonText = 'GET STARTED';
+    $buttonLink = "/ecommerce/add-to-cart?products[30-day-chops]=1&redirect=/order";
+    $studentProfilesImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png';
+    $numStudents =  number_format($nPackOwners ?? 0);
+    $students = 'drummers';
+    $enrollmentLink = 'https://www.drumeo.com/choose-plan';
+    $brandTitle = 'Drumeo';
     @endphp
 
      <!-- Header Section -->
@@ -231,14 +239,6 @@
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/header-left-collage.png',
     'isVideo' => true,
     'mediaSource' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/30dc.mp4',
-    'buttonText' => 'GET STARTED',
-    'buttonLink' => $registerButtonUrl,
-    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
-    'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'drummers',
-    'price' => "$127",
-    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
-    'brandTitle' => 'Drumeo'
 ])
 
  <!-- Lessons Section -->
@@ -329,14 +329,7 @@ $items = [
 @include('drumeo.products.partials.evergreen._get-started', [
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/logo-30d-chops-2.png',
     'items' => $items,
-    'buttonText' => 'GET STARTED',
-    'buttonLink' => $registerButtonUrl,
-    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
-    'numStudents' =>  number_format($nPackOwners ?? 0),
-    'students' => 'drummers',
-    'price' => "$127",
-    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
-    'brandTitle' => 'Drumeo'])
+])
 
  <!-- Meet your teacher section -->
     <section class="text-center sm:px-6 pt-10 sm:py-14 lg:py-20">
@@ -443,16 +436,8 @@ $points = [
     'logoAlt' => '30 day chops logo',
     'title' => 'Improve your chops <br class="md:hidden"> in just 30 days.',
     'points' => $points,
-    'buttonText' => 'Get Started',
-    'buttonLink' => $registerButtonUrl,
-    'studentProfilesImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png',
     'profileImageAlt' => 'student profile image',
     'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/order-collage.png',
-    'students' => 'drummers',
-    'numStudents' => number_format($nPackOwners ?? 0),
-    'price' => "$127",
-    'enrollmentLink' => 'https://www.drumeo.com/choose-plan',
-    'brandTitle' => 'Drumeo',
 ])
 
 <!-- trailer for header section -->

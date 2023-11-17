@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <p class="mt-4 p-4 md:hidden">
+        <p class="mt-4 md:hidden">
              <span> {!! $description !!} </span>
             <span class="block pt-10">Instructor: <strong> {{ $instructor }}</strong></span>
             <span class="block pt-2">Lesson Length: <strong> {{ $course }}</strong></span>
