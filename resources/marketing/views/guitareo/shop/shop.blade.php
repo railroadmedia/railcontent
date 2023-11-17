@@ -170,7 +170,7 @@
                      "cardDescription" => "Unlimited guitar lessons, a huge song library, and ongoing support from real teachers.",
                      "specialPrice" => "7-Day Free Trial",
                      "fullPrice" => 240,
-                     "price" => 240,
+                     "price" => 150,
                      "category" => "lessons",
                      "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
                      'soldOut' => false,

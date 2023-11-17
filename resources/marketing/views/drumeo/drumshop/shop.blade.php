@@ -201,20 +201,45 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Online Drum Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
                 {{-- Drumeo annual membership --}}
-                @include('musora.shop._shop-card-alt', [
-                     "itemURL" => "/",
-                     "sku" => null,
-                     "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",
-                     "title" => "Drumeo Membership",
-                     "packAuthor" => "Award-Winning Membership",
-                     "cardDescription" => "The Ultimate Online Drum Lessons Experience. You’ll get step-by-step drum lessons from the best drummers in the world (and much more).",
-                     "specialPrice" => "7-Day Free Trial",
-                     "fullPrice" => 240,
-                     "price" => 240,
-                     "category" => "lessons",
-                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
-                     'soldOut' => false,
-                ])
+{{--                @include('musora.shop._shop-card-alt', [--}}
+{{--                     "itemURL" => "/",--}}
+{{--                     "sku" => null,--}}
+{{--                     "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",--}}
+{{--                     "title" => "Drumeo Membership",--}}
+{{--                     "packAuthor" => "Award-Winning Membership",--}}
+{{--                     "cardDescription" => "The Ultimate Online Drum Lessons Experience. You’ll get step-by-step drum lessons from the best drummers in the world (and much more).",--}}
+{{--                     "specialPrice" => "7-Day Free Trial",--}}
+{{--                     "fullPrice" => 240,--}}
+{{--                     "price" => 240,--}}
+{{--                     "category" => "lessons",--}}
+{{--                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",--}}
+{{--                     'soldOut' => false,--}}
+{{--                ])--}}
+                <div x-cloak x-show="filter === 'lessons'">
+                    @include('musora.shop._shop-card-alt', [
+                         "itemURL" => "/drumshop/ultimate-lessons-bundle",
+                         "sku" => null,
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-shop-thumb.jpg",
+                         "title" => "Ultimate Lessons Bundle",
+                         "fullPrice" => 240,
+                         "price" => 150,
+                         "category" => "lessons",
+                         'soldOut' => false,
+                    ])
+                </div>
+                <div x-cloak x-show="filter === 'lessons'">
+                    @include('musora.shop._shop-card-alt', [
+                         "itemURL" => "/lifetime",
+                         "sku" => null,
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lt-shop-thumb.jpg",
+                         "title" => "Lifetime Bundle",
+                         "fullPrice" => 1200.00,
+                         "price" => 1200.00,
+                         "category" => "lessons",
+                         'soldOut' => false,
+                    ])
+                </div>
+
                 @foreach($lessons as $key => $lesson)
                     @include('musora.shop._shop-card-alt', [
                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
@@ -256,6 +281,18 @@
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Accessories</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                <div x-cloak x-show="filter === 'accessories'">
+                    @include('musora.shop._shop-card-alt', [
+                         "itemURL" => "/drumshop/better-hands-bundle",
+                         "sku" => null,
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/bh-shop-thumb.jpg",
+                         "title" => "Better Hands Bundle",
+                         "fullPrice" => 199.95,
+                         "price" => 150.15,
+                         "category" => "accessories",
+                         'soldOut' => false,
+                    ])
+                </div>
                 @foreach($accessories as $accessory)
                     @include('musora.shop._shop-card-alt', [
                         "sku" => $accessory->sku,

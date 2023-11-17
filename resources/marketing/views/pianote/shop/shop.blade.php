@@ -174,21 +174,45 @@
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Piano Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
-                    @include('musora.shop._shop-card-alt', [
-                          "itemURL" => "/",
-                          "sku" => null,
-                          "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
-                          "title" => "Pianote Membership",
-                          "packAuthor" => "Lisa Witt",
-                          "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",
-                          "specialPrice" => "7-Day Free Trial",
-                          "fullPrice" => 240,
-                          "price" => 240,
-                          "category" => "lessons",
-                          "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
-                          'soldOut' => false,
-                     ])
+{{--                    @include('musora.shop._shop-card-alt', [--}}
+{{--                          "itemURL" => "/",--}}
+{{--                          "sku" => null,--}}
+{{--                          "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",--}}
+{{--                          "title" => "Pianote Membership",--}}
+{{--                          "packAuthor" => "Lisa Witt",--}}
+{{--                          "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",--}}
+{{--                          "specialPrice" => "7-Day Free Trial",--}}
+{{--                          "fullPrice" => 240,--}}
+{{--                          "price" => 150,--}}
+{{--                          "category" => "lessons",--}}
+{{--                          "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",--}}
+{{--                          'soldOut' => false,--}}
+{{--                     ])--}}
 
+                <div x-cloak x-show="filter === 'lessons'">
+                    @include('musora.shop._shop-card-alt', [
+                         "itemURL" => "/shop/ultimate-lessons-bundle",
+                         "sku" => null,
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-shop-thumb.jpg",
+                         "title" => "Ultimate Lessons Bundle",
+                         "fullPrice" => 240,
+                         "price" => 150,
+                         "category" => "lessons",
+                         'soldOut' => false,
+                    ])
+                </div>
+                <div x-cloak x-show="filter === 'lessons'">
+                    @include('musora.shop._shop-card-alt', [
+                         "itemURL" => "/lifetime",
+                         "sku" => null,
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lt-shop-thumb.jpg",
+                         "title" => "Lifetime Bundle",
+                         "fullPrice" => 1200.00,
+                         "price" => 1200.00,
+                         "category" => "lessons",
+                         'soldOut' => false,
+                    ])
+                </div>
                 @foreach($lessons as $key => $lesson)
                     @include('musora.shop._shop-card-alt', [
                             "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,

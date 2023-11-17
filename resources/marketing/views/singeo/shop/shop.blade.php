@@ -71,7 +71,7 @@
                          "cardDescription" => "Improve your vocal range, strength, and control with step-by-step lessons and unlimited personal support.",
                          "specialPrice" => "7-Day Free Trial",
                          "fullPrice" => 240,
-                         "price" => 240,
+                         "price" => 150,
                          "category" => "lessons",
                          "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
                          'soldOut' => false,
