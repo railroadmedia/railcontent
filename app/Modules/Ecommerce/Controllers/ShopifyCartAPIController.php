@@ -363,7 +363,7 @@ class ShopifyCartAPIController extends Controller
                 $checkoutURL
             );
 
-            $multipassLoginUrl = config('shopify.hostName') . '/account/login/multipass/' . $shopifyMultipassToken;
+            $multipassLoginUrl = config('shopify.storefront.host_name') . '/account/login/multipass/' . $shopifyMultipassToken;
 
             return redirect()->away($multipassLoginUrl);
         }
