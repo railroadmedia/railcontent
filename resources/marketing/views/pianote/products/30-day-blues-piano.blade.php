@@ -227,11 +227,11 @@
             $enrollmentLink = 'https://www.pianote.com/choose-plan';
             $brandTitle = 'Pianote';
             $buttonText = 'GET STARTED';
-            $buttonLink = "/ecommerce/add-to-cart?products[30-day-blues-piano]=1&redirect=/order";
+            $buttonLink = "/ecommerce/add-to-cart?products[30-day-blues-piano]=1&redirect=/order&locked=true";
             $studentProfilesImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png';
             $numStudents =  number_format($nPackOwners ?? 0);
             $students = 'piano players';
-    @endphp
+        @endphp
 
 <!-- Header Section -->
     @include('drumeo.products.partials.evergreen._header', [

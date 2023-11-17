@@ -220,7 +220,7 @@
     $price = floatval($productPrices['30-day-chops']->price);
     $discountedPrice = floatval($productPrices['30-day-chops']->discounted_price);
     $buttonText = 'GET STARTED';
-    $buttonLink = "/ecommerce/add-to-cart?products[30-day-chops]=1&redirect=/order";
+    $buttonLink = "/ecommerce/add-to-cart?products[30-day-chops]=1&redirect=/order&locked=true";
     $studentProfilesImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png';
     $numStudents =  number_format($nPackOwners ?? 0);
     $students = 'drummers';
