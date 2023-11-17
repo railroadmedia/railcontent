@@ -44,11 +44,7 @@
                     <div>
                         <transition appear name="fade">
                             <CatalogueCardContainer
-                                catalogue-type="grid"
-                                no-results-message="Looks like you haven't started any lessons.
-                Once you watch a video, it will show up here for you to access later."
-                                :six-wide="true"
-                                :show-filter="false"
+                                :is-mini-view="true"
                                 :pre-loaded-content="continueData"
                             />
 
