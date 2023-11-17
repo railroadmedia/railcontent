@@ -210,7 +210,7 @@
                 class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
                 style="padding: 20px 10px;"
                 :class="bonus !== 1 && 'sold-out'"
-                :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1'+query+'&locked=true' : '#customize-anchor'"
+                :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1'+query+'&locked=true' : '#customize-anchor'"
                 x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>
 {{--            <p class="mt-5 leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
 
