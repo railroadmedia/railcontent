@@ -60,7 +60,7 @@
                         @if(!empty($formName))
                             {!! \Railroad\LeadTracker\Services\LeadTrackerService::getRequestTrackingInputsHtmlFromRequest(
                                 $formName,
-                                route('customer-io.submit-email-form-rc', [], false),
+                                'https://www.musora.com/customer-io/submit-email-form-rc',
                                 'post',
                                 null,
                                 null,
