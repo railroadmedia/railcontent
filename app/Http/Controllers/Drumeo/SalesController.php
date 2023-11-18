@@ -202,7 +202,7 @@ class SalesController extends BaseController
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.products.festival', ['products' => $products]);
+        return view('drumeo.products.festival', ['products' => $products, 'theme' => 'drumeo']);
     }
 
     public function toneControl()
@@ -210,7 +210,7 @@ class SalesController extends BaseController
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.products.tone-control-kit', ['products' => $products]);
+        return view('drumeo.products.tone-control-kit', ['products' => $products, 'theme' => 'drumeo']);
     }
     public function quietKick()
     {
@@ -224,14 +224,7 @@ class SalesController extends BaseController
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.products.eardrums', ['products' => $products]);
-    }
-    public function eardrumsMembers()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.products.eardrums-members', ['products' => $products]);
+        return view('drumeo.products.eardrums', ['products' => $products, 'theme' => 'drumeo']);
     }
     public function thirtyDayDrummer()
     {

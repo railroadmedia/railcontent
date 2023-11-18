@@ -144,7 +144,7 @@
                                 @foreach($featured as $key => $feat)
                                     <li class="splide__slide px-1">
                                         @include('musora.shop._shop-card-alt', [
-                                            "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $feat->slug ),
+                                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $feat->slug ),
                                             "sku" => $feat->sku === 'drumeo' ? null : $feat->sku,
                                             "badgeText" => $feat->badge_text,
                                             "thumbnail" => $feat->thumbnail,

@@ -34,7 +34,7 @@
                 <p class="leading-tight text-sm">For your first year, then $240/yr</p>
             <a class="join promo my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
             <p class="leading-tight"><em>New students only. Renews at $240/year.<br class="sm:hidden"> Cancel anytime.</em></p>
-            <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get 10 free Black Friday bonuses worth ${{ $bonusSum }}</strong></h3>
+            <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get {{ $bonusCount }} free Black Friday bonuses worth ${{ $bonusSum }}</strong></h3>
         </div>
         <div style="font-size:0px">
             @foreach($bonuses as $bonus)

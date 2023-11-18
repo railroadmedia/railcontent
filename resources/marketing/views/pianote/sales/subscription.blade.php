@@ -315,8 +315,8 @@
                     'shipping' => true,
                 ],
                 [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/dynamics-poster.jpg',
-                    'description' => 'Don’t learn Italian. Just look at this poster.',
+                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-card.jpg',
+                    'description' => 'Decorate your home and improve your musical knowledge with this set of 6 music theory posters.',
                     'price' => floatval($productPrices['music-theory-posters']->price),
                     'shipping' => true,
                 ],
@@ -324,16 +324,15 @@
                     'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/christmas-songbook-card.jpg',
                     'description' => 'Play Your Favorite Christmas Songs on the Piano.',
                     'price' => floatval($productPrices['christmas-song-book-digital']->price),
-                    'shipping' => true,
                 ],
                 [
                     'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
-                    'description' => 'New to the piano? Start here! This play-along course is your first 30 days on the piano. You don’t need any previous experience or theory knowledge. Over 30 days, you’ll play along with your teacher for just 10 minutes a day! You’ll be amazing at what a little bit of consistent practice will do.',
+                    'description' => 'Learn the piano. Play your favorite songs. Start sounding beautiful.',
                     'price' => 97,
                 ],
                 [
                     'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
-                    'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
+                    'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. ',
                     'price' => 97,
                 ],
                 [
@@ -366,7 +365,8 @@
         @include('musora.sales.components.order-section-bf', [
         'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-annual-2w-card.png',
         'bonusWidth' => 'w-1/2 md:w-1/4',
-        'bonusSum' => '1234',
+        'bonusCount' => '11',
+        'bonusSum' => '963',
         'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[taktell-piccolo-metronome]=1&products[piano-chords-and-scales-guide]=1&products[music-theory-posters]=1&products[christmas-song-book-digital]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=special',
         'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
         ])
