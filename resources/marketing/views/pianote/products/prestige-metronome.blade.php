@@ -46,76 +46,12 @@
                     <h3 class="leading-tight text-gold"><strong>${{ floatval($productPrices['maelzel-metronome']->discounted_price) }}</strong></h3>
                     <p class="leading-normal my-3 sm:my-4"><em>Enter your email to be notified when one is available:</em></p>
 
-
-                    <script src="https://www.google.com/recaptcha/api.js"></script>
-                    <style> .grecaptcha-badge {display:none;right:0!important;} </style>
-                    @php
-                            $cleanFormId = str_replace('-', '', (str_replace(' ', '', 'Pianote - Engagement - Trigger - Metronome Notice - Web Form')));
-                    @endphp
-
-                    <form id="{{$cleanFormId}}" accept-charset="UTF-8" method="POST"
-                        action="https://www.musora.com/customer-io/submit-email-form-rc"
-                        class="ajax-form clearfix infusion-form facebook-track-lead mx-auto">
-
-                        @if(!empty($formName))
-                            {!! \Railroad\LeadTracker\Services\LeadTrackerService::getRequestTrackingInputsHtmlFromRequest(
-                                $formName,
-                                'https://www.musora.com/customer-io/submit-email-form-rc',
-                                'post',
-                                null,
-                                null,
-                                null
-                            ) !!}
-                        @endif
-
-                        <div class="infusion-field w-full px-2 sm:px-3 float-left sm:w-7/12 sm:text-left">
-                            <input id='sign-up-email' class="w-full" name="email" type="email" placeholder="Your Email" required />
-                        </div>
-                        <div class="infusion-submit w-full px-2 sm:px-3 float-left sm:w-5/12">
-                            <button class="submit g-recaptcha hover:opacity-80 bg-pianote" type="submit"
-                                data-sitekey="{{$recaptchaKey}}"
-                                data-callback='recaptchaSubmit{{$cleanFormId}}'
-                                data-action='submit'>
-                                <span class="pre-add">NOTIFY ME</span>
-                                <span class="pending hidden">Sending <i class="fad fa-spinner-third fa-spin"></i></span>
-                                <span class="success hidden">Sent <i class="fad fa-thumbs-up"></i></span>
-                                <span class="fail hidden">Try Again <i class="fad fa-exclamation-triangle"></i></span>
-                            </button>
-                        </div>
-                        <input name="inf_form_xid" type="hidden" value="{{ str_replace('-', '', (str_replace(' ', '', 'Pianote - Engagement - Trigger - Metronome Notice - Web Form'))) }}"/>
-                        <input name="success_redirect" type="hidden" value="https://www.pianote.com/thank-you"/>
-                    </form>
-
-
-                    <script>
-                        function recaptchaSubmit{{$cleanFormId}}(token) {
-                            const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-                            const userEmail = document.getElementById('{{ $cleanFormId }}').querySelector('input[type=email]');
-
-                            if(userEmail.value.match(emailFormat)){
-                                document.getElementById("{{$cleanFormId}}").submit();
-                                dataLayer.push({
-                                    "event": "gtm.formSubmit",
-                                    "formId": "{{ $cleanFormId }}",
-                                    "formSuccess": true
-                                });
-                                emailSignUpConversionTrackerForImpactProvider();
-                            } else {
-                                userEmail.classList.add('bg-red-200');
-                            }
-                        }
-                    </script>
-
-
-
-
-
-                    {{--                    @include('pianote._partials.sign-up-form', [--}}
-{{--                        "recaptchaKey" => $recaptchaKey,--}}
-{{--                        "formName" => 'Metronome Notice',--}}
-{{--                        "formId" => "Pianote - Engagement - Trigger - Metronome Notice - Web Form",--}}
-{{--                        "buttonText" => "Notify Me ",--}}
-{{--                    ])--}}
+                    @include('pianote._partials.sign-up-form', [
+                        "recaptchaKey" => $recaptchaKey,
+                        "formName" => 'Metronome Notice',
+                        "formId" => "Pianote - Engagement - Trigger - Metronome Notice - Web Form",
+                        "buttonText" => "Notify Me ",
+                    ])
                 </div>
             </div>
         </div>
