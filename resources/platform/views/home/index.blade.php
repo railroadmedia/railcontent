@@ -19,6 +19,7 @@
             {{-- Carousel --}}
             <header-carousel
                 :preloaded-carousel="{{ $carousel }}"
+                brand="{{ $brand }}"
             >
             </header-carousel>
 
