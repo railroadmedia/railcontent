@@ -16,6 +16,20 @@ if (!function_exists('user')) {
     }
 }
 
+if (!function_exists('userId')) {
+    function userId(): ?int
+    {
+        return auth()->user()->id;
+    }
+}
+
+if (!function_exists('userIdString')) {
+    function userIdString(): ?string
+    {
+        return strval(userId());
+    }
+}
+
 if (!function_exists('brand')) {
     /**
      * Get the currently logged-in user.

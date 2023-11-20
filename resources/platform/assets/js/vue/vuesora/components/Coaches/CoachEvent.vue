@@ -1,6 +1,6 @@
 <template>
   <div
-    class="tw-mb-3 tw-w-full tw-py-4 tw-px-4 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]"
+    class="tw-mb-[30px] tw-w-full tw-py-4 tw-px-4 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]"
     v-if="content && $_hours <= 48">
     <div class="tw-flex tw-flex-row tw-items-center">
       <!-- Live Event Image -->

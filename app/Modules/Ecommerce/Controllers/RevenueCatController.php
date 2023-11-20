@@ -981,7 +981,7 @@ class RevenueCatController extends Controller
             $data = json_decode(base64_decode($encodedData));
             Log::debug(var_export($data, true));
             // we should return something for test notifications
-            if (!empty($data->testNotification)) {
+            if (!empty($data->testNotification) || empty($data->subscriptionNotification)) {
                 return response()->json();
             }
 

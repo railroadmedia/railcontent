@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Railroad\Ecommerce\Controllers\AppleStoreKitController;
 
 Route::prefix(config('ecommerce.route_prefix'))
+    ->middleware(config('ecommerce.route_middleware_public_groups'))
     ->group(function () {
         Route::post(
             'apple/webhook/notification/v1',
@@ -21,60 +22,58 @@ Route::prefix(config('ecommerce.route_prefix'))
         Route::post(
             'revenuecat/restore',
             \App\Modules\Ecommerce\Controllers\RevenueCatController::class . '@syncSubscriber'
-        )
-            ->middleware([\Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class]);
+        );
 
         Route::post(
             'revenuecat/signup',
-            \App\Modules\Ecommerce\Controllers\RevenueCatController::class.'@signupRevenuecat'
-        )
-            ->middleware([\Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class]);
+            \App\Modules\Ecommerce\Controllers\RevenueCatController::class . '@signupRevenuecat'
+        );
+
         /*
-* ACCESS CODES
-*/
+         * ACCESS CODES
+         */
         Route::post(
             '/access-codes/redeem',
             AccessCodeController::class . '@claim'
         )
-            ->name('access-codes.form-claim')
-            ->middleware(config('ecommerce.route_middleware_public_groups'));
-        Route::group([
-            'middleware' => config('ecommerce.route_middleware_logged_in_groups'),
-        ], function () {
-            Route::get(
-                '/access-codes',
-                AccessCodeJsonController::class.'@index'
-            )
-                ->name('access-codes.index');
-            Route::get(
-                '/access-codes/search',
-                AccessCodeJsonController::class.'@search'
-            )
-                ->name('access-codes.search');
-            Route::post(
-                '/access-codes/claim',
-                AccessCodeJsonController::class.'@claim'
-            )
-                ->name('access-codes.claim');
-            Route::post(
-                '/access-codes/release',
-                AccessCodeJsonController::class.'@release'
-            )
-                ->name('access-codes.release');
+            ->name('access-codes.form-claim');
+    });
 
-            Route::group([
-                             'middleware' => ['auth', 'web_authenticated_admin']
-                         ],function () {
-                    Route::put('user-access-permission', UserAccessPermissionsController::class . '@store')
-                        ->name('user-access-permissions.store');
+Route::prefix(config('ecommerce.route_prefix'))
+    ->middleware(config('ecommerce.route_middleware_logged_in_groups'))
+    ->group(function () {
+        Route::get(
+            '/access-codes',
+            AccessCodeJsonController::class . '@index'
+        )
+            ->name('access-codes.index');
+        Route::get(
+            '/access-codes/search',
+            AccessCodeJsonController::class . '@search'
+        )
+            ->name('access-codes.search');
+        Route::post(
+            '/access-codes/claim',
+            AccessCodeJsonController::class . '@claim'
+        )
+            ->name('access-codes.claim');
+        Route::post(
+            '/access-codes/release',
+            AccessCodeJsonController::class . '@release'
+        )
+            ->name('access-codes.release');
 
-                    Route::patch('user-access-permission/{userPermissionId}', UserAccessPermissionsController::class . '@update')
-                        ->name('user-access-permissions.update');
+        Route::put('user-access-permission', UserAccessPermissionsController::class . '@store')
+            ->name('user-access-permissions.store');
 
-                    Route::get('user-access-permissions', UserAccessPermissionsController::class . '@index')
-                        ->name('user-access-permissions.index');
-                });
-        });
+        Route::patch(
+            'user-access-permission/{userPermissionId}',
+            UserAccessPermissionsController::class . '@update'
+        )
+            ->name('user-access-permissions.update');
+
+        Route::get('user-access-permissions', UserAccessPermissionsController::class . '@index')
+            ->name('user-access-permissions.index');
     });
 
 if (config('ecommerce.revenuecat_only') == true) {
@@ -119,7 +118,7 @@ if (config('ecommerce.revenuecat_only') == true) {
             ->name('google_play_store.restore');
         Route::post(
             '/google/handle-server-notification',
-            \App\Modules\Ecommerce\Controllers\RevenueCatController::class.'@processGoogleNotifications'
+            \App\Modules\Ecommerce\Controllers\RevenueCatController::class . '@processGoogleNotifications'
         )
             ->name('google_play_store.process_notifications');
     });

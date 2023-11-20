@@ -727,7 +727,7 @@ export default {
 
         $_artist: {
             get() {
-                return this.thisPost.artist.value;
+                return this.thisPost.artist ? this.thisPost.artist.value : '';
             },
             set(val) {
                 this.sendSetFieldRequest({
@@ -755,7 +755,7 @@ export default {
 
         $_released: {
             get() {
-                return this.thisPost.released.value;
+                return this.thisPost.released ? this.thisPost.released.value : '';
             },
             set(val) {
                 this.sendSetFieldRequest({
@@ -769,7 +769,7 @@ export default {
 
         $_album: {
             get() {
-                return this.thisPost.album.value;
+                return this.thisPost.album ? this.thisPost.album.value : '';
             },
             set(val) {
                 this.sendSetFieldRequest({
@@ -783,7 +783,7 @@ export default {
 
         $_transcriber_name: {
             get() {
-                return this.thisPost.transcriber_name.value;
+                return this.thisPost.transcriber_name ? this.thisPost.transcriber_name.value : '';
             },
             set(val) {
                 this.sendSetFieldRequest({
@@ -806,7 +806,7 @@ export default {
 
         $_timecode: {
             get() {
-                return this.thisPost.timecode.value;
+                return this.thisPost.timecode ? this.thisPost.timecode.value : '';
             },
             set(val) {
                 this.sendSetDatumRequest({
@@ -821,7 +821,7 @@ export default {
 
         $_registration_url: {
             get() {
-                return this.thisPost.registration_url.value;
+                return this.thisPost.registration_url ? this.thisPost.registration_url.value : '';
             },
             set(val) {
                 this.sendSetFieldRequest({
@@ -835,7 +835,7 @@ export default {
 
         $_week: {
             get() {
-                return this.thisPost.week.value;
+                return this.thisPost.week ? this.thisPost.week.value : '';
             },
             set(val) {
                 this.sendSetFieldRequest({
@@ -849,7 +849,7 @@ export default {
 
         $_bands: {
             get() {
-                return this.thisPost.bands.value;
+                return this.thisPost.bands ? this.thisPost.bands.value : '';
             },
             set(val) {
                 this.sendSetFieldRequest({
@@ -863,7 +863,7 @@ export default {
 
         $_endorsements: {
             get() {
-                return this.thisPost.endorsements.value;
+                return this.thisPost.endorsements ? this.thisPost.endorsements.value : '';
             },
             set(val) {
                 this.sendSetFieldRequest({
@@ -1073,7 +1073,7 @@ export default {
 
         $_show_in_new_feed: {
             get() {
-                if (this.thisPost) {
+                if (this.thisPost && this.thisPost.show_in_new_feed) {
                     return this.thisPost.show_in_new_feed.value == 1
                       || this.thisPost.show_in_new_feed.value == "1";
                 }
@@ -1233,7 +1233,7 @@ export default {
 
         handleTagChange(newArray) {
             const changedField = Utils.getDifferingArrayKeys(newArray, this.$_tag);
-            const val = changedField[changedField.length - 1].id || changedField[changedField.length - 1];
+            const val = changedField[changedField.length - 1].value || changedField[changedField.length - 1];
 
             api.handleArrayChange({
                 oldArray: this.$_tag,
@@ -1261,7 +1261,7 @@ export default {
 
         handleFocusChange(newArray) {
             const changedField = Utils.getDifferingArrayKeys(newArray, this.$_focus);
-            const val = changedField[changedField.length - 1].id || changedField[changedField.length - 1];
+            const val = changedField[changedField.length - 1].value || changedField[changedField.length - 1];
 
             api.handleArrayChange({
                 oldArray: this.$_focus,
@@ -1289,7 +1289,7 @@ export default {
 
         handleTopicChange(newArray) {
             const changedField = Utils.getDifferingArrayKeys(newArray, this.$_topic);
-            const val = changedField[changedField.length - 1].id || changedField[changedField.length - 1];
+            const val = changedField[changedField.length - 1].value || changedField[changedField.length - 1];
 
             api.handleArrayChange({
                 oldArray: this.$_topic,
@@ -1315,7 +1315,7 @@ export default {
 
         handleBPMChange(newArray) {
             const changedField = Utils.getDifferingArrayKeys(newArray, this.$_bpm);
-            const val = changedField[changedField.length - 1].id || changedField[changedField.length - 1];
+            const val = changedField[changedField.length - 1].value || changedField[changedField.length - 1];
 
             api.handleArrayChange({
                 oldArray: this.$_bpm,
@@ -1341,7 +1341,7 @@ export default {
 
         handleStyleChange(newArray) {
             const changedField = Utils.getDifferingArrayKeys(newArray, this.$_style);
-            const val = changedField[changedField.length - 1].id || changedField[changedField.length - 1];
+            const val = changedField[changedField.length - 1].value || changedField[changedField.length - 1];
 
             api.handleArrayChange({
                 oldArray: this.$_style,
@@ -1370,7 +1370,7 @@ export default {
 
             this.sendSetFieldRequest({
                 key: 'instructor',
-                val: contentInstructorField.id,
+                val: contentInstructorField.value.id,
                 deleted: true,
                 multi: true,
                 delay: 0,
@@ -1422,7 +1422,7 @@ export default {
 
         handleKeyPitchTypeChange(newArray) {
             const changedField = Utils.getDifferingArrayKeys(newArray, this.$_key_pitch_type);
-            const val = changedField[changedField.length - 1].id || changedField[changedField.length - 1];
+            const val = changedField[changedField.length - 1].value || changedField[changedField.length - 1];
 
             api.handleArrayChange({
                 oldArray: this.$_key_pitch_type,
