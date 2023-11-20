@@ -90,6 +90,11 @@ Route::group(
         * Onboarding API
         */
         Route::post(
+            'onboarding-about-completed',
+            OnboardingController::class . '@aboutStepCompleted'
+        )
+            ->name('user_management_system.onboarding.about_completed');
+        Route::post(
             'onboarding-gears',
             OnboardingController::class . '@gears'
         )

@@ -199,7 +199,7 @@
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Online Drum Lessons</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 {{-- Drumeo annual membership --}}
 {{--                @include('musora.shop._shop-card-alt', [--}}
 {{--                     "itemURL" => "/",--}}
@@ -280,7 +280,7 @@
         <section class="grid-view category-section" data-category="accessories" x-show="filter === 'accessories' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Accessories</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5gap-2 md:gap-4 text-left">
                 <div x-cloak x-show="filter === 'accessories'">
                     @include('musora.shop._shop-card-alt', [
                          "itemURL" => "/drumshop/better-hands-bundle",
@@ -317,7 +317,7 @@
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Shirts</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
                 @foreach($shirts as $shirt)
                     @include('musora.shop._shop-card-alt', [
@@ -358,7 +358,7 @@
         <section class="grid-view category-section" data-category="hoodies" x-show="filter === 'clothing' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Hoodies</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
                 @foreach($hoodies as $hoodie)
                     @include('musora.shop._shop-card-alt', [

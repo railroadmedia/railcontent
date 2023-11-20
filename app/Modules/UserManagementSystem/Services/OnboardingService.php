@@ -26,17 +26,7 @@ class OnboardingService
             return null;
         }
 
-        switch ($instrumentAnswer) {
-            case 'drums':
-                return Brand::Drumeo->value;
-            case 'piano':
-                return Brand::Pianote->value;
-            case 'singing':
-                return Brand::Singeo->value;
-            case 'guitar':
-                return Brand::Guitareo->value;
-        }
-        throw new Exception("Unable to determine brand from instrument onboarding answer '$instrumentAnswer'");
+        return $this->getBrandFromInstrument($instrumentAnswer);
     }
 
     public function saveInstrument(string $instrument): void
@@ -47,5 +37,20 @@ class OnboardingService
             'user_id' => user()->id
         ]);
         event(new OnboardingInstrumentUpdated(user()->id));
+    }
+
+    public function getBrandFromInstrument(string $instrument): string
+    {
+        switch ($instrument) {
+            case 'drums':
+                return Brand::Drumeo->value;
+            case 'piano':
+                return Brand::Pianote->value;
+            case 'singing':
+                return Brand::Singeo->value;
+            case 'guitar':
+                return Brand::Guitareo->value;
+        }
+        throw new Exception("Unable to determine brand from instrument onboarding answer '$instrument'");
     }
 }

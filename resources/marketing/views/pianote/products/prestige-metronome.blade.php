@@ -30,7 +30,7 @@
 
 @section('global-body')
     @include('pianote.sales.partials._nav')
-
+    <div id="signup" class="anchor"></div>
     <header class="text-white px-4 sm:px-6 py-10 sm:py-10 lg:py-16 relative" style="background-color:#000;">
         <div class="inset-0 absolute z-0 bg-top bg-cover hidden sm:block" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/header-bg.jpg')"></div>
         <div class="container max-w-4xl mx-auto relative z-10">
@@ -45,12 +45,77 @@
                         Numbers are extremely limited as <strong class="text-gold">only 216</strong> were made.</p>
                     <h3 class="leading-tight text-gold"><strong>${{ floatval($productPrices['maelzel-metronome']->discounted_price) }}</strong></h3>
                     <p class="leading-normal my-3 sm:my-4"><em>Enter your email to be notified when one is available:</em></p>
-                    @include('pianote._partials.sign-up-form', [
-                    "recaptchaKey" => $recaptchaKey,
-                            "formName" => 'Metronome Notice',
-                            "formId" => "Pianote - Engagement - Trigger - Metronome Notice - Web Form",
-                            "buttonText" => "Notify Me ",
-                        ])
+
+
+                    <script src="https://www.google.com/recaptcha/api.js"></script>
+                    <style> .grecaptcha-badge {display:none;right:0!important;} </style>
+                    @php
+                            $cleanFormId = str_replace('-', '', (str_replace(' ', '', 'Pianote - Engagement - Trigger - Metronome Notice - Web Form')));
+                    @endphp
+
+                    <form id="{{$cleanFormId}}" accept-charset="UTF-8" method="POST"
+                        action="https://www.musora.com/customer-io/submit-email-form-rc"
+                        class="ajax-form clearfix infusion-form facebook-track-lead mx-auto">
+
+                        @if(!empty($formName))
+                            {!! \Railroad\LeadTracker\Services\LeadTrackerService::getRequestTrackingInputsHtmlFromRequest(
+                                $formName,
+                                'https://www.musora.com/customer-io/submit-email-form-rc',
+                                'post',
+                                null,
+                                null,
+                                null
+                            ) !!}
+                        @endif
+
+                        <div class="infusion-field w-full px-2 sm:px-3 float-left sm:w-7/12 sm:text-left">
+                            <input id='sign-up-email' class="w-full" name="email" type="email" placeholder="Your Email" required />
+                        </div>
+                        <div class="infusion-submit w-full px-2 sm:px-3 float-left sm:w-5/12">
+                            <button class="submit g-recaptcha hover:opacity-80 bg-pianote" type="submit"
+                                data-sitekey="{{$recaptchaKey}}"
+                                data-callback='recaptchaSubmit{{$cleanFormId}}'
+                                data-action='submit'>
+                                <span class="pre-add">NOTIFY ME</span>
+                                <span class="pending hidden">Sending <i class="fad fa-spinner-third fa-spin"></i></span>
+                                <span class="success hidden">Sent <i class="fad fa-thumbs-up"></i></span>
+                                <span class="fail hidden">Try Again <i class="fad fa-exclamation-triangle"></i></span>
+                            </button>
+                        </div>
+                        <input name="inf_form_xid" type="hidden" value="{{ str_replace('-', '', (str_replace(' ', '', 'Pianote - Engagement - Trigger - Metronome Notice - Web Form'))) }}"/>
+                        <input name="success_redirect" type="hidden" value="https://www.pianote.com/thank-you"/>
+                    </form>
+
+
+                    <script>
+                        function recaptchaSubmit{{$cleanFormId}}(token) {
+                            const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                            const userEmail = document.getElementById('{{ $cleanFormId }}').querySelector('input[type=email]');
+
+                            if(userEmail.value.match(emailFormat)){
+                                document.getElementById("{{$cleanFormId}}").submit();
+                                dataLayer.push({
+                                    "event": "gtm.formSubmit",
+                                    "formId": "{{ $cleanFormId }}",
+                                    "formSuccess": true
+                                });
+                                emailSignUpConversionTrackerForImpactProvider();
+                            } else {
+                                userEmail.classList.add('bg-red-200');
+                            }
+                        }
+                    </script>
+
+
+
+
+
+                    {{--                    @include('pianote._partials.sign-up-form', [--}}
+{{--                        "recaptchaKey" => $recaptchaKey,--}}
+{{--                        "formName" => 'Metronome Notice',--}}
+{{--                        "formId" => "Pianote - Engagement - Trigger - Metronome Notice - Web Form",--}}
+{{--                        "buttonText" => "Notify Me ",--}}
+{{--                    ])--}}
                 </div>
             </div>
         </div>
@@ -305,14 +370,15 @@
                     <img class="h-20 lg:hidden" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/header-limited-metronome-logo-m.svg">
                     <img class="h-24 lg:h-32 hidden lg:inline-block" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/metronome-web-logo.svg">
                     <p class="leading-normal my-3 sm:my-4">Keep perfect time with this handcrafted, German-made Wittner metronome. <em class="font-black text-gold">Limited to 216.</em></p>
-                    <h3 class="leading-tight text-gold"><strong>${{ floatval($productPrices['maelzel-metronome']->discounted_price) }}</strong></h3>
-                    <p class="leading-normal my-3 sm:my-4"><em>Enter your email to be notified when one is available:</em></p>
-                    @include('pianote._partials.sign-up-form', [
-                    "recaptchaKey" => $recaptchaKey,
-                            "formName" => 'Metronome Notice',
-                            "formId" => "Pianote - Engagement - Trigger - Metronome Notice - Web Form2",
-                            "buttonText" => "Notify Me ",
-                        ])
+                    <h3 class="leading-tight text-gold inline-block align-middle mr-5"><strong>${{ floatval($productPrices['maelzel-metronome']->discounted_price) }}</strong></h3>
+                    <a class="join smaller anchor-slide inline-block align-middle" href="#signup">Notify Me</a>
+{{--                    <p class="leading-normal my-3 sm:my-4"><em>Enter your email to be notified when one is available:</em></p>--}}
+                    {{--                    @include('pianote._partials.sign-up-form', [--}}
+{{--                    "recaptchaKey" => $recaptchaKey,--}}
+{{--                            "formName" => 'Metronome Notice',--}}
+{{--                            "formId" => "Pianote - Engagement - Trigger - Metronome Notice - Web Form2",--}}
+{{--                            "buttonText" => "Notify Me ",--}}
+{{--                        ])--}}
                 </div>
             </div>
         </div>

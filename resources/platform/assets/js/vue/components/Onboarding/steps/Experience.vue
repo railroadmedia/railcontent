@@ -5,7 +5,7 @@ import SquaresContainer from "../../SquaredCard/SquaresContainer.vue";
 import ExperienceCardContent from "../../SquaredCard/ExperienceCardContent.vue";
 import StepWrapper from "../StepWrapper.vue";
 import SkipStep from "../SkipStep.vue";
-import { saveExperience } from "../services"
+import {saveExperience} from "../services"
 
 const experienceDescriptionMap = {
   pianote: {
@@ -44,12 +44,15 @@ const props = defineProps({
   info: {
     type: Object,
   },
+  stepName: {
+    type: String,
+  }
 });
 
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
 
 function onExperienceSelection(selection) {
-  emit("onChangeInfo", { ...props.info, experience: { ...props.info.experience, [props.brand]: selection } });
+  emit("onChangeInfo", {...props.info, experience: {...props.info.experience, [props.brand]: selection}});
   handleNextStep(selection);
 }
 
@@ -84,31 +87,31 @@ const stepHeaderProps = {
       <div class="
         tw-w-full tw-min-h-full tw-flex tw-flex-col tw-items-center
         tw-justify-between
-        xl:tw-justify-center 
+        xl:tw-justify-center
       ">
         <SquaresContainer>
           <SquaredCard type="green" :active="info.experience[brand] === 0" defaultBorderColor="tw-border-[#7E9AB1]"
-            @onSelect="() => onExperienceSelection(0)">
-            <ExperienceCardContent title="Level 1" :subtitle="experienceDescriptionMap[brand][0]" level="1" />
+                       @onSelect="() => onExperienceSelection(0)">
+            <ExperienceCardContent title="Level 1" :subtitle="experienceDescriptionMap[brand][0]" level="1"/>
           </SquaredCard>
           <SquaredCard :active="info.experience[brand] === 1" type="blue" defaultBorderColor="tw-border-[#7E9AB1]"
-            @onSelect="() => onExperienceSelection(1)">
-            <ExperienceCardContent title="Level 2-3" :subtitle="experienceDescriptionMap[brand][1]" level="2-3" />
+                       @onSelect="() => onExperienceSelection(1)">
+            <ExperienceCardContent title="Level 2-3" :subtitle="experienceDescriptionMap[brand][1]" level="2-3"/>
           </SquaredCard>
           <SquaredCard :active="info.experience[brand] === 2" defaultBorderColor="tw-border-[#7E9AB1]" type="yellow"
-            @onSelect="() => onExperienceSelection(2)">
-            <ExperienceCardContent title="Level 4-6" :subtitle="experienceDescriptionMap[brand][2]" level="4-6" />
+                       @onSelect="() => onExperienceSelection(2)">
+            <ExperienceCardContent title="Level 4-6" :subtitle="experienceDescriptionMap[brand][2]" level="4-6"/>
           </SquaredCard>
           <SquaredCard :active="info.experience[brand] === 3" defaultBorderColor="tw-border-[#7E9AB1]" type="red"
-            @onSelect="() => onExperienceSelection(3)">
-            <ExperienceCardContent title="Level 7-10" :subtitle="experienceDescriptionMap[brand][3]" level="7-10" />
+                       @onSelect="() => onExperienceSelection(3)">
+            <ExperienceCardContent title="Level 7-10" :subtitle="experienceDescriptionMap[brand][3]" level="7-10"/>
           </SquaredCard>
         </SquaresContainer>
       </div>
     </template>
     <template v-slot:footer>
-      <ProgressBar :brand="brand" :currentStep="3" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
-      <SkipStep :brand="brand" />
+      <ProgressBar :brand="brand" :currentStep="3" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)"/>
+      <SkipStep :brand="brand" :step="stepName"/>
     </template>
   </StepWrapper>
 </template>

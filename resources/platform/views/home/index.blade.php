@@ -45,17 +45,6 @@
                     </div>
                 </div>
             @endif
-
-            <!-- Home Card Links -->
-            <home-card-links
-                brand="{{ $brand }}"
-                :has-started-method="{{ isset($hasStartedMethod) && $hasStartedMethod ? 'true' : 'false' }}"
-                :has-completed-method="{{ isset($hasCompletedMethod) && $hasCompletedMethod ? 'true' : 'false' }}"
-                completed-levels-url="{{ $completedLevelsUrl }}"
-                method-url="{{ $methodUrl }}"
-                next-learning-path-lesson-title="{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('fields.title') : '' }}"
-                next-learning-path-level="{{ $nextLearningPathLevel }}"
-            ></home-card-links>
         </div>
 
         {{-- Continue Section --}}
