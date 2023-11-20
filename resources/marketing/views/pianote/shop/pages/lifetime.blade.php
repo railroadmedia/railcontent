@@ -201,17 +201,17 @@
                 [
                     'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
                     'description' => 'Learn the piano. Play your favorite songs. Start sounding beautiful.',
-                    'price' => 97,
+                    'price' => floatval($productPrices['new-piano-players-start-here']->price),
                 ],
                 [
                     'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
                     'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. ',
-                    'price' => 97,
+                    'price' => floatval($productPrices['easy-chords']->price),
                 ],
             [
                 'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d444aa7c-3c5f-4a3e-8d8b-36a98ac99da4-30DBluesPiano_cart.jpg',
                 'description' => 'Learn Blues Piano in 30 days with daily 10-minute lessons where you play along with a teacher. This is the new way of learning the blues.',
-                'price' => 97,
+                'price' => floatval($productPrices['30-day-blues-piano']->price),
             ],
             [
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',

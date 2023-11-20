@@ -224,8 +224,8 @@
     ])
     @include('pianote._partials._promo-banner', [
         "name" => "30-Day Blues Piano",
-        "fullPrice" => floatval($productPrices['new-piano-players-start-here']->price),
-        "price" => floatval($productPrices['new-piano-players-start-here']->discounted_price),
+        "fullPrice" => floatval($productPrices['30-day-blues-piano']->price),
+        "price" => floatval($productPrices['30-day-blues-piano']->discounted_price),
         "noBreadcrumb" => true
     ])
 

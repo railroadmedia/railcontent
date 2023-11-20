@@ -24,7 +24,9 @@ class BFUpdates extends Seeder
         Product::where('brand_id', 1)->where('name', 'Four Weeks To Better Drum Fills')->update(['discounted_price' => 39]);
         Product::where('brand_id', 1)->where('name', 'Beyond Beginner Drumming')->update(['discounted_price' => 50]);
         Product::where('brand_id', 1)->where('name', '30 Day Drummer - Season 3')->update(['discounted_price' => 50]);
+        Product::where('brand_id', 1)->where('name', '30 Day Drummer - Season 3')->update(['price' => 127]);
         Product::where('brand_id', 1)->where('name', '30 Day Chops')->update(['discounted_price' => 50]);
+        Product::where('brand_id', 1)->where('name', '30 Day Chops')->update(['price' => 127]);
         Product::where('brand_id', 1)->where('name', 'Electrify Your Drumming')->update(['discounted_price' => 79]);
         Product::where('brand_id', 1)->where('name', 'Learn Songs Faster')->update(['discounted_price' => 5]);
         Product::where('brand_id', 1)->where('name', 'Successful Drumming')->update(['discounted_price' => 47]);
@@ -68,8 +70,11 @@ class BFUpdates extends Seeder
         Product::where('brand_id', 2)->where('name', 'Faster Fingers')->update(['discounted_price' => 39]);
         Product::where('brand_id', 2)->where('name', 'Piano Riffs & Fills')->update(['discounted_price' => 39]);
         Product::where('brand_id', 2)->where('name', 'New Piano Players Start Here')->update(['discounted_price' => 50]);
+        Product::where('brand_id', 2)->where('name', 'New Piano Players Start Here')->update(['price' => 127]);
         Product::where('brand_id', 2)->where('name', 'Easy Chords')->update(['discounted_price' => 50]);
+        Product::where('brand_id', 2)->where('name', 'Easy Chords')->update(['price' => 127]);
         Product::where('brand_id', 2)->where('name', '30-Day Blues Piano')->update(['discounted_price' => 50]);
+        Product::where('brand_id', 2)->where('name', '30-Day Blues Piano')->update(['price' => 127]);
 
         Product::where('brand_id', 2)->where('name', 'Classical Method Companion Book')->update(['discounted_price' => 29.25]);
         Product::where('brand_id', 2)->where('name', 'The Most Beautiful Classical Piano Pieces')->update(['discounted_price' => 36.75]);
