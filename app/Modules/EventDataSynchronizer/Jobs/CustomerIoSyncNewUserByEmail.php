@@ -79,7 +79,9 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
                 $this->user,
                 ['account_created_at' => $accountCreatedAt]
             );
-            Avo::account_created(AvoHelper::defaultEventProperties(['account_created_at' => $accountCreatedAt]));
+            Avo::account_created(
+                AvoHelper::defaultEventProperties(['account_created_at' => $accountCreatedAt], $this->user)
+            );
         } catch (Exception $exception) {
             $this->failed($exception);
         }
