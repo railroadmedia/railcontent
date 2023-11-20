@@ -65,7 +65,7 @@ return [
                     'pianote_prospect_metronome-notice',
                 ],
                 'accounts_to_sync' => [
-                    'pianote',
+                    'musora',
                 ],
             ],
         ],
@@ -352,6 +352,16 @@ return [
             ],
         ],
         'pianote' => [
+            'Metronome Notice' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_metronome-notice',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Blues Piano Bootcamp' => [
                 'custom_attributes' => [
                 ],
