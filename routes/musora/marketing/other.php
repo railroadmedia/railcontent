@@ -22,6 +22,7 @@ Route::domain('{musoraDomain}')
         Route::get('privacy-policy', [MarketingController::class, 'privacy']);
         Route::get('preferences', [MarketingController::class, 'preferences']);
         Route::get('careers', [MarketingController::class, 'careers']);
+        Route::get('careers-pinpoint', [MarketingController::class, 'careersPP']);
         Route::get('ambassador', [MarketingController::class, 'ambassador']);
         Route::get('brand', [MarketingController::class, 'brand']);
         Route::get('unified-2022', [MarketingController::class, 'unified2022']);
@@ -36,6 +37,8 @@ Route::domain('{musoraDomain}')
         Route::get('songs', [MarketingController::class, 'songs']);
         Route::get('community', [MarketingController::class, 'community']);
         Route::get('choose-plan', [MarketingController::class, 'choosePlan'] );
+
+        Route::get('/drum-faster', [MarketingController::class, 'faster']);
 
         Route::get('redeem', [CodeRedemptionController::class, 'renderNewAccountRedeemPage']);
         Route::get('friends', [CodeRedemptionController::class, 'friends']);

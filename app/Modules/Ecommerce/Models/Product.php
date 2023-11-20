@@ -2,115 +2,107 @@
 
 namespace App\Modules\Ecommerce\Models;
 
+use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\Ecommerce\database\factories\ProductFactory;
 use App\Modules\Ecommerce\Enums\DigitalAccessType;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
+use App\Modules\Ecommerce\Models\Shopify\MetaField;
+use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
 use Carbon\Carbon;
+use Eloquent;
+use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class Product
  *
  * @package App\Modules\Ecommerce\Models
  *
- * @property integer id
- * @property string brand
- * @property string name
- * @property string sku
- * @property string inventory_control_sku
- * @property string fulfillment_sku
- * @property float price
- * @property string type
- * @property boolean active
- * @property string category
- * @property string description
- * @property string thumbnail_url
- * @property string sales_page_url
- * @property boolean is_physical
- * @property float weight
- * @property string subscription_interval_type
- * @property integer subscription_interval_count
- * @property string stock
- * @property string min_stock_level
- * @property string public_stock_count
- * @property string auto_decrement_stock
- * @property array digital_access_permission_names
- * @property string digital_access_type
- * @property string digital_access_time_type
- * @property string digital_access_time_interval_length
- * @property string note
- * @property Carbon $digital_membership_access_expiration_date
- * @property Carbon $start_date
- * @property Carbon $expiration_date
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon|null $deleted_at
  * @property int $id
  * @property string $brand
  * @property string $name
  * @property string $sku
- * @property string|null $inventory_control_sku
- * @property string|null $fulfillment_sku
+ * @property string $inventory_control_sku
+ * @property string $fulfillment_sku
  * @property string $price
  * @property string $type
  * @property int $active
- * @property string|null $category
- * @property string|null $description
- * @property string|null $thumbnail_url
- * @property string|null $sales_page_url
+ * @property string $category
+ * @property string $description
+ * @property string $thumbnail_url
+ * @property string $sales_page_url
  * @property int $is_physical
- * @property string|null $weight
- * @property string|null $subscription_interval_type
- * @property int|null $subscription_interval_count
- * @property int|null $stock
- * @property int|null $min_stock_level
- * @property int|null $public_stock_count
+ * @property string $weight
+ * @property string $subscription_interval_type
+ * @property int $subscription_interval_count
+ * @property int $stock
+ * @property int $min_stock_level
+ * @property int $public_stock_count
  * @property int $auto_decrement_stock
- * @property string|null $digital_access_permission_names
- * @property string|null $digital_access_type
- * @property string|null $digital_access_time_interval_type
- * @property string|null $digital_access_time_type
- * @property int|null $digital_access_time_interval_length
- * @property string|null $note
- * @method static \App\Modules\Ecommerce\database\factories\ProductFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Product query()
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereAutoDecrementStock($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereBrand($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereCategory($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDigitalAccessPermissionNames($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDigitalAccessTimeIntervalLength($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDigitalAccessTimeIntervalType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDigitalAccessTimeType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereDigitalAccessType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereFulfillmentSku($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereInventoryControlSku($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereIsPhysical($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereMinStockLevel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereNote($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product wherePublicStockCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereSalesPageUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereSku($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereStock($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereSubscriptionIntervalCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereSubscriptionIntervalType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereThumbnailUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereWeight($value)
- * @mixin \Eloquent
+ * @property string $digital_access_permission_names
+ * @property string $digital_access_type
+ * @property string $digital_access_time_interval_type
+ * @property string $digital_access_time_type
+ * @property int $digital_access_time_interval_length
+ * @property string $note
+ * @property Carbon $digital_membership_access_expiration_date
+ * @property Carbon $start_date
+ * @property Carbon $expiration_date
+ * @property int $shopify_id
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $deleted_at
+ * @method static ProductFactory factory(...$parameters)
+ * @method static Builder|Product newModelQuery()
+ * @method static Builder|Product newQuery()
+ * @method static Builder|Product query()
+ * @method static Builder|Product whereActive($value)
+ * @method static Builder|Product whereAutoDecrementStock($value)
+ * @method static Builder|Product whereBrand($value)
+ * @method static Builder|Product whereCategory($value)
+ * @method static Builder|Product whereCreatedAt($value)
+ * @method static Builder|Product whereDeletedAt($value)
+ * @method static Builder|Product whereDescription($value)
+ * @method static Builder|Product whereDigitalAccessPermissionNames($value)
+ * @method static Builder|Product whereDigitalAccessTimeIntervalLength($value)
+ * @method static Builder|Product whereDigitalAccessTimeIntervalType($value)
+ * @method static Builder|Product whereDigitalAccessTimeType($value)
+ * @method static Builder|Product whereDigitalAccessType($value)
+ * @method static Builder|Product whereFulfillmentSku($value)
+ * @method static Builder|Product whereId($value)
+ * @method static Builder|Product whereInventoryControlSku($value)
+ * @method static Builder|Product whereIsPhysical($value)
+ * @method static Builder|Product whereMinStockLevel($value)
+ * @method static Builder|Product whereName($value)
+ * @method static Builder|Product whereNote($value)
+ * @method static Builder|Product wherePrice($value)
+ * @method static Builder|Product wherePublicStockCount($value)
+ * @method static Builder|Product whereSalesPageUrl($value)
+ * @method static Builder|Product whereSku($value)
+ * @method static Builder|Product whereStock($value)
+ * @method static Builder|Product whereSubscriptionIntervalCount($value)
+ * @method static Builder|Product whereSubscriptionIntervalType($value)
+ * @method static Builder|Product whereThumbnailUrl($value)
+ * @method static Builder|Product whereType($value)
+ * @method static Builder|Product whereUpdatedAt($value)
+ * @method static Builder|Product whereWeight($value)
+ * @mixin Eloquent
+ * @property Collection $userProducts
  */
 class Product extends Model
 {
+    use CanSaveWithoutUpdatedAt;
     use HasFactory;
+    use HasShopifyMetafields;
+    use SoftDeletes;
 
     const TYPE_DIGITAL_SUBSCRIPTION = 'digital subscription';
     const TYPE_DIGITAL_ONE_TIME = 'digital one time';
@@ -124,7 +116,7 @@ class Product extends Model
     const DIGITAL_ACCESS_TIME_TYPE_ONE_TIME = 'one time';
     const DIGITAL_ACCESS_TIME_TYPE_LIFETIME = 'lifetime';
 
-
+    const DIGITAL_PRODUCT_TYPES = [self::TYPE_DIGITAL_SUBSCRIPTION, self::TYPE_DIGITAL_ONE_TIME];
 
     const MEMBERSHIP_DIGITAL_ACCESS_TYPES = [DigitalAccessType::Plus, DigitalAccessType::Basic];
 
@@ -137,8 +129,303 @@ class Product extends Model
         return ProductFactory::new();
     }
 
+    public function userProducts(): HasMany
+    {
+        return $this->hasMany(UserProduct::class);
+    }
+
     public function isMembershipProduct(): bool
     {
-        return in_array($this->digital_access_type, Product::MEMBERSHIP_DIGITAL_ACCESS_TYPES);
+        return in_array($this->getDigitalAccessTypeAsEnum(), Product::MEMBERSHIP_DIGITAL_ACCESS_TYPES);
     }
+
+    public function isPack(): bool
+    {
+        return $this->digital_access_type == Product::DIGITAL_ACCESS_TYPE_SPECIFIC_CONTENT_ACCESS;
+    }
+
+    public function getDigitalAccessTypeAsEnum(): ?DigitalAccessType
+    {
+        return DigitalAccessType::tryFrom($this->digital_access_type);
+    }
+
+    public function getMembershipTimeDays(): ?int
+    {
+        if ($this->isTrial()) {
+            return $this->getTrialDays();
+        }
+
+        switch ($this->digital_access_time_interval_type) {
+            case 'days':
+                return $this->digital_access_time_interval_length ?? 0;
+            case 'month':
+            case 'year':
+            case '':
+                return 0;
+        }
+        Log::error(
+            "Not Implemented membership time interval type: $this->digital_access_time_interval_type",
+            [
+                'product_id' => $this->id,
+                'digital_access_time_interval_type' => $this->digital_access_time_interval_type,
+            ]
+        );
+        return null;
+    }
+
+    public function getMembershipTimeMonths(): ?int
+    {
+        if ($this->isTrial()) {
+            return 0;
+        }
+        switch ($this->digital_access_time_interval_type) {
+            case 'days':
+            case '':
+                return 0;
+            case 'month':
+                return $this->digital_access_time_interval_length;
+            case 'year':
+                return 12 * $this->digital_access_time_interval_length;
+        }
+        Log::error(
+            "Not Implemented membership time interval type: $this->digital_access_time_interval_type",
+            [
+                'product_id' => $this->id,
+                'digital_access_time_interval_type' => $this->digital_access_time_interval_type,
+            ]
+        );
+        return null;
+    }
+
+    public function isLifeTime()
+    {
+        return $this->digital_access_time_interval_type == null || $this->digital_access_time_type == self::DIGITAL_ACCESS_TIME_TYPE_LIFETIME;
+    }
+
+    public function getContentPermissions($permissionsLookup): Collection
+    {
+        $permissionNames = collect($this->getDigitalAccessPermissionNames());
+        return $permissionNames->map(function ($permissionName) use ($permissionsLookup) {
+            $brand = $this->brand;
+            $keyBrand = $brand . '_' . $permissionName;
+            $keyGeneral = 'musora_' . $permissionName;
+            $permission = $permissionsLookup[$keyBrand] ?? $permissionsLookup[$keyGeneral] ?? null;
+            if (!$permission) {
+                Log::error(
+                    "Permission $brand - $permissionName does not exist.  Fix issue with product $this->id - $this->name and resync."
+                );
+                return false;
+            }
+            return $permission;
+        });
+    }
+
+    public function getDigitalAccessPermissionNames(): array
+    {
+        if ($this->digital_access_permission_names == null) {
+            return [];
+        }
+
+        return is_array($this->digital_access_permission_names) ? $this->digital_access_permission_names : json_decode(
+            $this->digital_access_permission_names
+        );
+    }
+
+    /**
+     * @return int
+     */
+    public function getStockAvailability(): int
+    {
+        if ($this->min_stock_level === null || $this->stock === null) {
+            return 1000000;
+        }
+
+        return intval($this->stock) - intval($this->min_stock_level);
+    }
+
+    public function isDigital(): bool
+    {
+        return in_array($this->type, self::DIGITAL_PRODUCT_TYPES);
+    }
+
+    public function isTrial(): bool
+    {
+        return str_contains(strtolower($this->sku), 'trial');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getMetafieldsForShopify(): array
+    {
+        // some of our metafields are only set for certain product (e.g. digital_access_type only on digital products),
+        // so build up the array of entries that are only set
+        $metafields = [];
+        $metafields[] = MetaField::getStructureForShopify(
+            new MetaField(
+                ShopifyMetafieldKey::Id,
+                (string)$this->id,
+                ShopifyMetafieldTypes::integer,
+                ShopifyMetafieldNamespace::Model_Products
+            )
+        );
+
+        if ($this->inventory_control_sku) {
+            $metafields[] = MetaField::getStructureForShopify(
+                new MetaField(
+                    ShopifyMetafieldKey::InventoryControlSKU,
+                    $this->inventory_control_sku,
+                    ShopifyMetafieldTypes::single_line_text_field,
+                    ShopifyMetafieldNamespace::Model_Products
+                )
+            );
+        }
+
+        if ($this->fulfillment_sku) {
+            $metafields[] = MetaField::getStructureForShopify(
+                new MetaField(
+                    ShopifyMetafieldKey::FulfillmentSKU,
+                    $this->fulfillment_sku,
+                    ShopifyMetafieldTypes::single_line_text_field,
+                    ShopifyMetafieldNamespace::Model_Products
+                )
+            );
+        }
+
+        if ($this->digital_access_type) {
+            $metafields[] = MetaField::getStructureForShopify(
+                new MetaField(
+                    ShopifyMetafieldKey::DigitalAccessType,
+                    $this->digital_access_type,
+                    ShopifyMetafieldTypes::single_line_text_field,
+                    ShopifyMetafieldNamespace::Model_Products
+                )
+            );
+        }
+
+        if ($this->digital_access_time_type) {
+            $metafields[] = MetaField::getStructureForShopify(
+                new MetaField(
+                    ShopifyMetafieldKey::DigitalAccessTimeType,
+                    $this->digital_access_time_type,
+                    ShopifyMetafieldTypes::single_line_text_field,
+                    ShopifyMetafieldNamespace::Model_Products
+                )
+            );
+        }
+
+        if ($this->digital_access_time_interval_type) {
+            $metafields[] = MetaField::getStructureForShopify(
+                new MetaField(
+                    ShopifyMetafieldKey::DigitalAccessTimeIntervalType,
+                    $this->digital_access_time_interval_type,
+                    ShopifyMetafieldTypes::single_line_text_field,
+                    ShopifyMetafieldNamespace::Model_Products
+                )
+            );
+        }
+
+        if ($this->digital_access_time_interval_length) {
+            $metafields[] = MetaField::getStructureForShopify(
+                new MetaField(
+                    ShopifyMetafieldKey::DigitalAccessTimeIntervalLength,
+                    (string)$this->digital_access_time_interval_length,
+                    ShopifyMetafieldTypes::integer,
+                    ShopifyMetafieldNamespace::Model_Products
+                )
+            );
+        }
+
+        return $metafields;
+    }
+
+    public function getTrialDays(): int
+    {
+        if (str_contains(strtolower($this->sku), "7-day")
+            || in_array(
+                $this->sku,
+                [
+                    "PIANOTE-MEMBERSHIP-TRIAL",
+                    "DLM-Trial-1-month",
+                    "DLM-Trial-Best-Book-1-month"
+                ]
+            )
+        ) {
+            return 7;
+        }
+        if (str_contains(strtolower($this->sku), "30-day")
+            || str_contains(strtolower($this->sku), "1-month")) {
+            return 30;
+        }
+        return 0;
+    }
+
+    /**
+     * Get the full product corresponding to this trial product.
+     * If this product is not a trial, it will return itself.
+     *
+     * @return $this|self
+     * @throws Exception
+     */
+    public function getFullProductForTrial(): self
+    {
+        if (!$this->isTrial()) {
+            return $this;
+        }
+
+        $fullProductSku = self::trialToFullProductSkuMap($this);
+        if (is_null($fullProductSku)) {
+            throw new Exception(sprintf("No full product found for trial product %s (%s)", $this->id, $this->sku));
+        }
+
+        $fullProductBySku = self::where("sku", $fullProductSku)->get();
+
+        if ($fullProductBySku->isEmpty()) {
+            throw new Exception(sprintf("No product found for sku %s", $fullProductSku));
+        }
+
+        if ($fullProductBySku->count() > 1) {
+            throw new Exception(sprintf("Multiple products found for sku %s", $fullProductSku));
+        }
+
+        return $fullProductBySku->first();
+    }
+
+    /**
+     * Get the sku of the full product corresponding to the given trial product's sku
+     *
+     * @param  Product  $product
+     * @return string|null
+     */
+    public static function trialToFullProductSkuMap(self $product): ?string
+    {
+        if (!$product->isTrial()) {
+            return null;
+        }
+
+        return match ($product->sku) {
+            'PIANOTE-MEMBERSHIP-TRIAL', 'PIANOTE-MEMBERSHIP-TRIAL-30-DAY' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+            'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL', 'PIANOTE-MEMBERSHIP-TRIAL-30-DAY-ANNUAL' => 'PIANOTE-MEMBERSHIP-1-YEAR',
+            'guitareo-monthly-recurring-30-day-trial-membership', 'GUITAREO-7-DAY-TRIAL-ONE-TIME', 'guitareo-monthly-recurring-7-day-trial-membership' => 'GUITAREO-1-MONTH-MEMBERSHIP',
+            'guitareo-annual-recurring-7-day-trial-membership', 'guitareo-annual-recurring-30-day-trial-membership' => 'GUITAREO-1-YEAR-MEMBERSHIP',
+            'DLM-Trial-1-month', 'DLM-Trial-30-Day' => 'DLM-1-month',
+            'DLM-Trial-Annual-30-Day', 'DLM-Trial-Annual-7-Day' => 'DLM-1-year',
+            'singeo-monthly-recurring-30-day-trial-membership', 'singeo-monthly-recurring-7-day-trial-membership' => 'singeo-monthly-recurring-membership',
+            'singeo-annual-recurring-30-day-trial-membership', 'singeo-annual-recurring-7-day-trial-membership' => 'singeo-annual-recurring-membership',
+            'musora-annual-recurring-7-day-trial-membership', 'musora-annual-recurring-30-day-trial-membership' => 'musora-annual-recurring-membership',
+            'musora-monthly-recurring-7-day-trial-membership', 'musora-monthly-recurring-30-day-trial-membership' => 'musora-monthly-recurring-membership',
+            'drumeo-base-annual-recurring-7-day-trial-membership' => 'drumeo-base-annual-recurring-membership',
+            'drumeo-base-monthly-recurring-7-day-trial-membership' => 'drumeo-base-monthly-recurring-membership',
+            'pianote-base-annual-recurring-7-day-trial-membership' => 'pianote-base-annual-recurring-membership',
+            'pianote-base-monthly-recurring-7-day-trial-membership' => 'pianote-base-monthly-recurring-membership',
+            'guitareo-base-annual-recurring-7-day-trial-membership' => 'guitareo-base-annual-recurring-membership',
+            'guitareo-base-monthly-recurring-7-day-trial-membership' => 'guitareo-base-monthly-recurring-membership',
+            'singeo-base-annual-recurring-7-day-trial-membership' => 'singeo-base-annual-recurring-membership',
+            'singeo-base-monthly-recurring-7-day-trial-membership' => 'singeo-base-monthly-recurring-membership',
+            'musora-base-annual-recurring-7-day-trial-membership' => 'musora-base-annual-recurring-membership',
+            'musora-base-monthly-recurring-7-day-trial-membership' => 'musora-base-monthly-recurring-membership',
+            default => null,
+        };
+    }
+
 }

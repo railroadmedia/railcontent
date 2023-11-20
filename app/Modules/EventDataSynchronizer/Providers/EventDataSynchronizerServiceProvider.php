@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Providers;
 
+use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\EventDataSynchronizer\Console\Commands\CustomerIOSyncUser;
 use App\Modules\EventDataSynchronizer\Console\Commands\ExpiredProductResync;
 use App\Modules\EventDataSynchronizer\Console\Commands\MigrateMinutesWatchedPoints;
@@ -10,7 +11,8 @@ use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoOrders;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncPoints;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncUserTotalXp;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserContentProductPermissionsResyncTool;
-use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipOwnedProductSyncTool;
+use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipSyncByPermissions;
+use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipSyncCustom;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Railroad\Ecommerce\Events\AccessCodeClaimed;
@@ -107,6 +109,12 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
             UserProductToUserContentPermissionListener::class . '@handleDeleted',
             HelpScoutEventListener::class . '@handleUserProductDeleted',
             UserMembershipFieldsListener::class . '@handleUserProductDeleted',
+        ],
+        UserAccessPermissionsUpdated::class => [
+            CustomerIoSyncEventListener::class . '@handleUserAccessPermissionsUpdated',
+            UserProductToUserContentPermissionListener::class . '@handleUserAccessPermissionsUpdated',
+            HelpScoutEventListener::class . '@handleUserAccessPermissionsUpdated',
+            UserMembershipFieldsListener::class . '@handleUserAccessPermissionsUpdated',
         ],
         SubscriptionCreated::class => [
             CustomerIoSyncEventListener::class . '@handleSubscriptionCreated',
@@ -235,13 +243,12 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 SyncHelpScoutAsync::class,
                 SyncCustomerIoOldEvents::class,
                 SyncCustomerIoExistingDevices::class,
-                UserMembershipFieldsResyncTool::class,
-                UserMembershipOwnedProductSyncTool::class,
+                UserMembershipSyncByPermissions::class,
+                UserMembershipSyncCustom::class,
                 ProductOwnerUserFieldResyncTool::class,
                 SyncUserTotalXp::class,
                 IsDrumeoLifetimeUserFieldResyncTool::class,
                 CustomerIOSyncUser::class,
-                ExpiredProductResync::class,
                 MigrateMinutesWatchedPoints::class,
                 SyncPoints::class,
                 SyncCustomerIoOrders::class,

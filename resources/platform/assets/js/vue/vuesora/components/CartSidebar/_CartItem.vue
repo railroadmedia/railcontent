@@ -1,7 +1,7 @@
 <template>
     <div class="cart-item-container">
         <div class="image-container">
-            <a :href="this.item.sales_page_url"><img :src="'https://www.musora.com/musora-cdn/image/width=200,quality=95/' + item.thumbnail_url" class="item-thumbnail"></a>
+            <a :href="this.item.sales_page_url"><img :src="item.thumbnail_url" class="item-thumbnail"></a>
             <div class="item-logo" v-if="item.logo">
                 <img :src="item.logo">
             </div>
@@ -249,14 +249,13 @@ export default {
             height: 80px;
         }
         a {
-            display: inline-block;
             text-decoration: none;
             .item-thumbnail {
                 object-fit: cover;
                 object-position: center;
                 border-radius: 5px;
                 max-width: 100%;
-                height: auto;
+                height: 100%;
             }
         }
         .item-logo {

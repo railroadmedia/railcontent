@@ -44,9 +44,9 @@ return [
     ],
 
     // routes
-    'autoload_all_routes' => false,
-    'route_middleware_public_groups' => ['web'],
-    'route_middleware_logged_in_groups' => ['web_authed'],
+    'autoload_all_routes' => true,
+    'route_middleware_public_groups' => ['web_or_api_public'],
+    'route_middleware_logged_in_groups' => ['web_or_api_authenticated'],
     'route_prefix' => 'usora',
 
     //middleware for API requests
@@ -151,4 +151,6 @@ return [
     ],
 
     'password_creation_rules' => 'confirmed|min:8|max:128', // also defined in ecommerce
+    'shopify_store' => env('SHOPIFY_STORE','musora-sandbox-staging'),
+    'revenuecat_project_id' => env('REVENUECAT_PROJECT_ID','34db7a33'),
 ];

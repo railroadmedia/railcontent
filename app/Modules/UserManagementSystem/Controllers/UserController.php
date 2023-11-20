@@ -2,22 +2,36 @@
 
 namespace Modules\UserManagementSystem\Controllers;
 
+use App\Modules\Ecommerce\Models\Product;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
+use Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserDeleted;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\ReportedUser;
 use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\Ecommerce\Entities\Structures\Purchaser;
+use Railroad\Ecommerce\Events\AugustContestReferralClaimed;
 use Railroad\Mailora\Services\MailService;
+use Railroad\Referral\Exceptions\NotFoundException;
+use Railroad\Referral\Exceptions\ReferralException;
+use Railroad\Referral\Exceptions\SaasquatchException;
+use Railroad\Referral\Exceptions\SaasquatchUserExistsException;
+use Railroad\Referral\Models\Referrer;
+use Railroad\Referral\Services\SaasquatchService;
+use Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends Controller
@@ -26,14 +40,129 @@ class UserController extends Controller
     use AuthorizesRequests;
 
     private MailService $mailService;
+    private SaasquatchService $saasquatchService;
 
     /**
      * UserController constructor.
      */
-    public function __construct(MailService $mailService)
+    public function __construct(MailService $mailService, SaasquatchService $saasquatchService)
     {
         $this->mailService = $mailService;
+        $this->saasquatchService = $saasquatchService;
         $this->middleware([ConvertEmptyStringsToNull::class]);
+    }
+
+    /**
+     * @throws SaasquatchUserExistsException
+     * @throws ReferralException
+     * @throws SaasquatchException
+     * @throws NotFoundException
+     * @throws Exception
+     */
+    private function applyReferral(string $referralCode, User $user, string $productSku): void
+    {
+        /**
+         * @var $referrer Referrer
+         */
+        $referrer = Referrer::query()->where('referral_code', $referralCode)->firstOrFail();
+
+        $brand = $referrer->brand;
+        $productToAssign = Product::whereSku($productSku)->first();
+
+        if (empty($productToAssign)) {
+            throw new Exception(
+                'Error assigning product to user trying to claim a referral. ' .
+                'Could not find product with configured SKU, ' . $productSku
+            );
+        }
+
+        // increase the referrers referral count for this program and code and add this claimers user id to the column
+        $referrer->referrals_performed += 1;
+
+        $claimedUserIds = $referrer->claimed_user_ids;
+        $claimedUserIds[] = $user->id;
+
+        $referrer->claimed_user_ids = $claimedUserIds;
+
+        $referrer->save();
+
+        $this->saasquatchService->applyReferralCode($user->getId(), $referrer->referral_code, $brand);
+
+        event(new AugustContestReferralClaimed($referrer, $productToAssign->id, $user->getId()));
+        info(
+            "Applied referral code $referralCode for user " . $user->getId(
+            ) . " and triggered event AugustContestReferralClaimed."
+        );
+    }
+
+
+    public function createUserWithVerificationToken(Request $request)
+    {
+        try {
+            $validationRules = [
+                'email' => 'email|max:255',
+                'password' => 'required|string|min:8|max:128',
+            ];
+
+            $this->validate(
+                $request,
+                $validationRules
+            );
+        } catch (ValidationException $exception) {
+            return redirect()
+                ->back()
+                ->withErrors($exception->errors());
+        }
+
+        $email = $request->get('email');
+        $password = $request->get('password');
+
+        // This must be generated passed so that someone can't claim someone else's email.
+        // It must be generated via md5 with the email string and special key combined.
+        // md5('email' . config('shopify.accountCreationSecretKey'))
+        // On the shopify side, we'll generate the link to this claim page and include the key in the url params. This
+        // ensures that only a person with the special link can claim that email address.
+
+        $verificationToken = $request->get('verification_token');
+
+        if (strtolower($verificationToken) !== strtolower(md5($email . config('shopify.accountCreationSecretKey')))) {
+            throw new AuthorizationException('Invalid verification_token.', 403);
+        }
+
+        $user = User::where('email', $email)->first() ?? new User();
+        $parts = explode('@', $email);
+
+        $user->email = $email;
+        $user->setPassword($password);
+        $this->requires_password_update = false;
+        $user->display_name = $parts[0] . rand(10000, 99999);
+        $user->save();
+
+        event(new UserCreated($user));
+
+        try {
+            $referralCode = Session::pull('referral_code');
+            $productSku = Session::pull('referral_code_product_sku');
+            if ($referralCode && $productSku) {
+                $this->applyReferral(
+                    $referralCode,
+                    $user,
+                    $productSku,
+                );
+            }
+        } catch (Exception $e) {
+            // don't block the user from creating an account if the referral code fails
+            Log::error("Error applying referral code for user $user->id: " . $e->getMessage());
+        }
+
+
+        Auth::loginUsingId($user->getId());
+
+        return $request->has('redirect') ?
+            redirect()
+                ->away($request->get('redirect')) :
+            redirect()
+                ->to(config('ecommerce.post_purchase_redirect_digital_items'));
     }
 
     /**
@@ -46,12 +175,12 @@ class UserController extends Controller
 
         try {
             $validationRules = [
-                'email' => 'email|max:255|unique:'.
-                    config('user_management_system.database_connection_name').
+                'email' => 'email|max:255|unique:' .
+                    config('user_management_system.database_connection_name') .
                     '.usora_users',
                 'password' => 'required|string|min:8|max:128',
-                'display_name' => 'required|string|max:64|min:2|unique:'.
-                    config('user_management_system.database_connection_name').
+                'display_name' => 'required|string|max:64|min:2|unique:' .
+                    config('user_management_system.database_connection_name') .
                     '.usora_users',
             ];
 
@@ -62,8 +191,8 @@ class UserController extends Controller
         } catch (ValidationException $exception) {
             if ($isJson) {
                 return json_encode([
-                                       "errors" => $exception->errors(),
-                                   ]);
+                    "errors" => $exception->errors(),
+                ]);
             }
 
             return $request->has('redirect') ?
@@ -100,8 +229,8 @@ class UserController extends Controller
                     ->with($message);
         } else {
             return json_encode([
-                                   "data" => ["attributes" => json_encode($user)],
-                               ]);
+                "data" => ["attributes" => json_encode($user)],
+            ]);
         }
     }
 
@@ -111,17 +240,35 @@ class UserController extends Controller
      */
     public function read(Request $request, $id)
     {
-        $this->authorize('show-users');
+        //$this->authorize('show-users');
         $user = User::findOrFail($id);
 
         if ($user) {
+            $user['shopify_customer_url'] =
+                ($user->shopify_id) ?
+                    'https://admin.shopify.com/store/' . config(
+                        'usora.shopify_store'
+                    ) . '/customers/' . $user->shopify_id :
+                    '';
+            $user['revenuecat_customer_url'] =
+                ($user->revenuecat_origin_app_user_id) ?
+                    'https://app.revenuecat.com/customers/' .
+                    config('usora.revenuecat_project_id') .
+                    '/' .
+                    $user->revenuecat_origin_app_user_id : '';
+
             return json_encode([
-                                   "data" => ["attributes" => json_encode($user)],
-                               ]);
+                "data" => [
+                    "id" => $user->id,
+                    "type" => "user",
+                    "attributes" => $user,
+                ],
+            ]);
         } else {
             throw new NotFoundHttpException();
         }
     }
+
 
     /**
      * @param Request $request
@@ -136,16 +283,16 @@ class UserController extends Controller
         }
         try {
             $request->validate([
-               'display_name' => [
-                   Rule::unique(
-                       config('user_management_system.database_connection_name').'.usora_users'
-                   )
-                       ->ignore($id),
-                   'string',
-                   'max:64',
-                   'min:2',
-               ],
-           ]);
+                'display_name' => [
+                    Rule::unique(
+                        config('user_management_system.database_connection_name') . '.usora_users'
+                    )
+                        ->ignore($id),
+                    'string',
+                    'max:64',
+                    'min:2',
+                ],
+            ]);
         } catch (ValidationException $e) {
             $messagesByField =
                 $e->validator->getMessageBag()
@@ -200,8 +347,8 @@ class UserController extends Controller
                     ->with($message);
         } else {
             return json_encode([
-                                   "data" => ["attributes" => json_encode($user)],
-                               ]);
+                "data" => ["attributes" => json_encode($user)],
+            ]);
         }
     }
 
@@ -235,8 +382,8 @@ class UserController extends Controller
                     ->with($message);
         } else {
             return json_encode([
-                                   "data" => ["attributes" => json_encode($user)],
-                               ]);
+                "data" => ["attributes" => json_encode($user)],
+            ]);
         }
     }
 
@@ -245,23 +392,52 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('index-users');
+        //$this->authorize('index-users');
         $searchTerm = $request->get('search_term');
+        $limit = $request->get('per_page', 25);
+        $skip = ($request->get('page', 1) - 1) * $limit;
+
 
         $users =
             User::query()
-                ->where('displayName', 'LIKE', "%{$searchTerm}%")
+                ->where('display_name', 'LIKE', "%{$searchTerm}%")
                 ->orWhere('email', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('firstName', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('lastName', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('phoneNumber', 'LIKE', "%{$searchTerm}%")
-                ->limit($request->get('per_page', 25))
+                ->orWhere('first_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('phone_number', 'LIKE', "%{$searchTerm}%")
+                ->skip($skip)
+                ->take($limit)
                 ->orderBy($request->get('sort', 'createdAt'))
                 ->get();
+        $totalResults =
+            User::query()
+                ->where('display_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('email', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('first_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('phone_number', 'LIKE', "%{$searchTerm}%")
+                ->count();
+        $results = [];
+        foreach ($users as $user) {
+            $results[] = [
+                "id" => $user->id,
+                "type" => "user",
+                "attributes" => $user,
+            ];
+        }
 
         return json_encode([
-                               "data" => json_encode($users),
-                           ]);
+            "data" => $results,
+            "meta" => [
+                "pagination" => [
+                    "total" => $totalResults,
+                    "per_page" => $limit,
+                    "current_page" => 1,
+                    "total_pages" => ceil($totalResults / $limit),
+                    "links" => [],
+                ],
+            ],
+        ]);
     }
 
     /**
@@ -308,10 +484,10 @@ class UserController extends Controller
                 ->first();
 
         if ($user) {
-            return response()->json(['unique' => false]);
+            return response()->json(['unique' => false, 'is_musora_account_set_up' => $user->isAccountSetup()]);
         }
 
-        return response()->json(['unique' => true]);
+        return response()->json(['unique' => true, 'is_musora_account_set_up' => false]);
     }
 
     /**
@@ -330,14 +506,14 @@ class UserController extends Controller
         $brand = brand();
 
         ReportedUser::firstOrNew([
-                                     'user_id' => $id,
-                                     'reporter_id' => $currentUser['id'],
-                                     "created_on" => Carbon::now()
-                                         ->toDateTimeString(),
-                                 ])
+            'user_id' => $id,
+            'reporter_id' => $currentUser['id'],
+            "created_on" => Carbon::now()
+                ->toDateTimeString(),
+        ])
             ->save();
 
-        $input['subject'] = 'User reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
+        $input['subject'] = 'User reported by ' . $currentUser['display_name'] . " (" . $currentUser['email'] . ")";
         $input['sender-address'] = config('mailora.report-sender-address');
         $input['sender-name'] = config('mailora.report-sender-name');
         $input['lines'] = ['The following user has been reported:'];
@@ -348,25 +524,25 @@ class UserController extends Controller
             'userId' => $user['id'],
         ]);
 
-        $input['alert'] = 'User reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
+        $input['alert'] = 'User reported by ' . $currentUser['display_name'] . " (" . $currentUser['email'] . ")";
 
-        $input['logo'] = config('mailora.'.$brand.'.logo-link');
+        $input['logo'] = config('mailora.' . $brand . '.logo-link');
         $input['type'] = 'layouts/inline/alert';
-        $input['recipient'] = config('mailora.'.$brand.'.report-user-recipient');
+        $input['recipient'] = config('mailora.' . $brand . '.report-user-recipient');
 
         try {
             $this->mailService->sendSecure($input);
         } catch (\Exception $exception) {
             return response()->json([
-                                        "success" => false,
-                                        "message" => $exception->getMessage(),
-                                    ], 500);
+                "success" => false,
+                "message" => $exception->getMessage(),
+            ], 500);
         }
 
         return response()->json([
-                                    "success" => true,
-                                    "message" => "The user profile was reported",
-                                ], 200);
+            "success" => true,
+            "message" => "The user profile was reported",
+        ], 200);
     }
 
     /**
@@ -382,17 +558,17 @@ class UserController extends Controller
 
         $currentUser = user();
         $blocked = BlockedUser::firstOrNew([
-                                               'user_id' => $id,
-                                               'blocker_id' => $currentUser['id'],
-                                               "created_on" => Carbon::now()
-                                                   ->toDateTimeString(),
-                                           ])
+            'user_id' => $id,
+            'blocker_id' => $currentUser['id'],
+            "created_on" => Carbon::now()
+                ->toDateTimeString(),
+        ])
             ->save();
 
         return response()->json([
-                                    "success" => $blocked,
-                                    "message" => $user['display_name']." was blocked",
-                                ], 200);
+            "success" => $blocked,
+            "message" => $user['display_name'] . " was blocked",
+        ], 200);
     }
 
     /**
@@ -413,9 +589,9 @@ class UserController extends Controller
                 ->delete();
 
         return response()->json([
-                                    "success" => $unblock > 0,
-                                    "message" => $user['display_name']." was unblocked",
-                                ], 200);
+            "success" => $unblock > 0,
+            "message" => $user['display_name'] . " was unblocked",
+        ], 200);
     }
 
     /**
@@ -443,14 +619,14 @@ class UserController extends Controller
                 ->get();
 
         return response()->json([
-                                    "data" => $users,
-                                    "meta" => [
-                                        "totalResulsts" => BlockedUser::where('blocker_id', '=', $currentUser['id'])
-                                            ->count(),
-                                        "page" => $request->get('page', 1),
-                                        "limit" => $request->get('limit', 2),
-                                    ],
-                                ], 200);
+            "data" => $users,
+            "meta" => [
+                "totalResulsts" => BlockedUser::where('blocker_id', '=', $currentUser['id'])
+                    ->count(),
+                "page" => $request->get('page', 1),
+                "limit" => $request->get('limit', 2),
+            ],
+        ], 200);
     }
 
     /**
@@ -466,7 +642,7 @@ class UserController extends Controller
                 ->first();
 
         return response()->json([
-                                    "reported" => $reported ? true : false,
-                                ], 200);
+            "reported" => $reported ? true : false,
+        ], 200);
     }
 }

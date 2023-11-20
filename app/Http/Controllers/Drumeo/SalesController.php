@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Drumeo;
 
 use App\Http\Controllers\BaseController;
 use App\Listeners\OrderEventListener;
+use App\Modules\Ecommerce\Services\AccessCodeService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\DatabaseManager;
@@ -12,7 +13,6 @@ use Illuminate\Support\Facades\Mail;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 
 use Railroad\Ecommerce\Entities\User;
-use Railroad\Ecommerce\Services\AccessCodeService;
 use Railroad\Ecommerce\Services\UserProductService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -125,20 +125,6 @@ class SalesController extends BaseController
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
-    }
-    public function ultimatepracticerig()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.ultimate-practice-rig', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
-    }
-    public function restart()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.restart', ['products' => $products, 'theme' => 'drumeo']);
     }
     public function choosePlanVDF()
     {
@@ -344,11 +330,6 @@ class SalesController extends BaseController
         return view('drumeo.sales.pages.tom-sawyer');
     }
 
-    public function drumFest()
-    {
-        return view('drumeo.sales.pages.drumfest');
-    }
-
     public function awards()
     {
         return view('drumeo.lead-gen.pages.awards');
@@ -436,8 +417,8 @@ class SalesController extends BaseController
         return view('drumeo.drumshop.pages.drumming-system', ['theme' => 'drumeo']);
     }
 
-    public function fiveforthreeBundle()
+    public function easyRudimentsPlaylist()
     {
-        return view('drumeo.drumshop.pages.5-for-3-bundle', ['theme' => 'drumeo']);
+        return view('drumeo.pages.easy-rudiments-playlist', ['theme' => 'drumeo']);
     }
 }

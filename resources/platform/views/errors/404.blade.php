@@ -1,3 +1,6 @@
+@php
+$userData = assembleUserAttributes(user());
+@endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     {!! \App\Analytics\Tracker::headTop() !!}
@@ -30,6 +33,9 @@
 {{-- Notifications Container --}}
 <div id="notifications-container"></div>
 
+{{-- Dropdowns Container --}}
+<div id="dropdowns-container"></div>
+
 {{-- Modal Container --}}
 <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
 
@@ -41,18 +47,12 @@
     <app-container
         :vue-router="false"
         brand="{{ $brand }}"
+        :user="{{ json_encode($userData) }}"
     >
         <page-container
-            brand="{{ $brand }}"
             :is-live="{{ isLive() ? 'true':'false' }}"
             search-url=""
             :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}
-            @if(!empty( user() ))
-            user-name="{{ user()->display_name }}"
-            user-avatar="{{ user()->profile_picture_url }}"
-            user-id="{{ user()->id }}"
-            account-url="{{ user()->getDashboardUrl() }}"
-            @endif
             @if(!empty( $hasUnreadNotifications ))
             :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
             @endif

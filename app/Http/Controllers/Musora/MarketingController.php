@@ -60,6 +60,11 @@ class MarketingController extends BaseController
         return view('musora.pages.careers');
     }
 
+    public function careersPP()
+    {
+        return view('musora.pages.careers-pinpoint');
+    }
+
     public function contact()
     {
         return view('musora.pages.contact');
@@ -119,5 +124,9 @@ class MarketingController extends BaseController
     public function choosePlan()
     {
         return view('musora.pages.choose-plan', ['theme' => 'musora']);
+    }
+    public function faster()
+    {
+        return view('drumeo.lead-gen.faster.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 }

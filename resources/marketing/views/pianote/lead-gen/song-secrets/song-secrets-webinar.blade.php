@@ -270,15 +270,16 @@
     ])
 
 
-    <header class="px-5 sm:px-6 pt-10 pb-80 sm:py-14 lg:py-20 xl:py-36 text-white relative" style="background:#f5f8fb;">
+    <header class="px-4 sm:px-6 pt-10 pb-80 sm:py-14 lg:py-20 xl:py-36 text-white relative" style="background:#f5f8fb;">
         <div class="inset-0 hidden sm:block absolute bg-center bg-cover z-0 mx-auto" style="max-width:1920px;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/header-image.png');"></div>
         <div class="inset-0 block sm:hidden absolute bg-bottom bg-cover z-0" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/header-image-m.png');"></div>
         <div class="container max-w-4xl mx-auto relative z-10">
-            <div class="w-full sm:w-1/2 text-center lg:text-left">
+            <div class="w-full sm:w-7/12 lg:w-1/2 text-center lg:text-left">
                 <h3 class="font-bebas tracking-widest mb-1 sm:mb-0 lg:mb-3">SONG SECRETS</h3>
                 <h3 class="leading-tight"><strong>The Fastest Way to Play <br class="sm:hidden"> Popular Songs on the Piano</strong></h3>
-                <p class="leading-normal text-sm my-3 sm:my-5 max-w-xs sm:max-w-full"><em>Proven strategies to help you play the songs you love on the piano - <u>no matter what your age or experience level!</u> It’s never too late to play the songs you love on the piano. I’ll show you how!</em></p>
+                <p class="leading-normal text-sm my-3 sm:my-5 max-w-xs sm:max-w-full sm:px-4 lg:px-0"><em>Proven strategies to help you play the songs you love on the piano - <u>no matter what your age or experience level!</u> It’s never too late to play the songs you love on the piano. I’ll show you how!</em></p>
                 <div @click="enroll = true;" class="join white medium">ENROLL NOW FOR FREE</div>
+
             </div>
         </div>
     </header>

@@ -5,7 +5,7 @@
 
     <!-- Hero Component -->
     @component('_partials.components.hero-section', [
-        "backgroundImage" => "https://d3fzm1tzeyr5n3.cloudfront.net/pianote/homepage/pianote-hero.jpg",
+        "backgroundImage" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-hero.jpg",
         "gradientClasses" => "from-[#29050f] to-[#29050f]"
     ])
         @slot('content')

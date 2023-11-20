@@ -146,7 +146,7 @@
         <div class="px-3 py-6 sm:py-10">
             <div class="container mx-auto clearfix" style="max-width:920px">
                 <div class="text-left lesson-text">
-                    <h4 class="mb-1 sm:mb-3"><strong>Assets</strong></h4>
+                    <h4 class="mb-1 sm:mb-3"><strong>Resources</strong></h4>
                     @foreach($leadgen->assets as $key => $asset)
                         @php
                             $bodyData = $bodyData.'soundsliceModal'.($key+21).': false,';
@@ -236,7 +236,7 @@
             'benefits' => ['FREE Chords & Scales book', 'The perfect step-by-step curriculum', 'Beginner-friendly song tutorials', 'Live support from REAL teachers'],
             'img' => 'https://pianote.s3.amazonaws.com/products/30-day-blues-piano/collage-lessons.png',
             'mobileImg' => 'https://pianote.s3.amazonaws.com/products/30-day-blues-piano/collage-lessons-m.png',
-            'customLink' => '/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL:1,piano-chords-and-scales-guide:1&promo-code=annual-trial&redirect=/order&locked=true',
+            'customLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&products[piano-chords-and-scales-guide]=1&promo-code=trial-book&redirect=/order&locked=true',
         ])
     @endif
 

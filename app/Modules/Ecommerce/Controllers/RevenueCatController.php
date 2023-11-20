@@ -2,15 +2,20 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
+use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
+use App\Modules\Ecommerce\Models\UserProduct;
 use App\Modules\Ecommerce\Services\RevenueCatService;
+use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use App\Modules\Ecommerce\Services\PaymentService;
 use Modules\UserManagementSystem\Models\User;
@@ -23,15 +28,18 @@ class RevenueCatController extends Controller
     private RevenueCatService $revenueCatService;
     private SubscriptionService $subscriptionService;
     private UserProductService $userProductService;
+    private ShopifySyncService $shopifySyncService;
     private PaymentService $paymentService;
 
     const SUBSCRIPTION_REVOKED = 12;
+    const SANDBOX_ENVIRONMENT = 'SANDBOX';
 
     /**
      * @param RevenueCatService $revenueCatService
      * @param SubscriptionService $subscriptionService
      * @param UserProductService $userProductService
      * @param PaymentService $paymentService
+     * @param ShopifySyncService $shopifySyncService
      * @param RevenueCatGateway $revenueCatGateway
      */
     public function __construct(
@@ -39,11 +47,13 @@ class RevenueCatController extends Controller
         SubscriptionService $subscriptionService,
         UserProductService $userProductService,
         PaymentService $paymentService,
+        ShopifySyncService $shopifySyncService,
         RevenueCatGateway $revenueCatGateway
     ) {
         $this->revenueCatService = $revenueCatService;
         $this->subscriptionService = $subscriptionService;
         $this->userProductService = $userProductService;
+        $this->shopifySyncService = $shopifySyncService;
         $this->paymentService = $paymentService;
         $this->revenueCatGateway = $revenueCatGateway;
     }
@@ -82,16 +92,17 @@ class RevenueCatController extends Controller
                 $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
                     $data['event']['original_app_user_id'],
-                    true
+                    true,
+                    $data['event']['aliases'],
                 );
 
                 if (!$user) {
                     //TBD
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
                     Log::error(
-                        'RevenueCatController processNotification::INITIAL_PURCHASE - user not found email: '.
-                        $email.
-                        ' original_app_user_id: '.
+                        'RevenueCatController processNotification::INITIAL_PURCHASE - user not found email: ' .
+                        $email .
+                        ' original_app_user_id: ' .
                         $data['event']['original_app_user_id']
                     );
                     break;
@@ -104,42 +115,37 @@ class RevenueCatController extends Controller
                 $productId = $this->getProductId($data['event']['product_id']);
 
                 //get Musora product
-                $musoraProduct =
-                    $this->getMusoraProduct($type, $data['event'], $productId)
-                        ->first();
+                $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
+                $musoraProduct = $musoraProducts->first();
 
-                //get RevenueCat subscription
-                $currentRevenueCatSubscription =
-                    $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
+                $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
+                $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
+                if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
+                    if (!$musoraProduct) {
+                        Log::error(
+                            "RevenueCatController processNotification::INITIAL_PURCHASE - musora product not found: $productId"
+                        );
+                        break;
+                    }
+                    $price = $data['event']['price'] ?? $musoraProduct->price;
 
-                //check if already exists Musora subscription
-                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
-                if (!$musoraSubscription) {
-                    //create Musora subscription
-                    $musoraSubscription = $this->subscriptionService->createSubscription(
-                        $user->id,
-                        $data['event']['expiration_at_ms'],
-                        $musoraProduct,
-                        $type,
-                        $data['event']['purchased_at_ms']
+                    if($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
+                        UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
+                    }
+
+                    $this->shopifySyncService->syncOrder(
+                        $user,
+                        [$musoraProduct->id],
+                        $musoraProduct->brand,
+                        $processedAt,
+                        $price,
+                        $this->calculateTaxAmount($price, $data['event']['tax_percentage']),
+                        $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
+                            : ShopifyPaymentSourceEnum::Google,
+                        null //defaults to USD
                     );
+                    $this->setUserSubscription($user, $type);
                 }
-
-                if ($data['event']['period_type'] != 'TRIAL') {
-                    $this->paymentService->create(
-                        $musoraSubscription,
-                        $type,
-                        $data['event']['event_timestamp_ms'],
-                        $data['event']['transaction_id']
-                    );
-                }
-
-                //Assign user product
-                $this->userProductService->assignUserProduct(
-                    $user->id,
-                    $musoraSubscription->product_id,
-                    $musoraSubscription->paid_until
-                );
                 break;
             case 'NON_RENEWING_PURCHASE':
                 echo 'NON_RENEWING_PURCHASE';
@@ -147,20 +153,22 @@ class RevenueCatController extends Controller
                 break;
             case 'RENEWAL':
                 echo 'RENEWAL';
+                $subscriberAttributtes = $data['event']['subscriber_attributes'];
 
                 // get Musora user
                 $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
                     $data['event']['original_app_user_id'],
-                    true
+                    true,
+                    $data['event']['aliases']
                 );
                 if (!$user) {
                     //TBD
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
                     Log::error(
-                        'RevenueCatController processNotification::RENEWAL - user not found email: '.
-                        $email.
-                        ' original_app_user_id: '.
+                        'RevenueCatController processNotification::RENEWAL - user not found email: ' .
+                        $email .
+                        ' original_app_user_id: ' .
                         $data['event']['original_app_user_id']
                     );
                     break;
@@ -173,111 +181,48 @@ class RevenueCatController extends Controller
                 $productId = $this->getProductId($data['event']['product_id']);
 
                 //get Musora product
-                $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId);
+                $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
 
-                //get RevenueCat subscription
-                $currentRevenueCatSubscription =
-                    $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
-
-                //get Musora subscription
-                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
-                if (!$musoraSubscription) {
-                    //create Musora subscription
-                    $musoraSubscription = $this->subscriptionService->createSubscription(
-                        $user->id,
-                        $data['event']['expiration_at_ms'],
-                        $musoraProduct->first(),
-                        $type,
-                        $data['event']['purchased_at_ms']
+                $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
+                $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
+                if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
+                    $musoraProduct = $musoraProducts?->first();
+                    if (!$musoraProduct) {
+                        Log::error(
+                            "RevenueCatController processNotification::RENEWAL - musora product not found: $productId"
+                        );
+                        break;
+                    }
+                    $price = $data['event']['price'] ?? $musoraProduct->price;
+                    if($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
+                        UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
+                    }
+                    $this->shopifySyncService->syncOrder(
+                        $user,
+                        [$musoraProduct->id],
+                        $musoraProduct->brand,
+                        $processedAt,
+                        $price,
+                        $this->calculateTaxAmount($price, $data['event']['tax_percentage']),
+                        $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
+                            : ShopifyPaymentSourceEnum::Google,
+                        null //defaults to USD
                     );
+
+                    $this->setUserSubscription($user, $type);
                 }
-
-                //update Musora subscription
-                $this->subscriptionService->updateSubscription(
-                    $musoraSubscription,
-                    $data['event']['expiration_at_ms']
-                );
-
-                $this->paymentService->create(
-                    $musoraSubscription,
-                    $type,
-                    $data['event']['purchased_at_ms'],
-                    $data['event']['transaction_id']
-                );
-
-                //update user product
-                $this->userProductService->assignUserProduct(
-                    $user->id,
-                    $musoraSubscription->product_id,
-                    $musoraSubscription->paid_until
-                );
-
-                break;
-            case 'PRODUCT_CHANGE':
-                echo 'PRODUCT_CHANGE';
-                // get Musora user
-                $user = $this->revenueCatService->getUser(
-                    $data['event']['subscriber_attributes']['email']['value'] ?? null,
-                    $data['event']['original_app_user_id']
-                );
-                if (!$user) {
-                    //TBD
-                    $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
-                    Log::error(
-                        'RevenueCatController processNotification::PRODUCT_CHANGE - user not found email: '.
-                        $email.
-                        ' original_app_user_id: '.
-                        $data['event']['original_app_user_id']
-                    );
-                    break;
-                }
-
-                //store type
-                $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
-
-                //new productId
-                $productId = $this->getProductId($data['event']['new_product_id']);
-
-                //get Musora product
-                $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId);
-
-                //get RevenueCat subscription
-                $currentRevenueCatSubscription =
-                    $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
-
-                //check if Musora subscription for new product exists
-                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
-                if (!$musoraSubscription) {
-                    //create Musora subscription
-                    $musoraSubscription = $this->subscriptionService->createSubscription(
-                        $user->id,
-                        $data['event']['expiration_at_ms'],
-                        $musoraProduct->first(),
-                        $type,
-                        $data['event']['purchased_at_ms']
-                    );
-                }
-
-                //Assign user product
-                $this->userProductService->assignUserProduct(
-                    $user->id,
-                    $musoraSubscription->product_id,
-                    $musoraSubscription->paid_until
-                );
-
-                // code...
                 break;
             case 'CANCELLATION':
                 $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
-                    $data['event']['original_app_user_id']
+                    $data['event']['original_app_user_id'], false,  $data['event']['aliases']
                 );
                 if (!$user) {
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
                     Log::error(
-                        'RevenueCatController processNotification::CANCELLATION - user not found email: '.
-                        $email.
-                        ' original_app_user_id: '.
+                        'RevenueCatController processNotification::CANCELLATION - user not found email: ' .
+                        $email .
+                        ' original_app_user_id: ' .
                         $data['event']['original_app_user_id']
                     );
                     break;
@@ -286,58 +231,23 @@ class RevenueCatController extends Controller
                 //store type
                 $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
 
-                //productId
-                $productId = $this->getProductId($data['event']['product_id']);
-
-                //get Musora product
-                $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId);
-
-                //get RevenueCat subscription
-                $currentRevenueCatSubscription =
-                    $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
-
-                //get Musora subscription
-                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
-
-                if (!$musoraSubscription) {
-                    //create Musora subscription
-                    $musoraSubscription = $this->subscriptionService->createSubscription(
-                        $user->id,
-                        $data['event']['expiration_at_ms'],
-                        $musoraProduct->first(),
-                        $type,
-                        $data['event']['purchased_at_ms']
+                if ($user->shopify_id && $data['event']['cancel_reason'] == 'CUSTOMER_SUPPORT') {
+                    if (!$data['event']['purchased_at_ms']) {
+                        Log::warning(
+                            'RevenueCatController processNotification::CANCELLATION - purchased_at_ms not found'
+                        );
+                        break;
+                    }
+                    $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
+                    $orderId = $this->shopifySyncService->getCustomerOrderIdByProcessedAtDate(
+                        $user->shopify_id,
+                        $processedAt
                     );
-
-                    //Assign user product
-                    $this->userProductService->assignUserProduct(
-                        $user->id,
-                        $musoraSubscription->product_id,
-                        $musoraSubscription->paid_until
-                    );
-                    break;
+                    if ($orderId) {
+                        $this->shopifySyncService->cancelOrder($user->shopify_id, $user->email, $orderId);
+                        $this->unsetUserSubscription($user, $type);
+                    }
                 }
-
-                $this->subscriptionService->updateSubscription(
-                    $musoraSubscription,
-                    (isset($currentRevenueCatSubscription['expires_date'])) ?
-                        Carbon::create($currentRevenueCatSubscription['expires_date'])
-                            ->getTimestampMs() : $data['event']['expiration_at_ms'],
-                    (isset($currentRevenueCatSubscription['unsubscribe_detected_at'])) ?
-                        Carbon::create($currentRevenueCatSubscription['unsubscribe_detected_at'])
-                            ->getTimestampMs() : null,
-                    $data['event']['cancel_reason']
-                );
-
-                break;
-            case 'BILLING_ISSUE':
-                // code...
-                break;
-            case 'SUBSCRIBER_ALIAS':
-                // code...
-                break;
-            case 'SUBSCRIPTION_PAUSED':
-                // code...
                 break;
             case 'TRANSFER':
                 $oldRevenueCatAppUserId = $data['event']['transferred_from'];
@@ -357,62 +267,27 @@ class RevenueCatController extends Controller
             case 'EXPIRATION':
                 $user = $this->revenueCatService->getUser(
                     $data['event']['subscriber_attributes']['email']['value'] ?? null,
-                    $data['event']['original_app_user_id']
+                    $data['event']['original_app_user_id'], false, $data['event']['aliases']
                 );
                 if (!$user) {
                     $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
                     Log::error(
-                        'RevenueCatController processNotification::EXPIRATION - user not found email: '.
-                        $email.
-                        ' original_app_user_id: '.
+                        'RevenueCatController processNotification::EXPIRATION - user not found email: ' .
+                        $email .
+                        ' original_app_user_id: ' .
                         $data['event']['original_app_user_id']
                     );
                     break;
                 }
-
-                //store type
                 $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
+                $this->unsetUserSubscription($user, $type);
 
-                //productId
-                $productId = $this->getProductId($data['event']['product_id']);
-
-                //get Musora product
-                $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId);
-
-                //get RevenueCat subscription
-                $currentRevenueCatSubscription =
-                    $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
-
-                //get Musora subscription
-                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
-
-                if (!$musoraSubscription) {
-                    //create Musora subscription
-                    $musoraSubscription = $this->subscriptionService->createSubscription(
-                        $user->id,
-                        $data['event']['expiration_at_ms'],
-                        $musoraProduct->first(),
-                        $type,
-                        $data['event']['purchased_at_ms']
-                    );
-
-                    //Assign user product
-                    $this->userProductService->assignUserProduct(
-                        $user->id,
-                        $musoraSubscription->product_id,
-                        $musoraSubscription->paid_until
-                    );
-                    break;
-                }
-
-                $this->subscriptionService->updateSubscription(
-                    $musoraSubscription,
-                    $data['event']['expiration_at_ms'],
-                    null,
-                    $data['event']['expiration_reason']
-                );
                 break;
-            // handle other events..
+            // handle other events...
+            case 'PRODUCT_CHANGE':
+            case 'BILLING_ISSUE':
+            case 'SUBSCRIBER_ALIAS':
+            case 'SUBSCRIPTION_PAUSED':
             default:
                 // code...
                 break;
@@ -422,12 +297,26 @@ class RevenueCatController extends Controller
     }
 
     /**
+     * @param float $price
+     * @param float $taxPercentage
+     * @return float|null
+     */
+    private function calculateTaxAmount(float $price, float $taxPercentage): ?float
+    {
+        if (!$taxPercentage) {
+            return 0;
+        }
+
+        return floor($price * $taxPercentage);
+    }
+
+    /**
      * @param string $type
      * @param $event
      * @param mixed $productId
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|object|null
+     * @return Collection
      */
-    private function getMusoraProduct(string $type, $event, mixed $productId)
+    private function getMusoraProducts(string $type, $event, mixed $productId)
     {
         $store = $type.'_store';
 
@@ -437,10 +326,10 @@ class RevenueCatController extends Controller
             $productsMap = [config('ecommerce.'.$store.'_products_map')[$productId]];
         }
 
-        if ($event['type'] != 'INITIAL_PURCHASE') {
+        if ($event['type'] != 'INITIAL_PURCHASE' && $event['type'] != 'RENEWAL') {
             $productsMap = array_merge(
-                [config('ecommerce.'.$store.'_products_map')[$productId]],
-                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
+                [config('ecommerce.' . $store . '_products_map')[$productId]],
+                [config('ecommerce.' . $store . '_products_map_trial')[$productId]]
             );
         }
 
@@ -539,6 +428,29 @@ class RevenueCatController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
+    public function signupRevenuecat(Request $request)
+    {
+        $user = $this->revenueCatService->getSubscriber($request->get('original_app_user_id'));
+
+        $subscriber = json_decode(
+            json_encode((array)$user),
+            true
+        );
+
+        if (!$subscriber || empty($subscriber['entitlements'])) {
+            return response()->json([
+                                        'shouldSignup' => true,
+                                    ]);
+        }
+
+        return $this->checkSignupRestrictions($user->entitlements, $user->subscriptions, $user->original_app_user_id);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
     public function purchaseIOS(Request $request)
     {
         Log::debug('Redirect ecommerce purchase IOS to RevenueCat API:::'.$request->input('data.attributes.email'));
@@ -546,9 +458,9 @@ class RevenueCatController extends Controller
 
         if (!\user()) {
             $this->validate($request, [
-                                        'data.attributes.email' => 'required|email',
-                                        'data.attributes.password' => 'required',
-                                    ]);
+                'data.attributes.email' => 'required|email',
+                'data.attributes.password' => 'required',
+            ]);
         }
 
         $email = null;
@@ -556,7 +468,7 @@ class RevenueCatController extends Controller
             $user = user();
             $email = $user->getEmail();
         }
-        Log::debug('Purchase RevenueCat API for email :::'.$request->input('data.attributes.email') ?? $email);
+        Log::debug('Purchase RevenueCat API for email :::' . $request->input('data.attributes.email') ?? $email);
         $revenuecatPurchase = $this->revenueCatGateway->purchase(
             $request->input('data.attributes.receipt'),
             null,
@@ -568,7 +480,7 @@ class RevenueCatController extends Controller
         );
 
         $apiResponse = json_decode($revenuecatPurchase);
-        Log::debug('RevenueCat API response');
+        Log::debug('RevenueCat API response after purchase');
         Log::debug(var_export($apiResponse, true));
 
         $user = $this->revenueCatService->syncSubscriber(
@@ -638,9 +550,9 @@ class RevenueCatController extends Controller
         Log::debug(var_export($request->all(), true));
         if (!\user()) {
             $this->validate($request, [
-                                        'data.attributes.email' => 'required|email',
-                                        'data.attributes.password' => 'required',
-                                    ]);
+                'data.attributes.email' => 'required|email',
+                'data.attributes.password' => 'required',
+            ]);
         }
 
         $email = null;
@@ -831,7 +743,7 @@ class RevenueCatController extends Controller
             if (user() && $user->id == user()->id) {
                 $token = $user->createToken('ios');
                 $userAuthToken = $token->plainTextToken;
-
+                Log::debug('Old ecommerce restore IOS to RevenueCat API response :: token for userId '.$user->id);
                 return response()->json([
                                             'success' => true,
                                             'token' => $userAuthToken,
@@ -839,14 +751,16 @@ class RevenueCatController extends Controller
                                             'userId' => $user->id,
                                         ]);
             }
-
+            Log::debug('Old ecommerce restore IOS to RevenueCat API response :: shouldLogin for email '.$user->email);
             return response()->json([
                                         'shouldLogin' => true,
                                         'email' => $user->email,
                                     ]);
         } else {
+            Log::debug('Old ecommerce restore IOS to RevenueCat API response :: shouldCreateAccount for purchase '.$receipt);
             return response()->json([
                                         'shouldCreateAccount' => true,
+                                        'purchase' => $receipt,
                                     ]);
         }
     }
@@ -885,46 +799,11 @@ class RevenueCatController extends Controller
         }
         $entitlements = $apiResponse->subscriber->entitlements;
 
-        $active = false;
-
-        foreach ($entitlements as $entitlement) {
-            if (Carbon::parse($entitlement->expires_date) >= now()->subDays(7)) {
-                $active = true;
-                $subscription = $apiResponse->subscriber->subscriptions->{$entitlement->product_identifier};
-                $store = (strtolower($subscription->store) == 'app_store') ? 'apple_store' : 'google_store';
-
-                //productId
-                $productId = $entitlement->product_identifier;
-                $productsMap = array_merge(
-                    [config('ecommerce.'.$store.'_products_map')[$productId]],
-                    [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
-                );
-
-                $musoraProduct =
-                    Product::whereIn('sku', $productsMap)
-                        ->first();
-
-                return response()->json([
-                                            'shouldLogin' => true,
-                                            'message' => 'You have an active '.
-                                                ucfirst($musoraProduct->brand ?? config('ecommerce.brand')).
-                                                ' account. Please login into your account. If you want to modify your payment plan please cancel your active subscription from device settings before.',
-                                        ]);
-            }
-        }
-
-        if (!$active) {
-            return response()->json([
-                                        'shouldRenew' => true,
-                                        'message' => 'You can not create multiple '.
-                                            ucfirst(config('ecommerce.brand')).
-                                            ' accounts under the same apple account. You already have an expired/cancelled membership. Please renew your membership.',
-                                    ]);
-        }
-
-        return response()->json([
-                                    'shouldSignup' => true,
-                                ]);
+        return $this->checkSignupRestrictions(
+            $entitlements,
+            $apiResponse->subscriber->subscriptions,
+            $apiResponse->subscriber->original_app_user_id
+        );
     }
 
     /**
@@ -964,7 +843,10 @@ class RevenueCatController extends Controller
             $entitlements = $apiResponse->subscriber->entitlements;
 
             foreach ($entitlements as $entitlement) {
-                if (Carbon::parse($entitlement->expires_date) >= now()->subDays(7)) {
+                if (Carbon::parse($entitlement->expires_date) >= now()->subDays(config(
+                                                                                    'ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only',
+                                                                                    7
+                                                                                ))) {
                     $active = true;
                     $subscription = $apiResponse->subscriber->subscriptions->{$entitlement->product_identifier};
                     $store = (strtolower($subscription->store) == 'app_store') ? 'apple_store' : 'google_store';
@@ -1002,6 +884,90 @@ class RevenueCatController extends Controller
                                 ]);
     }
 
+    /**
+     * @param $entitlements
+     * @param $subscriptions
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private function checkSignupRestrictions($entitlements, $subscriptions, $revenuecatUserId)
+    : \Illuminate\Http\JsonResponse {
+        $active = false;
+
+        foreach ($entitlements as $entitlement) {
+            if (Carbon::parse($entitlement->expires_date) >= now()->subDays(config(
+                                                                                'ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only',
+                                                                                7
+                                                                            ))) {
+                $active = true;
+                $subscription = $subscriptions->{$entitlement->product_identifier};
+                $store = (strtolower($subscription->store) == 'app_store') ? 'apple_store' : 'google_store';
+
+                //productId
+                $productId = $entitlement->product_identifier;
+                $productsMap = array_merge([config('ecommerce.'.$store.'_products_map')[$productId]],
+                                           [config('ecommerce.'.$store.'_products_map_trial')[$productId]]);
+
+                $musoraProduct =
+                    Product::whereIn('sku', $productsMap)
+                        ->first();
+                $musoraUser = $this->revenueCatService->getUser(null, $revenuecatUserId);
+
+                if ($musoraUser) {
+                    return response()->json([
+                                                'shouldLogin' => true,
+                                                'message' => 'You have an active '.
+                                                    ucfirst($musoraProduct->brand ?? config('ecommerce.brand')).
+                                                    ' account. Please login into your account. If you want to modify your payment plan please cancel your active subscription from device settings before.',
+                                                'email' => $musoraUser->getEmail(),
+                                            ]);
+                } else {
+                    return response()->json([
+                                                'shouldSignup' => true,
+                                            ]);
+                }
+            }
+        }
+
+        if (!$active) {
+            $musoraUser = $this->revenueCatService->getUser(null, $revenuecatUserId);
+            if ($musoraUser) {
+                return response()->json([
+                                            'shouldRenew' => true,
+                                            'message' => 'You can not create multiple '.
+                                                ucfirst(config('ecommerce.brand')).
+                                                ' accounts under the same apple account. You already have an expired/cancelled membership. Please renew your membership.',
+                                            'email' => $musoraUser->getEmail(),
+                                        ]);
+            }else {
+                return response()->json([
+                                            'shouldSignup' => true,
+                                        ]);
+            }
+        }
+
+        return response()->json([
+                                    'shouldSignup' => true,
+                                ]);
+    }
+
+    private function setUserSubscription(User $user, string $type): void
+    {
+        match ($type) {
+            'apple' => $user->has_apple_subscription = true,
+            'google' => $user->has_google_subscription = true
+        };
+        $user->save();
+    }
+
+    private function unsetUserSubscription(User $user, string $type): void
+    {
+        match ($type) {
+            'apple' => $user->has_apple_subscription = false,
+            'google' => $user->has_google_subscription = false
+        };
+        $user->save();
+    }
+
     public function processGoogleNotifications(Request $request)
     {
         Log::debug('Processing Google Play notifications ');
@@ -1015,12 +981,12 @@ class RevenueCatController extends Controller
             $data = json_decode(base64_decode($encodedData));
             Log::debug(var_export($data, true));
             // we should return something for test notifications
-            if (!empty($data->testNotification)) {
+            if (!empty($data->testNotification) || empty($data->subscriptionNotification)) {
                 return response()->json();
             }
 
             $subscriptionNotification = $data->subscriptionNotification;
-            $app = ($data->packageName == 'com.pianote2') ? 'Pianote' : (($data->packageName == 'com.drumeo')?'Drumeo':'Musora');
+            $app = ($data->packageName == 'com.pianote2') ? 'Pianote' : (($data->packageName == 'com.drumeo') ? 'Drumeo' : 'Musora');
 
             if (strtolower($subscriptionNotification->notificationType) == self::SUBSCRIPTION_REVOKED) {
                 $revenuecatPurchase = $this->revenueCatGateway->purchase(
@@ -1034,10 +1000,10 @@ class RevenueCatController extends Controller
                 $apiResponse = json_decode($revenuecatPurchase);
 
                 Log::debug(
-                    'Should revoke '.
-                    $subscriptionNotification->subscriptionId.
-                    ' for '.
-                    $apiResponse->subscriber->original_app_user_id.
+                    'Should revoke ' .
+                    $subscriptionNotification->subscriptionId .
+                    ' for ' .
+                    $apiResponse->subscriber->original_app_user_id .
                     ' on Revenuecat(user access revoked from Google Play Console)'
                 );
 

@@ -6,8 +6,10 @@ use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\EventTracking\Services\CustomerIoService;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Avo;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Models\OnboardingAnswerHistory;
 use Modules\UserManagementSystem\Models\OnboardingExperience;
@@ -15,6 +17,7 @@ use Modules\UserManagementSystem\Models\OnboardingGoals;
 use Modules\UserManagementSystem\Models\OnboardingGear;
 use Modules\UserManagementSystem\Models\OnboardingTopic;
 use Modules\UserManagementSystem\Models\OnboardingGenre;
+use Modules\UserManagementSystem\Models\User;
 
 
 class OnboardingController extends Controller
@@ -28,6 +31,36 @@ class OnboardingController extends Controller
         $this->onboardingService = $onboardingService;
         $this->customerIoService = $customerIoService;
         $this->middleware('deprecated:2023-10-16');
+    }
+
+    public function createAccountPage(Request $request)
+    {
+        $email = $request->get('email');
+
+        // This must be generated passed so that someone can't claim someone else's email.
+        // It must be generated via md5 with the email string and special key combined.
+        // md5('email' . config('shopify.accountCreationSecretKey'))
+        // On the shopify side, we'll generate the link to this claim page and include the key in the url params. This
+        // ensures that only a person with the special link can claim that email address.
+
+        $verificationToken = $request->get('verification_token');
+
+        if (strtolower($verificationToken) !== strtolower(md5($email . config('shopify.accountCreationSecretKey')))) {
+            throw new AuthorizationException('Invalid verification_token.', 403);
+        }
+
+        if (user() && user()->getEmail() == $email && !user()->doesRequirePasswordUpdate()) {
+            return redirect()->to('/members');
+        }
+
+        $user = User::query()->where('email', $email)->first() ?? null;
+
+        if ($user && !$user->doesRequirePasswordUpdate()) {
+            Auth::logout();
+            return redirect()->route('login', ['email' => $email]);
+        }
+
+        return view('pages.account-creation', ['email' => $email, 'verificationToken' => $verificationToken]);
     }
 
     /**

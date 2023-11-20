@@ -278,6 +278,26 @@ return [
                     'drumeo',
                 ],
             ],
+            'Drumeo Drumset Giveaway' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_drumset-giveaway-2023',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Drumeo Giveaway Rafflepress' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_rafflepress-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
             'Drumeo Awards Giveaway' => [
                 'custom_attributes' => [
                 ],
@@ -320,6 +340,16 @@ return [
             ],
         ],
         'pianote' => [
+            'Metronome Notice' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_metronome-notice',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Blues Piano Bootcamp' => [
                 'custom_attributes' => [
                 ],
@@ -415,6 +445,16 @@ return [
                 ],
                 'events' => [
                     'pianote_prospect_christmas-carols',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Beautiful Christmas Classics' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_beautiful-christmas-classics',
                 ],
                 'accounts_to_sync' => [
                     'pianote',
@@ -564,7 +604,7 @@ return [
                 'custom_attributes' => [
                 ],
                 'events' => [
-                    'pianote_prospect_fp30-giveaway',
+                    'pianote_prospect_giveaway-2023',
                 ],
                 'accounts_to_sync' => [
                     'pianote',

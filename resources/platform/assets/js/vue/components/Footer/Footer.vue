@@ -1,13 +1,9 @@
-<script>
-  export default {
-    name: 'Footer',
-    props: {
-      brand: {
-        type: String,
-        default: () => "drumeo",
-      },
-    }
-  }
+<script setup>
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '../../../stores/user';
+
+const userStore = useUserStore();
+const { brand } = storeToRefs(userStore)
 </script>
 
 <template>

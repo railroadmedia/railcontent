@@ -153,57 +153,57 @@
 
     @php
         $testimonials = [
-            [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/ed-koop.jpg',
+             [
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/ed-koop.jpg',
             'name' => 'Ed Koop',
             'video' => '342059271',
             'title' => 'I’m loving music more than I ever did before!',
             'description' => 'After 20 years away from the drums, Ed says he’s loving music more than ever. He nailed his first audition and has now played at the venues of his dreams.',
             ],
             [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/barry-lisle.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/barry-lisle.jpg',
             'name' => 'Barry Lisle',
             'video' => '342066433',
             'title' => 'They walk you through, step-by-step, for any goal.',
             'description' => 'Barry wanted something to keep his mind busy, so he revisited the instrument he’d loved as a kid: the drums. Now he’s playing in bands and recording an album.',
             ],
             [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/lisa-aragon.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/lisa-aragon.jpg',
             'name' => 'Lisa Aragon',
             'video' => '373252004',
             'title' => 'I was able to play drums on stage!',
             'description' => 'Lisa got interested in the drums by playing Rock Band. She had no idea she’d be performing with strangers in Nashville just a few years later.',
             ],
             [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/guy-dobbins.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/guy-dobbins.jpg',
             'name' => 'Guy Dobbins',
             'video' => '373445704',
             'title' => 'Drummers from all around the world helping you out.',
             'description' => 'Guy had trouble figuring out a song, he reached out and an instructor walked him through it that same day - getting him through the gig that evening.',
             ],
             [
-            'image' => 'https://i.vimeocdn.com/video/1143532818-61ead907372040ae51f23b9d5f05469c271aee744e9cb67e777ae4307f762b23-d_620.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/omari-augustine.jpg',
             'name' => 'Omari Augustine',
             'video' => '553438851',
             'title' => 'Something you can’t get from having a drum teacher.',
             'description' => 'Omari had big shoes to fill. His father was already an accomplished drummer in Trinidad & Tobago when Omari decided to take his drumming to the next level.',
             ],
             [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/marlene-rosen.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/marlene-rosen.jpg',
             'name' => 'Marlene Rosen',
             'video' => '373446024',
             'title' => 'I’m rediscovering music again.',
             'description' => 'Marlene, a cancer survivor, filled her recovery time with drumming and was able to progress at a pace that worked for her.',
             ],
             [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/jay-damberg-2.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/jay-damberg-2.jpg',
             'name' => 'Jay Damberg',
             'video' => '373445466',
             'title' => 'Anytime, day or night, I can access the lessons I need.',
             'description' => 'With a full-time job and a family, Jay often can’t practice drums until late at night, which is why he loves being able to access Drumeo whenever he wants.',
             ],
             [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/ivy-elizondo-2.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/ivy-elizondo-2.jpg',
             'name' => 'Ivy Elizondo',
             'video' => '373445819',
             'title' => 'Now we have a band and we’re recording an album!',

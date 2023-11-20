@@ -3,7 +3,7 @@
         <h1 class="relative w-auto inline-block text-3xl sm:text-4xl lg:text-5xl">
             <strong>{!! $header !!}</strong>
             @if(!empty($underline))
-                <img class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/underline.png" alt="underline" fetchpriority="high">
+                <img class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2023/underline.png" alt="underline" fetchpriority="high">
             @endif
         </h1>
         <h6 class="leading-relaxed sm:mt-6 mb-4 sm:mb-7 px-5 sm:px-0 max-w-xs sm:max-w-full">{!! $desc !!}</h6>
@@ -39,15 +39,16 @@
             <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
         </div>
     </div>
-    <img class="absolute z-10 h-10 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/{{ $bubble1 }}" alt="header circle image" fetchpriority="high">
-    <img class="absolute z-10 h-24 sm:h-28 lg:h-44 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]" src="https://www.musora.com/musora-cdn/image/width=350,quality=95/{{ $bubble2 }}" alt="header circle image" fetchpriority="high">
-    <img class="absolute z-10 h-32 sm:h-40 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/{{ $bubble3 }}" alt="header circle image" fetchpriority="high">
-    <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/{{ $bubble4 }}" alt="header circle image" fetchpriority="high">
-    <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/{{ $bubble5 }}" alt="header circle image" fetchpriority="high">
-    <img class="absolute z-10 h-28 sm:h-32 lg:h-48 transform -translate-x-1/2 -translate-y-1/2 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/{{ $bubble6 }}" alt="header circle image" fetchpriority="high">
-    <img class="absolute z-10 h-28 sm:h-36 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/{{ $bubble7 }}" alt="header circle image" fetchpriority="high">
-    <img class="absolute z-10 h-12 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/{{ $bubble8 }}" alt="header circle image" fetchpriority="high">
+    <img class="absolute z-10 h-10 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]" src="{{ $bubble1 }}" alt="header circle image" fetchpriority="high">
+    <img class="absolute z-10 h-24 sm:h-28 lg:h-44 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]" src={{ $bubble2 }} alt="header circle image" fetchpriority="high">
+    <img class="absolute z-10 h-32 sm:h-40 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]" src={{ $bubble3 }} alt="header circle image" fetchpriority="high">
+    <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]" src={{ $bubble4 }} alt="header circle image" fetchpriority="high">
+    <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]" src={{ $bubble5 }} alt="header circle image" fetchpriority="high">
+    <img class="absolute z-10 h-28 sm:h-32 lg:h-48 transform -translate-x-1/2 -translate-y-1/2 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]" src={{ $bubble6 }} alt="header circle image" fetchpriority="high">
+    <img class="absolute z-10 h-28 sm:h-36 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]" src={{ $bubble7 }} alt="header circle image" fetchpriority="high">
+    <img class="absolute z-10 h-12 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]" src={{ $bubble8 }} alt="header circle image" fetchpriority="high">
 </header>
+
 <section class="sm:px-6 py-4 sm:py-5 text-white" style="background:#0c1524;">
     <div class="container max-w-4xl mx-auto">
         @component('_partials.components.carousel',[
@@ -61,7 +62,10 @@
                 perPage: 1,
                 perMove: 1,
                 type: 'loop',
-                interval: 2000,
+                autoplay: true,
+                pauseOnHover: true,
+                pauseOnFocus: true,
+                interval: 3000,
             ",
         ])
             @slot('content')
@@ -72,7 +76,7 @@
                             <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
                                 <img
                                     class="rounded-full object-cover object-right w-9 h-9 transition-opacity opacity-0"
-                                    src="https://www.musora.com/musora-cdn/image/width=80,quality=95/{{ $slide['thumb'] }}"
+                                    src={{ $slide['thumb'] }}
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
                                     alt="{{$slide['name']}}"

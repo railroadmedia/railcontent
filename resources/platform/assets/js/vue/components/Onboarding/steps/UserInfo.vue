@@ -95,7 +95,7 @@ const headerProps = {
   <StepWrapper :brand="brand" :showBgImg="false" :showInstrumentBrand="false" :headerProps="headerProps">
     <template v-slot:content>
       <div class="tw-w-full tw-flex tw-flex-col tw-items-center md:tw-justify-center md:tw-mt-0">
-        <AvatarUpload :imgUrl="info.user.avatarUrl" :userName="info.user.name" @onError="handleError"
+        <AvatarUpload :imgUrl="info.user.userProfilePictureUrl" :userName="info.user.name" @onError="handleError"
           :userId="info.user.id" />
         <InputLabel labelOverride="tw-text-white" wrapperOverride="tw-items-center" :initialValue="info.user.name"
           labelValue="Display Name" placeholder="Enter your display name..." inputOverride="tw-w-[90vw] md:tw-w-[471px]"
@@ -109,11 +109,11 @@ const headerProps = {
     </template>
     <template v-slot:footer>
       <Button :brand="brand" @onButtonClick="handleNextStep"
-        :isDisabled="!info.user.avatarUrl.length && !info.user.name.length"
+        :isDisabled="!info.user.userProfilePictureUrl.length && !info.user.name.length"
         classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Next</Button>
       <ProgressBar :brand="brand" :currentStep="0" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
       <Button :brand="brand" @onButtonClick="handleNextStep"
-        :isDisabled="!info.user.avatarUrl.length && !info.user.name.length"
+        :isDisabled="!info.user.userProfilePictureUrl.length && !info.user.name.length"
         classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Next</Button>
       <button class="tw-mt-[12px] tw-text-[18px] tw-text-white tw-underline tw-font-bebas-neue" @click="handleSkipStep">
         SKIP THIS STEP

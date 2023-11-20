@@ -26,15 +26,17 @@ Route::domain('{pianoteDomain}')
                 Route::get('/play-beautiful-piano', [SalesController::class, 'playbeautifulpiano'] );
                 Route::get('/riffs-and-fills', [LeadGenController::class, 'riffsAndFills']);
                 Route::get('/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
+                Route::get('/the-power-of-chords-giveaway', [SalesController::class, 'PowerOfChordsGiveaway'] );
                 Route::get('/worship-piano', [SalesController::class, 'worshippiano'] );
                 Route::get('/beautiful-beginner-bundle', [SalesController::class, 'beautifulBeginnerBundle'] );
-                Route::get('/5-for-3-bundle', [SalesController::class, 'fiveforthreeBundle'] );
+                Route::get('/metronome', [SalesController::class, 'metronome'] );
+                Route::get('/prestige-metronome', [SalesController::class, 'metronomePrestige'] );
             }
         );
 
         Route::get('/{page?}', SalesController::class . '@products')
             ->whereIn('page', [
-                '500-songs-fb', '500-songs-discount', '500-songs-carols-discount', '500-songs-chord-discount', '500-songs-elton-john', '500-songs-alicia-keys', '500-songs-sam-smith', '500-songs-taylor-swift', '500-songs-the-beatles', '500-songs-free-lesson'
+                '500-songs-discount', '500-songs-carols-discount', '500-songs-chord-discount', '500-songs-free-lesson'
             ]);
 
         Route::get('/{category}', [ShopController::class, 'shop'])

@@ -1,7 +1,7 @@
 @extends('guitareo.products.guitar-quest.guitar-quest-sales-layout')
 
-@php $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1&promo-code=siah-deal&redirect=/order&payment-plan=1' @endphp
-@php $orderLinkAlt = '/ecommerce/add-to-cart?products[guitar-quest]=1&promo-code=siah-deal&redirect=/order&payment-plan=5' @endphp
+@php $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1&promo-code=lead-discount3&redirect=/order&payment-plan=1' @endphp
+@php $orderLinkAlt = '/ecommerce/add-to-cart?products[guitar-quest]=1&promo-code=lead-discount3&redirect=/order&payment-plan=5' @endphp
 @php $productPrice = 47 @endphp
 
 @section('promo-banner')

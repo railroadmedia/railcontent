@@ -287,7 +287,9 @@ return [
         \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
         \App\Http\Middleware\SetContentPermissions::class,
     ],
-    'administrator_routes_middleware' => ['auth.admin'],
+
+    'administrator_routes_middleware' => [],
+
 
     //middleware for API requests
     'api_middleware' => [
@@ -340,6 +342,7 @@ return [
 
             \App\Decorators\Content\SemesterPackDecorator::class,
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
+//            \App\Modules\MusoraCenter\Decorators\UrlDecorator::class,
 
             \App\Decorators\Content\PlaylistItemDecorator::class,
 
@@ -1357,6 +1360,7 @@ return [
         'home_staff_pick_rating',
         'title',
         'xp',
+        'total_xp',
         'album',
         'artist',
         'chord_or_scale',

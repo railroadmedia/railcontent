@@ -169,7 +169,10 @@ class AuthenticationController extends Controller
             $user->withAccessToken($token);
             $user['login_as_users'] = user()->hasRole('login_as_users');
 
-            return response()->json(['token' => $token->plainTextToken, 'user' => $user]);
+            $attributes = $user->toArray();
+            $toRemove = ['shopify_id'];
+            $attributes = array_diff_key($attributes, array_flip($toRemove));
+            return response()->json(['token' => $token->plainTextToken, 'user' => $attributes]);
         }
 
         return response()->json(

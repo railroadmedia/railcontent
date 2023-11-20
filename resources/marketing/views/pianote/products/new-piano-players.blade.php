@@ -44,7 +44,7 @@
     ])
 
     @php
-            $registerButtonUrl = "/ecommerce/add-to-cart?product-array=new-piano-players-start-here:1";
+            $registerButtonUrl = "/ecommerce/add-to-cart?products[new-piano-players-start-here]=1";
     @endphp
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
@@ -528,10 +528,10 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
 
 
     <script>

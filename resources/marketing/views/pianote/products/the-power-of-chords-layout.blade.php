@@ -348,9 +348,11 @@
                     <div class="hidden md:flex">
                         <div class="flex-1 relative">
                             <a class="join small w-full text-base" href="@yield('order-link')">get started</a>
-                            {{--<div class="text-pianote absolute -bottom-6 left-0 right-0 text-xs text-center">--}}
-                                {{--LAUNCH SPECIAL - SAVE {{ round(100 - (100 * (floatval($productPrices['the-power-of-chords']->discounted_price) / floatval($productPrices['the-power-of-chords']->price)))) }}%--}}
-                            {{--</div>--}}
+                            @if(floatval($productPrices['the-power-of-chords']->price) > $productPrice)
+                                <div class="text-pianote absolute -bottom-6 left-0 right-0 text-xs text-center">
+                                    SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['the-power-of-chords']->price)))) }}%
+                                </div>
+                            @endif
                         </div>
                         <div class="flex-1 flex items-center pl-2">
                             <img class="h-6 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/profiles.png" alt="profiles">
@@ -572,7 +574,7 @@
                     {{--<p  class="w-full px-4 pt-2 pb-4 -mb-3 bg-guitareo text-black rounded-t-2xl bg-pianote text-white">--}}
                             {{--<strong>LAUNCH SPECIAL</strong>--}}
                     {{--</p>--}}
-                    {{--<a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['the-power-of-chords' => 1, 'piano-chords-and-scales-guide' => 1], 'redirect' => '/order', 'locked' => 'true']) }}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 border border-gray-300 group">--}}
+                    {{--<a class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 border border-gray-300 group">--}}
                         {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
                             {{--<h5 class="leading-none mb-3">Power Of Chords</h5>--}}
                             {{--<h1 class="inline-block leading-none text-4xl lg:text-5xl">--}}
@@ -600,7 +602,7 @@
                         {{--style="background: #FFAE00;">--}}
                             {{--<strong>LIMITED TIME PIANOTE DEAL</strong>--}}
                     {{--</p>--}}
-                    {{--<a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['PIANOTE-MEMBERSHIP-1-YEAR' => 1, 'the-power-of-chords' => 1, '500-songs-in-5-days' => 1, 'piano-chords-and-scales-guide' => 1,], 'redirect' => '/order', 'locked' => 'true']) }}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 border border-gray-300 group">--}}
+                    {{--<a class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 border border-gray-300 group">--}}
                         {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
                             {{--<h5 class="leading-none mb-3">Power Of Chords + Pianote</h5>--}}
                             {{--<h1 class="inline-block leading-none text-4xl lg:text-5xl">--}}

@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\Models\UserProduct;
+use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
 use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
@@ -52,6 +53,12 @@ class UserProductService
                 ->count();
 
         return $count;
+    }
+
+    public function getUserProductsQuery($userId)
+    : Builder {
+        return UserProduct::query()
+            ->where('user_id', '=', $userId);
     }
 
     /**

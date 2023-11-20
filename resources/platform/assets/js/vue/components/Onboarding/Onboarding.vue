@@ -1,5 +1,6 @@
 <script setup>
 import {ref, inject, computed, onMounted} from 'vue'
+import { storeToRefs } from 'pinia'
 import ModalRenderer from '../Modal/ModalRenderer.vue'
 import UserInfo from './steps/UserInfo.vue'
 import InstrumentSelect from './steps/InstrumentSelect.vue'
@@ -8,8 +9,9 @@ import Experience from './steps/Experience.vue'
 import Genre from './steps/Genre.vue'
 import Topics from './steps/Topics.vue'
 import Goals from './steps/Goals.vue'
-import {initialSteps, instrumentBrand, brandInstrument} from './constants';
-import {getInitialInfo, getCheckedSteps} from './utils';
+import { initialSteps, instrumentBrand, brandInstrument } from './constants';
+import { getInitialInfo, getCheckedSteps } from './utils';
+import { useUserStore } from '../../../stores/user';
 
 const props = defineProps({
   startOnStep: {
@@ -40,37 +42,37 @@ const props = defineProps({
   },
 });
 
-const userId = inject('userId');
-const userName = inject('userName');
-const userAvatar = inject('userAvatar');
+
+const userStore = useUserStore();
+const { userId, userDisplayName, userProfilePictureUrl } = storeToRefs(userStore)
 
 const currentStep = ref(0)
 const info = ref(getInitialInfo({
-  userId,
-  userName,
-  userAvatar,
-  ...props,
-  instrument: brandInstrument[props.selectedBrand],
+    userId: userId.value,
+    userDisplayName: userDisplayName.value,
+    userProfilePictureUrl: userProfilePictureUrl.value,
+    ...props,
+    instrument: brandInstrument[props.selectedBrand],
 }))
 const steps = ref(initialSteps);
 const brand = computed(() => instrumentBrand[info.value.instrument]);
 
-function changeStep(step) {
-  if (step === 2) {
-    const newSteps = getCheckedSteps({...props, steps: JSON.parse(JSON.stringify(steps.value)), brand: brand.value});
+function changeStep (step) {
+    if (step === 2) {
+        const newSteps = getCheckedSteps({ ...props, steps: JSON.parse(JSON.stringify(steps.value)), brand: brand.value });
+        steps.value = newSteps;
+    }
+    currentStep.value = step;
+}
+
+function changeInfo (newInfo) {
+    info.value = newInfo;
+}
+
+function checkStepToggle (step, val) {
+    const newSteps = steps.value
+    newSteps[step].checked = val
     steps.value = newSteps;
-  }
-  currentStep.value = step;
-}
-
-function changeInfo(newInfo) {
-  info.value = newInfo;
-}
-
-function checkStepToggle(step, val) {
-  const newSteps = steps.value
-  newSteps[step].checked = val
-  steps.value = newSteps;
 }
 
 onMounted(() => {

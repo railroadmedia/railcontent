@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Modules\Ecommerce\Models\Recharge;
+
+use App\Modules\Ecommerce\Models\Product;
+use Carbon\Carbon;
+
+class Subscription
+{
+    public ?string $cancellationReason;
+    public ?Carbon $cancelledAt;
+
+    public ?Carbon $createdAt;
+    public int $id;
+    public ?Product $product;
+    public ?int $shopifyVariantId;
+    public string $status;
+    public ?string $sku;
+    public ?Carbon $nextChargeScheduledAt;
+
+    public function __construct($subscriptionData)
+    {
+        $this->id = $subscriptionData->id;
+        $this->createdAt = $subscriptionData->created_at? Carbon::parse($subscriptionData->created_at) : null;
+
+        $this->cancellationReason = $subscriptionData->cancellation_reason;
+        $this->cancelledAt = $subscriptionData->cancelled_at ? Carbon::parse($subscriptionData->cancelled_at) : null;
+        $this->status = $subscriptionData->status;
+        $this->sku = $subscriptionData->sku;
+        $this->nextChargeScheduledAt = $subscriptionData->next_charge_scheduled_at ? Carbon::parse($subscriptionData->next_charge_scheduled_at) : null;
+        $this->shopifyVariantId = $subscriptionData->shopify_variant_id;
+    }
+
+    public function setProduct(Product $product): void
+    {
+        $this->product = $product;
+    }
+
+}

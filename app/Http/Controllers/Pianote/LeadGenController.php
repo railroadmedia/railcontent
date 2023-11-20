@@ -115,6 +115,10 @@ class LeadGenController extends BaseController
     {
         return view('pianote.lead-gen.song-secrets.thank-you', ['theme' => 'pianote']);
     }
+    public function giveaway()
+    {
+        return view('pianote.lead-gen.giveaway', ['theme' => 'pianote', 'recaptchaKey'=>config('recaptcha.key')]);
+    }
 
     public function beginnerBootcamp(Request $request, $domain, $page = null)
     {
@@ -167,6 +171,15 @@ class LeadGenController extends BaseController
                 return view('pianote.lead-gen.blues-piano-bootcamp.ty-annual');
             case 'ty-monthly':
                 return view('pianote.lead-gen.blues-piano-bootcamp.ty-monthly');
+        }
+
+        throw new NotFoundHttpException();
+    }
+    public function beautifulChristmasClassics(Request $request, $domain, $page = null, $lesson = null)
+    {
+        switch($page){
+            case null:
+                return view('pianote.lead-gen.beautiful-christmas-classics', ['recaptchaKey'=>config('recaptcha.key')]);
         }
 
         throw new NotFoundHttpException();
