@@ -57,6 +57,18 @@ return [
 
     // form names and configuration
     'forms' => [
+        'musora' => [
+            'Metronome Notice' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_metronome-notice',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+        ],
         'drumeo' => [
             'Kristinas Top 25' => [
                 'custom_attributes' => [
@@ -340,16 +352,6 @@ return [
             ],
         ],
         'pianote' => [
-            'Metronome Notice' => [
-                'custom_attributes' => [
-                ],
-                'events' => [
-                    'pianote_prospect_metronome-notice',
-                ],
-                'accounts_to_sync' => [
-                    'pianote',
-                ],
-            ],
             'Blues Piano Bootcamp' => [
                 'custom_attributes' => [
                 ],
