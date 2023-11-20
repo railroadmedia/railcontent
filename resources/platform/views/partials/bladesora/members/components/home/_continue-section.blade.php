@@ -25,7 +25,6 @@
                         :lock-unowned="{{ json_encode(true) }}"
                         :pre-loaded-content="{{ $startedContentJson }}"
                         :show-dropdown="{{ json_encode(true) }}"
-                        :extra-padding-bottom="{{ json_encode(true) }}"
                 >
                 </catalogue-card-container>
             </transition>

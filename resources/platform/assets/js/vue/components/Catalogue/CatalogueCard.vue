@@ -1,7 +1,7 @@
 <template>
     <div v-if="!isMiniCard"
         class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]"
-        :class="[class_object, displayInline ? 'tw-py-3' : 'tw-pb-2']">
+        :class="[class_object, displayInline ? 'tw-py-3' : '']">
         <div class="tw-flex" :class="displayInline ? 'tw-flex-row' : 'tw-flex-col'">
             <!-- Thumbnail Section -->
             <a :href="renderLink ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
@@ -41,8 +41,8 @@
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
                 <a :href="renderLink ? item.url : null"
-                    class="card-info tw-flex tw-flex-auto tw-flex-col tw-p-1 tw-rounded-lg"
-                    :class="displayInline ? 'tw-justify-center' : 'tw-pt-2'">
+                    class="card-info tw-flex tw-flex-auto tw-flex-col tw-px-2 tw-rounded-lg"
+                    :class="displayInline ? 'tw-justify-center tw-pt-1' : 'tw-pt-2'">
                     <!-- Coach Title -->
                     <div v-if="item.type !== 'song-part'">
                         <h5 class="tw-text-xs tw-font-normal tw-leading-none tw-text-[#3F3F46] tw-mb-1 tw-uppercase dark:tw-text-[#9EC0DC]"
@@ -70,7 +70,7 @@
                     </h6>
                 </a>
                 <!-- Add to Playlist -->
-                <div :id="`${item.id}-action-btn`" class="tw-inline-flex tw-items-start tw-p-1 tw-relative">
+                <div :id="`${item.id}-action-btn`" class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
                     <div class="tw-relative" v-click-outside="() => { state.dropdownOpen = false }">
                         <button v-if="item.type !== 'pack-bundle' && showMyListAction"
                             class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
