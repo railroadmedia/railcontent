@@ -10,12 +10,6 @@ use Modules\UserManagementSystem\Events\User\UserCreated;
 
 class EventTrackingServiceProvider extends EventServiceProvider
 {
-    protected $listen = [
-        UserCreated::class => [
-            [EventTrackerListener::class, 'handleUserCreated']
-        ],
-    ];
-
     public function boot(): void
     {
     }
