@@ -66,7 +66,7 @@
         <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #094073 50%, #000C16);">
             <div class="container mx-auto">
                 <h1 class="leading-none"><strong>A <span class="text-musora">Lifetime</span> Of Drum Lessons </strong></h1>
-                <h4 class="leading-tight">(plus your choice of sticks, in-ears, or a StickBag!)</h4>
+                <h4 class="leading-tight">(plus your choice of sticks, in-ears, or a stick bag!)</h4>
                 <div class="w-full mx-auto my-4 sm:my-8 " style="max-width:920px;">
                     <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
                         <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/774477396" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>
@@ -92,7 +92,8 @@
         <div class="container mx-auto max-w-5xl z-10 relative">
             <h2 class="leading-tight mb-2"><strong>The Lifetime Advantage</strong></h2>
             <p class="leading-tight mb-5"><em>You’ll have a lifetime of unlimited drum lessons for the <br class="hidden sm:inline lg:hidden"> price of 5 years of access to Drumeo ($1200 total).</em></p>
-            <img class="w-full max-w-3xl mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/timeline.png">
+            <img class="hidden sm:inline-block w-full max-w-3xl mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/timeline.png">
+            <img class="sm:hidden inline-block w-full max-w-3xl mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/timeline-m.png">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center">
                 <div class="order-1 sm:order-0 text-left sm:pr-5 lg:pr-7">
                     <p class="leading-relaxed">
@@ -142,15 +143,16 @@
 
                     $bonuses = [
                         [
-                            'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
+                            'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/508daf15-2a10-4dfa-a11f-1ebdfb614cfb-2023-02-15-Drumeo-EarDrums-Updated-100-Square+(1).jpg',
                             'sku' => '&products[drumeo-eardrums]=1',
                         ],
                         [
-                            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
+                            'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/e36ad306-8ba6-4db5-99bc-bd955080a57a-2023-06-21-Vater-Sticks-101-White-Backdrop+(1).jpg',
+                            'badge' => '12 Pairs',
                             'sku' => '&products[Drumeo-VaterSticks]=12',
                         ],
                         [
-                            'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://drumeo-assets.s3.amazonaws.com/drum-shop/stickbag/stickbag-cart-image.jpg',
+                            'image' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/stickbag/stickbag-cart-image.jpg',
                             'sku' => '&products[stickbag]=1',
                         ],
                     ]
@@ -177,16 +179,20 @@
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div
                                     x-ref="front"
-                                    class="border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
+                                    class="border-musora front absolute rounded-xl overflow-hidden w-full h-full transition-transform duration-700"
                                     :class="selected ? 'border-4' : !selected && bonus !== 1 && 'hover:border-2'"
                                     style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
-                                    @if(!empty($bonus['badge']))
-                                        <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
-                                        {{--                                        <h4 class="absolute text-white -top-3 -left-3  py-3 px-2.5 rounded-full transform -rotate-12" style="    line-height: 0.6;background-color:#cda880;"><strong>6<br><span class="leading-none" style="font-size: 50%;">PAIRS</span></strong></h4>--}}
+                                    <h6 class="absolute bg-black text-white top-0 right-0 px-1.5 py-1 my-0.5 mx-0.5 bg-black rounded-full opacity-0 border-2 border-white z-30"
+                                        :class="selected && bonus === 1 && 'opacity-100'"
+                                    ><i class="fas fa-times"></i></h6>
+                                @if(!empty($bonus['badge']))
+                                        <h6 class="absolute text-white top-0 left-0 w-full pt-1 bg-{{ $theme }} font-bebas uppercase z-20"
+                                            :class="!selected && bonus === 1 && 'grayscale'"
+                                        >{{ $bonus['badge'] }}</h6>
                                     @endif
                                     <div
-                                        class="overflow-hidden rounded-xl h-full w-full bg-black bg-bottom bg-cover"
-                                        style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/{{ $bonus['image'] }});"
+                                        class="h-full w-full bg-black bg-bottom bg-cover z-10"
+                                        style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/{{ $bonus['image'] }}');"
                                         :class="!selected && bonus === 1 && 'grayscale'"
                                     ></div>
                                 </div>
