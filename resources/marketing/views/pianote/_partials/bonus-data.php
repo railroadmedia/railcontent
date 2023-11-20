@@ -92,13 +92,6 @@ $bonuses = [
         'shipping' => true,
     ],
     [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/christmas-book.jpg',
-        'title' => 'Christmas Songbook',
-        'description' => '14 beautiful Christmas Carols hand-picked and arranged for solo piano.',
-        'price' => floatval($productPrices['christmas-song-book']->price),
-        'shipping' => true,
-    ],
-    [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/christmas-songbook-card.jpg',
         'title' => 'Christmas Songbook Digital',
         'description' => 'Play Your Favorite Christmas Songs on the Piano.',
