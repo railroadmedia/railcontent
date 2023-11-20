@@ -225,7 +225,7 @@
                     </div>
                 </div>
             </section>
-            <section class="grid-view category-section" data-category="hats">
+            <section class="grid-view category-section" data-category="misc">
                 <div class="container mx-auto">
                     <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Hats</strong></h5>
                     <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
