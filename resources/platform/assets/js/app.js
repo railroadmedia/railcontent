@@ -16,7 +16,6 @@ import Workouts from './vue/views/Workouts';
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
 import PageContainer from './vue/components/PageContainer/PageContainer.vue';
-import HomeCardLinks from './vue/components/HomeCardLinks/HomeCardLinks.vue';
 import CatalogSection from './vue/components/CatalogSection/CatalogSection.vue';
 import CatalogueCardContainer from './vue/components/Catalogue/CatalogueCardContainer.vue';
 import StatsSection from './vue/components/StatsSection/StatsSection.vue';
@@ -240,7 +239,6 @@ app.component('AppContainer', AppContainer)
     .component('PageContainer', PageContainer)
     .component('HeaderCarousel', HeaderCarousel)
     .component('StaticHeader', StaticHeader)
-    .component('HomeCardLinks', HomeCardLinks)
     .component('CatalogSection', CatalogSection)
     .component('StatsSection', StatsSection)
     .component('CoachEvent', CoachEvent)
