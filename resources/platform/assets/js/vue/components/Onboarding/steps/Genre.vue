@@ -21,6 +21,9 @@ const props = defineProps({
   },
   configOptions: {
     type: Object,
+  },
+  stepName: {
+    type: String,
   }
 });
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
@@ -97,7 +100,7 @@ const headerProps = {
       <ProgressBar :brand="brand" :currentStep="4" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
       <Button :brand="brand" @onButtonClick="handleNextStep" :isDisabled="isNextButtonDisabled()"
         classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Next</Button>
-      <SkipStep :brand="brand" classOverride="tw-mt-[20px] md:tw-mt-0" />
+      <SkipStep :brand="brand" :step="stepName" classOverride="tw-mt-[20px] md:tw-mt-0" />
     </template>
   </StepWrapper>
 </template>

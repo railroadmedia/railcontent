@@ -181,6 +181,7 @@ return [
         \Railroad\Location\Providers\LocationServiceProvider::class,
         \Railroad\RemoteStorage\Providers\RemoteStorageServiceProvider::class,
         \Railroad\LeadTracker\Providers\LeadTrackerServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
 
         /*
          * Module Service Providers
@@ -195,8 +196,9 @@ return [
         App\Modules\Notifications\Providers\NotificationServiceProvider::class,
         App\Modules\Reporting\Providers\ReportingServiceProvider::class,
         App\Modules\AddEventCalendars\Providers\AddEventCalendarsServiceProvider::class,
+        App\Modules\EventTracking\Providers\EventTrackingServiceProvider::class,
+        App\Modules\MusoraApi\Providers\MusoraApiServiceProvider::class,
         App\Modules\MusoraCenter\Providers\MusoraCenterServiceProvider::class,
-
         /*
          * Application Service Providers...
          */
@@ -226,6 +228,7 @@ return [
 
     'aliases' => [
 
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,

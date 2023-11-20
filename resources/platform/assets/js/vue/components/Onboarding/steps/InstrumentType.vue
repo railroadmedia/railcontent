@@ -1,13 +1,13 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import {ref, onMounted} from "vue";
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import SkipStep from "../SkipStep.vue";
 import StepHeader from "../StepHeader.vue";
 import MultiSelect from "../../MultiSelect/MultiSelect.vue";
-import { saveGear } from "../services"
-import { getMultiSelectOptions } from "../utils";
+import {saveGear} from "../services"
+import {getMultiSelectOptions} from "../utils";
 
 const props = defineProps({
   brand: {
@@ -21,6 +21,9 @@ const props = defineProps({
   },
   configOptions: {
     type: Object,
+  },
+  stepName: {
+    type: String,
   }
 });
 
@@ -42,7 +45,10 @@ function handleMultiSelection(selection) {
 const handleNextStep = () => {
   const data = [];
 
-  emit("onChangeInfo", { ...props.info, instrumentTypes: { ...props.info.instrumentTypes, [props.brand]: currentSelection.value } });
+  emit("onChangeInfo", {
+    ...props.info,
+    instrumentTypes: {...props.info.instrumentTypes, [props.brand]: currentSelection.value}
+  });
 
   Object.entries(currentSelection.value).forEach(([type, isChecked]) => {
     if (isChecked) {
@@ -89,16 +95,18 @@ const headerProps = {
         md:tw-mt-0
       ">
         <MultiSelect :options="options" :initialSelection="currentSelection" classOverride="md:tw-mb-[52px]"
-          @onChangeSelection="handleMultiSelection" />
+                     @onChangeSelection="handleMultiSelection"/>
       </div>
     </template>
     <template v-slot:footer>
       <Button :brand="brand" @onButtonClick="handleNextStep" :isDisabled="isNextButtonDisabled()"
-        classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Next</Button>
-      <ProgressBar :brand="brand" :currentStep="2" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
+              classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Next
+      </Button>
+      <ProgressBar :brand="brand" :currentStep="2" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)"/>
       <Button :brand="brand" @onButtonClick="handleNextStep" :isDisabled="isNextButtonDisabled()"
-        classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Next</Button>
-      <SkipStep :brand="brand" classOverride="tw-mt-[20px] md:tw-mt-0" />
+              classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Next
+      </Button>
+      <SkipStep :brand="brand" :step="stepName" classOverride="tw-mt-[20px] md:tw-mt-0"/>
     </template>
   </StepWrapper>
 </template>
