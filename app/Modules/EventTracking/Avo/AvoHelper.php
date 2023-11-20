@@ -2,6 +2,8 @@
 
 namespace App\Modules\EventTracking\Avo;
 
+use Modules\UserManagementSystem\Models\User;
+
 class AvoHelper
 {
     /**
@@ -45,10 +47,10 @@ class AvoHelper
      * @param array $properties
      * @return array
      */
-    public static function defaultEventProperties(array $properties = []): array
+    public static function defaultEventProperties(array $properties = [], User $user = null): array
     {
         $defaultProperties = [
-            'user_id_' => userIdString(),
+            'user_id_' => $user ? strval($user->id) : userIdString(),
             'platform' => self::getRequestPlatform(),
             'os' => self::getRequestOS()
         ];
