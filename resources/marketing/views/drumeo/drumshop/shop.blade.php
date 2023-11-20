@@ -280,7 +280,7 @@
         <section class="grid-view category-section" data-category="accessories" x-show="filter === 'accessories' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Accessories</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5gap-2 md:gap-4 text-left">
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 <div x-cloak x-show="filter === 'accessories'">
                     @include('musora.shop._shop-card-alt', [
                          "itemURL" => "/drumshop/better-hands-bundle",
