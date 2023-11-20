@@ -37,7 +37,7 @@
 
             <p class="text-white pt-3"><strong>{{ $lessonTitle }}</strong></p>
             <div class="relative">
-                <div x-data="{ isOpen: [] }" class="h-70 overflow-y-scroll sm:pb-5">
+                <div x-data="{ isOpen: [] }">
                     @foreach ($lessons as $lesson)
                         <div x-data="{ open: false }" class="rounded-lg bg-white shadow mb-1.5">
                             <button class="rounded-lg flex w-full items-center justify-between px-4 py-3.5" style="background: #eff7ff;" x-on:click="open = !open;">
