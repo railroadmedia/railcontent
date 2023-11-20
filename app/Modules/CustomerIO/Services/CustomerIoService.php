@@ -171,7 +171,7 @@ class CustomerIoService
 
         // uuid (this is what is used inside customer.io
         if (empty($id)) {
-            if ($userId && config('shopify.enabled')) {
+            if ($userId) {
                 $customer->uuid = $userId;
             } else {
                 $customer->generateUUID();

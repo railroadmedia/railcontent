@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9127e11d7badb0dfd75fd68b6e33467c",
+    "content-hash": "ed6522ebe8e249248be902102904991f",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8871,16 +8871,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.35",
+            "version": "dev-srr-148-CMS",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "88863b134f2fcfc5e2617e251e21a20e5387c183"
+                "reference": "aaa196d0977966e57ed714a3a9fd1aa7f0db4ac9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/88863b134f2fcfc5e2617e251e21a20e5387c183",
-                "reference": "88863b134f2fcfc5e2617e251e21a20e5387c183",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/aaa196d0977966e57ed714a3a9fd1aa7f0db4ac9",
+                "reference": "aaa196d0977966e57ed714a3a9fd1aa7f0db4ac9",
                 "shasum": ""
             },
             "require": {
@@ -8935,9 +8935,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.35"
+                "source": "https://github.com/railroadmedia/railcontent/tree/srr-148-CMS"
             },
-            "time": "2023-10-24T14:16:50+00:00"
+            "time": "2023-11-14T13:21:16+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -17365,11 +17365,18 @@
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "3.0.7",
             "alias_normalized": "3.0.7.0"
+        },
+        {
+            "package": "railroad/railcontent",
+            "version": "dev-srr-148-CMS",
+            "alias": "v2.1.35",
+            "alias_normalized": "2.1.35.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/railanalytics": 20
+        "railroad/railanalytics": 20,
+        "railroad/railcontent": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
