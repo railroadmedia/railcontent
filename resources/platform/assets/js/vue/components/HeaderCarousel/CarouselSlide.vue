@@ -140,7 +140,8 @@ const secondaryVideoModal = ref(false);
           <h4 class="tw-font-bold tw-text-sm tw-uppercase tw-leading-none tw-mb-3" :class="`${ topSubtitleColor && `tw-text-${topSubtitleColor}` }`" v-if="topSubtitle && !logo">{{ topSubtitle }}</h4>
           <h2 class="
               tw-font-bebas-neue
-              tw-text-[50px]
+              tw-text-[40px]
+              sm:tw-text-[50px]
               tw-mb-1
               tw-uppercase
               tw-leading-none
