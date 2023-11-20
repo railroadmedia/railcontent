@@ -180,7 +180,7 @@
             <section class="grid-view category-section" data-category="hoodies">
                 <div class="container mx-auto">
                     <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Hoodies</strong></h5>
-                    <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                    <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
                         @foreach($hoodies as $hoodie)
                             @include('musora.shop._shop-card-alt', [
@@ -204,7 +204,7 @@
             <section class="grid-view category-section" data-category="shirts">
                 <div class="container mx-auto">
                     <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Shirts</strong></h5>
-                    <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                    <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
                         @foreach($shirts as $shirt)
                             @include('musora.shop._shop-card-alt', [
@@ -228,7 +228,7 @@
             <section class="grid-view category-section" data-category="hats">
                 <div class="container mx-auto">
                     <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Hats</strong></h5>
-                    <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                    <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
                         @foreach($hats as $hat)
                             @include('musora.shop._shop-card-alt', [
