@@ -75,7 +75,7 @@
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Piano Lessons</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                     @include('musora.shop._shop-card-alt', [
                           "itemURL" => "/",
                           "sku" => null,
@@ -118,7 +118,7 @@
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'accessories' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Accessories</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 @foreach($accessories as $accessory)
                     @include('musora.shop._shop-card-alt', [
                             "sku" => (str_contains($accessory->sku, 'member') || str_contains($accessory->sku, 'products')) ? '' : $accessory->sku,
@@ -139,27 +139,27 @@
             </div>
         </section>
 
-        {{--   HATS     --}}
-        <div id="hats" class="anchor"></div>
-        <section class="grid-view category-section" data-category="hats" x-show="filter === 'clothing' || filter === 'all'">
+        {{--   MISC     --}}
+        <div id="misc" class="anchor"></div>
+        <section class="grid-view category-section" data-category="misc" x-show="filter === 'clothing' || filter === 'all'">
             <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Hats</strong></h5>
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Misc</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
 
-                    @foreach($hats as $hat)
+                    @foreach($misc as $miscItem)
                     @include('musora.shop._shop-card-alt', [
-                         "sku" => $hat->sku,
-                         "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
-                         "badgeText" => $hat->badge_text,
-                         "thumbnail" => $hat->thumbnail,
-                         "title" => $hat->name,
-                         "cardDescription" => $hat->short_desc,
-                         "fullPrice" => $hat->price,
-                         "price" => $hat->discounted_price,
-                         "sizes" => $hat->sizes,
-                         "soldOut" => isset($products[$hat->sku]) ? $products[$hat->sku]->getStockAvailability() === 0 : $hat->sold_out,
-                         "category" => strtolower($hat->productType->name),
-                         "size_case_sensitive" => $hat->size_case_sensitive,
+                         "sku" => $miscItem->sku,
+                         "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $miscItem->slug ),
+                         "badgeText" => $miscItem->badge_text,
+                         "thumbnail" => $miscItem->thumbnail,
+                         "title" => $miscItem->name,
+                         "cardDescription" => $miscItem->short_desc,
+                         "fullPrice" => $miscItem->price,
+                         "price" => $miscItem->discounted_price,
+                         "sizes" => $miscItem->sizes,
+                         "soldOut" => isset($products[$miscItem->sku]) ? $products[$miscItem->sku]->getStockAvailability() === 0 : $miscItem->sold_out,
+                         "category" => strtolower($miscItem->productType->name),
+                         "size_case_sensitive" => $miscItem->size_case_sensitive,
                     ])
                 @endforeach
 
@@ -172,7 +172,7 @@
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Shirts</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
                     @foreach($shirts as $shirt)
                     @include('musora.shop._shop-card-alt', [
@@ -199,7 +199,7 @@
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Hoodies</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
                     @foreach($hoodies as $hoodie)
                     @include('musora.shop._shop-card-alt', [
