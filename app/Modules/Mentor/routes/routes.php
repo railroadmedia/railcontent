@@ -16,7 +16,6 @@ Route::group(
         Route::get('/getMentor/{userId}', [MentorController::class, 'getMentor']);
         Route::get('/updateMentor', [MentorController::class, 'updateMentor']);
         Route::get('/demoteMentor/{userId}', [MentorController::class, 'demoteMentor']);
-        Route::post('/helpscout/conversation/new', [HelpScoutMentorController::class, 'newHelpScoutConversation'])->name('helpscout_conversation_new');
     }
 );
 
