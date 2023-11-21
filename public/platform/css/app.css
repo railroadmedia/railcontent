@@ -21391,6 +21391,9 @@ a:visited{
 .tw-right-2{
   right: 0.5rem !important;
 }
+.tw-top-2{
+  top: 0.5rem !important;
+}
 .tw-top-1{
   top: 0.25rem !important;
 }
@@ -21438,9 +21441,6 @@ a:visited{
 }
 .tw-right-\[calc\(100\%-22px\)\]{
   right: calc(100% - 22px) !important;
-}
-.tw-top-2{
-  top: 0.5rem !important;
 }
 .tw-top-\[12px\]{
   top: 12px !important;
@@ -21673,6 +21673,10 @@ a:visited{
   margin-top: 1.5rem !important;
   margin-bottom: 1.5rem !important;
 }
+.tw-mx-6{
+  margin-left: 1.5rem !important;
+  margin-right: 1.5rem !important;
+}
 .tw-my-8{
   margin-top: 2rem !important;
   margin-bottom: 2rem !important;
@@ -21680,10 +21684,6 @@ a:visited{
 .tw-mx-1{
   margin-left: 0.25rem !important;
   margin-right: 0.25rem !important;
-}
-.tw-mx-6{
-  margin-left: 1.5rem !important;
-  margin-right: 1.5rem !important;
 }
 .tw-mx-\[40px\]{
   margin-left: 40px !important;
@@ -22523,6 +22523,9 @@ a:visited{
 .tw-w-\[27px\]{
   width: 27px !important;
 }
+.tw-w-\[26px\]{
+  width: 26px !important;
+}
 .tw-w-11\/12{
   width: 91.666667% !important;
 }
@@ -22612,9 +22615,6 @@ a:visited{
 }
 .tw-w-\[9px\]{
   width: 9px !important;
-}
-.tw-w-\[26px\]{
-  width: 26px !important;
 }
 .tw-w-\[23px\]{
   width: 23px !important;
@@ -26614,6 +26614,12 @@ a:visited{
   .md\:-tw-left-16{
     left: -4rem !important;
   }
+  .md\:tw-top-\[32px\]{
+    top: 32px !important;
+  }
+  .md\:tw-right-\[48px\]{
+    right: 48px !important;
+  }
   .md\:tw-top-\[9px\]{
     top: 9px !important;
   }
@@ -26628,12 +26634,6 @@ a:visited{
   }
   .md\:tw-top-6{
     top: 1.5rem !important;
-  }
-  .md\:tw-top-\[32px\]{
-    top: 32px !important;
-  }
-  .md\:tw-right-\[48px\]{
-    right: 48px !important;
   }
   .md\:tw-right-\[32px\]{
     right: 32px !important;
@@ -26820,6 +26820,9 @@ a:visited{
   .md\:tw-h-\[276px\]{
     height: 276px !important;
   }
+  .md\:tw-h-\[48px\]{
+    height: 48px !important;
+  }
   .md\:tw-h-\[50px\]{
     height: 50px !important;
   }
@@ -26828,9 +26831,6 @@ a:visited{
   }
   .md\:tw-h-28{
     height: 7rem !important;
-  }
-  .md\:tw-h-\[48px\]{
-    height: 48px !important;
   }
   .md\:tw-h-\[54px\]{
     height: 54px !important;
@@ -26883,11 +26883,11 @@ a:visited{
   .md\:tw-w-36{
     width: 9rem !important;
   }
-  .md\:tw-w-44{
-    width: 11rem !important;
-  }
   .md\:tw-w-\[48px\]{
     width: 48px !important;
+  }
+  .md\:tw-w-44{
+    width: 11rem !important;
   }
   .md\:tw-w-\[620px\]{
     width: 620px !important;

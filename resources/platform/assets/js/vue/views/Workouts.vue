@@ -138,8 +138,8 @@ const videoModalOpen = ref(false);
 const videoSrc = ref('');
 
 const openVideo = (src) => {
-    videoModalOpen.value = true;
     videoSrc.value = src;
+    videoModalOpen.value = true;
 }
 
 const closeVideo = () => {
