@@ -7,7 +7,7 @@
     <meta name="description" content="Keep perfect time with this handcrafted, German-made Wittner metronome.">
     <meta property="og:description" content="Keep perfect time with this handcrafted, German-made Wittner metronome.">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/limited-metronome-share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/limited-metronome-share-image2.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -38,8 +38,7 @@
                 <div class="w-full sm:w-2/3 text-center lg:text-left">
                     <img class="h-48 mb-5 sm:hidden" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/310x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/header-metronome-m.png">
                     <br>
-                    <img class="h-20 lg:hidden" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/header-limited-metronome-logo-m.svg">
-                    <img class="h-24 lg:h-32 hidden lg:inline-block" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/metronome-web-logo.svg">
+                    <img class="h-20 sm:h-24 lg:h-32" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/logo-white-m2.svg">
                     <p class="leading-normal my-3 sm:my-4">Keep perfect time with this handcrafted, German-made Wittner metronome. It features a luxurious flamed maple case finished in a satin lacquer and all the precision engineering you’d expect from the world’s best metronome maker.
                         <br><br>
                         Numbers are extremely limited as <strong class="text-gold">only 216</strong> were made.</p>
@@ -58,7 +57,7 @@
     </header>
 
     <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative bg-center bg-cover text-white" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/metronome-feature-bg.jpg');">
-        <div class="container mx-auto z-10 relative max-w-5xl">
+        <div class="container mx-auto z-10 relative max-w-6xl">
             <h2 class="leading-tight"><strong>So beautiful - you’ll<br class="sm:hidden"> WANT to use it.</strong></h2>
             <p class="leading-normal mt-2 mb-5 mx-auto max-w-xl">Most metronomes collect dust.<br class="sm:hidden"> This one demands attention.</p>
             @php
@@ -66,31 +65,31 @@
                     [
                     'icon' => 'marketing/pianote/products/prestige-metronome/timing-icon.svg',
                     'img' => 'marketing/pianote/products/prestige-metronome/timing-slide.jpg',
-                    'title' => 'Precision Timing So You’re Always On Beat',
+                    'title' => 'Precision Timing So<br class="hidden sm:inline"> You’re Always On Beat',
                     'desc' => 'The Swiss make watches. The Germans make metronomes. And Wittner makes the best. Cheap metronomes don’t keep time. With this metronome - every beat is perfect.',
                     ],
                     [
                     'icon' => 'marketing/pianote/products/prestige-metronome/numbered-icon.svg',
                     'img' => 'marketing/pianote/products/prestige-metronome/numbered-slide.jpg',
-                    'title' => 'Hand-Numbered & One-Of-A-Kind',
+                    'title' => 'Hand-Numbered<br class="hidden sm:inline"> & One-Of-A-Kind',
                     'desc' => 'Each Prestige Metronome is hand-numbered, and there are only 216 in the world. Your metronome is one-of-a-kind, and you can feel proud having it in your practice space.',
                     ],
                     [
                     'icon' => 'marketing/pianote/products/prestige-metronome/maple-wood-icon.svg',
                     'img' => 'marketing/pianote/products/prestige-metronome/wooden-slide.jpg',
-                    'title' => 'Solid Flamed Maple Wood Casing',
+                    'title' => 'Solid Flamed Maple<br class="hidden sm:inline"> Wood Casing',
                     'desc' => 'Chosen by Horst Wittner himself, this beautiful white maple features a perfect flamed grain that’s not found on any other metronome in the world. No plastic here.',
                     ],
                     [
                     'icon' => 'marketing/pianote/products/prestige-metronome/adjustable-icon.svg',
                     'img' => 'marketing/pianote/products/prestige-metronome/adjustable-slide.jpg',
-                    'title' => 'Adjustable Tempos For Any Song',
+                    'title' => 'Adjustable Tempos<br class="hidden sm:inline"> For Any Song',
                     'desc' => 'Changing tempos is easy with this metronome. Find the tempo you want on the tempo chart, and simply slide the adjustable weight until it clicks to the right tempo. The old ways are still the best ways.',
                     ],
                     [
                     'icon' => 'marketing/pianote/products/prestige-metronome/hand-wound-icon.svg',
                     'img' => 'marketing/pianote/products/prestige-metronome/hand-wound-slide.jpg',
-                    'title' => 'Hand-Wound and Battery-Free',
+                    'title' => 'Hand-Wound and<br class="hidden sm:inline"> Battery-Free',
                     'desc' => 'Like the best watches, this metronome doesn’t take batteries. Instead, you’ll find a hand winder on the side to set the internal gears in motion. ',
                     ],
                 ];
@@ -99,40 +98,40 @@
                 <div class="w-1/4 pr-3">
                     <div class="mt-20 mb-14">
                         <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[0]['icon'] }}">
-                        <h6 class="my-2"><strong>{{ $gridItems[0]['title'] }}</strong></h6>
-                        <p class="text-sm">{{ $gridItems[0]['desc'] }}</p>
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[3]['icon'] }}">
+                        <h6 class="my-2"><strong>{!! $gridItems[3]['title']  !!}</strong></h6>
+                        <p class="text-sm">{!! $gridItems[3]['desc'] !!}</p>
                     </div>
                     <div>
                         <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[1]['icon'] }}">
-                        <h6 class="my-2"><strong>{{ $gridItems[1]['title'] }}</strong></h6>
-                        <p class="text-sm">{{ $gridItems[1]['desc'] }}</p>
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[0]['icon'] }}">
+                        <h6 class="my-2"><strong>{!! $gridItems[0]['title'] !!}</strong></h6>
+                        <p class="text-sm">{!!  $gridItems[0]['desc']  !!}</p>
                     </div>
                 </div>
                 <div class="w-1/2">
                     <img class="transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/limited-metronome-features.png"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/limited-metronome-features2.png"
                     >
                 </div>
                 <div class="w-1/4 pl-3">
                     <div>
                         <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[2]['icon'] }}">
-                        <h6 class="my-2"><strong>{{ $gridItems[2]['title'] }}</strong></h6>
-                        <p class="text-sm">{{ $gridItems[2]['desc'] }}</p>
+                        <h6 class="my-2"><strong>{!! $gridItems[2]['title'] !!}</strong></h6>
+                        <p class="text-sm">{!! $gridItems[2]['desc'] !!}</p>
                     </div>
-                    <div class="my-10">
+                    <div class="my-5">
                         <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[3]['icon'] }}">
-                        <h6 class="my-2"><strong>{{ $gridItems[3]['title'] }}</strong></h6>
-                        <p class="text-sm">{{ $gridItems[3]['desc'] }}</p>
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[4]['icon'] }}">
+                        <h6 class="my-2"><strong>{!! $gridItems[4]['title'] !!}</strong></h6>
+                        <p class="text-sm">{!! $gridItems[4]['desc'] !!}</p>
                     </div>
                     <div>
                         <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[4]['icon'] }}">
-                        <h6 class="my-2"><strong>{{ $gridItems[4]['title'] }}</strong></h6>
-                        <p class="text-sm">{{ $gridItems[4]['desc'] }}</p>
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/{{ $gridItems[1]['icon'] }}">
+                        <h6 class="my-2"><strong>{!! $gridItems[1]['title'] !!}</strong></h6>
+                        <p class="text-sm">{!! $gridItems[1]['desc'] !!}</p>
                     </div>
                 </div>
             </div>
@@ -173,8 +172,8 @@
                                                 loading="lazy" onload="this.classList.remove('opacity-0')" alt="metronome"
                                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $gridItem['img'] }}">
                                         </div>
-                                        <p class="mt-4 mb-1 px-4 font-black leading-tight"><strong>{{ $gridItem['title'] }}</strong></p>
-                                        <p class="px-4 pb-6 text-sm leading-tight">{{ $gridItem['desc'] }}</p>
+                                        <p class="mt-4 mb-1 px-4 font-black leading-tight"><strong>{!! $gridItem['title'] !!}</strong></p>
+                                        <p class="px-4 pb-6 text-sm leading-tight">{!! $gridItem['desc'] !!}</p>
                                     </div>
                                 </li>
                             @endforeach
@@ -235,7 +234,7 @@
             </div>
         </div>
     </section>
-<section class="text-center px-5 py-10 md:py-20 lg:py-24 text-white"  style="background-color:#010B1A;" >
+<section class="text-center px-5 py-10 md:py-20 lg:py-24">
         <div class="container mx-auto relative z-10 max-w-5xl">
             <h2><strong>The last metronome <br class="sm:hidden">  you’ll ever buy.</strong></h2>
             <p class="leading-tight mt-2 mb-5 sm:mb-10 mx-auto max-w-lg">
@@ -245,24 +244,24 @@
                 @php
                     $slides = [
                      [
-                         'img' => 'marketing/pianote/products/prestige-metronome/limited-metronome-gallery-01.jpg',
+                         'img' => 'marketing/pianote/products/prestige-metronome/gallery-01.jpg',
                      ],
                      [
-                         'img' => 'marketing/pianote/products/prestige-metronome/limited-metronome-gallery-02.jpg',
+                         'img' => 'marketing/pianote/products/prestige-metronome/gallery-02.jpg',
                      ],
                      [
-                         'img' => 'marketing/pianote/products/prestige-metronome/limited-metronome-gallery-03a.jpg',
+                         'img' => 'marketing/pianote/products/prestige-metronome/gallery-03.jpg',
                      ],
                      [
-                         'img' => 'marketing/pianote/products/prestige-metronome/limited-metronome-gallery-04.jpg',
+                         'img' => 'marketing/pianote/products/prestige-metronome/gallery-04.jpg',
                      ],
                      [
-                         'img' => 'marketing/pianote/products/prestige-metronome/limited-metronome-gallery-05.jpg',
+                         'img' => 'marketing/pianote/products/prestige-metronome/gallery-05.jpg',
                      ],
                  ];
                 @endphp
 
-            <div class="flex flex-wrap items-center mb-12">
+            <div class="flex flex-wrap items-center mb-10">
                 <div class="w-full sm:w-1/2 sm:order-1">
                     <div class="p-2 w-full"><div data-open="image1" class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl"
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')"></div></div>
@@ -283,7 +282,7 @@
         </div>
     </section>
 
-    <div class="h-5 sm:h-10 -mb-5 sm:-mb-10 relative z-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #010B1A calc(50% + 1px));"></div>
+    <div class="h-5 sm:h-10 -mb-5 sm:-mb-10 relative z-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32 bg-center bg-cover text-white" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/metronome-feature-bg.jpg');">
         <div class="container max-w-3xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-all opacity-0 relative z-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/410x0/filters:quality(95)/marketing/pianote/products/metronome/repair-guarantee.png" alt="guarantee badge" loading="lazy" onload="this.classList.remove('opacity-0')">
@@ -296,25 +295,26 @@
         </div>
     </section>
     <div id="customize-anchor" class="anchor"></div>
-    <section class="text-white px-4 sm:px-6 py-10 sm:py-10 lg:py-16 relative" style="background-color:#000;">
-        <div class="inset-0 absolute z-0 bg-top bg-cover hidden sm:block" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/header-bg.jpg')"></div>
-        <div class="container max-w-3xl mx-auto relative z-10">
+    <section class="px-5 sm:px-6 py-12 sm:pb-16 sm:pt-0 lg:pb-20 relative" style="background:#fff9f2;">
+        <div class="container max-w-4xl mx-auto relative z-10">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <div class="w-full sm:w-2/3 text-center lg:text-left">
+                <div class="w-full sm:w-5/12 text-center lg:text-left sm:order-1 px-10 sm:px-0">
+                    <img class="-mt-32 sm:-mt-36 sm:-mb-12 w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/metronome-order.png">
+                </div>
+                <div class="w-full sm:w-7/12 text-center lg:text-left sm:pr-5">
                     <img class="h-48 mb-5 sm:hidden" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/310x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/header-metronome-m.png">
-                    <br>
-                    <img class="h-20 lg:hidden" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/header-limited-metronome-logo-m.svg">
-                    <img class="h-24 lg:h-32 hidden lg:inline-block" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/metronome-web-logo.svg">
-                    <p class="leading-normal my-3 sm:my-4">Keep perfect time with this handcrafted, German-made Wittner metronome. <em class="font-black text-gold">Limited to 216.</em></p>
-                    <h3 class="leading-tight text-gold inline-block align-middle mr-5"><strong>${{ floatval($productPrices['maelzel-metronome']->discounted_price) }}</strong></h3>
-                    <a class="join smaller anchor-slide inline-block align-middle" href="#signup">Notify Me</a>
-{{--                    <p class="leading-normal my-3 sm:my-4"><em>Enter your email to be notified when one is available:</em></p>--}}
-                    {{--                    @include('pianote._partials.sign-up-form', [--}}
-{{--                    "recaptchaKey" => $recaptchaKey,--}}
-{{--                            "formName" => 'Metronome Notice',--}}
-{{--                            "formId" => "Pianote - Engagement - Trigger - Metronome Notice - Web Form2",--}}
-{{--                            "buttonText" => "Notify Me ",--}}
-{{--                        ])--}}
+                    <br class="sm:hidden">
+                    <img class="h-20 lg:hidden" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/logo-m2.svg">
+                    <img class="h-24 lg:h-32 hidden lg:inline-block mt-12" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/logo2.svg">
+                    <p class="leading-normal my-3 sm:my-4">Keep perfect time with this handcrafted, German-made<br class="sm:hidden"> Wittner metronome. <em class="font-black">Limited to 216.</em></p>
+                    <h3 class="leading-tight"><strong>${{ floatval($productPrices['maelzel-metronome']->discounted_price) }}</strong></h3>
+                    <p class="leading-normal my-3 sm:my-4"><em>Enter your email to be notified when one is available:</em></p>
+                    @include('pianote._partials.sign-up-form', [
+                        "recaptchaKey" => $recaptchaKey,
+                        "formName" => 'Metronome Notice',
+                        "formId" => "Pianote - Engagement - Trigger - Metronome Notice - Web Form2",
+                        "buttonText" => "Notify Me ",
+                    ])
                 </div>
             </div>
         </div>
@@ -326,13 +326,6 @@
                 <p><strong>Any questions?</strong><br> Call us toll-free at
                     <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
                     <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
-            </div>
-            <div class="inline-block w-full px-3 md:px-4" style="margin-top: 0;">
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
             </div>
         </div>
     </section>
