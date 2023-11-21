@@ -19,3 +19,10 @@ Route::group(
         Route::post('/helpscout/conversation/new', [HelpScoutMentorController::class, 'newHelpScoutConversation'])->name('helpscout_conversation_new');
     }
 );
+
+Route::group(
+    ['prefix' => config('mentor.route_prefix')],
+    function () {
+        Route::post('/helpscout/conversation/new', [HelpScoutMentorController::class, 'newHelpScoutConversation'])->name('helpscout_conversation_new');
+    }
+);
