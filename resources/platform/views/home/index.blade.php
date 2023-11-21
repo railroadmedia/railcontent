@@ -42,14 +42,3 @@
 @include('partials._railanalytics-brand-tracking-iframe')
 
 @endsection
-
-@section('layout-scripts')
-    @parent
-    @if(str_contains(Request::url(), 'create-playlist-window'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                window.openplaylistmodal({ modalType: 'create', brand: '{{ $brand }}', data: { name: '', category: 'General', thumbnail_url: null, description: ''} });
-            })
-        </script>
-    @endif
-@endsection

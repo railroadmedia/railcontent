@@ -14,15 +14,13 @@
                 :eventCoachProfileUrl="eventCoachProfileUrl" />
         </div>
         <UpcomingSection v-if="hasUpcomingEvents" :upcomingUrl="upcomingUrl" :upcomingEvents="upcomingEvents" />
-        <StatsSection :accountUrl="accountUrl"
-            :nextLearningPathProgressPercent="nextLearningPathProgressPercent"
-            :nextLearningPathLevel="nextLearningPathLevel"
-            :userMetrics="userMetrics" />
+        <StatsSection :accountUrl="accountUrl" :nextLearningPathProgressPercent="nextLearningPathProgressPercent"
+            :nextLearningPathLevel="nextLearningPathLevel" :userMetrics="userMetrics" />
     </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import TriggerBanner from '../components/Onboarding/TriggerBanner.vue';
 import HeaderCarousel from '../components/HeaderCarousel/HeaderCarousel.vue';
 import CohortBanner from '../components/CohortBanner/CohortBanner.vue';
@@ -66,5 +64,24 @@ const props = defineProps({
     nextLearningPathProgressPercent: { type: Number, default: 0 },
     nextLearningPathLevel: { type: String, default: '' },
     userMetrics: { type: Object, default: () => ({}) }
+});
+
+const openPlaylistModal = () => {
+    window.openplaylistmodal({
+        modalType: 'create',
+        brand: '{{ $brand }}',
+        data: {
+            name: '',
+            category: 'General',
+            thumbnail_url: null,
+            description: ''
+        }
+    });
+};
+
+onMounted(() => {
+    if (window.location.href.includes('create-playlist-window')) {
+        openPlaylistModal();
+    }
 });
 </script>
