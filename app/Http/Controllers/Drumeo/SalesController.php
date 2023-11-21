@@ -257,21 +257,6 @@ class SalesController extends BaseController
         ]);
     }
 
-    public function thirtyDayDrummerDeal()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.lead-gen.pages.30-day-drummer-deal', ['products' => $products]);
-    }
-    public function thirtyDayChopsDeal()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.lead-gen.pages.30-day-chops-deal', ['products' => $products, 'theme' => 'drumeo']);
-    }
-
     /**
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */

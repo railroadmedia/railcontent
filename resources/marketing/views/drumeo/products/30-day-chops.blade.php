@@ -211,8 +211,8 @@
     ])
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "30-Day Chops",
-                "fullPrice" => floatval($productPrices['30-day-drummer-2']->price),
-                "price" => floatval($productPrices['30-day-drummer-2']->discounted_price),
+                "fullPrice" => floatval($productPrices['30-day-chops']->price),
+                "price" => floatval($productPrices['30-day-chops']->discounted_price),
                 "noBreadcrumb" => true
             ])
 

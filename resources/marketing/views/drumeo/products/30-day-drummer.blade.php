@@ -238,8 +238,8 @@
     ])
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "30-Day Drummer",
-                "fullPrice" => floatval($productPrices['30-day-drummer-2']->price),
-                "price" => floatval($productPrices['30-day-drummer-2']->discounted_price),
+                "fullPrice" => floatval($productPrices['30-day-drummer-3']->price),
+                "price" => floatval($productPrices['30-day-drummer-3']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -266,7 +266,7 @@
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/header-left-collage.png',
     'isVideo' => true,
     'mediaSource' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/video-reel.mp4',
-    
+
 ])
 
  <!-- Lessons Section -->

@@ -263,10 +263,6 @@ class SalesController extends BaseController
             'nPackOwners' => $nPackOwners,
         ]);
     }
-    public function newPianoPlayersDeal()
-    {
-        return view('pianote.products.new-piano-players-deal', ['theme' => 'pianote']);
-    }
     public function easyChords()
     {
         /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
@@ -297,13 +293,6 @@ class SalesController extends BaseController
             'nPackOwners' => $nPackOwners,
         ]);
     }
-    public function thirtyDayBluesPianoDeal()
-    {
-        return view('pianote.products.30-day-blues-piano-deal', [
-            'theme' => 'pianote',
-        ]);
-    }
-
 
     // 408 is the 3 month access code product
     // 2 is the customer.io email ID from their system
