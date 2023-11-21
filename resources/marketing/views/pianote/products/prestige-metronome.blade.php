@@ -32,7 +32,7 @@
     @include('pianote.sales.partials._nav')
 
     @if(strpos(url()->full(), 'thankyou'))
-        <div class="py-7 px-6 text-center bg-green-400">
+        <div class="py-5 sm:py-7 px-6 text-center bg-green-400">
             <div class="container mx-auto max-w-xl">
                 <h3 class="leading-tight mb-2"><strong>Thanks for contacting us!</strong></h3>
                 <p class="leading-tight">You’re on the early access list for the Prestige Metronome. Keep on eye on your inbox Thursday morning (PST) to get yours before anyone else.</p>
@@ -41,20 +41,16 @@
     @endif
 
     <div id="signup" class="anchor"></div>
-    <header class="text-white px-4 sm:px-6 py-10 sm:py-10 lg:py-16 relative" style="background-color:#000;">
-        <div class="inset-0 absolute z-0 bg-top bg-cover hidden sm:block" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/header-bg.jpg')"></div>
-        <div class="container max-w-4xl mx-auto relative z-10">
-            <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <div class="w-full sm:w-2/3 text-center lg:text-left">
-                    <img class="h-48 mb-5 sm:hidden" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/310x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/header-metronome-m.png">
-                    <br>
-                    <img class="h-20 sm:h-24 lg:h-32" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/logo-white-m2.svg">
-                    <p class="leading-normal my-3 sm:my-4">Keep perfect time with this handcrafted, German-made Wittner metronome. It features a luxurious flamed maple case finished in a satin lacquer and all the precision engineering you’d expect from the world’s best metronome maker.
-                        <br><br>
-                        Numbers are extremely limited as <strong class="text-gold">only 216</strong> were made.</p>
-                    <h3 class="leading-tight text-gold"><strong>${{ floatval($productPrices['maelzel-metronome']->discounted_price) }}</strong></h3>
-                    <p class="leading-normal my-3 sm:my-4"><em>Enter your email to be notified when one is available:</em></p>
-
+    <header class="text-white relative overflow-hidden z-10" style="background-color:#000;">
+        <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
+            <div class="container mx-auto max-w-5xl">
+                <img class="h-20 sm:h-24 lg:h-28" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/logo-white-m2.svg">
+                <p class="leading-normal my-2 sm:my-3"><strong class="font-black">Only 216 made.</strong> Solid flamed maple case.<br class="hidden sm:inline"> Precision German manufacturing. Handcrafted.</p>
+                <h3 class="leading-tight"><strong>${{ floatval($productPrices['maelzel-metronome']->discounted_price) }}</strong></h3>
+                <p class="leading-normal my-2 sm:my-3"><em>
+                        Enter your email to be notified <br class="sm:hidden">
+                        when one is available:</em></p>
+                <div class="w-full max-w-2xl mx-auto">
                     @include('pianote._partials.sign-up-form', [
                         "recaptchaKey" => $recaptchaKey,
                         "formName" => 'Metronome Notice',
@@ -65,6 +61,9 @@
                 </div>
             </div>
         </div>
+        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0,0,0,0.6);"></div>
+        <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
+            src="https://player.vimeo.com/progressive_redirect/playback/885331096/rendition/720p/file.mp4?loc=external&signature=fa4b7843da9aa3b685be87295232d14bfaa4f69c44d87a563c4cd546a5499767"></video>
     </header>
 
     <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative bg-center bg-cover text-white" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/metronome-feature-bg.jpg');">
@@ -195,57 +194,42 @@
         </div>
     </section>
 
-    <section class="px-5 sm:px-12 py-10 md:py-20 lg:py-24 overflow-hidden"  style="background:linear-gradient(to bottom, #fff7ef 50%, #dad0c6);" >
-        <div class="container mx-auto relative z-10 max-w-4xl">
-            <h2 class="text-center mb-10"><strong>Practice with the best.  <br>Then hear the result.</strong></h2>
-            <div class="relative">
-                <div class="flex flex-wrap sm:flex-nowrap items-center bg-white rounded-xl border border-black py-6 sm:py-8 px-5 sm:pr-0 sm:pl-10 mb-8 relative z-10">
-                    <img class="rounded-xl shadow-md h-64 lg:h-72 sm:order-1" style="margin-right: -5%;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/practice-section-02.jpg">
-                    <p class="leading-normal w-full sm:pr-8 mt-5 sm:mt-0">
-                        Tick, tick, tick.
-                        <br><br>
-                        You need a metronome.
-                        <br><br>
-                        And while no piano player loves the metronome, it’s one of (if not the) most important practice tools you will EVER have.
-                        <br><br>
-                        <strong>So get the best.</strong>
-                        <br><br>
-                        Because a cheap metronome won’t keep time. And that’s disastrous for your progress.
+    <section class="text-center sm:text-left px-4 sm:px-6 py-10 sm:py-20 lg:py-24">
+        <div class="container mx-auto relative z-10 max-w-4xl mb-12 sm:mb-0">
+            <div class="flex flex-wrap sm:flex-nowrap items-center">
+                <img class="sm:hidden h-64 mb-5 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/every-beat-image-m.png">
+                <div class="sm:pr-8 lg:pr-10">
+                    <h3 class="leading-tight mb-2"><strong>Make every beat perfect.</strong></h3>
+                    <p class="leading-normal">
+                        This is the metronome you could set your watch to.
+                        <br><br>Wittner has been hand-making metronomes in Germany since 1895, setting the standard for precision manufacturing and timekeeping. Four generations later, the company is still family-owned and operated.
+                        <br><br>The Prestige Flamed Maple Metronome features handcrafted German timekeeping, ensuring every beat is uniform and perfect.
+                        <br><br>Set your tempo. Then start practicing.
                     </p>
                 </div>
-                <div class="absolute w-full h-full border rounded-xl" style="border-color:#A17642;top: 10px;left: 10px;"></div>
-            </div>
-            <div class="relative">
-                <div class="flex flex-wrap sm:flex-nowrap items-center bg-white rounded-xl border border-black py-6 sm:py-8 px-5 sm:pl-0 sm:pr-10 mb-8 relative z-10">
-                    <img class="rounded-xl shadow-md h-64 lg:h-72 sm:-ml-[5%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/practice-section-01.jpg">
-                    <p class="leading-normal w-full sm:pl-8 mt-5 sm:mt-0">
-                        Wittner has been hand-making metronomes in Germany since 1895, setting the standard for precision manufacturing and timekeeping. Four generations later, the company is still family-owned and operated.
-                        <br><br>
-                        We’re so proud to partner with Wittner to bring you this exclusive, limited-edition Prestige Flamed Maple Metronome.
-                    </p>
-                </div>
-                <div class="absolute w-full h-full border rounded-xl" style="border-color:#A17642;top: 10px;right: 10px;"></div>
-            </div>
-            <div class="relative">
-                <div class="flex flex-wrap sm:flex-nowrap items-center bg-white rounded-xl border border-black py-6 sm:py-8 px-5 sm:pr-0 sm:pl-10 relative z-10">
-                    <img class="rounded-xl shadow-md h-64 lg:h-72 sm:order-1" style="margin-right: -5%;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/practice-section-03.jpg">
-                    <p class="leading-normal w-full sm:pr-8 mt-5 sm:mt-0">
-                        You won’t find them anywhere else in the world. You can’t buy one from Wittner. They’re not in any stores. The only way to get one is to be a Pianote Member. Even Elon Musk couldn’t get one.
-                        <br><br>
-                        <strong>But you can.</strong>
-                        <br><br>
-                        There are only 216 in the world because that’s all they could make with this beautiful wood.
-                        <br><br>
-                        Each metronome is individually hand-numbered.
-                        <br><br>
-                        And once they are gone, they’ll never be made again.
-                    </p>
-                </div>
-                <div class="absolute w-full h-full border rounded-xl" style="border-color:#A17642;top: 10px;left: 10px;"></div>
+                <img class="hidden sm:inline-block h-80 lg:h-96" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/every-beat-image.png">
             </div>
         </div>
     </section>
-<section class="text-center px-5 py-10 md:py-20 lg:py-24">
+    <section class="text-center sm:text-left px-4 sm:px-6 pb-10 sm:pb-14 lg:pb-20" style="background:#fff9f2;">
+        <div class="container mx-auto relative z-10 max-w-4xl">
+            <div class="flex flex-wrap sm:flex-nowrap items-center">
+                <img class="-mt-12 hidden sm:inline-block h-80 lg:h-96" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/elton-image.png">
+                <img class="-mt-12 sm:hidden h-48 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/elton-image-m.png">
+                <div class="sm:pl-8 lg:pl-10">
+                    <h3 class="leading-tight mb-2 mt-5 sm:mt-10"><strong>Elton John couldn’t<br class="hidden sm:inline"> get one of these.</strong></h3>
+                    <p class="leading-normal">
+                        The Prestige Flamed Maple Metronome might be the most exclusive metronome in the world.
+                        <br><br>Only 216 were made and each one is hand-numbered.
+                        <br><br>The only way to get one is to be a Pianote Member. Even Elton John couldn’t get one (unless he decided to join Pianote).
+                        <br><br>But you can.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+<section class="text-center px-5 py-10 sm:py-20 lg:py-24">
         <div class="container mx-auto relative z-10 max-w-5xl">
             <h2><strong>The last metronome <br class="sm:hidden">  you’ll ever buy.</strong></h2>
             <p class="leading-tight mt-2 mb-5 sm:mb-10 mx-auto max-w-lg">
@@ -292,10 +276,9 @@
             </div>
         </div>
     </section>
-
     <div class="h-5 sm:h-10 -mb-5 sm:-mb-10 relative z-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32 bg-center bg-cover text-white" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/metronome-feature-bg.jpg');">
-        <div class="container max-w-3xl mx-auto">
+        <div class="container max-w-3xl mx-auto mb-10 sm:mb-0">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-all opacity-0 relative z-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/410x0/filters:quality(95)/marketing/pianote/products/metronome/repair-guarantee.png" alt="guarantee badge" loading="lazy" onload="this.classList.remove('opacity-0')">
             <h3 class="my-4 sm:my-6 lg:my-8"><strong>The best metronome deserves<br> the best guarantee.</strong></h3>
             <p class="leading-normal">Wittner makes the best metronomes in the world.
@@ -306,20 +289,18 @@
         </div>
     </section>
     <div id="customize-anchor" class="anchor"></div>
-    <section class="px-5 sm:px-6 py-12 sm:pb-16 sm:pt-0 lg:pb-20 relative" style="background:#fff9f2;">
+    <section class="px-5 sm:px-6 pb-8 sm:pb-12 lg:pb-20 relative" style="background:#fff9f2;">
         <div class="container max-w-4xl mx-auto relative z-10">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <div class="w-full sm:w-5/12 text-center lg:text-left sm:order-1 px-10 sm:px-0">
-                    <img class="-mt-32 sm:-mt-36 sm:-mb-12 w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/metronome-order.png">
+                <div class="w-full sm:w-5/12 text-center lg:text-left sm:order-1 px-12 sm:px-0">
+                    <img class="-mt-12 sm:-mt-36 sm:-mb-12 w-full max-w-xs sm:max-w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/metronome-order.png">
                 </div>
                 <div class="w-full sm:w-7/12 text-center lg:text-left sm:pr-5">
-                    <img class="h-48 mb-5 sm:hidden" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/310x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/header-metronome-m.png">
-                    <br class="sm:hidden">
-                    <img class="h-20 lg:hidden" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/logo-m2.svg">
-                    <img class="h-24 lg:h-32 hidden lg:inline-block mt-12" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/logo2.svg">
-                    <p class="leading-normal my-3 sm:my-4">Keep perfect time with this handcrafted, German-made<br class="sm:hidden"> Wittner metronome. <em class="font-black">Limited to 216.</em></p>
+                    <img class="h-20 sm:h-24 mt-8 sm:mt-12 lg:hidden" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/logo-m2.svg">
+                    <img class="h-32 hidden lg:inline-block mt-12" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/logo2.svg">
+                    <p class="leading-normal my-3 sm:my-4">Keep perfect time with this handcrafted, German-made Wittner metronome.<br class="sm:hidden"> <em class="font-black">Limited to 216.</em></p>
                     <h3 class="leading-tight"><strong>${{ floatval($productPrices['maelzel-metronome']->discounted_price) }}</strong></h3>
-                    <p class="leading-normal my-3 sm:my-4"><em>Enter your email to be notified when one is available:</em></p>
+                    <p class="leading-normal my-3 sm:my-4"><em>Enter your email to be notified<br class="sm:hidden"> when one is available:</em></p>
                     @include('pianote._partials.sign-up-form', [
                         "recaptchaKey" => $recaptchaKey,
                         "formName" => 'Metronome Notice',
