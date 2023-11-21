@@ -38,7 +38,7 @@ export default {
 
 <template>
 
-    <section id="stats-section" class="tw-flex tw-flex-col tw-mb-5 tw-text-[#00101D] dark:tw-text-white tw-w-full">
+    <section id="stats-section" class="tw-flex tw-flex-col tw-text-[#00101D] dark:tw-text-white tw-w-full tw-mb-[30px] tw-px-4 lg:tw-px-0">
 
         <!-- Section Title -->
         <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
