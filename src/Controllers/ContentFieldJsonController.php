@@ -12,6 +12,7 @@ use Railroad\Railcontent\Requests\ContentFieldUpdateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFieldService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Transformers\ContentCompiledColumnTransformer;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentFieldJsonController extends Controller
@@ -68,17 +69,15 @@ class ContentFieldJsonController extends Controller
      */
     public function store(ContentFieldCreateRequest $request)
     {
+        ContentCompiledColumnTransformer::$avoidDuplicates = true;
         $contentField = $this->fieldService->createOrUpdate(
-            $request->only(
-                [
-                    'id',
-                    'content_id',
-                    'key',
-                    'value',
-                    'position',
-                    'type',
-                ]
-            )
+            $request->only([
+                               'content_id',
+                               'key',
+                               'value',
+                               'position',
+                               'type',
+                           ])
         );
         $content_id = $request->input('content_id');
         $currentContent = $this->contentService->getById($content_id);
@@ -108,17 +107,25 @@ class ContentFieldJsonController extends Controller
      */
     public function update(ContentFieldUpdateRequest $request, $fieldId)
     {
-        $contentField = $this->fieldService->update(
-            $fieldId,
-            $request->only(
-                [
-                    'content_id',
-                    'key',
-                    'value',
-                    'position',
-                    'type',
-                ]
-            )
+        ContentCompiledColumnTransformer::$avoidDuplicates = true;
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+        Decorator::$typeDecoratorsEnabled = false;
+
+        $field = $this->fieldService->getByContentIdAndKey(
+            $request->input('content_id'),
+            $request->input('key')
+        );
+
+        $data = $request->only([
+                                   'content_id',
+                                   'key',
+                                   'value',
+                                   'position',
+                                   'type',
+                               ]);
+        $data['id'] = $field['id'] ?? null;
+        $contentField = $this->fieldService->createOrUpdate(
+            $data
         );
 
         //if the update method response it's null the field not exist; we throw the proper exception
@@ -155,8 +162,16 @@ class ContentFieldJsonController extends Controller
      */
     public function delete(ContentFieldDeleteRequest $request, $fieldId)
     {
-        $field = $this->fieldService->get($fieldId);
-        $deleted = $this->fieldService->delete($fieldId);
+        ContentCompiledColumnTransformer::$avoidDuplicates = true;
+
+        $existingField = $this->fieldService->getByContentIdAndKey(
+            $request->input('content_id'),
+            $request->input('key'),
+            $request->input('value')
+        );
+
+        $field = $this->fieldService->get($existingField['id'] ?? $fieldId);
+        $deleted = $this->fieldService->delete($existingField['id'] ?? $fieldId);
 
         //if the update method response it's null the field not exist; we throw the proper exception
         throw_if(
@@ -164,7 +179,7 @@ class ContentFieldJsonController extends Controller
             new NotFoundException('Delete failed, field not found with id: ' . $fieldId)
         );
 
-        $content_id = $field['content_id'];
+        $content_id = $request->input('content_id');
         $currentContent = $this->contentService->getById($content_id);
 
         $data = ["post" => $currentContent];

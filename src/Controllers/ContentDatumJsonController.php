@@ -10,7 +10,10 @@ use Railroad\Railcontent\Requests\ContentDatumUpdateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Transformers\ContentCompiledColumnTransformer;
 use Railroad\Railcontent\Transformers\DataTransformer;
+use Railroad\Railcontent\Decorators\ModeDecoratorBase;
+use Railroad\Railcontent\Decorators\Decorator;
 
 class ContentDatumJsonController extends Controller
 {
@@ -45,6 +48,10 @@ class ContentDatumJsonController extends Controller
      */
     public function store(ContentDatumCreateRequest $request)
     {
+        ContentCompiledColumnTransformer::$avoidDuplicates = true;
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+        Decorator::$typeDecoratorsEnabled = false;
+
         $contentData = $this->datumService->create(
             $request->input('content_id'),
             $request->input('key'),
@@ -54,12 +61,6 @@ class ContentDatumJsonController extends Controller
 
         $content_id = $request->input('content_id');
         $currentContent = $this->contentService->getById($content_id);
-        $extraColumns = config('railcontent.contentColumnNamesForFields', []);
-        foreach ($extraColumns as $extraColumn) {
-            if (isset($currentContent[$extraColumn])) {
-                unset($currentContent[$extraColumn]);
-            }
-        }
         $data = ["datum" => $contentData, "post" => $currentContent];
 
         return response()->json(

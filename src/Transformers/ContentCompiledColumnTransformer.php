@@ -8,6 +8,7 @@ use Railroad\Railcontent\Entities\ContentEntity;
 class ContentCompiledColumnTransformer
 {
     public static bool $useCompiledColumnForServingData = true;
+    public static bool $avoidDuplicates = false;
 
     /**
      * @param  array|null  $contentRows
@@ -38,7 +39,7 @@ class ContentCompiledColumnTransformer
 
             $contentRows[$contentRowIndex]['data'] = [];
             $contentRows[$contentRowIndex]['fields'] = [];
-            $contentRows[$contentRowIndex]['permissions'] = [];
+          //  $contentRows[$contentRowIndex]['permissions'] = [];
 
             if (empty($contentRowCompiledColumnValues)) {
                 continue;
@@ -67,6 +68,9 @@ class ContentCompiledColumnTransformer
                                 'position' => $dataKeyCounts[$dataKey],
                             ];
                         }
+                        if(self::$avoidDuplicates){
+                            unset($contentRows[$contentRowIndex][$dataKey]);
+                        }
                     }
                 }
             }
@@ -94,6 +98,9 @@ class ContentCompiledColumnTransformer
                                 'type' => 'string',
                                 'position' => $fieldKeyCounts[$fieldKey],
                             ];
+                            if(self::$avoidDuplicates){
+                                unset($contentRows[$contentRowIndex][$fieldKey]);
+                            }
                         }
                     } elseif ($compiledFieldKey === $fieldKey && in_array($fieldKey, $subContentFieldKeys)) {
                         if (isset($compiledFieldValue['id'])) {
@@ -111,6 +118,9 @@ class ContentCompiledColumnTransformer
                                 'type' => 'content',
                                 'position' => $fieldKeyCounts[$fieldKey],
                             ];
+                            if(self::$avoidDuplicates){
+                                unset($contentRows[$contentRowIndex][$fieldKey]);
+                            }
                         } elseif(is_array($compiledFieldValue)) {
                             // there are multiple values
                             foreach ($compiledFieldValue as $compiledFieldSingleValue) {
@@ -131,6 +141,9 @@ class ContentCompiledColumnTransformer
                                     'type' => 'content',
                                     'position' => $fieldKeyCounts[$fieldKey],
                                 ];
+                            }
+                            if(self::$avoidDuplicates){
+                                unset($contentRows[$contentRowIndex][$fieldKey]);
                             }
                         }
 
