@@ -26,24 +26,8 @@ class WorkoutsPageController extends BaseController
 
     public function showWorkoutsPage(Request $request, $domain, $brand)
     {
-        $lessonType = 'challenge-part';
+        $lessonType = 'workout';
         $requiredFields = $request->get('required_fields', []);
-        if ($request->has('duration')) {
-            switch ($request->get('duration')) {
-                case 5:
-                    $requiredFields[] = 'length_in_seconds,300,integer,<=,video';
-                    break;
-                case 10:
-                    $requiredFields[] = 'length_in_seconds,300,integer,>,video';
-                    $requiredFields[] = 'length_in_seconds,6000,integer,<=,video';
-                    break;
-                case 15:
-                    $requiredFields[] = 'length_in_seconds,900,integer,>=,video';
-                    break;
-                default:
-                    break;
-            }
-        }
 
         $workouts = $this->contentService->getFiltered(
             $request->get('page', 1),
@@ -136,7 +120,7 @@ class WorkoutsPageController extends BaseController
 
         return view('content.lesson', [
             "parentType" => $contentToRenderAsLessonParent['type'] ?? null,
-            "lessonType" => 'challenge-part',
+            "lessonType" => 'workout',
             "lessonContent" => $contentToRenderAsLesson,
             "relatedLessons" => $relatedLessons,
             "showEmail" => false,
