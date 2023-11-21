@@ -129,12 +129,15 @@
 @endsection
 
 @section('global-body')
-    @if(!empty($promoVersion))
+    @if(!empty($bfVersion))
+        @include("pianote.sales.partials._nav", [
+            "cartVersion" => true
+        ])
+    @elseif(!empty($promoVersion))
         @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "scrollToJoin" => true,
-            "hideMenu" => true,
         ])
     @elseif(!empty($month))
         @include("pianote.sales.partials._nav", [
