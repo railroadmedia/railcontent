@@ -30,6 +30,16 @@
 
 @section('global-body')
     @include('pianote.sales.partials._nav')
+
+    @if(strpos(url()->full(), 'thankyou'))
+        <div class="py-7 px-6 text-center bg-green-400">
+            <div class="container mx-auto max-w-xl">
+                <h3 class="leading-tight mb-2"><strong>Thanks for contacting us!</strong></h3>
+                <p class="leading-tight">You’re on the early access list for the Prestige Metronome. Keep on eye on your inbox Thursday morning (PST) to get yours before anyone else.</p>
+            </div>
+        </div>
+    @endif
+
     <div id="signup" class="anchor"></div>
     <header class="text-white px-4 sm:px-6 py-10 sm:py-10 lg:py-16 relative" style="background-color:#000;">
         <div class="inset-0 absolute z-0 bg-top bg-cover hidden sm:block" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/header-bg.jpg')"></div>
