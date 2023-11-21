@@ -110,8 +110,8 @@ class BFUpdates extends Seeder
         Product::where('brand_id', 3)->where('name', "Guitareo Survival Guide")->update(['discounted_price' => 14.25]);
 
         //SINGEO UPDATES
-        Product::where('brand_id', 4)->where('name', 'The Singing Starter Kit')->update(['discounted_price' => 50]);
-        Product::where('brand_id', 4)->where('name', 'The Essential Guide to Beautiful Harmonies')->update(['discounted_price' => 50]);
+        Product::where('brand_id', 4)->where('name', 'The Singing Starter Kit')->update(['discounted_price' => 9]);
+        Product::where('brand_id', 4)->where('name', 'The Essential Guide to Beautiful Harmonies')->update(['discounted_price' => 9]);
 
         Product::where('brand_id', 4)->where('name', 'Do Re Mi Tumbler')->update(['discounted_price' => 21.75]);
         Product::where('brand_id', 4)->where('name', 'Rockstar Mug')->update(['discounted_price' => 9]);

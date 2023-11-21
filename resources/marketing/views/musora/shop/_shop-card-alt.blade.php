@@ -1,4 +1,4 @@
-<a class="product-wrap relative text-black pb-2 md:pb-3 hover:opacity-90 transition-opacity" data-price="{{ floatVal($price) }}" data-category="{{ $category }}"
+<a class="product-wrap relative text-black pb-4 hover:opacity-90 transition-opacity" data-price="{{ floatVal($price) }}" data-category="{{ $category }}"
         @if(!empty($itemURL)) href="{{ ($itemURL === '/drumshop/' || $itemURL === '/shop/') ? '/' : $itemURL }}" @if(!empty($externalURL)) target="_blank" @endif @endif
         x-data="{ open: false }">
     @if(!empty($sizes) && count($sizes) > 0)

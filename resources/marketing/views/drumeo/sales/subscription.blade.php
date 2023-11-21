@@ -127,7 +127,11 @@
 @endsection
 
 @section('global-body')
-    @if(!empty($promoVersion))
+    @if(!empty($bfVersion))
+        @include("drumeo.sales.partials._nav", [
+            "cartVersion" => true
+        ])
+    @elseif(!empty($promoVersion))
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
