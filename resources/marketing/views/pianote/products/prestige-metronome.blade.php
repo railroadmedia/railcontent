@@ -306,6 +306,7 @@
                         "formName" => 'Metronome Notice',
                         "formId" => "Pianote - Engagement - Trigger - Metronome Notice - Web Form2",
                         "buttonText" => "Notify Me ",
+                        "redirectURL" => "/shop/prestige-metronome?thankyou",
                     ])
                 </div>
             </div>
