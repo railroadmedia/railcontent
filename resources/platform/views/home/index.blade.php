@@ -1,7 +1,3 @@
-@php
-    //dd($startedLessons);
-@endphp
-
 @extends('partials.layout')
 
 @section('meta')
@@ -9,137 +5,41 @@
 @endsection
 
 @section('content')
-    <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white">
-        @if(!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience || !$hasGoals)
-            {{-- On Boarding TriggerBanner --}}
-            <trigger-banner brand="{{ $brand }}">
-            </trigger-banner>
-        @endif
-        <div class="tw-px-4 lg:tw-px-0">
-            {{-- Carousel --}}
-            <header-carousel
-                :preloaded-carousel="{{ $carousel }}"
-            >
-            </header-carousel>
+    <home
+        :has-gear="{{ $hasGear ? 'true' : 'false' }}"
+        :has-topics="{{ $hasTopics ? 'true' : 'false' }}"
+        :has-genres="{{ $hasGenres ? 'true' : 'false' }}"
+        :has-experience="{{ $hasExperience ? 'true' : 'false' }}"
+        :has-goals="{{ $hasGoals ? 'true' : 'false' }}"
+        :carousel="{{ json_encode($carousel) }}"
+        :exists-cohort-banner="{{ $existsCohortBanner ? 'true' : 'false' }}"
+        :cohort-banner="{{ $cohortBanner }}"
+        :has-started-lessons="{{ $hasStartedLessons ? 'true' : 'false' }}"
+        :started-content="{{ $startedContentJson }}"
+        :new-content="{{ $newContentJson }}"
+        :hot-forum-topics="{{ json_encode($hotForumTopics) }}"
+        :users-list="{{ json_encode($usersList->results())  }}"
+        :coach-event="{{ $coachEvent }}"
+        current-date="{{ $currentDate }}"
+        calendar-id="{{ $calendarId }}"
+        youtube-id="{{ $youtubeId }}"
+        :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+        event-coach-profile-url="{{ $eventCoachProfileUrl }}"
+        :has-upcoming-events="{{ $hasUpcomingEvents ? 'true' : 'false' }}"
+        :upcoming-events="{{ $upcomingEvents }}"
+        :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
+        :user-metrics="{{ json_encode($userMetrics) }}"
+        :has-started-content="{{ $hasStartedLessons ? 'true' : 'false' }}"
+        content-endpoint="/railcontent/content"
+        continue-url="{{ url()->route('platform.lesson-history.in-progress') }}"
+        new-content-url="{{ url()->route('platform.new-lessons') }}"
+        :new-content="{{ $newContentJson }}"
+        account-url="{{ user()->getDashboardUrl() }}"
+        next-learning-path-level="{{ user()->getMethodLevel() }}"
+        :is-a-member="{{ user()->isAMember() ? 'true' : 'false' }}"
+        upcoming-url="{{ '/'.$brand.'/live' }}"
+    ></home>
 
-            @if($existsCohortBanner)
-                <cohort-banner
-                :preloaded-banner="{{$cohortBanner}}"
-                ></cohort-banner>
-                @endif
+@include('partials._railanalytics-brand-tracking-iframe')
 
-            {{-- Invite Email Message --}}
-            @if(session()->has('email-invite-message'))
-                <div class="tw-container tw-mx-auto tw-rounded tw-px-4 md:tw-px-8 tw-my-4">
-                    <div class="tw-flex tw-flex-col tw-p-[20px] tw-bg-[#c7ff9b] tw-border tw-border-[#3fd525]">
-                        <h3 class="tw-text-[#00101D] tw-font-bold no-decoration grow">Your invite was emailed successfully!</h3>
-                    </div>
-                </div>
-            @endif
-            {{-- Access Code Message --}}
-            @if(session()->has('access-code-claimed-success') && session()->get('access-code-claimed-success') == true)
-                <div class="tw-container tw-mx-auto tw-rounded tw-px-4 md:tw-px-8 tw-my-4">
-                    <div class="tw-flex tw-flex-col tw-p-[20px] tw-bg-[#eee]">
-                        <h3 class="tw-text-[#00101D] tw-font-bold no-decoration grow">Your access code has been claimed successfully!</h3>
-                    </div>
-                </div>
-            @endif
-        </div>
-
-        {{-- Continue Section --}}
-        @if(count(json_decode($startedContentJson)->data) > 0)
-            @component('partials.bladesora.members.components.home._continue-section', [
-                'brand' => brand(),
-                'hasStartedContent' => $hasStartedLessons,
-                'contentEndpoint' => '/railcontent/content',
-                'continueUrl' => url()->route('platform.lesson-history.in-progress'),
-                'seeAllUrl' => url()->route('platform.lesson-history.in-progress'),
-                'startedContentJson' => $startedContentJson,
-                ])
-            @endcomponent
-        @endif
-
-        {{-- New Section --}}
-        @component('partials.bladesora.members.components.home._new-section', [
-            'brand' => brand(),
-            'contentEndpoint' => '/railcontent/content',
-            'allLessonsUrl' => url()->route('platform.new-lessons'),
-            'newContentJson' => $newContentJson,
-            'hasContinueSection' => $hasStartedLessons,
-            ])
-        @endcomponent
-
-{{--        @if(count($hotForumTopics) > 0)--}}
-{{--            --}}{{-- Popular Conversations --}}
-{{--            @component('partials.bladesora.members.components.home._conversations-section', [--}}
-{{--                'brand' => brand(),--}}
-{{--                'forumUrl' => brand() . '/forums',--}}
-{{--                'forumPosts' => $hotForumTopics,--}}
-{{--                ])--}}
-{{--            @endcomponent--}}
-{{--        @endif--}}
-
-        {{-- My Playlists --}}
-        @component('partials.bladesora.members.components.home._list-section', [
-            'brand' => brand(),
-            'myListUrl' => url()->route('platform.user.playlists',['brand'=>brand()]),
-            'usersList' => $usersList,
-            ])
-        @endcomponent
-
-        <div class="tw-px-4 lg:tw-px-0">
-            {{-- Live Banner --}}
-            @if( !empty($coachEvent) )
-                <coach-event
-                    brand="{{ $brand }}"
-                    class="tw-mb-6"
-                    :preloaded-content='{{ $coachEvent }}'
-                    current-date-string="{{ $currentDate }}"
-                    subscription-calendar-id="{{ $calendarId }}"
-                    youtube-event-id="{{ $youtubeId }}"
-                    :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
-                    event-coach-profile-url="{{ $eventCoachProfileUrl }}"
-                ></coach-event>
-            @endif
-        </div>
-
-        {{-- Upcoming Events --}}
-        @if($hasUpcomingEvents)
-            @component('partials.bladesora.members.components.home._upcoming-section', [
-                'brand' => brand(),
-                'upcomingUrl' => '/'.$brand.'/live', // todo: url
-                'upcomingEvents' => $upcomingEvents,
-                'contentEndpoint' => '/railcontent/content',
-                ])
-            @endcomponent
-        @endif
-        <div class="tw-px-4 lg:tw-px-0">
-            {{-- My Stats --}}
-            @if(user()->isAMember())
-                <stats-section
-                    brand="{{ $brand }}"
-                    account-url="{{ user()->getDashboardUrl() }}"
-                    :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
-                    next-learning-path-level="{{ user()->getMethodLevel() }}"
-                    :user-metrics="{{ json_encode($userMetrics) }}"
-                ></stats-section>
-            @endif
-        </div>
-
-    </div>
-
-    @include('partials._railanalytics-brand-tracking-iframe')
-
-@endsection
-
-@section('layout-scripts')
-    @parent
-
-    @if(str_contains(Request::url(), 'create-playlist-window'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                window.openplaylistmodal({ modalType: 'create', brand: '{{ $brand }}', data: { name: '', category: 'General', thumbnail_url: null, description: ''} });
-            })
-        </script>
-    @endif
 @endsection

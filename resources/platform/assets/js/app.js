@@ -12,6 +12,7 @@ import { createPinia } from 'pinia';
 
 //App Pages
 import Workouts from './vue/views/Workouts';
+import Home from './vue/views/Home.vue';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -237,6 +238,7 @@ app.config.productionTip = false;
 
 app.component('AppContainer', AppContainer)
     .component('PageContainer', PageContainer)
+    .component('Home', Home)
     .component('HeaderCarousel', HeaderCarousel)
     .component('StaticHeader', StaticHeader)
     .component('CatalogSection', CatalogSection)
