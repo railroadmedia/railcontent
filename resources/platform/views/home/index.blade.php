@@ -37,6 +37,7 @@
         account-url="{{ user()->getDashboardUrl() }}"
         next-learning-path-level="{{ user()->getMethodLevel() }}"
         :is-a-member="{{ user()->isAMember() ? 'true' : 'false' }}"
+        upcoming-url="{{ '/'.$brand.'/live' }}"
     ></home>
 
 @include('partials._railanalytics-brand-tracking-iframe')

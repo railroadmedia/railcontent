@@ -1,19 +1,31 @@
 <template>
     <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white">
+        <!-- Onboarding banner -->
         <TriggerBanner v-if="showTriggerBanner" />
         <div class="tw-px-4 lg:tw-px-0">
+            <!-- Header carousel -->
             <HeaderCarousel :preloadedCarousel="carousel" />
+            <!-- Cohort banner -->
             <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" />
         </div>
-        <ContinueSection v-if="hasStartedLessons" :continueUrl="continueUrl" :startedContent="startedContent" />
-        <NewSection :newContentUrl="newContentUrl" :newContent="newContent" />
+        <!-- Continue section -->
+        <MiniCatalogueSection title="Continue" seeAllAriaLabel="See All Lessons In Progress" v-if="hasStartedLessons"
+            :seeAllUrl="continueUrl" :preLoadedContent="startedContent" :isMiniView="true" />
+        <!-- New section -->
+        <MiniCatalogueSection title="New Releases" seeAllAriaLabel="See All New Releases" :seeAllUrl="newContentUrl"
+            :preLoadedContent="newContent" />
+        <!-- List section -->
         <ListSection :newContentUrl="newContentUrl" :usersList="usersList" />
         <div v-if="coachEvent" class="tw-px-4 lg:tw-px-0">
+            <!-- Live section -->
             <CoachEvent class="tw-mb-6" :preloadedContent="coachEvent" :currentDateString="currentDate"
                 :subscriptionCalendarId="calendarId" :youtubeEventId="youtubeId" :timeCutoffMinutes="timeCutoffMinutes"
                 :eventCoachProfileUrl="eventCoachProfileUrl" />
         </div>
-        <UpcomingSection v-if="hasUpcomingEvents" :upcomingUrl="upcomingUrl" :upcomingEvents="upcomingEvents" />
+        <!-- Upcoming section -->
+        <MiniCatalogueSection v-if="hasUpcomingEvents" title="Upcoming Events" seeAllAriaLabel="See All Upcoming Events"
+            :seeAllUrl="upcomingUrl" :preLoadedContent="upcomingEvents" />
+        <!-- Stats section -->
         <StatsSection :accountUrl="accountUrl" :nextLearningPathProgressPercent="nextLearningPathProgressPercent"
             :nextLearningPathLevel="nextLearningPathLevel" :userMetrics="userMetrics" />
     </div>
@@ -24,11 +36,9 @@ import { computed, onMounted } from 'vue';
 import TriggerBanner from '../components/Onboarding/TriggerBanner.vue';
 import HeaderCarousel from '../components/HeaderCarousel/HeaderCarousel.vue';
 import CohortBanner from '../components/CohortBanner/CohortBanner.vue';
-import ContinueSection from '../components/ContinueSection/ContinueSection.vue';
-import NewSection from '../components/NewSection/NewSection.vue';
+import MiniCatalogueSection from '../components/MiniCatalogueSection/MiniCatalogueSection.vue';
 import ListSection from '../components/ListSection/ListSection.vue';
 import CoachEvent from '../vuesora/components/Coaches/CoachEvent.vue';
-import UpcomingSection from '../components/UpcomingSection/UpcomingSection.vue';
 import StatsSection from '../components/StatsSection/StatsSection.vue';
 
 const showTriggerBanner = computed(() => {
