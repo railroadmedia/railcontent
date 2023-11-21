@@ -116,7 +116,7 @@
                         &nbsp;
                     </h6>
                     <!-- Difficulty Label -->
-                    <DifficultyLabel class="tw-text-xs" v-if="mappedData.difficulty" :difficulty="mappedData.difficulty" textCase="capitalize" />
+                    <DifficultyLabel class="tw-text-xs" v-if="mappedData.difficulty" :difficultyValue="mappedData.difficulty" textCase="capitalize" />
                 </a>
                 <!-- Add to Playlist -->
                 <div :id="`${item.id}-action-btn`" class="tw-inline-flex tw-items-start tw-p-1 tw-relative">
@@ -264,10 +264,16 @@ const handleShowDropdown = (className) => {
 };
 
 const mappedData = computed(() => {
-    const difficulties = ["BEGINNER", "INTERMEDIATE", "ADVANCED"];
-    const randomIndex = Math.floor(Math.random() * difficulties.length);
+    const difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty').value
+    if (Number.isFinite(Number(difficultyValue))) {
+        contentModel.value.card.difficulty = difficultyValue;
+    }
+    else {
+        contentModel.value.card.difficulty = 'all';
+    }
+    const excludePattern = new RegExp('(novice|beginner|intermediate|advanced|expert) \\d+', 'i');
+    contentModel.value.card.grey_title = contentModel.value.card.grey_title.replace(excludePattern, '').trim();
 
-    contentModel.value.card.difficulty = difficulties[randomIndex];
     return contentModel.value.card
 });
 

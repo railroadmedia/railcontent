@@ -1,14 +1,14 @@
 <template>
-    <div :class="[difficultyClass]">
+    <div :class="difficultyClass">
         {{ formattedDifficulty }}
     </div>
 </template>
-  
+
 <script setup>
 import { computed, defineProps } from 'vue';
 
 const props = defineProps({
-    difficulty: {
+    difficultyValue: {
         type: String,
         required: true
     },
@@ -21,44 +21,55 @@ const props = defineProps({
     }
 });
 
-const difficultyClass = computed(() => {
-    switch (props.difficulty.toUpperCase()) {
-        case 'BEGINNER':
+const difficultyText = computed(() => {
+    switch (props.difficultyValue.toString()) {
+        case '1':
+            return 'novice';
+        case '2':
+        case '3':
             return 'beginner';
-        case 'INTERMEDIATE':
+        case '4':
+        case '5':
             return 'intermediate';
-        case 'ADVANCED':
+        case '6':
+        case '7':
             return 'advanced';
+        case '8':
+        case '9':
+        case '10':
+            return 'expert';
         default:
-            return '';
+            return 'all';
+    }
+});
+
+const difficultyClass = computed(() => {
+    switch (difficultyText.value) {
+        case 'novice':
+            return 'tw-text-[#16A34A]';
+        case 'beginner':
+            return 'tw-text-[#0B76DB]';
+        case 'intermediate':
+            return 'tw-text-[#EAB308]';
+        case 'advanced':
+            return 'tw-text-[#F06314]';
+        case 'expert':
+            return 'tw-text-[#B91C1C]';
+        default:
+            return 'tw-text-[#E5E7EB]';
     }
 });
 
 const formattedDifficulty = computed(() => {
     switch (props.textCase) {
         case 'uppercase':
-            return props.difficulty.toUpperCase();
+            return difficultyText.value.toUpperCase();
         case 'lowercase':
-            return props.difficulty.toLowerCase();
+            return difficultyText.value.toLowerCase();
         case 'capitalize':
-            return props.difficulty.charAt(0).toUpperCase() + props.difficulty.slice(1).toLowerCase();
+            return difficultyText.value.charAt(0).toUpperCase() + difficultyText.value.slice(1).toLowerCase();
         default:
-            return props.difficulty;
+            return difficultyText.value;
     }
 });
-
-
 </script>
-  
-<style lang="scss" scoped>
-.beginner {
-    color: #0B76DB;
-}
-.intermediate {
-    color: #EAB308;
-}
-.advanced {
-    color: #F06314;
-}
-</style>
-  

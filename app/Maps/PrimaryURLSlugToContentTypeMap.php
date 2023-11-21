@@ -51,6 +51,6 @@ class PrimaryURLSlugToContentTypeMap
         'routines' => 'routine',
         'song-tutorials' => 'song-tutorial',
         'drum-fest-international-2022' => 'drum-fest-international-2022',
-        'challenge-part' => 'challenge-part',
+        'workouts' => 'workout',
     ];
 }

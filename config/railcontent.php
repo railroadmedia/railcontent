@@ -65,6 +65,8 @@ return [
         'podcast',
         'song-tutorial',
         'song-tutorial-children',
+        'workout',
+        'challenge-part',
     ],
     'comment_assignation_owner_ids' => [
         102905,
@@ -1277,6 +1279,8 @@ return [
         'song-part',
         'play-along-part',
         'song-tutorial-children',
+        'workout',
+        'challenge-part',
     ],
     'appUserListContentTypes' => [
         'course',
@@ -1543,6 +1547,7 @@ return [
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
+            'challenge' => 'lessons',
         ],
         'pianote' => [
             'learning-path' => 'levels',
@@ -1556,6 +1561,7 @@ return [
             'unit' => 'lessons',
             'song-tutorial' => 'lessons',
             'song-tutorial-children' => 'lessons',
+            'challenge' => 'lessons',
         ],
         'guitareo' => [
             'learning-path' => 'levels',
@@ -1566,6 +1572,7 @@ return [
             'semester-pack' => 'lessons',
             'song' => 'lessons',
             'play-along' => 'lessons',
+            'challenge' => 'lessons',
         ],
         'singeo' => [
             'learning-path' => 'levels',
@@ -1574,6 +1581,7 @@ return [
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
+            'challenge' => 'lessons',
         ],
 
     ],
@@ -1585,6 +1593,7 @@ return [
         'captions',
         'chapter_description',
         'chapter_timecode',
+        'chapter_thumbnail_url',
         'coach_bottom_banner_image',
         'coach_card_image',
         'coach_featured_image',
