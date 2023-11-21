@@ -57,18 +57,6 @@ return [
 
     // form names and configuration
     'forms' => [
-        'musora' => [
-            'Metronome Notice' => [
-                'custom_attributes' => [
-                ],
-                'events' => [
-                    'pianote_prospect_metronome-notice',
-                ],
-                'accounts_to_sync' => [
-                    'musora',
-                ],
-            ],
-        ],
         'drumeo' => [
             'Kristinas Top 25' => [
                 'custom_attributes' => [
