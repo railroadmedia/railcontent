@@ -15,7 +15,7 @@
                 <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
                     :total-results="getTotalResults" />
                 <CatalogueCardContainer
-                    v-else-if="isChallengePart"
+                    v-else-if="isWorkout"
                     :pre-loaded-content="preLoadedContent"
                 />
             </CollectionResults>
@@ -166,18 +166,18 @@ const isRudiment = computed(() => {
     return props.collectionType === 'rudiment';
 })
 
-const isChallengePart = computed(() => {
-    return props.collectionType === 'challenge-part';
+const isWorkout = computed(() => {
+    return props.collectionType === 'workout';
 })
 
 //List view reactive
 const isList = computed(() => {
-    return !isPlayAlong.value && !isRoutine.value && !isChallengePart.value;
+    return !isPlayAlong.value && !isRoutine.value && !isWorkout.value;
 })
 
 //Filter state reactive
 const showFilter = computed(() => {
-    return isSong.value || isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value || isCoach.value || isChallengePart.value;
+    return isSong.value || isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value || isCoach.value || isWorkout.value;
 })
 
 //Tab options reactive
@@ -202,7 +202,7 @@ const getTabOptions = computed(() => {
             { key: 'paradiddles', value: 'Paradiddles' },
             { key: 'rolls', value: 'Rolls' },
         ];
-    } else if (isChallengePart.value) {
+    } else if (isWorkout.value) {
         return [
             { key: 'all', value: 'All' },
             { key: '5minutes', value: '5 Minutes' },

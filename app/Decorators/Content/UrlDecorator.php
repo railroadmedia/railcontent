@@ -39,9 +39,10 @@ class UrlDecorator extends ModeDecoratorBase
                 ]);
             }
 
-            if($content['type'] == 'challenge-part'){
-                $contents[$contentIndex]['url'] = url()->route('platform.workouts.show', [
+            if ($content['type'] == 'challenge') {
+                $contents[$contentIndex]['url'] = url()->route('platform.workout.challenge', [
                     'brand' => $content['brand'],
+                    'primaryPage' => 'challenges',
                     'firstContentSlug' => $content['slug'],
                     'firstContentId'=>$content['id'],
                 ]);
@@ -69,6 +70,17 @@ class UrlDecorator extends ModeDecoratorBase
             }
 
             // second-level types
+            if (count($contentParentData) == 1 && $content['type'] == 'challenge-part') {
+                $contents[$contentIndex]['url'] = url()->route('platform.workout.challenge.workout', [
+                    'brand' => $content['brand'],
+                    "challenges",
+                    $contentParentData[0]->slug,
+                    $contentParentData[0]->id,
+                    $content['slug'],
+                    $content['id'],
+                ]);
+            }
+
             if (count($contentParentData) == 1 && !empty($contentTypeToURLSlugMap[$contentParentData[0]->type]))
             {
                 $contents[$contentIndex]['url'] = url()->route('platform.content.second-level', [

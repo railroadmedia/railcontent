@@ -18,6 +18,26 @@
             ]
         ]
     ])
+@elseif($lessonType === 'challenge-part')
+    @include('partials.bladesora.members.navigation.breadcrumbs', [
+        "pages" => [
+            [
+                "title" => 'Home',
+                "url" => url()->route('platform.home'),
+            ],
+            [
+                "title" => 'Workouts',
+                "url" => url()->route('platform.workouts'),
+            ],
+            [
+                "title" => $parent->fetch('fields.title'),
+                "url" => $parent->fetch('url')
+            ],
+            [
+                "title" => $lessonContent->fetch('fields.title')
+            ]
+        ]
+    ])
 @elseif($lessonType === 'learning-path-lesson')
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [

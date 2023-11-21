@@ -165,9 +165,23 @@ Route::domain('{musoraDomain}')
                 Route::get('/{brand}/workouts/challenges', [WorkoutsPageController::class, 'showChallengesPage'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.workouts.challenges');
-                Route::get('/{brand}/workouts/{firstContentSlug}/{firstContentId}', [WorkoutsPageController::class, 'showWorkoutPage'])
+
+                Route::get(
+                    '/{brand}/workouts/{primaryPage}/{firstContentSlug}/{firstContentId}',
+                    [ContentPagesController::class, 'firstLevel']
+                )
                     ->whereIn('brand', all_brands())
-                    ->name('platform.workouts.show');
+                    ->whereIn(
+                        'primaryPage',
+                        [
+
+                            'challenges',
+
+                        ]
+                    )
+                    ->name('platform.workout.challenge');
+
+
 
                 Route::get('/{brand}/shows', [ContentPagesController::class, 'shows'])
                     ->whereIn('brand', ['drumeo'])
@@ -222,6 +236,14 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->name('platform.live-chat');
 
+                Route::get(
+                    '/{brand}/workouts/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}',
+                    [ContentPagesController::class, 'secondLevel']
+                )
+                    ->whereIn('brand', all_brands())
+                    ->whereIn('primaryPage', ['challenges'])
+                    ->name('platform.workout.challenge.workout');
+
                 /*
                  * Catch-All Sub-Content Hierarchy Pages / Video Lesson Pages
                  */
@@ -272,6 +294,7 @@ Route::domain('{musoraDomain}')
                             'play-alongs',
                             'song-tutorials',
                             'drum-fest-international-2022',
+                            'workouts'
                         ]
                     )
                     ->name('platform.content.first-level');
