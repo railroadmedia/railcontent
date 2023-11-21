@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
 use Railroad\Railcontent\Entities\Entity;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\RemoteStorageService;
@@ -26,10 +27,9 @@ class RemoteStorageJsonController extends Controller
     public function put(Request $request)
     {
         $target = $request->get('target');
-
-        if ($this->remoteStorageService->put($target, $request->file('file'))) {
+        if (Storage::disk('s3')->put($target, $request->file('file'))) {
             return reply()->json(
-                new Entity(['url' => 'https://' . config('railcontent.awsCloudFront') . '/' . $target]),
+                new Entity(['url' => config('filesystems.disks.s3.cloudfront_access_url') . $target]),
                 [
                     'transformer' => DataTransformer::class,
                     'code' => 201,

@@ -190,6 +190,11 @@ class ContentRepository extends RepositoryBase
         $data = $contentRows[0] ?? null;
 
         if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($data)) {
+            $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
+            $contentRows[0]['permissions'] = $contentPermissionRows;
             return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows))[0] ?? null;
         }
 

@@ -16,6 +16,7 @@ use Railroad\Railcontent\Requests\ContentUpdateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
+use Railroad\Railcontent\Transformers\ContentCompiledColumnTransformer;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentJsonController extends Controller
@@ -192,6 +193,7 @@ class ContentJsonController extends Controller
      */
     public function show($id)
     {
+        ContentCompiledColumnTransformer::$avoidDuplicates = true;
         $content = $this->contentService->getById($id);
         if (!$content) {
             $userId = user()?->id;
@@ -273,6 +275,8 @@ class ContentJsonController extends Controller
      */
     public function update(ContentUpdateRequest $request, $contentId)
     {
+        ContentCompiledColumnTransformer::$avoidDuplicates = true;
+
         //update content with the data sent on the request
         $content = $this->contentService->update(
             $contentId,
