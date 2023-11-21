@@ -9,7 +9,8 @@
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
                 <div class="tw-flex tw-items-start">
                     <a :href="`/${brand}/workouts/challenges`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mr-2">Featured Challenges</a>
-                    <musora-icon icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
+<!--                    <musora-icon @click="openVideo('//player.vimeo.com/video/785314424?autoplay=1')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>-->
+                    <musora-icon @click="openVideo('TODO')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
                 </div>
                 <a :href="`/${brand}/workouts/challenges`" class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                     See All Challenges
@@ -23,7 +24,8 @@
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
                 <div class="tw-flex tw-items-start">
                     <a href="TODO" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mr-2">Workouts</a>
-                    <musora-icon icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
+<!--                    <musora-icon @click="openVideo('//player.vimeo.com/video/785314388?autoplay=1')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>-->
+                    <musora-icon @click="openVideo('TODO')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
                 </div>
             </div>
             <hr class="tw-border-[#65656b40] dark:tw-border-[#223F57]" />
@@ -65,9 +67,21 @@
             />
         </section>
     </div>
+
+    <!-- VIDEOS -->
+    <ModalRenderer v-if="videoModalOpen">
+        <button @click="closeVideo"
+                class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
+            <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
+        </button>
+        <div class="tw-w-full tw-mx-6 lg:tw-mx-0 lg:tw-w-1/2 tw-relative" style="padding-bottom: 56.25%;">
+            <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close" :src="videoSrc" frameborder="0" allowfullscreen allow="autoplay" title="Challenge Video"></iframe>
+        </div>
+    </ModalRenderer>
 </template>
 
 <script setup>
+import {ref} from "vue";
 import { storeToRefs } from 'pinia';
 import {useUserStore} from "../../stores/user";
 
@@ -75,6 +89,8 @@ import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
 import HeaderCarousel from '../components/HeaderCarousel/HeaderCarousel';
 import CatalogueCardContainer from '../components/Catalogue/CatalogueCardContainer';
 import CollectionWrapper from '../components/CollectionWrapper/CollectionWrapper';
+import ModalRenderer from "../components/Modal/ModalRenderer";
+import { XIcon } from "@heroicons/vue/solid";
 
 const props = defineProps({
     breadcrumbLastLevelUrl: {
@@ -117,4 +133,16 @@ const props = defineProps({
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
+
+const videoModalOpen = ref(false);
+const videoSrc = ref('');
+
+const openVideo = (src) => {
+    videoSrc.value = src;
+    videoModalOpen.value = true;
+}
+
+const closeVideo = () => {
+    videoModalOpen.value = false;
+}
 </script>
