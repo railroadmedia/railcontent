@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\UnauthorizedException;
 use Illuminate\Validation\ValidationException;
 use Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
@@ -438,6 +439,32 @@ class UserController extends Controller
                 ],
             ],
         ]);
+    }
+
+    public function getLogInAsUserURL(Request $request, $userId)
+    {
+        if (!user()->isAdmin()) {
+            throw new UnauthorizedException();
+        }
+
+        /**
+         * @var $user User
+         */
+        $user = User::findOrFail($userId);
+
+        // they should never be able to log in as admins
+        if ($user->isAdmin()) {
+            throw new UnauthorizedException();
+        }
+
+        $authKey = md5($user->id . $user->password . Carbon::now()->startOfMinute()->toDateTimeString());
+        $lastUsedBrand = $user->last_used_brand ?? 'drumeo';
+        $logInAsUserURL = url()->route(
+            'platform.profile.dashboard',
+            ['brand' => $lastUsedBrand, 'userId' => $user->id, 'auth_key' => $authKey, 'user_id' => $user->id]
+        );
+
+        return response()->json(['login_in_as_user_url' => $logInAsUserURL]);
     }
 
     /**

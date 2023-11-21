@@ -47,6 +47,17 @@
                     </v-btn>
                 </div>
             </v-form>
+
+            <div class="text-right" style="margin-top: 25px;">
+                <v-btn
+                    color="error"
+                    class="white--text"
+                    v-if="loginAsUserURL"
+                    @click.stop="copyLoginAsUserURLToClipboard"
+                >
+                    Copy Log In As User URL
+                </v-btn>
+            </div>
         </v-col>
     </v-card>
 </template>
@@ -55,6 +66,8 @@
 import { mapState, mapActions } from 'vuex';
 import api from '../../../api/users';
 import brandColors from '../../../api/mixins.js';
+import axios from "axios";
+import ErrorHandler from "@/api/error-handler";
 
 export default {
     name: 'UserDetailsForm',
@@ -73,6 +86,7 @@ export default {
                 v => !!v || 'Email is Required',
                 v => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'E-mail must be valid',
             ],
+            loginAsUserURL: undefined,
         };
     },
     computed: {
@@ -100,11 +114,33 @@ export default {
                 || `https://ui-avatars.com/api/?name=${displayName}&size=500&bold=true&background=00b0ff&color=FFFFFF`;
         },
     },
+    mounted() {
+        this.getLoginAsUserURL();
+    },
     methods: {
         ...mapActions('users', [
             'editUserField',
             'setUsers',
         ]),
+
+        getLoginAsUserURL() {
+            axios
+                .get('/user-management-system/get-login-as-user-url/' + this.thisUser.id)
+                .then(response => {
+                    console.log(response);
+                    console.log(response.data.login_in_as_user_url);
+                    this.loginAsUserURL = response.data.login_in_as_user_url;
+                })
+                .catch(ErrorHandler.push);
+        },
+
+        copyLoginAsUserURLToClipboard() {
+            navigator.clipboard.writeText(this.loginAsUserURL);
+            this.$root.$emit('displayMessage', {
+                text: 'User login URL copied to clipboard!',
+                color: 'success',
+            });
+        },
 
         submitUserDetails() {
             if (!this.$refs.userDetails.validate()) {
