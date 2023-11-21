@@ -22078,6 +22078,9 @@ a:visited{
 .tw-mt-auto{
   margin-top: auto !important;
 }
+.tw-mb-\[18px\]{
+  margin-bottom: 18px !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -22401,6 +22404,9 @@ a:visited{
 }
 .tw-h-screen{
   height: 100vh !important;
+}
+.tw-h-\[195px\]{
+  height: 195px !important;
 }
 .tw-max-h-0{
   max-height: 0px !important;
@@ -22781,6 +22787,9 @@ a:visited{
 .tw-w-screen{
   width: 100vw !important;
 }
+.tw-w-\[205px\]{
+  width: 205px !important;
+}
 .tw-min-w-0{
   min-width: 0px !important;
 }
@@ -22811,6 +22820,9 @@ a:visited{
 .tw-min-w-max{
   min-width: -moz-max-content !important;
   min-width: max-content !important;
+}
+.tw-min-w-\[205px\]{
+  min-width: 205px !important;
 }
 .tw-max-w-3xl{
   max-width: 48rem !important;
@@ -24190,6 +24202,9 @@ a:visited{
 .tw-p-\[32px\]{
   padding: 32px !important;
 }
+.tw-p-8{
+  padding: 2rem !important;
+}
 .\!tw-py-6{
   padding-top: 1.5rem !important;
   padding-bottom: 1.5rem !important;
@@ -24680,6 +24695,15 @@ a:visited{
 .tw-pt-\[80px\]{
   padding-top: 80px !important;
 }
+.tw-pl-16{
+  padding-left: 4rem !important;
+}
+.tw-pr-16{
+  padding-right: 4rem !important;
+}
+.tw-pr-\[10px\]{
+  padding-right: 10px !important;
+}
 .tw-text-left{
   text-align: left !important;
 }
@@ -25158,6 +25182,29 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(250 204 21 / var(--tw-text-opacity)) !important;
 }
+.tw-text-\[\]{
+  color:  !important;
+}
+.tw-text-\[\#0B76DB\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(11 118 219 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#B91C1C\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(185 28 28 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#EAB308\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(234 179 8 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#F06314\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(240 99 20 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#E5E7EB\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(229 231 235 / var(--tw-text-opacity)) !important;
+}
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
           text-decoration-line: underline !important;
@@ -25487,6 +25534,9 @@ a:visited{
 }
 .visited\:tw-text-gray-400:visited{
   color: rgb(156 163 175 ) !important;
+}
+.visited\:tw-text-white:visited{
+  color: rgb(255 255 255 ) !important;
 }
 .checked\:tw-bg-\[\#FFAE00\]:checked{
   --tw-bg-opacity: 1 !important;
@@ -27083,6 +27133,12 @@ a:visited{
   .md\:tw-border{
     border-width: 1px !important;
   }
+  .md\:tw-border-b-0{
+    border-bottom-width: 0px !important;
+  }
+  .md\:tw-border-r{
+    border-right-width: 1px !important;
+  }
   .md\:tw-border-none{
     border-style: none !important;
   }
@@ -27290,6 +27346,9 @@ a:visited{
   .md\:tw-text-xl{
     font-size: 1.25rem !important;
     line-height: 1.75rem !important;
+  }
+  .md\:tw-text-\[20px\]{
+    font-size: 20px !important;
   }
   .md\:tw-leading-\[40px\]{
     line-height: 40px !important;
@@ -27512,6 +27571,9 @@ a:visited{
   }
   .lg\:tw-h-full{
     height: 100% !important;
+  }
+  .lg\:tw-h-auto{
+    height: auto !important;
   }
   .lg\:tw-max-h-\[350px\]{
     max-height: 350px !important;
@@ -27910,6 +27972,9 @@ a:visited{
     font-size: 1rem !important;
     line-height: 1.5rem !important;
   }
+  .lg\:tw-font-normal{
+    font-weight: 400 !important;
+  }
   .lg\:tw-leading-none{
     line-height: 1 !important;
   }
@@ -28282,6 +28347,9 @@ a:visited{
   }
   .\34xl\:tw-grid-cols-6{
     grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  }
+  .\34xl\:tw-grid-cols-8{
+    grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
   }
 }
 @media (hover: hover){
