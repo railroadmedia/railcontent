@@ -197,10 +197,10 @@ class ContentQueryBuilder extends QueryBuilder
 //            We make sure not to show the 'scheduled' content that is already in the past
 //              SQL condition:  "where ((status in (published)) or (status = 'scheduled' and published_on > $now))"
             $this->where(function (Builder $builder) {
-                return $builder->whereIn('status', array_diff(ContentRepository::$availableContentStatues, [ContentService::STATUS_SCHEDULED]))
+                return $builder->whereIn(ConfigService::$tableContent.'.status', array_diff(ContentRepository::$availableContentStatues, [ContentService::STATUS_SCHEDULED]))
                     ->orWhere(function (Builder $builder) {
-                        return $builder->where('status', 'scheduled')
-                            ->where('published_on', '>', Carbon::now()->toDateTimeString());
+                        return $builder->where(ConfigService::$tableContent.'.status', '=','scheduled')
+                            ->where(ConfigService::$tableContent.'.published_on', '>', Carbon::now()->toDateTimeString());
                     });
             });
         }
