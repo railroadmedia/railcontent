@@ -668,7 +668,7 @@
             <p class="columns">
                 <strong>Normally, Nate Savage charges $50 for a 30-minute private lesson</strong> and is extremely selective on which students he’ll teach. With Acoustic Guitar Made Easy, Nate is your personal guitar coach for 26 weeks, giving you a new exclusive video lesson each week and a clear path to improve your skills — <u>all for just ${{ number_format((floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price) / 26), 2, '.', ',') }} per week.</u>
                 <br><br>
-                You can choose a one-time payment, or two or five-time payment plans — and the entire Acoustic Guitar Made Easy course is <u>yours for life</u> with no recurring subscription or additional fees.
+                The entire Acoustic Guitar Made Easy course is <u>yours for life</u> with no recurring subscription or additional fees.
             </p>
         </div>
     </section>

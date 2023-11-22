@@ -62,6 +62,14 @@ class SalesController extends BaseController
     {
         return view('guitareo.shop.pages.lifetime-bundle', [ 'theme' => 'guitareo' ]);
     }
+    public function salesLifetime()
+    {
+        return view('guitareo.sales.pages.lifetime', ['theme' => 'guitareo']);
+    }
+    public function lifetimeDiscount()
+    {
+        return view('guitareo.sales.pages.lifetime', ['theme' => 'guitareo', 'upgradeVersion' => true]);
+    }
 
 
     public function welcome()

@@ -223,7 +223,7 @@
     @php
         $testimonials = $guitareo['testimonials'];
     @endphp
-    
+
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by guitarists<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
@@ -290,7 +290,7 @@
         'header' => 'Online guitar lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 3 bonuses<br class="inline sm:hidden"> worth $333',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&redirect=/order&locked=true&promo-code=special',
+        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702',
         'altButtonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true',
         ])
     @else
