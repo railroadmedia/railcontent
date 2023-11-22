@@ -148,7 +148,7 @@ class SalesController extends BaseController
 
     public function beautifulharmonies()
     {
-        return view('singeo.products.beautiful-harmonies');
+        return view('singeo.products.beautiful-harmonies', [ 'theme' => 'singeo' ]);
     }
 
     public function lifetimeMasterclass()
