@@ -18,53 +18,11 @@
         <div class="tw-max-w-4xl tw-mx-auto tw-px-4">
             <h3 class="tw-text-center tw-mb-10 dark:tw-text-white"><strong>Frequently Asked Questions</strong></h3>
             <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 tw-gap-3 sm:tw-gap-4">
-                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-regular fa-comments tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
-                    <p class="tw-font-bold tw-mb-1 tw-text-sm">Instructor Feedback</p>
-                    <p class="tw-text-sm">How can I get personalized feedback from my instructor?</p>
-                    <a href="#" data-beacon-article-sidebar="634b281d4d805871ceaa3acb" class="tw-absolute tw-inset-0" aria-label="Instructor Feedback"></a>
-                </div>
-                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-sharp fa-regular fa-truck-fast tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
-                    <p class="tw-font-bold tw-mb-1 tw-text-sm">Shipment Tracking</p>
-                    <p class="tw-text-sm">I ordered a product from you, how can I track my shipment?</p>
-                    <a href="#" data-beacon-article-sidebar="634b2901927a2c1634dfac43" class="tw-absolute tw-inset-0" aria-label="Shipment Tracking"></a>
-                </div>
-                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-sharp fa-regular fa-download tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
-                    <p class="tw-font-bold tw-mb-1 tw-text-sm">Download Lessons</p>
-                    <p class="tw-text-sm">Can I download lessons and replay them later without using data?</p>
-                    <a href="#" data-beacon-article-sidebar="636ed0fe190e8f786b443e0f" class="tw-absolute tw-inset-0" aria-label="Download Lessons"></a>
-                </div>
-                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-regular fa-file-music tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
-                    <p class="tw-font-bold tw-mb-1 tw-text-sm">Downloading Sheet Music</p>
-                    <p class="tw-text-sm">How do I download or print sheet music and chord charts?</p>
-                    <a href="#" data-beacon-article-sidebar="634b2887de258f5018eb4af3" class="tw-absolute tw-inset-0" aria-label="Downloading Sheet Music"></a>
-                </div>
-                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-solid fa-question tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
-                    <p class="tw-font-bold tw-mb-1 tw-text-sm">Determine skill level</p>
-                    <p class="tw-text-sm">How do I know if I’m a beginner, intermediate, or advanced?</p>
-                    <a href="#" data-beacon-article-sidebar="637fdfec9d8f1448fb81874e" class="tw-absolute tw-inset-0" aria-label="Determine skill level"></a>
-                </div>
-                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-regular fa-file-invoice-dollar tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
-                    <p class="tw-font-bold tw-mb-1 tw-text-sm">Billing Information</p>
-                    <p class="tw-text-sm">Where can I find my billing history and invoices?</p>
-                    <a href="#" data-beacon-article-sidebar="6467ba0017da4d6b8d6f0963" class="tw-absolute tw-inset-0" aria-label="Billing Information"></a>
-                </div>
-                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-light fa-circle-xmark tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
-                    <p class="tw-font-bold tw-mb-1 tw-text-sm">End membership</p>
-                    <p class="tw-text-sm">How can I make sure my subscription doesn't renew?</p>
-                    <a href="#" data-beacon-article-sidebar="6080966ae0324b5fdfd0d608" class="tw-absolute tw-inset-0" aria-label="End membership"></a>
-                </div>
-                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-regular fa-circle-dollar tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
-                    <p class="tw-font-bold tw-mb-1 tw-text-sm">Request a Refund</p>
-                    <p class="tw-text-sm">I purchased less than 90 days ago and I would like a refund.</p>
-                    <a href="#" data-beacon-article-sidebar="6467b2256413a34741154344" class="tw-absolute tw-inset-0" aria-label="Request a Refund"></a>
+                <div v-for="question in questions" class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <i :class="`tw-text-3xl md:tw-text-4xl tw-mb-3 ${question.icon}`"></i>
+                    <p class="tw-font-bold tw-mb-1 tw-text-sm">{{ question.title }}</p>
+                    <p class="tw-text-sm">{{ question.question }}</p>
+                    <a href="#" :data-beacon-article-sidebar="question.beacon" class="tw-absolute tw-inset-0" :aria-label="question.title"></a>
                 </div>
             </div>
         </div>
@@ -172,4 +130,55 @@ const handleSearch = () => {
         window.location = `https://help.musora.com/search?query=${keyword}`;
     }
 }
+
+const questions = [
+    {
+        title: 'Instructor Feedback',
+        question: 'How can I get personalized feedback from my instructor?',
+        beacon: '634b281d4d805871ceaa3acb',
+        icon: 'fa-regular fa-comments',
+    },
+    {
+        title: 'Shipment Tracking',
+        question: 'I ordered a product from you, how can I track my shipment?',
+        beacon: '634b2901927a2c1634dfac43',
+        icon: 'fa-sharp fa-regular fa-truck-fast',
+    },
+    {
+        title: 'Download Lessons',
+        question: 'How do I download or print sheet music and chord charts?',
+        beacon: '636ed0fe190e8f786b443e0f',
+        icon: 'fa-sharp fa-regular fa-download',
+    },
+    {
+        title: 'Downloading Sheet Music',
+        question: 'How do I download or print sheet music and chord charts?',
+        beacon: '634b2887de258f5018eb4af3',
+        icon: 'fa-regular fa-file-music',
+    },
+    {
+        title: 'Determine skill level',
+        question: 'How do I know if I’m a beginner, intermediate, or advanced?',
+        beacon: '637fdfec9d8f1448fb81874e',
+        icon: 'fa-solid fa-question',
+    },
+    {
+        title: 'Billing Information',
+        question: 'Where can I find my billing history and invoices?',
+        beacon: '6467ba0017da4d6b8d6f0963',
+        icon: 'fa-regular fa-file-invoice-dollar',
+    },
+    {
+        title: 'End membership',
+        question: 'How can I make sure my subscription doesn\'t renew?',
+        beacon: '6080966ae0324b5fdfd0d608',
+        icon: 'fa-light fa-circle-xmark',
+    },
+    {
+        title: 'Request a Refund',
+        question: 'I purchased less than 90 days ago and I would like a refund.',
+        beacon: '6467b2256413a34741154344',
+        icon: 'fa-regular fa-circle-dollar',
+    },
+];
 </script>
