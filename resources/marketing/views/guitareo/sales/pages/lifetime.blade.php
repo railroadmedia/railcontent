@@ -3,7 +3,7 @@
 @section('global-head')
     <title>Lifetime Membership To Guitareo | Guitareo</title>
     <meta property="og:title" content="Lifetime Membership To Guitareo">
-    <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
+    <meta property="og:url" content="https://www.guitareo.com/{{ Request::path() }}">
 
     <meta name="description" content="Two, maybe three times per year you get the chance to become a Guitareo Lifetime Member.">
     <meta property="og:description" content="Two, maybe three times per year you get the chance to become a Guitareo Lifetime Member.">
@@ -119,7 +119,7 @@
     <section class="text-center px-3 sm:px-5 py-10 md:py-14 lg:py-16 px-2 md:px-4 relative overflow-hidden">
         <div class="container mx-auto max-w-4xl z-10 relative">
             <h2 class="leading-tight mb-2"><strong>The Lifetime Advantage</strong></h2>
-            <p class="leading-tight"><em>Pay once. Play forever. Get unlimited piano lessons for <br class="hidden sm:inline lg:hidden"> the price of 5 years of access to Guitareo ($1200 total).</em></p>
+            <p class="leading-tight"><em>Pay once. Play forever. Get unlimited guitar lessons for <br class="hidden sm:inline lg:hidden"> the price of 5 years of access to Guitareo ($1200 total).</em></p>
             <img class="hidden sm:inline-block w-full max-w-3xl mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/promos/november/bundles/timeline.png">
             <img class="sm:hidden inline-block w-full max-w-3xl mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/guitareo/promos/november/bundles/timeline-m.png">
             <div class="flex flex-wrap sm:flex-nowrap items-start lg:items-center justify-center">
@@ -341,10 +341,6 @@
 
     @include('guitareo.sales.partials._footer')
 
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2023-03-31 23:59:59',
-        'promoVersion' => false
-    ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     {{--    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

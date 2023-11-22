@@ -298,10 +298,10 @@
         @php
             $bonuses = [
                 [
-                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/p4.jpg',
-                    'title' => 'Practice Pad',
-                    'description' => 'The most versatile practice pad in the world, featuring four playing surfaces on three different levels for simulating movement around the kit.',
-                    'price' => floatval($productPrices['practicepad']->price),
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/pad.jpg',
+                    'title' => 'QuietPad',
+                    'description' => 'Practice anywhere with two full-size playing surfaces.',
+                    'price' => floatval($productPrices['quietpad']->price),
                     'shipping' => true,
                 ],
                 [
@@ -365,9 +365,10 @@
         'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drumeo-annual-2w-card.png',
         'bonusCount' => '10',
         'bonusSum' => '1233.94',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
         ])
+{{--        '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',--}}
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-blue.png',

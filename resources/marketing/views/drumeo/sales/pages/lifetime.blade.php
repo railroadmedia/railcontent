@@ -213,7 +213,10 @@
                 x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>
 {{--            <p class="mt-5 leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
             <br>
-            <a class="inline-block leading-tight mt-3" href="/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1&products[Drumeo-VaterSticks]=12&promo-code=FREE-W-LIFETIME-849&locked=true"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
+            <a class="inline-block leading-tight mt-3"
+                :class="bonus !== 1 && 'opacity-50'"
+                :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849&locked=true' : '#customize-anchor'"
+                ><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
         </div>
     </section>
     @php

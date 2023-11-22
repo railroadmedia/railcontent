@@ -204,7 +204,7 @@
                     'price' => floatval($productPrices['easy-chords']->price),
                 ],
             [
-                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d444aa7c-3c5f-4a3e-8d8b-36a98ac99da4-30DBluesPiano_cart.jpg',
+                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/46f26b8d-f53a-44c6-8eb2-d9a700801310-30d-blues.png',
                 'description' => 'Learn Blues Piano in 30 days with daily 10-minute lessons where you play along with a teacher. This is the new way of learning the blues.',
                 'price' => floatval($productPrices['30-day-blues-piano']->price),
             ],
@@ -381,10 +381,6 @@
 
     @include('pianote.sales.partials._footer')
 
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2023-03-31 23:59:59',
-        'promoVersion' => false
-    ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     {{--    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

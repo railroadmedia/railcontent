@@ -28,7 +28,7 @@
 
 @section('body')
     @include('_partials.components.shop.promo-top-banner',[
-        'text' => '<span class="text-promo">Save up to 80%</span> on singing lessons,<br class="sm:hidden"> merch, & more.',
+        'text' => '<span class="text-promo">Save up to 67%</span> on singing lessons,<br class="sm:hidden"> merch, & more.',
     ])
 
     @if(Session::has('addedProducts'))
@@ -76,7 +76,7 @@
                 ],
                 [
                     'slug' => '/lifetime',
-                    'desc' => 'Unlimited guitar lessons<br> for life + more',
+                    'desc' => 'Unlimited singing lessons<br> for life + more',
                     'visible' => 1,
                     'discountedPrice' => 1200,
                     'specialW2' => true,
