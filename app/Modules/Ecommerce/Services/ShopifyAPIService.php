@@ -118,6 +118,7 @@ class ShopifyAPIService
                                         title
                                         productType
                                         description
+                                        vendor
                                     }
                                 }
                             }

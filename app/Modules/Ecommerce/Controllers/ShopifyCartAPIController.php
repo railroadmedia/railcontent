@@ -371,6 +371,39 @@ class ShopifyCartAPIController extends Controller
         return redirect()->away($checkoutURL);
     }
 
+    public function redirectToCurrentCartShopPage(Request $request)
+    {
+        $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
+
+        if (!empty($request->get('shopify-cart-id'))) {
+            $existingShopifyCartId = $request->get('shopify-cart-id');
+            Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $existingShopifyCartId);
+        }
+
+        $cartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
+
+        if (empty($cartData)) {
+            return redirect()->away(get_musora_brand_base_url());
+        }
+
+        $firstProductVendor = $cartData['lines']['edges'][0]['node']['merchandise']['product']['vendor'] ?? null;
+        $firstProductVendor = strtolower($firstProductVendor);
+
+        if ($firstProductVendor == 'drumeo') {
+            return redirect()->away(get_legacy_brand_base_url($firstProductVendor) . '/drumshop?open-cart=1');
+        } elseif ($firstProductVendor == 'pianote') {
+            return redirect()->away(get_legacy_brand_base_url($firstProductVendor) . '/shop?open-cart=1');
+        } elseif ($firstProductVendor == 'guitareo') {
+            return redirect()->away(get_legacy_brand_base_url($firstProductVendor) . '/shop?open-cart=1');
+        } elseif ($firstProductVendor == 'singeo') {
+            return redirect()->away(get_legacy_brand_base_url($firstProductVendor) . '/shop?open-cart=1');
+        } elseif ($firstProductVendor == 'musora') {
+            return redirect()->away(get_musora_brand_base_url());
+        }
+
+        return redirect()->away(get_musora_brand_base_url());
+    }
+
     public function serveShopifyCartCustomizationScriptTagFile(Request $request)
     {
         $response = Response::make(
