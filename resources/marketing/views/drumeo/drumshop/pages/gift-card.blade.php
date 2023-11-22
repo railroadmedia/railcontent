@@ -21,7 +21,7 @@
 @section('top')
     @include('_partials.components.shop.slider', [
         "headerText" => "<strong>The perfect gift for ANY drummer!</strong>",
-        "videoSrc" => "//player.vimeo.com/video/495414119",
+        "videoSrc" => "//player.vimeo.com/video/785314424",
         "videoThumb" => "https://s3.amazonaws.com/drumeo-packs/Merch/pass.jpg",
     ])
 

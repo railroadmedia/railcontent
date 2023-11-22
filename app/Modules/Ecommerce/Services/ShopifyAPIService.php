@@ -91,6 +91,18 @@ class ShopifyAPIService
                                     title
                                     weight
                                     weightUnit
+                                    digitalAccessTimeType: metafield(
+                                        namespace: "products"
+                                        key: "digital_access_time_type"
+                                    ) {
+                                        value
+                                    }
+                                    digitalAccessType: metafield(
+                                        namespace: "products"
+                                        key: "digital_access_type"
+                                    ) {
+                                        value
+                                    }
                                     image {
                                         altText
                                         height
@@ -106,6 +118,7 @@ class ShopifyAPIService
                                         title
                                         productType
                                         description
+                                        vendor
                                     }
                                 }
                             }
@@ -137,15 +150,15 @@ class ShopifyAPIService
         // see: https://admin.shopify.com/store/musora-sandbox-staging/settings/apps/development/62166990849/overview
         // currently using a private app created from the shopify store admin area, not a partner app (yet!)
         Context::initialize(
-            apiKey: config('shopify.apiKey'),
-            apiSecretKey: config('shopify.apiSecretKey'),
-            scopes: config('shopify.scopes'),
-            hostName: config('shopify.hostName'),
+            apiKey: config('shopify.storefront.api_key'),
+            apiSecretKey: config('shopify.storefront.api_secret_key'),
+            scopes: config('shopify.storefront.scopes'),
+            hostName: config('shopify.storefront.host_name'),
             sessionStorage: $this->sessionService,
-            apiVersion: config('shopify.apiVersion'),
+            apiVersion: config('shopify.storefront.api_version'),
             isEmbeddedApp: true,
             isPrivateApp: true,
-            privateAppStorefrontAccessToken: config('shopify.privateAppStorefrontAccessToken'),
+            privateAppStorefrontAccessToken: config('shopify.storefront.access_token'),
         );
 
         $this->storefrontClient = new Storefront(
@@ -153,11 +166,11 @@ class ShopifyAPIService
             Context::$PRIVATE_APP_STOREFRONT_ACCESS_TOKEN
         );
 
-//        dd(config('shopify.privateAppAdminAccessToken'));
+//        dd(config('shopify.storefront.admin_access_token'));
 
         $this->adminClient = new Graphql(
             Context::$HOST_NAME,
-            config('shopify.privateAppAdminAccessToken')
+            config('shopify.storefront.admin_access_token')
         );
     }
 
@@ -675,7 +688,7 @@ class ShopifyAPIService
     {
         $customerDataHash = ['email' => $userEmail];
 
-        $keyMaterial = hash("sha256", config('shopify.multipassSecretKey'), true);
+        $keyMaterial = hash("sha256", config('shopify.multipass.secret_key'), true);
         $encryptionKey = substr($keyMaterial, 0, 16);
         $signatureKey = substr($keyMaterial, 16, 16);
 
@@ -841,41 +854,56 @@ class ShopifyAPIService
         }
 
         $currentDiscountCodes = collect($cartData['discountCodes'] ?? [])->pluck('code')->toArray();
+
         $applyAnnualMembershipDiscountCode = false;
-        $freeWithAnnualDiscountCode = config('shopify.freeWithAnnualDiscountCode');
+        $freeWithAnnualDiscountCode = config('shopify.discount_codes.free_with_annual');
+
+        $applyLifetimeMembershipDiscountCode = false;
+        $freeWithLifetimeDiscountCode = config('shopify.discount_codes.free_with_lifetime');
 
         foreach ($cartData['lines']['edges'] as $lineItemNode) {
             $lineItemData = $lineItemNode['node'];
             $merchandise = $lineItemData['merchandise'];
             $product = $lineItemData['merchandise']['product'];
 
-            if (strtolower($product['productType']) == 'digital subscription' &&
+            if (strtolower($product['productType'] ?? '') === 'digital subscription' &&
                 (float)$lineItemData['cost']['totalAmount']['amount'] > 100) {
                 $applyAnnualMembershipDiscountCode = true;
             }
-        }
 
-        // don't set if there are any quantities more than 1 or total cart items is more than 10;
-        foreach ($cartData['lines']['edges'] as $lineItemNode) {
-            $lineItemData = $lineItemNode['node'];
-            $merchandise = $lineItemData['merchandise'];
-            $product = $lineItemData['merchandise']['product'];
-
-            if ((integer)$lineItemData['quantity'] > 1) {
-                $applyAnnualMembershipDiscountCode = false;
+            if (($merchandise['digitalAccessTimeType']['value'] ?? null) === 'lifetime' &&
+                (($merchandise['digitalAccessType']['value'] ?? null) === 'all content access' ||
+                    ($merchandise['digitalAccessType']['value'] ?? null) === 'basic content access')  &&
+                (float)$lineItemData['cost']['totalAmount']['amount'] > 250) {
+                $applyLifetimeMembershipDiscountCode = true;
             }
         }
 
         // don't set if there are any quantities more than 1 or total cart items is more than 10;
-        if (count($cartData['lines']['edges']) > 10) {
+        if (count($cartData['lines']['edges']) > 20) {
+            $applyAnnualMembershipDiscountCode = false;
+            $applyLifetimeMembershipDiscountCode = false;
+        }
+
+        // never in the same order
+        if ($applyLifetimeMembershipDiscountCode) {
             $applyAnnualMembershipDiscountCode = false;
         }
 
+        // apply code annual
         if ($applyAnnualMembershipDiscountCode) {
-            // apply code
             $currentDiscountCodes[] = $freeWithAnnualDiscountCode;
         } else {
             if (($key = array_search($freeWithAnnualDiscountCode, $currentDiscountCodes)) !== false) {
+                unset($currentDiscountCodes[$key]);
+            }
+        }
+
+        // apply code lifetime
+        if ($applyLifetimeMembershipDiscountCode) {
+            $currentDiscountCodes[] = $freeWithLifetimeDiscountCode;
+        } else {
+            if (($key = array_search($freeWithLifetimeDiscountCode, $currentDiscountCodes)) !== false) {
                 unset($currentDiscountCodes[$key]);
             }
         }

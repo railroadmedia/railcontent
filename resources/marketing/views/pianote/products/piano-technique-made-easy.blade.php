@@ -20,7 +20,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner-no-tw', [
+    @include('pianote._partials._promo-banner', [
         "name" => "Piano Technique Made Easy",
         "fullPrice" => floatval($productPrices['piano-technique-made-easy']->price),
         "price" => floatval($productPrices['piano-technique-made-easy']->discounted_price),

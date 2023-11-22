@@ -46,7 +46,11 @@
                         Instruments <i class="fa-solid fa-caret-down"></i>
                     </span>
                     <a class=" @if(strpos(url()->full(), 'choose-plan')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/choose-plan" >Pricing</a>
-                    <a class=" @if(strpos(url()->full(), 'shop')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/shop" >Shop</a>
+                    @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                        <a style="color: #fe006b;" class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('singeo') }}/shop" ><div class="hidden lg:inline">Black Friday</div> Deals</a>
+                    @else
+                        <a style="color: #fe006b;" class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('singeo') }}/shop" ><div class="hidden lg:inline">Cyber Monday</div> Deals</a>
+                    @endif
                     <a class="" href="{{ get_legacy_brand_base_url('singeo') }}/chorus" >Blog</a>
                 </div>
                 <div
@@ -163,9 +167,9 @@
             "linkUrl" => "/choose-plan",
         ])
         @include('drumeo.sales.partials._nav-link', [
-            "linkName" => "Shop",
-            "linkIcon" => "fas fa-tag",
-            "linkUrl" => '/shop',
+            "linkName" => "Black Friday Deals",
+            "linkIcon" => "fas fa-tag text-promo",
+            "linkUrl" => "/shop",
         ])
         @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Blog",

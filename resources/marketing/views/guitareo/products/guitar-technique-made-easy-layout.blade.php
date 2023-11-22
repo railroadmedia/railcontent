@@ -613,7 +613,7 @@
                 @endif
                  per week.</u>
                 <br><br>
-                    You can choose a one-time payment or a three-payment plan — and the entire Guitar Technique Made Easy course is yours for life with no recurring subscription or additional fees.
+                    The entire Guitar Technique Made Easy course is yours for life with no recurring subscription or additional fees.
             </p>
         </div>
     </section>

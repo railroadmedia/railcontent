@@ -20,7 +20,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner-no-tw', [
+    @include('pianote._partials._promo-banner', [
         "name" => "De-Stupefy Your Left Hand",
         "fullPrice" => floatval($productPrices['destupefy-your-left-hand']->price),
         "price" => floatval($productPrices['destupefy-your-left-hand']->discounted_price),
