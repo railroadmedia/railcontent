@@ -89,7 +89,7 @@
             ];
         @endphp
         @include('_partials.layout.holiday.bundle-tiles', [
-            "header" => 'Save up to 67% with <br class="sm:hidden"> Black Friday Bundles',
+            "header" => 'Save up to 50% with <br class="sm:hidden"> Black Friday Bundles',
         ])
 
         <div id="lessons" class="anchor"></div>
