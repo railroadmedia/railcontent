@@ -76,7 +76,7 @@
                     </h2>
                     <p class="leading-tight text-sm"><em>One time payment or choose a <br class="sm:hidden">
                             payment plan below.</em></p>
-                    <a class="join smaller drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
+                    <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
 {{--                    <p class="mt-4 leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
                 </div>
             </div>
@@ -213,7 +213,7 @@
                 x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>
 {{--            <p class="mt-5 leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
             <br>
-            <a class="inline-block leading-tight mt-3" href="/ecommerce/add-to-cart?products[products[DLM-Lifetime-3-pay]=1]=1&products[musora-access-1-year]=1&products[Drumeo-VaterSticks]=12&locked=true"><em><u>or start a 3 installment payment plan with sticks &raquo;</u></em></a>
+            <a class="inline-block leading-tight mt-3" href="/ecommerce/add-to-cart?products[products[DLM-Lifetime-3-pay]=1]=1&products[musora-access-1-year]=1&products[Drumeo-VaterSticks]=12&locked=true"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
         </div>
     </section>
     @php

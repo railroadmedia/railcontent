@@ -63,7 +63,7 @@
         @php
             $bundles = [
                 [
-                    'slug' => 'https://www.guitareo.com/shop/ultimate-lessons-bundle',
+                    'slug' => 'https://www.singeo.com/shop/ultimate-lessons-bundle',
                     'desc' => 'Singeo Discount<br> + 3 Bonuses',
                     'visible' => 1,
                     'specialW' => true,
@@ -89,7 +89,7 @@
             ];
         @endphp
         @include('_partials.layout.holiday.bundle-tiles', [
-            "header" => 'Save up to 50% with <br class="sm:hidden"> Black Friday Bundles',
+            "header" => 'Save up to 67% with <br class="sm:hidden"> Black Friday Bundles',
         ])
 
         <div id="lessons" class="anchor"></div>

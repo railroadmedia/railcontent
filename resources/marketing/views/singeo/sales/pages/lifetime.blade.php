@@ -131,7 +131,7 @@
                         <li><i class="fas fa-check text-singeo mr-2"></i> Unlimited singing lessons for life</li>
                         <li><i class="fas fa-check text-singeo mr-2"></i> 3 singing bonuses (see below)</li>
                         <li><i class="fas fa-check text-singeo mr-2"></i> Drum, piano, and guitar lessons included</li>
-                        <li><i class="fas fa-check text-singeo mr-2"></i> An option to split payments over 1, 2 or 5 installments</li>
+                        <li><i class="fas fa-check text-singeo mr-2"></i> An option to split payments over 3 installments</li>
                     </ul>
                     <p class="leading-relaxed my-5">
                         We know this invitation isn’t for everyone… but if you see yourself playing & learning to sing for 5 or more years, a Lifetime Membership gives you the best value. Scroll down to see everything included and click the button to explore payment options.
@@ -195,7 +195,7 @@
                         <strong>$1200</strong>
                     @endif
                 </h2>
-                <p class="leading-tight text-sm">One time payment or choose a payment plan below.</p>
+                <p class="leading-tight text-sm">One time payment.</p>
                 <a class="join mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
 {{--                <p class="mt-4 md:mt-5 leading-tight text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
                 <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get 13 free Black Friday bonuses.</strong></h3>
@@ -266,7 +266,7 @@
                 @endforeach
             </div>
             <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a><br>
-            <a class="inline-block leading-tight" href="{{ $buttonLink2 }}"><em><u>or start a 3 installment payment plan &raquo;</u></em></a>
+            <a class="inline-block leading-tight" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
         </div>
     </section>
 
