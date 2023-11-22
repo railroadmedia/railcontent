@@ -8,6 +8,12 @@
 @endsection
 
 @section('layout-body')
+    @include('pianote._partials._promo-banner', [
+                "name" => $product->name,
+                "fullPrice" => $product->price,
+                "price" => $product->discounted_price,
+                "noBreadcrumb" => true
+    ])
     <div class="clearfix container mx-auto max-w-6xl">
         <div class="lg:flex">
             @include('_partials.components.shop.slider',[

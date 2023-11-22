@@ -118,6 +118,12 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
+    @include('drumeo.products.partials.promo-banner', [
+        "name" => "Drumeo StickBag",
+        "fullPrice" => floatval($productPrices['stickbag']->price),
+        "price" => floatval($productPrices['stickbag']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     @include('drumeo.products.partials._stickbag')
 

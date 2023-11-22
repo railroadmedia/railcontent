@@ -96,7 +96,14 @@ class SalesController extends BaseController
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo']);
+        return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
+    }
+    public function homeBF()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true', 'bfVersion' => 'true']);
     }
     public function homeMonth()
     {
@@ -175,12 +182,19 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.pages.upgrade-offer', ['products' => $products]);
     }
-    public function salesUpgradeLifetime()
+    public function salesLifetime()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
         return view('drumeo.sales.pages.lifetime', ['products' => $products, 'theme' => 'drumeo']);
+    }
+    public function lifetimeDiscount()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.pages.lifetime', ['products' => $products, 'theme' => 'drumeo', 'upgradeVersion' => true]);
     }
 
     public function Festival()
@@ -188,7 +202,7 @@ class SalesController extends BaseController
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.products.festival', ['products' => $products]);
+        return view('drumeo.products.festival', ['products' => $products, 'theme' => 'drumeo']);
     }
 
     public function toneControl()
@@ -196,7 +210,7 @@ class SalesController extends BaseController
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.products.tone-control-kit', ['products' => $products]);
+        return view('drumeo.products.tone-control-kit', ['products' => $products, 'theme' => 'drumeo']);
     }
     public function quietKick()
     {
@@ -210,14 +224,7 @@ class SalesController extends BaseController
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.products.eardrums', ['products' => $products]);
-    }
-    public function eardrumsMembers()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.products.eardrums-members', ['products' => $products]);
+        return view('drumeo.products.eardrums', ['products' => $products, 'theme' => 'drumeo']);
     }
     public function thirtyDayDrummer()
     {
@@ -249,23 +256,6 @@ class SalesController extends BaseController
             'hasProduct' => $hasProduct
         ]);
     }
-
-    public function thirtyDayDrummerDeal()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.lead-gen.pages.30-day-drummer-deal', ['products' => $products]);
-    }
-    public function thirtyDayChopsDeal()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.lead-gen.pages.30-day-chops-deal', ['products' => $products, 'theme' => 'drumeo']);
-    }
-
-
 
     /**
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
