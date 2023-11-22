@@ -358,6 +358,7 @@ class CustomerIoSyncEventListener
             $user = $this->userService->getByIdOrNull($userId);
 
             $data = $this->getCustomerIoDataFromOrders(
+                $user,
                 $userAccessPermissionsUpdated->getOrderCollection(),
                 $userAccessPermissionsUpdated->getSubscriptions()
             );
@@ -1423,11 +1424,10 @@ class CustomerIoSyncEventListener
         );
     }
 
-    private function getCustomerIoDataFromOrders(?OrderCollection $orderCollection, $subscriptions): array
+    private function getCustomerIoDataFromOrders(User $user, ?OrderCollection $orderCollection, $subscriptions): array
     {
         $attributes = $this->getOrderAttributes($orderCollection);
-        $attributes = array_merge($attributes, $this->getSubscriptionAttributes($subscriptions));
-        return $attributes;
+        return array_merge($attributes, $this->getSubscriptionAttributes($user, $subscriptions));
     }
 
     public function getOrderAttributes(?OrderCollection $orderCollection): array
@@ -1500,7 +1500,7 @@ class CustomerIoSyncEventListener
         return $attributes;
     }
 
-    private function getSubscriptionAttributes($subscriptions): array
+    private function getSubscriptionAttributes(User $user, $subscriptions): array
     {
         if (!$subscriptions) {
             return [];
@@ -1522,6 +1522,9 @@ class CustomerIoSyncEventListener
             /** @var RechargeSubscription $latest */
             $latest = $brandSubscriptions->last() ?? null;
 
+            if (!$first || $user->hasMobileMembership()) {
+               continue;
+            }
 
             $attributes[$brand . '_membership_status'] = $latest ? $this->getSubscriptionStatus($latest) : "";
             $attributes[$brand . '_membership_subscription_type'] = $latest ?
@@ -1529,8 +1532,8 @@ class CustomerIoSyncEventListener
             $attributes[$brand . '_membership_subscription_renewal-date'] = $latest?->nextChargeScheduledAt->timestamp ?? "";
             $attributes[$brand . '_membership_subscription_cancellation-date'] = $latest?->cancelledAt?->timestamp ?? "";
             $attributes[$brand . '_membership_subscription_cancellation-reason'] = $latest?->cancellationReason ?? "";
-            $attributes[$brand . '_membership_subscription_latest-start-date'] = $latest?->createdAt?->timestamp ?? "";
-            $attributes[$brand . '_membership_subscription_first-start-date'] = $first?->createdAt?->timestamp ?? "";
+            $attributes[$brand . '_membership_subscription_first-start-date'] = Carbon::parse($user->created_at)->timestamp;
+            $attributes[$brand . '_membership_subscription_latest-start-date'] = $latest?->updatedAt?->timestamp ?? "";
             $attributes[$brand . '_membership_subscription_trial-type'] = $latest ? $this->getTrialType($latest) : "";
         }
         return $attributes;
