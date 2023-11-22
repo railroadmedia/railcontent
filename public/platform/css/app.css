@@ -21586,6 +21586,9 @@ a:visited{
 .tw-z-\[99\]{
   z-index: 99 !important;
 }
+.tw-z-\[1000\]{
+  z-index: 1000 !important;
+}
 .tw-order-1{
   order: 1 !important;
 }
