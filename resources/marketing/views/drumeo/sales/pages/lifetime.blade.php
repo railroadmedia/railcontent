@@ -205,18 +205,33 @@
             </h2>
             <p class="leading-tight text-sm"><em>
                     One time payment.</em></p>
-            <a
-                class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
-                style="padding: 20px 10px;"
-                :class="bonus !== 1 && 'sold-out'"
-                :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849&locked=true' : '#customize-anchor'"
-                x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>
-{{--            <p class="mt-5 leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
-            <br>
-            <a class="inline-block leading-tight mt-3"
-                :class="bonus !== 1 && 'opacity-50'"
-                :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849&locked=true' : '#customize-anchor'"
+            @if(!empty($upgradeVersion))
+                <a
+                    class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
+                    style="padding: 20px 10px;"
+                    :class="bonus !== 1 && 'sold-out'"
+                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true' : '#customize-anchor'"
+                    x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>
+                {{--            <p class="mt-5 leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
+                <br>
+                <a class="inline-block leading-tight mt-3"
+                    :class="bonus !== 1 && 'opacity-50'"
+                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true' : '#customize-anchor'"
                 ><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
+            @else
+                <a
+                    class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
+                    style="padding: 20px 10px;"
+                    :class="bonus !== 1 && 'sold-out'"
+                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849&locked=true' : '#customize-anchor'"
+                    x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>
+                {{--            <p class="mt-5 leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
+                <br>
+                <a class="inline-block leading-tight mt-3"
+                    :class="bonus !== 1 && 'opacity-50'"
+                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849&locked=true' : '#customize-anchor'"
+                ><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
+            @endif
         </div>
     </section>
     @php

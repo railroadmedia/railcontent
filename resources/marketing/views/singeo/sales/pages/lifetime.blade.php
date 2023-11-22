@@ -168,8 +168,16 @@
                     'price' => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price),
                 ],
         ];
-        $buttonLink = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
-        $buttonLink2 = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access-3-pay]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
+    @endphp
+
+    @php
+        if(!empty($upgradeVersion)) {
+            $buttonLink = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
+            $buttonLink2 = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access-3-pay]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
+        } else {
+            $buttonLink = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
+            $buttonLink2 = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access-3-pay]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
+        };
     @endphp
 
     <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
