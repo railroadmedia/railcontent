@@ -44,6 +44,9 @@ Route::domain('{singeoDomain}')
     Route::get('/singing-starter-kit-discount', [SalesController::class, 'singingstarterkitdiscount']);
     Route::get('/singing-starter-kit-shyv-discount', [SalesController::class, 'singingstarterkitshyvdiscount']);
     Route::get('/recitals', [SalesController::class, 'recitals']);
+
+    Route::get('/lifetime', [SalesController::class, 'salesLifetime'] );
+    Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount'] );
     Route::get('/lifetime-members-masterclass', [SalesController::class, 'lifetimeMasterclass']);
 
     Route::group(['prefix' => 'beginner-vocal-bootcamp'],

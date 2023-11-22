@@ -53,12 +53,6 @@
     </style>
 @stop
 
-@section('body-data')
-    x-data ='{
-        trailer : false,
-    }'
-@endsection
-
 @section('global-body')
         @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
@@ -69,7 +63,7 @@
                 <h4 class="leading-tight">(plus your choice of sticks, in-ears, or a stick bag!)</h4>
                 <div class="w-full mx-auto my-4 sm:my-8 " style="max-width:920px;">
                     <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                        <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/774477396" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>
+                        <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/885338480" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>
                     </div>
                 </div>
                 <div class="px-3 mx-auto w-full max-w-2xl">
@@ -279,12 +273,6 @@
     </section>
 
     @include("drumeo.sales.partials._footer")
-
-    @include('_partials.components.video-modal',[
-        'name' => 'trailer',
-        'video' => '803596141',
-        'vimeo' => true,
-    ])
 
     @include('_partials.components.countdown',[
         'countdownDate' => '2023-04-01 10:00:00',

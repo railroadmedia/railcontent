@@ -27,7 +27,8 @@ Route::domain('{guitareoDomain}')
     Route::get('/coaches', [SalesController::class, 'coaches']);
     Route::get('/method', [SalesController::class, 'method']);
 
-    Route::get('/lifetime', [SalesController::class, 'lifetime']);
+    Route::get('/lifetime', [SalesController::class, 'salesLifetime'] );
+    Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount'] );
     Route::get('/survival-kit-instructions', [SalesController::class, 'survivalkitinstructions']);
 
     Route::get('/welcome', [SalesController::class, 'welcome']);

@@ -1,18 +1,18 @@
-@extends('pianote._partials.global-layout')
+@extends('guitareo._partials.global-layout')
 
 @section('global-head')
-    <title>Lifetime Membership To Pianote | Pianote</title>
-    <meta property="og:title" content="Lifetime Membership To Pianote">
+    <title>Lifetime Membership To Guitareo | Guitareo</title>
+    <meta property="og:title" content="Lifetime Membership To Guitareo">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
-    <meta name="description" content="Two, maybe three times per year you get the chance to become a Pianote Lifetime Member.">
-    <meta property="og:description" content="Two, maybe three times per year you get the chance to become a Pianote Lifetime Member.">
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/lifetime-fb-share-image-1.jpg" style="display: none;">
+    <meta name="description" content="Two, maybe three times per year you get the chance to become a Guitareo Lifetime Member.">
+    <meta property="og:description" content="Two, maybe three times per year you get the chance to become a Guitareo Lifetime Member.">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/guitareo/promos/november/bundles/guitareo-lt-share-image.jpg" style="display: none;">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-guitareo.css') }}">
     <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
     <style>
         .lazyload {
@@ -90,15 +90,15 @@
 @stop
 
 @section('global-body')
-    @include('pianote.sales.partials._nav', [
+    @include('guitareo.sales.partials._nav', [
         "cartVersion" => true
     ])
-    <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #AF1F2D 50%, #180104);">
+    <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #077061 50%, #011815);">
         <div class="container mx-auto">
-            <h1 class="leading-none"><strong>Get piano lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
+            <h1 class="leading-none"><strong>Get guitar lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
             <div class="w-full mx-auto my-4 sm:my-8 " style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/885340200" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>
+                    <img class="absolute inset-0 object-cover" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/promos/november/bundles/guitareo-lifetime-thumb2.jpg">
                 </div>
             </div>
             <div class="px-3 mx-auto w-full max-w-2xl">
@@ -119,33 +119,27 @@
     <section class="text-center px-3 sm:px-5 py-10 md:py-14 lg:py-16 px-2 md:px-4 relative overflow-hidden">
         <div class="container mx-auto max-w-4xl z-10 relative">
             <h2 class="leading-tight mb-2"><strong>The Lifetime Advantage</strong></h2>
-            <p class="leading-tight"><em>Pay once. Play forever. Get unlimited piano lessons for <br class="hidden sm:inline lg:hidden"> the price of 5 years of access to Pianote ($1200 total).</em></p>
-            <img class="hidden sm:inline-block w-full max-w-3xl mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/november/bundles/timeline2.png">
-            <img class="sm:hidden inline-block w-full max-w-3xl mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/november/bundles/timeline-m2.png">
+            <p class="leading-tight"><em>Pay once. Play forever. Get unlimited piano lessons for <br class="hidden sm:inline lg:hidden"> the price of 5 years of access to Guitareo ($1200 total).</em></p>
+            <img class="hidden sm:inline-block w-full max-w-3xl mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/promos/november/bundles/timeline.png">
+            <img class="sm:hidden inline-block w-full max-w-3xl mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/guitareo/promos/november/bundles/timeline-m.png">
             <div class="flex flex-wrap sm:flex-nowrap items-start lg:items-center justify-center">
                 <div class="order-1 sm:order-0 text-left sm:pr-5 lg:pr-7">
                     <p class="leading-relaxed my-5">
-                        You’re a pianist. It’s who you are.
-                        <br><br>
-                        And for the cost of just 5 years of lessons with Pianote, you’ll get:
+                        For the price of 5 years Guitareo access, you’ll get:
                     </p>
                     <ul class="leading-tight">
-                        <li><i class="fas fa-check text-pianote mr-2"></i> Unlimited piano lessons for life</li>
-                        <li><i class="fas fa-check text-pianote mr-2"></i> 13 Bonuses worth $971 (see below)</li>
-                        <li><i class="fas fa-check text-pianote mr-2"></i> Singing, Guitar, and Drum lessons</li>
-                        <li><i class="fas fa-check text-pianote mr-2"></i> Split payments over 1, 2, or 5 installments</li>
+                        <li><i class="fas fa-check text-guitareo mr-2"></i> Unlimited guitar lessons for life</li>
+                        <li><i class="fas fa-check text-guitareo mr-2"></i> 7 guitar bonuses (see below)</li>
+                        <li><i class="fas fa-check text-guitareo mr-2"></i> Drum, piano, and singing lessons included</li>
+                        <li><i class="fas fa-check text-guitareo mr-2"></i> An option to split payments over 1, 2 or 5 installments</li>
                     </ul>
                     <p class="leading-relaxed my-5">
-                        Playing the piano makes your life better. It’s proven to improve your mood, memory, and cognitive function. This isn’t just a hobby -- it’s a lifestyle.
-                        <br><br>
-                        And right now you can lock in piano lessons for LIFE with Pianote.
-                        <br><br>
-                        So if you know the piano will be your lifelong companion, scroll down and see why joining Pianote for life makes so much sense.
+                        We know this invitation isn’t for everyone… but if you see yourself playing & learning the guitar for 5 or more years, a Lifetime Membership gives you the best value. Scroll down to see everything included and click the button to explore payment options.
                     </p>
                 </div>
                 <img
                     class="mb-4 sm:mb-0 order-0 sm:order-1 h-56 lg:h-72 rounded-xl transition-opacity opacity-0"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/november/bundles/lifetime-bundle-spread.png"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/guitareo/promos/november/bundles/guitareo-lifetime-collage.png"
                     alt="Anika"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -158,82 +152,48 @@
     @php
         $bonuses = [
             [
-                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/b15d76f7-b3c5-4dcd-94c3-449cd60ed88e-metronome-cart.jpg',
-                'description' => 'Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner.',
-                'price' => floatval($productPrices['taktell-piccolo-metronome']->price),
-                'shipping' => true,
-            ],
-            [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
-                'description' => 'Your encyclopedia of piano chords & scales.',
-                'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
-                'shipping' => true,
-            ],
-            [
-                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/5afe20b9-5f1c-4886-b932-9ee93ffc67f4-christmas-songbook-shop.jpg',
-                'title' => 'Christmas Songbook',
-                'description' => '14 beautiful Christmas Carols hand-picked and arranged for solo piano.',
-                'price' => 49,
-                'shipping' => true,
-            ],
-            [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/christmas-songbook-card.jpg',
-                'description' => 'Play Your Favorite Christmas Songs on the Piano.',
-                'price' => floatval($productPrices['christmas-song-book-digital']->price),
-            ],
-            [
-                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/5307c3c2-d687-44d9-8da5-e8be784f8c86-classical-piano-pieces-shop-card.jpg',
-                'description' => 'Play Your Favorite Christmas Songs on the Piano.',
-                'price' => 49,
-                'shipping' => true,
-            ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-card.jpg',
-                    'description' => 'Decorate your home and improve your musical knowledge with this set of 6 music theory posters.',
-                    'price' => floatval($productPrices['music-theory-posters']->price),
+                'price' => floatval($productPrices['guitarists-survival-kit']->price),
+                'description' => "Get the gear essentials to start sounding better on the guitar.",
+                'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/november/survival-kit-shop.jpg',
                     'shipping' => true,
-                ],
-                [
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
-                    'description' => 'Learn the piano. Play your favorite songs. Start sounding beautiful.',
-                    'price' => floatval($productPrices['new-piano-players-start-here']->price),
-                ],
-                [
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
-                    'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. ',
-                    'price' => floatval($productPrices['easy-chords']->price),
-                ],
-            [
-                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d444aa7c-3c5f-4a3e-8d8b-36a98ac99da4-30DBluesPiano_cart.jpg',
-                'description' => 'Learn Blues Piano in 30 days with daily 10-minute lessons where you play along with a teacher. This is the new way of learning the blues.',
-                'price' => floatval($productPrices['30-day-blues-piano']->price),
             ],
             [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
-                'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
-                'price' => floatval($productPrices['piano-riffs-and-fills']->price),
+                'price' => floatval($productPrices['chords-scales-poster']->price),
+                'description' => "When you need an instant refresher on a chord in a song or want to improvise with your own solo or chord progression, this poster has you covered.",
+                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Guitareo/Thumbnails/5bd94363-e9f4-46c3-a602-d8c7c39bbeea-f2efb356-6d7e-451b-a087-e90c06cefa40-cart-image.jpg',
+                    'shipping' => true,
             ],
             [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/power_of_chords_card.jpg',
-                'description' => 'Play the music you love using the power of chords.',
-                'price' => floatval($productPrices['the-power-of-chords']->price),
+                'price' => floatval($productPrices['AGME-JAN-2019-SEMESTER']->price),
+                'description' => "Master the five pillars of the acoustic guitar and build a rock-solid foundation to play the songs you love in this organized 26-week course. You'll have fun playing the guitar by applying everything you learn to real music.",
+                'image' => 'https://d122ay5chh2hr5.cloudfront.net/order-form/acoustic-guitar-made-easy.png',
             ],
             [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
-                'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
-                'price' => floatval($productPrices['piano-technique-made-easy']->price),
+                'price' => floatval($productPrices['GTME-OCT-2018-SEMESTER']->price),
+                'description' => 'Take a crystal-clear path to gain total guitar confidence in playing the music you love. This 26-week plan provides a complete foundation for you to achieve guitar techniques, giving you the freedom to explore the guitar neck and improvise on the spot.',
+                'image' => 'https://d122ay5chh2hr5.cloudfront.net/order-form/guitar-technique-made-easy.png',
             ],
             [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/faster-fingers.jpg',
-                'description' => 'Boost your speed and confidence with this guided practice course.',
-                'price' => floatval($productPrices['faster-fingers']->price),
+                'price' => floatval($productPrices['guitar-quest']->price),
+                'description' => 'Go on a guitar-playing mission to complete nine musical projects with YouTuber Rob Scallon. Each level builds on expanding your creativity and skills on the guitar — such as shooting a music video, making a commercial jingle, and writing your own song.',
+                'image' => 'https://d1923uyy6spedc.cloudfront.net/398-product-thumb--1609436919.jpg',
+            ],
+            [
+                'price' => floatval($productPrices['GUITAR-SYSTEM']->price),
+                'description' => "Transform your guitar playing with the ultimate encyclopedia of guitar lessons. Inside, you'll find guided lessons on anything you want to learn on the guitar — such as the fundamentals, gear and tone, playing styles for genres, and more.",
+                'image' => 'https://d122ay5chh2hr5.cloudfront.net/order-form/guitar-system.png',
+            ],
+            [
+                'price' => floatval($productPrices['rhythm-and-groove']->price),
+                'description' => "Start grooving to rhythms on the guitar that you can throw into any song. Your teacher Sami Ghawi will show you how to change the feel of your music and get an audience moving to the beat.",
+                'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/rhythm_groove_cart.jpg',
             ],
         ];
-        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[musora-access-1-year]=1&products[taktell-piccolo-metronome]=1&products[piano-chords-and-scales-guide]=1&products[christmas-songbook]=1&products[christmas-song-book-digital]=1&products[classical-piano-pieces]=1&products[music-theory-posters]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true';
+        $buttonLink = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1';
     @endphp
 
     <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
-        style="background:linear-gradient(to bottom, #AF1F2D, #180104);"
+        style="background:linear-gradient(to bottom, #077061, #011815);"
     >
         <div class="container mx-auto relative z-50 max-w-4xl">
             <h3 class="leading-tight mb-5 md:mb-7 lg:mb-10" style="line-height: 1.4em;"><strong>Become a Lifetime Member today and get:</strong></h3>
@@ -242,7 +202,7 @@
                     <div class=" inline-block relative w-full group" style="padding-bottom: 56%;perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div class=" {{--border-2 border-musora--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <div class="h-full w-full bg-center bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/pianote-lifetime.png');"></div>
+                                <div class="h-full w-full bg-center bg-cover" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/guitareo/promos/november/bundles/guitareo-lifetime-card.jpg');"></div>
                             </div>
                         </div>
                     </div>
@@ -263,7 +223,7 @@
             <div style="font-size:0px">
                 @foreach($bonuses as $bonus)
                     <div
-                        class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 w-1/2 md:w-1/4 lg:w-1/5"
+                        class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 w-1/2 md:w-1/4"
                         x-data="{
                         flipped: false,
                     }"
@@ -333,10 +293,10 @@
         $faqs = [
             [
                 "title" => "How long does my lifetime membership last?",
-                "desc" => 'Simply, for life! Either yours or ours. Your Lifetime Membership is valid as long as Pianote (Musora) remains in service and you stay alive.',
+                "desc" => 'Simply, for life! Either yours or ours. Your Lifetime Membership is valid as long as Guitareo (Musora) remains in service and you stay alive.',
             ],
             [
-                "title" => "What happens if Pianote or Musora’s service ends?",
+                "title" => "What happens if Guitareo or Musora’s service ends?",
                 "desc" => 'We’ll make every effort to provide Lifetime Members with all the original media content we have created available for download. That way, you can continue to enjoy everything we’ve done.<br><br>This will cover all available Musora original content (our entire curriculum and courses) but will not include and 3rd party content that we do not own rights to.',
             ],
             [
@@ -359,8 +319,8 @@
             @endforeach
         </div>
     </section>
-    <section class="content-section text-center" style="background: #040c1b;">
-        <div class="container mx-auto relative z-50 max-w-md">
+    <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #00101d;">
+        <div class="container mx-auto relative z-50">
             <div class="inline-block w-full px-3 md:px-4 mb-5 text-light-navy">
                 <h5 class="mb-2"><strong>Still have questions?</strong></h5>
                 <p>If you need any further information about becoming a Lifetime Member, <a href="{{ get_musora_brand_base_url() }}/contact"><u>contact our amazing support team!</u></a>
@@ -377,7 +337,7 @@
         </div>
     </section>
 
-    @include('pianote.sales.partials._footer')
+    @include('guitareo.sales.partials._footer')
 
     @include('_partials.components.countdown',[
         'countdownDate' => '2023-03-31 23:59:59',
@@ -399,8 +359,8 @@
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/app.js') }}"></script>
 @stop

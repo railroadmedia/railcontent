@@ -8,11 +8,13 @@
     <title>Drumeo Drum Shop - Get Lessons, T-Shirts, Gear, & Much More!</title>
     <meta name="description" content="Take your drumming to the next level with the largest collection of drum lessons in the world - or gear up for success with a selection of drum gear, t-shirts, sticks, and other cool drum swag.">
 
-{{--    @if(Carbon\Carbon::create(2023, 8, 1, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())--}}
-{{--        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-summer-share-image.jpg">--}}
-{{--    @else--}}
-        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/og-image.jpg">
-{{--    @endif--}}
+    @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/bf-drumeo-shop-share-image.jpg">
+    @elseif(Carbon\Carbon::create(2023, 11, 28, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/cm-drumeo-shop-share-image.jpg">
+    @else
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/xmas-drumeo-shop-share-image.jpg">
+    @endif
     <meta property="og:title" content="Drumeo Drum Shop - Get Lessons, T-Shirts, Gear, & Much More!">
     <meta property="og:description" content="Take your drumming to the next level with the largest collection of drum lessons in the world - or gear up for success with a selection of drum gear, t-shirts, sticks, and other cool drum swag.">
     <meta property="og:url" content="https://www.drumeo.com/drumshop/">

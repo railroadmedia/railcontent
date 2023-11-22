@@ -156,6 +156,15 @@ class SalesController extends BaseController
         return view('singeo.lead-gen.lifetime-members-masterclass');
     }
 
+    public function salesLifetime()
+    {
+        return view('singeo.sales.pages.lifetime', ['theme' => 'singeo']);
+    }
+    public function lifetimeDiscount()
+    {
+        return view('singeo.sales.pages.lifetime', ['theme' => 'singeo', 'upgradeVersion' => true]);
+    }
+
     public function method()
     {
         return view('singeo.sales.features.method', ['theme' => 'singeo', 'page' => 'method']);

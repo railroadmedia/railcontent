@@ -9,11 +9,13 @@
     <meta property="og:title" content="Pianote Shop">
     <meta name="description" content="Get Lessons, T-Shirts, & Much More!">
     <meta property="og:description" content="Get Lessons, T-Shirts, & Much More!">
-{{--    @if(Carbon\Carbon::create(2023, 8, 1, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())--}}
-{{--        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/july/pianote-summer-share-image.jpg">--}}
-{{--    @else--}}
-        <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg">
-{{--    @endif--}}
+    @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/november/bf-pianote-shop-share-image.jpg">
+    @elseif(Carbon\Carbon::create(2023, 11, 28, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/november/cm-pianote-shop-share-image.jpg">
+    @else
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/november/xmas-pianote-shop-share-image.jpg">
+    @endif
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 @endsection
 

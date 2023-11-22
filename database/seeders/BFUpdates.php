@@ -95,15 +95,14 @@ class BFUpdates extends Seeder
         Product::where('brand_id', 2)->where('product_type_id', 4)->update(['discounted_price' => 21]);
         Product::where('brand_id', 2)->where('product_type_id', 5)->update(['discounted_price' => 39]);
         Product::where('brand_id', 2)->where('product_type_id', 7)->update(['discounted_price' => 39]);
-//        todo socks price
 
         //GUITAREO UPDATES
-        Product::where('brand_id', 3)->where('name', 'Acoustic Guitar Made Easy')->update(['discounted_price' => 197]);
-        Product::where('brand_id', 3)->where('name', 'Guitar Technique Made Easy')->update(['discounted_price' => 197]);
-        Product::where('brand_id', 3)->where('name', 'GuitarQuest')->update(['discounted_price' => 197]);
-        Product::where('brand_id', 3)->where('name', 'The Guitar System')->update(['discounted_price' => 197]);
-        Product::where('brand_id', 3)->where('name', "Rhythm & Groove")->update(['discounted_price' => 47]);
-        Product::where('brand_id', 3)->where('name', '500 Songs In 5 Days')->update(['discounted_price' => 97]);
+        Product::where('brand_id', 3)->where('name', 'Acoustic Guitar Made Easy')->update(['discounted_price' => 50]);
+        Product::where('brand_id', 3)->where('name', 'Guitar Technique Made Easy')->update(['discounted_price' => 50]);
+        Product::where('brand_id', 3)->where('name', 'GuitarQuest')->update(['discounted_price' => 50]);
+        Product::where('brand_id', 3)->where('name', 'The Guitar System')->update(['discounted_price' => 50]);
+        Product::where('brand_id', 3)->where('name', "Rhythm & Groove")->update(['discounted_price' => 19]);
+        Product::where('brand_id', 3)->where('name', '500 Songs In 5 Days')->update(['discounted_price' => 19]);
 
         Product::where('brand_id', 3)->where('name', "Chords & Scales Poster")->update(['discounted_price' => 9]);
         Product::where('brand_id', 3)->where('name', "Guitarist's Survival Kit")->update(['discounted_price' => 66.75]);

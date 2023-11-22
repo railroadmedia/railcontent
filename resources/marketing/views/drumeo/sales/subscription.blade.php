@@ -158,9 +158,12 @@
     @include('_partials.layout.holiday.homepage-top-banner',[
         'text' => '<span class="text-promo">Save 38%</span> + get 10 free<br class="sm:hidden"> bonuses worth $1233.94',
         'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
-        'vimeo' => '869289949',
-        'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=special',
+        'vimeo' => '885338636',
+        'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=special',
     ])
+{{--    p4 swap--}}
+{{--    'vimeo' => '885338592',--}}
+{{--    'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=special',--}}
 
     <div class="sticky-trigger block"></div>
     @include('_partials.layout.holiday.sticky-bar')

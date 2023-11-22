@@ -195,16 +195,16 @@
                 @php
                     $slides = [
                      [
+                         'img' => 'marketing/pianote/products/metronome/metronome-gallery-06.jpg',
+                     ],
+                     [
                          'img' => 'marketing/pianote/products/metronome/metronome-gallery-01.jpg',
                      ],
                      [
-                         'img' => 'marketing/pianote/products/metronome/metronome-gallery-02.jpg',
-                     ],
-                     [
-                         'img' => 'marketing/pianote/products/metronome/metronome-gallery-03.jpg',
-                     ],
-                     [
                          'img' => 'marketing/pianote/products/metronome/metronome-gallery-04.jpg',
+                     ],
+                     [
+                         'img' => 'marketing/pianote/products/metronome/metronome-gallery-07.jpg',
                      ],
                      [
                          'img' => 'marketing/pianote/products/metronome/metronome-gallery-05.jpg',

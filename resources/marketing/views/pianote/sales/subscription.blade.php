@@ -159,7 +159,7 @@
     @include('_partials.layout.holiday.homepage-top-banner',[
         'text' => '<span class="text-promo">Save 38%</span> + get 11 free<br class="sm:hidden"> bonuses worth $963',
         'text2' => '<span class="text-promo">Save 38%</span> on your Pianote Membership<br> + get 11 free bonuses worth $963',
-        'vimeo' => '869289949',
+        'vimeo' => '885340227',
         'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[taktell-piccolo-metronome]=1&products[piano-chords-and-scales-guide]=1&products[music-theory-posters]=1&products[christmas-song-book-digital]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=special',
     ])
 
