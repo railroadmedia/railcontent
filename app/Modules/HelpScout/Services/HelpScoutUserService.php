@@ -6,6 +6,8 @@ use App\Modules\HelpScout\Factories\ClientFactory;
 use App\Modules\HelpScout\Models\HelpScoutCustomer;
 use App\Modules\HelpScout\Models\HelpScoutUser;
 use App\Modules\UserManagementSystem\Services\UserService;
+use HelpScout\Api\Conversations\ConversationFilters;
+use HelpScout\Api\Conversations\ConversationRequest;
 
 class HelpScoutUserService extends HelpScoutServiceBase
 {
@@ -77,5 +79,11 @@ class HelpScoutUserService extends HelpScoutServiceBase
         $this->client->conversations()->assign($conversationId, $helpScoutUserId);
     }
 
+    public function getConversations(
+        ConversationFilters $conversationFilters = null,
+        ConversationRequest $conversationRequest = null
+    ) {
+        return $this->client->conversations()->list($conversationFilters, $conversationRequest);
+    }
 
 }

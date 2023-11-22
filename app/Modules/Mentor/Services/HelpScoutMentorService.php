@@ -56,6 +56,11 @@ class HelpScoutMentorService
             return;
         }
 
+        if (empty($helpScoutCustomerId) || empty($helpScoutEmail)) {
+            Log::info("Unable to find user for helpscout customer $helpScoutCustomerId $helpScoutEmail");
+            return;
+        }
+
         $userId = $this->helpScoutUserService->getUserIdFromHelpScoutCustomerInfo(
             $helpScoutCustomerId,
             $helpScoutEmail
