@@ -21,7 +21,7 @@ style="
                 </div>
             </div>
             <h3 class="leading-tight mb-3"><s class="opacity-60">$240</s> <strong>$150</strong> <span class="text-promo">SAVE {{ round(100 - (100 * (150 / 240))) }}%</span> </h3>
-            <a class="join promo" href="{{ $orderUrl }}">GET STARTED &raquo;</a>
+            <a class="join promo w-full max-w-xl mx-auto" href="{{ $orderUrl }}">GET STARTED &raquo;</a>
         @else
             <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
                 @include($theme.'._partials.holiday-logo', [
