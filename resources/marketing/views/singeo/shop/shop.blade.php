@@ -76,7 +76,7 @@
                 ],
                 [
                     'slug' => '/lifetime',
-                    'desc' => 'Unlimited guitar lessons<br> for life + more',
+                    'desc' => 'Unlimited singing lessons<br> for life + more',
                     'visible' => 1,
                     'discountedPrice' => 1200,
                     'specialW2' => true,
