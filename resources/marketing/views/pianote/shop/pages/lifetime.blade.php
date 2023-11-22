@@ -230,6 +230,7 @@
             ],
         ];
         $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[musora-access-1-year]=1&products[taktell-piccolo-metronome]=1&products[piano-chords-and-scales-guide]=1&products[christmas-songbook]=1&products[christmas-song-book-digital]=1&products[classical-piano-pieces]=1&products[music-theory-posters]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true';
+        $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[musora-access-1-year]=1&products[taktell-piccolo-metronome]=1&products[piano-chords-and-scales-guide]=1&products[christmas-songbook]=1&products[christmas-song-book-digital]=1&products[classical-piano-pieces]=1&products[music-theory-posters]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true';
     @endphp
 
     <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
@@ -326,6 +327,7 @@
                 @endforeach
             </div>
             <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+            <a class="inline-block leading-tight" href="{{ $buttonLink2 }}"><em><u>or start a 3 installment payment plan &raquo;</u></em></a>
         </div>
     </section>
 

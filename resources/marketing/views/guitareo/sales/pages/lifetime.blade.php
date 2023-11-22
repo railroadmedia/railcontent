@@ -190,6 +190,7 @@
             ],
         ];
         $buttonLink = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true';
+        $buttonLink2 = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP-3-pay]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true';
     @endphp
 
     <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
@@ -286,6 +287,7 @@
                 @endforeach
             </div>
             <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+            <a class="inline-block leading-tight" href="{{ $buttonLink2 }}"><em><u>or start a 3 installment payment plan &raquo;</u></em></a>
         </div>
     </section>
 

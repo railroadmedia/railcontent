@@ -169,6 +169,7 @@
                 ],
         ];
         $buttonLink = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1';
+        $buttonLink2 = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access-3-pay]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1';
     @endphp
 
     <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
@@ -264,7 +265,8 @@
                     </div>
                 @endforeach
             </div>
-            <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+            <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a><br>
+            <a class="inline-block leading-tight" href="{{ $buttonLink2 }}"><em><u>or start a 3 installment payment plan &raquo;</u></em></a>
         </div>
     </section>
 
