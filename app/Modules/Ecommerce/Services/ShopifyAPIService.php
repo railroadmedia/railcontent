@@ -879,18 +879,6 @@ class ShopifyAPIService
         }
 
         // don't set if there are any quantities more than 1 or total cart items is more than 10;
-        foreach ($cartData['lines']['edges'] as $lineItemNode) {
-            $lineItemData = $lineItemNode['node'];
-            $merchandise = $lineItemData['merchandise'];
-            $product = $lineItemData['merchandise']['product'];
-
-            if ((integer)$lineItemData['quantity'] > 1) {
-                $applyAnnualMembershipDiscountCode = false;
-                $applyLifetimeMembershipDiscountCode = false;
-            }
-        }
-
-        // don't set if there are any quantities more than 1 or total cart items is more than 10;
         if (count($cartData['lines']['edges']) > 20) {
             $applyAnnualMembershipDiscountCode = false;
             $applyLifetimeMembershipDiscountCode = false;
