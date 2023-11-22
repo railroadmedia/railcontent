@@ -2,6 +2,10 @@
 
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
+use App\Modules\EventTracking\Avo\AvoHelper;
+use App\Modules\EventTracking\Services\CustomerIoService as EventTrackingCustomerIoService;
+use Avo;
+use Carbon\Carbon;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Exception;
 use App\Modules\CustomerIO\Services\CustomerIoService;
@@ -26,6 +30,7 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
      * @param CustomerIoService $customerIoService
      * @param CustomerIoSyncService $customerIoSyncService
      * @param UserService $userService
+     * @param EventTrackingCustomerIoService $eventTrackingCustomerIoService
      * @param UserAccessPermissionsService $userAccessPermissionsService
      * @throws Throwable
      */
@@ -33,12 +38,14 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
         CustomerIoService $customerIoService,
         CustomerIoSyncService $customerIoSyncService,
         UserService $userService,
+        EventTrackingCustomerIoService $eventTrackingCustomerIoService,
         UserAccessPermissionsService $userAccessPermissionsService
-    ) {
+    ): void {
         try {
             $this->user = $userService->GetByIdOrNull($this->user->id);
             $accountNameBrandsToSync = config('event-data-synchronizer.customer_io_account_name_brands_to_sync', []);
             $accountNameToSyncAllBrand = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
+            $accountCreatedAt = Carbon::now()->timestamp;
 
             foreach ($accountNameBrandsToSync as $accountName => $brands) {
                 // in order for this user to be synced to a specific workspace, they must have at least 1 product
@@ -59,10 +66,22 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
                         $this->user->email,
                         $accountName,
                         $customerAttributes,
-                        $this->user->id
+                        $this->user->id,
+                        $accountCreatedAt
                     );
                 }
             }
+
+            /*
+             * @TODO EVENT TRACKING: move this to the new event tracking when migration is completed
+             */
+            $eventTrackingCustomerIoService->updateUserAttributes(
+                $this->user,
+                ['account_created_at' => $accountCreatedAt]
+            );
+            Avo::account_created(
+                AvoHelper::defaultEventProperties(['account_created_at' => $accountCreatedAt], $this->user)
+            );
         } catch (Exception $exception) {
             $this->failed($exception);
         }

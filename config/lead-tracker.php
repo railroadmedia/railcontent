@@ -15,7 +15,6 @@ return [
     // the data map tells the middleware which input variables map to which attributes that are required
     // by the package
     'requests_to_capture' => [
-
         //--------------------------------------------------
         // drumeo
         [

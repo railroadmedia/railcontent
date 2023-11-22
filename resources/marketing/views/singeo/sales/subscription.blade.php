@@ -227,7 +227,7 @@
     ])
     @include('musora.sales.components.learn-by-playing-section', [
         'header' => 'Learning to sing made easy with <u>personal coaching</u>.',
-        'desc' => 'With Singeo, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
+        'desc' => 'With Singeo, you’ll sing more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
                 'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314557/rendition/540p/file.mp4?loc=external&signature=e1db56d3f22044707be08bbb02d7327bdf4bee7a07bc705017de56ef45bf1ed4',
     ])
 

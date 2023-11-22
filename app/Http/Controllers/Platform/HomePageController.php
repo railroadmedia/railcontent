@@ -2,41 +2,39 @@
 
 namespace App\Http\Controllers\Platform;
 
-use App\Collections\PackCollection;
 use App\Decorators\Content\ContentLikesDecorator;
-use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\Playlist\PlaylistDecorator;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Content\CoachesController;
 use App\Maps\ContentTypes;
+use App\Modules\Content\Services\CarouselService;
 use App\Modules\Content\Services\CohortService;
 use App\Modules\Ecommerce\Services\UserProductService;
+use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use App\Services\LiveStreamEventService;
 use App\Services\PackService;
 use App\Services\UserMetricsService;
-use Illuminate\Support\Facades\Mail;
-use Modules\UserManagementSystem\Models\BlockedUser;
-use Railroad\Railcontent\Services\UserContentProgressService;
+use Avo;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Mail;
+use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\Points\Services\UserPointsService;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
-use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator;
+use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection as RailcontentCollection;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Modules\Content\Services\CarouselService;
 
 class HomePageController extends BaseController
 {
@@ -61,6 +59,11 @@ class HomePageController extends BaseController
      * @param PackService $packService
      * @param DatabaseManager $databaseManager
      * @param UserContentProgressService $userContentProgressService
+     * @param CarouselService $carouselService
+     * @param CohortService $cohortService
+     * @param UserProductService $userProductService
+     * @param OnboardingService $onboardingService
+     *
      */
     public function __construct(
         ContentService $contentService,
@@ -74,7 +77,7 @@ class HomePageController extends BaseController
         CarouselService $carouselService,
         CohortService $cohortService,
         UserProductService $userProductService,
-        OnboardingService $onboardingService
+        OnboardingService $onboardingService,
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
@@ -97,22 +100,22 @@ class HomePageController extends BaseController
 
     public function profileRedirect()
     {
-        return redirect("/".brand()."/profile/".user()->id."/dashboard");
+        return redirect("/" . brand() . "/profile/" . user()->id . "/dashboard");
     }
 
     public function paymentSettingsRedirect()
     {
-        return redirect("/".brand()."/profile/".user()->id."/settings/payments");
+        return redirect("/" . brand() . "/profile/" . user()->id . "/settings/payments");
     }
 
     public function notificationsRedirect()
     {
-        return redirect("/".brand()."/notifications");
+        return redirect("/" . brand() . "/notifications");
     }
 
     public function notificationSettingsRedirect()
     {
-        return redirect("/".brand()."/profile/".user()->id."/settings/notifications");
+        return redirect("/" . brand() . "/profile/" . user()->id . "/settings/notifications");
     }
 
     public function home(Request $request, $brand)
@@ -278,9 +281,9 @@ class HomePageController extends BaseController
             ->slice(0, 4)
             ->values();
         $upcomingEvents = new ContentFilterResultsEntity([
-                                                             'results' => $upcomingEvents,
-                                                             'total_results' => $upcomingEventsCount,
-                                                         ]);
+            'results' => $upcomingEvents,
+            'total_results' => $upcomingEventsCount,
+        ]);
 
         if ($currentEvent) {
             $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
@@ -294,8 +297,8 @@ class HomePageController extends BaseController
                     'firstContentId' => $eventCoachId,
                 ]);
                 $currentEventCalendarId = config('addevent.uniquekeys.by-coach')[$currentEvent->fetch(
-                        'fields.instructor.slug'
-                    )] ?? config('addevent.uniquekeys.brand-overview');
+                    'fields.instructor.slug'
+                )] ?? config('addevent.uniquekeys.brand-overview');
             } else {
                 $currentEvent = null;
             }
@@ -331,7 +334,7 @@ class HomePageController extends BaseController
                     $cohortBanner['title'] = $nextLesson->fetch('title');
                     $cohortBanner['thumbnail'] = $nextLesson->fetch('data.thumbnail_url');
                     $cohortBanner['continue_visible'] = true;
-                    if(Carbon::parse($nextLesson->fetch('published_on')) > Carbon::now()){
+                    if (Carbon::parse($nextLesson->fetch('published_on')) > Carbon::now()) {
                         $cohortBanner['continue_visible'] = false;
                         $cohortBanner['close_visible'] = false;
                     }
@@ -374,9 +377,10 @@ class HomePageController extends BaseController
             'hasGenres' => $hasGenres,
             'hasTopics' => $hasTopics,
             'hasExperience' => $hasExperience,
-            'hasGoals' => $hasGoals,
-            'methodUrl' => ($hasCompletedMethod)? url()->route('platform.content.first-level', ['method', $methodContent['slug'], $methodContent['id']]):
+            'methodUrl' => ($hasCompletedMethod) ?
+                url()->route('platform.content.first-level', ['method', $methodContent['slug'], $methodContent['id']]) :
                 url()->route('platform.content.jump-to-continue-content', $methodContent['id']),
+            'hasGoals' => $hasGoals,
             'completedLevelsUrl' => $methodContent['url'] ?? '',
             'carousel' => $carousel,
             'cohortBanner' => json_encode($cohortBanner),
@@ -386,6 +390,7 @@ class HomePageController extends BaseController
 
     public function onboarding(Request $request)
     {
+        Avo::onboarding_started(AvoHelper::defaultEventProperties());
         return view('home.onboarding');
     }
 
@@ -420,7 +425,7 @@ class HomePageController extends BaseController
             "hotForumTopics" => $hotForumTopics,
             "userNameToDisplay" => $userNameToDisplay,
             "userMetrics" => $userMetrics,
-            "startedContentCount" => 0 //TODO: replace with real data
+            "startedContentCount" => 0, //TODO: replace with real data
         ]);
     }
 
@@ -498,7 +503,7 @@ class HomePageController extends BaseController
                 $forumPosts[$forumPostIndex]->content = preg_replace(
                     "~<blockquote(.*?)>(.*)</blockquote>~si",
                     "",
-                    ' '.$forumPosts[$forumPostIndex]->content.' '
+                    ' ' . $forumPosts[$forumPostIndex]->content . ' '
                 );
 
                 $forumPosts[$forumPostIndex]->user_xp = $user->getBrandTotalXp();
@@ -616,7 +621,7 @@ class HomePageController extends BaseController
             'started',
             'updated_on',
             'desc',
-            6
+            8
         );
         $lessons = $this->contentService->getByIds(array_column($startedProgressRows, 'content_id'));
 
@@ -632,12 +637,10 @@ class HomePageController extends BaseController
             user()->id,
             'user-playlist',
             brand(),
-            8
+            12
         );
 
-        $results =
-            new ContentFilterResultsEntity(['results' => $playlists]
-            );
+        $results = new ContentFilterResultsEntity(['results' => $playlists]);
 
         return $results;
     }

@@ -118,71 +118,34 @@ class RevenueCatController extends Controller
                 $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
                 $musoraProduct = $musoraProducts->first();
 
-                if (config('shopify.enabled')) {
-                    $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
-                    $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
-                    if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
-                        if (!$musoraProduct) {
-                            Log::error(
-                                "RevenueCatController processNotification::INITIAL_PURCHASE - musora product not found: $productId"
-                            );
-                            break;
-                        }
-                        $price = $data['event']['price'] ?? $musoraProduct->price;
-
-                        if($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
-                            UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
-                        }
-
-                        $this->shopifySyncService->syncOrder(
-                            $user,
-                            [$musoraProduct->id],
-                            $musoraProduct->brand,
-                            $processedAt,
-                            $price,
-                            $this->calculateTaxAmount($price, $data['event']['tax_percentage']),
-                            $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
-                                : ShopifyPaymentSourceEnum::Google,
-                            null //defaults to USD
+                $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
+                $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
+                if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
+                    if (!$musoraProduct) {
+                        Log::error(
+                            "RevenueCatController processNotification::INITIAL_PURCHASE - musora product not found: $productId"
                         );
-                        $this->setUserSubscription($user, $type);
+                        break;
                     }
-                } else {
-                    //get RevenueCat subscription
-                    $currentRevenueCatSubscription =
-                        $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
+                    $price = $data['event']['price'] ?? $musoraProduct->price;
 
-                    //check if already exists Musora subscription
-                    $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProducts);
-
-                    if (!$musoraSubscription) {
-                        //create Musora subscription
-                        $musoraSubscription = $this->subscriptionService->createSubscription(
-                            $user->id,
-                            $data['event']['expiration_at_ms'],
-                            $musoraProduct,
-                            $type,
-                            $data['event']['purchased_at_ms']
-                        );
+                    if($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
+                        UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
                     }
 
-                    if ($data['event']['period_type'] != 'TRIAL') {
-                        $this->paymentService->create(
-                            $musoraSubscription,
-                            $type,
-                            $data['event']['event_timestamp_ms'],
-                            $data['event']['transaction_id']
-                        );
-                    }
-
-                    //Assign user product
-                    $this->userProductService->assignUserProduct(
-                        $user->id,
-                        $musoraSubscription->product_id,
-                        $musoraSubscription->paid_until
+                    $this->shopifySyncService->syncOrder(
+                        $user,
+                        [$musoraProduct->id],
+                        $musoraProduct->brand,
+                        $processedAt,
+                        $price,
+                        $this->calculateTaxAmount($price, $data['event']['tax_percentage']),
+                        $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
+                            : ShopifyPaymentSourceEnum::Google,
+                        null //defaults to USD
                     );
+                    $this->setUserSubscription($user, $type);
                 }
-
                 break;
             case 'NON_RENEWING_PURCHASE':
                 echo 'NON_RENEWING_PURCHASE';
@@ -220,146 +183,34 @@ class RevenueCatController extends Controller
                 //get Musora product
                 $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
 
-                if (config('shopify.enabled')) {
-                    $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
-                    $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
-                    if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
-                        $musoraProduct = $musoraProducts?->first();
-                        if (!$musoraProduct) {
-                            Log::error(
-                                "RevenueCatController processNotification::RENEWAL - musora product not found: $productId"
-                            );
-                            break;
-                        }
-                        $price = $data['event']['price'] ?? $musoraProduct->price;
-                        if($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
-                            UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
-                        }
-                        $this->shopifySyncService->syncOrder(
-                            $user,
-                            [$musoraProduct->id],
-                            $musoraProduct->brand,
-                            $processedAt,
-                            $price,
-                            $this->calculateTaxAmount($price, $data['event']['tax_percentage']),
-                            $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
-                                : ShopifyPaymentSourceEnum::Google,
-                            null //defaults to USD
+                $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
+                $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
+                if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
+                    $musoraProduct = $musoraProducts?->first();
+                    if (!$musoraProduct) {
+                        Log::error(
+                            "RevenueCatController processNotification::RENEWAL - musora product not found: $productId"
                         );
-
-                        $this->setUserSubscription($user, $type);
+                        break;
                     }
-                } else {
-                    //get RevenueCat subscription
-                    $currentRevenueCatSubscription =
-                        $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
-
-                    //get Musora subscription
-                    $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProducts);
-                    if (!$musoraSubscription) {
-                        //create Musora subscription
-                        $musoraSubscription = $this->subscriptionService->createSubscription(
-                            $user->id,
-                            $data['event']['expiration_at_ms'],
-                            $musoraProducts->first(),
-                            $type,
-                            $data['event']['purchased_at_ms']
-                        );
+                    $price = $data['event']['price'] ?? $musoraProduct->price;
+                    if($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
+                        UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
                     }
-
-                    //update Musora subscription
-                    $this->subscriptionService->updateSubscription(
-                        $musoraSubscription,
-                        $data['event']['expiration_at_ms']
+                    $this->shopifySyncService->syncOrder(
+                        $user,
+                        [$musoraProduct->id],
+                        $musoraProduct->brand,
+                        $processedAt,
+                        $price,
+                        $this->calculateTaxAmount($price, $data['event']['tax_percentage']),
+                        $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
+                            : ShopifyPaymentSourceEnum::Google,
+                        null //defaults to USD
                     );
 
-                    $this->paymentService->create(
-                        $musoraSubscription,
-                        $type,
-                        $data['event']['purchased_at_ms'],
-                        $data['event']['transaction_id']
-                    );
-
-                    //update user product
-                    $this->userProductService->assignUserProduct(
-                        $user->id,
-                        $musoraSubscription->product_id,
-                        $musoraSubscription->paid_until
-                    );
+                    $this->setUserSubscription($user, $type);
                 }
-
-                break;
-            case 'PRODUCT_CHANGE':
-                echo 'PRODUCT_CHANGE';
-                // get Musora user
-                $user = $this->revenueCatService->getUser(
-                    $data['event']['subscriber_attributes']['email']['value'] ?? null,
-                    $data['event']['original_app_user_id'], false, $data['event']['aliases']
-                );
-                if (!$user) {
-                    //TBD
-                    $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
-                    Log::error(
-                        'RevenueCatController processNotification::PRODUCT_CHANGE - user not found email: ' .
-                        $email .
-                        ' original_app_user_id: ' .
-                        $data['event']['original_app_user_id']
-                    );
-                    break;
-                }
-
-                if (!config('shopify.enabled')) {
-                    //store type
-                    $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
-
-                    //new productId
-                    $productId = $this->getProductId($data['event']['new_product_id']);
-
-                    //get Musora product
-                    $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
-
-                    //get RevenueCat subscription
-                    $currentRevenueCatSubscription =
-                        $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
-
-                    //check if Musora subscription for new product exists
-                    $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProducts);
-                    if (!$musoraSubscription) {
-                        //create Musora subscription
-                        $musoraSubscription = $this->subscriptionService->createSubscription(
-                            $user->id,
-                            $data['event']['expiration_at_ms'],
-                            $musoraProducts->first(),
-                            $type,
-                            $data['event']['purchased_at_ms']
-                        );
-                    }
-
-                    $currentRevenueCatSubscription =
-                        $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
-
-                    //check if Musora subscription for new product exists
-                    $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProducts);
-                    if (!$musoraSubscription) {
-                        //create Musora subscription
-                        $musoraSubscription = $this->subscriptionService->createSubscription(
-                            $user->id,
-                            $data['event']['expiration_at_ms'],
-                            $musoraProducts->first(),
-                            $type,
-                            $data['event']['purchased_at_ms']
-                        );
-                    }
-
-                    //Assign user product
-                    $this->userProductService->assignUserProduct(
-                        $user->id,
-                        $musoraSubscription->product_id,
-                        $musoraSubscription->paid_until
-                    );
-                }
-
-                // code...
                 break;
             case 'CANCELLATION':
                 $user = $this->revenueCatService->getUser(
@@ -380,78 +231,23 @@ class RevenueCatController extends Controller
                 //store type
                 $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
 
-                //productId
-                $productId = $this->getProductId($data['event']['product_id']);
-
-                //get Musora product
-                $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
-
-                if (config('shopify.enabled')) {
-                    if ($user->shopify_id && $data['event']['cancel_reason'] == 'CUSTOMER_SUPPORT') {
-                        if (!$data['event']['purchased_at_ms']) {
-                            Log::warning(
-                                'RevenueCatController processNotification::CANCELLATION - purchased_at_ms not found'
-                            );
-                            break;
-                        }
-                        $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
-                        $orderId = $this->shopifySyncService->getCustomerOrderIdByProcessedAtDate(
-                            $user->shopify_id,
-                            $processedAt
-                        );
-                        if ($orderId) {
-                            $this->shopifySyncService->cancelOrder($user->shopify_id, $user->email, $orderId);
-                            $this->unsetUserSubscription($user, $type);
-                        }
-                    }
-                } else {
-                    //get RevenueCat subscription
-                    $currentRevenueCatSubscription =
-                        $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
-
-                    //get Musora subscription
-                    $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProducts);
-
-                    if (!$musoraSubscription) {
-                        //create Musora subscription
-                        $musoraSubscription = $this->subscriptionService->createSubscription(
-                            $user->id,
-                            $data['event']['expiration_at_ms'],
-                            $musoraProducts->first(),
-                            $type,
-                            $data['event']['purchased_at_ms']
-                        );
-
-                        //Assign user product
-                        $this->userProductService->assignUserProduct(
-                            $user->id,
-                            $musoraSubscription->product_id,
-                            $musoraSubscription->paid_until
+                if ($user->shopify_id && $data['event']['cancel_reason'] == 'CUSTOMER_SUPPORT') {
+                    if (!$data['event']['purchased_at_ms']) {
+                        Log::warning(
+                            'RevenueCatController processNotification::CANCELLATION - purchased_at_ms not found'
                         );
                         break;
                     }
-
-                    $this->subscriptionService->updateSubscription(
-                        $musoraSubscription,
-                        (isset($currentRevenueCatSubscription['expires_date'])) ?
-                            Carbon::create($currentRevenueCatSubscription['expires_date'])
-                                ->getTimestampMs() : $data['event']['expiration_at_ms'],
-                        (isset($currentRevenueCatSubscription['unsubscribe_detected_at'])) ?
-                            Carbon::create($currentRevenueCatSubscription['unsubscribe_detected_at'])
-                                ->getTimestampMs() : null,
-                        $data['event']['cancel_reason']
+                    $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
+                    $orderId = $this->shopifySyncService->getCustomerOrderIdByProcessedAtDate(
+                        $user->shopify_id,
+                        $processedAt
                     );
+                    if ($orderId) {
+                        $this->shopifySyncService->cancelOrder($user->shopify_id, $user->email, $orderId);
+                        $this->unsetUserSubscription($user, $type);
+                    }
                 }
-
-                break;
-            case 'BILLING_ISSUE':
-                // code...
-                break;
-            case 'SUBSCRIBER_ALIAS':
-                // code...
-                break;
-            case 'SUBSCRIPTION_PAUSED':
-                // code...
                 break;
             case 'TRANSFER':
                 $oldRevenueCatAppUserId = $data['event']['transferred_from'];
@@ -483,55 +279,15 @@ class RevenueCatController extends Controller
                     );
                     break;
                 }
-
-                if (!config('shopify_enabled')) {
-                    //store type
-                    $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
-
-                    //productId
-                    $productId = $this->getProductId($data['event']['product_id']);
-
-                    //get Musora product
-                    $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
-
-                    //get RevenueCat subscription
-                    $currentRevenueCatSubscription =
-                        $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
-
-                    //get Musora subscription
-                    $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProducts);
-
-                    if (!$musoraSubscription) {
-                        //create Musora subscription
-                        $musoraSubscription = $this->subscriptionService->createSubscription(
-                            $user->id,
-                            $data['event']['expiration_at_ms'],
-                            $musoraProducts->first(),
-                            $type,
-                            $data['event']['purchased_at_ms']
-                        );
-
-                        //Assign user product
-                        $this->userProductService->assignUserProduct(
-                            $user->id,
-                            $musoraSubscription->product_id,
-                            $musoraSubscription->paid_until
-                        );
-                        break;
-                    }
-
-                    $this->subscriptionService->updateSubscription(
-                        $musoraSubscription,
-                        $data['event']['expiration_at_ms'],
-                        null,
-                        $data['event']['expiration_reason']
-                    );
-                }
-
+                $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
                 $this->unsetUserSubscription($user, $type);
 
                 break;
-            // handle other events..
+            // handle other events...
+            case 'PRODUCT_CHANGE':
+            case 'BILLING_ISSUE':
+            case 'SUBSCRIBER_ALIAS':
+            case 'SUBSCRIPTION_PAUSED':
             default:
                 // code...
                 break;
@@ -1225,7 +981,7 @@ class RevenueCatController extends Controller
             $data = json_decode(base64_decode($encodedData));
             Log::debug(var_export($data, true));
             // we should return something for test notifications
-            if (!empty($data->testNotification)) {
+            if (!empty($data->testNotification) || empty($data->subscriptionNotification)) {
                 return response()->json();
             }
 

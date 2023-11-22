@@ -64,7 +64,7 @@
             @if(!empty($isCurrentUsersProfile))
                 <div class="tw-flex tw-items-center tw-justify-center lg:tw-justify-start xl:tw-justify-end tw-w-full tw-flex-wrap xl:tw-flex-nowrap">
                     {{-- Complete Your Account / Update Your Account --}}
-                    <a href="/onboarding"
+                    <a href="/onboarding?brand={{ $brand }}{{ $showCompleteYourAccountButton ? '&update=2' : '' }}"
                         class="tw-btn-secondary tw-border-2 tw-text-white tw-w-auto tw-inline-flex tw-max-w-[267px] tw-mx-2"
                     >
                         {{ $showCompleteYourAccountButton ? 'Complete Your Account' : 'Update Your Account' }}

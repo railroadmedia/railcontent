@@ -6,6 +6,7 @@ use App\Console\Commands\AddTimeToUsersAccountsJan2023;
 use App\Console\Commands\AssignSongsPermissionsToAllUsers;
 use App\Console\Commands\AssignSongsPermissionsToContent;
 use App\Console\Commands\AssignSongsPermissionsToProducts;
+use App\Console\Commands\AssignUnassignedHelpScoutCustomersToMentors;
 use App\Console\Commands\CreateSongs24Jan2023;
 use App\Console\Commands\CreateSongsDecember2022;
 use App\Console\Commands\FixSongsTemp;
@@ -75,6 +76,7 @@ class Kernel extends ConsoleKernel
         MigrateOldGuitareoDeletedSongs::class,
         RemoveRailTrackerData::class,
         SyncUsersToCIO::class,
+        AssignUnassignedHelpScoutCustomersToMentors::class,
     ];
 
     /**

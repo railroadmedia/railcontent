@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'enabled' => ENV('SHOPIFY_ENABLED', false),
     'apiKey' => ENV('SHOPIFY_APP_API_KEY'),
     'apiSecretKey' => ENV('SHOPIFY_APP_API_SECRET'),
     'hostName' => ENV('SHOPIFY_APP_HOST_NAME'),
