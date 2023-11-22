@@ -1471,7 +1471,7 @@ class CustomerIoSyncEventListener
         $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
 
         foreach ($brands as $brand) {
-            $orderItems = ($membershipOrderItemsLookup[$brand] ?? collect())->sort(function ($orderLineItem) {
+            $orderItems = ($membershipOrderItemsLookup[$brand] ?? collect())->sortBy(function ($orderLineItem) {
                 /** @var OrderLineItem $orderLineItem */
                 return $orderLineItem->order->processedAt->timestamp;
             });
