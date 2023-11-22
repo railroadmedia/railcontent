@@ -3,16 +3,23 @@
     <template v-if="isMiniCard">
         <div class="tw-flex tw-items-center tw-w-full tw-h-full">
         <!-- Thumbnail Image -->
-        <a :href="renderLink ? item.url : null" class="tw-flex-none tw-h-[70px] tw-w-[121px] tw-relative">
+        <a :href="renderLink ? item.url : null" class="tw-flex-none tw-h-[70px] tw-w-[121px] tw-relative tw-overflow-hidden tw-rounded-[5px]">
             <div
-                class="tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[70px] tw-w-[121px] tw-justify-center tw-items-center tw-text-white tw-text-center">
+                class="tw-rounded-[5px] tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[70px] tw-w-[121px] tw-justify-center tw-items-center tw-text-white tw-text-center tw-z-[100]">
                 <i class="fas" :class="thumbnailIcon"></i>
                 <p v-if="!isReleased" class="tw-text-sm text-white font-bold">
                     {{ releaseDate }}
                 </p>
             </div>
             <img :src="mappedData.thumbnail" :alt="`${mappedData.color_title} thumbnail`"
-                class="tw-h-[70px] tw-w-[121px] tw-rounded-[5px]">
+                class="tw-h-[70px] tw-w-[121px] tw-rounded-[5px]"
+                :class="item.type === 'song' ? 'tw-blur-sm' : ''"
+            >
+
+            <div v-if="item.type === 'song'"
+                class="tw-absolute tw-h-[70px] tw-w-[121px] tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center tw-rounded-[5px]">
+                <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail" :alt="mappedData.black_title" />
+            </div>
         </a>
 
         <!-- Instructor Name and Title -->
