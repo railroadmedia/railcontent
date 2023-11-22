@@ -249,7 +249,7 @@
             $enrollmentLink = 'https://www.drumeo.com/choose-plan';
             $brandTitle = 'Drumeo';
             $buttonText = 'GET STARTED';
-            $buttonLink = "/ecommerce/add-to-cart?products[30-day-drummer-3]=1&redirect=/order&locked=true";
+            $buttonLink = "/ecommerce/add-to-cart?products[30-day-drummer-3]=1&redirect=/order";
             $studentProfilesImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png';
             $numStudents =  number_format($nPackOwners ?? 0);
             $students = 'drummers';
