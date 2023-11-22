@@ -120,13 +120,13 @@ class UserController extends Controller
 
         // This must be generated passed so that someone can't claim someone else's email.
         // It must be generated via md5 with the email string and special key combined.
-        // md5('email' . config('shopify.accountCreationSecretKey'))
+        // md5('email' . config('shopify.multipass.account_creation_secret_key'))
         // On the shopify side, we'll generate the link to this claim page and include the key in the url params. This
         // ensures that only a person with the special link can claim that email address.
 
         $verificationToken = $request->get('verification_token');
 
-        if (strtolower($verificationToken) !== strtolower(md5($email . config('shopify.accountCreationSecretKey')))) {
+        if (strtolower($verificationToken) !== strtolower(md5($email . config('shopify.multipass.account_creation_secret_key')))) {
             throw new AuthorizationException('Invalid verification_token.', 403);
         }
 
