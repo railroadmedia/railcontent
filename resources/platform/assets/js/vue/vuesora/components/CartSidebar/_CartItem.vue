@@ -1,6 +1,6 @@
 <template>
     <div class="cart-item-container">
-        <div class="image-container">
+        <div class="image-container relative flex-shrink-0">
             <a :href="this.item.sales_page_url"><img :src="item.thumbnail_url" class="item-thumbnail"></a>
             <div class="item-logo" v-if="item.logo">
                 <img :src="item.logo">
@@ -241,7 +241,6 @@ export default {
         }
     }
     .image-container {
-        position: relative;
         width: 70px;
         height: 70px;
         @include medium {
