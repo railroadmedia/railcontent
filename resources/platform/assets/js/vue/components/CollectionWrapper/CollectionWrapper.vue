@@ -15,7 +15,7 @@
                 <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
                     :total-results="getTotalResults" />
                 <CatalogueCardContainer
-                    v-else-if="isWorkout"
+                    v-else
                     :pre-loaded-content="preLoadedContent"
                 />
             </CollectionResults>
@@ -170,10 +170,15 @@ const isWorkout = computed(() => {
     return props.collectionType === 'workout';
 })
 
+const isChallenge = computed(() => {
+    return props.collectionType === 'challenge';
+});
+
 //List view reactive
 const isList = computed(() => {
-    return !isPlayAlong.value && !isRoutine.value && !isWorkout.value;
+    return !isPlayAlong.value && !isRoutine.value && !isWorkout.value && !isChallenge.value;
 })
+
 
 //Filter state reactive
 const showFilter = computed(() => {
