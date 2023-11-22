@@ -41,19 +41,19 @@ class Clothing extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
         return $query->join('product_types', 'products.product_type_id', '=', 'product_types.id')
-            ->whereIn('product_types.name', ['Hats', 'Shirts', 'Hoodies', 'Sweaters'])->select('products.*');
+            ->whereIn('product_types.name', ['Misc', 'Shirts', 'Hoodies', 'Sweaters'])->select('products.*');
     }
 
     public function fields(NovaRequest $request)
     {
-        $types = ProductType::whereIn('name', ['Hats', 'Shirts', 'Hoodies', 'Sweaters'])->get();
+        $types = ProductType::whereIn('name', ['Misc', 'Shirts', 'Hoodies', 'Sweaters'])->get();
         $uuid  = Str::uuid();
 
         return [
             ID::make()->sortable(),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Select::make('Product Type', 'product_type_id')->options([
-                $types->where('name', 'Hats')->first()->id => 'Hats',
+                $types->where('name', 'Misc')->first()->id => 'Misc',
                 $types->where('name', 'Shirts')->first()->id => 'Shirts',
                 $types->where('name', 'Hoodies')->first()->id => 'Hoodies',
                 $types->where('name', 'Sweaters')->first()->id => 'Sweaters'

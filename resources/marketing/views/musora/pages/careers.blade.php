@@ -272,7 +272,7 @@
                 right time, or there’s not an opening for what you do best — just click the <br class="hidden md:inline">
                 link below to join our talent pool for future opportunities.
             </p>
-            <a class="join smaller musora-gold text-black" target="_blank" href="https://musora.pinpointhq.com/en/postings/37e00d05-4dc8-47b3-97e8-68b7d1b4019e">JOIN TALENT POOL <i class="fa-light fa-smile-plus"></i></a>
+            <a class="join smaller musora-gold text-black" target="_blank" href="https://careers.musora.com/register-your-interest/new">JOIN TALENT POOL <i class="fa-light fa-smile-plus"></i></a>
         </div>
     </section>
     <section class="py-12 sm:py-16 lg:py-20 px-4 sm:px-5 relative">

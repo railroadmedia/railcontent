@@ -195,7 +195,7 @@ import playlists from '../../../../services/playlists.js';
             </section>
             <section class="tw-w-full tw-block tw-overflow-x-auto lg:tw-overflow-x-hidden tw-no-scrollbar">
                 <div v-if="!playlistsStore.loadingPlaylists && miniCatalog && !state.isListView"
-                    class="PlaylistMiniCatalogContainer tw-px-4 lg:tw-px-0 tw-w-full tw-gap-[6px] tw-relative tw-mb-5 tw-grid lg:tw-overflow-hidden tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-6 lg:tw-grid-cols-5 2xl:tw-grid-cols-6 xl:tw-gap-[12px] 2xl:tw-gap-[16px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full"
+                    class="PlaylistMiniCatalogContainer tw-px-4 lg:tw-px-0 tw-w-full tw-gap-[6px] tw-relative tw-grid lg:tw-overflow-hidden tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-6 lg:tw-grid-cols-5 2xl:tw-grid-cols-6 xl:tw-gap-[12px] 2xl:tw-gap-[16px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full"
                 >
                 <!-- Mini Catalog -->
                     <playlist-collection-card

@@ -21,6 +21,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "iksaku/laravel-mass-update": "^1.0",
         "intervention/image": "^2.7",
+        "jenssegers/agent": "^2.6",
         "laravel/framework": "^9.9",
         "laravel/nova": "4.25.1",
         "laravel/sanctum": "^2.15",
@@ -37,13 +38,14 @@
         "railroad/points": "1.0.*",
         "railroad/railanalytics": "dev-v3.0-fixing-transaction-tracking as 3.0.7",
         "railroad/railchat": "2.0.*",
-        "railroad/railcontent": "dev-srr-148-CMS as v2.1.35",
+        "railroad/railcontent": "2.1.*",
         "railroad/railforums": "2.0.*",
         "railroad/railnotifications": "3.0.*",
         "railroad/railtracker": "4.0.*",
         "railroad/referral": "3.0.*",
         "railroad/usora": "3.0.*",
         "railroadmedia/helpscout-api-php": "~3.7",
+        "rudderstack/rudder-php-sdk": "*",
         "shopify/shopify-api": "^5.1",
         "signifly/laravel-shopify": "^1.2",
         "spatie/laravel-data": "^3.9",
@@ -80,7 +82,8 @@
             "helpers/helpers.php",
             "app/Modules/UserManagementSystem/helpers/user_management_system_helpers.php",
             "app/Modules/Brand/helpers/brand_helpers.php",
-            "app/Modules/Brand/helpers/prices.php"
+            "app/Modules/Brand/helpers/prices.php",
+            "app/Modules/EventTracking/Avo/Avo.php"
         ]
     },
     "autoload-dev": {

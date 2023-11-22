@@ -1,0 +1,25 @@
+{
+  "avo": {
+    "version": 3
+  },
+  "schema": {
+    "id": "1cMjCpEPIvTt6xkXe7Fi",
+    "name": "Members' Area"
+  },
+  "branch": {
+    "id": "ycp3d9CRQ",
+    "name": "add-platform-property"
+  },
+  "sources": [
+    {
+      "id": "Z-PFv6Lo9",
+      "name": "Musora Web Platform",
+      "path": "app/Modules/EventTracking/Avo/Avo.php",
+      "interfacePath": "app/Modules/EventTracking/Avo/Avo.php",
+      "actionId": "MxjnBvljQWTqcoR54e9D",
+      "branchId": "ycp3d9CRQ",
+      "updatedAt": "2023-11-16T16:42:15.655Z"
+    }
+  ],
+  "force": false
+}

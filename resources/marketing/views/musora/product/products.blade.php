@@ -47,7 +47,7 @@
                         Accessories
                     </span>
                 @endif
-                @if(count($hats) > 0 || count($hats) > 0 || count($hoodies) > 0)
+                @if(count($misc) > 0 || count($misc) > 0 || count($hoodies) > 0)
                     <span
                         class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
                         x-on:click="filter = 'clothing'"
@@ -123,7 +123,7 @@
                 </section>
             @endif
 
-            @if(count($hats) > 0)
+            @if(count($misc) > 0)
                 <section class="grid-view" x-show="filter === 'clothing' || filter === 'all'">
                     <ul class="fixed-cards">
                         <li>
@@ -136,23 +136,23 @@
                                         style="@if($theme === 'pianote') filter: invert(1) sepia(1) brightness(.5) hue-rotate(-70deg) saturate(37); @elseif($theme === 'drumeo') filter: invert(1) sepia(1) brightness(.35) hue-rotate(140deg) saturate(37); @endif"
                                     />
                                 </div>
-                                Hats
+                                Misc
                             </h5>
                         </li>
-                        @foreach($hats as $hat){
+                        @foreach($misc as $miscItem){
                             @include('musora.product.partials._shop-card', [
-                                "sku" => $hat->sku,
-                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
-                                "thumbnail" => $hat->thumbnail,
-                                "badgeText" => $hat->badge_text,
-                                "title" => $hat->name,
-                                "cardDescription" => $hat->short_desc,
-                                "fullPrice" => $hat->price,
-                                "price" => $hat->discounted_price === '0.00' || empty($hat->discounted_price) ? $hat->price : $hat->discounted_price,
+                                "sku" => $miscItem->sku,
+                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $miscItem->slug ),
+                                "thumbnail" => $miscItem->thumbnail,
+                                "badgeText" => $miscItem->badge_text,
+                                "title" => $miscItem->name,
+                                "cardDescription" => $miscItem->short_desc,
+                                "fullPrice" => $miscItem->price,
+                                "price" => $miscItem->discounted_price === '0.00' || empty($miscItem->discounted_price) ? $miscItem->price : $miscItem->discounted_price,
                                 "physical" => true,
-                                "sizes" => $hat->sizes,
-                                "soldOut" => $hat->sold_out,
-                                "category" => strtolower($hat->productType->name),
+                                "sizes" => $miscItem->sizes,
+                                "soldOut" => $miscItem->sold_out,
+                                "category" => strtolower($miscItem->productType->name),
                             ])
                         }
                         @endforeach

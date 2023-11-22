@@ -14,6 +14,7 @@
 
     @include("singeo._partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
+                            "formName" => 'Website Signup',
         "formId" => "Guitareo - Engagement - Trigger - Website Signup - Web Form",
         "buttonText" => "Send Me Free Content",
         "minimalForm" => true,
