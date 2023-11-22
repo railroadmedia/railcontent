@@ -141,12 +141,7 @@
         "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png"
     ])
 
-    @if(Carbon\Carbon::create(2023, 11, 25, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-        @include('_partials.components.countdown',[
-            'countdownDate' => '2023-11-25 00:00:00',
-            'promoVersion' => true
-        ])
-    @elseif(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+    @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
         @include('_partials.components.countdown',[
             'countdownDate' => '2023-11-27 00:00:00',
             'promoVersion' => true

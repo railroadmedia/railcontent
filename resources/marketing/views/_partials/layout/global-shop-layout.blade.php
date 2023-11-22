@@ -210,12 +210,7 @@
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-    @if(Carbon\Carbon::create(2023, 11, 25, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-        @include('_partials.components.countdown',[
-            'countdownDate' => '2023-11-25 00:00:00',
-            'promoVersion' => true
-        ])
-    @elseif(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+    @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
         @include('_partials.components.countdown',[
             'countdownDate' => '2023-11-27 00:00:00',
             'promoVersion' => true
