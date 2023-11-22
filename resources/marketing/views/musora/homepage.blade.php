@@ -232,10 +232,10 @@
                 Click any of the logos to shop<br class="sm:hidden">
                  our Black Friday deals.</h6>
             <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs sm:max-w-none my-3">
-                <a class="m-1 join pianote smaller" href="/shop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-piano-keyboard"></i> Pianote</a>
-                <a class="m-1 join guitareo smaller" href="/shop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-guitar"></i> Guitareo</a>
-                <a class="m-1 join drumeo smaller" href="/drumshop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-drum"></i> Drumeo</a>
-                <a class="m-1 join singeo smaller" href="/shop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-microphone-stand"></i> Singeo</a>
+                <a class="m-1 join pianote smaller" href="https://www.pianote.com/shop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-piano-keyboard"></i> Pianote</a>
+                <a class="m-1 join guitareo smaller" href="https://www.guitareo.com/shop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-guitar"></i> Guitareo</a>
+                <a class="m-1 join drumeo smaller" href="https://www.drumeo.com/drumshop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-drum"></i> Drumeo</a>
+                <a class="m-1 join singeo smaller" href="https://www.singeo.com/shop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-microphone-stand"></i> Singeo</a>
             </div>
             <div class="inline-flex flex-wrap mx-auto justify-center items-center text-promo">
                 <h5 class="leading-none m-0"><strong>DEALS END IN:</strong></h5>
