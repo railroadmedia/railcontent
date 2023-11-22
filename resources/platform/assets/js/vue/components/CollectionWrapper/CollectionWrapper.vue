@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :active-tab="filter.activeTab" :filterable-values="filterableValues" :hide-filter="!showFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData"
+            :active-tab="filter.activeTab" :filterable-values="filterableValues" :hide-filter="hideFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
         />
 
@@ -179,10 +179,9 @@ const isList = computed(() => {
     return !isPlayAlong.value && !isRoutine.value && !isWorkout.value && !isChallenge.value;
 })
 
-
 //Filter state reactive
-const showFilter = computed(() => {
-    return isSong.value || isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value || isCoach.value || isWorkout.value || isChallenge.value;
+const hideFilter = computed(() => {
+    return isRoutine.value || isStudentReview.value; 
 })
 
 //Tab options reactive
