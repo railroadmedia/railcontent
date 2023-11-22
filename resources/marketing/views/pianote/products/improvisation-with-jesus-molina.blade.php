@@ -68,7 +68,7 @@
     "cartVersion" => true,
     ])
 
-    @include('pianote._partials._promo-banner', [
+    @include('pianote._partials.promo-banner', [
         "name" => "Improvisation & Musical Freedom",
         "fullPrice" => floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->price),
         "price" => floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->discounted_price),
