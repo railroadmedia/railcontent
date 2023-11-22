@@ -882,7 +882,7 @@ class ShopifyAPIService
             if (($merchandise['digitalAccessTimeType']['value'] ?? null) === 'lifetime' &&
                 (($merchandise['digitalAccessType']['value'] ?? null) === 'all content access' ||
                     ($merchandise['digitalAccessType']['value'] ?? null) === 'basic content access')  &&
-                (float)$lineItemData['cost']['totalAmount']['amount'] > 250) {
+                (float)$lineItemData['cost']['totalAmount']['amount'] > 100) {
                 $applyLifetimeMembershipDiscountCode = true;
             }
         }
