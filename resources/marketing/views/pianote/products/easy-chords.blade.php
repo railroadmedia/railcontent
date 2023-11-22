@@ -284,7 +284,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner', [
+    @include('pianote._partials.promo-banner', [
         "name" => "Easy Chords",
         "fullPrice" => floatval($productPrices['easy-chords']->price),
         "price" => floatval($productPrices['easy-chords']->discounted_price),
