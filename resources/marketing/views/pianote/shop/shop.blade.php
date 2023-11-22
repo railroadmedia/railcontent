@@ -106,7 +106,7 @@
             ];
         @endphp
         @include('_partials.layout.holiday.bundle-tiles', [
-            "header" => 'Save up to 86% with <br class="sm:hidden"> Black Friday Bundles',
+            "header" => 'Save even more with <br class="sm:hidden"> Black Friday Bundles',
         ])
 
         <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">

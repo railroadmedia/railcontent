@@ -6,7 +6,7 @@ style="
         background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/cm-header-bg.jpg');
     @endif
 ">
-    <div class="container mx-auto relative z-30 @if(!empty($bfVersion)) max-w-3xl @else max-w-lg @endif">
+    <div class="container mx-auto relative z-30 @if(!empty($bfVersion)) max-w-3xl @else max-w-2xl @endif">
 
         @if(!empty($bfVersion))
             <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
