@@ -91,6 +91,14 @@ class ShopifyAPIService
                                     title
                                     weight
                                     weightUnit
+                                    compareAtPrice {
+                                        amount
+                                        currencyCode
+                                    }
+                                    price {
+                                        amount
+                                        currencyCode
+                                    }
                                     digitalAccessTimeType: metafield(
                                         namespace: "products"
                                         key: "digital_access_time_type"

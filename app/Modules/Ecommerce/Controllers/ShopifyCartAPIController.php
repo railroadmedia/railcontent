@@ -446,9 +446,16 @@ class ShopifyCartAPIController extends Controller
                     "quantity" => $shopifyLineItemData['quantity'],
                     "thumbnail_url" => $shopifyLineItemData['merchandise']['image']['url'] ?? '',
                     "description" => $shopifyLineItemData['merchandise']['product']['description'],
-                    "price_before_discounts" => (float)$shopifyLineItemData['cost']['subtotalAmount']['amount'],
                     "price_after_discounts" => (float)$shopifyLineItemData['cost']['totalAmount']['amount'],
                 ];
+
+                if (!empty($shopifyLineItemData['merchandise']['compareAtPrice']['amount'])) {
+                    $priceBeforeDiscounts = round((float)($shopifyLineItemData['merchandise']['compareAtPrice']['amount'] ?? 0) * $shopifyLineItemData['quantity'], 2);
+                } else {
+                    $priceBeforeDiscounts = round((float)($shopifyLineItemData['merchandise']['price']['amount'] ?? 0) * $shopifyLineItemData['quantity'], 2);
+                }
+
+                $legacyLineItemData["price_before_discounts"] = $priceBeforeDiscounts;
 
                 $legacyResponseData['meta']['cart']['items'][] = $legacyLineItemData;
             }

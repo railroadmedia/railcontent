@@ -7,7 +7,7 @@
 @endsection
 
 @section('topbar')
-    @include('pianote._partials._promo-banner', [
+    @include('pianote._partials.promo-banner', [
         "name" => "The Power of Chords",
         "fullPrice" => floatval($productPrices['the-power-of-chords']->price),
         "price" => floatval($productPrices['the-power-of-chords']->discounted_price),

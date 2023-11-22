@@ -77,7 +77,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner', [
+    @include('pianote._partials.promo-banner', [
         "name" => "Classical Piano Pieces",
         "fullPrice" => floatval($productPrices['classical-piano-pieces']->price),
         "price" => floatval($productPrices['classical-piano-pieces']->discounted_price),
