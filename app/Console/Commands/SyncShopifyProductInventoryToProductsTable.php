@@ -39,9 +39,9 @@ class SyncShopifyProductInventoryToProductsTable extends Command
                  * @var $products Product[]
                  */
                 foreach ($products as $product) {
-                    if (isset($skuInventoryCounts[$product->sku])) {
+                    if (isset($skuInventoryCounts[$product->sku]) && $product->stock !== $skuInventoryCounts[$product->sku]) {
                         $this->info(
-                            'Setting product SKU ' . $product->sku . ' inventory count to: ' . $skuInventoryCounts[$product->sku]
+                            'Setting product SKU ' . $product->sku . ' inventory count from: ' . $product->stock . ' to: ' . $skuInventoryCounts[$product->sku]
                         );
                         $product->stock = $skuInventoryCounts[$product->sku];
 
