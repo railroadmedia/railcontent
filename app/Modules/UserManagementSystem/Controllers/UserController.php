@@ -96,6 +96,35 @@ class UserController extends Controller
         );
     }
 
+    public function createAccountPage(Request $request)
+    {
+        $email = $request->get('email');
+
+        // This must be generated passed so that someone can't claim someone else's email.
+        // It must be generated via md5 with the email string and special key combined.
+        // md5('email' . config('shopify.multipass.account_creation_secret_key'))
+        // On the shopify side, we'll generate the link to this claim page and include the key in the url params. This
+        // ensures that only a person with the special link can claim that email address.
+
+        $verificationToken = $request->get('verification_token');
+
+        if (strtolower($verificationToken) !== strtolower(md5($email . config('shopify.multipass.account_creation_secret_key')))) {
+            throw new AuthorizationException('Invalid verification_token.', 403);
+        }
+
+        if (user() && user()->getEmail() == $email && !user()->doesRequirePasswordUpdate()) {
+            return redirect()->to('/members');
+        }
+
+        $user = User::query()->where('email', $email)->first() ?? null;
+
+        if ($user && !$user->doesRequirePasswordUpdate()) {
+            Auth::logout();
+            return redirect()->route('login', ['email' => $email]);
+        }
+
+        return view('pages.account-creation', ['email' => $email, 'verificationToken' => $verificationToken]);
+    }
 
     public function createUserWithVerificationToken(Request $request)
     {

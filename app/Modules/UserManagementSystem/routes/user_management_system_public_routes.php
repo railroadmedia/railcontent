@@ -16,7 +16,7 @@ Route::group(
          */
         Route::get(
             'create-account',
-            OnboardingController::class . '@createAccountPage'
+            UserController::class . '@createAccountPage'
         )
             ->name('user_management_system.create-account-page');
 
