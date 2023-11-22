@@ -159,8 +159,8 @@
 {{--            "linkUrl" => "/choose-plan",--}}
 {{--        ])--}}
         @include('drumeo.sales.partials._nav-link', [
-            "linkName" => "Shop",
-            "linkIcon" => "fas fa-tag",
+            "linkName" => "Black Friday Deals",
+            "linkIcon" => "fas fa-tag text-promo",
             "linkUrl" => "/shop",
         ])
         @include('drumeo.sales.partials._nav-link', [
