@@ -182,7 +182,7 @@ const isList = computed(() => {
 
 //Filter state reactive
 const showFilter = computed(() => {
-    return isSong.value || isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value || isCoach.value || isWorkout.value;
+    return isSong.value || isRudiment.value || isQuickTips.value || isStudentFocus.value || isSolos.value || isPlayAlong.value || isCourse.value || isBootCamps.value || isSongTutorial.value || isArchives.value || isCoach.value || isWorkout.value || isChallenge.value;
 })
 
 //Tab options reactive
