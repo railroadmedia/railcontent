@@ -1,8 +1,10 @@
 @php
-    $currentDate = now();
-    $blackFridayDate = \Carbon\Carbon::create(2023, 11, 24); // need to change, just for checking 
-    $cyberMondayDate = \Carbon\Carbon::create(2023, 11, 27);
-    $christmasDate = \Carbon\Carbon::create(2023, 12, 25);
+    $currentDate = now()->timezone('America/Vancouver');
+    $blackFridayDate = \Carbon\Carbon::create(2023, 11, 24)->timezone('America/Vancouver'); // need to change, just for checking 
+    $cyberMondayDate = \Carbon\Carbon::create(2023, 11, 27)->timezone('America/Vancouver');
+    $christmasDate = \Carbon\Carbon::create(2023, 12, 25)->timezone('America/Vancouver');
+
+    dd($currentDate);
 @endphp
 
 <div class="w-full pt-4">
