@@ -196,6 +196,7 @@ return [
             'unit',
             'song-tutorial',
             'song-tutorial-children',
+            'challenge',
         ],
         'completed' => [
             'course',
@@ -222,6 +223,7 @@ return [
             'unit',
             'song-tutorial',
             'song-tutorial-children',
+            'challenge',
         ],
     ],
 
