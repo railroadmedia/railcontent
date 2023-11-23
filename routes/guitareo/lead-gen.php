@@ -39,7 +39,7 @@ Route::domain('{guitareoDomain}')
         function () {
             Route::get('/{page?}', LeadGenController::class . '@songInAnHour')
                 ->whereIn('page', [
-                    null, 'thank-you', 'success', ' writing-a-melody', 'next-steps'
+                    null, 'thank-you', 'success', 'writing-a-melody', 'next-steps'
                 ]);
             Route::get('/{page?}/{lesson?}', LeadGenController::class . '@songInAnHour')
                 ->whereIn('page', [
