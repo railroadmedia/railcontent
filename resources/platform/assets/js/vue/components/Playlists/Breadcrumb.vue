@@ -23,9 +23,14 @@
     </span>
   </div>
 </template>
-  
+
 <script setup>
+import { storeToRefs } from "pinia/dist/pinia";
+import { useUserStore } from "../../../stores/user";
 import { HomeIcon } from '@heroicons/vue/solid';
+
+const userStore = useUserStore();
+const { brand } = storeToRefs(userStore);
 
 const props = defineProps({
   brand: String,
@@ -36,4 +41,3 @@ const props = defineProps({
   lastLevelTitle: String,
 });
 </script>
-  
