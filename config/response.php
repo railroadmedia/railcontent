@@ -1912,6 +1912,7 @@ return [
             'slug',
             'primary_cta_text',
             'data.thumbnail_url',
+            'data.logo_image_url',
             'type',
             'url',
             'published_on',
