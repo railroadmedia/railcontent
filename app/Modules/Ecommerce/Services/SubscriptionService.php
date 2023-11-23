@@ -61,7 +61,7 @@ class SubscriptionService
             /** @var Subscription $subscription */
             $product = $productLookup[$subscription->sku] ?? $productIdsLookup[$subscription->shopifyVariantId] ?? null;
             if (!$product) {
-                Log::error("Product $subscription->sku not found for recharge subscription $subscription->id");
+                Log::warning("Product $subscription->sku $subscription->shopifyVariantId not found for recharge subscription $subscription->id");
                 return;
             }
             $subscription->setProduct($product);
@@ -69,10 +69,10 @@ class SubscriptionService
 
         $membershipSubscriptions = $subscriptions->filter(function ($subscription) {
             /** @var Subscription $subscription */
-            return $subscription->product->isRecurringMembershipProduct();
+            return $subscription->product?->isRecurringMembershipProduct() ?? false;
         });
 
-        $activeMembershipSubscriptions = $subscriptions->filter(function ($subscription) {
+        $activeMembershipSubscriptions = $membershipSubscriptions->filter(function ($subscription) {
             /** @var Subscription $subscription */
             return $subscription->status == RechargeSubscriptionStatusEnum::Active->value;
         });

@@ -13,7 +13,7 @@ class Subscription
 
     public ?Carbon $createdAt;
     public int $id;
-    public ?Product $product;
+    public ?Product $product = null;
     public ?int $shopifyVariantId;
     public string $status;
     public ?string $sku;
