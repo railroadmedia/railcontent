@@ -34,7 +34,7 @@
             {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
             <a
                 class="join vue-add-to-cart"
-                href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1&redirect=/order"
+                href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1"
                 data-product-json='{"piano-technique-made-easy": 1}'
             >Get Started &raquo;</a>
 
@@ -57,7 +57,7 @@
                     <iframe class="embed-responsive-item reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/466355774?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
                 {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
-                <a href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1&redirect=/order" class="join">Get Started</a>
+                <a href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1" class="join">Get Started</a>
             </div>
         </div>
     </div>
@@ -561,7 +561,7 @@
             <h2>Master the fundamentals — so you can <br> <strong>play anything you want on the piano.</strong></h2>
             {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
             <a
-                href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1&redirect=/order"
+                href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1"
                 class="join vue-add-to-cart"
                 data-product-json='{"piano-technique-made-easy": 1}'
             >Get Started &raquo;</a>

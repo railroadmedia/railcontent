@@ -52,7 +52,7 @@
                             <strong>ONLY ${{ floatval($productPrices['taktell-piccolo-metronome']->discounted_price) }}</strong>
                         @endif
                     </h4>
-                    <a href="/ecommerce/add-to-cart?products[taktell-piccolo-metronome]=1&redirect=/order" class="join medium w-full">ORDER NOW &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[taktell-piccolo-metronome]=1" class="join medium w-full">ORDER NOW &raquo;</a>
                 </div>
             </div>
         </div>
@@ -263,7 +263,7 @@
                             <strong>ONLY ${{ floatval($productPrices['taktell-piccolo-metronome']->discounted_price) }}</strong>
                         @endif
                     </h4>
-                    <a href="/ecommerce/add-to-cart?products[taktell-piccolo-metronome]=1&redirect=/order" class="join medium w-full">ORDER NOW &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[taktell-piccolo-metronome]=1" class="join medium w-full">ORDER NOW &raquo;</a>
                 </div>
             </div>
         </div>

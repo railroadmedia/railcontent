@@ -223,7 +223,7 @@
 
                         <a
                             class="join vue-add-to-cart mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl"
-                            href="/ecommerce/add-to-cart?products[pianote-foundation]=1&redirect=/order"
+                            href="/ecommerce/add-to-cart?products[pianote-foundation]=1"
                             data-product-json='{"pianote-foundation": 1}'
                         >CLICK HERE TO ORDER &raquo;</a>
                     @endif
@@ -483,7 +483,7 @@
                         @else
                             <a
                                 class="join vue-add-to-cart w-full text-lg sm:text-xl md:text-2xl lg:text-3xl"
-                                href="/ecommerce/add-to-cart?products[pianote-foundation]=1&redirect=/order"
+                                href="/ecommerce/add-to-cart?products[pianote-foundation]=1"
                                 data-product-json='{"pianote-foundation": 1}'
                             >CLICK HERE TO ORDER »</a>
                         @endif
