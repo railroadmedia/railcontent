@@ -119,6 +119,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('addevent:syncMusora')->hourlyAt(50);
 
         $schedule->command('addevent:syncMusora --live')->hourlyAt(30);
+
+        $schedule->command('SyncShopifyProductInventoryToProductsTable')->everyFiveMinutes();
     }
 
     /**
