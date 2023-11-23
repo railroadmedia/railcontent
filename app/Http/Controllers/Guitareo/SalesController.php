@@ -99,7 +99,7 @@ class SalesController extends BaseController
 
     public function songs500()
     {
-        return view('guitareo.products.500-songs');
+        return view('guitareo.products.500-songs', [ 'theme' => 'guitareo' ]);
     }
 
     public function acousticGuitarMadeEasy()
@@ -109,31 +109,31 @@ class SalesController extends BaseController
 
     public function guitarQuest()
     {
-        return view('guitareo.products.guitar-quest.guitar-quest');
+        return view('guitareo.products.guitar-quest.guitar-quest', [ 'theme' => 'guitareo' ]);
     }
 
     public function guitarQuestDiscount()
     {
-        return view('guitareo.products.guitar-quest.guitar-quest-discount');
+        return view('guitareo.products.guitar-quest.guitar-quest-discount', [ 'theme' => 'guitareo' ]);
     }
 
     public function guitarQuestDiscountTricks()
     {
-        return view('guitareo.products.guitar-quest.guitar-quest-discount-tricks');
+        return view('guitareo.products.guitar-quest.guitar-quest-discount-tricks', [ 'theme' => 'guitareo' ]);
     }
 
     public function guitarQuestTestimonials()
     {
-        return view('guitareo.products.guitar-quest.guitar-quest-testimonials');
+        return view('guitareo.products.guitar-quest.guitar-quest-testimonials', [ 'theme' => 'guitareo' ]);
     }
 
     public function gs(Request $request)
     {
         if ($request->get('utm_campaign') === 'gs27_aug2019') {
-            return redirect('/acoustic-guitar-made-easy');
+            return redirect('/acoustic-guitar-made-easy', [ 'theme' => 'guitareo' ]);
         }
 
-        return view('guitareo.products.guitar-system');
+        return view('guitareo.products.guitar-system', [ 'theme' => 'guitareo' ]);
     }
 
     public function guitarTechniqueMadeEasy()
@@ -143,7 +143,7 @@ class SalesController extends BaseController
 
     public function rhythmAndGroove()
     {
-        return view('guitareo.products.rhythm-and-groove');
+        return view('guitareo.products.rhythm-and-groove', [ 'theme' => 'guitareo' ]);
     }
 
     public function products(Request $request, $domain, $page = null)

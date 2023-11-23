@@ -242,7 +242,7 @@
                 <br><br>
                 And your Pianote Metronome comes with a 2-year guarantee. That means you don’t have to worry about the quality of your metronome.
                 <br><br>
-                Insead, you can focus on what’s most important - practice.</p>
+                Instead, you can focus on what’s most important - practice.</p>
         </div>
     </section>
     <div id="customize-anchor" class="anchor"></div>

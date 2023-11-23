@@ -603,6 +603,65 @@ class ShopifyAPIService
     }
 
     /**
+     * This accepts either Shopify product SKUs or product variant SKUs. It always returns the underlying
+     * product Shopify product variant id (not the product ID).
+     *
+     * @param array $productSKUs
+     * @return array
+     * @throws HttpRequestException
+     * @throws MissingArgumentException
+     */
+    public function getProductInventoryCountFromSKUs(array $productSKUs)
+    {
+        $productSKUsQueryStrings = [];
+
+        foreach ($productSKUs as $productSKU) {
+            $productSKUsQueryStrings[] = "(sku:$productSKU)";
+        }
+
+        $productsQueryString = implode(' OR ', $productSKUsQueryStrings);
+
+        $productData = $this->adminClient->query(
+            <<<GRAPHQL
+                query {
+                    productVariants(first: 25, query: "$productsQueryString") {
+                        edges {
+                            node {
+                                id
+                                sku
+                                inventoryQuantity
+                            }
+                        }
+                    }
+                }
+            GRAPHQL
+        );
+
+        $responseBody = $productData->getBody()->getContents();
+        $responseCode = $productData->getStatusCode();
+
+        $jsonResponse = json_decode($responseBody, true);
+
+        $responseProductVariantData = $jsonResponse["data"]["productVariants"]["edges"] ?? [];
+
+        if ($responseCode !== 200) {
+            throw new Exception(
+                "Shopify API call (productVariants) error: " .
+                "HTTP status code: $responseCode - " .
+                "HTTP response body: $responseBody"
+            );
+        }
+
+        $productSKUsInventoryCounts = [];
+
+        foreach ($jsonResponse["data"]["productVariants"]["edges"] as $edge) {
+            $productSKUsInventoryCounts[$edge['node']['sku']] = $edge['node']['inventoryQuantity'];
+        }
+
+        return $productSKUsInventoryCounts;
+    }
+
+    /**
      * This accepts either Shopify product SKUs or product variant SKUs.
      *
      * @param array $productSKUs

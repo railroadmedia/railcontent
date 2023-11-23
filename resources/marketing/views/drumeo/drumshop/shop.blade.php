@@ -133,12 +133,12 @@
             ];
         @endphp
         @include('_partials.layout.holiday.bundle-tiles', [
-            "header" => 'Save even more with <br class="sm:hidden"> Black Friday Bundles',
+            "header" => 'Featured Deals',
         ])
 
         <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
             <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Featured</strong></h5>
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Trending Now</strong></h5>
                 <div
                     x-data="{
                 init() {
@@ -190,6 +190,7 @@
                                             "includedEdge" => $feat->included_edge,
                                             "sizes" => $feat->sizes,
                                             'FCP' => $key < 4 ? true : null,
+                                            "size_case_sensitive" => $feat->size_case_sensitive,
                                         ])
                                     </li>
                                 @endforeach
@@ -313,6 +314,35 @@
                         "size_case_sensitive" => $accessory->size_case_sensitive,
                     ])
                 @endforeach
+                </div>
+            </div>
+        </section>
+
+
+        {{--   MISC     --}}
+        <div id="misc" class="anchor"></div>
+        <section class="grid-view category-section" data-category="misc" x-show="filter === 'clothing' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Misc</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+
+                    @foreach($misc as $miscItem)
+                        @include('musora.shop._shop-card-alt', [
+                             "sku" => $miscItem->sku,
+                             "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $miscItem->slug ),
+                             "badgeText" => $miscItem->badge_text,
+                             "thumbnail" => $miscItem->thumbnail,
+                             "title" => $miscItem->name,
+                             "cardDescription" => $miscItem->short_desc,
+                             "fullPrice" => $miscItem->price,
+                             "price" => $miscItem->discounted_price,
+                             "sizes" => $miscItem->sizes,
+                             "soldOut" => isset($products[$miscItem->sku]) ? $products[$miscItem->sku]->getStockAvailability() === 0 : $miscItem->sold_out,
+                             "category" => strtolower($miscItem->productType->name),
+                             "size_case_sensitive" => $miscItem->size_case_sensitive,
+                        ])
+                    @endforeach
+
                 </div>
             </div>
         </section>

@@ -28,6 +28,7 @@ use App\Console\Commands\RepairUserProgressStartedOn;
 use App\Console\Commands\RepairVimeoDurations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
+use App\Console\Commands\SyncShopifyProductInventoryToProductsTable;
 use App\Console\Commands\SyncUsersToCIO;
 use App\Console\Commands\TestLessonsDescriptionUrls;
 use App\Console\Commands\MembershipFieldsSync;
@@ -77,6 +78,7 @@ class Kernel extends ConsoleKernel
         RemoveRailTrackerData::class,
         SyncUsersToCIO::class,
         AssignUnassignedHelpScoutCustomersToMentors::class,
+        SyncShopifyProductInventoryToProductsTable::class,
     ];
 
     /**
@@ -117,6 +119,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('addevent:syncMusora')->hourlyAt(50);
 
         $schedule->command('addevent:syncMusora --live')->hourlyAt(30);
+
+        $schedule->command('SyncShopifyProductInventoryToProductsTable')->everyFiveMinutes();
     }
 
     /**

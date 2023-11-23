@@ -31,7 +31,7 @@
 
 @section('body')
     @include('_partials.components.shop.promo-top-banner',[
-        'text' => '<span class="text-promo">Save up to 84%</span> on piano lessons,<br class="sm:hidden"> tools, & merch.',
+        'text' => '<span class="text-promo">Save up to 88%</span> on piano lessons,<br class="sm:hidden"> tools, & merch.',
     ])
 
     @if(Session::has('addedProducts'))
@@ -106,12 +106,12 @@
             ];
         @endphp
         @include('_partials.layout.holiday.bundle-tiles', [
-            "header" => 'Save even more with <br class="sm:hidden"> Black Friday Bundles',
+            "header" => 'Featured Deals',
         ])
 
         <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
             <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Featured</strong></h5>
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Trending Now</strong></h5>
                 <div
                     x-data="{
                 init() {
@@ -163,6 +163,7 @@
                                             "includedEdge" => $feat->included_edge,
                                             "sizes" => $feat->sizes,
                                             'FCP' => $key < 4 ? true : null,
+                                            "size_case_sensitive" => $feat->size_case_sensitive,
                                         ])
                                     </li>
                                 @endforeach

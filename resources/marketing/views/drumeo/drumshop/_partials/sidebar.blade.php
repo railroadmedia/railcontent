@@ -26,7 +26,7 @@
                     @if(number_format($price, 2) == intval($price))
                         <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  floatVal($price)  }}</span></strong>
                     @else
-                        <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  floatVal(number_format($price, 2))  }}</span></strong>
+                        <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  number_format($price, 2)  }}</span></strong>
                     @endif
                 </h1>
             @elseif(isset($price))

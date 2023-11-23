@@ -11,6 +11,7 @@ use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\Ecommerce\Services\UserProductService;
+use App\Modules\EventTracking\Services\CustomerIoService;
 use Carbon\Carbon;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -30,6 +31,8 @@ class RevenueCatController extends Controller
     private UserProductService $userProductService;
     private ShopifySyncService $shopifySyncService;
     private PaymentService $paymentService;
+    private RevenueCatGateway $revenueCatGateway;
+    private CustomerIoService $customerIoService;
 
     const SUBSCRIPTION_REVOKED = 12;
     const SANDBOX_ENVIRONMENT = 'SANDBOX';
@@ -48,7 +51,8 @@ class RevenueCatController extends Controller
         UserProductService $userProductService,
         PaymentService $paymentService,
         ShopifySyncService $shopifySyncService,
-        RevenueCatGateway $revenueCatGateway
+        RevenueCatGateway $revenueCatGateway,
+        CustomerIoService $customerIoService
     ) {
         $this->revenueCatService = $revenueCatService;
         $this->subscriptionService = $subscriptionService;
@@ -56,6 +60,7 @@ class RevenueCatController extends Controller
         $this->shopifySyncService = $shopifySyncService;
         $this->paymentService = $paymentService;
         $this->revenueCatGateway = $revenueCatGateway;
+        $this->customerIoService = $customerIoService;
     }
 
     public function processNotification(Request $request)
@@ -145,6 +150,7 @@ class RevenueCatController extends Controller
                         null //defaults to USD
                     );
                     $this->setUserSubscription($user, $type);
+                    $this->customerIoService->updateCustomerIoAttributesFromRevenueCat($user, $data['event'], $musoraProduct);
                 }
                 break;
             case 'NON_RENEWING_PURCHASE':
@@ -210,6 +216,7 @@ class RevenueCatController extends Controller
                     );
 
                     $this->setUserSubscription($user, $type);
+                    $this->customerIoService->updateCustomerIoAttributesFromRevenueCat($user, $data['event'], $musoraProduct);
                 }
                 break;
             case 'CANCELLATION':
@@ -248,6 +255,13 @@ class RevenueCatController extends Controller
                         $this->unsetUserSubscription($user, $type);
                     }
                 }
+                $productId = $this->getProductId($data['event']['product_id']);
+
+                //get Musora product
+                $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
+                $musoraProduct = $musoraProducts->first();
+
+                $this->customerIoService->updateCustomerIoAttributesFromRevenueCat($user, $data['event'], $musoraProduct);
                 break;
             case 'TRANSFER':
                 $oldRevenueCatAppUserId = $data['event']['transferred_from'];
