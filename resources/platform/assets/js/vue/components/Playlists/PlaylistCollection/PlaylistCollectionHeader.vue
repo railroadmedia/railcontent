@@ -52,7 +52,7 @@ const state = reactive({
 const handleCreatePlaylist = () => {
     window.openplaylistmodal({
         modalType: 'create',
-        brand,
+        brand: brand.value,
         data: {
             name: '',
             category: 'General',

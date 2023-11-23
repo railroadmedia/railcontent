@@ -170,7 +170,7 @@ const state = reactive({
 const handlePageChange = (pageNumber) => {
     //load playlists
     playlistsStore.loadingPlaylists = true;
-    playlistsStore.getPlaylists({ brand, page: pageNumber, term: state.searchTerm, sort: state.sortValue, categories: state.categories ? [state.categories] : [], limit: 10 }, token);
+    playlistsStore.getPlaylists({ brand: brand.value, page: pageNumber, term: state.searchTerm, sort: state.sortValue, categories: state.categories ? [state.categories] : [], limit: 10 }, token);
     //update current page number
     playlistsStore.resultsPage = pageNumber;
     //update url
@@ -192,7 +192,7 @@ onMounted(()=> {
         playlistsStore.loadingPlaylists = true;
         playlistsStore.getPlaylists(
             {
-                brand: brand,
+                brand: brand.value,
                 page: params.page || 1,
                 limit: null,
                 term: state.searchTerm,
