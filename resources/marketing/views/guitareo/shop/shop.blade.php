@@ -5,11 +5,14 @@
     <meta property="og:title" content="Guitareo Shop">
     <meta name="description" content="Say goodbye to “do it yourself” guitar lessons.">
     <meta property="og:description" content="Say goodbye to “do it yourself” guitar lessons.">
-{{--    @if(Carbon\Carbon::create(2023, 8, 1, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())--}}
-{{--        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/july/guitareo-summer-share-image.jpg">--}}
-{{--    @else--}}
-        <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2023/share-image-guitareo.jpg">
-{{--    @endif--}}
+
+    @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/guitareo/promos/november/bf-guitareo-shop-share-image.jpg">
+    @elseif(Carbon\Carbon::create(2023, 11, 28, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/guitareo/promos/november/cm-guitareo-shop-share-image.jpg">
+    @else
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/guitareo/promos/november/xmas-guitareo-shop-share-image.jpg">
+    @endif
     <meta property="og:url" content="https://www.guitareo.com/shop/">
 @endsection
 
@@ -92,18 +95,9 @@
 @endsection
 
 @section('body')
-    <header class="drum-shop-header relative">
-        <picture>
-            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/shop-bg.jpg">
-            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/shop-bg.jpg" alt="header background image" fetchpriority="high" />
-        </picture>
-        <div class="container mx-auto relative z-10">
-            <div class="px-2 md:px-3">
-                <img class="logo" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="guitareo logo" fetchpriority="high" />
-                <h1><strong>SHOP</strong></h1>
-            </div>
-        </div>
-    </header>
+    @include('_partials.components.shop.promo-top-banner',[
+        'text' => '<span class="text-promo">Save up to 80%</span> on guitar lessons,<br class="sm:hidden"> merch, & more.',
+    ])
 
     @if(Session::has('addedProducts'))
         <section class="py-6 md:py-10">
@@ -165,26 +159,82 @@
         "noClothing" => true
     ])
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
+        @php
+            $bundles = [
+                [
+                    'slug' => 'https://www.guitareo.com/shop/ultimate-lessons-bundle',
+                    'desc' => 'Guitareo Discount<br> + 5 Bonuses',
+                    'visible' => 1,
+                    'specialW' => true,
+                    'price' => 1075,
+                    'discountedPrice' => 150,
+                    'buttonColor' => '#00C9AC',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/guitareo/promos/november/bundles/guitareo-ultimate-lessons-card.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/guitareo/promos/november/bundles/guitareo-ultimate-lessons-card-m.jpg',
+                ],
+                [
+                    'slug' => '/lifetime',
+                    'desc' => 'Unlimited guitar lessons<br> for life + more',
+                    'visible' => 1,
+                    'discountedPrice' => 1200,
+                    'specialW2' => true,
+                    'price' => 1200,
+                    'buttonColor' => '#000',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
+                ],
+            ];
+        @endphp
+        @include('_partials.layout.holiday.bundle-tiles', [
+            "header" => 'Featured Deals',
+        ])
+
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Guitar Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-                    @include('musora.shop._shop-card-alt', [
-                     "itemURL" => "/",
-                     "sku" => null,
-                     "thumbnail" => "https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-membership-shop.jpg",
-                     "title" => "Guitareo Membership",
-                     "packAuthor" => "Ayla Tesler-Mabe",
-                     "cardDescription" => "Unlimited guitar lessons, a huge song library, and ongoing support from real teachers.",
-                     "specialPrice" => "7-Day Free Trial",
-                     "fullPrice" => 240,
-                     "price" => 240,
-                     "category" => "lessons",
-                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
-                     'soldOut' => false,
-                ])
+{{--                    @include('musora.shop._shop-card-alt', [--}}
+{{--                     "itemURL" => "/",--}}
+{{--                     "sku" => null,--}}
+{{--                     "thumbnail" => "https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-membership-shop.jpg",--}}
+{{--                     "title" => "Guitareo Membership",--}}
+{{--                     "packAuthor" => "Ayla Tesler-Mabe",--}}
+{{--                     "cardDescription" => "Unlimited guitar lessons, a huge song library, and ongoing support from real teachers.",--}}
+{{--                     "specialPrice" => "7-Day Free Trial",--}}
+{{--                     "fullPrice" => 240,--}}
+{{--                     "price" => 150,--}}
+{{--                     "category" => "lessons",--}}
+{{--                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",--}}
+{{--                     'soldOut' => false,--}}
+{{--                ])--}}
 
+                    <div x-cloak x-show="filter === 'lessons'">
+                        @include('musora.shop._shop-card-alt', [
+                             "itemURL" => "/shop/ultimate-lessons-bundle",
+                             "sku" => null,
+                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/guitareo/promos/november/bundles/guitareo-ultimate-shop-thumb.jpg",
+                             "title" => "Ultimate Lessons Bundle",
+                             "fullPrice" => 240,
+                             "price" => 150,
+                             "category" => "lessons",
+                             'soldOut' => false,
+                        ])
+                    </div>
+                    <div x-cloak x-show="filter === 'lessons'">
+                        @include('musora.shop._shop-card-alt', [
+                             "itemURL" => "/lifetime",
+                             "sku" => null,
+                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lt-shop-thumb2.jpg",
+                             "title" => "Lifetime Bundle",
+                             "fullPrice" => 1200.00,
+                             "price" => 1200.00,
+                             "category" => "lessons",
+                             'soldOut' => false,
+                        ])
+                    </div>
                 @foreach($lessons as $key => $lesson)
                     @include('musora.shop._shop-card-alt', [
                             "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,

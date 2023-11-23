@@ -2,16 +2,11 @@
 
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
-use App\Modules\Content\Models\Content;
-use App\Modules\Content\Services\ContentPermissionsService;
-use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
+use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
+use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Exception;
-use App\Modules\CustomerIO\Services\CustomerIoService;
-use Railroad\Ecommerce\Entities\User as EcommerceUser;
-use Railroad\Ecommerce\Services\UserProductService;
-use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use Modules\UserManagementSystem\Models\User;
 use Throwable;
 
@@ -31,14 +26,17 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
 
     /**
      * @param CustomerIoService $customerIoService
-     * @throws \Throwable
+     * @param CustomerIoSyncService $customerIoSyncService
+     * @param UserService $userService
+     * @param UserAccessPermissionsService $userAccessPermissionsService
+     * @throws Throwable
      */
     public function handle(
         CustomerIoService $customerIoService,
         CustomerIoSyncService $customerIoSyncService,
         UserService $userService,
         UserAccessPermissionsService $userAccessPermissionsService,
-    ) {
+    ): void {
         try {
             $this->user = $userService->getByIdOrNull($this->user->id);
             $accountNameBrandsToSync = config('event-data-synchronizer.customer_io_account_name_brands_to_sync', []);
@@ -62,6 +60,7 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
                     if ($this->data) {
                         $customerAttributes = array_merge($customerAttributes, $this->data);
                     }
+
                     $customerIoService->createOrUpdateCustomerByUserId(
                         $this->user->id,
                         $accountName,

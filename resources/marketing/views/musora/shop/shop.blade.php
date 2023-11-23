@@ -185,7 +185,7 @@
                         @foreach($hoodies as $hoodie)
                             @include('musora.shop._shop-card-alt', [
                                  "sku" => $hoodie->sku,
-                                 "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
+                                 "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
                                  "badgeText" => $hoodie->badge_text,
                                  "thumbnail" => $hoodie->thumbnail,
                                  "title" => $hoodie->name,
@@ -209,7 +209,7 @@
                         @foreach($shirts as $shirt)
                             @include('musora.shop._shop-card-alt', [
                                  "sku" => $shirt->sku,
-                                 "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
+                                 "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
                                  "badgeText" => $shirt->badge_text,
                                  "thumbnail" => $shirt->thumbnail,
                                  "title" => $shirt->name,

@@ -20,7 +20,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner-no-tw', [
+    @include('pianote._partials.promo-banner', [
         "name" => "De-Stupefy Your Left Hand",
         "fullPrice" => floatval($productPrices['destupefy-your-left-hand']->price),
         "price" => floatval($productPrices['destupefy-your-left-hand']->discounted_price),
@@ -451,6 +451,10 @@
             }
         });
     </script>
+    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
 
 
 @stop

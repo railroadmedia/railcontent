@@ -182,7 +182,7 @@
         "cartVersion" => true
     ])
 
-    @include('pianote._partials._promo-banner-no-tw', [
+    @include('pianote._partials.promo-banner', [
         "name" => "Playing Beautiful Piano",
         "fullPrice" => floatval($productPrices['play-beautiful-piano']->price),
         "price" => floatval($productPrices['play-beautiful-piano']->discounted_price),
@@ -458,9 +458,10 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
     {{-- Platform --}}
-    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
-    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
-    <script src="{{ mix('/platform/js/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
 
 
 @stop

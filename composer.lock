@@ -17443,8 +17443,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/railanalytics": 20,
-        "railroad/railcontent": 20
+        "railroad/railanalytics": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
