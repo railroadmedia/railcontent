@@ -216,7 +216,7 @@ class RevenueCatController extends Controller
                     );
 
                     $this->setUserSubscription($user, $type);
-                    $this->customerIoService->updateCustomerIoAttributesFromRevenueCat($user->id, $data['event'], $musoraProduct);
+                    $this->customerIoService->updateCustomerIoAttributesFromRevenueCat($user, $data['event'], $musoraProduct);
                 }
                 break;
             case 'CANCELLATION':

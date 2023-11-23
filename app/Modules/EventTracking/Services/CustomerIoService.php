@@ -15,7 +15,6 @@ use Throwable;
 
 class CustomerIoService
 {
-    private static array $alreadyQueuedUserIds;
     private LegacyCustomerIoService $customerIoService;
 
     public function __construct()
@@ -62,7 +61,7 @@ class CustomerIoService
         $subscriptionStatus = $this->getSubscriptionStatus($event);
         $expirationTimestamp = Carbon::createFromTimestampMs($event['expiration_at_ms'])->timestamp;
         $eventTimestamp = Carbon::createFromTimestampMs($event['event_timestamp_ms'])->timestamp;
-        $purchaseTimestamp = Carbon::createFromTimestampMs($event['purchase_at_ms'])->timestamp;
+        $purchaseTimestamp = Carbon::createFromTimestampMs($event['purchased_at_ms'])->timestamp;
 
         $attributes[$brand . '_membership_status'] = $subscriptionStatus;
         $attributes[$brand . '_membership_subscription_type'] = $product->subscription_interval_count . "_" . $product->subscription_interval_type;
@@ -72,17 +71,12 @@ class CustomerIoService
         $attributes[$brand . '_membership_subscription_latest-start-date'] = $purchaseTimestamp;
         $attributes[$brand . '_membership_subscription_first-start-date'] = Carbon::parse($user->created_at)->timestamp;
         $attributes[$brand . '_membership_subscription_trial-type'] = $this->getTrialType($product);
-
-        if (!in_array($user->id, self::$alreadyQueuedUserIds)) {
-            dispatch(
-                (new CustomerIoSyncUserByUserId($user, $attributes))->delay(
-                    Carbon::now()
-                        ->addSeconds(3)
-                )
-            );
-
-            self::$alreadyQueuedUserIds[] = $user->id;
-        }
+        dispatch(
+            (new CustomerIoSyncUserByUserId($user, $attributes))->delay(
+                Carbon::now()
+                    ->addSeconds(30)
+            )
+        );
     }
 
     private function getTrialType(Product $product): string
@@ -116,7 +110,7 @@ class CustomerIoService
 
     public function getSubscriptionStatus($event): string
     {
-        if ($event['cancel_reason']) {
+        if ($event['cancel_reason'] ?? false) {
             return 'cancelled';
         } elseif (Carbon::now()->lessThan(Carbon::createFromTimestampMs($event['expiration_at_ms']))) {
             return 'active';

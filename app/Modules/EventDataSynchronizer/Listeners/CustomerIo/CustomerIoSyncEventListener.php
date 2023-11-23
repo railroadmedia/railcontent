@@ -1522,19 +1522,20 @@ class CustomerIoSyncEventListener
             /** @var RechargeSubscription $latest */
             $latest = $brandSubscriptions->last() ?? null;
 
-            if (!$first || $user->hasMobileMembership()) {
-               continue;
+            if (!$first || !$latest || $user->hasMobileMembership()) {
+                continue;
             }
 
-            $attributes[$brand . '_membership_status'] = $latest ? $this->getSubscriptionStatus($latest) : "";
-            $attributes[$brand . '_membership_subscription_type'] = $latest ?
-                $latest->product->subscription_interval_count . "_" . $latest->product->subscription_interval_type : "";
-            $attributes[$brand . '_membership_subscription_renewal-date'] = $latest?->nextChargeScheduledAt->timestamp ?? "";
-            $attributes[$brand . '_membership_subscription_cancellation-date'] = $latest?->cancelledAt?->timestamp ?? "";
-            $attributes[$brand . '_membership_subscription_cancellation-reason'] = $latest?->cancellationReason ?? "";
-            $attributes[$brand . '_membership_subscription_first-start-date'] = Carbon::parse($user->created_at)->timestamp;
-            $attributes[$brand . '_membership_subscription_latest-start-date'] = $latest?->updatedAt?->timestamp ?? "";
-            $attributes[$brand . '_membership_subscription_trial-type'] = $latest ? $this->getTrialType($latest) : "";
+            $attributes[$brand . '_membership_status'] = $this->getSubscriptionStatus($latest);
+            $attributes[$brand . '_membership_subscription_type'] =
+                $latest->product->subscription_interval_count . "_" . $latest->product->subscription_interval_type;
+            $attributes[$brand . '_membership_subscription_renewal-date'] = $latest->nextChargeScheduledAt->timestamp;
+            $attributes[$brand . '_membership_subscription_cancellation-date'] = $latest->cancelledAt?->timestamp;
+            $attributes[$brand . '_membership_subscription_cancellation-reason'] = $latest->cancellationReason;
+            $attributes[$brand . '_membership_subscription_first-start-date'] =
+                Carbon::parse($user->created_at)->timestamp;
+            $attributes[$brand . '_membership_subscription_latest-start-date'] = $latest->updatedAt?->timestamp;
+            $attributes[$brand . '_membership_subscription_trial-type'] = $this->getTrialType($latest);
         }
         return $attributes;
     }
