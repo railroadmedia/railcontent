@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "161184980393c17cdb39aa0a25b05b53",
+    "content-hash": "8fef426a255375d204bc2cb84b11e768",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -2923,16 +2923,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.13.25",
+            "version": "8.13.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "fe9c0b201941977b91b6b086c9551aff07a733ae"
+                "reference": "1d730fe40d5f32641c12ca143a086757c95cfccf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/fe9c0b201941977b91b6b086c9551aff07a733ae",
-                "reference": "fe9c0b201941977b91b6b086c9551aff07a733ae",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/1d730fe40d5f32641c12ca143a086757c95cfccf",
+                "reference": "1d730fe40d5f32641c12ca143a086757c95cfccf",
                 "shasum": ""
             },
             "require": {
@@ -2991,7 +2991,7 @@
                 "issues": "https://github.com/giggsey/libphonenumber-for-php/issues",
                 "source": "https://github.com/giggsey/libphonenumber-for-php"
             },
-            "time": "2023-11-13T09:34:15+00:00"
+            "time": "2023-11-23T07:57:25+00:00"
         },
         {
             "name": "giggsey/locale",
@@ -8637,16 +8637,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.45",
+            "version": "dev-v3.0-workouts",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "0e6c6d3a07fa9fd3b8d2ddc4780da57efc4e12bf"
+                "reference": "5319a2e786d9c207f0e6654d434947d5e6d72d2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/0e6c6d3a07fa9fd3b8d2ddc4780da57efc4e12bf",
-                "reference": "0e6c6d3a07fa9fd3b8d2ddc4780da57efc4e12bf",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/5319a2e786d9c207f0e6654d434947d5e6d72d2e",
+                "reference": "5319a2e786d9c207f0e6654d434947d5e6d72d2e",
                 "shasum": ""
             },
             "require": {
@@ -8676,9 +8676,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.45"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.0-workouts"
             },
-            "time": "2023-11-14T13:35:24+00:00"
+            "time": "2023-11-23T13:17:12+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -17429,6 +17429,12 @@
     ],
     "aliases": [
         {
+            "package": "railroad/musora-api",
+            "version": "dev-v3.0-workouts",
+            "alias": "v3.1.45",
+            "alias_normalized": "3.1.45.0"
+        },
+        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "3.0.7",
@@ -17443,7 +17449,9 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/railanalytics": 20
+        "railroad/musora-api": 20,
+        "railroad/railanalytics": 20,
+        "railroad/railcontent": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
