@@ -41,7 +41,7 @@ class ShopController extends BaseController
         });
 
         $hoodies = $products->filter(function($value, $key){
-            return $value->productType->name === 'Hoodies';
+            return $value->productType->name === 'Hoodies' || $value->productType->name === 'Sweaters';
         });
 
         $featured = $products->whereIn('id', [208, 197, 113, 230, 228, 225]);

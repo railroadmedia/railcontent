@@ -31,7 +31,7 @@
 
 @section('body')
     @include('_partials.components.shop.promo-top-banner',[
-        'text' => '<span class="text-promo">Save up to 84%</span> on piano lessons,<br class="sm:hidden"> tools, & merch.',
+        'text' => '<span class="text-promo">Save up to 88%</span> on piano lessons,<br class="sm:hidden"> tools, & merch.',
     ])
 
     @if(Session::has('addedProducts'))
@@ -163,6 +163,7 @@
                                             "includedEdge" => $feat->included_edge,
                                             "sizes" => $feat->sizes,
                                             'FCP' => $key < 4 ? true : null,
+                                            "size_case_sensitive" => $feat->size_case_sensitive,
                                         ])
                                     </li>
                                 @endforeach
