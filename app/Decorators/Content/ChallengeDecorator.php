@@ -20,12 +20,13 @@ class ChallengeDecorator extends TypeDecoratorBase
         }
 
         foreach ($contentsOfType as $contentIndex => $content) {
-            $challengeStarted = Carbon::parse($content->fetch('data.enrollment_start_time')) > Carbon::now();
+            $challengeEnrollStarted = Carbon::parse($content->fetch('data.enrollment_start_time')) <= Carbon::now();
+            $challengeEnrollEnded = Carbon::parse($content->fetch('data.enrollment_end_time')) >= Carbon::now();
 //            $challengePermissions = (\Arr::pluck($content['permissions'],'permission_id'));
 //            $isEnrolled = $challengeStarted && auth()->check() && auth()->user()->isEnrolledInCohort($challengePermissions);
             $contentsOfType[$contentIndex]['lesson_count'] = $content['child_count'];
-            $contentsOfType[$contentIndex]['primary_cta_text'] = ($challengeStarted)?'Notify Me':'Start Challenge';
-
+            $contentsOfType[$contentIndex]['primary_cta_text'] = (!$challengeEnrollStarted)?'Notify Me':'Start Challenge';
+            $contentsOfType[$contentIndex]['challenge_state_text'] = (!$challengeEnrollStarted)?'Upcoming':((!$challengeEnrollEnded)?'Enroll Now':$content['child_count'].' Workouts');
         }
 
         return $this->mergeDecorated($contents, $contentsOfType);

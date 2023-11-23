@@ -1913,6 +1913,7 @@ return [
             'primary_cta_text',
             'data.thumbnail_url',
             'data.logo_image_url',
+            'challenge_state_text',
             'type',
             'url',
             'published_on',
