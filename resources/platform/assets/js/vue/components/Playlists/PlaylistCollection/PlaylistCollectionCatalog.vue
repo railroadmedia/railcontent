@@ -6,20 +6,19 @@
     import PlaylistCollectionCard from './PlaylistCollectionCard.vue';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
     import Pagination from '../../../components/Pagination/Pagination.vue';
-import playlists from '../../../../services/playlists.js';
+    import playlists from '../../../../services/playlists.js';
+    import { useUserStore } from '../../../../stores/user';
 
     //Inject
     const token = inject('csrf_token');
 
     //Pinia Stores
     const playlistsStore = usePlaylistsStore();
+    const userStore = useUserStore();
+    const { brand } = userStore;
 
     //-----------Props-----------//
     const props = defineProps({
-        brand: {
-            type: String,
-            default: "drumeo"
-        },
         playlists: {
             type: Array,
             default: []

@@ -9,6 +9,10 @@ import VueAxios from 'vue-axios'
 import 'simplebar';
 import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
+
+//App Pages
+import Home from './vue/views/Home.vue';
+
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
 import PageContainer from './vue/components/PageContainer/PageContainer.vue';
@@ -231,6 +235,7 @@ app.config.productionTip = false;
 
 app.component('AppContainer', AppContainer)
     .component('PageContainer', PageContainer)
+    .component('Home', Home)
     .component('HeaderCarousel', HeaderCarousel)
     .component('StaticHeader', StaticHeader)
     .component('HomeCardLinks', HomeCardLinks)

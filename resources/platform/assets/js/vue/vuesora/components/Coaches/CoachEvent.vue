@@ -169,7 +169,7 @@ export default {
     };
   },
   mounted() {
-    if (this.preloadedContent.data[0]) {
+    if (this.preloadedContent?.data[0]) {
       this.content = ContentHelpers.flattenContentObject(
         this.preloadedContent.data[0],
         true
