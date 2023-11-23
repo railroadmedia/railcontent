@@ -44,7 +44,7 @@
             let token = document.getElementById('_token').value;
             let brand = document.getElementById('brand').value;
             let email = document.getElementById('email');
-            const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            const emailFormat = /^\w+([\.-^+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
             let data = {
                 _token: token,
