@@ -14,18 +14,9 @@
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-learn-songs.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
-    <style>
-        .text-gold {
-            color:#FFC16B;
-        }
-        .disclaimer {
-            display:none!important;
-        }
-    </style>
 @stop
 
 @section('global-body')
@@ -46,19 +37,9 @@
             <div class="container mx-auto max-w-5xl">
                 <img class="h-20 sm:h-24 lg:h-28" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/logo-white-m2.svg">
                 <p class="leading-normal my-2 sm:my-3"><strong class="font-black">Only 216 made.</strong> Solid flamed maple case.<br class="hidden sm:inline"> Precision German manufacturing. Handcrafted.</p>
-                <h3 class="leading-tight"><strong>${{ floatval($productPrices['maelzel-metronome']->discounted_price) }}</strong></h3>
-                <p class="leading-normal my-2 sm:my-3"><em>
-                        Enter your email to be notified <br class="sm:hidden">
-                        when one is available:</em></p>
-                <div class="w-full max-w-2xl mx-auto">
-                    @include('pianote._partials.sign-up-form', [
-                        "recaptchaKey" => $recaptchaKey,
-                        "formName" => 'Metronome Notice',
-                        "formId" => "Pianote - Engagement - Trigger - Metronome Notice - Web Form",
-                        "buttonText" => "Notify Me ",
-                        "redirectURL" => "/shop/prestige-metronome?thankyou",
-                    ])
-                </div>
+                <h3 class="leading-tight mb-3"><strong>${{ floatval($productPrices['maelzel-metronome']->discounted_price) }}</strong></h3>
+                <a class="join smaller vue-add-to-cart" data-product-json='{"maelzel-metronome": 1}'
+                    href="/ecommerce/add-to-cart?products[maelzel-metronome]=1&redirect=/order">Add To Cart &raquo;</a>
             </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0,0,0,0.6);"></div>
@@ -299,15 +280,10 @@
                     <img class="h-20 sm:h-24 mt-8 sm:mt-12 lg:hidden" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/logo-m2.svg">
                     <img class="h-32 hidden lg:inline-block mt-12" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/logo2.svg">
                     <p class="leading-normal my-3 sm:my-4">Keep perfect time with this handcrafted, German-made Wittner metronome.<br class="sm:hidden"> <em class="font-black">Limited to 216.</em></p>
-                    <h3 class="leading-tight"><strong>${{ floatval($productPrices['maelzel-metronome']->discounted_price) }}</strong></h3>
-                    <p class="leading-normal my-3 sm:my-4"><em>Enter your email to be notified<br class="sm:hidden"> when one is available:</em></p>
-                    @include('pianote._partials.sign-up-form', [
-                        "recaptchaKey" => $recaptchaKey,
-                        "formName" => 'Metronome Notice',
-                        "formId" => "Pianote - Engagement - Trigger - Metronome Notice - Web Form2",
-                        "buttonText" => "Notify Me ",
-                        "redirectURL" => "/shop/prestige-metronome?thankyou",
-                    ])
+                    <h3 class="leading-tight inline-block align-middle mb-3 lg:mb-0 lg:mr-3"><strong>${{ floatval($productPrices['maelzel-metronome']->discounted_price) }}</strong></h3>
+                    <br class="lg:hidden">
+                    <a class="inline-block align-middle join smaller vue-add-to-cart" data-product-json='{"maelzel-metronome": 1}'
+                        href="/ecommerce/add-to-cart?products[maelzel-metronome]=1&redirect=/order">Add To Cart &raquo;</a>
                 </div>
             </div>
         </div>
