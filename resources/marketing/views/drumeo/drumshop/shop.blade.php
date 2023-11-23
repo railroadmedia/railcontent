@@ -190,6 +190,7 @@
                                             "includedEdge" => $feat->included_edge,
                                             "sizes" => $feat->sizes,
                                             'FCP' => $key < 4 ? true : null,
+                                            "size_case_sensitive" => $feat->size_case_sensitive,
                                         ])
                                     </li>
                                 @endforeach
