@@ -1,8 +1,7 @@
 @extends('guitareo.products.guitar-quest.guitar-quest-sales-layout')
 
 @php
-    $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order&payment-plan=1';
-    $orderLinkAlt = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order&payment-plan=5';
+    $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order';
     $productPrice = floatval($productPrices['guitar-quest']->discounted_price)
 @endphp
 @section('top-promo-banner')

@@ -587,7 +587,7 @@
             </table>
             <p>
                 <strong>You can unlock the full 26-week course today</strong> to get Bruce Becker’s curriculum for improving your technique on the drums — <u>all for just {{ round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }} for the entire course).
-                <br><br> You can choose a one-time payment, a two-payment plan, or a five-payment plan — and the entire course is yours for life with no recurring subscription or additional fees.
+                <br><br> The entire course is yours for life with no recurring subscription or additional fees.
             </p>
         </div>
     </section>

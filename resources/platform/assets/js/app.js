@@ -9,6 +9,10 @@ import VueAxios from 'vue-axios'
 import 'simplebar';
 import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
+
+//App Pages
+import Support from './vue/views/Support';
+
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
 import PageContainer from './vue/components/PageContainer/PageContainer.vue';
@@ -258,6 +262,7 @@ app.component('AppContainer', AppContainer)
     .component('CohortBanner', CohortBanner)
     .component('CatalogueCardContainer', CatalogueCardContainer)
     .component('ContentInfo', ContentInfo)
+    .component('Support', Support)
 
     .component('PlaylistPlaybackWrapper', defineAsyncComponent(() =>
         import(

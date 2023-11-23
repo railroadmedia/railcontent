@@ -37,12 +37,6 @@ class EcommerceServiceProvider extends EventServiceProvider
         Route::middleware([])
             ->group(__DIR__ . '/../routes/routes.php')
             ->group(__DIR__ . '/../routes/shopify.php');
-
-
-        $this->mergeConfigFrom(
-            __DIR__ . '/../config/shopify.php',
-            'shopify'
-        );
     }
 
     /**

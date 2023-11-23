@@ -127,11 +127,15 @@
 @endsection
 
 @section('global-body')
-    @if(!empty($promoVersion))
+    @if(!empty($bfVersion))
+        @include("drumeo.sales.partials._nav", [
+            "cartVersion" => true
+        ])
+    @elseif(!empty($promoVersion))
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
             "scrollToJoin" => true,
-            "hideMenu" => true,
             "logoUrl" => Request::path(),
         ])
     @elseif(!empty($month))
@@ -151,6 +155,18 @@
         ])
     @endif
 
+    @include('_partials.layout.holiday.homepage-top-banner',[
+        'text' => '<span class="text-promo">Save 38% on Drumeo</span> + get 10 free<br class="sm:hidden"> bonuses worth $1233.94',
+        'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
+        'vimeo' => '885338636',
+        'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',
+    ])
+{{--    p4 swap--}}
+{{--    'vimeo' => '885338592',--}}
+{{--    'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',--}}
+
+    <div class="sticky-trigger block"></div>
+    @include('_partials.layout.holiday.sticky-bar')
 
 
     @php
@@ -166,7 +182,9 @@
        $slides = $drumeo['slides'];
     @endphp
 
-    @if(!empty($beginnerVersion))
+    @if(!empty($bfVersion))
+
+    @elseif(!empty($beginnerVersion))
         @include('musora.sales.components.header-section', [
             'header' => 'Learn beginner beats, fills<br> and songs on the drums.',
             'desc' => 'Try Drumeo’s award-winning online drum lessons for 7 days FREE:',
@@ -236,7 +254,7 @@
     @php
         $testimonials = $drumeo['testimonials'];
     @endphp
-    
+
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
@@ -280,39 +298,77 @@
         @php
             $bonuses = [
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
-                'title' => 'Drumeo Drumsticks',
-                'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
-                'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
-                'shipping' => true,
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/pad.jpg',
+                    'title' => 'QuietPad',
+                    'description' => 'Practice anywhere with two full-size playing surfaces.',
+                    'price' => floatval($productPrices['quietpad']->price),
+                    'shipping' => true,
                 ],
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/promos/black-friday/bundles/vertical-bg/rdm.jpg',
-                'title' => 'Rock Drumming Masterclass',
-                'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
-                'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
+                    'title' => 'Drumeo Drumsticks',
+                    'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
+                    'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
+                    'shipping' => true,
                 ],
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/promos/black-friday/bundles/vertical-bg/dtme.jpg',
-                'title' => 'Drum Technique Made Easy',
-                'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
-                'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg',
+                    'title' => 'Drum Technique Made Easy',
+                    'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
+                    'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
                 ],
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/promos/black-friday/bundles/vertical-bg/ime.jpg',
-                'title' => 'Independence Made Easy',
-                'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
-                'price' => floatval($productPrices['independence-made-easy-pack']->price),
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
+                    'title' => 'Better Drum Fills',
+                    'description' => 'The ultimate four-week crash course to playing more creative & musical drum fills.',
+                    'price' => floatval($productPrices['four-weeks-to-better-drum-fills']->price),
+                ],
+                [
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/tommy_card.jpg',
+                    'title' => 'Great Hands For A Lifetime',
+                    'description' => 'Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.',
+                    'price' => floatval($productPrices['GHFAL-DIGI']->price),
+                ],
+                [
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/sd.jpg',
+                    'title' => 'Successful Drumming',
+                    'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
+                    'price' => floatval($productPrices['SD-DIGI']->price),
+                ],
+                [
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/ime.jpg',
+                    'title' => 'Independence Made Easy',
+                    'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
+                    'price' => floatval($productPrices['independence-made-easy-pack']->price),
+                ],
+                [
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/rdm.jpg',
+                    'title' => 'Rock Drumming Masterclass',
+                    'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
+                    'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
+                ],
+                [
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eyd.jpg',
+                    'title' => 'Electrify Your Drumming',
+                    'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
+                    'price' => floatval($productPrices['electrify-your-drumming']->price),
+                ],
+                [
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/lsf.jpg',
+                    'title' => 'Learn Songs Faster',
+                    'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
+                    'price' => floatval($productPrices['learn-songs-faster-pack']->price),
                 ],
             ]
         @endphp
-        @include('musora.sales.components.order-section-bonuses', [
+        @include('musora.sales.components.order-section-bf', [
         'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drumeo-annual-2w-card.png',
-        'header' => 'Online drum lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special',
+        'bonusCount' => '10',
+        'bonusSum' => '1233.94',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
         ])
+{{--        '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',--}}
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-blue.png',
@@ -358,4 +414,23 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     @yield('scripts')
+
+    <script>
+        $(document).ready(function () {
+            var stickyBar = $('.promo-banner');
+            $(window).scroll(function () {
+                var stickTrigger = $('.sticky-trigger').offset().top;
+                var unstickTrigger = $('.unstick-trigger').offset().top;
+                if ($(this).scrollTop() > (unstickTrigger - 115)) {
+                    stickyBar.removeClass('fixed mt-0');
+                }
+                if ($(this).scrollTop() < stickTrigger - 115) {
+                    stickyBar.removeClass('fixed mt-0');
+                }
+                if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
+                    stickyBar.addClass('fixed mt-0');
+                }
+            });
+        });
+    </script>
 @stop

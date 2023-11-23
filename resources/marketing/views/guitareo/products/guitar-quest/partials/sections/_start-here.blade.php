@@ -20,12 +20,8 @@
             <a title="Go To Order Page" href="{{ $orderLink }}" class="bg-goldenrod-gradient transition duration-500 linear px-4 py-4 w-full inline-block uppercase text-black font-roboto-condensed-bold rounded-full text-3xl mb-5 md:w-3/4">
                 Start Your Quest &raquo;
             </a>
-            <p class="font-primary text-sm mb-10">
-                <a href="{{ $orderLinkAlt }}" class="text-goldenrod underline font-bold transition-colors text-goldenrod-hover" title="Go To Order Page">OR CHOOSE A PAYMENT PLAN<br class="inline sm:hidden">
-                    ON THE NEXT PAGE</a>
-            </p>
 
-            <div class="opacity-40 flex justify-center text-5xl mb-4">
+            <div class="opacity-40 flex justify-center text-5xl mt-10 mb-4">
                 <i class="fab fa-cc-visa mr-2"></i>
                 <i class="fab fa-cc-mastercard mr-2"></i>
                 <i class="fab fa-cc-amex mr-2"></i>

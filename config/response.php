@@ -1909,10 +1909,14 @@ return [
 
         'challenge' => [
             'id',
+            'slug',
+            'primary_cta_text',
             'data.thumbnail_url',
             'type',
             'url',
             'published_on',
+            'data.enrollment_start_time',
+            'data.enrollment_end_time',
             'status',
             'fields.title',
             'completed',

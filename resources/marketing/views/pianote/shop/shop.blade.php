@@ -9,11 +9,13 @@
     <meta property="og:title" content="Pianote Shop">
     <meta name="description" content="Get Lessons, T-Shirts, & Much More!">
     <meta property="og:description" content="Get Lessons, T-Shirts, & Much More!">
-{{--    @if(Carbon\Carbon::create(2023, 8, 1, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())--}}
-{{--        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/july/pianote-summer-share-image.jpg">--}}
-{{--    @else--}}
-        <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg">
-{{--    @endif--}}
+    @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/november/bf-pianote-shop-share-image.jpg">
+    @elseif(Carbon\Carbon::create(2023, 11, 28, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/november/cm-pianote-shop-share-image.jpg">
+    @else
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/november/xmas-pianote-shop-share-image.jpg">
+    @endif
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 @endsection
 
@@ -28,20 +30,9 @@
 @endsection
 
 @section('body')
-    <header class="drum-shop-header">
-        <picture>
-            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg">
-            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg" alt="header background image" fetchpriority="high" />
-        </picture>
-        <div class="container mx-auto relative z-10">
-            <div class="px-2 md:px-3">
-                <div class="float-left px-2 md:px-3 w-full">
-                    <img class="h-12 sm:h-14 md:h-24 lg:h-28 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/pianote-shop-logo.png" alt="pianote logo" fetchpriority="high">
-                    <h3>GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!</h3>
-                </div>
-            </div>
-        </div>
-    </header>
+    @include('_partials.components.shop.promo-top-banner',[
+        'text' => '<span class="text-promo">Save up to 84%</span> on piano lessons,<br class="sm:hidden"> tools, & merch.',
+    ])
 
     @if(Session::has('addedProducts'))
         <section class="added-to-cart-background clearfix">
@@ -70,27 +61,161 @@
     @endif
 
     @include('drumeo.drumshop._partials._catalogue-filters')
+
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
+{{--        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card.jpg',--}}
+{{--        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m.jpg',--}}
+        @php
+            $bundles = [
+                [
+                    'slug' => 'https://www.pianote.com/shop/ultimate-lessons-bundle',
+                    'desc' => 'Pianote Discount<br> + 11 Bonuses',
+                    'visible' => 1,
+                    'specialW' => true,
+                    'price' => 1203,
+                    'discountedPrice' => 150,
+                    'buttonColor' => '#F61A30',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card2.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m2.jpg',
+                ],
+                [
+                    'slug' => '/lifetime',
+                    'desc' => 'Unlimited pianote lessons<br> for life + more',
+                    'visible' => 1,
+                    'discountedPrice' => 1200,
+                    'specialW2' => true,
+                    'price' => 1200,
+                    'buttonColor' => '#000',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
+                ],
+                [
+                    'slug' => '/shop/metronome',
+                    'desc' => '',
+                    'full' => true,
+                    'visible' => 1,
+                    'price' => 79,
+                    'discountedPrice' => 59,
+                    'buttonColor' => '#F61A30',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card-logo.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card-m.jpg',
+                ],
+            ];
+        @endphp
+        @include('_partials.layout.holiday.bundle-tiles', [
+            "header" => 'Featured Deals',
+        ])
+
+        <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Trending Now</strong></h5>
+                <div
+                    x-data="{
+                init() {
+                    new Splide(this.$refs.splide, {
+                        classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next hidden sm:flex mb-16',
+                                pagination: 'hidden',
+                        },
+                        perPage: 3.5,
+                        perMove: 1,
+                        type: 'loop',
+                        focus: 0,
+                        interval: 2000,
+                        breakpoints: {
+                            1023: {
+                                perPage: 2.5,
+                            },
+                            767: {
+                                perPage: 1.5,
+                                drag   : 'free',
+                                snap   : false,
+                            },
+                        },
+                    }).mount()
+                },
+            }"
+                >
+                    <div x-ref="splide" class="splide text-left">
+                        <div class="splide__track pb-8">
+                            <ul class="splide__list items-start">
+                                @foreach($featured as $key => $feat)
+                                    <li class="splide__slide px-1">
+                                        @include('musora.shop._shop-card-alt', [
+                                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $feat->slug ),
+                                            "sku" => $feat->sku === 'drumeo' ? null : $feat->sku,
+                                            "badgeText" => $feat->badge_text,
+                                            "thumbnail" => $feat->thumbnail,
+                                            "packLogo" => $feat->thumbnail_logo,
+                                            "title" => $feat->name,
+                                            "packAuthor" => $feat->instructor_name,
+                                            "cardDescription" => $feat->short_desc,
+                                            "fullPrice" => $feat->price,
+                                            "price" => $feat->discounted_price,
+                                            "category" => strtolower($feat->productType->name),
+                                            "buttonText" => $feat->sku === 'drumeo' || $feat->sku === 'pianote' || $feat->sku === 'singeo' || $feat->sku === 'guitareo' ? 'see the deal' : null,
+                                            "soldOut" => $feat->sold_out,
+                                            "includedEdge" => $feat->included_edge,
+                                            "sizes" => $feat->sizes,
+                                            'FCP' => $key < 4 ? true : null,
+                                        ])
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Piano Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-                    @include('musora.shop._shop-card-alt', [
-                          "itemURL" => "/",
-                          "sku" => null,
-                          "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
-                          "title" => "Pianote Membership",
-                          "packAuthor" => "Lisa Witt",
-                          "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",
-                          "specialPrice" => "7-Day Free Trial",
-                          "fullPrice" => 240,
-                          "price" => 240,
-                          "category" => "lessons",
-                          "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
-                          'soldOut' => false,
-                     ])
+{{--                    @include('musora.shop._shop-card-alt', [--}}
+{{--                          "itemURL" => "/",--}}
+{{--                          "sku" => null,--}}
+{{--                          "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",--}}
+{{--                          "title" => "Pianote Membership",--}}
+{{--                          "packAuthor" => "Lisa Witt",--}}
+{{--                          "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",--}}
+{{--                          "specialPrice" => "7-Day Free Trial",--}}
+{{--                          "fullPrice" => 240,--}}
+{{--                          "price" => 150,--}}
+{{--                          "category" => "lessons",--}}
+{{--                          "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",--}}
+{{--                          'soldOut' => false,--}}
+{{--                     ])--}}
 
+                <div x-cloak x-show="filter === 'lessons'">
+                    @include('musora.shop._shop-card-alt', [
+                         "itemURL" => "/shop/ultimate-lessons-bundle",
+                         "sku" => null,
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/november/bundles/pianote-ultimate-shop-thumb2.jpg",
+                         "title" => "Ultimate Lessons Bundle",
+                         "fullPrice" => 240,
+                         "price" => 150,
+                         "category" => "lessons",
+                         'soldOut' => false,
+                    ])
+                </div>
+                <div x-cloak x-show="filter === 'lessons'">
+                    @include('musora.shop._shop-card-alt', [
+                         "itemURL" => "/lifetime",
+                         "sku" => null,
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lt-shop-thumb2.jpg",
+                         "title" => "Lifetime Bundle",
+                         "fullPrice" => 1200.00,
+                         "price" => 1200.00,
+                         "category" => "lessons",
+                         'soldOut' => false,
+                    ])
+                </div>
                 @foreach($lessons as $key => $lesson)
                     @include('musora.shop._shop-card-alt', [
                             "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,

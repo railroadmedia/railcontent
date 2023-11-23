@@ -48,7 +48,7 @@ class LoginPageController extends BaseController
             $request->get('redirect_to_multipass', 0) == 1) {
 
             if (!empty($request->get('checkout_url'))) {
-                $shopifyRedirectUrl = config('shopify.hostName') . $request->get('checkout_url');
+                $shopifyRedirectUrl = config('shopify.storefront.host_name') . $request->get('checkout_url');
             } else {
                 // fallback if all else fails
                 $shopifyRedirectUrl = 'https://www.drumeo.com/shop';
@@ -59,7 +59,7 @@ class LoginPageController extends BaseController
                 $shopifyRedirectUrl
             );
 
-            $multipassLoginUrl = config('shopify.hostName') . '/account/login/multipass/' . $shopifyMultipassToken;
+            $multipassLoginUrl = config('shopify.storefront.host_name') . '/account/login/multipass/' . $shopifyMultipassToken;
 
             return redirect()->away($multipassLoginUrl);
         }
