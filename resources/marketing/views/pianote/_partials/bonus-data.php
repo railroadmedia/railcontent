@@ -158,4 +158,10 @@ $bonuses = [
         'description' => '92 pages full of beautiful pieces by famous classical composers that you can actually play!',
         'price' => floatval($productPrices['classical-book']->price),
     ],
+    [
+        'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/5307c3c2-d687-44d9-8da5-e8be784f8c86-classical-piano-pieces-shop-card.jpg',
+        'description' => 'Timeless classics you’ll want to play over and over again. Presented in original and simplified arrangements.',
+        'price' => 49,
+        'shipping' => true,
+    ],
 ];

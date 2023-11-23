@@ -183,7 +183,7 @@
             ],
             [
                 'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/5307c3c2-d687-44d9-8da5-e8be784f8c86-classical-piano-pieces-shop-card.jpg',
-                'description' => 'Play Your Favorite Christmas Songs on the Piano.',
+                'description' => 'Timeless classics you’ll want to play over and over again. Presented in original and simplified arrangements.',
                 'price' => 49,
                 'shipping' => true,
             ],
