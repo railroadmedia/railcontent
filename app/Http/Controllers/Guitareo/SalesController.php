@@ -109,22 +109,22 @@ class SalesController extends BaseController
 
     public function guitarQuest()
     {
-        return view('guitareo.products.guitar-quest.guitar-quest', [ 'theme' => 'guitareo' ]);
+        return view('guitareo.products.guitar-quest', [ 'theme' => 'guitareo' ]);
     }
 
     public function guitarQuestDiscount()
     {
-        return view('guitareo.products.guitar-quest.guitar-quest-discount', [ 'theme' => 'guitareo' ]);
+        return view('guitareo.products.guitar-quest-discount', [ 'theme' => 'guitareo' ]);
     }
 
     public function guitarQuestDiscountTricks()
     {
-        return view('guitareo.products.guitar-quest.guitar-quest-discount-tricks', [ 'theme' => 'guitareo' ]);
+        return view('guitareo.products.guitar-quest-discount-tricks', [ 'theme' => 'guitareo' ]);
     }
 
     public function guitarQuestTestimonials()
     {
-        return view('guitareo.products.guitar-quest.guitar-quest-testimonials', [ 'theme' => 'guitareo' ]);
+        return view('guitareo.pages.guitar-quest-testimonials', [ 'theme' => 'guitareo' ]);
     }
 
     public function gs(Request $request)

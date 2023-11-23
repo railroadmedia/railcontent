@@ -35,7 +35,7 @@
         }
     </style>
 
-    @yield('page-styles')
+    @yield('styles')
 @stop
 
 @section('global-body')

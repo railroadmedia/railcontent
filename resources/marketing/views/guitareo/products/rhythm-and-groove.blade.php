@@ -1,4 +1,4 @@
-@extends('guitareo._partials.global-vue-layout')
+@extends('guitareo._partials.global-layout')
 
 @section('meta')
     @parent
@@ -14,7 +14,7 @@
 
 @section('styles')
     @parent
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-page-guitareo.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}" rel="stylesheet">
