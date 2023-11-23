@@ -33,8 +33,8 @@ class ShopController extends BaseController
             return $value->productType->name === 'Accessories';
         });
 
-        $hats = $products->filter(function($value, $key){
-            return $value->productType->name === 'Hats';
+        $misc = $products->filter(function($value, $key){
+            return $value->productType->name === 'Misc';
         });
 
         $shirts = $products->filter(function($value, $key){
@@ -45,12 +45,12 @@ class ShopController extends BaseController
             return $value->productType->name === 'Hoodies';
         });
 
-        $featured = $products->whereIn('id', [95, 97, 98, 100]);
+        $featured = $products->whereIn('id', [95, 207, 97, 98]);
 
         return view('drumeo.drumshop.shop', [
             'lessons' => $lessons,
             'accessories' => $accessories,
-            'hats' => $hats,
+            'misc' => $misc,
             'shirts' => $shirts,
             'hoodies' => $hoodies,
             'theme' => 'drumeo',

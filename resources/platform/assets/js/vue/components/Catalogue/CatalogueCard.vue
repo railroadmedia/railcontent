@@ -1,7 +1,7 @@
 <template>
     <div v-if="!isMiniCard"
         class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]"
-        :class="[class_object, displayInline ? 'tw-py-3' : 'tw-pb-2']">
+        :class="[class_object, displayInline ? 'tw-py-3' : '']">
         <div class="tw-flex" :class="displayInline ? 'tw-flex-row' : 'tw-flex-col'">
             <!-- Thumbnail Section -->
             <a :href="renderLink ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
@@ -41,8 +41,8 @@
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
                 <a :href="renderLink ? item.url : null"
-                    class="card-info tw-flex tw-flex-auto tw-flex-col tw-p-1 tw-rounded-lg"
-                    :class="displayInline ? 'tw-justify-center' : 'tw-pt-2'">
+                    class="card-info tw-flex tw-flex-auto tw-flex-col tw-px-2 tw-rounded-lg"
+                    :class="displayInline ? 'tw-justify-center tw-pt-1' : 'tw-pt-2'">
                     <!-- Coach Title -->
                     <div v-if="item.type !== 'song-part'">
                         <h5 class="tw-text-xs tw-font-normal tw-leading-none tw-text-[#3F3F46] tw-mb-1 tw-uppercase dark:tw-text-[#9EC0DC]"
@@ -70,7 +70,7 @@
                     </h6>
                 </a>
                 <!-- Add to Playlist -->
-                <div :id="`${item.id}-action-btn`" class="tw-inline-flex tw-items-start tw-p-1 tw-relative">
+                <div :id="`${item.id}-action-btn`" class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
                     <div class="tw-relative" v-click-outside="() => { state.dropdownOpen = false }">
                         <button v-if="item.type !== 'pack-bundle' && showMyListAction"
                             class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
@@ -103,16 +103,22 @@
     <div v-if="isMiniCard"
         class="tw-group tw-flex tw-items-center tw-py-[4px] tw-h-[78px] tw-relative tw-w-[365px] lg:tw-w-auto tw-shrink-0">
         <!-- Thumbnail Image -->
-        <a :href="renderLink ? item.url : null" class="tw-flex-none tw-h-[70px] tw-w-[121px] tw-relative">
+        <a :href="renderLink ? item.url : null"
+            class="tw-flex-none tw-h-[70px] tw-w-[121px] tw-relative tw-overflow-hidden tw-rounded-[5px]">
             <div
-                class="tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[70px] tw-w-[121px] tw-justify-center tw-items-center tw-text-white tw-text-center">
+                class="tw-rounded-[5px] tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[70px] tw-w-[121px] tw-justify-center tw-items-center tw-text-white tw-text-center tw-z-[100]">
                 <i class="fas" :class="thumbnailIcon"></i>
                 <p v-if="!isReleased" class="tw-text-sm text-white font-bold">
                     {{ releaseDate }}
                 </p>
             </div>
             <img :src="mappedData.thumbnail" :alt="`${mappedData.color_title} thumbnail`"
-                class="tw-h-[70px] tw-w-[121px] tw-rounded-[5px]">
+                class="tw-h-[70px] tw-w-[121px] tw-rounded-[5px]" :class="item.type === 'song' ? 'tw-blur-sm' : ''">
+
+            <div v-if="item.type === 'song'"
+                class="tw-absolute tw-h-[70px] tw-w-[121px] tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center tw-rounded-[5px]">
+                <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail" :alt="mappedData.black_title" />
+            </div>
         </a>
 
         <!-- Instructor Name and Title -->
@@ -135,9 +141,9 @@
             v-click-outside="() => { state.dropdownOpen = false }">
             <button v-if="item.type !== 'pack-bundle' && showMyListAction"
                 class="tw-flex-none tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
-                :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
-                title="More" :data-content-id="item.id"
-                :data-content-type="item.type" @click.prevent="handleShowDropdown(`${item.id}-action-btn`)">
+                :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'" title="More"
+                :data-content-id="item.id" :data-content-type="item.type"
+                @click.prevent="handleShowDropdown(`${item.id}-action-btn`)">
                 <DotsHorizontalIcon class="tw-h-[24px] tw-w-[24px]" />
             </button>
             <Dropdown v-if="showDropdown" :brand="brand" :item="item" :is-open="state.dropdownOpen"

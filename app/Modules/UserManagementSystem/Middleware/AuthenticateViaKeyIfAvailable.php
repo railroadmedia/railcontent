@@ -42,8 +42,8 @@ class AuthenticateViaKeyIfAvailable
         $passedCheck = false;
         $i = 0;
 
-        // key expires after 2 minutes
-        while ($i < 2) {
+        // key expires after 5 minutes
+        while ($i < 5) {
             $hash = md5($user->id . $user->password . Carbon::now()->startOfMinute()->subMinutes($i)->toDateTimeString());
 
             if ($hash === $key) {

@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\UnauthorizedException;
 use Illuminate\Validation\ValidationException;
 use Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
@@ -95,6 +96,35 @@ class UserController extends Controller
         );
     }
 
+    public function createAccountPage(Request $request)
+    {
+        $email = $request->get('email');
+
+        // This must be generated passed so that someone can't claim someone else's email.
+        // It must be generated via md5 with the email string and special key combined.
+        // md5('email' . config('shopify.multipass.account_creation_secret_key'))
+        // On the shopify side, we'll generate the link to this claim page and include the key in the url params. This
+        // ensures that only a person with the special link can claim that email address.
+
+        $verificationToken = $request->get('verification_token');
+
+        if (strtolower($verificationToken) !== strtolower(md5($email . config('shopify.multipass.account_creation_secret_key')))) {
+            throw new AuthorizationException('Invalid verification_token.', 403);
+        }
+
+        if (user() && user()->getEmail() == $email && !user()->doesRequirePasswordUpdate()) {
+            return redirect()->to('/members');
+        }
+
+        $user = User::query()->where('email', $email)->first() ?? null;
+
+        if ($user && !$user->doesRequirePasswordUpdate()) {
+            Auth::logout();
+            return redirect()->route('login', ['email' => $email]);
+        }
+
+        return view('pages.account-creation', ['email' => $email, 'verificationToken' => $verificationToken]);
+    }
 
     public function createUserWithVerificationToken(Request $request)
     {
@@ -119,13 +149,13 @@ class UserController extends Controller
 
         // This must be generated passed so that someone can't claim someone else's email.
         // It must be generated via md5 with the email string and special key combined.
-        // md5('email' . config('shopify.accountCreationSecretKey'))
+        // md5('email' . config('shopify.multipass.account_creation_secret_key'))
         // On the shopify side, we'll generate the link to this claim page and include the key in the url params. This
         // ensures that only a person with the special link can claim that email address.
 
         $verificationToken = $request->get('verification_token');
 
-        if (strtolower($verificationToken) !== strtolower(md5($email . config('shopify.accountCreationSecretKey')))) {
+        if (strtolower($verificationToken) !== strtolower(md5($email . config('shopify.multipass.account_creation_secret_key')))) {
             throw new AuthorizationException('Invalid verification_token.', 403);
         }
 
@@ -438,6 +468,32 @@ class UserController extends Controller
                 ],
             ],
         ]);
+    }
+
+    public function getLogInAsUserURL(Request $request, $userId)
+    {
+        if (!user()->isAdmin()) {
+            throw new UnauthorizedException();
+        }
+
+        /**
+         * @var $user User
+         */
+        $user = User::findOrFail($userId);
+
+        // they should never be able to log in as admins
+        if ($user->isAdmin()) {
+            throw new UnauthorizedException();
+        }
+
+        $authKey = md5($user->id . $user->password . Carbon::now()->startOfMinute()->toDateTimeString());
+        $lastUsedBrand = $user->last_used_brand ?? 'drumeo';
+        $logInAsUserURL = url()->route(
+            'platform.profile.dashboard',
+            ['brand' => $lastUsedBrand, 'userId' => $user->id, 'auth_key' => $authKey, 'user_id' => $user->id]
+        );
+
+        return response()->json(['login_in_as_user_url' => $logInAsUserURL]);
     }
 
     /**

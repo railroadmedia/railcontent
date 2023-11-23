@@ -145,6 +145,7 @@ a {
     }
 
     .edge-wrap {
+        color: #FFF;
         display: inline-block;
         box-sizing: border-box;
         height: 100%;
@@ -163,7 +164,7 @@ a {
             font: 500 13px/1em $bebas;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: #FFF;
+            color: inherit;
             outline: none;
             text-align: center;
             user-select: none;
@@ -177,7 +178,7 @@ a {
                 margin-left: 15px;
             }
             @include desktop {
-                margin-left: 35px;
+                margin-left: 21px;
             }
 
             &:hover {

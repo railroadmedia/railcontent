@@ -28,6 +28,12 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
+    @include('pianote._partials.promo-banner', [
+        "name" => "Pianote Metronome",
+        "fullPrice" => floatval($productPrices['taktell-piccolo-metronome']->price),
+        "price" => floatval($productPrices['taktell-piccolo-metronome']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     <header class="text-white px-5 sm:px-6 pt-[100%] pb-10 sm:py-20 lg:py-28 relative" style="background-color:#690808;">
         <div class="inset-0 absolute z-0 bg-top bg-cover block sm:hidden" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/pianote/products/metronome/header-bg-m.jpg')"></div>
@@ -189,16 +195,16 @@
                 @php
                     $slides = [
                      [
+                         'img' => 'marketing/pianote/products/metronome/metronome-gallery-06.jpg',
+                     ],
+                     [
                          'img' => 'marketing/pianote/products/metronome/metronome-gallery-01.jpg',
                      ],
                      [
-                         'img' => 'marketing/pianote/products/metronome/metronome-gallery-02.jpg',
-                     ],
-                     [
-                         'img' => 'marketing/pianote/products/metronome/metronome-gallery-03.jpg',
-                     ],
-                     [
                          'img' => 'marketing/pianote/products/metronome/metronome-gallery-04.jpg',
+                     ],
+                     [
+                         'img' => 'marketing/pianote/products/metronome/metronome-gallery-07.jpg',
                      ],
                      [
                          'img' => 'marketing/pianote/products/metronome/metronome-gallery-05.jpg',

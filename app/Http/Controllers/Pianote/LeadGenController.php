@@ -187,7 +187,7 @@ class LeadGenController extends BaseController
 
     public function riffsAndFills()
     {
-        return view('pianote.products.riffs-and-fills');
+        return view('pianote.products.riffs-and-fills', ['theme' => 'pianote']);
     }
 
     public function method(Request $request, $domain, $page = null)

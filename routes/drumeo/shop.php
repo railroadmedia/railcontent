@@ -24,7 +24,6 @@ Route::domain('{drumeoDomain}')
             Route::get('/30-day-chops', [SalesController::class, 'thirtyDayChops'] );
             Route::get('/30-day-chops/deal', [SalesController::class, 'thirtyDayChopsDeal'] );
             Route::get('/eardrums', [SalesController::class, 'eardrums'] );
-            Route::get('/eardrums-members', [SalesController::class, 'eardrumsMembers'] );
             Route::get('/quietkick', [SalesController::class, 'quietKick'] );
             Route::get('/tone-control-kit', [SalesController::class, 'toneControl'] );
             Route::get('/{productslug}', [ShopController::class, 'product']);
