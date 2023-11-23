@@ -150,7 +150,7 @@ class RevenueCatController extends Controller
                         null //defaults to USD
                     );
                     $this->setUserSubscription($user, $type);
-                    $this->customerIoService->updateCustomerIoAttributesFromRevenueCat($user->id, $data['event'], $musoraProduct);
+                    $this->customerIoService->updateCustomerIoAttributesFromRevenueCat($user, $data['event'], $musoraProduct);
                 }
                 break;
             case 'NON_RENEWING_PURCHASE':
@@ -261,7 +261,7 @@ class RevenueCatController extends Controller
                 $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
                 $musoraProduct = $musoraProducts->first();
 
-                $this->customerIoService->updateCustomerIoAttributesFromRevenueCat($user->id, $data['event'], $musoraProduct);
+                $this->customerIoService->updateCustomerIoAttributesFromRevenueCat($user, $data['event'], $musoraProduct);
                 break;
             case 'TRANSFER':
                 $oldRevenueCatAppUserId = $data['event']['transferred_from'];
