@@ -25,12 +25,12 @@
         "cartVersion" => true
     ])
 
-    {{--@include('shop.partials.promo-banner', [--}}
-                {{--"name" => "Singing Starter Kit",--}}
-                {{--"fullPrice" => floatval($productPrices['singing-starter-kit']->price),--}}
-                {{--"price" => floatval($productPrices['singing-starter-kit']->discounted_price),--}}
-                {{--"noBreadcrumb" => true--}}
-            {{--])--}}
+    @include('singeo.shop.partials.promo-banner', [
+                "name" => "Singing Starter Kit",
+                "fullPrice" => floatval($productPrices['singing-starter-kit']->price),
+                "price" => floatval($productPrices['singing-starter-kit']->discounted_price),
+                "noBreadcrumb" => true
+            ])
     @yield('topbar')
 
     <header class="text-center text-white py-5 md:py-8 bg-top bg-no-repeat relative" style="background-color:#000419;background-image: url(https://www.musora.com/musora-cdn/image/width=1900,quality=95/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/header2.jpg);">

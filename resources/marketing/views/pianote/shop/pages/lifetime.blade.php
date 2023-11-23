@@ -93,6 +93,12 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
+    @include('pianote._partials.promo-banner', [
+                "name" => "Lifetime",
+                "fullPrice" => 1200,
+                "price" => 1200,
+                "noBreadcrumb" => true
+            ])
     <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #AF1F2D 50%, #180104);">
         <div class="container mx-auto">
             <h1 class="leading-none"><strong>Get piano lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>

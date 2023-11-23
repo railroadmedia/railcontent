@@ -68,13 +68,12 @@
     @include("singeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-
-    {{--@include('shop.partials.promo-banner', [--}}
-    {{--"name" => "Beautiful Harmonies",--}}
-    {{--"fullPrice" => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price),--}}
-    {{--"price" => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price),--}}
-    {{--"noBreadcrumb" => true--}}
-    {{--])--}}
+    @include('singeo.shop.partials.promo-banner', [
+    "name" => "Beautiful Harmonies",
+    "fullPrice" => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price),
+    "price" => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price),
+    "noBreadcrumb" => true
+    ])
     @yield('topbar')
 
     <header class="py-12 md:py-20" style="background:linear-gradient(180deg, #00101D 0%, #23053A 100%);">
