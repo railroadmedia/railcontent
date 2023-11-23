@@ -180,7 +180,9 @@
         $slides = $pianote['slides'];
     @endphp
     @if(empty($hideHeader) || !$hideHeader)
-        @if(!empty($beginnerVersion))
+        @if(!empty($bfVersion))
+
+        @elseif(!empty($beginnerVersion))
             @include('musora.sales.components.header-section', [
                 'header' => 'Online piano lessons<br> tailored for beginners.',
                 'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> friendly teachers, and songs perfect for your skill level.',

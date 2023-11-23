@@ -22,6 +22,16 @@ style="
             </div>
             <h3 class="leading-tight mb-3"><s class="opacity-60">$240</s> <strong>$150</strong> <span class="text-promo">SAVE {{ round(100 - (100 * (150 / 240))) }}%</span> </h3>
             <a class="join promo w-full max-w-xl mx-auto" href="{{ $orderUrl }}">GET STARTED &raquo;</a>
+            <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
+                <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #000;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #000;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #000;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #000;color: #ffac00;" aria-hidden="true"></i>
+                </a>
+                <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
+            </div>
         @else
             <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
                 @include($theme.'._partials.holiday-logo', [
@@ -60,7 +70,6 @@ style="
                 </div>
             </div>
         @endif
-
 
         @if(session()->has('error'))
             <h5 class="leading-tight my-2"><strong class="text-musora">{{ session()->get('error') }}</strong></h5>
