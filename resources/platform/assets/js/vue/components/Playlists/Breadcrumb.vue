@@ -33,7 +33,6 @@ const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
 const props = defineProps({
-  brand: String,
   firstLevelUrl: String,
   firstLevelTitle: String,
   secondLevelUrl: String,
