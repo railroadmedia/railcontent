@@ -69,7 +69,7 @@ class SubscriptionService
 
         $membershipSubscriptions = $subscriptions->filter(function ($subscription) {
             /** @var Subscription $subscription */
-            return $subscription->product->isMembershipProduct();
+            return $subscription->product->isRecurringMembershipProduct();
         });
 
         $activeMembershipSubscriptions = $subscriptions->filter(function ($subscription) {
@@ -79,27 +79,24 @@ class SubscriptionService
 
         $isLifetimeMember = $userAccessPermissions->getIsLifetimeMember();
 
-        // Disabled auto cancel subscriptions due to multiple payment subscriptions
-        // requires rework to support this case
-//        /** @var Subscription $mostRecentActiveSubscription */
-//        $mostRecentActiveSubscription = null;
-//        if ($isLifetimeMember) {
-//            foreach ($activeMembershipSubscriptions as $activeMembershipSubscription) {
-//                $this->recharge->cancelSubscription($activeMembershipSubscription, 'Lifetime Member');
-//            }
-//        } elseif ($membershipSubscriptions->count() > 1) {
-//            $mostRecentActiveSubscription = $activeMembershipSubscriptions->sortByDesc('createdAt')->first();
-//
-//            foreach ($activeMembershipSubscriptions as $activeMembershipSubscription) {
-//                if ($activeMembershipSubscription->id != $mostRecentActiveSubscription->id) {
-//                    $this->recharge->cancelSubscription($activeMembershipSubscription, 'Duplicate Subscription');
-//                }
-//            }
-//
-//            $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate(includeBuffer: false);
-//
-//            $this->recharge->updateSubscriptionNextChargeDate($mostRecentActiveSubscription, $membershipExpirationDate);
-//        }
+        /** @var Subscription $mostRecentActiveSubscription */
+        if ($isLifetimeMember) {
+            foreach ($activeMembershipSubscriptions as $activeMembershipSubscription) {
+                $this->recharge->cancelSubscription($activeMembershipSubscription, 'Lifetime Member');
+            }
+        } elseif ($activeMembershipSubscriptions->count() > 1) {
+            $mostRecentActiveSubscription = $activeMembershipSubscriptions->sortByDesc('createdAt')->first();
+
+            foreach ($activeMembershipSubscriptions as $activeMembershipSubscription) {
+                if ($activeMembershipSubscription->id != $mostRecentActiveSubscription->id) {
+                    $this->recharge->cancelSubscription($activeMembershipSubscription, 'Duplicate Subscription');
+                }
+            }
+
+            $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate(includeBuffer: false);
+
+            $this->recharge->updateSubscriptionNextChargeDate($mostRecentActiveSubscription, $membershipExpirationDate);
+        }
 
         // SRR-82 set the subscription type when the user has a Recharge subscription
         if (!$isLifetimeMember && $membershipSubscriptions->count() > 0) {
