@@ -25,7 +25,7 @@ class DataTransformer extends TransformerAbstract
         $extraColumns = config('railcontent.contentColumnNamesForFields', []);
 
         foreach ($extraColumns as $extraColumn) {
-            if (isset($data[$extraColumn])) {
+            if (isset($data[$extraColumn]) && $extraColumn != 'total_xp') {
                 unset($data[$extraColumn]);
             }
         }
