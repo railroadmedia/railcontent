@@ -162,7 +162,7 @@ class ShopifyWebHookController extends Controller
 
     private function getOrderEventData($order, string $brand): array
     {
-        $order['payment_source'] = $this->shopifySyncService->getOrderPaymentSource($order['id']);
+        $order['payment_source'] = $this->shopifySyncService->getOrderPaymentSource($order['id'])->value;
 
         return [
             'checkout_token' => $order['checkout_token'],
