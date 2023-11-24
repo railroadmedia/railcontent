@@ -162,7 +162,7 @@ class ShopifyWebHookController extends Controller
 
     private function getOrderEventData($order, string $brand): array
     {
-        $order['payment_source'] = $this->shopifySyncService->getOrderPaymentSource($order['id'])->value;
+        $paymentSource = $this->shopifySyncService->getOrderPaymentSource($order['id'])->value;
 
         return [
             'checkout_token' => $order['checkout_token'],
@@ -177,7 +177,7 @@ class ShopifyWebHookController extends Controller
             'currency' => $order['currency'],
             'products' => $this->getProductList($order['line_items']),
             'brand' => $brand,
-            'payment_source' => $order['payment_source'],
+            'payment_source' => $paymentSource,
             'timestamp' => Carbon::parse($order['processed_at'])->timestamp,
         ];
     }
