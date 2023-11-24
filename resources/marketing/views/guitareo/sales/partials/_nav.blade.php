@@ -158,11 +158,19 @@
             "linkIcon" => "fas fa-money-bill-wave",
             "linkUrl" => "/choose-plan",
         ])
-        @include('drumeo.sales.partials._nav-link', [
-            "linkName" => "Black Friday Deals",
-            "linkIcon" => "fas fa-tag text-promo",
-            "linkUrl" => "/shop",
-        ])
+        @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+            @include('drumeo.sales.partials._nav-link', [
+                "linkName" => "Black Friday Deals",
+                "linkIcon" => "fas fa-tag text-promo",
+                "linkUrl" => "/shop",
+            ])
+        @else
+            @include('drumeo.sales.partials._nav-link', [
+                "linkName" => "Cyber Monday Deals",
+                "linkIcon" => "fas fa-tag text-promo",
+                "linkUrl" => "/shop",
+            ])
+        @endif
         @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Blog",
             "linkUrl" => "/riff/",

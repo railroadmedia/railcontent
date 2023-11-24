@@ -230,7 +230,13 @@
             <img class="h-6 sm:h-8 lg:h-10 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/promos/november/BF-musora-logo.png">
             <h6 class="leading-tight mt-3">
                 Click any of the logos to shop<br class="sm:hidden">
-                 our Black Friday deals.</h6>
+                 our
+                @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                    Black Friday
+                @else
+                    Cyber Monday
+                @endif
+                deals.</h6>
             <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs sm:max-w-none my-3">
                 <a class="m-1 join pianote smaller" href="https://www.pianote.com/shop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-piano-keyboard"></i> Pianote</a>
                 <a class="m-1 join guitareo smaller" href="https://www.guitareo.com/shop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-guitar"></i> Guitareo</a>
