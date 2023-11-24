@@ -17,8 +17,10 @@
                     @endif
                 </p>
                 @if(empty($noCountdown))
-                <div class="flex text-center mx-auto sm:mx-0"  x-data="timer()" x-init="countdown()">
-                        <div class="mr-3 sm:mr-4" x-show="timeLeft > 0 && day">
+
+                <div x-data="timer()" x-init="countdown()" x-cloak x-show="day < 2">
+                <div class="flex text-center mx-auto sm:mx-0">
+                        <div class="mr-3 sm:mr-4" x-show="timeLeft > 0 && day > 0">
                             <div class="text-2xl sm:text-3xl font-extrabold" x-text="day">00</div>
                             <div class="text-xs font-bold text-promo" x-text="dayText">DAYS</div>
                         </div>
@@ -35,6 +37,7 @@
                             <div class="text-xs font-bold text-promo" x-text="secondText">SEC</div>
                         </div>
                         <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>
+                    </div>
                     </div>
             @endif
         </span>

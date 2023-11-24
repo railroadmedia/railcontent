@@ -370,8 +370,7 @@
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-    <script src="{{ asset('/marketing/js/guitareo/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/guitareo/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/guitareo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/guitareo/app.js') }}"></script>
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @stop

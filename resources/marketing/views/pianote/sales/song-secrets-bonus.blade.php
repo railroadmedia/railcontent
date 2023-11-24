@@ -187,21 +187,6 @@
             </div>
         </div>
     </section>
-    <div class="sticky-trigger block"></div>
-    <a href="{{ $buttonLink }}"
-            class="promo-banner flex text-musora items-center justify-center -mt-10 py-3 px-2 sm:px-0 w-full z-[100] transition-none bg-cover bg-center" style="background:#ac1179 url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/order-bg.jpg');">
-        <p class="inline-block text-sm mx-0 leading-none uppercase font-black">
-            Only
-            <span x-cloak x-data="timer()" x-init="countdown()">
-                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0">left!</span>
-                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                     </span>
-        </p>
-    </a>
     <section class="px-6 py-6 sm:py-8 text-white text-center bg-cover bg-center" style="background:#ac1179 url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/order-bg.jpg');">
         <div class="container max-w-4xl mx-auto">
             <h6 class="leading-tight mb-4"><em><strong>PLUS</strong> get these special<br class="sm:hidden"> bonuses when you join today.</em></h6>
@@ -252,19 +237,6 @@
                     </div>
                 </div>
             </div>
-            <h6 class="leading-tight mt-4 text-musora uppercase">
-                <strong>
-                    Only
-                    <span x-cloak x-data="timer()" x-init="countdown()">
-                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0">left!</span>
-                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                     </span>
-                </strong>
-            </h6>
         </div>
     </section>
 

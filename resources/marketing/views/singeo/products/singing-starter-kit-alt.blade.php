@@ -37,7 +37,7 @@
             <i class="fas fa-play play-button autoplay-video mt-40 md:mt-56 lg:mt-64 mb-3 md:mb-3" data-open="trailer"></i><br>
             <img class="h-20 md:h-32 lg:h-40" src="https://www.musora.com/musora-cdn/image/width=980,quality=95/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/logo.png"><br>
             <h4 class="mt-2 mb-5">Everything You Need To Start Singing Now</h4>
-            <a class="join" href="/ecommerce/add-to-cart?products[singing-starter-kit]=1&redirect=/order">START SINGING FOR
+            <a class="join" href="/ecommerce/add-to-cart?products[singing-starter-kit]=1">START SINGING FOR
                 @if(floatval($productPrices['singing-starter-kit']->discounted_price) < floatval($productPrices['singing-starter-kit']->price))
                     <s class="opacity-50">${{ floatval($productPrices['singing-starter-kit']->price) }}</s>
                 @endif
@@ -66,7 +66,7 @@
                         <br><br>
                         Take yours with confidence thanks to our 90-day guarantee and start singing today.
                     </p>
-                    <a class="join smaller mt-5 w-full sm:w-2/3" href="/ecommerce/add-to-cart?products[singing-starter-kit]=1&redirect=/order">START SINGING &raquo;</a>
+                    <a class="join smaller mt-5 w-full sm:w-2/3" href="/ecommerce/add-to-cart?products[singing-starter-kit]=1">START SINGING &raquo;</a>
                 </div>
                 <div class="hidden sm:block absolute inset-0 z-0" style="background:linear-gradient(to right, #000419, transparent);"></div>
                 <div class="block sm:hidden absolute inset-0 z-0" style="background:rgba(0,4,25,0.6);"></div>
@@ -206,7 +206,7 @@
         <div class="container mx-auto">
             <img class="h-20 md:h-32 lg:h-40" src="https://www.musora.com/musora-cdn/image/width=980,quality=95/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/logo.png"><br>
             <h4 class="mt-2 mt-3 leading-normal">Everything You Need To Start Singing Now</h4>
-            <a class="join my-2 md:my-3" href="/ecommerce/add-to-cart?products[singing-starter-kit]=1&redirect=/order">START SINGING FOR
+            <a class="join my-2 md:my-3" href="/ecommerce/add-to-cart?products[singing-starter-kit]=1">START SINGING FOR
                 @if(floatval($productPrices['singing-starter-kit']->discounted_price) < floatval($productPrices['singing-starter-kit']->price))
                     <s class="opacity-50">${{ floatval($productPrices['singing-starter-kit']->price) }}</s>
                 @endif

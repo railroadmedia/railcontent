@@ -318,9 +318,8 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-        <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
-        <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
-        <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
-        <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
+        <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+        <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+        <script src="{{ mix('/platform/js/app.js') }}"></script>
 
 @stop
