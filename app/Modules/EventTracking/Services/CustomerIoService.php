@@ -71,6 +71,26 @@ class CustomerIoService
         $attributes[$brand . '_membership_subscription_latest-start-date'] = $purchaseTimestamp;
         $attributes[$brand . '_membership_subscription_first-start-date'] = Carbon::parse($user->created_at)->timestamp;
         $attributes[$brand . '_membership_subscription_trial-type'] = $this->getTrialType($product);
+
+        dispatch(
+            (new CustomerIoSyncUserByUserId($user, $attributes))->delay(
+                Carbon::now()
+                    ->addSeconds(30)
+            )
+        );
+    }
+
+    public function syncCancellationDataFromRecharge(
+        User $user,
+        Product $product,
+        Carbon $cancellation_date,
+        mixed $cancellation_reason
+    ): void {
+        $brand = $product->brand;
+        $attributes = [];
+        $attributes[$brand . '_membership_subscription_cancellation-date'] = $cancellation_date->timestamp;
+        $attributes[$brand . '_membership_subscription_cancellation-reason'] = $cancellation_reason;
+
         dispatch(
             (new CustomerIoSyncUserByUserId($user, $attributes))->delay(
                 Carbon::now()

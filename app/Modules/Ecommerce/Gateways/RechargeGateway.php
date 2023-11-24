@@ -255,7 +255,7 @@ class RechargeGateway
         );
     }
 
-    public function getSubscriptions($shopifyCustomerId) : Collection
+    public function getSubscriptions($shopifyCustomerId): Collection
     {
         $response = $this->call('GET', '/subscriptions', [
             'shopify_customer_id' => $shopifyCustomerId,
@@ -264,7 +264,7 @@ class RechargeGateway
         try {
             return collect(
                 $response?->subscriptions
-            )->map(function($subscription) {
+            )->map(function ($subscription) {
                 return new Subscription($subscription);
             });
         } catch (Exception $e) {
@@ -275,7 +275,7 @@ class RechargeGateway
     }
 
     public function cancelSubscription(
-      Subscription $subscription,
+        Subscription $subscription,
         $cancelReason,
         $cancelReasonComments = '',
         $sendEmail = true
@@ -288,7 +288,6 @@ class RechargeGateway
         $subscription->status = RechargeSubscriptionStatusEnum::Cancelled->value;
         $subscription->cancellationReason = $cancelReason;
         $subscription->createdAt = Carbon::now();
-
     }
 
     public function updateSubscriptionNextChargeDate($subscription, Carbon $nextChargeDate): void
@@ -297,6 +296,50 @@ class RechargeGateway
             'POST',
             "/subscriptions/$subscription->id/set_next_charge_date",
             ['date' => $nextChargeDate->isoFormat('YYYY-MM-DD')]
+        );
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function createWebhook(array $data): array
+    {
+        $response = $this->call(
+            'POST',
+            "/webhooks",
+            $data
+        );
+        if (!$response->webhook) {
+            throw new Exception("Error creating webhook: " . print_r($response, true));
+        }
+        return [
+            'id' => $response->webhook->id,
+            'address' => $response->webhook->address,
+            'topic' => $response->webhook->topic
+        ];
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getWebhooks(): array
+    {
+        $response = $this->call(
+            'GET',
+            "/webhooks",
+        );
+
+        return $response->webhooks ?? [];
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function deleteWebhook($id): void
+    {
+        $this->call(
+            'DELETE',
+            "/webhooks/$id",
         );
     }
 }
