@@ -57,10 +57,20 @@
         @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
         ])
+
+        @php
+            if(!empty($products['DLM-Lifetime']->getPublicStockCount())) {
+                $stock = $products['DLM-Lifetime']->getPublicStockCount();
+            }
+            else {
+                $stock = 0;
+            }
+        @endphp
         @include('drumeo.products.partials.promo-banner', [
                     "name" => "Lifetime",
                     "fullPrice" => 1200,
                     "price" => 1200,
+                    "specialText" => "<strong>Only <s class='opacity-60'>500</s> <span class='text-promo'>" . $stock . "</span> left!</strong>",
                     "noBreadcrumb" => true
                 ])
         <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #094073 50%, #000C16);">
