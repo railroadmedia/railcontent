@@ -21,24 +21,26 @@
                     @endif
                 </p>
                 @if(empty($noCountdown))
-                    <div class="flex text-center mx-auto sm:mx-0"  x-data="timer()" x-init="countdown()">
-                        <div class="mr-3 sm:mr-4" x-show="timeLeft > 0 && day">
-                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="day">00</div>
-                            <div class="text-xs font-bold text-promo" x-text="dayText">DAYS</div>
+                    <div x-data="timer()" x-init="countdown()" x-cloak x-show="day < 2">
+                        <div class="flex text-center mx-auto sm:mx-0">
+                            <div class="mr-3 sm:mr-4" x-show="timeLeft > 0 && day > 0">
+                                <div class="text-2xl sm:text-3xl font-extrabold" x-text="day">00</div>
+                                <div class="text-xs font-bold text-promo" x-text="dayText">DAYS</div>
+                            </div>
+                            <div class="mr-3 sm:mr-4" x-show="timeLeft > 0 && hour > 0">
+                                <div class="text-2xl sm:text-3xl font-extrabold" x-text="hour">00</div>
+                                <div class="text-xs font-bold text-promo" x-text="hourText">HRS</div>
+                            </div>
+                            <div class="mr-3 sm:mr-4" x-show="timeLeft > 0">
+                                <div class="text-2xl sm:text-3xl font-extrabold" x-text="minute">00</div>
+                                <div class="text-xs font-bold text-promo" x-text="minuteText">MIN</div>
+                            </div>
+                            <div x-show="timeLeft > 0">
+                                <div class="text-2xl sm:text-3xl font-extrabold" x-text="second">00</div>
+                                <div class="text-xs font-bold text-promo" x-text="secondText">SEC</div>
+                            </div>
+                            <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>
                         </div>
-                        <div class="mr-3 sm:mr-4" x-show="timeLeft > 0 && hour > 0">
-                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="hour">00</div>
-                            <div class="text-xs font-bold text-promo" x-text="hourText">HRS</div>
-                        </div>
-                        <div class="mr-3 sm:mr-4" x-show="timeLeft > 0">
-                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="minute">00</div>
-                            <div class="text-xs font-bold text-promo" x-text="minuteText">MIN</div>
-                        </div>
-                        <div x-show="timeLeft > 0">
-                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="second">00</div>
-                            <div class="text-xs font-bold text-promo" x-text="secondText">SEC</div>
-                        </div>
-                        <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>
                     </div>
                 @endif
         </span>
