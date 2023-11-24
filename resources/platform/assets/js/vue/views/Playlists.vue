@@ -1,5 +1,5 @@
 <template>
-    <PlaylistBreadCrumb
+    <Breadcrumb
         :last-level-url="`/${brand}/playlists`"
         last-level-title="Playlists"
     />
@@ -20,7 +20,7 @@ import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "../../stores/user";
 
 //Components
-import PlaylistBreadCrumb from '../components/Playlists/Breadcrumb';
+import Breadcrumb from '../components/Breadcrumb/Breadcrumb.vue';
 import PlaylistCollectionHeader from '../components/Playlists/PlaylistCollection/PlaylistCollectionHeader';
 import PlaylistCollectionCatalog from '../components/Playlists/PlaylistCollection/PlaylistCollectionCatalog';
 
