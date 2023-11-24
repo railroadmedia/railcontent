@@ -114,3 +114,48 @@ const isSelectedTimezone = (timezone) => {
     return area === props.selectedTimezone;
 }
 </script>
+
+<style scoped media="print">
+    #nav, #subNav {
+        display: none;
+    }
+
+    #pageHeader {
+        display: none;
+    }
+
+    #scheduleHeader {
+        display: none;
+        border: none;
+    }
+
+    #printSchedule {
+        display: none;
+    }
+
+    footer {
+        display: none !important;
+    }
+
+    .shadow {
+        box-shadow: none !important;
+        border: 1px solid #e5e8e8;
+    }
+
+    .content-table-row.scheduled .month-col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .content-table-row.scheduled .icon-col {
+        display: none;
+    }
+
+    .content-table-row.scheduled .title-column p {
+        color: #000 !important;
+    }
+
+    .content-table-row.scheduled .title-column .hide-md-up {
+        display: none;
+    }
+</style>
