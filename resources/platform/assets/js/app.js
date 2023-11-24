@@ -11,6 +11,7 @@ import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
 
 //App Pages
+import Home from './vue/views/Home.vue';
 import Support from './vue/views/Support';
 import Schedule from './vue/views/Schedule';
 import Playlists from './vue/views/Playlists';
@@ -238,6 +239,7 @@ app.config.productionTip = false;
 
 app.component('AppContainer', AppContainer)
     .component('PageContainer', PageContainer)
+    .component('Home', Home)
     .component('HeaderCarousel', HeaderCarousel)
     .component('StaticHeader', StaticHeader)
     .component('HomeCardLinks', HomeCardLinks)
@@ -471,10 +473,10 @@ app.component('AppContainer', AppContainer)
             `./vue/components/Playlists/Playlist/PlaylistCatalog.vue`
         )
     ))
-    .component('PlaylistBreadcrumb', defineAsyncComponent(() =>
+    .component('Breadcrumb', defineAsyncComponent(() =>
         import(
-            /* webpackChunkName: "playlist-breadcrumb" */
-            `./vue/components/Playlists/Breadcrumb.vue`
+            /* webpackChunkName: "breadcrumb" */
+            `./vue/components/Breadcrumb/Breadcrumb.vue`
         )
     ))
     .component('PlaylistCollectionHeader', defineAsyncComponent(() =>
