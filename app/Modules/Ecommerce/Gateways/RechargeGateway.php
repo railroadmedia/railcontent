@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Gateways;
 
 use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
+use App\Modules\Ecommerce\Models\Recharge\Customer;
 use App\Modules\Ecommerce\Models\Recharge\Subscription;
 use Carbon\Carbon;
 use Exception;
@@ -23,6 +24,9 @@ class RechargeGateway
     }
 
 
+    /**
+     * @throws Exception
+     */
     public function call(
         $method = 'GET',
         $url = '/',
@@ -217,12 +221,11 @@ class RechargeGateway
                 throw new \Exception('ERROR #' . $returnError['number'] . ': ' . $returnError['msg']);
             }
 
-            if (isset($result->errors) && $result->errors[0] ?? '' == 'shopify_customer_id not found') {
-                // Customer not found, return null result
-                return null;
-            }
-
             if (isset($result->errors)) {
+                if (is_array($result->errors) && $result->errors[0] ?? '' == 'shopify_customer_id not found') {
+                    // Customer not found, return null result
+                    return null;
+                }
                 throw new \Exception("Error:" . print_r($result->errors, true));
             }
         }
@@ -230,7 +233,6 @@ class RechargeGateway
         if ($retry) {
             throw new \Exception("RechargeGateway: Reached maximum of $maxAttempts attempts");
         }
-
 
         if ($options['all_data']) {
             if ($options['return_array']) {
@@ -253,6 +255,83 @@ class RechargeGateway
                 'limit' => 250
             ])
         );
+    }
+
+    /**
+     * Get the customer from Recharge, for the given Shopify ID
+     *
+     * @param  int  $shopifyCustomerId
+     * @return Customer|null
+     */
+    public function getRechargeCustomer(int $shopifyCustomerId): ?Customer
+    {
+        try {
+            $customers = collect(
+                $this->call(
+                    'GET',
+                    '/customers',
+                    [
+                        'external_customer_id' => $shopifyCustomerId,
+                        'limit' => 250
+                    ]
+                )->customers ?? []
+            );
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            return null;
+        }
+
+        if ($customers->isEmpty()) {
+            return null;
+        }
+
+        // transform into our model
+        $customers->transform(fn ($customerData) => new Customer($customerData));
+
+        // in case there are multiple customers with that shopify id, we should log it for investigation
+        if ($customers->count() > 1) {
+            Log::error("[Recharge\API] {$customers->count()} customers found for $shopifyCustomerId");
+            // sort them so we can grab the latest entry
+            $customers = $customers->sortByDesc("createdAt");
+        }
+
+        return $customers->first();
+    }
+
+    /**
+     * Update the customer in Recharge, identified by the given Shopify ID, with the given array of values
+     *
+     * @param  int  $shopifyCustomerId
+     * @param  array  $updateValues the key-value array of data to update. e.g. ["email" => "foo@bar.baz", "first_name" => "Foo"]
+     * @return bool success or fail in updating all given values
+     * @throws Exception
+     */
+    public function updateCustomer(int $shopifyCustomerId, array $updateValues): bool
+    {
+        $customer = $this->getRechargeCustomer($shopifyCustomerId);
+
+        if (is_null($customer)) {
+            throw new Exception("No Recharge customer found for Shopify ID $shopifyCustomerId");
+        }
+
+        $customerData = $this->call(
+            'PUT',
+            "/customers/{$customer->id}",
+            $updateValues
+        )?->customer ?? null;
+
+        if (is_null($customerData)) {
+            return false;
+        }
+
+        $allUpdated = true;
+        foreach($updateValues as $key => $value) {
+          if ($customerData->$key != $value) {
+              Log::error("[Recharge\API] Customer data for $key was not updated for customer with Shopify ID $shopifyCustomerId");
+              $allUpdated = false;
+          }
+        }
+        return $allUpdated;
     }
 
     public function getSubscriptions($shopifyCustomerId) : Collection
