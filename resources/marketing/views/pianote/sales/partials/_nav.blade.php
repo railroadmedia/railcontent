@@ -46,7 +46,7 @@
                     @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                         <a style="color: #fe006b;" class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/shop" ><div class="hidden lg:inline">Black Friday</div> Deals</a>
                     @else
-                        <a style="color: #fe006b;" class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/shop" ><div class="hidden lg:inline">Cyber Monday</div> Deals</a>
+                        <a style="color: #23bcff;" class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/shop" ><div class="hidden lg:inline">Cyber Monday</div> Deals</a>
                     @endif
                     <a class="" href="{{ get_legacy_brand_base_url('pianote') }}/blog" >Blog</a>
 

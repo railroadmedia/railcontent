@@ -91,7 +91,7 @@
                 </div>
                 <h3 class="font-extrabold leading-tight mb-2 md:mb-8 text-center md:text-left">Everything you need <br class="md:hidden">to start singing in <br class="md:hidden">perfect harmony now</h3>
                 <div class="md:w-72 lg:w-2/3 text-center">
-                    <a class="join smaller w-full tracking-tighter mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1&redirect=/order">get started for ${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price) }}</a>
+                    <a class="join smaller w-full tracking-tighter mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1">get started for ${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price) }}</a>
                     <p>**90-DAY GUARANTEE**</p>
                 </div>
             </div>
@@ -125,7 +125,7 @@
                     So if you dream of singing beautiful harmonies and creating something extraordinary, then you need The Essential Guide To Beautiful Harmonies.
                 </p>
                 <div class="md:w-80 lg:w-2/3 mb-6 md:mb-0">
-                    <a class="join smaller w-full tracking-tighter mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1&redirect=/order">get started for ${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price) }}</a>
+                    <a class="join smaller w-full tracking-tighter mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1">get started for ${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price) }}</a>
                 </div>
             </div>
             <div class="absolute md:relative left-0 right-0 md:w-2/5 flex justify-center md:block">
@@ -242,7 +242,7 @@
         <h3 class="font-extrabold leading-snug md:leading-normal mb-4">
             Everything you need to <br class="md:hidden">start singing <br class="hidden md:inline">in perfect <br class="md:hidden">harmony now
         </h3>
-        <a class="join smaller w-60 md:w-96 mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1&redirect=/order">Get started for ${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price) }}</a>
+        <a class="join smaller w-60 md:w-96 mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1">Get started for ${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price) }}</a>
         <p style="color:#747474;">**90-DAY GUARANTEE**</p>
     </section>
 

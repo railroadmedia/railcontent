@@ -102,16 +102,6 @@ img {
     }
   }
 
-  &.promo {
-    font-family: $opensans;
-    font-weight: 900;
-    color: $promoColor;
-
-    &:hover {
-      background: lighten($promoColor, 10%);
-    }
-  }
-
   &.outline {
     background: transparent;
     border: 2px solid #fff;
