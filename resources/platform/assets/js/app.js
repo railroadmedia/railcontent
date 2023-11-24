@@ -467,10 +467,10 @@ app.component('AppContainer', AppContainer)
             `./vue/components/Playlists/Playlist/PlaylistCatalog.vue`
         )
     ))
-    .component('PlaylistBreadcrumb', defineAsyncComponent(() =>
+    .component('Breadcrumb', defineAsyncComponent(() =>
         import(
-            /* webpackChunkName: "playlist-breadcrumb" */
-            `./vue/components/Playlists/Breadcrumb.vue`
+            /* webpackChunkName: "breadcrumb" */
+            `./vue/components/Breadcrumb/Breadcrumb.vue`
         )
     ))
     .component('PlaylistCollectionHeader', defineAsyncComponent(() =>
