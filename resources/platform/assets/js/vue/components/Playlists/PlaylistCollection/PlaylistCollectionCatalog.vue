@@ -1,134 +1,3 @@
-<script setup>
-    import { onBeforeMount, onMounted, onUpdated, watch, inject, reactive, computed } from 'vue';
-    import PlaylistService from '../../../../services/playlists.js';
-    import { usePlaylistsStore } from '../../../../stores/playlists';
-    import PlaylistCollectionControls from './PlaylistCollectionControls.vue';
-    import PlaylistCollectionCard from './PlaylistCollectionCard.vue';
-    import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
-    import Pagination from '../../../components/Pagination/Pagination.vue';
-import playlists from '../../../../services/playlists.js';
-
-    //Inject
-    const token = inject('csrf_token');
-
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
-
-    //-----------Props-----------//
-    const props = defineProps({
-        brand: {
-            type: String,
-            default: "drumeo"
-        },
-        playlists: {
-            type: Array,
-            default: []
-        },
-        playlistCount: {
-            type: Number,
-            default: 0
-        },
-        miniCatalog: {
-            type: Boolean,
-            default: false,
-        }
-    })
-
-   //---------Computed Props---------//
-    const hasPlaylists = computed(() => {
-        return props.playlistCount ? true : false;
-    })
-
-    //---------Reactive Data---------//
-    const state = reactive({
-        isListView: false,
-        showControls: true,
-        searchTerm: '',
-        sortValue: '',
-        categories: '',
-    })
-
-    //----------Methods----------//
-
-    const handlePageChange = (pageNumber) => {
-        //load playlists
-        playlistsStore.loadingPlaylists = true;
-        playlistsStore.getPlaylists({ brand: props.brand, page: pageNumber, term: state.searchTerm, sort: state.sortValue, categories: state.categories ? [state.categories] : [], limit: 10 }, token);
-        //update current page number
-        playlistsStore.resultsPage = pageNumber;
-        //update url
-        let url = new URL(window.location.href);
-        url.searchParams.set('page', pageNumber)
-        window.history.pushState({}, '', url);
-    }
-
-    //---------Lifecycle Methods---------//
-
-    onMounted(()=> {
-        if(props.miniCatalog || props.playlistCount <= 10 && props.playlists.length <= 10) {
-            playlistsStore.playlists = props.playlists;
-        } else {
-            const params = new Proxy(new URLSearchParams(window.location.search), {
-                get: (searchParams, prop) => searchParams.get(prop),
-            });
-
-            playlistsStore.loadingPlaylists = true;
-            playlistsStore.getPlaylists(
-                {
-                    brand: brand,
-                    page: params.page || 1,
-                    limit: null,
-                    term: state.searchTerm,
-                    sort: state.sortValue,
-                    categories: state.categories ? [state.categories] : [],
-                }, token);
-        }
-        //For Create Modal to reload Playlists
-        playlistsStore.pageHasPlaylistCatalog = true;
-    })
-
-    onBeforeMount(() => {
-        // console.log(props.playlists)
-        //Get Local Storage Value
-        if (!props.miniCatalog) {
-            if(localStorage.getItem('playlistIsListView')) {
-                state.isListView = JSON.parse(localStorage.getItem('playlistIsListView'));
-            }
-        }
-
-        //Get URL Params
-        const params = new Proxy(new URLSearchParams(window.location.search), {
-            get: (searchParams, prop) => searchParams.get(prop),
-        });
-
-        //Set resultsPage
-        playlistsStore.resultsPage = Number(params.page || 1);
-        state.searchTerm = params.search || '';
-        state.categories = params['categories[]'] || '';
-        state.sortValue = params.sortby_val || '-created_at';
-    });
-
-    onUpdated(()=> {
-        //Get URL Params
-        const params = new Proxy(new URLSearchParams(window.location.search), {
-            get: (searchParams, prop) => searchParams.get(prop),
-        });
-
-        state.searchTerm = params.search || '';
-        state.categories = params['categories[]'] || '';
-        state.sortValue = params.sortby_val || '-created_at';
-    })
-
-    //-----------Watchers-----------//
-
-    //Store ListView to Local Storage
-    watch(state, async () => {
-        if (!props.miniCatalog) {
-            localStorage.setItem('playlistIsListView', state.isListView);
-        }
-    })
-
-</script>
 <template>
     <main class="tw-w-full">
         <!-- No Playlists -->
@@ -247,3 +116,133 @@ import playlists from '../../../../services/playlists.js';
 
     </main>
 </template>
+
+<script setup>
+import { onBeforeMount, onMounted, onUpdated, watch, inject, reactive, computed } from 'vue';
+import { usePlaylistsStore } from '../../../../stores/playlists';
+import PlaylistCollectionControls from './PlaylistCollectionControls.vue';
+import PlaylistCollectionCard from './PlaylistCollectionCard.vue';
+import Pagination from '../../../components/Pagination/Pagination.vue';
+import { useUserStore } from "../../../../stores/user";
+import {storeToRefs} from "pinia/dist/pinia";
+
+//Inject
+const token = inject('csrf_token');
+
+//Pinia Stores
+const playlistsStore = usePlaylistsStore();
+const userStore = useUserStore();
+
+const { brand } = storeToRefs(userStore)
+
+//-----------Props-----------//
+const props = defineProps({
+    playlists: {
+        type: Array,
+        default: []
+    },
+    playlistCount: {
+        type: Number,
+        default: 0
+    },
+    miniCatalog: {
+        type: Boolean,
+        default: false,
+    }
+})
+
+//---------Computed Props---------//
+const hasPlaylists = computed(() => {
+    return props.playlistCount ? true : false;
+})
+
+//---------Reactive Data---------//
+const state = reactive({
+    isListView: false,
+    showControls: true,
+    searchTerm: '',
+    sortValue: '',
+    categories: '',
+})
+
+//----------Methods----------//
+
+const handlePageChange = (pageNumber) => {
+    //load playlists
+    playlistsStore.loadingPlaylists = true;
+    playlistsStore.getPlaylists({ brand: brand.value, page: pageNumber, term: state.searchTerm, sort: state.sortValue, categories: state.categories ? [state.categories] : [], limit: 10 }, token);
+    //update current page number
+    playlistsStore.resultsPage = pageNumber;
+    //update url
+    let url = new URL(window.location.href);
+    url.searchParams.set('page', pageNumber)
+    window.history.pushState({}, '', url);
+}
+
+//---------Lifecycle Methods---------//
+
+onMounted(()=> {
+    if(props.miniCatalog || props.playlistCount <= 10 && props.playlists.length <= 10) {
+        playlistsStore.playlists = props.playlists;
+    } else {
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+
+        playlistsStore.loadingPlaylists = true;
+        playlistsStore.getPlaylists(
+            {
+                brand: brand.value,
+                page: params.page || 1,
+                limit: null,
+                term: state.searchTerm,
+                sort: state.sortValue,
+                categories: state.categories ? [state.categories] : [],
+            }, token);
+    }
+    //For Create Modal to reload Playlists
+    playlistsStore.pageHasPlaylistCatalog = true;
+})
+
+onBeforeMount(() => {
+    // console.log(props.playlists)
+    //Get Local Storage Value
+    if (!props.miniCatalog) {
+        if(localStorage.getItem('playlistIsListView')) {
+            state.isListView = JSON.parse(localStorage.getItem('playlistIsListView'));
+        }
+    }
+
+    //Get URL Params
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+    });
+
+    //Set resultsPage
+    playlistsStore.resultsPage = Number(params.page || 1);
+    state.searchTerm = params.search || '';
+    state.categories = params['categories[]'] || '';
+    state.sortValue = params.sortby_val || '-created_at';
+});
+
+onUpdated(()=> {
+    //Get URL Params
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+    });
+
+    state.searchTerm = params.search || '';
+    state.categories = params['categories[]'] || '';
+    state.sortValue = params.sortby_val || '-created_at';
+})
+
+//-----------Watchers-----------//
+
+//Store ListView to Local Storage
+watch(state, async () => {
+    if (!props.miniCatalog) {
+        localStorage.setItem('playlistIsListView', state.isListView);
+    }
+})
+
+</script>

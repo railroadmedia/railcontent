@@ -1,169 +1,3 @@
-<script setup>
-    import PlaylistService from '../../../../services/playlists.js';
-    import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue'
-    import PlaylistDropdown from '../PlaylistDropdown.vue';
-    import { usePlaylistsStore } from '../../../../stores/playlists';
-    import { onBeforeMount, ref, inject, reactive, onMounted, computed, onUpdated } from 'vue';
-
-    //Inject
-    const token = inject('csrf_token');
-
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
-
-    //-----------Props-----------//
-    const props = defineProps({
-        brand: {
-            type: String,
-            default: "drumeo"
-        },
-        playlist: {
-            type: Object,
-            default: {}
-        },
-        lessons: {
-            type: Object,
-            default: {
-                data: []
-            }
-        },
-        hasAccess: {
-            type: Number,
-            default: 1,
-        }
-    })
-
-    //-------------Refs-------------//
-    const dropdownTarget = ref(null)
-
-    //-----------Reactive Data-----------//
-    const state = reactive({
-        dropdownOpen: false,
-        durationHours: '0',
-        durationMinutes: '0',
-        dropdownTop: false,
-        isPinned: false,
-        isLiked: false,
-    })
-
-    //-----------Static Data-----------//
-    const dropdownOptions = [
-        {
-            name: "Edit",
-            action: "editPlaylist"
-        },
-        {
-            name: "Delete",
-            action: "deletePlaylist"
-        },
-        {
-            name: "Duplicate",
-            action: "duplicatePlaylist"
-        },
-        {
-            name: "Re-Order",
-            action: "reorderPlaylist"
-        },
-        {
-            name: "Pin To Sidebar",
-            action: "pinPlaylist"
-        },
-        {
-            name: "Private",
-            action: "privateToggle"
-        },
-    ]
-
-    //--------------Computed--------------//
-    const description = computed(() => {
-        return playlistsStore.activePlaylist.description.replace(/(<([^>]+)>)/gi, "");
-    })
-
-    //--------------Methods--------------//
-
-    //Check Dropdown Distance
-    const GetElementDistance = el => {
-        let rect = el.getBoundingClientRect();
-        let spaceBelow = window.innerHeight - rect.bottom;
-        if(spaceBelow < 240) {
-            state.dropdownTop = true;
-        } else {
-            state.dropdownTop = false;
-        }
-    }
-
-    //Handle Share
-    const sharePlaylist = () => {
-        if(playlistsStore.activePlaylist.private) {
-            window.openplaylistmodal({ modalType: 'share', data: props.playlist });
-        } else {
-            navigator.clipboard.writeText(props.playlist.url)
-            window.shownotification({
-                icon: 'fa-link',
-                text: `${ props.playlist.name } link copied to clipboard.`
-            })
-        }
-    };
-
-    //Handle Like/Unllike
-    const likePlaylist = () => {
-        state.isLiked = !state.isLiked;
-        if(state.isLiked){
-            PlaylistService.likePlaylist({ "brand": props.brand, "playlist_id": props.playlist.id }, token)
-                .then((response) => {
-                    console.log('successfully liked')
-                })
-                .catch(function (error) {
-                    console.log('failed to like')
-                });
-        }
-        else {
-            PlaylistService.unlikePlaylist(props.playlist.id, token)
-                .then((response) => {
-                    console.log('successfully unliked')
-                })
-                .catch(function (error) {
-                    console.log('failed to unlike')
-                });
-        }
-    }
-
-    //Handle Dropdown Trigger
-    const dropdownTriggerHandler = event => {
-        GetElementDistance(event.target);
-        state.dropdownOpen = !state.dropdownOpen;
-    }
-
-    const formatDuration = duration => {
-        let time = duration;
-        if (time) { //does it exist
-            state.durationHours = Math.floor(time / 3600);
-            state.durationMinutes = Math.floor( (time % 3600) / 60);
-        }
-    }
-
-    const duplicatePlaylist = () => {
-        window.openplaylistmodal({ modalType: 'duplicate', data: props.playlist });
-    };
-
-    //---------Lifecycle Methods---------//
-
-    onBeforeMount(() => {
-        playlistsStore.setActivePlaylist(props.playlist)
-        //initial Values
-        state.isLiked = props.playlist.is_liked_by_current_user;
-        state.isPinned = props.playlist.pinned ? true : false;
-        
-        //Get Duration Hours and Seconds
-        formatDuration(playlistsStore.activePlaylist.duration)
-    })
-
-    onUpdated(()=>{
-        state.isPinned = props.playlist.pinned ? true : false;
-        //Recalculate Duration
-        formatDuration(playlistsStore.activePlaylist.duration);
-    })
-</script>
 <template>
     <platform-header
         :backgroundImage="playlistsStore.activePlaylist.thumbnail_url || 'https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg'"
@@ -222,8 +56,8 @@
                     <div class="tw-text-white tw-flex tw-flex-col tw-mb-2">
                         <h1 class="tw-capitalize tw-leading-tight tw-font-bold tw-mb-2 lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.name }}</h1>
                         <p class="lg:tw-line-clamp-2">{{ description }}</p>
-                        
-                        <p  v-if="playlistsStore.lessons.length" 
+
+                        <p  v-if="playlistsStore.lessons.length"
                             class="tw-justify-center lg:tw-justify-start tw-font-bebas-neue tw-text-white tw-mt-1 tw-text-lg tw-leading-none tw-flex tw-items-center"
                         >
                             <span>{{ state.durationHours }}H {{ state.durationMinutes }}M</span>
@@ -305,3 +139,171 @@
         </template>
     </platform-header>
 </template>
+
+<script setup>
+import PlaylistService from '../../../../services/playlists.js';
+import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue'
+import PlaylistDropdown from '../PlaylistDropdown.vue';
+import { usePlaylistsStore } from '../../../../stores/playlists';
+import { onBeforeMount, ref, inject, reactive, computed, onUpdated } from 'vue';
+import { useUserStore } from "../../../../stores/user";
+import { storeToRefs } from "pinia/dist/pinia";
+
+//Inject
+const token = inject('csrf_token');
+
+//Pinia Stores
+const playlistsStore = usePlaylistsStore();
+const userStore = useUserStore();
+
+const { brand } = storeToRefs(userStore);
+
+//-----------Props-----------//
+const props = defineProps({
+    playlist: {
+        type: Object,
+        default: {}
+    },
+    lessons: {
+        type: Object,
+        default: {
+            data: []
+        }
+    },
+    hasAccess: {
+        type: Number,
+        default: 1,
+    }
+})
+
+//-------------Refs-------------//
+const dropdownTarget = ref(null)
+
+//-----------Reactive Data-----------//
+const state = reactive({
+    dropdownOpen: false,
+    durationHours: '0',
+    durationMinutes: '0',
+    dropdownTop: false,
+    isPinned: false,
+    isLiked: false,
+})
+
+//-----------Static Data-----------//
+const dropdownOptions = [
+    {
+        name: "Edit",
+        action: "editPlaylist"
+    },
+    {
+        name: "Delete",
+        action: "deletePlaylist"
+    },
+    {
+        name: "Duplicate",
+        action: "duplicatePlaylist"
+    },
+    {
+        name: "Re-Order",
+        action: "reorderPlaylist"
+    },
+    {
+        name: "Pin To Sidebar",
+        action: "pinPlaylist"
+    },
+    {
+        name: "Private",
+        action: "privateToggle"
+    },
+]
+
+//--------------Computed--------------//
+const description = computed(() => {
+    return playlistsStore.activePlaylist.description.replace(/(<([^>]+)>)/gi, "");
+})
+
+//--------------Methods--------------//
+
+//Check Dropdown Distance
+const GetElementDistance = el => {
+    let rect = el.getBoundingClientRect();
+    let spaceBelow = window.innerHeight - rect.bottom;
+    if(spaceBelow < 240) {
+        state.dropdownTop = true;
+    } else {
+        state.dropdownTop = false;
+    }
+}
+
+//Handle Share
+const sharePlaylist = () => {
+    if(playlistsStore.activePlaylist.private) {
+        window.openplaylistmodal({ modalType: 'share', data: props.playlist });
+    } else {
+        navigator.clipboard.writeText(props.playlist.url)
+        window.shownotification({
+            icon: 'fa-link',
+            text: `${ props.playlist.name } link copied to clipboard.`
+        })
+    }
+};
+
+//Handle Like/Unllike
+const likePlaylist = () => {
+    state.isLiked = !state.isLiked;
+    if(state.isLiked){
+        PlaylistService.likePlaylist({ brand: brand.value, "playlist_id": props.playlist.id }, token)
+            .then((response) => {
+                console.log('successfully liked')
+            })
+            .catch(function (error) {
+                console.log('failed to like')
+            });
+    }
+    else {
+        PlaylistService.unlikePlaylist(props.playlist.id, token)
+            .then((response) => {
+                console.log('successfully unliked')
+            })
+            .catch(function (error) {
+                console.log('failed to unlike')
+            });
+    }
+}
+
+//Handle Dropdown Trigger
+const dropdownTriggerHandler = event => {
+    GetElementDistance(event.target);
+    state.dropdownOpen = !state.dropdownOpen;
+}
+
+const formatDuration = duration => {
+    let time = duration;
+    if (time) { //does it exist
+        state.durationHours = Math.floor(time / 3600);
+        state.durationMinutes = Math.floor( (time % 3600) / 60);
+    }
+}
+
+const duplicatePlaylist = () => {
+    window.openplaylistmodal({ modalType: 'duplicate', data: props.playlist });
+};
+
+//---------Lifecycle Methods---------//
+
+onBeforeMount(() => {
+    playlistsStore.setActivePlaylist(props.playlist)
+    //initial Values
+    state.isLiked = props.playlist.is_liked_by_current_user;
+    state.isPinned = props.playlist.pinned ? true : false;
+
+    //Get Duration Hours and Seconds
+    formatDuration(playlistsStore.activePlaylist.duration)
+})
+
+onUpdated(()=>{
+    state.isPinned = props.playlist.pinned ? true : false;
+    //Recalculate Duration
+    formatDuration(playlistsStore.activePlaylist.duration);
+})
+</script>

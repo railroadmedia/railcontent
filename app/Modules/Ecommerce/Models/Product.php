@@ -139,6 +139,11 @@ class Product extends Model
         return in_array($this->getDigitalAccessTypeAsEnum(), Product::MEMBERSHIP_DIGITAL_ACCESS_TYPES);
     }
 
+    public function isRecurringMembershipProduct(): bool
+    {
+        return $this->isMembershipProduct() && $this->digital_access_time_type == self::DIGITAL_ACCESS_TIME_TYPE_RECURRING;
+    }
+
     public function isPack(): bool
     {
         return $this->digital_access_type == Product::DIGITAL_ACCESS_TYPE_SPECIFIC_CONTENT_ACCESS;
