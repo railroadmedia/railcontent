@@ -12,8 +12,7 @@ import { createPinia } from 'pinia';
 
 //App Pages
 import Support from './vue/views/Support';
-import Playlists from './vue/views/Playlists';
-import Playlist from './vue/views/Playlist';
+import Schedule from './vue/views/Schedule';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -265,8 +264,7 @@ app.component('AppContainer', AppContainer)
     .component('CatalogueCardContainer', CatalogueCardContainer)
     .component('ContentInfo', ContentInfo)
     .component('Support', Support)
-    .component('Playlists', Playlists)
-    .component('Playlist', Playlist)
+    .component('Schedule', Schedule)
 
     .component('PlaylistPlaybackWrapper', defineAsyncComponent(() =>
         import(
