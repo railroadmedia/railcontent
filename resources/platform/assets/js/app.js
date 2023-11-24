@@ -266,7 +266,6 @@ app.component('AppContainer', AppContainer)
     .component('ContentInfo', ContentInfo)
     .component('Support', Support)
     .component('Playlists', Playlists)
-    .component('Playlists', Playlists)
     .component('Playlist', Playlist)
 
     .component('PlaylistPlaybackWrapper', defineAsyncComponent(() =>

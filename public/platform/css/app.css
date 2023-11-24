@@ -24331,9 +24331,6 @@ a:visited{
 .tw-pt-\[24px\]{
   padding-top: 24px !important;
 }
-.tw-pt-2{
-  padding-top: 0.5rem !important;
-}
 .tw-pr-4{
   padding-right: 1rem !important;
 }
@@ -24396,6 +24393,9 @@ a:visited{
 }
 .tw-pb-16{
   padding-bottom: 4rem !important;
+}
+.tw-pt-2{
+  padding-top: 0.5rem !important;
 }
 .tw-pb-\[12px\]{
   padding-bottom: 12px !important;
