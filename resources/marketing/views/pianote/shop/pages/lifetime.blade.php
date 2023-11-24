@@ -127,7 +127,7 @@
                 <p class="leading-tight text-sm"><em>One time payment or choose a <br class="sm:hidden">
                         payment plan below.</em></p>
                 <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
-{{--                <p class="leading-tight mt-4 text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
+                <p class="leading-tight mt-4 text-musora font-black">ONLY <s class='opacity-60'>300</s> {{ $stock }} SPOTS AVAILABLE</p>
             </div>
         </div>
     </section>
