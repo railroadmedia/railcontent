@@ -1574,6 +1574,7 @@ return [
         'captions',
         'chapter_description',
         'chapter_timecode',
+        'chapter_thumbnail_url',
         'coach_bottom_banner_image',
         'coach_card_image',
         'coach_featured_image',
