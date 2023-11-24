@@ -61,7 +61,7 @@ class SubscriptionService
             /** @var Subscription $subscription */
             $product = $productLookup[$subscription->sku] ?? $productIdsLookup[$subscription->shopifyVariantId] ?? null;
             if (!$product) {
-                Log::error("Product $subscription->sku not found for recharge subscription $subscription->id");
+                Log::warning("Product $subscription->sku $subscription->shopifyVariantId not found for recharge subscription $subscription->id");
                 return;
             }
             $subscription->setProduct($product);
@@ -69,37 +69,34 @@ class SubscriptionService
 
         $membershipSubscriptions = $subscriptions->filter(function ($subscription) {
             /** @var Subscription $subscription */
-            return $subscription->product->isMembershipProduct();
+            return $subscription->product?->isRecurringMembershipProduct() ?? false;
         });
 
-        $activeMembershipSubscriptions = $subscriptions->filter(function ($subscription) {
+        $activeMembershipSubscriptions = $membershipSubscriptions->filter(function ($subscription) {
             /** @var Subscription $subscription */
             return $subscription->status == RechargeSubscriptionStatusEnum::Active->value;
         });
 
         $isLifetimeMember = $userAccessPermissions->getIsLifetimeMember();
 
-        // Disabled auto cancel subscriptions due to multiple payment subscriptions
-        // requires rework to support this case
-//        /** @var Subscription $mostRecentActiveSubscription */
-//        $mostRecentActiveSubscription = null;
-//        if ($isLifetimeMember) {
-//            foreach ($activeMembershipSubscriptions as $activeMembershipSubscription) {
-//                $this->recharge->cancelSubscription($activeMembershipSubscription, 'Lifetime Member');
-//            }
-//        } elseif ($membershipSubscriptions->count() > 1) {
-//            $mostRecentActiveSubscription = $activeMembershipSubscriptions->sortByDesc('createdAt')->first();
-//
-//            foreach ($activeMembershipSubscriptions as $activeMembershipSubscription) {
-//                if ($activeMembershipSubscription->id != $mostRecentActiveSubscription->id) {
-//                    $this->recharge->cancelSubscription($activeMembershipSubscription, 'Duplicate Subscription');
-//                }
-//            }
-//
-//            $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate(includeBuffer: false);
-//
-//            $this->recharge->updateSubscriptionNextChargeDate($mostRecentActiveSubscription, $membershipExpirationDate);
-//        }
+        /** @var Subscription $mostRecentActiveSubscription */
+        if ($isLifetimeMember) {
+            foreach ($activeMembershipSubscriptions as $activeMembershipSubscription) {
+                $this->recharge->cancelSubscription($activeMembershipSubscription, 'Lifetime Member');
+            }
+        } elseif ($activeMembershipSubscriptions->count() > 1) {
+            $mostRecentActiveSubscription = $activeMembershipSubscriptions->sortByDesc('createdAt')->first();
+
+            foreach ($activeMembershipSubscriptions as $activeMembershipSubscription) {
+                if ($activeMembershipSubscription->id != $mostRecentActiveSubscription->id) {
+                    $this->recharge->cancelSubscription($activeMembershipSubscription, 'Duplicate Subscription');
+                }
+            }
+
+            $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate(includeBuffer: false);
+
+            $this->recharge->updateSubscriptionNextChargeDate($mostRecentActiveSubscription, $membershipExpirationDate);
+        }
 
         // SRR-82 set the subscription type when the user has a Recharge subscription
         if (!$isLifetimeMember && $membershipSubscriptions->count() > 0) {
