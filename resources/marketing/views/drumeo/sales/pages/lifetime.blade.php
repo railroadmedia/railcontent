@@ -57,6 +57,12 @@
         @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
         ])
+        @include('drumeo.products.partials.promo-banner', [
+                    "name" => "Lifetime",
+                    "fullPrice" => 1200,
+                    "price" => 1200,
+                    "noBreadcrumb" => true
+                ])
         <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #094073 50%, #000C16);">
             <div class="container mx-auto">
                 <h1 class="leading-none"><strong>A <span class="text-musora">Lifetime</span> Of Drum Lessons </strong></h1>

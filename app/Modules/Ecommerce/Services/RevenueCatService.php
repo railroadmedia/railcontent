@@ -3,35 +3,33 @@
 namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\ApiGateways\RevenueCatApiGateway;
+use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Models\Product;
-use App\Modules\Ecommerce\Models\Subscription;
+use App\Modules\EventTracking\Services\CustomerIoService;
 use Carbon\Carbon;
-use App\Modules\Ecommerce\Services\PaymentService;
+use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Models\User;
-use Illuminate\Support\Facades\Log;
 
 class RevenueCatService
 {
     public RevenueCatApiGateway $revenueCatApiGateway;
-    public SubscriptionService $subscriptionService;
-    public UserProductService $userProductService;
-    public PaymentService $paymentService;
+    private ShopifySyncService $shopifySyncService;
+    private CustomerIoService $customerIoService;
 
     /**
      * @param RevenueCatApiGateway $revenueCatApiGateway
-     * @param \App\Modules\Ecommerce\Services\SubscriptionService $subscriptionService
+     * @param ShopifySyncService $shopifySyncService
+     * @param CustomerIoService $customerIoService
      */
     public function __construct(
         RevenueCatApiGateway $revenueCatApiGateway,
-        SubscriptionService $subscriptionService,
-        UserProductService $userProductService,
-        PaymentService $paymentService
+        ShopifySyncService $shopifySyncService,
+        CustomerIoService $customerIoService
     ) {
         $this->revenueCatApiGateway = $revenueCatApiGateway;
-        $this->subscriptionService = $subscriptionService;
-        $this->userProductService = $userProductService;
-        $this->paymentService = $paymentService;
+        $this->shopifySyncService = $shopifySyncService;
+        $this->customerIoService = $customerIoService;
     }
 
     /**
@@ -63,19 +61,12 @@ class RevenueCatService
         $entitlements = $subscriber->entitlements;
         $subscriptions = $subscriber->subscriptions;
 
-        $active = false;
         if (!empty($entitlements)) {
             foreach ($entitlements as $entitlement) {
+
                 $productIdentifier = $entitlement->product_identifier;
                 $subscriptionData = $subscriptions->$productIdentifier;
-                if (Carbon::parse($subscriptionData->expires_date) >= now()->subDays(
-                        config(
-                            'ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only',
-                            7
-                        )
-                    )) {
-                    $active = true;
-                }
+
                 $type = (strtolower($subscriptionData->store) == 'app_store') ? 'apple' : 'google';
                 $store = $type . '_store';
                 if ($subscriptionData->period_type == 'trial') {
@@ -86,62 +77,41 @@ class RevenueCatService
                         [config('ecommerce.' . $store . '_products_map_trial')[$productIdentifier]]
                     );
                 }
-
                 $musoraProduct =
                     Product::whereIn('sku', $productsMap)
-                        ->get();
+                        ->get()->first();
 
-                if ($user) {
-                    $userId = $user->id;
-                    $musoraSubscription =
-                        Subscription::query()
-                            ->where('user_id', '=', $userId)
-                            ->where('type', '=', $type . '_subscription')
-                            ->whereIn(
-                                'product_id',
-                                $musoraProduct->pluck('id')
-                                    ->toArray()
-                            )
-                            ->first();
+                $processedAt = Carbon::parse($subscriptionData->purchase_date);
+                $expiredAt = Carbon::parse($subscriptionData->expires_date);
+                if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
+                    if (!$musoraProduct) {
+                        break;
+                    }
+                    $price = $musoraProduct->price;
 
-                    if (!$musoraSubscription) {
-                        $musoraSubscription = $this->subscriptionService->createSubscription(
-                            $userId,
-                            Carbon::parse($subscriptionData->expires_date)
-                                ->getTimestampMs(),
-                            $musoraProduct->first(),
-                            $type,
-                            Carbon::parse($subscriptionData->purchase_date)
-                                ->getTimestampMs(),
-                            Carbon::parse($subscriptionData->unsubscribe_detected_at)
-                                ->getTimestampMs()
-                        );
-                    } else {
-                        //update subscription
-                        $this->subscriptionService->updateSubscription(
-                            $musoraSubscription,
-                            Carbon::parse($subscriptionData->expires_date)
-                                ->getTimestampMs(),
-                            Carbon::parse($subscriptionData->unsubscribe_detected_at)
-                                ->getTimestampMs()
-                        );
+                    if($subscriptionData->is_sandbox) {
+                        UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
                     }
 
-                    //Assign user product
-                    $this->userProductService->assignUserProduct(
-                        $userId,
-                        $musoraSubscription->product_id,
-                        $musoraSubscription->paid_until
+                    $this->shopifySyncService->syncOrder(
+                        $user,
+                        [$musoraProduct->id],
+                        $musoraProduct->brand,
+                        $processedAt,
+                        $price,
+                        0,
+                        $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
+                            : ShopifyPaymentSourceEnum::Google,
+                        null //defaults to USD
                     );
-                    if (strtoupper($subscriptionData->period_type) != 'TRIAL') {
-                        $this->paymentService->create(
-                            $musoraSubscription,
-                            $type,
-                            Carbon::parse($subscriptionData->purchase_date)
-                                ->getTimestampMs(),
-                            $subscriptionData->store_transaction_id
-                        );
-                    }
+
+                    match ($type) {
+                        'apple' => $user->has_apple_subscription = true,
+                        'google' => $user->has_google_subscription = true
+                    };
+                    $user->save();
+
+                   // $this->customerIoService->updateCustomerIoAttributesFromRevenueCat($user, $data['event'], $musoraProduct);
                 }
             }
         }

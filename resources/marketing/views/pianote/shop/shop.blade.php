@@ -31,7 +31,7 @@
 
 @section('body')
     @include('_partials.components.shop.promo-top-banner',[
-        'text' => '<span class="text-promo">Save up to 84%</span> on piano lessons,<br class="sm:hidden"> tools, & merch.',
+        'text' => '<span class="text-promo">Save up to 88%</span> on piano lessons,<br class="sm:hidden"> tools, & merch.',
     ])
 
     @if(Session::has('addedProducts'))
@@ -163,6 +163,7 @@
                                             "includedEdge" => $feat->included_edge,
                                             "sizes" => $feat->sizes,
                                             'FCP' => $key < 4 ? true : null,
+                                            "size_case_sensitive" => $feat->size_case_sensitive,
                                         ])
                                     </li>
                                 @endforeach
@@ -264,31 +265,34 @@
             </div>
         </section>
 
-        {{--   MISC     --}}
-        <div id="misc" class="anchor"></div>
-        <section class="grid-view category-section" data-category="misc" x-show="filter === 'clothing' || filter === 'all'">
+        {{--   XMAS     --}}
+        <div id="xmas" class="anchor"></div>
+        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
             <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Misc</strong></h5>
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-tree-christmas text-{{ $brand }} mr-1"></i> Christmas Merch</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
-
-                    @foreach($misc as $miscItem)
-                    @include('musora.shop._shop-card-alt', [
-                         "sku" => $miscItem->sku,
-                         "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $miscItem->slug ),
-                         "badgeText" => $miscItem->badge_text,
-                         "thumbnail" => $miscItem->thumbnail,
-                         "title" => $miscItem->name,
-                         "cardDescription" => $miscItem->short_desc,
-                         "fullPrice" => $miscItem->price,
-                         "price" => $miscItem->discounted_price,
-                         "sizes" => $miscItem->sizes,
-                         "soldOut" => isset($products[$miscItem->sku]) ? $products[$miscItem->sku]->getStockAvailability() === 0 : $miscItem->sold_out,
-                         "category" => strtolower($miscItem->productType->name),
-                         "size_case_sensitive" => $miscItem->size_case_sensitive,
-                    ])
-                @endforeach
-
-            </div>
+                    @foreach($xmas as $key => $xmasItem)
+                        @include('musora.shop._shop-card-alt', [
+                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $xmasItem->slug ),
+                            "sku" => $xmasItem->sku === 'pianote' ? null : $xmasItem->sku,
+                            "badgeText" => $xmasItem->badge_text,
+                            "thumbnail" => $xmasItem->thumbnail,
+                            "packLogo" => $xmasItem->thumbnail_logo,
+                            "title" => $xmasItem->name,
+                            "packAuthor" => $xmasItem->instructor_name,
+                            "cardDescription" => $xmasItem->short_desc,
+                            "fullPrice" => $xmasItem->price,
+                            "price" => $xmasItem->discounted_price,
+                            "category" => strtolower($xmasItem->productType->name),
+                            "buttonText" => $xmasItem->sku === 'drumeo' || $xmasItem->sku === 'pianote' || $xmasItem->sku === 'singeo' || $xmasItem->sku === 'guitareo' ? 'see the deal' : null,
+                            "soldOut" => $xmasItem->sold_out,
+                            "includedEdge" => $xmasItem->included_edge,
+                            "sizes" => $xmasItem->sizes,
+                            'FCP' => $key < 4 ? true : null,
+                            "size_case_sensitive" => $xmasItem->size_case_sensitive,
+                        ])
+                    @endforeach
+                </div>
             </div>
         </section>
 
@@ -323,7 +327,7 @@
         <div id="hoodies" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
             <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Hoodies</strong></h5>
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt-long-sleeve text-{{ $brand }} mr-1"></i> Hoodies</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
                     @foreach($hoodies as $hoodie)
@@ -344,6 +348,34 @@
                 @endforeach
 
             </div>
+            </div>
+        </section>
+
+        {{--   MISC     --}}
+        <div id="misc" class="anchor"></div>
+        <section class="grid-view category-section" data-category="misc" x-show="filter === 'clothing' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Misc</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+
+                    @foreach($misc as $miscItem)
+                        @include('musora.shop._shop-card-alt', [
+                             "sku" => $miscItem->sku,
+                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $miscItem->slug ),
+                             "badgeText" => $miscItem->badge_text,
+                             "thumbnail" => $miscItem->thumbnail,
+                             "title" => $miscItem->name,
+                             "cardDescription" => $miscItem->short_desc,
+                             "fullPrice" => $miscItem->price,
+                             "price" => $miscItem->discounted_price,
+                             "sizes" => $miscItem->sizes,
+                             "soldOut" => isset($products[$miscItem->sku]) ? $products[$miscItem->sku]->getStockAvailability() === 0 : $miscItem->sold_out,
+                             "category" => strtolower($miscItem->productType->name),
+                             "size_case_sensitive" => $miscItem->size_case_sensitive,
+                        ])
+                    @endforeach
+
+                </div>
             </div>
         </section>
     </div>

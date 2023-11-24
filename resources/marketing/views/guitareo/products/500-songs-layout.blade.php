@@ -1,4 +1,4 @@
-@extends('guitareo._partials.global-vue-layout')
+@extends('guitareo._partials.global-layout')
 
 @section('meta')
     <title>500 Songs In 5 Days | Guitareo</title>
@@ -12,8 +12,8 @@
 
 @section('styles')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}">
-    @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/500-songs.css') }}">
     <style>
