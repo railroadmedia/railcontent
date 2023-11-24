@@ -352,12 +352,25 @@ class ShopifySyncService
         return $customer;
     }
 
-    public function getOrderPaymentSource(int $orderId)
+    public function getOrderPaymentSource(int $orderId): ShopifyPaymentSourceEnum
     {
         $metafields = $this->shopify->getOrderMetafields($orderId);
         $paymentSource = collect($metafields)->first(
             fn($item) => $item->key === ShopifyMetafieldKey::PaymentSource->value
         );
-        return $paymentSource?->value ?? 'web';
+
+        $paymentSourceEnum = ShopifyPaymentSourceEnum::tryFrom($paymentSource?->value);
+        
+        if (is_null($paymentSourceEnum)) {
+            if (!is_null($paymentSource)) {
+                Log::error(
+                    "Unknown payment source from {ShopifyMetafieldKey::PaymentSource->value} metafield: {$paymentSource->value} on Shopify order $orderId"
+                );
+            }
+            
+            return ShopifyPaymentSourceEnum::Web;
+        }
+
+        return $paymentSourceEnum;
     }
 }
