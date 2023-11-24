@@ -48,7 +48,6 @@ class ShopifyWebHookController extends Controller
             $email = $request->get('customer')['email'];
             Log::debug("Shopify customer id: $shopifyCustomerId email: $email");
 
-
             $this->handleOrderCreatedEventTracking($request->all());
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
             Log::error($e->getMessage());
@@ -163,6 +162,8 @@ class ShopifyWebHookController extends Controller
 
     private function getOrderEventData($order, string $brand): array
     {
+        $order['payment_source'] = $this->shopifySyncService->getOrderPaymentSource($order['id']);
+
         return [
             'checkout_token' => $order['checkout_token'],
             'order_id' => $order['id'],
@@ -176,6 +177,7 @@ class ShopifyWebHookController extends Controller
             'currency' => $order['currency'],
             'products' => $this->getProductList($order['line_items']),
             'brand' => $brand,
+            'payment_source' => $order['payment_source'],
             'timestamp' => Carbon::parse($order['processed_at'])->timestamp,
         ];
     }

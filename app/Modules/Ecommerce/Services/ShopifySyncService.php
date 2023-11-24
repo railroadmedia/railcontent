@@ -351,4 +351,13 @@ class ShopifySyncService
         $customer = collect($customers)->first(fn($item) => $item->email === $email);
         return $customer;
     }
+
+    public function getOrderPaymentSource(int $orderId)
+    {
+        $metafields = $this->shopify->getOrderMetafields($orderId);
+        $paymentSource = collect($metafields)->first(
+            fn($item) => $item->key === ShopifyMetafieldKey::PaymentSource->value
+        );
+        return $paymentSource?->value ?? 'web';
+    }
 }
