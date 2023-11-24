@@ -83,7 +83,7 @@ class RevenueCatService
 
                 $processedAt = Carbon::parse($subscriptionData->purchase_date);
                 $expiredAt = Carbon::parse($subscriptionData->expires_date);
-                if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
+                if ($user && (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt))) {
                     if (!$musoraProduct) {
                         break;
                     }
