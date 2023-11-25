@@ -66,6 +66,7 @@
 {{--        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card.jpg',--}}
 {{--        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m.jpg',--}}
         @php
+            if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now()) {
             $bundles = [
                 [
                     'slug' => 'https://www.pianote.com/shop/ultimate-lessons-bundle',
@@ -81,7 +82,7 @@
                 ],
                 [
                     'slug' => '/lifetime',
-                    'desc' => 'Unlimited pianote lessons<br> for life + more',
+                    'desc' => 'Unlimited Pianote Lessons<br> For Life + More',
                     'visible' => 1,
                     'discountedPrice' => 1200,
                     'specialW2' => true,
@@ -104,6 +105,44 @@
                     'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card-m.jpg',
                 ],
             ];
+            } else {
+            $bundles = [
+                [
+                    'slug' => 'https://www.pianote.com/shop/ultimate-lessons-bundle',
+                    'desc' => 'Pianote Discount<br> + 11 Bonuses',
+                    'visible' => 1,
+                    'full' => true,
+                    'price' => 1203,
+                    'discountedPrice' => 150,
+                    'buttonColor' => '#F61A30',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card2.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m2.jpg',
+                ],
+                [
+                    'slug' => 'https://www.pianote.com/shop/30-day-challenge-bundle',
+                    'desc' => '7 Online Courses <br>For The Price Of 1',
+                    'visible' => 1,
+                    'price' => 706,
+                    'discountedPrice' => 97,
+                    'buttonColor' => '#01C1FF',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30-day-challenge-bundle-white.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
+                ],
+                [
+                    'slug' => '/lifetime',
+                    'desc' => 'Unlimited Pianote Lessons<br> For Life + More',
+                    'visible' => 1,
+                    'discountedPrice' => 1200,
+                    'price' => 1200,
+                    'buttonColor' => '#000',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
+                ],
+            ];
+            }
         @endphp
         @include('_partials.layout.holiday.bundle-tiles', [
             "header" => 'Featured Deals',
@@ -205,6 +244,20 @@
                          'soldOut' => false,
                     ])
                 </div>
+                @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
+                    <div x-cloak x-show="filter === 'lessons'">
+                        @include('musora.shop._shop-card-alt', [
+                             "itemURL" => "/shop/30-day-challenge-bundle",
+                             "sku" => null,
+                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-shop-thumb2.jpg",
+                             "title" => "30 Day Challenge Bundle",
+                             "fullPrice" => 706,
+                             "price" => 97,
+                             "category" => "lessons",
+                             'soldOut' => false,
+                        ])
+                    </div>
+                @endif
                 <div x-cloak x-show="filter === 'lessons'">
                     @include('musora.shop._shop-card-alt', [
                          "itemURL" => "/lifetime",

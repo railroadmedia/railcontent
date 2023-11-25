@@ -95,42 +95,82 @@
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         @php
-            $bundles = [
-                [
-                    'slug' => 'https://www.drumeo.com/drumshop/ultimate-lessons-bundle',
-                    'desc' => 'Drumeo Discount<br class="sm:hidden"> + 10 Bonuses',
-                    'full' => true,
-                    'visible' => 1,
-                    'price' => 1473.94,
-                    'discountedPrice' => 150,
-                    'buttonColor' => '#0A69D0',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card2.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card-m2.jpg',
-                ],
-                [
-                    'slug' => 'https://www.drumeo.com/drumshop/better-hands-bundle',
-                    'desc' => 'Easy Rudiments Book + QuietPad<br> + Drumsticks + PadStand',
-                    'visible' => 1,
-                    'price' => 200.94,
-                    'discountedPrice' => 150.21,
-                    'buttonColor' => '#01AB5A',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-bundle-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
-                ],
-                [
-                    'slug' => '/lifetime',
-                    'desc' => 'Unlimited drum lessons <br>for life + more',
-                    'visible' => 1,
-                    'discountedPrice' => 1200,
-                    'price' => 1200,
-                    'buttonColor' => '#532700',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
-                ],
-            ];
+            if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now()) {
+                $bundles = [
+                    [
+                        'slug' => 'https://www.drumeo.com/drumshop/ultimate-lessons-bundle',
+                        'desc' => 'Drumeo Discount<br class="sm:hidden"> + 10 Bonuses',
+                        'full' => true,
+                        'visible' => 1,
+                        'price' => 1473.94,
+                        'discountedPrice' => 150,
+                        'buttonColor' => '#0A69D0',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card2.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card-m2.jpg',
+                    ],
+                    [
+                        'slug' => 'https://www.drumeo.com/drumshop/better-hands-bundle',
+                        'desc' => 'Easy Rudiments Book + QuietPad<br> + Drumsticks + PadStand',
+                        'visible' => 1,
+                        'price' => 200.94,
+                        'discountedPrice' => 150.21,
+                        'buttonColor' => '#01AB5A',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-bundle-white.png',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
+                    ],
+                    [
+                        'slug' => '/lifetime',
+                        'desc' => 'Unlimited Drum Lessons <br>For Life + More',
+                        'visible' => 1,
+                        'discountedPrice' => 1200,
+                        'price' => 1200,
+                        'buttonColor' => '#532700',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
+                    ],
+                ];
+            } else {
+                $bundles = [
+                    [
+                        'slug' => 'https://www.drumeo.com/drumshop/ultimate-lessons-bundle',
+                        'desc' => 'Drumeo Discount<br class="sm:hidden"> + 10 Bonuses',
+                        'full' => true,
+                        'visible' => 1,
+                        'price' => 1473.94,
+                        'discountedPrice' => 150,
+                        'buttonColor' => '#0A69D0',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card2.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card-m2.jpg',
+                    ],
+                    [
+                        'slug' => 'https://www.drumeo.com/drumshop/30-day-challenge-bundle',
+                        'desc' => '5 Online Courses <br>For The Price Of 1',
+                        'visible' => 1,
+                        'price' => 497,
+                        'discountedPrice' => 97,
+                        'buttonColor' => '#01C1FF',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30-day-challenge-bundle-white.png',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
+                    ],
+                    [
+                        'slug' => '/lifetime',
+                        'desc' => 'Unlimited Drum Lessons <br>For Life + More',
+                        'visible' => 1,
+                        'discountedPrice' => 1200,
+                        'price' => 1200,
+                        'buttonColor' => '#532700',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
+                    ],
+                ];
+
+            }
         @endphp
         @include('_partials.layout.holiday.bundle-tiles', [
             "header" => 'Featured Deals',
@@ -232,6 +272,20 @@
                          'soldOut' => false,
                     ])
                 </div>
+                @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
+                    <div x-cloak x-show="filter === 'lessons'">
+                        @include('musora.shop._shop-card-alt', [
+                             "itemURL" => "/drumshop/30-day-challenge-bundle",
+                             "sku" => null,
+                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-shop-thumb2.jpg",
+                             "title" => "30 Day Challenge Bundle",
+                             "fullPrice" => 497,
+                             "price" => 97,
+                             "category" => "lessons",
+                             'soldOut' => false,
+                        ])
+                    </div>
+                @endif
                 <div x-cloak x-show="filter === 'lessons'">
                     @include('musora.shop._shop-card-alt', [
                          "itemURL" => "/lifetime",
@@ -286,18 +340,20 @@
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Accessories</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-                <div x-cloak x-show="filter === 'accessories'">
-                    @include('musora.shop._shop-card-alt', [
-                         "itemURL" => "/drumshop/better-hands-bundle",
-                         "sku" => null,
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/drumeo-bh-shop-thumb2.jpg",
-                         "title" => "Better Hands Bundle",
-                         "fullPrice" => 200.94,
-                         "price" => 150.21,
-                         "category" => "accessories",
-                         'soldOut' => false,
-                    ])
-                </div>
+                @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                    <div x-cloak x-show="filter === 'accessories'">
+                        @include('musora.shop._shop-card-alt', [
+                             "itemURL" => "/drumshop/better-hands-bundle",
+                             "sku" => null,
+                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/drumeo-bh-shop-thumb2.jpg",
+                             "title" => "Better Hands Bundle",
+                             "fullPrice" => 200.94,
+                             "price" => 150.21,
+                             "category" => "accessories",
+                             'soldOut' => false,
+                        ])
+                    </div>
+                @endif
                 @foreach($accessories as $accessory)
                     @include('musora.shop._shop-card-alt', [
                         "sku" => $accessory->sku,
