@@ -106,7 +106,8 @@
                 "fullPrice" => 1200,
                 "price" => 1200,
                     "specialText" => "<strong>Only <s class='opacity-60'>300</s> <span class='text-promo'>" . $stock . "</span> left!</strong>",
-                "noBreadcrumb" => true
+                "noBreadcrumb" => true,
+                "noCountdown" => true
             ])
     <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #AF1F2D 50%, #180104);">
         <div class="container mx-auto">

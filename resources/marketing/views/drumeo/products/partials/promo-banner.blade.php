@@ -21,7 +21,7 @@
                     @endif
                 </p>
                 @if(empty($noCountdown))
-                    <div x-data="timer()" x-init="countdown()" x-cloak x-show="day < 2">
+                    <div class="mx-auto" x-data="timer()" x-init="countdown()" x-cloak x-show="day < 2">
                         <div class="flex text-center mx-auto sm:mx-0">
                             <div class="mr-3 sm:mr-4" x-show="timeLeft > 0 && day > 0">
                                 <div class="text-2xl sm:text-3xl font-extrabold" x-text="day">00</div>
