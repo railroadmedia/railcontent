@@ -261,7 +261,7 @@ const handleShowDropdown = (className) => {
     const { innerHeight, innerWidth } = window;
 
     state.dropdownPosition = {
-        top: (top + height) < innerHeight ? top : top - height,
+        top: (top + height + 30) < innerHeight ? top + 30: top - height,
         left: (left + width) < innerWidth ? left : left - width,
     };
     state.dropdownOpen = !state.dropdownOpen;
