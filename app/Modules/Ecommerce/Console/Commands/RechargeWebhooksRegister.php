@@ -11,8 +11,6 @@ class RechargeWebhooksRegister extends Command
         'subscription/cancelled' => 'recharge.webhook.subscription.cancel',
     ];
 
-    public array $webHookFields = [];
-
     protected $signature = 'ecommerce:registerRechargeWebhook {customBaseURL?}';
 
     public function handle(RechargeGateway $rechargeGateway): void
@@ -41,9 +39,6 @@ class RechargeWebhooksRegister extends Command
                 'topic' => $topic,
                 'address' => $url,
             ];
-            if ($this->webHookFields[$topic] ?? false) {
-                $data['fields'] = $this->webHookFields[$topic];
-            }
 
             $webhookData = $rechargeGateway->createWebhook($data);
             $this->info("Webhooks registered: $url $topic");
