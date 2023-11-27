@@ -64,13 +64,13 @@
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         @php
-            if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now()) {
+            if(Carbon\Carbon::create(2023, 11, 28, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now()) {
             $bundles = [
                 [
                     'slug' => 'https://www.pianote.com/shop/ultimate-lessons-bundle',
                     'desc' => 'Pianote Discount<br> + 11 Bonuses',
                     'visible' => 1,
-                    'specialW' => true,
+                    'full' => true,
                     'price' => 1203,
                     'discountedPrice' => 150,
                     'buttonColor' => '#F61A30',
@@ -79,28 +79,26 @@
                     'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m3.jpg',
                 ],
                 [
+                    'slug' => 'https://www.pianote.com/shop/30-day-challenge-bundle',
+                    'desc' => '7 Online Courses <br>For The Price Of 1',
+                    'visible' => 1,
+                    'price' => 706,
+                    'discountedPrice' => 97,
+                    'buttonColor' => '#01C1FF',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30-day-challenge-bundle-white.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
+                ],
+                [
                     'slug' => '/lifetime',
-                    'desc' => 'Unlimited Pianote Lessons<br> For Life + More',
+                    'desc' => 'Unlimited Pianote Lessons For Life + More<br> <strong class="font-black">Only <s class="opacity-60">300</s> ' . $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() . ' Left!</strong>',
                     'visible' => 1,
                     'discountedPrice' => 1200,
-                    'specialW2' => true,
                     'price' => 1200,
                     'buttonColor' => '#000',
                     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
                     'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
                     'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
-                ],
-                [
-                    'slug' => '/shop/metronome',
-                    'desc' => '',
-                    'full' => true,
-                    'visible' => 1,
-                    'price' => 79,
-                    'discountedPrice' => 59,
-                    'buttonColor' => '#F61A30',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card-logo.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card-m.jpg',
                 ],
             ];
             } else {
@@ -130,7 +128,7 @@
                 ],
                 [
                     'slug' => '/lifetime',
-                    'desc' => 'Unlimited Pianote Lessons<br> For Life + More',
+                    'desc' => 'Unlimited Pianote Lessons For Life + More<br> <strong class="font-black">Only <s class="opacity-60">300</s> ' . $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() . ' Left!</strong>',
                     'visible' => 1,
                     'discountedPrice' => 1200,
                     'price' => 1200,

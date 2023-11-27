@@ -95,7 +95,7 @@
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         @php
-            if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now()) {
+            if(Carbon\Carbon::create(2023, 11, 28, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now()) {
                 $bundles = [
                     [
                         'slug' => 'https://www.drumeo.com/drumshop/ultimate-lessons-bundle',
@@ -110,19 +110,19 @@
                         'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card-m.jpg',
                     ],
                     [
-                        'slug' => 'https://www.drumeo.com/drumshop/better-hands-bundle',
-                        'desc' => 'Easy Rudiments Book + P4<br> + Drumsticks + PadStand',
+                        'slug' => 'https://www.drumeo.com/drumshop/30-day-challenge-bundle',
+                        'desc' => '5 Online Courses <br>For The Price Of 1',
                         'visible' => 1,
-                        'price' => 200.94,
-                        'discountedPrice' => 150.21,
-                        'buttonColor' => '#01AB5A',
-                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-bundle-white.png',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
+                        'price' => 497,
+                        'discountedPrice' => 97,
+                        'buttonColor' => '#01C1FF',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30-day-challenge-bundle-white.png',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
                     ],
                     [
                         'slug' => '/lifetime',
-                        'desc' => 'Unlimited Drum Lessons <br>For Life + More',
+                        'desc' => 'Unlimited Drum Lessons For Life + More<br> <strong class="font-black">Only <s class="opacity-60">500</s> ' . $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() . ' Left!</strong>',
                         'visible' => 1,
                         'discountedPrice' => 1200,
                         'price' => 1200,
@@ -159,7 +159,7 @@
                     ],
                     [
                         'slug' => '/lifetime',
-                        'desc' => 'Unlimited Drum Lessons <br>For Life + More',
+                        'desc' => 'Unlimited Drum Lessons For Life + More<br> <strong class="font-black">Only <s class="opacity-60">500</s> ' . $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() . ' Left!</strong>',
                         'visible' => 1,
                         'discountedPrice' => 1200,
                         'price' => 1200,
