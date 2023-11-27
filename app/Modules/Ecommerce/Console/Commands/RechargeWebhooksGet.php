@@ -7,7 +7,7 @@ use App\Modules\Ecommerce\Gateways\RechargeGateway;
 
 class RechargeWebhooksGet extends Command
 {
-    protected $signature = 'ecommerce:GetRechargeWebHooks';
+    protected $signature = 'ecommerce:getRechargeWebhooks';
 
     public function handle(RechargeGateway $recharge): void
     {

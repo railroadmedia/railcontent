@@ -7,7 +7,7 @@ use App\Modules\Ecommerce\Gateways\RechargeGateway;
 
 class RechargeWebhookDelete extends Command
 {
-    protected $signature = 'ecommerce:DeleteRechargeWebHooks {webhookId}';
+    protected $signature = 'ecommerce:deleteRechargeWebhooks {webhookId}';
 
     public function handle(RechargeGateway $recharge): void
     {
