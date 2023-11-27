@@ -99,7 +99,6 @@ export default {
 
         // Used to handle the event when bussed to the top level parent
         addToListEventHandler(payload) {
-            console.log('add to list event handler', payload)
             window.openplaylistmodal({ modalType: 'addItem', content: payload });
         },
 

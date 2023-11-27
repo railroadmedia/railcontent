@@ -82,9 +82,6 @@ export default {
             }
         });
     },
-    beforeMount() {
-        console.log('preloaded content', this.preloadedContent);
-    },
     methods: {
         addEventToDropdown(payload) {
             this.singleEvent = payload;

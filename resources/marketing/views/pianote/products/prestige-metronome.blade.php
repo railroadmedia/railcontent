@@ -41,7 +41,7 @@
                 <p class="leading-normal my-2 sm:my-3"><strong class="font-black">Only 216 made.</strong> Solid flamed maple case.<br class="hidden sm:inline"> Precision German manufacturing. Handcrafted.</p>
                 <h3 class="leading-tight mb-3"><strong>${{ floatval($productPrices['maelzel-metronome']->discounted_price) }}</strong></h3>
                 <a class="join smaller vue-add-to-cart" data-product-json='{"maelzel-metronome": 1}'
-                    href="/ecommerce/add-to-cart?products[maelzel-metronome]=1&redirect=/order">GET YOURS &raquo;</a>
+                    href="/ecommerce/add-to-cart?products[maelzel-metronome]=1">GET YOURS &raquo;</a>
             </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0,0,0,0.6);"></div>
@@ -285,7 +285,7 @@
                     <h3 class="leading-tight inline-block align-middle mb-3 lg:mb-0 lg:mr-3"><strong>${{ floatval($productPrices['maelzel-metronome']->discounted_price) }}</strong></h3>
                     <br class="lg:hidden">
                     <a class="inline-block align-middle join smaller vue-add-to-cart" data-product-json='{"maelzel-metronome": 1}'
-                        href="/ecommerce/add-to-cart?products[maelzel-metronome]=1&redirect=/order">GET YOURS &raquo;</a>
+                        href="/ecommerce/add-to-cart?products[maelzel-metronome]=1">GET YOURS &raquo;</a>
                 </div>
             </div>
         </div>
@@ -307,8 +307,7 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @stop

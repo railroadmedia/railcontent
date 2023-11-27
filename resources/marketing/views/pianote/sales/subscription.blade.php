@@ -164,7 +164,9 @@
     ])
 
     <div class="sticky-trigger block"></div>
-    @include('_partials.layout.holiday.sticky-bar')
+    @include('_partials.layout.holiday.sticky-bar',[
+        'text' => '<span class="text-promo">Save 38% on Drumeo</span> + get 11 <br>free bonuses worth $963',
+    ])
 
     @php
         $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/bubbles/summer-swee-singh.png';
@@ -180,7 +182,9 @@
         $slides = $pianote['slides'];
     @endphp
     @if(empty($hideHeader) || !$hideHeader)
-        @if(!empty($beginnerVersion))
+        @if(!empty($bfVersion))
+
+        @elseif(!empty($beginnerVersion))
             @include('musora.sales.components.header-section', [
                 'header' => 'Online piano lessons<br> tailored for beginners.',
                 'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> friendly teachers, and songs perfect for your skill level.',

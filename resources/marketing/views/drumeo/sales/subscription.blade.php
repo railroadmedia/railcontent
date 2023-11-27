@@ -166,8 +166,9 @@
 {{--    'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',--}}
 
     <div class="sticky-trigger block"></div>
-    @include('_partials.layout.holiday.sticky-bar')
-
+    @include('_partials.layout.holiday.sticky-bar',[
+        'text' => '<span class="text-promo">Save 38% on Drumeo</span> + get 10 <br>free bonuses worth $1233.94',
+    ])
 
     @php
         $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/bubbles/dorothea-taylor.png';

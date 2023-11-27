@@ -36,7 +36,7 @@
             <h2>The shortcuts to <br class="hidden-sm hidden-md hidden-lg"><strong>sounding great</strong> on the piano.</h2>
             <a
                 class="join vue-add-to-cart"
-                href="/ecommerce/add-to-cart?products[piano-riffs-and-fills]=1&redirect=/order"
+                href="/ecommerce/add-to-cart?products[piano-riffs-and-fills]=1"
                 data-product-json='{"piano-riffs-and-fills": 1}'
             >Get Started &raquo;</a>
 
@@ -59,7 +59,7 @@
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item reset-on-close" data-lazy-load-url="//player.vimeo.com/video/423703341?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
-                <a href="/ecommerce/add-to-cart?products[piano-riffs-and-fills]=1&redirect=/order"
+                <a href="/ecommerce/add-to-cart?products[piano-riffs-and-fills]=1"
                         class="join stop-play" data-dismiss="modal" aria-label="Close">Get Started</a>
             </div>
         </div>
@@ -247,7 +247,7 @@ Connect every riff, fill and tip you’ve learned and see how to apply it to pre
             <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/piano-riffs-fills-logo.png" alt="Riffs and fills logo">
             <h2>The shortcuts to <strong>sounding great</strong> on the piano.</h2>
             <a
-                href="/ecommerce/add-to-cart?products[piano-riffs-and-fills]=1&redirect=/order"
+                href="/ecommerce/add-to-cart?products[piano-riffs-and-fills]=1"
                 class="join vue-add-to-cart"
                 data-product-json='{"piano-riffs-and-fills": 1}'
             >Get Started &raquo;</a>
@@ -330,10 +330,8 @@ Connect every riff, fill and tip you’ve learned and see how to apply it to pre
             });
         });
     </script>
-    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
-
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
 @stop
