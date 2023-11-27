@@ -122,7 +122,7 @@
                     ],
                     [
                         'slug' => '/lifetime',
-                        'desc' => 'Unlimited Drum Lessons For Life + More<br> <strong class="font-black">Only <s class="opacity-60">500</s> ' . $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() . ' Left!</strong>',
+                        'desc' => 'Unlimited Drum Lessons For Life<br> <strong class="font-black">Only <s class="opacity-60">500</s> ' . $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() . ' Left!</strong>',
                         'visible' => 1,
                         'discountedPrice' => 1200,
                         'price' => 1200,
@@ -159,7 +159,7 @@
                     ],
                     [
                         'slug' => '/lifetime',
-                        'desc' => 'Unlimited Drum Lessons For Life + More<br> <strong class="font-black">Only <s class="opacity-60">500</s> ' . $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() . ' Left!</strong>',
+                        'desc' => 'Unlimited Drum Lessons For Life<br> <strong class="font-black">Only <s class="opacity-60">500</s> ' . $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() . ' Left!</strong>',
                         'visible' => 1,
                         'discountedPrice' => 1200,
                         'price' => 1200,
