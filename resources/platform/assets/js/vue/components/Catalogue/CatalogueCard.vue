@@ -70,14 +70,14 @@
                     </h6>
                 </a>
                 <!-- Add to Playlist -->
-                <div :id="`${item.id}-action-btn`" class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
+                <div class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
                     <div class="tw-relative" v-click-outside="() => { state.dropdownOpen = false }">
-                        <button v-if="item.type !== 'pack-bundle' && showMyListAction"
+                        <button :id="`${item.id}-action-btn-big`" v-if="item.type !== 'pack-bundle' && showMyListAction"
                             class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
                             :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                             :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'" :data-content-id="item.id"
                             :data-content-type="item.type"
-                            @click.prevent="showDropdown ? handleShowDropdown(`${item.id}-action-btn`) : $emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })">
+                            @click.prevent="showDropdown ? handleShowDropdown(`${item.id}-action-btn-big`) : $emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })">
                             <svg v-if="showDropdown" width="25" height="25" viewBox="0 0 25 25" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -137,13 +137,13 @@
         </a>
 
         <!-- Action Button -->
-        <div :id="`${item.id}-action-btn`" class="tw-inline-flex tw-items-start tw-p-1 tw-relative"
+        <div class="tw-inline-flex tw-items-start tw-p-1 tw-relative"
             v-click-outside="() => { state.dropdownOpen = false }">
-            <button v-if="item.type !== 'pack-bundle' && showMyListAction"
+            <button :id="`${item.id}-action-btn-small`" v-if="item.type !== 'pack-bundle' && showMyListAction"
                 class="tw-flex-none tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
                 :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'" title="More"
                 :data-content-id="item.id" :data-content-type="item.type"
-                @click.prevent="handleShowDropdown(`${item.id}-action-btn`)">
+                @click.prevent="handleShowDropdown(`${item.id}-action-btn-small`)">
                 <DotsHorizontalIcon class="tw-h-[24px] tw-w-[24px]" />
             </button>
             <Dropdown v-if="showDropdown" :brand="brand" :item="item" :is-open="state.dropdownOpen"
@@ -255,12 +255,14 @@ const dropdownOptions = [
 const { themeBgClass } = useThemeClasses(props);
 
 const handleShowDropdown = (className) => {
-    const { top, left, width, height } = document.getElementById(className).getBoundingClientRect();
+    const dropdownSize = { width: 162, height: 84 };
+    const { top, left } = document.getElementById(className).getBoundingClientRect();
+    const { width, height } = dropdownSize;
     const { innerHeight, innerWidth } = window;
 
     state.dropdownPosition = {
-        top: (top + height + 100) < innerHeight ? top + height : top - height,
-        left: (left + width + 150) < innerWidth ? left : left - width - 100,
+        top: (top + height) < innerHeight ? top : top - height,
+        left: (left + width) < innerWidth ? left : left - width,
     };
     state.dropdownOpen = !state.dropdownOpen;
 };
