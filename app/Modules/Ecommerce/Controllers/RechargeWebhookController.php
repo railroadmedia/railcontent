@@ -26,13 +26,13 @@ class RechargeWebhookController extends Controller
             //Log::debug(print_r($request->all(), true));
 
             $subscription = $request->get('subscription');
-            $shopifyCustomerId = $subscription['customer_id'];
-            Log::debug("Shopify customer id: $shopifyCustomerId");
+            $email = $subscription['email'];
+            Log::debug("Shopify customer email: $email");
 
             /** @var User $user */
-            $user = User::query()->where('shopify_id', '=', $shopifyCustomerId)->first();
+            $user = User::query()->where('email', '=', $email)->first();
             if (!$user) {
-                Log::debug("User not found for shopify id: $shopifyCustomerId");
+                Log::debug("User not found for email: $email");
                 return;
             }
             /** @var Product $product */
