@@ -110,8 +110,11 @@ class RevenueCatService
                         'google' => $user->has_google_subscription = true
                     };
                     $user->save();
+                    $event['expiration_at_ms'] = $expiredAt->timestamp;
+                    $event['event_timestamp_ms'] = Carbon::parse(Carbon::now())->timestamp;
+                    $event['purchased_at_ms'] = $processedAt->timestamp;
 
-                   // $this->customerIoService->updateCustomerIoAttributesFromRevenueCat($user, $data['event'], $musoraProduct);
+                    $this->customerIoService->updateCustomerIoAttributesFromRevenueCat($user, $event, $musoraProduct);
                 }
             }
         }
