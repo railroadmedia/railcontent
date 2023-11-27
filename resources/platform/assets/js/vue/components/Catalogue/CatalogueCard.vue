@@ -155,7 +155,7 @@
     </div>
 </template>
 <script setup>
-import { computed, onBeforeUnmount, reactive, onMounted, onUpdated } from 'vue';
+import { computed, onBeforeUnmount, reactive, onMounted } from 'vue';
 import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '../../hooks/useCatalogueItem.js';
 import useThemeClasses from '../../hooks/useThemeClasses.js';
@@ -237,9 +237,8 @@ const state = reactive({
     dropdownPosition: {
         top: 0,
         left: 0,
-    },
-    cardButtonClass: null,
-    dropdownLocated: false,
+        opacity: 0,
+    }
 });
 
 //-----------Static Data-----------//
@@ -257,11 +256,24 @@ const dropdownOptions = [
 const { themeBgClass } = useThemeClasses(props);
 
 const handleShowDropdown = (className) => {
-    state.dropdownOpen = !state.dropdownOpen;
-    state.cardButtonClass = className;
+    const { top, left } = document.getElementById(className).getBoundingClientRect();
+    const { innerHeight, innerWidth } = window;
 
-    const contentContainer = document.getElementById('content-container');
-    contentContainer.addEventListener('scroll', closeDropdownOnScroll);
+    state.dropdownOpen = !state.dropdownOpen;
+
+    //opacity 0 to avoid flicker
+    state.dropdownPosition = { ...state.dropdownPosition, opacity: 0 }
+
+    //wait for element to appear on screen
+    window.setTimeout(()=>{
+        const { width, height } = document.getElementById('catalogue-card-dropdown-div').getBoundingClientRect();
+
+        state.dropdownPosition = {
+            top: (top + height + 30) < innerHeight ? top + 30: top - height,
+            left: (left + width) < innerWidth ? left : left - width + 26,
+            opacity: 1,
+        };
+    }, 0)
 };
 
 const mappedData = computed(() => contentModel.value.card);
@@ -288,21 +300,6 @@ const closeDropdownOnScroll = () => {
 onMounted(() => {
     const contentContainer = document.getElementById('content-container');
     contentContainer.addEventListener('scroll', closeDropdownOnScroll);
-});
-
-onUpdated(() => {
-    if (state.dropdownOpen && !state.dropdownLocated) {
-        const { top, left } = document.getElementById(state.cardButtonClass).getBoundingClientRect();
-        const { width, height } = document.getElementById('catalogue-card-dropdown-div').getBoundingClientRect();
-        const { innerHeight, innerWidth } = window;
-
-        state.dropdownLocated = true;
-        state.dropdownPosition = {
-            top: (top + height + 30) < innerHeight ? top + 30 : top - height,
-            left: (left + width) < innerWidth ? left : left - width,
-            opacity: 1,
-        };
-    }
 });
 
 onBeforeUnmount(() => {
