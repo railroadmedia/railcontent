@@ -320,6 +320,7 @@
                     'description' => 'Your encyclopedia of piano chords & scales.',
                     'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
                     'shipping' => true,
+                    'delayshipping' => true,
                 ],
                 [
                     'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-card.jpg',

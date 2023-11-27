@@ -184,6 +184,7 @@
                 'description' => 'Your encyclopedia of piano chords & scales.',
                 'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
                 'shipping' => true,
+                'delayshipping' => true,
             ],
             [
                 'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/5afe20b9-5f1c-4886-b932-9ee93ffc67f4-christmas-songbook-shop.jpg',
@@ -343,6 +344,9 @@
                                     Free Shipping
                                 @else
                                     Online Access
+                                @endif
+                                @if(!empty($bonus['delayshipping']))
+                                       <br><u class="text-xs"> Shipping will be delayed</u>
                                 @endif
                             </em>
                         </p>

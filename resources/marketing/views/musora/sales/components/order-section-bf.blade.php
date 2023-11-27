@@ -103,6 +103,10 @@
                             @else
                                 Online Access
                             @endif
+
+                                @if(!empty($bonus['delayshipping']))
+                                    <br><u class="text-xs"> Shipping will be delayed</u>
+                                @endif
                         </em>
                     </p>
                 </div>
