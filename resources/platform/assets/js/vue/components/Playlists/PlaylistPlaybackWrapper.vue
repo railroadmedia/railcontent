@@ -9,7 +9,7 @@ import SoundSlice from '../SoundSlice/SoundSlice.vue';
 import PlaybackCue from './PlaybackCue.vue';
 import Comments from '../../vuesora/views/comments/Comments.vue';
 import PlaybackNavButtons from './PlaybackNavButtons.vue';
-import Breadcrumb from './Breadcrumb.vue';
+import Breadcrumb from '../Breadcrumb/Breadcrumb.vue';
 import VideoMediaElement from '../../vuesora/components/MediaElement/MediaElement.vue';
 import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
 import VideoResources from '../../vuesora/components/VideoResources/VideoResources.vue';
@@ -437,7 +437,7 @@ onBeforeMount(() => {
                 <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
                     <div class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
                         <h1 class="heading dark:tw-text-white">Assignments</h1>
-                        <button @click="state.assignmentCollapsed = !state.assignmentCollapsed">
+                        <button class="tw-z-[500]" @click="state.assignmentCollapsed = !state.assignmentCollapsed">
                             <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center" :class="!state.assignmentCollapsed && 'tw-rotate-180'">
                                 <i class="fas fa-chevron-down"></i>
                             </div>

@@ -93,6 +93,12 @@
     @include('singeo.sales.partials._nav', [
         "cartVersion" => true
     ])
+    @include('singeo.shop.partials.promo-banner', [
+    "name" => "Lifetime",
+    "fullPrice" => 1200,
+    "price" => 1200,
+    "noBreadcrumb" => true
+    ])
     <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #420571 50%, #051829);">
         <div class="container mx-auto">
             <h1 class="leading-none"><strong>Get singing lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
@@ -344,8 +350,7 @@
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-    <script src="{{ asset('/marketing/js/singeo/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/singeo/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/singeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/singeo/app.js') }}"></script>
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @stop

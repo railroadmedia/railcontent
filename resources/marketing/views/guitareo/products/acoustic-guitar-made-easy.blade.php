@@ -1,4 +1,4 @@
-@extends('guitareo._partials.global-vue-layout')
+@extends('guitareo._partials.global-layout')
 
 <?php \App\Analytics\Tracker::trackProductImpression('AGME-JAN-2019-SEMESTER'); ?>
 
@@ -12,8 +12,8 @@
 
 @section('styles')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/agme-sales.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    <link href="{{ asset('/marketing/parcel/drumeo/agme-sales.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}">
 @stop()
 
@@ -105,7 +105,7 @@
             <div class="columns">
                 <p><strong>Get started on the guitar<br class="hide-for-medium"> the  RIGHT way</strong></p>
 
-                <a href="/ecommerce/add-to-cart?products[AGME-JAN-2019-SEMESTER]=1&redirect=/order" class="join made-easy" data-product-json='{"AGME-JAN-2019-SEMESTER": 1}'>Get Started &raquo;</a>
+                <a href="/ecommerce/add-to-cart?products[AGME-JAN-2019-SEMESTER]=1" class="join made-easy" data-product-json='{"AGME-JAN-2019-SEMESTER": 1}'>Get Started &raquo;</a>
 
                 <p class="price-info">
                     @if(floatval($productPrices['AGME-JAN-2019-SEMESTER']->price) > floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price))
@@ -700,7 +700,7 @@
             @else
                 <h2 class="columns">(<strong>${{ floatval($productPrices['AGME-JAN-2019-SEMESTER']->price) }}</strong> one-time payment. Or choose <br class="hide-for-medium">a 2-pay or 5-pay plan on the next page.)</h2>
             @endif
-            <div class="columns"><a href="/ecommerce/add-to-cart?products[AGME-JAN-2019-SEMESTER]=1&redirect=/order" class="join made-easy" data-product-json='{"AGME-JAN-2019-SEMESTER": 1}'>Get Started &raquo;</a></div>
+            <div class="columns"><a href="/ecommerce/add-to-cart?products[AGME-JAN-2019-SEMESTER]=1" class="join made-easy" data-product-json='{"AGME-JAN-2019-SEMESTER": 1}'>Get Started &raquo;</a></div>
             <div class="columns cards">
                 <i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i> <i class="fab fa-cc-amex"></i>
                 <i class="fab fa-cc-paypal"></i>

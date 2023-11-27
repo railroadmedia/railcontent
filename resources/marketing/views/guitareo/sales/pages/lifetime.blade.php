@@ -93,6 +93,12 @@
     @include('guitareo.sales.partials._nav', [
         "cartVersion" => true
     ])
+    @include('guitareo._partials.promo-banner', [
+                "name" => "Lifetime",
+                "fullPrice" => 1200,
+                "price" => 1200,
+                "noBreadcrumb" => true
+            ])
     <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #077061 50%, #011815);">
         <div class="container mx-auto">
             <h1 class="leading-none"><strong>Get guitar lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
@@ -364,8 +370,7 @@
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-    <script src="{{ asset('/marketing/js/guitareo/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/guitareo/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/guitareo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/guitareo/app.js') }}"></script>
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @stop

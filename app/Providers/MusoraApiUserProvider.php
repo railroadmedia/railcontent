@@ -86,6 +86,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'is_drumeo_lifetime_member' => $user->is_drumeo_lifetime_member,
             'is_lifetime_member' => $user->is_lifetime_member,
             'access_level' => $user->access_level,
+            'is_enrolled_into_cohort' => $user->isEnrolledIntoCohort(),
         ];
     }
 

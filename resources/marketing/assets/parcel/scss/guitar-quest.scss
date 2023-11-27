@@ -54,7 +54,7 @@
   text-shadow: 2px 2px 1px rgba(0, 0, 0, .9);
 }
 
-.tw-max-h-1400 {
+.max-h-1400 {
   max-height: 1400px;
 }
 
@@ -62,7 +62,7 @@
   top: calc(50vh - 150px);
 }
 
-.tw-border-3 {
+.border-3 {
   border-width: 3px;
 }
 
@@ -269,11 +269,11 @@ main + footer.sales-footer .site-map h1 {
   }
 }
 
-.tw-scrollbar-none::-webkit-scrollbar {
+.scrollbar-none::-webkit-scrollbar {
   display: none; /* Chrome */
 }
 
-.tw-scrollbar-none {
+.scrollbar-none {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }

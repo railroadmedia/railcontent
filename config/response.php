@@ -2363,6 +2363,7 @@ return [
             'is_drumeo_lifetime_member',
             'access_level',
             'login_as_users',
+            'is_enrolled_into_cohort',
         ],
 
         'quick-tips' => [
@@ -5339,6 +5340,7 @@ return [
             'is_lifetime_member',
             'is_drumeo_lifetime_member',
             'access_level',
+            'is_enrolled_into_cohort',
         ],
 
         'quick-tips' => [

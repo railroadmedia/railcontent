@@ -116,7 +116,8 @@ class ShopifySyncService
     {
         $emailShopify = $this->getEmailForShopify($email);
         $customers = $this->shopify->getCustomers(['email' => $email]);
-        $customer = collect($customers)->first(fn($item) => $item->email === $email);
+
+        $customer = collect($customers)->first(fn($item) => strtolower($item->email) === strtolower($email));
         if (!$customer) {
             Log::warning("Customer with email $email not found in Shopify");
             return;
@@ -349,5 +350,27 @@ class ShopifySyncService
         $customers = $this->shopify->getCustomers(['email' => $email]);
         $customer = collect($customers)->first(fn($item) => $item->email === $email);
         return $customer;
+    }
+
+    public function getOrderPaymentSource(int $orderId): ShopifyPaymentSourceEnum
+    {
+        $metafields = $this->shopify->getOrderMetafields($orderId);
+        $paymentSource = collect($metafields)->first(
+            fn($item) => $item->key === ShopifyMetafieldKey::PaymentSource->value
+        );
+
+        $paymentSourceEnum = ShopifyPaymentSourceEnum::tryFrom($paymentSource?->value);
+        
+        if (is_null($paymentSourceEnum)) {
+            if (!is_null($paymentSource)) {
+                Log::error(
+                    "Unknown payment source from {ShopifyMetafieldKey::PaymentSource->value} metafield: {$paymentSource->value} on Shopify order $orderId"
+                );
+            }
+            
+            return ShopifyPaymentSourceEnum::Web;
+        }
+
+        return $paymentSourceEnum;
     }
 }

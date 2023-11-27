@@ -5,8 +5,7 @@
     {!! \App\Analytics\Tracker::headTop() !!}
 
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
 
     @yield('meta')
     @yield('global-head')
@@ -20,7 +19,7 @@
     @include('_partials.layout._fonts')
 
     @yield('styles')
-    @yield('page-styles')
+
     <style>
         .big-promo-banner{z-index:98;}.big-promo-banner .text-right{flex-grow:1}.big-promo-banner h1.logo{color:#000;margin:0 auto;font-size:25px}@media (min-width:768px){.big-promo-banner h1.logo{font-size:28px}}@media (min-width:991px){.big-promo-banner h1.logo{font-size:35px}}.big-promo-banner p.text{font:400 17px/1.2em Open Sans,sans-serif;display:inline-block;}@media (min-width:768px){.big-promo-banner p.text{font-size:16px}}@media (min-width:991px){.big-promo-banner p.text{font-size:18px;white-space:nowrap}}.big-promo-banner p.text strong{display:inline-block}
         .promo-banner-shim{display:block;width:100%;height:40px}
@@ -39,18 +38,18 @@
     @yield('navigation')
 
     @yield('content')
-@if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2023-11-27 00:00:00',
-        'promoVersion' => true
-    ])
-@else
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2023-11-28 00:00:00',
-        'promoVersion' => true
-    ])
 
-@endif
+    @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        @include('_partials.components.countdown',[
+            'countdownDate' => '2023-11-27 00:00:00',
+            'promoVersion' => true
+        ])
+    @else
+        @include('_partials.components.countdown',[
+            'countdownDate' => '2023-11-28 00:00:00',
+            'promoVersion' => true
+        ])
+    @endif
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 

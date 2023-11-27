@@ -1,165 +1,3 @@
-<script setup>
-import {onBeforeMount, onMounted, watch, inject, ref, reactive } from 'vue';
-    import { storeToRefs  } from 'pinia';
-    import { VueDraggableNext } from 'vue-draggable-next';
-    import PlaylistService from '../../../../services/playlists.js';
-    import { usePlaylistsStore } from '../../../../stores/playlists';
-    import PlaylistCard from './PlaylistCard.vue';
-    import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
-
-    //Inject
-    const token = inject('csrf_token');
-
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
-    const { sortingPlaylist } = storeToRefs(playlistsStore)
-
-    //-----------Props-----------//
-    const props = defineProps({
-        brand: {
-            type: String,
-            default: "drumeo"
-        },
-        lessons: {
-            type: Object,
-            default: {
-                data: []
-            }
-        },
-        playlistCount: {
-            type: Number,
-            default: 0
-        },
-        infiniteScroll: {
-            type: Boolean,
-            default: false
-        },
-        limit: {
-            type: Number,
-            default: 20,
-        },
-        isCueCatalog: {
-            type: Boolean,
-            default: false,
-        },
-        hasAccess: {
-            type: Number,
-            default: 1,
-        }
-    })
-
-    //-----------Refs-----------//
-    const pageNumber = ref(1);
-    const preventReFetch = ref(false);
-    const lessonsCopy = ref([]);
-
-    //-----------Reactive Data-----------//
-    const state = reactive({
-        stopScroll: true,
-        lessonsContainerKey: Math.round(Math.random() * 100000),
-    })
-
-    //-----------Static Data-----------//
-    const scrollContainer = document.querySelector('#content-container');
-
-    //-------------Methods-------------//
-
-    const handleSort = async() => {
-        let hasFirstChanged = false;
-        playlistsStore.sortingPlaylist = false;
-
-        if(playlistsStore.lessons[0].id !== lessonsCopy.value[0].id) hasFirstChanged = true;
-
-        //Update store and computed array
-        playlistsStore.lessons = lessonsCopy.value;
-
-        state.lessonsContainerKey = Math.round(Math.random() * 100000);
-
-        //Update each item in temp array
-        for(let i = 0; i < lessonsCopy.value.length; i++) {
-            if (lessonsCopy.value[i].hasChanged) {
-                await PlaylistService.updatePlaylistItem({
-                    user_playlist_item_id: lessonsCopy.value[i].user_playlist_item_id,
-                    position: lessonsCopy.value[i].user_playlist_item_position
-                }, token)
-
-                lessonsCopy.value[i].hasChanged = false;
-            }
-        }
-
-        if(hasFirstChanged) playlistsStore.getPlaylist({ playlist_id: playlistsStore.activePlaylist.id }, token)
-
-        //show success message
-        window.shownotification({
-            icon: 'fa-pen-to-square',
-            text: `You have successfully re-ordered your playlist items.`
-        })
-    }
-
-    //Cancel Sort
-    const handleCancelSort = () => {
-        //Update array to initial order
-        lessonsCopy.value = playlistsStore.lessons;
-        playlistsStore.sortingPlaylist = false;
-        state.lessonsContainerKey = Math.round(Math.random() * 100000);
-    }
-
-    const handleDragChange = (e) => {
-        const dragObj = lessonsCopy.value[e.oldIndex];
-        lessonsCopy.value.splice(e.oldIndex, 1);
-        lessonsCopy.value.splice(e.newIndex, 0, dragObj );
-
-        dragObj.user_playlist_item_position = e.newIndex + 1;
-        dragObj.hasChanged = true;
-        console.log(e.oldIndex, e.newIndex)
-        lessonsCopy.value[e.newIndex] = dragObj;
-    }
-
-    //Vertical Scroll
-    const VerticalMaxed = () => {
-        return (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
-    }
-
-    watch(sortingPlaylist, () => {
-        //Update Lessons Copy only when Sorting
-        lessonsCopy.value = [...playlistsStore.lessons];
-    })
-
-    //---------Lifecycle Methods---------//
-
-    onMounted(()=> {
-        //Handle infinite Scroll
-        if(props.infiniteScroll) {
-            scrollContainer.onscroll = () => {
-                if ( (scrollContainer.scrollHeight - scrollContainer.scrollTop - scrollContainer.clientHeight < 1) && !preventReFetch.value ) {
-                    pageNumber.value = pageNumber.value + 1;
-                    //Payload
-                    const payload = {
-                        page: pageNumber.value,
-                        limit: props.limit,
-                        playlist_id: playlistsStore.activePlaylist.id,
-                    };
-                    //Get Lessons
-                    playlistsStore.loadingLessons = true;
-                    PlaylistService.getPlaylistLessons(payload, token).then(response => {
-                        playlistsStore.loadingLessons = false;
-                        if (response.data.results.length) {
-                            playlistsStore.lessons = playlistsStore.lessons.concat(response.data.results);
-                        } else {
-                            preventReFetch.value = true;
-                        }
-                    }).catch(() => {
-                        window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
-                    });
-                }
-            }
-        }
-    })
-
-    onBeforeMount(() => {
-        playlistsStore.lessons = [...props.lessons.data];
-    });
-</script>
 <template>
     <main class="tw-w-full ">
 
@@ -256,6 +94,171 @@ import {onBeforeMount, onMounted, watch, inject, ref, reactive } from 'vue';
 
     </main>
 </template>
+
+<script setup>
+import { onBeforeMount, onMounted, watch, inject, ref, reactive } from 'vue';
+import { storeToRefs  } from 'pinia';
+import { VueDraggableNext } from 'vue-draggable-next';
+import PlaylistService from '../../../../services/playlists.js';
+import { usePlaylistsStore } from '../../../../stores/playlists';
+import PlaylistCard from './PlaylistCard.vue';
+import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
+import { useUserStore } from "../../../../stores/user";
+
+//Inject
+const token = inject('csrf_token');
+
+//Pinia Stores
+const playlistsStore = usePlaylistsStore();
+const userStore = useUserStore();
+
+const { brand } = storeToRefs(userStore);
+const { sortingPlaylist } = storeToRefs(playlistsStore);
+
+
+//-----------Props-----------//
+const props = defineProps({
+    lessons: {
+        type: Object,
+        default: {
+            data: []
+        }
+    },
+    playlistCount: {
+        type: Number,
+        default: 0
+    },
+    infiniteScroll: {
+        type: Boolean,
+        default: false
+    },
+    limit: {
+        type: Number,
+        default: 20,
+    },
+    isCueCatalog: {
+        type: Boolean,
+        default: false,
+    },
+    hasAccess: {
+        type: Number,
+        default: 1,
+    }
+})
+
+//-----------Refs-----------//
+const pageNumber = ref(1);
+const preventReFetch = ref(false);
+const lessonsCopy = ref([]);
+
+//-----------Reactive Data-----------//
+const state = reactive({
+    stopScroll: true,
+    lessonsContainerKey: Math.round(Math.random() * 100000),
+})
+
+//-----------Static Data-----------//
+const scrollContainer = document.querySelector('#content-container');
+
+//-------------Methods-------------//
+
+const handleSort = async() => {
+    let hasFirstChanged = false;
+    playlistsStore.sortingPlaylist = false;
+
+    if(playlistsStore.lessons[0].id !== lessonsCopy.value[0].id) hasFirstChanged = true;
+
+    //Update store and computed array
+    playlistsStore.lessons = lessonsCopy.value;
+
+    state.lessonsContainerKey = Math.round(Math.random() * 100000);
+
+    //Update each item in temp array
+    for(let i = 0; i < lessonsCopy.value.length; i++) {
+        if (lessonsCopy.value[i].hasChanged) {
+            await PlaylistService.updatePlaylistItem({
+                user_playlist_item_id: lessonsCopy.value[i].user_playlist_item_id,
+                position: lessonsCopy.value[i].user_playlist_item_position
+            }, token)
+
+            lessonsCopy.value[i].hasChanged = false;
+        }
+    }
+
+    if(hasFirstChanged) playlistsStore.getPlaylist({ playlist_id: playlistsStore.activePlaylist.id }, token)
+
+    //show success message
+    window.shownotification({
+        icon: 'fa-pen-to-square',
+        text: `You have successfully re-ordered your playlist items.`
+    })
+}
+
+//Cancel Sort
+const handleCancelSort = () => {
+    //Update array to initial order
+    lessonsCopy.value = playlistsStore.lessons;
+    playlistsStore.sortingPlaylist = false;
+    state.lessonsContainerKey = Math.round(Math.random() * 100000);
+}
+
+const handleDragChange = (e) => {
+    const dragObj = lessonsCopy.value[e.oldIndex];
+    lessonsCopy.value.splice(e.oldIndex, 1);
+    lessonsCopy.value.splice(e.newIndex, 0, dragObj );
+
+    dragObj.user_playlist_item_position = e.newIndex + 1;
+    dragObj.hasChanged = true;
+    console.log(e.oldIndex, e.newIndex)
+    lessonsCopy.value[e.newIndex] = dragObj;
+}
+
+//Vertical Scroll
+const VerticalMaxed = () => {
+    return (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
+}
+
+watch(sortingPlaylist, () => {
+    //Update Lessons Copy only when Sorting
+    lessonsCopy.value = [...playlistsStore.lessons];
+})
+
+//---------Lifecycle Methods---------//
+
+onMounted(()=> {
+    //Handle infinite Scroll
+    if(props.infiniteScroll) {
+        scrollContainer.onscroll = () => {
+            if ( (scrollContainer.scrollHeight - scrollContainer.scrollTop - scrollContainer.clientHeight < 1) && !preventReFetch.value ) {
+                pageNumber.value = pageNumber.value + 1;
+                //Payload
+                const payload = {
+                    page: pageNumber.value,
+                    limit: props.limit,
+                    playlist_id: playlistsStore.activePlaylist.id,
+                };
+                //Get Lessons
+                playlistsStore.loadingLessons = true;
+                PlaylistService.getPlaylistLessons(payload, token).then(response => {
+                    playlistsStore.loadingLessons = false;
+                    if (response.data.results.length) {
+                        playlistsStore.lessons = playlistsStore.lessons.concat(response.data.results);
+                    } else {
+                        preventReFetch.value = true;
+                    }
+                }).catch(() => {
+                    window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
+                });
+            }
+        }
+    }
+})
+
+onBeforeMount(() => {
+    playlistsStore.lessons = [...props.lessons.data];
+});
+</script>
+
 <style>
     .ghost {
         border-bottom: 1px solid black;

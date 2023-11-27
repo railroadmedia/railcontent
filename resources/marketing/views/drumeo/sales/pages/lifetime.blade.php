@@ -57,6 +57,12 @@
         @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
         ])
+        @include('drumeo.products.partials.promo-banner', [
+                    "name" => "Lifetime",
+                    "fullPrice" => 1200,
+                    "price" => 1200,
+                    "noBreadcrumb" => true
+                ])
         <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #094073 50%, #000C16);">
             <div class="container mx-auto">
                 <h1 class="leading-none"><strong>A <span class="text-musora">Lifetime</span> Of Drum Lessons </strong></h1>
@@ -312,9 +318,8 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-        <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
-        <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
-        <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
-        <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
+        <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+        <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+        <script src="{{ mix('/platform/js/app.js') }}"></script>
 
 @stop

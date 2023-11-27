@@ -41,10 +41,11 @@ class ShopController extends BaseController
         });
 
         $hoodies = $products->filter(function($value, $key){
-            return $value->productType->name === 'Hoodies';
+            return $value->productType->name === 'Hoodies' || $value->productType->name === 'Sweaters';
         });
 
-        $featured = $products->whereIn('id', [208, 197, 113, 230, 228, 225]);
+        $featured = $products->whereIn('id', [208, 197, 113]);
+        $xmas = $products->whereIn('id', [230, 228, 225]);
 
         return view('pianote.shop.shop', [
             'lessons' => $lessons,
@@ -54,7 +55,8 @@ class ShopController extends BaseController
             'hoodies' => $hoodies,
             'theme' => 'pianote',
             'category' => $request->category,
-            'featured' => $featured
+            'featured' => $featured,
+            'xmas' => $xmas
         ]);
     }
 

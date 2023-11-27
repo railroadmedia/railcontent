@@ -254,7 +254,7 @@
                             <strong>ONLY ${{ floatval($productPrices['christmas-songbook']->discounted_price) }}</strong>
                         @endif
                     </h4>
-                    <a href="#final" class="join medium w-full anchor-slide">GET YOUR COPY &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?locked=true&products[christmas-songbook]=1&products[christmas-song-book-digital]=1" class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
         </div>
@@ -283,10 +283,9 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
     <script>
         $(document).ready(function () {
