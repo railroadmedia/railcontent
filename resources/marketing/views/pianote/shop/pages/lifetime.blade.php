@@ -114,7 +114,8 @@
             <h1 class="leading-none"><strong>Get piano lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
             <div class="w-full mx-auto my-4 sm:my-8 " style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/885340200" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>
+{{--                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/885340200" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>--}}
+                    <img class="absolute inset-0 object-cover" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/pianote-lifetime-bundle-thumb.jpg" ></img>
                 </div>
             </div>
             <div class="px-3 mx-auto w-full max-w-2xl">
@@ -161,7 +162,7 @@
                 </div>
                 <img
                     class="mb-4 sm:mb-0 order-0 sm:order-1 h-56 lg:h-72 rounded-xl transition-opacity opacity-0"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/november/bundles/lifetime-bundle-spread.png"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/november/bundles/lifetime-bundle-spread2.png"
                     alt="Anika"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -180,11 +181,11 @@
                 'shipping' => true,
             ],
             [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
-                'description' => 'Your encyclopedia of piano chords & scales.',
-                'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
+                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Pianote_Planner_Card.jpg',
+                'title' => 'Practice Planner',
+                'description' => 'Always know exactly what to practice.',
+                'price' => floatval($productPrices['pianote-practice-planner']->price),
                 'shipping' => true,
-                'delayshipping' => true,
             ],
             [
                 'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/5afe20b9-5f1c-4886-b932-9ee93ffc67f4-christmas-songbook-shop.jpg',
@@ -249,11 +250,11 @@
     @endphp
     @php
         if(!empty($upgradeVersion)) {
-            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[musora-access-1-year]=1&products[taktell-piccolo-metronome]=1&products[piano-chords-and-scales-guide]=1&products[christmas-songbook]=1&products[christmas-song-book-digital]=1&products[classical-piano-pieces]=1&products[music-theory-posters]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
-            $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[musora-access-1-year]=1&products[taktell-piccolo-metronome]=1&products[piano-chords-and-scales-guide]=1&products[christmas-songbook]=1&products[christmas-song-book-digital]=1&products[classical-piano-pieces]=1&products[music-theory-posters]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
+            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[musora-access-1-year]=1&products[taktell-piccolo-metronome]=1&products[pianote-practice-planner]=1&products[christmas-songbook]=1&products[christmas-song-book-digital]=1&products[classical-piano-pieces]=1&products[music-theory-posters]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
+            $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[musora-access-1-year]=1&products[taktell-piccolo-metronome]=1&products[pianote-practice-planner]=1&products[christmas-songbook]=1&products[christmas-song-book-digital]=1&products[classical-piano-pieces]=1&products[music-theory-posters]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
         } else {
-            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[musora-access-1-year]=1&products[taktell-piccolo-metronome]=1&products[piano-chords-and-scales-guide]=1&products[christmas-songbook]=1&products[christmas-song-book-digital]=1&products[classical-piano-pieces]=1&products[music-theory-posters]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849';
-            $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[musora-access-1-year]=1&products[taktell-piccolo-metronome]=1&products[piano-chords-and-scales-guide]=1&products[christmas-songbook]=1&products[christmas-song-book-digital]=1&products[classical-piano-pieces]=1&products[music-theory-posters]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849';
+            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[musora-access-1-year]=1&products[taktell-piccolo-metronome]=1&products[pianote-practice-planner]=1&products[christmas-songbook]=1&products[christmas-song-book-digital]=1&products[classical-piano-pieces]=1&products[music-theory-posters]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849';
+            $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[musora-access-1-year]=1&products[taktell-piccolo-metronome]=1&products[pianote-practice-planner]=1&products[christmas-songbook]=1&products[christmas-song-book-digital]=1&products[classical-piano-pieces]=1&products[music-theory-posters]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849';
         };
     @endphp
 
