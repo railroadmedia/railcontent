@@ -50,8 +50,8 @@ class RechargeWebhooksRegister extends Command
             $this->warn("Please write down the webhook's id for future reference:");
             $this->info(print_r($webhookData, true));
         } catch (\Exception $e) {
-            $this->info("Error registering webhook: $url $topic");
-            $this->info($e->getMessage());
+            $this->error("Error registering webhook: $url $topic");
+            $this->error($e->getMessage());
         }
     }
 }
