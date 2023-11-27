@@ -155,7 +155,7 @@
     </div>
 </template>
 <script setup>
-import { computed, onBeforeUnmount, reactive, onMounted } from 'vue';
+import { computed, onBeforeUnmount, reactive, onMounted, onUpdated } from 'vue';
 import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '../../hooks/useCatalogueItem.js';
 import useThemeClasses from '../../hooks/useThemeClasses.js';
@@ -237,7 +237,9 @@ const state = reactive({
     dropdownPosition: {
         top: 0,
         left: 0,
-    }
+    },
+    cardButtonClass: null,
+    dropdownLocated: false,
 });
 
 //-----------Static Data-----------//
@@ -255,16 +257,11 @@ const dropdownOptions = [
 const { themeBgClass } = useThemeClasses(props);
 
 const handleShowDropdown = (className) => {
-    const dropdownSize = { width: 162, height: 84 };
-    const { top, left } = document.getElementById(className).getBoundingClientRect();
-    const { width, height } = dropdownSize;
-    const { innerHeight, innerWidth } = window;
-
-    state.dropdownPosition = {
-        top: (top + height + 30) < innerHeight ? top + 30: top - height,
-        left: (left + width) < innerWidth ? left : left - width,
-    };
     state.dropdownOpen = !state.dropdownOpen;
+    state.cardButtonClass = className;
+
+    const contentContainer = document.getElementById('content-container');
+    contentContainer.addEventListener('scroll', closeDropdownOnScroll);
 };
 
 const mappedData = computed(() => contentModel.value.card);
@@ -291,6 +288,21 @@ const closeDropdownOnScroll = () => {
 onMounted(() => {
     const contentContainer = document.getElementById('content-container');
     contentContainer.addEventListener('scroll', closeDropdownOnScroll);
+});
+
+onUpdated(() => {
+    if (state.dropdownOpen && !state.dropdownLocated) {
+        const { top, left } = document.getElementById(state.cardButtonClass).getBoundingClientRect();
+        const { width, height } = document.getElementById('catalogue-card-dropdown-div').getBoundingClientRect();
+        const { innerHeight, innerWidth } = window;
+
+        state.dropdownLocated = true;
+        state.dropdownPosition = {
+            top: (top + height + 30) < innerHeight ? top + 30 : top - height,
+            left: (left + width) < innerWidth ? left : left - width,
+            opacity: 1,
+        };
+    }
 });
 
 onBeforeUnmount(() => {
