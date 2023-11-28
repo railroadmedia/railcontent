@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Controllers;
 
 use App\Modules\Ecommerce\Models\Product;
 use Carbon\Carbon;
+use Carbon\CarbonTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
@@ -42,11 +43,15 @@ class RechargeWebhookController extends Controller
                 return;
             }
 
+            // Recharge sends date with no timezone offset and on America/Toronto, so we need to change to PST
+            $rctz = CarbonTimeZone::create('America/Toronto');
+            $ciotz = CarbonTimeZone::create('America/Vancouver');
+            $cancelledAt = Carbon::parse($subscription['cancelled_at'], $rctz)->setTimezone($ciotz);
+
             $this->customerIoService->syncCancellationDataFromRecharge(
                 $user,
                 $product,
-                // Recharge sends date on EST, so we need to change to PST
-                Carbon::parse($subscription['cancelled_at'], 'EST')->setTimezone('PST'),
+                $cancelledAt,
                 $subscription['cancellation_reason']
             );
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook

@@ -2,6 +2,7 @@
 
 use App\Modules\Ecommerce\Controllers\RechargeWebhookController;
 use App\Modules\Ecommerce\Middleware\RechargeWebhookVerify;
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('ecommerce/recharge')
     ->middleware(config('ecommerce.route_middleware_public_groups'))
@@ -13,4 +14,3 @@ Route::prefix('ecommerce/recharge')
                     ->name('recharge.webhook.subscription.cancel');
             });
     });
-
