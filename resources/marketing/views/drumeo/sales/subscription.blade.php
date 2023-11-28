@@ -162,11 +162,6 @@
         'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',
     ])
 
-    <div class="sticky-trigger block"></div>
-    @include('_partials.layout.holiday.sticky-bar',[
-        'text' => 'Get 10 free bonuses<br> worth $1272.94',
-    ])
-
     @php
         $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/bubbles/dorothea-taylor.png';
         $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/bubbles/todd-sucherman.png';
@@ -410,23 +405,4 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     @yield('scripts')
-
-    <script>
-        $(document).ready(function () {
-            var stickyBar = $('.promo-banner');
-            $(window).scroll(function () {
-                var stickTrigger = $('.sticky-trigger').offset().top;
-                var unstickTrigger = $('.unstick-trigger').offset().top;
-                if ($(this).scrollTop() > (unstickTrigger - 115)) {
-                    stickyBar.removeClass('fixed mt-0');
-                }
-                if ($(this).scrollTop() < stickTrigger - 115) {
-                    stickyBar.removeClass('fixed mt-0');
-                }
-                if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
-                    stickyBar.addClass('fixed mt-0');
-                }
-            });
-        });
-    </script>
 @stop

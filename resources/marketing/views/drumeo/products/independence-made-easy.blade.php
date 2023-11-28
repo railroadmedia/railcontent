@@ -24,21 +24,6 @@
     @parent
     <script type="text/javascript">
         $(document).ready(function () {
-            // var stickyBar = $('.promo-banner');
-            // $(window).scroll(function () {
-            //     var orderSection = $('.final').offset().top;
-            //     var spreadSection = $('#triple-benefit').offset().top;
-            //     if ($(this).scrollTop() > (orderSection - 115)) {
-            //         stickyBar.removeClass('fixed');
-            //     }
-            //     if ($(this).scrollTop() < spreadSection - 115) {
-            //         stickyBar.removeClass('fixed');
-            //     }
-            //     if ($(this).scrollTop() < orderSection - 115 && $(this).scrollTop() > spreadSection - 115) {
-            //         stickyBar.addClass('fixed');
-            //     }
-            // });
-
             // Dropdown for FAQ section
             $(".question-dropdown").on("click", questionDropdown);
 

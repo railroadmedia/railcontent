@@ -163,11 +163,6 @@
         'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[taktell-piccolo-metronome]=1&products[pianote-practice-planner]=1&products[music-theory-posters]=1&products[christmas-song-book-digital]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702',
     ])
 
-    <div class="sticky-trigger block"></div>
-    @include('_partials.layout.holiday.sticky-bar',[
-        'text' => 'Get 11 free bonuses<br> worth $963',
-    ])
-
     @php
         $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/bubbles/summer-swee-singh.png';
         $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/bubbles/lisa-witt.png';
@@ -432,22 +427,4 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     @yield('scripts')
-    <script>
-        $(document).ready(function () {
-            var stickyBar = $('.promo-banner');
-            $(window).scroll(function () {
-                var stickTrigger = $('.sticky-trigger').offset().top;
-                var unstickTrigger = $('.unstick-trigger').offset().top;
-                if ($(this).scrollTop() > (unstickTrigger - 115)) {
-                    stickyBar.removeClass('fixed mt-0');
-                }
-                if ($(this).scrollTop() < stickTrigger - 115) {
-                    stickyBar.removeClass('fixed mt-0');
-                }
-                if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
-                    stickyBar.addClass('fixed mt-0');
-                }
-            });
-        });
-    </script>
 @stop

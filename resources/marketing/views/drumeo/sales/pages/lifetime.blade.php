@@ -27,14 +27,14 @@
             $stock = 0;
         }
     @endphp
-    @include('drumeo.products.partials.promo-banner', [
-        "name" => "Lifetime",
-        "fullPrice" => 1200,
-        "price" => 1200,
-        "specialText" => "<strong>Only <s class='opacity-60'>500</s> <span class='text-promo'>" . $stock . "</span> left!</strong>",
-        "noBreadcrumb" => true,
-                "noCountdown" => true
-    ])
+{{--    @include('drumeo.products.partials.promo-banner', [--}}
+{{--        "name" => "Lifetime",--}}
+{{--        "fullPrice" => 1200,--}}
+{{--        "price" => 1200,--}}
+{{--        "specialText" => "<strong>Only <s class='opacity-60'>500</s> <span class='text-promo'>" . $stock . "</span> left!</strong>",--}}
+{{--        "noBreadcrumb" => true,--}}
+{{--                "noCountdown" => true--}}
+{{--    ])--}}
     <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #094073 50%, #000C16);">
         <div class="container mx-auto">
             <h1 class="leading-none"><strong>A <span class="text-musora">Lifetime</span> Of Drum Lessons </strong></h1>
@@ -54,8 +54,9 @@
                 </h2>
                 <p class="leading-tight text-sm"><em>One time payment or choose a <br class="sm:hidden">
                         payment plan below.</em></p>
-                <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
-                <p class="mt-4 leading-tight text-musora font-black">ONLY <s class='opacity-60'>500</s>  {{ $stock }} SPOTS AVAILABLE</p>
+{{--                <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>--}}
+                <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
+{{--                <p class="mt-4 leading-tight text-musora font-black">ONLY <s class='opacity-60'>500</s>  {{ $stock }} SPOTS AVAILABLE</p>--}}
             </div>
         </div>
     </section>
@@ -178,29 +179,30 @@
                 @endif
             </h2>
             <p class="leading-tight text-sm"><em>One time payment.</em></p>
-            @if(!empty($upgradeVersion))
-                <a
-                    class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;"
-                    :class="bonus !== 1 && 'sold-out'"
-                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true'"
-                    x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>
-                <br>
-                <a class="inline-block text-white leading-tight mt-3"
-                    :class="bonus !== 1 && 'opacity-50'"
-                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true'"
-                ><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
-            @else
-                <a
-                    class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;"
-                    :class="bonus !== 1 && 'sold-out'"
-                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849&locked=true'"
-                    x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>
-                <br>
-                <a class="inline-block text-white leading-tight mt-3"
-                    :class="bonus !== 1 && 'opacity-50'"
-                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849&locked=true'"
-                ><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
-            @endif
+            <a class="join sold-out bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;">SOLD OUT</a>
+{{--            @if(!empty($upgradeVersion))--}}
+{{--                <a--}}
+{{--                    class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;"--}}
+{{--                    :class="bonus !== 1 && 'sold-out'"--}}
+{{--                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true'"--}}
+{{--                    x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>--}}
+{{--                <br>--}}
+{{--                <a class="inline-block text-white leading-tight mt-3"--}}
+{{--                    :class="bonus !== 1 && 'opacity-50'"--}}
+{{--                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true'"--}}
+{{--                ><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>--}}
+{{--            @else--}}
+{{--                <a--}}
+{{--                    class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;"--}}
+{{--                    :class="bonus !== 1 && 'sold-out'"--}}
+{{--                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849&locked=true'"--}}
+{{--                    x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>--}}
+{{--                <br>--}}
+{{--                <a class="inline-block text-white leading-tight mt-3"--}}
+{{--                    :class="bonus !== 1 && 'opacity-50'"--}}
+{{--                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849&locked=true'"--}}
+{{--                ><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>--}}
+{{--            @endif--}}
         </div>
     </section>
     @php
