@@ -760,7 +760,69 @@ class ContentQueryBuilder extends QueryBuilder
                 ConfigService::$tableContent.'.id'
             );
         })
-            ->whereIn(ConfigService::$tablePlaylistContents.'.user_playlist_id', ContentRepository::$includedInPlaylistsIds);
+            ->whereIn(
+                ConfigService::$tablePlaylistContents.'.user_playlist_id',
+                ContentRepository::$includedInPlaylistsIds
+            );
+
+        return $this;
+    }
+
+    public function groupByField($groupBy)
+    {
+        $isTableContent = $groupBy['is_content_column'] ?? false;
+
+        if ($isTableContent) {
+            $field = $groupBy['field'];
+            $this->addSelect([
+                                 $this->raw(ConfigService::$tableContent.'.'.$field.' as '.$field),
+
+                                 DB::raw(
+                                     "( 
+           JSON_ARRAYAGG(
+            JSON_OBJECT(
+               'id', id,
+               'compiled_view_data', ".ConfigService::$tableContent.".compiled_view_data
+              )
+        ) ) as lessons_grouped_by_field"
+                                 ),
+                             ])
+                ->whereNotNull(ConfigService::$tableContent.'.'.$field)
+                ->groupBy(ConfigService::$tableContent.'.'.$field);
+
+            return $this;
+        }
+
+        if(empty($groupBy['associated_table']))
+        {
+            return $this;
+        }
+
+        $table = $groupBy['associated_table']['table'];
+        $field = $groupBy['associated_table']['column'];
+        $alias = $groupBy['associated_table']['alias'];
+
+        $this->addSelect([
+                             $this->raw($alias.'.'.$field.' as grouped_by_field'),
+                             $this->raw($alias.'.'.$field.' as id'),
+                             DB::raw(
+                                 "( 
+           JSON_ARRAYAGG(
+            JSON_OBJECT(
+               'id', content_id,
+               'compiled_view_data', ".ConfigService::$tableContent.".compiled_view_data
+              )
+        ) ) as lessons_grouped_by_field"
+                             ),
+                         ])
+            ->join(
+                $table.' as '.$alias,
+                $alias.'.'.'content_id',
+                '=',
+                ConfigService::$tableContent.'.id'
+            )
+            ->whereNotNull($alias.'.'.$field)
+            ->groupBy($alias.'.'.$field);
 
         return $this;
     }

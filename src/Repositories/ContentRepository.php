@@ -71,6 +71,8 @@ class ContentRepository extends RepositoryBase
     private $slugHierarchy = [];
     private $requiredParentIds = [];
 
+    private $groupByFields = false;
+
     private ContentCompiledColumnTransformer $contentCompiledColumnTransformer;
 
     /**
@@ -1326,6 +1328,32 @@ class ContentRepository extends RepositoryBase
      */
     public function retrieveFilter()
     {
+        if ($this->groupByFields) {
+            $subQuery =
+                $this->query()
+                    ->restrictByTypes($this->typesToInclude)
+                    ->restrictByUserAccess()
+                    ->directPaginate($this->page, $this->limit)
+                    ->groupByField($this->groupByFields);
+            $query = $subQuery;
+
+            if ($this->groupByFields['is_a_related_content']) {
+                $query =
+                    $this->query()
+                        ->selectPrimaryColumns()
+                        ->addSelect('inner_content.lessons_grouped_by_field as lessons_grouped_by_field')
+                        ->addSubJoinToQuery($subQuery);
+                $contentRows = $query->getToArray();
+
+                $contentRows = $this->contentCompiledColumnTransformer->transformLessons($contentRows) ?? [];
+
+                return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+            }
+            $contentRows = $query->getToArray();
+
+            return $this->contentCompiledColumnTransformer->transformLessons($contentRows) ?? [];
+        }
+
         $subQuery =
             $this->query()
                 ->selectCountColumns($this->orderBy)
@@ -1508,6 +1536,25 @@ class ContentRepository extends RepositoryBase
     {
         $this->includedUserStates[] = ['state' => $state, 'user_id' => $userId ?? auth()->id()];
 
+        return $this;
+    }
+
+    /**
+     * @param $field
+     * @return $this
+     */
+    public function groupByField($field)
+    {
+        $groupByFields = [
+            'field' => $field,
+            'associated_table' => self::TABLESFORFIELDS[$field] ?? [],
+            'is_content_column' => in_array(
+                    $field,
+                    config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                ) && ($field != 'length_in_seconds'),
+            'is_a_related_content' => $field == 'instructor',
+        ];
+        $this->groupByFields = ($groupByFields['is_content_column'] || !empty($groupByFields['associated_table']))?$groupByFields:null;
         return $this;
     }
 

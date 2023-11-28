@@ -100,7 +100,15 @@ class ContentJsonController extends Controller
         }
 
         $contentTypes = $request->get('included_types', []);
-
+        if($request->get('tab', false)){
+            $extra = explode(',',$request->get('tab'));
+            if($extra['0'] == 'group_by'){
+                $group_by = $extra['1'];
+            }
+            if($extra['0'] == 'duration'){
+                $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
+            }
+        }
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 10),
@@ -116,7 +124,8 @@ class ContentJsonController extends Controller
             false,
             true,
             $request->get('only_subscribed', false),
-            $futureScheduledContentOnly
+            $futureScheduledContentOnly,
+            $group_by ?? false,
         );
 
         $filters = $contentData['filter_options'];

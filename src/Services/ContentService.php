@@ -899,7 +899,8 @@ class ContentService
         $getFutureContentOnly = false,
         $pullPagination = true,
         $getFollowedContentOnly = false,
-        $getFutureScheduledContentOnly = false
+        $getFutureScheduledContentOnly = false,
+        $groupBy = null
     ) {
         $results = null;
         if ($limit == 'null') {
@@ -922,7 +923,8 @@ class ContentService
                 implode(' ', array_values($requiredUserStates) ?? ''),
                 implode(' ', array_values($includedUserStates) ?? ''),
                 ContentRepository::$bypassPermissions,
-                $getFollowedContentOnly
+                $getFollowedContentOnly,
+                $groupBy
             );
 
         $cache = CacheHelper::getCachedResultsForKey($hash);
@@ -971,6 +973,10 @@ class ContentService
                     ...
                     is_array($includedUserState) ? $includedUserState : explode(',', $includedUserState)
                 );
+            }
+
+            if($groupBy){
+                $filter->groupByField($groupBy);
             }
 
             if (config('railcontent.use_elastic_search') == true) {
@@ -1135,6 +1141,11 @@ class ContentService
                 $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
                 $results = new ContentFilterResultsEntity($results);
             }
+        }
+
+        //TODO: remove this when we have a better solution for the grouped contents that should not be decorated
+        if($groupBy && $groupBy != 'instructor'){
+            return $results;
         }
 
         return Decorator::decorate($results, 'content');
