@@ -29,7 +29,7 @@
                         <div class="leading-none sm:leading-none text-xl sm:text-2xl font-extrabold" x-text="second">00</div>
                         <div class="text-xs font-semibold" x-text="secondText">SEC</div>
                     </div>
-                    <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>
+                    <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>
                 </div>
             </div>
             </div>
