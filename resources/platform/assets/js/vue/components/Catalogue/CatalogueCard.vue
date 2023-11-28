@@ -70,20 +70,15 @@
                     </h6>
                 </a>
                 <!-- Add to Playlist -->
-                <div :id="`${item.id}-action-btn`" class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
+                <div class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
                     <div class="tw-relative" v-click-outside="() => { state.dropdownOpen = false }">
-                        <button v-if="item.type !== 'pack-bundle' && showMyListAction"
+                        <button :id="`${item.id}-action-btn-big`" v-if="item.type !== 'pack-bundle' && showMyListAction"
                             class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
                             :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                             :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'" :data-content-id="item.id"
                             :data-content-type="item.type"
-                            @click.prevent="showDropdown ? handleShowDropdown(`${item.id}-action-btn`) : $emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })">
-                            <svg v-if="showDropdown" width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12.5 5.20768L12.5 5.2181M12.5 12.4993L12.5 12.5098M12.5 19.791L12.5 19.8014M12.5 6.24935C11.9247 6.24935 11.4583 5.78298 11.4583 5.20768C11.4583 4.63239 11.9247 4.16602 12.5 4.16602C13.0753 4.16602 13.5417 4.63239 13.5417 5.20768C13.5417 5.78298 13.0753 6.24935 12.5 6.24935ZM12.5 13.541C11.9247 13.541 11.4583 13.0746 11.4583 12.4993C11.4583 11.9241 11.9247 11.4577 12.5 11.4577C13.0753 11.4577 13.5417 11.9241 13.5417 12.4993C13.5417 13.0746 13.0753 13.541 12.5 13.541ZM12.5 20.8327C11.9247 20.8327 11.4583 20.3663 11.4583 19.791C11.4583 19.2157 11.9247 18.7493 12.5 18.7493C13.0753 18.7493 13.5417 19.2157 13.5417 19.791C13.5417 20.3663 13.0753 20.8327 12.5 20.8327Z"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
+                            @click.prevent="showDropdown ? handleShowDropdown(`${item.id}-action-btn-big`) : $emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })">
+                            <DotsHorizontalIcon v-if="showDropdown" class="tw-h-[24px] tw-w-[24px]" />
                             <svg v-else xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -137,13 +132,13 @@
         </a>
 
         <!-- Action Button -->
-        <div :id="`${item.id}-action-btn`" class="tw-inline-flex tw-items-start tw-p-1 tw-relative"
+        <div class="tw-inline-flex tw-items-start tw-p-1 tw-relative"
             v-click-outside="() => { state.dropdownOpen = false }">
-            <button v-if="item.type !== 'pack-bundle' && showMyListAction"
+            <button :id="`${item.id}-action-btn-small`" v-if="item.type !== 'pack-bundle' && showMyListAction"
                 class="tw-flex-none tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
                 :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'" title="More"
                 :data-content-id="item.id" :data-content-type="item.type"
-                @click.prevent="handleShowDropdown(`${item.id}-action-btn`)">
+                @click.prevent="handleShowDropdown(`${item.id}-action-btn-small`)">
                 <DotsHorizontalIcon class="tw-h-[24px] tw-w-[24px]" />
             </button>
             <Dropdown v-if="showDropdown" :brand="brand" :item="item" :is-open="state.dropdownOpen"
@@ -237,6 +232,7 @@ const state = reactive({
     dropdownPosition: {
         top: 0,
         left: 0,
+        opacity: 0,
     }
 });
 
@@ -255,14 +251,24 @@ const dropdownOptions = [
 const { themeBgClass } = useThemeClasses(props);
 
 const handleShowDropdown = (className) => {
-    const { top, left, width, height } = document.getElementById(className).getBoundingClientRect();
+    const { top, left } = document.getElementById(className).getBoundingClientRect();
     const { innerHeight, innerWidth } = window;
 
-    state.dropdownPosition = {
-        top: (top + height + 100) < innerHeight ? top + height : top - height,
-        left: (left + width + 150) < innerWidth ? left : left - width - 100,
-    };
     state.dropdownOpen = !state.dropdownOpen;
+
+    //opacity 0 to avoid flicker
+    state.dropdownPosition = { ...state.dropdownPosition, opacity: 0 }
+
+    //wait for element to appear on screen
+    window.setTimeout(()=>{
+        const { width, height } = document.getElementById('catalogue-card-dropdown-div').getBoundingClientRect();
+
+        state.dropdownPosition = {
+            top: (top + height + 30) < innerHeight ? top + 30: top - height,
+            left: (left + width) < innerWidth ? left : left - width + 26,
+            opacity: 1,
+        };
+    }, 0)
 };
 
 const mappedData = computed(() => contentModel.value.card);
