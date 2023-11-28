@@ -134,37 +134,37 @@
                 $bundles = [
                     [
                         'slug' => 'https://www.drumeo.com/drumshop/ultimate-lessons-bundle',
-                        'desc' => 'Drumeo Discount<br class="sm:hidden"> + 10 Bonuses',
+                        'desc' => '10 Free Bonuses <br class="sm:hidden"> Worth $1272',
                         'full' => true,
                         'visible' => 1,
                         'price' => 1512.94,
-                        'discountedPrice' => 150,
+                        'discountedPrice' => 240,
                         'buttonColor' => '#0A69D0',
                         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
                         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card.jpg',
                         'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card-m.jpg',
                     ],
                     [
-                        'slug' => 'https://www.drumeo.com/drumshop/30-day-challenge-bundle',
-                        'desc' => '5 Online Courses <br>For The Price Of 1',
+                        'slug' => 'https://www.drumeo.com/drumshop/better-hands-bundle',
+                        'desc' => 'Easy Rudiments Book + P4<br> + Drumsticks + PadStand',
                         'visible' => 1,
-                        'price' => 497,
-                        'discountedPrice' => 97,
-                        'buttonColor' => '#01C1FF',
-                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30-day-challenge-bundle-white.png',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
+                        'price' => 200.94,
+                        'discountedPrice' => 150.21,
+                        'buttonColor' => '#01AB5A',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-bundle-white.png',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
                     ],
                     [
-                        'slug' => '/lifetime',
-                        'desc' => 'Unlimited Drum Lessons For Life<br> <strong class="font-black">Only <s class="opacity-60">500</s> ' . $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() . ' Left!</strong>',
+                        'slug' => 'https://www.drumeo.com/drumshop/perfect-gift-bundle',
+                        'desc' => 'The perfect gift <br> for any drummer.',
                         'visible' => 1,
-                        'discountedPrice' => 1200,
-                        'price' => 1200,
-                        'buttonColor' => '#532700',
-                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
+                        'price' => 331.95,
+                        'discountedPrice' => 240,
+                        'buttonColor' => '#01AB5A',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/the-pefect-gift-bundle-white.png',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
                     ],
                 ];
 
@@ -270,6 +270,20 @@
                          'soldOut' => false,
                     ])
                 </div>
+                @if(Carbon\Carbon::create(2023, 11, 28, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
+                    <div x-cloak x-show="filter === 'lessons'">
+                        @include('musora.shop._shop-card-alt', [
+                             "itemURL" => "/drumshop/perfect-gift-bundle",
+                             "sku" => null,
+                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/drumeo-pg-shop-thumb2.jpg",
+                             "title" => "The Perfect Gift Bundle",
+                             "fullPrice" => 331.95,
+                             "price" => 240,
+                             "category" => "lessons",
+                             'soldOut' => false,
+                        ])
+                    </div>
+                @endif
                 @if(Carbon\Carbon::create(2023, 11, 28, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                     <div x-cloak x-show="filter === 'lessons'">
                         @include('musora.shop._shop-card-alt', [
@@ -283,19 +297,19 @@
                              'soldOut' => false,
                         ])
                     </div>
+                    <div x-cloak x-show="filter === 'lessons'">
+                        @include('musora.shop._shop-card-alt', [
+                             "itemURL" => "/lifetime",
+                             "sku" => null,
+                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lt-shop-thumb2.jpg",
+                             "title" => "Lifetime Bundle",
+                             "fullPrice" => 1200.00,
+                             "price" => 1200.00,
+                             "category" => "lessons",
+                             'soldOut' => false,
+                        ])
+                    </div>
                 @endif
-                <div x-cloak x-show="filter === 'lessons'">
-                    @include('musora.shop._shop-card-alt', [
-                         "itemURL" => "/lifetime",
-                         "sku" => null,
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lt-shop-thumb2.jpg",
-                         "title" => "Lifetime Bundle",
-                         "fullPrice" => 1200.00,
-                         "price" => 1200.00,
-                         "category" => "lessons",
-                         'soldOut' => false,
-                    ])
-                </div>
 
                 @foreach($lessons as $key => $lesson)
                     @include('musora.shop._shop-card-alt', [
@@ -338,20 +352,18 @@
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Accessories</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-                @if(Carbon\Carbon::create(2023, 11, 28, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                    <div x-cloak x-show="filter === 'accessories'">
-                        @include('musora.shop._shop-card-alt', [
-                             "itemURL" => "/drumshop/better-hands-bundle",
-                             "sku" => null,
-                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/drumeo-bh-shop-thumb2.jpg",
-                             "title" => "Better Hands Bundle",
-                             "fullPrice" => 200.94,
-                             "price" => 150.21,
-                             "category" => "accessories",
-                             'soldOut' => false,
-                        ])
-                    </div>
-                @endif
+                <div x-cloak x-show="filter === 'accessories'">
+                    @include('musora.shop._shop-card-alt', [
+                         "itemURL" => "/drumshop/better-hands-bundle",
+                         "sku" => null,
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/drumeo-bh-shop-thumb2.jpg",
+                         "title" => "Better Hands Bundle",
+                         "fullPrice" => 200.94,
+                         "price" => 150.21,
+                         "category" => "accessories",
+                         'soldOut' => false,
+                    ])
+                </div>
                 @foreach($accessories as $accessory)
                     @include('musora.shop._shop-card-alt', [
                         "sku" => $accessory->sku,

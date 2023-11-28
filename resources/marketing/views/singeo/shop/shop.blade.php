@@ -64,25 +64,13 @@
                     'slug' => 'https://www.singeo.com/shop/ultimate-lessons-bundle',
                     'desc' => 'Singeo Discount<br> + 3 Bonuses',
                     'visible' => 1,
-                    'specialW' => true,
+                    'full' => true,
                     'price' => 298,
                     'discountedPrice' => 150,
                     'buttonColor' => '#8300E9',
                     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
                     'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/singeo/promos/november/bundles/singeo-ultimate-lessons-card.jpg',
                     'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/singeo/promos/november/bundles/singeo-ultimate-lessons-card-m.jpg',
-                ],
-                [
-                    'slug' => '/lifetime',
-                    'desc' => 'Unlimited singing lessons<br> for life + more',
-                    'visible' => 1,
-                    'discountedPrice' => 1200,
-                    'specialW2' => true,
-                    'price' => 1200,
-                    'buttonColor' => '#000',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
                 ],
             ];
         @endphp
@@ -119,18 +107,6 @@
                              "title" => "Ultimate Lessons Bundle",
                              "fullPrice" => 240,
                              "price" => 150,
-                             "category" => "lessons",
-                             'soldOut' => false,
-                        ])
-                    </div>
-                    <div x-cloak x-show="filter === 'lessons'">
-                        @include('musora.shop._shop-card-alt', [
-                             "itemURL" => "/lifetime",
-                             "sku" => null,
-                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lt-shop-thumb2.jpg",
-                             "title" => "Lifetime Bundle",
-                             "fullPrice" => 1200.00,
-                             "price" => 1200.00,
                              "category" => "lessons",
                              'soldOut' => false,
                         ])

@@ -103,37 +103,15 @@
             $bundles = [
                 [
                     'slug' => 'https://www.pianote.com/shop/ultimate-lessons-bundle',
-                    'desc' => 'Pianote Discount<br> + 11 Bonuses',
+                    'desc' => '11 Free Bonuses<br> Worth $963',
                     'visible' => 1,
                     'full' => true,
                     'price' => 1203,
-                    'discountedPrice' => 150,
+                    'discountedPrice' => 240,
                     'buttonColor' => '#F61A30',
                     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
                     'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card3.jpg',
                     'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m3.jpg',
-                ],
-                [
-                    'slug' => 'https://www.pianote.com/shop/30-day-challenge-bundle',
-                    'desc' => '7 Online Courses <br>For The Price Of 1',
-                    'visible' => 1,
-                    'price' => 706,
-                    'discountedPrice' => 97,
-                    'buttonColor' => '#01C1FF',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30-day-challenge-bundle-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
-                ],
-                [
-                    'slug' => '/lifetime',
-                    'desc' => 'Unlimited Pianote Lessons For Life<br> <strong class="font-black">Only <s class="opacity-60">300</s> ' . $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() . ' Left!</strong>',
-                    'visible' => 1,
-                    'discountedPrice' => 1200,
-                    'price' => 1200,
-                    'buttonColor' => '#000',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
                 ],
             ];
             }
@@ -251,19 +229,19 @@
                              'soldOut' => false,
                         ])
                     </div>
-                @endif
-                <div x-cloak x-show="filter === 'lessons'">
-                    @include('musora.shop._shop-card-alt', [
-                         "itemURL" => "/lifetime",
-                         "sku" => null,
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lt-shop-thumb2.jpg",
-                         "title" => "Lifetime Bundle",
-                         "fullPrice" => 1200.00,
-                         "price" => 1200.00,
-                         "category" => "lessons",
-                         'soldOut' => false,
-                    ])
-                </div>
+                    <div x-cloak x-show="filter === 'lessons'">
+                        @include('musora.shop._shop-card-alt', [
+                             "itemURL" => "/lifetime",
+                             "sku" => null,
+                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lt-shop-thumb2.jpg",
+                             "title" => "Lifetime Bundle",
+                             "fullPrice" => 1200.00,
+                             "price" => 1200.00,
+                             "category" => "lessons",
+                             'soldOut' => false,
+                        ])
+                    </div>
+                    @endif
                 @foreach($lessons as $key => $lesson)
                     @include('musora.shop._shop-card-alt', [
                             "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,

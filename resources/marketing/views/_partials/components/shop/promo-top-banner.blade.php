@@ -2,7 +2,7 @@
     <div class="container mx-auto relative z-30 max-w-2xl">
             <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
                 @include($theme.'._partials.holiday-logo', [
-                    'styles' => 'h-8 sm:h-10 mx-auto'
+                    'styles' => 'h-10 sm:h-14 mx-auto'
                 ])
             </a>
             <h1 class="uppercase leading-none sm:leading-none text-4xl sm:text-6xl my-1.5">
