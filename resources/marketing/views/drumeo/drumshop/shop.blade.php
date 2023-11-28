@@ -319,25 +319,25 @@
 {{--            <div class="container">--}}
 {{--                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> 30-Day Drummer Merch</strong></h5>--}}
 {{--                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">--}}
-{{--                    @foreach($thiryDD as $key => $thiryDDItem)--}}
+{{--                    @foreach($thirtyDD as $key => $thirtyDDItem)--}}
 {{--                            @include('musora.shop._shop-card-alt', [--}}
-{{--                                "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $thiryDDItem->slug ),--}}
-{{--                                "sku" => $thiryDDItem->sku === 'drumeo' ? null : $thiryDDItem->sku,--}}
-{{--                                "badgeText" => $thiryDDItem->badge_text,--}}
-{{--                                "thumbnail" => $thiryDDItem->thumbnail,--}}
-{{--                                "packLogo" => $thiryDDItem->thumbnail_logo,--}}
-{{--                                "title" => $thiryDDItem->name,--}}
-{{--                                "packAuthor" => $thiryDDItem->instructor_name,--}}
-{{--                                "cardDescription" => $thiryDDItem->short_desc,--}}
-{{--                                "fullPrice" => $thiryDDItem->price,--}}
-{{--                                "price" => $thiryDDItem->discounted_price,--}}
-{{--                                "category" => strtolower($thiryDDItem->productType->name),--}}
-{{--                                "buttonText" => $thiryDDItem->sku === 'drumeo' || $thiryDDItem->sku === 'pianote' || $thiryDDItem->sku === 'singeo' || $thiryDDItem->sku === 'guitareo' ? 'see the deal' : null,--}}
-{{--                                "soldOut" => $thiryDDItem->sold_out,--}}
-{{--                                "includedEdge" => $thiryDDItem->included_edge,--}}
-{{--                                "sizes" => $thiryDDItem->sizes,--}}
+{{--                                "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $thirtyDDItem->slug ),--}}
+{{--                                "sku" => $thirtyDDItem->sku === 'drumeo' ? null : $thirtyDDItem->sku,--}}
+{{--                                "badgeText" => $thirtyDDItem->badge_text,--}}
+{{--                                "thumbnail" => $thirtyDDItem->thumbnail,--}}
+{{--                                "packLogo" => $thirtyDDItem->thumbnail_logo,--}}
+{{--                                "title" => $thirtyDDItem->name,--}}
+{{--                                "packAuthor" => $thirtyDDItem->instructor_name,--}}
+{{--                                "cardDescription" => $thirtyDDItem->short_desc,--}}
+{{--                                "fullPrice" => $thirtyDDItem->price,--}}
+{{--                                "price" => $thirtyDDItem->discounted_price,--}}
+{{--                                "category" => strtolower($thirtyDDItem->productType->name),--}}
+{{--                                "buttonText" => $thirtyDDItem->sku === 'drumeo' || $thirtyDDItem->sku === 'pianote' || $thirtyDDItem->sku === 'singeo' || $thirtyDDItem->sku === 'guitareo' ? 'see the deal' : null,--}}
+{{--                                "soldOut" => $thirtyDDItem->sold_out,--}}
+{{--                                "includedEdge" => $thirtyDDItem->included_edge,--}}
+{{--                                "sizes" => $thirtyDDItem->sizes,--}}
 {{--                                'FCP' => $key < 4 ? true : null,--}}
-{{--                                "size_case_sensitive" => $thiryDDItem->size_case_sensitive,--}}
+{{--                                "size_case_sensitive" => $thirtyDDItem->size_case_sensitive,--}}
 {{--                            ])--}}
 {{--                    @endforeach--}}
 {{--                </div>--}}
