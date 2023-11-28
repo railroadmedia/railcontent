@@ -17,7 +17,7 @@
                     <CatalogueCardContainer
                         :is-mini-view="isMiniView"
                         :pre-loaded-content="preLoadedContent"
-                        :show-dropdown="true"
+                        :show-dropdown="showDropdown"
                     />
                 </transition>
             </div>
@@ -52,6 +52,10 @@ const props = defineProps({
   seeAllAriaLabel: {
     type: String,
     default: ''
-  }
+  },
+  showDropdown: {
+    type: Boolean,
+    default: () => false,
+  },
 });
 </script>
