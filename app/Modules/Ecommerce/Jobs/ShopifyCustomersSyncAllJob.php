@@ -20,7 +20,7 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
     private int $take;
     private int $startId;
     private int $endId;
-    private bool $isRebuildingPermissions;
+    private bool $customQuery;
     /**
      * @var false
      */
@@ -31,14 +31,14 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
         int $take,
         int $startId,
         int $endId,
-        $isRebuildingPermissions = false,
+        $customQuery = false,
         $skipEventSync = false
     ) {
         $this->skip = $skip;
         $this->take = $take;
         $this->startId = $startId;
         $this->endId = $endId;
-        $this->isRebuildingPermissions = $isRebuildingPermissions;
+        $this->customQuery = $customQuery ?? "";
         $this->skipEventSync = $skipEventSync;
     }
 
@@ -55,6 +55,16 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
     function getQuery(): Builder
     {
         $query = User::query();
+
+        switch ($this->customQuery) {
+            case "hasRechargeSubscription":
+                $query = $query->where('has_recharge_subscription', true);
+                break;
+            case "":
+                break;
+            default:
+                throw new \Exception("Invalid custom query: $this->customQuery");
+        }
         if ($this->startId) {
             $query = $query->where('id', '>=', $this->startId);
         }
@@ -75,7 +85,7 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
             try {
                 $shopifySyncService->syncCustomerByUser(
                     $item,
-                    isRebuildingPermissions: $this->isRebuildingPermissions,
+                    isRebuildingPermissions: false,
                     skipEventSync: $this->skipEventSync
                 );
             } catch (\Throwable $ex) {

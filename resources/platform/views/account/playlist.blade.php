@@ -9,5 +9,5 @@
 @endsection
 
 @section('content')
-    <playlist :playlist="{{ json_encode($playlist) }}" :lessons="{{ $listLessons }}" />
+    <playlist :playlist="{{ json_encode($playlist) }}" :lessons="{{ $listLessons }}" ></playlist>
 @endsection
