@@ -6,7 +6,7 @@
     <meta property="og:title" content="30-Day Blues Piano | Pianote">
     <meta name="description" content="30 days to better piano chords.">
     <meta property="og:description" content="30 days to better piano chords.">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/30-day-blues/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -185,6 +185,14 @@
                 margin:25px 10px 0
             }
         }
+         @media (max-width: 638px) {
+            .dropdown-box {
+            background: linear-gradient(180deg, #00101D 0%, rgba(0, 16, 29, 0) 100%);
+            }
+        }
+         .container-video {
+    background: linear-gradient(3deg, white 50%, #EFF7FF 50%);
+}
     </style>
     <style>
         .timeline-container .timeline:after,
@@ -205,8 +213,8 @@
 
 @section('body-data')
     x-data ='{
-    trailer : false,
-    demoVid : false,
+        trailer : false,
+        testimonial: false,
     }'
 @endsection
 
@@ -214,309 +222,219 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner-no-tw', [
+    @include('pianote._partials.promo-banner', [
         "name" => "30-Day Blues Piano",
-        "fullPrice" => floatval($productPrices['new-piano-players-start-here']->price),
-        "price" => floatval($productPrices['new-piano-players-start-here']->discounted_price),
+        "fullPrice" => floatval($productPrices['30-day-blues-piano']->price),
+        "price" => floatval($productPrices['30-day-blues-piano']->discounted_price),
         "noBreadcrumb" => true
     ])
 
 
-    <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white bg-cover bg-top" style="background:#00114f url(https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/header-bg.jpg);">
-        <div class="container max-w-5xl mx-auto">
-            <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <div class="w-full sm:w-7/12 text-center lg:text-left">
-                    <img class="h-20 sm:h-24 lg:h-32 mb-1 sm:mb-0 lg:mb-1" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="logo" fetchpriority="high">
-                    <h1 class=""><strong>Learn the Blues</strong></h1>
-                    <h2 class="sm:-mt-1 lg:mt-0">in just 30 days.</h2>
+        @php
+            $price = floatval($productPrices['30-day-blues-piano']->price);
+            $discountedPrice = floatval($productPrices['30-day-blues-piano']->discounted_price);
+            $enrollmentLink = 'https://www.pianote.com/choose-plan';
+            $brandTitle = 'Pianote';
+            $buttonText = 'GET STARTED';
+            $buttonLink = "/ecommerce/add-to-cart?products[30-day-blues-piano]=1";
+            $studentProfilesImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png';
+            $numStudents =  number_format($nPackOwners ?? 0);
+            $students = 'piano players';
+        @endphp
 
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Get the essential skills to<br class="inline lg:hidden"> play beautiful Blues piano.</strong></h6>
+<!-- Header Section -->
+    @include('drumeo.products.partials.evergreen._header', [
+    'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png',
+    'logoAlt' => '30 day blues logo',
+    'text' => 'Learn the Blues',
+    'subtitle' => 'in just 30 days',
+    'checklist' => ['Learn By Doing', 'Play Every Day', 'Perfect For Beginners'],
+    'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/header-right-collage.png',
+    'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/header-left-collage.png',
+    'mediaSource' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/video-thumb-header.png',
+    'extraClass' => 'h-20 sm:h-24 lg:h-32',
+])
 
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video" style="padding-bottom: 75%;"  x-on:click="trailer = true;">
-                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/header-thumb-m.png" alt="header image" fetchpriority="high" />
-                        <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
-                    </div>
 
-                    <p class="hidden lg:inline">
-                        <i class="fas fa-check text-pianote"></i> Learn by doing
-                        <i class="ml-2 fas fa-check text-pianote"></i> Play every day
-                        <i class="ml-2 fas fa-check text-pianote"></i> Perfect for beginners</p>
-                    <div class="flex inline lg:hidden">
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> Learn  <br> by doing</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> Play  <br>every day</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> Perfect for  <br> beginners</p>
-                    </div>
+ <!-- Lessons Section -->
+@php
 
-                    <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
-                        <div class="w-full sm:w-1/2 text-center sm:pr-2">
-{{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
-                            <span class="join sold-out medium w-full">SOLD OUT</span>
-{{--                                <a href="#final" class="join medium w-full anchor-slide">ENROLL NOW</a>--}}
-{{--                            <p class="opacity-70 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">--}}
-{{--                                <a href="https://www.musora.com/pianote/enrollment/30-day-blues-piano">Pianote Members register for free here.</a>--}}
-{{--                            </p>--}}
-                        </div>
-                        <div class="w-full sm:w-1/2">
-                            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/piano-players-trusted.png" alt="joined student profiles" fetchpriority="high">
-                            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video" x-on:click="trailer = true;">
-                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/header-thumb.png" alt="header image" fetchpriority="high" />
-                        <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
-                    </div>
-                </div>
-            </div>
+$lessons = [
+        [
+        'title' => 'Blues Essentials',
+        'description' => "Before the course starts, Kevin shares some essential advice that will prepare you for success."
+],
+    [
+        'title' => 'Blues Foundations',
+        'description' => "In week 1, you'll dive into the 12-bar blues, develop rhythm, and get both hands playing with 5 workouts and a pre-recorded Q&A."
+    ],
+    [
+        'title' => 'Building Confidence & Adding Scales',
+        'description' => "In week 2, you'll build confidence with the blues progression and rhythm through 5 workouts and a pre-recorded Q&A."
+    ],
+    [
+        'title' => 'Blues Riffs & Fills',
+        'description' => "In week 3, you'll learn simple riffs alongside iconic riffs and fills through 5 workouts and a pre-recorded Q&A."
+    ],
+    [
+        'title' => 'Storytelling With Solos',
+        'description' => "In week 4, everything you've learned will be brought together and you'll craft your story for your very own blues piano solo!"
+    ],
+];
 
-            <div class="flex flex-wrap sm:flex-nowrap text-center border rounded-lg border-gray-300 mt-8 lg:mt-12 mb-2 lg:mb-4">
-                <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
-                    <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
-                        <i class="far fa-fw mr-3 sm:mr-0 fa-calendar-day text-pianote text-2xl"></i>
-                        <p class="leading-tight mx-0"><strong class="font-black">Course Length</strong><br>
-                            <span class="text-sm">30 days.</span></p>
-                    </div>
-                    <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
-                        <i class="far fa-fw mr-3 sm:mr-0 fa-clock text-pianote text-2xl"></i>
-                        <p class="leading-tight mx-0"><strong class="font-black">Commitment</strong><br>
-                            <span class="text-sm">10 minutes per day.</span></p>
-                    </div>
-                    <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
-                        <i class="far fa-fw mr-3 sm:mr-0 fa-piano-keyboard text-pianote text-2xl"></i>
-                        <p class="leading-tight mx-0"><strong class="font-black">Skill Level</strong><br>
-                            <span class="text-sm">Beginner.</span></p>
-                    </div>
-                    <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3">
-                        <i class="far fa-fw mr-3 sm:mr-0 fa-trophy text-pianote text-2xl"></i>
-                        <p class="leading-tight mx-0"><strong class="font-black">Result</strong><br>
-                            <span class="text-sm">Play your first Blues solo!</span></p>
-                    </div>
-                </div>
-            </div>
+$features = [
+    [
+        'title' => 'Course Kick-Off',
+        'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/kick-off-30-day-blues.jpg',
+        'videoId' => 851379131,
+    ]
+];
+@endphp
 
-            <p class="opacity-70 text-center"><em>
-                    Learn the piano on YOUR schedule <br class="inline sm:hidden">
-                    with lifetime access!</em></p>
-        </div>
-    </header>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container max-w-4xl mx-auto">
-            <img class="h-56 inline sm:hidden transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/collage.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <h2 class="text-center mt-5 sm:mt-0"><strong>Learn the Blues by PLAYING the Blues.</strong></h2>
-            <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7 lg:mb-10 uppercase text-blue-600">This is the NEW way of learning Blues piano.<br class="hidden sm:inline"> Play along with your teacher for just 10 minutes a day.</p>
 
-            <div class="text-left flex flex-wrap sm:flex-nowrap">
-                <p class="leading-normal max-w-lg pr-7">All your favorite songs can be traced back to one genre – the Blues.
-                    <br><br>
-                    It’s one of the funnest styles to play – but it can seem IMPOSSIBLE to learn. After all, how do you learn something that is supposed to be improvised? How can you practice something that is meant to be spontaneous?
-                    <br><br>
-                    The same way you learn everything else…
-                    <br><br>
-                    <strong>With a great teacher and a bit of practice.</strong>
-                    <br><br>
-                    30-Day Blues Piano will guide you through the essential skills you need to confidently play the Blues on your piano. You’ll learn the basic structure of the Blues, the most important scale, and some iconic riffs than will get you started on your Blues journey.
-                    <br><br>
-                    All in just 10 minutes a day.
-                    <br><br>
-                    Keep scrolling to see how.</p>
-                <img class="h-96 hidden sm:inline transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/collage.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
-            </div>
-        </div>
-    </section>
+@include('drumeo.products.partials.evergreen._lessons', [
+    'title' => 'Learn the Blues by PLAYING the Blues.',
+    'description' => "The Blues is <em>everywhere</em>. At least one of your favorite songs can be traced back to the Blues. Probably way <em>more</em> than one.
+                        <br><br>
+                        But the Blues is IMPOSSIBLE to learn, right? After all, there’s so much improvisation! How do you learn to make stuff up? Don’t you need to be <em>gifted</em>?
+                        <br><br>
+                        No way! All you need is a great teacher.
+                        <br><br>
+                        Give teacher Kevin Castro 30 days, and he’ll give you the essential skills you need to confidently play the Blues on your piano. In just 10 minutes a day, you’ll learn everything from the basic Blues structure and the most important scale, through to the Blues riffs and fills you’ll use to tell a musical story in the final week.
+                        <br><br>
+                        It’s all here. Let’s get bluesy!",
+    'features' => $features,
+    'lessonTitle' => 'Course Lessons',
+    'instructor' => ' Kevin Castro',
+    'course' => ' 30 Days (20 Workouts + 4 Q&As)',
+    'lessons' => $lessons
+])
 
-    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f1f7fe calc(50% + 1px));"></div>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f1f7fe;">
-        <div class="container max-w-4xl mx-auto">
-            <img class="h-10 sm:h-20 mb-8 transition-all opacity-0"src="https://www.musora.com/musora-cdn/image/width=1220,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/just-press-play-title.png" alt="just play logo" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <p class="leading-normal mb-20 lg:mb-28 max-w-2xl">30-Day Blues Piano is the new way to learn the Blues. By focusing on short, consistent practice sessions, you’ll develop the skill and muscle memory to play the Blues. You’ll never have to worry about what to practice. All you need to do is follow along.</p>
+@php
+$practiceItems = [
+            [
+                "icon" =>
+                "fa-regular fa-music",
+                "title" => "The PERFECT lesson, every time.",
+                "desc" =>
+                "Your job is simple: sit down to play. Kevin’s got your lesson and practice ready — all you need to do is follow along! Start where you are, be thrilled with where you end up.",
+            ],
+            [
+                "icon" =>
+                "fa-regular fa-clock",
+                "title" => "Stop wasting time.",
+                "desc" =>
+                "Your time is precious. So is your desire to learn something new. That’s why every lesson is only 10 minutes long and includes a handy countdown timer. Get better results in less time with greater focus.",
+            ],
+            [
+                "icon" =>
+                "fa-regular fa-infinity",
+                "title" => "Lifetime access.",
+                "desc" =>
+                "Oh no! You didn’t finish 30-Day Blues Piano in 30 days! Don’t worry. The course is yours for life. And that’s important, because learning should happen on your time. So whether you need a few extra weeks, or just want to revisit the course to focus on different skills, 30-Day Blues Piano will be there for you. For life.
+",
+            ]
+            ]
+@endphp
 
-            @php
-                $gettings = [
-                    [
-                    'position' => 'left',
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/perfect-lesson.jpg',
-                    'title' => 'The PERFECT lesson, every time.',
-                    'desc' => 'You’ll start slow and gradually build your skills day-by-day. It won’t be overwhelming, and you’ll never have to worry about WHAT to practice.',
-                    'special' => true,
-                    ],
-                    [
-                    'position' => 'right',
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/practice.jpg',
-                    'title' => 'Get the MOST out of every practice.',
-                    'desc' => 'Your time is precious, so don’t waste it. Each lesson is only 10 minutes and there’s a handy countdown timer so you can stay focused and get better results in a shorter time.',
-                    ],
-                    [
-                    'position' => 'left',
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/live-support.jpg',
-                    'title' => 'Support from REAL teachers.',
-                    'desc' => 'Throughout the 30 days, you’ll have a team of REAL teachers to help you. Got questions? You’ll get a personalized answer from an experienced piano teacher. You’re never alone.',
-                    ],
-                    [
-                    'position' => 'right',
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/lifetime-access.jpg',
-                    'title' => 'Lifetime access.',
-                    'desc' => 'The course lasts 30 days. But it’s yours for life. You’ll keep access to ALL the lessons forever. So you can go back and repeat anything you want to, as often as you like.',
-                    ],
-                ];
-            @endphp
-            <div class="timeline-container max-w-3xl lg:max-w-4xl mx-auto relative px-4 mt-5">
-                @foreach ($gettings as $key => $getting)
-                    @if($getting['position'] === 'right')
-                        <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 @if($key !== 3) md:mb-28 @else md:mb-0 @endif">
-                            <div class="content relative text-left sm:pl-10 md:pl-0">
-                                <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
-                                <p>{{ $getting['desc'] }}</p>
-                            </div>
-                            <img class="-mt-7 rounded-lg overflow-hidden transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
-                        </div>
-                    @else
-                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-28">
-                            @if(empty($getting['special']))
-                                <img class="-mt-7 rounded-lg transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
-                            @else
-                                <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 overflow-hidden">
-                                    <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="{{ $getting['title'] }}img" loading="lazy" onload="this.classList.remove('opacity-0')" />
-                                </div>
-                            @endif
-                            <div class="content relative text-left sm:pl-10 md:pl-0">
-                                <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
-                                <p>{{ $getting['desc'] }}</p>
-                            </div>
-                        </div>
-                    @endif
+
+<!-- Songs subsection -->
+@include('drumeo.products.partials.evergreen._dropdown', [
+    'bgClass' => 'bg-slate-900',
+    'songItems' => $practiceItems])
+
+<!-- What you will learn section-->
+@php
+$items = [
+            '20 guided play-along lessons.',
+            'Lifetime access to watch & re-watch.',
+            '90 day money-back guarantee.',
+        ]
+@endphp
+
+<!-- Get started with video section-->
+<section class="text-center bg-blue-50">
+    <div class="container max-w-4xl mx-auto px-6 pt-6">
+        <div class="flex flex-wrap sm:flex-nowrap items-center justify-center pb-4">
+            <img class="h-32 md:h-64 lg:h-72 py-4 lazyload p-2"
+                data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png"
+                alt="logo">
+            <ul class="pl-6">
+                @foreach ($items as $item)
+                    <li>
+                        <h4 class="leading-loose text-left"><i
+                                class="fas fa-sharp fa-solid fa-circle-check text-{{ $brand }} mr-5"
+                                aria-hidden="true"></i>{{ $item }}</h4>
+                    </li>
                 @endforeach
+            </ul>
+        </div>
+        {{-- <a href={{$buttonLink}} class="join blue medium w-full sm:w-1/2 md:w-1/3 lg:w-3/5 mt-6 sm:mt-12 mb-3 anchor-slide" role="button">{{$buttonText}}</a><br> --}}
+        <div class="w-full flex flex-col items-center">
+            <div class="w-full sm:w-1/2 md:w-1/3">
+                @include('drumeo.products.partials.evergreen._button', [
+                    'link' => $buttonLink,
+                    'buttonClass' => 'text-white font-bebas tracking-widest',
+                    'buttonText' => $buttonText,
+                ])
             </div>
-            <img class="h-14 mb-2" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/scoll-more-icon.svg">
-            <h5 class="leading-tight text-blue-600"><strong>Watch the<br> demo below!</strong></h5>
+            {{-- <div class="flex flex-row items-center py-2">
+                     @if ($numStudents > 500)
+                    <img class="h-7 mr-2 lazyload" alt="Joined Student Profiles" data-src={{ $studentProfilesImage }}>
+                    <span class="inline-block align-middle leading-tight text-xs">Join
+                        {{ $numStudents }} {{ $students }} who<br> have already registered.
+                    </span>
+                    @endif
+                </div> --}}
         </div>
-    </section>
-    <div id="demo" class="anchor"></div>
-    <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-tablet-bg.png);">
-        <h3 class="leading-tight"><strong>You should know it’s right for you.</strong></h3>
-        <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7">Curious? <strong>Try a snippet from Day 1</strong> and<br class="inline sm:hidden"> see if  30-Day Blues Piano is right for you.</p>
-        <div class="relative cursor-pointer autoplay-video" x-on:click="demoVid = true;">
-            <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-tablet-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-tablet.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <p class="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-2/3 px-3 py-1 z-10 rounded-xl text-white inline-block mx-auto text-sm whitespace-nowrap" style="background-color:#284ffd;"><i class="fas fa-play-circle mr-1 text-xl sm:text-3xl align-middle"></i> Hit play and see what Day 1 is like.</p>
-        </div>
-    </section>
+        @include('drumeo.products.partials.evergreen._price-link', [
+            'price' => $price,
+            'enrollmentLink' => $enrollmentLink,
+            'brandTitle' => $brandTitle,
+        ])
+    </div>
+</section>
 
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white bg-cover bg-top" style="background:#00114f url(https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/midway-bg.jpg);">
-        <div class="container max-w-3xl mx-auto">
-            <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-                <img class="h-32 sm:h-64 lg:h-72 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=760,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30DD logo">
-                <h4 class="leading-loose text-left">
-                    <i class="fas fa-check text-pianote mr-5"></i> Daily guided Blues lessons<br>
-                    <i class="fas fa-check text-pianote mr-5"></i> Support from REAL piano teachers<br>
-                    <i class="fas fa-check text-pianote mr-5"></i> Flexible schedule<br>
-                    <i class="fas fa-check text-pianote mr-5"></i> 10-minute lessons<br>
-                    <i class="fas fa-check text-pianote mr-5"></i> Guaranteed results</h4>
-            </div>
+<section class="container-video">
+    <div class="container max-w-4xl mx-auto flex flex-col items-center md:pt-10 text-center px-6">
+        <h2 class="py-2"><strong>You’ll sound like THIS after 30 days…</strong></h2>
+        <p class="pb-2 md:pb-4">Hear what REAL 30-Day Blues Piano students sound like after completing the course:
+        </p>
+        <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
+            x-on:click="testimonial = true;" role="button">
+            <i
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
 
-{{--            <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">ENROLL NOW</a><br>--}}
-{{--            <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/piano-players-trusted.png" alt="joined student profiles">--}}
-{{--            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>--}}
+
+            <img class="absolute inset-0 rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/testimonial-video-thumb.png"
+                alt="testimonial image" fetchpriority="high" />
 
         </div>
-    </section>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container max-w-6xl mx-auto">
-            <h2 class="mb-6 sm:mb-10 lg:mb-14"><img class="h-20 sm:h-24 align-bottom opacity-0" src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-black.png" loading="lazy" onload="this.classList.remove('opacity-0')" alt="logo"> <strong>...is perfect for:</strong></h2>
-            <div class="flex flex-wrap text-left max-w-4xl mx-auto">
-                <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl">
-                        <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=530,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/beginner-piano-player.jpg" alt="classical player" loading="lazy" onload="this.classList.remove('opacity-0')" />
-                        <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong><img class="h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon" loading="lazy" onload="this.classList.remove('opacity-0')"><br>Beginner <br class="hidden sm:inline"> piano players</strong></h6>
-                        <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
-                    </div>
-                    <p class="leading-normal mt-3">Know a few chords, but struggling to feel like you’re “playing the piano”? Or are you feeling overwhelmed about improvisation or soloing? 30-Day Blues Piano will give you the exact structure to start exploring your creative side.</p>
-                </div>
-                <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl">
-                        <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=530,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/intermediate-piano-player.jpg" alt="classical player" loading="lazy" onload="this.classList.remove('opacity-0')" />
-                        <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong><img class="h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon" loading="lazy" onload="this.classList.remove('opacity-0')"><br>Intermediate<br class="hidden sm:inline"> piano players</strong></h6>
-                        <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
-                    </div>
-                    <p class="leading-normal mt-3">Do you want to play with other musicians? Or break through that plateau of the same chords and the same songs? You’ll learn the riffs and techniques the pros use to make their playing sound interesting and advanced.</p>
-                </div>
-                <div class="w-full sm:w-1/3 px-2">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl">
-                        <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=530,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/classical-piano-player.jpg" alt="classical player" loading="lazy" onload="this.classList.remove('opacity-0')" />
-                        <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong><img class="h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon" loading="lazy" onload="this.classList.remove('opacity-0')"><br> Classical<br class="hidden sm:inline"> piano players</strong></h6>
-                        <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
-                    </div>
-                    <p class="leading-normal mt-3">The Blues is scary for a classically-trained musician. There are no notes. It’s all about what’s inside. If that’s making you sweat a little, then you NEED to try 30-Day Blues Piano. Push that comfort zone, and start playing the Blues.</p>
-                </div>
-            </div>
+        <p class="py-2 md:py-6">Ready to sound this good?</p>
+
+        <div class="w-full sm:w-1/2 md:w-1/3">
+            @include('drumeo.products.partials.evergreen._button', [
+                'link' => $buttonLink,
+                'buttonClass' => 'text-white font-bebas tracking-widest',
+                'buttonText' => $buttonText,
+            ])
         </div>
-    </section>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f1f7fe;">
-        <div class="container max-w-6xl mx-auto">
-            <h2 class="leading-tight"><strong>Play More. Get Better.</strong></h2>
-            <p class="leading-tight mt-2 sm:mt-3 mb-5 sm:mb-7 uppercase text-blue-600">It’s not rocket science.</p>
-            <p class="leading-normal mb-11 max-w-2xl">The more you play, the better you’ll get. And it won’t cost the earth. For less than the cost of 2 private piano lessons, you’ll get 30 days of guided training to get you playing awesome Blues piano. And once the course is over, the lessons are yours for life.</p>
-            <div class="relative">
-                <p class="inline sm:hidden leading-tight text-xs absolute top-0 right-0 -mt-8 w-2/5 animated infinite bounce slower"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
-                <table class="w-full mx-auto comparison max-w-4xl mx-auto private">
-                    <tbody>
-                    <tr style="background-color:transparent!important;">
-                        <td></td>
-                        <td class="rounded-t-xl"><img class="h-8 sm:h-14 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=220,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-white.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')"></td>
-                        <td class="cursor-pointer sm:cursor-default rounded-tl-xl"><strong>Private<br> Lessons</strong></td>
-                        <td class="cursor-pointer sm:cursor-default"><strong>Online<br> Courses</strong></td>
-                        <td class="cursor-pointer sm:cursor-default rounded-tr-xl"><strong>Piano<br> Books</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Style</td>
-                        <td>20 Play-Along Lessons</td>
-                        <td>In-Person</td>
-                        <td>Self-Directed</td>
-                        <td>Self-Directed</td>
-                    </tr>
-                    <tr>
-                        <td>Length</td>
-                        <td>30 Days</td>
-                        <td>Open Ended</td>
-                        <td>Open Ended</td>
-                        <td>Open Ended</td>
-                    </tr>
-                    <tr>
-                        <td>Access</td>
-                        <td>Lifetime Access</td>
-                        <td>One-Time</td>
-                        <td>Varies</td>
-                        <td>Lifetime</td>
-                    </tr>
-                    <tr>
-                        <td>Guarantee</td>
-                        <td>90 days</td>
-                        <td>No</td>
-                        <td>Varies</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td>Investment</td>
-                        <td class="rounded-b-xl"><strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong><br>Single Payment</td>
-                        <td class="rounded-bl-xl"><strong>$50-$100</strong><br> For a Single <L></L>esson</td>
-                        <td><strong>$89-$270+</strong><br>&nbsp;</td>
-                        <td class="rounded-br-xl"><strong>$19-$49</strong><br>&nbsp;</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-    <section class="text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40">
+    </div>
+</section>
+
+
+ <!-- Meet your teacher section -->
+    <section class="text-center sm:px-6 pt-10 sm:pt-14 lg:pt-20 sm:pb-32 lg:pb-40">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
                 <div class="w-52 sm:w-64 lg:w-72 relative -mb-8 sm:mb-0 sm:-mr-8">
-                    <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/coach-profile-m2.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/coach-profile.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/coach-profile-m.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/coach-profile.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 150%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
 
-                <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-20 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
+                <div class="text-white text-left z-10 sm:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 sm:max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
                     <h6 class="uppercase text-pianote leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
                     <h2 class="text-center sm:text-left"><strong>Kevin Castro</strong></h2>
                     <p class="leading-normal my-4 lg:my-6">Kevin Castro wouldn’t be a professional pianist without the Blues. In fact, it was a Blues improvisation that got him accepted into University.
@@ -534,15 +452,43 @@
                     <img class="float-right h-12 sm:h-24 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/kevin-signature.png" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
             </div>
-
-{{--            <a href="#final" class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>--}}
-{{--            <img class="h-7 mr-1 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/piano-players-trusted.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('opacity-0')">--}}
-{{--            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>--}}
         </div>
     </section>
 
-    <div class="h-10 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f1f7fe calc(50% + 1px));"></div>
-    <section class="text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#f1f7fe;">
+
+<!-- Testimonials section -->
+
+@include('drumeo.products.partials.evergreen._testimonials', [
+    'socialIcons' => [
+                [
+                    'url' => 'https://www.youtube.com/pianolessonscom/',
+                    'label' => 'youtube',
+                    'iconClass' => 'fab fa-youtube',
+                    'count' => '1,450,000',
+                    'countLabel' => 'Subscribers',
+                ],
+                [
+                    'url' => 'https://facebook.com/pianoteofficial/',
+                    'label' => 'facebook',
+                    'iconClass' => 'fab fa-facebook-f',
+                    'count' => '560,000',
+                    'countLabel' => 'Likes',
+                ],
+                [
+                    'url' => 'https://instagram.com/pianoteofficial/',
+                    'label' => 'instagram',
+                    'iconClass' => 'fab fa-instagram',
+                    'count' => '239,000',
+                    'countLabel' => 'Followers',
+                ],
+            ],
+        'bgColor' => 'linear-gradient(rgba(246, 26, 48, 1), rgba(161, 0, 0, 1))',
+        'title' => "Trusted by piano players everywhere.",
+        'subTitle' => "Rated 5 stars by thousands by Pianote students from around the world! See the reviews ››",
+        'showTop' => true,
+])
+    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2A2F34 calc(50% + 1px));"></div>
+    <section class="text-center text-white px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#2A2F34; border: 1px solid #2A2F34">
         <div class="container max-w-3xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=410,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png" alt="guarantee badge" loading="lazy" onload="this.classList.remove('opacity-0')">
             <h3 class="my-4 sm:my-6 lg:my-8"><strong>But what if it doesn’t<br class="inline sm:hidden"> work for you?</strong></h3>
@@ -556,96 +502,51 @@
         </div>
     </section>
 
-    <div id="final" class="anchor"></div>
-    <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white bg-cover bg-top" style="background:#00114f url(https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/order-bg.jpg);">
-        <div class="container max-w-6xl mx-auto relative z-50">
-            <div class="flex flex-wrap items-center justify-center">
-                <div class="text-center w-full sm:w-7/12 lg:w-5/12 mb-7 lg:mb-0">
-                    <img class="h-20 md:h-24 lg:h-28 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <h4 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
-                            20 Guided Play-Along Lessons.<br>
-                            Feedback From Real Teachers.<br>
-                            Lifetime Course Access.
-                        </strong></h4>
-                    <div class="w-full mx-auto sm:mx-0">
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>  10-minute lessons</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>  Guaranteed results</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.</p>
-                    </div>
-                    <h4 class="mt-2 mb-4 sm:my-4 lg:my-5"><strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong></h4>
-                    <span class="join sold-out medium w-full align-middle">SOLD OUT</span>
-{{--                    /ecommerce/add-to-cart?products[30-day-blues-piano]=1&promo-code=special&redirect=/order&locked=true--}}
-                </div>
+<!-- Learn section -->
+@php
+$points = [
+            '20 guided play-along lessons.',
+            'Lifetime access to watch & re-watch.',
+            '90-day money-back guarantee.'
+        ]
+@endphp
 
-            </div>
-        </div>
-    </section>
+@include('drumeo.products.partials.evergreen._learn', [
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png',
+    'logoAlt' => '30 day blues logo',
+    'title' => 'Learn the blues <br class="md:hidden"> by playing the blues',
+    'points' => $points,
+    'profileImageAlt' => 'student profile image',
+    'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/30-day-blues/order-collage.png',
+])
 
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2><strong>Still have questions?</strong></h2>
-            <div class="max-w-6xl mt-4 sm:mt-10 px-4">
-                @include('_partials.components.question-dropdown', [
-                "title" => "What if I miss a day (or two)?",
-                "desc" => "That’s totally fine. The course is meant to be flexible if you miss a day here or there. There are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session if you ever need to catch up.",
-                "num" => '?',
-                ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "Do I need a digital piano or software?",
-                "desc" => "No! This course works with all pianos and keyboards. You don’t have to plug anything in and you don't need any fancy plugins or software. Simply click play on your lesson, and follow along!",
-                "num" => '?',
-                ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "How much time per week will this course require?",
-                "desc" => "30-Day Blues Piano gives you guided daily piano lessons for thirty days – with a few flex days built in for when life happens. Each lesson is only 10 minutes. We’ve made it short so you’re more likely to keep playing!",
-                "num" => '?',
-                ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "What devices can I access the course on?",
-                "desc" => "30-Day Blues Piano is available on your laptop, tablet, or phone. You’ll also have access through the Musora App after you’ve completed your purchase of the course.",
-                "num" => '?',
-                ])
-            </div>
-            <div class="inline-block w-full px-3 md:px-4 my-5" style="color:#2a2f34;">
-                <p><strong>Any other questions?</strong><br class="inline-block md:hidden"> Call us toll-free at
-                    <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
-                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
-            </div>
-            <div class="inline-block w-full px-3 md:px-4 mb-10" style="color:#2a2f34;">
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
-            </div>
-        </div>
-    </section>
-
-    @include('_partials.components.video-modal',[
-        'name' => 'demoVid',
-        'video' => '852836211',
-        'vimeo' => true,
-    ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '852795615',
+        'video' => '879913986',
         'vimeo' => true,
     ])
 
-    @include('_partials.components.countdown',[
+    @include('_partials.components.video-modal',[
+        'name' => 'testimonial',
+        'video' => '884499141',
+        'vimeo' => true,
+    ])
+
+
+    {{-- @include('_partials.components.countdown',[
         'countdownDate' => '2023-09-01 00:00:00',
         'promoVersion' => false
-    ])
+    ]) --}}
+
     @include("pianote.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
 
-    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
 
     <script>
@@ -665,7 +566,7 @@
             });
         })
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" defer></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js" defer></script>
 
 @stop

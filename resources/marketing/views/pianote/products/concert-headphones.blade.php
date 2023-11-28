@@ -96,6 +96,12 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
+    @include('pianote._partials.promo-banner', [
+        "name" => "Concert Headphones",
+        "fullPrice" => floatval($productPrices['pianote-headphones']->price),
+        "price" => floatval($productPrices['pianote-headphones']->discounted_price),
+        "noBreadcrumb" => true
+    ])
     @if(!empty($memberVersion))
 {{--        <div class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-50 fixed" style="background: linear-gradient(180deg, #FFAC00 0%, #FF7A00 100%);">--}}
 {{--            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-none sm:leading-none">--}}
@@ -382,8 +388,6 @@
         })
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-
-    {{-- Platform --}}
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>

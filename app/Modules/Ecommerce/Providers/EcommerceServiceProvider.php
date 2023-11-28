@@ -33,15 +33,10 @@ class EcommerceServiceProvider extends EventServiceProvider
      */
     public function boot(): void
     {
-        Route::middleware('web_or_api_public')
+        // middleware is controlled in the route files
+        Route::middleware([])
             ->group(__DIR__ . '/../routes/routes.php')
             ->group(__DIR__ . '/../routes/shopify.php');
-
-
-        $this->mergeConfigFrom(
-            __DIR__ . '/../config/shopify.php',
-            'shopify'
-        );
     }
 
     /**

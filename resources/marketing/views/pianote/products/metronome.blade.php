@@ -28,6 +28,12 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
+    @include('pianote._partials.promo-banner', [
+        "name" => "Pianote Metronome",
+        "fullPrice" => floatval($productPrices['taktell-piccolo-metronome']->price),
+        "price" => floatval($productPrices['taktell-piccolo-metronome']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     <header class="text-white px-5 sm:px-6 pt-[100%] pb-10 sm:py-20 lg:py-28 relative" style="background-color:#690808;">
         <div class="inset-0 absolute z-0 bg-top bg-cover block sm:hidden" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/pianote/products/metronome/header-bg-m.jpg')"></div>
@@ -46,7 +52,7 @@
                             <strong>ONLY ${{ floatval($productPrices['taktell-piccolo-metronome']->discounted_price) }}</strong>
                         @endif
                     </h4>
-                    <a href="/ecommerce/add-to-cart?products[taktell-piccolo-metronome]=1&redirect=/order" class="join medium w-full">ORDER NOW &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[taktell-piccolo-metronome]=1" class="join medium w-full">ORDER NOW &raquo;</a>
                 </div>
             </div>
         </div>
@@ -189,16 +195,16 @@
                 @php
                     $slides = [
                      [
+                         'img' => 'marketing/pianote/products/metronome/metronome-gallery-06.jpg',
+                     ],
+                     [
                          'img' => 'marketing/pianote/products/metronome/metronome-gallery-01.jpg',
                      ],
                      [
-                         'img' => 'marketing/pianote/products/metronome/metronome-gallery-02.jpg',
-                     ],
-                     [
-                         'img' => 'marketing/pianote/products/metronome/metronome-gallery-03.jpg',
-                     ],
-                     [
                          'img' => 'marketing/pianote/products/metronome/metronome-gallery-04.jpg',
+                     ],
+                     [
+                         'img' => 'marketing/pianote/products/metronome/metronome-gallery-07.jpg',
                      ],
                      [
                          'img' => 'marketing/pianote/products/metronome/metronome-gallery-05.jpg',
@@ -236,7 +242,7 @@
                 <br><br>
                 And your Pianote Metronome comes with a 2-year guarantee. That means you don’t have to worry about the quality of your metronome.
                 <br><br>
-                Insead, you can focus on what’s most important - practice.</p>
+                Instead, you can focus on what’s most important - practice.</p>
         </div>
     </section>
     <div id="customize-anchor" class="anchor"></div>
@@ -257,7 +263,7 @@
                             <strong>ONLY ${{ floatval($productPrices['taktell-piccolo-metronome']->discounted_price) }}</strong>
                         @endif
                     </h4>
-                    <a href="/ecommerce/add-to-cart?products[taktell-piccolo-metronome]=1&redirect=/order" class="join medium w-full">ORDER NOW &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[taktell-piccolo-metronome]=1" class="join medium w-full">ORDER NOW &raquo;</a>
                 </div>
             </div>
         </div>
@@ -284,10 +290,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-
-    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 @stop

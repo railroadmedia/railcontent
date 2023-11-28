@@ -75,7 +75,7 @@
             <div class="cs-message-edit">
                 <textarea
                     v-model="messageEdit.text"
-                    class="cs-text-sm tw-p-2 tw-bg-black dark:tw-text-white tw-bg-[#F4F4F5] dark:tw-bg-[#002039] tw-resize-none tw-rounded-md tw-border-[#D4D4D8] dark:tw-border-[#223F57] tw-border"
+                    class="cs-text-sm tw-p-2 dark:tw-text-white tw-bg-[#F4F4F5] dark:tw-bg-[#002039] tw-resize-none tw-rounded-md tw-border-[#D4D4D8] dark:tw-border-[#223F57] tw-border"
                 ></textarea>
                 <div class="tw-flex tw-flex-row tw-justify-end tw-mt-2">
                     <div

@@ -9,10 +9,11 @@ class Subscription
 {
     public ?string $cancellationReason;
     public ?Carbon $cancelledAt;
+    public ?Carbon $updatedAt;
 
     public ?Carbon $createdAt;
     public int $id;
-    public ?Product $product;
+    public ?Product $product = null;
     public ?int $shopifyVariantId;
     public string $status;
     public ?string $sku;
@@ -29,6 +30,7 @@ class Subscription
         $this->sku = $subscriptionData->sku;
         $this->nextChargeScheduledAt = $subscriptionData->next_charge_scheduled_at ? Carbon::parse($subscriptionData->next_charge_scheduled_at) : null;
         $this->shopifyVariantId = $subscriptionData->shopify_variant_id;
+        $this->updatedAt = $subscriptionData->updated_at ? Carbon::parse($subscriptionData->updated_at) : null;
     }
 
     public function setProduct(Product $product): void

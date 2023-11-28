@@ -26,6 +26,12 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
+    @include('drumeo.products.partials.promo-banner', [
+        "name" => "Easy Rudiments",
+        "fullPrice" => floatval($productPrices['easy-rudiments-book']->price),
+        "price" => floatval($productPrices['easy-rudiments-book']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     <header class="text-white px-5 sm:px-6 pt-72 pb-10 sm:py-20 lg:py-24 relative" style="background-color:#013350;">
         <div class="inset-0 absolute z-0 bg-top block sm:hidden" style="background-size: 365px;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/header-bg-m.jpg')"></div>
@@ -232,9 +238,8 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 
-    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
 @stop

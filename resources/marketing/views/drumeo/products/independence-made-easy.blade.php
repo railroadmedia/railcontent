@@ -447,7 +447,7 @@
             <p class="columns">
                 <strong>You can unlock the full 26-week course today</strong> to get Jared Falk’s best advice for improving your independence on the drums — <u>all for just ${{ round(floatval($productPrices['independence-made-easy-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price), 2 }} for the entire course).
                 <br><br>
-                You can choose a one-time payment, a two-payment plan, or a five-payment plan — and the entire course is yours for life with no recurring subscription or additional fees.
+                The entire course is yours for life with no recurring subscription or additional fees.
 
             </p>
         </div>

@@ -15,13 +15,13 @@
     <script type="text/javascript">
         recharge.init({
             // optional when in a shopify environment
-            storeIdentifier: '{{ config('shopify.domain') }}',
+            storeIdentifier: '{{ config('shopify.credentials.domain') }}',
             // required for API access
-            storefrontAccessToken: '{{ config('shopify.rechargeStoreFrontAccessToken') }}',
+            storefrontAccessToken: '{{ config('shopify.recharge.storefront_access_token') }}',
             // retry middleware function if/when Recharge session expires
             loginRetryFn: () => {
                 return recharge.auth.loginShopifyApi(
-                    '{{ config('shopify.privateAppStorefrontAccessToken') }}',
+                    '{{ config('shopify.storefront.access_token') }}',
                     '{{ $shopifyCustomerAccessToken }}'
                 )
                     .then(session => {
@@ -35,7 +35,7 @@
         });
 
         recharge.auth.loginShopifyApi(
-            '{{ config('shopify.privateAppStorefrontAccessToken') }}',
+            '{{ config('shopify.storefront.access_token') }}',
             '{{ $shopifyCustomerAccessToken }}'
         )
             .then(session => {
@@ -114,12 +114,12 @@
                 {{-- ============================================================================================= --}}
                 {{-- ================================= Subscription Info Section ================================= --}}
                 {{-- ============================================================================================= --}}
-                
+
                 <div class="tw-flex tw-flex-col pa-3">
                     {{-- TEMPORARY MESSAGE --}}
                     {{-- <div class="tw-full tw-flex tw-p-4 tw-mb-4 tw-rounded-lg tw-bg-red-100 tw-text-red-800 tw-font-semibold">
                         <p>
-                            Hello! 👋 We are doing a quick systems update today that will impact this page. For help with managing 
+                            Hello! 👋 We are doing a quick systems update today that will impact this page. For help with managing
                             your subscription in the interim, please <a href="/{{$brand}}/support#contactPageApp" class="tw-underline tw-text-current">contact our support team</a>!
                         </p>
                     </div> --}}

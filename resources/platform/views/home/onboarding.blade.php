@@ -21,7 +21,7 @@
         <onboarding
             :selected-brand="{{ json_encode(request()->get('brand')) }}"
             @if(request()->get('update') !== null)
-                :start-on-step="{{ 2 }}"
+                :start-on-step="{{ json_encode(intval(request()->get('update'))) }}"
             @endif
             :config-options="{{ json_encode(config('onboarding.options')) }}"
             :selected-gear="{{ json_encode(user()->onboardingGear) }}"

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
+import { storeToRefs } from 'pinia';
 import { getCookie, setCookie } from '../../vuesora/assets/js/functions/cookies';
 import { XIcon } from "@heroicons/vue/solid";
 import Button from "../Button/Button.vue";
@@ -8,6 +9,7 @@ import { useUserStore } from '../../../stores/user';
 
 const shouldShowBanner = ref(true);
 const userStore = useUserStore();
+const { brand } = storeToRefs(userStore);
 
 onBeforeMount(() => {
     const hideOnboardingBanner = !!getCookie("hideOnboardingBanner");

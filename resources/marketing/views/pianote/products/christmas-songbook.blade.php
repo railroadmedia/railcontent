@@ -70,6 +70,12 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
+    @include('pianote._partials.promo-banner', [
+        "name" => "Christmas Songbook",
+        "fullPrice" => floatval($productPrices['christmas-songbook']->price),
+        "price" => floatval($productPrices['christmas-songbook']->discounted_price),
+        "noBreadcrumb" => true
+    ])
     <header class="text-white px-5 sm:px-6 pt-96 pb-10 sm:py-20 lg:py-36 relative" style="background-color:#0f5e8a;">
         <div class="inset-0 absolute z-0 bg-top bg-cover block sm:hidden" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/products/christmas-songbook/header-m.png')"></div>
         <div class="inset-0 absolute z-0 bg-top bg-cover hidden sm:block" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/products/christmas-songbook/header.jpg')"></div>
@@ -228,48 +234,29 @@
         </div>
     </section>
     <div id="final" class="anchor"></div>
-    <section class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-center text-white" style="background:#0f5e8a url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/christmas-songbook/order-bg.jpg') center center/cover;">
-        <div class="container mx-auto">
-            <img alt="quietkick logo" class="h-28 sm:h-44 lg:h-52" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/products/christmas-songbook/christmas-songbook-logo-center.png"><br>
-            <p class="leading-tight mt-3 mb-6">Christmas classics to make your holiday season extra special.<br class="hidden sm:inline">
-                Presented in original and simplified arrangements.</p>
 
-            @if( $products['christmas-songbook']->getStockAvailability() > 1 && !empty($products['christmas-songbook']->getStockAvailability()))
-                <div class="flex flex-wrap items-start justify-center 2-full max-w-sm sm:max-w-3xl mx-auto">
-                    <div class="w-full md:w-1/2 px-2 md:px-3 relative">
+    <section class="text-white px-5 sm:px-6 pt-96 pb-10 sm:py-20 lg:py-36 relative" style="background-color:#0f5e8a;">
+        <div class="inset-0 absolute z-0 bg-top bg-cover block sm:hidden" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/products/christmas-songbook/header-m.png')"></div>
+        <div class="inset-0 absolute z-0 bg-top bg-cover hidden sm:block" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/products/christmas-songbook/header.jpg')"></div>
+        <div class="container max-w-4xl mx-auto relative z-10">
+            <div class="flex flex-wrap sm:flex-nowrap items-center">
+                <div class="w-full sm:w-5/12 text-center lg:text-left">
+                    <img class="h-24 lg:h-36 lg:-ml-5 mx-0" alt="logo" fetchpriority="high"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/christmas-songbook/christmas-songbook-logo-left.png">
+                    <p class="leading-normal my-4 sm:my-6">Christmas classics to make your holiday season extra special.
+                        Presented in original and simplified arrangements.
+                    </p>
+                    <h4 class="mb-4 sm:mb-6">
                         @if(floatval($productPrices['christmas-songbook']->price) > floatval($productPrices['christmas-songbook']->discounted_price))
-                            <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >Save {{ round(100 - (100 * (floatval($productPrices['christmas-songbook']->discounted_price) / floatval($productPrices['christmas-songbook']->price)))) }}%</p>
+                            <strong>ONLY</strong> <s class="opacity-60">${{ floatval($productPrices['christmas-songbook']->price) }}</s>
+                            <strong>${{ floatval($productPrices['christmas-songbook']->discounted_price) }}</strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['christmas-songbook']->discounted_price) / floatval($productPrices['christmas-songbook']->price)))) }}%)
+                        @else
+                            <strong>ONLY ${{ floatval($productPrices['christmas-songbook']->discounted_price) }}</strong>
                         @endif
-                        <a href="/ecommerce/add-to-cart?locked=true&products[christmas-songbook]=1&products[christmas-song-book-digital]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
-                            <div class="bg-white px-3 py-6 md:py-9">
-                                <h4 class="mb-2 sm:mb-3"><strong>Book Only</strong></h4>
-                                <img class="h-28 lg:h-32 transition-opacity opacity-0"
-                                    loading="lazy"
-                                    onload="this.classList.remove('opacity-0')"
-                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/310x0/filters:quality(95)/marketing/pianote/products/christmas-songbook/book-only.png"
-                                    alt="learn playing image"
-                                >
-                                <br>
-                                <h4 class="inline-block leading-tight">
-                                    @if(floatval($productPrices['christmas-songbook']->price) > floatval($productPrices['christmas-songbook']->discounted_price))
-                                        <s>${{ floatval($productPrices['christmas-songbook']->price) }}</s>
-                                    @endif
-                                    <strong>${{ floatval($productPrices['christmas-songbook']->discounted_price) }}</strong></h4>
-                                <p class="text-sm"><em>
-                                        @if(floatval($productPrices['christmas-songbook']->price) > floatval($productPrices['christmas-songbook']->discounted_price))
-                                            Save {{ round(100 - (100 * (floatval($productPrices['christmas-songbook']->discounted_price) / floatval($productPrices['christmas-songbook']->price)))) }}%.
-                                        @endif
-                                        One-time payment.</em></p>
-                                <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Get Your Copy</div>
-                                <p class="text-sm mb-1.5">20 Christmas Classics</p>
-                                <p class="text-sm">BONUS Digital Book (10 songs)</p>
-                            </div>
-                        </a>
-                    </div>
+                    </h4>
+                    <a href="/ecommerce/add-to-cart?locked=true&products[christmas-songbook]=1&products[christmas-song-book-digital]=1" class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
-            @else
-                <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>
-            @endif
+            </div>
         </div>
     </section>
     <section class="text-white px-4 sm:px-6 py-8 sm:py-12 text-center" style="background: #012c41;">
@@ -296,10 +283,9 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
     <script>
         $(document).ready(function () {

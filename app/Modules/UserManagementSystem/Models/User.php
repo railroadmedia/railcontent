@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Models;
 
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
+use App\Modules\Content\Models\Content;
 use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
@@ -11,6 +12,7 @@ use App\Modules\Ecommerce\Models\Address;
 use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
+use App\Modules\Ecommerce\Models\UserAccessPermission;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
 use App\Modules\Notifications\Models\NotificationSettings;
@@ -54,6 +56,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property int|null $phone_number
  * @property string|null $profile_picture_url
  * @property string|null $timezone
+ * @property bool $is_coach
  * @property string|null $permission_level
  * @property int|null $legacy_drumeo_id
  * @property int|null $legacy_pianote_id
@@ -105,6 +108,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string|null $support_note
  * @property int|null $shopify_id
  * @property bool|false $has_recharge_subscription
+ * @property Carbon|null $recharge_renewal_date
  * @property bool|false $has_apple_subscription
  * @property bool|false $has_google_subscription
  * @property int $cio_synced_workspaces
@@ -443,6 +447,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return Attribute::make(
             get: function ($value) {
+                if ($this->is_coach) {
+                    return "coach";
+                }
+
                 if (!empty($value)) {
                     return $value;
                 }
@@ -1001,5 +1009,36 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function isAccountSetup(): bool
     {
         return !$this->requires_password_update;
+    }
+
+    public function associatedContent(): HasMany
+    {
+        return $this->hasMany(Content::class, 'associated_user_id');
+    }
+
+    /**
+     * @return Attribute
+     */
+    public function isCoach(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return boolval(
+                    $this->associatedContent()
+                        ->where("is_coach", true)
+                        ->where("status", "published")
+                        ->count()
+                );
+            },
+        );
+    }
+
+    public function isEnrolledIntoCohort()
+    {
+        $cohortPermissionsIds = config('railcontent.cohort_permisssion_ids',[]);
+        return $this->hasMany(
+            UserAccessPermission::class,
+            "user_id"
+        )->whereIn("permission_id", $cohortPermissionsIds)->count() > 0;
     }
 }

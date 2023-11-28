@@ -32,8 +32,8 @@ class ShopController extends BaseController
             return $value->productType->name === 'Accessories';
         });
 
-        $hats = $products->filter(function($value, $key){
-            return $value->productType->name === 'Hats';
+        $misc = $products->filter(function($value, $key){
+            return $value->productType->name === 'Misc';
         });
 
         $shirts = $products->filter(function($value, $key){
@@ -41,17 +41,22 @@ class ShopController extends BaseController
         });
 
         $hoodies = $products->filter(function($value, $key){
-            return $value->productType->name === 'Hoodies';
+            return $value->productType->name === 'Hoodies' || $value->productType->name === 'Sweaters';
         });
+
+        $featured = $products->whereIn('id', [208, 197, 113]);
+        $xmas = $products->whereIn('id', [230, 228, 225]);
 
         return view('pianote.shop.shop', [
             'lessons' => $lessons,
             'accessories' => $accessories,
-            'hats' => $hats,
+            'misc' => $misc,
             'shirts' => $shirts,
             'hoodies' => $hoodies,
             'theme' => 'pianote',
-            'category' => $request->category
+            'category' => $request->category,
+            'featured' => $featured,
+            'xmas' => $xmas
         ]);
     }
 

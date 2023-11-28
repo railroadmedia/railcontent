@@ -6,6 +6,7 @@ use App\Console\Commands\AddTimeToUsersAccountsJan2023;
 use App\Console\Commands\AssignSongsPermissionsToAllUsers;
 use App\Console\Commands\AssignSongsPermissionsToContent;
 use App\Console\Commands\AssignSongsPermissionsToProducts;
+use App\Console\Commands\AssignUnassignedHelpScoutCustomersToMentors;
 use App\Console\Commands\CreateSongs24Jan2023;
 use App\Console\Commands\CreateSongsDecember2022;
 use App\Console\Commands\FixSongsTemp;
@@ -28,6 +29,7 @@ use App\Console\Commands\RepairUserProgressStartedOn;
 use App\Console\Commands\RepairVimeoDurations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
+use App\Console\Commands\SyncShopifyProductInventoryToProductsTable;
 use App\Console\Commands\SyncUsersToCIO;
 use App\Console\Commands\TestLessonsDescriptionUrls;
 use App\Console\Commands\MembershipFieldsSync;
@@ -77,6 +79,8 @@ class Kernel extends ConsoleKernel
         RemoveRailTrackerData::class,
         SyncUsersToCIO::class,
         SeedUserProgress::class,
+        AssignUnassignedHelpScoutCustomersToMentors::class,
+        SyncShopifyProductInventoryToProductsTable::class,
     ];
 
     /**
@@ -117,6 +121,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('addevent:syncMusora')->hourlyAt(50);
 
         $schedule->command('addevent:syncMusora --live')->hourlyAt(30);
+
+        $schedule->command('SyncShopifyProductInventoryToProductsTable')->everyFiveMinutes();
     }
 
     /**

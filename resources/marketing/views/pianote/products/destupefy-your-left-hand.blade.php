@@ -20,7 +20,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner-no-tw', [
+    @include('pianote._partials.promo-banner', [
         "name" => "De-Stupefy Your Left Hand",
         "fullPrice" => floatval($productPrices['destupefy-your-left-hand']->price),
         "price" => floatval($productPrices['destupefy-your-left-hand']->discounted_price),
@@ -32,7 +32,7 @@
                     src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/de-stupefy-logo.png" alt="destupefy logo"><br>
             <i class="fas fa-play play-vimeo autoplay-video" data-toggle="modal" data-target="#trailer"></i>
             <h1><strong>It’s time to tame<br class="hidden-sm hidden-md hidden-lg"> your left hand.</strong></h1>
-            <a class="join" href="/ecommerce/add-to-cart?products[destupefy-your-left-hand]=1&redirect=/order">Get Started &raquo;</a>
+            <a class="join" href="/ecommerce/add-to-cart?products[destupefy-your-left-hand]=1">Get Started &raquo;</a>
 
             <p class="breakdown">
                 @if(floatval($productPrices['destupefy-your-left-hand']->price) > floatval($productPrices['destupefy-your-left-hand']->discounted_price))
@@ -52,7 +52,7 @@
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/479108043?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
-                <a href="/ecommerce/add-to-cart?products[destupefy-your-left-hand]=1&redirect=/order" class="join">Get Started</a>
+                <a href="/ecommerce/add-to-cart?products[destupefy-your-left-hand]=1" class="join">Get Started</a>
             </div>
         </div>
     </div>
@@ -374,7 +374,7 @@
         <div class="container">
             <img class="logo lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/de-stupefy-logo.png" alt="destupefy logo">
             <h1><strong>It’s time to tame<br class="hidden-sm hidden-md hidden-lg"> your left hand.</strong></h1>
-            <a href="/ecommerce/add-to-cart?products[destupefy-your-left-hand]=1&redirect=/order" class="join">Get Started &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[destupefy-your-left-hand]=1" class="join">Get Started &raquo;</a>
             <p class="breakdown">
                 @if(floatval($productPrices['destupefy-your-left-hand']->price) > floatval($productPrices['destupefy-your-left-hand']->discounted_price))
                     <s>NORMALLY ${{ floatval($productPrices['destupefy-your-left-hand']->price) }}.</s> &nbsp;
@@ -451,6 +451,7 @@
             }
         });
     </script>
-
-
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @stop

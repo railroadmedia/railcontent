@@ -13,7 +13,7 @@ class NavigationService
         if (empty($user)) {
             return [];
         }
-
+        $shopName = brand() == 'drumeo' ?  'drumshop' : 'shop';
         if ($user->isPackOnlyOwner() || !$user->isAMember() || $user->isAnExpiredMember()) {
             return [
                 [ // section
@@ -24,7 +24,7 @@ class NavigationService
                     ],
                     [
                         'name' => 'Shop',
-                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'path' => get_legacy_brand_base_url().'/'.$shopName,
                         'icon' => 'cart',
                     ]
                 ],
@@ -46,152 +46,118 @@ class NavigationService
             ];
         }
 
-        if (brand() === 'drumeo') {
-            $navData = [
-                [ // section
-                    [
-                        'name' => 'Home',
-                        'path' => '/'.brand(),
-                        'icon' => 'home',
-                    ],
-                    [
-                        'name' => 'Method',
-                        'path' => '/'.brand().'/method/drumeo-method/241247',
-                        'icon' => 'method',
-                    ],
-                    [
-                        'name' => 'Songs',
-                        'path' => '/'.brand().'/songs',
-                        'icon' => 'headphones',
-                    ],
-                    [
-                        'name' => 'Workouts',
-                        'path' => '/'.brand().'/workouts',
-                        'icon' => 'workouts',
-                    ],
-                ],
-                [ // section
-                    [
-                        'name' => 'Packs',
-                        'path' => '/'.brand().'/packs',
-                        'icon' => 'box',
-                    ],
-                    [
-                        'name' => 'Courses',
-                        'path' => '/'.brand().'/courses',
-                        'icon' => 'academic-cap',
-                    ],
-                    [
-                        'name' => 'Quick Tips',
-                        'path' => '/'.brand().'/quick-tips',
-                        'icon' => 'light-bulb',
-                    ],
-                    [
-                        'name' => 'Student Focus',
-                        'path' => '/'.brand().'/student-focus',
-                        'icon' => 'person-plus',
-                    ],
-                    [
-                        'name' => 'Live',
-                        'path' => '/'.brand().'/live',
-                        'icon' => 'play-circle',
-                    ],
-                    [
-                        'name' => brand().' Schedule',
-                        'path' => '/'.brand().'/schedule/',
-                        'icon' => 'calendar',
-                    ],
-                    [
-                        'name' => 'Play-Alongs',
-                        'path' => '/'.brand().'/play-alongs',
-                        'icon' => 'eigth-notes',
-                    ],
-                    [
-                        'name' => 'Rudiments',
-                        'path' => '/'.brand().'/rudiments',
-                        'icon' => 'drum',
-                    ],
-                    [
-                        'name' => 'Shows',
-                        'path' => '/'.brand().'/shows',
-                        'icon' => 'shows',
-                    ],
-                    [
-                        'name' => 'Coaches',
-                        'path' => '/'.brand().'/coaches',
-                        'icon' => 'whistle',
-                    ],
-                ],
-                [ // section
-                    [
-                        'name' => 'Forums',
-                        'path' => '/'.brand().'/forums',
-                        'icon' => 'messages',
-                    ],
+        $methodurl = match(brand()) {
+            'drumeo' => 'drumeo-method/241247',
+            'pianote' => 'pianote-method/276693',
+            'guitareo' => 'guitareo-method/333652',
+            'singeo' => 'singeo-method/308514'
+        };
 
-                    [
-                        'name' => 'Shop',
-                        'path' => get_legacy_brand_base_url() . '/shop',
-                        'icon' => 'cart',
-                    ]
+        $homeSection = [
+            [
+                'name' => 'Home',
+                'path' => '/'.brand(),
+                'icon' => 'home',
+            ],
+            [
+                'name' => 'Method',
+                'path' => '/'.brand().'/method/'.$methodurl,
+                'icon' => 'method',
+            ],
+            'songs' => [
+                'name' => 'Songs',
+                'path' => '/'.brand().'/songs',
+                'icon' => 'headphones',
+            ],
+            [
+                'name' => 'Workouts',
+                'path' => '/'.brand().'/workouts',
+                'icon' => 'workouts',
+            ],
+        ];
+
+        $commonContentSection = [
+            [
+                'name' => 'Packs',
+                'path' => '/'.brand().'/packs',
+                'icon' => 'box',
+            ],
+            [
+                'name' => 'Courses',
+                'path' => '/'.brand().'/courses',
+                'icon' => 'academic-cap',
+            ],
+            [
+                'name' => 'Quick Tips',
+                'path' => '/'.brand().'/quick-tips',
+                'icon' => 'light-bulb',
+            ],
+            [
+                'name' => 'Student Focus',
+                'path' => '/'.brand().'/student-focus',
+                'icon' => 'person-plus',
+            ],
+            [
+                'name' => 'Live',
+                'path' => '/'.brand().'/live',
+                'icon' => 'play-circle',
+            ],
+            [
+                'name' => brand().' Schedule',
+                'path' => '/'.brand().'/schedule/',
+                'icon' => 'calendar',
+            ]
+        ];
+
+        $forumAndShopSection =
+            [
+                [
+                    'name' => 'Forums',
+                    'path' => '/'.brand().'/forums',
+                    'icon' => 'messages',
                 ],
+
+                [
+                    'name' => 'Shop',
+                    'path' => get_legacy_brand_base_url() . '/'.$shopName,
+                    'icon' => 'cart',
+                ]
+            ];
+
+        if (brand() === 'drumeo') {
+            $commonContentSection = array_merge($commonContentSection,
+                    [
+                        [
+                            'name' => 'Play-Alongs',
+                            'path' => '/'.brand().'/play-alongs',
+                            'icon' => 'eigth-notes',
+                        ],
+                        [
+                            'name' => 'Rudiments',
+                            'path' => '/'.brand().'/rudiments',
+                            'icon' => 'drum',
+                        ],
+                        [
+                            'name' => 'Shows',
+                            'path' => '/'.brand().'/shows',
+                            'icon' => 'shows',
+                        ],
+                        [
+                            'name' => 'Coaches',
+                            'path' => '/'.brand().'/coaches',
+                            'icon' => 'whistle',
+                        ]
+                    ]
+            );
+            $navData = [
+                $homeSection,
+                $commonContentSection,
+                $forumAndShopSection
             ];
             return $navData;
         } elseif (brand() === 'pianote') {
-            $navData = [
-                [ // section
-                    [
-                        'name' => 'Home',
-                        'path' => '/'.brand(),
-                        'icon' => 'home',
-                    ],
-                    [
-                        'name' => 'Method',
-                        'path' => '/'.brand().'/method/pianote-method/276693',
-                        'icon' => 'method',
-                    ],
-                    [
-                        'name' => 'Songs',
-                        'path' => '/'.brand().'/songs',
-                        'icon' => 'headphones',
-                    ],
-                    [
-                        'name' => 'Workouts',
-                        'path' => '/'.brand().'/workouts',
-                        'icon' => 'workouts',
-                    ],
-                ],
-                [ // section
-                    [
-                        'name' => 'Packs',
-                        'path' => '/'.brand().'/packs',
-                        'icon' => 'box',
-                    ],
-                    [
-                        'name' => 'Courses',
-                        'path' => '/'.brand().'/courses',
-                        'icon' => 'academic-cap',
-                    ],
-                    [
-                        'name' => 'Quick Tips',
-                        'path' => '/'.brand().'/quick-tips',
-                        'icon' => 'light-bulb',
-                    ],
-                    [
-                        'name' => 'Student Focus',
-                        'path' => '/'.brand().'/student-focus',
-                        'icon' => 'person-plus',
-                    ],
-                    [
-                        'name' => 'Live',
-                        'path' => '/'.brand().'/live',
-                        'icon' => 'play-circle',
-                    ],
-                    [
-                        'name' => brand().' Schedule',
-                        'path' => '/'.brand().'/schedule/',
-                        'icon' => 'calendar',
-                    ],
+            $commonContentSection = array_merge($commonContentSection,
+                [
                     [
                         'name' => 'Song Tutorials',
                         'path' => '/'.brand().'/song-tutorials',
@@ -211,78 +177,18 @@ class NavigationService
                         'name' => 'Coaches',
                         'path' => '/'.brand().'/coaches',
                         'icon' => 'whistle',
-                    ],
-                ],
-                [ // section
-                    [
-                        'name' => 'Forums',
-                        'path' => '/'.brand().'/forums',
-                        'icon' => 'messages',
-                    ],
-
-                    [
-                        'name' => 'Shop',
-                        'path' => get_legacy_brand_base_url() . '/shop',
-                        'icon' => 'cart',
                     ]
-                ],
+                ]
+            );
+            $navData = [
+                $homeSection,
+                $commonContentSection,
+                $forumAndShopSection
             ];
             return $navData;
         } elseif (brand() === 'guitareo') {
-            $navData = [
-                [ // section
-                    [
-                        'name' => 'Home',
-                        'path' => '/'.brand(),
-                        'icon' => 'home',
-                    ],
-                    [
-                        'name' => 'Method',
-                        'path' => '/'.brand().'/method/guitareo-method/333652',
-                        'icon' => 'method',
-                    ],
-                    [
-                        'name' => 'Songs',
-                        'path' => '/'.brand().'/songs',
-                        'icon' => 'headphones',
-                    ],
-                    [
-                        'name' => 'Workouts',
-                        'path' => '/'.brand().'/workouts',
-                        'icon' => 'workouts',
-                    ],
-                ],
-                [ // section
-                    [
-                        'name' => 'Packs',
-                        'path' => '/'.brand().'/packs',
-                        'icon' => 'box',
-                    ],
-                    [
-                        'name' => 'Courses',
-                        'path' => '/'.brand().'/courses',
-                        'icon' => 'academic-cap',
-                    ],
-                    [
-                        'name' => 'Quick Tips',
-                        'path' => '/'.brand().'/quick-tips',
-                        'icon' => 'light-bulb',
-                    ],
-                    [
-                        'name' => 'Student Focus',
-                        'path' => '/'.brand().'/student-focus',
-                        'icon' => 'person-plus',
-                    ],
-                    [
-                        'name' => 'Live',
-                        'path' => '/'.brand().'/live',
-                        'icon' => 'play-circle',
-                    ],
-                    [
-                        'name' => brand().' Schedule',
-                        'path' => '/'.brand().'/schedule/',
-                        'icon' => 'calendar',
-                    ],
+            $commonContentSection = array_merge($commonContentSection,
+                [
                     [
                         'name' => 'Play-Alongs',
                         'path' => '/'.brand().'/play-alongs',
@@ -312,73 +218,20 @@ class NavigationService
                         'name' => 'Coaches',
                         'path' => '/'.brand().'/coaches',
                         'icon' => 'whistle',
-                    ],
-                ],
-                [ // section
-                    [
-                        'name' => 'Forums',
-                        'path' => '/'.brand().'/forums',
-                        'icon' => 'messages',
-                    ],
-
-                    [
-                        'name' => 'Shop',
-                        'path' => get_legacy_brand_base_url() . '/shop',
-                        'icon' => 'cart',
                     ]
-                ],
+                ]
+            );
+            $navData = [
+                $homeSection,
+                $commonContentSection,
+                $forumAndShopSection
             ];
             return $navData;
         } elseif (brand() === 'singeo') {
-            $navData = [
-                [ // section
-                    [
-                        'name' => 'Home',
-                        'path' => '/'.brand(),
-                        'icon' => 'home',
-                    ],
-                    [
-                        'name' => 'Method',
-                        'path' => '/'.brand().'/method/singeo-method/308514',
-                        'icon' => 'method',
-                    ],
-                    [
-                        'name' => 'Songs',
-                        'path' => '/'.brand().'/songs',
-                        'icon' => 'headphones',
-                    ],
-                    [
-                        'name' => 'Workouts',
-                        'path' => '/'.brand().'/workouts',
-                        'icon' => 'workouts',
-                    ],
-                ],
-                [ // section
-                    [
-                        'name' => 'Courses',
-                        'path' => '/'.brand().'/courses',
-                        'icon' => 'academic-cap',
-                    ],
-                    [
-                        'name' => 'Quick Tips',
-                        'path' => '/'.brand().'/quick-tips',
-                        'icon' => 'light-bulb',
-                    ],
-                    [
-                        'name' => 'Student Focus',
-                        'path' => '/'.brand().'/student-focus',
-                        'icon' => 'person-plus',
-                    ],
-                    [
-                        'name' => 'Live',
-                        'path' => '/'.brand().'/live',
-                        'icon' => 'play-circle',
-                    ],
-                    [
-                        'name' => brand().' Schedule',
-                        'path' => '/'.brand().'/schedule/',
-                        'icon' => 'calendar',
-                    ],
+            // remove the "Packs" menu item
+            array_shift($commonContentSection);
+            $commonContentSection = array_merge($commonContentSection,
+                [
                     [
                         'name' => 'Routines',
                         'path' => '/'.brand().'/routines',
@@ -388,21 +241,13 @@ class NavigationService
                         'name' => 'Coaches',
                         'path' => '/'.brand().'/coaches',
                         'icon' => 'whistle',
-                    ],
-                ],
-                [ // section
-                    [
-                        'name' => 'Forums',
-                        'path' => '/'.brand().'/forums',
-                        'icon' => 'messages',
-                    ],
-
-                    [
-                        'name' => 'Shop',
-                        'path' => get_legacy_brand_base_url() . '/shop',
-                        'icon' => 'cart',
                     ]
-                ],
+                ]
+            );
+            $navData = [
+                $homeSection,
+                $commonContentSection,
+                $forumAndShopSection
             ];
             return $navData;
         }

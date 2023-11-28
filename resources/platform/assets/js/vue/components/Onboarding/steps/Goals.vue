@@ -1,13 +1,13 @@
 <script setup>
-import { ref } from "vue";
+import {ref} from "vue";
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import StepHeader from "../StepHeader.vue";
 import SkipStep from "../SkipStep.vue";
 import MultiSelect from "../../MultiSelect/MultiSelect.vue";
-import { getMultiSelectOptions } from "../utils";
-import { saveGoals } from "../services";
+import {getMultiSelectOptions} from "../utils";
+import {saveGoals} from "../services";
 import SingleChoicePills from "../../SingleChoicePills/SingleChoicePills.vue";
 
 const props = defineProps({
@@ -22,6 +22,9 @@ const props = defineProps({
   },
   configOptions: {
     type: Object,
+  },
+  stepName: {
+    type: String
   }
 });
 
@@ -52,7 +55,7 @@ const isNextButtonDisabled = () => {
 };
 
 const handleRedirect = () => {
-  emit("onChangeInfo", { ...props.info, goals: { ...props.info.goals, [props.brand]: currentSelection.value } });
+  emit("onChangeInfo", {...props.info, goals: {...props.info.goals, [props.brand]: currentSelection.value}});
 
   saveGoals({
     goals: currentSelection.value,
@@ -89,11 +92,13 @@ const headerProps = {
     </template>
     <template v-slot:footer>
       <Button :brand="brand" @onButtonClick="handleRedirect" :isDisabled="isNextButtonDisabled()"
-        classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Complete Your Account</Button>
-      <ProgressBar :brand="brand" :currentStep="6" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
+              classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Complete Your Account
+      </Button>
+      <ProgressBar :brand="brand" :currentStep="6" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)"/>
       <Button :brand="brand" @onButtonClick="handleRedirect" :isDisabled="isNextButtonDisabled()"
-        classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Complete Your Account</Button>
-      <SkipStep :brand="brand" classOverride="tw-mt-[20px] md:tw-mt-0" />
+              classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Complete Your Account
+      </Button>
+      <SkipStep :brand="brand" :step="stepName" classOverride="tw-mt-[20px] md:tw-mt-0"/>
     </template>
   </StepWrapper>
 </template>

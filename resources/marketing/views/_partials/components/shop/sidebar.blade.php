@@ -10,7 +10,7 @@
     <div class="lg:h-0">
     <div id="order" class="anchor"></div>
     <div class="side-slide overflow-hidden rounded border border-solid" style="border-color: #CCD3D3;">
-{{--        @include('_partials.layout.holiday.shop-sidebar-banner')--}}
+        @include('_partials.layout.holiday.shop-sidebar-banner')
 
         <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">
             @if(!empty($instructor))
@@ -21,14 +21,17 @@
             @endif
 
             @if(isset($fullPrice) && isset($price) && ($fullPrice - $price) > 0)
-                <p class="text-center mx-auto mb-1 font-bold text-sm md:text-base" style="color:#10D05F">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</p>
-                <h1 class="text-center text-3xl uppercase md:text-4xl" style="color:#F71B26;"><s class="opacity-40 text-2xl">${{ floatVal($fullPrice) }}</s>
-                    @if(number_format($price, 2) == intval($price))
-                        <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  floatVal($price)  }}</span></strong>
-                    @else
-                        <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  floatVal(number_format($price, 2))  }}</span></strong>
-                    @endif
+                <h1 class="text-center text-3xl uppercase md:text-4xl">
+                    <s class="opacity-40 text-2xl">${{ floatVal($fullPrice) }}</s>
+                    <strong class="font-black text-{{ $theme }}">
+                        @if(number_format($price, 2) == intval($price))
+                            $<span class="chosen-variant-price-float">{{  floatVal($price)  }}</span>
+                        @else
+                            $<span class="chosen-variant-price-float">{{  number_format($price, 2)  }}</span>
+                        @endif
+                    </strong>
                 </h1>
+                <p class="text-sm font-black text-white rounded-lg px-2 leading-none py-1 inline-block bg-promo">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</p>
             @elseif(isset($price))
                 <h1 class="text-center text-3xl uppercase md:text-4xl"><strong class="font-black text-{{ $theme }}">Only $<span class="chosen-variant-price-float">{{ floatVal($price) }}</span></strong></h1>
             @endif

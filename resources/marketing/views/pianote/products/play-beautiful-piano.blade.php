@@ -182,7 +182,7 @@
         "cartVersion" => true
     ])
 
-    @include('pianote._partials._promo-banner-no-tw', [
+    @include('pianote._partials.promo-banner', [
         "name" => "Playing Beautiful Piano",
         "fullPrice" => floatval($productPrices['play-beautiful-piano']->price),
         "price" => floatval($productPrices['play-beautiful-piano']->discounted_price),
@@ -195,7 +195,7 @@
             <div class="transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-full absolute z-30 animated fadeIn">
                 <img class="h-20 md:h-40 lg:h-52 mx-auto" src="https://www.musora.com/musora-cdn/image/width=1600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/logo-2.png" alt="Playing beautiful piano logo">
                 <h4 class="leading-normal mb-5 md:mb-8">Start playing beautiful music from<br class="inline md:hidden"> your very 1st lesson - for just <strong>${{ floatval($productPrices['play-beautiful-piano']->discounted_price) }}</strong>.</h4>
-                <a class="join vue-add-to-cart" data-product-json='{"play-beautiful-piano": 1}' href="/ecommerce/add-to-cart?products[play-beautiful-piano]=1&redirect=/order">Play Beautifully &raquo;</a>
+                <a class="join vue-add-to-cart" data-product-json='{"play-beautiful-piano": 1}' href="/ecommerce/add-to-cart?products[play-beautiful-piano]=1">Play Beautifully &raquo;</a>
             </div>
             <div class="bottom absolute bottom-0 left-0 right-0 z-30 pb-5 md:pb-8"><img class="h-14 md:h-16 lg:h-20 animated infinite pulse" src="https://www.musora.com/musora-cdn/image/width=70,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/treble-clef.png" alt="Treble clef"></div>
         </div>
@@ -424,7 +424,7 @@
             <div class="transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-full absolute z-30">
                 <img class="h-20 md:h-40 lg:h-52 mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/logo-2.png" alt="Playing beautiful piano logo">
                 <h4 class="mt-1 md:mt-4 leading-normal">Start playing beautiful music from<br class="inline md:hidden"> your very 1st lesson - for just <strong>${{ floatval($productPrices['play-beautiful-piano']->discounted_price) }}</strong>.</h4>
-                <a class="join my-5 md:my-7 vue-add-to-cart" data-product-json='{"play-beautiful-piano": 1}' href="/ecommerce/add-to-cart?products[play-beautiful-piano]=1&redirect=/order">Play Beautifully For Just ${{ floatval($productPrices['play-beautiful-piano']->discounted_price) }} &raquo;</a>
+                <a class="join my-5 md:my-7 vue-add-to-cart" data-product-json='{"play-beautiful-piano": 1}' href="/ecommerce/add-to-cart?products[play-beautiful-piano]=1">Play Beautifully For Just ${{ floatval($productPrices['play-beautiful-piano']->discounted_price) }} &raquo;</a>
                 <a class="text-pianote" href="/"><h6><u>OR FREE WITH A PIANOTE MEMBERSHIP</u></h6></a>
                 <h6 class="mt-2"><strong>** 90-DAY GUARANTEE **</strong></h6>
             </div>
@@ -456,11 +456,7 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-
-    {{-- Platform --}}
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
-
-
 @stop

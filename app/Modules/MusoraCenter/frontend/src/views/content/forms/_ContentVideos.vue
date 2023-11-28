@@ -445,7 +445,7 @@ export default {
 
         $_qna_video_id: {
             get() {
-                return this.thisPost.qna_video.vimeo_video_id.value;
+                return this.thisPost.qna_video ? this.thisPost.qna_video.vimeo_video_id.value : null;
             },
             set(val) {
                 console.log(val);
@@ -670,8 +670,8 @@ export default {
         },
     },
     created() {
-        this.getCaptions();
-        this.getRevCaptionsStatus();
+        //this.getCaptions();
+        //this.getRevCaptionsStatus();
     },
     methods: {
 

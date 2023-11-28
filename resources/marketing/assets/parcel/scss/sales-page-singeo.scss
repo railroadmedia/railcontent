@@ -90,14 +90,6 @@ img {
   display: inline-block;
 }
 
-.text-promo {
-  color: $promoColor;
-}
-
-.bg-promo {
-  background-color: $promoColor;
-}
-
 .bg-songs {
   background-color: $songsPink;
 }
@@ -191,12 +183,10 @@ img {
 
   &.promo {
     background: $promoColor;
-      color: #000;
 
     &:hover,
     &:focus {
       background: lighten($promoColor, 10%);
-        color: #000;
     }
   }
 

@@ -5,7 +5,6 @@
                 :class="`
                     tw-px-4 lg:tw-px-0 tw-no-scrollbar
                     ${isMiniView ? 'tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-3 xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-y-[25px] tw-gap-x-[8px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : 'tw-flex tw-overflow-x-scroll lg:tw-overflow-x-clip tw-flex-nowrap'}
-                    ${extraPaddingBottom ? ' tw-pb-5' : ''}
                 `
                 "
                 >
@@ -106,10 +105,6 @@ const props = defineProps({
     noResultsMessage: {
         type: String,
         default: 'No lessons found',
-    },
-    extraPaddingBottom: {
-        type: Boolean,
-        default: () => false,
     },
 },
 );

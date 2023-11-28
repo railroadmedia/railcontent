@@ -1,6 +1,6 @@
 @extends('_partials.layout.features-layout')
 
-@section('page-styles')
+@section('styles')
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}" rel="stylesheet">

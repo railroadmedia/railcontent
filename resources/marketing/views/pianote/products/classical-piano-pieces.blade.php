@@ -77,6 +77,12 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
+    @include('pianote._partials.promo-banner', [
+        "name" => "Classical Piano Pieces",
+        "fullPrice" => floatval($productPrices['classical-piano-pieces']->price),
+        "price" => floatval($productPrices['classical-piano-pieces']->discounted_price),
+        "noBreadcrumb" => true
+    ])
     <header class="text-white px-5 sm:px-6 pt-72 pb-12 sm:py-20 lg:py-36 bg-top bg-no-repeat" style="background-color:#0e1623;">
         <div class="container max-w-3xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
@@ -92,7 +98,7 @@
                             <strong>ONLY ${{ floatval($productPrices['classical-piano-pieces']->discounted_price) }}</strong>
                         @endif
                         </h4>
-                    <a href="/ecommerce/add-to-cart?products[classical-piano-pieces]=1&redirect=/order" class="join medium w-full">GET YOUR COPY &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[classical-piano-pieces]=1" class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
         </div>
@@ -219,7 +225,7 @@
                             <strong>ONLY ${{ floatval($productPrices['classical-piano-pieces']->discounted_price) }}</strong>
                         @endif
                     </h4>
-                    <a href="/ecommerce/add-to-cart?products[classical-piano-pieces]=1&redirect=/order" class="join medium w-full">GET YOUR COPY &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[classical-piano-pieces]=1" class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
         </div>
@@ -249,10 +255,9 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
     <script>
         $(document).ready(function () {
