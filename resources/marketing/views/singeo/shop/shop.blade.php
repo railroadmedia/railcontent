@@ -62,11 +62,11 @@
             $bundles = [
                 [
                     'slug' => 'https://www.singeo.com/shop/ultimate-lessons-bundle',
-                    'desc' => 'Singeo Discount<br> + 3 Bonuses',
+                    'desc' => '3 Free Bonuses',
                     'visible' => 1,
                     'full' => true,
                     'price' => 298,
-                    'discountedPrice' => 150,
+                    'discountedPrice' => 240,
                     'buttonColor' => '#8300E9',
                     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
                     'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/singeo/promos/november/bundles/singeo-ultimate-lessons-card.jpg',
@@ -106,7 +106,7 @@
                              "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/singeo/promos/november/bundles/singeo-ultimate-shop-thumb.jpg",
                              "title" => "Ultimate Lessons Bundle",
                              "fullPrice" => 240,
-                             "price" => 150,
+                             "price" => 240,
                              "category" => "lessons",
                              'soldOut' => false,
                         ])

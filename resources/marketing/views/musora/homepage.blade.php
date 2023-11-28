@@ -225,31 +225,6 @@
 @endsection
 
 @section('layout-body')
-    <section class="big-promo-banner bg-black text-white text-center relative z-10 overflow-hidden px-5 sm:px-3 lg:px-5 sm:px-8 py-8 sm:py-8"  style="background-color:#141535;">
-        <div class="container mx-auto relative z-30  max-w-4xl ">
-            <img class="h-6 sm:h-8 lg:h-10 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/promos/november/BF-musora-logo.png">
-            <h6 class="leading-tight mt-3">
-                Click any of the logos to shop<br class="sm:hidden">
-                 our
-                @if(Carbon\Carbon::create(2023, 11, 28, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                    Cyber Monday
-                @else
-                    Holiday
-                @endif
-                deals.</h6>
-            <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs sm:max-w-none my-3">
-                <a class="m-1 join pianote smaller" href="https://www.pianote.com/shop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-piano-keyboard"></i> Pianote</a>
-                <a class="m-1 join guitareo smaller" href="https://www.guitareo.com/shop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-guitar"></i> Guitareo</a>
-                <a class="m-1 join drumeo smaller" href="https://www.drumeo.com/drumshop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-drum"></i> Drumeo</a>
-                <a class="m-1 join singeo smaller" href="https://www.singeo.com/shop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-microphone-stand"></i> Singeo</a>
-            </div>
-
-        </div>
-        <div class="inset-0 inline-block lg:hidden absolute bg-center bg-cover z-0" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/promos/november/header-bg-m2.jpg');"></div>
-        <div class="inset-0 hidden lg:inline-block absolute bg-center bg-cover z-0" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/header-bg2.jpg');"></div>
-
-    </section>
-
     <section class="text-center px-5 sm:px-6 py-32 sm:py-52 lg:py-56 relative overflow-hidden" style="background:linear-gradient(to bottom, #fff 40%, #F1EFED);">
         <div class="container max-w-xs sm:max-w-6xl mx-auto relative z-20">
             <h1 class="relative w-auto inline-block text-3xl sm:text-4xl lg:text-5xl">

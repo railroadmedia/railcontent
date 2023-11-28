@@ -165,7 +165,7 @@
                     'visible' => 1,
                     'full' => true,
                     'price' => 1075,
-                    'discountedPrice' => 150,
+                    'discountedPrice' => 240,
                     'buttonColor' => '#00C9AC',
                     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
                     'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/guitareo/promos/november/bundles/guitareo-ultimate-lessons-card.jpg',

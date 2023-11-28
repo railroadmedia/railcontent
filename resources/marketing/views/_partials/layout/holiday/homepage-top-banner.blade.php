@@ -20,7 +20,7 @@ style="
                     <iframe class="absolute w-full h-full reset-on-close bg-black" src="//player.vimeo.com/video/{{ $vimeo }}" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
             </div>
-            <h3 class="leading-tight mb-3"><s class="opacity-60">$240</s> <strong>$150</strong> <span class="text-promo">SAVE {{ round(100 - (100 * (150 / 240))) }}%</span> </h3>
+            <h3 class="leading-tight mb-3"><strong>$240</strong></h3>
             <a class="join promo w-full max-w-xl mx-auto" href="{{ $orderUrl }}">GET STARTED &raquo;</a>
             <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
