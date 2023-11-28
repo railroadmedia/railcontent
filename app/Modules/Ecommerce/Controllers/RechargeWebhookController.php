@@ -45,7 +45,8 @@ class RechargeWebhookController extends Controller
             $this->customerIoService->syncCancellationDataFromRecharge(
                 $user,
                 $product,
-                Carbon::parse($subscription['cancelled_at']),
+                // Recharge sends date on EST, so we need to change to PST
+                Carbon::parse($subscription['cancelled_at'], 'EST')->setTimezone('PST'),
                 $subscription['cancellation_reason']
             );
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
