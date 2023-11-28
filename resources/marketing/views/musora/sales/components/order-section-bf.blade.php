@@ -36,10 +36,10 @@
             <p class="leading-tight"><em>Renews at $240/year.<br class="sm:hidden"> Cancel anytime.</em></p>
             <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>
                     + get {{ $bonusCount }} free
-                    @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                        Black Friday
-                    @else
+                    @if(Carbon\Carbon::create(2023, 11, 28, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                         Cyber Monday
+                    @else
+                        Holiday
                     @endif
                     bonuses worth ${{ $bonusSum }}</strong></h3>
         </div>

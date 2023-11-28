@@ -231,10 +231,10 @@
             <h6 class="leading-tight mt-3">
                 Click any of the logos to shop<br class="sm:hidden">
                  our
-                @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                    Black Friday
-                @else
+                @if(Carbon\Carbon::create(2023, 11, 28, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                     Cyber Monday
+                @else
+                    Holiday
                 @endif
                 deals.</h6>
             <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs sm:max-w-none my-3">

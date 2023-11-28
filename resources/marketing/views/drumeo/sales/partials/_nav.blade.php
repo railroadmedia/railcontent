@@ -174,8 +174,7 @@
             ])
         @else
             @include('drumeo.sales.partials._nav-link', [
-                "linkName" => "Holiday
-                 Deals",
+                "linkName" => "Holiday Deals",
                 "linkIcon" => "fas fa-tag text-promo",
                 "linkUrl" => "/drumshop",
             ])
