@@ -9,11 +9,7 @@
     <meta property="og:title" content="Pianote Shop">
     <meta name="description" content="Get Lessons, T-Shirts, & Much More!">
     <meta property="og:description" content="Get Lessons, T-Shirts, & Much More!">
-    @if(Carbon\Carbon::create(2023, 11, 28, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/november/cm-pianote-shop-share-image.jpg">
-    @else
         <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/november/xmas-pianote-shop-share-image.jpg">
-    @endif
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 @endsection
 
@@ -30,7 +26,9 @@
 @section('body')
     @include('_partials.components.shop.promo-top-banner',[
         'text' => '<span class="text-promo">Save up to 88%</span> on piano lessons,<br class="sm:hidden"> tools, & merch.',
+        'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg',
     ])
+
 
     @if(Session::has('addedProducts'))
         <section class="added-to-cart-background clearfix">

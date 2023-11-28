@@ -6,11 +6,7 @@
     <meta name="description" content="Say goodbye to “do it yourself” guitar lessons.">
     <meta property="og:description" content="Say goodbye to “do it yourself” guitar lessons.">
 
-    @if(Carbon\Carbon::create(2023, 11, 28, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/guitareo/promos/november/cm-guitareo-shop-share-image.jpg">
-    @else
         <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/guitareo/promos/november/xmas-guitareo-shop-share-image.jpg">
-    @endif
     <meta property="og:url" content="https://www.guitareo.com/shop/">
 @endsection
 
@@ -95,6 +91,7 @@
 @section('body')
     @include('_partials.components.shop.promo-top-banner',[
         'text' => '<span class="text-promo">Save up to 80%</span> on guitar lessons,<br class="sm:hidden"> merch, & more.',
+        'bg' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/shop-bg.jpg',
     ])
 
     @if(Session::has('addedProducts'))

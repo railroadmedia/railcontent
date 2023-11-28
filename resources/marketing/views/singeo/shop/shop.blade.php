@@ -6,11 +6,7 @@
     <meta name="description" content="Singeo.com: Your start-to-finish guide to confident singing">
     <meta property="og:description" content="Singeo.com: Your start-to-finish guide to confident singing">
 
-    @if(Carbon\Carbon::create(2023, 11, 28, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/promos/november/cm-singeo-shop-share-image.jpg">
-    @else
         <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/promos/november/xmas-singeo-shop-share-image.jpg">
-    @endif
     <meta property="og:url" content="https://www.singeo.com/shop/">
 @endsection
 
@@ -27,6 +23,7 @@
 @section('body')
     @include('_partials.components.shop.promo-top-banner',[
         'text' => '<span class="text-promo">Save up to 67%</span> on singing lessons,<br class="sm:hidden"> merch, & more.',
+        'bg' => 'https://d21xeg6s76swyd.cloudfront.net/products/shop-header.jpg',
     ])
 
     @if(Session::has('addedProducts'))
