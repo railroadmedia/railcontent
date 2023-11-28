@@ -280,7 +280,7 @@
     <div id="order" class="anchor"></div>
     @hasSection('final')
         @yield('final')
-    @if(!empty($trialVersion))
+    @elseif(!empty($trialVersion))
        @include('musora.sales.components.card-selection-section', [
             "noSelector" => true,
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-plus-logo-light.svg",
