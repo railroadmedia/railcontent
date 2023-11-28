@@ -110,8 +110,8 @@ const props = defineProps({
         default: () => []
     },
     workoutData: {
-        type: Array,
-        default: () => []
+        type: Object,
+        default: () => ({}),
     },
     collectionType: {
         type: String,
