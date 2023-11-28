@@ -69,7 +69,7 @@
           tw-shrink-0
         "
       >
-        <h4 v-on:click="goToCoachProfile(instructor.url)" class="tw-cursor-pointer tw-z-[500]">
+        <h4 v-on:click="goToCoachProfile(instructor.url)" class="tw-cursor-pointer">
           <span class="tw-text-xs sm:tw-text-base tw-font-normal tw-mr-1">
             {{ instructor.name.split(" ")[0] }}
           </span>
@@ -88,7 +88,7 @@
             v-if="!instructor.current_user_is_subscribed"
             v-on:click="followCoach(instructor.id)"
             class="
-              tw-text-left tw-px-0 tw-py-0 tw-text-xs tw-z-[500]
+              tw-text-left tw-px-0 tw-py-0 tw-text-xs
               sm:tw-text-base
               tw-transition-none
               tw-text-[#00101D] dark:tw-text-white
@@ -109,7 +109,7 @@
             v-if="instructor.current_user_is_subscribed"
             v-on:click="unfollowCoach(instructor.id)"
             class="
-              tw-text-left tw-px-0 tw-py-0 tw-text-xs tw-z-[500]
+              tw-text-left tw-px-0 tw-py-0 tw-text-xs
               sm:tw-text-base
               tw-transition-none
               tw-border-none
