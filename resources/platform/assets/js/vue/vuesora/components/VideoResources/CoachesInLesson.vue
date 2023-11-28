@@ -109,7 +109,7 @@
             v-if="instructor.current_user_is_subscribed"
             v-on:click="unfollowCoach(instructor.id)"
             class="
-              tw-text-left tw-px-0 tw-py-0 tw-text-xs tw-z-[500]
+              tw-text-left tw-px-0 tw-py-0 tw-text-xs tw-z-10
               sm:tw-text-base
               tw-transition-none
               tw-border-none
