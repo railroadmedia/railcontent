@@ -129,14 +129,9 @@
 @endsection
 
 @section('global-body')
-    @if(!empty($bfVersion))
-        @include("pianote.sales.partials._nav", [
-            "cartVersion" => true
-        ])
-    @elseif(!empty($promoVersion))
+    @if(!empty($promoVersion))
         @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
-            "fullSubscriptionVersion" => true,
             "scrollToJoin" => true,
         ])
     @elseif(!empty($month))
@@ -146,7 +141,6 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-your-trial-month',
         ])
-
     @else
         @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
@@ -156,12 +150,14 @@
         ])
     @endif
 
-    @include('_partials.layout.holiday.homepage-top-banner',[
-        'text' => 'Get 11 free<br class="sm:hidden"> bonuses worth $963',
-        'text2' => 'Get 11 free bonuses worth $963',
-        'vimeo' => '885340227',
-        'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[taktell-piccolo-metronome]=1&products[pianote-practice-planner]=1&products[music-theory-posters]=1&products[christmas-song-book-digital]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702',
-    ])
+    @if(empty($trialVersion))
+        @include('_partials.layout.holiday.homepage-top-banner',[
+            'text' => 'Get 11 free<br class="sm:hidden"> bonuses worth $963',
+            'text2' => 'Get 11 free bonuses worth $963',
+            'vimeo' => '885340227',
+            'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[taktell-piccolo-metronome]=1&products[pianote-practice-planner]=1&products[music-theory-posters]=1&products[christmas-song-book-digital]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702',
+        ])
+    @endif
 
     @php
         $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/bubbles/summer-swee-singh.png';
@@ -284,7 +280,7 @@
     <div id="order" class="anchor"></div>
     @hasSection('final')
         @yield('final')
-    @elseif(!empty($trialVersion))
+    @if(!empty($trialVersion))
        @include('musora.sales.components.card-selection-section', [
             "noSelector" => true,
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-plus-logo-light.svg",

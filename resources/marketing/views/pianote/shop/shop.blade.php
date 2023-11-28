@@ -194,25 +194,11 @@
                          "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-shop-thumb2.jpg",
                          "title" => "30 Day Challenge Bundle",
                          "fullPrice" => 706,
-                         "price" => 97,
+                         "price" => 127,
                          "category" => "lessons",
                          'soldOut' => false,
                     ])
                 </div>
-                    @if(Carbon\Carbon::create(2023, 11, 28, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                    <div x-cloak x-show="filter === 'lessons'">
-                        @include('musora.shop._shop-card-alt', [
-                             "itemURL" => "/lifetime",
-                             "sku" => null,
-                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lt-shop-thumb2.jpg",
-                             "title" => "Lifetime Bundle",
-                             "fullPrice" => 1200.00,
-                             "price" => 1200.00,
-                             "category" => "lessons",
-                             'soldOut' => false,
-                        ])
-                    </div>
-                    @endif
                 @foreach($lessons as $key => $lesson)
                     @include('musora.shop._shop-card-alt', [
                             "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,

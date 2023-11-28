@@ -127,16 +127,10 @@
 @endsection
 
 @section('global-body')
-    @if(!empty($bfVersion))
-        @include("drumeo.sales.partials._nav", [
-            "cartVersion" => true
-        ])
-    @elseif(!empty($promoVersion))
+    @if(!empty($promoVersion))
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
-            "fullSubscriptionVersion" => true,
             "scrollToJoin" => true,
-            "logoUrl" => Request::path(),
         ])
     @elseif(!empty($month))
         @include("drumeo.sales.partials._nav", [
@@ -155,12 +149,14 @@
         ])
     @endif
 
-    @include('_partials.layout.holiday.homepage-top-banner',[
-        'text' => 'Get 10 free bonuses worth $1272.94',
-        'text2' => 'Get 10 free bonuses worth $1272.94.',
-        'vimeo' => '885338592',
-        'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',
-    ])
+    @if(empty($trialVersion))
+        @include('_partials.layout.holiday.homepage-top-banner',[
+            'text' => 'Get 10 free bonuses worth $1272.94',
+            'text2' => 'Get 10 free bonuses worth $1272.94.',
+            'vimeo' => '885338592',
+            'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',
+        ])
+    @endif
 
     @php
         $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/bubbles/dorothea-taylor.png';
@@ -268,9 +264,7 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @hasSection('final')
-        @yield('final')
-    @elseif(!empty($trialVersion))
+    @if(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
             "noSelector" => true,
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drumeoplus_logo.svg",

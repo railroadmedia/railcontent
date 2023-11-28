@@ -120,10 +120,10 @@
                         'visible' => 1,
                         'price' => 331.95,
                         'discountedPrice' => 240,
-                        'buttonColor' => '#01AB5A',
+                        'buttonColor' => '#f2192e',
                         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/the-pefect-gift-bundle-white.png',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/perfect-gift-card.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/perfect-gift-card.jpg',
                     ],
                 ];
         @endphp
@@ -227,47 +227,18 @@
                          'soldOut' => false,
                     ])
                 </div>
-                @if(Carbon\Carbon::create(2023, 11, 28, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
-                    <div x-cloak x-show="filter === 'lessons'">
-                        @include('musora.shop._shop-card-alt', [
-                             "itemURL" => "/drumshop/perfect-gift-bundle",
-                             "sku" => null,
-                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/drumeo-pg-shop-thumb2.jpg",
-                             "title" => "The Perfect Gift Bundle",
-                             "fullPrice" => 331.95,
-                             "price" => 240,
-                             "category" => "lessons",
-                             'soldOut' => false,
-                        ])
-                    </div>
-                @endif
-                @if(Carbon\Carbon::create(2023, 11, 28, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                    <div x-cloak x-show="filter === 'lessons'">
-                        @include('musora.shop._shop-card-alt', [
-                             "itemURL" => "/drumshop/30-day-challenge-bundle",
-                             "sku" => null,
-                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-shop-thumb2.jpg",
-                             "title" => "30 Day Challenge Bundle",
-                             "fullPrice" => 497,
-                             "price" => 127,
-                             "category" => "lessons",
-                             'soldOut' => false,
-                        ])
-                    </div>
-                    <div x-cloak x-show="filter === 'lessons'">
-                        @include('musora.shop._shop-card-alt', [
-                             "itemURL" => "/lifetime",
-                             "sku" => null,
-                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lt-shop-thumb2.jpg",
-                             "title" => "Lifetime Bundle",
-                             "fullPrice" => 1200.00,
-                             "price" => 1200.00,
-                             "category" => "lessons",
-                             'soldOut' => false,
-                        ])
-                    </div>
-                @endif
-
+                <div x-cloak x-show="filter === 'lessons'">
+                    @include('musora.shop._shop-card-alt', [
+                         "itemURL" => "/drumshop/perfect-gift-bundle",
+                         "sku" => null,
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/drumeo-pg-shop-thumb2.jpg",
+                         "title" => "The Perfect Gift Bundle",
+                         "fullPrice" => 331.95,
+                         "price" => 240,
+                         "category" => "lessons",
+                         'soldOut' => false,
+                    ])
+                </div>
                 @foreach($lessons as $key => $lesson)
                     @include('musora.shop._shop-card-alt', [
                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
