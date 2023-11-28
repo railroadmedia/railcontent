@@ -202,7 +202,7 @@ const handleCloseSoundslice = () => {
                     <div class="tw-flex flex-column tw-w-full song-details">
                         <div>
                             <h1 class="text-black font-bold item-title heading dark:tw-text-white">{{ songTitle }}</h1>
-                            <p class="text-grey-3 tw-text-lg dark:tw-text-[#9EC0DC] tw-text-[#3F3F46] mt-1 mb-3">
+                            <p class="text-grey-3 tw-text-lg dark:tw-text-[#9EC0DC] tw-text-[#3F3F46] mt-1 tw-mb-3">
                                 {{ songArtist }} -
                                 {{ songAlbum }} -
                                 {{ songMeta }}
