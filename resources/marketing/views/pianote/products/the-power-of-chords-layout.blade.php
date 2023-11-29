@@ -639,8 +639,8 @@
             </h6>
             @if($productPrice !== 0)
                 <p class="text-center text-gray-400">
-                    <a class="text-pianote" href="/"> (OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
-                    ** 90-DAY GUARANTEE **
+{{--                    <a class="text-pianote" href="/"> (OR FREE WITH A PIANOTE MEMBERSHIP)</a>--}}
+                    <br>** 90-DAY GUARANTEE **
                 </p>
             @endif
         </div>

@@ -89,18 +89,10 @@
 @endsection
 
 @section('layout-scripts')
-    @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-        @include('_partials.components.countdown',[
-            'countdownDate' => '2023-11-27 00:00:00',
-            'promoVersion' => true
-        ])
-    @else
-        @include('_partials.components.countdown',[
-            'countdownDate' => '2023-11-28 00:00:00',
-            'promoVersion' => true
-        ])
-
-    @endif
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-11-28 00:00:00',
+        'promoVersion' => true
+    ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

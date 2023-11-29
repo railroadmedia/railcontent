@@ -46,7 +46,10 @@ class ShopController extends BaseController
         });
 
         $featured = $products->whereIn('id', [95, 207, 97, 98]);
+
         $xmas = $products->whereIn('id', [224, 226, 229]);
+
+        $thirtyDD = $products->whereIn('id', [217, 216, 215, 214, 213, 212]);
 
         return view('drumeo.drumshop.shop', [
             'lessons' => $lessons,
@@ -57,7 +60,8 @@ class ShopController extends BaseController
             'theme' => 'drumeo',
             'category' => $request->category,
             'featured' => $featured,
-            'xmas' => $xmas
+            'xmas' => $xmas,
+            'thirtyDD' => $thirtyDD
         ]);
     }
 

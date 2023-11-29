@@ -48,8 +48,8 @@
                     <strong><u>ONLY ${{ floatval($productPrices['piano-riffs-and-fills']->discounted_price) }}</u></strong>
                 @endif
 
-                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
-                    <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
+{{--                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a>--}}
+                    <br><strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
         </div>
     </header>
     <div class="modal fade text-center" id="trailer" tabindex="-1" role="dialog" aria-labelledby="trailerLabel">
@@ -258,8 +258,8 @@ Connect every riff, fill and tip you’ve learned and see how to apply it to pre
                 @else
                     <strong><u>ONLY ${{ floatval($productPrices['piano-riffs-and-fills']->discounted_price) }}</u></strong>
                 @endif
-                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
-                    <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
+{{--                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a>--}}
+                    <br><strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
 
             <div class="credit-cards col-xs-12">
                 <i class="fab fa-cc-visa"></i>

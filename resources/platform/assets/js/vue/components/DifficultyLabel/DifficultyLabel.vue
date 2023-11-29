@@ -1,6 +1,9 @@
 <template>
-    <div :class="difficultyClass">
-        {{ formattedDifficulty }}
+    <div class="tw-flex tw-items-center">
+        <div class="tw-w-1.5 tw-h-1.5 tw-rounded-full tw-inline-block tw-mr-1.5" :class="difficultyClass" />
+        <span>
+            {{ formattedDifficulty }}
+        </span>
     </div>
 </template>
 
@@ -46,17 +49,17 @@ const difficultyText = computed(() => {
 const difficultyClass = computed(() => {
     switch (difficultyText.value) {
         case 'novice':
-            return 'tw-text-[#16A34A]';
+            return 'tw-bg-[#16A34A]';
         case 'beginner':
-            return 'tw-text-[#0B76DB]';
+            return 'tw-bg-[#0B76DB]';
         case 'intermediate':
-            return 'tw-text-[#EAB308]';
+            return 'tw-bg-[#EAB308]';
         case 'advanced':
-            return 'tw-text-[#F06314]';
+            return 'tw-bg-[#F06314]';
         case 'expert':
-            return 'tw-text-[#B91C1C]';
+            return 'tw-bg-[#B91C1C]';
         default:
-            return 'tw-text-[#E5E7EB]';
+            return 'tw-bg-[#3F3F46] dark:tw-bg-[#E7EFF6]';
     }
 });
 

@@ -340,23 +340,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script>
-        // $(document).ready(function () {
-        //     var stickyBar = $('.promo-banner');
-        //     $(window).scroll(function () {
-        //         var stickTrigger = $('.sticky-trigger').offset().top;
-        //         var unstickTrigger = $('.unstick-trigger').offset().top;
-        //         if ($(this).scrollTop() > (unstickTrigger - 115)) {
-        //             stickyBar.removeClass('fixed mt-0');
-        //         }
-        //         if ($(this).scrollTop() < stickTrigger - 115) {
-        //             stickyBar.removeClass('fixed mt-0');
-        //         }
-        //         if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
-        //             stickyBar.addClass('fixed mt-0');
-        //         }
-        //     });
-        // });
-    </script>
     @yield('scripts')
 @stop

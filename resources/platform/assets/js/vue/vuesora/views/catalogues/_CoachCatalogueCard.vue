@@ -62,9 +62,9 @@
                    :class="displayInline ? 'align-v-center' : 'tw-py-2'"
                 >
                     <!-- Coach Title -->
-                    <h5 class="tw-text-xs tw-font-normal tw-leading-none tw-text-[#3F3F46] tw-mb-1 tw-uppercase dark:tw-text-[#9EC0DC]"
+                    <!-- <h5 class="tw-text-xs tw-font-normal tw-leading-none tw-text-[#3F3F46] tw-mb-1 tw-uppercase dark:tw-text-[#9EC0DC]"
                         v-if="!isGuitareoChordAndScale" v-html="mappedData.color_title">
-                    </h5>
+                    </h5> -->
                     <!-- Video Title -->
                     <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
                         :class="{'text-center': isGuitareoChordAndScale}"
@@ -78,14 +78,21 @@
                         {{ mappedData.description.replace(/<[^>]+>/g, '') }}
                     </p>
                     <!-- Content -->
-                    <h6 class="tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]"
-                        :class="{'text-center': isGuitareoChordAndScale}"
-                    >
-                        <span v-html="mappedData.content_type"></span>
-                        <span v-if="mappedData.grey_title && mappedData.grey_title !== ''">
-                            - {{ mappedData.grey_title }}
-                        </span>
-                        &nbsp;
+                    <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]"
+                        :class="{ 'tw-text-center': isGuitareoChordAndScale }">
+                        <div v-if="contentCreator && contentCreator !== ''" class="tw-mb-0.5">
+                            <span> {{ contentCreator }} </span>
+                            <span class="tw-mx-1">|</span>
+                        </div>
+                        <div class="tw-mb-0.5"> 
+                            {{ contentTypeString }} 
+                            <span class="tw-mx-1">|</span> 
+                        </div>
+                        <!-- Difficulty Label -->
+                        <div v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
+                            <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
+                                textCase="capitalize" />
+                        </div>
                     </h6>
                 </a>
                 <!-- Add to Playlist -->
@@ -110,10 +117,15 @@
 <script>
 import Mixin from './_mixin';
 import ThemeClasses from '../../mixins/ThemeClasses';
+import DifficultyLabel from '../../../../vue/components/DifficultyLabel/DifficultyLabel'
+import { snakeToCapitalized } from '../../../../vue/utils'
 
 export default {
     name: 'CoachCatalogueCard',
     mixins: [Mixin, ThemeClasses],
+    components: {
+        DifficultyLabel
+    },
     props: {
         sixWide: {
             type: Boolean,
@@ -133,8 +145,28 @@ export default {
         },
     },
     computed: {
+        contentTypeString () {
+            return snakeToCapitalized(this.contentModel.post.type);
+        },
+        isSongContent () {
+            return this.contentModel.post.type === 'song';
+        },
+        contentCreator () {
+            if (this.isSongContent) {
+                return this.contentModel.post.fields.find(field => field.key === 'artist').value;
+            }
+            return this.contentModel.post.fields.find(field => field.key === 'instructor').value.name;
+        },
         mappedData: {
             get() {
+                console.log('coach catalogue card')
+                const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value
+                if (Number.isFinite(Number(difficultyValue))) {
+                    this.contentModel.card.difficulty = difficultyValue;
+                }
+                else {
+                    this.contentModel.card.difficulty = 'all';
+                }
                 return this.contentModel.card;
             },
             set(value) {

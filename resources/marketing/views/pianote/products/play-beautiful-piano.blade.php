@@ -425,7 +425,7 @@
                 <img class="h-20 md:h-40 lg:h-52 mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/logo-2.png" alt="Playing beautiful piano logo">
                 <h4 class="mt-1 md:mt-4 leading-normal">Start playing beautiful music from<br class="inline md:hidden"> your very 1st lesson - for just <strong>${{ floatval($productPrices['play-beautiful-piano']->discounted_price) }}</strong>.</h4>
                 <a class="join my-5 md:my-7 vue-add-to-cart" data-product-json='{"play-beautiful-piano": 1}' href="/ecommerce/add-to-cart?products[play-beautiful-piano]=1">Play Beautifully For Just ${{ floatval($productPrices['play-beautiful-piano']->discounted_price) }} &raquo;</a>
-                <a class="text-pianote" href="/"><h6><u>OR FREE WITH A PIANOTE MEMBERSHIP</u></h6></a>
+{{--                <a class="text-pianote" href="/"><h6><u>OR FREE WITH A PIANOTE MEMBERSHIP</u></h6></a>--}}
                 <h6 class="mt-2"><strong>** 90-DAY GUARANTEE **</strong></h6>
             </div>
         </div>
