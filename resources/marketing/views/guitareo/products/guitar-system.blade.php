@@ -1,4 +1,4 @@
-@extends('guitareo._partials.global-vue-layout')
+@extends('guitareo._partials.global-layout')
 
 @section('meta')
     @parent
@@ -12,9 +12,9 @@
 
 @section('styles')
     @parent
-    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
-    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/gs.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}" rel="stylesheet">
     <style>
@@ -69,7 +69,7 @@
                     {{--<h2>THE <strong>FASTER WAY</strong><br class="hide-for-medium"> TO LEARN GUITAR</h2>--}}
                 {{--</div>--}}
                 <p><strong>Transform your guitar playing with the <br class="show-for-medium">ULTIMATE Encyclopedia of Guitar Lessons</strong></p>
-                <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GUITAR-SYSTEM' => 1],'redirect' => '/order']) }}" class="join" data-product-json='{"GUITAR-SYSTEM": 1}'>Get Started &raquo;</a>
+                <a href="/ecommerce/add-to-cart?products[GUITAR-SYSTEM]=1" class="join" data-product-json='{"GUITAR-SYSTEM": 1}'>Get Started &raquo;</a>
                 <p class="price-info">
                     @if(floatval($productPrices['GUITAR-SYSTEM']->price) > floatval($productPrices['GUITAR-SYSTEM']->discounted_price))
                         <s>NORMALLY ${{ floatval($productPrices['GUITAR-SYSTEM']->price) }}.</s> &nbsp;<strong><u>ONLY ${{ floatval($productPrices['GUITAR-SYSTEM']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['GUITAR-SYSTEM']->discounted_price) / floatval($productPrices['GUITAR-SYSTEM']->price)))) }}%)
@@ -92,27 +92,6 @@
     </header>
 
 
-    {{--<section class="featured-product">--}}
-        {{--<div class="noise-wrap">--}}
-            {{--<div class="row">--}}
-                {{--<a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GUITAR-SYSTEM' => 1], 'redirect' => '/order']) }}">--}}
-                    {{--<img class="logo animated tada delay-2s" src="https://d122ay5chh2hr5.cloudfront.net/sales/promos/april/guitar-month-logo.png">--}}
-                    {{--<br>--}}
-                    {{--<div class="text">--}}
-                        {{--<p class="text-left" style="max-width:510px">It’s Guitar Month! And we’re celebrating by giving you a {{ round(100 - (100 * (floatval($productPrices['GUITAR-SYSTEM']->discounted_price) / floatval($productPrices['GUITAR-SYSTEM']->price)))) }}% discount on our most popular training pack where you’ll learn ANYTHING you want on guitar.--}}
-                            {{--<br><br>--}}
-                            {{--Yes, anything!--}}
-                            {{--<br><br>--}}
-                            {{--The Guitar System is the ultimate encyclopedia of guitar lessons — and it’s an affordable solution to reach your goals. So hey, why not join us and reach your goals?--}}
-                            {{--<br><br>--}}
-                            {{--<u>Just click here to get started</u> — and join in the celebration by playing and creating the music you love.--}}
-                            {{--<br></p>--}}
-                        {{--<div class="join">Get Started &raquo;</div>--}}
-                    {{--</div>--}}
-                {{--</a>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</section>--}}
 
     <section class="lesson-breakdown">
         <div class="row">
@@ -431,8 +410,7 @@
             {{--<img class="logo edge" src="https://d122ay5chh2hr5.cloudfront.net/sales/promos/cyber-monday/logo.png"><br>--}}
             <img class="logo mx-auto" src="https://d122ay5chh2hr5.cloudfront.net/tripwire/gs-logo.png" alt="GS logo">
             <h2>The Ultimate Encyclopedia <br>Of Guitar Lessons</h2>
-            <a href="{{ url()->route('shopping-cart.add-to-cart',
-                ['products' => ['GUITAR-SYSTEM' => 1], 'redirect' => '/order']) }}" class="join" data-product-json='{"GUITAR-SYSTEM": 1}'>Get Started &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[GUITAR-SYSTEM]=1" class="join" data-product-json='{"GUITAR-SYSTEM": 1}'>Get Started &raquo;</a>
             <p class="breakdown">
                 @if(floatval($productPrices['GUITAR-SYSTEM']->price) > floatval($productPrices['GUITAR-SYSTEM']->discounted_price))
                     <s style="opacity: 0.6;">NORMALLY ${{ floatval($productPrices['GUITAR-SYSTEM']->price) }}.</s> &nbsp;<strong><u>ONLY ${{ floatval($productPrices['GUITAR-SYSTEM']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['GUITAR-SYSTEM']->discounted_price) / floatval($productPrices['GUITAR-SYSTEM']->price)))) }}%)

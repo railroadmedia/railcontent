@@ -1,41 +1,43 @@
-<section class="catalogue-filters clearfix w-full">
+<section class="clearfix w-full text-center mx-auto sm:px-5 py-4 sm:pb-2 sm:pt-8">
     <div class="container mx-auto">
-        <div class="md:flex justify-between md:px-3 lg:px-2">
-            <div class="filter-wrap clearfix">
-                <span
-                    class="filter float-left px-2 md:px-3 w-1/2 md:w-auto"
-                    x-bind:class="filter === 'all' && 'active'"
+        <div class="sm:flex items-center justify-between">
+            <div class="text-left whitespace-nowrap overflow-x-scroll sm:overflow-x-auto mb-4 sm:mb-0">
+                <h4
+                    class="px-2 sm:px-4 py-3 sm:py-4 inline-block cursor-pointer text-gray-400"
+                    x-bind:class="filter === 'all' && 'active text-gray-900 font-black border-b-2 border-{{ $brand }}'"
                     x-on:click="filter = 'all'"
                 >
                     All
-                </span>
-                <span
-                    class="filter float-left px-2 md:px-3 w-1/2 md:w-auto"
-                    x-bind:class="filter === 'lessons' && 'active'"
+                </h4>
+                <h4
+                    class="px-2 sm:px-4 py-3 sm:py-4 inline-block cursor-pointer text-gray-400"
+                    x-bind:class="filter === 'lessons' && 'active text-gray-900 font-black border-b-2 border-{{ $brand }}'"
                     x-on:click="filter = 'lessons'"
                 >
                     Lessons
-                </span>
-                <span
-                    class="filter float-left px-2 md:px-3 w-1/2 md:w-auto"
-                    x-bind:class="filter === 'accessories' && 'active'"
+                </h4>
+                <h4
+                    class="px-2 sm:px-4 py-3 sm:py-4 inline-block cursor-pointer text-gray-400"
+                    x-bind:class="filter === 'accessories' && 'active text-gray-900 font-black border-b-2 border-{{ $brand }}'"
                     x-on:click="filter = 'accessories'"
                 >
                     Accessories
-                </span>
-                <span
-                    class="filter float-left px-2 md:px-3 w-1/2 md:w-auto"
-                    x-bind:class="filter === 'clothing' && 'active'"
+                </h4>
+                @if(empty($noClothing))
+                <h4
+                    class="px-2 sm:px-4 py-3 sm:py-4 inline-block cursor-pointer text-gray-400"
+                    x-bind:class="filter === 'clothing' && 'active text-gray-900 font-black border-b-2 border-{{ $brand }}'"
                     x-on:click="filter = 'clothing'"
                 >
                     Clothing
-                </span>
+                </h4>
+                @endif
             </div>
-            <div class="select-wrap relative px-3 md:px-0">
-                <select id="sortBySection" data-filter-type="sort-order" class="catalogue-filter w-full">
-                    <option class="selectable-option" disabled selected>Sort By..</option>
-                    <option class="selectable-option">Price: Low to High</option>
-                    <option class="selectable-option">Price: High to Low</option>
+            <div>
+                <select id="sortBySection" data-filter-type="sort-order" class="w-full text-gray-500 py-2 pl-2 pr-6 rounded-xl bg-white border border-gray-400">
+                    <option class="text-gray-500 selectable-option" disabled selected>Sort By..</option>
+                    <option class="text-gray-500 selectable-option">Price: Low to High</option>
+                    <option class="text-gray-500 selectable-option">Price: High to Low</option>
                 </select>
             </div>
         </div>

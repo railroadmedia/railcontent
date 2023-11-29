@@ -14,11 +14,14 @@
         "php": "^8.1",
         "ext-curl": "*",
         "code-lts/laravel-fcm": "1.7.*",
+        "cweagans/composer-patches": "^1.7",
         "fakerphp/faker": "^1.9.1",
         "fruitcake/laravel-cors": "^2.0.5",
+        "giggsey/libphonenumber-for-php": "^8.13",
         "guzzlehttp/guzzle": "^7.2",
         "iksaku/laravel-mass-update": "^1.0",
         "intervention/image": "^2.7",
+        "jenssegers/agent": "^2.6",
         "laravel/framework": "^9.9",
         "laravel/nova": "4.25.1",
         "laravel/sanctum": "^2.15",
@@ -31,24 +34,29 @@
         "railroad/lead-tracker": "^3.0",
         "railroad/location": "3.0.*",
         "railroad/mailora": "^3.0",
-        "railroad/musora-api": "v3.1.*",
+        "railroad/musora-api": "dev-v3.0-workouts as v3.1.45",
         "railroad/points": "1.0.*",
-        "railroad/railanalytics": "dev-v3.0-fixing-transaction-tracking as v3.0.7",
+        "railroad/railanalytics": "dev-v3.0-fixing-transaction-tracking as 3.0.7",
         "railroad/railchat": "2.0.*",
-        "railroad/railcontent": "2.1.*",
+        "railroad/railcontent": "dev-2.0-workouts as v2.1.36",
         "railroad/railforums": "2.0.*",
         "railroad/railnotifications": "3.0.*",
         "railroad/railtracker": "4.0.*",
         "railroad/referral": "3.0.*",
         "railroad/usora": "3.0.*",
         "railroadmedia/helpscout-api-php": "~3.7",
+        "rudderstack/rudder-php-sdk": "*",
+        "shopify/shopify-api": "^5.1",
+        "signifly/laravel-shopify": "^1.2",
+        "spatie/laravel-data": "^3.9",
         "spatie/laravel-markdown": "^2.2",
         "spatie/laravel-permission": "^5.5",
         "symfony/http-client": "^6.0",
         "symfony/mailgun-mailer": "^6.0",
         "venturecraft/revisionable": "1.*",
         "vimeo/vimeo-api": "^3.0",
-        "whitecube/nova-flexible-content": "^1.0"
+        "whitecube/nova-flexible-content": "^1.0",
+        "ext-openssl": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -74,7 +82,8 @@
             "helpers/helpers.php",
             "app/Modules/UserManagementSystem/helpers/user_management_system_helpers.php",
             "app/Modules/Brand/helpers/brand_helpers.php",
-            "app/Modules/Brand/helpers/prices.php"
+            "app/Modules/Brand/helpers/prices.php",
+            "app/Modules/EventTracking/Avo/Avo.php"
         ]
     },
     "autoload-dev": {
@@ -103,12 +112,22 @@
     "extra": {
         "laravel": {
             "dont-discover": []
+        },
+        "composer-exit-on-patch-failure": true,
+        "patches": {
+            "signifly/laravel-shopify": {
+                "Fix adjustInventoryLevel response": "patches/composer/laravel-shopify/fix-adjustInventoryLevel.patch",
+                "Fix updateCustomerAddress to use proper response key": "patches/composer/laravel-shopify/fix-updateCustomerAddress.patch"
+            }
         }
     },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "cweagans/composer-patches": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

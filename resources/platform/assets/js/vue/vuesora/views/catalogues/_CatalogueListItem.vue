@@ -13,6 +13,7 @@
       dark:hover:tw-bg-[#002039]
     " :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : 'hover-bg-grey-7 hover-text-black']"
     :href="renderLink ? item.url : null">
+
     <!-- LESSON NUMBERS -->
     <div v-if="showNumbers" class="
         tw-flex
@@ -58,7 +59,6 @@
         </div>
       </div>
     </div>
-
     <!-- AVATAR INSTEAD OF THUMBNAIL -->
     <div v-if="showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center avatar-col">
       <div class="thumb-wrap rounded" style="border-radius: 50%">
@@ -129,67 +129,91 @@
         :src="mappedData.sheet_music" loading="lazy" />
     </div>
 
+    <DifficultyLabel v-if="mappedData.difficulty" class="flex tw-flex-col tw-justify-center tw-justify-center basic-col tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
+
     <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
-    <div v-for="(column_data, i) in mappedData.column_data" v-if="!is_search" :key="`${item.id}-mappedData-${i}`" class="
-        tw-hidden
-        xl:tw-flex
-        tw-uppercase
-        tw-items-center
-        tw-justify-center
-        basic-col
-        tw-text-center
-        tw-text-xs
-        font-compressed
-      " :data-test="column_data">
-      {{ column_data }}
-    </div>
+    <template v-if="!is_search">
+      <div v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`" class="
+          tw-hidden
+          xl:tw-flex
+          tw-uppercase
+          tw-items-center
+          tw-justify-center
+          basic-col
+          tw-text-center
+          tw-text-xs
+          font-compressed
+        " :data-test="column_data">
+        {{ column_data }}
+      </div>
+    </template>
 
     <!-- ONLY SHOW TYPE ON SEARCHES -->
-    <div v-if="mappedData.column_data && mappedData.column_data.length && is_search" class="
-        tw-hidden
-        sm:tw-flex
-        tw-flex-col
-        tw-uppercase
-        tw-justify-center
-        basic-col
-        tw-text-center
-        tw-text-xs
-      ">
-      {{ mappedData.column_data[0] }}
-    </div>
-    <div v-if="is_search" class="
-        tw-hidden
-        sm:tw-flex
-        tw-flex-col
-        tw-uppercase
-        tw-justify-center
-        basic-col
-        tw-text-center
-        tw-text-xs
-      ">
-      {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}
-    </div>
-    <div v-if="is_search" class="
-        flex tw-flex-col
-        uppercase
-        tw-justify-center
-        basic-col
-        text-center
-        tw-text-xs
-        hide-sm-down
-      ">
-      {{ releaseDate }}
-    </div>
+    <template v-if="is_search">
+      <div v-if="item.type === 'song'" class="
+          tw-hidden
+          sm:tw-flex
+          tw-flex-col
+          tw-uppercase
+          tw-justify-center
+          basic-col
+          tw-text-center
+          tw-text-xs
+        ">
+        {{ itemStyle }}
+      </div>
+      <div v-if="mappedData.column_data && mappedData.column_data.length" class="
+          tw-hidden
+          sm:tw-flex
+          tw-flex-col
+          tw-uppercase
+          tw-justify-center
+          basic-col
+          tw-text-center
+          tw-text-xs
+        ">
+          <template v-if="brand !== 'pianote'">
+            {{ mappedData.column_data[0] }}
+          </template>
+          <template v-if="brand === 'pianote'">
+            {{ mappedData.column_data[1] }}
+          </template>
+      </div>
+      <div v-if="item.type !== 'song'" class="
+          tw-hidden
+          sm:tw-flex
+          tw-flex-col
+          tw-uppercase
+          tw-justify-center
+          basic-col
+          tw-text-center
+          tw-text-xs
+        ">
+        {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}
+      </div>
+      <div class="
+          flex tw-flex-col
+          uppercase
+          tw-justify-center
+          basic-col
+          text-center
+          tw-text-xs
+          hide-sm-down
+        ">
+        {{ releaseDate }}
+      </div>
+    </template>
 
     <!-- ADD TO LIST OR RESET PROGRESS BUTTONS -->
-    <div v-if="displayUserInteractions && item.type !== 'learning-path-level'"
+    <div v-if="displayUserInteractions"
       class="flex tw-flex-col icon-col tw-justify-center" :class="is_search ? '' : 'hide-xs-only'">
       <div v-if="resetProgress" class="body">
         <i class="fas fa-undo flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D] reset"
           :class="isBranchPath ? branchPathText : 'text-grey-2 hover-text-black'" title="Reset Progress"
           @click.stop.prevent="progressReset"></i>
       </div>
-      <button 
+      <button
+          v-if="!resetProgress"
           class="add-to-list tw-inline-flex tw-rounded-full tw-justify-center tw-px-0.5 tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white"
           :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'"
           :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"
@@ -233,10 +257,13 @@
 <script>
 import Mixin from "./_mixin";
 import ThemeClasses from "../../mixins/ThemeClasses";
-
+import DifficultyLabel from '../../../components/DifficultyLabel/DifficultyLabel';
 export default {
   name: "CatalogueListItem",
   mixins: [Mixin, ThemeClasses],
+  components: {
+    DifficultyLabel,
+  },
   props: {
     brand: {
       type: String,
@@ -253,7 +280,24 @@ export default {
   },
   computed: {
     mappedData() {
+      const difficultyValue = this.contentModel.post.fields.find(field => field.key === `difficulty`).value
+      if (Number.isFinite(Number(difficultyValue))) {
+        this.contentModel.list.difficulty = difficultyValue;
+      }
+      else {
+        this.contentModel.list.difficulty = 'all';
+      }
+
+      const excludeWords = ['novice', 'beginner', 'intermediate', 'advanced', 'expert', 'all'];
+      const filteredColumnData = this.contentModel.list.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));
+      this.contentModel.list.column_data = filteredColumnData
+
       return this.contentModel.list;
+    },
+
+    itemStyle() {
+      const field = this.item.fields.find((field) => field.key === 'style');
+      return field.value;
     },
 
     class_object() {
@@ -303,9 +347,6 @@ export default {
 
       return this.index;
     },
-  },
-  mounted(){
-    console.log(this.item.type)
   },
   beforeDestroy() {
     this.contentModel = null;

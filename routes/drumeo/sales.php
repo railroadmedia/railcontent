@@ -11,17 +11,18 @@ Route::domain('{drumeoDomain}')
         'uses' => \App\Http\Controllers\Musora\ReferralJoinController::class . '@join',
     ]);
     Route::get('/', [SalesController::class, 'home'] );
+    Route::get('/ultimate-bundle', [SalesController::class, 'homeBF'] );
     Route::get('/new-year', [SalesController::class, 'promo'] );
     Route::get('/lp', [SalesController::class, 'promo'] );
     Route::get('/beginner', [SalesController::class, 'promo']);
     Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/student-only', [SalesController::class, 'promo'] );
     Route::get('/upgrade-offer', [SalesController::class, 'salesUpgrade'] );
-    Route::get('/lifetime', [SalesController::class, 'salesUpgradeLifetime'] );
+    Route::get('/lifetime', [SalesController::class, 'salesLifetime'] );
+    Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount'] );
     Route::get('/festival/', [SalesController::class, 'Festival'] );
     Route::get('/anniversary', [SalesController::class, 'home'] );
         Route::get('/vdf', [SalesController::class, 'choosePlanVDF'] );
-        Route::get('/restart', [SalesController::class, 'restart'] );
 
     //    sales pages
     Route::get('/method', [SalesController::class, 'method'] );
@@ -40,6 +41,7 @@ Route::domain('{drumeoDomain}')
     Route::get('/awards/', [SalesController::class, 'awards']);
     Route::get('/sonor/', [SalesController::class, 'sonor']);
     Route::get('/alesis', [SalesController::class, 'alesis']);
+    Route::get('/alesis/existing', [SalesController::class, 'alesisExisting']);
 
     Route::get('/june', [SalesController::class, 'trial']);
     Route::get('/trial-key', [SalesController::class, 'trial']);
@@ -49,6 +51,7 @@ Route::domain('{drumeoDomain}')
     Route::get('/30-day-trial', [SalesController::class, 'homeMonth']);
     Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
     Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
+    Route::get('/easy-rudiments-playlist', [SalesController::class, 'easyRudimentsPlaylist']);
 
     Route::get('/{pageT?}', SalesController::class . '@trialPages')
         ->whereIn('pageT', [

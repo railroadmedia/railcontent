@@ -23,7 +23,9 @@
 
     $hasExperience = user()->onboardingExperience ? true : false;
 
-    $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$hasExperience;
+    $hasGoals= user()->onboardingGoals ? true : false;
+
+    $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$hasExperience || !$hasGoals;
 @endphp
 
 @extends('partials.layout')
@@ -83,7 +85,7 @@
                 {{-- Calls To Action --}}
                 <div class="tw-flex tw-items-center tw-justify-center lg:tw-justify-start xl:tw-justify-end tw-w-full tw-flex-wrap xl:tw-flex-nowrap">
                     {{-- Complete Your Account / Update Your Account --}}
-                    <a href="/onboarding?brand={{ $brand }}&update={{ !$showCompleteYourAccountButton ? 'true' : 'false'  }}"
+                    <a href="/onboarding?brand={{ $brand }}{{ !$showCompleteYourAccountButton ? '&update=2' : ''  }}"
                         class="tw-btn-secondary tw-border-2 tw-text-white tw-w-auto tw-inline-flex tw-max-w-[267px] tw-mx-2"
                     >
                         {{ $showCompleteYourAccountButton ? 'Complete Your Account' : 'Update Your Account' }}

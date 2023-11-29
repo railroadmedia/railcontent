@@ -2,25 +2,35 @@
 
 namespace Modules\UserManagementSystem\Controllers;
 
+use App\Modules\EventTracking\Avo\AvoHelper;
+use App\Modules\EventTracking\Services\CustomerIoService;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
+use Avo;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Models\OnboardingAnswerHistory;
 use Modules\UserManagementSystem\Models\OnboardingExperience;
+use Modules\UserManagementSystem\Models\OnboardingGoals;
 use Modules\UserManagementSystem\Models\OnboardingGear;
 use Modules\UserManagementSystem\Models\OnboardingTopic;
 use Modules\UserManagementSystem\Models\OnboardingGenre;
+use Modules\UserManagementSystem\Models\User;
 
 
 class OnboardingController extends Controller
 {
 
     private OnboardingService $onboardingService;
+    private CustomerIoService $customerIoService;
 
-    public function __construct(OnboardingService $onboardingService)
+    public function __construct(OnboardingService $onboardingService, CustomerIoService $customerIoService)
     {
         $this->onboardingService = $onboardingService;
+        $this->customerIoService = $customerIoService;
+        $this->middleware('deprecated:2023-10-16');
     }
 
     /**
@@ -34,6 +44,7 @@ class OnboardingController extends Controller
 
         OnboardingGear::where(['brand' => $request->brand, 'user_id' => user()->id])->delete();
 
+        $gearList = [];
         foreach ($request->data as $gear) {
             OnboardingGear::create(['gear' => $gear, 'brand' => $request->brand, 'user_id' => user()->id]);
             OnboardingAnswerHistory::create([
@@ -42,7 +53,14 @@ class OnboardingController extends Controller
                 'brand' => $request->brand,
                 'user_id' => user()->id
             ]);
+            $gearList[] = $gear;
         }
+        Avo::onboarding_gear_step_completed(
+            AvoHelper::defaultEventProperties([
+                'brand' => $request->brand,
+                'gear_list' => $gearList,
+            ])
+        );
 
         return response(json_encode(user()), 200);
     }
@@ -60,6 +78,7 @@ class OnboardingController extends Controller
 
         OnboardingTopic::where(['brand' => $request->brand, 'user_id' => user()->id])->delete();
 
+        $topicList = [];
         foreach ($request->data as $topic) {
             OnboardingTopic::create(['topic' => $topic, 'brand' => $request->brand, 'user_id' => user()->id]);
             OnboardingAnswerHistory::create([
@@ -68,8 +87,15 @@ class OnboardingController extends Controller
                 'brand' => $request->brand,
                 'user_id' => user()->id
             ]);
+            $topicList[] = $topic;
         }
 
+        Avo::onboarding_topics_step_completed(
+            AvoHelper::defaultEventProperties([
+                'brand' => $request->brand,
+                'topic_list' => $topicList,
+            ])
+        );
         return response(json_encode(user()), 200);
     }
 
@@ -85,7 +111,7 @@ class OnboardingController extends Controller
         ]);
 
         OnboardingGenre::where(['brand' => $request->brand, 'user_id' => user()->id])->delete();
-
+        $genres = [];
         foreach ($request->data as $genre) {
             OnboardingGenre::create(['genre' => $genre, 'brand' => $request->brand, 'user_id' => user()->id]);
             OnboardingAnswerHistory::create([
@@ -94,8 +120,15 @@ class OnboardingController extends Controller
                 'brand' => $request->brand,
                 'user_id' => user()->id
             ]);
+            $genres[] = $genre;
         }
 
+        Avo::onboarding_genres_step_completed(
+            AvoHelper::defaultEventProperties([
+                'brand' => $request->brand,
+                'genre_list' => $genres,
+            ])
+        );
         return response(json_encode(user()), 200);
     }
 
@@ -122,6 +155,51 @@ class OnboardingController extends Controller
         $onboardingAnswerHistory->user_id = user()->id;
         $onboardingAnswerHistory->save();
 
+
+        Avo::onboarding_experience_step_completed(
+            AvoHelper::defaultEventProperties([
+                'brand' => $request->brand,
+                'experience_level' => strval($request->experience_level),
+            ])
+        );
+
+        return response(json_encode(user()), 200);
+    }
+
+    /**
+     *
+     * @param Request $request
+     * @throws \Throwable
+     */
+    public function goals(Request $request)
+    {
+        $request->validate([
+            'goals' => 'required',
+            'brand' => 'required',
+        ]);
+
+        OnboardingGoals::where(['brand' => $request->brand, 'user_id' => user()->id])->delete();
+        OnboardingGoals::create(
+            ['goals' => $request->goals, 'brand' => $request->brand, 'user_id' => user()->id]
+        );
+
+        $onboardingAnswerHistory = new OnboardingAnswerHistory();
+        $onboardingAnswerHistory->onboarding_question = OnboardingAnswerHistory::QUESTION_GOALS;
+        $onboardingAnswerHistory->onboarding_answer = $request->goals;
+        $onboardingAnswerHistory->brand = $request->brand;
+        $onboardingAnswerHistory->user_id = user()->id;
+        $onboardingAnswerHistory->save();
+
+        $this->customerIoService->updateUserAttributes(user(), ['has_completed_onboarding' => true]);
+
+        Avo::onboarding_goals_step_completed(
+            AvoHelper::defaultEventProperties([
+                'brand' => $request->brand,
+                'goals_list' => [$request->goals],
+                'has_completed_onboarding' => true,
+            ])
+        );
+
         return response(json_encode(user()), 200);
     }
 
@@ -146,11 +224,27 @@ class OnboardingController extends Controller
         $response = [
             'gears' => OnboardingGear::where(['brand' => $brand, 'user_id' => user()->id])->pluck('gear')->toArray(),
             'experience' => $experience ? intval($experience->experience_level) : $experience,
+            'goals' => OnboardingGoals::select('goals')->where(['brand' => $brand, 'user_id' => user()->id])->first(),
             'genres' => OnboardingGenre::where(['brand' => $brand, 'user_id' => user()->id])->pluck('genre')->toArray(),
             'topics' => OnboardingTopic::where(['brand' => $brand, 'user_id' => user()->id])->pluck('topic')->toArray(),
         ];
 
         return response($response, 200);
+    }
+
+    public function aboutStepCompleted(Request $request)
+    {
+        $request->validate([
+            'skipped' => 'required'
+        ]);
+
+        Avo::onboarding_about_step_completed(
+            AvoHelper::defaultEventProperties([
+                'is_skipped' => $request->get('skipped'),
+            ])
+        );
+
+        return response(null, 200);
     }
 
     /**
@@ -160,13 +254,23 @@ class OnboardingController extends Controller
     public function skipAccountSetup(Request $request)
     {
         $request->validate([
-            'skip' => 'boolean|required',
-            'brand' => 'required'
+            'brand' => 'required',
+            'skippedStep' => 'nullable'
         ]);
 
-        $userAttribute = $request->get('brand') . '_onboarding_skip_setup';
-        user()->{$userAttribute} = $request->get('skip');
+        $brand = $request->get('brand');
+        $skippedStep = $request->get('skippedStep');
+
+        $userAttribute = $brand . '_onboarding_skip_setup';
+        user()->{$userAttribute} = true;
         user()->save();
+
+        Avo::onboarding_skipped(
+            AvoHelper::defaultEventProperties([
+                'step_skipped' => $skippedStep ? strtolower($skippedStep) : null,
+                'brand' => $brand,
+            ])
+        );
 
         return response(json_encode(user()), 200);
     }
@@ -174,6 +278,7 @@ class OnboardingController extends Controller
     /**
      *
      * @param Request $request
+     * @throws \Exception
      */
     public function saveOnboardingHistoryForInstrument(Request $request)
     {
@@ -185,6 +290,12 @@ class OnboardingController extends Controller
         }
         $instrument = $request->get('instrument');
         $this->onboardingService->saveInstrument($instrument);
+        Avo::onboarding_instrument_step_completed(
+            AvoHelper::defaultEventProperties([
+                'brand' => $this->onboardingService->getBrandFromInstrument($instrument),
+            ])
+        );
+
         return response("History data for instrument has been saved.", 200);
     }
 

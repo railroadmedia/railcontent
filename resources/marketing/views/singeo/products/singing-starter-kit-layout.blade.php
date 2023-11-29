@@ -25,12 +25,12 @@
         "cartVersion" => true
     ])
 
-    {{--@include('shop.partials.promo-banner', [--}}
-                {{--"name" => "Singing Starter Kit",--}}
-                {{--"fullPrice" => floatval($productPrices['singing-starter-kit']->price),--}}
-                {{--"price" => floatval($productPrices['singing-starter-kit']->discounted_price),--}}
-                {{--"noBreadcrumb" => true--}}
-            {{--])--}}
+    @include('singeo.shop.partials.promo-banner', [
+                "name" => "Singing Starter Kit",
+                "fullPrice" => floatval($productPrices['singing-starter-kit']->price),
+                "price" => floatval($productPrices['singing-starter-kit']->discounted_price),
+                "noBreadcrumb" => true
+            ])
     @yield('topbar')
 
     <header class="text-center text-white py-5 md:py-8 bg-top bg-no-repeat relative" style="background-color:#000419;background-image: url(https://www.musora.com/musora-cdn/image/width=1900,quality=95/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/header2.jpg);">
@@ -69,7 +69,7 @@
                         <br><br>
                         Take yours with confidence thanks to our 90-day guarantee and start singing today.
                     </p>
-                    <a class="join smaller mt-5 w-full sm:w-2/3" href="/ecommerce/add-to-cart?products[singing-starter-kit]=1&redirect=/order">START SINGING &raquo;</a>
+                    <a class="join smaller mt-5 w-full sm:w-2/3" href="/ecommerce/add-to-cart?products[singing-starter-kit]=1">START SINGING &raquo;</a>
                 </div>
                 <div class="hidden sm:block absolute inset-0 z-0" style="background:linear-gradient(to right, #000419, transparent);"></div>
                 <div class="block sm:hidden absolute inset-0 z-0" style="background:rgba(0,4,25,0.6);"></div>

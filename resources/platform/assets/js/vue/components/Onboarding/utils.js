@@ -38,18 +38,31 @@ const getSavedExperience = (selectedExperience) => {
   return multiSelectMap;
 };
 
-export const getInitialInfo = ({ userId, userName, userAvatar, selectedGear, selectedTopics, selectedGenres, selectedExperience, configOptions, instrument }) => {
+const getSavedGoals = (goals) => {
+  const multiSelectMap = {};
+  brands.forEach((brand) => {
+    const goalsPerBrand = goals.find((goal) => goal.brand === brand);
+    if(!!goalsPerBrand) {
+      multiSelectMap[brand] = goalsPerBrand.goals;
+    }
+  });
+
+  return multiSelectMap;
+};
+
+export const getInitialInfo = ({ userId, userDisplayName, userProfilePictureUrl, selectedGear, selectedTopics, selectedGenres, selectedExperience, configOptions, instrument, selectedGoals }) => {
   return ({
       user: {
           id: userId,
-          name: userName || null,
-          avatarUrl: userAvatar || null
+          name: userDisplayName || null,
+          userProfilePictureUrl: userProfilePictureUrl || null
       },
       instrument: instrument || 'default',
       instrumentTypes: getSavedMultiSelect({ options: selectedGear, plural: 'gears', singular: 'gear', configOptions }),
       experience: getSavedExperience(selectedExperience.length ? selectedExperience : [selectedExperience]),
       genres: getSavedMultiSelect({ options: selectedGenres, plural: 'genres', singular: 'genre', configOptions }),
       topics: getSavedMultiSelect({ options: selectedTopics, plural: 'topics', singular: 'topic', configOptions }),
+      goals: getSavedGoals(selectedGoals.length ? selectedGoals : [selectedGoals]),
   })
 };
 
@@ -63,6 +76,16 @@ export const getCheckedSteps = ({ selectedGear, selectedTopics, selectedGenres, 
   });
   const hasGear = !!selectedGear.find(gear => gear.brand === brand);
   const hasExperience = () => {
+    if (!selectedExperience) {
+      return false;
+    }
+    if (selectedExperience.length) {
+      return !!selectedExperience.find(exp => exp.brand === brand);
+    } else {
+      return selectedExperience.brand === brand;
+    }
+  };
+  const hasGoals= () => {
     if (!selectedExperience) {
       return false;
     }
@@ -88,6 +111,9 @@ export const getCheckedSteps = ({ selectedGear, selectedTopics, selectedGenres, 
   }
   if (hasTopics) {
     newSteps[5].checked = true;
+  }
+  if (hasGoals()) {
+    newSteps[6].checked = true;
   }
   return newSteps;
 };

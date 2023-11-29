@@ -1,3 +1,6 @@
+@php
+$userData = assembleUserAttributes(user());
+@endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     {!! \App\Analytics\Tracker::headTop() !!}
@@ -30,6 +33,9 @@
 {{-- Notifications Container --}}
 <div id="notifications-container"></div>
 
+{{-- Dropdowns Container --}}
+<div id="dropdowns-container"></div>
+
 {{-- Modal Container --}}
 <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
 
@@ -41,18 +47,12 @@
     <app-container
         :vue-router="false"
         brand="{{ $brand }}"
+        :user="{{ json_encode($userData) }}"
     >
         <page-container
-            brand="{{ $brand }}"
             :is-live="{{ isLive() ? 'true':'false' }}"
             search-url=""
             :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}
-            @if(!empty( user() ))
-            user-name="{{ user()->display_name }}"
-            user-avatar="{{ user()->profile_picture_url }}"
-            user-id="{{ user()->id }}"
-            account-url="{{ user()->getDashboardUrl() }}"
-            @endif
             @if(!empty( $hasUnreadNotifications ))
             :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
             @endif
@@ -120,17 +120,17 @@
 @else
 
     <body class="tw-text-white tw-flex
-                @if($brand == 'drumeo')
-                    tw-bg-drumeo
-                @elseif($brand == 'pianote')
-                     tw-bg-pianote
-                @elseif($brand == 'guitareo')
-                     tw-bg-guitareo
-                @elseif($brand == 'singeo')
-                     tw-bg-singeo
-                @else
-                     tw-bg-[#000C17]
-                 @endif
+        @if($brand == 'drumeo')
+            tw-bg-drumeo
+        @elseif($brand == 'pianote')
+                tw-bg-pianote
+        @elseif($brand == 'guitareo')
+                tw-bg-guitareo
+        @elseif($brand == 'singeo')
+                tw-bg-singeo
+        @else
+            tw-bg-[#000C17]
+        @endif
      ">
         <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
             <div class="tw-text-center tw-max-w-md tw-px-6 md:tw-px-0 md:tw-max-w-full">

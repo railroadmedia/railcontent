@@ -160,7 +160,7 @@
         @endslot
     @endcomponent
 
-    <section class="content-section two-sides text-center">
+    <section class="content-section two-sides text-center" style="background:#fff!important;color:#000!important;">
         <div class="row">
             <h2><strong>One traditional side.<br class="hide-for-medium"> One quiet side.</strong></h2>
             <h5>The portable, double-sided practice pad<br class="hide-for-medium"> with different <br class="show-for-medium-only">volumes so you can<br class="hide-for-medium"> practice late into the night.</h5>
@@ -206,11 +206,11 @@
             <div class="thumb size-16-9 img-modal"><div style="background-image: url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/pad-snare-jared-2.jpg);"></div></div>
             <div class="thumb size-16-9 img-modal float-right"><div style="background-image: url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/pad-quiet-dub.jpg);"></div></div>
             <div class="video-pop autoplay-video" @click="trailerTwo = true;">
-                <div class="watch-badge">
+                <div class="watch-badge absolute top-1/3 left-2/3 sm:left-3/4 lg:left-2/3 transform -translate-x-1/2 -translate-y-1/2">
                     <span>WATCH<br> BLIND TEST</span>
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
+                    <img class="block mt-2 w-8 sm:w-11" src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
                 </div>
-                <img class="play-button" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
+                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-20"></i>
                 <img class="bg" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/blindfold-test-thumb.jpg" alt="Thumnail">
             </div>
         </div>

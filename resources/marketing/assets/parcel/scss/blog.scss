@@ -1057,7 +1057,7 @@ h1, h2, h3, h4, h5, h6 {
                         font-style: normal;
                         font-variant: normal;
                         text-rendering: auto;
-                        font: 900 22px/65px "Font Awesome 5 Pro";
+                        font: 900 22px/65px "Font Awesome 6 Pro";
                         color: #FFF;
                         position: absolute;
                         top: 0;
@@ -1469,6 +1469,53 @@ h1, h2, h3, h4, h5, h6 {
             padding: 13px 20px;
             @include tablet {
                 padding: 17px 25px;
+            }
+        }
+
+        .box-snippet {
+            position: relative;
+            margin: 40px auto;
+            width: 96%;
+
+            .content {
+                display: flex;
+                padding: 10px;
+                position: relative;
+                color: white;
+                background: $drumeoBlue;
+                border-radius: 2px;
+
+                .icon {
+                    margin-right: 10px;
+                    background: white;
+                    color: $drumeoBlue;
+                    font-size: 24px;
+                    padding: 10px;
+                    border-radius: 100%;
+                    min-width: 44px;
+                    text-align: center;
+                }
+
+                .text-container {
+                    padding: 4px 0;
+                    position: relative;
+                    z-index: 10;
+
+                    a {
+                        color: #fff!important;
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .shadow {
+                border: 3px solid $drumeoBlue;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: -10px;
+                top: 10px;
+                border-radius: 2px;
             }
         }
 
@@ -2424,7 +2471,7 @@ h1, h2, h3, h4, h5, h6 {
                     font-style: normal;
                     font-variant: normal;
                     text-rendering: auto;
-                    font: 900 22px/95px "Font Awesome 5 Pro";
+                    font: 900 22px/95px "Font Awesome 6 Pro";
                     color: #FFF;
                     position: absolute;
                     top: 0;
@@ -2474,7 +2521,7 @@ h1, h2, h3, h4, h5, h6 {
     &:after {
         -moz-osx-font-smoothing: grayscale;
         -webkit-font-smoothing: antialiased;
-        font-family: "Font Awesome 5 Pro";
+        font-family: "Font Awesome 6 Pro";
         font-weight: 900;
         font-style: normal;
         font-variant: normal;
@@ -2646,52 +2693,5 @@ h1, h2, h3, h4, h5, h6 {
                 -webkit-box-orient: vertical;
             }
         }
-    }
-}
-
-.box-snippet {
-    position: relative;
-    margin: 40px auto;
-    width: 96%;
-
-    .content {
-        display: flex;
-        padding: 10px;
-        position: relative;
-        color: white;
-        background: $drumeoBlue;
-        border-radius: 2px;
-
-        .icon {
-            margin-right: 10px;
-            background: white;
-            color: $drumeoBlue;
-            font-size: 24px;
-            padding: 10px;
-            border-radius: 100%;
-            min-width: 44px;
-            text-align: center;
-        }
-
-        .text-container {
-            padding: 4px 0;
-            position: relative;
-            z-index: 10;
-
-            a {
-                color: #fff!important;
-                text-decoration: underline;
-            }
-        }
-    }
-
-    .shadow {
-        border: 3px solid $drumeoBlue;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: -10px;
-        top: 10px;
-        border-radius: 2px;
     }
 }

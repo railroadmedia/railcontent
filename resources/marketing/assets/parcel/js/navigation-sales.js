@@ -49,7 +49,7 @@ $(document).ready(function (){
         document.cookie = "cookiesEnabled=true; expires=" + date.toUTCString() + "; path=/";
         var cookiesEnabled = document.cookie.indexOf("cookiesEnabled=") !== -1;
         var hasCookie = document.cookie.indexOf("cookieAccept=true");
-        if (hasCookie < 0 && cookiesEnabled === true && window.location.hostname.endsWith('drumeo.com')) {
+        if (hasCookie < 0 && cookiesEnabled === true) {
             setTimeout(function () {
                 $(".cookie-notice").removeClass("hide");
             }, 3000);
@@ -58,7 +58,7 @@ $(document).ready(function (){
 
     function setPopUpCookie() {
         if (!popUp) {
-            document.cookie = "cookieAccept=true; expires=" + new Date(2147483647 * 1000).toUTCString() + "; path=/; domain=drumeo.com;";
+            document.cookie = "cookieAccept=true; expires=" + new Date(2147483647 * 1000).toUTCString() + "; path=/;";
             popUp = true;
         }
     }
@@ -75,56 +75,5 @@ $(document).ready(function (){
         $('html, body').animate({
             scrollTop: $(anchor).offset().top
         }, 1000);
-    });
-
-    $(".ajax-form").submit(function(e) {
-        e.preventDefault();
-        console.log(e.originalEvent)
-
-        // var pre = $(this).find(".pre-add"),
-        //     pending = $(this).find(".pending"),
-        //     success = $(this).find(".success"),
-        //     fail = $(this).find(".fail"),
-        //     submitButton = $(this).find(".submit"),
-        //     disclaimer = $(this).parent().find(".disclaimer"),
-        //     thankBanner = $(this).parent().find(".thank-you-box"),
-        //     form = $(this),
-        //     url = form.attr("action");
-        //
-        // pre.addClass("hide hidden");
-        // success.addClass("hide hidden");
-        // fail.addClass("hide hidden");
-        // pending.removeClass("hide hidden");
-        // submitButton.removeClass("error");
-        //
-        // $.ajax({
-        //     type: "POST",
-        //     url: url,
-        //     data: form.serialize(),
-        //     success: function() {
-        //         form.addClass("hide hidden");
-        //         disclaimer.addClass("hide hidden");
-        //         thankBanner.addClass("active");
-        //
-        //         pending.addClass("hide hidden");
-        //         success.removeClass("hide hidden");
-        //     },
-        //     error: function() {
-        //         submitButton.addClass("error");
-        //
-        //         pending.addClass("hide hidden");
-        //         fail.removeClass("hide hidden");
-        //     }
-        // });
-        //
-        // if(e.originalEvent != null) {
-        //     var formId = $(this).find("input[name='inf_form_xid']").val();
-        //
-        //     dataLayer.push({
-        //         "event": "gtm.formSubmit",
-        //         "formId": formId,
-        //         "formSuccess": true
-        //     });
-        // }
     });
 });

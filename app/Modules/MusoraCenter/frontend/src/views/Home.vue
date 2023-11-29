@@ -221,50 +221,7 @@
                         </v-card>
                     </v-col>
 
-                    <v-col
-                        cols="12"
-                        sm="6"
-                        md="6"
-                        class="pa-2 column"
-                    >
-                        <v-card
-                            v-if="userHasAccessToSection('products')"
-                            height="200"
-                            to="products"
-                        >
-                            <v-container class="pa-2 no-position">
-                                <v-row class="title-box piano">
-                                    <v-col class="pa-4">
-                                        <h2 class="headline header-icon">
-                                            <v-icon
-                                                x-large
-                                                class="mr-2"
-                                                :color="brandColor"
-                                            >
-                                                local_offer
-                                            </v-icon>
-                                            Products
-                                        </h2>
 
-                                        <v-divider class="my-4"></v-divider>
-                                        <p class="ma-0">
-                                            Create/Edit products.
-                                        </p>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-
-                            <v-footer
-                                absolute
-                            >
-                                <v-card-actions>
-                                    <v-btn text>
-                                        Go to Products
-                                    </v-btn>
-                                </v-card-actions>
-                            </v-footer>
-                        </v-card>
-                    </v-col>
                 </v-row>
             </v-container>
         </v-row>

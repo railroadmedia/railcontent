@@ -1,13 +1,13 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import {ref, onMounted} from "vue";
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import SkipStep from "../SkipStep.vue";
 import StepHeader from "../StepHeader.vue";
 import MultiSelect from "../../MultiSelect/MultiSelect.vue";
-import { saveGear } from "../services"
-import { getMultiSelectOptions } from "../utils";
+import {saveGear} from "../services"
+import {getMultiSelectOptions} from "../utils";
 
 const props = defineProps({
   brand: {
@@ -21,6 +21,9 @@ const props = defineProps({
   },
   configOptions: {
     type: Object,
+  },
+  stepName: {
+    type: String,
   }
 });
 
@@ -42,7 +45,10 @@ function handleMultiSelection(selection) {
 const handleNextStep = () => {
   const data = [];
 
-  emit("onChangeInfo", { ...props.info, instrumentTypes: { ...props.info.instrumentTypes, [props.brand]: currentSelection.value} });
+  emit("onChangeInfo", {
+    ...props.info,
+    instrumentTypes: {...props.info.instrumentTypes, [props.brand]: currentSelection.value}
+  });
 
   Object.entries(currentSelection.value).forEach(([type, isChecked]) => {
     if (isChecked) {
@@ -73,59 +79,34 @@ const isNextButtonDisabled = () => {
     return val;
   }).length;
 };
+const headerProps = {
+  title: "What kind of gear will you be practicing with?",
+  subtitle: `You selected ${props.info.instrument}! Now it’s time to tell us about
+      your practice set up. You can select more than one instrument and change your settings in your profile at any time.`,
+}
 </script>
 
 <template>
-  <StepWrapper :brand="brand" :showBgImg="true">
-    <div
-      class="
+  <StepWrapper :brand="brand" :showBgImg="true" @onHeaderGoBack="goBack" :headerProps="headerProps">
+    <template v-slot:content>
+      <div class="
         tw-w-full tw-flex tw-flex-col tw-items-center
         md:tw-justify-center
         md:tw-mt-0
-      "
-    >
-      <StepHeader
-        title="What kind of gear will you be practicing with?"
-        :subtitle="`You selected ${info.instrument}! Now it’s time to tell us about
-            your practice set up. You can select more than one instrument and change your settings in your profile at any time.`"
-        @onGoBack="goBack"
-      />
-      <MultiSelect
-        :options="options"
-        :initialSelection="currentSelection"
-        classOverride="md:tw-mb-[52px]"
-        @onChangeSelection="handleMultiSelection"
-      />
-    </div>
-    <div
-      class="
-        tw-flex tw-flex-col tw-items-center tw-pb-[20px] tw-pt-[20px]
-        md:tw-pb-0
-      "
-    >
-      <Button
-        :brand="brand"
-        @onButtonClick="handleNextStep"
-        :isDisabled="isNextButtonDisabled()"
-        classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block"
-        >Next</Button
-      >
-      <ProgressBar
-        :brand="brand"
-        :currentStep="2"
-        :steps="steps"
-        @onChangeStep="(s) => emit('onChangeStep', s)"
-      />
-      <Button
-        :brand="brand"
-        @onButtonClick="handleNextStep"
-        :isDisabled="isNextButtonDisabled()"
-        classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block"
-        >Next</Button
-      >
-      <SkipStep :brand="brand"
-        classOverride="tw-mt-[20px] md:tw-mt-0"
-      />
-    </div>
+      ">
+        <MultiSelect :options="options" :initialSelection="currentSelection" classOverride="md:tw-mb-[52px]"
+                     @onChangeSelection="handleMultiSelection"/>
+      </div>
+    </template>
+    <template v-slot:footer>
+      <Button :brand="brand" @onButtonClick="handleNextStep" :isDisabled="isNextButtonDisabled()"
+              classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Next
+      </Button>
+      <ProgressBar :brand="brand" :currentStep="2" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)"/>
+      <Button :brand="brand" @onButtonClick="handleNextStep" :isDisabled="isNextButtonDisabled()"
+              classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Next
+      </Button>
+      <SkipStep :brand="brand" :step="stepName" classOverride="tw-mt-[20px] md:tw-mt-0"/>
+    </template>
   </StepWrapper>
 </template>

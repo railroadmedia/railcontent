@@ -75,12 +75,19 @@
                         </div>
                     </v-col>
                 </v-card>
+            </v-col>
+        </v-row>
 
-                <!-- USER PERMISSIONS -->
+        <v-row class="align-top">
+            <v-col
+                v-if="thisUser.id"
+                cols="12"
+                class="mb-4 text-center px-4 column"
+            >
+                <!-- USER ACCESS PERMISSIONS -->
                 <user-products
                     :user-id="userId"
-                    :user-products="userProducts"
-                    :included-data="userProductsIncludedData"
+                    :user-access-permissions="userAccessPermissions"
                     @userProductEdit="loadUserData"
                 ></user-products>
             </v-col>
@@ -92,51 +99,6 @@
                 cols="12"
                 class="mb-4 text-center px-4 column"
             >
-                <!-- USER SUBSCRIPTIONS -->
-                <user-subscriptions
-                    :user-id="userId"
-                    :user-payment-methods="userPaymentMethods"
-                    :user-payment-methods-included-data="userPaymentMethodsIncludedData"
-                    :user-subscriptions="userSubscriptions"
-                    :included-data="userSubscriptionsIncludedData"
-                ></user-subscriptions>
-
-                <!-- USER ORDERS -->
-                <user-orders
-                    :user-id="userId"
-                    :this-user="thisUser"
-                    :user-orders="userOrders"
-                    :included-data="userOrdersIncludedData"
-                    :user-addresses="userAddresses"
-                    :user-payment-methods="userPaymentMethods"
-                    :user-payment-methods-included-data="userPaymentMethodsIncludedData"
-                    @orderCreated="loadUserData"
-                    @paymentRefunded="loadUserData"
-                ></user-orders>
-
-                <!-- USER PAYMENT METHODS -->
-                <user-payment-methods
-                    :user-id="userId"
-                    :user-email="thisUser.email"
-                    :user-payment-methods="userPaymentMethods"
-                    :included-data="userPaymentMethodsIncludedData"
-                    :user-addresses="userAddresses.filter(address =>
-                        address.attributes.type === 'billing')"
-                ></user-payment-methods>
-
-                <!-- USER MEMBERSHIP ACTIONS -->
-                <user-membership-actions
-                    :user-id="userId"
-                    :user-membership-actions="userMembershipActions"
-                    :included-data="userMembershipActionsIncludedData"
-                ></user-membership-actions>
-
-                <!-- USER ADDRESSES -->
-                <user-addresses
-                    :user-id="userId"
-                    :user-addresses="userAddresses"
-                ></user-addresses>
-
                 <user-access-codes
                     :user-id="userId"
                 ></user-access-codes>
@@ -204,12 +166,7 @@
 import { mapState, mapActions } from 'vuex';
 import api from '../../api/users';
 import cartApi from '../../api/ecommerce/cart';
-import addressesApi from '../../api/ecommerce/addresses';
-import membershipActionsApi from '../../api/ecommerce/membership-actions';
-import paymentsApi from '../../api/ecommerce/payments';
-import ordersApi from '../../api/ecommerce/orders';
-import subscriptionsApi from '../../api/ecommerce/subscriptions';
-import userProductsApi from '../../api/ecommerce/user-products';
+import userPermissionsApi from '../../api/ecommerce/user-permissions';
 import brandColors from '../../api/mixins.js';
 import Middleware from '../../middleware/user';
 import UserAccessCodes from './forms/UserAccessCodes';
@@ -219,20 +176,14 @@ import UserSpecialPermissionsForm from './forms/UserSpecialPermissions';
 import UserPermissionsForm from './forms/UserPermissions';
 import UserMentorForm from './forms/UserMentor';
 import UserPasswordForm from './forms/UserPassword';
-import UserSubscriptions from './forms/UserSubscriptions';
-import UserPaymentMethods from './forms/UserPaymentMethods';
-import UserAddresses from './forms/UserAddresses';
-import UserOrders from './forms/UserOrders';
 import UserProducts from './forms/UserProducts';
 import CustomBreadcrumbs from '../../components/CustomBreadcrumbs';
 import LastVisistedUsers from '../../components/LastVisistedUsers';
 import CustomTreeview from '../../components/CustomTreeview';
-import UserMembershipActions from "./forms/UserMembershipActions";
 import axios from "axios";
 
 export default {
     components: {
-        'user-membership-actions': UserMembershipActions,
         'user-access-codes': UserAccessCodes,
         'user-details-form': UserDetailsForm,
         'user-fields-form': UserFieldsForm,
@@ -240,10 +191,6 @@ export default {
         'user-permissions-form': UserPermissionsForm,
         'user-mentor-form': UserMentorForm,
         'user-password-form': UserPasswordForm,
-        'user-subscriptions': UserSubscriptions,
-        'user-payment-methods': UserPaymentMethods,
-        'user-addresses': UserAddresses,
-        'user-orders': UserOrders,
         'user-products': UserProducts,
         'v-custom-breadcrumbs': CustomBreadcrumbs,
         'v-custom-treeview': CustomTreeview,
@@ -268,18 +215,8 @@ export default {
     data() {
         return {
             userId: this.$route.params.id,
-            userSubscriptions: [],
-            userSubscriptionsIncludedData: [],
-            userOrders: [],
-            userOrdersIncludedData: [],
-            userPaymentMethods: [],
-            userPaymentMethodsIncludedData: [],
-            userAddresses: [],
-            userMembershipActions: [],
-            userMembershipActionsIncludedData: [],
             userPermissions: [],
-            userProducts: [],
-            userProductsIncludedData: [],
+            userAccessPermissions: [],
             userRoles: [],
             userNotes: '',
         };
@@ -361,6 +298,7 @@ export default {
             'setUsers',
             'editUserRole',
             'getProducts',
+            'getPermissions'
         ]),
 
         resetUserAvatar() {
@@ -375,73 +313,13 @@ export default {
             }
         },
 
-        getUserSubscriptions() {
-            subscriptionsApi.getUserSubscriptions({
-                user_id: this.userId,
+        getUserAccessPermissions() {
+            userPermissionsApi.getUserAccessPermissions(this.userId, {
                 limit: 100,
             })
                 .then((response) => {
                     if (response) {
-                        this.userSubscriptions = response.data.data;
-                        this.userSubscriptionsIncludedData = response.data.included;
-                    }
-                });
-        },
-
-        getUserOrderHistory() {
-            ordersApi.getUserOrderHistory({
-                user_id: this.userId,
-                limit: 100,
-            })
-                .then((response) => {
-                    if (response) {
-                        this.userOrders = response.data.data;
-                        this.userOrdersIncludedData = response.data.included;
-                    }
-                });
-        },
-
-        getUserPaymentMethods() {
-            paymentsApi.getUserPaymentMethods(this.userId)
-                .then((response) => {
-                    if (response) {
-                        this.userPaymentMethods = response.data.data;
-                        this.userPaymentMethodsIncludedData = response.data.included;
-                    }
-                });
-        },
-
-        getUserAddresses() {
-            addressesApi.getUserAddresses(this.userId, {
-                limit: 100,
-            })
-                .then((response) => {
-                    if (response) {
-                        this.userAddresses = response.data.data;
-                    }
-                });
-        },
-
-        getMembershipActions() {
-            membershipActionsApi.getMembershipActions(this.userId, {
-                limit: 100,
-            })
-                .then((response) => {
-                    if (response) {
-                        this.userMembershipActions = response.data.data;
-                        this.userMembershipActionsIncludedData = response.data.included;
-                    }
-                });
-        },
-
-        getUserProducts() {
-            userProductsApi.getUserProducts(this.userId, {
-                limit: 100,
-            })
-                .then((response) => {
-                    if (response) {
-                        this.userProducts = response.data.data;
-                        this.userProductsIncludedData = response.data.included;
+                        this.userAccessPermissions = response.data.data;
                     }
                 });
         },
@@ -456,17 +334,8 @@ export default {
         },
 
         loadUserData() {
-            this.getUserSubscriptions();
 
-            this.getUserOrderHistory();
-
-            this.getUserPaymentMethods();
-
-            this.getUserAddresses();
-
-            this.getMembershipActions();
-
-            this.getUserProducts();
+            this.getUserAccessPermissions();
 
             this.getUserRoles();
         },

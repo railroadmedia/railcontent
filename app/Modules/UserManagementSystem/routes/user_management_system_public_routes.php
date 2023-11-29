@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Controllers\AuthenticationController;
 use Modules\UserManagementSystem\Controllers\ForgotPasswordController;
+use Modules\UserManagementSystem\Controllers\OnboardingController;
 use Modules\UserManagementSystem\Controllers\ResetPasswordController;
 use Modules\UserManagementSystem\Controllers\UserController;
 
@@ -11,13 +12,28 @@ Route::group(
     ['prefix' => config('user_management_system.route_prefix'),],
     function () {
         /*
+         * Account Creation
+         */
+        Route::get(
+            'create-account',
+            UserController::class . '@createAccountPage'
+        )
+            ->name('user_management_system.create-account-page');
+
+        Route::post(
+            'create-account-submit',
+            UserController::class . '@createUserWithVerificationToken',
+        )
+            ->name('user_management_system.create-account-submit');
+
+        /*
          * Authentication
          */
         Route::post(
             'login/token',
             AuthenticationController::class . '@loginToken',
-        )->middleware(     [
-            \Railroad\Ecommerce\Middleware\SyncInAppPurchasedItems::class,
+        )->middleware([
+//            \Railroad\Ecommerce\Middleware\SyncInAppPurchasedItems::class,
             \Railroad\MusoraApi\Middleware\AddMemberData::class,
         ])
             ->name('user_management_system.login.token');
@@ -74,6 +90,5 @@ Route::group(
             'is-email-unique',
             UserController::class . '@isEmailUnique'
         );
-
     }
 );

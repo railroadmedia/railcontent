@@ -199,7 +199,7 @@
             <div class="guitar"  style="background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/background-guitar.jpg);"></div>
         </div>
         <div class="container mx-auto max-w-6xl relative z-10">
-            <img class="mx-auto h-16 sm:h-32 lg:h-40 mb-5 md:mb-10" src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://musora-center.s3.amazonaws.com/affiliate/Musora-AllBrands.png" alt="musora logos" fetchpriority="high">
+            <img class="mx-auto h-16 sm:h-32 lg:h-40 mb-5 md:mb-10" src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/Musora-AllBrands.png" alt="musora logos" fetchpriority="high">
 
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
             <h4 class="mt-3 mb-5 md:mb-10 leading-normal">Get paid to promote world-class<br class="inline md:hidden"> online music lessons.</h4>
@@ -400,7 +400,7 @@
         <div class="container mx-auto max-w-6xl">
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
             <a class="join bg-musora-gold my-8 md:my-10 inline-block" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
-            <p class="leading-normal">Have any questions? Please email <a href="mailto:natalie@musora.com"><u>natalie@musora.com</u></a> after<br class="hidden md:inline">
+            <p class="leading-normal">Have any questions? Please email <a href="mailto:dave@musora.com"><u>dave@musora.com</u></a> after<br class="hidden md:inline">
                 reviewing the <span class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></span> and <a href="https://airtable.com/shr086ixt4K8JIQpi"><u>application page</u></a>.</p>
         </div>
     </section>

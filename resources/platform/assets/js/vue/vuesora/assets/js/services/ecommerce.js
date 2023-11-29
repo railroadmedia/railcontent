@@ -27,7 +27,7 @@ export default {
      * @returns {Promise}
      */
     submitOrder(url, payload) {
-        return axios.put(url+'/ecommerce/json/order-form/submit', payload);
+        return axios.put('/ecommerce/json/order-form/submit', payload);
     },
 
     /**
@@ -39,7 +39,7 @@ export default {
      * @returns {Promise}
      */
     addCartItems(url, payload) {
-        return axios.put(url+'/ecommerce/json/add-to-cart', payload);
+        return axios.put('/ecommerce/json/add-to-cart', payload);
     },
 
     /**
@@ -58,7 +58,7 @@ export default {
             quantity,
         }
     ) {
-        return axios.patch(url+`/ecommerce/json/update-product-quantity/${productSku}/${quantity}`)
+        return axios.patch(`/ecommerce/json/update-product-quantity/${productSku}/${quantity}`)
     },
 
     /**
@@ -70,7 +70,7 @@ export default {
      * @returns {Promise}
      */
     removeCartItem(url, { productSku }) {
-        return axios.delete(url+`/ecommerce/json/remove-from-cart/${productSku}`)
+        return axios.delete(`/ecommerce/json/remove-from-cart/${productSku}`)
             .then(response => response)
             .catch(ErrorHandler);
     },
@@ -83,7 +83,7 @@ export default {
      * @returns {Promise}
      */
     clearCart(url) {
-        return axios.delete(url+`/ecommerce/json/clear-cart`)
+        return axios.delete(`/ecommerce/json/clear-cart`)
             .then(response => response)
             .catch(ErrorHandler);
     },
@@ -153,7 +153,7 @@ export default {
      * @returns {Promise}
      */
     updateNumberOfPayments(url, numberOfPayments) {
-        return axios.put(url+`/ecommerce/json/update-number-of-payments/${numberOfPayments}`)
+        return axios.put(`/ecommerce/json/update-number-of-payments/${numberOfPayments}`)
             .then(response => response)
             .catch(ErrorHandler);
     },
@@ -213,7 +213,7 @@ export default {
      * @returns {Promise}
      */
     setPaymentMethodAsDefault(url, payment_method_id) {
-        return axios.patch(url+'/ecommerce/payment-method/set-default', {
+        return axios.patch('/ecommerce/payment-method/set-default', {
             id: payment_method_id,
         })
             .then(response => response)

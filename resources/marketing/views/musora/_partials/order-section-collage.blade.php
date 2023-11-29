@@ -7,12 +7,12 @@
         <div class="flex flex-wrap sm:flex-nowrap items-center">
             <div class="flex w-full justify-center sm:justify-start sm:w-auto sm:order-1 mb-7 sm:mb-0 -mt-4">
                 <picture class="max-w-xs sm:max-w-full">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-m-team2.png">
-                    <img class="transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-m-team2.png" alt="musora collage image">
+                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/membership/homepage/2023/musora-m-team2.png">
+                    <img class="transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/musora-m-team2.png" alt="musora collage image">
                 </picture>
             </div>
             <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0 flex-col flex items-center sm:items-start">
-                <img class="h-6 mb-3 sm:mb-6" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png">
+                <img class="h-6 mb-3 sm:mb-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/musora_logo.png">
                 <h6 class="uppercase  text-musora inline-block mb-2"><strong>YOUR FIRST  7 Days  ARE FREE.</strong></h6>
                 <h3 class="leading-tight inline-block"><strong>Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.</strong></h3>
                 <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-0 inline-block">

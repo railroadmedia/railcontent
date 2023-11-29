@@ -2,6 +2,14 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners\CustomerIo;
 
+use App\Modules\Ecommerce\Collections\OrderCollection;
+use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
+use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
+use App\Modules\Ecommerce\Events\UserProductsUpdated;
+use App\Modules\Ecommerce\Models\Product;
+use App\Modules\Ecommerce\Models\Recharge\Subscription as RechargeSubscription;
+use App\Modules\Ecommerce\Models\Shopify\Order;
+use App\Modules\Ecommerce\Models\Shopify\OrderLineItem;
 use App\Modules\EventDataSynchronizer\Events\FirstActivityPerDay;
 use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
 use App\Modules\EventDataSynchronizer\Events\UTMLinks;
@@ -15,6 +23,7 @@ use App\Modules\EventDataSynchronizer\Jobs\CustomerIoTriggerEvent;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserCreated;
@@ -327,6 +336,36 @@ class CustomerIoSyncEventListener
             if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                 dispatch(
                     (new CustomerIoSyncUserByUserId($user))->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
+                );
+                self::$alreadyQueuedUserIds[] = $user->id;
+            }
+        } catch (Throwable $throwable) {
+            error_log($throwable);
+        }
+    }
+
+    public function handleUserAccessPermissionsUpdated(UserAccessPermissionsUpdated $userAccessPermissionsUpdated)
+    {
+        if (self::$disable) {
+            return;
+        }
+
+        try {
+            $userId = $userAccessPermissionsUpdated->getUserId();
+            $user = $this->userService->getByIdOrNull($userId);
+
+            $data = $this->getCustomerIoDataFromOrders(
+                $user,
+                $userAccessPermissionsUpdated->getOrderCollection(),
+                $userAccessPermissionsUpdated->getSubscriptions()
+            );
+
+            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
+                dispatch(
+                    (new CustomerIoSyncUserByUserId($user, $data))->delay(
                         Carbon::now()
                             ->addSeconds(3)
                     )
@@ -802,7 +841,7 @@ class CustomerIoSyncEventListener
             dispatch(
                 (new CustomerIoCreateEventByUserId(
                     $activityEvent->getUserId(),
-                    config('event-data-syncrhonizer.customer_io_account_to_sync_all_brands'),
+                    config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
                     'musora_members_area_activity',
                     [
                         'brands' => $activityEvent->getBrands()
@@ -856,14 +895,10 @@ class CustomerIoSyncEventListener
     public function syncOrder($order, $payment, $onlyMusoraEvent = false)
     {
         try {
-            if (!empty($order) && !empty(
-                $order->getUser()
-                )) {
+            if (!empty($order) && !empty($order->getUser())) {
                 $productIds = [];
 
-                foreach (
-                    $order->getOrderItems() as $orderItem
-                ) {
+                foreach ($order->getOrderItems() as $orderItem) {
                     $productIds[] =
                         $orderItem->getProduct()
                             ->getId();
@@ -1328,10 +1363,12 @@ class CustomerIoSyncEventListener
     }
 
     // CMT-77 August Referral Contest
+
     /**
      * @param ReferralClaimed $referralClaimed
      */
-    public function handleAugustContestReferralClaimed(AugustContestReferralClaimed $referralClaimed) {
+    public function handleAugustContestReferralClaimed(AugustContestReferralClaimed $referralClaimed)
+    {
         $referrer = $referralClaimed->getReferrer();
         $referrerEmail = $this->userService->getByIdOrNull($referrer->user_id)?->getEmail();
         dispatch(
@@ -1387,4 +1424,158 @@ class CustomerIoSyncEventListener
         );
     }
 
+    private function getCustomerIoDataFromOrders(User $user, ?OrderCollection $orderCollection, $subscriptions): array
+    {
+        $attributes = $this->getOrderAttributes($orderCollection);
+        return array_merge($attributes, $this->getSubscriptionAttributes($user, $subscriptions));
+    }
+
+    public function getOrderAttributes(?OrderCollection $orderCollection): array
+    {
+        if (!$orderCollection) {
+            return [];
+        }
+        $attributes = [];
+
+        $membershipOrderItemsLookup = $orderCollection->getOrders()->flatMap(function ($order) {
+            /** @var Order $order */
+            return $order->lineItems->filter(function ($orderLineItem) {
+                /** @var OrderLineItem $orderLineItem */
+                return $orderLineItem->product && $orderLineItem->product->isDigital(
+                    ) && $orderLineItem->product->isMembershipProduct();
+            });
+        })->groupBy(function ($orderLineItem) {
+            /** @var OrderLineItem $orderLineItem */
+            if ($orderLineItem->product) {
+                return $orderLineItem->product->brand;
+            }
+            return 'unknown';
+        });
+
+        $packsOrderItemLookup = $orderCollection->getOrders()->flatMap(function ($order) {
+            /** @var Order $order */
+            return $order->lineItems->filter(function ($orderLineItem) {
+                /** @var OrderLineItem $orderLineItem */
+                return $orderLineItem->product
+                    && $orderLineItem->product->isDigital()
+                    && $orderLineItem->product->isPack();
+            });
+        })->groupBy(function ($orderLineItem) {
+            /** @var OrderLineItem $orderLineItem */
+            if ($orderLineItem->product) {
+                return $orderLineItem->product->brand;
+            }
+            return 'unknown';
+        });
+
+        $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
+
+        foreach ($brands as $brand) {
+            $orderItems = ($membershipOrderItemsLookup[$brand] ?? collect())->sortBy(function ($orderLineItem) {
+                /** @var OrderLineItem $orderLineItem */
+                return $orderLineItem->order->processedAt->timestamp;
+            });
+
+            $first = $orderItems->first();
+            $attributes[$brand . '_membership_first-access-start-date'] = $first ? $first->order->processedAt->timestamp : null;
+            $last = $orderItems->last();
+            $attributes[$brand . '_membership_latest-access-start-date'] = $last ? $last->order->processedAt->timestamp : null;
+
+            $packs = $packsOrderItemLookup[$brand] ?? collect();
+            $attributes[$brand . '_owned_pack_product_ids'] = implode(
+                ', ',
+                $packs->map(function ($item) {
+                    /** @var OrderLineItem $item */
+                    return "_" . $item->product->id . "_";
+                })->toArray()
+            );
+            $attributes[$brand . '_owned_pack_product_skus'] = implode(
+                ', ',
+                $packs->map(function ($item) {
+                    /** @var OrderLineItem $item */
+                    return "_" . $item->product->sku . "_";
+                })->toArray()
+            );
+        }
+        return $attributes;
+    }
+
+    private function getSubscriptionAttributes(User $user, $subscriptions): array
+    {
+        if (!$subscriptions) {
+            return [];
+        }
+        $attributes = [];
+
+        $subscriptionsByBrand = $subscriptions->groupBy(function ($subscription) {
+            /** @var RechargeSubscription $subscription */
+            return $subscription->product->brand;
+        });
+
+
+        $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
+
+        foreach ($brands as $brand) {
+            $brandSubscriptions = ($subscriptionsByBrand[$brand] ?? collect())->sortBy('createdAt');
+            /** @var RechargeSubscription $first */
+            $first = $brandSubscriptions->first() ?? null;
+            /** @var RechargeSubscription $latest */
+            $latest = $brandSubscriptions->last() ?? null;
+
+            if (!$first || !$latest || $user->hasMobileMembership()) {
+                continue;
+            }
+
+            $attributes[$brand . '_membership_status'] = $this->getSubscriptionStatus($latest);
+            $attributes[$brand . '_membership_subscription_type'] =
+                $latest->product->subscription_interval_count . "_" . $latest->product->subscription_interval_type;
+            $attributes[$brand . '_membership_subscription_renewal-date'] = $latest->nextChargeScheduledAt->timestamp;
+            $attributes[$brand . '_membership_subscription_cancellation-date'] = $latest->cancelledAt?->timestamp;
+            $attributes[$brand . '_membership_subscription_cancellation-reason'] = $latest->cancellationReason;
+            $attributes[$brand . '_membership_subscription_first-start-date'] =
+                Carbon::parse($user->created_at)->timestamp;
+            $attributes[$brand . '_membership_subscription_latest-start-date'] = $latest->updatedAt?->timestamp;
+            $attributes[$brand . '_membership_subscription_trial-type'] = $this->getTrialType($latest);
+        }
+        return $attributes;
+    }
+
+    public function getSubscriptionStatus(RechargeSubscription $subscription): string
+    {
+        return match ($subscription->status) {
+            RechargeSubscriptionStatusEnum::Active->value => 'active',
+            RechargeSubscriptionStatusEnum::Cancelled->value => 'cancelled',
+            RechargeSubscriptionStatusEnum::Expired->value => 'expired',
+            default => 'unknown',
+        };
+    }
+
+    private function getTrialType(RechargeSubscription $latest): string
+    {
+        if (!$latest->product->isTrial()) {
+            return "";
+        }
+        $interval = match ($latest->product->subscription_interval_type) {
+            "month" => "monthly",
+            "year" => "annual",
+            default => "unknown",
+        };
+
+        $days = 0;
+        if (str_contains(strtolower($latest->product->sku), "7-day")
+            || $latest->product->sku == "PIANOTE-MEMBERSHIP-TRIAL") {
+            $days = 7;
+        }
+        if (str_contains(strtolower($latest->product->sku), "30-day")
+            || str_contains(strtolower($latest->product->sku), "1-month")) {
+            $days = 30;
+        }
+
+        if ($days == 0 || $interval == "unknown") {
+            Log::error("Unable to parse trial type for product: " . $latest->product->id);
+            return "";
+        }
+
+        return $interval . "_" . $days . "_days_free";
+    }
 }

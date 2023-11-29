@@ -1,7 +1,7 @@
 <template>
     <div class="cart-item-container">
-        <div class="image-container">
-            <a :href="this.item.sales_page_url"><img :src="'https://www.musora.com/musora-cdn/image/width=200,quality=95/' + item.thumbnail_url" class="item-thumbnail"></a>
+        <div class="image-container relative flex-shrink-0">
+            <a :href="this.item.sales_page_url"><img :src="item.thumbnail_url" class="item-thumbnail"></a>
             <div class="item-logo" v-if="item.logo">
                 <img :src="item.logo">
             </div>
@@ -32,7 +32,7 @@
                         class="inline-flex flex-column body ml-2 mr-auto csb-product-price"
                     >
                         <i
-                            class="fas fa-spin fa-spinner inline-flex justify-center"
+                            class="fas fa-spin fa-loader inline-flex justify-center"
                             :class="'text-'+brand"
                         ></i>
                     </div>
@@ -241,7 +241,6 @@ export default {
         }
     }
     .image-container {
-        position: relative;
         width: 70px;
         height: 70px;
         @include medium {
@@ -249,14 +248,13 @@ export default {
             height: 80px;
         }
         a {
-            display: inline-block;
             text-decoration: none;
             .item-thumbnail {
                 object-fit: cover;
                 object-position: center;
                 border-radius: 5px;
                 max-width: 100%;
-                height: auto;
+                height: 100%;
             }
         }
         .item-logo {

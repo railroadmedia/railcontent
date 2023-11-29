@@ -65,6 +65,8 @@ return [
         'podcast',
         'song-tutorial',
         'song-tutorial-children',
+        'workout',
+        'challenge-part',
     ],
     'comment_assignation_owner_ids' => [
         102905,
@@ -196,6 +198,7 @@ return [
             'unit',
             'song-tutorial',
             'song-tutorial-children',
+            'challenge',
         ],
         'completed' => [
             'course',
@@ -222,6 +225,7 @@ return [
             'unit',
             'song-tutorial',
             'song-tutorial-children',
+            'challenge',
         ],
     ],
 
@@ -343,6 +347,8 @@ return [
             \App\Decorators\Content\SemesterPackDecorator::class,
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
 //            \App\Modules\MusoraCenter\Decorators\UrlDecorator::class,
+
+            \App\Decorators\Content\ChallengeDecorator::class,
 
             \App\Decorators\Content\PlaylistItemDecorator::class,
 
@@ -747,7 +753,27 @@ return [
                 'allowableFilters' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
-            ]
+            ],
+            'challenge-part' => [
+                'name' => 'Challenge Part',
+                'icon' => 'icon-courses',
+                'description' => "... ",
+                'allowableFilters' => ['instructor','duration','style','difficulty'],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'sortBy' => '-published_on',
+            ],
+            'challenge' => [
+                'name' => 'Challenge',
+                'icon' => 'icon-courses',
+                'description' => "... ",
+                'allowableFilters' => ['instructor','duration','style','difficulty'],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'sortBy' => '-published_on',
+		'trailer1' => 448684113,
+            ],
+ 	    'workout' => [
+                'trailer1' => 448684113,
+            ],
         ],
         'pianote' => [
             'all' => [
@@ -903,6 +929,12 @@ return [
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
+            'workout' => [
+                'trailer1' => 448684113,
+            ],
+            'challenge' => [
+                'trailer1' => 448684113,
+            ],
         ],
         'guitareo' => [
             'all' => [
@@ -994,6 +1026,12 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => '-published_on',
             ],
+            'workout' => [
+                'trailer1' => 448684113,
+            ],
+            'challenge' => [
+                'trailer1' => 448684113,
+            ],
         ],
         'singeo' => [
             'all' => [
@@ -1069,6 +1107,12 @@ return [
                 "description" => "Warm up your voice for any occasion with our bite-sized routines - ranging from 5 to 20 minutes - perfect for busy days or when you need motivation.",
                 "allowableFilters" => [],
                 'allowableFiltersMobile' => [],
+            ],
+            'workout' => [
+                'trailer1' => 448684113,
+            ],
+            'challenge' => [
+                'trailer1' => 448684113,
             ],
         ],
     ],
@@ -1285,6 +1329,8 @@ return [
         'song-part',
         'play-along-part',
         'song-tutorial-children',
+        'workout',
+        'challenge-part',
     ],
     'appUserListContentTypes' => [
         'course',
@@ -1384,6 +1430,7 @@ return [
         'home_staff_pick_rating',
         'title',
         'xp',
+        'total_xp',
         'album',
         'artist',
         'chord_or_scale',
@@ -1551,6 +1598,7 @@ return [
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
+            'challenge' => 'lessons',
         ],
         'pianote' => [
             'learning-path' => 'levels',
@@ -1564,6 +1612,7 @@ return [
             'unit' => 'lessons',
             'song-tutorial' => 'lessons',
             'song-tutorial-children' => 'lessons',
+            'challenge' => 'lessons',
         ],
         'guitareo' => [
             'learning-path' => 'levels',
@@ -1574,6 +1623,7 @@ return [
             'semester-pack' => 'lessons',
             'song' => 'lessons',
             'play-along' => 'lessons',
+            'challenge' => 'lessons',
         ],
         'singeo' => [
             'learning-path' => 'levels',
@@ -1582,6 +1632,7 @@ return [
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
+            'challenge' => 'lessons',
         ],
 
     ],
@@ -1593,6 +1644,7 @@ return [
         'captions',
         'chapter_description',
         'chapter_timecode',
+        'chapter_thumbnail_url',
         'coach_bottom_banner_image',
         'coach_card_image',
         'coach_featured_image',
@@ -1660,6 +1712,8 @@ return [
         'web_banner_url',
         'zip_name',
         'zip_url',
+        'enrollment_start_time',
+        'enrollment_end_time',
     ],
 
     'compiled_column_mapping_field_keys' => [
@@ -1766,5 +1820,7 @@ return [
         'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
     ],
     'playlist_items_limit' => 300,
-    'search_in_playlist_items_name' => true
+    'search_in_playlist_items_name' => true,
+
+    'cohort_permisssion_ids' => [81, 65,96,97,98,100,101],
 ];

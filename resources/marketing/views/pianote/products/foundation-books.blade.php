@@ -29,7 +29,7 @@
         }
 
         .modal-bg:after {
-            font-family:"Font Awesome 5 Pro";
+            font-family:"Font Awesome 6 Pro";
             font-weight:900;
             font-style:normal;
             font-variant:normal;
@@ -196,7 +196,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner-no-tw', [
+    @include('pianote._partials.promo-banner', [
                     "name" => "Pianote Foundations Books",
                     "fullPrice" => 149,
                     "price" => 149,
@@ -223,7 +223,7 @@
 
                         <a
                             class="join vue-add-to-cart mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl"
-                            href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-foundation' => 1,], 'redirect' => '/order', 'locked' => 'false']) }}"
+                            href="/ecommerce/add-to-cart?products[pianote-foundation]=1"
                             data-product-json='{"pianote-foundation": 1}'
                         >CLICK HERE TO ORDER &raquo;</a>
                     @endif
@@ -483,7 +483,7 @@
                         @else
                             <a
                                 class="join vue-add-to-cart w-full text-lg sm:text-xl md:text-2xl lg:text-3xl"
-                                href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-foundation' => 1,], 'redirect' => '/order', 'locked' => 'false']) }}"
+                                href="/ecommerce/add-to-cart?products[pianote-foundation]=1"
                                 data-product-json='{"pianote-foundation": 1}'
                             >CLICK HERE TO ORDER »</a>
                         @endif
@@ -599,10 +599,7 @@
         }, false);
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-
-    {{-- Platform --}}
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
-
 @stop

@@ -96,6 +96,12 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
+    @include('pianote._partials.promo-banner', [
+        "name" => "Concert Headphones",
+        "fullPrice" => floatval($productPrices['pianote-headphones']->price),
+        "price" => floatval($productPrices['pianote-headphones']->discounted_price),
+        "noBreadcrumb" => true
+    ])
     @if(!empty($memberVersion))
 {{--        <div class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-50 fixed" style="background: linear-gradient(180deg, #FFAC00 0%, #FF7A00 100%);">--}}
 {{--            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-none sm:leading-none">--}}
@@ -267,14 +273,7 @@
 {{--        <p>ONLY @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} HEADPHONES LEFT!</p>--}}
         <div class="flex flex-wrap justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-7 mx-auto text-center">
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                <a class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group"
-
-{{--                    @if(!empty($memberVersion))--}}
-{{--                        href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-headphones' => 1], 'redirect' => '/order', 'locked' => 'false', 'promo-code' => 'members-special']) }}"--}}
-{{--                    @else--}}
-{{--                        href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-headphones' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"--}}
-{{--                    @endif--}}
-                >
+                <a class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                     <p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl font-extrabold uppercase" style="background: linear-gradient(180deg, #F51A30 0%, #9A1120 64.29%);">
                         LAUNCH SPECIAL
                     </p>
@@ -389,8 +388,6 @@
         })
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-
-    {{-- Platform --}}
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>

@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners;
 
+use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
 use Railroad\Ecommerce\Events\UserProducts\UserProductDeleted;
 use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
@@ -40,5 +41,10 @@ class UserMembershipFieldsListener
     public function handleUserProductDeleted(UserProductDeleted $deletedEvent)
     {
         $this->userMembershipFieldsService->sync($deletedEvent->getUserProduct()->getUser()->getId());
+    }
+
+    public function handleUserAccessPermissionsUpdated(UserAccessPermissionsUpdated $userAccessPermissionsUpdated)
+    {
+        $this->userMembershipFieldsService->syncUserAccess($userAccessPermissionsUpdated->getUserAccessPermissions());
     }
 }

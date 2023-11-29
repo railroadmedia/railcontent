@@ -140,42 +140,42 @@
                                 </linkable-td>
                             </tr>
 
-                            <tr
-                                style="cursor:pointer;"
-                                class="user-membership-row"
-                                v-if="hasMembership(item) && getMembership(item).length > 1"
-                                v-for="(membership, index) in getMembership(item).slice(1)"
-                                :key="membership.id"
-                                :class="getMembershipRowClasses(item)"
-                                @mouseover="hoveredUserId = item.id"
-                                @mouseleave="hoveredUserId = -1"
-                            >
-                                <linkable-td
-                                    :to="{ name: 'users.edit', params: { id: item.id }}"
-                                >
-                                    <span
-                                        :class="getMembershipStateColor(membership)"
-                                        >{{ membership.attributes.subscription_state }}</span>&nbsp;
-                                    <span>{{ getMembershipType(membership) }}</span>
-                                </linkable-td>
+<!--                            <tr-->
+<!--                                style="cursor:pointer;"-->
+<!--                                class="user-membership-row"-->
+<!--                                v-if="hasMembership(item) && getMembership(item).length > 1"-->
+<!--                                v-for="(membership, index) in getMembership(item).slice(1)"-->
+<!--                                :key="membership.id"-->
+<!--                                :class="getMembershipRowClasses(item)"-->
+<!--                                @mouseover="hoveredUserId = item.id"-->
+<!--                                @mouseleave="hoveredUserId = -1"-->
+<!--                            >-->
+<!--                                <linkable-td-->
+<!--                                    :to="{ name: 'users.edit', params: { id: item.id }}"-->
+<!--                                >-->
+<!--                                    <span-->
+<!--                                        :class="getMembershipStateColor(membership)"-->
+<!--                                        >{{ membership.attributes.subscription_state }}</span>&nbsp;-->
+<!--                                    <span>{{ getMembershipType(membership) }}</span>-->
+<!--                                </linkable-td>-->
 
-                                <linkable-td
-                                    :to="{ name: 'users.edit', params: { id: item.id }}"
-                                    v-if="hasMembership(item)"
-                                    class="text-center"
-                                >
-                                    <v-custom-brand-icon :brand="membership.attributes.brand">
-                                    </v-custom-brand-icon>
-                                </linkable-td>
+<!--                                <linkable-td-->
+<!--                                    :to="{ name: 'users.edit', params: { id: item.id }}"-->
+<!--                                    v-if="hasMembership(item)"-->
+<!--                                    class="text-center"-->
+<!--                                >-->
+<!--                                    <v-custom-brand-icon :brand="membership.attributes.brand">-->
+<!--                                    </v-custom-brand-icon>-->
+<!--                                </linkable-td>-->
 
-                                <linkable-td
-                                    :to="{ name: 'users.edit', params: { id: item.id }}"
-                                    v-if="hasMembership(item)"
-                                    class="text-center"
-                                >
-                                    {{ getMembershipRenew(membership) }}
-                                </linkable-td>
-                            </tr>
+<!--                                <linkable-td-->
+<!--                                    :to="{ name: 'users.edit', params: { id: item.id }}"-->
+<!--                                    v-if="hasMembership(item)"-->
+<!--                                    class="text-center"-->
+<!--                                >-->
+<!--                                    {{ getMembershipRenew(membership) }}-->
+<!--                                </linkable-td>-->
+<!--                            </tr>-->
                         </template>
 
                         <template v-slot:footer>
@@ -420,13 +420,6 @@ export default {
                 },
                 {
                     text: 'Brand',
-                    align: 'center',
-                    sortable: false,
-                    width: 150,
-                    value: ''
-                },
-                {
-                    text: 'Next Renewal',
                     align: 'center',
                     sortable: false,
                     width: 150,

@@ -52,21 +52,31 @@
                     @endif
                 </a>
             @else
-                <button class="btn completeButton
-                               {{ $isCompleted ? 'is-complete' : '' }}"
-                        dusk="master-complete-button"
-                        title="Mark Lesson as Complete"
-                        data-brand="{{ $brand }}"
-                        data-content-id="{{ $contentId }}">
+                <div class="tw-flex">
+                    <button class="btn resetProgress"
+                            data-brand="{{ $brand }}"
+                            data-content-id="{{ $contentId }}"
+                            title="Reset Prgress">
+                            <span class="bg-white inverted tw-text-white tw-px-6 tw-items-center tw-border-none tw-shadow-none tw-flex-col">
+                                <i class="fas fa-undo tw-text-white reset tw-mb-0.5 tw-text-lg" aria-hidden="true"></i> Reset
+                            </span>
+                    </button>
+                    <button class="btn completeButton tw-text-base
+                                   {{ $isCompleted ? 'is-complete' : '' }}"
+                            dusk="master-complete-button"
+                            title="Mark Lesson as Complete"
+                            data-brand="{{ $brand }}"
+                            data-content-id="{{ $contentId }}">
 
-                    <span class="incompleted bg-white inverted text-white tw-px-6 tw-items-center">
-                        <i class="fas fa-check mr-1"></i> Mark as Complete
-                    </span>
+                        <span class="incompleted bg-white inverted tw-text-white tw-px-6 tw-items-center tw-border-none tw-shadow-none tw-flex-col">
+                            <div class="tw-border-2 tw-border-white tw-rounded-full tw-px-1 tw-mb-1.5"><i class="fas fa-check tw-text-[10px] tw-mb-1"></i></div> Complete
+                        </span>
 
-                    <span class="completed bg-white text-{{ $brand }} tw-px-6 tw-items-center">
-                        <i class="fas fa-check mr-1"></i>Completed
-                    </span>
-                </button>
+                        <span class="completed tw-text-white tw-px-6 tw-items-center tw-border-none tw-shadow-none tw-flex-col">
+                            <div class="tw-border-2 tw-border-white tw-bg-white tw-rounded-full tw-px-1 tw-mb-1.5"><i class="fas fa-check tw-text-[10px] tw-mb-1 tw-text-{{$brand}}"></i></div> Completed
+                        </span>
+                    </button>
+                </div>
             @endif
         </div>
     </div>

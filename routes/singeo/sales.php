@@ -8,7 +8,6 @@ Route::domain('{singeoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
     Route::get('/', [SalesController::class, 'home'] );
-    Route::get('/restart', [SalesController::class, 'restart'] );
     Route::get('/5-reasons', [SalesController::class, 'fiveReasons'] );
     Route::get('/trial', [SalesController::class, 'trial']);
     Route::get('/trial-a', [SalesController::class, 'trial1']);
@@ -38,14 +37,16 @@ Route::domain('{singeoDomain}')
 
     Route::get('/thank-you', [SalesController::class, 'thankyou']);
     Route::get('/subscribed', [SalesController::class, 'subscribed']);
+    Route::get('/preferences', [SalesController::class, 'preferences']);
     Route::get('/lets-sing-a-song', [SalesController::class, 'letssingasong']);
     Route::get('/welcome-party', [SalesController::class, 'welcomeparty']);
-    Route::get('/shop/singing-starter-kit', [SalesController::class, 'singingstarterkit']);
     Route::get('/singingstarterkit', [SalesController::class, 'singingstarterkitalt']);
     Route::get('/singing-starter-kit-discount', [SalesController::class, 'singingstarterkitdiscount']);
     Route::get('/singing-starter-kit-shyv-discount', [SalesController::class, 'singingstarterkitshyvdiscount']);
     Route::get('/recitals', [SalesController::class, 'recitals']);
-    Route::get('/beautiful-harmonies', [SalesController::class, 'beautifulharmonies']);
+
+    Route::get('/lifetime', [SalesController::class, 'salesLifetime'] );
+    Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount'] );
     Route::get('/lifetime-members-masterclass', [SalesController::class, 'lifetimeMasterclass']);
 
     Route::group(['prefix' => 'beginner-vocal-bootcamp'],

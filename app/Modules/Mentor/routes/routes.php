@@ -6,8 +6,7 @@ use Modules\Mentor\Controllers\HelpScoutMentorController;
 use Modules\Mentor\Controllers\MentorController;
 
 Route::group(
-// Todo:  remove cors once musora runs on MWP domain
-    ['prefix' => config('mentor.route_prefix')],
+    ['prefix' => config('mentor.route_prefix'), 'middleware' => ['web_or_api_authenticated', 'musora-center-admin']],
     function () {
         Route::get('/getMentorIdByStudent/{userId}/', [MentorController::class, 'getMentorIdByStudent']);
         Route::get('/getMentors', [MentorController::class, 'getMentors']);
@@ -17,6 +16,12 @@ Route::group(
         Route::get('/getMentor/{userId}', [MentorController::class, 'getMentor']);
         Route::get('/updateMentor', [MentorController::class, 'updateMentor']);
         Route::get('/demoteMentor/{userId}', [MentorController::class, 'demoteMentor']);
+    }
+);
+
+Route::group(
+    ['prefix' => config('mentor.route_prefix')],
+    function () {
         Route::post('/helpscout/conversation/new', [HelpScoutMentorController::class, 'newHelpScoutConversation'])->name('helpscout_conversation_new');
     }
 );

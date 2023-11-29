@@ -1,13 +1,9 @@
 <script setup>
 import ModalRenderer from "../Modal/ModalRenderer";
 import { XIcon } from "@heroicons/vue/solid";
-import { ref } from "vue";
+import {computed, ref} from "vue";
 
 const props = defineProps({
-  brand: {
-    type: String,
-    default: "",
-  },
   topSubtitle: {
     type: String,
     default: "",
@@ -104,10 +100,32 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  skillLevel: {
+    type: String,
+    default: ''
+  },
 });
 
 const primaryVideoModal = ref(false);
 const secondaryVideoModal = ref(false);
+
+const skillLevelColor = computed(() => {
+    switch (props.skillLevel) {
+        case 'Novice':
+            return 'tw-bg-[#22C55E]';
+        case 'Beginner':
+            return 'tw-bg-[#0B76DB]';
+        case 'Intermediate':
+            return 'tw-bg-[#EAB308]';
+        case 'Advanced':
+            return 'tw-bg-[#F06314]';
+        case 'Expert':
+            return 'tw-bg-[#B91C1C]';
+        default:
+            return 'tw-bg-[#22C55E]';
+    }
+});
+
 
 </script>
 
@@ -140,7 +158,8 @@ const secondaryVideoModal = ref(false);
           <h4 class="tw-font-bold tw-text-sm tw-uppercase tw-leading-none tw-mb-3" :class="`${ topSubtitleColor && `tw-text-${topSubtitleColor}` }`" v-if="topSubtitle && !logo">{{ topSubtitle }}</h4>
           <h2 class="
               tw-font-bebas-neue
-              tw-text-[50px]
+              tw-text-[40px]
+              sm:tw-text-[50px]
               tw-mb-1
               tw-uppercase
               tw-leading-none
@@ -152,34 +171,37 @@ const secondaryVideoModal = ref(false);
           </h2>
             <!-- Logo -->
             <img v-if="logo" class="tw-h-24 md:tw-h-28 3xl:tw-h-32 mb-1 tw-mr-auto" :src="`https://www.musora.com/musora-cdn/image/width=800,quality=95/${logo}`" alt="pack logo" />
+          <div v-if="isFeatured && skillLevel" class="tw-flex tw-items-center tw-font-semibold md:tw-text-lg">
+              <div class="tw-inline-block tw-w-[9px] tw-h-[9px] tw-rounded-full tw-mr-2" :class="skillLevelColor"></div> {{ skillLevel }}
+          </div>
           <p :class="`tw-hidden xl:tw-block xl:tw-line-clamp-3 tw-text-lg tw-max-w-[520px] ${ descriptionColor && `tw-text-${descriptionColor}` }`" v-html="description"></p>
           <!-- CTA -->
-            <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
+            <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block tw-max-w-[450px] md:tw-max-w-none">
                 <a
                     v-if="primaryCtaText && primaryCtaUrl && !primaryVideo"
                     :href="primaryCtaUrl"
-                    :class="`tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg md:tw-text-xl tw-mr-2 tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2`"
+                    :class="`tw-text-center tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-2 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 md:tw-text-xl tw-mr-2 tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2 ${secondaryCtaText ? 'tw-flex-1 tw-px-2' : 'tw-px-6'}`"
                 >
                     {{ primaryCtaText }}
                 </a>
                 <span
                     v-if="primaryCtaText && primaryVideo"
                     @click="primaryVideoModal = true"
-                    :class="`tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg tw-mr-2 tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block  tw-text-xl ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2 tw-cursor-pointer`"
+                    :class="`tw-text-center tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-2 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-mr-2 tw-line-clamp-1 md:tw-inline-block md:tw-text-xl ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2 tw-cursor-pointer ${secondaryCtaText ? 'tw-flex-1 tw-px-2' : 'tw-px-6'}`"
                 >
                     {{ primaryCtaText }}
                 </span>
                 <a
                     v-if="secondaryCtaText && secondaryCtaUrl && !secondaryVideo"
                     :href="secondaryCtaUrl"
-                    :class="`tw-border-2 tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg md:tw-text-xl tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2`"
+                    :class="`tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-2 tw-px-2 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 md:tw-text-xl tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2`"
                 >
                     {{ secondaryCtaText }}
                 </a>
                 <span
                     v-if="secondaryCtaText && secondaryVideo"
                     @click="secondaryVideoModal = true"
-                    :class="`tw-border-2 tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg md:tw-text-xl tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2 tw-cursor-pointer`"
+                    :class="`tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-2 tw-px-2 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 md:tw-text-xl tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2 tw-cursor-pointer`"
 
                 >
                     {{ secondaryCtaText }}

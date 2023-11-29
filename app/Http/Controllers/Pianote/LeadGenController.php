@@ -37,6 +37,11 @@ class LeadGenController extends BaseController
         return view('pianote.lead-gen.subscribed');
     }
 
+    public function preferences()
+    {
+        return view('pianote.lead-gen.preferences');
+    }
+
     public function weeklyemail()
     {
         return view('pianote.lead-gen.blog-forms.weekly-email', ['recaptchaKey'=>config('recaptcha.key')]);
@@ -102,6 +107,19 @@ class LeadGenController extends BaseController
         return view('pianote.lead-gen.lifetime-members-masterclass');
     }
 
+    public function songSecrets()
+    {
+        return view('pianote.lead-gen.song-secrets.song-secrets-webinar', ['theme' => 'pianote']);
+    }
+    public function songSecretsTY()
+    {
+        return view('pianote.lead-gen.song-secrets.thank-you', ['theme' => 'pianote']);
+    }
+    public function giveaway()
+    {
+        return view('pianote.lead-gen.giveaway', ['theme' => 'pianote', 'recaptchaKey'=>config('recaptcha.key')]);
+    }
+
     public function beginnerBootcamp(Request $request, $domain, $page = null)
     {
         if(is_null($page)){
@@ -132,7 +150,7 @@ class LeadGenController extends BaseController
             case null:
                 return view('pianote.lead-gen.chord-hacks.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
-                return view('pianote.lead-gen.chord-hacks.thank-you', ['theme' => 'pianote', 'month' => true]);
+                return view('pianote.lead-gen.chord-hacks.thank-you', ['theme' => 'pianote']);
             case 'ty-annual':
                 return view('pianote.lead-gen.chord-hacks.ty-annual');
             case 'ty-monthly':
@@ -157,10 +175,19 @@ class LeadGenController extends BaseController
 
         throw new NotFoundHttpException();
     }
+    public function beautifulChristmasClassics(Request $request, $domain, $page = null, $lesson = null)
+    {
+        switch($page){
+            case null:
+                return view('pianote.lead-gen.beautiful-christmas-classics', ['recaptchaKey'=>config('recaptcha.key')]);
+        }
+
+        throw new NotFoundHttpException();
+    }
 
     public function riffsAndFills()
     {
-        return view('pianote.products.riffs-and-fills');
+        return view('pianote.products.riffs-and-fills', ['theme' => 'pianote']);
     }
 
     public function method(Request $request, $domain, $page = null)

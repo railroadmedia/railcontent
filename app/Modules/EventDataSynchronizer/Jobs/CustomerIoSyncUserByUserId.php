@@ -2,12 +2,11 @@
 
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
+use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
+use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Exception;
-use App\Modules\CustomerIO\Services\CustomerIoService;
-use Railroad\Ecommerce\Entities\User as EcommerceUser;
-use Railroad\Ecommerce\Services\UserProductService;
-use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use Modules\UserManagementSystem\Models\User;
 use Throwable;
 
@@ -17,22 +16,27 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
      * @var User
      */
     private $user;
+    private array $data;
 
-    public function __construct(User $user)
+    public function __construct(User $user, array $data = [])
     {
         $this->user = $user;
+        $this->data = $data;
     }
 
     /**
-     * @param  CustomerIoService  $customerIoService
-     * @throws \Throwable
+     * @param CustomerIoService $customerIoService
+     * @param CustomerIoSyncService $customerIoSyncService
+     * @param UserService $userService
+     * @param UserAccessPermissionsService $userAccessPermissionsService
+     * @throws Throwable
      */
     public function handle(
         CustomerIoService $customerIoService,
         CustomerIoSyncService $customerIoSyncService,
         UserService $userService,
-        UserProductService $userProductService
-    ) {
+        UserAccessPermissionsService $userAccessPermissionsService,
+    ): void {
         try {
             $this->user = $userService->getByIdOrNull($this->user->id);
             $accountNameBrandsToSync = config('event-data-synchronizer.customer_io_account_name_brands_to_sync', []);
@@ -44,16 +48,18 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
                 $syncThisWorkspace = false;
 
                 foreach ($brands as $brand) {
-                    if ($userProductService->userHadOrHasAnyDigitalProductsForBrand(
-                            new EcommerceUser($this->user->id, $this->user->email),
-                            $brand
-                        ) || $accountNameToSyncAllBrand == $brand) {
+                    if ($userAccessPermissionsService->shouldSyncCustomerIOWorkspace($this->user, $brand)
+                        || $accountNameToSyncAllBrand == $brand) {
                         $syncThisWorkspace = true;
+                        break;
                     }
                 }
 
                 if ($syncThisWorkspace) {
                     $customerAttributes = $customerIoSyncService->getUsersCustomAttributes($this->user, $brands);
+                    if ($this->data) {
+                        $customerAttributes = array_merge($customerAttributes, $this->data);
+                    }
 
                     $customerIoService->createOrUpdateCustomerByUserId(
                         $this->user->id,
@@ -72,17 +78,11 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
     /**
      * The job failed to process.
      *
-     * @param  Throwable  $exception
+     * @param Throwable $exception
      */
-    public function failed(Throwable $exception)
+    public function failed(Throwable $exception): void
     {
-        error_log(
-            'Error on CustomerIoSyncUserById job trying to sync user to customer.io. User ID: '.
-            $this->user->id.' - lookupEmail: '.$this->user->email
-        );
-
-        error_log($exception);
-
+        Log::error('CustomerIoSyncUserByUserId job failed for user: ' . $this->user->id);
         parent::failed($exception);
     }
 }

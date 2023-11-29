@@ -7,10 +7,6 @@ import {
 import CarouselSlide from "./CarouselSlide.vue";
 
 const props = defineProps({
-  brand: {
-    type: String,
-    default: 'drumeo'
-  },
   preloadedCarousel: {
     type: Array,
     default: [],
@@ -84,7 +80,7 @@ onMounted(() => {
 
 <template>
   <div
-    :class="slides.length > 0 ? 'tw-block tw-border-[0.5px] tw-border-[#A1A1A9] dark:tw-border-[#344858] tw-w-full tw-h-[370px] tw-border-box tw-rounded-[10px] tw-relative tw-my-4 tw-overflow-hidden' : 'tw-mb-4'">
+    :class="slides.length > 0 ? 'tw-block tw-border-[0.5px] tw-border-[#A1A1A9] dark:tw-border-[#344858] tw-w-full tw-h-[370px] tw-border-box tw-rounded-[10px] tw-relative tw-mt-[16px] tw-mb-[30px] tw-overflow-hidden' : 'tw-mb-4'">
 
     <CarouselSlide
       v-for="(slide, i) in slides"
@@ -93,7 +89,6 @@ onMounted(() => {
       :isPrevSlide="i === prevSlide"
       :key="slide.title"
       :animateDirection="animateDirection"
-      :brand="brand"
       :topSubtitle="slide.subtitle"
       :topSubtitleColor="slide.subtitle_color"
       :title="slide.title"
@@ -112,7 +107,8 @@ onMounted(() => {
       :desktopImg="slide.desktop_img"
       :tabletImg="slide.tablet_img"
       :mobileImg="slide.mobile_img"
-      :is-draft="slide.draft"
+      :is-draft="slide.draft === 1"
+      :skill-level="slide.skill_level"
     />
 
       <!-- Directional Buttons -->

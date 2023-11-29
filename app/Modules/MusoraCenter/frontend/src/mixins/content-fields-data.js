@@ -79,4 +79,6 @@ export default {
     mp3_no_drums_yes_click_url: dataDefault(),
     mp3_yes_drums_yes_click_url: dataDefault(),
     show_in_new_feed: dataDefault(),
+    high_soundslice_slug: dataDefault(),
+    low_soundslice_slug: dataDefault(),
 };

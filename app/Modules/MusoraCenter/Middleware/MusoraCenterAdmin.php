@@ -45,8 +45,7 @@ class MusoraCenterAdmin
                 $this->permissionService->is(auth()->id(), 'super_administrator') ||
                 $this->permissionService->is(auth()->id(), 'shipping_fulfillment') ||
                 $this->permissionService->is(auth()->id(), 'payment_recovery') ||
-                $this->permissionService->is(auth()->id(), 'view_daily_stats'))
-            && (in_array(app()->environment(), ['local', 'staging', 'development', 'beta-testing']))) {
+                $this->permissionService->is(auth()->id(), 'view_daily_stats'))) {
 
             ContentRepository::$bypassPermissions = true;
             ContentRepository::$pullFutureContent = true;

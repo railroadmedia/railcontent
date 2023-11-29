@@ -9,10 +9,18 @@ import VueAxios from 'vue-axios'
 import 'simplebar';
 import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
+
+//App Pages
+import Workouts from './vue/views/Workouts';
+import Home from './vue/views/Home.vue';
+import Support from './vue/views/Support';
+import Schedule from './vue/views/Schedule';
+import Playlists from './vue/views/Playlists';
+import Playlist from './vue/views/Playlist';
+
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
 import PageContainer from './vue/components/PageContainer/PageContainer.vue';
-import HomeCardLinks from './vue/components/HomeCardLinks/HomeCardLinks.vue';
 import CatalogSection from './vue/components/CatalogSection/CatalogSection.vue';
 import CatalogueCardContainer from './vue/components/Catalogue/CatalogueCardContainer.vue';
 import StatsSection from './vue/components/StatsSection/StatsSection.vue';
@@ -26,6 +34,10 @@ import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue';
 import InfoModal from './vue/components/Modal/InfoModal';
 import SoundSlice from './vue/components/SoundSlice/SoundSlice.vue';
 import CohortBanner from './vue/components/CohortBanner/CohortBanner.vue';
+import ContentInfo from './vue/components/ContentInfo/ContentInfo';
+import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWrapper';
+import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper';
+import ChildCollectionPage from './vue/components/CollectionPage/ChildCollectionPage';
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -40,7 +52,6 @@ import './vue/vuesora/assets/js/functions/user-events';
 import './vue/vuesora/assets/js/functions/dropdown';
 import './vue/vuesora/assets/js/functions/modal';
 import './vue/vuesora/assets/js/functions/accordion';
-import './vue/vuesora/assets/js/functions/instructor-info';
 import './vue/vuesora/assets/js/third-party/add-event-atc';
 
 //Vuesora Components
@@ -231,9 +242,9 @@ app.config.productionTip = false;
 
 app.component('AppContainer', AppContainer)
     .component('PageContainer', PageContainer)
+    .component('Home', Home)
     .component('HeaderCarousel', HeaderCarousel)
     .component('StaticHeader', StaticHeader)
-    .component('HomeCardLinks', HomeCardLinks)
     .component('CatalogSection', CatalogSection)
     .component('StatsSection', StatsSection)
     .component('CoachEvent', CoachEvent)
@@ -257,6 +268,15 @@ app.component('AppContainer', AppContainer)
     .component('SoundSlice', SoundSlice)
     .component('CohortBanner', CohortBanner)
     .component('CatalogueCardContainer', CatalogueCardContainer)
+    .component('ContentInfo', ContentInfo)
+    .component('CollectionFilterWrapper', CollectionFilterWrapper)
+    .component('CollectionWrapper', CollectionWrapper)
+    .component('ChildCollectionPage', ChildCollectionPage)
+    .component('Workouts', Workouts)
+    .component('Support', Support)
+    .component('Schedule', Schedule)
+    .component('Playlists', Playlists)
+    .component('Playlist', Playlist)
 
     .component('PlaylistPlaybackWrapper', defineAsyncComponent(() =>
         import(
@@ -459,10 +479,10 @@ app.component('AppContainer', AppContainer)
             `./vue/components/Playlists/Playlist/PlaylistCatalog.vue`
         )
     ))
-    .component('PlaylistBreadcrumb', defineAsyncComponent(() =>
+    .component('Breadcrumb', defineAsyncComponent(() =>
         import(
-            /* webpackChunkName: "playlist-breadcrumb" */
-            `./vue/components/Playlists/Breadcrumb.vue`
+            /* webpackChunkName: "breadcrumb" */
+            `./vue/components/Breadcrumb/Breadcrumb.vue`
         )
     ))
     .component('PlaylistCollectionHeader', defineAsyncComponent(() =>

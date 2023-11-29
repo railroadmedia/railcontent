@@ -54,7 +54,7 @@
   text-shadow: 2px 2px 1px rgba(0, 0, 0, .9);
 }
 
-.tw-max-h-1400 {
+.max-h-1400 {
   max-height: 1400px;
 }
 
@@ -62,7 +62,7 @@
   top: calc(50vh - 150px);
 }
 
-.tw-border-3 {
+.border-3 {
   border-width: 3px;
 }
 
@@ -124,7 +124,7 @@ main + footer.sales-footer .site-map h1 {
 }
 
 .completed-badge {
-  background-image: url("https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Ficon-checkmark.svg?auto=format&ixlib=php-1.2.1&w=150&s=d744dce77f5d9a32b7e3d8caa6e008ff") !important;
+  background-image: url("https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-checkmark.svg") !important;
 }
 
 .gradient {
@@ -177,33 +177,33 @@ main + footer.sales-footer .site-map h1 {
 }
 
 .header-image {
-  background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fmobile-header.jpg?auto=format&ixlib=php-1.2.1&w=768&s=2224943f95432f553b27dcce914772ea);
+  background-image: url(https://www.musora.com/musora-cdn/image/width=768,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/mobile-header.jpg);
   height: calc(100vh - 127px);
   min-height: 528px;
 }
 
 .sticky-1 .sticky-a {
-  background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fmobile-section-1-background-a.jpg?auto=format&ixlib=php-1.2.1&w=768&s=400b7be5421073348e17f28009652a8e);
+  background-image: url(https://www.musora.com/musora-cdn/image/width=768,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/mobile-section-1-background-a.jpg);
 }
 
 .sticky-1 .sticky-b {
-  background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fmobile-section-1-background-b.jpg?auto=format&ixlib=php-1.2.1&w=768&s=035641a082c423f143e9e9e513e57b24);
+  background-image: url(https://www.musora.com/musora-cdn/image/width=768,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/mobile-section-1-background-b.jpg);
 }
 
 .sticky-2 .sticky-a {
-  background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fmobile-section-2-background-a.jpg?auto=format&ixlib=php-1.2.1&w=768&s=c02d760eb263f35c44903bc8cb450ae5);
+  background-image: url(https://www.musora.com/musora-cdn/image/width=768,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/mobile-section-2-background-a.jpg);
 }
 
 .sticky-2 .sticky-b {
-  background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fmobile-section-2-background-b.jpg?auto=format&ixlib=php-1.2.1&w=768&s=90e46ca56dbcf0ec96df0786440421f5);
+  background-image: url(https://www.musora.com/musora-cdn/image/width=768,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/mobile-section-2-background-b.jpg);
 }
 
 .sticky-3 .sticky-a {
-  background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fmobile-section-3-background-a.jpg?auto=format&ixlib=php-1.2.1&w=768&s=19d3e4cfd0c07cf8815d20a4048e1e11);
+  background-image: url(https://www.musora.com/musora-cdn/image/width=768,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/mobile-section-3-background-a.jpg);
 }
 
 .sticky-3 .sticky-b {
-  background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fmobile-section-3-background-b.jpg?auto=format&ixlib=php-1.2.1&w=768&s=5ff94bf5874d08892b7a099bd39d9b95);
+  background-image: url(https://www.musora.com/musora-cdn/image/width=768,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/mobile-section-3-background-b.jpg);
 }
 
 @media (hover: none) and (max-width: 640px) {
@@ -215,25 +215,25 @@ main + footer.sales-footer .site-map h1 {
 
 @media (min-width: 641px) {
   .header-image {
-    background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Ftablet-header.jpg?auto=format&ixlib=php-1.2.1&w=2000&s=1c266f7463f5d14e472e6bb0e5f110f7);
+    background-image: url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/tablet-header.jpg);
   }
   .sticky-1 .sticky-a {
-    background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Ftablet-section-1-background-a.jpg?auto=format&ixlib=php-1.2.1&w=1280&s=4007cf59390514988c80b47bd0d80827);
+    background-image: url(https://www.musora.com/musora-cdn/image/width=1280,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/tablet-section-1-background-a.jpg);
   }
   .sticky-1 .sticky-b {
-    background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Ftablet-section-1-background-b.jpg?auto=format&ixlib=php-1.2.1&w=1280&s=3ae30e0415a7f5ae97b39b1580d8e050);
+    background-image: url(https://www.musora.com/musora-cdn/image/width=1280,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/tablet-section-1-background-b.jpg);
   }
   .sticky-2 .sticky-a {
-    background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Ftablet-section-2-background-a.jpg?auto=format&ixlib=php-1.2.1&w=1280&s=450d584abac657e81eb06750de5b0a72);
+    background-image: url(https://www.musora.com/musora-cdn/image/width=1280,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/tablet-section-2-background-a.jpg);
   }
   .sticky-2 .sticky-b {
-    background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Ftablet-section-2-background-b.jpg?auto=format&ixlib=php-1.2.1&w=1280&s=8768891e14fcdf153ab053f460a4b0b2);
+    background-image: url(https://www.musora.com/musora-cdn/image/width=1280,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/tablet-section-2-background-b.jpg);
   }
   .sticky-3 .sticky-a {
-    background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Ftablet-section-3-background-a.jpg?auto=format&ixlib=php-1.2.1&w=1280&s=c4a416f29a4d6f253556beeae2ff0012);
+    background-image: url(https://www.musora.com/musora-cdn/image/width=1280,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/tablet-section-3-background-a.jpg);
   }
   .sticky-3 .sticky-b {
-    background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Ftablet-section-3-background-b.jpg?auto=format&ixlib=php-1.2.1&w=1280&s=2a40d9e3250e14df91180c329eed0088);
+    background-image: url(https://www.musora.com/musora-cdn/image/width=1280,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/tablet-section-3-background-b.jpg);
   }
 }
 
@@ -246,34 +246,34 @@ main + footer.sales-footer .site-map h1 {
     display: flex;
   }
   .header-image {
-    background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fheader-background.png?auto=format&ixlib=php-1.2.1&w=2000&s=f4dfeffdc8947fede09190db30f4eb41);
+    background-image: url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/header-background.png);
     height: auto;
   }
   .sticky-1 .sticky-a {
-    background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fsection-1-background-a.jpg?auto=format&ixlib=php-1.2.1&w=2000&s=bd5d281dbbfdf7979489a9739e5a2ff2);
+    background-image: url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/section-1-background-a.jpg);
   }
   .sticky-1 .sticky-b {
-    background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fsection-1-background-b.jpg?auto=format&ixlib=php-1.2.1&w=2000&s=86d9eb1c6b5249ea5fa06b4deef31bfa);
+    background-image: url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/section-1-background-b.jpg);
   }
   .sticky-2 .sticky-a {
-    background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fsection-2-background-a.jpg?auto=format&ixlib=php-1.2.1&w=2000&s=c7e63a445ee1a1de7eebdb354a83e714);
+    background-image: url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/section-2-background-a.jpg);
   }
   .sticky-2 .sticky-b {
-    background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fsection-2-background-b.jpg?auto=format&ixlib=php-1.2.1&w=2000&s=37c863a8228cd2c0d7270a573d13b559);
+    background-image: url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/section-2-background-b.jpg);
   }
   .sticky-3 .sticky-a {
-    background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fsection-3-background-a.jpg?auto=format&ixlib=php-1.2.1&w=2000&s=d7f4455e9b23226b8a718cd74ecb83e6);
+    background-image: url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/section-3-background-a.jpg);
   }
   .sticky-3 .sticky-b {
-    background-image: url(https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fsection-3-background-b.jpg?auto=format&ixlib=php-1.2.1&w=2000&s=57cd914b84fa3d39d35103ff30d7d185);
+    background-image: url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/section-3-background-b.jpg);
   }
 }
 
-.tw-scrollbar-none::-webkit-scrollbar {
+.scrollbar-none::-webkit-scrollbar {
   display: none; /* Chrome */
 }
 
-.tw-scrollbar-none {
+.scrollbar-none {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }

@@ -2,19 +2,20 @@
 
 namespace App\Modules\Ecommerce\Providers;
 
-use App\Modules\Ecommerce\Console\Commands\FixMissingStripeCustomerIds;
-use App\Modules\Ecommerce\Console\Commands\MigrateExistingStripeMusoraGatewayPaymentsToDrumeo;
-use App\Modules\Ecommerce\Console\Commands\MigratePaypalGatewayToMusora;
-use App\Modules\Ecommerce\Console\Commands\MigrateStripeCustomersToMusora;
-use App\Modules\Ecommerce\Console\Commands\MigrateStripeSubscriptions;
-use App\Modules\Ecommerce\Console\Commands\SyncStripePaymentMethods;
-use App\Modules\Ecommerce\Console\Commands\ProcessAppleExpiredSubscriptions;
-use App\Modules\Ecommerce\Console\Commands\UnifySubscriptions;
+use App\Modules\Ecommerce\Listeners\EcommerceEventListener;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider;
+use Modules\UserManagementSystem\Events\User\UserCreated;
 
-class EcommerceServiceProvider extends ServiceProvider
+class EcommerceServiceProvider extends EventServiceProvider
 {
+    protected $listen = [
+        UserCreated::class => [
+            EcommerceEventListener::class . '@handleUserCreated',
+        ],
+    ];
+
     /**
      * UsoraServiceProvider constructor.
      *
@@ -32,19 +33,10 @@ class EcommerceServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->commands(
-            [
-                UnifySubscriptions::class,
-                ProcessAppleExpiredSubscriptions::class,
-                SyncStripePaymentMethods::class,
-                FixMissingStripeCustomerIds::class,
-                MigrateStripeCustomersToMusora::class,
-                MigratePaypalGatewayToMusora::class,
-                MigrateStripeSubscriptions::class,
-            ]
-        );
-
-        $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
+        // middleware is controlled in the route files
+        Route::middleware([])
+            ->group(__DIR__ . '/../routes/routes.php')
+            ->group(__DIR__ . '/../routes/shopify.php');
     }
 
     /**

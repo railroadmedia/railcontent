@@ -61,7 +61,7 @@
     </style>
     <div class="py-24 md:py-32 lg:py-40 px-2 md:px-5 text-white text-center w-full bg-musora-black">
         <div class="container mx-auto relative z-0">
-            <a href="https://dmmior4id2ysr.cloudfront.net/brand/brand-guide.pdf" class="join musora-gold relative">DOWNLOAD GUIDE &nbsp; <i class="fas fa-arrow-to-bottom"></i></a>
+            <a target="_blank" href="https://dmmior4id2ysr.cloudfront.net/brand/brand-guide-2023.pdf" class="join musora-gold relative">DOWNLOAD GUIDE &nbsp; <i class="fas fa-arrow-to-bottom"></i></a>
 
             <div class="mt-7 md:mt-16" style="font-size: 0;">
                 <a href="https://dmmior4id2ysr.cloudfront.net/brand/Drumeo-Assets.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #0b76db;">

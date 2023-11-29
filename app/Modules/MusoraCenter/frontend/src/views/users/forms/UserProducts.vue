@@ -5,52 +5,82 @@
             dark
             :color="brandColor"
         >
-            <v-toolbar-title>User Products</v-toolbar-title>
-
+            <v-toolbar-title>
+                User Access Permissions
+            </v-toolbar-title>
             <v-spacer></v-spacer>
-
-            <v-tooltip left>
-                <template v-slot:activator="{ on }">
-                    <v-btn
-                        icon
-                        text
-                        class="mx-0"
-                        v-on="on"
-                        @click="openEditForm(0)"
+            <v-toolbar-items>
+                <v-tooltip left>
+                    <template v-slot:activator="{ on }">
+                        <v-btn
+                            icon
+                            text
+                            class="mx-0"
+                            v-on="on"
+                            @click="openEditForm(0)"
+                        >
+                            <v-icon>add</v-icon>
+                        </v-btn>
+                    </template>
+                    <span>Add User Access Permission</span>
+                </v-tooltip>
+            </v-toolbar-items>
+            <!-- Members Dropdown -->
+            <template v-slot:extension>
+                <v-row class="pt-2">
+                    <v-col
+                        cols="12" md="4" sm="12"
+                        class="column"
                     >
-                        <v-icon>add</v-icon>
-                    </v-btn>
-                </template>
-
-                <span>Add New Level</span>
-            </v-tooltip>
+                        <v-select
+                            v-model="selectedProductType"
+                            :items="productOptions"
+                            item-text="text"
+                            item-value="value"
+                            label="Select Membership"
+                        ></v-select>
+                    </v-col>
+                </v-row>
+            </template>
+            
         </v-toolbar>
 
         <v-data-table
             :headers="headings"
-            :items="userProducts"
+            :items="filteredPermissions"
             :items-per-page="5"
+            must-sort
+            sort-desc
+            sort-by="expiration_time"
         >
             <template
                 v-slot:item="{ item }"
             >
-                <tr :class="{'deleted-table-row': !!item.attributes.deleted_at}">
+
+                <tr :class="[ isActiveSubscription(item) ? 'active-subscription' : '']"
+                >
+                    <!-- <p>{{ item }}</p> -->
                     <td class="text-center">
-                        <v-custom-brand-icon :brand="getProductBrand(item.relationships.product.data)"></v-custom-brand-icon>
+                        <v-custom-brand-icon :brand="item.brand"></v-custom-brand-icon>
                     </td>
-
                     <td class="text-left">
-                        {{ getProductName(item.relationships.product.data) }}
+                        {{ item.permission_name }}
                     </td>
-
                     <td class="text-left">
-                        {{ getStartDate(item.attributes.start_date) }}
+                        {{ item.duration }}
                     </td>
-
                     <td class="text-left">
-                        {{ getActiveUntil(item.attributes.expiration_date) }}
+                        {{ getStartDate(item.start_time) }}
                     </td>
-
+                    <td class="text-left">
+                        {{ getActiveUntil(item.expiration_time) }}
+                    </td>
+                    <td class="text-left">
+                        {{ item.source }}
+                    </td>
+                    <td class="text-left">
+                        {{ item.status }}
+                    </td>
                     <td class="text-center">
                         <v-tooltip top>
                             <template v-slot:activator="{ on }">
@@ -59,7 +89,7 @@
                                     x-small
                                     raised
                                     :color="brandColor"
-                                    class="mx-1 white--text"
+                                    class="mx-1 white&#45;&#45;text"
                                     v-on="on"
                                     @click="openEditForm(item.id)"
                                 >
@@ -68,27 +98,25 @@
                                     </v-icon>
                                 </v-btn>
                             </template>
-
-                            <span>Edit User Product</span>
+                            <span>Edit User Access Permission</span>
                         </v-tooltip>
 
-                        <v-tooltip top>
+                        <v-tooltip  v-if="item.status=='active'" top>
                             <template v-slot:activator="{ on }">
                                 <v-btn
                                     fab
                                     x-small
                                     raised
                                     color="error"
-                                    class="mx-1 white--text"
+                                    class="mx-1 white&#45;&#45;text"
                                     v-on="on"
-                                    @click.stop="cancelUserProduct(item.id)"
+                                    @click.stop="cancelUserPermission(item.id)"
                                 >
                                     <v-icon>
                                         cancel
                                     </v-icon>
                                 </v-btn>
                             </template>
-
                             <span>Expire</span>
                         </v-tooltip>
                     </td>
@@ -106,7 +134,9 @@
                     dark
                     :color="brandColor"
                 >
-                    <v-toolbar-title>Add User Level</v-toolbar-title>
+                    <v-toolbar-title>
+                        {{ this.editingUserAccessPermission.id ? 'Edit' : 'Add' }} User Access Permission
+                    </v-toolbar-title>
                 </v-toolbar>
 
                 <v-col
@@ -117,12 +147,14 @@
                         ref="newPassword"
                         lazy-validation
                     >
+
                         <v-combobox
-                            v-model="$_product_id"
-                            label="Product"
+                            ref="permissionInput"
+                            v-model="$_permission_id"
+                            label="Permission"
                             :color="brandColor"
-                            :items="products"
-                            item-text="attributes.name"
+                            :items="permissionsOptions"
+                            item-text="name"
                             item-value="id"
                         >
                             <template
@@ -130,18 +162,10 @@
                                 slot-scope="data"
                             >
                                 <v-list-item-content>
-                                    <v-list-item-title>{{ data.item.attributes.name }}:</v-list-item-title>
-                                    <v-list-item-subtitle>{{ data.item.attributes.sku }}</v-list-item-subtitle>
+                                    <v-list-item-title>{{ data.item.name }}</v-list-item-title>
                                 </v-list-item-content>
                             </template>
                         </v-combobox>
-
-                        <v-text-field
-                            v-model="$_quantity"
-                            type="number"
-                            label="Quantity"
-                            :color="brandColor"
-                        ></v-text-field>
 
                         <v-menu
                             ref="menu"
@@ -155,11 +179,10 @@
                             <template v-slot:activator="{ on }">
                                 <v-text-field
                                     slot="activator"
-                                    v-model="$_expiration_date"
-                                    label="Expires On"
+                                    v-model="$_start_time"
+                                    label="Start Time"
                                     :color="brandColor"
-                                    hint="Leave blank to never expire."
-                                    clearable
+                                    hint="Time user is granted access.  Actual active time may differ if permissions overlap."
                                     persistent-hint
                                     readonly
                                     v-on="on"
@@ -167,7 +190,7 @@
                             </template>
 
                             <v-date-picker
-                                v-model="$_expiration_date"
+                                v-model="$_start_time"
                                 no-title
                                 scrollable
                             >
@@ -188,54 +211,33 @@
                                 </v-btn>
                             </v-date-picker>
                         </v-menu>
-
-
-                        <v-menu
-                            ref="menu"
-                            v-model="pausedUntilDatepicker"
-                            :close-on-content-click="false"
-                            :nudge-right="40"
-                            transition="scale-transition"
-                            offset-y
-                            min-width="290px"
-                        >
-                            <template v-slot:activator="{ on }">
-                                <v-text-field
-                                    slot="activator"
-                                    v-model="$_paused_until_date"
-                                    label="Paused Until"
-                                    :color="brandColor"
-                                    hint="Leave blank to not prevent access before a date."
-                                    clearable
-                                    persistent-hint
-                                    readonly
-                                    v-on="on"
-                                ></v-text-field>
-                            </template>
-
-                            <v-date-picker
-                                v-model="$_paused_until_date"
-                                no-title
-                                scrollable
-                            >
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                    text
-                                    :color="brandColor"
-                                    @click.stop="pausedUntilDatepicker = false"
-                                >
-                                    Cancel
-                                </v-btn>
-                                <v-btn
-                                    text
-                                    :color="brandColor"
-                                    @click.stop="pausedUntilDatepicker = false"
-                                >
-                                    OK
-                                </v-btn>
-                            </v-date-picker>
-                        </v-menu>
-
+                        <v-checkbox
+                            v-model="$_is_lifetime"
+                            label="Lifetime"
+                            :color="brandColor"
+                        ></v-checkbox>
+                        <v-text-field
+                            v-model="$_nDays"
+                            v-if="!$_is_lifetime"
+                            type="number"
+                            label="# Days"
+                            hint="Number of days until access revoked.  Used to calculate access Expiration Time."
+                            :color="brandColor"
+                        ></v-text-field>
+                        <v-text-field
+                            v-model="$_nMonths"
+                            v-if="!$_is_lifetime"
+                            type="number"
+                            label="# Months"
+                            hint="Number of months until access revoked.  Used to calculate access Expiration Time."
+                            :color="brandColor"
+                        ></v-text-field>
+                        <v-select
+                            v-model="$_status"
+                            label="Status"
+                            :color="brandColor"
+                            :items="['active', 'revoked']"
+                        ></v-select>
                         <div class="text-right">
                             <v-btn
                                 text
@@ -259,20 +261,13 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
-import api from '../../../api/ecommerce/user-products';
+import api from '../../../api/content';
 import JsonApiMethods from '../../../mixins/json-api-methods';
 import brandColors from '../../../api/mixins.js';
 import Utils from '../../../api/utils';
 import CustomBrandIcon from '../../../components/CustomBrandIcon.vue';
-
-const defaultUserProduct = () => ({
-    id: 0,
-    attributes: {},
-    relationships: {
-        user: { data: {} },
-        product: { data: {} },
-    },
-});
+import PermissionsApi from "../../../api/permissions";
+import userPermissionsApi from '../../../api/ecommerce/user-permissions';
 
 export default {
     name: 'UserProducts',
@@ -286,7 +281,7 @@ export default {
             default: () => 0,
         },
 
-        userProducts: {
+        userAccessPermissions: {
             type: Array,
             default: () => [],
         },
@@ -296,94 +291,177 @@ export default {
             dialog: false,
             datepicker: false,
             pausedUntilDatepicker: false,
+            selectedProductType: 'all', //Default
+            productOptions: [
+                { text: 'All', value: 'all' },
+                { text: 'Plus, Basic, and Lifetime Memberships', value: 1 },
+                { text: 'Non Membership Products', value: 0 },
+            ],
             headings: [
                 {
                     text: 'Brand',
                     align: 'center',
-                    sortable: false,
+                    sortable: true,
+                    width: 100,
+                    value: 'brand',
                 },
                 {
                     text: 'Name',
                     align: 'left',
-                    sortable: false,
+                    sortable: true,
+                    value: 'permission_name',
                 },
                 {
-                    text: 'Paused Until',
+                    text: 'Duration',
                     align: 'left',
-                    sortable: false,
-                    width: 190,
+                    sortable: true,
+                    width: 150,
+                    value: 'duration',
                 },
                 {
-                    text: 'Active Until',
+                    text: 'Active From',
                     align: 'left',
-                    sortable: false,
+                    sortable: true,
                     width: 190,
+                    value: 'start_time',
+                },
+                {
+                    text: 'Expires On',
+                    align: 'left',
+                    sortable: true,
+                    width: 190,
+                    value: 'expiration_time',
+                },
+                {
+                    text: 'Source',
+                    align: 'left',
+                    sortable: true,
+                    width: 150,
+                    value: 'source',
+                },
+                {
+                    text: 'Status',
+                    align: 'left',
+                    sortable: true,
+                    width: 100,
+                    value: 'status'
                 },
                 {
                     text: 'Actions',
                     align: 'center',
                     sortable: false,
                     width: 120,
+                    
                 },
             ],
-            editingUserProduct: this.getDefaultUserProduct(),
+            editingUserAccessPermission: this.getDefaultUserAccessPermission(),
+            permissionsOptions: [],
         };
     },
     computed: {
-        ...mapState({
-            permissionsOptions: state => state.permissions.permissions,
-            products: state => state.products.products,
-        }),
-
-        $_product_id: {
-            get() {
-                return this.editingUserProduct.relationships.product.data.id;
-            },
-            set({ id }) {
-                this.$set(this.editingUserProduct.relationships.product.data, 'id', id);
-            },
+        filteredPermissions() {
+            if (this.selectedProductType === 'all') {
+                return this.userAccessPermissions;
+            } else if (this.selectedProductType === 1) {
+                return this.userAccessPermissions.filter(permission =>
+                    permission.permission_name.includes("Member") || permission.permission_name.includes("Edge")
+                );
+            } else if (this.selectedProductType === 0) {
+                return this.userAccessPermissions.filter(permission =>
+                    !permission.permission_name.includes("Member") && !permission.permission_name.includes("Edge")
+                );
+            }
         },
 
-        $_quantity: {
+        $_permission_id: {
             get() {
-                return this.editingUserProduct.attributes.quantity || 1;
+                return this.editingUserAccessPermission.permission_id;
             },
             set(value) {
-                this.$set(this.editingUserProduct.attributes, 'quantity', value);
+                this.$set(this.editingUserAccessPermission, 'permission_id', value);
             },
         },
 
-        $_paused_until_date: {
+        $_is_lifetime: {
             get() {
-                return this.editingUserProduct.attributes.start_date;
+                return this.editingUserAccessPermission.time_lifetime;
             },
             set(value) {
-                this.$set(this.editingUserProduct.attributes, 'start_date', value);
+                this.$set(this.editingUserAccessPermission, 'time_lifetime', value);
             },
         },
 
-        $_expiration_date: {
+        $_nDays: {
             get() {
-                return this.editingUserProduct.attributes.expiration_date;
+                return this.editingUserAccessPermission.time_days || 0;
             },
             set(value) {
-                this.$set(this.editingUserProduct.attributes, 'expiration_date', value);
+                this.$set(this.editingUserAccessPermission, 'time_days', value);
             },
         },
+
+        $_nMonths: {
+            get() {
+                return this.editingUserAccessPermission.time_months || 0;
+            },
+            set(value) {
+                this.$set(this.editingUserAccessPermission, 'time_months', value);
+            },
+        },
+
+        $_status:{
+            get() {
+                return this.editingUserAccessPermission.status;
+            },
+            set(value) {
+                this.$set(this.editingUserAccessPermission, 'status', value);
+            },
+        },
+
+        $_start_time: {
+            get() {
+                return this.editingUserAccessPermission.start_date;
+            },
+            set(value) {
+                this.$set(this.editingUserAccessPermission, 'start_date', value);
+            },
+        },
+    },
+    mounted() {
+        PermissionsApi.getPermissions({
+            limit: 100,
+        })
+            .then((response) => {
+                 const options = response.data.data;
+                 this.permissionsOptions = Utils.dynamicSort(options, 'name');
+            });
     },
     methods: {
         ...mapActions('permissions', [
             'getPermissions',
         ]),
 
-        getDefaultUserProduct() {
+        isActiveSubscription(item) {
+            //convert item.expiration_time to date object
+            const dateString = item.expiration_time;
+            const dateToCheck = new Date(dateString);
+            const today = new Date();
+            //Remove time
+            dateToCheck.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0);
+            //Compare Values
+            const subscriptionIsCurrent = dateToCheck > today;
+            if(item.status === "active" && subscriptionIsCurrent) {
+                return true;
+            }
+            return false;
+        },   
+
+        getDefaultUserAccessPermission() {
             return {
                 id: 0,
-                attributes: {},
-                relationships: {
-                    user: { data: {} },
-                    product: { data: {} },
-                },
+                status : 'active',
+                start_date : this.moment(this.moment.now()).format('YYYY-MM-DD'),
             };
         },
 
@@ -392,7 +470,7 @@ export default {
                 return this.moment(date).format('MMM D, Y - HH:mm');
             }
 
-            return 'Forever';
+            return '-';
         },
 
         getStartDate(date) {
@@ -404,12 +482,12 @@ export default {
         },
 
         openEditForm(id) {
-            const thisUserProduct = this.userProducts.find(userProduct => userProduct.id === id);
+            const thisUserAccessPermission = this.userAccessPermissions.find(userAccessPermission => userAccessPermission.id === id);
 
             if (id) {
-                this.editingUserProduct = Utils.createObjectCopy(thisUserProduct);
+                this.editingUserAccessPermission = Utils.createObjectCopy(thisUserAccessPermission);
             } else {
-                this.editingUserProduct = this.getDefaultUserProduct();
+                this.editingUserAccessPermission = this.getDefaultUserAccessPermission();
             }
 
             this.dialog = true;
@@ -418,26 +496,31 @@ export default {
         submitEditForm() {
             this.$root.$emit('pageLoading');
 
-            api.setUserProduct(this.editingUserProduct.id, {
+            const thisUserAccessPermission = this.userAccessPermissions.find(userAccessPermission => userAccessPermission.id === this.editingUserAccessPermission.id);
+
+            userPermissionsApi.setUserPermission(this.editingUserAccessPermission.id, {
                 user_id: this.userId,
-                product_id: this.$_product_id,
-                quantity: this.$_quantity,
-                expiration_date: this.$_expiration_date || null,
-                start_date: this.$_paused_until_date || null,
+                permission_id: this.$_permission_id.id,
+                start_date: this.$_start_time,
+                lifetime: this.$_is_lifetime,
+                days: this.$_nDays,
+                months: this.$_nMonths,
+                status: this.$_status,
+                revoked_at: (thisUserAccessPermission && thisUserAccessPermission.status != this.$_status && this.$_status=='revoked') ? this.moment(this.moment.now()).format('YYYY-MM-DD') : null,
             })
                 .then((response) => {
                     if (response) {
                         this.$emit('userProductEdit');
                         this.$root.$emit('displayMessage', {
-                            text: 'Product successfully added to this user!',
+                            text: 'Permission successfully added to this user!',
                             color: 'success',
                         });
 
                         this.dialog = false;
-                        this.editingUserProduct = this.getDefaultUserProduct();
+                        this.editingUserAccessPermission = this.getDefaultUserAccessPermission();
                     } else {
                         this.$root.$emit('displayMessage', {
-                            text: 'Oops! Something went wrong. Product not added to this user.',
+                            text: 'Oops! Something went wrong. Permission not added to this user.',
                             color: 'error',
                         });
                     }
@@ -446,38 +529,32 @@ export default {
                 });
         },
 
-        getProductName(data) {
-            return this.getRelatedAttributesByTypeAndId(
-                data,
-                this.userPaymentMethodsIncludedData,
-            ).attributes.name || 'N/A';
-        },
-
-        getProductBrand(data) {
-            return this.getRelatedAttributesByTypeAndId(
-                data,
-                this.userPaymentMethodsIncludedData,
-            ).attributes.brand || 'N/A';
-        },
-
-        cancelUserProduct(user_product_id) {
-            const confirmation = confirm('Are you sure you wish to expire this User Product?');
+        cancelUserPermission(id) {
+            const confirmation = confirm('Are you sure you wish to revoke this User Permission?');
 
             if (confirmation) {
-                api.setUserProduct(user_product_id, {
-                    expiration_date: this.moment(this.moment.now()).subtract(1, 'days').format('YYYY-MM-DD'),
+                const thisUserAccessPermission = this.userAccessPermissions.find(userAccessPermission => userAccessPermission.id === id);
+                userPermissionsApi.setUserPermission(id, {
+                    user_id: this.userId,
+                    permission_id: thisUserAccessPermission.permission_id.id,
+                    start_date: thisUserAccessPermission.start_date,
+                    lifetime: thisUserAccessPermission.time_lifetime,
+                    days: thisUserAccessPermission.time_days,
+                    months: thisUserAccessPermission.time_months,
+                    status: 'revoked',
+                    revoked_at: this.moment(this.moment.now()).format('YYYY-MM-DD HH:mm:ss'),
                 })
                     .then((response) => {
                         if (response) {
                             this.$root.$emit('displayMessage', {
-                                text: 'User Product successfully canceled!',
+                                text: 'User Permission successfully canceled!',
                                 color: 'success',
                             });
 
                             this.$emit('userProductEdit');
                         } else {
                             this.$root.$emit('displayMessage', {
-                                text: 'Oops! Something went wrong. User Product likely not canceled.',
+                                text: 'Oops! Something went wrong. User Permission likely not canceled.',
                                 color: 'error',
                             });
                         }
@@ -488,3 +565,11 @@ export default {
     },
 };
 </script>
+<style>
+    .active-subscription {
+        background-color: rgba(0,255,0,.15) !important;
+    }
+    .active-subscription:hover {
+        background-color: rgba(0,255,0,.25) !important;
+    }
+</style>

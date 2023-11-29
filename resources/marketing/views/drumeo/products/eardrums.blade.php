@@ -98,7 +98,7 @@
                 <p>Protect your ears + play your favorite songs.</p>
                 <i class="fas fa-play play-button autoplay-video my-28 md:my-36" data-open="trailer"></i><br>
                 @if( $products['drumeo-eardrums']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums']->getStockAvailability()))
-                    <a class="join blue my-2 sm:my-4 w-full sm:w-2/3" href="/ecommerce/add-to-cart?products[drumeo-eardrums]=1">GRAB A PAIR &raquo;</a>
+                    <a class="join blue my-2 sm:my-4 w-full sm:w-2/3 vue-add-to-cart" data-product-json='{"drumeo-eardrums": 1}' href="/ecommerce/add-to-cart?products[drumeo-eardrums]=1">GRAB A PAIR &raquo;</a>
                 @else
                     <a class="join sold-out my-2 sm:my-4 w-full sm:w-2/3">SOLD OUT</a>
                 @endif
@@ -322,7 +322,8 @@
                 <div class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-10 mx-auto">
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>LAUNCH SPECIAL</strong></p>--}}
-                        <a href="/ecommerce/add-to-cart?products[drumeo-eardrums]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                        <a href="/ecommerce/add-to-cart?products[drumeo-eardrums]=1" data-product-json='{"drumeo-eardrums": 1}'
+                            class="vue-add-to-cart text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                             <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                                 <h5 class="leading-none mb-3">EarDrums</h5>
                                 <h1 class="inline-block leading-none">
@@ -348,6 +349,9 @@
                 <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>
             @endif
 
+            <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&locked=true"><h4><strong><u>Or get it FREE when you join Drumeo.</u></strong></h4></a>
+            <br>
+            <br>
             <p class="uppercase"><strong>For hygienic reasons all <br class="inline sm:hidden"> EarDrum sales are final.</strong></p>
         </div>
     </section>
@@ -381,10 +385,9 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
     <script>
         $(document).ready(function () {

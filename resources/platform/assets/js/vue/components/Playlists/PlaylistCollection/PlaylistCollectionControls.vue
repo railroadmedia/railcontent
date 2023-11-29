@@ -1,127 +1,126 @@
 <script setup>
-    import { onBeforeMount, watch, ref, inject, reactive } from 'vue';
-    import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
-    import { XIcon } from "@heroicons/vue/solid";
-    import PlaylistService from '../../../../services/playlists.js';
-    import { usePlaylistsStore } from '../../../../stores/playlists';
+import { onBeforeMount, watch, ref, inject, reactive } from 'vue';
+import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
+import { XIcon } from "@heroicons/vue/solid";
+import PlaylistService from '../../../../services/playlists.js';
+import { usePlaylistsStore } from '../../../../stores/playlists';
 
-    //Inject
-    const token = inject('csrf_token');
+//Inject
+const token = inject('csrf_token');
 
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
+//Pinia Stores
+const playlistsStore = usePlaylistsStore();
 
-    //Emits
-    const emit = defineEmits(['onUpdateListView']);
+//Emits
+const emit = defineEmits(['onUpdateListView']);
 
-    //-----------Props-----------//
-    const props = defineProps({
-        brand: {
-            type: String,
-            default: "drumeo"
-        },
-        isListView: {
-            type: Boolean,
-            default: false,
-        }
-    });
-
-    //---------Reactive Data---------//
-    const state = reactive({
-        searchTerm: '',
-        sortValue: '-created_at', //Default
-        categories: '',
-    })
-
-    //---------Template Refs---------//
-    const playlistSearch = ref(null)
-
-    //---------Static Data---------//
-    const sortOptions =[
-        { text: 'Newest First', value: '-created_at' },
-        { text: 'Alphabetical', value: 'name' },
-        { text: 'Most Recent', value: '-last_progress' },
-        { text: 'Pinned', value: 'pinned' }
-    ]
-
-    const categories = [
-        {
-            text: 'Watch-Later',
-            value: 'Watch Later',
-        },
-        {
-            text: 'Favorites',
-            value: 'Favorites',
-        },
-        {
-            text: 'General',
-            value: 'General',
-        },
-        {
-            text: 'Practice',
-            value: 'Practice',
-        },
-        {
-            text: 'Learning',
-            value: 'Learning',
-        },
-        {
-            text: 'Entertainment',
-            value: 'Entertainment',
-        },
-        {
-            text: 'Warm-Up',
-            value: 'Warm Up',
-        },
-        {
-            text: 'Songs',
-            value: 'Songs',
-        }
-    ];
-
-    //----------Methods----------//
-    const loadPlaylists = ()=> {
-        const payload = {
-            brand: brand,
-            page: 1,
-            limit: 10,
-            term: state.searchTerm,
-            sort: state.sortValue,
-            categories: state.categories ? [state.categories] : '',
-        }
-        //load Playlists
-        playlistsStore.getPlaylists(payload, token);
-        //Update URL w/ new params
-        const url = new URL(window.location.href);
-        url.searchParams.set('sortby_val', state.sortValue);
-        if(state.categories) url.searchParams.set('categories[]', state.categories)
-        url.searchParams.set('search', state.searchTerm);
-        url.searchParams.set('page', 1);
-        if(state.categories) url.searchParams.set('categories[]', state.categories);
-        else url.searchParams.delete('categories[]');
-
-        playlistsStore.resultsPage = 1;
-        window.history.pushState({}, '', url);
-        //Blur Input
-        playlistSearch.value.blur();
-    };
-
-    const cancelCategoryFilter = ()=> {
-        state.categories = '';
-        loadPlaylists();
+//-----------Props-----------//
+const props = defineProps({
+    brand: {
+        type: String,
+        default: "drumeo"
+    },
+    isListView: {
+        type: Boolean,
+        default: false,
     }
+});
 
-    //---------Lifecycle Methods---------//
-    onBeforeMount(()=> {
-        //get url params
-        const params = new Proxy(new URLSearchParams(window.location.search), {
-            get: (searchParams, prop) => searchParams.get(prop),
-        });
-        //Set state props
-        state.searchTerm = params.search || '';
-        state.categories = params['categories[]'] || '';
-        state.sortValue = params.sortby_val || '-created_at';
-    })
+//---------Reactive Data---------//
+const state = reactive({
+    searchTerm: '',
+    sortValue: '-created_at', //Default
+    categories: '',
+})
+
+//---------Template Refs---------//
+const playlistSearch = ref(null)
+
+//---------Static Data---------//
+const sortOptions =[
+    { text: 'Newest First', value: '-created_at' },
+    { text: 'Alphabetical', value: 'name' },
+    { text: 'Most Recent', value: '-last_progress' },
+    { text: 'Pinned', value: 'pinned' }
+]
+
+const categories = [
+    {
+        text: 'Watch-Later',
+        value: 'Watch Later',
+    },
+    {
+        text: 'Favorites',
+        value: 'Favorites',
+    },
+    {
+        text: 'General',
+        value: 'General',
+    },
+    {
+        text: 'Practice',
+        value: 'Practice',
+    },
+    {
+        text: 'Learning',
+        value: 'Learning',
+    },
+    {
+        text: 'Entertainment',
+        value: 'Entertainment',
+    },
+    {
+        text: 'Warm-Up',
+        value: 'Warm Up',
+    },
+    {
+        text: 'Songs',
+        value: 'Songs',
+    }
+];
+
+//----------Methods----------//
+const loadPlaylists = ()=> {
+    const payload = {
+        brand: brand,
+        page: 1,
+        limit: 10,
+        term: state.searchTerm,
+        sort: state.sortValue,
+        categories: state.categories ? [state.categories] : '',
+    }
+    //load Playlists
+    playlistsStore.getPlaylists(payload, token);
+    //Update URL w/ new params
+    const url = new URL(window.location.href);
+    url.searchParams.set('sortby_val', state.sortValue);
+    url.searchParams.set('search', state.searchTerm);
+    url.searchParams.set('page', 1);
+    if(state.categories) url.searchParams.set('categories[]', state.categories);
+    else url.searchParams.delete('categories[]');
+
+    playlistsStore.resultsPage = 1;
+    window.history.pushState({}, '', url);
+    //Blur Input
+    playlistSearch.value.blur();
+};
+
+const cancelCategoryFilter = ()=> {
+    state.categories = '';
+    loadPlaylists();
+}
+
+//---------Lifecycle Methods---------//
+onBeforeMount(()=> {
+    //get url params
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+    });
+    //Set state props
+    state.searchTerm = params.search || '';
+    state.categories = params['categories[]'] || '';
+    state.sortValue = params.sortby_val || '-created_at';
+})
 </script>
 <template>
     <nav class="tw-flex tw-my-4 tw-w-full tw-items-center tw-flex-wrap md:tw-flex-nowrap">

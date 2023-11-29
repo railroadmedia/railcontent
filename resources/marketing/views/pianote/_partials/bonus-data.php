@@ -2,6 +2,18 @@
 
 $bonuses = [
     [
+        'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
+        'title' => 'New Piano Players Start Here',
+        'description' => 'New to the piano? Start here! This play-along course is your first 30 days on the piano. You don’t need any previous experience or theory knowledge. Over 30 days, you’ll play along with your teacher for just 10 minutes a day! You’ll be amazing at what a little bit of consistent practice will do.',
+        'price' => floatval($productPrices['new-piano-players-start-here']->price),
+    ],
+    [
+        'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
+        'title' => 'Easy Chords',
+        'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
+        'price' => floatval($productPrices['easy-chords']->price),
+    ],
+    [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/headphones-cart.jpg',
         'title' => 'Pianote Headphones',
         'description' => 'Hear your piano the way it was meant to sound.',
@@ -36,11 +48,47 @@ $bonuses = [
         'price' => floatval($productPrices['poster-scales']->price),
         'shipping' => true,
     ],
+
     [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/christmas-book.jpg',
-        'title' => 'Christmas Songbook',
-        'description' => '14 beautiful Christmas Carols hand-picked and arranged for solo piano.',
-        'price' => floatval($productPrices['christmas-song-book']->price),
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chords-poster.jpg',
+        'title' => 'Chords Poster',
+        'description' => 'Play every major and minor chord.',
+        'price' => floatval(($productPrices['music-theory-posters']->price / 6)),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chord-formulas-poster.jpg',
+        'title' => 'Chord Formulas Poster',
+        'description' => 'Play any chord. On any key. ',
+        'price' => floatval(($productPrices['music-theory-posters']->price / 6)),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/circle-of-fifths-poster.jpg',
+        'title' => 'Circle Of 5ths Poster',
+        'description' => 'The essential piece of music theory.',
+        'price' => floatval(($productPrices['music-theory-posters']->price / 6)),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/key-to-sight-reading-poster.jpg',
+        'title' => 'Keys To Sight Reading Poster',
+        'description' => 'Link the notes on the page to your keys.',
+        'price' => floatval(($productPrices['music-theory-posters']->price / 6)),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/dynamics-poster.jpg',
+        'title' => 'Dynamics Poster',
+        'description' => 'Don’t learn Italian. Just look at this poster.',
+        'price' => floatval(($productPrices['music-theory-posters']->price / 6)),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/scales-poster.jpg',
+        'title' => 'Scales Poster',
+        'description' => 'All the major and minor scales in one place.',
+        'price' => floatval(($productPrices['music-theory-posters']->price / 6)),
         'shipping' => true,
     ],
     [
@@ -109,5 +157,11 @@ $bonuses = [
         'title' => 'Classical <br>Book',
         'description' => '92 pages full of beautiful pieces by famous classical composers that you can actually play!',
         'price' => floatval($productPrices['classical-book']->price),
+    ],
+    [
+        'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/5307c3c2-d687-44d9-8da5-e8be784f8c86-classical-piano-pieces-shop-card.jpg',
+        'description' => 'Timeless classics you’ll want to play over and over again. Presented in original and simplified arrangements.',
+        'price' => 49,
+        'shipping' => true,
     ],
 ];

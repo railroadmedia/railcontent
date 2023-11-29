@@ -20,7 +20,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner-no-tw', [
+    @include('pianote._partials.promo-banner', [
         "name" => "Piano Technique Made Easy",
         "fullPrice" => floatval($productPrices['piano-technique-made-easy']->price),
         "price" => floatval($productPrices['piano-technique-made-easy']->discounted_price),
@@ -34,7 +34,7 @@
             {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
             <a
                 class="join vue-add-to-cart"
-                href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['piano-technique-made-easy' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"
+                href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1"
                 data-product-json='{"piano-technique-made-easy": 1}'
             >Get Started &raquo;</a>
 
@@ -57,8 +57,7 @@
                     <iframe class="embed-responsive-item reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/466355774?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
                 {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
-                <a href="{{ url()->route('shopping-cart.add-to-cart',
-                ['products' => ['piano-technique-made-easy' => 1], 'redirect' => '/order', 'locked' => 'false']) }}" class="join">Get Started</a>
+                <a href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1" class="join">Get Started</a>
             </div>
         </div>
     </div>
@@ -331,11 +330,6 @@
                 By the end, you’ll be playing comfortable in ANY key on the piano. That means any song, key signature or chord won’t be intimidating or challenging.
                 <br><br>
                 You’ll know them all.</p>
-
-            {{--<a href="{{ url()->route('shopping-cart.add-to-cart',--}}
-    {{--['products' => ['piano-technique-made-easy' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"--}}
-                    {{--class="join smaller">Get Started &raquo;</a>--}}
-
         </div>
     </section>
 
@@ -469,7 +463,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="embed-responsive embed-responsive-4by3">
-                    <iframe class="embed-responsive-item reset-on-close" src="" data-lazy-load-url="https://www.soundslice.com/scores/404032/embed/?api=1&amp;scroll_type=2&amp;branding=0" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                    <iframe class="embed-responsive-item reset-on-close" src="" data-lazy-load-url="https://www.soundslice.com/slices/6JGVc/embed/?api=1&amp;scroll_type=2&amp;branding=0" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
             </div>
         </div>
@@ -535,7 +529,7 @@
                 ])
                 @include('pianote.products.partials._testimonial', [
                 "heading" => "I got the feeling I was actually improving…",
-                "testimonial" => "Piano Technique Made Easy has taught me the fundamentals and helped me get to playing some of my original songs.<br><br>Soon after starting, I got the feeling that I was actually improving and accomplishing what I set out to do.<br><br>If anyone is motivated to learn the piano, Pano Technique Made Easy is probably the best way to do it.",
+                "testimonial" => "Piano Technique Made Easy has taught me the fundamentals and helped me get to playing some of my original songs.<br><br>Soon after starting, I got the feeling that I was actually improving and accomplishing what I set out to do.<br><br>If anyone is motivated to learn the piano, Piano Technique Made Easy is probably the best way to do it.",
                 "name" => "Dennis Inman",
                 "location" => "Washington, USA",
                 ])
@@ -567,7 +561,7 @@
             <h2>Master the fundamentals — so you can <br> <strong>play anything you want on the piano.</strong></h2>
             {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
             <a
-                href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['piano-technique-made-easy' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"
+                href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1"
                 class="join vue-add-to-cart"
                 data-product-json='{"piano-technique-made-easy": 1}'
             >Get Started &raquo;</a>
@@ -676,10 +670,7 @@
 
         });
     </script>
-    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
-
-
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @stop

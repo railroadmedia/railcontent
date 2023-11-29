@@ -16,6 +16,7 @@ use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Support\Str;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Select;
 
 class Carousel extends Resource
 {
@@ -56,9 +57,42 @@ class Carousel extends Resource
             ID::make()->sortable(),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
-            Text::make('name')->sortable()->help('For easy reference to this banner in the CMS. This info won\'t show on the banner.')->required()->rules('required'),
-            Boolean::make('visible')->hideFromIndex()->default(true),
-            Boolean::make('draft')->hideFromIndex()->default(true),
+            Text::make('Name')->sortable()->help('For easy reference to this banner in the CMS. This info won\'t show on the banner.')->required()->rules('required'),
+            Boolean::make('Visible on Desktop', 'visible_on_desktop')->hideFromIndex()->default(true),
+            Boolean::make('Visible on Mobile', 'visible_on_mobile')->hideFromIndex()->default(true),
+            Select::make(__('All but latest version'), 'mobile_version_below')->options(function () {
+                return [
+                    '' => '' . __('No restrictions') . '',
+                    '1' => '' . __('V1') . '',
+                    '2' => '' . __('V2') . '',
+                    '3' => '' . __('V3') . '',
+                    '4' => '' . __('V4') . '',
+                ];
+            })->hideFromIndex()
+                ->hide()
+                ->dependsOn(
+                    ['visible_on_mobile'],
+                    function (Select $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->visible_on_mobile) $field->show();
+                    }
+                ),
+            Select::make(__('Selected version and higher only'), 'mobile_version_above')->options(function () {
+                return [
+                    '' => '' . __('No restrictions') . '',
+                    '1' => '' . __('V1') . '',
+                    '2' => '' . __('V2') . '',
+                    '3' => '' . __('V3') . '',
+                    '4' => '' . __('V4') . '',
+                ];
+            })->hideFromIndex()
+                ->hide()
+                ->dependsOn(
+                ['visible_on_mobile'],
+                function (Select $field, NovaRequest $request, FormData $formData) {
+                    if ($formData->visible_on_mobile) $field->show();
+                }
+            ),
+            Boolean::make('Draft')->hideFromIndex()->default(true),
             Number::make('Display Order', 'display_order')->hideFromIndex(),
             DateTime::make('Start Time', 'start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             DateTime::make(__('End Time'), 'end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
@@ -67,7 +101,7 @@ class Carousel extends Resource
             Text::make('Subtitle Color', 'subtitle_color')->hideFromIndex()->help('Leave blank for white text. Otherwise, type "black".'),
             Text::make('Title')->hideFromIndex()->sortable()->help('This is visible only if there is no logo uploaded or supported. Older app versions do not support the logo and will only see this text.'),
             Text::make('Title Color', 'title_color')->hideFromIndex()->help('Leave blank for white text. Otherwise, type "black".'),
-            Image::make('logo')
+            Image::make('Logo')
                 ->help("The logo will replace the 'Title' and 'Subtitle'.")
                 ->disk('nova_s3')
                 ->prunable()
@@ -98,7 +132,7 @@ class Carousel extends Resource
 
                     return $value;
                 }),
-            Text::make('logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Text::make('Logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Markdown::make('Description')->help('If a description exceeds 316 the last three characters will be replaced with an ellipses.<br> Use &lt;br&gt; for a line break, &lt;i&gt;&lt;/i&gt; for italics, and &lt;b&gt;&lt;/b&gt; for bold. <br> Limited to three lines of text.'),
             Text::make('Description Color', 'desc_color')->hideFromIndex()->help('Leave blank for white text. Otherwise, type "black".'),
             Image::make('Desktop Image', 'desktop_img')
@@ -210,6 +244,25 @@ class Carousel extends Resource
                         if ($formData->is_featured) $field->show()->rules(['required']);
                     }
                 ),
+            Select::make('Skill Level', 'skill_level')
+                ->options([
+                    'Novice' => 'Novice',
+                    'Beginner' => 'Beginner',
+                    'Intermediate' => 'Intermediate',
+                    'Advanced' => 'Advanced',
+                    'Expert' => 'Expert',
+                ])
+                ->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_featured;
+                })
+                ->dependsOn(
+                    ['is_featured'],
+                    function (Select $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_featured) $field->show()->rules(['required']);
+                    }
+                ),
             Boolean::make('Button Light Mode', 'btn_light_mode')->hideFromIndex()->default(false),
             Text::make('Primary Button Text', 'primary_cta_text')->hideFromIndex(),
             Text::make('Primary Button Text Alt', 'primary_cta_text_alt')->hideFromIndex()
@@ -243,11 +296,11 @@ class Carousel extends Resource
             Text::make('Secondary Button URL', 'secondary_cta_url')->hideFromIndex(),
             Text::make('Secondary Video Source', 'video_src')->hideFromIndex()
                 ->help('Automatically replaces the second button URL with the pop-up video player. Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1. In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted".'),
-
             //duplicated fields for displaying index page purpose
-            Number::make('Display Order', 'display_order')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating(),
             Boolean::make('draft')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating()->sortable(),
-            Boolean::make('visible')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating()->sortable(),
+            Boolean::make('Desktop', 'visible_on_desktop')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating()->sortable(),
+            Boolean::make('Mobile', 'visible_on_mobile')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating()->sortable(),
+            Number::make('Display Order', 'display_order')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating(),
         ];
     }
 

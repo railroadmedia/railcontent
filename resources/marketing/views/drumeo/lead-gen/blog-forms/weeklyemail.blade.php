@@ -11,12 +11,13 @@
 @endsection
 
 @section('form')
-
     @include("drumeo.lead-gen.partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
+        "recaptchaKey" => $recaptchaKey,
+        "formName" => 'Blog Signup',
         "formId" => "Drumeo - Engagement - Trigger - Blog Signup - WebForm",
-        "buttonText" => "Join The Drum Club &raquo;",
+        "buttonText" => "Join The Drum Club",
         "minimalForm" => true,
+        "redirectURL" => "/thankyou",
     ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

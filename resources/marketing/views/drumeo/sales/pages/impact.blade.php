@@ -445,18 +445,18 @@
             text-rendering: auto;
             opacity: 1;
             line-height: 1;
-            font-family: "Font Awesome 5 Pro";
+            font-family: "Font Awesome 6 Pro";
             font-weight: 300;
             color: #0b76db;
             font-size: 26px;
         }
 
         .shorts-arrow-left::before {
-            content: "\f104";
+            content: "\f053";
         }
 
         .shorts-arrow-right::before {
-            content: "\f105";
+            content: "\f054";
         }
 
         .content-section .song-row {
@@ -831,17 +831,17 @@
             </div>
             <div class="text-center mb-4 sm:mb-0">
                 <img class="block h-4 md:h-5 lg:h-6 mx-auto mb-6" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/facebook_icon.svg" alt="drumeo logo">
-                <h1 class="font-extrabold">1.1M</h1>
+                <h1 class="font-extrabold">2.3M</h1>
                 <p class="uppercase sm:tracking-widest">Followers</p>
             </div>
             <div class="text-center">
                 <img class="block h-4 md:h-5 lg:h-6 mx-auto mb-6" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/youtube_icon.svg" alt="drumeo logo">
-                <h1 class="font-extrabold">2.3M</h1>
+                <h1 class="font-extrabold">3M</h1>
                 <p class="uppercase sm:tracking-widest">Subscribers</p>
             </div>
             <div class="text-center">
                 <img class="block h-4 md:h-5 lg:h-6 mx-auto mb-6" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/instagram_icon.svg" alt="drumeo logo">
-                <h1 class="font-extrabold">909K</h1>
+                <h1 class="font-extrabold">1.3M</h1>
                 <p class="uppercase sm:tracking-widest">Followers</p>
             </div>
         </div>

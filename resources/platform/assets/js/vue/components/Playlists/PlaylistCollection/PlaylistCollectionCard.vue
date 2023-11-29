@@ -22,6 +22,10 @@
             type: Boolean,
             default: false,
         },
+        index: {
+            type: Number,
+            default: 0,
+        },
     });
 
     //-----------Computed Props-----------//
@@ -31,9 +35,6 @@
     const description = computed(() => {
         return props.listElement.description.replace(/(<([^>]+)>)/gi, "");
     })
-
-    //-------------Refs-------------//
-    const dropdownTarget = ref(null)
 
     //-----------Reactive Data-----------//
     const state = reactive({
@@ -82,17 +83,22 @@
     const GetElementDistance = el => {
         let rect = el.getBoundingClientRect();
         let spaceBelow = window.innerHeight - rect.bottom;
-        if(spaceBelow < 240) {
-            state.dropdownTop = true;
-        } else {
-            state.dropdownTop = false;
-        }
+        //wait for element to appear on screen
+        window.setTimeout(()=>{
+            let dropdown = document.querySelector(`#pl-dropdown-${props.index}`);
+            if(spaceBelow < dropdown.offsetHeight ) {
+                state.dropdownTop = true;
+            } else {
+                state.dropdownTop = false;
+            }
+        }, 0)
+
     }
 
     //Handle Dropdown Trigger
     const dropdownTriggerHandler = target => {
-        GetElementDistance(event.target);
         state.dropdownOpen = !state.dropdownOpen;
+        GetElementDistance(event.target);
     }
 
     //---------Lifecycle Methods---------//
@@ -106,7 +112,7 @@
 </script>
 <template>
     <div class="tw-group tw-relative"
-         :class="isListView ? 'tw-h-[56px] tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825]' : `tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 ${isMiniCatalog ? 'tw-w-[205px] tw-min-w-[205px] lg:tw-w-auto lg:tw-min-w-0 tw-pr-[10px]' : ''}` "
+         :class="isListView ? 'tw-h-[56px] tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825]' : `tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 ${isMiniCatalog ? 'tw-w-[221px] tw-min-w-[221px] lg:tw-w-auto lg:tw-min-w-0 lg:[&:nth-child(11)]:tw-hidden lg:[&:nth-child(12)]:tw-hidden 2xl:[&:nth-child(11)]:tw-grid 2xl:[&:nth-child(12)]:tw-grid' : ''}` "
     >
         <!-- Playlist thumbnail -->
         <PlaylistThumbnail
@@ -168,14 +174,15 @@
                         title="Playlist Options"
                         @click.prevent="dropdownTriggerHandler($event)"
                 >
-                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="tw-pointer-events-none" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.5 5.20768L12.5 5.2181M12.5 12.4993L12.5 12.5098M12.5 19.791L12.5 19.8014M12.5 6.24935C11.9247 6.24935 11.4583 5.78298 11.4583 5.20768C11.4583 4.63239 11.9247 4.16602 12.5 4.16602C13.0753 4.16602 13.5417 4.63239 13.5417 5.20768C13.5417 5.78298 13.0753 6.24935 12.5 6.24935ZM12.5 13.541C11.9247 13.541 11.4583 13.0746 11.4583 12.4993C11.4583 11.9241 11.9247 11.4577 12.5 11.4577C13.0753 11.4577 13.5417 11.9241 13.5417 12.4993C13.5417 13.0746 13.0753 13.541 12.5 13.541ZM12.5 20.8327C11.9247 20.8327 11.4583 20.3663 11.4583 19.791C11.4583 19.2157 11.9247 18.7493 12.5 18.7493C13.0753 18.7493 13.5417 19.2157 13.5417 19.791C13.5417 20.3663 13.0753 20.8327 12.5 20.8327Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
-                <!-- Dropdown-->
+                <!-- Dropdown -->
                 <PlaylistDropdown
+                    :index="index"
                     :brand="brand"
-                    :dropdownTop="state.dropdownTop"
+                    :dropdownTop="isMiniCatalog ? true : state.dropdownTop"
                     :is-private="state.isPrivate"
                     :is-pinned="state.isPinned ? true : false"
                     :dropdownOptions="dropdownOptions"

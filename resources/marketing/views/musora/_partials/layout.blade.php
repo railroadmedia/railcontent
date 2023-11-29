@@ -6,6 +6,45 @@
         "theme_bg" => "bg-musora",
         "theme_text" => "text-musora",
         "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
+        "nav_links" => [
+            "lessons" => [
+                "url" => get_musora_brand_base_url().'/method',
+            ],
+            "songs" => [
+                "url" => get_musora_brand_base_url().'/songs',
+            ],
+            "Instruments" => [
+                "iconClass" => "fas fa-piano-keyboard",
+                "children" => [
+                    "piano" => [
+                        "url" => get_legacy_brand_base_url("pianote"),
+                        "brand" => "pianote",
+                        "iconClass" => "fa-fw far fa-piano-keyboard",
+                    ],
+                    "guitar" => [
+                        "url" => get_legacy_brand_base_url("guitareo"),
+                        "brand" => "guitareo",
+                        "iconClass" => "fa-fw far fa-guitar",
+                    ],
+                    "drums" => [
+                        "url" => get_legacy_brand_base_url("drumeo"),
+                        "brand" => "drumeo",
+                        "iconClass" => "fa-fw far fa-drum",
+                    ],
+                    "singing" => [
+                        "url" => get_legacy_brand_base_url("singeo"),
+                        "brand" => "singeo",
+                        "iconClass" => "fa-fw far fa-microphone-stand",
+                    ],
+                ],
+            ],
+            "pricing" => [
+                "url" => get_musora_brand_base_url().'/choose-plan',
+            ],
+            "login" => [
+                "url" => get_musora_brand_base_url().'/login',
+            ],
+        ],
         "links" => [
             "Member Login" => [
                 "iconClass" => "fas fa-sign-in",
@@ -30,16 +69,16 @@
                 "iconClass" => "fas fa-piano-keyboard",
                 "children" => [
                     "Piano" => [
-                        "url" => 'https://www.pianote.com',
+                        "url" => get_legacy_brand_base_url("pianote"),
                     ],
                     "Guitar" => [
-                        "url" => 'https://www.guitareo.com',
+                        "url" => get_legacy_brand_base_url("guitareo"),
                     ],
                     "Drums" => [
-                        "url" => 'https://www.drumeo.com',
+                        "url" => get_legacy_brand_base_url("drumeo"),
                     ],
                     "Singing" => [
-                        "url" => 'https://www.singeo.com',
+                        "url" => get_legacy_brand_base_url("singeo"),
                     ],
                 ],
             ],
@@ -101,4 +140,17 @@
         "brand" => "musora",
         "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png"
     ])
+
+    @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        @include('_partials.components.countdown',[
+            'countdownDate' => '2023-11-27 00:00:00',
+            'promoVersion' => true
+        ])
+    @else
+        @include('_partials.components.countdown',[
+            'countdownDate' => '2023-11-28 00:00:00',
+            'promoVersion' => true
+        ])
+
+    @endif
 @stop

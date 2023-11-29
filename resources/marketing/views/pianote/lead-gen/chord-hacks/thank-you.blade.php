@@ -47,31 +47,33 @@
 @endsection
 
 @section('page-body')
-    <div class="overflow-hidden text-white px-3 py-5 sm:py-7 lg:py-12" style="background-color:#000a1e;">
+    <div class="overflow-hidden px-3 py-5 sm:py-10 lg:py-14">
         <div class="container mx-auto max-w-3xl clearfix">
             <div class="text-center sm:px-3">
                 <img class="h-8 sm:h-10" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/logo.svg">
                 <h3 class="mt-4 leading-tight"><strong>
                         Congratulations! Your free lessons <br class="hidden sm:inline">
                         will be landing in your inbox soon!</strong></h3>
-                <p class="leading-normal mt-2 mb-8">
+                <p class="leading-normal mt-2 mb-12">
                     Before you get started, here’s a <br class="inline sm:hidden">
                     message from Lisa!</p>
-                <div class="max-w-xs mx-auto px-10 sm:px-7 relative">
-                    <img class="absolute top-0 right-0 -mx-14 -my-3 h-14" src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" style="filter: sepia()saturate(20)brightness(.8)hue-rotate(-17deg);">
-                    <div class="w-full relative rounded-xl overflow-hidden border-4 border-white" style="padding-bottom: 172%;">
-                        <iframe class="fixed inset-0 h-full w-full absolute" src="//player.vimeo.com/video/847164746?h=857e80c5e2" frameborder="0" allowfullscreen title="intro-video"></iframe>
+                <div class="flex flex-wrap sm:text-left">
+                    <div class="w-full sm:w-5/12 mx-auto px-10 max-w-xs sm:max-w-full sm:pl-0 sm:pr-5 relative">
+{{--                        <img class="absolute top-0 right-0 -mx-14 -my-3 h-14" src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" style="filter: sepia()saturate(20)brightness(.8)hue-rotate(-17deg);">--}}
+                        <div class="w-full relative rounded-xl overflow-hidden shadow-lg" style="padding-bottom: 177%;">
+                            <iframe class="fixed inset-0 h-full w-full absolute" src="//player.vimeo.com/video/847164746?h=857e80c5e2" frameborder="0" allowfullscreen title="intro-video"></iframe>
+                        </div>
                     </div>
+                    <p class="w-full sm:w-7/12 mt-8 sm:mt-0 flex-shrink sm:pl-4">Here’s what you need to do now:
+                        <br><br>
+                        <strong>✓ Check your inbox.</strong> Your access link will be emailed to the email address you provided. If you don’t see it in your inbox, check your spam or junk folder. Make sure you add us to your contacts or safe sender so you never miss a lesson!
+                        <br><br>
+                        <strong>✓ Get to your piano!</strong> You’re here to learn right?! You’ll be following along with Lisa for all of the lessons. That means you’ll want to be at your piano when you watch them. You can watch them on ANY device.
+                        <br><br>
+                        <strong>✓ Tell your friends and family.</strong> If you like the lessons, or you know someone who also wants to learn the piano, please <a target="_blank" href="/chord-hacks"><u><strong>share this link with them!</strong></u></a> Learning is more fun when it’s done together. And having a buddy learn with you will set you up for greater success.
+                        <br><br>
+                        We’ll see you in Lesson 1!!</p>
                 </div>
-                <p class="mt-8 max-w-lg">Here’s what you need to do now:
-                    <br><br>
-                    <strong>✓ Check your inbox.</strong> Your access link will be emailed to the email address you provided. If you don’t see it in your inbox, check your spam or junk folder. Make sure you add us to your contacts or safe sender so you never miss a lesson!
-                    <br><br>
-                    <strong>✓ Get to your piano!</strong> You’re here to learn right?! You’ll be following along with Lisa for all of the lessons. That means you’ll want to be at your piano when you watch them. You can watch them on ANY device.
-                    <br><br>
-                    <strong>✓ Tell your friends and family.</strong> If you like the lessons, or you know someone who also wants to learn the piano, please <a target="_blank" href="/chord-hacks"><u><strong>share this link with them!</strong></u></a> Learning is more fun when it’s done together. And having a buddy learn with you will set you up for greater success.
-                    <br><br>
-                    We’ll see you in Lesson 1!!</p>
             </div>
         </div>
     </div>
@@ -80,7 +82,7 @@
             <h5 class="mb-4">
                 Start playing the piano with a  <br class="inline sm:hidden">
                 free trial to Pianote.</h5>
-            <a class="join pianote smaller anchor-slide" href="#customize-anchor">FREE FOR 30 DAYS <i class="fas fa-arrow-right"></i></a>
+            <a class="join pianote smaller anchor-slide" href="#customize-anchor">Get Started <i class="fas fa-arrow-right"></i></a>
         </div>
     </section>
 
@@ -160,7 +162,7 @@
     @php
         $testimonials = [
             [
-            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/iankershaw.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/iankershaw.jpg',
             'title' => "Such a fantastic and welcoming student community.",
             'description' => "When I signed up for Pianote, I knew I was going to get Lisa’s great energy, the Method, the courses, the bootcamps, and the student reviews.<br><br>But my breakthrough came when I realized that sitting behind all of this is such a fantastic and welcoming, supportive student community. It’s this community – as well as the teachers and the rest of the Pianote team – that really actively encourages you to share your progress and practice. And it doesn’t have to be perfect. And that really does encourage you to practice more. And it’s in that sharing and practice that the real breakthroughs come. Thank you!",
             'name' => 'Ian Kershaw',
@@ -168,7 +170,7 @@
             'location' => 'United Kingdom',
             ],
             [
-            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jaydemcintosh.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/jaydemcintosh.jpg',
             'title' => "I’ve had to give up on a lot of my dreams. Then I discovered Pianote.",
             'description' => "I’ve been chronically ill for the last six years, which means I’ve had to give up on a lot of my dreams and goals.<br><br>During my health journey, my interest in piano and my connection to music really arose – but it also seemed impossible. I had no prior music knowledge and couldn’t even get out of bed some days. This is when I discovered Pianote and they’ve been amazing.<br><br>I have to work at a very slow pace due to my health, but I’ve already learned so many basics. I can play some of my all-time favorite songs – and it’s just so awesome to know I can learn from home and accomplish one of my dreams. I’m so excited to keep learning and I recommend Pianote so much.",
             'name' => 'Jayde McIntosh',
@@ -176,7 +178,7 @@
             'location' => 'Australia',
             ],
             [
-            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/xitlalicaballero2.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/xitlalicaballero2.jpg',
             'title' => "I’m six years old. My biggest moment is when I play Für Elise.",
             'description' => "My name is Xitlali. I’m six years old. I started playing piano when I was five. A few weeks ago, I started using pianote. My biggest moment is when I play Für Elise.",
             'name' => 'Xitlali Caballero',
@@ -184,7 +186,7 @@
             'location' => 'Florida, USA',
             ],
             [
-            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/nabilabdelmoneim.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/nabilabdelmoneim.jpg',
             'title' => "I’m a lot better at using both hands and it opened up more songs.",
             'description' => "You guys make learning way too fun.<br><br>I’ve had two breakthrough moments. There was this video that promised hand independence in five days. And what do you know? A few days later I’m a lot better at using both hands and it just opened up a bunch more songs for me. And my second breakthrough moment was finding this chord chart that made it so much easier to go through the chords and practice them. And I started realizing that these chords sounded a lot like the ones I play on guitar. So I managed to take the notes that were in the practice log and apply them to my guitar, and actually learned theory for both instruments at once. Thank you Lisa and happy playing!",
             'name' => 'Nabil Abd El Moneim',
@@ -192,28 +194,28 @@
             'location' => 'British Columbia, Canada',
             ],
             [
-            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jessripley.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/jessripley.jpg',
             'title' => "I’m blown away by the program you’ve created.",
             'description' => "Pianote is an insanely encouraging and supportive community run by an insanely encouraging and supportive team. Sincerely, I’m blown away by the program you’ve created.<br><br>I sat down one day and it just clicked. From then on, I’ve felt VERY encouraged to keep learning and practicing. It’s fulfilling and fun to see myself progress and achieve goals. Now I’m playing with both hands at the same time with confidence – and I’ve started playing along with more backing tracks and making up my own songs.",
             'name' => 'Jess Ripley',
             'location' => 'California, USA',
             ],
             [
-            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/anselmdesouza.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/anselmdesouza.jpg',
             'title' => "Helped coordinate my left and right hands.",
             'description' => "I was using a piano app, but it wasn’t personal and I had to figure it out on my own most of the time. So I joined Pianote and went back to the basics.<br><br>Pianote helped coordinate my left and right hands. The explanations and instructions are very clear, easy to follow, and slowly I noticed I was improving by using skills from one lesson to the next. It’s structured to allow you to build the foundations, and the tips and tricks videos make your playing special. The lessons are fun and the instructors are engaging.",
             'name' => 'Anselm de Souza',
             'location' => 'Singapore',
             ],
             [
-            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/johnmaclean.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/johnmaclean.jpg',
             'title' => "My 6 year old daughter started dancing as I played.",
             'description' => "Before Pianote and The Method, I was completely lost in terms of knowing how to become a better musician. All I would do is try to play songs, but without any of the structure and practice that is required to actually improve. And with face to face lessons I wasn’t really progressing much between the lessons. But having access to the video tutorials online lets me go back as often as I need to.<br><br>My biggest breakthrough has been independent hand control – allowing me to hear rich music that I’m creating for the first time. And gaining that confidence has allowed me to start to improvise the pieces that I learn.<br><br>The lightbulb moment happened when my 6 year old daughter started dancing as I played! You must be doing something right if someone dances to music that you’re playing, right?",
             'name' => 'John Maclean',
             'location' => 'United Kingdom',
             ],
             [
-            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/serenadorward.jpg',
+            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/serenadorward.jpg',
             'title' => "If I was taught this way as a child, I would have never quit.",
             'description' => "I decided to sign up with Pianote not only to re-learn how to play the piano, but also because my mental health was really suffering and I needed something positive to focus on that was just for ME. I knew almost immediately that this was the answer I had been looking for. It felt like the heaviness on my shoulders got a bit lighter after every piano session.  And even though the lessons are virtual, it was like Lisa was right there beside me cheering me on.<br><br>I was blown away by how quickly I progressed with a few tutorials from Lisa. My overall confidence improved, especially with improvisation. Now I know all these little tricks (fills & riffs) and how to play inversions and practice chords in ways that sound so lovely.  If I had been taught this way as a child, I probably never would have quit.",
             'name' => 'Serena Dorward',
@@ -226,17 +228,38 @@
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
     ])
-    <div id="customize-anchor" class="anchor anchor-slide"></div>
-    @include('musora.sales.components.card-selection-section', [
-        "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo-light.svg",
-        "logo" => "https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png",
-        "songs" => "1000+ popular songs.",
-        "firstPoint" => "Unlimited piano lessons.",
-        "thirdPoint" => "Direct access to real teachers.",
-        "fifthPoint" => "Lesson access for singing, guitar, and drums.",
-        "plusAnnualLink" => "/chord-hacks/ty-annual",
-        "plusMonthlyLink" => "/chord-hacks/ty-monthly",
-    ])
+    <div class="unstick-trigger block"></div>
+    <div id="customize-anchor" class="anchor"></div>
+    <div id="order" class="anchor"></div>
+
+
+    <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
+        style="background: linear-gradient(to right, #08203a, #0c1524);">
+        <div class="container mx-auto max-w-6xl relative z-50">
+            <div class="w-full">
+                <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
+                    <div class=" inline-block relative w-full group" style="padding-bottom: 33%;perspective: 1000px;">
+                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
+                            <div class=" {{--border-2 border-promo--}} front absolute z-20  w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
+                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/cas-order-promo.png);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <h2 class="leading-tight mb-2"><strong>Try Pianote for 7 days & get<br class="hidden sm:inline"> a FREE Chords & Scales book.</strong></h2>
+
+                <p class="leading-tight mt-4 sm:mt-5 mb-2"><span class="text-musora">Click below to start your free 7-day trial. Your annual membership will<br class="hidden sm:inline"> continue on {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} (after your free trial).</span></p>
+
+                <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Free for 7 days</strong></h3>
+                <p class="leading-tight opacity-70 text-sm"><em>Then billed at $240 per year. Save 33%.</em></p>
+                <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&products[piano-chords-and-scales-guide]=1&promo-code=trial-book&redirect=/order&locked=true">CLICK HERE TO GET STARTED</a>
+            </div>
+            <a class="inline-block text-pianote mt-2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true"><p class="leading-tight"><strong><u>Or start a Monthly Plan for<br class="sm:hidden"> $30/month (no bonuses)</u></strong></p></a>
+            <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
+        </div>
+    </section>
+
     @include('musora.sales.components.trial-explanation', [
         'instrument' => 'piano',
     ])

@@ -2,10 +2,13 @@
 
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
+use App\Modules\EventTracking\Avo\AvoHelper;
+use App\Modules\EventTracking\Services\CustomerIoService as EventTrackingCustomerIoService;
+use Avo;
+use Carbon\Carbon;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Exception;
 use App\Modules\CustomerIO\Services\CustomerIoService;
-use Railroad\Ecommerce\Entities\User as EcommerceUser;
-use Railroad\Ecommerce\Services\UserProductService;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use Modules\UserManagementSystem\Models\User;
 use App\Modules\UserManagementSystem\Services\UserService;
@@ -16,7 +19,7 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
     /**
      * @var User
      */
-    private $user;
+    private User $user;
 
     public function __construct(User $user)
     {
@@ -24,19 +27,25 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
     }
 
     /**
-     * @param  CustomerIoService  $customerIoService
-     * @throws \Throwable
+     * @param CustomerIoService $customerIoService
+     * @param CustomerIoSyncService $customerIoSyncService
+     * @param UserService $userService
+     * @param EventTrackingCustomerIoService $eventTrackingCustomerIoService
+     * @param UserAccessPermissionsService $userAccessPermissionsService
+     * @throws Throwable
      */
     public function handle(
         CustomerIoService $customerIoService,
         CustomerIoSyncService $customerIoSyncService,
         UserService $userService,
-        UserProductService $userProductService
-    ) {
+        EventTrackingCustomerIoService $eventTrackingCustomerIoService,
+        UserAccessPermissionsService $userAccessPermissionsService
+    ): void {
         try {
             $this->user = $userService->GetByIdOrNull($this->user->id);
             $accountNameBrandsToSync = config('event-data-synchronizer.customer_io_account_name_brands_to_sync', []);
             $accountNameToSyncAllBrand = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
+            $accountCreatedAt = Carbon::now()->timestamp;
 
             foreach ($accountNameBrandsToSync as $accountName => $brands) {
                 // in order for this user to be synced to a specific workspace, they must have at least 1 product
@@ -44,10 +53,8 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
                 $syncThisWorkspace = false;
 
                 foreach ($brands as $brand) {
-                    if ($userProductService->userHadOrHasAnyDigitalProductsForBrand(
-                            new EcommerceUser($this->user->id, $this->user->email),
-                            $brand
-                        ) || $accountNameToSyncAllBrand == $brand) {
+                    if ($userAccessPermissionsService->shouldSyncCustomerIOWorkspace($this->user, $brand)
+                        || $accountNameToSyncAllBrand == $brand) {
                         $syncThisWorkspace = true;
                     }
                 }
@@ -59,10 +66,22 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
                         $this->user->email,
                         $accountName,
                         $customerAttributes,
-                        $this->user->id
+                        $this->user->id,
+                        $accountCreatedAt
                     );
                 }
             }
+
+            /*
+             * @TODO EVENT TRACKING: move this to the new event tracking when migration is completed
+             */
+            $eventTrackingCustomerIoService->updateUserAttributes(
+                $this->user,
+                ['account_created_at' => $accountCreatedAt]
+            );
+            Avo::account_created(
+                AvoHelper::defaultEventProperties(['account_created_at' => $accountCreatedAt], $this->user)
+            );
         } catch (Exception $exception) {
             $this->failed($exception);
         }
@@ -71,16 +90,11 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
     /**
      * The job failed to process.
      *
-     * @param  Throwable  $exception
+     * @param Throwable $exception
      */
-    public function failed(Throwable $exception)
+    public function failed(Throwable $exception): void
     {
-        error_log(
-            'Error on CustomerIoSyncNewUserByEmail job trying to sync user to customer.io. User ID: '.
-            $this->user->id.' - lookupEmail: '.$this->user->email
-        );
-
-        error_log($exception);
+        \Log::error('CustomerIoSyncNewUserByEmail job failed for user: ' . $this->user->id);
 
         parent::failed($exception);
     }

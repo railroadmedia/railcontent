@@ -6,6 +6,7 @@ use App\Console\Commands\AddTimeToUsersAccountsJan2023;
 use App\Console\Commands\AssignSongsPermissionsToAllUsers;
 use App\Console\Commands\AssignSongsPermissionsToContent;
 use App\Console\Commands\AssignSongsPermissionsToProducts;
+use App\Console\Commands\AssignUnassignedHelpScoutCustomersToMentors;
 use App\Console\Commands\CreateSongs24Jan2023;
 use App\Console\Commands\CreateSongsDecember2022;
 use App\Console\Commands\FixSongsTemp;
@@ -15,6 +16,7 @@ use App\Console\Commands\RemoveRailTrackerData;
 use App\Console\Commands\RemoveTemporarySongsAccessForLifetimeMembersJanuary2023;
 use App\Console\Commands\RepairUserProgressOn30DD;
 use App\Console\Commands\RepairUserProgressOnNPPSH;
+use App\Console\Commands\SeedUserProgress;
 use App\Console\Commands\SoftDeleteOldGuitareoSongs;
 use App\Console\Commands\SoftDeleteOldSingeoSongs;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
@@ -27,6 +29,8 @@ use App\Console\Commands\RepairUserProgressStartedOn;
 use App\Console\Commands\RepairVimeoDurations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
+use App\Console\Commands\SyncShopifyProductInventoryToProductsTable;
+use App\Console\Commands\SyncUsersToCIO;
 use App\Console\Commands\TestLessonsDescriptionUrls;
 use App\Console\Commands\MembershipFieldsSync;
 use App\Console\Commands\UpdateRoutinesFebruary2023;
@@ -73,6 +77,10 @@ class Kernel extends ConsoleKernel
         RepairUserProgressOnNPPSH::class,
         MigrateOldGuitareoDeletedSongs::class,
         RemoveRailTrackerData::class,
+        SyncUsersToCIO::class,
+        SeedUserProgress::class,
+        AssignUnassignedHelpScoutCustomersToMentors::class,
+        SyncShopifyProductInventoryToProductsTable::class,
     ];
 
     /**
@@ -97,12 +105,12 @@ class Kernel extends ConsoleKernel
             "0 */6 * * *"
         );//4am, 10am, 4pm, 10pm PST
 
-        $schedule->command('ecommerce:renewalDueSubscriptions 200')->cron(
-            "15 */2 * * *"
-        );
-        $schedule->command('ecommerce:ProcessAppleExpiredSubscriptionsQueued')->cron(
-            "30 */8 * * *"
-        ); // every 8 hours: 12am, 8am, 4pm PST
+//        $schedule->command('ecommerce:renewalDueSubscriptions 200')->cron(
+//            "15 */2 * * *"
+//        );
+//        $schedule->command('ecommerce:ProcessAppleExpiredSubscriptionsQueued')->cron(
+//            "30 */8 * * *"
+//        ); // every 8 hours: 12am, 8am, 4pm PST
 
         $schedule->command('mentors:verify')->daily(); //4pm
         //temporary measure to assign mentors until ecommerce is integrated with MWP
@@ -113,6 +121,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('addevent:syncMusora')->hourlyAt(50);
 
         $schedule->command('addevent:syncMusora --live')->hourlyAt(30);
+
+        $schedule->command('SyncShopifyProductInventoryToProductsTable')->everyFiveMinutes();
     }
 
     /**
@@ -123,6 +133,8 @@ class Kernel extends ConsoleKernel
     protected function commands()
     {
         $this->load(__DIR__ . '/Commands');
+
+        $this->load(app_path('Modules/Ecommerce/Console/Commands'));
 
         // TODO: uncomment when the console route file exists
         //require base_path('routes/console.php');

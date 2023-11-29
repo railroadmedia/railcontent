@@ -1,5 +1,10 @@
+@php
+    require_once(resource_path('marketing/views/musora/_partials/homepage-data.php'));
+@endphp
+
 @extends('musora._partials.layout', [
     'whiteNav' => true,
+    'fullSubscriptionVersion' => true,
 ])
 
 @section('head-includes')
@@ -10,7 +15,7 @@
     <meta property="og:description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
 
     <meta property="og:url" content="https://www.musora.com">
-    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.jpg">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
@@ -181,6 +186,30 @@
                 bottom:0;
             }
         }
+        .join.drumeo {
+            background:#0b76db;
+        }
+        .join.drumeo:hover {
+            background:#0c84f5;
+        }
+        .join.pianote {
+            background:#F61A30;
+        }
+        .join.pianote:hover {
+            background:#ff3347;
+        }
+        .join.guitareo {
+            background:#00C9AC;
+        }
+        .join.guitareo:hover {
+            background:#00e3c1;
+        }
+        .join.singeo {
+            background:#8300E9;
+        }
+        .join.singeo:hover {
+            background:#9000ff;
+        }
     </style>
 @stop
 
@@ -196,16 +225,59 @@
 @endsection
 
 @section('layout-body')
+    <section class="big-promo-banner bg-black text-white text-center relative z-10 overflow-hidden px-5 sm:px-3 lg:px-5 sm:px-8 py-8 sm:py-8"  style="background-color:#141535;">
+        <div class="container mx-auto relative z-30  max-w-4xl ">
+            <img class="h-6 sm:h-8 lg:h-10 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/promos/november/BF-musora-logo.png">
+            <h6 class="leading-tight mt-3">
+                Click any of the logos to shop<br class="sm:hidden">
+                 our Black Friday deals.</h6>
+            <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs sm:max-w-none my-3">
+                <a class="m-1 join pianote smaller" href="https://www.pianote.com/shop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-piano-keyboard"></i> Pianote</a>
+                <a class="m-1 join guitareo smaller" href="https://www.guitareo.com/shop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-guitar"></i> Guitareo</a>
+                <a class="m-1 join drumeo smaller" href="https://www.drumeo.com/drumshop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-drum"></i> Drumeo</a>
+                <a class="m-1 join singeo smaller" href="https://www.singeo.com/shop"><i class="align-middle mr-0.5 sm:mr-1 fa-light fa-microphone-stand"></i> Singeo</a>
+            </div>
+            <div x-data="timer()" x-init="countdown()" x-cloak x-show="day < 2">
+            <div class="inline-flex flex-wrap mx-auto justify-center items-center text-promo">
+                <h5 class="leading-none m-0"><strong>DEALS END IN:</strong></h5>
+                <div class="h-12 mx-2 sm:mx-4 bg-promo" style="width:2px;"></div>
+                <div class="flex">
+                    <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && day > 0">
+                        <div class="text-2xl sm:text-3xl font-extrabold" x-text="day">00</div>
+                        <div class="text-xs font-semibold" x-text="dayText">DAYS</div>
+                    </div>
+                    <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && hour > 0">
+                        <div class="text-2xl sm:text-3xl font-extrabold" x-text="hour">00</div>
+                        <div class="text-xs font-semibold" x-text="hourText">HRS</div>
+                    </div>
+                    <div class="mr-4 sm:mr-6" x-show="timeLeft > 0">
+                        <div class="text-2xl sm:text-3xl font-extrabold" x-text="minute">00</div>
+                        <div class="text-xs font-semibold" x-text="minuteText">MIN</div>
+                    </div>
+                    <div x-show="timeLeft > 0">
+                        <div class="text-2xl sm:text-3xl font-extrabold" x-text="second">00</div>
+                        <div class="text-xs font-semibold" x-text="secondText">SEC</div>
+                    </div>
+                    <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="inset-0 inline-block lg:hidden absolute bg-center bg-cover z-0" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/promos/november/header-bg-m2.jpg');"></div>
+        <div class="inset-0 hidden lg:inline-block absolute bg-center bg-cover z-0" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/header-bg2.jpg');"></div>
+
+    </section>
+
     <section class="text-center px-5 sm:px-6 py-32 sm:py-52 lg:py-56 relative overflow-hidden" style="background:linear-gradient(to bottom, #fff 40%, #F1EFED);">
         <div class="container max-w-xs sm:max-w-6xl mx-auto relative z-20">
             <h1 class="relative w-auto inline-block text-3xl sm:text-4xl lg:text-5xl">
                 <strong>Your musical goals <br class="inline sm:hidden"> start here.</strong>
-                <img class="w-64 lg:w-80 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:-right-6 px-7" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/underline.png" alt="underline" fetchpriority="high">
+                <img class="w-64 lg:w-80 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:-right-6 px-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2023/underline.png" alt="underline" fetchpriority="high">
             </h1>
             <h6 class="leading-relaxed sm:mt-6 mb-4 sm:mb-7 px-5 sm:px-0 max-w-xs sm:max-w-full">
                 Find your musical flow with step-by-step lessons, <br class="hidden sm:inline">
                 thousands of songs, and unlimited personal support.</h6>
-            <a class="sm:mx-1 w-full sm:w-56 join musora-gold smaller" href="/choose-plan">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
+            <a class="sm:mx-1 w-full sm:w-64 join musora-gold smaller" href="/choose-plan">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
             <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
@@ -217,38 +289,39 @@
                 <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
             </div>
         </div>
-        <img class="absolute z-10 h-10 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header4.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-24 sm:h-28 lg:h-44 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]" src="https://www.musora.com/musora-cdn/image/width=350,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header5.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-32 sm:h-40 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header7.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header1.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header3.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-28 sm:h-32 lg:h-48 transform -translate-x-1/2 -translate-y-1/2 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header8.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-28 sm:h-36 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header6.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-12 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header2.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-10 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header4.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-24 sm:h-28 lg:h-44 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header5.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-32 sm:h-40 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header7.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header1.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header3.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-28 sm:h-32 lg:h-48 transform -translate-x-1/2 -translate-y-1/2 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header8.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-28 sm:h-36 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header6.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-12 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header2.png" alt="header circle image" fetchpriority="high">
     </section>
 
     <section class="text-center text-white py-5 sm:py-7" style="background-color:#0c1524;">
         <div class="container max-w-4xl mx-auto">
             <div class="flex-wrap justify-center items-center hidden sm:flex">
-                <h5 class="px-1 sm:px-5 lg:px-10"><i class="text-pianote text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-piano-keyboard"></i> <strong>Piano</strong></h5>
-                <h5 class="px-1 sm:px-5 lg:px-10"><i class="text-guitareo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-guitar"></i> <strong>Guitar</strong></h5>
-                <h5 class="px-1 sm:px-5 lg:px-10"><i class="text-drumeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-drum"></i> <strong>Drums</strong></h5>
-                <h5 class="px-1 sm:px-5 lg:px-10"><i class="text-singeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-microphone-stand"></i> <strong>Singing</strong></h5>
+                <a href="/6-reasons/piano"><h5 class="px-1 sm:px-5 lg:px-10"><i class="text-pianote text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-piano-keyboard"></i> <strong>Piano</strong></h5></a>
+                <a href="/6-reasons/guitar"><h5 class="px-1 sm:px-5 lg:px-10"><i class="text-guitareo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-guitar"></i> <strong>Guitar</strong></h5></a>
+                <a href="/6-reasons/drums"><h5 class="px-1 sm:px-5 lg:px-10"><i class="text-drumeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-drum"></i> <strong>Drums</strong></h5></a>
+                <a href="/6-reasons/singing"><h5 class="px-1 sm:px-5 lg:px-10"><i class="text-singeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-microphone-stand"></i> <strong>Singing</strong></h5></a>
             </div>
             <div class="flex-wrap justify-center items-center flex sm:hidden">
-                <p class="px-2 sm:px-5 lg:px-10"><i class="text-pianote text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-piano-keyboard"></i> <strong>Piano</strong></p>
-                <p class="px-2 sm:px-5 lg:px-10"><i class="text-guitareo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-guitar"></i> <strong>Guitar</strong></p>
-                <p class="px-2 sm:px-5 lg:px-10"><i class="text-drumeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-drum"></i> <strong>Drums</strong></p>
-                <p class="px-2 sm:px-5 lg:px-10"><i class="text-singeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-microphone-stand"></i> <strong>Singing</strong></p>
+                <a href="/6-reasons/piano"><p class="px-2 sm:px-5 lg:px-10"><i class="text-pianote text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-piano-keyboard"></i> <strong>Piano</strong></p></a>
+                <a href="/6-reasons/guitar"><p class="px-2 sm:px-5 lg:px-10"><i class="text-guitareo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-guitar"></i> <strong>Guitar</strong></p></a>
+                <a href="/6-reasons/drums"><p class="px-2 sm:px-5 lg:px-10"><i class="text-drumeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-drum"></i> <strong>Drums</strong></p></a>
+                <a href="/6-reasons/singing"><p class="px-2 sm:px-5 lg:px-10"><i class="text-singeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-microphone-stand"></i> <strong>Singing</strong></p></a>
             </div>
         </div>
     </section>
+
     <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
-            <img class="text-center mx-auto sm:h-20 lg:h-24 mb-10 hidden sm:inline-block" src="https://musora-center.s3.amazonaws.com/homepage/2023/learn-practice-play.png">
-            <img class="text-center mx-auto h-24 inline-block sm:hidden" src="https://musora-center.s3.amazonaws.com/homepage/2023/learn-practice-play-m.png">
+            <img class="text-center mx-auto sm:h-20 lg:h-24 mb-10 hidden sm:inline-block" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2023/learn-practice-play.png">
+            <img class="text-center mx-auto h-24 inline-block sm:hidden" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2023/learn-practice-play-m.png">
             <img class="my-5 h-64 inline sm:hidden"
-                src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/intro-collage3.png"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/620x0/filters:quality(95)/marketing/musora/membership/homepage/2023/intro-collage3.png"
                 alt="learn playing image"
                 fetchpriority="high"
             >
@@ -262,7 +335,7 @@
                 <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/intro-collage3.png"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/musora/membership/homepage/2023/intro-collage3.png"
                     alt="learn playing image"
                 >
             </div>
@@ -282,81 +355,18 @@
             <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6 hidden sm:flex">
 
                 @php
-                    $gridItems = [
-                        [
-                            'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/10-level-cirriculum.jpg',
-                            'title' => 'Step-By-Step Clarity',
-                            'desc' => 'Learn the right skills in the right order with our 10-level curriculum for each instrument. ',
-                            'lessonInfo' => [
-                                [
-                                    'thumb' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/10-level-cirriculum.jpg',
-                                ],
-                            ]
-                        ],
-                        [
-                            'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/practical-assignments.jpg',
-                            'title' => 'Handy Practice Tools',
-                            'desc' => 'Gain momentum with interactive exercises, speed control, looping, and progress tracking.',
-                            'lessonInfo' => [
-                                [
-                                    'thumb' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/practical-assignments.jpg',
-                                ],
-                            ]
-                        ],
-                        [
-                            'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/world-class-teachers.jpg',
-                            'title' => 'World-Class Teachers',
-                            'desc' => 'Study with 100+ music authorities including Grammy Award winners and touring musicians. ',
-                            'lessonInfo' => [
-                                [
-                                    'thumb' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/world-class-teachers.jpg',
-                                ],
-                            ]
-                        ],
-                        [
-                            'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/on-demand-courses2.jpg',
-                            'title' => 'On-Demand Courses',
-                            'desc' => 'Prefer to jump around? Boost any skill, anytime with topic-based courses for any musical goal. ',
-                            'lessonInfo' => [
-                                [
-                                    'thumb' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/on-demand-courses2.jpg',
-                                ],
-                            ]
-                        ],
-                        [
-                            'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/downloadable-videos.jpg',
-                            'title' => 'Downloadable Videos',
-                            'desc' => 'Stream your lesson OR download your videos so you can learn and practice anywhere, anytime. ',
-                            'lessonInfo' => [
-                                [
-                                    'thumb' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/downloadable-videos.jpg',
-                                ],
-                            ]
-                        ],
-                        [
-                            'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/personalized-support.jpg',
-                            'title' => 'Powered By Humans',
-                            'desc' => 'Get weekly live streams, student lesson plans, and access to a global music community. ',
-                            'lessonInfo' => [
-                                [
-                                    'thumb' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/personalized-support.jpg',
-                                ],
-                            ]
-                        ],
-                    ];
+                    $gridItems = $musora['gridItems'];
                 @endphp
                 @foreach ($gridItems as $key => $gridItem)
                     <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0 max-w-xs sm:max-w-full">
-                        <picture class="w-1/3 sm:w-full">
-                            <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/{{ $gridItem['image'] }}">
-                            <img
-                                class=" rounded-xl mb-3 transition-opacity opacity-0"
-                                src="https://www.musora.com/musora-cdn/image/width=200,quality=95/{{ $gridItem['image'] }}"
-                                alt="grid{{$key+1}}"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
+
+                        <div class="w-1/3 sm:w-full mb-3 rounded-xl overflow-hidden">
+                            <div
+                                class=" aspect-16:9 bg-cover bg-center"
+                                style="background-image:url('https://www.musora.com/musora-cdn/image/width=640,quality=95/{{ $gridItem['image'] }}')"
                             >
-                        </picture>
+                            </div>
+                        </div>
                         <div class="w-2/3 sm:w-full pl-3 sm:pl-0">
                             <p class="leading-tight mb-0.5"><strong class="font-black"><span class="border border-musora rounded-full px-2 py-0.5 inline-block">{{$key+1}}</span> {{ $gridItem['title'] }}</strong></p>
                             <p class="leading-normal text-sm">{{ $gridItem['desc'] }}</p>
@@ -398,195 +408,9 @@
     </section>
 
     @php
-        $buttons = [
-            '<i class="text-pianote align-middle mr-0.5 fa-light fa-piano-keyboard"></i> Piano',
-            '<i class="text-guitareo align-middle mr-0.5 fa-light fa-guitar"></i> Guitar',
-            '<i class="text-drumeo align-middle mr-0.5 fa-light fa-drum"></i> Drums',
-            '<i class="text-singeo align-middle mr-0.5 fa-light fa-microphone-stand"></i> Singing'
-        ];
+        $buttons = $musora['buttons'];
 
-        $courses = [
-            [
-                'title' => '<i class="text-pianote align-middle mr-0.5 fa-light fa-piano-keyboard"></i> Piano',
-                'images' => [
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/classical-piano.jpg',
-                    'title' => 'Classical<br> Piano',
-                    'instructor' => 'Victoria Theodore',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/improvisational-jazz.jpg',
-                    'title' => 'Improvisational<br> Jazz',
-                    'instructor' => 'Jesús Molina',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/beautifully-simple-piano-arpeggios.jpg',
-                    'title' => 'Simple Piano<br> Arpeggios',
-                    'instructor' => 'Sangah Noona',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/the-perfect-arrangement.jpg',
-                    'title' => 'The Perfect<br> Arrangement',
-                    'instructor' => 'Summer Swee-Singh',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/creative-song-writing.jpg',
-                    'title' => 'Creative<br> Songwriting',
-                    'instructor' => 'Josh Dion',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/rhythmic-playing.jpg',
-                    'title' => 'Rhythmic<br> Playing',
-                    'instructor' => 'Jay Oliver',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/gospel-piano.jpg',
-                    'title' => 'Gospel<br> Piano',
-                    'instructor' => 'Erskine Hawkins',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/latin-essentials.jpg',
-                    'title' => 'Latin<br> Essentials',
-                    'instructor' => 'Kevin Castro',
-                    ],
-                ]
-            ],
-            [
-                'title' => '<i class="text-guitareo align-middle mr-0.5 fa-light fa-guitar"></i> Guitar',
-                'images' => [
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/solo-in-an-hour.jpg',
-                    'title' => 'Solo In<br> An Hour',
-                    'instructor' => 'Ayla Tesler-Mabé',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/songwriting-cheat-codes.jpg',
-                    'title' => 'Songwriting<br> Cheat Codes',
-                    'instructor' => 'Rob Scallon',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/rhythm-groove.jpg',
-                    'title' => 'Rhythm &<br> Groove',
-                    'instructor' => 'Sami Ghawi',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/shred-guitar.jpg',
-                    'title' => 'Shred<br> Guitar',
-                    'instructor' => 'Dean Lamb',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/unlock-your-creativity.jpg',
-                    'title' => 'Unlock Your<br> Creativity',
-                    'instructor' => 'Yvette Young',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/musical-lanes.jpg',
-                    'title' => 'Musical<br> Lanes',
-                    'instructor' => 'Mark Lettieri',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/add-power-to-your-playing.jpg',
-                    'title' => 'Add Power To<br> Your Playing',
-                    'instructor' => 'Dave Weiner',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/the-anatomy-of-a-song.jpg',
-                    'title' => 'The Anatomy<br> of a Song',
-                    'instructor' => 'Pete Thorn',
-                    ],
-                ]
-            ],
-            [
-                'title' => '<i class="text-drumeo align-middle mr-0.5 fa-light fa-drum"></i> Drums',
-                'images' => [
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
-                    'title' => 'Drum<br> Chops',
-                    'instructor' => 'Aaron Spears',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Hannah-Welton.jpg',
-                    'title' => 'Writing<br> Drum Parts',
-                    'instructor' => 'Hannah Welton',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Todd-Sucherman.jpg',
-                    'title' => 'Rock <br>Drumming',
-                    'instructor' => 'Todd Sucherman',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Matt-McGuire.jpg',
-                    'title' => 'Song<br> Breakdowns',
-                    'instructor' => 'Matt McGuire',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Dorothe-Taylor-01.jpg',
-                    'title' => 'Rudiments <br>& Patterns',
-                    'instructor' => 'Dorothea Taylor',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aric-Improta.jpg',
-                    'title' => 'The Creative<br> Mindset',
-                    'instructor' => 'Aric Improta',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Kaz-Rodgriguez.jpg',
-                    'title' => 'Musical <br>Exercises',
-                    'instructor' => 'Kaz Rodriguez',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Sarah-Thawer.jpg',
-                    'title' => '4-Way <br>Coordination',
-                    'instructor' => 'Sarah Thawer',
-                    ]
-                ]
-            ],
-            [
-                'title' => '<i class="text-singeo align-middle mr-0.5 fa-light fa-microphone-stand"></i> Singing',
-                'images' => [
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/find-your-true-voice.jpg',
-                    'title' => 'Find Your<br> True Voice',
-                    'instructor' => 'Sheléa',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/The-power-of-movement.jpg',
-                    'title' => 'The Power<br> of Movement',
-                    'instructor' => 'Chris Johnson',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/singing-with-soul.jpg',
-                    'title' => 'Singing<br> With Soul',
-                    'instructor' => 'Tony Lindsay',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/define-your-singing.jpg',
-                    'title' => 'Define Your<br> Singing',
-                    'instructor' => 'Cate Canning',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/the-science-of-singing-better.jpg',
-                    'title' => 'The Science<br> of Singing Better',
-                    'instructor' => 'Darcy D',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/songwriting-for-singers.jpg',
-                    'title' => 'Songwriting <br>For Singers',
-                    'instructor' => 'Hailey Benedict',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/hit-the-high-notes.jpg',
-                    'title' => 'Hit The <br>High Notes',
-                    'instructor' => 'Lisa Witt',
-                    ],
-                    [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/beautiful-harmonies.jpg',
-                    'title' => 'Beautiful<br> Harmonies',
-                    'instructor' => 'Julia Ziegler',
-                    ],
-                ]
-            ],
-        ];
+        $courses = $musora['courses'];
     @endphp
 
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
@@ -599,33 +423,13 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #0c1524 calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white" style="background:#0c1524;">
         <div class="container max-w-4xl mx-auto">
-            <img class="h-10 sm:h-20 lg:h-24 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1300,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/just-press-play-title3.png" alt="collage intro mobile" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <img class="h-10 sm:h-20 lg:h-24 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2023/just-press-play-title3.png" alt="collage intro mobile" loading="lazy" onload="this.classList.remove('opacity-0')">
             <p class="text-center mt-5 mb-16 sm:mt-5 sm:mb-20">Musora is loaded with practice tools and guided workouts
                 <br class="hidden sm:inline"> to help you learn music by actually playing.</p>
 
             @php
-                $gettings = [
-
-                    [
-                    'position' => 'left',
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/your-schedule.png',
-                    'title' => 'Practice on your schedule. ',
-                    'desc' => 'Day or night. Here or there. Musora goes anywhere – an app for iOS or Android, a full desktop experience, as well as downloadable videos and printable PDFs so you can learn your way, every time. ',
-                    ],
-                    [
-                    'position' => 'right',
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/know-exactly.png',
-                    'title' => 'Know exactly what to practice. ',
-                    'desc' => 'You’ll never be left wondering what to do – with one-click progress tracking on every lesson and exercise so you know exactly where you left off and what to practice next. ',
-                    ],
-                    [
-                    'position' => 'left',
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/sheet-music-alive2.png',
-                    'title' => 'Sheet music that comes alive!',
-                    'desc' => 'Every lesson comes with interactive assignments to make your practice session easier. Play-along to the sheet music, create loops, and adjust the speed to hit the right note, every time. ',
-                    ],
-                ];
-//            @endphp
+                $gettings = $musora['gettings'];
+          //  @endphp
             <div class="max-w-3xl lg:max-w-4xl mx-auto relative sm:px-4 mt-7 pb-10 sm:pb-20">
                 @foreach ($gettings as $key => $getting)
                     @if($getting['position'] === 'right')
@@ -634,26 +438,26 @@
                                 <h5 class="mb-2 md:mb-4 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h5>
                                 <p>{{ $getting['desc'] }}</p>
                             </div>
-                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 bg-contain bg-top bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }});"></div>
-                            <div class="dot hidden sm:block absolute bg-white top-0 rounded-full z-10 transform -translate-x-1/2 -translate-y-1/2" style="width: 20px;height:20px"></div>
+                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 bg-contain bg-top bg-no-repeat" style="background-image: url('{{$getting['img']}}');"></div>
+                            <div class="dot hidden md:block absolute bg-white top-0 rounded-full z-10 transform -translate-x-1/2 -translate-y-1/2" style="width: 20px; height: 20px"></div>
                         </div>
                     @else
                         <div class="relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if($key !== 2) mb-16 md:mb-28 @endif">
-                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 bg-contain bg-top bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }});"></div>
+                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 bg-contain bg-top bg-no-repeat" style="background-image: url('{{$getting['img']}}');"></div>
                             <div class="content relative text-left sm:pl-10 md:pl-0">
                                 <h5 class="mb-2 md:mb-4 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h5>
                                 <p>{{ $getting['desc'] }}</p>
                             </div>
-                            <div class="dot hidden sm:block absolute bg-white top-0 rounded-full z-10 transform -translate-x-1/2 -translate-y-1/2" style="width: 20px;height:20px"></div>
+                            <div class="dot hidden md:block absolute bg-white top-0 rounded-full z-10 transform -translate-x-1/2 -translate-y-1/2" style="width: 20px;height:20px"></div>
                         </div>
                     @endif
                 @endforeach
-                <div class="full-line hidden sm:block absolute bg-white top-0 z-0 transform -translate-x-1/2" style="width: 2px;"></div>
+                <div class="full-line hidden md:block absolute bg-white top-0 z-0 transform -translate-x-1/2" style="width: 2px;"></div>
             </div>
             <div class="text-center sm:text-left sm:text-center mb-5">
                 <img class="h-24 mb-4 transition-opacity opacity-0"
                 loading="lazy"
-                onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=190,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/guarantee-musora-line.png" alt="bonus icon">
+                onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/musora/membership/homepage/2023/guarantee-musora-line.png" alt="bonus icon">
                 <h5><strong><i class="fas fa-star text-musora"></i> BETTER PRACTICE GUARANTEE <i class="fas fa-star text-musora"></i></strong></h5>
                 <p class="max-w-sm mx-auto leading-normal mt-3">You’ll get 7 days free PLUS a 90-day guarantee<br> to make sure you love your improvements!</p>
             </div>
@@ -683,22 +487,22 @@
             <p class="leading-tight mt-2 sm:mt-3 mb-7">You’ll have <strong>all the tools you need</strong><br class="inline sm:hidden"> to play the songs you love.</p>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'pianote'">
                 <div style="padding-bottom:62.4%;" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="pianoteSoundslice = true;" >
-                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/pianote-player2.png" alt="pianote player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/pianote-player2.png" alt="pianote player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
-            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'guitareo'">
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'guitareo'" style="display:none;">
                 <div style="padding-bottom:62.4%" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="guitareoSoundslice = true;" >
-                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/guitareo-player2.png" alt="guitareo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/guitareo-player2.png" alt="guitareo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
-            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'drumeo'">
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'drumeo'" style="display:none;">
                 <div style="padding-bottom:62.4%;" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="drumeoSoundslice = true;" >
-                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/drumeo-player2.png" alt="drumeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/drumeo-player2.png" alt="drumeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
-            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'singeo'">
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'singeo'" style="display:none;">
                 <div style="padding-bottom:62.4%" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="singeoSoundslice = true;" >
-                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/singeo-player2.png" alt="singeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/singeo-player2.png" alt="singeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
             <div class="">
@@ -734,45 +538,7 @@
             <div class="text-center w-full sm:w-auto mt-6 sm:mt-12 mx-auto mb-5 sm:mb-10">
                 <div class="hidden sm:flex flex-wrap">
                     @php
-                        $songItems = [
-                            [
-                                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/popular-song-icon.svg',
-                                'fa-icon' => 'fa-music',
-                                'title' => '1000+ popular songs.',
-                                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
-                            ],
-                            [
-                                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/isolate-icon.svg',
-                                'fa-icon' => 'fa-sliders-up',
-                                'title' => 'Ditch the distractions.',
-                                'desc' => 'Isolate the piano, guitar, or drums so you always know exactly what to play.',
-                            ],
-                            [
-                                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/loop-icon.svg',
-                                'fa-icon' => 'fa-arrows-repeat',
-                                'title' => 'Simplify the tricky parts.',
-                                'desc' => 'Learn songs faster with perfect notation, practice loops, and tempo control.',
-                            ],
-                            [
-                                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/metronome-icon.svg',
-                                'fa-icon' => 'fa-timer',
-                                'title' => 'Improve your timing.',
-                                'desc' => 'Use built-in metronome - your new best friend to get the timing just right. ',
-                            ],
-                            [
-                                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/notation-icon.svg',
-                                'fa-icon' => 'fa-list-music',
-                                'title' => 'Play it right the first time.',
-                                'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
-                            ],
-                            [
-                                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/devices-icon.svg',
-                                'fa-icon' => 'fa-laptop-mobile',
-                                'title' => 'Take your songs anywhere.',
-                                'desc' => 'Accessible on any device, or printable,so you can play any song, any time.',
-                            ],
-
-                        ];
+                        $songItems = $musora['songItems'];
                     @endphp
                     @foreach ($songItems as $songItem)
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 sm:mb-4">
@@ -802,7 +568,7 @@
                 </div>
             </div>
             @if(empty($promoVersion))
-                <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline {{ $theme }} smaller">SEE SONGS LIST</a>
+                <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-72 join outline {{ $theme }} smaller">SEE SONGS LIST</a>
             @endif
             <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }}-gold smaller @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))
@@ -823,72 +589,7 @@
     </section>
 
     @php
-        $testimonials = [
-            [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/ed-koop.jpg',
-            'name' => 'Ed Koop',
-            'brand' => 'Drummer',
-            'video' => '342059271',
-            'title' => 'I’m loving music more than I ever did before!',
-            'description' => 'After 20 years away from the drums, Ed says he’s loving music more than ever. He nailed his first audition and has now played at the venues of his dreams.',
-            ],
-            [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/lisa-aragon.jpg',
-            'name' => 'Lisa Aragon',
-            'brand' => 'Drummer',
-            'video' => '373252004',
-            'title' => 'I was able to play drums on stage!',
-            'description' => 'Lisa got interested in the drums by playing Rock Band. She had no idea she’d be performing with strangers in Nashville just a few years later.',
-            ],
-            [
-            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/serenadorward.jpg',
-            'title' => "If I was taught this way as a child, I would have never quit.",
-            'description' => "I decided to sign up with Pianote not only to re-learn how to play the piano, but also because my mental health was really suffering and I needed something positive to focus on that was just for ME. I knew almost immediately that this was the answer I had been looking for. It felt like the heaviness on my shoulders got a bit lighter after every piano session.  And even though the lessons are virtual, it was like Lisa was right there beside me cheering me on.<br><br>I was blown away by how quickly I progressed with a few tutorials from Lisa. My overall confidence improved, especially with improvisation. Now I know all these little tricks (fills & riffs) and how to play inversions and practice chords in ways that sound so lovely.  If I had been taught this way as a child, I probably never would have quit.",
-            'name' => 'Serena Dorward',
-            'brand' => 'Pianist',
-            'location' => 'Ontario, Canada',
-            ],
-            [
-            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jessripley.jpg',
-            'title' => "I’m blown away by the program you’ve created.",
-            'description' => "Pianote is an insanely encouraging and supportive community run by an insanely encouraging and supportive team. Sincerely, I’m blown away by the program you’ve created.<br><br>I sat down one day and it just clicked. From then on, I’ve felt VERY encouraged to keep learning and practicing. It’s fulfilling and fun to see myself progress and achieve goals. Now I’m playing with both hands at the same time with confidence – and I’ve started playing along with more backing tracks and making up my own songs.",
-            'name' => 'Jess Ripley',
-            'brand' => 'Pianist',
-            'location' => 'California, USA',
-            ],
-            [
-            'title' => "I’m lightyears ahead of where I was.",
-            'description' => "I’ve come so far in such a short period of time. I’ve gone from not even knowing what palm muting was to noodling with the E & A string pentatonic shapes and creating melodies with it – and using it to work on my vibrato, slides, and bends. And I’ve gained priceless info like knowing where to place chords, start power chords, and scale shapes.<br><br>Having the breakthroughs I’ve had so far has brought me confidence and kept me sane while the world is seemingly not – and made me believe there is still a bright future ahead. As I progress, I feel supported towards achieving my goals of jamming with others and using my love for writing to start telling stories through music. All in due time.<br><br>I’m lightyears ahead of where I was at. And no matter where I go, or however tough things get, I’ll always have one of my guitars in the passenger seat and we’ll always be there for each other. The life long journey has begun!",
-            'name' => 'Ërlik Sörensen',
-            'brand' => 'Guitarist',
-            'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2022/testimonials/erliksorensen.jpg',
-            'location' => 'British Columbia, Canada',
-            ],
-            [
-            'title' => "I’ve never felt so much JOY playing the guitar.",
-            'description' => "When I finished the first lesson, I had a feeling of joy that I’ve never had before when playing guitar. I'm experimenting a lot more and improving my technique. The goal-based learning makes each set of lessons more entertaining and a feeling of accomplishment when completed.",
-            'name' => 'Jamie K',
-            'brand' => 'Guitarist',
-            'image' => 'https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/testimonials/jamie-nova-scotia.jpg',
-            'location' => 'Nova Scotia, Canada',
-            ],
-            [
-            'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2022/testimonials/OriannaSells.jpg',
-            'name' => 'Orianna Sells',
-            'brand' => 'Singer',
-            'title' => 'It felt like the chains finally fell off my voice.',
-            'description' => 'I was concerned that my singing style was too different to truly learn what I needed – and I wanted to strengthen my voice and stretch my range in a healthy manner.<br><br>With Singeo, I started practicing my songs more meticulously and it paid off – stronger high notes were available and it felt like the chains finally fell off my voice!',
-            'location' => 'South Carolina, USA',
-            ],
-            [
-            'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2022/testimonials/DamienGiven3.jpg',
-            'name' => 'Damien Given',
-            'brand' => 'Singer',
-            'title' => 'I’m getting back some of my old confidence.',
-            'description' => 'Thirty-five years ago, I sang professionally in a group. And now at 74 years old, I’d given up the idea of ever singing properly again. But when tendonitis put a stop to my piano playing for several months, I decided to give Singeo a try – and boy, what a great choice!<br><br>I’m getting back some of my old confidence through the lessons and feedback – and I’m now keen to regain more pitch and breathing control, even though physiologically I’ve probably lost about one and a half steps at the top of my range. But that doesn’t bother me as much as I thought it would after a few months with Singeo. I’ve received a great deal of positive feedback from my classmates - and great tips from Lisa, Julia, and the team. What a find, what a course, and what great tutors!',
-            'location' => 'Northern Ireland',
-            ],
-        ]
+        $testimonials = $musora['testimonials'];
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'desktopGrid' => true,
@@ -898,7 +599,7 @@
     @include('musora._partials.order-section-collage')
 
     @include('musora.sales.components.app-section', [
-        'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/devices2.png',
+        'image' => 'marketing/musora/membership/homepage/2023/devices2.png',
         'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?platform=iphone',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
     ])

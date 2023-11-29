@@ -127,7 +127,26 @@
                         </v-btn>
                     </v-date-picker>
                 </v-menu>
-
+                <v-text-field
+                    v-model="$_shopify_url"
+                    label="Shopify Customer Profile"
+                    :color="brandColor"
+                ></v-text-field>
+                <v-text-field
+                    v-model="$_revenuecat_url"
+                    label="RevenueCat Customer Profile"
+                    :color="brandColor"
+                ></v-text-field>
+                <v-text-field
+                    v-model="$_membership_level"
+                    label="Membership Level"
+                    :color="brandColor"
+                ></v-text-field>
+                <v-text-field
+                    v-model="$_membership_expiration_date"
+                    label="Membership Expiration Date"
+                    :color="brandColor"
+                ></v-text-field>
                 <v-textarea
                     v-model="$_biography"
                     label="Bio"
@@ -356,7 +375,30 @@ export default {
                 });
             },
         },
-
+        $_shopify_url: {
+            cache: false,
+            get() {
+                return this.thisUser.attributes.shopify_customer_url;
+            },
+        },
+        $_revenuecat_url: {
+            cache: false,
+            get() {
+                return this.thisUser.attributes.revenuecat_customer_url;
+            },
+        },
+        $_membership_level: {
+            cache: false,
+            get() {
+                return this.thisUser.attributes.membership_level;
+            },
+        },
+        $_membership_expiration_date: {
+            cache: false,
+            get() {
+                return this.thisUser.attributes.membership_expiration_date;
+            },
+        },
         $_profile_picture_url: {
             cache: false,
             get() {

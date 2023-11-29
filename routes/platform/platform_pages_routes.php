@@ -3,7 +3,8 @@
 use App\Http\Controllers\Platform\CoachPagesController;
 use App\Http\Controllers\Platform\CohortPackController;
 use App\Http\Controllers\Platform\ContentPagesController;
-use App\Http\Controllers\Platform\InactiveMemberController;
+use App\Http\Controllers\Platform\WorkoutsPageController;
+use App\Http\Controllers\Platform\ExpiredMemberController;
 use App\Http\Controllers\Platform\ForumPagesController;
 use App\Http\Controllers\Platform\HomePageController;
 use App\Http\Controllers\Platform\LegacyResourcesController;
@@ -61,10 +62,12 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->name('platform.subscribed-lessons');
 
-
-                Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
+                Route::get('/{brand}/artists/{slug}', [ContentPagesController::class, 'artistSongs'])
                     ->whereIn('brand', all_brands())
-                    ->whereIn('contentTypeName', [
+                    ->name('platform.content.artist.show');
+
+                Route::get('/{brand}/genres/{genre}/{contentTypeName}', [ContentPagesController::class, 'genreContentByType'])
+                    ->whereIn('brand', all_brands())->whereIn('contentTypeName', [
                         'lessons', // guitareo one-off page
                         'routines', // singeo one-off page
                         'courses',
@@ -107,7 +110,78 @@ Route::domain('{musoraDomain}')
                         'song-tutorials',
                         'drum-fest-international-2022',
                     ])
+                    ->name('platform.content.genre.show');
+
+                Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
+                    ->whereIn('brand', all_brands())
+                    ->whereIn('contentTypeName', [
+                        'lessons', // guitareo one-off page
+                        'routines', // singeo one-off page
+                        'courses',
+                        'songs',
+                        'quick-tips',
+                        'podcasts',
+                        'question-and-answer',
+                        'student-reviews',
+                        'boot-camps',
+                        'chords-and-scales',
+                        'bootcamps',
+                        'chords-scales',
+                        'library',
+                        'recording',
+                        'play-alongs',
+                        'archives',
+                        'spotlight',
+                        'the-history-of-electronic-drums',
+                        'backstage-secrets',
+                        'student-collaborations',
+                        'live-streams',
+                        'solos',
+                        'gear-guides',
+                        'performances',
+                        'in-rhythm',
+                        'challenges',
+                        'on-the-road',
+                        'diy-drum-experiments',
+                        'rhythmic-adventures-of-captain-carson',
+                        'study-the-greats',
+                        'rhythms-from-another-planet',
+                        'tama-drums',
+                        'paiste-cymbals',
+                        'behind-the-scenes',
+                        'exploring-beats',
+                        'sonor-drums',
+                        'rudiments',
+                        'song-tutorials',
+                        'drum-fest-international-2022',
+                    ])
                     ->name('platform.content-type-catalog');
+                
+
+                Route::get('/{brand}/workouts', [WorkoutsPageController::class, 'showWorkoutsPage'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.workouts');
+
+                Route::get('/{brand}/workouts/challenges', [WorkoutsPageController::class, 'showChallengesPage'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.workouts.challenges');
+
+                Route::get(
+                    '/{brand}/workouts/{primaryPage}/{firstContentSlug}/{firstContentId}',
+                    [ContentPagesController::class, 'firstLevel']
+                )
+                    ->whereIn('brand', all_brands())
+                    ->whereIn(
+                        'primaryPage',
+                        [
+
+                            'challenges',
+
+                        ]
+                    )
+                    ->name('platform.workout.challenge');
+
+
 
                 Route::get('/{brand}/shows', [ContentPagesController::class, 'shows'])
                     ->whereIn('brand', ['drumeo'])
@@ -162,6 +236,14 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->name('platform.live-chat');
 
+                Route::get(
+                    '/{brand}/workouts/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}',
+                    [ContentPagesController::class, 'secondLevel']
+                )
+                    ->whereIn('brand', all_brands())
+                    ->whereIn('primaryPage', ['challenges'])
+                    ->name('platform.workout.challenge.workout');
+
                 /*
                  * Catch-All Sub-Content Hierarchy Pages / Video Lesson Pages
                  */
@@ -212,6 +294,7 @@ Route::domain('{musoraDomain}')
                             'play-alongs',
                             'song-tutorials',
                             'drum-fest-international-2022',
+                            'workouts'
                         ]
                     )
                     ->name('platform.content.first-level');

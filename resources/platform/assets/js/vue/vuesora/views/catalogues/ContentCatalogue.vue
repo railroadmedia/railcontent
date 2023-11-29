@@ -499,14 +499,7 @@ export default {
         : 0,
       loading: false,
       requestingMore: false,
-      filter_params: {
-        artist: null,
-        bpm: null,
-        difficulty: null,
-        instructor: null,
-        style: null,
-        topic: null,
-      },
+      filter_params: {},
       selected_types: null,
       search_term: this.searchTerm,
       required_user_states: this.requiredUserStates || [],
@@ -531,6 +524,9 @@ export default {
               value: '-published_on'
           }
       ],
+      selectedTab: 'subscribedCoaches',
+      filterMultiSelectColumns: [],
+      coachData: { allCoaches: this.preLoadedContent ? this.preLoadedContent.data : [], subscribedCoaches: [] },
     };
   },
   computed: {
@@ -654,6 +650,17 @@ export default {
         this.loadedContentIds[item.id] = true;
       });
     }
+
+    if(this.isCoachesGrid){
+        this.getContent(true, true).then(()=>{
+            this.selectedTab = 'allCoaches';
+            this.coachData['subscribedCoaches'] = [...this.content];
+            this.getContent(true, true);
+        });
+
+        this.getFilterColumns();
+    }
+
   },
   watch: {
     catalogueType: function () {
@@ -666,8 +673,8 @@ export default {
     }
   },
   methods: {
-    handleContentSort(event) {
-      this.sort = event.target.value;
+    handleContentSort(key) {
+      this.sort = key;
       //reset page params
       this.page = 1;
 
@@ -785,7 +792,7 @@ export default {
 
     fetchContent() {
       return axios
-        .get(this.$_contentEndpoint, {
+        .get( this.isCoachesGrid ? this.coachEndpoint() : this.$_contentEndpoint, {
           params: {
             brand: this.brand,
             limit: this.limit,
@@ -952,6 +959,49 @@ export default {
       this.setUrlParams();
 
       this.getContent();
+    },
+
+    coachEndpoint(){
+        return this.selectedTab === "allCoaches" ? '/railcontent/content?only_subscribed=' : '/railcontent/content?only_subscribed=true';
+    },
+
+    handleFilterTabClick(value){
+        this.coachData[this.selectedTab] = [...this.content];
+        this.selectedTab = value;
+        this.content = [...this.coachData[this.selectedTab]];
+    },
+
+    getFilterColumns(){
+      let filters = [];
+      for (const value of this.filterableValues){
+          filters.push({
+              category: value,
+              items: this.filters[value]
+          });
+      }
+      this.filterMultiSelectColumns = filters;
+    },
+
+    applyFilters(category, item){
+        if (this.filter_params[category]){
+            const isChecked = this.filter_params[category].find((f)=> f.value === item.value);
+
+            if (isChecked) {
+                this.filter_params[category] = this.filter_params[category].filter((f) => f.value !== item.value);
+
+                if(this.filter_params[category].length === 0) {
+                    delete this.filter_params[category];
+                }
+            }
+
+            else {
+                this.filter_params[category].push(item);
+            }
+        }
+
+        else {
+            this.filter_params[category] = [item];
+        }
     },
   },
 };

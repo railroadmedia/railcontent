@@ -1,11 +1,13 @@
 <script setup>
 import { defineProps, defineEmits, onBeforeMount, ref } from 'vue';
+import { storeToRefs } from 'pinia'
 import SidebarContainer from './SidebarContainer.vue';
 import { textColor, borderColor } from '../../../constants/brands.js';
 import SidebarPlaylists from '../Playlists/SidebarPlaylists.vue';
 //Icons
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
 import SearchInput from './SearchInput.vue';
+import { useUserStore } from '../../../stores/user';
 
 const emit = defineEmits(['onCollapseSidebar']);
 const handleCollapse = (val) => {
@@ -14,20 +16,15 @@ const handleCollapse = (val) => {
 
 const props = defineProps({
   isSidebarCollapsed: Boolean,
-  isSidebarHidden: Boolean,
-  brand: {
-    type: String,
-    default: 'drumeo'
-  },
+  isSidebarHidden: Boolean,    
   forceSidebarHidden: {
     type: Boolean,
     default: false,
-  },
-  userId: {
-    type: String,
-    default: null
   }
 });
+
+const userStore = useUserStore();
+const { brand } = storeToRefs(userStore)
 
 const sidebarNavigationLinks = ref([]);
 
@@ -36,7 +33,7 @@ const activePath = (path) => {
   let pathArray = path.split('/');
 
   //Page Check
-  if (pathArray[3] !== '500-songs-in-5-days' && windowPathArray[3] !== '500-songs-in-5-days') {
+  if (pathArray[3] !== '500-songs-in-5-days' && windowPathArray[3] !== '500-songs-in-5-days' && pathArray[3] !== 'chord-resources' && windowPathArray[3] !== 'chord-resources') {
     return windowPathArray[2] === pathArray[2];
   }
 
@@ -44,6 +41,11 @@ const activePath = (path) => {
   if (windowPathArray[3] === '500-songs-in-5-days' && pathArray[3] === '500-songs-in-5-days') {
     return true;
   }
+
+    // special case for guitareo chords
+    if (windowPathArray[3] === 'chord-resources' && pathArray[3] === 'chord-resources') {
+        return true;
+    }
 }
 
 onBeforeMount(() => {
@@ -84,8 +86,6 @@ onBeforeMount(() => {
     <sidebar-playlists
       :isSidebarCollapsed="isSidebarCollapsed"
       :isActivePath="activePath(`/${brand}/playlists`)"
-      :brand="brand"
-      :userId="userId"
     >
     </sidebar-playlists>
 

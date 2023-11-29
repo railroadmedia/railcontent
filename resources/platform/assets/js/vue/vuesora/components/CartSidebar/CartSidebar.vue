@@ -3,26 +3,25 @@
         <div id="cart-sidebar-overlay" @click.stop.prevent="closeCartSidebar" :class="{active: active}">
         </div>
         <section id="cart-sidebar" :class="{active: active}">
-            <div class="top">
-                <h5 class="">Your Cart</h5>
+            <div class="top relative mb-2">
+                <h3 class="mb-0 leading-tight"><strong>Your Cart</strong></h3>
                 <a
                     href="#"
-                    class="close"
+                    class="close absolute text-gray-400 absolute top-0 right-0"
                     style="font-size: 16px !important;"
                     @click.stop.prevent="closeCartSidebar"
                     aria-label="close"
-                ><i class="fal fa-times fa-2x"></i></a>
+                ><i class="fas fa-times fa-2x"></i></a>
             </div>
-            <div class="csb-guarantee">
-                <div>
-                    <i class="fas fa-check-circle" :class="brand"></i>
+            <div class="csb-guarantee mb-4">
+                <p class="text-xs text-gray-500">
+                    <i class="fas fa-circle-check mr-1.5" :class="'text-' + brand"></i>
                     <span>All of our lessons are backed by a 90-day guarantee.</span>
-                </div>
+                </p>
             </div>
-            <div id="csb-products-container" v-show="cartItems">
-                <div class="border-top"></div>
-                <div class="csb-products-inner" ref="simplebar">
-                    <div class="csb-products-wrapper">
+            <div id="csb-products-container" class="relative overflow-hidden border-b border-t border-gray-300" style="height:345px" v-show="cartItems">
+                <div class="csb-products-inner" style="height:345px" ref="simplebar">
+                    <div class="csb-products-wrapper max-h-full">
                         <cart-item
                             v-for="item in cartItems"
                             v-if="cartItems"
@@ -46,62 +45,62 @@
                         ></cart-item>
                     </div>
                 </div>
-                <div class="border-bottom"></div>
             </div>
-            <div class="csb-remove-all-items" v-show="cartItems" @click.stop.prevent="clearCart">
-              <div>
-                <span>Remove all items from cart</span>
-              </div>
-              <div class="border-bottom"></div>
+            <div class="csb-remove-all-items py-3 border-b border-gray-300 text-center" v-show="cartItems" @click.stop.prevent="clearCart">
+              <p class="leading-tight cursor-pointer text-gray-500 w-full">
+                  <u>Remove all items from cart</u>
+              </p>
             </div>
-            <div class="summary-container">
-                <div class="summary-container-inner text-sm">
-                    <div class="summary-row">
-                        <div class="summary">Subtotal</div>
-                        <div v-if="subTotalBeforeDiscounts() !== subTotalAfterDiscounts()" class="due">
-                            <span v-if="cartTotals">
-                                <s style="font-weight: normal; color: #666;">${{ parseTotal(subTotalBeforeDiscounts()) }}</s>
-                                <span>&nbsp;&nbsp; ${{ parseTotal(subTotalAfterDiscounts()) }}</span>
-                            </span>
-                        </div>
-                        <div v-if="subTotalBeforeDiscounts() === subTotalAfterDiscounts()" class="due">
-                            <span v-if="cartTotals">${{ parseTotal(subTotalAfterDiscounts()) }}</span>
-                        </div>
-                    </div>
-                    <div v-if="sumOfDiscounts() > 0" class="summary-row">
-                        <div class="summary">My Savings</div>
-                        <div class="savings">
-                            <span v-if="cartTotals">-${{ parseTotal(sumOfDiscounts()) }}</span>
-                        </div>
-                    </div>
-                    <div v-if="cartRequiresShippingAddress" class="summary-row">
-                        <div class="summary">Shipping</div>
-                        <div class="deferred">{{shippingCostMessage }}</div>
-                    </div>
-                    <div class="summary-row">
-                        <div class="summary">Tax</div>
-                        <div class="deferred">Calculated at checkout</div>
-                    </div>
+            <div class="summary-container text-sm my-5">
+                <div class="summary-row flex justify-between">
+                    <p class="summary mx-0">Subtotal</p>
+                    <p v-if="subTotalBeforeDiscounts() !== subTotalAfterDiscounts()" class="mx-0 due">
+                        <strong>
+                        <span v-if="cartTotals">
+                            <s style="font-weight: normal; color: #666;">${{ parseTotal(subTotalBeforeDiscounts()) }}</s>
+                            <span>&nbsp;&nbsp; ${{ parseTotal(subTotalAfterDiscounts()) }}</span>
+                        </span>
+                        </strong>
+                    </p>
+                    <p v-if="subTotalBeforeDiscounts() === subTotalAfterDiscounts()" class="mx-0 due">
+                        <strong>
+                        <span v-if="cartTotals">${{ parseTotal(subTotalAfterDiscounts()) }}</span>
+                        </strong>
+                    </p>
+                </div>
+                <div v-if="sumOfDiscounts() > 0" class="summary-row flex justify-between">
+                    <p class="summary mx-0">My Savings</p>
+                    <p class="savings text-red-600 mx-0">
+                        <span v-if="cartTotals">-${{ parseTotal(sumOfDiscounts()) }}</span>
+                    </p>
+                </div>
+                <div v-if="cartRequiresShippingAddress" class="summary-row flex justify-between">
+                    <p class="summary mx-0">Shipping</p>
+                    <p class="deferred mx-0"><em>{{shippingCostMessage }}</em></p>
+                </div>
+                <div class="summary-row flex justify-between">
+                    <p class="summary mx-0">Tax</p>
+                    <p class="deferred mx-0"><em>Calculated at checkout</em></p>
                 </div>
             </div>
-            <div class="checkout">
-                <a :href="checkoutUrl" :class="brand"><i class="fas fa-lock"></i>checkout</a>
+            <div class="checkout text-center">
+                <a :href="checkoutUrl" :class="brand"><i class="fas fa-lock mr-2"></i>checkout</a>
             </div>
-            <div v-if="!locked" class="recommended-title">
-                <div>customers also liked</div>
-            </div>
-            <div class="recommended-products" v-if="cartItems && !locked">
-                <div class="recommended-products-wrapper">
-                    <recommended-product
-                        v-for="item in recommendedProducts"
-                        :key="item.sku"
-                        :item="item"
-                        :brand="brand"
-                        :loading="loading"
-                        @addToCart="addRecommendedProductToCart"
-                    ></recommended-product>
-                </div>
-            </div>
+<!--            <div v-if="!locked" class="recommended-title">-->
+<!--                <div>customers also liked</div>-->
+<!--            </div>-->
+<!--            <div class="recommended-products" v-if="cartItems && !locked">-->
+<!--                <div class="recommended-products-wrapper">-->
+<!--                    <recommended-product-->
+<!--                        v-for="item in recommendedProducts"-->
+<!--                        :key="item.sku"-->
+<!--                        :item="item"-->
+<!--                        :brand="brand"-->
+<!--                        :loading="loading"-->
+<!--                        @addToCart="addRecommendedProductToCart"-->
+<!--                    ></recommended-product>-->
+<!--                </div>-->
+<!--            </div>-->
         </section>
     </div>
 </template>
@@ -193,8 +192,17 @@ export default {
     },
     methods: {
         buildInitialCartData() {
-
             this.updateCartData(this.cartData);
+
+            let urlParams = new URLSearchParams(window.location.search);
+
+            if (urlParams.get('open-cart') === '1') {
+                this.loading = true;
+
+                setTimeout(() => {
+                    this.openCartSidebar();
+                }, 500);
+            }
         },
         openCartSidebar() {
             this.active = true;
@@ -425,253 +433,101 @@ export default {
 
 .toasted-container.custom-toast {
     z-index: 2147483010;
+
     &.top-left {
         left: 2%;
     }
+
     .toasted {
         max-width: 400px;
+
         .toasted-icon {
             margin-right: 20px;
         }
+
         .toasted-close-icon {
             color: #8B929A;
             font-size: 18px;
         }
     }
 }
+
 #cart-sidebar-overlay {
     position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     visibility: hidden;
     z-index: -1;
     opacity: 0;
     -webkit-transition: visibility 0.1s ease-in-out, opacity 0.1s ease-in-out;
     -moz-transition: visibility 0.1s ease-in-out, opacity 0.1s ease-in-out;
     -o-transition: visibility 0.1s ease-in-out, opacity 0.1s ease-in-out;
+
     &.active {
         z-index: 2147483005;
         opacity: 1;
         visibility: visible;
     }
 }
+
 #cart-sidebar {
     position: fixed;
     top: 0;
     right: -100%;
     z-index: 2147483006;
-    padding-left: 2px;
     -webkit-transition: all 0.1s;
     -moz-transition: all 0.1s;
     -o-transition: all 0.1s;
-    height:100vh;
+    height: 100vh;
     overflow: auto;
-    padding: 20px 5px 20px 20px;
+    padding: 20px;
     background: #FCFCFC;
     @include xSmallOnly {
         width: 95%;
     }
+
     &.active {
         right: 0;
     }
-    h5 {
-        font-family: 'Open Sans', sans-serif;
-    }
-    .top {
-        padding: 10px 15px 10px 0;
-        position: relative;
-        .close {
-            position: absolute;
-            top: 0;
-            right: 10px;
-        }
-        h5 {
-            font-weight: 700;
-            font-size: 30px;
-            margin-bottom: 0;
-        }
-        a {
-            color: #CCD3D3;
-        }
-    }
-    .csb-guarantee {
-        padding-bottom: 18px;
-        padding-right: 14px;
-        div {
-            line-height: 1;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            i {
-                margin-right: 3px;
-                &.drumeo {
-                    color: #0b76db;
-                }
-                &.pianote {
-                    color: #ff383f;
-                }
-                &.guitareo {
-                    color: #00C9AC;;
-                }
-                &.singeo {
-                    color: #8300E9;;
-                }
-            }
-            span {
-                padding-left: 3px;
-                color: #8B929A;
-                font-size: 12px;
-            }
-        }
-    }
-    .csb-remove-all-items {
-        padding-bottom: 18px;
-        padding-right: 14px;
-        margin-top: 14px;
 
-        .border-bottom {
-            border-bottom: 1px solid #CCD3D3;
-            margin-top: 15px;
-        }
-
-        div {
-            cursor: pointer;
-            line-height: 1;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            span {
-                width: 100%;
-                color: #8B929A;
-                font-size: 12px;
-                text-align: center;
-                text-decoration: underline;
-            }
-        }
-    }
-    .summary-container {
-        padding: 18px 15px 18px 0;
-        .summary-container-inner {
-            .summary-row {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                .summary {
-                    font-size: 14px;
-                }
-                .due {
-                    font-weight: 700;
-                    font-size: 14px;
-                }
-                .savings {
-                    color: #F71B26;
-                    font-size: 14px;
-                }
-                .deferred {
-                    font-size: 14px;
-                    font-style: italic;
-                }
-            }
-        }
-    }
-    .checkout {
-        margin-right: 15px;
+    .checkout a {
+        color: #FFF;
+        padding: 12px;
+        font: 400 17px "Bebas Neue", sans-serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 50px;
+        outline: none;
         text-align: center;
-        margin-bottom: 60px;
-        a {
-            color: #FFF;
-            padding: 12px;
-            font: 700 17px "Bebas Neue",sans-serif;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            text-decoration: none;
-            border-radius: 50px;
-            outline: none;
-            text-align: center;
-            user-select: none;
-            transition: all .3s;
-            box-shadow: 0 0 0 rgba(0,0,0,0.35);
-            display: inline-block;
-            width: 100%;
-            &.drumeo {
-                background: #0B76DB;
-                &:hover {
-                    background: #258FF4;
-                }
-            }
-            &.pianote {
-                background: #FF383F;
-                &:hover {
-                    background: #FF6B70;
-                }
-            }
-            &.guitareo {
-                background: #00C9AC;
-                &:hover {
-                    background: #00FCB8;
-                }
-            }
-            &.singeo {
-                background: #8300E9;
-                &:hover {
-                    background: #8300E9;
-                }
-            }
-            i {
-                padding-right: 5px;
-            }
+        user-select: none;
+        transition: opacity .3s;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.35);
+        display: inline-block;
+        width: 100%;
+
+        &:hover {
+            opacity: 0.85;
+        }
+
+        &.drumeo {
+            background: #0B76DB;
+        }
+
+        &.pianote {
+            background: #FF383F;
+        }
+
+        &.guitareo {
+            background: #00C9AC;
+        }
+
+        &.singeo {
+            background: #8300E9;
         }
     }
-    .recommended-title {
-        padding-top: 15px;
-        padding-right: 15px;
-        div {
-            text-transform: uppercase;
-            font-size: 14px;
-            color: #8B929A;
-        }
-    }
-    .recommended-products {
-        padding-top: 10px;
-        margin-bottom: 100px;
-        .recommended-products-wrapper {
-            display: flex;
-            flex-direction: row;
-        }
-    }
-}
-#csb-products-container {
-    overflow: hidden;
-    position: relative;
-    height: 345px;
-
-    .border-top {
-        border-top: 1px solid #CCD3D3;
-        margin-right: 15px;
-    }
-
-    .csb-products-inner {
-        height: 345px;
-        padding-right: 15px;
-
-        .csb-products-wrapper {
-            max-height: 100%;
-        }
-    }
-
-    .border-bottom {
-        border-bottom: 1px solid #CCD3D3;
-        position: absolute;
-        bottom: 0;
-        right: 15px;
-        left: 0;
-    }
-}
-
-#csb-clear-cart-container {
-  margin-bottom: 20px;
 }
 </style>

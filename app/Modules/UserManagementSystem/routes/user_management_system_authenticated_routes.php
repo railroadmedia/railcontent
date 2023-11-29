@@ -86,9 +86,20 @@ Route::group(
         )
             ->name('user_management_system.login-as-user');
 
+        Route::get(
+            'get-login-as-user-url/{userId}',
+            UserController::class . '@getLogInAsUserURL'
+        )
+            ->name('user_management_system.get-login-as-user-url');
+
         /*
         * Onboarding API
         */
+        Route::post(
+            'onboarding-about-completed',
+            OnboardingController::class . '@aboutStepCompleted'
+        )
+            ->name('user_management_system.onboarding.about_completed');
         Route::post(
             'onboarding-gears',
             OnboardingController::class . '@gears'
@@ -113,6 +124,13 @@ Route::group(
 
         )
             ->name('user_management_system.onboarding.experience');
+
+        Route::post(
+            'onboarding-goals',
+            OnboardingController::class . '@goals'
+
+        )
+            ->name('user_management_system.onboarding.goals');
 
         Route::get(
             'onboarding-saved-answers',

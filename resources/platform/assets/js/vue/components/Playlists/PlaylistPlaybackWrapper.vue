@@ -9,15 +9,15 @@ import SoundSlice from '../SoundSlice/SoundSlice.vue';
 import PlaybackCue from './PlaybackCue.vue';
 import Comments from '../../vuesora/views/comments/Comments.vue';
 import PlaybackNavButtons from './PlaybackNavButtons.vue';
-import RelatedLesson from './RelatedLesson.vue';
-import RelatedPlaylists from './RelatedPlaylists.vue';
-import Breadcrumb from './Breadcrumb.vue';
+import Breadcrumb from '../Breadcrumb/Breadcrumb.vue';
 import VideoMediaElement from '../../vuesora/components/MediaElement/MediaElement.vue';
 import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
 import VideoResources from '../../vuesora/components/VideoResources/VideoResources.vue';
 import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import ContentUnavailable from './ContentUnavailable.vue';
 import AssignmentsContainer from '../../vuesora/components/AssignmentsContainer/AssignmentsContainer.vue';
+import ContentInfo from '../ContentInfo/ContentInfo.vue';
+import RelatedPlaylists from './RelatedPlaylists';
 
 //-----------Props-----------//
 const props = defineProps({
@@ -41,9 +41,25 @@ const props = defineProps({
         type: String,
         default: ''
     },
+    contentBreadcrumb: {
+        type: Object,
+        default: () => {}
+    },
+    contentChapters: {
+        type: Array,
+        default: () => []
+    },
+    contentDescription: {
+        type: String,
+        default: ''
+    },
     contentId: {
         type: [Number, String],
         default: ''
+    },
+    contentInstructors: {
+        type: Array,
+        default: () => []
     },
     currentSecond: {
         type: [Number, String],
@@ -143,6 +159,14 @@ const props = defineProps({
         type: Object,
         default: {}
     },
+    reportLogo: {
+        type: String,
+        default: ''
+    },
+    reportRecipient: {
+        type: String,
+        default: ''
+    },
     showInfoButton: {
         type: Boolean,
         default: false
@@ -169,6 +193,10 @@ const props = defineProps({
     },
     userId: {
         type: [String, Number],
+        default: ''
+    },
+    userEmail: {
+        type: String,
         default: ''
     },
     userName: {
@@ -226,7 +254,7 @@ const props = defineProps({
 });
 
 const state = reactive({
-    assignmentCollapsed: false,
+    assignmentCollapsed: true,
 });
 
 //Pinia Stores
@@ -369,13 +397,13 @@ onBeforeMount(() => {
                         :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
                         :user-id="userId" :resources="videoResources" :show-add-to-list="true"
                         :show-complete-button="isReleased && !needAccess" :relatedLesson="relatedLesson"
-                        :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton" />
+                        :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton"
+                        :report-logo="reportLogo" :report-recipient="reportRecipient" :report-user-email="userEmail" :report-user-name="userName"
+                    />
                     <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
-                    <RelatedLesson v-if="relatedLesson && relatedLesson.data && relatedLesson.data.length"
-                        :relatedLesson="relatedLesson.data[0]" :brand="brand" />
                 </div>
                 <!-- Info Section -->
-                <slot name="info-section"></slot>
+                <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription" :content-chapters="contentChapters" :instructors="contentInstructors" />
             </div>
 
             <!-- Cue and Realted Playlist Wrapper -->
@@ -412,7 +440,7 @@ onBeforeMount(() => {
                 <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
                     <div class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
                         <h1 class="heading dark:tw-text-white">Assignments</h1>
-                        <button @click="state.assignmentCollapsed = !state.assignmentCollapsed">
+                        <button class="tw-z-10" @click="state.assignmentCollapsed = !state.assignmentCollapsed">
                             <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center" :class="!state.assignmentCollapsed && 'tw-rotate-180'">
                                 <i class="fas fa-chevron-down"></i>
                             </div>

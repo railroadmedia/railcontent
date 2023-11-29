@@ -13,7 +13,27 @@ class MarketingController extends BaseController
     }
     public function sixReasons()
     {
-        return view('musora.pages.6-reasons', ['theme' => 'musora']);
+        return view('musora.pages.6-reasons', ['theme' => 'musora', 'version' => 'musora']);
+    }
+    public function sixReasonsDrums()
+    {
+        return view('musora.pages.6-reasons', ['theme' => 'musora', 'version' => 'drums']);
+    }
+    public function sixReasonsPiano()
+    {
+        return view('musora.pages.6-reasons', ['theme' => 'musora', 'version' => 'piano']);
+    }
+    public function sixReasonsGuitar()
+    {
+        return view('musora.pages.6-reasons', ['theme' => 'musora', 'version' => 'guitar']);
+    }
+    public function sixReasonsSinging()
+    {
+        return view('musora.pages.6-reasons', ['theme' => 'musora', 'version' => 'singing']);
+    }
+    public function moderators()
+    {
+        return view('musora.pages.moderators', ['theme' => 'musora']);
     }
 
     public function handbook()
@@ -30,9 +50,19 @@ class MarketingController extends BaseController
         return view('musora.pages.privacy');
     }
 
+    public function preferences()
+    {
+        return view('musora.pages.preferences');
+    }
+
     public function careers()
     {
         return view('musora.pages.careers');
+    }
+
+    public function careersPP()
+    {
+        return view('musora.pages.careers-pinpoint');
     }
 
     public function contact()
@@ -94,5 +124,9 @@ class MarketingController extends BaseController
     public function choosePlan()
     {
         return view('musora.pages.choose-plan', ['theme' => 'musora']);
+    }
+    public function faster()
+    {
+        return view('drumeo.lead-gen.faster.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 }

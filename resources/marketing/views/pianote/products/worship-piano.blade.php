@@ -19,7 +19,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner-no-tw', [
+    @include('pianote._partials.promo-banner', [
                     "name" => "Worship Piano",
                     "fullPrice" => floatval($productPrices['worship-piano']->price),
                     "price" => floatval($productPrices['worship-piano']->discounted_price),
@@ -38,7 +38,7 @@
             <h2>Start playing piano or <br class="hidden-sm hidden-md hidden-lg"> keyboard in your church.</h2>
             <a
                 class="join vue-add-to-cart"
-                href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['worship-piano' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"
+                href="/ecommerce/add-to-cart?products[worship-piano]=1"
                 data-product-json='{"worship-piano": 1}'
             >Get Started &raquo;</a>
 
@@ -614,7 +614,7 @@
             <img class="logo lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/logo-text-white.png" alt="Worship piano logo">
             <h2>Start playing piano or<br class="hidden-sm hidden-md hidden-lg"> keyboard in your church.</h2>
             <a
-                href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['worship-piano' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"
+                href="/ecommerce/add-to-cart?products[worship-piano]=1"
                 class="join vue-add-to-cart"
                 data-product-json='{"worship-piano": 1}'
             >Get Started &raquo;</a>
@@ -672,10 +672,7 @@
             });
         });
     </script>
-    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
-
-
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @stop

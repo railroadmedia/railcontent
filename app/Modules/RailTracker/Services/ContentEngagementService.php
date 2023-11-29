@@ -36,7 +36,7 @@ class ContentEngagementService
             }
         }
         catch(\Throwable $e){
-            Log::error($e);
+            //Log::error($e);
         }
     }
 }

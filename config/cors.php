@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie', 'mentors/*', 'ecommerce/*'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'mentors/*', 'ecommerce/*', 'user-management-system/*'],
 
     'allowed_methods' => ['*'],
 
@@ -29,7 +29,9 @@ return [
         '*.drumeo.com',
         '*.pianote.com',
         '*.guitareo.com',
-        '*.singeo.com'
+        '*.singeo.com',
+        'cdn.shopify.com',
+        '*',
     ],
 
     'allowed_origins_patterns' => [],

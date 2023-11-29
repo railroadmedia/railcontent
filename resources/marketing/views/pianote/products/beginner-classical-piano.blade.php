@@ -373,7 +373,7 @@
             text-rendering: auto;
             opacity: 1;
             line-height: 1;
-            font-family: "Font Awesome 5 Pro";
+            font-family: "Font Awesome 6 Pro";
             font-weight: 300;
             color: #BB3744;
             font-size: 30px;
@@ -453,16 +453,6 @@
                         The fun way to start playing classical piano.
                     </strong>
                 </h1>
-                {{--<div class="md:w-72 lg:w-96 mt-6 md:mt-12 px-6 sm:px-0">--}}
-                    {{--<a--}}
-                        {{--class="join w-full"--}}
-                        {{--style="background:#F61A30;"--}}
-                        {{--href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['classical-piano' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"--}}
-                        {{--data-product-json='{"classical-piano": 1}'--}}
-                    {{-->--}}
-                        {{--Get Started--}}
-                    {{--</a>--}}
-                {{--</div>--}}
             </div>
         </div>
         <div class="absolute inset-0 md:hidden h-full" style="background:linear-gradient(0deg, #01172C 0.03%, rgba(2, 17, 32, 0) 63.86%);">
@@ -488,14 +478,6 @@
                     <strong class="text-lg sm:text-base lg:text-lg leading-tight sm:leading-tight lg:leading-tight">Play 8 Pieces</strong>
                 </div>
             </div>
-            {{--<a --}}
-                {{--class="hidden sm:flex bg-white rounded-full px-6 sm:px-10 py-2 font-medium items-center font-bebas tracking-wider cursor-pointer text-center mx-auto sm:mt-4 md:mt-0 leading-none text-sm sm:text-base"--}}
-                {{--style="color:#902E38;"--}}
-                {{--href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['classical-piano' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"--}}
-                {{--data-product-json='{"classical-piano": 1}'--}}
-            {{-->--}}
-                {{--Get started--}}
-            {{--</a>--}}
             <a
                 class="hidden sm:flex bg-white rounded-full px-6 sm:px-10 py-2 font-medium items-center font-bebas tracking-wider cursor-pointer text-center mx-auto sm:mt-4 md:mt-0 leading-none text-sm sm:text-base"
                 style="color:#902E38;"
@@ -504,17 +486,6 @@
             </a>
         </div>
     </div>
-
-    {{--<a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['classical-piano' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"--}}
-            {{--data-product-json='{"classical-piano": 1}' style="background:#902E38;"--}}
-    {{--class="promo-banner block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap shadow-md py-1 hover:text-gray-100 z-0 mx-auto -mt-12 text-xs">--}}
-        {{--<div class="container mx-auto relative">--}}
-            {{--<div class="inline-block align-middle text-center">--}}
-                {{--<img class="inline-block align-middle mr-2 h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.svg">--}}
-                {{--<div class="inline-block align-middle bg-white rounded-full px-6 sm:px-10 py-1 font-medium items-center font-bebas tracking-wider cursor-pointer text-center leading-none text-base" style="color:#902E38;">Get Started &raquo;</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</a>--}}
 
     <section class="pt-10 sm:pt-16 md:pt-24 lg:pt-40 sm:mb-24 sm:mb-0 pb-10 sm:pb-0" style="background: #F5F5F7">
         <div class="flex mx-auto px-4 flex-col-reverse sm:flex-row md:max-w-2xl lg:max-w-4xl">
@@ -849,12 +820,6 @@
                         <i class="text-pianote fas fa-check sm:mr-2"></i> Free sheet music for 8 classical pieces
                     </p>
                     <div class="w-72 lg:w-96 mx-auto sm:mx-0">
-                        {{--<a--}}
-                                {{--class="join w-full"--}}
-                                {{--style="background:#F61A30;"--}}
-                                {{--href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['classical-piano' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"--}}
-                                {{--data-product-json='{"classical-piano": 1}'--}}
-                        {{-->Get Started</a>--}}
                         <a class="join sold-out w-full">Closed Down</a>
                         <h6 class="text-center py-3 md:py-4">
                             <strong>ONLY</strong>

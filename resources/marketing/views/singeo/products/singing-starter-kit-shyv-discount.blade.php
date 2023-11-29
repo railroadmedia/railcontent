@@ -2,7 +2,7 @@
 
 @php $productPrice = 9 @endphp
 
-@section('order-link', '/ecommerce/add-to-cart?products[singing-starter-kit]=1&redirect=/order&promo-code=improve')
+@section('order-link', '/ecommerce/add-to-cart?products[singing-starter-kit]=1&redirect=/order&promo-code=lead-discount4&locked=true')
 
 @section('topbar')
     <div class="artist-promo-banner-shim"></div>

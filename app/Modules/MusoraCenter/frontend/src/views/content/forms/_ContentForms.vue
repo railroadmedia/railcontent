@@ -30,14 +30,14 @@
             ></content-children>
 
             <content-chapters
-                v-if="thisPost && hasChapters"
+                v-if="thisPost && hasChapters && contentType !== 'routine'"
                 :content-model="contentModel"
                 :this-post="thisPost"
                 :is-child="isChild"
             ></content-chapters>
 
             <content-assignments
-                v-if="thisPost && !postHasChildren && this.contentType !== 'assignment'"
+                v-if="thisPost && !postHasChildren && this.contentType !== 'assignment' && contentType !== 'routine'"
                 :content-model="contentModel"
                 :this-post="thisPost"
                 :is-child="isChild"
@@ -85,13 +85,14 @@
             ></media-fields>
 
             <downloadable-resources
-                v-if="hasResources"
+                v-if="hasResources && contentType !== 'routine'"
                 :this-post="thisPost"
                 :is-child="isChild"
                 :content-model="contentModel"
             ></downloadable-resources>
 
             <subtitling
+                v-if="contentType !== 'routine'"
                 :this-post="thisPost"
                 :is-child="isChild"
                 :content-type="contentType"

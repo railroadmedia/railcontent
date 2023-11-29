@@ -16,7 +16,7 @@ Route::domain('{drumeoDomain}')
             Route::get('/gift-card', [SalesController::class, 'giftCard']);
             Route::get('/{page?}', ShopController::class . '@products')
                 ->whereIn('page', [
-                    'beginner-book', 'better-drum-fills', 'beyond-beginner-drumming', 'comfort-cover', 'drum-technique-made-easy', 'drumsticks', 'electrify-your-drumming', 'festival-videos', 'independence-made-easy', 'learn-songs-faster', 'new-drummers', 'practice-pad-full', 'quietpad', 'rock-drumming-masterclass', 'successful-drumming-discount', 'the-drummers-toolbox', 'tony-royster-jr'
+                    'beginner-book', 'better-drum-fills', 'better-drum-fills-giveaway', 'beyond-beginner-drumming', 'comfort-cover', 'drum-technique-made-easy', 'drumsticks', 'easy-rudiments', 'electrify-your-drumming', 'festival-videos', 'independence-made-easy', 'learn-songs-faster', 'new-drummers', 'padstand', 'practice-pad-full', 'quietpad', 'rock-drumming-masterclass', 'successful-drumming', 'stickbag', 'stickbag-members', 'stickbag-ltd', 'the-drummers-toolbox', 'tony-royster-jr'
                 ]);
 
             Route::get('/30-day-drummer', [SalesController::class, 'thirtyDayDrummer'] );
@@ -24,11 +24,8 @@ Route::domain('{drumeoDomain}')
             Route::get('/30-day-chops', [SalesController::class, 'thirtyDayChops'] );
             Route::get('/30-day-chops/deal', [SalesController::class, 'thirtyDayChopsDeal'] );
             Route::get('/eardrums', [SalesController::class, 'eardrums'] );
-            Route::get('/eardrums-members', [SalesController::class, 'eardrumsMembers'] );
             Route::get('/quietkick', [SalesController::class, 'quietKick'] );
             Route::get('/tone-control-kit', [SalesController::class, 'toneControl'] );
-            Route::get('/5-for-3-bundle', [SalesController::class, 'fiveforthreeBundle'] );
-
             Route::get('/{productslug}', [ShopController::class, 'product']);
         }
     );

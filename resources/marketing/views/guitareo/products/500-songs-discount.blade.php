@@ -2,9 +2,7 @@
 
 @php $productPrice = 9 @endphp
 
-@section('order-link')
-    {{ url()->route('shopping-cart.add-to-cart', ['products' => ['500-songs-in-5-days-guitareo' => 1], 'redirect' => '/order', 'promo-code' => 'special-discount']) }}
-@endsection
+@section('order-link', '/ecommerce/add-to-cart?products[500-songs-in-5-days-guitareo]=1&redirect=/order&promo-code=special-discount&locked=true')
 
 @section('product-json')
     data-product-json='{"500-songs-in-5-days-guitareo": 1}'
