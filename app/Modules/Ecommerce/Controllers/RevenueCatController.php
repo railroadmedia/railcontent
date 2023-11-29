@@ -145,11 +145,10 @@ class RevenueCatController extends Controller
                 break;
             case 'RENEWAL':
                 echo 'RENEWAL';
-                $subscriberAttributtes = $data['event']['subscriber_attributes'];
 
-                // get Musora user
+
                 $user = $this->TryGetUserFromNotificationData($data, true);
-                if($user) {
+                if (!$user) {
                     break;
                 }
 
@@ -194,7 +193,7 @@ class RevenueCatController extends Controller
                 break;
             case 'CANCELLATION':
                 $user = $this->TryGetUserFromNotificationData($data, false);
-                if($user) {
+                if (!$user) {
                     break;
                 }
 
@@ -243,7 +242,7 @@ class RevenueCatController extends Controller
                 break;
             case 'EXPIRATION':
                 $user = $this->TryGetUserFromNotificationData($data, false);
-                if($user) {
+                if (!$user) {
                     break;
                 }
                 $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
