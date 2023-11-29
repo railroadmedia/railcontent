@@ -5,10 +5,6 @@ import Button from "../Button/Button.vue";
 import {getCookie, setCookie} from "../../vuesora/assets/js/functions/cookies";
 
 const props = defineProps({
-    brand: {
-        type: String,
-        default: 'drumeo'
-    },
     preloadedBanner: {
         type: Object,
         default: {},
