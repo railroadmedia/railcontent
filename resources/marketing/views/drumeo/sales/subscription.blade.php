@@ -131,6 +131,7 @@
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
             "scrollToJoin" => true,
+            "hideMenu" => true,
         ])
     @elseif(!empty($month))
         @include("drumeo.sales.partials._nav", [
