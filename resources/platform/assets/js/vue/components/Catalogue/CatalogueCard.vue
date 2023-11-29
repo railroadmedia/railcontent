@@ -66,9 +66,9 @@
                             <span> {{ contentCreator }} </span>
                             <span class="tw-mx-1">|</span>
                         </div>
-                        <div class="tw-mb-0.5"> 
-                            {{ contentTypeString }} 
-                            <span class="tw-mx-1">|</span> 
+                        <div class="tw-mb-0.5">
+                            {{ contentTypeString }}
+                            <span class="tw-mx-1">|</span>
                         </div>
                         <!-- Difficulty Label -->
                         <div v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
@@ -103,7 +103,7 @@
             </div>
         </div>
     </div>
-    <div v-if="isMiniCard"
+    <div v-else
         class="tw-group tw-flex tw-items-center tw-py-[4px] tw-h-[78px] tw-relative tw-w-[365px] lg:tw-w-auto tw-shrink-0">
         <!-- Thumbnail Image -->
         <a :href="renderLink ? item.url : null"
@@ -158,7 +158,7 @@
     </div>
 </template>
 <script setup>
-import { computed, onBeforeUnmount, reactive, onMounted } from 'vue';
+import { computed, onUnmounted, reactive, onMounted } from 'vue';
 import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '../../hooks/useCatalogueItem.js';
 import useThemeClasses from '../../hooks/useThemeClasses.js';
@@ -341,10 +341,9 @@ onMounted(() => {
     contentContainer.addEventListener('scroll', closeDropdownOnScroll);
 });
 
-onBeforeUnmount(() => {
+onUnmounted(() => {
     const contentContainer = document.getElementById('content-container');
     contentContainer.removeEventListener('scroll', closeDropdownOnScroll);
-    mappedData.value = null;
 });
 
 const emit = defineEmits(['addToList', 'progressReset']);
