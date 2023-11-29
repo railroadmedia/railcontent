@@ -29,7 +29,6 @@ class WorkoutsPageController extends BaseController
     {
         $lessonType = 'workout';
         $requiredFields = $request->get('required_fields', []);
-        Log::debug('Workouts -  showWorkoutsPage');
 
         $workouts = $this->contentService->getFiltered(
             $request->get('page', 1),
@@ -44,7 +43,7 @@ class WorkoutsPageController extends BaseController
             $request->get('included_user_states', []),
             true
         );
-        Log::debug(var_export($workouts, true));
+
         $startedLessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
             [$lessonType],
             auth()->id(),
@@ -66,7 +65,7 @@ class WorkoutsPageController extends BaseController
         $carousel =
             $this->carouselService->getCarouselSlides()
                 ->where('is_featured', 1);
-        Log::debug(var_export($carousel, true));
+
         return view(
             'pages.workouts',
             [
