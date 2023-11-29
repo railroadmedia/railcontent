@@ -2123,6 +2123,7 @@ return [
                 '*fields.style',
                 '*fields.instructor',
                 'instructors',
+                'difficulty_string',
             ],
             'next_lesson' => [
                 'id',
