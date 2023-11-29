@@ -1,6 +1,6 @@
 <template>
     <div v-if="!isMiniCard"
-        class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]"
+        class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-mb-6 lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]"
         :class="[class_object, displayInline ? 'tw-py-3' : '']">
         <div class="tw-flex" :class="displayInline ? 'tw-flex-row' : 'tw-flex-col'">
             <!-- Thumbnail Section -->
@@ -62,14 +62,16 @@
                     <!-- Content -->
                     <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]"
                         :class="{ 'tw-text-center': isGuitareoChordAndScale }">
-                        <div v-if="contentCreator && contentCreator !== ''">
+                        <div v-if="contentCreator && contentCreator !== ''" class="tw-mb-0.5">
                             <span> {{ contentCreator }} </span>
                             <span class="tw-mx-1">|</span>
                         </div>
-                        <span> {{ contentTypeString }} </span>
+                        <div class="tw-mb-0.5"> 
+                            {{ contentTypeString }} 
+                            <span class="tw-mx-1">|</span> 
+                        </div>
                         <!-- Difficulty Label -->
-                        <div v-if="mappedData.difficulty" class="tw-flex tw-items-center">
-                            <span class="tw-mx-1">|</span>
+                        <div v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
                             <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
                                 textCase="capitalize" />
                         </div>
