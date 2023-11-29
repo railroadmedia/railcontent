@@ -13,7 +13,9 @@
         breadcrumb-last-level-url="/{{ $brand }}/workouts"
         breadcrumb-level-title="Workouts"
         :carousel-data="{{ $carousel }}"
-        :continue-data="{{ $startedLessons }}"
+        @if($startedLessons)
+            :continue-data="{{ $startedLessons }}"
+        @endif
         :workout-data="{{ $listLessons }}"
         :collection-type="{{ json_encode($lessonType) }}"
         :filterable-values="{{ json_encode($catalogueMeta['allowableFilters'] ?? []) }}"
