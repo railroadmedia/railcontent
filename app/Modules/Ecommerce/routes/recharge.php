@@ -12,5 +12,8 @@ Route::prefix('ecommerce/recharge')
             ->group(function () {
                 Route::post('subscription/cancelled', [RechargeWebhookController::class, 'subscriptionCancelled'])
                     ->name('recharge.webhook.subscription.cancel');
+
+                Route::post('charge/failed', [RechargeWebhookController::class, 'chargeFailed'])
+                    ->name('recharge.webhook.charge.failed');
             });
     });

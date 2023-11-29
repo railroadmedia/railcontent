@@ -6,6 +6,7 @@ use App\Modules\CustomerIO\ApiGateways\CustomerIoApiGateway;
 use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\CustomerIO\Services\CustomerIoService as LegacyCustomerIoService;
 use App\Modules\Ecommerce\Models\Product;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoCreateEventByUserId;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -63,6 +64,7 @@ class CustomerIoService
         $eventTimestamp = Carbon::createFromTimestampMs($event['event_timestamp_ms'])->timestamp;
         $purchaseTimestamp = Carbon::createFromTimestampMs($event['purchased_at_ms'])->timestamp;
 
+        $attributes = [];
         $attributes[$brand . '_membership_status'] = $subscriptionStatus;
         $attributes[$brand . '_membership_subscription_type'] = $product->subscription_interval_count . "_" . $product->subscription_interval_type;
         $attributes[$brand . '_membership_subscription_renewal-date'] = $expirationTimestamp;
@@ -90,6 +92,25 @@ class CustomerIoService
         $attributes = [];
         $attributes[$brand . '_membership_subscription_cancellation-date'] = $cancellation_date->timestamp;
         $attributes[$brand . '_membership_subscription_cancellation-reason'] = $cancellation_reason;
+
+        dispatch(
+            (new CustomerIoSyncUserByUserId($user, $attributes))->delay(
+                Carbon::now()
+                    ->addSeconds(30)
+            )
+        );
+    }
+
+    /**
+     * @param int $userId
+     * @param string $brand
+     * @param array $data
+     */
+    public function syncChargeFailedAttributes(User $user, string $brand, array $data): void
+    {
+        $attributes = [];
+        $attributes['musora_retention_failed-billing_membership_subscription-renewal-attempts'] = $data['charge_attempts'];
+        $attributes[$brand . '_retention_failed-billing_membership_subscription-renewal-attempts'] = $data['charge_attempts'];
 
         dispatch(
             (new CustomerIoSyncUserByUserId($user, $attributes))->delay(

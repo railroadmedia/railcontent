@@ -300,6 +300,38 @@ class RevenueCatController extends Controller
             // handle other events...
             case 'PRODUCT_CHANGE':
             case 'BILLING_ISSUE':
+                $user = $this->revenueCatService->getUser(
+                    $data['event']['subscriber_attributes']['email']['value'] ?? null,
+                    $data['event']['original_app_user_id'],
+                    false,
+                    $data['event']['aliases']
+                );
+                if (!$user) {
+                    $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
+                    Log::error(
+                        'RevenueCatController processNotification::EXPIRATION - user not found email: ' .
+                        $email .
+                        ' original_app_user_id: ' .
+                        $data['event']['original_app_user_id']
+                    );
+                    break;
+                }
+                $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
+
+                $productId = $this->getProductId($data['event']['product_id']);
+
+                //get Musora product
+                $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
+                $musoraProduct = $musoraProducts->first();
+
+                $data = [];
+                // RevenueCat sends only one BILLING_ERROR per cycle:
+                // https://www.revenuecat.com/docs/how-grace-periods-work#encountering-billing-issues
+                $data['charge_attempts'] = 1;
+
+                $this->customerIoService->syncChargeFailedAttributes($user, $musoraProduct->brand, $data);
+
+                break;
             case 'SUBSCRIBER_ALIAS':
             case 'SUBSCRIPTION_PAUSED':
             default:
