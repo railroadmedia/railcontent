@@ -446,7 +446,7 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
                 ->where("status", UserAccessPermissionsStatusEnum::Active->value)
                 ->get();
 
-            if ($userAccessPermissions->isNotEmpty()) {
+            if ($userAccessPermissions->count() > 1) {
                 $foundUAPs = $userAccessPermissions->implode("id", ", ");
                 $this->results[] = [
                     self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
