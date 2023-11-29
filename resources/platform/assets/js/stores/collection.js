@@ -16,6 +16,7 @@ export const useCollectionStore = defineStore({
                 searchTerm: '',
                 sort: 'slug',
             },
+            isCoach: false,
             loading: false,
             tabData: {},
             totalPages: 0,
@@ -35,6 +36,14 @@ export const useCollectionStore = defineStore({
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.getData();
+        },
+
+        coachEndpoint (){
+            return `/railcontent/content?only_subscribed=${this.filter.activeTab === 'allCoaches' ? '' : 'true'}`;
+        },
+
+        endpoint (){
+            return '/railcontent/content';
         },
 
         updateIncludedFields (param) {
@@ -65,7 +74,7 @@ export const useCollectionStore = defineStore({
             try {
                 const response = await axios
                     .get(
-                        this.tabData[this.filter.activeTab].endpoint,
+                        this.isCoach ? this.coachEndpoint() : this.endpoint(),
                         {
                             params: {
                                 brand: userStore.brand,
@@ -129,6 +138,10 @@ export const useCollectionStore = defineStore({
             this.loading = false;
         },
         setDefaults (defaults) {
+            if (defaults.isCoach){
+                this.isCoach = defaults.isCoach;
+            }
+
             if (defaults.data) {
                 this.data = defaults.data;
             }
@@ -176,9 +189,10 @@ export const useCollectionStore = defineStore({
             }
 
             this.filter.activeTab = tab;
-            if (this.tabData[tab].filterApplied) {
+            if (this.tabData[tab] && this.tabData[tab].filterApplied) {
                 this.data = ([...this.tabData[this.filter.activeTab].data]);
             } else {
+                this.tabData[this.filter.activeTab] = {};
                 this.getData();
                 this.tabData[tab].filterApplied = true;
             }

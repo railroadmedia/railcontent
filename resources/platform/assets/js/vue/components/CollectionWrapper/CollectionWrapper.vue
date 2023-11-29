@@ -229,25 +229,14 @@ const getFirstTabOption = computed(() => {
     return tabOptionData.value[0];
 })
 
-const getTabData = computed(() => {
-    const tabDataMap = {};
-
-    tabOptionData.value.forEach(tab => {
-        let endpoint = '/railcontent/content';
-        if (isCoach.value) {
-            endpoint = `/railcontent/content?only_subscribed=${tab.key === 'allCoaches' ? '' : 'true'}`;
-        }
-        tabDataMap[tab.key] = {
-            endpoint,
-            searchTerm: '',
-            sort: isCoach.value ? 'slug' : '-published_on',
+const getFirstTabData = computed(() => {
+    return {
+        [getFirstTabOption.value.key]: {
             currentPage: 1,
-            totalPages: props.preLoadedContent ? Math.ceil(props.preLoadedContent.meta.totalResults / props.limit) : 0,
-            totalResults: props.preLoadedContent?.meta.totalResults || 0,
-        };
-    });
-
-    return tabDataMap;
+            totalPages: Object.keys(props.preLoadedContent).length > 0 ? Math.ceil(props.preLoadedContent?.meta?.totalResults / props.limit) : 0,
+            totalResults: Object.keys(props.preLoadedContent).length > 0 ? props.preLoadedContent?.meta?.totalResults : 0,
+        }
+    }
 })
 
 //prop reactives
@@ -304,13 +293,14 @@ onMounted(() => {
     console.log(props.title)
 
     collectionStore.setDefaults({
+        isCoach: isCoach.value,
         data: props.preLoadedContent?.data || [],
         filter: {
             activeTab: getFirstTabOption.value.key,
             params: { ...request_params.value },
             [isCoach.value ? 'term' : 'title']: '',
         },
-        tabData: getTabData.value,
+        tabData: getFirstTabData.value,
     })
 
     collectionStore.getURLParams();
