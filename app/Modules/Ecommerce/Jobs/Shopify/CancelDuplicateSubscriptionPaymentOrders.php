@@ -3,11 +3,9 @@
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Modules\Content\Services\ContentPermissionsService;
-use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesShopifyRateLimit;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
-use App\Modules\Ecommerce\Models\Payment;
 use App\Modules\Ecommerce\Models\SubscriptionPayment;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
@@ -226,7 +224,7 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
                     }
 
                     // we need to remove the permissions from the order
-                    $this->deleteUserAccessPermissions($subscriptionPayment);
+                    $this->deleteUserAccessPermissions($subscriptionPayment, $orderShopifyAttributes);
 
                     $this->results[] = [
                         self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
@@ -422,45 +420,49 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
     }
 
     /**
-     * Find the User Access Permissions related to the given subscription payment and delete each excess entry,
-     * leaving only the first one.
+     * Find the User Access Permissions related to the given Shopify Order and delete each entry
      *
      * @param  SubscriptionPayment  $subscriptionPayment
+     * @param  array  $shopifyOrderAttributes
      * @return void
      */
-    private function deleteUserAccessPermissions(SubscriptionPayment $subscriptionPayment): void
-    {
-        // get the user and product from the subscription payment, so we can find the user's access permission
+    private function deleteUserAccessPermissions(
+        SubscriptionPayment $subscriptionPayment,
+        array $shopifyOrderAttributes
+    ): void {
         $subscription = $subscriptionPayment->subscription;
         $user = $subscription->user;
         $product = $subscription->product;
-        $source = $this->getSourceString($subscriptionPayment);
 
-        // go through each content permission for the product, so we can build up the source hash to find the user's access permissions
+        $shopifyOrderId = $shopifyOrderAttributes["id"];
+        // orders created by subscription payments only have one line item, so just grab its id that we need to build the hash
+        $shopifyLineItemId = $shopifyOrderAttributes["line_items"][0]["id"];
+
         $contentPermissions = $product->getContentPermissions($this->contentPermissionsLookup);
+
         foreach ($contentPermissions as $contentPermission) {
-            $hash = sha1("$source.$product->id.$contentPermission->id");
+            $hash = sha1("$shopifyOrderId.$shopifyLineItemId.$contentPermission->id");
+
+            // get the user access permission(s) created by this Shopify order
+            // there should only be one, but use the whole collection result set just in case
             $userAccessPermissions = UserAccessPermission::query()
                 ->whereBelongsTo($user)
                 ->where("source_hash", $hash)
                 ->where("status", UserAccessPermissionsStatusEnum::Active->value)
                 ->get();
 
-            if ($userAccessPermissions->count() > 1) {
+            if ($userAccessPermissions->isNotEmpty()) {
                 $foundUAPs = $userAccessPermissions->implode("id", ", ");
                 $this->results[] = [
                     self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
                     self::RESULTS_MESSAGE => sprintf(
-                        "Subscription Payment %s linked to User Access Permissions %s",
+                        "Subscription Payment %s linked to User Access Permission(s) %s",
                         $subscriptionPayment->id,
                         $foundUAPs
                     )
                 ];
 
-                // keep only the earliest entry
-                $userAccessPermissions = $userAccessPermissions->sortBy("created_at");
-                $uapsToDelete = $userAccessPermissions->skip(1);
-                $uapsToDelete->each(function (UserAccessPermission $userAccessPermission) {
+                $userAccessPermissions->each(function (UserAccessPermission $userAccessPermission) {
                     $idToDelete = $userAccessPermission->id;
                     if (!$this->getIsSimulation()) {
                         $userAccessPermission->delete();
@@ -476,25 +478,6 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
                 });
             }
         }
-    }
-
-    /**
-     * Get the payment source used for the user access permission,
-     * based on the ShopifyPaymentSourceEnum that was used when creating the Shopify order,
-     * mapped to the corresponding UserAccessPermissionsSourceEnum
-     *
-     * @param  SubscriptionPayment  $subscriptionPayment
-     * @return string
-     */
-    private function getSourceString(SubscriptionPayment $subscriptionPayment): string
-    {
-        // DEV NOTE: the UserAccessPermissionsSourceEnum values match the ShopifyPaymentSourceEnum
-        // for these three cases, so we can just return the string value
-        return match ($subscriptionPayment->payment->type) {
-            Payment::TYPE_APPLE_SUBSCRIPTION_RENEWAL => ShopifyPaymentSourceEnum::Apple->value,
-            Payment::TYPE_GOOGLE_SUBSCRIPTION_RENEWAL => ShopifyPaymentSourceEnum::Google->value,
-            default => ShopifyPaymentSourceEnum::Web->value,
-        };
     }
 
     /**
