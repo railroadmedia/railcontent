@@ -2120,6 +2120,9 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                '*fields.style',
+                '*fields.instructor',
+                'instructors',
             ],
             'next_lesson' => [
                 'id',
