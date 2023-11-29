@@ -81,6 +81,7 @@ class WorkoutsPageController extends BaseController
 
     public function showChallengesPage(Request $request, $domain, $brand)
     {
+        ContentRepository::$pullFutureContent = true;
         $lessonType = 'challenge';
         $challenges = $this->contentService->getFiltered(
             $request->get('page', 1),
