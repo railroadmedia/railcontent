@@ -62,37 +62,38 @@
 
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
-                <a :href="renderLink ? item.url : null"
-                   class="card-info flex flex-column tw-p-1 tw-rounded-lg"
-                   :class="displayInline ? 'align-v-center' : 'tw-py-2'"
-                >
+                <a :href="renderLink ? item.url : null" class="card-info flex flex-column tw-p-1 tw-rounded-lg"
+                    :class="displayInline ? 'align-v-center' : 'tw-py-2'">
                     <!-- Coach Title -->
-                    <div v-if="item.type !== 'song-part'">
+                    <!-- <div v-if="item.type !== 'song-part'">
                         <h5 class="tw-text-xs tw-font-normal tw-leading-none tw-text-[#3F3F46] tw-mb-1 tw-uppercase dark:tw-text-[#9EC0DC]"
                             v-if="!isGuitareoChordAndScale" v-html="mappedData.color_title">
                         </h5>
-                    </div>
+                    </div> -->
 
                     <!-- Video Title -->
                     <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
-                        :class="{'text-center': isGuitareoChordAndScale}"
-                    >
+                        :class="{ 'text-center': isGuitareoChordAndScale }">
                         {{ mappedData.black_title }}
                     </h4>
                     <!-- Video Description -->
                     <p v-if="mappedData.show_description"
-                       class="tw-text-xs font-compressed tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] pb-1 tw-mb-1 item-description tw-line-clamp-2"
-                       v-html="mappedData.description.replace(/<[^>]+>/g, '')"
-                    ></p>
+                        class="tw-text-xs font-compressed tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] pb-1 tw-mb-1 item-description tw-line-clamp-2"
+                        v-html="mappedData.description.replace(/<[^>]+>/g, '')"></p>
                     <!-- Content -->
-                    <h6 class="tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]"
-                        :class="{'text-center': isGuitareoChordAndScale}"
-                    >
-                        <span v-html="mappedData.content_type"></span>
-                        <span v-if="mappedData.grey_title && mappedData.grey_title !== ''">
-                            - {{ mappedData.grey_title }}
-                        </span>
-                        &nbsp;
+                    <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]"
+                        :class="{ 'text-center': isGuitareoChordAndScale }">
+                        <div v-if="contentCreator && contentCreator !== ''">
+                            <span> {{ contentCreator }} </span>
+                            <span class="tw-mx-1">|</span>
+                        </div>
+                        <span> {{ contentTypeString }} </span>
+                        <!-- Difficulty Label -->
+                        <div v-if="mappedData.difficulty" class="tw-flex tw-items-center">
+                            <span class="tw-mx-1">|</span>
+                            <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
+                                textCase="capitalize" />
+                        </div>
                     </h6>
                 </a>
                 <!-- Add to Playlist -->
@@ -117,10 +118,14 @@
 <script>
 import Mixin from './_mixin';
 import ThemeClasses from '../../mixins/ThemeClasses';
-
+import DifficultyLabel from '../../../../vue/components/DifficultyLabel/DifficultyLabel'
+import { snakeToCapitalized } from '../../../../vue/utils'
 export default {
     name: 'CatalogueCard',
     mixins: [Mixin, ThemeClasses],
+    components: {
+        DifficultyLabel
+    },
     props: {
         sixWide: {
             type: Boolean,
@@ -143,11 +148,30 @@ export default {
         },
     },
     computed: {
-        mappedData() {
+        contentTypeString () {
+            return snakeToCapitalized(this.contentModel.post.type);
+        },
+        isSongContent () {
+            return this.contentModel.post.type === 'song';
+        },
+        contentCreator () {
+            if (this.isSongContent) {
+                return this.contentModel.post.fields.find(field => field.key === 'artist').value;
+            }
+            return this.contentModel.post.fields.find(field => field.key === 'instructor').value.name;
+        },
+        mappedData () {
+            const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value
+            if (Number.isFinite(Number(difficultyValue))) {
+                this.contentModel.card.difficulty = difficultyValue;
+            }
+            else {
+                this.contentModel.card.difficulty = 'all';
+            }
             return this.contentModel.card;
         },
 
-        class_object() {
+        class_object () {
             return {
                 'no-access': this.noAccess,
                 completed: this.item.completed,
@@ -160,20 +184,20 @@ export default {
 
         is_added: {
             cache: false,
-            get() {
+            get () {
                 return this.item.is_added_to_primary_playlist;
             },
         },
 
-        showTrophy() {
+        showTrophy () {
             return this.item.type === 'pack-bundle' && this.item.completed === true;
         },
 
-        isGuitareoChordAndScale() {
+        isGuitareoChordAndScale () {
             return this.brand === 'guitareo' && this.item.type === 'chord-and-scale';
         },
     },
-    beforeDestroy() {
+    beforeDestroy () {
         this.mappedData = null;
     },
 };
