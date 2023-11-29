@@ -67,7 +67,8 @@
                 @else
                     <strong>ONLY ${{ floatval($productPrices['electrify-your-drumming']->discounted_price) }}.</strong>
                 @endif
-                90-DAY GUARANTEE <br><a href="/" class="text-blue smaller">(OR FREE WITH A DRUMEO MEMBERSHIP)</a>
+                90-DAY GUARANTEE
+{{--                <br><a href="/" class="text-blue smaller">(OR FREE WITH A DRUMEO MEMBERSHIP)</a>--}}
             </p>
         </div>
     </header>
@@ -453,7 +454,8 @@
                 @else
                     <strong>ONLY ${{ floatval($productPrices['electrify-your-drumming']->discounted_price) }}.</strong>
                 @endif
-                90-DAY GUARANTEE <br><a href="/" class="text-blue smaller">(OR FREE WITH A DRUMEO MEMBERSHIP)</a>
+                90-DAY GUARANTEE
+{{--                    <br><a href="/" class="text-blue smaller">(OR FREE WITH A DRUMEO MEMBERSHIP)</a>--}}
             </h4>
 
             <div class="credit-cards columns">

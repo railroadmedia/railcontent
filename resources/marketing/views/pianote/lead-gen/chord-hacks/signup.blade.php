@@ -59,7 +59,7 @@
                             'stacked' => true,
                             'inputBorder' => '1px solid #747474',
                             'disclaimerColor' => 'rgba(208, 226, 231, 0.8)',
-                    "redirectURL" => "/chord-hacks/thank-you/"
+                    "redirectURL" => "/thank-you"
                         ])
                     </div>
                 </div>
@@ -236,7 +236,7 @@
                         "buttonText" => "start for free",
                         'stacked' => true,
                         'inputBorder' => '1px solid #7A8491',
-                    "redirectURL" => "/chord-hacks/thank-you/"
+                    "redirectURL" => "/thank-you"
                     ])
                 </div>
             </div>
