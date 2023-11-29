@@ -10,8 +10,6 @@
 
 @section('content')
     <workouts
-        breadcrumb-last-level-url="/{{ $brand }}/workouts"
-        breadcrumb-level-title="Workouts"
         :carousel-data="{{ $carousel }}"
         :continue-data="{{ $startedLessons }}"
         :workout-data="{{ $listLessons }}"
