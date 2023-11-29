@@ -776,6 +776,7 @@ class ContentQueryBuilder extends QueryBuilder
             $field = $groupBy['field'];
             $this->addSelect([
                                  $this->raw(ConfigService::$tableContent.'.'.$field.' as '.$field),
+                                 $this->raw(ConfigService::$tableContent.'.'.$field.' as grouped_by_field'),
 
                                  DB::raw(
                                      "( 
