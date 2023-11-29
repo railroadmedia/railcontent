@@ -751,7 +751,13 @@ return [
                 'allowableFilters' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
-            ]
+            ],
+            'workout' => [
+                'trailer1' => 448684113,
+            ],
+            'challenge' => [
+                'trailer1' => 448684113,
+            ],
         ],
         'pianote' => [
             'all' => [
@@ -899,6 +905,12 @@ return [
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
+            'workout' => [
+                'trailer1' => 448684113,
+            ],
+            'challenge' => [
+                'trailer1' => 448684113,
+            ],
         ],
         'guitareo' => [
             'all' => [
@@ -982,6 +994,12 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => '-published_on',
             ],
+            'workout' => [
+                'trailer1' => 448684113,
+            ],
+            'challenge' => [
+                'trailer1' => 448684113,
+            ],
         ],
         'singeo' => [
             'all' => [
@@ -1049,6 +1067,12 @@ return [
                 "description" => "Warm up your voice for any occasion with our bite-sized routines - ranging from 5 to 20 minutes - perfect for busy days or when you need motivation.",
                 "allowableFilters" => [],
                 'allowableFiltersMobile' => [],
+            ],
+            'workout' => [
+                'trailer1' => 448684113,
+            ],
+            'challenge' => [
+                'trailer1' => 448684113,
             ],
         ],
     ],
