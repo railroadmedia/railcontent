@@ -94,22 +94,8 @@ class RevenueCatController extends Controller
                 echo 'INITIAL_PURCHASE';
 
                 //create new user
-                $user = $this->revenueCatService->getUser(
-                    $data['event']['subscriber_attributes']['email']['value'] ?? null,
-                    $data['event']['original_app_user_id'],
-                    true,
-                    $data['event']['aliases'],
-                );
-
+                $user = $this->TryGetUserFromNotificationData($data, true);
                 if (!$user) {
-                    //TBD
-                    $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
-                    Log::error(
-                        'RevenueCatController processNotification::INITIAL_PURCHASE - user not found email: ' .
-                        $email .
-                        ' original_app_user_id: ' .
-                        $data['event']['original_app_user_id']
-                    );
                     break;
                 }
 
@@ -159,24 +145,10 @@ class RevenueCatController extends Controller
                 break;
             case 'RENEWAL':
                 echo 'RENEWAL';
-                $subscriberAttributtes = $data['event']['subscriber_attributes'];
 
-                // get Musora user
-                $user = $this->revenueCatService->getUser(
-                    $data['event']['subscriber_attributes']['email']['value'] ?? null,
-                    $data['event']['original_app_user_id'],
-                    true,
-                    $data['event']['aliases']
-                );
+
+                $user = $this->TryGetUserFromNotificationData($data, true);
                 if (!$user) {
-                    //TBD
-                    $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
-                    Log::error(
-                        'RevenueCatController processNotification::RENEWAL - user not found email: ' .
-                        $email .
-                        ' original_app_user_id: ' .
-                        $data['event']['original_app_user_id']
-                    );
                     break;
                 }
 
@@ -220,18 +192,8 @@ class RevenueCatController extends Controller
                 }
                 break;
             case 'CANCELLATION':
-                $user = $this->revenueCatService->getUser(
-                    $data['event']['subscriber_attributes']['email']['value'] ?? null,
-                    $data['event']['original_app_user_id'], false,  $data['event']['aliases']
-                );
+                $user = $this->TryGetUserFromNotificationData($data, false);
                 if (!$user) {
-                    $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
-                    Log::error(
-                        'RevenueCatController processNotification::CANCELLATION - user not found email: ' .
-                        $email .
-                        ' original_app_user_id: ' .
-                        $data['event']['original_app_user_id']
-                    );
                     break;
                 }
 
@@ -279,18 +241,8 @@ class RevenueCatController extends Controller
                 }
                 break;
             case 'EXPIRATION':
-                $user = $this->revenueCatService->getUser(
-                    $data['event']['subscriber_attributes']['email']['value'] ?? null,
-                    $data['event']['original_app_user_id'], false, $data['event']['aliases']
-                );
+                $user = $this->TryGetUserFromNotificationData($data, false);
                 if (!$user) {
-                    $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
-                    Log::error(
-                        'RevenueCatController processNotification::EXPIRATION - user not found email: ' .
-                        $email .
-                        ' original_app_user_id: ' .
-                        $data['event']['original_app_user_id']
-                    );
                     break;
                 }
                 $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
@@ -299,21 +251,10 @@ class RevenueCatController extends Controller
                 break;
             // handle other events...
             case 'PRODUCT_CHANGE':
+                break;
             case 'BILLING_ISSUE':
-                $user = $this->revenueCatService->getUser(
-                    $data['event']['subscriber_attributes']['email']['value'] ?? null,
-                    $data['event']['original_app_user_id'],
-                    false,
-                    $data['event']['aliases']
-                );
+                $user = $this->TryGetUserFromNotificationData($data, false, "BILLING_ISSUE");
                 if (!$user) {
-                    $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
-                    Log::error(
-                        'RevenueCatController processNotification::EXPIRATION - user not found email: ' .
-                        $email .
-                        ' original_app_user_id: ' .
-                        $data['event']['original_app_user_id']
-                    );
                     break;
                 }
                 $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
@@ -340,6 +281,33 @@ class RevenueCatController extends Controller
         }
 
         return response()->json();
+    }
+
+    private function TryGetUserFromNotificationData(
+        $data,
+        $createIfNotExists,
+    ) : ?User
+    {
+        $user = $this->revenueCatService->getUser(
+            $data['event']['subscriber_attributes']['email']['value'] ?? null,
+            $data['event']['original_app_user_id'],
+            $createIfNotExists,
+            $data['event']['aliases']
+        );
+        if (!$user) {
+            $eventType = $data['event']['type'];
+            $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
+            Log::error(
+                'RevenueCatController processNotification::' .
+                $eventType .
+                '- user not found email: ' .
+                $email .
+                ' original_app_user_id: ' .
+                $data['event']['original_app_user_id']
+            );
+            return null;
+        }
+        return $user;
     }
 
     /**
