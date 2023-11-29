@@ -2,10 +2,15 @@
 
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
+use App\Modules\Content\Services\ContentPermissionsService;
+use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
+use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesShopifyRateLimit;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
+use App\Modules\Ecommerce\Models\Payment;
 use App\Modules\Ecommerce\Models\SubscriptionPayment;
-use Exception;
+use App\Modules\Ecommerce\Models\UserAccessPermission;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,6 +20,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
+use Signifly\Shopify\Exceptions\NotFoundException;
 use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\Shopify;
 
@@ -42,10 +48,13 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
     public $timeout = 840; // 14 minutes
 
     protected Shopify $shopify;
+    protected UserAccessPermissionsService $userAccessPermissionsService;
     // rows for displaying the results in a table
     protected array $results = [];
 
     protected Collection $paymentIds;
+
+    protected Collection $contentPermissionsLookup;
 
     public function __construct(
         array $paymentIds,
@@ -64,15 +73,21 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
      * Execute the job
      *
      * @param  Shopify  $shopify
+     * @param  UserAccessPermissionsService  $userAccessPermissionsService
+     * @param  ContentPermissionsService  $contentPermissionsService
      * @return void
-     * @throws Exception
      */
     public function handle(
         Shopify $shopify,
+        UserAccessPermissionsService $userAccessPermissionsService,
+        ContentPermissionsService $contentPermissionsService
     ): void {
         // set DI instances that we'll need
         $this->shopify = $shopify;
+        $this->userAccessPermissionsService = $userAccessPermissionsService;
 
+        // get the content permissions lookup, so we can reference them later on
+        $this->contentPermissionsLookup = $contentPermissionsService->getContentPermissionsLookup();
         /*
         $this->logDebug(
             sprintf(
@@ -125,14 +140,6 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
     }
 
     /**
-     * @inheritDoc
-     */
-    protected function getClassName(): string
-    {
-        return "CancelDuplicateSubscriptionPaymentOrders";
-    }
-
-    /**
      * Cancel any duplicate orders in Shopify for payments in this job.
      * This will cancel any fulfillments, refund any payments, and then finally cancel the order.
      *
@@ -166,9 +173,21 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
             */
 
             $subscriptionPaymentsToCancel->each(function (SubscriptionPayment $subscriptionPayment) use ($paymentId) {
-                // first ensure this subscription payment's order hasn't already been cancelled
-                $orderShopifyAttributes = $this->shopify->getOrder($subscriptionPayment->shopify_id)->getAttributes();
-                $this->handleRateLimit(true);
+                // first ensure this subscription payment's order hasn't already been cancelled or deleted
+                try {
+                    $orderShopifyAttributes = $this->shopify->getOrder($subscriptionPayment->shopify_id)->getAttributes(
+                    );
+                    $this->handleRateLimit(true);
+                } catch (NotFoundException $exception) {
+                    $this->results[] = [
+                        self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_WARNING,
+                        self::RESULTS_MESSAGE => sprintf(
+                            "SKIPPED Subscription Payment %s already deleted",
+                            $subscriptionPayment->id
+                        )
+                    ];
+                    return;
+                }
 
                 if ($orderShopifyAttributes["cancelled_at"]) {
                     $this->results[] = [
@@ -206,6 +225,9 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
                         $this->handleRateLimit();
                     }
 
+                    // we need to remove the permissions from the order
+                    $this->deleteUserAccessPermissions($subscriptionPayment);
+
                     $this->results[] = [
                         self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
                         self::RESULTS_MESSAGE => sprintf(
@@ -214,6 +236,9 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
                             $cancelResults["notice"] ?? "simulated cancellation"
                         )
                     ];
+
+                    // now that we've cancelled the order, it can also be deleted
+                    $this->deleteOrder($shopifyOrderId);
                 } catch (ValidationException $exception) {
                     $this->results[] = [
                         self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
@@ -394,5 +419,140 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
             $this->shopify->closeOrder($orderShopifyId);
             $this->handleRateLimit();
         }
+    }
+
+    /**
+     * Find the User Access Permissions related to the given subscription payment and delete each excess entry,
+     * leaving only the first one.
+     *
+     * @param  SubscriptionPayment  $subscriptionPayment
+     * @return void
+     */
+    private function deleteUserAccessPermissions(SubscriptionPayment $subscriptionPayment): void
+    {
+        // get the user and product from the subscription payment, so we can find the user's access permission
+        $subscription = $subscriptionPayment->subscription;
+        $user = $subscription->user;
+        $product = $subscription->product;
+        $source = $this->getSourceString($subscriptionPayment);
+
+        // go through each content permission for the product, so we can build up the source hash to find the user's access permissions
+        $contentPermissions = $product->getContentPermissions($this->contentPermissionsLookup);
+        foreach ($contentPermissions as $contentPermission) {
+            $hash = sha1("$source.$product->id.$contentPermission->id");
+            $userAccessPermissions = UserAccessPermission::query()
+                ->whereBelongsTo($user)
+                ->where("source_hash", $hash)
+                ->where("status", UserAccessPermissionsStatusEnum::Active->value)
+                ->get();
+
+            if ($userAccessPermissions->isNotEmpty()) {
+                $foundUAPs = $userAccessPermissions->implode("id", ", ");
+                $this->results[] = [
+                    self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                    self::RESULTS_MESSAGE => sprintf(
+                        "Subscription Payment %s linked to User Access Permissions %s",
+                        $subscriptionPayment->id,
+                        $foundUAPs
+                    )
+                ];
+
+                // keep only the earliest entry
+                $userAccessPermissions = $userAccessPermissions->sortBy("created_at");
+                $uapsToDelete = $userAccessPermissions->skip(1);
+                $uapsToDelete->each(function (UserAccessPermission $userAccessPermission) {
+                    $idToDelete = $userAccessPermission->id;
+                    if (!$this->getIsSimulation()) {
+                        $userAccessPermission->delete();
+                    }
+                    $this->results[] = [
+                        self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                        self::RESULTS_MESSAGE => sprintf(
+                            "User Access Permissions %s %s",
+                            $idToDelete,
+                            $this->getIsSimulation() ? "simulated deletion" : "deleted"
+                        )
+                    ];
+                });
+            }
+        }
+    }
+
+    /**
+     * Get the payment source used for the user access permission,
+     * based on the ShopifyPaymentSourceEnum that was used when creating the Shopify order,
+     * mapped to the corresponding UserAccessPermissionsSourceEnum
+     *
+     * @param  SubscriptionPayment  $subscriptionPayment
+     * @return string
+     */
+    private function getSourceString(SubscriptionPayment $subscriptionPayment): string
+    {
+        // DEV NOTE: the UserAccessPermissionsSourceEnum values match the ShopifyPaymentSourceEnum
+        // for these three cases, so we can just return the string value
+        return match ($subscriptionPayment->payment->type) {
+            Payment::TYPE_APPLE_SUBSCRIPTION_RENEWAL => ShopifyPaymentSourceEnum::Apple->value,
+            Payment::TYPE_GOOGLE_SUBSCRIPTION_RENEWAL => ShopifyPaymentSourceEnum::Google->value,
+            default => ShopifyPaymentSourceEnum::Web->value,
+        };
+    }
+
+    /**
+     * Delete the Shopify Order
+     *
+     * @param  int  $shopifyOrderId
+     * @return bool whether the order was deleted
+     */
+    private function deleteOrder(int $shopifyOrderId): bool
+    {
+        if (!$this->getIsSimulation()) {
+            // unfortunately, this is function doesn't return anything, so we just have to assume it worked
+            $this->shopify->deleteOrder($shopifyOrderId);
+            $this->handleRateLimit();
+
+            // confirm that the deletion worked
+            try {
+                $this->shopify->getOrder($shopifyOrderId);
+                $this->handleRateLimit();
+            } catch (NotFoundException $exception) {
+                $this->results[] = [
+                    self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                    self::RESULTS_MESSAGE => sprintf(
+                        "Shopify Order %s: %s",
+                        $shopifyOrderId,
+                        "deleted"
+                    )
+                ];
+                return true;
+            }
+            // the order was found, which means we failed to delete it
+            $this->results[] = [
+                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
+                self::RESULTS_MESSAGE => sprintf(
+                    "Shopify Order %s: %s",
+                    $shopifyOrderId,
+                    "NOT deleted"
+                )
+            ];
+        } else {
+            $this->results[] = [
+                self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+                self::RESULTS_MESSAGE => sprintf(
+                    "Shopify Order %s: %s",
+                    $shopifyOrderId,
+                    "simulated deletion"
+                )
+            ];
+        }
+
+        return false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getClassName(): string
+    {
+        return "CancelDuplicateSubscriptionPaymentOrders";
     }
 }

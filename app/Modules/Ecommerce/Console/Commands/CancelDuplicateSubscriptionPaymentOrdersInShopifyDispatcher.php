@@ -28,7 +28,7 @@ class CancelDuplicateSubscriptionPaymentOrdersInShopifyDispatcher extends Comman
      *
      * @var string
      */
-    protected $description = 'Cancel orders in Shopify that were created by duplicate subscription payments';
+    protected $description = 'Cancel and delete orders in Shopify that were created by duplicate subscription payments';
 
     /**
      * Execute the console command.
