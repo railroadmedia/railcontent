@@ -563,6 +563,14 @@ class ContentQueryBuilder extends QueryBuilder
                         'id_content_permissions'.'.permission_id'
                     );
                 })
+                    ->orWhereExists(function (Builder $builder)  {
+                        return $builder->select('id')
+                            ->from(ConfigService::$tableContentFields)
+                            ->where('content_id', '=',DB::raw(ConfigService::$tableContent.'.id'))
+                            ->where('key', '=','enrollment_end_time')
+                            ->where('value', '>=', Carbon::now()
+                                ->toDateTimeString());
+                    })
                     ->orWhereExists(function (Builder $builder) use ($membershipPermissionIds) {
                         return $builder->select('id')
                             ->from(ConfigService::$tableUserPermissions)
