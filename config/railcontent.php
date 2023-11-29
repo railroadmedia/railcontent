@@ -198,6 +198,7 @@ return [
             'unit',
             'song-tutorial',
             'song-tutorial-children',
+            'challenge',
         ],
         'completed' => [
             'course',
@@ -224,6 +225,7 @@ return [
             'unit',
             'song-tutorial',
             'song-tutorial-children',
+            'challenge',
         ],
     ],
 
@@ -345,6 +347,8 @@ return [
             \App\Decorators\Content\SemesterPackDecorator::class,
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
 //            \App\Modules\MusoraCenter\Decorators\UrlDecorator::class,
+
+            \App\Decorators\Content\ChallengeDecorator::class,
 
             \App\Decorators\Content\PlaylistItemDecorator::class,
 
@@ -765,6 +769,10 @@ return [
                 'allowableFilters' => ['instructor','duration','style','difficulty'],
                 'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
+		'trailer1' => 448684113,
+            ],
+ 	    'workout' => [
+                'trailer1' => 448684113,
             ],
         ],
         'pianote' => [
@@ -913,6 +921,12 @@ return [
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
+            'workout' => [
+                'trailer1' => 448684113,
+            ],
+            'challenge' => [
+                'trailer1' => 448684113,
+            ],
         ],
         'guitareo' => [
             'all' => [
@@ -996,6 +1010,12 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => '-published_on',
             ],
+            'workout' => [
+                'trailer1' => 448684113,
+            ],
+            'challenge' => [
+                'trailer1' => 448684113,
+            ],
         ],
         'singeo' => [
             'all' => [
@@ -1063,6 +1083,12 @@ return [
                 "description" => "Warm up your voice for any occasion with our bite-sized routines - ranging from 5 to 20 minutes - perfect for busy days or when you need motivation.",
                 "allowableFilters" => [],
                 'allowableFiltersMobile' => [],
+            ],
+            'workout' => [
+                'trailer1' => 448684113,
+            ],
+            'challenge' => [
+                'trailer1' => 448684113,
             ],
         ],
     ],
@@ -1662,6 +1688,8 @@ return [
         'web_banner_url',
         'zip_name',
         'zip_url',
+        'enrollment_start_time',
+        'enrollment_end_time',
     ],
 
     'compiled_column_mapping_field_keys' => [

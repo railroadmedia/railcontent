@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "702c1904d064610c54e4da4a0da11bb1",
+    "content-hash": "8fef426a255375d204bc2cb84b11e768",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8637,16 +8637,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.45",
+            "version": "dev-v3.0-workouts",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "0e6c6d3a07fa9fd3b8d2ddc4780da57efc4e12bf"
+                "reference": "b023f64c5a27774951379d4f8886d7652455efae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/0e6c6d3a07fa9fd3b8d2ddc4780da57efc4e12bf",
-                "reference": "0e6c6d3a07fa9fd3b8d2ddc4780da57efc4e12bf",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/b023f64c5a27774951379d4f8886d7652455efae",
+                "reference": "b023f64c5a27774951379d4f8886d7652455efae",
                 "shasum": ""
             },
             "require": {
@@ -8676,9 +8676,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.45"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.0-workouts"
             },
-            "time": "2023-11-14T13:35:24+00:00"
+            "time": "2023-11-29T07:24:23+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8792,12 +8792,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railanalytics.git",
-                "reference": "dbd809c6a61cf8e93416ba4dc00c77ca3c2d2c9a"
+                "reference": "433f5c1e1326258c5cc8a9646444257b6e5e7d4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/dbd809c6a61cf8e93416ba4dc00c77ca3c2d2c9a",
-                "reference": "dbd809c6a61cf8e93416ba4dc00c77ca3c2d2c9a",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/433f5c1e1326258c5cc8a9646444257b6e5e7d4b",
+                "reference": "433f5c1e1326258c5cc8a9646444257b6e5e7d4b",
                 "shasum": ""
             },
             "require": {
@@ -8826,7 +8826,7 @@
                 "issues": "https://github.com/railroadmedia/railanalytics/issues",
                 "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0-fixing-transaction-tracking"
             },
-            "time": "2023-02-21T18:27:34+00:00"
+            "time": "2023-11-28T22:12:12+00:00"
         },
         {
             "name": "railroad/railchat",
@@ -8875,12 +8875,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "1136d299252999fad5aed7cf699c18ba616412f3"
+                "reference": "1114770d7e94dc588776d597f781c2b6354aa5d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/1136d299252999fad5aed7cf699c18ba616412f3",
-                "reference": "1136d299252999fad5aed7cf699c18ba616412f3",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/1114770d7e94dc588776d597f781c2b6354aa5d7",
+                "reference": "1114770d7e94dc588776d597f781c2b6354aa5d7",
                 "shasum": ""
             },
             "require": {
@@ -8937,7 +8937,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-workouts"
             },
-            "time": "2023-11-28T18:26:09+00:00"
+            "time": "2023-11-29T07:21:59+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -17429,6 +17429,12 @@
     ],
     "aliases": [
         {
+            "package": "railroad/musora-api",
+            "version": "dev-v3.0-workouts",
+            "alias": "v3.1.45",
+            "alias_normalized": "3.1.45.0"
+        },
+        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "3.0.7",
@@ -17437,12 +17443,13 @@
         {
             "package": "railroad/railcontent",
             "version": "dev-2.0-workouts",
-            "alias": "v2.1.35",
-            "alias_normalized": "2.1.35.0"
+            "alias": "v2.1.36",
+            "alias_normalized": "2.1.36.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "railroad/musora-api": 20,
         "railroad/railanalytics": 20,
         "railroad/railcontent": 20
     },
