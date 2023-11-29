@@ -75,6 +75,7 @@ export const useCollectionStore = defineStore({
                                 ...this.filter.params,
                                 included_fields: this.filter.includedFields,
                                 [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm,
+                                tab: this.filter.activeTab
                             },
                         })
                 return response;
@@ -171,6 +172,7 @@ export const useCollectionStore = defineStore({
             this.tabData[this.filter.activeTab] = {
                 ...this.tabData[this.filter.activeTab],
                 data: [...this.data],
+                filterApplied: true,
             }
 
             this.filter.activeTab = tab;

@@ -4,12 +4,10 @@
             <div
                 :class="`
                     tw-px-4 lg:tw-px-0 tw-no-scrollbar
-                    ${isMiniView ? 'tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-3 xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-y-[25px] tw-gap-x-[8px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : 'tw-flex tw-overflow-x-scroll lg:tw-overflow-x-clip tw-flex-nowrap'}
-                `
-                "
-                >
+                    ${isMiniView ? 'tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-3 xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-y-[25px] tw-gap-x-[8px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : 'tw-flex tw-overflow-x-scroll lg:tw-overflow-x-clip tw-flex-nowrap lg:tw-flex-wrap'}
+                `">
                 <CatalogueCard
-                    v-for="item in content"
+                    v-for="item in data"
                     :key="'grid' + item.id"
                     :item="item"
                     :content-type="item.type"
@@ -30,7 +28,7 @@
                 />
             </div>
         </div>
-        <div v-if="content.length === 0 && noResultsMessage.length > 0" class="tw-flex tw-flex-row tw-py-4 tw-justify-center tw-items-center tw-px-4 lg:tw-px-0">
+        <div v-if="data.length === 0 && noResultsMessage.length > 0" class="tw-flex tw-flex-row tw-py-4 tw-justify-center tw-items-center tw-px-4 lg:tw-px-0">
             <div class="tw-flex tw-flex-column icon-col face-icon tw-mr-1">
                 <div class="icon-wrap square"></div>
             </div>
@@ -42,12 +40,12 @@
 </template>
 <script setup>
 // TODO: Find a way to re add the smily face or change the icon
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 // In order for the horizontal scroll to work, you need to make parent container a block.
 import CatalogueCard from '../Catalogue/CatalogueCard.vue';
 import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
-import {storeToRefs} from "pinia";
-import { useUserStore} from "../../../stores/user";
+import { storeToRefs } from "pinia";
+import { useUserStore } from "../../../stores/user";
 
 const props = defineProps({
     isMiniView: {
@@ -114,4 +112,8 @@ const { brand } = storeToRefs(userStore);
 
 const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, content: props.preLoadedContent.data });
 const content = ref(props.preLoadedContent ? props.preLoadedContent.data : []);
+
+const data = computed(() => {
+    return Array.isArray(props.preLoadedContent) ? props.preLoadedContent : content.value;
+})
 </script>

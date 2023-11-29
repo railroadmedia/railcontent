@@ -16,7 +16,7 @@
                     :total-results="getTotalResults" />
                 <CatalogueCardContainer
                     v-else
-                    :pre-loaded-content="preLoadedContent"
+                    :pre-loaded-content="data"
                 />
             </CollectionResults>
         </transition>
@@ -181,7 +181,7 @@ const isList = computed(() => {
 
 //Filter state reactive
 const hideFilter = computed(() => {
-    return isRoutine.value || isStudentReview.value; 
+    return isRoutine.value || isStudentReview.value;
 })
 
 //Tab options reactive
@@ -209,10 +209,10 @@ const getTabOptions = computed(() => {
     } else if (isWorkout.value) {
         return [
             { key: 'all', value: 'All' },
-            { key: '5minutes', value: '5 Minutes' },
-            { key: '10minutes', value: '10 Minutes' },
-            { key: '15minutes', value: '15+ Minutes' },
-            { key: 'instructors', value: 'Instructors' },
+            { key: 'duration,300,<', value: '5 Minutes' },
+            { key: 'duration,600,<', value: '10 Minutes' },
+            { key: 'duration,900,>', value: '15+ Minutes' },
+            { key: 'group_by,instructor', value: 'Instructors' },
         ];
     }
 
@@ -226,7 +226,7 @@ const tabOptionData = computed(() => {
 })
 
 const getFirstTabOption = computed(() => {
-    return tabOptionData.value[0]
+    return tabOptionData.value[0];
 })
 
 const getTabData = computed(() => {
