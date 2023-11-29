@@ -252,6 +252,7 @@ class RevenueCatController extends Controller
                 break;
             // handle other events...
             case 'PRODUCT_CHANGE':
+                break;
             case 'BILLING_ISSUE':
                 $user = $this->TryGetUserFromNotificationData($data, false, "BILLING_ISSUE");
                 if (!$user) {
