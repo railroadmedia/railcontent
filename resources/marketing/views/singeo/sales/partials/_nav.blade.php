@@ -46,7 +46,7 @@
                         Instruments <i class="fa-solid fa-caret-down"></i>
                     </span>
                     <a class=" @if(strpos(url()->full(), 'choose-plan')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/choose-plan" >Pricing</a>
-                        <a style="color: #b30c15;" class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('singeo') }}/shop" ><div class="hidden lg:inline">Holiday</div> Deals</a>
+                        <a style="color: #d61922;" class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('singeo') }}/shop" ><div class="hidden lg:inline">Holiday</div> Deals</a>
                     <a class="" href="{{ get_legacy_brand_base_url('singeo') }}/chorus" >Blog</a>
                 </div>
                 <div
