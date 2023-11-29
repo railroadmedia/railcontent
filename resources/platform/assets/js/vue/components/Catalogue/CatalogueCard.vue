@@ -1,6 +1,6 @@
 <template>
     <div v-if="!isMiniCard"
-        class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]"
+        class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-mb-6 lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]"
         :class="[class_object, displayInline ? 'tw-py-3' : '']">
         <div class="tw-flex" :class="displayInline ? 'tw-flex-row' : 'tw-flex-col'">
             <!-- Thumbnail Section -->
@@ -44,11 +44,11 @@
                     class="card-info tw-flex tw-flex-auto tw-flex-col tw-px-2 tw-rounded-lg"
                     :class="displayInline ? 'tw-justify-center tw-pt-1' : 'tw-pt-2'">
                     <!-- Coach Title -->
-                    <div v-if="item.type !== 'song-part'">
+                    <!-- <div v-if="item.type !== 'song-part'">
                         <h5 class="tw-text-xs tw-font-normal tw-leading-none tw-text-[#3F3F46] tw-mb-1 tw-uppercase dark:tw-text-[#9EC0DC]"
                             v-if="!isGuitareoChordAndScale" v-html="mappedData.color_title">
                         </h5>
-                    </div>
+                    </div> -->
 
                     <!-- Video Title -->
                     <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
@@ -60,16 +60,22 @@
                         class="tw-text-xs font-compressed tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pb-1 tw-mb-1 item-description tw-line-clamp-2"
                         v-html="mappedData.description.replace(/<[^>]+>/g, '')"></p>
                     <!-- Content -->
-                    <h6 class="tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]"
+                    <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]"
                         :class="{ 'tw-text-center': isGuitareoChordAndScale }">
-                        <span v-html="mappedData.content_type"></span>
-                        <span v-if="mappedData.grey_title && mappedData.grey_title !== ''">
-                            - {{ mappedData.grey_title }}
-                        </span>
-                        &nbsp;
+                        <div v-if="contentCreator && contentCreator !== ''" class="tw-mb-0.5">
+                            <span> {{ contentCreator }} </span>
+                            <span class="tw-mx-1">|</span>
+                        </div>
+                        <div class="tw-mb-0.5">
+                            {{ contentTypeString }}
+                            <span class="tw-mx-1">|</span>
+                        </div>
+                        <!-- Difficulty Label -->
+                        <div v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
+                            <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
+                                textCase="capitalize" />
+                        </div>
                     </h6>
-                    <!-- Difficulty Label -->
-                    <DifficultyLabel class="tw-text-xs" v-if="mappedData.difficulty" :difficultyValue="mappedData.difficulty" textCase="capitalize" />
                 </a>
                 <!-- Add to Playlist -->
                 <div class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
@@ -97,7 +103,7 @@
             </div>
         </div>
     </div>
-    <div v-if="isMiniCard"
+    <div v-else
         class="tw-group tw-flex tw-items-center tw-py-[4px] tw-h-[78px] tw-relative tw-w-[365px] lg:tw-w-auto tw-shrink-0">
         <!-- Thumbnail Image -->
         <a :href="renderLink ? item.url : null"
@@ -124,13 +130,13 @@
             <!-- Instructor Name -->
             <div
                 class="tw-font-semibold tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-[10px] tw-uppercase tw-truncate tw-leading-[15px]">
-                {{ mappedData.color_title
-                }}</div>
+                {{ mappedData.color_title }}
+            </div>
             <!-- Title -->
             <div
                 class="tw-text-[#00101D] dark:tw-text-white tw-text-[12px] tw-line-clamp-2 tw-font-[700] tw-leading-[18px]">
-                {{
-                    mappedData.black_title }}</div>
+                {{ mappedData.black_title }}
+            </div>
         </a>
 
         <!-- Action Button -->
@@ -152,13 +158,14 @@
     </div>
 </template>
 <script setup>
-import { computed, onBeforeUnmount, reactive, onMounted } from 'vue';
+import { computed, onUnmounted, reactive, onMounted } from 'vue';
 import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '../../hooks/useCatalogueItem.js';
 import useThemeClasses from '../../hooks/useThemeClasses.js';
 import Dropdown from './Dropdown';
 import DifficultyLabel from '../DifficultyLabel/DifficultyLabel';
 import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
+import { snakeToCapitalized } from "../../utils"
 
 const props = defineProps({
     item: {
@@ -263,16 +270,31 @@ const handleShowDropdown = (className) => {
     state.dropdownPosition = { ...state.dropdownPosition, opacity: 0 }
 
     //wait for element to appear on screen
-    window.setTimeout(()=>{
+    window.setTimeout(() => {
         const { width, height } = document.getElementById('catalogue-card-dropdown-div').getBoundingClientRect();
 
         state.dropdownPosition = {
-            top: (top + height + 30) < innerHeight ? top + 30: top - height,
+            top: (top + height + 30) < innerHeight ? top + 30 : top - height,
             left: (left + width) < innerWidth ? left : left - width + 26,
             opacity: 1,
         };
     }, 0)
 };
+
+const contentTypeString = computed(() => {
+    return snakeToCapitalized(contentModel.value.post.type)
+})
+
+const isSongContent = computed(() => {
+    return contentModel.value.post.type === 'song'
+})
+
+const contentCreator = computed(() => {
+    if (isSongContent.value) {
+        return contentModel.value.post.fields.find(field => field.key === 'artist')?.value || ''
+    }
+    return contentModel.value.post.fields.find(field => field.key === 'instructor')?.value.name || ''
+})
 
 const mappedData = computed(() => {
     const difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty').value
@@ -282,8 +304,6 @@ const mappedData = computed(() => {
     else {
         contentModel.value.card.difficulty = 'all';
     }
-    const excludePattern = new RegExp('(novice|beginner|intermediate|advanced|expert) \\d+', 'i');
-    contentModel.value.card.grey_title = contentModel.value.card.grey_title.replace(excludePattern, '').trim();
 
     return contentModel.value.card
 });
@@ -321,10 +341,9 @@ onMounted(() => {
     contentContainer.addEventListener('scroll', closeDropdownOnScroll);
 });
 
-onBeforeUnmount(() => {
+onUnmounted(() => {
     const contentContainer = document.getElementById('content-container');
     contentContainer.removeEventListener('scroll', closeDropdownOnScroll);
-    mappedData.value = null;
 });
 
 const emit = defineEmits(['addToList', 'progressReset']);

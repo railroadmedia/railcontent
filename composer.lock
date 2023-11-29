@@ -17469,5 +17469,9 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
+<<<<<<< HEAD
     "plugin-api-version": "2.2.0"
+=======
+    "plugin-api-version": "2.6.0"
+>>>>>>> project-catalogs-v2
 }

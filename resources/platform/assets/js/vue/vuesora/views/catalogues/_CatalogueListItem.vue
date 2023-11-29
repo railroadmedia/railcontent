@@ -116,9 +116,10 @@
         " :class="`${this.overview ? 'tw-mt-4' : ''}`">
         <span v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`">
           <span v-if="i > 0" class="bullet">-</span>
-
           {{ column_data }}
         </span>
+        <!-- Difficulty Label -->
+        <DifficultyLabel v-if="mappedData.difficulty" class="basic-col tw-justify-start tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
       </p>
     </div>
 
@@ -128,8 +129,9 @@
       <img class="dark:tw-invert tw-transition-opacity tw-duration-500" alt="Rudiment Image"
         :src="mappedData.sheet_music" loading="lazy" />
     </div>
-
-    <DifficultyLabel v-if="mappedData.difficulty" class="flex tw-flex-col tw-justify-center tw-justify-center basic-col tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
+    
+    <!-- Difficulty Label -->
+    <DifficultyLabel v-if="mappedData.difficulty" class="tw-hidden xl:tw-flex basic-col tw-justify-start tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
 
     <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
     <template v-if="!is_search">
