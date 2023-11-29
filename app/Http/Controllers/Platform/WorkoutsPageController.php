@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Platform;
 use App\Http\Controllers\BaseController;
 use App\Modules\Content\Services\CarouselService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
@@ -28,6 +29,7 @@ class WorkoutsPageController extends BaseController
     {
         $lessonType = 'workout';
         $requiredFields = $request->get('required_fields', []);
+        Log::debug('Workouts -  showWorkoutsPage');
 
         $workouts = $this->contentService->getFiltered(
             $request->get('page', 1),
@@ -42,7 +44,7 @@ class WorkoutsPageController extends BaseController
             $request->get('included_user_states', []),
             true
         );
-
+        Log::debug(var_export($workouts, true));
         $startedLessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
             [$lessonType],
             auth()->id(),
@@ -54,7 +56,7 @@ class WorkoutsPageController extends BaseController
         $startedListLessons =
             count($startedLessons) > 0 ?
                 (new ContentFilterResultsEntity(['results' => $startedLessons]))->toResponseRawJson() : false;
-
+        Log::debug(var_export($startedListLessons, true));
         $hasStartedLessons = !empty(json_decode($startedListLessons)->data);
 
         $catalogName = $lessonType;
@@ -64,7 +66,7 @@ class WorkoutsPageController extends BaseController
         $carousel =
             $this->carouselService->getCarouselSlides()
                 ->where('is_featured', 1);
-
+        Log::debug(var_export($carousel, true));
         return view(
             'pages.workouts',
             [
