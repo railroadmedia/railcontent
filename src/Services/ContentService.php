@@ -1144,7 +1144,7 @@ class ContentService
         }
 
         //TODO: remove this when we have a better solution for the grouped contents that should not be decorated
-        if($groupBy && $groupBy != 'instructor'){
+        if($groupBy){
             return $results;
         }
 
