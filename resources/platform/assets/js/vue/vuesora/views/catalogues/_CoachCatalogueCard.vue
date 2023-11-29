@@ -79,16 +79,17 @@
                     </p>
                     <!-- Content -->
                     <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]"
-                        :class="{'text-center': isGuitareoChordAndScale}"
-                    >
-                        <div v-if="contentCreator && contentCreator !== ''">
+                        :class="{ 'tw-text-center': isGuitareoChordAndScale }">
+                        <div v-if="contentCreator && contentCreator !== ''" class="tw-mb-0.5">
                             <span> {{ contentCreator }} </span>
                             <span class="tw-mx-1">|</span>
                         </div>
-                        <span> {{ contentTypeString }} </span>
+                        <div class="tw-mb-0.5"> 
+                            {{ contentTypeString }} 
+                            <span class="tw-mx-1">|</span> 
+                        </div>
                         <!-- Difficulty Label -->
-                        <div v-if="mappedData.difficulty" class="tw-flex tw-items-center">
-                            <span class="tw-mx-1">|</span>
+                        <div v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
                             <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
                                 textCase="capitalize" />
                         </div>
