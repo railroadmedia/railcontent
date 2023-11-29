@@ -309,7 +309,8 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
                 $this->results[] = [
                     self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
                     self::RESULTS_MESSAGE => sprintf(
-                        "Cancelled fulfillment %s on order %s for payment id %s",
+                        "%s fulfillment %s on order %s for payment id %s",
+                        $this->getIsSimulation() ? "Simulated cancellation of" : "Cancelled",
                         $fulfillmentId,
                         $shopifyOrderId,
                         $paymentId
@@ -403,7 +404,8 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
             $this->results[] = [
                 self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
                 self::RESULTS_MESSAGE => sprintf(
-                    "Refunded payment of %s %s on order %s for payment id %s.",
+                    "%s payment of %s %s on order %s for payment id %s.",
+                    $this->getIsSimulation() ? "Simulated refund of" : "Refunded",
                     $transactionData["maximum_refundable"],
                     $currency,
                     $orderShopifyId,
@@ -463,15 +465,17 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
                 ];
 
                 $userAccessPermissions->each(function (UserAccessPermission $userAccessPermission) {
-                    $idToDelete = $userAccessPermission->id;
                     if (!$this->getIsSimulation()) {
                         $userAccessPermission->delete();
                     }
                     $this->results[] = [
                         self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
                         self::RESULTS_MESSAGE => sprintf(
-                            "User Access Permissions %s %s",
-                            $idToDelete,
+                            "User Access Permission %s (%s %s - %s) %s",
+                            $userAccessPermission->id,
+                            $userAccessPermission->getDescription(),
+                            $userAccessPermission->start_time,
+                            $userAccessPermission->getExpirationTime(),
                             $this->getIsSimulation() ? "simulated deletion" : "deleted"
                         )
                     ];
