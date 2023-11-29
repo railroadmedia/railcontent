@@ -95,7 +95,7 @@ class RevenueCatController extends Controller
 
                 //create new user
                 $user = $this->TryGetUserFromNotificationData($data, true);
-                if($user) {
+                if (!$user) {
                     break;
                 }
 
