@@ -72,7 +72,8 @@
                     <strong>ONLY ${{ floatval($price) }}.</strong>
                 @endif
                 @if($price > 0)
-                    90-DAY GUARANTEE <br><a href="/" class="text-blue smaller">(OR FREE WITH A DRUMEO MEMBERSHIP)</a>
+                    90-DAY GUARANTEE
+{{--                        <br><a href="/" class="text-blue smaller">(OR FREE WITH A DRUMEO MEMBERSHIP)</a>--}}
                 @endif
             </p>
         </div>
@@ -320,7 +321,8 @@
                 @endif
 
                 @if($price > 0)
-                    90-DAY GUARANTEE <br><a href="/" class="text-blue smaller">(OR FREE WITH A DRUMEO MEMBERSHIP)</a>
+                    90-DAY GUARANTEE
+{{--                        <br><a href="/" class="text-blue smaller">(OR FREE WITH A DRUMEO MEMBERSHIP)</a>--}}
                 @endif
             </h4>
         </div>

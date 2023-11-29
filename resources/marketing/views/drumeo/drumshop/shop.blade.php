@@ -8,13 +8,7 @@
     <title>Drumeo Drum Shop - Get Lessons, T-Shirts, Gear, & Much More!</title>
     <meta name="description" content="Take your drumming to the next level with the largest collection of drum lessons in the world - or gear up for success with a selection of drum gear, t-shirts, sticks, and other cool drum swag.">
 
-    @if(Carbon\Carbon::create(2023, 11, 27, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/bf-drumeo-shop-share-image.jpg">
-    @elseif(Carbon\Carbon::create(2023, 11, 28, 8, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/cm-drumeo-shop-share-image.jpg">
-    @else
         <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/xmas-drumeo-shop-share-image.jpg">
-    @endif
     <meta property="og:title" content="Drumeo Drum Shop - Get Lessons, T-Shirts, Gear, & Much More!">
     <meta property="og:description" content="Take your drumming to the next level with the largest collection of drum lessons in the world - or gear up for success with a selection of drum gear, t-shirts, sticks, and other cool drum swag.">
     <meta property="og:url" content="https://www.drumeo.com/drumshop/">
@@ -33,6 +27,7 @@
 @section('body')
     @include('_partials.components.shop.promo-top-banner',[
         'text' => '<span class="text-promo">Save up to 86%</span> on drum lessons,<br class="sm:hidden"> tools, & merch.',
+        'bg' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg',
     ])
 
     @if(Session::has('addedProducts'))
@@ -95,42 +90,42 @@
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         @php
-            $bundles = [
-                [
-                    'slug' => 'https://www.drumeo.com/drumshop/ultimate-lessons-bundle',
-                    'desc' => 'Drumeo Discount<br class="sm:hidden"> + 10 Bonuses',
-                    'full' => true,
-                    'visible' => 1,
-                    'price' => 1473.94,
-                    'discountedPrice' => 150,
-                    'buttonColor' => '#0A69D0',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card2.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card-m2.jpg',
-                ],
-                [
-                    'slug' => 'https://www.drumeo.com/drumshop/better-hands-bundle',
-                    'desc' => 'Easy Rudiments Book + QuietPad<br> + Drumsticks + PadStand',
-                    'visible' => 1,
-                    'price' => 200.94,
-                    'discountedPrice' => 150.21,
-                    'buttonColor' => '#01AB5A',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-bundle-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
-                ],
-                [
-                    'slug' => '/lifetime',
-                    'desc' => 'Unlimited drum lessons <br>for life + more',
-                    'visible' => 1,
-                    'discountedPrice' => 1200,
-                    'price' => 1200,
-                    'buttonColor' => '#532700',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
-                ],
-            ];
+                $bundles = [
+                    [
+                        'slug' => 'https://www.drumeo.com/drumshop/ultimate-lessons-bundle',
+                        'desc' => '10 Free Bonuses <br class="sm:hidden"> Worth $1272',
+                        'full' => true,
+                        'visible' => 1,
+                        'price' => 1512.94,
+                        'discountedPrice' => 240,
+                        'buttonColor' => '#0A69D0',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card-m.jpg',
+                    ],
+                    [
+                        'slug' => 'https://www.drumeo.com/drumshop/better-hands-bundle',
+                        'desc' => 'Easy Rudiments Book + P4<br> + Drumsticks + PadStand',
+                        'visible' => 1,
+                        'price' => 200.94,
+                        'discountedPrice' => 150.21,
+                        'buttonColor' => '#01AB5A',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-bundle-white.png',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
+                    ],
+                    [
+                        'slug' => 'https://www.drumeo.com/drumshop/perfect-gift-bundle',
+                        'desc' => 'The perfect gift <br> for any drummer.',
+                        'visible' => 1,
+                        'price' => 331.95,
+                        'discountedPrice' => 240,
+                        'buttonColor' => '#f2192e',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/the-pefect-gift-bundle-white.png',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/perfect-gift-card.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/perfect-gift-card.jpg',
+                    ],
+                ];
         @endphp
         @include('_partials.layout.holiday.bundle-tiles', [
             "header" => 'Featured Deals',
@@ -227,24 +222,23 @@
                          "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/drumeo-ultimate-shop-thumb2.jpg",
                          "title" => "Ultimate Lessons Bundle",
                          "fullPrice" => 240,
-                         "price" => 150,
+                         "price" => 240,
                          "category" => "lessons",
                          'soldOut' => false,
                     ])
                 </div>
                 <div x-cloak x-show="filter === 'lessons'">
                     @include('musora.shop._shop-card-alt', [
-                         "itemURL" => "/lifetime",
+                         "itemURL" => "/drumshop/perfect-gift-bundle",
                          "sku" => null,
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lt-shop-thumb2.jpg",
-                         "title" => "Lifetime Bundle",
-                         "fullPrice" => 1200.00,
-                         "price" => 1200.00,
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/drumeo-pg-shop-thumb2.jpg",
+                         "title" => "The Perfect Gift Bundle",
+                         "fullPrice" => 331.95,
+                         "price" => 240,
                          "category" => "lessons",
                          'soldOut' => false,
                     ])
                 </div>
-
                 @foreach($lessons as $key => $lesson)
                     @include('musora.shop._shop-card-alt', [
                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
@@ -318,6 +312,37 @@
             </div>
         </section>
 
+
+        {{--   XMAS     --}}
+        <div id="30dd" class="anchor"></div>
+{{--        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">--}}
+{{--            <div class="container">--}}
+{{--                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> 30-Day Drummer Merch</strong></h5>--}}
+{{--                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">--}}
+{{--                    @foreach($thiryDD as $key => $thiryDDItem)--}}
+{{--                            @include('musora.shop._shop-card-alt', [--}}
+{{--                                "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $thiryDDItem->slug ),--}}
+{{--                                "sku" => $thiryDDItem->sku === 'drumeo' ? null : $thiryDDItem->sku,--}}
+{{--                                "badgeText" => $thiryDDItem->badge_text,--}}
+{{--                                "thumbnail" => $thiryDDItem->thumbnail,--}}
+{{--                                "packLogo" => $thiryDDItem->thumbnail_logo,--}}
+{{--                                "title" => $thiryDDItem->name,--}}
+{{--                                "packAuthor" => $thiryDDItem->instructor_name,--}}
+{{--                                "cardDescription" => $thiryDDItem->short_desc,--}}
+{{--                                "fullPrice" => $thiryDDItem->price,--}}
+{{--                                "price" => $thiryDDItem->discounted_price,--}}
+{{--                                "category" => strtolower($thiryDDItem->productType->name),--}}
+{{--                                "buttonText" => $thiryDDItem->sku === 'drumeo' || $thiryDDItem->sku === 'pianote' || $thiryDDItem->sku === 'singeo' || $thiryDDItem->sku === 'guitareo' ? 'see the deal' : null,--}}
+{{--                                "soldOut" => $thiryDDItem->sold_out,--}}
+{{--                                "includedEdge" => $thiryDDItem->included_edge,--}}
+{{--                                "sizes" => $thiryDDItem->sizes,--}}
+{{--                                'FCP' => $key < 4 ? true : null,--}}
+{{--                                "size_case_sensitive" => $thiryDDItem->size_case_sensitive,--}}
+{{--                            ])--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </section>--}}
 
         {{--   XMAS     --}}
         <div id="xmas" class="anchor"></div>

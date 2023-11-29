@@ -133,7 +133,7 @@
                         @endif
                     @endif
 
-                        <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>
+{{--                        <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>--}}
                     <br> <strong>** 90-DAY GUARANTEE **</strong>
                 </p>
             </div>
@@ -678,7 +678,7 @@
                         @endif
                     @endif
 
-                    <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>
+{{--                    <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>--}}
                     <br> <strong>** 90-DAY GUARANTEE **</strong>
                 </h6>
             </div>

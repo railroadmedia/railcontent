@@ -43,8 +43,10 @@
                     <s class="opacity-60">${{ floatval($productPrices['rhythm-and-groove']->price) }}</s>
                 @endif
                 <strong class="">Only ${{ floatval($productPrices['rhythm-and-groove']->discounted_price) }}</strong> {{--<span style="font-size: 75%;"><em>({{ round(100 - (100 * (floatval($productPrices['rhythm-and-groove']->discounted_price) / floatval($productPrices['rhythm-and-groove']->price)))) }}% off)</em></span>--}}</h3>
-            <p class="leading-tight mt-2"><strong><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a><br>
-                    <span class="text-coaches">** 90-DAY GUARANTEE **</span></strong></p>
+            <p class="leading-tight mt-2"><strong>
+{{--                    <a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a><br>--}}
+                    <span class="text-coaches">** 90-DAY GUARANTEE **</span>
+                </strong></p>
         </div>
         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 70%, #020b17);"></div>
     </header>
@@ -259,8 +261,10 @@
                 <strong class="">Only  ${{ floatval($productPrices['rhythm-and-groove']->discounted_price) }}</strong>
                     {{--<em style="font-size: 70%;">({{ round(100 - (100 * (floatval($productPrices['rhythm-and-groove']->discounted_price) / floatval($productPrices['rhythm-and-groove']->price)))) }}% off)</em>--}}
             </h3>
-            <p class="leading-tight mt-4"><strong><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a><br>
-                <span class="text-coaches">** 90-DAY GUARANTEE **</span></strong></p>
+            <p class="leading-tight mt-4"><strong>
+{{--                    <a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a><br>--}}
+                <span class="text-coaches">** 90-DAY GUARANTEE **</span>
+                </strong></p>
         </div>
     </section>
     <div class="h-5 sm:h-7 -mt-5 sm:-mt-7" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #00101d calc(50% + 1px));"></div>
