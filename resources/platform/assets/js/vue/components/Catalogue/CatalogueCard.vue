@@ -291,13 +291,12 @@ const isSongContent = computed(() => {
 
 const contentCreator = computed(() => {
     if (isSongContent.value) {
-        return contentModel.value.post.fields.find(field => field.key === 'artist').value
+        return contentModel.value.post.fields.find(field => field.key === 'artist')?.value || ''
     }
-    return contentModel.value.post.fields.find(field => field.key === 'instructor').value.name
+    return contentModel.value.post.fields.find(field => field.key === 'instructor')?.value.name || ''
 })
 
 const mappedData = computed(() => {
-    console.log('new cat card')
     const difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty').value
     if (Number.isFinite(Number(difficultyValue))) {
         contentModel.value.card.difficulty = difficultyValue;
