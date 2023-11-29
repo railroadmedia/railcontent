@@ -108,6 +108,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string|null $support_note
  * @property int|null $shopify_id
  * @property bool|false $has_recharge_subscription
+ * @property Carbon|null $recharge_renewal_date
  * @property bool|false $has_apple_subscription
  * @property bool|false $has_google_subscription
  * @property int $cio_synced_workspaces

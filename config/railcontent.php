@@ -65,6 +65,8 @@ return [
         'podcast',
         'song-tutorial',
         'song-tutorial-children',
+        'workout',
+        'challenge-part',
     ],
     'comment_assignation_owner_ids' => [
         102905,
@@ -752,10 +754,24 @@ return [
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
             ],
-            'workout' => [
-                'trailer1' => 448684113,
+            'challenge-part' => [
+                'name' => 'Challenge Part',
+                'icon' => 'icon-courses',
+                'description' => "... ",
+                'allowableFilters' => ['instructor','duration','style','difficulty'],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'sortBy' => '-published_on',
             ],
             'challenge' => [
+                'name' => 'Challenge',
+                'icon' => 'icon-courses',
+                'description' => "... ",
+                'allowableFilters' => ['instructor','duration','style','difficulty'],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'sortBy' => '-published_on',
+		'trailer1' => 448684113,
+            ],
+ 	    'workout' => [
                 'trailer1' => 448684113,
             ],
         ],
@@ -1289,6 +1305,8 @@ return [
         'song-part',
         'play-along-part',
         'song-tutorial-children',
+        'workout',
+        'challenge-part',
     ],
     'appUserListContentTypes' => [
         'course',
@@ -1556,6 +1574,7 @@ return [
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
+            'challenge' => 'lessons',
         ],
         'pianote' => [
             'learning-path' => 'levels',
@@ -1569,6 +1588,7 @@ return [
             'unit' => 'lessons',
             'song-tutorial' => 'lessons',
             'song-tutorial-children' => 'lessons',
+            'challenge' => 'lessons',
         ],
         'guitareo' => [
             'learning-path' => 'levels',
@@ -1579,6 +1599,7 @@ return [
             'semester-pack' => 'lessons',
             'song' => 'lessons',
             'play-along' => 'lessons',
+            'challenge' => 'lessons',
         ],
         'singeo' => [
             'learning-path' => 'levels',
@@ -1587,6 +1608,7 @@ return [
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
+            'challenge' => 'lessons',
         ],
 
     ],

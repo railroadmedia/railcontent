@@ -10,7 +10,7 @@
         </div>
         <!-- Continue section -->
         <MiniCatalogueSection title="Continue" seeAllAriaLabel="See All Lessons In Progress" v-if="hasStartedLessons"
-            :seeAllUrl="continueUrl" :preLoadedContent="startedContent" :isMiniView="true" />
+            :seeAllUrl="continueUrl" :preLoadedContent="startedContent" :isMiniView="true" :show-dropdown="true" />
         <!-- New section -->
         <MiniCatalogueSection title="New Releases" seeAllAriaLabel="See All New Releases" :seeAllUrl="newContentUrl"
             :preLoadedContent="newContent" />

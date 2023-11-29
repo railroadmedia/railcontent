@@ -129,6 +129,8 @@
         :src="mappedData.sheet_music" loading="lazy" />
     </div>
 
+    <DifficultyLabel v-if="mappedData.difficulty" class="flex tw-flex-col tw-justify-center tw-justify-center basic-col tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
+
     <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
     <template v-if="!is_search">
       <div v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`" class="
@@ -255,10 +257,13 @@
 <script>
 import Mixin from "./_mixin";
 import ThemeClasses from "../../mixins/ThemeClasses";
-
+import DifficultyLabel from '../../../components/DifficultyLabel/DifficultyLabel';
 export default {
   name: "CatalogueListItem",
   mixins: [Mixin, ThemeClasses],
+  components: {
+    DifficultyLabel,
+  },
   props: {
     brand: {
       type: String,
@@ -275,6 +280,18 @@ export default {
   },
   computed: {
     mappedData() {
+      const difficultyValue = this.contentModel.post.fields.find(field => field.key === `difficulty`).value
+      if (Number.isFinite(Number(difficultyValue))) {
+        this.contentModel.list.difficulty = difficultyValue;
+      }
+      else {
+        this.contentModel.list.difficulty = 'all';
+      }
+
+      const excludeWords = ['novice', 'beginner', 'intermediate', 'advanced', 'expert', 'all'];
+      const filteredColumnData = this.contentModel.list.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));
+      this.contentModel.list.column_data = filteredColumnData
+
       return this.contentModel.list;
     },
 

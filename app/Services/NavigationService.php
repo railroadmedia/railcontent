@@ -70,10 +70,10 @@ class NavigationService
                 'icon' => 'headphones',
             ],
             [
-                'name' => 'Coaches',
-                'path' => '/'.brand().'/coaches',
-                'icon' => 'whistle',
-            ]
+                'name' => 'Workouts',
+                'path' => '/'.brand().'/workouts',
+                'icon' => 'workouts',
+            ],
         ];
 
         $commonContentSection = [
@@ -141,6 +141,11 @@ class NavigationService
                             'name' => 'Shows',
                             'path' => '/'.brand().'/shows',
                             'icon' => 'shows',
+                        ],
+                        [
+                            'name' => 'Coaches',
+                            'path' => '/'.brand().'/coaches',
+                            'icon' => 'whistle',
                         ]
                     ]
             );
@@ -168,6 +173,11 @@ class NavigationService
                         'path' => '/'.brand().'/bootcamps',
                         'icon' => 'keys',
                     ],
+                    [
+                        'name' => 'Coaches',
+                        'path' => '/'.brand().'/coaches',
+                        'icon' => 'whistle',
+                    ]
                 ]
             );
             $navData = [
@@ -204,6 +214,11 @@ class NavigationService
                         'path' => '/'.brand().'/archives',
                         'icon' => 'archives',
                     ],
+                    [
+                        'name' => 'Coaches',
+                        'path' => '/'.brand().'/coaches',
+                        'icon' => 'whistle',
+                    ]
                 ]
             );
             $navData = [
@@ -222,6 +237,11 @@ class NavigationService
                         'path' => '/'.brand().'/routines',
                         'icon' => 'routines',
                     ],
+                    [
+                        'name' => 'Coaches',
+                        'path' => '/'.brand().'/coaches',
+                        'icon' => 'whistle',
+                    ]
                 ]
             );
             $navData = [
