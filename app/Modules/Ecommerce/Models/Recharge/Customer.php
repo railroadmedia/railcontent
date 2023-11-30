@@ -12,13 +12,13 @@ class Customer
     public Carbon $createdAt;
     public string $email;
     public object $externalCustomerId;
-    public Carbon $firstChargeProcessedAt;
+    public ?Carbon $firstChargeProcessedAt;
     public string $firstName;
     public bool $hasPaymentMethodInDunning; // (failed charge)
     public bool $hasValidPaymentMethod;
     public string $hash;
     public string $lastName;
-    public string $phone;
+    public ?string $phone;
     public int $activeSubscriptionCount;
     public int $totalSubscriptionsCount;
     public bool $isTaxExempt;
@@ -32,7 +32,7 @@ class Customer
         $this->createdAt = Carbon::parse($customerData->created_at);
         $this->email = $customerData->email;
         $this->externalCustomerId = $customerData->external_customer_id;
-        $this->firstChargeProcessedAt = Carbon::parse($customerData->first_charge_processed_at);
+        $this->firstChargeProcessedAt = !is_null($customerData->first_charge_processed_at) ? Carbon::parse($customerData->first_charge_processed_at) : null;
         $this->firstName = $customerData->first_name;
         $this->hasPaymentMethodInDunning = $customerData->has_payment_method_in_dunning;
         $this->hasValidPaymentMethod = $customerData->has_valid_payment_method;
