@@ -63,6 +63,8 @@ class UserAccessPermission extends Model
         $duration = '';
         if ($this->time_lifetime) {
             $duration = 'Lifetime';
+        } elseif ($this->time_fixed) {
+            $duration = 'Fixed';
         } elseif ($this->time_months) {
             $duration = $this->time_months . ' Month';
             if ($this->time_months > 1) {
@@ -73,7 +75,7 @@ class UserAccessPermission extends Model
             if ($this->time_days > 1) {
                 $duration .= 's';
             }
-        }elseif ($this->time_minutes) {
+        } elseif ($this->time_minutes) {
             $duration = $this->time_minutes . ' Minute';
             if ($this->time_minutes > 1) {
                 $duration .= 's';
