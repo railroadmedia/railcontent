@@ -7,6 +7,7 @@ use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Modules\UserManagementSystem\Models\User;
 
 /**
  * @property int $id
@@ -34,6 +35,11 @@ class UserAccessPermission extends Model
     public function permission()
     {
         return $this->belongsTo(Permission::class);
+    }
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function getExpirationTime(): string
