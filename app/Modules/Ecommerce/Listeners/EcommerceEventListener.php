@@ -38,8 +38,9 @@ class EcommerceEventListener
      */
     public function handleUserUpdated(UserUpdated|UsoraUserUpdated $userUpdated): void
     {
-        $oldEmail = $userUpdated->getOldUser()->email;
-        $newEmail = $userUpdated->getNewUser()->email;
+        $oldEmail = $userUpdated->getOldUser()->getEmail();
+        $newEmail = $userUpdated->getNewUser()->getEmail();
+
         // email change needs to sync to Shopify and Recharge
         if ($newEmail != $oldEmail && $userUpdated->getNewUser()->shopify_id) {
             $this->shopifyCustomerService->updateOrCreateShopifyCustomer($userUpdated->getNewUser());
