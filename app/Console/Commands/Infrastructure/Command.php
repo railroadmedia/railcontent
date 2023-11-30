@@ -107,7 +107,6 @@ abstract class Command extends CommandBase
         $skip = 0;
         $take = $chunks;
         $jobs = [];
-        $timeStart2 = microtime(true);
         $maxJobs = ceil($count / $take);
         $i = 0;
         $this->info("Creating $maxJobs jobs.");
@@ -118,14 +117,10 @@ abstract class Command extends CommandBase
             $job = call_user_func($getJob, $skip, $take);
             $skip += $chunks;
             $jobs[] = $job;
-
-            $diff2 = microtime(true) - $timeStart2;
-            $sec2 = intval($diff2);
             $i++;
-            if ($sec2 > 3) {
-                $timeStart2 = microtime(true);
+            Timer::afterSeconds(2, function () use ($i, $maxJobs) {
                 $this->info("Created $i/$maxJobs jobs.");
-            }
+            });
         }
         $nJobs = count($jobs);
         if ($nJobs == 0) {
