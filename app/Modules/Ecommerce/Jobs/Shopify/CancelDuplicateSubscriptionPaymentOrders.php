@@ -54,6 +54,8 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
 
     protected Collection $contentPermissionsLookup;
 
+    protected string $mcUserLink = "";
+
     public function __construct(
         array $paymentIds,
         protected bool $simulate,
@@ -86,16 +88,9 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
 
         // get the content permissions lookup, so we can reference them later on
         $this->contentPermissionsLookup = $contentPermissionsService->getContentPermissionsLookup();
-        /*
-        $this->logDebug(
-            sprintf(
-                "%s: running batch %s for payments %s",
-                $this->getClassName(),
-                $this->batchIndex,
-                $this->paymentIds->implode(", ")
-            )
-        );
-        */
+
+        // get the URL for Musora Center for this environment
+        $this->mcUserLink = get_musora_brand_base_url()."/musora-center#/users/";
 
         $this->cancelDuplicateOrders();
 
@@ -231,7 +226,7 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
                         self::RESULTS_MESSAGE => sprintf(
                             "Subscription Payment %s: %s",
                             $subscriptionPayment->id,
-                            $cancelResults["notice"] ?? "simulated cancellation"
+                            $this->getIsSimulation() ? "simulated cancellation" : "cancelled"
                         )
                     ];
 
@@ -482,6 +477,12 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
                 });
             }
         }
+
+        // log the route to the user in MC for easy verification
+        $this->results[] = [
+            self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_SUCCESS,
+            self::RESULTS_MESSAGE => $this->mcUserLink.$user->id
+        ];
     }
 
     /**
