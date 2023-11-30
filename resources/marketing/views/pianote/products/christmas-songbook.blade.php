@@ -95,7 +95,7 @@
                             <strong>ONLY ${{ floatval($productPrices['christmas-songbook']->discounted_price) }}</strong>
                         @endif
                         </h4>
-                    <a href="#final" class="join medium w-full anchor-slide">GET YOUR COPY &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[christmas-songbook]=1" class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
         </div>
