@@ -2,16 +2,13 @@
 
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
-use App\Modules\EventTracking\Avo\AvoHelper;
-use App\Modules\EventTracking\Services\CustomerIoService as EventTrackingCustomerIoService;
-use Avo;
-use Carbon\Carbon;
-use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
-use Exception;
 use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
-use Modules\UserManagementSystem\Models\User;
+use App\Modules\EventTracking\Services\CustomerIoService as EventTrackingCustomerIoService;
 use App\Modules\UserManagementSystem\Services\UserService;
+use Exception;
+use Modules\UserManagementSystem\Models\User;
 use Throwable;
 
 class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
@@ -45,7 +42,7 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
             $this->user = $userService->GetByIdOrNull($this->user->id);
             $accountNameBrandsToSync = config('event-data-synchronizer.customer_io_account_name_brands_to_sync', []);
             $accountNameToSyncAllBrand = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
-            $accountCreatedAt = Carbon::now()->timestamp;
+            $accountCreatedAt = $this->user->created_at->timestamp;
 
             foreach ($accountNameBrandsToSync as $accountName => $brands) {
                 // in order for this user to be synced to a specific workspace, they must have at least 1 product
@@ -78,9 +75,6 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
             $eventTrackingCustomerIoService->updateUserAttributes(
                 $this->user,
                 ['account_created_at' => $accountCreatedAt]
-            );
-            Avo::account_created(
-                AvoHelper::defaultEventProperties(['account_created_at' => $accountCreatedAt], $this->user)
             );
         } catch (Exception $exception) {
             $this->failed($exception);
