@@ -8,6 +8,7 @@ use App\Modules\Ecommerce\Services\ShopifySyncService;
 use Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
+use Railroad\Usora\Events\User\UserUpdated as UsoraUserUpdated;
 
 class EcommerceEventListener
 {
@@ -33,9 +34,9 @@ class EcommerceEventListener
     /**
      * Handle necessary updates to external ecommerce systems when the user has been updated.
      *
-     * @param  UserUpdated  $userUpdated
+     * @param  UserUpdated|UsoraUserUpdated  $userUpdated
      */
-    public function handleUserUpdated(UserUpdated $userUpdated): void
+    public function handleUserUpdated(UserUpdated|UsoraUserUpdated $userUpdated): void
     {
         $oldEmail = $userUpdated->getOldUser()->email;
         $newEmail = $userUpdated->getNewUser()->email;
