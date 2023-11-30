@@ -272,10 +272,16 @@ class UserAccessPermissionsService
     private function ensureUserProductAccess(
         User $user,
         Collection $contentPermissionsLookup
-    ): bool {
-        $userAccessPermissions = $this->getUserAccessPermissions($user->id);
+    ): void {
+        $permissions = $this->getUserAccessPermissionsQuery($user->id)
+            ->where('source', '!=', UserAccessPermissionsSourceEnum::Migration->value)
+            ->get();
+        $migrationPermissionLookup = $this->getUserAccessPermissionsQuery($user->id)
+            ->where('source', '=', UserAccessPermissionsSourceEnum::Migration->value)
+            ->get()
+            ->keyBy('permission_id');
+        $userAccessPermissions = new UserAccessPermissionsCollection($user->id, $permissions);
         $userPermissions = $this->buildUserPermissionsList($user->id, $contentPermissionsLookup);
-        $wasUpdated = false;
         foreach ($userPermissions as $permissionId => $dates) {
             $isLifeTime = $dates['expiration_date'] == null;
             $expirationDate = $isLifeTime ? Carbon::maxValue() : Carbon::parse($dates['expiration_date']);
@@ -285,31 +291,38 @@ class UserAccessPermissionsService
                 $userAccessExpirationDate = Carbon::now();
             }
             if ($userAccessExpirationDate < $expirationDate) {
-                $days = $isLifeTime ? 0 : ($expirationDate->diffInDays($userAccessExpirationDate) + 1);
                 //User products not synced with orders Add manual permission to fix missing access
                 $startDate = $userAccessExpirationDate->subDays(
                     config('ecommerce.days_before_access_revoked_after_expiry', 7)
                 );
-                $accessPermission = $this->createUserAccessPermission(
-                    $user,
-                    $permissionId,
-                    $startDate,
-                    UserAccessPermissionsSourceEnum::Migration,
-                    '',
-                    new Product(),
-                    UserAccessPermissionsStatusEnum::Active,
-                    $days,
-                    0,
-                    null,
-                    $isLifeTime
-                );
-
+                $accessPermission = $migrationPermissionLookup[$permissionId] ?? null;
                 if ($accessPermission) {
-                    $wasUpdated = true;
+                    $accessPermission->time_days = 0;
+                    $accessPermission->time_lifetime = $isLifeTime;
+                    $accessPermission->time_fixed = $isLifeTime ? null : $expirationDate;
+                    $accessPermission->save();
+                } else {
+                    $accessPermission = $this->createUserAccessPermission(
+                        $user,
+                        $permissionId,
+                        $startDate,
+                        UserAccessPermissionsSourceEnum::Migration,
+                        '',
+                        new Product(),
+                        UserAccessPermissionsStatusEnum::Active,
+                        0,
+                        0,
+                        $isLifeTime ? null : $expirationDate,
+                        $isLifeTime
+                    );
+                }
+            } else {
+                $accessPermission = $migrationPermissionLookup[$permissionId] ?? null;
+                if ($accessPermission) {
+                    $accessPermission->delete();
                 }
             }
         }
-        return $wasUpdated;
     }
 
     private function buildUserPermissionsList(int $userId, $permissionsLookup): array
