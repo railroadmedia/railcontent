@@ -69,6 +69,16 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
                         ->where('railcontent_user_permissions.start_date', '>', Carbon::now()->addDays(1));
                 });
                 break;
+            case "hasMigrationDays":
+                $query = $query->whereExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('user_access_permissions')
+                        ->whereRaw('user_access_permissions.user_id = usora_users.id')
+                        ->whereNull('user_access_permissions.time_fixed')
+                        ->where('user_access_permissions.source', 'migration')
+                    ->where('user_access_permissions.time_lifetime', false);
+                });
+                break;
             case "":
                 break;
             default:
