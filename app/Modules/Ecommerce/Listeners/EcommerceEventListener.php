@@ -8,6 +8,7 @@ use App\Modules\Ecommerce\Services\ShopifySyncService;
 use Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
+use Modules\UserManagementSystem\Models\User;
 use Railroad\Usora\Events\User\UserUpdated as UsoraUserUpdated;
 
 class EcommerceEventListener
@@ -38,16 +39,25 @@ class EcommerceEventListener
      */
     public function handleUserUpdated(UserUpdated|UsoraUserUpdated $userUpdated): void
     {
-        $oldEmail = $userUpdated->getOldUser()->getEmail();
-        $newEmail = $userUpdated->getNewUser()->getEmail();
+        if ($userUpdated instanceof UsoraUserUpdated) {
+            $newEmail = $userUpdated->getNewUser()->getEmail();
+            $oldEmail = $userUpdated->getOldUser()->getEmail();
+            // UsoraUserUpdated's User models are Railroad\Usora\Entities type, so get the
+            // Modules\UserManagementSystem\Models version, so we can interact with it the same way
+            $newUser = User::find($userUpdated->getNewUser()->getId());
+        } else {
+            $newEmail = $userUpdated->getNewUser()->email;
+            $oldEmail = $userUpdated->getOldUser()->email;
+            $newUser = $userUpdated->getNewUser();
+        }
 
         // email change needs to sync to Shopify and Recharge
-        if ($newEmail != $oldEmail && $userUpdated->getNewUser()->shopify_id) {
-            $this->shopifyCustomerService->updateOrCreateShopifyCustomer($userUpdated->getNewUser());
+        if ($newEmail != $oldEmail && $newUser->shopify_id) {
+            $this->shopifyCustomerService->updateOrCreateShopifyCustomer($newUser);
 
             try {
                 $updateSuccess = $this->rechargeGateway->updateCustomer(
-                    $userUpdated->getNewUser()->shopify_id,
+                    $newUser->shopify_id,
                     ["email" => $newEmail]
                 );
 
