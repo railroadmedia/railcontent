@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Jobs;
 
 use App\Console\Commands\Infrastructure\BatchQueryJob;
+use App\Console\Commands\Infrastructure\BatchQueryJobByIds;
 use App\Models\ShopifySync;
 use App\Modules\Ecommerce\Enums\SubscriptionIntervalType;
 use App\Modules\Ecommerce\Models\Subscription;
@@ -14,10 +15,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 
-class ShopifyCustomersSyncAllJob extends BatchQueryJob
+class ShopifyCustomersSyncAllJob extends BatchQueryJobByIds
 {
     private int $skip;
     private int $take;
+    protected array $ids;
+
     private int $startId;
     private int $endId;
     private string $customQuery;
@@ -40,6 +43,7 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
         $this->endId = $endId;
         $this->customQuery = $customQuery ?? "";
         $this->skipEventSync = $skipEventSync;
+        $this->init($skip, $take);
     }
 
     function getSkip(): int
@@ -50,6 +54,11 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
     function getTake(): int
     {
         return $this->take;
+    }
+
+    function getIds(): array
+    {
+        return $this->ids;
     }
 
     function getQuery(): Builder
@@ -76,7 +85,7 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
                         ->whereRaw('user_access_permissions.user_id = usora_users.id')
                         ->whereNull('user_access_permissions.time_fixed')
                         ->where('user_access_permissions.source', 'migration')
-                    ->where('user_access_permissions.time_lifetime', false);
+                        ->where('user_access_permissions.time_lifetime', false);
                 });
                 break;
             case "":
