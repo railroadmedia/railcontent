@@ -20,7 +20,7 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
     private int $take;
     private int $startId;
     private int $endId;
-    private bool $customQuery;
+    private string $customQuery;
     /**
      * @var false
      */
@@ -31,7 +31,7 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
         int $take,
         int $startId,
         int $endId,
-        $customQuery = false,
+        $customQuery = '',
         $skipEventSync = false
     ) {
         $this->skip = $skip;
@@ -59,6 +59,15 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJob
         switch ($this->customQuery) {
             case "hasRechargeSubscription":
                 $query = $query->where('has_recharge_subscription', true);
+                break;
+            case "futureMembershipIssue":
+                $query = $query->whereExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('railcontent_user_permissions')
+                        ->whereRaw('railcontent_user_permissions.user_id = usora_users.id')
+                        ->whereIn('railcontent_user_permissions.permission_id', [91, 92])
+                        ->where('railcontent_user_permissions.start_date', '>', Carbon::now()->addDays(1));
+                });
                 break;
             case "":
                 break;
