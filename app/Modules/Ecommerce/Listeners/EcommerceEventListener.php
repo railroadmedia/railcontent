@@ -41,7 +41,7 @@ class EcommerceEventListener
         $newEmail = $userUpdated->getNewUser()->email;
         // email change needs to sync to Shopify and Recharge
         if ($newEmail != $oldEmail && $userUpdated->getNewUser()->shopify_id) {
-            $this->shopifyCustomerService->createShopifyCustomer($userUpdated->getNewUser());
+            $this->shopifyCustomerService->updateOrCreateShopifyCustomer($userUpdated->getNewUser());
 
             try {
                 $updateSuccess = $this->rechargeGateway->updateCustomer(
