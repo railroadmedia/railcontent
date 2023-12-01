@@ -121,7 +121,7 @@ class LeadGenController extends BaseController
     }
     public function digitalChordsAndScales()
     {
-        return view('pianote.lead-gen.digital-chords-and-scales', ['theme' => 'pianote', 'recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.digital-chords-scales-guide', ['theme' => 'pianote', 'recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function beginnerBootcamp(Request $request, $domain, $page = null)
