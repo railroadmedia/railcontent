@@ -13,6 +13,7 @@ use Modules\UserManagementSystem\Models\User;
  * @property int $id
  * @property integer $user_id
  * @property integer $permission_id
+ * @property integer $product_id
  * @property UserAccessPermissionsSourceEnum $source
  * @property integer $source_hash
  * @property Carbon $start_time
