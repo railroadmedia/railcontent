@@ -21538,6 +21538,12 @@ a:visited{
 .tw-top-full{
   top: 100% !important;
 }
+.-tw-top-10{
+  top: -2.5rem !important;
+}
+.-tw-top-20{
+  top: -5rem !important;
+}
 .tw-z-0{
   z-index: 0 !important;
 }
@@ -22062,6 +22068,15 @@ a:visited{
 .tw-mt-auto{
   margin-top: auto !important;
 }
+.-tw-mt-40{
+  margin-top: -10rem !important;
+}
+.-tw-mt-60{
+  margin-top: -15rem !important;
+}
+.tw-mb-16{
+  margin-bottom: 4rem !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -22373,6 +22388,9 @@ a:visited{
 }
 .tw-h-screen{
   height: 100vh !important;
+}
+.tw-h-96{
+  height: 24rem !important;
 }
 .tw-max-h-0{
   max-height: 0px !important;
@@ -22743,6 +22761,9 @@ a:visited{
 }
 .tw-w-screen{
   width: 100vw !important;
+}
+.tw-w-72{
+  width: 18rem !important;
 }
 .tw-min-w-0{
   min-width: 0px !important;
@@ -24325,6 +24346,14 @@ a:visited{
   padding-top: 9px !important;
   padding-bottom: 9px !important;
 }
+.tw-px-7{
+  padding-left: 1.75rem !important;
+  padding-right: 1.75rem !important;
+}
+.tw-py-28{
+  padding-top: 7rem !important;
+  padding-bottom: 7rem !important;
+}
 .tw-pb-0{
   padding-bottom: 0px !important;
 }
@@ -25243,6 +25272,30 @@ a:visited{
 .body a:visited, .post-body a:visited {
   color: #0b76db;
 }
+.hover\:tw-bg-drumeo:hover.tw-btn-primary:hover,.hover\:tw-bg-drumeo:hover .tw-btn-primary:focus-visible{
+  background-color: #3C91E2;
+}
+.hover\:tw-bg-pianote:hover.tw-btn-primary:hover,.hover\:tw-bg-pianote:hover .tw-btn-primary:focus-visible{
+  background-color: #FA7683;
+}
+.hover\:tw-bg-guitareo:hover.tw-btn-primary:hover,.hover\:tw-bg-guitareo:hover .tw-btn-primary:focus-visible{
+  background-color: #66DFCD;
+}
+.hover\:tw-bg-singeo:hover.tw-btn-primary:hover,.hover\:tw-bg-singeo:hover .tw-btn-primary:focus-visible{
+  background-color: #9C33ED;
+}
+.hover\:tw-bg-drumeo:hover.tw-btn-primary:active{
+  background-color: #095EAF;
+}
+.hover\:tw-bg-pianote:hover.tw-btn-primary:active{
+  background-color: #AC1222;
+}
+.hover\:tw-bg-guitareo:hover.tw-btn-primary:active{
+  background-color: #00A18A;
+}
+.hover\:tw-bg-singeo:hover.tw-btn-primary:active{
+  background-color: #6900BA;
+}
 .tw-peer:checked ~ .peer-checked\:tw-bg-drumeo.tw-btn-primary:hover,.tw-peer:checked ~ .peer-checked\:tw-bg-drumeo .tw-btn-primary:focus-visible{
   background-color: #3C91E2;
 }
@@ -25541,6 +25594,22 @@ a:visited{
 .hover\:tw-bg-white:hover{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+}
+.hover\:tw-bg-drumeo:hover{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(11 118 219 / var(--tw-bg-opacity)) !important;
+}
+.hover\:tw-bg-guitareo:hover{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 201 172 / var(--tw-bg-opacity)) !important;
+}
+.hover\:tw-bg-pianote:hover{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(246 26 48 / var(--tw-bg-opacity)) !important;
+}
+.hover\:tw-bg-singeo:hover{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(131 0 233 / var(--tw-bg-opacity)) !important;
 }
 .hover\:tw-bg-opacity-10:hover{
   --tw-bg-opacity: 0.1 !important;
@@ -25894,6 +25963,18 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
+:is(.tw-dark .dark\:tw-bg-\[\#030303\]){
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(3 3 3 / var(--tw-bg-opacity)) !important;
+}
+:is(.tw-dark .dark\:tw-bg-\[\#1B1B1B\]){
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(27 27 27 / var(--tw-bg-opacity)) !important;
+}
+:is(.tw-dark .dark\:tw-bg-\[\#303030\]){
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(48 48 48 / var(--tw-bg-opacity)) !important;
+}
 :is(.tw-dark .dark\:tw-text-\[\#000C17\]){
   --tw-text-opacity: 1 !important;
   color: rgb(0 12 23 / var(--tw-text-opacity)) !important;
@@ -26204,6 +26285,9 @@ a:visited{
   .sm\:tw-mt-14{
     margin-top: 3.5rem !important;
   }
+  .sm\:-tw-mt-52{
+    margin-top: -13rem !important;
+  }
   .sm\:tw-block{
     display: block !important;
   }
@@ -26251,6 +26335,9 @@ a:visited{
   }
   .sm\:tw-h-auto{
     height: auto !important;
+  }
+  .sm\:tw-h-48{
+    height: 12rem !important;
   }
   .sm\:tw-max-h-\[260px\]{
     max-height: 260px !important;
@@ -26315,6 +26402,9 @@ a:visited{
   }
   .sm\:tw-max-w-none{
     max-width: none !important;
+  }
+  .sm\:tw-max-w-sm{
+    max-width: 24rem !important;
   }
   .sm\:tw-flex-1{
     flex: 1 1 0% !important;
@@ -26456,6 +26546,10 @@ a:visited{
     padding-top: 2.25rem !important;
     padding-bottom: 2.25rem !important;
   }
+  .sm\:tw-py-20{
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+  }
   .sm\:tw-pb-6{
     padding-bottom: 1.5rem !important;
   }
@@ -26519,6 +26613,10 @@ a:visited{
   .sm\:tw-text-xl{
     font-size: 1.25rem !important;
     line-height: 1.75rem !important;
+  }
+  .sm\:tw-text-2xl{
+    font-size: 1.5rem !important;
+    line-height: 2rem !important;
   }
   .sm\:tw-font-normal{
     font-weight: 400 !important;
@@ -26779,6 +26877,9 @@ a:visited{
   .md\:tw-h-full{
     height: 100% !important;
   }
+  .md\:tw-h-56{
+    height: 14rem !important;
+  }
   .md\:tw-w-1\/2{
     width: 50% !important;
   }
@@ -26871,6 +26972,9 @@ a:visited{
   }
   .md\:tw-w-full{
     width: 100% !important;
+  }
+  .md\:tw-w-96{
+    width: 24rem !important;
   }
   .md\:tw-max-w-2xl{
     max-width: 42rem !important;
@@ -27126,6 +27230,9 @@ a:visited{
   }
   .md\:tw-pt-\[40px\]{
     padding-top: 40px !important;
+  }
+  .md\:tw-pl-5{
+    padding-left: 1.25rem !important;
   }
   .md\:tw-text-left{
     text-align: left !important;
@@ -27719,6 +27826,9 @@ a:visited{
   .lg\:tw-pt-12{
     padding-top: 3rem !important;
   }
+  .lg\:tw-pl-10{
+    padding-left: 2.5rem !important;
+  }
   .lg\:tw-text-left{
     text-align: left !important;
   }
@@ -27821,6 +27931,9 @@ a:visited{
   }
   .xl\:tw-mt-auto{
     margin-top: auto !important;
+  }
+  .xl\:tw-mt-0{
+    margin-top: 0px !important;
   }
   .xl\:tw-line-clamp-3{
     overflow: hidden !important;
@@ -28035,6 +28148,9 @@ a:visited{
   }
   .\32xl\:tw-mt-0{
     margin-top: 0px !important;
+  }
+  .\32xl\:tw-ml-16{
+    margin-left: 4rem !important;
   }
   .\32xl\:tw-hidden{
     display: none !important;
