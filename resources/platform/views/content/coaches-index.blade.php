@@ -78,7 +78,6 @@
                             :six-wide="true"
                             :force-wide-thumbs="true"
                             :pre-loaded-content="{{ $latestLessons }}"
-                            :show-filter="false"
                         >
                             <div class="tw-flex tw-flex-row nmh-1">
                                 @for($i = 0; $i < 6; $i++)
@@ -125,7 +124,6 @@
                                 :four-wide="true"
                                 :force-wide-thumbs="true"
                                 :pre-loaded-content="{{ $latestSubscribedLessons }}"
-                                :show-filter="false"
                             >
                                 <div class="tw-flex tw-flex-row nmh-1">
                                     @for($i = 0; $i < 6; $i++)
@@ -159,20 +157,41 @@
     @endcomponent
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mb-3">
-        <collection-wrapper
-            :brand="{{ $brand }}"
-            collection-type="coach"
-            :filterable-values="{{ json_encode(['focus','style']) }}"
-            :included-types="{{ json_encode(['instructor']) }}"
-            limit="{{ $limitOverride ?? 18 }}"
-            :pre-loaded-content="{{ $coaches->toResponseRawJson() }}"
-            :required-fields="{{json_encode(['is_coach,1'])}}"
-            :statuses="{{ json_encode(['published', 'scheduled']) }}"
-            :tab-options="{{ json_encode([
-                [ 'key' => 'allCoaches', 'value' => 'All Coaches' ],
-                [ 'key' => 'subscribedCoaches', 'value' => 'Subscribed Coaches' ]
-            ]) }}"
-        />
+        <transition appear name="fade">
+            <content-catalogue
+                    theme-color="{{ $brand }}"
+                    brand="{{ $brand }}"
+                    content-endpoint="/railcontent/content?only_subscribed={{$onlySubscribedCoaches}}"
+                    catalogue-type="coaches-grid"
+                    limit="{{ $limitOverride ?? 18 }}"
+                    :infinite-scroll="true"
+                    :statuses="{{ json_encode(['published', 'scheduled']) }}"
+                    :filterable-values="{{ json_encode(['focus','style']) }}"
+                    :included-types="{{ json_encode(['instructor']) }}"
+                    :required-fields="{{json_encode(['is_coach,1'])}}"
+                    :pre-loaded-content="{{ $coaches->toResponseRawJson() }}"
+                    user-id="{{ auth()->id() }}"
+                    :is-admin="{{ json_encode(user()->isAdmin()) }}"
+                    :use-url-params="true"
+                    :lock-unowned="true"
+                    :show-loading-animation="true"
+                    sort-override="slug"
+                    :six-wide="true"
+
+                    @if(!empty($showSearch))
+                    :search-bar="true"
+                    :total-results="{{ $limitOverride ?? 18 }}"
+                    :search-endpoint="{{json_encode(url()->route('content.index'))}}"
+                    @endif
+            >
+                @for($i = 0; $i < ($limitOverride ?? 18); $i++)
+                    @include('partials.bladesora.members.skeletons.card-item', [
+                    "cardClass" => 'six-wide',
+                    ])
+                @endfor
+            </content-catalogue>
+        </transition>
     </div>
 
 @endsection
+
