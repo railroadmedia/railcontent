@@ -51,10 +51,8 @@ class EcommerceEventListener
             $newUser = $userUpdated->getNewUser();
         }
 
-        // email change needs to sync to Shopify and Recharge
+        // email change needs to sync to Recharge and Shopify (in that order!)
         if ($newEmail != $oldEmail && $newUser->shopify_id) {
-            $this->shopifyCustomerService->updateOrCreateShopifyCustomer($newUser);
-
             try {
                 $updateSuccess = $this->rechargeGateway->updateCustomer(
                     $newUser->shopify_id,
@@ -67,6 +65,8 @@ class EcommerceEventListener
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
             }
+
+            $this->shopifyCustomerService->updateOrCreateShopifyCustomer($newUser);
         }
     }
 }
