@@ -364,11 +364,11 @@ export default {
                 return this.userAccessPermissions;
             } else if (this.selectedProductType === 1) {
                 return this.userAccessPermissions.filter(permission =>
-                    permission.permission_name.includes("Member") && !permission.permission_name.includes("Edge") && !permission.permission_name.includes("Pianote Membership")
+                    permission.permission_name.includes("Member") && !permission.permission_name.includes("Edge") && !permission.permission_name.includes("Pianote Membership") && !permission.permission_name.includes("Singeo Membership") && !permission.permission_name.includes("Guitareo Membership")
                 );
             } else if (this.selectedProductType === 0) {
                 return this.userAccessPermissions.filter(permission =>
-                    !permission.permission_name.includes("Member") && !permission.permission_name.includes("Edge") && !permission.permission_name.includes("Pianote Membership")
+                    !permission.permission_name.includes("Member") && !permission.permission_name.includes("Edge") && !permission.permission_name.includes("Pianote Membership") && !permission.permission_name.includes("Singeo Membership") && !permission.permission_name.includes("Guitareo Membership")
                 );
             }
         },
