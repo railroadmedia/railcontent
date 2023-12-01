@@ -94,7 +94,7 @@ class RevenueCatController extends Controller
                 echo 'INITIAL_PURCHASE';
 
                 //create new user
-                $user = $this->TryGetUserFromNotificationData($data, true);
+                $user = $this->tryGetUserFromNotificationData($data, true);
                 if (!$user) {
                     break;
                 }
@@ -107,6 +107,13 @@ class RevenueCatController extends Controller
 
                 //get Musora product
                 $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
+                if (!$musoraProducts->isEmpty()) {
+                    Log::error(
+                        "RevenueCatController processNotification::INITIAL_PURCHASE - musora product not found: $productId"
+                    );
+                    break;
+                }
+
                 $musoraProduct = $musoraProducts->first();
 
                 $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
@@ -147,7 +154,7 @@ class RevenueCatController extends Controller
                 echo 'RENEWAL';
 
 
-                $user = $this->TryGetUserFromNotificationData($data, true);
+                $user = $this->tryGetUserFromNotificationData($data, true);
                 if (!$user) {
                     break;
                 }
@@ -192,7 +199,7 @@ class RevenueCatController extends Controller
                 }
                 break;
             case 'CANCELLATION':
-                $user = $this->TryGetUserFromNotificationData($data, false);
+                $user = $this->tryGetUserFromNotificationData($data, false);
                 if (!$user) {
                     break;
                 }
@@ -221,6 +228,13 @@ class RevenueCatController extends Controller
 
                 //get Musora product
                 $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
+                if (!$musoraProducts->isEmpty()) {
+                    Log::error(
+                        "RevenueCatController processNotification::CANCELLATION - musora product not found: $productId"
+                    );
+                    break;
+                }
+
                 $musoraProduct = $musoraProducts->first();
 
                 $this->customerIoService->updateCustomerIoAttributesFromRevenueCat($user, $data['event'], $musoraProduct);
@@ -241,7 +255,7 @@ class RevenueCatController extends Controller
                 }
                 break;
             case 'EXPIRATION':
-                $user = $this->TryGetUserFromNotificationData($data, false);
+                $user = $this->tryGetUserFromNotificationData($data, false);
                 if (!$user) {
                     break;
                 }
@@ -253,7 +267,7 @@ class RevenueCatController extends Controller
             case 'PRODUCT_CHANGE':
                 break;
             case 'BILLING_ISSUE':
-                $user = $this->TryGetUserFromNotificationData($data, false);
+                $user = $this->tryGetUserFromNotificationData($data, false);
                 if (!$user) {
                     break;
                 }
@@ -263,6 +277,12 @@ class RevenueCatController extends Controller
 
                 //get Musora product
                 $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
+                if (!$musoraProducts->isEmpty()) {
+                    Log::error(
+                        "RevenueCatController processNotification::BILLING_ISSUE - musora product not found: $productId"
+                    );
+                    break;
+                }
                 $musoraProduct = $musoraProducts->first();
 
                 $data = [];
@@ -288,20 +308,20 @@ class RevenueCatController extends Controller
         $createIfNotExists,
     ) : ?User
     {
+        $subscriberEmail = $data['event']['subscriber_attributes']['email']['value'] ?? null;
         $user = $this->revenueCatService->getUser(
-            $data['event']['subscriber_attributes']['email']['value'] ?? null,
+            $subscriberEmail,
             $data['event']['original_app_user_id'],
             $createIfNotExists,
             $data['event']['aliases']
         );
         if (!$user) {
             $eventType = $data['event']['type'];
-            $email = $data['event']['subscriber_attributes']['email']['value'] ?? '';
             Log::error(
                 'RevenueCatController processNotification::' .
                 $eventType .
                 '- user not found email: ' .
-                $email .
+                $subscriberEmail .
                 ' original_app_user_id: ' .
                 $data['event']['original_app_user_id']
             );
