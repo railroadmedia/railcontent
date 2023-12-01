@@ -283,7 +283,7 @@ class RevenueCatController extends Controller
         return response()->json();
     }
 
-    private function TryGetUserFromNotificationData(
+    private function tryGetUserFromNotificationData(
         $data,
         $createIfNotExists,
     ) : ?User
