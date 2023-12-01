@@ -47,6 +47,8 @@
                     >
                         {{ item }}
                     </div>
+                    <!-- Difficulty Label -->
+                    <DifficultyLabel v-if="mappedData.difficulty" class="basic-col tw-justify-start tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
                 </div>
             </div>
 
@@ -82,10 +84,14 @@ import { DateTime } from 'luxon';
 import ContentModel from '../../assets/js/models/_model.js';
 import UserCatalogueEvents from '../../mixins/UserCatalogueEvents';
 import ThemeClasses from '../../mixins/ThemeClasses';
+import DifficultyLabel from '../../../../vue/components/DifficultyLabel/DifficultyLabel'
 
 export default {
     name: 'ScheduleItem',
     mixins: [UserCatalogueEvents, ThemeClasses],
+    components: {
+        DifficultyLabel,
+    },
     props: {
         item: {
             type: Object,
@@ -147,7 +153,7 @@ export default {
     },
     methods: {
 
-        getContentModel() {
+        getContentModel () {
             const shows = ContentHelpers.shows();
             let type = this.contentTypeOverride || this.item.type;
 
@@ -159,6 +165,18 @@ export default {
                 brand: this.brand,
                 post: this.item,
             });
+
+            const difficultyValue = model.post.fields.find(field => field.key === 'difficulty').value
+            if (Number.isFinite(Number(difficultyValue))) {
+                model.schedule.difficulty = difficultyValue;
+            }
+            else {
+                model.schedule.difficulty = 'all';
+            }
+
+            const excludeWords = ['novice', 'beginner', 'intermediate', 'advanced', 'expert', 'all'];
+            const filteredColumnData = model.schedule.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));
+            model.schedule.column_data = filteredColumnData
 
             return model.schedule;
         },
