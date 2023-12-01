@@ -96,7 +96,6 @@ class RechargeWebhookController extends Controller
              */
             $data = [];
             $data['charge_attempts'] = $charge['number_times_tried'];
-            $data['charge_attempts'] = $charge['number_times_tried'];
 
             $this->customerIoService->syncChargeFailedAttributes($user, $product->brand, $charge);
         } catch (Exception $e) {
