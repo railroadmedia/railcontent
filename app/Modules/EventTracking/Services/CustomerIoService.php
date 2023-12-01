@@ -102,7 +102,7 @@ class CustomerIoService
     }
 
     /**
-     * @param int $userId
+     * @param User $user
      * @param string $brand
      * @param array $data
      */
