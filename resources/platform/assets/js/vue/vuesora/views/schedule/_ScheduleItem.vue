@@ -48,7 +48,7 @@
                         {{ item }}
                     </div>
                     <!-- Difficulty Label -->
-                    <DifficultyLabel v-if="mappedData.difficulty" class="basic-col tw-justify-start tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
+                    <DifficultyLabel v-if="mappedData.difficulty" class="basic-col dark:tw-text-[#9EC0DC] tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
                 </div>
             </div>
 

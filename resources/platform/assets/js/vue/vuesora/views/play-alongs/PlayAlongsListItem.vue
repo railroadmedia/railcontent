@@ -58,11 +58,11 @@
                     >-</span>
                     {{ item }}
                 </span>
-                <DifficultyLabel v-if="mappedData.difficulty" class="basic-col tw-justify-start tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
+                <DifficultyLabel v-if="mappedData.difficulty" class="basic-col tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
             </p>
         </div>
 
-        <DifficultyLabel v-if="mappedData.difficulty" class="tw-hidden xl:tw-flex basic-col tw-justify-start tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
+        <DifficultyLabel v-if="mappedData.difficulty" class="tw-hidden xl:tw-flex basic-col tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
 
         <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
         <div
