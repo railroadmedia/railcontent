@@ -253,7 +253,7 @@ class RevenueCatController extends Controller
             case 'PRODUCT_CHANGE':
                 break;
             case 'BILLING_ISSUE':
-                $user = $this->TryGetUserFromNotificationData($data, false, "BILLING_ISSUE");
+                $user = $this->TryGetUserFromNotificationData($data, false);
                 if (!$user) {
                     break;
                 }
