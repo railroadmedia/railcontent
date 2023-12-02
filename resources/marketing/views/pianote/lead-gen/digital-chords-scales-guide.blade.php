@@ -50,6 +50,7 @@
                             "formId" => "Pianote - Engagement - Trigger - Digital Chords And Scales - Web Form",
                     "buttonText" => "Get my book",
                     "stacked" => true,
+                    'inputBorder' => '1px solid #CCC',
                 ])
             </div>
         </div>
@@ -89,48 +90,13 @@
 
         </div>
     </section>
-    <section class="text-center px-5 py-10 md:py-20 lg:py-24 text-white" style="background-color:#0e1523;">
-        <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2 class="leading-tight mb-5 sm:mb-10"><strong>Take a look inside:</strong></h2>
-            @php
-                $slides = [
-                 [
-                     'img' => 'marketing/pianote/lead-gen/digital-chords-and-scales/gallery-01.jpg',
-                 ],
-                 [
-                     'img' => 'marketing/pianote/lead-gen/digital-chords-and-scales/gallery-02.jpg',
-                 ],
-                 [
-                     'img' => 'marketing/pianote/lead-gen/digital-chords-and-scales/gallery-03.jpg',
-                 ],
-                 [
-                     'img' => 'marketing/pianote/lead-gen/digital-chords-and-scales/gallery-04.jpg',
-                 ],
-                 [
-                     'img' => 'marketing/pianote/lead-gen/digital-chords-and-scales/gallery-05.jpg',
-                 ],
-             ];
-            @endphp
-
-            <div class="flex flex-wrap items-center">
-                <div class="w-full sm:w-1/2 sm:order-1">
-                    <div class="p-2 w-full"><div data-open="image1" class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl"
-                            style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')"></div></div>
-                </div>
-                <div class="w-1/2 sm:w-1/4">
-                    <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
-                            style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')"></div></div>
-                    <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
-                            style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}')"></div></div>
-                </div>
-                <div class="w-1/2 sm:w-1/4 sm:order-2">
-                    <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
-                            style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')"></div></div>
-                    <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
-                            style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')"></div></div>
-                </div>
-            </div>
-        </div>
+    <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/digital-chords-and-scales/piano-bg.jpg');">
+        <h3 class="leading-tight"><strong>Take A Look Inside.</strong></h3>
+        <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative" style="bottom:-7px"></i> <em>Click to see inside the book!</em> <i class="fa-light fa-arrow-turn-down ml-1 relative" style="bottom:-7px"></i></p>
+        <a target="_blank" href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/lead-gen/digital-chords-and-scales/preview-cas.pdf" class="relative">
+            <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/digital-chords-and-scales/piano-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/lead-gen/digital-chords-and-scales/piano.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+        </a>
     </section>
     @include('pianote.lead-gen.partials.quick-questions', [
         'textColor' => 'black',
@@ -160,6 +126,7 @@
                             "formId" => "Pianote - Engagement - Trigger - Digital Chords And Scales - Web Form2",
                     "buttonText" => "Get my book",
                     "stacked" => true,
+                    'inputBorder' => '1px solid #CCC',
                 ])
             </div>
         </div>
