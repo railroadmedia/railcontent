@@ -100,8 +100,7 @@ class SubscriptionService
                 includeFixedTimes: false
             )->startOfDay();
             if ($mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay() != $membershipExpirationDate
-                && $membershipExpirationDate > Carbon::today()
-                && $mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay() > $membershipExpirationDate) {
+                && $membershipExpirationDate > Carbon::today()) {
                 Log::info(
                     "Updating subscription next charge date for user $user->id from $mostRecentActiveSubscription->nextChargeScheduledAt to $membershipExpirationDate"
                 );
