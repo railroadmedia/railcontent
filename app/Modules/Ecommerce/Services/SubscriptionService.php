@@ -97,7 +97,7 @@ class SubscriptionService
             }
             $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate(
                 includeBuffer: false,
-                includeFixedTimes: false
+                includeFixedTimes: true
             )->startOfDay();
             $diff = abs($mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay()->diffInDays($membershipExpirationDate));
             if ($diff > 1
