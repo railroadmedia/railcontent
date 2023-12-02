@@ -87,16 +87,30 @@ class SubscriptionService
             foreach ($activeMembershipSubscriptions as $activeMembershipSubscription) {
                 $this->recharge->cancelSubscription($activeMembershipSubscription, 'Lifetime Member');
             }
-        } elseif ($activeMembershipSubscriptions->count() > 1) {
-            foreach ($activeMembershipSubscriptions as $activeMembershipSubscription) {
-                if ($activeMembershipSubscription->id != $mostRecentActiveSubscription->id) {
-                    $this->recharge->cancelSubscription($activeMembershipSubscription, 'Duplicate Subscription');
+        } elseif ($mostRecentActiveSubscription) {
+            if ($activeMembershipSubscriptions->count() > 1) {
+                foreach ($activeMembershipSubscriptions as $activeMembershipSubscription) {
+                    if ($activeMembershipSubscription->id != $mostRecentActiveSubscription->id) {
+                        $this->recharge->cancelSubscription($activeMembershipSubscription, 'Duplicate Subscription');
+                    }
                 }
             }
-
-            $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate(includeBuffer: false);
-
-            $this->recharge->updateSubscriptionNextChargeDate($mostRecentActiveSubscription, $membershipExpirationDate);
+            $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate(
+                includeBuffer: false,
+                includeFixedTimes: false
+            )->startOfDay();
+            if ($mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay() != $membershipExpirationDate
+                && $membershipExpirationDate > Carbon::today()
+                && $mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay() > $membershipExpirationDate) {
+                Log::info(
+                    "Updating subscription next charge date for user $user->id from $mostRecentActiveSubscription->nextChargeScheduledAt to $membershipExpirationDate"
+                );
+                $this->recharge->updateSubscriptionNextChargeDate(
+                    $mostRecentActiveSubscription,
+                    $membershipExpirationDate
+                );
+                $mostRecentActiveSubscription->nextChargeScheduledAt = $membershipExpirationDate;
+            }
         }
 
         // SRR-82 set the subscription type when the user has a Recharge subscription
