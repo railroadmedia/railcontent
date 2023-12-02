@@ -176,7 +176,7 @@ class Product extends Model
 
     public function bundles()
     {
-        return $this->hasManyThrough( Product::class,Bundle::class, 'bundle_id', 'id', 'id', 'product_id')->select(['products.name', 'bundles.id', 'bundles.product_id as bundle_product_id', 'bundles.lifetime_access', 'products.bundle_img', 'products.bundle_desc', 'products.bundle_free_shipping', 'products.price', 'bundles.free_bonus'])->orderBy('order_number');
+        return $this->hasManyThrough( Product::class,Bundle::class, 'bundle_id', 'id', 'id', 'product_id')->select(['products.name', 'bundles.id', 'bundles.product_id as bundle_product_id', 'bundles.lifetime_access', 'products.bundle_img', 'products.thumbnail', 'products.thumbnail_logo', 'products.bundle_desc', 'products.bundle_free_shipping', 'products.price', 'bundles.free_bonus'])->orderBy('order_number');
     }
 
     public function sizeChart()
