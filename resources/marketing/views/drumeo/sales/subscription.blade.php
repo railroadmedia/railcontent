@@ -164,7 +164,12 @@
     @endphp
 
     @if(!empty($bfVersion))
-
+        @include('_partials.layout.holiday.homepage-top-banner',[
+            'text' => 'Get 10 free bonuses worth $1272.94',
+            'text2' => 'Get 10 free bonuses worth $1272.94.',
+            'vimeo' => '885338592',
+            'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',
+        ])
     @elseif(!empty($beginnerVersion))
         @include('musora.sales.components.header-section', [
             'header' => 'Learn beginner beats, fills<br> and songs on the drums.',
