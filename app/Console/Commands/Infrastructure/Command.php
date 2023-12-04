@@ -107,6 +107,9 @@ abstract class Command extends CommandBase
         $skip = 0;
         $take = $chunks;
         $jobs = [];
+        $maxJobs = ceil($count / $take);
+        $i = 0;
+        $this->info("Creating $maxJobs jobs.");
         while ($skip < $count) {
             if (($skip + $take) > $count) {
                 $take = $count % $take;
@@ -114,6 +117,10 @@ abstract class Command extends CommandBase
             $job = call_user_func($getJob, $skip, $take);
             $skip += $chunks;
             $jobs[] = $job;
+            $i++;
+            Timer::afterSeconds(2, function () use ($i, $maxJobs) {
+                $this->info("Created $i/$maxJobs jobs.");
+            });
         }
         $nJobs = count($jobs);
         if ($nJobs == 0) {

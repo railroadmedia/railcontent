@@ -5,7 +5,7 @@
     />
 
     <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white tw-pt-6">
-        <section>
+        <section v-if="carouselData.length">
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
                 <div class="tw-flex tw-items-start">
                     <a :href="`/${brand}/workouts/challenges`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mr-2">Featured Challenges</a>
@@ -19,7 +19,9 @@
             <hr class="tw-border-[#65656b40] dark:tw-border-[#223F57]" />
             <HeaderCarousel :preloaded-carousel="carouselData" />
         </section>
+
         <br>
+
         <section>
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
                 <div class="tw-flex tw-items-start">
@@ -29,7 +31,7 @@
                 </div>
             </div>
             <hr class="tw-border-[#65656b40] dark:tw-border-[#223F57]" />
-            <template v-if="continueData">
+            <template v-if="continueData.data">
                 <section class="tw-container tw-mx-auto dark:tw-text-white lg:tw-px-4">
                     <!-- Section Title -->
                     <div class="tw-flex tw-items-center tw-mt-5 tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
@@ -81,7 +83,7 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import { storeToRefs } from 'pinia';
 import {useUserStore} from "../../stores/user";
 
@@ -131,6 +133,9 @@ const props = defineProps({
     },
 });
 
+onMounted(()=> {
+    console.log('continueData',props.carouselData.length)
+})
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 

@@ -49,7 +49,7 @@ class ShopController extends BaseController
 
         $xmas = $products->whereIn('id', [224, 226, 229]);
 
-        $thirtyDD = $products->whereIn('id', [217, 216, 215, 214, 213, 212]);
+        $thirtyDD = Product::whereHas('brand', fn($query) => $query->where('name', 'drumeo'))->where([['sold_out', 0]])->orderBy('display_order')->get()->whereIn('id', [217, 216, 215, 214, 213, 212]);
 
         return view('drumeo.drumshop.shop', [
             'lessons' => $lessons,

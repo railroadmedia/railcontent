@@ -159,7 +159,6 @@ export default {
         },
         mappedData: {
             get() {
-                console.log('coach catalogue card')
                 const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value
                 if (Number.isFinite(Number(difficultyValue))) {
                     this.contentModel.card.difficulty = difficultyValue;
