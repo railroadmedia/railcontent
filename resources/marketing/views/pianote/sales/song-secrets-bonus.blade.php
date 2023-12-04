@@ -172,7 +172,7 @@
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> 1000+ Officially licensed songs</li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Detailed song tutorials</li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Live support</li>
-                            <li class="leading-tight"><i class="fa-li fas fa-check text-pianote"></i> 10 FREE Bonuses</li>
+                            <li class="leading-tight"><i class="fa-li fas fa-check text-pianote"></i> 11 FREE Bonuses</li>
                         </ul>
                     </div>
                     <div class="w-72 lg:w-96 mx-auto sm:mx-0">
@@ -575,7 +575,6 @@ That’s the Play Better Guarantee™.',
                         <p class="w-full leading-normal mt-2">
                             <strong class="font-black leading-tight inline-block mb-1">Digital Chords &amp; <br>Scales Guide</strong><br>
                             <span style="text-transform:uppercase; display:inline-block;">
-<s class="opacity-40">$39</s>
 <strong class="text-musora">FREE</strong></span><br>
                             <em>
                                 Instant Access
