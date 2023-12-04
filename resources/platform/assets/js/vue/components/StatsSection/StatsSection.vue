@@ -1,39 +1,30 @@
-<script>
+<script setup>
 import { textColor, bgColor, bgBottomGradients } from '../../../constants/brands.js'
-import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
+import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
+import { useUserStore } from "../../../stores/user";
+import { storeToRefs } from "pinia/dist/pinia";
 
-export default {
-    components: { MusoraIcon },
-    props: {
-        brand: {
-            type: String,
-            default: 'drumeo'
-        },
-        nextLearningPathProgressPercent: {
-            type: Number,
-            default: 0
-        },
-        nextLearningPathLevel: {
-            type: String,
-            default: '1.1'
-        },
-        userMetrics: {
-            type: Object,
-            default: [],
-        },
-        accountUrl: {
-            type: String,
-            default: '/'
-        },
+const props = defineProps({
+    nextLearningPathProgressPercent: {
+        type: Number,
+        default: 0
     },
-    setup(_props) {
-        return {
-            textColor,
-            bgColor,
-            bgBottomGradients,
-        }
+    nextLearningPathLevel: {
+        type: String,
+        default: '1.1'
     },
-}
+    userMetrics: {
+        type: Object,
+        default: [],
+    },
+    accountUrl: {
+        type: String,
+        default: '/'
+    },
+})
+
+const userStore = useUserStore();
+const { brand } = storeToRefs(userStore);
 </script>
 
 <template>

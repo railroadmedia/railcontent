@@ -30,6 +30,9 @@
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
         'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
     ])
+    @include('musora.sales.components.trial-explanation', [
+        'instrument' => 'guitar',
+    ])
 
     @include('musora.sales.components.app-section', [
         'image' => 'marketing/guitareo/membership/homepage/2023/devices.png',

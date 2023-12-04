@@ -54,19 +54,17 @@
             <section v-if="!playlistsStore.loadingPlaylists && !miniCatalog" class="tw-w-full tw-relative tw-mb-5"
                 :class="state.isListView && !miniCatalog ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 3xl:tw-grid-cols-6 tw-gap-4'">
                 <!-- Full Catalog -->
-                <playlist-collection-card v-for="listElement in playlistsStore.playlists" :key="listElement.id"
-                    :listElement="listElement" :isListView="state.isListView" :token="token" :brand="brand" />
+                <playlist-collection-card v-for="(listElement, i) in playlistsStore.playlists" :key="listElement.id"
+                    :listElement="listElement" :isListView="state.isListView" :token="token" :brand="brand" :index="i" />
             </section>
-            <section class="tw-w-full tw-block tw-overflow-x-auto lg:tw-overflow-x-hidden tw-no-scrollbar">
-                <div v-if="!playlistsStore.loadingPlaylists && miniCatalog && !state.isListView"
-                    class="PlaylistMiniCatalogContainer tw-px-4 lg:tw-px-0 tw-w-full tw-gap-[6px] tw-relative tw-grid lg:tw-overflow-hidden tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-6 lg:tw-grid-cols-5 2xl:tw-grid-cols-6 xl:tw-gap-[12px] 2xl:tw-gap-[16px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full">
+            <section v-if="!playlistsStore.loadingPlaylists && miniCatalog && !state.isListView" class="tw-w-full tw-block tw-no-scrollbar tw-pt-4 tw--mt-4 tw-overflow-x-auto lg:tw-overflow-x-visible">
+                <div class="PlaylistMiniCatalogContainer tw-px-4 lg:tw-px-0 tw-w-full tw-gap-[6px] tw-relative tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-6 lg:tw-grid-cols-5 2xl:tw-grid-cols-6 xl:tw-gap-[12px] 2xl:tw-gap-[16px] tw-min-w-max lg:tw-min-w-full tw-pt-4 tw--mt-4 tw-overflow-x-auto lg:tw-overflow-x-visible">
                     <!-- Mini Catalog -->
-                    <playlist-collection-card v-for="listElement in playlistsStore.playlists" :key="listElement.id"
-                        :listElement="listElement" :isListView="false" :isMiniCatalog="true" :token="token"
+                    <playlist-collection-card v-for="(listElement, i) in playlistsStore.playlists" :key="listElement.id"
+                        :listElement="listElement" :isListView="false" :isMiniCatalog="true" :token="token" :index="i"
                         :brand="brand" />
                 </div>
             </section>
-
 
             <!-- Pagination -->
             <Pagination v-if="!miniCatalog && !playlistsStore.loadingPlaylists && playlistsStore.playlistsQuantity > 10"

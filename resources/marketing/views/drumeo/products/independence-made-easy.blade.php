@@ -24,21 +24,6 @@
     @parent
     <script type="text/javascript">
         $(document).ready(function () {
-            // var stickyBar = $('.promo-banner');
-            // $(window).scroll(function () {
-            //     var orderSection = $('.final').offset().top;
-            //     var spreadSection = $('#triple-benefit').offset().top;
-            //     if ($(this).scrollTop() > (orderSection - 115)) {
-            //         stickyBar.removeClass('fixed');
-            //     }
-            //     if ($(this).scrollTop() < spreadSection - 115) {
-            //         stickyBar.removeClass('fixed');
-            //     }
-            //     if ($(this).scrollTop() < orderSection - 115 && $(this).scrollTop() > spreadSection - 115) {
-            //         stickyBar.addClass('fixed');
-            //     }
-            // });
-
             // Dropdown for FAQ section
             $(".question-dropdown").on("click", questionDropdown);
 
@@ -91,8 +76,8 @@
                     @else
                         <strong>Now ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price) }}.</strong>
                     @endif
-                    <br>
-                    <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
+{{--                    <br>--}}
+{{--                    <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>--}}
                     <br>
                     <strong class="text-yellow">** 90-Day Guarantee **</strong>
                 </p>
@@ -483,8 +468,8 @@
                 @else
                     <strong>Now ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price) }}.</strong>
                 @endif
-                <br>
-                <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
+{{--                <br>--}}
+{{--                <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>--}}
                 <br>
                 <strong class="text-yellow">** 90-Day Guarantee **</strong>
             </h2>

@@ -61,8 +61,8 @@
                 @else
                     <strong><u>ONLY ${{ $productPrice }}</u></strong>
                 @endif
-                    <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
-                <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
+{{--                    <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a>--}}
+                    <br><strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
             @yield('badge-2')
         </div>
     </header>
@@ -891,8 +891,8 @@
                 @else
                     <strong><u>ONLY ${{ $productPrice }}</u></strong>
                 @endif
-                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
-                <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
+{{--                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a>--}}
+                    <br><strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
 
             <div class="credit-cards col-xs-12">
                 <i class="fab fa-cc-visa"></i>

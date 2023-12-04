@@ -9,13 +9,15 @@
             <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" />
         </div>
         <!-- Continue section -->
-        <MiniCatalogueSection title="Continue" seeAllAriaLabel="See All Lessons In Progress" v-if="hasStartedLessons"
-            :seeAllUrl="continueUrl" :preLoadedContent="startedContent" :isMiniView="true" />
+        <MiniCatalogueSection title="Continue" seeAllAriaLabel="See All Lessons In Progress" v-if="hasStartedLessons && startedContent.data.length"
+            :seeAllUrl="continueUrl" :preLoadedContent="startedContent" :isMiniView="true" :show-dropdown="true" />
         <!-- New section -->
         <MiniCatalogueSection title="New Releases" seeAllAriaLabel="See All New Releases" :seeAllUrl="newContentUrl"
             :preLoadedContent="newContent" />
-        <!-- List section -->
+
+        <!-- Playlist section -->
         <ListSection :newContentUrl="newContentUrl" :usersList="usersList" />
+
         <div v-if="coachEvent" class="tw-px-4 lg:tw-px-0">
             <!-- Live section -->
             <CoachEvent class="tw-mb-6" :preloadedContent="coachEvent" :currentDateString="currentDate"

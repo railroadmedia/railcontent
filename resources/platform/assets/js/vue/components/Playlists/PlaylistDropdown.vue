@@ -268,6 +268,7 @@ onBeforeUpdate(() => {
 </script>
 <template>
     <div v-if="isOpen"
+        :id="`pl-dropdown-${index}`"
         class="tw-w-[162px] tw-drop-shadow-lg tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-py-2 tw-z-50"
         :class="dropdownTop ? 'tw-bottom-[100%]' : 'tw-top-[100%]'">
         <span class="tw-absolute tw-w-3 tw-h-3 tw-bg-white dark:tw-bg-[#081825] tw-rotate-45 tw-right-[11px]"

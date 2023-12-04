@@ -290,7 +290,7 @@
         'header' => 'Online guitar lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 3 bonuses<br class="inline sm:hidden"> worth $333',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702',
+        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702,special',
         'altButtonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true',
         ])
     @else
@@ -302,6 +302,9 @@
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
         'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
+        ])
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'guitar',
         ])
 
     @endif
@@ -340,23 +343,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script>
-        // $(document).ready(function () {
-        //     var stickyBar = $('.promo-banner');
-        //     $(window).scroll(function () {
-        //         var stickTrigger = $('.sticky-trigger').offset().top;
-        //         var unstickTrigger = $('.unstick-trigger').offset().top;
-        //         if ($(this).scrollTop() > (unstickTrigger - 115)) {
-        //             stickyBar.removeClass('fixed mt-0');
-        //         }
-        //         if ($(this).scrollTop() < stickTrigger - 115) {
-        //             stickyBar.removeClass('fixed mt-0');
-        //         }
-        //         if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
-        //             stickyBar.addClass('fixed mt-0');
-        //         }
-        //     });
-        // });
-    </script>
     @yield('scripts')
 @stop

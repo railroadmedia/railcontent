@@ -7,11 +7,13 @@ use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Modules\UserManagementSystem\Models\User;
 
 /**
  * @property int $id
  * @property integer $user_id
  * @property integer $permission_id
+ * @property integer $product_id
  * @property UserAccessPermissionsSourceEnum $source
  * @property integer $source_hash
  * @property Carbon $start_time
@@ -34,6 +36,11 @@ class UserAccessPermission extends Model
     public function permission()
     {
         return $this->belongsTo(Permission::class);
+    }
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function getExpirationTime(): string
@@ -63,6 +70,8 @@ class UserAccessPermission extends Model
         $duration = '';
         if ($this->time_lifetime) {
             $duration = 'Lifetime';
+        } elseif ($this->time_fixed) {
+            $duration = 'Fixed';
         } elseif ($this->time_months) {
             $duration = $this->time_months . ' Month';
             if ($this->time_months > 1) {
@@ -73,7 +82,7 @@ class UserAccessPermission extends Model
             if ($this->time_days > 1) {
                 $duration .= 's';
             }
-        }elseif ($this->time_minutes) {
+        } elseif ($this->time_minutes) {
             $duration = $this->time_minutes . ' Minute';
             if ($this->time_minutes > 1) {
                 $duration .= 's';

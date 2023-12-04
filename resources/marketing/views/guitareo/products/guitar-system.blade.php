@@ -76,7 +76,7 @@
                     @else
                         <strong><u>ONLY ${{ floatval($productPrices['GUITAR-SYSTEM']->discounted_price) }}</u></strong>
                     @endif
-                    <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>
+{{--                    <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>--}}
                         <br> <strong>** 90-DAY GUARANTEE **</strong>
 
                 </p>
@@ -417,7 +417,7 @@
                 @else
                     <strong><u>ONLY ${{ floatval($productPrices['GUITAR-SYSTEM']->discounted_price) }}</u></strong>
                 @endif
-                <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>
+{{--                <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>--}}
                 <br><strong>** 90-DAY GUARANTEE **</strong></p>
             <div class="credit-cards columns">
                 <i class="fab fa-cc-visa"></i>

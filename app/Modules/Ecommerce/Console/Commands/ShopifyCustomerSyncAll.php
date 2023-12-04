@@ -8,24 +8,25 @@ use App\Modules\Ecommerce\Jobs\ShopifyCustomersSyncAllJob;
 class ShopifyCustomerSyncAll extends Command
 {
     protected $signature = 'ecommerce:ShopifyCustomerSyncAll {startId} {endId}
-    {--rebuildPermissions : removed existing shopify permissions before creating them}
-    {--skipEventSync : only pull data into user access permissions table, nothing else}';
+    {--skipEventSync : only pull data into user access permissions table, nothing else}
+    {--customQuery= : run a custom query instead of the default one}';
+
     protected $description = 'Sync shopfiy order data into user access permissions table';
 
     public function handle()
     {
         $startId = $this->argument('startId') ?? null;
         $endId = $this->argument('endId') ?? null;
-        $isRebuildingPermissions = $this->option('rebuildPermissions');
+        $customQuery = $this->option('customQuery');
         $syncEventSync = $this->option('skipEventSync');
         $this->runBatchQuery(
-            function (int $skip, int $take) use ($isRebuildingPermissions, $syncEventSync, $startId, $endId) {
+            function (int $skip, int $take) use ($customQuery, $syncEventSync, $startId, $endId) {
                 return new ShopifyCustomersSyncAllJob(
                     $skip,
                     $take,
                     $startId,
                     $endId,
-                    $isRebuildingPermissions,
+                    $customQuery,
                     $syncEventSync
                 );
             },
