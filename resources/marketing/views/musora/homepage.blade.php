@@ -15,7 +15,7 @@
     <meta property="og:description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
 
     <meta property="og:url" content="https://www.musora.com">
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.jpg">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/share-image3.webp">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
@@ -229,7 +229,7 @@
         <div class="container max-w-xs sm:max-w-6xl mx-auto relative z-20">
             <h1 class="relative w-auto inline-block text-3xl sm:text-4xl lg:text-5xl">
                 <strong>Your musical goals <br class="inline sm:hidden"> start here.</strong>
-                <img class="w-64 lg:w-80 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:-right-6 px-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2023/underline.png" alt="underline" fetchpriority="high">
+                <img class="w-64 lg:w-80 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:-right-6 px-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/underline.webp" alt="underline" fetchpriority="high">
             </h1>
             <h6 class="leading-relaxed sm:mt-6 mb-4 sm:mb-7 px-5 sm:px-0 max-w-xs sm:max-w-full">
                 Find your musical flow with step-by-step lessons, <br class="hidden sm:inline">
@@ -246,14 +246,14 @@
                 <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
             </div>
         </div>
-        <img class="absolute z-10 h-10 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header4.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-24 sm:h-28 lg:h-44 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header5.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-32 sm:h-40 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header7.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header1.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header3.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-28 sm:h-32 lg:h-48 transform -translate-x-1/2 -translate-y-1/2 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header8.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-28 sm:h-36 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header6.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-12 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header2.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-10 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/bubbles/header4.webp" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-24 sm:h-28 lg:h-44 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/bubbles/header5.webp" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-32 sm:h-40 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/bubbles/header7.webp" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/bubbles/header1.webp" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/bubbles/header3.webp" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-28 sm:h-32 lg:h-48 transform -translate-x-1/2 -translate-y-1/2 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/bubbles/header8.webp" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-28 sm:h-36 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/bubbles/header6.webp" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-12 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/bubbles/header2.webp" alt="header circle image" fetchpriority="high">
     </section>
 
     <section class="text-center text-white py-5 sm:py-7" style="background-color:#0c1524;">
@@ -275,10 +275,10 @@
 
     <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
-            <img class="text-center mx-auto sm:h-20 lg:h-24 mb-10 hidden sm:inline-block" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2023/learn-practice-play.png">
-            <img class="text-center mx-auto h-24 inline-block sm:hidden" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2023/learn-practice-play-m.png">
+            <img class="text-center mx-auto sm:h-20 lg:h-24 mb-10 hidden sm:inline-block" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/learn-practice-play.webp" alt="learn practice play image">
+            <img class="text-center mx-auto h-24 inline-block sm:hidden" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/learn-practice-play-m.webp" alt="learn practice play image">
             <img class="my-5 h-64 inline sm:hidden"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/620x0/filters:quality(95)/marketing/musora/membership/homepage/2023/intro-collage3.png"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/620x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/intro-collage3.webp"
                 alt="learn playing image"
                 fetchpriority="high"
             >
@@ -292,7 +292,7 @@
                 <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/musora/membership/homepage/2023/intro-collage3.png"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/intro-collage3.webp"
                     alt="learn playing image"
                 >
             </div>
@@ -320,7 +320,7 @@
                         <div class="w-1/3 sm:w-full mb-3 rounded-xl overflow-hidden">
                             <div
                                 class=" aspect-16:9 bg-cover bg-center"
-                                style="background-image:url('https://www.musora.com/musora-cdn/image/width=640,quality=95/{{ $gridItem['image'] }}')"
+                                style="background-image:url('{{ $gridItem['image'] }}')"
                             >
                             </div>
                         </div>
@@ -380,13 +380,16 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #0c1524 calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white" style="background:#0c1524;">
         <div class="container max-w-4xl mx-auto">
-            <img class="h-10 sm:h-20 lg:h-24 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2023/just-press-play-title3.png" alt="collage intro mobile" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <picture>
+                <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/just-press-play-title3.webp">
+                <img class="h-10 sm:h-20 lg:h-24 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/just-press-play-title3.webp" alt="collage intro mobile" loading="lazy" onload="this.classList.remove('opacity-0')">
+            </picture>
             <p class="text-center mt-5 mb-16 sm:mt-5 sm:mb-20">Musora is loaded with practice tools and guided workouts
                 <br class="hidden sm:inline"> to help you learn music by actually playing.</p>
 
             @php
                 $gettings = $musora['gettings'];
-          //  @endphp
+           @endphp
             <div class="max-w-3xl lg:max-w-4xl mx-auto relative sm:px-4 mt-7 pb-10 sm:pb-20">
                 @foreach ($gettings as $key => $getting)
                     @if($getting['position'] === 'right')
@@ -412,10 +415,15 @@
                 <div class="full-line hidden md:block absolute bg-white top-0 z-0 transform -translate-x-1/2" style="width: 2px;"></div>
             </div>
             <div class="text-center sm:text-left sm:text-center mb-5">
+            <picture>
+                <source media="(min-width:640px)" type="image/webp" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/200x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/guarantee-musora-line.webp">
                 <img class="h-24 mb-4 transition-opacity opacity-0"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/musora/membership/homepage/2023/guarantee-musora-line.png" alt="bonus icon">
-                <h5><strong><i class="fas fa-star text-musora"></i> BETTER PRACTICE GUARANTEE <i class="fas fa-star text-musora"></i></strong></h5>
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')" 
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/guarantee-musora-line.webp" 
+                    alt="guarantee logo">
+            </picture>                
+            <h5><strong><i class="fas fa-star text-musora"></i> BETTER PRACTICE GUARANTEE <i class="fas fa-star text-musora"></i></strong></h5>
                 <p class="max-w-sm mx-auto leading-normal mt-3">You’ll get 7 days free PLUS a 90-day guarantee<br> to make sure you love your improvements!</p>
             </div>
             <a class="sm:mx-1 w-full sm:w-64 join musora-gold smaller @if(!empty($promoVersion)) anchor-slide @endif"
@@ -444,22 +452,22 @@
             <p class="leading-tight mt-2 sm:mt-3 mb-7">You’ll have <strong>all the tools you need</strong><br class="inline sm:hidden"> to play the songs you love.</p>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'pianote'">
                 <div style="padding-bottom:62.4%;" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="pianoteSoundslice = true;" >
-                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/pianote-player2.png" alt="pianote player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/pianote-player2.webp" alt="pianote player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'guitareo'" style="display:none;">
                 <div style="padding-bottom:62.4%" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="guitareoSoundslice = true;" >
-                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/guitareo-player2.png" alt="guitareo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/guitareo-player2.webp" alt="guitareo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'drumeo'" style="display:none;">
                 <div style="padding-bottom:62.4%;" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="drumeoSoundslice = true;" >
-                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/drumeo-player2.png" alt="drumeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/drumeo-player2.webp" alt="drumeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'singeo'" style="display:none;">
                 <div style="padding-bottom:62.4%" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="singeoSoundslice = true;" >
-                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/singeo-player2.png" alt="singeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/singeo-player2.webp" alt="singeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
             <div class="">

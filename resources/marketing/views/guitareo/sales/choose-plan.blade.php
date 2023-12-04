@@ -8,7 +8,7 @@
     <meta name="description" content="Play guitar like you've always wanted with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee." />
     <meta property="og:description" content="Play guitar like you've always wanted with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee."/>
 
-        <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2023/share-image-guitareo.jpg"/>
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/guitareo/membership/homepage/webp-format/share-image-guitareo.webp"/>
 
     @include('_partials.layout._fonts')
 
@@ -43,7 +43,7 @@
     @if(empty($month))
         @include('musora.sales.components.card-selection-section', [
             "plusLogo" => "https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-plus-logo-light.svg",
-            "logo" => "https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo.png",
+            "logo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/guitareo/membership/homepage/webp-format/guitareo-logo.webp",
             "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",
@@ -58,7 +58,7 @@
         ])
         @include('musora.sales.components.plans-different-section', [
             "plusLogo" => "https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-plus-logo.svg",
-            "logo" => "https://dmmior4id2ysr.cloudfront.net/logos/guitareo-logo.png",
+            "logo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/guitareo/membership/homepage/webp-format/guitareo-logo.webp",
             "secondPoint" => "Artist courses and exclusive events with special guests.",
             "thirdPoint" => "Go beyond guitar with lessons for singing, piano, and drums.",
             "fifthPoint" => "1000+ songs transcribed w/ playback tools for all instruments.",
@@ -66,7 +66,7 @@
     @else
         @include('musora.sales.components.card-selection-section', [
             "plusLogo" => "https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-plus-logo-light.svg",
-            "logo" => "https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo.png",
+            "logo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/guitareo/membership/homepage/webp-format/guitareo-logo.webp",
             "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",

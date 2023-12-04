@@ -32,7 +32,7 @@
     <div class="sticky-trigger block"></div>
 @endif
 <div style="background:linear-gradient(30deg, #0a3761, #0c1526);">
-<section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:url(https://dpwjbsxqtam5n.cloudfront.net/sales/2023/order-bg-tile-2.png) center center/160px;">
+<section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/musora/membership/homepage/2023/order-bg-tile-2.png') center center/160px;">
     <div class="container max-w-6xl mx-auto">
         <img class="hidden sm:inline-block h-9 lg:h-11" alt="promo logo" src="{{ $promoLogo }}">
         <img class="inline-block sm:hidden h-14" alt="mobile promo logo" src="{{ $promoLogoM }}">

@@ -1,5 +1,50 @@
     <?php
+
+    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/dorothea-taylor.webp';
+    $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/todd-sucherman.webp';
+    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/jared-falk.webp';
+    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/hannah-welton.webp';
+    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/larnell-lewis.webp';
+    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/zack-grooves.webp';
+    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/domino-santatonio.webp';
+    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/aaron-spears.webp';
+
     $drumeo = [
+        
+        'bubbles' => [
+    [
+        'src' => $bubble1,
+        'classes' => 'absolute z-10 h-10 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]',
+    ],
+    [
+        'src' => $bubble2,
+        'classes' => 'absolute z-10 h-24 sm:h-28 lg:h-44 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]',
+    ],
+    [
+        'src' => $bubble3,
+        'classes' => 'absolute z-10 h-32 sm:h-40 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]',
+    ],
+    [
+        'src' => $bubble4,
+        'classes' => 'absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]',
+    ],
+    [
+        'src' => $bubble5,
+        'classes' => 'absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]',
+    ],
+    [
+        'src' => $bubble6,
+        'classes' => 'absolute z-10 h-28 sm:h-32 lg:h-48 transform -translate-x-1/2 -translate-y-1/2 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]',
+    ],
+    [
+        'src' => $bubble7,
+        'classes' => 'absolute z-10 h-28 sm:h-36 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]',
+    ],
+    [
+        'src' => $bubble8,
+        'classes' => 'absolute z-10 h-12 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]',
+    ],
+],
         'slides' => [
             [
                 "desc" =>
@@ -29,27 +74,27 @@
         "gridItems" => [
             [
                 "image" =>
-                "marketing/drumeo/membership/homepage/2023/10-level-cirriculum.jpg",
+                "marketing/drumeo/membership/homepage/webp-format/10-level-cirriculum.webp",
                 "title" => "10-Level Curriculum",
                 "desc" =>
                 "The most trusted step-by-step video lessons for every technique, pattern, and style.",
                 "lessonInfo" => [
                     [
                         "thumb" =>
-                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/10-level-cirriculum.jpg",
+                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/10-level-cirriculum.webp",
                     ],
                 ],
             ],
             [
                 "image" =>
-                "marketing/drumeo/membership/homepage/2023/practical-assignments.jpg",
+                "marketing/drumeo/membership/homepage/webp-format/practical-assignments.webp",
                 "title" => "Practical Assignments",
                 "desc" =>
                 "Keep up your progress with clear assignments and handy practice tools for every level.",
                 "lessonInfo" => [
                     [
                         "thumb" =>
-                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/practical-assignments.jpg",
+                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/practical-assignments.webp",
                     ],
                 ],
             ],
@@ -62,46 +107,46 @@
                 "lessonInfo" => [
                     [
                         "thumb" =>
-                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guided-workouts2.jpg",
+                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guided-workouts2.jpg",
                     ],
                 ],
             ],
             [
                 "image" =>
-                "marketing/drumeo/membership/homepage/2023/world-class-teachers.jpg",
+                "marketing/drumeo/membership/homepage/webp-format/world-class-teachers.webp",
                 "title" => "World-Class Teachers",
                 "desc" =>
                 "The best drummers are here — including Grammy Award winners and touring musicians.",
                 "lessonInfo" => [
                     [
                         "thumb" =>
-                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/world-class-teachers.jpg",
+                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/world-class-teachers.webp",
                     ],
                 ],
             ],
             [
                 "image" =>
-                "marketing/drumeo/membership/homepage/2023/downloadable-videos.jpg",
+                "marketing/drumeo/membership/homepage/webp-format/downloadable-videos.webp",
                 "title" => "Downloadable Videos",
                 "desc" =>
                 "Stream your lessons OR download your videos so you can practice anywhere, anytime.",
                 "lessonInfo" => [
                     [
                         "thumb" =>
-                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/downloadable-videos.jpg",
+                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/downloadable-videos.webp",
                     ],
                 ],
             ],
             [
                 "image" =>
-                "marketing/drumeo/membership/homepage/2023/personalized-support.jpg",
+                "marketing/drumeo/membership/homepage/webp-format/personalized-support.webp",
                 "title" => "Personalized Support",
                 "desc" =>
                 "Get weekly live streams, student lesson plans, and access to a global drum community.",
                 "lessonInfo" => [
                     [
                         "thumb" =>
-                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/personalized-support.jpg",
+                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/personalized-support.webp",
                     ],
                 ],
             ],
@@ -113,49 +158,49 @@
                 "images" => [
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Todd-Sucherman.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Todd-Sucherman.webp",
                         "title" => "Rock <br>Drumming",
                         "instructor" => "Todd Sucherman",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Dennis-Chambers.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Dennis-Chambers.webp",
                         "title" => "Funk <br>Drumming",
                         "instructor" => "Dennis Chambers",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Domino-Santatonio.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Domino-Santatonio.webp",
                         "title" => "Pop <br>Drumming",
                         "instructor" => "Domino Santantonio",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Steve-Smith.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Steve-Smith.webp",
                         "title" => "Jazz <br>Drumming",
                         "instructor" => "Steve Smith",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Larnell-Lewis.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Larnell-Lewis.webp",
                         "title" => "Gospel <br>Drumming",
                         "instructor" => "Larnell Lewis",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Greyson-Nektrutman.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Greyson-Nektrutman.webp",
                         "title" => "Big Band <br>Drumming",
                         "instructor" => "Greyson Nekrutman",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Gene-Hoglan.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Gene-Hoglan.webp",
                         "title" => "Metal <br>Drumming",
                         "instructor" => "Gene Hoglan",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/John-Wooton.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/John-Wooton.webp",
                         "title" => "Latin <br>Drumming",
                         "instructor" => "John Wooton",
                     ],
@@ -166,49 +211,49 @@
                 "images" => [
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Anika-Nilles.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Anika-Nilles.webp",
                         "title" => "Subdivision<br> Studies",
                         "instructor" => "Anika Nilles",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Dom-Famularo.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Dom-Famularo.webp",
                         "title" => "Pedal<br> Control",
                         "instructor" => "Dom Famularo",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Tommy-Igoe.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Tommy-Igoe.webp",
                         "title" => "Groove<br> Essentials",
                         "instructor" => "Tommy Igoe",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Dorothe-Taylor-01.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Dorothe-Taylor-01.webp",
                         "title" => "Stick<br> Control",
                         "instructor" => "Dorothea Taylor",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Bruce-Becker.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Bruce-Becker.webp",
                         "title" => "Hand<br> Technique",
                         "instructor" => "Bruce Becker",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Billy-Cobham.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Billy-Cobham.webp",
                         "title" => "Internal<br> Synchronization",
                         "instructor" => "Billy Cobham",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Emmanuelle-Caplette.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Emmanuelle-Caplette.webp",
                         "title" => "Traditional<br> Grip",
                         "instructor" => "Emmanuelle Caplette",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Sarah-Thawer.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Sarah-Thawer.webp",
                         "title" => "4-Way<br> Coordination",
                         "instructor" => "Sarah Thawer",
                     ],
@@ -219,49 +264,49 @@
                 "images" => [
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Simon-Phillips.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Simon-Phillips.webp",
                         "title" => "Elevate Your<br> Drum Sound",
                         "instructor" => "Simon Phillips",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Aaron-Spears.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Aaron-Spears.webp",
                         "title" => "Drum<br> Chops",
                         "instructor" => "Aaron Spears",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Hannah-Welton.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Hannah-Welton.webp",
                         "title" => "Writing<br> Drum Parts",
                         "instructor" => "Hannah Welton",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Matt-McGuire.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Matt-McGuire.webp",
                         "title" => "Song<br> Breakdowns",
                         "instructor" => "Matt McGuire",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Dorothe-Taylor-02.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Dorothe-Taylor-02.webp",
                         "title" => "Rudiments<br> & Patterns",
                         "instructor" => "Dorothea Taylor",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Aric-Improta.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Aric-Improta.webp",
                         "title" => "The Creative<br> Mindset",
                         "instructor" => "Aric Improta",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Kaz-Rodgriguez.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Kaz-Rodgriguez.webp",
                         "title" => "Musical<br> Exercises",
                         "instructor" => "Kaz Rodriguez",
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/2023/drummers/Gavin-Harrison.jpg",
+                        "marketing/drumeo/membership/homepage/webp-format/coaches/Gavin-Harrison.webp",
                         "title" => "Bass Drum<br> Calibration",
                         "instructor" => "Gavin Harrison",
                     ],
@@ -315,15 +360,7 @@
         "testimonials" => [
             [
                 "image" =>
-                "https://i.vimeocdn.com/video/1751944105-765a9cc9ef08e836de7b0c436c50e50aa828db3e7773409007e186cc071ec45b-d_500.jpg",
-                "name" => "Claudio Sanchez",
-                "video" => "877648411",
-                "title" => "Becoming a musician has completed a part of my life.",
-                "description" => "Becoming a musician has completed a part of my life.",
-            ],
-            [
-                "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/ed-koop.jpg",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/ed-koop.webp",
                 "name" => "Ed Koop",
                 "video" => "342059271",
                 "title" => "I’m loving music more than I ever did before!",
@@ -332,7 +369,7 @@
             ],
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/barry-lisle.jpg",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/barry-lisle.webp",
                 "name" => "Barry Lisle",
                 "video" => "342066433",
                 "title" => "They walk you through, step-by-step, for any goal.",
@@ -341,7 +378,7 @@
             ],
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/lisa-aragon.jpg",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/lisa-aragon.webp",
                 "name" => "Lisa Aragon",
                 "video" => "373252004",
                 "title" => "I was able to play drums on stage!",
@@ -350,7 +387,7 @@
             ],
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/guy-dobbins.jpg",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/guy-dobbins.webp",
                 "name" => "Guy Dobbins",
                 "video" => "373445704",
                 "title" =>
@@ -360,7 +397,7 @@
             ],
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/omari-augustine.jpg",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/omari-augustine.webp",
                 "name" => "Omari Augustine",
                 "video" => "553438851",
                 "title" =>
@@ -370,7 +407,7 @@
             ],
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/marlene-rosen.jpg",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/marlene-rosen.webp",
                 "name" => "Marlene Rosen",
                 "video" => "373446024",
                 "title" => "I’m rediscovering music again.",
@@ -379,7 +416,7 @@
             ],
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/jay-damberg-2.jpg",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/jay-damberg-2.webp",
                 "name" => "Jay Damberg",
                 "video" => "373445466",
                 "title" =>
@@ -389,7 +426,7 @@
             ],
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/ivy-elizondo-2.jpg",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/ivy-elizondo-2.webp",
                 "name" => "Ivy Elizondo",
                 "video" => "373445819",
                 "title" => "Now we have a band and we’re recording an album!",
@@ -397,83 +434,5 @@
                 "When Ivy’s kids decided to stop playing drums, she jumped on the throne instead — she’s used Drumeo to build a foundation and formed a band.",
             ],
         ],
-         "testimonialsShopVersion" => [
-                                [
-                                    'season' => '1',
-                                    'name' => 'Erin W.',
-                                    'comment' => '<strong>I am shocked at how much I learned in these last 30 days.</strong> My husbands a drummer so he watched me go from knowing NOTHING to being able to make it through a song.',
-                                    'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1678130486-572603.jpg',
-                                ],
-                                [
-                                    'season' => '1',
-                                    'name' => 'Kristyn T.',
-                                    'comment' => '<b>I\'m SOO EXCITED to have actually learned my first entire song ever!!!</b>  Such a HIGH!!!  Domino is like having a dear sweet encouraging friend and mentor to work with daily! ',
-                                    'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1679111185-496776.jpg',
-                                ],
-                                [
-                                    'season' => '1',
-                                    'name' => 'Tobias W.',
-                                    'comment' => 'The idea behind this format is really great. These short sessions can easily be fit into everyday life, no need to think or prepare what\'s next. <strong>It keeps the guesswork out of learning the drums so you can focus on the most important part: Playing the drums and having fun.</strong>',
-                                    'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1669379419-276550.jpg',
-                                ],
-                                [
-                                    'season' => '1',
-                                    'name' => 'Stephiekitty (Estephania E.)',
-                                    'comment' => 'I never thought I’d be a drummer but here I am! I went from zero to hero all thanks to Domino and Drumeo! I would have never tried drums had it not been for this 30 day drummer program💕🥁🎵🎶',
-                                    'img' => 'https://dzryyo1we6bm3.cloudfront.net/avatars/526989_1660712845376-1660712847-526989.jpg',
-                                ],
-                                [
-                                    'season' => '1',
-                                    'name' => 'Monique G.',
-                                    'comment' => 'I\'m thrilled that I\'m back behind a drum kit after 30 years and not only loving it, but genuinely understanding it. Thank you, thank you, thank you! 🥁',
-                                    'img' => 'https://dzryyo1we6bm3.cloudfront.net/avatars/528540_1661460541688-1661460545-528540.jpg',
-                                ],
-                                [
-                                    'season' => '2',
-                                    'name' => 'Alan C.',
-                                    'comment' => '<strong>Five weeks ago I didn\'t own a drum kit – Today I played a whole song twice!</strong> I wouldn\'t have believed it possible if I hadn\'t just experienced it. Big thanks to Domino and all at Drumeo',
-                                    'img' => 'https://dzryyo1we6bm3.cloudfront.net/avatars/412320_1662361641020-1662361646-412320.jpg',
-                                ],
-                                [
-                                    'season' => '2',
-                                    'name' => 'Shae C.',
-                                    'comment' => 'Yes! I’m so happy and so proud. I still can’t believe I played my first ever drum song. And I did it twice!! So very happy right now, it’s making me tear up.',
-                                    'img' => 'https://dzryyo1we6bm3.cloudfront.net/avatars/521912_1663974802851-1663974809-521912.jpg',
-                                ],
-                                [
-                                    'season' => '2',
-                                    'name' => 'David Stanley',
-                                    'comment' => 'This has just been the best experience. In less than 30 days I\'ve gone from the occasional uncoordinated bash on my son\'s acoustic kit to sounding like I almost know what I\'m doing.',
-                                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/david.jpg',
-                                ],
-                                [
-                                    'season' => '2',
-                                    'name' => 'Evan W.',
-                                    'comment' => 'An absolutely fabulous program… for yourself, your son, your daughter or otherwise. <strong>Filled with great energy, and sound fundamentals.</strong> 🤩 If you’re thinking about it - don’t think, just do! ⚡️',
-                                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/evan.jpg',
-                                ],
-                            ],
-        "practiceItems" => [
-            [
-                "icon" =>
-                "fa-sharp fa-regular fa-music",
-                "title" => "Know exactly what to practice.",
-                "desc" =>
-                "30-Day Drummer gives you guided play-along workouts every day for thirty days. You’ll know exactly what to work on every time you sit at the drums or practice pad.",
-            ],
-            [
-                "icon" =>
-                "fas fa-regular fa-clock",
-                "title" => "Focused practice time.",
-                "desc" =>
-                "Each exercise includes a countdown timer that tells you exactly how long to practice for. This means you can turn off all distractions and focus on your drumming.",
-            ],
-            [
-                "icon" =>
-                "fas fa-regular fa-infinity",
-                "title" => "Lifetime access.",
-                "desc" =>
-                "30-Day Drummer can become part of your practice routine forever. You’ll have lifetime access to ALL the workouts and Q&A sessions from your class to access anytime you like.",
-            ],]
     ];
     ?>

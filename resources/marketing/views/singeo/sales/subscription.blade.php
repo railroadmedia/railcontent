@@ -15,10 +15,8 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/share-image-singeo.jpg"/>
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/share-image-singeo-new.webp"/>
     @endif
-
-
 
 
     @include('_partials.layout._fonts')
@@ -154,15 +152,7 @@
     @endif
 
     @php
-        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/hailey-benedict.png';
-        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/lisa-witt.png';
-        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/tony-lindsay.png';
-        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/chris-johnson.png';
-        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/julia-ziegler.png';
-        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/darcy-d.png';
-        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/shelea.png';
-        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/cate-canning.png';
-
+        $bubbles= $singeo['bubbles'];
         $features = $singeo['features'];
         $slides = $singeo['slides'];
     @endphp
@@ -171,9 +161,9 @@
         @include('musora.sales.components.header-section', [
             'header' => 'Singing lessons that <br> fit your schedule. ',
             'desc' => 'Learn to sing from home, anytime, with bite-sized <br class="hidden sm:inline"> video lessons and unlimited personal support. ',
-            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/header-thumb2.jpg',
-            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/jan-thumb.png',
-            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/jan-thumb-m.png',
+            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/header-thumb2.webp',
+            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/jan-thumb.webp',
+            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/jan-thumb-m.webp',
             'pointOne' => 'Improve Your Voice',
             'pointTwo' => 'Helpful Vocal Coaches',
             'pointThree' => 'Sing Popular Songs',
@@ -182,9 +172,9 @@
         @include('musora.sales.components.header-section', [
             'header' => 'Get the singing voice <br> you’ve always wanted.',
             'desc' => 'Improve your vocal range, strength, and control with<br class="hidden sm:inline"> step-by-step lessons and unlimited personal support.',
-            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/header-thumb2.jpg',
-            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/jan-thumb.png',
-            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/jan-thumb-m.jpg',
+            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/header-thumb2.webp',
+            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/jan-thumb.webp',
+            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/jan-thumb-m.webp',
             'pointOne' => 'Improve Your Voice',
             'pointTwo' => 'Helpful Vocal Coaches',
             'pointThree' => 'Sing Popular Songs',
@@ -221,7 +211,7 @@
     @include('musora.sales.components.songs-section', [
         'header' => 'Sing your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note. ',
-        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/device.png',
+        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/device.webp',
         'brandName' => 'Singeo',
         'bannerDesc' => 'Powered by Musora, Singeo includes full access to our communities for drums, piano, and guitar.',
     ])
@@ -247,7 +237,7 @@
 
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
-        'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/marketing/singeo/membership/homepage/2023/singeo-guarantee.png',
+        'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/marketing/singeo/membership/homepage/webp-format/singeo-guarantee.webp',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence to share your voice with the world.',
     ])
@@ -260,7 +250,7 @@
     @if(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
             "noSelector" => true,
-            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/singeo-plus-logo-light.svg",
+            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/singeo-plus-logo-light.svg",
             "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
             "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited singing lessons.",
@@ -276,24 +266,24 @@
         ])
     @elseif(!empty($promoVersion))
         @php
-            $bonuses = [
-                [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/promos/november/singing-starter-kit.jpg',
-                    'title' => 'Singing<br> Starter Kit',
-                    'description' => 'Get everything you need to start singing now. In just 7 hands-on lessons, you’ll overcome the challenges most beginner singers face and will instantly sound better.',
-                    'price' => floatval($productPrices['singing-starter-kit']->price),
-                ],
-                [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/promos/october/Beautiful_harmonies_card.jpg',
-                    'title' => 'Harmony',
-                    'description' => 'In just 8, short, sing-a-long lessons, you’ll learn how to elevate any vocal performance with incredible harmonies. Even if you’re a total beginner, you’ll be singing your first harmony within the first 10 minutes of this course.',
-                    'price' => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price),
-                ],
-            ]
+        $productSkus = ['singing-starter-kit', 'the-essential-guide-to-beautiful-harmonies'];
+        $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(function ($a, $b) use ($productSkus) {
+            return array_search($a->sku, $productSkus) - array_search($b->sku, $productSkus);
+        });
+        $bonuses = [];
+        foreach ($products as $product) {
+            $bonuses[] = [
+                'image' => $product['bundle_img'],
+                'description' => $product['short_desc'],
+                'price' => floatval($productPrices[$product['sku']]->price),
+                'shipping' => boolval($product['bundle_free_shipping']), 
+                'title' => $product['name'], 
+            ];
+        }
         @endphp
 
         @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/singeo-annual-2w-card.png',
+        'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/singeo-annual-2w-card.webp',
         'header' => 'Online singing lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 2 bonuses<br class="inline sm:hidden"> worth $46',
         'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&locked=true&redirect=/order&promo-code=FREE-W-ANNUAL-6702,special',
@@ -301,18 +291,18 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/singeo-logo.png',
+        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/singeo-logo.webp',
         'header' => 'Unlimited singing lessons.<br> Vocal coaches and support.<br>1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
-                'image' => 'marketing/singeo/membership/homepage/2023/singeo-spread.png',
+                'image' => 'marketing/singeo/membership/homepage/webp-format/singeo-spread.webp',
         ])
     @endif
 
     @include('musora.sales.components.app-section', [
-        'image' => 'marketing/singeo/membership/homepage/2023/devices.png',
+        'image' => 'marketing/singeo/membership/homepage/webp-format/devices.webp',
         'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?ppid=101a6930-1058-4aae-9584-1a25cec367a0',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=singeo_previews',
     ])
@@ -341,6 +331,6 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+    <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @stop

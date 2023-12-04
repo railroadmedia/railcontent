@@ -15,7 +15,7 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/share-image-guitareo.jpg"/>
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/guitareo/membership/homepage/webp-format/share-image-guitareo.webp"/>
     @endif
 
     @include('_partials.layout._fonts')
@@ -156,26 +156,17 @@
     @endif
 
     @php
-        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/rob-scallon.png';
-        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/ayla-tesler-mabe.png';
-        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/mark-lettieri.png';
-        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/pete-thorn.png';
-        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/dean-lamb.png';
-        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/sami-ghawi.png';
-        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/yvette-young.png';
-        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/kent-shores.png';
-
+        $bubbles= $guitareo['bubbles']; // from homepage-data.php
         $features = $guitareo['features'];;
         $slides = $guitareo['slides'];
     @endphp
-
     @include('musora.sales.components.header-section', [
         'header' => 'Online guitar lessons<br> for all skill levels.',
             'underline' => true,
         'desc' => 'Learn the guitar faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
-        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/header-thumb.jpg',
-        'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/jan-thumb.png',
-        'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/jan-thumb-m.jpg',
+        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/guitareo/membership/homepage/webp-format/header-thumb.webp',
+        'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/guitareo/membership/homepage/webp-format/jan-thumb.webp',
+        'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/guitareo/membership/homepage/webp-format/jan-thumb-m.webp',
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
         'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
@@ -185,7 +176,6 @@
     @php
         $gridItems = $guitareo['gridItems'];
     @endphp
-
     @include('musora.sales.components.trailer-grid-section', [
         'header' => 'Your guitar goals<br class="inline sm:hidden"> start here.',
         'desc' => 'Learn to play guitar online with a fluff-free curriculum that’ll<br class="hidden sm:inline">  take your skills from zero to guitar hero – with step-by-step<br class="hidden sm:inline">  lessons designed around playing songs faster. ',
@@ -193,24 +183,20 @@
 
     @php
         $buttons = $guitareo['buttons'];
-
         $courses = $guitareo['courses'];
     @endphp
-
     @include('musora.sales.components.coaches-section', [
         'header' => 'Real Teachers,  <br class="sm:hidden">Real Results.',
         'desc' => 'Amplify your skills with exclusive artist <br class="hidden md:inline"> courses + live events with special guests.'
     ])
 
-
     @php
         $songItems = $guitareo['songItems'];
     @endphp
-
     @include('musora.sales.components.songs-section', [
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note.',
-        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/device.png',
+        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/guitareo/membership/homepage/webp-format/device.webp',
         'brandName' => 'Guitareo',
         'bannerDesc' => 'Powered by Musora, Guitareo includes full access to our communities for voice, piano, and drums.',
     ])
@@ -223,7 +209,6 @@
     @php
         $testimonials = $guitareo['testimonials'];
     @endphp
-
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by guitarists<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
@@ -236,7 +221,7 @@
     ])
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
-        'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-guarantee.png',
+        'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/guitareo/membership/homepage/webp-format/guitareo-guarantee.webp',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the guitar.',
     ])
@@ -244,11 +229,12 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
+    
     @if(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
             "noSelector" => true,
-            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-plus-logo-light.svg",
-            "logo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-logo.png",
+            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-plus-logo-light.svg",
+            "logo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/guitareo/membership/homepage/webp-format/guitareo-logo.webp",
             "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",
@@ -261,32 +247,26 @@
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'guitar',
         ])
+
     @elseif(!empty($promoVersion))
         @php
-            $bonuses = [
-                [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/survival-kit-shop.jpg',
-                    'title' => 'The Guitarist’s Survival Kit',
-                    'description' => 'Get the gear essentials to start sounding better on the guitar.',
-                    'price' => floatval($productPrices['guitarists-survival-kit']->price),
-                    'shipping' => 'true'
-                ],
-                [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/black-friday/bundles/ultimate/gq.jpg',
-                    'title' => 'GuitarQuest',
-                    'description' => 'Skip the boring stuff and start having fun! Your journey starts here.',
-                    'price' => floatval($productPrices['guitar-quest']->price),
-                ],
-                [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/black-friday/rhythm_groove_cart.jpg',
-                    'title' => 'Rhythm & Groove',
-                    'description' => 'Go beyond simple strumming on the guitar.',
-                    'price' => floatval($productPrices['rhythm-and-groove']->price),
-                ],
-            ]
+        $productSkus = ['guitarists-survival-kit', 'guitar-quest', 'rhythm-and-groove'];
+        $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(function ($a, $b) use ($productSkus) {
+            return array_search($a->sku, $productSkus) - array_search($b->sku, $productSkus);
+        });
+        $bonuses = [];
+        foreach ($products as $product) {
+            $bonuses[] = [
+                'image' => $product['bundle_img'],
+                'description' => $product['short_desc'],
+                'price' => floatval($productPrices[$product['sku']]->price),
+                'shipping' => boolval($product['bundle_free_shipping']), 
+                'title' => $product['name'], 
+            ];
+        }
         @endphp
         @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-annual-2w-card.png',
+        'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/guitareo/membership/homepage/webp-format/guitareo-annual-2w-card.webp',
         'header' => 'Online guitar lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 3 bonuses<br class="inline sm:hidden"> worth $333',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
@@ -295,7 +275,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-logo-green.png',
+        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/guitareo/membership/homepage/webp-format/guitareo-logo-green.webp',
         'header' => 'Unlimited guitar lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
@@ -307,7 +287,7 @@
     @endif
 
     @include('musora.sales.components.app-section', [
-        'image' => 'marketing/guitareo/membership/homepage/2023/devices.png',
+        'image' => 'marketing/guitareo/membership/homepage/webp-format/devices.webp',
         'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?ppid=e92a296a-7aeb-40ec-85eb-aaf891c3e6c1',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=guitareo_previews',
     ])
