@@ -19,10 +19,12 @@ class DefaultDifficultyDecorator extends ModeDecoratorBase
             }
 
             $hasDifficulty = false;
+            $difficulty = '';
 
             foreach ($content['fields'] ?? [] as $field) {
                 if ($field['key'] == 'difficulty' && !empty($field['value'])) {
                     $hasDifficulty = true;
+                    $difficulty = is_numeric($field['value']) ? (int)$field['value'] : $field['value'];
                 }
             }
 
@@ -33,6 +35,26 @@ class DefaultDifficultyDecorator extends ModeDecoratorBase
                     'type' => 'string',
                     'position' => 1
                 ]);
+                $contents[$contentIndex]['difficulty_string'] = 'All';
+            } else {
+                $contents[$contentIndex]['difficulty_string'] = $difficulty;
+                if (!is_string($difficulty)) {
+                    if ($difficulty == 1) {
+                        $contents[$contentIndex]['difficulty_string'] = 'Novice';
+                    }
+                    if ($difficulty > 1 && $difficulty <= 3) {
+                        $contents[$contentIndex]['difficulty_string'] = 'Beginner';
+                    }
+                    if ($difficulty > 3 && $difficulty <= 5) {
+                        $contents[$contentIndex]['difficulty_string'] = 'Intermediate';
+                    }
+                    if ($difficulty > 5 && $difficulty <= 7) {
+                        $contents[$contentIndex]['difficulty_string'] = 'Advanced';
+                    }
+                    if ($difficulty > 7 && $difficulty <= 10) {
+                        $contents[$contentIndex]['difficulty_string'] = 'Expert';
+                    }
+                }
             }
         }
 
