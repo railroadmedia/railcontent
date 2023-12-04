@@ -325,12 +325,12 @@ class SalesController extends BaseController
 
     public function jaredRecommends()
     {
-        return view('drumeo.drumshop.jared-recommends');
+        return view('drumeo.pages.jared-recommends');
     }
 
     public function giftCard()
     {
-        return view('drumeo.drumshop.gift-card', ['theme' => 'drumeo']);
+        return view('drumeo.products.gift-card', ['theme' => 'drumeo']);
     }
 
     public function easyRudimentsPlaylist()

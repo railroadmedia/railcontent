@@ -1,7 +1,3 @@
-@php
-    require_once(resource_path('marketing/views/drumeo/drumshop/bundles.php'))
-@endphp
-
 @extends('_partials.layout.global-shop-layout')
 
 @section('meta')
