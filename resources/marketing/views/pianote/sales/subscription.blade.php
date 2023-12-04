@@ -376,9 +376,6 @@
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
         'image' => 'marketing/pianote/membership/homepage/2023/pianote-collage.png',
         ])
-        @include('musora.sales.components.trial-explanation', [
-            'instrument' => 'piano',
-        ])
 
     @endif
 
