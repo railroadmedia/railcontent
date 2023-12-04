@@ -9,15 +9,6 @@
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 @stop()
 
-@section('head')
-    @parent
-    <?php
-    \App\Analytics\Tracker::trackProductImpression('PASS-1');
-    \App\Analytics\Tracker::trackProductImpression('PASS-6');
-    \App\Analytics\Tracker::trackProductImpression('PASS-12');
-    ?>
-@stop()
-
 @section('top')
     @include('_partials.components.shop.slider', [
         "headerText" => "<strong>The perfect gift for ANY drummer!</strong>",
