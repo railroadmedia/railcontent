@@ -1471,6 +1471,7 @@ class ContentRepository extends RepositoryBase
      */
     public function requireField($name, $value, $type = '', $operator = '=', $field = '')
     {
+        $value = Arr::first(explode(' (',$value));
         $this->requiredFields[] =
             [
                 'name' => $name,
@@ -1500,6 +1501,8 @@ class ContentRepository extends RepositoryBase
      */
     public function includeField($name, $value, $type = '', $operator = '=')
     {
+        $value = Arr::first(explode(' (',$value));
+
         $this->includedFields[] = [
             'name' => $name,
             'value' => $value,
@@ -2355,7 +2358,7 @@ class ContentRepository extends RepositoryBase
 
             $filterOptionsArray[$filterOptionColumnName] = [];
         }
-
+        $tableResultsCount = $joinTablesQuery->get();
         if (!empty($groupBy)) {
             $joinTablesQuery->groupBy($groupBy);
         } else {
@@ -2364,17 +2367,20 @@ class ContentRepository extends RepositoryBase
 
         $tableResults = $joinTablesQuery->get();
 
+        $counts = [];
         foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
             $filterOptionsArray[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
                 ->pluck($filterOptionName)
                 ->unique()
                 ->values()
                 ->toArray();
+        $counts[$filterOptionName] = ($tableResultsCount->whereNotNull($filterOptionName)
+       ->pluck($filterOptionName)->countBy())->toArray();
 
             foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
                 $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
                     trim(
-                        $filterOptionValueToClean
+                        $filterOptionValueToClean.' ('.$counts[$filterOptionName][$filterOptionValueToClean].')'
                     )
                 );
             }
@@ -2433,7 +2439,7 @@ class ContentRepository extends RepositoryBase
             'type' => ConfigService::$tableContent . '.type',
             'instrument' => ConfigService::$tableContent . '.instrument',
         ];
-
+        $contentTableQueryCount = ($contentTableQuery->get());
         $contentTableQuery->groupBy($filterOptionNameToContentTableColumnName)
             ->select($filterOptionNameToContentTableColumnName);
 
@@ -2445,11 +2451,12 @@ class ContentRepository extends RepositoryBase
                 ->unique()
                 ->values()
                 ->toArray();
-
+            $counts[$filterOptionName] = ($contentTableQueryCount->whereNotNull($filterOptionName)
+                ->pluck($filterOptionName)->countBy())->toArray();
             foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
                 $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = trim(
                     ucwords(
-                        $filterOptionValueToClean
+                        $filterOptionValueToClean.' ('.$counts[$filterOptionName][$filterOptionValueToClean].')'
                     )
                 );
             }
