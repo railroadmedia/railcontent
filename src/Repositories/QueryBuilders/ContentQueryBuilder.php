@@ -818,7 +818,7 @@ class ContentQueryBuilder extends QueryBuilder
                                  "( 
            JSON_ARRAYAGG(
             JSON_OBJECT(
-               'id', content_id,
+               'id', ".$alias.".content_id,
                'compiled_view_data', ".ConfigService::$tableContent.".compiled_view_data
               )
         ) ) as lessons_grouped_by_field"
