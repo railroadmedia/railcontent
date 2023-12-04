@@ -16,7 +16,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/trial-songs', [SalesController::class, 'trialSongs'] );
         Route::get('/trial-beginner', [SalesController::class, 'trialBeginner'] );
 
-        Route::get('/song-secrets-bonus', [SalesController::class, 'promo'] );
+        Route::get('/song-secrets-bonus', [SalesController::class, 'promoSS'] );
         Route::get('/lp', [SalesController::class, 'promo'] );
         Route::get('/student-only', [SalesController::class, 'promo'] );
         Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );

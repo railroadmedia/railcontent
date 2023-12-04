@@ -21,40 +21,14 @@
 @endsection
 
 @section('body')
-    @include('_partials.components.shop.promo-top-banner',[
+    @include('_partials.components.shop.promo-shop-header',[
         'text' => '<span class="text-promo">Save up to 67%</span> on singing lessons,<br class="sm:hidden"> merch, & more.',
         'bg' => 'https://d21xeg6s76swyd.cloudfront.net/products/shop-header.jpg',
     ])
 
-    @if(Session::has('addedProducts'))
-        <section class="added-to-cart-background clearfix">
-            <div class="float-left px-2 md:px-3 w-full check">
-                <h2><i class="fas fa-check"></i>Added to Cart</h2>
-            </div>
-            <div class="float-left px-2 md:px-3 w-full product-info">
-                <div class="float-left px-2 md:px-3 w-full md:w-8/12 product">
-                    @foreach(Session::get('addedProducts') as $addedProduct)
-                        <div class="float-left px-2 md:px-3 w-full" style="padding:0;margin-bottom:15px;">
-                            <img src="{{ $addedProduct['thumbnail'] }}">
-                            <h4>{{ $addedProduct['name'] }}</h4>
-                            <p>{{ $addedProduct['description'] }}</p>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="float-left px-2 md:px-3 w-full md:w-4/12 checkout">
-                    <h5>
-                        Cart Subtotal({{ Session::get('cartNumberOfItems') }}):
-                        <strong>${{ Session::get('cartSubTotal') }}</strong>
-                    </h5>
-                    <a href="{{ get_musora_brand_base_url() }}/order/{{ $brand }}" class="checkout-button"><i class="fas fa-cart-plus"></i> Checkout</a>
-                </div>
-            </div>
-        </section>
-    @endif
+    @include('_partials.components.shop.index-filters')
 
-    @include('drumeo.drumshop._partials._catalogue-filters')
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
-
         @php
             $bundles = [
                 [
@@ -81,7 +55,7 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Singing Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
-{{--                    @include('musora.shop._shop-card-alt', [--}}
+{{--                    @include('_partials.components.shop.product-card', [--}}
 {{--                         "itemURL" => "/",--}}
 {{--                         "sku" => null,--}}
 {{--                         "thumbnail" => "https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-membership-shop.jpg",--}}
@@ -97,7 +71,7 @@
 {{--                    ])--}}
 
                     <div x-cloak x-show="filter === 'lessons'">
-                        @include('musora.shop._shop-card-alt', [
+                        @include('_partials.components.shop.product-card', [
                              "itemURL" => "/shop/ultimate-lessons-bundle",
                              "sku" => null,
                              "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/singeo/promos/november/bundles/singeo-ultimate-shop-thumb.jpg",
@@ -109,7 +83,7 @@
                         ])
                     </div>
                     @foreach($lessons as $key => $lesson)
-                        @include('musora.shop._shop-card-alt', [
+                        @include('_partials.components.shop.product-card', [
                                 "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
                                 "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
                                 "thumbnail" => $lesson->thumbnail,
@@ -137,7 +111,7 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Accessories</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                     @foreach($accessories as $accessory)
-                        @include('musora.shop._shop-card-alt', [
+                        @include('_partials.components.shop.product-card', [
                                 "sku" => (str_contains($accessory->sku, 'member') || str_contains($accessory->sku, 'products')) ? '' : $accessory->sku,
                                 "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
                                 "thumbnail" => $accessory->thumbnail,
@@ -164,7 +138,7 @@
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
                     @foreach($shirts as $shirt)
-                        @include('musora.shop._shop-card-alt', [
+                        @include('_partials.components.shop.product-card', [
                             "sku" => $shirt->sku,
                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
                             "thumbnail" => $shirt->thumbnail,

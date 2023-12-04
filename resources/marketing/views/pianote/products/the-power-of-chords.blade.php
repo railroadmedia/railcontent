@@ -5,7 +5,7 @@
 @section('order-link', '/ecommerce/add-to-cart?products[the-power-of-chords]=1')
 
 @section('topbar')
-    @include('pianote._partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "The Power of Chords",
         "fullPrice" => floatval($productPrices['the-power-of-chords']->price),
         "price" => floatval($productPrices['the-power-of-chords']->discounted_price),

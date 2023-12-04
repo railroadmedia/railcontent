@@ -51,7 +51,7 @@ class ShopController extends BaseController
 
         $thirtyDD = Product::whereHas('brand', fn($query) => $query->where('name', 'drumeo'))->where([['sold_out', 0]])->orderBy('display_order')->get()->whereIn('id', [217, 216, 215, 214, 213, 212]);
 
-        return view('drumeo.drumshop.shop', [
+        return view('drumeo.shop.shop', [
             'lessons' => $lessons,
             'accessories' => $accessories,
             'misc' => $misc,
@@ -80,7 +80,7 @@ class ShopController extends BaseController
             })
             ->firstOrFail();
 
-        return view('drumeo.drumshop.product-layout', [ 'product' => $product, 'theme' => 'drumeo' ]);
+        return view('drumeo.shop.product-layout', [ 'product' => $product, 'theme' => 'drumeo' ]);
     }
 
     public function products(Request $request, $domain, $page = null)

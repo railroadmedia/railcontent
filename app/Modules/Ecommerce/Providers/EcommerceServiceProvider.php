@@ -4,15 +4,23 @@ namespace App\Modules\Ecommerce\Providers;
 
 use App\Modules\Ecommerce\Listeners\EcommerceEventListener;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
+use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Events\User\UserCreated;
+use Modules\UserManagementSystem\Events\User\UserUpdated;
+use Railroad\Usora\Events\User\UserUpdated as UsoraUserUpdated;
 
 class EcommerceServiceProvider extends EventServiceProvider
 {
     protected $listen = [
         UserCreated::class => [
             EcommerceEventListener::class . '@handleUserCreated',
+        ],
+        UserUpdated::class => [
+            EcommerceEventListener::class . '@handleUserUpdated',
+        ],
+        UsoraUserUpdated::class => [
+            EcommerceEventListener::class . '@handleUserUpdated',
         ],
     ];
 

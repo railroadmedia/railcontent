@@ -121,7 +121,7 @@
 
 @section('content')
 
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Drumeo QuietPad",
         "fullPrice" => floatval($productPrices['quietpad']->price),
         "price" => floatval($productPrices['quietpad']->discounted_price),

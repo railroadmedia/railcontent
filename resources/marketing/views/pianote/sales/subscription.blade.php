@@ -166,7 +166,12 @@
     @endphp
     @if(empty($hideHeader) || !$hideHeader)
         @if(!empty($bfVersion))
-
+            @include('_partials.layout.holiday.homepage-top-banner',[
+                'text' => 'Get 11 free<br class="sm:hidden"> bonuses worth $963',
+                'text2' => 'Get 11 free bonuses worth $963',
+                'vimeo' => '885340227',
+                'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[taktell-piccolo-metronome]=1&products[pianote-practice-planner]=1&products[music-theory-posters]=1&products[christmas-song-book-digital]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702',
+            ])
         @elseif(!empty($beginnerVersion))
             @include('musora.sales.components.header-section', [
                 'header' => 'Online piano lessons<br> tailored for beginners.',
@@ -254,11 +259,11 @@
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
-        'youtube' => '1.4M',
+        'youtube' => '1.5M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
         'facebook' => '430K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '230K',
+        'instagram' => '240K',
     ])
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
@@ -370,9 +375,6 @@
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
         'image' => 'marketing/pianote/membership/homepage/2023/pianote-collage.png',
-        ])
-        @include('musora.sales.components.trial-explanation', [
-            'instrument' => 'piano',
         ])
 
     @endif

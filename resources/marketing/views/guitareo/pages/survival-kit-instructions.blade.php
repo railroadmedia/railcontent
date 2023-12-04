@@ -1,17 +1,21 @@
-@extends('shop.product-layout')
+@extends('guitareo._partials.global-layout')
 
 @section('styles')
-    @parent
     <title>The Guitarist's Survival Kit</title>
     <meta name="description" content="How to U  se The Guitarist's Survival Kit in 3 Simple Steps">
     <meta property="og:description" content="How to U  se The Guitarist's Survival Kit in 3 Simple Steps">
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/shop/survival-kit/survival-kit-fb-share.jpg" style="display: none;">
     <meta property="og:url" content="https://www.guitareo.com/{{ Request::path() }}">
 
-    <link href="{{ asset('/assets/marketing/sales-page.css') }}" rel="stylesheet">
-@stop()
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    <link href="{{asset('/marketing/css/tailwind-helpers.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}">
+    <link href="{{ asset('/marketing/parcel/drumeo/sales-page-guitareo.css') }}" rel="stylesheet">
+
+@endsection
+
 @section('scripts')
-    @parent
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script>
         $(document).ready(function () {
@@ -19,9 +23,11 @@
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-@stop()
+@endsection
 
-@section('banner')
+@section('content')
+    @include("guitareo.sales.partials._nav")
+
     <section class="pb-60 bg-cover bg-center" style="background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/shop/survival-kit/survival-kit-tutorial-header.jpg')">
     </section>
 
@@ -62,6 +68,6 @@
             <iframe class="absolute w-full h-full reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/774475015?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
         </div>
     </div>
+
+    @include("guitareo.sales.partials._footer")
 @endsection
-
-
