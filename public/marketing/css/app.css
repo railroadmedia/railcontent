@@ -3011,6 +3011,9 @@ video {
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops)) !important;
 }
+.bg-\[url\(\'https\:\/\/www\.musora\.com\/musora-cdn\/image\/width\=2000\2c quality\=85\/https\:\/\/d3fzm1tzeyr5n3\.cloudfront\.net\/referral\/winter\/info-section-bg\.jpg\'\)\] {
+  background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/info-section-bg.jpg') !important;
+}
 .from-\[\#032829\] {
   --tw-gradient-from: #032829 var(--tw-gradient-from-position) !important;
   --tw-gradient-to: rgb(3 40 41 / 0) var(--tw-gradient-to-position) !important;
@@ -4536,6 +4539,10 @@ li, p {
 :is(.dark .dark\:border-\[\#445F74\]) {
   --tw-border-opacity: 1 !important;
   border-color: rgb(68 95 116 / var(--tw-border-opacity)) !important;
+}
+:is(.dark .dark\:bg-\[\#000B17\]) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 11 23 / var(--tw-bg-opacity)) !important;
 }
 :is(.dark .dark\:bg-\[\#00101D\]) {
   --tw-bg-opacity: 1 !important;
@@ -7387,6 +7394,10 @@ li, p {
 
   .md\:pr-12 {
     padding-right: 3rem !important;
+  }
+
+  .md\:pr-20 {
+    padding-right: 5rem !important;
   }
 
   .md\:pr-24 {

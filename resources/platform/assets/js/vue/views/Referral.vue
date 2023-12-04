@@ -1,20 +1,25 @@
 <template>
-    <div class="tw-py-28">
-        <div class="tw-max-w-4xl tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-rounded-xl tw-bg-white tw-relative tw-z-30 dark:tw-bg-[#303030] dark:tw-text-white" style="box-shadow: rgba(0, 0, 0, 0.25) 5px 5px 20px;">
-            <div class="tw-flex tw-justify-center tw-absolute -tw-top-20 tw-w-full">
-<!--                <div class="tw-max-w-sm sm:tw-max-w-none tw-mx-auto">-->
-<!--                    <img class="sm:tw-h-48 md:tw-h-56 tw-mx-auto tw-mb-6 tw-transition-opacity" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/header-collage2.png" alt="header amazon image" onload="this.classList.remove('tw-opacity-0')" loading="lazy">-->
-<!--                </div>-->
+    <div class="tw-py-32 lg:tw-pt-40 tw-relative tw-px-4 xl:tw-px-0 tw-bg-white dark:tw-bg-[#000B17]">
+        <div class="tw-absolute tw-w-full tw-h-1/2 tw-left-0 tw-top-0">
+            <img class="tw-w-full tw-h-full tw-object-cover" src="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/header-bg.jpg" alt="header bg" />
+        </div>
+        <div class="tw-max-w-4xl tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-rounded-xl tw-bg-white tw-relative tw-z-30 dark:tw-bg-[#303030] dark:tw-text-white tw-pt-24 md:tw-pt-32 lg:tw-pt-40 tw-pb-16 tw-text-center" style="box-shadow: rgba(0, 0, 0, 0.25) 5px 5px 20px;">
+            <div class="tw-absolute tw-w-full -tw-top-4 sm:-tw-top-6 md:-tw-top-8 tw-left-0">
+                <img class="tw-w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/leaves.png" alt="leaves" />
             </div>
-            <h3 class="tw-font-normal tw-mb-4 tw-text-center"> Give your friends and family members <br />a 30-day trial to {{ brandName }} for a chance to<br /> <strong class="tw-font-extrabold">win a $100 Amazon Gift Card.</strong>
+            <div class="tw-flex tw-justify-center tw-absolute -tw-top-24 sm:-tw-top-32 lg:-tw-top-40 tw-left-0 tw-w-full">
+                <img class="tw-h-48 sm:tw-h-56 md:tw-h-64 lg:tw-h-80 tw-mx-auto tw-mb-6 tw-transition-opacity" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/gift-card.png" alt="gift card" onload="this.classList.remove('tw-opacity-0')" loading="lazy">
+            </div>
+            <img class="tw-h-24 lg:tw-h-32 tw-inline-block tw-mb-4" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/12-days-title.svg" alt="12 days title" />
+            <h3 class="tw-font-normal tw-mb-4 "> Give your friends and family members <br class="tw-hidden sm:tw-inline" />a 30-day trial to {{ brandName }} for a chance to<br /> <strong class="tw-font-extrabold">win a $100 Amazon Gift Card.</strong>
             </h3>
-            <p class="tw-text-center">
+            <p>
                 Share the gift of drumming this holiday season.
             </p>
-            <p class="tw-text-center tw-mt-2">
-                Every new referral you make <strong>from December 11 to 27, 2023</strong><br /> instantly gives you a chance to win one of 12 $100 Musora gift cards.
+            <p class="tw-mt-2">
+                Every new referral you make <strong>from December 11 to 27, 2023</strong><br class="tw-hidden sm:tw-inline" /> instantly gives you a chance to win one of 12 $100 Musora gift cards.
             </p>
-            <p class="tw-text-center tw-mt-6 tw-mb-4">
+            <p class="tw-mt-6 tw-mb-4">
                 <a href="#terms" class="tw-underline tw-italic tw-text-black dark:tw-text-white">See Contest Details - Terms & Conditions*</a>
             </p>
 
@@ -25,7 +30,7 @@
                         <div class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
                             <input type="hidden" name="_token" class="sort-input has-input" id="_token" value="8UVOL6wfWwdRywCAMgMQ1e9PmrA5HnZVqhRk7ezn"><input type="hidden" name="brand" class="sort-input has-input" id="brand" value="drumeo">
                             <input v-model="inviteeEmail" class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-2 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border" type="email" id="email" name="email" placeholder="Email address...">
-                            <input name="button" type="submit" id="button" class="tw-btn-primary tw-bg-[#030814] dark:tw-bg-[#030303] tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52 has-input" value="Send Guest Pass">
+                            <input name="button" type="submit" id="button" class="tw-btn-primary tw-bg-[#030814] tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52 has-input" value="Send Guest Pass">
                         </div>
                     </form>
                     <hr class="tw-mt-6">
@@ -34,20 +39,20 @@
                         </label>
                         <div class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
                             <input class="tw-text-black tw-inline-block tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-2 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border has-input" type="text" id="referral-link" readonly="" name="referral-link" placeholder="link" :value="userReferralLink">
-                            <input @click="copyLink" name="button" id="sendButton" readonly="" class="tw-bg-[#030814] dark:tw-bg-[#030303] tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52 has-input" value="Copy Link">
+                            <input @click="copyLink" name="button" id="sendButton" readonly="" class="tw-bg-[#030814] tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52 has-input" value="Copy Link">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <div class="tw-bg-[#00101D] tw-py-10 lg:tw-py-20">
+    <div class="tw-bg-[#00101D] tw-py-10 lg:tw-py-20 tw-bg-cover tw-bg-[url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/info-section-bg.jpg')]">
         <div class="tw-max-w-5xl tw-mx-auto md:tw-flex md:tw-items-center md:tw-justify-center tw-px-4 sm:tw-px-6 xl:tw-px-0">
             <div class="tw-order-1 tw-relative md:tw-pl-5 lg:tw-pl-10 tw-mb-10 md:tw-mb-0">
                 <img
                     class="tw-w-72 md:tw-w-96 tw-mx-auto"
-                    src="https://www.musora.com/musora-cdn/image/width=500,quality=90/https://d3fzm1tzeyr5n3.cloudfront.net/referral/intro-collage2.png"
-                    alt="intro"
+                    src="https://www.musora.com/musora-cdn/image/width=500,quality=90/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/leaf-ring.png"
+                    alt="leaf ring"
                 />
             </div>
             <div class="tw-text-white tw-max-w-lg tw-mx-auto tw-text-center md:tw-text-left">
@@ -74,15 +79,15 @@
         </div>
     </div>
     <div id="terms" class="tw-block tw-relative tw-invisible"></div>
-    <div class="tw-py-12 lg:tw-py-20 dark:tw-bg-[#1B1B1B]">
+    <div class="tw-py-12 lg:tw-py-20 tw-bg-[#F9F9F9] dark:tw-bg-[#000B17]">
         <div class="tw-max-w-6xl tw-mx-auto tw-px-6 2xl:tw-px-0 dark:tw-text-white">
             <h4 class="tw-mb-4"><strong>Terms and Conditions</strong></h4>
             <p>
                 <strong>Eligibility:</strong> This contest is open to Musora students with an active, paid membership and newly referred students, 18 years or older at the time of entry. Void where prohibited by law. Employees, officers, and directors of the sponsor and their immediate family members and/or those living in the same household are not eligible to participate in the contest.
                 <br><br>
-                <strong>How to Enter:</strong> Participants automatically receive an entry to the contest when a referred friend signs up for a membership with a 30-day trial from December 11 to 23, 2023. Participants may collect up to (5) contest entries for {{ brandName }} based on each referral sign-up during the contest period; for a total of (20) contest entries across all Musora brands. New students who sign up for {{ brandName }} will gain one contest entry. No purchase is necessary to enter or win.
+                <strong>How to Enter:</strong> Participants automatically receive an entry to the contest when a referred friend signs up for a membership with a 30-day trial from December 11 to 27, 2023. Participants may collect up to (5) contest entries for {{ brandName }} based on each referral sign-up during the contest period; for a total of (20) contest entries across all Musora brands. New students who sign up for {{ brandName }} will gain one contest entry. No purchase is necessary to enter or win.
                 <br><br>
-                <strong>Prize:</strong> Twelve students will win a $100 Musora gift card redeemable inside the Drumeo, Pianote, Guitareo, and Singeo shops. The Musora gift cards do not expire. The prizes are non-transferable and cannot be exchanged for cash.
+                <strong>Prize:</strong> Twelve students will win a $100 Musora gift card redeemable inside the Drumeo, Pianote, Guitareo, and Singeo shops. The prizes are non-transferable and cannot be exchanged for cash.
                 <br><br>
                 <strong>Winner Selection:</strong> The winner will be randomly selected from all eligible entries received during the contest period. The winner will be notified by email or direct message within 48 hours of the selection. If the winner does not respond within 48 hours, another winner will be selected.
                 <br><br>
