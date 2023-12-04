@@ -101,12 +101,18 @@ class ContentJsonController extends Controller
 
         $contentTypes = $request->get('included_types', []);
         if($request->get('tab', false)){
-            $extra = explode(',',$request->get('tab'));
-            if($extra['0'] == 'group_by'){
-                $group_by = $extra['1'];
+            $tabs = $request->get('tab');
+            if(!is_array($request->get('tab'))){
+                $tabs = [$request->get('tab')];
             }
-            if($extra['0'] == 'duration'){
-                $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
+            foreach($tabs as $tab) {
+                $extra = explode(',', $tab);
+                if ($extra['0'] == 'group_by') {
+                    $group_by = $extra['1'];
+                }
+                if ($extra['0'] == 'duration') {
+                    $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
+                }
             }
         }
         $contentData = $this->contentService->getFiltered(
