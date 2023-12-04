@@ -1,9 +1,23 @@
 <template>
-    <Breadcrumb
-        :first-level-url="breadcrumbFirstLevelUrl"
-        :first-level-title="breadcrumbFirstLevelTitle"
-        :last-level-title="breadcrumbLastLevelTitle"
-    />
+    <div>
+        <Breadcrumb
+            :first-level-url="breadcrumbFirstLevelUrl"
+            :first-level-title="breadcrumbFirstLevelTitle"
+            :last-level-title="breadcrumbLastLevelTitle"
+        />
+        <div class="tw-flex tw-w-full">
+            <div class="tw-grow">
+                <div class="tw-w-full" v-if="videoType && videoId">
+                    <YoutubePlayer v-if="videoType === 'youtube'"
+                        :video-id="videoId"
+                    />
+                    <VideoPlayer v-if="false" />
+                </div>
+                <div v-else>ERROR LOADING VIDEO</div>
+            </div>
+            <div >sidebar</div>
+        </div>
+    </div>
 </template>
 
 <script setup>
@@ -12,8 +26,8 @@ import { storeToRefs } from 'pinia';
 import {useUserStore} from "../../stores/user";
 
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
-import CatalogueCardContainer from '../components/Catalogue/CatalogueCardContainer';
-import CollectionWrapper from '../components/CollectionWrapper/CollectionWrapper';
+import YoutubePlayer from "../vuesora/components/YoutubePlayer/YoutubePlayer.vue";
+import VideoPlayer from "../vuesora/components/VideoPlayer/VideoPlayer.vue";
 
 const props = defineProps({
     breadcrumbFirstLevelUrl: {
@@ -28,39 +42,16 @@ const props = defineProps({
         type: String,
         default: ''
     },
-    collectionType: {
+    videoType: {
         type: String,
-        default: ''
+        default: null
     },
-    filterableValues: {
-        type: Array,
-        default: () => [],
-    },
-    includeFutureScheduledContentOnly: {
-        type: Boolean,
-        default: () => false,
-    },
-    statuses: {
-        type: Array,
-        default: () => ["published"],
+    videoId: {
+        type: String,
+        default: null
     },
 });
 
-onMounted(()=> {
-    console.log('continueData',props.carouselData.length)
-})
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
-
-const videoModalOpen = ref(false);
-const videoSrc = ref('');
-
-const openVideo = (src) => {
-    videoSrc.value = src;
-    videoModalOpen.value = true;
-}
-
-const closeVideo = () => {
-    videoModalOpen.value = false;
-}
 </script>

@@ -22974,6 +22974,9 @@ a:visited{
 .tw-shrink-0{
   flex-shrink: 0 !important;
 }
+.tw-shrink{
+  flex-shrink: 1 !important;
+}
 .tw-flex-grow{
   flex-grow: 1 !important;
 }
