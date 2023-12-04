@@ -23,11 +23,12 @@ trait HandlesShopifyRateLimit
      * to sleep if so, to recover our calls.
      * This needs to be called before any `$this->>shopify->___` calls that you want to protect.
      *
+     * @param  bool  $forceUsage to handle the rate limit, even if running a simulation
      * @return void
      */
-    protected function handleRateLimit(): void
+    protected function handleRateLimit(bool $forceUsage = false): void
     {
-        if ($this->getIsSimulation()) {
+        if ($this->getIsSimulation() && !$forceUsage) {
             return;
         }
 

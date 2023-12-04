@@ -803,6 +803,9 @@
     </section>
     @include('musora._partials.order-section-collage')
 
+    @include('musora.sales.components.trial-explanation', [
+        'instrument' => 'musical',
+    ])
 
     @include('musora.sales.components.app-section', [
         'image' => 'marketing/musora/membership/homepage/2023/devices2.png',

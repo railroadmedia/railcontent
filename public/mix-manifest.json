@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=a8175bffe5ce8a2962c326bdff3a3311",
+=======
+    "/platform/js/app.js": "/platform/js/app.js?id=f6f37bd0388150e05acdf7045edc88bc",
+>>>>>>> project-workouts-mobile
     "/platform/js/profile.js": "/platform/js/profile.js?id=86aa1841f2c5fd61f0b1a0a087caa000",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=b11719fd2b12999cf314705273f39458",
     "/platform/js/books.js": "/platform/js/books.js?id=59cd94e09b034342fbe6c7401bdd44e4",
@@ -9,13 +13,21 @@
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=7ed25dcacb39ff3c44f255d86052dd58",
     "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=c55d06cff215ddc38f8aaedb0eff5f7f",
     "/platform/js/song.js": "/platform/js/song.js?id=d6cce5c3dd3b50ddcc90600c1cb0c4de",
+<<<<<<< HEAD
     "/platform/js/song-request.js": "/platform/js/song-request.js?id=f95b6e5fe1f4681948b56011c63b1287",
+=======
+    "/platform/js/song-request.js": "/platform/js/song-request.js?id=877f4476a5e67b4c01fbf01cff44627e",
+>>>>>>> project-workouts-mobile
     "/platform/js/report-user.js": "/platform/js/report-user.js?id=81d4d24d5503d2ae8853006ddb92fbcc",
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=ffdc55947903244877a6f3589f3766b6",
     "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=1ad34e2c5b5fd4c0401fd8e49825c861",
     "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=f87b2e1be67ebd7f9ccd41ae971a7d18",
     "/platform/js/order-form.js": "/platform/js/order-form.js?id=2e17eeb0b5bcf1f9449b83b79d02997f",
+<<<<<<< HEAD
     "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=ac668fa4bc4f45b081154b7c4c46fbff",
+=======
+    "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=633d651d388c00400096563aa23fa4da",
+>>>>>>> project-workouts-mobile
     "/platform/js/text-editor-component.js": "/platform/js/text-editor-component.js?id=dc929d5338fd1c398aeb38d4ac29ab46",
     "/platform/js/cart-sidebar.js": "/platform/js/cart-sidebar.js?id=4892c214cb5f345f6cbfda1357e398be",
     "/platform/js/nav-cart-button.js": "/platform/js/nav-cart-button.js?id=9cae2c787bb9a7b5e494fe3ed1d49a45",
@@ -30,7 +42,13 @@
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=615b828a5c5d567a25c31dddfbfbc02b",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=e2082f7ad4786ce50ed2fc5843c742d7",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=b06c413be0cbc92f51079e8948ccc276",
+<<<<<<< HEAD
     "/platform/css/app.css": "/platform/css/app.css?id=ea1159b0f6e89988335b66bdc026c72d",
     "/marketing/css/app.css": "/marketing/css/app.css?id=b0f35668505e88d1547223492e1c8bb3",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=effbe30da99204da47ff365b8a016f64"
+=======
+    "/platform/css/app.css": "/platform/css/app.css?id=640a517528c81de2c16ff8770fe8b425",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=dede09aa102b6b5726bed46dad931ab6",
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=bddda253fb56d8e52a1f2572e2fae956"
+>>>>>>> project-workouts-mobile
 }

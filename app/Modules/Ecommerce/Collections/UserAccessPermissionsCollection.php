@@ -38,7 +38,7 @@ class UserAccessPermissionsCollection
         return $this->userId;
     }
 
-    public function getActiveDates(int|array $permissions, $includeBuffer = true): array
+    public function getActiveDates(int|array $permissions, $includeBuffer = true, $includeFixedTimes = true): array
     {
         $unifiedLaunchDate = Carbon::parse(config('ecommerce.launch_dates.unified'));
         if (is_integer($permissions)) {
@@ -52,20 +52,28 @@ class UserAccessPermissionsCollection
         $expirationDate = null;
         $startDate = null;
         $canAggregate = false;
+        $maxFixedExpirationDate = null;
+
         /** @var UserAccessPermission $userAccessPermission */
         foreach ($userAccessPermissions as $userAccessPermission) {
             if ($userAccessPermission->time_lifetime && $userAccessPermission->status != 'revoked') {
                 return [Carbon::parse($userAccessPermission->start_time), Carbon::maxValue()];
             }
+            if ($userAccessPermission->time_fixed) {
+                $fixedExpirationDate = Carbon::parse($userAccessPermission->time_fixed);
+                $userAccessPermission->actualStartTime = Carbon::today();
+                $userAccessPermission->actualExpirationTime = $fixedExpirationDate;
+                if ($fixedExpirationDate > $maxFixedExpirationDate) {
+                    $maxFixedExpirationDate = $fixedExpirationDate;
+                }
+                continue;
+            }
             if ($userAccessPermission->status == 'revoked') {
                 $userAccessPermission->actualStartTime = Carbon::parse($userAccessPermission->start_time);
-                $calculatedExpiration = $userAccessPermission->time_fixed ? Carbon::parse(
-                    $userAccessPermission->time_fixed
-                )
-                    : Carbon::parse($userAccessPermission->start_time)->clone()
-                        ->addMinutes($userAccessPermission->time_minutes)
-                        ->addDays($userAccessPermission->time_days)
-                        ->addMonths($userAccessPermission->time_months);
+                $calculatedExpiration = Carbon::parse($userAccessPermission->start_time)->clone()
+                    ->addMinutes($userAccessPermission->time_minutes)
+                    ->addDays($userAccessPermission->time_days)
+                    ->addMonths($userAccessPermission->time_months);
                 $revokedAt = Carbon::parse($userAccessPermission->revoked_at);
 
                 $userAccessPermission->actualExpirationTime = min($revokedAt, $calculatedExpiration);
@@ -77,14 +85,21 @@ class UserAccessPermissionsCollection
             $canAggregate = $userAccessPermission->start_time > $unifiedLaunchDate;
             $startDate = $aggregatePrevious ? $startDate : Carbon::parse($userAccessPermission->start_time);
             $tempStartDate = $aggregatePrevious ? $expirationDate : Carbon::parse($userAccessPermission->start_time);
-            $expirationDate = $userAccessPermission->time_fixed ? Carbon::parse($userAccessPermission->time_fixed)
-                : $tempStartDate->clone()
-                    ->addMinutes($userAccessPermission->time_minutes)
-                    ->addDays($userAccessPermission->time_days)
-                    ->addMonths($userAccessPermission->time_months);
+            $expirationDate = $tempStartDate->clone()
+                ->addMinutes($userAccessPermission->time_minutes)
+                ->addDays($userAccessPermission->time_days)
+                ->addMonths($userAccessPermission->time_months);
             $userAccessPermission->actualStartTime = $tempStartDate;
             $userAccessPermission->actualExpirationTime = $expirationDate;
         }
+
+        if ($includeFixedTimes && $maxFixedExpirationDate > $expirationDate) {
+            if (!$startDate || $startDate > Carbon::today()) {
+                $startDate = Carbon::today();
+            }
+            $expirationDate = $maxFixedExpirationDate;
+        }
+
         if ($expirationDate && $includeBuffer) {
             $expirationDate->addDays(config('ecommerce.days_before_access_revoked_after_expiry', 7));
         }
@@ -94,12 +109,12 @@ class UserAccessPermissionsCollection
         return array($startDate, $expirationDate);
     }
 
-    public function getMembershipExpirationDate($includeBuffer = true): ?Carbon
+    public function getMembershipExpirationDate($includeBuffer = true, $includeFixedTimes = true): ?Carbon
     {
         list($startDate, $endDate) = $this->getActiveDates([
             self::MusoraPlusMembershipPermission,
             self::MusoraBasicMembershipPermission
-        ], $includeBuffer);
+        ], $includeBuffer, $includeFixedTimes);
         return $endDate;
     }
 
