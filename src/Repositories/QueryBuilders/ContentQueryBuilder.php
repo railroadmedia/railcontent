@@ -566,9 +566,9 @@ class ContentQueryBuilder extends QueryBuilder
                     ->orWhereExists(function (Builder $builder)  {
                         return $builder->select('id')
                             ->from(ConfigService::$tableContentFields)
-                            ->where('content_id', '=',DB::raw(ConfigService::$tableContent.'.id'))
-                            ->where('key', '=','enrollment_end_time')
-                            ->where('value', '>=', Carbon::now()
+                            ->where(ConfigService::$tableContentFields.'.content_id', '=',DB::raw(ConfigService::$tableContent.'.id'))
+                            ->where(ConfigService::$tableContentFields.'.key', '=','enrollment_end_time')
+                            ->where(ConfigService::$tableContentFields.'.value', '>=', Carbon::now()
                                 ->toDateTimeString());
                     })
                     ->orWhereExists(function (Builder $builder) use ($membershipPermissionIds) {
