@@ -86,8 +86,8 @@
                     <strong>Now ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }}.</strong>
                 @endif
                 <br>
-                <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
-                <br>
+{{--                <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>--}}
+{{--                <br>--}}
                 <strong class="text-yellow">** 90-Day Guarantee **</strong>
             </p>
         </div>
@@ -674,8 +674,8 @@
                     <strong>Now ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }}.</strong>
                 @endif
                 <br>
-                <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
-                <br>
+{{--                <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>--}}
+{{--                <br>--}}
                 <strong class="text-yellow">** 90-Day Guarantee **</strong>
             </h2>
 

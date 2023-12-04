@@ -219,7 +219,7 @@
 @section('content')
     @include("guitareo.sales.partials._nav")
     @php
-        $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order';
+        $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1';
         $productPrice = floatval($productPrices['guitar-quest']->discounted_price)
     @endphp
 

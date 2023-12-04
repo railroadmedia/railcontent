@@ -38,7 +38,7 @@
             <h2>Start playing piano or <br class="hidden-sm hidden-md hidden-lg"> keyboard in your church.</h2>
             <a
                 class="join vue-add-to-cart"
-                href="/ecommerce/add-to-cart?products[worship-piano]=1&redirect=/order"
+                href="/ecommerce/add-to-cart?products[worship-piano]=1"
                 data-product-json='{"worship-piano": 1}'
             >Get Started &raquo;</a>
 
@@ -49,8 +49,8 @@
                 @else
                     <strong><u>ONLY ${{ floatval($productPrices['worship-piano']->discounted_price) }}</u></strong>
                 @endif
-                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br> <strong
-                        class="yellow">** 90-DAY GUARANTEE **</strong></p>
+{{--                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a>--}}
+                    <br> <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
         </div>
     </header>
     <div class="modal fade text-center" id="trailer" tabindex="-1" role="dialog" aria-labelledby="lesson1">
@@ -614,7 +614,7 @@
             <img class="logo lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/logo-text-white.png" alt="Worship piano logo">
             <h2>Start playing piano or<br class="hidden-sm hidden-md hidden-lg"> keyboard in your church.</h2>
             <a
-                href="/ecommerce/add-to-cart?products[worship-piano]=1&redirect=/order"
+                href="/ecommerce/add-to-cart?products[worship-piano]=1"
                 class="join vue-add-to-cart"
                 data-product-json='{"worship-piano": 1}'
             >Get Started &raquo;</a>
@@ -625,8 +625,8 @@
                 @else
                     <strong><u>ONLY ${{ floatval($productPrices['worship-piano']->discounted_price) }}</u></strong>
                 @endif
-                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br> <strong
-                        class="yellow">** 90-DAY GUARANTEE **</strong></p>
+{{--                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a>--}}
+                    <br> <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
 
             <div class="credit-cards col-xs-12">
                 <i class="fab fa-cc-visa"></i>
@@ -672,10 +672,7 @@
             });
         });
     </script>
-    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
-
-
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @stop

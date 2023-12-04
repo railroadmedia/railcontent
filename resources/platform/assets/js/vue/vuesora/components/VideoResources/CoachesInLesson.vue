@@ -69,14 +69,14 @@
           tw-shrink-0
         "
       >
-        <h4 v-on:click="goToCoachProfile(instructor.url)" class="tw-cursor-pointer">
+        <h4 v-on:click="goToCoachProfile(instructor.url)" class="tw-cursor-pointer tw-z-10">
           <span class="tw-text-xs sm:tw-text-base tw-font-normal tw-mr-1">
             {{ instructor.name.split(" ")[0] }}
           </span>
           <span class="tw-text-xs sm:tw-text-base tw-mr-1 tw-font-bold">
             {{ instructor.name.split(" ")[1] }}
           </span>
-          <span v-if="instructor.name.split(' ')[2]" 
+          <span v-if="instructor.name.split(' ')[2]"
                 class="tw-text-xs sm:tw-text-base tw-font-bold tw-mr-1"
           >
             {{ instructor.name.split(" ")[2] }}
@@ -88,7 +88,7 @@
             v-if="!instructor.current_user_is_subscribed"
             v-on:click="followCoach(instructor.id)"
             class="
-              tw-text-left tw-px-0 tw-py-0 tw-text-xs
+              tw-text-left tw-px-0 tw-py-0 tw-text-xs tw-z-10
               sm:tw-text-base
               tw-transition-none
               tw-text-[#00101D] dark:tw-text-white
@@ -97,6 +97,7 @@
               tw-uppercase
               tw-font-bold
               tw-cursor-pointer
+              tw-relative
             "
           >
             <span>
@@ -108,7 +109,7 @@
             v-if="instructor.current_user_is_subscribed"
             v-on:click="unfollowCoach(instructor.id)"
             class="
-              tw-text-left tw-px-0 tw-py-0 tw-text-xs
+              tw-text-left tw-px-0 tw-py-0 tw-text-xs tw-z-10
               sm:tw-text-base
               tw-transition-none
               tw-border-none
@@ -116,6 +117,7 @@
               tw-uppercase
               tw-font-bold
               tw-cursor-pointer
+              tw-relative
             "
             :class="`tw-text-${brand}`"
           >
@@ -163,7 +165,7 @@ export default {
         })
       } else {
         window.shownotification({
-          icon, 
+          icon,
           text
         });
       }

@@ -32,7 +32,7 @@
                     src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/de-stupefy-logo.png" alt="destupefy logo"><br>
             <i class="fas fa-play play-vimeo autoplay-video" data-toggle="modal" data-target="#trailer"></i>
             <h1><strong>It’s time to tame<br class="hidden-sm hidden-md hidden-lg"> your left hand.</strong></h1>
-            <a class="join" href="/ecommerce/add-to-cart?products[destupefy-your-left-hand]=1&redirect=/order">Get Started &raquo;</a>
+            <a class="join" href="/ecommerce/add-to-cart?products[destupefy-your-left-hand]=1">Get Started &raquo;</a>
 
             <p class="breakdown">
                 @if(floatval($productPrices['destupefy-your-left-hand']->price) > floatval($productPrices['destupefy-your-left-hand']->discounted_price))
@@ -41,8 +41,8 @@
                 @else
                     <strong><u>ONLY ${{ floatval($productPrices['destupefy-your-left-hand']->discounted_price) }}</u></strong>
                 @endif
-                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
-                    <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
+{{--                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a>--}}
+                    <br><strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
         </div>
     </header>
     <div class="modal fade text-center" id="trailer" tabindex="-1" role="dialog" aria-labelledby="trailerLabel">
@@ -52,7 +52,7 @@
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/479108043?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
-                <a href="/ecommerce/add-to-cart?products[destupefy-your-left-hand]=1&redirect=/order" class="join">Get Started</a>
+                <a href="/ecommerce/add-to-cart?products[destupefy-your-left-hand]=1" class="join">Get Started</a>
             </div>
         </div>
     </div>
@@ -374,7 +374,7 @@
         <div class="container">
             <img class="logo lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/de-stupefy-logo.png" alt="destupefy logo">
             <h1><strong>It’s time to tame<br class="hidden-sm hidden-md hidden-lg"> your left hand.</strong></h1>
-            <a href="/ecommerce/add-to-cart?products[destupefy-your-left-hand]=1&redirect=/order" class="join">Get Started &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[destupefy-your-left-hand]=1" class="join">Get Started &raquo;</a>
             <p class="breakdown">
                 @if(floatval($productPrices['destupefy-your-left-hand']->price) > floatval($productPrices['destupefy-your-left-hand']->discounted_price))
                     <s>NORMALLY ${{ floatval($productPrices['destupefy-your-left-hand']->price) }}.</s> &nbsp;
@@ -382,8 +382,8 @@
                 @else
                     <strong><u>ONLY ${{ floatval($productPrices['destupefy-your-left-hand']->discounted_price) }}</u></strong>
                 @endif
-                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
-                    <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
+{{--                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a>--}}
+                    <br><strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
 
             <div class="credit-cards col-xs-12">
                 <i class="fab fa-cc-visa"></i>
@@ -451,10 +451,7 @@
             }
         });
     </script>
-    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
-
-
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @stop

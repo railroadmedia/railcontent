@@ -2,9 +2,7 @@
 
 @php $productPrice = floatval($productPrices['the-power-of-chords']->discounted_price) @endphp
 
-@section('order-link')
-    /ecommerce/add-to-cart?products[the-power-of-chords]=1&redirect=/order
-@endsection
+@section('order-link', '/ecommerce/add-to-cart?products[the-power-of-chords]=1')
 
 @section('topbar')
     @include('pianote._partials.promo-banner', [

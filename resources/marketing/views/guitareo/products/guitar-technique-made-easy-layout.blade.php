@@ -119,7 +119,7 @@
                 @hasSection('button-change')
                     @yield('button-change')
                 @else
-                    <a href="/ecommerce/add-to-cart?products[GTME-OCT-2018-SEMESTER]=1&redirect=/order" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[GTME-OCT-2018-SEMESTER]=1" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
                 @endif
 
                 <p class="price-info">
@@ -133,7 +133,7 @@
                         @endif
                     @endif
 
-                        <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>
+{{--                        <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>--}}
                     <br> <strong>** 90-DAY GUARANTEE **</strong>
                 </p>
             </div>
@@ -664,7 +664,7 @@
                 @hasSection('button-change')
                     @yield('button-change')
                 @else
-                    <a href="/ecommerce/add-to-cart?products[GTME-OCT-2018-SEMESTER]=1&redirect=/order" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[GTME-OCT-2018-SEMESTER]=1" class="join made-easy" data-product-json='{"GTME-OCT-2018-SEMESTER": 1}'>Get Started &raquo;</a>
                 @endif
 
                 <h6 style="margin-top: 15px;">
@@ -678,7 +678,7 @@
                         @endif
                     @endif
 
-                    <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>
+{{--                    <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>--}}
                     <br> <strong>** 90-DAY GUARANTEE **</strong>
                 </h6>
             </div>

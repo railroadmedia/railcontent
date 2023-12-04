@@ -9,84 +9,57 @@
     <meta property="og:description" content="Drum lessons for LIFE. (+20 FREE bonuses)">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/november/lifetime-fb-share-image.jpg" style="display: none;">
 
-    @include('_partials.layout._fonts')
-
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <style>
-        .lazyload {
-            opacity: 0;
-        }
-
-        .lazyloading {
-            opacity: 1;
-            transition: opacity 300ms;
-        }
-
-        .beg-adv-text img {
-            transform: translate(-50%, 0);
-            left: 95%;
-        }
-        .beg-adv-text p {
-            transform: translate(-50%, 0);
-        }
-        .beg-adv-text p:nth-child(2) {
-            left: 40%;
-        }
-        .beg-adv-text p:nth-child(3) {
-            left: 50%;
-        }
-        .beg-adv-bar div:nth-child(1) {
-            width: 40%;
-        }
-        .text-gradient {
-            display:inline-block;
-            background:-webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-        }
-        .text-gradient s {
-            -webkit-text-fill-color: #888;
-        }
-    </style>
+    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
 @stop
 
 @section('global-body')
-        @include("drumeo.sales.partials._nav", [
-        "cartVersion" => true
-        ])
-        @include('drumeo.products.partials.promo-banner', [
-                    "name" => "Lifetime",
-                    "fullPrice" => 1200,
-                    "price" => 1200,
-                    "noBreadcrumb" => true
-                ])
-        <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #094073 50%, #000C16);">
-            <div class="container mx-auto">
-                <h1 class="leading-none"><strong>A <span class="text-musora">Lifetime</span> Of Drum Lessons </strong></h1>
-                <h4 class="leading-tight">(plus your choice of sticks, in-ears, or a stick bag!)</h4>
-                <div class="w-full mx-auto my-4 sm:my-8 " style="max-width:920px;">
-                    <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                        <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/885338480" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>
-                    </div>
-                </div>
-                <div class="px-3 mx-auto w-full max-w-2xl">
-                    <h2 class="leading-none mb-1">
-                        @if(!empty($upgradeVersion))
-                            <s class="opacity-60">$1200</s> <strong>$960</strong>
-                        @else
-                            <strong>$1200</strong>
-                        @endif
-                    </h2>
-                    <p class="leading-tight text-sm"><em>One time payment or choose a <br class="sm:hidden">
-                            payment plan below.</em></p>
-                    <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
-{{--                    <p class="mt-4 leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
+    @include("drumeo.sales.partials._nav", [
+    "cartVersion" => true
+    ])
+
+    @php
+        if(!empty($products['DLM-Lifetime']->getPublicStockCount())) {
+            $stock = $products['DLM-Lifetime']->getPublicStockCount();
+        }
+        else {
+            $stock = 0;
+        }
+    @endphp
+{{--    @include('drumeo.products.partials.promo-banner', [--}}
+{{--        "name" => "Lifetime",--}}
+{{--        "fullPrice" => 1200,--}}
+{{--        "price" => 1200,--}}
+{{--        "specialText" => "<strong>Only <s class='opacity-60'>500</s> <span class='text-promo'>" . $stock . "</span> left!</strong>",--}}
+{{--        "noBreadcrumb" => true,--}}
+{{--                "noCountdown" => true--}}
+{{--    ])--}}
+    <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #094073 50%, #000C16);">
+        <div class="container mx-auto">
+            <h1 class="leading-none"><strong>A <span class="text-musora">Lifetime</span> Of Drum Lessons </strong></h1>
+            <h4 class="leading-tight">(plus your choice of sticks, in-ears, or a stick bag!)</h4>
+            <div class="w-full mx-auto my-4 sm:my-8 " style="max-width:920px;">
+                <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
+                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/885338480" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>
                 </div>
             </div>
-        </section>
+            <div class="px-3 mx-auto w-full max-w-2xl">
+                <h2 class="leading-none mb-1">
+                    @if(!empty($upgradeVersion))
+                        <s class="opacity-60">$1200</s> <strong>$960</strong>
+                    @else
+                        <strong>$1200</strong>
+                    @endif
+                </h2>
+                <p class="leading-tight text-sm"><em>One time payment or choose a <br class="sm:hidden">
+                        payment plan below.</em></p>
+{{--                <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>--}}
+                <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
+{{--                <p class="mt-4 leading-tight text-musora font-black">ONLY <s class='opacity-60'>500</s>  {{ $stock }} SPOTS AVAILABLE</p>--}}
+            </div>
+        </div>
+    </section>
 
     <section class="text-center px-3 sm:px-5 py-10 md:py-14 lg:py-16 px-2 md:px-4 relative overflow-hidden">
         <div class="container mx-auto max-w-5xl z-10 relative">
@@ -122,11 +95,8 @@
             </div>
         </div>
     </section>
-
-
     <div id="customize-anchor" class="anchor anchor-slide"></div>
-    <section
-        class="py-10 md:py-14 lg:py-16 text-white text-center text-center relative z-50"
+    <section class="py-10 md:py-14 lg:py-16 text-white text-center text-center relative z-50"
         style="background:linear-gradient(to bottom, #094073 50%, #000C16);"
         x-data="{
             bonus: 0,
@@ -140,7 +110,6 @@
 
                 <hr class="opacity-0">
                 @php
-
                     $bonuses = [
                         [
                             'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/508daf15-2a10-4dfa-a11f-1ebdfb614cfb-2023-02-15-Drumeo-EarDrums-Updated-100-Square+(1).jpg',
@@ -209,35 +178,31 @@
                     <strong>$1200</strong>
                 @endif
             </h2>
-            <p class="leading-tight text-sm"><em>
-                    One time payment.</em></p>
-            @if(!empty($upgradeVersion))
-                <a
-                    class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
-                    style="padding: 20px 10px;"
-                    :class="bonus !== 1 && 'sold-out'"
-                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true' : '#customize-anchor'"
-                    x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>
-                {{--            <p class="mt-5 leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
-                <br>
-                <a class="inline-block leading-tight mt-3"
-                    :class="bonus !== 1 && 'opacity-50'"
-                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true' : '#customize-anchor'"
-                ><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
-            @else
-                <a
-                    class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
-                    style="padding: 20px 10px;"
-                    :class="bonus !== 1 && 'sold-out'"
-                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849&locked=true' : '#customize-anchor'"
-                    x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>
-                {{--            <p class="mt-5 leading-tight text-musora">ONLY {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
-                <br>
-                <a class="inline-block leading-tight mt-3"
-                    :class="bonus !== 1 && 'opacity-50'"
-                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849&locked=true' : '#customize-anchor'"
-                ><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
-            @endif
+            <p class="leading-tight text-sm"><em>One time payment.</em></p>
+            <a class="join sold-out bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;">SOLD OUT</a>
+{{--            @if(!empty($upgradeVersion))--}}
+{{--                <a--}}
+{{--                    class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;"--}}
+{{--                    :class="bonus !== 1 && 'sold-out'"--}}
+{{--                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true'"--}}
+{{--                    x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>--}}
+{{--                <br>--}}
+{{--                <a class="inline-block text-white leading-tight mt-3"--}}
+{{--                    :class="bonus !== 1 && 'opacity-50'"--}}
+{{--                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true'"--}}
+{{--                ><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>--}}
+{{--            @else--}}
+{{--                <a--}}
+{{--                    class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;"--}}
+{{--                    :class="bonus !== 1 && 'sold-out'"--}}
+{{--                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849&locked=true'"--}}
+{{--                    x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>--}}
+{{--                <br>--}}
+{{--                <a class="inline-block text-white leading-tight mt-3"--}}
+{{--                    :class="bonus !== 1 && 'opacity-50'"--}}
+{{--                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849&locked=true'"--}}
+{{--                ><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>--}}
+{{--            @endif--}}
         </div>
     </section>
     @php
@@ -273,7 +238,7 @@
     <section class="content-section text-center" style="background: #0c1429;">
         <div class="container mx-auto relative z-50">
             <a class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
-                <img alt="" class="h-7 md:h-12 lg:h-14 mb-2 md:mb-0 mx-auto md:mr-2 opacity-70 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=320,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/shopper-approved-logo-white.png">
+                <img alt="" class="h-7 md:h-12 lg:h-14 mb-2 md:mb-0 mx-auto md:mr-2 opacity-70" src="https://www.musora.com/musora-cdn/image/width=320,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/shopper-approved-logo-white.png">
                 <i class="align-middle text-2xl md:text-4xl fas fa-star" style="color: #f68d2d;"></i>
                 <i class="align-middle text-2xl md:text-4xl fas fa-star" style="color: #f68d2d;"></i>
                 <i class="align-middle text-2xl md:text-4xl fas fa-star" style="color: #f68d2d;"></i>
@@ -298,29 +263,9 @@
 
     @include("drumeo.sales.partials._footer")
 
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2023-04-01 10:00:00',
-        'promoVersion' => false
-    ])
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-{{--        <script>--}}
-{{--            $(document).ready(function () {--}}
-{{--                $(document).foundation();--}}
-{{--                $('.flip-div').click(function (e) {--}}
-{{--                    $(this).toggleClass('flipped');--}}
-{{--                });--}}
-{{--            });--}}
-{{--        </script>--}}
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-        <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
-        <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
-        <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
-        <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
-
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @stop

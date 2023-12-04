@@ -93,12 +93,12 @@
     @include('guitareo.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('guitareo._partials.promo-banner', [
-                "name" => "Lifetime",
-                "fullPrice" => 1200,
-                "price" => 1200,
-                "noBreadcrumb" => true
-            ])
+{{--    @include('guitareo._partials.promo-banner', [--}}
+{{--                "name" => "Lifetime",--}}
+{{--                "fullPrice" => 1200,--}}
+{{--                "price" => 1200,--}}
+{{--                "noBreadcrumb" => true--}}
+{{--            ])--}}
     <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #077061 50%, #011815);">
         <div class="container mx-auto">
             <h1 class="leading-none"><strong>Get guitar lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
@@ -117,7 +117,8 @@
                 </h2>
                 <p class="leading-tight text-sm"><em>One time payment or choose a <br class="sm:hidden">
                         payment plan below.</em></p>
-                <a class="join smaller drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
+{{--                <a class="join smaller drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>--}}
+                <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
 {{--                <p class="leading-tight mt-4 text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
             </div>
         </div>
@@ -230,7 +231,7 @@
                     @endif
                 </h2>
                 <p class="leading-tight text-sm">One time payment.</p>
-                <a class="join mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+{{--                <a class="join mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>--}}
 {{--                <p class="mt-4 md:mt-5 leading-tight text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
                 <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get 13 free Black Friday bonuses.</strong></h3>
             </div>
@@ -299,8 +300,9 @@
                     </div>
                 @endforeach
             </div>
-            <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-            <a class="inline-block leading-tight" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
+            <a class="join sold-out my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;">SOLD OUT</a>
+{{--            <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>--}}
+{{--            <a class="inline-block leading-tight" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>--}}
         </div>
     </section>
 
@@ -370,8 +372,7 @@
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-    <script src="{{ asset('/marketing/js/guitareo/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/guitareo/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/guitareo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/guitareo/app.js') }}"></script>
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @stop

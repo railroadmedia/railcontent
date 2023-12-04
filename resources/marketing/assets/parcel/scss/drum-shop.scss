@@ -463,48 +463,6 @@ img {
             }
         }
     }
-
-    .vid-thumb {
-        position: relative;
-        margin: 10px auto 0;
-        cursor: pointer;
-        outline: none;
-        display: inline-block;
-
-        img {
-            border: 2px solid $promoColor;
-            border-radius: 7px;
-            width: 160px;
-            @include tablet {
-                width: 250px;
-            }
-        }
-
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            cursor: pointer;
-            outline: none;
-            transition: opacity .3s;
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid #fff;
-            border-radius: 200px;
-            line-height: 1em;
-            font-size: 16px;
-            padding: 11px;
-            @include tablet {
-                font-size: 19px;
-                padding: 17px;
-            }
-
-            &:hover {
-                opacity: 0.8;
-            }
-        }
-    }
-
 }
 
 .white-box {

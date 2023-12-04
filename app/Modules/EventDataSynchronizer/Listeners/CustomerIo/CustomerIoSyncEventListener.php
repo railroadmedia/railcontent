@@ -1529,7 +1529,7 @@ class CustomerIoSyncEventListener
             $attributes[$brand . '_membership_status'] = $this->getSubscriptionStatus($latest);
             $attributes[$brand . '_membership_subscription_type'] =
                 $latest->product->subscription_interval_count . "_" . $latest->product->subscription_interval_type;
-            $attributes[$brand . '_membership_subscription_renewal-date'] = $latest->nextChargeScheduledAt->timestamp;
+            $attributes[$brand . '_membership_subscription_renewal-date'] = $latest->nextChargeScheduledAt?->timestamp ?? '';
             $attributes[$brand . '_membership_subscription_cancellation-date'] = $latest->cancelledAt?->timestamp;
             $attributes[$brand . '_membership_subscription_cancellation-reason'] = $latest->cancellationReason;
             $attributes[$brand . '_membership_subscription_first-start-date'] =

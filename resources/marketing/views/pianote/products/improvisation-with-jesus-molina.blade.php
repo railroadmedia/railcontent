@@ -75,7 +75,7 @@
         "noBreadcrumb" => true
     ])
 
-    @php $annualLink = '/ecommerce/add-to-cart?products[jesus-molina-improvisation-and-musical-freedom-pack]=1&redirect=/order' @endphp
+    @php $annualLink = '/ecommerce/add-to-cart?products[jesus-molina-improvisation-and-musical-freedom-pack]=1' @endphp
 
     <header class="header text-white relative overflow-hidden z-10" style="background: rgba(38, 13, 15, 0.7);">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-6 text-center">
@@ -486,9 +486,9 @@
                             <i class="fas fa-check text-pianote"></i> Personal support from REAL teachers<br>
                             <i class="fas fa-check text-pianote"></i> 90-day guarantee</p>
                         <a class="join w-full my-3 sm:my-5" style="background:#F61A30;" href="{{ $annualLink }}">Get Started</a>
-                        <p class="text-center text-sm text-pianote">
-                            <em><a href="/#customize-anchor">(OR FREE WITH A PIANOTE MEMBERSHIP)</a></em>
-                        </p>
+{{--                        <p class="text-center text-sm text-pianote">--}}
+{{--                            <em><a href="/#customize-anchor">(OR FREE WITH A PIANOTE MEMBERSHIP)</a></em>--}}
+{{--                        </p>--}}
                     </div>
                 </div>
                 <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0">
@@ -564,11 +564,9 @@
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
-
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
     @yield('scripts')
 @stop
 

@@ -21,6 +21,7 @@ const props = defineProps({
         default: {
             top: 0,
             left: 0,
+            opacity: 0,
         }
     }
 });
@@ -30,7 +31,7 @@ const emit = defineEmits(['closeDropdown', 'addToList', 'progressReset']);
 
 <template>
     <teleport v-if="isOpen" to="#dropdowns-container">
-        <div :style="`top: ${position.top}px !important; left: ${position.left}px !important;`"
+        <div id="catalogue-card-dropdown-div" :style="`top: ${position.top}px !important; left: ${position.left}px !important; opacity:${position.opacity}`"
             class="tw-w-[162px] tw-drop-shadow-lg tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-z-[200] tw-right-0 tw-py-2 tw-top-8">
             <ul class="tw-text-xs tw-w-full">
                 <!-- List Items -->
