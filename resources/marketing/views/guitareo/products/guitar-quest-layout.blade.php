@@ -137,7 +137,7 @@
 
 
     <main>
-        @include('guitareo._partials.promo-banner', [
+        @include('_partials.components.shop.promo-banner', [
             "name" => "Guitar Quest",
             "fullPrice" => floatval($productPrices['guitar-quest']->price),
             "price" => floatval($productPrices['guitar-quest']->discounted_price),

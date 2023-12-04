@@ -21,7 +21,7 @@
         "cartVersion" => true
     ])
 
-    @include('pianote._partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Faster Fingers",
         "fullPrice" => floatval($productPrices['faster-fingers']->price),
         "price" => floatval($productPrices['faster-fingers']->discounted_price),

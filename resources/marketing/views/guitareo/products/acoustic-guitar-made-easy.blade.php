@@ -84,7 +84,7 @@
     @include("guitareo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('guitareo._partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Acoustic Guitar Made Easy",
         "fullPrice" => floatval($productPrices['AGME-JAN-2019-SEMESTER']->price),
         "price" => floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price),

@@ -143,7 +143,7 @@
     @endif
 
     @php
-        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[easy-chords]=1&products[new-piano-players-start-here]=1&products[piano-riffs-and-fills]=1&products[song-secrets-webinar]=1&redirect=/order&locked=true&promo-code=special-discount'
+        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[digital-chords-scales-guide]=1&products[piano-chords-and-scales-guide]=1&products[easy-chords]=1&products[new-piano-players-start-here]=1&products[piano-riffs-and-fills]=1&products[song-secrets-webinar]=1&redirect=/order&locked=true&promo-code=special-discount'
     @endphp
 
     <section class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-center customize px-4 lg:px-8 relative overflow-hidden" style="background: #f6f8fc;">
@@ -172,7 +172,7 @@
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> 1000+ Officially licensed songs</li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Detailed song tutorials</li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Live support</li>
-                            <li class="leading-tight"><i class="fa-li fas fa-check text-pianote"></i> 10 FREE Bonuses</li>
+                            <li class="leading-tight"><i class="fa-li fas fa-check text-pianote"></i> 11 FREE Bonuses</li>
                         </ul>
                     </div>
                     <div class="w-72 lg:w-96 mx-auto sm:mx-0">
@@ -191,7 +191,7 @@
         <div class="container max-w-4xl mx-auto">
             <h6 class="leading-tight mb-4"><em><strong>PLUS</strong> get these special<br class="sm:hidden"> bonuses when you join today.</em></h6>
             <div style="font-size:0px">
-                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 md:w-1/5 ">
+                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 sm:w-1/6 ">
                     <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
@@ -200,7 +200,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 md:w-1/5 ">
+                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 sm:w-1/6 ">
+                    <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
+                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
+                            <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
+                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/december/chords-scales-digital-ipad-bonus.png');"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 sm:w-1/6 ">
                     <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
@@ -209,7 +218,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 md:w-1/5 ">
+                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 sm:w-1/6 ">
                     <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
@@ -218,7 +227,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 md:w-1/5 ">
+                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 sm:w-1/6 ">
                     <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
@@ -227,7 +236,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 md:w-1/5 ">
+                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 sm:w-1/6 ">
                     <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
@@ -309,11 +318,11 @@
         'header' => 'Trusted by students<br class="inline-block sm:hidden">  just like you.',
         'reviewText' => '',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
-        'youtube' => '1.4M',
+        'youtube' => '1.5M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
         'facebook' => '430K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '220K',
+        'instagram' => '240K',
     ])
 
     <section class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-center customize px-5 lg:px-8 relative overflow-hidden" style="background: #f6f8fc;">
@@ -322,25 +331,25 @@
             <h6 class="leading-tight text-pianote mt-2 mb-5"><em>Join today and you’ll get all of these.</em></h6>
 
             <div class="flex flex-wrap text-left">
-                <div class="w-full mb-12 sm:flex items-center">
+                <div class="w-full sm:flex items-center mb-12">
                     <div class="relative flex-shrink-0">
                         <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/chords-scales.jpg">
                     </div>
                     <div class="sm:pl-5 lg:pl-8">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/chords-scales-logo.png">
-                        <p class="leading-tight">Our best-selling book is yours FREE. This book is your encyclopedia of piano chords & scales. Arranged by key, you’ll find every major, minor, sus, and 7th chord as well as all the scales you’ll need to play the songs you love without fear.</p>
+                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/december/chords-and-scales-horizontal-logo.png">
+                        <p class="leading-tight">Our best-selling book is yours FREE. This book is your encyclopedia of piano chords & scales. Arranged by key, you’ll find every major, minor, sus, and 7th chord as well as all the scales you’ll need to play the songs you love without fear. (Because of the busy holiday season, your book will ship in mid-January.)</p>
                     </div>
                 </div>
-                <div class="w-full mb-12 sm:flex items-center">
+                <div class="w-full sm:flex items-center mb-12">
                     <div class="relative flex-shrink-0 sm:order-1">
-                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-poster.jpg">
+                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden bg-white border border-gray-400" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/pianote/promos/december/chords-scales-digital-large.png">
                     </div>
                     <div class="sm:pr-5 lg:pr-8">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-logo.png">
-                        <p class="leading-tight">Upgrade your practice space and master your music theory with this gorgeous poster bundle. Shipped flat so there are no creases and printed in full color on beautiful paper stock, these posters will help you connect the notes on the page to the keys on your piano.</p>
+                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/december/chords-and-scales-digital-logo2.png">
+                        <p class="leading-tight">While you wait for the physical book to arrive, you’ll get instant access to the Digital Version of our amazing book. Available for immediate download, you’ll be able to find and play all the chords and scales you’ll need to play the songs you love.</p>
                     </div>
                 </div>
-                <div class="w-full mb-12 sm:flex items-center">
+                <div class="w-full sm:flex items-center mb-12">
                     <div class="relative flex-shrink-0">
                         <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/nppsh.jpg">
                     </div>
@@ -349,22 +358,31 @@
                         <p class="leading-tight">Your first 30 days on the piano. This 30-day challenge will help you come back to the keys with confidence and feel excited to play your piano every day. Simply follow along with Lisa for 10 minutes a day. You’ll have lifetime access to this course.</p>
                     </div>
                 </div>
-                <div class="w-full mb-12 sm:flex items-center">
+                <div class="w-full sm:flex items-center mb-12">
                     <div class="relative flex-shrink-0 sm:order-1">
-                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/easy-chords.jpg">
+                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-poster.jpg">
                     </div>
                     <div class="sm:pr-5 lg:pr-8">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/easy-chords-logo.png">
-                        <p class="leading-tight">Put what you learned in the webinar to use with this 30-day chording challenge. Play with Lisa every day and master your chord progressions and inversions so you can play any lead sheet with ease. All you have to do is pretty play and follow along.</p>
+                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-logo.png">
+                        <p class="leading-tight">Upgrade your practice space and master your music theory with this gorgeous poster bundle. Shipped flat so there are no creases and printed in full color on beautiful paper stock, these posters will help you connect the notes on the page to the keys on your piano.</p>
                     </div>
                 </div>
-                <div class="w-full sm:flex items-center">
+                <div class="w-full sm:flex items-center mb-12">
                     <div class="relative flex-shrink-0">
                         <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/riffs-fills.jpg">
                     </div>
                     <div class="sm:pl-5 lg:pl-8">
                         <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/riffs-fills-logo.png">
                         <p class="leading-tight">Take your chords and make something beautiful. Lisa will show you her favorite riffs and fills to add some emotion and beauty to your playing. These are the fills she uses every day. She’ll show you each one, note for note.</p>
+                    </div>
+                </div>
+                <div class="w-full sm:flex items-center">
+                    <div class="relative flex-shrink-0 sm:order-1">
+                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/easy-chords.jpg">
+                    </div>
+                    <div class="sm:pr-5 lg:pr-8">
+                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/easy-chords-logo.png">
+                        <p class="leading-tight">Put what you learned in the webinar to use with this 30-day chording challenge. Play with Lisa every day and master your chord progressions and inversions so you can play any lead sheet with ease. All you have to do is pretty play and follow along.</p>
                     </div>
                 </div>
             </div>
@@ -474,7 +492,7 @@ That’s the Play Better Guarantee™.',
                         </div>
                     </div>
                     <br>
-                    <h4 class="leading-tight mt-4 sm:mt-5 mb-2"><strong><span class="text-musora">SAVE 26%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 3 COURSES, 6 POSTERS &amp; THE CHORDS AND SCALES BOOK.</h4> <a class="join  white  my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&amp;products[music-theory-posters]=1&amp;products[piano-chords-and-scales-guide]=1&amp;products[easy-chords]=1&amp;products[new-piano-players-start-here]=1&amp;products[piano-riffs-and-fills]=1&amp;products[song-secrets-webinar]=1&amp;redirect=/order&amp;locked=true&amp;promo-code=special-discount">
+                    <h4 class="leading-tight mt-4 sm:mt-5 mb-2"><strong><span class="text-musora">SAVE 26%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 3 COURSES, 6 POSTERS &amp; THE CHORDS AND SCALES BOOK.</h4> <a class="join  white  my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
                         CLAIM YOUR OFFER
                     </a>
                     <p class="leading-tight text-sm mb-6"><em>First year discount: <s class="opacity-40">$240</s>
@@ -482,7 +500,7 @@ That’s the Play Better Guarantee™.',
                             <br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
                 </div>
                 <div style="font-size:0px">
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/5 " x-data="{
+                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
                         flipped: false,
                     }" x-on:click="
                         flipped = !flipped;
@@ -523,7 +541,47 @@ That’s the Play Better Guarantee™.',
                             </em>
                         </p>
                     </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/5 " x-data="{
+                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
+                        flipped: false,
+                    }" x-on:click="
+                        flipped = !flipped;
+                        if(flipped){
+                            $refs.front.classList.add('rotate-y-180');
+                            $refs.back.classList.remove('-rotate-y-180');
+                            $refs.back.classList.add('rotate-y-0');
+                        }
+                        else {
+                            $refs.front.classList.remove('rotate-y-180');
+                            $refs.back.classList.add('-rotate-y-180');
+                            $refs.back.classList.remove('rotate-y-0');
+                        }
+                    ">
+                        <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
+                            <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
+                                <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="    background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/december/chords-scales-digital-ipad-bonus.png');"></div>
+                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
+                                        <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
+                                        <p class="text-sm"><strong>DETAILS</strong></p>
+                                    </div>
+                                </div>
+                                <div x-ref="back" class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
+                                    <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
+                                        <p class="leading-normal mx-auto text-sm">Your encyclopedia of piano chords &amp; scales.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="w-full leading-normal mt-2">
+                            <strong class="font-black leading-tight inline-block mb-1">Digital Chords &amp; <br>Scales Guide</strong><br>
+                            <span style="text-transform:uppercase; display:inline-block;">
+<strong class="text-musora">FREE</strong></span><br>
+                            <em>
+                                Instant Access
+                            </em>
+                        </p>
+                    </div>
+                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
                         flipped: false,
                     }" x-on:click="
                         flipped = !flipped;
@@ -560,11 +618,11 @@ That’s the Play Better Guarantee™.',
 <s class="opacity-40">$97</s>
 <strong class="text-musora">FREE</strong></span><br>
                             <em>
-                                Online Access
+                                Instant Access
                             </em>
                         </p>
                     </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/5 " x-data="{
+                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
                         flipped: false,
                     }" x-on:click="
                         flipped = !flipped;
@@ -601,11 +659,11 @@ That’s the Play Better Guarantee™.',
 <s class="opacity-40">$97</s>
 <strong class="text-musora">FREE</strong></span><br>
                             <em>
-                                Online Access
+                                Instant Access
                             </em>
                         </p>
                     </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/5 " x-data="{
+                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
                         flipped: false,
                     }" x-on:click="
                         flipped = !flipped;
@@ -642,11 +700,12 @@ That’s the Play Better Guarantee™.',
 <s class="opacity-40">$99</s>
 <strong class="text-musora">FREE</strong></span><br>
                             <em>
-                                Online Access
+                                Instant Access
                             </em>
                         </p>
                     </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/5 " x-data="{
+                    <br class="hidden lg:inline-block">
+                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
                         flipped: false,
                     }" x-on:click="
                         flipped = !flipped;
@@ -687,7 +746,7 @@ That’s the Play Better Guarantee™.',
                             </em>
                         </p>
                     </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/5 " x-data="{
+                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
                         flipped: false,
                     }" x-on:click="
                         flipped = !flipped;
@@ -728,7 +787,7 @@ That’s the Play Better Guarantee™.',
                             </em>
                         </p>
                     </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/5 " x-data="{
+                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
                         flipped: false,
                     }" x-on:click="
                         flipped = !flipped;
@@ -769,7 +828,7 @@ That’s the Play Better Guarantee™.',
                             </em>
                         </p>
                     </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/5 " x-data="{
+                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
                         flipped: false,
                     }" x-on:click="
                         flipped = !flipped;
@@ -810,7 +869,7 @@ That’s the Play Better Guarantee™.',
                             </em>
                         </p>
                     </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/5 " x-data="{
+                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
                         flipped: false,
                     }" x-on:click="
                         flipped = !flipped;
@@ -851,7 +910,7 @@ That’s the Play Better Guarantee™.',
                             </em>
                         </p>
                     </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/5 " x-data="{
+                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
                         flipped: false,
                     }" x-on:click="
                         flipped = !flipped;
@@ -915,7 +974,7 @@ That’s the Play Better Guarantee™.',
                     <strong>$177</strong> <span class="text-musora">(Save 26%)</span>
                 </h3>
                 <p class="text-sm mb-4 sm:mb-6">For your first year, then $240/yr.</p>
-                <a class="join  white  mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&amp;products[music-theory-posters]=1&amp;products[piano-chords-and-scales-guide]=1&amp;products[easy-chords]=1&amp;products[new-piano-players-start-here]=1&amp;products[piano-riffs-and-fills]=1&amp;products[song-secrets-webinar]=1&amp;redirect=/order&amp;locked=true&amp;promo-code=special-discount">
+                <a class="join  white  mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
                     CLAIM YOUR OFFER
                 </a>
                 <br>

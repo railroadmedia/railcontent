@@ -28,7 +28,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Pianote Metronome",
         "fullPrice" => floatval($productPrices['taktell-piccolo-metronome']->price),
         "price" => floatval($productPrices['taktell-piccolo-metronome']->discounted_price),

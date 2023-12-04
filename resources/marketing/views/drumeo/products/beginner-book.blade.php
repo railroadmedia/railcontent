@@ -19,7 +19,7 @@
 @stop
 
 @section('content')
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "The Best Beginner Drum Book",
         "fullPrice" => floatval($productPrices['BeginnerBook']->price),
         "price" => floatval($productPrices['BeginnerBook']->discounted_price),

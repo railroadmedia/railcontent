@@ -304,7 +304,7 @@
 @endsection
 
 @section('content')
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Tone Control Kit",
         "fullPrice" => floatval($productPrices['tone-control-kit']->price),
         "price" => floatval($productPrices['tone-control-kit']->discounted_price),

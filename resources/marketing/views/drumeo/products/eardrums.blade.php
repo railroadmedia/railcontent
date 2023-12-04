@@ -84,7 +84,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Drumeo EarDrums",
         "fullPrice" => floatval($productPrices['drumeo-eardrums']->price),
         "price" => floatval($productPrices['drumeo-eardrums']->discounted_price),

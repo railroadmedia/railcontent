@@ -89,12 +89,12 @@ class SalesController extends BaseController
 
     public function aylarecommends()
     {
-        return view('guitareo.shop.ayla-recommends');
+        return view('guitareo.pages.ayla-recommends');
     }
 
     public function survivalkitinstructions()
     {
-        return view('guitareo.shop.pages.survival-kit-tutorial');
+        return view('guitareo.pages.survival-kit-instructions');
     }
 
     public function songs500()

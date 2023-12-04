@@ -30,9 +30,6 @@
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and voice lessons with full access to all Musora communities.</li>',
         'image' => '/marketing/drumeo/membership/homepage/2023/drumeo-collage.png',
     ])
-    @include('musora.sales.components.trial-explanation', [
-        'instrument' => 'drumming',
-    ])
 
     @include('musora.sales.components.app-section', [
         'image' => 'marketing/drumeo/membership/homepage/2023/devices.png',
