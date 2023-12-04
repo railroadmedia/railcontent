@@ -1,15 +1,13 @@
-@php
-    require_once(resource_path('marketing/views/pianote/shop/bundles.php'))
-@endphp
-
 @extends('_partials.layout.global-shop-layout')
 
 @section('meta')
     <title>Pianote Shop</title>
     <meta property="og:title" content="Pianote Shop">
+
     <meta name="description" content="Get Lessons, T-Shirts, & Much More!">
     <meta property="og:description" content="Get Lessons, T-Shirts, & Much More!">
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/november/xmas-pianote-shop-share-image.jpg">
+
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/november/xmas-pianote-shop-share-image.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 @endsection
 
@@ -24,37 +22,10 @@
 @endsection
 
 @section('body')
-    @include('_partials.components.shop.promo-top-banner',[
+    @include('_partials.components.shop.promo-shop-header',[
         'text' => '<span class="text-promo">Save up to 88%</span> on piano lessons,<br class="sm:hidden"> tools, & merch.',
         'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg',
     ])
-
-
-    @if(Session::has('addedProducts'))
-        <section class="added-to-cart-background clearfix">
-            <div class="float-left px-2 md:px-3 w-full check">
-                <h2><i class="fas fa-check"></i>Added to Cart</h2>
-            </div>
-            <div class="float-left px-2 md:px-3 w-full product-info">
-                <div class="float-left px-2 md:px-3 w-full md:w-8/12 product">
-                    @foreach(Session::get('addedProducts') as $addedProduct)
-                        <div class="float-left px-2 md:px-3 w-full" style="padding:0;margin-bottom:15px;">
-                            <img src="{{ $addedProduct['thumbnail'] }}">
-                            <h4>{{ $addedProduct['name'] }}</h4>
-                            <p>{{ $addedProduct['description'] }}</p>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="float-left px-2 md:px-3 w-full md:w-4/12 checkout">
-                    <h5>
-                        Cart Subtotal({{ Session::get('cartNumberOfItems') }}):
-                        <strong>${{ Session::get('cartSubTotal') }}</strong>
-                    </h5>
-                    <a href="{{ get_musora_brand_base_url() }}/order/{{ $brand }}" class="checkout-button"><i class="fas fa-cart-plus"></i> Checkout</a>
-                </div>
-            </div>
-        </section>
-    @endif
 
     @include('_partials.components.shop.index-filters')
 
@@ -128,7 +99,7 @@
                             <ul class="splide__list items-start">
                                 @foreach($featured as $key => $feat)
                                     <li class="splide__slide px-1">
-                                        @include('musora.shop._shop-card-alt', [
+                                        @include('_partials.components.shop.product-card', [
                                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $feat->slug ),
                                             "sku" => $feat->sku === 'drumeo' ? null : $feat->sku,
                                             "badgeText" => $feat->badge_text,
@@ -160,7 +131,7 @@
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Piano Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-{{--                    @include('musora.shop._shop-card-alt', [--}}
+{{--                    @include('_partials.components.shop.product-card', [--}}
 {{--                          "itemURL" => "/",--}}
 {{--                          "sku" => null,--}}
 {{--                          "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",--}}
@@ -176,7 +147,7 @@
 {{--                     ])--}}
 
                 <div x-cloak x-show="filter === 'lessons'">
-                    @include('musora.shop._shop-card-alt', [
+                    @include('_partials.components.shop.product-card', [
                          "itemURL" => "/shop/ultimate-lessons-bundle",
                          "sku" => null,
                          "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/november/bundles/pianote-ultimate-shop-thumb2.jpg",
@@ -188,7 +159,7 @@
                     ])
                 </div>
                 <div x-cloak x-show="filter === 'lessons'">
-                    @include('musora.shop._shop-card-alt', [
+                    @include('_partials.components.shop.product-card', [
                          "itemURL" => "/shop/30-day-challenge-bundle",
                          "sku" => null,
                          "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-shop-thumb2.jpg",
@@ -200,7 +171,7 @@
                     ])
                 </div>
                 @foreach($lessons as $key => $lesson)
-                    @include('musora.shop._shop-card-alt', [
+                    @include('_partials.components.shop.product-card', [
                             "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
                             "thumbnail" => $lesson->thumbnail,
@@ -228,7 +199,7 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Accessories</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 @foreach($accessories as $accessory)
-                    @include('musora.shop._shop-card-alt', [
+                    @include('_partials.components.shop.product-card', [
                             "sku" => (str_contains($accessory->sku, 'member') || str_contains($accessory->sku, 'products')) ? '' : $accessory->sku,
                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
                             "thumbnail" => $accessory->thumbnail,
@@ -254,7 +225,7 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-tree-christmas text-{{ $brand }} mr-1"></i> Christmas Merch</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
                     @foreach($xmas as $key => $xmasItem)
-                        @include('musora.shop._shop-card-alt', [
+                        @include('_partials.components.shop.product-card', [
                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $xmasItem->slug ),
                             "sku" => $xmasItem->sku === 'pianote' ? null : $xmasItem->sku,
                             "badgeText" => $xmasItem->badge_text,
@@ -286,7 +257,7 @@
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
                     @foreach($shirts as $shirt)
-                    @include('musora.shop._shop-card-alt', [
+                    @include('_partials.components.shop.product-card', [
                         "sku" => $shirt->sku,
                         "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
                         "thumbnail" => $shirt->thumbnail,
@@ -313,7 +284,7 @@
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
                     @foreach($hoodies as $hoodie)
-                    @include('musora.shop._shop-card-alt', [
+                    @include('_partials.components.shop.product-card', [
                         "sku" => $hoodie->sku,
                         "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
                         "thumbnail" => $hoodie->thumbnail,
@@ -341,7 +312,7 @@
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
 
                     @foreach($misc as $miscItem)
-                        @include('musora.shop._shop-card-alt', [
+                        @include('_partials.components.shop.product-card', [
                              "sku" => $miscItem->sku,
                              "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $miscItem->slug ),
                              "badgeText" => $miscItem->badge_text,
