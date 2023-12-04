@@ -460,6 +460,16 @@ return [
                     'pianote',
                 ],
             ],
+            'Digital Chords And Scales' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_digital-chords-and-scales',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Blog Signup' => [
                 'custom_attributes' => [
                 ],

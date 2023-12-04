@@ -1743,5 +1743,7 @@ return [
         'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
     ],
     'playlist_items_limit' => 300,
-    'search_in_playlist_items_name' => true
+    'search_in_playlist_items_name' => true,
+
+    'cohort_permisssion_ids' => [81, 65,96,97,98,100,101],
 ];

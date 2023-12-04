@@ -236,7 +236,7 @@
             $enrollmentLink = 'https://www.pianote.com/choose-plan';
             $brandTitle = 'Pianote';
             $buttonText = 'GET STARTED';
-            $buttonLink = "/ecommerce/add-to-cart?products[30-day-blues-piano]=1&redirect=/order";
+            $buttonLink = "/ecommerce/add-to-cart?products[30-day-blues-piano]=1";
             $studentProfilesImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png';
             $numStudents =  number_format($nPackOwners ?? 0);
             $students = 'piano players';
@@ -544,10 +544,9 @@ $points = [
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
 
-    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
 
     <script>

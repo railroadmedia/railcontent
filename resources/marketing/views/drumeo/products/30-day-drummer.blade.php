@@ -249,7 +249,7 @@
             $enrollmentLink = 'https://www.drumeo.com/choose-plan';
             $brandTitle = 'Drumeo';
             $buttonText = 'GET STARTED';
-            $buttonLink = "/ecommerce/add-to-cart?products[30-day-drummer-3]=1&redirect=/order";
+            $buttonLink = "/ecommerce/add-to-cart?products[30-day-drummer-3]=1";
             $studentProfilesImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png';
             $numStudents =  number_format($nPackOwners ?? 0);
             $students = 'drummers';
@@ -506,10 +506,9 @@ $points = [
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 
-    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
 
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>

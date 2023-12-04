@@ -146,7 +146,7 @@
                         <a class="join smaller sold-out">SOLD OUT</a>
                     @endif
                 </div>
-                <h6 class="text-sm leading-tight mt-2"><em>or get it free with an Annual Drumeo Membership.</em></h6>
+{{--                <h6 class="text-sm leading-tight mt-2"><em>or get it free with an Annual Drumeo Membership.</em></h6>--}}
             </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to right, rgba(7,23,43,0.85), rgba(26,32,38,0.85));"></div>
@@ -386,8 +386,8 @@
 
                         </div>
                     </div>
-                    <br>
-                    <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[padstand]=1&locked=true"><h4><strong><u>Or get it FREE when you join Drumeo.</u></strong></h4></a>
+{{--                    <br>--}}
+{{--                    <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[padstand]=1&locked=true"><h4><strong><u>Or get it FREE when you join Drumeo.</u></strong></h4></a>--}}
                 @else
                     <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>
                 @endif

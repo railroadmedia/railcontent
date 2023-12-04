@@ -430,10 +430,19 @@ class RevenueCatController extends Controller
     public function syncSubscriber(Request $request)
     {
         $user = $this->revenueCatService->syncSubscriber($request->get('original_app_user_id'), $request->get('email'));
+        $revenueCatSubscriber = $this->revenueCatService->getSubscriber($request->get('original_app_user_id'));
+        $entitlements = $revenueCatSubscriber->entitlements;
+
+        if(!$entitlements) {
+            return response()->json(
+                ['shouldCreateAccount' => true]
+            );
+        }
 
         if (!$user) {
             return response()->json([
                                         'shouldCreateAccount' => true,
+                                        'originalAppUserId' => $request->get('original_app_user_id'),
                                     ]);
         }
 

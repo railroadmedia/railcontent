@@ -12,6 +12,7 @@ use App\Modules\Ecommerce\Models\Address;
 use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
+use App\Modules\Ecommerce\Models\UserAccessPermission;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
 use App\Modules\Notifications\Models\NotificationSettings;
@@ -107,6 +108,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string|null $support_note
  * @property int|null $shopify_id
  * @property bool|false $has_recharge_subscription
+ * @property Carbon|null $recharge_renewal_date
  * @property bool|false $has_apple_subscription
  * @property bool|false $has_google_subscription
  * @property int $cio_synced_workspaces
@@ -1029,5 +1031,14 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
                 );
             },
         );
+    }
+
+    public function isEnrolledIntoCohort()
+    {
+        $cohortPermissionsIds = config('railcontent.cohort_permisssion_ids',[]);
+        return $this->hasMany(
+            UserAccessPermission::class,
+            "user_id"
+        )->whereIn("permission_id", $cohortPermissionsIds)->count() > 0;
     }
 }

@@ -5,9 +5,9 @@
     //dd($brand . '/playlists')
 @endphp
 @section('meta')
-    <title>Playlists | Musora</title>
+    <title> {{ $playlist['name'] }} | Musora</title>
 @endsection
 
 @section('content')
-    <playlist :playlist="{{ json_encode($playlist) }}" :lessons="{{ $listLessons }}" />
+    <playlist :playlist="{{ json_encode($playlist) }}" :lessons="{{ $listLessons }}" ></playlist>
 @endsection

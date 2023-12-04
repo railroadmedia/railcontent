@@ -37,14 +37,16 @@
             <img class="h-16 sm:h-20 lg:h-24" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d122ay5chh2hr5.cloudfront.net/shop/rhythm-and-groove/Logo.svg" alt="Rhythm and groove logo"><br>
             <i class="fas fa-play play-button mt-56 sm:mt-80 mb-5 sm:mb-24 lg:mb-28 autoplay-video" data-open="trailer"></i>
             <h2><strong>Go beyond simple<br class="inline sm:hidden"> strumming</strong> on the guitar.</h2>
-            <a class="join my-3 md:my-4 w-full max-w-xl" href="/ecommerce/add-to-cart?products[rhythm-and-groove]=1&redirect=/order">Start Your Course</a>
+            <a class="join my-3 md:my-4 w-full max-w-xl" href="/ecommerce/add-to-cart?products[rhythm-and-groove]=1">Start Your Course</a>
             <h3>
                 @if(floatval($productPrices['rhythm-and-groove']->price) > floatval($productPrices['rhythm-and-groove']->discounted_price))
                     <s class="opacity-60">${{ floatval($productPrices['rhythm-and-groove']->price) }}</s>
                 @endif
                 <strong class="">Only ${{ floatval($productPrices['rhythm-and-groove']->discounted_price) }}</strong> {{--<span style="font-size: 75%;"><em>({{ round(100 - (100 * (floatval($productPrices['rhythm-and-groove']->discounted_price) / floatval($productPrices['rhythm-and-groove']->price)))) }}% off)</em></span>--}}</h3>
-            <p class="leading-tight mt-2"><strong><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a><br>
-                    <span class="text-coaches">** 90-DAY GUARANTEE **</span></strong></p>
+            <p class="leading-tight mt-2"><strong>
+{{--                    <a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a><br>--}}
+                    <span class="text-coaches">** 90-DAY GUARANTEE **</span>
+                </strong></p>
         </div>
         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 70%, #020b17);"></div>
     </header>
@@ -251,7 +253,7 @@
             <img class="h-14 sm:h-20 lg:h-24" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d122ay5chh2hr5.cloudfront.net/shop/rhythm-and-groove/Logo.svg" alt="Rhythm and groove logo"><br>
             <h3 class="leading-normal my-6 sm:my-8"><strong>Get grooving on guitar</strong><br class="hidden sm:inline"> with fun rhythms you can add to any song.</h3>
             {{--<p class="text-coaches tracking-widest">LIMITED TIME OFFER</p>--}}
-            <a class="join my-2 md:my-3 w-full max-w-xl" href="/ecommerce/add-to-cart?products[rhythm-and-groove]=1&redirect=/order">Start Your Course</a>
+            <a class="join my-2 md:my-3 w-full max-w-xl" href="/ecommerce/add-to-cart?products[rhythm-and-groove]=1">Start Your Course</a>
             <h3>
                 @if(floatval($productPrices['rhythm-and-groove']->price) > floatval($productPrices['rhythm-and-groove']->discounted_price))
                     <s class="opacity-60">${{ floatval($productPrices['rhythm-and-groove']->price) }}</s>
@@ -259,8 +261,10 @@
                 <strong class="">Only  ${{ floatval($productPrices['rhythm-and-groove']->discounted_price) }}</strong>
                     {{--<em style="font-size: 70%;">({{ round(100 - (100 * (floatval($productPrices['rhythm-and-groove']->discounted_price) / floatval($productPrices['rhythm-and-groove']->price)))) }}% off)</em>--}}
             </h3>
-            <p class="leading-tight mt-4"><strong><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a><br>
-                <span class="text-coaches">** 90-DAY GUARANTEE **</span></strong></p>
+            <p class="leading-tight mt-4"><strong>
+{{--                    <a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a><br>--}}
+                <span class="text-coaches">** 90-DAY GUARANTEE **</span>
+                </strong></p>
         </div>
     </section>
     <div class="h-5 sm:h-7 -mt-5 sm:-mt-7" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #00101d calc(50% + 1px));"></div>
