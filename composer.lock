@@ -8956,12 +8956,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "eb4a3d2f743711a6b9fd7332421dea9f167651ae"
+                "reference": "75784211ca0e2e513fc06d371f6954166d4b983c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/eb4a3d2f743711a6b9fd7332421dea9f167651ae",
-                "reference": "eb4a3d2f743711a6b9fd7332421dea9f167651ae",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/75784211ca0e2e513fc06d371f6954166d4b983c",
+                "reference": "75784211ca0e2e513fc06d371f6954166d4b983c",
                 "shasum": ""
             },
             "require": {
@@ -9018,7 +9018,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-workouts"
             },
-            "time": "2023-12-04T14:00:39+00:00"
+            "time": "2023-12-04T16:13:21+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -10455,16 +10455,16 @@
         },
         {
             "name": "spatie/laravel-data",
-            "version": "3.10.0",
+            "version": "3.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-data.git",
-                "reference": "5b9e32824a17dd7c91499075fbae882398bd4220"
+                "reference": "23dd20812d3ba829233081679b5bf0f97645d300"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-data/zipball/5b9e32824a17dd7c91499075fbae882398bd4220",
-                "reference": "5b9e32824a17dd7c91499075fbae882398bd4220",
+                "url": "https://api.github.com/repos/spatie/laravel-data/zipball/23dd20812d3ba829233081679b5bf0f97645d300",
+                "reference": "23dd20812d3ba829233081679b5bf0f97645d300",
                 "shasum": ""
             },
             "require": {
@@ -10526,7 +10526,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-data/issues",
-                "source": "https://github.com/spatie/laravel-data/tree/3.10.0"
+                "source": "https://github.com/spatie/laravel-data/tree/3.10.1"
             },
             "funding": [
                 {
@@ -10534,7 +10534,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-01T14:22:21+00:00"
+            "time": "2023-12-04T14:59:58+00:00"
         },
         {
             "name": "spatie/laravel-fractal",

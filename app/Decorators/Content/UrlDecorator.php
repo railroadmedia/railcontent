@@ -34,8 +34,11 @@ class UrlDecorator extends ModeDecoratorBase
             if ($content['type'] == 'coach-stream') {
                 $contents[$contentIndex]['url'] = url()->route('platform.coach.first-level', [
                     'brand' => $content['brand'],
-                    'firstContentSlug' => $content['slug'],
-                    'firstContentId'=>$content['id'],
+                    $content->fetch(
+                        'fields.instructor.1.slug'
+                    ),
+                    $content['slug'],
+                    $content['id'],
                 ]);
             }
 
