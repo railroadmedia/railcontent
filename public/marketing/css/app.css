@@ -3622,12 +3622,9 @@ video {
 .uppercase {
   text-transform: uppercase !important;
 }
-<<<<<<< HEAD
 .lowercase {
   text-transform: lowercase !important;
 }
-=======
->>>>>>> project-workouts-mobile
 .capitalize {
   text-transform: capitalize !important;
 }
