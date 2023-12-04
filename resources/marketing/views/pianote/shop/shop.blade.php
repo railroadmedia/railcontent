@@ -56,7 +56,7 @@
         </section>
     @endif
 
-    @include('drumeo.drumshop._partials._catalogue-filters')
+    @include('_partials.components.shop.index-filters')
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         @php

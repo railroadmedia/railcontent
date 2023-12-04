@@ -82,7 +82,7 @@
         </div>
     @endif
 
-    @include('drumeo.drumshop._partials._catalogue-filters', [
+    @include('_partials.components.shop.index-filters', [
         "all" => true
     ])
 

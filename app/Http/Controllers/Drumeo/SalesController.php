@@ -157,19 +157,6 @@ class SalesController extends BaseController
     {
         return view('drumeo.products.festival', ['theme' => 'drumeo']);
     }
-
-    public function toneControl()
-    {
-        return view('drumeo.products.tone-control-kit', ['theme' => 'drumeo']);
-    }
-    public function quietKick()
-    {
-        return view('drumeo.products.quietkick', ['theme' => 'drumeo']);
-    }
-    public function eardrums()
-    {
-        return view('drumeo.products.eardrums', ['theme' => 'drumeo']);
-    }
     public function thirtyDayDrummer()
     {
         $productId = 741;
@@ -343,12 +330,7 @@ class SalesController extends BaseController
 
     public function giftCard()
     {
-        return view('drumeo.drumshop.pages.gift-card', ['theme' => 'drumeo']);
-    }
-
-    public function drummingSystem()
-    {
-        return view('drumeo.drumshop.pages.drumming-system', ['theme' => 'drumeo']);
+        return view('drumeo.drumshop.gift-card', ['theme' => 'drumeo']);
     }
 
     public function easyRudimentsPlaylist()
