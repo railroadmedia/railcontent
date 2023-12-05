@@ -33,7 +33,7 @@
         @php
             $bundles = [
                 [
-                    'slug' => 'https://www.pianote.com/shop/ultimate-lessons-bundle',
+                    'slug' => '/shop/ultimate-lessons-bundle',
                     'desc' => '11 Free Bonuses<br> Worth $933',
                     'visible' => 1,
                     'specialW' => true,
@@ -45,7 +45,7 @@
                     'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m4.jpg',
                 ],
                 [
-                    'slug' => 'https://www.pianote.com/shop/30-day-challenge-bundle',
+                    'slug' => '/shop/30-day-challenge-bundle',
                     'desc' => '7 Online Courses <br>For The Price Of 1',
                     'visible' => 1,
                     'specialW2' => true,
