@@ -166,7 +166,7 @@ class RailcontentV2DataSyncingService
 
         foreach ($contentRows as $contentRow) {
             $contentFieldRows = $contentsFieldRows[$contentRow->id] ?? [];
-            $contentLengthInSecondsField = $contentsLengthInSecondsFields[$contentRow->id] ?? null;
+            $contentLengthInSecondsField = $contentsLengthInSecondsFields[$contentRow->video] ?? null;
 
             // fields first
             foreach ($this->fieldNameToContentColumnNameMap as $fieldName => $contentColumnName) {
@@ -238,7 +238,7 @@ class RailcontentV2DataSyncingService
                         $tableRowsToInsert[$tableName][] = [
                             'content_id' => $contentRow->id,
                             $fieldAndColumnName => $contentFieldRow->value,
-                            'position' => $contentFieldRow->position,
+                            'position' => $contentFieldRow->position ?? 1,
                         ];
                     }
                 }
