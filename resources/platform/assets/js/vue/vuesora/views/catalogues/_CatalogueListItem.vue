@@ -282,6 +282,7 @@ export default {
   },
   computed: {
     mappedData() {
+      //console.log('mappedData', this.contentModel.list.column_data)
       const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value
       if (Number.isFinite(Number(difficultyValue))) {
         this.contentModel.list.difficulty = difficultyValue;
