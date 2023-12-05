@@ -2358,7 +2358,11 @@ class ContentRepository extends RepositoryBase
 
             $filterOptionsArray[$filterOptionColumnName] = [];
         }
-        $tableResultsCount = $joinTablesQuery->get();
+        $joinTablesQuery->addSelect(
+            [ 'railcontent_content.id as content_id']
+        );
+
+        $groupBy[] = 'content_id';
         if (!empty($groupBy)) {
             $joinTablesQuery->groupBy($groupBy);
         } else {
@@ -2374,13 +2378,19 @@ class ContentRepository extends RepositoryBase
                 ->unique()
                 ->values()
                 ->toArray();
-        $counts[$filterOptionName] = ($tableResultsCount->whereNotNull($filterOptionName)
-       ->pluck($filterOptionName)->countBy())->toArray();
+            $counts[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
+                ->unique(function ($item) use($filterOptionName) {
+                                return $item['content_id'].$item["$filterOptionName"];
+                            })
+                ->pluck($filterOptionName)
+                ->countBy()
+                ->toArray();
 
-            foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
+        foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
+               $nr = $counts[$filterOptionName][$filterOptionValueToClean];
                 $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
                     trim(
-                        $filterOptionValueToClean.' ('.$counts[$filterOptionName][$filterOptionValueToClean].')'
+                        $filterOptionValueToClean.' ('.$nr.')'
                     )
                 );
             }
