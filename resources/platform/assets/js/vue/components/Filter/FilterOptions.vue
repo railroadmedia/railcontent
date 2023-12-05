@@ -31,36 +31,12 @@
 
     const selectedOption = ref({});
 
-    const clickColumnItem = (category, item) => {
-         let newSelection = {...props.selectedFilters};
-
-         if (newSelection[category]){
-            const isChecked = newSelection[category].find((f)=> f === item.value);
-
-            if (isChecked) {
-                newSelection[category] = newSelection[category].filter((f) => f !== item.value);
-
-                if(newSelection[category].length === 0) {
-                    delete newSelection[category];
-                }
-            }
-            else {
-                newSelection[category].push(item.value);
-            }
-
-         }
-         else {
-             newSelection[category] = [item.value];
-         }
-
-         emit('onFilterClickHandle', newSelection);
-    };
-
     const singleSelect = (category, item) => {
         selectedOption.value[category] = item;
     }
 
     onMounted(()=>{
+        console.log('multi columns',props.multiSelectColumns)
         if(Object.keys(selectedOption.value).length === 0 && props.singleSelectColumns.length > 0) {
             selectedOption.value = {
                 [props.singleSelectColumns[0].category]: props.singleSelectColumns[0].items[0],
