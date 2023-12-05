@@ -901,7 +901,7 @@ class ContentPagesController extends BaseController
 
                 $contentToRenderAsLesson['ranges'] = array_unique($contentToRenderAsLesson['ranges'] ?? []);
             }
-        }
+        }   
 
         if ($contentToRenderAsLesson['type'] == 'workout') {
             return view('content.workout-lesson', [

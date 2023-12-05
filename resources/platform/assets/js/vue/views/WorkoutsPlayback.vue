@@ -7,14 +7,14 @@
         />
         <div class="tw-flex tw-w-full">
             <div class="tw-grow">
-                <div class="tw-w-full" v-if="videoId">
-                    <YoutubePlayer v-if="videoType === 'youtube'"
-                        :video-id="videoId"
+                <div class="tw-w-full" v-if="videoProps.videoId">
+                    <YoutubePlayer v-if="videoProps.videoType === 'youtube'"
+                        :video-id="videoProps.videoId"
                     />
-                    <video-player
+                    <video-player v-else-if="videoProps.videoType === 'vimeo' && videoProps.useLegacyPlayer"
                         ref="mediaElementVueInstance"
-                        :theme-color="videoProps.themeColor"
-                        :brand="videoProps.brand"
+                        :theme-color="brand"
+                        :brand="brand"
                         :poster="videoProps.poster"
                         :sources="videoProps.sources"
                         :ranges="videoProps.ranges ? videoProps.ranges : {}"
@@ -32,8 +32,32 @@
                         :cast-title="videoProps.castTitle"
                         :use-intersection-observer="videoProps.useIntersectionObserver"
                     >
-                        <div class="widescreen title tw-text-[videoProps.brand] tw-mb-2"></div>
+                        <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                     </video-player>
+                    <video-player v-else-if="videoProps.videoType === 'vimeo' && !videoProps.useLegacyPlayer"
+                        ref="mediaElementVueInstance"
+                        :theme-color="brand"
+                        :brand="brand"
+                        :poster="videoProps.poster"
+                        :sources="videoProps.sources"
+                        :ranges="videoProps.ranges ? videoProps.ranges : {}"
+                        :ranges-video-ids="videoProps.rangesVideoIds ? videoProps.rangesVideoIds : {}"
+                        :show-range-buttons="videoProps.showRangeButtons ? videoProps.showRangeButtons : false"
+                        :hls-manifest-url="videoProps.hlsManifestUrl"
+                        :captions="videoProps.captions"
+                        :chapters="videoProps.chapters"
+                        :current-second="videoProps.currentSecond"
+                        :content-id="videoProps.contentId"
+                        :user-id="videoProps.userId"
+                        :video-id="videoProps.videoId"
+                        :video-length="videoProps.videoLength"
+                        :total-duration="videoProps.totalDuration"
+                        :cast-title="videoProps.castTitle"
+                        :use-intersection-observer="videoProps.useIntersectionObserver"
+                    >
+                        <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
+                    </video-player>
+                    <div v-else>ERROR LOADING VIDEO...</div>
                 </div>
             </div>
             <div >sidebar</div>
@@ -65,22 +89,10 @@ const props = defineProps({
         type: String,
         default: ''
     },
-    videoType: {
-        type: String,
-        default: null
-    },
-    videoId: {
-        type: String,
-        default: null
-    },
     videoProps: {
         type: Object,
         default: {},
     },
-    useLegacyPlayer: {
-        type: Boolean,
-        default: false
-    }
 });
 
 const userStore = useUserStore();

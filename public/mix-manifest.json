@@ -1,5 +1,5 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=f591b373137ef1fde2c72f039da246be",
+    "/platform/js/app.js": "/platform/js/app.js?id=a101185584874738a60a86c13217d9f1",
     "/platform/js/profile.js": "/platform/js/profile.js?id=86aa1841f2c5fd61f0b1a0a087caa000",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=b11719fd2b12999cf314705273f39458",
     "/platform/js/books.js": "/platform/js/books.js?id=59cd94e09b034342fbe6c7401bdd44e4",
@@ -22,16 +22,14 @@
     "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=a1f6fdae415f5b0fefa59d58d4c25c7f",
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=b9caf2c45cf80d5b3071a3dcd42aaa60",
     "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=183a1b7776f61574a15145a8ee0872f6",
+    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=215668a7ca2964afd49b06b3e4b8b933",
     "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=19f87590d36a1417067cd4843f58d26d",
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=8bd9bccef0842948c5e88cd0d674807d",
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=2722706e09f4733ca6e2d65e9b61d496",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=615b828a5c5d567a25c31dddfbfbc02b",
-    "/vendor~player.js": "/vendor~player.js?id=e2082f7ad4786ce50ed2fc5843c742d7",
+    "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=e2082f7ad4786ce50ed2fc5843c742d7",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=b06c413be0cbc92f51079e8948ccc276",
-    "/platform/css/app.css": "/platform/css/app.css?id=e017953739ababdd720742f7f61b0300",
+    "/platform/css/app.css": "/platform/css/app.css?id=ea1159b0f6e89988335b66bdc026c72d",
     "/marketing/css/app.css": "/marketing/css/app.css?id=b0f35668505e88d1547223492e1c8bb3",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=effbe30da99204da47ff365b8a016f64",
-    "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=c3a69e61482bda11dd17c9af8ae10906",
-    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=215668a7ca2964afd49b06b3e4b8b933",
-    "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=e2082f7ad4786ce50ed2fc5843c742d7"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=effbe30da99204da47ff365b8a016f64"
 }
