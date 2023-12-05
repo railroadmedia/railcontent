@@ -1,4 +1,5 @@
 @php
+    //dd($lessonContent);
     $hasRelatedLessons = false;
     if(count(json_decode($relatedLessons)->data) > 1 && $lessonContent['id'] !== json_decode($relatedLessons)->data[0]->id){
         $hasRelatedLessons = true;
@@ -45,6 +46,7 @@
             'checkForTimecode' => true
         ];
     } elseif (!empty($lessonContent->fetch('fields.video.fields.vimeo_video_id'))) {
+        dd($lessonContent->fetch('fields.video.fields.vimeo_video_id');
         $videoType = 'vimeo';
         $videoId = $lessonContent->fetch('fields.video.fields.vimeo_video_id');
         $videoProps = [
@@ -94,5 +96,11 @@
         :video-type="{{ json_encode($videoType) }}"
         :video-id="{{ json_encode($videoId) }}"
         :video-props="{{ json_encode($videoProps) }}"
+        :use-legacy-player="{{ json_encode(!!(user()->use_legacy_video_player ?? $agent->isSamsung())) }}"
     />
+@endsection
+
+@section('layout-scripts')
+    @parent
+    <script src="{{ mix('platform/js/vendor~player.js') }}"></script>
 @endsection

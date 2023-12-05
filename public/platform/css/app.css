@@ -22974,9 +22974,6 @@ a:visited{
 .tw-shrink-0{
   flex-shrink: 0 !important;
 }
-.tw-shrink{
-  flex-shrink: 1 !important;
-}
 .tw-flex-grow{
   flex-grow: 1 !important;
 }
@@ -25155,6 +25152,9 @@ a:visited{
 .tw-text-yellow-400{
   --tw-text-opacity: 1 !important;
   color: rgb(250 204 21 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[videoProps\.brand\]{
+  color: videoProps.brand !important;
 }
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
