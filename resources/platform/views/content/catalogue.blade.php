@@ -250,6 +250,16 @@
     @endif
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
+{{--        <collection-wrapper--}}
+{{--            :brand="{{ json_encode($brand) }}"--}}
+{{--            :collection-type="{{ json_encode($lessonType) }}"--}}
+{{--            :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"--}}
+{{--            :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"--}}
+{{--            :included-types="{{ json_encode(['course']) }}"--}}
+{{--            :pre-loaded-content="{{ $listLessons }}"--}}
+{{--            :statuses="{{ json_encode($statuses ?? ['published']) }}"--}}
+{{--            :title="{{ json_encode($catalogueMeta['shortname'] ?? $catalogueMeta['name']) }}"--}}
+{{--        ></collection-wrapper>--}}
 
         {{-- Play Alongs Catalogue for Drumeo --}}
         @if( $catalogueMeta['name'] === "Play Alongs" && $brand === "drumeo" )

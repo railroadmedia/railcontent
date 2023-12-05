@@ -157,6 +157,19 @@
     @endcomponent
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mb-3">
+{{--        <collection-wrapper--}}
+{{--            collection-type="coach"--}}
+{{--            :filterable-values="{{ json_encode(['focus','style']) }}"--}}
+{{--            :included-types="{{ json_encode(['instructor']) }}"--}}
+{{--            limit="{{ $limitOverride ?? 18 }}"--}}
+{{--            :pre-loaded-content="{{ $coaches->toResponseRawJson() }}"--}}
+{{--            :required-fields="{{json_encode(['is_coach,1'])}}"--}}
+{{--            :statuses="{{ json_encode(['published', 'scheduled']) }}"--}}
+{{--            :tab-options="{{ json_encode([--}}
+{{--                [ 'key' => 'allCoaches', 'value' => 'All Coaches' ],--}}
+{{--                [ 'key' => 'subscribedCoaches', 'value' => 'Subscribed Coaches' ]--}}
+{{--            ]) }}"--}}
+{{--        ></collection-wrapper>--}}
         <transition appear name="fade">
             <content-catalogue
                     theme-color="{{ $brand }}"
