@@ -30,7 +30,7 @@
                         <div class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
                             <input type="hidden" name="_token" class="sort-input has-input" id="_token" value="8UVOL6wfWwdRywCAMgMQ1e9PmrA5HnZVqhRk7ezn"><input type="hidden" name="brand" class="sort-input has-input" id="brand" value="drumeo">
                             <input v-model="inviteeEmail" class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-2 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border" type="email" id="email" name="email" placeholder="Email address...">
-                            <input name="button" type="submit" id="button" class="tw-btn-primary tw-bg-[#030814] tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52 has-input" value="Send Guest Pass">
+                            <input name="button" type="submit" id="button" class="tw-btn-primary tw-bg-[#030814] tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52 has-input" value="SHARE 30-DAY TRIAL">
                         </div>
                     </form>
                     <hr class="tw-mt-6">
@@ -166,9 +166,9 @@ const isSingeo = computed(() => {
 
 const lessons = computed(() => {
     const lessons = {
-        drumeo: 'drumming',
-        pianote: 'piano',
-        guitareo: 'guitar',
+        drumeo: 'playing drums',
+        pianote: 'playing piano',
+        guitareo: 'playing guitar',
         singeo: 'singing',
     }
 
