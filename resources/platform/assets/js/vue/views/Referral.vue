@@ -60,11 +60,11 @@
                 <h3 class="tw-leading-tight">
                     <strong>You can refer them to {{ !isDrumeo ? 'Drumeo, ' : '' }}{{ !isPianote ? 'Pianote, ' : '' }}{{ isSingeo ? 'and ' : '' }}{{ !isGuitareo ? 'Guitareo' : '' }}{{ !isSingeo && !isGuitareo ? ', ' : ''}}{{ !isSingeo ? 'and Singeo' : '' }} too.</strong>
                 </h3>
-                <div class="tw-flex tw-items-center tw-justify-center md:tw-justify-start tw-my-5 tw-text-sm md:tw-text-base tw-max-w-[336px] md:tw-max-w-none tw-mx-auto">
+                <div class="tw-flex tw-items-center tw-justify-center md:tw-justify-start tw-my-5 tw-text-sm md:tw-text-base tw-max-w-[410px] md:tw-max-w-none tw-mx-auto">
                     <i :class="`fa-light fa-calendar-days tw-text-${brand} tw-text-2xl tw-mr-4`"></i> <span>12 Days of Giving Referral Contest - <b>December 11 to 23, 2023</b></span>
                 </div>
                 <div class="tw-flex tw-items-center tw-justify-center md:tw-justify-start tw-my-5 tw-text-sm md:tw-text-base">
-                    <i :class="`fa-regular fa-gift tw-text-${brand} tw-text-2xl tw-mr-4`"></i> <span>Refer and <b>Win $100 in Musora Shop credits.</b></span>
+                    <i :class="`fa-regular fa-gift tw-text-${brand} tw-text-2xl tw-mr-4`"></i> <span>Refer & Enter to <b>Win one of 12 $100 Musora Gift Cards.</b></span>
                 </div>
                 <i class="tw-text-sm">
                     30-day trials are for new subscribers only and cannot be redeemed for renewals, extensions, or gift subscriptions.
