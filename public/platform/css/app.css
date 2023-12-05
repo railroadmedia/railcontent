@@ -22832,6 +22832,9 @@ a:visited{
 .tw-max-w-\[287px\]{
   max-width: 287px !important;
 }
+.tw-max-w-\[336px\]{
+  max-width: 336px !important;
+}
 .tw-max-w-\[415px\]{
   max-width: 415px !important;
 }
@@ -22924,12 +22927,6 @@ a:visited{
 }
 .tw-max-w-xs{
   max-width: 20rem !important;
-}
-.tw-max-w-\[337px\]{
-  max-width: 337px !important;
-}
-.tw-max-w-\[336px\]{
-  max-width: 336px !important;
 }
 .tw-flex-1{
   flex: 1 1 0% !important;

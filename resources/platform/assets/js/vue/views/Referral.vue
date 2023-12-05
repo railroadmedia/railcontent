@@ -11,7 +11,7 @@
                 <img class="tw-h-48 sm:tw-h-56 md:tw-h-64 lg:tw-h-80 tw-mx-auto tw-mb-6 tw-transition-opacity" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/gift-card.png" alt="gift card" onload="this.classList.remove('tw-opacity-0')" loading="lazy">
             </div>
             <img class="tw-h-24 lg:tw-h-32 tw-inline-block tw-mb-4" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/12-days-title.svg" alt="12 days title" />
-            <h3 class="tw-font-normal tw-mb-4 "> Give your friends and family members <br class="tw-hidden sm:tw-inline" />a 30-day trial to {{ brandName }} for a chance to<br /> <strong class="tw-font-extrabold">win a $100 Amazon Gift Card.</strong>
+            <h3 class="tw-font-normal tw-mb-4 "> Give your friends and family members <br class="tw-hidden sm:tw-inline" />a 30-day trial to {{ brandName }} for a chance to<br /> <strong class="tw-font-extrabold">win a $100 Musora Gift Card.</strong>
             </h3>
             <p>
                 Share the gift of drumming this holiday season.
