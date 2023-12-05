@@ -298,16 +298,16 @@
 
     @php
         $testimonials = $pianote['testimonials'];
+        $youtube = convertNumber($pianote['youtube']); // numbers 
+        $facebook = convertNumber($pianote['facebook']);
+        $instagram = convertNumber($pianote['instagram']); 
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
-        'youtube' => '1.5M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
-        'facebook' => '430K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '240K',
     ])
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [

@@ -1,3 +1,6 @@
+@php
+    require_once(resource_path('marketing/views/pianote/_partials/homepage-data.php'));
+@endphp
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
@@ -312,17 +315,17 @@
             'name' => 'Serena Dorward',
             'location' => 'Ontario, Canada',
             ],
-        ]
+];
+        $youtube = convertNumber($pianote['youtube']); // numbers 
+        $facebook = convertNumber($pianote['facebook']);
+        $instagram = convertNumber($pianote['instagram']); 
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by students<br class="inline-block sm:hidden">  just like you.',
         'reviewText' => '',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
-        'youtube' => '1.5M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
-        'facebook' => '430K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '240K',
     ])
 
     <section class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-center customize px-5 lg:px-8 relative overflow-hidden" style="background: #f6f8fc;">

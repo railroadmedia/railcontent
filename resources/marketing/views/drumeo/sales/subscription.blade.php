@@ -239,17 +239,17 @@
 
     @php
         $testimonials = $drumeo['testimonials'];
+        $youtube = convertNumber($drumeo['youtube']);
+        $facebook = convertNumber($drumeo['facebook']);
+        $instagram = convertNumber($drumeo['instagram']);
     @endphp
 
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
-        'youtube' => '3M',
         'facebookLink' => 'https://facebook.com/drumeo/',
-        'facebook' => '1.2M',
         'instagramLink' => 'https://instagram.com/drumeoofficial/',
-        'instagram' => '1.3M',
     ])
     @if(empty($trialVersion))
         @include('musora.sales.components.guarantee-section', [
