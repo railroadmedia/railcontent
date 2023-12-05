@@ -7,7 +7,7 @@
 @section('content')
 
 
-    @if(Carbon\Carbon::create(2023, 12, 28, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+    @if(Carbon\Carbon::create(2023, 12, 05, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
         <referral
             :user-referral-link="{{ json_encode($userReferralLink) }}"
             :email-invite-url="{{ json_encode(url()->route('referral.email-invite')) }}"
