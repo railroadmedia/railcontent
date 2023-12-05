@@ -1,6 +1,10 @@
     <?php
     $singeo = [
 
+        'youtube' => '139,000',
+        'facebook' => '23,000',
+        'instagram' => '9,900',
+
         'features' => [
             [
                 'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/vocal-lessons-icon.svg',

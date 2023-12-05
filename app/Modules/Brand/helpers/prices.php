@@ -8,7 +8,7 @@ class Prices
 
     //Content Counts
     public static $students = 86421;
-    public static $reviews = 6745;
+    public static $reviews = 6772;
     public static $drumeoLessons = 2500;
     public static $drumeoPlayAlongs = 300;
     public static $drumeoSongs = 5000;
