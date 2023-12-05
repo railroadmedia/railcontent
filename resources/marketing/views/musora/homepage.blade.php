@@ -316,7 +316,6 @@
                 @endphp
                 @foreach ($gridItems as $key => $gridItem)
                     <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0 max-w-xs sm:max-w-full">
-
                         <div class="w-1/3 sm:w-full mb-3 rounded-xl overflow-hidden">
                             <div
                                 class=" aspect-16:9 bg-cover bg-center"

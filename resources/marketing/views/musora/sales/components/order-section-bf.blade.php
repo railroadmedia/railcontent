@@ -197,7 +197,7 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
                     Online Access
                 @endif
 
-                @if (!empty($bonus['delayshipping']))
+                @if (!empty($delayshipping))
                     <br><u class="text-xs"> Shipping will be delayed</u>
                 @endif
             </em>
