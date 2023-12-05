@@ -34,15 +34,15 @@
             $bundles = [
                 [
                     'slug' => 'https://www.pianote.com/shop/ultimate-lessons-bundle',
-                    'desc' => '11 Free Bonuses<br> Worth $963',
+                    'desc' => '11 Free Bonuses<br> Worth $933',
                     'visible' => 1,
                     'specialW' => true,
-                    'price' => 1203,
+                    'price' => 1173,
                     'discountedPrice' => 240,
                     'buttonColor' => '#F61A30',
                     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card3.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m3.jpg',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card4.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m4.jpg',
                 ],
                 [
                     'slug' => 'https://www.pianote.com/shop/30-day-challenge-bundle',
