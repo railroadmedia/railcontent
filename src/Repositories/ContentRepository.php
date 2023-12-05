@@ -2448,8 +2448,12 @@ class ContentRepository extends RepositoryBase
             'artist' => ConfigService::$tableContent . '.artist',
             'type' => ConfigService::$tableContent . '.type',
             'instrument' => ConfigService::$tableContent . '.instrument',
+            'content_id' => ConfigService::$tableContent . '.id',
         ];
         $contentTableQueryCount = ($contentTableQuery->get());
+        $contentTableQuery->addSelect(
+            [ 'railcontent_content.id as id']
+        );
         $contentTableQuery->groupBy($filterOptionNameToContentTableColumnName)
             ->select($filterOptionNameToContentTableColumnName);
 
@@ -2461,8 +2465,13 @@ class ContentRepository extends RepositoryBase
                 ->unique()
                 ->values()
                 ->toArray();
-            $counts[$filterOptionName] = ($contentTableQueryCount->whereNotNull($filterOptionName)
-                ->pluck($filterOptionName)->countBy())->toArray();
+            $counts[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
+                ->unique(function ($item) use($filterOptionName) {
+                    return $item['id'].$item["$filterOptionName"];
+                })
+                ->pluck($filterOptionName)
+                ->countBy()
+                ->toArray();
             foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
                 $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = trim(
                     ucwords(
