@@ -77,7 +77,7 @@
         <!-- Buttons -->
         <div class="
             tw-flex tw-flex-col tw-justify-center tw-mt-3
-            sm:tw-mt-0 sm:tw-ml-auto 
+            sm:tw-mt-0 sm:tw-ml-auto
           ">
           <div v-if="eventIsLive || showWatch">
             <div class="tw-flex-row tw-flex-wrap-md tw-hidden lg:tw-block">
@@ -116,8 +116,9 @@
 <script>
 import ContentHelpers from "../../assets/js/helper-functions/content.js";
 import ContentSchedule from "../../views/schedule/Schedule.vue";
-import ContentService from "../../assets/js/services/content";
 import { DateTime } from "luxon";
+import { useUserStore} from "../../../../stores/user";
+import {storeToRefs} from "pinia/dist/pinia";
 
 export default {
   components: {
@@ -125,10 +126,6 @@ export default {
   },
   name: "CoachEvent",
   props: {
-    brand: {
-      type: String,
-      default: () => "drumeo",
-    },
     preloadedContent: {
       type: Object,
       default: () => ({}),
@@ -236,6 +233,12 @@ export default {
       get() {
         return this.content.is_added_to_primary_playlist;
       },
+    },
+    brand(){
+        const userStore = useUserStore();
+        const { brand } = storeToRefs(userStore)
+
+        return brand.value;
     },
     brandBGColor() {
       return "tw-bg-" + this.brand;
