@@ -1483,7 +1483,7 @@ class ContentRepository extends RepositoryBase
                 'is_content_column' => in_array(
                     $name,
                     config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
-                ) && ($name != 'length_in_seconds')
+                )
             ];
 
         return $this;

@@ -413,25 +413,15 @@ class ContentQueryBuilder extends QueryBuilder
                 );
             } elseif (!empty($requiredFieldDataGrouped[0]['associated_table'])) {
                 $field = $requiredFieldDataGrouped[0]['field'] ? $requiredFieldDataGrouped[0]['field'] :'content_id';
-                if($field == 'video'){
-                    $this->leftJoin(
-                        $requiredFieldDataGrouped[0]['associated_table']['table'].
-                        ' as '.
-                        $requiredFieldDataGrouped[0]['associated_table']['alias'],
-                        $requiredFieldDataGrouped[0]['associated_table']['alias'].'.id',
-                        '=',
-                        ConfigService::$tableContent.'.'.$field
-                    );
-                }else {
-                    $this->leftJoin(
+                $this->leftJoin(
                         $requiredFieldDataGrouped[0]['associated_table']['table'].
                         ' as '.
                         $requiredFieldDataGrouped[0]['associated_table']['alias'],
                         $requiredFieldDataGrouped[0]['associated_table']['alias'].'.'.$field,
                         '=',
                         ConfigService::$tableContent.'.id'
-                    );
-                }
+                );
+
                 $this->where(function (Builder $builder) use (
                     $requiredFieldDataGrouped
                 ) {
