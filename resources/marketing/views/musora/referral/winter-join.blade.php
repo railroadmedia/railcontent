@@ -97,11 +97,31 @@
                     <strong>The 12 Days of Giving <br />contest is on right now!</strong>
                 </h3>
                 <p>
-                    Start your 30-day trial today and you’ll enter to win a $100 gift card to {{ ucfirst($brand) }}. This referral contest closes on December 27, 2023. See terms & conditions below.
+                    Start your 30-day trial today and you’ll enter to win a $100 gift card to {{ ucfirst($brand) }}. This referral contest closes on December 23, 2023. See terms & conditions below.
                 </p>
             </div>
         </div>
     </section>
+
+    <div id="customize-anchor" class="anchor anchor-slide"></div>
+    @include('musora.sales.components.card-selection-section', [
+        'theme' => $referralBrand,
+        "month" => true,
+        "whiteBg" => true,
+        "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
+        "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
+        "songs" => "Thousands of popular songs.",
+        "firstPoint" => "Learn piano, guitar, drums, & singing.",
+        "thirdPoint" => "Unlimited personal support",
+        "plusAnnualLink" => "/ecommerce/shopify/cart/add-to-cart?products[musora-annual-recurring-30-day-trial-membership]=1&locked=true&referralCode=" . $referralCode,
+        "plusMonthlyLink" => "/ecommerce/shopify/cart/add-to-cart?products[musora-monthly-recurring-30-day-trial-membership]=1&locked=true&referralCode=" . $referralCode,
+    ])
+
+    @include('musora.sales.components.trial-explanation', [
+        'theme' => $referralBrand,
+        'instrument' => 'musical',
+        "month" => true,
+    ])
 
     <div id="terms" class="block relative invisible"></div>
     <section class="py-12 lg:py-20 bg-[#F9F9F9] dark:bg-[#000B17]">
@@ -110,7 +130,7 @@
             <p>
                 <strong>Eligibility:</strong> This contest is open to Musora students with an active, paid membership and newly referred students, 18 years or older at the time of entry. Void where prohibited by law. Employees, officers, and directors of the sponsor and their immediate family members and/or those living in the same household are not eligible to participate in the contest.
                 <br><br>
-                <strong>How to Enter:</strong> Participants automatically receive an entry to the contest when a referred friend signs up for a membership with a 30-day trial from December 11 to 27, 2023. Participants may collect up to (5) contest entries for {{ ucfirst($brand) }} based on each referral sign-up during the contest period; for a total of (20) contest entries across all Musora brands. New students who sign up for {{ ucfirst($brand) }} will gain one contest entry. No purchase is necessary to enter or win.
+                <strong>How to Enter:</strong> Participants automatically receive an entry to the contest when a referred friend signs up for a membership with a 30-day trial from December 11 to 23, 2023. Participants may collect up to (5) contest entries for {{ ucfirst($brand) }} based on each referral sign-up during the contest period; for a total of (20) contest entries across all Musora brands. New students who sign up for {{ ucfirst($brand) }} will gain one contest entry. No purchase is necessary to enter or win.
                 <br><br>
                 <strong>Prize:</strong> Twelve students will win a $100 Musora gift card redeemable inside the Drumeo, Pianote, Guitareo, and Singeo shops. The prizes are non-transferable and cannot be exchanged for cash.
                 <br><br>

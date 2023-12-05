@@ -11,13 +11,13 @@
                 <img class="tw-h-48 sm:tw-h-56 md:tw-h-64 lg:tw-h-80 tw-mx-auto tw-mb-6 tw-transition-opacity" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/gift-card.png" alt="gift card" onload="this.classList.remove('tw-opacity-0')" loading="lazy">
             </div>
             <img class="tw-h-24 lg:tw-h-32 tw-inline-block tw-mb-4" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/12-days-title.svg" alt="12 days title" />
-            <h3 class="tw-font-normal tw-mb-4 "> Give your friends and family members <br class="tw-hidden sm:tw-inline" />a 30-day trial to {{ brandName }} for a chance to<br /> <strong class="tw-font-extrabold">win a $100 Musora Gift Card.</strong>
+            <h3 class="tw-font-normal tw-mb-4 "> Give your friends and family members <br class="tw-hidden sm:tw-inline" />a {{ brandName }} 30-day trial for a chance to<br /> <strong class="tw-font-extrabold">win a $100 Musora Gift Card.</strong>
             </h3>
             <p>
-                Share the gift of drumming this holiday season.
+                Share the gift of {{ lessons }} this holiday season.
             </p>
             <p class="tw-mt-2">
-                Every new referral you make <strong>from December 11 to 27, 2023</strong><br class="tw-hidden sm:tw-inline" /> instantly gives you a chance to win one of 12 $100 Musora gift cards.
+                Every referral you make <strong>from December 11 to 23, 2023</strong><br class="tw-hidden sm:tw-inline" /> instantly gives you a chance to win one of 12 $100 Musora gift cards.
             </p>
             <p class="tw-mt-6 tw-mb-4">
                 <a href="#terms" class="tw-underline tw-italic tw-text-black dark:tw-text-white">See Contest Details - Terms & Conditions*</a>
@@ -61,7 +61,7 @@
                     <strong>You can refer them to {{ !isDrumeo ? 'Drumeo, ' : '' }}{{ !isPianote ? 'Pianote, ' : '' }}{{ isSingeo ? 'and ' : '' }}{{ !isGuitareo ? 'Guitareo' : '' }}{{ !isSingeo && !isGuitareo ? ', ' : ''}}{{ !isSingeo ? 'and Singeo' : '' }} too.</strong>
                 </h3>
                 <div class="tw-flex tw-items-center tw-justify-center md:tw-justify-start tw-my-5 tw-text-sm md:tw-text-base tw-max-w-[336px] md:tw-max-w-none tw-mx-auto">
-                    <i :class="`fa-light fa-calendar-days tw-text-${brand} tw-text-2xl tw-mr-4`"></i> <span>16 Days of Giving Referral Contest - <b>December 11 to 27, 2023</b></span>
+                    <i :class="`fa-light fa-calendar-days tw-text-${brand} tw-text-2xl tw-mr-4`"></i> <span>12 Days of Giving Referral Contest - <b>December 11 to 23, 2023</b></span>
                 </div>
                 <div class="tw-flex tw-items-center tw-justify-center md:tw-justify-start tw-my-5 tw-text-sm md:tw-text-base">
                     <i :class="`fa-regular fa-gift tw-text-${brand} tw-text-2xl tw-mr-4`"></i> <span>Refer and <b>Win $100 in Musora Shop credits.</b></span>
@@ -85,7 +85,7 @@
             <p>
                 <strong>Eligibility:</strong> This contest is open to Musora students with an active, paid membership and newly referred students, 18 years or older at the time of entry. Void where prohibited by law. Employees, officers, and directors of the sponsor and their immediate family members and/or those living in the same household are not eligible to participate in the contest.
                 <br><br>
-                <strong>How to Enter:</strong> Participants automatically receive an entry to the contest when a referred friend signs up for a membership with a 30-day trial from December 11 to 27, 2023. Participants may collect up to (5) contest entries for {{ brandName }} based on each referral sign-up during the contest period; for a total of (20) contest entries across all Musora brands. New students who sign up for {{ brandName }} will gain one contest entry. No purchase is necessary to enter or win.
+                <strong>How to Enter:</strong> Participants automatically receive an entry to the contest when a referred friend signs up for a membership with a 30-day trial from December 11 to 23, 2023. Participants may collect up to (5) contest entries for {{ brandName }} based on each referral sign-up during the contest period; for a total of (20) contest entries across all Musora brands. New students who sign up for {{ brandName }} will gain one contest entry. No purchase is necessary to enter or win.
                 <br><br>
                 <strong>Prize:</strong> Twelve students will win a $100 Musora gift card redeemable inside the Drumeo, Pianote, Guitareo, and Singeo shops. The prizes are non-transferable and cannot be exchanged for cash.
                 <br><br>
@@ -162,6 +162,17 @@ const isGuitareo = computed(() => {
 
 const isSingeo = computed(() => {
     return brand.value === 'singeo';
+})
+
+const lessons = computed(() => {
+    const lessons = {
+        drumeo: 'drumming',
+        pianote: 'piano',
+        guitareo: 'guitar',
+        singeo: 'singing',
+    }
+
+    return lessons[brand.value];
 })
 
 const closeModal = () => {
