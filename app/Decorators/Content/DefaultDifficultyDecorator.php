@@ -51,7 +51,7 @@ class DefaultDifficultyDecorator extends ModeDecoratorBase
                     if ($difficulty > 5 && $difficulty <= 7) {
                         $contents[$contentIndex]['difficulty_string'] = 'Advanced';
                     }
-                    if ($difficulty > 7 && $difficulty <= 10) {
+                    if ($difficulty > 7) {
                         $contents[$contentIndex]['difficulty_string'] = 'Expert';
                     }
                 }
