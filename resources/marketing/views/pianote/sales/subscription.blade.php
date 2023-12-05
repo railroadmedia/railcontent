@@ -259,11 +259,11 @@
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
-        'youtube' => '1.4M',
+        'youtube' => '1.5M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
         'facebook' => '430K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '230K',
+        'instagram' => '240K',
     ])
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
@@ -375,9 +375,6 @@
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
         'image' => 'marketing/pianote/membership/homepage/2023/pianote-collage.png',
-        ])
-        @include('musora.sales.components.trial-explanation', [
-            'instrument' => 'piano',
         ])
 
     @endif

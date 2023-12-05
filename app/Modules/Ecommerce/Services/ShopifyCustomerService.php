@@ -32,7 +32,15 @@ class ShopifyCustomerService
         $this->entityManager = $entityManager;
     }
 
-    public function createShopifyCustomer(User $user)
+    /**
+     * Update the existing Shopify customer's records if the user has a Shopify ID,
+     * otherwise create a new customer in Shopify, with the requisite data for the
+     * given user.
+     *
+     * @param  User  $user
+     * @return int|null the Shopify customer's ID
+     */
+    public function updateOrCreateShopifyCustomer(User $user)
     : ?int {
         $customers = $this->getCustomersForUser($user);
 

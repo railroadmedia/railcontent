@@ -309,10 +309,6 @@
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
                 'image' => 'marketing/singeo/membership/homepage/2023/singeo-spread.png',
         ])
-        @include('musora.sales.components.trial-explanation', [
-            'instrument' => 'singing',
-        ])
-
     @endif
 
     @include('musora.sales.components.app-section', [

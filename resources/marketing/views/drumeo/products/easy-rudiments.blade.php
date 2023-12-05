@@ -26,7 +26,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Easy Rudiments",
         "fullPrice" => floatval($productPrices['easy-rudiments-book']->price),
         "price" => floatval($productPrices['easy-rudiments-book']->discounted_price),

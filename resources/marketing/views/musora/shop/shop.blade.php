@@ -183,7 +183,7 @@
                     <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
                         @foreach($hoodies as $hoodie)
-                            @include('musora.shop._shop-card-alt', [
+                            @include('_partials.components.shop.product-card', [
                                  "sku" => $hoodie->sku,
                                  "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
                                  "badgeText" => $hoodie->badge_text,
@@ -207,7 +207,7 @@
                     <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
                         @foreach($shirts as $shirt)
-                            @include('musora.shop._shop-card-alt', [
+                            @include('_partials.components.shop.product-card', [
                                  "sku" => $shirt->sku,
                                  "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
                                  "badgeText" => $shirt->badge_text,
@@ -231,7 +231,7 @@
                     <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
                         @foreach($misc as $miscItem)
-                            @include('musora.shop._shop-card-alt', [
+                            @include('_partials.components.shop.product-card', [
                                  "sku" => $miscItem->sku,
                                  "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $miscItem->slug ),
                                  "badgeText" => $miscItem->badge_text,
