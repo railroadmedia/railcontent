@@ -1,10 +1,4 @@
 @php
-    //dd($lessonContent);
-    $hasRelatedLessons = false;
-    if(count(json_decode($relatedLessons)->data) > 1 && $lessonContent['id'] !== json_decode($relatedLessons)->data[0]->id){
-        $hasRelatedLessons = true;
-    }
-
     if (!empty($lessonContent->fetch('fields.video.fields.youtube_video_id'))) {
         $videoProps = [
             'ref' => 'mediaElementVueInstance',
@@ -68,7 +62,6 @@
         ];
     }
 @endphp
-
 @extends('partials.layout', ['forceHideSidebar' => false])
 
 @section('meta')
@@ -89,6 +82,7 @@
         breadcrumb-first-level-title="Workouts"
         :breadcrumb-last-level-title="{{ json_encode($lessonContent->fetch('fields.title')) }}"
         :video-props="{{ json_encode($videoProps) }}"
+        :related-lessons="{{ $relatedLessons }}"
     />
 @endsection
 
