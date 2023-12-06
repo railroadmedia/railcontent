@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.293.4",
+            "version": "3.293.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "bb62581cb3796dd1866ace52ed0a750bd22936a8"
+                "reference": "f2002e52b382b45231da3f9552033f769acfebd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/bb62581cb3796dd1866ace52ed0a750bd22936a8",
-                "reference": "bb62581cb3796dd1866ace52ed0a750bd22936a8",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f2002e52b382b45231da3f9552033f769acfebd8",
+                "reference": "f2002e52b382b45231da3f9552033f769acfebd8",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.293.4"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.293.5"
             },
-            "time": "2023-12-05T19:07:19+00:00"
+            "time": "2023-12-06T19:09:15+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -8956,12 +8956,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "a53d5610b11179714f1763a79aedfe47de225b60"
+                "reference": "361935d597e47bf70d4fb9b62ab55f5dd33ac678"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/a53d5610b11179714f1763a79aedfe47de225b60",
-                "reference": "a53d5610b11179714f1763a79aedfe47de225b60",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/361935d597e47bf70d4fb9b62ab55f5dd33ac678",
+                "reference": "361935d597e47bf70d4fb9b62ab55f5dd33ac678",
                 "shasum": ""
             },
             "require": {
@@ -9018,7 +9018,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-workouts"
             },
-            "time": "2023-12-06T17:42:26+00:00"
+            "time": "2023-12-06T19:14:48+00:00"
         },
         {
             "name": "railroad/railforums",
