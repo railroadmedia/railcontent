@@ -86,7 +86,8 @@ return [
                 'is_liked_by_current_user',
                 'parent_id',
                 'published_on_in_timezone',
-                'bundle_count'
+                'bundle_count',
+                'difficulty_string',
             ],
             'total_lessons',
             'lessons_filter_options',
@@ -160,7 +161,8 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
-                'published_on_in_timezone'
+                'published_on_in_timezone',
+                'difficulty_string',
             ],
             'lessons_filter_options',
             'total_comments',

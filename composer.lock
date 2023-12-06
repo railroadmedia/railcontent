@@ -8722,12 +8722,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "c362a25cfc163b469573c21bcec37ffa58328247"
+                "reference": "2bfcc6cf03ff48bb404263a58d751c2c823b0f61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/c362a25cfc163b469573c21bcec37ffa58328247",
-                "reference": "c362a25cfc163b469573c21bcec37ffa58328247",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/2bfcc6cf03ff48bb404263a58d751c2c823b0f61",
+                "reference": "2bfcc6cf03ff48bb404263a58d751c2c823b0f61",
                 "shasum": ""
             },
             "require": {
@@ -8759,7 +8759,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v3.0-workouts"
             },
-            "time": "2023-12-06T09:59:00+00:00"
+            "time": "2023-12-06T14:18:18+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8956,12 +8956,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "3e02b98b93a2c21c52d6131ecb9e9867e9542a7c"
+                "reference": "f1a7170346f65e973b73f8d641ea1b3de856a55a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/3e02b98b93a2c21c52d6131ecb9e9867e9542a7c",
-                "reference": "3e02b98b93a2c21c52d6131ecb9e9867e9542a7c",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/f1a7170346f65e973b73f8d641ea1b3de856a55a",
+                "reference": "f1a7170346f65e973b73f8d641ea1b3de856a55a",
                 "shasum": ""
             },
             "require": {
@@ -9018,7 +9018,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-workouts"
             },
-            "time": "2023-12-06T09:58:07+00:00"
+            "time": "2023-12-06T14:19:04+00:00"
         },
         {
             "name": "railroad/railforums",
