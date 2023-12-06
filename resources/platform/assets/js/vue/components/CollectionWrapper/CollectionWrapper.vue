@@ -7,7 +7,8 @@
 
         <transition appear name="fade">
             <CollectionResults :current-page="getCurrentPage" :loading="loading" :total-pages="getTotalPages" @on-load-more="collectionStore.loadMore">
-                <CoachesGridCatalogue v-if="isCoach" :content="data" :brand="brand" />
+                <GroupedResultsContainer v-if="showGroupBy" v-for="data in preLoadedContent.data" :pre-loaded-content="preLoadedContent.data.slice(0,5)" />
+                <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <RoutinesCatalogue v-else-if="isRoutine" :content="data"
@@ -36,6 +37,7 @@ import PlayAlongs from "../../vuesora/views/play-alongs/PlayAlongs";
 import {storeToRefs} from "pinia";
 import { useUserStore } from "../../../stores/user";
 import CatalogueCardContainer from "../Catalogue/CatalogueCardContainer";
+import GroupedResultsContainer from "../GroupedResultsContainer/GroupedResultsContainer";
 
 const props = defineProps({
     collectionType: {
@@ -179,6 +181,10 @@ const isList = computed(() => {
     return !isPlayAlong.value && !isRoutine.value && !isWorkout.value && !isChallenge.value;
 })
 
+const showGroupBy = computed(() => {
+    return tabData.value[filter.value.activeTab]?.groupByView;
+})
+
 //Filter state reactive
 const hideFilter = computed(() => {
     return isRoutine.value || isStudentReview.value;
@@ -208,11 +214,11 @@ const getTabOptions = computed(() => {
         ];
     } else if (isWorkout.value) {
         return [
-            { key: 'all', value: 'All' },
-            { key: 'duration,300,<', value: '5 Minutes' },
-            { key: 'duration,600,<', value: '10 Minutes' },
-            { key: 'duration,900,>', value: '15+ Minutes' },
-            { key: 'group_by,instructor', value: 'Instructors' },
+            { key: 'all', value: 'All', },
+            { key: 'duration,300,<', value: '5 Minutes', },
+            { key: 'duration,600,<', value: '10 Minutes', },
+            { key: 'duration,900,>', value: '15+ Minutes', },
+            { key: 'group_by,instructor', value: 'Instructors', groupByView: true, },
         ];
     }
 
