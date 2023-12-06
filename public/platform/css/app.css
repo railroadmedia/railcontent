@@ -22405,6 +22405,9 @@ a:visited{
 .tw-h-screen{
   height: 100vh !important;
 }
+.tw-h-\[71px\]{
+  height: 71px !important;
+}
 .tw-max-h-0{
   max-height: 0px !important;
 }
@@ -22786,6 +22789,9 @@ a:visited{
 }
 .tw-w-screen{
   width: 100vw !important;
+}
+.tw-w-\[123px\]{
+  width: 123px !important;
 }
 .tw-min-w-0{
   min-width: 0px !important;
@@ -23418,6 +23424,9 @@ a:visited{
 .tw-rounded-xl{
   border-radius: 0.75rem !important;
 }
+.tw-rounded-\[7px\]{
+  border-radius: 7px !important;
+}
 .tw-rounded-b-lg{
   border-bottom-right-radius: 0.5rem !important;
   border-bottom-left-radius: 0.5rem !important;
@@ -24026,6 +24035,10 @@ a:visited{
 .tw-bg-yellow-500{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(234 179 8 / var(--tw-bg-opacity)) !important;
+}
+.tw-bg-blue-500{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity)) !important;
 }
 .tw-bg-opacity-0{
   --tw-bg-opacity: 0 !important;
@@ -25165,6 +25178,10 @@ a:visited{
 .tw-text-yellow-400{
   --tw-text-opacity: 1 !important;
   color: rgb(250 204 21 / var(--tw-text-opacity)) !important;
+}
+.tw-text-yellow-500{
+  --tw-text-opacity: 1 !important;
+  color: rgb(234 179 8 / var(--tw-text-opacity)) !important;
 }
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
