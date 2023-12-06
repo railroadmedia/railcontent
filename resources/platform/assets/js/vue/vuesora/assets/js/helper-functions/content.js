@@ -103,9 +103,11 @@ export default {
                         ).length > 0;
 
                         if(!value_exists){
+                            const numberFormat = /\s\(\d\)/;
+
                             filter_map[key].push({
                                 key: filter_options[key][i],
-                                value: filter_options[key][i]
+                                value: filter_options[key][i].replace(numberFormat, '')
                             });
                         }
                     }
