@@ -50,6 +50,7 @@ class ContentRepository extends RepositoryBase
 
     public static $catalogMetaAllowableFilters = null;
     public static $pullFilterResultsOptionsAndCount = true;
+    public static $countFilterOptionItems = false;
 
     public static $includedInPlaylistsIds = false;
 
@@ -2358,11 +2359,9 @@ class ContentRepository extends RepositoryBase
 
             $filterOptionsArray[$filterOptionColumnName] = [];
         }
-        $joinTablesQuery->addSelect(
-            [ 'railcontent_content.id as content_id']
-        );
 
-        $groupBy[] = 'content_id';
+        $countingQuery = clone($joinTablesQuery);
+
         if (!empty($groupBy)) {
             $joinTablesQuery->groupBy($groupBy);
         } else {
@@ -2371,6 +2370,14 @@ class ContentRepository extends RepositoryBase
 
         $tableResults = $joinTablesQuery->get();
 
+        $countingQuery->addSelect(
+            [ 'railcontent_content.id']
+        );
+        $groupBy[] = 'id';
+        $countingQuery->groupBy($groupBy);
+
+        $countingQueryResults = $countingQuery->get();
+
         $counts = [];
         foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
             $filterOptionsArray[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
@@ -2378,22 +2385,26 @@ class ContentRepository extends RepositoryBase
                 ->unique()
                 ->values()
                 ->toArray();
-            $counts[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
+            $counts[$filterOptionName] = $countingQueryResults->whereNotNull($filterOptionName)
                 ->unique(function ($item) use($filterOptionName) {
-                                return $item['content_id'].$item["$filterOptionName"];
+                    return $item['id'].$item["$filterOptionName"];
                             })
                 ->pluck($filterOptionName)
                 ->countBy()
                 ->toArray();
 
         foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
-               $nr = $counts[$filterOptionName][$filterOptionValueToClean];
+                $countingItems = '';
+                if (self::$countFilterOptionItems) {
+                    $nr = $counts[$filterOptionName][$filterOptionValueToClean];
+                    $countingItems = ' ('.$nr.')';
+                }
                 $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
                     trim(
-                        $filterOptionValueToClean.' ('.$nr.')'
+                        $filterOptionValueToClean.$countingItems
                     )
                 );
-            }
+
 
             $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
             sort($filterOptionsArray[$filterOptionName]);
@@ -2473,9 +2484,15 @@ class ContentRepository extends RepositoryBase
                 ->countBy()
                 ->toArray();
             foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
+                $countingItems = '';
+                if (self::$countFilterOptionItems) {
+                    $nr = $counts[$filterOptionName][$filterOptionValueToClean];
+                    $countingItems = ' ('.$nr.')';
+                }
+            }
                 $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = trim(
                     ucwords(
-                        $filterOptionValueToClean.' ('.$counts[$filterOptionName][$filterOptionValueToClean].')'
+                        $filterOptionValueToClean.$countingItems
                     )
                 );
             }
