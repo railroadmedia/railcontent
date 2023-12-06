@@ -32,7 +32,7 @@
         @php
             $bundles = [
                 [
-                    'slug' => 'https://www.singeo.com/shop/ultimate-lessons-bundle',
+                    'slug' => '/shop/ultimate-lessons-bundle',
                     'desc' => '3 Free Bonuses',
                     'visible' => 1,
                     'full' => true,

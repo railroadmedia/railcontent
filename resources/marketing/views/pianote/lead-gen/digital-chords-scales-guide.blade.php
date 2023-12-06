@@ -7,8 +7,8 @@
     <title>Digital Chords & Scales Guide | Pianote</title>
     <meta property="og:title" content="Digital Chords & Scales Guide | Pianote">
 
-    <meta name="description" content="This comprehensive e-book will help you learn every chord shape, chord variation, and scale in EVERY key.">
-    <meta property="og:description" content="This comprehensive e-book will help you learn every chord shape, chord variation, and scale in EVERY key.">
+    <meta name="description" content="Learn every chord shape, variation, and scale--in every key--with this FREE e-book.">
+    <meta property="og:description" content="Learn every chord shape, variation, and scale--in every key--with this FREE e-book.">
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/lead-gen/digital-chords-and-scales/master-every-chord-bg.png" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/digital-chords-scales-guide">
 @endsection
@@ -40,7 +40,7 @@
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/430x0/filters:quality(95)/marketing/pianote/lead-gen/digital-chords-and-scales/Chords-scales-digital-logo.png"
                         class="h-20 sm:h-24 lg:h-28 transition-opacity opacity-0" alt="FWTGF logo" loading="lazy" onload="this.classList.remove('opacity-0')"
                     />
-                    <p class="my-4">This comprehensive e-book will help you learn every chord shape, chord variation, and scale in EVERY key.
+                    <p class="my-4">Learn every chord shape, variation, and scale--in every key--with this FREE e-book.
                         <br><br>It’s the ultimate guide to mastering the building blocks of music on the piano.
                         <br><br><strong class="font-black">Enter your {{--name and--}} email address to get<br class="lg:hidden"> your FREE E-Book instantly.</strong></p>
                 </div>

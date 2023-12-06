@@ -3,8 +3,8 @@
         class="flex flex-row align-v-top test-coach"
         :class="[noWrap ? 'overflow' : 'flex-wrap', {'nmh-1': !displayInline}]"
     >
-        <coach-catalogue-card
-            v-for="(item, i) in content"
+        <catalogue-card
+            v-for="item in content"
             :key="'coach-grid' + item.id"
             :item="item"
             :content-type="item.type"
@@ -21,17 +21,17 @@
             :show-my-list-action="showMyListAction"
             :display-inline="displayInline"
             @addToList="emitAddToList"
-        ></coach-catalogue-card>
+        ></catalogue-card>
     </div>
 </template>
 <script>
-import CoachCatalogueCard from './_CoachCatalogueCard.vue';
+import CatalogueCard from './_CatalogueCard.vue';
 import UserCatalogueEvents from '../../mixins/UserCatalogueEvents';
 
 export default {
     name: 'CoachGridCatalogue',
     components: {
-        'coach-catalogue-card': CoachCatalogueCard,
+        'catalogue-card': CatalogueCard,
     },
     mixins: [UserCatalogueEvents],
     props: {
