@@ -1,5 +1,9 @@
     <?php
     $drumeo = [
+        'youtube' => '3.2M',
+        'facebook' => '1.2M',
+        'instagram' => '1.5M',
+
         'slides' => [
             [
                 "desc" =>
