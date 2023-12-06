@@ -70,7 +70,7 @@ export const useCollectionStore = defineStore({
         },
         async fetchData () {
             const userStore = useUserStore();
-
+            console.log(this.coachEndpoint());
             try {
                 const response = await axios
                     .get(
@@ -188,13 +188,13 @@ export const useCollectionStore = defineStore({
                 filterApplied: true,
             }
 
-            this.filter.activeTab = tab;
-            if (this.tabData[tab] && this.tabData[tab].filterApplied) {
+            this.filter.activeTab = tab.key;
+            if (this.tabData[tab.key] && this.tabData[tab.key].filterApplied) {
                 this.data = ([...this.tabData[this.filter.activeTab].data]);
             } else {
-                this.tabData[this.filter.activeTab] = {};
+                this.tabData[this.filter.activeTab] = { ...tab };
                 this.getData();
-                this.tabData[tab].filterApplied = true;
+                this.tabData[tab.key].filterApplied = true;
             }
         },
     },

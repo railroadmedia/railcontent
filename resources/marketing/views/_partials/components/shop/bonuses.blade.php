@@ -1,25 +1,49 @@
 @foreach ($product->bundles as $key => $bundle)
-    <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center">
-        <div class="image-wrap relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-0 {{-- @if($bundle['bundle_free_shipping']) shipping @endif--}}">
-            <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/{{ $bundle['bundle_img'] }}" alt="product thumbnail{{$key+1}}">
-        </div>
-        <div>
-            <strong>
-                {{ $bundle['name'] }} - <span @if(!empty($bundle['priceColor']) && $bundle['priceColor'] == 'orange') class="orange" @endif>Normally ${{ floatVal($bundle['price'])}}</span>
-                @if(!empty($bundle['special_text']))<span class="text-{{ $theme }}">{{ $bundle['special_text'] }}</span> @endif
-                @if($bundle['free_bonus']) <span class="text-{{$theme}}">FREE BONUS</span> @endif
 
-                <br @if(!$bundle['bundle_free_shipping'] && !$bundle['lifetime_access']) class="hidden" @endif>
-                    @if($bundle['lifetime_access'])
-                        <span style="color:#E69500;">LIFETIME ACCESS</span>
-                    @endif
-
-                @if($bundle['bundle_free_shipping'])
-                    <span style="color:#E69500;">FREE SHIPPING</span>
+    <div class="flex mb-5 sm:mb-8 sm:items-start lg:items-center">
+        <div class="relative overflow-hidden w-52 mb-4 sm:mb-0 sm:mr-5 mx-0 flex-shrink-0">
+            <div class="w-full overflow-hidden rounded-lg relative bg-cover bg-top border border-gray-300"
+                style="padding-bottom: 100%;
+                @if(!empty($bundle['thumbnail']))
+                    background-image:url('https://www.musora.com/musora-cdn/image/width=520,quality=95/{{ $bundle['thumbnail'] }}');
                 @endif
-            </strong><br>
-            {{ $bundle['bundle_desc'] }}
-            <br>
+                ">
+                @if(!empty($bundle['thumbnail_logo']))
+                    <div class="z-20 absolute bottom-0 left-0 right-0 px-4 py-3 text-center">
+                        <img class="w-auto h-auto" style="max-height:55px;" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/{{ $bundle['thumbnail_logo'] }}"
+                            alt="logo" >
+                    </div>
+                    <div class="inset-0 absolute z-10" style="background:linear-gradient(to bottom, transparent 66%, rgba(0,0,0,0.75));"></div>
+                @endif
+            </div>
         </div>
+        <p class="leading-normal">
+            <strong class="font-black">{{ $bundle['name'] }}</strong>
+            <br>
+            @if($bundle['free_bonus'])
+                <span class="opacity-60 line-through">${{ floatVal($bundle['price'])}}</span>
+
+                <span class="ml-1 text-xs bottom-0 font-black text-white rounded-md px-1.5 leading-none py-1 inline-block bg-{{$theme}} align-bottom">
+                    FREE BONUS
+                </span>
+            @else
+                Normally ${{ floatVal($bundle['price'])}}
+            @endif
+
+            @if($bundle['lifetime_access'])
+                <span class="ml-1 text-xs bottom-0 font-black text-black rounded-md px-1.5 leading-none py-1 inline-block bg-musora align-bottom">
+                    LIFETIME ACCESS
+                </span>
+            @endif
+
+            @if($bundle['bundle_free_shipping'])
+                <span class="ml-1 text-xs bottom-0 font-black text-black rounded-md px-1.5 leading-none py-1 inline-block bg-musora align-bottom">
+                    FREE SHIPPING
+                </span>
+            @endif
+
+            <br>
+            <span class="mt-2 inline-block">{{ $bundle['bundle_desc'] }}</span>
+        </p>
     </div>
 @endforeach

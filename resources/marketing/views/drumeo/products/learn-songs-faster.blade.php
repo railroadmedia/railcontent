@@ -21,7 +21,7 @@
 @endsection
 
 @section('content')
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Learn Songs Faster",
         "fullPrice" => floatval($productPrices['learn-songs-faster-pack']->price),
         "price" => floatval($productPrices['learn-songs-faster-pack']->discounted_price),

@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.293.3",
+            "version": "3.293.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "a4b5523d5bde20fbaa35f439f8ca57ab2b4a753d"
+                "reference": "bb62581cb3796dd1866ace52ed0a750bd22936a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a4b5523d5bde20fbaa35f439f8ca57ab2b4a753d",
-                "reference": "a4b5523d5bde20fbaa35f439f8ca57ab2b4a753d",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/bb62581cb3796dd1866ace52ed0a750bd22936a8",
+                "reference": "bb62581cb3796dd1866ace52ed0a750bd22936a8",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.293.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.293.4"
             },
-            "time": "2023-12-04T19:09:01+00:00"
+            "time": "2023-12-05T19:07:19+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -5204,16 +5204,16 @@
         },
         {
             "name": "laravel/vapor-cli",
-            "version": "v1.60.1",
+            "version": "v1.61.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-cli.git",
-                "reference": "b95bbb54f063e254edff14c038b4694553f00ee8"
+                "reference": "7cdf6de6b76a5e23a89e7a815269be6331998574"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/b95bbb54f063e254edff14c038b4694553f00ee8",
-                "reference": "b95bbb54f063e254edff14c038b4694553f00ee8",
+                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/7cdf6de6b76a5e23a89e7a815269be6331998574",
+                "reference": "7cdf6de6b76a5e23a89e7a815269be6331998574",
                 "shasum": ""
             },
             "require": {
@@ -5267,9 +5267,9 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-cli/tree/v1.60.1"
+                "source": "https://github.com/laravel/vapor-cli/tree/v1.61.0"
             },
-            "time": "2023-11-05T20:53:18+00:00"
+            "time": "2023-12-06T08:29:44+00:00"
         },
         {
             "name": "laravel/vapor-core",
@@ -8722,12 +8722,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "e1f647a4f282b56f6050180657c362997125af1b"
+                "reference": "c362a25cfc163b469573c21bcec37ffa58328247"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/e1f647a4f282b56f6050180657c362997125af1b",
-                "reference": "e1f647a4f282b56f6050180657c362997125af1b",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/c362a25cfc163b469573c21bcec37ffa58328247",
+                "reference": "c362a25cfc163b469573c21bcec37ffa58328247",
                 "shasum": ""
             },
             "require": {
@@ -8759,7 +8759,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v3.0-workouts"
             },
-            "time": "2023-12-04T09:06:58+00:00"
+            "time": "2023-12-06T09:59:00+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8956,12 +8956,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "9c10b6029ef1d8c30f28856026981f04612baa89"
+                "reference": "3e02b98b93a2c21c52d6131ecb9e9867e9542a7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/9c10b6029ef1d8c30f28856026981f04612baa89",
-                "reference": "9c10b6029ef1d8c30f28856026981f04612baa89",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/3e02b98b93a2c21c52d6131ecb9e9867e9542a7c",
+                "reference": "3e02b98b93a2c21c52d6131ecb9e9867e9542a7c",
                 "shasum": ""
             },
             "require": {
@@ -9018,7 +9018,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-workouts"
             },
-            "time": "2023-12-05T15:07:08+00:00"
+            "time": "2023-12-06T09:58:07+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -15302,16 +15302,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.26.2",
+            "version": "v1.26.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "c0177786b1cd05b687b0fa11364aeeecb42cd3d8"
+                "reference": "fa1ad5fbb03686dfc752bfd1861d86091cc1c32d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/c0177786b1cd05b687b0fa11364aeeecb42cd3d8",
-                "reference": "c0177786b1cd05b687b0fa11364aeeecb42cd3d8",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/fa1ad5fbb03686dfc752bfd1861d86091cc1c32d",
+                "reference": "fa1ad5fbb03686dfc752bfd1861d86091cc1c32d",
                 "shasum": ""
             },
             "require": {
@@ -15363,7 +15363,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2023-11-27T14:46:06+00:00"
+            "time": "2023-12-02T18:26:39+00:00"
         },
         {
             "name": "maximebf/debugbar",

@@ -147,7 +147,9 @@ export default {
     },
     computed: {
         mappedData() {
-            const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value
+            let difficultyValue = 'all';
+            if(this.contentModel.post.fields) difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value
+            
             if (Number.isFinite(Number(difficultyValue))) {
                 this.contentModel.list.difficulty = difficultyValue;
             }

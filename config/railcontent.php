@@ -766,7 +766,7 @@ return [
                 'name' => 'Challenge',
                 'icon' => 'icon-courses',
                 'description' => "... ",
-                'allowableFilters' => ['difficulty','style','topic'],
+                'allowableFilters' => ['difficulty','topic','style'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
                 'sortBy' => '-published_on',
 		'trailer1' => 448684113,
@@ -774,6 +774,7 @@ return [
  	    'workout' => [
                 'trailer1' => 448684113,
                 'allowableFilters' => ['difficulty','style','topic'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
             ],
         ],
         'pianote' => [

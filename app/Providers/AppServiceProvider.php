@@ -70,7 +70,7 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer(
             [
-                'drumeo.drumshop.*',
+                'drumeo.shop.*',
                 'drumeo.lead-gen.*',
                 'drumeo.pages.*',
                 'drumeo.products.*',
