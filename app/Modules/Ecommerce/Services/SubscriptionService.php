@@ -99,9 +99,14 @@ class SubscriptionService
                 includeBuffer: false,
                 includeFixedTimes: true
             )->startOfDay();
-            $diff = abs($mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay()->diffInDays($membershipExpirationDate));
+            $diff = abs(
+                $mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay()->diffInDays(
+                    $membershipExpirationDate
+                )
+            );
             if ($diff > 1
-                && $membershipExpirationDate > Carbon::today()) {
+                && $membershipExpirationDate > Carbon::today()
+                && $activeMembershipSubscriptions->count() > 1) {
                 Log::info(
                     "Updating subscription next charge date for user $user->id from $mostRecentActiveSubscription->nextChargeScheduledAt to $membershipExpirationDate"
                 );
