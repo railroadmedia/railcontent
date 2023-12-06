@@ -231,17 +231,17 @@
 
     @php
         $testimonials = $drumeo['testimonials'];
+        $youtube = convertNumber(Prices::$drumeoYoutubeSubsc);
+        $facebook = convertNumber(Prices::$drumeoFacebookLikes);
+        $instagram = convertNumber(Prices::$drumeoInstagramFollowers);
     @endphp
 
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
-        'youtube' => '3M',
         'facebookLink' => 'https://facebook.com/drumeo/',
-        'facebook' => '1.2M',
         'instagramLink' => 'https://instagram.com/drumeoofficial/',
-        'instagram' => '1.3M',
     ])
     @if(empty($trialVersion))
         @include('musora.sales.components.guarantee-section', [
@@ -291,7 +291,7 @@
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and voice lessons with full access to all Musora communities.</li>',
-        'image' => 'marketing/drumeo/membership/homepage/2023/drumeo-collage.png',
+        'image' => 'marketing/drumeo/membership/homepage/webp-format/drumeo-collage.webp',
         ])
     @endif
 

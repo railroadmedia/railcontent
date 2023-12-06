@@ -208,16 +208,16 @@
 
     @php
         $testimonials = $guitareo['testimonials'];
+        $youtube = convertNumber(Prices::$guitareoYoutubeSubsc);
+        $facebook = convertNumber(Prices::$guitareoFacebookLikes);
+        $instagram = convertNumber(Prices::$guitareoInstagramFollowers);
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by guitarists<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/guitarlessonscom/',
-        'youtube' => '1M',
         'facebookLink' => 'https://facebook.com/guitareoofficial/',
-        'facebook' => '330K',
         'instagramLink' => 'https://instagram.com/guitareoofficial/',
-        'instagram' => '19K',
     ])
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [

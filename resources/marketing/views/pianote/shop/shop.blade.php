@@ -23,7 +23,7 @@
 
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => '<span class="text-promo">Save up to 88%</span> on piano lessons,<br class="sm:hidden"> tools, & merch.',
+        'text' => '<span class="text-promo">Save up to 84%</span> on piano lessons,<br class="sm:hidden"> tools, & merch.',
         'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg',
     ])
 
@@ -33,19 +33,19 @@
         @php
             $bundles = [
                 [
-                    'slug' => 'https://www.pianote.com/shop/ultimate-lessons-bundle',
-                    'desc' => '11 Free Bonuses<br> Worth $963',
+                    'slug' => '/shop/ultimate-lessons-bundle',
+                    'desc' => '11 Free Bonuses<br> Worth $933',
                     'visible' => 1,
                     'specialW' => true,
-                    'price' => 1203,
+                    'price' => 1173,
                     'discountedPrice' => 240,
                     'buttonColor' => '#F61A30',
                     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card3.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m3.jpg',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card4.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m4.jpg',
                 ],
                 [
-                    'slug' => 'https://www.pianote.com/shop/30-day-challenge-bundle',
+                    'slug' => '/shop/30-day-challenge-bundle',
                     'desc' => '7 Online Courses <br>For The Price Of 1',
                     'visible' => 1,
                     'specialW2' => true,

@@ -1,3 +1,6 @@
+@php
+    require_once(resource_path('marketing/views/pianote/_partials/homepage-data.php'));
+@endphp
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
@@ -464,21 +467,21 @@ $items = [
                     'url' => 'https://www.youtube.com/pianolessonscom/',
                     'label' => 'youtube',
                     'iconClass' => 'fab fa-youtube',
-                    'count' => '1,450,000',
+                    'count' => number_format(Prices::$pianoteYoutubeSubsc), 
                     'countLabel' => 'Subscribers',
                 ],
                 [
                     'url' => 'https://facebook.com/pianoteofficial/',
                     'label' => 'facebook',
                     'iconClass' => 'fab fa-facebook-f',
-                    'count' => '560,000',
+                    'count' => number_format(Prices::$pianoteFacebookLikes),
                     'countLabel' => 'Likes',
                 ],
                 [
                     'url' => 'https://instagram.com/pianoteofficial/',
                     'label' => 'instagram',
                     'iconClass' => 'fab fa-instagram',
-                    'count' => '239,000',
+                    'count' => number_format(Prices::$pianoteInstagramFollowers),
                     'countLabel' => 'Followers',
                 ],
             ],

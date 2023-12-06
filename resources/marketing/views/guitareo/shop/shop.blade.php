@@ -33,7 +33,7 @@
         @php
             $bundles = [
                 [
-                    'slug' => 'https://www.guitareo.com/shop/ultimate-lessons-bundle',
+                    'slug' => '/shop/ultimate-lessons-bundle',
                     'desc' => 'Guitareo Discount<br> + 5 Bonuses',
                     'visible' => 1,
                     'full' => true,

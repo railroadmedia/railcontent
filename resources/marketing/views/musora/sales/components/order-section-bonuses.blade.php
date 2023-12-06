@@ -5,13 +5,13 @@
         style="background:linear-gradient(30deg, #0a3761, #0c1526);"
     @endif
 >
-    <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
+<section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
         @if(empty($bgColor)) style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/musora/membership/homepage/2023/order-bg-tile-2.png') center center/160px;" @endif >
-        <div class="container mx-auto relative z-50 @if(!empty($max5)) max-w-5xl @else max-w-6xl @endif">
-            <div class="w-full">
-                @if(!empty($promoLogo))
-                    <div class="text-center">
-                        <img
+    <div class="container mx-auto relative z-50 @if(!empty($max5)) max-w-5xl @else max-w-6xl @endif">
+        <div class="w-full">
+            @if(!empty($promoLogo))
+                <div class="text-center">
+                    <img
                             class="h-12 lg:h-16 mb-6 transition-opacity opacity-0"
                             src="{{ $promoLogo }}"
                             alt="Promo logo"
@@ -103,14 +103,14 @@
                                     <s class="opacity-40">${{ $bonus['price'] }}</s>
                                 @endif
                             <strong class="text-musora">FREE</strong></span><br>
-                            <em>
-                                @if(!empty($bonus['shipping']))
-                                    Free Shipping
-                                @else
-                                    Online Access
-                                @endif
-                            </em>
-                        </p>
+                        <em>
+                            @if(!empty($bonus['shipping']))
+                                Free Shipping
+                            @else
+                                Online Access
+                            @endif
+                        </em>
+                    </p>
                     </div>
                 @endforeach
                 <div class="flex flex-wrap sm:flex-nowrap justify-center items-start my-2 sm:my-4">
