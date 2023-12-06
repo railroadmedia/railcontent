@@ -325,7 +325,9 @@ if (!function_exists('convertNumber')) {
         }
 
         if ($num >= 1000000) {
-            return number_format($num / 1000000, 1) . 'M';
+            $million = $num / 1000000;
+            $decimal = fmod($million, 1) > 0 ? '.' . substr(number_format($million, 1), -1) : '';
+            return floor($million) . $decimal . 'M';
         } elseif ($num >= 1000) {
             return number_format($num / 1000) . 'K';
         }

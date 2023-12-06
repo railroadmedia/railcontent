@@ -1,3 +1,6 @@
+@php
+    require_once(resource_path('marketing/views/pianote/_partials/homepage-data.php'));
+@endphp
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
