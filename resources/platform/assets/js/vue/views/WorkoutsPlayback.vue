@@ -5,36 +5,51 @@
         <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white tw-flex tw-w-full tw-mt-[30px]">
             <div class="tw-grow">
                 <div class="tw-w-full" v-if="videoProps.videoId">
-                    <YoutubePlayer v-if="videoProps.videoType === 'youtube'" :video-id="videoProps.videoId" />
-                    <video-player v-else-if="videoProps.videoType === 'vimeo' && videoProps.useLegacyPlayer"
-                        ref="mediaElementVueInstance" :theme-color="brand" :brand="brand" :poster="videoProps.poster"
-                        :sources="videoProps.sources" :ranges="videoProps.ranges ? videoProps.ranges : {}"
-                        :ranges-video-ids="videoProps.rangesVideoIds ? videoProps.rangesVideoIds : {}"
-                        :show-range-buttons="videoProps.showRangeButtons ? videoProps.showRangeButtons : false"
-                        :hls-manifest-url="videoProps.hlsManifestUrl" :captions="videoProps.captions"
-                        :chapters="videoProps.chapters" :current-second="videoProps.currentSecond"
-                        :content-id="videoProps.contentId" :user-id="videoProps.userId" :video-id="videoProps.videoId"
-                        :video-length="videoProps.videoLength" :total-duration="videoProps.totalDuration"
-                        :cast-title="videoProps.castTitle" :use-intersection-observer="videoProps.useIntersectionObserver">
-                        <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
-                    </video-player>
-                    <video-player v-else-if="videoProps.videoType === 'vimeo' && !videoProps.useLegacyPlayer"
-                        ref="mediaElementVueInstance" :theme-color="brand" :brand="brand" :poster="videoProps.poster"
-                        :sources="videoProps.sources" :ranges="videoProps.ranges ? videoProps.ranges : {}"
-                        :ranges-video-ids="videoProps.rangesVideoIds ? videoProps.rangesVideoIds : {}"
-                        :show-range-buttons="videoProps.showRangeButtons ? videoProps.showRangeButtons : false"
-                        :hls-manifest-url="videoProps.hlsManifestUrl" :captions="videoProps.captions"
-                        :chapters="videoProps.chapters" :current-second="videoProps.currentSecond"
-                        :content-id="videoProps.contentId" :user-id="videoProps.userId" :video-id="videoProps.videoId"
-                        :video-length="videoProps.videoLength" :total-duration="videoProps.totalDuration"
-                        :cast-title="videoProps.castTitle" :use-intersection-observer="videoProps.useIntersectionObserver">
-                        <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
-                    </video-player>
+                    <!-- YouTube video -->
+                    <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
+                        <YoutubePlayer :video-id="videoProps.videoId" />
+                    </transition>
+                    <!-- Vimeo video (legacy player) -->
+                    <transition v-else-if="videoProps.videoType === 'vimeo' && videoProps.useLegacyPlayer" appear
+                        name="fade">
+                        <video-media-element ref="mediaElementVueInstance" element-id="lessonPlayer"
+                            :brand="videoProps.brand" :theme-color="videoProps.brand"
+                            :poster="videoProps.videoPosterImageUrl" :sources="videoProps.videoPlaybackEndpoints"
+                            :hls-manifest-url="videoProps.hlsManifestUrl" :video-id="videoProps.vimeoVideoId"
+                            :content-id="videoProps.id" :current-second="videoProps.lastWatchPositionInSeconds"
+                            :progress-state="videoProps.progressState" :video-length="videoProps.videoLength"
+                            :chapters="videoProps.chapters" :user-id="videoProps.userId" :like-count="videoProps.likeCount"
+                            :is-liked="videoProps.isLiked" :check-for-timecode="videoProps.checkForTimecode"
+                        >
+
+                            <div :class="`widescreen title tw-text-${brand}`">
+                                <i class="fas fa-spinner fa-spin absolute-center"></i>
+                            </div>
+                        </video-media-element>
+                    </transition>
+                    <!-- Vimeo video -->
+                    <transition v-else-if="videoProps.videoType === 'vimeo' && !videoProps.useLegacyPlayer" appear
+                        name="fade">
+                        <video-player ref="mediaElementVueInstance" :theme-color="brand" :brand="brand"
+                            :poster="videoProps.poster" :sources="videoProps.sources"
+                            :ranges="videoProps.ranges ? videoProps.ranges : {}"
+                            :ranges-video-ids="videoProps.rangesVideoIds ? videoProps.rangesVideoIds : {}"
+                            :show-range-buttons="videoProps.showRangeButtons ? videoProps.showRangeButtons : false"
+                            :hls-manifest-url="videoProps.hlsManifestUrl" :captions="videoProps.captions"
+                            :chapters="videoProps.chapters" :current-second="videoProps.currentSecond"
+                            :content-id="videoProps.contentId" :user-id="videoProps.userId" :video-id="videoProps.videoId"
+                            :video-length="videoProps.videoLength" :total-duration="videoProps.totalDuration"
+                            :cast-title="videoProps.castTitle"
+                            :use-intersection-observer="videoProps.useIntersectionObserver">
+                            <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
+                        </video-player>
+                    </transition>
                     <div v-else>ERROR LOADING VIDEO...</div>
                 </div>
             </div>
             <div class="tw-ml-[10px] tw-flex tw-transition-all">
-                <div class="tw-rounded-[5px] tw-border tw-border-[#1E364A] tw-overflow-hidden tw-transition-all"  :class="!isSidebarOpen ? 'tw-w-0 tw-overflow-hidden tw-border-0' : 'tw-w-full'">
+                <div class="tw-rounded-[5px] tw-border tw-border-[#1E364A] tw-overflow-hidden tw-transition-all"
+                    :class="!isSidebarOpen ? 'tw-w-0 tw-overflow-hidden tw-border-0' : 'tw-w-full'">
                     <div class="tw-flex tw-flex-col tw-w-[402px]">
                         <div class="tw-bg-[#081825] tw-pt-[24px] tw-pb-[16px] tw-flex tw-justify-between tw-px-[18px]">
                             <h3 class="tw-text-[20px] tw-font-bold tw-font-open-sans">Related Workouts</h3>
@@ -50,7 +65,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="tw-ml-[21px] tw-transition-all" :class="isSidebarOpen ? 'tw-w-0  tw-overflow-hidden' : 'tw-w-full'">
+                <div class="tw-ml-[21px] tw-transition-all"
+                    :class="isSidebarOpen ? 'tw-w-0  tw-overflow-hidden' : 'tw-w-full'">
                     <button @click="isSidebarOpen = !isSidebarOpen">
                         <svg id="icon-workouts-filled" width="38" height="38" viewBox="0 0 38 38" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -68,6 +84,7 @@
 </template>
 
 <script setup>
+// TODO: ADD THE PLAY AND PAUSE EVENTS TO THE VIDEO PLAYERS
 import { onMounted, ref } from "vue";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from "../../stores/user";
