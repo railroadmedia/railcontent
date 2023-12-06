@@ -36,7 +36,6 @@
     }
 
     onMounted(()=>{
-        console.log('multi columns',props.multiSelectColumns)
         if(Object.keys(selectedOption.value).length === 0 && props.singleSelectColumns.length > 0) {
             selectedOption.value = {
                 [props.singleSelectColumns[0].category]: props.singleSelectColumns[0].items[0],
