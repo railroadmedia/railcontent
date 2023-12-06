@@ -135,11 +135,6 @@ class ContentRepository extends RepositoryBase
             'column' => 'bpm',
             'alias' => '_rcb',
         ],
-        'length_in_seconds' => [
-            'table' => 'railcontent_content',
-            'column' => 'length_in_seconds',
-            'alias' => '_rcc',
-        ],
     ];
 
     /**
