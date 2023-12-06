@@ -111,7 +111,6 @@
                 <p class="tw-mt-3 tw-mb-5 tw-max-w-md tw-mx-auto">
                     You've successfully sent <span id="modalEmail">{{ inviteeEmail }}</span>
                     <br class="tw-hidden sm:tw-inline-block"> a 30-Day Guest Pass to {{ brandName }}.
-                    <br class="tw-hidden sm:tw-inline-block"> a 30-Day Trial to {{ brandName }}.
                 </p>
                 <div>
                     <span @click="closeModal"  class="tw-btn-primary tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white dark:tw-bg-[#000C17] dark:tw-border-white dark:tw-text-white tw-mr-2 dark:hover:tw-bg-white dark:hover:tw-text-[#000C17]">Close</span>

@@ -29,10 +29,9 @@
         <div id="confirmationModal" class="modal">
             <div class="tw-flex tw-justify-center tw-items-center" style="background:transparent!important;">
                 <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-text-center dark:tw-text-white tw-rounded-xl tw-px-5 sm:tw-px-8 tw-py-6 sm:tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
-                    <div class="tw-text-2xl tw-font-bold">Thanks for sharing your love for music!</div>
+                    <div class="tw-text-2xl tw-font-bold">Thanks for sharing your love of music!</div>
                     <p class="tw-mt-3 tw-mb-5 tw-max-w-md tw-mx-auto">
                         You've successfully sent <span id="modalEmail"></span>
-                        <br class="tw-hidden sm:tw-inline-block"> a 30-Day Guest Pass to {{ ucfirst($brand) }}.
                         <br class="tw-hidden sm:tw-inline-block"> a 30-Day Trial to {{ ucfirst($brand) }}.
                     </p>
                     <div>
