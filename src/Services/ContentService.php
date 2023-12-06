@@ -1143,10 +1143,6 @@ class ContentService
             }
         }
 
-        //TODO: remove this when we have a better solution for the grouped contents that should not be decorated
-        if($groupBy){
-            return $results;
-        }
 
         return Decorator::decorate($results, 'content');
     }
