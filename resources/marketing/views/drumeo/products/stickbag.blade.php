@@ -118,7 +118,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Drumeo StickBag",
         "fullPrice" => floatval($productPrices['stickbag']->price),
         "price" => floatval($productPrices['stickbag']->discounted_price),

@@ -25,7 +25,7 @@
     @include("guitareo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('guitareo._partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Rhythm & Groove",
         "fullPrice" => floatval($productPrices['rhythm-and-groove']->price),
         "price" => floatval($productPrices['rhythm-and-groove']->discounted_price),

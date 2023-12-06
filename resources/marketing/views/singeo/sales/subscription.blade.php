@@ -233,16 +233,16 @@
 
     @php
         $testimonials = $singeo['testimonials'];
+        $youtube = number_format(Prices::$singeoYoutubeSubsc);
+        $facebook = number_format(Prices::$singeoFacebookLikes);
+        $instagram = number_format(Prices::$singeoInstagramFollowers);
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by singers everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
-        'youtube' => '97,000',
         'facebookLink' => 'https://facebook.com/singeoofficial/',
-        'facebook' => '23,000',
         'instagramLink' => 'https://instagram.com/singeoofficial/',
-        'instagram' => '9,000',
     ])
 
     @if(empty($trialVersion))
@@ -309,10 +309,6 @@
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
                 'image' => 'marketing/singeo/membership/homepage/2023/singeo-spread.png',
         ])
-        @include('musora.sales.components.trial-explanation', [
-            'instrument' => 'singing',
-        ])
-
     @endif
 
     @include('musora.sales.components.app-section', [

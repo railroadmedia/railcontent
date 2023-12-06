@@ -25,7 +25,7 @@
         "cartVersion" => true
     ])
 
-    @include('singeo.shop.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
                 "name" => "Singing Starter Kit",
                 "fullPrice" => floatval($productPrices['singing-starter-kit']->price),
                 "price" => floatval($productPrices['singing-starter-kit']->discounted_price),

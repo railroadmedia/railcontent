@@ -196,7 +196,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
                     "name" => "Pianote Foundations Books",
                     "fullPrice" => 149,
                     "price" => 149,

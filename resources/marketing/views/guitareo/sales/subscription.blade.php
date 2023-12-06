@@ -222,17 +222,17 @@
 
     @php
         $testimonials = $guitareo['testimonials'];
+        $youtube = convertNumber(Prices::$guitareoYoutubeSubsc);
+        $facebook = convertNumber(Prices::$guitareoFacebookLikes);
+        $instagram = convertNumber(Prices::$guitareoInstagramFollowers);
     @endphp
 
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by guitarists<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/guitarlessonscom/',
-        'youtube' => '1M',
         'facebookLink' => 'https://facebook.com/guitareoofficial/',
-        'facebook' => '330K',
         'instagramLink' => 'https://instagram.com/guitareoofficial/',
-        'instagram' => '19K',
     ])
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
@@ -302,9 +302,6 @@
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
         'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
-        ])
-        @include('musora.sales.components.trial-explanation', [
-            'instrument' => 'guitar',
         ])
 
     @endif

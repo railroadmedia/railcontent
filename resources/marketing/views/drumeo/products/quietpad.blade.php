@@ -121,7 +121,7 @@
 
 @section('content')
 
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Drumeo QuietPad",
         "fullPrice" => floatval($productPrices['quietpad']->price),
         "price" => floatval($productPrices['quietpad']->discounted_price),
@@ -319,13 +319,6 @@
                 </tr>
                 <tr>
                     <td>Hand Assembled</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td></td>
-                    <td></td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                </tr>
-                <tr>
-                    <td>Made In The USA <i class="fad fa-flag-usa" style="font-size: inherit;margin-left: 3px;"></i></td>
                     <td><i class="fas fa-check-circle"></i></td>
                     <td></td>
                     <td></td>

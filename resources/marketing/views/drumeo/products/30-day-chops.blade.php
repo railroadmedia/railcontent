@@ -209,7 +209,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
                 "name" => "30-Day Chops",
                 "fullPrice" => floatval($productPrices['30-day-chops']->price),
                 "price" => floatval($productPrices['30-day-chops']->discounted_price),
@@ -383,21 +383,21 @@ $testimonials = $drumeo['testimonialsShopVersion'];
                     'url' => 'https://www.youtube.com/freedrumlessons/',
                     'label' => 'youtube',
                     'iconClass' => 'fab fa-youtube',
-                    'count' => '3,300,000',
+                    'count' => number_format(Prices::$drumeoYoutubeSubsc), 
                     'countLabel' => 'Subscribers',
                 ],
                 [
                     'url' => 'https://facebook.com/drumeo/',
                     'label' => 'facebook',
                     'iconClass' => 'fab fa-facebook-f',
-                    'count' => '1,120,000',
+                    'count' => number_format(Prices::$drumeoFacebookLikes),
                     'countLabel' => 'Likes',
                 ],
                 [
                     'url' => 'https://instagram.com/drumeoofficial/',
                     'label' => 'instagram',
                     'iconClass' => 'fab fa-instagram',
-                    'count' => '1,400,000',
+                    'count' => number_format(Prices::$drumeoInstagramFollowers),
                     'countLabel' => 'Followers',
                 ],
             ],

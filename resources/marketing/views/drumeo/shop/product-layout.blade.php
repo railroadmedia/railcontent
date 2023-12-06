@@ -8,7 +8,7 @@
 @endsection
 
 @section('layout-body')
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
                 "name" => $product->name,
                 "fullPrice" => $product->price,
                 "price" => $product->discounted_price,
@@ -65,7 +65,7 @@
 
                     <p class="mb-4">
                         <strong>Say hello to your free bonuses:</strong><br>
-                        <em style="opacity: 0.5;">All digital bonuses are added to your account instantly with your membership to {{ $brand }}, and they’re yours forever.</em>
+                        <em style="opacity: 0.5;">All digital bonuses are added to your account instantly with your membership to {{ ucwords($brand) }}, and they’re yours for as long as you remain a member.</em>
                     </p>
 
                     @include('_partials.components.shop.bonuses')

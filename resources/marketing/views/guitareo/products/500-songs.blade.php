@@ -5,7 +5,7 @@
 @section('order-link', '/ecommerce/add-to-cart?products[500-songs-in-5-days-guitareo]=1')
 
 @section('topbar')
-    @include('guitareo._partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
                 "name" => "500 Songs In 5 Days",
                 "fullPrice" => floatval($productPrices['500-songs-in-5-days-guitareo']->price),
                 "price" => floatval($productPrices['500-songs-in-5-days-guitareo']->discounted_price),

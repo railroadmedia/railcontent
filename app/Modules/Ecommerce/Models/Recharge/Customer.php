@@ -13,11 +13,11 @@ class Customer
     public string $email;
     public object $externalCustomerId;
     public ?Carbon $firstChargeProcessedAt;
-    public string $firstName;
+    public ?string $firstName;
     public bool $hasPaymentMethodInDunning; // (failed charge)
     public bool $hasValidPaymentMethod;
     public string $hash;
-    public string $lastName;
+    public ?string $lastName;
     public ?string $phone;
     public int $activeSubscriptionCount;
     public int $totalSubscriptionsCount;
