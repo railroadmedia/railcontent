@@ -325,13 +325,6 @@
                     <td><i class="fas fa-check-circle"></i></td>
                 </tr>
                 <tr>
-                    <td>Made In The USA <i class="fad fa-flag-usa" style="font-size: inherit;margin-left: 3px;"></i></td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td></td>
-                    <td></td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                </tr>
-                <tr>
                     <td>Worldwide Shipping</td>
                     <td><i class="fas fa-check-circle"></i></td>
                     <td></td>

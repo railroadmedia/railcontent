@@ -165,14 +165,7 @@
         $slides = $pianote['slides'];
     @endphp
     @if(empty($hideHeader) || !$hideHeader)
-        @if(!empty($bfVersion))
-            @include('_partials.layout.holiday.homepage-top-banner',[
-                'text' => 'Get 11 free<br class="sm:hidden"> bonuses worth $963',
-                'text2' => 'Get 11 free bonuses worth $963',
-                'vimeo' => '885340227',
-                'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[taktell-piccolo-metronome]=1&products[pianote-practice-planner]=1&products[music-theory-posters]=1&products[christmas-song-book-digital]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702',
-            ])
-        @elseif(!empty($beginnerVersion))
+        @if(!empty($beginnerVersion))
             @include('musora.sales.components.header-section', [
                 'header' => 'Online piano lessons<br> tailored for beginners.',
                 'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> friendly teachers, and songs perfect for your skill level.',
@@ -254,16 +247,16 @@
 
     @php
         $testimonials = $pianote['testimonials'];
+        $youtube = $pianote['youtube']; // numbers 
+        $facebook = $pianote['facebook'];
+        $instagram = $pianote['instagram']; 
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
-        'youtube' => '1.5M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
-        'facebook' => '430K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '240K',
     ])
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
@@ -298,12 +291,6 @@
         @php
             $bonuses = [
                 [
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/b15d76f7-b3c5-4dcd-94c3-449cd60ed88e-metronome-cart.jpg',
-                    'description' => 'Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner.',
-                    'price' => floatval($productPrices['taktell-piccolo-metronome']->price),
-                    'shipping' => true,
-                ],
-                [
                     'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Pianote_Planner_Card.jpg',
                     'title' => 'Practice Planner',
                     'description' => 'Always know exactly what to practice.',
@@ -315,6 +302,11 @@
                     'description' => 'Decorate your home and improve your musical knowledge with this set of 6 music theory posters.',
                     'price' => floatval($productPrices['music-theory-posters']->price),
                     'shipping' => true,
+                ],
+                [
+                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/5afe20b9-5f1c-4886-b932-9ee93ffc67f4-christmas-songbook-shop.jpg',
+                    'description' => 'Christmas classics to make your holiday season extra special.',
+                    'price' => floatval($productPrices['christmas-songbook']->price),
                 ],
                 [
                     'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/christmas-songbook-card.jpg',
@@ -362,8 +354,8 @@
         'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-annual-2w-card.png',
         'bonusWidth' => 'w-1/2 md:w-1/4',
         'bonusCount' => '11',
-        'bonusSum' => '963',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[taktell-piccolo-metronome]=1&products[pianote-practice-planner]=1&products[music-theory-posters]=1&products[christmas-song-book-digital]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702',
+        'bonusSum' => '933',
+        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[christmas-songbook]=1&products[pianote-practice-planner]=1&products[music-theory-posters]=1&products[christmas-song-book-digital]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702',
         'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
         ])
     @else
