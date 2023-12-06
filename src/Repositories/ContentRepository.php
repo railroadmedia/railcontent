@@ -2394,17 +2394,17 @@ class ContentRepository extends RepositoryBase
                 ->toArray();
 
         foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
-                $countingItems = '';
-                if (self::$countFilterOptionItems) {
-                    $nr = $counts[$filterOptionName][$filterOptionValueToClean];
-                    $countingItems = ' ('.$nr.')';
-                }
-                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
-                    trim(
-                        $filterOptionValueToClean.$countingItems
-                    )
-                );
-
+            $countingItems = '';
+            if (self::$countFilterOptionItems) {
+                $nr = $counts[$filterOptionName][$filterOptionValueToClean];
+                $countingItems = ' ('.$nr.')';
+            }
+            $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
+                trim(
+                    $filterOptionValueToClean.$countingItems
+                )
+            );
+        }
 
             $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
             sort($filterOptionsArray[$filterOptionName]);
@@ -2489,7 +2489,7 @@ class ContentRepository extends RepositoryBase
                     $nr = $counts[$filterOptionName][$filterOptionValueToClean];
                     $countingItems = ' ('.$nr.')';
                 }
-            }
+
                 $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = trim(
                     ucwords(
                         $filterOptionValueToClean.$countingItems
