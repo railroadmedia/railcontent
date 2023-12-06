@@ -78,22 +78,24 @@
                         {{ mappedData.description.replace(/<[^>]+>/g, '') }}
                     </p>
                     <!-- Content -->
-                    <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]"
+                    <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] tw-mb-0.5"
                         :class="{ 'tw-text-center': isGuitareoChordAndScale }">
                         <div v-if="contentCreator && contentCreator !== ''" class="tw-mb-0.5">
                             <span> {{ contentCreator }} </span>
-                            <span class="tw-mx-1">|</span>
-                        </div>
-                        <div class="tw-mb-0.5"> 
-                            {{ contentTypeString }} 
-                            <span class="tw-mx-1">|</span> 
-                        </div>
-                        <!-- Difficulty Label -->
-                        <div v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
-                            <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
-                                textCase="capitalize" />
                         </div>
                     </h6>
+                    <p class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
+                        <!-- Difficulty Label -->
+                        <span v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
+                            <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
+                                textCase="capitalize" />
+                                <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
+                        </span>
+                        <span class="tw-mb-0.5">
+                            {{ contentTypeString }}
+                        </span>
+                    </p>
+
                 </a>
                 <!-- Add to Playlist -->
                 <div class="tw-inline-flex tw-items-start tw-p-1">
