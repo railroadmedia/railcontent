@@ -399,29 +399,31 @@ class ContentQueryBuilder extends QueryBuilder
         }
 
         // set the joins first, then we'll add the where's after
-        foreach ($requiredFieldsGroupedByTable as $name => $requiredFieldDataGroupedA) {
-            foreach($requiredFieldDataGroupedA as $requiredFieldDataGrouped) {
-                if ($requiredFieldDataGrouped['is_content_column']) {
-                    $this->where(
-                        'railcontent_content.'.$requiredFieldDataGrouped['name'],
-                        $requiredFieldDataGrouped['operator'],
-                        is_numeric($requiredFieldDataGrouped['value']) ?
-                            DB::raw($requiredFieldDataGrouped['value']) : DB::raw(
-                            DB::connection()
-                                ->getPdo()
-                                ->quote($requiredFieldDataGrouped['value'])
-                        )
-                    );
-                } elseif (!empty($requiredFieldDataGrouped['associated_table'])) {
+        foreach ($requiredFieldsGroupedByTable as $name => $requiredFieldDataGrouped) {
+
+                if ($requiredFieldDataGrouped[0]['is_content_column']) {
+                    foreach($requiredFieldDataGrouped as $requiredFieldGroup) {
+                        $this->where(
+                            'railcontent_content.' . $requiredFieldGroup['name'],
+                            $requiredFieldGroup['operator'],
+                            is_numeric($requiredFieldGroup['value']) ?
+                                DB::raw($requiredFieldGroup['value']) : DB::raw(
+                                DB::connection()
+                                    ->getPdo()
+                                    ->quote($requiredFieldGroup['value'])
+                            )
+                        );
+                    }
+                } elseif (!empty($requiredFieldDataGrouped[0]['associated_table'])) {
                     $field =
-                        $requiredFieldDataGrouped['field'] ? $requiredFieldDataGrouped['field'] : 'content_id';
+                        $requiredFieldDataGrouped[0]['field'] ? $requiredFieldDataGrouped[0]['field'] : 'content_id';
                     $this->leftJoin(
-                        $requiredFieldDataGrouped['associated_table']['table'].
-                        ' as '.
-                        $requiredFieldDataGrouped['associated_table']['alias'],
-                        $requiredFieldDataGrouped['associated_table']['alias'].'.'.$field,
+                        $requiredFieldDataGrouped[0]['associated_table']['table'] .
+                        ' as ' .
+                        $requiredFieldDataGrouped[0]['associated_table']['alias'],
+                        $requiredFieldDataGrouped[0]['associated_table']['alias'] . '.' . $field,
                         '=',
-                        ConfigService::$tableContent.'.id'
+                        ConfigService::$tableContent . '.id'
                     );
 
                     $this->where(function (Builder $builder) use (
@@ -429,8 +431,8 @@ class ContentQueryBuilder extends QueryBuilder
                     ) {
                         foreach ($requiredFieldDataGrouped as $requiredFieldGroup) {
                             $this->where(
-                                $requiredFieldGroup['associated_table']['alias'].
-                                '.'.
+                                $requiredFieldGroup['associated_table']['alias'] .
+                                '.' .
                                 $requiredFieldGroup['associated_table']['column'],
                                 $requiredFieldGroup['operator'],
                                 is_numeric($requiredFieldGroup['value']) ? DB::raw($requiredFieldGroup['value']) :
@@ -442,8 +444,8 @@ class ContentQueryBuilder extends QueryBuilder
                             );
                         }
                     });
-                };
-            }
+                }
+
         }
 
         return $this;
