@@ -130,24 +130,25 @@ class InstructorDecorator extends ModeDecoratorBase
             $lessons = $content['lessons'] ?? [];
 
             foreach ($lessons as $lessonIndex => $lesson) {
-                switch ($lesson['difficulty']) {
-                    case ($lesson['difficulty'] == 1):
+                $difficulty = $lesson['difficulty'] ?? '';
+                switch ($difficulty) {
+                    case ($difficulty == 1):
                         $difficultyString = 'Novice';
                         break;
-                    case ($lesson['difficulty'] > 1 && $lesson['difficulty'] <= 3):
+                    case ($difficulty > 1 && $difficulty <= 3):
                         $difficultyString = 'Beginner';
                         break;
-                    case ($lesson['difficulty'] > 3 && $lesson['difficulty'] <= 5):
+                    case ($difficulty > 3 && $difficulty <= 5):
                         $difficultyString = 'Intermediate';
                         break;
-                    case ($lesson['difficulty'] > 5 && $lesson['difficulty'] <= 7):
+                    case ($difficulty > 5 && $difficulty <= 7):
                         $difficultyString = 'Advanced';
                         break;
-                    case ($lesson['difficulty'] > 7):
+                    case ($difficulty > 7):
                         $difficultyString = 'Expert';
                         break;
                     default:
-                        $difficultyString = $lesson['difficulty'];
+                        $difficultyString = $difficulty;
                         break;
                 }
                 $contents[$contentIndex]['lessons'][$lessonIndex]['difficulty_string'] = $difficultyString;
