@@ -10,11 +10,11 @@
             <!-- Thumbnail Section -->
             <a :href="renderLink ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
                 { 'thumbnail-col tw-mr-3': displayInline },
-                item.type === 'song' ? 'tw-max-w-[121px]' : '',
+                item.type === 'song' && displayInline ? 'tw-max-w-[121px]' : '',
                 item.type + '-thumbnail'
             ]">
                 <div class="tw-relative tw-overflow-hidden tw-rounded-[10px]" 
-                    :class="item.type === 'song' ? 'tw-aspect-square' : 'tw-aspect-video'"
+                    :class="item.type === 'song' && displayInline ? 'tw-aspect-square' : 'tw-aspect-video'"
                 >
                     <!-- Video Thumbnail -->
                     <img :src="`https://www.musora.com/musora-cdn/image/width=500/${mappedData.thumbnail} `"
