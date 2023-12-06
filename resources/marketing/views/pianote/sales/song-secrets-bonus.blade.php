@@ -1,6 +1,3 @@
-@php
-    require_once(resource_path('marketing/views/pianote/_partials/homepage-data.php'));
-@endphp
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
@@ -316,9 +313,9 @@
             'location' => 'Ontario, Canada',
             ],
 ];
-        $youtube = convertNumber($pianote['youtube']); // numbers 
-        $facebook = convertNumber($pianote['facebook']);
-        $instagram = convertNumber($pianote['instagram']); 
+        $youtube = convertNumber(Prices::$pianoteYoutubeSubsc); 
+        $facebook = convertNumber(Prices::$pianoteFacebookLikes);
+        $instagram = convertNumber(Prices::$pianoteInstagramFollowers); 
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by students<br class="inline-block sm:hidden">  just like you.',

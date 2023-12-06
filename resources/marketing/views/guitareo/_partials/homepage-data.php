@@ -1,10 +1,6 @@
     <?php
     $guitareo = [
 
-        'youtube' => 1000000, // should be an integer
-        'facebook' => 330000,
-        'instagram' => 19000,
-
         'features' => [
             [
                 'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitar-lessons-icon.svg',

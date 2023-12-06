@@ -1,8 +1,5 @@
     <?php
     $drumeo = [
-        'youtube' => 3200000, // should be an integer
-        'facebook' => 1200000,
-        'instagram' => 1500000,
 
         'slides' => [
             [

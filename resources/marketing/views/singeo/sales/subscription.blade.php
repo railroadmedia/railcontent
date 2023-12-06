@@ -233,9 +233,9 @@
 
     @php
         $testimonials = $singeo['testimonials'];
-        $youtube = convertNumber($singeo['youtube']);
-        $facebook = convertNumber($singeo['facebook']);
-        $instagram = convertNumber($singeo['instagram']);
+        $youtube = number_format(Prices::$singeoYoutubeSubsc);
+        $facebook = number_format(Prices::$singeoFacebookLikes);
+        $instagram = number_format(Prices::$singeoInstagramFollowers);
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by singers everywhere.',
