@@ -409,12 +409,12 @@ class ContentQueryBuilder extends QueryBuilder
                             DB::raw($requiredFieldDataGrouped['value']) : DB::raw(
                             DB::connection()
                                 ->getPdo()
-                                ->quote($requiredFieldDataGrouped[0]['value'])
+                                ->quote($requiredFieldDataGrouped['value'])
                         )
                     );
                 } elseif (!empty($requiredFieldDataGrouped['associated_table'])) {
                     $field =
-                        $requiredFieldDataGrouped['field'] ? $requiredFieldDataGrouped[0]['field'] : 'content_id';
+                        $requiredFieldDataGrouped['field'] ? $requiredFieldDataGrouped['field'] : 'content_id';
                     $this->leftJoin(
                         $requiredFieldDataGrouped['associated_table']['table'].
                         ' as '.
