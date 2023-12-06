@@ -97,7 +97,7 @@ class RechargeWebhookController extends Controller
             $data = [];
             $data['charge_attempts'] = $charge['number_times_tried'];
 
-            $this->customerIoService->syncChargeFailedAttributes($user, $product->brand, $charge);
+            $this->customerIoService->syncChargeFailedAttributes($user, $product->brand, $data);
         } catch (Exception $e) {
             //Catch exception to prevent shopify from retrying the webhook
             Log::error($e->getMessage());

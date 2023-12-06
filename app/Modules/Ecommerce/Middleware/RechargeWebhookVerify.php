@@ -20,7 +20,7 @@ class RechargeWebhookVerify
         }
         $hmac_header = $_SERVER['HTTP_X_RECHARGE_HMAC_SHA256'];
         $data = file_get_contents('php://input');
-        $calculated_hmac = base64_encode(hash_hmac('sha256', $data, $secret, true));
+        $calculated_hmac = hash('sha256', $secret . $data);
 
         if (hash_equals($calculated_hmac, $hmac_header)) {
             return $next($request);
