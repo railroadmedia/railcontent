@@ -962,7 +962,7 @@ export default {
     },
 
     coachEndpoint(){
-        return this.selectedTab === "allCoaches" ? '/railcontent/content?only_subscribed=' : '/railcontent/content?only_subscribed=true';
+        return this.isOnlySubscribed  ? '/railcontent/content?only_subscribed=true' : '/railcontent/content?only_subscribed=';
     },
 
     handleFilterTabClick(value){

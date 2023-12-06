@@ -5,12 +5,12 @@
 </style>
  <div class="big-promo-banner text-white text-center lg:text-left relative py-4" style="background: #000;">
     <div class="row container mx-auto px-3 sm:flex items-center justify-between">
-            <a href="/drumshop/">
-                @include($theme.'._partials.holiday-logo',[
-                    'styles' => 'w-auto h-8 sm:h-10'
-                ])
-            </a>
-            <span class="text-center sm:text-right flex flex-wrap items-center sm:justify-end">
+        <a @if($theme === 'drumeo') href="/drumshop/" @else href="/shop/" @endif>
+            @include($theme.'._partials.holiday-logo',[
+                'styles' => 'w-auto h-8 sm:h-10'
+            ])
+        </a>
+        <span class="text-center sm:text-right flex flex-wrap items-center sm:justify-end">
                 <p class="text mx-auto sm:ml-0 sm:mr-3 my-2 sm:my-0 w-full sm:w-auto">
                     @if(!empty($price))
                         @if(round(100 - (100 * ($price / $fullPrice))) > 1)

@@ -112,8 +112,8 @@ const props = defineProps({
         default: () => []
     },
     workoutData: {
-        type: Object,
-        default: () => ({}),
+        type: [Array, Object],
+        default: () => [],
     },
     collectionType: {
         type: String,
@@ -133,9 +133,6 @@ const props = defineProps({
     },
 });
 
-onMounted(()=> {
-    console.log('continueData',props.carouselData.length)
-})
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 

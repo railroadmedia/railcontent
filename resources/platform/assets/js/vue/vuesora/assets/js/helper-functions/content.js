@@ -539,17 +539,19 @@ export default {
      * @returns {string} - the icon class name
      */
     getContentTypeIcon(type){
-        type = type
-            .replace(/-part/g, '') // Remove the -part
-            .replace(/-bundle/g, '') // Remove the -bundle
-            .replace(/-level/g, '') // Remove the -level
-            .replace(/-course/g, '') // Remove the -course
-            .replace(/-lesson/g, '');  // Remove -lesson
-        const contentType = this.topLevelContentTypes().filter(content =>
-            content.type === type
-        )[0];
+        if(type) {
+            type = type
+                .replace(/-part/g, '') // Remove the -part
+                .replace(/-bundle/g, '') // Remove the -bundle
+                .replace(/-level/g, '') // Remove the -level
+                .replace(/-course/g, '') // Remove the -course
+                .replace(/-lesson/g, '');  // Remove -lesson
+            const contentType = this.topLevelContentTypes().filter(content =>
+                content.type === type
+            )[0];
 
-        return contentType ? contentType.icon : undefined;
+            return contentType ? contentType.icon : undefined;
+        }
     },
 
     /**

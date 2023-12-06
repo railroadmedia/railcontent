@@ -41,7 +41,7 @@
 @endsection
 
 @section('content')
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Independence Made Easy",
         "fullPrice" => floatval($productPrices['independence-made-easy-pack']->price),
         "price" => floatval($productPrices['independence-made-easy-pack']->discounted_price),

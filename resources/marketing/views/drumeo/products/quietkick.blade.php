@@ -75,7 +75,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
                 "name" => "QuietKick",
                 "fullPrice" => floatval($productPrices['quietkick']->price),
                 "price" => $memberPrice,

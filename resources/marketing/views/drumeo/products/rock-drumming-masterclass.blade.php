@@ -48,7 +48,7 @@
 @endsection
 
 @section('content')
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Rock Drumming Masterclass",
         "fullPrice" => floatval($productPrices['rock-drumming-masterclass-pack']->price),
         "price" => floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price),

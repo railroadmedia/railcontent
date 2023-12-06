@@ -236,7 +236,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
                 "name" => "30-Day Drummer",
                 "fullPrice" => floatval($productPrices['30-day-drummer-3']->price),
                 "price" => floatval($productPrices['30-day-drummer-3']->discounted_price),

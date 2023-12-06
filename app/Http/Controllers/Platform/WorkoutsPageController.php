@@ -29,6 +29,10 @@ class WorkoutsPageController extends BaseController
         $lessonType = 'workout';
         $requiredFields = $request->get('required_fields', []);
 
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$lessonType] ?? [];
+        ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
+        ContentRepository::$countFilterOptionItems = true;
+
         $workouts = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 25),
@@ -57,9 +61,7 @@ class WorkoutsPageController extends BaseController
 
         $hasStartedLessons = !empty(json_decode($startedListLessons)->data);
 
-        $catalogName = $lessonType;
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$catalogName] ?? [];
-        ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
+
 
         $carousel =
             $this->carouselService->getCarouselSlides()
@@ -82,6 +84,10 @@ class WorkoutsPageController extends BaseController
     {
         ContentRepository::$pullFutureContent = true;
         $lessonType = 'challenge';
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$lessonType] ?? [];
+        ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
+        ContentRepository::$countFilterOptionItems = true;
+
         $challenges = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 25),

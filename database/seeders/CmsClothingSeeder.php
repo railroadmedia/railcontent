@@ -60,7 +60,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => '	Relaxed Fit Scoop Neck Short Sleeve T-Shirt'
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -116,7 +116,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => 'Mid profile, 3 1/2" high crown, curved visor, 6 panels'
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -171,7 +171,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "4” wide, front embroidery."
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => true,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -225,7 +225,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => 'Mid profile, 3 1/2" high crown, curved visor, 6 panels'
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -276,7 +276,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Black with a blue Drumeo logo"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -326,7 +326,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Black with a blue Drumeo logo"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -375,7 +375,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Royal Frost Blue"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -425,7 +425,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Coal"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -474,7 +474,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Heather Slate"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -525,7 +525,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Heather Dark Gray"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -576,7 +576,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Heather Deep Teal"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -627,7 +627,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Black"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -677,7 +677,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Natural/Forest Green"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -728,7 +728,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Oxblood Black"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -779,7 +779,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Heather Gray & Black"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -831,7 +831,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Black/White"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -882,7 +882,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Black with blue Drumeo logo"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -931,7 +931,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Bone"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -981,7 +981,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Charcoal-Black Triblend"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1033,7 +1033,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Oatmeal Heather/Army Green"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1084,7 +1084,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "White"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1135,7 +1135,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Black"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1186,7 +1186,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Red"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1237,7 +1237,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Black"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1292,7 +1292,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Women’s Fine Jersey Relaxed V T-Shirt"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1347,7 +1347,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "V-Neck Rib Knit Collar w/Contrast Pocket"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1402,7 +1402,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "V-Neck Rib Knit Collar w/Contrast Pocket"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1452,7 +1452,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Vintage Black"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1503,7 +1503,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Vintage Black"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1557,7 +1557,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Relaxed Fit Scoop Neck Short Sleeve T-Shirt"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1611,7 +1611,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Relaxed Fit Scoop Neck Short Sleeve T-Shirt"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1665,7 +1665,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Zip-Up Hoodie With Kangaroo Pockets"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1720,7 +1720,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Hooded Sweatshirt With Front Pouch Pocket"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1774,7 +1774,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Hooded Sweatshirt With Front Pouch Pocket"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1823,7 +1823,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Lavender"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1872,7 +1872,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Black"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1925,7 +1925,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Black"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1981,7 +1981,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "8” wide front screenprint"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -2030,7 +2030,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Black, with superior screen printing"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => true,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -2082,7 +2082,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Funnel Neck With Matching Drawcord & Side Pockets"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => true,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -2133,7 +2133,7 @@ class CmsClothingSeeder extends Seeder
 //                        "desc" => "Black"
 //                    ],
 //                ],
-//                "visible" => false,
+//                "shop_card_visible" => false,
 //                "sold_out" => false,
 //                "guaranteed" => false,
 //                "lifetime_access" => false,
@@ -2188,8 +2188,8 @@ class CmsClothingSeeder extends Seeder
                 'sold_out' => $product['sold_out'],
                 'free_shipping' => $product['free_shipping'],
                 'guaranteed' => $product['guaranteed'],
-                'visible' => $product['visible'],
-                'display_order' => $product['visible'] ? $orderNum : 0,
+                'shop_card_visible' => $product['shop_card_visible'],
+                'display_order' => $product['shop_card_visible'] ? $orderNum : 0,
                 'size_case_sensitive' => empty($product['size_case_sensitive']) ? false : $product['size_case_sensitive'],
                 'size_chart_id' => empty($product['sizeChart']) ? null : $product['sizeChart'],
                 'bundle_img' => empty($product['bundle_img']) ? null : $product['bundle_img'],

@@ -49,7 +49,7 @@
     @include("guitareo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('guitareo._partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Guitar System",
         "fullPrice" => floatval($productPrices['GUITAR-SYSTEM']->price),
         "price" => floatval($productPrices['GUITAR-SYSTEM']->discounted_price),
