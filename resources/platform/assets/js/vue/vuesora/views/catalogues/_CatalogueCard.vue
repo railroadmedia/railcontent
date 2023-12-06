@@ -160,7 +160,9 @@ export default {
             if (this.isSongContent) {
                 return this.contentModel.post.fields.find(field => field.key === 'artist').value;
             }
-            return this.contentModel.post.fields.find(field => field.key === 'instructor').value.name;
+            if(this.contentModel.post.fields.find(field => field.key === 'instructor')) {
+                return this.contentModel.post.fields.find(field => field.key === 'instructor').value.name;
+            }
         },
         mappedData () {
             const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value

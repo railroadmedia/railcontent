@@ -96,7 +96,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Concert Headphones",
         "fullPrice" => floatval($productPrices['pianote-headphones']->price),
         "price" => floatval($productPrices['pianote-headphones']->discounted_price),

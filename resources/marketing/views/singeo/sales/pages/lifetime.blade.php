@@ -93,7 +93,7 @@
     @include('singeo.sales.partials._nav', [
         "cartVersion" => true
     ])
-{{--    @include('singeo.shop.partials.promo-banner', [--}}
+{{--    @include('_partials.components.shop.promo-banner', [--}}
 {{--    "name" => "Lifetime",--}}
 {{--    "fullPrice" => 1200,--}}
 {{--    "price" => 1200,--}}

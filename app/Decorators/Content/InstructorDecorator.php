@@ -5,7 +5,6 @@ namespace App\Decorators\Content;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Support\Collection;
-//use Railroad\Railnotifications\Contracts\RailforumProviderInterface;
 
 class InstructorDecorator extends ModeDecoratorBase
 {
@@ -14,11 +13,6 @@ class InstructorDecorator extends ModeDecoratorBase
      */
     protected $contentFollowsService;
 
-//    /**
-//     * @var RailforumProviderInterface
-//     */
-//    private $railforumProvider;
-
     private static $cache = [];
 
     /**
@@ -26,10 +20,8 @@ class InstructorDecorator extends ModeDecoratorBase
      */
     public function __construct(
         ContentFollowsService $contentFollowsService
-//        RailforumProviderInterface $railforumProvider
     ) {
         $this->contentFollowsService = $contentFollowsService;
-//        $this->railforumProvider = $railforumProvider;
     }
 
     public function decorate(Collection $contents)
@@ -71,7 +63,7 @@ class InstructorDecorator extends ModeDecoratorBase
             foreach ($content['fields'] as $field) {
                 if ($field['key'] === 'instructor') {
                     $coachName = $field['value']->fetch('fields.name');
-                    if(!in_array($coachName, $contents[$contentIndex]['instructors'])) {
+                    if (!in_array($coachName, $contents[$contentIndex]['instructors'])) {
                         $contents[$contentIndex]['instructors'][] = $coachName;
                     }
 
@@ -86,10 +78,11 @@ class InstructorDecorator extends ModeDecoratorBase
             $contents[$contentIndex]['coaches'] = array_values($coaches);
 
             if ($content['type'] == 'instructor') {
-                $contents[$contentIndex]['url'] = url()->route('platform.content.coach.show', [$content['slug'], $content['id']]);
+                $contents[$contentIndex]['url'] =
+                    url()->route('platform.content.coach.show', [$content['slug'], $content['id']]);
 
-//                $contents[$contentIndex]['mobile_app_url'] =
-//                    url()->route('mobile.musora-api.content.show', [$content['id']]);
+                //                $contents[$contentIndex]['mobile_app_url'] =
+                //                    url()->route('mobile.musora-api.content.show', [$content['id']]);
 
                 $contents[$contentIndex]['current_user_is_subscribed'] =
                     in_array($content['id'], $userSubscribedContents);
@@ -111,19 +104,54 @@ class InstructorDecorator extends ModeDecoratorBase
 
                 // this is a hack that only runs this for mobile app json requests
                 if (strpos(request()->path(), 'musora-api') !== false) {
-                    $contents[$contentIndex]['short_bio'] = str_replace('<br>', '
-', $content->fetch('data.short_bio'));
-                    $contents[$contentIndex]['long_bio'] = str_replace('<br>', '
-', $content->fetch('data.long_bio'));
+                    $contents[$contentIndex]['short_bio'] = str_replace(
+                        '<br>',
+                        '
+',
+                        $content->fetch('data.short_bio')
+                    );
+                    $contents[$contentIndex]['long_bio'] = str_replace(
+                        '<br>',
+                        '
+',
+                        $content->fetch('data.long_bio')
+                    );
                 }
 
                 $forumThreadId = $content->fetch('fields.forum_thread_id', null);
                 $contents[$contentIndex]['forum_thread_id'] = $forumThreadId;
-                if($forumThreadId){
+                if ($forumThreadId) {
                     // todo: railforums
-//                    $contents[$contentIndex]['forum_thread'] =  $this->railforumProvider->getThreadById($forumThreadId);
-//                    $contents[$contentIndex]['forum_thread']['url'] = url()->route('forums.thread.jump-to',$forumThreadId);
+                    //                    $contents[$contentIndex]['forum_thread'] =  $this->railforumProvider->getThreadById($forumThreadId);
+                    //                    $contents[$contentIndex]['forum_thread']['url'] = url()->route('forums.thread.jump-to',$forumThreadId);
                 }
+            }
+
+            $lessons = $content['lessons'] ?? [];
+
+            foreach ($lessons as $lessonIndex => $lesson) {
+                $difficulty = $lesson['difficulty'] ?? '';
+                switch ($difficulty) {
+                    case ($difficulty == 1):
+                        $difficultyString = 'Novice';
+                        break;
+                    case ($difficulty > 1 && $difficulty <= 3):
+                        $difficultyString = 'Beginner';
+                        break;
+                    case ($difficulty > 3 && $difficulty <= 5):
+                        $difficultyString = 'Intermediate';
+                        break;
+                    case ($difficulty > 5 && $difficulty <= 7):
+                        $difficultyString = 'Advanced';
+                        break;
+                    case ($difficulty > 7):
+                        $difficultyString = 'Expert';
+                        break;
+                    default:
+                        $difficultyString = $difficulty;
+                        break;
+                }
+                $contents[$contentIndex]['lessons'][$lessonIndex]['difficulty_string'] = $difficultyString;
             }
         }
 
