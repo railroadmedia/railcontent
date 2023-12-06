@@ -22784,6 +22784,12 @@ a:visited{
 .tw-w-screen{
   width: 100vw !important;
 }
+.\!tw-w-full{
+  width: 100% !important;
+}
+.tw-w-\[125px\]{
+  width: 125px !important;
+}
 .tw-min-w-0{
   min-width: 0px !important;
 }
@@ -22961,6 +22967,12 @@ a:visited{
 }
 .tw-max-w-xs{
   max-width: 20rem !important;
+}
+.tw-max-w-\[125px\]{
+  max-width: 125px !important;
+}
+.tw-max-w-\[121px\]{
+  max-width: 121px !important;
 }
 .tw-flex-1{
   flex: 1 1 0% !important;

@@ -381,10 +381,6 @@ export default {
             return this.noResultsMessage;
         },
     },
-    beforeMount() {
-        console.log('preloaded content', this.preloadedContent)
-
-    },
     mounted() {
         console.log('includeFutureScheduledContentOnly',this.includeFutureScheduledContentOnly)
         if (!this.preLoadedContent && !this.preLoadedContent.results.length) {

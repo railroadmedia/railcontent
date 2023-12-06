@@ -9,15 +9,10 @@
             :item="item"
             :content-type="item.type"
             :brand="brand"
-            :theme-color="themeColor"
-            :use-theme-color="useThemeColor"
             :user-id="userId"
             :is-admin="isAdmin"
             :lock-unowned="lockUnowned"
-            :force-wide-thumbs="forceWideThumbs"
             :content-type-override="contentTypeOverride"
-            :six-wide="sixWide"
-            :five-wide="fiveWide"
             :show-my-list-action="showMyListAction"
             :display-inline="displayInline"
             @addToList="emitAddToList"
@@ -25,7 +20,7 @@
     </div>
 </template>
 <script>
-import CatalogueCard from './_CatalogueCard.vue';
+import CatalogueCard from '../../../components/Catalogue/CatalogueCard.vue';
 import UserCatalogueEvents from '../../mixins/UserCatalogueEvents';
 
 export default {

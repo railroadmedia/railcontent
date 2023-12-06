@@ -294,7 +294,7 @@ const handleCloseSoundslice = () => {
                 </div>
             </div>
 
-            <div class="mb-3 hide-xs-only xl:tw-max-w-[420px]">
+            <div class="mb-3 hide-xs-only tw-w-full xl:tw-max-w-[420px]">
                 <div class="flex flex-row mb-2">
                     <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
                         Related Lessons
