@@ -70,7 +70,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Christmas Songbook",
         "fullPrice" => floatval($productPrices['christmas-songbook']->price),
         "price" => floatval($productPrices['christmas-songbook']->discounted_price),
@@ -95,7 +95,7 @@
                             <strong>ONLY ${{ floatval($productPrices['christmas-songbook']->discounted_price) }}</strong>
                         @endif
                         </h4>
-                    <a href="#final" class="join medium w-full anchor-slide">GET YOUR COPY &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[christmas-songbook]=1" class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
         </div>
@@ -254,7 +254,7 @@
                             <strong>ONLY ${{ floatval($productPrices['christmas-songbook']->discounted_price) }}</strong>
                         @endif
                     </h4>
-                    <a href="/ecommerce/add-to-cart?locked=true&products[christmas-songbook]=1&products[christmas-song-book-digital]=1" class="join medium w-full">GET YOUR COPY &raquo;</a>
+                    <a href="/ecommerce/add-to-cart?products[christmas-songbook]=1" class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
         </div>

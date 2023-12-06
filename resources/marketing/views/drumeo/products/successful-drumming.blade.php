@@ -31,7 +31,7 @@
 @endsection
 
 @section('content')
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
                     "name" => "Successful Drumming",
                     "fullPrice" => floatval($productPrices['SD-DIGI']->price),
                     "price" => floatval($productPrices['SD-DIGI']->discounted_price),

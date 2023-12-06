@@ -162,7 +162,7 @@
 @endsection
 
 @section('content')
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "Comfort Cover",
         "fullPrice" => floatval($productPrices['comfort-cover']->price),
         "price" => floatval($productPrices['comfort-cover']->discounted_price),

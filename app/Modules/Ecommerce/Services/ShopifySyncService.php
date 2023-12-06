@@ -139,7 +139,7 @@ class ShopifySyncService
         // STEP 1: Is user synced?
         $customerShopifyId = $user->shopify_id;
         if (!$customerShopifyId) {
-            $customerShopifyId = $this->shopifyCustomerService->createShopifyCustomer($user);
+            $customerShopifyId = $this->shopifyCustomerService->updateOrCreateShopifyCustomer($user);
             if (!$customerShopifyId) {
                 return;
             } // Return and it will be reprocessed in a command

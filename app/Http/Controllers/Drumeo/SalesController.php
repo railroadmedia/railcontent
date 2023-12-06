@@ -93,138 +93,69 @@ class SalesController extends BaseController
 
     public function home()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo']);
 
-        return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
     }
     public function homeBF()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true', 'bfVersion' => 'true']);
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'bfVersion' => 'true']);
     }
     public function homeMonth()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'month' => true]);
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'month' => true]);
     }
     public function trial()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
     }
     public function trialBeginner()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true, 'beginnerVersion' => true ]);
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true, 'beginnerVersion' => true ]);
     }
     public function promo()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true']);
     }
     public function choosePlanVDF()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.pages.vdf', ['products' => $products, 'theme' => 'drumeo']);
+        return view('drumeo.sales.pages.vdf', ['theme' => 'drumeo']);
     }
     public function choosePlan()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.choose-plan', ['products' => $products, 'theme' => 'drumeo']);
+        return view('drumeo.sales.choose-plan', ['theme' => 'drumeo']);
     }
     public function choosePlanMonth(Request $request)
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.choose-plan', ['products' => $products, 'theme' => 'drumeo', 'month' => true, 'referralCode' => $request->get('referralCode')]);
+        return view('drumeo.sales.choose-plan', ['theme' => 'drumeo', 'month' => true, 'referralCode' => $request->get('referralCode')]);
     }
     public function method()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.features.method', ['products' => $products, 'theme' => 'drumeo', 'page' => 'method']);
+        return view('drumeo.sales.features.method', ['theme' => 'drumeo', 'page' => 'method']);
     }
     public function songs()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.features.songs', ['products' => $products, 'theme' => 'drumeo', 'page' => 'songs']);
+        return view('drumeo.sales.features.songs', ['theme' => 'drumeo', 'page' => 'songs']);
     }
     public function coaches()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.features.coaches', ['products' => $products, 'theme' => 'drumeo', 'page' => 'coaches']);
+        return view('drumeo.sales.features.coaches', ['theme' => 'drumeo', 'page' => 'coaches']);
     }
     public function salesUpgrade()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.pages.upgrade-offer', ['products' => $products]);
+        return view('drumeo.sales.pages.upgrade-offer', ['theme' => 'drumeo']);
     }
     public function salesLifetime()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.pages.lifetime', ['products' => $products, 'theme' => 'drumeo']);
+        return view('drumeo.sales.pages.lifetime', ['theme' => 'drumeo']);
     }
     public function lifetimeDiscount()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.pages.lifetime', ['products' => $products, 'theme' => 'drumeo', 'upgradeVersion' => true]);
+        return view('drumeo.sales.pages.lifetime', ['theme' => 'drumeo', 'upgradeVersion' => true]);
     }
 
     public function Festival()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.products.festival', ['products' => $products, 'theme' => 'drumeo']);
-    }
-
-    public function toneControl()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.products.tone-control-kit', ['products' => $products, 'theme' => 'drumeo']);
-    }
-    public function quietKick()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.products.quietkick', ['products' => $products, 'theme' => 'drumeo']);
-    }
-    public function eardrums()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.products.eardrums', ['products' => $products, 'theme' => 'drumeo']);
+        return view('drumeo.products.festival', ['theme' => 'drumeo']);
     }
     public function thirtyDayDrummer()
     {
@@ -394,17 +325,12 @@ class SalesController extends BaseController
 
     public function jaredRecommends()
     {
-        return view('drumeo.drumshop.jared-recommends');
+        return view('drumeo.pages.jared-recommends');
     }
 
     public function giftCard()
     {
-        return view('drumeo.drumshop.pages.gift-card', ['theme' => 'drumeo']);
-    }
-
-    public function drummingSystem()
-    {
-        return view('drumeo.drumshop.pages.drumming-system', ['theme' => 'drumeo']);
+        return view('drumeo.products.gift-card', ['theme' => 'drumeo']);
     }
 
     public function easyRudimentsPlaylist()

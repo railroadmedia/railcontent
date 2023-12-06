@@ -1025,7 +1025,7 @@
 
 @section('content')
 
-    @include('drumeo.products.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
         "name" => "The P4 Practice Pad",
         "fullPrice" => floatval($productPrices['practicepad']->price),
         "price" => floatval($productPrices['practicepad']->discounted_price),

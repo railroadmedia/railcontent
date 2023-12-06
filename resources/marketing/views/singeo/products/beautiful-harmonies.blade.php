@@ -68,7 +68,7 @@
     @include("singeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('singeo.shop.partials.promo-banner', [
+    @include('_partials.components.shop.promo-banner', [
     "name" => "Beautiful Harmonies",
     "fullPrice" => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price),
     "price" => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price),

@@ -13,7 +13,7 @@
             </div>
 
             <div class="flex flex-column">
-                <div class="tw-flex tw-flex-row tw-justify-end">
+                <div class="tw-flex tw-flex-row" :class="[isCoachesGrid ? 'tw-justify-start' : 'tw-justify-end']">
                     <div class="flex flex-column grow pr-2 tw-w-full md:tw-max-w-[455px]">
                         <input id="catalogueSearch" v-model="searchTermInterface" ref="searchInput" type="text"
                             name="search" autocomplete="off" placeholder="Search..."

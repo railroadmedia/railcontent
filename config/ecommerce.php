@@ -1054,7 +1054,7 @@ return [
     'revenuecat_only' => env('REVENUECAT_ONLY', true),
     'revenuecat_secret_key' => env('REVENUECAT_SECRET_KEY'),
     'launch_dates' => [
-        'unified' => '2022-01-01',
+        'unified' => '2023-01-01',
         'shopify' => '2023-11-08',
     ],
 ];

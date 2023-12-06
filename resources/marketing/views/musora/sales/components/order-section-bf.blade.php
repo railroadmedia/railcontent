@@ -30,10 +30,9 @@
                 </div>
             </div>
             <br>
-                <h2 class="leading-tight mt-4 sm:mt-6 mb-1"><strong>$240</strong></h2>
-                <p class="leading-tight text-sm">Annual plan</p>
+                <h2 class="leading-tight mt-4 sm:mt-6"><strong>$240</strong></h2>
             <a class="join promo my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-            <p class="leading-tight"><em>Renews at $240/year.<br class="sm:hidden"> Cancel anytime.</em></p>
+            <p class="leading-tight"><em>Billed annually.<br class="sm:hidden"> Cancel anytime.</em></p>
             <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>
                     + get {{ $bonusCount }} free Holiday bonuses worth ${{ $bonusSum }}</strong></h3>
         </div>
