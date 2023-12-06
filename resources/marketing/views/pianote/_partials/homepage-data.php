@@ -123,12 +123,12 @@
                 ]
             ],
             [
-                'image' => 'marketing/pianote/membership/homepage/webp-format/world-class-teachers-pianote.webp',
+                'image' => 'marketing/pianote/membership/homepage/webp-format/world-class-teachers.webp',
                 'title' => 'World-Class Teachers',
                 'desc' => 'Lifetime teachers, touring performers, recording professionals, and trending stars. ',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/world-class-teachers-pianote.webp',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/world-class-teachers.webp',
                     ],
                 ]
             ],

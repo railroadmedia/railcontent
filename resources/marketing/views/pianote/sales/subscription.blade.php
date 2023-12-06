@@ -289,7 +289,7 @@
     @elseif(!empty($promoVersion))
     
         @php
-        $productSkus = ['taktell-piccolo-metronome', 'pianote-practice-planner', 'music-theory-posters', 'christmas-song-book-digital', 'new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', 'piano-riffs-and-fills', 'the-power-of-chords', 'piano-technique-made-easy', 'faster-fingers'];
+        $productSkus = ['pianote-practice-planner', 'music-theory-posters', 'christmas-songbook', 'christmas-song-book-digital', 'new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', 'piano-riffs-and-fills', 'the-power-of-chords', 'piano-technique-made-easy', 'faster-fingers'];
         @endphp
 
         @include('musora.sales.components.order-section-bf', [
