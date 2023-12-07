@@ -8,15 +8,13 @@
             <section class="gift-guide">
                 <div class="top-image">
                     <div class="image-wrap" style="background-image:url({{ $thumbnail }});"></div>
-                    <div class="titles">
-                        <h4 class="two-line-wrap">{{ $title }}</h4>
-                    </div>
                     <div class="open-lesson">
                         <i class="fas fa-arrow-right hover-icon"></i>
                     </div>
                 </div>
                 <div class="bottom-section">
-                    <h6>{!!  $bottomText  !!}</h6>
+                    <h6><strong>{{ $title }}</strong><br>
+                        {!!  $bottomText  !!}</h6>
                 </div>
             </section>
             <div class="color-button {{ !empty($onDrumeo) ? 'on-drumeo' : '' }}">

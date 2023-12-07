@@ -231,27 +231,7 @@ class LeadGenController extends BaseController
 
     public function giftGuide()
     {
-        return view('drumeo.lead-gen.gift-guide.new-years-guide');
-    }
-
-    public function newYearGift()
-    {
-        return view('drumeo.lead-gen.gift-guide.new-years-guide');
-    }
-
-    public function birthdayGifts()
-    {
-        return view('drumeo.lead-gen.gift-guide.birthday-guide');
-    }
-
-    public function christmasGift()
-    {
-        return view('drumeo.lead-gen.gift-guide.christmas-guide');
-    }
-
-    public function fatherGift()
-    {
-        return view('drumeo.lead-gen.gift-guide.fathers-day-guide');
+        return view('drumeo.lead-gen.gift-guide.new-years-guide', ['theme'=>'drumeo']);
     }
 
     public function shows(Request $request, $domain, $page = null)

@@ -81,18 +81,18 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
                 ]);
         }
     );
-    Route::get('/birthday-gifts/', [LeadGenController::class, 'birthdayGifts']);
-    Route::get('/christmas-gift-guide/', [LeadGenController::class, 'christmasGift']);
+    Route::get('/birthday-gifts/', [LeadGenController::class, 'giftGuide']);
+    Route::get('/christmas-gift-guide/', [LeadGenController::class, 'giftGuide']);
     Route::get('/{page?}', LeadGenController::class . '@pages')
         ->whereIn('page', [
             'lifetime-members-masterclass', 'click', 'free-drum-lessons', 'quick-drummer-survey', 'teach-a-beginner', 'thankyou', 'thank-you', '30-day-drummer-unsubscribe', '30-day-drummer-subscribe', 'subscribed', 'preferences', 'confirming', 'lets-stay-together', 'welcome-party', 'recitals', '30-day-drummer-live', 'awards', 'fwtgf-blog', '40s-blog', 'gsd-blog', 'gojb-blog', 'fpa-blog'
         ]);
     Route::get('/druminar/coming-back-to-the-drums', [LeadGenController::class, 'druminarCBTTD']);
     Route::get('/druminar/coming-back-to-the-drums/june-12-live-event', [LeadGenController::class, 'druminarEvent']);
-    Route::get('/fathers-day-gifts/', [LeadGenController::class, 'fatherGift']);
+    Route::get('/fathers-day-gifts/', [LeadGenController::class, 'giftGuide']);
     Route::get('/for-teachers/teach-drums/', [LeadGenController::class, 'teachDrums']);
     Route::get('/gift-guide/', [LeadGenController::class, 'giftGuide']);
-    Route::get('/new-years-gift-guide/', [LeadGenController::class, 'newYearGift']);
+    Route::get('/new-years-gift-guide/', [LeadGenController::class, 'giftGuide']);
     Route::get('/teach-a-beginner/lessons/', [LeadGenController::class, 'teachBeginner']);
     Route::get('/giveaway/', [LeadGenController::class, 'giveaway']);
     Route::get('/weekly-email/', [LeadGenController::class, 'weeklyEmail']);
