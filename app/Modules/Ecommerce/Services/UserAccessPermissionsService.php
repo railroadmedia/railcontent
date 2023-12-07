@@ -166,6 +166,15 @@ class UserAccessPermissionsService
         if (!$skipEventSync) {
             $this->handleUserPermissionsUpdatedEvent($user, $orderCollection);
         }
+        else{
+            try {
+                $accessPermissions = $this->getUserAccessPermissions($user->id);
+                $subscriptions = $this->subscriptionService->syncSubscriptionData($accessPermissions);
+            } catch (\Throwable $e) {
+                Log::error("Error syncing subscriptions for user: $user->id");
+                Log::error($e);
+            }
+        }
     }
 
     private function syncShopifyOrder(
