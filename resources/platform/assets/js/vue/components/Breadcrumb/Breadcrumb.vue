@@ -32,18 +32,18 @@
 </template>
 
 <script setup>
-import { HomeIcon } from '@heroicons/vue/solid';
-import { storeToRefs } from 'pinia';
-import { useUserStore } from '../../../stores/user';
+  import { HomeIcon } from '@heroicons/vue/solid';
+  import { storeToRefs } from 'pinia';
+  import { useUserStore } from '../../../stores/user';
 
-const props = defineProps({
-  firstLevelUrl: String,
-  firstLevelTitle: String,
-  secondLevelUrl: String,
-  secondLevelTitle: String,
-  lastLevelTitle: String,
-});
+  const props = defineProps({
+    firstLevelUrl: String,
+    firstLevelTitle: String,
+    secondLevelUrl: String,
+    secondLevelTitle: String,
+    lastLevelTitle: String,
+  });
 
-const userStore = useUserStore();
-const { brand } = storeToRefs(userStore);
+  const userStore = useUserStore();
+  const { brand } = storeToRefs(userStore);
 </script>
