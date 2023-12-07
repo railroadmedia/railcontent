@@ -23,7 +23,7 @@ class ChallengeDecorator extends TypeDecoratorBase
             $challengeEnrollStarted = Carbon::parse($content->fetch('fields.enrollment_start_time')) <= Carbon::now();
             $challengeEnrollEnded = Carbon::parse($content->fetch('fields.enrollment_end_time')) <= Carbon::now();
             $registrationUrl = $content->fetch('fields.registration_url');
-            if($registrationUrl){
+            if($registrationUrl && config('musora-api.api.version')){
                 $paths = explode('/', $registrationUrl);
                 $contentsOfType[$contentIndex]['slug'] = \Arr::last($paths);
             }
