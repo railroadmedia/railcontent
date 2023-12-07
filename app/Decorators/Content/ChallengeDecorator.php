@@ -23,6 +23,10 @@ class ChallengeDecorator extends TypeDecoratorBase
             $challengeEnrollStarted = Carbon::parse($content->fetch('fields.enrollment_start_time')) <= Carbon::now();
             $challengeEnrollEnded = Carbon::parse($content->fetch('fields.enrollment_end_time')) <= Carbon::now();
             $registrationUrl = $content->fetch('fields.registration_url');
+            if($registrationUrl){
+                $paths = explode('/', $registrationUrl);
+                $contentsOfType[$contentIndex]['slug'] = \Arr::last($paths);
+            }
             $enrollNow = $registrationUrl && $challengeEnrollStarted && !$challengeEnrollEnded;
             $notifyMe = Carbon::parse($content->fetch('fields.enrollment_start_time')) > Carbon::now();
             $normallAndAccessible = Carbon::parse($content->fetch('published_on')) <= Carbon::now();
