@@ -1,20 +1,26 @@
 <template>
+    <!-- 
+        - Cards can be mini with the 'isMiniCard' for continue section
+        - Cards can be inline with the 'displayInline' prop for the Related Lessons sections
+    -->
     <div v-if="!isMiniCard"
-        class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-mb-6 lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]"
-        :class="[class_object, displayInline ? 'tw-py-3' : '']">
+        class="tw-snap-center tw-flex tw-flex-col tw-group"
+        :class="[class_object, displayInline ? 'tw-py-3 tw-w-full' : 'tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 lg:tw-mb-6 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]']">
         <div class="tw-flex" :class="displayInline ? 'tw-flex-row' : 'tw-flex-col'">
             <!-- Thumbnail Section -->
             <a :href="renderLink ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
                 { 'thumbnail-col tw-mr-3': displayInline },
+                item.type === 'song' && displayInline ? 'tw-max-w-[121px]' : '',
                 item.type + '-thumbnail'
             ]">
-                <div class="tw-relative tw-overflow-hidden tw-rounded-[10px] tw-aspect-video">
+                <div class="tw-relative tw-overflow-hidden tw-rounded-[10px]" 
+                    :class="item.type === 'song' && displayInline ? 'tw-aspect-square' : 'tw-aspect-video'"
+                >
                     <!-- Video Thumbnail -->
                     <img :src="`https://www.musora.com/musora-cdn/image/width=500/${mappedData.thumbnail} `"
-                        class="tw-absolute tw-transition-opacity tw-duration-500" :class="[
-                            item.imageLoaded ? 'tw-opacity-100' : 'tw-opacity-0',
+                        class="tw-absolute tw-transition-opacity tw-duration-500tw-opacity-0" :class="[
                             item.type === 'song' ? 'tw-blur-sm' : ''
-                        ]" loading="lazy" @load="item.imageLoaded = true">
+                        ]" loading="lazy" onload="this.classList.remove('tw-opacity-0')">
                     <!-- Song Overlay -->
                     <div v-if="item.type === 'song'"
                         class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
@@ -23,7 +29,7 @@
 
                     <!-- Progress -->
                     <div class="lesson-progress overflow">
-                        <span class="progress" :class="themeBgClass" :style="'width:' + progress_percent + '%'"></span>
+                        <span class="progress" :class="`tw-bg-${brand}`" :style="'width:' + progress_percent + '%'"></span>
                     </div>
                     <div v-if="showTrophy" class="bundle-complete tw-justify-center">
                         <i class="fas fa-trophy"></i>
@@ -43,12 +49,6 @@
                 <a :href="renderLink ? item.url : null"
                     class="card-info tw-flex tw-flex-auto tw-flex-col tw-px-2 tw-rounded-lg"
                     :class="displayInline ? 'tw-justify-center tw-pt-1' : 'tw-pt-2'">
-                    <!-- Coach Title -->
-                    <!-- <div v-if="item.type !== 'song-part'">
-                        <h5 class="tw-text-xs tw-font-normal tw-leading-none tw-text-[#3F3F46] tw-mb-1 tw-uppercase dark:tw-text-[#9EC0DC]"
-                            v-if="!isGuitareoChordAndScale" v-html="mappedData.color_title">
-                        </h5>
-                    </div> -->
 
                     <!-- Video Title -->
                     <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
@@ -57,32 +57,33 @@
                     </h4>
                     <!-- Video Description -->
                     <p v-if="mappedData.show_description"
-                        class="tw-text-xs font-compressed tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pb-1 tw-mb-1 item-description tw-line-clamp-2"
+                        class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2"
                         v-html="mappedData.description.replace(/<[^>]+>/g, '')"></p>
                     <!-- Content -->
-                    <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]"
+                    <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] tw-mb-0.5"
                         :class="{ 'tw-text-center': isGuitareoChordAndScale }">
                         <div v-if="contentCreator && contentCreator !== ''" class="tw-mb-0.5">
                             <span> {{ contentCreator }} </span>
-                            <span class="tw-mx-1">|</span>
-                        </div>
-                        <div class="tw-mb-0.5">
-                            {{ contentTypeString }}
-                            <span class="tw-mx-1">|</span>
-                        </div>
-                        <!-- Difficulty Label -->
-                        <div v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
-                            <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
-                                textCase="capitalize" />
                         </div>
                     </h6>
+                    <p class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
+                        <!-- Difficulty Label -->
+                        <span v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
+                            <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
+                                textCase="capitalize" />
+                                <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
+                        </span>
+                        <span class="tw-mb-0.5">
+                            {{ contentTypeString }}
+                        </span>
+                    </p>
                 </a>
                 <!-- Add to Playlist -->
                 <div class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
                     <div class="tw-relative" v-click-outside="() => { state.dropdownOpen = false }">
                         <button :id="`${item.id}-action-btn-big`" v-if="item.type !== 'pack-bundle' && showMyListAction"
                             class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
-                            :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
+                            :class="is_added ? 'is-added' + `tw-text-${brand}` : 'tw-text-[#00101D] dark:tw-text-white'"
                             :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'" :data-content-id="item.id"
                             :data-content-type="item.type"
                             @click.prevent="showDropdown ? handleShowDropdown(`${item.id}-action-btn-big`) : $emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })">
@@ -144,7 +145,7 @@
             v-click-outside="() => { state.dropdownOpen = false }">
             <button :id="`${item.id}-action-btn-small`" v-if="item.type !== 'pack-bundle' && showMyListAction"
                 class="tw-flex-none tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
-                :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'" title="More"
+                :class="is_added ? 'is-added' + `tw-text-${brand}` : 'tw-text-[#00101D] dark:tw-text-white'" title="More"
                 :data-content-id="item.id" :data-content-type="item.type"
                 @click.prevent="handleShowDropdown(`${item.id}-action-btn-small`)">
                 <DotsHorizontalIcon class="tw-h-[24px] tw-w-[24px]" />
@@ -161,32 +162,30 @@
 import { computed, onUnmounted, reactive, onMounted } from 'vue';
 import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '../../hooks/useCatalogueItem.js';
-import useThemeClasses from '../../hooks/useThemeClasses.js';
 import Dropdown from './Dropdown';
 import DifficultyLabel from '../DifficultyLabel/DifficultyLabel';
 import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
-import { snakeToCapitalized } from "../../utils"
+import { snakeToCapitalized } from "../../utils";
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '../../../stores/user';
+
+//Pinia Stores
+const userStore = useUserStore();
+const { brand } = storeToRefs(userStore);
+
 
 const props = defineProps({
     item: {
         type: Object,
         default: () => ({}), // Default empty object
     },
-    contentType: {
-        type: String,
-        default: '' // Default empty string
-    },
     brand: {
         type: String,
         default: ''
     },
-    themeColor: {
+    contentType: {
         type: String,
-        default: '#000000' // Default color black
-    },
-    useThemeColor: {
-        type: Boolean,
-        default: false
+        default: '' // Default empty string
     },
     userId: {
         type: String,
@@ -197,10 +196,6 @@ const props = defineProps({
         default: false
     },
     lockUnowned: {
-        type: Boolean,
-        default: false
-    },
-    forceWideThumbs: {
         type: Boolean,
         default: false
     },
@@ -257,8 +252,6 @@ const dropdownOptions = [
         action: "progressReset"
     },
 ]
-
-const { themeBgClass } = useThemeClasses(props);
 
 const handleShowDropdown = (className) => {
     const { top, left } = document.getElementById(className).getBoundingClientRect();
@@ -328,7 +321,7 @@ const is_added = computed(() => props.item.is_added_to_primary_playlist);
 
 const showTrophy = computed(() => props.item.type === 'pack-bundle' && props.item.completed === true);
 
-const isGuitareoChordAndScale = computed(() => props.brand.value === 'guitareo' && props.item.type === 'chord-and-scale');
+const isGuitareoChordAndScale = computed(() => brand === 'guitareo' && props.item.type === 'chord-and-scale');
 
 const closeDropdownOnScroll = () => {
     if (state.dropdownOpen) {

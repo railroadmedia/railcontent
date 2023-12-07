@@ -1,9 +1,14 @@
 {
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=d3fa73fad320b961891d549e5db5e1ff",
+=======
+    "/platform/js/app.js": "/platform/js/app.js?id=d776f93ae3fdf37801ba0957b52f274d",
+>>>>>>> project-workouts
     "/platform/js/profile.js": "/platform/js/profile.js?id=86aa1841f2c5fd61f0b1a0a087caa000",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=b11719fd2b12999cf314705273f39458",
     "/platform/js/books.js": "/platform/js/books.js?id=59cd94e09b034342fbe6c7401bdd44e4",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=6e2f01abb91d2092e2ee76c471f1d357",
+<<<<<<< HEAD
     "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=276deea59ac8a5aaeb5bd54e5dd0e2eb",
     "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=cb89a36e1cf8f02beb2727b1600f94f3",
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=48995b781c32a535259e3e92f47b85a9",
@@ -31,6 +36,35 @@
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=e2082f7ad4786ce50ed2fc5843c742d7",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=b06c413be0cbc92f51079e8948ccc276",
     "/platform/css/app.css": "/platform/css/app.css?id=ea1159b0f6e89988335b66bdc026c72d",
+=======
+    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=cd74008b0083c32ffc90b7850a0c8dea",
+    "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=7f09c45565744679ca906314048b4195",
+    "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=7ed25dcacb39ff3c44f255d86052dd58",
+    "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=c55d06cff215ddc38f8aaedb0eff5f7f",
+    "/platform/js/song.js": "/platform/js/song.js?id=7202c68d082cc9156f120f240cf62fcf",
+    "/platform/js/song-request.js": "/platform/js/song-request.js?id=f95b6e5fe1f4681948b56011c63b1287",
+    "/platform/js/report-user.js": "/platform/js/report-user.js?id=81d4d24d5503d2ae8853006ddb92fbcc",
+    "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=ffdc55947903244877a6f3589f3766b6",
+    "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=1ad34e2c5b5fd4c0401fd8e49825c861",
+    "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=f87b2e1be67ebd7f9ccd41ae971a7d18",
+    "/platform/js/order-form.js": "/platform/js/order-form.js?id=2e17eeb0b5bcf1f9449b83b79d02997f",
+    "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=ac668fa4bc4f45b081154b7c4c46fbff",
+    "/platform/js/text-editor-component.js": "/platform/js/text-editor-component.js?id=dc929d5338fd1c398aeb38d4ac29ab46",
+    "/platform/js/cart-sidebar.js": "/platform/js/cart-sidebar.js?id=4892c214cb5f345f6cbfda1357e398be",
+    "/platform/js/nav-cart-button.js": "/platform/js/nav-cart-button.js?id=9cae2c787bb9a7b5e494fe3ed1d49a45",
+    "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=a1f6fdae415f5b0fefa59d58d4c25c7f",
+    "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=b9caf2c45cf80d5b3071a3dcd42aaa60",
+    "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=c3a69e61482bda11dd17c9af8ae10906",
+    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=183a1b7776f61574a15145a8ee0872f6",
+    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=5b4c65ac7354c91e0fde3eaf9272e64b",
+    "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=19f87590d36a1417067cd4843f58d26d",
+    "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=8bd9bccef0842948c5e88cd0d674807d",
+    "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=2722706e09f4733ca6e2d65e9b61d496",
+    "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=615b828a5c5d567a25c31dddfbfbc02b",
+    "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=e2082f7ad4786ce50ed2fc5843c742d7",
+    "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=b06c413be0cbc92f51079e8948ccc276",
+    "/platform/css/app.css": "/platform/css/app.css?id=a21d3d24794755840be273e08f29208f",
+>>>>>>> project-workouts
     "/marketing/css/app.css": "/marketing/css/app.css?id=4560d253461a9590d593da723d60aa1f",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=effbe30da99204da47ff365b8a016f64"
 }

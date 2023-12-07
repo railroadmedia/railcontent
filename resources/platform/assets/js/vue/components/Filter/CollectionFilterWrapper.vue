@@ -18,7 +18,7 @@
         <div>
             <FilterPills :multi-select-columns="state.multiSelectColumns" :selected-filters="selectedFilters" @cancel-filter="param => emit('onFilterChange', param)" @clear-filter="emit('OnClearFilter')" />
         </div>
-        <div v-if="!hideFilter" class="tw-relative">
+        <div v-if="!hideFilter" :class="`tw-relative ${!isCollapsed ? 'tw-mb-20' : ''}`">
             <FilterOptions
                 v-if="!isCollapsed && isMobile"
                 :multi-select-columns="state.multiSelectColumns"

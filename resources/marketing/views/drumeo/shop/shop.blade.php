@@ -35,7 +35,7 @@
         @php
                 $bundles = [
                     [
-                        'slug' => 'https://www.drumeo.com/drumshop/ultimate-lessons-bundle',
+                        'slug' => '/drumshop/ultimate-lessons-bundle',
                         'desc' => '10 Free Bonuses <br class="sm:hidden"> Worth $1272',
                         'full' => true,
                         'visible' => 1,
@@ -47,7 +47,7 @@
                         'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card-m.jpg',
                     ],
                     [
-                        'slug' => 'https://www.drumeo.com/drumshop/better-hands-bundle',
+                        'slug' => '/drumshop/better-hands-bundle',
                         'desc' => 'Easy Rudiments Book + P4<br> + Drumsticks + PadStand',
                         'visible' => 1,
                         'price' => 200.94,
@@ -58,7 +58,7 @@
                         'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
                     ],
                     [
-                        'slug' => 'https://www.drumeo.com/drumshop/perfect-gift-bundle',
+                        'slug' => '/drumshop/perfect-gift-bundle',
                         'desc' => 'The perfect gift <br> for any drummer.',
                         'visible' => 1,
                         'price' => 331.95,

@@ -1787,6 +1787,8 @@ return [
         'week',
         'xp',
         'youtube_video_id',
+        'enrollment_start_time',
+        'enrollment_end_time',
     ],
 
     'compiled_column_mapping_sub_content_field_keys' => [
