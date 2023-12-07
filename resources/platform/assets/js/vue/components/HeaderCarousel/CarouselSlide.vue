@@ -170,7 +170,7 @@ const skillLevelColor = computed(() => {
           </h2>
             <!-- Logo -->
             <img v-if="logo" class="tw-h-24 md:tw-h-28 3xl:tw-h-32 mb-1 tw-mr-auto" :src="`https://www.musora.com/musora-cdn/image/width=800,quality=95/${logo}`" alt="pack logo" />
-            <div v-if="isFeatured && skillLevel" class="tw-flex tw-items-center tw-font-semibold md:tw-text-lg">
+            <div v-if="isFeatured && skillLevel" class="tw-flex tw-items-center tw-font-semibold md:tw-text-lg" :class="`${ descriptionColor && `tw-text-${descriptionColor}` }`">
                 <div class="tw-inline-block tw-w-[9px] tw-h-[9px] tw-rounded-full tw-mr-2" :class="skillLevelColor"></div> {{ skillLevel }}
             </div>
           <p :class="`tw-hidden xl:tw-line-clamp-3 tw-text-lg tw-max-w-[520px] ${ descriptionColor && `tw-text-${descriptionColor}` }`" v-html="description"></p>
