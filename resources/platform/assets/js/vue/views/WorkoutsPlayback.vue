@@ -45,41 +45,35 @@
                     </transition>
                     <div v-else>ERROR LOADING VIDEO...</div>
                 </div>
-                <VideoResources
-                    :theme-color="videoResources.themeColor"
-                    :brand="videoResources.brand"
-                    :title="videoResources.title"
-                    :lesson-type="videoResources.lessonType"
-                    :thumbnail-url="videoResources.thumbnailUrl"
-                    :description="videoResources.description"
-                    :instructors="videoResources.instructors"
-                    :parent-title="videoResources.parentTitle"
-                    :is-liked="videoResources.isLiked"
-                    :like-count="videoResources.likeCount"
-                    :is-added="videoResources.isAdded"
-                    :content-id="videoResources.contentId"
-                    :user-id="videoResources.userId"
-                    :resources="videoResources.resources"
-                    :show-add-to-list="videoResources.showAddToList"
-                    :show-info-button="videoResources.showInfoButton"
-                    :report-user-email="videoResources.reportUserEmail"
-                    :report-user-name="videoResources.reportUserName"
-                    :report-recipient="videoResources.reportRecipient"
-                    :report-logo="videoResources.reportLogo"
-                    ></VideoResources>
-                    <VideoButtons
-                        :prev-lesson-url="videoButtons.prevLessonUrl"
-                        :next-lesson-url="videoButtons.nextLessonUrl"
-                        :brand="brand"
-                        :prev-label="videoButtons.prevLabel"
-                        :next-label="videoButtons.nextLabel"
-                        :has-qa-video="videoButtons.hasQAVideo"
-                    />
+                <VideoResources :theme-color="videoResources.themeColor" :brand="videoResources.brand"
+                    :title="videoResources.title" :lesson-type="videoResources.lessonType"
+                    :thumbnail-url="videoResources.thumbnailUrl" :description="videoResources.description"
+                    :instructors="videoResources.instructors" :parent-title="videoResources.parentTitle"
+                    :is-liked="videoResources.isLiked" :like-count="videoResources.likeCount"
+                    :is-added="videoResources.isAdded" :content-id="videoResources.contentId"
+                    :user-id="videoResources.userId" :resources="videoResources.resources"
+                    :show-add-to-list="videoResources.showAddToList" :show-info-button="videoResources.showInfoButton"
+                    :report-user-email="videoResources.reportUserEmail" :report-user-name="videoResources.reportUserName"
+                    :report-recipient="videoResources.reportRecipient" :report-logo="videoResources.reportLogo">
+                </VideoResources>
+                <VideoButtons :prev-lesson-url="videoButtons.prevLessonUrl" :next-lesson-url="videoButtons.nextLessonUrl"
+                    :brand="brand" :prev-label="videoButtons.prevLabel" :next-label="videoButtons.nextLabel"
+                    :has-qa-video="videoButtons.hasQAVideo" />
+                <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
+                    <div class="tw-flex tw-flex-row tw-w-full">
+                        <VideoComments :theme-color="commentsProps.themeColor" :brand="commentsProps.brand"
+                            :content-id="commentsProps.contentId" :user-id="commentsProps.userId"
+                            :user-name="commentsProps.userName" :user-avatar="commentsProps.userAvatar"
+                            :user-xp="commentsProps.userXp" :user-access-level="commentsProps.userAccessLevel"
+                            :profile-base-route="commentsProps.profileBaseRoute" :is-admin="commentsProps.isAdmin">
+                        </VideoComments>
+                    </div>
+                </div>
             </div>
             <div class="tw-ml-[10px] tw-flex tw-transition-all" :class="isSidebarOpen ? 'tw-w-auto' : 'tw-w-[402px]'">
-                <div class="tw-rounded-[5px] tw-border tw-border-[#1E364A] tw-overflow-hidden tw-transition-all"
+                <div class="tw-transition-all"
                     v-if="!isSidebarOpen">
-                    <div class="tw-flex tw-flex-col">
+                    <div class="tw-flex tw-flex-col tw-rounded-[5px] tw-border tw-border-[#1E364A] tw-overflow-hidden">
                         <div class="tw-bg-[#081825] tw-pt-[24px] tw-pb-[16px] tw-flex tw-justify-between tw-px-[18px]">
                             <h3 class="tw-text-[20px] tw-font-bold tw-font-open-sans">Related Workouts</h3>
                             <button @click="isSidebarOpen = !isSidebarOpen">
@@ -93,7 +87,7 @@
                             </button>
                         </div>
                     </div>
-                    <RelatedCard v-for="relatedLesson in formattedRelatedLessons" :key="relatedLesson.id"
+                    <RelatedCard v-for=" relatedLesson  in  formattedRelatedLessons " :key="relatedLesson.id"
                         :thumbnail="relatedLesson.thumbnail" :instructor="relatedLesson.instructor"
                         :title="relatedLesson.title" :difficulty="relatedLesson.difficulty"
                         :content-type="relatedLesson.contentType" />
@@ -126,6 +120,7 @@ import YoutubePlayer from "../vuesora/components/YoutubePlayer/YoutubePlayer.vue
 import RelatedCard from "../components/Catalogue/RelatedCard.vue";
 import VideoButtons from "../components/VideoButtons/VideoButtons.vue";
 import VideoResources from "../vuesora/components/VideoResources/VideoResources.vue";
+import VideoComments from "../vuesora/views/comments/Comments.vue";
 // READ ME: Importing video player breaks the app for some reason.
 // We need further investigation on this matter, but for now let's use it globally.
 //import VideoPlayer from "../vuesora/components/VideoPlayer/VideoPlayer.vue";
@@ -156,6 +151,10 @@ const props = defineProps({
         default: {},
     },
     videoButtons: {
+        type: Object,
+        default: {},
+    },
+    commentsProps: {
         type: Object,
         default: {},
     },

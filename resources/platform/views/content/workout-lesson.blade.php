@@ -94,6 +94,19 @@
         'contentId' => $lessonContent->fetch('id'),
         'xpAmount' => $lessonContent->fetch('fields.xp'),
     ];
+
+    $commentsProps = [
+        'themeColor' => $brand, // Assuming $brand is a variable
+        'brand' => $brand,
+        'contentId' => $lessonContent->fetch('id'),
+        'userId' => user()->id,
+        'userName' => user()->display_name,
+        'userAvatar' => user()->profile_picture_url,
+        'userXp' => user()->totalXP(),
+        'userAccessLevel' => user()->access_level,
+        'profileBaseRoute' => "/profile/",
+        'isAdmin' => json_encode(user()->isAdmin())
+    ];
 @endphp
 @extends('partials.layout', ['forceHideSidebar' => false])
 
@@ -114,7 +127,8 @@
         :breadcrumb-last-level-title="{{ json_encode($lessonContent->fetch('fields.title')) }}"
         :video-props="{{ json_encode($videoProps) }}" :related-lessons="{{ $relatedLessons }}"
         :video-resources="{{ json_encode($videoResources) }}"
-        :video-buttons="{{ json_encode($videoButtons) }}" />
+        :video-buttons="{{ json_encode($videoButtons) }}"
+        :comments-props="{{ json_encode($commentsProps) }}" />
 @endsection
 
 @section('layout-scripts')
