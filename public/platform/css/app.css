@@ -22404,6 +22404,12 @@ a:visited{
 .tw-h-screen{
   height: 100vh !important;
 }
+.\!tw-h-\[40px\]{
+  height: 40px !important;
+}
+.tw-h-\[45px\]{
+  height: 45px !important;
+}
 .tw-max-h-0{
   max-height: 0px !important;
 }
@@ -22782,6 +22788,9 @@ a:visited{
 }
 .tw-w-screen{
   width: 100vw !important;
+}
+.tw-w-\[45px\]{
+  width: 45px !important;
 }
 .tw-min-w-0{
   min-width: 0px !important;
@@ -24888,6 +24897,9 @@ a:visited{
 }
 .tw-leading-tight{
   line-height: 1.25 !important;
+}
+.tw-leading-\[1px\]{
+  line-height: 1px !important;
 }
 .tw-tracking-\[1px\]{
   letter-spacing: 1px !important;
@@ -27433,6 +27445,9 @@ a:visited{
   }
   .lg\:tw-mt-6{
     margin-top: 1.5rem !important;
+  }
+  .lg\:tw-mt-8{
+    margin-top: 2rem !important;
   }
   .lg\:tw-line-clamp-2{
     overflow: hidden !important;
