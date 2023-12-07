@@ -229,11 +229,6 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function giftGuide()
-    {
-        return view('drumeo.lead-gen.gift-guide.new-years-guide', ['theme'=>'drumeo']);
-    }
-
     public function shows(Request $request, $domain, $page = null)
     {
         return view('drumeo.lead-gen.shows.'.$page);
