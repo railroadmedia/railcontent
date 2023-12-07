@@ -56,6 +56,8 @@ return [
             'user_playlist_item_position',
             'data.guitar_chord_image_url',
             'challenge_state_text',
+            'primary_cta_text',
+            'challenge_state',
         ],
 
         'instructor' => [

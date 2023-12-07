@@ -8722,12 +8722,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "2bfcc6cf03ff48bb404263a58d751c2c823b0f61"
+                "reference": "e11ee3b1e8bee2c767c03e15ff57b7b7214929e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/2bfcc6cf03ff48bb404263a58d751c2c823b0f61",
-                "reference": "2bfcc6cf03ff48bb404263a58d751c2c823b0f61",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/e11ee3b1e8bee2c767c03e15ff57b7b7214929e6",
+                "reference": "e11ee3b1e8bee2c767c03e15ff57b7b7214929e6",
                 "shasum": ""
             },
             "require": {
@@ -8759,7 +8759,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v3.0-workouts"
             },
-            "time": "2023-12-06T14:18:18+00:00"
+            "time": "2023-12-07T08:39:37+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -17550,5 +17550,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
