@@ -32,6 +32,10 @@
     @endif
 @endsection
 
+@php
+    //dd( $parentContent->fetch('data.logo_image_url') )
+@endphp
+
 {{-- Content --}}
 @section('content')
 
@@ -47,6 +51,26 @@
             @include('partials.content.overview-headers._learning-path-level')
         @elseif($parentContent->fetch('type') === 'learning-path-course')
             @include('partials.content.overview-headers._learning-path-course')
+        @elseif($parentContent->fetch('type') === 'challenge')
+            @component('partials.bladesora.members.components.header-banner', [
+                'hideUser' => true,
+                'backgroundImage' => 'https://www.musora.com/musora-cdn/image/width=1200/'.$parentContent->fetch('data.header_image_url'),
+            ])
+                @slot('content')
+                    <div class="flex flex-column pr-1 align-v-bottom align-h-center">
+                        <div class="pv-5"></div>
+                        <div class="pv-5 hide-xs-only"></div>
+                        {{-- Pack Logo --}}
+                        <img alt="{{ $parentContent->fetch('title') }} Logo"
+                            class="tw-w-full tw-transition-opacity tw-max-w-[480px] tw-opacity-0"
+                            src="{{ $parentContent->fetch('data.logo_image_url') }}"
+                            onload="this.classList.remove('tw-opacity-0')"
+                        >
+
+                    </div>
+                @endslot
+            @endcomponent
+
         @else
             @include('partials.content.overview-headers._default')
         @endif
@@ -64,7 +88,7 @@
             "isAdded" => $parentContent->fetch('is_added_to_primary_playlist')
         ])
     @endif
-
+    
     {{-- Content Progress --}}
     <div class="tw-w-full fluid tw-bg-{{ $brand }}" >
         @include('partials.bladesora.members.content.content-progress', [
