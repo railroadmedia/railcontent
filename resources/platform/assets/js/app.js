@@ -11,13 +11,13 @@ import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
 
 //App Pages
-import Workouts from './vue/views/Workouts.vue';
-import WorkoutsPlayback from './vue/views/WorkoutsPlayback.vue';
-import Home from './vue/views/Home.vue';
-import Support from './vue/views/Support.vue';
-import Schedule from './vue/views/Schedule.vue';
-import Playlists from './vue/views/Playlists.vue';
-import Playlist from './vue/views/Playlist.vue';
+import Workouts from './vue/Views/Workouts';
+import Home from './vue/Views/Home.vue';
+import ChildCatalog from './vue/Views/ChildCatalog.vue';
+import Support from './vue/Views/Support';
+import Schedule from './vue/Views/Schedule';
+import Playlists from './vue/Views/Playlists';
+import Playlist from './vue/Views/Playlist';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -35,10 +35,10 @@ import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue';
 import InfoModal from './vue/components/Modal/InfoModal.vue';
 import SoundSlice from './vue/components/SoundSlice/SoundSlice.vue';
 import CohortBanner from './vue/components/CohortBanner/CohortBanner.vue';
-import ContentInfo from './vue/components/ContentInfo/ContentInfo.vue';
-import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWrapper.vue';
-import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper.vue';
-import ChildCollectionPage from './vue/components/CollectionPage/ChildCollectionPage.vue';
+import ContentInfo from './vue/components/ContentInfo/ContentInfo';
+import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWrapper';
+//import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper';
+import ChildCollectionPage from './vue/components/CollectionPage/ChildCollectionPage';
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -271,10 +271,10 @@ app.component('AppContainer', AppContainer)
     .component('CatalogueCardContainer', CatalogueCardContainer)
     .component('ContentInfo', ContentInfo)
     .component('CollectionFilterWrapper', CollectionFilterWrapper)
-    .component('CollectionWrapper', CollectionWrapper)
+    //.component('CollectionWrapper', CollectionWrapper)
     .component('ChildCollectionPage', ChildCollectionPage)
     .component('Workouts', Workouts)
-    .component('WorkoutsPlayback', WorkoutsPlayback)
+    .component('ChildCatalog', ChildCatalog)
     .component('Support', Support)
     .component('Schedule', Schedule)
     .component('Playlists', Playlists)

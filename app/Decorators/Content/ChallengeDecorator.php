@@ -20,13 +20,20 @@ class ChallengeDecorator extends TypeDecoratorBase
         }
 
         foreach ($contentsOfType as $contentIndex => $content) {
-            $challengeEnrollStarted = Carbon::parse($content->fetch('data.enrollment_start_time')) <= Carbon::now();
-            $challengeEnrollEnded = Carbon::parse($content->fetch('data.enrollment_end_time')) >= Carbon::now();
-//            $challengePermissions = (\Arr::pluck($content['permissions'],'permission_id'));
-//            $isEnrolled = $challengeStarted && auth()->check() && auth()->user()->isEnrolledInCohort($challengePermissions);
+            $challengeEnrollStarted = Carbon::parse($content->fetch('fields.enrollment_start_time')) <= Carbon::now();
+            $challengeEnrollEnded = Carbon::parse($content->fetch('fields.enrollment_end_time')) <= Carbon::now();
+            $registrationUrl = $content->fetch('fields.registration_url');
+            if($registrationUrl && config('musora-api.api.version')){
+                $paths = explode('/', $registrationUrl);
+                $contentsOfType[$contentIndex]['slug'] = \Arr::last($paths);
+            }
+            $enrollNow = $registrationUrl && $challengeEnrollStarted && !$challengeEnrollEnded;
+            $notifyMe = Carbon::parse($content->fetch('fields.enrollment_start_time')) > Carbon::now();
+            $normallAndAccessible = Carbon::parse($content->fetch('published_on')) <= Carbon::now();
             $contentsOfType[$contentIndex]['lesson_count'] = $content['child_count'];
             $contentsOfType[$contentIndex]['primary_cta_text'] = (!$challengeEnrollStarted)?'Notify Me':'Start Challenge';
-            $contentsOfType[$contentIndex]['challenge_state_text'] = (!$challengeEnrollStarted)?'Upcoming':((!$challengeEnrollEnded)?'Enroll Now':$content['child_count'].' Workouts');
+            $contentsOfType[$contentIndex]['challenge_state'] = $enrollNow ? 'enrollment' : ($notifyMe ? 'upcoming' : ($normallAndAccessible ? 'accessible' : 'inaccessible'));
+            $contentsOfType[$contentIndex]['challenge_state_text'] = $enrollNow ? 'Enroll Now' : ($notifyMe ? 'Notify Me' : $content['child_count'].' Workouts');
         }
 
         return $this->mergeDecorated($contents, $contentsOfType);

@@ -1,9 +1,10 @@
 <template>
     <div class="tw-flex tw-flex-wrap tw-gap-[4px] md:tw-gap-[10px] tw-text-sm">
         <button
-            v-for="option in tabOptions"
+            v-for="(option,i) in tabOptions"
+            :key="i"
             @click="onTabClick(option)"
-            class="tw-flex tw-items-center tw-justify-center tw-text-center tw-h-[40px] md:tw-h-[50px] tw-uppercase tw-text-[14px] md:tw-text-[18px] tw-font-bebas-neue tw-rounded-[55px] tw-border tw-font-semibold dark:tw-border-[#445F74] tw-px-4 lg:tw-px-6"
+            class="tw-btn-primary tw-flex tw-items-center tw-justify-center tw-text-center tw-border dark:tw-border-[#445F74] tw-px-4 lg:tw-px-6 tw-mb-0 tw-leading-[1px]"
             :class="isActive(option.key) ? `tw-bg-[#28282D] dark:tw-bg-[#445F74] tw-text-white` : `hover:tw-bg-[#E7E7E8] hover:dark:tw-bg-[#223F57] hover:dark:tw-text-white tw-bg-white dark:tw-bg-[#000C17] tw-border-[#CBCBCD] dark:tw-text-white`"
         >
            {{ option.value }}

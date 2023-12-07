@@ -20775,13 +20775,12 @@ a:visited{
   cursor: pointer;
   display: inline-flex;
   font-family: "Bebas Neue", cursive;
-  font-size: 1.25rem;
+  font-size: 1rem;
   justify-content: center;
   letter-spacing: 1px;
-  line-height: 1;
   margin-bottom: 0.25rem;
-  min-height: 50px;
-  padding: 8px 70px;
+  min-height: 40px;
+  padding: 6px 70px;
   position: relative;
   text-decoration: none;
   text-transform: uppercase;
@@ -22324,6 +22323,9 @@ a:visited{
 .tw-h-\[44px\]{
   height: 44px !important;
 }
+.tw-h-\[45px\]{
+  height: 45px !important;
+}
 .tw-h-\[48px\]{
   height: 48px !important;
 }
@@ -22732,6 +22734,9 @@ a:visited{
 .tw-w-\[42px\]{
   width: 42px !important;
 }
+.tw-w-\[45px\]{
+  width: 45px !important;
+}
 .tw-w-\[48px\]{
   width: 48px !important;
 }
@@ -22844,6 +22849,9 @@ a:visited{
 }
 .tw-max-w-\[120px\]{
   max-width: 120px !important;
+}
+.tw-max-w-\[121px\]{
+  max-width: 121px !important;
 }
 .tw-max-w-\[1280px\]{
   max-width: 1280px !important;
@@ -23390,9 +23398,6 @@ a:visited{
 }
 .tw-rounded-\[25px\]{
   border-radius: 25px !important;
-}
-.tw-rounded-\[55px\]{
-  border-radius: 55px !important;
 }
 .tw-rounded-\[5px\]{
   border-radius: 5px !important;
@@ -24881,6 +24886,9 @@ a:visited{
 }
 .tw-leading-\[18px\]{
   line-height: 18px !important;
+}
+.tw-leading-\[1px\]{
+  line-height: 1px !important;
 }
 .tw-leading-\[20px\]{
   line-height: 20px !important;
@@ -26568,10 +26576,6 @@ a:visited{
     padding-top: 3.5rem !important;
     padding-bottom: 3.5rem !important;
   }
-  .sm\:tw-py-2{
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
-  }
   .sm\:tw-py-3{
     padding-top: 0.75rem !important;
     padding-bottom: 0.75rem !important;
@@ -26904,9 +26908,6 @@ a:visited{
   }
   .md\:tw-h-\[48px\]{
     height: 48px !important;
-  }
-  .md\:tw-h-\[50px\]{
-    height: 50px !important;
   }
   .md\:tw-h-\[52px\]{
     height: 52px !important;
@@ -27299,9 +27300,6 @@ a:visited{
   .md\:tw-text-\[16px\]{
     font-size: 16px !important;
   }
-  .md\:tw-text-\[18px\]{
-    font-size: 18px !important;
-  }
   .md\:tw-text-\[32px\]{
     font-size: 32px !important;
   }
@@ -27473,6 +27471,9 @@ a:visited{
   }
   .lg\:tw-mt-6{
     margin-top: 1.5rem !important;
+  }
+  .lg\:tw-mt-8{
+    margin-top: 2rem !important;
   }
   .lg\:tw-line-clamp-2{
     overflow: hidden !important;
@@ -27843,10 +27844,6 @@ a:visited{
   .lg\:tw-py-20{
     padding-top: 5rem !important;
     padding-bottom: 5rem !important;
-  }
-  .lg\:tw-py-3{
-    padding-top: 0.75rem !important;
-    padding-bottom: 0.75rem !important;
   }
   .lg\:tw-py-4{
     padding-top: 1rem !important;
