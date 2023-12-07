@@ -1,5 +1,5 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=584340d38069ae242c6664c3161c2b01",
+    "/platform/js/app.js": "/platform/js/app.js?id=c1925164d53ffc217dd7a2a3f2ed5982",
     "/platform/js/profile.js": "/platform/js/profile.js?id=86aa1841f2c5fd61f0b1a0a087caa000",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=b11719fd2b12999cf314705273f39458",
     "/platform/js/books.js": "/platform/js/books.js?id=59cd94e09b034342fbe6c7401bdd44e4",
@@ -31,5 +31,6 @@
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=b06c413be0cbc92f51079e8948ccc276",
     "/platform/css/app.css": "/platform/css/app.css?id=310228fcb502918756e99cf536400695",
     "/marketing/css/app.css": "/marketing/css/app.css?id=4560d253461a9590d593da723d60aa1f",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=53149ce01d0f6bc1069e0f54001f3d51"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=53149ce01d0f6bc1069e0f54001f3d51",
+    "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=c3a69e61482bda11dd17c9af8ae10906"
 }

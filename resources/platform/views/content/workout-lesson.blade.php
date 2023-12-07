@@ -33,10 +33,10 @@
             'videoId' => $lessonContent->fetch('fields.video.fields.vimeo_video_id'),
             'videoType' => 'vimeo',
             'useLegacyPlayer' => true,
-
         ];
     } elseif (!empty($lessonContent->fetch('fields.video.fields.vimeo_video_id'))) {
-        $videoProps = ['title' => $lessonContent->fetch('fields.title'),
+        $videoProps = [
+            'title' => $lessonContent->fetch('fields.title'),
             'lessonType' => $lessonType,
             'thumbnailUrl' => $lessonContent->fetch('data.thumbnail_url'),
             'description' => $lessonContent->fetch('data.description'),
@@ -53,14 +53,47 @@
             'showInfoButton' => !empty($lessonContent->fetch('*fields.instructor')) || !empty($lessonContent->fetch('data.description')) || !empty($lessonContent['chapters']),
             'reportUserEmail' => user()->email,
             'reportUserName' => user()->display_name,
-            'reportRecipient' => config('mailora.'. $brand . '.ask-question-recipient'),
-            'reportLogo' => config('mailora.'. $brand . '.logo-link'),
+            'reportRecipient' => config('mailora.' . $brand . '.ask-question-recipient'),
+            'reportLogo' => config('mailora.' . $brand . '.logo-link'),
             'videoId' => $lessonContent->fetch('fields.video.fields.vimeo_video_id'),
             'videoType' => 'vimeo',
             'useLegacyPlayer' => false,
             'hlsManifestUrl' => $lessonContent['hlsManifestUrl'] ?? '',
         ];
     }
+
+    $videoResources = [
+        'themeColor' => $brand,
+        'brand' => $brand,
+        'title' => $lessonContent->fetch('fields.title'),
+        'lessonType' => $lessonType,
+        'thumbnailUrl' => $lessonContent->fetch('data.thumbnail_url'),
+        'description' => $lessonContent->fetch('data.description'),
+        'instructors' => $lessonContent['coaches'] ?? [],
+        'parentTitle' => isset($parent) ? $parent->fetch('fields.title') : null,
+        'isLiked' => $lessonContent['is_liked_by_current_user'] ?? false,
+        'likeCount' => $lessonContent['like_count'] ?? 0,
+        'isAdded' => $lessonContent->fetch('is_added_to_primary_playlist') ?? false,
+        'contentId' => $lessonContent->fetch('id'),
+        'userId' => auth()->id(),
+        'resources' => array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? []),
+        'showAddToList' => $lessonType != 'song',
+        'showInfoButton' => !empty($lessonContent->fetch('*fields.instructor')) || !empty($lessonContent->fetch('data.description')) || !empty($lessonContent['chapters']),
+        'reportUserEmail' => user()->email,
+        'reportUserName' => user()->display_name,
+        'reportRecipient' => config('mailora.' . $brand . '.ask-question-recipient'),
+        'reportLogo' => config('mailora.' . $brand . '.logo-link'),
+    ];
+
+    $videoButtons = [
+        'themeColor' => $brand,
+        'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
+        'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
+        'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
+        'isCompleted' => $lessonContent->fetch('completed'),
+        'contentId' => $lessonContent->fetch('id'),
+        'xpAmount' => $lessonContent->fetch('fields.xp'),
+    ];
 @endphp
 @extends('partials.layout', ['forceHideSidebar' => false])
 
@@ -77,13 +110,11 @@
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
 
     {{-- Workouts page template --}}
-    <workouts-playback
-        breadcrumb-first-level-url="/{{ $brand }}/workouts"
-        breadcrumb-first-level-title="Workouts"
+    <workouts-playback breadcrumb-first-level-url="/{{ $brand }}/workouts" breadcrumb-first-level-title="Workouts"
         :breadcrumb-last-level-title="{{ json_encode($lessonContent->fetch('fields.title')) }}"
-        :video-props="{{ json_encode($videoProps) }}"
-        :related-lessons="{{ $relatedLessons }}"
-    />
+        :video-props="{{ json_encode($videoProps) }}" :related-lessons="{{ $relatedLessons }}"
+        :video-resources="{{ json_encode($videoResources) }}"
+        :video-buttons="{{ json_encode($videoButtons) }}" />
 @endsection
 
 @section('layout-scripts')

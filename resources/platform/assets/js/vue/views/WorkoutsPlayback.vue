@@ -45,6 +45,36 @@
                     </transition>
                     <div v-else>ERROR LOADING VIDEO...</div>
                 </div>
+                <VideoResources
+                    :theme-color="videoResources.themeColor"
+                    :brand="videoResources.brand"
+                    :title="videoResources.title"
+                    :lesson-type="videoResources.lessonType"
+                    :thumbnail-url="videoResources.thumbnailUrl"
+                    :description="videoResources.description"
+                    :instructors="videoResources.instructors"
+                    :parent-title="videoResources.parentTitle"
+                    :is-liked="videoResources.isLiked"
+                    :like-count="videoResources.likeCount"
+                    :is-added="videoResources.isAdded"
+                    :content-id="videoResources.contentId"
+                    :user-id="videoResources.userId"
+                    :resources="videoResources.resources"
+                    :show-add-to-list="videoResources.showAddToList"
+                    :show-info-button="videoResources.showInfoButton"
+                    :report-user-email="videoResources.reportUserEmail"
+                    :report-user-name="videoResources.reportUserName"
+                    :report-recipient="videoResources.reportRecipient"
+                    :report-logo="videoResources.reportLogo"
+                    ></VideoResources>
+                    <VideoButtons
+                        :prev-lesson-url="videoButtons.prevLessonUrl"
+                        :next-lesson-url="videoButtons.nextLessonUrl"
+                        :brand="brand"
+                        :prev-label="videoButtons.prevLabel"
+                        :next-label="videoButtons.nextLabel"
+                        :has-qa-video="videoButtons.hasQAVideo"
+                    />
             </div>
             <div class="tw-ml-[10px] tw-flex tw-transition-all" :class="isSidebarOpen ? 'tw-w-auto' : 'tw-w-[402px]'">
                 <div class="tw-rounded-[5px] tw-border tw-border-[#1E364A] tw-overflow-hidden tw-transition-all"
@@ -94,6 +124,8 @@ import { useUserStore } from "../../stores/user";
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
 import YoutubePlayer from "../vuesora/components/YoutubePlayer/YoutubePlayer.vue";
 import RelatedCard from "../components/Catalogue/RelatedCard.vue";
+import VideoButtons from "../components/VideoButtons/VideoButtons.vue";
+import VideoResources from "../vuesora/components/VideoResources/VideoResources.vue";
 // READ ME: Importing video player breaks the app for some reason.
 // We need further investigation on this matter, but for now let's use it globally.
 //import VideoPlayer from "../vuesora/components/VideoPlayer/VideoPlayer.vue";
@@ -116,6 +148,14 @@ const props = defineProps({
         default: {},
     },
     relatedLessons: {
+        type: Object,
+        default: {},
+    },
+    videoResources: {
+        type: Object,
+        default: {},
+    },
+    videoButtons: {
         type: Object,
         default: {},
     },
