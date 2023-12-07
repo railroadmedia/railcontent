@@ -2,15 +2,15 @@
     <div class="tw-flex tw-flex-col">
         <div class="tw-flex tw-flex-row tw-pb-8 tw-items-center tw-flex-wrap tw-justify-between">
             <div class="tw-flex tw-flex-row tw-items-center">
-                <BellIcon class="tw-h-[26px] tw-w-[26px] tw-mr-[10px]" :class="textColor[brand]" />
-                <h1 class="tw-text-[30px] tw-font-bold tw-mb-2">
+                <BellIcon class="tw-h-[26px] tw-w-[26px] tw-mr-[10px] tw-text-white" />
+                <h1 class="tw-text-xl md:tw-text-2xl tw-font-bold tw-mb-2">
                     Notifications
                 </h1>
             </div>
 
             <div class="tw-flex tw-flex-row tw-flex-wrap">
                 <div class="tw-flex tw-flex-col tw-mr-[12px]">
-                <button class="tw-btn-primary" :class="bgColor[brand]" :disabled="!hasUnread"
+                <button class="tw-btn-primary tw-bg-white tw-text-[#00101D]"  :disabled="!hasUnread"
                     @click.stop="markAllAsRead">
                     <EyeIcon class="tw-h-[22px] tw-w-[22px] tw-mr-[12px]" />
                     Mark All As Read
