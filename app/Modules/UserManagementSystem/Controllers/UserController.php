@@ -170,7 +170,7 @@ class UserController extends Controller
         }
 
         $user = User::where('email', $email)->first();
-        if (!$user) {
+        if ($user) {
             $parts = explode('@', $email);
 
             $user->email = $email;
