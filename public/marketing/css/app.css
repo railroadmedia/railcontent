@@ -558,13 +558,12 @@ video {
   cursor: pointer;
   display: inline-flex;
   font-family: "Bebas Neue", cursive;
-  font-size: 1.25rem;
+  font-size: 1rem;
   justify-content: center;
   letter-spacing: 1px;
-  line-height: 1;
   margin-bottom: 0.25rem;
-  min-height: 50px;
-  padding: 8px 70px;
+  min-height: 40px;
+  padding: 6px 70px;
   position: relative;
   text-decoration: none;
   text-transform: uppercase;

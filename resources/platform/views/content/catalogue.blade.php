@@ -47,37 +47,37 @@
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
                     @if($catalogueMeta['name'] == 'Q&A')
                         <musora-icon icon-name="light-bulb-filled"
-                                     class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     @elseif($catalogueMeta['name'] == 'Routines')
                         <musora-icon icon-name="routines-filled"
-                                     class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     @elseif($catalogueMeta['name'] == 'Quick Tips')
                         <musora-icon icon-name="light-bulb-filled"
-                                     class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     @elseif($catalogueMeta['name'] == 'Songs')
                         <musora-icon icon-name="headphones-filled"
-                                     class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     @elseif($catalogueMeta['name'] == 'Bootcamps')
                         <musora-icon icon-name="keys-filled"
-                                     class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     @elseif($catalogueMeta['name'] == 'The Pianote Podcast')
                         <musora-icon icon-name="podcast-filled"
-                                     class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     @elseif($catalogueMeta['name'] == 'Student Focus')
                         <musora-icon icon-name="person-plus-filled"
-                                     class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     @elseif($catalogueMeta['name'] == 'Q & A')
                         <musora-icon icon-name="question-mark-circle"
-                                     class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     @elseif($catalogueMeta['name'] == 'Student Reviews')
                         <musora-icon icon-name="person-plus-filled"
-                                     class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     @elseif($catalogueMeta['name'] == 'Chords & Scales')
                         <musora-icon icon-name="guitar-tabs-filled"
-                                     class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     @elseif($catalogueMeta['name'] == 'Archives')
                         <musora-icon icon-name="archives-filled"
-                                     class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     @elseif($catalogueMeta['name'] == 'Play Alongs')
                         <musora-icon icon-name="eigth-notes-filled"
                                      class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
@@ -88,7 +88,7 @@
                         <i class="fas fa-bell tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
                     @elseif($catalogueMeta['name'] == 'Song Tutorials')
                         <musora-icon icon-name="play-progress-filled"
-                                     class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
+                                class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
                         </musora-icon>
                     @elseif($catalogueMeta['name'] == 'Rudiments')
                         <musora-icon icon-name="drum-filled"
@@ -96,7 +96,7 @@
                         </musora-icon>
                     @else
                         <musora-icon icon-name="academic-cap-filled"
-                                     class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     @endif
                     <span class="tw-text-32 tw-font-bold">{{ ucfirst($catalogueMeta['name']) }}</span>
                 </h1>
@@ -127,12 +127,12 @@
                 <div class="tw-flex tw-mt-4">
                     <a
                         @if(Carbon\Carbon::create(2023, 1, 15, 11, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                        href="/drumeo/forums/drumeo-songs/15/february-2023-song-request-voting-thread/14114?sortby_val=published_on"
+                            href="/drumeo/forums/drumeo-songs/15/february-2023-song-request-voting-thread/14114?sortby_val=published_on"
                         @else
-                        href="/drumeo/forums/threads/drumeo-songs/15"
+                            href="/drumeo/forums/threads/drumeo-songs/15"
                         @endif
                         class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600">
-                        Request A Song
+                            Request A Song
                         <span class="tw-text-4xl tw-ml-1 tw-leading-none tw-mt-0.5">»</span>
                     </a>
                 </div>
@@ -165,11 +165,11 @@
             <!-- Section Title -->
             <div class="tw-flex tw-items-center tw-mt-5 tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
                 <a href="/{{ $brand }}/lesson-history/in-progress" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                    <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">In Progress</h2>
+                    <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">In Progress</h2>
                 </a>
                 <a href="/{{ $brand }}/lesson-history/in-progress"
-                   aria-label="See All Subscribed Lessons"
-                   class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                    aria-label="See All Subscribed Lessons"
+                    class="tw-text-sm md:tw-text-base md:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
                 >
                     See All
                 </a>
@@ -250,16 +250,16 @@
     @endif
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
-{{--        <collection-wrapper--}}
-{{--            :brand="{{ json_encode($brand) }}"--}}
-{{--            :collection-type="{{ json_encode($lessonType) }}"--}}
-{{--            :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"--}}
-{{--            :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"--}}
-{{--            :included-types="{{ json_encode(['course']) }}"--}}
-{{--            :pre-loaded-content="{{ $listLessons }}"--}}
-{{--            :statuses="{{ json_encode($statuses ?? ['published']) }}"--}}
-{{--            :title="{{ json_encode($catalogueMeta['shortname'] ?? $catalogueMeta['name']) }}"--}}
-{{--        ></collection-wrapper>--}}
+        {{--        <collection-wrapper--}}
+        {{--            :brand="{{ json_encode($brand) }}"--}}
+        {{--            :collection-type="{{ json_encode($lessonType) }}"--}}
+        {{--            :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"--}}
+        {{--            :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"--}}
+        {{--            :included-types="{{ json_encode(['course']) }}"--}}
+        {{--            :pre-loaded-content="{{ $listLessons }}"--}}
+        {{--            :statuses="{{ json_encode($statuses ?? ['published']) }}"--}}
+        {{--            :title="{{ json_encode($catalogueMeta['shortname'] ?? $catalogueMeta['name']) }}"--}}
+        {{--        ></collection-wrapper>--}}
 
         {{-- Play Alongs Catalogue for Drumeo --}}
         @if( $catalogueMeta['name'] === "Play Alongs" && $brand === "drumeo" )
@@ -297,33 +297,33 @@
                     :show-loading-animation="true"
                     no-results-message="There are no {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }} that match those filters. Please remove some filters."
                     @if($lessonType === 'routine')
-                    catalogue-type="routines"
-                    :infinite-scroll="false"
-                    :paginate="true"
-                    limit="12"
+                        catalogue-type="routines"
+                        :infinite-scroll="false"
+                        :paginate="true"
+                        limit="12"
                     @else
-                    catalogue-type="{{ $lessonType === 'chord-and-scale' ? 'grid' : 'list' }}"
-                    :infinite-scroll="true"
-                    limit="20"
+                        catalogue-type="{{ $lessonType === 'chord-and-scale' ? 'grid' : 'list' }}"
+                        :infinite-scroll="true"
+                        limit="20"
                     @endif
                     @if($lessonType === 'quick-tips')
-                    :included-types="{{ json_encode([$lessonType, 'boot-camps']) }}"
+                        :included-types="{{ json_encode([$lessonType, 'boot-camps']) }}"
                     @else
-                    :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : explode(',', $lessonType) ) }}"
+                        :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : explode(',', $lessonType) ) }}"
                     @endif
                     @if($lessonType === 'student-review' || !empty($isAllContent))
-                    :force-wide-thumbs="true"
+                        :force-wide-thumbs="true"
                     @endif
                     @if(!empty($isAllContent))
-                    :search-bar="true"
-                    search-endpoint="/railcontent/search"
-                    total-results="{{ $totalResults }}"
+                        :search-bar="true"
+                        search-endpoint="/railcontent/search"
+                        total-results="{{ $totalResults }}"
                     @endif
                     @if(!empty($searchTerm))
-                    search-term="{{ $searchTerm }}"
+                        search-term="{{ $searchTerm }}"
                     @endif
                     @if(!empty($sortOverride))
-                    sort-override="{{ $sortOverride }}"
+                        sort-override="{{ $sortOverride }}"
                     @endif
                 >
                     @include('partials.bladesora.members.skeletons.catalog-filters', [

@@ -12,10 +12,10 @@
                 </h1>
                 <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
                     <a :href="`/${brand}/create-playlist-window`"
-                        class="tw-btn-primary tw-rounded-full tw-text-lg md:tw-text-xl tw-mr-2 tw-line-clamp-1 md:tw-inline-block tw-bg-white tw-text-[#000C17] hover:tw-bg-[#00101D] hover:dark:tw-bg-[#627F97] hover:tw-text-white md:tw-mb-2 tw-border-2 tw-border-[#000C17]">Create
+                        class="tw-btn-primary tw-rounded-full tw-mr-2 tw-line-clamp-1 md:tw-inline-block tw-bg-white tw-text-[#000C17] hover:tw-bg-[#00101D] hover:dark:tw-bg-[#627F97] hover:tw-text-white md:tw-mb-2 tw-border-2 tw-border-[#000C17]">Create
                         Playlist</a>
                     <a href="/playlists"
-                        class="tw-border-2 tw-btn-primary tw-rounded-full tw-text-lg md:tw-text-xl tw-line-clamp-1 md:tw-inline-block tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17] md:tw-mb-2">Learn
+                        class="tw-border-2 tw-btn-primary tw-rounded-full tw-line-clamp-1 md:tw-inline-block tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17] md:tw-mb-2">Learn
                         More</a>
                 </div>
             </div>
