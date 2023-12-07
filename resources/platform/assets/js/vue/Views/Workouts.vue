@@ -32,7 +32,7 @@
             </div>
             <hr class="tw-border-[#65656b40] dark:tw-border-[#223F57]" />
             <template v-if="continueData.data">
-                <section class="tw-container tw-mx-auto dark:tw-text-white lg:tw-px-4">
+                <section class="dark:tw-text-white tw-mb-4">
                     <!-- Section Title -->
                     <div class="tw-flex tw-items-center tw-mt-5 tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
                         <a :href="`/${brand}/lesson-history/in-progress`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
@@ -51,7 +51,6 @@
                                 :is-mini-view="true"
                                 :pre-loaded-content="continueData"
                             />
-
                         </transition>
                     </div>
                 </section>

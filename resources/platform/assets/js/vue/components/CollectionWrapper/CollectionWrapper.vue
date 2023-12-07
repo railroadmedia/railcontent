@@ -1,13 +1,15 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :active-tab="filter.activeTab" :filterable-values="filterableValues" :hide-filter="hideFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="filter.activeTab" :filterable-values="filterableValues" :hide-filter="hideFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
         />
 
         <transition appear name="fade">
             <CollectionResults :current-page="getCurrentPage" :loading="loading" :total-pages="getTotalPages" @on-load-more="collectionStore.loadMore">
-                <GroupedResultsContainer v-if="showGroupBy" v-for="data in preLoadedContent.data" :pre-loaded-content="preLoadedContent.data.slice(0,5)" />
+                <template v-if="showGroupBy">
+                    <GroupedResultsContainer v-for="(data, i) in preLoadedContent.data" :key="i" :pre-loaded-content="preLoadedContent.data.slice(0,5)" />
+                </template>
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
@@ -50,6 +52,14 @@ const props = defineProps({
     includeFutureScheduledContentOnly: {
         type: Boolean,
         default: () => false,
+    },
+    showBackButton: {
+        type: Boolean,
+        default: () => false,
+    }, 
+    parentUrl: {
+        type: String,
+        default: () => "/",
     },
     limit: {
         type: String,
@@ -295,10 +305,9 @@ const handleTabChange = (tab) => {
 }
 
 onMounted(() => {
-    console.log(props.collectionType)
-    console.log(props.title)
-    console.log(props.preLoadedContent)
-
+    // console.log(props.collectionType)
+    // console.log(props.title)
+    // console.log(props.preLoadedContent)
     collectionStore.setDefaults({
         isCoach: isCoach.value,
         data: props.preLoadedContent?.data || [],

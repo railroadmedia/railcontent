@@ -1,6 +1,8 @@
 <template>
     <div>
         <FilterControls
+            :showBackButton="showBackButton" 
+            :parentUrl="parentUrl"
             :hide-filter="hideFilter"
             :search-term="searchTerm"
             :is-collapsed="isCollapsed"
@@ -50,6 +52,14 @@
     import FilterPills from './FilterPills.vue';
 
     const props = defineProps({
+        showBackButton: {
+            type: Boolean,
+            default: () => false,
+        }, 
+        parentUrl: {
+            type: String,
+            default: () => "/",
+        },
         activeTab: {
             type: String,
             default: '',

@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="tw-flex tw-flex-col tw-text-white tw-w-full sm:tw-w-auto">
+        <div class="tw-flex tw-flex-col tw-text-white tw-w-full sm:tw-w-auto tw-justify-center">
             @if(empty($showCompleteButton))
                 <a href="{{ $isCompleted ? $backButton['url'] : $nextLessonUrl }}"
                    class="tw-btn-secondary tw-text-lg tw-mb-0 tw-leading-[0] tw-border-[3px] tw-text-white">

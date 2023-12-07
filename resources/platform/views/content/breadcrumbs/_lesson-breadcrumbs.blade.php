@@ -30,6 +30,10 @@
                 "url" => url()->route('platform.workouts'),
             ],
             [
+                "title" => 'Challenges',
+                "url" => url()->route('platform.workouts.challenges'),
+            ],
+            [
                 "title" => $parent->fetch('fields.title'),
                 "url" => $parent->fetch('url')
             ],
