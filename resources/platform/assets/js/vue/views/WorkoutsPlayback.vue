@@ -19,8 +19,7 @@
                             :content-id="videoProps.id" :current-second="videoProps.lastWatchPositionInSeconds"
                             :progress-state="videoProps.progressState" :video-length="videoProps.videoLength"
                             :chapters="videoProps.chapters" :user-id="videoProps.userId" :like-count="videoProps.likeCount"
-                            :is-liked="videoProps.isLiked" :check-for-timecode="videoProps.checkForTimecode"
-                        >
+                            :is-liked="videoProps.isLiked" :check-for-timecode="videoProps.checkForTimecode">
 
                             <div :class="`widescreen title tw-text-${brand}`">
                                 <i class="fas fa-spinner fa-spin absolute-center"></i>
@@ -47,10 +46,10 @@
                     <div v-else>ERROR LOADING VIDEO...</div>
                 </div>
             </div>
-            <div class="tw-ml-[10px] tw-flex tw-transition-all">
+            <div class="tw-ml-[10px] tw-flex tw-transition-all" :class="isSidebarOpen ? 'tw-w-auto' : 'tw-w-[402px]'">
                 <div class="tw-rounded-[5px] tw-border tw-border-[#1E364A] tw-overflow-hidden tw-transition-all"
-                    :class="!isSidebarOpen ? 'tw-w-0 tw-overflow-hidden tw-border-0' : 'tw-w-full'">
-                    <div class="tw-flex tw-flex-col tw-w-[402px]">
+                    v-if="!isSidebarOpen">
+                    <div class="tw-flex tw-flex-col">
                         <div class="tw-bg-[#081825] tw-pt-[24px] tw-pb-[16px] tw-flex tw-justify-between tw-px-[18px]">
                             <h3 class="tw-text-[20px] tw-font-bold tw-font-open-sans">Related Workouts</h3>
                             <button @click="isSidebarOpen = !isSidebarOpen">
@@ -64,9 +63,12 @@
                             </button>
                         </div>
                     </div>
+                    <RelatedCard v-for="relatedLesson in formattedRelatedLessons" :key="relatedLesson.id"
+                        :thumbnail="relatedLesson.thumbnail" :instructor="relatedLesson.instructor"
+                        :title="relatedLesson.title" :difficulty="relatedLesson.difficulty"
+                        :content-type="relatedLesson.contentType" />
                 </div>
-                <div class="tw-ml-[21px] tw-transition-all"
-                    :class="isSidebarOpen ? 'tw-w-0  tw-overflow-hidden' : 'tw-w-full'">
+                <div class="tw-ml-[21px] tw-transition-all tw-overflow-hidden" v-if="isSidebarOpen">
                     <button @click="isSidebarOpen = !isSidebarOpen">
                         <svg id="icon-workouts-filled" width="38" height="38" viewBox="0 0 38 38" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -85,12 +87,13 @@
 
 <script setup>
 // TODO: ADD THE PLAY AND PAUSE EVENTS TO THE VIDEO PLAYERS
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from "../../stores/user";
 
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
 import YoutubePlayer from "../vuesora/components/YoutubePlayer/YoutubePlayer.vue";
+import RelatedCard from "../components/Catalogue/RelatedCard.vue";
 // READ ME: Importing video player breaks the app for some reason.
 // We need further investigation on this matter, but for now let's use it globally.
 //import VideoPlayer from "../vuesora/components/VideoPlayer/VideoPlayer.vue";
@@ -119,6 +122,22 @@ const props = defineProps({
 });
 
 const isSidebarOpen = ref(false);
+
+const formattedRelatedLessons = computed(() => {
+    return props.relatedLessons.data.map(({ compiled_view_data, difficulty_string, instructors }) => {
+        const { id, title, type, thumbnail_url } = JSON.parse(compiled_view_data);
+        const instructor = instructors[0]?.name || 'INSTRUCTOR';
+
+        return {
+            id,
+            thumbnail: thumbnail_url,
+            instructor,
+            title,
+            difficulty: difficulty_string,
+            contentType: type
+        }
+    })
+});
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
