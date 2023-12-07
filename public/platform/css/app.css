@@ -27448,6 +27448,9 @@ a:visited{
   .lg\:tw-mt-6{
     margin-top: 1.5rem !important;
   }
+  .lg\:tw-mb-2{
+    margin-bottom: 0.5rem !important;
+  }
   .lg\:tw-line-clamp-2{
     overflow: hidden !important;
     display: -webkit-box !important;

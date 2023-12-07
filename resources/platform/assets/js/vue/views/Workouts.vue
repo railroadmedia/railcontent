@@ -108,7 +108,7 @@ const props = defineProps({
         default: () => []
     },
     continueData: {
-        type: Array,
+        type: [Array, Object],
         default: () => []
     },
     workoutData: {
