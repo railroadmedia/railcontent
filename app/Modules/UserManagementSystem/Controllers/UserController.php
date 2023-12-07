@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Controllers;
 
 use App\Modules\Ecommerce\Models\Product;
+use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -42,14 +43,19 @@ class UserController extends Controller
 
     private MailService $mailService;
     private SaasquatchService $saasquatchService;
+    private UserService $userService;
 
     /**
      * UserController constructor.
      */
-    public function __construct(MailService $mailService, SaasquatchService $saasquatchService)
-    {
+    public function __construct(
+        MailService $mailService,
+        SaasquatchService $saasquatchService,
+        UserService $userService
+    ) {
         $this->mailService = $mailService;
         $this->saasquatchService = $saasquatchService;
+        $this->userService = $userService;
         $this->middleware([ConvertEmptyStringsToNull::class]);
     }
 
@@ -108,7 +114,9 @@ class UserController extends Controller
 
         $verificationToken = $request->get('verification_token');
 
-        if (strtolower($verificationToken) !== strtolower(md5($email . config('shopify.multipass.account_creation_secret_key')))) {
+        if (strtolower($verificationToken) !== strtolower(
+                md5($email . config('shopify.multipass.account_creation_secret_key'))
+            )) {
             throw new AuthorizationException('Invalid verification_token.', 403);
         }
 
@@ -155,20 +163,24 @@ class UserController extends Controller
 
         $verificationToken = $request->get('verification_token');
 
-        if (strtolower($verificationToken) !== strtolower(md5($email . config('shopify.multipass.account_creation_secret_key')))) {
+        if (strtolower($verificationToken) !== strtolower(
+                md5($email . config('shopify.multipass.account_creation_secret_key'))
+            )) {
             throw new AuthorizationException('Invalid verification_token.', 403);
         }
 
-        $user = User::where('email', $email)->first() ?? new User();
-        $parts = explode('@', $email);
+        $user = User::where('email', $email)->first();
+        if (!$user) {
+            $parts = explode('@', $email);
 
-        $user->email = $email;
-        $user->setPassword($password);
-        $this->requires_password_update = false;
-        $user->display_name = $parts[0] . rand(10000, 99999);
-        $user->save();
-
-        event(new UserCreated($user));
+            $user->email = $email;
+            $user->setPassword($password);
+            $this->requires_password_update = false;
+            $user->display_name = $parts[0] . rand(10000, 99999);
+            $user->save();
+        } else {
+            $user = $this->userService->createUser($email, $password);
+        }
 
         try {
             $referralCode = Session::pull('referral_code');
