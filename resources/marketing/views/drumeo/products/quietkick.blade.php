@@ -6,7 +6,7 @@
     <meta name="description" content="Improve your kick foot anywhere.">
     <meta property="og:description" content="Improve your kick foot anywhere.">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/fb-share-image.jpg" style="display: none;">
-    <meta property="og:url" content="https://www.drumeo.com/drumshop/quietkick/">
+    <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
     <?php \App\Analytics\Tracker::trackProductImpression('quietkick'); ?>

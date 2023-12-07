@@ -6,7 +6,7 @@
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/og-image.jpg" style="display: none;">
     <meta property="og:title" content="Drumeo QuietPad">
     <meta property="og:description" content="Practice anywhere with two full-size playing surfaces.">
-    <meta property="og:url" content="https://www.drumeo.com/drumshop/quietpad/">
+    <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 @stop()
 
 @section('head')

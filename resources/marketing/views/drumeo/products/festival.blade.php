@@ -8,7 +8,7 @@
     <meta property="og:description" content="The Drumeo Festival is designed to inspire you with legendary shows, surround you with a community of friends and family, and give you the chance to get closer than ever to many of your favorite drummers.">
 
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/festival/2021-notification/header.jpg" style="display: none;">
-    <meta property="og:url" content="https://www.drumeo.com/festival">
+    <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
 
