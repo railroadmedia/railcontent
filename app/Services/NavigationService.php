@@ -64,7 +64,7 @@ class NavigationService
                 'path' => '/'.brand().'/method/'.$methodurl,
                 'icon' => 'method',
             ],
-            'songs' => [
+            [
                 'name' => 'Songs',
                 'path' => '/'.brand().'/songs',
                 'icon' => 'headphones',
