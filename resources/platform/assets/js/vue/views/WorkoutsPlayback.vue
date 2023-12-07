@@ -70,10 +70,10 @@
                     </div>
                 </div>
             </div>
-            <div class="tw-ml-[10px] tw-flex tw-transition-all" :class="isSidebarOpen ? 'tw-w-auto' : 'tw-w-[402px]'">
-                <div class="tw-transition-all"
-                    v-if="!isSidebarOpen">
-                    <div class="tw-flex tw-flex-col tw-rounded-[5px] tw-border tw-border-[#1E364A] tw-overflow-hidden">
+            <div class="tw-ml-[10px] tw-flex tw-transition-all tw-h-full">
+                <div class="tw-flex tw-w-[402px]" v-if="!isSidebarOpen">
+                    <div class="tw-rounded-[5px] tw-border tw-border-[#1E364A] tw-overflow-hidden tw-transition-all">
+                    <div class="tw-flex tw-flex-col">
                         <div class="tw-bg-[#081825] tw-pt-[24px] tw-pb-[16px] tw-flex tw-justify-between tw-px-[18px]">
                             <h3 class="tw-text-[20px] tw-font-bold tw-font-open-sans">Related Workouts</h3>
                             <button @click="isSidebarOpen = !isSidebarOpen">
@@ -91,6 +91,7 @@
                         :thumbnail="relatedLesson.thumbnail" :instructor="relatedLesson.instructor"
                         :title="relatedLesson.title" :difficulty="relatedLesson.difficulty"
                         :content-type="relatedLesson.contentType" />
+                </div>
                 </div>
                 <div class="tw-ml-[21px] tw-transition-all tw-overflow-hidden" v-if="isSidebarOpen">
                     <button @click="isSidebarOpen = !isSidebarOpen">
