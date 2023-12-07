@@ -66,6 +66,15 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJobByIds
         $query = User::query();
 
         switch ($this->customQuery) {
+            case "hasOldActiveSubscription":
+                $query = $query->whereExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('ecommerce_subscriptions')
+                        ->whereRaw('ecommerce_subscriptions.user_id = usora_users.id')
+                        ->where('ecommerce_subscriptions.is_active', '1')
+                        ->where('ecommerce_subscriptions.paid_until', '>', '2023-12-07');
+                });
+                break;
             case "hasRechargeSubscription":
                 $query = $query->where('has_recharge_subscription', true);
                 break;
