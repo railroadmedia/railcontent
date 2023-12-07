@@ -1,4 +1,8 @@
 <script setup>
+// TODO
+// CONNECT ADD TO PLAYLIST BUTTON
+// ADD HREF TO THE A TAGS
+// ADD EXPERT LEVEL COLOR
 import { ref, computed } from 'vue';
 import { PlusIcon } from '@heroicons/vue/solid';
 
