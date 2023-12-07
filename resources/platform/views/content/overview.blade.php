@@ -57,6 +57,9 @@
                 'backgroundImage' => 'https://www.musora.com/musora-cdn/image/width=1200/'.$parentContent->fetch('data.header_image_url'),
             ])
                 @slot('content')
+                    <!-- Back Button --> 
+                    <a href="{{ url()->route('platform.workouts.challenges') }}" class="tw-absolute tw-top-0 tw-left-8 tw-inline-flex tw-items-center tw-justify-center tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border-[2px] tw-border-white tw-bg-black tw-rounded-full  hover:tw-bg-white tw-text-white hover:tw-text-[#000C17] tw-mr-3"><i class="fas fa-arrow-left" aria-hidden="true"></i></a>
+                    <!-- Content -->
                     <div class="flex flex-column pr-1 align-v-bottom align-h-center">
                         <div class="pv-5"></div>
                         <div class="pv-5 hide-xs-only"></div>
