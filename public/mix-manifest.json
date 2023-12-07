@@ -1,18 +1,10 @@
 {
-<<<<<<< HEAD
-    "/platform/js/app.js": "/platform/js/app.js?id=b6117f9ad4c2e8a9dc751c3727fd10ca",
-=======
-    "/platform/js/app.js": "/platform/js/app.js?id=80fa0f53caf5109ede2cca4a6c7b000f",
->>>>>>> project-workouts
+    "/platform/js/app.js": "/platform/js/app.js?id=2a16521aac1b0f16f0f436b2bdc4bc5f",
     "/platform/js/profile.js": "/platform/js/profile.js?id=86aa1841f2c5fd61f0b1a0a087caa000",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=b11719fd2b12999cf314705273f39458",
     "/platform/js/books.js": "/platform/js/books.js?id=59cd94e09b034342fbe6c7401bdd44e4",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=6e2f01abb91d2092e2ee76c471f1d357",
-<<<<<<< HEAD
-    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=276deea59ac8a5aaeb5bd54e5dd0e2eb",
-=======
-    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=92a6df3185bd0efee9cdf8404b3d12e9",
->>>>>>> project-workouts
+    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=8fd045c071b713e8d468d772091e3dcb",
     "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=cb89a36e1cf8f02beb2727b1600f94f3",
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=48995b781c32a535259e3e92f47b85a9",
     "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=7b21b2d614d7d44d5857aef5307e0949",
@@ -34,11 +26,7 @@
     "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=23d560bd49433055f398214a4ca8c116",
     "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=2f20499359d51a8bc48f66f81ef28d42",
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=d5f8299acca066cdbbbdcd3692527593",
-<<<<<<< HEAD
-    "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=a07c17dbe895428a807d1983598b50a1",
-=======
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=e44e1ba98412c88f20822fdb87aa44d3",
->>>>>>> project-workouts
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=075cde3b106fe85cc3c9536d0049dbd1",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=e2082f7ad4786ce50ed2fc5843c742d7",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=b06c413be0cbc92f51079e8948ccc276",
