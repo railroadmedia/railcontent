@@ -167,19 +167,19 @@
         </div>
     </section>
 
-    <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative text-white" style="background:linear-gradient(to bottom, #01050d, #021021);">
+    <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative text-white" style="background:linear-gradient(to bottom, #01050d 66%, #021021);">
         <div class="container mx-auto z-10 relative max-w-5xl pb-16">
-            <h2 class="leading-tight mb-5"><strong>Pro details on a beginner budget.</strong></h2>
+            <h2 class="leading-tight mb-7 sm:mb-10"><strong>Pro details on a beginner budget.</strong></h2>
 
-            <div class="mb-5"
+            <div class="mb-7 sm:mb-10"
                 x-data="{
                     init() {
                         new Splide(this.$refs.splide, {
                             classes: {
-                                    arrow: 'hidden',
-                                    prev: 'hidden',
-                                    next: 'hidden',
-                                    pagination: 'splide__pagination bottom-0',
+                                arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next hidden sm:flex mb-16',
+                                pagination: 'splide__pagination bottom-0',
                             },
                             perPage: 2.5,
                             perMove: 1,
@@ -230,15 +230,15 @@
                                 ];
                             @endphp
                             @foreach ($gridItems as $gridItem)
-                                <li class="splide__slide px-1">
-                                    <div class="rounded-xl overflow-hidden shadow-md" style="color:#fff;background-color:#000;">
+                                <li class="splide__slide px-1 sm:px-3">
+                                    <div class="rounded-xl overflow-hidden shadow-md border-2" style="color:#fff;background-color:#080c14;border-color:#121f2d;">
                                         <div class="relative" style="padding-bottom:71%;">
                                             <img class="absolute object-cover h-full w-full transition-opacity opacity-1"
                                                 loading="lazy" onload="this.classList.remove('opacity-0')" alt="drumeo stickbag"
                                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $gridItem['img'] }}">
                                         </div>
-                                        <p class="mt-4 mb-1 px-4 font-black leading-tight"><strong>{{ $gridItem['title'] }}</strong></p>
-                                        <p class="px-4 pb-6 text-sm leading-tight">{{ $gridItem['desc'] }}</p>
+                                        <h4 class="mt-4 mb-2 px-4 font-black leading-tight"><strong>{{ $gridItem['title'] }}</strong></h4>
+                                        <p class="px-4 pb-6 text-sm leading-normal opacity-70">{{ $gridItem['desc'] }}</p>
                                     </div>
                                 </li>
                             @endforeach
@@ -246,20 +246,220 @@
                     </div>
                 </div>
             </div>
-            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-center">
-                <div class="flex-grow-0 pr-5 lg:pr-8 mx-0">
-                    <h3><strong>Your house <i class="fas fa-arrow-right text-musora"></i> recording studio.</strong></h3>
-                    <p class="leading-normal max-w-xl">
+            <div class="flex justify-center items-center text-left">
+                <div class="flex-grow pr-5 lg:pr-8 mx-0">
+                    <h3 class="leading-tight mb-3"><strong>Your house <i class="fas fa-arrow-right text-musora"></i> recording studio.</strong></h3>
+                    <p class="leading-normal max-w-lg mx-0">
                     Connect your kit to your laptop with a single cable, open up Garage Band (or any DAW), and start laying down your grooves.
                     <br><br>
                     This makes it effortless to collaborate with other musicians and document your practice history.</p>
                 </div>
-                <div></div>
+                <div class="flex-shrink-0 border-2 rounded-xl px-10 py-10" style="background-color:#080c14;border-color:#121f2d;">
+                    <h6 class="leading-normal font-black">
+                                <img class="align-middle w-8 mr-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/record-icon.svg"> Record your practice.
+                        <br><br><img class="align-middle w-8 mr-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/drum-icon.svg"> Create your own beats.
+                        <br><br><img class="align-middle w-8 mr-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/people-icon.svg"> Share your creative ideas.
+                    </h6>
+                </div>
             </div>
+        </div>
+    </section>
+    <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative">
+        <div class="container mx-auto z-10 relative max-w-4xl">
+            <h2 class="leading-tight mb-7 sm:mb-10"><strong>Play your first beats <i class="fas fa-arrow-right text-drumeo"></i> Write your first song.</strong></h2>
+            <div class="flex justify-center text-left">
+                <div class="sm:pr-7 sm:w-7/12 flex-grow-0">
+                    <div class="h-full rounded-xl px-10 py-10 bg-black text-white flex items-end bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/new-drummers-image.jpg');">
+                        <div>
+                            <h3 class="leading-tight mb-3"><strong>New Drummers</strong></h3>
+                            <p class="leading-normal max-w-lg mx-0">Get started on the drums with an affordable e-kit that gives you all the features of a premium drum set. This is the perfect way to dip your toe into the waters of drumming without breaking the bank.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="rounded-xl px-10 py-10 mb-7" style="background-color:#eff6fd;">
+                        <h3 class="leading-tight mb-3"><strong>Acoustic Drummers</strong></h3>
+                        <p class="leading-normal max-w-lg mx-0">You’re already living the dream on an acoustic kit. The Drumeo E-Kit gives you a quiet practice option to practice, play and record your ideas without the volume of your acoustic kit.</p>
+                    </div>
+                    <div class="rounded-xl px-10 py-10" style="background-color:#eff6fd;">
+                        <h3 class="leading-tight mb-3"><strong>Other Musicians</strong></h3>
+                        <p class="leading-normal max-w-lg mx-0">Complete your home studio with a versatile e-kit. Lay down your beats and fills, add your keyboards, guitars, and vocals, and share your ideas with the world—the ultimate kit for your home studio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background:linear-gradient(to bottom, #fff, #f0f6fc);">
+        <div class="container mx-auto z-10 relative max-w-5xl">
+            <h6 class="text-drumeo mb-3"><em>The highest-rated beginner e-kit meets award-winning drum lessons.</em></h6>
+            <h2 class="leading-tight mb-5 sm:mb-7"><strong>Rave reviews for the Alesis Nitro Max…</strong></h2>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                <div class="rounded-xl border-2 px-4 py-8" style="border-color:#cad1e4;">
+                    <img class="h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/amazon-logo.png">
+                    <h2 class="leading-tight my-2"><strong>4.6</strong></h2>
+                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star-half" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                </div>
+                <div class="rounded-xl border-2 px-4 py-8" style="border-color:#cad1e4;">
+                    <img class="h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/music-radar-logo.png">
+                    <h2 class="leading-tight my-2"><strong>5</strong></h2>
+                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                </div>
+                <div class="rounded-xl border-2 px-4 py-8" style="border-color:#cad1e4;">
+                    <img class="h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/thomann-logo.png">
+                    <h2 class="leading-tight my-2"><strong>4.3</strong></h2>
+                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star-half" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                </div>
+                <div class="rounded-xl border-2 px-4 py-8" style="border-color:#cad1e4;">
+                    <img class="h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/sweetwater-logo.png">
+                    <h2 class="leading-tight my-2"><strong>5</strong></h2>
+                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                </div>
+</div>
+
+            @php
+        $gridItems = [
+                [
+                    "image" =>
+                    "marketing/drumeo/membership/homepage/webp-format/10-level-cirriculum.webp",
+                    "title" => "10-Level Curriculum",
+                    "desc" =>
+                    "The most trusted step-by-step video lessons for every technique, pattern, and style.",
+                    "lessonInfo" => [
+                        [
+                            "thumb" =>
+                            "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/10-level-cirriculum.webp",
+                        ],
+                    ],
+                ],
+                [
+                    "image" =>
+                    "marketing/drumeo/membership/homepage/webp-format/practical-assignments.webp",
+                    "title" => "Practical Assignments",
+                    "desc" =>
+                    "Keep up your progress with clear assignments and handy practice tools for every level.",
+                    "lessonInfo" => [
+                        [
+                            "thumb" =>
+                            "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/practical-assignments.webp",
+                        ],
+                    ],
+                ],
+                [
+                    "image" =>
+                    "marketing/drumeo/membership/homepage/2023/guided-workouts2.jpg",
+                    "title" => "Guided Workouts",
+                    "desc" =>
+                    "Stay inspired with guided workouts where you’ll play along with your teacher in real time.",
+                    "lessonInfo" => [
+                        [
+                            "thumb" =>
+                            "https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guided-workouts2.jpg",
+                        ],
+                    ],
+                ],
+                [
+                    "image" =>
+                    "marketing/drumeo/membership/homepage/webp-format/world-class-teachers.webp",
+                    "title" => "World-Class Teachers",
+                    "desc" =>
+                    "The best drummers are here — including Grammy Award winners and touring musicians.",
+                    "lessonInfo" => [
+                        [
+                            "thumb" =>
+                            "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/world-class-teachers.webp",
+                        ],
+                    ],
+                ],
+                [
+                    "image" =>
+                    "marketing/drumeo/membership/homepage/webp-format/downloadable-videos.webp",
+                    "title" => "Downloadable Videos",
+                    "desc" =>
+                    "Stream your lessons OR download your videos so you can practice anywhere, anytime.",
+                    "lessonInfo" => [
+                        [
+                            "thumb" =>
+                            "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/downloadable-videos.webp",
+                        ],
+                    ],
+                ],
+                [
+                    "image" =>
+                    "marketing/drumeo/membership/homepage/webp-format/personalized-support.webp",
+                    "title" => "Personalized Support",
+                    "desc" =>
+                    "Get weekly live streams, student lesson plans, and access to a global drum community.",
+                    "lessonInfo" => [
+                        [
+                            "thumb" =>
+                            "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/personalized-support.webp",
+                        ],
+                    ],
+                ],
+            ]
+            @endphp
+
+            @include('musora.sales.components.trailer-grid-section', [
+                'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
+                'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum featuring many of the world’s best teachers. ',
+            ])
+        </div>
+    </section>
+    <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative bg-drumeo text-white">
+        <div class="container mx-auto z-10 relative max-w-4xl">
+            <h2 class="leading-tight"><strong>A double guarantee for peace of mind. </strong></h2>
+            <p class="leading-tight mt-2 mb-5 sm:mb-7">Your E-Kit includes a 90-day purchase guarantee from Drumeo + a 1-year warranty from Alesis on all parts. </p>
+            <img class="h-36" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/guarantee.png">
         </div>
     </section>
 
     <div id="customize-anchor" class="anchor"></div>
+    <section class="px-3 sm:px-0 text-center relative z-50 overflow-hidden" style="background:linear-gradient(to bottom, #fff, #f0f6fc 66%);">
+        <div class="container max-w-6xl mx-auto relative z-50">
+            <div class="flex flex-wrap items-center px-4 sm:px-6 pt-10 md:py-10 lg:py-20">
+                <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5">
+                    <h2 class="pb-6 sm:pb-4"><strong>Everything you need<br> to start playing<br> the drums.</strong></h2>
+                    <h6 class="leading-tight">Get the ultimate starter e-kit + <br>
+                        one year of unlimited drum lessons.</h6>
+
+                    <h4 class="my-4 text-drumeo">
+                        @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
+                            <s class="opacity-50">${{ floatval($productPrices['stickbag']->price) }}</s>
+                            <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
+                            (Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%)
+                        @else
+                            <strong>Only ${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
+                        @endif
+                    </h4>
+                    <a href="TODO" class="join blue smaller w-full max-w-xs">BUY NOW</a>
+                </div>
+                <div
+                    class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0 hidden sm:block">
+                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl pb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/collage.png" alt="collage">
+                </div>
+            </div>
+        </div>
+        <div class="w-full sm:hidden text-center py-8">
+            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/collage.png" alt="collage">
+        </div>
+    </section>
 
     <section class="text-center py-10" style="background: #00101D;">
         <div class="container mx-auto relative z-50">
