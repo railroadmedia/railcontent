@@ -20,6 +20,7 @@
                 <CatalogueCardContainer
                     v-else
                     :pre-loaded-content="data"
+                    :will-scroll="false"
                 />
             </CollectionResults>
         </transition>

@@ -17,7 +17,9 @@
                 </a>
             </div>
             <hr class="tw-border-[#65656b40] dark:tw-border-[#223F57]" />
-            <HeaderCarousel :preloaded-carousel="carouselData" />
+            <div class="tw-px-4 lg:tw-px-0">
+                <HeaderCarousel :preloaded-carousel="carouselData"/>
+            </div>
         </section>
 
         <br>
@@ -61,8 +63,7 @@
             <collection-wrapper
                 :collection-type="collectionType"
                 :filterable-values="filterableValues"
-                :include-future-scheduled-content-only = "
-                includeFutureScheduledContentOnly"
+                :include-future-scheduled-content-only = "includeFutureScheduledContentOnly"
                 :pre-loaded-content="workoutData"
                 :statuses="statuses"
             />
