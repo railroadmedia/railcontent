@@ -309,3 +309,28 @@ if (!function_exists('assembleUserAttributes')) {
         return $userData;
     }
 }
+
+/**
+ * Formats a number to a shorter version, converting it to 'K' for thousands and 'M' for millions.
+ *
+ * @param int|float $num The number to be formatted.
+ * @return string The formatted number with 'K' or 'M' suffix, or the original number if it's less than 1000.
+ */
+
+if (!function_exists('convertNumber')) {
+    function convertNumber($num)
+    {
+        if (!is_numeric($num)) {
+            $num = floatval($num);
+        }
+
+        if ($num >= 1000000) {
+            $million = $num / 1000000;
+            $decimal = fmod($million, 1) > 0 ? '.' . substr(number_format($million, 1), -1) : '';
+            return floor($million) . $decimal . 'M';
+        } elseif ($num >= 1000) {
+            return number_format($num / 1000) . 'K';
+        }
+        return $num;
+    }
+}

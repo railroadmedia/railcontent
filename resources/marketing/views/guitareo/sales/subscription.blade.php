@@ -222,9 +222,9 @@
 
     @php
         $testimonials = $guitareo['testimonials'];
-        $youtube = $guitareo['youtube'];
-        $facebook = $guitareo['facebook'];
-        $instagram = $guitareo['instagram'];
+        $youtube = convertNumber(Prices::$guitareoYoutubeSubsc);
+        $facebook = convertNumber(Prices::$guitareoFacebookLikes);
+        $instagram = convertNumber(Prices::$guitareoInstagramFollowers);
     @endphp
 
     @include('musora.sales.components.testimonials-section', [
