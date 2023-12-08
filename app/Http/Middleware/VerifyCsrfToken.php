@@ -21,5 +21,6 @@ class VerifyCsrfToken extends Middleware
         '/ecommerce/user-access-permission*',
         '/ecommerce/revenuecat/webhook/notification',
         '/ecommerce/shopify/webhook/*',
+        '/ecommerce/recharge/webhook/*',
     ];
 }
