@@ -68,13 +68,13 @@
                 >
                     <!-- Coach Title -->
                     <div v-if="item.type !== 'song-part'">
-                        <h5 class="tw-text-xs tw-font-normal tw-leading-none tw-text-[#3F3F46] tw-mb-1 tw-uppercase dark:tw-text-[#9EC0DC]"
+                        <h5 class="tw-text-xs tw-font-normal tw-leading-none tw-mb-1 tw-uppercase tw-text-[#9EC0DC]"
                             v-if="!isGuitareoChordAndScale" v-html="mappedData.color_title">
                         </h5>
                     </div>
 
                     <!-- Video Title -->
-                    <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
+                    <h4 class="tw-text-sm tw-leading-snug tw-text-white font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
                         :class="{'text-center': isGuitareoChordAndScale}"
                     >
                         {{ mappedData.black_title }}
@@ -85,7 +85,7 @@
                        v-html="mappedData.description.replace(/<[^>]+>/g, '')"
                     ></p>
                     <!-- Content -->
-                    <h6 class="tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]"
+                    <h6 class="tw-text-xs tw-font-normal tw-capitalize tw-text-[#9EC0DC]"
                         :class="{'text-center': isGuitareoChordAndScale}"
                     >
                         <span v-html="mappedData.content_type"></span>
@@ -98,7 +98,7 @@
                 <!-- Add to Playlist -->
                 <div class="tw-inline-flex tw-items-start tw-p-1">
                     <button v-if="item.type !== 'pack-bundle' && showMyListAction"
-                        class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
+                        class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#9EC0DC]y"
                         :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                         :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"
                         :data-content-id="item.id"
