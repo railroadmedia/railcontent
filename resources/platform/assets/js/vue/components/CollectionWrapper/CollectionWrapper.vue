@@ -20,6 +20,7 @@
                 <CatalogueCardContainer
                     v-else
                     :pre-loaded-content="data"
+                    :content-type-override="collectionType"
                     :will-scroll="false"
                     :subscription-calendar-id="subscriptionCalendarId" 
                 />
