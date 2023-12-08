@@ -32,6 +32,7 @@
                 </div> --}}
             </div>
             @include('drumeo.products.partials.evergreen._price-link', [
+                'price' => $discountedPrice,
                 'enrollmentLink' => $enrollmentLink,
                 'brandTitle' => $brandTitle,
             ])

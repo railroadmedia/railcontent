@@ -14,4 +14,22 @@ class Prices
     public static $drumeoSongs = 5000;
     public static $drumeoCourses = 260;
     public static $singeoSongs = 130;
+    
+    // social media counts
+    public static $drumeoYoutubeSubsc = 3200000;
+    public static $drumeoFacebookLikes = 1200000;
+    public static $drumeoInstagramFollowers = 1500000;
+
+    public static $pianoteYoutubeSubsc = 1500000;
+    public static $pianoteFacebookLikes = 430000;
+    public static $pianoteInstagramFollowers = 248000;
+
+    public static $guitareoYoutubeSubsc = 1000000;
+    public static $guitareoFacebookLikes = 330000;
+    public static $guitareoInstagramFollowers = 19000;
+
+
+    public static $singeoYoutubeSubsc = 139000;
+    public static $singeoFacebookLikes = 23000;
+    public static $singeoInstagramFollowers = 9900;
 }
