@@ -111,9 +111,9 @@
                         >
                             Enroll Now
                         </a>
-                        <button v-if="!isReleased && hasProduct || true" data-open-modal="notifyModal" class="tw-mt-1 tw-inline-flex tw-items-center tw-justify-center tw-uppercase tw-text-sm tw-px-4 tw-leading-none tw-font-bebas-neue tw-h-[36px] tw-rounded-2xl dark:tw-bg-[#0E2031] dark:tw-text-[#F1F1F1] tw-text-[#00101D]">
+                        <button v-if="!isReleased && hasProduct" data-open-modal="notifyModal" class="tw-mt-1 tw-inline-flex tw-items-center tw-justify-center tw-uppercase tw-text-sm tw-px-4 tw-leading-none tw-font-bebas-neue tw-h-[36px] tw-rounded-2xl dark:tw-bg-[#0E2031] dark:tw-text-[#F1F1F1] tw-text-[#00101D]">
                             <musora-icon icon-name="bell" class="tw-w-5 tw-h-5 tw-mr-1"/>
-                            Notify Me
+                            Notify Me 
                         </button>
                     </template>
                 </div>
@@ -327,6 +327,10 @@ const contentTypeString = computed(() => {
 
 const isSongContent = computed(() => {
     return contentModel.value.post.type === 'song'
+})
+
+const hasProduct = computed(() => {
+    return true; //for now..
 })
 
 const contentCreator = computed(() => {
