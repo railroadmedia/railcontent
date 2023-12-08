@@ -21750,6 +21750,10 @@ a:visited{
   margin-top: auto !important;
   margin-bottom: auto !important;
 }
+.tw-my-\[30px\]{
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
+}
 .-tw-mb-10{
   margin-bottom: -2.5rem !important;
 }
