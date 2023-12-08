@@ -186,11 +186,11 @@ const formattedRelatedLessons = computed(() => {
 });
 
 const formattedChapters = computed(() => {
-    return props.videoProps.chapters.map(({ title, thumbnail, time }) => {
+    return props.videoProps.chapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
         return {
-            title,
-            thumbnail,
-            time
+            title: chapter_description,
+            thumbnail: chapter_thumbnail_url,
+            time: chapter_timecode
         }
     })
 });
