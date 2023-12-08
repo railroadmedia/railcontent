@@ -15,7 +15,7 @@ module.exports = (theme) => {
             letterSpacing: '1px',
             marginBottom: '0.25rem',
             minHeight: '40px',
-            padding: '6px 70px',
+            padding: '7px 70px 6px',
             position: 'relative',
             textDecoration: 'none',
             textTransform: 'uppercase',
