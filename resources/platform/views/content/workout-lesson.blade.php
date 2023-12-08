@@ -12,6 +12,7 @@
             'videoId' => $lessonContent->fetch('fields.video.fields.youtube_video_id'),
             'videoType' => 'youtube',
             'useLegacyPlayer' => false,
+            'chapters' => $lessonContent['chapters'] ?? [],
         ];
     } elseif (user()->use_legacy_video_player ?? false || $agent->isSamsung()) {
         $videoProps = [
@@ -59,6 +60,7 @@
             'videoType' => 'vimeo',
             'useLegacyPlayer' => false,
             'hlsManifestUrl' => $lessonContent['hlsManifestUrl'] ?? '',
+            'chapters' => $lessonContent['chapters'] ?? [],
         ];
     }
 
@@ -128,7 +130,8 @@
         :video-props="{{ json_encode($videoProps) }}" :related-lessons="{{ $relatedLessons }}"
         :video-resources="{{ json_encode($videoResources) }}"
         :video-buttons="{{ json_encode($videoButtons) }}"
-        :comments-props="{{ json_encode($commentsProps) }}" />
+        :comments-props="{{ json_encode($commentsProps) }}"
+        :soundslice-slug={{ json_encode($lessonContent->fetch('soundslice_slug')) }} />
 @endsection
 
 @section('layout-scripts')

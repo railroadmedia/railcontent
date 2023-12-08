@@ -2,7 +2,7 @@
     <div>
         <Breadcrumb :first-level-url="breadcrumbFirstLevelUrl" :first-level-title="breadcrumbFirstLevelTitle"
             :last-level-title="breadcrumbLastLevelTitle" />
-        <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white tw-flex tw-w-full tw-mt-[30px]">
+        <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white tw-flex tw-w-full tw-mt-[30px] tw-mb-[15px]">
             <div class="tw-grow">
                 <div class="tw-w-full" v-if="videoProps.videoId">
                     <!-- YouTube video -->
@@ -69,6 +69,7 @@
                         </VideoComments>
                     </div>
                 </div>
+                <VideoChapters :chapters="formattedChapters"></VideoChapters>
             </div>
             <div class="tw-ml-[10px] tw-flex tw-transition-all tw-h-full">
                 <div class="tw-flex tw-w-[402px]" v-if="!isSidebarOpen">
@@ -122,6 +123,7 @@ import RelatedCard from "../components/Catalogue/RelatedCard.vue";
 import VideoButtons from "../components/VideoButtons/VideoButtons.vue";
 import VideoResources from "../vuesora/components/VideoResources/VideoResources.vue";
 import VideoComments from "../vuesora/views/comments/Comments.vue";
+import VideoChapters from "../components/VideoChapters/VideoChapters.vue";
 // READ ME: Importing video player breaks the app for some reason.
 // We need further investigation on this matter, but for now let's use it globally.
 //import VideoPlayer from "../vuesora/components/VideoPlayer/VideoPlayer.vue";
@@ -159,6 +161,10 @@ const props = defineProps({
         type: Object,
         default: {},
     },
+    soundsliceSlug: {
+        type: String,
+        default: '',
+    },
 });
 
 const isSidebarOpen = ref(false);
@@ -179,10 +185,20 @@ const formattedRelatedLessons = computed(() => {
     })
 });
 
+const formattedChapters = computed(() => {
+    return props.videoProps.chapters.map(({ title, thumbnail, time }) => {
+        return {
+            title,
+            thumbnail,
+            time
+        }
+    })
+});
+
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
 onMounted(() => {
-    console.log('relatedLessons', props.relatedLessons)
+    console.log('chapters', props.videoProps.chapters)
 })
 </script>

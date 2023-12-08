@@ -12,6 +12,7 @@ import { createPinia } from 'pinia';
 
 //App Pages
 import Workouts from './vue/Views/Workouts';
+import WorkoutsPlayback from './vue/Views/WorkoutsPlayback';
 import Home from './vue/Views/Home.vue';
 import ChildCatalog from './vue/Views/ChildCatalog.vue';
 import Support from './vue/Views/Support';
@@ -274,6 +275,7 @@ app.component('AppContainer', AppContainer)
     //.component('CollectionWrapper', CollectionWrapper)
     .component('ChildCollectionPage', ChildCollectionPage)
     .component('Workouts', Workouts)
+    .component('WorkoutsPlayback', WorkoutsPlayback)
     .component('ChildCatalog', ChildCatalog)
     .component('Support', Support)
     .component('Schedule', Schedule)

@@ -1,10 +1,10 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=a0bb520d4eee8ba9c6beee203fa0465a",
+    "/platform/js/app.js": "/platform/js/app.js?id=d8c4a78931c2edb1e37f9a5120dd935e",
     "/platform/js/profile.js": "/platform/js/profile.js?id=86aa1841f2c5fd61f0b1a0a087caa000",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=b11719fd2b12999cf314705273f39458",
     "/platform/js/books.js": "/platform/js/books.js?id=59cd94e09b034342fbe6c7401bdd44e4",
-    "/platform/js/manifest.js": "/platform/js/manifest.js?id=6e2f01abb91d2092e2ee76c471f1d357",
-    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=8414556514875468b9e6b38e844f7919",
+    "/platform/js/manifest.js": "/platform/js/manifest.js?id=c3877480fc7ec36d0c46d6b29b053d99",
+    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=08a827ac79e6465f45fcc634ee639992",
     "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=7f09c45565744679ca906314048b4195",
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=7ed25dcacb39ff3c44f255d86052dd58",
     "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=c55d06cff215ddc38f8aaedb0eff5f7f",
@@ -16,10 +16,12 @@
     "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=e07fd6d5aacb8344725cb99164255716",
     "/platform/js/order-form.js": "/platform/js/order-form.js?id=2e17eeb0b5bcf1f9449b83b79d02997f",
     "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=a5a55e1059561f349ccff92388c30b00",
+    "/platform/js/text-editor-component.js": "/platform/js/text-editor-component.js?id=dc929d5338fd1c398aeb38d4ac29ab46",
     "/platform/js/cart-sidebar.js": "/platform/js/cart-sidebar.js?id=4892c214cb5f345f6cbfda1357e398be",
     "/platform/js/nav-cart-button.js": "/platform/js/nav-cart-button.js?id=9cae2c787bb9a7b5e494fe3ed1d49a45",
     "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=a1f6fdae415f5b0fefa59d58d4c25c7f",
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=b9caf2c45cf80d5b3071a3dcd42aaa60",
+    "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=c3a69e61482bda11dd17c9af8ae10906",
     "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=183a1b7776f61574a15145a8ee0872f6",
     "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=215668a7ca2964afd49b06b3e4b8b933",
     "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=19f87590d36a1417067cd4843f58d26d",
@@ -28,7 +30,7 @@
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=615b828a5c5d567a25c31dddfbfbc02b",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=e2082f7ad4786ce50ed2fc5843c742d7",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=b06c413be0cbc92f51079e8948ccc276",
-    "/platform/css/app.css": "/platform/css/app.css?id=c6cda48fe46c1124ea679a33c4536231",
+    "/platform/css/app.css": "/platform/css/app.css?id=799cefa39e16924504aaec970d76cceb",
     "/marketing/css/app.css": "/marketing/css/app.css?id=0eee26ca73a391cda806ee896805a0b1",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=effbe30da99204da47ff365b8a016f64"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=53149ce01d0f6bc1069e0f54001f3d51"
 }
