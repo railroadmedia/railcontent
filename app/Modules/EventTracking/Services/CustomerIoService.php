@@ -86,7 +86,7 @@ class CustomerIoService
         User $user,
         Product $product,
         Carbon $cancellation_date,
-        mixed $cancellation_reason
+        mixed $cancellation_reason,
     ): void {
         $brand = $product->brand;
         $attributes = [];

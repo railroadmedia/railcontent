@@ -3,7 +3,7 @@
     class="modal"
 >
     <div class="flex flex-column">
-        <div class="flex flex-row bb-grey-4-1 pv-3">
+        <div class="flex flex-row tw-border-b tw-border-white pv-3">
             <div class="flex flex-column">
                 <h1 class="display uppercase text-center text-white mb-2">
                     <i class="fas fa-check-circle text-{{ $themeColor }} mr-1"></i>
@@ -22,7 +22,7 @@
 
         <div class="flex flex-row pv-3 flex-wrap single-col dark-mode align-h-center">
             <div class="flex flex-column xs-12 sm-6">
-                <p class="body text-center text-grey-4 mb-2">
+                <p class="body text-center tw-text-white mb-2">
                     Completed...
                 </p>
 
@@ -40,7 +40,7 @@
 
             @if(!empty($nextLessonJson))
                 <div class="flex flex-column xs-12 sm-6">
-                    <p class="body text-center text-grey-4 mb-2">
+                    <p class="body text-center tw-text-white mb-2">
                         Up Next...
                     </p>
 
