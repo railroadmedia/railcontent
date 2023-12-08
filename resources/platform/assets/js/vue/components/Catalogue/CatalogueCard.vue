@@ -38,7 +38,7 @@
                     <!-- Workouts Pill -->
                     <div v-if="item.type === 'challenge' && isReleased"
                          class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text-white tw-text-[10px] tw-p-1">
-                        # Workouts
+                        {{ item.child_count }} Workouts
                     </div>
                     <!-- Progress -->
                     <div class="lesson-progress overflow">
@@ -106,7 +106,7 @@
                     <!-- CHALLENGE CTA's -->
                     <template v-if="contentType === 'challenge'">
                         <a v-if="!isReleased && !hasProduct" 
-                            :href="item.slug" 
+                            :href="registrationUrl" 
                             class="tw-mt-1 tw-inline-flex tw-items-center tw-justify-center tw-uppercase tw-text-sm tw-px-4 tw-leading-none tw-font-bebas-neue tw-h-[36px] tw-rounded-2xl dark:tw-bg-[#0E2031] dark:tw-text-[#F1F1F1] tw-text-[#00101D]"
                         >
                             Enroll Now
@@ -331,6 +331,10 @@ const isSongContent = computed(() => {
 
 const hasProduct = computed(() => {
     return true; //for now..
+})
+
+const registrationUrl = computed(() => {
+    return item.data.find(field => field.key === 'registration_url')?.value || '';
 })
 
 const contentCreator = computed(() => {
