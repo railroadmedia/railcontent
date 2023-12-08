@@ -1,5 +1,8 @@
     <?php
     $pianote = [
+        'youtube' => '1.5M',
+        'facebook' => '430K',
+        'instagram' => '248K',
 
         'features' => [
             [

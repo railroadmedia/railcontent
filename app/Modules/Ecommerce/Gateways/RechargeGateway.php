@@ -260,7 +260,7 @@ class RechargeGateway
     /**
      * Get the customer from Recharge, for the given Shopify ID
      *
-     * @param  int  $shopifyCustomerId
+     * @param int $shopifyCustomerId
      * @return Customer|null
      */
     public function getRechargeCustomer(int $shopifyCustomerId): ?Customer
@@ -286,7 +286,7 @@ class RechargeGateway
         }
 
         // transform into our model
-        $customers->transform(fn ($customerData) => new Customer($customerData));
+        $customers->transform(fn($customerData) => new Customer($customerData));
 
         // in case there are multiple customers with that shopify id, we should log it for investigation
         if ($customers->count() > 1) {
@@ -301,8 +301,8 @@ class RechargeGateway
     /**
      * Update the customer in Recharge, identified by the given Shopify ID, with the given array of values
      *
-     * @param  int  $shopifyCustomerId
-     * @param  array  $updateValues the key-value array of data to update. e.g. ["email" => "foo@bar.baz", "first_name" => "Foo"]
+     * @param int $shopifyCustomerId
+     * @param array $updateValues the key-value array of data to update. e.g. ["email" => "foo@bar.baz", "first_name" => "Foo"]
      * @return bool success or fail in updating all given values
      * @throws Exception
      */
@@ -325,16 +325,18 @@ class RechargeGateway
         }
 
         $allUpdated = true;
-        foreach($updateValues as $key => $value) {
-          if ($customerData->$key != $value) {
-              Log::error("[Recharge\API] Customer data for $key was not updated for customer with Shopify ID $shopifyCustomerId");
-              $allUpdated = false;
-          }
+        foreach ($updateValues as $key => $value) {
+            if ($customerData->$key != $value) {
+                Log::error(
+                    "[Recharge\API] Customer data for $key was not updated for customer with Shopify ID $shopifyCustomerId"
+                );
+                $allUpdated = false;
+            }
         }
         return $allUpdated;
     }
 
-    public function getSubscriptions($shopifyCustomerId) : Collection
+    public function getSubscriptions($shopifyCustomerId): Collection
     {
         $response = $this->call('GET', '/subscriptions', [
             'shopify_customer_id' => $shopifyCustomerId,
@@ -343,7 +345,7 @@ class RechargeGateway
         try {
             return collect(
                 $response?->subscriptions
-            )->map(function($subscription) {
+            )->map(function ($subscription) {
                 return new Subscription($subscription);
             });
         } catch (Exception $e) {
@@ -354,7 +356,7 @@ class RechargeGateway
     }
 
     public function cancelSubscription(
-      Subscription $subscription,
+        Subscription $subscription,
         $cancelReason,
         $cancelReasonComments = '',
         $sendEmail = true
@@ -367,7 +369,6 @@ class RechargeGateway
         $subscription->status = RechargeSubscriptionStatusEnum::Cancelled->value;
         $subscription->cancellationReason = $cancelReason;
         $subscription->createdAt = Carbon::now();
-
     }
 
     public function updateSubscriptionNextChargeDate($subscription, Carbon $nextChargeDate): void
@@ -376,6 +377,50 @@ class RechargeGateway
             'POST',
             "/subscriptions/$subscription->id/set_next_charge_date",
             ['date' => $nextChargeDate->isoFormat('YYYY-MM-DD')]
+        );
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function createWebhook(array $data): array
+    {
+        $response = $this->call(
+            'POST',
+            "/webhooks",
+            $data
+        );
+        if (!$response->webhook) {
+            throw new Exception("Error creating webhook: " . print_r($response, true));
+        }
+        return [
+            'id' => $response->webhook->id,
+            'address' => $response->webhook->address,
+            'topic' => $response->webhook->topic
+        ];
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getWebhooks(): array
+    {
+        $response = $this->call(
+            'GET',
+            "/webhooks",
+        );
+
+        return $response->webhooks ?? [];
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function deleteWebhook($id): void
+    {
+        $this->call(
+            'DELETE',
+            "/webhooks/$id",
         );
     }
 }

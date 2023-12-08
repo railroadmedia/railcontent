@@ -233,16 +233,16 @@
 
     @php
         $testimonials = $singeo['testimonials'];
+        $youtube = number_format(Prices::$singeoYoutubeSubsc);
+        $facebook = number_format(Prices::$singeoFacebookLikes);
+        $instagram = number_format(Prices::$singeoInstagramFollowers);
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by singers everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
-        'youtube' => '97,000',
         'facebookLink' => 'https://facebook.com/singeoofficial/',
-        'facebook' => '23,000',
         'instagramLink' => 'https://instagram.com/singeoofficial/',
-        'instagram' => '9,000',
     ])
 
     @if(empty($trialVersion))
