@@ -21546,6 +21546,12 @@ a:visited{
 .tw-top-full{
   top: 100% !important;
 }
+.tw--top-\[16px\]{
+  top: -16px !important;
+}
+.tw-bottom-1{
+  bottom: 0.25rem !important;
+}
 .tw-z-0{
   z-index: 0 !important;
 }
@@ -21582,11 +21588,11 @@ a:visited{
 .tw-z-\[500\]{
   z-index: 500 !important;
 }
-.tw-z-\[99\]{
-  z-index: 99 !important;
-}
 .tw-z-\[50\]{
   z-index: 50 !important;
+}
+.tw-z-\[99\]{
+  z-index: 99 !important;
 }
 .tw-order-1{
   order: 1 !important;
@@ -22611,6 +22617,9 @@ a:visited{
 .tw-w-\[140px\]{
   width: 140px !important;
 }
+.tw-w-\[142px\]{
+  width: 142px !important;
+}
 .tw-w-\[14px\]{
   width: 14px !important;
 }
@@ -22791,9 +22800,6 @@ a:visited{
 }
 .tw-w-screen{
   width: 100vw !important;
-}
-.tw-w-\[142px\]{
-  width: 142px !important;
 }
 .tw-min-w-0{
   min-width: 0px !important;
@@ -24030,6 +24036,9 @@ a:visited{
 .tw-bg-yellow-500{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(234 179 8 / var(--tw-bg-opacity)) !important;
+}
+.tw-bg-black\/60{
+  background-color: rgb(0 0 0 / 0.6) !important;
 }
 .tw-bg-opacity-0{
   --tw-bg-opacity: 0 !important;
@@ -26066,6 +26075,10 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
+:is(.tw-dark .dark\:tw-text-\[\#F1F1F1\]){
+  --tw-text-opacity: 1 !important;
+  color: rgb(241 241 241 / var(--tw-text-opacity)) !important;
+}
 :is(.tw-dark .dark\:tw-placeholder-\[\#9EC0DC\])::-moz-placeholder{
   --tw-placeholder-opacity: 1 !important;
   color: rgb(158 192 220 / var(--tw-placeholder-opacity)) !important;
@@ -27359,6 +27372,9 @@ a:visited{
   .lg\:tw-top-\[32px\]{
     top: 32px !important;
   }
+  .lg\:tw-left-8{
+    left: 2rem !important;
+  }
   .lg\:tw-order-first{
     order: -9999 !important;
   }
@@ -27416,6 +27432,9 @@ a:visited{
   .lg\:tw-mb-4{
     margin-bottom: 1rem !important;
   }
+  .lg\:tw-mb-5{
+    margin-bottom: 1.25rem !important;
+  }
   .lg\:tw-mb-6{
     margin-bottom: 1.5rem !important;
   }
@@ -27433,6 +27452,9 @@ a:visited{
   }
   .lg\:tw-ml-auto{
     margin-left: auto !important;
+  }
+  .lg\:tw-mr-0{
+    margin-right: 0px !important;
   }
   .lg\:tw-mr-12{
     margin-right: 3rem !important;
@@ -27454,12 +27476,6 @@ a:visited{
   }
   .lg\:tw-mt-8{
     margin-top: 2rem !important;
-  }
-  .lg\:tw-mb-5{
-    margin-bottom: 1.25rem !important;
-  }
-  .lg\:tw-mr-0{
-    margin-right: 0px !important;
   }
   .lg\:tw-line-clamp-2{
     overflow: hidden !important;
@@ -27751,12 +27767,6 @@ a:visited{
   .lg\:tw-gap-14{
     gap: 3.5rem !important;
   }
-  .lg\:tw-gap-3{
-    gap: 0.75rem !important;
-  }
-  .lg\:tw-gap-4{
-    gap: 1rem !important;
-  }
   .lg\:tw-overflow-hidden{
     overflow: hidden !important;
   }
@@ -27832,6 +27842,10 @@ a:visited{
     padding-left: 50px !important;
     padding-right: 50px !important;
   }
+  .lg\:tw-py-0{
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+  }
   .lg\:tw-py-16{
     padding-top: 4rem !important;
     padding-bottom: 4rem !important;
@@ -27851,10 +27865,6 @@ a:visited{
   .lg\:tw-py-\[25px\]{
     padding-top: 25px !important;
     padding-bottom: 25px !important;
-  }
-  .lg\:tw-py-0{
-    padding-top: 0px !important;
-    padding-bottom: 0px !important;
   }
   .lg\:tw-pb-0{
     padding-bottom: 0px !important;
@@ -27886,6 +27896,9 @@ a:visited{
   .lg\:tw-pr-\[42px\]{
     padding-right: 42px !important;
   }
+  .lg\:tw-pr-\[8px\]{
+    padding-right: 8px !important;
+  }
   .lg\:tw-pt-0{
     padding-top: 0px !important;
   }
@@ -27894,9 +27907,6 @@ a:visited{
   }
   .lg\:tw-pt-2{
     padding-top: 0.5rem !important;
-  }
-  .lg\:tw-pr-\[8px\]{
-    padding-right: 8px !important;
   }
   .lg\:tw-text-left{
     text-align: left !important;

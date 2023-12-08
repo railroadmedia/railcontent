@@ -18,6 +18,7 @@
                 :statuses="statuses"
                 :showBackButton="true"
                 :parentUrl="firstLevelUrl"
+                :subscription-calendar-id="subscriptionCalendarId" 
             />
         </div>
     </div>
@@ -34,6 +35,10 @@
         lastLevelTitle: String,
         collectionType: {
             default: '',
+        },
+        subscriptionCalendarId: {
+            type: String,
+            default: () => '',
         },
         filterableValues: {
             type: Array,
