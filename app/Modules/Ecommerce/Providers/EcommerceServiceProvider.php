@@ -44,7 +44,8 @@ class EcommerceServiceProvider extends EventServiceProvider
         // middleware is controlled in the route files
         Route::middleware([])
             ->group(__DIR__ . '/../routes/routes.php')
-            ->group(__DIR__ . '/../routes/shopify.php');
+            ->group(__DIR__ . '/../routes/shopify.php')
+            ->group(__DIR__ . '/../routes/recharge.php');
     }
 
     /**
