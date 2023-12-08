@@ -50,11 +50,16 @@ class RechargeWebhookController extends Controller
             $ciotz = CarbonTimeZone::create('America/Vancouver');
             $cancelledAt = Carbon::parse($subscription['cancelled_at'], $rctz)->setTimezone($ciotz);
 
+            $cancellationReason = $subscription['cancellation_reason'] ?? "";
+            if ($subscription['cancellation_reason_comments']) {
+                $cancellationReason .= " - " . $subscription['cancellation_reason_comments'];
+            }
+
             $this->customerIoService->syncCancellationDataFromRecharge(
                 $user,
                 $product,
                 $cancelledAt,
-                $subscription['cancellation_reason']
+                $cancellationReason
             );
         } catch (Exception $e) {
             //Catch exception to prevent shopify from retrying the webhook
