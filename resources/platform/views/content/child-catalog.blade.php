@@ -19,5 +19,6 @@
         :pre-loaded-content="{{ $listLessons }}"
         :statuses="{{ json_encode($statuses ?? ['published']) }}"
         :title="{{ json_encode($catalogueMeta['shortname'] ?? $catalogueMeta['name']) }}"
+        subscription-calendar-id="{{ config('addevent.'.brand().'.uniquekeys.brand-overview') }}"
     ></child-catalog>
 @endsection

@@ -21,6 +21,7 @@
                     v-else
                     :pre-loaded-content="data"
                     :will-scroll="false"
+                    :subscription-calendar-id="subscriptionCalendarId" 
                 />
             </CollectionResults>
         </transition>
@@ -73,6 +74,10 @@ const props = defineProps({
     requiredFields: {
         type: Array,
         default: () => [],
+    },
+    subscriptionCalendarId: {
+        type: String,
+        default: () => '',
     },
     requiredUserStates: {
         type: Array,
@@ -308,7 +313,7 @@ const handleTabChange = (tab) => {
 onMounted(() => {
     // console.log(props.collectionType)
     // console.log(props.title)
-    // console.log(props.preLoadedContent)
+    console.log(props.preLoadedContent)
     collectionStore.setDefaults({
         isCoach: isCoach.value,
         data: props.preLoadedContent?.data || [],

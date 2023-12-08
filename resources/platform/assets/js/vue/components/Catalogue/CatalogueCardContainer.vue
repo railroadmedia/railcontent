@@ -39,6 +39,18 @@
                 <h4 class="body tw-text-[#00101D] dark:tw-text-white">{{ noResultsMessage }}</h4>
             </div>
         </div>
+        
+        <!-- TODO:
+            Add contentTypeOverride of challenge from parent components
+            Otherwise this will always render for CatalogueCardContainer(s)
+        -->
+        <AddEventModal 
+            v-if="contentTypeOverride === 'challenge' || true" 
+            modal-id="notifyModal"
+            :subscription-calendar-id="subscriptionCalendarId" 
+            :theme-color="brand" 
+            toggleSubscribe="toggleSubscribe">
+        </AddEventModal>
     </div>
 </template>
 <script setup>
@@ -46,6 +58,7 @@
 import { computed, ref } from 'vue'
 // In order for the horizontal scroll to work, you need to make parent container a block.
 import CatalogueCard from '../Catalogue/CatalogueCard.vue';
+import AddEventModal from '../../vuesora/components/AddEvent/AddEventModal.vue';
 import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
 import { storeToRefs } from "pinia";
 import { useUserStore } from "../../../stores/user";
@@ -58,6 +71,10 @@ const props = defineProps({
     isMiniView: {
         type: Boolean,
         default: () => false,
+    },
+    subscriptionCalendarId: {
+        type: String,
+        default: () => '',
     },
     preLoadedContent: {
         type: [Array, Object],
