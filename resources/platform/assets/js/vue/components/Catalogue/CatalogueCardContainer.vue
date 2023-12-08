@@ -24,7 +24,7 @@
                     :is-mini-card="isMiniView"
                     :show-my-list-action="showMyListAction"
                     :display-inline="displayInline"
-                    :break-to-list-view="true"
+                    :break-to-list-view="breakToListView"
                     @addToList="addToList"
                     @progressReset="resetProgressEventHandler"
                     :show-dropdown="showDropdown"
@@ -39,13 +39,9 @@
                 <h4 class="body tw-text-[#00101D] dark:tw-text-white">{{ noResultsMessage }}</h4>
             </div>
         </div>
-        
-        <!-- TODO:
-            Add contentTypeOverride of challenge from parent components
-            Otherwise this will always render for CatalogueCardContainer(s)
-        -->
+    
         <AddEventModal 
-            v-if="contentTypeOverride === 'challenge' || true" 
+            v-if="contentTypeOverride === 'challenge'" 
             modal-id="notifyModal"
             :subscription-calendar-id="subscriptionCalendarId" 
             :theme-color="brand" 
@@ -139,5 +135,9 @@ const content = ref(props.preLoadedContent ? props.preLoadedContent.data : []);
 
 const data = computed(() => {
     return Array.isArray(props.preLoadedContent) ? props.preLoadedContent : content.value;
+})
+
+const breakToListView = computed( () => {
+    return props.contentTypeOverride === 'challenge' || props.contentTypeOverride === 'workout';
 })
 </script>
