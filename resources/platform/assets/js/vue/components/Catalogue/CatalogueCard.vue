@@ -37,7 +37,7 @@
                     </div>
                     <!-- Workouts Pill -->
                     <div v-if="item.type === 'challenge' && isReleased"
-                         class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text white tw-text-[10px] tw-p-1">
+                         class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text-white tw-text-[10px] tw-p-1">
                         # Workouts
                     </div>
                     <!-- Progress -->
@@ -49,12 +49,12 @@
                     </div>
                     <!-- CHALLENGE: Not Released -->
                     <div v-else-if="item.type === 'challenge' && !isReleased && hasProduct"
-                         class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text white tw-text-[10px] tw-p-1">
+                         class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text-white tw-text-[10px] tw-p-1">
                         Upcoming
                     </div>
                     <!-- CHALLENGE: Not Enrolled -->
                     <div v-else-if="item.type === 'challenge' && !isReleased && !hasProduct"
-                         class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text white tw-text-[10px] tw-p-1">
+                         class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text-white tw-text-[10px] tw-p-1">
                         Enroll Now
                     </div>
                     <!-- EVERYTHING ELSE -->
