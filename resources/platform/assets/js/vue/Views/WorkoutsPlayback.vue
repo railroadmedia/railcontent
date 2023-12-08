@@ -56,6 +56,7 @@
                     :report-user-email="videoResources.reportUserEmail" :report-user-name="videoResources.reportUserName"
                     :report-recipient="videoResources.reportRecipient" :report-logo="videoResources.reportLogo">
                 </VideoResources>
+                <VideoChapters :chapters="formattedChapters"></VideoChapters>
                 <VideoButtons :prev-lesson-url="videoButtons.prevLessonUrl" :next-lesson-url="videoButtons.nextLessonUrl"
                     :brand="brand" :prev-label="videoButtons.prevLabel" :next-label="videoButtons.nextLabel"
                     :has-qa-video="videoButtons.hasQAVideo" />
@@ -69,7 +70,6 @@
                         </VideoComments>
                     </div>
                 </div>
-                <VideoChapters :chapters="formattedChapters"></VideoChapters>
             </div>
             <div class="tw-ml-[10px] tw-flex tw-transition-all tw-h-full">
                 <div class="tw-flex tw-w-[402px]" v-if="!isSidebarOpen">
