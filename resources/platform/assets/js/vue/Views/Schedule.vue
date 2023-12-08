@@ -1,7 +1,7 @@
 <template>
     <div class="tw-w-full tw-relative">
         <!-- Header -->
-        <div class="tw-w-full fluid collapsed-h tw-py-8 md:tw-py-11 tw-relative tw-bg-black">
+        <div class="tw-w-full tw-py-8 md:tw-py-11 tw-relative tw-bg-black">
         <!-- Background Image -->
             <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top">
                 <img :src="`https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/headers/${brand}-header.jpg`"
@@ -10,8 +10,7 @@
                 >
             </div>
             <!-- Background Gradient -->
-            <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top hide-lg-down" style="background: linear-gradient(to left, #000 0%, transparent 10%, transparent 90%, #000 100%)"></div>
-            <div :class="`header-gradient-overlay absolute-fill ${brand}`"></div>
+            <div :class="`header-gradient-overlay tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-full ${brand}`"></div>
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-relative">
                 <div class="tw-flex tw-flex-row">
                     <div class="tw-flex tw-flex-col tw-pr-1">
@@ -28,10 +27,10 @@
                             <div class="tw-flex tw-flex-col xs-12 sm-4">
                                 <label id="timezoneLabel" for="timezoneSelector" class="flex-auto body tw-cursor-pointer tw-w-fit">
                                     <button class="tw-btn-secondary tw-text-white">
-                                        <i class="fas fa-globe mr-1"></i>
+                                        <i class="fas fa-globe tw-mr-[10px]"></i>
                                         Change Your Timezone
                                     </button>
-                                    <select name="timezone" id="timezoneSelector">
+                                    <select class="tw-cursor-pointer" name="timezone" id="timezoneSelector">
                                         <option v-for="(timezone, i) in timezones" :key="i" class="tw-text-[#00101D]" :selected="isSelectedTimezone(timezone)">
                                             {{ timezone }}
                                         </option>
@@ -45,10 +44,10 @@
         </div>
 
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
-            <div class="tw-flex tw-flex-col mv-3">
+            <div class="tw-flex tw-flex-col tw-py-[30px]">
                 <div id="scheduleHeader" class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mb-6 md:tw-mb-[10px]">
                     <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
-                        <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
+                        <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-text-xl md:tw-text-2xl">
                             Scheduled Releases
                         </h1>
                     </div>
@@ -151,5 +150,25 @@ const isSelectedTimezone = (timezone) => {
 
     .content-table-row.scheduled .title-column .hide-md-up {
         display: none;
+    }
+
+    .header-gradient-overlay {
+        background: linear-gradient(180deg, rgba(0, 16, 29, 0.01) 68.57%, #00101D 100%);
+    }
+
+    .header-gradient-overlay.drumeo {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 45%, rgba(9, 92, 170, 0.7) 100%);
+    }
+
+    .header-gradient-overlay.pianote {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 45%, rgba(213, 8, 29, 0.7) 100%);
+    }
+
+    .header-gradient-overlay.guitareo {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 45%, rgba(0, 150, 128, 0.7) 100%);
+    }
+
+    .header-gradient-overlay.singeo {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 45%, rgba(102, 0, 182, 0.7) 100%);
     }
 </style>
