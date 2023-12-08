@@ -21585,6 +21585,9 @@ a:visited{
 .tw-z-\[99\]{
   z-index: 99 !important;
 }
+.tw-z-\[50\]{
+  z-index: 50 !important;
+}
 .tw-order-1{
   order: 1 !important;
 }
@@ -22788,6 +22791,9 @@ a:visited{
 }
 .tw-w-screen{
   width: 100vw !important;
+}
+.tw-w-\[142px\]{
+  width: 142px !important;
 }
 .tw-min-w-0{
   min-width: 0px !important;
@@ -27356,6 +27362,9 @@ a:visited{
   .lg\:tw-order-first{
     order: -9999 !important;
   }
+  .lg\:tw-order-last{
+    order: 9999 !important;
+  }
   .lg\:tw-mx-0{
     margin-left: 0px !important;
     margin-right: 0px !important;
@@ -27445,6 +27454,12 @@ a:visited{
   }
   .lg\:tw-mt-8{
     margin-top: 2rem !important;
+  }
+  .lg\:tw-mb-5{
+    margin-bottom: 1.25rem !important;
+  }
+  .lg\:tw-mr-0{
+    margin-right: 0px !important;
   }
   .lg\:tw-line-clamp-2{
     overflow: hidden !important;
@@ -27706,6 +27721,9 @@ a:visited{
   .lg\:tw-flex-row{
     flex-direction: row !important;
   }
+  .lg\:tw-flex-col{
+    flex-direction: column !important;
+  }
   .lg\:tw-flex-wrap{
     flex-wrap: wrap !important;
   }
@@ -27732,6 +27750,12 @@ a:visited{
   }
   .lg\:tw-gap-14{
     gap: 3.5rem !important;
+  }
+  .lg\:tw-gap-3{
+    gap: 0.75rem !important;
+  }
+  .lg\:tw-gap-4{
+    gap: 1rem !important;
   }
   .lg\:tw-overflow-hidden{
     overflow: hidden !important;
@@ -27828,6 +27852,10 @@ a:visited{
     padding-top: 25px !important;
     padding-bottom: 25px !important;
   }
+  .lg\:tw-py-0{
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+  }
   .lg\:tw-pb-0{
     padding-bottom: 0px !important;
   }
@@ -27863,6 +27891,12 @@ a:visited{
   }
   .lg\:tw-pt-12{
     padding-top: 3rem !important;
+  }
+  .lg\:tw-pt-2{
+    padding-top: 0.5rem !important;
+  }
+  .lg\:tw-pr-\[8px\]{
+    padding-right: 8px !important;
   }
   .lg\:tw-text-left{
     text-align: left !important;

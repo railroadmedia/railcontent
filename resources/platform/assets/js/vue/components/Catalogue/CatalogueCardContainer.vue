@@ -4,7 +4,9 @@
             <div
                 :class="`
                     tw-px-4 lg:tw-px-0 tw-no-scrollbar
-                    ${isMiniView ? 'tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-3 xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-y-[25px] tw-gap-x-[8px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : 'tw-flex tw-overflow-x-scroll lg:tw-overflow-x-clip tw-flex-nowrap lg:tw-flex-wrap'}
+                    ${isMiniView && willScroll ? 'tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-3 xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-y-[25px] tw-gap-x-[8px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : ''}
+                    ${!isMiniView && willScroll ? 'tw-flex tw-overflow-x-scroll lg:tw-overflow-x-clip tw-flex-nowrap lg:tw-flex-wrap' : ''}
+                    ${!isMiniView && !willScroll ? 'tw-flex tw-flex-wrap' : ''}
                 `">
                 <CatalogueCard
                     v-for="item in data"
@@ -22,6 +24,7 @@
                     :is-mini-card="isMiniView"
                     :show-my-list-action="showMyListAction"
                     :display-inline="displayInline"
+                    :break-to-list-view="true"
                     @addToList="addToList"
                     @progressReset="resetProgressEventHandler"
                     :show-dropdown="showDropdown"
@@ -48,6 +51,10 @@ import { storeToRefs } from "pinia";
 import { useUserStore } from "../../../stores/user";
 
 const props = defineProps({
+    willScroll: {
+        type: Boolean,
+        default: () => true,
+    },
     isMiniView: {
         type: Boolean,
         default: () => false,

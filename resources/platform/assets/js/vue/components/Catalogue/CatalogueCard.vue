@@ -2,14 +2,23 @@
     <!-- 
         - Cards can be mini with the 'isMiniCard' for continue section
         - Cards can be inline with the 'displayInline' prop for the Related Lessons sections
+        - Cards can break to list view in mobile with the 'breakToListView' prop for large catalogs
     -->
     <div v-if="!isMiniCard"
         class="tw-snap-center tw-flex tw-flex-col tw-group"
-        :class="[class_object, displayInline ? 'tw-py-3 tw-w-full' : 'tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 lg:tw-mb-6 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]']">
-        <div class="tw-flex" :class="displayInline ? 'tw-flex-row' : 'tw-flex-col'">
+        :class="[
+            class_object, 
+            displayInline || breakToListView ? 'tw-py-3 tw-w-full' : 'tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 lg:tw-mb-6 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]',
+            { 'tw-py-3 tw-w-full lg:tw-py-0 lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 lg:tw-mb-6 lg:tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]' : breakToListView }
+        ]">
+        <div class="tw-flex" :class="[
+            displayInline || breakToListView ? 'tw-flex-row' : 'tw-flex-col',
+            { 'lg:tw-flex-col' : breakToListView }
+        ]">
             <!-- Thumbnail Section -->
             <a :href="renderLink ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
-                { 'thumbnail-col tw-mr-3': displayInline },
+                { 'tw-w-[142px] tw-mr-3': displayInline || breakToListView },
+                { 'lg:tw-w-full lg:tw-mr-0': breakToListView },
                 item.type === 'song' && displayInline ? 'tw-max-w-[121px]' : '',
                 item.type + '-thumbnail'
             ]">
@@ -43,29 +52,31 @@
                     </div>
                 </div>
             </a>
-
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
                 <a :href="renderLink ? item.url : null"
                     class="card-info tw-flex tw-flex-auto tw-flex-col tw-px-2 tw-rounded-lg"
-                    :class="displayInline ? 'tw-justify-center tw-pt-1' : 'tw-pt-2'">
+                    :class="[displayInline || breakToListView ? 'tw-justify-center tw-pt-1' : 'tw-pt-2', { 'lg:tw-pt-2 lg:tw-justify-start' : breakToListView }]">
 
-                    <!-- Video Title -->
-                    <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
-                        :class="{ 'tw-text-center': isGuitareoChordAndScale }">
-                        {{ mappedData.black_title }}
-                    </h4>
-                    <!-- Video Description -->
-                    <p v-if="mappedData.show_description"
-                        class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2"
-                        v-html="mappedData.description.replace(/<[^>]+>/g, '')"></p>
-                    <!-- Content -->
-                    <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] tw-mb-0.5"
-                        :class="{ 'tw-text-center': isGuitareoChordAndScale }">
-                        <div v-if="contentCreator && contentCreator !== ''" class="tw-mb-0.5">
-                            <span> {{ contentCreator }} </span>
-                        </div>
-                    </h6>
+                    
+                    <div class="tw-flex tw-flex-col">
+                        <!-- Video Title -->
+                        <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
+                            :class="{ 'tw-text-center': isGuitareoChordAndScale }">
+                            {{ mappedData.black_title }}
+                        </h4>
+                        <!-- Video Description -->
+                        <p v-if="mappedData.show_description"
+                            class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2"
+                        >{{  mappedData.description.replace(/<[^>]+>/g, '') }}</p>
+                        <!-- Content -->
+                        <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] tw-mb-0.5"
+                            :class="[{ 'tw-text-center': isGuitareoChordAndScale },{ 'tw-order-first lg:tw-order-last' : breakToListView }]">
+                            <div v-if="contentCreator && contentCreator !== ''" class="tw-mb-0.5">
+                                <span>{{ contentCreator }}</span>
+                            </div>
+                        </h6>
+                    </div>
                     <p class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
                         <!-- Difficulty Label -->
                         <span v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
@@ -110,7 +121,7 @@
         <a :href="renderLink ? item.url : null"
             class="tw-flex-none tw-h-[70px] tw-w-[121px] tw-relative tw-overflow-hidden tw-rounded-[5px]">
             <div
-                class="tw-rounded-[5px] tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[70px] tw-w-[121px] tw-justify-center tw-items-center tw-text-white tw-text-center tw-z-[100]">
+                class="tw-rounded-[5px] tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[70px] tw-w-[121px] tw-justify-center tw-items-center tw-text-white tw-text-center tw-z-[50]">
                 <i class="fas" :class="thumbnailIcon"></i>
                 <p v-if="!isReleased" class="tw-text-sm text-white font-bold">
                     {{ releaseDate }}
@@ -192,6 +203,10 @@ const props = defineProps({
         default: ''
     },
     isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    breakToListView: {
         type: Boolean,
         default: false
     },
