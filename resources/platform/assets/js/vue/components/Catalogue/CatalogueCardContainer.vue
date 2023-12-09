@@ -4,7 +4,9 @@
             <div
                 :class="`
                     tw-px-4 lg:tw-px-0 tw-no-scrollbar
-                    ${isMiniView ? 'tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-3 xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-y-[25px] tw-gap-x-[8px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : 'tw-flex tw-overflow-x-scroll lg:tw-overflow-x-clip tw-flex-nowrap lg:tw-flex-wrap'}
+                    ${isMiniView && willScroll ? 'tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-3 xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-y-[25px] tw-gap-x-[8px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : ''}
+                    ${!isMiniView && willScroll ? 'tw-flex tw-overflow-x-scroll lg:tw-overflow-x-clip tw-flex-nowrap lg:tw-flex-wrap' : ''}
+                    ${!isMiniView && !willScroll ? 'tw-flex tw-flex-wrap' : ''}
                 `">
                 <CatalogueCard
                     v-for="item in data"
@@ -22,6 +24,7 @@
                     :is-mini-card="isMiniView"
                     :show-my-list-action="showMyListAction"
                     :display-inline="displayInline"
+                    :break-to-list-view="breakToListView"
                     @addToList="addToList"
                     @progressReset="resetProgressEventHandler"
                     :show-dropdown="showDropdown"
@@ -36,6 +39,14 @@
                 <h4 class="body tw-text-[#00101D] dark:tw-text-white">{{ noResultsMessage }}</h4>
             </div>
         </div>
+    
+        <AddEventModal 
+            v-if="contentTypeOverride === 'challenge'" 
+            modal-id="notifyModal"
+            :subscription-calendar-id="subscriptionCalendarId" 
+            :theme-color="brand" 
+            toggleSubscribe="toggleSubscribe">
+        </AddEventModal>
     </div>
 </template>
 <script setup>
@@ -43,14 +54,23 @@
 import { computed, ref } from 'vue'
 // In order for the horizontal scroll to work, you need to make parent container a block.
 import CatalogueCard from '../Catalogue/CatalogueCard.vue';
+import AddEventModal from '../../vuesora/components/AddEvent/AddEventModal.vue';
 import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
 import { storeToRefs } from "pinia";
 import { useUserStore } from "../../../stores/user";
 
 const props = defineProps({
+    willScroll: {
+        type: Boolean,
+        default: () => true,
+    },
     isMiniView: {
         type: Boolean,
         default: () => false,
+    },
+    subscriptionCalendarId: {
+        type: String,
+        default: () => '',
     },
     preLoadedContent: {
         type: [Array, Object],
@@ -115,5 +135,9 @@ const content = ref(props.preLoadedContent ? props.preLoadedContent.data : []);
 
 const data = computed(() => {
     return Array.isArray(props.preLoadedContent) ? props.preLoadedContent : content.value;
+})
+
+const breakToListView = computed( () => {
+    return props.contentTypeOverride === 'challenge' || props.contentTypeOverride === 'workout';
 })
 </script>

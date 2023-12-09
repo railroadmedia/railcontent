@@ -30,9 +30,10 @@
                     tw-max-w-full
                     tw-text-lg
                     tw-rounded-full
-                    tw-py-4
+                    tw-py-2
                     tw-uppercase
                     tw-font-bebas-neue
+                    tw-mb-2
                     tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white
                   ">
                 <i class="fas fa-calendar-plus tw-mr-1"></i>

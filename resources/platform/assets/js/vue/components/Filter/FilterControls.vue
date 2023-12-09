@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-flex-col md:tw-flex-row tw-w-full tw-justify-between tw-mb-5">
+    <div class="tw-flex tw-flex-col md:tw-flex-row tw-w-full tw-justify-between lg:tw-mb-5 tw-px-4 lg:tw-px-0">
         <div class="tw-flex tw-grow tw-relative tw-items-center tw-mb-3 lg:tw-mb-0">
             <!-- Back Button -->
             <template v-if="showBackButton">

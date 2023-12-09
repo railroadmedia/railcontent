@@ -2,14 +2,23 @@
     <!-- 
         - Cards can be mini with the 'isMiniCard' for continue section
         - Cards can be inline with the 'displayInline' prop for the Related Lessons sections
+        - Cards can break to list view in mobile with the 'breakToListView' prop for large catalogs
     -->
     <div v-if="!isMiniCard"
         class="tw-snap-center tw-flex tw-flex-col tw-group"
-        :class="[class_object, displayInline ? 'tw-py-3 tw-w-full' : 'tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 lg:tw-mb-6 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]']">
-        <div class="tw-flex" :class="displayInline ? 'tw-flex-row' : 'tw-flex-col'">
+        :class="[
+            class_object, 
+            displayInline || breakToListView ? 'tw-py-3 tw-w-full' : 'tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 lg:tw-mb-6 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]',
+            { 'tw-py-3 tw-w-full lg:tw-py-0 lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 lg:tw-mb-6 lg:tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]' : breakToListView }
+        ]">
+        <div class="tw-flex" :class="[
+            displayInline || breakToListView ? 'tw-flex-row' : 'tw-flex-col',
+            { 'lg:tw-flex-col' : breakToListView }
+        ]">
             <!-- Thumbnail Section -->
             <a :href="renderLink ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
-                { 'thumbnail-col tw-mr-3': displayInline },
+                { 'tw-w-[142px] tw-mr-3': displayInline || breakToListView },
+                { 'lg:tw-w-full lg:tw-mr-0': breakToListView },
                 item.type === 'song' && displayInline ? 'tw-max-w-[121px]' : '',
                 item.type + '-thumbnail'
             ]">
@@ -26,7 +35,11 @@
                         class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
                         <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail" :alt="mappedData.black_title" />
                     </div>
-
+                    <!-- Workouts Pill -->
+                    <div v-if="item.type === 'challenge' && isReleased"
+                         class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text-white tw-text-[10px] tw-p-1">
+                        {{ item.child_count }} Workouts
+                    </div>
                     <!-- Progress -->
                     <div class="lesson-progress overflow">
                         <span class="progress" :class="`tw-bg-${brand}`" :style="'width:' + progress_percent + '%'"></span>
@@ -34,6 +47,17 @@
                     <div v-if="showTrophy" class="bundle-complete tw-justify-center">
                         <i class="fas fa-trophy"></i>
                     </div>
+                    <!-- CHALLENGE: Not Released -->
+                    <div v-else-if="item.type === 'challenge' && !isReleased && hasProduct"
+                         class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text-white tw-text-[10px] tw-p-1">
+                        Upcoming
+                    </div>
+                    <!-- CHALLENGE: Not Enrolled -->
+                    <div v-else-if="item.type === 'challenge' && !isReleased && !hasProduct"
+                         class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text-white tw-text-[10px] tw-p-1">
+                        Enroll Now
+                    </div>
+                    <!-- EVERYTHING ELSE -->
                     <div v-else
                         class="tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center">
                         <i class="fas" :class="thumbnailIcon"></i>
@@ -43,43 +67,61 @@
                     </div>
                 </div>
             </a>
-
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
-                <a :href="renderLink ? item.url : null"
-                    class="card-info tw-flex tw-flex-auto tw-flex-col tw-px-2 tw-rounded-lg"
-                    :class="displayInline ? 'tw-justify-center tw-pt-1' : 'tw-pt-2'">
-
-                    <!-- Video Title -->
-                    <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
-                        :class="{ 'tw-text-center': isGuitareoChordAndScale }">
-                        {{ mappedData.black_title }}
-                    </h4>
-                    <!-- Video Description -->
-                    <p v-if="mappedData.show_description"
-                        class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2"
-                        v-html="mappedData.description.replace(/<[^>]+>/g, '')"></p>
-                    <!-- Content -->
-                    <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] tw-mb-0.5"
-                        :class="{ 'tw-text-center': isGuitareoChordAndScale }">
-                        <div v-if="contentCreator && contentCreator !== ''" class="tw-mb-0.5">
-                            <span> {{ contentCreator }} </span>
+                <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block">
+                    <a :href="renderLink ? item.url : null"
+                        class="card-info tw-flex tw-flex-auto tw-flex-col tw-px-2 tw-rounded-lg"
+                        :class="[displayInline || breakToListView ? 'tw-justify-center tw-pt-1' : 'tw-pt-2', { 'lg:tw-pt-2 lg:tw-justify-start' : breakToListView }]">
+                        <div class="tw-flex tw-flex-col">
+                            <!-- Video Title -->
+                            <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
+                                :class="{ 'tw-text-center': isGuitareoChordAndScale }">
+                                {{ mappedData.black_title }}
+                            </h4>
+                            <!-- Video Description -->
+                            <p v-if="mappedData.show_description"
+                                class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2"
+                            >{{  mappedData.description.replace(/<[^>]+>/g, '') }}</p>
+                            <!-- Content -->
+                            <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] tw-mb-0.5"
+                                :class="[{ 'tw-text-center': isGuitareoChordAndScale },{ 'tw-order-first lg:tw-order-last' : breakToListView }]">
+                                <div v-if="contentCreator && contentCreator !== ''" class="tw-mb-0.5">
+                                    <span>{{ contentCreator }}</span>
+                                </div>
+                            </h6>
                         </div>
-                    </h6>
-                    <p class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
-                        <!-- Difficulty Label -->
-                        <span v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
-                            <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
-                                textCase="capitalize" />
-                                <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
-                        </span>
-                        <span class="tw-mb-0.5">
-                            {{ contentTypeString }}
-                        </span>
-                    </p>
-                </a>
-                <!-- Add to Playlist -->
-                <div class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
+                        <p class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
+                            <!-- Difficulty Label -->
+                            <span v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
+                                <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
+                                    textCase="capitalize" />
+                                    <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
+                            </span>
+                            <span class="tw-mb-0.5">
+                                {{ contentTypeString }}
+                            </span>
+                        </p>
+                    </a>
+                    <!-- CHALLENGE CTA's -->
+                    <template v-if="contentType === 'challenge'">
+                        <a v-if="!isReleased && !hasProduct" 
+                            :href="registrationUrl" 
+                            class="tw-mt-1 tw-inline-flex tw-items-center tw-justify-center tw-uppercase tw-text-sm tw-px-4 tw-leading-none tw-font-bebas-neue tw-h-[36px] tw-rounded-2xl dark:tw-bg-[#0E2031] dark:tw-text-[#F1F1F1] tw-text-[#00101D]"
+                        >
+                            Enroll Now
+                        </a>
+                        <button v-if="!isReleased && hasProduct" data-open-modal="notifyModal" class="tw-mt-1 tw-inline-flex tw-items-center tw-justify-center tw-uppercase tw-text-sm tw-px-4 tw-leading-none tw-font-bebas-neue tw-h-[36px] tw-rounded-2xl dark:tw-bg-[#0E2031] dark:tw-text-[#F1F1F1] tw-text-[#00101D]">
+                            <musora-icon icon-name="bell" class="tw-w-5 tw-h-5 tw-mr-1"/>
+                            Notify Me 
+                        </button>
+                    </template>
+                </div>
+                <!-- 
+                    Add to Playlist 
+                    Don't show if the user has not enrolled in a challenge (does not own Product)
+                -->
+                <div v-if="item.type !== 'challenge' || hasProduct" class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
                     <div class="tw-relative" v-click-outside="() => { state.dropdownOpen = false }">
                         <button :id="`${item.id}-action-btn-big`" v-if="item.type !== 'pack-bundle' && showMyListAction"
                             class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
@@ -110,7 +152,7 @@
         <a :href="renderLink ? item.url : null"
             class="tw-flex-none tw-h-[70px] tw-w-[121px] tw-relative tw-overflow-hidden tw-rounded-[5px]">
             <div
-                class="tw-rounded-[5px] tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[70px] tw-w-[121px] tw-justify-center tw-items-center tw-text-white tw-text-center tw-z-[100]">
+                class="tw-rounded-[5px] tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[70px] tw-w-[121px] tw-justify-center tw-items-center tw-text-white tw-text-center tw-z-[50]">
                 <i class="fas" :class="thumbnailIcon"></i>
                 <p v-if="!isReleased" class="tw-text-sm text-white font-bold">
                     {{ releaseDate }}
@@ -168,6 +210,7 @@ import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
 import { snakeToCapitalized } from "../../utils";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '../../../stores/user';
+import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
 
 //Pinia Stores
 const userStore = useUserStore();
@@ -192,6 +235,10 @@ const props = defineProps({
         default: ''
     },
     isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    breakToListView: {
         type: Boolean,
         default: false
     },
@@ -282,6 +329,14 @@ const isSongContent = computed(() => {
     return contentModel.value.post.type === 'song'
 })
 
+const hasProduct = computed(() => {
+    return true; //for now..
+})
+
+const registrationUrl = computed(() => {
+    return item.data.find(field => field.key === 'registration_url')?.value || '';
+})
+
 const contentCreator = computed(() => {
     if (isSongContent.value) {
         return contentModel.value.post.fields.find(field => field.key === 'artist')?.value || ''
@@ -318,9 +373,7 @@ const getWrapperClass = computed(() => {
 });
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);
-
 const showTrophy = computed(() => props.item.type === 'pack-bundle' && props.item.completed === true);
-
 const isGuitareoChordAndScale = computed(() => brand === 'guitareo' && props.item.type === 'chord-and-scale');
 
 const closeDropdownOnScroll = () => {
@@ -328,6 +381,10 @@ const closeDropdownOnScroll = () => {
         state.dropdownOpen = false;
     }
 };
+
+const openNotifyModal = () => {
+    console.log('TODO')
+}
 
 onMounted(() => {
     const contentContainer = document.getElementById('content-container');
