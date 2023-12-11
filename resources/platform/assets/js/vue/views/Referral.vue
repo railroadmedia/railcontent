@@ -201,7 +201,7 @@ const sendPass = () => {
 
     let data = {
         _token: token,
-        brand,
+        brand: brand.value,
         email: inviteeEmail.value,
     };
 
