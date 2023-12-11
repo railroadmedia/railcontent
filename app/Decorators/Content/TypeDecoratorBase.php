@@ -2,6 +2,9 @@
 
 namespace App\Decorators\Content;
 
+use App\Modules\Content\Services\CohortService;
+use App\Modules\Content\Services\ContentPermissionsService;
+use App\Modules\Ecommerce\Services\ProductService;
 use Google\Service\Script\Content;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
@@ -14,6 +17,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 
 abstract class TypeDecoratorBase extends ModeDecoratorBase
 {
@@ -27,6 +31,10 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
     protected UserPermissionsRepository $userPermissionsRepository;
     protected UserPlaylistContentRepository $userPlaylistContentRepository;
     protected ResourceDecorator $resourceDecorator;
+    protected ContentPermissionsService $contentPermissionsService;
+    protected ProductService $productService;
+    protected CohortService $cohortService;
+    protected UserAccessPermissionsService $userAccessPermissionsService;
 
     public function __construct(
         ContentService $contentService,
@@ -38,7 +46,11 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
         ContentPermissionRepository $contentPermissionRepository,
         UserPermissionsRepository $userPermissionsRepository,
         UserPlaylistContentRepository $userPlaylistContentRepository,
-        ResourceDecorator $resourceDecorator
+        ResourceDecorator $resourceDecorator,
+        ContentPermissionsService $contentPermissionsService,
+        ProductService $productService,
+        CohortService $cohortService,
+        UserAccessPermissionsService $userAccessPermissionsService
     ) {
         $this->contentService = $contentService;
         $this->userContentProgressService = $userContentProgressService;
@@ -50,6 +62,10 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
         $this->userPermissionsRepository = $userPermissionsRepository;
         $this->userPlaylistContentRepository = $userPlaylistContentRepository;
         $this->resourceDecorator = $resourceDecorator;
+        $this->contentPermissionsService = $contentPermissionsService;
+        $this->productService = $productService;
+        $this->cohortService = $cohortService;
+        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
     /**
