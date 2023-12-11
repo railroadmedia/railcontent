@@ -7,6 +7,7 @@ use App\Modules\Content\database\factories\ContentFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 /**
  * App\Modules\Content\Models\Content
@@ -45,6 +46,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $length_in_seconds
  * @property Carbon $live_event_start_time
  * @property Carbon $live_event_end_time
+ * @property Carbon $enrollment_start_time
+ * @property Carbon $enrollment_end_time
+ * @property string $registration_url
  * @property string $live_event_youtube_id
  * @property string $live_stream_feed_type
  * @property string $low_soundslice_slug
@@ -82,6 +86,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $published_on
  * @property Carbon $created_on
  * @property Carbon $archived_on
+ * @property integer $instructor
  * @method static ContentBuilder query()
  * @property int|null $instrumentless
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Modules\Content\Models\ContentData[] $data
@@ -175,6 +180,21 @@ class Content extends Model
     protected $table = 'railcontent_content';
     public $timestamps = false;
 
+    private $fieldTypes = [
+        'topic' => 'string',
+        'style' => 'string',
+        'focus' => 'string',
+        'difficulty' => 'string',
+        'title' => 'string',
+        'instructor' => 'content_id',
+        'video' => 'content_id',
+        'xp' => 'integer',
+        'registration_url' => 'string',
+        'enrollment_start_time' => 'datetime',
+        'enrollment_end_time' => 'datetime',
+        'soundslice_slug' => 'string',
+    ];
+
     public function newEloquentBuilder($query): ContentBuilder
     {
         return new ContentBuilder($query);
@@ -194,4 +214,230 @@ class Content extends Model
     {
         return ContentFactory::new();
     }
+
+    private function setField(string $key, $value): void
+    {
+        /** @var ContentField $field */
+        $field = $this->fields->where('key', '=', $key)->first();
+        if (!$value) {
+            if ($field) {
+                Log::debug("Content Field ($this->id) $key $field->value deleted");
+                $field->delete();
+            }
+            return;
+        }
+        if (!$field) {
+            $field = $this->getNewContentField($key);
+            Log::debug("Content Field ($this->id) $key inserted $value");
+            $field->value = $value;
+            $field->save();
+            return;
+        }
+        if ($field->value != $value) {
+            Log::debug("Content Field ($this->id) $key updated from '$field->value' to '$value'");
+            $field->value = $value;
+            $field->save();
+        }
+    }
+
+    public function setFieldArray(string $key, array $values): void
+    {
+        $fields = $this->fields->where('key', '=', $key)->collect();
+        $position = 1;
+        foreach ($values as $value) {
+            if (!$value) {
+                continue;
+            }
+            $field = $fields->where('value', '=', $value)->first();
+            if (!$field) {
+                $field = $this->getNewContentField($key);
+                Log::debug("Content Field ($this->id) $key inserted '$value'");
+                $field->value = $value;
+            }
+            $field->position = $position;
+            $field->save();
+            $position++;
+        }
+
+        /** @var ContentField $field */
+        foreach ($fields as $field) {
+            if (!in_array($field->value, $values)) {
+                Log::debug("Content Field ($this->id) $key $field->value deleted");
+                $field->delete();
+            }
+        }
+    }
+
+    public function getNewContentField(string $key): ContentField
+    {
+        $field = new ContentField();
+        $field->content_id = $this->id;
+        $field->key = $key;
+        $field->type = $this->fieldTypes[$key];
+        $field->position = 1;
+        return $field;
+    }
+
+    private function setData(string $key, $value)
+    {
+        /** @var ContentData $data */
+        $data = $this->data->where('key', '=', $key)->first();
+        if (!$value) {
+            if ($data) {
+                Log::debug("Content Data ($this->id) $key $data->value deleted");
+                $data->delete();
+            }
+            return;
+        }
+        if (!$data) {
+            $data = $this->getNewContentData($key);
+            Log::debug("Content Data ($this->id) $key inserted $value");
+            $data->value = $value;
+            $data->save();
+            return;
+        }
+        if ($data->value != $value) {
+            Log::debug("Content Data ($this->id) $key updated from '$data->value' to '$value'");
+            $data->value = $value;
+            $data->save();
+        }
+    }
+
+
+    public function getNewContentData(string $key): ContentData
+    {
+        $content = new ContentData();
+        $content->content_id = $this->id;
+        $content->key = $key;
+        $content->position = 1;
+        return $content;
+    }
+
+    public function setTopic($value)
+    {
+        $values = array_map('trim', explode(',', $value));
+        foreach ($values as $key => $value) {
+            if ($value) {
+                $topic = ContentTopic::query()->where('content_id', '=', $this->id)->where('topic', $value)->first();
+                if(!$topic) {
+                    $topic = new ContentTopic();
+                    $topic->content_id = $this->id;
+                    $topic->topic = $value;
+                    $topic->position = $key + 1;
+                    $topic->save();
+                }
+            }
+        }
+      //  $this->setFieldArray('topic', $values);
+    }
+
+
+    public function setTitle($value)
+    {
+        $this->setField('title', $value);
+        $this->title = $value;
+    }
+
+    public function setDifficulty($value)
+    {
+        $this->setField('difficulty', $value);
+        $this->difficulty = $value;
+    }
+
+    public function setXP($value)
+    {
+        if($value) {
+            $this->setField('xp', $value);
+            $this->xp = $value;
+        }
+    }
+
+    public function setRegistrationUrl($value)
+    {
+        if($value) {
+            $this->setField('registration_url', $value);
+//            $this->registration_url = $value;
+        }
+    }
+
+    public function setEnrollmentStartDate($value)
+    {
+        if($value) {
+            $this->setField('enrollment_start_time', $value);
+//            $this->enrollment_start_time = $value;
+        }
+    }
+
+    public function setEnrollmentEndDate($value)
+    {
+        if($value) {
+            $this->setField('enrollment_end_time', $value);
+        }
+    }
+
+    public function setInstructor($value)
+    {
+        $values = array_map('trim', explode(',', $value));
+        foreach ($values as $key => $value) {
+            if ($value) {
+                $this->setField('instructor', $value);
+            }
+        }
+    }
+
+    public function setDescription($value)
+    {
+        if($value) {
+            $this->setData('description', $value);
+        }
+    }
+
+    public function setOriginalThumb($value)
+    {
+        $this->setData('original_thumbnail_url', $value);
+    }
+
+    public function setThumb($value)
+    {
+        $this->setData('thumbnail_url', $value);
+    }
+
+    public function setLogo($value)
+    {
+        $this->setData('logo_image_url', $value);
+    }
+
+    public function setHeaderImage($value)
+    {
+        $this->setData('header_image_url', $value);
+    }
+
+    public function setSoundsliceSlug($value)
+    {
+        $this->setField('soundslice_slug', $value);
+//        $this->soundslice_slug = $value;
+    }
+
+    public function setVideo($value)
+    {
+        $this->setField('video', $value);
+        $this->video = $value;
+    }
+
+    public function setParentId($value)
+    {
+        $hierarhy = ContentHierarchy::query()->where('parent_id', '=', $value)->where('child_id', '=', $this->id)->get();
+
+        if($hierarhy->isEmpty()){
+            $hierarhy = new ContentHierarchy();
+            $hierarhy->parent_id = $value;
+            $hierarhy->child_id = $this->id;
+            $hierarhy->child_position = 1;
+            $hierarhy->created_on = Carbon::now()->toDateTimeString();
+            $hierarhy->save();
+        }
+
+//        $this->parent_id = $value;
+    }
+
 }
