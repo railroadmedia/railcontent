@@ -44,6 +44,10 @@
             type: Array,
             default: () => [],
         },
+        includedTypes: {
+            type: Array,
+            default: () => [],
+        },
         includeFutureScheduledContentOnly: {
             type: Boolean,
             default: () => false,
