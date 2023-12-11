@@ -64,6 +64,7 @@ return [
     'recharge' => [
         'access_token' => env('RECHARGE_ACCESS_TOKEN', ''),
         'storefront_access_token' => ENV('RECHARGE_STOREFRONT_ACCESS_TOKEN'),
+        'webhook_secret' => env('RECHARGE_WEBHOOK_SECRET'),
     ],
 
     /*

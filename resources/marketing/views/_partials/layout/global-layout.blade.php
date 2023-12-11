@@ -15,7 +15,20 @@
         <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
 
         @yield('head-includes')
+        <script type="module">
+            try {
+                const response = await fetch("https://shopify-gtm-suite.getelevar.com/configs/b2934fc67ad5f4d4708f129db537a4679accfc78/config.json");
+                const config = await response.json();
+                const scriptUrl = config.script_src_custom_pages;
 
+                if (scriptUrl) {
+                    const { handler } = await import(scriptUrl);
+                    await handler(config);
+                }
+            } catch (error) {
+                console.error("Elevar Error:", error);
+            }
+        </script>
         {!! \App\Analytics\Tracker::trackPageView() !!}
 
         {!! \App\Analytics\Tracker::headBottom() !!}

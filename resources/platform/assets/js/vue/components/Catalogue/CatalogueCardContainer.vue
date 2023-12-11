@@ -45,8 +45,8 @@
             modal-id="notifyModal"
             :subscription-calendar-id="subscriptionCalendarId" 
             :theme-color="brand" 
-            toggleSubscribe="toggleSubscribe">
-        </AddEventModal>
+        />
+
     </div>
 </template>
 <script setup>
@@ -133,6 +133,7 @@ const { brand } = storeToRefs(userStore);
 const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, content: props.preLoadedContent.data });
 const content = ref(props.preLoadedContent ? props.preLoadedContent.data : []);
 
+//Computed Props
 const data = computed(() => {
     return Array.isArray(props.preLoadedContent) ? props.preLoadedContent : content.value;
 })
@@ -140,4 +141,5 @@ const data = computed(() => {
 const breakToListView = computed( () => {
     return props.contentTypeOverride === 'challenge' || props.contentTypeOverride === 'workout';
 })
+
 </script>
