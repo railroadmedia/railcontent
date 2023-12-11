@@ -98,13 +98,14 @@ class SubscriptionService
             $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate(
                 includeBuffer: false,
                 includeFixedTimes: true
-            )->startOfDay();
+            )?->startOfDay() ?? null;
             $diff = abs(
                 $mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay()->diffInDays(
                     $membershipExpirationDate
                 )
             );
-            if ($diff > 1
+            if ($membershipExpirationDate
+                && $diff > 1
                 && $membershipExpirationDate > Carbon::today()
                 //never move recharge dates backwards could be a paused subscription
                 && $membershipExpirationDate > $mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay()
