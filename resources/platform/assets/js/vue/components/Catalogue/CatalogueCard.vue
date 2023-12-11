@@ -35,11 +35,13 @@
                         class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
                         <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail" :alt="mappedData.black_title" />
                     </div>
-                    <!-- Workouts Pill -->
-                    <div v-if="item.type === 'challenge'"
+
+                    <!-- Thumbnail Badge -->
+                    <div v-if="thumbnailBadge"
                          class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text-white tw-text-[10px] tw-p-1">
-                         {{ workoutsPillText }}  
+                         {{ thumbnailBadge }}  
                     </div>
+
                     <!-- Progress -->
                     <div class="lesson-progress overflow">
                         <span class="progress" :class="`tw-bg-${brand}`" :style="'width:' + progress_percent + '%'"></span>
@@ -332,10 +334,13 @@ const enrollmentOpen = computed(() => {
     return contentModel.value.post.challenge_state === 'enrollment';
 })
 
-const workoutsPillText = computed(() => {
-    if(enrollmentOpen.value && !contentModel.value.post.has_product) return 'Enroll Now';
-    if(registrationUrl.value.length && !isReleased) return 'Upcomming';
-    return `${ props.item.child_count } Workouts`;
+const thumbnailBadge = computed(() => {
+    if(props.item.type === 'challenge') {
+        if(enrollmentOpen.value && !contentModel.value.post.has_product) return 'Enroll Now';
+        if(registrationUrl.value.length && !isReleased) return 'Upcomming';
+        return `${ props.item.child_count } Workouts`;
+    }
+    return false;
 })
 
 const upcomingChallenge = computed(() => {
