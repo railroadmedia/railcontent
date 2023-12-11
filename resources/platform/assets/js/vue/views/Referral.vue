@@ -121,13 +121,14 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import {computed, inject, ref} from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "../../stores/user";
 import ModalRenderer from "../components/Modal/ModalRenderer";
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
+const token = inject('csrf_token');
 
 const props = defineProps({
     userReferralLink: {
@@ -195,7 +196,6 @@ const copyLink = () => {
 }
 
 const sendPass = () => {
-    let token = document.getElementById('_token').value;
     let brand = document.getElementById('brand').value;
     let email = document.getElementById('email');
     const emailFormat = /^\w+([\.-^+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
