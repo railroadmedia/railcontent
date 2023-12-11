@@ -6,7 +6,7 @@
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/og-image.jpg" style="display: none;">
     <meta property="og:title" content="New Drummers Start Here | Drumeo">
     <meta property="og:description" content="The ultimate guide to getting started on the drums and playing the songs you love.">
-    <meta property="og:url" content="https://www.drumeo.com/new-drummers/">
+    <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
 
