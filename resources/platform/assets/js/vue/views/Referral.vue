@@ -17,7 +17,7 @@
                 Share the gift of {{ lessons }} this holiday season.
             </p>
             <p class="tw-mt-2">
-                Every referral you make <strong>from December 11 to 23, 2023</strong><br class="tw-hidden sm:tw-inline" /> instantly gives you a chance to win one of 12 $100 Musora gift cards.
+                Every referral you make <strong>from December 11 to 22, 2023</strong><br class="tw-hidden sm:tw-inline" /> instantly gives you a chance to win one of 12 $100 Musora gift cards.
             </p>
             <p class="tw-mt-6 tw-mb-4">
                 <a href="#terms" class="tw-underline tw-italic tw-text-black dark:tw-text-white">See Contest Details - Terms & Conditions*</a>
@@ -61,7 +61,7 @@
                     <strong>You can refer them to {{ !isDrumeo ? 'Drumeo, ' : '' }}{{ !isPianote ? 'Pianote, ' : '' }}{{ isSingeo ? 'and ' : '' }}{{ !isGuitareo ? 'Guitareo' : '' }}{{ !isSingeo && !isGuitareo ? ', ' : ''}}{{ !isSingeo ? 'and Singeo' : '' }} too.</strong>
                 </h3>
                 <div class="tw-flex tw-items-center tw-justify-center md:tw-justify-start tw-my-5 tw-text-sm md:tw-text-base tw-max-w-[410px] md:tw-max-w-none tw-mx-auto">
-                    <i :class="`fa-light fa-calendar-days tw-text-${brand} tw-text-2xl tw-mr-4`"></i> <span>13 Days of Giving Referral Contest - <b>December 11 to 23, 2023</b></span>
+                    <i :class="`fa-light fa-calendar-days tw-text-${brand} tw-text-2xl tw-mr-4`"></i> <span>12 Days of Giving Referral Contest - <b>December 11 to 22, 2023</b></span>
                 </div>
                 <div class="tw-flex tw-items-center tw-justify-center md:tw-justify-start tw-my-5 tw-text-sm md:tw-text-base">
                     <i :class="`fa-regular fa-gift tw-text-${brand} tw-text-2xl tw-mr-4`"></i> <span>Refer & Enter to <b>Win one of 12 $100 Musora Gift Cards.</b></span>
@@ -85,7 +85,7 @@
             <p>
                 <strong>Eligibility:</strong> This contest is open to Musora students with an active, paid membership and newly referred students, 18 years or older at the time of entry. Void where prohibited by law. Employees, officers, and directors of the sponsor and their immediate family members and/or those living in the same household are not eligible to participate in the contest.
                 <br><br>
-                <strong>How to Enter:</strong> Participants automatically receive an entry to the contest when a referred friend signs up for a membership with a 30-day trial from December 11 to 23, 2023. Participants may collect up to (5) contest entries for {{ brandName }} based on each referral sign-up during the contest period; for a total of (20) contest entries across all Musora brands. New students who sign up for {{ brandName }} will gain one contest entry. No purchase is necessary to enter or win.
+                <strong>How to Enter:</strong> Participants automatically receive an entry to the contest when a referred friend signs up for a membership with a 30-day trial from December 11 to 22, 2023. Participants may collect up to (5) contest entries for {{ brandName }} based on each referral sign-up during the contest period; for a total of (20) contest entries across all Musora brands. New students who sign up for {{ brandName }} will gain one contest entry. No purchase is necessary to enter or win.
                 <br><br>
                 <strong>Prize:</strong> Twelve students will win a $100 Musora gift card redeemable inside the Drumeo, Pianote, Guitareo, and Singeo shops. The prizes are non-transferable and cannot be exchanged for cash.
                 <br><br>
@@ -121,13 +121,14 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import {computed, inject, ref} from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "../../stores/user";
 import ModalRenderer from "../components/Modal/ModalRenderer";
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
+const token = inject('csrf_token');
 
 const props = defineProps({
     userReferralLink: {
@@ -195,7 +196,6 @@ const copyLink = () => {
 }
 
 const sendPass = () => {
-    let token = document.getElementById('_token').value;
     let brand = document.getElementById('brand').value;
     let email = document.getElementById('email');
     const emailFormat = /^\w+([\.-^+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
