@@ -94,7 +94,7 @@
             </div>
             <div class="sm:pr-10 md:pr-20">
                 <h3 class="leading-tight mb-4">
-                    <strong>The 12 Days of Giving <br />contest is on right now!</strong>
+                    <strong>The 13 Days of Giving <br />contest is on right now!</strong>
                 </h3>
                 <p>
                     Start your 30-day trial today and you’ll enter to win a $100 gift card to {{ ucfirst($brand) }}. This referral contest closes on December 23, 2023. <a class="italic text-white underline" href="#terms">See terms & conditions below.</a>
