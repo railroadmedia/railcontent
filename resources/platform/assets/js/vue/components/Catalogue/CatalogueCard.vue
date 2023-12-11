@@ -392,10 +392,6 @@ const closeDropdownOnScroll = () => {
     }
 };
 
-const openNotifyModal = () => {
-    console.log('TODO')
-}
-
 onMounted(() => {
     const contentContainer = document.getElementById('content-container');
     contentContainer.addEventListener('scroll', closeDropdownOnScroll);
