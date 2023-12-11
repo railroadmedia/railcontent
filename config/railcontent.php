@@ -1333,7 +1333,8 @@ return [
         'unit-part',
         'boot-camps',
         'podcasts',
-        'chord-and-scale'
+        'chord-and-scale',
+        'workout','challenge-part'
     ],
     'hiddenContentTypes' => [
         'ha-oemurd-pmac',
@@ -1797,7 +1798,7 @@ return [
         'singeo' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/06b2a24d-60ba-4f6d-9e8d-3a467b2d0b00/public'
     ],
     'content_multiple_level_content_depth_playlist_allowed' => [
-        'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
+        'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial','challenge'
     ],
     'playlist_items_limit' => 300,
     'search_in_playlist_items_name' => true,
