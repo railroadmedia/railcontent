@@ -55,17 +55,14 @@ class SyncOrdersToShopifyDispatcher extends Command
             })
             ->where(function (Builder $q) use ($lastSyncAt, $fresh) {
                 $q->when(!$fresh, function (Builder $q) use ($lastSyncAt) {
-                    return $q->whereNull("shopify_id")
-                        ->orWhereDate("updated_at", ">", $lastSyncAt)
+                    return $q->whereDate("updated_at", ">", $lastSyncAt)
 
                         // we also need to check if any of the order's order items or order item fulfillments need to be synced
                         ->orWhereHas("orderItems", function (Builder $oiq) use ($lastSyncAt) {
-                            $oiq->whereNull("shopify_id")
-                                ->orWhereDate("updated_at", ">", $lastSyncAt);
+                            $oiq->whereDate("updated_at", ">", $lastSyncAt);
                         })
                         ->orWhereHas("orderItemFullfillments", function (Builder $oifq) use ($lastSyncAt) {
-                            $oifq->whereNull("shopify_id")
-                                ->orWhereDate("updated_at", ">", $lastSyncAt);
+                            $oifq->whereDate("updated_at", ">", $lastSyncAt);
                         });
                 });
             })
