@@ -152,7 +152,7 @@
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10 bg-cover bg-center" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/kit/header-bg.jpg');"></div>
 {{--        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to bottom, transparent, rgba(0,79,153,0.6));"></div>--}}
-        <video class="object-cover w-full relative z-0" style="height: 750px;" type="video/mp4" autoplay loop playsinline muted
+        <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
             src="https://d21q7xesnoiieh.cloudfront.net/marketing/drumeo/shop/stickbag/header-vid.mp4"></video>
     </header>
 
@@ -557,7 +557,7 @@
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h2 class="leading-tight"><strong>A double guarantee for peace of mind. </strong></h2>
             <p class="leading-tight mt-2 mb-5 sm:mb-7">Your E-Kit includes a 90-day purchase guarantee from Drumeo + a 1-year warranty from Alesis on all parts. </p>
-            <img class="h-36" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/guarantee.png">
+            <img class="h-16 sm:h-36" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/guarantee.png">
         </div>
     </section>
 
@@ -592,14 +592,26 @@
         </div>
     </section>
 
-    <section class="text-center py-10" style="background: #00101D;">
+
+    <section class="px-4 sm:px-6 py-10" style="background: #f0f6fc;">
+        <div class="container max-w-5xl mx-auto relative z-50">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <h5 class="leading-normal"><strong>Free shipping in North America</strong><br>
+                Your Drumeo E-Kit will ship for free anywhere in North America.</h5>
+
+                <h5 class="leading-normal"><strong>Discounted shipping outside of North America</strong><br>
+                If you live outside of North America, you qualify for a $100 shipping discount. You’ll see that applied upon checkout.</h5>
+            </div>
+        </div>
+    </section>
+    <section class="text-center py-10 text-white" style="background: #00101D;">
         <div class="container mx-auto relative z-50">
-            <div class="inline-block w-full px-3 md:px-4 mb-5 text-light-navy">
+            <div class="inline-block w-full px-3 md:px-4 mb-5 opacity-60">
                 <p>Call us toll-free at
                     <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
                     <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
             </div>
-            <div class="inline-block w-full px-3 md:px-4 text-light-navy" style="margin-top: 0;">
+            <div class="inline-block w-full px-3 md:px-4 opacity-60" style="margin-top: 0;">
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
