@@ -124,7 +124,7 @@
         "noBreadcrumb" => true
     ])
 
-    <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
+    <header class="text-white relative overflow-hidden z-10" style="background-color:#3b5875;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <h1 class="leading-tight mb-3"><strong>Everything you need to<br class="hidden sm:inline"> start playing the drums.</strong></h1>
@@ -168,7 +168,7 @@
     </section>
 
     <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative text-white" style="background:linear-gradient(to bottom, #01050d 66%, #021021);">
-        <div class="container mx-auto z-10 relative max-w-5xl pb-16">
+        <div class="container mx-auto z-10 relative max-w-5xl">
             <h2 class="leading-tight mb-7 sm:mb-10"><strong>Pro details on a<br class="sm:hidden">  beginner budget.</strong></h2>
 
             <div class="mb-7 sm:mb-10"
