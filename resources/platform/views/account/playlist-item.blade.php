@@ -40,6 +40,10 @@
                     $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", 'courses');
                     $contentBreadCrumb->firstLevelTitle = 'Course';
                 }
+                else if(str_contains($lessonContent['parent']->fetch('type'),'challenge-part')){
+                    $contentBreadCrumb->firstLevelUrl = url()->route("platform.workouts.challenges");
+                    $contentBreadCrumb->firstLevelTitle = 'Challenges';
+                }
                 else if(str_contains($lessonContent['parent']->fetch('type'),'workouts')){
                     $contentBreadCrumb->firstLevelUrl = url()->route("platform.workouts");
                     $contentBreadCrumb->firstLevelTitle = 'Workouts';
