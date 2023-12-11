@@ -36,9 +36,9 @@
                         <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail" :alt="mappedData.black_title" />
                     </div>
                     <!-- Workouts Pill -->
-                    <div v-if="item.type === 'challenge' && isReleased"
+                    <div v-if="item.type === 'challenge'"
                          class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text-white tw-text-[10px] tw-p-1">
-                        {{ item.child_count }} Workouts
+                         {{ workoutsPillText }}  
                     </div>
                     <!-- Progress -->
                     <div class="lesson-progress overflow">
@@ -47,16 +47,7 @@
                     <div v-if="showTrophy" class="bundle-complete tw-justify-center">
                         <i class="fas fa-trophy"></i>
                     </div>
-                    <!-- CHALLENGE: Not Released -->
-                    <div v-else-if="item.type === 'challenge' && !isReleased && hasProduct"
-                         class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text-white tw-text-[10px] tw-p-1">
-                        Upcoming
-                    </div>
-                    <!-- CHALLENGE: Not Enrolled -->
-                    <div v-else-if="item.type === 'challenge' && !isReleased && !hasProduct"
-                         class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text-white tw-text-[10px] tw-p-1">
-                        Enroll Now
-                    </div>
+
                     <!-- EVERYTHING ELSE -->
                     <div v-else
                         class="tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center">
@@ -105,7 +96,7 @@
                     </a>
                     <!-- CHALLENGE CTA's -->
                     <template v-if="contentType === 'challenge'">
-                        <a v-if="enrollmentOpen"
+                        <a v-if="enrollmentOpen && !hasProduct"
                             :href="registrationUrl"
                             class="tw-mt-1 tw-inline-flex tw-items-center tw-justify-center tw-uppercase tw-text-sm tw-px-4 tw-leading-none tw-font-bebas-neue tw-h-[36px] tw-rounded-2xl dark:tw-bg-[#0E2031] dark:tw-text-[#F1F1F1] tw-text-[#00101D]"
                         >
@@ -121,7 +112,7 @@
                     Add to Playlist
                     Don't show if the user has not enrolled in a challenge (does not own Product)
                 -->
-                <div v-if="item.type !== 'challenge' || hasProduct" class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
+                <div v-if="!enrollmentOpen || hasProduct" class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
                     <div class="tw-relative" v-click-outside="() => { state.dropdownOpen = false }">
                         <button :id="`${item.id}-action-btn-big`" v-if="item.type !== 'pack-bundle' && showMyListAction"
                             class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
@@ -330,7 +321,7 @@ const isSongContent = computed(() => {
 })
 
 const hasProduct = computed(() => {
-    return contentModel.value.post.has_product; //for now..
+    return contentModel.value.post.has_product;
 })
 
 const registrationUrl = computed(() => {
@@ -339,6 +330,12 @@ const registrationUrl = computed(() => {
 
 const enrollmentOpen = computed(() => {
     return contentModel.value.post.challenge_state === 'enrollment';
+})
+
+const workoutsPillText = computed(() => {
+    if(enrollmentOpen.value && !contentModel.value.post.has_product) return 'Enroll Now';
+    if(registrationUrl.value.length && !isReleased) return 'Upcomming';
+    return `${ props.item.child_count } Workouts`;
 })
 
 const upcomingChallenge = computed(() => {

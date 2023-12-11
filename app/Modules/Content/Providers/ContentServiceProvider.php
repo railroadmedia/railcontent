@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Providers;
 
+use App\Modules\Content\Console\Commands\ChallengesImport2023;
 use App\Modules\Content\Console\Commands\CoachBulkDataUpdate;
 use App\Modules\Content\Console\Commands\CoachBulkImageUpdate;
 use App\Modules\Content\Console\Commands\FixProgressOnUnpublishedContent;
@@ -38,7 +39,8 @@ class ContentServiceProvider extends ServiceProvider
                             MigrateMissingPlaylistsItems::class,
                             SongDuration::class,
                             ImportSongsDuration::class,
-                            RecalculatePlaylistDuration::class
+                            RecalculatePlaylistDuration::class,
+            ChallengesImport2023::class
                         ]);
     }
 }
