@@ -91,7 +91,7 @@
                     <RelatedCard v-for=" relatedLesson  in  formattedRelatedLessons " :key="relatedLesson.id"
                         :thumbnail="relatedLesson.thumbnail" :instructor="relatedLesson.instructor"
                         :title="relatedLesson.title" :difficulty="relatedLesson.difficulty"
-                        :content-type="relatedLesson.contentType" />
+                        :content-type="relatedLesson.contentType" :id="relatedLesson.id" :url="relatedLesson.url" />
                 </div>
                 </div>
                 <div class="tw-ml-[21px] tw-transition-all tw-overflow-hidden" v-if="isSidebarOpen">
@@ -170,9 +170,10 @@ const props = defineProps({
 const isSidebarOpen = ref(false);
 
 const formattedRelatedLessons = computed(() => {
-    return props.relatedLessons.data.map(({ compiled_view_data, difficulty_string, instructors }) => {
-        const { id, title, type, thumbnail_url } = JSON.parse(compiled_view_data);
-        const instructor = instructors[0]?.name || 'INSTRUCTOR';
+    return props.relatedLessons.data.map((lesson) => {
+        const { compiled_view_data, difficulty_string, instructors } = lesson;
+        const { id, title, type, thumbnail_url, url } = JSON.parse(compiled_view_data);
+        const instructor = instructors[0] || 'INSTRUCTOR';
 
         return {
             id,
@@ -180,7 +181,9 @@ const formattedRelatedLessons = computed(() => {
             instructor,
             title,
             difficulty: difficulty_string,
-            contentType: type
+            contentType: type,
+            url,
+            lesson
         }
     })
 });
@@ -199,6 +202,6 @@ const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
 onMounted(() => {
-    console.log('chapters', props.videoProps.chapters)
+    console.log('chapters', props.relatedLessons.data)
 })
 </script>
