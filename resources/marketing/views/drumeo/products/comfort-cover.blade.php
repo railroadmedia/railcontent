@@ -7,7 +7,7 @@
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/fb-share-image.jpg" style="display: none;">
     <meta property="og:title" content="Comfort Cover">
     <meta property="og:description" content="Upgrade any round drum throne in seconds.">
-    <meta property="og:url" content="https://www.drumeo.com/drumshop/comfort-cover/">
+    <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 @stop()
