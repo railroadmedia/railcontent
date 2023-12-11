@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     @if(Carbon\Carbon::create(2023, 11, 19, 20, 59, 0, 'America/Vancouver') < Carbon\Carbon::now())
-        <meta http-equiv="Refresh" content="0; url='https://www.drumeo.com/beat/drumeo-awards-2022-winners/'" />
+        <meta http-equiv="Refresh" content="0; url='https://www.drumeo.com/beat/drumeo-awards-media/'" />
     @else
         <meta http-equiv="Refresh" content="0; url='https://www.drumeo.com/beat/drumeo-awards-2023/'" />
     @endif
