@@ -264,10 +264,10 @@
             </div>
         </div>
     </section>
-    <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative">
-        <div class="container mx-auto z-10 relative max-w-4xl">
+    <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background:linear-gradient(to bottom, #fff 66%, #e8f2fb);">
+        <div class="container mx-auto z-10 relative max-w-5xl">
             <h2 class="leading-tight mb-7 sm:mb-10"><strong>Play your first beats<br class="sm:hidden"> <i class="fas fa-arrow-right text-drumeo"></i> Write your first song.</strong></h2>
-            <div class="flex flex-wrap sm:flex-nowrap justify-center text-left">
+            <div class="flex flex-wrap sm:flex-nowrap justify-center text-left mb-8 sm:mb-16 lg:mb-20">
                 <div class="mb-5 sm:mb-0 sm:pr-7 sm:w-7/12 flex-grow-0">
                     <div class="h-full rounded-xl p-7 sm:p-10 pt-48 bg-black text-white flex items-end bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/new-drummers-image.jpg');">
                         <div>
@@ -287,10 +287,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background:linear-gradient(to bottom, #fff 50%, #e8f2fb);">
-        <div class="container mx-auto z-10 relative max-w-5xl">
             <h6 class="text-drumeo mb-3"><em>The highest-rated beginner e-kit<br class="sm:hidden"> meets award-winning drum lessons.</em></h6>
             <h2 class="leading-tight mb-5 sm:mb-7"><strong>Rave reviews for the<br class="sm:hidden"> Alesis Nitro Max…</strong></h2>
 
@@ -299,37 +295,37 @@
                     <img class="h-5 lg:h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/amazon-logo.png">
                     <h2 class="leading-tight my-2"><strong>4.6</strong></h2>
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star-half" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star-half" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
                 </div>
                 <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
                     <img class="h-5 lg:h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/music-radar-logo.png">
                     <h2 class="leading-tight my-2"><strong>5</strong></h2>
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
                 </div>
                 <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
                     <img class="h-5 lg:h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/thomann-logo.png">
                     <h2 class="leading-tight my-2"><strong>4.3</strong></h2>
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star-half" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star-half" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
                 </div>
                 <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
                     <img class="h-5 lg:h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/sweetwater-logo.png">
                     <h2 class="leading-tight my-2"><strong>5</strong></h2>
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
                 </div>
 </div>
 
