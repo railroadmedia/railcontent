@@ -18,15 +18,31 @@ class ChallengeDecorator extends TypeDecoratorBase
         if ($contentsOfType->isEmpty()) {
             return $contents;
         }
+        $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
 
         foreach ($contentsOfType as $contentIndex => $content) {
             $challengeEnrollStarted = Carbon::parse($content->fetch('fields.enrollment_start_time')) <= Carbon::now();
             $challengeEnrollEnded = Carbon::parse($content->fetch('fields.enrollment_end_time')) <= Carbon::now();
             $registrationUrl = $content->fetch('fields.registration_url');
-            if($registrationUrl && config('musora-api.api.version')){
+            $cohortSlug = '';
+            if($registrationUrl){
                 $paths = explode('/', $registrationUrl);
-                $contentsOfType[$contentIndex]['slug'] = \Arr::last($paths);
+                $cohortSlug = \Arr::last($paths);
             }
+            if(config('musora-api.api.version')){
+                $contentsOfType[$contentIndex]['slug'] = $cohortSlug;
+            }
+
+            $cohort = $this->cohortService->getCohort($cohortSlug);
+            if($cohort) {
+                $productId = $cohort['product_id'];
+                $product = $this->productService->getById($productId);
+                $permissionID =
+                    $product->getContentPermissions($contentPermissionsLookup)
+                        ->first()->id ?? null;
+                $contentsOfType[$contentIndex]['has_product'] = user() && $this->userAccessPermissionsService->hasPermission(user()?->id, $permissionID);
+            }
+
             $enrollNow = $registrationUrl && $challengeEnrollStarted && !$challengeEnrollEnded;
             $notifyMe = Carbon::parse($content->fetch('fields.enrollment_start_time')) > Carbon::now();
             $normallAndAccessible = Carbon::parse($content->fetch('published_on')) <= Carbon::now();
