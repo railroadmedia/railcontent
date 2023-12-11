@@ -196,7 +196,6 @@ const copyLink = () => {
 }
 
 const sendPass = () => {
-    let brand = document.getElementById('brand').value;
     let email = document.getElementById('email');
     const emailFormat = /^\w+([\.-^+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
