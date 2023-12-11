@@ -8,7 +8,7 @@
     <meta property="og:description" content="Pack like a pro.">
 
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/share-image2.jpg" style="display: none;">
-    <meta property="og:url" content="https://www.drumeo.com/drumshop/stickbag/">
+    <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
 

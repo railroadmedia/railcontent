@@ -7,7 +7,7 @@
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drumeo-pro/og-image.jpg" style="display: none;">
     <meta property="og:title" content="Drumeo PRO">
     <meta property="og:description" content="The easier way to sell drum lessons.">
-    <meta property="og:url" content="https://www.drumeo.com/pro/">
+    <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 @stop()
 
 @section('head')
