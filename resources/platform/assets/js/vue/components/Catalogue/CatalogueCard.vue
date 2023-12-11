@@ -105,20 +105,20 @@
                     </a>
                     <!-- CHALLENGE CTA's -->
                     <template v-if="contentType === 'challenge'">
-                        <a v-if="!isReleased && !hasProduct" 
-                            :href="registrationUrl" 
+                        <a v-if="enrollmentOpen"
+                            :href="registrationUrl"
                             class="tw-mt-1 tw-inline-flex tw-items-center tw-justify-center tw-uppercase tw-text-sm tw-px-4 tw-leading-none tw-font-bebas-neue tw-h-[36px] tw-rounded-2xl dark:tw-bg-[#0E2031] dark:tw-text-[#F1F1F1] tw-text-[#00101D]"
                         >
                             Enroll Now
                         </a>
-                        <button v-if="!isReleased && hasProduct" data-open-modal="notifyModal" class="tw-mt-1 tw-inline-flex tw-items-center tw-justify-center tw-uppercase tw-text-sm tw-px-4 tw-leading-none tw-font-bebas-neue tw-h-[36px] tw-rounded-2xl dark:tw-bg-[#0E2031] dark:tw-text-[#F1F1F1] tw-text-[#00101D]">
+                        <button v-if="upcomingChallenge" data-open-modal="notifyModal" class="tw-mt-1 tw-inline-flex tw-items-center tw-justify-center tw-uppercase tw-text-sm tw-px-4 tw-leading-none tw-font-bebas-neue tw-h-[36px] tw-rounded-2xl dark:tw-bg-[#0E2031] dark:tw-text-[#F1F1F1] tw-text-[#00101D]">
                             <musora-icon icon-name="bell" class="tw-w-5 tw-h-5 tw-mr-1"/>
-                            Notify Me 
+                            Notify Me
                         </button>
                     </template>
                 </div>
-                <!-- 
-                    Add to Playlist 
+                <!--
+                    Add to Playlist
                     Don't show if the user has not enrolled in a challenge (does not own Product)
                 -->
                 <div v-if="item.type !== 'challenge' || hasProduct" class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
@@ -330,11 +330,19 @@ const isSongContent = computed(() => {
 })
 
 const hasProduct = computed(() => {
-    return true; //for now..
+    return contentModel.value.post.has_product; //for now..
 })
 
 const registrationUrl = computed(() => {
-    return item.data.find(field => field.key === 'registration_url')?.value || '';
+    return contentModel.value.post.fields.find(field => field.key === 'registration_url')?.value || '';
+})
+
+const enrollmentOpen = computed(() => {
+    return contentModel.value.post.challenge_state === 'enrollment';
+})
+
+const upcomingChallenge = computed(() => {
+    return contentModel.value.post.challenge_state === 'upcoming';
 })
 
 const contentCreator = computed(() => {
