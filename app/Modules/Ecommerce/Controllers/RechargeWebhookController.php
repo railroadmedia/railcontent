@@ -24,7 +24,7 @@ class RechargeWebhookController extends Controller
     public function subscriptionCancelled(Request $request): void
     {
         try {
-            Log::debug('Recharge subscription cancelled webhook received');
+            Log::info('Recharge subscription cancelled webhook received');
             //Log::debug(print_r($request->all(), true));
 
             $subscription = $request->get('subscription');
@@ -50,11 +50,19 @@ class RechargeWebhookController extends Controller
             $ciotz = CarbonTimeZone::create('America/Vancouver');
             $cancelledAt = Carbon::parse($subscription['cancelled_at'], $rctz)->setTimezone($ciotz);
 
+            $cancellationReason = $subscription['cancellation_reason'] ?? "";
+            if ($subscription['cancellation_reason_comments']) {
+                $cancellationReason .= " - " . $subscription['cancellation_reason_comments'];
+            }
+
             $this->customerIoService->syncCancellationDataFromRecharge(
                 $user,
                 $product,
                 $cancelledAt,
-                $subscription['cancellation_reason']
+                $cancellationReason
+            );
+            Log::info(
+                RechargeWebhookController::class . '::subscriptionCancelled: updated CustomerIo attributes for user ' . $user->id
             );
         } catch (Exception $e) {
             //Catch exception to prevent shopify from retrying the webhook
@@ -66,7 +74,7 @@ class RechargeWebhookController extends Controller
     public function chargeFailed(Request $request): void
     {
         try {
-            Log::debug('Recharge charge failed webhook received');
+            Log::info('Recharge charge failed webhook received');
             //Log::debug(print_r($request->all(), true));
 
             $charge = $request->get('charge');
@@ -98,6 +106,9 @@ class RechargeWebhookController extends Controller
             $data['charge_attempts'] = $charge['number_times_tried'];
 
             $this->customerIoService->syncChargeFailedAttributes($user, $product->brand, $data);
+            Log::info(
+                RechargeWebhookController::class . '::chargeFailed: updated CustomerIo attributes for user ' . $user->id
+            );
         } catch (Exception $e) {
             //Catch exception to prevent shopify from retrying the webhook
             Log::error($e->getMessage());
