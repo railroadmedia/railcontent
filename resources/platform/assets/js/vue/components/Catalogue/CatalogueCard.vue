@@ -50,9 +50,9 @@
 
                     <!-- EVERYTHING ELSE -->
                     <div v-else
-                        class="tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center">
+                        class="tw-absolute tw-flex tw-flex-col tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center">
                         <i class="fas" :class="thumbnailIcon"></i>
-                        <p v-if="!isReleased" class="tw-text-sm text-white font-bold">
+                        <p v-if="!isReleased" class="tw-mt-1 tw-text-sm text-white font-bold">
                             {{ releaseDate }}
                         </p>
                     </div>
