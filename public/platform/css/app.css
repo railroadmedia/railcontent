@@ -22096,6 +22096,9 @@ a:visited{
 .tw-mt-auto{
   margin-top: auto !important;
 }
+.tw-mr-\[16px\]{
+  margin-right: 16px !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -22425,6 +22428,9 @@ a:visited{
 }
 .tw-h-screen{
   height: 100vh !important;
+}
+.tw-h-\[133px\]{
+  height: 133px !important;
 }
 .tw-max-h-0{
   max-height: 0px !important;
@@ -22816,6 +22822,9 @@ a:visited{
 }
 .tw-w-screen{
   width: 100vw !important;
+}
+.tw-w-\[237px\]{
+  width: 237px !important;
 }
 .tw-min-w-0{
   min-width: 0px !important;
