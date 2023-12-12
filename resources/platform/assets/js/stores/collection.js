@@ -70,7 +70,6 @@ export const useCollectionStore = defineStore({
         },
         async fetchData () {
             const userStore = useUserStore();
-            console.log(this.coachEndpoint());
             try {
                 const response = await axios
                     .get(

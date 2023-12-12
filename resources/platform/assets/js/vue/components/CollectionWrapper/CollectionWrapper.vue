@@ -314,7 +314,7 @@ const handleTabChange = (tab) => {
 onMounted(() => {
     // console.log(props.collectionType)
     // console.log(props.title)
-    console.log(props.preLoadedContent)
+    //console.log(props.preLoadedContent)
     collectionStore.setDefaults({
         isCoach: isCoach.value,
         data: props.preLoadedContent?.data || [],
