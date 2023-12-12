@@ -14,7 +14,7 @@
             :lock-unowned="lockUnowned"
             :content-type-override="contentTypeOverride"
             :show-my-list-action="showMyListAction"
-            :display-inline="displayInline"
+            :force-list-view="displayInline"
             @addToList="emitAddToList"
         ></catalogue-card>
     </div>
