@@ -103,12 +103,7 @@ class Kernel extends ConsoleKernel
             "0 */6 * * *"
         );//4am, 10am, 4pm, 10pm PST
 
-//        $schedule->command('ecommerce:renewalDueSubscriptions 200')->cron(
-//            "15 */2 * * *"
-//        );
-//        $schedule->command('ecommerce:ProcessAppleExpiredSubscriptionsQueued')->cron(
-//            "30 */8 * * *"
-//        ); // every 8 hours: 12am, 8am, 4pm PST
+        $schedule->command('ecommerce:renewalDueSubscriptions 200')->dailyAt('10:00');//2am PST
 
         $schedule->command('mentors:verify')->daily(); //4pm
         //temporary measure to assign mentors until ecommerce is integrated with MWP
