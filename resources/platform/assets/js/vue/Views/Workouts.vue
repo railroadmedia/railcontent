@@ -52,6 +52,7 @@
                             <CatalogueCardContainer
                                 :is-mini-view="true"
                                 :pre-loaded-content="continueData"
+                                :show-dropdown="true"
                             />
                         </transition>
                     </div>
