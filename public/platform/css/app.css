@@ -22099,6 +22099,12 @@ a:visited{
 .tw-mr-\[16px\]{
   margin-right: 16px !important;
 }
+.tw-mr-\[14px\]{
+  margin-right: 14px !important;
+}
+.tw-mb-\[\]{
+  margin-bottom:  !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -24947,6 +24953,9 @@ a:visited{
 }
 .tw-leading-tight{
   line-height: 1.25 !important;
+}
+.tw-leading-\[30px\]{
+  line-height: 30px !important;
 }
 .tw-tracking-\[1px\]{
   letter-spacing: 1px !important;
