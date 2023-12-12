@@ -1,18 +1,31 @@
 
 <template>
-  <div class="tw-flex tw-flex-col tw-mb-[30px]">
-    <div class="tw-text-[20px] tw-leading-[30px] tw-font-bold">Chapters:</div>
-    <div class="tw-flex tw-overflow-hidden">
-      <div v-for="(chapter, index) in chapters" :key="index"
-        class="tw-flex tw-flex-col tw-justify-center tw-gap-2 tw-mr-[10px]">
-        <img :src="chapter.thumbnail" alt="Chapter thumbnail"
-          class="tw-rounded-[5px] tw-w-[237px] tw-h-[133px] tw-object-cover">
+  <div class="tw-flex tw-flex-col tw-mb-10">
+    <h3 class="tw-text-[20px] tw-leading-[30px] tw-font-bold tw-mb-2">Chapters:</h3>
+    <section class="tw-flex tw-overflow-hidden tw-flex-wrap tw-gap-4">
+      <div v-for="(chapter, index) in chapters" 
+          :key="index"
+          class="tw-flex tw-flex-col tw-justify-center tw-w-full tw-max-w-[237px]"
+      > 
+        <!-- Chapter Thumbnail -->
+        <div class="tw-w-full tw-flex tw-items-center tw-justify-center tw-relative dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-aspect-video tw-rounded-lg tw-mb-2">
+          <img v-if="chapter.thumbnail" 
+              :src="chapter.thumbnail" 
+              :alt="`Chapter ${ index } thumbnail`"
+              class="tw-transition-opacity tw-rounded-[5px] tw-w-[237px] tw-h-[133px] tw-object-cover tw-opacity-0"
+              onload="this.classList.remove('tw-opacity-0')"
+              loading="lazy"
+            >
+          <!-- Fallback -->
+          <p v-else class="tw-font-bold tw-text-black tw-text-xl dark:tw-text-white">Chapter {{ index + 1 }}</p>
+        </div>
+        <!-- Chapter Info Wrapper -->
         <div class="tw-flex tw-justify-between">
           <div class="tw-flex tw-flex-col">
             <div class="tw-text-[12px] tw-leading-[18px] tw-font-bold">{{ formatTime(chapter.time) }}</div>
             <div class="tw-flex tw-flex-col tw-text-[12px] tw-leading-[18px] tw-font-bold tw-truncate">
-          {{ chapter.title }}
-        </div>
+                {{ chapter.title }}
+            </div>
           </div>
           <div class="tw-flex">
             <button id="video-chapter-song" class="tw-text-black dark:tw-text-white tw-mr-[14px] tw-flex tw-flex-col tw-justify-start"
@@ -40,31 +53,37 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
   
 <script setup>
-const props = defineProps({
-  chapters: {
-    type: Array,
-    default: () => [],
-  },
-});
+  import { onBeforeMount } from "vue";
 
-const emit = defineEmits([
-  'openSlice',
-]);
+  onBeforeMount(()=> {
+    console.log('video chapters', props.chapters)
+  })
 
-const formatTime = (seconds) => {
-  const mins = Math.floor(seconds / 60);
-  const secs = seconds % 60;
-  return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-};
+  const props = defineProps({
+    chapters: {
+      type: Array,
+      default: () => [],
+    },
+  });
 
-const handleOpenSoundslice = (chapter, loop) => {
-  console.log('handle open', chapter, loop);
-  emit('openSlice', chapter, loop);
-};
+  const emit = defineEmits([
+    'openSlice',
+  ]);
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const handleOpenSoundslice = (chapter, loop) => {
+    console.log('handle open', chapter, loop);
+    emit('openSlice', chapter, loop);
+  };
 </script>
   
