@@ -28,7 +28,19 @@ const props = defineProps({
     autoplay: {
         type: Boolean,
         default: false,
-    }
+    },
+    startTime: {
+        type: Number,
+        default: 0,
+    },
+    endTimeProps: {
+        type: Number,
+        default: 0,
+    },
+    startLooping: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 //Emits
@@ -46,7 +58,7 @@ const isPlaying = ref(false);
 const isLoading = ref(true);
 const hasBeenPlayed = ref(false);
 const playEventsRan = ref(0);
-const endTime = ref(30); //get end time depending on user settings
+const endTime = ref(props.endTimeProps || 0); //need a better name
 const ssiframe = ref(null);
 const progressTrackerEventListener = ref(null);
 const ssURL = ref(`https://www.soundslice.com/${scoreOrSlice()}/${props.soundsliceSlug}/embed/?api=1&scroll_type=2&branding=0&recording_idx=2&top_controls=1&u=${props.userId}${props.additionalParams}`);
@@ -169,6 +181,12 @@ const handleSoundsliceEvent = (event) => {
         switch (cmd.method) {
             //GLOBAL SETTINGS
             case 'ssPlayerReady':
+                if (props.startTime) {
+                    ssiframe.value.contentWindow.postMessage(`{"method": "seek", "arg": ${props.startTime} }`, 'https://www.soundslice.com');
+                }
+                if (props.startLooping) {
+                    ssiframe.postMessage(`{"method": "setLoop", "arg": [${props.startTime}, ${props.endTime}]}', 'https://www.soundslice.com'`);
+                }
                 break 
             case 'ssNotationLoaded':
                 //Get Duration
