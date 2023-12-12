@@ -58,7 +58,7 @@
                 </VideoResources>
                 <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
                     :content-chapters="videoProps.chapters" :instructors="contentInstructors" />
-                <VideoChapters :chapters="formattedChapters" @openSoundsliceChapter="openSlice"></VideoChapters>
+                <VideoChapters v-if="formattedChapters.length" :chapters="formattedChapters" @openSoundsliceChapter="openSlice"></VideoChapters>
                 <VideoButtons :prev-lesson-url="videoButtons.prevLessonUrl" :next-lesson-url="videoButtons.nextLessonUrl"
                     :brand="brand" :prev-label="videoButtons.prevLabel" :next-label="videoButtons.nextLabel"
                     :has-qa-video="videoButtons.hasQAVideo" />
@@ -84,29 +84,30 @@
                             :content-id="commentsProps.contentId" :user-id="commentsProps.userId"
                             :user-name="commentsProps.userName" :user-avatar="commentsProps.userAvatar"
                             :user-xp="commentsProps.userXp" :user-access-level="commentsProps.userAccessLevel"
-                            :profile-base-route="commentsProps.profileBaseRoute" :is-admin="commentsProps.isAdmin">
+                            :profile-base-route="commentsProps.profileBaseRoute" :is-admin="commentsProps.isAdmin === 'true' ? true : false">
                         </VideoComments>
                     </div>
                 </div>
             </div>
-            <div class="tw-ml-[10px] tw-flex tw-transition-all tw-h-full">
+            <!--Related Setion -->
+            <aside class="tw-ml-[10px] tw-flex tw-transition-all tw-h-full">
                 <div class="tw-flex tw-w-[402px]" v-if="!isSidebarOpen">
-                    <div class="tw-rounded-[5px] tw-border tw-border-[#1E364A] tw-overflow-hidden tw-transition-all">
-                        <div class="tw-flex tw-flex-col">
-                            <div class="tw-bg-[#081825] tw-pt-[24px] tw-pb-[16px] tw-flex tw-justify-between tw-px-[18px]">
+                    <div class="tw-rounded-[5px] tw-border tw-border-[#E5E7EB] dark:tw-border-[#1E364A] tw-overflow-hidden tw-transition-all">
+                        <header class="tw-flex tw-flex-col">
+                            <div class="tw-bg-[#F9F9F9] dark:tw-bg-[#081825] tw-pt-[24px] tw-pb-[16px] tw-flex tw-justify-between tw-px-[18px]">
                                 <h3 class="tw-text-[20px] tw-font-bold tw-font-open-sans">Related Workouts</h3>
-                                <button @click="isSidebarOpen = !isSidebarOpen">
+                                <button @click="isSidebarOpen = !isSidebarOpen" class="tw-text-black dark:tw-text-white">
                                     <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M27.55 11.5L27.55 26.5" stroke="white" stroke-width="1.5"
+                                        <path d="M27.55 11.5L27.55 26.5" stroke="currentColor" stroke-width="1.5"
                                             stroke-linecap="round" />
                                         <path d="M17.1334 24.5L22.55 19M22.55 19L17.1334 13.5M22.55 19L9.55005 19"
-                                            stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                             stroke-linejoin="round" />
                                     </svg>
                                 </button>
                             </div>
-                        </div>
+                        </header>
                         <RelatedCard v-for=" relatedLesson  in  formattedRelatedLessons " :key="relatedLesson.id"
                             :thumbnail="relatedLesson.thumbnail" :instructor="relatedLesson.instructor"
                             :title="relatedLesson.title" :difficulty="relatedLesson.difficulty"
@@ -114,18 +115,18 @@
                     </div>
                 </div>
                 <div class="tw-ml-[21px] tw-transition-all tw-overflow-hidden" v-if="isSidebarOpen">
-                    <button @click="isSidebarOpen = !isSidebarOpen">
+                    <button @click="isSidebarOpen = !isSidebarOpen" class="tw-text-black dark:tw-text-white">
                         <svg id="icon-workouts-filled" width="38" height="38" viewBox="0 0 38 38" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <rect x="-0.5" y="0.5" width="37" height="37" rx="18.5" transform="matrix(-1 0 0 1 37 0)"
-                                fill="black" stroke="#223F57" />
-                            <path d="M9 11.0498L9 26.0498" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                                fill="transparent" stroke="currentColor" />
+                            <path d="M9 11.0498L9 26.0498" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                             <path d="M19.4167 24.0498L14 18.5498M14 18.5498L19.4167 13.0498M14 18.5498L27 18.5498"
-                                stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </button>
                 </div>
-            </div>
+            </aside>
         </div>
     </div>
 </template>
@@ -191,6 +192,14 @@ const props = defineProps({
         type: Object,
         default: {},
     },
+    contentDescription: {
+        type: String,
+        default: ''
+    },
+    contentInstructors: {
+        type: Array,
+        default: []
+    }
 });
 
 const userStore = useUserStore();

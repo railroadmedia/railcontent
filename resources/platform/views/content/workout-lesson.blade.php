@@ -88,7 +88,6 @@
     ];
 
     $videoButtons = [
-        'themeColor' => $brand,
         'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
         'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
         'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
