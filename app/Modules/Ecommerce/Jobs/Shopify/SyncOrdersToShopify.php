@@ -187,16 +187,12 @@ class SyncOrdersToShopify implements ShouldQueue
             $qb->where($qb->expr()->between('entity.id', ':startingOrderId', ':endingOrderId'))
                 ->andWhere(
                     $qb->expr()->orX(
-                        $qb->expr()->isNull("entity.shopifyId"),
                         $qb->expr()->gt("entity.updatedAt", ":lastSyncAt"),
                         $qb->expr()->in(
                             "entity.id",
                             $orderItemQB->select("oi.orderId")
                                 ->from(OrderItem::class, "oi")
                                 ->where(
-                                    $orderItemQB->expr()
-                                        ->isNull("oi.shopifyId")
-                                )->orWhere(
                                     $orderItemQB->expr()
                                         ->gt("oi.updatedAt", ":lastSyncAt")
                                 )
@@ -207,9 +203,6 @@ class SyncOrdersToShopify implements ShouldQueue
                             $orderItemFulfillmentQB->select("oif.orderId")
                                 ->from(OrderItemFulfillment::class, "oif")
                                 ->where(
-                                    $orderItemQB->expr()
-                                        ->isNull("oif.shopifyId")
-                                )->orWhere(
                                     $orderItemQB->expr()
                                         ->gt("oif.updatedAt", ":lastSyncAt")
                                 )
