@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $visible
  * @property integer $is_featured
  * @property integer $product_id
+ * @property integer $challenge_id
  * @property string $product_url
  * @property string $endpoint
  * @property string $video_src

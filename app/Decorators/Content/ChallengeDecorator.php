@@ -40,7 +40,7 @@ class ChallengeDecorator extends TypeDecoratorBase
                 $permissionID =
                     $product->getContentPermissions($contentPermissionsLookup)
                         ->first()->id ?? null;
-                $contentsOfType[$contentIndex]['has_product'] = user() && $this->userAccessPermissionsService->hasPermission(user()?->id, $permissionID);
+                $contentsOfType[$contentIndex]['has_product'] = (!$permissionID)?true:(user() && $this->userAccessPermissionsService->hasPermission(user()?->id, $permissionID));
             }
 
             $enrollNow = $registrationUrl && $challengeEnrollStarted && !$challengeEnrollEnded;

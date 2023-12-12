@@ -263,6 +263,17 @@ class Carousel extends Resource
                         if ($formData->is_featured) $field->show()->rules(['required']);
                     }
                 ),
+            Text::make('Challenge ID', 'challenge_id')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_featured;
+                })
+                ->dependsOn(
+                    ['is_featured'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_featured) $field->show()->rules(['required']);
+                    }
+                ),
             Boolean::make('Button Light Mode', 'btn_light_mode')->hideFromIndex()->default(false),
             Text::make('Primary Button Text', 'primary_cta_text')->hideFromIndex(),
             Text::make('Primary Button Text Alt', 'primary_cta_text_alt')->hideFromIndex()
