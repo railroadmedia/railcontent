@@ -20,6 +20,7 @@
             :five-wide="fiveWide"
             :show-my-list-action="showMyListAction"
             :display-inline="displayInline"
+            :add-dark-mode-color="addDarkModeColor"
             @addToList="emitAddToList"
         />
     </div>
@@ -35,6 +36,10 @@ export default {
     },
     mixins: [UserCatalogueEvents],
     props: {
+        addDarkModeColor: {
+            type: Boolean,
+            default: () => true,
+        },
         content: {
             type: Array,
             default: () => [],
