@@ -337,4 +337,9 @@ class SalesController extends BaseController
     {
         return view('drumeo.pages.easy-rudiments-playlist', ['theme' => 'drumeo']);
     }
+
+    public function vote()
+    {
+        return view('drumeo.pages.vote', ['theme' => 'drumeo']);
+    }
 }
