@@ -102,8 +102,7 @@ class CarouselService
                 }
                 if($challenge && $challenge['challenge_state'] === 'upcoming'){
                         $slide->primary_cta_text = 'Notify Me';
-                        $slide->primary_cta_url = null;
-                        $slide->secondary_cta_text = null;
+
                         $slide->is_enrolled = false;
                 }
                 elseif ($slide->product_id && $this->isEnrolled(user()->id, $slide->product_id)) {
