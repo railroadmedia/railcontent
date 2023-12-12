@@ -22,8 +22,8 @@
         <!-- Chapter Info Wrapper -->
         <div class="tw-flex tw-justify-between">
           <div class="tw-flex tw-flex-col">
-            <div class="tw-text-[12px] tw-leading-[18px] tw-font-bold">{{ formatTime(chapter.time) }}</div>
-            <div class="tw-flex tw-flex-col tw-text-[12px] tw-leading-[18px] tw-font-bold tw-truncate">
+            <div class="tw-text-[12px] tw-leading-[18px] tw-font-bold dark:tw-text-white">{{ formatTime(chapter.time) }}</div>
+            <div class="tw-flex tw-flex-col tw-text-[12px] tw-leading-[18px] tw-font-bold tw-truncate dark:tw-text-white">
                 {{ chapter.title }}
             </div>
           </div>
