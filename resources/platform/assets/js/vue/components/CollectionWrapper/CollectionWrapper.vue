@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="filter.activeTab" :filterable-values="filterableValues" :hide-filter="hideFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="filter.activeTab" :hide-filter="hideFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
         />
 
@@ -22,7 +22,7 @@
                     :pre-loaded-content="data"
                     :content-type-override="collectionType"
                     :will-scroll="false"
-                    :subscription-calendar-id="subscriptionCalendarId" 
+                    :subscription-calendar-id="subscriptionCalendarId"
                 />
             </CollectionResults>
         </transition>
@@ -59,7 +59,7 @@ const props = defineProps({
     showBackButton: {
         type: Boolean,
         default: () => false,
-    }, 
+    },
     parentUrl: {
         type: String,
         default: () => "/",
@@ -101,7 +101,7 @@ const props = defineProps({
 const collectionStore = useCollectionStore();
 const userStore = useUserStore();
 
-const { data, currentPage, filter, loading, totalPages, tabData } = storeToRefs(collectionStore);
+const { data, currentPage, filter, loading, totalPages, tabData, filterColumns } = storeToRefs(collectionStore);
 const { brand } = storeToRefs(userStore);
 
 const request_params = computed(() => {
@@ -317,13 +317,14 @@ onMounted(() => {
     //console.log(props.preLoadedContent)
     collectionStore.setDefaults({
         isCoach: isCoach.value,
-        data: props.preLoadedContent?.data || [],
+        content: props.preLoadedContent,
         filter: {
             activeTab: getFirstTabOption.value.key,
             params: { ...request_params.value },
             [isCoach.value ? 'term' : 'title']: '',
         },
         tabData: getFirstTabData.value,
+        filterableValues: props.filterableValues,
     })
 
     collectionStore.getURLParams();

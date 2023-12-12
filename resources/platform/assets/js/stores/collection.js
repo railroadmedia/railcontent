@@ -1,6 +1,7 @@
-import { defineStore } from 'pinia';
 import axios from "axios";
+import { defineStore } from 'pinia';
 import { useUserStore } from "./user";
+import ContentHelpers from '../vue/vuesora/assets/js/helper-functions/content';
 
 export const useCollectionStore = defineStore({
     id: 'Collection',
@@ -21,6 +22,9 @@ export const useCollectionStore = defineStore({
             tabData: {},
             totalPages: 0,
             totalResults: 0,
+            filterValues: {},
+            filterColumns: [],
+            filterableValues: [],
         }
     },
     actions: {
@@ -83,7 +87,8 @@ export const useCollectionStore = defineStore({
                                 ...this.filter.params,
                                 included_fields: this.filter.includedFields,
                                 [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm,
-                                tab: this.filter.activeTab
+                                tab: this.filter.activeTab,
+                                count_filter_items: true,
                             },
                         })
                 return response;
@@ -115,6 +120,19 @@ export const useCollectionStore = defineStore({
                 this.filter.includedFields = params.getAll('included_fields[]');
             }
         },
+        getFilterColumns () {
+            let filters = [];
+            for (const value of this.filterableValues){
+                filters.push({
+                    category: value,
+                    items: this.filterValues[value]
+                });
+            }
+            this.filterColumns = filters;
+        },
+        getFilterValues (values) {
+            return ContentHelpers.flattenFilters(values);
+        },
         loadMore () {
             if (!this.fetching) {
                 this.tabData[this.filter.activeTab].currentPage++;
@@ -132,6 +150,8 @@ export const useCollectionStore = defineStore({
                     this.data = [...this.data, ...response.data.data];
                     this.tabData[this.filter.activeTab].totalResults = response.data.meta.totalResults;
                 }
+                this.filterValues = this.getFilterValues(response.data?.meta?.filterOptions);
+                this.getFilterColumns();
             }
 
             this.loading = false;
@@ -141,8 +161,9 @@ export const useCollectionStore = defineStore({
                 this.isCoach = defaults.isCoach;
             }
 
-            if (defaults.data) {
-                this.data = defaults.data;
+            if (defaults.content) {
+                this.data = defaults.content.data || [];
+                this.filterValues = this.getFilterValues(defaults.content.meta.filterOptions);
             }
 
             if (defaults.filter) {
@@ -151,6 +172,11 @@ export const useCollectionStore = defineStore({
 
             if (defaults.tabData) {
                 this.tabData = { ...defaults.tabData };
+            }
+
+            if (defaults.filterableValues) {
+                this.filterableValues = defaults.filterableValues;
+                this.getFilterColumns();
             }
         },
         setURLParams () {
