@@ -56,10 +56,28 @@
                     :report-user-email="videoResources.reportUserEmail" :report-user-name="videoResources.reportUserName"
                     :report-recipient="videoResources.reportRecipient" :report-logo="videoResources.reportLogo">
                 </VideoResources>
-                <VideoChapters :chapters="formattedChapters"></VideoChapters>
+                <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
+                    :content-chapters="videoProps.chapters" :instructors="contentInstructors" />
+                <VideoChapters :chapters="formattedChapters" @openSoundsliceChapter="openSlice"></VideoChapters>
                 <VideoButtons :prev-lesson-url="videoButtons.prevLessonUrl" :next-lesson-url="videoButtons.nextLessonUrl"
                     :brand="brand" :prev-label="videoButtons.prevLabel" :next-label="videoButtons.nextLabel"
                     :has-qa-video="videoButtons.hasQAVideo" />
+
+                <transition name="show-from-bottom">
+                    <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
+                        <SoundSlice :user-id="userId" :theme-color="brand"
+                            :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
+                            :soundslice-slug="soundsliceObject.soundsliceSlug" :contentId="contentId"
+                            :end-time="videoProps.totalDuration" :start-looping="startLooping"
+                            :start-time="chapterStartTime">
+                            <template v-slot:soundsliceControls>
+                                <SoundSliceControls :title="`${songTitle}`" :disable-next="true" :disable-prev="true"
+                                    @onClose="handleCloseSoundslice" />
+                            </template>
+                        </SoundSlice>
+                    </div>
+                </transition>
+
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
                     <div class="tw-flex tw-flex-row tw-w-full">
                         <VideoComments :theme-color="commentsProps.themeColor" :brand="commentsProps.brand"
@@ -74,25 +92,26 @@
             <div class="tw-ml-[10px] tw-flex tw-transition-all tw-h-full">
                 <div class="tw-flex tw-w-[402px]" v-if="!isSidebarOpen">
                     <div class="tw-rounded-[5px] tw-border tw-border-[#1E364A] tw-overflow-hidden tw-transition-all">
-                    <div class="tw-flex tw-flex-col">
-                        <div class="tw-bg-[#081825] tw-pt-[24px] tw-pb-[16px] tw-flex tw-justify-between tw-px-[18px]">
-                            <h3 class="tw-text-[20px] tw-font-bold tw-font-open-sans">Related Workouts</h3>
-                            <button @click="isSidebarOpen = !isSidebarOpen">
-                                <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M27.55 11.5L27.55 26.5" stroke="white" stroke-width="1.5"
-                                        stroke-linecap="round" />
-                                    <path d="M17.1334 24.5L22.55 19M22.55 19L17.1334 13.5M22.55 19L9.55005 19"
-                                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </button>
+                        <div class="tw-flex tw-flex-col">
+                            <div class="tw-bg-[#081825] tw-pt-[24px] tw-pb-[16px] tw-flex tw-justify-between tw-px-[18px]">
+                                <h3 class="tw-text-[20px] tw-font-bold tw-font-open-sans">Related Workouts</h3>
+                                <button @click="isSidebarOpen = !isSidebarOpen">
+                                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M27.55 11.5L27.55 26.5" stroke="white" stroke-width="1.5"
+                                            stroke-linecap="round" />
+                                        <path d="M17.1334 24.5L22.55 19M22.55 19L17.1334 13.5M22.55 19L9.55005 19"
+                                            stroke="white" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
+                        <RelatedCard v-for=" relatedLesson  in  formattedRelatedLessons " :key="relatedLesson.id"
+                            :thumbnail="relatedLesson.thumbnail" :instructor="relatedLesson.instructor"
+                            :title="relatedLesson.title" :difficulty="relatedLesson.difficulty"
+                            :content-type="relatedLesson.contentType" :id="relatedLesson.id" :url="relatedLesson.url" />
                     </div>
-                    <RelatedCard v-for=" relatedLesson  in  formattedRelatedLessons " :key="relatedLesson.id"
-                        :thumbnail="relatedLesson.thumbnail" :instructor="relatedLesson.instructor"
-                        :title="relatedLesson.title" :difficulty="relatedLesson.difficulty"
-                        :content-type="relatedLesson.contentType" :id="relatedLesson.id" :url="relatedLesson.url" />
-                </div>
                 </div>
                 <div class="tw-ml-[21px] tw-transition-all tw-overflow-hidden" v-if="isSidebarOpen">
                     <button @click="isSidebarOpen = !isSidebarOpen">
@@ -124,6 +143,9 @@ import VideoButtons from "../components/VideoButtons/VideoButtons.vue";
 import VideoResources from "../vuesora/components/VideoResources/VideoResources.vue";
 import VideoComments from "../vuesora/views/comments/Comments.vue";
 import VideoChapters from "../components/VideoChapters/VideoChapters.vue";
+import ContentInfo from "../components/ContentInfo/ContentInfo.vue";
+import SoundSlice from "../components/SoundSlice/SoundSlice.vue";
+import SoundSliceControls from "../components/SoundSlice/SoundSliceControls.vue";
 // READ ME: Importing video player breaks the app for some reason.
 // We need further investigation on this matter, but for now let's use it globally.
 //import VideoPlayer from "../vuesora/components/VideoPlayer/VideoPlayer.vue";
@@ -165,9 +187,20 @@ const props = defineProps({
         type: String,
         default: '',
     },
+    contentBreadcrumb: {
+        type: Object,
+        default: {},
+    },
 });
 
+const userStore = useUserStore();
+const { brand } = storeToRefs(userStore);
+
 const isSidebarOpen = ref(false);
+const openSoundslice = ref(false);
+const chapterStartTime = ref(0);
+const startLooping = ref(false);
+
 
 const formattedRelatedLessons = computed(() => {
     return props.relatedLessons.data.map((lesson) => {
@@ -198,8 +231,31 @@ const formattedChapters = computed(() => {
     })
 });
 
-const userStore = useUserStore();
-const { brand } = storeToRefs(userStore);
+const getBrandSpecificParams = () => {
+    return ({
+        drumeo: '&show_chords=0',
+        singeo: '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
+        guitareo: '',
+        pianote: '&show_chords=1'
+    }[brand]);
+};
+
+const openSlice = (startAt, loop) => {
+    console.log('open slice', startAt, loop);
+    chapterStartTime.value = startAt;
+    openSoundslice.value = true;
+    startLooping.value = loop;
+};
+
+const handleCloseSoundslice = () => {
+    openSoundslice.value = false;
+    startLooping.value = false;
+
+    document.body.classList.remove('no-scroll', 'dim-sidebar');
+
+    Helpscout.showWidget();
+    Intercom.showWidget();
+};
 
 onMounted(() => {
     console.log('chapters', props.relatedLessons.data)
