@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="tw-px-4 lg:tw-px-0">
         <FilterControls
-            :showBackButton="showBackButton" 
+            :showBackButton="showBackButton"
             :parentUrl="parentUrl"
             :hide-filter="hideFilter"
             :search-term="searchTerm"
@@ -55,7 +55,7 @@
         showBackButton: {
             type: Boolean,
             default: () => false,
-        }, 
+        },
         parentUrl: {
             type: String,
             default: () => "/",
