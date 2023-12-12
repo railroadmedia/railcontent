@@ -166,7 +166,6 @@ import { useUserStore } from "../../stores/user";
 
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
 import YoutubePlayer from "../vuesora/components/YoutubePlayer/YoutubePlayer.vue";
-import RelatedCard from "../components/Catalogue/RelatedCard.vue";
 import VideoButtons from "../components/VideoButtons/VideoButtons.vue";
 import VideoResources from "../vuesora/components/VideoResources/VideoResources.vue";
 import VideoComments from "../vuesora/views/comments/Comments.vue";
