@@ -96,6 +96,7 @@ class CarouselService
         $carousel->each(function (Carousel $slide) {
             //dd($slide->product_id);
             if ($slide->is_featured) {
+                $challenge = null;
                 if ($slide->challenge_id) {
                     $challenge = $this->contentService->getById($slide->challenge_id);
                 }
