@@ -66,11 +66,16 @@
                     <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
                         :content-chapters="videoProps.chapters" :instructors="contentInstructors" />
 
-                    <VideoChapters v-if="formattedChapters.length" :chapters="formattedChapters" @openSoundsliceChapter="openSlice"></VideoChapters>
+                    <VideoChapters 
+                        v-if="formattedChapters.length" 
+                        :chapters="formattedChapters" 
+                        @open-slice="openSlice"
+                    />
 
                     <VideoButtons :prev-lesson-url="videoButtons.prevLessonUrl" :next-lesson-url="videoButtons.nextLessonUrl"
                         :brand="brand" :prev-label="videoButtons.prevLabel" :next-label="videoButtons.nextLabel"
-                        :has-qa-video="videoButtons.hasQAVideo" />
+                        :has-qa-video="videoButtons.hasQAVideo" 
+                    />
                 </div>
                 <!-- Close Expanded View -->
                 <div class="tw-ml-[21px] tw-transition-all tw-overflow-hidden tw-shrink-0" v-if="!isRelatedSectionOpen">
@@ -126,21 +131,6 @@
 
             <!-- Lesson Content Wrapper -->
             <section class="tw-col-span-3 2xl:tw-col-span-2" :class="{'tw-hidden' : !isRelatedSectionOpen }">
-                <transition name="show-from-bottom">
-                    <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
-                        <SoundSlice :user-id="userId" :theme-color="brand"
-                            :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                            :soundslice-slug="soundsliceObject.soundsliceSlug" :contentId="contentId"
-                            :end-time="videoProps.totalDuration" :start-looping="startLooping"
-                            :start-time="chapterStartTime">
-                            <template v-slot:soundsliceControls>
-                                <SoundSliceControls :title="`${songTitle}`" :disable-next="true" :disable-prev="true"
-                                    @onClose="handleCloseSoundslice" />
-                            </template>
-                        </SoundSlice>
-                    </div>
-                </transition>
-
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
                     <div class="tw-flex tw-flex-row tw-w-full">
                         <VideoComments :theme-color="commentsProps.themeColor" :brand="commentsProps.brand"
@@ -152,8 +142,27 @@
                     </div>
                 </div>
             </section>
-            
         </div>
+        <!-- Workout Chapter Soundslice -->
+        <transition name="show-from-bottom">
+            <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
+                <SoundSlice 
+                    :user-id="userId" 
+                    :theme-color="brand"
+                    :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
+                    :soundslice-slug="soundsliceSlug" 
+                    :contentId="contentId"
+                    :end-time="videoProps.totalDuration" 
+                    :start-looping="startLooping"
+                    :start-time="chapterStartTime"
+                >
+                    <template v-slot:soundsliceControls>
+                        <SoundSliceControls :title="`${songTitle}`" :disable-next="true" :disable-prev="true"
+                            @onClose="handleCloseSoundslice" />
+                    </template>
+                </SoundSlice>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -260,6 +269,7 @@ const openSlice = (startAt, loop) => {
     chapterStartTime.value = startAt;
     openSoundslice.value = true;
     startLooping.value = loop;
+    console.log('soundslice open', openSoundslice.value)
 };
 
 const handleCloseSoundslice = () => {

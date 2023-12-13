@@ -1,29 +1,29 @@
 <template>
     <!-- 
         - Cards can be mini with the 'isMiniCard' for continue section
-        - Cards can be inline with the 'displayInline' prop for the Related Lessons sections
+        - Cards can be list view with the 'forceListView' prop for the Related Lessons sections
         - Cards can break to list view in mobile with the 'breakToListView' prop for large catalogs
     -->
     <div v-if="!isMiniCard"
         class="tw-snap-center tw-flex tw-flex-col tw-group"
         :class="[
             class_object, 
-            displayInline || breakToListView ? 'tw-py-3 tw-w-full' : 'tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 lg:tw-mb-6 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]',
-            { 'tw-py-3 tw-w-full lg:tw-py-0 lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 lg:tw-mb-6 lg:tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]' : breakToListView }
+            forceListView || breakToListView ? 'tw-py-3 tw-w-full' : 'tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 lg:tw-mb-6 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]',
+            { 'tw-py-3 tw-w-full @3xl/breakToList:tw-py-0 @3xl/breakToList:tw-w-1/4 @3xl/breakToList:tw-mb-6 @3xl/breakToList:tw-pr-[8px] @4xl/breakToList:tw-pr-[12px] @5xl/breakToList:tw-w-1/5 @6xl/breakToList:tw-pr-[18px] @7xl/breakToList:tw-w-1/6' : breakToListView }
         ]">
         <div class="tw-flex" :class="[
-            displayInline || breakToListView ? 'tw-flex-row' : 'tw-flex-col',
-            { 'lg:tw-flex-col' : breakToListView }
+            forceListView || breakToListView ? 'tw-flex-row' : 'tw-flex-col',
+            { '@3xl/breakToList:tw-flex-col' : breakToListView }
         ]">
             <!-- Thumbnail Section -->
             <a :href="renderLink ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
-                { 'tw-w-[142px] tw-mr-3': displayInline || breakToListView },
-                { 'lg:tw-w-full lg:tw-mr-0': breakToListView },
-                item.type === 'song' && displayInline ? 'tw-max-w-[121px]' : '',
+                { 'tw-w-[142px] tw-mr-3': forceListView || breakToListView },
+                { '@3xl/breakToList:tw-w-full @3xl/breakToList:tw-mr-0': breakToListView },
+                item.type === 'song' && forceListView ? 'tw-max-w-[121px]' : '',
                 item.type + '-thumbnail'
             ]">
                 <div class="tw-relative tw-overflow-hidden tw-rounded-[10px]" 
-                    :class="item.type === 'song' && displayInline ? 'tw-aspect-square' : 'tw-aspect-video'"
+                    :class="item.type === 'song' && forceListView ? 'tw-aspect-square' : 'tw-aspect-video'"
                 >
                     <!-- Video Thumbnail -->
                     <img :src="`https://www.musora.com/musora-cdn/image/width=500/${mappedData.thumbnail} `"
@@ -65,7 +65,7 @@
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block">
                     <a :href="renderLink ? item.url : null"
                         class="card-info tw-flex tw-flex-auto tw-flex-col tw-px-2 tw-rounded-lg"
-                        :class="[displayInline || breakToListView ? 'tw-justify-center tw-pt-1' : 'tw-pt-2', { 'lg:tw-pt-2 lg:tw-justify-start' : breakToListView }]">
+                        :class="[forceListView || breakToListView ? 'tw-justify-center tw-pt-1' : 'tw-pt-2', { 'lg:tw-pt-2 lg:tw-justify-start' : breakToListView }]">
                         <div class="tw-flex tw-flex-col">
                             <!-- Video Title -->
                             <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
@@ -247,7 +247,7 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
-    displayInline: {
+    forceListView: {
         type: Boolean,
         default: false
     },
@@ -315,7 +315,9 @@ const handleShowDropdown = (className) => {
 };
 
 const contentTypeString = computed(() => {
-    return snakeToCapitalized(contentModel.value.post.type)
+    if(contentModel.value.post.type) return snakeToCapitalized(contentModel.value.post.type);
+    return '';
+    
 })
 
 const isSongContent = computed(() => {
@@ -348,29 +350,35 @@ const upcomingChallenge = computed(() => {
 })
 
 const contentCreator = computed(() => {
-    if (isSongContent.value) {
-        return contentModel.value.post.fields.find(field => field.key === 'artist')?.value || ''
+    if(contentModel.value.post.fields) {
+        if (isSongContent.value) {
+            return contentModel.value.post.fields.find(field => field.key === 'artist')?.value || ''
+        }
+        return contentModel.value.post.fields.find(field => field.key === 'instructor')?.value.name || ''
     }
-    return contentModel.value.post.fields.find(field => field.key === 'instructor')?.value.name || ''
+    return '';
+
 })
 
 const mappedData = computed(() => {
-    const difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty').value
+    let difficultyValue = 0; //default
+    if(contentModel.value.post.fields) {
+        difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty').value;
+    }
     if (Number.isFinite(Number(difficultyValue))) {
         contentModel.value.card.difficulty = difficultyValue;
     }
     else {
         contentModel.value.card.difficulty = 'all';
     }
-
     return contentModel.value.card
 });
 
 const class_object = computed(() => ({
     'no-access': noAccess.value,
     completed: props.item.completed,
-    'bb-grey-1-1 dark:tw-border-[#223F57]': props.displayInline,
-    'display-inline': props.displayInline,
+    'dark:tw-border-[#223F57]': props.forceListView,
+    'display-inline': props.forceListView,
 }));
 
 const getWrapperClass = computed(() => {
@@ -378,7 +386,7 @@ const getWrapperClass = computed(() => {
         return `tw-group tw-py-[4px] tw-h-[78px] tw-relative tw-w-[365px] lg:tw-w-auto tw-shrink-0`;
     }
     else {
-        return `tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px] ${class_object.value} ${props.displayInline ? 'tw-py-3' : 'tw-pb-2'}`;
+        return `tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px] ${class_object.value} ${props.forceListView ? 'tw-py-3' : 'tw-pb-2'}`;
     }
 });
 
