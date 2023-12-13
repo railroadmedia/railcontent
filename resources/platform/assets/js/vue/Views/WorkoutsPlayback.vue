@@ -51,17 +51,32 @@
                         <div v-else>ERROR LOADING VIDEO...</div>
                     </div>
 
-                    <VideoResources :theme-color="videoResources.themeColor" :brand="videoResources.brand"
-                        :title="videoResources.title" :lesson-type="videoResources.lessonType"
-                        :thumbnail-url="videoResources.thumbnailUrl" :description="videoResources.description"
-                        :instructors="videoResources.instructors" :parent-title="videoResources.parentTitle"
-                        :is-liked="videoResources.isLiked" :like-count="videoResources.likeCount"
-                        :is-added="videoResources.isAdded" :content-id="videoResources.contentId"
-                        :user-id="videoResources.userId" :resources="videoResources.resources"
-                        :show-add-to-list="videoResources.showAddToList" :show-info-button="videoResources.showInfoButton"
-                        :report-user-email="videoResources.reportUserEmail" :report-user-name="videoResources.reportUserName"
-                        :report-recipient="videoResources.reportRecipient" :report-logo="videoResources.reportLogo">
-                    </VideoResources>
+                    <VideoResources 
+                        :theme-color="videoResources.themeColor" 
+                        :brand="videoResources.brand"
+                        :title="videoResources.title" 
+                        :lesson-type="videoResources.lessonType"
+                        :thumbnail-url="videoResources.thumbnailUrl" 
+                        :description="videoResources.description"
+                        :instructors="videoResources.instructors" 
+                        :parent-title="videoResources.parentTitle"
+                        :is-liked="videoResources.isLiked" 
+                        :like-count="videoResources.likeCount"
+                        :is-added="videoResources.isAdded" 
+                        :content-id="videoResources.contentId"
+                        :user-id="videoResources.userId" 
+                        :resources="videoResources.resources"
+                        :show-add-to-list="videoResources.showAddToList" 
+                        :show-info-button="videoResources.showInfoButton"
+                        :show-practice-button="true"
+                        :show-share-button="false"
+                        :show-complete-button="true"
+                        :report-user-email="videoResources.reportUserEmail" 
+                        :report-user-name="videoResources.reportUserName"
+                        :report-recipient="videoResources.reportRecipient" 
+                        :report-logo="videoResources.reportLogo"
+                        @open-practice-soundslice="openSlice(videoResources.title, 0, false)"
+                    />
 
                     <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
                         :content-chapters="videoProps.chapters" :instructors="contentInstructors" />
@@ -78,7 +93,7 @@
                     />
                 </div>
                 <!-- Close Expanded View -->
-                <div class="tw-ml-[21px] tw-transition-all tw-overflow-hidden tw-shrink-0" v-if="!isRelatedSectionOpen">
+                <div class="2xl:tw-ml-[21px] tw-transition-all tw-overflow-hidden tw-shrink-0 tw-hidden" :class=" {'2xl:tw-inline-block' : !isRelatedSectionOpen }">
                     <button @click="isRelatedSectionOpen = !isRelatedSectionOpen" class="tw-text-black dark:tw-text-white">
                         <svg id="icon-workouts-filled" width="38" height="38" viewBox="0 0 38 38" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -93,13 +108,13 @@
             </section>
 
             <!--Related Setion -->
-            <aside v-if="isRelatedSectionOpen" class="tw-w-full tw-col-span-3 tw-flex tw-flex-col 2xl:tw-mt-0 2xl:tw-col-span-1">
+            <aside class="tw-w-full tw-col-span-3 tw-flex tw-flex-col 2xl:tw-mt-0 2xl:tw-col-span-1" :class=" {'2xl:tw-hidden' : !isRelatedSectionOpen } ">
                 <div class="tw-flex tw-w-full">
                     <div class="tw-w-full tw-border dark:tw-border-[#002039] tw-border-[#e5e7ea] dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] tw-overflow-hidden tw-transition-all">
                         <header class="tw-flex tw-flex-col">
                             <div class="tw-bg-white dark:tw-bg-[#081825] tw-pt-[24px] tw-pb-[16px] tw-flex tw-justify-between tw-px-[18px]">
                                 <h3 class="tw-text-xl tw-font-bold tw-font-open-sans dark:tw-text-white">Related Workouts</h3>
-                                <button @click="isRelatedSectionOpen = !isRelatedSectionOpen" class="tw-text-black dark:tw-text-white">
+                                <button @click="isRelatedSectionOpen = !isRelatedSectionOpen" class="tw-text-black dark:tw-text-white tw-hidden 2xl:tw-inline-block">
                                     <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path d="M27.55 11.5L27.55 26.5" stroke="currentColor" stroke-width="1.5"
@@ -130,7 +145,7 @@
             </aside>
 
             <!-- Lesson Content Wrapper -->
-            <section class="tw-col-span-3 2xl:tw-col-span-2" :class="{'tw-hidden' : !isRelatedSectionOpen }">
+            <section class="tw-col-span-3 2xl:tw-col-span-2" :class="{'2xl:tw-hidden' : !isRelatedSectionOpen }">
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
                     <div class="tw-flex tw-flex-row tw-w-full">
                         <VideoComments :theme-color="commentsProps.themeColor" :brand="commentsProps.brand"
@@ -157,7 +172,10 @@
                     :start-time="chapterStartTime"
                 >
                     <template v-slot:soundsliceControls>
-                        <SoundSliceControls :title="`${songTitle}`" :disable-next="true" :disable-prev="true"
+                        <SoundSliceControls 
+                            :title="soundsliceTitle || videoResources.title" 
+                            :disable-next="true" 
+                            :disable-prev="true"
                             @onClose="handleCloseSoundslice" />
                     </template>
                 </SoundSlice>
@@ -243,6 +261,7 @@ const { brand } = storeToRefs(userStore);
 const isRelatedSectionOpen = ref(true);
 const openSoundslice = ref(false);
 const chapterStartTime = ref(0);
+const soundsliceTitle = ref('');
 const startLooping = ref(false);
 
 const formattedChapters = computed(() => {
@@ -264,8 +283,9 @@ const getBrandSpecificParams = () => {
     }[brand]);
 };
 
-const openSlice = (startAt, loop) => {
+const openSlice = (title, startAt, loop) => {
     console.log('open slice', startAt, loop);
+    soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
     openSoundslice.value = true;
     startLooping.value = loop;
