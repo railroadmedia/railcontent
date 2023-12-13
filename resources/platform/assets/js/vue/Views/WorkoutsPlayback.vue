@@ -4,7 +4,7 @@
             :last-level-title="breadcrumbLastLevelTitle" />
 
         <div class="tw-grid tw-grid-cols-3 2xl:tw-grid-cols-[auto_auto_420px] tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 tw-mt-3 tw-flex-col tw-gap-4">
-            
+
             <!-- VIDEO WRAPPER -->
             <section class="tw-col-span-3 tw-w-full tw-flex" :class="isRelatedSectionOpen ? '2xl:tw-col-span-2' : 'tw-mb-8'">
                 <!-- Video Content -->
@@ -51,29 +51,29 @@
                         <div v-else>ERROR LOADING VIDEO...</div>
                     </div>
 
-                    <VideoResources 
-                        :theme-color="videoResources.themeColor" 
+                    <VideoResources
+                        :theme-color="videoResources.themeColor"
                         :brand="videoResources.brand"
-                        :title="videoResources.title" 
+                        :title="videoResources.title"
                         :lesson-type="videoResources.lessonType"
-                        :thumbnail-url="videoResources.thumbnailUrl" 
+                        :thumbnail-url="videoResources.thumbnailUrl"
                         :description="videoResources.description"
-                        :instructors="videoResources.instructors" 
+                        :instructors="videoResources.instructors"
                         :parent-title="videoResources.parentTitle"
-                        :is-liked="videoResources.isLiked" 
+                        :is-liked="videoResources.isLiked"
                         :like-count="videoResources.likeCount"
-                        :is-added="videoResources.isAdded" 
+                        :is-added="videoResources.isAdded"
                         :content-id="videoResources.contentId"
-                        :user-id="videoResources.userId" 
+                        :user-id="videoResources.userId"
                         :resources="videoResources.resources"
-                        :show-add-to-list="videoResources.showAddToList" 
+                        :show-add-to-list="videoResources.showAddToList"
                         :show-info-button="videoResources.showInfoButton"
                         :show-practice-button="true"
                         :show-share-button="false"
                         :show-complete-button="true"
-                        :report-user-email="videoResources.reportUserEmail" 
+                        :report-user-email="videoResources.reportUserEmail"
                         :report-user-name="videoResources.reportUserName"
-                        :report-recipient="videoResources.reportRecipient" 
+                        :report-recipient="videoResources.reportRecipient"
                         :report-logo="videoResources.reportLogo"
                         @open-practice-soundslice="openSlice(videoResources.title, 0, false)"
                     />
@@ -81,15 +81,15 @@
                     <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
                         :content-chapters="videoProps.chapters" :instructors="contentInstructors" />
 
-                    <VideoChapters 
-                        v-if="formattedChapters.length" 
-                        :chapters="formattedChapters" 
+                    <VideoChapters
+                        v-if="formattedChapters.length"
+                        :chapters="formattedChapters"
                         @open-slice="openSlice"
                     />
 
                     <VideoButtons :prev-lesson-url="videoButtons.prevLessonUrl" :next-lesson-url="videoButtons.nextLessonUrl"
                         :brand="brand" :prev-label="videoButtons.prevLabel" :next-label="videoButtons.nextLabel"
-                        :has-qa-video="videoButtons.hasQAVideo" 
+                        :has-qa-video="videoButtons.hasQAVideo"
                     />
                 </div>
                 <!-- Close Expanded View -->
@@ -128,7 +128,7 @@
                         </header>
                         <!-- Cards -->
                         <section class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-relative tw-overflow-y-auto lg:tw-block">
-                            <div v-for="(item, i) in relatedLessons " 
+                            <div v-for="(item, i) in relatedLessons.data"
                                  :key="i"
                                  class="tw-group tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-px-2"
                             >
@@ -161,20 +161,21 @@
         <!-- Workout Chapter Soundslice -->
         <transition name="show-from-bottom">
             <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
-                <SoundSlice 
-                    :user-id="videoProps.userId" 
+                <SoundSlice
+                    :user-id="videoProps.userId"
                     :theme-color="brand"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                    :soundslice-slug="soundsliceSlug" 
+                    :soundslice-slug="soundsliceSlug"
                     :contentId="videoProps.contentId"
-                    :end-time="videoProps.totalDuration" 
                     :force-start-time="true"
                     :start-time="chapterStartTime"
+                    :end-time="videoProps.totalDuration"
+                    :loop="startLooping"
                 >
                     <template v-slot:soundsliceControls>
-                        <SoundSliceControls 
-                            :title="soundsliceTitle || videoResources.title" 
-                            :disable-next="true" 
+                        <SoundSliceControls
+                            :title="soundsliceTitle || videoResources.title"
+                            :disable-next="true"
                             :disable-prev="true"
                             @onClose="handleCloseSoundslice" />
                     </template>
@@ -284,7 +285,7 @@ const getBrandSpecificParams = () => {
 };
 
 const openSlice = (title, startAt, loop) => {
-    console.log('startAt', startAt);
+    console.log('loop', loop)
     soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
     startLooping.value = loop;

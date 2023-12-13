@@ -33,6 +33,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    loop: {
+        type: Boolean,
+        default: false,
+    },
     startTime: {
         type: Number,
         default: 0,
@@ -198,6 +202,10 @@ const handleSoundsliceEvent = (event) => {
 
                 //Get Current Time
                 ssiframe.value.contentWindow.postMessage(`{"method": "seek", "arg": ${uniqueSettings.time} }`, 'https://www.soundslice.com');
+                
+                //Set Loop
+                if(props.loop) ssiframe.value.contentWindow.postMessage(`{"method": "setLoop", "arg": [${props.startTime}, ${props.endTime}]}`, 'https://www.soundslice.com');
+                
                 //Done
                 isLoading.value = false;
                 break
