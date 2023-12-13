@@ -82,7 +82,6 @@
   };
 
   const handleOpenSoundslice = (title, chapter, loop) => {
-    console.log('loop', loop)
     emit('openSlice', title, chapter, loop);
   };
 </script>
