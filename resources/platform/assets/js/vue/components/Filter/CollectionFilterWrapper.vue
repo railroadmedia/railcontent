@@ -9,7 +9,7 @@
             :selected-sort="selectedSort"
             :tab-options="tabOptions"
             :active-tab="activeTab"
-            :hide-filter-icon="state.multiSelectColumns.length === 0"
+            :hide-filter-icon="multiSelectColumns.length === 0"
             @on-toggle-collapse="handleToggleCollapse"
             @on-search-submit="value => emit('onSearchChange', value)"
             @on-sort="item => emit('onSortChange', item)"
@@ -18,24 +18,28 @@
             <slot name="viewToggleButton"></slot>
         </FilterControls>
         <div>
-            <FilterPills :multi-select-columns="state.multiSelectColumns" :selected-filters="selectedFilters" @cancel-filter="param => emit('onFilterChange', param)" @clear-filter="emit('OnClearFilter')" />
+            <FilterPills :multi-select-columns="multiSelectColumns" :selected-filters="selectedFilters" @cancel-filter="param => emit('onFilterChange', param)" @clear-filter="emit('OnClearFilter')" />
         </div>
         <div v-if="!hideFilter" :class="`tw-relative ${!isCollapsed ? 'tw-mb-20' : ''}`">
             <FilterOptions
                 v-if="!isCollapsed && isMobile"
-                :multi-select-columns="state.multiSelectColumns"
+                :multi-select-columns="multiSelectColumns"
                 :single-select-columns="singleSelectColumns"
                 :selected-filters="selectedFilters"
+                :selected-progress="selectedProgress"
                 @on-filter-click-handle="param => emit('onFilterChange', param)"
+                @on-progress-click="progress => emit('onProgressChange', progress)"
             />
             <FilterOptionsModal
                 v-if="!isCollapsed && !isMobile"
                 :is-collapsed-mobile="isCollapsed"
                 :selected-filters="selectedFilters"
-                :multi-select-columns="state.multiSelectColumns"
+                :selected-progress="selectedProgress"
+                :multi-select-columns="multiSelectColumns"
                 :single-select-columns="singleSelectColumns"
                 @onClose="handleToggleCollapse"
                 @handle-filter-click="param => emit('onFilterChange', param)"
+                @on-progress-click="progress => emit('onProgressChange', progress)"
             />
 
             <div v-if="loading" class="tw-absolute tw-inset-0 dark:tw-bg-[#000C17]/30 tw-bg-[#F9F9F9]/30 tw-z-50"></div>
@@ -44,8 +48,7 @@
 </template>
 
 <script setup>
-    import { onMounted, onUnmounted, reactive, ref } from 'vue';
-    import ContentHelpers from '../../vuesora/assets/js/helper-functions/content.js';
+    import { onMounted, onUnmounted, ref } from 'vue';
     import FilterOptions from './FilterOptions.vue';
     import FilterOptionsModal from './FilterOptionsModal.vue';
     import FilterControls from './FilterControls.vue';
@@ -64,10 +67,6 @@
             type: String,
             default: '',
         },
-        filterableValues: {
-            type: Array,
-            default: () => [],
-        },
         hideFilter: {
             type: Boolean,
             default: false,
@@ -76,6 +75,10 @@
             type: Boolean,
             default: false,
         },
+        multiSelectColumns: {
+            type: Array,
+            default: () => [],
+        },
         preLoadedContent: {
             type: Object,
             default: () => ({}),
@@ -83,6 +86,10 @@
         selectedFilters: {
             type: Object,
             default: () => ({}),
+        },
+        selectedProgress: {
+            type: String,
+            default: '',
         },
         selectedSort: {
             type: String,
@@ -100,15 +107,15 @@
                     items: [
                         {
                             key: 'All',
-                            value: 'all',
+                            value: '',
                         },
                         {
                             key: 'In Progress',
-                            value: 'in_progress',
+                            value: 'started',
                         },
                         {
                             key: 'Complete',
-                            value: 'complete',
+                            value: 'completed',
                         },
                     ],
                 },
@@ -120,14 +127,10 @@
         },
     });
 
-    const emit = defineEmits(['onFilterChange', 'onSearchChange', 'onSortChange', 'onTabChange'])
+    const emit = defineEmits(['onFilterChange', 'onSearchChange', 'onSortChange', 'onTabChange', 'onProgressChange', 'OnClearFilter']);
 
     const isMobile = ref(true);
     const isCollapsed = ref(true);
-    const state = reactive({
-        filters: props.preLoadedContent ? ContentHelpers.flattenFilters( props.preLoadedContent?.meta?.filterOptions || [] ) : {},
-        multiSelectColumns: [],
-    })
 
     const handleToggleCollapse = () => {
         isCollapsed.value = !isCollapsed.value;
@@ -142,22 +145,9 @@
         }
     }
 
-    const getFilterColumns = () => {
-        let filters = [];
-        for (const value of props.filterableValues){
-            filters.push({
-                category: value,
-                items: state.filters[value]
-            });
-        }
-        state.multiSelectColumns = filters;
-    }
-
     onMounted(()=>{
         getScreenSize();
         window.addEventListener('resize', getScreenSize);
-
-        getFilterColumns();
     })
 
     onUnmounted(()=>{

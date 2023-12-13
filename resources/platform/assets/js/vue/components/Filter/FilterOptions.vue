@@ -2,46 +2,35 @@
     <div class="lg:tw-flex tw-flex-wrap lg:tw-gap-14 tw-text-[#000C17] dark:tw-text-white">
         <filter-multi-selection-item v-for="column in multiSelectColumns" :column="column" @click-column-item="param => emit('onFilterClickHandle', param)" :selected-filters="selectedFilters">
         </filter-multi-selection-item>
-        <filter-single-selection-item v-for="column in singleSelectColumns" :column="column" @single-select="singleSelect" :selected-value="selectedOption[column.category] ? selectedOption[column.category].value : ''">
+        <filter-single-selection-item v-for="column in singleSelectColumns" :column="column" @click-progress="progress => emit('onProgressClick', progress)" :selected-value="selectedProgress">
         </filter-single-selection-item>
     </div>
 </template>
 
 <script setup>
-    import { onMounted, ref } from 'vue';
-    import FilterMultiSelectionItem from './FilterMultiSelectionItem';
-    import FilterSingleSelectionItem from './FilterSingleSelectionItem';
+import FilterMultiSelectionItem from './FilterMultiSelectionItem';
+import FilterSingleSelectionItem from './FilterSingleSelectionItem';
 
-    const props = defineProps({
-        multiSelectColumns: {
-            type: Array,
-            default: [],
-        },
-        selectedFilters:{
-            type: Object,
-            default: () => ({}),
-        },
-        singleSelectColumns: {
-            type: Array,
-            default: [],
-        },
-    });
+const props = defineProps({
+    multiSelectColumns: {
+        type: Array,
+        default: [],
+    },
+    selectedFilters: {
+        type: Object,
+        default: () => ({}),
+    },
+    selectedProgress: {
+        type: String,
+        default: '',
+    },
+    singleSelectColumns: {
+        type: Array,
+        default: [],
+    },
+});
 
-    const emit = defineEmits(['onFilterClickHandle']);
-
-    const selectedOption = ref({});
-
-    const singleSelect = (category, item) => {
-        selectedOption.value[category] = item;
-    }
-
-    onMounted(()=>{
-        if(Object.keys(selectedOption.value).length === 0 && props.singleSelectColumns.length > 0) {
-            selectedOption.value = {
-                [props.singleSelectColumns[0].category]: props.singleSelectColumns[0].items[0],
-            }
-        }
-    })
+const emit = defineEmits(['onFilterClickHandle', 'onProgressClick']);
 </script>
 
 <style scoped>

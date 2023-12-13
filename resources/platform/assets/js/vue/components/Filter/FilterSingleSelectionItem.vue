@@ -7,7 +7,7 @@
         <hr class="tw-border-[rgba(101, 101, 107, 0.25)] dark:tw-border-[#223F57] tw-mb-[15px]" />
         <div :class="isCollapsed ? 'tw-hidden lg:tw-block' : ''">
             <li v-for="item in column.items" class="tw-flex tw-justify-between tw-items-center tw-mb-2 tw-px-4 md:tw-px-0" :class="isSelected(item.value) ? 'tw-font-bold' : ''"  >
-                {{ item.key }} <input class="tw-border tw-border-[#D1D5DB] dark:tw-border-[#445F74] tw-rounded-full dark:tw-bg-[#002039] checked:tw-bg-[#FFAE00] checked:dark:tw-bg-[#FFAE00] tw-cursor-pointer" type="radio" @click="$emit('singleSelect', column.category, item)" :checked="isSelected(item.value)" />
+                {{ item.key }} <input class="tw-border tw-border-[#D1D5DB] dark:tw-border-[#445F74] tw-rounded-full dark:tw-bg-[#002039] checked:tw-bg-[#FFAE00] checked:dark:tw-bg-[#FFAE00] tw-cursor-pointer" type="radio" @click="$emit('clickProgress', item.value)" :checked="isSelected(item.value)" />
             </li>
         </div>
 
@@ -15,28 +15,28 @@
 </template>
 
 <script setup>
-  import {ref} from "vue";
+import {ref} from "vue";
 
-  const props = defineProps({
-      column: {
-          type: Object,
-          default: {},
-      },
-      selectedValue: {
-          type: String,
-          default: '',
-      },
-  })
+const props = defineProps({
+  column: {
+      type: Object,
+      default: {},
+  },
+  selectedValue: {
+      type: String,
+      default: '',
+  },
+})
 
-  const isCollapsed = ref(false);
+const isCollapsed = ref(false);
 
-  const toggleCollapse = () => {
-      isCollapsed.value = !isCollapsed.value;
-  }
+const toggleCollapse = () => {
+  isCollapsed.value = !isCollapsed.value;
+}
 
-  const isSelected = (value) => {
-      return props.selectedValue === value;
-  }
+const isSelected = (value) => {
+  return props.selectedValue === value;
+}
 </script>
 
 <style scoped>

@@ -1,14 +1,14 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="filter.activeTab" :filterable-values="filterableValues" :hide-filter="hideFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData"
-            @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="filter.activeTab" :hide-filter="hideFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
+            @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
         <transition appear name="fade">
             <CollectionResults :current-page="getCurrentPage" :loading="loading" :total-pages="getTotalPages" @on-load-more="collectionStore.loadMore">
                 <template v-if="showGroupBy">
-                    <GroupedResultsContainer v-for="(data, i) in preLoadedContent.data" :key="i" :pre-loaded-content="preLoadedContent.data.slice(0,5)" />
+                    <GroupedResultsContainer v-for="(item, i) in preLoadedContent.data" :key="i" :item="item" />
                 </template>
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
@@ -22,7 +22,7 @@
                     :pre-loaded-content="data"
                     :content-type-override="collectionType"
                     :will-scroll="false"
-                    :subscription-calendar-id="subscriptionCalendarId" 
+                    :subscription-calendar-id="subscriptionCalendarId"
                 />
             </CollectionResults>
         </transition>
@@ -59,7 +59,7 @@ const props = defineProps({
     showBackButton: {
         type: Boolean,
         default: () => false,
-    }, 
+    },
     parentUrl: {
         type: String,
         default: () => "/",
@@ -101,7 +101,7 @@ const props = defineProps({
 const collectionStore = useCollectionStore();
 const userStore = useUserStore();
 
-const { data, currentPage, filter, loading, totalPages, tabData } = storeToRefs(collectionStore);
+const { data, currentPage, filter, loading, totalPages, tabData, filterColumns } = storeToRefs(collectionStore);
 const { brand } = storeToRefs(userStore);
 
 const request_params = computed(() => {
@@ -299,6 +299,10 @@ const handleFilterChange = (param) => {
     collectionStore.applyFilter(param);
 }
 
+const handleProgressChange = (value) => {
+    collectionStore.setProgress(value);
+}
+
 const handleSearchChange = (value) => {
     collectionStore.setSearchTerm(value)
 }
@@ -317,13 +321,14 @@ onMounted(() => {
     //console.log(props.preLoadedContent)
     collectionStore.setDefaults({
         isCoach: isCoach.value,
-        data: props.preLoadedContent?.data || [],
+        content: props.preLoadedContent,
         filter: {
             activeTab: getFirstTabOption.value.key,
             params: { ...request_params.value },
             [isCoach.value ? 'term' : 'title']: '',
         },
         tabData: getFirstTabData.value,
+        filterableValues: props.filterableValues,
     })
 
     collectionStore.getURLParams();

@@ -1,6 +1,7 @@
-import { defineStore } from 'pinia';
 import axios from "axios";
+import { defineStore } from 'pinia';
 import { useUserStore } from "./user";
+import ContentHelpers from '../vue/vuesora/assets/js/helper-functions/content';
 
 export const useCollectionStore = defineStore({
     id: 'Collection',
@@ -15,12 +16,16 @@ export const useCollectionStore = defineStore({
                 params: {},
                 searchTerm: '',
                 sort: 'slug',
+                progress: '',
             },
             isCoach: false,
             loading: false,
             tabData: {},
             totalPages: 0,
             totalResults: 0,
+            filterValues: {},
+            filterColumns: [],
+            filterableValues: [],
         }
     },
     actions: {
@@ -28,6 +33,14 @@ export const useCollectionStore = defineStore({
             this.updateIncludedFields(param);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
+            this.getData();
+        },
+
+        setProgress (value) {
+            this.filter = {
+                ...this.filter,
+                progress: value,
+            };
             this.getData();
         },
 
@@ -57,17 +70,6 @@ export const useCollectionStore = defineStore({
             this.filter.includedFields = [];
         },
 
-        setAllTabsToFilterNotApplied () {
-            Object.keys(this.tabData).forEach(tab => {
-                this.tabData[tab].filterApplied = false;
-            });
-        },
-
-        setActiveTabToFilterApplied () {
-            if (this.tabData[this.filter.activeTab]) {
-                this.tabData[this.filter.activeTab].filterApplied = true;
-            }
-        },
         async fetchData () {
             const userStore = useUserStore();
             try {
@@ -83,7 +85,9 @@ export const useCollectionStore = defineStore({
                                 ...this.filter.params,
                                 included_fields: this.filter.includedFields,
                                 [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm,
-                                tab: this.filter.activeTab
+                                tab: this.filter.activeTab,
+                                count_filter_items: true,
+                                ...(this.filter.progress && { included_user_states: [this.filter.progress] })
                             },
                         })
                 return response;
@@ -95,6 +99,7 @@ export const useCollectionStore = defineStore({
                 })
             }
         },
+
         async getData (replace = true, displayLoading = true) {
             this.loading = displayLoading;
             this.fetching = true;
@@ -106,6 +111,7 @@ export const useCollectionStore = defineStore({
             this.setURLParams();
             this.fetching = false;
         },
+
         getURLParams () {
             const params = new URLSearchParams(window.location.search);
 
@@ -115,12 +121,41 @@ export const useCollectionStore = defineStore({
                 this.filter.includedFields = params.getAll('included_fields[]');
             }
         },
+
+        getFilterColumns () {
+            let filters = [];
+            for (const value of this.filterableValues){
+                filters.push({
+                    category: value,
+                    items: this.filterValues[value]
+                });
+            }
+            this.filterColumns = filters;
+        },
+
+        getFilterValues (values) {
+            return ContentHelpers.flattenFilters(values);
+        },
+
         loadMore () {
             if (!this.fetching) {
                 this.tabData[this.filter.activeTab].currentPage++;
                 this.getData(false, false);
             }
         },
+
+        setAllTabsToFilterNotApplied () {
+            Object.keys(this.tabData).forEach(tab => {
+                this.tabData[tab].filterApplied = false;
+            });
+        },
+
+        setActiveTabToFilterApplied () {
+            if (this.tabData[this.filter.activeTab]) {
+                this.tabData[this.filter.activeTab].filterApplied = true;
+            }
+        },
+
         setData (response, replace) {
             if (response) {
                 if (replace) {
@@ -132,17 +167,21 @@ export const useCollectionStore = defineStore({
                     this.data = [...this.data, ...response.data.data];
                     this.tabData[this.filter.activeTab].totalResults = response.data.meta.totalResults;
                 }
+                this.filterValues = this.getFilterValues(response.data?.meta?.filterOptions);
+                this.getFilterColumns();
             }
 
             this.loading = false;
         },
+
         setDefaults (defaults) {
             if (defaults.isCoach){
                 this.isCoach = defaults.isCoach;
             }
 
-            if (defaults.data) {
-                this.data = defaults.data;
+            if (defaults.content) {
+                this.data = defaults.content.data || [];
+                this.filterValues = this.getFilterValues(defaults.content.meta.filterOptions);
             }
 
             if (defaults.filter) {
@@ -152,7 +191,13 @@ export const useCollectionStore = defineStore({
             if (defaults.tabData) {
                 this.tabData = { ...defaults.tabData };
             }
+
+            if (defaults.filterableValues) {
+                this.filterableValues = defaults.filterableValues;
+                this.getFilterColumns();
+            }
         },
+
         setURLParams () {
             const url = new URL(window.location.origin + window.location.pathname);
 
@@ -167,18 +212,21 @@ export const useCollectionStore = defineStore({
 
             window.history.pushState({}, '', url);
         },
+
         setSearchTerm (term) {
             this.filter.searchTerm = term;
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.getData();
         },
+
         sortData (item) {
             this.filter.sort = item;
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.getData();
         },
+
         switchTab (tab) {
             //Save page data
             this.tabData[this.filter.activeTab] = {
