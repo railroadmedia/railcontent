@@ -26,7 +26,6 @@
                                 :progress-state="videoProps.progressState" :video-length="videoProps.videoLength"
                                 :chapters="videoProps.chapters" :user-id="videoProps.userId" :like-count="videoProps.likeCount"
                                 :is-liked="videoProps.isLiked" :check-for-timecode="videoProps.checkForTimecode">
-
                                 <div :class="`widescreen title tw-text-${brand}`">
                                     <i class="fas fa-spinner fa-spin absolute-center"></i>
                                 </div>
