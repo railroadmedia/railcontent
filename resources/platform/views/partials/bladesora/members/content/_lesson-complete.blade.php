@@ -35,6 +35,7 @@
                     :lock-unowned="true"
                     @endif
                     user-id="{{ auth()->id() }}"
+                    :add-dark-mode-color="false"
                 ></content-catalogue>
             </div>
 
@@ -53,6 +54,7 @@
                         :lock-unowned="true"
                         @endif
                         user-id="{{ auth()->id() }}"
+                        :add-dark-mode-color="false"
                     ></content-catalogue>
                 </div>
             @endif

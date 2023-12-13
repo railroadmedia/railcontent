@@ -63,17 +63,14 @@ class SyncOrdersToShopifyJobManager implements ShouldQueue
             ->whereBetween("id", [$this->startAtId, $this->endAtId])
             ->where(function (Builder $q) {
                 $q->when(!$this->fresh, function (Builder $q) {
-                    return $q->whereNull("shopify_id")
-                        ->orWhereDate("updated_at", ">", $this->lastSyncAt)
+                    return $q->whereDate("updated_at", ">", $this->lastSyncAt)
 
                         // we also need to check if any of the order's order items or order item fulfillments need to be synced
                         ->orWhereHas("orderItems", function (Builder $oiq) {
-                            $oiq->whereNull("shopify_id")
-                                ->orWhereDate("updated_at", ">", $this->lastSyncAt);
+                            $oiq->whereDate("updated_at", ">", $this->lastSyncAt);
                         })
                         ->orWhereHas("orderItemFullfillments", function (Builder $oifq) {
-                            $oifq->whereNull("shopify_id")
-                                ->orWhereDate("updated_at", ">", $this->lastSyncAt);
+                            $oifq->whereDate("updated_at", ">", $this->lastSyncAt);
                         });
                 });
             })

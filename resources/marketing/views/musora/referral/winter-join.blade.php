@@ -97,7 +97,7 @@
                     <strong>The 12 Days of Giving <br />contest is on right now!</strong>
                 </h3>
                 <p>
-                    Start your 30-day trial today and you’ll enter to win a $100 gift card to {{ ucfirst($brand) }}. This referral contest closes on December 23, 2023. <a class="italic text-white underline" href="#terms">See terms & conditions below.</a>
+                    Start your 30-day trial today and you’ll enter to win a $100 gift card to {{ ucfirst($brand) }}. This referral contest closes on December 22, 2023. <a class="italic text-white underline" href="#terms">See terms & conditions below.</a>
                 </p>
             </div>
         </div>
@@ -130,7 +130,7 @@
             <p>
                 <strong>Eligibility:</strong> This contest is open to Musora students with an active, paid membership and newly referred students, 18 years or older at the time of entry. Void where prohibited by law. Employees, officers, and directors of the sponsor and their immediate family members and/or those living in the same household are not eligible to participate in the contest.
                 <br><br>
-                <strong>How to Enter:</strong> Participants automatically receive an entry to the contest when a referred friend signs up for a membership with a 30-day trial from December 11 to 23, 2023. Participants may collect up to (5) contest entries for {{ ucfirst($brand) }} based on each referral sign-up during the contest period; for a total of (20) contest entries across all Musora brands. New students who sign up for {{ ucfirst($brand) }} will gain one contest entry. No purchase is necessary to enter or win.
+                <strong>How to Enter:</strong> Participants automatically receive an entry to the contest when a referred friend signs up for a membership with a 30-day trial from December 11 to 22, 2023. Participants may collect up to (5) contest entries for {{ ucfirst($brand) }} based on each referral sign-up during the contest period; for a total of (20) contest entries across all Musora brands. New students who sign up for {{ ucfirst($brand) }} will gain one contest entry. No purchase is necessary to enter or win.
                 <br><br>
                 <strong>Prize:</strong> Twelve students will win a $100 Musora gift card redeemable inside the Drumeo, Pianote, Guitareo, and Singeo shops. The prizes are non-transferable and cannot be exchanged for cash.
                 <br><br>
