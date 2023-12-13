@@ -70,9 +70,15 @@ class WorkoutsImport2023 extends Command
                     $content->save();
 
                 }
+
+                $content->published_on =
+                    Carbon::now()->subMonth()
+                        ->toDateTimeString();
+                $content->save();
+
                 $contentId = $content->id;
                 $content->setTitle($contentTitle);
-                $content->published_on = Carbon::now()->subDays(1)->toDateTimeString();
+
                 $content->setDifficulty($this->getValue($data, $headersRow, 'Difficulty'));
                 $content->setXP($this->getValue($data, $headersRow, 'XP'));
                 $content->setTopic($this->getValue($data, $headersRow, 'Topic Filter'));
