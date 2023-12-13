@@ -56,6 +56,7 @@ class WorkoutsImport2023 extends Command
                 $content->setDifficulty($this->getValue($data, $headersRow, 'Difficulty'));
                 $content->setXP($this->getValue($data, $headersRow, 'XP'));
                 $content->setTopic($this->getValue($data, $headersRow, 'Topic Filter'));
+                $content->setStyle($this->getValue($data, $headersRow, 'Style'));
                 $content->setInstructor($this->getValue($data, $headersRow, 'Instructor'));
                 $content->setVideo($this->getValue($data, $headersRow, 'Video ID - Workouts'), $this->getValue($data, $headersRow, 'Duration'));
                 $content->setSoundsliceSlug($this->getValue($data, $headersRow, 'SSID - Workouts'));

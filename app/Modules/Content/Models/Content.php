@@ -318,22 +318,21 @@ class Content extends Model
 
     public function setTopic($value)
     {
-        $values = array_map('trim', explode(',', $value));
-        foreach ($values as $key => $value) {
-            if ($value) {
-                $topic = ContentTopic::query()->where('content_id', '=', $this->id)->where('topic', $value)->first();
-                if(!$topic) {
-                    $topic = new ContentTopic();
-                    $topic->content_id = $this->id;
-                    $topic->topic = $value;
-                    $topic->position = $key + 1;
-                    $topic->save();
-                }
+        if ($value) {
+            $topic =
+                ContentTopic::query()
+                    ->where('content_id', '=', $this->id)
+                    ->where('topic', $value)
+                    ->first();
+            if (!$topic) {
+                $topic = new ContentTopic();
+                $topic->content_id = $this->id;
+                $topic->topic = $value;
+                $topic->position = 1;
+                $topic->save();
             }
         }
-        //  $this->setFieldArray('topic', $values);
     }
-
 
     public function setTitle($value)
     {
@@ -349,7 +348,7 @@ class Content extends Model
 
     public function setXP($value)
     {
-        if($value) {
+        if ($value) {
             $this->setField('xp', $value);
             $this->xp = $value;
         }
@@ -357,39 +356,41 @@ class Content extends Model
 
     public function setRegistrationUrl($value)
     {
-        if($value) {
+        if ($value) {
             $this->setField('registration_url', $value);
         }
     }
 
     public function setEnrollmentStartDate($value)
     {
-        if($value) {
+        if ($value) {
             $this->setField('enrollment_start_time', $value);
         }
     }
 
     public function setEnrollmentEndDate($value)
     {
-        if($value) {
+        if ($value) {
             $this->setField('enrollment_end_time', $value);
         }
     }
 
     public function setInstructor($value)
     {
-            if ($value) {
-                $instructor = Instructor::query()->where('name', 'like', '%'.$value.'%')->first();
-                if($instructor) {
-                    $this->setField('instructor', $instructor->id);
-                }
+        if ($value) {
+            $instructor =
+                Instructor::query()
+                    ->where('name', 'like', '%'.$value.'%')
+                    ->first();
+            if ($instructor) {
+                $this->setField('instructor', $instructor->id);
             }
-
+        }
     }
 
     public function setDescription($value)
     {
-        if($value) {
+        if ($value) {
             $this->setData('description', $value);
         }
     }
@@ -421,7 +422,7 @@ class Content extends Model
 
     public function setVideo($value, $duration)
     {
-        if($value && $duration != '') {
+        if ($value && $duration != '') {
             $video =
                 Content::query()
                     ->where('vimeo_video_id', '=', $value)
@@ -449,15 +450,39 @@ class Content extends Model
 
     public function setParentId($value)
     {
-        $hierarhy = ContentHierarchy::query()->where('parent_id', '=', $value)->where('child_id', '=', $this->id)->get();
+        $hierarhy =
+            ContentHierarchy::query()
+                ->where('parent_id', '=', $value)
+                ->where('child_id', '=', $this->id)
+                ->get();
 
-        if($hierarhy->isEmpty()){
+        if ($hierarhy->isEmpty()) {
             $hierarhy = new ContentHierarchy();
             $hierarhy->parent_id = $value;
             $hierarhy->child_id = $this->id;
             $hierarhy->child_position = 1;
-            $hierarhy->created_on = Carbon::now()->toDateTimeString();
+            $hierarhy->created_on =
+                Carbon::now()
+                    ->toDateTimeString();
             $hierarhy->save();
+        }
+    }
+
+    public function setStyle($value)
+    {
+        if ($value) {
+            $style =
+                ContentStyle::query()
+                    ->where('content_id', '=', $this->id)
+                    ->where('style', $value)
+                    ->first();
+            if (!$style) {
+                $style = new ContentStyle();
+                $style->content_id = $this->id;
+                $style->style = $value;
+                $style->position = 1;
+                $style->save();
+            }
         }
     }
 
