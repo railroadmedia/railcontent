@@ -134,6 +134,7 @@
 
     <grid-catalogue
       v-if="catalogueType === 'grid'"
+      :add-dark-mode-color="addDarkModeColor"
       :content="content"
       :brand="brand"
       :theme-color="themeColor"
@@ -282,7 +283,11 @@ export default {
   },
   mixins: [UserCatalogueEvents, ThemeClasses],
   props: {
-    searchBarTitle: {
+    addDarkModeColor: {
+      type: Boolean,
+      default: () => true,
+    },
+      searchBarTitle: {
       type: String,
       default: '',
     },

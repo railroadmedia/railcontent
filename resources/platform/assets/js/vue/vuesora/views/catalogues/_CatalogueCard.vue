@@ -68,14 +68,15 @@
                 >
                     <!-- Coach Title -->
                     <div v-if="item.type !== 'song-part'">
-                        <h5 class="tw-text-xs tw-font-normal tw-leading-none tw-mb-1 tw-uppercase tw-text-[#9EC0DC]"
+                        <h5 class="tw-text-xs tw-font-normal tw-leading-none tw-mb-1 tw-uppercase"
+                            :class="addDarkModeColor ? 'tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]' : 'tw-text-[#9EC0DC]'"
                             v-if="!isGuitareoChordAndScale" v-html="mappedData.color_title">
                         </h5>
                     </div>
 
                     <!-- Video Title -->
-                    <h4 class="tw-text-sm tw-leading-snug tw-text-white font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
-                        :class="{'text-center': isGuitareoChordAndScale}"
+                    <h4 class="tw-text-sm tw-leading-snug font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
+                        :class="[{'text-center': isGuitareoChordAndScale}, addDarkModeColor ? 'tw-text-[#00101D] dark:tw-text-white' : 'tw-text-white']"
                     >
                         {{ mappedData.black_title }}
                     </h4>
@@ -85,8 +86,8 @@
                        v-html="mappedData.description.replace(/<[^>]+>/g, '')"
                     ></p>
                     <!-- Content -->
-                    <h6 class="tw-text-xs tw-font-normal tw-capitalize tw-text-[#9EC0DC]"
-                        :class="{'text-center': isGuitareoChordAndScale}"
+                    <h6 class="tw-text-xs tw-font-normal tw-capitalize"
+                        :class="[{'text-center': isGuitareoChordAndScale}, addDarkModeColor ? 'tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]' : 'tw-text-[#9EC0DC]']"
                     >
                         <span v-html="mappedData.content_type"></span>
                         <span v-if="mappedData.grey_title && mappedData.grey_title !== ''">
@@ -98,8 +99,8 @@
                 <!-- Add to Playlist -->
                 <div class="tw-inline-flex tw-items-start tw-p-1">
                     <button v-if="item.type !== 'pack-bundle' && showMyListAction"
-                        class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#9EC0DC]y"
-                        :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
+                        class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5"
+                        :class="[is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white', addDarkModeColor ? 'tw-text-[#00101D] dark:tw-text-white' : 'tw-text-[#9EC0DC]']"
                         :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"
                         :data-content-id="item.id"
                         :data-content-type="item.type"
@@ -122,6 +123,10 @@ export default {
     name: 'CatalogueCard',
     mixins: [Mixin, ThemeClasses],
     props: {
+        addDarkModeColor: {
+            type: Boolean,
+            default: () => true,
+        },
         sixWide: {
             type: Boolean,
             default: () => false,

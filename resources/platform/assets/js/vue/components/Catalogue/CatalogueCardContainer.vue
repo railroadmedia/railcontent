@@ -7,6 +7,7 @@
                     ${isMiniView && willScroll ? 'tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-3 xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-y-[25px] tw-gap-x-[8px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : ''}
                     ${!isMiniView && willScroll ? 'tw-flex tw-overflow-x-scroll lg:tw-overflow-x-clip tw-flex-nowrap lg:tw-flex-wrap' : ''}
                     ${!isMiniView && !willScroll ? 'tw-flex tw-flex-wrap' : ''}
+                    ${breakToListView ? 'tw-@container/breakToList' : ''}
                 `">
                 <CatalogueCard
                     v-for="item in data"
@@ -14,7 +15,6 @@
                     :item="item"
                     :content-type="item.type"
                     :brand="brand"
-                    :theme-color="brand"
                     :use-theme-color="useThemeColor"
                     :user-id="userId"
                     :is-admin="isAdmin"
@@ -23,7 +23,7 @@
                     :content-type-override="contentTypeOverride"
                     :is-mini-card="isMiniView"
                     :show-my-list-action="showMyListAction"
-                    :display-inline="displayInline"
+                    :force-list-view="displayInline"
                     :break-to-list-view="breakToListView"
                     @addToList="addToList"
                     @progressReset="resetProgressEventHandler"

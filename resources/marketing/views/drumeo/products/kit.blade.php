@@ -124,7 +124,7 @@
         "noBreadcrumb" => true
     ])
 
-    <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
+    <header class="text-white relative overflow-hidden z-10" style="background-color:#3b5875;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <h1 class="leading-tight mb-3"><strong>Everything you need to<br class="hidden sm:inline"> start playing the drums.</strong></h1>
@@ -152,7 +152,7 @@
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10 bg-cover bg-center" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/kit/header-bg.jpg');"></div>
 {{--        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to bottom, transparent, rgba(0,79,153,0.6));"></div>--}}
-        <video class="object-cover w-full relative z-0" style="height: 750px;" type="video/mp4" autoplay loop playsinline muted
+        <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
             src="https://d21q7xesnoiieh.cloudfront.net/marketing/drumeo/shop/stickbag/header-vid.mp4"></video>
     </header>
 
@@ -168,7 +168,7 @@
     </section>
 
     <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative text-white" style="background:linear-gradient(to bottom, #01050d 66%, #021021);">
-        <div class="container mx-auto z-10 relative max-w-5xl pb-16">
+        <div class="container mx-auto z-10 relative max-w-5xl">
             <h2 class="leading-tight mb-7 sm:mb-10"><strong>Pro details on a<br class="sm:hidden">  beginner budget.</strong></h2>
 
             <div class="mb-7 sm:mb-10"
@@ -264,10 +264,10 @@
             </div>
         </div>
     </section>
-    <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative">
-        <div class="container mx-auto z-10 relative max-w-4xl">
+    <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background:linear-gradient(to bottom, #fff 66%, #e8f2fb);">
+        <div class="container mx-auto z-10 relative max-w-5xl">
             <h2 class="leading-tight mb-7 sm:mb-10"><strong>Play your first beats<br class="sm:hidden"> <i class="fas fa-arrow-right text-drumeo"></i> Write your first song.</strong></h2>
-            <div class="flex flex-wrap sm:flex-nowrap justify-center text-left">
+            <div class="flex flex-wrap sm:flex-nowrap justify-center text-left mb-8 sm:mb-16 lg:mb-20">
                 <div class="mb-5 sm:mb-0 sm:pr-7 sm:w-7/12 flex-grow-0">
                     <div class="h-full rounded-xl p-7 sm:p-10 pt-48 bg-black text-white flex items-end bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/new-drummers-image.jpg');">
                         <div>
@@ -287,10 +287,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background:linear-gradient(to bottom, #fff 50%, #e8f2fb);">
-        <div class="container mx-auto z-10 relative max-w-5xl">
             <h6 class="text-drumeo mb-3"><em>The highest-rated beginner e-kit<br class="sm:hidden"> meets award-winning drum lessons.</em></h6>
             <h2 class="leading-tight mb-5 sm:mb-7"><strong>Rave reviews for the<br class="sm:hidden"> Alesis Nitro Max…</strong></h2>
 
@@ -299,37 +295,37 @@
                     <img class="h-5 lg:h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/amazon-logo.png">
                     <h2 class="leading-tight my-2"><strong>4.6</strong></h2>
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star-half" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star-half" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
                 </div>
                 <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
                     <img class="h-5 lg:h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/music-radar-logo.png">
                     <h2 class="leading-tight my-2"><strong>5</strong></h2>
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
                 </div>
                 <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
                     <img class="h-5 lg:h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/thomann-logo.png">
                     <h2 class="leading-tight my-2"><strong>4.3</strong></h2>
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star-half" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star-half" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
                 </div>
                 <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
                     <img class="h-5 lg:h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/sweetwater-logo.png">
                     <h2 class="leading-tight my-2"><strong>5</strong></h2>
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
                 </div>
 </div>
 
@@ -561,7 +557,7 @@
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h2 class="leading-tight"><strong>A double guarantee for peace of mind. </strong></h2>
             <p class="leading-tight mt-2 mb-5 sm:mb-7">Your E-Kit includes a 90-day purchase guarantee from Drumeo + a 1-year warranty from Alesis on all parts. </p>
-            <img class="h-36" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/guarantee.png">
+            <img class="h-16 sm:h-36" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/guarantee.png">
         </div>
     </section>
 
@@ -596,14 +592,26 @@
         </div>
     </section>
 
-    <section class="text-center py-10" style="background: #00101D;">
+
+    <section class="px-4 sm:px-6 py-10" style="background: #f0f6fc;">
+        <div class="container max-w-5xl mx-auto relative z-50">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <h5 class="leading-normal"><strong>Free shipping in North America</strong><br>
+                Your Drumeo E-Kit will ship for free anywhere in North America.</h5>
+
+                <h5 class="leading-normal"><strong>Discounted shipping outside of North America</strong><br>
+                If you live outside of North America, you qualify for a $100 shipping discount. You’ll see that applied upon checkout.</h5>
+            </div>
+        </div>
+    </section>
+    <section class="text-center py-10 text-white" style="background: #00101D;">
         <div class="container mx-auto relative z-50">
-            <div class="inline-block w-full px-3 md:px-4 mb-5 text-light-navy">
+            <div class="inline-block w-full px-3 md:px-4 mb-5 opacity-60">
                 <p>Call us toll-free at
                     <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
                     <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
             </div>
-            <div class="inline-block w-full px-3 md:px-4 text-light-navy" style="margin-top: 0;">
+            <div class="inline-block w-full px-3 md:px-4 opacity-60" style="margin-top: 0;">
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>

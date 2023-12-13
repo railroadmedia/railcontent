@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="tw-px-4 lg:tw-px-0">
         <FilterControls
             :showBackButton="showBackButton"
             :parentUrl="parentUrl"

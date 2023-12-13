@@ -1,6 +1,6 @@
 <template>
     <form
-        class="tw-relative dark:tw-bg-black tw-bg-white tw-rounded-[63px] tw-w-full md:tw-max-w-[576px] tw-h-[40px] md:tw-ml-[10px]"
+        class="tw-relative dark:tw-bg-black tw-bg-white tw-rounded-[63px] tw-w-full md:tw-max-w-[576px] tw-h-[40px] md:tw-ml-[10px] tw-mb-4 md:tw-mb-0"
     >
         <!-- Search Icon -->
         <div class="tw-flex tw-justify-center tw-items-center tw-cursor-pointer tw-absolute tw-h-full tw-rounded-[5px] tw-w-[25px] tw-mr-[20px] tw-bg-transparent tw-z-20 tw-right-0 tw-top-0" @click="handleIconClick">
