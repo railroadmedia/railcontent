@@ -925,6 +925,8 @@ return [
             ],
             'workout' => [
                 'trailer1' => 448684113,
+                'allowableFilters' => ['difficulty','style','topic'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
             ],
             'challenge' => [
                 'trailer1' => 448684113,
@@ -1014,6 +1016,8 @@ return [
             ],
             'workout' => [
                 'trailer1' => 448684113,
+                'allowableFilters' => ['difficulty','style','topic'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
             ],
             'challenge' => [
                 'trailer1' => 448684113,
@@ -1088,6 +1092,8 @@ return [
             ],
             'workout' => [
                 'trailer1' => 448684113,
+                'allowableFilters' => ['difficulty','style','topic'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
             ],
             'challenge' => [
                 'trailer1' => 448684113,
