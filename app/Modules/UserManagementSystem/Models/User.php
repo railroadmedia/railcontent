@@ -503,107 +503,43 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return !empty($this->total_xp) ? $this->total_xp : 0;
     }
 
-    /**
-     * @return string
-     */
-    public function getXpRank()
+    public function getXpRank() : string
     {
-        switch ($this->total_xp) {
-            case $this->total_xp < 250:
-                return 'Casual';
-            case $this->total_xp >= 250 && $this->total_xp < 1000:
-                return 'Enthusiast I';
-            case $this->total_xp >= 1000 && $this->total_xp < 2500:
-                return 'Enthusiast II';
-            case $this->total_xp >= 2500 && $this->total_xp < 5000:
-                return 'Pro I';
-            case $this->total_xp >= 5000 && $this->total_xp < 10000:
-                return 'Pro II';
-            case $this->total_xp >= 10000 && $this->total_xp < 20000:
-                return 'Pro III';
-            case $this->total_xp >= 20000 && $this->total_xp < 50000:
-                return 'Master I';
-            case $this->total_xp >= 50000 && $this->total_xp < 100000:
-                return 'Master II';
-            case $this->total_xp >= 100000 && $this->total_xp < 250000:
-                return 'Master III';
-            case $this->total_xp >= 250000 && $this->total_xp < 500000:
-                return 'Drumeo Legend';
-            case $this->total_xp >= 500000 && $this->total_xp < 1000000:
-                return 'Legends: Starr';
-            case $this->total_xp >= 1000000 && $this->total_xp < 1500000:
-                return 'Legends: Erskine';
-            case $this->total_xp >= 1500000 && $this->total_xp < 2000000:
-                return 'Legends: Cobham';
-            case $this->total_xp >= 2000000 && $this->total_xp < 2500000:
-                return 'Legends: Garibaldi';
-            case $this->total_xp >= 2500000 && $this->total_xp < 3000000:
-                return 'Legends: Peart';
-            case $this->total_xp >= 3000000 && $this->total_xp < 4000000:
-                return 'Legends: Bonham';
-            case $this->total_xp >= 4000000 && $this->total_xp < 5000000:
-                return 'Legends: Colaiuta';
-            case $this->total_xp >= 5000000 && $this->total_xp < 7500000:
-                return 'Legends: Gadd';
-            case $this->total_xp >= 75000000 && $this->total_xp < 10000000:
-                return 'Legends: Porcaro';
-            case $this->total_xp >= 10000000:
-                return 'Legends: Rich';
-            default:
-                return 'Member';
-        }
+        return $this->getXpRankName($this->total_xp);
     }
 
-    /**
-     * @return string
-     */
-    public function getBrandXpRank()
+    public function getBrandXpRank() : string
     {
-        $brandXp = $this->getBrandTotalXp();
-        switch ($brandXp) {
-            case $brandXp < 250:
-                return 'Casual';
-            case $brandXp >= 250 && $this->total_xp < 1000:
-                return 'Enthusiast I';
-            case $brandXp >= 1000 && $this->total_xp < 2500:
-                return 'Enthusiast II';
-            case $brandXp >= 2500 && $this->total_xp < 5000:
-                return 'Pro I';
-            case $brandXp >= 5000 && $this->total_xp < 10000:
-                return 'Pro II';
-            case $brandXp >= 10000 && $this->total_xp < 20000:
-                return 'Pro III';
-            case $brandXp >= 20000 && $this->total_xp < 50000:
-                return 'Master I';
-            case $brandXp >= 50000 && $this->total_xp < 100000:
-                return 'Master II';
-            case $brandXp >= 100000 && $this->total_xp < 250000:
-                return 'Master III';
-            case $brandXp >= 250000 && $this->total_xp < 500000:
-                return 'Drumeo Legend';
-            case $brandXp >= 500000 && $this->total_xp < 1000000:
-                return 'Legends: Starr';
-            case $brandXp >= 1000000 && $this->total_xp < 1500000:
-                return 'Legends: Erskine';
-            case $brandXp >= 1500000 && $this->total_xp < 2000000:
-                return 'Legends: Cobham';
-            case $brandXp >= 2000000 && $this->total_xp < 2500000:
-                return 'Legends: Garibaldi';
-            case $brandXp >= 2500000 && $this->total_xp < 3000000:
-                return 'Legends: Peart';
-            case $brandXp >= 3000000 && $this->total_xp < 4000000:
-                return 'Legends: Bonham';
-            case $brandXp >= 4000000 && $this->total_xp < 5000000:
-                return 'Legends: Colaiuta';
-            case $brandXp >= 5000000 && $this->total_xp < 7500000:
-                return 'Legends: Gadd';
-            case $brandXp >= 75000000 && $this->total_xp < 10000000:
-                return 'Legends: Porcaro';
-            case $brandXp >= 10000000:
-                return 'Legends: Rich';
-            default:
-                return 'Member';
-        }
+        $brankExp = $this->getBrandTotalXp();
+        return $this->getXpRankName($brankExp, brand());
+    }
+
+    private static function getXpRankName($exp, $brand = '') : string
+    {
+        $isDrumeo = $brand == 'drumeo';
+        return match (true) {
+             $exp < 250 =>'Casual',
+             $exp < 1000 => 'Enthusiast I',
+             $exp < 2500 => 'Enthusiast II',
+             $exp < 5000 => 'Pro I' ,
+             $exp < 10000 => 'Pro II' ,
+             $exp < 20000 => 'Pro III' ,
+             $exp < 50000 => 'Master I' ,
+             $exp < 100000 => 'Master II' ,
+             $exp < 250000 => 'Master III' ,
+             $exp < 500000 => $isDrumeo ? 'Drumeo Legend' : 'Legend',
+             $exp < 1000000 => $isDrumeo ? 'Legends: Starr' : 'Legend I' ,
+             $exp < 1500000 => $isDrumeo ? 'Legends: Erskine' : 'Legend II' ,
+             $exp < 2000000 => $isDrumeo ? 'Legends: Cobham' : 'Legend III' ,
+             $exp < 2500000 => $isDrumeo ? 'Legends: Garibaldi' : 'Legend IV' ,
+             $exp < 3000000 => $isDrumeo ? 'Legends: Peart' : 'Legend V' ,
+             $exp < 4000000 => $isDrumeo ? 'Legends: Bonham' : 'Legend VI' ,
+             $exp < 5000000 => $isDrumeo ? 'Legends: Colaiuta' : 'Legend VII' ,
+             $exp < 7500000 => $isDrumeo ? 'Legends: Gadd' : 'Legend VIII' ,
+             $exp < 10000000 => $isDrumeo ? 'Legends: Porcaro' : 'Legend IX' ,
+             $exp >= 10000000 => $isDrumeo ? 'Legends: Rich' : 'Legend X',
+             default => 'Member'
+        };
     }
 
     /**

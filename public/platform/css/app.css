@@ -20121,7 +20121,11 @@ ul {
 }
 
 /* Tailwind CSS */
+<<<<<<< HEAD
 /*! tailwindcss v3.3.6 | MIT License | https://tailwindcss.com
+=======
+/*! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
+>>>>>>> project-workouts
 */
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -20209,19 +20213,28 @@ strong {
   font-weight: bolder;
 }
 /*
+<<<<<<< HEAD
 1. Use the user's configured `mono` font-family by default.
 2. Use the user's configured `mono` font-feature-settings by default.
 3. Use the user's configured `mono` font-variation-settings by default.
 4. Correct the odd `em` font sizing in all browsers.
+=======
+1. Use the user's configured `mono` font family by default.
+2. Correct the odd `em` font sizing in all browsers.
+>>>>>>> project-workouts
 */
 code,
 kbd,
 samp,
 pre {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
+<<<<<<< HEAD
   font-feature-settings: normal; /* 2 */
   font-variation-settings: normal; /* 3 */
   font-size: 1em; /* 4 */
+=======
+  font-size: 1em; /* 2 */
+>>>>>>> project-workouts
 }
 /*
 Add the correct font size in all browsers.
@@ -21218,7 +21231,12 @@ a:visited{
 }
 .tw-tooltip{
   background-color: #fff;
+<<<<<<< HEAD
   backface-visibility: hidden;
+=======
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+>>>>>>> project-workouts
   border-radius: 0.375rem;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   color: #000;
@@ -25126,10 +25144,13 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(255 90 107 / var(--tw-text-opacity)) !important;
 }
+<<<<<<< HEAD
 .tw-text-\[\#d1d1d1\]{
   --tw-text-opacity: 1 !important;
   color: rgb(209 209 209 / var(--tw-text-opacity)) !important;
 }
+=======
+>>>>>>> project-workouts
 .tw-text-\[\#ef4444\]{
   --tw-text-opacity: 1 !important;
   color: rgb(239 68 68 / var(--tw-text-opacity)) !important;
@@ -27622,6 +27643,12 @@ a:visited{
   .lg\:tw-ml-auto{
     margin-left: auto !important;
   }
+<<<<<<< HEAD
+=======
+  .lg\:tw-mr-0{
+    margin-right: 0px !important;
+  }
+>>>>>>> project-workouts
   .lg\:tw-mr-12{
     margin-right: 3rem !important;
   }
@@ -27909,6 +27936,12 @@ a:visited{
   .lg\:tw-flex-row{
     flex-direction: row !important;
   }
+<<<<<<< HEAD
+=======
+  .lg\:tw-flex-col{
+    flex-direction: column !important;
+  }
+>>>>>>> project-workouts
   .lg\:tw-flex-wrap{
     flex-wrap: wrap !important;
   }
@@ -28011,6 +28044,13 @@ a:visited{
     padding-left: 50px !important;
     padding-right: 50px !important;
   }
+<<<<<<< HEAD
+=======
+  .lg\:tw-py-0{
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+  }
+>>>>>>> project-workouts
   .lg\:tw-py-16{
     padding-top: 4rem !important;
     padding-bottom: 4rem !important;
@@ -28064,6 +28104,12 @@ a:visited{
   .lg\:tw-pr-\[42px\]{
     padding-right: 42px !important;
   }
+<<<<<<< HEAD
+=======
+  .lg\:tw-pr-\[8px\]{
+    padding-right: 8px !important;
+  }
+>>>>>>> project-workouts
   .lg\:tw-pt-0{
     padding-top: 0px !important;
   }
