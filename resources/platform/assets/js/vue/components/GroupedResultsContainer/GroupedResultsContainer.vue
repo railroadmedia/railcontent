@@ -2,10 +2,10 @@
     <!--  Instructor Thumbnail  -->
     <div class="tw-flex tw-justify-between tw-items-center tw-mb-4">
         <a class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white">
-            <img class="tw-rounded-full tw-w-20 tw-h-20 tw-border-2 tw-border-white tw-border-solid tw-mr-[10px]" src="https://d1923uyy6spedc.cloudfront.net/2022-04-18-HEADSHOTS-Brandon-Toews-101-1-1650867796.jpeg" alt="Instructor Image" />
+            <img class="tw-rounded-full tw-w-20 tw-h-20 tw-border-2 tw-border-white tw-border-solid tw-mr-[10px]" :src="`https://www.musora.com/musora-cdn/image/width=200/${item.head_shot_picture_url}`" :alt="`${item.name} Image`" />
             <div>
-                <h3 class="tw-font-bold">Gene Hoglan</h3>
-                <div class="tw-font-semibold">11 Workouts</div>
+                <h3 class="tw-font-bold">{{ item.name }}</h3>
+                <div class="tw-font-semibold">{{ item.lessons.length }} Workouts</div>
             </div>
         </a>
         <a class="tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue xl:tw-text-lg hover:tw-underline" style="text-underline-offset: 6px;">
@@ -15,7 +15,7 @@
 
     <div>
         <transition appear name="fade">
-            <CatalogueCardContainer :pre-loaded-content="preLoadedContent" />
+            <CatalogueCardContainer :pre-loaded-content="item.lessons" />
         </transition>
     </div>
 </template>
@@ -24,9 +24,9 @@
 import CatalogueCardContainer from "../Catalogue/CatalogueCardContainer";
 
 const props = defineProps({
-    preLoadedContent: {
-        type: [Array, Object],
-        default: () => [],
+    item: {
+        type: Object,
+        default: () => ({}),
     },
 })
 </script>
