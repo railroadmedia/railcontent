@@ -207,7 +207,7 @@
 
     @include('musora.sales.components.trailer-grid-section', [
         'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
-        'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum featuring many of the world’s best teachers. ',
+        'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline">curriculum featuring many of the world’s best teachers. ',
     ])
 
     @php

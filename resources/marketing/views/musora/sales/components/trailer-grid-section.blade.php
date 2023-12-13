@@ -6,10 +6,19 @@
         <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6">
             @foreach ($gridItems as $key => $gridItem)
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8">
-                    <div class="aspect-16:9 overflow-hidden text-white relative w-full bg-cover bg-center rounded-xl" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/{{ $gridItem['image'] }}');">
-                        <div class="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-10" style="background:linear-gradient(to bottom, transparent, #000);">
-                            <p class="leading-tight mb-0.5"><strong class="font-black"><span class="border border-{{ $theme }} rounded-full px-2 py-0.5 inline-block">{{$key+1}}</span> {{ $gridItem['title'] }}</strong></p>
-                            <p class="leading-normal text-sm">{{ $gridItem['desc'] }}</p>
+                    <div class="aspect-16:9 overflow-hidden text-white relative w-full bg-cover bg-center rounded-xl"
+                        style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/{{ $gridItem['image'] }}');"
+                        x-data="{ descriptionSelected: false }"
+                    >
+                        <div class="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-10" style="background:linear-gradient(to bottom, transparent, #000);"
+                            x-on:click="descriptionSelected = true"
+
+                        >
+                            <h5 class="leading-tight"><strong class="font-black"><span class="border-2 border-white rounded-full px-2 mr-2 inline-block">+</span> {{ $gridItem['title'] }}</strong></h5>
+                            <p class="leading-normal text-sm mt-0.5"
+                                x-cloak
+                                x-bind:class="{ 'hidden': !descriptionSelected }"
+                            >{{ $gridItem['desc'] }}</p>
                         </div>
                     </div>
                 </div>

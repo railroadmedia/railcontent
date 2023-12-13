@@ -220,7 +220,7 @@
 
     @include('musora.sales.components.trailer-grid-section', [
         'header' => 'Your piano goals<br class="inline sm:hidden"> start here.',
-        'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum and direct access to real teachers. ',
+        'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline">curriculum and direct access to real teachers. ',
     ])
 
    @php
@@ -255,9 +255,9 @@
 
     @php
         $testimonials = $pianote['testimonials'];
-        $youtube = convertNumber(Prices::$pianoteYoutubeSubsc); 
+        $youtube = convertNumber(Prices::$pianoteYoutubeSubsc);
         $facebook = convertNumber(Prices::$pianoteFacebookLikes);
-        $instagram = convertNumber(Prices::$pianoteInstagramFollowers); 
+        $instagram = convertNumber(Prices::$pianoteInstagramFollowers);
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
