@@ -61,7 +61,7 @@
   import { onBeforeMount } from "vue";
 
   onBeforeMount(()=> {
-    console.log('video chapters', props.chapters)
+    //console.log('video chapters', props.chapters)
   })
 
   const props = defineProps({
@@ -82,7 +82,6 @@
   };
 
   const handleOpenSoundslice = (chapter, loop) => {
-    console.log('handle open', chapter, loop);
     emit('openSlice', chapter, loop);
   };
 </script>
