@@ -29,8 +29,9 @@
         ],
         "gridItems" => [
             [
+                "big" => true,
                 "image" =>
-                "marketing/drumeo/membership/homepage/webp-format/10-level-cirriculum.webp",
+            "marketing/drumeo/membership/homepage/webp-format/10-level-cirriculum.webp",
                 "title" => "10-Level Curriculum",
                 "desc" =>
                 "The most trusted step-by-step video lessons for every technique, pattern, and style.",
@@ -56,6 +57,19 @@
             ],
             [
                 "image" =>
+                    "marketing/drumeo/membership/homepage/webp-format/downloadable-videos.webp",
+                "title" => "Downloadable Videos",
+                "desc" =>
+                    "Stream your lessons OR download your videos so you can practice anywhere, anytime.",
+                "lessonInfo" => [
+                    [
+                        "thumb" =>
+                            "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/downloadable-videos.webp",
+                    ],
+                ],
+            ],
+            [
+                "image" =>
                 "marketing/drumeo/membership/homepage/2023/guided-workouts2.jpg",
                 "title" => "Guided Workouts",
                 "desc" =>
@@ -68,6 +82,7 @@
                 ],
             ],
             [
+                "big" => true,
                 "image" =>
                 "marketing/drumeo/membership/homepage/webp-format/world-class-teachers.webp",
                 "title" => "World-Class Teachers",
@@ -77,19 +92,6 @@
                     [
                         "thumb" =>
                         "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/world-class-teachers.webp",
-                    ],
-                ],
-            ],
-            [
-                "image" =>
-                "marketing/drumeo/membership/homepage/webp-format/downloadable-videos.webp",
-                "title" => "Downloadable Videos",
-                "desc" =>
-                "Stream your lessons OR download your videos so you can practice anywhere, anytime.",
-                "lessonInfo" => [
-                    [
-                        "thumb" =>
-                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/downloadable-videos.webp",
                     ],
                 ],
             ],
