@@ -162,13 +162,13 @@
         <transition name="show-from-bottom">
             <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
                 <SoundSlice 
-                    :user-id="userId" 
+                    :user-id="videoProps.userId" 
                     :theme-color="brand"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
                     :soundslice-slug="soundsliceSlug" 
-                    :contentId="contentId"
+                    :contentId="videoProps.contentId"
                     :end-time="videoProps.totalDuration" 
-                    :start-looping="startLooping"
+                    :force-start-time="true"
                     :start-time="chapterStartTime"
                 >
                     <template v-slot:soundsliceControls>
@@ -284,6 +284,7 @@ const getBrandSpecificParams = () => {
 };
 
 const openSlice = (title, startAt, loop) => {
+    console.log('startAt', startAt);
     soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
     startLooping.value = loop;
