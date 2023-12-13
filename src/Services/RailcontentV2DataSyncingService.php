@@ -253,7 +253,7 @@ class RailcontentV2DataSyncingService
                         $tableRowsToInsert[$tableName][] = [
                             'content_id' => $contentRow->id,
                             $fieldAndColumnName => $contentFieldRow->value,
-                            'position' => $contentFieldRow->position,
+                            'position' => $contentFieldRow->position ?? 1,
                         ];
                     }
                 }
