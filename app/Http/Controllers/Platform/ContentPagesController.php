@@ -901,6 +901,30 @@ class ContentPagesController extends BaseController
 
                 $contentToRenderAsLesson['ranges'] = array_unique($contentToRenderAsLesson['ranges'] ?? []);
             }
+        }   
+
+        if ($contentToRenderAsLesson['type'] == 'workout') {
+            return view('content.workout-lesson', [
+                "parentType" => $contentToRenderAsLessonParent['type'] ?? null,
+                "lessonType" => $contentToRenderAsLesson['type'],
+                "lessonContent" => $contentToRenderAsLesson,
+                "parent" => $contentToRenderAsLessonParent,
+                "parentChildren" => $parentChildren,
+                "hasSiblings" => !empty($parentChildren),
+                "nextChild" => $nextChild,
+                "previousChild" => $previousChild,
+                "isLive" => false,
+                "relatedLessons" => $relatedLessons,
+                "themeColor" => $themeColor,
+                "isHiddenContentType" => $isHiddenContentType,
+                "hasLessonInfo" => $hasLessonInfo,
+                "thisLessonJson" => $thisLessonJson,
+                "nextLessonJson" => content_to_json($nextChild),
+                "showEmail" => false,
+                "firstContent" => $firstContent,
+                "rangesVideoIds" => $rangesVideoIds,
+                "adminMessage" => $adminMessage,
+            ]);
         }
 
         return view('content.lesson', [
