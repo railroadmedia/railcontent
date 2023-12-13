@@ -331,6 +331,7 @@ class Content extends Model
                 $topic->position = 1;
                 $topic->save();
             }
+            $this->setField('topic', $value);
         }
     }
 
@@ -483,6 +484,7 @@ class Content extends Model
                 $style->position = 1;
                 $style->save();
             }
+            $this->setField('style', $value);
         }
     }
 
