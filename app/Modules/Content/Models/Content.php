@@ -488,4 +488,35 @@ class Content extends Model
         }
     }
 
+    public function setChapter($value, $position = 1)
+    {
+        if(!$value){
+            return;
+        }
+        $chapterData = explode(':', $value);
+        $chapterDescription = $this->data->where('key', '=', 'chapter_description')
+            ->where('position','=',$position)->first();
+        if($chapterDescription){
+            $chapterDescription->delete();
+        }
+        $data = $this->getNewContentData('chapter_description');
+        $data->position = $position;
+        $data->value = $chapterData[0];
+        $data->save();
+
+        $chapterTimecode = $this->data->where('key', '=', 'chapter_timecode')
+            ->where('position','=',$position)->first();
+
+        if($chapterTimecode){
+            $chapterTimecode->delete();
+        }
+        if(!isset($chapterData[1])){
+            dd($chapterData);
+        }
+        $dataTimecode = $this->getNewContentData('chapter_timecode');
+        $dataTimecode->position = $position;
+        $dataTimecode->value = $chapterData[1];
+        $dataTimecode->save();
+    }
+
 }

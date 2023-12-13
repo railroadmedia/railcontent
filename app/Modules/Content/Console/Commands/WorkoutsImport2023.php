@@ -60,6 +60,17 @@ class WorkoutsImport2023 extends Command
                 $content->setInstructor($this->getValue($data, $headersRow, 'Instructor'));
                 $content->setVideo($this->getValue($data, $headersRow, 'Video ID - Workouts'), $this->getValue($data, $headersRow, 'Duration'));
                 $content->setSoundsliceSlug($this->getValue($data, $headersRow, 'SSID - Workouts'));
+                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 1', 1));
+                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 2', 2));
+                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 3', 3));
+                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 4', 4));
+                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 5', 5));
+                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 6', 6));
+//                $thumbnail = $this->getValue($data, $headersRow, 'Thumbnail URL');
+//                if($thumbnail) {
+//                    $content->setThumb($thumbnail);
+//                }
+
 
                 if($content->video) {
                     $video[] = $content->video;
