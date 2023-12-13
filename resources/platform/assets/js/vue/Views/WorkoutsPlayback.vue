@@ -167,9 +167,10 @@
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
                     :soundslice-slug="soundsliceSlug" 
                     :contentId="videoProps.contentId"
-                    :end-time="videoProps.totalDuration" 
                     :force-start-time="true"
                     :start-time="chapterStartTime"
+                    :end-time="videoProps.totalDuration" 
+                    :loop="startLooping"
                 >
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls 
@@ -284,7 +285,7 @@ const getBrandSpecificParams = () => {
 };
 
 const openSlice = (title, startAt, loop) => {
-    console.log('startAt', startAt);
+    console.log('loop', loop)
     soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
     startLooping.value = loop;
