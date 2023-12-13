@@ -10,6 +10,7 @@ use App\Modules\Content\Console\Commands\PredefinedPlaylists;
 use App\Modules\Content\Console\Commands\RebuildSearchIndexes;
 use App\Modules\Content\Console\Commands\RecalculatePlaylistDuration;
 use App\Modules\Content\Console\Commands\SongDuration;
+use App\Modules\Content\Console\Commands\WorkoutsImport2023;
 use App\Modules\Content\Models\ContentField;
 use App\Modules\Content\Observers\ContentFieldObserver;
 use Illuminate\Console\Scheduling\Schedule;
@@ -38,7 +39,8 @@ class ContentServiceProvider extends ServiceProvider
                             MigrateMissingPlaylistsItems::class,
                             SongDuration::class,
                             ImportSongsDuration::class,
-                            RecalculatePlaylistDuration::class
+                            RecalculatePlaylistDuration::class,
+                            WorkoutsImport2023::class
                         ]);
     }
 }
