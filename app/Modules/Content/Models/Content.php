@@ -488,7 +488,7 @@ class Content extends Model
         }
     }
 
-    public function setChapter($value, $position = 1)
+    public function setChapter($value, $position = 1, $thumb = null)
     {
         if(!$value){
             return;
@@ -510,13 +510,24 @@ class Content extends Model
         if($chapterTimecode){
             $chapterTimecode->delete();
         }
-        if(!isset($chapterData[1])){
-            dd($chapterData);
-        }
+
         $dataTimecode = $this->getNewContentData('chapter_timecode');
         $dataTimecode->position = $position;
         $dataTimecode->value = $chapterData[1];
         $dataTimecode->save();
+
+        if($thumb){
+           // dd($thumb);
+            $chapterThumb = $this->data->where('key', '=', 'chapter_thumbnail_url')
+                ->where('position','=',$position)->first();
+            if($chapterThumb){
+                $chapterThumb->delete();
+            }
+            $dataThumb = $this->getNewContentData('chapter_thumbnail_url');
+            $dataThumb->position = $position;
+            $dataThumb->value = $thumb;
+            $dataThumb->save();
+        }
     }
 
 }

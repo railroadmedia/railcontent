@@ -16,6 +16,25 @@ class WorkoutsImport2023 extends Command
     protected $signature = 'workouts:import {startIndex=0} {endIndex=-1}';
     protected $description = 'Import workouts data from CSV file';
 
+    const CHAPTER_THUMBS = [
+        'drumeo' =>[
+            'https://d1923uyy6spedc.cloudfront.net/Chapter1-1701464222.jpg',
+'https://d1923uyy6spedc.cloudfront.net/Chapter2-1701464237.jpg',
+'https://d1923uyy6spedc.cloudfront.net/Chapter3-1701464247.jpg',
+'https://d1923uyy6spedc.cloudfront.net/Chapter4-1701464280.jpg',
+'https://d1923uyy6spedc.cloudfront.net/Chapter5-1701464293.jpg',
+'https://d1923uyy6spedc.cloudfront.net/Chapter6-1701464305.jpg'
+        ],
+        'guitareo' => [
+            'https://d1923uyy6spedc.cloudfront.net/Chapter1-1701710727.jpg',
+'https://d1923uyy6spedc.cloudfront.net/Chapter2-1701710743.jpg',
+'https://d1923uyy6spedc.cloudfront.net/Chapter3-1701710752.jpg',
+'https://d1923uyy6spedc.cloudfront.net/Chapter4-1701710765.jpg',
+'https://d1923uyy6spedc.cloudfront.net/Chapter5-1701710774.jpg',
+'https://d1923uyy6spedc.cloudfront.net/Chapter6-1701710783.jpg',
+        ]
+    ];
+
     public function handle(
         ContentService $contentService
     ) {
@@ -60,12 +79,12 @@ class WorkoutsImport2023 extends Command
                 $content->setInstructor($this->getValue($data, $headersRow, 'Instructor'));
                 $content->setVideo($this->getValue($data, $headersRow, 'Video ID - Workouts'), $this->getValue($data, $headersRow, 'Duration'));
                 $content->setSoundsliceSlug($this->getValue($data, $headersRow, 'SSID - Workouts'));
-                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 1', 1));
-                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 2', 2));
-                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 3', 3));
-                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 4', 4));
-                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 5', 5));
-                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 6', 6));
+                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 1'), 1, self::CHAPTER_THUMBS[$content->brand][0]);
+                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 2'), 2, self::CHAPTER_THUMBS[$content->brand][1]);
+                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 3'), 3, self::CHAPTER_THUMBS[$content->brand][2]);
+                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 4'), 4, self::CHAPTER_THUMBS[$content->brand][3]);
+                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 5'), 5, self::CHAPTER_THUMBS[$content->brand][4]);
+                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 6'), 6, self::CHAPTER_THUMBS[$content->brand][5]);
 //                $thumbnail = $this->getValue($data, $headersRow, 'Thumbnail URL');
 //                if($thumbnail) {
 //                    $content->setThumb($thumbnail);
