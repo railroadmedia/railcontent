@@ -284,12 +284,10 @@ const getBrandSpecificParams = () => {
 };
 
 const openSlice = (title, startAt, loop) => {
-    console.log('open slice', startAt, loop);
     soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
-    openSoundslice.value = true;
     startLooping.value = loop;
-    console.log('soundslice open', openSoundslice.value)
+    openSoundslice.value = true;
 };
 
 const handleCloseSoundslice = () => {
