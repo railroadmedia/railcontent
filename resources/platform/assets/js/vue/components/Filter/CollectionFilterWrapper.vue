@@ -26,16 +26,20 @@
                 :multi-select-columns="multiSelectColumns"
                 :single-select-columns="singleSelectColumns"
                 :selected-filters="selectedFilters"
+                :selected-progress="selectedProgress"
                 @on-filter-click-handle="param => emit('onFilterChange', param)"
+                @on-progress-click="progress => emit('onProgressChange', progress)"
             />
             <FilterOptionsModal
                 v-if="!isCollapsed && !isMobile"
                 :is-collapsed-mobile="isCollapsed"
                 :selected-filters="selectedFilters"
+                :selected-progress="selectedProgress"
                 :multi-select-columns="multiSelectColumns"
                 :single-select-columns="singleSelectColumns"
                 @onClose="handleToggleCollapse"
                 @handle-filter-click="param => emit('onFilterChange', param)"
+                @on-progress-click="progress => emit('onProgressChange', progress)"
             />
 
             <div v-if="loading" class="tw-absolute tw-inset-0 dark:tw-bg-[#000C17]/30 tw-bg-[#F9F9F9]/30 tw-z-50"></div>
@@ -83,6 +87,10 @@
             type: Object,
             default: () => ({}),
         },
+        selectedProgress: {
+            type: String,
+            default: '',
+        },
         selectedSort: {
             type: String,
             default: '',
@@ -99,15 +107,15 @@
                     items: [
                         {
                             key: 'All',
-                            value: 'all',
+                            value: '',
                         },
                         {
                             key: 'In Progress',
-                            value: 'in_progress',
+                            value: 'started',
                         },
                         {
                             key: 'Complete',
-                            value: 'complete',
+                            value: 'completed',
                         },
                     ],
                 },
@@ -119,7 +127,7 @@
         },
     });
 
-    const emit = defineEmits(['onFilterChange', 'onSearchChange', 'onSortChange', 'onTabChange'])
+    const emit = defineEmits(['onFilterChange', 'onSearchChange', 'onSortChange', 'onTabChange', 'onProgressChange', 'OnClearFilter']);
 
     const isMobile = ref(true);
     const isCollapsed = ref(true);

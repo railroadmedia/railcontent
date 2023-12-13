@@ -1,14 +1,14 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="filter.activeTab" :hide-filter="hideFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
-            @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="filter.activeTab" :hide-filter="hideFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
+            @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
         <transition appear name="fade">
             <CollectionResults :current-page="getCurrentPage" :loading="loading" :total-pages="getTotalPages" @on-load-more="collectionStore.loadMore">
                 <template v-if="showGroupBy">
-                    <GroupedResultsContainer v-for="(data, i) in preLoadedContent.data" :key="i" :pre-loaded-content="preLoadedContent.data.slice(0,5)" />
+                    <GroupedResultsContainer v-for="(item, i) in preLoadedContent.data" :key="i" :item="item" />
                 </template>
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
@@ -297,6 +297,10 @@ const handleClearFilter = () => {
 
 const handleFilterChange = (param) => {
     collectionStore.applyFilter(param);
+}
+
+const handleProgressChange = (value) => {
+    collectionStore.setProgress(value);
 }
 
 const handleSearchChange = (value) => {
