@@ -16,6 +16,7 @@ export const useCollectionStore = defineStore({
                 params: {},
                 searchTerm: '',
                 sort: 'slug',
+                progress: '',
             },
             isCoach: false,
             loading: false,
@@ -32,6 +33,14 @@ export const useCollectionStore = defineStore({
             this.updateIncludedFields(param);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
+            this.getData();
+        },
+
+        setProgress (value) {
+            this.filter = {
+                ...this.filter,
+                progress: value,
+            };
             this.getData();
         },
 
@@ -61,17 +70,6 @@ export const useCollectionStore = defineStore({
             this.filter.includedFields = [];
         },
 
-        setAllTabsToFilterNotApplied () {
-            Object.keys(this.tabData).forEach(tab => {
-                this.tabData[tab].filterApplied = false;
-            });
-        },
-
-        setActiveTabToFilterApplied () {
-            if (this.tabData[this.filter.activeTab]) {
-                this.tabData[this.filter.activeTab].filterApplied = true;
-            }
-        },
         async fetchData () {
             const userStore = useUserStore();
             try {
@@ -89,6 +87,7 @@ export const useCollectionStore = defineStore({
                                 [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm,
                                 tab: this.filter.activeTab,
                                 count_filter_items: true,
+                                ...(this.filter.progress && { included_user_states: [this.filter.progress] })
                             },
                         })
                 return response;
@@ -100,6 +99,7 @@ export const useCollectionStore = defineStore({
                 })
             }
         },
+
         async getData (replace = true, displayLoading = true) {
             this.loading = displayLoading;
             this.fetching = true;
@@ -111,6 +111,7 @@ export const useCollectionStore = defineStore({
             this.setURLParams();
             this.fetching = false;
         },
+
         getURLParams () {
             const params = new URLSearchParams(window.location.search);
 
@@ -120,6 +121,7 @@ export const useCollectionStore = defineStore({
                 this.filter.includedFields = params.getAll('included_fields[]');
             }
         },
+
         getFilterColumns () {
             let filters = [];
             for (const value of this.filterableValues){
@@ -130,15 +132,30 @@ export const useCollectionStore = defineStore({
             }
             this.filterColumns = filters;
         },
+
         getFilterValues (values) {
             return ContentHelpers.flattenFilters(values);
         },
+
         loadMore () {
             if (!this.fetching) {
                 this.tabData[this.filter.activeTab].currentPage++;
                 this.getData(false, false);
             }
         },
+
+        setAllTabsToFilterNotApplied () {
+            Object.keys(this.tabData).forEach(tab => {
+                this.tabData[tab].filterApplied = false;
+            });
+        },
+
+        setActiveTabToFilterApplied () {
+            if (this.tabData[this.filter.activeTab]) {
+                this.tabData[this.filter.activeTab].filterApplied = true;
+            }
+        },
+
         setData (response, replace) {
             if (response) {
                 if (replace) {
@@ -156,6 +173,7 @@ export const useCollectionStore = defineStore({
 
             this.loading = false;
         },
+
         setDefaults (defaults) {
             if (defaults.isCoach){
                 this.isCoach = defaults.isCoach;
@@ -179,6 +197,7 @@ export const useCollectionStore = defineStore({
                 this.getFilterColumns();
             }
         },
+
         setURLParams () {
             const url = new URL(window.location.origin + window.location.pathname);
 
@@ -193,18 +212,21 @@ export const useCollectionStore = defineStore({
 
             window.history.pushState({}, '', url);
         },
+
         setSearchTerm (term) {
             this.filter.searchTerm = term;
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.getData();
         },
+
         sortData (item) {
             this.filter.sort = item;
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.getData();
         },
+
         switchTab (tab) {
             //Save page data
             this.tabData[this.filter.activeTab] = {
