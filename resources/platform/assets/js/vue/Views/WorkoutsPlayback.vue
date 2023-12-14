@@ -186,7 +186,7 @@
                     :contentId="videoProps.contentId"
                     :force-start-time="true"
                     :start-time="chapterStartTime"
-                    :end-time="videoProps.totalDuration"
+                    :end-time="chapterEndTime"
                     :loop="startLooping"
                 >
                     <template v-slot:soundsliceControls>
@@ -219,6 +219,8 @@ import ContentInfo from "../components/ContentInfo/ContentInfo.vue";
 import SoundSlice from "../components/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "../components/SoundSlice/SoundSliceControls.vue";
 import CatalogueCard from "../components/Catalogue/CatalogueCard.vue";
+import Intercom from "../vuesora/assets/js/services/intercom";
+import Helpscout from "../vuesora/assets/js/services/helpscout";
 // READ ME: Importing video player breaks the app for some reason.
 // We need further investigation on this matter, but for now let's use it globally.
 //import VideoPlayer from "../vuesora/components/VideoPlayer/VideoPlayer.vue";
@@ -312,7 +314,6 @@ const openSlice = (title, index, startAt, loop) => {
     chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;
     startLooping.value = loop;
     openSoundslice.value = true;
-    console.log(chapterEndTime.value)
 };
 
 const handleCloseSoundslice = () => {

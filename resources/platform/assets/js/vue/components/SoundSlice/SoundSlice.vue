@@ -38,12 +38,11 @@ const props = defineProps({
         default: false,
     },
     startTime: {
-        type: Number,
+        type: [Number, String],
         default: 0,
     },
     endTime: {
-        type: Number,
-        default: null,
+        type: [Number, String],
     }
 });
 
