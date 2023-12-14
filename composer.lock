@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.293.9",
+            "version": "3.293.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "1fa17dba47021586de511d10944637da8ea4cc43"
+                "reference": "9ae3bfd036190847dd0a5c3cdc4681dbb0994f5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1fa17dba47021586de511d10944637da8ea4cc43",
-                "reference": "1fa17dba47021586de511d10944637da8ea4cc43",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9ae3bfd036190847dd0a5c3cdc4681dbb0994f5a",
+                "reference": "9ae3bfd036190847dd0a5c3cdc4681dbb0994f5a",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.293.9"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.293.10"
             },
-            "time": "2023-12-12T19:08:53+00:00"
+            "time": "2023-12-13T19:41:27+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -8873,12 +8873,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railanalytics.git",
-                "reference": "433f5c1e1326258c5cc8a9646444257b6e5e7d4b"
+                "reference": "d80d3cfadeeb807ff49b7adb5f491e4c6a27f418"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/433f5c1e1326258c5cc8a9646444257b6e5e7d4b",
-                "reference": "433f5c1e1326258c5cc8a9646444257b6e5e7d4b",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/d80d3cfadeeb807ff49b7adb5f491e4c6a27f418",
+                "reference": "d80d3cfadeeb807ff49b7adb5f491e4c6a27f418",
                 "shasum": ""
             },
             "require": {
@@ -8907,7 +8907,7 @@
                 "issues": "https://github.com/railroadmedia/railanalytics/issues",
                 "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0-fixing-transaction-tracking"
             },
-            "time": "2023-11-28T22:12:12+00:00"
+            "time": "2023-12-13T20:01:18+00:00"
         },
         {
             "name": "railroad/railchat",
@@ -8956,12 +8956,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "654da4313766f098290a2c884e8156f9e75a357a"
+                "reference": "e229e4ab3de2c04a89efa141f084ad01a0697814"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/654da4313766f098290a2c884e8156f9e75a357a",
-                "reference": "654da4313766f098290a2c884e8156f9e75a357a",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/e229e4ab3de2c04a89efa141f084ad01a0697814",
+                "reference": "e229e4ab3de2c04a89efa141f084ad01a0697814",
                 "shasum": ""
             },
             "require": {
@@ -9018,7 +9018,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-workouts"
             },
-            "time": "2023-12-13T08:25:39+00:00"
+            "time": "2023-12-14T10:57:46+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -17548,5 +17548,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
