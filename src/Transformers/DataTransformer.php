@@ -39,10 +39,6 @@ class DataTransformer extends TransformerAbstract
                 unset($data[$rowIndex]['assignments']);
             }
 
-            if ($rowIndex == 'lessons') {
-                unset($data[$rowIndex]);
-            }
-
             if ($rowIndex == 'video') {
                 unset($data[$rowIndex]);
             }
