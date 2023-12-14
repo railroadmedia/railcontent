@@ -1,37 +1,14 @@
 <template>
-    <!--  Instructor Thumbnail  -->
-    <div class="tw-flex tw-justify-between tw-items-center tw-mb-4">
-        <a class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white">
-            <img class="tw-rounded-full tw-w-20 tw-h-20 tw-border-2 tw-border-white tw-border-solid tw-mr-[10px]" :src="`https://www.musora.com/musora-cdn/image/width=200/${item.coach_profile_image}`" :alt="`${parsedData.name} Image`" />
-            <div>
-                <h3 class="tw-font-bold">{{ parsedData.name }}</h3>
-                <div class="tw-font-semibold">{{ item.lessons.length }} Workouts</div>
-            </div>
-        </a>
-        <a :href="item.web_url_path" class="tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue xl:tw-text-lg hover:tw-underline" style="text-underline-offset: 6px;">
-            See All
-        </a>
-    </div>
-
-    <div>
-        <transition appear name="fade">
-            <CatalogueCardContainer :pre-loaded-content="item.lessons" />
-        </transition>
-    </div>
+    <GroupedCard v-for="item in content" :item="item" />
 </template>
 
 <script setup>
-import { computed } from "vue";
-import CatalogueCardContainer from "../Catalogue/CatalogueCardContainer";
+import GroupedCard from '../GroupedCard/GroupedCard';
 
 const props = defineProps({
-    item: {
-        type: Object,
-        default: () => ({}),
+    content: {
+        type: Array,
+        default: () => [],
     },
-})
-
-const parsedData = computed(() => {
-    return JSON.parse(props.item.compiled_view_data);
 })
 </script>
