@@ -7,9 +7,7 @@
 
         <transition appear name="fade">
             <CollectionResults :brand="brand" :current-page="getCurrentPage" :loading="loading" :total-pages="getTotalPages" @on-load-more="collectionStore.loadMore">
-                <template v-if="showGroupBy">
-                    <GroupedResultsContainer v-for="(item, i) in data" :key="i" :item="item" />
-                </template>
+                <GroupedResultsContainer v-if="showGroupBy" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
