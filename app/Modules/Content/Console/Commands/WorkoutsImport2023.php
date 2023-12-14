@@ -74,6 +74,7 @@ class WorkoutsImport2023 extends Command
                 $content->published_on =
                     Carbon::now()->subMonth()
                         ->toDateTimeString();
+
                 $content->save();
 
                 $contentId = $content->id;
@@ -92,10 +93,11 @@ class WorkoutsImport2023 extends Command
                 $content->setChapter($this->getValue($data, $headersRow, 'Chapter 4'), 4, self::CHAPTER_THUMBS[$content->brand][3]);
                 $content->setChapter($this->getValue($data, $headersRow, 'Chapter 5'), 5, self::CHAPTER_THUMBS[$content->brand][4]);
                 $content->setChapter($this->getValue($data, $headersRow, 'Chapter 6'), 6, self::CHAPTER_THUMBS[$content->brand][5]);
-//                $thumbnail = $this->getValue($data, $headersRow, 'Thumbnail URL');
-//                if($thumbnail) {
-//                    $content->setThumb($thumbnail);
-//                }
+                $thumbnail = $this->getValue($data, $headersRow, 'Thumbnail Uploaded');
+                if($thumbnail) {
+                    $content->setThumb('https://musora-web-platform.s3.amazonaws.com/workouts/guitareo/'.$thumbnail);
+                    $content->setOriginalThumb('https://musora-web-platform.s3.amazonaws.com/workouts/guitareo/'.$thumbnail);
+                }
 
 
                 if($content->video) {
