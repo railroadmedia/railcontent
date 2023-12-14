@@ -63,6 +63,8 @@
             'chapters' => $lessonContent['chapters'] ?? [],
             'totalDuration' => $lessonContent->fetch('fields.video.fields.length_in_seconds', 0),
         ];
+    } else {
+        $videoProps = [];
     }
 
     $videoResources = [
