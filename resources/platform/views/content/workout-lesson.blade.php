@@ -61,6 +61,7 @@
             'useLegacyPlayer' => false,
             'hlsManifestUrl' => $lessonContent['hlsManifestUrl'] ?? '',
             'chapters' => $lessonContent['chapters'] ?? [],
+            'totalDuration' => $lessonContent->fetch('fields.video.fields.length_in_seconds', 0),
         ];
     }
 

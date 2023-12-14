@@ -34,15 +34,23 @@
                         <!-- Vimeo -->
                         <transition v-else-if="videoProps.videoType === 'vimeo' && !videoProps.useLegacyPlayer" appear
                             name="fade">
-                            <video-player ref="mediaElementVueInstance" :theme-color="brand" :brand="brand"
-                                :poster="videoProps.poster" :sources="videoProps.sources"
+                            <video-player ref="mediaElementVueInstance" 
+                                :theme-color="brand" 
+                                :brand="brand"
+                                :poster="videoProps.poster" 
+                                :sources="videoProps.sources"
                                 :ranges="videoProps.ranges ? videoProps.ranges : {}"
                                 :ranges-video-ids="videoProps.rangesVideoIds ? videoProps.rangesVideoIds : {}"
                                 :show-range-buttons="videoProps.showRangeButtons ? videoProps.showRangeButtons : false"
-                                :hls-manifest-url="videoProps.hlsManifestUrl" :captions="videoProps.captions"
-                                :chapters="videoProps.chapters" :current-second="videoProps.currentSecond"
-                                :content-id="videoProps.contentId" :user-id="videoProps.userId" :video-id="videoProps.videoId"
-                                :video-length="videoProps.videoLength" :total-duration="videoProps.totalDuration"
+                                :hls-manifest-url="videoProps.hlsManifestUrl" 
+                                :captions="videoProps.captions"
+                                :chapters="videoProps.chapters" 
+                                :current-second="videoProps.currentSecond"
+                                :content-id="videoProps.contentId" 
+                                :user-id="videoProps.userId" 
+                                :video-id="videoProps.videoId"
+                                :video-length="videoProps.videoLength" 
+                                :total-duration="videoProps.totalDuration"
                                 :cast-title="videoProps.castTitle"
                                 :use-intersection-observer="videoProps.useIntersectionObserver">
                                 <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
@@ -75,7 +83,7 @@
                         :report-user-name="videoResources.reportUserName"
                         :report-recipient="videoResources.reportRecipient"
                         :report-logo="videoResources.reportLogo"
-                        @open-practice-soundslice="openSlice(videoResources.title, 0, false)"
+                        @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)"
                     />
 
                     <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
@@ -128,7 +136,7 @@
                         </header>
                         <!-- Cards -->
                         <section class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-relative tw-overflow-y-auto lg:tw-block">
-                            <div v-for="(item, i) in relatedLessons.data"
+                            <div v-for="(item, i) in relatedLessons.data " 
                                  :key="i"
                                  class="tw-group tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-px-2"
                             >
@@ -177,7 +185,8 @@
                             :title="soundsliceTitle || videoResources.title"
                             :disable-next="true"
                             :disable-prev="true"
-                            @onClose="handleCloseSoundslice" />
+                            @onClose="handleCloseSoundslice" 
+                        />
                     </template>
                 </SoundSlice>
             </div>
@@ -262,6 +271,7 @@ const { brand } = storeToRefs(userStore);
 const isRelatedSectionOpen = ref(true);
 const openSoundslice = ref(false);
 const chapterStartTime = ref(0);
+const chapterEndTime = ref(props.videoProps.totalDuration);
 const soundsliceTitle = ref('');
 const startLooping = ref(false);
 
@@ -284,12 +294,13 @@ const getBrandSpecificParams = () => {
     }[brand]);
 };
 
-const openSlice = (title, startAt, loop) => {
-    console.log('loop', loop)
+const openSlice = (title, index, startAt, loop) => {
     soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
+    chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;
     startLooping.value = loop;
     openSoundslice.value = true;
+    console.log(chapterEndTime.value)
 };
 
 const handleCloseSoundslice = () => {
@@ -303,6 +314,6 @@ const handleCloseSoundslice = () => {
 };
 
 onMounted(() => {
-    //console.log('chapters', props.relatedLessons.data)
+    console.log(props.videoProps.totalDuration)
 })
 </script>

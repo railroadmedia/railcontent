@@ -204,7 +204,9 @@ const handleSoundsliceEvent = (event) => {
                 ssiframe.value.contentWindow.postMessage(`{"method": "seek", "arg": ${uniqueSettings.time} }`, 'https://www.soundslice.com');
                 
                 //Set Loop
-                if(props.loop) ssiframe.value.contentWindow.postMessage(`{"method": "setLoop", "arg": [${props.startTime}, ${props.endTime}]}`, 'https://www.soundslice.com');
+                if(props.loop) {
+                    ssiframe.value.contentWindow.postMessage(`{"method": "setLoop", "arg": [${props.startTime}, ${props.endTime}] }`, 'https://www.soundslice.com');
+                }
                 
                 //Done
                 isLoading.value = false;
