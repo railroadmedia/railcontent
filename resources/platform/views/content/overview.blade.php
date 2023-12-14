@@ -63,12 +63,10 @@
                         <i class="fas fa-arrow-left" aria-hidden="true"></i>
                     </a>
                     <!-- Content -->
-                    <div class="flex flex-column pr-1 align-v-bottom align-h-center">
-                        <div class="pv-5"></div>
-                        <div class="pv-5 hide-xs-only"></div>
+                    <div class="flex flex-column pr-1 align-v-bottom align-h-center tw-self-end">
                         {{-- Pack Logo --}}
                         <img alt="{{ $parentContent->fetch('title') }} Logo"
-                            class="tw-w-full tw-transition-opacity tw-max-w-[480px] tw-opacity-0"
+                            class="tw-transition-opacity tw-w-[150px] sm:tw-w-[250px] md:tw-w-[350px]  tw-opacity-0"
                             src="{{ $parentContent->fetch('data.logo_image_url') }}"
                             onload="this.classList.remove('tw-opacity-0')"
                         >
