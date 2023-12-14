@@ -1,6 +1,6 @@
 <template>
     <div>
-        <slot></slot>
+        <slot v-if="!loading"></slot>
 
         <transition name="show-from-bottom">
             <div
