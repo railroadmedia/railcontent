@@ -6,7 +6,7 @@
 
 @section('content')
     <support
-        email-recipient="'{{ $emailRecipient ? 'support@' . $brand . '.com' : '' }}'"
+        email-recipient="{{ $emailRecipient ? 'support@' . $brand . '.com' : '' }}"
         email-logo="{{ $logoLink }}"
         email-subject="{{ " Support Request from: " . user()->display_name . " (" . user()->email . ")" }}"
         email-type="support-contact"
