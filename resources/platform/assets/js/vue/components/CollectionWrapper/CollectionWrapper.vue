@@ -6,9 +6,9 @@
         />
 
         <transition appear name="fade">
-            <CollectionResults :current-page="getCurrentPage" :loading="loading" :total-pages="getTotalPages" @on-load-more="collectionStore.loadMore">
+            <CollectionResults :brand="brand" :current-page="getCurrentPage" :loading="loading" :total-pages="getTotalPages" @on-load-more="collectionStore.loadMore">
                 <template v-if="showGroupBy">
-                    <GroupedResultsContainer v-for="(item, i) in preLoadedContent.data" :key="i" :item="item" />
+                    <GroupedResultsContainer v-for="(item, i) in data" :key="i" :item="item" />
                 </template>
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
@@ -318,7 +318,7 @@ const handleTabChange = (tab) => {
 onMounted(() => {
     // console.log(props.collectionType)
     // console.log(props.title)
-    //console.log(props.preLoadedContent)
+    // console.log(props.preLoadedContent)
     collectionStore.setDefaults({
         isCoach: isCoach.value,
         content: props.preLoadedContent,
