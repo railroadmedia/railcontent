@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
+use Railroad\Railcontent\Events\ContentCreated;
 
 /**
  * App\Modules\Content\Models\Content
@@ -219,6 +220,7 @@ class Content extends Model
     {
         /** @var ContentField $field */
         $field = $this->fields->where('key', '=', $key)->first();
+
         if (!$value) {
             if ($field) {
                 Log::debug("Content Field ($this->id) $key $field->value deleted");
@@ -228,6 +230,7 @@ class Content extends Model
         }
         if (!$field) {
             $field = $this->getNewContentField($key);
+
             Log::debug("Content Field ($this->id) $key inserted $value");
             $field->value = $value;
             $field->save();
@@ -315,22 +318,22 @@ class Content extends Model
 
     public function setTopic($value)
     {
-        $values = array_map('trim', explode(',', $value));
-        foreach ($values as $key => $value) {
-            if ($value) {
-                $topic = ContentTopic::query()->where('content_id', '=', $this->id)->where('topic', $value)->first();
-                if(!$topic) {
-                    $topic = new ContentTopic();
-                    $topic->content_id = $this->id;
-                    $topic->topic = $value;
-                    $topic->position = $key + 1;
-                    $topic->save();
-                }
+        if ($value) {
+            $topic =
+                ContentTopic::query()
+                    ->where('content_id', '=', $this->id)
+                    ->where('topic', $value)
+                    ->first();
+            if (!$topic) {
+                $topic = new ContentTopic();
+                $topic->content_id = $this->id;
+                $topic->topic = $value;
+                $topic->position = 1;
+                $topic->save();
             }
+            $this->setField('topic', $value);
         }
-      //  $this->setFieldArray('topic', $values);
     }
-
 
     public function setTitle($value)
     {
@@ -346,7 +349,7 @@ class Content extends Model
 
     public function setXP($value)
     {
-        if($value) {
+        if ($value) {
             $this->setField('xp', $value);
             $this->xp = $value;
         }
@@ -354,40 +357,41 @@ class Content extends Model
 
     public function setRegistrationUrl($value)
     {
-        if($value) {
+        if ($value) {
             $this->setField('registration_url', $value);
-//            $this->registration_url = $value;
         }
     }
 
     public function setEnrollmentStartDate($value)
     {
-        if($value) {
+        if ($value) {
             $this->setField('enrollment_start_time', $value);
-//            $this->enrollment_start_time = $value;
         }
     }
 
     public function setEnrollmentEndDate($value)
     {
-        if($value) {
+        if ($value) {
             $this->setField('enrollment_end_time', $value);
         }
     }
 
     public function setInstructor($value)
     {
-        $values = array_map('trim', explode(',', $value));
-        foreach ($values as $key => $value) {
-            if ($value) {
-                $this->setField('instructor', $value);
+        if ($value) {
+            $instructor =
+                Instructor::query()
+                    ->where('name', 'like', '%'.$value.'%')
+                    ->first();
+            if ($instructor) {
+                $this->setField('instructor', $instructor->id);
             }
         }
     }
 
     public function setDescription($value)
     {
-        if($value) {
+        if ($value) {
             $this->setData('description', $value);
         }
     }
@@ -415,29 +419,118 @@ class Content extends Model
     public function setSoundsliceSlug($value)
     {
         $this->setField('soundslice_slug', $value);
-//        $this->soundslice_slug = $value;
     }
 
-    public function setVideo($value)
+    public function setVideo($value, $duration)
     {
-        $this->setField('video', $value);
-        $this->video = $value;
+        if ($value && $duration != '') {
+            $video =
+                Content::query()
+                    ->where('vimeo_video_id', '=', $value)
+                    ->first();
+            if (!$video) {
+                $video = new Content();
+                $video->type = 'vimeo-video';
+                $video->status = 'published';
+                $video->brand = $this->brand;
+                $video->slug = 'vimeo-video-'.$value;
+                $video->language = $this->language;
+                $video->vimeo_video_id = $value;
+                $video->length_in_seconds = $duration;
+                $video->created_on =
+                    Carbon::now()
+                        ->toDateTimeString();
+                $video->published_on =
+                    Carbon::now()
+                        ->toDateTimeString();
+                $video->save();
+            }
+            $this->video = $video->id;
+            $this->length_in_seconds = $duration;
+
+            $this->setField('video', $video->id);
+        }
     }
 
     public function setParentId($value)
     {
-        $hierarhy = ContentHierarchy::query()->where('parent_id', '=', $value)->where('child_id', '=', $this->id)->get();
+        $hierarhy =
+            ContentHierarchy::query()
+                ->where('parent_id', '=', $value)
+                ->where('child_id', '=', $this->id)
+                ->get();
 
-        if($hierarhy->isEmpty()){
+        if ($hierarhy->isEmpty()) {
             $hierarhy = new ContentHierarchy();
             $hierarhy->parent_id = $value;
             $hierarhy->child_id = $this->id;
             $hierarhy->child_position = 1;
-            $hierarhy->created_on = Carbon::now()->toDateTimeString();
+            $hierarhy->created_on =
+                Carbon::now()
+                    ->toDateTimeString();
             $hierarhy->save();
         }
+    }
 
-//        $this->parent_id = $value;
+    public function setStyle($value)
+    {
+        if ($value) {
+            $style =
+                ContentStyle::query()
+                    ->where('content_id', '=', $this->id)
+                    ->where('style', $value)
+                    ->first();
+            if (!$style) {
+                $style = new ContentStyle();
+                $style->content_id = $this->id;
+                $style->style = $value;
+                $style->position = 1;
+                $style->save();
+            }
+            $this->setField('style', $value);
+        }
+    }
+
+    public function setChapter($value, $position = 1, $thumb = null)
+    {
+        if(!$value){
+            return;
+        }
+        $chapterData = explode(':', $value);
+        $chapterDescription = $this->data->where('key', '=', 'chapter_description')
+            ->where('position','=',$position)->first();
+        if($chapterDescription){
+            $chapterDescription->delete();
+        }
+        $data = $this->getNewContentData('chapter_description');
+        $data->position = $position;
+        $data->value = $chapterData[0];
+        $data->save();
+
+        $chapterTimecode = $this->data->where('key', '=', 'chapter_timecode')
+            ->where('position','=',$position)->first();
+
+        if($chapterTimecode){
+            $chapterTimecode->delete();
+        }
+
+        $dataTimecode = $this->getNewContentData('chapter_timecode');
+        $dataTimecode->position = $position;
+        $dataTimecode->value = $chapterData[1];
+        $dataTimecode->save();
+
+        if($thumb){
+           // dd($thumb);
+            $chapterThumb = $this->data->where('key', '=', 'chapter_thumbnail_url')
+                ->where('position','=',$position)->first();
+            if($chapterThumb){
+                $chapterThumb->delete();
+            }
+            $dataThumb = $this->getNewContentData('chapter_thumbnail_url');
+            $dataThumb->position = $position;
+            $dataThumb->value = $thumb;
+            $dataThumb->save();
+        }
     }
 
 }
