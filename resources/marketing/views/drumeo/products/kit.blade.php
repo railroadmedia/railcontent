@@ -99,6 +99,11 @@
         .join.gold {
             background:linear-gradient(to bottom, #e2c584, #ad7c12);
         }
+
+        .arrow-button {
+                    background: linear-gradient(270deg, #01050D 0%, rgba(1, 5, 13, 0) 50%);
+                    height: 70%;
+                }
     </style>
 @stop
 
@@ -117,12 +122,6 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
-        "name" => "Drumeo StickBag",
-        "fullPrice" => floatval($productPrices['stickbag']->price),
-        "price" => floatval($productPrices['stickbag']->discounted_price),
-        "noBreadcrumb" => true
-    ])
 
     <header class="text-white relative overflow-hidden z-10" style="background-color:#3b5875;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
@@ -130,16 +129,16 @@
                 <h1 class="leading-tight mb-3"><strong>Everything you need to<br class="hidden sm:inline"> start playing the drums.</strong></h1>
                 <h5 class="leading-tight">The highest-rated beginner e-kit<br> meets award-winning drum lessons. </h5>
                 <h4 class="leading-tight text-musora my-4 sm:my-5">
-                    @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
-                        <s class="opacity-50">${{ floatval($productPrices['stickbag']->price) }}</s>
-                        <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
-                        (Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%)
+                    @if(floatval($productPrices['alesis-ekit']->price) > floatval($productPrices['alesis-ekit']->discounted_price))
+                        <s class="opacity-50">${{ floatval($productPrices['alesis-ekit']->price) }}</s>
+                        <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
+                        (Save {{ round(100 - (100 * (floatval($productPrices['alesis-ekit']->discounted_price) / floatval($productPrices['alesis-ekit']->price)))) }}%)
                     @else
-                        <strong>Only ${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
+                        <strong>Only ${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
                     @endif
                 </h4>
                 <div class="w-full max-w-xs mx-auto">
-                    @if( $products['stickbag']->getStockAvailability() > 1 && !empty($products['stickbag']->getStockAvailability()))
+                    @if( $products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
                         <a class="w-full join smaller blue" href="#customize-anchor">Buy Now</a>
                     @else
                         <a class="w-full join smaller sold-out">SOLD OUT</a>
@@ -170,15 +169,17 @@
     <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative text-white" style="background:linear-gradient(to bottom, #01050d 66%, #021021);">
         <div class="container mx-auto z-10 relative max-w-5xl">
             <h2 class="leading-tight mb-7 sm:mb-10"><strong>Pro details on a<br class="sm:hidden">  beginner budget.</strong></h2>
+           
 
             <div class="mb-7 sm:mb-10"
                 x-data="{
+                    splide: null,
                     init() {
-                        new Splide(this.$refs.splide, {
+                        this.splide = new Splide(this.$refs.splide, {
                             classes: {
-                                arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
+                                arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-lg h-40 w-40 text-[#0B76DB]',
                                 prev: 'hidden',
-                                next: 'splide__arrow--next hidden sm:flex mb-16',
+                                next: 'hidden',
                                 pagination: 'splide__pagination bottom-0',
                             },
                             perPage: 2.5,
@@ -193,10 +194,20 @@
                                     perPage: 1.5,
                                 },
                             },
-                        }).mount()
+                        }).mount();
+                    },
+                    next() {
+                        if (this.splide) {
+                            this.splide.go('>');
+                        }
                     },
                 }"
+                x-init="init"
             >
+                      
+                <button class="arrow-button absolute top-1/3 right-0 transform -translate-y-1/2 z-150 w-20 hidden sm:block" @click="next()">
+                <img src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/kit/arrow-button-white.svg" alt="Arrow Icon" class="w-10" style="position: absolute; left:50px">
+                </button>
                 <div x-ref="splide" class="splide text-left">
                     <div class="splide__track pb-8">
                         <ul class="splide__list items-start">
@@ -231,14 +242,14 @@
                             @endphp
                             @foreach ($gridItems as $gridItem)
                                 <li class="splide__slide px-1 sm:px-3">
-                                    <div class="rounded-xl overflow-hidden shadow-md border-2" style="color:#fff;background-color:#080c14;border-color:#121f2d;">
+                                    <div class="rounded-xl overflow-hidden shadow-md border-2" style="color:#fff;background-color:#080c14;border-color:#121f2d; padding: 20px;">
                                         <div class="relative" style="padding-bottom:71%;">
-                                            <img class="absolute object-cover h-full w-full transition-opacity opacity-1"
-                                                loading="lazy" onload="this.classList.remove('opacity-0')" alt="drumeo stickbag"
+                                            <img class="absolute object-cover h-full w-full transition-opacity opacity-1 rounded-xl"
+                                                loading="lazy" onload="this.classList.remove('opacity-0')" alt="drumeo alesis-ekit"
                                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $gridItem['img'] }}">
                                         </div>
-                                        <h4 class="mt-4 mb-2 px-4 font-black leading-tight"><strong>{{ $gridItem['title'] }}</strong></h4>
-                                        <p class="px-4 pb-6 text-sm leading-normal opacity-70">{{ $gridItem['desc'] }}</p>
+                                        <h4 class="mt-4 mb-2 font-black leading-tight"><strong>{{ $gridItem['title'] }}</strong></h4>
+                                        <p class="pb-6 text-sm leading-normal opacity-70">{{ $gridItem['desc'] }}</p>
                                     </div>
                                 </li>
                             @endforeach
@@ -248,7 +259,7 @@
             </div>
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-center sm:text-left">
                 <div class="flex-grow sm:pr-5 lg:pr-8 mx-0 mb-5 sm:mb-0">
-                    <h3 class="leading-tight mb-3"><strong>Your house<br class="hidden sm:inline lg:hidden"> <i class="fas fa-arrow-right text-musora"></i> recording studio.</strong></h3>
+                    <h3 class="leading-tight mb-3"><strong>Your house<br class="hidden sm:inline lg:hidden"> <img src="https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/products/kit/arrow-yellow.svg" alt="arrow" class="w-10 mx-3"> recording studio.</strong></h3>
                     <p class="leading-normal max-w-lg mx-0">
                     Connect your kit to your laptop with a single cable, open up Garage Band (or any DAW), and start laying down your grooves.
                     <br><br>
@@ -266,7 +277,7 @@
     </section>
     <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background:linear-gradient(to bottom, #fff 66%, #e8f2fb);">
         <div class="container mx-auto z-10 relative max-w-5xl">
-            <h2 class="leading-tight mb-7 sm:mb-10"><strong>Play your first beats<br class="sm:hidden"> <i class="fas fa-arrow-right text-drumeo"></i> Write your first song.</strong></h2>
+            <h2 class="leading-tight mb-7 sm:mb-10"><strong>Play your first beats<br class="sm:hidden"> <img src="https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/products/kit/arrow-blue.svg" alt="Arrow" class="w-10 lg:w-12 mx-3"> Write your first song.</strong></h2>
             <div class="flex flex-wrap sm:flex-nowrap justify-center text-left mb-8 sm:mb-16 lg:mb-20">
                 <div class="mb-5 sm:mb-0 sm:pr-7 sm:w-7/12 flex-grow-0">
                     <div class="h-full rounded-xl p-7 sm:p-10 pt-48 bg-black text-white flex items-end bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/new-drummers-image.jpg');">
@@ -290,45 +301,91 @@
             <h6 class="text-drumeo mb-3"><em>The highest-rated beginner e-kit<br class="sm:hidden"> meets award-winning drum lessons.</em></h6>
             <h2 class="leading-tight mb-5 sm:mb-7"><strong>Rave reviews for the<br class="sm:hidden"> Alesis Nitro Max…</strong></h2>
 
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 lg:gap-6">
-                <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
-                    <img class="h-5 lg:h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/amazon-logo.png">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 lg:gap-6">
+            <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
+                <div class="h-7 md:h-10 lg:h-12 flex items-start justify-center">
+                    <img class="h-7 md:h-9 lg:h-10"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/kit/amazon-logo.png"
+                        alt="Amazon Logo">
+                </div>
+                <div class="flex flex-col align-bottom">
                     <h2 class="leading-tight my-2"><strong>4.6</strong></h2>
-                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star-half" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
+                    <div class="flex justify-center">
+                    @for($i = 1; $i <= 5; $i++)
+                        @if($i <= 4)
+                            <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                        @else
+                            <i class="align-middle text-lg fas fa-star-half" style="color: #ffac00;" aria-hidden="true"></i>
+                        @endif
+                    @endfor
+                    </div>
                 </div>
-                <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
-                    <img class="h-5 lg:h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/music-radar-logo.png">
-                    <h2 class="leading-tight my-2"><strong>5</strong></h2>
-                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                </div>
-                <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
-                    <img class="h-5 lg:h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/thomann-logo.png">
-                    <h2 class="leading-tight my-2"><strong>4.3</strong></h2>
-                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star-half" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                </div>
-                <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
-                    <img class="h-5 lg:h-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/sweetwater-logo.png">
-                    <h2 class="leading-tight my-2"><strong>5</strong></h2>
-                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-xl -ml-2 fas fa-star" style="text-shadow: -2px -1px 1px #fff;color: #ffac00;" aria-hidden="true"></i>
-                </div>
-</div>
+            </div>
 
+            <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
+                <div class="h-7 md:h-10 lg:h-12 flex items-start justify-center">
+                    <img class="h-4 md:h-5 lg:h-6"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/kit/music-radar-logo.png"
+                        atl="Music Radar Logo">
+                </div>
+
+                <div class="flex flex-col align-bottom">
+                    <h2 class="leading-tight my-2"><strong>5</strong></h2>
+                    <div class="flex justify-center">
+                    @for($i = 1; $i <= 5; $i++)
+                    @if($i <= 5)
+                        <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                        @else
+                            <i class="align-middle text-lg fas fa-star-half" style="color: #ffac00;" aria-hidden="true"></i>
+                        @endif
+                    @endfor
+                    </div>
+
+                </div>
+            </div>
+            <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
+
+                <div class="h-7 md:h-10 lg:h-12 flex items-start justify-center">
+                    <img class="h-5 md:h-7 lg:h-9"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/kit/thomann-logo.png"
+                        alt="Thomann Logo">
+                </div>
+                <div class="flex flex-col align-bottom">
+                    <h2 class="leading-tight my-2"><strong>4.3</strong></h2>
+                    <div class="flex justify-center">
+                    @for($i = 1; $i <= 5; $i++)
+                        @if($i <= 4)
+                            <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                        @else
+                            <i class="align-middle text-lg fas fa-star-half" style="color: #ffac00;" aria-hidden="true"></i>
+                        @endif
+                    @endfor
+                    </div>
+                </div>
+            </div>
+            <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
+                <div class="h-7 md:h-10 lg:h-12 flex items-start justify-center"> 
+                    <img class="h-7 md:h-10 lg:h-11"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/kit/sweetwater-logo.png"
+                        alt="Sweetwater Logo">
+                </div>
+                <div class="flex flex-col align-bottom">
+                    <h2 class="leading-tight my-2"><strong>5</strong></h2>
+                    <div class="flex justify-center"> 
+                        @for($i = 1; $i <= 5; $i++)
+                        @if($i <= 4)
+                            <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                        @else
+                            <i class="align-middle text-lg fas fa-star-half" style="color: #ffac00;" aria-hidden="true"></i>
+                        @endif
+                    @endfor
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="relative"></div>
             <h2 class="leading-tight mt-14 sm:mt-20 mb-4 sm:mb-5"><strong>… and {{ number_format(Prices::$students) }} happy<br class="sm:hidden"> drum students.</strong></h2>
             @php
                 $testimonials = [
@@ -388,34 +445,46 @@
                    ],
                ];
             @endphp
+                               
+                               
                 <div x-data="{
-    init() {
-        new Splide(this.$refs.splide, {
-            classes: {
-                arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
-                prev: 'hidden',
-                next: 'splide__arrow--next hidden sm:flex mb-16',
-                pagination: 'splide__pagination -bottom-10',
-            },
-            perPage: 2.5,
-            perMove: 1,
-            type: 'loop',
-            focus: 0,
-            interval: 2000,
-            breakpoints: {
-                800: {
-                    perPage: 2.5,
-                },
-                769: {
-                    perPage: 1.5,
-                    drag: 'free',
-                    snap: false,
-                },
-            },
-        }).mount()
-    },
-}">
-                    <div x-ref="splide" class="splide">
+                    splide: null,
+                    init() {
+                        this.splide = new Splide(this.$refs.splide, {
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
+                                prev: 'hidden',
+                                next: 'hidden',
+                                pagination: 'splide__pagination -bottom-10',
+                            },
+                            perPage: 2.5,
+                            perMove: 1,
+                            type: 'loop',
+                            focus: 0,
+                            interval: 2000,
+                            breakpoints: {
+                                800: {
+                                    perPage: 2.5,
+                                },
+                                769: {
+                                    perPage: 1.5,
+                                    drag: 'free',
+                                    snap: false,
+                                },
+                            },
+                        }).mount();
+                    },
+                    goNext() {
+                        if (this.splide) {
+                            this.splide.go('>');
+                        }
+                    },
+                }" x-init="init"
+                class="relative">
+                <button class="absolute top-1/3 right-0 transform -translate-y-1/2 z-150 w-20 hidden sm:block" @click="goNext()">
+                    <img src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/kit/arrow-button-blue.svg" alt="Arrow Icon" class="w-10" style="position: absolute; left:50px">
+                </button>
+                    <div x-ref="splide" class="splide" style="width: 95%">
                         <div class="splide__track">
                             <ul class="splide__list items-start" style="padding-top: 60px !important;">
 
@@ -440,7 +509,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+            </div>
         </div>
     </section>
 
@@ -571,12 +640,12 @@
                         one year of unlimited drum lessons.</h6>
 
                     <h4 class="my-4 text-drumeo">
-                        @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
-                            <s class="opacity-50">${{ floatval($productPrices['stickbag']->price) }}</s>
-                            <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
-                            (Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%)
+                        @if(floatval($productPrices['alesis-ekit']->price) > floatval($productPrices['alesis-ekit']->discounted_price))
+                            <s class="opacity-50">${{ floatval($productPrices['alesis-ekit']->price) }}</s>
+                            <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
+                            (Save {{ round(100 - (100 * (floatval($productPrices['alesis-ekit']->discounted_price) / floatval($productPrices['alesis-ekit']->price)))) }}%)
                         @else
-                            <strong>Only ${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
+                            <strong>Only ${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
                         @endif
                     </h4>
                     <a href="TODO" class="join blue smaller w-full max-w-xs">BUY NOW</a>
@@ -593,13 +662,13 @@
     </section>
 
 
-    <section class="px-4 sm:px-6 py-10" style="background: #f0f6fc;">
+    <section class="px-4 sm:px-6 py-10 text-white" style="background: #00101D;">
         <div class="container max-w-5xl mx-auto relative z-50">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <h5 class="leading-normal"><strong>Free shipping in North America</strong><br>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                <h5 class="leading-normal text-left" style="width: 100%"><strong>Free shipping in North America</strong><br>
                 Your Drumeo E-Kit will ship for free anywhere in North America.</h5>
 
-                <h5 class="leading-normal"><strong>Discounted shipping outside of North America</strong><br>
+                <h5 class="leading-normal text-left"><strong>Discounted shipping outside of North America</strong><br>
                 If you live outside of North America, you qualify for a $100 shipping discount. You’ll see that applied upon checkout.</h5>
             </div>
         </div>
