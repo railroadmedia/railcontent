@@ -1,7 +1,7 @@
 <template>
     <!--  Instructor Thumbnail  -->
     <div class="tw-flex tw-justify-between tw-items-center tw-mb-4">
-        <a class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white">
+        <a :href="item.web_url_path" class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white hover:tw-underline" style="text-underline-offset: 6px;">
             <img class="tw-rounded-full tw-w-20 tw-h-20 tw-border-2 tw-border-white tw-border-solid tw-mr-[10px]" :src="`https://www.musora.com/musora-cdn/image/width=200/${item.coach_profile_image}`" :alt="`${parsedData.name} Image`" />
             <div>
                 <h3 class="tw-font-bold">{{ parsedData.name }}</h3>
