@@ -8,55 +8,64 @@
             <!-- VIDEO WRAPPER -->
             <section class="tw-col-span-3 tw-w-full tw-flex" :class="isRelatedSectionOpen ? '2xl:tw-col-span-2' : 'tw-mb-8'">
                 <!-- Video Content -->
-                <div>
+                <div class="tw-w-full">
                     <!--Video-->
-                    <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED]" v-if="videoProps.videoId">
-                        <!-- YouTube -->
-                        <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
-                            <YoutubePlayer :video-id="videoProps.videoId" />
-                        </transition>
-                        <!-- Vimeo video (legacy player) -->
-                        <transition v-else-if="videoProps.videoType === 'vimeo' && videoProps.useLegacyPlayer" appear
-                            name="fade">
-                            <video-media-element ref="mediaElementVueInstance" element-id="lessonPlayer"
-                                :brand="videoProps.brand" :theme-color="videoProps.brand"
-                                :poster="videoProps.videoPosterImageUrl" :sources="videoProps.videoPlaybackEndpoints"
-                                :hls-manifest-url="videoProps.hlsManifestUrl" :video-id="videoProps.vimeoVideoId"
-                                :content-id="videoProps.id" :current-second="videoProps.lastWatchPositionInSeconds"
-                                :progress-state="videoProps.progressState" :video-length="videoProps.videoLength"
-                                :chapters="videoProps.chapters" :user-id="videoProps.userId" :like-count="videoProps.likeCount"
-                                :is-liked="videoProps.isLiked" :check-for-timecode="videoProps.checkForTimecode">
-                                <div :class="`widescreen title tw-text-${brand}`">
-                                    <i class="fas fa-spinner fa-spin absolute-center"></i>
-                                </div>
-                            </video-media-element>
-                        </transition>
-                        <!-- Vimeo -->
-                        <transition v-else-if="videoProps.videoType === 'vimeo' && !videoProps.useLegacyPlayer" appear
-                            name="fade">
-                            <video-player ref="mediaElementVueInstance" 
-                                :theme-color="brand" 
-                                :brand="brand"
-                                :poster="videoProps.poster" 
-                                :sources="videoProps.sources"
-                                :ranges="videoProps.ranges ? videoProps.ranges : {}"
-                                :ranges-video-ids="videoProps.rangesVideoIds ? videoProps.rangesVideoIds : {}"
-                                :show-range-buttons="videoProps.showRangeButtons ? videoProps.showRangeButtons : false"
-                                :hls-manifest-url="videoProps.hlsManifestUrl" 
-                                :captions="videoProps.captions"
-                                :chapters="videoProps.chapters" 
-                                :current-second="videoProps.currentSecond"
-                                :content-id="videoProps.contentId" 
-                                :user-id="videoProps.userId" 
-                                :video-id="videoProps.videoId"
-                                :video-length="videoProps.videoLength" 
-                                :total-duration="videoProps.totalDuration"
-                                :cast-title="videoProps.castTitle"
-                                :use-intersection-observer="videoProps.useIntersectionObserver">
-                                <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
-                            </video-player>
-                        </transition>
-                        <div v-else>ERROR LOADING VIDEO...</div>
+                    <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED]">
+                        <template v-if="videoProps.videoId">
+                            <!-- YouTube -->
+                            <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
+                                <YoutubePlayer :video-id="videoProps.videoId" />
+                            </transition>
+                            <!-- Vimeo video (legacy player) -->
+                            <transition v-else-if="videoProps.videoType === 'vimeo' && videoProps.useLegacyPlayer" appear
+                                name="fade">
+                                <video-media-element ref="mediaElementVueInstance" element-id="lessonPlayer"
+                                    :brand="videoProps.brand" :theme-color="videoProps.brand"
+                                    :poster="videoProps.videoPosterImageUrl" :sources="videoProps.videoPlaybackEndpoints"
+                                    :hls-manifest-url="videoProps.hlsManifestUrl" :video-id="videoProps.vimeoVideoId"
+                                    :content-id="videoProps.id" :current-second="videoProps.lastWatchPositionInSeconds"
+                                    :progress-state="videoProps.progressState" :video-length="videoProps.videoLength"
+                                    :chapters="videoProps.chapters" :user-id="videoProps.userId" :like-count="videoProps.likeCount"
+                                    :is-liked="videoProps.isLiked" :check-for-timecode="videoProps.checkForTimecode">
+                                    <div :class="`widescreen title tw-text-${brand}`">
+                                        <i class="fas fa-spinner fa-spin absolute-center"></i>
+                                    </div>
+                                </video-media-element>
+                            </transition>
+                            <!-- Vimeo -->
+                            <transition v-else-if="videoProps.videoType === 'vimeo' && !videoProps.useLegacyPlayer" appear
+                                name="fade">
+                                <video-player ref="mediaElementVueInstance" 
+                                    :theme-color="brand" 
+                                    :brand="brand"
+                                    :poster="videoProps.poster" 
+                                    :sources="videoProps.sources"
+                                    :ranges="videoProps.ranges ? videoProps.ranges : {}"
+                                    :ranges-video-ids="videoProps.rangesVideoIds ? videoProps.rangesVideoIds : {}"
+                                    :show-range-buttons="videoProps.showRangeButtons ? videoProps.showRangeButtons : false"
+                                    :hls-manifest-url="videoProps.hlsManifestUrl" 
+                                    :captions="videoProps.captions"
+                                    :chapters="videoProps.chapters" 
+                                    :current-second="videoProps.currentSecond"
+                                    :content-id="videoProps.contentId" 
+                                    :user-id="videoProps.userId" 
+                                    :video-id="videoProps.videoId"
+                                    :video-length="videoProps.videoLength" 
+                                    :total-duration="videoProps.totalDuration"
+                                    :cast-title="videoProps.castTitle"
+                                    :use-intersection-observer="videoProps.useIntersectionObserver">
+                                    <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
+                                </video-player>
+                            </transition>
+                            <div v-else class="tw-w-full tw-flex tw-flex-col tw-justify-center tw-items-center tw-aspect-video tw-text-black dark:tw-text-white tw-text-3xl tw-font-bold">
+                                ERROR LOADING VIDEO...
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div class="tw-w-full tw-flex tw-flex-col tw-justify-center tw-items-center tw-aspect-video tw-text-black dark:tw-text-white tw-text-3xl tw-font-bold">
+                                No Video Data
+                            </div>
+                        </template>
                     </div>
 
                     <VideoResources
@@ -177,7 +186,7 @@
                     :contentId="videoProps.contentId"
                     :force-start-time="true"
                     :start-time="chapterStartTime"
-                    :end-time="videoProps.totalDuration"
+                    :end-time="chapterEndTime"
                     :loop="startLooping"
                 >
                     <template v-slot:soundsliceControls>
@@ -210,6 +219,8 @@ import ContentInfo from "../components/ContentInfo/ContentInfo.vue";
 import SoundSlice from "../components/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "../components/SoundSlice/SoundSliceControls.vue";
 import CatalogueCard from "../components/Catalogue/CatalogueCard.vue";
+import Intercom from "../vuesora/assets/js/services/intercom";
+import Helpscout from "../vuesora/assets/js/services/helpscout";
 // READ ME: Importing video player breaks the app for some reason.
 // We need further investigation on this matter, but for now let's use it globally.
 //import VideoPlayer from "../vuesora/components/VideoPlayer/VideoPlayer.vue";
@@ -276,13 +287,16 @@ const soundsliceTitle = ref('');
 const startLooping = ref(false);
 
 const formattedChapters = computed(() => {
-    return props.videoProps.chapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
-        return {
-            title: chapter_description,
-            thumbnail: chapter_thumbnail_url,
-            time: chapter_timecode
-        }
-    })
+    if(props.videoProps.chapters?.length) {
+        return props.videoProps.chapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
+            return {
+                title: chapter_description,
+                thumbnail: chapter_thumbnail_url,
+                time: chapter_timecode
+            }
+        })
+    }
+    return [];
 });
 
 const getBrandSpecificParams = () => {
@@ -300,7 +314,6 @@ const openSlice = (title, index, startAt, loop) => {
     chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;
     startLooping.value = loop;
     openSoundslice.value = true;
-    console.log(chapterEndTime.value)
 };
 
 const handleCloseSoundslice = () => {

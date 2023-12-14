@@ -3,7 +3,7 @@
     RE add captions
     fix tracking for videos
 */
-import { onBeforeMount, computed, reactive } from 'vue';
+import { onBeforeMount, computed, reactive, ref } from 'vue';
 import { usePlaylistsStore } from '../../../stores/playlists';
 import SoundSlice from '../SoundSlice/SoundSlice.vue';
 import PlaybackCue from './PlaybackCue.vue';
@@ -18,6 +18,10 @@ import ContentUnavailable from './ContentUnavailable.vue';
 import AssignmentsContainer from '../../vuesora/components/AssignmentsContainer/AssignmentsContainer.vue';
 import ContentInfo from '../ContentInfo/ContentInfo.vue';
 import RelatedPlaylists from './RelatedPlaylists';
+import VideoChapters from '../VideoChapters/VideoChapters.vue';
+import SoundSliceControls from "../SoundSlice/SoundSliceControls.vue";
+import Intercom from '../../vuesora/assets/js/services/intercom';
+import Helpscout from '../../vuesora/assets/js/services/helpscout';
 
 //-----------Props-----------//
 const props = defineProps({
@@ -257,6 +261,14 @@ const state = reactive({
     assignmentCollapsed: true,
 });
 
+//---------Refs--------------//
+const openSoundslice = ref(false);
+const chapterStartTime = ref(0);
+const chapterEndTime = ref(props.totalDuration);
+const soundsliceTitle = ref('');
+const startLooping = ref(false);
+
+
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
 
@@ -281,7 +293,6 @@ const lessonDateParsed = activeItem.published_on_in_timezone ? Date.parse(active
 const lessonDate = activeItem.published_on_in_timezone ? activeItem.published_on_in_timezone : activeItem.published_on;
 
 //computed
-const homeUrl = computed(() => `/${props.brand}/playlists`);
 const secondLevelUrl = computed(() => `/${props.brand}/playlist/${props.playlistId}`);
 
 const needAccess = computed(() => {
@@ -291,9 +302,19 @@ const needAccess = computed(() => {
 const needAccessMessage = computed(() => {
     return activeItem.need_access_message;
 })
-const isSong = computed(() => {
-    return activeItem.type === 'song';
-})
+
+const formattedChapters = computed(() => {
+    if(props.videoChapters?.length) {
+        return props.videoChapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
+            return {
+                title: chapter_description,
+                thumbnail: chapter_thumbnail_url,
+                time: chapter_timecode
+            }
+        })
+    }
+    return [];
+});
 
 const unavailableType = computed(() => {
     if (!props.isReleased) {
@@ -314,11 +335,39 @@ const unavailableType = computed(() => {
     return null;
 });
 
-const handleVideoPause = () => {};
-const handleVideoPlay = () => {};
 
+//--------Methods---------------//
+const handleVideoPause = () => {}; //?
+const handleVideoPlay = () => {}; //?
+
+const openSlice = (title, index, startAt, loop) => {
+    soundsliceTitle.value = title;
+    chapterStartTime.value = startAt;
+    chapterEndTime.value = formattedChapters.value.length === index ? props.totalDuration : formattedChapters.value[index].time;
+    startLooping.value = loop;
+    openSoundslice.value = true;
+};
+
+const getBrandSpecificParams = () => {
+    return ({
+        drumeo: '&show_chords=0',
+        singeo: '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
+        guitareo: '',
+        pianote: '&show_chords=1'
+    }[brand]);
+};
+
+const handleCloseSoundslice = () => {
+    openSoundslice.value = false;
+    startLooping.value = false;
+    document.body.classList.remove('no-scroll', 'dim-sidebar');
+    Helpscout.showWidget();
+    Intercom.showWidget();
+};
+
+//---------Lifecycle-----------//
 onBeforeMount(() => {
-    //console.log(activeItem)
+    //console.log(props.lessonType)
     //console.log('released', props.released, 'need access', activeItem.need_access, 'no access message', activeItem.need_access_message)
 });
 </script>
@@ -328,7 +377,9 @@ onBeforeMount(() => {
         <!-- Breadcrumbs -->
         <Breadcrumb :class="{ 'lg:tw-hidden': playlistsStore.playerExpanded }" :brand="brand"
             :first-level-url="`/${brand}/playlists`" first-level-title="Playlists" :secondLevelUrl="secondLevelUrl"
-            :secondLevelTitle="playlistName" :lastLevelTitle="playlistItemTitle" />
+            :secondLevelTitle="playlistName" :lastLevelTitle="playlistItemTitle" 
+        />
+
         <div class="tw-grid tw-grid-cols-3 2xl:tw-grid-cols-[auto_auto_420px] tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 tw-mt-3 tw-flex-col"
              :class="{ 'tw-gap-4' : !playlistsStore.playerExpanded }"
         >
@@ -340,15 +391,21 @@ onBeforeMount(() => {
                 <ContentUnavailable v-if="!isReleased || needAccess" @goToNext="handleGoToNext"
                     :subscriptionCalendarId="subscriptionCalendarId" :bgImgUrl="thumbnailUrl"
                     :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle"
-                    :message="needAccessMessage" />
+                    :message="needAccessMessage" 
+                />
                 <!-- Soundslice Player -->
                 <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine') && !needAccess && isReleased"
                     class="tw-w-full tw-aspect-video tw-max-h-[90vh] tw-mb-4"
                     :class="{ 'tw-max-w-[1280px]' : !playlistsStore.playerExpanded }"
                 >
-                    <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
-                        :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext">
-                    </SoundSlice>
+                    <SoundSlice 
+                        :user-id="userId" 
+                        :theme-color="brand" 
+                        :additional-params="additionalSoundsliceParams"
+                        :soundslice-slug="soundsliceSlug" 
+                        :content-id="contentId" 
+                        @onAudioEnd="handleGoToNext"
+                    />
                 </div>
                 <!-- Video Players -->
                 <div v-if="isReleased && !needAccess" class="p-lg-only lean tw-relative">
@@ -357,8 +414,8 @@ onBeforeMount(() => {
                             :start-second="startSecond" :end-second="endSecond"
                             :total-duration="totalDuration" :video-length="videoLength" :progress-state="progressState"
                             :content-id="contentId" :use-intersection-observer="true" :theme-color="brand"
-                            @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
-                        </YoutubePlayer>
+                            @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext"
+                        />
                     </div>
                     <div v-else-if="lessonType !== 'song' && lessonType !== 'assignment' && lessonType !== 'routine'"
                         id="lessonVideoWrap">
@@ -392,18 +449,44 @@ onBeforeMount(() => {
                 </div>
                 <!-- Video Resources -->
                 <div class="tw-mb-4">
-                    <VideoResources :theme-color="brand" :brand="brand" :title="playlistItemTitle" :lesson-type="lessonType"
-                        :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
-                        :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
-                        :user-id="userId" :resources="videoResources" :show-add-to-list="true"
-                        :show-complete-button="isReleased && !needAccess" :relatedLesson="relatedLesson"
-                        :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton"
-                        :report-logo="reportLogo" :report-recipient="reportRecipient" :report-user-email="userEmail" :report-user-name="userName"
+                    <VideoResources 
+                        :theme-color="brand" 
+                        :brand="brand" 
+                        :title="playlistItemTitle" 
+                        :lesson-type="lessonType"
+                        :thumbnail-url="thumbnailUrl" 
+                        :description="description" 
+                        :instructors="instructors"
+                        :parent-title="parentTitle" 
+                        :is-liked="isLiked" 
+                        :like-count="likeCount" 
+                        :content-id="contentId"
+                        :user-id="userId" 
+                        :resources="videoResources" 
+                        :show-add-to-list="true"
+                        :show-practice-button="props.lessonType === 'workout' ? true : false"
+                        :show-complete-button="isReleased && !needAccess" 
+                        :relatedLesson="relatedLesson"
+                        :lesson="playlistItems.data[props.playlistItemPosition - 1]" 
+                        :show-info-button="showInfoButton"
+                        :report-logo="reportLogo" 
+                        :report-recipient="reportRecipient" 
+                        :report-user-email="userEmail" 
+                        :report-user-name="userName"
+                        @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)"
                     />
+
+                    <!-- Info Section -->
+                    <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription" :content-chapters="contentChapters" :instructors="contentInstructors" />
+
+                    <VideoChapters
+                        v-if="formattedChapters.length"
+                        :chapters="formattedChapters"
+                        @open-slice="openSlice"
+                    />
+
                     <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
                 </div>
-                <!-- Info Section -->
-                <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription" :content-chapters="contentChapters" :instructors="contentInstructors" />
             </div>
 
             <!-- Cue and Realted Playlist Wrapper -->
@@ -465,8 +548,32 @@ onBeforeMount(() => {
                     </div>
                 </div>
             </div>
-
+        
+            <!-- Workout Chapter Soundslice -->
+            <transition name="show-from-bottom">
+                <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
+                    <SoundSlice
+                        :user-id="userId"
+                        :theme-color="brand"
+                        :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
+                        :soundslice-slug="soundsliceSlug"
+                        :contentId="contentId"
+                        :force-start-time="true"
+                        :start-time="chapterStartTime"
+                        :end-time="chapterEndTime"
+                        :loop="startLooping"
+                    >
+                        <template v-slot:soundsliceControls>
+                            <SoundSliceControls
+                                :title="soundsliceTitle || playlistItemTitle"
+                                :disable-next="true"
+                                :disable-prev="true"
+                                @onClose="handleCloseSoundslice" 
+                            />
+                        </template>
+                    </SoundSlice>
+                </div>
+            </transition>
         </div>
-
     </div>
 </template>
