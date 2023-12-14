@@ -26224,10 +26224,6 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
-:is(.tw-dark .dark\:tw-text-yellow-500){
-  --tw-text-opacity: 1 !important;
-  color: rgb(234 179 8 / var(--tw-text-opacity)) !important;
-}
 :is(.tw-dark .dark\:tw-placeholder-\[\#9EC0DC\])::-moz-placeholder{
   --tw-placeholder-opacity: 1 !important;
   color: rgb(158 192 220 / var(--tw-placeholder-opacity)) !important;

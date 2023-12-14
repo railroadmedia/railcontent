@@ -10,7 +10,7 @@
                 <!-- Video Content -->
                 <div>
                     <!--Video-->
-                    <div class="tw-w-full tw-flex tw-flex-col tw-justify-center tw-items-center tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED]">
+                    <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED]">
                         <template v-if="videoProps.videoId">
                             <!-- YouTube -->
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
@@ -57,12 +57,14 @@
                                     <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                                 </video-player>
                             </transition>
-                            <h2 v-else class="tw-text-black dark:tw-text-white tw-text-3xl tw-font-bold">
+                            <div v-else class="tw-w-full tw-flex tw-flex-col tw-justify-center tw-items-center tw-aspect-video tw-text-black dark:tw-text-white tw-text-3xl tw-font-bold">
                                 ERROR LOADING VIDEO...
-                            </h2>
+                            </div>
                         </template>
                         <template v-else>
-                            <h2 class="tw-text-black dark:tw-text-white tw-text-3xl tw-font-bold">No Video Data</h2>
+                            <div class="tw-w-full tw-flex tw-flex-col tw-justify-center tw-items-center tw-aspect-video tw-text-black dark:tw-text-white tw-text-3xl tw-font-bold">
+                                No Video Data
+                            </div>
                         </template>
                     </div>
 
