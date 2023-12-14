@@ -8,7 +8,7 @@
             <!-- VIDEO WRAPPER -->
             <section class="tw-col-span-3 tw-w-full tw-flex" :class="isRelatedSectionOpen ? '2xl:tw-col-span-2' : 'tw-mb-8'">
                 <!-- Video Content -->
-                <div>
+                <div class="tw-w-full">
                     <!--Video-->
                     <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED]">
                         <template v-if="videoProps.videoId">
