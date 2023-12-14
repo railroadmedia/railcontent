@@ -107,7 +107,7 @@ class RevenueCatController extends Controller
 
                 //get Musora product
                 $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
-                if (!$musoraProducts->isEmpty()) {
+                if ($musoraProducts->isEmpty()) {
                     Log::error(
                         "RevenueCatController processNotification::INITIAL_PURCHASE - musora product not found: $productId"
                     );
@@ -228,7 +228,7 @@ class RevenueCatController extends Controller
 
                 //get Musora product
                 $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
-                if (!$musoraProducts->isEmpty()) {
+                if ($musoraProducts->isEmpty()) {
                     Log::error(
                         "RevenueCatController processNotification::CANCELLATION - musora product not found: $productId"
                     );
@@ -277,7 +277,7 @@ class RevenueCatController extends Controller
 
                 //get Musora product
                 $musoraProducts = $this->getMusoraProducts($type, $data['event'], $productId);
-                if (!$musoraProducts->isEmpty()) {
+                if ($musoraProducts->isEmpty()) {
                     Log::error(
                         "RevenueCatController processNotification::BILLING_ISSUE - musora product not found: $productId"
                     );

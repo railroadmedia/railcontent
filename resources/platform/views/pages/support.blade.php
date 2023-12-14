@@ -6,11 +6,11 @@
 
 @section('content')
     <support
-        email-recipient="'{{ $emailRecipient ? 'support@' . $brand . '.com' : '' }}'"
+        email-recipient="{{ $emailRecipient ? 'support@' . $brand . '.com' : '' }}"
         email-logo="{{ $logoLink }}"
         email-subject="{{ " Support Request from: " . user()->display_name . " (" . user()->email . ")" }}"
-        email-type="'support-contact'"
-        email-endpoint="'/mailora/secure/send'"
-        email-success-message="'Your email has been sent!'"
+        email-type="support-contact"
+        email-endpoint="/mailora/secure/send"
+        email-success-message="Your email has been sent!"
     />
 @endsection
