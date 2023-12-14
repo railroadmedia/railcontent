@@ -445,6 +445,9 @@ class Content extends Model
                         ->toDateTimeString();
                 $video->save();
             }
+            $this->video = $video->id;
+            $this->length_in_seconds = $duration;
+
             $this->setField('video', $video->id);
         }
     }
