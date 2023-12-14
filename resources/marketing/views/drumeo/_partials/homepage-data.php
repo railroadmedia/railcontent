@@ -271,6 +271,7 @@
                 ],
             ],
         ],
+        "workouts" => ["https://i.vimeocdn.com/video/1768362015-3ecb7c06c2936cc71622cc11344fb791715f25b786d43857f87d923f6a09522b-d_500.jpg"],
         "songItems" => [
             [
                 "icon" =>

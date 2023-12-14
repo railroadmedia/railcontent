@@ -3,49 +3,47 @@
     <div class="container max-w-4xl mx-auto">
         <h2 class="leading-tight"><strong><span class="border-2 border-{{ $theme }} rounded-full px-3 sm:px-4 py-1 inline-block">6</span> reasons why you’ll <br class="inline sm:hidden">love learning here.</strong></h2>
         <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">Level up your skills with the lessons, teachers, and<br class="hidden sm:inline lg:hidden">  practice tools <strong class="font-black">trusted by <span class="text-{{ $theme }}">{{ number_format(Prices::$students) }}</span> active students</strong>. </p>
-        <div class="flex text-left mb-2 sm:mb-6">
+        <div class="flex text-left">
             <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6 w-full sm:w-1/2">
                 @foreach ($gridItems as $key => $gridItem)
                     @if($key < 3)
-                    <div class="flex flex-wrap items-start w-full pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8"
-                        x-data="{ descriptionSelected: false }">
-                        <div class="@if(!empty($gridItem['big'])) aspect-1:1 @else aspect-16:9 @endif overflow-hidden text-white relative w-full bg-cover bg-center rounded-xl"
-                            style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/{{ $gridItem['image'] }}');"
-                            x-on:click="descriptionSelected = true"
-
-                        >
-                            <div class="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-10" style="background:linear-gradient(to bottom, transparent, #000);">
-                                <h5 class="leading-tight"><strong class="font-black"><span class="border-2 border-white rounded-full px-2 mr-2 inline-block">+</span> {{ $gridItem['title'] }}</strong></h5>
-                                <p class="leading-normal text-sm mt-0.5"
-                                    x-cloak
-                                    x-bind:class="{ 'hidden': !descriptionSelected }"
-                                >{{ $gridItem['desc'] }}</p>
+                        <div class="flex flex-wrap items-start w-full pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8"
+                            x-data="{ open: false }">
+                            <div class="aspect-16:9 overflow-hidden text-white relative w-full bg-cover bg-center rounded-xl cursor-pointer"
+                                style="@if(!empty($gridItem['big'])) padding-bottom:80%!important; @endif background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/{{ $gridItem['image'] }}');"
+                                x-on:click="open = ! open"
+                            >
+                                <div class="absolute bottom-0 left-0 right-0 px-7 pb-7 pt-10" style="background:linear-gradient(to bottom, transparent, #000);">
+                                    <h5 class="leading-tight"><strong><i class="fa-light fa-circle-plus align-sub text-3xl mr-1"></i> {{ $gridItem['title'] }}</strong></h5>
+                                    <p class="leading-normal text-sm transition-all duration-500 overflow-hidden"
+                                        x-cloak
+                                        x-bind:class="{ 'max-h-0': !open, 'max-h-[2000px]': open  }"
+                                    >{{ $gridItem['desc'] }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endif
                 @endforeach
             </div>
             <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6 w-full sm:w-1/2">
                 @foreach ($gridItems as $key => $gridItem)
                     @if($key > 2)
-                    <div class="flex flex-wrap items-start w-full pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8">
-                        <div class="@if(!empty($gridItem['big'])) aspect-1:1 @else aspect-16:9 @endif overflow-hidden text-white relative w-full bg-cover bg-center rounded-xl"
-                            style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/{{ $gridItem['image'] }}');"
-                            x-data="{ descriptionSelected: false }"
-                        >
-                            <div class="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-10" style="background:linear-gradient(to bottom, transparent, #000);"
-                                x-on:click="descriptionSelected = true"
-
+                        <div class="flex flex-wrap items-start w-full pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8"
+                            x-data="{ open: false }">
+                            <div class="aspect-16:9 overflow-hidden text-white relative w-full bg-cover bg-center rounded-xl cursor-pointer"
+                                style="@if(!empty($gridItem['big'])) padding-bottom:80%!important; @endif background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/{{ $gridItem['image'] }}');"
+                                x-on:click="open = ! open"
                             >
-                                <h5 class="leading-tight"><strong class="font-black"><span class="border-2 border-white rounded-full px-2 mr-2 inline-block">+</span> {{ $gridItem['title'] }}</strong></h5>
-                                <p class="leading-normal text-sm mt-0.5"
-                                    x-cloak
-                                    x-bind:class="{ 'hidden': !descriptionSelected }"
-                                >{{ $gridItem['desc'] }}</p>
+                                <div class="absolute bottom-0 left-0 right-0 px-7 pb-7 pt-10" style="background:linear-gradient(to bottom, transparent, #000);">
+                                    <h5 class="leading-tight"><strong><i class="fa-light fa-circle-plus align-sub text-3xl mr-1"></i> {{ $gridItem['title'] }}</strong></h5>
+                                    <p class="leading-normal text-sm transition-all duration-500 overflow-hidden"
+                                        x-cloak
+                                        x-bind:class="{ 'max-h-0': !open, 'max-h-[2000px]': open  }"
+                                    >{{ $gridItem['desc'] }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+
                     @endif
                 @endforeach
             </div>
