@@ -63,19 +63,25 @@
                                                 next: 'splide__arrow--next your-class-next hidden sm:flex -right-1',
                                                 pagination: 'splide__pagination hidden md:flex -bottom-10',
                                         },
-                                        perPage: 4.5,
+                                        padding: '3rem',
+                                        perPage: 4,
                                         perMove: 1,
                                         type: 'loop',
                                         focus: 0,
                                         interval: 2000,
                                         breakpoints: {
+                                            1020: {
+                                                padding: '2rem',
+                                            },
                                             720: {
-                                                perPage: 3.5,
+                                                padding: '3rem',
+                                                perPage: 3,
                                                 drag   : 'free',
                                                 snap   : false,
                                             },
                                             620: {
-                                                perPage: 2.5,
+                                                padding: '1rem',
+                                                perPage: 2,
                                             },
                                         },
                                     }).mount()

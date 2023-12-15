@@ -35,9 +35,9 @@
                                     next: 'splide__arrow--next your-class-next hidden sm:flex -right-1 mb-16',
                                     pagination: 'splide__pagination hidden md:flex -bottom-10',
                             },
-                            perPage: 1.5,
                             perMove: 1,
                             type: 'loop',
+                            padding: '5rem',
                             focus: 0,
                             interval: 2000,
                             breakpoints: {
