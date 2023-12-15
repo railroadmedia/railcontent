@@ -429,26 +429,27 @@ class Content extends Model
                     ->where('vimeo_video_id', '=', $value)
                     ->first();
             if (!$video) {
-                $video = new Content();
+                $video = new Video();
                 $video->type = 'vimeo-video';
                 $video->status = 'published';
                 $video->brand = $this->brand;
                 $video->slug = 'vimeo-video-'.$value;
-                $video->language = $this->language;
                 $video->vimeo_video_id = $value;
                 $video->length_in_seconds = $duration;
-                $video->created_on =
-                    Carbon::now()
-                        ->toDateTimeString();
+
                 $video->published_on =
                     Carbon::now()
                         ->toDateTimeString();
                 $video->save();
+                $video->setLengthInSeconds($duration);
+                $video->setVimeoVideoId($value);
+
             }
-            $this->video = $video->id;
-            $this->length_in_seconds = $duration;
+
 
             $this->setField('video', $video->id);
+        } else {
+            Log::debug("Video not imported for $this->id  value:: $value duration:: $duration");
         }
     }
 
@@ -532,5 +533,4 @@ class Content extends Model
             $dataThumb->save();
         }
     }
-
 }
