@@ -282,7 +282,7 @@ class Carousel extends Resource
                 ->dependsOn(
                     ['is_featured'],
                     function (Text $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->is_featured) $field->show()->rules(['required']);
+                        if ($formData->is_featured) $field->show();
                     }
                 ),
             Boolean::make('Button Light Mode', 'btn_light_mode')->hideFromIndex()->default(false),
