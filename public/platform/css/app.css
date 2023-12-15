@@ -22514,6 +22514,15 @@ a:visited{
 .tw-min-h-screen{
   min-height: 100vh !important;
 }
+.tw-min-h-\[400px\]{
+  min-height: 400px !important;
+}
+.tw-min-h-\[calc\(400px-88px\)\]{
+  min-height: calc(400px - 88px) !important;
+}
+.tw-min-h-\[312px\]{
+  min-height: 312px !important;
+}
 .tw-w-0{
   width: 0px !important;
 }
@@ -22924,6 +22933,9 @@ a:visited{
 .tw-max-w-\[287px\]{
   max-width: 287px !important;
 }
+.tw-max-w-\[300px\]{
+  max-width: 300px !important;
+}
 .tw-max-w-\[410px\]{
   max-width: 410px !important;
 }
@@ -22941,9 +22953,6 @@ a:visited{
 }
 .tw-max-w-\[475px\]{
   max-width: 475px !important;
-}
-.tw-max-w-\[480px\]{
-  max-width: 480px !important;
 }
 .tw-max-w-\[500px\]{
   max-width: 500px !important;
@@ -23019,9 +23028,6 @@ a:visited{
 }
 .tw-max-w-xs{
   max-width: 20rem !important;
-}
-.tw-max-w-\[350px\]{
-  max-width: 350px !important;
 }
 .tw-flex-1{
   flex: 1 1 0% !important;
@@ -27246,11 +27252,11 @@ a:visited{
   .md\:tw-w-\[280px\]{
     width: 280px !important;
   }
+  .md\:tw-w-\[300px\]{
+    width: 300px !important;
+  }
   .md\:tw-w-\[32px\]{
     width: 32px !important;
-  }
-  .md\:tw-w-\[350px\]{
-    width: 350px !important;
   }
   .md\:tw-w-\[471px\]{
     width: 471px !important;

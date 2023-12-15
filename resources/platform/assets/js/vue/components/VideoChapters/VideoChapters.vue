@@ -16,7 +16,9 @@
               loading="lazy"
             >
           <!-- Fallback -->
-          <p v-else class="tw-font-bold tw-text-black tw-text-xl dark:tw-text-white">Chapter {{ index + 1 }}</p>
+          <div v-else :class="`tw-p-2 tw-w-full tw-h-full tw-flex tw-items-center tw-justify-center tw-font-bold tw-text-white tw-text-2xl `">
+            <span class="drop-shadow-lg"> Chapter {{ index + 1 }}</span>
+          </div>
         </div>
         <!-- Chapter Info Wrapper -->
         <div class="tw-flex tw-justify-between">

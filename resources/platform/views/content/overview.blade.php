@@ -66,7 +66,7 @@
                     <div class="flex flex-column pr-1 align-v-bottom align-h-center tw-self-end">
                         {{-- Pack Logo --}}
                         <img alt="{{ $parentContent->fetch('title') }} Logo"
-                            class="tw-transition-opacity tw-w-[150px] sm:tw-w-[250px] md:tw-w-[350px]  tw-opacity-0"
+                            class="tw-transition-opacity tw-w-[150px] sm:tw-w-[250px] md:tw-w-[300px]  tw-opacity-0"
                             src="{{ $parentContent->fetch('data.logo_image_url') }}"
                             onload="this.classList.remove('tw-opacity-0')"
                         >
