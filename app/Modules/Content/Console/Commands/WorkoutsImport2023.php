@@ -35,6 +35,17 @@ class WorkoutsImport2023 extends Command
         ]
     ];
 
+    const PERMISSIONS = [
+'guitareo' =>[
+    'basic' => [
+        91,
+        92,
+        52
+    ],
+    'plus' => [92],
+]
+    ];
+
     public function handle(
         ContentService $contentService
     ) {
@@ -93,6 +104,15 @@ class WorkoutsImport2023 extends Command
                 $content->setChapter($this->getValue($data, $headersRow, 'Chapter 4'), 4, self::CHAPTER_THUMBS[$content->brand][3]);
                 $content->setChapter($this->getValue($data, $headersRow, 'Chapter 5'), 5, self::CHAPTER_THUMBS[$content->brand][4]);
                 $content->setChapter($this->getValue($data, $headersRow, 'Chapter 6'), 6, self::CHAPTER_THUMBS[$content->brand][5]);
+                $content->setInstructor($this->getValue($data, $headersRow, 'Instructor'));
+
+                $isCopyright = $this->getValue($data, $headersRow, 'Copyright');
+                if($isCopyright == 'Yes') {
+                    $content->setPermissions(self::PERMISSIONS[$content->brand]['plus']);
+                }else{
+                    $content->setPermissions(self::PERMISSIONS[$content->brand]['basic']);
+                }
+
                 $thumbnail = $this->getValue($data, $headersRow, 'Thumbnail Uploaded');
                 if($thumbnail) {
                     $content->setThumb('https://musora-web-platform.s3.amazonaws.com/workouts/guitareo/'.$thumbnail);

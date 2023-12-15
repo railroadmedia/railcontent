@@ -533,4 +533,23 @@ class Content extends Model
             $dataThumb->save();
         }
     }
+
+    public function setPermissions($values)
+    {
+        foreach ($values as $value) {
+            $permission =
+                ContentPermissions::query()
+                    ->where('content_id', '=', $this->id)
+                    ->where('permission_id', '=', $value)
+                    ->where('brand', '=', $this->brand)
+                    ->first();
+            if (!$permission) {
+                $permission = new ContentPermissions();
+                $permission->content_id = $this->id;
+                $permission->permission_id = $value;
+                $permission->brand = $this->brand;
+                $permission->save();
+            }
+        }
+    }
 }
