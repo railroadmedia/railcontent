@@ -21558,6 +21558,12 @@ a:visited{
 .tw-top-full{
   top: 100% !important;
 }
+.tw-left-10{
+  left: 2.5rem !important;
+}
+.tw-left-5{
+  left: 1.25rem !important;
+}
 .tw-z-0{
   z-index: 0 !important;
 }
@@ -22966,6 +22972,9 @@ a:visited{
 .tw-max-w-\[589px\]{
   max-width: 589px !important;
 }
+.tw-max-w-\[600px\]{
+  max-width: 600px !important;
+}
 .tw-max-w-\[606px\]{
   max-width: 606px !important;
 }
@@ -23019,9 +23028,6 @@ a:visited{
 }
 .tw-max-w-xs{
   max-width: 20rem !important;
-}
-.tw-max-w-\[600px\]{
-  max-width: 600px !important;
 }
 .tw-flex-1{
   flex: 1 1 0% !important;
@@ -27762,6 +27768,9 @@ a:visited{
   }
   .lg\:tw-mt-8{
     margin-top: 2rem !important;
+  }
+  .lg\:tw-mb-7{
+    margin-bottom: 1.75rem !important;
   }
   .lg\:tw-line-clamp-2{
     overflow: hidden !important;
