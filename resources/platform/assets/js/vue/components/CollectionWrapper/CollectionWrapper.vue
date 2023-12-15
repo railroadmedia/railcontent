@@ -229,7 +229,7 @@ const getTabOptions = computed(() => {
         ];
     } else if (isWorkout.value) {
         return [
-            { key: 'all', value: 'All', },
+            { key: '', value: 'All', },
             { key: 'duration,300,<', value: '5 Minutes', },
             { key: 'duration,600,<', value: '10 Minutes', },
             { key: 'duration,900,>', value: '15+ Minutes', },
