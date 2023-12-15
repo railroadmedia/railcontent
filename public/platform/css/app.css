@@ -22499,6 +22499,9 @@ a:visited{
 .tw-min-h-\[25vh\]{
   min-height: 25vh !important;
 }
+.tw-min-h-\[312px\]{
+  min-height: 312px !important;
+}
 .tw-min-h-\[369px\]{
   min-height: 369px !important;
 }
@@ -22513,15 +22516,6 @@ a:visited{
 }
 .tw-min-h-screen{
   min-height: 100vh !important;
-}
-.tw-min-h-\[400px\]{
-  min-height: 400px !important;
-}
-.tw-min-h-\[calc\(400px-88px\)\]{
-  min-height: calc(400px - 88px) !important;
-}
-.tw-min-h-\[312px\]{
-  min-height: 312px !important;
 }
 .tw-w-0{
   width: 0px !important;
