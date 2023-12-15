@@ -193,14 +193,14 @@ const skillLevelColor = computed(() => {
                 <a
                     v-if="secondaryCtaText && secondaryCtaUrl && !secondaryVideo"
                     :href="secondaryCtaUrl"
-                    :class="`tw-btn-primary tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-px-2 md:tw-px-10 lg:tw-px-[30px] tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2`"
+                    :class="`tw-btn-primary tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-px-2 md:tw-px-10 lg:tw-px-[30px] tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2`"
                 >
                     {{ secondaryCtaText }}
                 </a>
                 <span
                     v-if="secondaryCtaText && secondaryVideo"
                     @click="secondaryVideoModal = true"
-                    :class="`tw-btn-primary tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-px-2 md:tw-px-10 lg:tw-px-[30px] tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2 tw-cursor-pointer`"
+                    :class="`tw-btn-primary tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-px-2 md:tw-px-10 lg:tw-px-[30px] tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2 tw-cursor-pointer`"
 
                 >
                     {{ secondaryCtaText }}
