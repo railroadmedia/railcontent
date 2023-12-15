@@ -33,7 +33,7 @@ export const useCollectionStore = defineStore({
             this.updateIncludedFields(param);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
-            this.getData(fas);
+            this.getData();
         },
 
         setProgress (value) {
