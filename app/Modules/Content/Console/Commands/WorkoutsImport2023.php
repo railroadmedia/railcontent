@@ -98,6 +98,9 @@ class WorkoutsImport2023 extends Command
                     $content->setThumb('https://musora-web-platform.s3.amazonaws.com/workouts/guitareo/'.$thumbnail);
                     $content->setOriginalThumb('https://musora-web-platform.s3.amazonaws.com/workouts/guitareo/'.$thumbnail);
                 }
+                if($content->video) {
+                    $contentService->fillCompiledViewContentDataColumnForContentIds([$content->video]);
+                }
                 $contentIds[] = $contentId;
                 event(new ContentCreated($contentId));
 
