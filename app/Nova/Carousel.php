@@ -233,6 +233,17 @@ class Carousel extends Resource
             Text::make('Mobile Image', 'mobile_img')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Heading::make('BANNER ACTIONS'),
             Boolean::make('Featured product?', 'is_featured')->hideFromIndex()->default(false)->help('Used for member enrolment for cohort packs. Leave unchecked for normal banners.'),
+            Boolean::make('Show on Homepage?', 'show_on_homepage')->hideFromIndex()->default(true)
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_featured;
+                })
+                ->dependsOn(
+                    ['is_featured'],
+                    function (Boolean $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_featured) $field->default(true)->show()->rules(['required']);
+                    }
+                ),
             Text::make('Product ID', 'product_id')->hideFromIndex()
                 ->hide()
                 ->hideFromDetail(function (NovaRequest $request, $resource) {
