@@ -203,7 +203,6 @@
                         }
                     },
                 }"
-                x-init="init"
             >
                       
                 <button class="arrow-button absolute top-1/3 right-0 transform -translate-y-1/2 z-150 w-20 hidden sm:block" @click="next()">
@@ -423,7 +422,7 @@
                             this.splide.go('>');
                         }
                     },
-                }" x-init="init"
+                }"
                 class="relative">
                 <button class="absolute top-1/3 right-0 transform -translate-y-1/2 z-150 w-20 hidden sm:block" @click="goNext()">
                     <img src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/kit/arrow-button-blue.svg" alt="Arrow Icon" class="w-10" style="position: absolute; left:50px">
