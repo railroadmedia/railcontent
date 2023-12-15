@@ -74,7 +74,7 @@
     </div>
 
     <!-- TITLES AND COLUMN DATA (on mobile) -->
-    <div class="tw-flex tw-flex-col tw-justify-center tw-mr-auto title-column overflow">
+    <div class="tw-flex tw-flex-col tw-justify-center tw-mr-auto title-column tw-flex-grow overflow">
 
       <!-- Is New -->
       <div v-if="isBranchPath"
