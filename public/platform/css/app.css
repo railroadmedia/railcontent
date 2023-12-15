@@ -28151,6 +28151,10 @@ a:visited{
     padding-top: 25px !important;
     padding-bottom: 25px !important;
   }
+  .lg\:tw-py-7{
+    padding-top: 1.75rem !important;
+    padding-bottom: 1.75rem !important;
+  }
   .lg\:tw-pb-0{
     padding-bottom: 0px !important;
   }
