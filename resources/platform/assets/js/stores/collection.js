@@ -85,9 +85,9 @@ export const useCollectionStore = defineStore({
                                 ...this.filter.params,
                                 included_fields: this.filter.includedFields,
                                 [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm,
-                                tab: this.filter.activeTab,
                                 count_filter_items: true,
-                                ...(this.filter.progress && { included_user_states: [this.filter.progress] })
+                                ...(this.filter.activeTab && { tab: this.filter.activeTab }),
+                                ...(this.filter.progress && { included_user_states: [this.filter.progress] }),
                             },
                         })
                 return response;

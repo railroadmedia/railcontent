@@ -64,8 +64,7 @@ class WorkoutsPageController extends BaseController
 
         CarouselService::$workoutsPage = true;
         $carousel =
-            $this->carouselService->getCarouselSlides()
-                ->where('is_featured', 1);
+            $this->carouselService->getCarouselSlides();
 
         return view(
             'pages.workouts',
