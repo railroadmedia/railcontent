@@ -147,7 +147,7 @@
                         <a class="w-full join smaller sold-out">SOLD OUT</a>
                     @endif
                     <br>
-                    <div class="join smaller outline mt-3"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;This is cool. Really cool.</div>
+                    <div class="join smaller outline mt-3"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Check It Out!</div>
                 </div>
                 {{--                <h6 class="text-sm leading-tight"><em>or get it free with an Annual Drumeo Membership.</em></h6>--}}
             </div>
@@ -205,7 +205,7 @@
                 }"
                 x-init="init"
             >
-                      
+
                 <button class="arrow-button absolute top-1/3 right-0 transform -translate-y-1/2 z-150 w-20 hidden sm:block" @click="next()">
                 <img src="https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/products/kit/arrow-button-white.svg" alt="Arrow Icon" class="w-10" style="position: absolute; left:50px">
                 </button>
@@ -365,14 +365,14 @@
                 </div>
             </div>
             <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
-                <div class="h-7 md:h-10 lg:h-12 flex items-start justify-center"> 
+                <div class="h-7 md:h-10 lg:h-12 flex items-start justify-center">
                     <img class="h-7 md:h-10 lg:h-11"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/kit/sweetwater-logo.png"
                         alt="Sweetwater Logo">
                 </div>
                 <div class="flex flex-col align-bottom">
                     <h2 class="leading-tight my-2"><strong>5</strong></h2>
-                    <div class="flex justify-center"> 
+                    <div class="flex justify-center">
                         @for($i = 1; $i <= 5; $i++)
                         @if($i <= 4)
                             <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
@@ -390,7 +390,7 @@
             <h2 class="leading-tight mt-14 sm:mt-20 mb-4 sm:mb-5"><strong>… and {{ number_format(Prices::$students) }} happy<br class="sm:hidden"> drum students.</strong></h2>
             @php
                 $testimonials = $drumeo['testimonialsShopVersion'];
-            @endphp    
+            @endphp
                 <div x-data="{
                     splide: null,
                     init() {
@@ -609,11 +609,11 @@
     <section class="px-4 sm:px-6 py-10 text-white" style="background: #00101D;">
         <div class="container max-w-5xl mx-auto relative z-50">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mx-2">
-                <h5 class="leading-normal text-left" style="width: 100%"><strong>Free shipping in North America</strong><br>
-                Your Drumeo E-Kit will ship for free anywhere in North America.</h5>
+                <h5 class="leading-normal text-left" style="width: 100%"><strong>Free shipping in the USA and Canada</strong><br>
+                Your Drumeo E-Kit will ship for free anywhere in the USA/Canada.</h5>
 
-                <h5 class="leading-normal text-left"><strong>Discounted shipping outside of North America</strong><br>
-                If you live outside of North America, you qualify for a $100 shipping discount. You’ll see that applied upon checkout.</h5>
+                <h5 class="leading-normal text-left"><strong>Discounted shipping in all other countries.</strong><br>
+                    If you live outside of the US or Canada, you qualify for a $100 shipping discount. You’ll see that applied upon checkout.</h5>
             </div>
         </div>
     </section>
