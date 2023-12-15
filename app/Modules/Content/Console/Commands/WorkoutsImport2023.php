@@ -44,10 +44,10 @@ class WorkoutsImport2023 extends Command
         [$csv, $headersRow] = $this->getCSV($startIndex, $endIndex);
 
         $contentIds = [];
-        $video = [];
+
         $this->withProgressBar(
             $csv,
-            function ($row) use ($headersRow, $contentService, &$contentIds, &$video) {
+            function ($row) use ($headersRow, $contentService, &$contentIds) {
                 $data = $this->getData($row, $headersRow);
 
                 $contentTitle = $this->getValue($data, $headersRow, 'Name');
@@ -98,18 +98,11 @@ class WorkoutsImport2023 extends Command
                     $content->setThumb('https://musora-web-platform.s3.amazonaws.com/workouts/guitareo/'.$thumbnail);
                     $content->setOriginalThumb('https://musora-web-platform.s3.amazonaws.com/workouts/guitareo/'.$thumbnail);
                 }
-
-
-                if($content->video) {
-                    $video[] = $content->video;
-                }
                 $contentIds[] = $contentId;
                 event(new ContentCreated($contentId));
 
             }
         );
-
-        $contentService->fillCompiledViewContentDataColumnForContentIds($video);
 
         $this->info('Done.');
     }
