@@ -58,7 +58,7 @@
                 @endif
                 {{-- Logo --}}
                 <img alt="{{ $pack->fetch('title') }} Logo"
-                    class="tw-w-full tw-transition-opacity tw-max-w-[480px] tw-opacity-0"
+                    class="tw-w-full tw-transition-opacity tw-max-w-[350px] tw-opacity-0"
                     src="{{ $pack->fetch('data.logo_image_url') }}"
                     onload="this.classList.remove('tw-opacity-0')"
                 >

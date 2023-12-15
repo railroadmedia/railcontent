@@ -23020,6 +23020,9 @@ a:visited{
 .tw-max-w-xs{
   max-width: 20rem !important;
 }
+.tw-max-w-\[350px\]{
+  max-width: 350px !important;
+}
 .tw-flex-1{
   flex: 1 1 0% !important;
 }
@@ -25435,29 +25438,127 @@ a:visited{
 .body a:visited, .post-body a:visited {
   color: #0b76db;
 }
+.hover\:tw-btn-primary:hover{
+  align-items: center;
+  border-style: solid;
+  border-radius: 9999px;
+  border-width: 2px;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "Bebas Neue", cursive;
+  font-size: 1rem;
+  justify-content: center;
+  letter-spacing: 1px;
+  margin-bottom: 0.25rem;
+  min-height: 40px;
+  padding: 7px 70px 6px;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition-duration: 150ms;
+  transition-property: background-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  white-space: nowrap;
+}
+.hover\:tw-btn-primary:hover:focus-visible{
+  outline: none;
+}
+.hover\:tw-btn-primary:hover{
+  border-color: transparent;
+}
+.hover\:tw-btn-primary:hover:visited{
+  background-color: inherit;
+  color: white;
+}
+.hover\:tw-btn-primary:hover:hover{
+  text-decoration: none;
+}
+.hover\:tw-btn-primary:hover[disabled],.hover\:tw-btn-primary:hover[disabled]:active{
+  background-color: #e5e7eb !important;
+  color: #9ca3af !important;
+  pointer-events: none;
+}
+.hover\:tw-btn-primary:hover.tw-bg-drumeo:hover,.hover\:tw-btn-primary:hover.tw-bg-drumeo:focus-visible{
+  background-color: #3C91E2;
+}
 .hover\:tw-bg-drumeo:hover.tw-btn-primary:hover,.hover\:tw-bg-drumeo:hover .tw-btn-primary:focus-visible{
   background-color: #3C91E2;
+}
+.hover\:tw-btn-primary:hover.tw-bg-drumeo:hover,.hover\:tw-btn-primary:hover.tw-bg-drumeo:focus-visible{
+  background-color: #3C91E2;
+}
+.hover\:tw-bg-drumeo:hover.tw-btn-primary:hover,.hover\:tw-bg-drumeo:hover .tw-btn-primary:focus-visible{
+  background-color: #3C91E2;
+}
+.hover\:tw-btn-primary:hover.tw-bg-pianote:hover,.hover\:tw-btn-primary:hover.tw-bg-pianote:focus-visible{
+  background-color: #FA7683;
 }
 .hover\:tw-bg-pianote:hover.tw-btn-primary:hover,.hover\:tw-bg-pianote:hover .tw-btn-primary:focus-visible{
   background-color: #FA7683;
 }
+.hover\:tw-btn-primary:hover.tw-bg-pianote:hover,.hover\:tw-btn-primary:hover.tw-bg-pianote:focus-visible{
+  background-color: #FA7683;
+}
+.hover\:tw-bg-pianote:hover.tw-btn-primary:hover,.hover\:tw-bg-pianote:hover .tw-btn-primary:focus-visible{
+  background-color: #FA7683;
+}
+.hover\:tw-btn-primary:hover.tw-bg-guitareo:hover,.hover\:tw-btn-primary:hover.tw-bg-guitareo:focus-visible{
+  background-color: #66DFCD;
+}
 .hover\:tw-bg-guitareo:hover.tw-btn-primary:hover,.hover\:tw-bg-guitareo:hover .tw-btn-primary:focus-visible{
   background-color: #66DFCD;
+}
+.hover\:tw-btn-primary:hover.tw-bg-guitareo:hover,.hover\:tw-btn-primary:hover.tw-bg-guitareo:focus-visible{
+  background-color: #66DFCD;
+}
+.hover\:tw-bg-guitareo:hover.tw-btn-primary:hover,.hover\:tw-bg-guitareo:hover .tw-btn-primary:focus-visible{
+  background-color: #66DFCD;
+}
+.hover\:tw-btn-primary:hover.tw-bg-singeo:hover,.hover\:tw-btn-primary:hover.tw-bg-singeo:focus-visible{
+  background-color: #9C33ED;
 }
 .hover\:tw-bg-singeo:hover.tw-btn-primary:hover,.hover\:tw-bg-singeo:hover .tw-btn-primary:focus-visible{
   background-color: #9C33ED;
 }
+.hover\:tw-btn-primary:hover.tw-bg-singeo:hover,.hover\:tw-btn-primary:hover.tw-bg-singeo:focus-visible{
+  background-color: #9C33ED;
+}
+.hover\:tw-bg-singeo:hover.tw-btn-primary:hover,.hover\:tw-bg-singeo:hover .tw-btn-primary:focus-visible{
+  background-color: #9C33ED;
+}
+.hover\:tw-btn-primary:hover.tw-bg-recordeo:hover,.hover\:tw-btn-primary:hover.tw-bg-recordeo:focus-visible{
+  background-color: #FFBE33;
+}
+.hover\:tw-btn-primary:hover.tw-bg-drumeo:active{
+  background-color: #095EAF;
+}
 .hover\:tw-bg-drumeo:hover.tw-btn-primary:active{
   background-color: #095EAF;
+}
+.hover\:tw-btn-primary:hover.tw-bg-pianote:active{
+  background-color: #AC1222;
 }
 .hover\:tw-bg-pianote:hover.tw-btn-primary:active{
   background-color: #AC1222;
 }
+.hover\:tw-btn-primary:hover.tw-bg-guitareo:active{
+  background-color: #00A18A;
+}
 .hover\:tw-bg-guitareo:hover.tw-btn-primary:active{
   background-color: #00A18A;
 }
+.hover\:tw-btn-primary:hover.tw-bg-singeo:active{
+  background-color: #6900BA;
+}
 .hover\:tw-bg-singeo:hover.tw-btn-primary:active{
   background-color: #6900BA;
+}
+.hover\:tw-btn-primary:hover.tw-bg-recordeo:active{
+  background-color: #CC8B00;
 }
 .tw-peer:checked ~ .peer-checked\:tw-bg-drumeo.tw-btn-primary:hover,.tw-peer:checked ~ .peer-checked\:tw-bg-drumeo .tw-btn-primary:focus-visible{
   background-color: #3C91E2;
