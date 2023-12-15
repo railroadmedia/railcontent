@@ -84,14 +84,14 @@
       </div>
 
       <p v-if="!isCoach"
-        class="tw-text-base font-compressed tw-uppercase text-truncate tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]" :class="[
+        class="tw-text-xs font-compressed tw-uppercase text-truncate tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]" :class="[
           overview ? 'dense' : 'font-compressed',
         ]">
         {{ mappedData.color_title }}
       </p>
 
       <p class="tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title"
-        :class="overview ? 'heading' : 'tw-text-sm lg:tw-text-base'">
+        :class="overview ? 'heading' : 'tw-text-sm'">
         {{ mappedData.black_title }}
       </p>
 
@@ -129,7 +129,7 @@
       <img class="dark:tw-invert tw-transition-opacity tw-duration-500" alt="Rudiment Image"
         :src="mappedData.sheet_music" loading="lazy" />
     </div>
-    
+
     <!-- Difficulty Label -->
     <DifficultyLabel v-if="mappedData.difficulty" class="tw-hidden xl:tw-flex basic-col tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
 
