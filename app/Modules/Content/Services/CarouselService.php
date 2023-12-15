@@ -20,6 +20,8 @@ class CarouselService
     private ContentPermissionsService $contentPermissionsService;
     private ContentService $contentService;
 
+    public static $workoutsPage = false;
+
     public function __construct(
         UserProductService $userProductService,
         UserAccessPermissionsService $userAccessPermissionsService,
@@ -92,9 +94,17 @@ class CarouselService
         $carousel =
             $query->orderBy('display_order')
                 ->get();
-
+        if(self::$workoutsPage){
+            $carousel = $carousel->filter(function($slide){
+                return ($slide->is_featured && !$slide->show_on_homepage);
+            });
+        }else{
+            $carousel = $carousel->filter(function($slide){
+                return (!$slide->is_featured || ($slide->is_featured && $slide->show_on_homepage));
+            });
+        }
         $carousel->each(function (Carousel $slide) {
-            //dd($slide->product_id);
+
             if ($slide->is_featured) {
                 $challenge = null;
                 if ($slide->challenge_id) {

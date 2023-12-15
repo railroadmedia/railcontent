@@ -61,8 +61,7 @@ class WorkoutsPageController extends BaseController
 
         $hasStartedLessons = !empty(json_decode($startedListLessons)->data);
 
-
-
+        CarouselService::$workoutsPage = true;
         $carousel =
             $this->carouselService->getCarouselSlides()
                 ->where('is_featured', 1);
