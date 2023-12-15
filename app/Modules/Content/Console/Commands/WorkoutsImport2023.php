@@ -82,10 +82,7 @@ class WorkoutsImport2023 extends Command
 
                 }
 
-                $content->published_on =
-                    Carbon::now()->subMonth()
-                        ->toDateTimeString();
-
+                $content->published_on = '2023-12-28 00:01:00';
                 $content->save();
 
                 $contentId = $content->id;
