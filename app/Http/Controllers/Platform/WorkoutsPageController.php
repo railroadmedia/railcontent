@@ -62,8 +62,7 @@ class WorkoutsPageController extends BaseController
         Log::debug(var_export($startedListLessons, true));
         $hasStartedLessons = !empty(json_decode($startedListLessons)->data);
 
-
-
+        CarouselService::$workoutsPage = true;
         $carousel =
             $this->carouselService->getCarouselSlides()
                 ->where('is_featured', 1);
