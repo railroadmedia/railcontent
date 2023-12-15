@@ -33,7 +33,7 @@ export const useCollectionStore = defineStore({
             this.updateIncludedFields(param);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
-            this.getData();
+            this.getData(fas);
         },
 
         setProgress (value) {
@@ -84,8 +84,8 @@ export const useCollectionStore = defineStore({
                                 sort: this.filter.sort,
                                 ...this.filter.params,
                                 included_fields: this.filter.includedFields,
-                                [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm,
                                 count_filter_items: true,
+                                ...(this.filter.searchTerm && { [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm} ),
                                 ...(this.filter.activeTab && { tab: this.filter.activeTab }),
                                 ...(this.filter.progress && { included_user_states: [this.filter.progress] }),
                             },
