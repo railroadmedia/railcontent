@@ -105,8 +105,11 @@
                         @else
                             <strong>ONLY ${{ $discountedPrice }}</strong>
                         @endif
-                        </h4>
+                    </h4>
                     <a href="{{ $orderUrl }}" class="join medium w-full">GET YOUR COPY &raquo;</a>
+                    @if(!empty($membersVersion))
+                        <p class="mt-2"><a href="/ecommerce/add-to-cart?products[christmas-songbook]=1&products[christmas-song-book-digital]=1&promo-code=members-discount"><u>Or add the digital version for $29.50</u></a></p>
+                    @endif
                 </div>
             </div>
         </div>
@@ -266,6 +269,9 @@
                         @endif
                     </h4>
                     <a href="{{ $orderUrl }}" class="join medium w-full">GET YOUR COPY &raquo;</a>
+                    @if(!empty($membersVersion))
+                        <p class="mt-2"><a href="/ecommerce/add-to-cart?products[christmas-songbook]=1&products[christmas-song-book-digital]=1&promo-code=members-discount"><u>Or add the digital version for $29.50</u></a></p>
+                    @endif
                 </div>
             </div>
         </div>
