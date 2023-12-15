@@ -35,22 +35,22 @@
                             <!-- Vimeo -->
                             <transition v-else-if="videoProps.videoType === 'vimeo' && !videoProps.useLegacyPlayer" appear
                                 name="fade">
-                                <video-player ref="mediaElementVueInstance" 
-                                    :theme-color="brand" 
+                                <video-player ref="mediaElementVueInstance"
+                                    :theme-color="brand"
                                     :brand="brand"
-                                    :poster="videoProps.poster" 
+                                    :poster="videoProps.poster"
                                     :sources="videoProps.sources"
                                     :ranges="videoProps.ranges ? videoProps.ranges : {}"
                                     :ranges-video-ids="videoProps.rangesVideoIds ? videoProps.rangesVideoIds : {}"
                                     :show-range-buttons="videoProps.showRangeButtons ? videoProps.showRangeButtons : false"
-                                    :hls-manifest-url="videoProps.hlsManifestUrl" 
+                                    :hls-manifest-url="videoProps.hlsManifestUrl"
                                     :captions="videoProps.captions"
-                                    :chapters="videoProps.chapters" 
+                                    :chapters="videoProps.chapters"
                                     :current-second="videoProps.currentSecond"
-                                    :content-id="videoProps.contentId" 
-                                    :user-id="videoProps.userId" 
+                                    :content-id="videoProps.contentId"
+                                    :user-id="videoProps.userId"
                                     :video-id="videoProps.videoId"
-                                    :video-length="videoProps.videoLength" 
+                                    :video-length="videoProps.videoLength"
                                     :total-duration="videoProps.totalDuration"
                                     :cast-title="videoProps.castTitle"
                                     :use-intersection-observer="videoProps.useIntersectionObserver">
@@ -110,7 +110,7 @@
                     />
                 </div>
                 <!-- Close Expanded View -->
-                <div class="2xl:tw-ml-[21px] tw-transition-all tw-overflow-hidden tw-shrink-0 tw-hidden" :class=" {'2xl:tw-inline-block' : !isRelatedSectionOpen }">
+                <div class="2xl:tw-ml-[10px] 2xl:tw-pt-6 2xl:tw-pr-4 tw-transition-all tw-overflow-hidden tw-shrink-0 tw-hidden" :class=" {'2xl:tw-inline-block' : !isRelatedSectionOpen }">
                     <button @click="isRelatedSectionOpen = !isRelatedSectionOpen" class="tw-text-black dark:tw-text-white">
                         <svg id="icon-workouts-filled" width="38" height="38" viewBox="0 0 38 38" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -145,7 +145,7 @@
                         </header>
                         <!-- Cards -->
                         <section class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-relative tw-overflow-y-auto lg:tw-block">
-                            <div v-for="(item, i) in relatedLessons.data " 
+                            <div v-for="(item, i) in relatedLessons.data "
                                  :key="i"
                                  class="tw-group tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-px-2"
                             >
@@ -194,7 +194,7 @@
                             :title="soundsliceTitle || videoResources.title"
                             :disable-next="true"
                             :disable-prev="true"
-                            @onClose="handleCloseSoundslice" 
+                            @onClose="handleCloseSoundslice"
                         />
                     </template>
                 </SoundSlice>

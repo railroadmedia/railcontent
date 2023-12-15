@@ -28522,8 +28522,8 @@ a:visited{
   .\32xl\:tw-ml-4{
     margin-left: 1rem !important;
   }
-  .\32xl\:tw-ml-\[21px\]{
-    margin-left: 21px !important;
+  .\32xl\:tw-ml-\[10px\]{
+    margin-left: 10px !important;
   }
   .\32xl\:tw-mt-0{
     margin-top: 0px !important;
@@ -28579,6 +28579,12 @@ a:visited{
   }
   .\32xl\:tw-pl-10{
     padding-left: 2.5rem !important;
+  }
+  .\32xl\:tw-pr-4{
+    padding-right: 1rem !important;
+  }
+  .\32xl\:tw-pt-6{
+    padding-top: 1.5rem !important;
   }
   .\32xl\:tw-text-\[24px\]{
     font-size: 24px !important;
