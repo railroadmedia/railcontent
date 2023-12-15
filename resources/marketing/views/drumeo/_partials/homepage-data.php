@@ -319,7 +319,7 @@
         "testimonials" => [
             [
                 "image" =>
-                    "https://i.vimeocdn.com/video/1768362015-3ecb7c06c2936cc71622cc11344fb791715f25b786d43857f87d923f6a09522b-d_500.jpg",
+                    "https://i.vimeocdn.com/video/1768362015-3ecb7c06c2936cc71622cc11344fb791715f25b786d43857f87d923f6a09522b-d_700.jpg",
                 "name" => "Tarah Mark",
                 "video" => "878790651",
                 "title" => "Now I actually get to make my own rhythms and beats.",
@@ -327,7 +327,7 @@
             ],
             [
                 "image" =>
-                "https://i.vimeocdn.com/video/1751944105-765a9cc9ef08e836de7b0c436c50e50aa828db3e7773409007e186cc071ec45b-d_500.jpg",
+                "https://i.vimeocdn.com/video/1751944105-765a9cc9ef08e836de7b0c436c50e50aa828db3e7773409007e186cc071ec45b-d_700.jpg",
                 "name" => "Claudio Sanchez",
                 "video" => "877648411",
                 "title" => "Becoming a musician has completed a part of my life.",
@@ -335,7 +335,7 @@
             ],
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/ed-koop.jpg",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/marketing/drumeo/membership/homepage/2023/testimonials/ed-koop.jpg",
                 "name" => "Ed Koop",
                 "video" => "342059271",
                 "title" => "I’m loving music more than I ever did before!",
@@ -344,7 +344,7 @@
             ],
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/barry-lisle.webp",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/marketing/drumeo/membership/homepage/webp-format/testimonials/barry-lisle.webp",
                 "name" => "Barry Lisle",
                 "video" => "342066433",
                 "title" => "They walk you through, step-by-step, for any goal.",
@@ -353,7 +353,7 @@
             ],
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/lisa-aragon.webp",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/marketing/drumeo/membership/homepage/webp-format/testimonials/lisa-aragon.webp",
                 "name" => "Lisa Aragon",
                 "video" => "373252004",
                 "title" => "I was able to play drums on stage!",
@@ -362,7 +362,7 @@
             ],
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/guy-dobbins.webp",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/marketing/drumeo/membership/homepage/webp-format/testimonials/guy-dobbins.webp",
                 "name" => "Guy Dobbins",
                 "video" => "373445704",
                 "title" =>
@@ -372,7 +372,7 @@
             ],
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/omari-augustine.webp",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/marketing/drumeo/membership/homepage/webp-format/testimonials/omari-augustine.webp",
                 "name" => "Omari Augustine",
                 "video" => "553438851",
                 "title" =>
@@ -382,7 +382,7 @@
             ],
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/marlene-rosen.webp",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/marketing/drumeo/membership/homepage/webp-format/testimonials/marlene-rosen.webp",
                 "name" => "Marlene Rosen",
                 "video" => "373446024",
                 "title" => "I’m rediscovering music again.",
@@ -391,7 +391,7 @@
             ],
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/jay-damberg-2.webp",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/marketing/drumeo/membership/homepage/webp-format/testimonials/jay-damberg-2.webp",
                 "name" => "Jay Damberg",
                 "video" => "373445466",
                 "title" =>
@@ -401,7 +401,7 @@
             ],
             [
                 "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/ivy-elizondo-2.webp",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/marketing/drumeo/membership/homepage/webp-format/testimonials/ivy-elizondo-2.webp",
                 "name" => "Ivy Elizondo",
                 "video" => "373445819",
                 "title" => "Now we have a band and we’re recording an album!",

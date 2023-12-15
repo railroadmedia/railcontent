@@ -218,7 +218,7 @@
 
     @include('musora.sales.components.coaches-section', [
         'header' => 'Study with the world’s <br class="md:hidden">best drummers.',
-        'desc' => 'Amplify your skills with 200+ artist courses + <br class="hidden md:inline">access exclusive live events with drumming legends.'
+        'desc' => 'Amplify your skills with 200+ artist courses + <br class="hidden md:inline lg:hidden">access exclusive live events with drumming legends.'
     ])
 
 
@@ -239,16 +239,7 @@
     @endphp
 
     @include('musora.sales.components.songs-section', [
-        'header' => 'Play your favorite songs.',
-        'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
         'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/device.png',
-        'brandName' => 'Drumeo',
-    ])
-
-    @include('musora.sales.components.learn-by-playing-section', [
-        'header' => 'Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.',
-        'desc' => 'With Drumeo, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
-        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314560/rendition/540p/file.mp4?loc=external&signature=1549cce1dacabad80dd416b5a439f6639d3b7b30c7e4d70d46245bf70c6d5102',
     ])
 
     @php
@@ -259,8 +250,7 @@
     @endphp
 
     @include('musora.sales.components.testimonials-section', [
-        'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
-        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
+        'header' => 'drummers',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
         'facebookLink' => 'https://facebook.com/drumeo/',
         'instagramLink' => 'https://instagram.com/drumeoofficial/',

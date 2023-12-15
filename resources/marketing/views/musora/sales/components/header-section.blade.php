@@ -6,7 +6,7 @@
                 <img class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2023/underline.png" alt="underline" fetchpriority="high">
             @endif
         </h1>
-        <p class="text-sm leading-normal tracking-widest sm:mt-10 mb-3 sm:mb-5 lg:my-10 px-5 sm:px-0 max-w-xs sm:max-w-full">
+        <p class="text-sm leading-normal tracking-widest sm:mt-10 mb-3 sm:mb-5 lg:mt-10 lg:mb-7 px-5 sm:px-0 max-w-xs sm:max-w-full">
             <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
             <br class="sm:hidden">
             <i class="fas fa-check sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
@@ -15,8 +15,8 @@
             <br class="sm:hidden">
             <i class="fas fa-check sm:ml-5 text-{{ $theme }}"></i> {!! $pointFour !!}
         </p>
-        <div class="sm:mx-1 w-full sm:w-56 join outline black smaller autoplay-video mb-3 sm:mb-0" x-on:click="trailer = true;">WATCH THE TRAILER</div>
-        <a class="sm:mx-1 w-full sm:w-56 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
+        <div class="sm:mx-0.5 w-full sm:w-56 join outline black smaller autoplay-video mb-3 sm:mb-0" x-on:click="trailer = true;">WATCH THE TRAILER</div>
+        <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
                 href="#customize-anchor"
             @elseif(!empty($month))

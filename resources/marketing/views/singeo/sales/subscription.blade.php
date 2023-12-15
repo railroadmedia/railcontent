@@ -238,8 +238,7 @@
         $instagram = number_format(Prices::$singeoInstagramFollowers);
     @endphp
     @include('musora.sales.components.testimonials-section', [
-        'header' => 'Trusted by singers everywhere.',
-        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
+        'header' => 'singers',
         'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
         'facebookLink' => 'https://facebook.com/singeoofficial/',
         'instagramLink' => 'https://instagram.com/singeoofficial/',

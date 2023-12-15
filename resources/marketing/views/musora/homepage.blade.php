@@ -550,8 +550,7 @@
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'desktopGrid' => true,
-        'header' => 'Your new musical home. ',
-        'reviewText' => 'Music students everywhere are reaching their goals with Musora.<br class="hidden sm:inline"> Check out the reviews and meet some of our friendly students. ',
+        'header' => 'musicians',
     ])
     @include('musora._partials.order-section-collage')
 

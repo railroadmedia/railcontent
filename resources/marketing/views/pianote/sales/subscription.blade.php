@@ -230,7 +230,7 @@
 
    @include('musora.sales.components.coaches-section', [
         'header' => 'Real Teachers,  <br class="sm:hidden">Real Results.',
-        'desc' => 'Amplify your skills with exclusive artist <br class="hidden md:inline"> courses + live events with special guests.'
+        'desc' => 'Amplify your skills with exclusive artist <br class="hidden md:inline lg:hidden"> courses + live events with special guests.'
     ])
 
     @php
@@ -260,8 +260,7 @@
         $instagram = convertNumber(Prices::$pianoteInstagramFollowers);
     @endphp
     @include('musora.sales.components.testimonials-section', [
-        'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
-        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
+        'header' => 'pianists',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',

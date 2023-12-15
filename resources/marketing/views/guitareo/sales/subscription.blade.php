@@ -199,7 +199,7 @@
 
     @include('musora.sales.components.coaches-section', [
         'header' => 'Real Teachers,  <br class="sm:hidden">Real Results.',
-        'desc' => 'Amplify your skills with exclusive artist <br class="hidden md:inline"> courses + live events with special guests.'
+        'desc' => 'Amplify your skills with exclusive artist <br class="hidden md:inline lg:hidden"> courses + live events with special guests.'
     ])
 
 
@@ -228,8 +228,7 @@
     @endphp
 
     @include('musora.sales.components.testimonials-section', [
-        'header' => 'Trusted by guitarists<br class="inline-block sm:hidden">  everywhere.',
-        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
+        'header' => 'guitarists',
         'youtubeLink' => 'https://www.youtube.com/guitarlessonscom/',
         'facebookLink' => 'https://facebook.com/guitareoofficial/',
         'instagramLink' => 'https://instagram.com/guitareoofficial/',

@@ -4,7 +4,7 @@
     <div class="max-w-3xl mx-auto">
         <h2 class="leading-tight font-extrabold">{!! $header !!}</h2>
         @if(!empty($desc))
-            <p class="leading-tight px-4 md:px-0 mt-3 mb-5 md:mb-0 max-w-md mx-auto">{!! $desc !!}</p>
+            <p class="leading-tight px-4 md:px-0 mt-3 mb-5 md:mb-0 mx-auto">{!! $desc !!}</p>
         @endif
     </div>
 
@@ -115,7 +115,7 @@
         </div>
     </div>
 
-    <div class="text-center mt-10 px-4 sm:px-0">
+    <div class="text-center sm:mt-10 lg:mt-0 px-4 sm:px-0">
         @if(empty($promoVersion))
             <a href="/coaches" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-72 join outline black smaller">EXPLORE COURSES</a>
         @endif

@@ -316,13 +316,12 @@
             'location' => 'Ontario, Canada',
             ],
 ];
-        $youtube = convertNumber(Prices::$pianoteYoutubeSubsc); 
+        $youtube = convertNumber(Prices::$pianoteYoutubeSubsc);
         $facebook = convertNumber(Prices::$pianoteFacebookLikes);
-        $instagram = convertNumber(Prices::$pianoteInstagramFollowers); 
+        $instagram = convertNumber(Prices::$pianoteInstagramFollowers);
     @endphp
     @include('musora.sales.components.testimonials-section', [
-        'header' => 'Trusted by students<br class="inline-block sm:hidden">  just like you.',
-        'reviewText' => '',
+        'header' => 'pianists',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
