@@ -12,7 +12,7 @@
     <workouts
         breadcrumb-last-level-url="/{{ $brand }}/workouts"
         breadcrumb-level-title="Workouts"
-        :carousel-data="{{ $carousel }}"
+        :carousel-data="{{ json_encode($carousel) }}"
         @if($startedLessons)
             :continue-data="{{ $startedLessons }}"
         @endif
