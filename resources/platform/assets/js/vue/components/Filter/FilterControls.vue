@@ -3,7 +3,7 @@
         <div class="tw-flex tw-grow tw-relative tw-items-center tw-mb-3 lg:tw-mb-0">
             <!-- Back Button -->
             <template v-if="showBackButton">
-                <a :href="parentUrl" class="tw-inline-flex tw-items-center tw-justify-center tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border-[2px] tw-border-[#CBCBCD] hover:tw-border-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-bg-[#000C17] hover:dark:tw-bg-white tw-text-[#000C17] dark:tw-text-white hover:tw-text-white hover:dark:tw-text-[#000C17] tw-mr-3">
+                <a :href="parentUrl" class="tw-inline-flex tw-items-center tw-justify-center tw-shrink-0 tw-w-[40px] tw-h-[40px] tw-border-[2px] tw-border-[#CBCBCD] hover:tw-border-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-bg-[#000C17] hover:dark:tw-bg-white tw-text-[#000C17] dark:tw-text-white hover:tw-text-white hover:dark:tw-text-[#000C17] tw-mr-3">
                     <i class="fas fa-arrow-left"></i>
                 </a>
             </template>
