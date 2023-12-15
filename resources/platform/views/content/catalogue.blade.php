@@ -196,7 +196,7 @@
             <div class="tw-flex tw-flex-col tw-mt-3">
                 <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
                     <div class="tw-flex tw-flex-col tw-mb-3 md:tw-mb-0 tw-mr-auto">
-                        <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
+                        <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">
                             All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
                     </div>
                     <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 tw-mb-0">
@@ -220,7 +220,7 @@
                 <div class="tw-flex tw-flex-col mt-3">
                     <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
                         <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
-                            <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
+                            <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">
                                 All
                                 @if( !empty($catalogueMeta['shortname']) && $catalogueMeta['shortname'] === 'Podcast')
                                     Episodes {{-- Change Podcast Name}} --}}
