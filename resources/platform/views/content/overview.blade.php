@@ -43,7 +43,7 @@
 
     @if($parentContent->fetch('type') === 'learning-path')
         @include('partials._learning-path', ['learningPathSlug' => $parentContent->fetch('slug')])
-    @else        
+    @else
         {{-- Overview Headers --}}
         @if($parentContent->fetch('type') === 'pack-bundle')
             @include('partials.content.overview-headers._pack-bundle')
@@ -54,11 +54,11 @@
         @elseif($parentContent->fetch('type') === 'challenge')
             @component('partials.bladesora.members.components.header-banner', [
                 'hideUser' => true,
-                'backgroundImage' => 'https://www.musora.com/musora-cdn/image/width=1200/'.$parentContent->fetch('data.header_image_url'),
+                'backgroundImage' => $parentContent->fetch('data.header_image_url'),
             ])
                 @slot('content')
-                    <!-- Back Button --> 
-                    <a href="{{ url()->route('platform.workouts.challenges') }}" 
+                    <!-- Back Button -->
+                    <a href="{{ url()->route('platform.workouts.challenges') }}"
                         class="tw-absolute tw--top-[16px] tw-left-4 lg:tw-left-8 tw-inline-flex tw-items-center tw-justify-center tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border-[2px] tw-border-white tw-bg-black tw-rounded-full  hover:tw-bg-white tw-text-white hover:tw-text-[#000C17] tw-mr-3">
                         <i class="fas fa-arrow-left" aria-hidden="true"></i>
                     </a>
@@ -91,7 +91,7 @@
             "isAdded" => $parentContent->fetch('is_added_to_primary_playlist')
         ])
     @endif
-    
+
     {{-- Content Progress --}}
     <div class="tw-w-full fluid tw-bg-{{ $brand }}" >
         @include('partials.bladesora.members.content.content-progress', [

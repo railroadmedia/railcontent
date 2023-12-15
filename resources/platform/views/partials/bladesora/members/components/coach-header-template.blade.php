@@ -34,7 +34,7 @@ $colors = [
 $brandColors = $colors[$brand];
 @endphp
 
-<section class="tw-grid xs:tw-grid-cols-1 sm:tw-grid-cols-1 md:tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-0">
+<section class="tw-grid xs:tw-grid-cols-1 sm:tw-grid-cols-1 md:tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-0 tw-relative">
     <div class="lg:tw-hidden tw-bg-top tw-bg-cover tw-text-white tw-min-h-[25vh]"
         style="
             background-color: {{ $colors["$brand"]['solidBg'] }};
@@ -43,7 +43,7 @@ $brandColors = $colors[$brand];
     </div>
     <div class="tw-text-white" style="background-color: {{ $brandColors['solidBg'] }}">
         <div class="tw--mt-24 md:tw-mt-0 tw-text-center lg:tw-text-left md:tw-py-16 lg:tw-py-4 tw-py-12 md:tw-px-14 tw-px-6">
-            <div class="tw-mb-7">
+            <div class="tw-top-5 tw-left-5 lg:tw-top-0 lg:tw-left-0 tw-absolute lg:tw-relative lg:tw-mb-7">
                 <a href="javascript:history.back()" class="tw-inline-flex tw-items-center tw-justify-center tw-shrink-0 tw-w-[40px] tw-h-[40px] tw-border-[2px] tw-border-white tw-rounded-full hover:tw-bg-white tw-text-white hover:tw-text-[#000C17]"><i class="fas fa-arrow-left" aria-hidden="true"></i></a>
             </div>
             <div>
