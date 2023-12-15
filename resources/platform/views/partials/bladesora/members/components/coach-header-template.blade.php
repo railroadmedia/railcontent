@@ -42,28 +42,33 @@ $brandColors = $colors[$brand];
         <div style="width: 100%; height: 100%; background: linear-gradient(180deg,{{ $colors["$brand"]['bgRgbStart'] }} 50%,{{ $colors["$brand"]['solidBg'] }});"></div>
     </div>
     <div class="tw-text-white" style="background-color: {{ $brandColors['solidBg'] }}">
-        <div class="tw--mt-24 md:tw-mt-0 tw-text-center lg:tw-text-left md:tw-py-12 lg:tw-py-16 tw-py-12 md:tw-px-14 tw-px-6">
-            @if (isset($topSubtitle))
-                <h2 class="tw-uppercase  tw-mb-2 tw-font-bold tw-text-lg" style="color: {{ $brandColors['subtitle'] }}; font-size: 14px; line-height: 24px;">
-                    {{ $topSubtitle }}
-                </h2>
-            @endif
-            <h1 class="tw-mb-3 tw-uppercase tw-font-normal tw-text-[40px] tw-leading-none">
-                {{ $title }}
-            </h1>
-            @if (isset($bottomSubtitle))
-                <h2 class="tw-uppercase tw-mb-2 tw-font-bold tw-text-lg" style="color: {{ $brandColors['subtitle'] }}; font-size: 14px; line-height: 24px;">
-                    {{ $bottomSubtitle }}
-                </h2>
-            @endif
-            <h3 class="tw-mb-6 tw-font-normal tw-text-base">
-                {{ $shortBio }}
-            </h3>
-            @if(implode(' ',$fullName) !== 'Students Of Guitareo')
-                <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center xl:tw-items-start tw-flex-wrap xl:tw-flex-nowrap">
-                    {{ $actions }}
-                </div>
-            @endif
+        <div class="tw--mt-24 md:tw-mt-0 tw-text-center lg:tw-text-left md:tw-py-16 lg:tw-py-4 tw-py-12 md:tw-px-14 tw-px-6">
+            <div class="tw-mb-7">
+                <a href="javascript:history.back()" class="tw-inline-flex tw-items-center tw-justify-center tw-shrink-0 tw-w-[40px] tw-h-[40px] tw-border-[2px] tw-border-white tw-rounded-full hover:tw-bg-white tw-text-white hover:tw-text-[#000C17]"><i class="fas fa-arrow-left" aria-hidden="true"></i></a>
+            </div>
+            <div>
+                @if (isset($topSubtitle))
+                    <h2 class="tw-uppercase  tw-mb-2 tw-font-bold tw-text-lg" style="color: {{ $brandColors['subtitle'] }}; font-size: 14px; line-height: 24px;">
+                        {{ $topSubtitle }}
+                    </h2>
+                @endif
+                <h1 class="tw-mb-3 tw-uppercase tw-font-normal tw-text-[40px] tw-leading-none">
+                    {{ $title }}
+                </h1>
+                @if (isset($bottomSubtitle))
+                    <h2 class="tw-uppercase tw-mb-2 tw-font-bold tw-text-lg" style="color: {{ $brandColors['subtitle'] }}; font-size: 14px; line-height: 24px;">
+                        {{ $bottomSubtitle }}
+                    </h2>
+                @endif
+                <h3 class="tw-mb-6 tw-font-normal tw-text-base">
+                    {{ $shortBio }}
+                </h3>
+                @if(implode(' ',$fullName) !== 'Students Of Guitareo')
+                    <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center xl:tw-items-start tw-flex-wrap xl:tw-flex-nowrap">
+                        {{ $actions }}
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
     <div class="tw-hidden lg:tw-flex tw-bg-top tw-bg-cover tw-text-white"
