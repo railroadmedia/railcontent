@@ -126,12 +126,13 @@ class UserAccessPermissionsService
 
     public function addFixedAccessPermission(User $user, int $permissionId, Carbon $startDate, Carbon $expirationDate)
     {
+        $hash = sha1("fixed.$expirationDate->timestamp.$permissionId");
         $this->createUserAccessPermission(
             $user,
             $permissionId,
             $startDate,
             UserAccessPermissionsSourceEnum::Manual,
-            null,
+            $hash,
             null,
             UserAccessPermissionsStatusEnum::Active,
             fixed: $expirationDate,
