@@ -113,35 +113,13 @@
     ];
 
     $contentBreadCrumb = new stdClass();
+
     if(!empty($lessonContent->fetch('*fields.instructor')) ||
         !empty($lessonContent->fetch('data.description')) ||
         !empty($lessonContent['chapters'])){
 
             if(!empty($lessonContent['parent'])){
-                if(str_contains($lessonContent['parent']->fetch('type'),'learning-path')) {
-                    if($brand === 'drumeo'){
-                        $contentBreadCrumb->firstLevelUrl = '/drumeo/method/drumeo-method/241247';
-                    }
-                    else if($brand === 'pianote'){
-                        $contentBreadCrumb->firstLevelUrl = '/pianote/method/pianote-method/276693';
-                    }
-                    else if($brand === 'guitareo'){
-                        $contentBreadCrumb->firstLevelUrl = '/guitareo/method/guitareo-method/333652';
-                    }
-                    else if($brand === 'singeo'){
-                        $contentBreadCrumb->firstLevelUrl = '/singeo/method/singeo-method/308514';
-                    }
-                    $contentBreadCrumb->firstLevelTitle = $brand.' Method';
-                }
-                else if(str_contains($lessonContent['parent']->fetch('type'),'pack-bundle')){
-                    $contentBreadCrumb->firstLevelUrl = url()->route('platform.packs');
-                    $contentBreadCrumb->firstLevelTitle = 'Packs';
-                }
-                else if(str_contains($lessonContent['parent']->fetch('type'),'course-part')){
-                    $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", 'courses');
-                    $contentBreadCrumb->firstLevelTitle = 'Course';
-                }
-                else if(str_contains($lessonContent['parent']->fetch('type'),'challenge-part')){
+                if(str_contains($lessonContent['parent']->fetch('type'),'challenge-part')){
                     $contentBreadCrumb->firstLevelUrl = url()->route("platform.workouts.challenges");
                     $contentBreadCrumb->firstLevelTitle = 'Challenges';
                 }
@@ -161,8 +139,8 @@
             else {
                 //Temporary Fix For Challenges
                 if ($lessonType === 'challenge-part') {
-                    $contentBreadCrumb->firstLevelUrl = '';
-                    $contentBreadCrumb->firstLevelTitle = parse_lesson_type_readable($lessonContent->fetch('type'), true);
+                    $contentBreadCrumb->firstLevelUrl = url()->route("platform.workouts.challenges");
+                    $contentBreadCrumb->firstLevelTitle = 'Challenges';
                     $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
                 } else {
                     $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent->fetch('type')]]);
@@ -187,7 +165,13 @@
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
 
     {{-- Workouts page template --}}
-    <workouts-playback breadcrumb-first-level-url="/{{ $brand }}/workouts" breadcrumb-first-level-title="Workouts"
+    <workouts-playback 
+        breadcrumb-first-level-url="/{{ $brand }}/workouts" 
+        breadcrumb-first-level-title="Workouts"
+        @if($lessonType === 'challenge-part')
+            breadcrumb-second-level-url="{{ url()->route("platform.workouts.challenges") }}" 
+            breadcrumb-second-level-title="Challenges"
+        @endif
         :breadcrumb-last-level-title="{{ json_encode($lessonContent->fetch('fields.title')) }}"
         :video-props="{{ json_encode($videoProps) }}" :related-lessons="{{ $relatedLessons }}"
         :video-resources="{{ json_encode($videoResources) }}"
