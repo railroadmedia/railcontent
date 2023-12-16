@@ -1,7 +1,12 @@
 <template>
     <div>
-        <Breadcrumb :first-level-url="breadcrumbFirstLevelUrl" :first-level-title="breadcrumbFirstLevelTitle"
-            :last-level-title="breadcrumbLastLevelTitle" />
+        <Breadcrumb 
+            :first-level-url="breadcrumbFirstLevelUrl" 
+            :first-level-title="breadcrumbFirstLevelTitle"
+            :second-level-url="breadcrumbSecondLevelUrl" 
+            :second-level-title="breadcrumbSecondLevelTitle"
+            :last-level-title="breadcrumbLastLevelTitle" 
+        />
 
         <div class="tw-grid tw-grid-cols-3 2xl:tw-grid-cols-[auto_auto_420px] tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 tw-mt-3 tw-flex-col tw-gap-4">
 
@@ -240,6 +245,14 @@ const props = defineProps({
         default: ''
     },
     breadcrumbFirstLevelTitle: {
+        type: String,
+        default: ''
+    },
+    breadcrumbSecondLevelUrl: {
+        type: String,
+        default: ''
+    },
+    breadcrumbSecondLevelTitle: {
         type: String,
         default: ''
     },
