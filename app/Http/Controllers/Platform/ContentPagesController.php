@@ -903,7 +903,7 @@ class ContentPagesController extends BaseController
             }
         }   
 
-        if ($contentToRenderAsLesson['type'] == 'workout') {
+        if ($contentToRenderAsLesson['type'] == 'workout' || $contentToRenderAsLesson['type'] == 'challenge-part' ) {
             return view('content.workout-lesson', [
                 "parentType" => $contentToRenderAsLessonParent['type'] ?? null,
                 "lessonType" => $contentToRenderAsLesson['type'],

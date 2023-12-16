@@ -159,9 +159,16 @@
                 $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
             }
             else {
-                $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent->fetch('type')]]);
-                $contentBreadCrumb->firstLevelTitle = parse_lesson_type_readable($lessonContent->fetch('type'), true);
-                $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
+                //Temporary Fix For Challenges
+                if ($lessonType === 'challenge-part') {
+                    $contentBreadCrumb->firstLevelUrl = '';
+                    $contentBreadCrumb->firstLevelTitle = parse_lesson_type_readable($lessonContent->fetch('type'), true);
+                    $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
+                } else {
+                    $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent->fetch('type')]]);
+                    $contentBreadCrumb->firstLevelTitle = parse_lesson_type_readable($lessonContent->fetch('type'), true);
+                    $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
+                }
             }
     }
 @endphp
