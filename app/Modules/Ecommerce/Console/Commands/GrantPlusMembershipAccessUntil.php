@@ -21,9 +21,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 
-class GrantUserAccess extends Command
+class GrantPlusMembershipAccessUntil extends Command
 {
-    protected $signature = 'ecommerce:GrantAccessUntil {userId} {permissionId} {expirationDate}';
+    protected $signature = 'ecommerce:GrantPlusMembershipAccessUntil {userIdOrEmail} {expirationDate}';
 
     protected $description = 'grant user access until date';
 
@@ -31,20 +31,28 @@ class GrantUserAccess extends Command
         UserAccessPermissionsService $accessPermissionsService,
         UserService $userService
     ) {
-        $userId = $this->argument('userId');
-        $user = $userService->getByIdOrNull($userId);
+        $userIdOrEmail = $this->argument('userIdOrEmail');
+        if (is_integer($userIdOrEmail)) {
+            $user = $userService->getByIdOrNull($userIdOrEmail);
+        } else {
+            $user = $userService->getByEmailOrNull($userIdOrEmail);
+        }
+        if (!$user) {
+            $this->error("User $userIdOrEmail not found");
+        }
         $expirationDate = Carbon::parse($this->argument('expirationDate'));
-        $permissionId = $this->argument('permissionId');
+        $permissionId = UserAccessPermissionsCollection::MusoraPlusMembershipPermission;
 
-        if ($user->membership_expiration_date < $expirationDate) {
+        if ($user->membership_expiration_date < $expirationDate || $user->membership_level != 'plus') {
             $accessPermissionsService->addFixedAccessPermission(
                 $user,
                 $permissionId,
                 Carbon::today(),
                 $expirationDate
             );
+            $this->info("User granted plus access until $expirationDate");
         } else {
-            $this->info("User already has access until $expirationDate");
+            $this->info("User already has plus membership access until $user->membership_expiration_date");
         }
     }
 
