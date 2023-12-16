@@ -1,10 +1,9 @@
-<div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative z-20 -mb-10" x-on:click="trailer = true;">
+<div class="aspect-16:9 cursor-pointer autoplay-video w-full relative z-20 -mb-10" x-on:click="trailer = true;">
     <div class="absolute top-0 left-0 right-0 text-white z-10 text-center px-4 pt-10">
-        <img class="h-10 sm:h-16 lg:h-24 mb-3 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2023/just-press-play-title3.png" alt="collage intro mobile" loading="lazy" onload="this.classList.remove('opacity-0')">
-        <h3>Improve your skills in just 10 minutes a day.</h3>
+        <img class="h-10 sm:h-14 lg:h-20 pt-3 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/just-press-play-logo.png" alt="collage intro mobile" loading="lazy" onload="this.classList.remove('opacity-0')">
+        <h3 class="leading-tight">Improve your skills in just 10 minutes a day.</h3>
     </div>
-    <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-    <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="{{ $vid }}" type="video/mp4" autoplay muted loop playsinline></video>
+    <img class="object-cover w-full h-full absolute z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/thumb.jpg"></img>
 </div>
 
 <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
@@ -24,7 +23,7 @@
                 </div>
             </div>
             <div class="mb-5 sm:mb-0 sm:pl-7 sm:w-1/2 flex-grow-0">
-                <div class="h-full rounded-xl p-7 sm:p-10 pb-48 bg-black text-white flex bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/new-drummers-image.jpg');">
+                <div class="h-full rounded-xl p-7 sm:p-10 pb-48 bg-black text-white flex bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/workouts-card.jpg');">
                     <div>
                         <h5 class="leading-tight mb-3"><strong>Practice with your heroes.</strong></h5>
                         <h6 class="leading-normal max-w-lg mx-0">Never practice alone. Your favorite musicians and teachers will share their tips, cheer you along, and help you learn by playing!</h6>

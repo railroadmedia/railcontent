@@ -56,15 +56,21 @@
                             @foreach ($testimonials as $testimonial)
                                 <li class="splide__slide flex px-1">
                                     <div class="w-full rounded-xl p-6 flex text-white" style="background-color:#0C1524;">
-                                        <div class="w-1/2 bg-cover bg-center rounded-xl relative h-96" style="background-image:url({{$testimonial['image']}});">
-                                            <div class="absolute inset-0 flex justify-center align-center">
-                                                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if(!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-3xl text-white border-4 border-white px-6 py-4 rounded-full bg-[#0009] hover:opacity-80"></i>
-                                            </div>
+                                        <div class="w-7/12 bg-cover bg-center rounded-xl relative h-96" style="background-image:url('{{$testimonial['image']}}');">
+{{--                                            <div class="absolute inset-0 flex justify-center align-center">--}}
+{{--                                                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if(!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-3xl text-white border-4 border-white px-6 py-4 rounded-full bg-[#0009] hover:opacity-80"></i>--}}
+{{--                                            </div>--}}
                                         </div>
-                                        <div class="w-1/2 flex flex-col justify-between text-left pl-8 py-5">
+                                        <div class="w-5/12 flex flex-col justify-between text-left pl-8 py-5">
                                             <h3 class="leading-normal mb-2"><em>{!! $testimonial['title'] !!}</em></h3>
                                             <div class="flex items-center justify-start">
-                                                <img class="h-16 w-16 rounded-full object-cover mr-4" src="{{$testimonial['image']}}">
+                                                <img class="h-16 w-16 rounded-full object-cover mr-4"
+                                                    @if(!empty($testimonial['avatar']))
+                                                        src="{{$testimonial['avatar']}}"
+                                                    @else
+                                                        src="{{$testimonial['image']}}"
+                                                    @endif
+                                                >
                                                 <p class="mx-0 font-black">{{ $testimonial['name'] }}</p>
                                             </div>
                                         </div>

@@ -151,14 +151,14 @@
     @endif
 
     @php
-        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/dorothea-taylor.webp';
-        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/todd-sucherman.webp';
-        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/jared-falk.webp';
-        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/hannah-welton.webp';
-        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/larnell-lewis.webp';
-        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/zack-grooves.webp';
-        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/domino-santatonio.webp';
-        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/aaron-spears.webp';
+        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/dorothea-taylor.png';
+        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/jonathan-moffett.png';
+        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/brandon-toews.png';
+        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/emmanuelle-caplette.png';
+        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/dennis-chambers.png';
+        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/zack-grooves.png';
+        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/domino-santatonio.png';
+        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/simon-phillips.png';
 
        $slides = $drumeo['slides'];
     @endphp
@@ -400,7 +400,7 @@
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and voice lessons with full access to all Musora communities.</li>',
-        'image' => 'marketing/drumeo/membership/homepage/webp-format/drumeo-collage.webp',
+        'image' => 'marketing/drumeo/membership/homepage/2024/drumeo-collage.png',
         ])
     @endif
 
