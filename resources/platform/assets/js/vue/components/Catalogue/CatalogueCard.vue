@@ -27,9 +27,13 @@
                 >
                     <!-- Video Thumbnail -->
                     <img :src="`https://www.musora.com/musora-cdn/image/width=500/${mappedData.thumbnail} `"
-                        class="tw-absolute tw-transition-opacity tw-duration-500tw-opacity-0" :class="[
+                        class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0" 
+                        :class="[
                             item.type === 'song' ? 'tw-blur-sm' : ''
-                        ]" loading="lazy" onload="this.classList.remove('tw-opacity-0')">
+                        ]" 
+                        loading="lazy" 
+                        onload="this.classList.remove('tw-opacity-0')"
+                    >
                     <!-- Song Overlay -->
                     <div v-if="item.type === 'song'"
                         class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
