@@ -124,6 +124,21 @@ class UserAccessPermissionsService
         $this->handleUserPermissionsUpdatedEvent($user);
     }
 
+    public function addFixedAccessPermission(User $user, int $permissionId, Carbon $startDate, Carbon $expirationDate)
+    {
+        $this->createUserAccessPermission(
+            $user,
+            $permissionId,
+            $startDate,
+            UserAccessPermissionsSourceEnum::Manual,
+            null,
+            null,
+            UserAccessPermissionsStatusEnum::Active,
+            fixed: $expirationDate,
+        );
+        $this->handleUserPermissionsUpdatedEvent($user);
+    }
+
     public function syncUser(User $user, bool $skipEventSync = false): void
     {
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
@@ -165,8 +180,7 @@ class UserAccessPermissionsService
 
         if (!$skipEventSync) {
             $this->handleUserPermissionsUpdatedEvent($user, $orderCollection);
-        }
-        else{
+        } else {
             try {
                 $accessPermissions = $this->getUserAccessPermissions($user->id);
                 $subscriptions = $this->subscriptionService->syncSubscriptionData($accessPermissions);
@@ -514,8 +528,8 @@ class UserAccessPermissionsService
         int $permissionId,
         Carbon $startTime,
         UserAccessPermissionsSourceEnum $source,
-        string $hash,
-        Product $product,
+        ?string $hash,
+        ?Product $product,
         UserAccessPermissionsStatusEnum $status,
         ?int $days = null,
         ?int $months = null,
@@ -523,13 +537,13 @@ class UserAccessPermissionsService
         ?bool $isLifeTime = null
     ): ?UserAccessPermission {
         if (!isset($days)) {
-            $days = $product->getMembershipTimeDays();
+            $days = $product?->getMembershipTimeDays() ?? 0;
         }
         if (!isset($months)) {
-            $months = $product->getMembershipTimeMonths();
+            $months = $product?->getMembershipTimeMonths() ?? 0;
         }
         if (!isset($isLifeTime)) {
-            $isLifeTime = $product->isLifeTime();
+            $isLifeTime = $product?->isLifeTime() ?? false;
         }
         if (empty($hash)) {
             $hash = uniqid();
@@ -537,7 +551,7 @@ class UserAccessPermissionsService
         $accessPermission = new UserAccessPermission();
         $accessPermission->user_id = $user->id;
         $accessPermission->permission_id = $permissionId;
-        $accessPermission->product_id = $product->id;
+        $accessPermission->product_id = $product?->id;
         $accessPermission->source = $source;
         $accessPermission->source_hash = $hash;
         $accessPermission->start_time = $startTime;
