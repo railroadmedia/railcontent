@@ -15,6 +15,7 @@
             <div>
                 <transition appear name="fade">
                     <CatalogueCardContainer
+                        :force-no-links="forceNoLinks"
                         :is-mini-view="isMiniView"
                         :pre-loaded-content="preLoadedContent"
                         :show-dropdown="showDropdown"
@@ -46,6 +47,10 @@ const props = defineProps({
     default: ''
   },
   isMiniView: {
+    type: Boolean,
+    default: false
+  },
+  forceNoLinks: {
     type: Boolean,
     default: false
   },
