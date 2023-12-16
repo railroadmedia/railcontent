@@ -23,6 +23,7 @@
                     :content-type-override="contentTypeOverride"
                     :is-mini-card="isMiniView"
                     :show-my-list-action="showMyListAction"
+                    :force-no-links="forceNoLinks"
                     :force-list-view="displayInline"
                     :break-to-list-view="breakToListView"
                     @addToList="addToList"
@@ -65,6 +66,10 @@ const props = defineProps({
         default: () => true,
     },
     isMiniView: {
+        type: Boolean,
+        default: () => false,
+    },
+    forceNoLinks: {
         type: Boolean,
         default: () => false,
     },

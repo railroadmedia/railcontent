@@ -16,7 +16,7 @@
             { '@3xl/breakToList:tw-flex-col' : breakToListView }
         ]">
             <!-- Thumbnail Section -->
-            <a :href="renderLink ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
+            <a :href="renderLink  && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
                 { 'tw-w-[142px] tw-mr-3': forceListView || breakToListView },
                 { '@3xl/breakToList:tw-w-full @3xl/breakToList:tw-mr-0': breakToListView },
                 item.type === 'song' && forceListView ? 'tw-max-w-[121px]' : '',
@@ -63,14 +63,14 @@
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block">
-                    <a :href="renderLink ? item.url : null"
+                    <a :href="renderLink  && !forceNoLinks ? item.url : null"
                         class="card-info tw-flex tw-flex-auto tw-flex-col tw-px-2 tw-rounded-lg"
                         :class="[forceListView || breakToListView ? 'tw-justify-center tw-pt-1' : 'tw-pt-2', { 'lg:tw-pt-2 lg:tw-justify-start' : breakToListView }]">
                         <div class="tw-flex tw-flex-col">
                             <!-- Video Title -->
                             <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
                                 :class="{ 'tw-text-center': isGuitareoChordAndScale }">
-                                {{ mappedData.black_title }}
+                                {{ forceNoLinks }}
                             </h4>
                             <!-- Video Description -->
                             <p v-if="mappedData.show_description"
@@ -142,7 +142,7 @@
     <div v-else
         class="tw-group tw-flex tw-items-center tw-py-[4px] tw-h-[78px] tw-relative tw-w-[365px] lg:tw-w-auto tw-shrink-0">
         <!-- Thumbnail Image -->
-        <a :href="renderLink ? item.url : null"
+        <a :href="renderLink  && !forceNoLinks ? item.url : null"
             class="tw-flex-none tw-h-[70px] tw-w-[121px] tw-relative tw-overflow-hidden tw-rounded-[5px]">
             <div
                 class="tw-rounded-[5px] tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[70px] tw-w-[121px] tw-justify-center tw-items-center tw-text-white tw-text-center tw-z-[50]">
@@ -161,7 +161,7 @@
         </a>
 
         <!-- Instructor Name and Title -->
-        <a :href="renderLink ? item.url : null"
+        <a :href="renderLink  && !forceNoLinks ? item.url : null"
             class="tw-flex tw-flex-col tw-justify-center tw-flex-grow tw-ml-[10px] tw-font-open-sans tw-h-[70px] tw-overflow-hidden">
             <!-- Instructor Name -->
             <div
@@ -248,6 +248,10 @@ const props = defineProps({
         default: false
     },
     forceListView: {
+        type: Boolean,
+        default: false
+    },
+    forceNoLinks: {
         type: Boolean,
         default: false
     },
