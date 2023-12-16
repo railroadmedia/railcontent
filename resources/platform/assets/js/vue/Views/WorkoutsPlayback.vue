@@ -190,7 +190,7 @@
                 <SoundSlice
                     :user-id="videoProps.userId"
                     :theme-color="brand"
-                    :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=0`"
+                    :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
                     :soundslice-slug="soundsliceSlug"
                     :contentId="videoProps.contentId"
                     :force-start-time="true"
