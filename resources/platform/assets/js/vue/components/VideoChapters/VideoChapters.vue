@@ -19,17 +19,17 @@
           <p v-else class="tw-font-bold tw-text-black tw-text-xl dark:tw-text-white">Chapter {{ index + 1 }}</p>
         </div>
         <!-- Chapter Info Wrapper -->
-        <div class="tw-flex tw-justify-between">
-          <div class="tw-flex tw-flex-col">
-            <div class="tw-text-[12px] tw-leading-[18px] tw-font-bold dark:tw-text-white">{{ formatTime(chapter.time) }}</div>
-            <div class="tw-flex tw-flex-col tw-text-[12px] tw-leading-[18px] tw-font-bold tw-truncate dark:tw-text-white">
-                {{ chapter.title }}
+        <div class="tw-w-full tw-flex tw-justify-between">
+          <div class="tw-w-[calc(100%-46px)] tw-flex tw-flex-col">
+            <div class="tw-text-xs tw-font-bold dark:tw-text-white">{{ formatTime(chapter.time) }}</div>
+            <div class="tw-w-full tw-pr-2">
+                <p class="tw-truncate tw-text-xs tw-font-bold dark:tw-text-white">{{ chapter.title }}</p>
             </div>
           </div>
-          <div class="tw-flex">
+          <div class="tw-flex tw-flex-shrink-0">
             <!-- Practice Button -->
             <button id="video-chapter-song" 
-                    class="tw-text-black dark:tw-text-white tw-mr-[14px] tw-flex tw-flex-col tw-justify-start tw-group"
+                    class="tw-text-black dark:tw-text-white tw-mr-2 tw-flex tw-flex-col tw-justify-start tw-group"
                     @click="handleOpenSoundslice(chapter.title, index, chapter.time, false)" 
                     title="Open Chapter"
             >
