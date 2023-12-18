@@ -8,10 +8,9 @@
             :last-level-title="breadcrumbLastLevelTitle" 
         />
 
-        <div class="tw-grid tw-grid-cols-3 2xl:tw-grid-cols-[auto_auto_420px] tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 tw-mt-3 tw-flex-col tw-gap-4">
-
+        <div class="tw-grid tw-grid-cols-3 xl:tw-gird-rows-4 xl:tw-grid-cols-[auto_auto_420px] tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 tw-mt-3 tw-flex-col tw-gap-4">
             <!-- VIDEO WRAPPER -->
-            <section class="tw-col-span-3 tw-w-full tw-flex" :class="isRelatedSectionOpen ? '2xl:tw-col-span-2' : 'tw-mb-8'">
+            <section class="tw-col-span-3 xl:tw-row-span-2 tw-w-full tw-flex" :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : 'tw-mb-4'">
                 <!-- Video Content -->
                 <div class="tw-w-full">
                     <!--Video-->
@@ -118,7 +117,7 @@
                     />
                 </div>
                 <!-- Close Expanded View -->
-                <div class="2xl:tw-ml-[10px] 2xl:tw-pt-6 2xl:tw-pr-4 tw-transition-all tw-overflow-hidden tw-shrink-0 tw-hidden" :class=" {'2xl:tw-inline-block' : !isRelatedSectionOpen }">
+                <div class="xl:tw-ml-4 tw-transition-all tw-overflow-hidden tw-shrink-0 tw-hidden" :class=" {'xl:tw-inline-block' : !isRelatedSectionOpen }">
                     <button @click="isRelatedSectionOpen = !isRelatedSectionOpen" class="tw-text-black dark:tw-text-white tw-group">
                         <!-- Expand Icon outlined -->
                         <svg class="group-hover:tw-hidden" width="38" height="38" viewBox="0 0 38 38" fill="none"
@@ -142,13 +141,13 @@
             </section>
 
             <!--Related Setion -->
-            <aside class="tw-w-full tw-col-span-3 tw-flex tw-flex-col 2xl:tw-mt-0 2xl:tw-col-span-1" :class=" {'2xl:tw-hidden' : !isRelatedSectionOpen } ">
+            <aside class="tw-w-full tw-col-span-3 xl:tw-row-span-4 tw-flex tw-flex-col xl:tw-mt-0 xl:tw-col-span-1" :class=" {'xl:tw-hidden' : !isRelatedSectionOpen } ">
                 <div class="tw-flex tw-w-full">
                     <div class="tw-w-full tw-border dark:tw-border-[#002039] tw-border-[#e5e7ea] dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] tw-overflow-hidden tw-transition-all">
                         <header class="tw-flex tw-flex-col">
                             <div class="tw-bg-white dark:tw-bg-[#081825] tw-pt-[24px] tw-pb-[16px] tw-flex tw-justify-between tw-px-[18px]">
                                 <h3 class="tw-text-xl tw-font-bold tw-font-open-sans dark:tw-text-white">Related Workouts</h3>
-                                <button @click="isRelatedSectionOpen = !isRelatedSectionOpen" class="tw-text-black dark:tw-text-white tw-hidden 2xl:tw-inline-block">
+                                <button @click="isRelatedSectionOpen = !isRelatedSectionOpen" class="tw-text-black dark:tw-text-white tw-hidden xl:tw-inline-block">
                                     <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path d="M27.55 11.5L27.55 26.5" stroke="currentColor" stroke-width="1.5"
@@ -161,7 +160,7 @@
                             </div>
                         </header>
                         <!-- Cards -->
-                        <section class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-relative tw-overflow-y-auto lg:tw-block">
+                        <section class="tw-w-full tw-flex tw-flex-col tw-max-h-[920px] tw-relative tw-overflow-y-auto lg:tw-block">
                             <div v-for="(item, i) in relatedLessons.data "
                                  :key="i"
                                  class="tw-group tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-px-2"
@@ -179,7 +178,7 @@
             </aside>
 
             <!-- Lesson Content Wrapper -->
-            <section class="tw-col-span-3 2xl:tw-col-span-2" :class="{'2xl:tw-hidden' : !isRelatedSectionOpen }">
+            <section class="tw-col-span-3 xl:tw-row-span-2" :class="{'xl:tw-col-span-2' : isRelatedSectionOpen }">
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
                     <div class="tw-flex tw-flex-row tw-w-full">
                         <VideoComments :theme-color="commentsProps.themeColor" :brand="commentsProps.brand"
@@ -192,6 +191,7 @@
                 </div>
             </section>
         </div>
+        
         <!-- Workout Chapter Soundslice -->
         <transition name="show-from-bottom">
             <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
@@ -309,7 +309,7 @@ let hasBeenPlayed = false;
 let progressTracker;
 
 //Refs
-const isRelatedSectionOpen = ref(true);
+const isRelatedSectionOpen = ref(false);
 const openSoundslice = ref(false);
 const chapterStartTime = ref(0);
 const chapterEndTime = ref(props.videoProps.totalDuration);
