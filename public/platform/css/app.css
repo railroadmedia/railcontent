@@ -26777,6 +26777,9 @@ a:visited{
   .sm\:tw-whitespace-normal{
     white-space: normal !important;
   }
+  .sm\:tw-break-words{
+    overflow-wrap: break-word !important;
+  }
   .sm\:tw-break-all{
     word-break: break-all !important;
   }
@@ -26929,6 +26932,9 @@ a:visited{
   .sm\:tw-leading-relaxed{
     line-height: 1.625 !important;
   }
+  .sm\:tw-break-words{
+    word-break: break-word !important;
+  }
 }
 @media (min-width: 768px){
   .md\:tw-static{
@@ -26966,9 +26972,6 @@ a:visited{
   }
   .md\:tw-top-0{
     top: 0px !important;
-  }
-  .md\:tw-top-14{
-    top: 3.5rem !important;
   }
   .md\:tw-top-6{
     top: 1.5rem !important;
@@ -27067,9 +27070,6 @@ a:visited{
   }
   .md\:tw-ml-1{
     margin-left: 0.25rem !important;
-  }
-  .md\:tw-ml-\[10px\]{
-    margin-left: 10px !important;
   }
   .md\:tw-ml-\[23px\]{
     margin-left: 23px !important;
@@ -27301,9 +27301,6 @@ a:visited{
   }
   .md\:tw-max-w-\[465px\]{
     max-width: 465px !important;
-  }
-  .md\:tw-max-w-\[576px\]{
-    max-width: 576px !important;
   }
   .md\:tw-max-w-full{
     max-width: 100% !important;
@@ -27657,9 +27654,6 @@ a:visited{
   }
   .lg\:tw-top-0\.5{
     top: 0.125rem !important;
-  }
-  .lg\:tw-top-16{
-    top: 4rem !important;
   }
   .lg\:tw-top-2{
     top: 0.5rem !important;

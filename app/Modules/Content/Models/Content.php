@@ -421,20 +421,21 @@ class Content extends Model
         $this->setField('soundslice_slug', $value);
     }
 
-    public function setVideo($value, $duration)
+    public function setVideo($value, $duration, $type)
     {
         if ($value && $duration != '') {
             $video =
                 Content::query()
-                    ->where('vimeo_video_id', '=', $value)
+                    ->where($type.'_video_id', '=', $value)
                     ->first();
             if (!$video) {
                 $video = new Video();
-                $video->type = 'vimeo-video';
+                $video->type = $type.'-video';
                 $video->status = 'published';
                 $video->brand = $this->brand;
-                $video->slug = 'vimeo-video-'.$value;
-                $video->vimeo_video_id = $value;
+                $video->slug = $type.'-video-'.$value;
+                $typeId = $type.'_video_id';
+                $video->$typeId = $value;
                 $video->length_in_seconds = $duration;
 
                 $video->published_on =
@@ -442,12 +443,15 @@ class Content extends Model
                         ->toDateTimeString();
                 $video->save();
                 $video->setLengthInSeconds($duration);
-                $video->setVimeoVideoId($value);
-
+                if($type == 'vimeo') {
+                    $video->setVimeoVideoId($value);
+                }else{
+                    $video->setYoutubeVideoId($value);
+                }
             }
+            $id = $video->id;
 
-
-            $this->setField('video', $video->id);
+            $this->setField('video', $id);
         } else {
             Log::debug("Video not imported for $this->id  value:: $value duration:: $duration");
         }
@@ -521,7 +525,7 @@ class Content extends Model
         $dataTimecode->save();
 
         if($thumb){
-           // dd($thumb);
+            // dd($thumb);
             $chapterThumb = $this->data->where('key', '=', 'chapter_thumbnail_url')
                 ->where('position','=',$position)->first();
             if($chapterThumb){

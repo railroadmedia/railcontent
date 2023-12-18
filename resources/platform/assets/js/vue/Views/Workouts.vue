@@ -13,7 +13,7 @@
                     <musora-icon @click="openModal('challenge')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
                 </div>
                 <a :href="`/${brand}/workouts/challenges`" class="tw-text-sm lg:tw-text-base xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                    See All Challenges
+                    See All <span class="tw-hidden sm:tw-inline">Challenges</span>
                 </a>
             </div>
             <hr class="tw-border-[#65656b40] dark:tw-border-[#223F57]" />
@@ -27,7 +27,7 @@
         <section>
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
                 <div class="tw-flex tw-items-start">
-                    <a href="TODO" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl tw-mr-2">Workouts</a>
+                    <div href="TODO" class="tw-text-[#00101D] dark:tw-text-white tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl tw-mr-2">Workouts</div>
 <!--                    <musora-icon @click="openVideo('//player.vimeo.com/video/785314388?autoplay=1')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>-->
                     <musora-icon @click="openModal('workout')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
                 </div>

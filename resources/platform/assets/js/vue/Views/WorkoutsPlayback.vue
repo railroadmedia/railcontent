@@ -58,7 +58,10 @@
                                     :video-length="videoProps.videoLength"
                                     :total-duration="videoProps.totalDuration"
                                     :cast-title="videoProps.castTitle"
-                                    :use-intersection-observer="videoProps.useIntersectionObserver">
+                                    :use-intersection-observer="videoProps.useIntersectionObserver"
+                                    @play="handleVideoPlay"
+                                    @pause="handleVideoPause"
+                                >
                                     <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                                 </video-player>
                             </transition>
@@ -235,9 +238,11 @@ import SoundSliceControls from "../components/SoundSlice/SoundSliceControls.vue"
 import CatalogueCard from "../components/Catalogue/CatalogueCard.vue";
 import Intercom from "../vuesora/assets/js/services/intercom";
 import Helpscout from "../vuesora/assets/js/services/helpscout";
+import ProgressTracker from "../vuesora/assets/js/classes/progress-tracker";
+import ContentService from '../vuesora/assets/js/services/content';
 // READ ME: Importing video player breaks the app for some reason.
 // We need further investigation on this matter, but for now let's use it globally.
-//import VideoPlayer from "../vuesora/components/VideoPlayer/VideoPlayer.vue";
+// import VideoPlayer from "../vuesora/components/VideoPlayer/VideoPlayer.vue";
 
 const props = defineProps({
     breadcrumbFirstLevelUrl: {
@@ -300,14 +305,19 @@ const props = defineProps({
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
+let hasBeenPlayed = false;
+let progressTracker;
 
+//Refs
 const isRelatedSectionOpen = ref(true);
 const openSoundslice = ref(false);
 const chapterStartTime = ref(0);
 const chapterEndTime = ref(props.videoProps.totalDuration);
 const soundsliceTitle = ref('');
 const startLooping = ref(false);
+const mediaElementVueInstance = ref(null)
 
+//Computed
 const formattedChapters = computed(() => {
     if(props.videoProps.chapters?.length) {
         return props.videoProps.chapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
@@ -320,6 +330,41 @@ const formattedChapters = computed(() => {
     }
     return [];
 });
+
+//Methods
+const handleVideoPlay = (payload) => {
+    if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
+        ContentService.markContentAsStarted(payload.contentId);
+    }
+    if (progressTracker == null) {
+        progressTracker = new ProgressTracker();
+
+        const sessionTokenElement = document.querySelector('#sessionToken');
+
+        if (mediaElementVueInstance) {
+            window.addEventListener('unload', (event) => {
+                progressTracker.send({
+                    mediaId: mediaElementVueInstance.videoId,
+                    mediaType: 'video',
+                    mediaCategory: 'vimeo',
+                    watchPosition: mediaElementVueInstance.currentTimeInSeconds
+                        || mediaElementVueInstance.currentTime,
+                    totalDuration: mediaElementVueInstance.videoLength
+                        || mediaElementVueInstance.totalDuration,
+                    sessionToken: sessionTokenElement.value || null,
+                    brand:mediaElementVueInstance.brand,
+                    contentId: mediaElementVueInstance.contentId
+                });
+            });
+        }
+    }
+    hasBeenPlayed = true;
+    progressTracker.start();
+};
+
+const handleVideoPause = (payload) => {
+    progressTracker.stop();
+};
 
 const getBrandSpecificParams = () => {
     return ({
