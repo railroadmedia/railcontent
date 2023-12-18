@@ -1435,8 +1435,11 @@ class ContentRepository extends RepositoryBase
      */
     public function getFilterFields()
     {
-        $query =
-            $this->query()
+        $cat = self::$catalogMetaAllowableFilters;
+        self::$catalogMetaAllowableFilters = ['style','topic','difficulty'];
+
+        //dd($possibleContentFields2);
+        $query =   $this->query()
                 ->selectFilterOptionColumns()
                 ->restrictByUserAccess()
                 ->restrictByFields($this->requiredFields)
@@ -1456,10 +1459,58 @@ class ContentRepository extends RepositoryBase
 //        }
 
         $possibleContentFields = $this->getFilterOptionsForQuery($query);
+        $selectedFilterCategories = [];
+        $includedFields = collect($this->includedFields);
+        $selectedFilterCategories = $includedFields->pluck('name');
+        $initialFilters = $this->includedFields;
+
+$myResults = [];
+        foreach ($selectedFilterCategories as $category)
+        {
+
+
+            //dd(collect($this->includedFields)->where('name','!=',$category));
+            if(isset($possibleContentFields[$category])){
+                $otherCategories = $includedFields->where('name', '!=', $category);
+                $this->includedFields = $otherCategories->values()->toArray();
+                $allQuery =
+                    $this->query()
+                        ->selectFilterOptionColumns()
+                        ->restrictByUserAccess()
+//            ->restrictByFields($this->requiredFields)
+            ->includeByFields($this->includedFields)
+            ->restrictByUserStates($this->requiredUserStates)
+//            ->includeByUserStates($this->includedUserStates)
+                        ->restrictByTypes($this->typesToInclude)
+                        ->restrictByParentIds($this->requiredParentIds);
+                $possibleContentFields2 = $this->getFilterOptionsForQuery($allQuery);
+                $myResults[$category]= $possibleContentFields2[$category];
+                $this->includedFields = $initialFilters;
+               // dd($category, $possibleContentFields[$category], $possibleContentFields2[$category]);
+            }
+        }
+        foreach ($possibleContentFields as $possibleContentFieldKey => $possibleContentFieldValue){
+            if(isset($myResults[$possibleContentFieldKey])){
+                $possibleContentFields[$possibleContentFieldKey] = $myResults[$possibleContentFieldKey];
+            }
+        }
 
         return $possibleContentFields;
     }
+    public function check_diff_multi($array1, $array2){
+        $result = array();
+        foreach($array1 as $key => $val) {
+            if(isset($array2[$key])){
+                if(is_array($val) && $array2[$key]){
+                    $result[$key] = $this->check_diff_multi($val, $array2[$key]);
+                }
+            } else {
+                $result[$key] = $val;
+            }
+        }
 
+        return $result;
+    }
     /**
      * @param $name
      * @param $value
@@ -2403,7 +2454,7 @@ class ContentRepository extends RepositoryBase
             );
         }
 
-            $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
+            //$filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
             sort($filterOptionsArray[$filterOptionName]);
         }
 
@@ -2448,6 +2499,8 @@ class ContentRepository extends RepositoryBase
 
             $filterOptionsArray['instructor'] = $instructorRows;
         }
+
+       // dd($filterOptionsArray);
 
         // todo: now to the right place
         $filterOptionNameToContentTableColumnName = [
@@ -2494,7 +2547,7 @@ class ContentRepository extends RepositoryBase
                 );
             }
 
-            $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
+            //$filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
             usort($filterOptionsArray[$filterOptionName], [$this, 'sortByAlphaThenNumeric']);
         }
 
