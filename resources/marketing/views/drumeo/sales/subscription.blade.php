@@ -116,6 +116,9 @@
                 display:block!important;
             }
         @endif
+        .splide__slide.is-active .active-bg {
+            background-color:#0b76db!important;
+        }
     </style>
 @stop
 

@@ -1,22 +1,20 @@
 <header class="text-center px-5 sm:px-6 py-32 sm:py-52 lg:py-56 relative overflow-hidden" style="background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);">
-    <div class="container max-w-xs sm:max-w-6xl mx-auto relative z-20">
+    <div class="container max-w-6xl mx-auto relative z-20">
         <h1 class="relative w-auto inline-block text-3xl sm:text-4xl lg:text-5xl">
             <strong>{!! $header !!}</strong>
             @if(!empty($underline))
                 <img class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2023/underline.png" alt="underline" fetchpriority="high">
             @endif
         </h1>
-        <p class="text-sm leading-normal tracking-widest sm:mt-10 mb-3 sm:mb-5 lg:mt-10 lg:mb-7 px-5 sm:px-0 max-w-xs sm:max-w-full">
+        <p class="text-sm leading-normal tracking-widest sm:mt-10 mb-3 sm:mb-5 lg:mt-10 lg:mb-7">
             <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
-            <br class="sm:hidden">
-            <i class="fas fa-check sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
+            <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
             <br class="lg:hidden">
             <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> {!! $pointThree !!}
-            <br class="sm:hidden">
-            <i class="fas fa-check sm:ml-5 text-{{ $theme }}"></i> {!! $pointFour !!}
+            <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointFour !!}
         </p>
-        <div class="sm:mx-0.5 w-full sm:w-56 join outline black smaller autoplay-video mb-3 sm:mb-0" x-on:click="trailer = true;">WATCH THE TRAILER</div>
-        <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
+        <div class="sm:mx-0.5 w-64 sm:w-56 join outline black smaller autoplay-video mb-3 sm:mb-0" x-on:click="trailer = true;">WATCH THE TRAILER</div>
+        <a class="sm:mx-0.5 w-64 sm:w-56 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
                 href="#customize-anchor"
             @elseif(!empty($month))
