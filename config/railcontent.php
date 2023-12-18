@@ -1314,6 +1314,8 @@ return [
         'learning-path-lesson',
         'song-tutorial',
         'song-tutorial-children',
+        'workout',
+        'challenge-part',
     ],
     'dashboardInProgressContentTypes' => [
         'course',

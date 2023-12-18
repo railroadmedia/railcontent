@@ -421,33 +421,37 @@ class Content extends Model
         $this->setField('soundslice_slug', $value);
     }
 
-    public function setVideo($value, $duration)
+    public function setVideo($value, $duration, $type)
     {
         if ($value && $duration != '') {
-            $video =
-                Content::query()
-                    ->where('vimeo_video_id', '=', $value)
-                    ->first();
-            if (!$video) {
-                $video = new Video();
-                $video->type = 'vimeo-video';
-                $video->status = 'published';
-                $video->brand = $this->brand;
-                $video->slug = 'vimeo-video-'.$value;
-                $video->vimeo_video_id = $value;
-                $video->length_in_seconds = $duration;
+                $video =
+                    Content::query()
+                        ->where($type.'_video_id', '=', $value)
+                        ->first();
+                if (!$video) {
+                    $video = new Video();
+                    $video->type = $type.'-video';
+                    $video->status = 'published';
+                    $video->brand = $this->brand;
+                    $video->slug = $type.'-video-'.$value;
+                    $typeId = $type.'_video_id';
+                    $video->$typeId = $value;
+                    $video->length_in_seconds = $duration;
 
-                $video->published_on =
-                    Carbon::now()
-                        ->toDateTimeString();
-                $video->save();
-                $video->setLengthInSeconds($duration);
-                $video->setVimeoVideoId($value);
+                    $video->published_on =
+                        Carbon::now()
+                            ->toDateTimeString();
+                    $video->save();
+                    $video->setLengthInSeconds($duration);
+                    if($type == 'vimeo') {
+                        $video->setVimeoVideoId($value);
+                    }else{
+                        $video->setYoutubeVideoId($value);
+                    }
+                }
+                $id = $video->id;
 
-            }
-
-
-            $this->setField('video', $video->id);
+            $this->setField('video', $id);
         } else {
             Log::debug("Video not imported for $this->id  value:: $value duration:: $duration");
         }
