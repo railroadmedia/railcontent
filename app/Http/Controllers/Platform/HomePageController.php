@@ -628,7 +628,7 @@ class HomePageController extends BaseController
             [],
             [],
             [],
-            true
+            false
         );
 
         return $workouts;
