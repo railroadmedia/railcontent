@@ -1459,58 +1459,44 @@ class ContentRepository extends RepositoryBase
 //        }
 
         $possibleContentFields = $this->getFilterOptionsForQuery($query);
-        $selectedFilterCategories = [];
-        $includedFields = collect($this->includedFields);
-        $selectedFilterCategories = $includedFields->pluck('name');
-        $initialFilters = $this->includedFields;
+if(self::$countFilterOptionItems) {
+            $includedFields = collect($this->includedFields);
+            $selectedFilterCategories = $includedFields->pluck('name');
+            $initialFilters = $this->includedFields;
 
-$myResults = [];
-        foreach ($selectedFilterCategories as $category)
-        {
-
-
-            //dd(collect($this->includedFields)->where('name','!=',$category));
-            if(isset($possibleContentFields[$category])){
-                $otherCategories = $includedFields->where('name', '!=', $category);
-                $this->includedFields = $otherCategories->values()->toArray();
-                $allQuery =
-                    $this->query()
-                        ->selectFilterOptionColumns()
-                        ->restrictByUserAccess()
-//            ->restrictByFields($this->requiredFields)
-            ->includeByFields($this->includedFields)
-            ->restrictByUserStates($this->requiredUserStates)
-//            ->includeByUserStates($this->includedUserStates)
-                        ->restrictByTypes($this->typesToInclude)
-                        ->restrictByParentIds($this->requiredParentIds);
-                $possibleContentFields2 = $this->getFilterOptionsForQuery($allQuery);
-                $myResults[$category]= $possibleContentFields2[$category];
-                $this->includedFields = $initialFilters;
-               // dd($category, $possibleContentFields[$category], $possibleContentFields2[$category]);
+            $myResults = [];
+            foreach ($selectedFilterCategories as $category)
+            {
+                if(isset($possibleContentFields[$category])){
+                    $otherCategories = $includedFields->where('name', '!=', $category);
+                    $this->includedFields = $otherCategories->values()->toArray();
+                    $allQuery =
+                        $this->query()
+                            ->selectFilterOptionColumns()
+                            ->restrictByUserAccess()
+                            ->restrictByFields($this->requiredFields)
+                            ->includeByFields($this->includedFields)
+                            ->restrictByUserStates($this->requiredUserStates)
+                            ->includeByUserStates($this->includedUserStates)
+                            ->restrictByTypes($this->typesToInclude)
+                            ->restrictByParentIds($this->requiredParentIds);
+                    $possibleContentFields2 = $this->getFilterOptionsForQueryVersion2($allQuery);
+                    $myResults[$category]= $possibleContentFields2[$category];
+                    $this->includedFields = $initialFilters;
+                    //dd($category, $possibleContentFields[$category], $possibleContentFields2[$category]);
+                }
             }
-        }
-        foreach ($possibleContentFields as $possibleContentFieldKey => $possibleContentFieldValue){
-            if(isset($myResults[$possibleContentFieldKey])){
-                $possibleContentFields[$possibleContentFieldKey] = $myResults[$possibleContentFieldKey];
+
+            foreach ($possibleContentFields as $possibleContentFieldKey => $possibleContentFieldValue){
+                if(isset($myResults[$possibleContentFieldKey])){
+                    $possibleContentFields[$possibleContentFieldKey] = $myResults[$possibleContentFieldKey];
+                }
             }
-        }
+}
 
         return $possibleContentFields;
     }
-    public function check_diff_multi($array1, $array2){
-        $result = array();
-        foreach($array1 as $key => $val) {
-            if(isset($array2[$key])){
-                if(is_array($val) && $array2[$key]){
-                    $result[$key] = $this->check_diff_multi($val, $array2[$key]);
-                }
-            } else {
-                $result[$key] = $val;
-            }
-        }
 
-        return $result;
-    }
     /**
      * @param $name
      * @param $value
@@ -2454,7 +2440,7 @@ $myResults = [];
             );
         }
 
-            //$filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
+            $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
             sort($filterOptionsArray[$filterOptionName]);
         }
 
@@ -2547,7 +2533,7 @@ $myResults = [];
                 );
             }
 
-            //$filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
+            $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
             usort($filterOptionsArray[$filterOptionName], [$this, 'sortByAlphaThenNumeric']);
         }
 
@@ -2805,6 +2791,231 @@ $myResults = [];
         }
 
         return $contentRows->count(DB::raw('DISTINCT '.ConfigService::$tableContent . '.id'));
+    }
+
+    private function getFilterOptionsForQueryVersion2(ContentQueryBuilder $contentQueryBuilder)
+    {
+        $filterOptionsArray = [];
+
+        $joinTablesQuery = clone($contentQueryBuilder);
+        $contentTableQuery = clone($contentQueryBuilder);
+
+        $joinTablesQuery->select([]);
+
+        // get values that are in other tables
+        $filterNameToTableNameAndColumnName = [
+            'instructor' => [
+                'table' => 'railcontent_content_instructors',
+                'column' => 'instructor_id',
+                'alias' => '_rci'
+            ],
+            'style' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcs'],
+            'topic' => ['table' => 'railcontent_content_topics', 'column' => 'topic', 'alias' => '_rct'],
+            'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus', 'alias' => '_rcf'],
+            'bpm' => ['table' => 'railcontent_content_bpm', 'column' => 'bpm', 'alias' => '_rcb'],
+        ];
+
+        $filterOptions = self::$catalogMetaAllowableFilters ?? [
+                'data',
+                'instructor',
+                'style',
+                'topic',
+                'focus',
+                'bpm',
+            ];
+
+        // we always need the related data
+        if (!in_array('data', $filterOptions)) {
+            $filterOptions[] = 'data';
+        }
+
+        $filterOptions = array_unique($filterOptions);
+
+        foreach ($filterOptions as $filterOption) {
+            $filterOptionTableName = $filterNameToTableNameAndColumnName[$filterOption]['table'] ?? null;
+            $filterOptionTableAliasName = $filterNameToTableNameAndColumnName[$filterOption]['alias'] ?? null;
+            $filterOptionColumnName = $filterNameToTableNameAndColumnName[$filterOption]['column'] ?? null;
+
+            if (empty($filterOptionTableName) || empty($filterOptionColumnName)) {
+                continue;
+            }
+
+            $hasJoinAlready = false;
+
+            if (!empty($joinTablesQuery->joins)) {
+                foreach ($joinTablesQuery->joins as $existingJoin) {
+                    /**
+                     * @var $existingJoin JoinClause
+                     */
+                    if ($existingJoin->table == $filterOptionTableName . ' as ' . $filterOptionTableAliasName) {
+                        $hasJoinAlready = true;
+                    }
+                }
+            }
+
+            if (!$hasJoinAlready) {
+                $joinTablesQuery->leftJoin(
+                    $filterOptionTableName . ' as ' . $filterOptionTableAliasName,
+                    $filterOptionTableAliasName . '.content_id',
+                    '=',
+                    'railcontent_content.id'
+                );
+            }
+
+            $joinTablesQuery->addSelect(
+                [$filterOptionTableAliasName . '.' . $filterOptionColumnName . ' as ' . $filterOptionColumnName]
+            );
+
+            $groupBy[] = $filterOptionColumnName;
+
+            $filterOptionsArray[$filterOptionColumnName] = [];
+        }
+
+        $countingQuery = clone($joinTablesQuery);
+
+        if (!empty($groupBy)) {
+            $joinTablesQuery->groupBy($groupBy);
+        } else {
+            return [];
+        }
+
+        $tableResults = $joinTablesQuery->get();
+
+        $countingQuery->addSelect(
+            [ 'railcontent_content.id']
+        );
+        $groupBy[] = 'id';
+        $countingQuery->groupBy($groupBy);
+
+        $countingQueryResults = $countingQuery->get();
+
+        $counts = [];
+        foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
+            $filterOptionsArray[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
+                ->pluck($filterOptionName)
+                ->unique()
+                ->values()
+                ->toArray();
+            $counts[$filterOptionName] = $countingQueryResults->whereNotNull($filterOptionName)
+                ->unique(function ($item) use($filterOptionName) {
+                    return $item['id'].$item["$filterOptionName"];
+                })
+                ->pluck($filterOptionName)
+                ->countBy()
+                ->toArray();
+
+            foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
+                $countingItems = '';
+                if (self::$countFilterOptionItems) {
+                    $nr = $counts[$filterOptionName][$filterOptionValueToClean];
+                    $countingItems = ' ('.$nr.')';
+                }
+                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
+                    trim(
+                        $filterOptionValueToClean.$countingItems
+                    )
+                );
+            }
+
+            $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
+            sort($filterOptionsArray[$filterOptionName]);
+        }
+
+        // todo: handle instructors which need to be pulled from matching content rows
+        if (!empty($filterOptionsArray['instructor_id'])) {
+            $instructorRows = $this->query()
+                ->select(['railcontent_content.id as id', 'name', 'value as head_shot_picture_url'])
+                ->leftJoin(
+                    ConfigService::$tableContentData,
+                    function (JoinClause $joinClause) {
+                        $joinClause->on(
+                            ConfigService::$tableContentData . '.content_id',
+                            '=',
+                            ConfigService::$tableContent . '.id'
+                        )
+                            ->where(
+                                ConfigService::$tableContentData . '.id',
+                                '=',
+                                DB::raw(
+                                    '(SELECT id FROM ' . ConfigService::$tableContentData . ' WHERE ' . ConfigService::$tableContentData . '.content_id = railcontent_content.id and railcontent_content_data.key = \'head_shot_picture_url\' LIMIT 1)'
+                                )
+                            );
+                    }
+                )
+                ->whereIn('railcontent_content.id', $filterOptionsArray['instructor_id'])
+                ->orderBy('name')
+                ->get()
+                ->toArray();
+
+            foreach ($instructorRows as $instructorRowIndex => $instructorRow) {
+                $instructorRows[$instructorRowIndex]["fields"][] = [
+                    'id' => 1,
+                    'key' => 'name',
+                    'value' => $instructorRow["name"]
+                ];
+                $instructorRows[$instructorRowIndex]["data"][] = [
+                    'id' => 1,
+                    'key' => 'head_shot_picture_url',
+                    'value' => $instructorRow["head_shot_picture_url"]
+                ];
+            }
+
+            $filterOptionsArray['instructor'] = $instructorRows;
+        }
+
+        // dd($filterOptionsArray);
+
+        // todo: now to the right place
+        $filterOptionNameToContentTableColumnName = [
+            'difficulty' => ConfigService::$tableContent . '.difficulty',
+            'difficulty_range' => ConfigService::$tableContent . '.difficulty_range',
+            'artist' => ConfigService::$tableContent . '.artist',
+            'type' => ConfigService::$tableContent . '.type',
+            'instrument' => ConfigService::$tableContent . '.instrument',
+            'content_id' => ConfigService::$tableContent . '.id',
+        ];
+        $contentTableQueryCount = ($contentTableQuery->get());
+        $contentTableQuery->addSelect(
+            [ 'railcontent_content.id as id']
+        );
+        $contentTableQuery->groupBy($filterOptionNameToContentTableColumnName)
+            ->select($filterOptionNameToContentTableColumnName);
+
+        $tableResults = $contentTableQuery->get();
+      //  dd(array_combine(self::$catalogMetaAllowableFilters, self::$catalogMetaAllowableFilters));
+        $filterOptionNameToContentTableColumnName = array_intersect_key($filterOptionNameToContentTableColumnName, array_combine(self::$catalogMetaAllowableFilters, self::$catalogMetaAllowableFilters));
+        foreach ($filterOptionNameToContentTableColumnName as $filterOptionName => $filterOptionValue) {
+            $filterOptionsArray[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
+                ->pluck($filterOptionName)
+                ->unique()
+                ->values()
+                ->toArray();
+            $counts[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
+                ->unique(function ($item) use($filterOptionName) {
+                    return $item['id'].$item["$filterOptionName"];
+                })
+                ->pluck($filterOptionName)
+                ->countBy()
+                ->toArray();
+            foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
+                $countingItems = '';
+                if (self::$countFilterOptionItems) {
+                    $nr = $counts[$filterOptionName][$filterOptionValueToClean];
+                    $countingItems = ' ('.$nr.')';
+                }
+
+                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = trim(
+                    ucwords(
+                        $filterOptionValueToClean.$countingItems
+                    )
+                );
+            }
+
+            $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
+            usort($filterOptionsArray[$filterOptionName], [$this, 'sortByAlphaThenNumeric']);
+        }
+
+        return $filterOptionsArray;
     }
 
 }
