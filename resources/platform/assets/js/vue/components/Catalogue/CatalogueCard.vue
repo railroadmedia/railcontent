@@ -1,5 +1,5 @@
 <template>
-    <!-- 
+    <!--
         - Cards can be mini with the 'isMiniCard' for continue section
         - Cards can be list view with the 'forceListView' prop for the Related Lessons sections
         - Cards can break to list view in mobile with the 'breakToListView' prop for large catalogs
@@ -7,12 +7,12 @@
     <div v-if="!isMiniCard"
         class="tw-snap-center tw-flex tw-flex-col tw-group"
         :class="[
-            class_object, 
+            class_object,
             forceListView || breakToListView ? 'tw-py-3 tw-w-full' : 'tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 lg:tw-mb-6 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]',
             { 'tw-py-3 tw-w-full @3xl/breakToList:tw-py-0 @3xl/breakToList:tw-w-1/4 @3xl/breakToList:tw-mb-6 @3xl/breakToList:tw-pr-[8px] @4xl/breakToList:tw-pr-[12px] @5xl/breakToList:tw-w-1/5 @6xl/breakToList:tw-pr-[18px] @7xl/breakToList:tw-w-1/6' : breakToListView }
         ]">
         <div class="tw-flex" :class="[
-            forceListView || breakToListView ? 'tw-flex-row' : 'tw-flex-col',
+            forceListView || breakToListView ? 'tw-flex-row tw-items-center' : 'tw-flex-col',
             { '@3xl/breakToList:tw-flex-col' : breakToListView }
         ]">
             <!-- Thumbnail Section -->
@@ -22,16 +22,16 @@
                 item.type === 'song' && forceListView ? 'tw-max-w-[121px]' : '',
                 item.type + '-thumbnail'
             ]">
-                <div class="tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031]" 
+                <div class="tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031]"
                     :class="item.type === 'song' && forceListView ? 'tw-aspect-square' : 'tw-aspect-video'"
                 >
                     <!-- Video Thumbnail -->
                     <img :src="`https://www.musora.com/musora-cdn/image/width=500/${mappedData.thumbnail} `"
-                        class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0" 
+                        class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0"
                         :class="[
                             item.type === 'song' ? 'tw-blur-sm' : ''
-                        ]" 
-                        loading="lazy" 
+                        ]"
+                        loading="lazy"
                         onload="this.classList.remove('tw-opacity-0')"
                     >
                     <!-- Song Overlay -->
@@ -43,7 +43,7 @@
                     <!-- Thumbnail Badge -->
                     <div v-if="thumbnailBadge"
                          class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text-white tw-text-[10px] tw-p-1">
-                         {{ thumbnailBadge }}  
+                         {{ thumbnailBadge }}
                     </div>
 
                     <!-- Progress -->
@@ -155,11 +155,11 @@
                     {{ releaseDate }}
                 </p>
             </div>
-            <img :src="mappedData.thumbnail" 
+            <img :src="mappedData.thumbnail"
                 :alt="`${mappedData.color_title} thumbnail`"
-                class="tw-transition-opacity tw-h-[70px] tw-w-[121px] tw-rounded-[5px] tw-opacity-0" 
+                class="tw-transition-opacity tw-h-[70px] tw-w-[121px] tw-rounded-[5px] tw-opacity-0"
                 :class="item.type === 'song' ? 'tw-blur-sm' : ''"
-                loading="lazy" 
+                loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')"
             >
             <div v-if="item.type === 'song'"
@@ -329,7 +329,7 @@ const handleShowDropdown = (className) => {
 const contentTypeString = computed(() => {
     if(contentModel.value.post.type) return snakeToCapitalized(contentModel.value.post.type);
     return '';
-    
+
 })
 
 const isSongContent = computed(() => {
