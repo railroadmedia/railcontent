@@ -43,7 +43,6 @@
         "@babel/preset-react": "^7.22.5",
         "@musora/icons": "^1.0.6",
         "@parcel/transformer-sass": "^2.7.0",
-        "@shopify/hydrogen-react": "^2023.7.1",
         "@tinymce/tinymce-vue": "^5.0.0",
         "@vimeo/player": "^2.15.0",
         "alpinejs": "^3.4.2",
