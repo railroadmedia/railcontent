@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Services;
 use App\Modules\Ecommerce\DataTransferObjects\ShopifyCartDTO;
 use Exception;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Shopify\Clients\Graphql;
 use Shopify\Clients\Storefront;
 use Shopify\Context;
@@ -111,6 +112,12 @@ class ShopifyAPIService
                                     ) {
                                         value
                                     }
+                                    automaticDiscountCodeApplied: metafield(
+                                        namespace: "products"
+                                        key: "automatic_discount_code_applied"
+                                    ) {
+                                        value
+                                    }
                                     image {
                                         altText
                                         height
@@ -173,8 +180,6 @@ class ShopifyAPIService
             Context::$HOST_NAME,
             Context::$PRIVATE_APP_STOREFRONT_ACCESS_TOKEN
         );
-
-//        dd(config('shopify.storefront.admin_access_token'));
 
         $this->adminClient = new Graphql(
             Context::$HOST_NAME,
@@ -251,7 +256,7 @@ class ShopifyAPIService
             );
         }
 
-        $cartData = $this->applySpecialDiscountCodesAndRules($responseCartData['id']);
+        $cartData = $this->applySpecialDiscountCodesAndRules($responseCartData);
 
         return $cartData;
     }
@@ -367,7 +372,7 @@ class ShopifyAPIService
             );
         }
 
-        $cartData = $this->applySpecialDiscountCodesAndRules($cartId);
+        $cartData = $this->applySpecialDiscountCodesAndRules($responseCartData);
 
         return $cartData;
     }
@@ -429,7 +434,7 @@ class ShopifyAPIService
             );
         }
 
-        $cartData = $this->applySpecialDiscountCodesAndRules($cartId);
+        $cartData = $this->applySpecialDiscountCodesAndRules($responseCartData);
 
         return $cartData;
     }
@@ -484,7 +489,7 @@ class ShopifyAPIService
             );
         }
 
-        $cartData = $this->applySpecialDiscountCodesAndRules($cartId);
+        $cartData = $this->applySpecialDiscountCodesAndRules($responseCartData);
 
         return $cartData;
     }
@@ -912,9 +917,9 @@ class ShopifyAPIService
         return $allOrdersData;
     }
 
-    private function applySpecialDiscountCodesAndRules($cartId)
+    private function applySpecialDiscountCodesAndRules($latestCartData)
     {
-        $cartData = $this->getCart($cartId);
+        $cartData = $latestCartData;
 
         if (empty($cartData)) {
             return true;
@@ -922,60 +927,28 @@ class ShopifyAPIService
 
         $currentDiscountCodes = collect($cartData['discountCodes'] ?? [])->pluck('code')->toArray();
 
-        $applyAnnualMembershipDiscountCode = false;
-        $freeWithAnnualDiscountCode = config('shopify.discount_codes.free_with_annual');
+        // remove all discount codes starting with "_" meaning they are auto
+        foreach ($currentDiscountCodes as $currentDiscountCodeIndex => $currentDiscountCode) {
+            if (Str::startsWith($currentDiscountCode, "_")) {
+                unset($currentDiscountCodes[$currentDiscountCodeIndex]);
+            }
+        }
 
-        $applyLifetimeMembershipDiscountCode = false;
-        $freeWithLifetimeDiscountCode = config('shopify.discount_codes.free_with_lifetime');
+        $autoDiscountCodesToApply = [];
 
+        // get list of discount codes to apply from the products meta field
         foreach ($cartData['lines']['edges'] as $lineItemNode) {
             $lineItemData = $lineItemNode['node'];
             $merchandise = $lineItemData['merchandise'];
-            $product = $lineItemData['merchandise']['product'];
 
-            if (strtolower($product['productType'] ?? '') === 'digital subscription' &&
-                (float)$lineItemData['cost']['totalAmount']['amount'] > 100) {
-                $applyAnnualMembershipDiscountCode = true;
-            }
-
-            if (($merchandise['digitalAccessTimeType']['value'] ?? null) === 'lifetime' &&
-                (($merchandise['digitalAccessType']['value'] ?? null) === 'all content access' ||
-                    ($merchandise['digitalAccessType']['value'] ?? null) === 'basic content access')  &&
-                (float)$lineItemData['cost']['totalAmount']['amount'] > 100) {
-                $applyLifetimeMembershipDiscountCode = true;
+            if (!empty($merchandise['automaticDiscountCodeApplied']['value'])) {
+                $autoDiscountCodesToApply[] = $merchandise['automaticDiscountCodeApplied']['value'];
             }
         }
 
-        // don't set if there are any quantities more than 1 or total cart items is more than 10;
-        if (count($cartData['lines']['edges']) > 20) {
-            $applyAnnualMembershipDiscountCode = false;
-            $applyLifetimeMembershipDiscountCode = false;
-        }
+        $finalDiscountCodes = array_unique(array_merge($currentDiscountCodes, $autoDiscountCodesToApply));
 
-        // never in the same order
-        if ($applyLifetimeMembershipDiscountCode) {
-            $applyAnnualMembershipDiscountCode = false;
-        }
-
-        // apply code annual
-        if ($applyAnnualMembershipDiscountCode) {
-            $currentDiscountCodes[] = $freeWithAnnualDiscountCode;
-        } else {
-            if (($key = array_search($freeWithAnnualDiscountCode, $currentDiscountCodes)) !== false) {
-                unset($currentDiscountCodes[$key]);
-            }
-        }
-
-        // apply code lifetime
-        if ($applyLifetimeMembershipDiscountCode) {
-            $currentDiscountCodes[] = $freeWithLifetimeDiscountCode;
-        } else {
-            if (($key = array_search($freeWithLifetimeDiscountCode, $currentDiscountCodes)) !== false) {
-                unset($currentDiscountCodes[$key]);
-            }
-        }
-
-        return $this->applyDiscountCodes($cartId, $currentDiscountCodes);
+        return $this->applyDiscountCodes($latestCartData['id'], $finalDiscountCodes);
     }
 
     public function applyDiscountCodes($cartId, array $discountCodes)
