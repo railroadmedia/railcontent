@@ -1,12 +1,4 @@
-<div class="cookie-notice hide">
-    <div class="text-wrap">
-        <p>We use cookies for traffic data and advertising. <a href="/cookie">Cookie Policy &raquo;</a></p>
-        <div class="text-center">
-            <div id="accept-cookies">OKAY GOT IT</div>
-
-        </div>
-    </div>
-</div>
+@include('_partials.components.cookie-modal')
 <footer class="bottom-footer clearfix">
     @if(empty($minimal))
     <div class="container">

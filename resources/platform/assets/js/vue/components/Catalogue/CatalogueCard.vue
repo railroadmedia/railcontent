@@ -147,7 +147,7 @@
         class="tw-group tw-flex tw-items-center tw-py-[4px] tw-h-[78px] tw-relative tw-w-[365px] lg:tw-w-auto tw-shrink-0">
         <!-- Thumbnail Image -->
         <a :href="renderLink  && !forceNoLinks ? item.url : null"
-            class="tw-flex-none tw-h-[70px] tw-w-[121px] tw-relative tw-overflow-hidden tw-rounded-[5px]">
+            class="tw-flex-none tw-h-[70px] tw-w-[121px] tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#0E2031] tw-rounded-[5px]">
             <div
                 class="tw-rounded-[5px] tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[70px] tw-w-[121px] tw-justify-center tw-items-center tw-text-white tw-text-center tw-z-[50]">
                 <i class="fas" :class="thumbnailIcon"></i>
@@ -155,9 +155,13 @@
                     {{ releaseDate }}
                 </p>
             </div>
-            <img :src="mappedData.thumbnail" :alt="`${mappedData.color_title} thumbnail`"
-                class="tw-h-[70px] tw-w-[121px] tw-rounded-[5px]" :class="item.type === 'song' ? 'tw-blur-sm' : ''">
-
+            <img :src="mappedData.thumbnail" 
+                :alt="`${mappedData.color_title} thumbnail`"
+                class="tw-transition-opacity tw-h-[70px] tw-w-[121px] tw-rounded-[5px] tw-opacity-0" 
+                :class="item.type === 'song' ? 'tw-blur-sm' : ''"
+                loading="lazy" 
+                onload="this.classList.remove('tw-opacity-0')"
+            >
             <div v-if="item.type === 'song'"
                 class="tw-absolute tw-h-[70px] tw-w-[121px] tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center tw-rounded-[5px]">
                 <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail" :alt="mappedData.black_title" />
