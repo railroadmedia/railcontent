@@ -1331,6 +1331,7 @@ class ContentRepository extends RepositoryBase
                     ->restrictByUserAccess()
                     ->restrictByFields($this->requiredFields)
                     ->includeByFields($this->includedFields)
+                    ->restrictByUserStates($this->requiredUserStates)
                     ->directPaginate($this->page, $this->limit)
                     ->groupByField($this->groupByFields);
             $query = $subQuery;
