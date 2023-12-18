@@ -424,32 +424,32 @@ class Content extends Model
     public function setVideo($value, $duration, $type)
     {
         if ($value && $duration != '') {
-                $video =
-                    Content::query()
-                        ->where($type.'_video_id', '=', $value)
-                        ->first();
-                if (!$video) {
-                    $video = new Video();
-                    $video->type = $type.'-video';
-                    $video->status = 'published';
-                    $video->brand = $this->brand;
-                    $video->slug = $type.'-video-'.$value;
-                    $typeId = $type.'_video_id';
-                    $video->$typeId = $value;
-                    $video->length_in_seconds = $duration;
+            $video =
+                Content::query()
+                    ->where($type.'_video_id', '=', $value)
+                    ->first();
+            if (!$video) {
+                $video = new Video();
+                $video->type = $type.'-video';
+                $video->status = 'published';
+                $video->brand = $this->brand;
+                $video->slug = $type.'-video-'.$value;
+                $typeId = $type.'_video_id';
+                $video->$typeId = $value;
+                $video->length_in_seconds = $duration;
 
-                    $video->published_on =
-                        Carbon::now()
-                            ->toDateTimeString();
-                    $video->save();
-                    $video->setLengthInSeconds($duration);
-                    if($type == 'vimeo') {
-                        $video->setVimeoVideoId($value);
-                    }else{
-                        $video->setYoutubeVideoId($value);
-                    }
+                $video->published_on =
+                    Carbon::now()
+                        ->toDateTimeString();
+                $video->save();
+                $video->setLengthInSeconds($duration);
+                if($type == 'vimeo') {
+                    $video->setVimeoVideoId($value);
+                }else{
+                    $video->setYoutubeVideoId($value);
                 }
-                $id = $video->id;
+            }
+            $id = $video->id;
 
             $this->setField('video', $id);
         } else {
@@ -525,7 +525,7 @@ class Content extends Model
         $dataTimecode->save();
 
         if($thumb){
-           // dd($thumb);
+            // dd($thumb);
             $chapterThumb = $this->data->where('key', '=', 'chapter_thumbnail_url')
                 ->where('position','=',$position)->first();
             if($chapterThumb){
