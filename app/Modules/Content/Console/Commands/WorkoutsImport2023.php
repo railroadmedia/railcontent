@@ -13,37 +13,77 @@ use Railroad\Railcontent\Services\ContentService;
 class WorkoutsImport2023 extends Command
 {
     protected $name = 'WorkoutsImport2023';
-    protected $signature = 'workouts:import {startIndex=0} {endIndex=-1}';
+    protected $signature = 'workouts:import {brand=guitareo} {startIndex=0} {endIndex=-1}';
     protected $description = 'Import workouts data from CSV file';
 
     const CHAPTER_THUMBS = [
         'drumeo' =>[
             'https://d1923uyy6spedc.cloudfront.net/Chapter1-1701464222.jpg',
-'https://d1923uyy6spedc.cloudfront.net/Chapter2-1701464237.jpg',
-'https://d1923uyy6spedc.cloudfront.net/Chapter3-1701464247.jpg',
-'https://d1923uyy6spedc.cloudfront.net/Chapter4-1701464280.jpg',
-'https://d1923uyy6spedc.cloudfront.net/Chapter5-1701464293.jpg',
-'https://d1923uyy6spedc.cloudfront.net/Chapter6-1701464305.jpg'
+            'https://d1923uyy6spedc.cloudfront.net/Chapter2-1701464237.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter3-1701464247.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter4-1701464280.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter5-1701464293.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter6-1701464305.jpg'
         ],
         'guitareo' => [
             'https://d1923uyy6spedc.cloudfront.net/Chapter1-1701710727.jpg',
-'https://d1923uyy6spedc.cloudfront.net/Chapter2-1701710743.jpg',
-'https://d1923uyy6spedc.cloudfront.net/Chapter3-1701710752.jpg',
-'https://d1923uyy6spedc.cloudfront.net/Chapter4-1701710765.jpg',
-'https://d1923uyy6spedc.cloudfront.net/Chapter5-1701710774.jpg',
-'https://d1923uyy6spedc.cloudfront.net/Chapter6-1701710783.jpg',
-        ]
+            'https://d1923uyy6spedc.cloudfront.net/Chapter2-1701710743.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter3-1701710752.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter4-1701710765.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter5-1701710774.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter6-1701710783.jpg',
+        ],
+        'pianote' => [
+            'https://d1923uyy6spedc.cloudfront.net/Chapter1-1701465546.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter2-1701465574.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter3-1701465607.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter4-1701465597.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter5-1701465655.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter6-1701465685.jpg',
+        ],
+        'singeo' => [
+            'https://d1923uyy6spedc.cloudfront.net/Chapter1-1701711049.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter2-1701711065.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter3-1701711073.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter4-1701711184.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter5-1701711082.jpg',
+            'https://d1923uyy6spedc.cloudfront.net/Chapter6-1701711089.jpg',
+        ],
     ];
 
     const PERMISSIONS = [
-'guitareo' =>[
-    'basic' => [
-        91,
-        92,
-        52
-    ],
-    'plus' => [92],
-]
+        'guitareo' =>[
+            'basic' => [
+                91,
+                92,
+                52
+            ],
+            'plus' => [92],
+        ],
+        'drumeo' =>[
+            'basic' => [
+                91,
+                92,
+                1
+            ],
+            'plus' => [92],
+        ],
+        'pianote' =>[
+            'basic' => [
+                91,
+                92,
+                77
+            ],
+            'plus' => [92],
+        ],
+        'singeo' =>[
+            'basic' => [
+                91,
+                92,
+                73
+            ],
+            'plus' => [92],
+        ]
     ];
 
     public function handle(
@@ -51,14 +91,15 @@ class WorkoutsImport2023 extends Command
     ) {
         $startIndex = $this->argument('startIndex');
         $endIndex = $this->argument('endIndex');
+        $brand = $this->argument('brand');
 
-        [$csv, $headersRow] = $this->getCSV($startIndex, $endIndex);
+        [$csv, $headersRow] = $this->getCSV($startIndex, $endIndex, $brand);
 
         $contentIds = [];
 
         $this->withProgressBar(
             $csv,
-            function ($row) use ($headersRow, $contentService, &$contentIds) {
+            function ($row) use ($headersRow, $contentService, &$contentIds, $brand) {
                 $data = $this->getData($row, $headersRow);
 
                 $contentTitle = $this->getValue($data, $headersRow, 'Name');
@@ -73,7 +114,7 @@ class WorkoutsImport2023 extends Command
                     $content->type = $contentType;
                     $content->slug = ContentHelper::slugify($contentTitle);
                     $content->status = 'published';
-                    $content->brand = 'guitareo';
+                    $content->brand = $brand;
                     $content->published_on = '2023-12-28 00:01:00';
                     $content->language = 'en-US';
                     $content->created_on = Carbon::now()->toDateTimeString();
@@ -93,7 +134,6 @@ class WorkoutsImport2023 extends Command
                 $content->setTopic($this->getValue($data, $headersRow, 'Topic Filter'));
                 $content->setStyle($this->getValue($data, $headersRow, 'Style'));
                 $content->setInstructor($this->getValue($data, $headersRow, 'Instructor'));
-                $content->setVideo($this->getValue($data, $headersRow, 'Video ID - Workouts'), $this->getValue($data, $headersRow, 'Duration'));
                 $content->setSoundsliceSlug($this->getValue($data, $headersRow, 'SSID - Workouts'));
                 $content->setChapter($this->getValue($data, $headersRow, 'Chapter 1'), 1, self::CHAPTER_THUMBS[$content->brand][0]);
                 $content->setChapter($this->getValue($data, $headersRow, 'Chapter 2'), 2, self::CHAPTER_THUMBS[$content->brand][1]);
@@ -106,16 +146,19 @@ class WorkoutsImport2023 extends Command
                 $isCopyright = $this->getValue($data, $headersRow, 'Copyright');
                 if($isCopyright == 'Yes') {
                     $content->setPermissions(self::PERMISSIONS[$content->brand]['plus']);
+                    $content->setVideo($this->getValue($data, $headersRow, 'Video ID - Workouts'), $this->getValue($data, $headersRow, 'Duration'),'youtube');
                 }else{
                     $content->setPermissions(self::PERMISSIONS[$content->brand]['basic']);
+                    $content->setVideo($this->getValue($data, $headersRow, 'Video ID - Workouts'), $this->getValue($data, $headersRow, 'Duration'),'vimeo');
                 }
 
-                $thumbnail = $this->getValue($data, $headersRow, 'Thumbnail Uploaded');
+                $thumbnail = $this->getValue($data, $headersRow, 'Thumbnail name');
                 if($thumbnail) {
-                    $content->setThumb('https://musora-web-platform.s3.amazonaws.com/workouts/guitareo/'.$thumbnail);
-                    $content->setOriginalThumb('https://musora-web-platform.s3.amazonaws.com/workouts/guitareo/'.$thumbnail);
+                    $content->setThumb('https://musora-web-platform.s3.amazonaws.com/workouts/'.$brand.'/'.$thumbnail);
+                    $content->setOriginalThumb('https://musora-web-platform.s3.amazonaws.com/workouts/'.$brand.'/'.$thumbnail);
                 }
                 if($content->video) {
+                    //  dd($content->video);
                     $contentService->fillCompiledViewContentDataColumnForContentIds([$content->video]);
                 }
                 $contentIds[] = $contentId;
@@ -127,9 +170,11 @@ class WorkoutsImport2023 extends Command
         $this->info('Done.');
     }
 
-    public function getCSV(int $startIndex, int $endIndex): array
+    public function getCSV(int $startIndex, int $endIndex, $brand): array
     {
-        $fileName = 'Guitareo_Workouts_Content.csv';
+        //'Drumeo_Workouts_Content.csv';
+        $nam = ucfirst($brand);
+        $fileName = $nam.'_Workouts_Content.csv';
         $filePath = app_path() . '/Modules/Content/Console/Commands/Data/' . $fileName;
         $file = file($filePath);
         $csv = array_map('str_getcsv', $file);
