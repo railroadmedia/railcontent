@@ -38,7 +38,7 @@
                     <!-- Section Title -->
                     <div class="tw-flex tw-items-center tw-mt-5 tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
                         <a :href="`/${brand}/lesson-history/in-progress`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                            <h3 class="tw-font-bold tw-text-xl tw-leading-none lg:tw-leading-none lg:tw-text-2xl">Continue</h3>
+                            <h3 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">Continue</h3>
                         </a>
                         <a :href="`/${brand}/lesson-history/in-progress`"
                            aria-label="See All Subscribed Lessons"
