@@ -22,7 +22,7 @@
                 item.type === 'song' && forceListView ? 'tw-max-w-[121px]' : '',
                 item.type + '-thumbnail'
             ]">
-                <div class="tw-relative tw-overflow-hidden tw-rounded-[10px]" 
+                <div class="tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031]" 
                     :class="item.type === 'song' && forceListView ? 'tw-aspect-square' : 'tw-aspect-video'"
                 >
                     <!-- Video Thumbnail -->
@@ -151,7 +151,7 @@
             <div
                 class="tw-rounded-[5px] tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[70px] tw-w-[121px] tw-justify-center tw-items-center tw-text-white tw-text-center tw-z-[50]">
                 <i class="fas" :class="thumbnailIcon"></i>
-                <p v-if="!isReleased" class="tw-text-sm text-white font-bold">
+                <p v-if="!isReleased" class="tw-text-sm tw-text-white tw-font-bold">
                     {{ releaseDate }}
                 </p>
             </div>
