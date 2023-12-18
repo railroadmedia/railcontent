@@ -89,7 +89,7 @@
         </button>
         <div class="tw-rounded-lg dark:tw-border dark:tw-border-[#223F57] dark:tw-text-white tw-bg-white dark:tw-bg-[#081825] tw-text-center tw-p-6 sm:tw-p-[30px] tw-max-w-[600px] tw-mx-4 sm:tw-mx-0">
             <h1 class="tw-font-bold tw-text-2xl tw-mb-4">{{ infoText[modalType].title }}</h1>
-            <p class="tw-mb-3">{{ infoText[modalType].content }}</p>
+            <p class="tw-mb-4">{{ infoText[modalType].content }}</p>
             <button @click="closeModal" class="tw-btn-primary tw-border-[#000C17] dark:tw-border-white tw-text-[#000C17] dark:tw-text-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]">Close</button>
         </div>
     </ModalRenderer>

@@ -27712,9 +27712,6 @@ a:visited{
   .lg\:tw-mb-4{
     margin-bottom: 1rem !important;
   }
-  .lg\:tw-mb-5{
-    margin-bottom: 1.25rem !important;
-  }
   .lg\:tw-mb-6{
     margin-bottom: 1.5rem !important;
   }
@@ -28277,6 +28274,9 @@ a:visited{
   }
   .xl\:tw-mb-0{
     margin-bottom: 0px !important;
+  }
+  .xl\:tw-mb-5{
+    margin-bottom: 1.25rem !important;
   }
   .xl\:tw-ml-\[30px\]{
     margin-left: 30px !important;
