@@ -89,6 +89,7 @@ class FixWrongAccessIssues extends Command
                                     $payment->save();
                                 }
                                 $subscription->product_id = $this->getMonthlyProductId($subscription);
+                                $subscription->total_price = 29.99;
                                 $subscription->save();
                                 $requiresUpdate = true;
 
