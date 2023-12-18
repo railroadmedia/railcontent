@@ -36,7 +36,7 @@ class WorkoutsPageController extends BaseController
 
         $workouts = $this->contentService->getFiltered(
             $request->get('page', 1),
-            $request->get('limit', 25),
+            $request->get('limit', 10),
             $request->get('sort', 'slug'),
             [$lessonType],
             $request->get('slug_hierarchy', []),
