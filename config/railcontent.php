@@ -769,13 +769,13 @@ return [
                 'allowableFilters' => ['difficulty','topic','style'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
                 'sortBy' => '-published_on',
-		'trailer1' => 448684113,
+                'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
  	    'workout' => [
-                'trailer1' => 448684113,
-                'allowableFilters' => ['difficulty','style','topic'],
+            'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
+            'allowableFilters' => ['difficulty','style','topic'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
-            ],
+        ],
         ],
         'pianote' => [
             'all' => [
@@ -932,9 +932,9 @@ return [
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
             'workout' => [
-                'trailer1' => 448684113,
                 'allowableFilters' => ['difficulty','style','topic'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
             ],
             'challenge-part' => [
                 'name' => 'Challenge Part',
@@ -951,7 +951,7 @@ return [
                 'allowableFilters' => ['difficulty','topic','style'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
                 'sortBy' => '-published_on',
-                'trailer1' => 448684113,
+                'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
         ],
         'guitareo' => [
@@ -1045,9 +1045,9 @@ return [
                 'sortBy' => '-published_on',
             ],
             'workout' => [
-                'trailer1' => 448684113,
                 'allowableFilters' => ['difficulty','style','topic'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
             ],
             'challenge-part' => [
                 'name' => 'Challenge Part',
@@ -1064,7 +1064,7 @@ return [
                 'allowableFilters' => ['difficulty','topic','style'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
                 'sortBy' => '-published_on',
-                'trailer1' => 448684113,
+                'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
         ],
         'singeo' => [
@@ -1143,9 +1143,9 @@ return [
                 'allowableFiltersMobile' => [],
             ],
             'workout' => [
-                'trailer1' => 448684113,
                 'allowableFilters' => ['difficulty','style','topic'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
             ],
             'challenge-part' => [
                 'name' => 'Challenge Part',
@@ -1162,7 +1162,7 @@ return [
                 'allowableFilters' => ['difficulty','topic','style'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
                 'sortBy' => '-published_on',
-                'trailer1' => 448684113,
+                'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
         ],
     ],
@@ -1464,6 +1464,7 @@ return [
         'sonor-drums', /* 2018*/
         'song-tutorial',
         'song-tutorial-children',
+        'workout',
     ],
 
     'contentTypesWithChildren' => [
