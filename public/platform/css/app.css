@@ -21986,9 +21986,6 @@ a:visited{
 .tw-mr-\[12px\]{
   margin-right: 12px !important;
 }
-.tw-mr-\[14px\]{
-  margin-right: 14px !important;
-}
 .tw-mr-\[15px\]{
   margin-right: 15px !important;
 }
@@ -22823,6 +22820,9 @@ a:visited{
 .tw-w-\[calc\(100\%-35px\)\]{
   width: calc(100% - 35px) !important;
 }
+.tw-w-\[calc\(100\%-46px\)\]{
+  width: calc(100% - 46px) !important;
+}
 .tw-w-auto{
   width: auto !important;
 }
@@ -22835,12 +22835,6 @@ a:visited{
 }
 .tw-w-screen{
   width: 100vw !important;
-}
-.tw-w-\[calc\(100\%-42px\)\]{
-  width: calc(100% - 42px) !important;
-}
-.tw-w-\[calc\(100\%-46px\)\]{
-  width: calc(100% - 46px) !important;
 }
 .tw-min-w-0{
   min-width: 0px !important;
