@@ -100,6 +100,7 @@ class Video extends Content
     private $fieldTypes = [
         'length_in_seconds' => 'string',
         'vimeo_video_id' => 'string',
+        'youtube_video_id' => 'string',
     ];
 
     public function __construct()
@@ -184,5 +185,10 @@ class Video extends Content
     public function setVimeoVideoId($value)
     {
         $this->setField('vimeo_video_id', $value);
+    }
+
+    public function setYoutubeVideoId($value)
+    {
+        $this->setField('youtube_video_id', $value);
     }
 }
