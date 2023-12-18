@@ -316,6 +316,14 @@
         "testimonials" => [
             [
                 "image" =>
+                    "https://i.vimeocdn.com/video/1768362015-3ecb7c06c2936cc71622cc11344fb791715f25b786d43857f87d923f6a09522b-d_500.jpg",
+                "name" => "Tarah Mark",
+                "video" => "878790651",
+                "title" => "Now I actually get to make my own rhythms and beats.",
+                "description" => "Now I actually get to make my own rhythms and beats.",
+            ],
+            [
+                "image" =>
                 "https://i.vimeocdn.com/video/1751944105-765a9cc9ef08e836de7b0c436c50e50aa828db3e7773409007e186cc071ec45b-d_500.jpg",
                 "name" => "Claudio Sanchez",
                 "video" => "877648411",

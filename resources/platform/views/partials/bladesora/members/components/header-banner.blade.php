@@ -1,4 +1,8 @@
-<div class="tw-full fluid collapsed-h tw-py-8 md:tw-py-11 relative bg-black tw-h-[400px]">
+@php
+    $type = isset($contentType) ? $contentType : '';
+@endphp
+
+<div class="tw-full fluid collapsed-h tw-py-8 md:tw-py-11 relative bg-black @if($type === 'challenge') tw-h-[400px] @endif">
     {{-- Background Image --}}
     <div class="header-background-container absolute-fill bg-top bg-cover bg-center h-screen">
         <img src="{{ $backgroundImage }}" 

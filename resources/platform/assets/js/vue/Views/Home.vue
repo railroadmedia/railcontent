@@ -25,8 +25,15 @@
                 :eventCoachProfileUrl="eventCoachProfileUrl" />
         </div>
         <!-- Upcoming section -->
-        <MiniCatalogueSection v-if="hasUpcomingEvents" title="Upcoming Events" seeAllAriaLabel="See All Upcoming Events"
-            :seeAllUrl="upcomingUrl" :preLoadedContent="upcomingEvents" />
+        <MiniCatalogueSection 
+            v-if="hasUpcomingEvents" 
+            title="Upcoming Events" 
+            seeAllAriaLabel="See All Upcoming Events"
+            :seeAllUrl="upcomingUrl" 
+            :force-no-links="true"
+            :preLoadedContent="upcomingEvents" 
+        />
+
         <!-- Stats section -->
         <StatsSection :accountUrl="accountUrl" :nextLearningPathProgressPercent="nextLearningPathProgressPercent"
             :nextLearningPathLevel="nextLearningPathLevel" :userMetrics="userMetrics" />

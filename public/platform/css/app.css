@@ -21986,9 +21986,6 @@ a:visited{
 .tw-mr-\[12px\]{
   margin-right: 12px !important;
 }
-.tw-mr-\[14px\]{
-  margin-right: 14px !important;
-}
 .tw-mr-\[15px\]{
   margin-right: 15px !important;
 }
@@ -22822,6 +22819,9 @@ a:visited{
 }
 .tw-w-\[calc\(100\%-35px\)\]{
   width: calc(100% - 35px) !important;
+}
+.tw-w-\[calc\(100\%-46px\)\]{
+  width: calc(100% - 46px) !important;
 }
 .tw-w-auto{
   width: auto !important;
@@ -26493,10 +26493,6 @@ a:visited{
 :is(.tw-dark .hover\:dark\:tw-text-white):hover{
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
-}
-:is(.tw-dark .dark\:hover\:tw-text-black:hover){
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
 }
 :is(.tw-dark .dark\:focus\:tw-bg-\[\#00101D\]:focus){
   --tw-bg-opacity: 1 !important;

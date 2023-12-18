@@ -278,6 +278,43 @@
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'drumming',
         ])
+    @elseif(!empty($evergreenVersion))
+        @php
+            $bonuses = [
+                [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
+                'title' => 'Drumeo Drumsticks',
+                'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
+                'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
+                'shipping' => true,
+                ],
+                [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/rdm.jpg',
+                'title' => 'Rock Drumming Masterclass',
+                'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
+                'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
+                ],
+                [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg',
+                'title' => 'Drum Technique Made Easy',
+                'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
+                'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
+                ],
+                [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/ime.jpg',
+                'title' => 'Independence Made Easy',
+                'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
+                'price' => floatval($productPrices['independence-made-easy-pack']->price),
+                ],
+            ]
+        @endphp
+        @include('musora.sales.components.order-section-bonuses', [
+        'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-annual-2w-card.png',
+        'header' => 'Online drum lessons for all skill levels.',
+        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special',
+        'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
+        ])
     @elseif(!empty($promoVersion))
         @php
             $bonuses = [

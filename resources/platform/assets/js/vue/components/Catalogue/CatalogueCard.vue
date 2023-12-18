@@ -16,20 +16,24 @@
             { '@3xl/breakToList:tw-flex-col' : breakToListView }
         ]">
             <!-- Thumbnail Section -->
-            <a :href="renderLink ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
+            <a :href="renderLink  && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
                 { 'tw-w-[142px] tw-mr-3': forceListView || breakToListView },
                 { '@3xl/breakToList:tw-w-full @3xl/breakToList:tw-mr-0': breakToListView },
                 item.type === 'song' && forceListView ? 'tw-max-w-[121px]' : '',
                 item.type + '-thumbnail'
             ]">
-                <div class="tw-relative tw-overflow-hidden tw-rounded-[10px]" 
+                <div class="tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031]" 
                     :class="item.type === 'song' && forceListView ? 'tw-aspect-square' : 'tw-aspect-video'"
                 >
                     <!-- Video Thumbnail -->
                     <img :src="`https://www.musora.com/musora-cdn/image/width=500/${mappedData.thumbnail} `"
-                        class="tw-absolute tw-transition-opacity tw-duration-500tw-opacity-0" :class="[
+                        class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0" 
+                        :class="[
                             item.type === 'song' ? 'tw-blur-sm' : ''
-                        ]" loading="lazy" onload="this.classList.remove('tw-opacity-0')">
+                        ]" 
+                        loading="lazy" 
+                        onload="this.classList.remove('tw-opacity-0')"
+                    >
                     <!-- Song Overlay -->
                     <div v-if="item.type === 'song'"
                         class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
@@ -63,7 +67,7 @@
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block">
-                    <a :href="renderLink ? item.url : null"
+                    <a :href="renderLink  && !forceNoLinks ? item.url : null"
                         class="card-info tw-flex tw-flex-auto tw-flex-col tw-px-2 tw-rounded-lg"
                         :class="[forceListView || breakToListView ? 'tw-justify-center tw-pt-1' : 'tw-pt-2', { 'lg:tw-pt-2 lg:tw-justify-start' : breakToListView }]">
                         <div class="tw-flex tw-flex-col">
@@ -142,18 +146,22 @@
     <div v-else
         class="tw-group tw-flex tw-items-center tw-py-[4px] tw-h-[78px] tw-relative tw-w-[365px] lg:tw-w-auto tw-shrink-0">
         <!-- Thumbnail Image -->
-        <a :href="renderLink ? item.url : null"
-            class="tw-flex-none tw-h-[70px] tw-w-[121px] tw-relative tw-overflow-hidden tw-rounded-[5px]">
+        <a :href="renderLink  && !forceNoLinks ? item.url : null"
+            class="tw-flex-none tw-h-[70px] tw-w-[121px] tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#0E2031] tw-rounded-[5px]">
             <div
                 class="tw-rounded-[5px] tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[70px] tw-w-[121px] tw-justify-center tw-items-center tw-text-white tw-text-center tw-z-[50]">
                 <i class="fas" :class="thumbnailIcon"></i>
-                <p v-if="!isReleased" class="tw-text-sm text-white font-bold">
+                <p v-if="!isReleased" class="tw-text-sm tw-text-white tw-font-bold">
                     {{ releaseDate }}
                 </p>
             </div>
-            <img :src="mappedData.thumbnail" :alt="`${mappedData.color_title} thumbnail`"
-                class="tw-h-[70px] tw-w-[121px] tw-rounded-[5px]" :class="item.type === 'song' ? 'tw-blur-sm' : ''">
-
+            <img :src="mappedData.thumbnail" 
+                :alt="`${mappedData.color_title} thumbnail`"
+                class="tw-transition-opacity tw-h-[70px] tw-w-[121px] tw-rounded-[5px] tw-opacity-0" 
+                :class="item.type === 'song' ? 'tw-blur-sm' : ''"
+                loading="lazy" 
+                onload="this.classList.remove('tw-opacity-0')"
+            >
             <div v-if="item.type === 'song'"
                 class="tw-absolute tw-h-[70px] tw-w-[121px] tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center tw-rounded-[5px]">
                 <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail" :alt="mappedData.black_title" />
@@ -161,7 +169,7 @@
         </a>
 
         <!-- Instructor Name and Title -->
-        <a :href="renderLink ? item.url : null"
+        <a :href="renderLink  && !forceNoLinks ? item.url : null"
             class="tw-flex tw-flex-col tw-justify-center tw-flex-grow tw-ml-[10px] tw-font-open-sans tw-h-[70px] tw-overflow-hidden">
             <!-- Instructor Name -->
             <div
@@ -248,6 +256,10 @@ const props = defineProps({
         default: false
     },
     forceListView: {
+        type: Boolean,
+        default: false
+    },
+    forceNoLinks: {
         type: Boolean,
         default: false
     },

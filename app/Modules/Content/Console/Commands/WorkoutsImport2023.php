@@ -93,7 +93,6 @@ class WorkoutsImport2023 extends Command
                 $content->setTopic($this->getValue($data, $headersRow, 'Topic Filter'));
                 $content->setStyle($this->getValue($data, $headersRow, 'Style'));
                 $content->setInstructor($this->getValue($data, $headersRow, 'Instructor'));
-                $content->setVideo($this->getValue($data, $headersRow, 'Video ID - Workouts'), $this->getValue($data, $headersRow, 'Duration'));
                 $content->setSoundsliceSlug($this->getValue($data, $headersRow, 'SSID - Workouts'));
                 $content->setChapter($this->getValue($data, $headersRow, 'Chapter 1'), 1, self::CHAPTER_THUMBS[$content->brand][0]);
                 $content->setChapter($this->getValue($data, $headersRow, 'Chapter 2'), 2, self::CHAPTER_THUMBS[$content->brand][1]);
@@ -106,8 +105,10 @@ class WorkoutsImport2023 extends Command
                 $isCopyright = $this->getValue($data, $headersRow, 'Copyright');
                 if($isCopyright == 'Yes') {
                     $content->setPermissions(self::PERMISSIONS[$content->brand]['plus']);
+                    $content->setVideo($this->getValue($data, $headersRow, 'Video ID - Workouts'), $this->getValue($data, $headersRow, 'Duration'),'youtube');
                 }else{
                     $content->setPermissions(self::PERMISSIONS[$content->brand]['basic']);
+                    $content->setVideo($this->getValue($data, $headersRow, 'Video ID - Workouts'), $this->getValue($data, $headersRow, 'Duration'),'vimeo');
                 }
 
                 $thumbnail = $this->getValue($data, $headersRow, 'Thumbnail Uploaded');

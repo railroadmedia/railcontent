@@ -46,6 +46,7 @@
                                 :email-endpoint="emailEndpoint"
                                 :email-logo="emailLogo"
                                 :email-alert="emailSubject"
+                                input-label="Report your issue here.."
                                 :lesson-page="false"
                                 :recipient="emailRecipient"
                                 :success-message="emailSuccessMessage "
