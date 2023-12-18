@@ -106,9 +106,11 @@
 
 <!-- Main -->
 @section('global-layout-body')
-
-    @include('musora.referral.join')
-
+    @if(Carbon\Carbon::create(2023, 12, 23, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        @include('musora.referral.winter-join')
+    @else
+        @include('musora.referral.join')
+    @endif
 @stop
 
 @section('layout-scripts')

@@ -316,9 +316,9 @@
             'location' => 'Ontario, Canada',
             ],
 ];
-        $youtube = $pianote['youtube']; // numbers 
-        $facebook = $pianote['facebook'];
-        $instagram = $pianote['instagram']; 
+        $youtube = convertNumber(Prices::$pianoteYoutubeSubsc); 
+        $facebook = convertNumber(Prices::$pianoteFacebookLikes);
+        $instagram = convertNumber(Prices::$pianoteInstagramFollowers); 
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by students<br class="inline-block sm:hidden">  just like you.',

@@ -116,6 +116,10 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true']);
     }
+    public function promoEG()
+    {
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'evergreenVersion' => 'true']);
+    }
     public function choosePlanVDF()
     {
         return view('drumeo.sales.pages.vdf', ['theme' => 'drumeo']);
@@ -336,5 +340,10 @@ class SalesController extends BaseController
     public function easyRudimentsPlaylist()
     {
         return view('drumeo.pages.easy-rudiments-playlist', ['theme' => 'drumeo']);
+    }
+
+    public function vote()
+    {
+        return view('drumeo.pages.vote', ['theme' => 'drumeo']);
     }
 }

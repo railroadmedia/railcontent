@@ -12,11 +12,11 @@ Route::domain('{drumeoDomain}')
     ]);
     Route::get('/', [SalesController::class, 'home'] );
     Route::get('/ultimate-bundle', [SalesController::class, 'homeBF'] );
+    Route::get('/lp', [SalesController::class, 'promoEG'] );
     Route::get('/new-year', [SalesController::class, 'promo'] );
-    Route::get('/lp', [SalesController::class, 'promo'] );
     Route::get('/beginner', [SalesController::class, 'promo']);
-    Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/student-only', [SalesController::class, 'promo'] );
+    Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/upgrade-offer', [SalesController::class, 'salesUpgrade'] );
     Route::get('/lifetime', [SalesController::class, 'salesLifetime'] );
     Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount'] );
@@ -52,6 +52,7 @@ Route::domain('{drumeoDomain}')
     Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
     Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
     Route::get('/easy-rudiments-playlist', [SalesController::class, 'easyRudimentsPlaylist']);
+    Route::get('/vote', [SalesController::class, 'vote']);
 
     Route::get('/{pageT?}', SalesController::class . '@trialPages')
         ->whereIn('pageT', [

@@ -389,7 +389,6 @@
     RewriteRule ^getting-started/unlocked /getting-started/1-setting-up-your-drums/ [R=307,L,QSA]
     RewriteRule ^gift-bundle/?$.* /drumshop/ [R=307,L,QSA]
     RewriteRule ^gift-of-music/?$.* https://www.musora.com/gift-of-music [R=307,L,QSA]
-    RewriteRule ^gifts/?$.* /gift-guide/ [R=307,L,QSA]
     RewriteRule ^giveaway/?$.* / [R=307,L,QSA]
     RewriteRule ^giveaways.* / [R=307,L,QSA]
     RewriteRule ^go-now/.* / [R=307,L,QSA]
