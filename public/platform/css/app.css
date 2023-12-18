@@ -26777,9 +26777,6 @@ a:visited{
   .sm\:tw-whitespace-normal{
     white-space: normal !important;
   }
-  .sm\:tw-break-words{
-    overflow-wrap: break-word !important;
-  }
   .sm\:tw-break-all{
     word-break: break-all !important;
   }
@@ -26931,9 +26928,6 @@ a:visited{
   }
   .sm\:tw-leading-relaxed{
     line-height: 1.625 !important;
-  }
-  .sm\:tw-break-words{
-    word-break: break-word !important;
   }
 }
 @media (min-width: 768px){
