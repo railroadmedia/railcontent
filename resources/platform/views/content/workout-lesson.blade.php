@@ -1,4 +1,5 @@
 @php
+
     if (!empty($lessonContent->fetch('fields.video.fields.youtube_video_id'))) {
         $videoProps = [
             'ref' => 'mediaElementVueInstance',
@@ -27,7 +28,7 @@
             'progressState' => $lessonContent->fetch('progress_state'),
             'videoLength' => $lessonContent->fetch('fields.video.fields.length_in_seconds'),
             'chapters' => $lessonContent['chapters'] ?? [],
-            'userId' => user()->id(),
+            'userId' => user()->id,
             'likeCount' => $lessonContent['like_count'] ?? 0,
             'isLiked' => $lessonContent['is_liked_by_current_user'] ?? false,
             'checkForTimecode' => true,
@@ -47,7 +48,7 @@
             'likeCount' => $lessonContent['like_count'] ?? 0,
             'isAdded' => $lessonContent->fetch('is_added_to_primary_playlist') ?? false,
             'contentId' => $lessonContent->fetch('id'),
-            'userId' => auth()->id(),
+            'userId' => user()->id,
             'sources' => $lessonContent['video_playback_endpoints'] ?? [],
             'resources' => array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? []),
             'showAddToList' => $lessonType != 'song',
@@ -80,7 +81,7 @@
         'likeCount' => $lessonContent['like_count'] ?? 0,
         'isAdded' => $lessonContent->fetch('is_added_to_primary_playlist') ?? false,
         'contentId' => $lessonContent->fetch('id'),
-        'userId' => auth()->id(),
+        'userId' => user()->id,
         'resources' => array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? []),
         'showAddToList' => $lessonType != 'song',
         'showInfoButton' => !empty($lessonContent->fetch('*fields.instructor')) || !empty($lessonContent->fetch('data.description')) || !empty($lessonContent['chapters']),
@@ -165,11 +166,11 @@
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
 
     {{-- Workouts page template --}}
-    <workouts-playback 
-        breadcrumb-first-level-url="/{{ $brand }}/workouts" 
+    <workouts-playback
+        breadcrumb-first-level-url="/{{ $brand }}/workouts"
         breadcrumb-first-level-title="Workouts"
         @if($lessonType === 'challenge-part')
-            breadcrumb-second-level-url="{{ url()->route("platform.workouts.challenges") }}" 
+            breadcrumb-second-level-url="{{ url()->route("platform.workouts.challenges") }}"
             breadcrumb-second-level-title="Challenges"
         @endif
         :breadcrumb-last-level-title="{{ json_encode($lessonContent->fetch('fields.title')) }}"

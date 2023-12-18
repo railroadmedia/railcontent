@@ -201,7 +201,7 @@ export const useCollectionStore = defineStore({
         setURLParams () {
             const url = new URL(window.location.origin + window.location.pathname);
 
-            url.searchParams.set(this.filter.hasOwnProperty('term') ? 'term' : 'title', this.filter.searchTerm);
+            this.filter.searchTerm && url.searchParams.set(this.filter.hasOwnProperty('term') ? 'term' : 'title', this.filter.searchTerm);
             url.searchParams.set('sort', this.filter.sort);
 
             if (this.filter.includedFields.length > 0) {
