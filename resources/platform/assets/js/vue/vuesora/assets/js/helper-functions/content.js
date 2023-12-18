@@ -103,7 +103,7 @@ export default {
                         ).length > 0;
 
                         if(!value_exists){
-                            const numberFormat = /\s\(\d\)/;
+                            const numberFormat = /\s\(\d{1,}\)/;
 
                             filter_map[key].push({
                                 key: filter_options[key][i],
