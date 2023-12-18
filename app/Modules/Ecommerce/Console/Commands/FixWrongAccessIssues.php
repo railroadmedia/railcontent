@@ -29,11 +29,11 @@ class FixWrongAccessIssues extends Command
                     '=',
                     'ecommerce_subscription_payments.subscription_id'
                 )
-//                ->where('ecommerce_products.digital_access_time_interval_type', 'year')
-//                ->where('ecommerce_subscriptions.interval_type', 'month')
-//                ->where('ecommerce_subscriptions.interval_count', 1)
-//                ->where('ecommerce_subscriptions.type', '<>', 'payment plan')
-                ->where('ecommerce_subscription_payments.payment_id', 334338)
+                ->where('ecommerce_products.digital_access_time_interval_type', 'year')
+                ->where('ecommerce_subscriptions.interval_type', 'month')
+                ->where('ecommerce_subscriptions.interval_count', 1)
+                ->where('ecommerce_subscriptions.type', '<>', 'payment plan')
+                //->where('ecommerce_subscription_payments.payment_id', 334338)
                 ->join('ecommerce_products', 'ecommerce_products.id', '=', 'ecommerce_subscriptions.product_id');
             if ($userId) {
                 $query->where('ecommerce_subscriptions.user_id', $userId);
@@ -52,36 +52,50 @@ class FixWrongAccessIssues extends Command
                         $this->info("Skipping user 385381");
                         continue;
                     }
-                    $updated = false;
+                    $requiresUpdate = false;
 
                     switch ($subscription->type) {
                         case 'subscription':
                             if ($subscription->total_price < 30) {
-                                $subscription->product_id = $this->getMonthlyProductId($subscription);
-                                $subscription->save();
-                                $updated = true;
+                                $requiresUpdate = true;
                             }
                             break;
                         case 'apple_subscription':
-                            if ($payment->total_paid > 35) {
-                                $payment->total_paid = 29.99;
-                                if ($payment->total_refunded > $payment->total_paid) {
-                                    $payment->total_refunded = 29.99;
-                                }
-                            }
-                            $subscription->product_id = $this->getMonthlyProductId($subscription);
-                            $subscription->save();
-                            $updated = true;
-
+                            $requiresUpdate = true;
                             break;
                         default:
                             throw new \Exception('case not handled');
                     }
-                    if ($updated) {
+                    if ($requiresUpdate) {
                         $this->info("Removing order $item->shopify_id");
                         $shopifyCancelService->cancelSubscriptionPaymentOrder($item);
                         $item->shopify_id = null;
                         $item->save();
+
+                        switch ($subscription->type) {
+                            case 'subscription':
+                                if ($subscription->total_price < 30) {
+                                    $subscription->product_id = $this->getMonthlyProductId($subscription);
+                                    $subscription->save();
+                                    $requiresUpdate = true;
+                                }
+                                break;
+                            case 'apple_subscription':
+                                if ($payment->total_paid > 35) {
+                                    $payment->total_paid = 29.99;
+                                    if ($payment->total_refunded > $payment->total_paid) {
+                                        $payment->total_refunded = 29.99;
+                                    }
+                                    $payment->save();
+                                }
+                                $subscription->product_id = $this->getMonthlyProductId($subscription);
+                                $subscription->save();
+                                $requiresUpdate = true;
+
+                                break;
+                            default:
+                                throw new \Exception('case not handled');
+                        }
 
                         dispatch_sync(
                             new SyncSubscriptionPaymentsToShopifyOrders(
