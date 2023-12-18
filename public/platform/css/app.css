@@ -22836,6 +22836,9 @@ a:visited{
 .tw-w-screen{
   width: 100vw !important;
 }
+.tw-w-\[400px\]{
+  width: 400px !important;
+}
 .tw-min-w-0{
   min-width: 0px !important;
 }

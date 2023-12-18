@@ -54,6 +54,7 @@
         @elseif($parentContent->fetch('type') === 'challenge')
             @component('partials.bladesora.members.components.header-banner', [
                 'hideUser' => true,
+                'contentType' => $parentContent->fetch('type'),
                 'backgroundImage' => $parentContent->fetch('data.header_image_url'),
             ])
                 @slot('content')
