@@ -46,20 +46,20 @@
 
             @foreach ($packs as $index => $pack)
                 @include('partials.bladesora.members.content.content-overview', [
-                    'themeColor' => $brand,
-                    'hideBorder' => $index === 0,
-                    'itemThumbnail' => $pack->fetch('data.thumbnail_url'),
+                    "themeColor" => $brand,
+                    "hideBorder" => $index === 0,
+                    "itemThumbnail" => $pack->fetch('data.thumbnail_url'),
                     'itemId' => $pack->fetch('id'),
-                    'itemTitle' => $pack->fetch('fields.title'),
-                    'itemDescription' => $pack->fetch('data.description'),
-                    'itemProgress' => $pack->fetch('progress_state'),
-                    'itemType' => $pack->fetch('type'),
-                    'itemUrl' => $pack->fetch('next_lesson_url'),
-                    'lessonsUrl' => $pack->fetch('url'),
-                    'logoImage' => $pack->fetch('data.logo_image_url'),
-                    'forceSquareThumb' => true,
-                    'releaseDate' => $pack->fetch('published_on_in_timezone'),
-                    'isOwned' => true,
+                    "itemTitle" => $pack->fetch('fields.title'),
+                    "itemDescription" => $pack->fetch('data.description'),
+                    "itemProgress" => $pack->fetch('progress_state'),
+                    "itemType" => $pack->fetch('type'),
+                    "itemUrl" => $pack->fetch('next_lesson_url'),
+                    "lessonsUrl" => $pack->fetch('url'),
+                    "logoImage" => $pack->fetch('data.logo_image_url'),
+                    "forceSquareThumb" => true,
+                    "releaseDate" => $pack->fetch('published_on_in_timezone'),
+                    "isOwned" => true,
                     "statusText" => $pack->fetch('status_text')
                 ])
             @endforeach

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Platform;
 use App\Http\Controllers\BaseController;
 use App\Modules\Content\Services\CarouselService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
@@ -54,12 +55,13 @@ class WorkoutsPageController extends BaseController
             6,
             0
         );
-
-        $startedListLessons =
-            count($startedLessons) > 0 ?
-                (new ContentFilterResultsEntity(['results' => $startedLessons]))->toResponseRawJson() : false;
-
-        $hasStartedLessons = !empty(json_decode($startedListLessons)->data);
+//TODO: Add started lessons to $startedListLessons
+        $startedListLessons = false;
+//            $startedLessons->isNotEmpty() ?
+//                (new ContentFilterResultsEntity(['results' => $startedLessons]))->toResponseRawJson() : false;
+        Log::debug(var_export($startedListLessons, true));
+        $hasStartedLessons = false;
+            //$startedLessons->isNotEmpty();
 
         CarouselService::$workoutsPage = true;
         $carousel =

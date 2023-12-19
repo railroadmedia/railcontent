@@ -27,10 +27,12 @@ class TestingUserProvider implements UserProviderInterface
     public function saveMembershipData(
         int $userId,
         ?Carbon $membershipExpirationDate,
+        ?Carbon $membershipStartDate,
         bool $isLifetimeMember,
         string $accessLevel,
         bool $isPackOwner,
-        ?string $membershipLevel
+        ?string $membershipLevel,
+        bool $isDrumeoLifetimeMember
     ): bool {
         return $this->databaseManager->connection(config('event-data-synchronizer.users_database_connection_name'))
                 ->table('usora_users')
