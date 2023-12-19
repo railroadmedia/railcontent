@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="filter.activeTab" :hide-filter="hideFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-filter="hideFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
@@ -230,9 +230,9 @@ const getTabOptions = computed(() => {
     } else if (isWorkout.value) {
         return [
             { key: '', value: 'All', },
-            { key: 'duration,359,<', value: '5 Minutes', },
-            { key: 'duration,659,<', value: '10 Minutes', },
-            { key: 'duration,900,>', value: '15+ Minutes', },
+            { key: 'duration,450,<', value: '5 Minutes', },
+            { key: ['duration,451,>', 'duration,750,<'], value: '10 Minutes', },
+            { key: 'duration,751,>', value: '15+ Minutes', },
             { key: 'group_by,instructor', value: 'Instructors', groupByView: true, },
         ];
     }
@@ -287,6 +287,10 @@ const getTotalPages = computed(() => {
 
 const getTotalResults = computed(() => {
     return activeTabData.value && activeTabData.value.totalResults;
+})
+
+const getActiveTab = computed(() => {
+    return Array.isArray(filter.value.activeTab) ? JSON.stringify(filter.value.activeTab) : filter.value.activeTab;
 })
 
 const handleClearFilter = () => {

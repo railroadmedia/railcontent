@@ -46,7 +46,6 @@ const changeCurrentForm = (val) => {
 
 const handleEmailChange = (val) => {
   emailInput.value = val;
-  localStorage.setItem("lastEmailUsed", val)
 };
 
 const handlePasswordChange = (val) => {
@@ -55,6 +54,7 @@ const handlePasswordChange = (val) => {
 
 const handleButtonClick = (e) => {
   isLoading.value = true;
+  localStorage.setItem("lastEmailUsed", val)
   document.getElementById('hidden-submit').click();
 };
 
@@ -63,7 +63,7 @@ const toggleSeePassword = () => {
 };
 
 const isButtonDisabled = computed(() => {
-  return !emailInput.value.length || !passwordInput.value.length || isLoading.value;
+  return !(emailInput && passwordInput && emailInput.value && passwordInput.value && !isLoading.value);
 });
 
 onBeforeMount(() => {
