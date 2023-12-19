@@ -41,7 +41,8 @@ class ContentServiceProvider extends ServiceProvider
                             SongDuration::class,
                             ImportSongsDuration::class,
                             RecalculatePlaylistDuration::class,
-                            WorkoutsImport2023::class
+                            WorkoutsImport2023::class,
+            ChallengesImport2023::class,
                         ]);
     }
 }
