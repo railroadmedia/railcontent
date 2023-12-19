@@ -12,7 +12,7 @@
         <MiniCatalogueSection title="Continue" seeAllAriaLabel="See All Lessons In Progress" v-if="hasStartedLessons && startedContent.data.length"
             :seeAllUrl="continueUrl" :preLoadedContent="startedContent" :isMiniView="true" :show-dropdown="true" />
         <!-- Workouts section -->
-        <MiniCatalogueSection title="Workouts" seeAllAriaLabel="See All Workouts" :seeAllUrl="workoutsContentUrl"
+        <MiniCatalogueSection v-if="workoutsContent.data.length" title="Workouts" seeAllAriaLabel="See All Workouts" :seeAllUrl="workoutsContentUrl"
             :preLoadedContent="workoutsContent" />
         <!-- New section -->
         <MiniCatalogueSection title="New Releases" seeAllAriaLabel="See All New Releases" :seeAllUrl="newContentUrl"

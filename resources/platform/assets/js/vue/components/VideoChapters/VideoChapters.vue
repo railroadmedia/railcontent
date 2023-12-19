@@ -7,17 +7,25 @@
           class="tw-flex tw-flex-col tw-justify-center tw-flex-shrink-0 tw-w-[237px] lg:tw-flex-shrink lg:tw-w-full tw-max-w-[237px]"
       > 
         <!-- Chapter Thumbnail -->
-        <div class="tw-w-full tw-flex tw-items-center tw-justify-center tw-relative tw-transition-colors dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-aspect-video tw-rounded-lg tw-mb-2">
+        <button 
+          class="tw-overflow-hidden tw-w-full tw-flex tw-items-center tw-justify-center tw-relative tw-transition-colors dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-aspect-video tw-rounded-lg tw-mb-2"
+          :title="`Go To '${chapter.title}'`"
+          @click="handleSeekToChapter(chapter.time)"
+        >
           <img v-if="chapter.thumbnail" 
               :src="chapter.thumbnail" 
               :alt="`Chapter ${ index } thumbnail`"
               class="tw-transition-opacity tw-rounded-[5px] tw-w-[237px] tw-h-[133px] tw-object-cover tw-opacity-0"
               onload="this.classList.remove('tw-opacity-0')"
               loading="lazy"
-            >
+          >
           <!-- Fallback -->
           <p v-else class="tw-font-bold tw-text-black tw-text-xl dark:tw-text-white">Chapter {{ index + 1 }}</p>
-        </div>
+          <!-- Hover State -->
+          <div class="tw-cursor-pointer tw-bg-black/50 tw-z-10 tw-absolute tw-transition-opacity tw-opacity-0 hover:tw-opacity-100 tw-w-full tw-h-full tw-flex tw-items-center tw-justify-center">
+            <i class="fas fa-arrow-right tw-text-white tw-text-2xl"></i>
+          </div>
+        </button>
         <!-- Chapter Info Wrapper -->
         <div class="tw-w-full tw-flex tw-justify-between">
           <div class="tw-w-[calc(100%-46px)] tw-flex tw-flex-col">
@@ -31,7 +39,7 @@
             <button id="video-chapter-song" 
                     class="tw-text-black dark:tw-text-white tw-mr-2 tw-flex tw-flex-col tw-justify-start tw-group"
                     @click="handleOpenSoundslice(chapter.title, index, chapter.time, false)" 
-                    title="Open Chapter"
+                    title="Practice"
             >
               <!-- Outlined -->
               <svg width="19" height="24" viewBox="0 0 19 24" class="group-hover:tw-hidden tw-block" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +62,7 @@
             <button id="video-chapter-loop" 
                   class="tw-text-black dark:tw-text-white tw-flex tw-flex-col tw-justify-start tw-group"
                   @click="handleOpenSoundslice(chapter.title, index, chapter.time, true)" 
-                  title="Open and Loop Chapter"
+                  title="Loop"
             >
               <!-- Outlined -->
               <svg width="19" height="24" viewBox="0 0 19 24" fill="none" class="group-hover:tw-hidden tw-block" xmlns="http://www.w3.org/2000/svg">
@@ -95,6 +103,7 @@
 
   const emit = defineEmits([
     'openSlice',
+    'seekToChapter'
   ]);
 
   const formatTime = (seconds) => {
@@ -107,6 +116,9 @@
     emit('openSlice', title, index + 1, startTime, loop);
   };
 
+  const handleSeekToChapter = (startTime) => {
+    emit('seekToChapter', startTime);
+  }
 
 </script>
   

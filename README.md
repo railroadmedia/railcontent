@@ -276,6 +276,13 @@ To run artisan commands including migrate on any vapor environment use the follo
 'web-staging-one' with whatever environment you wish to run it on:  
 `r vapor command web-staging-one --command="php artisan migrate"`
 
+# How To Run Artisan Tinker On Cloud Environments
+Sometimes the easiest way to solve an issue is with a [tinker](https://laravel.com/docs/10.x/artisan#tinker) command; 
+such as seeing the formatted value of a piece of data, or performing a simple update. To run tinker on the cloud environment,
+simply run `r vapor tinker {environment}`. e.g. `r vapor tinker web-staging-one` or `r vapor tinker production`. You will 
+then be prompted for your input. Don't forget to put all the input on one line, because the new line submits the value.
+e.g. `$p = App\Modules\Ecommerce\Models\Product::latest()->first(); dump($p->getStockAvailability());`
+
 ## GitHub Actions Secrets  
 Such as 'COMPOSER_AUTH_JSON' can be found here: https://github.com/organizations/railroadmedia/settings/secrets/actions  
 The template for our COMPOSER_AUTH_JSON value is in 1 pass under: 

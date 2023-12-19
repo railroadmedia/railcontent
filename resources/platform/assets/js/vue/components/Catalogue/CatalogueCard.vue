@@ -8,7 +8,7 @@
         class="tw-snap-center tw-flex tw-flex-col tw-group"
         :class="[
             class_object,
-            forceListView || breakToListView ? 'tw-py-3 tw-w-full' : 'tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 lg:tw-mb-6 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]',
+            forceListView || breakToListView ? 'tw-py-3 tw-w-full' : 'tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]',
             { 'tw-py-3 tw-w-full @3xl/breakToList:tw-py-0 @3xl/breakToList:tw-w-1/4 @3xl/breakToList:tw-mb-6 @3xl/breakToList:tw-pr-[8px] @4xl/breakToList:tw-pr-[12px] @5xl/breakToList:tw-w-1/5 @6xl/breakToList:tw-pr-[18px] @7xl/breakToList:tw-w-1/6' : breakToListView }
         ]">
         <div class="tw-flex" :class="[
@@ -17,8 +17,8 @@
         ]">
             <!-- Thumbnail Section -->
             <a :href="renderLink  && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
-                { 'tw-w-[210px] tw-mr-3': forceListView || breakToListView },
-                { '@3xl/breakToList:tw-w-full @3xl/breakToList:tw-mr-0': breakToListView },
+                { 'tw-w-[142px] @lg/breakToList:tw-w-[200px] tw-flex-shrink-0 tw-mr-3 ': forceListView || breakToListView },
+                { '@3xl/breakToList:tw-w-full @3xl/breakToList:tw-flex-shrink @3xl/breakToList:tw-mr-0': breakToListView },
                 item.type === 'song' && forceListView ? 'tw-max-w-[121px]' : '',
                 item.type + '-thumbnail'
             ]">
@@ -329,7 +329,6 @@ const handleShowDropdown = (className) => {
 const contentTypeString = computed(() => {
     if(contentModel.value.post.type) return snakeToCapitalized(contentModel.value.post.type);
     return '';
-
 })
 
 const isSongContent = computed(() => {
@@ -344,6 +343,15 @@ const registrationUrl = computed(() => {
     return contentModel.value.post.fields.find(field => field.key === 'registration_url')?.value || '';
 })
 
+const duration = computed( () => {
+    let time = props.item.fields.find(field => field.key === 'length_in_seconds')?.value || '';
+    let hours = Math.floor(time / 3600);
+    let minutes = Math.floor(time / 60);
+    let seconds = time - minutes * 60;
+    time = time - hours * 3600;
+    return `${hours ? `${hours}:` : ''}${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+})
+
 const enrollmentOpen = computed(() => {
     return contentModel.value.post.challenge_state === 'enrollment';
 })
@@ -353,8 +361,11 @@ const thumbnailBadge = computed(() => {
         if(enrollmentOpen.value && !contentModel.value.post.has_product) return 'Enroll Now';
         if(upcomingChallenge.value) return 'Upcomming';
         return `${ props.item.child_count } Workouts`;
+    } else if(props.item.type === 'workout') {
+        return duration.value;
+    } else {
+        return false;
     }
-    return false;
 })
 
 const upcomingChallenge = computed(() => {
@@ -413,6 +424,7 @@ const closeDropdownOnScroll = () => {
 };
 
 onMounted(() => {
+    //console.log('item', props.item)
     const contentContainer = document.getElementById('content-container');
     contentContainer.addEventListener('scroll', closeDropdownOnScroll);
 });

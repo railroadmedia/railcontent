@@ -1,6 +1,6 @@
 <!-- Composition API -->
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed, onUpdated } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed, onUpdated, watch } from 'vue';
 import shaka from 'shaka-player';
 import Utils from '../../assets/js/helper-functions/utils.js';
 import Screenfull from 'screenfull';
@@ -131,6 +131,11 @@ const props = defineProps({
     endSecond: {
         type: [String, Number],
         default: null
+    },
+
+    seekToTime: {
+        type: [String, Number],
+        default: 0
     }
 });
 
@@ -234,8 +239,12 @@ defineExpose({
     hasRetriedSource,
 });
 
-//methods
+//watchers
+watch(() => props.seekToTime, (newTime, oldTime) => {
+    if(newTime !== oldTime ) seek(newTime);
+});
 
+//methods
 function getDefaultPlaybackQualityIndex() {
     const widthToCheck = window.localStorage.getItem('vuesoraDefaultVideoQuality')
         || document.documentElement.clientWidth;

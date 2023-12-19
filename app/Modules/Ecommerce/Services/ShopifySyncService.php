@@ -74,7 +74,8 @@ class ShopifySyncService
         $shopifyCustomerId,
         $email = '',
         bool $isRebuildingPermissions = false,
-        bool $skipEventSync = false
+        bool $skipEventSync = false,
+        bool $removeDeletedOrderPermissions = false,
     ): void {
         if (!$shopifyCustomerId) {
             $user = $this->userService->getByEmailOrNull($email);
@@ -98,7 +99,8 @@ class ShopifySyncService
                 $user,
                 $orderCollection,
                 $isRebuildingPermissions,
-                $skipEventSync
+                $skipEventSync,
+                $removeDeletedOrderPermissions
             );
         } else {
             Log::debug("Customer $shopifyCustomerId: No digital products found");
@@ -360,14 +362,14 @@ class ShopifySyncService
         );
 
         $paymentSourceEnum = ShopifyPaymentSourceEnum::tryFrom($paymentSource?->value);
-        
+
         if (is_null($paymentSourceEnum)) {
             if (!is_null($paymentSource)) {
                 Log::error(
                     "Unknown payment source from {ShopifyMetafieldKey::PaymentSource->value} metafield: {$paymentSource->value} on Shopify order $orderId"
                 );
             }
-            
+
             return ShopifyPaymentSourceEnum::Web;
         }
 

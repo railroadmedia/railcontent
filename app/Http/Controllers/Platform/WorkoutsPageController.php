@@ -55,12 +55,13 @@ class WorkoutsPageController extends BaseController
             6,
             0
         );
-
-        $startedListLessons =
-            count($startedLessons) > 0 ?
-                (new ContentFilterResultsEntity(['results' => $startedLessons]))->toResponseRawJson() : false;
+//TODO: Add started lessons to $startedListLessons
+        $startedListLessons = false;
+//            $startedLessons->isNotEmpty() ?
+//                (new ContentFilterResultsEntity(['results' => $startedLessons]))->toResponseRawJson() : false;
         Log::debug(var_export($startedListLessons, true));
-        $hasStartedLessons = !empty(json_decode($startedListLessons)->data);
+        $hasStartedLessons = false;
+            //$startedLessons->isNotEmpty();
 
         CarouselService::$workoutsPage = true;
         $carousel =
