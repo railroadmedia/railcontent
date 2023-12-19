@@ -17,7 +17,7 @@
         ]">
             <!-- Thumbnail Section -->
             <a :href="renderLink  && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
-                { 'tw-w-[210px] tw-mr-3': forceListView || breakToListView },
+                { 'tw-w-[142px] sm:tw-w-[210px] tw-mr-3': forceListView || breakToListView },
                 { '@3xl/breakToList:tw-w-full @3xl/breakToList:tw-mr-0': breakToListView },
                 item.type === 'song' && forceListView ? 'tw-max-w-[121px]' : '',
                 item.type + '-thumbnail'
