@@ -35,7 +35,7 @@
             <button id="video-chapter-song" 
                     class="tw-text-black dark:tw-text-white tw-mr-2 tw-flex tw-flex-col tw-justify-start tw-group"
                     @click="handleOpenSoundslice(chapter.title, index, chapter.time, false)" 
-                    title="Open Chapter"
+                    title="Practice"
             >
               <!-- Outlined -->
               <svg width="19" height="24" viewBox="0 0 19 24" class="group-hover:tw-hidden tw-block" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +58,7 @@
             <button id="video-chapter-loop" 
                   class="tw-text-black dark:tw-text-white tw-flex tw-flex-col tw-justify-start tw-group"
                   @click="handleOpenSoundslice(chapter.title, index, chapter.time, true)" 
-                  title="Open and Loop Chapter"
+                  title="Loop"
             >
               <!-- Outlined -->
               <svg width="19" height="24" viewBox="0 0 19 24" fill="none" class="group-hover:tw-hidden tw-block" xmlns="http://www.w3.org/2000/svg">
