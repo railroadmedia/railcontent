@@ -368,6 +368,7 @@ const handleVideoPause = (payload) => {
 };
 
 const handleVideoEnd = () => {
+    console.log('handle video end')
     isRelatedSectionOpen.value = true;
 };
 
