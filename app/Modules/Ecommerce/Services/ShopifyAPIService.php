@@ -353,7 +353,7 @@ class ShopifyAPIService
 
         if (!empty($discountCodesToApply)) {
             // always merge with existing discount codes
-            $this->applyDiscountCodes(
+            $responseCartData = $this->applyDiscountCodes(
                 $cartId,
                 array_unique(
                     array_merge(
@@ -947,6 +947,10 @@ class ShopifyAPIService
         }
 
         $finalDiscountCodes = array_unique(array_merge($currentDiscountCodes, $autoDiscountCodesToApply));
+
+        if ($currentDiscountCodes == $finalDiscountCodes) {
+            return $latestCartData;
+        }
 
         return $this->applyDiscountCodes($latestCartData['id'], $finalDiscountCodes);
     }
