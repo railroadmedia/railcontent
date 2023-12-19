@@ -18,19 +18,50 @@
                         <template v-if="videoProps.videoId">
                             <!-- YouTube -->
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
-                                <YoutubePlayer :video-id="videoProps.videoId" />
+                                <YoutubePlayer 
+                                    :video-id="videoProps.videoId" 
+                                    ref="mediaElementVueInstance" 
+                                    :brand="brand" 
+                                    :theme-color="brand" 
+                                    :video-length="videoProps.videoLength" 
+                                    :progress-state="videoProps.progressState"
+                                    :content-id="videoProps.id" 
+                                    :use-intersection-observer="true" 
+                                    :start-second="seekToTime" 
+                                    :end-second="videoProps.videoLength" 
+                                    :total-duration="videoProps.videoLength"
+                                    :seek-to-time="seekToTime"
+                                    @play="handleVideoPlay" 
+                                    @pause="handleVideoPause" 
+                                    @onVideoEnd="handleVideoEnd"
+                                />
                             </transition>
                             <!-- Vimeo video (legacy player) -->
                             <transition v-else-if="videoProps.videoType === 'vimeo' && videoProps.useLegacyPlayer" appear
                                 name="fade">
-                                <video-media-element ref="mediaElementVueInstance" element-id="lessonPlayer"
-                                    :brand="videoProps.brand" :theme-color="videoProps.brand"
-                                    :poster="videoProps.videoPosterImageUrl" :sources="videoProps.videoPlaybackEndpoints"
-                                    :hls-manifest-url="videoProps.hlsManifestUrl" :video-id="videoProps.vimeoVideoId"
-                                    :content-id="videoProps.id" :current-second="videoProps.lastWatchPositionInSeconds"
-                                    :progress-state="videoProps.progressState" :video-length="videoProps.videoLength"
-                                    :chapters="videoProps.chapters" :user-id="videoProps.userId" :like-count="videoProps.likeCount"
-                                    :is-liked="videoProps.isLiked" :check-for-timecode="videoProps.checkForTimecode">
+                                <video-media-element 
+                                    ref="mediaElementVueInstance" 
+                                    element-id="lessonPlayer"
+                                    :brand="videoProps.brand" 
+                                    :theme-color="videoProps.brand"
+                                    :poster="videoProps.videoPosterImageUrl" 
+                                    :sources="videoProps.videoPlaybackEndpoints"
+                                    :hls-manifest-url="videoProps.hlsManifestUrl" 
+                                    :video-id="videoProps.vimeoVideoId"
+                                    :content-id="videoProps.id" 
+                                    :current-second="videoProps.lastWatchPositionInSeconds"
+                                    :progress-state="videoProps.progressState" 
+                                    :video-length="videoProps.videoLength"
+                                    :chapters="videoProps.chapters" 
+                                    :user-id="videoProps.userId" 
+                                    :like-count="videoProps.likeCount"
+                                    :is-liked="videoProps.isLiked" 
+                                    :check-for-timecode="videoProps.checkForTimecode"
+                                    :seek-to-time="seekToTime"
+                                    @playing="handleVideoPlay"
+                                    @pause="handleVideoPause"
+                                    @ended="handleVideoEnd"
+                                >
                                     <div :class="`widescreen title tw-text-${brand}`">
                                         <i class="fas fa-spinner fa-spin absolute-center"></i>
                                     </div>
@@ -222,6 +253,8 @@ import { storeToRefs } from 'pinia';
 import { useUserStore } from "../../stores/user";
 
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
+import VideoMediaElement from "../vuesora/components/MediaElement/MediaElement.vue";
+import VideoPlayer from "../vuesora/components/VideoPlayer/VideoPlayer.vue";
 import YoutubePlayer from "../vuesora/components/YoutubePlayer/YoutubePlayer.vue";
 import VideoButtons from "../components/VideoButtons/VideoButtons.vue";
 import VideoResources from "../vuesora/components/VideoResources/VideoResources.vue";
@@ -235,9 +268,6 @@ import Intercom from "../vuesora/assets/js/services/intercom";
 import Helpscout from "../vuesora/assets/js/services/helpscout";
 import ProgressTracker from "../vuesora/assets/js/classes/progress-tracker";
 import ContentService from '../vuesora/assets/js/services/content';
-// READ ME: Importing video player breaks the app for some reason.
-// We need further investigation on this matter, but for now let's use it globally.
-// import VideoPlayer from "../vuesora/components/VideoPlayer/VideoPlayer.vue";
 
 const props = defineProps({
     breadcrumbFirstLevelUrl: {

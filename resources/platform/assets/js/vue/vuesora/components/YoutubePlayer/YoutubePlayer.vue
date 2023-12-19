@@ -71,6 +71,10 @@ export default {
         startSecond: {
             type: [Number, String],
             default: 0
+        },
+        seekToTime: {
+            type: [String, Number],
+            default: 0
         }
     },
     data() {
