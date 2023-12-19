@@ -7,7 +7,11 @@
           class="tw-flex tw-flex-col tw-justify-center tw-flex-shrink-0 tw-w-[237px] lg:tw-flex-shrink lg:tw-w-full tw-max-w-[237px]"
       > 
         <!-- Chapter Thumbnail -->
-        <div class="tw-w-full tw-flex tw-items-center tw-justify-center tw-relative tw-transition-colors dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-aspect-video tw-rounded-lg tw-mb-2">
+        <button 
+          class="tw-w-full tw-flex tw-items-center tw-justify-center tw-relative tw-transition-colors dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-aspect-video tw-rounded-lg tw-mb-2"
+          :title="`Go To '${chapter.title}'`"
+          @click="handleSeekToChapter(chapter.time)"
+        >
           <img v-if="chapter.thumbnail" 
               :src="chapter.thumbnail" 
               :alt="`Chapter ${ index } thumbnail`"
@@ -17,7 +21,7 @@
             >
           <!-- Fallback -->
           <p v-else class="tw-font-bold tw-text-black tw-text-xl dark:tw-text-white">Chapter {{ index + 1 }}</p>
-        </div>
+        </button>
         <!-- Chapter Info Wrapper -->
         <div class="tw-w-full tw-flex tw-justify-between">
           <div class="tw-w-[calc(100%-46px)] tw-flex tw-flex-col">
@@ -95,6 +99,7 @@
 
   const emit = defineEmits([
     'openSlice',
+    'seekToChapter'
   ]);
 
   const formatTime = (seconds) => {
@@ -107,6 +112,9 @@
     emit('openSlice', title, index + 1, startTime, loop);
   };
 
+  const handleSeekToChapter = (startTime) => {
+    emit('seekToChapter', startTime);
+  }
 
 </script>
   

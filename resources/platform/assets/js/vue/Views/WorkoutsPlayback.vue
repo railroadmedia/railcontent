@@ -58,6 +58,7 @@
                                     :total-duration="videoProps.totalDuration"
                                     :cast-title="videoProps.castTitle"
                                     :use-intersection-observer="videoProps.useIntersectionObserver"
+                                    :seek-to-time="seekToTime"
                                     @play="handleVideoPlay"
                                     @pause="handleVideoPause"
                                     @onVideoEnd="handleVideoEnd"
@@ -110,6 +111,7 @@
                         v-if="formattedChapters.length"
                         :chapters="formattedChapters"
                         @open-slice="openSlice"
+                        @seek-to-chapter="seekToChapter"
                     />
 
                     <VideoButtons :prev-lesson-url="videoButtons.prevLessonUrl" :next-lesson-url="videoButtons.nextLessonUrl"
@@ -312,6 +314,7 @@ let progressTracker;
 //Refs
 const isRelatedSectionOpen = ref(false);
 const openSoundslice = ref(false);
+const seekToTime = ref(0);
 const chapterStartTime = ref(0);
 const chapterEndTime = ref(props.videoProps.totalDuration);
 const soundsliceTitle = ref('');
@@ -389,6 +392,10 @@ const openSlice = (title, index, startAt, loop) => {
     openSoundslice.value = true;
 };
 
+const seekToChapter = (time) => {
+    seekToTime.value = time;
+};
+
 const handleCloseSoundslice = () => {
     openSoundslice.value = false;
     startLooping.value = false;
@@ -400,6 +407,6 @@ const handleCloseSoundslice = () => {
 };
 
 onMounted(() => {
-    console.log(props.videoProps.totalDuration)
+    //console.log(props.videoProps.totalDuration)
 })
 </script>
