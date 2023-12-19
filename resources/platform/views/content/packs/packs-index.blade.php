@@ -40,7 +40,7 @@
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3">
         <div class="tw-flex tw-flex-col">
             <div class="tw-flex tw-flex-row tw-pt-4">
-                <h1 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl dark:tw-text-white">
+                <h1 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl dark:tw-text-white">
                     Your Training Packs</h1>
             </div>
 

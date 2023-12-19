@@ -57,8 +57,8 @@
             </div>
         </div>
         <div class="tw-flex tw-flex-col mv-3 tw-w-full">
-            <div class="tw-flex tw-flex-row mb-3 ph">
-                <h1 class="heading dark:tw-text-white">Live Schedule</h1>
+            <div class="tw-flex tw-flex-row mb-3">
+                <h1 class="heading dark:tw-text-white tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">Live Schedule</h1>
             </div>
 
             <div class="tw-flex tw-flex-row tw-w-full">
