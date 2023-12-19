@@ -433,7 +433,7 @@ return [
                 'description' => "Here's a list of all lessons recently added to Drumeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor','progress'],
                 'sortBy' => '-published_on',
             ],
             'in-progress' => [
@@ -671,7 +671,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Get any drum related question answered by a Drumeo instructor on our weekly Q&A episodes! You can submit as many questions as you like by clicking the button below, and either join us live for the next episode, or check for your answer in the archived videos below!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['instructor'],
+                'allowableFiltersMobile' => ['instructor','progress'],
                 'sortBy' => '-published_on',
             ],
             'student-collaborations' => [
@@ -782,7 +782,7 @@ return [
                 'name' => 'New Content',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/courses.jpg',
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor','progress'],
                 'sortBy' => '-published_on',
                 'shortname' => 'New',
                 'icon' => 'fas fa-star',
@@ -803,6 +803,14 @@ return [
                 'description' => "This is a list of all of the releases by the coaches and topics that you have subscribed to across the member's area. You can filter by the type of content it is, or use the search bar to find all lessons by a specific coach or topic!",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
+            ],
+            'coaches' => [
+                'name' => 'Coaches',
+                'icon' => 'icon-coach',
+                'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
+                'allowableFilters' => ['progress'],
+                'allowableFiltersMobile' => ['focus', 'style'],
+                'sortBy' => '-published_on',
             ],
             'songs' => [
                 "name" => "Songs",
@@ -856,7 +864,7 @@ return [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/question-answer.jpg',
                 'name' => 'Q&A',
                 'allowableFilters' => ['instructor'],
-                'allowableFiltersMobile' => ['instructor'],
+                'allowableFiltersMobile' => ['instructor','progress'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Q&A',
                 'icon' => 'icon-student-focus',
@@ -953,11 +961,19 @@ return [
                 'description' => "Here's a list of all lessons recently added to Guitareo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor','progress'],
                 'sortBy' => '-published_on',
             ],
             'in-progress' => [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
+            ],
+            'coaches' => [
+                'name' => 'Coaches',
+                'icon' => 'icon-coach',
+                'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
+                'allowableFilters' => ['progress'],
+                'allowableFiltersMobile' => ['focus', 'style'],
+                'sortBy' => '-published_on',
             ],
             'courses' => [
                 "name" => "Courses",
@@ -978,7 +994,7 @@ return [
                 "icon" => "icon-play-alongs",
                 "description" => "Our play-along feature teaches you chords, strumming patterns, riffs, and song layouts -- with handy playback tools to help you create the perfect performance.",
                 "allowableFilters" => ['difficulty', 'style', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'allowableFiltersMobile' => ['difficulty', 'bpm','style','artist'],
             ],
             'chords-scales' => [
                 "name" => "Chords",
@@ -1059,11 +1075,19 @@ return [
                 'description' => "Here's a list of all lessons recently added to Singeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
                 'sortBy' => '-published_on',
             ],
             'in-progress' => [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
+            ],
+            'coaches' => [
+                'name' => 'Coaches',
+                'icon' => 'icon-coach',
+                'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
+                'allowableFilters' => ['progress'],
+                'allowableFiltersMobile' => ['focus', 'style'],
+                'sortBy' => '-published_on',
             ],
             'subscribed' => [
                 'name' => 'Subscribed',
@@ -1101,7 +1125,7 @@ return [
                 "icon" => "fas fa-question-circle",
                 "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
                 "allowableFilters" => [],
-                'allowableFiltersMobile' => ['instructor'],
+                'allowableFiltersMobile' => ['instructor', 'progress'],
             ],
             'student-reviews' => [
                 'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/student-reviews.png',

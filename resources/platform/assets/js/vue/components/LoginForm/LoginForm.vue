@@ -63,7 +63,7 @@ const toggleSeePassword = () => {
 };
 
 onBeforeMount(() => {
-  if(localStorage.getItem("lastEmailUsed") && props.errors.length) {
+  if(localStorage.getItem("lastEmailUsed") && props.errors?.length) {
     emailInput.value = localStorage.getItem("lastEmailUsed");
   }
 
@@ -101,7 +101,7 @@ onBeforeMount(() => {
       >
         <slot v-if="usecsrftoken" name="csrf"></slot>
         <ul
-          v-if="errors.length > 0"
+          v-if="errors && errors.length > 0"
           class="tw-flex tw-flex-col tw-mb-3 tw-text-xs text-error list-style-none"
         >
           <li v-for="(error, i) in errors" v-bind:key="i + 'error'">
@@ -156,7 +156,7 @@ onBeforeMount(() => {
           </InputLabel>
         </div>
 
-        <LoginButton :disabled="!passwordInput.length || !emailInput.length || isLoading" type="button" @on-button-click="handleButtonClick">
+        <LoginButton :disabled="!passwordInput?.length || !emailInput?.length || isLoading" type="button" @on-button-click="handleButtonClick">
           <span class="tw-flex tw-justify-center tw-items-center" v-if="isLoading"><LoadingSpinner /> SIGNING IN</span>
           <span v-if="!isLoading">SIGN IN</span>
         </LoginButton>

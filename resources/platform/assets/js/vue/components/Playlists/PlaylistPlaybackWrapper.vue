@@ -324,10 +324,13 @@ const unavailableType = computed(() => {
         if (props.lessonType === 'song') {
             return 'song';
         }
-        if (props.lessonType === 'pack') {
+        if (needAccessMessage && String(needAccessMessage).toLowerCase().includes('pack')) {
             return 'pack';
         }
-        return 'unreleased';
+        if (needAccessMessage && String(needAccessMessage).toLowerCase().includes('lifetime')) {
+            return 'lifetime';
+        }
+        return 'expired';
     }
     return null;
 });
