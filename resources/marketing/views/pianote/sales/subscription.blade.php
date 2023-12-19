@@ -255,9 +255,9 @@
 
     @php
         $testimonials = $pianote['testimonials'];
-        $youtube = convertNumber(Prices::$pianoteYoutubeSubsc);
-        $facebook = convertNumber(Prices::$pianoteFacebookLikes);
-        $instagram = convertNumber(Prices::$pianoteInstagramFollowers);
+        $youtube = number_format(Prices::$pianoteYoutubeSubsc);
+        $facebook = number_format(Prices::$pianoteFacebookLikes);
+        $instagram = number_format(Prices::$pianoteInstagramFollowers);
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'pianists',

@@ -5,8 +5,8 @@
         <p class="leading-tight mt-2 sm:mt-3">You’ll have all the tools you need to make sure you never miss a beat. <strong class="font-black text-{{ $theme }} cursor-pointer" x-on:click="soundslice = true;"><u>Try the demo <i class="fal fa-play-circle"></i></u></strong></p>
 
         <div class="flex items-center justify-center mt-4 sm:mt-6 lg:my-6">
-            <div class="w-full sm:w-1/2 h-64 sm:h-96 mx-auto sm:order-1">
-                <div style="padding-bottom:62.4%" class="w-full bg-cover bg-center lazyload" x-on:click="soundslice = true;" data-bg={{ $video }}></div>
+            <div class="w-full sm:w-1/2 mx-auto sm:order-1">
+                <video class="w-full h-64 sm:h-96" src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/loop.mp4" muted autoplay loop playsinline></video>
             </div>
             <div class="w-full sm:w-1/2 flex-grow-0 text-left mt-6 sm:mt-0 sm:pr-8">
                 @foreach ($songItems as $key => $songItem)

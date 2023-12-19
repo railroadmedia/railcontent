@@ -247,9 +247,9 @@
 
     @php
         $testimonials = $drumeo['testimonials'];
-        $youtube = convertNumber(Prices::$drumeoYoutubeSubsc);
-        $facebook = convertNumber(Prices::$drumeoFacebookLikes);
-        $instagram = convertNumber(Prices::$drumeoInstagramFollowers);
+        $youtube = number_format(Prices::$drumeoYoutubeSubsc);
+        $facebook = number_format(Prices::$drumeoFacebookLikes);
+        $instagram = number_format(Prices::$drumeoInstagramFollowers);
     @endphp
 
     @include('musora.sales.components.testimonials-section', [

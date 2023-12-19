@@ -136,7 +136,7 @@
             </div>
         @endif
         @if(!empty($youtube))
-            <div class="flex flex-wrap items-start justify-center mx-auto mt-10 sm:mt-16 lg:mt-20">
+            <div class="flex flex-wrap items-start justify-center mx-auto mt-10 sm:mt-16 lg:mt-20 max-w-4xl">
                 <div class="w-1/3 sm:px-2 mb-4 py-1 sm:py-4 lg:py-5" style="color:#cd201f;">
                     <a href="{{ $youtubeLink }}" target="_blank" aria-label="youtube"> <i class="fab fa-youtube text-4xl sm:text-5xl"></i>
                     </a>
