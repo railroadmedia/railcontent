@@ -111,12 +111,18 @@ export default {
             },
         }
     },
+
+    watch: { 
+        seekToTime: function(newVal, oldVal) { // watch it
+            this.player.seekTo(newVal)
+        }
+    },
+
     mounted() {
         const youtubeIframeApi = document.getElementById('youtubeIframeApi');
 
         if (youtubeIframeApi == null) {
             this.appendIframeApi();
-
             window.onYouTubeIframeAPIReady = () => {
                 this.initPlayer();
             };
