@@ -156,7 +156,8 @@ class UserAccessPermissionsService
         User $user,
         OrderCollection $orderCollection,
         bool $isRebuildingPermissions = false,
-        bool $skipEventSync = false
+        bool $skipEventSync = false,
+        bool $removeDeletedOrderPermissions = false
     ): void {
         if ($isRebuildingPermissions) {
             $this->removeExistingPermissions($user);
@@ -164,13 +165,19 @@ class UserAccessPermissionsService
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
         $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($user->id);
 
+        $accessPermissions = [];
         foreach ($orderCollection->getOrders()->sortBy('created_at') as $order) {
-            $this->syncShopifyOrder(
+            $orderAccessPermissions = $this->syncShopifyOrder(
                 $user,
                 $order,
                 $existingAccessPermissionsLookup,
                 $contentPermissionsLookup
             );
+            $accessPermissions = array_merge($accessPermissions, $orderAccessPermissions);
+        }
+
+        if ($removeDeletedOrderPermissions) {
+            $this->removeDeletedOrderPermissions($user, $accessPermissions);
         }
 
         $this->ensureUserProductAccess(
@@ -197,9 +204,10 @@ class UserAccessPermissionsService
         Order $order,
         Collection $existingAccessPermissionsLookup,
         Collection $contentPermissionsLookup
-    ): void {
+    ) {
         $shopifyOrderId = $order->id;
         $status = $order->getPermissionStatusFromOrder();
+        $accessPermissions = [];
 
         foreach ($order->lineItems as $lineItem) {
             if (!$lineItem->product) {
@@ -230,15 +238,20 @@ class UserAccessPermissionsService
                 } else {
                     $this->updateUserAccessPermission($accessPermission, $status, $lineItem, $user);
                 }
+                $accessPermissions[] = $accessPermission;
             }
-            $this->handleBonusMembershipPermission(
+            $bonusAccessPermission = $this->handleBonusMembershipPermission(
                 $lineItem->product,
                 $user,
                 $order->getPaymentSourceEnum(),
                 $shopifyOrderId . $lineItem->id,
                 $existingAccessPermissionsLookup
             );
+            if ($bonusAccessPermission) {
+                $accessPermissions[] = $bonusAccessPermission;
+            }
         }
+        return $accessPermissions;
     }
 
     private function updateUserAccessPermission(
@@ -495,7 +508,7 @@ class UserAccessPermissionsService
             $membershipExpirationDate = Carbon::parse($user->membership_expiration_date)
                 ->addDays(-config('ecommerce.days_before_access_revoked_after_expiry', 7));
             $digitalMembershipAccessExpirationDate = Carbon::parse($product->digital_membership_access_expiration_date);
-            $this->createUserAccessPermission(
+            return $this->createUserAccessPermission(
                 $user,
                 UserAccessPermissionsCollection::MusoraPlusMembershipPermission,
                 $membershipExpirationDate,
@@ -623,5 +636,18 @@ class UserAccessPermissionsService
         UserAccessPermission::on('musora_laravel_mysql::write')
             ->where('user_id', '=', $user->id)
             ->whereIn('source', $rebuildSources)->delete();
+    }
+
+    private function removeDeletedOrderPermissions(User $user, $accessPermissions)
+    {
+        $hashes = collect($accessPermissions)->pluck('source_hash')->toArray();
+        $toRemove = $this->getUserAccessPermissionsQuery($user->id)
+            ->whereNotIn('source_hash', $hashes)
+            ->where('source', UserAccessPermissionsSourceEnum::Web->value)
+            ->get();
+        $toRemove->each(function (UserAccessPermission $permission) use ($accessPermissions) {
+            Log::info("Removing deleted order permission $permission->id $permission->time_days $permission->time_months");
+            $permission->delete();
+        });
     }
 }
