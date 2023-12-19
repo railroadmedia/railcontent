@@ -28314,6 +28314,9 @@ a:visited{
   .xl\:tw-mt-auto{
     margin-top: auto !important;
   }
+  .xl\:tw-mb-4{
+    margin-bottom: 1rem !important;
+  }
   .xl\:tw-line-clamp-3{
     overflow: hidden !important;
     display: -webkit-box !important;

@@ -60,6 +60,7 @@
                                     :use-intersection-observer="videoProps.useIntersectionObserver"
                                     @play="handleVideoPlay"
                                     @pause="handleVideoPause"
+                                    @onVideoEnd="handleVideoEnd"
                                 >
                                     <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                                 </video-player>
@@ -141,7 +142,7 @@
             </section>
 
             <!--Related Setion -->
-            <aside class="tw-w-full tw-col-span-3 xl:tw-row-span-4 tw-flex tw-flex-col xl:tw-mt-0 xl:tw-col-span-1" :class=" {'xl:tw-hidden' : !isRelatedSectionOpen } ">
+            <aside class="tw-w-full tw-col-span-3 xl:tw-row-span-4 tw-flex tw-flex-col xl:tw-mb-4 xl:tw-mt-0 xl:tw-col-span-1" :class=" {'xl:tw-hidden' : !isRelatedSectionOpen } ">
                 <div class="tw-flex tw-w-full">
                     <div class="tw-w-full tw-border dark:tw-border-[#002039] tw-border-[#e5e7ea] dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] tw-overflow-hidden tw-transition-all">
                         <header class="tw-flex tw-flex-col">
@@ -364,6 +365,10 @@ const handleVideoPlay = (payload) => {
 
 const handleVideoPause = (payload) => {
     progressTracker.stop();
+};
+
+const handleVideoEnd = () => {
+    isRelatedSectionOpen.value = true;
 };
 
 const getBrandSpecificParams = () => {

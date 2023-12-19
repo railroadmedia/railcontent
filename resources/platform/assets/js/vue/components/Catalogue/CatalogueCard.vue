@@ -349,8 +349,7 @@ const duration = computed( () => {
     let minutes = Math.floor(time / 60);
     let seconds = time - minutes * 60;
     time = time - hours * 3600;
-    console.log(minutes)
-    return `${hours ? `${hours}:` : ''}${minutes}: ${seconds < 10 ? `0${seconds}` : seconds}`;
+    return `${hours ? `${hours}:` : ''}${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 })
 
 const enrollmentOpen = computed(() => {
