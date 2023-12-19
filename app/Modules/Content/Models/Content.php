@@ -388,6 +388,12 @@ class Content extends Model
                 foreach ($contentInstructor as $ci) {
                        $ci->delete();
                 }
+                $fields = $this->fields->where('key', '=', 'instructor')
+                    ->where('value',$instructor->id)->where('content_id',$this->id)->collect();
+                foreach ($fields as $field) {
+                    $field->delete();
+                }
+
                 $this->setField('instructor', $instructor->id);
             }
         }
