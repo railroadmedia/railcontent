@@ -60,7 +60,7 @@
         <div class="tw-flex tw-flex-row tw-mb-3">
             <div class="tw-flex tw-flex-col tw-flex-grow">
                 <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
-                    <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl  tw-mb-3">
+                    <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl tw-mb-3">
                         Latest Featured Lessons
                     </h2>
                 </div>
@@ -101,7 +101,7 @@
                     <!-- Section Title -->
                     <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                         <a href="/{{ $brand }}/lessons/subscribed" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                            <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">From Subscribed Coaches</h2>
+                            <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl">From Subscribed Coaches</h2>
                         </a>
                         <a href="/{{ $brand }}/lessons/subscribed"
                             aria-label="See All Subscribed Lessons"

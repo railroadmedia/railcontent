@@ -1,8 +1,8 @@
 <template>
     <div class="flex flex-column" :class="[isCoachesGrid ? 'tw-mr-4 tw-w-full xl:tw-w-1/4' : '']">
-        <div class="flex flex-row flex-wrap mb nmh-1">
-            <div v-if="searchBarTitle.length" class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto ph-1">
-                <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
+        <div class="flex flex-row flex-wrap mb nmh-1 tw-items-center">
+            <div v-if="searchBarTitle.length" class="tw-flex tw-flex-col tw-mb-3 sm:tw-mb-0 tw-mr-auto ph-1">
+                <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">
                     {{ searchBarTitle }}
                 </h1>
             </div>
@@ -17,11 +17,11 @@
                     <div class="flex flex-column grow pr-2 tw-w-full md:tw-max-w-[455px]">
                         <input id="catalogueSearch" v-model="searchTermInterface" ref="searchInput" type="text"
                             name="search" autocomplete="off" placeholder="Search..."
-                            class="no-label dark:placeholder:tw-text-white tw-bg-white dark:tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"
+                            class="no-label dark:placeholder:tw-text-white tw-bg-white dark:tw-bg-transparent tw-py-0 tw-h-[45px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"
                             @keydown.enter="submitSearch($event)">
                     </div>
 
-                    <button class="tw-btn-primary tw-btn-circle tw-flex-shrink-0"
+                    <button class="tw-btn-primary tw-btn-circle tw-flex-shrink-0 tw-w-[45px] tw-h-[45px] tw-mb-0"
                         :class="`tw-bg-${themeColor} hover:tw-bg-${themeColor}-600`" title="Search"
                         @click="submitSearch">
                         <i class="fas fa-search"></i>

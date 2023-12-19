@@ -54,7 +54,7 @@
         <div class="tw-flex tw-flex-col mv-3">
             <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mb-6 md:tw-mb-[10px]">
                 <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
-                    <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
+                    <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-text-xl md:tw-text-2xl">
                         Upcoming Live Events
                     </h1>
                 </div>
@@ -74,7 +74,7 @@
                         theme-color="{{ $brand }}"
                     />
                 @else
-                <span>No upcoming live events</span>
+                <span class="dark:tw-text-white">No upcoming live events</span>
                 @endif
             </div>
         </div>

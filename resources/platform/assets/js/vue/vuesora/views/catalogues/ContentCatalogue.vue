@@ -8,7 +8,7 @@
             <a class="tw-no-underline tw-mb-2 sm:tw-mb-0 tw-mr-6 tw-transition"
                :href="coachIndexUrl + '#coach-section'"
             >
-              <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
+              <h3 class="tw-text-xl md:tw-text-2xl tw-inline-block tw-cursor-pointer"
                   :class="[!isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500' ]"
               >
                 All Coaches
@@ -17,7 +17,7 @@
             <a class="tw-no-underline tw-transition"
                :href="coachIndexUrl + '?only_subscribed=true#coach-section' "
             >
-              <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
+              <h3 class="tw-text-xl md:tw-text-2xl tw-inline-block tw-cursor-pointer"
                   :class="[isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500' ]"
               >
                   Subscribed Coaches

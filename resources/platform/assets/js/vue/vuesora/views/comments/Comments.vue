@@ -13,7 +13,7 @@
                         </div>
                     </div>
                 </div>
-                <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-2 lg:tw-mb-0 tw-whitespace-nowrap tw-mr-5">
+                <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl tw-mb-2 lg:tw-mb-0 tw-whitespace-nowrap tw-mr-5">
                     <span>{{ totalCommentsAndReplies }}</span>
                     Comments
                 </h2>

@@ -230,8 +230,8 @@ const getTabOptions = computed(() => {
     } else if (isWorkout.value) {
         return [
             { key: '', value: 'All', },
-            { key: 'duration,300,<', value: '5 Minutes', },
-            { key: 'duration,600,<', value: '10 Minutes', },
+            { key: 'duration,359,<', value: '5 Minutes', },
+            { key: 'duration,659,<', value: '10 Minutes', },
             { key: 'duration,900,>', value: '15+ Minutes', },
             { key: 'group_by,instructor', value: 'Instructors', groupByView: true, },
         ];
