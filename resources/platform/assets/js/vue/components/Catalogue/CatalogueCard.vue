@@ -329,7 +329,6 @@ const handleShowDropdown = (className) => {
 const contentTypeString = computed(() => {
     if(contentModel.value.post.type) return snakeToCapitalized(contentModel.value.post.type);
     return '';
-
 })
 
 const isSongContent = computed(() => {
@@ -344,6 +343,16 @@ const registrationUrl = computed(() => {
     return contentModel.value.post.fields.find(field => field.key === 'registration_url')?.value || '';
 })
 
+const duration = computed( () => {
+    let time = props.item.fields.find(field => field.key === 'length_in_seconds')?.value || '';
+    let hours = Math.floor(time / 3600);
+    let minutes = Math.floor(time / 60);
+    let seconds = time - minutes * 60;
+    time = time - hours * 3600;
+
+    return `${hours ? `${hours}:` : ''}${minutes}:${seconds}`;
+})
+
 const enrollmentOpen = computed(() => {
     return contentModel.value.post.challenge_state === 'enrollment';
 })
@@ -353,8 +362,11 @@ const thumbnailBadge = computed(() => {
         if(enrollmentOpen.value && !contentModel.value.post.has_product) return 'Enroll Now';
         if(upcomingChallenge.value) return 'Upcomming';
         return `${ props.item.child_count } Workouts`;
+    } else if(props.item.type === 'workout') {
+        return duration.value;
+    } else {
+        return false;
     }
-    return false;
 })
 
 const upcomingChallenge = computed(() => {
@@ -413,6 +425,7 @@ const closeDropdownOnScroll = () => {
 };
 
 onMounted(() => {
+    console.log('item', props.item)
     const contentContainer = document.getElementById('content-container');
     contentContainer.addEventListener('scroll', closeDropdownOnScroll);
 });

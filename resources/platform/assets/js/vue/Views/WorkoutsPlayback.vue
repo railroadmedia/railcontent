@@ -160,7 +160,7 @@
                             </div>
                         </header>
                         <!-- Cards -->
-                        <section class="tw-w-full tw-flex tw-flex-col tw-max-h-[920px] tw-relative tw-overflow-y-auto lg:tw-block">
+                        <section class="tw-w-full tw-flex tw-flex-col tw-max-h-[1000px] tw-relative tw-overflow-y-auto lg:tw-block">
                             <div v-for="(item, i) in relatedLessons.data "
                                  :key="i"
                                  class="tw-group tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-px-2"
