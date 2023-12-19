@@ -349,8 +349,8 @@ const duration = computed( () => {
     let minutes = Math.floor(time / 60);
     let seconds = time - minutes * 60;
     time = time - hours * 3600;
-
-    return `${hours ? `${hours}:` : ''}${minutes}:${seconds}`;
+    console.log(minutes)
+    return `${hours ? `${hours}:` : ''}${minutes}: ${seconds < 10 ? `0${seconds}` : seconds}`;
 })
 
 const enrollmentOpen = computed(() => {
@@ -425,7 +425,7 @@ const closeDropdownOnScroll = () => {
 };
 
 onMounted(() => {
-    console.log('item', props.item)
+    //console.log('item', props.item)
     const contentContainer = document.getElementById('content-container');
     contentContainer.addEventListener('scroll', closeDropdownOnScroll);
 });
