@@ -194,7 +194,6 @@ const handleSoundsliceEvent = (event) => {
                 
                 //Set Zoom
                 //ssiframe.value.contentWindow.postMessage(`{"method": "setZoom", "arg": ${globalSettings.zoom} }`, 'https://www.soundslice.com');
-
                 //Set Audio Source
                 // if(uniqueSettings.audioSource) {
                 //     ssiframe.value.contentWindow.postMessage(`{"method": "changeAudioByIndex", "arg": "${uniqueSettings.audioSource}" }`, 'https://www.soundslice.com');
@@ -279,7 +278,6 @@ onBeforeMount(()=> {
     if(localStorage.getItem("ssVolume")) {
         globalSettings.volume = localStorage.getItem("ssVolume");
     }
-
     //GET Current Time
     if(!props.forceStartTime) {
         if(localStorage.getItem(`${ props.soundsliceSlug }_currentTime`) ) {

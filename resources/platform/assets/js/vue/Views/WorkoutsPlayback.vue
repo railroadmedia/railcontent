@@ -58,8 +58,10 @@
                                     :total-duration="videoProps.totalDuration"
                                     :cast-title="videoProps.castTitle"
                                     :use-intersection-observer="videoProps.useIntersectionObserver"
+                                    :seek-to-time="seekToTime"
                                     @play="handleVideoPlay"
                                     @pause="handleVideoPause"
+                                    @onVideoEnd="handleVideoEnd"
                                 >
                                     <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                                 </video-player>
@@ -109,6 +111,7 @@
                         v-if="formattedChapters.length"
                         :chapters="formattedChapters"
                         @open-slice="openSlice"
+                        @seek-to-chapter="seekToChapter"
                     />
 
                     <VideoButtons :prev-lesson-url="videoButtons.prevLessonUrl" :next-lesson-url="videoButtons.nextLessonUrl"
@@ -141,7 +144,7 @@
             </section>
 
             <!--Related Setion -->
-            <aside class="tw-w-full tw-col-span-3 xl:tw-row-span-4 tw-flex tw-flex-col xl:tw-mt-0 xl:tw-col-span-1" :class=" {'xl:tw-hidden' : !isRelatedSectionOpen } ">
+            <aside class="tw-w-full tw-col-span-3 xl:tw-row-span-4 tw-flex tw-flex-col xl:tw-mb-4 xl:tw-mt-0 xl:tw-col-span-1" :class=" {'xl:tw-hidden' : !isRelatedSectionOpen } ">
                 <div class="tw-flex tw-w-full">
                     <div class="tw-w-full tw-border dark:tw-border-[#002039] tw-border-[#e5e7ea] dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] tw-overflow-hidden tw-transition-all">
                         <header class="tw-flex tw-flex-col">
@@ -160,7 +163,7 @@
                             </div>
                         </header>
                         <!-- Cards -->
-                        <section class="tw-w-full tw-flex tw-flex-col tw-max-h-[920px] tw-relative tw-overflow-y-auto lg:tw-block">
+                        <section class="tw-w-full tw-flex tw-flex-col tw-max-h-[1000px] tw-relative tw-overflow-y-auto lg:tw-block">
                             <div v-for="(item, i) in relatedLessons.data "
                                  :key="i"
                                  class="tw-group tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-px-2"
@@ -311,6 +314,7 @@ let progressTracker;
 //Refs
 const isRelatedSectionOpen = ref(false);
 const openSoundslice = ref(false);
+const seekToTime = ref(0);
 const chapterStartTime = ref(0);
 const chapterEndTime = ref(props.videoProps.totalDuration);
 const soundsliceTitle = ref('');
@@ -366,6 +370,11 @@ const handleVideoPause = (payload) => {
     progressTracker.stop();
 };
 
+const handleVideoEnd = () => {
+    console.log('handle video end')
+    isRelatedSectionOpen.value = true;
+};
+
 const getBrandSpecificParams = () => {
     return ({
         drumeo: '&show_chords=0',
@@ -383,6 +392,11 @@ const openSlice = (title, index, startAt, loop) => {
     openSoundslice.value = true;
 };
 
+const seekToChapter = (time) => {
+    isRelatedSectionOpen.value = false; //Run by Mitch
+    seekToTime.value = time;
+};
+
 const handleCloseSoundslice = () => {
     openSoundslice.value = false;
     startLooping.value = false;
@@ -394,6 +408,6 @@ const handleCloseSoundslice = () => {
 };
 
 onMounted(() => {
-    console.log(props.videoProps.totalDuration)
+    //console.log(props.videoProps.totalDuration)
 })
 </script>

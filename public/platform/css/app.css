@@ -22445,6 +22445,9 @@ a:visited{
 .tw-max-h-8{
   max-height: 2rem !important;
 }
+.tw-max-h-\[1000px\]{
+  max-height: 1000px !important;
+}
 .tw-max-h-\[100vh\]{
   max-height: 100vh !important;
 }
@@ -22468,9 +22471,6 @@ a:visited{
 }
 .tw-max-h-\[90vh\]{
   max-height: 90vh !important;
-}
-.tw-max-h-\[920px\]{
-  max-height: 920px !important;
 }
 .tw-max-h-full{
   max-height: 100% !important;
@@ -28286,6 +28286,9 @@ a:visited{
   }
   .xl\:tw-mb-0{
     margin-bottom: 0px !important;
+  }
+  .xl\:tw-mb-4{
+    margin-bottom: 1rem !important;
   }
   .xl\:tw-mb-5{
     margin-bottom: 1.25rem !important;

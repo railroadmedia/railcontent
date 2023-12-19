@@ -206,6 +206,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereBrandMethodLevels($value)
  * @method static Builder|User whereTotalXp($value)
  * @property string|null $membership_expiration_date
+ * @property string|null $membership_start_date
  * @property int $is_lifetime_member
  * @property int $is_drumeo_lifetime_member
  * @method static Builder|User whereIsLifetimeMember($value)
