@@ -16,7 +16,7 @@
         <!-- List Item Component : Next Lesson Variant -->
 
         <!-- Content Catalog -->
-        <section class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4">
+        <section class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-[30px]">
             <div class="tw-flex tw-flex-col">
                 <div class="tw-flex tw-w-full tw-flex-row">
 
