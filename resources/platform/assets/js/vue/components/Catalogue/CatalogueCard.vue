@@ -424,7 +424,7 @@ const closeDropdownOnScroll = () => {
 };
 
 onMounted(() => {
-    //console.log('item', props.item)
+    console.log('item', props.item)
     const contentContainer = document.getElementById('content-container');
     contentContainer.addEventListener('scroll', closeDropdownOnScroll);
 });

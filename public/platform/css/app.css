@@ -26660,9 +26660,6 @@ a:visited{
   .sm\:tw-flex-grow{
     flex-grow: 1 !important;
   }
-  .sm\:tw-basis-\[110px\]{
-    flex-basis: 110px !important;
-  }
   .sm\:tw-grid-cols-1{
     grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
   }
