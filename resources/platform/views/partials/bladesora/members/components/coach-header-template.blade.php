@@ -42,7 +42,7 @@ $brandColors = $colors[$brand];
         <div style="width: 100%; height: 100%; background: linear-gradient(180deg,{{ $colors["$brand"]['bgRgbStart'] }} 50%,{{ $colors["$brand"]['solidBg'] }});"></div>
     </div>
     <div class="tw-text-white" style="background-color: {{ $brandColors['solidBg'] }}">
-        <div class="tw--mt-24 md:tw-mt-0 tw-text-center lg:tw-text-left md:tw-py-16 lg:tw-py-4 tw-py-12 md:tw-px-14 tw-px-6">
+        <div class="tw-mt-24 md:tw-mt-0 tw-text-center lg:tw-text-left md:tw-py-16 lg:tw-py-10 tw-py-12 md:tw-px-14 tw-px-6">
             <div class="tw-top-5 tw-left-5 lg:tw-top-0 lg:tw-left-0 tw-absolute lg:tw-relative lg:tw-mb-7">
                 <a href="javascript:history.back()" class="tw-inline-flex tw-items-center tw-justify-center tw-shrink-0 tw-w-[40px] tw-h-[40px] tw-border-[2px] tw-border-white tw-rounded-full hover:tw-bg-white tw-text-white hover:tw-text-[#000C17]"><i class="fas fa-arrow-left" aria-hidden="true"></i></a>
             </div>
