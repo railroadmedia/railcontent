@@ -22572,6 +22572,9 @@ a:visited{
 .tw-w-\[140px\]{
   width: 140px !important;
 }
+.tw-w-\[142px\]{
+  width: 142px !important;
+}
 .tw-w-\[14px\]{
   width: 14px !important;
 }
@@ -22610,9 +22613,6 @@ a:visited{
 }
 .tw-w-\[20px\]{
   width: 20px !important;
-}
-.tw-w-\[210px\]{
-  width: 210px !important;
 }
 .tw-w-\[218px\]{
   width: 218px !important;
@@ -25970,6 +25970,50 @@ a:visited{
 .tw-peer:disabled ~ .peer-disabled\:tw-opacity-70{
   opacity: 0.7 !important;
 }
+@container breakToList (min-width: 24rem){
+  .\@sm\/breakToList\:tw-w-\[210px\]{
+    width: 210px !important;
+  }
+}
+@container breakToList (min-width: 32rem){
+  .\@lg\/breakToList\:tw-mr-0{
+    margin-right: 0px !important;
+  }
+  .\@lg\/breakToList\:tw-w-full{
+    width: 100% !important;
+  }
+  .\@lg\/breakToList\:tw-w-\[210px\]{
+    width: 210px !important;
+  }
+  .\@lg\/breakToList\:tw-w-\[200px\]{
+    width: 200px !important;
+  }
+  .\@lg\/breakToList\:tw-flex-shrink{
+    flex-shrink: 1 !important;
+  }
+}
+@container breakToList (min-width: 36rem){
+  .\@xl\/breakToList\:tw-mr-0{
+    margin-right: 0px !important;
+  }
+  .\@xl\/breakToList\:tw-w-full{
+    width: 100% !important;
+  }
+  .\@xl\/breakToList\:tw-flex-shrink{
+    flex-shrink: 1 !important;
+  }
+}
+@container breakToList (min-width: 42rem){
+  .\@2xl\/breakToList\:tw-mr-0{
+    margin-right: 0px !important;
+  }
+  .\@2xl\/breakToList\:tw-w-full{
+    width: 100% !important;
+  }
+  .\@2xl\/breakToList\:tw-flex-shrink{
+    flex-shrink: 1 !important;
+  }
+}
 @container breakToList (min-width: 48rem){
   .\@3xl\/breakToList\:tw-mb-6{
     margin-bottom: 1.5rem !important;
@@ -26595,8 +26639,14 @@ a:visited{
   .sm\:tw-w-72{
     width: 18rem !important;
   }
+  .sm\:tw-w-\[110px\]{
+    width: 110px !important;
+  }
   .sm\:tw-w-\[116px\]{
     width: 116px !important;
+  }
+  .sm\:tw-w-\[142px\]{
+    width: 142px !important;
   }
   .sm\:tw-w-\[250px\]{
     width: 250px !important;
