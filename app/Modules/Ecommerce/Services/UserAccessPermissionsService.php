@@ -124,6 +124,22 @@ class UserAccessPermissionsService
         $this->handleUserPermissionsUpdatedEvent($user);
     }
 
+    public function addFixedAccessPermission(User $user, int $permissionId, Carbon $startDate, Carbon $expirationDate)
+    {
+        $hash = sha1("fixed.$expirationDate->timestamp.$permissionId");
+        $this->createUserAccessPermission(
+            $user,
+            $permissionId,
+            $startDate,
+            UserAccessPermissionsSourceEnum::Manual,
+            $hash,
+            null,
+            UserAccessPermissionsStatusEnum::Active,
+            fixed: $expirationDate,
+        );
+        $this->handleUserPermissionsUpdatedEvent($user);
+    }
+
     public function syncUser(User $user, bool $skipEventSync = false): void
     {
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
@@ -140,7 +156,8 @@ class UserAccessPermissionsService
         User $user,
         OrderCollection $orderCollection,
         bool $isRebuildingPermissions = false,
-        bool $skipEventSync = false
+        bool $skipEventSync = false,
+        bool $removeDeletedOrderPermissions = false
     ): void {
         if ($isRebuildingPermissions) {
             $this->removeExistingPermissions($user);
@@ -148,13 +165,19 @@ class UserAccessPermissionsService
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
         $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($user->id);
 
+        $accessPermissions = [];
         foreach ($orderCollection->getOrders()->sortBy('created_at') as $order) {
-            $this->syncShopifyOrder(
+            $orderAccessPermissions = $this->syncShopifyOrder(
                 $user,
                 $order,
                 $existingAccessPermissionsLookup,
                 $contentPermissionsLookup
             );
+            $accessPermissions = array_merge($accessPermissions, $orderAccessPermissions);
+        }
+
+        if ($removeDeletedOrderPermissions) {
+            $this->removeDeletedOrderPermissions($user, $accessPermissions);
         }
 
         $this->ensureUserProductAccess(
@@ -165,8 +188,7 @@ class UserAccessPermissionsService
 
         if (!$skipEventSync) {
             $this->handleUserPermissionsUpdatedEvent($user, $orderCollection);
-        }
-        else{
+        } else {
             try {
                 $accessPermissions = $this->getUserAccessPermissions($user->id);
                 $subscriptions = $this->subscriptionService->syncSubscriptionData($accessPermissions);
@@ -182,9 +204,10 @@ class UserAccessPermissionsService
         Order $order,
         Collection $existingAccessPermissionsLookup,
         Collection $contentPermissionsLookup
-    ): void {
+    ) {
         $shopifyOrderId = $order->id;
         $status = $order->getPermissionStatusFromOrder();
+        $accessPermissions = [];
 
         foreach ($order->lineItems as $lineItem) {
             if (!$lineItem->product) {
@@ -215,15 +238,20 @@ class UserAccessPermissionsService
                 } else {
                     $this->updateUserAccessPermission($accessPermission, $status, $lineItem, $user);
                 }
+                $accessPermissions[] = $accessPermission;
             }
-            $this->handleBonusMembershipPermission(
+            $bonusAccessPermission = $this->handleBonusMembershipPermission(
                 $lineItem->product,
                 $user,
                 $order->getPaymentSourceEnum(),
                 $shopifyOrderId . $lineItem->id,
                 $existingAccessPermissionsLookup
             );
+            if ($bonusAccessPermission) {
+                $accessPermissions[] = $bonusAccessPermission;
+            }
         }
+        return $accessPermissions;
     }
 
     private function updateUserAccessPermission(
@@ -480,7 +508,7 @@ class UserAccessPermissionsService
             $membershipExpirationDate = Carbon::parse($user->membership_expiration_date)
                 ->addDays(-config('ecommerce.days_before_access_revoked_after_expiry', 7));
             $digitalMembershipAccessExpirationDate = Carbon::parse($product->digital_membership_access_expiration_date);
-            $this->createUserAccessPermission(
+            return $this->createUserAccessPermission(
                 $user,
                 UserAccessPermissionsCollection::MusoraPlusMembershipPermission,
                 $membershipExpirationDate,
@@ -514,8 +542,8 @@ class UserAccessPermissionsService
         int $permissionId,
         Carbon $startTime,
         UserAccessPermissionsSourceEnum $source,
-        string $hash,
-        Product $product,
+        ?string $hash,
+        ?Product $product,
         UserAccessPermissionsStatusEnum $status,
         ?int $days = null,
         ?int $months = null,
@@ -523,13 +551,13 @@ class UserAccessPermissionsService
         ?bool $isLifeTime = null
     ): ?UserAccessPermission {
         if (!isset($days)) {
-            $days = $product->getMembershipTimeDays();
+            $days = $product?->getMembershipTimeDays() ?? 0;
         }
         if (!isset($months)) {
-            $months = $product->getMembershipTimeMonths();
+            $months = $product?->getMembershipTimeMonths() ?? 0;
         }
         if (!isset($isLifeTime)) {
-            $isLifeTime = $product->isLifeTime();
+            $isLifeTime = $product?->isLifeTime() ?? false;
         }
         if (empty($hash)) {
             $hash = uniqid();
@@ -537,7 +565,7 @@ class UserAccessPermissionsService
         $accessPermission = new UserAccessPermission();
         $accessPermission->user_id = $user->id;
         $accessPermission->permission_id = $permissionId;
-        $accessPermission->product_id = $product->id;
+        $accessPermission->product_id = $product?->id;
         $accessPermission->source = $source;
         $accessPermission->source_hash = $hash;
         $accessPermission->start_time = $startTime;
@@ -608,5 +636,21 @@ class UserAccessPermissionsService
         UserAccessPermission::on('musora_laravel_mysql::write')
             ->where('user_id', '=', $user->id)
             ->whereIn('source', $rebuildSources)->delete();
+    }
+
+    private function removeDeletedOrderPermissions(User $user, $accessPermissions)
+    {
+        $hashes = collect($accessPermissions)->pluck('source_hash')->toArray();
+        $toRemove = $this->getUserAccessPermissionsQuery($user->id)
+            ->whereNotIn('source_hash', $hashes)
+            ->whereIn('source', [
+                UserAccessPermissionsSourceEnum::Web->value,
+                UserAccessPermissionsSourceEnum::Apple->value,
+                UserAccessPermissionsSourceEnum::Google->value,
+            ])            ->get();
+        $toRemove->each(function (UserAccessPermission $permission) use ($accessPermissions) {
+            Log::info("Removing deleted order permission $permission->id $permission->time_days $permission->time_months");
+            $permission->delete();
+        });
     }
 }
