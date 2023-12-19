@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onBeforeMount } from "vue";
+import { ref, onBeforeMount, computed } from "vue";
 import { EyeIcon, EyeOffIcon } from '@heroicons/vue/outline'
 import InputLabel from "../InputLabel/InputLabel.vue";
 import LoginButton from "../Button/LoginButton.vue";
@@ -61,6 +61,10 @@ const handleButtonClick = (e) => {
 const toggleSeePassword = () => {
   isPasswordVisible.value = !isPasswordVisible.value;
 };
+
+const isButtonDisabled = computed(() => {
+  return !emailInput.value.length || !passwordInput.value.length || isLoading.value;
+});
 
 onBeforeMount(() => {
   if(localStorage.getItem("lastEmailUsed") && props.errors?.length) {
@@ -156,7 +160,7 @@ onBeforeMount(() => {
           </InputLabel>
         </div>
 
-        <LoginButton :disabled="!passwordInput?.length || !emailInput?.length || isLoading" type="button" @on-button-click="handleButtonClick">
+        <LoginButton :disabled="isButtonDisabled" type="button" @on-button-click="handleButtonClick">
           <span class="tw-flex tw-justify-center tw-items-center" v-if="isLoading"><LoadingSpinner /> SIGNING IN</span>
           <span v-if="!isLoading">SIGN IN</span>
         </LoginButton>
