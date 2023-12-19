@@ -1,7 +1,7 @@
 <template>
     <div
         class="tw-flex"
-        :class="[noWrap ? 'overflow' : 'flex-wrap', {'nmh-1': !displayInline}, {'tw-flex-col' : displayInline }]"
+        :class="[noWrap ? 'overflow' : 'flex-wrap', {'tw-flex-col' : displayInline }]"
     >
         <catalogue-card
             v-for="item in content"
