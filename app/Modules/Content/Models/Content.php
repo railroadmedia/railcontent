@@ -384,6 +384,10 @@ class Content extends Model
                     ->where('name', 'like', '%'.$value.'%')
                     ->first();
             if ($instructor) {
+                $contentInstructor = ContentInstructor::query()->where('content_id', '=', $this->id)->where('instructor_id', $instructor->id)->get();
+                foreach ($contentInstructor as $ci) {
+                       $ci->delete();
+                }
                 $this->setField('instructor', $instructor->id);
             }
         }
@@ -421,13 +425,16 @@ class Content extends Model
         $this->setField('soundslice_slug', $value);
     }
 
-    public function setVideo($value, $duration, $type)
+    public function setVideo($value, $duration = '', $type = 'vimeo')
     {
-        if ($value && $duration != '') {
-            $video =
-                Content::query()
-                    ->where($type.'_video_id', '=', $value)
-                    ->first();
+        if(!$value){
+            return;
+        }
+        $video =
+            Content::query()
+                ->where($type.'_video_id', '=', $value)
+                ->orWhere('slug', '=', $type.'-video-'.$value)
+                ->first();
             if (!$video) {
                 $video = new Video();
                 $video->type = $type.'-video';
@@ -452,9 +459,6 @@ class Content extends Model
             $id = $video->id;
 
             $this->setField('video', $id);
-        } else {
-            Log::debug("Video not imported for $this->id  value:: $value duration:: $duration");
-        }
     }
 
     public function setParentId($value)

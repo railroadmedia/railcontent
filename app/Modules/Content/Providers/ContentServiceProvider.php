@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Providers;
 
+use App\Modules\Content\Console\Commands\ChallengesImport2023;
 use App\Modules\Content\Console\Commands\CoachBulkDataUpdate;
 use App\Modules\Content\Console\Commands\CoachBulkImageUpdate;
 use App\Modules\Content\Console\Commands\FixProgressOnUnpublishedContent;
@@ -40,7 +41,8 @@ class ContentServiceProvider extends ServiceProvider
                             SongDuration::class,
                             ImportSongsDuration::class,
                             RecalculatePlaylistDuration::class,
-                            WorkoutsImport2023::class
+                            WorkoutsImport2023::class,
+            ChallengesImport2023::class,
                         ]);
     }
 }
