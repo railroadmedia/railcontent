@@ -91,9 +91,4 @@ return [
          */
         'account_creation_secret_key' => 'musora_shopify_claim_key_68769727349672736',
     ],
-
-    'discount_codes' => [
-        'free_with_annual' => 'FREE-W-ANNUAL-6702',
-        'free_with_lifetime' => 'FREE-W-LIFETIME-849',
-    ]
 ];
