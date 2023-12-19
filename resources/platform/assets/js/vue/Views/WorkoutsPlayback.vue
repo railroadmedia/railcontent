@@ -253,8 +253,8 @@ import { storeToRefs } from 'pinia';
 import { useUserStore } from "../../stores/user";
 
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
-import VideoMediaElement from "../vuesora/components/MediaElement/MediaElement.vue";
-import VideoPlayer from "../vuesora/components/VideoPlayer/VideoPlayer.vue";
+//import VideoMediaElement from "../vuesora/components/MediaElement/MediaElement.vue";
+//import VideoPlayer from "../vuesora/components/VideoPlayer/VideoPlayer.vue";
 import YoutubePlayer from "../vuesora/components/YoutubePlayer/YoutubePlayer.vue";
 import VideoButtons from "../components/VideoButtons/VideoButtons.vue";
 import VideoResources from "../vuesora/components/VideoResources/VideoResources.vue";
