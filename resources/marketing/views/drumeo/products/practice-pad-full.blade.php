@@ -268,7 +268,7 @@
             border-radius:5px;
             cursor:pointer;
             color:#fff;
-            font:600 20px/1em "Open Sans", sans-serif;
+            font:400 20px/1em "Open Sans", sans-serif;
             width:170px;
             padding:3% 0;
         }
@@ -307,7 +307,7 @@
             cursor:pointer;
             color:#fff;
             display:none;
-            font:600 20px/1em "Open Sans", sans-serif;
+            font:400 20px/1em "Open Sans", sans-serif;
             width:170px;
             padding:3% 0;
         }
@@ -419,7 +419,7 @@
         }
 
         .customize-section .final-pitch p {
-            font:600 16px/1.2em "Open Sans", sans-serif;
+            font:400 16px/1.2em "Open Sans", sans-serif;
             margin:15px auto;
         }
 
