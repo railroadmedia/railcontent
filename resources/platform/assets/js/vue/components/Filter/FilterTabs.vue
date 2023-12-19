@@ -24,7 +24,8 @@ const props = defineProps({
 const emit = defineEmits(['onTabClick']);
 
 const isActive = (key) => {
-    return key === props.activeTab;
+    const tabKey = Array.isArray(key) ? JSON.stringify(key) : key;
+    return tabKey === props.activeTab;
 };
 
 const onTabClick = (tab) => {
