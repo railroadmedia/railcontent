@@ -8,7 +8,7 @@
       > 
         <!-- Chapter Thumbnail -->
         <button 
-          class="tw-w-full tw-flex tw-items-center tw-justify-center tw-relative tw-transition-colors dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-aspect-video tw-rounded-lg tw-mb-2"
+          class="tw-overflow-hidden tw-w-full tw-flex tw-items-center tw-justify-center tw-relative tw-transition-colors dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-aspect-video tw-rounded-lg tw-mb-2"
           :title="`Go To '${chapter.title}'`"
           @click="handleSeekToChapter(chapter.time)"
         >
@@ -18,9 +18,13 @@
               class="tw-transition-opacity tw-rounded-[5px] tw-w-[237px] tw-h-[133px] tw-object-cover tw-opacity-0"
               onload="this.classList.remove('tw-opacity-0')"
               loading="lazy"
-            >
+          >
           <!-- Fallback -->
           <p v-else class="tw-font-bold tw-text-black tw-text-xl dark:tw-text-white">Chapter {{ index + 1 }}</p>
+          <!-- Hover State -->
+          <div class="tw-cursor-pointer tw-bg-black/50 tw-z-10 tw-absolute tw-transition-opacity tw-opacity-0 hover:tw-opacity-100 tw-w-full tw-h-full tw-flex tw-items-center tw-justify-center">
+            <i class="fas fa-arrow-right tw-text-white tw-text-2xl"></i>
+          </div>
         </button>
         <!-- Chapter Info Wrapper -->
         <div class="tw-w-full tw-flex tw-justify-between">

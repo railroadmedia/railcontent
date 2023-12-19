@@ -393,6 +393,7 @@ const openSlice = (title, index, startAt, loop) => {
 };
 
 const seekToChapter = (time) => {
+    isRelatedSectionOpen.value = false; //Run by Mitch
     seekToTime.value = time;
 };
 
