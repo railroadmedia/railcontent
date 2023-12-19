@@ -643,8 +643,11 @@ class UserAccessPermissionsService
         $hashes = collect($accessPermissions)->pluck('source_hash')->toArray();
         $toRemove = $this->getUserAccessPermissionsQuery($user->id)
             ->whereNotIn('source_hash', $hashes)
-            ->where('source', UserAccessPermissionsSourceEnum::Web->value)
-            ->get();
+            ->whereIn('source', [
+                UserAccessPermissionsSourceEnum::Web->value,
+                UserAccessPermissionsSourceEnum::Apple->value,
+                UserAccessPermissionsSourceEnum::Google->value,
+            ])            ->get();
         $toRemove->each(function (UserAccessPermission $permission) use ($accessPermissions) {
             Log::info("Removing deleted order permission $permission->id $permission->time_days $permission->time_months");
             $permission->delete();
