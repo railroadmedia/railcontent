@@ -1,6 +1,6 @@
 <?php
 
-namespace Unit\Models\Traits;
+namespace Tests\Unit\Models\Traits;
 
 use App\Models\ShopifySync;
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
