@@ -1,14 +1,14 @@
 <template>
     <div>
-        <Breadcrumb 
-            :first-level-url="breadcrumbFirstLevelUrl" 
+        <Breadcrumb
+            :first-level-url="breadcrumbFirstLevelUrl"
             :first-level-title="breadcrumbFirstLevelTitle"
             :second-level-url="breadcrumbSecondLevelUrl" 
             :second-level-title="breadcrumbSecondLevelTitle"
-            :last-level-title="breadcrumbLastLevelTitle" 
+            :last-level-title="breadcrumbLastLevelTitle"
         />
 
-        <div class="tw-grid tw-grid-cols-3 xl:tw-gird-rows-4 xl:tw-grid-cols-[auto_auto_420px] tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 tw-mt-3 tw-flex-col tw-gap-4">
+        <div class="tw-grid tw-grid-cols-3 xl:tw-gird-rows-4 xl:tw-grid-cols-[auto_auto_420px] tw-w-full tw-max-w-[1450px] tw-mx-auto tw-px-4 tw-mt-3 tw-flex-col tw-gap-4">
             <!-- VIDEO WRAPPER -->
             <section class="tw-col-span-3 xl:tw-row-span-2 tw-w-full tw-flex" :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : 'tw-mb-4'">
                 <!-- Video Content -->
@@ -191,7 +191,7 @@
                 </div>
             </section>
         </div>
-        
+
         <!-- Workout Chapter Soundslice -->
         <transition name="show-from-bottom">
             <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
