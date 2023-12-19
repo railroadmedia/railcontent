@@ -42,7 +42,7 @@
                                 <video-player ref="mediaElementVueInstance"
                                     :theme-color="brand"
                                     :brand="brand"
-                                    :poster="videoProps.poster"
+                                    :poster="videoProps.thumbnailUrl"
                                     :sources="videoProps.sources"
                                     :ranges="videoProps.ranges ? videoProps.ranges : {}"
                                     :ranges-video-ids="videoProps.rangesVideoIds ? videoProps.rangesVideoIds : {}"
@@ -400,6 +400,6 @@ const handleCloseSoundslice = () => {
 };
 
 onMounted(() => {
-    //console.log(props.videoProps.totalDuration)
+    console.log(props.videoProps)
 })
 </script>

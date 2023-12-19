@@ -119,7 +119,7 @@
           {{ column_data }}
         </span>
         <!-- Difficulty Label -->
-        <DifficultyLabel v-if="mappedData.difficulty" class="sm:tw-w-[110px] tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
+        <DifficultyLabel v-if="mappedData.difficulty" class="sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
       </p>
     </div>
 
@@ -131,7 +131,7 @@
     </div>
 
     <!-- Difficulty Label -->
-    <DifficultyLabel v-if="mappedData.difficulty" class="tw-hidden xl:tw-flex sm:tw-w-[110px] tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
+    <DifficultyLabel v-if="mappedData.difficulty" class="tw-hidden xl:tw-flex sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
 
     <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
     <template v-if="!is_search">
@@ -141,7 +141,7 @@
           tw-uppercase
           tw-items-center
           tw-justify-center
-          sm:tw-w-[110px]
+          sm:tw-w-[110px] xl:tw-flex-shrink-0
           tw-text-center
           tw-text-xs
           font-compressed
@@ -158,7 +158,7 @@
           tw-flex-col
           tw-uppercase
           tw-justify-center
-          sm:tw-w-[110px]
+          sm:tw-w-[110px] xl:tw-flex-shrink-0
           tw-text-center
           tw-text-xs
         ">
@@ -170,7 +170,7 @@
           tw-flex-col
           tw-uppercase
           tw-justify-center
-          sm:tw-w-[110px]
+          sm:tw-w-[110px] xl:tw-flex-shrink-0
           tw-text-center
           tw-text-xs
         ">
@@ -187,7 +187,7 @@
           tw-flex-col
           tw-uppercase
           tw-justify-center
-          sm:tw-w-[110px]
+          sm:tw-w-[110px] xl:tw-flex-shrink-0
           tw-text-center
           tw-text-xs
         ">
@@ -197,7 +197,7 @@
           flex tw-flex-col
           uppercase
           tw-justify-center
-          sm:tw-w-[110px]
+          sm:tw-w-[110px] xl:tw-flex-shrink-0
           text-center
           tw-text-xs
           hide-sm-down
