@@ -96,6 +96,7 @@
 </template>
 
 <script setup>
+// TODO: Attach the new component for continue section, or fix this implementation if necessary (no href)
 import {onMounted, ref} from "vue";
 import { storeToRefs } from 'pinia';
 import {useUserStore} from "../../stores/user";
