@@ -22103,6 +22103,9 @@ a:visited{
 .tw-mt-auto{
   margin-top: auto !important;
 }
+.tw-ml-\[4px\]{
+  margin-left: 4px !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -22445,9 +22448,6 @@ a:visited{
 .tw-max-h-8{
   max-height: 2rem !important;
 }
-.tw-max-h-\[1000px\]{
-  max-height: 1000px !important;
-}
 .tw-max-h-\[100vh\]{
   max-height: 100vh !important;
 }
@@ -22472,8 +22472,14 @@ a:visited{
 .tw-max-h-\[90vh\]{
   max-height: 90vh !important;
 }
+.tw-max-h-\[920px\]{
+  max-height: 920px !important;
+}
 .tw-max-h-full{
   max-height: 100% !important;
+}
+.tw-max-h-\[1000px\]{
+  max-height: 1000px !important;
 }
 .tw-min-h-\[103px\]{
   min-height: 103px !important;
@@ -27756,6 +27762,12 @@ a:visited{
   }
   .lg\:tw-mt-8{
     margin-top: 2rem !important;
+  }
+  .lg\:tw-ml-\[0px\]{
+    margin-left: 0px !important;
+  }
+  .lg\:tw-ml-0{
+    margin-left: 0px !important;
   }
   .lg\:tw-line-clamp-2{
     overflow: hidden !important;
