@@ -174,9 +174,10 @@
             'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/header-thumb2.jpg',
             'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/jan-thumb.png',
             'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/jan-thumb-m.png',
-            'pointOne' => 'Improve Your Voice',
-            'pointTwo' => 'Helpful Vocal Coaches',
-            'pointThree' => 'Sing Popular Songs',
+            'pointOne' => 'GREAT TEACHERS',
+            'pointTwo' => 'VIDEO LESSONS',
+            'pointThree' => 'FUN PRACTICE',
+            'pointFour' => '1000+ SONGS',
         ])
     @else
         @include('musora.sales.components.header-section', [
@@ -185,9 +186,10 @@
             'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/header-thumb2.jpg',
             'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/jan-thumb.png',
             'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/jan-thumb-m.jpg',
-            'pointOne' => 'Improve Your Voice',
-            'pointTwo' => 'Helpful Vocal Coaches',
-            'pointThree' => 'Sing Popular Songs',
+            'pointOne' => 'GREAT TEACHERS',
+            'pointTwo' => 'VIDEO LESSONS',
+            'pointThree' => 'FUN PRACTICE',
+            'pointFour' => '1000+ SONGS',
         ])
     @endif
     @hasSection('promo-banner')

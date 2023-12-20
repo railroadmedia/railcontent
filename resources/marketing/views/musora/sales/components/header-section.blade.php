@@ -1,9 +1,9 @@
-<header class="text-center px-5 sm:px-6 py-32 sm:py-52 lg:py-56 relative overflow-hidden" style="background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);">
+<header class="text-center px-5 sm:px-6 py-44 sm:py-52 lg:py-56 relative overflow-hidden" style="background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);">
     <div class="container max-w-6xl mx-auto relative z-20">
-        <h1 class="relative w-auto inline-block text-3xl sm:text-4xl lg:text-5xl">
+        <h1 class="relative w-auto inline-block text-4xl sm:text-5xl lg:text-6xl">
             <strong>{!! $header !!}</strong>
             @if(!empty($underline))
-                <img class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2023/underline.png" alt="underline" fetchpriority="high">
+                <img class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%;filter: brightness(62%) hue-rotate(169deg);" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2023/underline.png" alt="underline" fetchpriority="high">
             @endif
         </h1>
         <p class="text-sm leading-normal tracking-widest sm:mt-10 mb-3 sm:mb-5 lg:mt-10 lg:mb-7">
@@ -13,28 +13,30 @@
             <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> {!! $pointThree !!}
             <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointFour !!}
         </p>
-        <div class="sm:mx-0.5 w-64 sm:w-56 join outline black smaller autoplay-video mb-3 sm:mb-0" x-on:click="trailer = true;">WATCH THE TRAILER</div>
-        <a class="sm:mx-0.5 w-64 sm:w-56 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
-            @if(!empty($promoVersion))
-                href="#customize-anchor"
-            @elseif(!empty($month))
-                href="/choose-your-trial-month"
-            @else
-                href="/choose-plan"
-            @endif
-        >
-            @if(!empty($promoVersion) && empty($trialVersion))
-                @if(!empty($cta))
-                    {!! $cta !!}
+        <div class="flex flex-wrap justify-center">
+            <a class="sm:mx-0.5 w-64 sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
+                @if(!empty($promoVersion))
+                    href="#customize-anchor"
+                @elseif(!empty($month))
+                    href="/choose-your-trial-month"
                 @else
-                    SEE YOUR DEAL &raquo;
+                    href="/choose-plan"
                 @endif
-            @elseif(!empty($month))
-                30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
-            @else
-                7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
-            @endif
-        </a>
+            >
+                @if(!empty($promoVersion) && empty($trialVersion))
+                    @if(!empty($cta))
+                        {!! $cta !!}
+                    @else
+                        SEE YOUR DEAL &raquo;
+                    @endif
+                @elseif(!empty($month))
+                    30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                @else
+                    7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                @endif
+            </a>
+            <div class="sm:mx-0.5 w-64 sm:w-56 join outline black smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
+        </div>
         <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
             <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                 <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>

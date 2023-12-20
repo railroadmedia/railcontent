@@ -241,11 +241,6 @@
                 'desc' => 'Share a video and you’ll get helpful  feedback from our singing community.',
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/sing-it-right-icon.svg',
-                'title' => 'Play it right the first time.',
-                'desc' => 'Get perfect notation and learn to sing accurately from the get-go.',
-            ],
-            [
                 'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/device-icon.svg',
                 'title' => 'Take your songs anywhere.',
                 'desc' => 'Accessible on any device, or printable,  so you can sing any song, any time.',

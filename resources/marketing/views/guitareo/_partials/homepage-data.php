@@ -257,11 +257,6 @@
                 'desc' => 'Use the built-in-metronome – your new  best friend for difficult rhythms.  ',
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/play-it-right-icon.svg',
-                'title' => 'Play it right the first time.',
-                'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
-            ],
-            [
                 'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/devices-icon.svg',
                 'title' => 'Take your songs anywhere.',
                 'desc' => 'Accessible on any device, or printable,  so you can play any song, any time.    ',

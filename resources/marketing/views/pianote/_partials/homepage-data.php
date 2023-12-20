@@ -256,36 +256,38 @@
         ],
         "songItems" => [
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/songs-icon.svg',
-                'title' => '1000+ popular songs.',
-                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level. ',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/songs-icon.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/loop.mp4",
+                "title" => "5000+ popular songs.",
+                "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/tempo-icons.svg',
-                'title' => 'Find the perfect tempo.',
-                'desc' => 'Slow down any section of a song to make those tricky bars easier. ',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/tempo-icons.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/loop.mp4",
+                "title" => "Find the perfect tempo.",
+                "desc" => "Slow down or speed up any section of a song to hear every note.",
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/loop-icons.svg',
-                'title' => 'Loop the hard parts.',
-                'desc' => 'Create practice loops to play-through those difficult parts over and over.   ',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/loop-icons.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/loop.mp4",
+                "title" => "Loop the trouble spots.",
+                "desc" => "No more pausing and rewinding that tricky fill. Loop it over and over again!",
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/timing-icons.svg',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/timing-icons.svg",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/drumless-feature.jpg",
                 'title' => 'Improve your timing.',
                 'desc' => 'Use the built-in-metronome – your new best friend for difficult rhythms.  ',
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/play-it-right-icon.svg',
-                'title' => 'Play it right the first time.',
-                'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/devices-icons.svg",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/devices-feature.jpg",
+                "title" => "Take your songs anywhere.",
+                "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
             ],
-            [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/devices-icons.svg',
-                'title' => 'Take your songs anywhere.',
-                'desc' => 'Accessible on any device, or printable, so you can play any song, any time.    ',
-            ],
-
         ],
         "testimonials" => [
             [

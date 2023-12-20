@@ -298,12 +298,6 @@
                 'desc' => 'Use built-in metronome - your new best friend to get the timing just right. ',
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/musora/membership/homepage/2023/notation-icon.svg',
-                'fa-icon' => 'fa-list-music',
-                'title' => 'Play it right the first time.',
-                'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
-            ],
-            [
                 'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/musora/membership/homepage/2023/devices-icon.svg',
                 'fa-icon' => 'fa-laptop-mobile',
                 'title' => 'Take your songs anywhere.',

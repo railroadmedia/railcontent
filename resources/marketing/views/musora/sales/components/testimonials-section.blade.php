@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="w-full sm:w-5/12 flex flex-col justify-between text-left sm:pl-8 sm:py-5">
                                             <h3 class="leading-normal mt-3 sm:mt-0 mb-2"><em>{!! $testimonial['title'] !!}</em></h3>
-                                            <div class="flex items-center justify-start">
+                                            <div class="flex items-center">
                                                 <img class="h-16 w-16 rounded-full object-cover mr-4"
                                                     @if(!empty($testimonial['avatar']))
                                                         src="{{$testimonial['avatar']}}"
@@ -80,7 +80,12 @@
                                                         src="{{$testimonial['image']}}"
                                                     @endif
                                                 >
-                                                <p class="mx-0 font-black">{{ $testimonial['name'] }}</p>
+                                                <div class="">
+                                                    <p class="leading-tight mx-0 font-black">{{ $testimonial['name'] }}</p>
+                                                    @if(!empty($testimonial['location']))
+                                                        <p class="leading-tight mx-0 text-sm"><em>{{ $testimonial['location'] }}</em></p>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

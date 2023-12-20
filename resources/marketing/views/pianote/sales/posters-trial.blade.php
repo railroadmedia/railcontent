@@ -219,9 +219,10 @@
                 'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/header-thumb2.jpg',
                 'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/jan-thumb2.png',
                 'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/jan-thumb-m2.jpg',
-                'pointOne' => 'Perfect for Beginners',
-                'pointTwo' => 'Super-Friendly Teachers',
-                'pointThree' => 'Fun Lessons',
+            'pointOne' => 'GREAT TEACHERS',
+            'pointTwo' => 'VIDEO LESSONS',
+            'pointThree' => 'FUN PRACTICE',
+            'pointFour' => '1000+ SONGS',
             ])
         @elseif(!empty($songsVersion))
             @include('musora.sales.components.header-section', [
@@ -230,9 +231,10 @@
                 'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/header-thumb2.jpg',
                 'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/jan-thumb2.png',
                 'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/jan-thumb-m2.jpg',
-                'pointOne' => '1000+ popular songs',
-                'pointTwo' => 'World-Class Teachers',
-                'pointThree' => 'Learn anywhere, anytime',
+            'pointOne' => 'GREAT TEACHERS',
+            'pointTwo' => 'VIDEO LESSONS',
+            'pointThree' => 'FUN PRACTICE',
+            'pointFour' => '1000+ SONGS',
             ])
         @else
             @include('musora.sales.components.header-section', [
@@ -242,9 +244,10 @@
                 'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/header-thumb2.jpg',
                 'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/jan-thumb2.png',
                 'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/jan-thumb-m2.jpg',
-                'pointOne' => 'Improve Your Skills',
-                'pointTwo' => 'World-Class Teachers',
-                'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
+            'pointOne' => 'GREAT TEACHERS',
+            'pointTwo' => 'VIDEO LESSONS',
+            'pointThree' => 'FUN PRACTICE',
+            'pointFour' => '1000+ SONGS',
             ])
         @endif
     @endif
