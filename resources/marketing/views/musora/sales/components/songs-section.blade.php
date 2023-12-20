@@ -1,10 +1,10 @@
 <div id="songs" class="anchor"></div>
 <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#0c1524;">
-    <div class="container max-w-4xl mx-auto">
+    <div class="container max-w-5xl mx-auto">
         <h2><strong>Play your favorite songs.</strong></h2>
         <p class="leading-tight mt-2 sm:mt-3">You’ll have all the tools you need to make sure you never miss a beat. <strong class="font-black text-{{ $theme }} cursor-pointer" x-on:click="soundslice = true;"><u>Try the demo <i class="fal fa-play-circle"></i></u></strong></p>
 
-        <div class="flex items-center justify-center mt-4 sm:mt-6 lg:my-6 timed-toggle">
+        <div class="flex flex-wrap items-center justify-center mt-4 sm:mt-6 lg:my-6 timed-toggle">
             <div class="w-full sm:w-1/2 mx-auto sm:order-1">
                 @foreach ($songItems as $key => $songItem)
                     @if(!empty($songItem['mediaVid']))
