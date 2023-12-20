@@ -407,7 +407,7 @@ const getBrandSpecificParams = () => {
 };
 
 const openSlice = (title, index, startAt, loop) => {
-    mediaElementVueInstance.value.stopVideo(); //Pause Video when soundslice opens
+    if(videoProps.videoType === 'youtube') mediaElementVueInstance.value.stopVideo();
     soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
     chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;
