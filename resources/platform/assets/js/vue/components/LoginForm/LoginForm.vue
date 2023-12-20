@@ -54,7 +54,7 @@ const handlePasswordChange = (val) => {
 
 const handleButtonClick = (e) => {
   isLoading.value = true;
-  localStorage.setItem("lastEmailUsed", val)
+  localStorage.setItem("lastEmailUsed", emailInput.value);
   document.getElementById('hidden-submit').click();
 };
 
