@@ -28213,6 +28213,9 @@ a:visited{
   .tw-group\/reply:hover .group-hover\/reply\:lg\:tw-flex{
     display: flex !important;
   }
+  :is(.tw-dark .lg\:dark\:tw-bg-transparent){
+    background-color: transparent !important;
+  }
 }
 @media (min-width: 1280px){
   .xl\:tw-static{
