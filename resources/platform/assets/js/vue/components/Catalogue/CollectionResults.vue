@@ -53,7 +53,6 @@ import {onMounted, onUnmounted, onUpdated} from "vue";
         const scroll_position = scrollEl.scrollTop + scrollEl.offsetHeight;
         const scroll_buffer = scrollEl.scrollHeight * 0.8;
 
-        console.log(scroll_position >= scroll_buffer, scroll_position, scroll_buffer);
         if (scroll_position >= scroll_buffer && props.currentPage < props.totalPages) {
             emit('onLoadMore');
         }
