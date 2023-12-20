@@ -105,16 +105,21 @@ class MusoraApiUserProvider implements UserProviderInterface
             $customerIoData = null;
         }
 
-        $user['cio_id'] = null;
-        $user['customer_io_id'] = null;
+        $extraData = [
+            'cio_id' => null,
+            'customer_io_id' => null,
+        ];
 
         if ($customerIoData && !empty($externalAttributes = $customerIoData->getExternalAttributes())) {
-            $user['cio_id'] = $externalAttributes['cio_id'];
-            $user['customer_io_id'] = $externalAttributes['id'];
+            $extraData = [
+                'cio_id' => $externalAttributes['cio_id'],
+                'customer_io_id' => strval($externalAttributes['id']),
+            ];
         }
 
+        $userArray = array_merge($user->toArray(), $extraData);
         return [
-            'user' => $user,
+            'user' => $userArray,
             'isEdge' => $user->isAMember(),
             'isEdgeExpired' => !$user->membership_expiration_date || $user->isAnExpiredMember(),
             'edgeExpirationDate' => $user->membership_expiration_date,
