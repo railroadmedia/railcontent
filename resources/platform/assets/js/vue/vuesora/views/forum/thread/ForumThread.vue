@@ -538,7 +538,7 @@ export default {
         },
 
         handlePostDelete(payload) {
-            ForumService.deleteForumsPost(payload.id)
+            ForumService.deleteForumsPost(payload.id, this.brand)
                 .then((response) => {
                     Toasts.push({
                         icon: 'happy',
@@ -558,12 +558,12 @@ export default {
             if (likedPost.isLiked) {
                 likedPost.totalLikes -= 1;
 
-                ForumService.unlikeForumPost(payload.id)
+                ForumService.unlikeForumPost(payload.id, this.brand)
                     .then(resolved => resolved);
             } else {
                 likedPost.totalLikes += 1;
 
-                ForumService.likeForumPost(payload.id)
+                ForumService.likeForumPost(payload.id, this.brand)
                     .then(resolved => resolved);
             }
 
@@ -592,14 +592,14 @@ export default {
         },
 
         pinPost() {
-            ForumService.pinForumsThread(this.thread.id, !this.isPinned)
+            ForumService.pinForumsThread(this.thread.id, this.brand, !this.isPinned)
                 .then(resolved => resolved);
 
             this.isPinned = !this.isPinned;
         },
 
         lockPost() {
-            ForumService.lockForumsThread(this.thread.id, !this.isLocked)
+            ForumService.lockForumsThread(this.thread.id, this.brand, !this.isLocked)
                 .then(resolved => resolved);
 
             this.isLocked = !this.isLocked;
@@ -621,7 +621,7 @@ export default {
         },
 
         followPost() {
-            ForumService.followForumsThread(this.thread.id, this.isFollowed)
+            ForumService.followForumsThread(this.thread.id, this.brand, this.isFollowed)
                 .then(resolved => resolved);
 
             this.isFollowed = !this.isFollowed;
