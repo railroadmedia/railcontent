@@ -155,7 +155,7 @@ class InstructorDecorator extends ModeDecoratorBase
                 if($lesson['type'] == 'workout'){
                     $contents[$contentIndex]['lessons'][$lessonIndex]['url'] = url()->route('platform.content.first-level', [
                         'brand' => $lesson['brand'],
-                        $lesson['type'],
+                        'workouts',
                         $lesson['slug'],
                         $lesson['id'],
                     ]);
