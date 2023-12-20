@@ -163,7 +163,7 @@
             <h2 class="leading-tight mb-5"><strong>All in one tidy package.</strong></h2>
             <div class="mx-auto max-w-4xl px-3">
                 <img class="transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)//marketing/drumeo/products/kit/e-kit-chart2.png"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/e-kit-chart2.png"
                 >
             </div>
         </div>
