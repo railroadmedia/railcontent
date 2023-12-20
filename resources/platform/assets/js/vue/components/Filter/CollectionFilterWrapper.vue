@@ -1,7 +1,7 @@
 <template>
     <FilterControls :showBackButton="showBackButton" :parentUrl="parentUrl" :hide-filter="hideFilter"
         :search-term="searchTerm" :is-collapsed="isCollapsed" :selected-sort="selectedSort" :tab-options="tabOptions"
-        :active-tab="activeTab" :hide-filter-icon="multiSelectColumns.length === 0"
+        :active-tab="activeTab" :hide-filter-icon="multiSelectColumns.length === 0" :selected-filters="selectedFilters"
         @on-toggle-collapse="handleToggleCollapse" @on-search-submit="value => emit('onSearchChange', value)"
         @on-sort="item => emit('onSortChange', item)" @on-filter-tab-click="tab => emit('onTabChange', tab)">
         <slot name="viewToggleButton"></slot>

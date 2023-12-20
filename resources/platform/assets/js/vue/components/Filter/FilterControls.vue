@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-flex-col xl:tw-flex-row tw-w-full tw-justify-between">
+    <div class="tw-flex tw-flex-col xl:tw-flex-row tw-w-full tw-justify-between" :class="{ 'tw-mb-5': !hasPills}">
         <div class="tw-flex tw-grow tw-relative tw-items-center tw-mb-3 xl:tw-mb-0">
             <!-- Back Button -->
             <template v-if="showBackButton">
@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-    import {onMounted, ref} from 'vue';
+import {computed, onMounted, ref} from 'vue';
     import { AdjustmentsIcon, XIcon } from '@heroicons/vue/outline';
     import FilterTabs from './FilterTabs.vue';
     import FilterSearch from './FilterSearch.vue';
@@ -98,6 +98,10 @@
             type: Boolean,
             default: false,
         },
+        selectedFilters: {
+            type: Object,
+            default: () => ({}),
+        },
     });
 
     const emit = defineEmits(['onToggleCollapse', 'onFilterTabClick', 'onSearchSubmit']);
@@ -126,7 +130,11 @@
 
     const sortIcon = () => {
         return sortOptions.value && sortOptions.value.find(option => option.value === props.selectedSort).icon;
-    };
+    }
+
+    const hasPills = computed(() => {
+        return props.selectedFilters && Object.keys(props.selectedFilters).length > 0;
+    })
 
     onMounted(()=>{
         if (props.sortOptionData.length === 0){
