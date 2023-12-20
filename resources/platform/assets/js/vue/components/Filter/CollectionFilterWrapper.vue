@@ -6,25 +6,21 @@
         @on-sort="item => emit('onSortChange', item)" @on-filter-tab-click="tab => emit('onTabChange', tab)">
         <slot name="viewToggleButton"></slot>
     </FilterControls>
-    <div class="tw-px-4 lg:tw-px-0">
-        <div>
-            <FilterPills :multi-select-columns="multiSelectColumns" :selected-filters="selectedFilters"
-                @cancel-filter="param => emit('onFilterChange', param)" @clear-filter="emit('OnClearFilter')" />
-        </div>
-        <div v-if="!hideFilter" :class="`tw-relative ${!isCollapsed ? 'tw-mb-5' : ''}`">
-            <FilterOptions v-if="!isCollapsed && isMobile" :multi-select-columns="multiSelectColumns"
-                :single-select-columns="singleSelectColumns" :selected-filters="selectedFilters"
-                :selected-progress="selectedProgress" @on-filter-click-handle="param => emit('onFilterChange', param)"
-                @on-progress-click="progress => emit('onProgressChange', progress)" />
-            <FilterOptionsModal v-if="!isCollapsed && !isMobile" :is-collapsed-mobile="isCollapsed"
-                :selected-filters="selectedFilters" :selected-progress="selectedProgress"
-                :multi-select-columns="multiSelectColumns" :single-select-columns="singleSelectColumns"
-                @onClose="handleToggleCollapse" @handle-filter-click="param => emit('onFilterChange', param)"
-                @on-progress-click="progress => emit('onProgressChange', progress)" />
+    <FilterPills :multi-select-columns="multiSelectColumns" :selected-filters="selectedFilters" @cancel-filter="param => emit('onFilterChange', param)" @clear-filter="emit('OnClearFilter')" />
+    <div class="tw-px-4 lg:tw-px-0" v-if="!hideFilter" :class="`tw-relative ${!isCollapsed ? 'tw-mb-5' : ''}`">
+        <FilterOptions v-if="!isCollapsed && isMobile" :multi-select-columns="multiSelectColumns"
+            :single-select-columns="singleSelectColumns" :selected-filters="selectedFilters"
+            :selected-progress="selectedProgress" @on-filter-click-handle="param => emit('onFilterChange', param)"
+            @on-progress-click="progress => emit('onProgressChange', progress)" />
+        <FilterOptionsModal v-if="!isCollapsed && !isMobile" :is-collapsed-mobile="isCollapsed"
+            :selected-filters="selectedFilters" :selected-progress="selectedProgress"
+            :multi-select-columns="multiSelectColumns" :single-select-columns="singleSelectColumns"
+            @onClose="handleToggleCollapse" @handle-filter-click="param => emit('onFilterChange', param)"
+            @on-progress-click="progress => emit('onProgressChange', progress)" />
 
-            <div v-if="loading" class="tw-absolute tw-inset-0 dark:tw-bg-[#000C17]/30 tw-bg-[#F9F9F9]/30 tw-z-50"></div>
-        </div>
+        <div v-if="loading" class="tw-absolute tw-inset-0 dark:tw-bg-[#000C17]/30 tw-bg-[#F9F9F9]/30 tw-z-50"></div>
     </div>
+
 </template>
 
 <script setup>

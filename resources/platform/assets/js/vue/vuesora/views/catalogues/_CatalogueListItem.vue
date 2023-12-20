@@ -194,8 +194,8 @@
         {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}
       </div>
       <div class="
-          flex tw-flex-col
-          uppercase
+          tw-flex tw-flex-col
+          tw-uppercase
           tw-justify-center
           sm:tw-w-[110px] xl:tw-flex-shrink-0
           text-center
