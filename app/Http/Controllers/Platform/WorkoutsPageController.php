@@ -9,20 +9,25 @@ use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 
 class WorkoutsPageController extends BaseController
 {
     private ContentService $contentService;
     private CarouselService $carouselService;
+    private UserContentProgressService $userContentProgressService;
 
     /**
      * @param ContentService $contentService
      * @param CarouselService $carouselService
      */
-    public function __construct(ContentService $contentService, CarouselService $carouselService)
+    public function __construct(ContentService $contentService,
+        CarouselService $carouselService,
+        UserContentProgressService $userContentProgressService)
     {
         $this->contentService = $contentService;
         $this->carouselService = $carouselService;
+        $this->userContentProgressService = $userContentProgressService;
     }
 
     public function showWorkoutsPage(Request $request, $domain, $brand)
@@ -48,20 +53,23 @@ class WorkoutsPageController extends BaseController
             true
         );
 
-        $startedLessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
-            [$lessonType],
-            auth()->id(),
-            'started',
-            6,
-            0
-        );
-//TODO: Add started lessons to $startedListLessons
-        $startedListLessons = false;
-//            $startedLessons->isNotEmpty() ?
-//                (new ContentFilterResultsEntity(['results' => $startedLessons]))->toResponseRawJson() : false;
-        Log::debug(var_export($startedListLessons, true));
-        $hasStartedLessons = false;
-            //$startedLessons->isNotEmpty();
+            $startedProgressRows = $this->userContentProgressService->getForUserStateContentTypes(
+                auth()->id(),
+                [$lessonType],
+                'started',
+                'updated_on',
+                'desc',
+                4
+            );
+            $lessons = $this->contentService->getByIds(array_column($startedProgressRows, 'content_id'));
+            $lessons->transform(function ($lesson){
+                $lesson = collect($lesson);
+                return $lesson->only(['id','slug','type','fields','data','url','published_on','instructors'])->toArray();
+
+            });
+            $startedListLessons =
+                (new ContentFilterResultsEntity(['results' => $lessons->values()]))->toResponseRawJson() ;
+            $hasStartedLessons = count($startedProgressRows) > 0;
 
         CarouselService::$workoutsPage = true;
         $carousel =
