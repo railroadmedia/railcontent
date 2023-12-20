@@ -21,8 +21,8 @@ class ChallengeDecorator extends TypeDecoratorBase
         $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
 
         foreach ($contentsOfType as $contentIndex => $content) {
-            $challengeEnrollStarted = Carbon::parse($content->fetch('fields.enrollment_start_time')) <= Carbon::now();
-            $challengeEnrollEnded = Carbon::parse($content->fetch('fields.enrollment_end_time')) <= Carbon::now();
+            $challengeEnrollStarted = $content->fetch('fields.enrollment_start_time') && Carbon::parse($content->fetch('fields.enrollment_start_time')) <= Carbon::now();
+            $challengeEnrollEnded = $content->fetch('fields.enrollment_end_time') && Carbon::parse($content->fetch('fields.enrollment_end_time')) <= Carbon::now();
             $registrationUrl = $content->fetch('fields.registration_url');
             $cohortSlug = '';
             if($registrationUrl){
@@ -45,6 +45,7 @@ class ChallengeDecorator extends TypeDecoratorBase
 
             $enrollNow = $registrationUrl && $challengeEnrollStarted && !$challengeEnrollEnded;
             $notifyMe = Carbon::parse($content->fetch('fields.enrollment_start_time')) > Carbon::now();
+
             $normallAndAccessible = Carbon::parse($content->fetch('published_on')) <= Carbon::now();
             $contentsOfType[$contentIndex]['lesson_count'] = $content['child_count'];
             $contentsOfType[$contentIndex]['primary_cta_text'] = (!$challengeEnrollStarted)?'Notify Me':'Start Challenge';
