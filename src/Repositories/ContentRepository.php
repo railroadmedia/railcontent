@@ -8,6 +8,7 @@ use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
@@ -180,7 +181,14 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->where([ConfigService::$tableContent . '.id' => $id])
                 ->getToArray();
-
+if(user()->id == 149628){
+    $sql =  $this->query()
+        ->selectPrimaryColumns()
+        ->restrictByUserAccess()
+        ->where([ConfigService::$tableContent . '.id' => $id])->toSql();
+    Log::warning(print_r($contentRows,true));
+    Log::warning(print_r($sql,true));
+}
         if (empty($contentRows)) {
             return null;
         }
