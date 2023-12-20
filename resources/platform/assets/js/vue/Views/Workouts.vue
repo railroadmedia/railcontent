@@ -33,7 +33,7 @@
                 </div>
             </div>
             <hr class="tw-border-[#65656b40] dark:tw-border-[#223F57]" />
-            <template v-if="continueData.data">
+            <template v-if="continueData.data.length">
                 <section class="dark:tw-text-white tw-mb-4">
                     <!-- Section Title -->
                     <div class="tw-flex tw-items-center tw-mt-5 tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
