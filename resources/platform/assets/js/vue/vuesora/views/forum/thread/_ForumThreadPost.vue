@@ -63,6 +63,11 @@
                             name="_method"
                             value="patch"
                         >
+                        <input
+                            type="hidden"
+                            name="brand"
+                            :value="this.brand"
+                        >
                         <text-editor
                             :initial-value="post.postBody"
                         />
@@ -343,7 +348,7 @@ export default {
                 submitButton: {
                     text: '<span class="bg-error text-white">Report</span>',
                     callback: () => {
-                        ForumService.reportForumPost(vm.post.id)
+                        ForumService.reportForumPost(vm.post.id, vm.brand)
                             .then((resolved) => {
                                 Toasts.push({
                                     icon: 'happy',
