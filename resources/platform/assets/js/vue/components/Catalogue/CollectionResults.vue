@@ -54,7 +54,6 @@ import {onMounted, onUnmounted, onUpdated} from "vue";
         const scroll_buffer = scrollEl.scrollHeight * 0.9;
 
         if (scroll_position >= scroll_buffer && props.currentPage < props.totalPages) {
-            console.log('infinitescroll')
             emit('onLoadMore');
         }
     }
@@ -68,7 +67,6 @@ import {onMounted, onUnmounted, onUpdated} from "vue";
     })
 
     onUpdated(() => {
-        console.log('updated')
         infiniteScrollEventHandler();
     })
 </script>
