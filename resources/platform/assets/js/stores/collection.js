@@ -184,8 +184,11 @@ export const useCollectionStore = defineStore({
             }
 
             if (defaults.content) {
-                this.data = defaults.content.data || [];
-                this.filterValues = this.getFilterValues(defaults.content.meta.filterOptions);
+                this.data = defaults.content?.data || [];
+                if(defaults.content.meta?.filterOptions){
+                    this.filterValues = this.getFilterValues(defaults.content.meta.filterOptions);
+                }
+
             }
 
             if (defaults.filter) {
