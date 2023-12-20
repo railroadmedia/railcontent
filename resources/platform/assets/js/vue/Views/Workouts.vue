@@ -61,7 +61,7 @@
         </section>
         <br>
         <section>
-            <collection-wrapper
+            <CollectionWrapper
                 :collection-type="collectionType"
                 :filterable-values="filterableValues"
                 :include-future-scheduled-content-only = "includeFutureScheduledContentOnly"
