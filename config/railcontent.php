@@ -1247,6 +1247,8 @@ return [
         'podcasts',
         'song-tutorial',
         'song-tutorial-children',
+        'workout',
+        'challenge-part',
     ],
     'liveContentTypes' => [
         'student-focus',
