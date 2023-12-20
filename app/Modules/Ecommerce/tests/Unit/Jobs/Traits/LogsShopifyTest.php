@@ -6,22 +6,20 @@ use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use ReflectionException;
-use ReflectionMethod;
 use Tests\BaseTestCase;
 
 class LogsShopifyTest extends BaseTestCase
 {
-    // DEV NOTE: the LogsShopify methods are all protected, so we use ReflectionMethod in all of our tests in order to
-    // make the methods accessible
+    use CreatesReflectionMethod;
 
     protected array $logTypes = ['info', 'debug', 'warning', 'error'];
 
-    protected TraitJob $traitJob;
+    protected LogsShopifyTraitJob $traitJob;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->traitJob = new TraitJob();
+        $this->traitJob = new LogsShopifyTraitJob();
     }
 
     /**
@@ -46,8 +44,7 @@ class LogsShopifyTest extends BaseTestCase
 
         $methodName = 'log' . Str::ucfirst($type);
         $testMessage = "$type message";
-        $method = new ReflectionMethod($this->traitJob, $methodName);
-        $method->setAccessible(true);
+        $method = $this->getReflectionMethod($this->traitJob, $methodName);
 
         Log::shouldReceive($type)
             ->once()
@@ -63,13 +60,12 @@ class LogsShopifyTest extends BaseTestCase
      */
     public function test_class_with_trait_returns_class_name()
     {
-        $method = new ReflectionMethod($this->traitJob, 'getClassName');
-        $method->setAccessible(true);
-        $this->assertEquals('TraitJob', $method->invoke($this->traitJob));
+        $method = $this->getReflectionMethod($this->traitJob, 'getClassName');
+        $this->assertEquals('LogsShopifyTraitJob', $method->invoke($this->traitJob));
     }
 }
 
-class TraitJob
+class LogsShopifyTraitJob
 {
     use LogsShopify;
 
@@ -78,6 +74,6 @@ class TraitJob
      */
     protected function getClassName(): string
     {
-        return 'TraitJob';
+        return 'LogsShopifyTraitJob';
     }
 }
