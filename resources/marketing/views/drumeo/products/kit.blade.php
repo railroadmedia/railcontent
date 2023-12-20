@@ -10,7 +10,7 @@
     <meta name="description" content="Everything you need to start playing the drums.">
     <meta property="og:description" content="Everything you need to start playing the drums.">
 
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/share-image2.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)//marketing/drumeo/products/kit/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -163,7 +163,7 @@
             <h2 class="leading-tight mb-5"><strong>All in one tidy package.</strong></h2>
             <div class="mx-auto max-w-4xl px-3">
                 <img class="transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/e-kit-chart.png"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)//marketing/drumeo/products/kit/e-kit-chart2.png"
                 >
             </div>
         </div>
@@ -214,27 +214,27 @@
                             @php
                                 $gridItems = [
                                     [
-                                    'img' => 'marketing/drumeo/shop/stickbag/black-suede-m.jpg',
+                                    'img' => 'marketing/drumeo/products/kit/1-save.jpg',
                                     'title' => 'Save your hands (and ears) with mesh heads.',
                                     'desc' => 'Most entry-level e-kits use hard rubber pads that lack the sensitivity and feel of a real drum set. The Alesis Nitro Max features tightly-woven premium mesh heads that let you practice anywhere, anytime without disturbing family or neighbors.',
                                     ],
                                     [
-                                    'img' => 'marketing/drumeo/shop/stickbag/black-suede-m.jpg',
+                                    'img' => 'marketing/drumeo/products/kit/2-bigger.jpg',
                                     'title' => 'A bigger snare drum.',
                                     'desc' => 'Another reason to love this kit. The Nitro Max features a 10” snare with TWO strike zones – one in the center and one for rimshots. This gives your more sonic options AND helps you play with better technique and ergonomics. (Most entry-level kits have a tiny 8” snare.)',
                                     ],
                                     [
-                                    'img' => 'marketing/drumeo/shop/stickbag/black-suede-m.jpg',
+                                    'img' => 'marketing/drumeo/products/kit/3-favourite.jpg',
                                     'title' => 'Play your favorite songs.',
                                     'desc' => 'Wirelessly connect your phone and choose your favorite songs to jam along with. The Nitro Max seamlessly mixes your drumming into the music – no cables required. Simple toss your phone or tablet on the built-in mount and start jamming.',
                                     ],
                                     [
-                                    'img' => 'marketing/drumeo/shop/stickbag/black-suede-m.jpg',
+                                    'img' => 'marketing/drumeo/products/kit/4-improve.jpg',
                                     'title' => 'Improve your timing & feel.',
                                     'desc' => 'The perfect practice kit. The Nitro Max includes a built-in metronome trainer to help you develop your internal clock without any extra hardware. You’ll improve faster because the metronome tells you if you’re ahead, behind or just right.',
                                     ],
                                     [
-                                    'img' => 'marketing/drumeo/shop/stickbag/black-suede-m.jpg',
+                                    'img' => 'marketing/drumeo/products/kit/5-choose.jpg',
                                     'title' => 'Choose your favorite kit sounds.',
                                     'desc' => 'The Nitro Max Module features 32 built-in kit sounds by BFD drums – some of the most sampled drum sounds in music production history. That means you’ll literally sound like the original drum track on your favorite songs.',
                                     ],
@@ -280,7 +280,7 @@
             <h2 class="leading-tight mb-7 sm:mb-10"><strong>Play your first beats<br class="sm:hidden"> <img src="https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/products/kit/arrow-blue.svg" alt="Arrow" class="w-10 lg:w-12 mx-3"> Write your first song.</strong></h2>
             <div class="flex flex-wrap sm:flex-nowrap justify-center text-left mb-8 sm:mb-16 lg:mb-20">
                 <div class="mb-5 sm:mb-0 sm:pr-7 sm:w-7/12 flex-grow-0">
-                    <div class="h-full rounded-xl p-7 sm:p-10 pt-48 bg-black text-white flex items-end bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/new-drummers-image.jpg');">
+                    <div class="h-full rounded-xl p-7 sm:p-10 pt-48 bg-black text-white flex items-end bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/new-drummers-image2.jpg');">
                         <div>
                             <h3 class="leading-tight mb-3"><strong>New Drummers</strong></h3>
                             <p class="leading-normal max-w-lg mx-0">Get started on the drums with an affordable e-kit that gives you all the features of a premium drum set. This is the perfect way to dip your toe into the waters of drumming without breaking the bank.</p>
@@ -595,12 +595,12 @@
                 </div>
                 <div
                     class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0 hidden sm:block">
-                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl pb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/collage.png" alt="collage">
+                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl pb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/products/kit/collage2.png" alt="collage">
                 </div>
             </div>
         </div>
         <div class="w-full sm:hidden text-center py-8">
-            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/collage.png" alt="collage">
+            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/kit/collage2.png" alt="collage">
         </div>
     </section>
 
