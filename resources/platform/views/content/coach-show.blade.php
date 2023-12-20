@@ -65,7 +65,7 @@
         </div>
     @endif
 
-    @if ($hasFeaturedLessons)
+    {{-- @if ($hasFeaturedLessons)
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-8 tw-mb-[30px]">
             <div class="tw-flex tw-flex-row tw-mb-3">
                 <div class="tw-flex tw-flex-col tw-flex-grow">
@@ -102,7 +102,7 @@
                 </div>
             </div>
         </div>
-    @endif
+    @endif --}}
 
     @php
         $catalogueProps = [];
