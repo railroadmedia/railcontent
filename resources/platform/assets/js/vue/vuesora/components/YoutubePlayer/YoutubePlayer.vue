@@ -17,6 +17,7 @@ export default {
     components: {
         PlayerRanges,
     },
+
     props: {
         videoId: {
             type: [String, Number],
@@ -77,6 +78,7 @@ export default {
             default: 0
         }
     },
+
     data() {
         return {
             player: null,
@@ -87,6 +89,7 @@ export default {
             hasBeenPlayed: false,
         };
     },
+
     computed: {
         isMobileViewport: {
             cache: false,
@@ -143,16 +146,20 @@ export default {
             }
         });
     },
+
     beforeDestroy() {
         clearInterval(this.syncInterval);
     },
+
     methods: {
+        stopVideo() {
+            this.player.pauseVideo();
+        },
+
         setRange({ range }) {
             if (this.rangesVideoIds[range]) {
                 this.currentRange = range;
-
                 this.player.loadVideoById(this.rangesVideoIds[range], this.player.getCurrentTime());
-
                 window.localStorage.setItem('currentRange', range);
             }
         },

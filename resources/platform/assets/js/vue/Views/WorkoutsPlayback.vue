@@ -407,6 +407,7 @@ const getBrandSpecificParams = () => {
 };
 
 const openSlice = (title, index, startAt, loop) => {
+    mediaElementVueInstance.value.stopVideo(); //Pause Video when soundslice opens
     soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
     chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;
@@ -430,6 +431,6 @@ const handleCloseSoundslice = () => {
 };
 
 onMounted(() => {
-    console.log(props.videoProps)
+    //console.log(props.videoProps)
 })
 </script>

@@ -402,6 +402,10 @@ function getDefaultVolume() {
     }
 }
 
+function stopVideo() {
+    mediaElement.value.pause();
+}
+
 function playPause() {
     if (Date.now() - lastPlayPauseToggleTime.value < 200) {
         return;
