@@ -1,7 +1,6 @@
 <script setup>
 import { XIcon } from "@heroicons/vue/solid";
-import { vMaska } from 'maska';
-import { reactive, ref, onUpdated, onBeforeMount, watch } from 'vue';
+import { ref, onUpdated, onBeforeMount } from 'vue';
 const props = defineProps({
   initialValue: {
     type: String,
@@ -88,7 +87,6 @@ const props = defineProps({
 });
 
 const maskedValue = ref('');
-const bindedObject = reactive({});
 
 const emit = defineEmits(["onChange", "onFocus", "onEnter"]);
 
@@ -109,15 +107,11 @@ const getBaseInputStyles = () => `
   `
 
 onUpdated(() => {
-  emit('onChange', bindedObject.unmasked);
+  emit('onChange', maskedValue.value);
 })
 
 onBeforeMount(()=> {
   maskedValue.value = props.initialValue ? props.initialValue : '';
-})
-
-watch(() => props.initialValue, (value) => {
-    maskedValue.value = value;
 })
 </script>
 
@@ -130,7 +124,6 @@ watch(() => props.initialValue, (value) => {
       }}</label>
     <div class="tw-flex tw-relative">
       <input v-model="maskedValue"
-             v-maska="bindedObject"
              v-on:keypress.enter.prevent="onEnter"
              :data-maska="maskaConfig.dataMaska"
              :data-maska-tokens="maskaConfig.maskaTokens"
