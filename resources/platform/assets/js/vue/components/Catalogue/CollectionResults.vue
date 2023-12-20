@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-    import { onMounted, onUnmounted } from "vue";
+import {onMounted, onUnmounted, onUpdated} from "vue";
     import { useCollectionStore } from "../../../stores/collection";
 
     const props = defineProps({
@@ -48,11 +48,13 @@
     const collectionStore = useCollectionStore();
 
     const infiniteScrollEventHandler = () => {
+
         let scrollEl = document.querySelector('#content-container');
         const scroll_position = scrollEl.scrollTop + scrollEl.offsetHeight;
         const scroll_buffer = scrollEl.scrollHeight * 0.9;
 
         if (scroll_position >= scroll_buffer && props.currentPage < props.totalPages) {
+            console.log('infinitescroll')
             emit('onLoadMore');
         }
     }
@@ -63,5 +65,10 @@
 
     onUnmounted(()=>{
         document.querySelector('#content-container').removeEventListener("scroll", infiniteScrollEventHandler);
+    })
+
+    onUpdated(() => {
+        console.log('updated')
+        infiniteScrollEventHandler();
     })
 </script>
