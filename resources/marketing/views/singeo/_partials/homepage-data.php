@@ -1,28 +1,67 @@
     <?php
+    
+    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/bubbles/hailey-benedict.webp';
+    $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/bubbles/lisa-witt.webp';
+    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/bubbles/tony-lindsay.webp';
+    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/bubbles/chris-johnson.webp';
+    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/bubbles/julia-ziegler.webp';
+    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/bubbles/darcy-d.webp';
+    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/bubbles/shelea.webp';
+    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/bubbles/cate-canning.webp';
+
     $singeo = [
-
-        'youtube' => '139,000',
-        'facebook' => '23,000',
-        'instagram' => '9,900',
-
+        'bubbles' => [
+            [
+                'src' => $bubble1,
+                'classes' => 'absolute z-10 h-10 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]',
+            ],
+            [
+                'src' => $bubble2,
+                'classes' => 'absolute z-10 h-24 sm:h-28 lg:h-44 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]',
+            ],
+            [
+                'src' => $bubble3,
+                'classes' => 'absolute z-10 h-32 sm:h-40 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]',
+            ],
+            [
+                'src' => $bubble4,
+                'classes' => 'absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]',
+            ],
+            [
+                'src' => $bubble5,
+                'classes' => 'absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]',
+            ],
+            [
+                'src' => $bubble6,
+                'classes' => 'absolute z-10 h-28 sm:h-32 lg:h-48 transform -translate-x-1/2 -translate-y-1/2 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]',
+            ],
+            [
+                'src' => $bubble7,
+                'classes' => 'absolute z-10 h-28 sm:h-36 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]',
+            ],
+            [
+                'src' => $bubble8,
+                'classes' => 'absolute z-10 h-12 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]',
+            ],
+        ],
         'features' => [
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/vocal-lessons-icon.svg',
+                'image' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/vocal-lessons-icon.svg',
                 'title' => 'Vocal Lessons',
                 'desc' => 'Step-by-step video<br class="hidden sm:inline"> lessons on every topic.',
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/artist-course-icon.svg',
+                'image' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/artist-course-icon.svg',
                 'title' => 'Artist Courses',
                 'desc' => 'Courses and live events<br class="hidden sm:inline"> with singing heroes. ',
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/songs-icon.svg',
+                'image' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/songs-icon.svg',
                 'title' => '1000+ Songs',
                 'desc' => 'Sing your favorite<br class="hidden sm:inline"> from every style & era.',
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/support-icon.svg',
+                'image' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/support-icon.svg',
                 'title' => '24/7 Support',
                 'desc' => 'A global community<br class="hidden sm:inline"> of students & teachers.',
             ],
@@ -30,81 +69,81 @@
         'slides' => [
             [
                 'desc' => 'You’re going to learn how your voice works, how to strengthen it – and to sing with confidence.',
-                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/testimonials/CodyMcManus.png',
+                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/bubbles/CodyMcManus.webp',
                 'name' => 'Cody McManus',
                 'credit' => 'Music Producer',
             ],
             [
                 'desc' => 'Singeo really works. The skills are attainable, easy to learn, and lots of fun.',
-                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/testimonials/SylviaCantu.jpg',
+                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/bubbles/SylviaCantu.webp',
                 'name' => 'Sylvia Cantu',
                 'credit' => 'Singeo Student from USA',
             ],
             [
                 'desc' => 'I took traditional singing lessons in the past and didn’t have nearly this much fun.',
-                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/testimonials/AmberKissler.jpg',
+                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/bubbles/AmberKissler.webp',
                 'name' => 'Amber Kissler',
                 'credit' => 'Singeo Student from USA',
             ],
         ],
         "gridItems" => [
             [
-                'image' => 'marketing/singeo/membership/homepage/2023/method.jpg',
+                'image' => 'marketing/singeo/membership/homepage/webp-format/method.webp',
                 'title' => '10-Level Curriculum',
                 'desc' => 'Turn your desire to sing into passionate practice with useful lessons and exercises.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/method.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/method.webp',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/singeo/membership/homepage/2023/practical-assignments.jpg',
+                'image' => 'marketing/singeo/membership/homepage/webp-format/practical-assignments.webp',
                 'title' => 'Practical Assignments',
                 'desc' => 'You\'ll always have on-screen assignments and practice tools to guide you along the way.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/practical-assignments.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/practical-assignments.webp',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/singeo/membership/homepage/2023/guided-workouts.jpg',
+                'image' => 'marketing/singeo/membership/homepage/webp-format/guided-workouts.webp',
                 'title' => 'Warm-Up Routines',
                 'desc' => 'Access our quick warm-up routines to fit any schedule, ranging from 5 to 20 minutes.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/guided-workouts.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/guided-workouts.webp',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/singeo/membership/homepage/2023/world-class-teachers.jpg',
+                'image' => 'marketing/singeo/membership/homepage/webp-format/world-class-teachers.webp',
                 'title' => 'World-Class Teachers',
                 'desc' => 'Gain insights from vocal coaches, Grammy-Award winners, and chart-topping performers.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/world-class-teachers.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/world-class-teachers.webp',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/singeo/membership/homepage/2023/downloadable-videos.jpg',
+                'image' => 'marketing/singeo/membership/homepage/webp-format/downloadable-videos.webp',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/downloadable-videos.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/downloadable-videos.webp',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/singeo/membership/homepage/2023/personalized-support.jpg',
+                'image' => 'marketing/singeo/membership/homepage/webp-format/personalized-support.webp',
                 'title' => 'Personalized Support',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global singing community.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/personalized-support.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/personalized-support.webp',
                     ],
                 ]
             ],
