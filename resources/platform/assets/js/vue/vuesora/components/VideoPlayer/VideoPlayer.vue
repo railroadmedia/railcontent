@@ -8,12 +8,12 @@ import ContentService from '../../assets/js/services/content';
 import PlayerUtils from './player-utils';
 import ChromeCastPlugin from './chromecast';
 // import ThemeClasses from '../../mixins/ThemeClasses';
+// import EventHandlers from './event-handlers';
 import PlayerButton from './_PlayerButton.vue';
 import PlayerProgress from './_PlayerProgress.vue';
 import PlayerVolume from './_PlayerVolume.vue';
 import PlayerSettings from './_PlayerSettings.vue';
 import PlayerCaptions from './_PlayerCaptions.vue';
-// import EventHandlers from './event-handlers';
 import LoadingAnimation from '../LoadingAnimation/LoadingAnimation.vue';
 import PlayerShortcuts from './_PlayerShortcuts.vue';
 import PlayerError from './_PlayerError.vue';
@@ -200,6 +200,10 @@ const timeouts = ref({
 });
 const isTransitioning = ref(false);
 const currentRange = ref('original');
+//Had to define a function as a ref to expose it outside of the component
+const pauseVideo = ref(() => {
+    mediaElement.value.pause();
+})
 
 defineExpose({
     ...props,
@@ -221,6 +225,7 @@ defineExpose({
     mousedown,
     currentMouseX,
     currentVolume,
+    currentTimeInSeconds,
     settingsDrawer,
     captionsDrawer,
     chromeCast,
@@ -237,6 +242,7 @@ defineExpose({
     hasBeenPlayed,
     currentPlaybackRate,
     hasRetriedSource,
+    pauseVideo
 });
 
 //watchers
@@ -400,10 +406,6 @@ function getDefaultVolume() {
             volume: Number(window.localStorage.getItem('playerVolume')),
         });
     }
-}
-
-function stopVideo() {
-    mediaElement.value.pause();
 }
 
 function playPause() {

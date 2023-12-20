@@ -1,10 +1,10 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=c7622e3b85671176843feb40576d0a82",
+    "/platform/js/app.js": "/platform/js/app.js?id=fd30cf2ae6cd6c5d7daaea097fa0b0f3",
     "/platform/js/profile.js": "/platform/js/profile.js?id=62a1967802145926e45ba2d46539e132",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=bcd24582725b60d2023289a74eec86a3",
     "/platform/js/books.js": "/platform/js/books.js?id=599936459d2c88443928c73bfa9cdc15",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=c3877480fc7ec36d0c46d6b29b053d99",
-    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=ddaee2440e4d8b800f8ebf117be2b2fc",
+    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=53a7ef9e941dd04a7972990bd3326f65",
     "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=7739dc38d7af3c4f267e547765b87317",
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=60bc7a66731a470e6468314dc86af1db",
     "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=5006833202be7cd39f7e0e4b91e32e31",
@@ -21,13 +21,13 @@
     "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=ff9545bc58abe5a99fa13e8706f200c0",
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=ed9b9bf87c6a641c2720a715e2e539e6",
     "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=30b74f24eaf4332b7dbc7dc44520d75f",
-    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=daa6922ea2ce556038509e35f18ac807",
+    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=6893baf623847ce4c9d2769ed8b56abf",
     "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=a3dd32e354294bbb2381742a2ed30448",
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=73bfae85612df5f665be43d681912669",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=960b6526c962623a6f20882cdfadf455",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=1644e6f1c77f4de071c542c56c32f820",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=00490d08cda41ec54ee665a4f232166b",
-    "/platform/css/app.css": "/platform/css/app.css?id=dc95cd91b5aef18ca78a107702a477ab",
+    "/platform/css/app.css": "/platform/css/app.css?id=ac94493161a4b0cc485fa224f4206d31",
     "/marketing/css/app.css": "/marketing/css/app.css?id=e1deb472b39f72c60c6a7da94c4157b3",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=a7b8f4f9438a4b8e7b9520cbf84b31ef"
 }

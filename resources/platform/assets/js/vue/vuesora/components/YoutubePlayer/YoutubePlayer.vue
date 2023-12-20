@@ -117,7 +117,8 @@ export default {
 
     watch: { 
         seekToTime: function(newVal, oldVal) { // watch it
-            this.player.seekTo(newVal)
+            this.player.seekTo(newVal);
+            pauseVideo(); //Pause when seeking? 
         }
     },
 
@@ -152,7 +153,7 @@ export default {
     },
 
     methods: {
-        stopVideo() {
+        pauseVideo() {
             this.player.pauseVideo();
         },
 

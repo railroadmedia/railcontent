@@ -364,22 +364,20 @@ const handleVideoPlay = (payload) => {
     }
     if (progressTracker == null) {
         progressTracker = new ProgressTracker();
-
         const sessionTokenElement = document.querySelector('#sessionToken');
-
-        if (mediaElementVueInstance) {
+        if (mediaElementVueInstance.value) {
             window.addEventListener('unload', (event) => {
                 progressTracker.send({
-                    mediaId: mediaElementVueInstance.videoId,
+                    mediaId: mediaElementVueInstance.value.videoId,
                     mediaType: 'video',
                     mediaCategory: 'vimeo',
-                    watchPosition: mediaElementVueInstance.currentTimeInSeconds
-                        || mediaElementVueInstance.currentTime,
-                    totalDuration: mediaElementVueInstance.videoLength
-                        || mediaElementVueInstance.totalDuration,
+                    watchPosition: mediaElementVueInstance.value.currentTimeInSeconds
+                        || mediaElementVueInstance.value.currentTime,
+                    totalDuration: mediaElementVueInstance.value.videoLength
+                        || mediaElementVueInstance.value.totalDuration,
                     sessionToken: sessionTokenElement.value || null,
-                    brand:mediaElementVueInstance.brand,
-                    contentId: mediaElementVueInstance.contentId
+                    brand: props.videoProps.brand,
+                    contentId: mediaElementVueInstance.value.contentId
                 });
             });
         }
@@ -393,7 +391,6 @@ const handleVideoPause = (payload) => {
 };
 
 const handleVideoEnd = () => {
-    console.log('handle video end')
     isRelatedSectionOpen.value = true;
 };
 
@@ -407,7 +404,9 @@ const getBrandSpecificParams = () => {
 };
 
 const openSlice = (title, index, startAt, loop) => {
-    if(props.videoProps.videoType === 'youtube') mediaElementVueInstance.value.stopVideo();
+    if (mediaElementVueInstance.value) {
+        mediaElementVueInstance.value.pauseVideo();
+    }  
     soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
     chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;

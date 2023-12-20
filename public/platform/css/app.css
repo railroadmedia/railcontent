@@ -25939,6 +25939,18 @@ a:visited{
   --tw-rotate: 15deg !important;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
 }
+.tw-group:hover .group-hover\:tw-text-gray-300{
+  --tw-text-opacity: 1 !important;
+  color: rgb(209 213 219 / var(--tw-text-opacity)) !important;
+}
+.tw-group:hover .group-hover\:tw-text-\[\#EDEDED\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(237 237 237 / var(--tw-text-opacity)) !important;
+}
+.tw-group:hover .group-hover\:tw-text-\[\#e5e7eb\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(229 231 235 / var(--tw-text-opacity)) !important;
+}
 .tw-group:hover .group-hover\:tw-underline{
   text-decoration-line: underline !important;
 }
@@ -26445,6 +26457,10 @@ a:visited{
 :is(.tw-dark .dark\:disabled\:tw-text-\[\#445F74\]:disabled){
   --tw-text-opacity: 1 !important;
   color: rgb(68 95 116 / var(--tw-text-opacity)) !important;
+}
+.tw-group:hover :is(.tw-dark .group-hover\:dark\:tw-text-white){
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 @media (min-width: 640px){
   .sm\:tw-absolute{
