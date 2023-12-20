@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
+import {onMounted, computed, onBeforeMount} from "vue";
 import { useCollectionStore } from "../../../stores/collection";
 import CoachesGridCatalogue from "../../vuesora/views/catalogues/CoachesGridCatalogue";
 import CollectionFilterWrapper from '../Filter/CollectionFilterWrapper.vue';
@@ -317,6 +317,10 @@ const handleTabChange = (tab) => {
     collectionStore.switchTab(tab);
 }
 
+onBeforeMount(() => {
+    collectionStore.getURLParams();
+})
+
 onMounted(() => {
     // console.log(props.collectionType)
     // console.log(props.title)
@@ -332,7 +336,5 @@ onMounted(() => {
         tabData: getFirstTabData.value,
         filterableValues: props.filterableValues,
     })
-
-    collectionStore.getURLParams();
 })
 </script>
