@@ -1,6 +1,6 @@
 <header class="text-center px-5 sm:px-6 py-44 sm:py-52 lg:py-56 relative overflow-hidden" style="background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);">
     <div class="container max-w-6xl mx-auto relative z-20">
-        <h1 class="relative w-auto inline-block text-4xl sm:text-5xl lg:text-6xl">
+        <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl">
             <strong>{!! $header !!}</strong>
             @if(!empty($underline))
                 <img class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%;filter: brightness(62%) hue-rotate(169deg);" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2023/underline.png" alt="underline" fetchpriority="high">
