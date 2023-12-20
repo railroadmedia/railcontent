@@ -763,7 +763,7 @@ return [
                 'sortBy' => '-published_on',
             ],
             'challenge' => [
-                'name' => 'Challenge',
+                'name' => 'Challenges',
                 'icon' => 'icon-courses',
                 'description' => "... ",
                 'allowableFilters' => ['difficulty','topic','style'],
@@ -945,7 +945,7 @@ return [
                 'sortBy' => '-published_on',
             ],
             'challenge' => [
-                'name' => 'Challenge',
+                'name' => 'Challenges',
                 'icon' => 'icon-courses',
                 'description' => "... ",
                 'allowableFilters' => ['difficulty','topic','style'],
@@ -1058,7 +1058,7 @@ return [
                 'sortBy' => '-published_on',
             ],
             'challenge' => [
-                'name' => 'Challenge',
+                'name' => 'Challenges',
                 'icon' => 'icon-courses',
                 'description' => "... ",
                 'allowableFilters' => ['difficulty','topic','style'],
@@ -1156,7 +1156,7 @@ return [
                 'sortBy' => '-published_on',
             ],
             'challenge' => [
-                'name' => 'Challenge',
+                'name' => 'Challenges',
                 'icon' => 'icon-courses',
                 'description' => "... ",
                 'allowableFilters' => ['difficulty','topic','style'],

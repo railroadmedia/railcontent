@@ -115,7 +115,11 @@ export const useCollectionStore = defineStore({
         getURLParams () {
             const params = new URLSearchParams(window.location.search);
 
-            if (params.get('term')) this.filter.searchTerm = params.get('term');
+            if (params.get('term')) {
+                this.filter.searchTerm = params.get('term');
+            } else if (params.get('title')) {
+                this.filter.searchTerm = params.get('title');
+            }
             if (params.get('sort')) this.filter.sort = params.get('sort');
             if (params.getAll('included_fields[]').length > 0) {
                 this.filter.includedFields = params.getAll('included_fields[]');
