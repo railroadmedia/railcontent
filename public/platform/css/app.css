@@ -22106,6 +22106,12 @@ a:visited{
 .tw-mt-auto{
   margin-top: auto !important;
 }
+.tw-mr-\[4px\]{
+  margin-right: 4px !important;
+}
+.tw-mr-\[3px\]{
+  margin-right: 3px !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
