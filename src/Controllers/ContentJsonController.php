@@ -137,8 +137,8 @@ class ContentJsonController extends Controller
         );
 
         $filters = $contentData['filter_options'];
-
-        // Add "All" option, but not in all cases
+        if(!$request->has('count_filter_items'))
+        {// Add "All" option, but not in all cases
         foreach ($filters as $key => $filterOptions) {
             if (is_array($filterOptions)) {
                 $filtersToExclude = ['content_type', 'instructor', 'focus', 'style'];
@@ -159,6 +159,7 @@ class ContentJsonController extends Controller
                     array_unshift($filters[$key], 'All');
                 }
             }
+        }
         }
 
         return reply()->json($contentData['results'], [
