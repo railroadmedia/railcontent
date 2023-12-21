@@ -152,34 +152,18 @@
 
     <!-- ONLY SHOW TYPE ON SEARCHES -->
     <template v-if="is_search">
-      <div v-if="item.type === 'song'" class="
-          tw-hidden
-          sm:tw-flex
-          tw-flex-col
-          tw-uppercase
-          tw-justify-center
-          sm:tw-w-[110px] xl:tw-flex-shrink-0
-          tw-text-center
-          tw-text-xs
-        ">
-        {{ itemStyle }}
-      </div>
-      <div v-if="mappedData.column_data && mappedData.column_data.length" class="
-          tw-hidden
-          sm:tw-flex
-          tw-flex-col
-          tw-uppercase
-          tw-justify-center
-          sm:tw-w-[110px] xl:tw-flex-shrink-0
-          tw-text-center
-          tw-text-xs
-        ">
-          <template v-if="brand !== 'pianote'">
-            {{ mappedData.column_data[0] }}
-          </template>
-          <template v-if="brand === 'pianote'">
-            {{ mappedData.column_data[1] }}
-          </template>
+      <div v-if="mappedData.column_data && mappedData.column_data.length" 
+          class="
+            tw-hidden
+            sm:tw-flex
+            tw-flex-col
+            tw-uppercase
+            tw-justify-center
+            sm:tw-w-[110px] xl:tw-flex-shrink-0
+            tw-text-center
+            tw-text-xs"
+      >  
+        {{ mappedData.column_data[0] }}   
       </div>
       <div v-if="item.type !== 'song'" class="
           tw-hidden
@@ -194,7 +178,9 @@
         {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}
       </div>
       <div class="
-          tw-flex tw-flex-col
+          tw-hidden
+          sm:tw-flex
+          tw-flex-col
           tw-uppercase
           tw-justify-center
           sm:tw-w-[110px] xl:tw-flex-shrink-0
