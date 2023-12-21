@@ -1,7 +1,7 @@
 @foreach ($product->bundles as $key => $bundle)
 
     <div class="flex mb-5 sm:mb-8 sm:items-start lg:items-center">
-        <div class="relative overflow-hidden w-52 mb-4 sm:mb-0 sm:mr-5 mx-0 flex-shrink-0">
+        <div class="relative overflow-hidden w-52 mb-4 sm:mb-0 mr-5 mx-0 flex-shrink-0">
             <div class="w-full overflow-hidden rounded-lg relative bg-cover bg-top border border-gray-300"
                 style="padding-bottom: 100%;
                 @if(!empty($bundle['thumbnail']))

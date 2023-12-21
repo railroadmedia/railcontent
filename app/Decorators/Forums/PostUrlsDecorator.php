@@ -3,13 +3,15 @@
 namespace App\Decorators\Forums;
 
 use Carbon\Carbon;
+use Exception;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Request;
 
 class PostUrlsDecorator
 {
-    const HTML_HREF_REGEX_PATTERN = '#<a[^>]+href=\"(.*?)\"[^>]*>#';
+    public const HTML_HREF_REGEX_PATTERN = '#<a[^>]+href=\"(.*?)\"[^>]*>#';
 
     private $contentService;
 
@@ -23,7 +25,12 @@ class PostUrlsDecorator
 
     public function decorate($posts)
     {
+        $unifiedLaunchDate = Carbon::parse(config('ecommerce.launch_dates.unified'));
         foreach ($posts as $index => $post) {
+            $postDate = Carbon::parse($posts[$index]['updated_at']);
+            if ($unifiedLaunchDate->lessThan($postDate)) {
+                continue;
+            }
             $posts[$index]['url'] = route('forums.jump-to-post',['brand' => config('railnotifications.brand'), 'postId' => $post['id']]);
             $posts[$index]['created_at_diff'] = Carbon::parse($posts[$index]['created_at'])
                 ->diffForHumans();
@@ -102,52 +109,52 @@ class PostUrlsDecorator
         $numberOfSegments = count($segments);
 
         if (in_array($lastSegment, [
-            'lessons',
-            'routines',
-            'courses',
-            'songs',
-            'coaches',
-            'packs',
-            'quick-tips',
-            'podcasts',
-            'student-focus',
-            'question-and-answer',
-            'student-reviews',
-            'boot-camps',
-            'chords-and-scales',
-            'bootcamps',
-            'chords-scales',
-            'library',
-            'recording',
-            'play-alongs',
             'archives',
-            'spotlight',
-            'the-history-of-electronic-drums',
             'backstage-secrets',
-            'student-collaborations',
-            'live-streams',
-            'solos',
-            'boot-amps',
-            'gear-guides',
-            'performances',
-            'in-rhythm',
-            'challenges',
-            'on-the-road',
-            'diy-drum-experiments',
-            'rhythmic-adventures-of-captain-carson',
-            'study-the-greats',
-            'rhythms-from-another-planet',
-            'tama-drums',
-            'paiste-cymbals',
             'behind-the-scenes',
-            'exploring-beats',
-            'sonor-drums',
-            'rudiments',
+            'boot-amps',
             'boot-camps',
-            'support',
+            'boot-camps',
+            'bootcamps',
+            'challenges',
+            'chords-and-scales',
+            'chords-scales',
+            'coaches',
+            'courses',
+            'diy-drum-experiments',
+            'exploring-beats',
+            'gear-guides',
+            'in-rhythm',
+            'lessons',
+            'library',
             'live',
+            'live-streams',
+            'on-the-road',
+            'packs',
+            'paiste-cymbals',
+            'performances',
+            'play-alongs',
+            'podcasts',
+            'question-and-answer',
+            'quick-tips',
+            'recording',
+            'rhythmic-adventures-of-captain-carson',
+            'rhythms-from-another-planet',
+            'routines',
+            'rudiments',
             'schedule',
             'shows',
+            'solos',
+            'songs',
+            'sonor-drums',
+            'spotlight',
+            'student-collaborations',
+            'student-focus',
+            'student-reviews',
+            'study-the-greats',
+            'support',
+            'tama-drums',
+            'the-history-of-electronic-drums',
         ])) {
             $url = str_replace(
                 [
@@ -188,72 +195,28 @@ class PostUrlsDecorator
 
                 return $url;
             }
-
             ConfigService::$availableBrands = $availableBrands;
-
             return $url;
         } elseif (is_numeric($lastSegment)) {
             $content = $this->contentService->getById($lastSegment);
             ConfigService::$availableBrands = $availableBrands;
-
             return $content['url'] ?? '';
-
         } elseif ($numberOfSegments == 3 && $segments[1] == 'semester-packs') {
-            $content =
-                $this->contentService->getBySlugAndType($lastSegment, 'semester-pack')
-                    ->first();
-            ConfigService::$availableBrands = $availableBrands;
-
-            return $content['url'];
+            return $this->GetContentBySlugAndTypeSetBrands($lastSegment, $availableBrands, 'semester-pack');
         } elseif ($numberOfSegments == 3 && $segments[1] == 'coaches') {
-            $content =
-                $this->contentService->getBySlugAndType($lastSegment, 'instructor')
-                    ->first();
-            ConfigService::$availableBrands = $availableBrands;
-
-            return $content['url'];
+            return $this->GetContentBySlugAndTypeSetBrands($lastSegment, $availableBrands, 'instructor');
         } elseif ($numberOfSegments == 3 && $segments[1] == 'learning-paths') {
-            $content =
-                $this->contentService->getBySlugAndType($lastSegment, 'learning-path')
-                    ->first();
-            ConfigService::$availableBrands = $availableBrands;
-
-            return $content['url'];
+            return $this->GetContentBySlugAndTypeSetBrands($lastSegment, $availableBrands, 'learning-path');
         } elseif ($numberOfSegments == 4 && $segments[1] == 'packs') {
-            $content =
-                $this->contentService->getBySlugAndType($lastSegment, 'pack-bundle')
-                    ->first();
-            ConfigService::$availableBrands = $availableBrands;
-
-            return $content['url'];
+            return $this->GetContentBySlugAndTypeSetBrands($lastSegment, $availableBrands, 'pack-bundle');
         } elseif ($numberOfSegments == 5 && $segments[1] == 'packs') {
-            $content =
-                $this->contentService->getBySlugAndType($lastSegment, 'pack-bundle-lesson')
-                    ->first();
-            ConfigService::$availableBrands = $availableBrands;
-
-            return $content['url'];
+            return $this->GetContentBySlugAndTypeSetBrands($lastSegment, $availableBrands, 'pack-bundle-lesson');
         } elseif ($numberOfSegments == 4 && $segments[1] == 'semester-packs') {
-            $content =
-                $this->contentService->getBySlugAndType($lastSegment, 'semester-pack-lesson')
-                    ->first();
-            ConfigService::$availableBrands = $availableBrands;
-
-            return $content['url'];
+            return $this->GetContentBySlugAndTypeSetBrands($lastSegment, $availableBrands, 'semester-pack-lesson');
         } elseif ($numberOfSegments == 4 && $segments[1] == 'learning-paths') {
-            $content =
-                $this->contentService->getBySlugAndType($lastSegment, 'learning-path-level')
-                    ->first();
-            ConfigService::$availableBrands = $availableBrands;
-
-            return $content['url'];
+            return $this->GetContentBySlugAndTypeSetBrands($lastSegment, $availableBrands, 'learning-path-level');
         } elseif (in_array('packs', $segments) && !is_numeric($lastSegment)) {
-            $content =
-                $this->contentService->getBySlugAndType($lastSegment, 'pack')
-                    ->first();
-            ConfigService::$availableBrands = $availableBrands;
-
-            return $content['url'];
+            return $this->GetContentBySlugAndTypeSetBrands($lastSegment, $availableBrands, 'pack');
         } elseif ($lastSegment == 'loops') {
             $url = str_replace(
                 [
@@ -283,6 +246,14 @@ class PostUrlsDecorator
         return $url;
     }
 
+    private function GetContentBySlugAndTypeSetBrands($lastSegment, $availableBrands, $type) {
+        $content =
+            $this->contentService->getBySlugAndType($lastSegment, $type)
+                ->first();
+        ConfigService::$availableBrands = $availableBrands;
+        return $content['url'];
+    }
+
     /**
      * @param $matches
      * @return array
@@ -298,7 +269,7 @@ class PostUrlsDecorator
                 continue;
             }
             try {
-                $initialRequest = \Request::create($url);
+                $initialRequest = Request::create($url);
 
                 if (!in_array($initialRequest->getHttpHost(), [
                     'www.drumeo.com',
@@ -311,13 +282,13 @@ class PostUrlsDecorator
                     continue;
                 }
 
-                $oldRequest = \Request::create($url);
+                $oldRequest = Request::create($url);
                 $segments = $this->formatNewUrl($oldRequest->segments(), $url);
                 if ($oldRequest->getQueryString()) {
                     $segments = $segments.'?'.$oldRequest->getQueryString();
                 }
                 $urls[$match] = $segments;
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 continue;
             }
 
