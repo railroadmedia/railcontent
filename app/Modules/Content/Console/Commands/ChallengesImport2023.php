@@ -16,6 +16,42 @@ class ChallengesImport2023 extends Command
     protected $signature = 'workouts:import-challenges {startIndex=0} {endIndex=-1}';
     protected $description = 'Import challenge data from file';
 
+
+    const PERMISSIONS = [
+        'guitareo' =>[
+            'basic' => [
+                91,
+                92,
+                52
+            ],
+            'plus' => [92],
+        ],
+        'drumeo' =>[
+            'basic' => [
+                91,
+                92,
+                1
+            ],
+            'plus' => [92],
+        ],
+        'pianote' =>[
+            'basic' => [
+                91,
+                92,
+                77
+            ],
+            'plus' => [92],
+        ],
+        'singeo' =>[
+            'basic' => [
+                91,
+                92,
+                73
+            ],
+            'plus' => [92],
+        ]
+    ];
+
     const CHAPTER_THUMBS = [
         'drumeo' =>[
             'https://d1923uyy6spedc.cloudfront.net/Chapter1-1701464222.jpg',
@@ -96,10 +132,12 @@ class ChallengesImport2023 extends Command
                 $content->setTitle($contentTitle);
                 $content->setDifficulty($this->getValue($data, $headersRow, 'difficulty'));
                 $content->setXP($this->getValue($data, $headersRow, 'xp'));
+                $content->setTotalXP($this->getValue($data, $headersRow, 'total_xp'));
                 $content->setRegistrationUrl($this->getValue($data, $headersRow, 'registration_url'));
                 $content->setTopic($this->getValue($data, $headersRow, 'topic'));
                 $content->setInstructor($this->getValue($data, $headersRow, 'instructor'));
                 $content->setSoundsliceSlug($this->getValue($data, $headersRow, 'soundslice_slug'));
+                $content->setPermissions(self::PERMISSIONS[$content->brand]['basic']);
                 $chapter_1_d = $this->getValue($data, $headersRow, 'chapter_1_desc');
                 $chapter_1_t = $this->getValue($data, $headersRow, 'chapter_1_timecode');
                 $chapter_2_d = $this->getValue($data, $headersRow, 'chapter_2_desc');
@@ -137,8 +175,13 @@ class ChallengesImport2023 extends Command
                 $content->setLogo($this->getValue($data, $headersRow, 'logo_image_url'));
                 $content->setHeaderImage($this->getValue($data, $headersRow, 'header_image_url'));
 
-                //$content->setVideo($this->getValue($data, $headersRow, 'video'));
-
+                if($this->getValue($data, $headersRow, 'vimeo_video_id') !== 'NULL' && $this->getValue($data, $headersRow, 'duration') !== 'NULL') {
+                    $content->setVideo(
+                        $this->getValue($data, $headersRow, 'vimeo_video_id'),
+                        $this->getValue($data, $headersRow, 'duration'),
+                        'vimeo'
+                    );
+                }
 
                 $content->save();
 
@@ -146,7 +189,7 @@ class ChallengesImport2023 extends Command
                 if($stagingParentId && isset($mappingIds[$stagingParentId])) {
 
 $parentId = $mappingIds[$stagingParentId];
-                        $content->setParentId($parentId);
+                        $content->setParentId($parentId, $this->getValue($data, $headersRow, 'child_position'));
                         $challengePartIds[] = $content->id;
                         $content->save();
 

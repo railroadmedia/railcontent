@@ -194,6 +194,7 @@ class Content extends Model
         'enrollment_start_time' => 'datetime',
         'enrollment_end_time' => 'datetime',
         'soundslice_slug' => 'string',
+        'total_xp' => 'integer',
     ];
 
     public function newEloquentBuilder($query): ContentBuilder
@@ -355,6 +356,13 @@ class Content extends Model
         }
     }
 
+    public function setTotalXP($value)
+    {
+        if ($value) {
+            $this->setField('total_xp', $value);
+            $this->total_xp = $value;
+        }
+    }
     public function setRegistrationUrl($value)
     {
         if ($value && $value != 'NULL') {
@@ -441,7 +449,7 @@ if($contentInstructor->count() == 0) {
 
     public function setVideo($value, $duration = '', $type = 'vimeo')
     {
-        if(!$value){
+        if(!$value ){
             return;
         }
         $video =
@@ -480,7 +488,7 @@ if($contentInstructor->count() == 0) {
             $this->setField('video', $id);
     }
 
-    public function setParentId($value)
+    public function setParentId($value, $childPosition = 1)
     {
         $hierarhy =
             ContentHierarchy::query()
@@ -492,7 +500,7 @@ if($contentInstructor->count() == 0) {
             $hierarhy = new ContentHierarchy();
             $hierarhy->parent_id = $value;
             $hierarhy->child_id = $this->id;
-            $hierarhy->child_position = 1;
+            $hierarhy->child_position = $childPosition;
             $hierarhy->created_on =
                 Carbon::now()
                     ->toDateTimeString();
