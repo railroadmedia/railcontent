@@ -385,16 +385,11 @@ class Content extends Model
                     ->first();
             if ($instructor) {
                 $contentInstructor = ContentInstructor::query()->where('content_id', '=', $this->id)->where('instructor_id', $instructor->id)->get();
-                foreach ($contentInstructor as $ci) {
-                       $ci->delete();
-                }
-                $fields = $this->fields->where('key', '=', 'instructor')
-                    ->where('value',$instructor->id)->where('content_id',$this->id)->collect();
-                foreach ($fields as $field) {
-                    $field->delete();
-                }
-
-                $this->setField('instructor', $instructor->id);
+if($contentInstructor->count() == 0) {
+    $this->setField('instructor', $instructor->id);
+}
+            }else{
+                Log::debug("Instructor not exist::: ($value) ");
             }
         }
     }
@@ -439,7 +434,7 @@ class Content extends Model
         $video =
             Content::query()
                 ->where($type.'_video_id', '=', $value)
-                ->orWhere('slug', '=', $type.'-video-'.$value)
+                //->orWhere('slug', '=', $type.'-video-'.$value)
                 ->first();
             if (!$video) {
                 $video = new Video();
@@ -448,7 +443,11 @@ class Content extends Model
                 $video->brand = $this->brand;
                 $video->slug = $type.'-video-'.$value;
                 $typeId = $type.'_video_id';
-                $video->$typeId = $value;
+                if($type == 'vimeo') {
+                    $video->vimeo_video_id = $value;
+                }else{
+                    $video->youtube_video_id = $value;
+                }
                 $video->length_in_seconds = $duration;
 
                 $video->published_on =
@@ -462,6 +461,7 @@ class Content extends Model
                     $video->setYoutubeVideoId($value);
                 }
             }
+
             $id = $video->id;
 
             $this->setField('video', $id);
