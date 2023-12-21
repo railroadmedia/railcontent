@@ -106,16 +106,17 @@ class ChallengesImport2023 extends Command
 
                 $contentTitle = $this->getValue($data, $headersRow, 'title');
                 $contentType = $this->getValue($data, $headersRow, 'type');
+                $contentSlug = $this->getValue($data, $headersRow, 'slug');
 
                 $content = Content::query()
                     ->where('type', '=', $contentType)
-                    ->where('title', '=', $contentTitle)
+                    ->where('slug', '=', $contentSlug)
                     ->first();
 
                 if (!$content) {
                     $content = new Content();
                     $content->type = $contentType;
-                    $content->slug = ContentHelper::slugify($contentTitle);
+                    $content->slug = $contentSlug;
                     $content->status = 'draft';
                         //$this->getValue($data, $headersRow, 'status');
                     $content->brand = $this->getValue($data, $headersRow, 'brand');
