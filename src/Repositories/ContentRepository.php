@@ -2410,6 +2410,8 @@ class ContentRepository extends RepositoryBase
             $filterOptionsArray[$filterOptionColumnName] = [];
         }
 
+        $countingQuery = clone($joinTablesQuery);
+
         if (!empty($groupBy)) {
             $joinTablesQuery->groupBy($groupBy);
         } else {
@@ -2418,17 +2420,38 @@ class ContentRepository extends RepositoryBase
 
         $tableResults = $joinTablesQuery->get();
 
+        $countingQuery->addSelect(
+            [ 'railcontent_content.id']
+        );
+        $groupBy[] = 'id';
+        $countingQuery->groupBy($groupBy);
+
+        $countingQueryResults = $countingQuery->get();
+
+        $counts = [];
         foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
             $filterOptionsArray[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
                 ->pluck($filterOptionName)
                 ->unique()
                 ->values()
                 ->toArray();
+            $counts[$filterOptionName] = $countingQueryResults->whereNotNull($filterOptionName)
+                ->unique(function ($item) use($filterOptionName) {
+                    return $item['id'].$item["$filterOptionName"];
+                })
+                ->pluck($filterOptionName)
+                ->countBy()
+                ->toArray();
 
             foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
+                $countingItems = '';
+                if (self::$countFilterOptionItems) {
+                    $nr = $counts[$filterOptionName][$filterOptionValueToClean];
+                    $countingItems = ' ('.$nr.')';
+                }
                 $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
                     trim(
-                        $filterOptionValueToClean
+                        $filterOptionValueToClean.$countingItems
                     )
                 );
             }
@@ -2486,8 +2509,12 @@ class ContentRepository extends RepositoryBase
             'artist' => ConfigService::$tableContent . '.artist',
             'type' => ConfigService::$tableContent . '.type',
             'instrument' => ConfigService::$tableContent . '.instrument',
+            'content_id' => ConfigService::$tableContent . '.id',
         ];
-
+        $contentTableQueryCount = ($contentTableQuery->get());
+        $contentTableQuery->addSelect(
+            [ 'railcontent_content.id as id']
+        );
         $contentTableQuery->groupBy($filterOptionNameToContentTableColumnName)
             ->select($filterOptionNameToContentTableColumnName);
 
@@ -2499,11 +2526,23 @@ class ContentRepository extends RepositoryBase
                 ->unique()
                 ->values()
                 ->toArray();
-
+            $counts[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
+                ->unique(function ($item) use($filterOptionName) {
+                    return $item['id'].$item["$filterOptionName"];
+                })
+                ->pluck($filterOptionName)
+                ->countBy()
+                ->toArray();
             foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
+                $countingItems = '';
+                if (self::$countFilterOptionItems) {
+                    $nr = $counts[$filterOptionName][$filterOptionValueToClean];
+                    $countingItems = ' ('.$nr.')';
+                }
+
                 $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = trim(
                     ucwords(
-                        $filterOptionValueToClean
+                        $filterOptionValueToClean.$countingItems
                     )
                 );
             }
