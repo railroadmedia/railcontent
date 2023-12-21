@@ -1346,9 +1346,11 @@ class ContentRepository extends RepositoryBase
                         ->orderBy($this->orderBy, $this->orderDirection);
                 $contentRows = $query->getToArray();
 
+                $contentRows = $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+
                 $contentRows = $this->contentCompiledColumnTransformer->transformLessons($contentRows) ?? [];
 
-                return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+                return $contentRows;
             }
             $contentRows = $query->getToArray();
 

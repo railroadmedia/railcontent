@@ -167,8 +167,6 @@ class ContentCompiledColumnTransformer
             $contentRowCompiledColumnValues = (array_combine(Arr::pluck($contentRowCompiledColumnValues,'id'),$contentRowCompiledColumnValues));
             $allLessonsCount = count($contentRowCompiledColumnValues);
             $contentRowCompiledColumnValues = (array_slice($contentRowCompiledColumnValues,0,5));
-            $contentRows[$contentRowIndex]['data'] = [];
-            $contentRows[$contentRowIndex]['fields'] = [];
             $contentRows[$contentRowIndex]['all_lessons_count'] = $allLessonsCount;
 
 
@@ -298,7 +296,8 @@ class ContentCompiledColumnTransformer
                     }
                 }
             }
-            unset($contentRows[$contentRowIndex]['lessons_grouped_by_field']);
+            $content = collect($contentRows[$contentRowIndex]);
+            $contentRows[$contentRowIndex] = $content->only(['data','id','slug','type','fields','url','published_on','brand','lessons','all_lessons_count','web_url_path']);
         }
         return $contentRows;
     }
