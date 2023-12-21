@@ -318,7 +318,7 @@ class Content extends Model
 
     public function setTopic($value)
     {
-        if ($value) {
+        if ($value  && $value != 'NULL') {
             $topic =
                 ContentTopic::query()
                     ->where('content_id', '=', $this->id)
@@ -357,28 +357,30 @@ class Content extends Model
 
     public function setRegistrationUrl($value)
     {
-        if ($value) {
+        if ($value && $value != 'NULL') {
             $this->setField('registration_url', $value);
+        }else{
+
         }
     }
 
     public function setEnrollmentStartDate($value)
     {
-        if ($value) {
+        if ($value  && $value != 'NULL') {
             $this->setField('enrollment_start_time', $value);
         }
     }
 
     public function setEnrollmentEndDate($value)
     {
-        if ($value) {
+        if ($value  && $value != 'NULL') {
             $this->setField('enrollment_end_time', $value);
         }
     }
 
     public function setInstructor($value)
     {
-        if ($value) {
+        if ($value  && $value != 'NULL') {
             $instructor =
                 Instructor::query()
                     ->where('name', 'like', '%'.$value.'%')
@@ -396,34 +398,45 @@ if($contentInstructor->count() == 0) {
 
     public function setDescription($value)
     {
-        if ($value) {
+        if ($value  && $value != 'NULL') {
             $this->setData('description', $value);
         }
     }
 
     public function setOriginalThumb($value)
     {
-        $this->setData('original_thumbnail_url', $value);
+        if ($value  && $value != 'NULL') {
+            $this->setData('original_thumbnail_url', $value);
+        }
     }
 
     public function setThumb($value)
     {
+        if ($value && $value != 'NULL') {
+
         $this->setData('thumbnail_url', $value);
+    }
     }
 
     public function setLogo($value)
     {
-        $this->setData('logo_image_url', $value);
+        if ($value  && $value != 'NULL') {
+            $this->setData('logo_image_url', $value);
+        }
     }
 
     public function setHeaderImage($value)
     {
-        $this->setData('header_image_url', $value);
+        if ($value  && $value != 'NULL') {
+            $this->setData('header_image_url', $value);
+        }
     }
 
     public function setSoundsliceSlug($value)
     {
-        $this->setField('soundslice_slug', $value);
+        if ($value  && $value != 'NULL') {
+            $this->setField('soundslice_slug', $value);
+        }
     }
 
     public function setVideo($value, $duration = '', $type = 'vimeo')

@@ -6,6 +6,7 @@ use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Content\Models\Content;
 use Carbon\Carbon;
 use Exception;
+use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Services\ContentService;
 
@@ -60,13 +61,15 @@ class ChallengesImport2023 extends Command
 
         $contentIds = [];
         $challengePartIds = [];
+        $mappingIds = [];
         $this->withProgressBar(
             $csv,
-            function ($row) use ($headersRow, $contentService, &$contentIds, &$challengePartIds) {
+            function ($row) use ($headersRow, $contentService, &$contentIds, &$challengePartIds, &$mappingIds) {
                 $data = $this->getData($row, $headersRow);
+                $stagingId = $this->getValue($data, $headersRow, 'id');
+
                 $contentTitle = $this->getValue($data, $headersRow, 'title');
                 $contentType = $this->getValue($data, $headersRow, 'type');
-
 
                 $content = Content::query()
                     ->where('type', '=', $contentType)
@@ -77,7 +80,8 @@ class ChallengesImport2023 extends Command
                     $content = new Content();
                     $content->type = $contentType;
                     $content->slug = ContentHelper::slugify($contentTitle);
-                    $content->status = $this->getValue($data, $headersRow, 'status');
+                    $content->status = 'draft';
+                        //$this->getValue($data, $headersRow, 'status');
                     $content->brand = $this->getValue($data, $headersRow, 'brand');
                     $content->published_on = $this->getValue($data, $headersRow, 'published_on');
                     $content->language = 'en-US';
@@ -87,6 +91,8 @@ class ChallengesImport2023 extends Command
 
                 }
                 $contentId = $content->id;
+                $mappingIds[$stagingId] = $contentId;
+
                 $content->setTitle($contentTitle);
                 $content->setDifficulty($this->getValue($data, $headersRow, 'difficulty'));
                 $content->setXP($this->getValue($data, $headersRow, 'xp'));
@@ -94,41 +100,56 @@ class ChallengesImport2023 extends Command
                 $content->setTopic($this->getValue($data, $headersRow, 'topic'));
                 $content->setInstructor($this->getValue($data, $headersRow, 'instructor'));
                 $content->setSoundsliceSlug($this->getValue($data, $headersRow, 'soundslice_slug'));
-                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 1'), 1, self::CHAPTER_THUMBS[$content->brand][0]);
-                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 2'), 2, self::CHAPTER_THUMBS[$content->brand][1]);
-                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 3'), 3, self::CHAPTER_THUMBS[$content->brand][2]);
-                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 4'), 4, self::CHAPTER_THUMBS[$content->brand][3]);
-                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 5'), 5, self::CHAPTER_THUMBS[$content->brand][4]);
-                $content->setChapter($this->getValue($data, $headersRow, 'Chapter 6'), 6, self::CHAPTER_THUMBS[$content->brand][5]);
-
+                $chapter_1_d = $this->getValue($data, $headersRow, 'chapter_1_desc');
+                $chapter_1_t = $this->getValue($data, $headersRow, 'chapter_1_timecode');
+                $chapter_2_d = $this->getValue($data, $headersRow, 'chapter_2_desc');
+                $chapter_2_t = $this->getValue($data, $headersRow, 'chapter_2_timecode');
+                $chapter_3_d = $this->getValue($data, $headersRow, 'chapter_3_desc');
+                $chapter_3_t = $this->getValue($data, $headersRow, 'chapter_3_timecode');
+                $chapter_4_d = $this->getValue($data, $headersRow, 'chapter_4_desc');
+                $chapter_4_t = $this->getValue($data, $headersRow, 'chapter_4_timecode');
+                $chapter_5_d = $this->getValue($data, $headersRow, 'chapter_5_desc');
+                $chapter_5_t = $this->getValue($data, $headersRow, 'chapter_5_timecode');
+                $chapter_6_d = $this->getValue($data, $headersRow, 'chapter_6_desc');
+                $chapter_6_t = $this->getValue($data, $headersRow, 'chapter_6_timecode');
+                if($chapter_1_d != 'NULL' && $chapter_1_t != 'NULL'){
+                    $content->setChapter($chapter_1_d.':'.$chapter_1_t, 1, self::CHAPTER_THUMBS[$content->brand][0]);
+                }
+                if($chapter_2_d != 'NULL' && $chapter_2_t != 'NULL'){
+                    $content->setChapter($chapter_2_d.':'.$chapter_2_t, 2, self::CHAPTER_THUMBS[$content->brand][1]);
+                }
+                if($chapter_3_d != 'NULL' && $chapter_3_t != 'NULL'){
+                    $content->setChapter($chapter_3_d.':'.$chapter_3_t, 3, self::CHAPTER_THUMBS[$content->brand][2]);
+                }
+                if($chapter_4_d != 'NULL' && $chapter_4_t != 'NULL'){
+                    $content->setChapter($chapter_4_d.':'.$chapter_4_t, 4, self::CHAPTER_THUMBS[$content->brand][3]);
+                }
+                if($chapter_5_d != 'NULL' && $chapter_5_t != 'NULL'){
+                    $content->setChapter($chapter_5_d.':'.$chapter_5_t, 5, self::CHAPTER_THUMBS[$content->brand][4]);
+                }
+                if($chapter_6_d != 'NULL' && $chapter_6_t != 'NULL'){
+                    $content->setChapter($chapter_6_d.':'.$chapter_6_t, 6, self::CHAPTER_THUMBS[$content->brand][5]);
+                }
 
                 $content->setDescription($this->getValue($data, $headersRow, 'description'));
-                $content->setEnrollmentStartDate($this->getValue($data, $headersRow, 'enrollment_start_date'));
-                $content->setEnrollmentEndDate($this->getValue($data, $headersRow, 'enrollment_end_date'));
-
                 $content->setOriginalThumb($this->getValue($data, $headersRow, 'original_thumbnail_url'));
                 $content->setThumb($this->getValue($data, $headersRow, 'thumbnail_url'));
                 $content->setLogo($this->getValue($data, $headersRow, 'logo_image_url'));
                 $content->setHeaderImage($this->getValue($data, $headersRow, 'header_image_url'));
 
-                $content->setVideo($this->getValue($data, $headersRow, 'video'));
+                //$content->setVideo($this->getValue($data, $headersRow, 'video'));
 
 
                 $content->save();
 
-                $parentTitle = $this->getValue($data, $headersRow, 'parent');
-                if($parentTitle) {
-                    $parent =
-                        Content::query()
-                            ->where('type', '=', 'challenge')
-                            ->where('title', '=', $parentTitle)
-                            ->first();
+                $stagingParentId = $this->getValue($data, $headersRow, 'parent_id');
+                if($stagingParentId && isset($mappingIds[$stagingParentId])) {
 
-                    if ($parent) {
-                        $content->setParentId($parent->id);
+$parentId = $mappingIds[$stagingParentId];
+                        $content->setParentId($parentId);
                         $challengePartIds[] = $content->id;
                         $content->save();
-                    }
+
                 }
 
                 $contentIds[] = $contentId;
@@ -138,18 +159,21 @@ class ChallengesImport2023 extends Command
                 //CacheHelper::deleteCache('content_'.$contentId);
                 //CacheHelper::deleteUserFields(null, 'contents');
                 // event(new ElasticDataShouldUpdate($contentId));
+
+                event(new ContentCreated($contentId));
+
             }
         );
 
-        $contentService->fillCompiledViewContentDataColumnForContentIds($contentIds);
-        $contentService->fillParentContentDataColumnForContentIds($challengePartIds);
+//        $contentService->fillCompiledViewContentDataColumnForContentIds($contentIds);
+//        $contentService->fillParentContentDataColumnForContentIds($challengePartIds);
 
         $this->info('Done.');
     }
 
     public function getCSV(int $startIndex, int $endIndex): array
     {
-        $fileName = 'Challenge2023-2.csv';
+        $fileName = 'challenges-2023-content.csv';
         $filePath = app_path() . '/Modules/Content/Console/Commands/Data/' . $fileName;
         $file = file($filePath);
         $csv = array_map('str_getcsv', $file);
