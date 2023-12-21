@@ -9,7 +9,7 @@
             <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" />
         </div>
         <!-- Continue section -->
-        <MiniCatalogueSection title="Continue" seeAllAriaLabel="See All Lessons In Progress" v-if="hasStartedLessons && startedContent.data.length"
+        <MiniCatalogueSection v-if="hasStartedLessons && startedContent.data.length" title="Continue" seeAllAriaLabel="See All Lessons In Progress"
             :seeAllUrl="continueUrl" :preLoadedContent="startedContent" :isMiniView="true" :show-dropdown="true" />
         <!-- Workouts section -->
         <MiniCatalogueSection v-if="workoutsContent.data.length" title="Workouts" seeAllAriaLabel="See All Workouts" :seeAllUrl="workoutsContentUrl"
@@ -104,6 +104,7 @@ const openPlaylistModal = () => {
 };
 
 onMounted(() => {
+    console.log('continue section data ', startedContent.data);
     if (window.location.href.includes('create-playlist-window')) {
         openPlaylistModal();
     }
