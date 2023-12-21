@@ -181,15 +181,7 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->where([ConfigService::$tableContent . '.id' => $id])
                 ->getToArray();
-if(user()->id == 149628){
-    $sql =  $this->query()
-        ->selectPrimaryColumns()
-        ->restrictByUserAccess()
-        ->where([ConfigService::$tableContent . '.id' => $id])->toSql();
-    Log::warning(print_r($contentRows,true));
-    Log::warning(print_r($sql,true));
-    Log::warning(print_r(ContentRepository::$pullFutureContent,true));
-}
+
         if (empty($contentRows)) {
             return null;
         }
