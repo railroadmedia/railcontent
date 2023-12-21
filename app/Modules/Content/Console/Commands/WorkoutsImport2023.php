@@ -113,7 +113,7 @@ class WorkoutsImport2023 extends Command
                     $content = new Content();
                     $content->type = $contentType;
                     $content->slug = ContentHelper::slugify($contentTitle);
-                    $content->status = 'published';
+                    $content->status = 'draft';
                     $content->brand = $brand;
                     $content->published_on = '2023-12-28 00:01:00';
                     $content->language = 'en-US';
