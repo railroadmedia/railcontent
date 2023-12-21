@@ -116,6 +116,20 @@
                 display:block!important;
             }
         @endif
+        .splide__slide.is-active .active-bg {
+            background-color:#f61a30!important;
+        }
+
+        .timed-toggle .media-toggle.active {
+            display:block!important;
+        }
+        .timed-toggle .active-toggle.active {
+            border-color: #f61a30!important;
+            background-color:#151f31!important;
+        }
+        .timed-toggle .active-toggle.active .description {
+            max-height:100px!important;
+        }
     </style>
 @stop
 
@@ -152,14 +166,14 @@
     @endif
 
     @php
-        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/bubbles/summer-swee-singh.png';
-        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/bubbles/lisa-witt.png';
-        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/bubbles/jesus-molina.png';
-        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/bubbles/kevin-castro.png';
-        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/bubbles/erskine-hawkins.png';
-        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/bubbles/victoria-theodore.png';
-        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/bubbles/sangah-noona.png';
-        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/bubbles/cassi-falk.png';
+        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/jordan-rudess.png';
+        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/lisa-witt.png';
+        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/david-bennett.png';
+        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/kevin-castro.png';
+        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/erskine-hawkins.png';
+        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/victoria-thoedore.png';
+        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/sangah-noona.png';
+        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/jesus-molina.png';
 
         $features = $pianote['features'];
         $slides = $pianote['slides'];
@@ -221,7 +235,7 @@
         $gridItems = $pianote['gridItems'];
     @endphp
 
-    @include('musora.sales.components.trailer-grid-section', [
+    @include('musora.sales.components.reason-cards-section', [
         'header' => 'Your piano goals<br class="inline sm:hidden"> start here.',
         'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline">curriculum and direct access to real teachers. ',
     ])
@@ -236,6 +250,12 @@
         'desc' => 'Amplify your skills with exclusive artist <br class="hidden md:inline lg:hidden"> courses + live events with special guests.'
     ])
 
+    @include('musora.sales.components.workouts-section', [
+        'bgColor' => '',
+        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314572/rendition/540p/file.mp4?loc=external&signature=b8d6bc7c80a784c2cc9473ae9e1389b3f9e005fbbce2568d7bd6b7d548a4c19e',
+        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/workouts-card.jpg',
+    ])
+
     @php
         $songItems = $pianote['songItems'];
     @endphp
@@ -247,20 +267,12 @@
         'brandName' => 'Pianote',
         'bannerDesc' => 'Powered by Musora, Pianote includes full access to our communities for drums, guitar, and voice.',
     ])
-    @include('musora.sales.components.learn-by-playing-section', [
-        'header' => 'Learn the piano by<br class="inline sm:hidden"> <u>playing the piano</u>.',
-        'desc' => 'With Pianote, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
-                'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314572/rendition/540p/file.mp4?loc=external&signature=b8d6bc7c80a784c2cc9473ae9e1389b3f9e005fbbce2568d7bd6b7d548a4c19e',
-
-    ])
-
-{{--    @include('pianote.sales.headphones-section')--}}
 
     @php
         $testimonials = $pianote['testimonials'];
-        $youtube = number_format(Prices::$pianoteYoutubeSubsc);
-        $facebook = number_format(Prices::$pianoteFacebookLikes);
-        $instagram = number_format(Prices::$pianoteInstagramFollowers);
+        $youtube = convertNumber(Prices::$pianoteYoutubeSubsc);
+        $facebook = convertNumber(Prices::$pianoteFacebookLikes);
+        $instagram = convertNumber(Prices::$pianoteInstagramFollowers);
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'pianists',
@@ -450,9 +462,49 @@
     @else
         @include("pianote.sales.partials._footer")
     @endif
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var timedToggle = document.querySelector('.timed-toggle'),
+                songPoints = Array.from(timedToggle.querySelectorAll('.media-toggle')),
+                songPointToggles = Array.from(timedToggle.querySelectorAll('.active-toggle')),
+                currentSongPoint = 0,
+                totalSongPoints = songPoints.length,
+                autoplayInterval = 10000,
+                autoplaySongPoints;
+
+            function updateIndex(index) {
+                songPoints.forEach((point, i) => {
+                    point.classList.toggle('active', i === index);
+                    const video = point.querySelector('video');
+                    if (video) {
+                        video.currentTime = 0;
+                        video.play();
+                    }
+                });
+
+                songPointToggles.forEach((toggle, i) => {
+                    toggle.classList.toggle('active', i === index);
+                });
+            }
+
+            function autoplayHandler() {
+                currentSongPoint = (currentSongPoint + 1) % totalSongPoints;
+                updateIndex(currentSongPoint);
+            }
+
+            autoplaySongPoints = setInterval(autoplayHandler, autoplayInterval);
+
+            songPointToggles.forEach((toggle, index) => {
+                toggle.addEventListener('click', function () {
+                    updateIndex(index);
+                    currentSongPoint = index;
+                    clearInterval(autoplaySongPoints);
+                });
+            });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>

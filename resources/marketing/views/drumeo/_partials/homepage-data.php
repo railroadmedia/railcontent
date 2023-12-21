@@ -303,7 +303,6 @@
                 "location" => "California, USA",
                 "video" => "877648411",
                 "title" => "I’ve always wanted to play in front of a crowd – at least once in my lifetime – and now <strong>I’ve already achieved that!</strong>",
-                "description" => "I’ve always wanted to play in front of a crowd – at least once in my lifetime – and now <strong>I’ve already achieved that!</strong>",
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Ed-Koop-thumb-m.jpg",
@@ -312,7 +311,6 @@
                 "location" => "California, USA",
                 "video" => "342059271",
                 "title" => "<strong>I’m loving music more</strong> than I ever did before – and I just couldn’t be happier. They have all the resources you need and it’s so easy to use!",
-                "description" => "<strong>I’m loving music more</strong> than I ever did before – and I just couldn’t be happier. They have all the resources you need and it’s so easy to use!",
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Gabriel-Queija-thumb-m.jpg",
@@ -321,7 +319,6 @@
                 "location" => "Canada",
                 "video" => "877591404",
                 "title" => "It was everything I was looking for – they have <strong>great teachers, great courses, great everything</strong>! They help you so much. ",
-                "description" => "It was everything I was looking for – they have <strong>great teachers, great courses, great everything</strong>! They help you so much. ",
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Tarah-Mark-thumb-m.jpg",
@@ -330,7 +327,6 @@
                 "location" => "California, USA",
                 "video" => "878790651",
                 "title" => "I don’t feel the pressure to become this rock legend. I’m just going to me – and now I actually get to <strong>make my own rhythms and my own beat.</strong>",
-                "description" => "I don’t feel the pressure to become this rock legend. I’m just going to me – and now I actually get to <strong>make my own rhythms and my own beat.</strong>",
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Lisa-Aragon-thumb-m.jpg",
@@ -339,7 +335,6 @@
                 "location" => "Washington, USA",
                 "video" => "373252004",
                 "title" => "You don’t have to schedule an instructor. <strong>I can do this when I want</strong>, it’s a lot cheaper, and I can still ask questions. ",
-                "description" => "You don’t have to schedule an instructor. <strong>I can do this when I want</strong>, it’s a lot cheaper, and I can still ask questions. ",
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Omari-Augustine-thumb-m.jpg",
@@ -348,7 +343,6 @@
                 "location" => "Trinidad & Tobago",
                 "video" => "553438851",
                 "title" => "Drumeo is a great place to learn. They have lessons <strong>from basics to advanced</strong> drumming. There’s always something new to learn. ",
-                "description" => "Drumeo is a great place to learn. They have lessons <strong>from basics to advanced</strong> drumming. There’s always something new to learn. ",
             ],
         ],
          "testimonialsShopVersion" => [

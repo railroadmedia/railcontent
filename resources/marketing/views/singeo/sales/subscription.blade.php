@@ -119,6 +119,20 @@
                 display:block!important;
         }
         @endif
+        .splide__slide.is-active .active-bg {
+            background-color:#8300E9!important;
+        }
+
+        .timed-toggle .media-toggle.active {
+            display:block!important;
+        }
+        .timed-toggle .active-toggle.active {
+            border-color: #8300E9!important;
+            background-color:#151f31!important;
+        }
+        .timed-toggle .active-toggle.active .description {
+            max-height:100px!important;
+        }
     </style>
 @stop
 
@@ -200,7 +214,7 @@
         $gridItems = $singeo['gridItems'];
     @endphp
 
-    @include('musora.sales.components.trailer-grid-section', [
+    @include('musora.sales.components.reason-cards-section', [
         'header' => 'Your singing goals start here.',
         'desc' => 'An organized curriculum to help you understand your voice, how it functions, how to strengthen it, and sing with confidence.',
     ])
@@ -338,9 +352,50 @@
     @else
         @include("singeo.sales.partials._footer")
     @endif
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var timedToggle = document.querySelector('.timed-toggle'),
+                songPoints = Array.from(timedToggle.querySelectorAll('.media-toggle')),
+                songPointToggles = Array.from(timedToggle.querySelectorAll('.active-toggle')),
+                currentSongPoint = 0,
+                totalSongPoints = songPoints.length,
+                autoplayInterval = 10000,
+                autoplaySongPoints;
+
+            function updateIndex(index) {
+                songPoints.forEach((point, i) => {
+                    point.classList.toggle('active', i === index);
+                    const video = point.querySelector('video');
+                    if (video) {
+                        video.currentTime = 0;
+                        video.play();
+                    }
+                });
+
+                songPointToggles.forEach((toggle, i) => {
+                    toggle.classList.toggle('active', i === index);
+                });
+            }
+
+            function autoplayHandler() {
+                currentSongPoint = (currentSongPoint + 1) % totalSongPoints;
+                updateIndex(currentSongPoint);
+            }
+
+            autoplaySongPoints = setInterval(autoplayHandler, autoplayInterval);
+
+            songPointToggles.forEach((toggle, index) => {
+                toggle.addEventListener('click', function () {
+                    updateIndex(index);
+                    currentSongPoint = index;
+                    clearInterval(autoplaySongPoints);
+                });
+            });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>

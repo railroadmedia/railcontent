@@ -49,6 +49,7 @@
         ],
         "gridItems" => [
             [
+                "big" => true,
                 'image' => 'marketing/singeo/membership/homepage/2023/method.jpg',
                 'title' => '10-Level Curriculum',
                 'desc' => 'Turn your desire to sing into passionate practice with useful lessons and exercises.',
@@ -79,6 +80,7 @@
                 ]
             ],
             [
+                "big" => true,
                 'image' => 'marketing/singeo/membership/homepage/2023/world-class-teachers.jpg',
                 'title' => 'World-Class Teachers',
                 'desc' => 'Gain insights from vocal coaches, Grammy-Award winners, and chart-topping performers.',

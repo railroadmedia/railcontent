@@ -9,7 +9,7 @@
                     @if($key < 3)
                         <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8"
                             x-data="{ open: false }">
-                            <div class="pb-[80%] @if(empty($gridItem['big'])) sm:pb-[60%] @endif overflow-hidden text-white relative w-full bg-cover bg-center rounded-xl cursor-pointer"
+                            <div class="pb-[70%] @if(empty($gridItem['big'])) sm:pb-[60%] @else sm:pb-[80%]  @endif overflow-hidden text-white relative w-full bg-cover bg-center rounded-xl cursor-pointer"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/{{ $gridItem['image'] }}');"
                                 x-on:click="open = ! open"
                             >
@@ -30,7 +30,7 @@
                     @if($key > 2)
                         <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8"
                             x-data="{ open: false }">
-                            <div class="pb-[80%] @if(empty($gridItem['big'])) sm:pb-[60%] @endif overflow-hidden text-white relative w-full bg-cover bg-center rounded-xl cursor-pointer"
+                            <div class="pb-[70%] @if(empty($gridItem['big'])) sm:pb-[60%] @else sm:pb-[80%]  @endif overflow-hidden text-white relative w-full bg-cover bg-center rounded-xl cursor-pointer"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/{{ $gridItem['image'] }}');"
                                 x-on:click="open = ! open"
                             >

@@ -4,17 +4,17 @@
         <h2><strong>Play your favorite songs.</strong></h2>
         <p class="leading-tight mt-2 sm:mt-3">You’ll have all the tools you need to make sure you never miss a beat. <strong class="font-black text-{{ $theme }} cursor-pointer" x-on:click="soundslice = true;"><u>Try the demo <i class="fal fa-play-circle"></i></u></strong></p>
 
-        <div class="flex flex-wrap items-center justify-center my-10 sm:my-14 timed-toggle">
-            <div class="w-full sm:w-1/2 mx-auto sm:order-1 rounded-l-xl overflow-hidden py-7 pl-10" style="background-color:#1B2434;">
+        <div class="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-between my-10 sm:my-14 timed-toggle">
+            <div class="sm:order-1 rounded-l-xl overflow-hidden py-7 pl-10" style="background-color:#1B2434;">
                 @foreach ($songItems as $key => $songItem)
                     @if(!empty($songItem['mediaVid']))
-                        <video class="w-full h-64 sm:h-96 hidden media-toggle rounded-l-xl overflow-hidden @if($key == 0) active @endif" src="{{ $songItem['media'] }}" muted autoplay loop playsinline></video>
+                        <video class="h-64 sm:h-72 lg:h-96 hidden media-toggle rounded-l-xl overflow-hidden @if($key == 0) active @endif" src="{{ $songItem['media'] }}" muted autoplay loop playsinline></video>
                     @else
-                        <img class="w-full h-64 sm:h-96 hidden media-toggle rounded-l-xl overflow-hidden" src="{{ $songItem['media'] }}" >
+                        <img class="h-64 sm:h-72 lg:h-96 hidden media-toggle rounded-l-xl overflow-hidden" src="{{ $songItem['media'] }}" >
                     @endif
                 @endforeach
             </div>
-            <div class="w-full sm:w-1/2 flex-grow-0 text-left mt-6 sm:mt-0 sm:pr-8">
+            <div class="w-full sm:w-1/2 text-left mt-6 sm:mt-0 sm:pr-8">
                 @foreach ($songItems as $key => $songItem)
                     <div class="flex px-4 py-4 mb-1 rounded-xl w-full cursor-pointer active-toggle transition-colors duration-500 border bg-[#0c1524] border-[#0c1524] @if($key == 0) active @endif">
                         <div class="w-12 sm:w-16 flex-grow-0"><img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-8"></div>

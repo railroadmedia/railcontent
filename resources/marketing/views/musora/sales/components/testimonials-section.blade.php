@@ -8,16 +8,22 @@
     }">
 
     <div class="container mx-auto max-w-6xl mb-12">
-        <h2 class="leading-tight mb-3"><strong>Trusted by {!! $header !!} everywhere.</strong></h2>
+        <h2 class="font-lexend uppercase leading-none"><strong>
+                @if($theme != 'musora')
+                    Trusted by<br class="hidden sm:inline"> {!! $header !!} everywhere.
+                @else
+                    {!! $header !!}
+                @endif
+            </strong></h2>
+        <h1 class="leading-tight mb-2">
+            <i class="text-4xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+            <i class="text-4xl fas fa-star -ml-4" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+            <i class="text-4xl fas fa-star -ml-4" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+            <i class="text-4xl fas fa-star -ml-4" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+            <i class="text-4xl fas fa-star-half -ml-4" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+        </h1>
         <p class="mx-auto mb-7">
-            <span class="inline-block align-middle">
-                <i class="text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                <i class="text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                <i class="text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                <i class="text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                <i class="text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-            </span>
-            Rated 4.8/5 based on {{ number_format(Prices::$reviews) }} student reviews.
+            Rated 4.8/5 based on <strong class="font-black">{{ number_format(Prices::$reviews) }} student reviews.</strong>
             <a class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                 <strong class="font-black @if($theme != 'musora') text-{{ $theme }} @else text-drumeo @endif"><u>See the reviews »</u></strong>
             </a>
@@ -177,8 +183,7 @@
                         <div class="bg-white p-4">
                             <h2 class="leading-none font-bebas">{{$testimonial['name']}}</h2>
                             <p class="text-coaches uppercase mx-auto mb-3 md:mb-2">{!!  $testimonial['location'] !!}</p>
-                            <p class="mx-auto mt-2 mb-3 md:mb-2 leading-tight"><strong>{!!  $testimonial['title'] !!}</strong></p>
-                            <p class="mx-auto text-left leading-normal md:leading-normal">{!! $testimonial['description'] !!}</p>
+                            <p class="mx-auto text-left leading-normal md:leading-normal">{!! $testimonial['title'] !!}</p>
                         </div>
                     </div>
                 @endslot

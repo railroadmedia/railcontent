@@ -37,6 +37,7 @@
         ],
         "gridItems" => [
             [
+                "big" => true,
                 'image' => 'marketing/guitareo/membership/homepage/2023/method.jpg',
                 'title' => '10-Level Curriculum',
                 'desc' => 'Develop your core skills, techniques, and musicality to play confidently in any setting. ',
@@ -67,6 +68,7 @@
                 ]
             ],
             [
+                "big" => true,
                 'image' => 'marketing/guitareo/membership/homepage/2023/coaches-thumb2.jpg',
                 'title' => 'World-Class Teachers',
                 'desc' => 'The best guitarists are here – including Grammy Award winners and touring musicians.',

@@ -550,7 +550,7 @@
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'desktopGrid' => true,
-        'header' => 'musicians',
+        'header' => 'Where musical<br class="hidden sm:inline"> dreams come true.',
     ])
     @include('musora._partials.order-section-collage')
 

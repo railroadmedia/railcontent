@@ -54,62 +54,64 @@
         ],
         "gridItems" => [
             [
-                'image' => 'marketing/pianote/membership/homepage/2023/modern-method.jpg',
+                "big" => true,
+                'image' => 'marketing/pianote/membership/homepage/2024/10-level-curriculum.jpg',
                 'title' => '10-Level Curriculum',
                 'desc' => 'Develop your core skills, techniques, and musicality to play beautifully in any setting. ',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/modern-method.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/10-level-curriculum.jpg',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/pianote/membership/homepage/2023/practical-assignments.jpg',
+                'image' => 'marketing/pianote/membership/homepage/2024/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
                 'desc' => 'You\'ll always have on-screen assignments and practice tools to help you see results.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/practical-assignments.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/practical-assignments.jpg',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/pianote/membership/homepage/2023/guided-workouts.jpg',
-                'title' => 'Guided Workouts',
-                'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
-                'lessonInfo' => [
-                    [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/guided-workouts.jpg',
-                    ],
-                ]
-            ],
-            [
-                'image' => 'marketing/pianote/membership/homepage/2023/world-class-teachers.jpg',
-                'title' => 'World-Class Teachers',
-                'desc' => 'Lifetime teachers, touring performers, recording professionals, and trending stars. ',
-                'lessonInfo' => [
-                    [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/world-class-teachers.jpg',
-                    ],
-                ]
-            ],
-            [
-                'image' => 'marketing/pianote/membership/homepage/2023/downloadable-videos.jpg',
+                'image' => 'marketing/pianote/membership/homepage/2024/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime. ',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/downloadable-videos.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/downloadable-videos.jpg',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/pianote/membership/homepage/2023/personalized-support.jpg',
+                'image' => 'marketing/pianote/membership/homepage/2024/guided-workouts.jpg',
+                'title' => 'Guided Workouts',
+                'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/guided-workouts.jpg',
+                    ],
+                ]
+            ],
+            [
+                "big" => true,
+                'image' => 'marketing/pianote/membership/homepage/2024/world-class-teachers.jpg',
+                'title' => 'World-Class Teachers',
+                'desc' => 'Lifetime teachers, touring performers, recording professionals, and trending stars. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/world-class-teachers.jpg',
+                    ],
+                ]
+            ],
+            [
+                'image' => 'marketing/pianote/membership/homepage/2024/personalized-support.jpg',
                 'title' => 'Personalized Support',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global piano community. ',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/personalized-support.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/personalized-support.jpg',
                     ],
                 ]
             ],
@@ -258,21 +260,21 @@
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/songs-icon.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/loop.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/metronome-feature.mp4",
                 "title" => "5000+ popular songs.",
                 "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
             ],
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/tempo-icons.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/loop.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/speed-feature.mp4",
                 "title" => "Find the perfect tempo.",
                 "desc" => "Slow down or speed up any section of a song to hear every note.",
             ],
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/loop-icons.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/loop.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/loop-feature.mp4",
                 "title" => "Loop the trouble spots.",
                 "desc" => "No more pausing and rewinding that tricky fill. Loop it over and over again!",
             ],
@@ -284,78 +286,59 @@
             ],
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/devices-icons.svg",
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/devices-feature.jpg",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/devices-feature.jpg",
                 "title" => "Take your songs anywhere.",
                 "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
             ],
         ],
         "testimonials" => [
             [
-                'image' => 'https://i.vimeocdn.com/video/1751887244-0d2cfa5acca4de78249d087c3eb3d9f1b32f9ba8bb8bf63ef1cf9fb8ec9c081b-d_500.jpg',
-                'title' => "Before Pianote, I didn't have goals. Now I can focus on certain skills.",
-                'description' => "Before Pianote, I didn't have goals. Now I can focus on certain skills.",
-                'name' => 'Tonya Hotz',
-                'video' => '882979587',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Tonya-Hotz-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Tonya-Hotz-profile.jpg",
+                "name" => "Tonya Hotz",
+                "location" => "Arizona, USA",
+                "video" => "882979587",
+                "title" => "There was a time when I felt I had missed my opportunity to really master an instrument. But here I am three years later and  <strong>making music is my favorite thing</strong>  to do.",
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/iankershaw.jpg',
-                'title' => "Such a fantastic and welcoming student community.",
-                'description' => "When I signed up for Pianote, I knew I was going to get Lisa’s great energy, the Method, the courses, the bootcamps, and the student reviews.<br><br>But my breakthrough came when I realized that sitting behind all of this is such a fantastic and welcoming, supportive student community. It’s this community – as well as the teachers and the rest of the Pianote team – that really actively encourages you to share your progress and practice. And it doesn’t have to be perfect. And that really does encourage you to practice more. And it’s in that sharing and practice that the real breakthroughs come. Thank you!",
-                'name' => 'Ian Kershaw',
-                'video' => '660596700',
-                'location' => 'United Kingdom',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Allison-Bond-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Allison-Bond-profile.jpg",
+                "name" => "Allison Bond",
+                "location" => "Canada",
+                "video" => "877591721",
+                "title" => "Every time I have a question there’s something on Pianote for me. <strong>It’s a very positive place</strong> and I can play the piano with other people from around the world. ",
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/jaydemcintosh.jpg',
-                'title' => "I’ve had to give up on a lot of my dreams. Then I discovered Pianote.",
-                'description' => "I’ve been chronically ill for the last six years, which means I’ve had to give up on a lot of my dreams and goals.<br><br>During my health journey, my interest in piano and my connection to music really arose – but it also seemed impossible. I had no prior music knowledge and couldn’t even get out of bed some days. This is when I discovered Pianote and they’ve been amazing.<br><br>I have to work at a very slow pace due to my health, but I’ve already learned so many basics. I can play some of my all-time favorite songs – and it’s just so awesome to know I can learn from home and accomplish one of my dreams. I’m so excited to keep learning and I recommend Pianote so much.",
-                'name' => 'Jayde McIntosh',
-                'video' => '660596722',
-                'location' => 'Australia',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Steve-Wilson-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Steve-Wilson-profile.jpg",
+                "name" => "Steve Wilson",
+                "location" => "Arizona, USA",
+                "video" => "877591944",
+                "title" => "Pianote <strong> gave me the motivation I needed</strong> and to learn that it’s okay if I make a whole lot of mistakes. It’s really helpful and a lot of fun. ",
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/xitlalicaballero2.jpg',
-                'title' => "I’m six years old. My biggest moment is when I play Für Elise.",
-                'description' => "My name is Xitlali. I’m six years old. I started playing piano when I was five. A few weeks ago, I started using pianote. My biggest moment is when I play Für Elise.",
-                'name' => 'Xitlali Caballero',
-                'video' => '660596752',
-                'location' => 'Florida, USA',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Darli-Brazil-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Darli-Brazil-profile.jpg",
+                "name" => "Darli Brazil",
+                "location" => "California, USA",
+                "video" => "878027528",
+                "title" => "The lessons are broken down into sections that are manageable.  <strong>I am really enjoying this program.</strong> Everything about it is a positive experience. ",
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/nabilabdelmoneim.jpg',
-                'title' => "I’m a lot better at using both hands and it opened up more songs.",
-                'description' => "You guys make learning way too fun.<br><br>I’ve had two breakthrough moments. There was this video that promised hand independence in five days. And what do you know? A few days later I’m a lot better at using both hands and it just opened up a bunch more songs for me. And my second breakthrough moment was finding this chord chart that made it so much easier to go through the chords and practice them. And I started realizing that these chords sounded a lot like the ones I play on guitar. So I managed to take the notes that were in the practice log and apply them to my guitar, and actually learned theory for both instruments at once. Thank you Lisa and happy playing!",
-                'name' => 'Nabil Abd El Moneim',
-                'video' => '660596735',
-                'location' => 'British Columbia, Canada',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Ian-Kershaw-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Ian-Kershaw-profile.jpg",
+                "name" => "Ian Kershaw",
+                "location" => "United Kingdom",
+                "video" => "660596700",
+                "title" => "This is such a fantastic and welcoming, <strong> supportive student community.</strong> And it’s in that sharing and practice that the real breakthroughs come. Thank you!",
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/jessripley.jpg',
-                'title' => "I’m blown away by the program you’ve created.",
-                'description' => "Pianote is an insanely encouraging and supportive community run by an insanely encouraging and supportive team. Sincerely, I’m blown away by the program you’ve created.<br><br>I sat down one day and it just clicked. From then on, I’ve felt VERY encouraged to keep learning and practicing. It’s fulfilling and fun to see myself progress and achieve goals. Now I’m playing with both hands at the same time with confidence – and I’ve started playing along with more backing tracks and making up my own songs.",
-                'name' => 'Jess Ripley',
-                'location' => 'California, USA',
-            ],
-            [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/anselmdesouza.jpg',
-                'title' => "Helped coordinate my left and right hands.",
-                'description' => "I was using a piano app, but it wasn’t personal and I had to figure it out on my own most of the time. So I joined Pianote and went back to the basics.<br><br>Pianote helped coordinate my left and right hands. The explanations and instructions are very clear, easy to follow, and slowly I noticed I was improving by using skills from one lesson to the next. It’s structured to allow you to build the foundations, and the tips and tricks videos make your playing special. The lessons are fun and the instructors are engaging.",
-                'name' => 'Anselm de Souza',
-                'location' => 'Singapore',
-            ],
-            [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/johnmaclean.jpg',
-                'title' => "My 6 year old daughter started dancing as I played.",
-                'description' => "Before Pianote and The Method, I was completely lost in terms of knowing how to become a better musician. All I would do is try to play songs, but without any of the structure and practice that is required to actually improve. And with face to face lessons I wasn’t really progressing much between the lessons. But having access to the video tutorials online lets me go back as often as I need to.<br><br>My biggest breakthrough has been independent hand control – allowing me to hear rich music that I’m creating for the first time. And gaining that confidence has allowed me to start to improvise the pieces that I learn.<br><br>The lightbulb moment happened when my 6 year old daughter started dancing as I played! You must be doing something right if someone dances to music that you’re playing, right?",
-                'name' => 'John Maclean',
-                'location' => 'United Kingdom',
-            ],
-            [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/serenadorward.jpg',
-                'title' => "If I was taught this way as a child, I would have never quit.",
-                'description' => "I decided to sign up with Pianote not only to re-learn how to play the piano, but also because my mental health was really suffering and I needed something positive to focus on that was just for ME. I knew almost immediately that this was the answer I had been looking for. It felt like the heaviness on my shoulders got a bit lighter after every piano session.  And even though the lessons are virtual, it was like Lisa was right there beside me cheering me on.<br><br>I was blown away by how quickly I progressed with a few tutorials from Lisa. My overall confidence improved, especially with improvisation. Now I know all these little tricks (fills & riffs) and how to play inversions and practice chords in ways that sound so lovely.  If I had been taught this way as a child, I probably never would have quit.",
-                'name' => 'Serena Dorward',
-                'location' => 'Ontario, Canada',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Jayde-McIntosh-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Jayde-McIntosh-profile.jpg",
+                "name" => "Jayde McIntosh",
+                "location" => "Australia",
+                "video" => "660596722",
+                "title" => "I can play some of my all-time favorite songs – and it’s just so awesome to know <strong>I can learn from home</strong> and accomplish one of my dreams. I’m so excited to keep learning! ",
             ],
         ],
     ]

@@ -51,6 +51,9 @@ module.exports = {
         '.font-bebas': {
           fontFamily: '"Bebas Neue", sans-serif'
         },
+        '.font-lexend': {
+          fontFamily: '"Lexend", sans-serif'
+        },
         'img': {
           display: 'inline-block'
         },

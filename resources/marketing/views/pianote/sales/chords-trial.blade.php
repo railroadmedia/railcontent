@@ -259,12 +259,12 @@
         $gridItems = $pianote['gridItems'];
     @endphp
 
-    @include('musora.sales.components.trailer-grid-section', [
+    @include('musora.sales.components.reason-cards-section', [
         'header' => 'Your piano goals<br class="inline sm:hidden"> start here.',
         'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum and direct access to real teachers. ',
     ])
 
-    @include('musora.sales.components.trailer-grid-section', [
+    @include('musora.sales.components.reason-cards-section', [
         'header' => 'Your piano goals<br class="inline sm:hidden"> start here.',
         'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum and direct access to real teachers. ',
     ])
