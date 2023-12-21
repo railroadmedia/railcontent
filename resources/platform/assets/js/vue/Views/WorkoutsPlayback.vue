@@ -18,44 +18,44 @@
                         <template v-if="videoProps.videoId">
                             <!-- YouTube -->
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
-                                <YoutubePlayer 
-                                    :video-id="videoProps.videoId" 
-                                    ref="mediaElementVueInstance" 
-                                    :brand="brand" 
-                                    :theme-color="brand" 
-                                    :video-length="videoProps.videoLength" 
+                                <YoutubePlayer
+                                    :video-id="videoProps.videoId"
+                                    ref="mediaElementVueInstance"
+                                    :brand="brand"
+                                    :theme-color="brand"
+                                    :video-length="videoProps.videoLength"
                                     :progress-state="videoProps.progressState"
-                                    :content-id="videoProps.id" 
-                                    :use-intersection-observer="true" 
-                                    :start-second="seekToTime" 
-                                    :end-second="videoProps.videoLength" 
+                                    :content-id="videoProps.id"
+                                    :use-intersection-observer="true"
+                                    :start-second="seekToTime"
+                                    :end-second="videoProps.videoLength"
                                     :total-duration="videoProps.videoLength"
                                     :seek-to-time="seekToTime"
-                                    @play="handleVideoPlay" 
-                                    @pause="handleVideoPause" 
+                                    @play="handleVideoPlay"
+                                    @pause="handleVideoPause"
                                     @onVideoEnd="handleVideoEnd"
                                 />
                             </transition>
                             <!-- Vimeo video (legacy player) -->
                             <transition v-else-if="videoProps.videoType === 'vimeo' && videoProps.useLegacyPlayer" appear
                                 name="fade">
-                                <video-media-element 
-                                    ref="mediaElementVueInstance" 
+                                <video-media-element
+                                    ref="mediaElementVueInstance"
                                     element-id="lessonPlayer"
-                                    :brand="videoProps.brand" 
+                                    :brand="videoProps.brand"
                                     :theme-color="videoProps.brand"
-                                    :poster="videoProps.videoPosterImageUrl" 
+                                    :poster="videoProps.videoPosterImageUrl"
                                     :sources="videoProps.videoPlaybackEndpoints"
-                                    :hls-manifest-url="videoProps.hlsManifestUrl" 
+                                    :hls-manifest-url="videoProps.hlsManifestUrl"
                                     :video-id="videoProps.vimeoVideoId"
-                                    :content-id="videoProps.id" 
+                                    :content-id="videoProps.id"
                                     :current-second="videoProps.lastWatchPositionInSeconds"
-                                    :progress-state="videoProps.progressState" 
+                                    :progress-state="videoProps.progressState"
                                     :video-length="videoProps.videoLength"
-                                    :chapters="videoProps.chapters" 
-                                    :user-id="videoProps.userId" 
+                                    :chapters="videoProps.chapters"
+                                    :user-id="videoProps.userId"
                                     :like-count="videoProps.likeCount"
-                                    :is-liked="videoProps.isLiked" 
+                                    :is-liked="videoProps.isLiked"
                                     :check-for-timecode="videoProps.checkForTimecode"
                                     :seek-to-time="seekToTime"
                                     @playing="handleVideoPlay"
@@ -132,6 +132,7 @@
                         :report-user-name="videoResources.reportUserName"
                         :report-recipient="videoResources.reportRecipient"
                         :report-logo="videoResources.reportLogo"
+                        :lesson="{ completed: videoButtons.isCompleted }"
                         @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)"
                     />
 
@@ -406,7 +407,7 @@ const getBrandSpecificParams = () => {
 const openSlice = (title, index, startAt, loop) => {
     if (mediaElementVueInstance.value) {
         mediaElementVueInstance.value.pauseVideo();
-    }  
+    }
     soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
     chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;
@@ -430,6 +431,6 @@ const handleCloseSoundslice = () => {
 };
 
 onMounted(() => {
-    //console.log(props.videoProps)
+    console.log(props.videoButtons)
 })
 </script>
