@@ -327,6 +327,9 @@ const handleShowDropdown = (className) => {
 };
 
 const contentTypeString = computed(() => {
+    if(contentModel.value.post.type === 'workout') {
+        return 'Workouts';
+    }
     if(contentModel.value.post.type) return snakeToCapitalized(contentModel.value.post.type);
     return '';
 })
