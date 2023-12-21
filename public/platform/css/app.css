@@ -21795,6 +21795,9 @@ a:visited{
 .tw-mb-\[25px\]{
   margin-bottom: 25px !important;
 }
+.tw-mb-\[26px\]{
+  margin-bottom: 26px !important;
+}
 .tw-mb-\[2px\]{
   margin-bottom: 2px !important;
 }
@@ -22034,9 +22037,6 @@ a:visited{
 }
 .tw-mt-auto{
   margin-top: auto !important;
-}
-.tw-mb-\[26px\]{
-  margin-bottom: 26px !important;
 }
 .tw-box-border{
   box-sizing: border-box !important;
