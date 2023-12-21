@@ -1342,7 +1342,8 @@ class ContentRepository extends RepositoryBase
                     $this->query()
                         ->selectPrimaryColumns()
                         ->addSelect('inner_content.lessons_grouped_by_field as lessons_grouped_by_field')
-                        ->addSubJoinToQuery($subQuery);
+                        ->addSubJoinToQuery($subQuery)
+                        ->orderBy($this->orderBy, $this->orderDirection);
                 $contentRows = $query->getToArray();
 
                 $contentRows = $this->contentCompiledColumnTransformer->transformLessons($contentRows) ?? [];
@@ -1407,6 +1408,24 @@ class ContentRepository extends RepositoryBase
      */
     public function countFilter()
     {
+        if ($this->groupByFields) {
+            $subQuery =
+                $this->query()
+                    ->restrictByTypes($this->typesToInclude)
+                    ->restrictByUserAccess()
+                    ->restrictByFields($this->requiredFields)
+                    ->includeByFields($this->includedFields)
+                    ->restrictByUserStates($this->requiredUserStates)
+                    ->groupByField($this->groupByFields);
+
+            return $this->connection()
+                ->table(
+                    $this->databaseManager->raw('(' . $subQuery->toSql() . ') as results')
+                )
+                ->addBinding($subQuery->getBindings())
+                ->count();
+        }
+
         $subQuery =
             $this->query()
                 ->selectCountColumns()
@@ -1437,10 +1456,6 @@ class ContentRepository extends RepositoryBase
      */
     public function getFilterFields()
     {
-        $cat = self::$catalogMetaAllowableFilters;
-        self::$catalogMetaAllowableFilters = ['style','topic','difficulty'];
-
-        //dd($possibleContentFields2);
         $query =   $this->query()
                 ->selectFilterOptionColumns()
                 ->restrictByUserAccess()
@@ -1461,7 +1476,7 @@ class ContentRepository extends RepositoryBase
 //        }
 
         $possibleContentFields = $this->getFilterOptionsForQuery($query);
-if(self::$countFilterOptionItems) {
+        if(self::$countFilterOptionItems) {
             $includedFields = collect($this->includedFields);
             $selectedFilterCategories = $includedFields->pluck('name');
             $initialFilters = $this->includedFields;
@@ -1485,7 +1500,6 @@ if(self::$countFilterOptionItems) {
                     $possibleContentFields2 = $this->getFilterOptionsForQueryVersion2($allQuery);
                     $myResults[$category]= $possibleContentFields2[$category];
                     $this->includedFields = $initialFilters;
-                    //dd($category, $possibleContentFields[$category], $possibleContentFields2[$category]);
                 }
             }
 
@@ -2341,13 +2355,13 @@ if(self::$countFilterOptionItems) {
         ];
 
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
-            'data',
-            'instructor',
-            'style',
-            'topic',
-            'focus',
-            'bpm',
-        ];
+                'data',
+                'instructor',
+                'style',
+                'topic',
+                'focus',
+                'bpm',
+            ];
 
         // we always need the related data
         if (!in_array('data', $filterOptions)) {
@@ -2396,8 +2410,6 @@ if(self::$countFilterOptionItems) {
             $filterOptionsArray[$filterOptionColumnName] = [];
         }
 
-        $countingQuery = clone($joinTablesQuery);
-
         if (!empty($groupBy)) {
             $joinTablesQuery->groupBy($groupBy);
         } else {
@@ -2406,41 +2418,20 @@ if(self::$countFilterOptionItems) {
 
         $tableResults = $joinTablesQuery->get();
 
-        $countingQuery->addSelect(
-            [ 'railcontent_content.id']
-        );
-        $groupBy[] = 'id';
-        $countingQuery->groupBy($groupBy);
-
-        $countingQueryResults = $countingQuery->get();
-
-        $counts = [];
         foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
             $filterOptionsArray[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
                 ->pluck($filterOptionName)
                 ->unique()
                 ->values()
                 ->toArray();
-            $counts[$filterOptionName] = $countingQueryResults->whereNotNull($filterOptionName)
-                ->unique(function ($item) use($filterOptionName) {
-                    return $item['id'].$item["$filterOptionName"];
-                            })
-                ->pluck($filterOptionName)
-                ->countBy()
-                ->toArray();
 
-        foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
-            $countingItems = '';
-            if (self::$countFilterOptionItems) {
-                $nr = $counts[$filterOptionName][$filterOptionValueToClean];
-                $countingItems = ' ('.$nr.')';
+            foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
+                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
+                    trim(
+                        $filterOptionValueToClean
+                    )
+                );
             }
-            $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
-                trim(
-                    $filterOptionValueToClean.$countingItems
-                )
-            );
-        }
 
             $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
             sort($filterOptionsArray[$filterOptionName]);
@@ -2488,8 +2479,6 @@ if(self::$countFilterOptionItems) {
             $filterOptionsArray['instructor'] = $instructorRows;
         }
 
-       // dd($filterOptionsArray);
-
         // todo: now to the right place
         $filterOptionNameToContentTableColumnName = [
             'difficulty' => ConfigService::$tableContent . '.difficulty',
@@ -2497,12 +2486,8 @@ if(self::$countFilterOptionItems) {
             'artist' => ConfigService::$tableContent . '.artist',
             'type' => ConfigService::$tableContent . '.type',
             'instrument' => ConfigService::$tableContent . '.instrument',
-            'content_id' => ConfigService::$tableContent . '.id',
         ];
-        $contentTableQueryCount = ($contentTableQuery->get());
-        $contentTableQuery->addSelect(
-            [ 'railcontent_content.id as id']
-        );
+
         $contentTableQuery->groupBy($filterOptionNameToContentTableColumnName)
             ->select($filterOptionNameToContentTableColumnName);
 
@@ -2514,23 +2499,11 @@ if(self::$countFilterOptionItems) {
                 ->unique()
                 ->values()
                 ->toArray();
-            $counts[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
-                ->unique(function ($item) use($filterOptionName) {
-                    return $item['id'].$item["$filterOptionName"];
-                })
-                ->pluck($filterOptionName)
-                ->countBy()
-                ->toArray();
-            foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
-                $countingItems = '';
-                if (self::$countFilterOptionItems) {
-                    $nr = $counts[$filterOptionName][$filterOptionValueToClean];
-                    $countingItems = ' ('.$nr.')';
-                }
 
+            foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
                 $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = trim(
                     ucwords(
-                        $filterOptionValueToClean.$countingItems
+                        $filterOptionValueToClean
                     )
                 );
             }
@@ -2984,7 +2957,10 @@ if(self::$countFilterOptionItems) {
             ->select($filterOptionNameToContentTableColumnName);
 
         $tableResults = $contentTableQuery->get();
-      //  dd(array_combine(self::$catalogMetaAllowableFilters, self::$catalogMetaAllowableFilters));
+        if(!self::$catalogMetaAllowableFilters){
+            self::$catalogMetaAllowableFilters = ['style','topic','difficulty'];
+        }
+
         $filterOptionNameToContentTableColumnName = array_intersect_key($filterOptionNameToContentTableColumnName, array_combine(self::$catalogMetaAllowableFilters, self::$catalogMetaAllowableFilters));
         foreach ($filterOptionNameToContentTableColumnName as $filterOptionName => $filterOptionValue) {
             $filterOptionsArray[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
