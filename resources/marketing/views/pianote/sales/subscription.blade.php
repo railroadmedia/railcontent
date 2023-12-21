@@ -255,9 +255,9 @@
 
     @php
         $testimonials = $pianote['testimonials'];
-        $youtube = convertNumber(Prices::$pianoteYoutubeSubsc); 
+        $youtube = convertNumber(Prices::$pianoteYoutubeSubsc);
         $facebook = convertNumber(Prices::$pianoteFacebookLikes);
-        $instagram = convertNumber(Prices::$pianoteInstagramFollowers); 
+        $instagram = convertNumber(Prices::$pianoteInstagramFollowers);
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
@@ -294,6 +294,43 @@
         ])
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'piano',
+        ])
+    @elseif(!empty($evergreenVersion))
+        @php
+            $bonuses = [
+                [
+                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/bonus-chords-scales.jpg',
+                    'title' => 'Chords & <br>Scales Book',
+                    'description' => 'Your encyclopedia of piano chords & scales.',
+                    'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
+                    'shipping' => 'true'
+                ],
+                [
+                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
+                'title' => 'Piano Technique<br> Made Easy',
+                'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
+                'price' => floatval($productPrices['piano-technique-made-easy']->price),
+                ],
+                [
+                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
+                'title' => 'Piano Riffs<br> & Fills',
+                'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
+                'price' => floatval($productPrices['piano-riffs-and-fills']->price),
+                ],
+                [
+                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/promos/black-friday/unlimited/faster-fingers.jpg',
+                    'title' => '',
+                    'description' => 'Boost your speed and confidence with this guided practice course.',
+                    'price' => floatval($productPrices['faster-fingers']->price),
+                ],
+            ]
+        @endphp
+        @include('musora.sales.components.order-section-bonuses', [
+        'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-annual-2w-card.png',
+        'header' => 'Online piano lessons for all skill levels.',
+        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
+        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=special',
+        'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
         ])
     @elseif(!empty($promoVersion))
         @php
@@ -366,6 +403,7 @@
         'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[christmas-songbook]=1&products[pianote-practice-planner]=1&products[music-theory-posters]=1&products[christmas-song-book-digital]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702',
         'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
         ])
+
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png',

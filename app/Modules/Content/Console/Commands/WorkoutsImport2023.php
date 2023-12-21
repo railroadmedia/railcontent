@@ -113,7 +113,7 @@ class WorkoutsImport2023 extends Command
                     $content = new Content();
                     $content->type = $contentType;
                     $content->slug = ContentHelper::slugify($contentTitle);
-                    $content->status = 'published';
+                    $content->status = 'draft';
                     $content->brand = $brand;
                     $content->published_on = '2023-12-28 00:01:00';
                     $content->language = 'en-US';
@@ -151,7 +151,7 @@ class WorkoutsImport2023 extends Command
                     $content->setVideo($this->getValue($data, $headersRow, 'Video ID - Workouts'), $this->getValue($data, $headersRow, 'Duration'),'vimeo');
                 }
 
-                $thumbnail = $this->getValue($data, $headersRow, 'Thumbnail name');
+                $thumbnail = $this->getValue($data, $headersRow, 'Thumbnail Name');
                 if($thumbnail) {
                     $content->setThumb('https://musora-web-platform.s3.amazonaws.com/workouts/'.$brand.'/'.$thumbnail);
                     $content->setOriginalThumb('https://musora-web-platform.s3.amazonaws.com/workouts/'.$brand.'/'.$thumbnail);
