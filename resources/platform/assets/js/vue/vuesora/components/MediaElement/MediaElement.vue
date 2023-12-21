@@ -144,6 +144,10 @@ export default {
             type: [String, Number],
             default: null,
         },
+        seekToTime: {
+            type: [String, Number],
+            default: 0
+        }
     },
     data() {
         return {

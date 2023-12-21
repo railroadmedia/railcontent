@@ -1,7 +1,6 @@
 <script setup>
 import { XIcon } from "@heroicons/vue/solid";
-import { vMaska } from 'maska';
-import { reactive, ref, onUpdated, onBeforeMount } from 'vue';
+import { ref, onUpdated, onBeforeMount } from 'vue';
 const props = defineProps({
   initialValue: {
     type: String,
@@ -88,13 +87,13 @@ const props = defineProps({
 });
 
 const maskedValue = ref('');
-const bindedObject = reactive({});
 
-const emit = defineEmits(["onChange", "onFocus"]);
+const emit = defineEmits(["onChange", "onFocus", "onEnter"]);
 
 const onClear = (e) => {
   e.preventDefault();
   emit("onChange", '');
+  emit("onEnter", '');
   maskedValue.value = '';
 };
 
@@ -108,7 +107,7 @@ const getBaseInputStyles = () => `
   `
 
 onUpdated(() => {
-  emit('onChange', bindedObject.unmasked);
+  emit('onChange', maskedValue.value);
 })
 
 onBeforeMount(()=> {
@@ -124,22 +123,21 @@ onBeforeMount(()=> {
         labelValue
       }}</label>
     <div class="tw-flex tw-relative">
-      <input v-model="maskedValue" 
-             v-maska="bindedObject" 
-             v-on:keypress.enter.prevent="onEnter" 
-             :data-maska="maskaConfig.dataMaska" 
-             :data-maska-tokens="maskaConfig.maskaTokens" 
+      <input v-model="maskedValue"
+             v-on:keypress.enter.prevent="onEnter"
+             :data-maska="maskaConfig.dataMaska"
+             :data-maska-tokens="maskaConfig.maskaTokens"
              :placeholder="placeholder" :id="id"
              :class="[getBaseInputStyles(),
                       `${inputOverride ? inputOverride : ''}`,
                       { '!tw-border-red-500 dark:!tw-border-red-500' : error },
                       { 'tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : disabled  },
                     ]"
-             :name="inputName" 
+             :name="inputName"
              :type="inputType"
-             :disabled="disabled" 
+             :disabled="disabled"
              autocomplete="off"
-             @focus="() => emit('onFocus')" 
+             @focus="() => emit('onFocus')"
       />
       <div v-if="showClearButton"
         :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${maskedValue.length ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">

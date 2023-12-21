@@ -28,6 +28,21 @@ const props = defineProps({
     autoplay: {
         type: Boolean,
         default: false,
+    },
+    forceStartTime: {
+        type: Boolean,
+        default: false,
+    },
+    loop: {
+        type: Boolean,
+        default: false,
+    },
+    startTime: {
+        type: [Number, String],
+        default: 0,
+    },
+    endTime: {
+        type: [Number, String],
     }
 });
 
@@ -179,7 +194,6 @@ const handleSoundsliceEvent = (event) => {
                 
                 //Set Zoom
                 //ssiframe.value.contentWindow.postMessage(`{"method": "setZoom", "arg": ${globalSettings.zoom} }`, 'https://www.soundslice.com');
-
                 //Set Audio Source
                 // if(uniqueSettings.audioSource) {
                 //     ssiframe.value.contentWindow.postMessage(`{"method": "changeAudioByIndex", "arg": "${uniqueSettings.audioSource}" }`, 'https://www.soundslice.com');
@@ -187,6 +201,12 @@ const handleSoundsliceEvent = (event) => {
 
                 //Get Current Time
                 ssiframe.value.contentWindow.postMessage(`{"method": "seek", "arg": ${uniqueSettings.time} }`, 'https://www.soundslice.com');
+                
+                //Set Loop
+                if(props.loop) {
+                    ssiframe.value.contentWindow.postMessage(`{"method": "setLoop", "arg": [${props.startTime}, ${props.endTime}] }`, 'https://www.soundslice.com');
+                }
+                
                 //Done
                 isLoading.value = false;
                 break
@@ -258,11 +278,15 @@ onBeforeMount(()=> {
     if(localStorage.getItem("ssVolume")) {
         globalSettings.volume = localStorage.getItem("ssVolume");
     }
-
     //GET Current Time
-    if(localStorage.getItem(`${ props.soundsliceSlug }_currentTime`)) {
-        uniqueSettings.time = localStorage.getItem(`${ props.soundsliceSlug }_currentTime`);
+    if(!props.forceStartTime) {
+        if(localStorage.getItem(`${ props.soundsliceSlug }_currentTime`) ) {
+            uniqueSettings.time = localStorage.getItem(`${ props.soundsliceSlug }_currentTime`);
+        }
+    } else {
+        uniqueSettings.time = props.startTime;
     }
+
 
     //GET Layout
     if(localStorage.getItem("ssLayout")) {

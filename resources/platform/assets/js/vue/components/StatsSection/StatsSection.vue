@@ -34,11 +34,11 @@ const { brand } = storeToRefs(userStore);
         <!-- Section Title -->
         <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
             <a :href="`${accountUrl}`"  class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">My Stats</h2>
+                <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">My Stats</h2>
             </a>
             <a :href="`${accountUrl}`"
                 aria-label="See My Dashboard"
-                class="tw-text-base tw-uppercase  xl:tw-text-lg xl:tw-leading-none tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                class="tw-text-sm tw-uppercase md:tw-text-base md:tw-leading-none tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
             >
                 Dashboard
             </a>

@@ -44,7 +44,7 @@ onBeforeMount(() => {
           md:tw-justify-between
           tw-relative
           tw-p-5
-          tw-mb-5
+          tw-mb-[30px]
         "
         v-if="showBanner"
     >

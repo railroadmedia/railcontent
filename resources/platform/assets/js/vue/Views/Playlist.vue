@@ -8,7 +8,7 @@
     <PlaylistHeader
         :playlist="playlist"
         :has-access="playlist['has_access']"
-        :lessons="listLessons"
+        :lessons="lessons"
     />
 
     <PlaylistCatalog
@@ -35,7 +35,7 @@ const props = defineProps({
         default: {}
     },
     lessons: {
-        type: Array,
+        type: [Array,Object],
         default: []
     }
 })

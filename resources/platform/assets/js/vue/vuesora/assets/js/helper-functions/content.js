@@ -103,9 +103,11 @@ export default {
                         ).length > 0;
 
                         if(!value_exists){
+                            const numberFormat = /\s\(\d{1,}\)/;
+
                             filter_map[key].push({
                                 key: filter_options[key][i],
-                                value: filter_options[key][i]
+                                value: filter_options[key][i].replace(numberFormat, '')
                             });
                         }
                     }
@@ -537,17 +539,19 @@ export default {
      * @returns {string} - the icon class name
      */
     getContentTypeIcon(type){
-        type = type
-            .replace(/-part/g, '') // Remove the -part
-            .replace(/-bundle/g, '') // Remove the -bundle
-            .replace(/-level/g, '') // Remove the -level
-            .replace(/-course/g, '') // Remove the -course
-            .replace(/-lesson/g, '');  // Remove -lesson
-        const contentType = this.topLevelContentTypes().filter(content =>
-            content.type === type
-        )[0];
+        if(type) {
+            type = type
+                .replace(/-part/g, '') // Remove the -part
+                .replace(/-bundle/g, '') // Remove the -bundle
+                .replace(/-level/g, '') // Remove the -level
+                .replace(/-course/g, '') // Remove the -course
+                .replace(/-lesson/g, '');  // Remove -lesson
+            const contentType = this.topLevelContentTypes().filter(content =>
+                content.type === type
+            )[0];
 
-        return contentType ? contentType.icon : undefined;
+            return contentType ? contentType.icon : undefined;
+        }
     },
 
     /**

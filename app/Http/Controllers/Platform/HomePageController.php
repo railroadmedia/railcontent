@@ -182,6 +182,8 @@ class HomePageController extends BaseController
 
         $newContent = $this->getNewContents();
 
+        $workoutsContent = $this->getWorkoutsContents();
+
         $userMetrics = $this->getUserMetrics();
 
         $followedLessons = $this->contentFollowService->getLessonsForFollowedCoaches(
@@ -350,6 +352,7 @@ class HomePageController extends BaseController
             'brand' => $brand,
             "hotForumTopics" => $hotForumTopics,
             "newContentJson" => $newContent->toResponseRawJson(),
+            "workoutsContentJson" => $workoutsContent->toResponseRawJson(),
             "startedContentJson" => $startedLessons->toResponseRawJson(),
             "hasStartedLessons" => count($followedLessons->results()) > 0,
             "usersList" => $usersList,
@@ -606,6 +609,29 @@ class HomePageController extends BaseController
         ContentRepository::$pullFutureContent = true;
 
         return $contents;
+    }
+
+
+    /**
+     * @return ContentFilterResultsEntity
+     */
+    private function getWorkoutsContents()
+    {
+        $workouts = $this->contentService->getFiltered(
+            1,
+            10,
+            'slug',
+            ['workout'],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            false
+        );
+
+        return $workouts;
     }
 
     /**

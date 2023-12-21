@@ -33,7 +33,7 @@
                 <div class="flex flex-row align-v-center">
                     <a href="{{ url()->route('platform.packs') }}"
                         aria-label="See All Lesson Packs Lessons"
-                        class="tw-font-bold dark:tw-text-white tw-text-2xl lg:tw-text-3xl">
+                        class="tw-font-bold dark:tw-text-white tw-text-xl md:tw-text-2xl">
                         Lesson Packs
                     </a>
                 </div>
@@ -67,9 +67,9 @@
             <!-- COURSES SECTION-->
             <div class="flex flex-row mb-3">
                 <div class="flex flex-column grow">
-                    <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+                    <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]">
                         <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'course']) }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                            <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Courses</h2>
+                            <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl">Courses</h2>
                         </a>
                         <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'course']) }}" aria-label="See All New Lessons" class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                             See All
@@ -107,9 +107,9 @@
             <!-- QUICK TIPS SECTION-->
             <div class="flex flex-row mb-3">
                 <div class="flex flex-column grow">
-                    <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+                    <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]">
                         <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'quick-tips']) }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                            <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Quick Tips</h2>
+                            <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl">Quick Tips</h2>
                         </a>
                         <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'quick-tips']) }}" aria-label="See All New Lessons" class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                             See All
@@ -150,7 +150,7 @@
             <div class="flex flex-row">
                 <div class="flex flex-column grow">
                     <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
-                        <h2 class="tw-text-[#00101D] dark:tw-text-white tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Topics</h2>
+                        <h2 class="tw-text-[#00101D] dark:tw-text-white tw-font-bold tw-text-xl md:tw-text-2xl">Topics</h2>
                     </div>
 
                     <div class="tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-x-4 tw-gap-y-2">

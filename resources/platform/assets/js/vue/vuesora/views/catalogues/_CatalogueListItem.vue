@@ -74,7 +74,7 @@
     </div>
 
     <!-- TITLES AND COLUMN DATA (on mobile) -->
-    <div class="tw-flex tw-flex-col tw-justify-center tw-mr-auto title-column overflow">
+    <div class="tw-flex tw-flex-col tw-justify-center tw-mr-auto title-column tw-flex-grow overflow">
 
       <!-- Is New -->
       <div v-if="isBranchPath"
@@ -84,14 +84,14 @@
       </div>
 
       <p v-if="!isCoach"
-        class="tw-text-base font-compressed tw-uppercase text-truncate tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]" :class="[
+        class="tw-text-xs font-compressed tw-uppercase text-truncate tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]" :class="[
           overview ? 'dense' : 'font-compressed',
         ]">
         {{ mappedData.color_title }}
       </p>
 
       <p class="tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title"
-        :class="overview ? 'heading' : 'tw-text-sm lg:tw-text-base'">
+        :class="overview ? 'heading' : 'tw-text-sm'">
         {{ mappedData.black_title }}
       </p>
 
@@ -116,9 +116,10 @@
         " :class="`${this.overview ? 'tw-mt-4' : ''}`">
         <span v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`">
           <span v-if="i > 0" class="bullet">-</span>
-
           {{ column_data }}
         </span>
+        <!-- Difficulty Label -->
+        <DifficultyLabel v-if="mappedData.difficulty" class="sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
       </p>
     </div>
 
@@ -129,6 +130,9 @@
         :src="mappedData.sheet_music" loading="lazy" />
     </div>
 
+    <!-- Difficulty Label -->
+    <DifficultyLabel v-if="mappedData.difficulty" class="tw-hidden xl:tw-flex sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
+
     <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
     <template v-if="!is_search">
       <div v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`" class="
@@ -137,7 +141,7 @@
           tw-uppercase
           tw-items-center
           tw-justify-center
-          basic-col
+          sm:tw-w-[110px] xl:tw-flex-shrink-0
           tw-text-center
           tw-text-xs
           font-compressed
@@ -148,34 +152,18 @@
 
     <!-- ONLY SHOW TYPE ON SEARCHES -->
     <template v-if="is_search">
-      <div v-if="item.type === 'song'" class="
-          tw-hidden
-          sm:tw-flex
-          tw-flex-col
-          tw-uppercase
-          tw-justify-center
-          basic-col
-          tw-text-center
-          tw-text-xs
-        ">
-        {{ itemStyle }}
-      </div>
-      <div v-if="mappedData.column_data && mappedData.column_data.length" class="
-          tw-hidden
-          sm:tw-flex
-          tw-flex-col
-          tw-uppercase
-          tw-justify-center
-          basic-col
-          tw-text-center
-          tw-text-xs
-        ">
-          <template v-if="brand !== 'pianote'">
-            {{ mappedData.column_data[0] }}
-          </template>
-          <template v-if="brand === 'pianote'">
-            {{ mappedData.column_data[1] }}
-          </template>
+      <div v-if="mappedData.column_data && mappedData.column_data.length" 
+          class="
+            tw-hidden
+            sm:tw-flex
+            tw-flex-col
+            tw-uppercase
+            tw-justify-center
+            sm:tw-w-[110px] xl:tw-flex-shrink-0
+            tw-text-center
+            tw-text-xs"
+      >  
+        {{ mappedData.column_data[0] }}   
       </div>
       <div v-if="item.type !== 'song'" class="
           tw-hidden
@@ -183,17 +171,19 @@
           tw-flex-col
           tw-uppercase
           tw-justify-center
-          basic-col
+          sm:tw-w-[110px] xl:tw-flex-shrink-0
           tw-text-center
           tw-text-xs
         ">
         {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}
       </div>
       <div class="
-          flex tw-flex-col
-          uppercase
+          tw-hidden
+          sm:tw-flex
+          tw-flex-col
+          tw-uppercase
           tw-justify-center
-          basic-col
+          sm:tw-w-[110px] xl:tw-flex-shrink-0
           text-center
           tw-text-xs
           hide-sm-down
@@ -255,10 +245,13 @@
 <script>
 import Mixin from "./_mixin";
 import ThemeClasses from "../../mixins/ThemeClasses";
-
+import DifficultyLabel from '../../../components/DifficultyLabel/DifficultyLabel';
 export default {
   name: "CatalogueListItem",
   mixins: [Mixin, ThemeClasses],
+  components: {
+    DifficultyLabel,
+  },
   props: {
     brand: {
       type: String,
@@ -275,6 +268,19 @@ export default {
   },
   computed: {
     mappedData() {
+      //console.log('mappedData', this.contentModel.list.column_data)
+      const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value
+      if (Number.isFinite(Number(difficultyValue))) {
+        this.contentModel.list.difficulty = difficultyValue;
+      }
+      else {
+        this.contentModel.list.difficulty = 'all';
+      }
+
+      const excludeWords = ['novice', 'beginner', 'intermediate', 'advanced', 'expert', 'all'];
+      const filteredColumnData = this.contentModel.list.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));
+      this.contentModel.list.column_data = filteredColumnData
+
       return this.contentModel.list;
     },
 
@@ -315,7 +321,7 @@ export default {
     thumbnailColumnClass() {
       return {
         "large-thumbnail": this.overview,
-        "thumbnail-col": !this.overview,
+        "tw-w-[110px] sm:tw-w-[142px]": !this.overview,
         active: this.active,
         "background-cards tw-mt-3":
           this.item.type === "learning-path" ||

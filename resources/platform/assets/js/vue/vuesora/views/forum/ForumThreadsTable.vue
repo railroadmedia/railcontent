@@ -4,20 +4,20 @@
 
         <!-- Forum Tabs -->
         <div v-if="!onlyFollowed && showTabs"
-            class="tw-flex tw-px-4">
+             class="tw-flex tw-px-4">
             <div class="tw-flex tw-flex-col tw-mb-6">
                 <div class="tw-flex">
                     <a class="tw-no-underline tw-mr-6"
-                        :href="currentUrl"
-                        :class="[!isFollowedSection ? 'tw-text-[#00101D] dark:tw-text-white' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]' ]"
+                       :href="currentUrl"
+                       :class="[!isFollowedSection ? 'tw-text-[#00101D] dark:tw-text-white' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]' ]"
                     >
                         <h3 class="tw-text-3xl tw-font-bold tw-cursor-pointer">
                             All Threads
                         </h3>
                     </a>
                     <a class="tw-no-underline"
-                        :href=" currentUrl + '?followed=true' "
-                        :class="[isFollowedSection ? 'tw-text-[#00101D] dark:tw-text-white' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]', {'hide': searching}]"
+                       :href=" currentUrl + '?followed=true' "
+                       :class="[isFollowedSection ? 'tw-text-[#00101D] dark:tw-text-white' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]', {'hide': searching}]"
                     >
                         <h3 class="tw-text-3xl tw-font-bold tw-cursor-pointer">
                             Followed
@@ -33,7 +33,7 @@
         >
             <div class="tw-flex tw-flex-col tw-mb-6">
                 <div class="tw-no-underline tw-mr-6 tw-text-[#00101D] dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-2"
-                        :class="[ brandBorderColor ]"
+                     :class="[ brandBorderColor ]"
                 >
                     <h3 class="tw-text-3xl tw-font-bold tw-cursor-pointer">
                         All New Threads
@@ -76,7 +76,7 @@
 
                     <!-- Search Bar -->
                     <div class="tw-flex tw-w-full tw-mb-4 tw-order-first md:tw-order-last"
-                        :class="[!onlyFollowed && !searching ? 'md:tw-w-2/3' : '']"
+                         :class="[!onlyFollowed && !searching ? 'md:tw-w-2/3' : '']"
                     >
                         <div class="tw-flex tw-flex-col tw-w-full tw-w-full tw-mr-3 form-group">
                             <input
@@ -152,7 +152,7 @@
 
             <!-- Threads Table Header -->
             <div v-if="pinnedThreads.length !== 0 || threadsArray.length !== 0"
-                class="tw-flex tw-bg-gray-200 dark:tw-bg-[#002039] tw-h-10 tw-w-full tw-items-center tw-rounded-t-lg"
+                 class="tw-flex tw-bg-gray-200 dark:tw-bg-[#002039] tw-h-10 tw-w-full tw-items-center tw-rounded-t-lg"
             >
                 <div class="tw-uppercase tw-text-gray-500 dark:tw-text-white tw-text-sm tw-font-bold tw-pl-8 tw-w-full lg:tw-w-9/12">
                     Thread Details
@@ -267,12 +267,12 @@ export default {
             default: () => true,
         },
         latestThreadsUrl: {
-          type: String,
-          default: () => '/threads/latest',
+            type: String,
+            default: () => '/threads/latest',
         },
         searchJsonResultsEndpointUrl: {
-          type: String,
-          default: () => '/threads/latest',
+            type: String,
+            default: () => '/threads/latest',
         },
     },
     data() {

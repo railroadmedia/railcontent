@@ -228,7 +228,7 @@
                 @if (!empty($lessonContent->fetch('*assignments', [])))
                     <div class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
                         <div class="tw-flex tw-flex-row pv-3 tw-w-full">
-                            <h1 class="heading dark:tw-text-white">Assignments</h1>
+                            <h1 class="heading dark:tw-text-white tw-text-xl md:tw-text-2xl">Assignments</h1>
                         </div>
                         <div class="tw-flex tw-flex-row tw-w-full">
                             <assignments-container

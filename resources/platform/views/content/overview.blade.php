@@ -32,6 +32,10 @@
     @endif
 @endsection
 
+@php
+    //dd( $parentContent->fetch('data.logo_image_url') )
+@endphp
+
 {{-- Content --}}
 @section('content')
 
@@ -39,7 +43,7 @@
 
     @if($parentContent->fetch('type') === 'learning-path')
         @include('partials._learning-path', ['learningPathSlug' => $parentContent->fetch('slug')])
-    @else        
+    @else
         {{-- Overview Headers --}}
         @if($parentContent->fetch('type') === 'pack-bundle')
             @include('partials.content.overview-headers._pack-bundle')
@@ -47,6 +51,30 @@
             @include('partials.content.overview-headers._learning-path-level')
         @elseif($parentContent->fetch('type') === 'learning-path-course')
             @include('partials.content.overview-headers._learning-path-course')
+        @elseif($parentContent->fetch('type') === 'challenge')
+            @component('partials.bladesora.members.components.header-banner', [
+                'hideUser' => true,
+                'contentType' => $parentContent->fetch('type'),
+                'backgroundImage' => $parentContent->fetch('data.header_image_url'),
+            ])
+                @slot('content')
+                    <!-- Back Button -->
+                    <a href="{{ url()->route('platform.workouts.challenges') }}"
+                        class="tw-absolute tw--top-[16px] tw-left-4 lg:tw-left-8 tw-inline-flex tw-items-center tw-justify-center tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border-[2px] tw-border-white tw-bg-black tw-rounded-full  hover:tw-bg-white tw-text-white hover:tw-text-[#000C17] tw-mr-3">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                    </a>
+                    <!-- Content -->
+                    <div class="flex flex-column pr-1 align-v-bottom align-h-center tw-self-end">
+                        {{-- Pack Logo --}}
+                        <img alt="{{ $parentContent->fetch('title') }} Logo"
+                            class="tw-transition-opacity tw-w-[150px] sm:tw-w-[250px] md:tw-w-[300px]  tw-opacity-0"
+                            src="{{ $parentContent->fetch('data.logo_image_url') }}"
+                            onload="this.classList.remove('tw-opacity-0')"
+                        >
+                    </div>
+                @endslot
+            @endcomponent
+
         @else
             @include('partials.content.overview-headers._default')
         @endif
@@ -88,7 +116,7 @@
         ])
     @endif
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-[30px]">
         <div class="tw-flex tw-flex-col">
             <div class="tw-flex tw-w-full tw-flex-row">
 

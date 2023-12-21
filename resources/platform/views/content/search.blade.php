@@ -16,7 +16,7 @@
 
 @section('content')
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 forum-post tw-py-12">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-py-12">
         <div class="tw-flex tw-flex-col ">
 
             <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">

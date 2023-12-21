@@ -64,7 +64,7 @@ const handleAddRelatedLesson = () => {
                 <img :src="`https://musora.com/cdn-cgi/image/width=330/${relatedLessonThumbnail}`"
                     class="tw-h-[70px] tw-rounded" />
             </a>
-            <a :href="relatedLessonUrl" class="tw-flex tw-flex-col tw-px-[16px]">
+            <a :href="relatedLessonUrl" class="tw-flex tw-flex-col tw-px-[16px] tw-overflow-hidden">
                 <div class="tw-text-[12px] tw-text-black dark:tw-text-[#9EC0DC]">
                     <template v-if="props.relatedLesson.route">
                         <span v-for="(route, i) in props.relatedLesson.route" :key="i">
@@ -72,7 +72,7 @@ const handleAddRelatedLesson = () => {
                         </span>
                     </template>
                 </div>
-                <div class="tw-text-[16px] tw-text-black dark:tw-text-white tw-font-bold">
+                <div class="tw-text-[16px] tw-text-black dark:tw-text-white tw-font-bold tw-truncate">
                     {{ relatedLessonTitle }}
                 </div>
                 <div class="tw-text-[14px] tw-text-black dark:tw-text-[#9EC0DC]">

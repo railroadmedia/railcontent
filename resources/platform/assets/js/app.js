@@ -11,17 +11,19 @@ import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
 
 //App Pages
-import Home from './vue/views/Home.vue';
-import Support from './vue/views/Support';
-import Schedule from './vue/views/Schedule';
-import Playlists from './vue/views/Playlists';
-import Playlist from './vue/views/Playlist';
+import Workouts from './vue/Views/Workouts';
+import WorkoutsPlayback from './vue/Views/WorkoutsPlayback';
+import Home from './vue/Views/Home.vue';
+import ChildCatalog from './vue/Views/ChildCatalog.vue';
+import Support from './vue/Views/Support';
+import Schedule from './vue/Views/Schedule';
+import Playlists from './vue/Views/Playlists';
+import Playlist from './vue/Views/Playlist';
 import Referral from './vue/views/Referral';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
 import PageContainer from './vue/components/PageContainer/PageContainer.vue';
-import HomeCardLinks from './vue/components/HomeCardLinks/HomeCardLinks.vue';
 import CatalogSection from './vue/components/CatalogSection/CatalogSection.vue';
 import CatalogueCardContainer from './vue/components/Catalogue/CatalogueCardContainer.vue';
 import StatsSection from './vue/components/StatsSection/StatsSection.vue';
@@ -32,10 +34,13 @@ import LoginForm from './vue/components/LoginForm/LoginForm.vue';
 import ResetPassForm from './vue/components/ResetPassForm/ResetPassForm.vue';
 import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
 import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue';
-import InfoModal from './vue/components/Modal/InfoModal';
+import InfoModal from './vue/components/Modal/InfoModal.vue';
 import SoundSlice from './vue/components/SoundSlice/SoundSlice.vue';
 import CohortBanner from './vue/components/CohortBanner/CohortBanner.vue';
 import ContentInfo from './vue/components/ContentInfo/ContentInfo';
+import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWrapper';
+//import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper';
+import ChildCollectionPage from './vue/components/CollectionPage/ChildCollectionPage';
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -243,7 +248,6 @@ app.component('AppContainer', AppContainer)
     .component('Home', Home)
     .component('HeaderCarousel', HeaderCarousel)
     .component('StaticHeader', StaticHeader)
-    .component('HomeCardLinks', HomeCardLinks)
     .component('CatalogSection', CatalogSection)
     .component('StatsSection', StatsSection)
     .component('CoachEvent', CoachEvent)
@@ -268,6 +272,12 @@ app.component('AppContainer', AppContainer)
     .component('CohortBanner', CohortBanner)
     .component('CatalogueCardContainer', CatalogueCardContainer)
     .component('ContentInfo', ContentInfo)
+    .component('CollectionFilterWrapper', CollectionFilterWrapper)
+    //.component('CollectionWrapper', CollectionWrapper)
+    .component('ChildCollectionPage', ChildCollectionPage)
+    .component('Workouts', Workouts)
+    .component('WorkoutsPlayback', WorkoutsPlayback)
+    .component('ChildCatalog', ChildCatalog)
     .component('Support', Support)
     .component('Schedule', Schedule)
     .component('Playlists', Playlists)

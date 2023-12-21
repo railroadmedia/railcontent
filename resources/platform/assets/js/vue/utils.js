@@ -10,7 +10,7 @@ export const setEndpointPrefix = () => {
 };
 
 export const searchCoaches = (brand, term) => {
-    const coachesUrl = `${window.ENDPOINT_PREFIX}/railcontent/content?brand=${brand}&limit=18&statuses[]=published&sort=-published_on&required_fields[]=is_coach,1&page=1${term ? '&term='+term : ''}`
+    const coachesUrl = `${window.ENDPOINT_PREFIX}/railcontent/content?brand=${brand}&limit=18&statuses[]=published&sort=-published_on&required_fields[]=is_coach,1&page=1${term ? '&term=' + term : ''}`
     return axios.get(coachesUrl);
 }
 
@@ -19,7 +19,7 @@ const getResultValue = (el, searchKey, searchObj) => {
         const findResult = el[searchObj].find(({ key }) => key === searchKey);
         return findResult ? findResult.value : '';
     }
-    return  '';
+    return '';
 };
 
 
@@ -41,3 +41,10 @@ export const transformCoachesCardData = (result) => {
         }
     })
 };
+
+export function snakeToCapitalized (str) {
+    return str
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(' ');
+}

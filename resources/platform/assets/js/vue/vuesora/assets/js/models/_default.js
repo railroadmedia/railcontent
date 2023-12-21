@@ -11,7 +11,7 @@ export default class ContentModel {
         this.card = {
             thumbnail: this.getPostThumbnail(),
             logo_image: this.getPostLogoImage(),
-            color_title: this.postType,
+            color_title: this.postInstructor || this.postType,
             content_type: this.getTypeWithIcon(),
             black_title: this.getPostField('title'),
             description: this.getPostDatum('description'),
@@ -113,7 +113,7 @@ export default class ContentModel {
     }
 
     get postType() {
-        return this.post.type.replace('bundle-', '').replace(/-/g, ' ');
+        if(this.post.type) return this.post.type.replace('bundle-', '').replace(/-/g, ' ');
     }
 
     getTypeWithIcon() {
