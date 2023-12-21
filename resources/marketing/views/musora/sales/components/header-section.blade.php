@@ -6,7 +6,7 @@
                 <img class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%;filter: brightness(62%) hue-rotate(169deg);" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2023/underline.png" alt="underline" fetchpriority="high">
             @endif
         </h1>
-        <p class="text-sm leading-normal tracking-widest sm:mt-10 mb-3 sm:mb-5 lg:mt-10 lg:mb-7">
+        <p class="text-sm leading-normal tracking-widest sm:mt-10 mb-5 lg:mt-10 lg:mb-7">
             <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
             <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
             <br class="lg:hidden">

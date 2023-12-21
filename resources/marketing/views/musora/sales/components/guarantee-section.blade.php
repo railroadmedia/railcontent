@@ -1,8 +1,8 @@
-<div class="h-5 sm:h-10 mt-10 md:-mt-10 relative" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #FFF calc(50% + 1px));"></div>
+<div class="h-5 sm:h-10 -mt-10 relative" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #FFF calc(50% + 1px));"></div>
 <div id="guarantee" class="anchor"></div>
 <section class="pb-10 sm:pb-14 lg:pb-20 relative text-center px-6" style="background-color:#fff;">
     <div class="container mx-auto max-w-6xl">
-        <img class="h-28 md:h-32 -mt-14 md:-mt-16 mb-5 sm:mb-8 transition-opacity opacity-0"
+        <img class="h-28 md:h-32 -mt-16 md:-mt-20 mb-5 sm:mb-8 transition-opacity opacity-0"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
             src={!! $badge !!} alt="guarantee-badge">

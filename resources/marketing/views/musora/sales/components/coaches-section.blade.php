@@ -52,7 +52,7 @@
                     class="max-w-6xl mx-auto px-4 lg:px-6 mb-6 md:mb-0 md:absolute md:inset-0"
                     :class="!(isMobile || (!isMobile && selectedId === {{ $key+1 }})) && 'opacity-0'"
                 >
-                    <h4 class="font-extrabold text-left mb-2 md:hidden">{!!  $course['title']  !!}</h4>
+                    <h4 class="font-extrabold mb-3 md:hidden">{!!  $course['title']  !!}</h4>
                     <div
                         x-data="{
                                 init() {
@@ -61,7 +61,7 @@
                                                 arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                                                 prev: 'hidden',
                                                 next: 'splide__arrow--next your-class-next hidden sm:flex -right-1',
-                                                pagination: 'splide__pagination hidden md:flex -bottom-10',
+                                                pagination: 'splide__pagination flex -bottom-10',
                                         },
                                         padding: '3rem',
                                         perPage: 4,
@@ -88,7 +88,7 @@
                                 },
                             }"
                     >
-                        <section x-ref="splide" class="splide mb-10 md:mb-20 h-44 sm:h-48 lg:h-72">
+                        <section x-ref="splide" class="splide mb-20 h-44 sm:h-48 lg:h-72">
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @foreach ($course['images'] as $image)

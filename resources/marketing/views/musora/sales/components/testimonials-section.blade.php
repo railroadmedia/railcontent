@@ -7,7 +7,7 @@
         @endforeach
     }">
 
-    <div class="container mx-auto max-w-6xl">
+    <div class="container mx-auto max-w-6xl mb-12">
         <h2 class="leading-tight mb-3"><strong>Trusted by {!! $header !!} everywhere.</strong></h2>
         <p class="mx-auto mb-7">
             <span class="inline-block align-middle">
@@ -30,9 +30,9 @@
                     init() {
                         new Splide(this.$refs.splide, {
                             classes: {
-                                    arrow: 'splide__arrow bg-white opacity-100 top-[53%] shadow-lg h-11 w-11',
+                                    arrow: 'splide__arrow bg-white opacity-100 top-1/2 transform -translate-y-1/2 shadow-lg h-11 w-11',
                                     prev: 'hidden',
-                                    next: 'splide__arrow--next your-class-next hidden sm:flex -right-1 mb-16',
+                                    next: 'splide__arrow--next your-class-next hidden sm:flex -right-1',
                                     pagination: 'splide__pagination hidden md:flex -bottom-10',
                             },
                             perMove: 1,

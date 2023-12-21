@@ -242,8 +242,6 @@
     @endphp
 
     @include('musora.sales.components.workouts-section', [
-        'header' => 'Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.',
-        'desc' => 'With Drumeo, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314560/rendition/540p/file.mp4?loc=external&signature=1549cce1dacabad80dd416b5a439f6639d3b7b30c7e4d70d46245bf70c6d5102',
     ])
 
