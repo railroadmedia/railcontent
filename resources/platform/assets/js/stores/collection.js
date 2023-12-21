@@ -15,7 +15,7 @@ export const useCollectionStore = defineStore({
                 limit: 10,
                 params: {},
                 searchTerm: '',
-                sort: 'slug',
+                sort: '-published_on',
                 progress: '',
             },
             isCoach: false,
