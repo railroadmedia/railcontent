@@ -141,7 +141,6 @@ class WorkoutsImport2023 extends Command
                 $content->setChapter($this->getValue($data, $headersRow, 'Chapter 4'), 4, self::CHAPTER_THUMBS[$content->brand][3]);
                 $content->setChapter($this->getValue($data, $headersRow, 'Chapter 5'), 5, self::CHAPTER_THUMBS[$content->brand][4]);
                 $content->setChapter($this->getValue($data, $headersRow, 'Chapter 6'), 6, self::CHAPTER_THUMBS[$content->brand][5]);
-                $content->setInstructor($this->getValue($data, $headersRow, 'Instructor'));
 
                 $isCopyright = $this->getValue($data, $headersRow, 'Copyright');
                 if($isCopyright == 'Yes') {
