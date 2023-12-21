@@ -197,12 +197,9 @@ $parentId = $mappingIds[$stagingParentId];
 
                 $contentIds[] = $contentId;
 
-
-                //delete cache associated with the content id
-                //CacheHelper::deleteCache('content_'.$contentId);
-                //CacheHelper::deleteUserFields(null, 'contents');
-                // event(new ElasticDataShouldUpdate($contentId));
-
+                if($content->video) {
+                    $contentService->fillCompiledViewContentDataColumnForContentIds([$content->video]);
+                }
                 event(new ContentCreated($contentId));
 
             }
