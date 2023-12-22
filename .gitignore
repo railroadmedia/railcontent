@@ -131,3 +131,6 @@ storage/clockwork/*
 .env*
 
 storage/clockwork*
+
+# phpunit coverage report
+reports/*
