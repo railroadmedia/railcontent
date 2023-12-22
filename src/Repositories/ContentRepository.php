@@ -1343,7 +1343,7 @@ class ContentRepository extends RepositoryBase
                         ->selectPrimaryColumns()
                         ->addSelect('inner_content.lessons_grouped_by_field as lessons_grouped_by_field')
                         ->addSubJoinToQuery($subQuery)
-                        ->orderBy($this->orderBy, $this->orderDirection);
+                        ->orderBy('slug', 'asc');
                 $contentRows = $query->getToArray();
 
                 $contentRows = $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
