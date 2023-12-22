@@ -39,6 +39,18 @@
         .union-icon {
             top: -1rem;
         }
+
+        .kit-image {
+            position: relative;
+            top: 5rem;
+            margin-top: -5rem;
+        }
+        @media (max-width: 768px) {
+        .kit-image {
+            top: 3rem;
+            margin-top: -3rem; 
+        }
+}
     </style>
 @stop
 
@@ -59,7 +71,7 @@
     ])
 
 <!-- hero section-->
-<header class="text-white relative overflow-hidden z-20 pt-20"
+<header class="text-white relative overflow-hidden z-20 md:pt-16"
     style="background:linear-gradient(to bottom, rgb(26, 26, 26), #1e1e1e);">
     <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
         <div class="container mx-auto max-w-5xl">
@@ -105,15 +117,18 @@
         muted src="https://d21q7xesnoiieh.cloudfront.net/marketing/drumeo/shop/stickbag/header-vid.mp4"></video>
 </header>
 
-<!-- kit section-->
-<section class="text-center px-4 sm:px-6 pt-8 sm:pt-6 relative"
+
+<section>
+    <!-- kit section-->
+<div class="text-center px-4 sm:px-6 pt-8 sm:pt-6 relative"
     style="background: #01050D;">
      <div class="top-0 left-0 absolute w-full h-full z-10"
         style="background: linear-gradient(0deg, rgba(11, 118, 219, 0.20) 0%, rgba(11, 118, 219, 0.00) 100%)"></div>
     <div class="container mx-auto z-10 relative max-w-4xl text-white">
         <h2 class="leading-tight py-5"><strong>Pro details on a beginner budget.</strong></h2>
-        <h5 class="leading-tight mb-5">We partnered with Alesis to bring you the best way to get started or <br class="hidden md:block">
+        <h5 class="leading-tight mb-5 px-2">We partnered with Alesis to bring you the best way to get started or <br class="hidden sm:block">
             get BACK into drumming – from apartment to full house.</h5>
+           
         <picture>
             <source
                 srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)//marketing/drumeo/products/kit/alesis-drums-logo.png"
@@ -122,16 +137,16 @@
                 onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)//marketing/drumeo/products/kit/alesis-drums-logo.png">
         </picture>
-        <div class="mx-auto max-w-5xl">
-            <img class="transition-opacity opacity-0" alt="icon" loading="lazy"
+      
+            <img class="transition-opacity opacity-0 kit-image" alt="icon" loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/e-kit-chart-new.png">
-        </div>
+   
     </div>
-</section>
+</div>
 
 <!-- next section-->
-<section class="px-4 sm:px-6 py-20 text-white" style="background: #01050D">
+<div class="px-4 sm:px-6 py-16 text-white" style="background: #01050D">
     <div class="container max-w-4xl mx-auto relative z-50">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 w-full mx-2">
             <div class="px-1">
@@ -148,7 +163,9 @@
             </div>
         </div>
     </div>
+</div>
 </section>
+
 
 <!-- review section-->
 <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background:#EFF6FD">
