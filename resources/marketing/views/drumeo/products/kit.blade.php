@@ -100,7 +100,7 @@
         style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/kit/header-image.jpg');">
     </div>
     <div class="top-0 left-0 absolute w-full h-full z-10"
-        style="background: linear-gradient(to bottom, transparent, rgba(26,26,26,0.6));"></div>
+        style="background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6));"></div>
     <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline
         muted src="https://d21q7xesnoiieh.cloudfront.net/marketing/drumeo/shop/stickbag/header-vid.mp4"></video>
 </header>
@@ -151,12 +151,12 @@
 </section>
 
 <!-- review section-->
-<section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background:linear-gradient(to bottom, #fff 66%, #e8f2fb);">
+<section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background:#EFF6FD">
     <div class="container mx-auto z-10 relative max-w-5xl">
         <h2 class="leading-tight"><strong>Rave reviews for<br class="sm:hidden"> the Alesis Nitro Max</strong></h2>
         <h5 class="leading-normal py-3 sm:py-5">The Alesis Nitro Max is the highest-rated entry-level e-kit <strong>EVER</strong>.</h5>
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 lg:gap-6 pt-6">
-            <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
+            <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4; background: white;">
                 <div class="h-7 md:h-10 lg:h-12 flex items-start justify-center">
                     <img class="h-7 md:h-9 lg:h-10"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/kit/amazon-logo.png"
@@ -177,7 +177,7 @@
                 </div>
             </div>
 
-            <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
+            <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4; background: white;">
                 <div class="h-7 md:h-10 lg:h-12 flex items-start justify-center">
                     <img class="h-4 md:h-5 lg:h-6"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/kit/music-radar-logo.png"
@@ -198,7 +198,7 @@
 
                 </div>
             </div>
-            <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
+            <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4; background: white;">
                     <div class="h-7 md:h-10 lg:h-12 flex items-start justify-center">
                         <img class="h-5 md:h-7 lg:h-9"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/kit/thomann-logo.png"
@@ -218,7 +218,7 @@
                         </div>
                     </div>
             </div>
-            <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4;">
+            <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4; background: white;">
                 <div class="h-7 md:h-10 lg:h-12 flex items-start justify-center"> 
                     <img class="h-7 md:h-10 lg:h-11"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/kit/sweetwater-logo.png"
@@ -248,8 +248,8 @@
 <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative bg-drumeo text-white">
     <img class="w-8 md:w-16 absolute union-icon" src="https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/products/kit/union-icon.svg">
 
-    <div class="container mx-auto z-10 relative max-w-4xl">
-        <h4 class="leading-tight mt-2 mb-5 sm:mb-7 italic">Your new e-kit includes one year of unlimited drum lessons with... </h4>
+    <div class="container mx-auto z-10 relative max-w-5xl">
+        <h3 class="leading-tight mt-2 mb-5 sm:mb-7 italic">Your new e-kit includes one year of unlimited drum lessons with... </h3>
         <img class="w-40 md:w-80" src="https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/products/kit/drumeo-logo.svg">
     </div>
 </section>
@@ -318,11 +318,11 @@
 
 <!-- details section-->
 
-<section class="px-4 sm:px-6 py-8 sm:py-16 lg:py-20" style="background: #01050D">
+<section class="px-4 md:px-6 py-8 sm:py-16 lg:py-20" style="background: #01050D">
     <div class="container mx-auto p-4 max-w-5xl">
         <h2 class="text-white text-center leading-tight"><strong>All in one tidy package.</strong></h2>
         
-        <div class="flex flex-wrap md:flex-nowrap gap-4 pt-4 md:pt-10">
+        <div class="flex flex-wrap md:flex-nowrap gap-4 pt-10">
             <div class="md:hidden w-full">
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/gallery-02.png" alt="Drum kit" class="w-full h-auto">
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/gallery-01.png" alt="Drum kit" class="w-full h-auto py-6">
