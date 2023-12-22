@@ -1,7 +1,6 @@
 <template>
     <Breadcrumb
-        :last-level-url="breadcrumbLastLevelUrl"
-        :last-level-title="breadcrumbLevelTitle"
+        :breadcrumbs="[{ title: 'Workouts' }]"
     />
 
     <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white tw-pt-6">
