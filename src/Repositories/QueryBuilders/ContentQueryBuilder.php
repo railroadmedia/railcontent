@@ -784,10 +784,7 @@ class ContentQueryBuilder extends QueryBuilder
                                  DB::raw(
                                      "( 
            JSON_ARRAYAGG(
-            JSON_OBJECT(
-               'id', id,
-               'compiled_view_data', ".ConfigService::$tableContent.".compiled_view_data
-              )
+            id
         ) ) as lessons_grouped_by_field"
                                  ),
                              ])
@@ -812,10 +809,7 @@ class ContentQueryBuilder extends QueryBuilder
                              DB::raw(
                                  "( 
            JSON_ARRAYAGG(
-            JSON_OBJECT(
-               'id', ".$alias.".content_id,
-               'compiled_view_data', ".ConfigService::$tableContent.".compiled_view_data
-              )
+            ".$alias.".content_id      
         ) ) as lessons_grouped_by_field"
                              ),
                          ])
