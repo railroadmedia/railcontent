@@ -9,7 +9,7 @@ class MigrateCustomerIoIds extends Command
 {
     protected $signature = 'eventTracking:migrateCustomerIoIds';
 
-    protected $description = 'Sync shopfiy order data into user access permissions table';
+    protected $description = 'Merge duplicate customer.io profiles that exists in the customer_io_customers table';
     private const WORKSPACE_NAMES = ['musora', 'drumeo', 'pianote', 'guitareo', 'singeo'];
 
     public function handle(): void
