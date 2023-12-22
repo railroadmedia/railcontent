@@ -39,7 +39,9 @@
                     7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
                 @endif
             </a>
-            <div class="sm:mx-0.5 w-64 sm:w-56 join outline black smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
+            @if(empty($noTrailer))
+                <div class="sm:mx-0.5 w-64 sm:w-56 join outline black smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
+            @endif
         </div>
         <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
             <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
@@ -61,45 +63,46 @@
     <img class="absolute z-10 h-28 sm:h-36 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]" src="{{ $bubble7 }}" alt="header circle image" fetchpriority="high">
     <img class="absolute z-10 h-12 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]" src="{{ $bubble8 }}" alt="header circle image" fetchpriority="high">
 </header>
-
-<section class="sm:px-6 py-4 sm:py-5 text-white" style="background:#0c1524;">
-    <div class="container max-w-5xl mx-auto">
-        @component('_partials.components.carousel',[
-            'xdata' => "
-                classes: {
-                    arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 header-slide-btn',
-                    prev: 'hidden',
-                    next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
-                    pagination: 'hidden',
-                },
-                perPage: 1,
-                perMove: 1,
-                type: 'loop',
-                autoplay: true,
-                pauseOnHover: true,
-                pauseOnFocus: true,
-                interval: 3000,
-            ",
-        ])
-            @slot('content')
-                @foreach ($slides as $slide)
-                    <li class="splide__slide">
-                        <div class="px-3 md:px-6 text-center">
-                            <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
-                            <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
-                                <img
-                                    class="rounded-full object-cover object-right w-9 h-9 transition-opacity opacity-0"
-                                    src={{ $slide['thumb'] }}
-                                    loading="lazy"
-                                    onload="this.classList.remove('opacity-0')"
-                                    alt="{{$slide['name']}}"
-                                ><br class="inline md:hidden">
-                                <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
+@if(!empty($slides))
+    <section class="sm:px-6 py-4 sm:py-5 text-white" style="background:#0c1524;">
+        <div class="container max-w-5xl mx-auto">
+            @component('_partials.components.carousel',[
+                'xdata' => "
+                    classes: {
+                        arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 header-slide-btn',
+                        prev: 'splide__arrow--prev your-class-prev hidden sm:flex z-50',
+                        next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                        pagination: 'hidden',
+                    },
+                    perPage: 1,
+                    perMove: 1,
+                    type: 'loop',
+                    autoplay: true,
+                    pauseOnHover: true,
+                    pauseOnFocus: true,
+                    interval: 3000,
+                ",
+            ])
+                @slot('content')
+                    @foreach ($slides as $slide)
+                        <li class="splide__slide">
+                            <div class="px-3 md:px-6 text-center">
+                                <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
+                                <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
+                                    <img
+                                        class="rounded-full object-cover object-right w-9 h-9 transition-opacity opacity-0"
+                                        src={{ $slide['thumb'] }}
+                                        loading="lazy"
+                                        onload="this.classList.remove('opacity-0')"
+                                        alt="{{$slide['name']}}"
+                                    ><br class="inline md:hidden">
+                                    <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                @endforeach
-            @endslot
-        @endcomponent
-    </div>
-</section>
+                        </li>
+                    @endforeach
+                @endslot
+            @endcomponent
+        </div>
+    </section>
+@endif

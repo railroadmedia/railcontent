@@ -37,7 +37,7 @@
                         new Splide(this.$refs.splide, {
                             classes: {
                                     arrow: 'splide__arrow bg-white opacity-100 top-1/2 transform -translate-y-1/2 shadow-lg h-11 w-11',
-                                    prev: 'hidden',
+                                    prev: 'splide__arrow--prev your-class-prev hidden sm:flex -left-1',
                                     next: 'splide__arrow--next your-class-next hidden sm:flex -right-1',
                                     pagination: 'splide__pagination hidden md:flex -bottom-10',
                             },

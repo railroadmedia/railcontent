@@ -3,7 +3,8 @@
 
         "gridItems" => [
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/10-level-cirriculum.jpg',
+                "big" => true,
+                'image' => 'marketing/musora/membership/homepage/2023/10-level-cirriculum.jpg',
                 'title' => 'Step-By-Step Clarity',
                 'desc' => 'Learn the right skills in the right order with our 10-level curriculum for each instrument. ',
                 'lessonInfo' => [
@@ -13,7 +14,7 @@
                 ]
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/practical-assignments.jpg',
+                'image' => 'marketing/musora/membership/homepage/2023/practical-assignments.jpg',
                 'title' => 'Handy Practice Tools',
                 'desc' => 'Gain momentum with interactive exercises, speed control, looping, and progress tracking.',
                 'lessonInfo' => [
@@ -23,27 +24,7 @@
                 ]
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/world-class-teachers.jpg',
-                'title' => 'World-Class Teachers',
-                'desc' => 'Study with 100+ music authorities including Grammy Award winners and touring musicians. ',
-                'lessonInfo' => [
-                    [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/world-class-teachers.jpg',
-                    ],
-                ]
-            ],
-            [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/on-demand-courses2.jpg',
-                'title' => 'On-Demand Courses',
-                'desc' => 'Prefer to jump around? Boost any skill, anytime with topic-based courses for any musical goal. ',
-                'lessonInfo' => [
-                    [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/on-demand-courses2.jpg',
-                    ],
-                ]
-            ],
-            [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/downloadable-videos.jpg',
+                'image' => 'marketing/musora/membership/homepage/2023/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lesson OR download your videos so you can learn and practice anywhere, anytime. ',
                 'lessonInfo' => [
@@ -53,7 +34,28 @@
                 ]
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/personalized-support.jpg',
+                'image' => 'marketing/musora/membership/homepage/2023/on-demand-courses2.jpg',
+                'title' => 'On-Demand Courses',
+                'desc' => 'Prefer to jump around? Boost any skill, anytime with topic-based courses for any musical goal. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/on-demand-courses2.jpg',
+                    ],
+                ]
+            ],
+            [
+                "big" => true,
+                'image' => 'marketing/musora/membership/homepage/2023/world-class-teachers.jpg',
+                'title' => 'World-Class Teachers',
+                'desc' => 'Study with 100+ music authorities including Grammy Award winners and touring musicians. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/world-class-teachers.jpg',
+                    ],
+                ]
+            ],
+            [
+                'image' => 'marketing/musora/membership/homepage/2023/personalized-support.jpg',
                 'title' => 'Powered By Humans',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global music community. ',
                 'lessonInfo' => [
@@ -273,37 +275,40 @@
                     ],
                 ],
         "songItems" => [
+
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/musora/membership/homepage/2023/popular-song-icon.svg',
-                'fa-icon' => 'fa-music',
-                'title' => '1000+ popular songs.',
-                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/popular-song-icon.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/membership/homepage/2024/metronome-feature.mp4",
+                "title" => "1000+ popular songs.",
+                "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/musora/membership/homepage/2023/isolate-icon.svg',
-                'fa-icon' => 'fa-sliders-up',
-                'title' => 'Ditch the distractions.',
-                'desc' => 'Isolate the piano, guitar, or drums so you always know exactly what to play.',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/isolate-icon.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/membership/homepage/2024/speed-feature.mp4",
+                "title" => "Ditch the distractions.",
+                "desc" => "Isolate the piano, guitar, or drums so you always know exactly what to play.",
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/musora/membership/homepage/2023/loop-icon.svg',
-                'fa-icon' => 'fa-arrows-repeat',
-                'title' => 'Simplify the tricky parts.',
-                'desc' => 'Learn songs faster with perfect notation, practice loops, and tempo control.',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/loop-icon.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/membership/homepage/2024/loop-feature.mp4",
+                "title" => "Simplify the tricky parts.",
+                "desc" => "Learn songs faster with perfect notation, practice loops, and tempo control.",
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/musora/membership/homepage/2023/metronome-icon.svg',
-                'fa-icon' => 'fa-timer',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/metronome-icon.svg",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/drumless-feature.jpg",
                 'title' => 'Improve your timing.',
                 'desc' => 'Use built-in metronome - your new best friend to get the timing just right. ',
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/musora/membership/homepage/2023/devices-icon.svg',
-                'fa-icon' => 'fa-laptop-mobile',
-                'title' => 'Take your songs anywhere.',
-                'desc' => 'Accessible on any device, or printable,so you can play any song, any time.',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/devices-icon.svg",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/membership/homepage/2024/devices-feature.jpg",
+                "title" => "Take your songs anywhere.",
+                "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
             ],
-
         ],
         "testimonials" => [
             [

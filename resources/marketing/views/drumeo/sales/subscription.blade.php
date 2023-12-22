@@ -192,7 +192,7 @@
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
-            'pointFour' => '1000+ SONGS',
+            'pointFour' => '5000+ SONGS',
         ])
     @else
         @include('musora.sales.components.header-section', [
@@ -206,7 +206,7 @@
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
-            'pointFour' => '1000+ SONGS',
+            'pointFour' => '5000+ SONGS',
         ])
     @endif
 
