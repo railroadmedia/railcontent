@@ -119,6 +119,7 @@
             .option-buttons.active .radio-check i {
                 display:block!important;
             }
+        @endif
         .splide__slide.is-active .active-bg {
             background-color:#00c9ac!important;
         }
@@ -133,7 +134,6 @@
         .timed-toggle .active-toggle.active .description {
             max-height:100px!important;
         }
-        @endif
     </style>
 @stop
 
@@ -170,14 +170,14 @@
     @endif
 
     @php
-        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/rob-scallon.png';
-        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/ayla-tesler-mabe.png';
-        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/mark-lettieri.png';
-        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/pete-thorn.png';
-        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/dean-lamb.png';
-        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/sami-ghawi.png';
-        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/yvette-young.png';
-        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/kent-shores.png';
+        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/sami-ghawi.png';
+        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/ayla-tesler-mabe.png';
+        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/mark_lettieri.png';
+        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/pete-thorn.png';
+        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/dean-lamb.png';
+        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/rob-scallon.png';
+        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/yvette-young.png';
+        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/kent-shores.png';
 
         $features = $guitareo['features'];;
         $slides = $guitareo['slides'];
@@ -186,6 +186,7 @@
     @include('musora.sales.components.header-section', [
         'header' => 'Online guitar lessons<br> for all skill levels.',
             'underline' => true,
+            'fillColor' => "#00c9ac",
         'desc' => 'Learn the guitar faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
         'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/header-thumb.jpg',
         'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/jan-thumb.png',
@@ -217,6 +218,11 @@
         'desc' => 'Amplify your skills with exclusive artist <br class="hidden md:inline lg:hidden"> courses + live events with special guests.'
     ])
 
+    @include('musora.sales.components.workouts-section', [
+        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314551/rendition/540p/file.mp4?loc=external&signature=49333e2b437f90a4af69eb5b19468b68f5185729516f735cd390a6ce8b673516',
+        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/workouts-card.jpg',
+    ])
+
 
     @php
         $songItems = $guitareo['songItems'];
@@ -228,11 +234,6 @@
         'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/device.png',
         'brandName' => 'Guitareo',
         'bannerDesc' => 'Powered by Musora, Guitareo includes full access to our communities for voice, piano, and drums.',
-    ])
-    @include('musora.sales.components.learn-by-playing-section', [
-        'header' => 'Learn the guitar by<br class="inline sm:hidden"> <u>playing the guitar</u>.',
-        'desc' => 'With Guitareo, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
-                'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314551/rendition/540p/file.mp4?loc=external&signature=49333e2b437f90a4af69eb5b19468b68f5185729516f735cd390a6ce8b673516',
     ])
 
     @php

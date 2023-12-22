@@ -215,6 +215,7 @@
             @include('musora.sales.components.header-section', [
                 'header' => 'Online piano lessons<br> for all skill levels.',
                 'underline' => true,
+            'fillColor' => "#f61a30",
                 'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
                 'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/header-thumb2.jpg',
                 'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/jan-thumb2.png',
@@ -251,7 +252,6 @@
     ])
 
     @include('musora.sales.components.workouts-section', [
-        'bgColor' => '',
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314572/rendition/540p/file.mp4?loc=external&signature=b8d6bc7c80a784c2cc9473ae9e1389b3f9e005fbbce2568d7bd6b7d548a4c19e',
         'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/workouts-card.jpg',
     ])

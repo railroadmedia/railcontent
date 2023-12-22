@@ -261,7 +261,7 @@
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/songs-icon.svg",
                 "mediaVid" => true,
                 "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/metronome-feature.mp4",
-                "title" => "5000+ popular songs.",
+                "title" => "1000+ popular songs.",
                 "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
             ],
             [
@@ -269,14 +269,14 @@
                 "mediaVid" => true,
                 "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/speed-feature.mp4",
                 "title" => "Find the perfect tempo.",
-                "desc" => "Slow down or speed up any section of a song to hear every note.",
+                "desc" => "Slow down any section of a song to make those tricky bars easier.",
             ],
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/loop-icons.svg",
                 "mediaVid" => true,
                 "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/loop-feature.mp4",
                 "title" => "Loop the trouble spots.",
-                "desc" => "No more pausing and rewinding that tricky fill. Loop it over and over again!",
+                "desc" => "Create practice loops to play-through those difficult parts over and over.",
             ],
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/timing-icons.svg",
