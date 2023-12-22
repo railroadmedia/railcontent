@@ -168,14 +168,14 @@
     @endif
 
     @php
-        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/hailey-benedict.png';
-        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/lisa-witt.png';
-        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/tony-lindsay.png';
-        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/chris-johnson.png';
-        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/julia-ziegler.png';
-        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/darcy-d.png';
-        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/shelea.png';
-        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/cate-canning.png';
+        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/hailey-benedict.png';
+        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/lisa-witt.png';
+        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/tony-lindsay.png';
+        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/darcy-d.png';
+        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/julia-ziegler.png';
+        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/chris-johnson.png';
+        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/shelea.png';
+        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/cate-canning.png';
 
         $features = $singeo['features'];
         $slides = $singeo['slides'];
@@ -230,6 +230,11 @@
         'desc' => 'Shape your voice with exclusive artist courses + live events with special guests.'
     ])
 
+    @include('musora.sales.components.workouts-section', [
+        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314557/rendition/540p/file.mp4?loc=external&signature=e1db56d3f22044707be08bbb02d7327bdf4bee7a07bc705017de56ef45bf1ed4',
+        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/workouts-card.jpg',
+    ])
+
     @php
         $songItems = $singeo['songItems'];
     @endphp
@@ -241,17 +246,12 @@
         'brandName' => 'Singeo',
         'bannerDesc' => 'Powered by Musora, Singeo includes full access to our communities for drums, piano, and guitar.',
     ])
-    @include('musora.sales.components.learn-by-playing-section', [
-        'header' => 'Learning to sing made easy with <u>personal coaching</u>.',
-        'desc' => 'With Singeo, you’ll sing more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
-                'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314557/rendition/540p/file.mp4?loc=external&signature=e1db56d3f22044707be08bbb02d7327bdf4bee7a07bc705017de56ef45bf1ed4',
-    ])
 
     @php
         $testimonials = $singeo['testimonials'];
-        $youtube = number_format(Prices::$singeoYoutubeSubsc);
-        $facebook = number_format(Prices::$singeoFacebookLikes);
-        $instagram = number_format(Prices::$singeoInstagramFollowers);
+        $youtube = convertNumber(Prices::$singeoYoutubeSubsc);
+        $facebook = convertNumber(Prices::$singeoFacebookLikes);
+        $instagram = convertNumber(Prices::$singeoInstagramFollowers);
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'singers',

@@ -326,6 +326,10 @@
         'split' => true
     ])
 
+    @include('musora.sales.components.workouts-section', [
+        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts-card.jpg',
+    ])
+
 
     @php
         $songItems = $musora['songItems'];
