@@ -38,6 +38,8 @@
 
         .union-icon {
             top: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .kit-image {
@@ -49,6 +51,9 @@
         .kit-image {
             top: 3rem;
             margin-top: -3rem; 
+        }
+        .union-icon {
+            top: -0.5rem;
         }
 }
     </style>
@@ -298,11 +303,11 @@
                     <h6 class="leading-tight">Get the ultimate starter e-kit + <br>
                         one year of unlimited drum lessons.</h6>
 
-                    <h4 class="my-4 text-drumeo">
+                    <h4 class="my-4 text-drumeo"> ONLY
                         @if(floatval($productPrices['alesis-ekit']->price) > floatval($productPrices['alesis-ekit']->discounted_price))
                             <s class="opacity-50">${{ floatval($productPrices['alesis-ekit']->price) }}</s>
                             <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
-                            (Save {{ round(100 - (100 * (floatval($productPrices['alesis-ekit']->discounted_price) / floatval($productPrices['alesis-ekit']->price)))) }}%)
+                            {{-- (Save {{ round(100 - (100 * (floatval($productPrices['alesis-ekit']->discounted_price) / floatval($productPrices['alesis-ekit']->price)))) }}%) --}}
                         @else
                             <strong>Only ${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
                         @endif
