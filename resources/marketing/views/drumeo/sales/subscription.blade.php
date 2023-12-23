@@ -229,7 +229,7 @@
 
     @include('musora.sales.components.workouts-section', [
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314560/rendition/540p/file.mp4?loc=external&signature=1549cce1dacabad80dd416b5a439f6639d3b7b30c7e4d70d46245bf70c6d5102',
-        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/workouts-card.jpg',
+        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/workouts-card2.jpg',
     ])
 
     @php

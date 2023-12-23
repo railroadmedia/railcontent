@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="mt-5 sm:mt-0 sm:pl-7 sm:w-1/2 flex-grow-0">
-                <div class="h-full rounded-xl p-7 sm:p-10 pb-48 bg-black @if($theme != 'musora') text-white @else text-black @endif flex bg-cover bg-top" style="background-image:url('{{ $workoutsBG }}');">
+                <div class="h-full rounded-xl p-7 sm:p-10 pb-52 sm:pb-48 bg-black @if($theme != 'musora') text-white @else text-black @endif flex bg-cover bg-top" style="background-image:url('{{ $workoutsBG }}');">
                     <div>
                         <h5 class="leading-tight mb-3"><strong>Practice with your heroes.</strong></h5>
                         <h6 class="leading-normal max-w-lg mx-0">Never practice alone. Your favorite musicians and teachers will share their tips, cheer you along, and help you learn by playing!</h6>
