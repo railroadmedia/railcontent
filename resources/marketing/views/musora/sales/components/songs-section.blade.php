@@ -17,7 +17,7 @@
             <div class="w-full sm:w-1/2 text-left mt-6 sm:mt-0 sm:pr-8">
                 @foreach ($songItems as $key => $songItem)
                     <div class="flex px-4 py-4 mb-1 rounded-xl w-full cursor-pointer active-toggle transition-colors duration-500 border bg-[#0c1524] border-[#0c1524] @if($key == 0) active @endif">
-                        <div class="w-12 sm:w-16 flex-grow-0"><img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-8"></div>
+                        <div class="w-12 sm:w-16 flex-grow-0"><img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-8 @if($theme == 'musora') filter invert @endif"></div>
                         <div class="flex-grow pl-4">
                             <h5><strong>{!!$songItem['title']!!}</strong></h5>
                             <p class="mt-1 sm:mt-2 text-sm description overflow-hidden max-h-0">{!! $songItem['desc'] !!}</p>

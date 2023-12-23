@@ -268,7 +268,7 @@
             ],
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/devices-icon.svg",
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/membership/homepage/2024/devices-feature2.jpg",
+                "media" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/768x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/devices-feature2.jpg",
                 "title" => "Take your songs anywhere.",
                 "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
             ],

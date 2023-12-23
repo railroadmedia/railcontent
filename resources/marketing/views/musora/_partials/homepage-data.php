@@ -64,6 +64,16 @@
                     ],
                 ]
             ],
+            [
+                'image' => 'marketing/musora/membership/homepage/2024/any-instrument.jpg',
+                'title' => 'Any instrument, any time',
+                'desc' => 'Get all-access to piano, guitar, drums, and singing lessons.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/any-instrument.jpg',
+                    ],
+                ]
+            ],
         ],
         "buttons" => [
             '<i class="text-pianote align-middle mr-0.5 fa-light fa-piano-keyboard"></i> Piano',
@@ -285,7 +295,7 @@
             ],
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/isolate-icon.svg",
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/pianoless-feature.jpg",
+                "media" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/768x0/filters:quality(95)/marketing/musora/membership/homepage/2024/pianoless-feature.jpg",
                 "title" => "Ditch the distractions.",
                 "desc" => "Isolate the piano, guitar, or drums so you always know exactly what to play.",
             ],
@@ -305,7 +315,7 @@
             ],
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/devices-icon.svg",
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/devices-feature.jpg",
+                "media" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/768x0/filters:quality(95)/marketing/musora/membership/homepage/2024/devices-feature.jpg",
                 "title" => "Take your songs anywhere.",
                 "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
             ],

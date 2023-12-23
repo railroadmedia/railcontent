@@ -18,6 +18,8 @@
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.jpg">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+
+    <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
     <style>
         .join {
             display:inline-block;
@@ -186,6 +188,15 @@
                 bottom:0;
             }
         }
+        .join.musora {
+            background-color:#FFAE00;
+            color:#000;
+        }
+
+        .join.musora:hover {
+            background:#FFAE00;
+            color:#000;
+        }
         .join.drumeo {
             background:#0b76db;
         }
@@ -224,6 +235,36 @@
         .timed-toggle .active-toggle.active .description {
             max-height:100px!important;
         }
+
+        @-webkit-keyframes breathing {
+            0% {
+                opacity: 0.4;
+            }
+            40% {
+                opacity: 1;
+            }
+            60% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.4;
+            }
+        }
+
+        @keyframes breathing {
+            0% {
+                opacity: 0.4;
+            }
+            40% {
+                opacity: 1;
+            }
+            60% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.4;
+            }
+        }
     </style>
 @stop
 
@@ -241,14 +282,14 @@
 @section('layout-body')
 
     @php
-        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header4.png';
-        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header5.png';
-        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header7.png';
-        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header1.png';
-        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header3.png';
-        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header8.png';
-        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header6.png';
-        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/bubbles/header2.png';
+        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/jared-falk.png';
+        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/lisa-witt.png';
+        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/rob-scallon.png';
+        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/victoria-theodore.png';
+        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/chris-johnson.png';
+        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/shelea.png';
+        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/domino-santantonio.png';
+        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/ayla-tesler-mabe.png';
     @endphp
     @include('musora.sales.components.header-section', [
         'header' => 'Your musical goals<br> start here.',
@@ -260,58 +301,14 @@
         'pointFour' => '1000+ SONGS',
     ])
 
-    <section class="text-center text-white py-5 sm:py-7" style="background-color:#0c1524;">
-        <div class="container max-w-4xl mx-auto">
-            <div class="flex-wrap justify-center items-center hidden sm:flex">
-                <a href="/6-reasons/piano"><h5 class="px-1 sm:px-5 lg:px-10"><i class="text-pianote text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-piano-keyboard"></i> <strong>Piano</strong></h5></a>
-                <a href="/6-reasons/guitar"><h5 class="px-1 sm:px-5 lg:px-10"><i class="text-guitareo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-guitar"></i> <strong>Guitar</strong></h5></a>
-                <a href="/6-reasons/drums"><h5 class="px-1 sm:px-5 lg:px-10"><i class="text-drumeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-drum"></i> <strong>Drums</strong></h5></a>
-                <a href="/6-reasons/singing"><h5 class="px-1 sm:px-5 lg:px-10"><i class="text-singeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-microphone-stand"></i> <strong>Singing</strong></h5></a>
-            </div>
-            <div class="flex-wrap justify-center items-center flex sm:hidden">
-                <a href="/6-reasons/piano"><p class="px-2 sm:px-5 lg:px-10"><i class="text-pianote text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-piano-keyboard"></i> <strong>Piano</strong></p></a>
-                <a href="/6-reasons/guitar"><p class="px-2 sm:px-5 lg:px-10"><i class="text-guitareo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-guitar"></i> <strong>Guitar</strong></p></a>
-                <a href="/6-reasons/drums"><p class="px-2 sm:px-5 lg:px-10"><i class="text-drumeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-drum"></i> <strong>Drums</strong></p></a>
-                <a href="/6-reasons/singing"><p class="px-2 sm:px-5 lg:px-10"><i class="text-singeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-microphone-stand"></i> <strong>Singing</strong></p></a>
-            </div>
-        </div>
-    </section>
-
-    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
-        <div class="container max-w-4xl mx-auto">
-            <img class="text-center mx-auto sm:h-20 lg:h-24 mb-10 hidden sm:inline-block" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2023/learn-practice-play.png">
-            <img class="text-center mx-auto h-24 inline-block sm:hidden" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2023/learn-practice-play-m.png">
-            <img class="my-5 h-64 inline sm:hidden"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/620x0/filters:quality(95)/marketing/musora/membership/homepage/2023/intro-collage3.png"
-                alt="learn playing image"
-                fetchpriority="high"
-            >
-            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-center mb-5">
-                <p class="leading-normal max-w-xl pr-7 mx-0">Learning an instrument can be frustrating. So we’ve made the most helpful music lessons on the planet:
-                    <br><br>
-                    Guided video lessons from great teachers, interactive exercises that transform practice into play, and <strong>thousands of popular songs</strong> for every style, era, and skill level. PLUS unlimited personal support from real teachers.
-                    <br><br>
-                    You’ll play more. You’ll fall in love with the process. And we’re so confident you’ll love your new skills that you’ll get a 7-day free trial PLUS a 90-day guarantee (just to make sure!).
-                </p>
-                <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/musora/membership/homepage/2023/intro-collage3.png"
-                    alt="learn playing image"
-                >
-            </div>
-        </div>
-    </section>
-    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10 relative z-20" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
-
-
-
-
     @php
         $gridItems = $musora['gridItems'];
     @endphp
 
-    @include('musora.sales.components.reason-cards-section')
+    @include('musora.sales.components.reason-cards-section', [
+        'seven' => true,
+    ])
+])
 
     @php
         $buttons = $musora['buttons'];
@@ -348,7 +345,7 @@
 
     @if(empty($trialVersion))
         @include('musora.sales.components.guarantee-section', [
-            'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png',
+            'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/musora/membership/homepage/2024/guarantee.png',
             'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
             'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
         ])

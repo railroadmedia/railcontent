@@ -15,17 +15,11 @@
                     {!! $header !!}
                 @endif
             </strong></h2>
-        <h1 class="leading-tight mb-2">
-            <i class="text-4xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-            <i class="text-4xl fas fa-star -ml-4" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-            <i class="text-4xl fas fa-star -ml-4" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-            <i class="text-4xl fas fa-star -ml-4" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-            <i class="text-4xl fas fa-star-half -ml-4" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-        </h1>
+        <img class="h-11 my-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/musora/membership/homepage/2024/stars.png">
         <p class="mx-auto mb-7">
             Rated 4.8/5 based on <strong class="font-black">{{ number_format(Prices::$reviews) }} student reviews.</strong>
             <a class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
-                <strong class="font-black @if($theme != 'musora') text-{{ $theme }} @else text-drumeo @endif"><u>See the reviews »</u></strong>
+                <strong class="font-black text-{{ $theme }}"><u>See the reviews »</u></strong>
             </a>
         </p>
 
@@ -70,7 +64,7 @@
                         <ul class="splide__list">
                             @foreach ($testimonials as $testimonial)
                                 <li class="splide__slide flex px-1">
-                                    <div class="w-full rounded-xl p-6 flex flex-wrap sm:flex-nowrap text-white transition-colors duration-300 active-bg" style="background-color:#0C1524;">
+                                    <div class="w-full rounded-xl p-6 flex flex-wrap sm:flex-nowrap @if($theme != 'musora') text-white @else text-black @endif transition-colors duration-300 active-bg" style="background-color:#0C1524;">
                                         <div class="w-full @if(!empty($testimonial['video'])) sm:w-7/12 cursor-pointer @else sm:w-1/2 @endif flex-shrink-0 bg-cover bg-center rounded-xl relative h-56 sm:h-80 lg:h-[32rem]"
                                             style="background-image:url('{{$testimonial['image']}}');"
                                             @if(!empty($testimonial['video']))
