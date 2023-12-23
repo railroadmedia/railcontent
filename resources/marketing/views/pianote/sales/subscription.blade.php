@@ -204,6 +204,23 @@
             'pointThree' => 'FUN PRACTICE',
             'pointFour' => '1000+ SONGS',
             ])
+
+        @elseif(empty($trialVersion))
+            @include('musora.sales.components.header-section', [
+                'boldText' => true,
+                'promoHeader' => true,
+                'header' => 'A <span class="text-pianote">NEW WAY</span> OF<br> LEARNING PIANO.',
+                'underline' => true,
+            'fillColor' => "#f61a30",
+                'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
+                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/header-thumb2.jpg',
+                'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/jan-thumb2.png',
+                'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/jan-thumb-m2.jpg',
+            'pointOne' => 'GREAT TEACHERS',
+            'pointTwo' => 'VIDEO LESSONS',
+            'pointThree' => 'FUN PRACTICE',
+            'pointFour' => '1000+ SONGS',
+            ])
         @else
             @include('musora.sales.components.header-section', [
                 'header' => 'Online piano lessons<br> for all skill levels.',
@@ -339,113 +356,25 @@
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'piano',
         ])
-    @elseif(!empty($evergreenVersion))
-        @php
-            $bonuses = [
-                [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/bonus-chords-scales.jpg',
-                    'title' => 'Chords & <br>Scales Book',
-                    'description' => 'Your encyclopedia of piano chords & scales.',
-                    'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
-                    'shipping' => 'true'
-                ],
-                [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
-                'title' => 'Piano Technique<br> Made Easy',
-                'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
-                'price' => floatval($productPrices['piano-technique-made-easy']->price),
-                ],
-                [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
-                'title' => 'Piano Riffs<br> & Fills',
-                'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
-                'price' => floatval($productPrices['piano-riffs-and-fills']->price),
-                ],
-                [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/promos/black-friday/unlimited/faster-fingers.jpg',
-                    'title' => '',
-                    'description' => 'Boost your speed and confidence with this guided practice course.',
-                    'price' => floatval($productPrices['faster-fingers']->price),
-                ],
-            ]
-        @endphp
-        @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-annual-2w-card.png',
-        'header' => 'Online piano lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=special',
-        'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
-        ])
     @elseif(!empty($promoVersion))
-        @php
-            $bonuses = [
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Pianote_Planner_Card.jpg',
-                    'title' => 'Practice Planner',
-                    'description' => 'Always know exactly what to practice.',
-                    'price' => floatval($productPrices['pianote-practice-planner']->price),
-                    'shipping' => true,
-                ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-card.jpg',
-                    'description' => 'Decorate your home and improve your musical knowledge with this set of 6 music theory posters.',
-                    'price' => floatval($productPrices['music-theory-posters']->price),
-                    'shipping' => true,
-                ],
-                [
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/5afe20b9-5f1c-4886-b932-9ee93ffc67f4-christmas-songbook-shop.jpg',
-                    'description' => 'Christmas classics to make your holiday season extra special.',
-                    'price' => floatval($productPrices['christmas-songbook']->price),
-                ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/christmas-songbook-card.jpg',
-                    'description' => 'Play Your Favorite Christmas Songs on the Piano.',
-                    'price' => floatval($productPrices['christmas-song-book-digital']->price),
-                ],
-                [
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
-                    'description' => 'Learn the piano. Play your favorite songs. Start sounding beautiful.',
-                    'price' => floatval($productPrices['new-piano-players-start-here']->price),
-                ],
-                [
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
-                    'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. ',
-                    'price' => floatval($productPrices['easy-chords']->price),
-                ],
-                [
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/46f26b8d-f53a-44c6-8eb2-d9a700801310-30d-blues.png',
-                    'description' => 'Learn Blues Piano in 30 days with daily 10-minute lessons where you play along with a teacher. This is the new way of learning the blues.',
-                    'price' => floatval($productPrices['30-day-blues-piano']->price),
-                ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
-                    'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
-                    'price' => floatval($productPrices['piano-riffs-and-fills']->price),
-                ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/power_of_chords_card.jpg',
-                    'description' => 'Play the music you love using the power of chords.',
-                    'price' => floatval($productPrices['the-power-of-chords']->price),
-                ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
-                    'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
-                    'price' => floatval($productPrices['piano-technique-made-easy']->price),
-                ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/faster-fingers.jpg',
-                    'description' => 'Boost your speed and confidence with this guided practice course.',
-                    'price' => floatval($productPrices['faster-fingers']->price),
-                ],
-            ]
-        @endphp
-        @include('musora.sales.components.order-section-bf', [
-        'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-annual-2w-card.png',
-        'bonusWidth' => 'w-1/2 md:w-1/4',
-        'bonusCount' => '11',
-        'bonusSum' => '933',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[christmas-songbook]=1&products[pianote-practice-planner]=1&products[music-theory-posters]=1&products[christmas-song-book-digital]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702',
-        'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
+
+        @include('musora.sales.components.order-promo-cards-section', [
+            "songs" => "1000+ popular songs.",
+            "firstPoint" => "Unlimited piano lessons.",
+            "thirdPoint" => "Direct access to real teachers.",
+            "fifthPoint" => "Lesson access for singing, guitar, and drums.",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true",
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true",
+
+                'header' => 'A <span class="text-pianote">NEW WAY</span> OF<br> LEARNING PIANO.',
+                'underline' => true,
+            'fillColor' => "#f61a30",
+            'pointOne' => 'GREAT TEACHERS',
+            'pointTwo' => 'VIDEO LESSONS',
+            'pointThree' => 'FUN PRACTICE',
+            'pointFour' => '1000+ SONGS',
+
+
         ])
 
     @else

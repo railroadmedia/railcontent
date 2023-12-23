@@ -1,6 +1,13 @@
 <header class="text-center px-5 sm:px-6 py-44 sm:py-52 lg:py-56 relative overflow-hidden" style="background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);">
     <div class="container max-w-6xl mx-auto relative z-20">
-        <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl">
+        @if(!empty($noExcuse))
+            <h4 class="font-lexend leading-tight uppercase mb-3 sm:mb-4">NEW YEAR. <span class="text-{{$theme}}"> NO EXCUSES.</span></h4>
+        @endif
+        <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl sm:mb-10 lg:mb-10
+        @if(!empty($promoHeader))
+        font-lexend leading-tight uppercase
+        @endif
+        ">
             <strong>{!! $header !!}</strong>
             @if(!empty($underline))
                 <svg class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%;"
@@ -10,13 +17,18 @@
                 </svg>
             @endif
         </h1>
-        <p class="text-sm leading-normal tracking-widest sm:mt-10 mb-5 lg:mt-10 lg:mb-7">
+            @if(!empty($boldText))
+                <h5 class="leading-tight uppercase mb-5 lg:mb-7"><strong>Guided play-along lessons that are guaranteed to work.</strong></h5>
+            @endif
+        @if(empty($promoHeader))
+        <p class="text-sm leading-normal tracking-widest mb-5 lg:mb-7">
             <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
             <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
             <br class="lg:hidden">
             <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> {!! $pointThree !!}
             <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointFour !!}
         </p>
+        @endif
         <div class="flex flex-wrap justify-center">
             <a class="sm:mx-0.5 w-64 sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))
