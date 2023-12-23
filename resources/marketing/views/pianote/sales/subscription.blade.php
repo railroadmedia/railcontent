@@ -221,6 +221,43 @@
         @endif
     @endif
 
+    @if(empty($trialVersion) && !empty($promoVersion))
+        {{--        TODO: promo banner--}}
+        <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white relative" style="background: linear-gradient(to bottom, #0B1C39, #0C1524);">
+            <div class="container max-w-5xl mx-auto">
+                <img class="my-5 h-40 inline sm:hidden"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/620x0/filters:quality(95)/marketing/pianote/promos/september/pianote-trial-sept-promo-collage-m.png"
+                    alt="learn playing image"
+                    fetchpriority="high"
+                >
+                <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
+                    <div class=" max-w-xl pr-5 lg:pr-8 mx-0">
+                        <h2 class=" sm:mb-10"><strong>Imagine starting a resolution you knew would stick…</strong></h2>
+                        <p class="leading-normal">Pianote is different from other online lessons. 
+                            You won’t just watch a video and be left alone to do the hard work. Instead, you’ll get guided play-along lessons that bring the personal touch of a live class right into your living room. You’ll play alongside a REAL teacher so you’ll never have to guess what you should be doing. 
+                            It will feel like they’re right there with you.
+                            And it works.
+                            So this year, don’t just wish you could play the piano. Join Pianote and know you can.
+                            (And we’re so confident, you’ll have 90 days to try it risk-free.)
+                            Join today to save on your first year + get 8 FREE bonuses.
+                            You’ll love it.
+
+                            <br>
+                            <a class="join smaller blue my-3 w-1/2" href="">GET Started &raquo;</a>
+                        </p>
+
+                    </div>
+                    <img class="h-80 lg:h-96 hidden sm:inline transition-opacity opacity-0"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/promos/september/pianote-trial-sept-promo-collage.png"
+                        alt="learn playing image"
+                    >
+                </div>
+            </div>
+        </section>
+    @endif
+
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif

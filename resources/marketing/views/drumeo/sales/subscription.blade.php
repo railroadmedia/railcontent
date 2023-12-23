@@ -203,6 +203,41 @@
         ])
     @endif
 
+    @if(empty($trialVersion) && !empty($promoVersion))
+{{--        TODO: promo banner--}}
+        <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white relative" style="background: linear-gradient(to bottom, #0B1C39, #0C1524);">
+            <div class="container max-w-5xl mx-auto">
+                <img class="my-5 h-40 inline sm:hidden"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/620x0/filters:quality(95)/marketing/pianote/promos/september/pianote-trial-sept-promo-collage-m.png"
+                    alt="learn playing image"
+                    fetchpriority="high"
+                >
+                <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
+                    <div class=" max-w-xl pr-5 lg:pr-8 mx-0">
+                        <h2 class=" sm:mb-10"><strong>Lessons  Songs  Drums</strong></h2>
+                        <p class="leading-normal">The NEW Drumeo includes everything you need to learn the drums.<br>
+                            To celebrate the New Year, you have your choice of:<br>
+                            1. The Practice Anywhere Bundle  With unlimited drum lessons for a year + a portable practice rig for any room in your house. <br>
+                            2. The NEW Drumeo E-Kit Bundle The highest-rated entry-level e-kit combined with award-winning drum lessons. <br>
+                            If you’ve always wanted to play the drums but don’t know WHAT to practice or don’t have a PLACE to practice, this it.<br>
+                            It’s the first time EVER that you can get lessons and gear all in one tidy (and quiet!) package.<br>
+                            Scroll down to see everything waiting for you inside Drumeo – and we’ll see you on the drums in 2024.
+                            <br>
+                            <a class="join smaller blue my-3 w-1/2" href="">GET Started &raquo;</a>
+                        </p>
+
+                    </div>
+                    <img class="h-80 lg:h-96 hidden sm:inline transition-opacity opacity-0"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/promos/september/pianote-trial-sept-promo-collage.png"
+                        alt="learn playing image"
+                    >
+                </div>
+            </div>
+        </section>
+    @endif
+
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
