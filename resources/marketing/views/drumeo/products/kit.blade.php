@@ -76,7 +76,7 @@
     ])
 
 <!-- hero section-->
-<header class="text-white relative overflow-hidden z-20 md:pt-16"
+<header class="text-white relative overflow-hidden z-20 md:pt-10"
     style="background:linear-gradient(to bottom, rgb(26, 26, 26), #1e1e1e);">
     <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
         <div class="container mx-auto max-w-5xl">
@@ -102,7 +102,7 @@
             </h4>
             <div class="w-full max-w-xs mx-auto">
                 @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
-                    <a class="w-full join smaller blue" href="#customize-anchor">Buy Now</a>
+                    <a class="w-full join smaller blue" href="/ecommerce/add-to-cart?products[alesis-ekit]=1">Buy Now</a>
                 @else
                     <a class="w-full join smaller sold-out">SOLD OUT</a>
                 @endif
@@ -119,7 +119,7 @@
     <div class="top-0 left-0 absolute w-full h-full z-10"
         style="background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6));"></div>
     <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline
-        muted src="https://d21q7xesnoiieh.cloudfront.net/marketing/drumeo/shop/stickbag/header-vid.mp4"></video>
+        muted src="https://player.vimeo.com/video/897277793?h=1976fe84d9"></video>  <!-- TODO: Update video -->
 </header>
 
 
@@ -155,16 +155,16 @@
     <div class="container max-w-4xl mx-auto relative z-50">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 w-full mx-2">
             <div class="px-1">
-                <h5 class="leading-normal text-left"><strong>Neighbor-friendly heads</strong></h5>
-                <h5 class="pt-4 leading-normal text-left">Mesh heads make it quiet for your neighbors while giving you the feel of real drums.</h5>
+                <h5 class="leading-normal text-left"><strong>Neighbor-friendly Drums</strong></h5>
+                <h5 class="pt-4 leading-normal text-left">Mesh heads give you the feel of real drums while maintaining a quiet volume for your neighbors and family.</h5>
             </div>
             <div class="px-1">
-                <h5 class="leading-normal text-left"><strong>Connect Any Device</strong></h5>
+                <h5 class="leading-normal text-left"><strong>Play Your Favorite Songs</strong></h5>
                 <h5 class="pt-4 leading-normal text-left">Bluetooth connectivity lets you seamlessly mix your drums with Spotify or Apple Music and play along.</h5>
             </div>
             <div class="px-1">
-                <h5 class="leading-normal text-left"><strong>Small Footprint</strong></h5>
-                <h5 class="leading-normal text-left pt-4">Fits in any size of room and folds up in the tiniest corner of your house when you’re not playing.</h5>
+                <h5 class="leading-normal text-left"><strong>Fits In Any Room</strong></h5>
+                <h5 class="leading-normal text-left pt-4">Space is a luxury for drummers. Your Nitro Max fits in any room and folds up for easy storage between jam sessions.</h5>
             </div>
         </div>
     </div>
@@ -312,7 +312,7 @@
                             <strong>Only ${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
                         @endif
                     </h4>
-                    <a href="TODO" class="join blue smaller w-full max-w-xs">BUY NOW</a>
+                    <a href="/ecommerce/add-to-cart?products[alesis-ekit]=1" class="join blue smaller w-full max-w-xs">BUY NOW</a>
                 </div>
                 <div
                     class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0 hidden sm:block">
@@ -386,7 +386,7 @@
         <p class="p-4 text-center hidden md:block" style="color: rgb(135, 144, 151, 1.2)"> <strong>Height</strong> 12.12" (30.78cm) // <strong>Depth</strong> 21" (53.34cm) // <strong>Width</strong> 36.2" (91.94cm)</p>
         
         <div class="w-full max-w-xs mx-auto pt-4">
-            <a href="TODO" class="join blue smaller w-full max-w-xs">BUY NOW</a>
+            <a href="/ecommerce/add-to-cart?products[alesis-ekit]=1" class="join blue smaller w-full max-w-xs">BUY NOW</a>
         </div>
         
     </div>
@@ -411,7 +411,7 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '864032205',
+        'video' => '897277793',
         'vimeo' => true,
     ])
 
