@@ -98,7 +98,10 @@
 {{--    <div class="top-0 left-0 absolute w-full h-full z-10"--}}
 {{--        style="background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.4));"></div>--}}
 {{--    <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline--}}
-{{--        muted src="https://d21q7xesnoiieh.cloudfront.net/marketing/drumeo/shop/stickbag/header-vid.mp4"></video>--}}
+{{--        muted src="https://d21q7xesnoiieh.cloudfront.net/marketing/drumeo/shop/stickbag/header-vid.mp4"></video> 
+https://player.vimeo.com/video/897277793
+
+--}} 
 </header>
 
 
@@ -257,10 +260,15 @@
 
 
 
-<section>
-    <h2>6 reasons why you’ll love learning here.</h2>
-</section>
+ @php
+        $gridItems = $drumeo['gridItems'];
+    @endphp
 
+    @include('musora.sales.components.reason-cards-section', [
+        'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
+        'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline">curriculum featuring many of the world’s best teachers. ',
+        'shortVersion' => true,
+    ])
 
 
 <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative bg-drumeo text-white">
@@ -390,7 +398,7 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '897277793',
+        'video' => '897276787',
         'vimeo' => true,
     ])
 

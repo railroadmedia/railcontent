@@ -68,6 +68,7 @@
                 @endforeach
             </div>
         </div>
+       @if(empty($shortVersion))
         @if(empty($promoVersion))
             <a href="/method" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline black smaller">{{ $theme }} METHOD</a>
         @endif
@@ -86,5 +87,6 @@
                 START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
             @endif
         </a>
+       @endif
     </div>
 </section>
