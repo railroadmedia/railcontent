@@ -232,7 +232,7 @@ class RailcontentV2DataSyncingService
 
             // length in seconds
             if($contentRow->type !== 'assignment') {
-                $contentColumnsToUpdate['length_in_seconds'] = (integer)($contentLengthInSecondsField->value ?? 0);
+                $contentColumnsToUpdate['length_in_seconds'] = (integer)($contentLengthInSecondsField->value ?? $contentRow->length_in_seconds ?? 0);
             }else{
                 $contentColumnsToUpdate['length_in_seconds'] = $contentRow->length_in_seconds;
             }
