@@ -61,6 +61,7 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.12",
+        "brianium/paratest": "^6.11",
         "fakerphp/faker": "^1.9.1",
         "kitloong/laravel-migrations-generator": "^5.2",
         "laravel/sail": "^1.0.1",
