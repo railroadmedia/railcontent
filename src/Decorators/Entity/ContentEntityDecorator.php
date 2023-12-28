@@ -37,6 +37,11 @@ class ContentEntityDecorator implements DecoratorInterface
                     }
                 }
             }
+            foreach ($result['lessons'] ?? [] as $index => $field) {
+                if (isset($field['slug'])) {
+                    $entities[$resultsIndex]['lessons'][$index] = new ContentEntity($field);
+                }
+            }
         }
 
         return new Collection($entities);
