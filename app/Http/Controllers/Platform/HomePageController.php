@@ -238,6 +238,7 @@ class HomePageController extends BaseController
         $collectionForDecoration = $collectionForDecoration->merge($newContent->results());
         $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
         $collectionForDecoration = $collectionForDecoration->merge($subscribedCoaches->results());
+        $collectionForDecoration = $collectionForDecoration->merge($workoutsContent->results());
 
         Decorator::$typeDecoratorsEnabled = true;
         $collectionForDecoration = $collectionForDecoration->filter();
