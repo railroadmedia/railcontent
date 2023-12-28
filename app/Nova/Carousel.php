@@ -67,6 +67,7 @@ class Carousel extends Resource
                     '2' => '' . __('V2') . '',
                     '3' => '' . __('V3') . '',
                     '4' => '' . __('V4') . '',
+                    '5' => '' . __('V5') . '',
                 ];
             })->hideFromIndex()
                 ->hide()
@@ -83,6 +84,7 @@ class Carousel extends Resource
                     '2' => '' . __('V2') . '',
                     '3' => '' . __('V3') . '',
                     '4' => '' . __('V4') . '',
+                    '5' => '' . __('V5') . '',
                 ];
             })->hideFromIndex()
                 ->hide()
