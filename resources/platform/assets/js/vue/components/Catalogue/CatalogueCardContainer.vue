@@ -1,20 +1,20 @@
 <template>
     <div class="tw-flex tw-flex-col tw-grow tw-justify-center">
-        <div :class="`tw-block tw-no-scrollbar ${isMiniView ? 'tw-overflow-x-scroll tw-max-h-[181px] tw-overflow-y-hidden' : 'tw-overflow-x-clip'}`">
+        <div :class="`tw-block tw-no-scrollbar ${isMiniView ? 'tw-overflow-x-scroll tw-max-h-[181px] tw-overflow-y-hidden' : 'tw-overflow-x-clip tw-overflow-y-hidden'}`">
             <div
                 :class="`
                     tw-px-4 lg:tw-px-0 tw-no-scrollbar
-                    ${isMiniView ? 'tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-3 xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-y-[25px] tw-gap-x-[8px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : 'tw-flex tw-overflow-x-scroll lg:tw-overflow-x-clip tw-flex-nowrap'}
-                `
-                "
-                >
+                    ${isMiniView && willScroll ? 'tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-3 xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-y-[25px] tw-gap-x-[8px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : ''}
+                    ${!isMiniView && willScroll ? 'tw-flex tw-overflow-x-scroll lg:tw-overflow-x-clip tw-flex-nowrap' : ''}
+                    ${!isMiniView && !willScroll ? 'tw-flex tw-flex-wrap' : ''}
+                    ${breakToListView ? 'tw-@container/breakToList' : ''}
+                `">
                 <CatalogueCard
-                    v-for="item in content"
+                    v-for="item in data"
                     :key="'grid' + item.id"
                     :item="item"
                     :content-type="item.type"
                     :brand="brand"
-                    :theme-color="themeColor"
                     :use-theme-color="useThemeColor"
                     :user-id="userId"
                     :is-admin="isAdmin"
@@ -23,14 +23,16 @@
                     :content-type-override="contentTypeOverride"
                     :is-mini-card="isMiniView"
                     :show-my-list-action="showMyListAction"
-                    :display-inline="displayInline"
+                    :force-no-links="forceNoLinks"
+                    :force-list-view="displayInline"
+                    :break-to-list-view="breakToListView"
                     @addToList="addToList"
                     @progressReset="resetProgressEventHandler"
                     :show-dropdown="showDropdown"
                 />
             </div>
         </div>
-        <div v-if="content.length === 0 && noResultsMessage.length > 0" class="tw-flex tw-flex-row tw-py-4 tw-justify-center tw-items-center tw-px-4 lg:tw-px-0">
+        <div v-if="data.length === 0 && noResultsMessage.length > 0" class="tw-flex tw-flex-row tw-py-4 tw-justify-center tw-items-center tw-px-4 lg:tw-px-0">
             <div class="tw-flex tw-flex-column icon-col face-icon tw-mr-1">
                 <div class="icon-wrap square"></div>
             </div>
@@ -38,27 +40,46 @@
                 <h4 class="body tw-text-[#00101D] dark:tw-text-white">{{ noResultsMessage }}</h4>
             </div>
         </div>
+    
+        <AddEventModal 
+            v-if="contentTypeOverride === 'challenge'" 
+            modal-id="notifyModal"
+            :subscription-calendar-id="subscriptionCalendarId" 
+            :theme-color="brand" 
+        />
+
     </div>
 </template>
 <script setup>
 // TODO: Find a way to re add the smily face or change the icon
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 // In order for the horizontal scroll to work, you need to make parent container a block.
 import CatalogueCard from '../Catalogue/CatalogueCard.vue';
+import AddEventModal from '../../vuesora/components/AddEvent/AddEventModal.vue';
 import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
+import { storeToRefs } from "pinia";
+import { useUserStore } from "../../../stores/user";
 
 const props = defineProps({
+    willScroll: {
+        type: Boolean,
+        default: () => true,
+    },
     isMiniView: {
         type: Boolean,
         default: () => false,
     },
+    forceNoLinks: {
+        type: Boolean,
+        default: () => false,
+    },
+    subscriptionCalendarId: {
+        type: String,
+        default: () => '',
+    },
     preLoadedContent: {
         type: [Array, Object],
         default: () => [],
-    },
-    themeColor: {
-        type: String,
-        default: () => 'drumeo',
     },
     useThemeColor: {
         type: Boolean,
@@ -111,6 +132,19 @@ const props = defineProps({
 },
 );
 
+const userStore = useUserStore();
+const { brand } = storeToRefs(userStore);
+
 const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, content: props.preLoadedContent.data });
 const content = ref(props.preLoadedContent ? props.preLoadedContent.data : []);
+
+//Computed Props
+const data = computed(() => {
+    return Array.isArray(props.preLoadedContent) ? props.preLoadedContent : content.value;
+})
+
+const breakToListView = computed( () => {
+    return props.contentTypeOverride === 'challenge' || props.contentTypeOverride === 'workout';
+})
+
 </script>

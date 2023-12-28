@@ -17,6 +17,7 @@ export default {
     components: {
         PlayerRanges,
     },
+
     props: {
         videoId: {
             type: [String, Number],
@@ -71,8 +72,13 @@ export default {
         startSecond: {
             type: [Number, String],
             default: 0
+        },
+        seekToTime: {
+            type: [String, Number],
+            default: 0
         }
     },
+
     data() {
         return {
             player: null,
@@ -83,6 +89,7 @@ export default {
             hasBeenPlayed: false,
         };
     },
+
     computed: {
         isMobileViewport: {
             cache: false,
@@ -107,12 +114,19 @@ export default {
             },
         }
     },
+
+    watch: { 
+        seekToTime: function(newVal, oldVal) { // watch it
+            this.player.seekTo(newVal);
+            pauseVideo(); //Pause when seeking? 
+        }
+    },
+
     mounted() {
         const youtubeIframeApi = document.getElementById('youtubeIframeApi');
 
         if (youtubeIframeApi == null) {
             this.appendIframeApi();
-
             window.onYouTubeIframeAPIReady = () => {
                 this.initPlayer();
             };
@@ -133,16 +147,20 @@ export default {
             }
         });
     },
+
     beforeDestroy() {
         clearInterval(this.syncInterval);
     },
+
     methods: {
+        pauseVideo() {
+            this.player.pauseVideo();
+        },
+
         setRange({ range }) {
             if (this.rangesVideoIds[range]) {
                 this.currentRange = range;
-
                 this.player.loadVideoById(this.rangesVideoIds[range], this.player.getCurrentTime());
-
                 window.localStorage.setItem('currentRange', range);
             }
         },

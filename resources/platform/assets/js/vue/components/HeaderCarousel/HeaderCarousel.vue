@@ -108,6 +108,7 @@ onMounted(() => {
       :tabletImg="slide.tablet_img"
       :mobileImg="slide.mobile_img"
       :is-draft="slide.draft === 1"
+      :skill-level="slide.skill_level"
     />
 
       <!-- Directional Buttons -->

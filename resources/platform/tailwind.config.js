@@ -54,6 +54,7 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/container-queries'),
     //Stylesora's Base Styles
     require("../platform/assets/js/stylesora/base")(),
     //Stylesora's Attributes

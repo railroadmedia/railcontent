@@ -3,7 +3,7 @@
         <div class="tw-flex tw-flex-row tw-mb-3">
             <div class="tw-flex tw-flex-col tw-flex-grow">
                 <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
-                    <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-[15px]">
+                    <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl tw-mb-[15px]">
                         Featured Coach
                     </h2>
                 </div>

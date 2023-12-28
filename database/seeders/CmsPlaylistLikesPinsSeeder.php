@@ -14,9 +14,9 @@ class CmsPlaylistLikesPinsSeeder extends Seeder
     {
         $maxUserId = User::query()->max("id");
 
-        $playlistCount = UserPlaylist::query()->count();
+        $playlistCount = UserPlaylist::query()->where('id', '<', 5000)->count();
         $i = 0;
-        UserPlaylist::query()->chunk(1000, function ($playlists) use (&$i, $playlistCount, $maxUserId) {
+        UserPlaylist::query()->where('id', '<', 5000)->chunk(1000, function ($playlists) use (&$i, $playlistCount, $maxUserId) {
             foreach ($playlists as $playlist) {
                 $numberOfLikes = round(100000 / rand(1, 100000)) - 1;
 

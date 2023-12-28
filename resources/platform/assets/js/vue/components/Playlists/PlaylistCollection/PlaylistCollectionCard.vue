@@ -184,7 +184,7 @@
                     :brand="brand"
                     :dropdownTop="isMiniCatalog ? true : state.dropdownTop"
                     :is-private="state.isPrivate"
-                    :is-pinned="state.isPinned"
+                    :is-pinned="state.isPinned ? true : false"
                     :dropdownOptions="dropdownOptions"
                     :data="listElement"
                     :is-open="state.dropdownOpen"

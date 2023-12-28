@@ -68,10 +68,6 @@ export default {
     };
   },
   props: {
-    showMyListAction: {
-      type: Boolean,
-      default: () => true,
-    },
     brand: {
       type: String,
       default: () => "drumeo",
