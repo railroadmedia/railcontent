@@ -5,7 +5,7 @@
     <meta property="og:title" content="Drumeo | Reach your drumming goals.">
     <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
     <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/share-image-drumeo.webp" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/">
 
     @include('_partials.layout._fonts')
@@ -64,8 +64,8 @@
     ])
     @else
         @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
-            "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
+            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drumeoplus_logo.svg",
+            "logo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/logo-white.webp",
             "songs" => "5000+ popular songs.",
             "firstPoint" => "The world’s best drum lessons.",
             "thirdPoint" => "Unlimited personal support.",

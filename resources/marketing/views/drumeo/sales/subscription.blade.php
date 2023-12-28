@@ -15,7 +15,7 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/share-image-drumeo.jpg">
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/share-image-drumeo.webp">
     @endif
 
     @include('_partials.layout._fonts')
@@ -151,16 +151,8 @@
     @endif
 
     @php
-        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/dorothea-taylor.webp';
-        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/todd-sucherman.webp';
-        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/jared-falk.webp';
-        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/hannah-welton.webp';
-        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/larnell-lewis.webp';
-        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/zack-grooves.webp';
-        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/domino-santatonio.webp';
-        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/aaron-spears.webp';
-
-       $slides = $drumeo['slides'];
+        $bubbles = $drumeo['bubbles'];
+        $slides = $drumeo['slides'];
     @endphp
 
     @if(!empty($bfVersion))
@@ -174,9 +166,9 @@
         @include('musora.sales.components.header-section', [
             'header' => 'Learn beginner beats, fills<br> and songs on the drums.',
             'desc' => 'Try Drumeo’s award-winning online drum lessons for 7 days FREE:',
-            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/jan-thumb-no-badge.jpg',
-            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/header-thumb-promo2.png',
-            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/header-thumb-promo-m2.jpg',
+            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/jan-thumb-no-badge.webp',
+            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/header-thumb-promo2.webp',
+            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/header-thumb-promo-m2.webp',
             'pointOne' => 'Learn New Skills',
             'pointTwo' => 'Study With Legends',
             'pointThree' => 'Play Real Songs',
@@ -186,9 +178,9 @@
             'header' => 'Online drum lessons<br> for all skill levels.',
             'underline' => true,
             'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> thousands of songs and unlimited personal support.',
-            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/jan-thumb-no-badge.jpg',
-            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/header-thumb-promo2.png',
-            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/header-thumb-promo-m2.jpg',
+            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/jan-thumb-no-badge.webp',
+            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/header-thumb-promo2.webp',
+            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/header-thumb-promo-m2.webp',
             'pointOne' => 'Improve Your Skills',
             'pointTwo' => 'World-Class Teachers',
             'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
@@ -227,7 +219,7 @@
     @include('musora.sales.components.songs-section', [
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
-        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/device.png',
+        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/device.webp',
         'brandName' => 'Drumeo',
     ])
 
@@ -253,7 +245,7 @@
     ])
     @if(empty($trialVersion))
         @include('musora.sales.components.guarantee-section', [
-            'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png',
+            'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/guarantee.webp',
             'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
             'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
         ])
@@ -264,8 +256,8 @@
     @if(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
             "noSelector" => true,
-            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drumeoplus_logo.svg",
-            "logo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-white.png",
+            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drumeoplus_logo.svg",
+            "logo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/logo-white.webp",
             "songs" => "5000+ popular songs.",
             "firstPoint" => "The world’s best drum lessons.",
             "thirdPoint" => "Unlimited personal support.",
@@ -316,81 +308,21 @@
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
         ])
     @elseif(!empty($promoVersion))
-        @php
-            $bonuses = [
-                [
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Bundle-images/6e6ab2d9-0a45-4b58-936e-07c037c40f1a-p4-practice-card.jpg',
-                    'description' => 'The most versatile practice pad in the world, featuring four playing surfaces on three different levels for simulating movement around the kit.',
-                    'price' => floatval($productPrices['practicepad']->price),
-                    'shipping' => true,
-                ],
-                [
-                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
-                    'title' => 'Drumeo Drumsticks',
-                    'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
-                    'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
-                    'shipping' => true,
-                ],
-                [
-                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg',
-                    'title' => 'Drum Technique Made Easy',
-                    'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
-                    'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
-                ],
-                [
-                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
-                    'title' => 'Better Drum Fills',
-                    'description' => 'The ultimate four-week crash course to playing more creative & musical drum fills.',
-                    'price' => floatval($productPrices['four-weeks-to-better-drum-fills']->price),
-                ],
-                [
-                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/tommy_card.jpg',
-                    'title' => 'Great Hands For A Lifetime',
-                    'description' => 'Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.',
-                    'price' => floatval($productPrices['GHFAL-DIGI']->price),
-                ],
-                [
-                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/sd.jpg',
-                    'title' => 'Successful Drumming',
-                    'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
-                    'price' => floatval($productPrices['SD-DIGI']->price),
-                ],
-                [
-                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/ime.jpg',
-                    'title' => 'Independence Made Easy',
-                    'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
-                    'price' => floatval($productPrices['independence-made-easy-pack']->price),
-                ],
-                [
-                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/rdm.jpg',
-                    'title' => 'Rock Drumming Masterclass',
-                    'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
-                    'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
-                ],
-                [
-                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eyd.jpg',
-                    'title' => 'Electrify Your Drumming',
-                    'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
-                    'price' => floatval($productPrices['electrify-your-drumming']->price),
-                ],
-                [
-                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/lsf.jpg',
-                    'title' => 'Learn Songs Faster',
-                    'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
-                    'price' => floatval($productPrices['learn-songs-faster-pack']->price),
-                ],
-            ]
-        @endphp
-        @include('musora.sales.components.order-section-bf', [
+
+    @php
+    $productSkus = ['practicepad', 'Drumeo-VaterSticks', 'drum-technique-made-easy-pack', 'drum-technique-made-easy-pack', 'four-weeks-to-better-drum-fills', 'GHFAL-DIGI', 'SD-DIGI', 'rock-drumming-masterclass-pack', 'independence-made-easy-pack', 'electrify-your-drumming', 'learn-songs-faster-pack'];
+    @endphp
+
+    @include('musora.sales.components.order-section-bf', [
         'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drumeo-annual-2w-card.png',
         'bonusCount' => '10',
         'bonusSum' => '1272.94',
         'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
-        ])
+    ])
     @else
         @include('musora.sales.components.order-section-collage', [
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-blue.png',
+        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/logo-blue.webp',
         'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 5000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>

@@ -1,3 +1,6 @@
+@php
+    require_once(resource_path('marketing/views/singeo/_partials/homepage-data.php'));
+@endphp
 @extends('singeo._partials.global-layout')
 
 @section('global-head')
@@ -11,7 +14,7 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2023/share-image-singeo.jpg"/>
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/share-image-singeo-new.webp"/>
     @endif
 
     @include('_partials.layout._fonts')
@@ -147,57 +150,9 @@
     @endif
 
     @php
-        $bubble1 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/hailey-benedict.png';
-        $bubble2 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/lisa-witt.png';
-        $bubble3 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/tony-lindsay.png';
-        $bubble4 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/chris-johnson.png';
-        $bubble5 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/julia-ziegler.png';
-        $bubble6 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/darcy-d.png';
-        $bubble7 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/shelea.png';
-        $bubble8 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/cate-canning.png';
-
-        $features = [
-            [
-                'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/vocal-lessons-icon.svg',
-                'title' => 'Vocal Lessons',
-                'desc' => 'Step-by-step video<br class="hidden sm:inline"> lessons on every topic.',
-            ],
-            [
-                'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/artist-course-icon.svg',
-                'title' => 'Artist Courses',
-                'desc' => 'Courses and live events<br class="hidden sm:inline"> with singing heroes. ',
-            ],
-            [
-                'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/songs-icon.svg',
-                'title' => '1000+ Songs',
-                'desc' => 'Sing your favorite<br class="hidden sm:inline"> from every style & era.',
-            ],
-            [
-                'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/support-icon.svg',
-                'title' => '24/7 Support',
-                'desc' => 'A global community<br class="hidden sm:inline"> of students & teachers.',
-            ],
-        ];
-        $slides = [
-            [
-                'desc' => 'You’re going to learn how your voice works, how to strengthen it – and to sing with confidence.',
-                'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/testimonials/CodyMcManus.png',
-                'name' => 'Cody McManus',
-                'credit' => 'Music Producer',
-            ],
-            [
-                'desc' => 'Singeo really works. The skills are attainable, easy to learn, and lots of fun.',
-                'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2022/testimonials/SylviaCantu.jpg',
-                'name' => 'Sylvia Cantu',
-                'credit' => 'Singeo Student from USA',
-            ],
-            [
-                'desc' => 'I took traditional singing lessons in the past and didn’t have nearly this much fun.',
-                'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2022/testimonials/AmberKissler.jpg',
-                'name' => 'Amber Kissler',
-                'credit' => 'Singeo Student from USA',
-            ],
-        ];
+        $bubbles= $singeo['bubbles'];
+        $features = $singeo['features'];
+        $slides = $singeo['slides'];
     @endphp
 
         @include('musora.sales.components.header-section', [
