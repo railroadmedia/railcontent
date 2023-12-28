@@ -1,10 +1,10 @@
-name: Automated Testing
+name: Tests
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["shopify-tests"]
   pull_request:
-    branches: [ "master" ]
+    branches: ["shopify-tests"]
 
 env:
   APP_NAME: "Musora Web Platform"
@@ -15,6 +15,7 @@ env:
   APP_URL: http://localhost
   LOG_LEVEL: warning
   RAILTRACKER_ENABLED: false
+
 jobs:
   laravel-tests:
 
@@ -23,29 +24,33 @@ jobs:
       labels: ubuntu-latest-16-cores
 
     steps:
-      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+      - uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
-          tools: composer:v2
-          coverage: none
+          php-version: '8.1'
       - uses: actions/checkout@v3
+
       - name: Add HTTP basic auth credentials
         run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
+
       - name: Create .env
         run: php -r "file_exists('.env') || file_put_contents('.env', '');"
-      - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
       - name: Generate key
         run: php artisan key:generate
+
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Create Database
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
-      - name: Execute Unit Tests via PHPUnit
+
+      - name: Execute tests via artisan command
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: database/database.sqlite
-        run: vendor/bin/phpunit --testsuite Unit
-      - name: Execute Feature tests via PHPUnit
-        env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: database/database.sqlite
-        run: vendor/bin/phpunit --testsuite Feature --testdox
+        run: php artisan test --parallel
