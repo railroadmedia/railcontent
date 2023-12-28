@@ -47,7 +47,7 @@ jobs:
       - name: Create Database
         run: |
           mkdir -p database
-          touch database/database.sqlite
+          touch database/testing.sqlite
 
       - name: Execute tests via artisan command
         env:
