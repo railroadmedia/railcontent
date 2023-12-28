@@ -2,10 +2,6 @@
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
-                "title" => 'Home',
-                "url" => url()->route('platform.home', ['brand' => brand()]),
-            ],
-            [
                 "title" => $parentContent->fetch('fields.title'),
             ]
         ]
@@ -42,10 +38,6 @@
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
-                "title" => 'Home',
-                "url" => url()->route('platform.home'),
-            ],
-            [
                 "title" => $learningPath->fetch('fields.title'),
                 "url" => $learningPath->fetch('url'),
             ],
@@ -57,10 +49,6 @@
 @elseif($parentContent->fetch('type') === 'challenge')
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
-            [
-                "title" => 'Home',
-                "url" => url()->route('platform.home'),
-            ],
             [
                 "title" => 'Workouts',
                 "url" => url()->route('platform.workouts'),
@@ -79,10 +67,6 @@
         @include('partials.bladesora.members.navigation.breadcrumbs', [
             "pages" => [
                 [
-                    "title" => 'Home',
-                    "url" => url()->route('platform.home'),
-                ],
-                [
                     "title" => "Packs",
                     "url" => url()->route('platform.packs'),
                 ],
@@ -99,10 +83,6 @@
         @include('partials.bladesora.members.navigation.breadcrumbs', [
             "pages" => [
                 [
-                    "title" => 'Home',
-                    "url" => url()->route('platform.home'),
-                ],
-                [
                     "title" => "Packs",
                     "url" => url()->route('platform.packs'),
                 ],
@@ -115,10 +95,6 @@
 @else
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
-            [
-                "title" => 'Home',
-                "url" => url()->route('platform.home'),
-            ],
             [
                 "title" => parse_lesson_type_readable($parentContent->fetch('type'), true),
                 "url" => url()->route('platform.content-type-catalog', ["contentTypeName" => parse_lesson_type_readable($parentContent->fetch('type'), true)]),

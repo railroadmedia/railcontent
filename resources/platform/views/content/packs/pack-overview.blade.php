@@ -11,10 +11,6 @@
             @include('partials.bladesora.members.navigation.breadcrumbs', [
                 "pages" => [
                     [
-                        "title" => 'Home',
-                        "url" => url()->route('members.home'),
-                    ],
-                    [
                         "title" => "Packs",
                         "url" => url()->route('platform.packs'),
                     ],
@@ -31,10 +27,6 @@
         @else
             @include('partials.bladesora.members.navigation.breadcrumbs', [
                 "pages" => [
-                    [
-                        "title" => 'Home',
-                        "url" => url()->route('members.home'),
-                    ],
                     [
                         "title" => "Packs",
                         "url" => url()->route('platform.packs'),

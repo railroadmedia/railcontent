@@ -9,10 +9,6 @@
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
-                "title" => 'Home',
-                "url" => url()->route('platform.home', [brand()]),
-            ],
-            [
                 "title" => "Packs",
                 "url" => url()->route('platform.packs'),
             ],
