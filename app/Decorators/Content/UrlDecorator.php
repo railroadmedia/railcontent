@@ -45,9 +45,9 @@ class UrlDecorator extends ModeDecoratorBase
             if ($content['type'] == 'challenge') {
                 $contents[$contentIndex]['url'] = url()->route('platform.workout.challenge', [
                     'brand' => $content['brand'],
-                    'primaryPage' => 'challenges',
-                    'firstContentSlug' => $content['slug'],
-                    'firstContentId'=>$content['id'],
+                     'challenges',
+                    $content['slug'],
+                    $content['id'],
                 ]);
             }
 
