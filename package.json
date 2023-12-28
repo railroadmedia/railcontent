@@ -14,7 +14,8 @@
         "pw": "yarn platform-watch",
         "marketing-production": "parcel build resources/marketing/assets/parcel/scss/* --dist-dir public/marketing/parcel/drumeo --no-cache --log-level verbose",
         "mp": "yarn marketing-production",
-        "mjs": "parcel build resources/marketing/assets/parcel/js/* --dist-dir public/marketing/parcel/drumeo --no-cache --log-level verbose"
+        "mjs": "parcel build resources/marketing/assets/parcel/js/* --dist-dir public/marketing/parcel/drumeo --no-cache --log-level verbose",
+        "prepare": "husky install"
     },
     "devDependencies": {
         "@heroicons/vue": "^1.0.5",
@@ -35,7 +36,8 @@
         "sass": "^1.49.9",
         "sass-loader": "^12.1.0",
         "tailwindcss": "^3.3.3",
-        "vue-recaptcha": "^2.0.2"
+        "vue-recaptcha": "^2.0.2",
+        "husky": "^8.0.0"
     },
     "dependencies": {
         "@babel/preset-env": "^7.22.10",
