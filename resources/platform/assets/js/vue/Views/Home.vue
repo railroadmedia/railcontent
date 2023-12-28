@@ -9,8 +9,18 @@
             <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" />
         </div>
         <!-- Continue section -->
-        <MiniCatalogueSection title="Continue" seeAllAriaLabel="See All Lessons In Progress" v-if="hasStartedLessons && startedContent.data.length"
-            :seeAllUrl="continueUrl" :preLoadedContent="startedContent" :isMiniView="true" :show-dropdown="true" />
+        <MiniCatalogueSection 
+            v-if="startedContent.data.length" 
+            title="Continue" 
+            seeAllAriaLabel="See All Lessons In Progress"
+            :seeAllUrl="continueUrl" 
+            :preLoadedContent="startedContent.data" 
+            :isMiniView="true" 
+            :show-dropdown="true" 
+        />
+        <!-- Workouts section -->
+        <MiniCatalogueSection v-if="workoutsContent.data.length" title="Workouts" seeAllAriaLabel="See All Workouts" :seeAllUrl="workoutsContentUrl"
+            :preLoadedContent="workoutsContent" />
         <!-- New section -->
         <MiniCatalogueSection title="New Releases" seeAllAriaLabel="See All New Releases" :seeAllUrl="newContentUrl"
             :preLoadedContent="newContent" />
@@ -25,8 +35,15 @@
                 :eventCoachProfileUrl="eventCoachProfileUrl" />
         </div>
         <!-- Upcoming section -->
-        <MiniCatalogueSection v-if="hasUpcomingEvents" title="Upcoming Events" seeAllAriaLabel="See All Upcoming Events"
-            :seeAllUrl="upcomingUrl" :preLoadedContent="upcomingEvents" />
+        <MiniCatalogueSection 
+            v-if="hasUpcomingEvents" 
+            title="Upcoming Events" 
+            seeAllAriaLabel="See All Upcoming Events"
+            :seeAllUrl="upcomingUrl" 
+            :force-no-links="true"
+            :preLoadedContent="upcomingEvents" 
+        />
+
         <!-- Stats section -->
         <StatsSection :accountUrl="accountUrl" :nextLearningPathProgressPercent="nextLearningPathProgressPercent"
             :nextLearningPathLevel="nextLearningPathLevel" :userMetrics="userMetrics" />
@@ -52,6 +69,7 @@ const props = defineProps({
     upcomingUrl: { type: String, default: '' },
     continueUrl: { type: String, default: '' },
     newContentUrl: { type: String, default: '' },
+    workoutsContentUrl: { type: String, default: '' },
     hasGear: { type: Boolean, default: false },
     hasTopics: { type: Boolean, default: false },
     hasGenres: { type: Boolean, default: false },
@@ -63,6 +81,7 @@ const props = defineProps({
     hasStartedLessons: { type: Boolean, default: false },
     startedContent: { type: Object, default: () => ({}) },
     newContent: { type: Object, default: () => ({}) },
+    workoutsContent: { type: Object, default: () => ({}) },
     hotForumTopics: { type: Array, default: () => ([]) },
     usersList: { type: Object, default: () => ({}) },
     coachEvent: { type: Object, default: () => null },

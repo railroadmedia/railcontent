@@ -1,5 +1,9 @@
 @extends('partials.layout')
 
+@php
+//dd(get_defined_vars());
+@endphp
+
 @section('meta')
     <title>{{ ucfirst($brand) }} Home | Musora</title>
 @endsection
@@ -17,6 +21,7 @@
         :has-started-lessons="{{ $hasStartedLessons ? 'true' : 'false' }}"
         :started-content="{{ $startedContentJson }}"
         :new-content="{{ $newContentJson }}"
+        :workouts-content="{{ $workoutsContentJson }}"
         :hot-forum-topics="{{ json_encode($hotForumTopics) }}"
         :users-list="{{ json_encode($usersList->results())  }}"
         :coach-event="{{ $coachEvent }}"
@@ -33,6 +38,7 @@
         content-endpoint="/railcontent/content"
         continue-url="{{ url()->route('platform.lesson-history.in-progress') }}"
         new-content-url="{{ url()->route('platform.new-lessons') }}"
+        workouts-content-url="{{ url()->route('platform.workouts') }}"
         :new-content="{{ $newContentJson }}"
         account-url="{{ user()->getDashboardUrl() }}"
         next-learning-path-level="{{ user()->getMethodLevel() }}"

@@ -1,6 +1,6 @@
 <!-- Composition API -->
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed, onUpdated } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed, onUpdated, watch } from 'vue';
 import shaka from 'shaka-player';
 import Utils from '../../assets/js/helper-functions/utils.js';
 import Screenfull from 'screenfull';
@@ -8,12 +8,12 @@ import ContentService from '../../assets/js/services/content';
 import PlayerUtils from './player-utils';
 import ChromeCastPlugin from './chromecast';
 // import ThemeClasses from '../../mixins/ThemeClasses';
+// import EventHandlers from './event-handlers';
 import PlayerButton from './_PlayerButton.vue';
 import PlayerProgress from './_PlayerProgress.vue';
 import PlayerVolume from './_PlayerVolume.vue';
 import PlayerSettings from './_PlayerSettings.vue';
 import PlayerCaptions from './_PlayerCaptions.vue';
-// import EventHandlers from './event-handlers';
 import LoadingAnimation from '../LoadingAnimation/LoadingAnimation.vue';
 import PlayerShortcuts from './_PlayerShortcuts.vue';
 import PlayerError from './_PlayerError.vue';
@@ -131,10 +131,16 @@ const props = defineProps({
     endSecond: {
         type: [String, Number],
         default: null
+    },
+
+    seekToTime: {
+        type: [String, Number],
+        default: 0
     }
 });
 
-const emit = defineEmits('onVideoEnd', 'play', 'pause', 'canplaythrough', 'loadedmetadata', 'durationchange', 'waiting', 'playing', 'timeupdate', 'cc-time', 'cc-playpause', 'cc-media', 'cc-disconnect', 'cc-state');
+//Investigate other events
+const emit = defineEmits(['onVideoEnd', 'play', 'pause', 'canplaythrough', 'loadedmetadata', 'durationchange', 'waiting', 'playing', 'timeupdate', 'cc-time', 'cc-playpause', 'cc-media', 'cc-disconnect', 'cc-state']);
 
 // Non reactive vars
 let shakaPlayer = null;
@@ -194,6 +200,10 @@ const timeouts = ref({
 });
 const isTransitioning = ref(false);
 const currentRange = ref('original');
+//Had to define a function as a ref to expose it outside of the component
+const pauseVideo = ref(() => {
+    mediaElement.value.pause();
+})
 
 defineExpose({
     ...props,
@@ -215,6 +225,7 @@ defineExpose({
     mousedown,
     currentMouseX,
     currentVolume,
+    currentTimeInSeconds,
     settingsDrawer,
     captionsDrawer,
     chromeCast,
@@ -231,10 +242,15 @@ defineExpose({
     hasBeenPlayed,
     currentPlaybackRate,
     hasRetriedSource,
+    pauseVideo
+});
+
+//watchers
+watch(() => props.seekToTime, (newTime, oldTime) => {
+    if(newTime !== oldTime ) seek(newTime);
 });
 
 //methods
-
 function getDefaultPlaybackQualityIndex() {
     const widthToCheck = window.localStorage.getItem('vuesoraDefaultVideoQuality')
         || document.documentElement.clientWidth;

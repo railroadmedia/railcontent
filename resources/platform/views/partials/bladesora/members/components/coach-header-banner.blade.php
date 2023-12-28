@@ -28,7 +28,7 @@
         {{-- Subscribe --}}
         <div id="subscribeButton" class="{{ $isUserSubscribed ? 'tw-hidden' : '' }}">
             <button onclick="subscribeToCoach({{ $coachId }}, '{{ $subscribeUrl }}');"
-                    class="lg:tw-mr-4 tw-btn tw-btn-primary tw-transition tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-box-border tw-px-auto tw-mb-4 tw-w-[200px]"
+                    class="lg:tw-mr-4 tw-btn tw-btn-primary tw-transition tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-box-border tw-px-auto tw-w-[200px]"
             >
                 <span>
                     <i aria-hidden="true" class="fa fa-bell tw-mr-1"></i>
@@ -39,7 +39,7 @@
         {{-- Unsubscribe --}}
         <div id="unsubscribeButton" class="{{ $isUserSubscribed ? '' : 'tw-hidden' }}">
             <button onclick="unsubscribeToCoach({{ $coachId }}, '{{ $unsubscribeUrl }}');"
-                    class="lg:tw-mr-4 tw-btn tw-btn-primary tw-transition tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-box-border tw-px-auto tw-mb-4 tw-w-[200px]"
+                    class="lg:tw-mr-4 tw-btn tw-btn-primary tw-transition tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-box-border tw-px-auto tw-w-[200px]"
             >
                 <span>
                     <i aria-hidden="true" class="fa fa-check tw-mr-1"></i>

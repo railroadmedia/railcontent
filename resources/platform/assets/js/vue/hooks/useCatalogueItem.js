@@ -83,7 +83,7 @@ export default function useCatalogueItem(props) {
         });
     });
 
-    return toRefs({
+    return {
         is_added,
         progress_percent,
         noAccess,
@@ -96,5 +96,5 @@ export default function useCatalogueItem(props) {
         renderLink,
         thumbnailType,
         contentModel
-    });
+    };
 }

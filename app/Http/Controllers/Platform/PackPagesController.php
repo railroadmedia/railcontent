@@ -81,26 +81,7 @@ class PackPagesController extends Controller
             if ($pack['id'] == $activePack) {
                 $pack['status_text'] = "In Progress";
             }
-            $nextLesson = $this->contentService->getNextContentForParentContentForUser($pack['id'], user()->id);
-            if ($nextLesson && $nextLesson['type'] == 'pack-bundle-lesson') {
-                $bundle = $this->contentService->getByChildIdWhereParentTypeIn($nextLesson['id'], ['pack-bundle']
-                )->first();
 
-                $nextLesson['url'] = url()->route(
-                    'platform.packs.third-level',
-                    [
-                        "brand" => $brand,
-                        "packSlug" => $pack['slug'],
-                        "packId" => $pack['id'],
-                        "packBundleSlug" => $bundle['slug'],
-                        "packBundleId" => $bundle['id'],
-                        "packBundleLessonSlug" => $nextLesson['slug'],
-                        "packBundleLessonId" => $nextLesson['id'],
-                    ]
-                );
-
-                $pack['next_lesson_url'] = $nextLesson['url'];
-            }
         }
 
         if (user()->isALifetimeMember() && brand() == 'drumeo') {

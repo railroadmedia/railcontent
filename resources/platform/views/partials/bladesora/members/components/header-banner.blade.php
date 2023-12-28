@@ -1,6 +1,10 @@
-<div class="tw-full fluid collapsed-h tw-py-8 md:tw-py-11 relative bg-black">
+@php
+    $type = isset($contentType) ? $contentType : '';
+@endphp
+
+<div class="tw-full fluid collapsed-h tw-py-8 md:tw-py-11 relative bg-black @if($type === 'challenge') tw-h-[400px] @endif">
     {{-- Background Image --}}
-    <div class="header-background-container absolute-fill bg-top">
+    <div class="header-background-container absolute-fill bg-top bg-cover bg-center h-screen">
         <img src="{{ $backgroundImage }}" 
              class="tw-h-full tw-w-full  tw-object-top tw-object-cover tw-transition-opacity tw-opacity-0"
              loading="lazy"
@@ -10,8 +14,8 @@
     {{-- Background Gradient --}}
     <div class="absolute-fill bg-top hide-lg-down tw-left-0 tw-w-full" style="background: linear-gradient(to left, #000 0%, transparent 10%, transparent 90%, #000 100%)"></div>
     <div class="header-gradient-overlay absolute-fill {{ $brand }}"></div>
-    <div class="relative">
-        <div class="tw-relative tw-flex tw-items-center tw-container tw-mx-auto tw-px-4 md:tw-px-8">
+    <div class="relative tw-h-full">
+        <div class="tw-relative tw-flex tw-items-center tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-h-full">
             {{ $content }}
 
             @if(empty($hideUser))

@@ -65,7 +65,7 @@ export default {
         required_user_states,
         page = '1',
         include_future = 1,
-        only_from_my_list = false
+        only_from_my_list = false,
     }) {
         return axios
             .get(`${endpointPrefix}/railcontent/content`, {
@@ -82,7 +82,7 @@ export default {
                     required_user_states,
                     page,
                     include_future,
-                    only_from_my_list
+                    only_from_my_list,
                 },
             })
             .then(response => response)

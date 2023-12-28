@@ -10,13 +10,12 @@ module.exports = (theme) => {
             cursor: 'pointer',
             display: 'inline-flex',
             fontFamily: '"Bebas Neue", cursive',
-            fontSize: '1.25rem',
+            fontSize: '1rem',
             justifyContent: 'center',
             letterSpacing: '1px',
-            lineHeight: '1',
             marginBottom: '0.25rem',
-            minHeight: '50px',
-            padding: '8px 70px',
+            minHeight: '40px',
+            padding: '7px 70px 6px',
             position: 'relative',
             textDecoration: 'none',
             textTransform: 'uppercase',
@@ -76,7 +75,7 @@ module.exports = (theme) => {
                 backgroundColor: theme('backgroundColor.recordeo.600'),
             }
         },
-    
+
         //Secondary
         '.btn-secondary': {
             borderColor: 'currentColor',
@@ -121,7 +120,7 @@ module.exports = (theme) => {
                 color: theme('textColor.recordeo.600'),
             }
         },
-        
+
         //Button Variants,
         '.btn-circle': {
             padding: '0',

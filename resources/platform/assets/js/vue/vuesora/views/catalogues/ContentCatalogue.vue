@@ -8,7 +8,7 @@
             <a class="tw-no-underline tw-mb-2 sm:tw-mb-0 tw-mr-6 tw-transition"
                :href="coachIndexUrl + '#coach-section'"
             >
-              <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
+              <h3 class="tw-text-xl md:tw-text-2xl tw-inline-block tw-cursor-pointer"
                   :class="[!isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500' ]"
               >
                 All Coaches
@@ -17,7 +17,7 @@
             <a class="tw-no-underline tw-transition"
                :href="coachIndexUrl + '?only_subscribed=true#coach-section' "
             >
-              <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
+              <h3 class="tw-text-xl md:tw-text-2xl tw-inline-block tw-cursor-pointer"
                   :class="[isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500' ]"
               >
                   Subscribed Coaches
@@ -504,14 +504,7 @@ export default {
         : 0,
       loading: false,
       requestingMore: false,
-      filter_params: {
-        artist: null,
-        bpm: null,
-        difficulty: null,
-        instructor: null,
-        style: null,
-        topic: null,
-      },
+      filter_params: {},
       selected_types: null,
       search_term: this.searchTerm,
       required_user_states: this.requiredUserStates || [],
@@ -536,6 +529,9 @@ export default {
               value: '-published_on'
           }
       ],
+      selectedTab: 'subscribedCoaches',
+      filterMultiSelectColumns: [],
+      coachData: { allCoaches: this.preLoadedContent ? this.preLoadedContent.data : [], subscribedCoaches: [] },
     };
   },
   computed: {
@@ -636,12 +632,7 @@ export default {
       return this.noResultsMessage;
     },
   },
-  beforeMount() {
-    console.log('preloaded content', this.preloadedContent)
-
-  },
   mounted() {
-    console.log('includeFutureScheduledContentOnly',this.includeFutureScheduledContentOnly)
     if (!this.preLoadedContent && !this.preLoadedContent.results.length) {
       this.getContent();
     }
@@ -659,6 +650,17 @@ export default {
         this.loadedContentIds[item.id] = true;
       });
     }
+
+    if(this.isCoachesGrid){
+        this.getContent(true, true).then(()=>{
+            this.selectedTab = 'allCoaches';
+            this.coachData['subscribedCoaches'] = [...this.content];
+            this.getContent(true, true);
+        });
+
+        this.getFilterColumns();
+    }
+
   },
   watch: {
     catalogueType: function () {
@@ -671,8 +673,8 @@ export default {
     }
   },
   methods: {
-    handleContentSort(event) {
-      this.sort = event.target.value;
+    handleContentSort(key) {
+      this.sort = key;
       //reset page params
       this.page = 1;
 
@@ -790,7 +792,7 @@ export default {
 
     fetchContent() {
       return axios
-        .get(this.$_contentEndpoint, {
+        .get( this.isCoachesGrid ? this.coachEndpoint() : this.$_contentEndpoint, {
           params: {
             brand: this.brand,
             limit: this.limit,
@@ -957,6 +959,49 @@ export default {
       this.setUrlParams();
 
       this.getContent();
+    },
+
+    coachEndpoint(){
+        return this.isOnlySubscribed  ? '/railcontent/content?only_subscribed=true' : '/railcontent/content?only_subscribed=';
+    },
+
+    handleFilterTabClick(value){
+        this.coachData[this.selectedTab] = [...this.content];
+        this.selectedTab = value;
+        this.content = [...this.coachData[this.selectedTab]];
+    },
+
+    getFilterColumns(){
+      let filters = [];
+      for (const value of this.filterableValues){
+          filters.push({
+              category: value,
+              items: this.filters[value]
+          });
+      }
+      this.filterMultiSelectColumns = filters;
+    },
+
+    applyFilters(category, item){
+        if (this.filter_params[category]){
+            const isChecked = this.filter_params[category].find((f)=> f.value === item.value);
+
+            if (isChecked) {
+                this.filter_params[category] = this.filter_params[category].filter((f) => f.value !== item.value);
+
+                if(this.filter_params[category].length === 0) {
+                    delete this.filter_params[category];
+                }
+            }
+
+            else {
+                this.filter_params[category].push(item);
+            }
+        }
+
+        else {
+            this.filter_params[category] = [item];
+        }
     },
   },
 };

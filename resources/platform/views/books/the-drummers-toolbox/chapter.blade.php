@@ -16,7 +16,7 @@ if(!empty($user)){
 
 @section('content')
     <header id="bestBookHeader" class="fluid pb-5 pt-2 shadow">
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">  
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
             <div class="flex flex-row">
                 <a
                     href="{{ url()->route(
@@ -161,17 +161,17 @@ if(!empty($user)){
                 <h1 class="heading">Play-Alongs</h1>
             </div>
             <?php //dd($playAlongs); ?>
-            
-            <div class="tw-w-full flex flex-row"> 
+
+            <div class="tw-w-full flex flex-row">
                 <play-alongs
                     content-endpoint="/railcontent/content"
                     theme-color="drumeo"
                     brand="drumeo"
-                    :pre-loaded-content="{{ $playAlongs }}"
+                    :pre-loaded-content="{{ json_encode(json_decode($playAlongs)->data) }}"
+                    :total-results="{{ json_encode(json_decode($playAlongs)->meta->totalResults) }}"
                     user-id="{{ auth()->id() }}"
                     :no-sidebar="true"
                     :show-filters="false"
-                    :show-pagination="false"
                     :use-url-params="false"
                     :show-user-actions="false"
                     :track-progress="false"

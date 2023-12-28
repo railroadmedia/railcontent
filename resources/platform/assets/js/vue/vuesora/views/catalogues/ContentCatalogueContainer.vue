@@ -2,7 +2,7 @@
   <section id="content-catalogue">
     <div class="tw-flex tw-justify-between tw-items-center">
       <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
-        <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl  tw-mb-3">
+        <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl tw-mb-3">
             All Lessons
         </h2>
       </div>
