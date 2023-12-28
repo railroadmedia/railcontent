@@ -3,8 +3,8 @@
 use App\Http\Controllers\Platform\CoachPagesController;
 use App\Http\Controllers\Platform\CohortPackController;
 use App\Http\Controllers\Platform\ContentPagesController;
+use App\Http\Controllers\Platform\InactiveMemberController;
 use App\Http\Controllers\Platform\WorkoutsPageController;
-use App\Http\Controllers\Platform\ExpiredMemberController;
 use App\Http\Controllers\Platform\ForumPagesController;
 use App\Http\Controllers\Platform\HomePageController;
 use App\Http\Controllers\Platform\LegacyResourcesController;
@@ -156,7 +156,7 @@ Route::domain('{musoraDomain}')
                         'drum-fest-international-2022',
                     ])
                     ->name('platform.content-type-catalog');
-                
+
 
                 Route::get('/{brand}/workouts', [WorkoutsPageController::class, 'showWorkoutsPage'])
                     ->whereIn('brand', all_brands())
@@ -386,14 +386,6 @@ Route::domain('{musoraDomain}')
         Route::get('/membership-expired', [InactiveMemberController::class, 'showExpiredMemberPage'])
             ->whereIn('brand', all_brands())
             ->name('platform.membership-expired');
-
-
-        /*
-         * Paused Members
-         */
-        Route::get('/membership-paused', [ExpiredMemberController::class, 'showPausedMemberPage'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.membership-paused');
 
         /*
          * Paused Members

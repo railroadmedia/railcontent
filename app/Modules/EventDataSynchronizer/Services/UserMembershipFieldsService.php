@@ -82,7 +82,7 @@ class UserMembershipFieldsService
         return $this->userProvider->saveMembershipData(
             $userId,
             $membershipExpirationDate,
-            $membershipStartDate,
+            null,
             $isLifetimeMember,
             $accessLevel,
             $ownsPacks,
