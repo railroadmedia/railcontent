@@ -209,7 +209,7 @@
             @include('musora.sales.components.header-section', [
                 'boldText' => true,
                 'promoHeader' => true,
-                'header' => 'A <span class="text-pianote">NEW WAY</span> OF<br> LEARNING PIANO.',
+                'header' => 'THE <span class="text-pianote">NEW WAY</span> TO<br> LEARN PIANO.',
                 'underline' => true,
             'fillColor' => "#f61a30",
                 'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',

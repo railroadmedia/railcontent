@@ -110,7 +110,7 @@
             ],
             [
                 'image' => 'marketing/musora/membership/homepage/2024/any-instrument.jpg',
-                'title' => 'Any instrument, any time',
+                'title' => 'Any Instrument, Any Time',
                 'desc' => 'Get all-access to piano, guitar, drums, and singing lessons.',
                 'lessonInfo' => [
                     [

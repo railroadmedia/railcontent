@@ -317,7 +317,7 @@
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/loop-icons.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/loop-feature.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/pianote-loop.mp4",
                 "title" => "Loop the trouble spots.",
                 "desc" => "Create practice loops to play-through those difficult parts over and over.",
             ],
