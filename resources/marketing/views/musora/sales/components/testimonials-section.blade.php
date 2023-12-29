@@ -17,8 +17,22 @@
             </strong></h2>
         <img class="h-11 my-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/musora/membership/homepage/2024/stars.png">
         <p class="mx-auto mb-7">
-            Rated 4.8/5 based on <strong class="font-black">{{ number_format(Prices::$reviews) }} student reviews.</strong>
-            <a class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+            Rated 4.8/5 based on <strong class="font-black">
+                @if($theme == 'drumeo')
+                    {{ number_format(1917) }}
+                @else
+                    {{ number_format(Prices::$reviews) }}
+                @endif
+                student reviews.</strong>
+            <a class="inline-block" target="_blank"
+                @if($theme == 'drumeo')
+                    href="https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738"
+                    onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738', 'newwindow', 'width=750, height=550'); return false;"
+                @else
+                    href="https://www.shopperapproved.com/reviews/Musora.com"
+                    onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;"
+                @endif
+            >
                 <strong class="font-black text-{{ $theme }}"><u>See the reviews »</u></strong>
             </a>
         </p>

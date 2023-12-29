@@ -69,7 +69,7 @@
             </picture>
             <h1 class="leading-tight my-5 uppercase font-lexend"><strong>Everything you need to<br class="hidden sm:inline"> start
                     playing the drums.</strong></h1>
-            <h5 class="leading-tight">Get the highest-rated beginner e-kit PLUS an annual membership to Drumeo.</h5>
+            <h5 class="leading-tight text-musora">Get the highest-rated beginner e-kit <strong>PLUS</strong> an annual membership to Drumeo.</h5>
             <h4 class="leading-tight text-drumeo my-4 sm:my-5 uppercase"> Only
                 @if (floatval($productPrices['alesis-ekit']->price) > floatval($productPrices['alesis-ekit']->discounted_price))
                     <s class="opacity-50">${{ floatval($productPrices['alesis-ekit']->price) }}</s>
@@ -98,7 +98,7 @@
    <div class="top-0 left-0 absolute w-full h-full z-10"
        style="background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.4));"></div>
    <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline
-       muted src="https://player.vimeo.com/progressive_redirect/playback/897277793/rendition/2160p/file.mp4?loc=external&signature=5c965f98ffb7630446b2c0e429a893463d37587d37e600ac60093af60da9570b"></video> 
+       muted src="https://player.vimeo.com/progressive_redirect/playback/897277793/rendition/2160p/file.mp4?loc=external&signature=5c965f98ffb7630446b2c0e429a893463d37587d37e600ac60093af60da9570b"></video>
 </header>
 
 
@@ -125,7 +125,7 @@
             <img class="transition-opacity opacity-0 relative -mb-5 z-10" alt="icon" loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/e-kit-chart-new.png">
-   
+
     </div>
 </div>
 
@@ -284,8 +284,9 @@
             <div class="flex flex-wrap items-center px-4 sm:px-6 pt-10 md:py-10 lg:py-20">
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5">
                     <h2 class="pb-6 sm:pb-4"><strong>Everything you need<br> to start playing<br> the drums.</strong></h2>
-                    <h6 class="leading-tight">Get the ultimate starter e-kit + <br>
-                        one year of unlimited drum lessons.</h6>
+                    <h6 class="leading-tight">
+                        Alesis Nitro Max E-Kit (Black/Blue) <br>
+                        Drumeo Lessons (Annual Membership)</h6>
 
                     <h4 class="my-4 text-drumeo"> ONLY
                         @if(floatval($productPrices['alesis-ekit']->price) > floatval($productPrices['alesis-ekit']->discounted_price))
