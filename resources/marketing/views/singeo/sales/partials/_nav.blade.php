@@ -163,7 +163,7 @@
             "linkUrl" => "/choose-plan",
         ])
             @include('drumeo.sales.partials._nav-link', [
-                "linkName" => "Holiday Deals",
+                "linkName" => "Shop",
                 "linkIcon" => "fas fa-tag text-promo",
                 "linkUrl" => "/shop",
             ])

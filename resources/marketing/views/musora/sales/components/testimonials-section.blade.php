@@ -42,7 +42,7 @@
                             autoplay: true,
                             pauseOnHover: true,
                             pauseOnFocus: true,
-                            interval: 3000,
+                            interval: 5000,
                             breakpoints: {
                                 1020: {
                                     padding: '2.5rem',
