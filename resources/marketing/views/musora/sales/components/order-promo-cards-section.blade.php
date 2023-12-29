@@ -23,51 +23,76 @@
         </p>
 
         <div id="plusOptions"
-            class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto"
+            class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-3xl lg:max-w-4xl mb-5 sm:mb-10 mx-auto"
             x-bind:class="{ 'hidden': !plusMembershipSelected }"
         >
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                <a href="{{$plusMonthlyLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif">
-                    <div class="bg-white px-3 py-5 md:py-7">
-                        <h2 class="mb-2 sm:mb-3 text-3xl lg:text-4xl"><strong>Monthly</strong></h2>
-                        <h4 class="inline-block leading-tight"><strong>${{ Prices::$plusSubscriptionMonthly }}/month</strong></h4>
-                        <p class="text-sm"><em>Pay as you go.</em></p>
-                        <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
-                        <p class="text-sm mb-1.5"><strong>{{ $firstPoint }}</strong></p>
-                        <p class="text-sm mb-1.5"><strong>{{ $songs }}</strong></p>
-                        <p class="text-sm mb-1.5"><strong>{{ $thirdPoint }}</strong></p>
-                        <p class="text-sm mb-1.5">Join a community of {{ number_format(Prices::$students) }} students.</p>
-                        @if(!empty($fifthPoint))
-                            <p class="text-sm mb-1.5">{{ $fifthPoint }}</p>
-                        @endif
-                        <p class="text-sm mb-1.5">90-day money-back guarantee.</p>
-                        <p class="text-sm">Cancel anytime.</p>
+                <a href="{{$firstDealLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif" style="margin-top: 30px">
+                    <div class="bg-white px-3 py-6 md:py-7">
+                        <div>
+                        <h2 class="mb-2 sm:my-3 text-3xl lg:text-4xl"><strong>{{$firstDeal}}</strong></h2>
+                        <img
+                                        class="{{$firstImageHeight}} rounded-md transition-opacity opacity-0"
+                                        src={{ $firstDealImage }}
+                                        loading="lazy"
+                                        onload="this.classList.remove('opacity-0')"
+                                        alt="card image"
+                                    >
+                        </div>
+                        <h3 class="leading-tight pt-2">
+                            @if(!empty($firstDealDiscount))
+                                <span class="line-through" style="color: #879097; margin-right: 5px;"> ${{$firstDealDiscount}} </span>
+                            @endif
+                            <strong>${{$firstDealPrice}}</strong>
+                        </h3>                        
+                        <p class="text-sm"><em>{{$firstDealSub}}</em></p>
+                        <div class="join my-5 smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] {{ $theme }}">{{$buttonText}}</div>
                     </div>
+                        @if(!empty($firstExtraBonuses))
+                            <div class="px-4 md:px-6 lg:px-10 py-8" style="background:#F6F8FC">
+                            @foreach($firstExtraBonuses as $bonus)
+                            <p class="text-left text-sm mb-1.5 leading-tight">{!! $bonus !!}</p> 
+                            @endforeach
+                            </div>
+                        @endif
                 </a>
             </div>
+            
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-{{ $theme }} @if($theme == 'musora') text-black @endif" >MOST POPULAR</p>
-                <a href="{{$plusAnnualLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-{{ $theme }}">
+                <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-{{ $theme }} @if($theme == 'musora') text-black @endif" >{{$topBadge}}</p>
+                <a href="{{$secondDealLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-{{ $theme }}">
                     <div class="bg-white px-3 py-6 md:py-9">
-                        <h2 class="mb-2 sm:mb-3 text-3xl lg:text-4xl"><strong>Annual</strong></h2>
-                        <h4 class="inline-block leading-tight"><strong>${{ number_format(Prices::$plusSubscriptionAnnualFull / 12) }}/month</strong></h4>
-                        <p class="text-sm"><em>Save 33%. Billed at ${{Prices::$plusSubscriptionAnnualFull}} per year.</em></p>
-                        <div class="join my-5 {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
-                        <p class="text-sm mb-1.5"><strong>{{ $firstPoint }}</strong></p>
-                        <p class="text-sm mb-1.5"><strong>{{ $songs }}</strong></p>
-                        <p class="text-sm mb-1.5"><strong>{{ $thirdPoint }}</strong></p>
-                        <p class="text-sm mb-1.5">Join a community of {{ number_format(Prices::$students) }} students.</p>
-                        @if(!empty($fifthPoint))
-                            <p class="text-sm mb-1.5">{{ $fifthPoint }}</p>
+                        <img
+                                        class="absolute top-0 right-0 h-20 transition-opacity opacity-0"
+                                        src={{ $badge }}
+                                        loading="lazy"
+                                        onload="this.classList.remove('opacity-0')"
+                                        alt="free shipping badge"
+                                    >
+                        <h2 class="mb-2 sm:mb-3 text-3xl lg:text-4xl pt-4 md:pt-0"><strong>{{$secondDeal}}</strong></h2>
+                         <img
+                                        class="{{$secondImageHeight}} rounded-md transition-opacity opacity-0 transition-opacity opacity-0"
+                                        src={{ $secondDealImage }}
+                                        loading="lazy"
+                                        onload="this.classList.remove('opacity-0')"
+                                        alt="card image"
+                                    >
+                        <h3 class="leading-tight">
+                            <span class="line-through" style="color: #879097; margin-right: 5px;">${{$secondDealDiscount}}</span>
+                            <strong>${{$secondDealPrice}}</strong>
+                        </h3>                        
+                        <p class="text-sm"><em>{{$secondDealSub}}</em></p>
+                        <div class="join my-5 {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]"> {{$buttonText}} </div>
+                   </div>
+                        @if(!empty($secondExtraBonuses))
+                        <div class="px-4 md:px-6 lg:px-10 py-8" style="background:#F6F8FC">
+                            @foreach($secondExtraBonuses as $bonus)
+                            <p class="text-left text-sm mb-1.5">{!! $bonus !!}</p> 
+                            @endforeach
+                            </div>
                         @endif
-                        <p class="text-sm mb-1.5">90-day money-back guarantee.</p>
-                        <p class="text-sm">Cancel anytime.</p>
-                    </div>
                 </a>
             </div>
         </div>
-
-
-        <p><em>All prices listed in USD.</em></p>
     </div>
 </section>

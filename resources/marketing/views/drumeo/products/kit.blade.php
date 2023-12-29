@@ -95,13 +95,10 @@
     <div class="top-0 left-0 absolute w-full h-full z-10 bg-cover bg-center"
         style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/kit/header-image.jpg');">
     </div>
-{{--    <div class="top-0 left-0 absolute w-full h-full z-10"--}}
-{{--        style="background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.4));"></div>--}}
-{{--    <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline--}}
-{{--        muted src="https://d21q7xesnoiieh.cloudfront.net/marketing/drumeo/shop/stickbag/header-vid.mp4"></video> 
-https://player.vimeo.com/video/897277793
-
---}} 
+   <div class="top-0 left-0 absolute w-full h-full z-10"
+       style="background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.4));"></div>
+   <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline
+       muted src="https://player.vimeo.com/progressive_redirect/playback/897277793/rendition/2160p/file.mp4?loc=external&signature=5c965f98ffb7630446b2c0e429a893463d37587d37e600ac60093af60da9570b"></video> 
 </header>
 
 

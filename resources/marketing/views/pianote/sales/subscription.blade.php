@@ -242,33 +242,40 @@
         {{--        TODO: promo banner--}}
         <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white relative" style="background: linear-gradient(to bottom, #0B1C39, #0C1524);">
             <div class="container max-w-5xl mx-auto">
-                <img class="my-5 h-40 inline sm:hidden"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/620x0/filters:quality(95)/marketing/pianote/promos/september/pianote-trial-sept-promo-collage-m.png"
+                <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
+                    <div class=" max-w-xl pr-5 lg:pr-8 mx-0 leading-normal">
+                        <div class="text-center"> 
+                        <h2 class="py-4 sm:text-left"><strong>Imagine starting a resolution you <br class="inline sm:hidden"> <span class="text-pianote">knew</span> would stick…</strong></h2>
+                        <img class="my-5 h-86 inline sm:hidden"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/pianote-promo-m.png"
                     alt="learn playing image"
                     fetchpriority="high"
                 >
-                <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
-                    <div class=" max-w-xl pr-5 lg:pr-8 mx-0">
-                        <h2 class=" sm:mb-10"><strong>Imagine starting a resolution you knew would stick…</strong></h2>
-                        <p class="leading-normal">Pianote is different from other online lessons. 
-                            You won’t just watch a video and be left alone to do the hard work. Instead, you’ll get guided play-along lessons that bring the personal touch of a live class right into your living room. You’ll play alongside a REAL teacher so you’ll never have to guess what you should be doing. 
-                            It will feel like they’re right there with you.
-                            And it works.
-                            So this year, don’t just wish you could play the piano. Join Pianote and know you can.
-                            (And we’re so confident, you’ll have 90 days to try it risk-free.)
-                            Join today to save on your first year + get 8 FREE bonuses.
+            
+                </div>
+                       
+                        <p>Pianote is different from other online lessons. <br><br>
+                            You won’t just watch a video and be left alone to do the hard work. Instead, you’ll get guided play-along lessons that bring the personal touch of a live class right into your living room. You’ll play alongside a REAL teacher so you’ll never have to guess what you should be doing. <br><br>
+                            It will feel like they’re right there with you. <br><br>
+                            <span class="text-pianote">And it works.</span> <br><br>
+                            So this year, don’t just wish you could play the piano. Join Pianote and know you can. <br><br>
+                            (And we’re so confident, you’ll have 90 days to try it risk-free.)<br><br>
+                            Join today to save on your first year + get 8 FREE bonuses. <br><br>
                             You’ll love it.
 
-                            <br>
-                            <a class="join smaller blue my-3 w-1/2" href="">GET Started &raquo;</a>
+                            <br><br>
+                            <span class="flex justify-center md:justify-start">
+                            <a class="join smaller pianote my-3" href="TODO">GET Started <i class="fa-light fa-arrow-right"></i></a>
+                            </span>
                         </p>
 
                     </div>
-                    <img class="h-80 lg:h-96 hidden sm:inline transition-opacity opacity-0"
+                    <img class="hidden sm:inline transition-opacity opacity-0"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/promos/september/pianote-trial-sept-promo-collage.png"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/pianote/membership/homepage/2024/pianote-promo-bundle.png"
                         alt="learn playing image"
+                        style="height: 41rem;"
                     >
                 </div>
             </div>
@@ -358,24 +365,47 @@
         ])
     @elseif(!empty($promoVersion))
 
-        @include('musora.sales.components.order-promo-cards-section', [
-            "songs" => "1000+ popular songs.",
-            "firstPoint" => "Unlimited piano lessons.",
-            "thirdPoint" => "Direct access to real teachers.",
-            "fifthPoint" => "Lesson access for singing, guitar, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true",
+    @include('musora.sales.components.order-promo-cards-section', [
+        // General
+        "songs" => "1000+ popular songs.",
+        'buttonText' => 'GET STARTED',
+        'header' => 'A <span class="text-pianote">NEW WAY</span> OF<br> LEARNING PIANO.',
+        'underline' => true,
+        'fillColor' => "#f61a30",
+        'pointOne' => 'GREAT TEACHERS',
+        'pointTwo' => 'VIDEO LESSONS',
+        'pointThree' => 'FUN PRACTICE',
+        'pointFour' => '1000+ SONGS',
+        'topBadge' => 'BEST DEAL',
+        'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/pianote-free-shipping.png',
 
-                'header' => 'A <span class="text-pianote">NEW WAY</span> OF<br> LEARNING PIANO.',
-                'underline' => true,
-            'fillColor' => "#f61a30",
-            'pointOne' => 'GREAT TEACHERS',
-            'pointTwo' => 'VIDEO LESSONS',
-            'pointThree' => 'FUN PRACTICE',
-            'pointFour' => '1000+ SONGS',
+        // First deal 
+        'firstDeal'=> "Pianote Only",
+        'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/pianote-only.jpg',
+        'firstImageHeight'=> 'h-32',
+        'firstDealPrice' => floatval($productPrices['pianote']->price),
+        'firstDealSub' => "Save 25% on your first year. No bonuses.",
+        "firstDealLink" => "/ecommerce/add-to-cart?products[pianote]=1",
 
-
-        ])
+        // Second deal
+        'secondDeal' => "New Year’s Bundle",
+        'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/new-year-bundle.png',
+        'secondImageHeight'=> '',
+        'secondDealSub' => "Join Pianote + get 8 bonuses worth $615.",
+        'secondDealPrice' => floatval($productPrices['pianote-new-year']->discounted_price),
+        'secondDealDiscount' => floatval($productPrices['pianote-new-year']->price),
+        "secondDealLink" => "/ecommerce/add-to-cart?products[pianote-new-year]=1",
+        'secondExtraBonuses' => [
+            '<span class="text-pianote"><strong>BONUS</strong></span> Metronome <span class="italic">($79 value) <span class="text-pianote"><span class="line-through ">800 </span><strong>745</strong> left!</span></span>', 
+            '<span class="text-pianote"><strong>BONUS</strong></span> Little Book Bundle <span class="italic">($15 value)</span>',
+            '<span class="text-pianote"><strong>BONUS</strong></span> Pianote Practice Planner <span class="italic">($39 value)</span>', 
+            '<span class="text-pianote"><strong>BONUS</strong></span> 100 Days of Practice Poster <span class="italic">($9 value)</span>',
+            '<span class="text-pianote"><strong>BONUS</strong></span> New Piano Players Start Here <span class="italic">($127 value)</span>',
+            '<span class="text-pianote"><strong>BONUS</strong></span> Easy Chords <span class="italic">($127 value)</span>',
+            '<span class="text-pianote"><strong>BONUS</strong></span> Piano Technique Made Easy <span class="italic">($120 value)</span>',
+            '<span class="text-pianote"><strong>BONUS</strong></span> Riffs & Fills <span class="italic">($99 value)</span>'
+        ], 
+    ])
 
     @else
         @include('musora.sales.components.order-section-collage', [
