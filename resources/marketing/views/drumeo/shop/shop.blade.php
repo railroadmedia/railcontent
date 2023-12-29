@@ -36,7 +36,7 @@
                 $bundles = [
                     [
                         'slug' => '/drumshop/kit',
-                        'desc' => 'Get the ultimate starter e-kit <br class="sm:hidden"> + one year of <br class="hidden md:block lg:hidden"> Drumeo.',
+                        'desc' => 'Get the ultimate starter e-kit <br class="sm:hidden"> + one year of <br> Drumeo.',
                         'visible' => 1,
                         'price' => floatval($productPrices['alesis-ekit']->price),
                         'discountedPrice' => floatval($productPrices['alesis-ekit']->discounted_price),
@@ -47,7 +47,7 @@
                     ],
                     [
                         'slug' => '/drumshop/practice-anywhere-bundle',
-                        'desc' => 'A practice pad, stand and sticks <br class="sm:hidden"> so you can practice <br class="hidden md:block lg:hidden"> anywhere.',
+                        'desc' => 'A practice pad, stand and sticks <br class="sm:hidden"> so you can practice <br>anywhere.',
                         'visible' => 1,
                         'price' => floatval($productPrices['practice-anywhere']->price),
                         'discountedPrice' => floatval($productPrices['practice-anywhere']->discounted_price),

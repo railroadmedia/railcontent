@@ -28,8 +28,7 @@
         >
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                 <a href="{{$firstDealLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif" style="margin-top: 30px">
-                    <div class="bg-white px-3 py-6 md:py-7">
-                        <div>
+                    <div class="bg-white px-3 py-6 md:py-8" style="border-bottom: 1px solid white">
                         <h2 class="mb-2 sm:my-3 text-3xl lg:text-4xl"><strong>{{$firstDeal}}</strong></h2>
                         <img
                                         class="{{$firstImageHeight}} rounded-md transition-opacity opacity-0"
@@ -38,7 +37,6 @@
                                         onload="this.classList.remove('opacity-0')"
                                         alt="card image"
                                     >
-                        </div>
                         <h3 class="leading-tight pt-2">
                             @if(!empty($firstDealDiscount))
                                 <span class="line-through" style="color: #879097; margin-right: 5px;"> ${{$firstDealDiscount}} </span>
