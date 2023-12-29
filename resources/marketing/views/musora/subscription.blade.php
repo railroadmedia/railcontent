@@ -266,6 +266,9 @@
             }
         }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap" rel="stylesheet">
 @stop
 
 @section('body-data')
@@ -285,8 +288,8 @@
         $bubbles = $musora['bubbles'];
     @endphp
     @include('musora.sales.components.header-section', [
-        'header' => 'Your musical goals<br> start here.',
-        'underline' => true,
+        'header' => '“Like my very own music coach!”',
+        'testimonialVersion' => true,
         'noTrailer' => true,
         'pointOne' => 'GREAT TEACHERS',
         'pointTwo' => 'VIDEO LESSONS',

@@ -187,7 +187,7 @@
             'pointThree' => 'FUN PRACTICE',
             'pointFour' => '6000+ SONGS',
         ])
-    @elseif(empty($trialVersion))
+    @elseif(!empty($promoPage))
         @include('musora.sales.components.header-section', [
             'noExcuse' => true,
             'promoHeader' => true,

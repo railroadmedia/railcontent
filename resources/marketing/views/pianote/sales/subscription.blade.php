@@ -205,7 +205,7 @@
             'pointFour' => '1000+ SONGS',
             ])
 
-        @elseif(empty($trialVersion))
+        @elseif(!empty($promoPage))
             @include('musora.sales.components.header-section', [
                 'boldText' => true,
                 'promoHeader' => true,
@@ -395,7 +395,7 @@
         'topBadge' => 'BEST DEAL',
         'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/pianote-free-shipping.png',
 
-        // First deal 
+        // First deal
         'firstDeal'=> "Pianote Only",
         'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/pianote-only.jpg',
         'firstImageHeight'=> 'h-32',
@@ -412,15 +412,15 @@
         'secondDealDiscount' => floatval($productPrices['pianote-new-year']->price),
         "secondDealLink" => "/ecommerce/add-to-cart?products[pianote-new-year]=1",
         'secondExtraBonuses' => [
-            '<span class="text-pianote"><strong>BONUS</strong></span> Metronome <span class="italic">($79 value) <span class="text-pianote"><span class="line-through ">800 </span><strong>745</strong> left!</span></span>', 
+            '<span class="text-pianote"><strong>BONUS</strong></span> Metronome <span class="italic">($79 value) <span class="text-pianote"><span class="line-through ">800 </span><strong>745</strong> left!</span></span>',
             '<span class="text-pianote"><strong>BONUS</strong></span> Little Book Bundle <span class="italic">($15 value)</span>',
-            '<span class="text-pianote"><strong>BONUS</strong></span> Pianote Practice Planner <span class="italic">($39 value)</span>', 
+            '<span class="text-pianote"><strong>BONUS</strong></span> Pianote Practice Planner <span class="italic">($39 value)</span>',
             '<span class="text-pianote"><strong>BONUS</strong></span> 100 Days of Practice Poster <span class="italic">($9 value)</span>',
             '<span class="text-pianote"><strong>BONUS</strong></span> New Piano Players Start Here <span class="italic">($127 value)</span>',
             '<span class="text-pianote"><strong>BONUS</strong></span> Easy Chords <span class="italic">($127 value)</span>',
             '<span class="text-pianote"><strong>BONUS</strong></span> Piano Technique Made Easy <span class="italic">($120 value)</span>',
             '<span class="text-pianote"><strong>BONUS</strong></span> Riffs & Fills <span class="italic">($99 value)</span>'
-        ], 
+        ],
     ])
 
     @else
