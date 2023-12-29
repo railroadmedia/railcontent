@@ -1,94 +1,46 @@
 <template>
   <div class="tw-flex tw-flex-col tw-grow tw-justify-center">
 
-    <div v-if="isCoachesGrid"
-         id="coach-section"
-         class="tw-flex tw-flex-col tw-mb-6">
-        <div class="tw-flex tw-flex-wrap">
-            <a class="tw-no-underline tw-mb-2 sm:tw-mb-0 tw-mr-6 tw-transition"
-               :href="coachIndexUrl + '#coach-section'"
-            >
-              <h3 class="tw-text-xl md:tw-text-2xl tw-inline-block tw-cursor-pointer"
-                  :class="[!isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500' ]"
-              >
-                All Coaches
-              </h3>
-            </a>
-            <a class="tw-no-underline tw-transition"
-               :href="coachIndexUrl + '?only_subscribed=true#coach-section' "
-            >
-              <h3 class="tw-text-xl md:tw-text-2xl tw-inline-block tw-cursor-pointer"
-                  :class="[isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500' ]"
-              >
-                  Subscribed Coaches
-              </h3>
-            </a>
-        </div>
+    <div v-if="isCoachesGrid" id="coach-section" class="tw-flex tw-flex-col tw-mb-6">
+      <div class="tw-flex tw-flex-wrap">
+        <a class="tw-no-underline tw-mb-2 sm:tw-mb-0 tw-mr-6 tw-transition" :href="coachIndexUrl + '#coach-section'">
+          <h3 class="tw-text-xl md:tw-text-2xl tw-inline-block tw-cursor-pointer"
+            :class="[!isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500']">
+            All Coaches
+          </h3>
+        </a>
+        <a class="tw-no-underline tw-transition" :href="coachIndexUrl + '?only_subscribed=true#coach-section'">
+          <h3 class="tw-text-xl md:tw-text-2xl tw-inline-block tw-cursor-pointer"
+            :class="[isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500']">
+            Subscribed Coaches
+          </h3>
+        </a>
+      </div>
     </div>
 
-    <coach-catalogue-search
-      v-if="isCoach"
-      :theme-color="themeColor"
-      :brand="brand"
-      :included-types="includedTypes"
-      :selected-types="selected_types"
-      :search-term="search_term"
-      :current_page="page"
-      :total-results="total_results"
-      @typeChange="handleTypeChange"
-      @searchChange="handleSearch"
-      @handleContentSort="handleContentSort"
-    />
+    <coach-catalogue-search v-if="isCoach" :theme-color="themeColor" :brand="brand" :included-types="includedTypes"
+      :selected-types="selected_types" :search-term="search_term" :current_page="page" :total-results="total_results"
+      @typeChange="handleTypeChange" @searchChange="handleSearch" @handleContentSort="handleContentSort" />
 
-    <div :class="{'tw-flex tw-w-full tw-flex-wrap tw-mb-3' : isCoachesGrid }">
-        <catalogue-search
-            v-if="searchBar && !isCoach"
-            :theme-color="themeColor"
-            :included-types="includedTypes"
-            :selected-types="selected_types"
-            :search-term="search_term"
-            :current-page="page"
-            :isCoachesGrid="isCoachesGrid"
-            :total-results="total_results"
-            :catalogueType="catalogueType"
-            :search-bar-title="searchBarTitle"
-            :infiniteScroll="infiniteScroll"
-            @typeChange="handleTypeChange"
-            @searchChange="handleSearch"
-        />
+    <div :class="{ 'tw-flex tw-w-full tw-flex-wrap tw-mb-3': isCoachesGrid }">
+      <catalogue-search v-if="searchBar && !isCoach" :theme-color="themeColor" :included-types="includedTypes"
+        :selected-types="selected_types" :search-term="search_term" :current-page="page" :isCoachesGrid="isCoachesGrid"
+        :total-results="total_results" :catalogueType="catalogueType" :search-bar-title="searchBarTitle"
+        :infiniteScroll="infiniteScroll" @typeChange="handleTypeChange" @searchChange="handleSearch" />
 
-        <catalogue-playlist-tabs
-            v-if="isPlaylists && !isCoach"
-            :brand="brand"
-            :theme-color="themeColor"
-            :included-types="includedTypes"
-        />
+      <catalogue-playlist-tabs v-if="isPlaylists && !isCoach" :brand="brand" :theme-color="themeColor"
+        :included-types="includedTypes" />
 
-        <catalogue-filters
-            v-if="!isCoach && filterableValues.length"
-            :filters="filters"
-            :filterable-values="filterableValues"
-            :filters-labels="filtersLabels"
-            :required-user-states="required_user_states"
-            :filter-params="filter_params"
-            :isCoachesGrid="isCoachesGrid"
-            :event-type="eventType"
-            :loading="loading"
-            :theme-color="themeColor"
-            :content-types="selectedTypes"
-            :brand="brand"
-            :init-sort="sortBy"
-            @filterChange="handleFilterChange"
-            @progressChange="handleProgressChange"
-            @handleContentSort="handleContentSort"
-        />
+      <catalogue-filters v-if="!isCoach && filterableValues.length" :filters="filters"
+        :filterable-values="filterableValues" :filters-labels="filtersLabels" :required-user-states="required_user_states"
+        :filter-params="filter_params" :isCoachesGrid="isCoachesGrid" :event-type="eventType" :loading="loading"
+        :theme-color="themeColor" :content-types="selectedTypes" :brand="brand" :init-sort="sortBy"
+        @filterChange="handleFilterChange" @progressChange="handleProgressChange"
+        @handleContentSort="handleContentSort" />
 
     </div>
 
-    <div
-      v-if="content.length === 0 && noResultsMessage.length > 0"
-      class="flex flex-row pv-3 align-v-center"
-    >
+    <div v-if="content.length === 0 && noResultsMessage.length > 0" class="flex flex-row pv-3 align-v-center">
       <div class="flex flex-column icon-col face-icon mr-1">
         <div class="icon-wrap square" :class="noResultsIcon"></div>
       </div>
@@ -97,148 +49,55 @@
       </div>
     </div>
 
-    <coach-grid-catalogue
-      v-if="catalogueType === 'coach-grid'"
-      :content="content"
-      :brand="brand"
-      :theme-color="themeColor"
-      :use-theme-color="useThemeColor"
-      :user-id="userId"
-      :is-admin="isAdmin"
-      :lock-unowned="lockUnowned"
-      :force-wide-thumbs="forceWideThumbs"
-      :content-type-override="contentTypeOverride"
-      :six-wide="sixWide"
-      :five-wide="fiveWide"
-      :show-my-list-action="showMyListAction"
-      :display-inline="displayInline"
-      @addToList="addToListEventHandler"
-    />
+    <coach-grid-catalogue v-if="catalogueType === 'coach-grid'" :content="content" :brand="brand"
+      :theme-color="themeColor" :use-theme-color="useThemeColor" :user-id="userId" :is-admin="isAdmin"
+      :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
+      :six-wide="sixWide" :five-wide="fiveWide" :show-my-list-action="showMyListAction" :display-inline="displayInline"
+      @addToList="addToListEventHandler" />
 
     <!-- Coach Index Page -->
-    <coaches-grid-catalogue
-      v-if="isCoachesGrid"
-      :content="content"
-      :brand="brand"
-      :theme-color="themeColor"
-      :use-theme-color="useThemeColor"
-      :user-id="userId"
-      :is-admin="isAdmin"
-      :lock-unowned="lockUnowned"
-      :force-wide-thumbs="forceWideThumbs"
-      :content-type-override="contentTypeOverride"
-      :show-my-list-action="showMyListAction"
-      :display-inline="displayInline"
-      @addToList="addToListEventHandler"
-    />
+    <coaches-grid-catalogue v-if="isCoachesGrid" :content="content" :brand="brand" :theme-color="themeColor"
+      :use-theme-color="useThemeColor" :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
+      :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
+      :show-my-list-action="showMyListAction" :display-inline="displayInline" @addToList="addToListEventHandler" />
 
-    <grid-catalogue
-      v-if="catalogueType === 'grid'"
-      :add-dark-mode-color="addDarkModeColor"
-      :content="content"
-      :brand="brand"
-      :theme-color="themeColor"
-      :use-theme-color="useThemeColor"
-      :user-id="userId"
-      :is-admin="isAdmin"
-      :lock-unowned="lockUnowned"
-      :force-wide-thumbs="forceWideThumbs"
-      :content-type-override="contentTypeOverride"
-      :six-wide="sixWide"
-      :five-wide="fiveWide"
-      :show-my-list-action="showMyListAction"
-      :display-inline="displayInline"
-      @addToList="addToListEventHandler"
-    />
+    <grid-catalogue v-if="catalogueType === 'grid'" :add-dark-mode-color="addDarkModeColor" :content="content"
+      :brand="brand" :theme-color="themeColor" :use-theme-color="useThemeColor" :user-id="userId" :is-admin="isAdmin"
+      :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
+      :six-wide="sixWide" :five-wide="fiveWide" :show-my-list-action="showMyListAction" :display-inline="displayInline"
+      @addToList="addToListEventHandler" />
 
-    <routines-catalogue
-      v-if="catalogueType === 'routines'"
-      :content="content"
-      :brand="brand"
-      :theme-color="themeColor"
-      :use-theme-color="useThemeColor"
-      :user-id="userId"
-      :is-admin="isAdmin"
-      :lock-unowned="lockUnowned"
-      :force-wide-thumbs="forceWideThumbs"
-      :content-type-override="contentTypeOverride"
-      :six-wide="sixWide"
-      :display-inline="displayInline"
-      @addToList="addToListEventHandler"
-    />
+    <routines-catalogue v-if="catalogueType === 'routines'" :content="content" :brand="brand" :theme-color="themeColor"
+      :use-theme-color="useThemeColor" :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
+      :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride" :six-wide="sixWide"
+      :display-inline="displayInline" @addToList="addToListEventHandler" />
 
-    <list-catalogue
-      v-if="catalogueType === 'list'"
-      :is-coach="isCoach"
-      :content="content"
-      :brand="brand"
-      :theme-color="themeColor"
-      :use-theme-color="useThemeColor"
-      :card_type="catalogueType"
-      :user-id="userId"
-      :is-admin="isAdmin"
-      :display-items-as-overview="displayItemsAsOverview"
-      :display-user-interactions="displayUserInteractions"
-      :content-type-override="contentTypeOverride"
-      :lock-unowned="lockUnowned"
-      :show-numbers="showNumbers"
-      :is_search="searchBar || isPlaylists"
-      :reset-progress="resetProgress"
-      :force-wide-thumbs="forceWideThumbs"
-      :destroy-on-list-removal="destroyOnListRemoval"
-      :compact-layout="compactLayout"
-      :subscription-calendar-id="subscriptionCalendarId"
-      :branch-path-index="branchPathIndex"
-      :branch-path-content="branchPathContent"
-      @addToList="addToListEventHandler"
-      @progressReset="resetProgressEventHandler"
-    />
+    <list-catalogue v-if="catalogueType === 'list'" :is-coach="isCoach" :content="content" :brand="brand"
+      :theme-color="themeColor" :use-theme-color="useThemeColor" :card_type="catalogueType" :user-id="userId"
+      :is-admin="isAdmin" :display-items-as-overview="displayItemsAsOverview"
+      :display-user-interactions="displayUserInteractions" :content-type-override="contentTypeOverride"
+      :lock-unowned="lockUnowned" :show-numbers="showNumbers" :is_search="searchBar || isPlaylists"
+      :reset-progress="resetProgress" :force-wide-thumbs="forceWideThumbs" :destroy-on-list-removal="destroyOnListRemoval"
+      :compact-layout="compactLayout" :subscription-calendar-id="subscriptionCalendarId"
+      :branch-path-index="branchPathIndex" :branch-path-content="branchPathContent" @addToList="addToListEventHandler"
+      @progressReset="resetProgressEventHandler" />
 
-    <downloads-catalogue
-      v-if="catalogueType === 'downloads'"
-      :content="content"
-      :brand="brand"
-      :theme-color="themeColor"
-      :use-theme-color="useThemeColor"
-      :card_type="catalogueType"
-      :user-id="userId"
-      :is-admin="isAdmin"
-      :display-items-as-overview="displayItemsAsOverview"
-      :display-user-interactions="displayUserInteractions"
-      :content-type-override="contentTypeOverride"
-      :lock-unowned="lockUnowned"
-      :show-numbers="showNumbers"
-      :is_search="searchBar || isPlaylists"
-      :reset-progress="resetProgress"
-      :force-wide-thumbs="forceWideThumbs"
-      :destroy-on-list-removal="destroyOnListRemoval"
-      :compact-layout="compactLayout"
-      :subscription-calendar-id="subscriptionCalendarId"
-      @addToList="addToListEventHandler"
-      @progressReset="resetProgressEventHandler"
-    />
+    <downloads-catalogue v-if="catalogueType === 'downloads'" :content="content" :brand="brand" :theme-color="themeColor"
+      :use-theme-color="useThemeColor" :card_type="catalogueType" :user-id="userId" :is-admin="isAdmin"
+      :display-items-as-overview="displayItemsAsOverview" :display-user-interactions="displayUserInteractions"
+      :content-type-override="contentTypeOverride" :lock-unowned="lockUnowned" :show-numbers="showNumbers"
+      :is_search="searchBar || isPlaylists" :reset-progress="resetProgress" :force-wide-thumbs="forceWideThumbs"
+      :destroy-on-list-removal="destroyOnListRemoval" :compact-layout="compactLayout"
+      :subscription-calendar-id="subscriptionCalendarId" @addToList="addToListEventHandler"
+      @progressReset="resetProgressEventHandler" />
 
-    <div
-      v-if="paginate && total_pages > 1 && !infiniteScroll"
-      class="flex flex-row pagination-row align-h-right"
-    >
-      <pagination
-        :current-page="Number(page)"
-        :total-pages="total_pages"
-        @pageChange="handlePageChange"
-      />
+    <div v-if="paginate && total_pages > 1 && !infiniteScroll" class="flex flex-row pagination-row align-h-right">
+      <pagination :current-page="Number(page)" :total-pages="total_pages" @pageChange="handlePageChange" />
     </div>
 
     <transition name="show-from-bottom">
-      <div
-        v-show="loading && showLoadingAnimation"
-        id="loadingDialog"
-        class="flex flex-row align-center"
-      >
-        <div
-          class="loading-spinner corners-10 shadow pa flex-center"
-          :class="themeBgClass"
-        >
+      <div v-show="loading && showLoadingAnimation" id="loadingDialog" class="flex flex-row align-center">
+        <div class="loading-spinner corners-10 shadow pa flex-center" :class="themeBgClass">
           <i class="fas fa-spinner fa-spin text-white"></i>
           <p class="tw-text-xs text-white">Loading Please Wait...</p>
         </div>
@@ -287,7 +146,7 @@ export default {
       type: Boolean,
       default: () => true,
     },
-      searchBarTitle: {
+    searchBarTitle: {
       type: String,
       default: '',
     },
@@ -472,8 +331,8 @@ export default {
       default: () => [],
     },
     showMyListAction: {
-        type: Boolean,
-        default: () => true,
+      type: Boolean,
+      default: () => true,
     },
     //Branch Paths
     branchPathIndex: {
@@ -485,8 +344,8 @@ export default {
       default: () => ({}),
     },
     searchTerm: {
-        type: String,
-        default: () => undefined,
+      type: String,
+      default: () => undefined,
     },
     includeFutureScheduledContentOnly: {
       type: Boolean,
@@ -497,7 +356,7 @@ export default {
     return {
       page: this.initialPage || 1,
       content: this.preLoadedContent ? this.preLoadedContent.data : [],
-      filters: this.preLoadedContent ? ContentHelpers.flattenFilters( this.preLoadedContent?.meta?.filterOptions || [] ): {},
+      filters: this.preLoadedContent ? ContentHelpers.flattenFilters(this.preLoadedContent?.meta?.filterOptions || []) : {},
       total_results: this.totalResults ? this.totalResults : (this.preLoadedContent?.data ? this.preLoadedContent.data.length : (this.totalResults || 0)),
       total_pages: this.preLoadedContent
         ? Math.ceil(this.preLoadedContent.meta.totalResults / this.limit)
@@ -520,14 +379,14 @@ export default {
       included_fields: this.includedFields || [],
       sort: null,
       sortOptions: [
-          {
-              label: 'Alphabetical',
-              value: 'slug'
-          },
-          {
-              label: 'Most recent',
-              value: '-published_on'
-          }
+        {
+          label: 'Alphabetical',
+          value: 'slug'
+        },
+        {
+          label: 'Most recent',
+          value: '-published_on'
+        }
       ],
       selectedTab: 'subscribedCoaches',
       filterMultiSelectColumns: [],
@@ -537,20 +396,20 @@ export default {
   computed: {
     sortInterface: {
       get() {
-          return this.sortOptions.filter(option => option.value === this.currentSort)[0].value;
+        return this.sortOptions.filter(option => option.value === this.currentSort)[0].value;
       },
       set(value) {
-          this.currentSort = value;
-          this.handleSortChange(value);
+        this.currentSort = value;
+        this.handleSortChange(value);
       },
     },
     currentSort: {
       get() {
-          const urlParams = QueryString.parse(location.search);
-          if (urlParams['sort'] != null) {
-              return urlParams['sort'];
-          }
-          return 'slug';
+        const urlParams = QueryString.parse(location.search);
+        if (urlParams['sort'] != null) {
+          return urlParams['sort'];
+        }
+        return 'slug';
       },
       set(val) {
         return val;
@@ -572,10 +431,10 @@ export default {
       },
     },
     coachIndexUrl() {
-        return 'coaches';
+      return 'coaches';
     },
     isOnlySubscribed() {
-       return String(location.search).includes('only_subscribed=true');
+      return String(location.search).includes('only_subscribed=true');
     },
     isCoachesGrid() {
       return this.catalogueType === 'coaches-grid';
@@ -624,9 +483,8 @@ export default {
 
     noResultsMessageWithProgress() {
       if (this.required_user_states.length) {
-        return `You do not have any ${this.required_user_states[0] || ""} ${
-          this.catalogueName || "lessons"
-        } that match those filters. Please remove some filters.`;
+        return `You do not have any ${this.required_user_states[0] || ""} ${this.catalogueName || "lessons"
+          } that match those filters. Please remove some filters.`;
       }
 
       return this.noResultsMessage;
@@ -651,14 +509,14 @@ export default {
       });
     }
 
-    if(this.isCoachesGrid){
-        this.getContent(true, true).then(()=>{
-            this.selectedTab = 'allCoaches';
-            this.coachData['subscribedCoaches'] = [...this.content];
-            this.getContent(true, true);
-        });
+    if (this.isCoachesGrid) {
+      this.getContent(true, true).then(() => {
+        this.selectedTab = 'allCoaches';
+        this.coachData['subscribedCoaches'] = [...this.content];
+        this.getContent(true, true);
+      });
 
-        this.getFilterColumns();
+      this.getFilterColumns();
     }
 
   },
@@ -686,13 +544,13 @@ export default {
     },
 
     handleSortChange(value) {
-        if (value != 0) {
-            window.location.href = `${location.protocol}//${location.host
-            }${location.pathname}?sort=${value}`;
-        } else {
-            window.location.href = `${location.protocol}//${location.host
-            }${location.pathname}`;
-        }
+      if (value != 0) {
+        window.location.href = `${location.protocol}//${location.host
+          }${location.pathname}?sort=${value}`;
+      } else {
+        window.location.href = `${location.protocol}//${location.host
+          }${location.pathname}`;
+      }
     },
 
     getUrlParams() {
@@ -783,16 +641,15 @@ export default {
 
       const string = QueryString.stringify(params, { arrayFormat: "bracket" });
 
-      const new_url = `${
-        window.location.origin + window.location.pathname
-      }?${string}`;
+      const new_url = `${window.location.origin + window.location.pathname
+        }?${string}`;
 
       window.history.replaceState(history.state, null, new_url);
     },
 
     fetchContent() {
       return axios
-        .get( this.isCoachesGrid ? this.coachEndpoint() : this.$_contentEndpoint, {
+        .get(this.isCoachesGrid ? this.coachEndpoint() : this.$_contentEndpoint, {
           params: {
             brand: this.brand,
             limit: this.limit,
@@ -903,6 +760,15 @@ export default {
         }
 
         this.getContent();
+
+
+        const catalogueContainer = document.getElementById('content-catalogue');
+
+        catalogueContainer.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest'
+        });
       } else {
         const params = window.location.search;
         const query_object = QueryString.parse(params, {
@@ -911,9 +777,8 @@ export default {
 
         query_object.page = payload.page;
 
-        window.location.href = `${location.protocol}//${location.host}${
-          location.pathname
-        }?${QueryString.stringify(query_object)}`;
+        window.location.href = `${location.protocol}//${location.host}${location.pathname
+          }?${QueryString.stringify(query_object)}#content-catalogue`;
       }
     },
 
@@ -961,47 +826,47 @@ export default {
       this.getContent();
     },
 
-    coachEndpoint(){
-        return this.isOnlySubscribed  ? '/railcontent/content?only_subscribed=true' : '/railcontent/content?only_subscribed=';
+    coachEndpoint() {
+      return this.isOnlySubscribed ? '/railcontent/content?only_subscribed=true' : '/railcontent/content?only_subscribed=';
     },
 
-    handleFilterTabClick(value){
-        this.coachData[this.selectedTab] = [...this.content];
-        this.selectedTab = value;
-        this.content = [...this.coachData[this.selectedTab]];
+    handleFilterTabClick(value) {
+      this.coachData[this.selectedTab] = [...this.content];
+      this.selectedTab = value;
+      this.content = [...this.coachData[this.selectedTab]];
     },
 
-    getFilterColumns(){
+    getFilterColumns() {
       let filters = [];
-      for (const value of this.filterableValues){
-          filters.push({
-              category: value,
-              items: this.filters[value]
-          });
+      for (const value of this.filterableValues) {
+        filters.push({
+          category: value,
+          items: this.filters[value]
+        });
       }
       this.filterMultiSelectColumns = filters;
     },
 
-    applyFilters(category, item){
-        if (this.filter_params[category]){
-            const isChecked = this.filter_params[category].find((f)=> f.value === item.value);
+    applyFilters(category, item) {
+      if (this.filter_params[category]) {
+        const isChecked = this.filter_params[category].find((f) => f.value === item.value);
 
-            if (isChecked) {
-                this.filter_params[category] = this.filter_params[category].filter((f) => f.value !== item.value);
+        if (isChecked) {
+          this.filter_params[category] = this.filter_params[category].filter((f) => f.value !== item.value);
 
-                if(this.filter_params[category].length === 0) {
-                    delete this.filter_params[category];
-                }
-            }
-
-            else {
-                this.filter_params[category].push(item);
-            }
+          if (this.filter_params[category].length === 0) {
+            delete this.filter_params[category];
+          }
         }
 
         else {
-            this.filter_params[category] = [item];
+          this.filter_params[category].push(item);
         }
+      }
+
+      else {
+        this.filter_params[category] = [item];
+      }
     },
   },
 };
