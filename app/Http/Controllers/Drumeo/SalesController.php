@@ -114,7 +114,7 @@ class SalesController extends BaseController
     }
     public function promo()
     {
-        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true']);
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'promoPage' => 'true']);
     }
     public function promoEG()
     {
