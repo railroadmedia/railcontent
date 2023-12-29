@@ -654,6 +654,14 @@ export default {
                 }
 
                 this.getContent();
+
+                const catalogueContainer = document.getElementById('content-catalogue');
+                
+                catalogueContainer.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest'
+                });
             } else {
                 const params = window.location.search;
                 const query_object = QueryString.parse(params, {
@@ -664,7 +672,7 @@ export default {
 
                 window.location.href = `${location.protocol}//${location.host}${
                     location.pathname
-                }?${QueryString.stringify(query_object)}`;
+                }?${QueryString.stringify(query_object)}#content-catalogue`;
             }
         },
 
