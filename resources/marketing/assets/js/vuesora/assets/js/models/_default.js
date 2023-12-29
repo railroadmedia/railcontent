@@ -112,7 +112,7 @@ export default class ContentModel {
     }
 
     get postType() {
-        return this.post.type.replace('bundle-', '').replace(/-/g, ' ');
+        if(this.post.type) return this.post.type.replace('bundle-', '').replace(/-/g, ' ');
     }
 
     getTypeWithIcon() {

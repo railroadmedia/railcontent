@@ -54,6 +54,26 @@
             ]
         ]
     ])
+@elseif($parentContent->fetch('type') === 'challenge')
+    @include('partials.bladesora.members.navigation.breadcrumbs', [
+        "pages" => [
+            [
+                "title" => 'Home',
+                "url" => url()->route('platform.home'),
+            ],
+            [
+                "title" => 'Workouts',
+                "url" => url()->route('platform.workouts'),
+            ],
+            [
+                "title" => 'Challenges',
+                "url" => url()->route('platform.workouts.challenges'),
+            ],
+            [
+                 "title" => $parentContent->fetch('fields.title'),
+            ]
+        ]
+    ])
 @elseif($parentContent->fetch('type') === 'pack-bundle')
     @if($pack->fetch('bundle_count') > 1)
         @include('partials.bladesora.members.navigation.breadcrumbs', [

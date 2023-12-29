@@ -41,7 +41,7 @@ class CmsLessonSeeder extends Seeder
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -90,7 +90,7 @@ class CmsLessonSeeder extends Seeder
                         "desc" => "	6 months of full access"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -127,7 +127,7 @@ class CmsLessonSeeder extends Seeder
                 ],
                 "specs" => [
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -161,7 +161,7 @@ class CmsLessonSeeder extends Seeder
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -198,7 +198,7 @@ class CmsLessonSeeder extends Seeder
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -236,7 +236,7 @@ class CmsLessonSeeder extends Seeder
                 "specs" => [
 
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -274,7 +274,7 @@ class CmsLessonSeeder extends Seeder
                 "specs" => [
 
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -312,7 +312,7 @@ class CmsLessonSeeder extends Seeder
                 "specs" => [
 
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -350,7 +350,7 @@ class CmsLessonSeeder extends Seeder
                 "specs" => [
 
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -387,7 +387,7 @@ class CmsLessonSeeder extends Seeder
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -423,7 +423,7 @@ class CmsLessonSeeder extends Seeder
                 "specs" => [
 
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -460,7 +460,7 @@ class CmsLessonSeeder extends Seeder
                 "specs" => [
 
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -497,7 +497,7 @@ class CmsLessonSeeder extends Seeder
                 "specs" => [
 
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -556,7 +556,7 @@ class CmsLessonSeeder extends Seeder
                         "desc" => "All Levels"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -634,7 +634,7 @@ You’ll also get online access to Drumeo features like progress tracking, video
                         "desc" => "Intermediate"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -712,7 +712,7 @@ You’ll also get online access to Drumeo features like progress tracking, video
                         "desc" => "All Levels"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -794,7 +794,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                         "desc" => "All Levels"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -878,7 +878,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                         "desc" => "Intermediate"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -958,7 +958,7 @@ You’ll also get online access to Drumeo features like progress tracking, video
                         "desc" => "Intermediate"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1037,7 +1037,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                         "desc" => "Intermediate & Advanced"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1109,7 +1109,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                         "desc" => "Intermediate & Advanced"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1189,7 +1189,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                         "desc" => "All Levels"
                     ],
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1240,7 +1240,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1275,7 +1275,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1310,7 +1310,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1344,7 +1344,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1379,7 +1379,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1414,7 +1414,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1449,7 +1449,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1484,7 +1484,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1519,7 +1519,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1554,7 +1554,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1589,7 +1589,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => true,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1625,7 +1625,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1660,7 +1660,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1697,7 +1697,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1733,7 +1733,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1769,7 +1769,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1806,7 +1806,7 @@ Follow famous YouTuber and musician Rob Scallon as he takes you on a 9 mission j
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1842,7 +1842,7 @@ Follow famous YouTuber and musician Rob Scallon as he takes you on a 9 mission j
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "shop_card_visible" => true,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1898,7 +1898,7 @@ Follow famous YouTuber and musician Rob Scallon as he takes you on a 9 mission j
                         "desc" => "From beginner to advanced"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => true,
                 "freeBonus" => false,
                 "guaranteed" => false,
@@ -2027,7 +2027,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                         "desc" => "From beginner to advanced"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => true,
                 "freeBonus" => false,
                 "guaranteed" => false,
@@ -2144,7 +2144,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                         "desc" => "From beginner to advanced"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => true,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -2243,7 +2243,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                         "desc" => "From beginner to advanced"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => true,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -2330,7 +2330,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                         "desc" => "From beginner to advanced"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => true,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -2426,7 +2426,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                         "desc" => "From beginner to advanced"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => true,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -2526,7 +2526,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                         "desc" => "From beginner to advanced"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => true,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -2622,7 +2622,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                         "desc" => "From beginner to advanced"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => true,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -2718,7 +2718,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                         "desc" => "From beginner to advanced"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => true,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -2825,7 +2825,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                         "desc" => "From beginner to advanced"
                     ],
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => true,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -2921,7 +2921,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                 ],
                 "specs" => [
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -2955,7 +2955,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                 ],
                 "specs" => [
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -2990,7 +2990,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                 ],
                 "specs" => [
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -3024,7 +3024,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                 ],
                 "specs" => [
                 ],
-                "visible" => false,
+                "shop_card_visible" => false,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -3058,7 +3058,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
 //                ],
 //                "specs" => [
 //                ],
-//                "visible" => false,
+//                "shop_card_visible" => false,
 //                "sold_out" => false,
 //                "guaranteed" => true,
 //                "lifetime_access" => true,
@@ -3097,7 +3097,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
 //                ],
 //                "specs" => [
 //                ],
-//                "visible" => false,
+//                "shop_card_visible" => false,
 //                "sold_out" => false,
 //                "guaranteed" => true,
 //                "lifetime_access" => true,
@@ -3177,8 +3177,8 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                             'free_shipping' => $product['free_shipping'],
                             'included_edge' => empty($product['included_edge']) ? false : $product['included_edge'],
                             'guaranteed' => $product['guaranteed'],
-                            'visible' => $product['visible'],
-                            'display_order' => $product['visible'] ? $orderNum : 0,
+                            'shop_card_visible' => $product['shop_card_visible'],
+                            'display_order' => $product['shop_card_visible'] ? $orderNum : 0,
                             'bundle_img' => empty($product['bundle_img']) ? null : $product['bundle_img'],
                             'bundle_desc' => empty($product['bundle_desc']) ? null : $product['bundle_desc'],
                             'created_at' => now(),

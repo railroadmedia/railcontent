@@ -37,7 +37,7 @@
             </p>
             <div class="tw-text-left">
                 <div class="tw-flex tw-flex-col tw-max-w-3xl tw-mx-auto tw-px-4">
-                    <section class="tw-flex tw-flex-row tw-flex-wrap mv-3 tw-w-full">
+                    <section class="tw-flex tw-flex-row tw-flex-wrap tw-my-[30px] tw-w-full">
                         <div class="tw-flex tw-flex-col tw-w-full">
                             <ContactMemberEmailForm
                                 :brand="brand"

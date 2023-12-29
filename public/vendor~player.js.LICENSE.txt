@@ -1,0 +1,37 @@
+/*
+ @license
+ Copyright 2006 The Closure Library Authors
+ SPDX-License-Identifier: Apache-2.0
+*/
+
+/*
+ @license
+ Copyright 2008 The Closure Library Authors
+ SPDX-License-Identifier: Apache-2.0
+*/
+
+/*
+ @license
+ EME Encryption Scheme Polyfill
+ Copyright 2019 Google LLC
+ SPDX-License-Identifier: Apache-2.0
+*/
+
+/*
+ @license
+ Shaka Player
+ Copyright 2016 Google LLC
+ SPDX-License-Identifier: Apache-2.0
+*/
+
+/*!
+ * MediaElement.js
+ * http://www.mediaelementjs.com/
+ *
+ * Wrapper that mimics native HTML5 MediaElement (audio and video)
+ * using a variety of technologies (pure JavaScript, Flash, iframe)
+ *
+ * Copyright 2010-2017, John Dyer (http://j.hn/)
+ * License: MIT
+ *
+ */

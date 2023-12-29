@@ -95,8 +95,9 @@ class MusoraApiProductProvider implements ProductProviderInterface
     /**
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function carousel()
+    public function carousel($isWorkoutPage = false)
     {
+        CarouselService::$workoutsPage = $isWorkoutPage;
         $slides =  $this->carouselService->getCarouselSlides();
 
         foreach ($slides as $slide){

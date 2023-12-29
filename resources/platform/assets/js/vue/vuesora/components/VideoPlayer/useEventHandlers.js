@@ -120,7 +120,7 @@ export default function ({
         },
 
         timeupdate: (event) => {
-            console.log('timeupdate')
+            //console.log('timeupdate')
             totalDuration.value = mediaElement.value.duration;
             currentTime.value = mediaElement.value.currentTime;
             emit('timeupdate', event);
