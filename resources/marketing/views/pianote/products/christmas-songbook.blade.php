@@ -71,14 +71,16 @@
         "cartVersion" => true
     ])
     @php
-        if(!empty($membersVersion)) {
-             $discountedPrice = number_format(24.50, 2);
-             $orderUrl = '/ecommerce/add-to-cart?products[christmas-songbook]=1&products[christmas-song-book-digital]=1&promo-code=members-discount';
-        }
-        else {
-           $discountedPrice = floatval($productPrices['christmas-songbook']->discounted_price);
-         $orderUrl = '/ecommerce/add-to-cart?products[christmas-songbook]=1';
-        }
+        $discountedPrice = floatval($productPrices['christmas-songbook']->discounted_price);
+          $orderUrl = '/ecommerce/add-to-cart?products[christmas-songbook]=1';
+//     if(!empty($membersVersion)) {
+//          $discountedPrice = number_format(24.50, 2);
+//          $orderUrl = '/ecommerce/add-to-cart?products[christmas-songbook]=1&products[christmas-song-book-digital]=1&promo-code=members-discount';
+//     }
+//     else {
+//        $discountedPrice = floatval($productPrices['christmas-songbook']->discounted_price);
+//      $orderUrl = '/ecommerce/add-to-cart?products[christmas-songbook]=1';
+//     }
     @endphp
 
     @include('_partials.components.shop.promo-banner', [
@@ -105,9 +107,9 @@
                         @else
                             <strong>ONLY ${{ $discountedPrice }}</strong>
                         @endif
-                        @if(!empty($membersVersion))
-                            <br>+ a FREE digital songbook
-                        @endif
+{{--                        @if(!empty($membersVersion))--}}
+{{--                            <br>+ a FREE digital songbook--}}
+{{--                        @endif--}}
                     </h4>
                     <a href="{{ $orderUrl }}" class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
@@ -267,9 +269,9 @@
                         @else
                             <strong>ONLY ${{ $discountedPrice }}</strong>
                         @endif
-                        @if(!empty($membersVersion))
-                            <br>+ a FREE digital songbook
-                        @endif
+{{--                        @if(!empty($membersVersion))--}}
+{{--                            <br>+ a FREE digital songbook--}}
+{{--                        @endif--}}
                     </h4>
                     <a href="{{ $orderUrl }}" class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
