@@ -366,7 +366,7 @@
                 "name" => "Darli Brazil",
                 "location" => "California, USA",
                 "video" => "878027528",
-                "title" => "The lessons are broken down into sections that are manageable.  <strong>I am really enjoying this program.</strong> Everything about it is a positive experience. ",
+                "title" => "The amount of songs you can learn is amazing. <strong>I am really enjoying this program.</strong> Everything about it is a positive experience.",
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Ian-Kershaw-thumb-m.jpg",
