@@ -11,7 +11,7 @@ class Prices
     public static $reviews = 6783;
     public static $drumeoLessons = 2500;
     public static $drumeoPlayAlongs = 300;
-    public static $drumeoSongs = 5000;
+    public static $drumeoSongs = 6000;
     public static $drumeoCourses = 260;
     public static $singeoSongs = 130;
 

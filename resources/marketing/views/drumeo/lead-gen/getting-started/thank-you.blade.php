@@ -93,7 +93,7 @@
                         'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/5000-songs-icon.svg',
                         'fa-icon' => 'fa-music',
                         'title' => 'Play your favorite songs.',
-                        'desc' => 'Get 5000+ note-for-note song breakdowns for every style, era, and skill level.',
+                        'desc' => 'Get 6000+ note-for-note song breakdowns for every style, era, and skill level.',
                     ],
                     [
                         'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/tempo-icon.svg',
@@ -219,7 +219,7 @@
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
         "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
-        "songs" => "5000+ popular songs.",
+        "songs" => "6000+ popular songs.",
         "firstPoint" => "The world’s best drum lessons.",
         "thirdPoint" => "Unlimited personal support.",
         "fifthPoint" => "Lesson access for piano, guitar, and singing.",

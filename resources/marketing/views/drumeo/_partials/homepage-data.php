@@ -308,7 +308,7 @@
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/5000-songs-icon.svg",
                 "mediaVid" => true,
                 "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs.mp4",
-                "title" => "5000+ popular songs.",
+                "title" => "6000+ popular songs.",
                 "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
             ],
             [

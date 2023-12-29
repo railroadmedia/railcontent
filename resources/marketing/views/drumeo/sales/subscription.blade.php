@@ -185,7 +185,7 @@
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
-            'pointFour' => '5000+ SONGS',
+            'pointFour' => '6000+ SONGS',
         ])
     @elseif(empty($trialVersion))
         @include('musora.sales.components.header-section', [
@@ -201,7 +201,7 @@
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
-            'pointFour' => '5000+ SONGS',
+            'pointFour' => '6000+ SONGS',
         ])
     @else
         @include('musora.sales.components.header-section', [
@@ -215,7 +215,7 @@
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
-            'pointFour' => '5000+ SONGS',
+            'pointFour' => '6000+ SONGS',
         ])
     @endif
 
@@ -225,7 +225,7 @@
     <img class="w-full inline md:hidden"
         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/promo-collage.png"
         alt="drum kit image" fetchpriority="high">
-    
+
     <div class="text-center px-5 sm:px-6 py-4 sm:py-8 lg:py-14 text-white relative">
         <div class="container max-w-5xl lg:flex items-baseline">
             <div class="text-left flex flex-wrap sm:flex-nowrap md:justify-center items-start mb-5">
@@ -361,7 +361,7 @@
             "noSelector" => true,
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drumeoplus_logo.svg",
             "logo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-white.png",
-            "songs" => "5000+ popular songs.",
+            "songs" => "6000+ popular songs.",
             "firstPoint" => "The world’s best drum lessons.",
             "thirdPoint" => "Unlimited personal support.",
             "fifthPoint" => "Lesson access for piano, guitar, and singing.",
@@ -383,7 +383,7 @@
 
         @include('musora.sales.components.order-promo-cards-section', [
         // general
-        "songs" => "5000+ popular songs.",
+        "songs" => "6000+ popular songs.",
         'buttonText' => "ORDER NOW",
         'header' => '<span class="text-drumeo">EVERYTHING</span> YOU NEED<br> TO LEARN THE DRUMS.',
         'underline' => true,
@@ -391,11 +391,11 @@
         'pointOne' => 'GREAT TEACHERS',
         'pointTwo' => 'VIDEO LESSONS',
         'pointThree' => 'FUN PRACTICE',
-        'pointFour' => '5000+ SONGS',
+        'pointFour' => '6000+ SONGS',
         'topBadge' => 'ONLY 5000 LEFT',
         'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/drumeo-free-shipping.svg',
 
-        // first deal 
+        // first deal
         'firstDeal'=> "Practice Anywhere",
         'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/practice-anywhere-bundle.png',
         'firstImageHeight' => 'h-44',
@@ -404,15 +404,15 @@
         'firstDealSub' => "Save" . round($discountPercentage) . "% on your first year.",
         "firstDealLink" => "/ecommerce/add-to-cart?products[practice-anywhere]=1",
         'firstExtraBonuses' => [
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Annual Drumeo Membership </strong><span class="italic">($240 Value)', 
+            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Annual Drumeo Membership </strong><span class="italic">($240 Value)',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> P4 Practice Pad <span class="italic">($79 Value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Drumeo PadStand <span class="italic">($79 Value)</span>', 
+            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Drumeo PadStand <span class="italic">($79 Value)</span>',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 1 Pair of Drumeo Drumsticks <span class="italic">($$12.95 Value)</span>',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Drummer<span class="italic">($97 Value)</span>',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Chops <span class="italic">($97 Value)</span>',
-    ], 
+    ],
 
-        // second deal 
+        // second deal
         'secondDeal' => "E-Kit + Lessons",
         'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/marketing/drumeo/membership/homepage/2024/ekit-bundle.png',
         'secondImageHeight' => 'h-48',
@@ -426,13 +426,13 @@
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 2 Pairs of Drumeo Drumsticks <span class="italic">($97 Value)</span>',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Drummer <span class="italic">($97 Value)</span>',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Chops <span class="italic">($97 Value)</span>',
-    ], 
+    ],
 ])
-        
+
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-blue.png',
-        'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 5000+ popular songs.',
+        'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 6000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>

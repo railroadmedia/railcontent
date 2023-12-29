@@ -124,7 +124,7 @@
                         <br><br>
                         It's made for playing, creating, and connecting with music on another level. That's why, along with grabbing a free drum set, you'll also score a WHOLE YEAR of drumming lessons from Drumeo.
                         <br><br>
-                        You’ll have step-by-step lessons to help you go from a beginner to playing anything you want. Plus, you’ll have a library of 5000+ popular songs to play along with and personalized support every step of the way.
+                        You’ll have step-by-step lessons to help you go from a beginner to playing anything you want. Plus, you’ll have a library of {{ Prices::$drumeoSongs }}+ popular songs to play along with and personalized support every step of the way.
                         <br><br>
                         And even if you don’t land the big prize (but you probably will, right?), you still have a chance to win unlimited drum lessons for a year.
                         <br><br>
