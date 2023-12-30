@@ -361,7 +361,6 @@
         'pointTwo' => 'VIDEO LESSONS',
         'pointThree' => 'FUN PRACTICE',
         'pointFour' => '6000+ SONGS',
-        'topBadge' => 'ONLY ' . $stock . ' LEFT',
         'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/drumeo-free-shipping.svg',
 
         // first deal

@@ -27,7 +27,8 @@
             x-bind:class="{ 'hidden': !plusMembershipSelected }"
         >
             <div class="w-full sm:w-1/2 px-1 lg:px-3 relative">
-                <a href="{{$firstDealLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif" style="margin-top: 30px">
+                <a href="{{$firstDealLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif"
+                    @if(!empty($topBadge)) style="margin-top: 30px" @endif>
                     <div class="bg-white px-3 py-6 md:py-7" style="border-bottom: 1px solid white">
                         <h3 class="mb-1 sm:mb-2"><strong>{{$firstDeal}}</strong></h3>
                         <img
@@ -57,7 +58,9 @@
             </div>
 
             <div class="w-full sm:w-1/2 px-1 lg:px-3 relative">
+                @if(!empty($topBadge))
                 <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-{{ $theme }} @if($theme == 'musora') text-black @endif" >{{$topBadge}}</p>
+                @endif
                 <a href="{{$secondDealLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-{{ $theme }}">
                     <div class="bg-white px-3 py-6 md:py-7">
                         <img
