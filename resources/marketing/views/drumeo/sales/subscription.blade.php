@@ -168,14 +168,7 @@
        $slides = $drumeo['slides'];
     @endphp
 
-    @if(!empty($bfVersion))
-        @include('_partials.layout.holiday.homepage-top-banner',[
-            'text' => 'Get 10 free bonuses worth $1272.94',
-            'text2' => 'Get 10 free bonuses worth $1272.94.',
-            'vimeo' => '885338592',
-            'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',
-        ])
-    @elseif(!empty($beginnerVersion))
+    @if(!empty($beginnerVersion))
         @include('musora.sales.components.header-section', [
             'header' => 'Learn beginner beats, fills<br> and songs on the drums.',
             'desc' => 'Try Drumeo’s award-winning online drum lessons for 7 days FREE:',
@@ -187,26 +180,11 @@
             'pointThree' => 'FUN PRACTICE',
             'pointFour' => '6000+ SONGS',
         ])
-    @elseif(!empty($promoPage))
+    @else
         @include('musora.sales.components.header-section', [
             'noExcuse' => true,
             'promoHeader' => true,
-            'header' => 'EVERYTHING YOU NEED<br> TO LEARN THE DRUMS.',
-            'underline' => true,
-            'fillColor' => "#0b76db",
-            'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> thousands of songs and unlimited personal support.',
-            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/jan-thumb-no-badge.jpg',
-            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/header-thumb-promo2.png',
-            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/header-thumb-promo-m2.jpg',
-            'pointOne' => 'GREAT TEACHERS',
-            'pointTwo' => 'VIDEO LESSONS',
-            'pointThree' => 'FUN PRACTICE',
-            'pointFour' => '6000+ SONGS',
-        ])
-    @else
-        @include('musora.sales.components.header-section', [
-            'header' => 'Online drum lessons<br> for all skill levels.',
-            'underline' => true,
+            'header' => 'EVERYTHING YOU NEED<br class="hidden sm:inline"> TO <u style="text-decoration-color: #0b76db;">LEARN THE DRUMS</u>.',
             'fillColor' => "#0b76db",
             'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> thousands of songs and unlimited personal support.',
             'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/jan-thumb-no-badge.jpg',
@@ -321,7 +299,7 @@
     ])
 
     @include('musora.sales.components.workouts-section', [
-        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314560/rendition/540p/file.mp4?loc=external&signature=1549cce1dacabad80dd416b5a439f6639d3b7b30c7e4d70d46245bf70c6d5102',
+        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/898668674/rendition/540p/file.mp4?loc=external&signature=d5f33375d3a16dc91641be1539d7d621d07ad049b030baa8a7f32c23e63e3ab4',
         'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/workouts-card2.jpg',
     ])
 

@@ -36,6 +36,15 @@
             background:linear-gradient(to bottom, #e2c584, #ad7c12);
         }
     </style>
+
+    @php
+     if(!empty($membersVersion)) {
+          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&locked=true';
+     }
+     else {
+          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&products[DLM-1-year]=1&promo-code=free-with-ekit&locked=true';
+     }
+    @endphp
 @stop
 
 @section('body-data')
@@ -55,7 +64,7 @@
     ])
 
 <!-- hero section-->
-<header class="text-white relative overflow-hidden z-20 md:pt-16"
+<header class="text-white relative overflow-hidden z-20"
     style="height:700px;background:linear-gradient(to bottom, rgb(26, 26, 26), #1e1e1e);">
     <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
         <div class="container mx-auto max-w-5xl">
@@ -67,10 +76,12 @@
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/kit/drumeo-alesis-logo.png">
             </picture>
-            <h1 class="leading-tight my-5 uppercase font-lexend"><strong>Everything you need to<br class="hidden sm:inline"> start
+            <h1 class="leading-none my-5 uppercase font-lexend"><strong>Everything you need to<br class="hidden sm:inline"> start
                     playing the drums.</strong></h1>
-            <h5 class="leading-tight text-musora">Get the highest-rated beginner e-kit <strong>PLUS</strong> an annual membership to Drumeo.</h5>
-            <h4 class="leading-tight text-drumeo my-4 sm:my-5 uppercase"> Only
+            @if(empty($membersVersion))
+                <h5 class="leading-tight text-musora mb-4 sm:mb-5">Get the highest-rated beginner e-kit <strong>PLUS</strong> an annual membership to Drumeo.</h5>
+            @endif
+            <h4 class="leading-tight mb-4 sm:mb-5 uppercase"> Only
                 @if (floatval($productPrices['alesis-ekit']->price) > floatval($productPrices['alesis-ekit']->discounted_price))
                     <s class="opacity-50">${{ floatval($productPrices['alesis-ekit']->price) }}</s>
                     <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
@@ -81,7 +92,7 @@
             </h4>
             <div class="w-full max-w-xs mx-auto">
                 @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
-                    <a class="w-full join smaller blue" href="/ecommerce/add-to-cart?products[alesis-ekit]=1">Buy Now</a>
+                    <a class="w-full join smaller blue" href="{{ $orderUrl }}">Buy Now</a>
                 @else
                     <a class="w-full join smaller sold-out">SOLD OUT</a>
                 @endif
@@ -92,13 +103,9 @@
             {{--                <h6 class="text-sm leading-tight"><em>or get it free with an Annual Drumeo Membership.</em></h6> --}}
         </div>
     </div>
-    <div class="top-0 left-0 absolute w-full h-full z-10 bg-cover bg-center"
-        style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/kit/header-image.jpg');">
-    </div>
-   <div class="top-0 left-0 absolute w-full h-full z-10"
-       style="background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.4));"></div>
+    <div class="h-full w-full absolute top-0 left-0 right-0 bottom-0 z-10 bg-black opacity-80"></div>
    <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline
-       muted src="https://player.vimeo.com/progressive_redirect/playback/897277793/rendition/2160p/file.mp4?loc=external&signature=5c965f98ffb7630446b2c0e429a893463d37587d37e600ac60093af60da9570b"></video>
+       muted src="https://player.vimeo.com/progressive_redirect/playback/897277793/rendition/1080p/file.mp4?loc=external&signature=54243ca347163456312ff377c17948ff48334aa49e5375628363ab40a7049cde"></video>
 </header>
 
 
@@ -131,7 +138,7 @@
 
 <!-- next section-->
 <div class="px-4 sm:px-6 py-16 text-white" style="background: #01050D">
-    <div class="container max-w-4xl mx-auto relative z-50">
+    <div class="container max-w-5xl mx-auto relative z-50">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 w-full mx-2">
             <div class="px-1">
                 <h5 class="leading-normal text-left"><strong>Neighbor-friendly Drums</strong></h5>
@@ -144,6 +151,18 @@
             <div class="px-1">
                 <h5 class="leading-normal text-left"><strong>Fits In Any Room</strong></h5>
                 <h5 class="leading-normal text-left pt-4">Space is a luxury for drummers. Your Nitro Max fits in any room and folds up for easy storage between jam sessions.</h5>
+            </div>
+            <div class="px-1">
+                <h5 class="leading-normal text-left"><strong>Improve Your Timing & Feel</strong></h5>
+                <h5 class="pt-4 leading-normal text-left">Develop your internal clock with a built-in metronome that tells you if you’re ahead or behind the beat. </h5>
+            </div>
+            <div class="px-1">
+                <h5 class="leading-normal text-left"><strong>Choose Your Favorite Sounds</strong></h5>
+                <h5 class="pt-4 leading-normal text-left">You’ll have 32 kit sounds from some of the most sampled drum sounds in history. You can find the perfect kit to play your favorite songs. </h5>
+            </div>
+            <div class="px-1">
+                <h5 class="leading-normal text-left"><strong>Big Fat Snare Drum</strong></h5>
+                <h5 class="leading-normal text-left pt-4">A 10” snare drum helps you play with better technique AND gives you two strike zones. (Most entry-level kits have a tiny 8” snare!).</h5>
             </div>
         </div>
     </div>
@@ -245,7 +264,7 @@
 
 
 
-
+    @if(empty($membersVersion))
 <section class="text-center px-4 sm:px-6 py-8 sm:py-12 lg:py-14 relative bg-drumeo text-white">
     <img class="w-8 md:w-16 -mt-5 absolute top-0 left-1/2 translate -translate-x-1/2" src="https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/products/kit/union-icon.svg">
 
@@ -266,7 +285,7 @@
         'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline">curriculum featuring many of the world’s best teachers. ',
         'shortVersion' => true,
     ])
-
+@endif
 
 <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative bg-drumeo text-white">
     <div class="container mx-auto z-10 relative max-w-4xl">
@@ -285,8 +304,11 @@
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5">
                     <h2 class="pb-6 sm:pb-4"><strong>Everything you need<br> to start playing<br> the drums.</strong></h2>
                     <h6 class="leading-tight">
-                        Alesis Nitro Max E-Kit (Black/Blue) <br>
-                        Drumeo Lessons (Annual Membership)</h6>
+                        Alesis Nitro Max E-Kit (Black/Blue)
+                        @if(empty($membersVersion))
+                            <br>Drumeo Lessons (Annual Membership)
+                        @endif
+                    </h6>
 
                     <h4 class="my-4 text-drumeo"> ONLY
                         @if(floatval($productPrices['alesis-ekit']->price) > floatval($productPrices['alesis-ekit']->discounted_price))
@@ -297,7 +319,7 @@
                             <strong>Only ${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
                         @endif
                     </h4>
-                    <a href="/ecommerce/add-to-cart?products[alesis-ekit]=1" class="join blue smaller w-full max-w-xs">BUY NOW</a>
+                    <a href="{{ $orderUrl }}" class="join blue smaller w-full max-w-xs">BUY NOW</a>
                 </div>
                 <div
                     class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0 hidden sm:block">
@@ -335,21 +357,34 @@
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/gallery-01.png" alt="Drum kit" class="w-full h-auto py-6">
             </div>
 
-            <div class="w-full md:w-1/3 lg:w-1/4 flex items-center justify-center">
+            <div class="w-full @if(empty($membersVersion)) md:w-1/3 lg:w-1/4 @endif flex items-center justify-center">
                 <table class="w-full h-full bg-white rounded-xl">
                     <tbody>
             @php
-            $items = [
-                ["Drumeo Membership", "1"],
-                ["Alesis Nitro Max E-Kit", "1"],
-                ["10” Snare Pad", "1"],
-                ["8” Tom Pads", "3"],
-                ["3 10” Cymbal Pads", "3"],
-                ["Drum Module", "1"],
-                ["Kick Tower", "1"],
-                ["Kick Pedal", "1"],
-                ["5A Drumsticks", "1"]
-            ];
+                if(empty($membersVersion)) {
+                    $items = [
+                        ["Drumeo Membership", "1"],
+                        ["Alesis Nitro Max E-Kit", "1"],
+                        ["10” Snare Pad", "1"],
+                        ["8” Tom Pads", "3"],
+                        ["3 10” Cymbal Pads", "3"],
+                        ["Drum Module", "1"],
+                        ["Kick Tower", "1"],
+                        ["Kick Pedal", "1"],
+                        ["5A Drumsticks", "1"]
+                    ];
+                } else {
+                    $items = [
+                        ["Alesis Nitro Max E-Kit", "1"],
+                        ["10” Snare Pad", "1"],
+                        ["8” Tom Pads", "3"],
+                        ["3 10” Cymbal Pads", "3"],
+                        ["Drum Module", "1"],
+                        ["Kick Tower", "1"],
+                        ["Kick Pedal", "1"],
+                        ["5A Drumsticks", "1"]
+                    ];
+                }
             @endphp
 
             @foreach($items as $item)
@@ -361,17 +396,17 @@
                     </tbody>
                 </table>
             </div>
-
-            <div class="md:w-2/3 lg:w-3/4">
-                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/products/kit/gallery.png" alt="Drum kit" class="w-full h-full md:block hidden">
-            </div>
-
+            @if(empty($membersVersion))
+                <div class="md:w-2/3 lg:w-3/4">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/products/kit/gallery.png" alt="Drum kit" class="w-full h-full md:block hidden">
+                </div>
+            @endif
         </div>
 
         <p class="p-4 text-center hidden md:block" style="color: rgb(135, 144, 151, 1.2)"> <strong>Height</strong> 12.12" (30.78cm) // <strong>Depth</strong> 21" (53.34cm) // <strong>Width</strong> 36.2" (91.94cm)</p>
 
         <div class="w-full max-w-xs mx-auto pt-4">
-            <a href="/ecommerce/add-to-cart?products[alesis-ekit]=1" class="join blue smaller w-full max-w-xs">BUY NOW</a>
+            <a href="{{ $orderUrl }}" class="join blue smaller w-full max-w-xs">BUY NOW</a>
         </div>
 
     </div>

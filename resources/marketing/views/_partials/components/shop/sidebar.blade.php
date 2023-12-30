@@ -10,8 +10,6 @@
     <div class="lg:h-0">
     <div id="order" class="anchor"></div>
     <div class="side-slide overflow-hidden rounded border border-solid" style="border-color: #CCD3D3;">
-        @include('_partials.layout.holiday.shop-sidebar-banner')
-
         <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">
             @if(!empty($instructor))
                 <p class="instructor hidden lg:inline"><em>{{ $instructor }} </em></p>
