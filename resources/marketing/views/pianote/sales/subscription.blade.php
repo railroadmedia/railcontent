@@ -136,6 +136,7 @@
 @section('body-data')
     x-data ='{
         soundslice : false,
+        workoutVid : false,
         trailer : false,
         unbox : false,
         rolandTrailer : false
@@ -214,7 +215,7 @@
             ])
         @else
             @include('musora.sales.components.header-section', [
-                'header' => 'Online piano lessons<br> for <span class="relative inline-block">all skill levels<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="" height="" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
+                'header' => 'Piano lessons for<br> <span class="relative inline-block">all skill levels<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="" height="" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
                 'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
                 'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/header-thumb2.jpg',
                 'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/jan-thumb2.png',
@@ -228,27 +229,19 @@
     @endif
 
     @if(empty($trialVersion) && !empty($promoVersion))
-        {{--        TODO: promo banner--}}
-        <section class="text-center px-5 sm:px-6 py-12 sm:py-0 text-white relative" style="background: linear-gradient(to bottom, #0B1C39, #0C1524);">
+        <section class="text-center px-5 lg:px-6 py-8 sm:py-0 text-white relative" style="background: linear-gradient(to bottom, #0B1C39, #0C1524);">
             <div class="container max-w-5xl mx-auto">
+                    <h2 class="inline-block sm:hidden mb-4 sm:text-left"><strong>Imagine starting a<br class="inline sm:hidden"> resolution you <br class="inline sm:hidden"><span class="text-pianote">knew</span> would stick…</strong></h2>
                 <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
-                    <div class="max-w-lg pr-5 lg:pr-8 mx-0 leading-normal sm:py-14 lg:py-20">
+                    <div class="w-full sm:w-5/12 sm:order-1 bg-contain bg-top bg-no-repeat cursor-pointer autoplay-video" x-on:click="workoutVid = true;" style="    padding: 5% 9% 2% 0; background-image:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/pianote/membership/homepage/2024/pianote-promo-bundle.png);">
+                        <video class="rounded-xl overflow-hidden w-full shadow-lg max-w-[210px] sm:max-w-full"
+                            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/pianote-video.mp4"
+                            muted autoplay loop playsinline></video>
+                    </div>
+                    <div class="w-full sm:w-7/12 pr-5 lg:pr-8 mx-0 leading-normal sm:py-14 lg:py-20">
                         <div class="text-center relative">
-                            <h2 class="py-4 sm:text-left"><strong>Imagine starting a resolution you <br class="inline sm:hidden"><span class="text-pianote">knew</span> would stick…</strong></h2>
-
-                            <div class="my-5 h-86 relative sm:hidden">
-                                <a href="TODO">
-                                    <video class="rounded-xl inset-0 absolute h-full z-10 m-auto my-8" 
-                                    src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/pianote-video.mp4" 
-                                    muted autoplay loop playsinline></video>
-                                </a>
-                                <img class="h-full relative object-cover" 
-                                loading="lazy" 
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/pianote-promo-bundle-m.png" 
-                                alt="learn playing piano" fetchpriority="high">
-                            </div>
+                            <h2 class="hidden sm:inline-block py-4 sm:text-left"><strong>Imagine starting a resolution you <br class="inline sm:hidden"><span class="text-pianote">knew</span> would stick…</strong></h2>
                         </div>
-
                         <p class="pt-6 sm:pt-0">
                             Pianote is different from other online lessons. <br><br>
                             You won’t just watch a video and be left alone to do the hard work. Instead, you’ll get guided play-along lessons that bring the personal touch of a live class right into your living room. You’ll play alongside a REAL teacher so you’ll never have to guess what you should be doing. <br><br>
@@ -260,22 +253,11 @@
                             You’ll love it.
                             <br><br>
                             <span class="flex justify-center md:justify-start">
-                                <a class="join smaller pianote my-3 w-full sm:w-1/2" href="TODO">GET Started <i class="fa-light fa-arrow-right"></i></a>
+                                <a class="join smaller pianote my-3 w-full sm:w-1/2 anchor-slide" href="#customize-anchor">GET Started <i class="fa-light fa-arrow-right"></i></a>
                             </span>
                         </p>
                     </div>
 
-                    <div class="relative hidden sm:inline">
-                        <a href="TODO">
-                            <video class="rounded-xl inset-0 absolute h-full z-10 m-auto my-8 md:my-10 lg:mt-20" 
-                            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/pianote-video.mp4" 
-                            muted autoplay loop playsinline></video>
-                        </a>
-                        <img class="hidden sm:inline h-full relative" 
-                        loading="lazy" onload="this.classList.remove('opacity-0')" 
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/pianote/membership/homepage/2024/pianote-promo-bundle.png" 
-                        alt="learn playing image">
-                    </div>
                 </div>
             </div>
         </section>
@@ -369,9 +351,7 @@
         // General
         "songs" => "1000+ popular songs.",
         'buttonText' => 'GET STARTED',
-        'header' => 'A <span class="text-pianote">NEW WAY</span> OF<br> LEARNING PIANO.',
-        'underline' => true,
-        'fillColor' => "#f61a30",
+        'header' => 'THE <span class="text-pianote">NEW WAY</span> TO<br> <span class="relative inline-block">LEARN PIANO<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="" height="" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
         'pointOne' => 'GREAT TEACHERS',
         'pointTwo' => 'VIDEO LESSONS',
         'pointThree' => 'FUN PRACTICE',
@@ -434,6 +414,11 @@
         'soundslice' => true,
     ])
     @include('_partials.components.video-modal',[
+        'name' => 'workoutVid',
+        'video' => '886960702',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '785314388',
         'vimeo' => true,
@@ -452,48 +437,9 @@
         @include("pianote.sales.partials._footer")
     @endif
 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var timedToggle = document.querySelector('.timed-toggle'),
-                songPoints = Array.from(timedToggle.querySelectorAll('.media-toggle')),
-                songPointToggles = Array.from(timedToggle.querySelectorAll('.active-toggle')),
-                currentSongPoint = 0,
-                totalSongPoints = songPoints.length,
-                autoplayInterval = 10000,
-                autoplaySongPoints;
-
-            function updateIndex(index) {
-                songPoints.forEach((point, i) => {
-                    point.classList.toggle('active', i === index);
-                    const video = point.querySelector('video');
-                    if (video) {
-                        video.currentTime = 0;
-                        video.play();
-                    }
-                });
-
-                songPointToggles.forEach((toggle, i) => {
-                    toggle.classList.toggle('active', i === index);
-                });
-            }
-
-            function autoplayHandler() {
-                currentSongPoint = (currentSongPoint + 1) % totalSongPoints;
-                updateIndex(currentSongPoint);
-            }
-
-            autoplaySongPoints = setInterval(autoplayHandler, autoplayInterval);
-
-            songPointToggles.forEach((toggle, index) => {
-                toggle.addEventListener('click', function () {
-                    updateIndex(index);
-                    currentSongPoint = index;
-                    clearInterval(autoplaySongPoints);
-                });
-            });
-        });
-    </script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>

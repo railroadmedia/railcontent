@@ -3,11 +3,7 @@
         @if(!empty($noExcuse))
             <h4 class="font-lexend leading-tight uppercase mb-3 sm:mb-4">NEW YEAR. <span class="text-{{$theme}}"> NO EXCUSES.</span></h4>
         @endif
-        <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black
-        @if(!empty($promoHeader))
-        font-lexend leading-none sm:leading-none lg:leading-none uppercase
-        @endif
-        "
+        <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase"
         @if(!empty($testimonialVersion))
         style="font-weight: 400!important;line-height:1.5em!important;font-family: 'Sedgwick Ave', sans-serif;background: -webkit-linear-gradient(20deg, #980353, #003285, #00B59F);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"
         @endif
@@ -24,7 +20,7 @@
         @if(!empty($boldText))
             <h5 class="leading-tight uppercase mb-5 lg:mb-7 tracking-wide"><strong>Guided play-along lessons that<br class="sm:hidden"> are guaranteed to work.</strong></h5>
         @endif
-        @if(empty($promoHeader))
+        @if(empty($boldText))
         <p class="text-sm leading-normal tracking-widest mb-5 lg:mb-7">
             <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
             <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}

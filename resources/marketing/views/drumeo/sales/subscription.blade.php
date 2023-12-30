@@ -197,7 +197,6 @@
     @endif
 
     @if(empty($trialVersion) && !empty($promoVersion))
-{{--        TODO: promo banner--}}
    <section style="background: linear-gradient(to bottom, #0B1C39, #0C1524); position: relative;">
     <img class="w-full inline md:hidden"
         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/promo-collage.png"
@@ -247,7 +246,7 @@
                         Scroll down to see everything waiting for you inside Drumeo – and we’ll see you on the drums in
                         2024.<br><br>
                         <span class="flex justify-center md:justify-start">
-                            <a class="join smaller blue my-3 w-1/2" href="TODO">GET Started <i class="fa-light fa-arrow-right"></i></a>
+                            <a class="join smaller blue my-3 w-1/2" href="/ecommerce/add-to-cart?products[alesis-ekit]=1&products[drumeo_edge_1_year_access]=1&promo-code=free-with-ekit&locked=true">GET Started <i class="fa-light fa-arrow-right"></i></a>
                         </span>
                     </p>
                 </div>
@@ -362,9 +361,7 @@
         // general
         "songs" => "6000+ popular songs.",
         'buttonText' => "ORDER NOW",
-        'header' => '<span class="text-drumeo">EVERYTHING</span> YOU NEED<br> TO LEARN THE DRUMS.',
-        'underline' => true,
-        'fillColor' => "#0b76db",
+        'header' => '<span class="text-drumeo">EVERYTHING</span><br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE DRUMS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="" height="" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
         'pointOne' => 'GREAT TEACHERS',
         'pointTwo' => 'VIDEO LESSONS',
         'pointThree' => 'FUN PRACTICE',
@@ -378,7 +375,7 @@
         'firstImageHeight' => 'h-44',
         'firstDealPrice' => $discountedPrice,
         'firstDealDiscount' => $originalPrice,
-        'firstDealSub' => "Save" . round($discountPercentage) . "% on your first year.",
+        'firstDealSub' => "Save " . round($discountPercentage) . "% on your first year.",
         "firstDealLink" => "/ecommerce/add-to-cart?products[practice-anywhere]=1",
         'firstExtraBonuses' => [
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Annual Drumeo Membership </strong><span class="italic">($240 Value)',
@@ -396,7 +393,7 @@
         'secondDealSub' => "Everything you need to start playing the drums.",
         'secondDealPrice' => 499,
         'secondDealDiscount' => 993,
-        "secondDealLink" => "TODO",
+        "secondDealLink" => "/ecommerce/add-to-cart?products[alesis-ekit]=1&products[drumeo_edge_1_year_access]=1&promo-code=free-with-ekit&locked=true",
         'secondExtraBonuses' => [
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Alesis Nitro Max E-Kit</strong> <span class="italic">($500 Value)</span>',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong> Annual Drumeo Membership </strong><span class="italic">($240 Value)</span>',
@@ -445,48 +442,9 @@
         @include("drumeo.sales.partials._footer")
     @endif
 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var timedToggle = document.querySelector('.timed-toggle'),
-                songPoints = Array.from(timedToggle.querySelectorAll('.media-toggle')),
-                songPointToggles = Array.from(timedToggle.querySelectorAll('.active-toggle')),
-                currentSongPoint = 0,
-                totalSongPoints = songPoints.length,
-                autoplayInterval = 10000,
-                autoplaySongPoints;
-
-            function updateIndex(index) {
-                songPoints.forEach((point, i) => {
-                    point.classList.toggle('active', i === index);
-                    const video = point.querySelector('video');
-                    if (video) {
-                        video.currentTime = 0;
-                        video.play();
-                    }
-                });
-
-                songPointToggles.forEach((toggle, i) => {
-                    toggle.classList.toggle('active', i === index);
-                });
-            }
-
-            function autoplayHandler() {
-                currentSongPoint = (currentSongPoint + 1) % totalSongPoints;
-                updateIndex(currentSongPoint);
-            }
-
-            autoplaySongPoints = setInterval(autoplayHandler, autoplayInterval);
-
-            songPointToggles.forEach((toggle, index) => {
-                toggle.addEventListener('click', function () {
-                    updateIndex(index);
-                    currentSongPoint = index;
-                    clearInterval(autoplaySongPoints);
-                });
-            });
-        });
-    </script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>

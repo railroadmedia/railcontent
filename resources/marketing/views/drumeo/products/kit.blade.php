@@ -42,7 +42,7 @@
           $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&locked=true';
      }
      else {
-          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&products[DLM-1-year]=1&promo-code=free-with-ekit&locked=true';
+          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&products[drumeo_edge_1_year_access]=1&promo-code=free-with-ekit&locked=true';
      }
     @endphp
 @stop
