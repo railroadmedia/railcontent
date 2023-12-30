@@ -67,10 +67,10 @@
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/kit/drumeo-alesis-logo.png">
             </picture>
-            <h1 class="leading-tight my-5 uppercase font-lexend"><strong>Everything you need to<br class="hidden sm:inline"> start
+            <h1 class="leading-none my-5 uppercase font-lexend"><strong>Everything you need to<br class="hidden sm:inline"> start
                     playing the drums.</strong></h1>
             <h5 class="leading-tight text-musora">Get the highest-rated beginner e-kit <strong>PLUS</strong> an annual membership to Drumeo.</h5>
-            <h4 class="leading-tight text-drumeo my-4 sm:my-5 uppercase"> Only
+            <h4 class="leading-tight my-4 sm:my-5 uppercase"> Only
                 @if (floatval($productPrices['alesis-ekit']->price) > floatval($productPrices['alesis-ekit']->discounted_price))
                     <s class="opacity-50">${{ floatval($productPrices['alesis-ekit']->price) }}</s>
                     <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
