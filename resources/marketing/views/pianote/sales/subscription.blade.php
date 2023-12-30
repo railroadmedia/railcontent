@@ -240,61 +240,56 @@
 
     @if(empty($trialVersion) && !empty($promoVersion))
         {{--        TODO: promo banner--}}
-         <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white relative"
-     style="background: linear-gradient(to bottom, #0B1C39, #0C1524);">
-     <div class="container max-w-5xl mx-auto">
-         <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
-             <div class=" max-w-xl pr-5 lg:pr-8 mx-0 leading-normal">
-                 <div class="text-center">
-                     <h2 class="py-4 sm:text-left"><strong>Imagine starting a resolution you <br class="inline sm:hidden">
-                             <span class="text-pianote">knew</span> would stick…</strong></h2>
-                     <div>
+        <section class="text-center px-5 sm:px-6 py-12 sm:py-0 text-white relative" style="background: linear-gradient(to bottom, #0B1C39, #0C1524);">
+            <div class="container max-w-5xl mx-auto">
+                <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
+                    <div class="max-w-lg pr-5 lg:pr-8 mx-0 leading-normal sm:py-14 lg:py-20">
+                        <div class="text-center relative">
+                            <h2 class="py-4 sm:text-left"><strong>Imagine starting a resolution you <br class="inline sm:hidden"><span class="text-pianote">knew</span> would stick…</strong></h2>
 
-                         {{--                             <img class="my-5 h-86 inline sm:hidden"
-                                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/pianote-promo-m.png"
-                                                alt="learn playing image"
-                                                fetchpriority="high"
-                                            > --}}
+                            <div class="my-5 h-86 relative sm:hidden">
+                                <a href="TODO">
+                                    <video class="rounded-xl inset-0 absolute h-full z-10 m-auto my-8" 
+                                    src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/pianote-video.mp4" 
+                                    muted autoplay loop playsinline></video>
+                                </a>
+                                <img class="h-full relative object-cover" 
+                                loading="lazy" 
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/pianote-promo-bundle-m.png" 
+                                alt="learn playing piano" fetchpriority="high">
+                            </div>
+                        </div>
 
-                         <video class="sm:hidden rounded-xl overflow-hidden"
-                             src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/pianote-video.mp4"
-                             muted="" autoplay="" loop="" playsinline=""></video>
+                        <p class="pt-6 sm:pt-0">
+                            Pianote is different from other online lessons. <br><br>
+                            You won’t just watch a video and be left alone to do the hard work. Instead, you’ll get guided play-along lessons that bring the personal touch of a live class right into your living room. You’ll play alongside a REAL teacher so you’ll never have to guess what you should be doing. <br><br>
+                            It will feel like they’re right there with you. <br><br>
+                            <span class="text-pianote">And it works.</span> <br><br>
+                            So this year, don’t just wish you could play the piano. Join Pianote and know you can. <br><br>
+                            (And we’re so confident, you’ll have 90 days to try it risk-free.)<br><br>
+                            Join today to save on your first year + get 8 FREE bonuses. <br><br>
+                            You’ll love it.
+                            <br><br>
+                            <span class="flex justify-center md:justify-start">
+                                <a class="join smaller pianote my-3 w-full sm:w-1/2" href="TODO">GET Started <i class="fa-light fa-arrow-right"></i></a>
+                            </span>
+                        </p>
+                    </div>
 
-                     </div>
-                 </div>
-
-                 <p>Pianote is different from other online lessons. <br><br>
-                     You won’t just watch a video and be left alone to do the hard work. Instead, you’ll get guided
-                     play-along lessons that bring the personal touch of a live class right into your living room.
-                     You’ll play alongside a REAL teacher so you’ll never have to guess what you should be
-                     doing. <br><br>
-                     It will feel like they’re right there with you. <br><br>
-                     <span class="text-pianote">And it works.</span> <br><br>
-                     So this year, don’t just wish you could play the piano. Join Pianote and know you can. <br><br>
-                     (And we’re so confident, you’ll have 90 days to try it risk-free.)<br><br>
-                     Join today to save on your first year + get 8 FREE bonuses. <br><br>
-                     You’ll love it.
-
-                     <br><br>
-                     <span class="flex justify-center md:justify-start">
-                         <a class="join smaller pianote my-3" href="TODO">GET Started <i
-                                 class="fa-light fa-arrow-right"></i></a>
-                     </span>
-                 </p>
-
-             </div>
-             <video class="hidden sm:inline relative top-0 rounded-xl overflow-hidden"
-                 src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/pianote-video.mp4"
-                 muted="" autoplay="" loop="" playsinline=""></video>
-
-             <img class="hidden sm:inline transition-opacity opacity-0" loading="lazy"
-                 onload="this.classList.remove('opacity-0')"
-                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/pianote/membership/homepage/2024/pianote-promo-bundle.png"
-                 alt="learn playing image" style="height: 41rem;">
-
-         </div>
-     </div>
- </section>
+                    <div class="relative hidden sm:inline">
+                        <a href="TODO">
+                            <video class="rounded-xl inset-0 absolute h-full z-10 m-auto my-8 md:my-10 lg:mt-20" 
+                            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/pianote-video.mp4" 
+                            muted autoplay loop playsinline></video>
+                        </a>
+                        <img class="hidden sm:inline h-full relative" 
+                        loading="lazy" onload="this.classList.remove('opacity-0')" 
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/pianote/membership/homepage/2024/pianote-promo-bundle.png" 
+                        alt="learn playing image">
+                    </div>
+                </div>
+            </div>
+        </section>
 
     @endif
 
