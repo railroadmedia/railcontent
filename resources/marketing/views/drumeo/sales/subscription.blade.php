@@ -344,6 +344,12 @@
         $originalPrice = floatval($productPrices['practice-anywhere']->price);
         $discountedPrice = floatval($productPrices['practice-anywhere']->discounted_price);
         $discountPercentage = 17;
+        if(!empty($products['alesis-ekit'])) {
+            $stock = $products['alesis-ekit']->getPublicStockCount();
+        }
+        else {
+            $stock = 'A LIMITED AMOUNT';
+        }
     @endphp
 
         @include('musora.sales.components.order-promo-cards-section', [
@@ -355,7 +361,7 @@
         'pointTwo' => 'VIDEO LESSONS',
         'pointThree' => 'FUN PRACTICE',
         'pointFour' => '6000+ SONGS',
-        'topBadge' => 'ONLY 5000 LEFT',
+        'topBadge' => 'ONLY ' . $stock . ' LEFT',
         'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/drumeo-free-shipping.svg',
 
         // first deal
