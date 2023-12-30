@@ -426,7 +426,7 @@
         'secondDealSub' => "Everything you need to start playing the drums.",
         'secondDealPrice' => 499,
         'secondDealDiscount' => 1005.95,
-        "secondDealLink" => "/ecommerce/add-to-cart?products[alesis-ekit]=1&products[drumeo_edge_1_year_access]=1&products[Drumeo-VaterSticks]=2&products[30-day-drummer-3]=1&products[30-day-chops]=1&locked=true",
+        "secondDealLink" => "/ecommerce/add-to-cart?products[alesis-ekit]=1&products[drumeo_edge_1_year_access]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&locked=true",
         'secondExtraBonuses' => [
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Alesis Nitro Max E-Kit</strong> <span class="italic">($500 Value)</span>',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong> Annual Drumeo Membership </strong><span class="italic">($240 Value)</span>',

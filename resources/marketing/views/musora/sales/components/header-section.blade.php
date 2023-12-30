@@ -1,7 +1,16 @@
-<header class="text-center px-5 sm:px-6 py-44 sm:py-52 lg:py-56 relative overflow-hidden" style="background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);">
+<header class="text-center px-5 sm:px-6 py-44 sm:py-52 lg:py-56 relative overflow-hidden"
+    @if(!empty($testimonialVersion))
+    style="background:linear-gradient(to bottom, #fff, #F1EFED);"
+    @else
+    style="background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);"
+    @endif
+>
     <div class="container max-w-6xl mx-auto relative z-20">
         @if(!empty($noExcuse))
             <h4 class="font-lexend leading-tight uppercase mb-3 sm:mb-4">NEW YEAR. <span class="text-{{$theme}}"> NO EXCUSES.</span></h4>
+        @endif
+        @if(!empty($testimonialVersion))
+            <h4 class="leading-tight uppercase mb-3 sm:mb-4">MUSIC STUDENTS <strong>PREFER LEARNING HERE</strong></h4>
         @endif
         <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase"
         @if(!empty($testimonialVersion))

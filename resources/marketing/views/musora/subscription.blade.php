@@ -288,7 +288,7 @@
         $bubbles = $musora['bubbles'];
     @endphp
     @include('musora.sales.components.header-section', [
-        'header' => '“Like my very own music coach!”',
+        'header' => '“So positive and uplifting!”',
         'testimonialVersion' => true,
         'noTrailer' => true,
         'pointOne' => 'GREAT TEACHERS',
