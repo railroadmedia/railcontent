@@ -234,7 +234,7 @@
                     <h2 class="inline-block sm:hidden mb-4 sm:text-left"><strong>Imagine starting a<br class="inline sm:hidden"> resolution you <br class="inline sm:hidden"><span class="text-pianote">knew</span> would stick…</strong></h2>
                 <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
                     <div class="w-full sm:w-5/12 sm:order-1 bg-contain bg-top bg-no-repeat cursor-pointer autoplay-video" x-on:click="workoutVid = true;" style="    padding: 5% 9% 2% 0; background-image:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/pianote/membership/homepage/2024/pianote-promo-bundle.png);">
-                        <video class="rounded-xl overflow-hidden w-full shadow-lg max-w-[210px] sm:max-w-full"
+                        <video class="rounded-xl overflow-hidden w-full shadow-lg max-w-[230px] sm:max-w-full mx-auto"
                             src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/pianote-video.mp4"
                             muted autoplay loop playsinline></video>
                     </div>

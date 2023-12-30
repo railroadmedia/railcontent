@@ -779,11 +779,6 @@
             'artist' => 'Ayla Tesler-Mabé',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-chops.jpg',
-            'title' => 'Drum Chops',
-            'artist' => 'Aaron Spears',
-        ],
-        [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-solos.jpg',
             'title' => 'Supercharged Drum Solos',
             'artist' => 'Larnell Lewis',
@@ -835,11 +830,6 @@
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-sound.jpg',
             'title' => 'Elevate Your Drum Sound',
             'artist' => 'Simon Phillips',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-chops.jpg',
-            'title' => 'Drum Chops',
-            'artist' => 'Aaron Spears',
         ],
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/writing-drum-parts.jpg',

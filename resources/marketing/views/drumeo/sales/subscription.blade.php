@@ -180,6 +180,21 @@
             'pointThree' => 'FUN PRACTICE',
             'pointFour' => '6000+ SONGS',
         ])
+    @elseif(!empty($promoPage))
+        @include('musora.sales.components.header-section', [
+            'noExcuse' => true,
+            'promoHeader' => true,
+            'noCheck' => true,
+            'header' => 'EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE DRUMS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="" height="" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
+            'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> thousands of songs and unlimited personal support.',
+            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/jan-thumb-no-badge.jpg',
+            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/header-thumb-promo2.png',
+            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/header-thumb-promo-m2.jpg',
+            'pointOne' => 'GREAT TEACHERS',
+            'pointTwo' => 'VIDEO LESSONS',
+            'pointThree' => 'FUN PRACTICE',
+            'pointFour' => '6000+ SONGS',
+        ])
     @else
         @include('musora.sales.components.header-section', [
             'noExcuse' => true,
@@ -198,29 +213,29 @@
 
     @if(empty($trialVersion) && !empty($promoVersion))
        <section style="background: linear-gradient(to bottom, #0B1C39, #0C1524); position: relative;">
-            <img class="w-full inline md:hidden"
+            <img class="w-full inline sm:hidden"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/promo-collage.png"
                 alt="drum kit image" fetchpriority="high">
 
             <div class="text-center px-5 sm:px-6 py-4 sm:py-8 lg:py-14 text-white relative">
                 <div class="container max-w-5xl lg:flex items-baseline">
-                    <div class="text-left flex flex-wrap sm:flex-nowrap md:justify-center items-start mb-5">
-                        <div class="max-w-3xl md:max-w-2xl lg:max-w-2xl mx-0 z-10 md:pr-10 lg:pl-20">
-                            <div class="flex justify-around md:justify-start mb-10">
+                    <div class="text-left flex flex-wrap sm:flex-nowrap lg:justify-center items-start mb-5">
+                        <div class="max-w-3xl sm:max-w-xl lg:max-w-2xl mx-0 z-10 sm:pr-20">
+                            <div class="flex justify-around sm:justify-start mb-10">
                                 <div class="flex items-center pr-4">
-                                    <img class="h-6 md:h-10 mr-1" loading="lazy" onload="this.classList.remove('opacity-0')"
+                                    <img class="h-6 sm:h-10 mr-1" loading="lazy" onload="this.classList.remove('opacity-0')"
                                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/checkmark.svg"
                                         alt="checkmark icon">
                                     <h2 class="uppercase"><strong>Lessons</strong></h2>
                                 </div>
                                 <div class="flex items-center pr-4">
-                                    <img class="h-6 md:h-10 mr-1" loading="lazy" onload="this.classList.remove('opacity-0')"
+                                    <img class="h-6 sm:h-10 mr-1" loading="lazy" onload="this.classList.remove('opacity-0')"
                                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/checkmark.svg"
                                         alt="checkmark icon">
                                     <h2 class="uppercase"><strong>Songs</strong></h2>
                                 </div>
                                 <div class="flex items-center pr-4">
-                                    <img class="h-6 md:h-10 mr-1" loading="lazy" onload="this.classList.remove('opacity-0')"
+                                    <img class="h-6 sm:h-10 mr-1" loading="lazy" onload="this.classList.remove('opacity-0')"
                                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/checkmark.svg"
                                         alt="checkmark icon">
                                     <h2 class="text-musora uppercase relative">
@@ -245,12 +260,12 @@
                                 package.<br><br>
                                 Scroll down to see everything waiting for you inside Drumeo – and we’ll see you on the drums in
                                 2024.<br><br>
-                                <span class="flex justify-center md:justify-start">
+                                <span class="flex justify-center sm:justify-start">
                                     <a class="join smaller blue my-3 w-1/2 anchor-slide" href="#customize-anchor">GET Started <i class="fa-light fa-arrow-right"></i></a>
                                 </span>
                             </p>
                         </div>
-                        <img class="absolute top-0 right-0 h-auto hidden md:inline transition-opacity opacity-0"
+                        <img class="absolute top-0 right-0 h-auto hidden sm:inline transition-opacity opacity-0"
                             style="max-width: 50%; height: auto; max-height: 80vh;"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
@@ -421,7 +436,7 @@
 
         // second deal
         'secondDeal' => "E-Kit + Lessons",
-        'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/marketing/drumeo/membership/homepage/2024/ekit-bundle.png',
+        'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/marketing/drumeo/promos/december/ekit-bundle.png',
         'secondImageHeight' => 'h-48',
         'secondDealSub' => "Everything you need to start playing the drums.",
         'secondDealPrice' => 499,

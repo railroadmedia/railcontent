@@ -325,14 +325,13 @@
                     </h4>
                     <a href="{{ $orderUrl }}" class="join blue smaller w-full max-w-xs">BUY NOW</a>
                 </div>
-                <div
-                    class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0 hidden sm:block">
-                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl pb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/products/kit/collage2.png" alt="collage">
+                <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0 hidden sm:block">
+                    <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/december/ekit-bundle.png" alt="collage">
                 </div>
             </div>
         </div>
         <div class="w-full sm:hidden text-center py-8">
-            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/kit/collage2.png" alt="collage">
+            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/promos/december/ekit-bundle.png" alt="collage">
         </div>
     </section>
 

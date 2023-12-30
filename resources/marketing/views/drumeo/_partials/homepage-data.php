@@ -259,12 +259,6 @@
                     ],
                     [
                         "img" =>
-                        "marketing/drumeo/membership/homepage/webp-format/coaches/Aaron-Spears.webp",
-                        "title" => "Drum<br> Chops",
-                        "instructor" => "Aaron Spears",
-                    ],
-                    [
-                        "img" =>
                         "marketing/drumeo/membership/homepage/webp-format/coaches/Hannah-Welton.webp",
                         "title" => "Writing<br> Drum Parts",
                         "instructor" => "Hannah Welton",

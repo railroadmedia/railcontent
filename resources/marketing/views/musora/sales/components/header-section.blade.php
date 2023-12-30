@@ -29,7 +29,7 @@
         @if(!empty($boldText))
             <h5 class="leading-tight uppercase mb-5 lg:mb-7 tracking-wide"><strong>Guided play-along lessons that<br class="sm:hidden"> are guaranteed to work.</strong></h5>
         @endif
-        @if(empty($boldText))
+        @if(empty($boldText) && empty($noCheck))
         <p class="text-sm leading-normal tracking-widest mb-5 lg:mb-7">
             <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
             <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}

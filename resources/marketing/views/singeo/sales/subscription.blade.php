@@ -316,6 +316,7 @@
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
                 'image' => 'marketing/singeo/membership/homepage/2023/singeo-spread.png',
+
         ])
     @endif
 

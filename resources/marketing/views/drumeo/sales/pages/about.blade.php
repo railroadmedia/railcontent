@@ -290,10 +290,6 @@
             @php
                 $slider = [
                     [
-                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Aaron.jpg',
-                    'name' => 'Aaron Spears',
-                    ],
-                    [
                     'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Anika.jpg',
                     'name' => 'Anika Nilles',
                     ],

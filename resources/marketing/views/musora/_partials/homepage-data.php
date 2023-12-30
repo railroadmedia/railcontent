@@ -220,11 +220,6 @@
                 'title' => '<i class="text-drumeo align-middle mr-0.5 fa-light fa-drum"></i> Drums',
                 'images' => [
                     [
-                        'img' => 'marketing/musora/membership/homepage/2023/coaches/Aaron-Spears.jpg',
-                        'title' => 'Drum<br> Chops',
-                        'instructor' => 'Aaron Spears',
-                    ],
-                    [
                         'img' => 'marketing/musora/membership/homepage/2023/coaches/Hannah-Welton.jpg',
                         'title' => 'Writing<br> Drum Parts',
                         'instructor' => 'Hannah Welton',
