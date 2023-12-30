@@ -3,7 +3,7 @@
         @if(!empty($noExcuse))
             <h4 class="font-lexend leading-tight uppercase mb-3 sm:mb-4">NEW YEAR. <span class="text-{{$theme}}"> NO EXCUSES.</span></h4>
         @endif
-        <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl sm:mb-10 font-black
+        <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black
         @if(!empty($promoHeader))
         font-lexend leading-none sm:leading-none lg:leading-none uppercase
         @endif

@@ -322,6 +322,11 @@ class SalesController extends BaseController
         throw new NotFoundHttpException();
     }
 
+    public function kitLifetime()
+    {
+        return view('drumeo.products.kit', ['theme' => 'drumeo', 'membersVersion' => true]);
+    }
+
     public function pro()
     {
         return view('drumeo.products.pro');
