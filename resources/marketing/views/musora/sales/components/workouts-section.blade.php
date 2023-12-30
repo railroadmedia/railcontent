@@ -5,8 +5,8 @@
             <h4 class="leading-tight">Improve your skills in<br class="sm:hidden"> just 10 minutes a day.</h4>
         </div>
         <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-20 mt-5"></i>
-        <div class="h-full w-full absolute top-0 left-0 right-0 bottom-0 z-10 bg-{{ $theme }} opacity-60"></div>
-        <div class="h-full w-full absolute top-0 left-0 right-0 bottom-0 z-10 bg-black opacity-30"></div>
+        <div class="h-full w-full absolute top-0 left-0 right-0 bottom-0 z-10 bg-{{ $theme }} opacity-50"></div>
+        <div class="h-full w-full absolute top-0 left-0 right-0 bottom-0 z-10 bg-black opacity-20"></div>
         <video class="object-cover w-full h-full absolute z-0 lazyload" data-src="{{ $vid }}" type="video/mp4" autoplay muted loop playsinline></video>
     </div>
 @else

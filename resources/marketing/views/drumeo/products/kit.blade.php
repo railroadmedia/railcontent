@@ -55,7 +55,7 @@
     ])
 
 <!-- hero section-->
-<header class="text-white relative overflow-hidden z-20 md:pt-16"
+<header class="text-white relative overflow-hidden z-20"
     style="height:700px;background:linear-gradient(to bottom, rgb(26, 26, 26), #1e1e1e);">
     <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
         <div class="container mx-auto max-w-5xl">
@@ -81,7 +81,7 @@
             </h4>
             <div class="w-full max-w-xs mx-auto">
                 @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
-                    <a class="w-full join smaller blue" href="/ecommerce/add-to-cart?products[alesis-ekit]=1">Buy Now</a>
+                    <a class="w-full join smaller blue" href="/ecommerce/add-to-cart?products[alesis-ekit]=1&products[DLM-1-year]=1&promo-code=free-with-ekit&locked=true">Buy Now</a>
                 @else
                     <a class="w-full join smaller sold-out">SOLD OUT</a>
                 @endif
@@ -92,13 +92,9 @@
             {{--                <h6 class="text-sm leading-tight"><em>or get it free with an Annual Drumeo Membership.</em></h6> --}}
         </div>
     </div>
-    <div class="top-0 left-0 absolute w-full h-full z-10 bg-cover bg-center"
-        style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/kit/header-image.jpg');">
-    </div>
-   <div class="top-0 left-0 absolute w-full h-full z-10"
-       style="background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.4));"></div>
+    <div class="h-full w-full absolute top-0 left-0 right-0 bottom-0 z-10 bg-black opacity-80"></div>
    <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline
-       muted src="https://player.vimeo.com/progressive_redirect/playback/897277793/rendition/2160p/file.mp4?loc=external&signature=5c965f98ffb7630446b2c0e429a893463d37587d37e600ac60093af60da9570b"></video>
+       muted src="https://player.vimeo.com/progressive_redirect/playback/897277793/rendition/1080p/file.mp4?loc=external&signature=54243ca347163456312ff377c17948ff48334aa49e5375628363ab40a7049cde"></video>
 </header>
 
 
@@ -131,7 +127,7 @@
 
 <!-- next section-->
 <div class="px-4 sm:px-6 py-16 text-white" style="background: #01050D">
-    <div class="container max-w-4xl mx-auto relative z-50">
+    <div class="container max-w-5xl mx-auto relative z-50">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 w-full mx-2">
             <div class="px-1">
                 <h5 class="leading-normal text-left"><strong>Neighbor-friendly Drums</strong></h5>
@@ -144,6 +140,18 @@
             <div class="px-1">
                 <h5 class="leading-normal text-left"><strong>Fits In Any Room</strong></h5>
                 <h5 class="leading-normal text-left pt-4">Space is a luxury for drummers. Your Nitro Max fits in any room and folds up for easy storage between jam sessions.</h5>
+            </div>
+            <div class="px-1">
+                <h5 class="leading-normal text-left"><strong>Improve Your Timing & Feel</strong></h5>
+                <h5 class="pt-4 leading-normal text-left">Develop your internal clock with a built-in metronome that tells you if you’re ahead or behind the beat. </h5>
+            </div>
+            <div class="px-1">
+                <h5 class="leading-normal text-left"><strong>Choose Your Favorite Sounds</strong></h5>
+                <h5 class="pt-4 leading-normal text-left">You’ll have 32 kit sounds from some of the most sampled drum sounds in history. You can find the perfect kit to play your favorite songs. </h5>
+            </div>
+            <div class="px-1">
+                <h5 class="leading-normal text-left"><strong>Big Fat Snare Drum</strong></h5>
+                <h5 class="leading-normal text-left pt-4">A 10” snare drum helps you play with better technique AND gives you two strike zones. (Most entry-level kits have a tiny 8” snare!).</h5>
             </div>
         </div>
     </div>
@@ -297,7 +305,7 @@
                             <strong>Only ${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
                         @endif
                     </h4>
-                    <a href="/ecommerce/add-to-cart?products[alesis-ekit]=1" class="join blue smaller w-full max-w-xs">BUY NOW</a>
+                    <a href="/ecommerce/add-to-cart?products[alesis-ekit]=1&products[DLM-1-year]=1&promo-code=free-with-ekit&locked=true" class="join blue smaller w-full max-w-xs">BUY NOW</a>
                 </div>
                 <div
                     class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0 hidden sm:block">
@@ -371,7 +379,7 @@
         <p class="p-4 text-center hidden md:block" style="color: rgb(135, 144, 151, 1.2)"> <strong>Height</strong> 12.12" (30.78cm) // <strong>Depth</strong> 21" (53.34cm) // <strong>Width</strong> 36.2" (91.94cm)</p>
 
         <div class="w-full max-w-xs mx-auto pt-4">
-            <a href="/ecommerce/add-to-cart?products[alesis-ekit]=1" class="join blue smaller w-full max-w-xs">BUY NOW</a>
+            <a href="/ecommerce/add-to-cart?products[alesis-ekit]=1&products[DLM-1-year]=1&promo-code=free-with-ekit&locked=true" class="join blue smaller w-full max-w-xs">BUY NOW</a>
         </div>
 
     </div>

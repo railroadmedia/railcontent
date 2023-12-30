@@ -15,7 +15,7 @@
                             >
                                 <div class="absolute bottom-0 left-0 right-0 px-7 pb-7 pt-10" style="background:linear-gradient(to bottom, transparent, #000);">
                                     <h5 class="leading-tight"><strong><i class="fa-light fa-circle-plus align-sub text-3xl mr-1 transition-transform duration-300" x-bind:class="{ 'rotate-45': open  }"></i> {{ $gridItem['title'] }}</strong></h5>
-                                    <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm"
+                                    <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0"
                                         x-cloak
                                         x-bind:class="{ 'max-h-0': !open, 'max-h-[500px]': open  }"
                                     >{{ $gridItem['desc'] }}</p>
@@ -36,7 +36,7 @@
                             >
                                 <div class="absolute bottom-0 left-0 right-0 px-7 pb-7 pt-10" style="background:linear-gradient(to bottom, transparent, #000);">
                                     <h5 class="leading-tight"><strong><i class="fa-light fa-circle-plus align-sub text-3xl mr-1 transition-transform duration-300" x-bind:class="{ 'rotate-45': open  }"></i> {{ $gridItem['title'] }}</strong></h5>
-                                    <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-xs"
+                                    <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-xs mx-0"
                                         x-cloak
                                         x-bind:class="{ 'max-h-0': !open, 'max-h-[500px]': open  }"
                                     >{{ $gridItem['desc'] }}</p>
@@ -57,7 +57,7 @@
                             >
                                 <div class="absolute bottom-0 left-0 right-0 px-7 pb-7 pt-10" style="background:linear-gradient(to bottom, transparent, #000);">
                                     <h5 class="leading-tight"><strong><i class="fa-light fa-circle-plus align-sub text-3xl mr-1 transition-transform duration-300" x-bind:class="{ 'rotate-45': open  }"></i> {{ $gridItem['title'] }}</strong></h5>
-                                    <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-xs"
+                                    <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-xs mx-0"
                                         x-cloak
                                         x-bind:class="{ 'max-h-0': !open, 'max-h-[500px]': open  }"
                                     >{{ $gridItem['desc'] }}</p>

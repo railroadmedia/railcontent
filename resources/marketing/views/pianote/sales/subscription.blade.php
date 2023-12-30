@@ -173,14 +173,7 @@
     @endphp
 
     @if(empty($hideHeader) || !$hideHeader)
-        @if(!empty($bfVersion))
-            @include('_partials.layout.holiday.homepage-top-banner',[
-                'text' => 'Get 11 free<br class="sm:hidden"> bonuses worth $933',
-                'text2' => 'Get 11 free bonuses worth $933',
-                'image' => 'https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/27ae71a1-acba-4440-8ecd-457ab69a4f06-the-ultimate-lessons-bundle-thumb.jpg',
-                'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-practice-planner]=1&products[music-theory-posters]=1&products[christmas-songbook]=1&products[christmas-song-book-digital]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702',
-            ])
-        @elseif(!empty($beginnerVersion))
+        @if(!empty($beginnerVersion))
             @include('musora.sales.components.header-section', [
                 'header' => 'Online piano lessons<br> tailored for beginners.',
                 'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> friendly teachers, and songs perfect for your skill level.',
@@ -209,8 +202,7 @@
             @include('musora.sales.components.header-section', [
                 'boldText' => true,
                 'promoHeader' => true,
-                'header' => 'THE <span class="text-pianote">NEW WAY</span> TO<br> LEARN PIANO.',
-                'underline' => true,
+                'header' => 'THE <span class="text-pianote">NEW WAY</span> TO<br> <u style="text-decoration-color: #f61a30;">LEARN PIANO</u>.',
             'fillColor' => "#f61a30",
                 'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
                 'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/header-thumb2.jpg',
