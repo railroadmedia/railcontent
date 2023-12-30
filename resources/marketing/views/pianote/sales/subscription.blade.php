@@ -228,7 +228,7 @@
         @endif
     @endif
 
-    @if(empty($trialVersion) && !empty($promoVersion))
+    @if(empty($trialVersion) && empty($evergreenVersion) && !empty($promoVersion))
         <section class="text-center px-5 lg:px-6 py-8 sm:py-0 text-white relative" style="background: linear-gradient(to bottom, #0B1C39, #0C1524);">
             <div class="container max-w-5xl mx-auto">
                     <h2 class="inline-block sm:hidden mb-4 sm:text-left"><strong>Imagine starting a<br class="inline sm:hidden"> resolution you <br class="inline sm:hidden"><span class="text-pianote">knew</span> would stick…</strong></h2>
@@ -345,7 +345,46 @@
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'piano',
         ])
+
+    @elseif(!empty($evergreenVersion))
+        @php
+            $bonuses = [
+                [
+                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/bonus-chords-scales.jpg',
+                    'title' => 'Chords & <br>Scales Book',
+                    'description' => 'Your encyclopedia of piano chords & scales.',
+                    'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
+                    'shipping' => 'true'
+                ],
+                [
+                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
+                'title' => 'Piano Technique<br> Made Easy',
+                'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
+                'price' => floatval($productPrices['piano-technique-made-easy']->price),
+                ],
+                [
+                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
+                'title' => 'Piano Riffs<br> & Fills',
+                'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
+                'price' => floatval($productPrices['piano-riffs-and-fills']->price),
+                ],
+                [
+                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/promos/black-friday/unlimited/faster-fingers.jpg',
+                    'title' => '',
+                    'description' => 'Boost your speed and confidence with this guided practice course.',
+                    'price' => floatval($productPrices['faster-fingers']->price),
+                ],
+            ]
+        @endphp
+        @include('musora.sales.components.order-section-bonuses', [
+        'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-annual-2w-card.png',
+        'header' => 'Online piano lessons for all skill levels.',
+        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
+        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=special',
+        'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
+        ])
     @elseif(!empty($promoVersion))
+
 
     @include('musora.sales.components.order-promo-cards-section', [
         // General
