@@ -22,7 +22,7 @@
             @endif
         </h1>
         @if(!empty($boldText))
-            <h5 class="leading-tight uppercase mb-5 lg:mb-7 tracking-wide"><strong>Guided play-along lessons that are guaranteed to work.</strong></h5>
+            <h5 class="leading-tight uppercase mb-5 lg:mb-7 tracking-wide"><strong>Guided play-along lessons that<br class="sm:hidden"> are guaranteed to work.</strong></h5>
         @endif
         @if(empty($promoHeader))
         <p class="text-sm leading-normal tracking-widest mb-5 lg:mb-7">
