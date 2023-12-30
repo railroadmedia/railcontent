@@ -46,7 +46,7 @@
                         Instruments <i class="fa-solid fa-caret-down"></i>
                     </span>
                     <a class=" @if(strpos(url()->full(), 'choose-plan')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/choose-plan" >Pricing</a>
-                        <a style="color: #d61922;" class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('singeo') }}/shop" >Deals</a>
+                    <a class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('singeo') }}/shop" >Shop</a>
                     <a class="" href="{{ get_legacy_brand_base_url('singeo') }}/chorus" >Blog</a>
                 </div>
                 <div
@@ -164,7 +164,7 @@
         ])
             @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Shop",
-                "linkIcon" => "fas fa-tag text-promo",
+                "linkIcon" => "fas fa-tag",
                 "linkUrl" => "/shop",
             ])
         @include('drumeo.sales.partials._nav-link', [

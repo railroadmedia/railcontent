@@ -164,7 +164,7 @@
 {{--        ])--}}
          @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Shop",
-                "linkIcon" => "fas fa-tag text-promo",
+                "linkIcon" => "fas fa-tag",
                 "linkUrl" => "/drumshop",
             ])
         @include('drumeo.sales.partials._nav-link', [

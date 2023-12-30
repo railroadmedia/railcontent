@@ -41,7 +41,7 @@
                     <span class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></span>
                     <span class="cursor-pointer instruments">Instruments <i class="fa-solid fa-caret-down"></i></span>
                     <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('guitareo') }}/choose-plan" >Pricing</a>
-                        <a style="color: #d61922;" class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('guitareo') }}/shop" >Deals</a>
+                    <a class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('guitareo') }}/shop" >Shop</a>
                     <a class="" href="{{ get_legacy_brand_base_url('guitareo') }}/riff" >Blog</a>
 
                 </div>
@@ -156,7 +156,7 @@
         ])
             @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Shop",
-                "linkIcon" => "fas fa-tag text-promo",
+                "linkIcon" => "fas fa-tag",
                 "linkUrl" => "/shop",
             ])
         @include('drumeo.sales.partials._nav-link', [
