@@ -81,7 +81,7 @@
             <h1 class="leading-none my-5 uppercase font-lexend"><strong>Everything you need to<br class="hidden sm:inline"> start
                     playing the drums.</strong></h1>
             @if(empty($membersVersion))
-                <h5 class="leading-normal text-musora mb-4 sm:mb-5">Get the highest-rated beginner e-kit <strong>PLUS</strong> an annual membership to Drumeo.<br>
+                <h5 class="leading-normal text-musora mb-4 sm:mb-5">Get the highest-rated beginner e-kit <strong>PLUS</strong> a 1-Year Membership to Drumeo.<br>
                     <em>+ 3 LAUNCH-ONLY BONUSES</em></h5>
             @endif
             <h4 class="leading-tight mb-4 sm:mb-5 uppercase"> Only
