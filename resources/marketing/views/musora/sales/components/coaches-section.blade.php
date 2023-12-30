@@ -4,7 +4,7 @@
     <div class="max-w-3xl mx-auto">
         <h2 class="leading-tight font-extrabold">{!! $header !!}</h2>
         @if(!empty($desc))
-            <p class="leading-tight px-4 md:px-0 mt-3 mb-5 md:mb-0 max-w-md mx-auto">{!! $desc !!}</p>
+            <p class="leading-tight px-4 md:px-0 mt-3 mb-5 md:mb-0 mx-auto">{!! $desc !!}</p>
         @endif
     </div>
 
@@ -52,37 +52,43 @@
                     class="max-w-6xl mx-auto px-4 lg:px-6 mb-6 md:mb-0 md:absolute md:inset-0"
                     :class="!(isMobile || (!isMobile && selectedId === {{ $key+1 }})) && 'opacity-0'"
                 >
-                    <h4 class="font-extrabold text-left mb-2 md:hidden">{!!  $course['title']  !!}</h4>
+                    <h4 class="font-extrabold mb-3 md:hidden">{!!  $course['title']  !!}</h4>
                     <div
                         x-data="{
                                 init() {
                                     new Splide(this.$refs.splide, {
                                         classes: {
                                                 arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
-                                                prev: 'hidden',
+                                                prev: 'splide__arrow--prev your-class-prev hidden sm:flex -left-1',
                                                 next: 'splide__arrow--next your-class-next hidden sm:flex -right-1',
-                                                pagination: 'splide__pagination hidden md:flex -bottom-10',
+                                                pagination: 'splide__pagination flex -bottom-10',
                                         },
-                                        perPage: 4.5,
+                                        padding: '3rem',
+                                        perPage: 4,
                                         perMove: 1,
                                         type: 'loop',
                                         focus: 0,
                                         interval: 2000,
                                         breakpoints: {
+                                            1020: {
+                                                padding: '2rem',
+                                            },
                                             720: {
-                                                perPage: 3.5,
+                                                padding: '3rem',
+                                                perPage: 3,
                                                 drag   : 'free',
                                                 snap   : false,
                                             },
                                             620: {
-                                                perPage: 2.5,
+                                                padding: '1rem',
+                                                perPage: 2,
                                             },
                                         },
                                     }).mount()
                                 },
                             }"
                     >
-                        <section x-ref="splide" class="splide mb-10 md:mb-20 h-44 sm:h-48 lg:h-72">
+                        <section x-ref="splide" class="splide mb-20 h-44 sm:h-48 lg:h-72">
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @foreach ($course['images'] as $image)
@@ -115,7 +121,7 @@
         </div>
     </div>
 
-    <div class="text-center mt-10 px-4 sm:px-0">
+    <div class="text-center sm:mt-10 lg:mt-0 px-4 sm:px-0">
         @if(empty($promoVersion))
             <a href="/coaches" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-72 join outline black smaller">EXPLORE COURSES</a>
         @endif

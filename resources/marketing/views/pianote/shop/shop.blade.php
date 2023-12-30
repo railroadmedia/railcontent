@@ -33,28 +33,16 @@
         @php
             $bundles = [
                 [
-                    'slug' => '/shop/ultimate-lessons-bundle',
-                    'desc' => '11 Free Bonuses<br> Worth $933',
+                    'slug' => '/new-year#customize-anchor',
+                    'desc' => 'Join Pianote and get 4 books, 4 courses<br>  a practice poster PLUS a metronome.',
+                    'full' => true,
                     'visible' => 1,
-                    'specialW' => true,
-                    'price' => 1173,
+                    'price' => 855,
                     'discountedPrice' => 240,
                     'buttonColor' => '#F61A30',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card4.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m4.jpg',
-                ],
-                [
-                    'slug' => '/shop/30-day-challenge-bundle',
-                    'desc' => '7 Online Courses <br>For The Price Of 1',
-                    'visible' => 1,
-                    'specialW2' => true,
-                    'price' => 706,
-                    'discountedPrice' => 127,
-                    'buttonColor' => '#01C1FF',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30-day-challenge-bundle-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
+                    'title' => "New Year's Bundle",
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/december/new-year-bundle.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/december/new-year-bundle-m.jpg',
                 ],
             ];
         @endphp

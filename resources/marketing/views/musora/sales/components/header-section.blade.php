@@ -1,33 +1,60 @@
-<header class="text-center px-5 sm:px-6 py-32 sm:py-52 lg:py-56 relative overflow-hidden" style="background:linear-gradient(to bottom, #fff 40%, #ecf3f9);">
-    <div class="container max-w-xs sm:max-w-6xl mx-auto relative z-20">
-        <h1 class="relative w-auto inline-block text-3xl sm:text-4xl lg:text-5xl">
-            <strong>{!! $header !!}</strong>
+<header class="text-center px-5 sm:px-6 py-44 sm:py-52 lg:py-56 relative overflow-hidden" style="background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);">
+    <div class="container max-w-6xl mx-auto relative z-20">
+        @if(!empty($noExcuse))
+            <h4 class="font-lexend leading-tight uppercase mb-3 sm:mb-4">NEW YEAR. <span class="text-{{$theme}}"> NO EXCUSES.</span></h4>
+        @endif
+        <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase"
+        @if(!empty($testimonialVersion))
+        style="font-weight: 400!important;line-height:1.5em!important;font-family: 'Sedgwick Ave', sans-serif;background: -webkit-linear-gradient(20deg, #980353, #003285, #00B59F);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"
+        @endif
+        >
+            {!! $header !!}
             @if(!empty($underline))
-                <img class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2023/underline.png" alt="underline" fetchpriority="high">
+                <svg class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%;"
+                    xmlns="http://www.w3.org/2000/svg" width="524" height="22" viewBox="0 0 524 22" fill="none">
+                    <path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="@if(!empty($fillColor)) {{ $fillColor }} @else #ffac00 @endif" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="@if(!empty($fillColor)) {{ $fillColor }} @else #ffac00 @endif" stroke-width="3" stroke-linecap="round"/>
+                </svg>
             @endif
         </h1>
-        <h6 class="leading-relaxed sm:mt-6 mb-4 sm:mb-7 px-5 sm:px-0 max-w-xs sm:max-w-full">{!! $desc !!}</h6>
-        <a class="sm:mx-1 w-full sm:w-56 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
-            @if(!empty($promoVersion))
-                href="#customize-anchor"
-            @elseif(!empty($month))
-                href="/choose-your-trial-month"
-            @else
-                href="/choose-plan"
-            @endif
-        >
-            @if(!empty($promoVersion) && empty($trialVersion))
-                @if(!empty($cta))
-                    {!! $cta !!}
+        @if(!empty($boldText))
+            <h5 class="leading-tight uppercase mb-5 lg:mb-7 tracking-wide"><strong>Guided play-along lessons that<br class="sm:hidden"> are guaranteed to work.</strong></h5>
+        @endif
+        @if(empty($boldText))
+        <p class="text-sm leading-normal tracking-widest mb-5 lg:mb-7">
+            <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
+            <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
+            <br class="lg:hidden">
+            <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> {!! $pointThree !!}
+            <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointFour !!}
+        </p>
+        @endif
+        <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
+            <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
+                @if(!empty($promoVersion))
+                    href="#customize-anchor"
+                @elseif(!empty($month))
+                    href="/choose-your-trial-month"
                 @else
-                    SEE YOUR DEAL &raquo;
+                    href="/choose-plan"
                 @endif
-            @elseif(!empty($month))
-                30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
-            @else
-                7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+            >
+                @if(!empty($promoVersion) && empty($trialVersion))
+                    @if(!empty($cta))
+                        {!! $cta !!}
+                    @else
+                        SEE YOUR DEAL &raquo;
+                    @endif
+                @elseif(!empty($month))
+                    30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                @else
+                    7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                @endif
+            </a>
+            @if(empty($noTrailer))
+                <div class="sm:mx-0.5 w-full sm:w-56 join outline black smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
             @endif
-        </a>
+        </div>
         <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
             <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                 <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
@@ -87,46 +114,46 @@
     </picture>
 @endforeach
 </header>
-
-<section class="sm:px-6 py-4 sm:py-5 text-white" style="background:#0c1524;">
-    <div class="container max-w-4xl mx-auto">
-        @component('_partials.components.carousel',[
-            'xdata' => "
-                classes: {
-                    arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 header-slide-btn',
-                    prev: 'hidden',
-                    next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
-                    pagination: 'hidden',
-                },
-                perPage: 1,
-                perMove: 1,
-                type: 'loop',
-                autoplay: true,
-                pauseOnHover: true,
-                pauseOnFocus: true,
-                interval: 3000,
-            ",
-        ])
-            @slot('content')
-                @foreach ($slides as $slide)
-                    <li class="splide__slide">
-                        <div class="px-3 md:px-6 text-center">
-                            <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
-                            <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
-                                <img
-                                    class="rounded-full object-cover object-right w-9 h-9 transition-opacity opacity-0"
-                                    src={{ $slide['thumb'] }}
-                                    loading="lazy"
-                                    onload="this.classList.remove('opacity-0')"
-                                    alt="{{$slide['name']}}"
-                                    decoding="async"
-                                ><br class="inline md:hidden">
-                                <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
+@if(!empty($slides))
+    <section class="sm:px-6 py-4 sm:py-5 text-white" style="background:#0c1524;">
+        <div class="container max-w-5xl mx-auto">
+            @component('_partials.components.carousel',[
+                'xdata' => "
+                    classes: {
+                        arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 header-slide-btn',
+                        prev: 'splide__arrow--prev your-class-prev hidden sm:flex z-50',
+                        next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                        pagination: 'hidden',
+                    },
+                    perPage: 1,
+                    perMove: 1,
+                    type: 'loop',
+                    autoplay: true,
+                    pauseOnHover: true,
+                    pauseOnFocus: true,
+                    interval: 3000,
+                ",
+            ])
+                @slot('content')
+                    @foreach ($slides as $slide)
+                        <li class="splide__slide">
+                            <div class="px-3 md:px-6 text-center">
+                                <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
+                                <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
+                                    <img
+                                        class="rounded-full object-cover object-right w-9 h-9 transition-opacity opacity-0"
+                                        src={{ $slide['thumb'] }}
+                                        loading="lazy"
+                                        onload="this.classList.remove('opacity-0')"
+                                        alt="{{$slide['name']}}"
+                                    ><br class="inline md:hidden">
+                                    <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                @endforeach
-            @endslot
-        @endcomponent
-    </div>
-</section>
+                        </li>
+                    @endforeach
+                @endslot
+            @endcomponent
+        </div>
+    </section>
+@endif

@@ -114,7 +114,7 @@ class SalesController extends BaseController
     }
     public function promo()
     {
-        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true']);
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'promoPage' => 'true']);
     }
     public function promoEG()
     {
@@ -320,6 +320,11 @@ class SalesController extends BaseController
         return view('drumeo.sales.affiliate.'.$page, ['theme' => 'drumeo', 'month' => true]);
 
         throw new NotFoundHttpException();
+    }
+
+    public function kitLifetime()
+    {
+        return view('drumeo.products.kit', ['theme' => 'drumeo', 'membersVersion' => true]);
     }
 
     public function pro()

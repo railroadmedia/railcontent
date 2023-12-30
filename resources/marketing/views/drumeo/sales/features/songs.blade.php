@@ -8,8 +8,8 @@
     <title>Drumeo | Play your favorite songs.</title>
     <meta property="og:title" content="Drumeo | Play your favorite songs.">
     <meta property="og:url" content="https://www.drumeo.com/songs">
-    <meta name="description" content="Get 5000+ note-for-note song breakdowns for every style, era, and skill with handy play-along tools">
-    <meta property="og:description" content="Get 5000+ note-for-note song breakdowns for every style, era, and skill with handy play-along tools">
+    <meta name="description" content="Get {{ Prices::$drumeoSongs }}+ note-for-note song breakdowns for every style, era, and skill with handy play-along tools">
+    <meta property="og:description" content="Get {{ Prices::$drumeoSongs }}+ note-for-note song breakdowns for every style, era, and skill with handy play-along tools">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/method/share-image-songs.jpg" style="display: none;">
 @endsection
 
@@ -23,7 +23,7 @@
 
 @section('header', 'Play your favorite songs.')
 
-@section('desc', 'Get 5000+ note-for-note song breakdowns for every style, era, and skill with handy play-along tools.')
+@section('desc', 'Get 6000+ note-for-note song breakdowns for every style, era, and skill with handy play-along tools.')
 
 @section('page-body')
     <section class="py-12 md:py-20">

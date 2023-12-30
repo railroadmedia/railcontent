@@ -1,16 +1,15 @@
     <?php
-
-    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/dorothea-taylor.webp';
-    $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/todd-sucherman.webp';
-    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/jared-falk.webp';
-    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/hannah-welton.webp';
-    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/larnell-lewis.webp';
-    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/zack-grooves.webp';
-    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/domino-santatonio.webp';
-    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/bubbles/aaron-spears.webp';
+    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/dorothea-taylor.png';
+    $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/jonathan-moffett.png';
+    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/brandon-toews.png';
+    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/emmanuelle-caplette.png';
+    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/dennis-chambers.png';
+    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/zack-grooves.png';
+    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/domino-santatonio.png';
+    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/simon-phillips.png';
 
     $drumeo = [
-        
+
         'bubbles' => [
     [
         'src' => $bubble1,
@@ -73,24 +72,21 @@
         ],
         "gridItems" => [
             [
-                "image" =>
-                "marketing/drumeo/membership/homepage/webp-format/10-level-cirriculum.webp",
+                "big" => true,
+                "image" => "marketing/drumeo/membership/homepage/2024/10-level-curriculum.jpg",
                 "title" => "10-Level Curriculum",
-                "desc" =>
-                "The most trusted step-by-step video lessons for every technique, pattern, and style.",
+                "desc" => "The most trusted step-by-step video lessons for every technique, pattern, and style.",
                 "lessonInfo" => [
                     [
                         "thumb" =>
-                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/10-level-cirriculum.webp",
+                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/10-level-curriculum.jpg",
                     ],
                 ],
             ],
             [
-                "image" =>
-                "marketing/drumeo/membership/homepage/webp-format/practical-assignments.webp",
+                "image" => "marketing/drumeo/membership/homepage/2024/practical-assignments.jpg",
                 "title" => "Practical Assignments",
-                "desc" =>
-                "Keep up your progress with clear assignments and handy practice tools for every level.",
+                "desc" => "Keep up your progress with clear assignments and handy practice tools for every level.",
                 "lessonInfo" => [
                     [
                         "thumb" =>
@@ -99,11 +95,20 @@
                 ],
             ],
             [
-                "image" =>
-                "marketing/drumeo/membership/homepage/2023/guided-workouts2.jpg",
+                "image" => "marketing/drumeo/membership/homepage/webp-format/downloadable-videos.webp",
+                "title" => "Downloadable Videos",
+                "desc" => "Stream your lessons OR download your videos so you can practice anywhere, anytime.",
+                "lessonInfo" => [
+                    [
+                        "thumb" =>
+                            "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/downloadable-videos.webp",
+                    ],
+                ],
+            ],
+            [
+                "image" => "marketing/drumeo/membership/homepage/2024/guided-workouts.jpg",
                 "title" => "Guided Workouts",
-                "desc" =>
-                "Stay inspired with guided workouts where you’ll play along with your teacher in real time.",
+                "desc" => "Stay inspired with guided workouts where you’ll play along with your teacher in real time.",
                 "lessonInfo" => [
                     [
                         "thumb" =>
@@ -112,11 +117,10 @@
                 ],
             ],
             [
-                "image" =>
-                "marketing/drumeo/membership/homepage/webp-format/world-class-teachers.webp",
+                "big" => true,
+                "image" => "marketing/drumeo/membership/homepage/2024/world-class-teachers.jpg",
                 "title" => "World-Class Teachers",
-                "desc" =>
-                "The best drummers are here — including Grammy Award winners and touring musicians.",
+                "desc" => "The best drummers are here — including Grammy Award winners and touring musicians.",
                 "lessonInfo" => [
                     [
                         "thumb" =>
@@ -125,24 +129,9 @@
                 ],
             ],
             [
-                "image" =>
-                "marketing/drumeo/membership/homepage/webp-format/downloadable-videos.webp",
-                "title" => "Downloadable Videos",
-                "desc" =>
-                "Stream your lessons OR download your videos so you can practice anywhere, anytime.",
-                "lessonInfo" => [
-                    [
-                        "thumb" =>
-                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/downloadable-videos.webp",
-                    ],
-                ],
-            ],
-            [
-                "image" =>
-                "marketing/drumeo/membership/homepage/webp-format/personalized-support.webp",
+                "image" => "marketing/drumeo/membership/homepage/2024/personalized-support.jpg",
                 "title" => "Personalized Support",
-                "desc" =>
-                "Get weekly live streams, student lesson plans, and access to a global drum community.",
+                "desc" => "Get weekly live streams, student lesson plans, and access to a global drum community.",
                 "lessonInfo" => [
                     [
                         "thumb" =>
@@ -313,141 +302,90 @@
                 ],
             ],
         ],
+        "workouts" => ["https://i.vimeocdn.com/video/1768362015-3ecb7c06c2936cc71622cc11344fb791715f25b786d43857f87d923f6a09522b-d_500.jpg"],
         "songItems" => [
             [
-                "icon" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/5000-songs-icon.svg",
-                "title" => "5000+ popular songs.",
-                "desc" =>
-                "Get note-for-note song breakdowns for every style, era, and skill level.",
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/5000-songs-icon.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs.mp4",
+                "title" => "6000+ popular songs.",
+                "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
             ],
             [
-                "icon" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/tempo-icon.svg",
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/tempo-icon.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/speed.mp4",
                 "title" => "Find the perfect tempo.",
-                "desc" =>
-                "Slow down or speed up any section of a song to hear every note.",
+                "desc" => "Slow down or speed up any section of a song to hear every note.",
             ],
             [
-                "icon" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/loop-icon.svg",
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/loop-icon.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/loop.mp4",
                 "title" => "Loop the trouble spots.",
-                "desc" =>
-                "No more pausing and rewinding that tricky fill. Loop it over and over again!",
+                "desc" => "No more pausing and rewinding that tricky fill. Loop it over and over again!",
             ],
             [
-                "icon" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/no-drums-icon.svg",
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/no-drums-icon.svg",
+                "media" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/768x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/drumless-feature2.jpg",
                 "title" => "Remove the drums.",
-                "desc" =>
-                "Magically remove the original drums to make each song uniquely yours.",
+                "desc" => "Magically remove the original drums to make each song uniquely yours.",
             ],
             [
-                "icon" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/play-it-right-icon.svg",
-                "title" => "Play it right the first time.",
-                "desc" =>
-                "Get perfect notation and learn to play accurately from the get-go.",
-            ],
-            [
-                "icon" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/devices-icon.svg",
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/devices-icon.svg",
+                "media" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/768x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/devices-feature2.jpg",
                 "title" => "Take your songs anywhere.",
-                "desc" =>
-                "Accessible on any device, or printable,so you can play any song, any time.",
+                "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
             ],
         ],
         "testimonials" => [
             [
-                "image" =>
-                    "https://i.vimeocdn.com/video/1768362015-3ecb7c06c2936cc71622cc11344fb791715f25b786d43857f87d923f6a09522b-d_500.jpg",
-                "name" => "Tarah Mark",
-                "video" => "878790651",
-                "title" => "Now I actually get to make my own rhythms and beats.",
-                "description" => "Now I actually get to make my own rhythms and beats.",
-            ],
-            [
-                "image" =>
-                "https://i.vimeocdn.com/video/1751944105-765a9cc9ef08e836de7b0c436c50e50aa828db3e7773409007e186cc071ec45b-d_500.jpg",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Claudio-Sanchez-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Claudio-Sanchez-profile.jpg",
                 "name" => "Claudio Sanchez",
+                "location" => "California, USA",
                 "video" => "877648411",
-                "title" => "Becoming a musician has completed a part of my life.",
-                "description" => "Becoming a musician has completed a part of my life.",
+                "title" => "I’ve always wanted to play in front of a crowd – at least once in my lifetime – and now <strong>I’ve already achieved that!</strong>",
             ],
             [
-                "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/ed-koop.jpg",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Ed-Koop-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Ed-Koop-profile.jpg",
                 "name" => "Ed Koop",
+                "location" => "California, USA",
                 "video" => "342059271",
-                "title" => "I’m loving music more than I ever did before!",
-                "description" =>
-                "After 20 years away from the drums, Ed says he’s loving music more than ever. He nailed his first audition and has now played at the venues of his dreams.",
+                "title" => "<strong>I’m loving music more</strong> than I ever did before – and I just couldn’t be happier. They have all the resources you need and it’s so easy to use!",
             ],
             [
-                "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/barry-lisle.webp",
-                "name" => "Barry Lisle",
-                "video" => "342066433",
-                "title" => "They walk you through, step-by-step, for any goal.",
-                "description" =>
-                "Barry wanted something to keep his mind busy, so he revisited the instrument he’d loved as a kid: the drums. Now he’s playing in bands and recording an album.",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Gabriel-Queija-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Gabriel-Queija-profile.jpg",
+                "name" => "Gabriel Queija",
+                "location" => "Canada",
+                "video" => "877591404",
+                "title" => "It was everything I was looking for – they have <strong>great teachers, great courses, great everything</strong>! They help you so much. ",
             ],
             [
-                "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/lisa-aragon.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Tarah-Mark-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Tarah-Mark-profile.jpg",
+                "name" => "Tarah Mark",
+                "location" => "California, USA",
+                "video" => "878790651",
+                "title" => "I don’t feel the pressure to become this rock legend. I’m just going to me – and now I actually get to <strong>make my own rhythms and my own beat.</strong>",
+            ],
+            [
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Lisa-Aragon-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Lisa-Aragon-profile.jpg",
                 "name" => "Lisa Aragon",
+                "location" => "Washington, USA",
                 "video" => "373252004",
-                "title" => "I was able to play drums on stage!",
-                "description" =>
-                "Lisa got interested in the drums by playing Rock Band. She had no idea she’d be performing with strangers in Nashville just a few years later.",
+                "title" => "You don’t have to schedule an instructor. <strong>I can do this when I want</strong>, it’s a lot cheaper, and I can still ask questions. ",
             ],
             [
-                "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/guy-dobbins.webp",
-                "name" => "Guy Dobbins",
-                "video" => "373445704",
-                "title" =>
-                "Drummers from all around the world helping you out.",
-                "description" =>
-                "Guy had trouble figuring out a song, he reached out and an instructor walked him through it that same day - getting him through the gig that evening.",
-            ],
-            [
-                "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/omari-augustine.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Omari-Augustine-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Omari-Augustine-profile.jpg",
                 "name" => "Omari Augustine",
+                "location" => "Trinidad & Tobago",
                 "video" => "553438851",
-                "title" =>
-                "Something you can’t get from having a drum teacher.",
-                "description" =>
-                "Omari had big shoes to fill. His father was already an accomplished drummer in Trinidad & Tobago when Omari decided to take his drumming to the next level.",
-            ],
-            [
-                "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/marlene-rosen.webp",
-                "name" => "Marlene Rosen",
-                "video" => "373446024",
-                "title" => "I’m rediscovering music again.",
-                "description" =>
-                "Marlene, a cancer survivor, filled her recovery time with drumming and was able to progress at a pace that worked for her.",
-            ],
-            [
-                "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/jay-damberg-2.webp",
-                "name" => "Jay Damberg",
-                "video" => "373445466",
-                "title" =>
-                "Anytime, day or night, I can access the lessons I need.",
-                "description" =>
-                "With a full-time job and a family, Jay often can’t practice drums until late at night, which is why he loves being able to access Drumeo whenever he wants.",
-            ],
-            [
-                "image" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/webp-format/testimonials/ivy-elizondo-2.webp",
-                "name" => "Ivy Elizondo",
-                "video" => "373445819",
-                "title" => "Now we have a band and we’re recording an album!",
-                "description" =>
-                "When Ivy’s kids decided to stop playing drums, she jumped on the throne instead — she’s used Drumeo to build a foundation and formed a band.",
+                "title" => "Drumeo is a great place to learn. They have lessons <strong>from basics to advanced</strong> drumming. There’s always something new to learn. ",
             ],
         ],
          "testimonialsShopVersion" => [

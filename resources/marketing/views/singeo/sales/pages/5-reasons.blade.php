@@ -171,8 +171,7 @@
         @endphp
     @include('musora.sales.components.testimonials-section', [
         'desktopGrid' => true,
-        'header' => 'Singeo has helped THOUSANDS of<br class="hidden sm:inline"> singers find their dream voice. ',
-        'reviewText' => 'Here’s what they’re saying.',
+        'header' => 'singers',
     ])
 
     <div class="unstick-trigger block"></div>
