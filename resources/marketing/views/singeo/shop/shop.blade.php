@@ -22,7 +22,7 @@
 
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => '<span class="text-promo">Save up to 67%</span> on singing lessons,<br class="sm:hidden"> merch, & more.',
+        'text' => 'GET LESSONS, MERCH, GEAR, & MUCH MORE',
         'bg' => 'https://d21xeg6s76swyd.cloudfront.net/products/shop-header.jpg',
     ])
 

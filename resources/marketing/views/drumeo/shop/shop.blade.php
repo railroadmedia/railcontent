@@ -23,7 +23,7 @@
 
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => '<span class="text-promo">Save up to 86%</span> on drum lessons,<br class="sm:hidden"> tools, & merch.',
+        'text' => 'GET LESSONS, MERCH, GEAR, & MUCH MORE',
         'bg' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg',
     ])
 

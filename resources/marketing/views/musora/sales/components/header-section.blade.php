@@ -5,7 +5,7 @@
         @endif
         <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase"
         @if(!empty($testimonialVersion))
-        style="font-weight: 400!important;line-height:1.5em!important;font-family: 'Sedgwick Ave', sans-serif;background: -webkit-linear-gradient(20deg, #980353, #003285, #00B59F);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"
+        style="margin-bottom:15px!important;font-weight: 400!important;line-height:1.5em!important;font-family: 'Sedgwick Ave', sans-serif!important;text-transform: none!important;background: -webkit-linear-gradient(20deg, #980353, #003285, #00B59F);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"
         @endif
         >
             {!! $header !!}

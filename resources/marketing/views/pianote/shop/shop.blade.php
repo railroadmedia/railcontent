@@ -22,8 +22,9 @@
 @endsection
 
 @section('body')
+
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => '<span class="text-promo">Save up to 84%</span> on piano lessons,<br class="sm:hidden"> tools, & merch.',
+        'text' => 'GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!',
         'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg',
     ])
 
@@ -142,18 +143,6 @@
                          "title" => "Ultimate Lessons Bundle",
                          "fullPrice" => 240,
                          "price" => 240,
-                         "category" => "lessons",
-                         'soldOut' => false,
-                    ])
-                </div>
-                <div x-cloak x-show="filter === 'lessons'">
-                    @include('_partials.components.shop.product-card', [
-                         "itemURL" => "/shop/30-day-challenge-bundle",
-                         "sku" => null,
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-shop-thumb2.jpg",
-                         "title" => "30 Day Challenge Bundle",
-                         "fullPrice" => 706,
-                         "price" => 127,
                          "category" => "lessons",
                          'soldOut' => false,
                     ])
