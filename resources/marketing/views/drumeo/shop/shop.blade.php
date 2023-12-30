@@ -131,44 +131,20 @@
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Online Drum Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-{{--                @include('_partials.components.shop.product-card', [--}}
-{{--                     "itemURL" => "/",--}}
-{{--                     "sku" => null,--}}
-{{--                     "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",--}}
-{{--                     "title" => "Drumeo Membership",--}}
-{{--                     "packAuthor" => "Award-Winning Membership",--}}
-{{--                     "cardDescription" => "The Ultimate Online Drum Lessons Experience. You’ll get step-by-step drum lessons from the best drummers in the world (and much more).",--}}
-{{--                     "specialPrice" => "7-Day Free Trial",--}}
-{{--                     "fullPrice" => 240,--}}
-{{--                     "price" => 240,--}}
-{{--                     "category" => "lessons",--}}
-{{--                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",--}}
-{{--                     'soldOut' => false,--}}
-{{--                ])--}}
-                <div x-cloak x-show="filter === 'lessons'">
-                    @include('_partials.components.shop.product-card', [
-                         "itemURL" => "/drumshop/ultimate-lessons-bundle",
-                         "sku" => null,
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/drumeo-ultimate-shop-thumb2.jpg",
-                         "title" => "Ultimate Lessons Bundle",
-                         "fullPrice" => 240,
-                         "price" => 240,
-                         "category" => "lessons",
-                         'soldOut' => false,
-                    ])
-                </div>
-                <div x-cloak x-show="filter === 'lessons'">
-                    @include('_partials.components.shop.product-card', [
-                         "itemURL" => "/drumshop/perfect-gift-bundle",
-                         "sku" => null,
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/drumeo-pg-shop-thumb2.jpg",
-                         "title" => "The Perfect Gift Bundle",
-                         "fullPrice" => 331.95,
-                         "price" => 240,
-                         "category" => "lessons",
-                         'soldOut' => false,
-                    ])
-                </div>
+                @include('_partials.components.shop.product-card', [
+                     "itemURL" => "/",
+                     "sku" => null,
+                     "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",
+                     "title" => "Drumeo Membership",
+                     "packAuthor" => "Award-Winning Membership",
+                     "cardDescription" => "The Ultimate Online Drum Lessons Experience. You’ll get step-by-step drum lessons from the best drummers in the world (and much more).",
+                     "specialPrice" => "7-Day Free Trial",
+                     "fullPrice" => 240,
+                     "price" => 240,
+                     "category" => "lessons",
+                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
+                     'soldOut' => false,
+                ])
                 @foreach($lessons as $key => $lesson)
                     @include('_partials.components.shop.product-card', [
                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
@@ -209,18 +185,6 @@
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Accessories</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-                <div x-cloak x-show="filter === 'accessories'">
-                    @include('_partials.components.shop.product-card', [
-                         "itemURL" => "/drumshop/better-hands-bundle",
-                         "sku" => null,
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/drumeo-bh-shop-thumb2.jpg",
-                         "title" => "Better Hands Bundle",
-                         "fullPrice" => 200.94,
-                         "price" => 150.21,
-                         "category" => "accessories",
-                         'soldOut' => false,
-                    ])
-                </div>
                 @foreach($accessories as $accessory)
                     @include('_partials.components.shop.product-card', [
                         "sku" => $accessory->sku,

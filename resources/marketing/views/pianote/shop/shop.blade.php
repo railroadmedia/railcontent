@@ -120,33 +120,21 @@
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Piano Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-{{--                    @include('_partials.components.shop.product-card', [--}}
-{{--                          "itemURL" => "/",--}}
-{{--                          "sku" => null,--}}
-{{--                          "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",--}}
-{{--                          "title" => "Pianote Membership",--}}
-{{--                          "packAuthor" => "Lisa Witt",--}}
-{{--                          "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",--}}
-{{--                          "specialPrice" => "7-Day Free Trial",--}}
-{{--                          "fullPrice" => 240,--}}
-{{--                          "price" => 150,--}}
-{{--                          "category" => "lessons",--}}
-{{--                          "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",--}}
-{{--                          'soldOut' => false,--}}
-{{--                     ])--}}
-
-                <div x-cloak x-show="filter === 'lessons'">
                     @include('_partials.components.shop.product-card', [
-                         "itemURL" => "/shop/ultimate-lessons-bundle",
-                         "sku" => null,
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/november/bundles/pianote-ultimate-shop-thumb2.jpg",
-                         "title" => "Ultimate Lessons Bundle",
-                         "fullPrice" => 240,
-                         "price" => 240,
-                         "category" => "lessons",
-                         'soldOut' => false,
-                    ])
-                </div>
+                          "itemURL" => "/",
+                          "sku" => null,
+                          "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
+                          "title" => "Pianote Membership",
+                          "packAuthor" => "Lisa Witt",
+                          "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",
+                          "specialPrice" => "7-Day Free Trial",
+                          "fullPrice" => 240,
+                          "price" => 150,
+                          "category" => "lessons",
+                          "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
+                          'soldOut' => false,
+                     ])
+
                 @foreach($lessons as $key => $lesson)
                     @include('_partials.components.shop.product-card', [
                             "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
