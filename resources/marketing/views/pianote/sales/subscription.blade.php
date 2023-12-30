@@ -385,6 +385,14 @@
         ])
     @elseif(!empty($promoVersion))
 
+        @php
+            if(!empty($products['taktell-piccolo-metronome'])) {
+                $stock = $products['taktell-piccolo-metronome']->getPublicStockCount();
+            }
+            else {
+                $stock = '745';
+            }
+        @endphp
 
     @include('musora.sales.components.order-promo-cards-section', [
         // General
@@ -411,13 +419,13 @@
         'secondDeal' => "New Year’s Bundle",
         'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/new-year-bundle.png',
         'secondImageHeight'=> '',
-        'secondDealSub' => "Join Pianote + get 8 bonuses worth $615.",
-        'secondDealPrice' => floatval($productPrices['pianote-new-year']->discounted_price),
-        'secondDealDiscount' => floatval($productPrices['pianote-new-year']->price),
+        'secondDealSub' => "Join Pianote + get 8 bonuses worth $621.",
+        'secondDealPrice' => 240,
+        'secondDealDiscount' => 861,
         "secondDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[taktell-piccolo-metronome]=1&products[little-book-hanon]=1&products[little-book-chord]=1&products[little-book-arpeggios]=1&products[pianote-practice-planner]=1&products[100-days-of-practice-poster]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&redirect=/order&locked=true",
         'secondExtraBonuses' => [
-            '<span class="text-pianote"><strong>BONUS</strong></span> Metronome <span class="italic">($79 value) <span class="text-pianote"><span class="line-through ">800 </span><strong>745</strong> left!</span></span>',
-            '<span class="text-pianote"><strong>BONUS</strong></span> Little Book Bundle <span class="italic">($15 value)</span>',
+            '<span class="text-pianote"><strong>BONUS</strong></span> Metronome <span class="italic">($79 value) <span class="text-pianote"><span class="line-through ">800 </span><strong>' . $stock .'</strong> left!</span></span>',
+            '<span class="text-pianote"><strong>BONUS</strong></span> Little Book Bundle <span class="italic">($21 value)</span>',
             '<span class="text-pianote"><strong>BONUS</strong></span> Pianote Practice Planner <span class="italic">($39 value)</span>',
             '<span class="text-pianote"><strong>BONUS</strong></span> 100 Days of Practice Poster <span class="italic">($9 value)</span>',
             '<span class="text-pianote"><strong>BONUS</strong></span> New Piano Players Start Here <span class="italic">($127 value)</span>',
