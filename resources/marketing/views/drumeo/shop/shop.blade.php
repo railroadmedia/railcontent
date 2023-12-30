@@ -36,7 +36,7 @@
                 $bundles = [
                     [
                         'slug' => '/drumshop/kit',
-                        'desc' => 'Get the ultimate starter e-kit <br class="sm:hidden"> + one year of <br> Drumeo.',
+                        'desc' => 'Get the ultimate starter e-kit <br> + one year of Drumeo.',
                         'visible' => 1,
                         'price' => floatval($productPrices['alesis-ekit']->price),
                         'discountedPrice' => floatval($productPrices['alesis-ekit']->discounted_price),
@@ -46,8 +46,8 @@
                         'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/december/alesis-shop-m.jpg',
                     ],
                     [
-                        'slug' => '/drumshop/practice-anywhere-bundle',
-                        'desc' => 'A practice pad, stand and sticks <br class="sm:hidden"> so you can practice <br>anywhere.',
+                        'slug' => '/new-year#customize-anchor',
+                        'desc' => 'A practice pad, stand and sticks <br> so you can practice anywhere.',
                         'visible' => 1,
                         'price' => floatval($productPrices['practice-anywhere']->price),
                         'discountedPrice' => floatval($productPrices['practice-anywhere']->discounted_price),

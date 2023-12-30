@@ -363,9 +363,10 @@
         'firstDeal'=> "Pianote Only",
         'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/pianote-only.jpg',
         'firstImageHeight'=> 'h-32',
-        'firstDealPrice' => floatval($productPrices['pianote']->price),
+        'firstDealPrice' => 180,
+        'firstDealDiscount' => 240,
         'firstDealSub' => "Save 25% on your first year. No bonuses.",
-        "firstDealLink" => "/ecommerce/add-to-cart?products[pianote]=1",
+        "firstDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&promo-code=newyeardeal&redirect=/order&locked=true",
 
         // Second deal
         'secondDeal' => "New Year’s Bundle",
@@ -374,7 +375,7 @@
         'secondDealSub' => "Join Pianote + get 8 bonuses worth $615.",
         'secondDealPrice' => floatval($productPrices['pianote-new-year']->discounted_price),
         'secondDealDiscount' => floatval($productPrices['pianote-new-year']->price),
-        "secondDealLink" => "/ecommerce/add-to-cart?products[pianote-new-year]=1",
+        "secondDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[taktell-piccolo-metronome]=1&products[little-book-hanon]=1&products[little-book-chord]=1&products[little-book-arpeggios]=1&products[pianote-practice-planner]=1&products[100-days-of-practice-poster]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&redirect=/order&locked=true",
         'secondExtraBonuses' => [
             '<span class="text-pianote"><strong>BONUS</strong></span> Metronome <span class="italic">($79 value) <span class="text-pianote"><span class="line-through ">800 </span><strong>745</strong> left!</span></span>',
             '<span class="text-pianote"><strong>BONUS</strong></span> Little Book Bundle <span class="italic">($15 value)</span>',
@@ -386,7 +387,6 @@
             '<span class="text-pianote"><strong>BONUS</strong></span> Riffs & Fills <span class="italic">($99 value)</span>'
         ],
     ])
-
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png',

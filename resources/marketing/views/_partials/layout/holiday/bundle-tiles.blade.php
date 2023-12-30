@@ -15,7 +15,7 @@
                         @if(empty($bundle['img'])) style="background:linear-gradient(to bottom, {{ $bundle['bgColor'] }});" @endif >
                         <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0 py-6">
                              @if(isset($bundle['logo']))
-                            <img class="h-16 sm:h-20" src="{{ $bundle['logo'] }}"><br>
+                            <img class="h-12 sm:h-14 lg:h-16" src="{{ $bundle['logo'] }}"><br>
                             @endif
                             @if(isset($bundle['title']))
                                 <h2 class="leading-none"><strong>{{ $bundle['title'] }}</strong></h2>

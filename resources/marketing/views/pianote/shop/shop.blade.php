@@ -33,8 +33,8 @@
         @php
             $bundles = [
                 [
-                    'slug' => '/shop/pianote-new-year-bundle',
-                    'desc' => 'Join Pianote and get 4 books, <br class="sm:hidden"> 4 courses <br class="hidden sm:block"> a practice poster <br class="sm:hidden xl:block"> PLUS a metronome.',
+                    'slug' => '/new-year#customize-anchor',
+                    'desc' => 'Join Pianote and get 4 books, 4 courses<br>  a practice poster PLUS a metronome.',
                     'full' => true,
                     'visible' => 1,
                     'price' => 855,

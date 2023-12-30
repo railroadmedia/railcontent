@@ -40,9 +40,11 @@
     @php
      if(!empty($membersVersion)) {
           $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&locked=true';
+          $fullPrice = 499;
      }
      else {
-          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&products[drumeo_edge_1_year_access]=1&promo-code=free-with-ekit&locked=true';
+          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&products[drumeo_edge_1_year_access]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&locked=true';
+          $fullPrice = 1005.95;
      }
     @endphp
 @stop
@@ -82,12 +84,12 @@
                 <h5 class="leading-tight text-musora mb-4 sm:mb-5">Get the highest-rated beginner e-kit <strong>PLUS</strong> an annual membership to Drumeo.</h5>
             @endif
             <h4 class="leading-tight mb-4 sm:mb-5 uppercase"> Only
-                @if (floatval($productPrices['alesis-ekit']->price) > floatval($productPrices['alesis-ekit']->discounted_price))
-                    <s class="opacity-50">${{ floatval($productPrices['alesis-ekit']->price) }}</s>
+                @if ($fullPrice > floatval($productPrices['alesis-ekit']->discounted_price))
+                    <s class="opacity-50">${{ $fullPrice }}</s>
                     <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
                     {{-- (Save {{ round(100 - (100 * (floatval($productPrices['alesis-ekit']->discounted_price) / floatval($productPrices['alesis-ekit']->price)))) }}%) --}}
                 @else
-                    <strong>Only ${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
+                    <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
                 @endif
             </h4>
             <div class="w-full max-w-xs mx-auto">
@@ -311,12 +313,12 @@
                     </h6>
 
                     <h4 class="my-4 text-drumeo"> ONLY
-                        @if(floatval($productPrices['alesis-ekit']->price) > floatval($productPrices['alesis-ekit']->discounted_price))
-                            <s class="opacity-50">${{ floatval($productPrices['alesis-ekit']->price) }}</s>
+                        @if($fullPrice > floatval($productPrices['alesis-ekit']->discounted_price))
+                            <s class="opacity-50">${{ $fullPrice }}</s>
                             <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
                             {{-- (Save {{ round(100 - (100 * (floatval($productPrices['alesis-ekit']->discounted_price) / floatval($productPrices['alesis-ekit']->price)))) }}%) --}}
                         @else
-                            <strong>Only ${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
+                            <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
                         @endif
                     </h4>
                     <a href="{{ $orderUrl }}" class="join blue smaller w-full max-w-xs">BUY NOW</a>
