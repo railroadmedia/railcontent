@@ -218,32 +218,33 @@
                 alt="drum kit image" fetchpriority="high">
 
             <div class="text-center px-5 sm:px-6 py-4 sm:py-8 lg:py-14 text-white relative">
-                <div class="container max-w-5xl lg:flex items-baseline">
+                <div class="container max-w-5xl mx-auto lg:flex items-baseline">
                     <div class="text-left flex flex-wrap sm:flex-nowrap lg:justify-center items-start mb-5">
                         <div class="max-w-3xl sm:max-w-xl lg:max-w-2xl mx-0 z-10 sm:pr-20">
                             <div class="flex justify-around sm:justify-start mb-10">
-                                <div class="flex items-center pr-4">
-                                    <img class="h-6 sm:h-10 mr-1" loading="lazy" onload="this.classList.remove('opacity-0')"
+                                <div class="flex items-center sm:pr-4">
+                                    <img class="h-4 sm:h-10 mr-1" loading="lazy" onload="this.classList.remove('opacity-0')"
                                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/checkmark.svg"
                                         alt="checkmark icon">
-                                    <h2 class="uppercase"><strong>Lessons</strong></h2>
+                                    <h3 class="uppercase"><strong>Lessons</strong></h3>
                                 </div>
-                                <div class="flex items-center pr-4">
-                                    <img class="h-6 sm:h-10 mr-1" loading="lazy" onload="this.classList.remove('opacity-0')"
+                                <div class="flex items-center sm:pr-4">
+                                    <img class="h-4 sm:h-10 mr-1" loading="lazy" onload="this.classList.remove('opacity-0')"
                                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/checkmark.svg"
                                         alt="checkmark icon">
-                                    <h2 class="uppercase"><strong>Songs</strong></h2>
+                                    <h3 class="uppercase"><strong>Songs</strong></h3>
                                 </div>
-                                <div class="flex items-center pr-4">
-                                    <img class="h-6 sm:h-10 mr-1" loading="lazy" onload="this.classList.remove('opacity-0')"
+                                <div class="flex items-center sm:pr-4">
+                                    <img class="h-4 sm:h-10 mr-1" loading="lazy" onload="this.classList.remove('opacity-0')"
                                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/checkmark.svg"
                                         alt="checkmark icon">
-                                    <h2 class="text-musora uppercase relative">
+                                    <h3 class="text-musora uppercase relative">
                                         <strong>Drums</strong>
-                                        <img class="absolute bottom-2 right-0 h-4"
+                                        <img class="absolute h-4"
+                                            style="margin: -15px 0 0 -20px;"
                                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/new.svg"
                                             alt="New sign icon">
-                                    </h2>
+                                    </h3>
                                 </div>
                             </div>
                             <p class="leading-normal">

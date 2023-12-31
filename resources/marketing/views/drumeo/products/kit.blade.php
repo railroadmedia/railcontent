@@ -394,7 +394,6 @@
 
         <section class="px-4 sm:px-6 py-10">
         <div class="container max-w-5xl mx-auto relative z-50">
-            <h2 class="leading-tight mb-5 w-full text-center"><strong>E-Kit Shipping Notice</strong></h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mx-2">
                 <p class="leading-normal text-left p-2" style="width: 100%"><strong>Free shipping USA / Canada</strong><br>
                     Your Drumeo E-Kit will ship for free anywhere in the United States and Canada. </p>
