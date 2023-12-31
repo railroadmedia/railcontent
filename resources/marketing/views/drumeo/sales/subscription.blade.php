@@ -464,8 +464,8 @@
 
                  <p class="leading-normal text-left p-2"><strong>Global Shipping</strong><br>
                      We’ve automatically applied a $100 shipping discount that you’ll see during the checkout process. You may also need to pay duty depending on your country’s regulations.
-                     <br></br>Australia / New Zealand: <s>$267</s>  $167 shipping.
-                     <br>Rest of World: <s>$147</s> $47 shipping.
+                     <br>Australia / New Zealand: <s>$280.50</s> $180.50 shipping.
+                     <br>Rest of World: <s>$160.50</s> $60.50 shipping.
                  </p>
              </div>
          </div>
