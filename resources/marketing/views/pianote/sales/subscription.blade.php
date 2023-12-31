@@ -249,7 +249,7 @@
                             <span class="text-pianote">And it works.</span> <br><br>
                             So this year, don’t just wish you could play the piano. Join Pianote and know you can. <br><br>
                             (And we’re so confident, you’ll have 90 days to try it risk-free.)<br><br>
-                            Join today to save on your first year + get 8 FREE bonuses. <br><br>
+                            Join today and get 8 FREE bonuses. <br><br>
                             You’ll love it.
                             <br><br>
                             <span class="flex justify-center md:justify-start">

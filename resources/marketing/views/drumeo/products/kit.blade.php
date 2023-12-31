@@ -203,7 +203,7 @@
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/kit/6-big-snare-drum.png">
             </div>
             <div class="w-full sm:w-1/2 lg:w-5/12 sm:pl-7 lg:pl-10">
-                <h4 class="leading-tight"><strong>Big Fat Snare Drum</strong></h4>
+                <h4 class="leading-tight"><strong>More Snare Drum To Love</strong></h4>
                 <h6 class="leading-normal">A 10” snare drum helps you play with better technique AND gives you two strike zones. (Most entry-level kits have a tiny 8” snare!).</h6>
             </div>
         </div>
