@@ -438,7 +438,7 @@
 
         // second deal
         'secondDeal' => "E-Kit + Lessons",
-        'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/marketing/drumeo/promos/december/ekit-bundle.png',
+        'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/marketing/drumeo/products/kit/ekit-bundle.png',
         'secondImageHeight' => 'h-48',
         'secondDealSub' => "Everything you need to start playing the drums.",
         'secondDealPrice' => 499,
