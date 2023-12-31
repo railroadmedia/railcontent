@@ -454,6 +454,21 @@
     ],
 ])
 
+     <section class="px-4 sm:px-6 pt-10 pb-20">
+         <div class="container max-w-5xl mx-auto relative z-50">
+             <h2 class="leading-tight mb-5 w-full text-center"><strong>E-Kit Shipping Notice</strong></h2>
+             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mx-2">
+                 <p class="leading-normal text-left p-2" style="width: 100%"><strong>Free shipping USA / Canada</strong><br>
+                     Your Drumeo E-Kit will ship for free anywhere in the United States and Canada. </p>
+
+                 <p class="leading-normal text-left p-2"><strong>Global Shipping</strong><br>
+                     We’ve automatically applied a $100 shipping discount that you’ll see during the checkout process. You may also need to pay duty depending on your country’s regulations.
+                     <br></br>Australia / New Zealand: <s>$267</s>  $167 shipping.
+                     <br>Rest of World: <s>$147</s> $47 shipping.
+                 </p>
+             </div>
+         </div>
+     </section>
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-blue.png',

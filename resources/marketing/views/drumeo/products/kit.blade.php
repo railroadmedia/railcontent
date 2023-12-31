@@ -78,8 +78,13 @@
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/kit/drumeo-alesis-logo.png">
             </picture>
-            <h1 class="leading-none my-5 uppercase font-lexend"><strong>Everything you need to<br class="hidden sm:inline"> start
-                    playing the drums.</strong></h1>
+            <h1 class="leading-none my-5 uppercase font-lexend"><strong>
+                    @if(empty($membersVersion))
+                        Everything you need to<br class="hidden sm:inline"> start playing the drums.
+                    @else
+                        THE NEW DRUMEO<br class="hidden sm:inline"> DRUM KIT BY ALESIS
+                    @endif
+                </strong></h1>
             @if(empty($membersVersion))
                 <h5 class="leading-normal text-musora mb-4 sm:mb-5">Get the highest-rated beginner e-kit <strong>PLUS</strong> a 1-Year Membership to Drumeo.<br>
                     <em>+ 3 LAUNCH-ONLY BONUSES</em></h5>
@@ -140,32 +145,66 @@
 </div>
 
 <!-- next section-->
-<div class="px-4 sm:px-6 py-16 text-white" style="background: #01050D">
-    <div class="container max-w-5xl mx-auto relative z-50">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 w-full mx-2">
-            <div class="px-1">
-                <h5 class="leading-normal text-left"><strong>Neighbor-Friendly Drums</strong></h5>
-                <h5 class="pt-4 leading-normal text-left">Mesh heads give you the feel of real drums while maintaining a quiet volume for your neighbors and family.</h5>
+<div class="px-5 sm:px-8 py-10 sm:py-14 lg:py-20 text-white text-center sm:text-left" style="background: #01050D">
+    <div class="container max-w-5xl mx-auto">
+        <div class="flex flex-wrap items-center mb-8 sm:mb-20">
+            <div class="w-full sm:w-1/2 lg:w-7/12 mb-5 sm:mb-0 sm:order-1">
+                <img class="transition-opacity opacity-0 rounded-xl mx-auto max-w-xs sm:max-w-full" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/kit/1-neighbor-friendly.png">
             </div>
-            <div class="px-1">
-                <h5 class="leading-normal text-left"><strong>Play Your Favorite Songs</strong></h5>
-                <h5 class="pt-4 leading-normal text-left">Bluetooth connectivity lets you seamlessly mix your drums with Spotify or Apple Music and play along.</h5>
+            <div class="w-full sm:w-1/2 lg:w-5/12 sm:pr-7 lg:pr-10">
+                <h4 class="leading-tight "><strong>Neighbor-Friendly Drums</strong></h4>
+                <h6 class="leading-normal">Mesh heads give you the feel of real drums while maintaining a quiet volume for your neighbors and family.</h6>
             </div>
-            <div class="px-1">
-                <h5 class="leading-normal text-left"><strong>Fits In Any Room</strong></h5>
-                <h5 class="leading-normal text-left pt-4">Space is a luxury for drummers. Your Nitro Max fits in any room and folds up for easy storage between jam sessions.</h5>
+        </div>
+        <div class="flex flex-wrap items-center mb-8 sm:mb-20">
+            <div class="w-full sm:w-1/2 lg:w-7/12 mb-5 sm:mb-0">
+                <img class="transition-opacity opacity-0 rounded-xl mx-auto max-w-xs sm:max-w-full" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/kit/2-favorite-songs-bluetooth.png">
             </div>
-            <div class="px-1">
-                <h5 class="leading-normal text-left"><strong>Improve Your Timing & Feel</strong></h5>
-                <h5 class="pt-4 leading-normal text-left">Develop your internal clock with a built-in metronome that tells you if you’re ahead or behind the beat. </h5>
+            <div class="w-full sm:w-1/2 lg:w-5/12 sm:pl-7 lg:pl-10">
+                <h4 class="leading-tight"><strong>Play Your Favorite Songs</strong></h4>
+                <h6 class="leading-normal">Bluetooth connectivity lets you seamlessly mix your drums with Spotify or Apple Music and play along.</h6>
             </div>
-            <div class="px-1">
-                <h5 class="leading-normal text-left"><strong>Choose Your Favorite Sounds</strong></h5>
-                <h5 class="pt-4 leading-normal text-left">You’ll have 32 kit sounds from some of the most sampled drum sounds in history. You can find the perfect kit to play your favorite songs. </h5>
+        </div>
+        <div class="flex flex-wrap items-center mb-8 sm:mb-20">
+            <div class="w-full sm:w-1/2 lg:w-7/12 mb-5 sm:mb-0 sm:order-1">
+                <img class="transition-opacity opacity-0 rounded-xl mx-auto max-w-xs sm:max-w-full" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/kit/3-fits-anywhere.png">
             </div>
-            <div class="px-1">
-                <h5 class="leading-normal text-left"><strong>Big Fat Snare Drum</strong></h5>
-                <h5 class="leading-normal text-left pt-4">A 10” snare drum helps you play with better technique AND gives you two strike zones. (Most entry-level kits have a tiny 8” snare!).</h5>
+            <div class="w-full sm:w-1/2 lg:w-5/12 sm:pr-7 lg:pr-10">
+                <h4 class="leading-tight "><strong>Fits In Any Room</strong></h4>
+                <h6 class="leading-normal">Space is a luxury for drummers. Your Nitro Max fits in any room and folds up for easy storage between jam sessions.</h6>
+            </div>
+        </div>
+        <div class="flex flex-wrap items-center mb-8 sm:mb-20">
+            <div class="w-full sm:w-1/2 lg:w-7/12 mb-5 sm:mb-0">
+                <img class="transition-opacity opacity-0 rounded-xl mx-auto max-w-xs sm:max-w-full" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/kit/4-timing-metronome.png">
+            </div>
+            <div class="w-full sm:w-1/2 lg:w-5/12 sm:pl-7 lg:pl-10">
+                <h4 class="leading-tight"><strong>Improve Your Timing & Feel</strong></h4>
+                <h6 class="leading-normal">Develop your internal clock with a built-in metronome that tells you if you’re ahead or behind the beat. </h6>
+            </div>
+        </div>
+        <div class="flex flex-wrap items-center mb-8 sm:mb-20">
+            <div class="w-full sm:w-1/2 lg:w-7/12 mb-5 sm:mb-0 sm:order-1">
+                <img class="transition-opacity opacity-0 rounded-xl mx-auto max-w-xs sm:max-w-full" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/kit/5-favorite-sounds.png">
+            </div>
+            <div class="w-full sm:w-1/2 lg:w-5/12 sm:pr-7 lg:pr-10">
+                <h4 class="leading-tight "><strong>Choose Your Favorite Sounds</strong></h4>
+                <h6 class="leading-normal">You’ll have 32 kit sounds from some of the most sampled drum sounds in history. You can find the perfect kit to play your favorite songs. </h6>
+            </div>
+        </div>
+        <div class="flex flex-wrap items-center">
+            <div class="w-full sm:w-1/2 lg:w-7/12 mb-5 sm:mb-0">
+                <img class="transition-opacity opacity-0 rounded-xl mx-auto max-w-xs sm:max-w-full" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/kit/6-big-snare-drum.png">
+            </div>
+            <div class="w-full sm:w-1/2 lg:w-5/12 sm:pl-7 lg:pl-10">
+                <h4 class="leading-tight"><strong>Big Fat Snare Drum</strong></h4>
+                <h6 class="leading-normal">A 10” snare drum helps you play with better technique AND gives you two strike zones. (Most entry-level kits have a tiny 8” snare!).</h6>
             </div>
         </div>
     </div>
@@ -305,7 +344,13 @@
         <div class="container max-w-6xl mx-auto relative z-50">
             <div class="flex flex-wrap items-center px-4 sm:px-6 pt-10 md:py-10 lg:py-20">
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5">
-                    <h2 class="pb-6 sm:pb-4"><strong>Everything you need<br> to start playing<br> the drums.</strong></h2>
+                    <h2 class="pb-6 sm:pb-4"><strong>
+                            @if(empty($membersVersion))
+                                Everything you need<br> to start playing<br> the drums.
+                            @else
+                                THE NEW DRUMEO DRUM KIT BY ALESIS
+                            @endif
+                        </strong></h2>
                     <h6 class="leading-tight">
                         @if(empty($membersVersion))
                             Get the ultimate starter e-kit + 1 year of unlimited drum lessons + 3 extra launch bonuses.
