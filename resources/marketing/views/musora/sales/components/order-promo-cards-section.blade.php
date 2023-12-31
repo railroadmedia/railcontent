@@ -26,11 +26,11 @@
             class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-3xl lg:max-w-4xl mb-5 sm:mb-10 mx-auto"
             x-bind:class="{ 'hidden': !plusMembershipSelected }"
         >
-            <div class="w-full sm:w-1/2 sm:order-1 px-1 lg:px-3 relative">
+            <div class="w-full md:w-1/2 md:order-1 px-1 lg:px-3 relative">
                 @if(!empty($topBadge))
                     <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-{{ $theme }} @if($theme == 'musora') text-black @endif" >{{$topBadge}}</p>
                 @endif
-                <a href="{{$secondDealLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-{{ $theme }}">
+                <div  class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-{{ $theme }}">
                     <div class="bg-white px-3 py-6 md:py-7">
                         <img
                             class="absolute top-0 right-0 h-20 lg:h-24 transition-opacity opacity-0"
@@ -52,7 +52,14 @@
                             <strong>${{$secondDealPrice}}</strong>
                         </h3>
                         <p class="text-sm mb-5"><em>{{$secondDealSub}}</em></p>
-                        <div class="join {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]"> {{$buttonText}} </div>
+                        @if(!empty($secondTwoButtons))
+                            <div class="flex items-center">
+                                <a href="{{$secondDealLink}}" class="mx-1 join {{ $theme }} smaller w-1/2 transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]"> {{$buttonText}} </a>
+                                <a href="/drumshop/kit" class="mx-1 join {{ $theme }} smaller w-1/2 transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]"> {{$secondTwoButtons}} </a>
+                            </div>
+                        @else
+                            <a href="{{$secondDealLink}}" class="join {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]"> {{$buttonText}} </a>
+                        @endif
                     </div>
                     @if(!empty($secondExtraBonuses))
                         <div class="px-4 sm:px-4 lg:px-10 py-7" style="background:#F6F8FC">
@@ -61,9 +68,9 @@
                             @endforeach
                         </div>
                     @endif
-                </a>
+                </div>
             </div>
-            <div class="w-full sm:w-1/2 px-1 lg:px-3 relative">
+            <div class="w-full md:w-1/2 px-1 lg:px-3 relative">
                 <a href="{{$firstDealLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif"
                     @if(!empty($topBadge)) style="margin-top: 30px" @endif>
                     <div class="bg-white px-3 py-6 md:py-7" style="border-bottom: 1px solid white">

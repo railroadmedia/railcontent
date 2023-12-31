@@ -247,8 +247,10 @@
                                 </div>
                             </div>
                             <p class="leading-normal">
-                                The NEW Drumeo includes everything you need to learn the drums.<br><br>
-                                To celebrate the New Year, you have your choice of:<br><br>
+                                Start the year right with the NEW Drumeo.
+                                <br><br>
+                                For the first time ever, you can get one year of unlimited drum lessons plus your choice of an e-kit bundle OR practice kit bundle (drums or no drums):
+                                <br><br>
                                 <span class="text-musora"><strong>1. The Practice Anywhere Bundle</strong></span><br>
                                 With unlimited drum lessons for a year + a portable practice rig for any room in your
                                 house.<br><br>
@@ -441,6 +443,7 @@
         'secondDealSub' => "Everything you need to start playing the drums.",
         'secondDealPrice' => 499,
         'secondDealDiscount' => 1005.95,
+        'secondTwoButtons' => 'see the kit',
         "secondDealLink" => "/ecommerce/add-to-cart?products[alesis-ekit]=1&products[drumeo_edge_1_year_access]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&locked=true",
         'secondExtraBonuses' => [
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Alesis Nitro Max E-Kit</strong> <span class="italic">($500 Value)</span>',

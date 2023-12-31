@@ -144,7 +144,7 @@
     <div class="container max-w-5xl mx-auto relative z-50">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 w-full mx-2">
             <div class="px-1">
-                <h5 class="leading-normal text-left"><strong>Neighbor-friendly Drums</strong></h5>
+                <h5 class="leading-normal text-left"><strong>Neighbor-Friendly Drums</strong></h5>
                 <h5 class="pt-4 leading-normal text-left">Mesh heads give you the feel of real drums while maintaining a quiet volume for your neighbors and family.</h5>
             </div>
             <div class="px-1">
@@ -326,23 +326,39 @@
                     <a href="{{ $orderUrl }}" class="join blue smaller w-full max-w-xs">BUY NOW</a>
                 </div>
                 <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0 hidden sm:block">
-                    <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/december/ekit-bundle.png" alt="collage">
+                    <img class="w-full"
+                        @if(!empty($membersVersion))
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-lifetime.png"
+                        @else
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-bundle.png"
+                        @endif
+                        alt="collage">
                 </div>
             </div>
         </div>
         <div class="w-full sm:hidden text-center py-8">
-            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/promos/december/ekit-bundle.png" alt="collage">
+            <img
+                @if(!empty($membersVersion))
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-lifetime.png"
+                @else
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-bundle.png"
+                @endif
+                alt="collage">
         </div>
     </section>
 
-        <section class="px-4 sm:px-6 py-10 text-white" style="background: white;">
+        <section class="px-4 sm:px-6 py-10">
         <div class="container max-w-5xl mx-auto relative z-50">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mx-2 text-black">
-                <h5 class="leading-normal text-left p-2" style="width: 100%"><strong>Free shipping in the USA and Canada</strong><br>
-                Your Drumeo E-Kit will ship for free anywhere in the USA/Canada.</h5>
+            <h2 class="leading-tight mb-5 w-full text-center"><strong>E-Kit Shipping Notice</strong></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mx-2">
+                <p class="leading-normal text-left p-2" style="width: 100%"><strong>Free shipping USA / Canada</strong><br>
+                    Your Drumeo E-Kit will ship for free anywhere in the United States and Canada. </p>
 
-                <h5 class="leading-normal text-left p-2"><strong>Discounted shipping outside of North America</strong><br>
-                If you live outside of the US or Canada, you qualify for a $100 shipping discount. You’ll see that applied upon checkout.</h5>
+                <p class="leading-normal text-left p-2"><strong>Global Shipping</strong><br>
+                    We’ve automatically applied a $100 shipping discount that you’ll see during the checkout process. You may also need to pay duty depending on your country’s regulations.
+                    <br></br>Australia / New Zealand: <s>$267</s>  $167 shipping.
+                    <br>Rest of World: <s>$147</s> $47 shipping.
+                </p>
             </div>
         </div>
     </section>
@@ -360,7 +376,7 @@
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/gallery-01.png" alt="Drum kit" class="w-full h-auto py-6">
             </div>
 
-            <div class="w-full @if(empty($membersVersion)) md:w-1/3 lg:w-1/4 @endif flex items-center justify-center">
+            <div class="w-full  md:w-1/3 lg:w-1/4 flex items-center justify-center">
                 <table class="w-full h-full bg-white rounded-xl">
                     <tbody>
             @php
@@ -399,11 +415,9 @@
                     </tbody>
                 </table>
             </div>
-            @if(empty($membersVersion))
                 <div class="md:w-2/3 lg:w-3/4">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/products/kit/gallery.png" alt="Drum kit" class="w-full h-full md:block hidden">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/products/kit/gallery-full.png" alt="Drum kit" class="w-full h-full md:block hidden">
                 </div>
-            @endif
         </div>
 
         <p class="p-4 text-center hidden md:block" style="color: rgb(135, 144, 151, 1.2)"> <strong>Height</strong> 12.12" (30.78cm) // <strong>Depth</strong> 21" (53.34cm) // <strong>Width</strong> 36.2" (91.94cm)</p>

@@ -103,14 +103,6 @@
 @endsection
 
 @section('layout-body')
-    <div class="shipping-delay p-2">
-        <div class="delay-bar text-center">
-            <div class="container mx-auto">
-                <p class="inline-block cursor-pointer hover:underline" @click="shippingModal = true;"><i class="fas fa-truck"></i> <strong>FREE SHIPPING OVER $150</strong></p>
-                <p class="inline-block uppercase"><strong> | All items are pre-order only and ship within 2-4 weeks of purchase date.</strong></p>
-            </div>
-        </div>
-    </div>
 
     <header class="shop-header text-center text-white relative py-7 sm:py-10 bg-cover bg-center" style="background-color:#140c08;">
         <div class="container mx-auto relative z-10">
