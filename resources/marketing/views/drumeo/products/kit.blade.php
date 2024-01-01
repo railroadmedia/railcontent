@@ -248,7 +248,7 @@
                     <h2 class="leading-tight my-2"><strong>5</strong></h2>
                     <div class="flex justify-center">
                         @for($i = 1; $i <= 5; $i++)
-                        @if($i <= 4)
+                        @if($i <= 5)
                             <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
                         @else
                             <i class="align-middle text-lg fas fa-star-half" style="color: #ffac00;" aria-hidden="true"></i>
