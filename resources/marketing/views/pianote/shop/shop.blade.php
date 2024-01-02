@@ -121,7 +121,7 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Piano Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                     @include('_partials.components.shop.product-card', [
-                          "itemURL" => "/",
+                          "itemURL" => "/new-year#customize-anchor",
                           "sku" => null,
                           "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
                           "title" => "Pianote Membership",
@@ -129,7 +129,7 @@
                           "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",
                           "specialPrice" => "7-Day Free Trial",
                           "fullPrice" => 240,
-                          "price" => 150,
+                          "price" => 180,
                           "category" => "lessons",
                           "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
                           'soldOut' => false,

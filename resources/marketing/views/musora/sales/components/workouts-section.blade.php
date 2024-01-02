@@ -1,7 +1,7 @@
 @if(!empty($vid))
     <div class="h-96 sm:h-[720px] cursor-pointer autoplay-video w-full relative z-20 bg-black" x-on:click="trailer = true;">
         <div class="absolute top-0 left-0 right-0 text-white z-20 text-center px-4 pt-7 sm:pt-10">
-            <img class="h-10 sm:h-14 lg:h-20 pt-3 transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1378x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/just-press-play-logo.png" alt="collage intro mobile" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <h1 class="font-lexend  text-3xl sm:text-5xl lg:text-6xl leading-none uppercase mb-3"><strong>PLAY TO LEARN</strong></h1>
             <h4 class="leading-tight">Improve your skills in<br class="sm:hidden"> just 10 minutes a day.</h4>
         </div>
         <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-20 mt-5"></i>
@@ -14,7 +14,7 @@
         <div class="container max-w-5xl mx-auto">
             <div class="p-5 bg-white">
                 <h1 class="font-lexend  text-3xl sm:text-5xl lg:text-6xl leading-none uppercase mb-3"><strong>PLAY TO LEARN</strong></h1>
-                <h4 class="leading-tight">Improve your skills in just 10 minutes a day.</h4>
+                <h4 class="leading-tight">Improve your skills in<br class="sm:hidden"> just 10 minutes a day.</h4>
             </div>
         </div>
     </section>

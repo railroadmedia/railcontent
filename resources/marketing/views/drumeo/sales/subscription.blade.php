@@ -115,7 +115,8 @@
             }
         @endif
         .splide__slide.is-active .active-bg {
-            background-color:#0b76db!important;
+            background-color:#1B2434!important;
+            color:#fff!important;
         }
 
         .timed-toggle .media-toggle.active {
@@ -217,7 +218,7 @@
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/promo-collage.png"
                 alt="drum kit image" fetchpriority="high">
 
-            <div class="text-center px-5 sm:px-6 py-4 sm:py-8 lg:py-14 text-white relative">
+            <div class="text-center px-5 sm:px-6 py-4 sm:py-8 lg:py-14 text-white relative overflow-hidden">
                 <div class="container max-w-5xl mx-auto lg:flex items-baseline">
                     <div class="text-left flex flex-wrap sm:flex-nowrap lg:justify-center items-start mb-5">
                         <div class="max-w-3xl sm:max-w-xl lg:max-w-2xl mx-0 z-10 sm:pr-20">
@@ -433,25 +434,25 @@
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> P4 Practice Pad <span class="italic">($79 Value)</span>',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Drumeo PadStand <span class="italic">($79 Value)</span>',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 1 Pair of Drumeo Drumsticks <span class="italic">($12.95 Value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Drummer<span class="italic">($97 Value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Chops <span class="italic">($97 Value)</span>',
+            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Drummer<span class="italic">($127 Value)</span>',
+            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Chops <span class="italic">($127 Value)</span>',
     ],
 
         // second deal
         'secondDeal' => "E-Kit + Lessons",
         'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/marketing/drumeo/products/kit/ekit-bundle.png',
-        'secondImageHeight' => 'h-48',
+        'secondImageHeight' => 'h-44',
         'secondDealSub' => "Everything you need to start playing the drums.",
         'secondDealPrice' => 499,
         'secondDealDiscount' => 1005.95,
         'secondTwoButtons' => 'see the kit',
         "secondDealLink" => "/ecommerce/add-to-cart?products[alesis-ekit]=1&products[drumeo_edge_1_year_access]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&locked=true",
         'secondExtraBonuses' => [
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Alesis Nitro Max E-Kit</strong> <span class="italic">($500 Value)</span>',
+            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Alesis Nitro Max E-Kit</strong> <span class="italic">($499 Value)</span>',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong> 1-Year Drumeo Membership </strong><span class="italic">($240 Value)</span>',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 1 Pair of Drumeo Drumsticks <span class="italic">($12.95 Value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Drummer <span class="italic">($97 Value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Chops <span class="italic">($97 Value)</span>',
+            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Drummer <span class="italic">($127 Value)</span>',
+            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Chops <span class="italic">($127 Value)</span>',
     ],
 ])
 

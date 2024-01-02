@@ -78,27 +78,25 @@
                         <ul class="splide__list">
                             @foreach ($testimonials as $testimonial)
                                 <li class="splide__slide flex px-1">
-                                    <div class="w-full rounded-xl p-6 flex flex-wrap sm:flex-nowrap @if($theme != 'musora') text-white @else text-black @endif transition-colors duration-300 active-bg" style="background-color:#0C1524;">
-                                        <div class="w-full @if(!empty($testimonial['video'])) sm:w-7/12 cursor-pointer @else sm:w-1/2 @endif flex-shrink-0 bg-cover bg-center rounded-xl relative h-56 sm:h-80 lg:h-[32rem]"
+                                    <div class="w-full rounded-xl p-6 text-white flex flex-wrap sm:flex-nowrap transition-colors duration-300 active-bg"
+                                        style="background-color:#0C1524;">
+                                        <div class="w-full @if(!empty($testimonial['video'])) sm:w-1/2 cursor-pointer @else sm:w-1/2 @endif flex-shrink-0 bg-cover bg-center rounded-xl relative h-56 sm:h-80 lg:h-[32rem]"
                                             style="background-image:url('{{$testimonial['image']}}');"
                                             @if(!empty($testimonial['video']))
                                                 x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
                                             @endif
                                         >
-{{--                                            <div class="absolute inset-0 flex justify-center align-center">--}}
-{{--                                                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if(!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-3xl text-white border-4 border-white px-6 py-4 rounded-full bg-[#0009] hover:opacity-80"></i>--}}
-{{--                                            </div>--}}
                                         </div>
                                         <div class="flex flex-col justify-between text-left sm:pl-8 sm:py-5">
                                             <h3 class="leading-normal mt-3 sm:mt-0 mb-2"><em>{!! $testimonial['title'] !!}</em></h3>
                                             <div class="flex items-center">
                                                 @if(!empty($testimonial['avatar']))
-                                                    <img class="h-16 w-16 rounded-full object-cover mr-4" src="{{$testimonial['avatar']}}">
+                                                    <img class="h-16 w-16 rounded-full object-cover mr-4 border-4 border-{{ $theme }}" src="{{$testimonial['avatar']}}">
                                                 @endif
                                                 <div class="">
                                                     <p class="leading-tight mx-0 font-black">{{ $testimonial['name'] }}</p>
                                                     @if(!empty($testimonial['location']))
-                                                        <p class="leading-tight mx-0 text-sm"><em>{{ $testimonial['location'] }}</em></p>
+                                                        <p class="leading-tight mx-0 text-sm text-{{ $theme }}"><em>{{ $testimonial['location'] }}</em></p>
                                                     @endif
                                                 </div>
                                             </div>
