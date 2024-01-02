@@ -27712,6 +27712,9 @@ a:visited{
   .lg\:tw-mt-8{
     margin-top: 2rem !important;
   }
+  .lg\:tw-mt-\[6px\]{
+    margin-top: 6px !important;
+  }
   .lg\:tw-line-clamp-2{
     overflow: hidden !important;
     display: -webkit-box !important;
@@ -28106,6 +28109,10 @@ a:visited{
   .lg\:tw-py-\[25px\]{
     padding-top: 25px !important;
     padding-bottom: 25px !important;
+  }
+  .lg\:tw-px-9{
+    padding-left: 2.25rem !important;
+    padding-right: 2.25rem !important;
   }
   .lg\:tw-pb-0{
     padding-bottom: 0px !important;
