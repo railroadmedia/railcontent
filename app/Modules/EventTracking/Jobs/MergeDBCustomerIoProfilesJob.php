@@ -2,14 +2,14 @@
 
 namespace App\Modules\EventTracking\Jobs;
 
-use App\Console\Commands\Infrastructure\BatchQueryJobByIds;
+use App\Console\Commands\Infrastructure\BatchQueryJob;
 use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class MigrateCustomerIoIdsJob extends BatchQueryJobByIds
+class MergeDBCustomerIoProfilesJob extends BatchQueryJob
 {
     private int $skip;
     private int $take;
@@ -23,7 +23,6 @@ class MigrateCustomerIoIdsJob extends BatchQueryJobByIds
         $this->take = $take;
         $this->workspaceName = $workspaceName;
         $this->customerIoService = app(CustomerIoService::class);
-        $this->init($skip, $take);
     }
 
     public function getSkip(): int
