@@ -1,0 +1,2 @@
+document.addEventListener("DOMContentLoaded",function(){var e,t=document.querySelector(".timed-toggle"),r=Array.from(t.querySelectorAll(".media-toggle")),o=Array.from(t.querySelectorAll(".active-toggle")),c=0,l=r.length;function n(e){r.forEach((t,r)=>{t.classList.toggle("active",r===e);let o=t.querySelector("video");o&&(o.currentTime=0,o.play())}),o.forEach((t,r)=>{t.classList.toggle("active",r===e)})}e=setInterval(function(){n(c=(c+1)%l)},1e4),o.forEach((t,r)=>{t.addEventListener("click",function(){n(r),c=r,clearInterval(e)})})});
+//# sourceMappingURL=songs-toggler.js.map

@@ -51,7 +51,7 @@ h1, h2, h3, h4, h5, h6, p, li {
   }
 
   h3 {
-    font: 300 19px/1em $robotocondensed;
+    font: 400 19px/1em $robotocondensed;
     margin: 0 auto;
     text-transform: uppercase;
     @include tablet {
@@ -150,7 +150,7 @@ h1, h2, h3, h4, h5, h6, p, li {
       margin: 0 auto;
 
       .drumeo-free {
-        font: 300 17px/1em $robotocondensed;
+        font: 400 17px/1em $robotocondensed;
         margin: 0 auto 15px;
         text-transform: uppercase;
         letter-spacing: 3px;
@@ -289,7 +289,7 @@ h1, h2, h3, h4, h5, h6, p, li {
     }
 
     .drumeo-free {
-      font: 300 17px/1em $robotocondensed;
+      font: 400 17px/1em $robotocondensed;
       margin: 0 auto;
       text-transform: uppercase;
       letter-spacing: 3px;

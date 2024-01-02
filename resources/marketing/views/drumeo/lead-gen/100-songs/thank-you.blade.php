@@ -100,7 +100,7 @@
             @endcomponent
 
             @component('drumeo.lead-gen.100-songs._banner', [
-                'title' => '5000+ songs',
+                'title' => '6000+ songs',
                 'subtitle' => ' Play the songs you love.',
                 'description' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
                 'desktopImageSrc' => 'https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/play-songs.png',
@@ -214,15 +214,14 @@
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'desktopGrid' => true,
-        'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
-        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
+        'header' => 'drummers',
     ])
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
         "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
-        "songs" => "5000+ popular songs.",
+        "songs" => "6000+ popular songs.",
         "firstPoint" => "The world’s best drum lessons.",
         "thirdPoint" => "Unlimited personal support.",
         "fifthPoint" => "Lesson access for piano, guitar, and singing.",

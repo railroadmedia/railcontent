@@ -9,7 +9,7 @@ class MarketingController extends BaseController
 
     public function homepage()
     {
-        return view('musora.homepage', ['theme' => 'musora']);
+        return view('musora.subscription', ['theme' => 'musora']);
     }
     public function sixReasons()
     {

@@ -10,8 +10,6 @@
     <div class="lg:h-0">
     <div id="order" class="anchor"></div>
     <div class="side-slide overflow-hidden rounded border border-solid" style="border-color: #CCD3D3;">
-        @include('_partials.layout.holiday.shop-sidebar-banner')
-
         <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">
             @if(!empty($instructor))
                 <p class="instructor hidden lg:inline"><em>{{ $instructor }} </em></p>
@@ -31,7 +29,7 @@
                         @endif
                     </strong>
                 </h1>
-                <p class="text-sm font-black text-white rounded-lg px-2 leading-none py-1 inline-block bg-promo">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</p>
+                <p class="text-sm font-black text-black rounded-lg px-2 leading-none py-1 inline-block bg-musora">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</p>
             @elseif(isset($price))
                 <h1 class="text-center text-3xl uppercase md:text-4xl"><strong class="font-black text-{{ $theme }}">Only $<span class="chosen-variant-price-float">{{ floatVal($price) }}</span></strong></h1>
             @endif

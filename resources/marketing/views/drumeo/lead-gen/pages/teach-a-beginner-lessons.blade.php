@@ -61,7 +61,7 @@
             }
 
             .title .sub {
-                font: 300 16px/1em "Open Sans", sans-serif;
+                font: 400 16px/1em "Open Sans", sans-serif;
             }
 
             .hiw-item-container {
@@ -80,7 +80,7 @@
             }
 
             .title .sub {
-                font: 300 21px/1.2em "Open Sans", sans-serif;
+                font: 400 21px/1.2em "Open Sans", sans-serif;
             }
 
             .hiw-lesson-grid {
@@ -103,7 +103,7 @@
             }
 
             .title .sub {
-                font: 300 26px/1.4em "Open Sans", sans-serif;
+                font: 400 26px/1.4em "Open Sans", sans-serif;
             }
 
             .hiw-lesson-grid {
