@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Modules\RecommendationSystem\Services;
+namespace Railroad\Railcontent\Services;
 
-use App\Enums\RecommenderSection;
-use App\Modules\RecommendationSystem\Models\Recommendation;
 use Exception;
 use Illuminate\Database\DatabaseManager;
-use Illuminate\Support\Facades\DB;
 use PDO;
-
+use Railroad\Railcontent\Enums\RecommenderSection;
 
 class RecommendationService
 {
@@ -44,7 +41,6 @@ class RecommendationService
 
     private function getFilteredRecommendationsUsingPDO($userID, $brand, RecommenderSection $section)
     {
-
         $connection = $this->databaseManager->connection('snowflake_pdo');
         try {
             $result = $connection->select(
@@ -57,7 +53,6 @@ class RecommendationService
             error_log($e);
             $contentIDs = [];
         }
-        //TODO null + error handling
         return $contentIDs;
     }
 
@@ -85,6 +80,10 @@ class RecommendationService
 
     private function unpackRecommendationRow($row)
     {
-        return new Recommendation($row[0], $row[1], $row[2]);
+        return [ 'userID' => $row[0],
+                 'contentID' => $row[1],
+                 'rank' => $row[2],
+
+                ];
     }
 }
