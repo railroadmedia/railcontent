@@ -304,7 +304,6 @@
     @include('musora.sales.components.reason-cards-section', [
         'seven' => true,
     ])
-])
 
     @php
         $buttons = $musora['buttons'];
