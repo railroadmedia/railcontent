@@ -43,8 +43,6 @@ class MergeDBCustomerIoProfilesJob extends BatchQueryJob
             ->selectRaw('email, count(*) as pcount')
             ->where(
                 [
-                    'workspace_email' => $this->workspaceName,
-                    'workspace_name' => $accountConfigData['workspace_name'],
                     'workspace_id' => $accountConfigData['workspace_id'],
                     'site_id' => $accountConfigData['site_id'],
                 ]
