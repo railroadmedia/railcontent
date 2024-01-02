@@ -201,11 +201,13 @@ class UserAccessPermissionsCollection
         return $endDate != null;
     }
 
-    public function determineActiveTimes()
+    public function determineActiveTimes(): void
     {
         $this->permissionIdLookup->keys()->each(function ($key) {
             $this->getActiveDates($key);
         });
+        //aggregation of plus and basic needs to be done together to get calculate correct times.
+        $this->getMembershipExpirationDate();
     }
 
     public function getCollection()
