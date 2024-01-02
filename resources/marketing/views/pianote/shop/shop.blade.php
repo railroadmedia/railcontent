@@ -22,11 +22,13 @@
 @endsection
 
 @section('body')
-
     @include('_partials.components.shop.promo-shop-header',[
         'text' => 'GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!',
+        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/427x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png',
+        'logoStyles' => 'h-12 sm:h-20 pb-2 sm:pb-3',
         'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg',
     ])
+
 
     @include('_partials.components.shop.index-filters')
 

@@ -25,7 +25,10 @@
     @include('_partials.components.shop.promo-shop-header',[
         'text' => 'GET LESSONS, MERCH, GEAR, & MUCH MORE',
         'bg' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg',
+        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/543x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-blue.png',
+        'logoStyles' => 'h-6 sm:h-8 mb-1',
     ])
+{{--    'logoStyles' => 'h-12 sm:h-20 pb-3 sm:pb-4',--}}
 
     @include('_partials.components.shop.index-filters', [
         "all" => true
