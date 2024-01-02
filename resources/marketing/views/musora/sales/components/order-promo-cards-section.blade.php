@@ -27,19 +27,15 @@
             x-bind:class="{ 'hidden': !plusMembershipSelected }"
         >
             <div class="w-full md:w-1/2 md:order-1 px-1 lg:px-3 relative">
+                <img class="absolute top-0 right-0 h-20 lg:h-24 -mt-3 -mr-3 transition-opacity opacity-0"
+                    loading="lazy" onload="this.classList.remove('opacity-0')" alt="free shipping badge"
+                    src={{ $badge }}>
                 @if(!empty($topBadge))
                     <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-{{ $theme }} @if($theme == 'musora') text-black @endif" >{{$topBadge}}</p>
                 @endif
                 <div  class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-{{ $theme }}">
                     <div class="bg-white px-3 py-6 md:py-7">
-                        <img
-                            class="absolute top-0 right-0 h-20 lg:h-24 transition-opacity opacity-0"
-                            src={{ $badge }}
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
-                            alt="free shipping badge"
-                        >
-                        <h3 class="mb-1 sm:mb-2"><strong>{{$secondDeal}}</strong></h3>
+                        <h3 class="leading-tight mb-2"><strong>{{$secondDeal}}</strong></h3>
                         <img
                             class="{{$secondImageHeight}} rounded-md transition-opacity opacity-0"
                             src={{ $secondDealImage }}
@@ -47,7 +43,7 @@
                             onload="this.classList.remove('opacity-0')"
                             alt="card image"
                         >
-                        <h3 class="leading-tight">
+                        <h3 class="leading-tight mt-2">
                             <span class="line-through" style="color: #879097; margin-right: 5px;">${{$secondDealDiscount}}</span>
                             <strong>${{$secondDealPrice}}</strong>
                         </h3>
@@ -55,7 +51,7 @@
                         @if(!empty($secondTwoButtons))
                             <div class="flex items-center">
                                 <a href="{{$secondDealLink}}" class="mx-1 join {{ $theme }} smaller w-1/2 transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]"> {{$buttonText}} </a>
-                                <a href="/drumshop/kit" class="mx-1 join {{ $theme }} smaller w-1/2 transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]"> {{$secondTwoButtons}} </a>
+                                <a href="/drumshop/kit" class="mx-1 join black outline smaller w-1/2 transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]"> {{$secondTwoButtons}} </a>
                             </div>
                         @else
                             <a href="{{$secondDealLink}}" class="join {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]"> {{$buttonText}} </a>
@@ -74,7 +70,7 @@
                 <a href="{{$firstDealLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif"
                     @if(!empty($topBadge)) style="margin-top: 30px" @endif>
                     <div class="bg-white px-3 py-6 md:py-7" style="border-bottom: 1px solid white">
-                        <h3 class="mb-1 sm:mb-2"><strong>{{$firstDeal}}</strong></h3>
+                        <h3 class="leading-tight mb-2"><strong>{{$firstDeal}}</strong></h3>
                         <img
                                         class="{{$firstImageHeight}} rounded-md transition-opacity opacity-0"
                                         src={{ $firstDealImage }}
@@ -82,7 +78,7 @@
                                         onload="this.classList.remove('opacity-0')"
                                         alt="card image"
                                     >
-                        <h3 class="leading-tight pt-2">
+                        <h3 class="leading-tight mt-2">
                             @if(!empty($firstDealDiscount))
                                 <span class="line-through" style="color: #879097; margin-right: 5px;"> ${{$firstDealDiscount}} </span>
                             @endif

@@ -222,7 +222,8 @@
             background:#9000ff;
         }
         .splide__slide.is-active .active-bg {
-            background-color:#FFAE00!important;
+            background-color:#1B2434!important;
+            color:#fff!important;
         }
 
         .timed-toggle .media-toggle.active {

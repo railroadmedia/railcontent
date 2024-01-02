@@ -121,7 +121,8 @@
             }
         @endif
         .splide__slide.is-active .active-bg {
-            background-color:#00c9ac!important;
+            background-color:#1B2434!important;
+            color:#fff!important;
         }
 
         .timed-toggle .media-toggle.active {
