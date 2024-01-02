@@ -11,6 +11,7 @@ use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
@@ -120,6 +121,11 @@ class ContentService
      */
     private $contentVideoRepository;
 
+    /**
+     * @var RecommendationService
+     */
+    private $recommendationService;
+
     private DatabaseManager $databaseManager;
 
     // all possible content statuses
@@ -149,6 +155,7 @@ class ContentService
      * @param ContentInstructorRepository $contentInstructorRepository
      * @param ContentStyleRepository $contentStyleRepository
      * @param ContentBpmRepository $contentBpmRepository
+     * @param RecommendationService $recommendationService
      */
     public function __construct(
         ContentRepository $contentRepository,
@@ -168,7 +175,8 @@ class ContentService
         ContentStyleRepository $contentStyleRepository,
         ContentBpmRepository $contentBpmRepository,
         DatabaseManager $databaseManager,
-        ContentVideoRepository $contentVideoRepository
+        ContentVideoRepository $contentVideoRepository,
+        RecommendationService $recommendationService,
     ) {
         $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;
@@ -188,6 +196,7 @@ class ContentService
         $this->contentBpmRepository = $contentBpmRepository;
         $this->databaseManager = $databaseManager;
         $this->contentVideoRepository = $contentVideoRepository;
+        $this->recommendationService = $recommendationService;
     }
 
     /**
@@ -213,6 +222,36 @@ class ContentService
         $this->idContentCache[$hash] = Decorator::decorate($results, 'content');
 
         return $this->idContentCache[$hash];
+    }
+
+    /**
+     *
+     *
+     * @param int user_id
+     * @param string brand
+     * @param int limit -
+     * @return mixed|Collection|null
+     */
+    public function getSongRecommendations($user_id, $brand, $contentTypes, $limit=6)
+    {
+        $filter = $this->contentRepository->startFilter(
+            1,
+            $limit,
+            'published_on',
+            'desc',
+            $contentTypes,
+            [],
+            [],
+        );
+        $filterOptions = $this->getFilterOptions($filter, true, $contentTypes);
+        $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, RecommenderSection::Song);
+        $recommendations = array_slice($recommendations,0, $limit);
+        $content = $this->getByIds($recommendations);
+        return (new ContentFilterResultsEntity([
+            'results' => $content,
+            'filter_options' => $filterOptions,
+            'total_results' => $filter->countFilter()
+        ]));
     }
 
     /**
@@ -998,10 +1037,10 @@ class ContentService
                     $followedContents = $this->contentFollowsRepository->getFollowedContentIds();
                     if (empty($followedContents)) {
                         $resultsDB = new ContentFilterResultsEntity([
-                                                                        'results' => $followedContents,
-                                                                        'total_results' => 0,
-                                                                        'filter_options' => [],
-                                                                    ]);
+                            'results' => $followedContents,
+                            'total_results' => 0,
+                            'filter_options' => [],
+                        ]);
 
                         $results =
                             CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
@@ -1108,29 +1147,21 @@ class ContentService
                 }
 
                 $resultsDB = new ContentFilterResultsEntity([
-                                                                'results' => $data,
-                                                                'total_results' => $totalResults,
-                                                                'filter_options' => $filters,
-                                                            ]);
+                    'results' => $data,
+                    'total_results' => $totalResults,
+                    'filter_options' => $filters,
+                ]);
 
                 $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
                 $results = new ContentFilterResultsEntity($results);
             } else {
-                $filterFields = $pullFilterFields ? $filter->getFilterFields() : [];
-
-                if ($pullFilterFields && !empty($filterFields['difficulty'])) {
-                    $filterFields['difficulty'] = $this->difficultyFilterOptionsCleanup(
-                        $includedTypes,
-                        $filterFields['difficulty']
-                    );
-                }
-
+                $filterFields = $this->getFilterOptions($filter, $pullFilterFields, $includedTypes);
                 $resultsDB = new ContentFilterResultsEntity([
-                                                                'results' => $filter->retrieveFilter(),
-                                                                'total_results' => $pullPagination ?
-                                                                    $filter->countFilter() : 0,
-                                                                'filter_options' => $filterFields,
-                                                            ]);
+                    'results' => $filter->retrieveFilter(),
+                    'total_results' => $pullPagination ?
+                        $filter->countFilter() : 0,
+                    'filter_options' => $filterFields,
+                ]);
 
                 $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
                 $results = new ContentFilterResultsEntity($results);
@@ -1138,6 +1169,18 @@ class ContentService
         }
 
         return Decorator::decorate($results, 'content');
+    }
+
+    private function getFilterOptions( $filter, $pullFilterFields, $includedTypes)
+    {
+        $filterFields = $pullFilterFields ? $filter->getFilterFields() : [];
+        if ($pullFilterFields && !empty($filterFields['difficulty'])) {
+            $filterFields['difficulty'] = $this->difficultyFilterOptionsCleanup(
+                $includedTypes,
+                $filterFields['difficulty']
+            );
+        }
+        return $filterFields;
     }
 
     // for remove extraneous options and order logically rather than alphabetically
@@ -1209,19 +1252,19 @@ class ContentService
         }
 
         $id = $this->contentRepository->create([
-                                                   'slug' => $slug,
-                                                   'type' => $type,
-                                                   'sort' => $sort,
-                                                   'status' => $status ?? self::STATUS_DRAFT,
-                                                   'language' => $language ?? ConfigService::$defaultLanguage,
-                                                   'brand' => $brand ?? ConfigService::$brand,
-                                                   //                                                   'instrumentless' => ($type === 'song') ? false : null,
-                                                   'total_xp' => $this->getDefaultXP($type, 0),
-                                                   'user_id' => $userId,
-                                                   'published_on' => $publishedOn,
-                                                   'created_on' => Carbon::now()
-                                                       ->toDateTimeString(),
-                                               ]);
+            'slug' => $slug,
+            'type' => $type,
+            'sort' => $sort,
+            'status' => $status ?? self::STATUS_DRAFT,
+            'language' => $language ?? ConfigService::$defaultLanguage,
+            'brand' => $brand ?? ConfigService::$brand,
+            //                                                   'instrumentless' => ($type === 'song') ? false : null,
+            'total_xp' => $this->getDefaultXP($type, 0),
+            'user_id' => $userId,
+            'published_on' => $publishedOn,
+            'created_on' => Carbon::now()
+                ->toDateTimeString(),
+        ]);
 
         //save the link with parent if the parent id exist on the request
         if ($parentId) {
@@ -1993,31 +2036,31 @@ class ContentService
                     'rch4.parent_id'
                 )
                 ->select([
-                             'rch1.child_id as rch1_child_id',
-                             'rch1.parent_id as rch1_parent_id',
-                             'rch1.child_position as rch1_child_position',
-                             'rcp1.id as rcp1_content_id',
-                             'rcp1.slug as rcp1_content_slug',
-                             'rcp1.type as rcp1_content_type',
-                             'rch2.child_id as rch2_child_id',
-                             'rch2.parent_id as rch2_parent_id',
-                             'rch2.child_position as rch2_child_position',
-                             'rcp2.id as rcp2_content_id',
-                             'rcp2.slug as rcp2_content_slug',
-                             'rcp2.type as rcp2_content_type',
-                             'rch3.child_id as rch3_child_id',
-                             'rch3.parent_id as rch3_parent_id',
-                             'rch3.child_position as rch3_child_position',
-                             'rcp3.id as rcp3_content_id',
-                             'rcp3.slug as rcp3_content_slug',
-                             'rcp3.type as rcp3_content_type',
-                             'rch4.child_id as rch4_child_id',
-                             'rch4.parent_id as rch4_parent_id',
-                             'rch4.child_position as rch4_child_position',
-                             'rcp4.id as rcp4_content_id',
-                             'rcp4.slug as rcp4_content_slug',
-                             'rcp4.type as rcp4_content_type',
-                         ])
+                    'rch1.child_id as rch1_child_id',
+                    'rch1.parent_id as rch1_parent_id',
+                    'rch1.child_position as rch1_child_position',
+                    'rcp1.id as rcp1_content_id',
+                    'rcp1.slug as rcp1_content_slug',
+                    'rcp1.type as rcp1_content_type',
+                    'rch2.child_id as rch2_child_id',
+                    'rch2.parent_id as rch2_parent_id',
+                    'rch2.child_position as rch2_child_position',
+                    'rcp2.id as rcp2_content_id',
+                    'rcp2.slug as rcp2_content_slug',
+                    'rcp2.type as rcp2_content_type',
+                    'rch3.child_id as rch3_child_id',
+                    'rch3.parent_id as rch3_parent_id',
+                    'rch3.child_position as rch3_child_position',
+                    'rcp3.id as rcp3_content_id',
+                    'rcp3.slug as rcp3_content_slug',
+                    'rcp3.type as rcp3_content_type',
+                    'rch4.child_id as rch4_child_id',
+                    'rch4.parent_id as rch4_parent_id',
+                    'rch4.child_position as rch4_child_position',
+                    'rcp4.id as rcp4_content_id',
+                    'rcp4.slug as rcp4_content_slug',
+                    'rcp4.type as rcp4_content_type',
+                ])
                 ->whereIn('rch1.child_id', $contentIds)
                 ->get();
 
@@ -2195,27 +2238,27 @@ class ContentService
                     }
                 )
                 ->select([
-                             'ch_1.parent_id AS ch_1_parent_id',
-                             'ch_2.parent_id AS ch_2_parent_id',
-                             'ch_3.parent_id AS ch_3_parent_id',
-                             'ch_4.parent_id AS ch_4_parent_id',
-                             'ch_1.child_id AS ch_1_child_id',
-                             'ch_2.child_id AS ch_2_child_id',
-                             'ch_3.child_id AS ch_3_child_id',
-                             'ch_4.child_id AS ch_4_child_id',
-                             'ch_1.child_position AS ch_1_child_position',
-                             'ch_2.child_position AS ch_2_child_position',
-                             'ch_3.child_position AS ch_3_child_position',
-                             'ch_4.child_position AS ch_4_child_position',
-                             'ch_1_child.slug AS ch_1_child_slug',
-                             'ch_2_child.slug AS ch_2_child_slug',
-                             'ch_3_child.slug AS ch_3_child_slug',
-                             'ch_4_child.slug AS ch_4_child_slug',
-                             'ucp_1.state AS ucp_1_state',
-                             'ucp_2.state AS ucp_2_state',
-                             'ucp_3.state AS ucp_3_state',
-                             'ucp_4.state AS ucp_4_state',
-                         ])
+                    'ch_1.parent_id AS ch_1_parent_id',
+                    'ch_2.parent_id AS ch_2_parent_id',
+                    'ch_3.parent_id AS ch_3_parent_id',
+                    'ch_4.parent_id AS ch_4_parent_id',
+                    'ch_1.child_id AS ch_1_child_id',
+                    'ch_2.child_id AS ch_2_child_id',
+                    'ch_3.child_id AS ch_3_child_id',
+                    'ch_4.child_id AS ch_4_child_id',
+                    'ch_1.child_position AS ch_1_child_position',
+                    'ch_2.child_position AS ch_2_child_position',
+                    'ch_3.child_position AS ch_3_child_position',
+                    'ch_4.child_position AS ch_4_child_position',
+                    'ch_1_child.slug AS ch_1_child_slug',
+                    'ch_2_child.slug AS ch_2_child_slug',
+                    'ch_3_child.slug AS ch_3_child_slug',
+                    'ch_4_child.slug AS ch_4_child_slug',
+                    'ucp_1.state AS ucp_1_state',
+                    'ucp_2.state AS ucp_2_state',
+                    'ucp_3.state AS ucp_3_state',
+                    'ucp_4.state AS ucp_4_state',
+                ])
                 ->where('ch_1.parent_id', $parentContentId)
                 ->orderBy('ch_1.child_position')
                 ->orderBy('ch_2.child_position')
@@ -2553,7 +2596,7 @@ class ContentService
         $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn($types,
             [ContentService::STATUS_SCHEDULED, ContentService::STATUS_PUBLISHED],
             Carbon::now()
-                                                                                            ->toDateTimeString(),
+                ->toDateTimeString(),
             '>',
             'published_on',
             'asc',
@@ -2563,9 +2606,9 @@ class ContentService
         ContentRepository::$pullFutureContent = $oldFutureContent;
 
         $results = new ContentFilterResultsEntity([
-                                                      'results' => $scheduleEvents,
-                                                      'total_results' => $countEvents,
-                                                  ]);
+            'results' => $scheduleEvents,
+            'total_results' => $countEvents,
+        ]);
 
         return Decorator::decorate($results, 'content');
     }
@@ -2610,16 +2653,16 @@ class ContentService
         $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn($types,
             [ContentService::STATUS_SCHEDULED],
             Carbon::now()
-                                                                                            ->toDateTimeString(),
+                ->toDateTimeString(),
             '>',
             'published_on',
             'asc',
             []);
 
         return new ContentFilterResultsEntity([
-                                                  'results' => $scheduleEvents,
-                                                  'total_results' => $countEvents,
-                                              ]);
+            'results' => $scheduleEvents,
+            'total_results' => $countEvents,
+        ]);
     }
 
     /**
@@ -2688,27 +2731,27 @@ class ContentService
                     }
                 )
                 ->select([
-                             'ch_1.parent_id AS ch_1_parent_id',
-                             'ch_2.parent_id AS ch_2_parent_id',
-                             'ch_3.parent_id AS ch_3_parent_id',
-                             'ch_4.parent_id AS ch_4_parent_id',
-                             'ch_1.child_id AS ch_1_child_id',
-                             'ch_2.child_id AS ch_2_child_id',
-                             'ch_3.child_id AS ch_3_child_id',
-                             'ch_4.child_id AS ch_4_child_id',
-                             'ch_1.child_position AS ch_1_child_position',
-                             'ch_2.child_position AS ch_2_child_position',
-                             'ch_3.child_position AS ch_3_child_position',
-                             'ch_4.child_position AS ch_4_child_position',
-                             'ch_1_child.slug AS ch_1_child_slug',
-                             'ch_2_child.slug AS ch_2_child_slug',
-                             'ch_3_child.slug AS ch_3_child_slug',
-                             'ch_4_child.slug AS ch_4_child_slug',
-                             'ucp_1.state AS ucp_1_state',
-                             'ucp_2.state AS ucp_2_state',
-                             'ucp_3.state AS ucp_3_state',
-                             'ucp_4.state AS ucp_4_state',
-                         ])
+                    'ch_1.parent_id AS ch_1_parent_id',
+                    'ch_2.parent_id AS ch_2_parent_id',
+                    'ch_3.parent_id AS ch_3_parent_id',
+                    'ch_4.parent_id AS ch_4_parent_id',
+                    'ch_1.child_id AS ch_1_child_id',
+                    'ch_2.child_id AS ch_2_child_id',
+                    'ch_3.child_id AS ch_3_child_id',
+                    'ch_4.child_id AS ch_4_child_id',
+                    'ch_1.child_position AS ch_1_child_position',
+                    'ch_2.child_position AS ch_2_child_position',
+                    'ch_3.child_position AS ch_3_child_position',
+                    'ch_4.child_position AS ch_4_child_position',
+                    'ch_1_child.slug AS ch_1_child_slug',
+                    'ch_2_child.slug AS ch_2_child_slug',
+                    'ch_3_child.slug AS ch_3_child_slug',
+                    'ch_4_child.slug AS ch_4_child_slug',
+                    'ucp_1.state AS ucp_1_state',
+                    'ucp_2.state AS ucp_2_state',
+                    'ucp_3.state AS ucp_3_state',
+                    'ucp_4.state AS ucp_4_state',
+                ])
                 ->where('ch_1.parent_id', $parentContentId)
                 ->orderBy('ch_1.child_position')
                 ->orderBy('ch_2.child_position')
@@ -2753,7 +2796,7 @@ class ContentService
         return null;
     }
 
-   /**
+    /**
      * @param $contentId
      * @return array
      * @throws \Doctrine\ORM\NonUniqueResultException
@@ -2791,9 +2834,9 @@ class ContentService
                 $results['song_full_assignment'] = $assign;
             }
         } elseif (in_array(
-            $content['type'],
-            config('railcontent.content_multiple_level_content_depth_playlist_allowed', [])
-        ) || (in_array($content['brand'] ,['singeo', 'guitareo']) && $content['type'] == 'learning-path-level')) {
+                $content['type'],
+                config('railcontent.content_multiple_level_content_depth_playlist_allowed', [])
+            ) || (in_array($content['brand'] ,['singeo', 'guitareo']) && $content['type'] == 'learning-path-level')) {
             ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
             $lessons = $this->getByParentId($content['id']);
             $soundsliceAssingment = 0;
