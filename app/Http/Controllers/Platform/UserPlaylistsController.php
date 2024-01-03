@@ -40,6 +40,8 @@ class UserPlaylistsController extends BaseController
     private VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator;
     private LessonAssignmentDecorator $lessonAssignmentDecorator;
     private RoutingDecorator $routingDecorator;
+
+    private  ResourceDecorator $resourceDecorator;
     private PinnedPlaylistsRepository $pinnedPlaylistsRepository;
     private ContentLastEngagedService $contentLastEngagedService;
     private PlaylistService $playlistService;
@@ -52,6 +54,7 @@ class UserPlaylistsController extends BaseController
      * @param VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
      * @param LessonAssignmentDecorator $lessonAssignmentDecorator
      * @param RoutingDecorator $routingDecorator
+     * @param ResourceDecorator $resourceDecorator
      * @param PinnedPlaylistsRepository $pinnedPlaylistsRepository
      * @param ContentLastEngagedService $contentLastEngagedService
      * @param PlaylistService $playlistService
@@ -64,6 +67,7 @@ class UserPlaylistsController extends BaseController
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
         LessonAssignmentDecorator $lessonAssignmentDecorator,
         RoutingDecorator $routingDecorator,
+        ResourceDecorator $resourceDecorator,
         PinnedPlaylistsRepository $pinnedPlaylistsRepository,
         ContentLastEngagedService $contentLastEngagedService,
         PlaylistService $playlistService
@@ -75,6 +79,7 @@ class UserPlaylistsController extends BaseController
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
         $this->lessonAssignmentDecorator = $lessonAssignmentDecorator;
         $this->routingDecorator = $routingDecorator;
+        $this->resourceDecorator = $resourceDecorator;
         $this->pinnedPlaylistsRepository = $pinnedPlaylistsRepository;
         $this->contentLastEngagedService = $contentLastEngagedService;
         $this->playlistService = $playlistService;
@@ -433,6 +438,12 @@ class UserPlaylistsController extends BaseController
                     'data.original_thumbnail_url',
                     $playlistItem['parent']['parent']->fetch('data.thumbnail_url')
                 );
+            }
+            if(isset($playlistItem['parent']['parent'])){
+                ResourceDecorator::$decorationMode = ResourceDecorator::DECORATION_MODE_MAXIMUM;
+                $this->resourceDecorator->decorate(new Collection([$playlistItem['parent']['parent']]));
+
+                $playlistItem['resources'] = array_merge($playlistItem['resources'] ?? [], $playlistItem['parent']['parent']['resources'] ?? []);
             }
             }
         if (!empty($playlistItem['parent'] ?? [])){
