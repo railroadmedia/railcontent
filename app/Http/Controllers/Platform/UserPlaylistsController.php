@@ -439,16 +439,6 @@ class UserPlaylistsController extends BaseController
                     $playlistItem['parent']['parent']->fetch('data.thumbnail_url')
                 );
             }
-            if(isset($playlistItem['parent']['parent'])){
-                ResourceDecorator::$decorationMode = ResourceDecorator::DECORATION_MODE_MAXIMUM;
-                $this->resourceDecorator->decorate(new Collection([$playlistItem['parent']['parent']]));
-
-                $playlistItem['resources'] = array_merge($playlistItem['resources'] ?? [], $playlistItem['parent']['parent']['resources'] ?? []);
-            }
-            }
-        if (!empty($playlistItem['parent'] ?? [])){
-            $playlistItem['resources'] = array_merge($playlistItem['resources'] ?? [], $initialItem['parent']['resources'] ?? []) ;
-
         }
 
         $relatedLesson =
