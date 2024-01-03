@@ -62,6 +62,12 @@
             </a>
             @if(empty($noTrailer))
                 <div class="sm:mx-0.5 w-full sm:w-56 join outline black smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
+            @else
+            <a class="sm:mx-0.5 w-full sm:w-56 join outline black smaller"
+                href="https://www.shopperapproved.com/reviews/Musora.com"
+                onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;"
+            >SEE THE REVIEWS</a>
+
             @endif
         </div>
         <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">

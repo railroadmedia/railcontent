@@ -207,37 +207,6 @@
                 </div>
             </div>
         </section>
-
-        {{--   XMAS     --}}
-        <div id="xmas" class="anchor"></div>
-        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
-            <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-tree-christmas text-{{ $brand }} mr-1"></i> Christmas Merch</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-                    @foreach($xmas as $key => $xmasItem)
-                            @include('_partials.components.shop.product-card', [
-                                "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $xmasItem->slug ),
-                                "sku" => $xmasItem->sku === 'drumeo' ? null : $xmasItem->sku,
-                                "badgeText" => $xmasItem->badge_text,
-                                "thumbnail" => $xmasItem->thumbnail,
-                                "packLogo" => $xmasItem->thumbnail_logo,
-                                "title" => $xmasItem->name,
-                                "packAuthor" => $xmasItem->instructor_name,
-                                "cardDescription" => $xmasItem->short_desc,
-                                "fullPrice" => $xmasItem->price,
-                                "price" => $xmasItem->discounted_price,
-                                "category" => strtolower($xmasItem->productType->name),
-                                "buttonText" => $xmasItem->sku === 'drumeo' || $xmasItem->sku === 'pianote' || $xmasItem->sku === 'singeo' || $xmasItem->sku === 'guitareo' ? 'see the deal' : null,
-                                "soldOut" => $xmasItem->sold_out,
-                                "includedEdge" => $xmasItem->included_edge,
-                                "sizes" => $xmasItem->sizes,
-                                'FCP' => $key < 4 ? true : null,
-                                "size_case_sensitive" => $xmasItem->size_case_sensitive,
-                            ])
-                    @endforeach
-                </div>
-            </div>
-        </section>
         {{--   MISC     --}}
 {{--        <div id="misc" class="anchor"></div>--}}
 {{--        <section class="grid-view category-section" data-category="misc" x-show="filter === 'clothing' || filter === 'all'">--}}
