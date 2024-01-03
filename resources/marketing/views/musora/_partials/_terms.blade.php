@@ -26,7 +26,7 @@
 
         <h4 class="leading-normal mb-4"><strong>Privacy Policy</strong></h4>
 
-        <p class="leading-normal mb-4">As your privacy is important to us, we have adopted a privacy policy that explains and governs the manner in which information is collected and used at or in connection with the Services (the “Privacy Policy”).&nbsp; Please read the Privacy Policy that forms a part of these Terms.&nbsp; By accepting these Terms, you shall also be deemed to have accepted the terms of the Privacy Policy.&nbsp; Our Privacy Policy is at <a class="text-drumeo" href="https://www.musora.com/privacy-policy">https://www.musora.com/privacy-policy</a>.</p>
+        <p class="leading-normal mb-4">As your privacy is important to us, we have adopted a privacy policy that explains and governs the manner in which information is collected and used at or in connection with the Services (the “Privacy Policy”).&nbsp; Please read the Privacy Policy that forms a part of these Terms.&nbsp; By accepting these Terms, you shall also be deemed to have accepted the terms of the Privacy Policy.&nbsp; Our Privacy Policy is at <a class="text-drumeo" href="https://www.musora.com/privacy">https://www.musora.com/privacy</a>.</p>
 
         <h4 class="leading-normal mb-4"><strong>Membership&nbsp;</strong></h4>
 
