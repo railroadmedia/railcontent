@@ -42,7 +42,7 @@
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
         "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
-        "songs" => "5000+ popular songs.",
+        "songs" => "6000+ popular songs.",
         "firstPoint" => "The world’s best drum lessons.",
         "thirdPoint" => "Unlimited personal support.",
         "fifthPoint" => "Lesson access for piano, guitar, and singing.",
@@ -66,7 +66,7 @@
         @include('musora.sales.components.card-selection-section', [
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drumeoplus_logo.svg",
             "logo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/logo-white.webp",
-            "songs" => "5000+ popular songs.",
+            "songs" => "6000+ popular songs.",
             "firstPoint" => "The world’s best drum lessons.",
             "thirdPoint" => "Unlimited personal support.",
             "fifthPoint" => "Lesson access for piano, guitar, and singing.",

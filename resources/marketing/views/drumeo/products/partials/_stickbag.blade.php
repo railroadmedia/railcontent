@@ -666,7 +666,7 @@
                                 </div>
                                 <p class="text-sm mb-1.5 text-drumeo"><strong>Annual Drumeo Membership</strong> ($240/yr)</p>
                                 <p class="text-sm mb-1.5"><strong>The world's best drum lessons.</strong></p>
-                                <p class="text-sm mb-1.5"><strong>5000+ popular songs</strong></p>
+                                <p class="text-sm mb-1.5"><strong>{{ Prices::$drumeoSongs }}+ popular songs</strong></p>
                                 <p class="text-sm mb-1.5"><strong>Unlimited Personal Support</strong></p>
                                 <p class="text-sm mb-1.5">1 Drumeo StickBag<sup>NEW</sup></p>
                                 <p class="text-sm mb-1.5">1 Brushes Sleeve</p>

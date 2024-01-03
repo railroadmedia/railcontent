@@ -226,7 +226,8 @@ export default {
         },
 
         handleContentSort(event) {
-            this.$emit("handleContentSort", event);
+            const value = event?.target?.value;
+            this.$emit("handleContentSort", value);
         },
     },
 };

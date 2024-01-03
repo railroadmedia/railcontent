@@ -33,13 +33,6 @@
 @endsection
 
 @section('layout-body')
-    <div class="shipping-delay p-2 z-40">
-        <div class="delay-bar text-center">
-            <div class="container mx-auto">
-                <p class="cursor-pointer hover:underline" @click="shippingModal = true;"><i class="fas fa-truck"></i> <strong>FREE SHIPPING OVER $150</strong></p>
-            </div>
-        </div>
-    </div>
 
     @yield('body')
 
@@ -49,7 +42,7 @@
                 <div class="info-wrap shipping-info bg-white py-5 px-4 md:px-10 rounded-xl">
                     <p>
                         <strong class="font-extrabold">Free Shipping Over $150</strong> <br>
-                        Spend over $150 and you'll unlock free worldwide shipping on any order.
+                        Spend over $150 and you'll unlock free worldwide shipping on any order (e-kit excluded).
                     </p>
                 </div>
             </div>
