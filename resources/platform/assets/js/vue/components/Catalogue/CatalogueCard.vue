@@ -68,7 +68,7 @@
             <div class="tw-flex tw-w-full">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block">
                     <a :href="renderLink  && !forceNoLinks ? item.url : null"
-                        class="card-info tw-flex tw-flex-auto tw-flex-col tw-px-2 tw-rounded-lg"
+                        class="card-info tw-flex tw-flex-auto tw-flex-col tw-rounded-lg"
                         :class="[forceListView || breakToListView ? 'tw-justify-center tw-pt-1' : 'tw-pt-2', { 'lg:tw-pt-2 lg:tw-justify-start' : breakToListView }]">
                         <div class="tw-flex tw-flex-col">
                             <!-- Video Title -->
