@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Listeners\Authentication\AuthenticationEventListener;
 use App\Listeners\Content\EngageContentEventListener;
 use App\Listeners\OrderEventListener;
+use App\Modules\EventTracking\Events\ReferralLinkCopied;
+use App\Modules\EventTracking\Events\ReferralPageViewed;
 use App\Modules\EventTracking\Listeners\EventTrackerListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Modules\UserManagementSystem\Events\User\UserCreated;
@@ -66,6 +68,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         OrderEvent::class => [
             OrderEventListener::class . '@handleOrderPlaced',
+        ],
+        ReferralLinkCopied::class => [
+            [EventTrackerListener::class, 'handleReferralLinkCopied']
+        ],
+        ReferralPageViewed::class => [
+            [EventTrackerListener::class, 'handleReferralPageViewed']
         ],
         PlaylistItemsUpdated::class => [PlaylistListener::class.'@handlePlaylistItemsUpdated'],
         PlaylistItemLoaded::class => [EngageContentEventListener::class.'@handleEngageContent'],
