@@ -46,6 +46,10 @@ const props = defineProps({
     collectionType: {
         default: '',
     },
+    defaultSort: {
+        type: String,
+        default: '-published_on',
+    },
     filterableValues: {
         type: Array,
         default: () => [],
@@ -319,12 +323,6 @@ const handleTabChange = (tab) => {
 
 onBeforeMount(() => {
     collectionStore.getURLParams();
-})
-
-onMounted(() => {
-    // console.log(props.collectionType)
-    // console.log(props.title)
-    // console.log(props.preLoadedContent)
     collectionStore.setDefaults({
         isCoach: isCoach.value,
         content: props.preLoadedContent,
@@ -332,9 +330,17 @@ onMounted(() => {
             activeTab: getFirstTabOption.value.key,
             params: { ...request_params.value },
             [isCoach.value ? 'term' : 'title']: '',
+            sort: props.defaultSort,
         },
         tabData: getFirstTabData.value,
         filterableValues: props.filterableValues,
     })
+})
+
+onMounted(() => {
+    // console.log(props.collectionType)
+    // console.log(props.title)
+    // console.log(props.preLoadedContent)
+
 })
 </script>

@@ -15,7 +15,7 @@ export const useCollectionStore = defineStore({
                 limit: 10,
                 params: {},
                 searchTerm: '',
-                sort: '-published_on',
+                sort: '',
                 progress: '',
             },
             isCoach: false,
@@ -188,7 +188,6 @@ export const useCollectionStore = defineStore({
                 if(defaults.content.meta?.filterOptions){
                     this.filterValues = this.getFilterValues(defaults.content.meta.filterOptions);
                 }
-
             }
 
             if (defaults.filter) {
