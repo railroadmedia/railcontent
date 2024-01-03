@@ -79,6 +79,12 @@
                 icon: 'fa-file-import',
                 text: `Link copied to clipboard.`
             });
+            fetch('{{ url()->route('platform.referral-link-copied') }}', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
         }
 
         function hideToast() {

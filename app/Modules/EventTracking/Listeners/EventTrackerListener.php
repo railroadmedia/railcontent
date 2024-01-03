@@ -3,6 +3,7 @@
 namespace App\Modules\EventTracking\Listeners;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
+use App\Modules\EventTracking\Events\ReferralPageViewed;
 use Avo;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 
@@ -27,5 +28,28 @@ class EventTrackerListener
         Avo::account_created(
             AvoHelper::defaultEventProperties(['account_created_at' => $user->created_at->timestamp], $user)
         );
+    }
+
+    public function handleReferralPageViewed(ReferralPageViewed $event): void
+    {
+        // @TODO EVENT TRACKING: trigger event on Avo/Rudderstack
+//        Avo::referral_page_viewed(
+//            AvoHelper::defaultEventProperties(
+//                ['referral_code' => $event->getReferralCode(), 'brand' => $event->getBrand()],
+//                $event->getUser()
+//            )
+//        );
+    }
+
+
+    public function handleReferralLinkCopied(ReferralPageViewed $event): void
+    {
+        // @TODO EVENT TRACKING: trigger event on Avo/Rudderstack
+//        Avo::referral_link_copied(
+//            AvoHelper::defaultEventProperties(
+//                ['referral_code' => $event->getReferralCode(), 'brand' => $event->getBrand()],
+//                $event->getUser()
+//            )
+//        );
     }
 }
