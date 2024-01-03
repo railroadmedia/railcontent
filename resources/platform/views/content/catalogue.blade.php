@@ -257,105 +257,105 @@
     @endif
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
-        {{--        <collection-wrapper--}}
-        {{--            :brand="{{ json_encode($brand) }}"--}}
-        {{--            :collection-type="{{ json_encode($lessonType) }}"--}}
-        {{--            :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"--}}
-        {{--            :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"--}}
-        {{--            :included-types="{{ json_encode(['course']) }}"--}}
-        {{--            :pre-loaded-content="{{ $listLessons }}"--}}
-        {{--            :statuses="{{ json_encode($statuses ?? ['published']) }}"--}}
-        {{--            :title="{{ json_encode($catalogueMeta['shortname'] ?? $catalogueMeta['name']) }}"--}}
-        {{--        ></collection-wrapper>--}}
+                <collection-wrapper
+                    :brand="{{ json_encode($brand) }}"
+                    :collection-type="{{ json_encode($lessonType) }}"
+                    :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
+                    :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"
+                    :included-types="{{ json_encode(['course']) }}"
+                    :pre-loaded-content="{{ $listLessons }}"
+                    :statuses="{{ json_encode($statuses ?? ['published']) }}"
+                    :title="{{ json_encode($catalogueMeta['shortname'] ?? $catalogueMeta['name']) }}"
+                ></collection-wrapper>
 
         {{-- Play Alongs Catalogue for Drumeo --}}
-        @if( $catalogueMeta['name'] === "Play Alongs" && $brand === "drumeo" )
+{{--        @if( $catalogueMeta['name'] === "Play Alongs" && $brand === "drumeo" )--}}
 
-            <play-alongs
-                ref="playAlongsVueInstance"
-                content-endpoint="/railcontent/content"
-                theme-color="{{ $brand }}"
-                brand="{{ $brand }}"
-                :pre-loaded-content="{{ $listLessons }}"
-                :session-token="{{ json_encode(railtracker_session_token()) }}"
-                @play="handlePlayAlongsPlay"
-                @pause="handlePlayAlongsPause"
-            ></play-alongs>
+{{--            <play-alongs--}}
+{{--                ref="playAlongsVueInstance"--}}
+{{--                content-endpoint="/railcontent/content"--}}
+{{--                theme-color="{{ $brand }}"--}}
+{{--                brand="{{ $brand }}"--}}
+{{--                :pre-loaded-content="{{ $listLessons }}"--}}
+{{--                :session-token="{{ json_encode(railtracker_session_token()) }}"--}}
+{{--                @play="handlePlayAlongsPlay"--}}
+{{--                @pause="handlePlayAlongsPause"--}}
+{{--            ></play-alongs>--}}
 
-        @else
+{{--        @else--}}
 
-            <transition appear name="fade">
-                <content-catalogue
-                    dusk="content-catalogue"
-                    brand="{{ $brand }}"
-                    theme-color="{{ $brand }}"
-                    user-id="{{ auth()->id() }}"
-                    subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] ?? null }}"
-                    catalogue-name="{{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}"
-                    :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
-                    content-endpoint="{{ $endpointOverride ?? '/railcontent/content' }}"
-                    :use-theme-color="true"
-                    :pre-loaded-content="{{ $listLessons }}"
-                    :is-admin="{{ json_encode(user()->isAdmin()) }}"
-                    :statuses="{{ json_encode($statuses ?? ['published']) }}"
-                    :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"
-                    :use-url-params="true"
-                    :lock-unowned="true"
-                    :show-loading-animation="true"
-                    no-results-message="There are no {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }} that match those filters. Please remove some filters."
-                    @if($lessonType === 'routine')
-                        catalogue-type="routines"
-                        :infinite-scroll="false"
-                        :paginate="true"
-                        limit="12"
-                    @else
-                        catalogue-type="{{ $lessonType === 'chord-and-scale' ? 'grid' : 'list' }}"
-                        :infinite-scroll="true"
-                        limit="20"
-                    @endif
-                    @if($lessonType === 'quick-tips')
-                        :included-types="{{ json_encode([$lessonType, 'boot-camps']) }}"
-                    @else
-                        :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : explode(',', $lessonType) ) }}"
-                    @endif
-                    @if($lessonType === 'student-review' || !empty($isAllContent))
-                        :force-wide-thumbs="true"
-                    @endif
-                    @if(!empty($isAllContent))
-                        :search-bar="true"
-                        search-endpoint="/railcontent/search"
-                        total-results="{{ $totalResults }}"
-                    @endif
-                    @if(!empty($searchTerm))
-                        search-term="{{ $searchTerm }}"
-                    @endif
-                    @if(!empty($sortOverride))
-                        sort-override="{{ $sortOverride }}"
-                    @endif
-                >
-                    @include('partials.bladesora.members.skeletons.catalog-filters', [
-                        "length" => count($catalogueMeta['allowableFilters']),
-                    ])
-                    @if($lessonType === 'routine')
-                        <div class="tw-flex tw-flex-row nmh-1">
-                            @for($i = 0; $i < 4; $i++)
-                                @include('partials.bladesora.members.skeletons.card-item', [
-                                ])
-                            @endfor
-                        </div>
-                    @else
-                        @for($i = 0; $i < 10; $i++)
-                            @include('partials.bladesora.members.skeletons.list-item', [
-                                "overview" => false,
-                                "showNumbers" => false,
-                                "thumbnailType" => $lessonType === 'song' ? 'square' : 'widescreen'
-                            ])
-                        @endfor
-                    @endif
-                </content-catalogue>
-            </transition>
+{{--            <transition appear name="fade">--}}
+{{--                <content-catalogue--}}
+{{--                    dusk="content-catalogue"--}}
+{{--                    brand="{{ $brand }}"--}}
+{{--                    theme-color="{{ $brand }}"--}}
+{{--                    user-id="{{ auth()->id() }}"--}}
+{{--                    subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] ?? null }}"--}}
+{{--                    catalogue-name="{{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}"--}}
+{{--                    :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"--}}
+{{--                    content-endpoint="{{ $endpointOverride ?? '/railcontent/content' }}"--}}
+{{--                    :use-theme-color="true"--}}
+{{--                    :pre-loaded-content="{{ $listLessons }}"--}}
+{{--                    :is-admin="{{ json_encode(user()->isAdmin()) }}"--}}
+{{--                    :statuses="{{ json_encode($statuses ?? ['published']) }}"--}}
+{{--                    :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"--}}
+{{--                    :use-url-params="true"--}}
+{{--                    :lock-unowned="true"--}}
+{{--                    :show-loading-animation="true"--}}
+{{--                    no-results-message="There are no {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }} that match those filters. Please remove some filters."--}}
+{{--                    @if($lessonType === 'routine')--}}
+{{--                        catalogue-type="routines"--}}
+{{--                        :infinite-scroll="false"--}}
+{{--                        :paginate="true"--}}
+{{--                        limit="12"--}}
+{{--                    @else--}}
+{{--                        catalogue-type="{{ $lessonType === 'chord-and-scale' ? 'grid' : 'list' }}"--}}
+{{--                        :infinite-scroll="true"--}}
+{{--                        limit="20"--}}
+{{--                    @endif--}}
+{{--                    @if($lessonType === 'quick-tips')--}}
+{{--                        :included-types="{{ json_encode([$lessonType, 'boot-camps']) }}"--}}
+{{--                    @else--}}
+{{--                        :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : explode(',', $lessonType) ) }}"--}}
+{{--                    @endif--}}
+{{--                    @if($lessonType === 'student-review' || !empty($isAllContent))--}}
+{{--                        :force-wide-thumbs="true"--}}
+{{--                    @endif--}}
+{{--                    @if(!empty($isAllContent))--}}
+{{--                        :search-bar="true"--}}
+{{--                        search-endpoint="/railcontent/search"--}}
+{{--                        total-results="{{ $totalResults }}"--}}
+{{--                    @endif--}}
+{{--                    @if(!empty($searchTerm))--}}
+{{--                        search-term="{{ $searchTerm }}"--}}
+{{--                    @endif--}}
+{{--                    @if(!empty($sortOverride))--}}
+{{--                        sort-override="{{ $sortOverride }}"--}}
+{{--                    @endif--}}
+{{--                >--}}
+{{--                    @include('partials.bladesora.members.skeletons.catalog-filters', [--}}
+{{--                        "length" => count($catalogueMeta['allowableFilters']),--}}
+{{--                    ])--}}
+{{--                    @if($lessonType === 'routine')--}}
+{{--                        <div class="tw-flex tw-flex-row nmh-1">--}}
+{{--                            @for($i = 0; $i < 4; $i++)--}}
+{{--                                @include('partials.bladesora.members.skeletons.card-item', [--}}
+{{--                                ])--}}
+{{--                            @endfor--}}
+{{--                        </div>--}}
+{{--                    @else--}}
+{{--                        @for($i = 0; $i < 10; $i++)--}}
+{{--                            @include('partials.bladesora.members.skeletons.list-item', [--}}
+{{--                                "overview" => false,--}}
+{{--                                "showNumbers" => false,--}}
+{{--                                "thumbnailType" => $lessonType === 'song' ? 'square' : 'widescreen'--}}
+{{--                            ])--}}
+{{--                        @endfor--}}
+{{--                    @endif--}}
+{{--                </content-catalogue>--}}
+{{--            </transition>--}}
 
-        @endif
+{{--        @endif--}}
     </div>
 
 @endsection
