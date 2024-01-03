@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\ApiGateways;
 
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Models\Shopify\Order;
 use Carbon\Carbon;
 use Exception;
@@ -106,6 +107,79 @@ class ShopifyGateway
     {
         return count($this->getCustomerOrderByProcessAtDate($shopifyCustomerId, $processedAt));
     }
+
+    public function defineMetaField()
+    {
+        $namespace = ShopifyMetafieldNamespace::Model_Users->value;
+        $key = ShopifyMetafieldKey::LastTrialEndDate->value;
+        $type = ShopifyMetafieldTypes::date->value;
+        $query =
+            <<<GRAPHQL
+                mutation {
+                    metafieldDefinitionCreate (definition: {
+                        name: "Last Free Trial End"
+                        namespace: "$namespace"
+                        key: "$key"
+                        type: "$type"
+                        ownerType: CUSTOMER
+                        description: "End date of the users previous free trial"
+                    }
+                    ) {
+                    createdDefinition {
+                        id
+                        name
+                    }
+                    userErrors {
+                        field
+                        message
+                        code
+                    }
+                }
+            }
+            GRAPHQL;
+        $response = $this->executeQuery($query);
+        return $response;
+    }
+
+    public function updateCustomerLastTrialEndDate($customerID, $lastTrialEndDate)
+    {
+        // This data is processed by the shopify extension: checkout-block-repeated-trials
+        // in the repository: musora-shop-ify-extensions-app
+        $namespace = ShopifyMetafieldNamespace::Model_Users->value;
+        $key = ShopifyMetafieldKey::LastTrialEndDate->value;
+        $type = ShopifyMetafieldTypes::date->value;
+        $lastTrialEndDate = $lastTrialEndDate->toDateString();
+        $query =
+            <<<GRAPHQL
+                mutation {
+                    metafieldsSet( metafields: {
+                        namespace: "$namespace"
+                        key: "$key"
+                        type: "$type"
+                        ownerId:  "gid://shopify/Customer/$customerID"
+                        value: "$lastTrialEndDate"
+                    }
+                    ) {
+                    metafields {
+                        key
+                        namespace
+                        value
+                        createdAt
+                        updatedAt
+                    }
+                    userErrors {
+                        field
+                        message
+                        code
+                    }
+                }
+            }
+            GRAPHQL;
+        $response = $this->executeQuery($query);
+        return $response;
+    }
+
+
 
     public function executeQuery(string $gql): mixed
     {
