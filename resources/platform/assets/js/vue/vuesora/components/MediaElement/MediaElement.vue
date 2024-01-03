@@ -206,8 +206,8 @@ export default {
                         );
                     }
                 } else {
-                    const thisHeight = Number(defaultQuality.replace('p', ''));
-                    const defaultExists = this.sortedSourcesArray.filter(source => source.height === thisHeight).length > 0;
+                    const thisHeight = defaultQuality ? Number(defaultQuality.replace('p', '')) : 0;
+                    const defaultExists = thisHeight ? this.sortedSourcesArray.filter(source => source.height === thisHeight).length > 0 : false;
 
                     if (!defaultExists) {
                         if (guessedQuality.length) {
@@ -218,7 +218,7 @@ export default {
                         } else {
                             // Otherwise take the last item in the qualities array (the smallest quality)
                             defaultQuality = this.sourceQualityLabel(
-                                this.sortedSourcesArray[this.sortedSourcesArray.length - 1].height,
+                                this.sortedSourcesArray[this.sortedSourcesArray.length - 1]?.height,
                             );
                         }
                     }
@@ -376,7 +376,7 @@ export default {
             const vm = this;
             const urlParams = QueryString.parse(window.location.search);
 
-            return new MediaElementPlayer(vm.elementId, {
+            const mediaplayer = new MediaElementPlayer(vm.elementId, {
                 defaultVideoWidth: 1280,
                 defaultVideoHeight: 720,
                 autosizeProgress: false,
@@ -439,6 +439,10 @@ export default {
                     console.error(error);
                 },
             });
+
+            console.log(mediaplayer);
+
+            return mediaplayer;
         },
 
         initializeCopyTimecodeCommand(vm) {

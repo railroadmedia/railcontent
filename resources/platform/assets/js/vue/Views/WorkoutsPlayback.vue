@@ -45,7 +45,7 @@
                                     :brand="videoProps.brand"
                                     :theme-color="videoProps.brand"
                                     :poster="videoProps.videoPosterImageUrl"
-                                    :sources="videoProps.videoPlaybackEndpoints"
+                                    :sources="videoProps.sources"
                                     :hls-manifest-url="videoProps.hlsManifestUrl"
                                     :video-id="videoProps.vimeoVideoId"
                                     :content-id="videoProps.id"
