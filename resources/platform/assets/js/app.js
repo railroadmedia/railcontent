@@ -284,10 +284,10 @@ app.component('AppContainer', AppContainer)
     .component('Playlist', Playlist)
     .component('Referral', Referral)
 
-    .component('PlaylistPlaybackWrapper', defineAsyncComponent(() =>
+    .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
-            /* webpackChunkName: "playlist-playback-wrapper" */
-            `./vue/Views/PlaylistPlaybackWrapper.vue`
+            /* webpackChunkName: "playlist-playback" */
+            `./vue/Views/PlaylistPlayback.vue`
         )
     ))
 
