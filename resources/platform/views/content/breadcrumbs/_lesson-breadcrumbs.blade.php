@@ -2,10 +2,6 @@
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
-                "title" => 'Home',
-                "url" => url()->route('platform.home')
-            ],
-            [
                 "title" => $firstContent->fetch('fields.title'),
                 "url" => $firstContent->fetch('url')
             ],
@@ -21,10 +17,6 @@
 @elseif($lessonType === 'challenge-part')
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
-            [
-                "title" => 'Home',
-                "url" => url()->route('platform.home'),
-            ],
             [
                 "title" => 'Workouts',
                 "url" => url()->route('platform.workouts'),
@@ -79,10 +71,6 @@
         @include('partials.bladesora.members.navigation.breadcrumbs', [
             "pages" => [
                 [
-                    "title" => 'Home',
-                    "url" => url()->route('platform.home'),
-                ],
-                [
                     "title" => "Packs",
                     "url" => url()->route('platform.packs'),
                 ],
@@ -98,10 +86,6 @@
     @else
         @include('partials.bladesora.members.navigation.breadcrumbs', [
             "pages" => [
-                [
-                    "title" => 'Home',
-                    "url" => url()->route('platform.home'),
-                ],
                 [
                     "title" => "Packs",
                     "url" => url()->route('platform.packs'),
@@ -126,10 +110,6 @@
             @include('partials.bladesora.members.navigation.breadcrumbs', [
                 "pages" => [
                     [
-                        "title" => 'Home',
-                        "url" => url()->route('platform.home')
-                    ],
-                    [
                         "title" => "Packs",
                         "url" => url()->route('platform.packs'),
                     ],
@@ -149,10 +129,6 @@
             @include('partials.bladesora.members.navigation.breadcrumbs', [
                 "pages" => [
                     [
-                        "title" => 'Home',
-                        "url" => url()->route('platform.home')
-                    ],
-                    [
                         "title" => parse_lesson_type_readable($parent->fetch('type'), true),
                         "url" => url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$parent->fetch('type')]]),
                     ],
@@ -169,10 +145,6 @@
     @else
         @include('partials.bladesora.members.navigation.breadcrumbs', [
             "pages" => [
-                [
-                    "title" => 'Home',
-                    "url" => url()->route('platform.home')
-                ],
                     [
                         "title" => parse_lesson_type_readable($lessonContent->fetch('type'), true),
                         "url" => url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent->fetch('type')]]),

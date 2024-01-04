@@ -66,8 +66,7 @@ onBeforeMount(() => {
 
 </script>
 <template>
-    <Breadcrumb :brand="brand" :first-level-url="goBackUrl" :first-level-title="contentName"
-        :last-level-title="contentTitle" />
+    <Breadcrumb :breadcrumbs="[{ title: contentName, url: goBackUrl }, { title: contentTitle }]" />
     <UnifiedHeader :brand="brand" :header-background="headerBackground">
         <template v-slot:left-content>
             <div class="tw-bg-[#00101D] tw-rounded-full tw-h-[28px] tw-w-[28px]">

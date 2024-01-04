@@ -1,8 +1,6 @@
 <template>
     <Breadcrumb
-        :first-level-url="`/${ brand }/playlists`"
-        first-level-title="Playlists"
-        :last-level-title="playlist['name']"
+        :breadcrumbs="[{ title: 'Playlists', url: `/${ brand }/playlists` }, { title: playlist['name'] }]"
     />
 
     <PlaylistHeader

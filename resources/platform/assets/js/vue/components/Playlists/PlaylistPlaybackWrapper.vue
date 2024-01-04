@@ -376,8 +376,7 @@ onBeforeMount(() => {
     <div class="tw-w-full tw-h-full">
         <!-- Breadcrumbs -->
         <Breadcrumb :class="{ 'lg:tw-hidden': playlistsStore.playerExpanded }" :brand="brand"
-            :first-level-url="`/${brand}/playlists`" first-level-title="Playlists" :secondLevelUrl="secondLevelUrl"
-            :secondLevelTitle="playlistName" :lastLevelTitle="playlistItemTitle" 
+            :breadcrumbs="[{ title: 'Playlists', url: `/${brand}/playlists` }, { title: playlistName, url: secondLevelUrl }, { title: playlistItemTitle }]"
         />
 
         <div class="tw-grid tw-grid-cols-3 2xl:tw-grid-cols-[auto_auto_420px] tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 tw-mt-3 tw-flex-col"

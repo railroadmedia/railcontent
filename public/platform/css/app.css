@@ -25621,9 +25621,6 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
-.last-of-type\:tw-inline-block:last-of-type{
-  display: inline-block !important;
-}
 .last-of-type\:tw-inline-flex:last-of-type{
   display: inline-flex !important;
 }
@@ -26868,9 +26865,6 @@ a:visited{
   .sm\:tw-text-xl{
     font-size: 1.25rem !important;
     line-height: 1.75rem !important;
-  }
-  .sm\:tw-font-normal{
-    font-weight: 400 !important;
   }
   .sm\:tw-leading-loose{
     line-height: 2 !important;
