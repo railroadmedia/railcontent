@@ -349,6 +349,14 @@ export default {
 
         vm.removeMediaElementEventListeners(vm.mediaElement);
     },
+
+    //watchers
+    watch: {
+        seekToTime(newTime, oldTime) {
+            if(newTime !== oldTime ) this.jumpToTime(newTime);
+        }
+    },
+
     methods: {
         //Fix icons to use proper svg paths
         updateSvgUseElements() {
