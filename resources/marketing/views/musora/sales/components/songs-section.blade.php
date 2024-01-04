@@ -7,10 +7,10 @@
                 <strong class="font-black text-{{ $theme }} cursor-pointer" x-on:click="soundslice = true;"><u>Try the demo <i class="fal fa-play-circle"></i></u></strong>
             @else
                 <br class="lg:hidden"><strong class="font-black mr-0.5">Try the demo <i class="fas fa-arrow-right"></i></strong>
-                <span class="inline-block rounded-full border px-1.5 py-0.5 mr-0.5 border-drumeo text-drumeo" x-on:click="drumeoSoundslice = true;"><i class="fal fa-drum"></i></span>
-                <span class="inline-block rounded-full border px-1.5 py-0.5 mr-0.5 border-pianote text-pianote" x-on:click="pianoteSoundslice = true;"><i class="fal fa-piano"></i></span>
-                <span class="inline-block rounded-full border px-1.5 py-0.5 mr-0.5 border-guitareo text-guitareo" x-on:click="guitareoSoundslice = true;"><i class="fal fa-guitar"></i></span>
-                <span class="inline-block rounded-full border px-1.5 py-0.5 border-singeo text-singeo" x-on:click="singeoSoundslice = true;"><i class="fal fa-microphone-stand"></i></span>
+                <span class="inline-block rounded-full border px-1.5 py-0.5 cursor-pointer mr-0.5 border-drumeo text-drumeo" x-on:click="drumeoSoundslice = true;"><i class="fal fa-drum"></i></span>
+                <span class="inline-block rounded-full border px-1.5 py-0.5 cursor-pointer mr-0.5 border-pianote text-pianote" x-on:click="pianoteSoundslice = true;"><i class="fal fa-piano"></i></span>
+                <span class="inline-block rounded-full border px-1.5 py-0.5 cursor-pointer mr-0.5 border-guitareo text-guitareo" x-on:click="guitareoSoundslice = true;"><i class="fal fa-guitar"></i></span>
+                <span class="inline-block rounded-full border px-1.5 py-0.5 cursor-pointer border-singeo text-singeo" x-on:click="singeoSoundslice = true;"><i class="fal fa-microphone-stand"></i></span>
             @endif
 
         </p>

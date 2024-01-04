@@ -319,7 +319,7 @@
     x-data ='{
         brand: "pianote",
         drumeoSoundslice: false,
-        soundslice: false,
+        pianoteSoundslice: false,
         guitareoSoundslice: false,
         singeoSoundslice: false,
         trailer: false,
@@ -406,7 +406,7 @@
     ])
 
     @include('_partials.components.video-modal',[
-        'name' => 'soundslice',
+        'name' => 'pianoteSoundslice',
         'video' => '77f4c',
         'soundslice' => true,
     ])
