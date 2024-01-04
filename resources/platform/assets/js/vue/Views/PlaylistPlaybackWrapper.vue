@@ -4,24 +4,24 @@
     fix tracking for videos
 */
 import { onBeforeMount, computed, reactive, ref } from 'vue';
-import { usePlaylistsStore } from '../../../stores/playlists';
-import SoundSlice from '../SoundSlice/SoundSlice.vue';
-import PlaybackCue from './PlaybackCue.vue';
-import Comments from '../../vuesora/views/comments/Comments.vue';
-import PlaybackNavButtons from './PlaybackNavButtons.vue';
-import Breadcrumb from '../Breadcrumb/Breadcrumb.vue';
-import VideoMediaElement from '../../vuesora/components/MediaElement/MediaElement.vue';
-import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
-import VideoResources from '../../vuesora/components/VideoResources/VideoResources.vue';
-import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
-import ContentUnavailable from './ContentUnavailable.vue';
-import AssignmentsContainer from '../../vuesora/components/AssignmentsContainer/AssignmentsContainer.vue';
-import ContentInfo from '../ContentInfo/ContentInfo.vue';
-import RelatedPlaylists from './RelatedPlaylists';
-import VideoChapters from '../VideoChapters/VideoChapters.vue';
-import SoundSliceControls from "../SoundSlice/SoundSliceControls.vue";
-import Intercom from '../../vuesora/assets/js/services/intercom';
-import Helpscout from '../../vuesora/assets/js/services/helpscout';
+import { usePlaylistsStore } from '../../stores/playlists';
+import PlaybackCue from '../components/Playlists/PlaybackCue.vue';
+import ContentUnavailable from '../components/Playlists/ContentUnavailable.vue';
+import PlaybackNavButtons from '../components/Playlists/PlaybackNavButtons.vue';
+import RelatedPlaylists from '../components/Playlists/RelatedPlaylists';
+import SoundSlice from '../components/SoundSlice/SoundSlice.vue';
+import SoundSliceControls from "../components/SoundSlice/SoundSliceControls.vue";
+import Breadcrumb from '../components/Breadcrumb/Breadcrumb.vue';
+import ContentInfo from '../components/ContentInfo/ContentInfo.vue';
+import VideoChapters from '../components/VideoChapters/VideoChapters.vue';
+import Comments from '../vuesora/views/comments/Comments.vue';
+import VideoMediaElement from '../vuesora/components/MediaElement/MediaElement.vue';
+import VideoPlayer from '../vuesora/components/VideoPlayer/VideoPlayer.vue';
+import VideoResources from '../vuesora/components/VideoResources/VideoResources.vue';
+import YoutubePlayer from '../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
+import Intercom from '../vuesora/assets/js/services/intercom';
+import Helpscout from '../vuesora/assets/js/services/helpscout';
+import AssignmentsContainer from '../vuesora/components/AssignmentsContainer/AssignmentsContainer.vue';
 
 //-----------Props-----------//
 const props = defineProps({

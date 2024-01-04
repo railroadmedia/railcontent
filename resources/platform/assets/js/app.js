@@ -287,7 +287,7 @@ app.component('AppContainer', AppContainer)
     .component('PlaylistPlaybackWrapper', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-playback-wrapper" */
-            `./vue/components/Playlists/PlaylistPlaybackWrapper.vue`
+            `./vue/Views/PlaylistPlaybackWrapper.vue`
         )
     ))
 
