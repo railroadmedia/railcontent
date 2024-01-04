@@ -9,6 +9,7 @@ use App\Modules\Ecommerce\Models\Payment;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\SubscriptionPayment;
 use App\Modules\Ecommerce\Services\ShopifyCancelService;
+use App\Modules\Ecommerce\Services\ShopifySyncService;
 use Carbon\Carbon;
 use Railroad\Ecommerce\Repositories\SubscriptionPaymentRepository;
 use Signifly\Shopify\Shopify;
@@ -17,119 +18,28 @@ class FixWrongAccessIssues extends Command
 {
     protected $signature = 'ecommerce:FixWrongAccessIssues {--limit=10000} {--userId=}';
 
-    public function handle(Shopify $shopify, ShopifyCancelService $shopifyCancelService): void
+    public function handle(ShopifySyncService $shopifySyncService): void
     {
-        $this->withExecutionTime(function () use ($shopify, $shopifyCancelService) {
-            $limit = $this->option('limit');
-            $userId = $this->option('userId');
-            $query = SubscriptionPayment::query()->select('ecommerce_subscription_payments.*')
+        $this->withExecutionTime(function () use ($shopifySyncService) {
+            $query = SubscriptionPayment::query()->distinct()->select(['usora_users.id', 'usora_users.shopify_id'])
                 ->join(
                     'ecommerce_subscriptions',
                     'ecommerce_subscriptions.id',
                     '=',
                     'ecommerce_subscription_payments.subscription_id'
                 )
-                ->where('ecommerce_products.digital_access_time_interval_type', 'month')
-                ->where('ecommerce_products.digital_access_time_interval_length', '6')
-                ->where('ecommerce_subscriptions.interval_type', 'month')
-                ->where('ecommerce_subscriptions.interval_count', 1)
-                ->where('ecommerce_subscriptions.type', '<>', 'payment plan')
-                //->where('ecommerce_subscription_payments.payment_id', 334338)
-                ->join('ecommerce_products', 'ecommerce_products.id', '=', 'ecommerce_subscriptions.product_id');
+                ->join('usora_users', 'usora_users.id', '=', 'ecommerce_subscriptions.user_id')
+                ->where('ecommerce_subscription_payments.updated_at', '>', Carbon::parse('2023-12-18'));
+            $userId = $this->option('userId');
             if ($userId) {
-                $query->where('ecommerce_subscriptions.user_id', $userId);
+                $query = $query->where('ecommerce_subscriptions.user_id', $userId);
             }
-            $items = $query->limit($limit)->get();
-            $count = count($items);
-            $this->info("Found $count items to fix");
+            $users = $query->get();
 
-            foreach ($items as $item) {
-                $this->info("Fixing item $item->id");
-                try {
-                    $subscription = Subscription::find($item->subscription_id);
-
-                    $payment = Payment::find($item->payment_id);
-                    if ($subscription->user_id == 385381) {
-                        $this->info("Skipping user 385381");
-                        continue;
-                    }
-                    $requiresUpdate = false;
-
-                    switch ($subscription->type) {
-                        case 'subscription':
-                            if ($subscription->total_price < 30) {
-                                $requiresUpdate = true;
-                            }
-                            break;
-                        case 'apple_subscription':
-                            $requiresUpdate = true;
-                            break;
-                        default:
-                            throw new \Exception('case not handled');
-                    }
-                    $subscription->product_id = $this->getMonthlyProductId($subscription);
-
-                    if ($requiresUpdate) {
-                        $this->info("Removing order $item->shopify_id");
-                        $shopifyCancelService->cancelSubscriptionPaymentOrder($item);
-                        $item->shopify_id = null;
-                        $item->save();
-
-                        switch ($subscription->type) {
-                            case 'subscription':
-                                if ($subscription->total_price < 30) {
-                                    $subscription->product_id = $this->getMonthlyProductId($subscription);
-                                    $subscription->save();
-                                    $requiresUpdate = true;
-                                }
-                                break;
-                            case 'apple_subscription':
-                                if ($payment->total_paid > 35) {
-                                    $payment->total_paid = 29.99;
-                                    if ($payment->total_refunded > $payment->total_paid) {
-                                        $payment->total_refunded = 29.99;
-                                    }
-                                    $payment->save();
-                                }
-                                $subscription->product_id = $this->getMonthlyProductId($subscription);
-                                $subscription->total_price = 29.99;
-                                $subscription->save();
-                                $requiresUpdate = true;
-
-                                break;
-                            default:
-                                throw new \Exception('case not handled');
-                        }
-
-                        dispatch_sync(
-                            new SyncSubscriptionPaymentsToShopifyOrders(
-                                $item->id,
-                                $item->id,
-                                Carbon::minValue(),
-                                false,
-                                false
-                            )
-                        );
-                    }
-                } catch (\Throwable $exception) {
-                    \Log::error($exception->getMessage());
-                }
+            foreach ($users as $user) {
+                $this->info('ecommerce:FixWrongAccessIssues:Syncing user: ' . $user->id);
+                $shopifySyncService->syncCustomer($user->shopify_id, removeDeletedOrderPermissions: true);
             }
         });
-    }
-
-    private function getMonthlyProductId(Subscription $subscription): int
-    {
-        switch ($subscription->product_id) {
-            case 124:
-            case 125:
-                return 124;
-            case 6:
-            case 5:
-            case 53:
-                return 5;
-            default:
-                throw  new \Exception('case not handled');
-        }
     }
 }
