@@ -184,16 +184,28 @@ const handleCloseSoundslice = () => {
                 </a>
                 <div class="tw-flex tw-flex-col sm:tw-flex-row tw-py-4 song-content-container">
                     <div class="tw-flex tw-flex-col song-album-cover sm:tw-mr-6 tw-mb-6 sm:tw-mb-0">
-                        <div
-                            class="tw-aspect-square sm:tw-max-w-[338px] tw-min-w-[175px] 2xl:tw-w-screen corners-10 flex-center flex-column shadow-md tw-bg-[#d1d1d1] dark:tw-bg-[#081825">
-                            <img :src="thumbnailUrl" alt="Album Art" class="corners-10 tw-transition-opacity tw-w-full"
-                                loading="lazy">
-                            <div class="thumb-title flex-center text-center ph-1 rounded ba-white-2 hover-border-drumeo"
-                                style="width: 80px; height: 80px; position: absolute;">
+
+                        <div class="tw-flex tw-flex-shrink-0 tw-items-center tw-justify-center tw-aspect-square tw-w-full tw-min-w-[175px] sm:tw-max-w-[338px]  2xl:tw-w-screen tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031]">
+                            <!-- Song Image Background -->
+                            <img :src="`https://www.musora.com/musora-cdn/image/width=500/${thumbnailUrl}`" 
+                                class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0 tw-blur-sm" 
+                                loading="lazy"
+                                onload="this.classList.remove('tw-opacity-0')"
+                            >
+                            <!-- Song Image -->
+                            <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
+                                <img class="tw-h-full tw-object-cover tw-opacity-0" 
+                                    :src="thumbnailUrl" 
+                                    :alt="`${songTitle} album cover`"  
+                                    loading="lazy"
+                                    onload="this.classList.remove('tw-opacity-0')"
+                                />
+                            </div>
+
+                            <div class="tw-z-10 tw-flex tw-items-center tw-justify-center tw-w-[80px] tw-h-[80px] thumb-title rounded ba-white-2 hover-border-drumeo">
                                 <button @click="openFull"
-                                    class="square heading rounded pointer text-white hover-text-drumeo shadow-md"
-                                    style="width: 80px; height: 80px;">
-                                    <i class="fas fa-play absolute-center" style="margin-left: 2px;"></i>
+                                    class="square heading rounded pointer text-white hover-text-drumeo shadow-md tw-w-[80px] tw-h-[80px]">
+                                    <i class="fas fa-play absolute-center tw-ml-[2px]"></i>
                                 </button>
                             </div>
                         </div>
