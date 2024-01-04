@@ -5673,7 +5673,7 @@ media-typer@0.3.0:
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==
 
-mediaelement-plugins@^2.5.0:
+mediaelement-plugins@^2.6.7:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/mediaelement-plugins/-/mediaelement-plugins-2.6.7.tgz#3036d34d347e747f6606f997a2caeeb85f7d9edf"
   integrity sha512-idCgBOnaWHKqVOKciuFh/6SnauefZQ9TjBZ0uzNTaSooyyK/xhQwcNEitKJJBw90An2pbwlP0jIyUma7HR2cIA==
@@ -5681,17 +5681,18 @@ mediaelement-plugins@^2.5.0:
     global "^4.3.1"
     mediaelement "^5.0.1"
 
-mediaelement@^4.2.8:
-  version "4.2.17"
-  resolved "https://registry.yarnpkg.com/mediaelement/-/mediaelement-4.2.17.tgz#6a12a0f0149f2cc0051274fe64a6b7fcab4f4734"
-  integrity sha512-v+NcqaylHNPFbpfPwlyw8/LnKcuSyYlWaMcUvB+zBzP9jkVvHmVl63JebGOC3Zmimh4dRq6vzXlbda4e5jT4VQ==
-  dependencies:
-    global "^4.3.1"
-
 mediaelement@^5.0.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/mediaelement/-/mediaelement-5.1.1.tgz#7afc92690b8b8693c95ba485e49046beba017541"
   integrity sha512-dmS/HT4iV/YlCSSf/Tto66m3sptHnPiTld3Y64lSLnqXYOH/f3vXhA0AW01zEHS37HMAlrYQ0kEDxhpwej+6eA==
+  dependencies:
+    global "^4.3.1"
+    svg4everybody "^2.1.9"
+
+mediaelement@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/mediaelement/-/mediaelement-7.0.2.tgz#f2bbf835f75b353195263195ae5db2ea32aa23ed"
+  integrity sha512-7ejJ9M2HPYn4pkrh6Rwqa1xLz50dMR7nEmT/7vYqN55kJwRfIq4cb/6D73p1oM8O6uaBuWttkJjrWpTLm2p9mQ==
   dependencies:
     global "^4.3.1"
     svg4everybody "^2.1.9"
