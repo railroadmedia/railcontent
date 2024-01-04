@@ -398,8 +398,8 @@
         ])
     @elseif(!empty($promoVersion))
      @php
-        $originalPrice = floatval($productPrices['practice-anywhere']->price);
-        $discountedPrice = floatval($productPrices['practice-anywhere']->discounted_price);
+        $originalPrice = 240;
+        $discountedPrice = 200;
         $discountPercentage = 17;
         if(!empty($products['alesis-ekit'])) {
             $stock = $products['alesis-ekit']->getPublicStockCount();

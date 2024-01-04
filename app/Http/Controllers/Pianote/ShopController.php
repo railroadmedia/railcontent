@@ -45,7 +45,6 @@ class ShopController extends BaseController
         });
 
         $featured = $products->whereIn('id', [208, 210, 197, 206]);
-        $xmas = $products->whereIn('id', [230, 228, 225]);
 
         return view('pianote.shop.shop', [
             'lessons' => $lessons,
@@ -56,7 +55,6 @@ class ShopController extends BaseController
             'theme' => 'pianote',
             'category' => $request->category,
             'featured' => $featured,
-            'xmas' => $xmas
         ]);
     }
 

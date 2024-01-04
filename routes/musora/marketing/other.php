@@ -18,8 +18,8 @@ Route::domain('{musoraDomain}')
 //        Route::get('/handbook', [MarketingController::class, 'handbook']);
         Route::get('about', [MarketingController::class, 'about']);
         Route::get('contact', [MarketingController::class, 'contact']);
-        Route::get('terms-of-service', [MarketingController::class, 'terms']);
-        Route::get('privacy-policy', [MarketingController::class, 'privacy']);
+        Route::get('terms', [MarketingController::class, 'terms']);
+        Route::get('privacy', [MarketingController::class, 'privacy']);
         Route::get('preferences', [MarketingController::class, 'preferences']);
         Route::get('careers', [MarketingController::class, 'careers']);
         Route::get('careers-pinpoint', [MarketingController::class, 'careersPP']);

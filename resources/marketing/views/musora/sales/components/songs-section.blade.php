@@ -2,7 +2,18 @@
 <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#0c1524;">
     <div class="container max-w-5xl mx-auto">
         <h2><strong>Play your favorite songs.</strong></h2>
-        <p class="leading-tight mt-2 sm:mt-3">You’ll have all the tools you need to make sure you never miss a beat. <strong class="font-black text-{{ $theme }} cursor-pointer" x-on:click="soundslice = true;"><u>Try the demo <i class="fal fa-play-circle"></i></u></strong></p>
+        <p class="leading-tight mt-2 sm:mt-3">You’ll have all the tools you need to make sure you never miss a beat.
+            @if($theme != 'musora')
+                <strong class="font-black text-{{ $theme }} cursor-pointer" x-on:click="soundslice = true;"><u>Try the demo <i class="fal fa-play-circle"></i></u></strong>
+            @else
+                <br class="lg:hidden"><strong class="font-black mr-0.5">Try the demo <i class="fas fa-arrow-right"></i></strong>
+                <span class="inline-block rounded-full border px-1.5 py-0.5 cursor-pointer mr-0.5 border-drumeo text-drumeo" x-on:click="drumeoSoundslice = true;"><i class="fal fa-drum"></i></span>
+                <span class="inline-block rounded-full border px-1.5 py-0.5 cursor-pointer mr-0.5 border-pianote text-pianote" x-on:click="pianoteSoundslice = true;"><i class="fal fa-piano"></i></span>
+                <span class="inline-block rounded-full border px-1.5 py-0.5 cursor-pointer mr-0.5 border-guitareo text-guitareo" x-on:click="guitareoSoundslice = true;"><i class="fal fa-guitar"></i></span>
+                <span class="inline-block rounded-full border px-1.5 py-0.5 cursor-pointer border-singeo text-singeo" x-on:click="singeoSoundslice = true;"><i class="fal fa-microphone-stand"></i></span>
+            @endif
+
+        </p>
 
         <div class="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-between my-10 sm:my-14 timed-toggle">
             <div class="sm:order-1 rounded-l-xl overflow-hidden py-7 pl-10" style="background-color:#1B2434;">

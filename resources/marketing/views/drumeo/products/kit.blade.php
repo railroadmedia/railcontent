@@ -170,7 +170,7 @@
         <div class="flex flex-wrap items-center mb-8 sm:mb-20">
             <div class="w-full sm:w-1/2 lg:w-7/12 mb-5 sm:mb-0 sm:order-1">
                 <img class="transition-opacity opacity-0 rounded-xl mx-auto max-w-xs sm:max-w-full" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/kit/3-fits-anywhere.png">
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/kit/3-fits-anywhere2.png">
             </div>
             <div class="w-full sm:w-1/2 lg:w-5/12 sm:pr-7 lg:pr-10">
                 <h4 class="leading-tight "><strong>Fits In Any Room</strong></h4>
