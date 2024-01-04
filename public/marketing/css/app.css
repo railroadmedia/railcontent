@@ -9124,6 +9124,10 @@ li, p {
     display: none !important;
   }
 
+  .xl\:h-36 {
+    height: 9rem !important;
+  }
+
   .xl\:h-64 {
     height: 16rem !important;
   }
@@ -9142,6 +9146,10 @@ li, p {
 
   .xl\:w-40 {
     width: 10rem !important;
+  }
+
+  .xl\:w-\[1665px\] {
+    width: 1665px !important;
   }
 
   .xl\:w-full {

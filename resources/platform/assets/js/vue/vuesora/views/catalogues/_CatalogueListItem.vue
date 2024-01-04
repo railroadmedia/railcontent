@@ -30,7 +30,7 @@
     </div>
 
     <!-- THUMBNAIL COLUMN -->
-    <div v-if="!showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center"
+    <div v-if="!showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center tw-flex-shrink-0"
       :class="[thumbnailColumnClass, themeColor]">
       <div class="thumb-wrap corners-10">
         <div class="thumb-img corners-10 thumb-wrap corners-10 bg-grey-2 dark:tw-bg-[#081825]" :class="thumbnailType">
@@ -152,7 +152,7 @@
 
     <!-- ONLY SHOW TYPE ON SEARCHES -->
     <template v-if="is_search">
-      <div v-if="mappedData.column_data && mappedData.column_data.length" 
+      <div v-if="mappedData.column_data && mappedData.column_data.length"
           class="
             tw-hidden
             sm:tw-flex
@@ -162,8 +162,8 @@
             sm:tw-w-[110px] xl:tw-flex-shrink-0
             tw-text-center
             tw-text-xs"
-      >  
-        {{ mappedData.column_data[0] }}   
+      >
+        {{ mappedData.column_data[0] }}
       </div>
       <div v-if="item.type !== 'song'" class="
           tw-hidden

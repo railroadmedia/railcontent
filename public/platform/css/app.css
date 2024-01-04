@@ -1234,7 +1234,7 @@ span.flatpickr-day.nextMonthDay.selected {
 	}
 
 /*!
- * Cropper.js v1.5.12
+ * Cropper.js v1.6.1
  * https://fengyuanchen.github.io/cropperjs
  *
  * Copyright 2015-present Chen Fengyuan
@@ -25621,9 +25621,6 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
-.last-of-type\:tw-inline-block:last-of-type{
-  display: inline-block !important;
-}
 .last-of-type\:tw-inline-flex:last-of-type{
   display: inline-flex !important;
 }
@@ -26869,9 +26866,6 @@ a:visited{
     font-size: 1.25rem !important;
     line-height: 1.75rem !important;
   }
-  .sm\:tw-font-normal{
-    font-weight: 400 !important;
-  }
   .sm\:tw-leading-loose{
     line-height: 2 !important;
   }
@@ -28049,10 +28043,6 @@ a:visited{
   .lg\:tw-px-3{
     padding-left: 0.75rem !important;
     padding-right: 0.75rem !important;
-  }
-  .lg\:tw-px-4{
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
   }
   .lg\:tw-px-5{
     padding-left: 1.25rem !important;
