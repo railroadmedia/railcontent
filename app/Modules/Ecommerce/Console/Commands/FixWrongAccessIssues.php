@@ -29,7 +29,7 @@ class FixWrongAccessIssues extends Command
                     'ecommerce_subscription_payments.subscription_id'
                 )
                 ->join('usora_users', 'usora_users.id', '=', 'ecommerce_subscriptions.user_id')
-                ->where('ecommerce_subscription_payments.updated_at', '>', Carbon::parse('2023-12-18'));
+                ->where('ecommerce_subscription_payments.updated_at', '>', Carbon::parse('2023-01-03'));
             $userId = $this->option('userId');
             if ($userId) {
                 $query = $query->where('ecommerce_subscriptions.user_id', $userId);
