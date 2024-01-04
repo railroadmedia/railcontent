@@ -30,7 +30,7 @@
                                     element-id="lessonPlayer"
                                     :brand="videoProps.brand"
                                     :theme-color="videoProps.brand"
-                                    :poster="videoProps.videoPosterImageUrl"
+                                    :poster="videoProps.thumbnailUrl"
                                     :sources="videoProps.sources"
                                     :hls-manifest-url="videoProps.hlsManifestUrl"
                                     :video-id="videoProps.vimeoVideoId"
