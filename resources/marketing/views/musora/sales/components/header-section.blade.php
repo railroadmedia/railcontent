@@ -10,22 +10,19 @@
             <h4 class="font-lexend leading-tight uppercase mb-3 sm:mb-4">NEW YEAR. <span class="text-{{$theme}}"> NO EXCUSES.</span></h4>
         @endif
         @if(!empty($testimonialVersion))
-            <h4 class="leading-tight uppercase mb-3 sm:mb-4">MUSIC STUDENTS <strong>PREFER LEARNING HERE</strong></h4>
+            <h4 class="leading-tight uppercase">MUSIC STUDENTS <br class="sm:hidden"><strong>PREFER LEARNING HERE</strong></h4>
+            <h1 class="overflow-hidden text-2xl sm:text-5xl rotater-text -mt-4 -mb-4 sm:my-0" style="height: 110px;font-family: 'Sedgwick Ave', sans-serif!important; ">
+                <span class="py-3 relative whitespace-nowrap delay-1000 ease-in-out">Like my very own music coach!</span><br>
+                <span class="py-3 relative whitespace-nowrap delay-1000 ease-in-out">So positive and uplifting!</span><br>
+                <span class="py-3 relative whitespace-nowrap delay-1000 ease-in-out">Convenient and affordable.</span><br>
+                <span class="py-3 relative whitespace-nowrap delay-1000 ease-in-out">Try it once and you’ll see.</span><br>
+                <span class="py-3 relative whitespace-nowrap delay-1000 ease-in-out">The best teaching tool ever.</span><br>
+            </h1>
+        @else
+            <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
+                {!! $header !!}
+            </h1>
         @endif
-        <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase"
-        @if(!empty($testimonialVersion))
-        style="margin-bottom:15px!important;font-weight: 400!important;line-height:1.5em!important;font-family: 'Sedgwick Ave', sans-serif!important;text-transform: none!important;background: -webkit-linear-gradient(20deg, #980353, #003285, #00B59F);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"
-        @endif
-        >
-            {!! $header !!}
-            @if(!empty($underline))
-                <svg class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%;"
-                    xmlns="http://www.w3.org/2000/svg" width="524" height="22" viewBox="0 0 524 22" fill="none">
-                    <path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="@if(!empty($fillColor)) {{ $fillColor }} @else #ffac00 @endif" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="@if(!empty($fillColor)) {{ $fillColor }} @else #ffac00 @endif" stroke-width="3" stroke-linecap="round"/>
-                </svg>
-            @endif
-        </h1>
         @if(!empty($boldText))
             <h5 class="leading-tight uppercase mb-5 lg:mb-7 tracking-wide"><strong>Guided play-along lessons that<br class="sm:hidden"> are guaranteed to work.</strong></h5>
         @endif
@@ -81,53 +78,13 @@
             <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
         </div>
     </div>
-        {{-- <picture>
-            <source media="(min-width:640px)" srcset={{ $bubble1 }}>
-            <img class="absolute z-10 h-10 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]"
-                src="{{ $bubble1 }}" alt="header circle image" fetchpriority="high">
-        </picture>
+    @foreach($bubbles as $bubble)
         <picture>
-            <source media="(min-width:640px)" srcset={{ $bubble2 }}>
-            <img class="absolute z-10 h-24 sm:h-28 lg:h-44 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]"
-                src={{ $bubble2 }} alt="header circle image" fetchpriority="high">
+            <source media="(min-width:640px)" srcset="{{ $bubble['src'] }}">
+            <img class="{{ $bubble['classes'] }}"
+                src="{{ $bubble['src'] }}" alt="header circle image" fetchpriority="high">
         </picture>
-        <picture>
-            <source media="(min-width:640px)" srcset={{ $bubble3 }}>
-            <img class="absolute z-10 h-32 sm:h-40 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]"
-                src={{ $bubble3 }} alt="header circle image" fetchpriority="high">
-        </picture>
-        <picture>
-            <source media="(min-width:640px)" srcset={{ $bubble4 }}>
-            <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]"
-                src={{ $bubble4 }} alt="header circle image" fetchpriority="high">
-        </picture>
-        <picture>
-            <source media="(min-width:640px)" srcset={{ $bubble5 }}>
-            <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]"
-                src={{ $bubble5 }} alt="header circle image" fetchpriority="high">
-        </picture>
-        <picture>
-            <source media="(min-width:640px)" srcset={{ $bubble6 }}>
-            <img class="absolute z-10 h-28 sm:h-32 lg:h-48 transform -translate-x-1/2 -translate-y-1/2 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]"
-                src={{ $bubble6 }} alt="header circle image" fetchpriority="high">
-        </picture>
-        <picture>
-            <source media="(min-width:640px)" srcset={{ $bubble7 }}>
-            <img class="absolute z-10 h-28 sm:h-36 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]"
-                src={{ $bubble7 }} alt="header circle image" fetchpriority="high">
-        </picture>
-        <picture>
-            <source media="(min-width:640px)" srcset={{ $bubble8 }}>
-            <img class="absolute z-10 h-12 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]"
-                src={{ $bubble8 }} alt="header circle image" fetchpriority="high">
-        </picture> --}}
-        @foreach($bubbles as $bubble)
-    <picture>
-        <source media="(min-width:640px)" srcset="{{ $bubble['src'] }}">
-        <img class="{{ $bubble['classes'] }}"
-            src="{{ $bubble['src'] }}" alt="header circle image" fetchpriority="high">
-    </picture>
-@endforeach
+    @endforeach
 </header>
 @if(!empty($slides))
     <section class="sm:px-6 py-4 sm:py-5 text-white" style="background:#0c1524;">
