@@ -45,7 +45,7 @@ class ShopController extends BaseController
             return $value->productType->name === 'Hoodies' || $value->productType->name === 'Sweaters';
         });
 
-        $featured = $products->whereIn('id', [95, 207, 97, 98]);
+        $featured = $products->whereIn('id', [238, 95, 207, 97, 98]);
 
 
         $thirtyDD = Product::whereHas('brand', fn($query) => $query->where('name', 'drumeo'))->where([['sold_out', 0]])->orderBy('display_order')->get()->whereIn('id', [217, 216, 215, 214, 213, 212]);
