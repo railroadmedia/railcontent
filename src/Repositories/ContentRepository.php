@@ -2417,7 +2417,7 @@ class ContentRepository extends RepositoryBase
         if (!empty($groupBy)) {
             $joinTablesQuery->groupBy($groupBy);
         } else {
-            $joinTablesQuery->select(['id']);
+            $joinTablesQuery->select(['railcontent_content.id']);
         }
 
         $tableResults = $joinTablesQuery->get();
