@@ -46,12 +46,12 @@
 
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Email</span>
-                    <input id="email" type="email" name="email" autocomplete="email"  class="tw-bg-transparent tw-rounded-full"/>
+                    <input required id="email" type="email" name="email" autocomplete="email"  class="tw-bg-transparent tw-rounded-full"/>
                 </label>
 
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Age</span>
-                    <select name="age" id="age" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="age" id="age" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($ages as $age)
                             <option class="bg-white text-black" value="{{ $age['value'] }}">{{ $age['value'] }}</option>
@@ -61,7 +61,7 @@
 
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Gender</span>
-                    <select name="gender" id="gender" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="gender" id="gender" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($genders as $gender)
                             <option class="bg-white text-black" value="{{ $gender['value'] }}">{{ $gender['value'] }}</option>
@@ -71,7 +71,7 @@
 
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Country</span>
-                    <select name="country" id="country" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="country" id="country" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($countries as $country)
                             <option class="bg-white text-black" value="{{ $country }}">{{ $country }}</option>
@@ -81,7 +81,7 @@
 
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Spoken Languages<span>*</span></span>
-                    <select name="language" id="language" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="language" id="language" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach ($languages as $code => $name)
                             <option class="bg-white text-black" value="{{ $code }}">{{ $name }}</option>
@@ -91,7 +91,7 @@
 
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Current Student Level</span>
-                    <select name="level" id="level" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="level" id="level" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($levels as $level)
                             <option class="bg-white text-black" value="{{ $level['value'] }}">{{ $level['value'] }}</option>
@@ -101,7 +101,7 @@
 
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Primary Instrument</span>
-                    <select name="instruments" id="instruments" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="instruments" id="instruments" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($instruments as $instrument)
                             <option class="bg-white text-black" value="{{ $instrument['value'] }}">{{ $instrument['value'] }}</option>
@@ -111,12 +111,12 @@
                 {{-- If Other: remove tw-hidden --}}
                 <label id="other-instrument" class="tw-flex tw-flex-col tw-mb-2 tw-hidden">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Your Instrument</span>
-                    <input id="instrument" type="text" name="instrument" autocomplete="instrument"  class="tw-bg-transparent tw-rounded-full"/>
+                    <input required id="instrument" type="text" name="instrument" autocomplete="instrument"  class="tw-bg-transparent tw-rounded-full"/>
                 </label>
 
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Primary Learning Goal</span>
-                    <select name="goals" id="goals" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="goals" id="goals" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($goals as $goal)
                             <option class="bg-white text-black" value="{{ $goal['value'] }}">{{ $goal['value'] }}</option>
@@ -126,12 +126,12 @@
                 {{-- If Other: remove tw-hidden --}}
                 <label id="other-goal" class="tw-flex tw-flex-col tw-mb-2 tw-hidden">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Your Goal</span>
-                    <input id="goal" type="text" name="goal" autocomplete="goal"  class="tw-bg-transparent tw-rounded-full"/>
+                    <input required id="goal" type="text" name="goal" autocomplete="goal"  class="tw-bg-transparent tw-rounded-full"/>
                 </label>
 
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">For how long have you been a Musora student?</span>
-                    <select name="student-length" id="student-length" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="student-length" id="student-length" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($experience as $year)
                             <option class="bg-white text-black" value="{{ $year['value'] }}">{{ $year['value'] }}</option>
@@ -141,7 +141,7 @@
 
                 <label class="tw-flex tw-flex-col tw-mb-6">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Membership Type</span>
-                    <select name="type" id="type" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="type" id="type" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($types as $type)
                             <option class="bg-white text-black" value="{{ $type['value'] }}">{{ $type['value'] }}</option>
@@ -149,7 +149,12 @@
                     </select>
                 </label>
 
-                <p class="tw-text-sm tw-mb-2">*Please select all languages in which you have a native or near-native proficiency <div><i></i></div> </p>
+                <p class="tw-text-sm tw-mb-2">
+                    *Please select all languages in which you have a native or near-native proficiency 
+                    <i title="Some studies may involve rating the quality of content translation or subtitles in other languages.">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="info" version="1.1" width="36" height="35" viewBox="0 0 36 35" class="tw-inline-block tw-w-[20px] tw-h-[20px]"><use data-v-a55a9eb4="" xlink:href="#icon-info" x="0" y="0"></use></svg>
+                    </i> 
+                </p>
 
                 <label class="tw-mb-6">
                     <input class="tw-mr-2 tw-rounded dark:tw-border-[#445F74] tw-border-[#D1D5DB] checked:tw-bg-black dark:checked:tw-bg-[#002039] dark:tw-bg-[#002039] tw-bg-[#E7EFF6]" 
@@ -185,10 +190,12 @@
         
         {{-- Thank you Wrapper --}}
         <section id="stc-confirmation" class="tw-hidden">
-            <h2>Thank You For Your Interest!</h2>
-            <p>We have received your information and will be in touch <br>
-                when the next User Study is scheduled.
-            <p>
+            <div class="tw-text-center tw-mb-4">
+                <h2 class="tw-mb-1 tw-text-3xl tw-font-bold">Thank You For Your Interest!</h2>
+                <p>We have received your information and will be in touch <br>
+                    when the next User Study is scheduled.
+                <p>
+            </div>
         </section>
     </main>
 @endsection
