@@ -95,9 +95,14 @@
                                 name="language" 
                                 autocomplete="language" 
                                 placeholder="Select" 
-                                class="tw-w-full dark:placeholder:tw-text-white placeholder:tw-text-black tw-bg-transparent tw-rounded-full tw-cursor-pointer tw-pr-8"
+                                class="tw-w-full dark:placeholder:tw-text-white placeholder:tw-text-black tw-bg-transparent tw-rounded-full tw-cursor-pointer tw-pr-16"
                         />
-                        <i class="tw-absolute tw-right-[14px] tw-top-[14px] tw-text-2xl tw-text-[#6b7280]">
+                        <i id="clear-multi-select" class="tw-z-10 tw-absolute tw-right-10 tw-top-[14px] tw-text-2xl tw-text-[#6b7280] tw-hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="tw-w-4 tw-h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                            </svg>                             
+                        </i>
+                        <i class="tw-z-0 tw-absolute tw-right-[14px] tw-top-[14px] tw-text-2xl tw-text-[#6b7280]">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="tw-w-4 tw-h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                             </svg>                              
@@ -239,7 +244,8 @@
         const goalSelect = document.querySelector('#goals');
         const goalInput = document.querySelector('#other-goal');
         const languageInput = document.querySelector('#language');
-        const languageSelect = document.querySelector('#languages')
+        const languageSelect = document.querySelector('#languages');
+        const clearLanguagesButton = document.querySelector('#clear-multi-select')
 
         //Event Listeners
         instrumentSelect.addEventListener('change', (e)=> {
@@ -259,6 +265,7 @@
         consentBox.addEventListener('change', ()=> {
             submitButton.disabled = !submitButton.disabled;
         });
+        //Multi Select..... whyyyyyy....
         languageInput.addEventListener('click', ()=> {
             languageSelect.classList.toggle('tw-hidden');
             languageSelect.focus();
@@ -268,6 +275,11 @@
                 .filter(option => option.selected) // Filter only selected options
                 .map(option => option.value); // Map to their values
             languageInput.value = selectedLanguages.join(', ');
+            if(languageInput.value !== "") clearLanguagesButton.classList.remove('tw-hidden');
+        })
+        clearLanguagesButton.addEventListener('click', function(e) {
+            languageInput.value = "";
+            languageSelect.value = "";
         })
         //Clicked outside of the language select?
         document.addEventListener('click', function(e) {

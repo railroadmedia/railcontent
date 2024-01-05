@@ -21373,6 +21373,9 @@ a:visited{
 .tw-right-1{
   right: 0.25rem !important;
 }
+.tw-right-10{
+  right: 2.5rem !important;
+}
 .tw-right-2{
   right: 0.5rem !important;
 }
@@ -24722,6 +24725,9 @@ a:visited{
 }
 .tw-pt-\[80px\]{
   padding-top: 80px !important;
+}
+.tw-pr-16{
+  padding-right: 4rem !important;
 }
 .tw-text-left{
   text-align: left !important;
