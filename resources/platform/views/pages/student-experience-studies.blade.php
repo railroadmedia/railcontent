@@ -41,7 +41,7 @@
             <form action="" method="post" class="tw-flex tw-flex-col" id="stc-form">
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Name</span>
-                    <input id="name" type="text" name="name" autocomplete="name" class="tw-bg-transparent tw-rounded-full"/>
+                    <input required id="name" type="text" name="name" autocomplete="name" class="tw-bg-transparent tw-rounded-full"/>
                 </label>
 
                 <label class="tw-flex tw-flex-col tw-mb-2">
@@ -149,7 +149,7 @@
                     </select>
                 </label>
 
-                <p class="tw-text-sm tw-mb-2">Please select all languages in which you have a native or near-native proficiency <div><i></i></div> </p>
+                <p class="tw-text-sm tw-mb-2">*Please select all languages in which you have a native or near-native proficiency <div><i></i></div> </p>
 
                 <label class="tw-mb-6">
                     <input class="tw-mr-2 tw-rounded dark:tw-border-[#445F74] tw-border-[#D1D5DB] checked:tw-bg-black dark:checked:tw-bg-[#002039] dark:tw-bg-[#002039] tw-bg-[#E7EFF6]" 
@@ -164,7 +164,8 @@
 
                 <button disabled 
                         type="submit"
-                        class="disabled:tw-opacity-70 tw-btn tw-btn-primary dark:tw-bg-white dark:tw-text-black tw-bg-black tw-text-white"   
+                        id="submit-button"
+                        class="disabled:tw-opacity-70 tw-transition-all tw-btn tw-btn-primary dark:tw-bg-white dark:tw-text-black tw-bg-black tw-text-white"   
                 >
                     {{-- If Submitting Form --}}
                     <div id="button-loading" class="tw-hidden tw-inline-flex">
@@ -192,12 +193,19 @@
     </main>
 @endsection
 
-    {{-- Vanilla JS --}}
-@section('layout-scripts')
+{{-- Vanilla JS --}}
+@section('inject-components')
     <script>
-        //Get Dom Elements
+        //Dom Elements
         const form = document.querySelector('#stc-form');
+        const consentBox = document.querySelector('#consent');
+        const submitButton = document.querySelector('#submit-button');
 
-        
+        //Event Listeners
+        consentBox.addEventListener('change', ()=> {
+            submitButton.disabled = !submitButton.disabled;
+        });
+
+        //Methods
     </script>
 @endsection
