@@ -13,6 +13,7 @@ class STCController extends Controller
             ['value' => '18 or Below'],
             ['value' => '18-23'],
             ['value' => '24-29'],
+            ['value' => '30-35'],
             ['value' => '36-41'],
             ['value' => '42-47'],
             ['value' => '48-53'],

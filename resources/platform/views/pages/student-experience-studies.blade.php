@@ -109,7 +109,7 @@
                     </select>
                 </label>
                 {{-- If Other: remove tw-hidden --}}
-                <label id="other-instrument" class="tw-flex tw-flex-col tw-mb-2 tw-hidden">
+                <label id="other-instrument" class="tw-flex tw-flex-col tw-ml-4 tw-mb-2 tw-hidden">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Your Instrument</span>
                     <input required id="instrument" type="text" name="instrument" autocomplete="instrument"  class="tw-bg-transparent tw-rounded-full"/>
                 </label>
@@ -124,7 +124,7 @@
                     </select>
                 </label>
                 {{-- If Other: remove tw-hidden --}}
-                <label id="other-goal" class="tw-flex tw-flex-col tw-mb-2 tw-hidden">
+                <label id="other-goal" class="tw-flex tw-flex-col tw-ml-4 tw-mb-2 tw-hidden">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Your Goal</span>
                     <input required id="goal" type="text" name="goal" autocomplete="goal"  class="tw-bg-transparent tw-rounded-full"/>
                 </label>
@@ -207,8 +207,26 @@
         const form = document.querySelector('#stc-form');
         const consentBox = document.querySelector('#consent');
         const submitButton = document.querySelector('#submit-button');
+        const instrumentSelect = document.querySelector('#instruments');
+        const instrumentInput = document.querySelector('#other-instrument');
+        const goalSelect = document.querySelector('#goals');
+        const goalInput = document.querySelector('#other-goal');
 
         //Event Listeners
+        instrumentSelect.addEventListener('change', (e)=> {
+            if(e.target.value === 'Other') {
+                instrumentInput.classList.remove('tw-hidden');
+            } else {
+                instrumentInput.classList.add('tw-hidden');
+            }
+        })
+        goalSelect.addEventListener('change', (e)=> {
+            if(e.target.value === 'Other') {
+                goalInput.classList.remove('tw-hidden');
+            } else {
+                goalInput.classList.add('tw-hidden');
+            }
+        })
         consentBox.addEventListener('change', ()=> {
             submitButton.disabled = !submitButton.disabled;
         });
