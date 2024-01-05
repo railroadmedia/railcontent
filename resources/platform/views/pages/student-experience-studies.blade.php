@@ -68,7 +68,7 @@
                     <select name="country" id="country" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($countries as $country)
-                            <option class="bg-white text-black" value="{{ $country['value'] }}">{{ $country['value'] }}</option>
+                            <option class="bg-white text-black" value="{{ $country }}">{{ $country }}</option>
                         @endforeach
                     </select>
                 </label>
@@ -77,8 +77,8 @@
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Spoken Languages<span>*</span></span>
                     <select name="language" id="language" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
-                        @foreach($languages as $language)
-                            <option class="bg-white text-black" value="{{ $language['value'] }}">{{ $language['value'] }}</option>
+                        @foreach ($languages as $code => $name)
+                            <option class="bg-white text-black" value="{{ $code }}">{{ $name }}</option>
                         @endforeach
                     </select>
                 </label>
@@ -173,6 +173,7 @@
                     <span>Submit<span>
                 </button>
             </form>
+
         </section>
         
         {{-- Thank you Wrapper --}}
@@ -188,6 +189,9 @@
     {{-- Vanilla JS --}}
 @section('layout-scripts')
     <script>
+        //Get Dom Elements
+        const form = document.querySelector('#stc-form');
 
+        
     </script>
 @endsection

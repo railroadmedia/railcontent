@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Platform;
 
 use Illuminate\Routing\Controller;
+use Railroad\Location\Services\CountryListService;
 
 class STCController extends Controller
 {
@@ -27,15 +28,7 @@ class STCController extends Controller
             ['value' => 'Rather not say']
         ];
 
-        $countries = [
-            ['value' => 'US'],
-            ['value' => 'Canada'],
-        ];
-
-        $languages = [
-            ['value' => 'English'],
-            ['value' => 'Spanish'],
-        ];
+        $languages = require base_path('vendor/umpirsky/language-list/data/en/language.php');
 
         $levels = [
             ['value' => '1'],
@@ -90,7 +83,7 @@ class STCController extends Controller
         return view('pages.student-experience-studies', [
             'ages' => $ages,
             'genders' => $genders,
-            'countries' => $countries,
+            'countries' => array_values(CountryListService::allWithCommonDuplicatedAtTop()),
             'languages' => $languages,
             'levels' => $levels,
             'instruments' => $instruments,
