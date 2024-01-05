@@ -7,15 +7,15 @@
 @section('content')
     <header class="tw-relative tw-bg-black tw-py-[40px] tw-px-8 2xl:tw-px-0 tw-min-h-[380px] tw-flex tw-items-center">
         <!-- BG Image -->
-        <img src="https://www.musora.com/musora-cdn/image/width=1000/https://musora-web-platform.s3.amazonaws.com/stc/SupportHeader.png" 
-            class="tw-transition-opacity tw-absolute tw-top-0 tw-left-0 tw-object-cover tw-object-top tw-h-full tw-w-full" 
+        <img src="https://www.musora.com/musora-cdn/image/width=1000/https://musora-web-platform.s3.amazonaws.com/stc/SupportHeader.png"
+            class="tw-transition-opacity tw-absolute tw-top-0 tw-left-0 tw-object-cover tw-object-top tw-h-full tw-w-full"
             loading="lazy"
             onload="this.classList.remove('tw-opacity-0')"
         >
         <section class="tw-z-10 tw-max-w-screen-lg tw-w-full tw-mx-auto tw-flex tw-flex-col md:tw-flex-row tw-items-center">
             <!-- Instrument Image -->
-            <img src="https://www.musora.com/musora-cdn/image/width=300/https://musora-web-platform.s3.amazonaws.com/stc/instruments.png" 
-                title="Image of musical instruments" 
+            <img src="https://www.musora.com/musora-cdn/image/width=300/https://musora-web-platform.s3.amazonaws.com/stc/instruments.png"
+                title="Image of musical instruments"
                 class="tw-w-[300px] tw-h-[300px] tw-flex-shrink-0 sm:tw-mr-8 tw-mb-4 md:tw-mb-0 tw-transition-opacity tw-opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')"
@@ -38,7 +38,7 @@
                 <p>Please fill our the enrollment questionaire to be considered for studies</p>
             </div>
 
-            <form action="" method="post" class="tw-flex tw-flex-col" id="stc-form">
+            <form onsubmit="submitForm(event)" class="tw-flex tw-flex-col" id="stc-form">
                 {{-- Name --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Name</span>
@@ -99,12 +99,12 @@
                         <i id="clear-multi-select" class="tw-z-10 tw-absolute tw-right-10 tw-top-[14px] tw-text-2xl tw-text-[#6b7280] tw-hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="tw-w-4 tw-h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                            </svg>                             
+                            </svg>
                         </i>
                         <i class="tw-z-0 tw-absolute tw-right-[14px] tw-top-[14px] tw-text-2xl tw-text-[#6b7280]">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="tw-w-4 tw-h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                            </svg>                              
+                            </svg>
                         </i>
                     </div>
                     <select multiple name="languages[]" id="languages" class="tw-p-0 tw-absolute tw-w-full tw-top-full tw-hidden tw-h-[400px]">
@@ -181,28 +181,28 @@
 
                 {{-- Note on Languages --}}
                 <small class="tw-text-sm tw-mb-2">
-                    *Please select all languages in which you have a native or near-native proficiency 
+                    *Please select all languages in which you have a native or near-native proficiency
                     <i title="Some studies may involve rating the quality of content translation or subtitles in other languages.">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="info" version="1.1" width="36" height="35" viewBox="0 0 36 35" class="tw-inline-block tw-w-[20px] tw-h-[20px]"><use data-v-a55a9eb4="" xlink:href="#icon-info" x="0" y="0"></use></svg>
-                    </i> 
+                    </i>
                 </small>
 
                 {{-- Consent Message --}}
                 <label class="tw-mb-6">
-                    <input class="tw-mr-2 tw-rounded dark:tw-border-[#445F74] tw-border-[#D1D5DB] checked:tw-bg-black dark:checked:tw-bg-[#002039] dark:tw-bg-[#002039] tw-bg-[#E7EFF6]" 
-                            type="checkbox" 
-                            id="consent" 
+                    <input class="tw-mr-2 tw-rounded dark:tw-border-[#445F74] tw-border-[#D1D5DB] checked:tw-bg-black dark:checked:tw-bg-[#002039] dark:tw-bg-[#002039] tw-bg-[#E7EFF6]"
+                            type="checkbox"
+                            id="consent"
                             name="consent"
                     >
                     <span class="tw-text-sm">I consent to be occasionally contacted to participate in User Research Studies or interviews dedicated to
-                        collecting feedback or improving Musora products and services. 
+                        collecting feedback or improving Musora products and services.
                     </span>
                 </label>
 
-                <button disabled 
+                <button disabled
                         type="submit"
                         id="submit-button"
-                        class="md:tw-ml-auto disabled:tw-opacity-70 tw-transition-all tw-btn tw-btn-primary dark:tw-bg-white dark:tw-text-black tw-bg-black tw-text-white"   
+                        class="md:tw-ml-auto disabled:tw-opacity-70 tw-transition-all tw-btn tw-btn-primary dark:tw-bg-white dark:tw-text-black tw-bg-black tw-text-white"
                 >
                     {{-- If Submitting Form --}}
                     <div id="button-loading" class="tw-hidden tw-inline-flex">
@@ -211,14 +211,14 @@
                             <path class="tw-opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
                         Processing...
-                    </div>    
+                    </div>
                     {{-- Else --}}
                     <span>Submit<span>
                 </button>
             </form>
 
         </section>
-        
+
         {{-- Thank you Wrapper --}}
         <section id="stc-confirmation" class="tw-hidden">
             <div class="tw-text-center tw-mb-4">
@@ -286,5 +286,23 @@
         });
 
         //Methods
+        async function submitForm(event){
+            event.preventDefault();
+        }
+    </script>
+
+    <script type="text/javascript">
+        (function() {
+            var t = document.createElement('script'),
+                s = document.getElementsByTagName('script')[0];
+            t.async = true;
+            t.id    = 'cio-forms-handler';
+            t.setAttribute('data-site-id', 'fa24b9733327116040c7');
+            t.setAttribute('data-base-url', 'https://customerioforms.com');
+
+            t.src = 'https://customerioforms.com/assets/forms.js';
+
+            s.parentNode.insertBefore(t, s);
+        })();
     </script>
 @endsection
