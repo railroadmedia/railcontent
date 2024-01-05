@@ -244,7 +244,7 @@
         const goalInput = document.querySelector('#other-goal');
         const languageInput = document.querySelector('#language');
         const languageSelect = document.querySelector('#languages');
-        const clearLanguagesButton = document.querySelector('#clear-multi-select')
+        const clearLanguagesButton = document.querySelector('#clear-multi-select');
 
         //Event Listeners
         instrumentSelect.addEventListener('change', (e)=> {
