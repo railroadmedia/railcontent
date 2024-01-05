@@ -88,12 +88,12 @@
                 <label class="tw-flex tw-flex-col tw-mb-2 tw-relative">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Spoken Languages<span>*</span></span>
                     <div class="tw-relative tw-w-full">
-                        <input required 
-                                id="language" 
-                                type="text" 
-                                name="language" 
-                                autocomplete="language" 
-                                placeholder="Select" 
+                        <input required
+                                id="language"
+                                type="text"
+                                name="language"
+                                autocomplete="language"
+                                placeholder="Select"
                                 class="tw-w-full tw-pointer-events-none dark:placeholder:tw-text-white placeholder:tw-text-black tw-bg-transparent tw-rounded-full tw-cursor-pointer tw-pr-16"
                         />
                         <i id="clear-multi-select" class="tw-z-10 tw-absolute tw-right-10 tw-top-[14px] tw-text-2xl tw-text-[#6b7280] tw-hidden">
@@ -286,8 +286,30 @@
         });
 
         //Methods
-        async function submitForm(event){
-            event.preventDefault();
+        async function submitForm(e) {
+            e.preventDefault();
+            //Show Loading
+            document.querySelector('#button-loading').classList.remove('tw-hidden');
+            //Get Form Data
+            const formData = new FormData();
+            formData.append('name', name.value);
+            //Send Form Data
+            const response = await fetch('https://track.customer.io/api/v1/forms/5506/submit', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic $(echo -n   fa24b9733327116040c7:85ccfa0990fa78888ffa | base64)',
+                },
+                method: 'POST',
+                body: JSON.stringify({
+                    data: {
+                        name: name.value
+                    }
+                }),
+            });
+            //Hide Form
+            // form.classList.add('tw-hidden');
+            //Show Confirmation
+            // document.querySelector('#stc-confirmation').classList.remove('tw-hidden');
         }
     </script>
 
