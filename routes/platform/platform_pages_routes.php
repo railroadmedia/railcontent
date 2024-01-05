@@ -19,6 +19,7 @@ use App\Http\Controllers\Platform\RedirectController;
 use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\SongsUpgradeController;
 use App\Http\Controllers\Platform\SupportController;
+use App\Http\Controllers\Platform\STCController;
 use App\Http\Controllers\Platform\UserListPagesController;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Controllers\MusoraCenterContentController;
@@ -723,6 +724,13 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/support', [SupportController::class, 'memberSupport'])
             ->whereIn('brand', all_brands())
             ->name('platform.support');
+
+        /*
+         * Student Testing Center
+         */
+        Route::get('/{brand}/student-experience-studies', [STCController::class, 'memberSTC'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.student-experience-studies');
 
         /*
          * Drumeo legacy resources
