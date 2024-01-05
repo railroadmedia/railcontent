@@ -39,16 +39,19 @@
             </div>
 
             <form action="" method="post" class="tw-flex tw-flex-col" id="stc-form">
+                {{-- Name --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Name</span>
                     <input required id="name" type="text" name="name" autocomplete="name" class="tw-bg-transparent tw-rounded-full"/>
                 </label>
 
+                {{-- Email --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Email</span>
                     <input required id="email" type="email" name="email" autocomplete="email"  class="tw-bg-transparent tw-rounded-full"/>
                 </label>
 
+                {{-- Age --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Age</span>
                     <select required name="age" id="age" class="tw-bg-transparent tw-rounded-full">
@@ -59,6 +62,7 @@
                     </select>
                 </label>
 
+                {{-- Gender --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Gender</span>
                     <select required name="gender" id="gender" class="tw-bg-transparent tw-rounded-full">
@@ -69,6 +73,7 @@
                     </select>
                 </label>
 
+                {{-- Country --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Country</span>
                     <select required name="country" id="country" class="tw-bg-transparent tw-rounded-full">
@@ -79,16 +84,25 @@
                     </select>
                 </label>
 
-                <label class="tw-flex tw-flex-col tw-mb-2">
+                {{-- Languages: Multi-select --}}
+                <label class="tw-flex tw-flex-col tw-mb-2 tw-relative">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Spoken Languages<span>*</span></span>
-                    <select required name="language" id="language" class="tw-bg-transparent tw-rounded-full">
-                        <option value="" class="bg-white text-black">Select</option>
+                    <input required 
+                            id="language" 
+                            type="text" 
+                            name="language" 
+                            autocomplete="language" 
+                            placeholder="Select" 
+                            class="dark:placeholder:tw-text-white placeholder:tw-text-black tw-bg-transparent tw-rounded-full tw-cursor-pointer"
+                    />
+                    <select multiple name="languages[]" id="languages" class="tw-p-0 tw-absolute tw-w-full tw-top-full tw-hidden tw-h-[400px]">
                         @foreach ($languages as $code => $name)
-                            <option class="bg-white text-black" value="{{ $code }}">{{ $name }}</option>
+                            <option class="bg-white text-black" value="{{ $name }}">{{ $name }}</option>
                         @endforeach
                     </select>
                 </label>
 
+                {{-- Student Level --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Current Student Level</span>
                     <select required name="level" id="level" class="tw-bg-transparent tw-rounded-full">
@@ -99,6 +113,7 @@
                     </select>
                 </label>
 
+                {{-- Instrument --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Primary Instrument</span>
                     <select required name="instruments" id="instruments" class="tw-bg-transparent tw-rounded-full">
@@ -114,6 +129,7 @@
                     <input required id="instrument" type="text" name="instrument" autocomplete="instrument"  class="tw-bg-transparent tw-rounded-full"/>
                 </label>
 
+                {{-- Learning Goal --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Primary Learning Goal</span>
                     <select required name="goals" id="goals" class="tw-bg-transparent tw-rounded-full">
@@ -129,6 +145,7 @@
                     <input required id="goal" type="text" name="goal" autocomplete="goal"  class="tw-bg-transparent tw-rounded-full"/>
                 </label>
 
+                {{-- Student Length --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">For how long have you been a Musora student?</span>
                     <select required name="student-length" id="student-length" class="tw-bg-transparent tw-rounded-full">
@@ -139,6 +156,7 @@
                     </select>
                 </label>
 
+                {{-- Membership Type --}}
                 <label class="tw-flex tw-flex-col tw-mb-6">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Membership Type</span>
                     <select required name="type" id="type" class="tw-bg-transparent tw-rounded-full">
@@ -149,6 +167,7 @@
                     </select>
                 </label>
 
+                {{-- Note on Languages --}}
                 <p class="tw-text-sm tw-mb-2">
                     *Please select all languages in which you have a native or near-native proficiency 
                     <i title="Some studies may involve rating the quality of content translation or subtitles in other languages.">
@@ -156,6 +175,7 @@
                     </i> 
                 </p>
 
+                {{-- Consent Message --}}
                 <label class="tw-mb-6">
                     <input class="tw-mr-2 tw-rounded dark:tw-border-[#445F74] tw-border-[#D1D5DB] checked:tw-bg-black dark:checked:tw-bg-[#002039] dark:tw-bg-[#002039] tw-bg-[#E7EFF6]" 
                             type="checkbox" 
@@ -210,6 +230,8 @@
         const instrumentInput = document.querySelector('#other-instrument');
         const goalSelect = document.querySelector('#goals');
         const goalInput = document.querySelector('#other-goal');
+        const languageInput = document.querySelector('#language');
+        const languageSelect = document.querySelector('#languages')
 
         //Event Listeners
         instrumentSelect.addEventListener('change', (e)=> {
@@ -228,6 +250,19 @@
         })
         consentBox.addEventListener('change', ()=> {
             submitButton.disabled = !submitButton.disabled;
+        });
+        languageInput.addEventListener('click', ()=> {
+            languageSelect.classList.toggle('tw-hidden');
+        })
+        languageSelect.addEventListener('change', function() {
+            let selectedLanguages = Array.from(this.options) // Access all options
+                .filter(option => option.selected) // Filter only selected options
+                .map(option => option.value); // Map to their values
+            languageInput.value = selectedLanguages.join(', ');
+        })
+        //Clicked outside of the language select?
+        document.addEventListener('click', function(e) {
+            if(!languageSelect.contains(e.target) && !languageInput.contains(e.target)) languageSelect.classList.add('tw-hidden');
         });
 
         //Methods
