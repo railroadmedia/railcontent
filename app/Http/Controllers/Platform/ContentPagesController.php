@@ -86,6 +86,7 @@ class ContentPagesController extends BaseController
     {
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
+        ContentRepository::$countFilterOptionItems = true;
 
         if ($contentTypeName == 'lessons' && $brand == 'guitareo') {
             return $this->guitareoLessonsPage($request, $domain, $brand);
@@ -901,7 +902,7 @@ class ContentPagesController extends BaseController
 
                 $contentToRenderAsLesson['ranges'] = array_unique($contentToRenderAsLesson['ranges'] ?? []);
             }
-        }   
+        }
 
         if ($contentToRenderAsLesson['type'] == 'workout' || $contentToRenderAsLesson['type'] == 'challenge-part' ) {
             return view('content.workout-lesson', [
@@ -1670,15 +1671,15 @@ class ContentPagesController extends BaseController
     public function slugToPhrase($slug) {
         // Replace dashes with spaces
         $phrase = str_replace('-', ' ', $slug);
-        
+
         // Capitalize the first letter of each word
         $phrase = ucwords($phrase);
-        
+
         return $phrase;
     }
 
     public function artistSongs($route, Request $request, $brand, $artistSlug)
-    {   
+    {
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['songs'] ?? [];
 
         $initialContent = $this->contentService->getFiltered(
@@ -1700,7 +1701,7 @@ class ContentPagesController extends BaseController
 
         $artistName = $initialContent->results()[0]->fetch('fields.artist.1');
         $contentSubtitle = $initialContent->totalResults().' SONGS';
-        
+
         $allowableFilters = $catalogueMeta['allowableFilters'];
 
         $filterableValues = $this->removeWithKey($allowableFilters, 'artist');
