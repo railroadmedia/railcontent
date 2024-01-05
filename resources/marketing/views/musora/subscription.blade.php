@@ -15,7 +15,7 @@
     <meta property="og:description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
 
     <meta property="og:url" content="https://www.musora.com">
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.jpg">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.webp">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
@@ -363,7 +363,7 @@
     ])
 
     @include('musora.sales.components.workouts-section', [
-        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts-card.jpg',
+        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts-card.webp',
     ])
 
 
@@ -372,7 +372,7 @@
     @endphp
 
     @include('musora.sales.components.songs-section', [
-        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/device.png',
+        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/device.webp',
     ])
 
     @php
@@ -384,7 +384,7 @@
 
     @if(empty($trialVersion))
         @include('musora.sales.components.guarantee-section', [
-            'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/musora/membership/homepage/2024/guarantee.png',
+            'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/musora/membership/homepage/2024/guarantee.webp',
             'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
             'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
         ])
@@ -392,7 +392,7 @@
     @include('musora._partials.order-section-collage')
 
     @include('musora.sales.components.app-section', [
-        'image' => 'marketing/musora/membership/homepage/2023/devices2.png',
+        'image' => 'marketing/musora/membership/homepage/2024/devices2.webp',
         'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?platform=iphone',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
     ])
