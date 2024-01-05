@@ -44,14 +44,14 @@ const props = defineProps({
 
 const penultimateBreadcrumb = computed(() => {
   if (props.breadcrumbs.length < 2) {
-    return { title: 'HOME', url: '/' };
+    return { title: 'HOME', url: `/${brand.value}` };
   }
 
   const penultimateIndex = props.breadcrumbs.length - 2;
   const breadcrumb = props.breadcrumbs[penultimateIndex];
 
   if (!breadcrumb || typeof breadcrumb.title !== 'string' || !breadcrumb.url) {
-    return { title: 'HOME', url: '/' };
+    return { title: 'HOME', url: `/${brand.value}` };
   }
 
   return {
