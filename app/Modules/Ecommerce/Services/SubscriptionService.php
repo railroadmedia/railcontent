@@ -108,8 +108,7 @@ class SubscriptionService
                 && $diff > 1
                 && $membershipExpirationDate > Carbon::today()
                 //never move recharge dates backwards could be a paused subscription
-                && $membershipExpirationDate > $mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay()
-                && $activeMembershipSubscriptions->count() > 1) {
+                && $membershipExpirationDate > $mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay()) {
                 Log::info(
                     "Updating subscription next charge date for user $user->id from $mostRecentActiveSubscription->nextChargeScheduledAt to $membershipExpirationDate"
                 );
