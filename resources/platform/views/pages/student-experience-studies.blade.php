@@ -7,12 +7,12 @@
 @section('content')
     <header class="tw-relative tw-bg-black tw-py-[40px] tw-px-8 2xl:tw-px-0 tw-min-h-[380px] tw-flex tw-items-center">
         <!-- BG Image -->
-        <img src="" 
+        <img src="https://www.musora.com/musora-cdn/image/width=1000/https://musora-web-platform.s3.amazonaws.com/stc/SupportHeader.png" 
             class="tw-transition-opacity tw-absolute tw-top-0 tw-left-0 tw-object-cover tw-object-top tw-h-full tw-w-full" 
             loading="lazy"
             onload="this.classList.remove('tw-opacity-0')"
         >
-        <section class="tw-max-w-screen-lg tw-w-full tw-mx-auto tw-flex tw-flex-col md:tw-flex-row tw-items-center">
+        <section class="tw-z-10 tw-max-w-screen-lg tw-w-full tw-mx-auto tw-flex tw-flex-col md:tw-flex-row tw-items-center">
             <!-- Instrument Image -->
             <img src="https://www.musora.com/musora-cdn/image/width=300/https://musora-web-platform.s3.amazonaws.com/stc/instruments.png" 
                 title="Image of musical instruments" 
@@ -21,7 +21,7 @@
                 onload="this.classList.remove('tw-opacity-0')"
             >
             <!-- Content -->
-            <div class="tw-z-10">
+            <div class="">
                 <h1 class="tw-text-3xl tw-mb-2 tw-text-[#9EC0DC] tw-font-semibold">Sign Up for Musora Student Experience Studies and get rewarded with free platform time</h1>
                 <p class="tw-text-lg tw-text-white">Help us to test new student experiences and make our platforms even better.
                     Students selected to participate in studies will be rewarded with monthly passes.
