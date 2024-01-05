@@ -10,22 +10,19 @@
             <h4 class="font-lexend leading-tight uppercase mb-3 sm:mb-4">NEW YEAR. <span class="text-{{$theme}}"> NO EXCUSES.</span></h4>
         @endif
         @if(!empty($testimonialVersion))
-            <h4 class="leading-tight uppercase mb-3 sm:mb-4">MUSIC STUDENTS <strong>PREFER LEARNING HERE</strong></h4>
+            <h4 class="leading-tight uppercase">MUSIC STUDENTS <br class="sm:hidden"><strong>PREFER LEARNING HERE</strong></h4>
+            <h1 class="overflow-hidden text-2xl sm:text-5xl rotater-text -mt-4 -mb-4 sm:my-0" style="height: 110px;font-family: 'Sedgwick Ave', sans-serif!important; ">
+                <span class="py-3 relative whitespace-nowrap delay-1000 ease-in-out">Like my very own music coach!</span><br>
+                <span class="py-3 relative whitespace-nowrap delay-1000 ease-in-out">So positive and uplifting!</span><br>
+                <span class="py-3 relative whitespace-nowrap delay-1000 ease-in-out">Convenient and affordable.</span><br>
+                <span class="py-3 relative whitespace-nowrap delay-1000 ease-in-out">Try it once and you’ll see.</span><br>
+                <span class="py-3 relative whitespace-nowrap delay-1000 ease-in-out">The best teaching tool ever.</span><br>
+            </h1>
+        @else
+            <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
+                {!! $header !!}
+            </h1>
         @endif
-        <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase"
-        @if(!empty($testimonialVersion))
-        style="margin-bottom:15px!important;font-weight: 400!important;line-height:1.5em!important;font-family: 'Sedgwick Ave', sans-serif!important;text-transform: none!important;background: -webkit-linear-gradient(20deg, #980353, #003285, #00B59F);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"
-        @endif
-        >
-            {!! $header !!}
-            @if(!empty($underline))
-                <svg class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%;"
-                    xmlns="http://www.w3.org/2000/svg" width="524" height="22" viewBox="0 0 524 22" fill="none">
-                    <path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="@if(!empty($fillColor)) {{ $fillColor }} @else #ffac00 @endif" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="@if(!empty($fillColor)) {{ $fillColor }} @else #ffac00 @endif" stroke-width="3" stroke-linecap="round"/>
-                </svg>
-            @endif
-        </h1>
         @if(!empty($boldText))
             <h5 class="leading-tight uppercase mb-5 lg:mb-7 tracking-wide"><strong>Guided play-along lessons that<br class="sm:hidden"> are guaranteed to work.</strong></h5>
         @endif
@@ -62,6 +59,12 @@
             </a>
             @if(empty($noTrailer))
                 <div class="sm:mx-0.5 w-full sm:w-56 join outline black smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
+            @else
+            <a class="sm:mx-0.5 w-full sm:w-56 join outline black smaller"
+                href="https://www.shopperapproved.com/reviews/Musora.com"
+                onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;"
+            >SEE THE REVIEWS</a>
+
             @endif
         </div>
         <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">

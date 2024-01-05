@@ -156,6 +156,32 @@ Route::domain('{musoraDomain}')
                         'drum-fest-international-2022',
                     ])
                     ->name('platform.content-type-catalog');
+                
+
+                Route::get('/{brand}/workouts', [WorkoutsPageController::class, 'showWorkoutsPage'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.workouts');
+
+                Route::get('/{brand}/workouts/challenges', [WorkoutsPageController::class, 'showChallengesPage'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.workouts.challenges');
+
+                Route::get(
+                    '/{brand}/workouts/{primaryPage}/{firstContentSlug}/{firstContentId}',
+                    [ContentPagesController::class, 'firstLevel']
+                )
+                    ->whereIn('brand', all_brands())
+                    ->whereIn(
+                        'primaryPage',
+                        [
+
+                            'challenges',
+
+                        ]
+                    )
+                    ->name('platform.workout.challenge');
+
+
 
 
                 Route::get('/{brand}/workouts', [WorkoutsPageController::class, 'showWorkoutsPage'])
@@ -386,6 +412,21 @@ Route::domain('{musoraDomain}')
         Route::get('/membership-expired', [InactiveMemberController::class, 'showExpiredMemberPage'])
             ->whereIn('brand', all_brands())
             ->name('platform.membership-expired');
+
+
+        /*
+         * Paused Members
+         */
+        Route::get('/membership-paused', [ExpiredMemberController::class, 'showPausedMemberPage'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.membership-paused');
+
+        /*
+         * Paused Members
+         */
+        Route::get('/membership-paused', [InactiveMemberController::class, 'showPausedMemberPage'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.membership-paused');
 
         /*
          * Paused Members

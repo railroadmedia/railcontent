@@ -266,6 +266,49 @@
                 opacity: 0.4;
             }
         }
+        @keyframes move {
+            0% {
+                top: 0;
+            }
+            19% {
+                top: 0;
+            }
+            20% {
+                top: -110px;
+            }
+            39% {
+                top: -110px;
+            }
+            40% {
+                top: -220px;
+            }
+            59% {
+                top: -220px;
+            }
+            60% {
+                top: -330px;
+            }
+            79% {
+                top: -330px;
+            }
+            80% {
+                top: -440px;
+            }
+            99% {
+                top: -440px;
+            }
+            100% {
+                top: 0;
+            }
+        }
+
+        .rotater-text span {
+            line-height: 110px;
+            animation: move 25s infinite;
+            background: -webkit-linear-gradient(20deg, #980353, #003285, #00B59F);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -276,7 +319,7 @@
     x-data ='{
         brand: "pianote",
         drumeoSoundslice: false,
-        soundslice: false,
+        pianoteSoundslice: false,
         guitareoSoundslice: false,
         singeoSoundslice: false,
         trailer: false,
@@ -363,7 +406,7 @@
     ])
 
     @include('_partials.components.video-modal',[
-        'name' => 'soundslice',
+        'name' => 'pianoteSoundslice',
         'video' => '77f4c',
         'soundslice' => true,
     ])

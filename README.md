@@ -597,6 +597,5 @@ Any Staging URL: [https://web-staging-one.musora.com/musora-center/](https://web
 1. From inside our manager container, navigate to /app/musora-web-platform/app/Modules/MusoraCenter/frontend 
 2. `cd /app/musora-web-platform/app/Modules/MusoraCenter/frontend`
 3. Run: `npm run build`
-4. Publish the new assets to the MWP public folder: `r mwp artisan vendor:publish`
-5. Choose the `App\Modules\MusoraCenter\Providers\MusoraCenterServiceProvider` line to publish
+4. Publish the new assets to the MWP public folder: `r mwp artisan vendor:publish --tag=public --force`
 6. Commit all files changes and deploy.

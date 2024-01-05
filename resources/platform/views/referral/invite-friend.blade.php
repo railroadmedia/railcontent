@@ -5,14 +5,6 @@
 @endsection
 
 @section('content')
-
-
-    @if(Carbon\Carbon::create(2023, 12, 23, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-        <referral
-            :user-referral-link="{{ json_encode($userReferralLink) }}"
-            :email-invite-url="{{ json_encode(url()->route('referral.email-invite')) }}"
-        ></referral>
-    @else
         @include('partials.bladesora.members.referral.invite',
             [
                 'referralsPerUser' => $referralsPerUser,
@@ -40,7 +32,6 @@
                 </div>
             </div>
         </div>
-    @endif
 @endsection
 
 @section('layout-scripts')

@@ -19,7 +19,7 @@ import Support from './vue/Views/Support';
 import Schedule from './vue/Views/Schedule';
 import Playlists from './vue/Views/Playlists';
 import Playlist from './vue/Views/Playlist';
-import Referral from './vue/views/Referral';
+import Referral from './vue/Views/Referral';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -284,10 +284,10 @@ app.component('AppContainer', AppContainer)
     .component('Playlist', Playlist)
     .component('Referral', Referral)
 
-    .component('PlaylistPlaybackWrapper', defineAsyncComponent(() =>
+    .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
-            /* webpackChunkName: "playlist-playback-wrapper" */
-            `./vue/components/Playlists/PlaylistPlaybackWrapper.vue`
+            /* webpackChunkName: "playlist-playback" */
+            `./vue/Views/PlaylistPlayback.vue`
         )
     ))
 

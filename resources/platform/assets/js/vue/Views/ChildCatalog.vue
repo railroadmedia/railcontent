@@ -2,9 +2,7 @@
     <div class="tw-w-full tw-relative">
         <!-- BREADCRUMBS -->
         <Breadcrumb
-            :first-level-url="firstLevelUrl" 
-            :first-level-title="firstLevelTitle"
-            :last-level-title="lastLevelTitle"
+            :breadcrumbs="[{ title: firstLevelTitle, url: firstLevelUrl }, { title: lastLevelTitle }]"
         />
         <!-- Child Catalog -->
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] lg:tw-mt-8 dark:tw-text-white">

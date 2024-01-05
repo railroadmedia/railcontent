@@ -12,10 +12,6 @@
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
-                "title" => 'Home',
-                "url" => url()->route('platform.home'),
-            ],
-            [
                 "title" => "Forums",
                 "url" => url()->route('forums.show-categories'),
             ],

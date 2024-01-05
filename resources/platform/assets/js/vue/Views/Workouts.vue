@@ -1,7 +1,6 @@
 <template>
     <Breadcrumb
-        :last-level-url="breadcrumbLastLevelUrl"
-        :last-level-title="breadcrumbLevelTitle"
+        :breadcrumbs="[{ title: 'Workouts' }]"
     />
 
     <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white tw-pt-6">
@@ -27,7 +26,7 @@
         <section id="workouts">
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
                 <div class="tw-flex tw-items-start">
-                    <div href="TODO" class="tw-text-[#00101D] dark:tw-text-white tw-font-bold tw-text-xl md:tw-text-2xl tw-mr-2">Workouts</div>
+                    <div class="tw-text-[#00101D] dark:tw-text-white tw-font-bold tw-text-xl md:tw-text-2xl tw-mr-2">Workouts</div>
 <!--                    <musora-icon @click="openVideo('//player.vimeo.com/video/785314388?autoplay=1')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>-->
                     <musora-icon @click="openModal('workout')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
                 </div>

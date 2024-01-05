@@ -459,32 +459,32 @@ return [
                 'name' => 'Courses',
                 'icon' => 'icon-courses',
                 'description' => "Tackle your next drumming goal with bite-sized courses from many of the world's best drummers. ",
-                'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'allowableFilters' => ['difficulty', 'style', 'essentials','theory','creativity','lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'style', 'essentials','theory','creativity','lifestyle'],
                 'sortBy' => '-published_on',
             ],
             'songs' => [
                 'name' => 'Songs',
                 'icon' => 'icon-songs',
                 'description' => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
-                'allowableFilters' => ['difficulty', 'style', 'artist', 'progress'],
-                'allowableFiltersMobile' => ['difficulty',  'style', 'artist', 'progress'],
+                'allowableFilters' => ['difficulty', 'style', 'lifestyle'],
+                'allowableFiltersMobile' => ['difficulty',  'style', 'lifestyle'],
                 'sortBy' => 'slug',
             ],
             'student-focus' => [
                 'name' => 'Student Focus',
                 'icon' => 'icon-student-focus',
                 'description' => "Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.",
-                'allowableFilters' => ['difficulty', 'instructor', 'topic'],
-                'allowableFiltersMobile' => ['difficulty',  'instructor', 'topic'],
+                'allowableFilters' => ['difficulty', 'style','focus','lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'style','focus','lifestyle'],
                 'sortBy' => '-published_on',
             ],
             'rudiments' => [
                 'name' => 'Rudiments',
                 'icon' => 'icon-drums',
                 'description' => "The 40 drum rudiments are essential for any drummer, no matter the style, genre, or scenario. You can use the videos below to help you learn, practice, and perfect every single one.",
-                'allowableFilters' => ['topic', 'progress', 'instrument'],
-                'allowableFiltersMobile' => ['topic',  'instrument','progress'],
+                'allowableFilters' => ['difficulty','style',  'instrument','focus'],
+                'allowableFiltersMobile' => ['difficulty','style',  'instrument','focus'],
                 'sortBy' => 'sort',
             ],
             'spotlight' => [
@@ -505,8 +505,8 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Drummers love their gear - and in here you will find videos on gear demos,
                     reviews, maintenance, tuning tips and much more.",
-                'allowableFilters' => ['instructor', 'progress'],
-                'allowableFiltersMobile' => [],
+                'allowableFilters' => ['difficulty', 'style'],
+                'allowableFiltersMobile' => ['difficulty', 'style'],
                 'sortBy' => '-published_on',
             ],
             'challenges' => [
@@ -516,8 +516,8 @@ return [
                 'description' => "Like drumming puzzles, our challenges are lessons that will take a little
                     more brain power and practice to get down. They are a great way to motivate you to get behind
                     the kit or pad to practice, and cover the entire gamut of drumming skill level.",
-                'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
-                'allowableFiltersMobile' => [],
+                'allowableFilters' => ['difficulty', 'style'],
+                'allowableFiltersMobile' => ['difficulty', 'style'],
                 'sortBy' => '-published_on',
             ],
             'boot-camps' => [
@@ -526,8 +526,8 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Grab your sticks and practice along while watching a lesson! These boot camps
                     are designed like workout videos so you can follow along and push your drumming at the same time.",
-                'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'allowableFilters' => ['difficulty','style','essentials'],
+                'allowableFiltersMobile' => ['difficulty','style','essentials'],
                 'sortBy' => '-published_on',
             ],
             'quick-tips' => [
@@ -535,8 +535,8 @@ return [
                 'name' => 'Quick Tips',
                 'icon' => 'icon-shows',
                 'description' => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice. ",
-                'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'allowableFilters' => ['difficulty', 'style', 'essentials','theory','creativity','lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'style', 'essentials','theory','creativity','lifestyle'],
                 'sortBy' => '-published_on',
             ],
             'podcasts' => [
@@ -591,8 +591,8 @@ return [
                 'shortname' => 'Live Lessons',
                 'icon' => 'icon-shows',
                 'description' => "Practice sessions, Q&A, celebrations, and more are available during Drumeo live lessons. Subscribe to an event or the whole calendar, so you don’t miss out!",
-                'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
-                'allowableFiltersMobile' => [],
+                'allowableFilters' => ['difficulty', 'style', 'essentials', 'theory'],
+                'allowableFiltersMobile' => ['difficulty', 'style', 'essentials', 'theory'],
                 'sortBy' => '-published_on',
             ],
             'solos' => [
@@ -601,8 +601,8 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Watch drum solos performed by the many different artists we have had out
                     on Drumeo! A great way to be entertained, motivated, and to learn through amazing performances.",
-                'allowableFilters' => ['instructor', 'progress'],
-                'allowableFiltersMobile' => ['instructor'],
+                'allowableFilters' => ['difficulty', 'style'],
+                'allowableFiltersMobile' => ['difficulty', 'style'],
                 'sortBy' => '-published_on',
             ],
             'performances' => [
@@ -611,8 +611,8 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Watch the world's best drummers perform songs, duets, and other inspirational
                     pieces. Sit back, relax, and get ready to be inspired by these amazing performances!",
-                'allowableFilters' => ['instructor', 'progress'],
-                'allowableFiltersMobile' => ['instructor'],
+                'allowableFilters' => ['difficulty', 'style'],
+                'allowableFiltersMobile' => ['difficulty', 'style'],
                 'sortBy' => '-published_on',
             ],
             'exploring-beats' => [
@@ -670,8 +670,8 @@ return [
                 'shortname' => 'Lessons',
                 'icon' => 'icon-shows',
                 'description' => "Get any drum related question answered by a Drumeo instructor on our weekly Q&A episodes! You can submit as many questions as you like by clicking the button below, and either join us live for the next episode, or check for your answer in the archived videos below!",
-                'allowableFilters' => [],
-                'allowableFiltersMobile' => ['instructor','progress'],
+                'allowableFilters' => ['difficulty','style','essentials','theory'],
+                'allowableFiltersMobile' => ['difficulty','style','essentials','theory'],
                 'sortBy' => '-published_on',
             ],
             'student-collaborations' => [
@@ -808,8 +808,8 @@ return [
                 'name' => 'Coaches',
                 'icon' => 'icon-coach',
                 'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
-                'allowableFilters' => ['progress'],
-                'allowableFiltersMobile' => ['focus', 'style'],
+                'allowableFilters' => ['difficulty','style', 'essentials','theory','lifestyle','creativity'],
+                'allowableFiltersMobile' => ['difficulty','style', 'essentials','theory','lifestyle','creativity'],
                 'sortBy' => '-published_on',
             ],
             'songs' => [
@@ -863,8 +863,8 @@ return [
             'question-and-answer' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/question-answer.jpg',
                 'name' => 'Q&A',
-                'allowableFilters' => ['instructor'],
-                'allowableFiltersMobile' => ['instructor','progress'],
+                'allowableFilters' => ['difficulty','style','essentials','theory'],
+                'allowableFiltersMobile' => ['difficulty','style','essentials','theory'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Q&A',
                 'icon' => 'icon-student-focus',
@@ -875,8 +875,8 @@ return [
             'bootcamps' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/bootcamps.jpg',
                 'name' => 'Bootcamps',
-                'allowableFilters' => ['instructor'],
-                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'allowableFilters' => ['difficulty','style','essentials'],
+                'allowableFiltersMobile' => ['difficulty','style','essentials'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Bootcamps',
                 'icon' => 'icon-chords-scales-icon',

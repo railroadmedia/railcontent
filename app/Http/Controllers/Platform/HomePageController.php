@@ -621,7 +621,7 @@ class HomePageController extends BaseController
         $workouts = $this->contentService->getFiltered(
             1,
             10,
-            'slug',
+            '-published_on',
             ['workout'],
             [],
             [],

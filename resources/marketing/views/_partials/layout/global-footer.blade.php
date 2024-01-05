@@ -87,8 +87,8 @@
         </div> --}}
         <p class="text-xs md:text-sm">
             Musora Media, Inc. © {{ date('Y') }} - &nbsp;
-            <a class="text-xs md:text-sm" href="/terms-of-service">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;
-            <a href="/privacy-policy" class="text-xs md:text-sm">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;
+            <a class="text-xs md:text-sm" href="/terms">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;
+            <a href="/privacy" class="text-xs md:text-sm">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;
             <a rel="noopener" href="/careers" class="text-xs md:text-sm">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;
             <a rel="noopener" href="https://www.musora.com/brand" class="text-xs md:text-sm">Brand Guide</a>
         </p>

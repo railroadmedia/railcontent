@@ -81,7 +81,7 @@
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
 
     {{-- WRAPPER VUE --}}
-    <playlist-playback-wrapper
+    <playlist-playback
         :is-released="{{ json_encode($playlistItem['released']) }}"
         lesson-type="{{ $lessonType }}"
         brand="{{ $brand }}"
@@ -140,7 +140,7 @@
         report-logo="{{ config('mailora.'. $brand . '.logo-link') }}"
         report-recipient="{{ config('mailora.'. $brand . '.ask-question-recipient') }}"
     >
-    </playlist-playback-wrapper>
+    </playlist-playback>
 @endsection
 
 @section('layout-scripts')

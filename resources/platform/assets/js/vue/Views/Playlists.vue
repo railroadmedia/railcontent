@@ -1,7 +1,6 @@
 <template>
     <Breadcrumb
-        :last-level-url="`/${brand}/playlists`"
-        last-level-title="Playlists"
+        :breadcrumbs="[{ title: 'Playlists' }]"
     />
 
     <PlaylistCollectionHeader :playlist-count="playlistCount" />
