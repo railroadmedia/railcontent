@@ -13,8 +13,14 @@
             onload="this.classList.remove('tw-opacity-0')"
         >
         <section class="tw-max-w-screen-lg tw-w-full tw-mx-auto tw-flex tw-flex-col md:tw-flex-row tw-items-center">
-            <img src="" title="Image of musical instruments" class="tw-w-[300px] tw-h-[300px] tw-flex-shrink-0 sm:tw-mr-8 tw-mb-4 md:tw-mb-0">
-            <!-- content -->
+            <!-- Instrument Image -->
+            <img src="https://www.musora.com/musora-cdn/image/width=300/https://musora-web-platform.s3.amazonaws.com/stc/instruments.png" 
+                title="Image of musical instruments" 
+                class="tw-w-[300px] tw-h-[300px] tw-flex-shrink-0 sm:tw-mr-8 tw-mb-4 md:tw-mb-0 tw-transition-opacity tw-opacity-0"
+                loading="lazy"
+                onload="this.classList.remove('tw-opacity-0')"
+            >
+            <!-- Content -->
             <div class="tw-z-10">
                 <h1 class="tw-text-3xl tw-mb-2 tw-text-[#9EC0DC] tw-font-semibold">Sign Up for Musora Student Experience Studies and get rewarded with free platform time</h1>
                 <p class="tw-text-lg tw-text-white">Help us to test new student experiences and make our platforms even better.
