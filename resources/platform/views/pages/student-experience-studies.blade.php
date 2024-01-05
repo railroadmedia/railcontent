@@ -170,7 +170,7 @@
                 <button disabled 
                         type="submit"
                         id="submit-button"
-                        class="disabled:tw-opacity-70 tw-transition-all tw-btn tw-btn-primary dark:tw-bg-white dark:tw-text-black tw-bg-black tw-text-white"   
+                        class="md:tw-ml-auto disabled:tw-opacity-70 tw-transition-all tw-btn tw-btn-primary dark:tw-bg-white dark:tw-text-black tw-bg-black tw-text-white"   
                 >
                     {{-- If Submitting Form --}}
                     <div id="button-loading" class="tw-hidden tw-inline-flex">
@@ -180,7 +180,6 @@
                         </svg>
                         Processing...
                     </div>    
-
                     {{-- Else --}}
                     <span>Submit<span>
                 </button>
