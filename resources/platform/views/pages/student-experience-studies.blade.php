@@ -30,7 +30,7 @@
             </div>
         </section>
     </header>
-    <main class="tw-w-full tw-max-w-screen-md tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-10 dark:tw-text-white tw-flex tw-justify-center">
+    <main class="tw-w-full tw-max-w-screen-md tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-10 dark:tw-text-white tw-transition-colors tw-flex tw-justify-center">
         {{-- Form Wrapper --}}
         <section id="stc-form-wrapper" class="tw-mb-12">
             <div class="tw-text-center tw-mb-4">
@@ -87,14 +87,22 @@
                 {{-- Languages: Multi-select --}}
                 <label class="tw-flex tw-flex-col tw-mb-2 tw-relative">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Spoken Languages<span>*</span></span>
-                    <input required 
-                            id="language" 
-                            type="text" 
-                            name="language" 
-                            autocomplete="language" 
-                            placeholder="Select" 
-                            class="dark:placeholder:tw-text-white placeholder:tw-text-black tw-bg-transparent tw-rounded-full tw-cursor-pointer"
-                    />
+                    <div class="tw-relative tw-w-full">
+                        <input required 
+                                readonly
+                                id="language" 
+                                type="text" 
+                                name="language" 
+                                autocomplete="language" 
+                                placeholder="Select" 
+                                class="tw-w-full dark:placeholder:tw-text-white placeholder:tw-text-black tw-bg-transparent tw-rounded-full tw-cursor-pointer tw-pr-8"
+                        />
+                        <i class="tw-absolute tw-right-[14px] tw-top-[14px] tw-text-2xl tw-text-[#6b7280]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="tw-w-4 tw-h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>                              
+                        </i>
+                    </div>
                     <select multiple name="languages[]" id="languages" class="tw-p-0 tw-absolute tw-w-full tw-top-full tw-hidden tw-h-[400px]">
                         @foreach ($languages as $code => $name)
                             <option class="bg-white text-black" value="{{ $name }}">{{ $name }}</option>
@@ -168,12 +176,12 @@
                 </label>
 
                 {{-- Note on Languages --}}
-                <p class="tw-text-sm tw-mb-2">
+                <small class="tw-text-sm tw-mb-2">
                     *Please select all languages in which you have a native or near-native proficiency 
                     <i title="Some studies may involve rating the quality of content translation or subtitles in other languages.">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="info" version="1.1" width="36" height="35" viewBox="0 0 36 35" class="tw-inline-block tw-w-[20px] tw-h-[20px]"><use data-v-a55a9eb4="" xlink:href="#icon-info" x="0" y="0"></use></svg>
                     </i> 
-                </p>
+                </small>
 
                 {{-- Consent Message --}}
                 <label class="tw-mb-6">
@@ -253,6 +261,7 @@
         });
         languageInput.addEventListener('click', ()=> {
             languageSelect.classList.toggle('tw-hidden');
+            languageSelect.focus();
         })
         languageSelect.addEventListener('change', function() {
             let selectedLanguages = Array.from(this.options) // Access all options
