@@ -5,15 +5,15 @@
 @endsection
 
 @section('content')
-    <header class="tw-relative tw-bg-black tw-p-8">
+    <header class="tw-relative tw-bg-black tw-py-[40px] tw-px-8 2xl:tw-px-0 tw-min-h-[380px] tw-flex tw-items-center">
         <!-- BG Image -->
         <img src="" 
             class="tw-transition-opacity tw-absolute tw-top-0 tw-left-0 tw-object-cover tw-object-top tw-h-full tw-w-full" 
             loading="lazy"
             onload="this.classList.remove('tw-opacity-0')"
         >
-        <section class="tw-max-w-screen-lg tw-w-full tw-mx-auto tw-flex tw-flex-col sm:tw-flex-row tw-items-center">
-            <img src="" title="Image of musical instruments" class="tw-w-[300px] sm:tw-mr-4">
+        <section class="tw-max-w-screen-lg tw-w-full tw-mx-auto tw-flex tw-flex-col md:tw-flex-row tw-items-center">
+            <img src="" title="Image of musical instruments" class="tw-w-[300px] tw-h-[300px] tw-flex-shrink-0 sm:tw-mr-8 tw-mb-4 md:tw-mb-0">
             <!-- content -->
             <div class="tw-z-10">
                 <h1 class="tw-text-3xl tw-mb-2 tw-text-[#9EC0DC] tw-font-semibold">Sign Up for Musora Student Experience Studies and get rewarded with free platform time</h1>
@@ -95,22 +95,32 @@
 
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Primary Instrument</span>
-                    <select name="instrument" id="instrument" class="tw-bg-transparent tw-rounded-full">
+                    <select name="instruments" id="instruments" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($instruments as $instrument)
                             <option class="bg-white text-black" value="{{ $instrument['value'] }}">{{ $instrument['value'] }}</option>
                         @endforeach
                     </select>
                 </label>
+                {{-- If Other: remove tw-hidden --}}
+                <label id="other-instrument" class="tw-flex tw-flex-col tw-mb-2 tw-hidden">
+                    <span class="tw-m-2 tw-font-bold tw-leading-0">Your Instrument</span>
+                    <input id="instrument" type="text" name="instrument" autocomplete="instrument"  class="tw-bg-transparent tw-rounded-full"/>
+                </label>
 
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Primary Learning Goal</span>
-                    <select name="goal" id="goal" class="tw-bg-transparent tw-rounded-full">
+                    <select name="goals" id="goals" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($goals as $goal)
                             <option class="bg-white text-black" value="{{ $goal['value'] }}">{{ $goal['value'] }}</option>
                         @endforeach
                     </select>
+                </label>
+                {{-- If Other: remove tw-hidden --}}
+                <label id="other-goal" class="tw-flex tw-flex-col tw-mb-2 tw-hidden">
+                    <span class="tw-m-2 tw-font-bold tw-leading-0">Your Goal</span>
+                    <input id="goal" type="text" name="goal" autocomplete="goal"  class="tw-bg-transparent tw-rounded-full"/>
                 </label>
 
                 <label class="tw-flex tw-flex-col tw-mb-2">
@@ -146,11 +156,22 @@
                     </span>
                 </label>
 
-                <input disabled 
+                <button disabled 
                         type="submit"
-                        value="Submit"
                         class="disabled:tw-opacity-70 tw-btn tw-btn-primary dark:tw-bg-white dark:tw-text-black tw-bg-black tw-text-white"   
-                />
+                >
+                    {{-- If Submitting Form --}}
+                    <div id="button-loading" class="tw-hidden tw-inline-flex">
+                        <svg class="tw-animate-spin tw--ml-1 tw-mr-3 tw-h-5 tw-w-5 dark:tw-text-black tw-text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="tw-opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="tw-opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Processing...
+                    </div>    
+
+                    {{-- Else --}}
+                    <span>Submit<span>
+                </button>
             </form>
         </section>
         
