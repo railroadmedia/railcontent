@@ -89,13 +89,12 @@
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Spoken Languages<span>*</span></span>
                     <div class="tw-relative tw-w-full">
                         <input required 
-                                readonly
                                 id="language" 
                                 type="text" 
                                 name="language" 
                                 autocomplete="language" 
                                 placeholder="Select" 
-                                class="tw-w-full dark:placeholder:tw-text-white placeholder:tw-text-black tw-bg-transparent tw-rounded-full tw-cursor-pointer tw-pr-16"
+                                class="tw-w-full tw-pointer-events-none dark:placeholder:tw-text-white placeholder:tw-text-black tw-bg-transparent tw-rounded-full tw-cursor-pointer tw-pr-16"
                         />
                         <i id="clear-multi-select" class="tw-z-10 tw-absolute tw-right-10 tw-top-[14px] tw-text-2xl tw-text-[#6b7280] tw-hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="tw-w-4 tw-h-4">
