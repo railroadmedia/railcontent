@@ -75,6 +75,7 @@
         "simplebar": "^5.3.6",
         "smoothscroll-polyfill": "^0.4.4",
         "stream-chat": "^6.7.3",
+        "uuid": "^9.0.1",
         "vue": "^3.4.4",
         "vue-advanced-cropper": "^2.8.1",
         "vue-axios": "^3.4.1",
