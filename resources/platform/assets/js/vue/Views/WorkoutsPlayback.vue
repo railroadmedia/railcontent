@@ -17,7 +17,7 @@
                                 <YoutubePlayer :video-id="videoProps.videoId" ref="mediaElementVueInstance" :brand="brand"
                                     :theme-color="brand" :video-length="videoProps.videoLength"
                                     :progress-state="videoProps.progressState" :content-id="videoProps.id"
-                                    :use-intersection-observer="true" :start-second="seekToTime"
+                                    :use-intersection-observer="true" :start-second="startSecond"
                                     :end-second="videoProps.videoLength" :total-duration="videoProps.videoLength"
                                     :seek-to-time="seekToTime" @play="handleVideoPlay" @pause="handleVideoPause"
                                     @onVideoEnd="handleVideoEnd" />
