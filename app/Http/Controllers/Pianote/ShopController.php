@@ -46,6 +46,8 @@ class ShopController extends BaseController
 
         $featured = $products->whereIn('id', [208, 210, 197, 206]);
 
+        $lowStock = Product::whereHas('brand', fn($query) => $query->where('name', 'pianote'))->where([['sold_out', 0]])->orderBy('display_order')->get()->whereIn('id', [55, 84]);
+
         return view('pianote.shop.shop', [
             'lessons' => $lessons,
             'accessories' => $accessories,

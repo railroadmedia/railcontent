@@ -267,6 +267,34 @@
                 </div>
             </div>
         </section>
+
+        {{--   limited     --}}
+        <div id="limited" class="anchor"></div>
+        <section class="grid-view category-section" data-category="misc" x-show="filter === 'clothing' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Limited Sizing</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+
+                    @foreach($lowStock as $lowStockItem)
+                        @include('_partials.components.shop.product-card', [
+                             "sku" => $lowStockItem->sku,
+                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lowStockItem->slug ),
+                             "badgeText" => $lowStockItem->badge_text,
+                             "thumbnail" => $lowStockItem->thumbnail,
+                             "title" => $lowStockItem->name,
+                             "cardDescription" => $lowStockItem->short_desc,
+                             "fullPrice" => $lowStockItem->price,
+                             "price" => $lowStockItem->discounted_price,
+                             "sizes" => $lowStockItem->sizes,
+                             "soldOut" => isset($products[$lowStockItem->sku]) ? $products[$lowStockItem->sku]->getStockAvailability() === 0 : $lowStockItem->sold_out,
+                             "category" => strtolower($lowStockItem->productType->name),
+                             "size_case_sensitive" => $lowStockItem->size_case_sensitive,
+                        ])
+                    @endforeach
+
+                </div>
+            </div>
+        </section>
     </div>
 @endsection
 
