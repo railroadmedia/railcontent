@@ -48,6 +48,12 @@ class UserAccessPermissionsCollection
             $userAccessPermissions = $this->collection->whereIn('permission_id', $permissions);
         }
 
+        if ($this->user->isAdmin() && (
+                is_integer($permissions) && $permissions == self::MusoraPlusMembershipPermission
+                || is_array($permissions) && in_array(self::MusoraPlusMembershipPermission, $permissions))) {
+            return [Carbon::today(), Carbon::maxValue()];
+        }
+
         $userAccessPermissions = $userAccessPermissions
             ->sortBy('start_time');
         $expirationDate = null;
@@ -191,9 +197,14 @@ class UserAccessPermissionsCollection
 
     public function getActivePermissionIds(): array
     {
-        return $this->collection->where(function ($permission) {
+        $permissionIds = $this->collection->where(function ($permission) {
             return $permission->status != 'revoked';
         })->pluck('permission_id')->unique()->sort()->toArray();
+
+        if ($this->user->isAdmin() && !in_array(self::MusoraPlusMembershipPermission, $permissionIds)) {
+            $permissionIds[] = self::MusoraPlusMembershipPermission;
+        }
+        return $permissionIds;
     }
 
     public function hasUserOwnedPermissions(array $permissionIds): bool

@@ -100,6 +100,9 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJobByIds
             case "createdWithinLastDay":
                 $query = $query->where('created_at', '>', Carbon::now()->subDay());
                 break;
+            case "isAdmin":
+                $query = $query->where('permission_level', User::PERMISSION_LEVEL_ADMIN);
+                break;
             case "":
                 break;
             default:
