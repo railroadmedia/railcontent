@@ -2354,6 +2354,10 @@ class ContentRepository extends RepositoryBase
             'topic' => ['table' => 'railcontent_content_topics', 'column' => 'topic', 'alias' => '_rct'],
             'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus', 'alias' => '_rcf'],
             'bpm' => ['table' => 'railcontent_content_bpm', 'column' => 'bpm', 'alias' => '_rcb'],
+            'essentials' => ['table' => 'railcontent_content_essentials', 'column' => 'essentials', 'alias' => '_rce'],
+            'theory' => ['table' => 'railcontent_content_theory', 'column' => 'theory', 'alias' => '_rct'],
+            'creativity' => ['table' => 'railcontent_content_creativity', 'column' => 'creativity', 'alias' => '_rcc'],
+            'lifestyle' => ['table' => 'railcontent_content_lifestyle', 'column' => 'lifestyle', 'alias' => '_rcl'],
         ];
 
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
@@ -2831,6 +2835,10 @@ class ContentRepository extends RepositoryBase
             'topic' => ['table' => 'railcontent_content_topics', 'column' => 'topic', 'alias' => '_rct'],
             'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus', 'alias' => '_rcf'],
             'bpm' => ['table' => 'railcontent_content_bpm', 'column' => 'bpm', 'alias' => '_rcb'],
+            'essentials' => ['table' => 'railcontent_content_essentials', 'column' => 'essentials', 'alias' => '_rce'],
+            'theory' => ['table' => 'railcontent_content_theory', 'column' => 'theory', 'alias' => '_rct'],
+            'creativity' => ['table' => 'railcontent_content_creativity', 'column' => 'creativity', 'alias' => '_rcc'],
+            'lifestyle' => ['table' => 'railcontent_content_lifestyle', 'column' => 'lifestyle', 'alias' => '_rcl'],
         ];
 
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
