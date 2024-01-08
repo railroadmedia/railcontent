@@ -11,6 +11,9 @@
         })(window,document,'script','dataLayer','GTM-N2HMTTQ');</script>
     <!-- End Google Tag Manager -->
 
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
     <meta name="facebook-domain-verification" content="bclyyfgkbrovmw1kme6r18m1a16abf" />
@@ -23,8 +26,6 @@
     @include('_partials.layout._fonts')
 
     {!! \App\Analytics\Tracker::headBottom() !!}
-
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js"></script>
 
     @yield('global-head')
 
@@ -51,6 +52,7 @@
             document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
         })
     </script>
+    
     {!! \App\Analytics\Tracker::bodyBottom() !!}
 </body>
 </html>
