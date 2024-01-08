@@ -97,6 +97,12 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJobByIds
                         ->where('user_access_permissions.time_lifetime', false);
                 });
                 break;
+            case "createdWithinLastDay":
+                $query = $query->where('created_at', '>', Carbon::now()->subDay());
+                break;
+            case "isAdmin":
+                $query = $query->where('permission_level', User::PERMISSION_LEVEL_ADMIN);
+                break;
             case "":
                 break;
             default:

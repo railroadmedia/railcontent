@@ -16,8 +16,16 @@ class SaleRevertSeeder extends Seeder
      */
     public function run()
     {
-        //DRUMEO UPDATES
-        Product::where('brand_id', 1)->where('product_type_id', 4)->update(['discounted_price' => 25]);
-        Product::where('brand_id', 1)->where('product_type_id', 5)->update(['discounted_price' => 59]);
+//        all shirts
+        Product::where('product_type_id', 4)->update(['discounted_price' => 35]);
+//        all hoodies
+        Product::where('product_type_id', 5)->update(['discounted_price' => 65]);
+//        all sweaters
+        Product::where('product_type_id', 7)->update(['discounted_price' => 45]);
+
+        Product::where('name', '30-Day Drummer Plaid Shirt')->update(['discounted_price' => 65]);
+        Product::where('name', 'Drumeo Yuletide Knit Sweater')->update(['discounted_price' => 69]);
+        Product::where('name', 'Pianote Yuletide Knit Sweater')->update(['discounted_price' => 69]);
+        Product::where('name', '30-Day Drummer Satin Tour Jacket')->update(['discounted_price' => 89]);
     }
 }

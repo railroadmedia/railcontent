@@ -815,8 +815,8 @@ export default {
             return this.searchContent();
         },
 
-        handleContentSort(event) {
-            this.sort = event.target.value;
+        handleContentSort(value) {
+            this.sort = value;
 
             if (this.useUrlParams) {
                 this.updatePageUrl();

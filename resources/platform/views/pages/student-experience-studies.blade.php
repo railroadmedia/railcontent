@@ -38,7 +38,7 @@
                 <p>Please fill our the enrollment questionaire to be considered for studies</p>
             </div>
 
-            <form method="POST" action="https://customerioforms.com/forms/submit_action?site_id=fa24b9733327116040c7&form_id=9e8885d4ad1545a&success_url=https://beta-testing.musora.com/drumeo/student-experience-studies" class="tw-flex tw-flex-col" id="stc-form">
+            <form method="POST" action="https://customerioforms.com/forms/submit_action?site_id={{ config('customer-io.accounts.musora.site_id') }}&form_id=9e8885d4ad1545a&success_url=https://beta-testing.musora.com/drumeo/student-experience-studies" class="tw-flex tw-flex-col" id="stc-form">
                 {{-- Name --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Name</span>
