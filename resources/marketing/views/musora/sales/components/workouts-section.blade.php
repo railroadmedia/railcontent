@@ -55,7 +55,7 @@
     <div class="container max-w-5xl mx-auto">
         <div class="flex flex-wrap sm:flex-nowrap justify-center text-left">
             <div class="w-full sm:w-1/2">
-                <div class="rounded-xl px-7 sm:px-10 py-7 sm:py-14 mb-5 sm:mb-7 clearfix" style="background-color:#f6f8fc;">
+                <div class="rounded-xl px-7 lg:px-10 py-7 lg:py-14 mb-5 lg:mb-7 clearfix" style="background-color:#f6f8fc;">
                     <h5 class="leading-tight mb-3"><strong>Your daily energy boost.</strong></h5>
                     <h6 class="leading-normal">
                         You shouldn't lose momentum between lessons. We’ll help you play every
@@ -63,7 +63,7 @@
                         day with fun guided practice sessions.
                     </h6>
                 </div>
-                <div class="rounded-xl px-7 sm:px-10 py-7 sm:py-14 clearfix" style="background-color:#f6f8fc;">
+                <div class="rounded-xl px-7 lg:px-10 py-7 lg:py-14 clearfix" style="background-color:#f6f8fc;">
                     <h5 class="leading-tight mb-3"><strong>Build better habits. </strong></h5>
                     <h6 class="leading-normal">
                         The best way to build habits is to start with small habits. Our
@@ -73,7 +73,7 @@
                 </div>
             </div>
             <div class="mt-5 sm:mt-0 sm:pl-7 sm:w-1/2 flex-grow-0">
-                <div class="h-full rounded-xl p-7 sm:p-10 pb-52 sm:pb-48 bg-black @if($theme != 'musora') text-white @else text-black @endif flex bg-cover bg-top" style="background-image:url('{{ $workoutsBG }}');">
+                <div class="h-full rounded-xl p-7 lg:p-10 pb-64 sm:pb-48 bg-black @if($theme != 'musora') text-white @else text-black @endif flex bg-cover bg-top" style="background-image:url('{{ $workoutsBG }}');">
                     <div>
                         <h5 class="leading-tight mb-3"><strong>
                                 @if($theme == 'drumeo' || $theme == 'pianote')
