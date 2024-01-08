@@ -9,13 +9,8 @@ use Tests\BaseTestCase;
 class HandlesMaskedEmailAddressTest extends BaseTestCase
 {
     use CreatesReflectionMethod;
-    protected HandlesMaskedEmailAddressTraitJob $traitJob;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->traitJob = new HandlesMaskedEmailAddressTraitJob();
-    }
+    protected HandlesMaskedEmailAddressTraitJob $traitJob;
 
     /**
      * @throws ReflectionException
@@ -25,11 +20,11 @@ class HandlesMaskedEmailAddressTest extends BaseTestCase
         $method = $this->getReflectionMethod($this->traitJob, 'getIsUsingMask');
 
         // environment is non-prod by default
-        self::assertTrue($method->invoke($this->traitJob));
+        $this->assertTrue($method->invoke($this->traitJob));
 
         // mock being in prod
         $this->setProductionApp();
-        self::assertFalse($method->invoke($this->traitJob));
+        $this->assertFalse($method->invoke($this->traitJob));
     }
 
     /**
@@ -54,11 +49,11 @@ class HandlesMaskedEmailAddressTest extends BaseTestCase
 
         // test with normal email
         $email = 'foo@bar.com';
-        self::assertEquals($email, $method->invoke($this->traitJob, $email));
+        $this->assertEquals($email, $method->invoke($this->traitJob, $email));
 
         // and with the suffix added
         $email = $email.$this->traitJob->fakeSuffix;
-        self::assertEquals($email, $method->invoke($this->traitJob, $email));
+        $this->assertEquals($email, $method->invoke($this->traitJob, $email));
     }
 
     /**
@@ -70,10 +65,10 @@ class HandlesMaskedEmailAddressTest extends BaseTestCase
 
         // test with normal email
         $email = 'foo@bar.com';
-        self::assertEquals($email, $method->invoke($this->traitJob, $email));
+        $this->assertEquals($email, $method->invoke($this->traitJob, $email));
 
         // and with the suffix added
-        self::assertEquals($email, $method->invoke($this->traitJob, $email.$this->traitJob->fakeSuffix));
+        $this->assertEquals($email, $method->invoke($this->traitJob, $email.$this->traitJob->fakeSuffix));
     }
 
     /**
@@ -85,7 +80,7 @@ class HandlesMaskedEmailAddressTest extends BaseTestCase
         $email = "foo{$this->traitJob->fakeSuffix}@bar.com";
         $method = $this->getReflectionMethod($this->traitJob, 'getEmailFromShopify');
 
-        self::assertEquals($email, $method->invoke($this->traitJob, $email.$this->traitJob->fakeSuffix));
+        $this->assertEquals($email, $method->invoke($this->traitJob, $email.$this->traitJob->fakeSuffix));
     }
 
     /**
@@ -95,10 +90,16 @@ class HandlesMaskedEmailAddressTest extends BaseTestCase
     {
         $method = $this->getReflectionMethod($this->traitJob, 'getEmailFromShopify');
         $email = 'foo@bar.com';
-        self::assertEquals($email, $method->invoke($this->traitJob, $email.$this->traitJob->fakeSuffix));
+        $this->assertEquals($email, $method->invoke($this->traitJob, $email.$this->traitJob->fakeSuffix));
 
         $this->setProductionApp();
-        self::assertEquals($email, $method->invoke($this->traitJob, $email));
+        $this->assertEquals($email, $method->invoke($this->traitJob, $email));
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->traitJob = new HandlesMaskedEmailAddressTraitJob();
     }
 }
 
