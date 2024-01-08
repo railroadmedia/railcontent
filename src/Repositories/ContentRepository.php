@@ -131,6 +131,26 @@ class ContentRepository extends RepositoryBase
             'column' => 'focus',
             'alias' => '_rcf',
         ],
+        'essentials' => [
+            'table' => 'railcontent_content_essentials',
+            'column' => 'essentials',
+            'alias' => '_rce',
+        ],
+        'theory' => [
+            'table' => 'railcontent_content_theory',
+            'column' => 'theory',
+            'alias' => '_rtb',
+        ],
+        'creativity' => [
+            'table' => 'railcontent_content_creativity',
+            'column' => 'creativity',
+            'alias' => '_rcc',
+        ],
+        'lifestyle' => [
+            'table' => 'railcontent_content_lifestyle',
+            'column' => 'lifestyle',
+            'alias' => '_rcl',
+        ],
         'bpm' => [
             'table' => 'railcontent_content_bpm',
             'column' => 'bpm',
@@ -2359,7 +2379,10 @@ class ContentRepository extends RepositoryBase
             'creativity' => ['table' => 'railcontent_content_creativity', 'column' => 'creativity', 'alias' => '_rcc'],
             'lifestyle' => ['table' => 'railcontent_content_lifestyle', 'column' => 'lifestyle', 'alias' => '_rcl'],
         ];
-
+if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) == 1){
+    $brand = config('railcontent.brand');
+    self::$catalogMetaAllowableFilters = (config('railcontent.cataloguesMetadata.'.$brand.'.'.$this->typesToInclude[0].'.allowableFilters'));
+}
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
                 'data',
                 'instructor',
