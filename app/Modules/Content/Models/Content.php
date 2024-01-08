@@ -8,6 +8,10 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
+use Modules\Content\Models\ContentCreativity;
+use Modules\Content\Models\ContentEssentials;
+use Modules\Content\Models\ContentLifestyle;
+use Modules\Content\Models\ContentTheory;
 use Railroad\Railcontent\Events\ContentCreated;
 
 /**
@@ -195,6 +199,10 @@ class Content extends Model
         'enrollment_end_time' => 'datetime',
         'soundslice_slug' => 'string',
         'total_xp' => 'integer',
+        'essentials' => 'string',
+        'theory' => 'string',
+        'creativity' => 'string',
+        'lifestyle' => 'string',
     ];
 
     public function newEloquentBuilder($query): ContentBuilder
@@ -585,6 +593,82 @@ if($contentInstructor->count() == 0) {
                 $permission->brand = $this->brand;
                 $permission->save();
             }
+        }
+    }
+
+    public function setEssentials($value)
+    {
+        if ($value) {
+            $essential =
+                ContentEssentials::query()
+                    ->where('content_id', '=', $this->id)
+                    ->where('essentials', $value)
+                    ->first();
+            if (!$essential) {
+                $essential = new ContentEssentials();
+                $essential->content_id = $this->id;
+                $essential->essentials = $value;
+                $essential->position = 1;
+                $essential->save();
+            }
+            $this->setField('essentials', $value);
+        }
+    }
+
+    public function setTheory($value)
+    {
+        if ($value) {
+            $theory =
+                ContentTheory::query()
+                    ->where('content_id', '=', $this->id)
+                    ->where('theory', $value)
+                    ->first();
+            if (!$theory) {
+                $theory = new ContentTheory();
+                $theory->content_id = $this->id;
+                $theory->theory = $value;
+                $theory->position = 1;
+                $theory->save();
+            }
+            $this->setField('theory', $value);
+        }
+    }
+
+    public function setCreativity($value)
+    {
+        if ($value) {
+            $creativity =
+                ContentCreativity::query()
+                    ->where('content_id', '=', $this->id)
+                    ->where('creativity', $value)
+                    ->first();
+            if (!$creativity) {
+                $creativity = new ContentCreativity();
+                $creativity->content_id = $this->id;
+                $creativity->creativity = $value;
+                $creativity->position = 1;
+                $creativity->save();
+            }
+            $this->setField('creativity', $value);
+        }
+    }
+
+    public function setLifestyle($value)
+    {
+        if ($value) {
+            $lifestyle =
+                ContentLifestyle::query()
+                    ->where('content_id', '=', $this->id)
+                    ->where('lifestyle', $value)
+                    ->first();
+            if (!$lifestyle) {
+                $lifestyle = new ContentLifestyle();
+                $lifestyle->content_id = $this->id;
+                $lifestyle->lifestyle = $value;
+                $lifestyle->position = 1;
+                $lifestyle->save();
+            }
+            $this->setField('lifestyle', $value);
         }
     }
 }

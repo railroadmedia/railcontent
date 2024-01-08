@@ -17,6 +17,7 @@ use App\Modules\Content\Observers\ContentFieldObserver;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use App\Modules\Content\Console\Commands\MigrateMissingPlaylistsItems;
+use Modules\Content\Console\Commands\Filters2024;
 
 class ContentServiceProvider extends ServiceProvider
 {
@@ -43,6 +44,7 @@ class ContentServiceProvider extends ServiceProvider
                             RecalculatePlaylistDuration::class,
                             WorkoutsImport2023::class,
             ChallengesImport2023::class,
+            Filters2024::class,
                         ]);
     }
 }
