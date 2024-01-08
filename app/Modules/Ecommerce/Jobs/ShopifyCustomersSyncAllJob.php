@@ -103,6 +103,11 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJobByIds
             case "isAdmin":
                 $query = $query->where('permission_level', User::PERMISSION_LEVEL_ADMIN);
                 break;
+            case "requiresRechargeSync":
+                $query = $query->whereRaw(
+                    'recharge_renewal_date is not null and recharge_renewal_date > now() and DATEDIFF(membership_expiration_date, recharge_renewal_date) - 7 > 7'
+                );
+                break;
             case "":
                 break;
             default:
