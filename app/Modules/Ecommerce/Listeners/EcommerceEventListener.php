@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Listeners;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Services\ShopifyCustomerService;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
@@ -17,7 +18,8 @@ class EcommerceEventListener
     public function __construct(
         private readonly ShopifySyncService $shopifySyncService,
         private readonly ShopifyCustomerService $shopifyCustomerService,
-        private readonly RechargeGateway $rechargeGateway
+        private readonly RechargeGateway $rechargeGateway,
+        private readonly UserAccessPermissionsService $userAccessPermissionsService
     ) {
     }
 
@@ -35,7 +37,7 @@ class EcommerceEventListener
     /**
      * Handle necessary updates to external ecommerce systems when the user has been updated.
      *
-     * @param  UserUpdated|UsoraUserUpdated  $userUpdated
+     * @param UserUpdated|UsoraUserUpdated $userUpdated
      */
     public function handleUserUpdated(UserUpdated|UsoraUserUpdated $userUpdated): void
     {
@@ -68,5 +70,7 @@ class EcommerceEventListener
 
             $this->shopifyCustomerService->updateOrCreateShopifyCustomer($newUser);
         }
+
+        $this->userAccessPermissionsService->syncUser($newUser);
     }
 }
