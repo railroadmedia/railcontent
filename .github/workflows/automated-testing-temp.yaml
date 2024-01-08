@@ -2,9 +2,9 @@ name: Automated Testing - TEMP
 
 on:
   push:
-    branches: ["shopify-tests"]
+    branches: [ $default-branch ]
   pull_request:
-    branches: ["shopify-tests"]
+    branches: [ $default-branch ]
 
 env:
   APP_NAME: "Musora Web Platform"
