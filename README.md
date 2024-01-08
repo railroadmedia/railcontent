@@ -167,14 +167,44 @@ In your blade file you can load in these variables like this:
 
 ```
 
+# Automated Testing
+## Testing Through CLI
+You can use the Laravel framework to run various tests through the `artisan test` command. Please refer to the [documentation](https://laravel.com/docs/10.x/testing) 
+for details on options. For example, you can run `r mwp artisan test --testsuite=Feature` to run all tests defined in the 
+Feature test suite, in phpunit.xml.
 
-# PHPStorm Automated Testing Settings
+## Testing Through PhpStorm
+You can run tests directly within PhpStorm, either individually or all tests in a file. After following the setup process 
+outlined below, simply go to a test file and click the "Run test" button (green "play" icon). The test results will be 
+displayed in the Run Window of your PhpStorm.
 
-### Test Framework
+### PHPStorm Automated Testing Settings
+
+#### Test Framework
 ![](https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/f532fe6d-7f49-489e-aa55-2dabeaee5900/public)
 
-### CLI Interpreter
+#### CLI Interpreter
 ![](https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/e0eb64b1-b163-4626-e217-5ce9d80d7900/public)
+
+## Git Hooks
+We use [husky](https://github.com/typicode/husky) to set up Git hooks, to run on each developers' environment. These can be 
+found in the .husky directory and consist of the following:
+- pre-push
+  - This will automatically run all of our tests when you attempt to push (e.g. `git push origin my-branch`). If any tests fail, you will not be able to push.
+    - If you need to bypass this check, add the `--no-verify` option to your push command.
+
+## Code Coverage
+phpunit allows us to generate a code coverage report, that identifies what code is and isn't covered by tests. You can run 
+these through a number of scripts in the composer.json file. These have two main groups of differences:
+- `--parallel` to run the tests in a single thread, or in parallel
+- `--coverage` or `--coverage-html` to generate the report in your cli terminal, or in an html format stored in the `reports` directory of this project.
+  - To view the html report, go into the `reports` directory and open the `index.html` or `dashboard.html` file
+
+For best results, run `r mwp composer test-cov-html-p` to run the tests in parallel (to run faster) and generate an html report.
+
+## GitHub Actions
+The `automated-testing.yaml` file outlines the GitHub Action that runs our entire test suite and sends the coverage report 
+to [Codecov](https://app.codecov.io/gh/railroadmedia/musora-web-platform).
 
 
 # Useful Testing & Seeder Commands
