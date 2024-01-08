@@ -72,7 +72,11 @@ export default {
             topic: [],
             key: [],
             key_pitch_type: [],
-            instrument: []
+            instrument: [],
+            essentials: [],
+            theory: [],
+            creativity: [],
+            lifestyle:[]
         };
 
         keys.forEach(key => {
