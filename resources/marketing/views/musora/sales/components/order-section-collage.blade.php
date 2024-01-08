@@ -9,7 +9,7 @@
             <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5 mb-4 sm:mb-0">
                 <picture>
                     <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/{!! $image !!}">
-                    <img class="h-72 sm:h-auto max-w-full sm:max-w-xl lg:max-w-full transition-opacity opacity-0"
+                    <img class="object-contain h-64 sm:h-auto max-w-full sm:max-w-lg lg:max-w-full transition-opacity opacity-0"
                          loading="lazy"
                          onload="this.classList.remove('opacity-0')"
                          src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{!! $image !!}"
@@ -17,7 +17,7 @@
                     >
                 </picture>
             </div>
-            <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-auto flex-shrink-0">
+            <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0">
                 @if(!empty($logo))
                     <img class="h-7 mb-4 sm:mb-7" src="{{ $logo }}" alt="logo">
                 @endif
