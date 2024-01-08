@@ -22,32 +22,13 @@
 
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => '<span class="text-promo">Save up to 67%</span> on singing lessons,<br class="sm:hidden"> merch, & more.',
+        'text' => 'GET LESSONS, MERCH, GEAR, & MUCH MORE',
         'bg' => 'https://d21xeg6s76swyd.cloudfront.net/products/shop-header.jpg',
     ])
 
     @include('_partials.components.shop.index-filters')
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
-        @php
-            $bundles = [
-                [
-                    'slug' => '/shop/ultimate-lessons-bundle',
-                    'desc' => '3 Free Bonuses',
-                    'visible' => 1,
-                    'full' => true,
-                    'price' => 298,
-                    'discountedPrice' => 240,
-                    'buttonColor' => '#8300E9',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/singeo/promos/november/bundles/singeo-ultimate-lessons-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/singeo/promos/november/bundles/singeo-ultimate-lessons-card-m.jpg',
-                ],
-            ];
-        @endphp
-        @include('_partials.layout.holiday.bundle-tiles', [
-            "header" => 'Featured Deals',
-        ])
 
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
@@ -55,33 +36,21 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Singing Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
-{{--                    @include('_partials.components.shop.product-card', [--}}
-{{--                         "itemURL" => "/",--}}
-{{--                         "sku" => null,--}}
-{{--                         "thumbnail" => "https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-membership-shop.jpg",--}}
-{{--                         "title" => "Singeo Membership",--}}
-{{--                         "packAuthor" => "Lisa Witt",--}}
-{{--                         "cardDescription" => "Improve your vocal range, strength, and control with step-by-step lessons and unlimited personal support.",--}}
-{{--                         "specialPrice" => "7-Day Free Trial",--}}
-{{--                         "fullPrice" => 240,--}}
-{{--                         "price" => 150,--}}
-{{--                         "category" => "lessons",--}}
-{{--                         "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",--}}
-{{--                         'soldOut' => false,--}}
-{{--                    ])--}}
+                    @include('_partials.components.shop.product-card', [
+                         "itemURL" => "/",
+                         "sku" => null,
+                         "thumbnail" => "https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-membership-shop.jpg",
+                         "title" => "Singeo Membership",
+                         "packAuthor" => "Lisa Witt",
+                         "cardDescription" => "Improve your vocal range, strength, and control with step-by-step lessons and unlimited personal support.",
+                         "specialPrice" => "7-Day Free Trial",
+                         "fullPrice" => 240,
+                         "price" => 240,
+                         "category" => "lessons",
+                         "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
+                         'soldOut' => false,
+                    ])
 
-                    <div x-cloak x-show="filter === 'lessons'">
-                        @include('_partials.components.shop.product-card', [
-                             "itemURL" => "/shop/ultimate-lessons-bundle",
-                             "sku" => null,
-                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/singeo/promos/november/bundles/singeo-ultimate-shop-thumb.jpg",
-                             "title" => "Ultimate Lessons Bundle",
-                             "fullPrice" => 240,
-                             "price" => 240,
-                             "category" => "lessons",
-                             'soldOut' => false,
-                        ])
-                    </div>
                     @foreach($lessons as $key => $lesson)
                         @include('_partials.components.shop.product-card', [
                                 "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,

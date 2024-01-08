@@ -23,7 +23,7 @@ x-data="{ open: false }">
     @endif
     <div class="overflow-hidden rounded-lg relative bg-cover bg-top mb-3 border border-gray-300" style="padding-bottom: 100%;background-image:url('https://www.musora.com/musora-cdn/image/width=520,quality=95/{{ $thumbnail }}');">
         @if (!empty($badgeText))
-            <p class="absolute top-0 left-0 rounded-br-md bg-promo text-white font-black leading-none uppercase py-1 px-2 w-auto inline-block text-xs">
+            <p class="absolute top-0 left-0 rounded-br-md bg-musora text-black font-black leading-none uppercase py-1 px-2 w-auto inline-block text-xs">
                 {!! $badgeText !!}
             </p>
         @endif
@@ -71,7 +71,7 @@ x-data="{ open: false }">
             @endif
         </strong>
         @if (round(100 - (100 * ($price / $fullPrice))) > 1)
-            <span class="ml-1 text-xs bottom-0 font-black text-white rounded-md px-1.5 leading-none py-1 inline-block bg-promo align-bottom">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</span>
+            <span class="ml-1 text-xs bottom-0 font-black text-black rounded-md px-1.5 leading-none py-1 inline-block bg-musora align-bottom">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</span>
         @endif
     </p>
 </a>

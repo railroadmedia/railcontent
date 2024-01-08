@@ -10,6 +10,7 @@ enum ShopifyMetafieldKey: string
 {
     case Id = '_id'; // the internal ID in our db
     case IsMusoraAccountSetUp = 'is_musora_account_set_up';
+    case LastTrialEndDate = 'last_trial_end_date';
     case Brand = 'brand';
     case PaymentSource = 'payment_source';
 

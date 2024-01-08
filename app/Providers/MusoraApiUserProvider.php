@@ -68,14 +68,58 @@ class MusoraApiUserProvider implements UserProviderInterface
         return null;
     }
 
-    public function getCurrentUserMembershipData(?string $brand = null)
+    public function getCurrentUserMembershipData(?string $app = null)
     : array {
         $user = user();
 
         $isAppleAppSubscriber = $user->has_apple_subscription;
         $isGoogleAppSubscriber = $user->has_google_subscription;
 
+        $hasExperience = user()->onboardingExperience ? true : false;
+
+        $hasGear = count(
+                user()->onboardingGear->filter(function ($item) use($user) {
+                    return $item->brand == $user->last_used_brand;
+                })
+            ) > 0;
+
+        $hasTopics = count(
+                user()->onboardingTopics->filter(function ($item) use($user) {
+                    return $item->brand == $user->last_used_brand;
+                })
+            ) > 0;
+
+        $hasGenres = count(
+                user()->onboardingGenres->filter(function ($item) use($user) {
+                    return $item->brand == $user->last_used_brand;
+                })
+            ) > 0;
+
+	try {
+            $accountName = ($app)?strtolower($app):config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
+            $customerIoData = $this->customerIoService->getCustomerByUserId(
+                $accountName,
+                $user->id
+            );
+        } catch (ModelNotFoundException $exception) {
+            $customerIoData = null;
+        }
+
+        $extraData = [
+            'cio_id' => null,
+            'customer_io_id' => null,
+        ];
+
+        if ($customerIoData && !empty($externalAttributes = $customerIoData->getExternalAttributes())) {
+            $extraData = [
+                'cio_id' => $externalAttributes['cio_id'],
+                'customer_io_id' => strval($externalAttributes['id']),
+            ];
+        }
+
+        $userArray = array_merge($user->toArray(), $extraData);
         return [
+            'user' => $userArray,
             'isEdge' => $user->isAMember(),
             'isEdgeExpired' => !$user->membership_expiration_date || $user->isAnExpiredMember(),
             'edgeExpirationDate' => $user->membership_expiration_date,
@@ -85,12 +129,13 @@ class MusoraApiUserProvider implements UserProviderInterface
             'membership_level' => $user->membership_level,
             'is_drumeo_lifetime_member' => $user->is_drumeo_lifetime_member,
             'is_lifetime_member' => $user->is_lifetime_member,
+            'show_onboarding' => (!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience),
             'access_level' => $user->access_level,
             'is_enrolled_into_cohort' => $user->isEnrolledIntoCohort(),
         ];
     }
 
-    public function getCurrentUserProfileData()
+    public function getCurrentUserProfileData(?string $app = null)
     : array
     {
         $user = user();

@@ -1,5 +1,48 @@
     <?php
+    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/hailey-benedict.png';
+    $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/lisa-witt.png';
+    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/tony-lindsay.png';
+    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/darcy-d.png';
+    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/julia-ziegler.png';
+    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/chris-johnson.png';
+    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/shelea.png';
+    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/cate-canning.png';
     $singeo = [
+
+        'bubbles' => [
+            [
+                'src' => $bubble1,
+                'classes' => 'absolute z-10 h-10 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]',
+            ],
+            [
+                'src' => $bubble2,
+                'classes' => 'absolute z-10 h-24 sm:h-28 lg:h-44 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]',
+            ],
+            [
+                'src' => $bubble3,
+                'classes' => 'absolute z-10 h-32 sm:h-40 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]',
+            ],
+            [
+                'src' => $bubble4,
+                'classes' => 'absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]',
+            ],
+            [
+                'src' => $bubble5,
+                'classes' => 'absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]',
+            ],
+            [
+                'src' => $bubble6,
+                'classes' => 'absolute z-10 h-28 sm:h-32 lg:h-48 transform -translate-x-1/2 -translate-y-1/2 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]',
+            ],
+            [
+                'src' => $bubble7,
+                'classes' => 'absolute z-10 h-28 sm:h-36 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]',
+            ],
+            [
+                'src' => $bubble8,
+                'classes' => 'absolute z-10 h-12 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]',
+            ],
+        ],
 
         'youtube' => '139,000',
         'facebook' => '23,000',
@@ -49,62 +92,64 @@
         ],
         "gridItems" => [
             [
-                'image' => 'marketing/singeo/membership/homepage/2023/method.jpg',
+                "big" => true,
+                'image' => 'marketing/singeo/membership/homepage/2024/10-level-curriculum.jpg',
                 'title' => '10-Level Curriculum',
                 'desc' => 'Turn your desire to sing into passionate practice with useful lessons and exercises.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/method.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/10-level-curriculum.jpg',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/singeo/membership/homepage/2023/practical-assignments.jpg',
+                'image' => 'marketing/singeo/membership/homepage/2024/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
                 'desc' => 'You\'ll always have on-screen assignments and practice tools to guide you along the way.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/practical-assignments.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/practical-assignments.jpg',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/singeo/membership/homepage/2023/guided-workouts.jpg',
-                'title' => 'Warm-Up Routines',
-                'desc' => 'Access our quick warm-up routines to fit any schedule, ranging from 5 to 20 minutes.',
-                'lessonInfo' => [
-                    [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/guided-workouts.jpg',
-                    ],
-                ]
-            ],
-            [
-                'image' => 'marketing/singeo/membership/homepage/2023/world-class-teachers.jpg',
-                'title' => 'World-Class Teachers',
-                'desc' => 'Gain insights from vocal coaches, Grammy-Award winners, and chart-topping performers.',
-                'lessonInfo' => [
-                    [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/world-class-teachers.jpg',
-                    ],
-                ]
-            ],
-            [
-                'image' => 'marketing/singeo/membership/homepage/2023/downloadable-videos.jpg',
+                'image' => 'marketing/singeo/membership/homepage/2024/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/downloadable-videos.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/downloadable-videos.jpg',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/singeo/membership/homepage/2023/personalized-support.jpg',
+                'image' => 'marketing/singeo/membership/homepage/2024/guided-workouts.jpg',
+                'title' => 'Warm-Up Routines',
+                'desc' => 'Access our quick warm-up routines to fit any schedule, ranging from 5 to 20 minutes.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/guided-workouts.jpg',
+                    ],
+                ]
+            ],
+            [
+                "big" => true,
+                'image' => 'marketing/singeo/membership/homepage/2024/world-class-teachers.jpg',
+                'title' => 'World-Class Teachers',
+                'desc' => 'Gain insights from vocal coaches, Grammy-Award winners, and chart-topping performers.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/world-class-teachers.jpg',
+                    ],
+                ]
+            ],
+            [
+                'image' => 'marketing/singeo/membership/homepage/2024/personalized-support.jpg',
                 'title' => 'Personalized Support',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global singing community.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/personalized-support.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/personalized-support.jpg',
                     ],
                 ]
             ],
@@ -221,93 +266,76 @@
         ],
         "songItems" => [
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/1000-songs-icon.svg',
-                'title' => '1000+ popular songs.',
-                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/songs-icon.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs.mp4",
+                "title" => "1000+ popular songs.",
+                "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/find-tempo-icon.svg',
-                'title' => 'Find the perfect tempo.',
-                'desc' => 'Slow down any section of a song to  hear the cadence and intricacies.',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/find-tempo-icon.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/singeo/membership/homepage/2024/loop2.mp4",
+                "title" => "Find the perfect tempo.",
+                "desc" => "Slow down any section of a song to  hear the cadence and intricacies.",
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/loop-icon.svg',
-                'title' => 'Loop the hard parts.',
-                'desc' => 'Working on the chorus? Simply create  a loop to sing it over and over!',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/loop-icon.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/singeo/membership/homepage/2024/metronome-feature.mp4",
+                "title" => "Loop the hard parts.",
+                "desc" => "Working on the chorus? Simply create  a loop to sing it over and over!",
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/personal-feedback-icon.svg',
-                'title' => 'Personal feedback, anytime.',
-                'desc' => 'Share a video and you’ll get helpful  feedback from our singing community.',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/singeo-metronome.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/singeo/membership/homepage/2024/metronome-feature.mp4",
+                'title' => 'Improve your timing.',
+                'desc' => 'Use the built-in-metronome – your new best friend for difficult sections.  ',
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/sing-it-right-icon.svg',
-                'title' => 'Play it right the first time.',
-                'desc' => 'Get perfect notation and learn to sing accurately from the get-go.',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/device-icon.svg",
+                "media" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/768x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/devices-feature2.jpg",
+                "title" => "Take your songs anywhere.",
+                "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
             ],
-            [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/device-icon.svg',
-                'title' => 'Take your songs anywhere.',
-                'desc' => 'Accessible on any device, or printable,  so you can sing any song, any time.',
-            ],
-
         ],
         "testimonials" => [
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/singeo/membership/homepage/2023/testimonials/OriannaSells.jpg',
-                'name' => 'Orianna Sells',
-                'title' => 'It felt like the chains finally fell off my voice.',
-                'description' => 'I was concerned that my singing style was too different to truly learn what I needed – and I wanted to strengthen my voice and stretch my range in a healthy manner.<br><br>With Singeo, I started practicing my songs more meticulously and it paid off – stronger high notes were available and it felt like the chains finally fell off my voice!',
-                'location' => 'South Carolina, USA',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/orianna-sells-thumb.jpg",
+                "name" => "Orianna Sells",
+                "location" => "South Carolina, USA",
+                "title" => "I started practicing my songs more meticulously and it paid off – stronger high notes were available and it felt like <strong>the chains finally fell off my voice!</strong>",
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/singeo/membership/homepage/2023/testimonials/JocelynnRodrigues.jpg',
-                'name' => 'Jocelynn Rodrigues',
-                'title' => 'It’s so healing to sing.',
-                'description' => 'I wasn’t sure if I could really learn online, because I’ve heard in the past how important it is to have somebody with you, who can guide you – and make sure you don’t get injured.<br><br>But I’ve been making so much progress with Singeo. After doing the routines, I noticed that it didn’t stress me out as much to sing the higher octaves during the exercise. And while I’m singing around the house my voice feels stronger. Everyone can truly sing, and it’s so healing to sing. We were all born with this beautiful instrument and it’s just waiting to be played.',
-                'location' => 'Alberta, Canada',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/richard-bailey-thumb.jpg",
+                "name" => "Richard Bailey ",
+                "location" => "New Jersey, USA",
+                "title" => "Singeo is <strong>like having your own singing coach</strong> at your home, literally any time of the day or night. I enjoy singing so much more than I did before and it’s great fun.",
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/singeo/membership/homepage/2023/testimonials/JohnStevenson.jpg',
-                'name' => 'John Stevenson',
-                'title' => 'I have my first solo gig lined up!',
-                'description' => 'For years I thought I wouldn’t be able to sing. I don’t feel like that anymore. I feel that I can and I now have my first solo gig lined up for January.<br><br>Essentially I realised that I needed to maintain a disciplined regimen. I needed to practice every day. I needed to do specific exercises that focussed on my weak spots. I also realised it wasn’t magic. Improvement is gradual and requires effort. It was a relief realising that if I put in the work, I would get there. Singeo is a good program. If you put in the time you will see improvement.',
-                'location' => 'Australia',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/kathy-mandell-thumb.jpg",
+                "name" => "Kathy Mandell",
+                "location" => "South Carolina, USA",
+                "title" => "It was like, OH! THAT’S what my problem is! The teachers and students are so <strong>supportive, non-judgmental, and encouraging.</strong> ",
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/singeo/membership/homepage/2023/testimonials/DamienGiven3.jpg',
-                'name' => 'Damien Given',
-                'title' => 'I’m getting back some of my old confidence.',
-                'description' => 'Thirty-five years ago, I sang professionally in a group. And now at 74 years old, I’d given up the idea of ever singing properly again. But when tendonitis put a stop to my piano playing for several months, I decided to give Singeo a try – and boy, what a great choice!<br><br>I’m getting back some of my old confidence through the lessons and feedback – and I’m now keen to regain more pitch and breathing control, even though physiologically I’ve probably lost about one and a half steps at the top of my range. But that doesn’t bother me as much as I thought it would after a few months with Singeo. I’ve received a great deal of positive feedback from my classmates - and great tips from Lisa, Julia, and the team. What a find, what a course, and what great tutors!',
-                'location' => 'Northern Ireland',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/damien-given-thumb.jpg",
+                "name" => "Damien Given",
+                "location" => "Northern Ireland",
+                "title" => "I’ve received a great deal of positive feedback from my classmates - and great tips from Lisa, Julia, and the team. What a find, what a course, and <strong>what great tutors!</strong>",
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/singeo/membership/homepage/2023/testimonials/KathyMandell.jpg',
-                'name' => 'Kathy Mandell',
-                'title' => 'It was like, OH! That’s what my problem is.',
-                'description' => 'It was like, OH! THAT’S what my problem is! I’ve been having a lot of fun understanding the different singing styles, such as ‘flipper’ or ‘yeller’ – and getting past the flipping thing and either using it in my favor and flipping on purpose like Alanis Morrissette or opening my mouth more to have a stronger voice.<br><br>If you’ve always wanted to sing and didn’t have the confidence or thought you weren’t good enough, this is the program for you. The teachers and students are so supportive, non-judgmental, and encouraging.',
-                'location' => 'South Carolina, USA',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/jocelynn-rodrigues-thumb.jpg",
+                "name" => "Jocelynn Rodrigues",
+                "location" => "Canada",
+                "title" => "<strong>My voice feels stronger.</strong> Everyone can truly sing, and it’s so healing to sing. We were all born with this beautiful instrument and it’s just waiting to be played.",
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/singeo/membership/homepage/2023/testimonials/JerryBradley2.jpg',
-                'name' => 'Jerry Bradley',
-                'title' => 'More comfortable with my own voice every day.',
-                'description' => 'This is NOT a standard web-based training where you are provided training videos with no interaction. The teachers are always willing to give personal feedback, suggestions, and recommendations.<br><br>Singeo made me realize it’s about being the best singer I can be while working within my own unique style – not matching somebody else’s. It’s like having a weight lifted off my shoulders. Don’t get me wrong, there is still lots of work to do, but my direction and understanding changed – and I’m feeling more comfortable with my own voice every day.<br><br>It’s up to you to take advantage of it all. The worst case is that you will learn a lot. The best case: you will improve your vocal abilities, confidence, make connections, and become a part of a family that really cares.',
-                'location' => 'North Carolina, USA',
-            ],
-            [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/singeo/membership/homepage/2023/testimonials/RichardBailey.jpg',
-                'name' => 'Richard Bailey',
-                'title' => 'Like having your own singing coach.',
-                'description' => 'When I saw how knowledgeable, energetic, and bubbly Lisa was it convinced me that this was not just an online tutorial – Singeo is like having your own singing coach at your home, literally any time of the day or night. I’ve learned how to breathe and control my breath to sing – and I’m able to sing songs how they were meant to be sung.<br><br>I enjoy singing so much more than I did before and it’s great fun and so satisfying to hear others say how much they enjoy my singing!',
-                'location' => 'New Jersey, USA',
-            ],
-            [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/singeo/membership/homepage/2023/testimonials/TerriPigg.jpg',
-                'name' => 'Terri Pigg',
-                'title' => 'I sing all the time – at home, at the office, in the car, wherever!',
-                'description' => 'The learning is always fun and customized to fit you and your singing goals. In addition to that, you’ll get to know people all around the world who also love singing. The Singeo community celebrates and encourages each other as we learn and grow as singers from the convenience of our own homes.<br><br>Singeo’s given me a confidence boost and helped me begin to believe that I can really DO this singing thing while having fun at the same time. I sing all the time – at home, at the office, in the car, wherever. Singing just makes me happy!',
-                'location' => 'Tennessee, USA',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/terri-pigg-thumb.jpg",
+                "name" => "Terri Pigg",
+                "location" => "Tennessee, USA",
+                "title" => "Singeo’s <strong>given me a confidence boost.</strong> I sing all the time – at home, at the office, in the car, wherever. Singing just makes me happy! ",
             ],
         ],
     ]

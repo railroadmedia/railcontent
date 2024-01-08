@@ -40,6 +40,14 @@
                     $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", 'courses');
                     $contentBreadCrumb->firstLevelTitle = 'Course';
                 }
+                else if(str_contains($lessonContent['parent']->fetch('type'),'challenge-part')){
+                    $contentBreadCrumb->firstLevelUrl = url()->route("platform.workouts.challenges");
+                    $contentBreadCrumb->firstLevelTitle = 'Challenges';
+                }
+                else if(str_contains($lessonContent['parent']->fetch('type'),'workouts')){
+                    $contentBreadCrumb->firstLevelUrl = url()->route("platform.workouts");
+                    $contentBreadCrumb->firstLevelTitle = 'Workouts';
+                }
                 else {
                     $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent['parent']->fetch('type')]]);
                     $contentBreadCrumb->firstLevelTitle = $lessonContent['parent']->fetch('type');
@@ -73,7 +81,7 @@
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
 
     {{-- WRAPPER VUE --}}
-    <playlist-playback-wrapper
+    <playlist-playback
         :is-released="{{ json_encode($playlistItem['released']) }}"
         lesson-type="{{ $lessonType }}"
         brand="{{ $brand }}"
@@ -132,7 +140,7 @@
         report-logo="{{ config('mailora.'. $brand . '.logo-link') }}"
         report-recipient="{{ config('mailora.'. $brand . '.ask-question-recipient') }}"
     >
-    </playlist-playback-wrapper>
+    </playlist-playback>
 @endsection
 
 @section('layout-scripts')

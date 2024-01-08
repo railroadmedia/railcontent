@@ -114,7 +114,7 @@
                                 <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/5000-songs-icon.svg" class="h-6 sm:h-10">
                             </div>
                             <div class="text-left sm:text-center">
-                                <p class="mb-1 sm:my-2"><strong>5000+ popular songs.</strong></p>
+                                <p class="mb-1 sm:my-2"><strong>{{ Prices::$drumeoSongs }}+ popular songs.</strong></p>
                                 <p class="text-sm">Get note-for-note song breakdowns for every style, era, and skill level.</p>
                             </div>
                         </div>

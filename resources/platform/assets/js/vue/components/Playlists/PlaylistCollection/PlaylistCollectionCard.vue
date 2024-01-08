@@ -130,7 +130,7 @@
         >
             <div class="tw-w-full" :class="props.isListView ? 'tw-grid tw-grid-cols-10 tw-items-center' : '' ">
                 <!--name-->
-                <p class="playlist-info-link-name tw-font-bold tw-truncate tw-w-full"
+                <p class="playlist-info-link-name tw-font-bold tw-truncate tw-w-full tw-text-sm"
                    :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-7 xl:tw-col-span-2 tw-pl-2 md:tw-pl-[19px] tw-pr-2' : '' "
                 >
                     {{ listElement.name }}
@@ -142,7 +142,7 @@
                     <span class="tw-truncate tw-max-w-[512px] tw-pl-2 tw-pr-4 ">{{ description }}</span>
                 </p>
                 <!--category / duration -->
-                <div class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm tw-flex"
+                <div class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-xs tw-flex"
                     :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-3 tw-w-full tw-pl-2 md:tw-pl-0 md:tw-text-base' : ''"
                 >
                     <div :class="props.isListView ? 'md:tw-w-1/2 tw-inline-flex tw-items-center tw-justify-center' : '' ">
@@ -184,7 +184,7 @@
                     :brand="brand"
                     :dropdownTop="isMiniCatalog ? true : state.dropdownTop"
                     :is-private="state.isPrivate"
-                    :is-pinned="state.isPinned"
+                    :is-pinned="state.isPinned ? true : false"
                     :dropdownOptions="dropdownOptions"
                     :data="listElement"
                     :is-open="state.dropdownOpen"

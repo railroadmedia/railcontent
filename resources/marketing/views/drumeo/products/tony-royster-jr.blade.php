@@ -30,7 +30,7 @@
         }
 
         .register-cd p {
-            font:600 16px/1.2em "Open Sans", sans-serif;
+            font:400 16px/1.2em "Open Sans", sans-serif;
             color:#fff;
             margin:0 auto 7px;
         }

@@ -58,8 +58,11 @@
                     >-</span>
                     {{ item }}
                 </span>
+                <DifficultyLabel v-if="mappedData.difficulty" class="basic-col tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
             </p>
         </div>
+
+        <DifficultyLabel v-if="mappedData.difficulty" class="tw-hidden xl:tw-flex basic-col tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
 
         <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
         <div
@@ -128,6 +131,7 @@
 <script>
 import CatalogueMixin from '../catalogues/_mixin';
 import ThemeClasses from '../../mixins/ThemeClasses';
+import DifficultyLabel from '../../../../vue/components/DifficultyLabel/DifficultyLabel'
 
 export default {
     name: 'PlayAlongsListItem',
@@ -138,8 +142,24 @@ export default {
             default: () => false,
         },
     },
+    components: {
+        DifficultyLabel,
+    },
     computed: {
         mappedData() {
+            let difficultyValue = 'all';
+            if(this.contentModel.post.fields) difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value
+            
+            if (Number.isFinite(Number(difficultyValue))) {
+                this.contentModel.list.difficulty = difficultyValue;
+            }
+            else {
+                this.contentModel.list.difficulty = 'all';
+            }
+
+            const excludeWords = ['novice', 'beginner', 'intermediate', 'advanced', 'expert', 'all'];
+            const filteredColumnData = this.contentModel.list.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));
+            this.contentModel.list.column_data = filteredColumnData
             return this.contentModel.list;
         },
 

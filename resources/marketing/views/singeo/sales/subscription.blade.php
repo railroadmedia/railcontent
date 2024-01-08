@@ -119,6 +119,21 @@
                 display:block!important;
         }
         @endif
+        .splide__slide.is-active .active-bg {
+            background-color:#1B2434!important;
+            color:#fff!important;
+        }
+
+        .timed-toggle .media-toggle.active {
+            display:block!important;
+        }
+        .timed-toggle .active-toggle.active {
+            border-color: #8300E9!important;
+            background-color:#151f31!important;
+        }
+        .timed-toggle .active-toggle.active .description {
+            max-height:100px!important;
+        }
     </style>
 @stop
 
@@ -154,40 +169,35 @@
     @endif
 
     @php
-        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/hailey-benedict.png';
-        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/lisa-witt.png';
-        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/tony-lindsay.png';
-        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/chris-johnson.png';
-        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/julia-ziegler.png';
-        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/darcy-d.png';
-        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/shelea.png';
-        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/bubbles/cate-canning.png';
 
+        $bubbles = $singeo['bubbles'];
         $features = $singeo['features'];
         $slides = $singeo['slides'];
     @endphp
 
     @if(!empty($beginnerVersion))
         @include('musora.sales.components.header-section', [
-            'header' => 'Singing lessons that <br> fit your schedule. ',
+            'header' => 'Singing lessons that <br> fit <span class="relative inline-block"> your schedule<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="" height="" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#8300e9" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#8300e9" stroke-width="3" stroke-linecap="round"></path></svg></span>. ',
             'desc' => 'Learn to sing from home, anytime, with bite-sized <br class="hidden sm:inline"> video lessons and unlimited personal support. ',
             'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/header-thumb2.jpg',
             'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/jan-thumb.png',
             'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/jan-thumb-m.png',
-            'pointOne' => 'Improve Your Voice',
-            'pointTwo' => 'Helpful Vocal Coaches',
-            'pointThree' => 'Sing Popular Songs',
+            'pointOne' => 'GREAT TEACHERS',
+            'pointTwo' => 'VIDEO LESSONS',
+            'pointThree' => 'FUN PRACTICE',
+            'pointFour' => '1000+ SONGS',
         ])
     @else
         @include('musora.sales.components.header-section', [
-            'header' => 'Get the singing voice <br> you’ve always wanted.',
+            'header' => 'THE <span class="text-singeo">NEW WAY</span> TO<br> <span class="relative inline-block">SING BETTER<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="" height="" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#8300e9" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#8300e9" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
             'desc' => 'Improve your vocal range, strength, and control with<br class="hidden sm:inline"> step-by-step lessons and unlimited personal support.',
             'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/header-thumb2.jpg',
             'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/jan-thumb.png',
             'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2023/jan-thumb-m.jpg',
-            'pointOne' => 'Improve Your Voice',
-            'pointTwo' => 'Helpful Vocal Coaches',
-            'pointThree' => 'Sing Popular Songs',
+            'pointOne' => 'GREAT TEACHERS',
+            'pointTwo' => 'VIDEO LESSONS',
+            'pointThree' => 'FUN PRACTICE',
+            'pointFour' => '1000+ SONGS',
         ])
     @endif
     @hasSection('promo-banner')
@@ -198,7 +208,7 @@
         $gridItems = $singeo['gridItems'];
     @endphp
 
-    @include('musora.sales.components.trailer-grid-section', [
+    @include('musora.sales.components.reason-cards-section', [
         'header' => 'Your singing goals start here.',
         'desc' => 'An organized curriculum to help you understand your voice, how it functions, how to strengthen it, and sing with confidence.',
     ])
@@ -214,6 +224,11 @@
         'desc' => 'Shape your voice with exclusive artist courses + live events with special guests.'
     ])
 
+    @include('musora.sales.components.workouts-section', [
+        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314557/rendition/540p/file.mp4?loc=external&signature=e1db56d3f22044707be08bbb02d7327bdf4bee7a07bc705017de56ef45bf1ed4',
+        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/workouts-card2.jpg',
+    ])
+
     @php
         $songItems = $singeo['songItems'];
     @endphp
@@ -225,21 +240,15 @@
         'brandName' => 'Singeo',
         'bannerDesc' => 'Powered by Musora, Singeo includes full access to our communities for drums, piano, and guitar.',
     ])
-    @include('musora.sales.components.learn-by-playing-section', [
-        'header' => 'Learning to sing made easy with <u>personal coaching</u>.',
-        'desc' => 'With Singeo, you’ll sing more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
-                'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314557/rendition/540p/file.mp4?loc=external&signature=e1db56d3f22044707be08bbb02d7327bdf4bee7a07bc705017de56ef45bf1ed4',
-    ])
 
     @php
         $testimonials = $singeo['testimonials'];
-        $youtube = number_format(Prices::$singeoYoutubeSubsc);
-        $facebook = number_format(Prices::$singeoFacebookLikes);
-        $instagram = number_format(Prices::$singeoInstagramFollowers);
+        $youtube = convertNumber(Prices::$singeoYoutubeSubsc);
+        $facebook = convertNumber(Prices::$singeoFacebookLikes);
+        $instagram = convertNumber(Prices::$singeoInstagramFollowers);
     @endphp
     @include('musora.sales.components.testimonials-section', [
-        'header' => 'Trusted by singers everywhere.',
-        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
+        'header' => 'singers',
         'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
         'facebookLink' => 'https://facebook.com/singeoofficial/',
         'instagramLink' => 'https://instagram.com/singeoofficial/',
@@ -307,7 +316,8 @@
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
-                'image' => 'marketing/singeo/membership/homepage/2023/singeo-spread.png',
+                'image' => 'marketing/singeo/membership/homepage/2024/singeo-splash.png',
+
         ])
     @endif
 
@@ -337,9 +347,10 @@
     @else
         @include("singeo.sales.partials._footer")
     @endif
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>

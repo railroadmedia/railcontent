@@ -22,7 +22,7 @@
 
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => '<span class="text-promo">Save up to 80%</span> on guitar lessons,<br class="sm:hidden"> merch, & more.',
+        'text' => 'GET LESSONS, ACCESSORIES, & MORE',
         'bg' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/shop-bg.jpg',
     ])
 
@@ -30,58 +30,25 @@
         "noClothing" => true
     ])
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
-        @php
-            $bundles = [
-                [
-                    'slug' => '/shop/ultimate-lessons-bundle',
-                    'desc' => 'Guitareo Discount<br> + 5 Bonuses',
-                    'visible' => 1,
-                    'full' => true,
-                    'price' => 1075,
-                    'discountedPrice' => 240,
-                    'buttonColor' => '#00C9AC',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/guitareo/promos/november/bundles/guitareo-ultimate-lessons-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/guitareo/promos/november/bundles/guitareo-ultimate-lessons-card-m.jpg',
-                ],
-            ];
-        @endphp
-        @include('_partials.layout.holiday.bundle-tiles', [
-            "header" => 'Featured Deals',
-        ])
-
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Guitar Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-{{--                    @include('_partials.components.shop.product-card', [--}}
-{{--                     "itemURL" => "/",--}}
-{{--                     "sku" => null,--}}
-{{--                     "thumbnail" => "https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-membership-shop.jpg",--}}
-{{--                     "title" => "Guitareo Membership",--}}
-{{--                     "packAuthor" => "Ayla Tesler-Mabe",--}}
-{{--                     "cardDescription" => "Unlimited guitar lessons, a huge song library, and ongoing support from real teachers.",--}}
-{{--                     "specialPrice" => "7-Day Free Trial",--}}
-{{--                     "fullPrice" => 240,--}}
-{{--                     "price" => 150,--}}
-{{--                     "category" => "lessons",--}}
-{{--                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",--}}
-{{--                     'soldOut' => false,--}}
-{{--                ])--}}
-
-                    <div x-cloak x-show="filter === 'lessons'">
-                        @include('_partials.components.shop.product-card', [
-                             "itemURL" => "/shop/ultimate-lessons-bundle",
-                             "sku" => null,
-                             "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/guitareo/promos/november/bundles/guitareo-ultimate-shop-thumb.jpg",
-                             "title" => "Ultimate Lessons Bundle",
-                             "fullPrice" => 240,
-                             "price" => 150,
-                             "category" => "lessons",
-                             'soldOut' => false,
-                        ])
-                    </div>
+                    @include('_partials.components.shop.product-card', [
+                     "itemURL" => "/",
+                     "sku" => null,
+                     "thumbnail" => "https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-membership-shop.jpg",
+                     "title" => "Guitareo Membership",
+                     "packAuthor" => "Ayla Tesler-Mabe",
+                     "cardDescription" => "Unlimited guitar lessons, a huge song library, and ongoing support from real teachers.",
+                     "specialPrice" => "7-Day Free Trial",
+                     "fullPrice" => 240,
+                     "price" => 240,
+                     "category" => "lessons",
+                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
+                     'soldOut' => false,
+                ])
                 @foreach($lessons as $key => $lesson)
                     @include('_partials.components.shop.product-card', [
                             "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,

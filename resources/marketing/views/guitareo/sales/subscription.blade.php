@@ -120,6 +120,21 @@
                 display:block!important;
             }
         @endif
+        .splide__slide.is-active .active-bg {
+            background-color:#1B2434!important;
+            color:#fff!important;
+        }
+
+        .timed-toggle .media-toggle.active {
+            display:block!important;
+        }
+        .timed-toggle .active-toggle.active {
+            border-color: #00c9ac!important;
+            background-color:#151f31!important;
+        }
+        .timed-toggle .active-toggle.active .description {
+            max-height:100px!important;
+        }
     </style>
 @stop
 
@@ -156,29 +171,22 @@
     @endif
 
     @php
-        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/rob-scallon.png';
-        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/ayla-tesler-mabe.png';
-        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/mark-lettieri.png';
-        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/pete-thorn.png';
-        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/dean-lamb.png';
-        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/sami-ghawi.png';
-        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/yvette-young.png';
-        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/bubbles/kent-shores.png';
 
+        $bubbles = $guitareo['bubbles'];
         $features = $guitareo['features'];;
         $slides = $guitareo['slides'];
     @endphp
 
     @include('musora.sales.components.header-section', [
-        'header' => 'Online guitar lessons<br> for all skill levels.',
-            'underline' => true,
+        'header' => 'THE <span class="text-guitareo">NEW WAY</span> TO<br> <span class="relative inline-block">LEARN GUITAR<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="" height="" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#00c9ac" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#00c9ac" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
         'desc' => 'Learn the guitar faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
         'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/header-thumb.jpg',
         'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/jan-thumb.png',
         'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/jan-thumb-m.jpg',
-        'pointOne' => 'Improve Your Skills',
-        'pointTwo' => 'World-Class Teachers',
-        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
+            'pointOne' => 'GREAT TEACHERS',
+            'pointTwo' => 'VIDEO LESSONS',
+            'pointThree' => 'FUN PRACTICE',
+            'pointFour' => '1000+ SONGS',
         'cta' => 'SEE YOUR DEAL &raquo',
     ])
 
@@ -186,7 +194,7 @@
         $gridItems = $guitareo['gridItems'];
     @endphp
 
-    @include('musora.sales.components.trailer-grid-section', [
+    @include('musora.sales.components.reason-cards-section', [
         'header' => 'Your guitar goals<br class="inline sm:hidden"> start here.',
         'desc' => 'Learn to play guitar online with a fluff-free curriculum that’ll<br class="hidden sm:inline">  take your skills from zero to guitar hero – with step-by-step<br class="hidden sm:inline">  lessons designed around playing songs faster. ',
     ])
@@ -199,7 +207,12 @@
 
     @include('musora.sales.components.coaches-section', [
         'header' => 'Real Teachers,  <br class="sm:hidden">Real Results.',
-        'desc' => 'Amplify your skills with exclusive artist <br class="hidden md:inline"> courses + live events with special guests.'
+        'desc' => 'Amplify your skills with exclusive artist <br class="hidden md:inline lg:hidden"> courses + live events with special guests.'
+    ])
+
+    @include('musora.sales.components.workouts-section', [
+        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314551/rendition/540p/file.mp4?loc=external&signature=49333e2b437f90a4af69eb5b19468b68f5185729516f735cd390a6ce8b673516',
+        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/workouts-card2.jpg',
     ])
 
 
@@ -214,22 +227,16 @@
         'brandName' => 'Guitareo',
         'bannerDesc' => 'Powered by Musora, Guitareo includes full access to our communities for voice, piano, and drums.',
     ])
-    @include('musora.sales.components.learn-by-playing-section', [
-        'header' => 'Learn the guitar by<br class="inline sm:hidden"> <u>playing the guitar</u>.',
-        'desc' => 'With Guitareo, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
-                'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314551/rendition/540p/file.mp4?loc=external&signature=49333e2b437f90a4af69eb5b19468b68f5185729516f735cd390a6ce8b673516',
-    ])
 
     @php
         $testimonials = $guitareo['testimonials'];
-        $youtube = convertNumber(Prices::$guitareoYoutubeSubsc);
-        $facebook = convertNumber(Prices::$guitareoFacebookLikes);
-        $instagram = convertNumber(Prices::$guitareoInstagramFollowers);
+        $youtube = number_format(Prices::$guitareoYoutubeSubsc);
+        $facebook = number_format(Prices::$guitareoFacebookLikes);
+        $instagram = number_format(Prices::$guitareoInstagramFollowers);
     @endphp
 
     @include('musora.sales.components.testimonials-section', [
-        'header' => 'Trusted by guitarists<br class="inline-block sm:hidden">  everywhere.',
-        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
+        'header' => 'guitarists',
         'youtubeLink' => 'https://www.youtube.com/guitarlessonscom/',
         'facebookLink' => 'https://facebook.com/guitareoofficial/',
         'instagramLink' => 'https://instagram.com/guitareoofficial/',
@@ -336,7 +343,7 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>

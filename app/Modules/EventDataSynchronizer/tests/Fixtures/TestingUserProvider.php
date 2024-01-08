@@ -27,6 +27,7 @@ class TestingUserProvider implements UserProviderInterface
     public function saveMembershipData(
         int $userId,
         ?Carbon $membershipExpirationDate,
+        ?Carbon $membershipStartDate,
         bool $isLifetimeMember,
         string $accessLevel,
         bool $isPackOwner,

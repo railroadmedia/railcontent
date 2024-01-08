@@ -60,7 +60,7 @@
         <div class="tw-flex tw-flex-row tw-mb-3">
             <div class="tw-flex tw-flex-col tw-flex-grow">
                 <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
-                    <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl  tw-mb-3">
+                    <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl tw-mb-3">
                         Latest Featured Lessons
                     </h2>
                 </div>
@@ -101,7 +101,7 @@
                     <!-- Section Title -->
                     <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                         <a href="/{{ $brand }}/lessons/subscribed" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                            <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">From Subscribed Coaches</h2>
+                            <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl">From Subscribed Coaches</h2>
                         </a>
                         <a href="/{{ $brand }}/lessons/subscribed"
                             aria-label="See All Subscribed Lessons"
@@ -157,6 +157,19 @@
     @endcomponent
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mb-3">
+{{--        <collection-wrapper--}}
+{{--            collection-type="coach"--}}
+{{--            :filterable-values="{{ json_encode(['focus','style']) }}"--}}
+{{--            :included-types="{{ json_encode(['instructor']) }}"--}}
+{{--            limit="{{ $limitOverride ?? 18 }}"--}}
+{{--            :pre-loaded-content="{{ $coaches->toResponseRawJson() }}"--}}
+{{--            :required-fields="{{json_encode(['is_coach,1'])}}"--}}
+{{--            :statuses="{{ json_encode(['published', 'scheduled']) }}"--}}
+{{--            :tab-options="{{ json_encode([--}}
+{{--                [ 'key' => 'allCoaches', 'value' => 'All Coaches' ],--}}
+{{--                [ 'key' => 'subscribedCoaches', 'value' => 'Subscribed Coaches' ]--}}
+{{--            ]) }}"--}}
+{{--        ></collection-wrapper>--}}
         <transition appear name="fade">
             <content-catalogue
                     theme-color="{{ $brand }}"

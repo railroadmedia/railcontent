@@ -9,10 +9,6 @@
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
-                "title" => 'Home',
-                "url" => url()->route('platform.home', [brand()]),
-            ],
-            [
                 "title" => "Packs",
                 "url" => url()->route('platform.packs'),
             ],
@@ -28,9 +24,8 @@
         'hideBrandGradient' => $pack['slug'] == 'piano-technique-made-easy',
     ])
         @slot('content')
-            <div class="tw-flex tw-flex-col pr-1 tw-justify-end tw-items-center tw-w-full">
-                <div class="pv-5"></div>
-                <div class="pv-5 hide-xs-only"></div>
+            <div class="tw-flex tw-flex-col pr-1 tw-justify-end tw-items-center tw-w-full tw-min-h-[312px]">
+            
                 @if($pack['slug'] == 'piano-technique-made-easy')
                     <div
                         class="tw-flex tw-flex-col tw-mb-4 tw-rounded-full ba-grey-1-2 hover-border-{{ $brand }} tw-text-white hover-text-{{ $brand }} tw-cursor-pointer"
@@ -58,7 +53,7 @@
                 @endif
                 {{-- Logo --}}
                 <img alt="{{ $pack->fetch('title') }} Logo"
-                    class="tw-w-full tw-transition-opacity tw-max-w-[480px] tw-opacity-0"
+                    class="tw-w-full tw-transition-opacity tw-max-w-[300px] tw-opacity-0"
                     src="{{ $pack->fetch('data.logo_image_url') }}"
                     onload="this.classList.remove('tw-opacity-0')"
                 >

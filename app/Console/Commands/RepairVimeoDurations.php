@@ -26,7 +26,7 @@ class RepairVimeoDurations extends Command
         $lib->setToken($accessToken);
 
         $contentIds = [
-            285530
+            402045
         ];
         ContentRepository::$bypassPermissions = true;
         $content = $contentService->getByIds($contentIds);

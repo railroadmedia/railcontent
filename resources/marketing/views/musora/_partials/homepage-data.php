@@ -1,64 +1,120 @@
     <?php
+    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/jared-falk.png';
+    $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/lisa-witt.png';
+    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/rob-scallon.png';
+    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/victoria-theodore.png';
+    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/chris-johnson.png';
+    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/shelea.png';
+    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/domino-santantonio.png';
+    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2024/bubbles/ayla-tesler-mabe.png';
+
     $musora = [
+
+        'bubbles' => [
+            [
+                'src' => $bubble1,
+                'classes' => 'absolute z-10 h-10 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]',
+            ],
+            [
+                'src' => $bubble2,
+                'classes' => 'absolute z-10 h-24 sm:h-28 lg:h-44 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]',
+            ],
+            [
+                'src' => $bubble3,
+                'classes' => 'absolute z-10 h-32 sm:h-40 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]',
+            ],
+            [
+                'src' => $bubble4,
+                'classes' => 'absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]',
+            ],
+            [
+                'src' => $bubble5,
+                'classes' => 'absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]',
+            ],
+            [
+                'src' => $bubble6,
+                'classes' => 'absolute z-10 h-28 sm:h-32 lg:h-48 transform -translate-x-1/2 -translate-y-1/2 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]',
+            ],
+            [
+                'src' => $bubble7,
+                'classes' => 'absolute z-10 h-28 sm:h-36 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]',
+            ],
+            [
+                'src' => $bubble8,
+                'classes' => 'absolute z-10 h-12 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]',
+            ],
+        ],
 
         "gridItems" => [
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/10-level-cirriculum.jpg',
+                "big" => true,
+                'image' => 'marketing/musora/membership/homepage/2024/10-level-curriculum.jpg',
                 'title' => 'Step-By-Step Clarity',
                 'desc' => 'Learn the right skills in the right order with our 10-level curriculum for each instrument. ',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/10-level-cirriculum.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/10-level-curriculum.jpg',
                     ],
                 ]
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/practical-assignments.jpg',
+                'image' => 'marketing/musora/membership/homepage/2024/practical-assignments.jpg',
                 'title' => 'Handy Practice Tools',
                 'desc' => 'Gain momentum with interactive exercises, speed control, looping, and progress tracking.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/practical-assignments.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/practical-assignments.jpg',
                     ],
                 ]
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/world-class-teachers.jpg',
-                'title' => 'World-Class Teachers',
-                'desc' => 'Study with 100+ music authorities including Grammy Award winners and touring musicians. ',
-                'lessonInfo' => [
-                    [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/world-class-teachers.jpg',
-                    ],
-                ]
-            ],
-            [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/on-demand-courses2.jpg',
-                'title' => 'On-Demand Courses',
-                'desc' => 'Prefer to jump around? Boost any skill, anytime with topic-based courses for any musical goal. ',
-                'lessonInfo' => [
-                    [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/on-demand-courses2.jpg',
-                    ],
-                ]
-            ],
-            [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/downloadable-videos.jpg',
+                'image' => 'marketing/musora/membership/homepage/2024/personalized-support-1.jpg',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lesson OR download your videos so you can learn and practice anywhere, anytime. ',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/downloadable-videos.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/personalized-support-1.jpg',
                     ],
                 ]
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/personalized-support.jpg',
+                'image' => 'marketing/musora/membership/homepage/2024/guided-workouts.jpg',
+                'title' => 'On-Demand Courses',
+                'desc' => 'Prefer to jump around? Boost any skill, anytime with topic-based courses for any musical goal. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/guided-workouts.jpg',
+                    ],
+                ]
+            ],
+            [
+                "big" => true,
+                'image' => 'marketing/musora/membership/homepage/2024/world-class-teachers.jpg',
+                'title' => 'World-Class Teachers',
+                'desc' => 'Study with 100+ music authorities including Grammy Award winners and touring musicians. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/world-class-teachers.jpg',
+                    ],
+                ]
+            ],
+            [
+                'image' => 'marketing/musora/membership/homepage/2024/personalized-support.jpg',
                 'title' => 'Powered By Humans',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global music community. ',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2023/personalized-support.jpg',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/personalized-support.jpg',
+                    ],
+                ]
+            ],
+            [
+                'image' => 'marketing/musora/membership/homepage/2024/any-instrument.jpg',
+                'title' => 'Any Instrument, Any Time',
+                'desc' => 'Get all-access to piano, guitar, drums, and singing lessons.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/any-instrument.jpg',
                     ],
                 ]
             ],
@@ -164,11 +220,6 @@
                 'title' => '<i class="text-drumeo align-middle mr-0.5 fa-light fa-drum"></i> Drums',
                 'images' => [
                     [
-                        'img' => 'marketing/musora/membership/homepage/2023/coaches/Aaron-Spears.jpg',
-                        'title' => 'Drum<br> Chops',
-                        'instructor' => 'Aaron Spears',
-                    ],
-                    [
                         'img' => 'marketing/musora/membership/homepage/2023/coaches/Hannah-Welton.jpg',
                         'title' => 'Writing<br> Drum Parts',
                         'instructor' => 'Hannah Welton',
@@ -273,108 +324,73 @@
                     ],
                 ],
         "songItems" => [
+
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/musora/membership/homepage/2023/popular-song-icon.svg',
-                'fa-icon' => 'fa-music',
-                'title' => '1000+ popular songs.',
-                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/popular-song-icon.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs.mp4",
+                "title" => "1000+ popular songs.",
+                "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/musora/membership/homepage/2023/isolate-icon.svg',
-                'fa-icon' => 'fa-sliders-up',
-                'title' => 'Ditch the distractions.',
-                'desc' => 'Isolate the piano, guitar, or drums so you always know exactly what to play.',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/isolate-icon.svg",
+                "media" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/768x0/filters:quality(95)/marketing/musora/membership/homepage/2024/pianoless-feature.jpg",
+                "title" => "Ditch the distractions.",
+                "desc" => "Isolate the piano, guitar, or drums so you always know exactly what to play.",
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/musora/membership/homepage/2023/loop-icon.svg',
-                'fa-icon' => 'fa-arrows-repeat',
-                'title' => 'Simplify the tricky parts.',
-                'desc' => 'Learn songs faster with perfect notation, practice loops, and tempo control.',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/loop-icon.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/loop.mp4",
+                "title" => "Simplify the tricky parts.",
+                "desc" => "Learn songs faster with perfect notation, practice loops, and tempo control.",
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/musora/membership/homepage/2023/metronome-icon.svg',
-                'fa-icon' => 'fa-timer',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/metronome-icon.svg",
+                "mediaVid" => true,
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/metronome.mp4",
                 'title' => 'Improve your timing.',
                 'desc' => 'Use built-in metronome - your new best friend to get the timing just right. ',
             ],
             [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/musora/membership/homepage/2023/notation-icon.svg',
-                'fa-icon' => 'fa-list-music',
-                'title' => 'Play it right the first time.',
-                'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
+                "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/musora/membership/homepage/2023/devices-icon.svg",
+                "media" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/768x0/filters:quality(95)/marketing/musora/membership/homepage/2024/devices-feature.jpg",
+                "title" => "Take your songs anywhere.",
+                "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
             ],
-            [
-                'icon' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/musora/membership/homepage/2023/devices-icon.svg',
-                'fa-icon' => 'fa-laptop-mobile',
-                'title' => 'Take your songs anywhere.',
-                'desc' => 'Accessible on any device, or printable,so you can play any song, any time.',
-            ],
-
         ],
         "testimonials" => [
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/ed-koop.jpg',
-                'name' => 'Ed Koop',
-                'brand' => 'Drummer',
-                'video' => '342059271',
-                'title' => 'I’m loving music more than I ever did before!',
-                'description' => 'After 20 years away from the drums, Ed says he’s loving music more than ever. He nailed his first audition and has now played at the venues of his dreams.',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Tonya-Hotz-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Tonya-Hotz-profile.jpg",
+                "name" => "Tonya Hotz",
+                "location" => "Arizona, USA",
+                "video" => "882979587",
+                "title" => "Being able to start and complete an entire song was huge – and eventually to play and sing. <strong>It’s even better than I’d hoped it would be.</strong>",
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/drumeo/membership/homepage/2023/testimonials/lisa-aragon.jpg',
-                'name' => 'Lisa Aragon',
-                'brand' => 'Drummer',
-                'video' => '373252004',
-                'title' => 'I was able to play drums on stage!',
-                'description' => 'Lisa got interested in the drums by playing Rock Band. She had no idea she’d be performing with strangers in Nashville just a few years later.',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Claudio-Sanchez-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Claudio-Sanchez-profile.jpg",
+                "name" => "Claudio Sanchez",
+                "location" => "California, USA",
+                "video" => "877648411",
+                "title" => "I’ve always wanted to play in front of a crowd – at least once in my lifetime – and now <strong>I’ve already achieved that!</strong>",
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/serenadorward.jpg',
-                'title' => "If I was taught this way as a child, I would have never quit.",
-                'description' => "I decided to sign up with Pianote not only to re-learn how to play the piano, but also because my mental health was really suffering and I needed something positive to focus on that was just for ME. I knew almost immediately that this was the answer I had been looking for. It felt like the heaviness on my shoulders got a bit lighter after every piano session.  And even though the lessons are virtual, it was like Lisa was right there beside me cheering me on.<br><br>I was blown away by how quickly I progressed with a few tutorials from Lisa. My overall confidence improved, especially with improvisation. Now I know all these little tricks (fills & riffs) and how to play inversions and practice chords in ways that sound so lovely.  If I had been taught this way as a child, I probably never would have quit.",
-                'name' => 'Serena Dorward',
-                'brand' => 'Pianist',
-                'location' => 'Ontario, Canada',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Darli-Brazil-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Darli-Brazil-profile.jpg",
+                "name" => "Darli Brazil",
+                "location" => "California, USA",
+                "video" => "878027528",
+                "title" => "The amount of songs you can learn is amazing. <strong>I am really enjoying this program.</strong> Everything about it is a positive experience.",
             ],
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/jessripley.jpg',
-                'title' => "I’m blown away by the program you’ve created.",
-                'description' => "Pianote is an insanely encouraging and supportive community run by an insanely encouraging and supportive team. Sincerely, I’m blown away by the program you’ve created.<br><br>I sat down one day and it just clicked. From then on, I’ve felt VERY encouraged to keep learning and practicing. It’s fulfilling and fun to see myself progress and achieve goals. Now I’m playing with both hands at the same time with confidence – and I’ve started playing along with more backing tracks and making up my own songs.",
-                'name' => 'Jess Ripley',
-                'brand' => 'Pianist',
-                'location' => 'California, USA',
-            ],
-            [
-                'title' => "I’m lightyears ahead of where I was.",
-                'description' => "I’ve come so far in such a short period of time. I’ve gone from not even knowing what palm muting was to noodling with the E & A string pentatonic shapes and creating melodies with it – and using it to work on my vibrato, slides, and bends. And I’ve gained priceless info like knowing where to place chords, start power chords, and scale shapes.<br><br>Having the breakthroughs I’ve had so far has brought me confidence and kept me sane while the world is seemingly not – and made me believe there is still a bright future ahead. As I progress, I feel supported towards achieving my goals of jamming with others and using my love for writing to start telling stories through music. All in due time.<br><br>I’m lightyears ahead of where I was at. And no matter where I go, or however tough things get, I’ll always have one of my guitars in the passenger seat and we’ll always be there for each other. The life long journey has begun!",
-                'name' => 'Ërlik Sörensen',
-                'brand' => 'Guitarist',
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/guitareo/membership/homepage/2023/testimonials/erliksorensen.jpg',
-                'location' => 'British Columbia, Canada',
-            ],
-            [
-                'title' => "I’ve never felt so much JOY playing the guitar.",
-                'description' => "When I finished the first lesson, I had a feeling of joy that I’ve never had before when playing guitar. I'm experimenting a lot more and improving my technique. The goal-based learning makes each set of lessons more entertaining and a feeling of accomplishment when completed.",
-                'name' => 'Jamie K',
-                'brand' => 'Guitarist',
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/guitareo/membership/homepage/2023/testimonials/jamie-nova-scotia.jpg',
-                'location' => 'Nova Scotia, Canada',
-            ],
-            [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/singeo/membership/homepage/2023/testimonials/OriannaSells.jpg',
-                'name' => 'Orianna Sells',
-                'brand' => 'Singer',
-                'title' => 'It felt like the chains finally fell off my voice.',
-                'description' => 'I was concerned that my singing style was too different to truly learn what I needed – and I wanted to strengthen my voice and stretch my range in a healthy manner.<br><br>With Singeo, I started practicing my songs more meticulously and it paid off – stronger high notes were available and it felt like the chains finally fell off my voice!',
-                'location' => 'South Carolina, USA',
-            ],
-            [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/singeo/membership/homepage/2023/testimonials/DamienGiven3.jpg',
-                'name' => 'Damien Given',
-                'brand' => 'Singer',
-                'title' => 'I’m getting back some of my old confidence.',
-                'description' => 'Thirty-five years ago, I sang professionally in a group. And now at 74 years old, I’d given up the idea of ever singing properly again. But when tendonitis put a stop to my piano playing for several months, I decided to give Singeo a try – and boy, what a great choice!<br><br>I’m getting back some of my old confidence through the lessons and feedback – and I’m now keen to regain more pitch and breathing control, even though physiologically I’ve probably lost about one and a half steps at the top of my range. But that doesn’t bother me as much as I thought it would after a few months with Singeo. I’ve received a great deal of positive feedback from my classmates - and great tips from Lisa, Julia, and the team. What a find, what a course, and what great tutors!',
-                'location' => 'Northern Ireland',
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Gabriel-Queija-thumb-m.jpg",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Gabriel-Queija-profile.jpg",
+                "name" => "Gabriel Queija",
+                "location" => "Canada",
+                "video" => "877591404",
+                "title" => "It was everything I was looking for – they have <strong>great teachers, great courses, great everything</strong>! They help you so much. ",
             ],
         ],
     ]
