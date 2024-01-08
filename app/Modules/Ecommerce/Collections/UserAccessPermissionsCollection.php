@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Collections;
 
+use Modules\UserManagementSystem\Models\User;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
 use Carbon\Carbon;
@@ -17,15 +18,15 @@ class UserAccessPermissionsCollection
     const LifetimePermissions = [self::DrumeoLifetimePermission, 88, 89, 90];
 
     private Collection $collection;
-    private int $userId;
+    private User $user;
     private Collection $permissionIdLookup;
 
-    public function __construct(int $userId, Collection $collection)
+    public function __construct(User $user, Collection $collection)
     {
         $this->collection = $collection;
-        $this->userId = $userId;
+        $this->user = $user;
         $this->collection->each(function (UserAccessPermission $item) {
-            if ($item->user_id != $this->userId) {
+            if ($item->user_id != $this->user->id) {
                 throw new \Exception("User id mismatch");
             }
         });
@@ -35,7 +36,7 @@ class UserAccessPermissionsCollection
 
     public function getUserId(): int
     {
-        return $this->userId;
+        return $this->user->id;
     }
 
     public function getActiveDates(int|array $permissions, $includeBuffer = true, $includeFixedTimes = true): array
