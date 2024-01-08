@@ -167,8 +167,8 @@ if(!empty($user)){
                     content-endpoint="/railcontent/content"
                     theme-color="drumeo"
                     brand="drumeo"
-                    :pre-loaded-content="{{ json_encode(json_decode($playAlongs)->data) }}"
-                    :total-results="{{ json_encode(json_decode($playAlongs)->meta->totalResults) }}"
+                    :pre-loaded-content="{{ $playAlongs }}"
+{{--                    :total-results="{{ json_encode(json_decode($playAlongs)->meta->totalResults) }}"--}}
                     user-id="{{ auth()->id() }}"
                     :no-sidebar="true"
                     :show-filters="false"
