@@ -1,4 +1,4 @@
-name: Automated Testing - TEMP
+name: Automated Testing
 
 on:
   push:
