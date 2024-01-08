@@ -38,7 +38,7 @@
                 <p>Please fill our the enrollment questionaire to be considered for studies</p>
             </div>
 
-            <form onsubmit="submitForm(event)" class="tw-flex tw-flex-col" id="stc-form">
+            <form method="POST" action="https://customerioforms.com/forms/submit_action?site_id=fa24b9733327116040c7&form_id=9e8885d4ad1545a&success_url=https://beta-testing.musora.com/drumeo/student-experience-studies" class="tw-flex tw-flex-col" id="stc-form">
                 {{-- Name --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Name</span>
@@ -286,45 +286,5 @@
         });
 
         //Methods
-        async function submitForm(e) {
-            e.preventDefault();
-            //Show Loading
-            document.querySelector('#button-loading').classList.remove('tw-hidden');
-            //Get Form Data
-            const formData = new FormData();
-            formData.append('name', name.value);
-            //Send Form Data
-            const response = await fetch('https://track.customer.io/api/v1/forms/5506/submit', {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Basic $(echo -n   fa24b9733327116040c7:85ccfa0990fa78888ffa | base64)',
-                },
-                method: 'POST',
-                body: JSON.stringify({
-                    data: {
-                        name: name.value
-                    }
-                }),
-            });
-            //Hide Form
-            // form.classList.add('tw-hidden');
-            //Show Confirmation
-            // document.querySelector('#stc-confirmation').classList.remove('tw-hidden');
-        }
-    </script>
-
-    <script type="text/javascript">
-        (function() {
-            var t = document.createElement('script'),
-                s = document.getElementsByTagName('script')[0];
-            t.async = true;
-            t.id    = 'cio-forms-handler';
-            t.setAttribute('data-site-id', 'fa24b9733327116040c7');
-            t.setAttribute('data-base-url', 'https://customerioforms.com');
-
-            t.src = 'https://customerioforms.com/assets/forms.js';
-
-            s.parentNode.insertBefore(t, s);
-        })();
     </script>
 @endsection
