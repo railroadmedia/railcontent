@@ -601,7 +601,7 @@ class UserAccessPermissionsService
 
     private function handleUserPermissionsUpdatedEvent(User $user, OrderCollection $orderCollection = null): void
     {
-        $accessPermissions = $this->getUserAccessPermissions($user);
+        $accessPermissions = $this->getUserAccessPermissionsByUser($user);
         $shouldSyncCIOWorkspaces = $this->getShouldSyncCustomerIOWorkspace(
             $orderCollection,
             $accessPermissions
