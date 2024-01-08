@@ -450,9 +450,9 @@
         'secondExtraBonuses' => [
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Alesis Nitro Max E-Kit</strong> <span class="italic">($499 Value)</span>',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong> 1-Year Drumeo Membership </strong><span class="italic">($240 Value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 1 Pair of Drumeo Drumsticks <span class="italic">($12.95 Value)</span>',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Drummer <span class="italic">($127 Value)</span>',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Chops <span class="italic">($127 Value)</span>',
+            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 5A Drumsticks <span class="italic">($12.95 Value)</span>',
     ],
 ])
 
