@@ -57,6 +57,7 @@ class ShopController extends BaseController
             'theme' => 'pianote',
             'category' => $request->category,
             'featured' => $featured,
+            'lowStock' => $lowStock
         ]);
     }
 
