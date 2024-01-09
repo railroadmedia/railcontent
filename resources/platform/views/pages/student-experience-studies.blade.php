@@ -22,7 +22,9 @@
             >
             <!-- Content -->
             <div class="">
-                <h1 class="tw-text-3xl tw-mb-2 tw-text-[#9EC0DC] tw-font-semibold">Sign Up for Musora Student Experience Studies and get rewarded with free platform time</h1>
+                <h1 class="tw-text-3xl tw-mb-4 tw-text-[#9EC0DC] tw-font-semibold">
+                    Sign Up for Musora Student Experience Studies and get rewarded with free platform time
+                </h1>
                 <p class="tw-text-lg tw-text-white">Help us to test new student experiences and make our platforms even better.
                     Students selected to participate in studies will be rewarded with monthly passes.
                     Have questions? <a href="mailto:learning@musora.com" class="tw-font-bold tw-text-white">Get in touch.</a>
@@ -30,11 +32,11 @@
             </div>
         </section>
     </header>
-    <main class="tw-w-full tw-max-w-screen-md tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-10 dark:tw-text-white tw-transition-colors tw-flex tw-justify-center">
+    <main class="tw-w-full tw-max-w-screen-md tw-mx-auto tw-px-4 md:tw-px-8 tw-my-10 dark:tw-text-white tw-transition-colors tw-flex tw-justify-center">
         {{-- Form Wrapper --}}
-        <section id="stc-form-wrapper" class="tw-mb-12">
+        <section id="stc-form-wrapper" class="tw-mb-12 tw-w-full">
             <div class="tw-text-center tw-mb-4">
-                <h2 class="tw-mb-1 tw-text-3xl tw-font-bold">Enrollment Questionnaire</h2>
+                <h2 class="tw-mb-1 tw-text-2xl md:tw-text-3xl tw-font-bold">Enrollment Questionnaire</h2>
                 <p>Please fill our the enrollment questionaire to be considered for studies</p>
             </div>
 
@@ -203,10 +205,10 @@
         </section>
 
         {{-- Thank you Wrapper --}}
-        <section id="stc-confirmation" class="tw-hidden">
-            <div class="tw-text-center tw-mb-4">
-                <h2 class="tw-mb-1 tw-text-3xl tw-font-bold">Thank You For Your Interest!</h2>
-                <p>We have received your information and will be in touch <br>
+        <section id="stc-confirmation" class="tw-hidden tw-max-w-md tw-mx-auto">
+            <div class="tw-text-center tw-my-8">
+                <h2 class="tw-text-3xl tw-font-bold tw-mb-4">Thank You For Your Interest!</h2>
+                <p>We have received your information and will be in touch
                     when the next User Study is scheduled.
                 <p>
             </div>
@@ -228,6 +230,7 @@
         const languageInput = document.querySelector('#language');
         const languageSelect = document.querySelector('#languages');
         const clearLanguagesButton = document.querySelector('#clear-multi-select');
+        const name = document.querySelector('#name');
 
         //Event Listeners
         instrumentSelect.addEventListener('change', (e)=> {
@@ -248,7 +251,11 @@
         //Multi Select.....
         languageInput.addEventListener('click', ()=> {
             languageSelect.classList.toggle('tw-hidden');
-            if(!languageSelect.classList.contains('tw-hidden')) languageSelect.focus();
+            if(!languageSelect.classList.contains('tw-hidden')) {
+                setTimeout(() => { //for mobile
+                    languageSelect.focus();
+                }, 0);
+            }
         })
         languageSelect.addEventListener('change', function() {
             let selectedLanguages = Array.from(this.options) // Access all options
