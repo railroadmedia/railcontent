@@ -250,7 +250,7 @@
             })
             consentBox.addEventListener('change', ()=> submitButton.disabled = !submitButton.disabled);
             //Multi Select.....
-            languageInput.addEventListener('click', (e)=> {
+            languageInput.addEventListener('focus', (e)=> {
                 if(!MSOpen) {
                     MSOpen = true;
                     setTimeout(() => {
@@ -258,15 +258,16 @@
                     }, 0);
                 } else {
                     MSOpen = false;
+                    e.target.blur();
                     languageSelect.blur();
                 }
-            })
+            });
             document.addEventListener('click', e=> {
                 if(!multiSelect.contains(e.target)) {
                     languageSelect.blur();
                     MSOpen = false;
                 }
-            })
+            });
             languageSelect.addEventListener('change', function() {
                 let selectedLanguages = Array.from(this.options) // Access all options
                     .filter(option => option.selected) // Filter only selected options
