@@ -16,6 +16,7 @@
             :show-my-list-action="showMyListAction"
             :force-list-view="displayInline"
             :add-dark-mode-color="addDarkModeColor"
+            :is-single-item="isSingleItem"
             @addToList="emitAddToList"
         />
     </div>
@@ -91,6 +92,10 @@ export default {
             type: Boolean,
             default: () => true,
         },
+        isSingleItem: {
+            type: Boolean,
+            default: () => false,
+        }
     },
 };
 </script>

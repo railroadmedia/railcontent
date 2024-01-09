@@ -35,6 +35,7 @@
             'videoId' => $lessonContent->fetch('fields.video.fields.vimeo_video_id'),
             'videoType' => 'vimeo',
             'useLegacyPlayer' => true,
+            'thumbnailUrl' => $lessonContent->fetch('data.thumbnail_url'),
         ];
     } elseif (!empty($lessonContent->fetch('fields.video.fields.vimeo_video_id'))) {
         $videoProps = [

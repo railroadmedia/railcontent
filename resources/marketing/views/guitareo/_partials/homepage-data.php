@@ -10,41 +10,6 @@
 
     $guitareo = [
 
-        'bubbles' => [
-            [
-                'src' => $bubble1,
-                'classes' => 'absolute z-10 h-10 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]',
-            ],
-            [
-                'src' => $bubble2,
-                'classes' => 'absolute z-10 h-24 sm:h-28 lg:h-44 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]',
-            ],
-            [
-                'src' => $bubble3,
-                'classes' => 'absolute z-10 h-32 sm:h-40 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]',
-            ],
-            [
-                'src' => $bubble4,
-                'classes' => 'absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]',
-            ],
-            [
-                'src' => $bubble5,
-                'classes' => 'absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]',
-            ],
-            [
-                'src' => $bubble6,
-                'classes' => 'absolute z-10 h-28 sm:h-32 lg:h-48 transform -translate-x-1/2 -translate-y-1/2 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]',
-            ],
-            [
-                'src' => $bubble7,
-                'classes' => 'absolute z-10 h-28 sm:h-36 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]',
-            ],
-            [
-                'src' => $bubble8,
-                'classes' => 'absolute z-10 h-12 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]',
-            ],
-        ],
-
         'features' => [
             [
                 'image' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitar-lessons-icon.svg',

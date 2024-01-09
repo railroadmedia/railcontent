@@ -47,7 +47,7 @@ const props = defineProps({
     },
     contentBreadcrumb: {
         type: Object,
-        default: () => {}
+        default: () => { }
     },
     contentChapters: {
         type: Array,
@@ -92,7 +92,7 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
-    lessonData:{
+    lessonData: {
         type: [Array, Object],
         default: () => []
     },
@@ -267,6 +267,7 @@ const chapterStartTime = ref(0);
 const chapterEndTime = ref(props.totalDuration);
 const soundsliceTitle = ref('');
 const startLooping = ref(false);
+const seekToTime = ref(0);
 
 
 //Pinia Stores
@@ -304,7 +305,7 @@ const needAccessMessage = computed(() => {
 })
 
 const formattedChapters = computed(() => {
-    if(props.videoChapters?.length) {
+    if (props.videoChapters?.length) {
         return props.videoChapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
             return {
                 title: chapter_description,
@@ -337,8 +338,8 @@ const unavailableType = computed(() => {
 
 
 //--------Methods---------------//
-const handleVideoPause = () => {}; //?
-const handleVideoPlay = () => {}; //?
+const handleVideoPause = () => { }; //?
+const handleVideoPlay = () => { }; //?
 
 const openSlice = (title, index, startAt, loop) => {
     soundsliceTitle.value = title;
@@ -365,6 +366,10 @@ const handleCloseSoundslice = () => {
     Intercom.showWidget();
 };
 
+const seekToChapter = (time) => {
+    seekToTime.value = time;
+};
+
 //---------Lifecycle-----------//
 onBeforeMount(() => {
     //console.log(props.lessonType)
@@ -376,45 +381,33 @@ onBeforeMount(() => {
     <div class="tw-w-full tw-h-full">
         <!-- Breadcrumbs -->
         <Breadcrumb :class="{ 'lg:tw-hidden': playlistsStore.playerExpanded }" :brand="brand"
-            :breadcrumbs="[{ title: 'Playlists', url: `/${brand}/playlists` }, { title: playlistName, url: secondLevelUrl }, { title: playlistItemTitle }]"
-        />
+            :breadcrumbs="[{ title: 'Playlists', url: `/${brand}/playlists` }, { title: playlistName, url: secondLevelUrl }, { title: playlistItemTitle }]" />
 
         <div class="tw-grid tw-grid-cols-3 2xl:tw-grid-cols-[auto_auto_420px] tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 tw-mt-3 tw-flex-col"
-             :class="{ 'tw-gap-4' : !playlistsStore.playerExpanded }"
-        >
+            :class="{ 'tw-gap-4': !playlistsStore.playerExpanded }">
             <!--Video Wrapper -->
             <div class="tw-col-span-3 tw-w-full"
-                 :class="playlistsStore.playerExpanded ? '2xl:tw-col-span-3' : '2xl:tw-col-span-2'"
-            >
+                :class="playlistsStore.playerExpanded ? '2xl:tw-col-span-3' : '2xl:tw-col-span-2'">
                 <!-- Content Unavailable -->
                 <ContentUnavailable v-if="!isReleased || needAccess" @goToNext="handleGoToNext"
                     :subscriptionCalendarId="subscriptionCalendarId" :bgImgUrl="thumbnailUrl"
                     :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle"
-                    :message="needAccessMessage" 
-                />
+                    :message="needAccessMessage" />
                 <!-- Soundslice Player -->
                 <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine') && !needAccess && isReleased"
                     class="tw-w-full tw-aspect-video tw-max-h-[90vh] tw-mb-4"
-                    :class="{ 'tw-max-w-[1280px]' : !playlistsStore.playerExpanded }"
-                >
-                    <SoundSlice 
-                        :user-id="userId" 
-                        :theme-color="brand" 
-                        :additional-params="additionalSoundsliceParams"
-                        :soundslice-slug="soundsliceSlug" 
-                        :content-id="contentId" 
-                        @onAudioEnd="handleGoToNext"
-                    />
+                    :class="{ 'tw-max-w-[1280px]': !playlistsStore.playerExpanded }">
+                    <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
+                        :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext" />
                 </div>
                 <!-- Video Players -->
                 <div v-if="isReleased && !needAccess" class="p-lg-only lean tw-relative">
                     <div v-if="youtubeVideoId && String(youtubeVideoId).length" class="widescreen mb-2 bg-black">
                         <YoutubePlayer ref="mediaElementVueInstance" :brand="brand" :video-id="youtubeVideoId"
-                            :start-second="startSecond" :end-second="endSecond"
+                            :start-second="startSecond" :end-second="endSecond" :seek-to-time="seekToTime"
                             :total-duration="totalDuration" :video-length="videoLength" :progress-state="progressState"
                             :content-id="contentId" :use-intersection-observer="true" :theme-color="brand"
-                            @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext"
-                        />
+                            @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext" />
                     </div>
                     <div v-else-if="lessonType !== 'song' && lessonType !== 'assignment' && lessonType !== 'routine'"
                         id="lessonVideoWrap">
@@ -422,25 +415,24 @@ onBeforeMount(() => {
                             <VideoMediaElement ref="mediaElementVueInstance" element-id="lessonPlayer" :brand="brand"
                                 :theme-color="brand" :poster="videoPosterImageUrl" :sources="videoMediaSources"
                                 :hls-manifest-url="hlsManifestUrl" :video-id="vimeoVideoId" :content-id="contentId"
-                                :current-second="currentSecond" :progress-state="progressState"
-                                :video-length="videoLength" :chapters="videoChapters" :user-id="userId"
-                                :like-count="likeCount" :is-liked="isLiked" :check-for-timecode="true"
-                                @playing="handleVideoPlay" @pause="handleVideoPause" @ended="handleGoToNext">
+                                :current-second="currentSecond" :progress-state="progressState" :video-length="videoLength"
+                                :chapters="videoChapters" :user-id="userId" :like-count="likeCount" :is-liked="isLiked"
+                                :check-for-timecode="true" :seek-to-time="seekToTime" @playing="handleVideoPlay"
+                                @pause="handleVideoPause" @ended="handleGoToNext">
                                 <div :class="`widescreen title tw-text-${brand}`">
                                     <i class="fas fa-spinner fa-spin absolute-center"></i>
                                 </div>
                             </VideoMediaElement>
                         </transition>
                         <transition v-else appear name="fade">
-                            <VideoPlayer ref="mediaElementVueInstance" :start-second="startSecond"
-                                :end-second="endSecond" :theme-color="brand" :brand="brand"
-                                :poster="videoPosterImageUrl" :sources="videoMediaSources" :ranges="songRanges"
-                                :ranges-video-ids="rangesVideoIds" :show-range-buttons="true"
-                                :hls-manifest-url="hlsManifestUrl" :chapters="videoChapters"
+                            <VideoPlayer ref="mediaElementVueInstance" :start-second="startSecond" :end-second="endSecond"
+                                :theme-color="brand" :brand="brand" :poster="videoPosterImageUrl"
+                                :sources="videoMediaSources" :ranges="songRanges" :ranges-video-ids="rangesVideoIds"
+                                :show-range-buttons="true" :hls-manifest-url="hlsManifestUrl" :chapters="videoChapters"
                                 :current-second="currentSecond" :content-id="contentId" :user-id="userId"
                                 :video-id="vimeoVideoId" :video-length="videoLength" :total-duration="totalDuration"
                                 :cast-title="playlistItemTitle" :use-intersection-observer="true" @play="handleVideoPlay"
-                                @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
+                                :seek-to-time="seekToTime" @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
                                 <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                             </VideoPlayer>
                         </transition>
@@ -448,41 +440,23 @@ onBeforeMount(() => {
                 </div>
                 <!-- Video Resources -->
                 <div class="tw-mb-4">
-                    <VideoResources 
-                        :theme-color="brand" 
-                        :brand="brand" 
-                        :title="playlistItemTitle" 
-                        :lesson-type="lessonType"
-                        :thumbnail-url="thumbnailUrl" 
-                        :description="description" 
-                        :instructors="instructors"
-                        :parent-title="parentTitle" 
-                        :is-liked="isLiked" 
-                        :like-count="likeCount" 
-                        :content-id="contentId"
-                        :user-id="userId" 
-                        :resources="videoResources" 
-                        :show-add-to-list="true"
+                    <VideoResources :theme-color="brand" :brand="brand" :title="playlistItemTitle" :lesson-type="lessonType"
+                        :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
+                        :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
+                        :user-id="userId" :resources="videoResources" :show-add-to-list="true"
                         :show-practice-button="props.lessonType === 'workout' ? true : false"
-                        :show-complete-button="isReleased && !needAccess" 
-                        :relatedLesson="relatedLesson"
-                        :lesson="playlistItems.data[props.playlistItemPosition - 1]" 
-                        :show-info-button="showInfoButton"
-                        :report-logo="reportLogo" 
-                        :report-recipient="reportRecipient" 
-                        :report-user-email="userEmail" 
+                        :show-complete-button="isReleased && !needAccess" :relatedLesson="relatedLesson"
+                        :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton"
+                        :report-logo="reportLogo" :report-recipient="reportRecipient" :report-user-email="userEmail"
                         :report-user-name="userName"
-                        @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)"
-                    />
+                        @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)" />
 
                     <!-- Info Section -->
-                    <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription" :content-chapters="contentChapters" :instructors="contentInstructors" />
+                    <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
+                        :content-chapters="contentChapters" :instructors="contentInstructors" />
 
-                    <VideoChapters
-                        v-if="formattedChapters.length"
-                        :chapters="formattedChapters"
-                        @open-slice="openSlice"
-                    />
+                    <VideoChapters v-if="formattedChapters.length" :chapters="formattedChapters" @open-slice="openSlice"
+                        @seek-to-chapter="seekToChapter" />
 
                     <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
                 </div>
@@ -490,10 +464,10 @@ onBeforeMount(() => {
 
             <!-- Cue and Realted Playlist Wrapper -->
             <div class="tw-w-full tw-col-span-3 tw-flex tw-flex-col"
-                :class="playlistsStore.playerExpanded ? 'tw-mb-0 2xl:tw-col-span-3 lg:tw-order-first' : '2xl:tw-mt-0 2xl:tw-col-span-1'"
-            >
+                :class="playlistsStore.playerExpanded ? 'tw-mb-0 2xl:tw-col-span-3 lg:tw-order-first' : '2xl:tw-mt-0 2xl:tw-col-span-1'">
                 <!-- Playback Cue -->
-                <div v-if="playlistItems.data && playlistItems.data.length" class="tw-flex tw-flex-col tw-w-full tw-my-4 lg:tw-my-0">
+                <div v-if="playlistItems.data && playlistItems.data.length"
+                    class="tw-flex tw-flex-col tw-w-full tw-my-4 lg:tw-my-0">
                     <playback-cue :autoplay="false" :repeat="false" :brand="brand" :lessons="playlistItems"
                         :playlist-name="playlistName" :duration="playlistDuration" :playlist-url="playlistUrl"
                         :playlist-item-id="playlistItemId" :playlist-id="playlistId" :infinite-scroll="true"
@@ -503,8 +477,7 @@ onBeforeMount(() => {
                 <!-- Related Playlists -->
                 <div v-if="relatedPlaylists.data && relatedPlaylists.data.length"
                     class="tw-flex tw-flex-row reverse tw-items-start"
-                    :class="playlistsStore.playerExpanded ? 'lg:tw-hidden' : ''"
-                >
+                    :class="playlistsStore.playerExpanded ? 'lg:tw-hidden' : ''">
                     <div class="tw-flex tw-flex-col tw-w-full tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
                         <div class="tw-flex tw-flex-col tw-mb-5">
                             <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
@@ -520,21 +493,19 @@ onBeforeMount(() => {
             <div class="tw-col-span-3 2xl:tw-col-span-2" :class="playlistsStore.playerExpanded ? 'lg:tw-hidden' : ''">
                 <!-- Assignments Section -->
                 <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
-                    <div class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
+                    <div
+                        class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
                         <h1 class="heading dark:tw-text-white">Assignments</h1>
                         <button class="tw-z-10" @click="state.assignmentCollapsed = !state.assignmentCollapsed">
-                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center" :class="!state.assignmentCollapsed && 'tw-rotate-180'">
+                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
+                                :class="!state.assignmentCollapsed && 'tw-rotate-180'">
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                         </button>
                     </div>
                     <div class="tw-flex-row tw-w-full" :class="state.assignmentCollapsed ? 'tw-hidden' : 'tw-flex'">
-                        <assignments-container
-                            :lesson-data="lessonData"
-                            :assignments="assignments"
-                            :brand="brand"
-                            :user-id="userId"
-                        >
+                        <assignments-container :lesson-data="lessonData" :assignments="assignments" :brand="brand"
+                            :user-id="userId">
                         </assignments-container>
                     </div>
                 </div>
@@ -547,28 +518,17 @@ onBeforeMount(() => {
                     </div>
                 </div>
             </div>
-        
+
             <!-- Workout Chapter Soundslice -->
             <transition name="show-from-bottom">
                 <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
-                    <SoundSlice
-                        :user-id="userId"
-                        :theme-color="brand"
+                    <SoundSlice :user-id="userId" :theme-color="brand"
                         :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                        :soundslice-slug="soundsliceSlug"
-                        :contentId="contentId"
-                        :force-start-time="true"
-                        :start-time="chapterStartTime"
-                        :end-time="chapterEndTime"
-                        :loop="startLooping"
-                    >
+                        :soundslice-slug="soundsliceSlug" :contentId="contentId" :force-start-time="true"
+                        :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
                         <template v-slot:soundsliceControls>
-                            <SoundSliceControls
-                                :title="soundsliceTitle || playlistItemTitle"
-                                :disable-next="true"
-                                :disable-prev="true"
-                                @onClose="handleCloseSoundslice" 
-                            />
+                            <SoundSliceControls :title="soundsliceTitle || playlistItemTitle" :disable-next="true"
+                                :disable-prev="true" @onClose="handleCloseSoundslice" />
                         </template>
                     </SoundSlice>
                 </div>
