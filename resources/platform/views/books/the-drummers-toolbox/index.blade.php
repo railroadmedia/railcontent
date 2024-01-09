@@ -141,10 +141,7 @@ if(!empty($user)){
             @foreach($chapters as $index => $chapter)
                     <div class="flex flex-column chapter-thumb pa-1">
                     <a
-                        href="{{ url()->route(
-                            $isDigital ? 'books.digital.drummers-toolbox.chapter' : 'books.drummers-toolbox.chapter',
-                            [ "chapterNumber" => $chapter['chapter'] ]
-                        ) }}"
+                        href="/drumeo/{{ $isDigital ? 'drummers-toolbox-digital' : 'drummers-toolbox' }}/{{$chapter['chapter']}}"
                         class="square corners-3 bg-center"
                         style="background-image:url({{ $chapter['thumbnail'] }});"
                     >
