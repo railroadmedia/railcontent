@@ -32,12 +32,7 @@ if(!empty($user)){
                     <div class="flex flex-row align-center pv-3">
                             <a
                             @if($chapterNumber > 1)
-                               href="{{ url()->route(
-                                    $isDigital
-                                        ? 'books.digital.drummers-toolbox.chapter'
-                                        : 'books.drummers-toolbox.chapter',
-                                    [ "chapterNumber" => $chapterNumber - 1 ]
-                                ) }}"
+                                href="/drumeo/{{ $isDigital ? 'drummers-toolbox-digital' : 'drummers-toolbox' }}/{{$chapterNumber - 1}}"
                             @endif
                                class="btn short collapse-square rounded mr-2 bg-white text-white inverted
                                         {{ $chapterNumber > 1 ? '' : 'disabled' }}"
@@ -51,12 +46,7 @@ if(!empty($user)){
 
                             <a
                             @if($chapterNumber < 10)
-                               href="{{ url()->route(
-                                    $isDigital
-                                        ? 'books.digital.drummers-toolbox.chapter'
-                                        : 'books.drummers-toolbox.chapter',
-                                    [ "chapterNumber" => $chapterNumber + 1 ]
-                               ) }}"
+                            href="/drumeo/{{ $isDigital ? 'drummers-toolbox-digital' : 'drummers-toolbox' }}/{{$chapterNumber + 1}}"
                             @endif
                                class="btn short collapse-square rounded ml-2 bg-white text-white inverted
                                         {{ $chapterNumber < 10 ? '' : 'disabled' }}">
