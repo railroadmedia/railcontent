@@ -21669,6 +21669,10 @@ a:visited{
   margin-top: 0.25rem !important;
   margin-bottom: 0.25rem !important;
 }
+.tw-my-10{
+  margin-top: 2.5rem !important;
+  margin-bottom: 2.5rem !important;
+}
 .tw-my-2{
   margin-top: 0.5rem !important;
   margin-bottom: 0.5rem !important;
@@ -25929,6 +25933,15 @@ a:visited{
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color) !important;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+}
+.focus\:tw-block:focus{
+  display: block !important;
+}
+.focus\:tw-h-\[400px\]:focus{
+  height: 400px !important;
+}
+.focus\:tw-border:focus{
+  border-width: 1px !important;
 }
 .focus\:tw-border-none:focus{
   border-style: none !important;

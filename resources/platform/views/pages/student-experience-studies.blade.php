@@ -110,7 +110,7 @@
                             </svg>
                         </i>
                     </div>
-                    <select multiple name="languages[]" id="languages" class="tw-p-0 tw-absolute tw-w-full tw-top-full tw-hidden tw-h-[400px]">
+                    <select multiple name="languages[]" id="languages" class="tw-p-0 tw-absolute tw-w-full tw-top-full tw-border-0 tw-h-0 focus:tw-border focus:tw-h-[400px] ">
                         @foreach ($languages as $code => $name)
                             <option class="bg-white text-black" value="{{ $name }}">{{ $name }}</option>
                         @endforeach
@@ -219,105 +219,108 @@
 {{-- Vanilla JS --}}
 @section('inject-components')
     <script>
-        //Dom Elements
-        const form = document.querySelector('#stc-form');
-        const consentBox = document.querySelector('#consent');
-        const submitButton = document.querySelector('#submit-button');
-        const instrumentSelect = document.querySelector('#instruments');
-        const goalSelect = document.querySelector('#goals');
-        //MultiSelect
-        const multiSelect = document.querySelector('#multiSelect');
-        const languageInput = document.querySelector('#language');
-        const languageSelect = document.querySelector('#languages');
-        const clearLanguagesButton = document.querySelector('#clear-multi-select');
-        const name = document.querySelector('#name');
-
-        //Event Listeners
-        instrumentSelect.addEventListener('change', (e)=> {
-            if(e.target.value === 'Other') {
-                e.target.insertAdjacentHTML('afterend', inputHTML('instrument'))
-            } else {
-                document.getElementById('other-instrument')?.remove()
-            }
-        })
-        goalSelect.addEventListener('change', (e)=> {
-            if(e.target.value === 'Other') {
-                e.target.insertAdjacentHTML('afterend', inputHTML('goal'))
-            } else {
-                document.getElementById('other-goal')?.remove()
-            }
-        })
-        consentBox.addEventListener('change', ()=> submitButton.disabled = !submitButton.disabled);
-        //Multi Select.....
-        languageInput.addEventListener('click', ()=> {
-            languageSelect.classList.toggle('tw-hidden');
-            if(!languageSelect.classList.contains('tw-hidden')) {
-                setTimeout(() => { //for mobile
-                    languageSelect.focus();
-                }, 0);
-            }
-        })
-        languageSelect.addEventListener('change', function() {
-            let selectedLanguages = Array.from(this.options) // Access all options
-                .filter(option => option.selected) // Filter only selected options
-                .map(option => option.value); // Map to their values
-            languageInput.value = selectedLanguages.join(', ');
-            if(languageInput.value !== "") clearLanguagesButton.classList.remove('tw-hidden');
-        })
-        clearLanguagesButton.addEventListener('click', function(e) {
-            languageInput.value = "";
-            languageSelect.value = "";
-        })
-        document.addEventListener('click', e => {
-            if(!multiSelect.contains(e.target)) languageSelect.classList.add('tw-hidden');
-        });
-
-        //Functions
-        function inputHTML(name) {
-            return ` 
-                <label id="other-${name}" class="tw-flex tw-flex-col tw-ml-4 tw-mb-2">
-                    <span class="tw-m-2 tw-font-bold tw-leading-0">Your Instrument</span>
-                    <input required id="${name}" type="text" name="${name}" autocomplete="${name}"  class="tw-bg-transparent tw-rounded-full"/>
-                </label>`;
-        };
-
-        //Submit Form
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); 
-            //loading
-            submitButton.innerHTML = `
-                <div id="button-loading" class="tw-inline-flex">
-                    <svg class="tw-animate-spin tw--ml-1 tw-mr-3 tw-h-5 tw-w-5 dark:tw-text-black tw-text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="tw-opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="tw-opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Processing...
-                </div>`;
-            //send form
-            const formData = new FormData(this);
-            const formID = '9e8885d4ad1545a';
-            const authKey = '{{ base64_encode(config('customer-io.accounts.musora.site_id') . ':' . config('customer-io.accounts.musora.track_api_key')) }}'
-            const formData2 = {
-                data:Object.fromEntries(formData),
-            };
-            fetch(`https://track.customer.io/api/v1/forms/${formID}/submit`, {
-                method: 'POST',
-                body:JSON.stringify(formData2),
-                headers: {
-                    'Accept': 'application/json',
-                    'Authorization': 'Basic ' + authKey
+        (function(){
+            //Dom Elements
+            const form = document.querySelector('#stc-form');
+            const consentBox = document.querySelector('#consent');
+            const submitButton = document.querySelector('#submit-button');
+            const instrumentSelect = document.querySelector('#instruments');
+            const goalSelect = document.querySelector('#goals');
+            //MultiSelect
+            const multiSelect = document.querySelector('#multiSelect');
+            const languageInput = document.querySelector('#language');
+            const languageSelect = document.querySelector('#languages');
+            const clearLanguagesButton = document.querySelector('#clear-multi-select');
+            const name = document.querySelector('#name');
+            let MSOpen = false;
+            //Event Listeners
+            instrumentSelect.addEventListener('change', (e)=> {
+                if(e.target.value === 'Other') {
+                    e.target.insertAdjacentHTML('afterend', inputHTML('instrument'))
+                } else {
+                    document.getElementById('other-instrument')?.remove()
                 }
             })
-            //.then(response => response.ok ? response.json() : Promise.reject('Network response was not ok'))
-            .then(data => {
-                document.querySelector('#stc-form-wrapper').classList.add('tw-hidden');
-                document.querySelector('#stc-confirmation').classList.remove('tw-hidden');
+            goalSelect.addEventListener('change', (e)=> {
+                if(e.target.value === 'Other') {
+                    e.target.insertAdjacentHTML('afterend', inputHTML('goal'))
+                } else {
+                    document.getElementById('other-goal')?.remove()
+                }
             })
-            .catch(error => {
-                submitButton.innerHTML = 'Submit';
-                console.error('Error:', error);
+            consentBox.addEventListener('change', ()=> submitButton.disabled = !submitButton.disabled);
+            //Multi Select.....
+            languageInput.addEventListener('click', (e)=> {
+                if(!MSOpen) {
+                    languageSelect.focus();
+                    MSOpen = true;
+                } else {
+                    languageSelect.blur();
+                    MSOpen = false;
+                }
+            })
+            document.addEventListener('click', e=> {
+                if(!multiSelect.contains(e.target)) {
+                    languageSelect.blur();
+                    MSOpen = false;
+                }
+            })
+            languageSelect.addEventListener('change', function() {
+                let selectedLanguages = Array.from(this.options) // Access all options
+                    .filter(option => option.selected) // Filter only selected options
+                    .map(option => option.value); // Map to their values
+                languageInput.value = selectedLanguages.join(', ');
+                if(languageInput.value !== "") clearLanguagesButton.classList.remove('tw-hidden');
+            })
+            clearLanguagesButton.addEventListener('click', function(e) {
+                languageInput.value = "";
+                languageSelect.value = "";
+            })
+            //Functions
+            function inputHTML(name) {
+                return ` 
+                    <label id="other-${name}" class="tw-flex tw-flex-col tw-ml-4 tw-mb-2">
+                        <span class="tw-m-2 tw-font-bold tw-leading-0">Your Instrument</span>
+                        <input required id="${name}" type="text" name="${name}" autocomplete="${name}"  class="tw-bg-transparent tw-rounded-full"/>
+                    </label>`;
+            };
+            //Submit Form
+            form.addEventListener('submit', function(e) {
+                e.preventDefault(); 
+                //loading
+                submitButton.innerHTML = `
+                    <div id="button-loading" class="tw-inline-flex">
+                        <svg class="tw-animate-spin tw--ml-1 tw-mr-3 tw-h-5 tw-w-5 dark:tw-text-black tw-text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="tw-opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="tw-opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Processing...
+                    </div>`;
+                //send form
+                const formData = new FormData(this);
+                const formID = '9e8885d4ad1545a';
+                const authKey = '{{ base64_encode(config('customer-io.accounts.musora.site_id') . ':' . config('customer-io.accounts.musora.track_api_key')) }}'
+                const formData2 = {
+                    data:Object.fromEntries(formData),
+                };
+                fetch(`https://track.customer.io/api/v1/forms/${formID}/submit`, {
+                    method: 'POST',
+                    body:JSON.stringify(formData2),
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Basic ' + authKey
+                    }
+                })
+                //.then(response => response.ok ? response.json() : Promise.reject('Network response was not ok'))
+                .then(data => {
+                    document.querySelector('#stc-form-wrapper').classList.add('tw-hidden');
+                    document.querySelector('#stc-confirmation').classList.remove('tw-hidden');
+                })
+                .catch(error => {
+                    submitButton.innerHTML = 'Submit';
+                    console.error('Error:', error);
+                });
             });
-
-        });
+        })();
     </script>
 @endsection
