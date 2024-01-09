@@ -231,7 +231,7 @@ class ShopifyCancelService
      * @param int $shopifyOrderId
      * @return bool whether the order was deleted
      */
-    private function deleteOrder(int $shopifyOrderId): bool
+    public function deleteOrder(int $shopifyOrderId): bool
     {
         if (!$this->getIsSimulation()) {
             // unfortunately, this is function doesn't return anything, so we just have to assume it worked
