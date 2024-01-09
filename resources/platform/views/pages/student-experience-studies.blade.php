@@ -39,6 +39,7 @@
             </div>
 
             <form id="stc-form" method="POST" class="tw-flex tw-flex-col">
+                <input id="id" type="hidden" name="id" value="{{ user()->id }}"/>
                 {{-- Name --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Name</span>
@@ -287,17 +288,20 @@
                 </div>`;
             //send form
             const formData = new FormData(this);
-            const formID = 'fa24b9733327116040c7';
-            const siteID = `{{ config('customer-io.accounts.musora.site_id') }}`;
+            const formID = '9e8885d4ad1545a';
+            const authKey = '{{ base64_encode(config('customer-io.accounts.musora.site_id') . ':' . config('customer-io.accounts.musora.track_api_key')) }}'
+            const formData2 = {
+                data:Object.fromEntries(formData),
+            };
             fetch(`https://track.customer.io/api/v1/forms/${formID}/submit`, {
                 method: 'POST',
-                body: JSON.stringify(Object.fromEntries(formData)),
+                body:JSON.stringify(formData2),
                 headers: {
                     'Accept': 'application/json',
-                    'Authorization': 'Basic ' + btoa(siteID)
+                    'Authorization': 'Basic ' + authKey
                 }
             })
-            .then(response => response.ok ? response.json() : Promise.reject('Network response was not ok'))
+            //.then(response => response.ok ? response.json() : Promise.reject('Network response was not ok'))
             .then(data => {
                 document.querySelector('#stc-form-wrapper').classList.add('tw-hidden');
                 document.querySelector('#stc-confirmation').classList.remove('tw-hidden');
