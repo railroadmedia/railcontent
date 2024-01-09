@@ -3,21 +3,18 @@
 namespace App\Http\Controllers\Platform;
 
 use App\Http\Controllers\BaseController;
-use App\Modules\EventTracking\Events\ReferralLinkCopied;
-use App\Modules\EventTracking\Events\ReferralPageViewed;
+use App\Modules\EventTracking\Avo\AvoHelper;
+use Avo;
 use Exception;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Log;
-use Railroad\Referral\Models\Referrer;
 use Railroad\Referral\Services\ReferralService;
 
 class ReferralPagesController extends BaseController
 {
-    /**
-     * @var ReferralService
-     */
-    private $referralService;
+    private ReferralService $referralService;
 
 
     public function __construct(ReferralService $referralService)
@@ -25,11 +22,8 @@ class ReferralPagesController extends BaseController
         $this->referralService = $referralService;
     }
 
-    public function inviteAFriend()
+    public function inviteAFriend(): Factory|View|Application
     {
-        /**
-         * @var $referrer Referrer
-         */
         $referrer = $this->referralService->getOrCreateReferrer(
             user()->id,
             config('referral.saasquatch_referral_program_id.' . brand()),
@@ -38,42 +32,26 @@ class ReferralPagesController extends BaseController
 
         $referralsPerUser = $this->referralService->getReferralsPerUser();
 
-        event(new ReferralPageViewed(user(), brand(), $referrer->referral_code));
+        try {
+            Avo::referral_page_viewed(
+                AvoHelper::defaultEventProperties(
+                    ['referral_code' => $referrer->referral_code, 'brand' => $referrer->brand],
+                    user()
+                )
+            );
+        } catch (Exception $e) {
+            // Do not block user flow if event tracking fails
+            Log::error($e->getMessage());
+        }
 
         return view(
             'referral.invite-friend',
             [
+                'userReferralCode' => $referrer->referral_code,
                 'referralsPerUser' => $referralsPerUser,
                 'userReferralsPerformed' => $referrer->referrals_performed,
                 'userReferralLink' => $referrer->referral_link,
                 'canRefer' => $this->referralService->canRefer($referrer),
-            ]
-        );
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function referralLinkCopied(Request $request): JsonResponse
-    {
-        $user = user();
-        $brand = brand();
-
-        try {
-            $referrer = $this->referralService->getReferrer(
-                $user->id,
-                config('referral.saasquatch_referral_program_id.' . brand()),
-                $brand
-            );
-
-            event(new ReferralLinkCopied($user, $brand, $referrer->referral_code));
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
-
-        return response()->json(
-            [
-                'success' => true,
             ]
         );
     }

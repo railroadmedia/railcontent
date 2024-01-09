@@ -5,8 +5,6 @@ namespace App\Providers;
 use App\Listeners\Authentication\AuthenticationEventListener;
 use App\Listeners\Content\EngageContentEventListener;
 use App\Listeners\OrderEventListener;
-use App\Modules\EventTracking\Events\ReferralLinkCopied;
-use App\Modules\EventTracking\Events\ReferralPageViewed;
 use App\Modules\EventTracking\Listeners\EventTrackerListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Modules\UserManagementSystem\Events\User\UserCreated;
@@ -27,8 +25,6 @@ use Railroad\Railforums\Events\PostLiked;
 use Railroad\Railforums\Events\ThreadCreated;
 use Railroad\Railforums\Events\ThreadDeleted;
 use Railroad\Railnotifications\Listeners\NotificationEventListener;
-use Railroad\Railtracker\Events\EngageContent;
-use Railroad\Railtracker\Events\RemoveEngagedContent;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -68,12 +64,6 @@ class EventServiceProvider extends ServiceProvider
         ],
         OrderEvent::class => [
             OrderEventListener::class . '@handleOrderPlaced',
-        ],
-        ReferralLinkCopied::class => [
-            [EventTrackerListener::class, 'handleReferralLinkCopied']
-        ],
-        ReferralPageViewed::class => [
-            [EventTrackerListener::class, 'handleReferralPageViewed']
         ],
         PlaylistItemsUpdated::class => [PlaylistListener::class.'@handlePlaylistItemsUpdated'],
         PlaylistItemLoaded::class => [EngageContentEventListener::class.'@handleEngageContent'],

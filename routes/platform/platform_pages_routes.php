@@ -336,9 +336,6 @@ Route::domain('{musoraDomain}')
                         Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
                             ->whereIn('brand', all_brands())
                             ->name('platform.invite-a-friend');
-                        Route::get('/{brand}/referral/link-copied', [ReferralPagesController::class, 'referralLinkCopied'])
-                            ->whereIn('brand', all_brands())
-                            ->name('platform.referral-link-copied');
                     });
             });
 
@@ -768,9 +765,6 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
             ->whereIn('brand', all_brands())
             ->name('platform.invite-a-friend');
-        Route::get('/{brand}/referral/link-copied', [ReferralPagesController::class, 'referralLinkCopied'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.referral-link-copied');
     });
 
 Route::get(
