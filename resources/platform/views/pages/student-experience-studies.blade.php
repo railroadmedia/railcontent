@@ -252,11 +252,13 @@
             //Multi Select.....
             languageInput.addEventListener('click', (e)=> {
                 if(!MSOpen) {
-                    languageSelect.focus();
                     MSOpen = true;
+                    setTimeout(() => {
+                        languageSelect.focus();
+                    }, 0);
                 } else {
-                    languageSelect.blur();
                     MSOpen = false;
+                    languageSelect.blur();
                 }
             })
             document.addEventListener('click', e=> {
