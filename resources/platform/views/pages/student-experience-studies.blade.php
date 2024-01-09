@@ -85,7 +85,7 @@
                 </label>
 
                 {{-- Languages: Multi-select --}}
-                <label class="tw-flex tw-flex-col tw-mb-2 tw-relative">
+                <label id="multiSelect" class="tw-flex tw-flex-col tw-mb-2 tw-relative">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Spoken Languages<span>*</span></span>
                     <div class="tw-relative tw-w-full">
                         <input required
@@ -112,6 +112,7 @@
                             <option class="bg-white text-black" value="{{ $name }}">{{ $name }}</option>
                         @endforeach
                     </select>
+                    <small class="tw-text-xs tw-m-2 dark:tw-text-[#9EC0DC] tw-text-[#3F3F46]">On a keyboard. Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</small>
                 </label>
 
                 {{-- Student Level --}}
@@ -135,11 +136,6 @@
                         @endforeach
                     </select>
                 </label>
-                {{-- If Other: remove tw-hidden --}}
-                <label id="other-instrument" class="tw-flex tw-flex-col tw-ml-4 tw-mb-2 tw-hidden">
-                    <span class="tw-m-2 tw-font-bold tw-leading-0">Your Instrument</span>
-                    <input required id="instrument" type="text" name="instrument" autocomplete="instrument"  class="tw-bg-transparent tw-rounded-full"/>
-                </label>
 
                 {{-- Learning Goal --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
@@ -150,11 +146,6 @@
                             <option class="bg-white text-black" value="{{ $goal['value'] }}">{{ $goal['value'] }}</option>
                         @endforeach
                     </select>
-                </label>
-                {{-- If Other: remove tw-hidden --}}
-                <label id="other-goal" class="tw-flex tw-flex-col tw-ml-4 tw-mb-2 tw-hidden">
-                    <span class="tw-m-2 tw-font-bold tw-leading-0">Your Goal</span>
-                    <input required id="goal" type="text" name="goal" autocomplete="goal"  class="tw-bg-transparent tw-rounded-full"/>
                 </label>
 
                 {{-- Student Length --}}
@@ -239,9 +230,9 @@
         const consentBox = document.querySelector('#consent');
         const submitButton = document.querySelector('#submit-button');
         const instrumentSelect = document.querySelector('#instruments');
-        const instrumentInput = document.querySelector('#other-instrument');
         const goalSelect = document.querySelector('#goals');
-        const goalInput = document.querySelector('#other-goal');
+        //MultiSelect
+        const multiSelect = document.querySelector('#multiSelect');
         const languageInput = document.querySelector('#language');
         const languageSelect = document.querySelector('#languages');
         const clearLanguagesButton = document.querySelector('#clear-multi-select');
@@ -249,25 +240,23 @@
         //Event Listeners
         instrumentSelect.addEventListener('change', (e)=> {
             if(e.target.value === 'Other') {
-                instrumentInput.classList.remove('tw-hidden');
+                e.target.insertAdjacentHTML('afterend', inputHTML('instrument'))
             } else {
-                instrumentInput.classList.add('tw-hidden');
+                document.getElementById('other-instrument')?.remove()
             }
         })
         goalSelect.addEventListener('change', (e)=> {
             if(e.target.value === 'Other') {
-                goalInput.classList.remove('tw-hidden');
+                e.target.insertAdjacentHTML('afterend', inputHTML('goal'))
             } else {
-                goalInput.classList.add('tw-hidden');
+                document.getElementById('other-goal')?.remove()
             }
         })
-        consentBox.addEventListener('change', ()=> {
-            submitButton.disabled = !submitButton.disabled;
-        });
+        consentBox.addEventListener('change', ()=> submitButton.disabled = !submitButton.disabled);
         //Multi Select..... whyyyyyy....
         languageInput.addEventListener('click', ()=> {
             languageSelect.classList.toggle('tw-hidden');
-            languageSelect.focus();
+            if(!languageSelect.classList.contains('tw-hidden')) languageSelect.focus();
         })
         languageSelect.addEventListener('change', function() {
             let selectedLanguages = Array.from(this.options) // Access all options
@@ -280,11 +269,17 @@
             languageInput.value = "";
             languageSelect.value = "";
         })
-        //Clicked outside of the language select?
-        document.addEventListener('click', function(e) {
-            if(!languageSelect.contains(e.target) && !languageInput.contains(e.target)) languageSelect.classList.add('tw-hidden');
+        document.addEventListener('click', e => {
+            if(!multiSelect.contains(e.target)) languageSelect.classList.add('tw-hidden');
         });
 
-        //Methods
+        //Functions
+        function inputHTML(name) {
+            return ` 
+                <label id="other-${name}" class="tw-flex tw-flex-col tw-ml-4 tw-mb-2">
+                    <span class="tw-m-2 tw-font-bold tw-leading-0">Your Instrument</span>
+                    <input required id="${name}" type="text" name="${name}" autocomplete="${name}"  class="tw-bg-transparent tw-rounded-full"/>
+                </label>`;
+        }
     </script>
 @endsection
