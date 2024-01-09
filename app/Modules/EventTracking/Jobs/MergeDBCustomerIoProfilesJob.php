@@ -5,8 +5,10 @@ namespace App\Modules\EventTracking\Jobs;
 use App\Console\Commands\Infrastructure\BatchQueryJob;
 use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\Ecommerce\Services\ShopifySyncService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Log;
+use Modules\UserManagementSystem\Models\User;
 use Throwable;
 
 class MergeDBCustomerIoProfilesJob extends BatchQueryJob
@@ -23,6 +25,7 @@ class MergeDBCustomerIoProfilesJob extends BatchQueryJob
         $this->take = $take;
         $this->workspaceName = $workspaceName;
         $this->customerIoService = app(CustomerIoService::class);
+        $this->shopifySyncService = app(ShopifySyncService::class);
     }
 
     public function getSkip(): int
@@ -45,9 +48,9 @@ class MergeDBCustomerIoProfilesJob extends BatchQueryJob
                 [
                     'workspace_id' => $accountConfigData['workspace_id'],
                     'site_id' => $accountConfigData['site_id'],
+                    'workspace_name' => $this->workspaceName,
                 ]
             )
-            ->where('workspace_name', '=', $this->workspaceName)
             ->groupBy('email')
             ->having('pcount', '>', 1);
     }
@@ -55,16 +58,33 @@ class MergeDBCustomerIoProfilesJob extends BatchQueryJob
     public function handleItem($item): void
     {
         try {
+            $accountConfigData = $this->customerIoService->getAccountConfigData($this->workspaceName);
+
             /** @var Customer $item */
             $profiles = Customer::query()
                 ->where('email', $item->email)
-                ->where('workspace_name', '=', $this->workspaceName)
-                ->orderByRaw('created_at asc, updated_at desc');
+                ->where(
+                    [
+                        'workspace_id' => $accountConfigData['workspace_id'],
+                        'site_id' => $accountConfigData['site_id'],
+                        'workspace_name' => $this->workspaceName,
+                    ]
+                )
+                ->orderByRaw('user_id desc, created_at asc, updated_at desc');
 
             $primary = $profiles->first();
             $profiles = $profiles->skip(1)->get();
             foreach ($profiles as $secondary) {
                 $this->customerIoService->mergeCustomers($this->workspaceName, $primary->uuid, $secondary->uuid);
+            }
+
+            $user = User::query()->where('email', $item->email)->first();
+
+            if ($user) {
+                $primary->user_id ??= $user->id;
+                $primary->save();
+
+                $this->shopifySyncService->syncCustomerByUser($user, false, false);
             }
         } catch (Throwable $ex) {
             Log::error("Error migrating profile for email $item->email");
