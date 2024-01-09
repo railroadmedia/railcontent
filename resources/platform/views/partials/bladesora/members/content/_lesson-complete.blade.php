@@ -28,6 +28,7 @@
 
                 <content-catalogue
                     catalogue-type="grid"
+                    :is-single-item="true"
                     theme-color="{{ $themeColor }}"
                     :use-theme-color="true"
                     :pre-loaded-content="{{ $thisLessonJson }}"
@@ -47,6 +48,7 @@
 
                     <content-catalogue
                         catalogue-type="grid"
+                        :is-single-item="true"
                         theme-color="{{ $themeColor }}"
                         :use-theme-color="true"
                         :pre-loaded-content="{{ $nextLessonJson }}"

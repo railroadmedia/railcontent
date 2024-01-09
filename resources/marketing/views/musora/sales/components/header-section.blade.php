@@ -81,7 +81,7 @@
         @foreach($bubbles as $bubble)
     <picture>
         <source media="(min-width:640px)" srcset="{{ $bubble['src'] }}">
-        <img class="{{ $bubble['classes'] }} opacity-0 transition-opacity"
+        <img class="absolute z-10 transform -translate-x-1/2 -translate-y-1/2 {{ $bubble['classes'] }} opacity-0 transition-opacity"
             loading="lazy" onload="this.classList.remove('opacity-0')"
             src="{{ $bubble['src'] }}" alt="header circle image" fetchpriority="high">
     </picture>

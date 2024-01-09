@@ -351,13 +351,17 @@
                                 THE NEW DRUMEO DRUM KIT BY ALESIS
                             @endif
                         </strong></h2>
-                    <h6 class="leading-tight">
-                        @if(empty($membersVersion))
-                            Get the ultimate starter e-kit + 1 year of unlimited drum lessons + 3 extra launch bonuses.
-                        @else
-                            Get the ultimate starter e-kit.
-                        @endif
-                    </h6>
+                    @if(empty($membersVersion))
+                        <ul class="fa-ul text-left pl-6 mx-auto inline-block">
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> <strong>Alesis Nitro Max Drumeo Edition E-Kit</strong></li>
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> 1-Year Drumeo Membership (<s>$240</s> <strong>FREE</strong>)</li>
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> 30-Day Drummer (<s>$127</s> <strong>FREE</strong>)</li>
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> 30-Day Chops (<s>$127</s> <strong>FREE</strong>)</li>
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> 5A Drumsticks (<s>$12.95</s> <strong>FREE</strong>)</li>
+                        </ul>
+                    @else
+                        <h6 class="leading-tight">Get the ultimate starter e-kit.</h6>
+                    @endif
 
                     <h4 class="my-4 text-drumeo"> ONLY
                         @if($fullPrice > floatval($productPrices['alesis-ekit']->discounted_price))
