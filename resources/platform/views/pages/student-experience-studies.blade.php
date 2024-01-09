@@ -38,7 +38,7 @@
                 <p>Please fill our the enrollment questionaire to be considered for studies</p>
             </div>
 
-            <form method="POST" action="https://customerioforms.com/forms/submit_action?site_id={{ config('customer-io.accounts.musora.site_id') }}&form_id=9e8885d4ad1545a&success_url=https://beta-testing.musora.com/drumeo/student-experience-studies" class="tw-flex tw-flex-col" id="stc-form">
+            <form id="stc-form" method="POST" class="tw-flex tw-flex-col">
                 {{-- Name --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Name</span>
@@ -195,16 +195,7 @@
                         id="submit-button"
                         class="md:tw-ml-auto disabled:tw-opacity-70 tw-transition-all tw-btn tw-btn-primary dark:tw-bg-white dark:tw-text-black tw-bg-black tw-text-white"
                 >
-                    {{-- If Submitting Form --}}
-                    <div id="button-loading" class="tw-hidden tw-inline-flex">
-                        <svg class="tw-animate-spin tw--ml-1 tw-mr-3 tw-h-5 tw-w-5 dark:tw-text-black tw-text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="tw-opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="tw-opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Processing...
-                    </div>
-                    {{-- Else --}}
-                    <span>Submit<span>
+                    Submit
                 </button>
             </form>
 
@@ -253,7 +244,7 @@
             }
         })
         consentBox.addEventListener('change', ()=> submitButton.disabled = !submitButton.disabled);
-        //Multi Select..... whyyyyyy....
+        //Multi Select.....
         languageInput.addEventListener('click', ()=> {
             languageSelect.classList.toggle('tw-hidden');
             if(!languageSelect.classList.contains('tw-hidden')) languageSelect.focus();
@@ -280,6 +271,47 @@
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Your Instrument</span>
                     <input required id="${name}" type="text" name="${name}" autocomplete="${name}"  class="tw-bg-transparent tw-rounded-full"/>
                 </label>`;
-        }
+        };
+
+        //Submit Form
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            //loading
+            submitButton.innerHTML = `
+                <div id="button-loading" class="tw-inline-flex">
+                    <svg class="tw-animate-spin tw--ml-1 tw-mr-3 tw-h-5 tw-w-5 dark:tw-text-black tw-text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="tw-opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="tw-opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Processing...
+                </div>`;
+            //send form
+            const formData = new FormData(this);
+            const formID = '9e8885d4ad1545a';
+            const siteID = `{{ config('customer-io.accounts.musora.site_id') }}`;
+
+            fetch(`https://track.customer.io/api/v1/forms/${formID}/submit`, {
+                method: 'POST',
+                body: JSON.stringify(Object.fromEntries(formData)),
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': 'Basic ' + btoa(siteID) //Encode site ID
+                }
+            })
+            .then(response => {
+                if (!response.ok) { throw new Error('Network response was not ok') }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                // Redirect or handle success
+                document.querySelector('#stc-form-wrapper').classList.add('tw-hidden');
+                document.querySelector('#stc-confirmation').classList.remove('tw-hidden');
+            })
+            .catch((error) => {
+                submitButton.innerHTML = `Submit`;
+                console.error('Error:', error);
+            });
+        });
     </script>
 @endsection
