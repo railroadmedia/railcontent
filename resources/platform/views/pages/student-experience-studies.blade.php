@@ -51,7 +51,7 @@
                 {{-- Email --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Email</span>
-                    <input required id="email" type="email" name="email" autocomplete="email"  class="tw-bg-transparent tw-rounded-full"/>
+                    <input required id="email" type="email" name="email" autocomplete="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" class="tw-bg-transparent tw-rounded-full"/>
                 </label>
 
                 {{-- Age --}}
