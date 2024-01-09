@@ -9,10 +9,11 @@
                 @foreach ($gridItems as $key => $gridItem)
                     @if($key == 6)
                         <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8"
-                            x-data="{ open: false, shown: false }" x-intersect="shown = true">
+                            x-data="{ open: false }">
                             <div class="pb-96 overflow-hidden text-white relative w-full bg-cover bg-center rounded-xl cursor-pointer"
-                                x-show="shown" x-transition
-                                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/{{ $gridItem['image'] }}');"
+                                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                                :style="`background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/{{ $gridItem['image'] }}');`"
+                                x-intersect.once="lazyLoad = true"
                                 x-on:click="open = ! open"
                             >
                                 <div class="absolute bottom-0 left-0 right-0 px-7 pb-7 pt-10" style="background:linear-gradient(to bottom, transparent, #000);">
@@ -33,7 +34,9 @@
                         <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8"
                             x-data="{ open: false }">
                             <div class="pb-[70%] @if(empty($gridItem['big'])) sm:pb-[60%] @else sm:pb-[80%]  @endif overflow-hidden text-white relative w-full bg-cover bg-center rounded-xl cursor-pointer"
-                                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/{{ $gridItem['image'] }}');"
+                                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                                :style="`background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/{{ $gridItem['image'] }}'); background-color: rgba(0, 0, 0, 0.6);`"
+                                x-intersect.once="lazyLoad = true"
                                 x-on:click="open = ! open"
                             >
                                 <div class="absolute bottom-0 left-0 right-0 px-7 pb-7 pt-10" style="background:linear-gradient(to bottom, transparent, #000);">

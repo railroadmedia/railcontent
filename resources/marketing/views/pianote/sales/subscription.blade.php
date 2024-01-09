@@ -140,7 +140,8 @@
         workoutVid : false,
         trailer : false,
         unbox : false,
-        rolandTrailer : false
+        rolandTrailer : false,
+        lazyLoad: false,
     }'
 @endsection
 

@@ -19,12 +19,16 @@
                 <a class="inline-block" href="{!! $appleUrl !!}" target="_blank">
                     <img
                         class="h-8 md:h-10 m-1"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/download-on-app-store-button.webp"
                         alt="app store icon"
                     ></a>
                 <a class="inline-block" href="{!! $googleUrl !!}" target="_blank">
                     <img
                         class="h-8 md:h-10 m-1"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/google-play-button.webp"
                         alt="google play icon"
                     >

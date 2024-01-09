@@ -139,7 +139,7 @@
     x-data ='{
         soundslice : false,
         trailer : false,
-        lazyLoad: false
+        lazyLoad: false,
         }'
 @endsection
 
@@ -238,12 +238,6 @@
     @php
         $gridItems = $singeo['gridItems'];
     @endphp
-
-{{-- <div class="w-full h-96 bg-cover bg-center rounded-xl cursor-pointer transition-opacity duration-500"
-    :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-    :style="`background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2600x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/jan-thumb-m.webp'); background-color: rgba(0, 0, 0, 0.6)`"
-    x-intersect.once="lazyLoad = true">
-</div> --}}
    
 
     @include('musora.sales.components.reason-cards-section', [

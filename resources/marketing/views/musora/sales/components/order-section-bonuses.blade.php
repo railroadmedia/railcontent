@@ -6,7 +6,10 @@
     @endif
 >
 <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
-        @if(empty($bgColor)) style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/musora/membership/homepage/2023/order-bg-tile-2.png') center center/160px;" @endif >
+        @if(empty($bgColor))
+        :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" 
+        :style="`background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/2024/order-bg-tile-2.webp') center center/160px;`" @endif
+        x-intersect.once="lazyLoad = true">
     <div class="container mx-auto relative z-50 @if(!empty($max5)) max-w-5xl @else max-w-6xl @endif">
         <div class="w-full">
             @if(!empty($promoLogo))
@@ -27,7 +30,10 @@
                     <div class=" inline-block relative w-full group" style="padding-bottom: 45%;perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div class=" {{--border-2 border-musora--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <div class="h-full w-full bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=850,quality=95/{{ $topImage }}');"></div>
+                                <div class="h-full w-full bg-top bg-cover"
+                                     :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" 
+                                     :style="`background-image:url('{{ $topImage }}');`"
+                                     x-intersect.once="lazyLoad = true"></div>
                             </div>
                         </div>
                     </div>
@@ -76,7 +82,10 @@
                                     @if(!empty($bonus['badge']))
                                         <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} font-bebas uppercase">{{ $bonus['badge'] }}</h6>
                                     @endif
-                                    <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/{{ $bonus['image'] }}');"></div>
+                                    <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover"
+                                         :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" 
+                                         :style="`background-image:url('{{ $bonus['image'] }}');`"
+                                         x-intersect.once="lazyLoad = true"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>

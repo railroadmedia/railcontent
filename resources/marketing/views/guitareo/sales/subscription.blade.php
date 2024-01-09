@@ -141,7 +141,8 @@
 @section('body-data')
     x-data ='{
         soundslice : false,
-        trailer : false
+        trailer : false,
+        lazyLoad : false,
     }'
 @endsection
 

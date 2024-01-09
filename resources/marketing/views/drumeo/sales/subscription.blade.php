@@ -136,6 +136,7 @@
     x-data ='{
         soundslice : false,
         trailer : false,
+        lazyLoad: false,
     }'
 @endsection
 

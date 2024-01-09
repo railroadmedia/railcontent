@@ -15,7 +15,7 @@
                     {!! $header !!}
                 @endif
             </strong></h2>
-        <img class="h-11 my-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/musora/membership/homepage/2024/stars.png">
+        <img class="h-11 my-3 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/musora/membership/homepage/2024/stars.png">
         <p class="mx-auto mb-7">
             Rated 4.8/5 based on <strong class="font-black">
                 @if($theme == 'drumeo')
@@ -81,7 +81,9 @@
                                     <div class="w-full rounded-xl p-6 text-white flex flex-wrap sm:flex-nowrap transition-colors duration-300 active-bg"
                                         style="background-color:#0C1524;">
                                         <div class="w-full @if(!empty($testimonial['video'])) sm:w-1/2 cursor-pointer @else sm:w-1/2 @endif flex-shrink-0 bg-cover bg-center rounded-xl relative h-56 sm:h-80 lg:h-[32rem]"
-                                            style="background-image:url('{{$testimonial['image']}}');"
+                                             :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                                             :style="`background-image:url('{{$testimonial['image']}}'); background-color: rgba(0, 0, 0, 0.6)`"
+                                             x-intersect.once="lazyLoad = true"
                                             @if(!empty($testimonial['video']))
                                                 x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
                                             @endif
@@ -91,7 +93,7 @@
                                             <h3 class="leading-normal mt-3 sm:mt-0 mb-2"><em>{!! $testimonial['title'] !!}</em></h3>
                                             <div class="flex items-center">
                                                 @if(!empty($testimonial['avatar']))
-                                                    <img class="h-16 w-16 rounded-full object-cover mr-4 border-4 border-{{ $theme }}" src="{{$testimonial['avatar']}}">
+                                                    <img class="h-16 w-16 rounded-full object-cover mr-4 border-4 border-{{ $theme }} opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="{{$testimonial['avatar']}}">
                                                 @endif
                                                 <div class="">
                                                     <p class="leading-tight mx-0 font-black">{{ $testimonial['name'] }}</p>
@@ -116,7 +118,10 @@
                         <div class="relative mb-2 w-full overflow-hidden rounded-xl cursor-pointer" style="padding-bottom: 66%;"
                             x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
                         >
-                            <div class="absolute inset-0 bg-cover bg-top" style="background-image:url({{$testimonial['image']}});"></div>
+                            <div class="absolute inset-0 bg-cover bg-top"
+                                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" 
+                                :style="`background-image:url({{$testimonial['image']}}); background-color: rgba(0, 0, 0, 0.6)`"
+                                x-intersect.once="lazyLoad = true"></div>
                             <div class="absolute inset-0 flex justify-center align-center">
                                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if(!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
                             </div>
@@ -186,7 +191,7 @@
             @component('_partials.components.modal', ['name' => str_replace(' ', '', $testimonial['name'])])
                 @slot('content')
                     <div class="overflow-hidden rounded-xl max-w-sm mx-auto">
-                        <img src="{{$testimonial['image']}}" alt="{{$testimonial['name']}}" />
+                        <img class="opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="{{$testimonial['image']}}" alt="{{$testimonial['name']}}" />
                         <div class="bg-white p-4">
                             <h2 class="leading-none font-bebas">{{$testimonial['name']}}</h2>
                             <p class="text-coaches uppercase mx-auto mb-3 md:mb-2">{!!  $testimonial['location'] !!}</p>

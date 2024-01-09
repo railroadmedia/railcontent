@@ -16,12 +16,10 @@
 
     <meta property="og:url" content="https://www.musora.com">
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.webp">
-
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js"></script>
     
     <style>
         .join {
@@ -326,6 +324,7 @@
         guitareoSoundslice: false,
         singeoSoundslice: false,
         trailer: false,
+        lazyLoad: false,
     }'
 @endsection
 
