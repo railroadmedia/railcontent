@@ -1363,7 +1363,7 @@ class ContentRepository extends RepositoryBase
                     ->restrictByFields($this->requiredFields)
                     ->includeByFields($this->includedFields)
                     ->restrictByUserStates($this->requiredUserStates)
-                    ->directPaginate($this->page, $this->limit)
+
                     ->groupByField($this->groupByFields);
             $query = $subQuery;
 
@@ -1373,7 +1373,8 @@ class ContentRepository extends RepositoryBase
                         ->selectPrimaryColumns()
                         ->addSelect('inner_content.lessons_grouped_by_field as lessons_grouped_by_field')
                         ->addSubJoinToQuery($subQuery)
-                        ->orderBy($this->orderBy, $this->orderDirection);
+                        ->directPaginate($this->page, $this->limit)
+                        ->orderBy('slug', 'asc');
                 $contentRows = $query->getToArray();
                 $contentIds = $this->getGroupByContentIds($contentRows);
                 $dataLookup = $this->getContentLookupByIds($contentIds);
