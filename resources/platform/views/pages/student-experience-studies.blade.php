@@ -289,29 +289,24 @@
             const formData = new FormData(this);
             const formID = '9e8885d4ad1545a';
             const siteID = `{{ config('customer-io.accounts.musora.site_id') }}`;
-
             fetch(`https://track.customer.io/api/v1/forms/${formID}/submit`, {
                 method: 'POST',
                 body: JSON.stringify(Object.fromEntries(formData)),
                 headers: {
                     'Accept': 'application/json',
-                    'Authorization': 'Basic ' + btoa(siteID) //Encode site ID
+                    'Authorization': 'Basic ' + btoa(siteID)
                 }
             })
-            .then(response => {
-                if (!response.ok) { throw new Error('Network response was not ok') }
-                return response.json();
-            })
+            .then(response => response.ok ? response.json() : Promise.reject('Network response was not ok'))
             .then(data => {
-                console.log('Success:', data);
-                // Redirect or handle success
                 document.querySelector('#stc-form-wrapper').classList.add('tw-hidden');
                 document.querySelector('#stc-confirmation').classList.remove('tw-hidden');
             })
-            .catch((error) => {
-                submitButton.innerHTML = `Submit`;
+            .catch(error => {
+                submitButton.innerHTML = 'Submit';
                 console.error('Error:', error);
             });
+
         });
     </script>
 @endsection
