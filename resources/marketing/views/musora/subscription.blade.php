@@ -422,7 +422,14 @@
             'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
         ])
     @endif
-    @include('musora._partials.order-section-collage')
+    @include('musora.sales.components.order-section-collage', [
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/210x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/musora_logo.webp',
+    'header' => 'Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.',
+    'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Personalized feedback from real teachers.</li>
+    <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',
+    'image' => 'marketing/musora/membership/homepage/webp-format/musora-m-team2.webp',
+    ])
 
     @include('musora.sales.components.app-section', [
         'image' => 'marketing/musora/membership/homepage/2024/devices2.webp',
