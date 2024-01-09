@@ -54,6 +54,8 @@ class RailcontentV2DataSyncingService
             'length_in_seconds' => 'length_in_seconds',
             'live_event_start_time' => 'live_event_start_time',
             'live_event_end_time' => 'live_event_end_time',
+            'enrollment_start_time' => 'enrollment_start_time',
+            'enrollment_end_time' => 'enrollment_end_time',
             'live_event_youtube_id' => 'live_event_youtube_id',
             'live_stream_feed_type' => 'live_stream_feed_type',
             'low_soundslice_slug' => 'low_soundslice_slug',

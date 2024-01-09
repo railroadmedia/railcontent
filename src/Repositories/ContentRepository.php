@@ -2392,13 +2392,13 @@ class ContentRepository extends RepositoryBase
         ];
 
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
-            'data',
-            'instructor',
-            'style',
-            'topic',
-            'focus',
-            'bpm',
-        ];
+                'data',
+                'instructor',
+                'style',
+                'topic',
+                'focus',
+                'bpm',
+            ];
 
         // we always need the related data
         if (!in_array('data', $filterOptions)) {
@@ -2452,18 +2452,20 @@ class ContentRepository extends RepositoryBase
         if (!empty($groupBy)) {
             $joinTablesQuery->groupBy($groupBy);
         } else {
-            return [];
+            $joinTablesQuery->select(['railcontent_content.id']);
         }
 
         $tableResults = $joinTablesQuery->get();
+        $countingQueryResults = collect([]);
+        if (self::$countFilterOptionItems) {
+            $countingQuery->addSelect(
+                ['railcontent_content.id']
+            );
+            $groupBy[] = 'id';
+            $countingQuery->groupBy($groupBy);
 
-        $countingQuery->addSelect(
-            ['railcontent_content.id']
-        );
-        $groupBy[] = 'id';
-        $countingQuery->groupBy($groupBy);
-
-        $countingQueryResults = $countingQuery->get();
+            $countingQueryResults = $countingQuery->get();
+        }
 
         $counts = [];
         foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
@@ -2498,7 +2500,7 @@ class ContentRepository extends RepositoryBase
         }
 
         // todo: handle instructors which need to be pulled from matching content rows
-        if (!empty($filterOptionsArray['instructor_id'])) {
+        if (!empty($filterOptionsArray['instructor_id']) && in_array('instructor', $filterOptions)) {
             $instructorRows = $this->query()
                 ->select(['railcontent_content.id as id', 'name', 'value as head_shot_picture_url'])
                 ->leftJoin(
@@ -2548,9 +2550,9 @@ class ContentRepository extends RepositoryBase
             'instrument' => ConfigService::$tableContent . '.instrument',
             'content_id' => ConfigService::$tableContent . '.id',
         ];
-        $contentTableQueryCount = ($contentTableQuery->get());
+
         $contentTableQuery->addSelect(
-            ['railcontent_content.id as id']
+            [ 'railcontent_content.id as id']
         );
         $contentTableQuery->groupBy($filterOptionNameToContentTableColumnName)
             ->select($filterOptionNameToContentTableColumnName);
@@ -3054,7 +3056,7 @@ class ContentRepository extends RepositoryBase
             'instrument' => ConfigService::$tableContent . '.instrument',
             'content_id' => ConfigService::$tableContent . '.id',
         ];
-        $contentTableQueryCount = ($contentTableQuery->get());
+
         $contentTableQuery->addSelect(
             ['railcontent_content.id as id']
         );
