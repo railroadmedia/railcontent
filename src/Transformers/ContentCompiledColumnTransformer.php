@@ -155,7 +155,7 @@ class ContentCompiledColumnTransformer
         return $contentRows;
     }
 
-    public function transformLessons(array $contentRows = null)
+    public function transformLessons(array $contentRows, array $dataLookup)
     {
         $dataKeys = config('railcontent.compiled_column_mapping_data_keys', []);
         $fieldKeys = config('railcontent.compiled_column_mapping_field_keys', []);
@@ -163,14 +163,14 @@ class ContentCompiledColumnTransformer
 
         foreach($contentRows as $contentRowIndex => $contentRow){
             $lessons = $contentRow['lessons_grouped_by_field'] ?? [];
-            $contentRowCompiledColumnValues = json_decode($lessons ?? '', true);
-            $contentRowCompiledColumnValues = (array_combine(Arr::pluck($contentRowCompiledColumnValues,'id'),$contentRowCompiledColumnValues));
-            $allLessonsCount = count($contentRowCompiledColumnValues);
-            $contentRowCompiledColumnValues = (array_slice($contentRowCompiledColumnValues,0,5));
+            $lessonContentIds = json_decode($lessons ?? '', true);
+            $lessonContentIds = array_unique($lessonContentIds);
+            $allLessonsCount = count($lessonContentIds);
+            $lessonContentIds = (array_slice($lessonContentIds,0,5));
             $contentRows[$contentRowIndex]['all_lessons_count'] = $allLessonsCount;
 
 
-            if (empty($contentRowCompiledColumnValues)) {
+            if (empty($lessonContentIds)) {
                 continue;
             }
 
@@ -178,10 +178,13 @@ class ContentCompiledColumnTransformer
             $dataKeyCounts = [];
 
             foreach ($dataKeys as $dataKey) {
-                foreach($contentRowCompiledColumnValues as $index=>$contentRowCompiledColumnValue) {
-                    if(isset($contentRowCompiledColumnValue['compiled_view_data'])) {
+                foreach($lessonContentIds as $index=>$contentId) {
+                    $data = $dataLookup[$contentId] ?? [];
+                    $contentRowCompiledColumnValue = json_decode($data['compiled_view_data'] ?? '', true);
+
+                    if(isset($data['compiled_view_data'])) {
                         foreach (
-                            $contentRowCompiledColumnValue['compiled_view_data'] as $compiledDataKey =>
+                            $contentRowCompiledColumnValue as $compiledDataKey =>
                             $compiledDataValue
                         ) {
                             if (in_array(
@@ -203,10 +206,10 @@ class ContentCompiledColumnTransformer
                                     $dataKeyCounts[$dataKey]++;
                                     $contentRows[$contentRowIndex]['lessons'][$index]['data'][] = [
                                         'id' => substr(md5(mt_rand()), 0, 10),
-                                        'content_id' => $contentRowCompiledColumnValue['compiled_view_data']['id'],
+                                        'content_id' => $contentRowCompiledColumnValue['id'],
                                         'key' => $dataKey,
                                         'value' => $compiledDataSingleValue,
-                                        'position' => 1
+                                        'position' => $dataKeyCounts[$dataKey],
                                     ];
                                 }
                             }
@@ -219,10 +222,12 @@ class ContentCompiledColumnTransformer
             $fieldKeyCounts = [];
 
             foreach ($fieldKeys as $fieldKey) {
-                foreach($contentRowCompiledColumnValues as $index=>$contentRowCompiledColumnValue) {
-                    if(isset($contentRowCompiledColumnValue['compiled_view_data'])) {
+                foreach($lessonContentIds as $index=>$contentId) {
+                    $contentRowCompiledColumnValue = json_decode($data['compiled_view_data'] ?? '', true);
+
+                    if(isset($contentRowCompiledColumnValue)) {
                         foreach (
-                            $contentRowCompiledColumnValue['compiled_view_data'] as $compiledFieldKey =>
+                            $contentRowCompiledColumnValue as $compiledFieldKey =>
                             $compiledFieldValue
                         ) {
                             if (!isset($fieldKeyCounts[$fieldKey])) {
@@ -237,11 +242,11 @@ class ContentCompiledColumnTransformer
 
                                     $contentRows[$contentRowIndex]['lessons'][$index]['fields'][] = [
                                         'id' => substr(md5(mt_rand()), 0, 10),
-                                        'content_id' => $contentRowCompiledColumnValue['compiled_view_data']['id'],
+                                        'content_id' => $contentRowCompiledColumnValue['id'],
                                         'key' => $fieldKey,
                                         'value' => $compiledFieldSingleValue,
                                         'type' => 'string',
-                                        'position' => 1,
+                                        'position' => $fieldKeyCounts[$fieldKey],
                                     ];
                                     if (self::$avoidDuplicates) {
                                         unset($contentRows[$contentRowIndex][$fieldKey]);
@@ -257,11 +262,11 @@ class ContentCompiledColumnTransformer
 
                                     $contentRows[$contentRowIndex]['lessons'][$index]['fields'][] = [
                                         'id' => substr(md5(mt_rand()), 0, 10),
-                                        'content_id' => $contentRowCompiledColumnValue['compiled_view_data']['id'],
+                                        'content_id' => $contentRowCompiledColumnValue['id'],
                                         'key' => $fieldKey,
                                         'value' => $contentEntity,
                                         'type' => 'content',
-                                        'position' => 1,
+                                        'position' => $fieldKeyCounts[$fieldKey],
                                     ];
                                     if (self::$avoidDuplicates) {
                                         unset($contentRows[$contentRowIndex][$fieldKey]);
@@ -280,11 +285,11 @@ class ContentCompiledColumnTransformer
 
                                         $contentRows[$contentRowIndex]['lessons'][$index]['fields'][] = [
                                             'id' => substr(md5(mt_rand()), 0, 10),
-                                            'content_id' => $contentRowCompiledColumnValue['compiled_view_data']['id'],
+                                            'content_id' => $contentRowCompiledColumnValue['id'],
                                             'key' => $fieldKey,
                                             'value' => $contentEntity,
                                             'type' => 'content',
-                                            'position' => 1,
+                                            'position' => $fieldKeyCounts[$fieldKey],
                                         ];
                                     }
                                     if (self::$avoidDuplicates) {
