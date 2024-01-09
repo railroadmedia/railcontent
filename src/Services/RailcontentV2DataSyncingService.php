@@ -54,6 +54,8 @@ class RailcontentV2DataSyncingService
             'length_in_seconds' => 'length_in_seconds',
             'live_event_start_time' => 'live_event_start_time',
             'live_event_end_time' => 'live_event_end_time',
+            'enrollment_start_time' => 'enrollment_start_time',
+            'enrollment_end_time' => 'enrollment_end_time',
             'live_event_youtube_id' => 'live_event_youtube_id',
             'live_stream_feed_type' => 'live_stream_feed_type',
             'low_soundslice_slug' => 'low_soundslice_slug',
@@ -166,7 +168,7 @@ class RailcontentV2DataSyncingService
 
         foreach ($contentRows as $contentRow) {
             $contentFieldRows = $contentsFieldRows[$contentRow->id] ?? [];
-            $contentLengthInSecondsField = $contentsLengthInSecondsFields[$contentRow->id] ?? null;
+            $contentLengthInSecondsField = $contentsLengthInSecondsFields[$contentRow->video] ?? null;
 
             // fields first
             foreach ($this->fieldNameToContentColumnNameMap as $fieldName => $contentColumnName) {
@@ -238,7 +240,7 @@ class RailcontentV2DataSyncingService
                         $tableRowsToInsert[$tableName][] = [
                             'content_id' => $contentRow->id,
                             $fieldAndColumnName => $contentFieldRow->value,
-                            'position' => $contentFieldRow->position,
+                            'position' => $contentFieldRow->position ?? 1,
                         ];
                     }
                 }

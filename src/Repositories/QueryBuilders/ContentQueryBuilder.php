@@ -197,10 +197,10 @@ class ContentQueryBuilder extends QueryBuilder
 //            We make sure not to show the 'scheduled' content that is already in the past
 //              SQL condition:  "where ((status in (published)) or (status = 'scheduled' and published_on > $now))"
             $this->where(function (Builder $builder) {
-                return $builder->whereIn('status', array_diff(ContentRepository::$availableContentStatues, [ContentService::STATUS_SCHEDULED]))
+                return $builder->whereIn(ConfigService::$tableContent.'.status', array_diff(ContentRepository::$availableContentStatues, [ContentService::STATUS_SCHEDULED]))
                     ->orWhere(function (Builder $builder) {
-                        return $builder->where('status', 'scheduled')
-                            ->where('published_on', '>', Carbon::now()->toDateTimeString());
+                        return $builder->where(ConfigService::$tableContent.'.status', '=','scheduled')
+                            ->where(ConfigService::$tableContent.'.published_on', '>', Carbon::now()->toDateTimeString());
                     });
             });
         }
@@ -400,45 +400,52 @@ class ContentQueryBuilder extends QueryBuilder
 
         // set the joins first, then we'll add the where's after
         foreach ($requiredFieldsGroupedByTable as $name => $requiredFieldDataGrouped) {
-            if ($requiredFieldDataGrouped[0]['is_content_column']) {
-                $this->where(
-                    'railcontent_content.'.$requiredFieldDataGrouped[0]['name'],
-                    $requiredFieldDataGrouped[0]['operator'],
-                    is_numeric($requiredFieldDataGrouped[0]['value']) ? DB::raw($requiredFieldDataGrouped[0]['value']) :
-                        DB::raw(
-                            DB::connection()
-                                ->getPdo()
-                                ->quote($requiredFieldDataGrouped[0]['value'])
-                        )
-                );
-            } elseif (!empty($requiredFieldDataGrouped[0]['associated_table'])) {
-                $this->leftJoin(
-                    $requiredFieldDataGrouped[0]['associated_table']['table'].
-                    ' as '.
-                    $requiredFieldDataGrouped[0]['associated_table']['alias'],
-                    $requiredFieldDataGrouped[0]['associated_table']['alias'].'.content_id',
-                    '=',
-                    ConfigService::$tableContent.'.id'
-                );
-                $this->where(function (Builder $builder) use (
-                    $requiredFieldDataGrouped
-                ) {
-                    foreach ($requiredFieldDataGrouped as $requiredFieldGroup) {
+
+                if ($requiredFieldDataGrouped[0]['is_content_column']) {
+                    foreach($requiredFieldDataGrouped as $requiredFieldGroup) {
                         $this->where(
-                            $requiredFieldGroup['associated_table']['alias'].
-                            '.'.
-                            $requiredFieldGroup['associated_table']['column'],
+                            'railcontent_content.' . $requiredFieldGroup['name'],
                             $requiredFieldGroup['operator'],
-                            is_numeric($requiredFieldGroup['value']) ? DB::raw($requiredFieldGroup['value']) :
-                                DB::raw(
-                                    DB::connection()
-                                        ->getPdo()
-                                        ->quote($requiredFieldGroup['value'])
-                                )
+                            is_numeric($requiredFieldGroup['value']) ?
+                                DB::raw($requiredFieldGroup['value']) : DB::raw(
+                                DB::connection()
+                                    ->getPdo()
+                                    ->quote($requiredFieldGroup['value'])
+                            )
                         );
                     }
-                });
-            };
+                } elseif (!empty($requiredFieldDataGrouped[0]['associated_table'])) {
+                    $field =
+                        $requiredFieldDataGrouped[0]['field'] ? $requiredFieldDataGrouped[0]['field'] : 'content_id';
+                    $this->leftJoin(
+                        $requiredFieldDataGrouped[0]['associated_table']['table'] .
+                        ' as ' .
+                        $requiredFieldDataGrouped[0]['associated_table']['alias'],
+                        $requiredFieldDataGrouped[0]['associated_table']['alias'] . '.' . $field,
+                        '=',
+                        ConfigService::$tableContent . '.id'
+                    );
+
+                    $this->where(function (Builder $builder) use (
+                        $requiredFieldDataGrouped
+                    ) {
+                        foreach ($requiredFieldDataGrouped as $requiredFieldGroup) {
+                            $this->where(
+                                $requiredFieldGroup['associated_table']['alias'] .
+                                '.' .
+                                $requiredFieldGroup['associated_table']['column'],
+                                $requiredFieldGroup['operator'],
+                                is_numeric($requiredFieldGroup['value']) ? DB::raw($requiredFieldGroup['value']) :
+                                    DB::raw(
+                                        DB::connection()
+                                            ->getPdo()
+                                            ->quote($requiredFieldGroup['value'])
+                                    )
+                            );
+                        }
+                    });
+                }
+
         }
 
         return $this;
@@ -551,6 +558,13 @@ class ContentQueryBuilder extends QueryBuilder
                         'id_content_permissions'.'.permission_id'
                     );
                 })
+                    ->orWhere(function (Builder $builder) {
+                        return $builder->where(function (Builder $builder) {
+                            return $builder->where(
+                                'enrollment_end_time', '>=', Carbon::now()->toDateTimeString()
+                            );
+                        });
+                            })
                     ->orWhereExists(function (Builder $builder) use ($membershipPermissionIds) {
                         return $builder->select('id')
                             ->from(ConfigService::$tableUserPermissions)
@@ -748,7 +762,64 @@ class ContentQueryBuilder extends QueryBuilder
                 ConfigService::$tableContent.'.id'
             );
         })
-            ->whereIn(ConfigService::$tablePlaylistContents.'.user_playlist_id', ContentRepository::$includedInPlaylistsIds);
+            ->whereIn(
+                ConfigService::$tablePlaylistContents.'.user_playlist_id',
+                ContentRepository::$includedInPlaylistsIds
+            );
+
+        return $this;
+    }
+
+    public function groupByField($groupBy)
+    {
+        $isTableContent = $groupBy['is_content_column'] ?? false;
+
+        if ($isTableContent) {
+            $field = $groupBy['field'];
+            $this->addSelect([
+                                 $this->raw(ConfigService::$tableContent.'.'.$field.' as '.$field),
+                                 $this->raw(ConfigService::$tableContent.'.'.$field.' as grouped_by_field'),
+
+                                 DB::raw(
+                                     "( 
+           JSON_ARRAYAGG(
+            id
+        ) ) as lessons_grouped_by_field"
+                                 ),
+                             ])
+                ->whereNotNull(ConfigService::$tableContent.'.'.$field)
+                ->groupBy(ConfigService::$tableContent.'.'.$field);
+
+            return $this;
+        }
+
+        if(empty($groupBy['associated_table']))
+        {
+            return $this;
+        }
+
+        $table = $groupBy['associated_table']['table'];
+        $field = $groupBy['associated_table']['column'];
+        $alias = $groupBy['associated_table']['alias'];
+
+        $this->addSelect([
+                             $this->raw($alias.'.'.$field.' as grouped_by_field'),
+                             $this->raw($alias.'.'.$field.' as id'),
+                             DB::raw(
+                                 "( 
+           JSON_ARRAYAGG(
+            ".$alias.".content_id      
+        ) ) as lessons_grouped_by_field"
+                             ),
+                         ])
+            ->join(
+                $table.' as '.$alias,
+                $alias.'.'.'content_id',
+                '=',
+                ConfigService::$tableContent.'.id'
+            )
+            ->whereNotNull($alias.'.'.$field)
+            ->groupBy($alias.'.'.$field);
 
         return $this;
     }

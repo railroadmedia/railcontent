@@ -68,7 +68,9 @@ class ContentJsonController extends Controller
         if ($request->has('include_future_content')) {
             ContentRepository::$pullFutureContent = $request->has('include_future_content');
         }
-
+        if ($request->has('count_filter_items')) {
+            ContentRepository::$countFilterOptionItems = $request->has('count_filter_items');
+        }
         $futureScheduledContentOnly = false;
         if ($request->has('include_future_scheduled_content_only') && $request->get('include_future_scheduled_content_only') != 'false') {
             ContentRepository::$pullFutureContent = true;
@@ -100,7 +102,21 @@ class ContentJsonController extends Controller
         }
 
         $contentTypes = $request->get('included_types', []);
-
+        if($request->get('tab', false)){
+            $tabs = $request->get('tab');
+            if(!is_array($request->get('tab'))){
+                $tabs = [$request->get('tab')];
+            }
+            foreach($tabs as $tab) {
+                $extra = explode(',', $tab);
+                if ($extra['0'] == 'group_by') {
+                    $group_by = $extra['1'];
+                }
+                if ($extra['0'] == 'duration') {
+                    $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
+                }
+            }
+        }
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 10),
@@ -116,12 +132,13 @@ class ContentJsonController extends Controller
             false,
             true,
             $request->get('only_subscribed', false),
-            $futureScheduledContentOnly
+            $futureScheduledContentOnly,
+            $group_by ?? false,
         );
 
         $filters = $contentData['filter_options'];
-
-        // Add "All" option, but not in all cases
+        if(!$request->has('count_filter_items'))
+        {// Add "All" option, but not in all cases
         foreach ($filters as $key => $filterOptions) {
             if (is_array($filterOptions)) {
                 $filtersToExclude = ['content_type', 'instructor', 'focus', 'style'];
@@ -142,6 +159,7 @@ class ContentJsonController extends Controller
                     array_unshift($filters[$key], 'All');
                 }
             }
+        }
         }
 
         return reply()->json($contentData['results'], [
