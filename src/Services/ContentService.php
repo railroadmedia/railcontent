@@ -232,7 +232,7 @@ class ContentService
      * @param int limit -
      * @return mixed|Collection|null
      */
-    public function getSongRecommendations($user_id, $brand, $contentTypes, $limit=6)
+    public function getRecommendationsByContenType($user_id, $brand, $contentTypes, RecommenderSection $section, bool $randomize=false, $limit=6)
     {
         $filter = $this->contentRepository->startFilter(
             1,
@@ -244,14 +244,36 @@ class ContentService
             [],
         );
         $filterOptions = $this->getFilterOptions($filter, true, $contentTypes);
-        $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, RecommenderSection::Song);
-        $recommendations = array_slice($recommendations,0, $limit);
+        $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $section);
+        if ($randomize) {
+            $recommendations = $this->randomizeRecommendations($recommendations, $limit);
+        } else {
+            $recommendations = array_slice($recommendations, 0, $limit);
+        }
         $content = $this->getByIds($recommendations);
         return (new ContentFilterResultsEntity([
             'results' => $content,
             'filter_options' => $filterOptions,
             'total_results' => $filter->countFilter()
         ]));
+    }
+
+    private function randomizeRecommendations($recommendations, $limit=6, $useHourly=true)
+    {
+        if ($limit > count($recommendations)) {
+            return $recommendations;
+        }
+        if ($useHourly) {
+            // deterministic random: results will be the same for each hour of the day
+            // no caching involved :)
+            $hour = date("H");
+            srand($hour);
+            $temp =  array_rand($recommendations, $limit);
+            srand(mktime());
+            return $temp;
+        } else {
+            return array_rand($recommendations, $limit);
+        }
     }
 
     /**

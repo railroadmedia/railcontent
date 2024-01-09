@@ -16,6 +16,10 @@ class RecommendationService
         private DatabaseManager $databaseManager,
     ) {
         $this->usePDO = true;
+        $this->invalidConfigurations = [
+            'pianote' => [RecommenderSection::Course],
+            'singeo' => [RecommenderSection::Course],
+        ];
     }
 
     public function getRawTable()
@@ -32,11 +36,19 @@ class RecommendationService
 
     public function getFilteredRecommendations($userID, $brand, RecommenderSection $section)
     {
+        if ($this->hasNoResults($brand, $section)) {
+            return [];
+        }
         if ($this->usePDO) {
             return  $this->getFilteredRecommendationsUsingPDO($userID, $brand, $section);
         } else {
             return  $this->getFilteredRecommendationsUsingDBHandler($userID, $brand, $section);
         }
+    }
+
+    private function hasNoResults($brand, RecommenderSection $section): bool
+    {
+        return in_array($section, $this->invalidConfigurations[$brand]);
     }
 
     private function getFilteredRecommendationsUsingPDO($userID, $brand, RecommenderSection $section)
