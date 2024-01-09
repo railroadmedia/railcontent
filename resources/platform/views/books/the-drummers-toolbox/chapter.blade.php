@@ -19,9 +19,7 @@ if(!empty($user)){
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
             <div class="flex flex-row">
                 <a
-                    href="{{ url()->route(
-                        $isDigital ? 'books.digital.drummers-toolbox' : 'books.drummers-toolbox'
-                    ) }}"
+                    href="/drumeo/{{ $isDigital ? 'drummers-toolbox-digital' : 'drummers-toolbox' }}"
                     aria-label="Back to All"
                     class="tw-text-white no-decoration tiny uppercase pa-1"
                 >
