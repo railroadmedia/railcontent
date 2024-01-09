@@ -24,9 +24,9 @@ class RevenueCatWebHookSync extends Command
             for ($i = $index; $i < $end; $i++) {
                 $this->info("ecommerce:RevenueCatWebhookSync: Parsing line $i");
                 try {
-                    $test = explode("\",\"", $data[$i])[2];
-                    $test2 = explode(",200,", $test)[0];
-                    $event = substr($test2, 0, -1);
+                    $event = explode("\",\"", $data[$i])[2];
+                    $event = explode(",200,", $event)[0];
+                    $event = substr($event, 0, -1);
                     $event = str_replace("\"\"", "\"", $event);
                     $decodedEvent = json_decode($event, true);
 
