@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Railroad\Referral\Services\ReferralService;
 
@@ -22,12 +23,14 @@ class ReferralPagesController extends BaseController
         $this->referralService = $referralService;
     }
 
-    public function inviteAFriend(): Factory|View|Application
+    public function inviteAFriend(Request $request): Factory|View|Application
     {
+        $user = user();
+        $brand = brand();
         $referrer = $this->referralService->getOrCreateReferrer(
-            user()->id,
-            config('referral.saasquatch_referral_program_id.' . brand()),
-            brand()
+            $user->id,
+            config('referral.saasquatch_referral_program_id.' . $brand),
+            $brand
         );
 
         $referralsPerUser = $this->referralService->getReferralsPerUser();
@@ -35,8 +38,8 @@ class ReferralPagesController extends BaseController
         try {
             Avo::referral_page_viewed(
                 AvoHelper::defaultEventProperties(
-                    ['referral_code' => $referrer->referral_code, 'brand' => $referrer->brand],
-                    user()
+                    ['referral_code' => $referrer->referral_code, 'brand' => $brand],
+                    $user
                 )
             );
         } catch (Exception $e) {

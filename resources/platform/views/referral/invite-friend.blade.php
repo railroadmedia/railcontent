@@ -73,7 +73,8 @@
                                 "Content-Type": "application/json",
                             },
                             body: JSON.stringify({
-                                _token: '{{ csrf_token() }}'
+                                _token: '{{ csrf_token() }}',
+                                brand,
                             }),
                         });
                     })
@@ -96,7 +97,8 @@
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    _token: '{{ csrf_token() }}'
+                    _token: '{{ csrf_token() }}',
+                    brand: document.getElementById('brand').value
                 }),
             });
         }

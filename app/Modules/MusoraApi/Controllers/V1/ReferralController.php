@@ -21,17 +21,20 @@ class ReferralController
 
     public function linkCopied(Request $request): JsonResponse
     {
+        ['brand' => $brand] = $request->validate(['brand' => 'required|string']);
+
         try {
+            $user = user();
             $referrer = $this->referralService->getReferrer(
-                user()->id,
-                config('referral.saasquatch_referral_program_id.' . brand()),
-                brand()
+                $user->id,
+                config('referral.saasquatch_referral_program_id.' . $brand),
+                $brand
             );
 
             Avo::referral_link_copied(
                 AvoHelper::defaultEventProperties(
-                    ['referral_code' => $referrer->referral_code, 'brand' => brand()],
-                    user()
+                    ['referral_code' => $referrer->referral_code, 'brand' => $brand],
+                    $user
                 )
             );
         } catch (Exception $e) {
@@ -44,17 +47,20 @@ class ReferralController
 
     public function inviteSent(Request $request): JsonResponse
     {
+        ['brand' => $brand] = $request->validate(['brand' => 'required|string']);
+
         try {
+            $user = user();
             $referrer = $this->referralService->getReferrer(
-                user()->id,
-                config('referral.saasquatch_referral_program_id.' . brand()),
-                brand()
+                $user->id,
+                config('referral.saasquatch_referral_program_id.' . $brand),
+                $brand
             );
 
             Avo::referral_invite_sent(
                 AvoHelper::defaultEventProperties(
-                    ['referral_code' => $referrer->referral_code, 'brand' => brand()],
-                    user()
+                    ['referral_code' => $referrer->referral_code, 'brand' => $brand],
+                    $user
                 )
             );
         } catch (Exception $e) {
