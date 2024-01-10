@@ -209,7 +209,7 @@ class ContentCompiledColumnTransformer
                                         'content_id' => $contentRowCompiledColumnValue['id'],
                                         'key' => $dataKey,
                                         'value' => $compiledDataSingleValue,
-                                        'position' => $dataKeyCounts[$dataKey],
+                                        'position' => 1,
                                     ];
                                 }
                             }
@@ -246,7 +246,7 @@ class ContentCompiledColumnTransformer
                                         'key' => $fieldKey,
                                         'value' => $compiledFieldSingleValue,
                                         'type' => 'string',
-                                        'position' => $fieldKeyCounts[$fieldKey],
+                                        'position' => 1,
                                     ];
                                     if (self::$avoidDuplicates) {
                                         unset($contentRows[$contentRowIndex][$fieldKey]);
@@ -266,7 +266,7 @@ class ContentCompiledColumnTransformer
                                         'key' => $fieldKey,
                                         'value' => $contentEntity,
                                         'type' => 'content',
-                                        'position' => $fieldKeyCounts[$fieldKey],
+                                        'position' => 1,
                                     ];
                                     if (self::$avoidDuplicates) {
                                         unset($contentRows[$contentRowIndex][$fieldKey]);
@@ -289,7 +289,7 @@ class ContentCompiledColumnTransformer
                                             'key' => $fieldKey,
                                             'value' => $contentEntity,
                                             'type' => 'content',
-                                            'position' => $fieldKeyCounts[$fieldKey],
+                                            'position' => 1,
                                         ];
                                     }
                                     if (self::$avoidDuplicates) {
