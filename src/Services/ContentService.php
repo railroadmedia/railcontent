@@ -268,9 +268,9 @@ class ContentService
             // no caching involved :)
             $hour = date("H");
             srand($hour);
-            $temp =  array_rand($recommendations, $limit);
+            $randomKeys =  array_rand($recommendations, $limit);
             srand(time());
-            return $recommendations[$temp];
+            return array_intersect_key($recommendations, array_flip($randomKeys));
         } else {
             return array_rand($recommendations, $limit);
         }
