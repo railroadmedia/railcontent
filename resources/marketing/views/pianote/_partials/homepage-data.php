@@ -34,25 +34,25 @@
         'slides' => [
             [
                 'desc' => 'Pianote is a really fun resource for those wishing to pick up tips and tricks and gain perspective. ',
-                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/feature-testimonial-yvette.webp',
+                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/feature-testimonial-yvette.webp',
                 'name' => 'Yvette Young',
                 'credit' => ' Multi-Instrumentalist',
             ],
             [
                 'desc' => 'Incredibly thorough online piano course that seeks to help you learn at your speed.',
-                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/as-logo.webp',
+                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/as-logo.webp',
                 'name' => 'American Songwriter',
                 'credit' => 'Music Magazine',
             ],
             [
                 'desc' => 'You should check out Pianote. If you’re a beginner or intermediate, this is ideal for you!',
-                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/feature-testimonial-ali.webp',
+                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/feature-testimonial-ali.webp',
                 'name' => 'Ali Spagnola',
                 'credit' => ' YouTube Entertainer',
             ],
             [
                 'desc' => 'Whether you’re getting your head around “Chopsticks” or brushing up on your Shostakovich, there should be a lesson for you.',
-                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/feature-testimonial-musicradar.webp',
+                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/feature-testimonial-musicradar.webp',
                 'name' => 'MusicRadar',
                 'credit' => ' Website For Musicians',
             ],
@@ -300,7 +300,7 @@
         "testimonials" => [
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Tonya-Hotz-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Tonya-Hotz-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Tonya-Hotz-profile.webp",
                 "name" => "Tonya Hotz",
                 "location" => "Arizona, USA",
                 "video" => "882979587",
@@ -308,7 +308,7 @@
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Allison-Bond-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Allison-Bond-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Allison-Bond-profile.webp",
                 "name" => "Allison Bond",
                 "location" => "Canada",
                 "video" => "877591721",
@@ -316,7 +316,7 @@
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Steve-Wilson-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Steve-Wilson-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Steve-Wilson-profile.webp",
                 "name" => "Steve Wilson",
                 "location" => "Arizona, USA",
                 "video" => "877591944",
@@ -324,7 +324,7 @@
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Darli-Brazil-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Darli-Brazil-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Darli-Brazil-profile.webp",
                 "name" => "Darli Brazil",
                 "location" => "California, USA",
                 "video" => "878027528",
@@ -332,7 +332,7 @@
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Ian-Kershaw-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Ian-Kershaw-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Ian-Kershaw-profile.webp",
                 "name" => "Ian Kershaw",
                 "location" => "United Kingdom",
                 "video" => "660596700",
@@ -340,7 +340,7 @@
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Jayde-McIntosh-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Jayde-McIntosh-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Jayde-McIntosh-profile.webp",
                 "name" => "Jayde McIntosh",
                 "location" => "Australia",
                 "video" => "660596722",

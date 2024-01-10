@@ -35,7 +35,7 @@
         'slides' => [
             [
                 'desc' => 'for people who want to learn how to play guitar, and fast',
-                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/guitareo/membership/homepage/2024/as-logo.webp',
+                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/as-logo.webp',
                 'name' => 'American Songwriter',
                 'credit' => 'Music Magazine',
             ],

@@ -14,7 +14,7 @@
                 "desc" =>
                 "Drumeo is the real deal folks - a good place to study and realize one’s dreams.",
                 "thumb" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/billy-cobham.webp",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/billy-cobham.webp",
                 "name" => "Billy Cobham",
                 "credit" => "Rolling Stone Top 100 Drummer",
             ],
@@ -22,7 +22,7 @@
                 "desc" =>
                 "A world-class site for continuing education and insight into the world of drumming!",
                 "thumb" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/redmond.webp",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/redmond.webp",
                 "name" => "Rich Redmond",
                 "credit" => "3x Country Drummer Of The Year",
             ],
@@ -30,7 +30,7 @@
                 "desc" =>
                 "The Drumeo standard is one of the highest quality and is THE place to go for the best in drum education.",
                 "thumb" =>
-                "https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/drummer-david-garibaldi.webp",
+                "https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/drummer-david-garibaldi.webp",
                 "name" => "David Garibaldi",
                 "credit" => "Rolling Stone Top 100 Drummer",
             ],
@@ -300,7 +300,7 @@
         "testimonials" => [
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Claudio-Sanchez-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Claudio-Sanchez-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Claudio-Sanchez-profile.webp",
                 "name" => "Claudio Sanchez",
                 "location" => "California, USA",
                 "video" => "877648411",
@@ -308,7 +308,7 @@
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Ed-Koop-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Ed-Koop-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Ed-Koop-profile.webp",
                 "name" => "Ed Koop",
                 "location" => "California, USA",
                 "video" => "342059271",
@@ -316,7 +316,7 @@
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Gabriel-Queija-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Gabriel-Queija-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Gabriel-Queija-profile.webp",
                 "name" => "Gabriel Queija",
                 "location" => "Canada",
                 "video" => "877591404",
@@ -324,7 +324,7 @@
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Tarah-Mark-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Tarah-Mark-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Tarah-Mark-profile.webp",
                 "name" => "Tarah Mark",
                 "location" => "California, USA",
                 "video" => "878790651",
@@ -332,7 +332,7 @@
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Lisa-Aragon-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Lisa-Aragon-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Lisa-Aragon-profile.webp",
                 "name" => "Lisa Aragon",
                 "location" => "Washington, USA",
                 "video" => "373252004",
@@ -340,7 +340,7 @@
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Omari-Augustine-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Omari-Augustine-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Omari-Augustine-profile.webp",
                 "name" => "Omari Augustine",
                 "location" => "Trinidad & Tobago",
                 "video" => "553438851",

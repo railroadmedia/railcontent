@@ -238,7 +238,7 @@
     @php
         $gridItems = $singeo['gridItems'];
     @endphp
-   
+
 
     @include('musora.sales.components.reason-cards-section', [
         'header' => 'Your singing goals start here.',
@@ -342,7 +342,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/singeo-logo.webp',
+        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/210x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/singeo-logo.webp',
         'header' => 'Unlimited singing lessons.<br> Vocal coaches and support.<br>1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>

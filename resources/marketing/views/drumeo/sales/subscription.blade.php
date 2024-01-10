@@ -508,7 +508,7 @@
      </section>
     @else
         @include('musora.sales.components.order-section-collage', [
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/logo-blue.webp',
+        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/240x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/logo-blue.webp',
         'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 6000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>

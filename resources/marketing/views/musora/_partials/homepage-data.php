@@ -327,7 +327,7 @@
         "testimonials" => [
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Tonya-Hotz-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Tonya-Hotz-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Tonya-Hotz-profile.webp",
                 "name" => "Tonya Hotz",
                 "location" => "Arizona, USA",
                 "video" => "882979587",
@@ -335,7 +335,7 @@
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Claudio-Sanchez-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Claudio-Sanchez-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Claudio-Sanchez-profile.webp",
                 "name" => "Claudio Sanchez",
                 "location" => "California, USA",
                 "video" => "877648411",
@@ -343,7 +343,7 @@
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Darli-Brazil-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Darli-Brazil-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Darli-Brazil-profile.webp",
                 "name" => "Darli Brazil",
                 "location" => "California, USA",
                 "video" => "878027528",
@@ -351,7 +351,7 @@
             ],
             [
                 "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Gabriel-Queija-thumb-m.webp",
-                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Gabriel-Queija-profile.webp",
+                "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Gabriel-Queija-profile.webp",
                 "name" => "Gabriel Queija",
                 "location" => "Canada",
                 "video" => "877591404",

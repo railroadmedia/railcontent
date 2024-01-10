@@ -15,7 +15,7 @@
                     {!! $header !!}
                 @endif
             </strong></h2>
-        <img alt="star ratings" class="h-11 my-3 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/musora/membership/homepage/2024/stars.png">
+        <img alt="star ratings" class="h-11 my-3 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2024/stars.png">
         <p class="mx-auto mb-7">
             Rated 4.8/5 based on <strong class="font-black">
                 @if($theme == 'drumeo')
@@ -93,7 +93,9 @@
                                             <h3 class="leading-normal mt-3 sm:mt-0 mb-2"><em>{!! $testimonial['title'] !!}</em></h3>
                                             <div class="flex items-center">
                                                 @if(!empty($testimonial['avatar']))
-                                                    <img class="h-16 w-16 rounded-full object-cover mr-4 border-4 border-{{ $theme }} opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="{{$testimonial['avatar']}}">
+                                                    <img class="h-16 w-16 rounded-full object-cover mr-4 border-4 border-{{ $theme }} opacity-0 transition-opacity"
+                                                        loading="lazy" onload="this.classList.remove('opacity-0')"
+                                                        src="{{$testimonial['avatar']}}">
                                                 @endif
                                                 <div class="">
                                                     <p class="leading-tight mx-0 font-black">{{ $testimonial['name'] }}</p>
@@ -119,7 +121,7 @@
                             x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
                         >
                             <div class="absolute inset-0 bg-cover bg-top"
-                                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" 
+                                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
                                 :style="`background-image:url({{$testimonial['image']}}); background-color: rgba(0, 0, 0, 0.6)`"
                                 x-intersect.once="lazyLoad = true"></div>
                             <div class="absolute inset-0 flex justify-center align-center">

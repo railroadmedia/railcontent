@@ -335,7 +335,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
+        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/240x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
         'header' => 'Unlimited guitar lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>

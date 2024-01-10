@@ -470,7 +470,7 @@
     ])
     @else
         @include('musora.sales.components.order-section-collage', [
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/pianote-logo-red.webp',
+        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/190x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/pianote-logo-red.webp',
         'header' => 'Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>
