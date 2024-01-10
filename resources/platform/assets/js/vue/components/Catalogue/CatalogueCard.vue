@@ -395,12 +395,9 @@ const mappedData = computed(() => {
     if(contentModel.value.post.fields) {
         difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty').value;
     }
-    if (Number.isFinite(Number(difficultyValue))) {
-        contentModel.value.card.difficulty = difficultyValue;
-    }
-    else {
-        contentModel.value.card.difficulty = 'all';
-    }
+
+    contentModel.value.card.difficulty = difficultyValue;
+
     return contentModel.value.card
 });
 

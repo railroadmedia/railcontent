@@ -70,34 +70,129 @@
         .option-buttons.active .radio-check i {
             display:block!important;
         }
+
         .join {
-            display: inline-block;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            border-radius: 50px;
-            color: #FFF;
-            outline: none;
-            cursor: pointer;
-            text-align: center;
-            user-select: none;
-            text-decoration: none;
-            transition: background-color .3s, color .3s, opacity .3s;
-            box-shadow: 0 0 0 hsla(0, 0%, 0%, 0.35);
-            font-weight: 500;
+            display:inline-block;
+            font:500 22px/1em 'Bebas Neue', sans-serif;
+            letter-spacing:0.1em;
+            text-transform:uppercase;
+            background:#0c1524;
+            border-radius:50px;
+            color:#fff;
+            padding:17px 7%;
+            outline:none;
+            cursor:pointer;
+            text-align:center;
+            user-select:none;
+            text-decoration:none;
+            transition:background-color 0.3s, color 0.3s, opacity 0.3s;
+            box-shadow:0 0 0 rgba(0, 0, 0, 0.35);
+        }
+
+        @media (min-width:768px) {
+            .join {
+                font-size:30px;
+            }
+        }
+
+        .join:hover, .join:focus {
+            color:#fff;
+            background:#14233d;
+            box-shadow:0 0 7px rgba(0, 0, 0, 0.35);
+        }
+        .join i {
+            transition:all .3s;
+            position:relative;
+            right:0px;
+        }
+        .join:hover i {
+            right:-3px;
+        }
+
+        .join.white {
+            background:#fff;
+            color:#000;
+        }
+
+        .join.white:hover, .join.white:focus {
+            background:#eee;
         }
 
         .join.smaller {
-            padding: 8px 30px;
-            font-size: 16px;
-            background-color: black;
+            padding:8px 30px;
+            font-size:16px;
         }
-        @media (min-width: 768px) {
+
+        @media (min-width:768px) {
             .join.smaller {
-                font-size: 18px;
+                font-size:18px;
                 padding:11px 30px;
             }
         }
 
+        .join.smaller.outline {
+            padding:8px 28px 6px;
+            font-size:16px;
+        }
+
+        @media (min-width:768px) {
+            .join.smaller.outline {
+                font-size:18px;
+                padding:10px 28px 8px;
+            }
+        }
+
+        .join.musora-gold {
+            background-color:#FFAE00;
+            color:#000;
+        }
+
+        .join.musora-gold:hover, .join.musora-gold:focus {
+            background:#FFAE00;
+            color:#000;
+        }
+
+        .join.outline {
+            background:transparent;
+            outline-style:none !important;
+            border:1px solid #fff;
+            color:#fff;
+            padding:6px 12px;
+        }
+
+        @media (min-width:768px) {
+            .join.outline {
+                border-width:2px;
+                padding:11px 30px;
+            }
+        }
+
+        .join.outline:hover, .join.outline:focus {
+            background:#fff;
+            color:#000;
+        }
+
+        .join.outline.black {
+            border-color:#000;
+            color:#000;
+        }
+        .join.outline.black:hover, .join.outline.black:focus {
+            background:#000;
+            color:#fff;
+        }
+        .join.outline.musora {
+            border-color:#0c1524;
+            color:#0c1524;
+        }
+
+        .join.outline.musora:hover, .join.outline.musora:focus {
+            background:#0c1524;
+            color:#fff;
+        }
+
+        .text-musora-black {
+            color:#0c1524;
+        }
 
         .text-musora,
         .text-musora-gold {
@@ -801,7 +896,14 @@
             <a href="/choose-plan" class="mx-1 join blue smaller font-bebas">Get started <i class="fas fa-arrow-right" style="line-height: 0;"></i> </a>
         </div>
     </section>
-    @include('musora._partials.order-section-collage')
+    @include('musora.sales.components.order-section-collage', [
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/210x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/musora_logo.webp',
+    'header' => 'Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.',
+    'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Personalized feedback from real teachers.</li>
+    <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',
+    'image' => 'marketing/musora/membership/homepage/webp-format/musora-m-team2.webp',
+    ])
 
 
     @include('musora.sales.components.app-section', [

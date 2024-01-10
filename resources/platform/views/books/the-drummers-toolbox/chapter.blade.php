@@ -19,9 +19,7 @@ if(!empty($user)){
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
             <div class="flex flex-row">
                 <a
-                    href="{{ url()->route(
-                        $isDigital ? 'books.digital.drummers-toolbox' : 'books.drummers-toolbox'
-                    ) }}"
+                    href="/drumeo/{{ $isDigital ? 'drummers-toolbox-digital' : 'drummers-toolbox' }}"
                     aria-label="Back to All"
                     class="tw-text-white no-decoration tiny uppercase pa-1"
                 >
@@ -34,12 +32,7 @@ if(!empty($user)){
                     <div class="flex flex-row align-center pv-3">
                             <a
                             @if($chapterNumber > 1)
-                               href="{{ url()->route(
-                                    $isDigital
-                                        ? 'books.digital.drummers-toolbox.chapter'
-                                        : 'books.drummers-toolbox.chapter',
-                                    [ "chapterNumber" => $chapterNumber - 1 ]
-                                ) }}"
+                                href="/drumeo/{{ $isDigital ? 'drummers-toolbox-digital' : 'drummers-toolbox' }}/{{$chapterNumber - 1}}"
                             @endif
                                class="btn short collapse-square rounded mr-2 bg-white text-white inverted
                                         {{ $chapterNumber > 1 ? '' : 'disabled' }}"
@@ -53,12 +46,7 @@ if(!empty($user)){
 
                             <a
                             @if($chapterNumber < 10)
-                               href="{{ url()->route(
-                                    $isDigital
-                                        ? 'books.digital.drummers-toolbox.chapter'
-                                        : 'books.drummers-toolbox.chapter',
-                                    [ "chapterNumber" => $chapterNumber + 1 ]
-                               ) }}"
+                            href="/drumeo/{{ $isDigital ? 'drummers-toolbox-digital' : 'drummers-toolbox' }}/{{$chapterNumber + 1}}"
                             @endif
                                class="btn short collapse-square rounded ml-2 bg-white text-white inverted
                                         {{ $chapterNumber < 10 ? '' : 'disabled' }}">
@@ -167,8 +155,8 @@ if(!empty($user)){
                     content-endpoint="/railcontent/content"
                     theme-color="drumeo"
                     brand="drumeo"
-                    :pre-loaded-content="{{ json_encode(json_decode($playAlongs)->data) }}"
-                    :total-results="{{ json_encode(json_decode($playAlongs)->meta->totalResults) }}"
+                    :pre-loaded-content="{{ $playAlongs }}"
+{{--                    :total-results="{{ json_encode(json_decode($playAlongs)->meta->totalResults) }}"--}}
                     user-id="{{ auth()->id() }}"
                     :no-sidebar="true"
                     :show-filters="false"
