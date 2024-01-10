@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
         autoplayInterval = 10000,
         autoplaySongPoints;
 
+    // Function to update the active index
     function updateIndex(index) {
         songPoints.forEach((point, i) => {
             point.classList.toggle('active', i === index);
@@ -22,13 +23,27 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Function to handle autoplay
     function autoplayHandler() {
         currentSongPoint = (currentSongPoint + 1) % totalSongPoints;
         updateIndex(currentSongPoint);
     }
 
-    autoplaySongPoints = setInterval(autoplayHandler, autoplayInterval);
+    // Set up Intersection Observer
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                // Target section is in the viewport, start autoplay
+                autoplaySongPoints = setInterval(autoplayHandler, autoplayInterval);
+                observer.disconnect(); // Disconnect the observer after triggering the script
+            }
+        });
+    });
 
+    // Observe the target section
+    observer.observe(timedToggle);
+
+    // Add click event listeners to the toggles
     songPointToggles.forEach((toggle, index) => {
         toggle.addEventListener('click', function () {
             updateIndex(index);
