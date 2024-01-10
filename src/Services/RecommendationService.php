@@ -50,7 +50,7 @@ class RecommendationService
         {
             AccessMethod::PDO => $this->getFilteredRecommendationsUsingPDO($userID, $brand, $section),
             AccessMethod::DB => $this->getFilteredRecommendationsUsingDBHandler($userID, $brand, $section),
-            AccessMethod::HUGGINGFACE => $this->getFilteredRecommendationsUsingHuggingFace([$userID], $brand, $section),
+            AccessMethod::HUGGINGFACE => $this->getFilteredRecommendationsUsingHuggingFace([$userID], $brand, $section)[$userID],
         };
     }
 
