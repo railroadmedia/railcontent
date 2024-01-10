@@ -38,7 +38,7 @@
                 <div id="QAVideoModal" class="modal">
                     <div class="tw-flex tw-justify-center tw-items-center">
                         <div class="tw-max-w-3xl" style="padding-bottom: 56.25%;">
-                            <iframe class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0" src="{{$lessonContent['qna_video_playback_endpoints'][0]['file']}}" allowfullscreen title="QnA Video"></iframe>
+                            <iframe class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0" src="{{$QAVideo[0]['file']}}" allowfullscreen title="QnA Video"></iframe>
                         </div>
                     </div>
                 </div>
