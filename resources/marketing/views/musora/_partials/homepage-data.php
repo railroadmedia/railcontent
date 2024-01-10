@@ -306,14 +306,14 @@
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/musora/membership/homepage/2023/loop-icon.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/loop.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/loop.webm",
                 "title" => "Simplify the tricky parts.",
                 "desc" => "Learn songs faster with perfect notation, practice loops, and tempo control.",
             ],
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/musora/membership/homepage/2023/metronome-icon.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/metronome.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/metronome.webm",
                 'title' => 'Improve your timing.',
                 'desc' => 'Use built-in metronome - your new best friend to get the timing just right. ',
             ],

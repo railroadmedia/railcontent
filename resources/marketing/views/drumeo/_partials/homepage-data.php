@@ -273,14 +273,14 @@
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/tempo-icon.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/speed.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/speed.webm",
                 "title" => "Find the perfect tempo.",
                 "desc" => "Slow down or speed up any section of a song to hear every note.",
             ],
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/loop-icon.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/loop.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/loop.webm",
                 "title" => "Loop the trouble spots.",
                 "desc" => "No more pausing and rewinding that tricky fill. Loop it over and over again!",
             ],
