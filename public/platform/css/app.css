@@ -16128,13 +16128,13 @@ a {
   left: 0;
 }
 #loadingDialog .loading-spinner {
-  max-width: 250px;
-  flex: 0 0 250px;
+  max-width: 270px;
+  flex: 0 0 270px;
 }
 #loadingDialog .loading-spinner i {
-  font-size: 48px;
-  height: 50px;
-  width: 50px;
+  font-size: 36px;
+  height: 40px;
+  width: 40px;
 }
 
 #playQAVideo .lesson {
@@ -21487,6 +21487,9 @@ a:visited{
 .tw-top-full{
   top: 100% !important;
 }
+.tw-isolate{
+  isolation: isolate !important;
+}
 .tw-z-0{
   z-index: 0 !important;
 }
@@ -22374,6 +22377,9 @@ a:visited{
 .tw-h-screen{
   height: 100vh !important;
 }
+.tw-h-\[15\.93px\]{
+  height: 15.93px !important;
+}
 .tw-max-h-0{
   max-height: 0px !important;
 }
@@ -22928,9 +22934,6 @@ a:visited{
 .tw-max-w-\[665px\]{
   max-width: 665px !important;
 }
-.tw-max-w-\[764px\]{
-  max-width: 764px !important;
-}
 .tw-max-w-\[768px\]{
   max-width: 768px !important;
 }
@@ -22973,8 +22976,8 @@ a:visited{
 .tw-max-w-xs{
   max-width: 20rem !important;
 }
-.tw-max-w-2xl{
-  max-width: 42rem !important;
+.tw-max-w-\[764px\]{
+  max-width: 764px !important;
 }
 .tw-flex-1{
   flex: 1 1 0% !important;
@@ -23267,6 +23270,9 @@ a:visited{
 .tw-gap-\[10px\]{
   gap: 10px !important;
 }
+.tw-gap-\[12px\]{
+  gap: 12px !important;
+}
 .tw-gap-\[4px\]{
   gap: 4px !important;
 }
@@ -23275,6 +23281,9 @@ a:visited{
 }
 .tw-gap-\[8px\]{
   gap: 8px !important;
+}
+.tw-gap-\[10\.35px\]{
+  gap: 10.35px !important;
 }
 .tw-gap-x-4{
   -moz-column-gap: 1rem !important;
@@ -23393,6 +23402,9 @@ a:visited{
 .tw-rounded-\[25px\]{
   border-radius: 25px !important;
 }
+.tw-rounded-\[40px\]{
+  border-radius: 40px !important;
+}
 .tw-rounded-\[5px\]{
   border-radius: 5px !important;
 }
@@ -23425,6 +23437,12 @@ a:visited{
 }
 .tw-rounded-xl{
   border-radius: 0.75rem !important;
+}
+.tw-rounded-\[40\.61px\]{
+  border-radius: 40.61px !important;
+}
+.tw-rounded-\[7\.96px\]{
+  border-radius: 7.96px !important;
 }
 .tw-rounded-b-lg{
   border-bottom-right-radius: 0.5rem !important;
@@ -25993,6 +26011,18 @@ a:visited{
     width: 200px !important;
   }
 }
+@container breakToList (min-width: 42rem){
+  .\@2xl\/breakToList\:tw-w-1\/4{
+    width: 25% !important;
+  }
+  .\@2xl\/breakToList\:tw-py-0{
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+  }
+  .\@2xl\/breakToList\:tw-pr-\[8px\]{
+    padding-right: 8px !important;
+  }
+}
 @container breakToList (min-width: 48rem){
   .\@3xl\/breakToList\:tw-mb-6{
     margin-bottom: 1.5rem !important;
@@ -27127,14 +27157,14 @@ a:visited{
   .md\:tw-h-\[54px\]{
     height: 54px !important;
   }
-  .md\:tw-h-\[calc\(100vh-128px\)\]{
-    height: calc(100vh - 128px) !important;
-  }
   .md\:tw-h-auto{
     height: auto !important;
   }
   .md\:tw-h-full{
     height: 100% !important;
+  }
+  .md\:tw-h-\[calc\(100vh-128px\)\]{
+    height: calc(100vh - 128px) !important;
   }
   .md\:tw-w-1\/2{
     width: 50% !important;

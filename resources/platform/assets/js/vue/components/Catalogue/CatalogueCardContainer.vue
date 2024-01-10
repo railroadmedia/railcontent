@@ -9,27 +9,35 @@
                     ${!isMiniView && !willScroll ? 'tw-flex tw-flex-wrap' : ''}
                     ${breakToListView ? 'tw-@container/breakToList' : ''}
                 `">
-                <CatalogueCard
-                    v-for="item in data"
-                    :key="'grid' + item.id"
-                    :item="item"
-                    :content-type="item.type"
-                    :brand="brand"
-                    :use-theme-color="useThemeColor"
-                    :user-id="userId"
-                    :is-admin="isAdmin"
-                    :lock-unowned="lockUnowned"
-                    :force-wide-thumbs="forceWideThumbs"
-                    :content-type-override="contentTypeOverride"
-                    :is-mini-card="isMiniView"
-                    :show-my-list-action="showMyListAction"
-                    :force-no-links="forceNoLinks"
-                    :force-list-view="displayInline"
-                    :break-to-list-view="breakToListView"
-                    @addToList="addToList"
-                    @progressReset="resetProgressEventHandler"
-                    :show-dropdown="showDropdown"
-                />
+                <!-- Skeleton Loader -->
+                <template v-if="loading && (isWorkout || isChallenge)">
+                    <SkeletonLoader :count="12" type="card" />
+                </template>
+
+                <!-- Catalogue Cards -->
+                <template v-else>
+                    <CatalogueCard
+                        v-for="item in data"
+                        :key="'grid' + item.id"
+                        :item="item"
+                        :content-type="item.type"
+                        :brand="brand"
+                        :use-theme-color="useThemeColor"
+                        :user-id="userId"
+                        :is-admin="isAdmin"
+                        :lock-unowned="lockUnowned"
+                        :force-wide-thumbs="forceWideThumbs"
+                        :content-type-override="contentTypeOverride"
+                        :is-mini-card="isMiniView"
+                        :show-my-list-action="showMyListAction"
+                        :force-no-links="forceNoLinks"
+                        :force-list-view="displayInline"
+                        :break-to-list-view="breakToListView"
+                        @addToList="addToList"
+                        @progressReset="resetProgressEventHandler"
+                        :show-dropdown="showDropdown"
+                    />
+                </template>
             </div>
         </div>
         <div v-if="data.length === 0 && noResultsMessage.length > 0" class="tw-flex tw-flex-row tw-py-4 tw-justify-center tw-items-center tw-px-4 lg:tw-px-0">
@@ -59,8 +67,13 @@ import AddEventModal from '../../vuesora/components/AddEvent/AddEventModal.vue';
 import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
 import { storeToRefs } from "pinia";
 import { useUserStore } from "../../../stores/user";
+import SkeletonLoader from '../SkeletonLoader/SkeletonLoader.vue';
 
 const props = defineProps({
+    loading: {
+        type: Boolean,
+        default: () => false,
+    },
     willScroll: {
         type: Boolean,
         default: () => true,
@@ -144,7 +157,15 @@ const data = computed(() => {
 })
 
 const breakToListView = computed( () => {
-    return props.contentTypeOverride === 'challenge' || props.contentTypeOverride === 'workout';
+    return isWorkout.value || isChallenge.value;
+})
+
+const isWorkout = computed(() => {
+    return props.contentTypeOverride === 'workout';
+})
+
+const isChallenge = computed(() => {
+    return props.contentTypeOverride === 'challenge';
 })
 
 </script>

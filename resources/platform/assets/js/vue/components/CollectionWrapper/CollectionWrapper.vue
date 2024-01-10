@@ -17,6 +17,7 @@
                     :total-results="getTotalResults" />
                 <CatalogueCardContainer
                     v-else
+                    :loading="loading"
                     :pre-loaded-content="data"
                     :content-type-override="collectionType"
                     :will-scroll="false"
