@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <header class="tw-relative tw-bg-black tw-py-[40px] tw-px-8 2xl:tw-px-0 tw-min-h-[380px] tw-flex tw-items-center">
+    <header class="tw-relative tw-bg-black tw-py-[40px] tw-px-8 2xl:tw-px-0 tw-min-h-[360px] tw-flex tw-items-center">
         <!-- BG Image -->
         <img src="https://www.musora.com/musora-cdn/image/width=1000/https://musora-web-platform.s3.amazonaws.com/stc/SupportHeader.png"
             class="tw-transition-opacity tw-absolute tw-top-0 tw-left-0 tw-object-cover tw-object-top tw-h-full tw-w-full"
@@ -16,7 +16,7 @@
             <!-- Instrument Image -->
             <img src="https://www.musora.com/musora-cdn/image/width=300/https://musora-web-platform.s3.amazonaws.com/stc/instruments.png"
                 title="Image of musical instruments"
-                class="tw-w-[300px] tw-h-[300px] tw-flex-shrink-0 sm:tw-mr-8 tw-mb-4 md:tw-mb-0 tw-transition-opacity tw-opacity-0"
+                class="tw-w-[250px] tw-h-[250px] tw-flex-shrink-0 sm:tw-mr-8 tw-mb-4 md:tw-mb-0 tw-transition-opacity tw-opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')"
             >
@@ -34,7 +34,7 @@
     </header>
     <main class="tw-w-full tw-max-w-screen-md tw-mx-auto tw-px-4 md:tw-px-8 tw-my-10 dark:tw-text-white tw-transition-colors tw-flex tw-justify-center">
         {{-- Form Wrapper --}}
-        <section id="stc-form-wrapper" class="tw-w-full">
+        <section id="stc-form-wrapper" class="tw-mb-12 tw-w-full">
             <div class="tw-text-center tw-mb-4">
                 <h2 class="tw-mb-1 tw-text-2xl md:tw-text-3xl tw-font-bold">Enrollment Questionnaire</h2>
                 <p>Please fill out the enrollment questionaire to be considered for studies</p>
@@ -176,8 +176,12 @@
                 {{-- Note on Languages --}}
                 <small class="tw-text-sm tw-mb-2">
                     *Please select all languages in which you have a native or near-native proficiency
-                    <i title="Some studies may involve rating the quality of content translation or subtitles in other languages.">
-                        <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="info" version="1.1" width="36" height="35" viewBox="0 0 36 35" class="tw-inline-block tw-w-[20px] tw-h-[20px]"><use data-v-a55a9eb4="" xlink:href="#icon-info" x="0" y="0"></use></svg>
+                    <i tabindex="0"  aria-describedby="stc_tooltip" class="tw-relative tw-group tw-cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="info" version="1.1" width="36" height="35" viewBox="0 0 36 35" class="tw-inline-block tw-w-[20px] tw-h-[20px] group-focus:tw-text-drumeo"><use data-v-a55a9eb4="" xlink:href="#icon-info" x="0" y="0"></use></svg>
+                        {{-- Tooltlip --}}
+                        <div role="tooltip" id="stc_tooltip" class="group-focus:tw-block tw-hidden tw-w-[250px] tw-p-1 tw-rounded tw-text-xs tw-text-black tw-bg-white tw-border tw-border-gray-500 tw-shadow tw-absolute tw-right-0 tw-bottom-full tw-z-10">
+                            Some studies may involve rating the quality of content translation or subtitles in other languages.
+                        </div>
                     </i>
                 </small>
 
@@ -202,7 +206,7 @@
                 </button>
 
                 {{-- Error Message --}}
-                <div id="stc-error" class="tw-opacity-0 tw-flex tw-rounded-lg tw-mt-8 tw-p-5 tw-text-base tw-shadow-lg tw-transition-all tw-duration-200 tw-ease-in-out tw-bg-red-100 tw-text-red-600">
+                <div id="stc-error" class="tw-hidden tw-flex tw-rounded-lg tw-mt-8 tw-p-5 tw-text-base tw-shadow-lg tw-transition-all tw-duration-200 tw-ease-in-out tw-bg-red-100 tw-text-red-600">
                     There was an error submitting this form. Please Try again or contact support <a class="tw-font-bold tw-ml-1" href="/{{ $brand }}/support">here</a>.
                 </div>
             </form>
@@ -237,6 +241,11 @@
             const clearLanguagesButton = document.querySelector('#clear-multi-select');
             const name = document.querySelector('#student_form_name');
             let MSOpen = false;
+            //On Load
+            if (isCookieSet('stc_form_submitted')) {
+                document.querySelector('#stc-form-wrapper').classList.add('tw-hidden');
+                document.querySelector('#stc-confirmation').classList.remove('tw-hidden');
+            } 
             //Event Listeners
             instrumentSelect.addEventListener('change', (e)=> {
                 if(e.target.value === 'Other') {
@@ -291,6 +300,9 @@
                         <input required id="student_form_${name}" type="text" name="student_form_${name}" autocomplete="student_form_${name}"  class="tw-bg-transparent tw-rounded-full"/>
                     </label>`;
             };
+            function isCookieSet(cookieName) {
+                return document.cookie.split(';').some(c => c.trim().startsWith(cookieName + '='));
+            }
             //Submit Form
             form.addEventListener('submit', function(e) {
                 e.preventDefault(); 
@@ -318,14 +330,18 @@
                         'Authorization': 'Basic ' + authKey
                     }
                 })
-                //.then(response => response.ok ? response.json() : Promise.reject('Network response was not ok'))
                 .then(data => {
                     document.querySelector('#stc-form-wrapper').classList.add('tw-hidden');
                     document.querySelector('#stc-confirmation').classList.remove('tw-hidden');
+                    //Set Cookie
+                    let date = new Date();
+                    date.setDate(date.getDate() + 1);
+                    let expires = date.toUTCString();
+                    document.cookie = `stc_form_submitted=true; expires=${expires}; path=/`;
                 })
                 .catch(error => {
                     submitButton.innerHTML = 'Submit';
-                    document.querySelector('#stc-error').classList.remove('tw-opacity-0');
+                    document.querySelector('#stc-error').classList.remove('tw-hidden');
                     console.error('Error:', error);
                 });
             });
