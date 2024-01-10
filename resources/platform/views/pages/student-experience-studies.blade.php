@@ -34,7 +34,7 @@
     </header>
     <main class="tw-w-full tw-max-w-screen-md tw-mx-auto tw-px-4 md:tw-px-8 tw-my-10 dark:tw-text-white tw-transition-colors tw-flex tw-justify-center">
         {{-- Form Wrapper --}}
-        <section id="stc-form-wrapper" class="tw-mb-12 tw-w-full">
+        <section id="stc-form-wrapper" class="tw-w-full">
             <div class="tw-text-center tw-mb-4">
                 <h2 class="tw-mb-1 tw-text-2xl md:tw-text-3xl tw-font-bold">Enrollment Questionnaire</h2>
                 <p>Please fill out the enrollment questionaire to be considered for studies</p>
@@ -45,19 +45,19 @@
                 {{-- Name --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Name</span>
-                    <input required id="name" type="text" name="name" autocomplete="name" class="tw-bg-transparent tw-rounded-full"/>
+                    <input required id="student_form_name" type="text" name="student_form_name" autocomplete="name" class="tw-bg-transparent tw-rounded-full"/>
                 </label>
 
                 {{-- Email --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Email</span>
-                    <input required id="email" type="email" name="email" autocomplete="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" class="tw-bg-transparent tw-rounded-full"/>
+                    <input required id="student_form_email" type="email" name="student_form_email" autocomplete="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" class="tw-bg-transparent tw-rounded-full"/>
                 </label>
 
                 {{-- Age --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Age</span>
-                    <select required name="age" id="age" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="student_form_age" id="student_form_age" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($ages as $age)
                             <option class="bg-white text-black" value="{{ $age['value'] }}">{{ $age['value'] }}</option>
@@ -68,7 +68,7 @@
                 {{-- Gender --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Gender</span>
-                    <select required name="gender" id="gender" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="student_form_gender" id="student_form_gender" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($genders as $gender)
                             <option class="bg-white text-black" value="{{ $gender['value'] }}">{{ $gender['value'] }}</option>
@@ -79,7 +79,7 @@
                 {{-- Country --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Country</span>
-                    <select required name="country" id="country" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="student_form_country" id="student_form_country" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($countries as $country)
                             <option class="bg-white text-black" value="{{ $country }}">{{ $country }}</option>
@@ -92,9 +92,9 @@
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Spoken Languages<span>*</span></span>
                     <div class="tw-relative tw-w-full">
                         <input required
-                                id="language"
+                                id="student_form_language"
                                 type="text"
-                                name="language"
+                                name="student_form_language"
                                 autocomplete="language"
                                 placeholder="Select"
                                 class="tw-w-full tw-pointer-events-none dark:placeholder:tw-text-white placeholder:tw-text-black tw-bg-transparent tw-rounded-full tw-cursor-pointer tw-pr-16"
@@ -110,7 +110,7 @@
                             </svg>
                         </i>
                     </div>
-                    <select multiple name="languages[]" id="languages" class="tw-p-0 tw-absolute tw-w-full tw-top-full tw-border-0 tw-h-0 focus:tw-border focus:tw-h-[400px] ">
+                    <select multiple name="student_form_languages[]" id="student_form_languages" class="tw-p-0 tw-absolute tw-w-full tw-top-full tw-border-0 tw-h-0 focus:tw-border focus:tw-h-[400px] ">
                         @foreach ($languages as $code => $name)
                             <option class="bg-white text-black" value="{{ $name }}">{{ $name }}</option>
                         @endforeach
@@ -121,7 +121,7 @@
                 {{-- Student Level --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Current Student Level</span>
-                    <select required name="level" id="level" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="student_form_level" id="student_form_level" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($levels as $level)
                             <option class="bg-white text-black" value="{{ $level['value'] }}">{{ $level['value'] }}</option>
@@ -132,7 +132,7 @@
                 {{-- Instrument --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Primary Instrument</span>
-                    <select required name="instruments" id="instruments" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="student_form_instruments" id="student_form_instruments" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($instruments as $instrument)
                             <option class="bg-white text-black" value="{{ $instrument['value'] }}">{{ $instrument['value'] }}</option>
@@ -143,7 +143,7 @@
                 {{-- Learning Goal --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Primary Learning Goal</span>
-                    <select required name="goals" id="goals" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="student_form_goals" id="student_form_goals" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($goals as $goal)
                             <option class="bg-white text-black" value="{{ $goal['value'] }}">{{ $goal['value'] }}</option>
@@ -154,7 +154,7 @@
                 {{-- Student Length --}}
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">For how long have you been a Musora student?</span>
-                    <select required name="student-length" id="student-length" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="student_form_student-length" id="student_form_student-length" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($experience as $year)
                             <option class="bg-white text-black" value="{{ $year['value'] }}">{{ $year['value'] }}</option>
@@ -165,7 +165,7 @@
                 {{-- Membership Type --}}
                 <label class="tw-flex tw-flex-col tw-mb-6">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Membership Type</span>
-                    <select required name="type" id="type" class="tw-bg-transparent tw-rounded-full">
+                    <select required name="student_form_type" id="student_form_type" class="tw-bg-transparent tw-rounded-full">
                         <option value="" class="bg-white text-black">Select</option>
                         @foreach($types as $type)
                             <option class="bg-white text-black" value="{{ $type['value'] }}">{{ $type['value'] }}</option>
@@ -185,8 +185,8 @@
                 <label class="tw-mb-6">
                     <input class="tw-mr-2 tw-rounded dark:tw-border-[#445F74] tw-border-[#D1D5DB] checked:tw-bg-black dark:checked:tw-bg-[#002039] dark:tw-bg-[#002039] tw-bg-[#E7EFF6]"
                             type="checkbox"
-                            id="consent"
-                            name="consent"
+                            id="student_form_consent"
+                            name="student_form_consent"
                     >
                     <span class="tw-text-sm">I consent to be occasionally contacted to participate in User Research Studies or interviews dedicated to
                         collecting feedback or improving Musora products and services.
@@ -200,8 +200,12 @@
                 >
                     Submit
                 </button>
-            </form>
 
+                {{-- Error Message --}}
+                <div id="stc-error" class="tw-opacity-0 tw-flex tw-rounded-lg tw-mt-8 tw-p-5 tw-text-base tw-shadow-lg tw-transition-all tw-duration-200 tw-ease-in-out tw-bg-red-100 tw-text-red-600">
+                    There was an error submitting this form. Please Try again or contact support <a class="tw-font-bold tw-ml-1" href="/{{ $brand }}/support">here</a>.
+                </div>
+            </form>
         </section>
 
         {{-- Thank you Wrapper --}}
@@ -222,30 +226,30 @@
         (function(){
             //Dom Elements
             const form = document.querySelector('#stc-form');
-            const consentBox = document.querySelector('#consent');
+            const consentBox = document.querySelector('#student_form_consent');
             const submitButton = document.querySelector('#submit-button');
-            const instrumentSelect = document.querySelector('#instruments');
-            const goalSelect = document.querySelector('#goals');
+            const instrumentSelect = document.querySelector('#student_form_instruments');
+            const goalSelect = document.querySelector('#student_form_goals');
             //MultiSelect
             const multiSelect = document.querySelector('#multiSelect');
-            const languageInput = document.querySelector('#language');
-            const languageSelect = document.querySelector('#languages');
+            const languageInput = document.querySelector('#student_form_language');
+            const languageSelect = document.querySelector('#student_form_languages');
             const clearLanguagesButton = document.querySelector('#clear-multi-select');
-            const name = document.querySelector('#name');
+            const name = document.querySelector('#student_form_name');
             let MSOpen = false;
             //Event Listeners
             instrumentSelect.addEventListener('change', (e)=> {
                 if(e.target.value === 'Other') {
                     e.target.insertAdjacentHTML('afterend', inputHTML('instrument'))
                 } else {
-                    document.getElementById('other-instrument')?.remove()
+                    document.getElementById('student_form_other-instrument')?.remove()
                 }
             })
             goalSelect.addEventListener('change', (e)=> {
                 if(e.target.value === 'Other') {
                     e.target.insertAdjacentHTML('afterend', inputHTML('goal'))
                 } else {
-                    document.getElementById('other-goal')?.remove()
+                    document.getElementById('student_form_other-goal')?.remove()
                 }
             })
             consentBox.addEventListener('change', ()=> submitButton.disabled = !submitButton.disabled);
@@ -282,9 +286,9 @@
             //Functions
             function inputHTML(name) {
                 return ` 
-                    <label id="other-${name}" class="tw-flex tw-flex-col tw-ml-4 tw-mb-2">
+                    <label id="student_form_other-${name}" class="tw-flex tw-flex-col tw-ml-4 tw-mb-2">
                         <span class="tw-m-2 tw-font-bold tw-leading-0">Your Instrument</span>
-                        <input required id="${name}" type="text" name="${name}" autocomplete="${name}"  class="tw-bg-transparent tw-rounded-full"/>
+                        <input required id="student_form_${name}" type="text" name="student_form_${name}" autocomplete="student_form_${name}"  class="tw-bg-transparent tw-rounded-full"/>
                     </label>`;
             };
             //Submit Form
@@ -321,6 +325,7 @@
                 })
                 .catch(error => {
                     submitButton.innerHTML = 'Submit';
+                    document.querySelector('#stc-error').classList.remove('tw-opacity-0');
                     console.error('Error:', error);
                 });
             });
