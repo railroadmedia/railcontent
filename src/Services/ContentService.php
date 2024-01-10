@@ -232,7 +232,7 @@ class ContentService
      * @param int limit -
      * @return mixed|Collection|null
      */
-    public function getRecommendationsByContenType($user_id, $brand, $contentTypes, RecommenderSection $section, bool $randomize=false, $limit=6)
+    public function getRecommendationsByContentType($user_id, $brand, $contentTypes, RecommenderSection $section, bool $randomize=false, $limit=6)
     {
         $filter = $this->contentRepository->startFilter(
             1,
@@ -269,7 +269,7 @@ class ContentService
             $hour = date("H");
             srand($hour);
             $temp =  array_rand($recommendations, $limit);
-            srand(mktime());
+            srand(time());
             return $temp;
         } else {
             return array_rand($recommendations, $limit);
