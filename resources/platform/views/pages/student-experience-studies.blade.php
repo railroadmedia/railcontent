@@ -296,7 +296,7 @@
             function inputHTML(name) {
                 return ` 
                     <label id="student_form_other-${name}" class="tw-flex tw-flex-col tw-ml-4 tw-mb-2">
-                        <span class="tw-m-2 tw-font-bold tw-leading-0">Your Instrument</span>
+                        <span class="tw-m-2 tw-font-bold tw-leading-0 tw-capitalize">Your ${name === 'goal' ? 'Learning Goal' : name}</span>
                         <input required id="student_form_${name}" type="text" name="student_form_${name}" autocomplete="student_form_${name}"  class="tw-bg-transparent tw-rounded-full"/>
                     </label>`;
             };
