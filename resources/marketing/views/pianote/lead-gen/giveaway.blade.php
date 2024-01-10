@@ -4,8 +4,8 @@
     <title>Win a Roland FP-30X Digital Piano | Pianote</title>
     <meta property="og:title" content="Win a Roland FP-30X Digital Piano | Pianote">
 
-    <meta name="description" content="Want a free piano? Simply enter your email address before November 20th to secure your chance to win.">
-    <meta property="og:description" content="Want a free piano? Simply enter your email address before November 20th to secure your chance to win.">
+    <meta name="description" content="Want a free piano? Simply enter your email address before January 29th to secure your chance to win.">
+    <meta property="og:description" content="Want a free piano? Simply enter your email address before January 29th to secure your chance to win.">
 
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/roland-share.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/giveaway">
@@ -38,14 +38,20 @@
                 <div class="w-full md:w-4/12 lg:w-4/12 md:order-1 flex justify-center items-center mt-20 sm:mt-0">
 
                 </div>
-                <div class="w-full md:w-8/12 lg:w-8/12 mx-auto sm:pl-8 md:pl-14 lg:pl-0 text-center md:text-left px-4 sm:px-0">
-                    <img class="h-36 md:h-40 lg:h-44 mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="logo">
-                    <div class="md:max-w-lg">
-                        <p class="mb-4" style="color:#D0E2E7;">
-                            Want a free piano? Simply enter your email address before <span class="text-white font-extrabold">November 20th</span> to secure your chance to win. No purchase necessary. No age restrictions. No location restrictions.
-                        </p>
+                <div class="w-full md:w-8/12 lg:w-8/12 mx-auto sm:pl-8 lg:pl-0 text-center md:text-left px-4 sm:px-0">
+                    <div class="sm:px-3">
+                        <img class="h-36 md:h-40 lg:h-44 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="logo">
 
+                        <p class="mx-0 my-4" style="color:#D0E2E7; max-width: 450px;">
+                            Want a free piano? Simply enter your email address before <span class="text-white font-extrabold">January 29th</span> to secure your chance to win. No purchase necessary. No age restrictions. No location restrictions.
+                        </p>
                     </div>
+                    @include('pianote._partials.sign-up-form', [
+                    "recaptchaKey" => $recaptchaKey,
+                    "formId" => "Pianote - Engagement - Trigger - FP30 Giveaway - Web Form2",
+                    "formName" => 'FP30 Giveaway',
+                    "buttonText" => "I WANT TO WIN!",
+                    ])
                 </div>
             </div>
         </div>
@@ -152,7 +158,7 @@
                 </div>
             </div>
             <div class="inline-block italic text-pianote py-4 px-6" style="background:#111F29;">
-                The winner will be announced during a LIVE event on November 20th!
+                The winner will be announced during a LIVE event on January 29th!
             </div>
         </div>
     </section>
@@ -171,8 +177,14 @@
 
     <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/footer.jpg">
         <div class="mx-auto max-w-md md:max-w-2xl">
-            <img class="h-32 sm:h-36 md:h-44 lg:h-52 mb-12 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="title image">
+            <img class="h-32 sm:h-36 md:h-44 lg:h-52 mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="title image">
 
+            @include('pianote._partials.sign-up-form', [
+        "recaptchaKey" => $recaptchaKey,
+            "formId" => "Pianote - Engagement - Trigger - FP30 Giveaway - Web Form",
+            "formName" => 'FP30 Giveaway',
+                "buttonText" => "I WANT TO WIN!",
+            ])
         </div>
     </section>
 
