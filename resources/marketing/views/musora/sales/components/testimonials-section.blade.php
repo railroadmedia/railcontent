@@ -15,7 +15,7 @@
                     {!! $header !!}
                 @endif
             </strong></h2>
-        <img class="h-11 my-3 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/musora/membership/homepage/2024/stars.png">
+        <img alt="star ratings" class="h-11 my-3 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/musora/membership/homepage/2024/stars.png">
         <p class="mx-auto mb-7">
             Rated 4.8/5 based on <strong class="font-black">
                 @if($theme == 'drumeo')
