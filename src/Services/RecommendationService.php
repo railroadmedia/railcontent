@@ -56,7 +56,8 @@ class RecommendationService
 
     private function hasNoResults($brand, $section): bool
     {
-        return in_array($section, $this->invalidConfigurations[$brand]);
+        $brand = strtolower($brand);
+        return isset($this->invalidConfigurations[$brand]) && in_array($section, $this->invalidConfigurations[$brand]);
     }
 
     private function getFilteredRecommendationsUsingPDO($userID, $brand, RecommenderSection $section) : array
