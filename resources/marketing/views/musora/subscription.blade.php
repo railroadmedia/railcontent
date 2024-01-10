@@ -325,6 +325,7 @@
         singeoSoundslice: false,
         trailer: false,
         lazyLoad: false,
+        videoLoaded: false,
     }'
 @endsection
 

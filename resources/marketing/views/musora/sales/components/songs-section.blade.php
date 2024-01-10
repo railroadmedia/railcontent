@@ -19,7 +19,18 @@
             <div class="sm:order-1 rounded-l-xl overflow-hidden py-7 pl-10" style="background-color:#1B2434;">
                 @foreach ($songItems as $key => $songItem)
                     @if(!empty($songItem['mediaVid']))
-                        <video class="h-64 sm:h-72 lg:h-96 hidden media-toggle rounded-l-xl overflow-hidden @if($key == 0) active @endif" src="{{ $songItem['media'] }}" muted autoplay loop playsinline></video>
+                    <video 
+                    class="h-64 sm:h-72 lg:h-96 hidden media-toggle rounded-l-xl overflow-hidden @if($key == 0) active @endif" 
+                    src="{{ $songItem['media'] }}" 
+                    muted 
+                    autoplay 
+                    loop 
+                    playsinline
+                    x-ref="video"
+                    x-effect="if (videoLoaded) { $refs.video.play(); }"
+                    x-intersect.once="videoLoaded = true"
+                    ></video>
+                        {{-- <video class="h-64 sm:h-72 lg:h-96 hidden media-toggle rounded-l-xl overflow-hidden @if($key == 0) active @endif" src="{{ $songItem['media'] }}" muted autoplay loop playsinline></video> --}}
                     @else
                         <img class="h-64 sm:h-72 lg:h-96 hidden media-toggle rounded-l-xl overflow-hidden opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="{{ $songItem['media'] }}" >
                     @endif

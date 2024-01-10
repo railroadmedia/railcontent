@@ -265,7 +265,7 @@
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/songs-icon.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs-test.webm",
                 "title" => "1000+ popular songs.",
                 "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
             ],

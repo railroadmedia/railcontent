@@ -81,8 +81,7 @@
         @foreach($bubbles as $bubble)
     <picture>
         <source media="(min-width:640px)" srcset="{{ $bubble['src'] }}">
-        <img class="absolute z-10 transform -translate-x-1/2 -translate-y-1/2 {{ $bubble['classes'] }} opacity-0 transition-opacity"
-            loading="lazy" onload="this.classList.remove('opacity-0')"
+        <img class="absolute z-10 transform -translate-x-1/2 -translate-y-1/2 {{ $bubble['classes'] }}"
             src="{{ $bubble['src'] }}" alt="header circle image" fetchpriority="high">
     </picture>
 @endforeach
@@ -114,10 +113,8 @@
                                 <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
                                 <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
                                     <img
-                                        class="rounded-full object-cover object-right w-9 h-9 transition-opacity opacity-0"
+                                        class="rounded-full object-cover object-right w-9 h-9"
                                         src={{ $slide['thumb'] }}
-                                        loading="lazy"
-                                        onload="this.classList.remove('opacity-0')"
                                         alt="{{$slide['name']}}"
                                     ><br class="inline md:hidden">
                                     <p class="leading-tight w-full text-center md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>

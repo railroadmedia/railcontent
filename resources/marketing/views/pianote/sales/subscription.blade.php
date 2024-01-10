@@ -142,6 +142,7 @@
         unbox : false,
         rolandTrailer : false,
         lazyLoad: false,
+        videoLoaded: false,
     }'
 @endsection
 
