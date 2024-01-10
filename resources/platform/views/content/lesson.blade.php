@@ -141,6 +141,7 @@
                     'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
                     'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
                     'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
+                    'QAVideo' => !empty($lessonContent['qna_video_playback_endpoints']) ? $lessonContent['qna_video_playback_endpoints'] : '',
                     'isCompleted' => $lessonContent->fetch('completed'),
                     'contentId' => $lessonContent->fetch('id'),
                     'xpAmount' => $lessonContent->fetch('fields.xp'),
