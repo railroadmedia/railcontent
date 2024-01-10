@@ -39,7 +39,7 @@ class AddedToPrimaryPlaylistDecorator extends ModeDecoratorBase
      */
     public function decorate(Collection $contents)
     {
-        $contentsOfType = $contents->whereNotIn('type', ['user-playlist', 'instructor']);
+        $contentsOfType = $contents->whereNotIn('type', ['user-playlist', 'instructor','artist','style']);
 
         $contentIds =
             $contentsOfType->pluck('id')

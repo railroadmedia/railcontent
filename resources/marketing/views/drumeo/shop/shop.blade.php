@@ -207,33 +207,6 @@
                 </div>
             </div>
         </section>
-        {{--   MISC     --}}
-{{--        <div id="misc" class="anchor"></div>--}}
-{{--        <section class="grid-view category-section" data-category="misc" x-show="filter === 'clothing' || filter === 'all'">--}}
-{{--            <div class="container">--}}
-{{--                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Misc</strong></h5>--}}
-{{--                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">--}}
-
-{{--                    @foreach($misc as $miscItem)--}}
-{{--                        @include('_partials.components.shop.product-card', [--}}
-{{--                             "sku" => $miscItem->sku,--}}
-{{--                             "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $miscItem->slug ),--}}
-{{--                             "badgeText" => $miscItem->badge_text,--}}
-{{--                             "thumbnail" => $miscItem->thumbnail,--}}
-{{--                             "title" => $miscItem->name,--}}
-{{--                             "cardDescription" => $miscItem->short_desc,--}}
-{{--                             "fullPrice" => $miscItem->price,--}}
-{{--                             "price" => $miscItem->discounted_price,--}}
-{{--                             "sizes" => $miscItem->sizes,--}}
-{{--                             "soldOut" => isset($products[$miscItem->sku]) ? $products[$miscItem->sku]->getStockAvailability() === 0 : $miscItem->sold_out,--}}
-{{--                             "category" => strtolower($miscItem->productType->name),--}}
-{{--                             "size_case_sensitive" => $miscItem->size_case_sensitive,--}}
-{{--                        ])--}}
-{{--                    @endforeach--}}
-
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </section>--}}
 
         <div id="shirts" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
@@ -302,6 +275,32 @@
             </div>
         </section>
 
+        {{--   MISC     --}}
+        <div id="misc" class="anchor"></div>
+        <section class="grid-view category-section" data-category="misc" x-show="filter === 'clothing' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Misc</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
+                    @foreach($misc as $miscItem)
+                        @include('_partials.components.shop.product-card', [
+                             "sku" => $miscItem->sku,
+                             "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $miscItem->slug ),
+                             "badgeText" => $miscItem->badge_text,
+                             "thumbnail" => $miscItem->thumbnail,
+                             "title" => $miscItem->name,
+                             "cardDescription" => $miscItem->short_desc,
+                             "fullPrice" => $miscItem->price,
+                             "price" => $miscItem->discounted_price,
+                             "sizes" => $miscItem->sizes,
+                             "soldOut" => isset($products[$miscItem->sku]) ? $products[$miscItem->sku]->getStockAvailability() === 0 : $miscItem->sold_out,
+                             "category" => strtolower($miscItem->productType->name),
+                             "size_case_sensitive" => $miscItem->size_case_sensitive,
+                        ])
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
         {{--   30DD     --}}
         <div id="30dd" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
@@ -327,6 +326,37 @@
                             "sizes" => $thirtyDDItem->sizes,
                             'FCP' => $key < 4 ? true : null,
                             "size_case_sensitive" => $thirtyDDItem->size_case_sensitive,
+                        ])
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        {{--   limited     --}}
+        <div id="limited" class="anchor"></div>
+        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Limited Sizes</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
+                    @foreach($lowStock as $key => $lowStockItem)
+                        @include('_partials.components.shop.product-card', [
+                            "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '',  $lowStockItem->slug ),
+                            "sku" =>  $lowStockItem->sku === 'drumeo' ? null :  $lowStockItem->sku,
+                            "badgeText" =>  $lowStockItem->badge_text,
+                            "thumbnail" =>  $lowStockItem->thumbnail,
+                            "packLogo" =>  $lowStockItem->thumbnail_logo,
+                            "title" =>  $lowStockItem->name,
+                            "packAuthor" =>  $lowStockItem->instructor_name,
+                            "cardDescription" =>  $lowStockItem->short_desc,
+                            "fullPrice" =>  $lowStockItem->price,
+                            "price" =>  $lowStockItem->discounted_price,
+                            "category" => strtolower( $lowStockItem->productType->name),
+                            "buttonText" =>  $lowStockItem->sku === 'drumeo' ||  $lowStockItem->sku === 'pianote' ||  $lowStockItem->sku === 'singeo' ||  $lowStockItem->sku === 'guitareo' ? 'see the deal' : null,
+                            "soldOut" =>  $lowStockItem->sold_out,
+                            "includedEdge" =>  $lowStockItem->included_edge,
+                            "sizes" =>  $lowStockItem->sizes,
+                            'FCP' => $key < 4 ? true : null,
+                            "size_case_sensitive" =>  $lowStockItem->size_case_sensitive,
                         ])
                     @endforeach
                 </div>

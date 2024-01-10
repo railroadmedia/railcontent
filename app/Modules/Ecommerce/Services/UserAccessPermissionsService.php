@@ -63,8 +63,17 @@ class UserAccessPermissionsService
         int $userId,
         array $filterPermissionIds = []
     ): UserAccessPermissionsCollection {
+        $user = User::find($userId);
         $permissions = $this->getUserAccessPermissionsQuery($userId, $filterPermissionIds)->get();
-        return new UserAccessPermissionsCollection($userId, $permissions);
+        return new UserAccessPermissionsCollection($user, $permissions);
+    }
+
+    public function getUserAccessPermissionsByUser(
+        User $user,
+        array $filterPermissionIds = []
+    ): UserAccessPermissionsCollection {
+        $permissions = $this->getUserAccessPermissionsQuery($user->id, $filterPermissionIds)->get();
+        return new UserAccessPermissionsCollection($user, $permissions);
     }
 
     /**
@@ -190,7 +199,7 @@ class UserAccessPermissionsService
             $this->handleUserPermissionsUpdatedEvent($user, $orderCollection);
         } else {
             try {
-                $accessPermissions = $this->getUserAccessPermissions($user->id);
+                $accessPermissions = $this->getUserAccessPermissionsByUser($user);
                 $subscriptions = $this->subscriptionService->syncSubscriptionData($accessPermissions);
             } catch (\Throwable $e) {
                 Log::error("Error syncing subscriptions for user: $user->id");
@@ -328,7 +337,7 @@ class UserAccessPermissionsService
             ->where('source', '=', UserAccessPermissionsSourceEnum::Migration->value)
             ->get()
             ->keyBy('permission_id');
-        $userAccessPermissions = new UserAccessPermissionsCollection($user->id, $permissions);
+        $userAccessPermissions = new UserAccessPermissionsCollection($user, $permissions);
         $userPermissions = $this->buildUserPermissionsList($user->id, $contentPermissionsLookup);
         foreach ($userPermissions as $permissionId => $dates) {
             $isLifeTime = $dates['expiration_date'] == null;
@@ -433,6 +442,7 @@ class UserAccessPermissionsService
 
     public function getUserAccessPermissionsList(int $userId, int $page, int $limit): UserAccessPermissionsCollection
     {
+        $user = User::find($userId);
         $items = collect(
             $this->getUserAccessPermissionsQuery($userId)
                 ->with('permission')
@@ -444,7 +454,7 @@ class UserAccessPermissionsService
                 )
                 ->items()
         );
-        return new UserAccessPermissionsCollection($userId, $items);
+        return new UserAccessPermissionsCollection($user, $items);
     }
 
     public function createOrUpdateUserAccessPermission(
@@ -591,7 +601,7 @@ class UserAccessPermissionsService
 
     private function handleUserPermissionsUpdatedEvent(User $user, OrderCollection $orderCollection = null): void
     {
-        $accessPermissions = $this->getUserAccessPermissions($user->id);
+        $accessPermissions = $this->getUserAccessPermissionsByUser($user);
         $shouldSyncCIOWorkspaces = $this->getShouldSyncCustomerIOWorkspace(
             $orderCollection,
             $accessPermissions

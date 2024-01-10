@@ -258,6 +258,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_GUITAREO = 4;
     const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_SINGEO = 8;
 
+    const PERMISSION_LEVEL_ADMIN = 'administrator';
     private ?NotificationSettings $notificationSettingsLookup = null;
 
     protected $hidden = ['password', 'session_salt'];
@@ -547,7 +548,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function isAdmin()
     {
-        return $this->permission_level == 'administrator';
+        return $this->permission_level == self::PERMISSION_LEVEL_ADMIN;
     }
 
     /**

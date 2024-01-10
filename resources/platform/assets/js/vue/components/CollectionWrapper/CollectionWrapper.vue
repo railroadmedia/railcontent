@@ -231,14 +231,6 @@ const getTabOptions = computed(() => {
             { key: 'paradiddles', value: 'Paradiddles' },
             { key: 'rolls', value: 'Rolls' },
         ];
-    } else if (isWorkout.value) {
-        return [
-            { key: '', value: 'All', },
-            { key: 'duration,450,<', value: '5 Minutes', },
-            { key: ['duration,451,>', 'duration,750,<'], value: '10 Minutes', },
-            { key: 'duration,751,>', value: '15+ Minutes', },
-            { key: 'group_by,instructor', value: 'Instructors', groupByView: true, },
-        ];
     }
 
     return [

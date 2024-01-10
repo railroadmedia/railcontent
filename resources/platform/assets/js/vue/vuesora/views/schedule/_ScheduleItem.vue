@@ -53,7 +53,7 @@
             </div>
 
         <!-- ADD TO LIST OR RESET PROGRESS BUTTONS -->
-        <div class="tw-flex tw-flex-col icon-col tw-justify-center">  
+        <div class="tw-flex tw-flex-col icon-col tw-justify-center">
             <div class="body">
                 <i
                     class="add-to-list fas fa-plus flex-center pointer tw-text-[#52525A] dark:tw-text-[#9EC0DC]"
@@ -166,13 +166,8 @@ export default {
                 post: this.item,
             });
 
-            const difficultyValue = model.post.fields.find(field => field.key === 'difficulty').value
-            if (Number.isFinite(Number(difficultyValue))) {
-                model.schedule.difficulty = difficultyValue;
-            }
-            else {
-                model.schedule.difficulty = 'all';
-            }
+            const difficultyValue = model.post.fields.find(field => field.key === 'difficulty').value;
+            model.schedule.difficulty = difficultyValue;
 
             const excludeWords = ['novice', 'beginner', 'intermediate', 'advanced', 'expert', 'all'];
             const filteredColumnData = model.schedule.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));

@@ -268,14 +268,8 @@ export default {
   },
   computed: {
     mappedData() {
-      //console.log('mappedData', this.contentModel.list.column_data)
-      const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value
-      if (Number.isFinite(Number(difficultyValue))) {
-        this.contentModel.list.difficulty = difficultyValue;
-      }
-      else {
-        this.contentModel.list.difficulty = 'all';
-      }
+      const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value;
+      this.contentModel.list.difficulty = difficultyValue;
 
       const excludeWords = ['novice', 'beginner', 'intermediate', 'advanced', 'expert', 'all'];
       const filteredColumnData = this.contentModel.list.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));

@@ -17,7 +17,7 @@
                                 <YoutubePlayer :video-id="videoProps.videoId" ref="mediaElementVueInstance" :brand="brand"
                                     :theme-color="brand" :video-length="videoProps.videoLength"
                                     :progress-state="videoProps.progressState" :content-id="videoProps.id"
-                                    :use-intersection-observer="true" :start-second="seekToTime"
+                                    :use-intersection-observer="true" :start-second="startSecond"
                                     :end-second="videoProps.videoLength" :total-duration="videoProps.videoLength"
                                     :seek-to-time="seekToTime" @play="handleVideoPlay" @pause="handleVideoPause"
                                     @onVideoEnd="handleVideoEnd" />
@@ -25,29 +25,16 @@
                             <!-- Vimeo video (legacy player) -->
                             <transition v-else-if="videoProps.videoType === 'vimeo' && videoProps.useLegacyPlayer" appear
                                 name="fade">
-                                <video-media-element
-                                    ref="mediaElementVueInstance"
-                                    element-id="lessonPlayer"
-                                    :brand="videoProps.brand"
-                                    :theme-color="videoProps.brand"
-                                    :poster="videoProps.thumbnailUrl"
-                                    :sources="videoProps.sources"
-                                    :hls-manifest-url="videoProps.hlsManifestUrl"
-                                    :video-id="videoProps.vimeoVideoId"
-                                    :content-id="videoProps.id"
-                                    :current-second="videoProps.lastWatchPositionInSeconds"
-                                    :progress-state="videoProps.progressState"
-                                    :video-length="videoProps.videoLength"
-                                    :chapters="videoProps.chapters"
-                                    :user-id="videoProps.userId"
-                                    :like-count="videoProps.likeCount"
-                                    :is-liked="videoProps.isLiked"
-                                    :check-for-timecode="videoProps.checkForTimecode"
-                                    :seek-to-time="seekToTime"
-                                    @playing="handleVideoPlay"
-                                    @pause="handleVideoPause"
-                                    @ended="handleVideoEnd"
-                                >
+                                <video-media-element ref="mediaElementVueInstance" element-id="lessonPlayer"
+                                    :brand="videoProps.brand" :theme-color="videoProps.brand"
+                                    :poster="videoProps.thumbnailUrl" :sources="videoProps.sources"
+                                    :hls-manifest-url="videoProps.hlsManifestUrl" :video-id="videoProps.vimeoVideoId"
+                                    :content-id="videoProps.id" :current-second="videoProps.lastWatchPositionInSeconds"
+                                    :progress-state="videoProps.progressState" :video-length="videoProps.videoLength"
+                                    :chapters="videoProps.chapters" :user-id="videoProps.userId"
+                                    :like-count="videoProps.likeCount" :is-liked="videoProps.isLiked"
+                                    :check-for-timecode="videoProps.checkForTimecode" :seek-to-time="seekToTime"
+                                    @playing="handleVideoPlay" @pause="handleVideoPause" @ended="handleVideoEnd">
                                     <div :class="`widescreen title tw-text-${brand}`">
                                         <i class="fas fa-spinner fa-spin absolute-center"></i>
                                     </div>
@@ -93,7 +80,7 @@
                         :is-added="videoResources.isAdded" :content-id="videoResources.contentId"
                         :user-id="videoResources.userId" :resources="videoResources.resources"
                         :show-add-to-list="videoResources.showAddToList" :show-info-button="videoResources.showInfoButton"
-                        :show-practice-button="true" :show-share-button="false" :show-complete-button="true"
+                        :show-practice-button="showPracticeButton" :show-share-button="false" :show-complete-button="true"
                         :report-user-email="videoResources.reportUserEmail"
                         :report-user-name="videoResources.reportUserName" :report-recipient="videoResources.reportRecipient"
                         :report-logo="videoResources.reportLogo" :lesson="{ completed: videoButtons.isCompleted }"
@@ -135,7 +122,7 @@
                 </div>
             </section>
 
-            <!--Related Setion -->
+            <!--Related Section -->
             <aside
                 class="tw-w-full tw-col-span-3 xl:tw-row-span-4 tw-flex tw-flex-col xl:tw-mb-4 xl:tw-mt-0 xl:tw-col-span-1"
                 :class="{ 'xl:tw-hidden': !isRelatedSectionOpen }">
@@ -340,6 +327,10 @@ const breadcrumbProps = computed(() => {
     return breadcrumbLevels;
 });
 
+const showPracticeButton = computed(() => {
+    return props.soundsliceSlug ? true : false;
+})
+
 //Methods
 const handleVideoPlay = (payload) => {
     if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
@@ -411,8 +402,4 @@ const handleCloseSoundslice = () => {
     Helpscout.showWidget();
     Intercom.showWidget();
 };
-
-onMounted(() => {
-    console.log(props.videoButtons)
-})
 </script>
