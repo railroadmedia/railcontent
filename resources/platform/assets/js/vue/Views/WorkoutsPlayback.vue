@@ -80,7 +80,7 @@
                         :is-added="videoResources.isAdded" :content-id="videoResources.contentId"
                         :user-id="videoResources.userId" :resources="videoResources.resources"
                         :show-add-to-list="videoResources.showAddToList" :show-info-button="videoResources.showInfoButton"
-                        :show-practice-button="true" :show-share-button="false" :show-complete-button="true"
+                        :show-practice-button="showPracticeButton" :show-share-button="false" :show-complete-button="true"
                         :report-user-email="videoResources.reportUserEmail"
                         :report-user-name="videoResources.reportUserName" :report-recipient="videoResources.reportRecipient"
                         :report-logo="videoResources.reportLogo" :lesson="{ completed: videoButtons.isCompleted }"
@@ -122,7 +122,7 @@
                 </div>
             </section>
 
-            <!--Related Setion -->
+            <!--Related Section -->
             <aside
                 class="tw-w-full tw-col-span-3 xl:tw-row-span-4 tw-flex tw-flex-col xl:tw-mb-4 xl:tw-mt-0 xl:tw-col-span-1"
                 :class="{ 'xl:tw-hidden': !isRelatedSectionOpen }">
@@ -327,6 +327,10 @@ const breadcrumbProps = computed(() => {
     return breadcrumbLevels;
 });
 
+const showPracticeButton = computed(() => {
+    return props.soundsliceSlug ? true : false;
+})
+
 //Methods
 const handleVideoPlay = (payload) => {
     if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
@@ -398,8 +402,4 @@ const handleCloseSoundslice = () => {
     Helpscout.showWidget();
     Intercom.showWidget();
 };
-
-onMounted(() => {
-    console.log(props.videoButtons)
-})
 </script>
