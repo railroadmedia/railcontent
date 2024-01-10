@@ -1361,6 +1361,7 @@ return [
                 'fields.video.fields.length_in_seconds',
             ],
             'lesson_count',
+            'bundle_count',
             'child_count',
             'coaches' => [
                 'id',
