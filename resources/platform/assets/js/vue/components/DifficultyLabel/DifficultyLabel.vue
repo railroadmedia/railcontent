@@ -25,24 +25,40 @@ const props = defineProps({
 });
 
 const difficultyText = computed(() => {
-    switch (props.difficultyValue.toString()) {
-        case '1':
-            return 'novice';
-        case '2':
-        case '3':
-            return 'beginner';
-        case '4':
-        case '5':
-            return 'intermediate';
-        case '6':
-        case '7':
-            return 'advanced';
-        case '8':
-        case '9':
-        case '10':
-            return 'expert';
-        default:
-            return 'all';
+    const number = /^\d+$/;
+
+    if(number.test(props.difficultyValue.toString())){
+        switch (props.difficultyValue.toString()) {
+            case '1':
+                return 'novice';
+            case '2':
+            case '3':
+                return 'beginner';
+            case '4':
+            case '5':
+                return 'intermediate';
+            case '6':
+            case '7':
+                return 'advanced';
+            case '8':
+            case '9':
+            case '10':
+                return 'expert';
+            default:
+                return 'all';
+        }
+    } else {
+        const difficulty = props.difficultyValue.toString().toLowerCase();
+
+        switch(difficulty){
+            case 'novice':
+            case 'beginner':
+            case 'intermediate':
+            case 'advanced':
+                return difficulty;
+            default:
+                return 'all';
+        }
     }
 });
 

@@ -216,8 +216,9 @@
 <section class="text-center px-4 sm:px-6 py-8 sm:py-14 lg:py-16 relative" style="background:#EFF6FD">
     <div class="container mx-auto z-10 relative max-w-5xl">
         <h2 class="leading-tight mb-3"><strong>Rave reviews for<br class="sm:hidden"> the Alesis Nitro Max</strong></h2>
-        <h6 class="leading-normal mb-3 sm:mb-4">The Alesis Nitro Max is the <br class="sm:hidden">highest-rated entry-level e-kit <strong>EVER</strong>.</h6>
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 lg:gap-6 pt-6">
+        <h6 class="leading-normal mb-5 sm:mb-10">The Alesis Nitro Max is the <br class="sm:hidden">highest-rated entry-level e-kit <strong>EVER</strong>.</h6>
+    <div class="flex flex-wrap">
+            <div class="w-full sm:w-1/3 px-2 sm:px-3 mb-4 sm:mb-0">
             <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4; background: white;">
                 <div class="h-7 md:h-10 lg:h-12 flex items-start justify-center">
                     <img class="h-7 md:h-9 lg:h-10"
@@ -238,7 +239,9 @@
                     </div>
                 </div>
             </div>
+            </div>
 
+            <div class="w-1/2 sm:w-1/3 px-2 sm:px-3 mb-4 sm:mb-0">
             <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4; background: white;">
                 <div class="h-7 md:h-10 lg:h-12 flex items-start justify-center">
                     <img class="h-4 md:h-5 lg:h-6"
@@ -260,6 +263,8 @@
 
                 </div>
             </div>
+            </div>
+        <div class="w-1/2 sm:w-1/3 px-2 sm:px-3 mb-4 sm:mb-0">
             <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4; background: white;">
                     <div class="h-7 md:h-10 lg:h-12 flex items-start justify-center">
                         <img class="h-5 md:h-7 lg:h-9"
@@ -280,26 +285,29 @@
                         </div>
                     </div>
             </div>
-            <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4; background: white;">
-                <div class="h-7 md:h-10 lg:h-12 flex items-start justify-center">
-                    <img class="h-7 md:h-10 lg:h-11"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/kit/sweetwater-logo.png"
-                        alt="Sweetwater Logo">
-                </div>
-                <div class="flex flex-col align-bottom">
-                    <h2 class="leading-tight my-2"><strong>5</strong></h2>
-                    <div class="flex justify-center">
-                        @for($i = 1; $i <= 5; $i++)
-                        @if($i <= 5)
-                            <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                        @else
-                            <i class="align-middle text-lg fas fa-star-half" style="color: #ffac00;" aria-hidden="true"></i>
-                        @endif
-                    @endfor
-                    </div>
-
-                </div>
             </div>
+{{--        <div class="w-1/2 sm:w-1/3 px-2 sm:px-3 mb-4 sm:mb-0">--}}
+{{--            <div class="rounded-xl border-2 px-4 py-5 sm:py-8" style="border-color:#cad1e4; background: white;">--}}
+{{--                <div class="h-7 md:h-10 lg:h-12 flex items-start justify-center">--}}
+{{--                    <img class="h-7 md:h-10 lg:h-11"--}}
+{{--                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/kit/sweetwater-logo.png"--}}
+{{--                        alt="Sweetwater Logo">--}}
+{{--                </div>--}}
+{{--                <div class="flex flex-col align-bottom">--}}
+{{--                    <h2 class="leading-tight my-2"><strong>5</strong></h2>--}}
+{{--                    <div class="flex justify-center">--}}
+{{--                        @for($i = 1; $i <= 5; $i++)--}}
+{{--                        @if($i <= 5)--}}
+{{--                            <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>--}}
+{{--                        @else--}}
+{{--                            <i class="align-middle text-lg fas fa-star-half" style="color: #ffac00;" aria-hidden="true"></i>--}}
+{{--                        @endif--}}
+{{--                    @endfor--}}
+{{--                    </div>--}}
+
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            </div>--}}
     </div>
     </div>
 </section>
@@ -308,7 +316,7 @@
 
     @if(empty($membersVersion))
 <section class="text-center px-4 sm:px-6 py-8 sm:py-12 lg:py-14 relative bg-drumeo text-white">
-    <img class="w-8 md:w-16 -mt-5 absolute top-0 left-1/2 translate -translate-x-1/2" src="https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/products/kit/union-icon.svg">
+    <img class="w-10 md:w-16 -mt-3 sm:-mt-5 absolute top-0 left-1/2 translate -translate-x-1/2" src="https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/products/kit/union-icon.svg">
 
     <div class="container mx-auto z-10 relative max-w-5xl">
         <h4 class="leading-tight mb-5 sm:mb-7 italic">Your new e-kit includes one year of unlimited drum lessons with... </h4>

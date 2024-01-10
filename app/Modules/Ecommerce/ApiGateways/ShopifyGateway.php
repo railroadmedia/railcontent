@@ -86,10 +86,11 @@ class ShopifyGateway
         // DEV NOTE: we must supply the datetime as a properly formatted string, and for some reason Shopify isn't
         // taking the full datetime string into account when querying processed_at:\"$processedAtString\", and instead
         // only uses the date. So as a workaround, just check >= and <=.
-        $processedAtString = $processedAt->toIso8601String();
+        $processedAtStartString = $processedAt->clone()->addDays(-1)->toIso8601String();
+        $processedAtEndString = $processedAt->clone()->addDays(1)->toIso8601String();
         $gql = <<<GQL
             query {
-                 orders(first:1, query:"customer_id:$shopifyCustomerId AND processed_at:>=\"$processedAtString\" AND processed_at:<=\"$processedAtString\""){
+                 orders(first:1, query:"customer_id:$shopifyCustomerId AND processed_at:>=\"$processedAtStartString\" AND processed_at:<=\"$processedAtEndString\""){
                     nodes {
                         ... on Order {
                             id,
