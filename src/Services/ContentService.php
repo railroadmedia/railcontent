@@ -270,7 +270,7 @@ class ContentService
             srand($hour);
             $temp =  array_rand($recommendations, $limit);
             srand(time());
-            return $temp;
+            return $recommendations[$temp];
         } else {
             return array_rand($recommendations, $limit);
         }
