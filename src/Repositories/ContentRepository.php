@@ -1383,11 +1383,10 @@ class ContentRepository extends RepositoryBase
                     ->restrictByFields($this->requiredFields)
                     ->includeByFields($this->includedFields)
                     ->restrictByUserStates($this->requiredUserStates)
-
                     ->groupByField($this->groupByFields);
             $query = $subQuery;
 
-            if ($this->groupByFields['is_a_related_content']) {
+            if ($this->groupByFields['is_a_related_content'] ) {
                 $query =
                     $this->query()
                         ->selectPrimaryColumns()
@@ -1408,10 +1407,19 @@ class ContentRepository extends RepositoryBase
 
                 return $contentRows;
             }
-            $contentRows = $query->getToArray();
+            if(!empty($this->groupByFields['associated_table'])) {
+                $orderBy = ($this->groupByFields['associated_table']['alias'] . '.' . $this->groupByFields['associated_table']['column']);
+                $contentRows = $query->selectRaw(' "'.$this->groupByFields['associated_table']['column'].'" as type') ->directPaginate($this->page, $this->limit)
+                    ->orderByRaw($orderBy . ' asc')->getToArray();
+            }else{
+                $contentRows = $query->selectRaw(' "'.$this->groupByFields['field'].'" as type')->directPaginate($this->page, $this->limit)
+                    ->orderByRaw( $this->groupByFields['field'].' asc')->getToArray();
+            }
+
             $contentIds = $this->getGroupByContentIds($contentRows);
             $dataLookup = $this->getContentLookupByIds($contentIds);
-            return $this->contentCompiledColumnTransformer->transformLessons($contentRows) ?? [];
+
+            return $this->contentCompiledColumnTransformer->transformLessons($contentRows, $dataLookup) ?? [];
         }
 
         $subQuery =

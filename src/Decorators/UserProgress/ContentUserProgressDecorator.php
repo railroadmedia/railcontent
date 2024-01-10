@@ -47,7 +47,9 @@ class ContentUserProgressDecorator implements DecoratorInterface
         $contentIds = [];
 
         foreach ($contents as $content) {
-            $contentIds[] = $content['id'];
+            if(isset($content['id'])) {
+                $contentIds[] = $content['id'];
+            }
         }
 
         $contents = $contents->toArray();
