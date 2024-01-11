@@ -259,7 +259,7 @@
 
     @include('musora.sales.components.workouts-section', [
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314557/rendition/540p/file.mp4?loc=external&signature=e1db56d3f22044707be08bbb02d7327bdf4bee7a07bc705017de56ef45bf1ed4',
-        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/970x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/workouts-card2.webp',
+        'workoutsBG' => 'marketing/singeo/membership/homepage/2024/workouts-card2.webp',
     ])
 
     @php
@@ -289,7 +289,7 @@
 
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
-        'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/marketing/singeo/membership/homepage/webp-format/singeo-guarantee.webp',
+        'badge' => 'marketing/singeo/membership/homepage/webp-format/singeo-guarantee.webp',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence to share your voice with the world.',
     ])
@@ -343,7 +343,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/210x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/singeo-logo.webp',
+        'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
         'header' => 'Unlimited singing lessons.<br> Vocal coaches and support.<br>1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>

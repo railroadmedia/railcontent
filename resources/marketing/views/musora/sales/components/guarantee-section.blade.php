@@ -3,9 +3,10 @@
 <section class="pb-10 sm:pb-14 lg:pb-20 relative text-center px-6" style="background-color:#fff;">
     <div class="container mx-auto max-w-6xl">
         <picture>
-            <source media="(min-width:640px)" srcset={!! $badge !!}>
-            <img class="h-28 md:h-32 -mt-16 md:-mt-20 mb-5 sm:mb-8 transition-opacity opacity-0" loading="lazy"
-                onload="this.classList.remove('opacity-0')" src={!! $badge !!} alt="guarantee-badge">
+            <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/{!! $badge !!}">
+            <img class="h-28 md:h-32 -mt-16 md:-mt-20 mb-5 sm:mb-8 transition-opacity opacity-0" alt="guarantee-badge"
+                loading="lazy" onload="this.classList.remove('opacity-0')"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/220x0/filters:quality(95)/{!! $badge !!}">
         </picture>
         <h3 class="leading-tight">{!! $header !!}</h3>
         <p class="leading-normal md:leading-loose my-4 sm:my-7 max-w-4xl mx-auto">{!! $desc !!}</p>

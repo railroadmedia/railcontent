@@ -341,16 +341,14 @@
 
     @include('musora.sales.components.workouts-section', [
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/898668674/rendition/540p/file.mp4?loc=external&signature=d5f33375d3a16dc91641be1539d7d621d07ad049b030baa8a7f32c23e63e3ab4',
-        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/970x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/workouts-card2.webp',
+        'workoutsBG' => 'marketing/drumeo/membership/homepage/2024/workouts-card2.webp',
     ])
 
     @php
         $songItems = $drumeo['songItems'];
     @endphp
 
-    @include('musora.sales.components.songs-section', [
-        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/device.webp',
-    ])
+    @include('musora.sales.components.songs-section')
 
     @php
         $testimonials = $drumeo['testimonials'];
@@ -367,7 +365,7 @@
     ])
     @if(empty($trialVersion))
         @include('musora.sales.components.guarantee-section', [
-            'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/guarantee.webp',
+            'badge' => 'marketing/drumeo/membership/homepage/2024/guarantee.webp',
             'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
             'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
         ])
@@ -509,7 +507,7 @@
      </section>
     @else
         @include('musora.sales.components.order-section-collage', [
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/240x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/logo-blue.webp',
+        'logo' => 'marketing/drumeo/membership/homepage/2024/logo-blue.webp',
         'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 6000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
