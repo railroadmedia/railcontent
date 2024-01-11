@@ -1,12 +1,12 @@
     <?php
-    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/hailey-benedict.webp';
+    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/hailey-benedict.webp';
     $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/lisa-witt.webp';
-    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/tony-lindsay.webp';
-    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/darcy-d.webp';
-    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/julia-ziegler.webp';
-    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/chris-johnson.webp';
-    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/shelea.webp';
-    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/cate-canning.webp';
+    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/tony-lindsay.webp';
+    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/darcy-d.webp';
+    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/julia-ziegler.webp';
+    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/340x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/chris-johnson.webp';
+    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/370x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/shelea.webp';
+    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/cate-canning.webp';
     $singeo = [
 
         'youtube' => '139,000',

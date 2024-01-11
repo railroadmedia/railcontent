@@ -246,7 +246,7 @@
 
     @include('musora.sales.components.workouts-section', [
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314551/rendition/540p/file.mp4?loc=external&signature=49333e2b437f90a4af69eb5b19468b68f5185729516f735cd390a6ce8b673516',
-        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/workouts-card2.webp',
+        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/970x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/workouts-card2.webp',
     ])
 
 

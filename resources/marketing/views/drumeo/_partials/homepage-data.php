@@ -1,12 +1,12 @@
     <?php
-    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/dorothea-taylor.webp';
+    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/dorothea-taylor.webp';
     $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/jonathan-moffett.webp';
-    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/brandon-toews.webp';
-    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/emmanuelle-caplette.webp';
-    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/dennis-chambers.webp';
-    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/zack-grooves.webp';
-    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/domino-santatonio.webp';
-    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/simon-phillips.webp';
+    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/brandon-toews.webp';
+    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/emmanuelle-caplette.webp';
+    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/dennis-chambers.webp';
+    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/340x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/zack-grooves.webp';
+    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/370x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/domino-santatonio.webp';
+    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/bubbles/simon-phillips.webp';
 
     $drumeo = [
         'slides' => [

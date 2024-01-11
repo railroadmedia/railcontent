@@ -1,12 +1,12 @@
     <?php
-    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/sami-ghawi.webp';
+    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/sami-ghawi.webp';
     $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/ayla-tesler-mabe.webp';
-    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/mark_lettieri.webp';
-    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/pete-thorn.webp';
-    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/dean-lamb.webp';
-    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/rob-scallon.webp';
-    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/yvette-young.webp';
-    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/kent-shores.webp';
+    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/mark_lettieri.webp';
+    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/pete-thorn.webp';
+    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/dean-lamb.webp';
+    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/340x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/rob-scallon.webp';
+    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/370x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/yvette-young.webp';
+    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/kent-shores.webp';
 
     $guitareo = [
 

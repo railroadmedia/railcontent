@@ -259,7 +259,7 @@
 
     @include('musora.sales.components.workouts-section', [
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314557/rendition/540p/file.mp4?loc=external&signature=e1db56d3f22044707be08bbb02d7327bdf4bee7a07bc705017de56ef45bf1ed4',
-        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/workouts-card2.webp',
+        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/970x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/workouts-card2.webp',
     ])
 
     @php

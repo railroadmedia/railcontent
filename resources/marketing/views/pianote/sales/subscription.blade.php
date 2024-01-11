@@ -324,7 +324,7 @@
 
     @include('musora.sales.components.workouts-section', [
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314572/rendition/540p/file.mp4?loc=external&signature=b8d6bc7c80a784c2cc9473ae9e1389b3f9e005fbbce2568d7bd6b7d548a4c19e',
-        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/workouts-card2.webp',
+        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/970x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/workouts-card2.webp',
     ])
 
     @php
