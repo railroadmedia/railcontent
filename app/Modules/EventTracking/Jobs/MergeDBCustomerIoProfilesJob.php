@@ -6,6 +6,7 @@ use App\Console\Commands\Infrastructure\BatchQueryJob;
 use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
@@ -38,6 +39,9 @@ class MergeDBCustomerIoProfilesJob extends BatchQueryJob
         return $this->take;
     }
 
+    /**
+     * @throws Exception
+     */
     public function getQuery(): Builder
     {
         $accountConfigData = $this->customerIoService->getAccountConfigData($this->workspaceName);
@@ -81,7 +85,7 @@ class MergeDBCustomerIoProfilesJob extends BatchQueryJob
             $user = User::query()->where('email', $item->email)->first();
 
             if ($user) {
-                $primary->user_id ??= $user->id;
+                $primary->user_id = $user->id;
                 $primary->save();
 
                 $this->shopifySyncService->syncCustomerByUser($user, false, false);
