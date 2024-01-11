@@ -293,7 +293,7 @@
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/musora/membership/homepage/2023/popular-song-icon.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs.webm",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs-ultra.mp4",
                 "title" => "1000+ popular songs.",
                 "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
             ],
@@ -306,14 +306,14 @@
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/musora/membership/homepage/2023/loop-icon.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/loop.webm",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/loop-ultra.mp4",
                 "title" => "Simplify the tricky parts.",
                 "desc" => "Learn songs faster with perfect notation, practice loops, and tempo control.",
             ],
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/musora/membership/homepage/2023/metronome-icon.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/metronome.webm",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/metronome-ultra.mp4",
                 'title' => 'Improve your timing.',
                 'desc' => 'Use built-in metronome - your new best friend to get the timing just right. ',
             ],
