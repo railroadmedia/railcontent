@@ -35,7 +35,7 @@
                             x-data="{ open: false }">
                             <div class="pb-[70%] @if(empty($gridItem['big'])) sm:pb-[60%] @else sm:pb-[80%]  @endif overflow-hidden text-white relative w-full bg-cover bg-center rounded-xl cursor-pointer"
                                 :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-                                :style="`background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/{{ $gridItem['image'] }}'); background-color: rgba(0, 0, 0, 0.6);`"
+                                :style="`background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $gridItem['image'] }}'); background-color: rgba(0, 0, 0, 0.6);`"
                                 x-intersect.once="lazyLoad = true"
                                 x-on:click="open = ! open"
                             >
@@ -57,10 +57,10 @@
                         <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8"
                             x-data="{ open: false }">
                             <div class="pb-[70%] @if(empty($gridItem['big'])) sm:pb-[60%] @else sm:pb-[80%]  @endif overflow-hidden text-white relative w-full bg-cover bg-center rounded-xl cursor-pointer"
-                                 :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-                                 :style="`background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/{{ $gridItem['image'] }}'); background-color: rgba(0, 0, 0, 0.6);`"
-                                 x-intersect.once="lazyLoad = true"
-                                 x-on:click="open = ! open"
+                                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                                :style="`background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $gridItem['image'] }}'); background-color: rgba(0, 0, 0, 0.6);`"
+                                x-intersect.once="lazyLoad = true"
+                                x-on:click="open = ! open"
                             >
                                 <div class="absolute bottom-0 left-0 right-0 px-7 pb-7 pt-10" style="background:linear-gradient(to bottom, transparent, #000);">
                                     <h5 class="leading-tight"><strong><i class="fa-light fa-circle-plus align-sub text-3xl mr-1 transition-transform duration-300" x-bind:class="{ 'rotate-45': open  }"></i> {{ $gridItem['title'] }}</strong></h5>

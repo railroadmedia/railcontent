@@ -267,37 +267,37 @@
         ],
         "testimonials" => [
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/orianna-sells-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/orianna-sells-thumb.webp",
                 "name" => "Orianna Sells",
                 "location" => "South Carolina, USA",
                 "title" => "I started practicing my songs more meticulously and it paid off – stronger high notes were available and it felt like <strong>the chains finally fell off my voice!</strong>",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/richard-bailey-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/richard-bailey-thumb.webp",
                 "name" => "Richard Bailey ",
                 "location" => "New Jersey, USA",
                 "title" => "Singeo is <strong>like having your own singing coach</strong> at your home, literally any time of the day or night. I enjoy singing so much more than I did before and it’s great fun.",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/kathy-mandell-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/kathy-mandell-thumb.webp",
                 "name" => "Kathy Mandell",
                 "location" => "South Carolina, USA",
                 "title" => "It was like, OH! THAT’S what my problem is! The teachers and students are so <strong>supportive, non-judgmental, and encouraging.</strong> ",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/damien-given-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/damien-given-thumb.webp",
                 "name" => "Damien Given",
                 "location" => "Northern Ireland",
                 "title" => "I’ve received a great deal of positive feedback from my classmates - and great tips from Lisa, Julia, and the team. What a find, what a course, and <strong>what great tutors!</strong>",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/jocelynn-rodrigues-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/jocelynn-rodrigues-thumb.webp",
                 "name" => "Jocelynn Rodrigues",
                 "location" => "Canada",
                 "title" => "<strong>My voice feels stronger.</strong> Everyone can truly sing, and it’s so healing to sing. We were all born with this beautiful instrument and it’s just waiting to be played.",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/terri-pigg-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/terri-pigg-thumb.webp",
                 "name" => "Terri Pigg",
                 "location" => "Tennessee, USA",
                 "title" => "Singeo’s <strong>given me a confidence boost.</strong> I sing all the time – at home, at the office, in the car, wherever. Singing just makes me happy! ",

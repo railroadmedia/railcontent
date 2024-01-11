@@ -280,37 +280,37 @@
         ],
         "testimonials" => [
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/erlik-sorensen-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/erlik-sorensen-thumb.webp",
                 "name" => "Ërlik Sörensen",
                 "location" => "Canada",
                 "title" => "<strong>I’m lightyears ahead of where I was at.</strong> And no matter where I go, I’ll always have one of my guitars in the passenger seat. The life long journey has begun!",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/athina-katri-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/athina-katri-thumb.webp",
                 "name" => "Athina Katri ",
                 "location" => "Greece",
                 "title" => "I feel happy and more confident while playing. I played my first song with mini barre chords and actually enjoyed it. <strong>I’ve never done that before!</strong>",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/vetriselvi-senguttuvan-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/vetriselvi-senguttuvan-thumb.webp",
                 "name" => "Vetriselvi Senguttuvan ",
                 "location" => "India",
                 "title" => "I’m already playing things that were a nightmare to me before. Strumming patterns, smoothly changing chords, and improvisation of different scales. <strong>The frustration is over.</strong>",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/wj-williams-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/wj-williams-thumb.webp",
                 "name" => "WJ Williams",
                 "location" => "Georgia, USA",
                 "title" => "Things that I’ve struggled with for years have been explained in ways that make sense – and the Guitareo instructors have <strong>helped me become more comfortable.</strong>",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/jamie-k-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/jamie-k-thumb.webp",
                 "name" => "Jamie K",
                 "location" => "Canada",
                 "title" => "The goal-based learning makes each set of lessons more entertaining and a <strong>feeling of accomplishment</strong> when completed. I had a feeling of joy that I’ve never had before when playing guitar.",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/jim-mckenna-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/jim-mckenna-thumb.webp",
                 "name" => "Jim McKenna",
                 "location" => "Illinois, USA",
                 "title" => "I like the sincerity, knowledge, and positivity. They <strong>got me started on my journey</strong> and gave me confidence. Now I’m excited to practice and I can actually say “I’m a guitarist!”",

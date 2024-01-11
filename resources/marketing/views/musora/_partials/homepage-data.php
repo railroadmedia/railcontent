@@ -326,7 +326,7 @@
         ],
         "testimonials" => [
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Tonya-Hotz-thumb-m.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Tonya-Hotz-thumb-m.webp",
                 "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Tonya-Hotz-profile.webp",
                 "name" => "Tonya Hotz",
                 "location" => "Arizona, USA",
@@ -334,7 +334,7 @@
                 "title" => "Being able to start and complete an entire song was huge – and eventually to play and sing. <strong>It’s even better than I’d hoped it would be.</strong>",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Claudio-Sanchez-thumb-m.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Claudio-Sanchez-thumb-m.webp",
                 "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Claudio-Sanchez-profile.webp",
                 "name" => "Claudio Sanchez",
                 "location" => "California, USA",
@@ -342,7 +342,7 @@
                 "title" => "I’ve always wanted to play in front of a crowd – at least once in my lifetime – and now <strong>I’ve already achieved that!</strong>",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Darli-Brazil-thumb-m.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Darli-Brazil-thumb-m.webp",
                 "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Darli-Brazil-profile.webp",
                 "name" => "Darli Brazil",
                 "location" => "California, USA",
@@ -350,7 +350,7 @@
                 "title" => "The amount of songs you can learn is amazing. <strong>I am really enjoying this program.</strong> Everything about it is a positive experience.",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Gabriel-Queija-thumb-m.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Gabriel-Queija-thumb-m.webp",
                 "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Gabriel-Queija-profile.webp",
                 "name" => "Gabriel Queija",
                 "location" => "Canada",

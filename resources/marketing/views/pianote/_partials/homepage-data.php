@@ -299,7 +299,7 @@
         ],
         "testimonials" => [
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Tonya-Hotz-thumb-m.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Tonya-Hotz-thumb-m.webp",
                 "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Tonya-Hotz-profile.webp",
                 "name" => "Tonya Hotz",
                 "location" => "Arizona, USA",
@@ -307,7 +307,7 @@
                 "title" => "There was a time when I felt I had missed my opportunity to really master an instrument. But here I am three years later and  <strong>making music is my favorite thing</strong>  to do.",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Allison-Bond-thumb-m.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Allison-Bond-thumb-m.webp",
                 "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Allison-Bond-profile.webp",
                 "name" => "Allison Bond",
                 "location" => "Canada",
@@ -315,7 +315,7 @@
                 "title" => "Every time I have a question there’s something on Pianote for me. <strong>It’s a very positive place</strong> and I can play the piano with other people from around the world. ",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Steve-Wilson-thumb-m.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Steve-Wilson-thumb-m.webp",
                 "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Steve-Wilson-profile.webp",
                 "name" => "Steve Wilson",
                 "location" => "Arizona, USA",
@@ -323,7 +323,7 @@
                 "title" => "Pianote <strong> gave me the motivation I needed</strong> and to learn that it’s okay if I make a whole lot of mistakes. It’s really helpful and a lot of fun. ",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Darli-Brazil-thumb-m.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Darli-Brazil-thumb-m.webp",
                 "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Darli-Brazil-profile.webp",
                 "name" => "Darli Brazil",
                 "location" => "California, USA",
@@ -331,7 +331,7 @@
                 "title" => "The amount of songs you can learn is amazing. <strong>I am really enjoying this program.</strong> Everything about it is a positive experience.",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Ian-Kershaw-thumb-m.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Ian-Kershaw-thumb-m.webp",
                 "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Ian-Kershaw-profile.webp",
                 "name" => "Ian Kershaw",
                 "location" => "United Kingdom",
@@ -339,7 +339,7 @@
                 "title" => "This is such a fantastic and welcoming, <strong> supportive student community.</strong> And it’s in that sharing and practice that the real breakthroughs come. Thank you!",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Jayde-McIntosh-thumb-m.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Jayde-McIntosh-thumb-m.webp",
                 "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Jayde-McIntosh-profile.webp",
                 "name" => "Jayde McIntosh",
                 "location" => "Australia",
