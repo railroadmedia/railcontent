@@ -10,10 +10,9 @@
                     ${breakToListView ? 'tw-@container/breakToList' : ''}
                 `">
                 <!-- Skeleton Loader -->
-                <template v-if="loading && (isWorkout || isChallenge)">
-                    <SkeletonLoader :count="12" type="card" />
+                <template v-if="collectionStoreLoading && (isWorkout || isChallenge)">
+                    <SkeletonLoader :count="6" type="card" />
                 </template>
-
                 <!-- Catalogue Cards -->
                 <template v-else>
                     <CatalogueCard
@@ -40,7 +39,7 @@
                 </template>
             </div>
         </div>
-        <div v-if="data.length === 0 && noResultsMessage.length > 0" class="tw-flex tw-flex-row tw-py-4 tw-justify-center tw-items-center tw-px-4 lg:tw-px-0">
+        <div v-if="!collectionStoreLoading && data.length === 0 && noResultsMessage.length > 0" class="tw-flex tw-flex-row tw-py-4 tw-justify-center tw-items-center tw-px-4 lg:tw-px-0">
             <div class="tw-flex tw-flex-column icon-col face-icon tw-mr-1">
                 <div class="icon-wrap square"></div>
             </div>
@@ -67,13 +66,10 @@ import AddEventModal from '../../vuesora/components/AddEvent/AddEventModal.vue';
 import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
 import { storeToRefs } from "pinia";
 import { useUserStore } from "../../../stores/user";
+import { useCollectionStore } from "../../../stores/collection";
 import SkeletonLoader from '../SkeletonLoader/SkeletonLoader.vue';
 
 const props = defineProps({
-    loading: {
-        type: Boolean,
-        default: () => false,
-    },
     willScroll: {
         type: Boolean,
         default: () => true,
@@ -144,9 +140,11 @@ const props = defineProps({
     },
 },
 );
-
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
+
+const collectionStore = useCollectionStore();
+const { loading: collectionStoreLoading } = storeToRefs(collectionStore);
 
 const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, content: props.preLoadedContent.data });
 const content = ref(props.preLoadedContent ? props.preLoadedContent.data : []);

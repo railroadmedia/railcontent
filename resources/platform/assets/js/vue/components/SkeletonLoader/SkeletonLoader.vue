@@ -6,6 +6,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import SkeletonCard from './SkeletonCard.vue';
+import SkeletonCardGroupHeader from './SkeletonCardGroupHeader.vue';
 
 const props = defineProps({
     type: {
@@ -22,6 +23,8 @@ const skeletonComponent = computed(() => {
     switch (props.type) {
         case 'card':
             return SkeletonCard;
+        case 'card-group-header':
+            return SkeletonCardGroupHeader;
         default:
             return SkeletonCard;
     }
