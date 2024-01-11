@@ -109,6 +109,7 @@ class ShopifySyncService
                 $user = $this->userService->getByEmailOrNull($email);
             }
             if ($user) {
+                $this->updateUserData($shopifyCustomerId, $user);
                 $this->userAccessPermissionsService->syncUser($user, $skipEventSync);
             }
         }
