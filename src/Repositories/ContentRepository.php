@@ -124,7 +124,7 @@ class ContentRepository extends RepositoryBase
         'topic' => [
             'table' => 'railcontent_content_topics',
             'column' => 'topic',
-            'alias' => '_rct',
+            'alias' => '_rctt',
         ],
         'focus' => [
             'table' => 'railcontent_content_focus',
@@ -139,7 +139,7 @@ class ContentRepository extends RepositoryBase
         'theory' => [
             'table' => 'railcontent_content_theory',
             'column' => 'theory',
-            'alias' => '_rtb',
+            'alias' => '_rth',
         ],
         'creativity' => [
             'table' => 'railcontent_content_creativity',
@@ -2419,7 +2419,7 @@ class ContentRepository extends RepositoryBase
             'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus', 'alias' => '_rcf'],
             'bpm' => ['table' => 'railcontent_content_bpm', 'column' => 'bpm', 'alias' => '_rcb'],
             'essentials' => ['table' => 'railcontent_content_essentials', 'column' => 'essentials', 'alias' => '_rce'],
-            'theory' => ['table' => 'railcontent_content_theory', 'column' => 'theory', 'alias' => '_rct'],
+            'theory' => ['table' => 'railcontent_content_theory', 'column' => 'theory', 'alias' => '_rcth'],
             'creativity' => ['table' => 'railcontent_content_creativity', 'column' => 'creativity', 'alias' => '_rcc'],
             'lifestyle' => ['table' => 'railcontent_content_lifestyle', 'column' => 'lifestyle', 'alias' => '_rcl'],
         ];
@@ -2429,11 +2429,15 @@ if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) == 1){
 }
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
                 'data',
-                'instructor',
+//                'instructor',
                 'style',
                 'topic',
                 'focus',
                 'bpm',
+            'essentials',
+            'theory',
+            'creativity',
+            'lifestyle'
             ];
 
         // we always need the related data
@@ -2932,18 +2936,23 @@ if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) == 1){
             'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus', 'alias' => '_rcf'],
             'bpm' => ['table' => 'railcontent_content_bpm', 'column' => 'bpm', 'alias' => '_rcb'],
             'essentials' => ['table' => 'railcontent_content_essentials', 'column' => 'essentials', 'alias' => '_rce'],
-            'theory' => ['table' => 'railcontent_content_theory', 'column' => 'theory', 'alias' => '_rct'],
+            'theory' => ['table' => 'railcontent_content_theory', 'column' => 'theory', 'alias' => '_rcth'],
             'creativity' => ['table' => 'railcontent_content_creativity', 'column' => 'creativity', 'alias' => '_rcc'],
             'lifestyle' => ['table' => 'railcontent_content_lifestyle', 'column' => 'lifestyle', 'alias' => '_rcl'],
         ];
 
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
             'data',
-            'instructor',
+         //   'instructor',
             'style',
             'topic',
             'focus',
             'bpm',
+            'essentials',
+            'theory',
+            'creativity',
+            'lifestyle'
+
         ];
 
         // we always need the related data

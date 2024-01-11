@@ -174,6 +174,24 @@ class ContentCompiledColumnTransformer
                 continue;
             }
 
+            if($contentRow['type'] == 'style'){
+                $contentRows[$contentRowIndex]['data'][] = [
+                    'id' => substr(md5(mt_rand()), 0, 10),
+                    'content_id' =>substr(md5(mt_rand()), 0, 10),
+                    'key' => 'head_shot_picture_url',
+                    'value' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/challenges.jpg',
+                    'type' => 'string',
+                    'position' => 1,
+                ];
+                $contentRows[$contentRowIndex]['fields'][] = [
+                    'id' => substr(md5(mt_rand()), 0, 10),
+                    'content_id' =>substr(md5(mt_rand()), 0, 10),
+                    'key' => 'name',
+                    'value' => $contentRow['grouped_by_field'],
+                    'type' => 'string',
+                    'position' => 1,
+                ];
+            }
             // data
             $dataKeyCounts = [];
 
@@ -302,7 +320,8 @@ class ContentCompiledColumnTransformer
                 }
             }
             $content = collect($contentRows[$contentRowIndex]);
-            $contentRows[$contentRowIndex] = $content->only(['data','id','slug','type','fields','url','published_on','brand','lessons','all_lessons_count','web_url_path']);
+
+            $contentRows[$contentRowIndex] = $content->only(['grouped_by_field','data','id','slug','type','fields','url','published_on','brand','lessons','all_lessons_count','web_url_path']);
         }
         return $contentRows;
     }

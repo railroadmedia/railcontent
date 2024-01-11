@@ -115,6 +115,9 @@ class ContentJsonController extends Controller
                 if ($extra['0'] == 'duration') {
                     $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
                 }
+                if ($extra['0'] == 'topic') {
+                    $required_fields[] = 'topic,'.$extra[1].',string,'.$extra[2];
+                }
             }
         }
         $contentData = $this->contentService->getFiltered(
