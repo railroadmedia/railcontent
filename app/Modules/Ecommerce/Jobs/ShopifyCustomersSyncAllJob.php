@@ -131,11 +131,7 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJobByIds
         $shopifySyncService = app(ShopifySyncService::class);
         foreach ($items as $item) {
             try {
-                $shopifySyncService->syncCustomerByUser(
-                    $item,
-                    isRebuildingPermissions: false,
-                    skipEventSync: $this->skipEventSync
-                );
+                $shopifySyncService->syncCustomerByEmail($item->email);
             } catch (\Throwable $ex) {
                 Log::error("Error syncing shopify user $item->shopify_id: user:$item->id");
                 Log::error($ex);
