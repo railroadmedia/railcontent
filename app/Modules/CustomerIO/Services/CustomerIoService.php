@@ -297,21 +297,6 @@ class CustomerIoService
     }
 
     /**
-     * @throws Exception
-     */
-    public function updateCustomerByCioId(string $cioId, int $id, string $email, string $accountName): void
-    {
-        $accountConfigData = $this->getAccountConfigData($accountName);
-
-        $this->customerIoApiGateway->addOrUpdateCustomer(
-            $accountConfigData['site_id'],
-            $accountConfigData['track_api_key'],
-            'cio_'.$cioId,
-            $email,
-        );
-    }
-
-    /**
      * Looks up the customer based on the $email and $accountName config data. If none exists, this creates a new one,
      * otherwise it updates the existing customer in the database and via the API.
      *
