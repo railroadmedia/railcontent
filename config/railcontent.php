@@ -114,6 +114,8 @@ return [
         'student-review',
         'song-tutorial',
         'song-tutorial-children',
+        'workout',
+        'challenge'
     ],
     'validation' => [
         'drumeo' => [

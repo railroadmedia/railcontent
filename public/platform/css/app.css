@@ -22928,6 +22928,12 @@ a:visited{
 .tw-max-w-\[665px\]{
   max-width: 665px !important;
 }
+<<<<<<< HEAD
+=======
+.tw-max-w-\[764px\]{
+  max-width: 764px !important;
+}
+>>>>>>> filters-v2-BE-support
 .tw-max-w-\[768px\]{
   max-width: 768px !important;
 }
@@ -22970,6 +22976,12 @@ a:visited{
 .tw-max-w-xs{
   max-width: 20rem !important;
 }
+<<<<<<< HEAD
+=======
+.tw-max-w-2xl{
+  max-width: 42rem !important;
+}
+>>>>>>> filters-v2-BE-support
 .tw-flex-1{
   flex: 1 1 0% !important;
 }
@@ -27121,6 +27133,12 @@ a:visited{
   .md\:tw-h-\[54px\]{
     height: 54px !important;
   }
+<<<<<<< HEAD
+=======
+  .md\:tw-h-\[calc\(100vh-128px\)\]{
+    height: calc(100vh - 128px) !important;
+  }
+>>>>>>> filters-v2-BE-support
   .md\:tw-h-auto{
     height: auto !important;
   }
