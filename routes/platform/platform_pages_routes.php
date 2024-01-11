@@ -550,10 +550,6 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.account.id');
 
-        Route::get('/{brand}/profile/settings/account', [ProfileSettingsPagesController::class, 'account'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.profile.settings.account');
-
         Route::put('/update-payment-method', [PaymentMethodUpdateController::class, 'submitUpdateForm'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.update-payment-method');
@@ -806,6 +802,10 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
             ->whereIn('brand', all_brands())
             ->name('platform.invite-a-friend');
+
+        Route::get('/{brand}/profile/settings/account', [ProfileSettingsPagesController::class, 'account'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.account');
     });
 
 Route::get(
