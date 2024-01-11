@@ -26,6 +26,7 @@
                     autoplay
                     loop
                     playsinline
+                    preload="none"
                     x-ref="video"
                     x-effect="if (videoLoaded) { $refs.video.play(); }"
                     x-intersect.once="videoLoaded = true"
