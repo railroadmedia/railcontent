@@ -12,7 +12,7 @@
                             x-data="{ open: false }">
                             <div class="pb-96 overflow-hidden text-white relative w-full bg-cover bg-center rounded-xl cursor-pointer"
                                 :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-                                :style="`background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/{{ $gridItem['image'] }}');`"
+                                :style="`background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/{{ $gridItem['image'] }}');`"
                                 x-intersect.once="lazyLoad = true"
                                 x-on:click="open = ! open"
                             >

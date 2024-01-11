@@ -87,7 +87,7 @@
             <div class="mt-5 sm:mt-0 sm:pl-7 sm:w-1/2 flex-grow-0">
                 <div class="h-full rounded-xl p-7 lg:p-10 pb-64 sm:pb-48 bg-black @if($theme != 'musora') text-white @else text-black @endif flex bg-cover bg-top"
                     :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-                    :style="`background-image:url('://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/{{ $workoutsBG }}')`"
+                    :style="`background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/{{ $workoutsBG }}')`"
                     x-intersect.once="lazyLoad = true"
                     >
                     <div>
