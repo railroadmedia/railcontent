@@ -6005,16 +6005,16 @@
         },
         {
             "name": "laravel/vapor-cli",
-            "version": "v1.61.0",
+            "version": "v1.62.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-cli.git",
-                "reference": "7cdf6de6b76a5e23a89e7a815269be6331998574"
+                "reference": "c049627a5effe57cc32add0f9118cb54382b7982"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/7cdf6de6b76a5e23a89e7a815269be6331998574",
-                "reference": "7cdf6de6b76a5e23a89e7a815269be6331998574",
+                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/c049627a5effe57cc32add0f9118cb54382b7982",
+                "reference": "c049627a5effe57cc32add0f9118cb54382b7982",
                 "shasum": ""
             },
             "require": {
@@ -6068,9 +6068,9 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-cli/tree/v1.61.0"
+                "source": "https://github.com/laravel/vapor-cli/tree/v1.62.0"
             },
-            "time": "2023-12-06T08:29:44+00:00"
+            "time": "2024-01-10T08:27:37+00:00"
         },
         {
             "name": "laravel/vapor-core",
@@ -9691,16 +9691,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.47",
+            "version": "v3.1.49",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "293027191d151e931ee0969e8b0f5871edd8f30e"
+                "reference": "ae27112ae8a1f6d4bfa164f83db011717b4423ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/293027191d151e931ee0969e8b0f5871edd8f30e",
-                "reference": "293027191d151e931ee0969e8b0f5871edd8f30e",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/ae27112ae8a1f6d4bfa164f83db011717b4423ab",
+                "reference": "ae27112ae8a1f6d4bfa164f83db011717b4423ab",
                 "shasum": ""
             },
             "require": {
@@ -9730,9 +9730,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.47"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.49"
             },
-            "time": "2023-12-22T21:49:31+00:00"
+            "time": "2024-01-10T15:36:03+00:00"
         },
         {
             "name": "railroad/permissions",

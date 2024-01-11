@@ -232,6 +232,7 @@ return [
                 'status',
                 'published_on',
                 'completed',
+                'started',
                 'progress_percent',
                 'is_added_to_primary_playlist',
                 'mobile_app_url',
@@ -1361,6 +1362,7 @@ return [
                 'fields.video.fields.length_in_seconds',
             ],
             'lesson_count',
+            'bundle_count',
             'child_count',
             'coaches' => [
                 'id',
@@ -3567,6 +3569,7 @@ return [
                 'status',
                 'published_on',
                 'completed',
+                'started',
                 'progress_percent',
                 'is_added_to_primary_playlist',
                 'mobile_app_url',
