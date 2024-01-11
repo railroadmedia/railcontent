@@ -19,6 +19,7 @@ class MergeDBCustomerIoProfilesJob extends BatchQueryJob
     protected array $ids;
     private string $workspaceName;
     private CustomerIoService $customerIoService;
+    private ShopifySyncService $shopifySyncService;
 
     public function __construct(int $skip, int $take, string $workspaceName)
     {
