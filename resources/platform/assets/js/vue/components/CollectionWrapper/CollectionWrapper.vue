@@ -213,22 +213,22 @@ const getTabOptions = computed(() => {
     if (isCourse.value) {
         return [
             { key: 'courses', value: 'Courses' },
-            { key: 'instructors', value: 'Instructors' },
-            { key: 'genres', value: 'Genres' },
+            { key: 'group_by,instructor', value: 'Instructors', groupByView: true, },
+            { key: 'group_by,style', value: 'Genres', groupByView: true, },
         ];
     } else if (isQuickTips.value || isStudentFocus.value) {
         return [
             { key: 'lessons', value: 'Lessons' },
-            { key: 'instructors', value: 'Instructors' },
-            { key: 'genres', value: 'Genres' },
+            { key: 'group_by,instructor', value: 'Instructors', groupByView: true, },
+            { key: 'group_by,style', value: 'Genres', groupByView: true, },
         ];
     } else if (isRudiment.value) {
         return [
             { key: 'all', value: 'All' },
-            { key: 'drags', value: 'Drags' },
-            { key: 'flams', value: 'Flams' },
-            { key: 'paradiddles', value: 'Paradiddles' },
-            { key: 'rolls', value: 'Rolls' },
+            { key: 'topic,=,drags', value: 'Drags', },
+            { key: 'topic,=,flams', value: 'Flams', },
+            { key: 'topic,=,paradiddles', value: 'Paradiddles', },
+            { key: 'topic,=,rolls', value: 'Rolls', },
         ];
     }
 
