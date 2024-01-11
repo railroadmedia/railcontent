@@ -117,6 +117,7 @@ class ShopifySyncService
 
     public function syncCustomerByEmail($email)
     {
+        Log::debug("Shopify syncing customer by email $email");
         $emailShopify = $this->getEmailForShopify($email);
         $customers = $this->shopify->getCustomers(['email' => $email]);
 
