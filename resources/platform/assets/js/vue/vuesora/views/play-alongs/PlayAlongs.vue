@@ -43,22 +43,8 @@
             </div>
         </div>
 
-        <transition name="show-from-top">
-            <play-alongs-filters v-if="showFilters" v-show="displayFilters" :theme-color="themeColor"
-                :filter-options="filterOptions" :selected-filters="selectedFilters" :loading="loading" :limit="limit"
-                :sort="sort" :brand="brand" :show-completed-only="showCompletedOnly"
-                :show-favorites-only="showFavoritesOnly" :is-shuffle="isShuffle" @filterChange="handleFilterChange"
-                @toggleFavorites="toggleFavorites" @toggleCompleted="toggleCompleted"
-                @handleContentLimit="handleContentLimit" @handleContentSort="handleContentSort"></play-alongs-filters>
-        </transition>
-
-        <div v-if="showPagination" class="flex flex-row pagination-row align-h-right">
-            <pagination :current-page="Number(page)" :total-pages="totalPages" @pageChange="handlePageChange">
-            </pagination>
-        </div>
-
         <div class="tw-flex tw-flex-col tw-grow">
-            <play-alongs-list-item v-for="(item, i) in content" :ref="`list${item.id}`" :key="`list${item.id}`"
+            <play-alongs-list-item v-for="(item, i) in preLoadedContent" :ref="`list${item.id}`" :key="`list${item.id}`"
                 :index="i + 1" :item="item" :brand="brand"
                 :active="activeItem != null ? item.id === activeItem.id : false" :display-user-interactions="false"
                 :no-link="true" :theme-color="themeColor" :show-user-actions="showUserActions"
@@ -79,11 +65,6 @@
                     Alternatively, you can email <a href="mailto:support@musora.com">support@musora.com</a>.
                 </p>
             </div>
-        </div>
-
-        <div v-if="showPagination" class="flex flex-row pagination-row align-h-right">
-            <pagination :current-page="Number(page)" :total-pages="totalPages" @pageChange="handlePageChange">
-            </pagination>
         </div>
 
         <transition name="show-from-bottom">
@@ -199,14 +180,14 @@ export default {
     data() {
         return {
             searchTerm: null,
-            content: this.preLoadedContent.data,
+            content: this.preLoadedContent,
             loading: false,
             currentPlaybackRate: 1,
             currentVolume: 1,
             page: 1,
             limit: 20,
             sort: '-published_on',
-            totalResults: this.preLoadedContent.meta.totalResults,
+            totalResults: this.totalResults,
             // filterOptions: this.getFilterOptions(this.preLoadedContent.meta.filterOptions),
             isKeyboardControlsEnabled: false,
             selectedFilters: {
