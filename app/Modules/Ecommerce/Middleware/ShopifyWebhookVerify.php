@@ -23,8 +23,7 @@ class ShopifyWebhookVerify
         if (hash_equals($calculated_hmac, $hmac_header)) {
             $result = $next($request);
             $sec = intval(microtime(true) - $timeStart);
-            Log::debug("Shopify webhook request took $sec seconds.");
-            if ($sec > 5) {
+            if ($sec >= 5) {
                 Log::error("Shopify webhook request took $sec seconds.");
             }
             return $result;
