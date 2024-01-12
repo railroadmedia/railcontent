@@ -105,7 +105,7 @@ class ShopifySyncService
         } else {
             Log::debug("Customer $shopifyCustomerId: No digital products found");
             $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
-            if (!$user) {
+            if (!$user || $user->isDeleted()) {
                 $user = $this->userService->getByEmailOrNull($email);
             }
             if ($user) {
@@ -280,7 +280,7 @@ class ShopifySyncService
         ?string $email = null
     ): User {
         $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
-        if ($user) {
+        if ($user && !$user->isDeleted()) {
             return $user;
         }
         if ($email) {
