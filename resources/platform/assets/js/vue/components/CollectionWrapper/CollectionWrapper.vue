@@ -307,7 +307,7 @@ onBeforeMount(() => {
         isCoach: isCoach.value,
         content: props.preLoadedContent,
         filter: {
-            activeTab: getFirstTabOption.value.key,
+            activeTab: getActiveTab.value || getFirstTabOption.value.key,
             params: { ...request_params.value },
             [isCoach.value ? 'term' : 'title']: '',
             sort: props.defaultSort,

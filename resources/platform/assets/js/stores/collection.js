@@ -115,14 +115,26 @@ export const useCollectionStore = defineStore({
         getURLParams () {
             const params = new URLSearchParams(window.location.search);
 
+            //Get search params
             if (params.get('term')) {
                 this.filter.searchTerm = params.get('term');
             } else if (params.get('title')) {
                 this.filter.searchTerm = params.get('title');
             }
+
+            //Get sort
             if (params.get('sort')) this.filter.sort = params.get('sort');
+
+            //Get filters
             if (params.getAll('included_fields[]').length > 0) {
                 this.filter.includedFields = params.getAll('included_fields[]');
+            }
+
+            //Get Tab
+            if(params.get('tab')) {
+                this.filter.activeTab = params.get('tab')
+            } else if(params.getAll('tab[]').length > 0) {
+                this.filter.activeTab = params.getAll('tab[]')
             }
         },
 
@@ -214,6 +226,14 @@ export const useCollectionStore = defineStore({
                 this.filter.includedFields.map((field) => {
                     url.searchParams.append('included_fields[]', field);
                 })
+            }
+
+            if(Array.isArray(this.filter.activeTab)){
+                this.filter.activeTab.map((tab) => {
+                    url.searchParams.append('tab[]', tab);
+                })
+            } else if(this.filter.activeTab) {
+                url.searchParams.set('tab', this.filter.activeTab);
             }
 
             window.history.pushState({}, '', url);
