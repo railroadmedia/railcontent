@@ -786,19 +786,19 @@ return [
                     'name' => '5 Minutes',
                     'short_name' => '5 MINS',
                     'is_required_field' => true,
-                    'value' => ['length_in_seconds,<,integer,450,video']
+                    'value' => ['length_in_seconds,450,integer,<,video']
                 ],
                 [
                     'name' => '10 Minutes',
                     'short_name' => '10 MINS',
                     'is_required_field' => true,
-                    'value' => ['length_in_seconds,>,integer,451,video', 'length_in_seconds,<,integer,750,video']
+                    'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
                 ],
                 [
                     'name' => '15+ Minutes',
                     'short_name' => '15+ MINS',
                     'is_required_field' => true,
-                    'value' => ['length_in_seconds,>,integer,750,video']
+                    'value' => ['length_in_seconds,750,integer,>,video']
                 ],
                 [
                     'name' => 'Instructors',
@@ -975,13 +975,13 @@ return [
                         'name' => '5 Minutes',
                         'short_name' => '5 MINS',
                         'is_required_field' => true,
-                        'value' => ['length_in_seconds,<,integer,450,video']
+                        'value' => ['length_in_seconds,450,integer,<,video']
                     ],
                     [
                         'name' => '10 Minutes',
                         'short_name' => '10 MINS',
                         'is_required_field' => true,
-                        'value' => ['length_in_seconds,>,integer,451,video', 'length_in_seconds,<,integer,750,video']
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
                     ],
                     [
                         'name' => 'Instructors',
@@ -1112,19 +1112,19 @@ return [
                         'name' => '5 Minutes',
                         'short_name' => '5 MINS',
                         'is_required_field' => true,
-                        'value' => ['length_in_seconds,<,integer,450,video']
+                        'value' => ['length_in_seconds,450,integer,<,video']
                     ],
                     [
                         'name' => '10 Minutes',
                         'short_name' => '10 MINS',
                         'is_required_field' => true,
-                        'value' => ['length_in_seconds,>,integer,451,video', 'length_in_seconds,<,integer,750,video']
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
                     ],
                     [
                         'name' => '15+ Minutes',
                         'short_name' => '15+ MINS',
                         'is_required_field' => true,
-                        'value' => ['length_in_seconds,>,integer,750,video']
+                        'value' => ['length_in_seconds,750,integer,>,video']
                     ],
                     [
                         'name' => 'Instructors',
@@ -1240,13 +1240,13 @@ return [
                         'name' => '5 Minutes',
                         'short_name' => '5 MINS',
                         'is_required_field' => true,
-                        'value' => ['length_in_seconds,<,integer,450,video']
+                        'value' => ['length_in_seconds,450,integer,<,video']
                     ],
                     [
                         'name' => '10 Minutes',
                         'short_name' => '10 MINS',
                         'is_required_field' => true,
-                        'value' => ['length_in_seconds,>,integer,451,video', 'length_in_seconds,<,integer,750,video']
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
                     ],
                     [
                         'name' => 'Instructors',
