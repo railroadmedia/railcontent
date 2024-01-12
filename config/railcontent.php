@@ -781,6 +781,7 @@ return [
                 [
                     'name' => 'All',
                     'short_name' => 'ALL',
+                    'value' => '',
                 ],
                 [
                     'name' => '5 Minutes',
@@ -970,6 +971,7 @@ return [
                     [
                         'name' => 'All',
                         'short_name' => 'ALL',
+                        'value' => '',
                     ],
                     [
                         'name' => '5 Minutes',
@@ -1107,6 +1109,7 @@ return [
                     [
                         'name' => 'All',
                         'short_name' => 'ALL',
+                        'value' => '',
                     ],
                     [
                         'name' => '5 Minutes',
@@ -1235,6 +1238,7 @@ return [
                     [
                         'name' => 'All',
                         'short_name' => 'ALL',
+                        'value' => '',
                     ],
                     [
                         'name' => '5 Minutes',

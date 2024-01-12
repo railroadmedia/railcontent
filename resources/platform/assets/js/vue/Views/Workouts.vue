@@ -97,7 +97,7 @@
 
 <script setup>
 // TODO: Attach the new component for continue section, or fix this implementation if necessary (no href)
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import { storeToRefs } from 'pinia';
 import {useUserStore} from "../../stores/user";
 
@@ -145,6 +145,10 @@ const props = defineProps({
         type: Array,
         default: () => ["published"],
     },
+    tabs: {
+        type: Array,
+        default: () => [],
+    },
 });
 
 const userStore = useUserStore();
@@ -171,13 +175,18 @@ const closeModal = () => {
     modalType.value = false;
 }
 
-const tabOptions = [
-    { key: '', value: 'All', },
-    { key: 'duration,450,<', value: '5 Minutes', },
-    { key: ['duration,451,>', 'duration,750,<'], value: '10 Minutes', },
-    ...(brand.value === 'drumeo' || brand.value === 'guitareo' ? [{ key: 'duration,751,>', value: '15+ Minutes', }] : []),
-    { key: 'group_by,instructor', value: 'Instructors', groupByView: true, },
-]
+const tabOptions = computed(() => {
+    if (props.tabs?.length) {
+        return props.tabs.map(({ name, value, is_required_field, is_group_by }) => {
+            return {
+                key: (is_group_by) ? 'group_by,' + value:value,
+                value: name,
+                groupByView: (is_group_by) ? true : false,
+            }
+        })
+    }
+    return [];
+});
 
 const infoText = {
     challenge: {
