@@ -1130,9 +1130,16 @@ class ContentService
                         $filterFields['difficulty']
                     );
                 }
-
+                $res = $filter->retrieveFilter();
+                if($groupBy) {
+                    foreach ($res as $i => $v) {
+                        if (!empty($v['lessons'] ?? [])) {
+                            $res[$i]['lessons'] = (Decorator::decorate($v['lessons'], 'content'));
+                        }
+                    }
+                }
                 $resultsDB = new ContentFilterResultsEntity([
-                                                                'results' => $filter->retrieveFilter(),
+                                                                'results' => $res,
                                                                 'total_results' => $pullPagination ?
                                                                     $filter->countFilter() : 0,
                                                                 'filter_options' => $filterFields,
