@@ -2,8 +2,8 @@
 
 namespace App\Modules\MusoraApi\Controllers\V1;
 
+use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\EventTracking\Avo\AvoHelper;
-use App\Modules\EventTracking\Services\CustomerIoService;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Avo;
 use Exception;
@@ -152,6 +152,7 @@ class OnboardingController extends Controller
      *
      * @param Request $request
      * @return Response|Application|ResponseFactory
+     * @throws \Throwable
      */
     public function experience(Request $request): Response|Application|ResponseFactory
     {
@@ -172,6 +173,15 @@ class OnboardingController extends Controller
         $onboardingAnswerHistory->brand = $brand;
         $onboardingAnswerHistory->user_id = user()->id;
         $onboardingAnswerHistory->save();
+
+        $this->customerIoService->createOrUpdateCustomerByUserId(
+            user()->id,
+            'musora',
+            user()->email,
+            [
+                $brand . '_onboarding_experience_level' => strval($experienceLevel),
+            ]
+        );
 
         Avo::onboarding_experience_step_completed(
             AvoHelper::defaultEventProperties([
@@ -209,7 +219,15 @@ class OnboardingController extends Controller
         $onboardingAnswerHistory->user_id = user()->id;
         $onboardingAnswerHistory->save();
 
-        $this->customerIoService->updateUserAttributes(user(), ['has_completed_onboarding' => true]);
+        $this->customerIoService->createOrUpdateCustomerByUserId(
+            user()->id,
+            'musora',
+            user()->email,
+            [
+                $brand . '_onboarding_goal' => $goals,
+                'has_completed_onboarding' => true
+            ]
+        );
 
         Avo::onboarding_goals_step_completed(
             AvoHelper::defaultEventProperties([
