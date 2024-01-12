@@ -393,7 +393,7 @@ const contentCreator = computed(() => {
 const mappedData = computed(() => {
     let difficultyValue = 0; //default
     if(contentModel.value.post.fields) {
-        difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty').value;
+        difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty')?.value || 0;
     }
 
     contentModel.value.card.difficulty = difficultyValue;

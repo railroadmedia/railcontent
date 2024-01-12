@@ -266,6 +266,7 @@
                     :pre-loaded-content="{{ $listLessons }}"
                     :statuses="{{ json_encode($statuses ?? ['published']) }}"
                     :title="{{ json_encode($catalogueMeta['shortname'] ?? $catalogueMeta['name']) }}"
+                    :tabs="{{ json_encode($catalogueMeta['tabs'] ?? []) }}"
                 ></collection-wrapper>
 
         {{-- Play Alongs Catalogue for Drumeo --}}

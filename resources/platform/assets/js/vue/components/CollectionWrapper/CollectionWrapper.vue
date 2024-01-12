@@ -98,6 +98,10 @@ const props = defineProps({
         type: String,
         default: () => '',
     },
+    tabs: {
+        type: Array,
+        default: () => [],
+    },
 });
 
 const collectionStore = useCollectionStore();
@@ -207,31 +211,16 @@ const showGroupBy = computed(() => {
 const hideFilter = computed(() => {
     return isRoutine.value || isStudentReview.value;
 })
-
-//Tab options reactive
 const getTabOptions = computed(() => {
-    if (isCourse.value) {
-        return [
-            { key: 'courses', value: 'Courses' },
-            { key: 'group_by,instructor', value: 'Instructors', groupByView: true, },
-            { key: 'group_by,style', value: 'Genres', groupByView: true, },
-        ];
-    } else if (isQuickTips.value || isStudentFocus.value) {
-        return [
-            { key: 'lessons', value: 'Lessons' },
-            { key: 'group_by,instructor', value: 'Instructors', groupByView: true, },
-            { key: 'group_by,style', value: 'Genres', groupByView: true, },
-        ];
-    } else if (isRudiment.value) {
-        return [
-            { key: 'all', value: 'All' },
-            { key: 'topic,=,drags', value: 'Drags', },
-            { key: 'topic,=,flams', value: 'Flams', },
-            { key: 'topic,=,paradiddles', value: 'Paradiddles', },
-            { key: 'topic,=,rolls', value: 'Rolls', },
-        ];
+    if (props.tabs?.length) {
+        return props.tabs.map(({ name, value, is_required_field, is_group_by }) => {
+            return {
+                key: (is_group_by) ? 'group_by,' + value:value,
+                value: name,
+                groupByView: (is_group_by) ? true : false,
+            }
+        })
     }
-
     return [
         { key: `all${props.title.replace(' ', '').toLowerCase()}`, value: `All ${props.title}` },
     ]
