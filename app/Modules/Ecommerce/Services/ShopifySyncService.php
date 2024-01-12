@@ -77,6 +77,7 @@ class ShopifySyncService
         bool $skipEventSync = false,
         bool $removeDeletedOrderPermissions = false,
     ): void {
+        Log::debug("Shopify syncCustomer: $shopifyCustomerId $email");
         if (!$shopifyCustomerId) {
             $user = $this->userService->getByEmailOrNull($email);
             if ($user) {
@@ -105,10 +106,11 @@ class ShopifySyncService
         } else {
             Log::debug("Customer $shopifyCustomerId: No digital products found");
             $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
-            if (!$user) {
+            if (!$user || $user->isDeleted()) {
                 $user = $this->userService->getByEmailOrNull($email);
             }
             if ($user) {
+                $this->updateUserData($shopifyCustomerId, $user);
                 $this->userAccessPermissionsService->syncUser($user, $skipEventSync);
             }
         }
@@ -116,6 +118,7 @@ class ShopifySyncService
 
     public function syncCustomerByEmail($email)
     {
+        Log::debug("Shopify syncing customer by email $email");
         $emailShopify = $this->getEmailForShopify($email);
         $customers = $this->shopify->getCustomers(['email' => $email]);
 
@@ -278,7 +281,7 @@ class ShopifySyncService
         ?string $email = null
     ): User {
         $user = $this->userService->getUserByShopifyCustomerId($shopifyCustomerId);
-        if ($user) {
+        if ($user && !$user->isDeleted()) {
             return $user;
         }
         if ($email) {
