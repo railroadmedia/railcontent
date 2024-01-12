@@ -10,6 +10,7 @@ class ShopifyWebhookVerify
 {
     public function handle($request, Closure $next)
     {
+        $timeStart = microtime(true);
         $secret = config('shopify.webhooks.secret');
         if (!$secret) {
             Log::warning('SHOPIFY_WEBHOOK_SECRET not set in .env file.  Endpoints not protected.');
@@ -20,7 +21,13 @@ class ShopifyWebhookVerify
         $calculated_hmac = base64_encode(hash_hmac('sha256', $data, $secret, true));
 
         if (hash_equals($calculated_hmac, $hmac_header)) {
-            return $next($request);
+            $result = $next($request);
+            $sec = intval(microtime(true) - $timeStart);
+            Log::debug("Shopify webhook request took $sec seconds.");
+            if ($sec > 5) {
+                Log::error("Shopify webhook request took $sec seconds.");
+            }
+            return $result;
         } else {
             Log::warning('Invalid shopify webhook request.');
             throw new AuthenticationException("Invalid shopify webhook request.");
