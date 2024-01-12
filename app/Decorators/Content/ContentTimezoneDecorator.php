@@ -40,10 +40,11 @@ class ContentTimezoneDecorator extends TypeDecoratorBase
                     $contentsOfType[$contentIndex]['live_event_end_time'] = null;
                 }
             }
-
-            $contentsOfType[$contentIndex]['published_on_in_timezone'] =
-                Carbon::parse($content['published_on'], 'UTC')
-                    ->timezone($timezone)->toDateTimeString();
+            if(isset($content['published_on'])) {
+                $contentsOfType[$contentIndex]['published_on_in_timezone'] =
+                    Carbon::parse($content['published_on'], 'UTC')
+                        ->timezone($timezone)->toDateTimeString();
+            }
         }
 
         return $this->mergeDecorated($contents, $contentsOfType);
