@@ -37,21 +37,15 @@
 
         </div>
         <div class="tw-flex tw-mt-2 md:tw-mt-0 tw-justify-end tw-items-center tw-w-full md:tw-w-auto">
-            <div class="tw-flex tw-flex-col tw-justify-center tw-items-center">
-                <div tabindex="0" class="tw-w-[51px] tw-h-[58px] tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-cursor-pointer" title="Delete" @click.stop.prevent="deleteNotification(id)">
-                    <TrashIcon class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc]" />
-                </div>
+            <div tabindex="0" class="tw-inline-flex tw-justify-center tw-items-center tw-w-[51px] tw-h-[58px] tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-cursor-pointer" title="Delete" @click.stop.prevent="deleteNotification(id)">
+                <TrashIcon class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc]" />
             </div>
-            <div class="tw-flex tw-flex-col tw-justify-center tw-items-center">
-                <div tabindex="0" class="tw-w-[51px] tw-h-[58px] tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-cursor-pointer" :title="isRead ? 'Mark as Unread' : 'Mark as Read'" @click="toggleReadNotification">
-                    <EyeIcon v-if="!isRead" class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc]" />
-                    <EyeOffIcon v-if="isRead" class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc]" />
-                </div>
+            <div tabindex="0" class="tw-inline-flex tw-justify-center tw-items-center tw-w-[51px] tw-h-[58px] tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-cursor-pointer" :title="isRead ? 'Mark as Unread' : 'Mark as Read'" @click="toggleReadNotification">
+                <EyeIcon v-if="!isRead" class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc]" />
+                <EyeOffIcon v-if="isRead" class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc]" />
             </div>
-            <div class="tw-flex tw-flex-col tw-justify-center tw-items-center">
-                <div tabindex="0" class="tw-w-[51px] tw-h-[58px] tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-cursor-pointer" title="See notification">
-                    <ArrowCircleRightIcon class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc]" />
-                </div>
+            <div tabindex="0" class="tw-inline-flex tw-justify-center tw-items-center tw-w-[51px] tw-h-[58px] tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-cursor-pointer" title="See notification">
+                <ArrowCircleRightIcon class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc]" />
             </div>
         </div>
     </a>
