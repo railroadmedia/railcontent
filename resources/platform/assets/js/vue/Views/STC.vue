@@ -294,7 +294,7 @@ const selectLanguage = (value, isContainer = false) => {
     if(selectedLanguages.value.includes(value)){
         selectedLanguages.value = selectedLanguages.value.filter((lang) => lang !== value);
     } else {
-        selectedLanguages.value.push(value);
+        value && selectedLanguages.value.push(value);
     }
 }
 
