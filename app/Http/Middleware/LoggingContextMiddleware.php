@@ -21,7 +21,7 @@ class LoggingContextMiddleware
         Log::shareContext(
             array_filter([
                     'tid' => self::getTraceId(),
-                    'path' => $url,
+                    'url' => $url,
                     'uid' => $user?->id,
                 ]
             )
