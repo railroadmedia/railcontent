@@ -209,7 +209,7 @@ const showGroupBy = computed(() => {
 
 //Filter state reactive
 const hideFilter = computed(() => {
-    return isRoutine.value || isStudentReview.value;
+    return isRoutine.value;
 })
 const getTabOptions = computed(() => {
     if (props.tabs?.length) {
