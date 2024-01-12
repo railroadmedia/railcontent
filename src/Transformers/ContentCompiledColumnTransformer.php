@@ -223,6 +223,7 @@ class ContentCompiledColumnTransformer
 
             foreach ($fieldKeys as $fieldKey) {
                 foreach($lessonContentIds as $index=>$contentId) {
+                    $data = $dataLookup[$contentId] ?? [];
                     $contentRowCompiledColumnValue = json_decode($data['compiled_view_data'] ?? '', true);
 
                     if(isset($contentRowCompiledColumnValue)) {
