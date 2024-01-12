@@ -437,6 +437,25 @@ return [
                 'allowableFilters' => [],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor','progress'],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => '',
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => 'instructor'
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => 'style'
+                    ],
+                ],
             ],
             'in-progress' => [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
@@ -491,6 +510,25 @@ return [
                 'allowableFilters' => ['difficulty', 'style', 'lifestyle'],
                 'allowableFiltersMobile' => ['difficulty',  'style', 'lifestyle'],
                 'sortBy' => 'slug',
+                'tabs' => [
+                    [
+                        'name' => 'Songs',
+                        'short_name' => 'Songs',
+                        'value' => '',
+                    ],
+                    [
+                        'name' => 'Artists',
+                        'short_name' => 'ARTISTS',
+                        'is_group_by' => true,
+                        'value' => 'artist'
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => 'style'
+                    ],
+                ],
             ],
             'student-focus' => [
                 'name' => 'Student Focus',
@@ -528,26 +566,31 @@ return [
                 'tabs' => [
                     [
                         'name' => 'All',
+                        'short_name' => 'ALL',
                         'value' => '',
                     ],
                     [
                         'name' => 'Drags',
+                        'short_name' => 'DRAGS',
                         'is_required_field' => true,
                         //'key'=>['duration,451,>', 'duration,750,<'],topic,Accompaniment,string,=
                         'value' => ['topic,drags,string,=']
                     ],
                     [
                         'name' => 'Flams',
+                        'short_name' => 'FLAMS',
                         'is_required_field' => true,
                         'value' => ['topic,flams,string,=']
                     ],
                     [
                         'name' => 'Paradiddles',
+                        'short_name' => 'PARADIDDLES',
                         'is_required_field' => true,
                         'value' => ['topic,paradiddles,string,=']
                     ],
                     [
                         'name' => 'Rolls',
+                        'short_name' => 'ROLLS',
                         'is_required_field' => true,
                         'value' => ['topic,rolls,string,=']
                     ],
