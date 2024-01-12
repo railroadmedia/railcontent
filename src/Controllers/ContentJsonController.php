@@ -119,7 +119,7 @@ class ContentJsonController extends Controller
                     $required_fields[] = $tab;
                 }
                 if ($extra['0'] == 'topic') {
-                    $required_fields[] = 'topic,'.$extra[1].',string,'.$extra[2];
+                    $required_fields[] = $tab;
                 }
             }
         }
