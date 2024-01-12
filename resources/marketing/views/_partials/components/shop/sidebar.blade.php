@@ -60,12 +60,16 @@
                 @endif
 
                 @if(count($sizes) > 0)
-                    <select class="pack-pick mx-auto mt-4 border-2 rounded-full font-bold text-xl uppercase w-full h-auto py-2 pr-7 pl-5 bg-white md:py-2 lg:py-4" style="border-color: #717D80; color:#717D80; font-family: Roboto Condensed, sans-serif" title="Shirt Size" required>
+                    <select
+                        class="pack-pick mx-auto mt-4 border-2 rounded-full font-black text-lg w-full h-auto py-2 pr-7 pl-5 bg-white md:py-2 lg:py-4"
+                        style="border-color: #717D80; color:#717D80;"
+                        title="Shirt Size" required>
                         <option hidden value="">@if(!empty($optionText)) {{ $optionText }} @else Choose Size @endif</option>
                         @foreach($sizes as $size)
                             <option
-                                class="bg-white text-black"
-                                @if(empty($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]) || $products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() === 0) disabled @endif
+                                class="bg-white text-black font-black"
+                                @if(empty($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)])
+ || $products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() === 0) disabled style="color: #DDD;" @endif
                                 value="@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
                                 data-price="{{!empty($size->price) ? $size->price : $price}}"
                                 data-product-json='{"@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
