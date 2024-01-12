@@ -77,7 +77,6 @@ class ShopifySyncService
         bool $skipEventSync = false,
         bool $removeDeletedOrderPermissions = false,
     ): void {
-        Log::debug("Shopify syncCustomer: $shopifyCustomerId $email");
         if (!$shopifyCustomerId) {
             $user = $this->userService->getByEmailOrNull($email);
             if ($user) {
