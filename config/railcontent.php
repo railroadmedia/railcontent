@@ -371,7 +371,7 @@ return [
             \App\Decorators\Content\ContentLikesUserDecorator::class,
         ],
         'playlist' => [
-           \App\Decorators\Playlist\PlaylistDecorator::class,
+            \App\Decorators\Playlist\PlaylistDecorator::class,
         ],
         'playlist-item' => [
             \Railroad\Railcontent\Decorators\UserProgress\ContentUserProgressDecorator::class,
@@ -464,6 +464,25 @@ return [
                 'allowableFilters' => ['difficulty', 'style', 'essentials','theory','creativity','lifestyle'],
                 'allowableFiltersMobile' => ['difficulty', 'style', 'essentials','theory','creativity','lifestyle'],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'Courses',
+                        'short_name' => 'COURSES',
+                        'value' => '',
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => 'instructor'
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => 'style'
+                    ],
+                ],
             ],
             'songs' => [
                 'name' => 'Songs',
@@ -480,6 +499,25 @@ return [
                 'allowableFilters' => ['difficulty', 'style','focus','lifestyle'],
                 'allowableFiltersMobile' => ['difficulty', 'style','focus','lifestyle'],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => '',
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => 'instructor'
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => 'style'
+                    ],
+                ],
             ],
             'rudiments' => [
                 'name' => 'Rudiments',
@@ -487,6 +525,34 @@ return [
                 'description' => "The 40 drum rudiments are essential for any drummer, no matter the style, genre, or scenario. You can use the videos below to help you learn, practice, and perfect every single one.",
                 'allowableFilters' => ['difficulty','style',  'instrument','focus'],
                 'allowableFiltersMobile' => ['difficulty','style',  'instrument','focus'],
+                'tabs' => [
+                    [
+                        'name' => 'All',
+                        'value' => '',
+                    ],
+                    [
+                        'name' => 'Drags',
+                        'is_required_field' => true,
+                        //'key'=>['duration,451,>', 'duration,750,<'],topic,Accompaniment,string,=
+                        'value' => ['topic,drags,string,=']
+                    ],
+                    [
+                        'name' => 'Flams',
+                        'is_required_field' => true,
+                        'value' => ['topic,flams,string,=']
+                    ],
+                    [
+                        'name' => 'Paradiddles',
+                        'is_required_field' => true,
+                        'value' => ['topic,paradiddles,string,=']
+                    ],
+                    [
+                        'name' => 'Rolls',
+                        'is_required_field' => true,
+                        'value' => ['topic,rolls,string,=']
+                    ],
+                ],
+
                 'sortBy' => 'sort',
             ],
             'spotlight' => [
@@ -510,6 +576,25 @@ return [
                 'allowableFilters' => ['difficulty', 'style'],
                 'allowableFiltersMobile' => ['difficulty', 'style'],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => '',
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => 'instructor'
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => 'style'
+                    ],
+                ],
             ],
             'challenges' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/challenges.jpg',
@@ -521,6 +606,25 @@ return [
                 'allowableFilters' => ['difficulty', 'style'],
                 'allowableFiltersMobile' => ['difficulty', 'style'],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => '',
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => 'instructor'
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => 'style'
+                    ],
+                ],
             ],
             'boot-camps' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/bootcamps.jpg',
@@ -531,6 +635,25 @@ return [
                 'allowableFilters' => ['difficulty','style','essentials'],
                 'allowableFiltersMobile' => ['difficulty','style','essentials'],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => '',
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => 'instructor'
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => 'style'
+                    ],
+                ],
             ],
             'quick-tips' => [
                 'thumbnailUrl' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/78e68540-2b93-4445-882c-a19eef6b5d00/public',
@@ -539,6 +662,25 @@ return [
                 'description' => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice. ",
                 'allowableFilters' => ['difficulty', 'style', 'essentials','theory','creativity','lifestyle'],
                 'allowableFiltersMobile' => ['difficulty', 'style', 'essentials','theory','creativity','lifestyle'],
+                'tabs' => [
+                    [
+                        'name' => 'All',
+                        'short_name' => 'ALL',
+                        'value' => '',
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => 'instructor'
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => 'style'
+                    ],
+                ],
                 'sortBy' => '-published_on',
             ],
             'podcasts' => [
@@ -596,6 +738,25 @@ return [
                 'allowableFilters' => ['difficulty', 'style', 'essentials', 'theory'],
                 'allowableFiltersMobile' => ['difficulty', 'style', 'essentials', 'theory'],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => '',
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => 'instructor'
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => 'style'
+                    ],
+                ],
             ],
             'solos' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/solos.jpg',
@@ -606,6 +767,25 @@ return [
                 'allowableFilters' => ['difficulty', 'style'],
                 'allowableFiltersMobile' => ['difficulty', 'style'],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => '',
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => 'instructor'
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => 'style'
+                    ],
+                ],
             ],
             'performances' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/performances.jpg',
@@ -616,6 +796,25 @@ return [
                 'allowableFilters' => ['difficulty', 'style'],
                 'allowableFiltersMobile' => ['difficulty', 'style'],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => '',
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => 'instructor'
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => 'style'
+                    ],
+                ],
             ],
             'exploring-beats' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/exploring-beats.jpg',
@@ -745,6 +944,13 @@ return [
                 "description" => "Add your drumming to high-quality drumless play-along tracks - with handy playback tools to help you create the perfect performance.",
                 "allowableFilters" => ['bpm', 'style', 'difficulty'],
                 'allowableFiltersMobile' => ['difficulty', 'bpm','style','artist'],
+                'tabs' => [
+                    [
+                        'name' => 'All Play-Alongs',
+                        'short_name' => 'ALL',
+                        'value' => '',
+                    ],
+                ],
             ],
             'drum-fest-international-2022' => [
                 'thumbnailUrl' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/2c12c9ae-5a67-4767-f257-d1fa3693bd00/public',
@@ -773,41 +979,42 @@ return [
                 'sortBy' => '-published_on',
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
- 	    'workout' => [
-            'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
-            'allowableFilters' => ['difficulty','style','topic'],
+            'workout' => [
+                'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
+                'allowableFilters' => ['difficulty','style','topic'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
-            'tabs' => [
-                [
-                    'name' => 'All',
-                    'short_name' => 'ALL',
-                ],
-                [
-                    'name' => '5 Minutes',
-                    'short_name' => '5 MINS',
-                    'is_required_field' => true,
-                    'value' => ['length_in_seconds,450,integer,<,video']
-                ],
-                [
-                    'name' => '10 Minutes',
-                    'short_name' => '10 MINS',
-                    'is_required_field' => true,
-                    'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
-                ],
-                [
-                    'name' => '15+ Minutes',
-                    'short_name' => '15+ MINS',
-                    'is_required_field' => true,
-                    'value' => ['length_in_seconds,750,integer,>,video']
-                ],
-                [
-                    'name' => 'Instructors',
-                    'short_name' => 'INSTRUCTORS',
-                    'is_group_by' => true,
-                    'value' => 'instructor'
+                'tabs' => [
+                    [
+                        'name' => 'All',
+                        'short_name' => 'ALL',
+                        'value' => '',
+                    ],
+                    [
+                        'name' => '5 Minutes',
+                        'short_name' => '5 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,450,integer,<,video']
+                    ],
+                    [
+                        'name' => '10 Minutes',
+                        'short_name' => '10 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                    ],
+                    [
+                        'name' => '15+ Minutes',
+                        'short_name' => '15+ MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,750,integer,>,video']
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => 'instructor'
+                    ],
                 ],
             ],
-        ],
         ],
         'pianote' => [
             'all' => [
@@ -970,6 +1177,7 @@ return [
                     [
                         'name' => 'All',
                         'short_name' => 'ALL',
+                        'value' => '',
                     ],
                     [
                         'name' => '5 Minutes',
@@ -1107,6 +1315,7 @@ return [
                     [
                         'name' => 'All',
                         'short_name' => 'ALL',
+                        'value' => '',
                     ],
                     [
                         'name' => '5 Minutes',
@@ -1235,6 +1444,7 @@ return [
                     [
                         'name' => 'All',
                         'short_name' => 'ALL',
+                        'value' => '',
                     ],
                     [
                         'name' => '5 Minutes',
