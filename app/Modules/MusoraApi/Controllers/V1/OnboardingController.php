@@ -2,10 +2,11 @@
 
 namespace App\Modules\MusoraApi\Controllers\V1;
 
-use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Avo;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
@@ -23,12 +24,10 @@ use Modules\UserManagementSystem\Models\OnboardingTopic;
 class OnboardingController extends Controller
 {
     private OnboardingService $onboardingService;
-    private CustomerIoService $customerIoService;
 
-    public function __construct(OnboardingService $onboardingService, CustomerIoService $customerIoService)
+    public function __construct(OnboardingService $onboardingService)
     {
         $this->onboardingService = $onboardingService;
-        $this->customerIoService = $customerIoService;
     }
 
     /**
@@ -174,13 +173,14 @@ class OnboardingController extends Controller
         $onboardingAnswerHistory->user_id = user()->id;
         $onboardingAnswerHistory->save();
 
-        $this->customerIoService->createOrUpdateCustomerByUserId(
-            user()->id,
-            'musora',
-            user()->email,
-            [
-                $brand . '_onboarding_experience_level' => strval($experienceLevel),
-            ]
+        dispatch(
+            (new CustomerIoSyncUserByUserId(
+                user(),
+                [$brand . '_onboarding_experience_level' => strval($experienceLevel)]
+            ))->delay(
+                Carbon::now()
+                    ->addSeconds(30)
+            )
         );
 
         Avo::onboarding_experience_step_completed(
@@ -219,15 +219,19 @@ class OnboardingController extends Controller
         $onboardingAnswerHistory->user_id = user()->id;
         $onboardingAnswerHistory->save();
 
-        $this->customerIoService->createOrUpdateCustomerByUserId(
-            user()->id,
-            'musora',
-            user()->email,
-            [
-                $brand . '_onboarding_goal' => $goals,
-                'has_completed_onboarding' => true
-            ]
+        dispatch(
+            (new CustomerIoSyncUserByUserId(
+                user(),
+                [
+                    $brand . '_onboarding_goal' => $goals,
+                    'has_completed_onboarding' => true
+                ]
+            ))->delay(
+                Carbon::now()
+                    ->addSeconds(30)
+            )
         );
+
 
         Avo::onboarding_goals_step_completed(
             AvoHelper::defaultEventProperties([
