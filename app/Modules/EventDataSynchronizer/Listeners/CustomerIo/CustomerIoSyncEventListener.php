@@ -374,7 +374,7 @@ class CustomerIoSyncEventListener
                 self::$alreadyQueuedUserIds[] = $user->id;
             }
         } catch (Throwable $throwable) {
-            error_log($throwable);
+            Log::error($throwable);
         }
     }
 
