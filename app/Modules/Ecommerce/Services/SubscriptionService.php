@@ -102,7 +102,6 @@ class SubscriptionService
             // BR-1243: safety check for null nextChargeScheduledAt
             if (is_null($mostRecentActiveSubscription->nextChargeScheduledAt)) {
                 $diff = 0;
-                Log::debug('BR-1243: null nextChargeScheduledAt', $mostRecentActiveSubscription);
             } else {
                 $diff = abs(
                     $mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay()->diffInDays(
