@@ -170,7 +170,7 @@
         <div class="flex flex-wrap items-center mb-8 sm:mb-20">
             <div class="w-full sm:w-1/2 lg:w-7/12 mb-5 sm:mb-0 sm:order-1">
                 <img class="transition-opacity opacity-0 rounded-xl mx-auto max-w-xs sm:max-w-full" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/kit/3-fits-anywhere2.png">
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/kit/3-fits-anywhere3.png">
             </div>
             <div class="w-full sm:w-1/2 lg:w-5/12 sm:pr-7 lg:pr-10">
                 <h4 class="leading-tight "><strong>Fits In Any Room</strong></h4>
@@ -433,7 +433,7 @@
 
         <div class="flex flex-wrap md:flex-nowrap gap-4 pt-10">
             <div class="md:hidden w-full">
-                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/gallery-02.png" alt="Drum kit" class="w-full h-auto">
+                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/gallery-02a.png" alt="Drum kit" class="w-full h-auto">
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/drumeo/products/kit/gallery-01.png" alt="Drum kit" class="w-full h-auto py-6">
             </div>
 
