@@ -79,7 +79,7 @@
             class="flex flex-column icon-col tw-items-center"
         >
             <button 
-                class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]"
+                class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB] tw-h-full tw-items-center"
                 :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]'"
                 :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"
                 :data-content-id="item.id"
@@ -99,7 +99,7 @@
         >
             <a
                 :href="item.url"
-                class="body no-decoration tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]"
+                class="body tw-inline-flex no-decoration tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB] tw-h-full tw-items-center"
                 title="Watch Lesson Video"
                 @click.stop
             >
@@ -115,7 +115,7 @@
             class="flex flex-column icon-col align-v-center"
         >
             <div
-                class="body"
+                class="body tw-h-full tw-items-center tw-inline-flex"
                 @click.stop.prevent="markAsComplete"
             >
                 <i
