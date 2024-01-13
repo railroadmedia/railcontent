@@ -23,7 +23,7 @@ class EcommerceEventListener
     ) {
     }
 
-    public function handleUserCreated(UserCreated $userCreated)
+    public function handleUserCreated(UserCreated $userCreated): void
     {
         try {
             $user = $userCreated->getUser();
