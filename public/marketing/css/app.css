@@ -3892,6 +3892,12 @@ video {
 .no-underline {
   text-decoration-line: none !important;
 }
+.underline-offset-2 {
+  text-underline-offset: 2px !important;
+}
+.underline-offset-4 {
+  text-underline-offset: 4px !important;
+}
 .antialiased {
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
