@@ -86,7 +86,7 @@ export const useCollectionStore = defineStore({
                                 included_fields: this.filter.includedFields,
                                 count_filter_items: true,
                                 ...(this.filter.searchTerm && { [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm} ),
-                                ...(this.filter.activeTab && { tab: this.filter.activeTab }),
+                                ...(this.filter.activeTab && { tab: this.tabData[this.filter.activeTab].key }),
                                 ...(this.filter.progress && { included_user_states: [this.filter.progress] }),
                             },
                         })
@@ -128,13 +128,6 @@ export const useCollectionStore = defineStore({
             //Get filters
             if (params.getAll('included_fields[]').length > 0) {
                 this.filter.includedFields = params.getAll('included_fields[]');
-            }
-
-            //Get Tab
-            if(params.get('tab')) {
-                this.filter.activeTab = params.get('tab')
-            } else if(params.getAll('tab[]').length > 0) {
-                this.filter.activeTab = params.getAll('tab[]')
             }
         },
 
@@ -206,8 +199,24 @@ export const useCollectionStore = defineStore({
                 this.filter = { ...this.filter, ...defaults.filter };
             }
 
-            if (defaults.tabData) {
-                this.tabData = { ...defaults.tabData };
+            //Set active tab
+            if (defaults.tabOptions) {
+                const params = new URLSearchParams(window.location.search);
+                const tabParams = params.getAll('tab[]');
+                //Set active tab from URL
+                if(tabParams && tabParams.length > 0){
+                    const activeTab = defaults.tabOptions.find((tab) => {
+                        return JSON.stringify(tab.key) === JSON.stringify(tabParams);
+                    })
+
+                    this.filter.activeTab = activeTab.value;
+                    this.tabData[this.filter.activeTab] = { ...defaults.tabData, ...activeTab };
+
+                //Set active tab as first tab from tabOptions
+                } else {
+                    this.filter.activeTab = defaults.tabOptions[0].value;
+                    this.tabData[this.filter.activeTab] = { ...defaults.tabData, ...defaults.tabOptions[0] };
+                }
             }
 
             if (defaults.filterableValues) {
@@ -228,13 +237,9 @@ export const useCollectionStore = defineStore({
                 })
             }
 
-            if(Array.isArray(this.filter.activeTab)){
-                this.filter.activeTab.map((tab) => {
-                    url.searchParams.append('tab[]', tab);
-                })
-            } else if(this.filter.activeTab) {
-                url.searchParams.set('tab', this.filter.activeTab);
-            }
+            this.tabData[this.filter.activeTab].key.map((key) => {
+                url.searchParams.append('tabs[]', key);
+            })
 
             window.history.pushState({}, '', url);
         },
@@ -261,13 +266,12 @@ export const useCollectionStore = defineStore({
                 filterApplied: true,
             }
 
-            this.filter.activeTab = tab.key;
-            if (this.tabData[tab.key] && this.tabData[tab.key].filterApplied) {
+            if (this.tabData[tab.value] && this.tabData[tab.value].filterApplied) {
                 this.data = ([...this.tabData[this.filter.activeTab].data]);
             } else {
-                this.tabData[this.filter.activeTab] = { ...tab };
+                this.filter.activeTab = tab.value;
+                this.tabData[this.filter.activeTab] = { ...tab, filterApplied: true };
                 this.getData();
-                this.tabData[tab.key].filterApplied = true;
             }
         },
     },

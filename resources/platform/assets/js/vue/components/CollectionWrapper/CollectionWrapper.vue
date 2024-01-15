@@ -230,17 +230,11 @@ const tabOptionData = computed(() => {
     return props.tabOptions.length > 0 ? props.tabOptions : getTabOptions.value;
 })
 
-const getFirstTabOption = computed(() => {
-    return tabOptionData.value[0];
-})
-
-const getFirstTabData = computed(() => {
-    return {
-        [getFirstTabOption.value.key]: {
-            currentPage: 1,
-            totalPages: Object.keys(props.preLoadedContent).length > 0 ? Math.ceil(props.preLoadedContent?.meta?.totalResults / props.limit) : 0,
-            totalResults: Object.keys(props.preLoadedContent).length > 0 ? props.preLoadedContent?.meta?.totalResults : 0,
-        }
+const getTabData = computed(() => {
+    return  {
+        currentPage: 1,
+        totalPages: Object.keys(props.preLoadedContent).length > 0 ? Math.ceil(props.preLoadedContent?.meta?.totalResults / props.limit) : 0,
+        totalResults: Object.keys(props.preLoadedContent).length > 0 ? props.preLoadedContent?.meta?.totalResults : 0,
     }
 })
 
@@ -307,12 +301,12 @@ onBeforeMount(() => {
         isCoach: isCoach.value,
         content: props.preLoadedContent,
         filter: {
-            activeTab: getActiveTab.value || getFirstTabOption.value.key,
             params: { ...request_params.value },
             [isCoach.value ? 'term' : 'title']: '',
             sort: props.defaultSort,
         },
-        tabData: getFirstTabData.value,
+        tabData: getTabData.value,
+        tabOptions: tabOptionData.value,
         filterableValues: props.filterableValues,
     })
 })
@@ -321,6 +315,6 @@ onMounted(() => {
     // console.log(props.collectionType)
     // console.log(props.title)
     // console.log(props.preLoadedContent)
-
+    console.log(props.tabOptions)
 })
 </script>
