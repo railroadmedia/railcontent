@@ -6,11 +6,12 @@ namespace App\Modules\Ecommerce\Jobs;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class ShopifySyncCustomerJob
+class ShopifySyncCustomerJob implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;

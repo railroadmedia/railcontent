@@ -94,6 +94,7 @@ class ShopifySyncService
             Log::debug("Customer $shopifyCustomerId: Found $count orders");
 
             $user = $this->getOrCreateUser($shopifyCustomerId, $email);
+
             $orderCollection = new OrderCollection($orders, $products);
             $this->updateUserData($shopifyCustomerId, $user);
             $this->userAccessPermissionsService->syncShopifyOrders(
@@ -339,15 +340,16 @@ class ShopifySyncService
     {
         Log::debug("Shopify: syncing user $user->id");
         $customerResource = $this->getShopifyCustomer($user->email);
+        if ($customerResource) {
+            $shopifyCustomerId = $customerResource['id'];
+            $customerData = [];
+            $customerData["metafields"] = $user->getNewMetafieldsForShopify();
+            $this->shopify->updateCustomer($shopifyCustomerId, $customerData);
 
-        $shopifyCustomerId = $customerResource['id'];
-        $customerData = [];
-        $customerData["metafields"] = $user->getNewMetafieldsForShopify();
-        $this->shopify->updateCustomer($shopifyCustomerId, $customerData);
-
-        // record the shopify ID on the User
-        $user->shopify_id = $shopifyCustomerId;
-        $user->saveWithoutUpdatedAt();
+            // record the shopify ID on the User
+            $user->shopify_id = $shopifyCustomerId;
+            $user->saveWithoutUpdatedAt();
+        }
     }
 
     public function getShopifyCustomer($email): mixed

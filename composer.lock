@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b61a91719349489a83c3f0726d482819",
+    "content-hash": "1105a395ba9f2fdb7d1eb05ffc9aaa8f",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1107,16 +1107,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.295.10",
+            "version": "3.296.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4d8b4f47639275248e212bd61b6bc51f9dd709f2"
+                "reference": "38e47bbd3b5f76f008dd71c8a68545f9e4e47b6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4d8b4f47639275248e212bd61b6bc51f9dd709f2",
-                "reference": "4d8b4f47639275248e212bd61b6bc51f9dd709f2",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/38e47bbd3b5f76f008dd71c8a68545f9e4e47b6b",
+                "reference": "38e47bbd3b5f76f008dd71c8a68545f9e4e47b6b",
                 "shasum": ""
             },
             "require": {
@@ -1196,9 +1196,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.295.10"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.296.1"
             },
-            "time": "2024-01-11T19:04:31+00:00"
+            "time": "2024-01-14T05:20:33+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4089,16 +4089,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.331.0",
+            "version": "v0.332.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "94d0bcc1827f6ea24274fe17ece0930ae2a8f51d"
+                "reference": "027cc7fe60877c2b6ba0f380d419acf65a3755d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/94d0bcc1827f6ea24274fe17ece0930ae2a8f51d",
-                "reference": "94d0bcc1827f6ea24274fe17ece0930ae2a8f51d",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/027cc7fe60877c2b6ba0f380d419acf65a3755d2",
+                "reference": "027cc7fe60877c2b6ba0f380d419acf65a3755d2",
                 "shasum": ""
             },
             "require": {
@@ -4127,9 +4127,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.331.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.332.0"
             },
-            "time": "2024-01-05T01:04:19+00:00"
+            "time": "2024-01-15T00:56:15+00:00"
         },
         {
             "name": "google/auth",
@@ -4191,20 +4191,20 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.52.11",
+            "version": "v1.53.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "2e908c1fc3c2af048c77f8cb1f9de3281e31dddb"
+                "reference": "1899ea5306a20c4fb64f00f542e8895e7aa0e8cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/2e908c1fc3c2af048c77f8cb1f9de3281e31dddb",
-                "reference": "2e908c1fc3c2af048c77f8cb1f9de3281e31dddb",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/1899ea5306a20c4fb64f00f542e8895e7aa0e8cd",
+                "reference": "1899ea5306a20c4fb64f00f542e8895e7aa0e8cd",
                 "shasum": ""
             },
             "require": {
-                "google/auth": "^1.34.0",
+                "google/auth": "^1.34",
                 "guzzlehttp/guzzle": "^6.5.8|^7.4.4",
                 "guzzlehttp/promises": "^1.4||^2.0",
                 "guzzlehttp/psr7": "^2.6",
@@ -4250,26 +4250,26 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.52.11"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.53.0"
             },
-            "time": "2024-01-05T17:34:35+00:00"
+            "time": "2024-01-12T19:18:38+00:00"
         },
         {
             "name": "google/cloud-storage",
-            "version": "v1.36.1",
+            "version": "v1.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-storage.git",
-                "reference": "6b65c334b8b887cd771bb745ba0a5513ff9191b7"
+                "reference": "48489319d931262def899a5b2337b8e514c39d34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/6b65c334b8b887cd771bb745ba0a5513ff9191b7",
-                "reference": "6b65c334b8b887cd771bb745ba0a5513ff9191b7",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/48489319d931262def899a5b2337b8e514c39d34",
+                "reference": "48489319d931262def899a5b2337b8e514c39d34",
                 "shasum": ""
             },
             "require": {
-                "google/cloud-core": "^1.52.7",
+                "google/cloud-core": "^1.53",
                 "php": ">=7.4",
                 "ramsey/uuid": "^4.2.3"
             },
@@ -4306,9 +4306,9 @@
             ],
             "description": "Cloud Storage Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.36.1"
+                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.37.0"
             },
-            "time": "2024-01-05T17:34:35+00:00"
+            "time": "2024-01-12T19:18:38+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -6160,16 +6160,16 @@
         },
         {
             "name": "laravel/vapor-cli",
-            "version": "v1.62.0",
+            "version": "v1.62.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-cli.git",
-                "reference": "c049627a5effe57cc32add0f9118cb54382b7982"
+                "reference": "6d96a8fda11f933118fe3e3275147bc17348a298"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/c049627a5effe57cc32add0f9118cb54382b7982",
-                "reference": "c049627a5effe57cc32add0f9118cb54382b7982",
+                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/6d96a8fda11f933118fe3e3275147bc17348a298",
+                "reference": "6d96a8fda11f933118fe3e3275147bc17348a298",
                 "shasum": ""
             },
             "require": {
@@ -6223,9 +6223,9 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-cli/tree/v1.62.0"
+                "source": "https://github.com/laravel/vapor-cli/tree/v1.62.1"
             },
-            "time": "2024-01-10T08:27:37+00:00"
+            "time": "2024-01-13T18:42:22+00:00"
         },
         {
             "name": "laravel/vapor-core",
@@ -9846,16 +9846,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.49",
+            "version": "dev-v3.0-filters-v2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "ae27112ae8a1f6d4bfa164f83db011717b4423ab"
+                "reference": "8620a6f7197c8344126a20ee38f9bade610fb800"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/ae27112ae8a1f6d4bfa164f83db011717b4423ab",
-                "reference": "ae27112ae8a1f6d4bfa164f83db011717b4423ab",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/8620a6f7197c8344126a20ee38f9bade610fb800",
+                "reference": "8620a6f7197c8344126a20ee38f9bade610fb800",
                 "shasum": ""
             },
             "require": {
@@ -9885,9 +9885,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.49"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.0-filters-v2"
             },
-            "time": "2024-01-10T15:36:03+00:00"
+            "time": "2024-01-15T08:14:40+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -18798,6 +18798,12 @@
     ],
     "aliases": [
         {
+            "package": "railroad/musora-api",
+            "version": "dev-v3.0-filters-v2",
+            "alias": "v3.1.49",
+            "alias_normalized": "3.1.49.0"
+        },
+        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "3.0.7",
@@ -18812,6 +18818,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "railroad/musora-api": 20,
         "railroad/railanalytics": 20,
         "railroad/railcontent": 20
     },
