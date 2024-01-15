@@ -477,7 +477,7 @@
                 </table>
             </div>
                 <div class="md:w-2/3 lg:w-3/4">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/products/kit/gallery-full.png" alt="Drum kit" class="w-full h-full md:block hidden">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/products/kit/gallery-full2.webp" alt="Drum kit" class="w-full h-full md:block hidden">
                 </div>
         </div>
 
