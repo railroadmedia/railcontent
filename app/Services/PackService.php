@@ -100,7 +100,7 @@ class PackService
     }
 
 
-    public function getPacks()
+    public function getPacks($requiredFields = [])
     {
         ContentRepository::$pullFutureContent = true;
         AddedToPrimaryPlaylistDecorator::$skip = true;
@@ -115,7 +115,7 @@ class PackService
                 ['pack', 'semester-pack'],
                 [],
                 [],
-                [],
+                $requiredFields,
                 [],
                 [],
                 [],

@@ -189,9 +189,9 @@ class MusoraApiProductProvider implements ProductProviderInterface
         ];
     }
 
-    public function getPacks()
+    public function getPacks($requiredFieds = [])
     {
-        return $this->packService->getPacks();
+        return $this->packService->getPacks($requiredFieds);
     }
 
     public function getActiveCohort()
