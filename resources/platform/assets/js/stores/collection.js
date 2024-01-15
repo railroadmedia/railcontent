@@ -52,7 +52,7 @@ export const useCollectionStore = defineStore({
         },
 
         coachEndpoint (){
-            return `/railcontent/content?only_subscribed=${this.filter.activeTab === 'allCoaches' ? '' : 'true'}`;
+            return `/railcontent/content?only_subscribed=${this.filter.activeTab === 'All Coaches' ? '' : 'true'}`;
         },
 
         endpoint (){
@@ -237,9 +237,13 @@ export const useCollectionStore = defineStore({
                 })
             }
 
-            this.tabData[this.filter.activeTab].key.map((key) => {
-                url.searchParams.append('tabs[]', key);
-            })
+            if(Array.isArray(this.tabData[this.filter.activeTab].key)){
+                this.tabData[this.filter.activeTab].key.map((key) => {
+                    key && url.searchParams.append('tabs[]', key);
+                })
+            } else {
+                url.searchParams.set('tabs[]', this.tabData[this.filter.activeTab].key);
+            }
 
             window.history.pushState({}, '', url);
         },
