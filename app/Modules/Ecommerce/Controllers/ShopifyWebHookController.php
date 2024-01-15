@@ -34,8 +34,7 @@ class ShopifyWebHookController extends Controller
             $shopifyCustomerId = $request->get('customer')['id'];
             $email = $request->get('customer')['email'];
             Log::debug("Shopify order updated webhook received:$shopifyCustomerId $email");
-            dispatch(new ShopifySyncCustomerJob($shopifyCustomerId, $email))
-                ->delay(Carbon::now()->addSeconds(3));
+            dispatch(new ShopifySyncCustomerJob($shopifyCustomerId, $email));
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());

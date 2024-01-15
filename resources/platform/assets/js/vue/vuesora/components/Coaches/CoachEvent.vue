@@ -92,14 +92,15 @@
           <div class="tw-flex tw-flex-nowrap" :class="{ 'tw-pt-3': showWatch }" v-if="!eventIsLive && !showWatch">
             <!-- Add to Playlist -->
             <button
-              class="tw-cursor-pointer tw-border-0 tw-bg-transparent tw-transition tw-text-3xl tw-mr-6 tw-text-gray-400"
+              class="dark:tw-text-[#9EC0DC] dark:hover:tw-bg-[#000C17] hover:tw-bg-white tw-cursor-pointer tw-border-0 tw-bg-transparent tw-transition tw-text-3xl tw-mr-2 tw-inline-flex tw-items-center tw-justify-center tw-h-[61px] tw-w-[52px] tw-rounded"
               @click.stop.prevent="addToPlaylist">
-              <i class="fas fa-plus tw-transform tw-transition tw-origin-center">
-              </i>
+              <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
             </button>
 
             <!-- Subscribe to Calendar -->
-            <button class="tw-cursor-pointer tw-border-0 tw-bg-transparent tw-text-3xl"
+            <button class="dark:tw-text-[#9EC0DC] dark:hover:tw-bg-[#000C17] hover:tw-bg-white tw-cursor-pointer tw-border-0 tw-bg-transparent tw-text-3xl tw-inline-flex tw-items-center tw-justify-center tw-h-[61px] tw-w-[52px] tw-rounded"
               data-open-modal="scheduleAddToCalendarModal" alt="Subscribe to Calendar" :class="[brandTextColor]">
               <i class="fas fa-calendar-plus" @click="toggleSubscribePopup"></i>
             </button>
