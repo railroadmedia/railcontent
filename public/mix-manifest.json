@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=ee8bef9227422699be394a621c8798fd",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c889beb1ba5e4503ed1f92f9acca9348",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=5e255771f4c18ff0e362dff1c2b220f8",
@@ -30,4 +31,37 @@
     "/platform/css/app.css": "/platform/css/app.css?id=cbf1fc5e2fa0f8247e0a86b8266a2e3d",
     "/marketing/css/app.css": "/marketing/css/app.css?id=3a629fffdfae793eeff00b0411057d2e",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=c098e0ea998b06116bfa4feb2ddbad64"
+=======
+    "/platform/js/app.js": "/platform/js/app.js?id=e7edfa354c59018851214c0e31b222e6",
+    "/platform/js/profile.js": "/platform/js/profile.js?id=86aa1841f2c5fd61f0b1a0a087caa000",
+    "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=b11719fd2b12999cf314705273f39458",
+    "/platform/js/books.js": "/platform/js/books.js?id=59cd94e09b034342fbe6c7401bdd44e4",
+    "/platform/js/manifest.js": "/platform/js/manifest.js?id=5f354c6344c5323d83846fbfb4f4a01a",
+    "/platform/js/playlist-playback.js": "/platform/js/playlist-playback.js?id=a014e1f590d6abd3d7a7ae120a0fff87",
+    "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=f872d3305822a0ab83a186f41ec514f1",
+    "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=eee49d6e5d4231b84734b854ca3f8f29",
+    "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=4aad84077af232e6542a483021a24da5",
+    "/platform/js/song.js": "/platform/js/song.js?id=32cf4a674daee099564df930b014e13e",
+    "/platform/js/song-request.js": "/platform/js/song-request.js?id=a290d92f7d99c9d4d3206f32db077cd9",
+    "/platform/js/report-user.js": "/platform/js/report-user.js?id=7ffa8bad08d270210efcd885e9ef5c8d",
+    "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=69fcc27fa19d1d70f2bc61c0d420de1c",
+    "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=1420b312b0eef0d0a7fca01f80eb6a67",
+    "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=c5b4e73b5fb05a7e1c552fa7b4531db7",
+    "/platform/js/order-form.js": "/platform/js/order-form.js?id=24df519281c1a50ed48144ca87730b7e",
+    "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=096713e7a9e21e1a3aa8aab472e9f198",
+    "/platform/js/cart-sidebar.js": "/platform/js/cart-sidebar.js?id=51047c3d4821617ab2959346001ef265",
+    "/platform/js/nav-cart-button.js": "/platform/js/nav-cart-button.js?id=a80b645f7751b7b57d3ce7a78bdab232",
+    "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=2067a67635edf8f025b37c5b49f2585a",
+    "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=117e14dc90792ad85129cf2703b36e5f",
+    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=bd07ec637ef753e8f6db8569ea26cee8",
+    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=18c3ab0a964a0f49ac6fbc59909a8436",
+    "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=cf18752ef0dcfc6bdea4abc6723a49b8",
+    "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=655c336d5ac0a98c49f58697a1aa39de",
+    "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=631c549d3207d9fde6fed35914d1ba49",
+    "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=fc94a03ba81716dac8b8717ce2a76c59",
+    "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=00490d08cda41ec54ee665a4f232166b",
+    "/platform/css/app.css": "/platform/css/app.css?id=5d30f8472a174a0984310242b7b6b3aa",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=a833d264ce813b0ae42f4f1588a2d43e",
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=876048f2ebad7f698f1fcc359b575acb"
+>>>>>>> master
 }

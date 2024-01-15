@@ -781,6 +781,7 @@ return [
                 [
                     'name' => 'All',
                     'short_name' => 'ALL',
+                    'value' => [''],
                 ],
                 [
                     'name' => '5 Minutes',
@@ -804,7 +805,7 @@ return [
                     'name' => 'Instructors',
                     'short_name' => 'INSTRUCTORS',
                     'is_group_by' => true,
-                    'value' => 'instructor'
+                    'value' => ['instructor']
                 ],
             ],
         ],
@@ -970,6 +971,7 @@ return [
                     [
                         'name' => 'All',
                         'short_name' => 'ALL',
+                        'value' => [''],
                     ],
                     [
                         'name' => '5 Minutes',
@@ -987,7 +989,7 @@ return [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor']
                     ],
                 ],
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
@@ -1107,6 +1109,7 @@ return [
                     [
                         'name' => 'All',
                         'short_name' => 'ALL',
+                        'value' => [''],
                     ],
                     [
                         'name' => '5 Minutes',
@@ -1130,7 +1133,7 @@ return [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor']
                     ],
                 ],
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
@@ -1235,6 +1238,7 @@ return [
                     [
                         'name' => 'All',
                         'short_name' => 'ALL',
+                        'value' => [''],
                     ],
                     [
                         'name' => '5 Minutes',
@@ -1252,7 +1256,7 @@ return [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor']
                     ],
                 ],
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
