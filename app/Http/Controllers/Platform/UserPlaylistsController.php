@@ -381,6 +381,7 @@ class UserPlaylistsController extends BaseController
         $playlistItem['is_full_track'] = $initialItem['is_full_track'] ?? false;
         $playlistItem['is_instrumentless_track'] = $initialItem['is_instrumentless_track'] ?? false;
         $playlistItem['resources'] = $initialItem['resources'] ?? [] ;
+        $playlistItem['parent'] = $initialItem['parent'] ?? null;
 
         // Calculate if the playlist item is released or not
         $givenDate = Carbon::parse($initialItem['published_on']);

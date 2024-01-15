@@ -5,12 +5,15 @@
             {{ !empty($borderless) && $borderless === true ? 'borderless' : '' }} {{ $customClasses ?? '' }}"
             {{ !empty($validateRequired) && $validateRequired === true ? 'required' : '' }}
             {{ !empty($disabled) && $disabled === true ? 'disabled' : '' }}>
-        <option value="" style="display:none;"></option>
         @foreach($inputOptions as $optionIndex => $option)
-            <option value="{{ $inputValues[$optionIndex] ?? (string)$option }}"
-                    {{ $inputValue == $option ? 'selected' : '' }}>
-                {{ ucwords((string)$option) }}
-            </option>
+            @if($option == "") 
+                <option value=""></option>
+            @else
+                <option value="{{ $inputValues[$optionIndex] ?? (string)$option }}"
+                        {{ $inputValue == $option ? 'selected' : '' }}>
+                    {{ ucwords((string)$option) }}
+                </option>
+            @endif
         @endforeach
     </select>
     <label for="{{ $inputId }}"

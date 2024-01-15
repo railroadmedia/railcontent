@@ -1107,16 +1107,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.295.8",
+            "version": "3.295.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "dc23d1d1e2e0413a3707d5dd90d8c43cb6c7521b"
+                "reference": "4d8b4f47639275248e212bd61b6bc51f9dd709f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/dc23d1d1e2e0413a3707d5dd90d8c43cb6c7521b",
-                "reference": "dc23d1d1e2e0413a3707d5dd90d8c43cb6c7521b",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4d8b4f47639275248e212bd61b6bc51f9dd709f2",
+                "reference": "4d8b4f47639275248e212bd61b6bc51f9dd709f2",
                 "shasum": ""
             },
             "require": {
@@ -1196,9 +1196,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.295.8"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.295.10"
             },
-            "time": "2024-01-08T19:04:58+00:00"
+            "time": "2024-01-11T19:04:31+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -8638,16 +8638,16 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.7.3",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "3219c6ee25c9ea71e3d9bbaf39c67c9ebd499419"
+                "reference": "fad452781b3d774e3337b0c0b245dd8e5a4455fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/3219c6ee25c9ea71e3d9bbaf39c67c9ebd499419",
-                "reference": "3219c6ee25c9ea71e3d9bbaf39c67c9ebd499419",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/fad452781b3d774e3337b0c0b245dd8e5a4455fc",
+                "reference": "fad452781b3d774e3337b0c0b245dd8e5a4455fc",
                 "shasum": ""
             },
             "require": {
@@ -8690,9 +8690,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.7.3"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.8.0"
             },
-            "time": "2023-08-12T11:01:26+00:00"
+            "time": "2024-01-11T11:49:22+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -10080,16 +10080,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.45",
+            "version": "v2.1.46",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "8e114d3a76fa7864afdc671d4e542707a54e5155"
+                "reference": "a10d4b5cd5b49177bfaa8dec5bffffc0ca43eea1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/8e114d3a76fa7864afdc671d4e542707a54e5155",
-                "reference": "8e114d3a76fa7864afdc671d4e542707a54e5155",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/a10d4b5cd5b49177bfaa8dec5bffffc0ca43eea1",
+                "reference": "a10d4b5cd5b49177bfaa8dec5bffffc0ca43eea1",
                 "shasum": ""
             },
             "require": {
@@ -10144,9 +10144,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.45"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.46"
             },
-            "time": "2024-01-10T11:07:30+00:00"
+            "time": "2024-01-12T17:26:15+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -11300,16 +11300,16 @@
         },
         {
             "name": "shopify/shopify-api",
-            "version": "v5.2.0",
+            "version": "v5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Shopify/shopify-api-php.git",
-                "reference": "a3f8435a995ce92f4e1513cb06d9417891294bd9"
+                "reference": "8ff4648c360f5a4d5457f4c8f521e7bcaedba0d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Shopify/shopify-api-php/zipball/a3f8435a995ce92f4e1513cb06d9417891294bd9",
-                "reference": "a3f8435a995ce92f4e1513cb06d9417891294bd9",
+                "url": "https://api.github.com/repos/Shopify/shopify-api-php/zipball/8ff4648c360f5a4d5457f4c8f521e7bcaedba0d8",
+                "reference": "8ff4648c360f5a4d5457f4c8f521e7bcaedba0d8",
                 "shasum": ""
             },
             "require": {
@@ -11321,7 +11321,7 @@
                 "firebase/php-jwt": "^5.2 || ^6.2",
                 "guzzlehttp/guzzle": "^7.0",
                 "guzzlehttp/psr7": "^2.0",
-                "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
+                "php": "^8.0",
                 "psr/http-client": "^1.0",
                 "psr/http-message": "^1.0",
                 "psr/log": "^1.1 || ^2.0 || ^3.0",
@@ -11364,9 +11364,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Shopify/shopify-api-php/issues",
-                "source": "https://github.com/Shopify/shopify-api-php/tree/v5.2.0"
+                "source": "https://github.com/Shopify/shopify-api-php/tree/v5.3.0"
             },
-            "time": "2023-10-24T13:32:17+00:00"
+            "time": "2024-01-10T20:51:25+00:00"
         },
         {
             "name": "signifly/laravel-shopify",
@@ -11821,23 +11821,23 @@
         },
         {
             "name": "spatie/laravel-markdown",
-            "version": "2.4.1",
+            "version": "2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-markdown.git",
-                "reference": "c47bfee45b705a203550f621eb43ecce164a36c3"
+                "reference": "7f23584b545d7ec66e6114d9b25c3ec3ddffbb76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-markdown/zipball/c47bfee45b705a203550f621eb43ecce164a36c3",
-                "reference": "c47bfee45b705a203550f621eb43ecce164a36c3",
+                "url": "https://api.github.com/repos/spatie/laravel-markdown/zipball/7f23584b545d7ec66e6114d9b25c3ec3ddffbb76",
+                "reference": "7f23584b545d7ec66e6114d9b25c3ec3ddffbb76",
                 "shasum": ""
             },
             "require": {
-                "illuminate/cache": "^8.49|^9.0|^10.0",
-                "illuminate/contracts": "^8.37|^9.0|^10.0",
-                "illuminate/support": "^8.49|^9.0|^10.0",
-                "illuminate/view": "^8.49|^9.0|^10.0",
+                "illuminate/cache": "^8.49|^9.0|^10.0|^11.0",
+                "illuminate/contracts": "^8.37|^9.0|^10.0|^11.0",
+                "illuminate/support": "^8.49|^9.0|^10.0|^11.0",
+                "illuminate/view": "^8.49|^9.0|^10.0|^11.0",
                 "league/commonmark": "^2.2",
                 "php": "^8.0",
                 "spatie/commonmark-shiki-highlighter": "^2.0",
@@ -11885,7 +11885,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-markdown/tree/2.4.1"
+                "source": "https://github.com/spatie/laravel-markdown/tree/2.4.2"
             },
             "funding": [
                 {
@@ -11893,24 +11893,24 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-30T19:55:09+00:00"
+            "time": "2024-01-11T08:43:31+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
-            "version": "1.16.1",
+            "version": "1.16.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "cc7c991555a37f9fa6b814aa03af73f88026a83d"
+                "reference": "e62eeb1fe8a8a0b2e83227a6c279c8c59f7d3a15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/cc7c991555a37f9fa6b814aa03af73f88026a83d",
-                "reference": "cc7c991555a37f9fa6b814aa03af73f88026a83d",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/e62eeb1fe8a8a0b2e83227a6c279c8c59f7d3a15",
+                "reference": "e62eeb1fe8a8a0b2e83227a6c279c8c59f7d3a15",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "^9.28|^10.0",
+                "illuminate/contracts": "^9.28|^10.0|^11.0",
                 "php": "^8.0"
             },
             "require-dev": {
@@ -11945,7 +11945,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.1"
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.2"
             },
             "funding": [
                 {
@@ -11953,7 +11953,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-23T09:04:39+00:00"
+            "time": "2024-01-11T08:43:00+00:00"
         },
         {
             "name": "spatie/laravel-permission",

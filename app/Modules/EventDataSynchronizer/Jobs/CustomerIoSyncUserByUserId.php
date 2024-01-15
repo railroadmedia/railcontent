@@ -7,6 +7,7 @@ use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Exception;
+use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 use Throwable;
 

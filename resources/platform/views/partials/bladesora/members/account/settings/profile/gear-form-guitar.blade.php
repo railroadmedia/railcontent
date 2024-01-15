@@ -44,7 +44,7 @@
                                 "inputName" => "played_guitar_since",
                                 "inputLabel" => "Played Guitar Since",
                                 "inputValue" => '',
-                                "inputOptions" => array_reverse(range(1900, date('Y'))),
+                                "inputOptions" => array_merge([""],array_reverse(range(1900, date('Y')))),
                                 "inputErrors" => [],
                             ], $playedGuitarSinceInput ?? []))
                         </div>

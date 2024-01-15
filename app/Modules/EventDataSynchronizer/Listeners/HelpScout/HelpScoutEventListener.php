@@ -5,6 +5,7 @@ namespace App\Modules\EventDataSynchronizer\Listeners\HelpScout;
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\Ecommerce\Events\UserProductsUpdated;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionCreated;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionRenewed;
@@ -199,7 +200,7 @@ class HelpScoutEventListener
                 self::$alreadyQueuedUserIds[] = $user->id;
             }
         } catch (Throwable $throwable) {
-            error_log($throwable);
+            Log::error($throwable);
         }
     }
 

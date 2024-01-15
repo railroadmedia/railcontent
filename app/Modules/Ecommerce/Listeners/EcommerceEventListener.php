@@ -23,14 +23,14 @@ class EcommerceEventListener
     ) {
     }
 
-    public function handleUserCreated(UserCreated $userCreated)
+    public function handleUserCreated(UserCreated $userCreated): void
     {
         try {
             $user = $userCreated->getUser();
             $this->shopifySyncService->syncUser($user);
             $this->shopifySyncService->syncCustomer($user->shopify_id);
         } catch (\Throwable $e) {
-            Log::error($e->getMessage());
+            Log::error($e);
         }
     }
 
@@ -65,7 +65,7 @@ class EcommerceEventListener
                     Log::error("Failed to update Recharge email address from $oldEmail to $newEmail");
                 }
             } catch (\Exception $e) {
-                Log::error($e->getMessage());
+                Log::error($e);
             }
 
             $this->shopifyCustomerService->updateOrCreateShopifyCustomer($newUser);

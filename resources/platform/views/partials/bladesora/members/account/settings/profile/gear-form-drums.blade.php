@@ -35,7 +35,6 @@
                     {{ method_field($method) }}
                     {{ csrf_field() }}
 
-
                     <div class="flex flex-row ph-3 mb-1">
                         <div class="flex flex-column">
                             @include('partials.bladesora.members.inputs.select-input', array_merge([
@@ -44,7 +43,7 @@
                                 "inputName" => "drumming_since",
                                 "inputLabel" => "Drumming Since",
                                 "inputValue" => '',
-                                "inputOptions" => array_reverse(range(1900, date('Y'))),
+                                "inputOptions" => array_merge([""],array_reverse(range(1900, date('Y')))),
                                 "inputErrors" => [],
                             ], $drummingSinceInput ?? []))
                         </div>
