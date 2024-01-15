@@ -62,13 +62,15 @@
             @else
             <a class="sm:mx-0.5 w-full sm:w-56 join outline black smaller"
                 href="https://www.shopperapproved.com/reviews/Musora.com"
+                rel="noopener noreferrer"
+                aria-label="See the reviews on Shopper Approved"
                 onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;"
             >SEE THE REVIEWS</a>
 
             @endif
         </div>
         <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
-            <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+            <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" rel="noopener noreferrer" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                 <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
                 <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
                 <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
