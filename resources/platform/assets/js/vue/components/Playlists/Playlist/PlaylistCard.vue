@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 import { onBeforeMount, ref, computed, reactive, onMounted } from 'vue';
 import PlaylistDropdown from '../PlaylistDropdown.vue';
 import { usePlaylistsStore } from '../../../../stores/playlists';
+import DifficultyLabel from '../../DifficultyLabel/DifficultyLabel.vue'
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
@@ -206,7 +207,7 @@ onBeforeMount(() => {
 </script>
 <template>
     <div :id="cardId"
-        class="tw-group tw-h-[90px] tw-min-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4">
+        class="tw-group tw-h-[90px] tw-min-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-px-3">
         <div class="tw-flex tw-items-center tw-h-full tw-w-full"
              :class="{ 'tw-relative' : playlistsStore.sortingPlaylist }"
         >
@@ -217,15 +218,16 @@ onBeforeMount(() => {
                        :class="[{ 'tw-grayscale': needAccess }, !cueVersion ? 'tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)]' : 'tw-w-full']"
                        @click="handleNoAccess"
             >
-                <div class="tw-inline-flex tw-items-center tw-shrink-0 tw-min-w-[40px] tw-px-4 tw-transition-opacity tw-text-sm"
+                <div class="tw-inline-flex tw-items-center tw-shrink-0 tw-min-w-[40px] tw-transition-opacity tw-text-sm"
                     :class="{ 'tw-opacity-0': playlistsStore.sortingPlaylist }">
-                    <template v-if="Number(lesson.user_playlist_item_position) === Number(currentItem)"><i
-                            class="fas fa-play"></i></template>
+                    <template v-if="Number(lesson.user_playlist_item_position) === Number(currentItem)">
+                        <i class="fas fa-play"></i>
+                    </template>
                     <template v-else>{{ props.index + 1 }}</template>
                 </div>
                 <!-- Playlist thumbnail -->
                 <div
-                    class="tw-relative tw-inline-flex tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-video tw-w-[110px] tw-rounded tw-shrink-0">
+                    class="tw-relative tw-inline-flex tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-video tw-w-[110px] tw-rounded tw-shrink-0 ">
                     <!-- Image Conatiner -->
                     <div class="tw-relative tw-w-full tw-h-full" v-if="lessonThumbnail">
                         <img :src="`https://musora.com/cdn-cgi/image/width=330/${lessonThumbnail}`" alt="playlist thumbnail"
@@ -342,14 +344,20 @@ onBeforeMount(() => {
                 </div>
 
                 <template v-if="!cueVersion">
+                    <!-- Lesson Skill Level -->
+                    <div class="tw-hidden xl:tw-inline-flex tw-justify-start tw-shrink-0 tw-w-[140px]" :title="lesson.type">
+                        <span v-if="lesson.type" class="tw-text-center tw-text-sm ">
+                            <DifficultyLabel class="" difficultyValue="all" textCase="uppercase" />
+                        </span>
+                    </div>
                     <!-- Lesson Type -->
-                    <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[140px]" :title="lesson.type">
+                    <div class="tw-hidden xl:tw-inline-flex tw-justify-start tw-shrink-0 tw-w-[140px]" :title="lesson.type">
                         <span v-if="lesson.type" class="tw-text-center tw-text-sm tw-capitalize">
                             {{ lesson.type }}
                         </span>
                     </div>
                     <!-- Lesson Time -->
-                    <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px] tw-text-sm"
+                    <div class="tw-hidden xl:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px] tw-text-sm"
                         :title="lesson.duration">
                         <span>{{ duration_formatted(lesson.duration) || '' }}</span>
                     </div>
