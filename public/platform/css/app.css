@@ -16121,7 +16121,7 @@ a {
 }
 
 #loadingDialog {
-  position: fixed;
+  position: absolute;
   bottom: 1.875rem;
   z-index: 98;
   width: 100%;

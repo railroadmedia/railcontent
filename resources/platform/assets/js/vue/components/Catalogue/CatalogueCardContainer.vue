@@ -11,7 +11,7 @@
                 `">
                 <!-- Skeleton Loader -->
                 <template v-if="collectionStoreLoading && (isWorkout || isChallenge)">
-                    <SkeletonLoader :count="6" type="card" />
+                    <SkeletonLoader :count="skeletonCardCount" type="card" />
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else>
@@ -144,7 +144,7 @@ const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
 const collectionStore = useCollectionStore();
-const { loading: collectionStoreLoading } = storeToRefs(collectionStore);
+const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collectionStore);
 
 const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, content: props.preLoadedContent.data });
 const content = ref(props.preLoadedContent ? props.preLoadedContent.data : []);
@@ -156,6 +156,14 @@ const data = computed(() => {
 
 const breakToListView = computed( () => {
     return isWorkout.value || isChallenge.value;
+})
+
+const skeletonCardCount = computed(() => {
+    return showGroupBy.value ? 5 : 12;
+})
+
+const showGroupBy = computed(() => {
+    return tabData.value[filter.value.activeTab]?.groupByView;
 })
 
 const isWorkout = computed(() => {

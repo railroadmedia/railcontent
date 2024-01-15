@@ -616,7 +616,7 @@
 }
 
 #loadingDialog {
-  position:fixed;
+  position:absolute;
   bottom:$gutterWidth;
   z-index:98;
   width:100%;
