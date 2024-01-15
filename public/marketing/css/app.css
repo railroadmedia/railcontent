@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.3.7 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.0 | MIT License | https://tailwindcss.com
 *//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -26,17 +26,20 @@
 4. Use the user's configured `sans` font-family by default.
 5. Use the user's configured `sans` font-feature-settings by default.
 6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
 */
 
-html {
+html,
+:host {
   line-height: 1.5; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
   -moz-tab-size: 4; /* 3 */
   -o-tab-size: 4;
      tab-size: 4; /* 3 */
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
   font-feature-settings: normal; /* 5 */
   font-variation-settings: normal; /* 6 */
+  -webkit-tap-highlight-color: transparent; /* 7 */
 }
 
 /*
@@ -2633,6 +2636,9 @@ video {
 .whitespace-pre-wrap {
   white-space: pre-wrap !important;
 }
+.text-wrap {
+  text-wrap: wrap !important;
+}
 .break-words {
   overflow-wrap: break-word !important;
 }
@@ -4542,34 +4548,6 @@ li, p {
 }
 .group:hover .group-hover\:opacity-80 {
   opacity: 0.8 !important;
-}
-:is(.dark .dark\:border-\[\#445F74\]) {
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(68 95 116 / var(--tw-border-opacity)) !important;
-}
-:is(.dark .dark\:bg-\[\#000B17\]) {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 11 23 / var(--tw-bg-opacity)) !important;
-}
-:is(.dark .dark\:bg-\[\#00101D\]) {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 16 29 / var(--tw-bg-opacity)) !important;
-}
-:is(.dark .dark\:text-\[\#9EC0DC\]) {
-  --tw-text-opacity: 1 !important;
-  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
-}
-:is(.dark .dark\:text-white) {
-  --tw-text-opacity: 1 !important;
-  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
-}
-:is(.dark .dark\:placeholder\:text-\[\#9EC0DC\])::-moz-placeholder {
-  --tw-text-opacity: 1 !important;
-  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
-}
-:is(.dark .dark\:placeholder\:text-\[\#9EC0DC\])::placeholder {
-  --tw-text-opacity: 1 !important;
-  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
 }
 @media (min-width: 640px) {
 
@@ -9220,4 +9198,32 @@ li, p {
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
+}
+:is(:where(.dark) .dark\:border-\[\#445F74\]) {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(68 95 116 / var(--tw-border-opacity)) !important;
+}
+:is(:where(.dark) .dark\:bg-\[\#000B17\]) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 11 23 / var(--tw-bg-opacity)) !important;
+}
+:is(:where(.dark) .dark\:bg-\[\#00101D\]) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 16 29 / var(--tw-bg-opacity)) !important;
+}
+:is(:where(.dark) .dark\:text-\[\#9EC0DC\]) {
+  --tw-text-opacity: 1 !important;
+  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
+}
+:is(:where(.dark) .dark\:text-white) {
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+:is(:where(.dark) .dark\:placeholder\:text-\[\#9EC0DC\])::-moz-placeholder {
+  --tw-text-opacity: 1 !important;
+  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
+}
+:is(:where(.dark) .dark\:placeholder\:text-\[\#9EC0DC\])::placeholder {
+  --tw-text-opacity: 1 !important;
+  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
 }
