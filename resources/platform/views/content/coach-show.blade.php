@@ -133,16 +133,14 @@
     @endphp
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-mb-3">
-        <content-catalogue-container
-            brand="{{ $brand }}"
-            :catalogue-props="{{ json_encode($catalogueProps) }}"
-        >
-            @for ($i = 0; $i < ($limitOverride ?? 16); $i++)
-                @include('partials.bladesora.members.skeletons.card-item', [
-                    "cardClass" => 'six-wide',
-                ])
-            @endfor
-        </content-catalogue-container>
+        <collection-wrapper
+{{--            :filterable-values="{{ $something ?? []) }}"--}}
+            limit="{{ $limitOverride ?? 18 }}"
+            :pre-loaded-content="{{ $listLessons }}"
+            :required-fields="{{ json_encode($requiredFields) }}"
+            :statuses="{{ json_encode(['published', 'scheduled']) }}"
+            title="lessons"
+        ></collection-wrapper>
     </div>
 
     @component('partials.bladesora.members.components.coach-footer', [

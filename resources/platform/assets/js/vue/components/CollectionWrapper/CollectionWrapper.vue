@@ -127,7 +127,7 @@ const includedTypes = computed(() => {
     if (isCoach.value) {
         types.push('instructor');
     } else {
-        types.push(props.collectionType);
+        props.collectionType && types.push(props.collectionType);
 
         if (isQuickTips.value) {
             types.push('boot-camps');
@@ -200,7 +200,7 @@ const isChallenge = computed(() => {
 
 //List view reactive
 const isList = computed(() => {
-    return !isPlayAlong.value && !isRoutine.value && !isWorkout.value && !isChallenge.value;
+    return !isPlayAlong.value && !isRoutine.value && !isWorkout.value && !isChallenge.value && props.collectionType;
 })
 
 const showGroupBy = computed(() => {
@@ -312,9 +312,8 @@ onBeforeMount(() => {
 })
 
 onMounted(() => {
-    // console.log(props.collectionType)
+    // console.log('collection type',props.collectionType)
     // console.log(props.title)
     // console.log(props.preLoadedContent)
-    console.log(props.tabOptions)
 })
 </script>
