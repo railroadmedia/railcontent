@@ -406,6 +406,7 @@ $items = [
     </div>
 </section>
 
+    <div id="students" class="anchor"></div>
  <!-- Testimonials section -->
 @php
 $testimonials = $drumeo['testimonialsShopVersion'];

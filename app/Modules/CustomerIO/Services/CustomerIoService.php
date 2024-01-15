@@ -235,7 +235,7 @@ class CustomerIoService
      * @throws Exception
      */
     public function updateCustomer(
-        $uuid,
+        Customer $customer,
         $accountName,
         $customAttributes = [],
         $email = null,
@@ -243,19 +243,6 @@ class CustomerIoService
         $createdAtTimestamp = null
     ) {
         $accountConfigData = $this->getAccountConfigData($accountName);
-
-        /**
-         * @var $customer Customer
-         */
-        $customer =
-            Customer::query()
-                ->where([
-                    'uuid' => $uuid,
-                    'workspace_name' => $accountConfigData['workspace_name'],
-                    'workspace_id' => $accountConfigData['workspace_id'],
-                    'site_id' => $accountConfigData['site_id'],
-                ])
-                ->firstOrFail();
 
         $oldCustomer = clone $customer;
 
@@ -322,7 +309,7 @@ class CustomerIoService
          * @var $customer Customer
          */
         $customer =
-            Customer::query()
+            Customer::on('musora_laravel_mysql::write')
                 ->where([
                     'email' => $lookupEmail,
                     'workspace_name' => $accountConfigData['workspace_name'],
@@ -342,7 +329,7 @@ class CustomerIoService
             );
         } else {
             $customer = $this->updateCustomer(
-                $customer->uuid,
+                $customer,
                 $accountName,
                 $customAttributes,
                 null,
@@ -382,7 +369,7 @@ class CustomerIoService
          * @var $customer Customer
          */
         $customer =
-            Customer::query()
+            Customer::on('musora_laravel_mysql::write')
                 ->where([
                     'user_id' => $userId,
                     'workspace_name' => $accountConfigData['workspace_name'],
@@ -405,7 +392,7 @@ class CustomerIoService
             );
         } else {
             $customer = $this->updateCustomer(
-                $customer->uuid,
+                $customer,
                 $accountName,
                 $customAttributes,
                 $userEmail,
@@ -467,7 +454,7 @@ class CustomerIoService
                      * @var $customer Customer
                      */
                     $customer =
-                        Customer::query()
+                        Customer::on('musora_laravel_mysql::write')
                             ->where([
                                 'email' => $email,
                                 'workspace_name' => $accountConfigData['workspace_name'],
@@ -480,7 +467,7 @@ class CustomerIoService
                         $customer = $this->createCustomer($email, $accountName, $formConfig['custom_attributes']);
                     } else {
                         $customer = $this->updateCustomer(
-                            $customer->uuid,
+                            $customer,
                             $accountName,
                             $formConfig['custom_attributes']
                         );
