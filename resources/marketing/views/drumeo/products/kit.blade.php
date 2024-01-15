@@ -481,7 +481,7 @@
                 </div>
         </div>
 
-        <p class="p-4 text-center hidden md:block" style="color: rgb(135, 144, 151, 1.2)"> <strong>Height</strong> 12.12" (30.78cm) // <strong>Depth</strong> 21" (53.34cm) // <strong>Width</strong> 36.2" (91.94cm)</p>
+        <p class="p-4 text-center hidden md:block" style="color: rgb(135, 144, 151, 1.2)"> <strong>Depth</strong> 36" (91.44cm) // <strong>Width</strong> 48" (121.92cm) //  <strong>Height</strong> 12.12" (30.78cm)</p>
 
         <div class="w-full max-w-xs mx-auto pt-4">
             <a href="{{ $orderUrl }}" class="join blue smaller w-full max-w-xs">BUY NOW</a>
