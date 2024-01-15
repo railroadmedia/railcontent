@@ -195,22 +195,28 @@
     {{-- for guitareo 500 songs special page --}}
     @if(!empty($songsPdfs))
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3">
-            <div class="flex flex-column">
-                <div class="flex flex-row tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]">
-                    <content-catalogue
-                            catalogue-type="downloads"
-                            theme-color="guitareo"
-                            brand="guitareo"
-                            :use-theme-color="true"
-                            sort-override="slug"
-                            :included-types="['song-pdf']"
-                            :filterable-values="['artist', 'style']"
-                            :pre-loaded-content="{{ $songsPdfs }}"
-                            user-id="{{ auth()->id() }}"
-                            :infinite-scroll="true"
-                    ></content-catalogue>
-                </div>
-            </div>
+            <collection-wrapper
+                collection-type="song-pdf"
+                :pre-loaded-content="{{ $songsPdfs }}"
+                title="songs"
+{{--                :filterable-values="{{ $something ?? [] }}"--}}
+            ></collection-wrapper>
+{{--            <div class="flex flex-column">--}}
+{{--                <div class="flex flex-row tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]">--}}
+{{--                    <content-catalogue--}}
+{{--                            catalogue-type="downloads"--}}
+{{--                            theme-color="guitareo"--}}
+{{--                            brand="guitareo"--}}
+{{--                            :use-theme-color="true"--}}
+{{--                            sort-override="slug"--}}
+{{--                            :included-types="['song-pdf']"--}}
+{{--                            :filterable-values="['artist', 'style']"--}}
+{{--                            :pre-loaded-content="{{ $songsPdfs }}"--}}
+{{--                            user-id="{{ auth()->id() }}"--}}
+{{--                            :infinite-scroll="true"--}}
+{{--                    ></content-catalogue>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
     @endif
 

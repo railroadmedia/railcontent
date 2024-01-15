@@ -9,12 +9,13 @@
             <CollectionResults :brand="brand" :current-page="getCurrentPage" :loading="loading" :total-pages="getTotalPages" @on-load-more="collectionStore.loadMore">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
+                <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
+                            :total-results="getTotalResults" />
+                <DownloadsCatalogue v-else-if="isDownloadView" :content="data" />
+                <RoutinesCatalogue v-else-if="isRoutine" :content="data"
+                                   @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
-                <RoutinesCatalogue v-else-if="isRoutine" :content="data"
-                    @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
-                <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
-                    :total-results="getTotalResults" />
                 <CatalogueCardContainer
                     v-else
                     :pre-loaded-content="data"
@@ -30,17 +31,21 @@
 <script setup>
 import {onMounted, computed, onBeforeMount} from "vue";
 import { useCollectionStore } from "../../../stores/collection";
-import CoachesGridCatalogue from "../../vuesora/views/catalogues/CoachesGridCatalogue";
-import CollectionFilterWrapper from '../Filter/CollectionFilterWrapper.vue';
-import CollectionResults from '../Catalogue/CollectionResults.vue';
-import ListCatalogue from "../../vuesora/views/catalogues/ListCatalogue";
-import UserCatalogueEvents from "../../vuesora/mixins/UserCatalogueEvents";
-import RoutinesCatalogue from "../../vuesora/views/catalogues/RoutinesCatalogue";
-import PlayAlongs from "../../vuesora/views/play-alongs/PlayAlongs";
 import {storeToRefs} from "pinia";
 import { useUserStore } from "../../../stores/user";
+import CollectionFilterWrapper from '../Filter/CollectionFilterWrapper.vue';
+import CollectionResults from '../Catalogue/CollectionResults.vue';
+import UserCatalogueEvents from "../../vuesora/mixins/UserCatalogueEvents";
+
+//Views
+import PlayAlongs from "../../vuesora/views/play-alongs/PlayAlongs";
+import ListCatalogue from "../../vuesora/views/catalogues/ListCatalogue";
 import CatalogueCardContainer from "../Catalogue/CatalogueCardContainer";
+import RoutinesCatalogue from "../../vuesora/views/catalogues/RoutinesCatalogue";
+import CoachesGridCatalogue from "../../vuesora/views/catalogues/CoachesGridCatalogue";
 import GroupedResultsContainer from "../GroupedResultsContainer/GroupedResultsContainer";
+import DownloadsCatalogue from "../../vuesora/views/catalogues/DownloadsCatalogue";
+
 
 const props = defineProps({
     collectionType: {
@@ -198,13 +203,21 @@ const isChallenge = computed(() => {
     return props.collectionType === 'challenge';
 });
 
+const isSongPdf = computed(() => {
+    return props.collectionType === 'song-pdf';
+})
+
 //List view reactive
 const isList = computed(() => {
-    return !isPlayAlong.value && !isRoutine.value && !isWorkout.value && !isChallenge.value && props.collectionType;
+    return !isWorkout.value && !isChallenge.value && props.collectionType;
 })
 
 const showGroupBy = computed(() => {
     return tabData.value[filter.value.activeTab]?.groupByView;
+})
+
+const isDownloadView = computed(() => {
+    return isSongPdf.value;
 })
 
 //Filter state reactive
