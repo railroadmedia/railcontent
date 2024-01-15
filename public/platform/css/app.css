@@ -22377,6 +22377,9 @@ a:visited{
 .tw-h-screen{
   height: 100vh !important;
 }
+.tw-h-\[33px\]{
+  height: 33px !important;
+}
 .tw-max-h-0{
   max-height: 0px !important;
 }
@@ -22457,6 +22460,9 @@ a:visited{
 }
 .tw-min-h-screen{
   min-height: 100vh !important;
+}
+.tw-min-h-\[33px\]{
+  min-height: 33px !important;
 }
 .tw-w-0{
   width: 0px !important;
@@ -22825,6 +22831,9 @@ a:visited{
 .tw-min-w-max{
   min-width: -moz-max-content !important;
   min-width: max-content !important;
+}
+.tw-min-w-\[33px\]{
+  min-width: 33px !important;
 }
 .tw-max-w-3xl{
   max-width: 48rem !important;
@@ -24922,6 +24931,9 @@ a:visited{
 }
 .tw-leading-\[45px\]{
   line-height: 45px !important;
+}
+.tw-leading-\[48px\]{
+  line-height: 48px !important;
 }
 .tw-leading-none{
   line-height: 1 !important;

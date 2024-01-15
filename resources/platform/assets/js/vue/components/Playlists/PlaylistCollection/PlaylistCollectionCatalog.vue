@@ -1,23 +1,25 @@
 <template>
     <main class="tw-w-full">
+
         <!-- No Playlists -->
         <section
             v-if="playlistsStore.playlists.length === 0 && !playlistsStore.loadingPlaylists && !state.searchTerm && !state.categories"
-            class="tw-w-full tw-flex dark:tw-text-white tw-items-center "
-            :class="miniCatalog ? 'tw-mt-1 tw-px-4 lg:tw-px-0' : 'tw-mt-[58px] tw-flex-col'">
-            <div>
-                <h1 class="tw-text-3xl tw-font-normal tw-font-open-sans tw-text-[16px] tw-text-center"
-                    :class="!miniCatalog ? 'tw-mb-[15px]' : 'tw-mb-2'">
-                    You haven't created any playlists yet.
-                </h1>
-                <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
-                    <a :href="`/${brand}/create-playlist-window`"
-                        class="tw-btn-primary tw-rounded-full tw-mr-2 tw-line-clamp-1 md:tw-inline-block tw-bg-white tw-text-[#000C17] hover:tw-bg-[#00101D] hover:dark:tw-bg-[#627F97] hover:tw-text-white md:tw-mb-2 tw-border-2 tw-border-[#000C17]">Create
-                        Playlist</a>
-                    <a href="/playlists"
-                        class="tw-border-2 tw-btn-primary tw-rounded-full tw-line-clamp-1 md:tw-inline-block tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17] md:tw-mb-2">Learn
-                        More</a>
-                </div>
+            class="tw-w-full tw-flex dark:tw-text-white tw-items-center tw-justify-center"
+            :class="miniCatalog ? 'tw-mt-1 tw-px-4 lg:tw-px-0' : 'tw-mt-[58px] tw-flex-col'"
+        >
+            <musora-icon v-if="!miniCatalog" icon-name="playlist" width="57" height="57" class="tw-mb-2" />
+            <h1 class="tw-text-[30px] tw-leading-[48px] tw-font-bold tw-text-center tw-mb-2">
+                No Playlists here yet
+            </h1>
+            <p v-if="!miniCatalog" class="tw-text-center tw-mb-4">
+                Go ahead and create you first playlist!
+            </p>
+            <div class="tw-flex tw-items-center md:tw-block">
+                <a :href="`/${brand}/create-playlist-window`"
+                    class="tw-btn-primary tw-bg-[#000C17] tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]">
+                    <musora-icon icon-name="plus" class="tw-w-[30px] tw-mr-1" />
+                    Create Playlist
+                </a>
             </div>
         </section>
 

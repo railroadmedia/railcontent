@@ -1,17 +1,16 @@
 <template>
     <platform-header
-        title="Playlist Library"
+        title="Playlists"
         titleIcon="playlist"
         backgroundImage="https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg"
+        :content-quantity="playlistsStore.playlistsQuantity"
         class="tw-min-h-[180px]"
     >
         <template v-slot:content>
-            <p v-if="playlistsStore.playlistsQuantity" class="tw-uppercase tw-text-sm tw-font-bold tw-text-[#7E9AB1]">
-                {{ playlistsStore.playlistsQuantity }} Playlists
-            </p>
+            <!-- No Content -->
         </template>
         <template v-slot:ctas>
-            <div class="tw-flex tw-items-center tw-justify-start tw-ml-auto tw-w-full md:tw-w-auto tw-mt-4">
+            <div v-if="playlistsStore.playlistsQuantity" class="tw-flex tw-items-center tw-justify-start tw-ml-auto tw-w-full md:tw-w-auto tw-mt-4">
                 <button class="tw-btn-secondary tw-text-white hover:tw-bg-white hover:tw-text-black"
                         @click="handleCreatePlaylist"
                 >
