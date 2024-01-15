@@ -78,33 +78,37 @@
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white songs-catalogue-container @if($hasStartedLessons) tw-mt-[14px] lg:tw-mt-[6px] @else tw-mt-[30px] @endif">
         <transition appear name="fade">
-            <content-catalogue dusk="content-catalogue" brand="{{ $brand }}" theme-color="{{ $brand }}"
-                user-id="{{ auth()->id() }}" :search-bar="true"
-                search-bar-title="All Songs"
-                subscription-calendar-id="{{ config('addevent.' . $brand)['uniquekeys']['brand-overview'] ?? null }}"
-                catalogue-name="Songs" :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
-                content-endpoint="{{ $endpointOverride ?? '/railcontent/content' }}" :use-theme-color="true"
-                :pre-loaded-content="{{ $listLessons }}" :is-admin="{{ json_encode(user()->isAdmin()) }}"
-                :statuses="{{ json_encode($statuses ?? ['published']) }}"
-                :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"
-                :use-url-params="true" :lock-unowned="true" :show-loading-animation="true"
-                no-results-message="There are no songs that match those filters. Please remove some filters."
-                catalogue-type="list" :infinite-scroll="true" limit="20"
-                :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : explode(',', $lessonType)) }}"
-                total-results="{{ $songsNumber }}"
-                @if (!empty($searchTerm)) search-term="{{ $searchTerm }}" @endif
-                @if (!empty($sortOverride)) sort-override="{{ $sortOverride }}" @endif>
-                @include('partials.bladesora.members.skeletons.catalog-filters', [
-                    'length' => count($catalogueMeta['allowableFilters']),
-                ])
-                @for ($i = 0; $i < 10; $i++)
-                    @include('partials.bladesora.members.skeletons.list-item', [
-                        'overview' => false,
-                        'showNumbers' => false,
-                        'thumbnailType' => $lessonType === 'song' ? 'square' : 'widescreen',
-                    ])
-                @endfor
-            </content-catalogue>
+            <collection-wrapper
+                :pre-loaded-content="{{ $listLessons }}"
+                collection-type="song"
+            ></collection-wrapper>
+{{--            <content-catalogue dusk="content-catalogue" brand="{{ $brand }}" theme-color="{{ $brand }}"--}}
+{{--                user-id="{{ auth()->id() }}" :search-bar="true"--}}
+{{--                search-bar-title="All Songs"--}}
+{{--                subscription-calendar-id="{{ config('addevent.' . $brand)['uniquekeys']['brand-overview'] ?? null }}"--}}
+{{--                catalogue-name="Songs" :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"--}}
+{{--                content-endpoint="{{ $endpointOverride ?? '/railcontent/content' }}" :use-theme-color="true"--}}
+{{--                :pre-loaded-content="{{ $listLessons }}" :is-admin="{{ json_encode(user()->isAdmin()) }}"--}}
+{{--                :statuses="{{ json_encode($statuses ?? ['published']) }}"--}}
+{{--                :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"--}}
+{{--                :use-url-params="true" :lock-unowned="true" :show-loading-animation="true"--}}
+{{--                no-results-message="There are no songs that match those filters. Please remove some filters."--}}
+{{--                catalogue-type="list" :infinite-scroll="true" limit="20"--}}
+{{--                :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : explode(',', $lessonType)) }}"--}}
+{{--                total-results="{{ $songsNumber }}"--}}
+{{--                @if (!empty($searchTerm)) search-term="{{ $searchTerm }}" @endif--}}
+{{--                @if (!empty($sortOverride)) sort-override="{{ $sortOverride }}" @endif>--}}
+{{--                @include('partials.bladesora.members.skeletons.catalog-filters', [--}}
+{{--                    'length' => count($catalogueMeta['allowableFilters']),--}}
+{{--                ])--}}
+{{--                @for ($i = 0; $i < 10; $i++)--}}
+{{--                    @include('partials.bladesora.members.skeletons.list-item', [--}}
+{{--                        'overview' => false,--}}
+{{--                        'showNumbers' => false,--}}
+{{--                        'thumbnailType' => $lessonType === 'song' ? 'square' : 'widescreen',--}}
+{{--                    ])--}}
+{{--                @endfor--}}
+{{--            </content-catalogue>--}}
         </transition>
     </div>
 @endsection
