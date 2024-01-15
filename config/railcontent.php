@@ -441,19 +441,19 @@ return [
                     [
                         'name' => 'Lessons',
                         'short_name' => 'LESSONS',
-                        'value' => '',
+                        'value' => [''],
                     ],
                     [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor'],
                     ],
                     [
                         'name' => 'Genre',
                         'short_name' => 'Genre',
                         'is_group_by' => true,
-                        'value' => 'style'
+                        'value' => ['style'],
                     ],
                 ],
             ],
@@ -487,19 +487,19 @@ return [
                     [
                         'name' => 'Courses',
                         'short_name' => 'COURSES',
-                        'value' => '',
+                        'value' => [''],
                     ],
                     [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor'],
                     ],
                     [
                         'name' => 'Genre',
                         'short_name' => 'Genre',
                         'is_group_by' => true,
-                        'value' => 'style'
+                        'value' => ['style'],
                     ],
                 ],
             ],
@@ -514,19 +514,19 @@ return [
                     [
                         'name' => 'Songs',
                         'short_name' => 'Songs',
-                        'value' => '',
+                        'value' => [''],
                     ],
                     [
                         'name' => 'Artists',
                         'short_name' => 'ARTISTS',
                         'is_group_by' => true,
-                        'value' => 'artist'
+                        'value' => ['artist'],
                     ],
                     [
                         'name' => 'Genre',
                         'short_name' => 'Genre',
                         'is_group_by' => true,
-                        'value' => 'style'
+                        'value' => ['style']
                     ],
                 ],
             ],
@@ -541,19 +541,19 @@ return [
                     [
                         'name' => 'Lessons',
                         'short_name' => 'LESSONS',
-                        'value' => '',
+                        'value' => [''],
                     ],
                     [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor'],
                     ],
                     [
                         'name' => 'Genre',
                         'short_name' => 'Genre',
                         'is_group_by' => true,
-                        'value' => 'style'
+                        'value' => ['style'],
                     ],
                 ],
             ],
@@ -567,32 +567,31 @@ return [
                     [
                         'name' => 'All',
                         'short_name' => 'ALL',
-                        'value' => '',
+                        'value' => [''],
                     ],
                     [
                         'name' => 'Drags',
                         'short_name' => 'DRAGS',
                         'is_required_field' => true,
-                        //'key'=>['duration,451,>', 'duration,750,<'],topic,Accompaniment,string,=
-                        'value' => ['topic,drags,string,=']
+                        'value' => ['topic,drags,string,='],
                     ],
                     [
                         'name' => 'Flams',
                         'short_name' => 'FLAMS',
                         'is_required_field' => true,
-                        'value' => ['topic,flams,string,=']
+                        'value' => ['topic,flams,string,='],
                     ],
                     [
                         'name' => 'Paradiddles',
                         'short_name' => 'PARADIDDLES',
                         'is_required_field' => true,
-                        'value' => ['topic,paradiddles,string,=']
+                        'value' => ['topic,paradiddles,string,='],
                     ],
                     [
                         'name' => 'Rolls',
                         'short_name' => 'ROLLS',
                         'is_required_field' => true,
-                        'value' => ['topic,rolls,string,=']
+                        'value' => ['topic,rolls,string,='],
                     ],
                 ],
 
@@ -623,19 +622,19 @@ return [
                     [
                         'name' => 'Lessons',
                         'short_name' => 'LESSONS',
-                        'value' => '',
+                        'value' => [''],
                     ],
                     [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor'],
                     ],
                     [
                         'name' => 'Genre',
                         'short_name' => 'Genre',
                         'is_group_by' => true,
-                        'value' => 'style'
+                        'value' => ['style'],
                     ],
                 ],
             ],
@@ -653,19 +652,19 @@ return [
                     [
                         'name' => 'Lessons',
                         'short_name' => 'LESSONS',
-                        'value' => '',
+                        'value' => [''],
                     ],
                     [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor'],
                     ],
                     [
                         'name' => 'Genre',
                         'short_name' => 'Genre',
                         'is_group_by' => true,
-                        'value' => 'style'
+                        'value' => ['style'],
                     ],
                 ],
             ],
@@ -682,19 +681,19 @@ return [
                     [
                         'name' => 'Lessons',
                         'short_name' => 'LESSONS',
-                        'value' => '',
+                        'value' => [''],
                     ],
                     [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor'],
                     ],
                     [
                         'name' => 'Genre',
                         'short_name' => 'Genre',
                         'is_group_by' => true,
-                        'value' => 'style'
+                        'value' => ['style'],
                     ],
                 ],
             ],
@@ -709,19 +708,19 @@ return [
                     [
                         'name' => 'All',
                         'short_name' => 'ALL',
-                        'value' => '',
+                        'value' => [''],
                     ],
                     [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor'],
                     ],
                     [
                         'name' => 'Genre',
                         'short_name' => 'Genre',
                         'is_group_by' => true,
-                        'value' => 'style'
+                        'value' => ['style'],
                     ],
                 ],
                 'sortBy' => '-published_on',
@@ -785,19 +784,19 @@ return [
                     [
                         'name' => 'Lessons',
                         'short_name' => 'LESSONS',
-                        'value' => '',
+                        'value' => [''],
                     ],
                     [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor'],
                     ],
                     [
                         'name' => 'Genre',
                         'short_name' => 'Genre',
                         'is_group_by' => true,
-                        'value' => 'style'
+                        'value' => ['style'],
                     ],
                 ],
             ],
@@ -814,19 +813,19 @@ return [
                     [
                         'name' => 'Lessons',
                         'short_name' => 'LESSONS',
-                        'value' => '',
+                        'value' => [''],
                     ],
                     [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor'],
                     ],
                     [
                         'name' => 'Genre',
                         'short_name' => 'Genre',
                         'is_group_by' => true,
-                        'value' => 'style'
+                        'value' => ['style'],
                     ],
                 ],
             ],
@@ -843,19 +842,19 @@ return [
                     [
                         'name' => 'Lessons',
                         'short_name' => 'LESSONS',
-                        'value' => '',
+                        'value' => [''],
                     ],
                     [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor'],
                     ],
                     [
                         'name' => 'Genre',
                         'short_name' => 'Genre',
                         'is_group_by' => true,
-                        'value' => 'style'
+                        'value' => ['style'],
                     ],
                 ],
             ],
@@ -991,7 +990,7 @@ return [
                     [
                         'name' => 'All Play-Alongs',
                         'short_name' => 'ALL',
-                        'value' => '',
+                        'value' => [''],
                     ],
                 ],
             ],
@@ -1026,36 +1025,35 @@ return [
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
                 'allowableFilters' => ['difficulty','style','topic'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
-                'tabs' => [
-                    [
-                        'name' => 'All',
-                        'short_name' => 'ALL',
-                        'value' => '',
-                    ],
-                    [
-                        'name' => '5 Minutes',
-                        'short_name' => '5 MINS',
-                        'is_required_field' => true,
-                        'value' => ['length_in_seconds,450,integer,<,video']
-                    ],
-                    [
-                        'name' => '10 Minutes',
-                        'short_name' => '10 MINS',
-                        'is_required_field' => true,
-                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
-                    ],
-                    [
-                        'name' => '15+ Minutes',
-                        'short_name' => '15+ MINS',
-                        'is_required_field' => true,
-                        'value' => ['length_in_seconds,750,integer,>,video']
-                    ],
-                    [
-                        'name' => 'Instructors',
-                        'short_name' => 'INSTRUCTORS',
-                        'is_group_by' => true,
-                        'value' => 'instructor'
-                    ],
+            'tabs' => [
+                [
+                    'name' => 'All',
+                    'short_name' => 'ALL',
+                    'value' => [''],
+                ],
+                [
+                    'name' => '5 Minutes',
+                    'short_name' => '5 MINS',
+                    'is_required_field' => true,
+                    'value' => ['length_in_seconds,450,integer,<,video'],
+                ],
+                [
+                    'name' => '10 Minutes',
+                    'short_name' => '10 MINS',
+                    'is_required_field' => true,
+                    'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video'],
+                ],
+                [
+                    'name' => '15+ Minutes',
+                    'short_name' => '15+ MINS',
+                    'is_required_field' => true,
+                    'value' => ['length_in_seconds,750,integer,>,video'],
+                ],
+                [
+                    'name' => 'Instructors',
+                    'short_name' => 'INSTRUCTORS',
+                    'is_group_by' => true,
+                    'value' => ['instructor'],
                 ],
             ],
         ],
@@ -1220,25 +1218,25 @@ return [
                     [
                         'name' => 'All',
                         'short_name' => 'ALL',
-                        'value' => '',
+                        'value' => [''],
                     ],
                     [
                         'name' => '5 Minutes',
                         'short_name' => '5 MINS',
                         'is_required_field' => true,
-                        'value' => ['length_in_seconds,450,integer,<,video']
+                        'value' => ['length_in_seconds,450,integer,<,video'],
                     ],
                     [
                         'name' => '10 Minutes',
                         'short_name' => '10 MINS',
                         'is_required_field' => true,
-                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video'],
                     ],
                     [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor'],
                     ],
                 ],
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
@@ -1358,31 +1356,31 @@ return [
                     [
                         'name' => 'All',
                         'short_name' => 'ALL',
-                        'value' => '',
+                        'value' => [''],
                     ],
                     [
                         'name' => '5 Minutes',
                         'short_name' => '5 MINS',
                         'is_required_field' => true,
-                        'value' => ['length_in_seconds,450,integer,<,video']
+                        'value' => ['length_in_seconds,450,integer,<,video'],
                     ],
                     [
                         'name' => '10 Minutes',
                         'short_name' => '10 MINS',
                         'is_required_field' => true,
-                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video'],
                     ],
                     [
                         'name' => '15+ Minutes',
                         'short_name' => '15+ MINS',
                         'is_required_field' => true,
-                        'value' => ['length_in_seconds,750,integer,>,video']
+                        'value' => ['length_in_seconds,750,integer,>,video'],
                     ],
                     [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor'],
                     ],
                 ],
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
@@ -1487,25 +1485,25 @@ return [
                     [
                         'name' => 'All',
                         'short_name' => 'ALL',
-                        'value' => '',
+                        'value' => [''],
                     ],
                     [
                         'name' => '5 Minutes',
                         'short_name' => '5 MINS',
                         'is_required_field' => true,
-                        'value' => ['length_in_seconds,450,integer,<,video']
+                        'value' => ['length_in_seconds,450,integer,<,video'],
                     ],
                     [
                         'name' => '10 Minutes',
                         'short_name' => '10 MINS',
                         'is_required_field' => true,
-                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video'],
                     ],
                     [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
-                        'value' => 'instructor'
+                        'value' => ['instructor'],
                     ],
                 ],
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
