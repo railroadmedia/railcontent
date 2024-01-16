@@ -347,7 +347,7 @@ onBeforeMount(() => {
                     <!-- Lesson Skill Level -->
                     <div class="tw-hidden xl:tw-inline-flex tw-justify-start tw-shrink-0 tw-w-[140px]" :title="lesson.type">
                         <span v-if="lesson.type" class="tw-text-center tw-text-sm ">
-                            <DifficultyLabel class="" difficultyValue="all" textCase="uppercase" />
+                            <DifficultyLabel class="" :difficultyValue="lesson.difficulty" textCase="uppercase" />
                         </span>
                     </div>
                     <!-- Lesson Type -->
