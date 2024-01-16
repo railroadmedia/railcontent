@@ -29,11 +29,18 @@
                 <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
                     <div class=" inline-block relative w-full group" style="padding-bottom: 45%;perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
-                            <div class=" {{--border-2 border-musora--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <div class="h-full w-full bg-top bg-cover"
-                                     :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" 
-                                     :style="`background-image:url('{{ $topImage }}');`"
-                                     x-intersect.once="lazyLoad = true"></div>
+                            <div class="{{--border-2 border-musora--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
+                                <picture class="h-full w-full bg-top bg-cover"
+                                         :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                                         x-intersect.once="lazyLoad = true">
+                                    <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $topImage }}"
+                                            media="(min-width: 640px)">
+                                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $topImage }}"
+                                         alt="Top Image"
+                                         class="w-full h-full object-cover opacity-0 transition-opacity"
+                                         loading="lazy"
+                                         onload="this.classList.remove('opacity-0')">
+                                </picture>
                             </div>
                         </div>
                     </div>
@@ -83,9 +90,18 @@
                                         <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} font-bebas uppercase">{{ $bonus['badge'] }}</h6>
                                     @endif
                                     <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover"
-                                         :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" 
-                                         :style="`background-image:url('{{ $bonus['image'] }}');`"
-                                         x-intersect.once="lazyLoad = true"></div>
+                                         :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                                         x-intersect.once="lazyLoad = true">
+                                        <picture class="absolute inset-0 w-full h-full object-cover">
+                                            <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $bonus['image'] }}"
+                                                    media="(min-width: 640px)">
+                                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/{{ $bonus['image'] }}"
+                                                 alt="Bonus Image"
+                                                 class="w-full h-full object-cover opacity-0 transition-opacity"
+                                                 loading="lazy"
+                                                 onload="this.classList.remove('opacity-0')">
+                                        </picture>
+                                    </div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>

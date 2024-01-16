@@ -306,20 +306,20 @@
         @php
             $bonuses = [
                 [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/survival-kit-shop.webp',
+                    'image' => 'marketing/guitareo/membership/homepage/2024/survival-kit-shop.webp',
                     'title' => 'The Guitarist’s Survival Kit',
                     'description' => 'Get the gear essentials to start sounding better on the guitar.',
                     'price' => floatval($productPrices['guitarists-survival-kit']->price),
                     'shipping' => 'true'
                 ],
                 [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/gq.webp',
+                    'image' => 'marketing/guitareo/membership/homepage/2024/gq.webp',
                     'title' => 'GuitarQuest',
                     'description' => 'Skip the boring stuff and start having fun! Your journey starts here.',
                     'price' => floatval($productPrices['guitar-quest']->price),
                 ],
                 [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/rhythm_groove_cart.webp',
+                    'image' => 'marketing/guitareo/membership/homepage/2024/rhythm_groove_cart.webp',
                     'title' => 'Rhythm & Groove',
                     'description' => 'Go beyond simple strumming on the guitar.',
                     'price' => floatval($productPrices['rhythm-and-groove']->price),
@@ -327,7 +327,7 @@
             ]
         @endphp
         @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/guitareo-annual-2w-card.webp',
+        'topImage' => 'marketing/guitareo/membership/homepage/2024/guitareo-annual-2w-card.webp',
         'header' => 'Online guitar lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 3 bonuses<br class="inline sm:hidden"> worth $333',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
