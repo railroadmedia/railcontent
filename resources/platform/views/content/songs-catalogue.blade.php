@@ -81,7 +81,7 @@
             <collection-wrapper
                 :pre-loaded-content="{{ $listLessons }}"
                 collection-type="song"
-                :tabs="{{ json_encode($catalogueMeta['tabs'] ?? []) }}"
+                :tab-options="{{ json_encode($catalogueMeta['tabs'] ?? []) }}"
                 :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
             ></collection-wrapper>
 {{--            <content-catalogue dusk="content-catalogue" brand="{{ $brand }}" theme-color="{{ $brand }}"--}}
