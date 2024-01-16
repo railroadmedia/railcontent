@@ -274,7 +274,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                     }
 
                     if (isset($parent) && (!isset(self::$parents[$content['id']]))) {
-                        Decorator::$typeDecoratorsEnabled = false;
+                        Decorator::$typeDecoratorsEnabled = true;
                         \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
                         AddedToPrimaryPlaylistDecorator::$skip = true;
                         $initialByPassPermission = ContentRepository::$bypassPermissions;

@@ -57,7 +57,7 @@
             }
         }
         form input[type="submit"], form button[type="submit"], form input button, form button button {
-            font-family: 'Roboto Condensed', sans-serif;
+            font-family: 'Bebas Neue', sans-serif;
             font-weight: 700;
             color: #fff;
             background: #F61A30;
@@ -147,7 +147,7 @@
         }
 
         .thank-you-box h2 {
-            font:700 30px/1em "Roboto Condensed", sans-serif;
+            font:700 30px/1em "Bebas Neue", sans-serif;
             margin:15px auto;
             text-transform:uppercase;
             color:#F61A30
@@ -467,7 +467,7 @@ $items = [
                     'url' => 'https://www.youtube.com/pianolessonscom/',
                     'label' => 'youtube',
                     'iconClass' => 'fab fa-youtube',
-                    'count' => number_format(Prices::$pianoteYoutubeSubsc), 
+                    'count' => number_format(Prices::$pianoteYoutubeSubsc),
                     'countLabel' => 'Subscribers',
                 ],
                 [

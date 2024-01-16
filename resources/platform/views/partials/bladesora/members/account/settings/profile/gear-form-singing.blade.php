@@ -40,7 +40,7 @@
                                 "inputName" => "singing_since_year",
                                 "inputLabel" => "Singing Since",
                                 "inputValue" => '',
-                                "inputOptions" => array_reverse(range(1900, date('Y'))),
+                                "inputOptions" => array_merge([""],array_reverse(range(1900, date('Y')))),
                                 "inputErrors" => [],
                             ], $singingSinceInput ?? []))
                         </div>

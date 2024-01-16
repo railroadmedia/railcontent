@@ -59,7 +59,7 @@
             }
         }
         form input[type="submit"], form button[type="submit"], form input button, form button button {
-            font-family: 'Roboto Condensed', sans-serif;
+            font-family: 'Bebas Neue', sans-serif;
             font-weight: 700;
             color: #fff;
             background: #0b76db;
@@ -149,7 +149,7 @@
         }
 
         .thank-you-box h2 {
-            font:700 30px/1em "Roboto Condensed", sans-serif;
+            font:700 30px/1em "Bebas Neue", sans-serif;
             margin:15px auto;
             text-transform:uppercase;
             color:#0b76db
@@ -406,6 +406,7 @@ $items = [
     </div>
 </section>
 
+    <div id="students" class="anchor"></div>
  <!-- Testimonials section -->
 @php
 $testimonials = $drumeo['testimonialsShopVersion'];

@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Modules\MusoraApi\Controllers\V1\OnboardingController;
 
 Route::as('musora-api.')
