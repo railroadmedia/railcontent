@@ -184,7 +184,7 @@
             ],
             [
                 'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/songs-icon.svg',
-                'title' => '1000+ Songs',
+                'title' => '6000+ Songs',
                 'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
             ],
             [

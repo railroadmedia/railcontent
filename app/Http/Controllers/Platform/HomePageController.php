@@ -182,6 +182,8 @@ class HomePageController extends BaseController
 
         $newContent = $this->getNewContents();
 
+        $workoutsContent = $this->getWorkoutsContents();
+
         $userMetrics = $this->getUserMetrics();
 
         $followedLessons = $this->contentFollowService->getLessonsForFollowedCoaches(
@@ -236,6 +238,7 @@ class HomePageController extends BaseController
         $collectionForDecoration = $collectionForDecoration->merge($newContent->results());
         $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
         $collectionForDecoration = $collectionForDecoration->merge($subscribedCoaches->results());
+        $collectionForDecoration = $collectionForDecoration->merge($workoutsContent->results());
 
         Decorator::$typeDecoratorsEnabled = true;
         $collectionForDecoration = $collectionForDecoration->filter();
@@ -350,6 +353,7 @@ class HomePageController extends BaseController
             'brand' => $brand,
             "hotForumTopics" => $hotForumTopics,
             "newContentJson" => $newContent->toResponseRawJson(),
+            "workoutsContentJson" => $workoutsContent->toResponseRawJson(),
             "startedContentJson" => $startedLessons->toResponseRawJson(),
             "hasStartedLessons" => count($followedLessons->results()) > 0,
             "usersList" => $usersList,
@@ -606,6 +610,29 @@ class HomePageController extends BaseController
         ContentRepository::$pullFutureContent = true;
 
         return $contents;
+    }
+
+
+    /**
+     * @return ContentFilterResultsEntity
+     */
+    private function getWorkoutsContents()
+    {
+        $workouts = $this->contentService->getFiltered(
+            1,
+            10,
+            '-published_on',
+            ['workout'],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            false
+        );
+
+        return $workouts;
     }
 
     /**

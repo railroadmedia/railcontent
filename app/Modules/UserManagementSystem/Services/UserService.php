@@ -34,12 +34,16 @@ class UserService
 
     public function getUserByShopifyCustomerId($shopifyCustomerId): ?User
     {
-        $user = User::query()->where('shopify_id', '=', $shopifyCustomerId)->first('id');
+        $user = User::query()->where('shopify_id', '=', $shopifyCustomerId)->orderByDesc('id')->first();
         return $user ?? null;
     }
 
-    public function createUser(string $email, string $password, ?int $shopifyCustomerId = null, bool $requiresPasswordUpdate = false): User
-    {
+    public function createUser(
+        string $email,
+        string $password,
+        ?int $shopifyCustomerId = null,
+        bool $requiresPasswordUpdate = false
+    ): User {
         $parts = explode('@', $email);
 
         $user = new User();

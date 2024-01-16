@@ -31,7 +31,7 @@ class CmsAccessorySeeder extends Seeder
             ],
             "specs" => [
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -62,7 +62,7 @@ class CmsAccessorySeeder extends Seeder
             ],
             "specs" => [
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -93,7 +93,7 @@ class CmsAccessorySeeder extends Seeder
             ],
             "specs" => [
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -127,7 +127,7 @@ class CmsAccessorySeeder extends Seeder
             ],
             "specs" => [
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -161,7 +161,7 @@ class CmsAccessorySeeder extends Seeder
             ],
             "specs" => [
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -192,7 +192,7 @@ class CmsAccessorySeeder extends Seeder
             ],
             "specs" => [
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -226,7 +226,7 @@ class CmsAccessorySeeder extends Seeder
             ],
             "specs" => [
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -257,7 +257,7 @@ class CmsAccessorySeeder extends Seeder
             ],
             "specs" => [
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -291,7 +291,7 @@ class CmsAccessorySeeder extends Seeder
             ],
             "specs" => [
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -342,7 +342,7 @@ class CmsAccessorySeeder extends Seeder
                     "desc" => "4” Drumeo logo (blue and white)."
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => true,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -404,7 +404,7 @@ class CmsAccessorySeeder extends Seeder
                     "desc" => "Do not microwave"
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => true,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -468,7 +468,7 @@ class CmsAccessorySeeder extends Seeder
                     "desc" => "Microwave safe."
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => true,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -505,7 +505,7 @@ class CmsAccessorySeeder extends Seeder
             "specs" => [
 
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -582,7 +582,7 @@ You’ll get 10 of the 14 songs delivered to your inbox immediately after comple
                     "desc" => "38 pages"
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -663,7 +663,7 @@ You’ll get 10 of the 14 songs delivered to your inbox immediately after comple
                     "desc" => "38 pages"
                 ],
             ],
-            "visible" => false,
+            "shop_card_visible" => false,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -727,7 +727,7 @@ And because it’s a digital copy, you’ll have instant access to all the songs
                     "desc" => "25 pages"
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -791,7 +791,7 @@ And so many more!",
                     "desc" => "92 pages"
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -862,7 +862,7 @@ And so many more!",
                     "desc" => "92 pages"
                 ],
             ],
-            "visible" => false,
+            "shop_card_visible" => false,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -938,7 +938,7 @@ Start Mastering your Chords & Scales today.",
                     "desc" => "143 pages"
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1016,7 +1016,7 @@ Start Mastering your Chords & Scales today.",
                     "desc" => "143 pages"
                 ],
             ],
-            "visible" => false,
+            "shop_card_visible" => false,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1086,7 +1086,7 @@ This is Lisa Witt’s personal practice guide. Written by her, exclusively for p
                     "desc" => "198 pages total. Includes 12 undated months, chord reference chart, note reference guide, blank pages for notes, blank ledger-line pages"
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1133,7 +1133,7 @@ This is Lisa Witt’s personal practice guide. Written by her, exclusively for p
             ],
             "specs" => [
             ],
-            "visible" => false,
+            "shop_card_visible" => false,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1200,7 +1200,7 @@ This is Lisa Witt’s personal practice guide. Written by her, exclusively for p
                     "desc" => "198 pages total. Includes 12 undated months, chord reference chart, note reference guide, blank pages for notes, blank ledger-line pages"
                 ],
             ],
-            "visible" => false,
+            "shop_card_visible" => false,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1253,7 +1253,7 @@ At 17” x 22” this helpful poster can keep your chording on track. Don’t wa
                     "desc" => '17" x 22"'
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1300,7 +1300,7 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                     "desc" => '22" x 17"'
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1363,7 +1363,7 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                     "desc" => "Microwave safe."
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1424,7 +1424,7 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                     "desc" => "Microwave safe."
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1486,7 +1486,7 @@ This seven-piece gear kit helps you achieve four main goals:
                     "desc" => '8.5" x 5.5"'
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1562,7 +1562,7 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
                     "desc" => "Black Wire"
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1635,7 +1635,7 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
                     "desc" => "Black Wire"
                 ],
             ],
-            "visible" => false,
+            "shop_card_visible" => false,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1702,7 +1702,7 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
                     "desc" => "Microwave safe."
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1744,7 +1744,7 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
                     "desc" => "Gloss"
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1791,7 +1791,7 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
                     "desc" => "Matte pearlized finish"
                 ],
             ],
-            "visible" => true,
+            "shop_card_visible" => true,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1841,7 +1841,7 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
                     "desc" => "Matte pearlized finish"
                 ],
             ],
-            "visible" => false,
+            "shop_card_visible" => false,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1890,7 +1890,7 @@ APOP65 Nylon screen professional pop filter for studio-quality recordings',
             "specs" => [
 
             ],
-            "visible" => false,
+            "shop_card_visible" => false,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -1952,7 +1952,7 @@ APOP65 Nylon screen professional pop filter for studio-quality recordings',
 //                        "desc" => "Black"
 //                    ],
 //                ],
-//                "visible" => true,
+//                "shop_card_visible" => true,
 //                "sold_out" => false,
 //                "guaranteed" => false,
 //                "lifetime_access" => false,
@@ -2012,7 +2012,7 @@ APOP65 Nylon screen professional pop filter for studio-quality recordings',
 //                        "desc" => "Black"
 //                    ],
 //                ],
-//                "visible" => true,
+//                "shop_card_visible" => true,
 //                "sold_out" => false,
 //                "guaranteed" => false,
 //                "lifetime_access" => false,
@@ -2082,8 +2082,8 @@ APOP65 Nylon screen professional pop filter for studio-quality recordings',
                 'sold_out' => $product['sold_out'],
                 'free_shipping' => $product['free_shipping'],
                 'guaranteed' => $product['guaranteed'],
-                'visible' => $product['visible'],
-                'display_order' => $product['visible'] ? $orderNum : 0,
+                'shop_card_visible' => $product['shop_card_visible'],
+                'display_order' => $product['shop_card_visible'] ? $orderNum : 0,
                 'size_chart_id' => null,
                 'bundle_img' => empty($product['bundle_img']) ? null : $product['bundle_img'],
                 'bundle_desc' => empty($product['bundle_desc']) ? null : $product['bundle_desc'],

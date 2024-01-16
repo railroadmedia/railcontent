@@ -129,6 +129,10 @@ export default {
                 })
                     .then(() => {
                         this.initialVal = this.$_permission_level;
+                        this.$root.$emit('displayMessage', {
+                            text: 'Permission updated successfully.',
+                            color: 'success',
+                        });
                     });
             } else {
                 return false;

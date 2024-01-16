@@ -19,6 +19,11 @@ class ChapterDecorator extends ModeDecoratorBase
                     $contents[$contentIndex]['chapters'][$datum['position'] - 1]['chapter_description'] =
                         $datum['value'];
                 }
+
+                if ($datum['key'] === 'chapter_thumbnail_url') {
+                    $contents[$contentIndex]['chapters'][$datum['position'] - 1]['chapter_thumbnail_url'] =
+                        $datum['value'];
+                }
             }
         }
 

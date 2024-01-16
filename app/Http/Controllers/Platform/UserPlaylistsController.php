@@ -40,6 +40,8 @@ class UserPlaylistsController extends BaseController
     private VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator;
     private LessonAssignmentDecorator $lessonAssignmentDecorator;
     private RoutingDecorator $routingDecorator;
+
+    private  ResourceDecorator $resourceDecorator;
     private PinnedPlaylistsRepository $pinnedPlaylistsRepository;
     private ContentLastEngagedService $contentLastEngagedService;
     private PlaylistService $playlistService;
@@ -52,6 +54,7 @@ class UserPlaylistsController extends BaseController
      * @param VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
      * @param LessonAssignmentDecorator $lessonAssignmentDecorator
      * @param RoutingDecorator $routingDecorator
+     * @param ResourceDecorator $resourceDecorator
      * @param PinnedPlaylistsRepository $pinnedPlaylistsRepository
      * @param ContentLastEngagedService $contentLastEngagedService
      * @param PlaylistService $playlistService
@@ -64,6 +67,7 @@ class UserPlaylistsController extends BaseController
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
         LessonAssignmentDecorator $lessonAssignmentDecorator,
         RoutingDecorator $routingDecorator,
+        ResourceDecorator $resourceDecorator,
         PinnedPlaylistsRepository $pinnedPlaylistsRepository,
         ContentLastEngagedService $contentLastEngagedService,
         PlaylistService $playlistService
@@ -75,6 +79,7 @@ class UserPlaylistsController extends BaseController
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
         $this->lessonAssignmentDecorator = $lessonAssignmentDecorator;
         $this->routingDecorator = $routingDecorator;
+        $this->resourceDecorator = $resourceDecorator;
         $this->pinnedPlaylistsRepository = $pinnedPlaylistsRepository;
         $this->contentLastEngagedService = $contentLastEngagedService;
         $this->playlistService = $playlistService;
@@ -376,6 +381,7 @@ class UserPlaylistsController extends BaseController
         $playlistItem['is_full_track'] = $initialItem['is_full_track'] ?? false;
         $playlistItem['is_instrumentless_track'] = $initialItem['is_instrumentless_track'] ?? false;
         $playlistItem['resources'] = $initialItem['resources'] ?? [] ;
+        $playlistItem['parent'] = $initialItem['parent'] ?? null;
 
         // Calculate if the playlist item is released or not
         $givenDate = Carbon::parse($initialItem['published_on']);
@@ -434,10 +440,6 @@ class UserPlaylistsController extends BaseController
                     $playlistItem['parent']['parent']->fetch('data.thumbnail_url')
                 );
             }
-            }
-        if (!empty($playlistItem['parent'] ?? [])){
-            $playlistItem['resources'] = array_merge($playlistItem['resources'] ?? [], $initialItem['parent']['resources'] ?? []) ;
-
         }
 
         $relatedLesson =

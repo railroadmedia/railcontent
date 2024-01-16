@@ -23,9 +23,12 @@
 
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => '<span class="text-promo">Save up to 84%</span> on piano lessons,<br class="sm:hidden"> tools, & merch.',
+        'text' => 'GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!',
+        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/427x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png',
+        'logoStyles' => 'h-12 sm:h-20 pb-2 sm:pb-3',
         'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg',
     ])
+
 
     @include('_partials.components.shop.index-filters')
 
@@ -33,28 +36,16 @@
         @php
             $bundles = [
                 [
-                    'slug' => '/shop/ultimate-lessons-bundle',
-                    'desc' => '11 Free Bonuses<br> Worth $933',
+                    'slug' => '/new-year#customize-anchor',
+                    'desc' => 'Join Pianote and get 4 books, 4 courses<br>  a practice poster PLUS a metronome.',
+                    'full' => true,
                     'visible' => 1,
-                    'specialW' => true,
-                    'price' => 1173,
+                    'price' => 855,
                     'discountedPrice' => 240,
                     'buttonColor' => '#F61A30',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card4.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m4.jpg',
-                ],
-                [
-                    'slug' => '/shop/30-day-challenge-bundle',
-                    'desc' => '7 Online Courses <br>For The Price Of 1',
-                    'visible' => 1,
-                    'specialW2' => true,
-                    'price' => 706,
-                    'discountedPrice' => 127,
-                    'buttonColor' => '#01C1FF',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30-day-challenge-bundle-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-challenge-card.jpg',
+                    'title' => "New Year's Bundle",
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/december/new-year-bundle.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/december/new-year-bundle-m.jpg',
                 ],
             ];
         @endphp
@@ -131,45 +122,21 @@
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Piano Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-{{--                    @include('_partials.components.shop.product-card', [--}}
-{{--                          "itemURL" => "/",--}}
-{{--                          "sku" => null,--}}
-{{--                          "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",--}}
-{{--                          "title" => "Pianote Membership",--}}
-{{--                          "packAuthor" => "Lisa Witt",--}}
-{{--                          "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",--}}
-{{--                          "specialPrice" => "7-Day Free Trial",--}}
-{{--                          "fullPrice" => 240,--}}
-{{--                          "price" => 150,--}}
-{{--                          "category" => "lessons",--}}
-{{--                          "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",--}}
-{{--                          'soldOut' => false,--}}
-{{--                     ])--}}
+                    @include('_partials.components.shop.product-card', [
+                          "itemURL" => "/new-year#customize-anchor",
+                          "sku" => null,
+                          "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
+                          "title" => "Pianote Membership",
+                          "packAuthor" => "Lisa Witt",
+                          "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",
+                          "specialPrice" => "7-Day Free Trial",
+                          "fullPrice" => 240,
+                          "price" => 180,
+                          "category" => "lessons",
+                          "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
+                          'soldOut' => false,
+                     ])
 
-                <div x-cloak x-show="filter === 'lessons'">
-                    @include('_partials.components.shop.product-card', [
-                         "itemURL" => "/shop/ultimate-lessons-bundle",
-                         "sku" => null,
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/november/bundles/pianote-ultimate-shop-thumb2.jpg",
-                         "title" => "Ultimate Lessons Bundle",
-                         "fullPrice" => 240,
-                         "price" => 240,
-                         "category" => "lessons",
-                         'soldOut' => false,
-                    ])
-                </div>
-                <div x-cloak x-show="filter === 'lessons'">
-                    @include('_partials.components.shop.product-card', [
-                         "itemURL" => "/shop/30-day-challenge-bundle",
-                         "sku" => null,
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/30d-shop-thumb2.jpg",
-                         "title" => "30 Day Challenge Bundle",
-                         "fullPrice" => 706,
-                         "price" => 127,
-                         "category" => "lessons",
-                         'soldOut' => false,
-                    ])
-                </div>
                 @foreach($lessons as $key => $lesson)
                     @include('_partials.components.shop.product-card', [
                             "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
@@ -215,37 +182,6 @@
                     ])
                 @endforeach
             </div>
-            </div>
-        </section>
-
-        {{--   XMAS     --}}
-        <div id="xmas" class="anchor"></div>
-        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
-            <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-tree-christmas text-{{ $brand }} mr-1"></i> Christmas Merch</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
-                    @foreach($xmas as $key => $xmasItem)
-                        @include('_partials.components.shop.product-card', [
-                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $xmasItem->slug ),
-                            "sku" => $xmasItem->sku === 'pianote' ? null : $xmasItem->sku,
-                            "badgeText" => $xmasItem->badge_text,
-                            "thumbnail" => $xmasItem->thumbnail,
-                            "packLogo" => $xmasItem->thumbnail_logo,
-                            "title" => $xmasItem->name,
-                            "packAuthor" => $xmasItem->instructor_name,
-                            "cardDescription" => $xmasItem->short_desc,
-                            "fullPrice" => $xmasItem->price,
-                            "price" => $xmasItem->discounted_price,
-                            "category" => strtolower($xmasItem->productType->name),
-                            "buttonText" => $xmasItem->sku === 'drumeo' || $xmasItem->sku === 'pianote' || $xmasItem->sku === 'singeo' || $xmasItem->sku === 'guitareo' ? 'see the deal' : null,
-                            "soldOut" => $xmasItem->sold_out,
-                            "includedEdge" => $xmasItem->included_edge,
-                            "sizes" => $xmasItem->sizes,
-                            'FCP' => $key < 4 ? true : null,
-                            "size_case_sensitive" => $xmasItem->size_case_sensitive,
-                        ])
-                    @endforeach
-                </div>
             </div>
         </section>
 
@@ -325,6 +261,34 @@
                              "soldOut" => isset($products[$miscItem->sku]) ? $products[$miscItem->sku]->getStockAvailability() === 0 : $miscItem->sold_out,
                              "category" => strtolower($miscItem->productType->name),
                              "size_case_sensitive" => $miscItem->size_case_sensitive,
+                        ])
+                    @endforeach
+
+                </div>
+            </div>
+        </section>
+
+        {{--   limited     --}}
+        <div id="limited" class="anchor"></div>
+        <section class="grid-view category-section" data-category="misc" x-show="filter === 'clothing' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Limited Sizes</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+
+                    @foreach($lowStock as $lowStockItem)
+                        @include('_partials.components.shop.product-card', [
+                             "sku" => $lowStockItem->sku,
+                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lowStockItem->slug ),
+                             "badgeText" => $lowStockItem->badge_text,
+                             "thumbnail" => $lowStockItem->thumbnail,
+                             "title" => $lowStockItem->name,
+                             "cardDescription" => $lowStockItem->short_desc,
+                             "fullPrice" => $lowStockItem->price,
+                             "price" => $lowStockItem->discounted_price,
+                             "sizes" => $lowStockItem->sizes,
+                             "soldOut" => isset($products[$lowStockItem->sku]) ? $products[$lowStockItem->sku]->getStockAvailability() === 0 : $lowStockItem->sold_out,
+                             "category" => strtolower($lowStockItem->productType->name),
+                             "size_case_sensitive" => $lowStockItem->size_case_sensitive,
                         ])
                     @endforeach
 

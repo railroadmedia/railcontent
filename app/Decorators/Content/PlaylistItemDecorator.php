@@ -112,7 +112,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
         $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
 
         foreach ($contentsOfType as $contentIndex => $content) {
-
+            $resources = [];
             if(!config('musora-api.api.version') || config('musora-api.api.version') != 'v1'){
                 $contentsOfType[$contentIndex]['type'] = $this->convertContentType($content['type']);
             }
@@ -260,7 +260,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                             $route[] = 'Method';
                             break;
                         case 'learning-path-level':
-                            $route[] = 'L'.$parent->position;
+                            $route[] = 'L' . $parent->position;
                             break;
                         case 'song':
                             break;
@@ -272,85 +272,90 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                             $route[] = $parent->title ?? '';
                             break;
                     }
-                }
-                if (isset($parent) && (!isset(self::$parents[$content['id']]))) {
-                    Decorator::$typeDecoratorsEnabled = false;
-                    \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
-                    AddedToPrimaryPlaylistDecorator::$skip = true;
-                    $initialByPassPermission = ContentRepository::$bypassPermissions;
-                    $initialPullFutureContent = ContentRepository::$pullFutureContent;
-                    ContentRepository::$bypassPermissions = true;
-                    ContentRepository::$pullFutureContent = true;
-                    ResourceDecorator::$decorationMode = \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
 
-                    $parentContent[$content['id']] =
-                        $this->contentService->getByIds([$parent->id])
-                            ->first();
-                    ContentRepository::$bypassPermissions = $initialByPassPermission;
-                    ContentRepository::$pullFutureContent = $initialPullFutureContent;
-                    self::$parents = $parentContent + self::$parents;
-                    Decorator::$typeDecoratorsEnabled = true;
-                }
+                    if (isset($parent) && (!isset(self::$parents[$content['id']]))) {
+                        Decorator::$typeDecoratorsEnabled = true;
+                        \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
+                        AddedToPrimaryPlaylistDecorator::$skip = true;
+                        $initialByPassPermission = ContentRepository::$bypassPermissions;
+                        $initialPullFutureContent = ContentRepository::$pullFutureContent;
+                        ContentRepository::$bypassPermissions = true;
+                        ContentRepository::$pullFutureContent = true;
+                        ResourceDecorator::$decorationMode = \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
 
-                if (isset(self::$parents[$content['id']]) &&
-                    (self::$parents[$content['id']] instanceof ContentEntity)) {
-                    $contentsOfType[$contentIndex]['parent'] = self::$parents[$content['id']] ?? null;
-                    $contentsOfType[$contentIndex]['parent_title'] = self::$parents[$content['id']]['title'] ?? null;
-                    $contentsOfType[$contentIndex]['parent'] = $this->resourceDecorator->decorate(new Collection([self::$parents[$content['id']]]))
-                        ->first();
-                    if (empty($contentsOfType[$contentIndex]['instructors'])) {
-                        InstructorDecorator::$decorationMode =
-                            \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-                        self::$parents[$content['id']] =
-                            $this->instructorDecorator->decorate(new Collection([self::$parents[$content['id']]]))
+                        $parentContent[$content['id']] =
+                            $this->contentService->getByIds([$parent->id])
                                 ->first();
-                        $contentsOfType[$contentIndex]['instructors'] =
-                            self::$parents[$content['id']]['instructors'] ?? [];
+                        ContentRepository::$bypassPermissions = $initialByPassPermission;
+                        ContentRepository::$pullFutureContent = $initialPullFutureContent;
+                        self::$parents = $parentContent + self::$parents;
+                        Decorator::$typeDecoratorsEnabled = true;
                     }
-                    if (empty($contentsOfType[$contentIndex]['thumbnail_url'])) {
-                        $contentsOfType[$contentIndex]['thumbnail_url'] = self::$parents[$content['id']]->fetch(
-                            'data.original_thumbnail_url',
-                            self::$parents[$content['id']]->fetch('data.thumbnail_url')
-                        );
-                        if (empty($contentsOfType[$contentIndex]['thumbnail_url']) &&
-                            isset(self::$parents[(self::$parents[$content['id']]['id'])])) {
-                            $contentsOfType[$contentIndex]['thumbnail_url'] =
-                                self::$parents[(self::$parents[$content['id']]['id'])]->fetch(
-                                    'data.original_thumbnail_url'
-                                );
+
+                    if (isset(self::$parents[$content['id']]) &&
+                        (self::$parents[$content['id']] instanceof ContentEntity)) {
+
+                        $contentsOfType[$contentIndex]['parent'] = self::$parents[$content['id']] ?? null;
+                        $contentsOfType[$contentIndex]['parent_title'] = self::$parents[$content['id']]['title'] ?? null;
+                        $contentsOfType[$contentIndex]['parent'] = $this->resourceDecorator->decorate(new Collection([self::$parents[$content['id']]]))
+                            ->first();
+                        $resources = array_merge($contentsOfType[$contentIndex]['resources']??[], $contentsOfType[$contentIndex]['parent']['resources']??[]);
+
+                        if (empty($contentsOfType[$contentIndex]['instructors'])) {
+                            InstructorDecorator::$decorationMode =
+                                \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+                            self::$parents[$content['id']] =
+                                $this->instructorDecorator->decorate(new Collection([self::$parents[$content['id']]]))
+                                    ->first();
+                            $contentsOfType[$contentIndex]['instructors'] =
+                                self::$parents[$content['id']]['instructors'] ?? [];
                         }
-                    }
+                        if (empty($contentsOfType[$contentIndex]['thumbnail_url'])) {
+                            $contentsOfType[$contentIndex]['thumbnail_url'] = self::$parents[$content['id']]->fetch(
+                                'data.original_thumbnail_url',
+                                self::$parents[$content['id']]->fetch('data.thumbnail_url')
+                            );
+                            if (empty($contentsOfType[$contentIndex]['thumbnail_url']) &&
+                                isset(self::$parents[(self::$parents[$content['id']]['id'])])) {
+                                $contentsOfType[$contentIndex]['thumbnail_url'] =
+                                    self::$parents[(self::$parents[$content['id']]['id'])]->fetch(
+                                        'data.original_thumbnail_url'
+                                    );
+                            }
+                        }
 
-                    if ($contentsOfType[$contentIndex]['need_access'] &&
-                        (empty($contentsOfType[$contentIndex]['need_access_message']))) {
-                        $parent = self::$parents[$content['id']] ?? null;
-                        $contentsOfType[$contentIndex]['need_access_message'] =
-                        self::$noAccessMessages[$content['id']] =
-                            $content['title'].' is part of our <b>'.$parent['title'].'</b> Pack.';
-                    }
-
-                    if ($content['type'] == 'assignment') {
-                        // TODO: check how to get the assignment duration
-                        $contentsOfType[$contentIndex]['fields'] =
-                            array_merge($content['fields'] ?? [], self::$parents[$content['id']]['fields'] ?? []);
-
-                        $contentsOfType[$contentIndex]['need_access'] = empty(
-                            array_intersect(
-                                $userPermissionIds,
-                                (isset($grupedPermissions[self::$parents[$content['id']]['id']])) ?
-                                    $grupedPermissions[self::$parents[$content['id']]['id']]->pluck('permission_id')
-                                        ->toArray() : []
-                            )
-                            ) && (isset($grupedPermissions[self::$parents[$content['id']]['id']]));
-                        if ($contentsOfType[$contentIndex]['need_access']) {
+                        if ($contentsOfType[$contentIndex]['need_access'] &&
+                            (empty($contentsOfType[$contentIndex]['need_access_message']))) {
+                            $parent = self::$parents[$content['id']] ?? null;
                             $contentsOfType[$contentIndex]['need_access_message'] =
-                                self::$noAccessMessages[self::$parents[$content['id']]['id']] ?? '';
+                            self::$noAccessMessages[$content['id']] =
+                                $content['title'] . ' is part of our <b>' . $parent['title'] . '</b> Pack.';
+                        }
+
+                        if ($content['type'] == 'assignment') {
+                            // TODO: check how to get the assignment duration
+                            $contentsOfType[$contentIndex]['fields'] =
+                                array_merge($content['fields'] ?? [], self::$parents[$content['id']]['fields'] ?? []);
+
+                            $contentsOfType[$contentIndex]['need_access'] = empty(
+                                array_intersect(
+                                    $userPermissionIds,
+                                    (isset($grupedPermissions[self::$parents[$content['id']]['id']])) ?
+                                        $grupedPermissions[self::$parents[$content['id']]['id']]->pluck('permission_id')
+                                            ->toArray() : []
+                                )
+                                ) && (isset($grupedPermissions[self::$parents[$content['id']]['id']]));
+                            if ($contentsOfType[$contentIndex]['need_access']) {
+                                $contentsOfType[$contentIndex]['need_access_message'] =
+                                    self::$noAccessMessages[self::$parents[$content['id']]['id']] ?? '';
+                            }
                         }
                     }
                 }
             }
 
             $contentsOfType[$contentIndex]['route'] = $route;
+            $contentsOfType[$contentIndex]['resources'] = $resources;
         }
 
         return $this->mergeDecorated($contents, $contentsOfType);

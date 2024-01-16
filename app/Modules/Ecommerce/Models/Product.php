@@ -255,7 +255,12 @@ class Product extends Model
 
     public function isTrial(): bool
     {
-        return str_contains(strtolower($this->sku), 'trial');
+        return Product::IsTrialSku($this->sku);
+    }
+
+    public static function IsTrialSku($sku): bool
+    {
+        return str_contains(strtolower($sku), 'trial');
     }
 
     /**

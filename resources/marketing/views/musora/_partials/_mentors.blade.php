@@ -27,8 +27,8 @@
         transform: rotateY(0deg)!important;
     }
 </style>
-<section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f9f9fb;">
-    <div class="container max-w-4xl mx-auto">
+<section class="text-center px-4 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f9f9fb;">
+    <div class="container max-w-5xl mx-auto">
         <img class="h-16 sm:h-20 lg:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/720x0/filters:quality(95)/marketing/musora/lead-gen/mentors/musora_mentors_logo.png">
         <p class="mt-1 tracking-wider"><strong>MUSICIANS HELPING MUSICIANS</strong></p>
         <p class="max-w-2xl my-5 mx-auto">Our music lesson communities have always valued relationships before technology.
@@ -110,25 +110,25 @@
                     'description' => "Ale has been playing the drums for almost 25 years now! He's been fortunate enough to travel, tour and jam with some big names in the music biz. Right now, he's rockin' out with two international bands that keep him busy on the road. On top of all that, Ale has a degree in sound engineering, music, and video production. He just loves music, and nothing makes him happier than helping others find their own groove.",
                     ],
                     [
-                    'image' => 'susanna.jpg',
+                    'image' => 'susanna2.jpg',
                     'first' => 'Susana ',
                     'last' => 'W',
                     'drumeo' => true,
                     'pianote' => true,
                     'description' => "Susana's musical voyage began at 7 in Caracas, Venezuela, and she hit her first stage at 13. She's a seasoned artist with three albums, international performances, and music for film and TV. In Vancouver, she leads two Latin bands and pursues solo projects. Her talents span singing, songwriting, drumming, and rhythm guitar.",
                     ],
-                    [
-                    'image' => 'brit.jpg',
-                    'first' => 'Brit ',
-                    'last' => 'S',
-                    'pianote' => true,
-                    'guitareo' => true,
-                    'description' => "Brit is passionate about all things music. She plays multiple instruments, including guitar, piano, bass, drums, and ukulele. She’s often collaborating with musicians, collecting vinyl records, or crafting a good cup of coffee. Overall - she enjoys helping artists and musicians find their sound. ",
-                    ],
                 ]
             @endphp
+{{--            [--}}
+{{--            'image' => 'brit.jpg',--}}
+{{--            'first' => 'Brit ',--}}
+{{--            'last' => 'S',--}}
+{{--            'pianote' => true,--}}
+{{--            'guitareo' => true,--}}
+{{--            'description' => "Brit is passionate about all things music. She plays multiple instruments, including guitar, piano, bass, drums, and ukulele. She’s often collaborating with musicians, collecting vinyl records, or crafting a good cup of coffee. Overall - she enjoys helping artists and musicians find their sound. ",--}}
+{{--            ],--}}
             @foreach($bonuses as $bonus)
-                <div class="bonus-wrap relative inline-block align-top mx-auto mb-3 px-3 sm:px-1.5 w-full sm:w-1/3" style="max-width:250px;">
+                <div class="bonus-wrap relative inline-block align-top mx-auto mb-3 px-1 sm:px-1.5 w-1/2 sm:w-1/3 lg:w-1/4" style="max-width:250px;">
                     <div class="flip-div inline-block relative w-full group" style="padding-bottom: 120%; perspective: 1000px;" onclick="this.classList.toggle('flipped')">
                         <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                             <div class="shadow-sm front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">

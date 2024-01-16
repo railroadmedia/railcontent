@@ -45,11 +45,11 @@ class ShopController extends BaseController
             return $value->productType->name === 'Hoodies' || $value->productType->name === 'Sweaters';
         });
 
-        $featured = $products->whereIn('id', [95, 207, 97, 98]);
-
-        $xmas = $products->whereIn('id', [224, 226, 229]);
+        $featured = $products->whereIn('id', [238, 95, 207, 97, 98]);
 
         $thirtyDD = Product::whereHas('brand', fn($query) => $query->where('name', 'drumeo'))->where([['sold_out', 0]])->orderBy('display_order')->get()->whereIn('id', [217, 216, 215, 214, 213, 212]);
+
+        $lowStock = Product::whereHas('brand', fn($query) => $query->where('name', 'drumeo'))->where([['sold_out', 0]])->orderBy('display_order')->get()->whereIn('id', [59, 63, 64, 65, 67, 68, 69, 71, 72]);
 
         return view('drumeo.shop.shop', [
             'lessons' => $lessons,
@@ -60,8 +60,8 @@ class ShopController extends BaseController
             'theme' => 'drumeo',
             'category' => $request->category,
             'featured' => $featured,
-            'xmas' => $xmas,
-            'thirtyDD' => $thirtyDD
+            'thirtyDD' => $thirtyDD,
+            'lowStock' => $lowStock
         ]);
     }
 

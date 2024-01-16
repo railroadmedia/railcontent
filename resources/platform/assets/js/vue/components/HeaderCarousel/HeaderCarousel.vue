@@ -108,6 +108,7 @@ onMounted(() => {
       :tabletImg="slide.tablet_img"
       :mobileImg="slide.mobile_img"
       :is-draft="slide.draft === 1"
+      :skill-level="slide.skill_level"
     />
 
       <!-- Directional Buttons -->
@@ -118,13 +119,13 @@ onMounted(() => {
       >
 
           <button
-              class="tw-bg-[#000C17] tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[23px] tw-w-[23px] lg:tw-h-[30px] lg:tw-w-[30px] hover:tw-text-[#00101D] hover:tw-bg-white hover:tw-border-none"
+              class="tw-bg-[#000C17] tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[23px] tw-w-[23px] md:tw-h-[40px] md:tw-w-[40px] hover:tw-text-[#00101D] hover:tw-bg-white hover:tw-border-none"
               @click="handleLeft()">
               <ChevronLeftIcon />
           </button>
 
           <button
-              class="tw-bg-[#000C17] tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[23px] tw-w-[23px] lg:tw-h-[30px] lg:tw-w-[30px] tw-ml-[10px] md:tw-ml-[23px] hover:tw-text-[#00101D] hover:tw-bg-white hover:tw-border-none"
+              class="tw-bg-[#000C17] tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[23px] tw-w-[23px] md:tw-h-[40px] md:tw-w-[40px] tw-ml-[10px] md:tw-ml-[23px] hover:tw-text-[#00101D] hover:tw-bg-white hover:tw-border-none"
               @click="handleRight()">
               <ChevronRightIcon />
           </button>
@@ -136,8 +137,9 @@ onMounted(() => {
           class="tw-absolute tw-w-auto tw-bottom-0 tw-justify-center tw-py-[15px] lg:tw-py-[25px] tw-z-40 lg:tw-translate-x-[-50%] lg:tw-left-2/4 lg:tw-mx-auto tw-px-[26px] lg:tw-px-0"
           v-if="slides.length > 1"
       >
-          <button v-for="(slide, i) in slides" v-bind:key="slide.title" @click="() => handleNavClick(i)" :class="`tw-h-[6px] tw-w-[6px] tw-mr-[10px] lg:tw-mx-[15px] lg:tw-h-[10px] lg:tw-w-[10px] tw-rounded-full ${i === currentSlide ? 'tw-bg-white' : 'tw-bg-[#c4c4c4]/50'
-      }`" />
+        <button v-for="(slide, i) in slides" v-bind:key="slide.title" @click="() => handleNavClick(i)" class="tw-h-[25px] tw-w-[25px] tw-inline-flex tw-justify-center tw-items-center" >
+          <i :class="`tw-h-[6px] tw-w-[6px] tw-rounded-full ${i === currentSlide ? 'tw-bg-white' : 'tw-bg-[#c4c4c4]/50'}`"></i>
+        </button>
       </div>
   </div>
 </template>

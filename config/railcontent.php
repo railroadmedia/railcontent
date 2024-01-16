@@ -65,6 +65,8 @@ return [
         'podcast',
         'song-tutorial',
         'song-tutorial-children',
+        'workout',
+        'challenge-part',
     ],
     'comment_assignation_owner_ids' => [
         102905,
@@ -112,6 +114,8 @@ return [
         'student-review',
         'song-tutorial',
         'song-tutorial-children',
+        'workout',
+        'challenge'
     ],
     'validation' => [
         'drumeo' => [
@@ -196,6 +200,7 @@ return [
             'unit',
             'song-tutorial',
             'song-tutorial-children',
+            'challenge',
         ],
         'completed' => [
             'course',
@@ -222,6 +227,7 @@ return [
             'unit',
             'song-tutorial',
             'song-tutorial-children',
+            'challenge',
         ],
     ],
 
@@ -344,6 +350,8 @@ return [
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
 //            \App\Modules\MusoraCenter\Decorators\UrlDecorator::class,
 
+            \App\Decorators\Content\ChallengeDecorator::class,
+
             \App\Decorators\Content\PlaylistItemDecorator::class,
 
             // cant the level rank stuff use the RC updates for user progress label calculated on progress update?
@@ -427,7 +435,7 @@ return [
                 'description' => "Here's a list of all lessons recently added to Drumeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor','progress'],
                 'sortBy' => '-published_on',
             ],
             'in-progress' => [
@@ -665,7 +673,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Get any drum related question answered by a Drumeo instructor on our weekly Q&A episodes! You can submit as many questions as you like by clicking the button below, and either join us live for the next episode, or check for your answer in the archived videos below!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['instructor'],
+                'allowableFiltersMobile' => ['instructor','progress'],
                 'sortBy' => '-published_on',
             ],
             'student-collaborations' => [
@@ -747,14 +755,67 @@ return [
                 'allowableFilters' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
-            ]
+            ],
+            'challenge-part' => [
+                'name' => 'Challenge Part',
+                'icon' => 'icon-courses',
+                'description' => "... ",
+                'allowableFilters' => ['difficulty','style','topic'],
+                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
+                'sortBy' => '-published_on',
+            ],
+            'challenge' => [
+                'name' => 'Challenges',
+                'icon' => 'icon-courses',
+                'description' => "... ",
+                'allowableFilters' => ['difficulty','topic','style'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'sortBy' => '-published_on',
+                'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
+            ],
+ 	    'workout' => [
+            'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
+            'allowableFilters' => ['difficulty','style','topic'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+            'tabs' => [
+                [
+                    'name' => 'All',
+                    'short_name' => 'ALL',
+                    'value' => [''],
+                ],
+                [
+                    'name' => '5 Minutes',
+                    'short_name' => '5 MINS',
+                    'is_required_field' => true,
+                    'value' => ['length_in_seconds,450,integer,<,video']
+                ],
+                [
+                    'name' => '10 Minutes',
+                    'short_name' => '10 MINS',
+                    'is_required_field' => true,
+                    'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                ],
+                [
+                    'name' => '15+ Minutes',
+                    'short_name' => '15+ MINS',
+                    'is_required_field' => true,
+                    'value' => ['length_in_seconds,750,integer,>,video']
+                ],
+                [
+                    'name' => 'Instructors',
+                    'short_name' => 'INSTRUCTORS',
+                    'is_group_by' => true,
+                    'value' => ['instructor']
+                ],
+            ],
+        ],
         ],
         'pianote' => [
             'all' => [
                 'name' => 'New Content',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/courses.jpg',
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor','progress'],
                 'sortBy' => '-published_on',
                 'shortname' => 'New',
                 'icon' => 'fas fa-star',
@@ -775,6 +836,14 @@ return [
                 'description' => "This is a list of all of the releases by the coaches and topics that you have subscribed to across the member's area. You can filter by the type of content it is, or use the search bar to find all lessons by a specific coach or topic!",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
+            ],
+            'coaches' => [
+                'name' => 'Coaches',
+                'icon' => 'icon-coach',
+                'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
+                'allowableFilters' => ['progress'],
+                'allowableFiltersMobile' => ['focus', 'style'],
+                'sortBy' => '-published_on',
             ],
             'songs' => [
                 "name" => "Songs",
@@ -828,7 +897,7 @@ return [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/question-answer.jpg',
                 'name' => 'Q&A',
                 'allowableFilters' => ['instructor'],
-                'allowableFiltersMobile' => ['instructor'],
+                'allowableFiltersMobile' => ['instructor','progress'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Q&A',
                 'icon' => 'icon-student-focus',
@@ -895,6 +964,53 @@ return [
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
+            'workout' => [
+                'allowableFilters' => ['difficulty','style','topic'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'tabs' => [
+                    [
+                        'name' => 'All',
+                        'short_name' => 'ALL',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => '5 Minutes',
+                        'short_name' => '5 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,450,integer,<,video']
+                    ],
+                    [
+                        'name' => '10 Minutes',
+                        'short_name' => '10 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor']
+                    ],
+                ],
+                'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
+            ],
+            'challenge-part' => [
+                'name' => 'Challenge Part',
+                'icon' => 'icon-courses',
+                'description' => "... ",
+                'allowableFilters' => ['difficulty','style','topic'],
+                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
+                'sortBy' => '-published_on',
+            ],
+            'challenge' => [
+                'name' => 'Challenges',
+                'icon' => 'icon-courses',
+                'description' => "... ",
+                'allowableFilters' => ['difficulty','topic','style'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'sortBy' => '-published_on',
+                'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
+            ],
         ],
         'guitareo' => [
             'all' => [
@@ -903,11 +1019,19 @@ return [
                 'description' => "Here's a list of all lessons recently added to Guitareo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor','progress'],
                 'sortBy' => '-published_on',
             ],
             'in-progress' => [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
+            ],
+            'coaches' => [
+                'name' => 'Coaches',
+                'icon' => 'icon-coach',
+                'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
+                'allowableFilters' => ['progress'],
+                'allowableFiltersMobile' => ['focus', 'style'],
+                'sortBy' => '-published_on',
             ],
             'courses' => [
                 "name" => "Courses",
@@ -928,7 +1052,7 @@ return [
                 "icon" => "icon-play-alongs",
                 "description" => "Our play-along feature teaches you chords, strumming patterns, riffs, and song layouts -- with handy playback tools to help you create the perfect performance.",
                 "allowableFilters" => ['difficulty', 'style', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'allowableFiltersMobile' => ['difficulty', 'bpm','style','artist'],
             ],
             'chords-scales' => [
                 "name" => "Chords",
@@ -978,6 +1102,59 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => '-published_on',
             ],
+            'workout' => [
+                'allowableFilters' => ['difficulty','style','topic'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'tabs' => [
+                    [
+                        'name' => 'All',
+                        'short_name' => 'ALL',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => '5 Minutes',
+                        'short_name' => '5 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,450,integer,<,video']
+                    ],
+                    [
+                        'name' => '10 Minutes',
+                        'short_name' => '10 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                    ],
+                    [
+                        'name' => '15+ Minutes',
+                        'short_name' => '15+ MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,750,integer,>,video']
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor']
+                    ],
+                ],
+                'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
+            ],
+            'challenge-part' => [
+                'name' => 'Challenge Part',
+                'icon' => 'icon-courses',
+                'description' => "... ",
+                'allowableFilters' => ['difficulty','style','topic'],
+                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
+                'sortBy' => '-published_on',
+            ],
+            'challenge' => [
+                'name' => 'Challenges',
+                'icon' => 'icon-courses',
+                'description' => "... ",
+                'allowableFilters' => ['difficulty','topic','style'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'sortBy' => '-published_on',
+                'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
+            ],
         ],
         'singeo' => [
             'all' => [
@@ -987,11 +1164,19 @@ return [
                 'description' => "Here's a list of all lessons recently added to Singeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
                 'sortBy' => '-published_on',
             ],
             'in-progress' => [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
+            ],
+            'coaches' => [
+                'name' => 'Coaches',
+                'icon' => 'icon-coach',
+                'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
+                'allowableFilters' => ['progress'],
+                'allowableFiltersMobile' => ['focus', 'style'],
+                'sortBy' => '-published_on',
             ],
             'subscribed' => [
                 'name' => 'Subscribed',
@@ -1029,7 +1214,7 @@ return [
                 "icon" => "fas fa-question-circle",
                 "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
                 "allowableFilters" => [],
-                'allowableFiltersMobile' => ['instructor'],
+                'allowableFiltersMobile' => ['instructor', 'progress'],
             ],
             'student-reviews' => [
                 'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/student-reviews.png',
@@ -1045,6 +1230,53 @@ return [
                 "description" => "Warm up your voice for any occasion with our bite-sized routines - ranging from 5 to 20 minutes - perfect for busy days or when you need motivation.",
                 "allowableFilters" => [],
                 'allowableFiltersMobile' => [],
+            ],
+            'workout' => [
+                'allowableFilters' => ['difficulty','style','topic'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'tabs' => [
+                    [
+                        'name' => 'All',
+                        'short_name' => 'ALL',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => '5 Minutes',
+                        'short_name' => '5 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,450,integer,<,video']
+                    ],
+                    [
+                        'name' => '10 Minutes',
+                        'short_name' => '10 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor']
+                    ],
+                ],
+                'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
+            ],
+            'challenge-part' => [
+                'name' => 'Challenge Part',
+                'icon' => 'icon-courses',
+                'description' => "... ",
+                'allowableFilters' => ['difficulty','style','topic'],
+                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
+                'sortBy' => '-published_on',
+            ],
+            'challenge' => [
+                'name' => 'Challenges',
+                'icon' => 'icon-courses',
+                'description' => "... ",
+                'allowableFilters' => ['difficulty','topic','style'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'sortBy' => '-published_on',
+                'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
         ],
     ],
@@ -1129,6 +1361,8 @@ return [
         'podcasts',
         'song-tutorial',
         'song-tutorial-children',
+        'workout',
+        'challenge-part',
     ],
     'liveContentTypes' => [
         'student-focus',
@@ -1220,6 +1454,8 @@ return [
         'learning-path-lesson',
         'song-tutorial',
         'song-tutorial-children',
+        'workout',
+        'challenge-part',
     ],
     'dashboardInProgressContentTypes' => [
         'course',
@@ -1261,6 +1497,8 @@ return [
         'song-part',
         'play-along-part',
         'song-tutorial-children',
+        'workout',
+        'challenge-part',
     ],
     'appUserListContentTypes' => [
         'course',
@@ -1285,7 +1523,8 @@ return [
         'unit-part',
         'boot-camps',
         'podcasts',
-        'chord-and-scale'
+        'chord-and-scale',
+        'workout','challenge-part'
     ],
     'hiddenContentTypes' => [
         'ha-oemurd-pmac',
@@ -1343,6 +1582,7 @@ return [
         'sonor-drums', /* 2018*/
         'song-tutorial',
         'song-tutorial-children',
+        'workout',
     ],
 
     'contentTypesWithChildren' => [
@@ -1528,6 +1768,7 @@ return [
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
+            'challenge' => 'lessons',
         ],
         'pianote' => [
             'learning-path' => 'levels',
@@ -1541,6 +1782,7 @@ return [
             'unit' => 'lessons',
             'song-tutorial' => 'lessons',
             'song-tutorial-children' => 'lessons',
+            'challenge' => 'lessons',
         ],
         'guitareo' => [
             'learning-path' => 'levels',
@@ -1551,6 +1793,7 @@ return [
             'semester-pack' => 'lessons',
             'song' => 'lessons',
             'play-along' => 'lessons',
+            'challenge' => 'lessons',
         ],
         'singeo' => [
             'learning-path' => 'levels',
@@ -1559,6 +1802,7 @@ return [
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
+            'challenge' => 'lessons',
         ],
 
     ],
@@ -1570,6 +1814,7 @@ return [
         'captions',
         'chapter_description',
         'chapter_timecode',
+        'chapter_thumbnail_url',
         'coach_bottom_banner_image',
         'coach_card_image',
         'coach_featured_image',
@@ -1637,6 +1882,8 @@ return [
         'web_banner_url',
         'zip_name',
         'zip_url',
+        'enrollment_start_time',
+        'enrollment_end_time',
     ],
 
     'compiled_column_mapping_field_keys' => [
@@ -1708,6 +1955,8 @@ return [
         'week',
         'xp',
         'youtube_video_id',
+        'enrollment_start_time',
+        'enrollment_end_time',
     ],
 
     'compiled_column_mapping_sub_content_field_keys' => [
@@ -1740,7 +1989,7 @@ return [
         'singeo' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/06b2a24d-60ba-4f6d-9e8d-3a467b2d0b00/public'
     ],
     'content_multiple_level_content_depth_playlist_allowed' => [
-        'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
+        'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial','challenge'
     ],
     'playlist_items_limit' => 300,
     'search_in_playlist_items_name' => true,

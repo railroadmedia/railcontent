@@ -206,6 +206,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereBrandMethodLevels($value)
  * @method static Builder|User whereTotalXp($value)
  * @property string|null $membership_expiration_date
+ * @property string|null $membership_start_date
  * @property int $is_lifetime_member
  * @property int $is_drumeo_lifetime_member
  * @method static Builder|User whereIsLifetimeMember($value)
@@ -257,6 +258,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_GUITAREO = 4;
     const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_SINGEO = 8;
 
+    const PERMISSION_LEVEL_ADMIN = 'administrator';
     private ?NotificationSettings $notificationSettingsLookup = null;
 
     protected $hidden = ['password', 'session_salt'];
@@ -546,7 +548,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function isAdmin()
     {
-        return $this->permission_level == 'administrator';
+        return $this->permission_level == self::PERMISSION_LEVEL_ADMIN;
     }
 
     /**

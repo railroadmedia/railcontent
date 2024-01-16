@@ -99,17 +99,21 @@ class SubscriptionService
                 includeBuffer: false,
                 includeFixedTimes: true
             )?->startOfDay() ?? null;
-            $diff = abs(
-                $mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay()->diffInDays(
-                    $membershipExpirationDate
-                )
-            );
+            // BR-1243: safety check for null nextChargeScheduledAt
+            if (is_null($mostRecentActiveSubscription->nextChargeScheduledAt)) {
+                $diff = 0;
+            } else {
+                $diff = abs(
+                    $mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay()->diffInDays(
+                        $membershipExpirationDate
+                    )
+                );
+            }
             if ($membershipExpirationDate
                 && $diff > 1
                 && $membershipExpirationDate > Carbon::today()
                 //never move recharge dates backwards could be a paused subscription
-                && $membershipExpirationDate > $mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay()
-                && $activeMembershipSubscriptions->count() > 1) {
+                && $membershipExpirationDate > $mostRecentActiveSubscription->nextChargeScheduledAt->startOfDay()) {
                 Log::info(
                     "Updating subscription next charge date for user $user->id from $mostRecentActiveSubscription->nextChargeScheduledAt to $membershipExpirationDate"
                 );

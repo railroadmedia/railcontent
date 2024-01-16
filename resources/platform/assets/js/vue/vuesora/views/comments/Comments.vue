@@ -13,7 +13,7 @@
                         </div>
                     </div>
                 </div>
-                <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-2 lg:tw-mb-0 tw-whitespace-nowrap tw-mr-5">
+                <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl tw-mb-2 lg:tw-mb-0 tw-whitespace-nowrap tw-mr-5">
                     <span>{{ totalCommentsAndReplies }}</span>
                     Comments
                 </h2>
@@ -69,10 +69,8 @@
                                  @input="handleInput" :height="150" placeholder="Share your thoughts..."></text-editor>
 
                     <div class="tw-flex tw-flex-row tw-justify-end mv-1">
-                        <button class="btn collapse-150" :disabled="loading" dusk="submit-comment" @click="postComment">
-                            <span class="tw-text-white short" :class="themeBgClass">
+                        <button class="tw-btn-primary collapse-150 tw-text-white" :class="themeBgClass" :disabled="loading" dusk="submit-comment" @click="postComment">
                                 Comment
-                            </span>
                         </button>
                     </div>
 

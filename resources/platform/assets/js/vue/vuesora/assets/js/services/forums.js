@@ -82,10 +82,11 @@ export default {
      * Report a forum post
      *
      * @param {number} id - the post ID to report
+     * @param {string} brand - brand of the forum
      * @returns {Promise} resolved promise with the response.data object
      */
-    reportForumPost(id) {
-        return axios.put(`${endpointPrefix}/forums/post/report/${id}`)
+    reportForumPost(id, brand) {
+        return axios.put(`${endpointPrefix}/forums/post/report/${id}`, {brand})
             .then(response => response.data)
             .catch(ErrorHandler);
     },
@@ -93,11 +94,12 @@ export default {
     /**
      * Like a forum thread
      *
-     * @param {number} id - the comment ID to delete
+     * @param {number} id - the comment ID to like
+     * @param {string} brand - brand of the forum
      * @returns {Promise} resolved promise with the response.data object
      */
-    likeForumPost(id) {
-        return axios.put(`${endpointPrefix}/forums/post/like/${id}`)
+    likeForumPost(id, brand) {
+        return axios.put(`${endpointPrefix}/forums/post/like/${id}`, {brand})
             .then(response => response.data)
             .catch(ErrorHandler);
     },
@@ -105,11 +107,12 @@ export default {
     /**
      * Unlike a forum thread
      *
-     * @param {number} id - the comment ID to delete
+     * @param {number} id - the comment ID to unlike
+     * @param {string} brand - brand of the forum
      * @returns {Promise} resolved promise with the response.data object
      */
-    unlikeForumPost(id) {
-        return axios.delete(`${endpointPrefix}/forums/post/unlike/${id}`)
+    unlikeForumPost(id, brand) {
+        return axios.delete(`${endpointPrefix}/forums/post/unlike/${id}`, { data : {brand} } )
             .then(response => response.data)
             .catch(ErrorHandler);
     },
@@ -118,16 +121,19 @@ export default {
      * Follow a forum thread
      *
      * @param {number} id - thread id
+     * @param {string} brand - brand of the forum
      * @param {boolean} isFollowed
      * @returns {Promise} resolved promise with the response.data object
      */
-    followForumsThread(id, isFollowed = false) {
+    followForumsThread(id, brand, isFollowed = false) {
         const url = isFollowed ? '/forums/thread/unfollow/' : '/forums/thread/follow/';
         const method = isFollowed ? 'DELETE' : 'PUT';
 
         return axios({
             method,
             url: endpointPrefix + url + id,
+            data: {brand},
+            config: {data: {brand}}
         })
             .then(response => response.data)
             .catch(ErrorHandler);
@@ -137,12 +143,13 @@ export default {
      * Pin a forum thread
      *
      * @param {number} id - thread id
+     * @param {string} brand - brand of the forum
      * @param {boolean} pinned
      * @returns {Promise} resolved promise with the response.data object
      */
-    pinForumsThread(id, pinned) {
+    pinForumsThread(id, brand, pinned) {
         return axios.patch(`${endpointPrefix}/forums/thread/update/${id}`, {
-            pinned,
+            brand, pinned,
         })
             .then(response => response.data)
             .catch(ErrorHandler);
@@ -152,12 +159,13 @@ export default {
      * Lock a forum thread
      *
      * @param {number} id - thread id
+     * @param {string} brand - brand of the forum
      * @param {boolean} locked
      * @returns {Promise} resolved promise with the response.data object
      */
-    lockForumsThread(id, locked) {
+    lockForumsThread(id, brand, locked) {
         return axios.patch(`${endpointPrefix}/forums/thread/update/${id}`, {
-            locked,
+            brand, locked,
         })
             .then(response => response.data)
             .catch(ErrorHandler);
@@ -167,10 +175,11 @@ export default {
      * Delete a Forum thread
      *
      * @param {number} id - thread id
+     * @param {string} brand - brand of the forum
      * @returns {Promise} resolved promise with the response object
      */
-    deleteForumsPost(id) {
-        return axios.delete(`${endpointPrefix}/forums/post/delete/${id}`)
+    deleteForumsPost(id, brand) {
+        return axios.delete(`${endpointPrefix}/forums/post/delete/${id}`, {data : {brand}})
             .then(response => response)
             .catch(ErrorHandler);
     },

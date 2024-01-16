@@ -117,7 +117,7 @@
         }
 
         .gsotd-nav a {
-            font: 300 14px/50px "Open Sans", sans-serif;
+            font: 400 14px/50px "Open Sans", sans-serif;
             color: #CCC;
             text-align: center;
             float: left;
@@ -175,7 +175,7 @@
         }
 
         .overview-video .sub-title {
-            font: 300 14px/1.2em "Open Sans", sans-serif;
+            font: 400 14px/1.2em "Open Sans", sans-serif;
             margin: 0 auto;
         }
 
@@ -230,7 +230,7 @@
             }
 
             .sub-header {
-                font: 300 16px/1em "Open Sans", sans-serif;
+                font: 400 16px/1em "Open Sans", sans-serif;
                 margin: 5px auto 20px;
             }
 
@@ -263,7 +263,7 @@
             }
 
             .member-form .form-points {
-                font: 300 15px/1em "Helvetica Neue", sans-serif;
+                font: 400 15px/1em "Helvetica Neue", sans-serif;
                 margin: 1% 0 5% 5%;
                 min-height: 45px;
             }
@@ -275,7 +275,7 @@
 
             .member-form input {
                 height: 40px;
-                font: 300 16px "Helvetica Neue", sans-serif;
+                font: 400 16px "Helvetica Neue", sans-serif;
             }
 
             .member-form input[type="submit"] {
@@ -283,7 +283,7 @@
             }
 
             .gsotd-nav a {
-                font: 300 14px/50px "Open Sans", sans-serif;
+                font: 400 14px/50px "Open Sans", sans-serif;
                 width: 25%;
             }
 
@@ -320,7 +320,7 @@
             }
 
             .sub-header {
-                font: 300 16px/1.3em "Open Sans", sans-serif;
+                font: 400 16px/1.3em "Open Sans", sans-serif;
                 margin: 0px auto 35px;
             }
 
@@ -367,7 +367,7 @@
 
             .member-form input {
                 height: 40px;
-                font: 300 13px "Helvetica Neue", sans-serif;
+                font: 400 13px "Helvetica Neue", sans-serif;
             }
 
             .member-form input[type="submit"] {
@@ -375,7 +375,7 @@
             }
 
             .gsotd-nav a {
-                font: 300 16px/50px "Open Sans", sans-serif;
+                font: 400 16px/50px "Open Sans", sans-serif;
                 width: 15%;
             }
 
@@ -410,7 +410,7 @@
             }
 
             .sub-header {
-                font: 300 24px/1.3em "Open Sans", sans-serif;
+                font: 400 24px/1.3em "Open Sans", sans-serif;
                 margin: 0px auto 35px;
             }
 
@@ -459,7 +459,7 @@
 
             .member-form input {
                 height: 50px;
-                font: 300 19px "Helvetica Neue", sans-serif;
+                font: 400 19px "Helvetica Neue", sans-serif;
             }
 
             .member-form input[type="submit"] {
@@ -467,7 +467,7 @@
             }
 
             .gsotd-nav a {
-                font: 300 19px/50px "Open Sans", sans-serif;
+                font: 400 19px/50px "Open Sans", sans-serif;
                 width: 15.5%;
             }
 

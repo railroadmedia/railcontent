@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.3.6 | MIT License | https://tailwindcss.com
+! tailwindcss v3.3.7 | MIT License | https://tailwindcss.com
 *//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -562,13 +562,12 @@ video {
   cursor: pointer;
   display: inline-flex;
   font-family: "Bebas Neue", cursive;
-  font-size: 1.25rem;
+  font-size: 1rem;
   justify-content: center;
   letter-spacing: 1px;
-  line-height: 1;
   margin-bottom: 0.25rem;
-  min-height: 50px;
-  padding: 8px 70px;
+  min-height: 40px;
+  padding: 7px 70px 6px;
   position: relative;
   text-decoration: none;
   text-transform: uppercase;
@@ -1135,6 +1134,9 @@ video {
 .-left-0 {
   left: 0 !important;
 }
+.-left-1 {
+  left: -1rem !important;
+}
 .-left-11 {
   left: -2.75rem !important;
 }
@@ -1614,9 +1616,6 @@ video {
 .-mb-px {
   margin-bottom: -1px !important;
 }
-.-ml-2 {
-  margin-left: -0.5rem !important;
-}
 .-ml-20 {
   margin-left: -5rem !important;
 }
@@ -1631,6 +1630,9 @@ video {
 }
 .-mr-28 {
   margin-right: -7rem !important;
+}
+.-mr-3 {
+  margin-right: -0.75rem !important;
 }
 .-mt-1 {
   margin-top: -0.25rem !important;
@@ -2235,6 +2237,9 @@ video {
 .w-\[90px\] {
   width: 90px !important;
 }
+.w-\[965px\] {
+  width: 965px !important;
+}
 .w-auto {
   width: auto !important;
 }
@@ -2512,6 +2517,9 @@ video {
 .items-center {
   align-items: center !important;
 }
+.items-baseline {
+  align-items: baseline !important;
+}
 .items-stretch {
   align-items: stretch !important;
 }
@@ -2664,6 +2672,10 @@ video {
   border-bottom-right-radius: 0.75rem !important;
   border-bottom-left-radius: 0.75rem !important;
 }
+.rounded-l-xl {
+  border-top-left-radius: 0.75rem !important;
+  border-bottom-left-radius: 0.75rem !important;
+}
 .rounded-t {
   border-top-left-radius: 0.25rem !important;
   border-top-right-radius: 0.25rem !important;
@@ -2750,6 +2762,10 @@ video {
 .border-\[\#01050F\] {
   --tw-border-opacity: 1 !important;
   border-color: rgb(1 5 15 / var(--tw-border-opacity)) !important;
+}
+.border-\[\#0c1524\] {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(12 21 36 / var(--tw-border-opacity)) !important;
 }
 .border-\[\#888888\] {
   --tw-border-opacity: 1 !important;
@@ -2860,6 +2876,10 @@ video {
 .bg-\[\#030814\] {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(3 8 20 / var(--tw-bg-opacity)) !important;
+}
+.bg-\[\#0c1524\] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(12 21 36 / var(--tw-bg-opacity)) !important;
 }
 .bg-\[\#10d05f\] {
   --tw-bg-opacity: 1 !important;
@@ -3250,6 +3270,10 @@ video {
   padding-top: 10rem !important;
   padding-bottom: 10rem !important;
 }
+.py-44 {
+  padding-top: 11rem !important;
+  padding-bottom: 11rem !important;
+}
 .py-48 {
   padding-top: 12rem !important;
   padding-bottom: 12rem !important;
@@ -3367,6 +3391,9 @@ video {
 }
 .pb-\[66vh\] {
   padding-bottom: 66vh !important;
+}
+.pb-\[70\%\] {
+  padding-bottom: 70% !important;
 }
 .pl-1 {
   padding-left: 0.25rem !important;
@@ -3524,6 +3551,9 @@ video {
 .align-bottom {
   vertical-align: bottom !important;
 }
+.align-sub {
+  vertical-align: sub !important;
+}
 .font-bebas-neue {
   font-family: Bebas Neue, cursive !important;
 }
@@ -3612,6 +3642,9 @@ video {
 }
 .uppercase {
   text-transform: uppercase !important;
+}
+.lowercase {
+  text-transform: lowercase !important;
 }
 .capitalize {
   text-transform: capitalize !important;
@@ -3845,16 +3878,13 @@ video {
   color: rgb(234 179 8 / var(--tw-text-opacity)) !important;
 }
 .underline {
-  -webkit-text-decoration-line: underline !important;
-          text-decoration-line: underline !important;
+  text-decoration-line: underline !important;
 }
 .line-through {
-  -webkit-text-decoration-line: line-through !important;
-          text-decoration-line: line-through !important;
+  text-decoration-line: line-through !important;
 }
 .no-underline {
-  -webkit-text-decoration-line: none !important;
-          text-decoration-line: none !important;
+  text-decoration-line: none !important;
 }
 .antialiased {
   -webkit-font-smoothing: antialiased !important;
@@ -3868,6 +3898,9 @@ video {
 }
 .opacity-100 {
   opacity: 1 !important;
+}
+.opacity-20 {
+  opacity: 0.2 !important;
 }
 .opacity-30 {
   opacity: 0.3 !important;
@@ -3997,9 +4030,9 @@ video {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important;
 }
 .transition {
-  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter !important;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter !important;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter !important;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter !important;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter !important;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
   transition-duration: 150ms !important;
 }
@@ -4009,9 +4042,7 @@ video {
   transition-duration: 150ms !important;
 }
 .transition-colors {
-  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color !important;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke !important;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color !important;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
   transition-duration: 150ms !important;
 }
@@ -4076,6 +4107,9 @@ body {
 }
 .font-bebas {
   font-family: "Bebas Neue", sans-serif !important;
+}
+.font-lexend {
+  font-family: "Lexend", sans-serif !important;
 }
 img {
   display: inline-block !important;
@@ -4153,6 +4187,10 @@ img {
 
 .font-bebas {
   font-family: "Bebas Neue", sans-serif;
+}
+
+.font-lexend {
+  font-family: "Lexend", sans-serif;
 }
 
 .rotate-y-0 {
@@ -4452,13 +4490,8 @@ li, p {
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
-.hover\:underline:hover {
-  -webkit-text-decoration-line: underline !important;
-          text-decoration-line: underline !important;
-}
 .hover\:no-underline:hover {
-  -webkit-text-decoration-line: none !important;
-          text-decoration-line: none !important;
+  text-decoration-line: none !important;
 }
 .hover\:opacity-0:hover {
   opacity: 0 !important;
@@ -4558,10 +4591,6 @@ li, p {
 
   .sm\:-right-10 {
     right: -2.5rem !important;
-  }
-
-  .sm\:-right-6 {
-    right: -1.5rem !important;
   }
 
   .sm\:-top-10 {
@@ -4709,6 +4738,11 @@ li, p {
     margin-right: 0px !important;
   }
 
+  .sm\:mx-0\.5 {
+    margin-left: 0.125rem !important;
+    margin-right: 0.125rem !important;
+  }
+
   .sm\:mx-1 {
     margin-left: 0.25rem !important;
     margin-right: 0.25rem !important;
@@ -4742,6 +4776,11 @@ li, p {
   .sm\:my-10 {
     margin-top: 2.5rem !important;
     margin-bottom: 2.5rem !important;
+  }
+
+  .sm\:my-14 {
+    margin-top: 3.5rem !important;
+    margin-bottom: 3.5rem !important;
   }
 
   .sm\:my-16 {
@@ -4847,6 +4886,10 @@ li, p {
 
   .sm\:-mt-36 {
     margin-top: -9rem !important;
+  }
+
+  .sm\:-mt-5 {
+    margin-top: -1.25rem !important;
   }
 
   .sm\:-mt-64 {
@@ -4979,10 +5022,6 @@ li, p {
 
   .sm\:mr-0 {
     margin-right: 0px !important;
-  }
-
-  .sm\:mr-1 {
-    margin-right: 0.25rem !important;
   }
 
   .sm\:mr-12 {
@@ -5193,6 +5232,10 @@ li, p {
     height: 450px !important;
   }
 
+  .sm\:h-\[720px\] {
+    height: 720px !important;
+  }
+
   .sm\:h-auto {
     height: auto !important;
   }
@@ -5331,6 +5374,10 @@ li, p {
 
   .sm\:w-96 {
     width: 24rem !important;
+  }
+
+  .sm\:w-\[1485px\] {
+    width: 1485px !important;
   }
 
   .sm\:w-auto {
@@ -5753,12 +5800,20 @@ li, p {
     padding-bottom: 5rem !important;
   }
 
+  .sm\:pb-3 {
+    padding-bottom: 0.75rem !important;
+  }
+
   .sm\:pb-32 {
     padding-bottom: 8rem !important;
   }
 
   .sm\:pb-4 {
     padding-bottom: 1rem !important;
+  }
+
+  .sm\:pb-48 {
+    padding-bottom: 12rem !important;
   }
 
   .sm\:pb-5 {
@@ -5783,6 +5838,14 @@ li, p {
 
   .sm\:pb-96 {
     padding-bottom: 24rem !important;
+  }
+
+  .sm\:pb-\[60\%\] {
+    padding-bottom: 60% !important;
+  }
+
+  .sm\:pb-\[80\%\] {
+    padding-bottom: 80% !important;
   }
 
   .sm\:pl-0 {
@@ -6298,10 +6361,6 @@ li, p {
 
   .md\:-mt-11 {
     margin-top: -2.75rem !important;
-  }
-
-  .md\:-mt-16 {
-    margin-top: -4rem !important;
   }
 
   .md\:-mt-2 {
@@ -7741,6 +7800,10 @@ li, p {
     top: 1.5rem !important;
   }
 
+  .lg\:order-1 {
+    order: 1 !important;
+  }
+
   .lg\:order-none {
     order: 0 !important;
   }
@@ -7958,6 +8021,10 @@ li, p {
 
   .lg\:ml-2 {
     margin-left: 0.5rem !important;
+  }
+
+  .lg\:ml-5 {
+    margin-left: 1.25rem !important;
   }
 
   .lg\:ml-8 {
@@ -8188,6 +8255,10 @@ li, p {
     height: 20rem !important;
   }
 
+  .lg\:h-9 {
+    height: 2.25rem !important;
+  }
+
   .lg\:h-96 {
     height: 24rem !important;
   }
@@ -8414,6 +8485,10 @@ li, p {
 
   .lg\:flex-row {
     flex-direction: row !important;
+  }
+
+  .lg\:flex-nowrap {
+    flex-wrap: nowrap !important;
   }
 
   .lg\:items-start {
@@ -9058,6 +9133,10 @@ li, p {
     display: none !important;
   }
 
+  .xl\:h-36 {
+    height: 9rem !important;
+  }
+
   .xl\:h-64 {
     height: 16rem !important;
   }
@@ -9076,6 +9155,10 @@ li, p {
 
   .xl\:w-40 {
     width: 10rem !important;
+  }
+
+  .xl\:w-\[1665px\] {
+    width: 1665px !important;
   }
 
   .xl\:w-full {

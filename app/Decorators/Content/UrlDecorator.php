@@ -42,6 +42,15 @@ class UrlDecorator extends ModeDecoratorBase
                 ]);
             }
 
+            if ($content['type'] == 'challenge') {
+                $contents[$contentIndex]['url'] = url()->route('platform.workout.challenge', [
+                    'brand' => $content['brand'],
+                     'challenges',
+                    $content['slug'],
+                    $content['id'],
+                ]);
+            }
+
             //TODO: Should be deleted when the hierarchy with the draft learning-path: advanced-lead-guitar is deleted
             if ((brand() == 'guitareo' && $content['type'] == 'play-along') ||
                 ($content['type'] == 'course') ||
@@ -64,6 +73,17 @@ class UrlDecorator extends ModeDecoratorBase
             }
 
             // second-level types
+            if (count($contentParentData) == 1 && $content['type'] == 'challenge-part') {
+                $contents[$contentIndex]['url'] = url()->route('platform.workout.challenge.workout', [
+                    'brand' => $content['brand'],
+                    "challenges",
+                    $contentParentData[0]->slug,
+                    $contentParentData[0]->id,
+                    $content['slug'],
+                    $content['id'],
+                ]);
+            }
+
             if (count($contentParentData) == 1 && !empty($contentTypeToURLSlugMap[$contentParentData[0]->type]))
             {
                 $contents[$contentIndex]['url'] = url()->route('platform.content.second-level', [

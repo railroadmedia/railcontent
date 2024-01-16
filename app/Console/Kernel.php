@@ -16,6 +16,7 @@ use App\Console\Commands\RemoveRailTrackerData;
 use App\Console\Commands\RemoveTemporarySongsAccessForLifetimeMembersJanuary2023;
 use App\Console\Commands\RepairUserProgressOn30DD;
 use App\Console\Commands\RepairUserProgressOnNPPSH;
+use App\Console\Commands\SeedUserProgress;
 use App\Console\Commands\SoftDeleteOldGuitareoSongs;
 use App\Console\Commands\SoftDeleteOldSingeoSongs;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
@@ -77,6 +78,7 @@ class Kernel extends ConsoleKernel
         MigrateOldGuitareoDeletedSongs::class,
         RemoveRailTrackerData::class,
         SyncUsersToCIO::class,
+        SeedUserProgress::class,
         AssignUnassignedHelpScoutCustomersToMentors::class,
         SyncShopifyProductInventoryToProductsTable::class,
     ];

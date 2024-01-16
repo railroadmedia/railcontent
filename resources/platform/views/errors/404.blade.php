@@ -120,17 +120,17 @@ $userData = assembleUserAttributes(user());
 @else
 
     <body class="tw-text-white tw-flex
-                @if($brand == 'drumeo')
-                    tw-bg-drumeo
-                @elseif($brand == 'pianote')
-                     tw-bg-pianote
-                @elseif($brand == 'guitareo')
-                     tw-bg-guitareo
-                @elseif($brand == 'singeo')
-                     tw-bg-singeo
-                @else
-                     tw-bg-[#000C17]
-                 @endif
+        @if($brand == 'drumeo')
+            tw-bg-drumeo
+        @elseif($brand == 'pianote')
+                tw-bg-pianote
+        @elseif($brand == 'guitareo')
+                tw-bg-guitareo
+        @elseif($brand == 'singeo')
+                tw-bg-singeo
+        @else
+            tw-bg-[#000C17]
+        @endif
      ">
         <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
             <div class="tw-text-center tw-max-w-md tw-px-6 md:tw-px-0 md:tw-max-w-full">

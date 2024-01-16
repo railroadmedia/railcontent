@@ -153,11 +153,6 @@
             'artist' => 'Simon Phillips',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-chops.jpg',
-            'title' => 'Drum Chops',
-            'artist' => 'Aaron Spears',
-        ],
-        [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/writing-drum-parts.jpg',
             'title' => 'Writing Drum Parts',
             'artist' => 'Hannah Welton',

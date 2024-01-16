@@ -225,8 +225,7 @@
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'desktopGrid' => true,
-        'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
-        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
+        'header' => 'pianists',
     ])
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('musora.sales.components.card-selection-section', [

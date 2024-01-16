@@ -45,7 +45,8 @@ class ShopController extends BaseController
         });
 
         $featured = $products->whereIn('id', [208, 210, 197, 206]);
-        $xmas = $products->whereIn('id', [230, 228, 225]);
+
+        $lowStock = Product::whereHas('brand', fn($query) => $query->where('name', 'pianote'))->where([['sold_out', 0]])->orderBy('display_order')->get()->whereIn('id', [55, 77, 82, 84, 85, 87]);
 
         return view('pianote.shop.shop', [
             'lessons' => $lessons,
@@ -56,7 +57,7 @@ class ShopController extends BaseController
             'theme' => 'pianote',
             'category' => $request->category,
             'featured' => $featured,
-            'xmas' => $xmas
+            'lowStock' => $lowStock
         ]);
     }
 

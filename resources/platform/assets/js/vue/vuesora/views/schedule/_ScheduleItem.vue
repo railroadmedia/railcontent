@@ -47,27 +47,32 @@
                     >
                         {{ item }}
                     </div>
+                    <!-- Difficulty Label -->
+                    <DifficultyLabel v-if="mappedData.difficulty" class="basic-col dark:tw-text-[#9EC0DC] tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
                 </div>
             </div>
 
         <!-- ADD TO LIST OR RESET PROGRESS BUTTONS -->
-        <div class="tw-flex tw-flex-col icon-col tw-justify-center">  
-            <div class="body">
-                <i
-                    class="add-to-list fas fa-plus flex-center pointer tw-text-[#52525A] dark:tw-text-[#9EC0DC]"
+        <div class="tw-flex tw-h-full tw-flex-col icon-col tw-justify-center">
+            <div class="body tw-h-full tw-inline-flex tw-items-center tw-text-[#52525A] dark:tw-text-[#9EC0DC]"
+                    tabindex="0"
                     title="Add to Playlist"
                     @click.stop.prevent="addToList"
-                ></i>
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
             </div>
         </div>
 
         <div
-            class="tw-flex tw-flex-col icon-col tw-justify-center"
+            class="tw-flex tw-flex-col icon-col tw-justify-center tw-h-full"
             style="position:relative;"
         >
             <div
-                class="body pointer add-to"
+                class="body pointer add-to tw-inline-flex tw-items-center tw-h-full"
                 title="Add to Calendar"
+                tabindex="0"
                 data-open-modal="scheduleAddToCalendarModal"
                 @click="addEvent"
             >
@@ -82,10 +87,14 @@ import { DateTime } from 'luxon';
 import ContentModel from '../../assets/js/models/_model.js';
 import UserCatalogueEvents from '../../mixins/UserCatalogueEvents';
 import ThemeClasses from '../../mixins/ThemeClasses';
+import DifficultyLabel from '../../../../vue/components/DifficultyLabel/DifficultyLabel'
 
 export default {
     name: 'ScheduleItem',
     mixins: [UserCatalogueEvents, ThemeClasses],
+    components: {
+        DifficultyLabel,
+    },
     props: {
         item: {
             type: Object,
@@ -147,7 +156,7 @@ export default {
     },
     methods: {
 
-        getContentModel() {
+        getContentModel () {
             const shows = ContentHelpers.shows();
             let type = this.contentTypeOverride || this.item.type;
 
@@ -159,6 +168,13 @@ export default {
                 brand: this.brand,
                 post: this.item,
             });
+
+            const difficultyValue = model.post.fields.find(field => field.key === 'difficulty').value;
+            model.schedule.difficulty = difficultyValue;
+
+            const excludeWords = ['novice', 'beginner', 'intermediate', 'advanced', 'expert', 'all'];
+            const filteredColumnData = model.schedule.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));
+            model.schedule.column_data = filteredColumnData
 
             return model.schedule;
         },

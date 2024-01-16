@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\ApiGateways;
 
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Models\Shopify\Order;
 use Carbon\Carbon;
 use Exception;
@@ -81,14 +82,60 @@ class ShopifyGateway
         return $orders;
     }
 
-    public function getCustomerOrderByProcessAtDate(int $shopifyCustomerId, Carbon $processedAt) {
+    public function getCustomersToUpdate(Carbon $date)
+    {
+        $emails = collect();
+        $cursor = "";
+        $processedAtStartString = $date->toIso8601String();
+        $i = 0;
+        $max = 100;
+        do {
+            $this->handleRateLimitBefore();
+            $gql = <<<GQL
+            query {
+                 orders(first:250$cursor, query:"updated_at:>=\"$processedAtStartString\""){
+                    nodes {
+                        ... on Order {
+                            customer {
+                                email
+                            }
+                        }
+                    }
+                    pageInfo {
+                      hasNextPage
+                      endCursor
+                    }
+                }
+            }
+            GQL;
+
+            $responseBody = $this->executeQuery($gql);
+
+
+            $emails = $emails->merge(
+                collect($responseBody->data->orders->nodes)->map(function ($order) {
+                    return $order->customer->email;
+                })
+            );
+            $hasNextPage = $responseBody->data->orders->pageInfo->hasNextPage;
+            $endCursor = $responseBody->data->orders->pageInfo->endCursor;
+            $cursor = ", after: \"$endCursor\"";
+            $i++;
+        } while ($hasNextPage && $i < $max);
+        $emails = $emails->unique();
+        return $emails;
+    }
+
+    public function getCustomerOrderByProcessAtDate(int $shopifyCustomerId, Carbon $processedAt)
+    {
         // DEV NOTE: we must supply the datetime as a properly formatted string, and for some reason Shopify isn't
         // taking the full datetime string into account when querying processed_at:\"$processedAtString\", and instead
         // only uses the date. So as a workaround, just check >= and <=.
-        $processedAtString = $processedAt->toIso8601String();
+        $processedAtStartString = $processedAt->clone()->addDays(-1)->toIso8601String();
+        $processedAtEndString = $processedAt->clone()->addDays(1)->toIso8601String();
         $gql = <<<GQL
             query {
-                 orders(first:1, query:"customer_id:$shopifyCustomerId AND processed_at:>=\"$processedAtString\" AND processed_at:<=\"$processedAtString\""){
+                 orders(first:1, query:"customer_id:$shopifyCustomerId AND processed_at:>=\"$processedAtStartString\" AND processed_at:<=\"$processedAtEndString\""){
                     nodes {
                         ... on Order {
                             id,
@@ -106,6 +153,78 @@ class ShopifyGateway
     {
         return count($this->getCustomerOrderByProcessAtDate($shopifyCustomerId, $processedAt));
     }
+
+    public function defineMetaField()
+    {
+        $namespace = ShopifyMetafieldNamespace::Model_Users->value;
+        $key = ShopifyMetafieldKey::LastTrialEndDate->value;
+        $type = ShopifyMetafieldTypes::date->value;
+        $query =
+            <<<GRAPHQL
+                mutation {
+                    metafieldDefinitionCreate (definition: {
+                        name: "Last Free Trial End"
+                        namespace: "$namespace"
+                        key: "$key"
+                        type: "$type"
+                        ownerType: CUSTOMER
+                        description: "End date of the users previous free trial"
+                    }
+                    ) {
+                    createdDefinition {
+                        id
+                        name
+                    }
+                    userErrors {
+                        field
+                        message
+                        code
+                    }
+                }
+            }
+            GRAPHQL;
+        $response = $this->executeQuery($query);
+        return $response;
+    }
+
+    public function updateCustomerLastTrialEndDate($customerID, $lastTrialEndDate)
+    {
+        // This data is processed by the shopify extension: checkout-block-repeated-trials
+        // in the repository: musora-shop-ify-extensions-app
+        $namespace = ShopifyMetafieldNamespace::Model_Users->value;
+        $key = ShopifyMetafieldKey::LastTrialEndDate->value;
+        $type = ShopifyMetafieldTypes::date->value;
+        $lastTrialEndDate = $lastTrialEndDate->toDateString();
+        $query =
+            <<<GRAPHQL
+                mutation {
+                    metafieldsSet( metafields: {
+                        namespace: "$namespace"
+                        key: "$key"
+                        type: "$type"
+                        ownerId:  "gid://shopify/Customer/$customerID"
+                        value: "$lastTrialEndDate"
+                    }
+                    ) {
+                    metafields {
+                        key
+                        namespace
+                        value
+                        createdAt
+                        updatedAt
+                    }
+                    userErrors {
+                        field
+                        message
+                        code
+                    }
+                }
+            }
+            GRAPHQL;
+        $response = $this->executeQuery($query);
+        return $response;
+    }
+
 
     public function executeQuery(string $gql): mixed
     {

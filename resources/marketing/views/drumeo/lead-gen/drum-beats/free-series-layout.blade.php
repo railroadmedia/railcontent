@@ -41,7 +41,7 @@
 
         .toolbox-title p {
             color:#FFF;
-            font:100 15px/1.2em "Open Sans", sans-serif;
+            font:400 15px/1.2em "Open Sans", sans-serif;
             text-shadow:-1px 1px 1px rgba(0, 0, 0, 0.4);
             margin:10px auto 7px;
         }
@@ -115,7 +115,7 @@
         }
 
         .title p {
-            font:600 30px/1.2em "Open Sans", sans-serif;
+            font:400 30px/1.2em "Open Sans", sans-serif;
         }
 
         .title .sub {
@@ -145,7 +145,7 @@
         @media only screen and (min-width:40em) {
 
             .title p {
-                font:600 45px/1.3em "Open Sans", sans-serif;
+                font:400 45px/1.3em "Open Sans", sans-serif;
             }
 
             .title .sub {

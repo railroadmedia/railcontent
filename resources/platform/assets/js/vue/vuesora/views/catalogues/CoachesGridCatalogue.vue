@@ -9,10 +9,6 @@
       :item="item"
       :brand="brand"
       :content-type="item.type"
-      :user-id="userId"
-      :lock-unowned="lockUnowned"
-      :content-type-override="contentTypeOverride"
-      :show-my-list-action="showMyListAction"
       @onShowNotification="onShowNotificationMessage"
     />
   </div>
@@ -44,7 +40,7 @@ export default {
         })
       } else {
         window.shownotification({
-          icon, 
+          icon,
           text
         });
       }
@@ -55,49 +51,9 @@ export default {
       type: Array,
       default: () => [],
     },
-    themeColor: {
-      type: String,
-      default: () => "drumeo",
-    },
-    useThemeColor: {
-      type: Boolean,
-      default: () => true,
-    },
-    userId: {
-      type: String,
-      default: () => "",
-    },
-    isAdmin: {
-      type: Boolean,
-      default: () => false,
-    },
     brand: {
       type: String,
       default: () => "drumeo",
-    },
-    noWrap: {
-      type: Boolean,
-      default: () => false,
-    },
-    forceWideThumbs: {
-      type: Boolean,
-      default: () => false,
-    },
-    contentTypeOverride: {
-      type: String,
-      default: () => "",
-    },
-    lockUnowned: {
-      type: Boolean,
-      default: () => false,
-    },
-    displayInline: {
-      type: Boolean,
-      default: () => false,
-    },
-    showMyListAction: {
-      type: Boolean,
-      default: () => true,
     },
   },
 };

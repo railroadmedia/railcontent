@@ -70,10 +70,23 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
+    @php
+        $discountedPrice = floatval($productPrices['christmas-songbook']->discounted_price);
+          $orderUrl = '/ecommerce/add-to-cart?products[christmas-songbook]=1';
+//     if(!empty($membersVersion)) {
+//          $discountedPrice = number_format(24.50, 2);
+//          $orderUrl = '/ecommerce/add-to-cart?products[christmas-songbook]=1&products[christmas-song-book-digital]=1&promo-code=members-discount';
+//     }
+//     else {
+//        $discountedPrice = floatval($productPrices['christmas-songbook']->discounted_price);
+//      $orderUrl = '/ecommerce/add-to-cart?products[christmas-songbook]=1';
+//     }
+    @endphp
+
     @include('_partials.components.shop.promo-banner', [
         "name" => "Christmas Songbook",
         "fullPrice" => floatval($productPrices['christmas-songbook']->price),
-        "price" => floatval($productPrices['christmas-songbook']->discounted_price),
+        "price" => $discountedPrice,
         "noBreadcrumb" => true
     ])
     <header class="text-white px-5 sm:px-6 pt-96 pb-10 sm:py-20 lg:py-36 relative" style="background-color:#0f5e8a;">
@@ -87,15 +100,18 @@
                     <p class="leading-normal my-4 sm:my-6">Christmas classics to make your holiday season extra special.
                         Presented in original and simplified arrangements.
                     </p>
-                    <h4 class="mb-4 sm:mb-6">
-                        @if(floatval($productPrices['christmas-songbook']->price) > floatval($productPrices['christmas-songbook']->discounted_price))
+                    <h4 class="leading-tight mb-4 sm:mb-6">
+                        @if(floatval($productPrices['christmas-songbook']->price) > $discountedPrice)
                             <strong>ONLY</strong> <s class="opacity-60">${{ floatval($productPrices['christmas-songbook']->price) }}</s>
-                            <strong>${{ floatval($productPrices['christmas-songbook']->discounted_price) }}</strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['christmas-songbook']->discounted_price) / floatval($productPrices['christmas-songbook']->price)))) }}%)
+                            <strong>${{ $discountedPrice }}</strong> (SAVE {{ round(100 - (100 * ($discountedPrice / floatval($productPrices['christmas-songbook']->price)))) }}%)
                         @else
-                            <strong>ONLY ${{ floatval($productPrices['christmas-songbook']->discounted_price) }}</strong>
+                            <strong>ONLY ${{ $discountedPrice }}</strong>
                         @endif
-                        </h4>
-                    <a href="/ecommerce/add-to-cart?products[christmas-songbook]=1" class="join medium w-full">GET YOUR COPY &raquo;</a>
+{{--                        @if(!empty($membersVersion))--}}
+{{--                            <br>+ a FREE digital songbook--}}
+{{--                        @endif--}}
+                    </h4>
+                    <a href="{{ $orderUrl }}" class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
         </div>
@@ -246,15 +262,18 @@
                     <p class="leading-normal my-4 sm:my-6">Christmas classics to make your holiday season extra special.
                         Presented in original and simplified arrangements.
                     </p>
-                    <h4 class="mb-4 sm:mb-6">
-                        @if(floatval($productPrices['christmas-songbook']->price) > floatval($productPrices['christmas-songbook']->discounted_price))
+                    <h4 class="leading-tight mb-4 sm:mb-6">
+                        @if(floatval($productPrices['christmas-songbook']->price) > $discountedPrice)
                             <strong>ONLY</strong> <s class="opacity-60">${{ floatval($productPrices['christmas-songbook']->price) }}</s>
-                            <strong>${{ floatval($productPrices['christmas-songbook']->discounted_price) }}</strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['christmas-songbook']->discounted_price) / floatval($productPrices['christmas-songbook']->price)))) }}%)
+                            <strong>${{ $discountedPrice }}</strong> (SAVE {{ round(100 - (100 * ($discountedPrice / floatval($productPrices['christmas-songbook']->price)))) }}%)
                         @else
-                            <strong>ONLY ${{ floatval($productPrices['christmas-songbook']->discounted_price) }}</strong>
+                            <strong>ONLY ${{ $discountedPrice }}</strong>
                         @endif
+{{--                        @if(!empty($membersVersion))--}}
+{{--                            <br>+ a FREE digital songbook--}}
+{{--                        @endif--}}
                     </h4>
-                    <a href="/ecommerce/add-to-cart?products[christmas-songbook]=1" class="join medium w-full">GET YOUR COPY &raquo;</a>
+                    <a href="{{ $orderUrl }}" class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
         </div>

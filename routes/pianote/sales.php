@@ -11,13 +11,14 @@ Route::domain('{pianoteDomain}')
         Route::get('/trial-month', [SalesController::class, 'homeMonth'] );
 
         Route::get('/trial', [SalesController::class, 'trial'] );
-        Route::get('/posters-trial', [SalesController::class, 'trial'] );
+        Route::get('/posters-trial', [SalesController::class, 'trialPosters'] );
         Route::get('/chords-trial', [SalesController::class, 'trial'] );
         Route::get('/trial-songs', [SalesController::class, 'trialSongs'] );
         Route::get('/trial-beginner', [SalesController::class, 'trialBeginner'] );
 
         Route::get('/song-secrets-bonus', [SalesController::class, 'promoSS'] );
-        Route::get('/lp', [SalesController::class, 'promo'] );
+        Route::get('/lp', [SalesController::class, 'promoEG'] );
+        Route::get('/new-year', [SalesController::class, 'promo'] );
         Route::get('/student-only', [SalesController::class, 'promo'] );
         Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
         Route::get('/choose-your-trial', [SalesController::class, 'choosePlan'] );

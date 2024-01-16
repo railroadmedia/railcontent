@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Collections;
 
+use Modules\UserManagementSystem\Models\User;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
 use Carbon\Carbon;
@@ -17,15 +18,15 @@ class UserAccessPermissionsCollection
     const LifetimePermissions = [self::DrumeoLifetimePermission, 88, 89, 90];
 
     private Collection $collection;
-    private int $userId;
+    private User $user;
     private Collection $permissionIdLookup;
 
-    public function __construct(int $userId, Collection $collection)
+    public function __construct(User $user, Collection $collection)
     {
         $this->collection = $collection;
-        $this->userId = $userId;
+        $this->user = $user;
         $this->collection->each(function (UserAccessPermission $item) {
-            if ($item->user_id != $this->userId) {
+            if ($item->user_id != $this->user->id) {
                 throw new \Exception("User id mismatch");
             }
         });
@@ -35,7 +36,7 @@ class UserAccessPermissionsCollection
 
     public function getUserId(): int
     {
-        return $this->userId;
+        return $this->user->id;
     }
 
     public function getActiveDates(int|array $permissions, $includeBuffer = true, $includeFixedTimes = true): array
@@ -45,6 +46,12 @@ class UserAccessPermissionsCollection
             $userAccessPermissions = $this->permissionIdLookup[$permissions] ?? collect();
         } else {
             $userAccessPermissions = $this->collection->whereIn('permission_id', $permissions);
+        }
+
+        if ($this->user->isAdmin() && (
+                is_integer($permissions) && $permissions == self::MusoraPlusMembershipPermission
+                || is_array($permissions) && in_array(self::MusoraPlusMembershipPermission, $permissions))) {
+            return [Carbon::today(), Carbon::maxValue()];
         }
 
         $userAccessPermissions = $userAccessPermissions
@@ -190,9 +197,14 @@ class UserAccessPermissionsCollection
 
     public function getActivePermissionIds(): array
     {
-        return $this->collection->where(function ($permission) {
+        $permissionIds = $this->collection->where(function ($permission) {
             return $permission->status != 'revoked';
         })->pluck('permission_id')->unique()->sort()->toArray();
+
+        if ($this->user->isAdmin() && !in_array(self::MusoraPlusMembershipPermission, $permissionIds)) {
+            $permissionIds[] = self::MusoraPlusMembershipPermission;
+        }
+        return $permissionIds;
     }
 
     public function hasUserOwnedPermissions(array $permissionIds): bool
@@ -201,11 +213,13 @@ class UserAccessPermissionsCollection
         return $endDate != null;
     }
 
-    public function determineActiveTimes()
+    public function determineActiveTimes(): void
     {
         $this->permissionIdLookup->keys()->each(function ($key) {
             $this->getActiveDates($key);
         });
+        //aggregation of plus and basic needs to be done together to get calculate correct times.
+        $this->getMembershipExpirationDate();
     }
 
     public function getCollection()
