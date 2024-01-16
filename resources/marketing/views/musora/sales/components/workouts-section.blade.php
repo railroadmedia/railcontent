@@ -55,7 +55,7 @@
 
                 @foreach($workoutImages as $image)
                     <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity"
-                        src="{{ $image['src'] }}" 
+                        src="{{ $image['src'] }}"
                         style="{{ $image['animation'] }}"
                         loading="lazy">
                 @endforeach
@@ -85,7 +85,11 @@
                 </div>
             </div>
             <div class="mt-5 sm:mt-0 sm:pl-7 sm:w-1/2 flex-grow-0">
-                <div class="h-full rounded-xl p-7 lg:p-10 pb-64 sm:pb-48 bg-black @if($theme != 'musora') text-white @else text-black @endif flex bg-cover bg-top" style="background-image:url('{{ $workoutsBG }}');">
+                <div class="h-full rounded-xl p-7 lg:p-10 pb-64 sm:pb-48 bg-black @if($theme != 'musora') text-white @else text-black @endif flex bg-cover bg-top"
+                    :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                    :style="`background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/{{ $workoutsBG }}')`"
+                    x-intersect.once="lazyLoad = true"
+                    >
                     <div>
                         <h5 class="leading-tight mb-3"><strong>
                                 @if($theme == 'drumeo' || $theme == 'pianote')
