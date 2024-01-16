@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-php artisan test --parallel --recreate-databases --processes=4
+docker exec --workdir /app/musora-web-platform railenvironmentdocker_apache-php-fpm-8 php artisan test --parallel --recreate-databases --processes=4
