@@ -144,7 +144,7 @@
                 <div class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-xs tw-flex"
                     :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-3 tw-w-full tw-pl-2 md:tw-pl-0 md:tw-text-base' : ''"
                 >
-                    <div :class="props.isListView ? 'md:tw-w-1/2 tw-inline-flex tw-items-center tw-justify-center' : '' ">
+                    <div :class="props.isListView ? 'md:tw-w-1/2 tw-inline-flex tw-items-center' : '' ">
                         <span v-if="listElement.category" :class="{'tw-text-center' : props.isListView}">
                             {{ listElement.category }}
                             <span class="tw-mx-1 tw-leading-none" :class="props.isListView ? 'md:tw-hidden' : '' ">|</span>
@@ -159,7 +159,7 @@
             <div class="tw-inline-flex tw-items-center tw-transition-colors"
                  :class="[ !props.isListView ? 'tw-z-20 tw-absolute tw-top-2 tw-right-2 tw-bg-[rgba(0,12,23,0.5)] tw-rounded-full tw-p-1.5' : 'tw-px-4 xl:tw-px-8', { 'tw-opacity-0' : !state.isPinned } ]"
             >
-                <musora-icon icon-name="tack" class="tw-w-[20px] tw-h-[20px] tw-mx-auto tw-hidden md:tw-flex tw-text-white" />
+                <musora-icon icon-name="tack" class="tw-w-[20px] tw-h-[20px] tw-mx-auto tw-hidden md:tw-flex dark:tw-text-white" />
             </div>
         </a>
 
