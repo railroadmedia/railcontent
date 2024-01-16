@@ -38,7 +38,7 @@
             color: #FFF;
             text-align: center;
             margin: 0 auto;
-            font: 700 28px/1em "Roboto Condensed", sans-serif;
+            font: 700 28px/1em "Bebas Neue", sans-serif;
             text-transform: uppercase;
         }
         @media (min-width: 40.0625em) {

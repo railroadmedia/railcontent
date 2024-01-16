@@ -111,12 +111,17 @@ import { onMounted, ref } from 'vue';
             </div>
 
             <!-- INSTRUCTORS -->
-            <div v-if="instructors && instructors.length"  class="tw-flex tw-flex-row mb-3" v-for="instructor in instructors">
-                <div class="tw-flex tw-flex-col tw-flexgrow tw-text-[#191b1c] dark:tw-text-white">
-                    <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase tw-mb-1">About {{ instructor.name }}</h6>
-                    <div v-html="instructor.data.find((i) => i.key === 'biography').value"></div>
+            <template v-if="instructors && instructors.length"  >
+                <div class="tw-flex tw-flex-row mb-3" 
+                    v-for="(instructor, i) in instructors" 
+                    :key="i"
+                >
+                    <div class="tw-flex tw-flex-col tw-flexgrow tw-text-[#191b1c] dark:tw-text-white">
+                        <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase">About {{ instructor.name }}</h6>
+                        <div v-if="instructor.data.find((i) => i.key === 'biography')" v-html="instructor.data.find((i) => i.key === 'biography').value"></div>
+                    </div>
                 </div>
-            </div>
+            </template>
         </div>
     </div>
 </template>

@@ -624,10 +624,12 @@ export default {
         showRightArrowByDefault(){
             const ctaContainer = document.getElementById('cta-container');
 
-            if(ctaContainer.scrollWidth > ctaContainer.clientWidth + 15){
-                this.showRightArrow = true;
-            } else {
-                this.showRightArrow = false;
+            if(ctaContainer) {
+                if(ctaContainer.scrollWidth > ctaContainer.clientWidth + 15){
+                    this.showRightArrow = true;
+                } else {
+                    this.showRightArrow = false;
+                }
             }
         }
     },

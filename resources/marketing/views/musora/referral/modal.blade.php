@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="pt-14 flex justify-center">
-                    <input name="button" type="submit" id="button" class="text-white bg-{{ $brand }} leading-none text-base font-bold border-0 rounded-full select-none cursor-pointer text-center py-4 px-16 uppercase font-roboto" value="i'm real, let's start!"/>
+                    <input name="button" type="submit" id="button" class="text-white bg-{{ $brand }} leading-none text-base font-bold border-0 rounded-full select-none cursor-pointer text-center py-4 px-16 uppercase font-bebas" value="i'm real, let's start!"/>
                 </div>
             </form>
         </div>

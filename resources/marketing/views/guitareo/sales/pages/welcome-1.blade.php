@@ -64,7 +64,7 @@
 
         .expired .join {
             display:inline-block;
-            font:700 20px/1em "Roboto Condensed", sans-serif;
+            font:700 20px/1em "Bebas Neue", sans-serif;
             text-transform:uppercase;
             background:#00C9AC;
             border-radius:5px;

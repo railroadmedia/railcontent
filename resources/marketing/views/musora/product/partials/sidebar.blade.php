@@ -60,7 +60,7 @@
                     @endif
 
                     @if(!empty($sizes) && count($sizes) !== 0)
-                        <select class="pack-pick mx-auto mt-4 border-2 rounded-full font-bold text-xl uppercase w-full h-auto py-2 pr-7 pl-5 bg-white md:py-2 lg:py-4" style="border-color: #717D80; color:#717D80; font-family: Roboto Condensed, sans-serif" title="Shirt Size" required>
+                        <select class="pack-pick mx-auto mt-4 border-2 rounded-full font-bold text-xl uppercase w-full h-auto py-2 pr-7 pl-5 bg-white md:py-2 lg:py-4" style="border-color: #717D80; color:#717D80; font-family: Bebas Neue, sans-serif" title="Shirt Size" required>
                             <option hidden value="">@if(!empty($optionText)) {{ $optionText }} @else Choose Size @endif</option>
                             @foreach($sizes as $size)
                                 <option
