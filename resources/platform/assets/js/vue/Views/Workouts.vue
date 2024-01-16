@@ -66,7 +66,7 @@
                 :include-future-scheduled-content-only = "includeFutureScheduledContentOnly"
                 :pre-loaded-content="workoutData"
                 :statuses="statuses"
-                :tab-options="tabOptions"
+                :tabs="tabs"
             />
         </section>
     </div>
@@ -174,19 +174,6 @@ const openModal = (type) => {
 const closeModal = () => {
     modalType.value = false;
 }
-
-const tabOptions = computed(() => {
-    if (props.tabs?.length) {
-        return props.tabs.map(({ name, value, is_required_field, is_group_by }) => {
-            return {
-                key: (is_group_by) ? 'group_by,' + value[0]:value,
-                value: name,
-                groupByView: (is_group_by) ? true : false,
-            }
-        })
-    }
-    return [];
-});
 
 const infoText = {
     challenge: {
