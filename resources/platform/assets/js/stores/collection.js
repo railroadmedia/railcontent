@@ -209,7 +209,6 @@ export const useCollectionStore = defineStore({
                     const activeTab = defaults.tabOptions.find((tab) => {
                         return JSON.stringify(tab.key) === JSON.stringify(tabParams);
                     })
-                    console.log(activeTab)
                     this.filter.activeTab = activeTab.value;
                     this.tabData[this.filter.activeTab] = { ...defaults.tabData, ...activeTab };
 
