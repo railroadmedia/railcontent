@@ -228,7 +228,7 @@
                         "Lisa is the perfect teacher. Her hands-on teaching approach is invaluable to my learning and helps me make progress more easily."
                     </em>
                 </p>
-                <div class="avatar-name flex items-center font-roboto">
+                <div class="avatar-name flex items-center font-bebas">
                     <img class="rounded-full border-solid border-white border-2 w-12 mr-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/bernhard.jpg" alt="bernhard">
                     <p class="mx-0 text-sm leading-none">
                         <strong>BERNHARD ZAINSINGER</strong><br><em class="text-pianote">SWITZERLAND</em>
@@ -272,8 +272,8 @@
                             "{!! $testimonial['comment'] !!}"
                         </em>
                         <br>
-                        <strong class="font-roboto block leading-none mt-5">{{ $testimonial['name'] }}</strong>
-                        <em class="font-roboto block text-pianote leading-none">{{ $testimonial['country'] }}</em>
+                        <strong class="font-bebas block leading-none mt-5">{{ $testimonial['name'] }}</strong>
+                        <em class="font-bebas block text-pianote leading-none">{{ $testimonial['country'] }}</em>
                     </p>
                 </div>
             @endforeach

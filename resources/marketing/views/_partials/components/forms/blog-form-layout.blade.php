@@ -64,7 +64,7 @@
         }
 
         .infusion-form button {
-            font-family:"Roboto Condensed", sans-serif;
+            font-family:"Bebas Neue", sans-serif;
             font-weight:700;
             text-transform:uppercase;
             margin:0 auto!important;
@@ -101,7 +101,7 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com/" />
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&family=Roboto+Condensed:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&family=Bebas+Neue:wght@400&display=swap" rel="stylesheet">
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 

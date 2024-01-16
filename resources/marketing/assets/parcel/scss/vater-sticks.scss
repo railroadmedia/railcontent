@@ -155,7 +155,7 @@ a.text-yellow:hover {
     }
 
     &.dense {
-      font-family: $robotocondensed;
+      font-family: $bebas;
       text-transform: uppercase;
     }
 
@@ -326,7 +326,7 @@ a.text-yellow:hover {
 
   h3 {
     font-weight: 700;
-    font-family: $robotocondensed;
+    font-family: $bebas;
     margin: 15px auto 0;
     @include tablet {
       margin: 20px auto 0;
@@ -599,7 +599,7 @@ a.text-yellow:hover {
     }
 
     &.dense {
-      font-family: $robotocondensed;
+      font-family: $bebas;
       text-transform: uppercase;
     }
 

@@ -71,7 +71,7 @@
                             <h1 class="text-center text-3xl uppercase md:text-4xl">
                                 <strong class="font-black">$<span class="chosen-variant-price-float">29</span></strong>
                             </h1>
-                            <select class="pack-pick2 mx-auto mt-4 border-2 rounded-full font-bold text-xl uppercase w-full h-auto py-2 pr-7 pl-5 bg-white md:py-2 lg:py-4" style="border-color: #717D80; color:#717D80; font-family: Roboto Condensed, sans-serif" title="Shirt Size" required>
+                            <select class="pack-pick2 mx-auto mt-4 border-2 rounded-full font-bold text-xl uppercase w-full h-auto py-2 pr-7 pl-5 bg-white md:py-2 lg:py-4" style="border-color: #717D80; color:#717D80; font-family: Bebas Neue, sans-serif" title="Shirt Size" required>
                                 <option hidden value="">Pick duration</option>
                                 @foreach($variations as $variant)
                                     <option

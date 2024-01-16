@@ -140,7 +140,7 @@ h1, h2, h3, h4, h5, h6, p, li {
   }
 
   h2 {
-    font: 700 30px/1em $robotocondensed;
+    font: 700 30px/1em $bebas;
     margin: 15px auto;
     text-transform: uppercase;
     color: $guitareoGreen;
@@ -241,7 +241,7 @@ h1, h2, h3, h4, h5, h6, p, li {
     height: inherit;
 
     h2 {
-      font: 700 30px/1em $robotocondensed;
+      font: 700 30px/1em $bebas;
       margin: 0 auto;
       text-transform: uppercase;
       color: $guitareoGreen;
@@ -301,7 +301,7 @@ h1, h2, h3, h4, h5, h6, p, li {
     }
 
     button {
-      font-family: $robotocondensed;
+      font-family: $bebas;
       font-weight: 700;
       color: #FFF;
       background: $guitareoGreen;
@@ -413,7 +413,7 @@ h1, h2, h3, h4, h5, h6, p, li {
   }
 
   h1 {
-    font: 400 30px/1.1em $robotocondensed;
+    font: 400 30px/1.1em $bebas;
     margin: 10px auto 0;
     @include tablet {
       font-size: 45px;
@@ -667,7 +667,7 @@ h1, h2, h3, h4, h5, h6, p, li {
       top: 0;
       border-radius: 5px 0 5px 0;
       padding: 5px 8px;
-      font: 700 13px $robotocondensed;
+      font: 700 13px $bebas;
       text-transform: uppercase;
       background: $guitareoGreen;
       color: #FFF;
@@ -764,7 +764,7 @@ h1, h2, h3, h4, h5, h6, p, li {
   }
 
   h1 {
-    font: 400 30px/1.1em $robotocondensed;
+    font: 400 30px/1.1em $bebas;
     margin: 0 auto 20px;
     @include tablet {
       font-size: 60px;
@@ -1101,7 +1101,7 @@ h1, h2, h3, h4, h5, h6, p, li {
         text-overflow: ellipsis;
         padding: 11px 0;
         user-select: none;
-        font: 700 15px/1em $robotocondensed;
+        font: 700 15px/1em $bebas;
         text-transform: uppercase;
 
         &:hover {
@@ -1228,7 +1228,7 @@ h1, h2, h3, h4, h5, h6, p, li {
       background: $guitareoGreen;
       border: 2px solid $guitareoGreen;
       padding: 16px 15px;
-      font: 700 16px $robotocondensed;
+      font: 700 16px $bebas;
       margin: 0 auto 15px;
       @include tablet {
         font-size: 17px;

@@ -429,7 +429,7 @@ h1, h2, h3, h4, h5, h6 {
                                 width: auto;
                                 display: block;
                                 color: #000;
-                                font: 700 13px/1.2em $robotocondensed;
+                                font: 700 13px/1.2em $bebas;
                                 text-transform: uppercase;
                                 margin: 0 auto 7px;
                                 white-space: nowrap;
@@ -469,7 +469,7 @@ h1, h2, h3, h4, h5, h6 {
 
         h1 {
             text-transform: uppercase;
-            font: 900 20px/1em $robotocondensed;
+            font: 900 20px/1em $bebas;
             text-shadow: none;
             margin: 10px auto;
             @include tablet {
@@ -590,7 +590,7 @@ h1, h2, h3, h4, h5, h6 {
         }
 
         h1 {
-            font: 700 12px/1.2em $robotocondensed;
+            font: 700 12px/1.2em $bebas;
             text-transform: uppercase;
             margin: 0 auto;
             color: #000;
@@ -663,7 +663,7 @@ h1, h2, h3, h4, h5, h6 {
         }
 
         h1 {
-            font: 700 12px/1.2em $robotocondensed;
+            font: 700 12px/1.2em $bebas;
             text-transform: uppercase;
             margin-right: 10px;
             color: #575757;
@@ -776,7 +776,7 @@ h1, h2, h3, h4, h5, h6 {
                     width: auto;
                     display: block;
                     color: #000;
-                    font: 700 13px/1.2em $robotocondensed;
+                    font: 700 13px/1.2em $bebas;
                     text-transform: uppercase;
                     margin: 0 auto 7px;
                     white-space: nowrap;
@@ -1231,7 +1231,7 @@ h1, h2, h3, h4, h5, h6 {
 
                         strong {
                             text-transform: uppercase;
-                            font-family: $robotocondensed;
+                            font-family: $bebas;
                             font-size: 54px;
                             line-height: 1em;
                         }
@@ -1244,7 +1244,7 @@ h1, h2, h3, h4, h5, h6 {
             color: #BBB;
             text-align: center;
             border-radius: 100px;
-            font: 700 16px/1em $robotocondensed;
+            font: 700 16px/1em $bebas;
             padding: 15px;
             width: 100%;
             text-transform: uppercase;
@@ -1745,7 +1745,7 @@ h1, h2, h3, h4, h5, h6 {
             margin: 0 auto 15px;
 
             * {
-                font-family: $robotocondensed;
+                font-family: $bebas;
                 font-weight: 700;
             }
 
@@ -1793,7 +1793,7 @@ h1, h2, h3, h4, h5, h6 {
 
                     .caption {
                         padding: 15px 10px;
-                        font: 700 14px/1em $robotocondensed;
+                        font: 700 14px/1em $bebas;
                         text-transform: uppercase;
                         @include tablet {
                             font-size: 16px;
