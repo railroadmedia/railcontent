@@ -22,7 +22,7 @@
 
     <div class="tw-mb-[14px] lg:tw-mb-[6px]">
         <transition appear name="fade">
-            <CatalogueCardContainer :pre-loaded-content="item.lessons" :content-type-override="contentTypeOverride" />
+            <CatalogueCardContainer :pre-loaded-content="item.lessons" :content-type-override="contentTypeOverride" :group-by-cards="true" />
         </transition>
     </div>
 </template>

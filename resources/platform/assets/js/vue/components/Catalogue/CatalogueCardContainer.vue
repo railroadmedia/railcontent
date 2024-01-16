@@ -138,6 +138,11 @@ const props = defineProps({
         type: String,
         default: 'No lessons found',
     },
+    groupByCards: {
+        type: Boolean,
+        default: () => false,
+    }
+
 },
 );
 const userStore = useUserStore();
@@ -155,7 +160,7 @@ const data = computed(() => {
 })
 
 const breakToListView = computed( () => {
-    return isWorkout.value || isChallenge.value;
+    return (isWorkout.value || isChallenge.value) && !props.groupByCards;
 })
 
 const skeletonCardCount = computed(() => {
