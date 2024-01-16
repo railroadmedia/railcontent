@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Aws\Credentials\Credentials;
 use Aws\Ssm\SsmClient;
 use Dotenv\Dotenv;
+use Google\Exception;
 use Illuminate\Console\Command;
 use Laravel\VaporCli\ConsoleVaporClient;
 use Laravel\VaporCli\Helpers;
@@ -130,8 +131,13 @@ class VaporEnvManager extends Command
         $vapor = Helpers::app(ConsoleVaporClient::class);
 
         Helpers::app()->offsetSet('manifest', Path::defaultManifest());
+        try {
+            Helpers::ensure_api_token_is_available();
+        } catch (\Exception $ex) {
+            $this->error("Invalid vapour authentication. inner exception: $ex");
+            Helpers::abort('Please authenticate with Vapor using the "login" command. Are your "laravelVaporEmail" and "laravelVaporPassword" set in the credentials/credentials?');
+        }
 
-        Helpers::ensure_api_token_is_available();
 
         $vaporEnvironmentVariablesString = $vapor->environmentVariables(
             Manifest::id(),

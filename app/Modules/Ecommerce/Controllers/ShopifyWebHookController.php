@@ -10,6 +10,7 @@ use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Services\ProductService;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoCreateEventByUserId;
+use App\Modules\EventDataSynchronizer\Jobs\ImpactTrackConversion;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -120,8 +121,9 @@ class ShopifyWebHookController extends Controller
 
         // @TODO EVENT TRACKING: move to avo when migration is completed
         // Avo::order_placed($data);
-    }
 
+        dispatch(new ImpactTrackConversion($user,  $brand, $order))->delay(Carbon::now()->addSeconds(3));
+    }
 
     private function handleOrderRefundEventTracking($order): void
     {
