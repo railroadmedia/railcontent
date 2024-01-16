@@ -7,8 +7,8 @@
     "name": "Members' Area"
   },
   "branch": {
-    "id": "hBNmyY5sX",
-    "name": "add-referral-events"
+    "id": "master",
+    "name": "main"
   },
   "sources": [
     {
@@ -16,9 +16,9 @@
       "name": "Musora Web Platform",
       "path": "app/Modules/EventTracking/Avo/Avo.php",
       "interfacePath": "app/Modules/EventTracking/Avo/Avo.php",
-      "actionId": "jA6ZIuAG6Xp1gM5o0mk7",
-      "branchId": "hBNmyY5sX",
-      "updatedAt": "2024-01-09T15:25:21.010Z"
+      "actionId": "9z5kztABsZ6fcBcN6wrS",
+      "branchId": "master",
+      "updatedAt": "2024-01-16T17:09:51.941Z"
     }
   ],
   "force": false

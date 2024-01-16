@@ -112,8 +112,8 @@ class Avo
                 try {
                     $ch = curl_init('https://api.avo.app/i');
                     $data = [
-                        'ac' => 'jA6ZIuAG6Xp1gM5o0mk7',
-                        'br' => 'hBNmyY5sX',
+                        'ac' => '9z5kztABsZ6fcBcN6wrS',
+                        'br' => 'master',
                         'en' => self::$__AVO_ENV__,
                         'ev' => $event_id,
                         'ha' => $hash,
@@ -149,8 +149,8 @@ class Avo
                 try {
                     $ch = curl_init('https://api.avo.app/i');
                     $data = [
-                        'ac' => 'jA6ZIuAG6Xp1gM5o0mk7',
-                        'br' => 'hBNmyY5sX',
+                        'ac' => '9z5kztABsZ6fcBcN6wrS',
+                        'br' => 'master',
                         'en' => self::$__AVO_ENV__,
                         'ty' => $type,
                         'sc' => '1cMjCpEPIvTt6xkXe7Fi',
@@ -821,50 +821,6 @@ class Avo
          ]);
      }
 
-     public static function referral_page_viewed($properties = [])
-     {
-         // assert properties
-         if (self::$__AVO_ENV__ !== 'prod') {
-             $messages = [];
-             $messages = array_merge($messages, self::_assert_os($properties['os']));
-             $messages = array_merge($messages, self::_assert_platform($properties['platform']));
-             $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
-             $messages = array_merge($messages, self::_assert_brand($properties['brand']));
-             $messages = array_merge($messages, self::_assert_referral_code($properties['referral_code']));
-             // debug console in Avo
-             self::_invoke('fMpb6d55W5', 'e2e87225e7fb2029c4a47f06c79b920578ab373bc43525d7f476a89a80a574fc', $messages);
-             if (self::$__STRICT__) {
-                 // throw exception if messages is not empty
-                 if (count($messages) > 0) {
-                     throw new \UnexpectedValueException("Error sending event 'Referral Page Viewed': {$messages[0]['message']}");
-                 }
-             } else {
-                 if (self::$__VERBOSE__) {
-                     foreach($messages as $m) {
-                         self::$__LOGGER__->error("[avo] {$m['message']}");
-                     }
-                 }
-             }
-         }
-
-         if (self::$__AVO_ENV__ !== 'prod') {
-             self::$__LOGGER__->info("[avo] Event sent: 'Referral Page Viewed', Event props: ". print_r(array_filter([
-             'os' => $properties['os'],
-             'platform' => $properties['platform'],
-             'brand' => $properties['brand'],
-             'referral_code' => $properties['referral_code'],
-             ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
-         }
-
-         // destination rudder_stack
-         self::$rudder_stackDestination->log_event($properties['user_id_'], 'Referral Page Viewed', [
-         'os' => $properties['os'],
-         'platform' => $properties['platform'],
-         'brand' => $properties['brand'],
-         'referral_code' => $properties['referral_code'],
-         ]);
-     }
-
      public static function onboarding_goals_step_completed($properties = [])
      {
          // assert properties
@@ -917,9 +873,53 @@ class Avo
          ]);
      }
 
+     public static function referral_page_viewed($properties = [])
+     {
+         // assert properties
+         if (self::$__AVO_ENV__ !== 'prod') {
+             $messages = [];
+             $messages = array_merge($messages, self::_assert_os($properties['os']));
+             $messages = array_merge($messages, self::_assert_platform($properties['platform']));
+             $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
+             $messages = array_merge($messages, self::_assert_brand($properties['brand']));
+             $messages = array_merge($messages, self::_assert_referral_code($properties['referral_code']));
+             // debug console in Avo
+             self::_invoke('fMpb6d55W5', 'e2e87225e7fb2029c4a47f06c79b920578ab373bc43525d7f476a89a80a574fc', $messages);
+             if (self::$__STRICT__) {
+                 // throw exception if messages is not empty
+                 if (count($messages) > 0) {
+                     throw new \UnexpectedValueException("Error sending event 'Referral Page Viewed': {$messages[0]['message']}");
+                 }
+             } else {
+                 if (self::$__VERBOSE__) {
+                     foreach($messages as $m) {
+                         self::$__LOGGER__->error("[avo] {$m['message']}");
+                     }
+                 }
+             }
+         }
+
+         if (self::$__AVO_ENV__ !== 'prod') {
+             self::$__LOGGER__->info("[avo] Event sent: 'Referral Page Viewed', Event props: ". print_r(array_filter([
+             'os' => $properties['os'],
+             'platform' => $properties['platform'],
+             'brand' => $properties['brand'],
+             'referral_code' => $properties['referral_code'],
+             ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
+         }
+
+         // destination rudder_stack
+         self::$rudder_stackDestination->log_event($properties['user_id_'], 'Referral Page Viewed', [
+         'os' => $properties['os'],
+         'platform' => $properties['platform'],
+         'brand' => $properties['brand'],
+         'referral_code' => $properties['referral_code'],
+         ]);
+     }
+
 }
 if (!function_exists('json_encode')) {
     throw new \Exception('Avo needs the JSON PHP extension.');
 }
 // AVOMODULEMAP:"Avo"
-// AVOEVENTMAP:["onboarding_started","account_created","referral_invite_sent","referral_link_copied","onboarding_about_step_completed","onboarding_instrument_step_completed","onboarding_gear_step_completed","onboarding_experience_step_completed","onboarding_genres_step_completed","onboarding_topics_step_completed","onboarding_skipped","referral_page_viewed","onboarding_goals_step_completed"]
+// AVOEVENTMAP:["onboarding_started","account_created","referral_invite_sent","referral_link_copied","onboarding_about_step_completed","onboarding_instrument_step_completed","onboarding_gear_step_completed","onboarding_experience_step_completed","onboarding_genres_step_completed","onboarding_topics_step_completed","onboarding_skipped","onboarding_goals_step_completed","referral_page_viewed"]
