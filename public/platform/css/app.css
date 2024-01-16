@@ -24045,6 +24045,10 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(234 179 8 / var(--tw-bg-opacity)) !important;
 }
+.tw-bg-\[\#E0E0E1\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(224 224 225 / var(--tw-bg-opacity)) !important;
+}
 .tw-bg-opacity-0{
   --tw-bg-opacity: 0 !important;
 }
@@ -25899,6 +25903,9 @@ a:visited{
 .hover\:tw-underline:hover{
   text-decoration-line: underline !important;
 }
+.hover\:tw-no-underline:hover{
+  text-decoration-line: none !important;
+}
 .hover\:tw-underline-offset-2:hover{
   text-underline-offset: 2px !important;
 }
@@ -25989,6 +25996,9 @@ a:visited{
 }
 .tw-group:hover .group-hover\:tw-underline{
   text-decoration-line: underline !important;
+}
+.tw-group:hover .group-hover\:tw-no-underline{
+  text-decoration-line: none !important;
 }
 .tw-group:hover .group-hover\:tw-opacity-100{
   opacity: 1 !important;
@@ -28453,6 +28463,10 @@ a:visited{
 :is(:where(.tw-dark) .dark\:tw-text-white){
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+:is(:where(.tw-dark) .dark\:tw-text-\[\#002039\]){
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 32 57 / var(--tw-text-opacity)) !important;
 }
 :is(:where(.tw-dark) .dark\:tw-placeholder-\[\#9EC0DC\])::-moz-placeholder{
   --tw-placeholder-opacity: 1 !important;

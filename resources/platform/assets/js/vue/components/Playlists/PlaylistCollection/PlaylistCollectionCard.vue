@@ -103,6 +103,7 @@
     //---------Lifecycle Methods---------//
 
     onBeforeMount(() => {
+        console.log(props.listElement)
         //check if it's pinned with request? Or prerender?
         state.isPinned = props.listElement.pinned ? true : false;
         state.isPrivate = props.listElement.private;
@@ -124,15 +125,19 @@
 
         <!-- PLAYLIST INFO: clickable link -->
         <a  :href="listElement.url"
-            class="playlist-info-link tw-flex tw-w-full tw-text-[#0D0D0D] dark:tw-text-white"
+            class="playlist-info-link tw-flex tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-group"
             :class="props.isListView ? '' : 'tw-col-span-4'"
         >
             <div class="tw-w-full" :class="props.isListView ? 'tw-grid tw-grid-cols-10 tw-items-center' : '' ">
                 <!--name-->
-                <p class="playlist-info-link-name tw-font-bold tw-truncate tw-w-full tw-text-sm"
-                   :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-7 xl:tw-col-span-3 tw-pl-2 md:tw-pl-[19px] tw-pr-2' : '' "
+                <p class="playlist-info-link-name tw-w-full tw-flex tw-items-center group-hover:tw-no-underline"
+                   :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-7 xl:tw-col-span-3 tw-pl-2 md:tw-pl-[19px] tw-pr-2' : 'tw-mt-1' "
                 >
-                    {{ listElement.name }}
+                    <span class="tw-font-bold tw-truncate tw-max-w-full tw-text-sm">{{ listElement.name }}</span>
+                    <!-- Playlist Count -->
+                    <span class="tw-inline-flex tw-ml-1.5 tw-text-xs tw-px-2 tw-py-1.5 tw-bg-[#E0E0E1] tw-leading-none tw-rounded-full dark:tw-bg-[#002039] dark:tw-text-white">
+                        {{ listElement.total_items }}
+                    </span>
                 </p>
                 <!--description-->
                 <p class="tw-truncate tw-hidden"
@@ -197,7 +202,7 @@
 </template>
 
 <style>
-.playlist-info-link:hover .playlist-info-link-name {
-    text-decoration: underline;
-}
+    .playlist-info-link:hover .playlist-info-link-name {
+        text-decoration: underline;
+    }
 </style>
