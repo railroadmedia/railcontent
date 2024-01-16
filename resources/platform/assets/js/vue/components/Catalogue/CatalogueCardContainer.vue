@@ -10,7 +10,7 @@
                     ${breakToListView ? 'tw-@container/breakToList' : ''}
                 `">
                 <!-- Skeleton Loader -->
-                <template v-if="collectionStoreLoading && (isWorkout || isChallenge)">
+                <template v-if="!collectionStoreLoading && (isWorkout || isChallenge)">
                     <SkeletonLoader :count="skeletonCardCount" type="card" />
                 </template>
                 <!-- Catalogue Cards -->
