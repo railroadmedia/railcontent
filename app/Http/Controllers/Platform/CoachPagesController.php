@@ -241,6 +241,7 @@ class CoachPagesController extends Controller
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
         }
 
+        ContentRepository::$countFilterOptionItems = true;
         $lessonType = 'instructor';
 
         $thisCoach = $this->contentService->getById($coachId);
