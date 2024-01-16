@@ -33,20 +33,14 @@
                                 <picture class="h-full w-full bg-top bg-cover"
                                          :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
                                          x-intersect.once="lazyLoad = true">
-                                    <source srcset="{{ $topImage }}"
+                                    <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $topImage }}"
                                             media="(min-width: 640px)">
-                                    <img src="{{ $topImage }}"
+                                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $topImage }}"
                                          alt="Top Image"
                                          class="w-full h-full object-cover opacity-0 transition-opacity"
                                          loading="lazy"
                                          onload="this.classList.remove('opacity-0')">
                                 </picture>
-                            </div>
-                            <div class=" {{--border-2 border-musora--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <div class="h-full w-full bg-top bg-cover"
-                                     :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" 
-                                     :style="`background-image:url('{{ $topImage }}');`"
-                                     x-intersect.once="lazyLoad = true"></div>
                             </div>
                         </div>
                     </div>
