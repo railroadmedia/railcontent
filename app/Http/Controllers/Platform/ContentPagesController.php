@@ -156,6 +156,30 @@ class ContentPagesController extends BaseController
                 'filter_options' => [],
             ]);
         }
+        $required_fields = $request->get('required_fields', []);
+        if($request->get('tabs', false)){
+            $tabs = $request->get('tabs');
+
+            if(!is_array($request->get('tabs'))){
+                $tabs = [$request->get('tabs')];
+            }
+
+            foreach($tabs as $tab) {
+                $extra = explode(',', $tab);
+                if ($extra['0'] == 'group_by') {
+                    $group_by = $extra['1'];
+                }
+                if ($extra['0'] == 'duration') {
+                    $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
+                }
+                if ($extra['0'] == 'length_in_seconds') {
+                    $required_fields[] = $tab;
+                }
+                if ($extra['0'] == 'topic') {
+                    $required_fields[] = $tab;
+                }
+            }
+        }
 
         if ($contentTypeName == 'songs') {
             $listLessons = $this->contentService->getFiltered(
@@ -165,11 +189,16 @@ class ContentPagesController extends BaseController
                 [$lessonType],
                 $request->get('slug_hierarchy', []),
                 $request->get('required_parent_ids', []),
-                $request->get('required_fields', []),
+                $required_fields,
                 $request->get('included_fields', []),
                 $request->get('required_user_states', []),
                 $request->get('included_user_states', []),
-                true
+                true,
+                false,
+                true,
+                false,
+                false,
+                $group_by ?? false
             );
         } else {
             ContentRepository::$pullFutureContent = true;
@@ -181,7 +210,7 @@ class ContentPagesController extends BaseController
                 [$lessonType],
                 $request->get('slug_hierarchy', []),
                 $request->get('required_parent_ids', []),
-                $request->get('required_fields', []),
+                $required_fields,
                 $request->get('included_fields', []),
                 $request->get('required_user_states', []),
                 $request->get('included_user_states', []),
@@ -189,7 +218,8 @@ class ContentPagesController extends BaseController
                 false,
                 true,
                 false,
-                $futureScheduledContentOnly
+                $futureScheduledContentOnly,
+                $group_by ?? false
             );
         }
 
