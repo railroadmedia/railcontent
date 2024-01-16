@@ -22041,6 +22041,9 @@ a:visited{
 .tw-mt-auto{
   margin-top: auto !important;
 }
+.tw-mb-\[1px\]{
+  margin-bottom: 1px !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -22376,6 +22379,9 @@ a:visited{
 }
 .tw-h-screen{
   height: 100vh !important;
+}
+.tw-h-\[92px\]{
+  height: 92px !important;
 }
 .tw-max-h-0{
   max-height: 0px !important;
@@ -24726,6 +24732,9 @@ a:visited{
 .tw-pt-\[80px\]{
   padding-top: 80px !important;
 }
+.tw-pl-\[22px\]{
+  padding-left: 22px !important;
+}
 .tw-text-left{
   text-align: left !important;
 }
@@ -25597,11 +25606,6 @@ a:visited{
   }
   .md\:tw-bg-singeo.tw-btn-primary:active{
     background-color: #6900BA;
-  }
-  .md\:tw-btn-regular{
-    padding: 7px 70px 6px;
-    height: auto;
-    width: auto;
   }
 }
 @media (min-width: 1024px){
@@ -27842,6 +27846,12 @@ a:visited{
   }
   .xl\:tw-col-span-5{
     grid-column: span 5 / span 5 !important;
+  }
+  .xl\:tw-col-span-3{
+    grid-column: span 3 / span 3 !important;
+  }
+  .xl\:tw-col-span-4{
+    grid-column: span 4 / span 4 !important;
   }
   .xl\:tw-row-span-2{
     grid-row: span 2 / span 2 !important;

@@ -33,11 +33,11 @@
 
             <!-- List View Header -->
             <header v-if="playlistsStore.playlists.length !== 0"
-                class="tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-py-4 tw-pl-[48px]"
+                class="tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-rounded-t-md tw-py-4 tw-px-6"
                 :class="state.isListView && !miniCatalog ? 'tw-hidden md:tw-flex' : 'tw-hidden'">
                 <div class="tw-grid tw-grid-cols-10 tw-w-full">
                     <p class="tw-col-span-2 tw-relative">
-                        <span class="tw-ml-[-24px] tw-inline-block">Name</span>
+                        <span class="tw-inline-block">Name</span>
                     </p>
                     <p class="tw-col-span-5 tw-pl-2">
                         <span class="tw-hidden xl:tw-block">Description</span>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="tw-inline-flex tw-px-4 xl:tw-px-8"><span class="tw-w-[24px] tw-h-[24px]"></span></div>
                 <!-- Spacer for Pin Icon -->
-                <p class="tw-pr-[22px] tw-w-[100px] tw-text-center">Options</p>
+                <p class="tw-w-[100px] tw-text-center">Options</p>
             </header>
 
             <!-- Cards -->
