@@ -1,5 +1,5 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=682777e7047bd70d3cf8c347295617e8",
+    "/platform/js/app.js": "/platform/js/app.js?id=4dc61e13ec5238717f6b6ef2600877e9",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c889beb1ba5e4503ed1f92f9acca9348",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=5e255771f4c18ff0e362dff1c2b220f8",
     "/platform/js/books.js": "/platform/js/books.js?id=9429572834ae6ec9f887ec8226778941",
@@ -13,7 +13,7 @@
     "/platform/js/report-user.js": "/platform/js/report-user.js?id=2b7abf551ac21f4643a74a1ba84948ea",
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=114e15ffab16d08a948e6ae91b260cf4",
     "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=8e6a22a0eba3d6939682d01c7dc22715",
-    "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=79446549b5c93f1b5f8d552440a89acd",
+    "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=90fff9b7a35a79083d4d30f1c708afa3",
     "/platform/js/order-form.js": "/platform/js/order-form.js?id=23c0e3f0900ca63bfb0dfc3870989465",
     "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=9e813f3c4a7fa78819baf57ce6c759e7",
     "/platform/js/cart-sidebar.js": "/platform/js/cart-sidebar.js?id=0249135669d0dde21b8d668e6a5982f7",
@@ -27,7 +27,7 @@
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=87068a33136c70283a70c493d6ae7f1e",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=8ebf5120c66c66caf55528d3cdf70d42",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=027c1f4cbef556d1be41f55b7047d511",
-    "/platform/css/app.css": "/platform/css/app.css?id=53c2399bec15cad530b3c0687790285a",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=8a41a26148625feb7776772afe5a4b4a",
+    "/platform/css/app.css": "/platform/css/app.css?id=5108159ab5afd7482b4ae515aed26d8c",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=2374ad6008bbc16cac12769565a39e65",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=c098e0ea998b06116bfa4feb2ddbad64"
 }
