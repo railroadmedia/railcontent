@@ -11,7 +11,7 @@
         <div class="max-w-screen-xl m-auto px-6 flex">
             <div class="w-full m-auto text-white text-center lg:w-2/3">
                 <img src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png" width="400px" class="m-auto block mb-10">
-                <h2 class="uppercase text-3xl font-bison-bold sm:text-5xl md:text-6xl mb-2">Your Guitar Journey<br class="inline xl:hidden"> Starts Here.</h2>
+                <h2 class="uppercase text-3xl font-bebas sm:text-5xl md:text-6xl mb-2">Your Guitar Journey<br class="inline xl:hidden"> Starts Here.</h2>
 
                 <h4 class="text-xl mb-2 md:mb-10 font-primary sm:text-2xl md:text-3xl">
                     @if($productPrice < floatval($productPrices['guitar-quest']->price))
@@ -25,7 +25,7 @@
                     @endif
                 </h4>
 
-                <a title="Go To Order Page" href="{{ $orderLink }}" class="bg-goldenrod-gradient transition duration-500 linear px-4 py-4 w-full inline-block uppercase text-black font-roboto-condensed-bold rounded-full text-3xl mb-5 md:w-3/4">
+                <a title="Go To Order Page" href="{{ $orderLink }}" class="bg-goldenrod-gradient transition duration-500 linear px-4 py-4 w-full inline-block uppercase text-black font-bebas rounded-full text-3xl mb-5 md:w-3/4">
                     Start Your Quest &raquo;
                 </a>
 

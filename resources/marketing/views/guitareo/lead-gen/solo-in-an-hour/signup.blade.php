@@ -79,7 +79,7 @@
             '<img class="w-full h-24 md:h-32 lg:h-36" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/logo.png" alt="logo">',
         ],
         "playButton" => "down",
-        "headLine" => '<h1 class="font-bison-bold">Play your first solo<br class="inline md:hidden"> in less than 60 minutes</h1>
+        "headLine" => '<h1 class="font-bebas">Play your first solo<br class="inline md:hidden"> in less than 60 minutes</h1>
         <div class="leading-normal mt-2 md:mt-3 mb-4 md:mb-6 lg:text-xl">Enter your email below for your free lessons...</div>',
         "formId" => "Guitareo - Engagement - Trigger - Solo In An Hour - Web Form",
         "formName" => 'Solo In An Hour',
@@ -186,7 +186,7 @@
                 <img class="h-28 md:h-40 lg:h-52 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/logo.png" alt="logo">
             </picture>
         ',
-        "text" => '<h1 class="font-bison-bold">Play your first solo<br class="inline md:hidden"> in less than 60 minutes</h1>
+        "text" => '<h1 class="font-bebas">Play your first solo<br class="inline md:hidden"> in less than 60 minutes</h1>
         <div class="leading-normal mt-2 md:mt-3 mb-4 md:mb-6 lg:text-lg">Enter your email below for your free lessons...</div>',
         "formId" => "Guitareo - Engagement - Trigger - Solo In An Hour - Web Form2",
         "formName" => 'Solo In An Hour',

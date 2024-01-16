@@ -182,9 +182,9 @@
             <br>
             <h1><strong>Upgrade your drum<br class="hide-for-medium"> throne in seconds.</strong></h1>
             {{--            @if($products['comfort-cover']->getStockAvailability() > 0)--}}
-            <a class="join blue" href="/ecommerce/add-to-cart?products[comfort-cover]=1">Get Comfy &raquo;</a>
+{{--            <a class="join blue" href="/ecommerce/add-to-cart?products[comfort-cover]=1">Get Comfy &raquo;</a>--}}
             {{--@else--}}
-            {{--<a class="join blue sold-out">Sold Out</a>--}}
+            <a class="join blue sold-out">Sold Out</a>
             {{--@endif--}}
             <p>
                 @if(floatval($productPrices['comfort-cover']->price) > floatval($productPrices['comfort-cover']->discounted_price))
@@ -204,11 +204,6 @@
         'video' => '510872818',
         'vimeo' => true,
     ])
-        @slot('button')
-            <div class="text-center bg-white rounded-b-xl py-4">
-                <a href="/ecommerce/add-to-cart?products[comfort-cover]=1" class="join blue">Get Comfy »</a>
-            </div>
-        @endslot
     @endcomponent
 
     <section class="content-section coaches-info text-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/spread-background.jpg">
@@ -350,9 +345,9 @@
             <img class="logo" src="https://www.musora.com/musora-cdn/image/width=740,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/comfort-cover-logo-w-drumart.png" alt="Comfort cover logo"><br>
             <h1><strong>Upgrade your drum<br class="hide-for-medium"> throne in seconds.</strong></h1>
             {{--            @if($products['comfort-cover']->getStockAvailability() > 0)--}}
-            <a href="/ecommerce/add-to-cart?products[comfort-cover]=1" class="join blue">Get Comfy &raquo;</a>
+{{--            <a href="/ecommerce/add-to-cart?products[comfort-cover]=1" class="join blue">Get Comfy &raquo;</a>--}}
             {{--@else--}}
-            {{--<a class="join blue sold-out">Sold Out</a>--}}
+            <a class="join blue sold-out">Sold Out</a>
             {{--@endif--}}
             <p>@if(floatval($productPrices['comfort-cover']->price) > floatval($productPrices['comfort-cover']->discounted_price))
                     <s style="opacity: 0.6;">NORMALLY ${{ floatval($productPrices['comfort-cover']->price) }}</s>

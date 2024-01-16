@@ -211,7 +211,7 @@ a.text-yellow:hover {
   }
 
   p {
-    font: 400 13px/1.5em $robotocondensed;
+    font: 400 13px/1.5em $bebas;
     text-transform: uppercase;
     @include tablet {
       font-size: 17px;
@@ -624,7 +624,7 @@ a.text-yellow:hover {
       }
 
       strong {
-        font-family: $robotocondensed;
+        font-family: $bebas;
         font-size: 17px;
         margin: 0 auto 5px;
         color: $drumeoBlue;
@@ -694,7 +694,7 @@ a.text-yellow:hover {
     position: relative;
     z-index: 2;
     color: #ffdb00;
-    font: 700 30px/1em $robotocondensed;
+    font: 700 30px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto;
     @include tablet {
@@ -781,7 +781,7 @@ a.text-yellow:hover {
 
   h1 {
     text-transform: uppercase;
-    font-family: $robotocondensed;
+    font-family: $bebas;
     text-shadow: 0 0 15px #000;
   }
 
@@ -817,7 +817,7 @@ a.text-yellow:hover {
       width: auto;
       text-shadow: 0 0 10px #000;
       text-transform: uppercase;
-      font-family: $robotocondensed;
+      font-family: $bebas;
       padding: 14px 15px;
 
       h6, p {
@@ -914,7 +914,7 @@ a.text-yellow:hover {
     }
 
     h6, p.credit {
-      font-family: $robotocondensed;
+      font-family: $bebas;
       text-transform: uppercase;
       line-height: 1em;
       margin: 0 auto;
@@ -1028,7 +1028,7 @@ a.text-yellow:hover {
   }
 
   h4 {
-    font-family: $robotocondensed;
+    font-family: $bebas;
     text-transform: uppercase;
     margin: 0 auto;
     line-height: 1.2em;
