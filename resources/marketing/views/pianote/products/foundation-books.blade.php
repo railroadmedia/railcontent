@@ -89,7 +89,7 @@
         .join {
             display:inline-block;
             font-weight:700;
-            font-family:"Roboto Condensed", sans-serif;
+            font-family:"Bebas Neue", sans-serif;
             line-height:1em;
             text-transform:uppercase;
             background:#F61A30;
@@ -350,7 +350,7 @@
                     <img class="rounded-full border-4 sm:border-8 border-pianote w-1/3 order-2" src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/lisa.jpg">
                     <div class="text-left sm:pr-8 lg:pr-20">
                         <div class="w-32 bg-pianote rounded-full h-2 hidden sm:block mb-4"></div>
-                        <h1 class="font-bold font-roboto text-3xl sm:text-4xl md:text-5xl lg:text-6xl">LISA WITT</h1>
+                        <h1 class="font-bold font-bebas text-3xl sm:text-4xl md:text-5xl lg:text-6xl">LISA WITT</h1>
                         <p class="leading-loose max-w-2xl text-xs sm:text-sm">Lisa Witt has taught in a variety of settings from beginners just getting started to recording artists preparing their songs for the road.
                             <br><br>
                             She is committed to making sure students actually ENJOY learning the piano and see results while playing the songs they love.

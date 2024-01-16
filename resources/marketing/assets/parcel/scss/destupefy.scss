@@ -260,7 +260,7 @@ button {
         }
 
         &.breakdown {
-            font: 400 13px/1.5em $robotocondensed;
+            font: 400 13px/1.5em $bebas;
             margin: 0 auto;
             @include tablet {
                 font-size: 16px;
@@ -422,7 +422,7 @@ button {
 
             h4 {
                 margin: 0 auto;
-                font-family: $robotocondensed;
+                font-family: $bebas;
                 line-height: 1.2em;
             }
 
@@ -449,12 +449,12 @@ button {
             width: 100%;
             max-width: 100%;
             line-height: 1em;
-            font-family: $robotocondensed;
+            font-family: $bebas;
             margin: 0 auto;
         }
 
         h2 {
-            font-family: $robotocondensed;
+            font-family: $bebas;
             margin: 0 auto;
 
         }
@@ -499,7 +499,7 @@ button {
                     left: 0;
                     color: #FFF;
                     z-index: 8;
-                    font: 700 11px/1em $robotocondensed;
+                    font: 700 11px/1em $bebas;
                     text-transform: uppercase;
                     background: $pianoteRed;
                 }
@@ -906,7 +906,7 @@ button {
 
 
         p {
-            font: 400 14px/1.2em $robotocondensed;
+            font: 400 14px/1.2em $bebas;
             margin: 25px auto 0;
             text-transform: uppercase;
             color: #fff;
@@ -945,7 +945,7 @@ button {
     }
 
     p.breakdown {
-        font: 400 13px/1.4em $robotocondensed;
+        font: 400 13px/1.4em $bebas;
         margin: 20px auto 0;
         @include tablet {
             font-size: 16px;

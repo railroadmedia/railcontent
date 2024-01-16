@@ -177,7 +177,7 @@ body {
       }
 
       &[type="submit"] {
-        font-family: $robotocondensed;
+        font-family: $bebas;
         font-weight: 700;
         color: #FFF;
         background: $meGreen;
@@ -365,7 +365,7 @@ body {
   }
 
   p {
-    font-family: $robotocondensed;
+    font-family: $bebas;
     margin: 0 auto;
     font-size: 14px;
     @include tablet {
@@ -422,7 +422,7 @@ body {
   }
 
   p {
-    font: 700 14px/1em $robotocondensed;
+    font: 700 14px/1em $bebas;
     color: #fff;
     display: inline-block;
     margin: 0 0 7px;
@@ -457,7 +457,7 @@ body {
   }
 
   h1 {
-    font: 700 28px/1em $robotocondensed;
+    font: 700 28px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto 5px;
     @include tablet {
@@ -604,7 +604,7 @@ body {
 
   .title-text {
     h1 {
-      font: 700 30px/1em $robotocondensed;
+      font: 700 30px/1em $bebas;
       margin: 0 auto;
       text-transform: uppercase;
       color: $meGreen;
@@ -676,7 +676,7 @@ body {
       h2 {
         margin: 0 auto 3px;
         text-transform: uppercase;
-        font: 700 17px/1em $robotocondensed;
+        font: 700 17px/1em $bebas;
         @include tablet {
           font-size: 16px;
         }
@@ -864,7 +864,7 @@ body {
 
 
   h1 {
-    font: 700 25px/1em $robotocondensed;
+    font: 700 25px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto 30px;
     text-align: center;
@@ -896,7 +896,7 @@ body {
     }
 
     h3 {
-      font: 700 18px/1em $robotocondensed;
+      font: 700 18px/1em $bebas;
       text-transform: uppercase;
       margin: 15px auto 7px;
       @include tablet {
@@ -979,7 +979,7 @@ body {
   h1 {
     position: relative;
     z-index: 2;
-    font-family: $robotocondensed;
+    font-family: $bebas;
     text-transform: uppercase;
     margin: 0 auto;
     font-size: 27px;
@@ -1055,7 +1055,7 @@ body {
 
   h1 {
     text-transform: uppercase;
-    font: 700 33px/1em $robotocondensed;
+    font: 700 33px/1em $bebas;
     z-index: 1;
     margin: 0;
     @include tablet {
@@ -1067,7 +1067,7 @@ body {
   }
 
   p {
-    font: 400 18px/1em $robotocondensed;
+    font: 400 18px/1em $bebas;
     text-transform: uppercase;
     margin: 5px auto 0;
     @include tablet {
@@ -1211,7 +1211,7 @@ body.is-reveal-open {
 
 
   h1 {
-    font: 700 27px/1em $robotocondensed;
+    font: 700 27px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto 5px;
     @include tablet {
@@ -1251,7 +1251,7 @@ body.is-reveal-open {
     }
 
     h1 {
-      font: 700 21px/1em $robotocondensed;
+      font: 700 21px/1em $bebas;
       margin: 15px auto 5px;
       text-transform: uppercase;
       @include tablet {
@@ -1264,7 +1264,7 @@ body.is-reveal-open {
 
       .band {
         color: $meGreen;
-        font: italic 400 17px/1em $robotocondensed;
+        font: italic 400 17px/1em $bebas;
         margin: 0 auto;
         text-transform: uppercase;
         display: inline-block;
@@ -1358,7 +1358,7 @@ body.is-reveal-open {
   }
 
   h1 {
-    font: 700 30px/1em $robotocondensed;
+    font: 700 30px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto 7px;
     @include tablet {
@@ -1394,7 +1394,7 @@ body.is-reveal-open {
           border: 1px solid #DFE6E3;
           border-width: 0 1px;
           padding: 7px;
-          font: 600 11px/1.2em $robotocondensed;
+          font: 600 11px/1.2em $bebas;
           text-transform: uppercase;
           @include tablet {
             font-size: 15px;
@@ -1553,7 +1553,7 @@ body.is-reveal-open {
   .testimonial-section {
 
     h1 {
-      font: 700 30px/1em $robotocondensed;
+      font: 700 30px/1em $bebas;
       text-transform: uppercase;
       margin: 0 auto 20px;
       @include tablet {
@@ -1614,7 +1614,7 @@ body.is-reveal-open {
 
 
       h1 {
-        font: 700 22px/1em $robotocondensed;
+        font: 700 22px/1em $bebas;
         text-transform: uppercase;
         margin: 0 auto 15px;
         @include tablet {
@@ -1680,7 +1680,7 @@ body.is-reveal-open {
   }
 
   h2 {
-    font: 400 14px/1.3em $robotocondensed;
+    font: 400 14px/1.3em $bebas;
     text-transform: uppercase;
     margin: 0 auto;
     @include tablet {
@@ -1796,7 +1796,7 @@ body.is-reveal-open {
 
 
   h1.upper {
-    font: 700 22px/1em $robotocondensed;
+    font: 700 22px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto 20px;
     @include tablet {
@@ -1985,7 +1985,7 @@ body.is-reveal-open {
         }
 
         &[type="submit"] {
-          font-family: $robotocondensed;
+          font-family: $bebas;
           font-weight: 700;
           color: #FFF;
           background: $meGreen;
@@ -2157,7 +2157,7 @@ body.is-reveal-open {
   }
 
   h2 {
-    font: 700 30px/1em $robotocondensed;
+    font: 700 30px/1em $bebas;
     margin: 15px auto;
     text-transform: uppercase;
     color: $drumeoBlue;
@@ -2333,7 +2333,7 @@ body.is-reveal-open {
 
   h1 {
     text-transform: uppercase;
-    font: 700 25px/1em $robotocondensed;
+    font: 700 25px/1em $bebas;
     margin: 0 auto 20px;
     @include tablet {
       font-size: 32px;
