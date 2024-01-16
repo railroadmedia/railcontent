@@ -320,13 +320,13 @@
         @php
             $bonuses = [
                 [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/singing-starter-kit.webp',
+                    'image' => 'marketing/singeo/membership/homepage/2024/singing-starter-kit.webp',
                     'title' => 'Singing<br> Starter Kit',
                     'description' => 'Get everything you need to start singing now. In just 7 hands-on lessons, you’ll overcome the challenges most beginner singers face and will instantly sound better.',
                     'price' => floatval($productPrices['singing-starter-kit']->price),
                 ],
                 [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/Beautiful_harmonies_card.webp',
+                    'image' => 'marketing/singeo/membership/homepage/2024/Beautiful_harmonies_card.webp',
                     'title' => 'Harmony',
                     'description' => 'In just 8, short, sing-a-long lessons, you’ll learn how to elevate any vocal performance with incredible harmonies. Even if you’re a total beginner, you’ll be singing your first harmony within the first 10 minutes of this course.',
                     'price' => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price),

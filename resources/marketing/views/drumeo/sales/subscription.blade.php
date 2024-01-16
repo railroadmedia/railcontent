@@ -394,26 +394,26 @@
         @php
             $bonuses = [
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/drumsticks.webp',
+                'image' => 'marketing/drumeo/membership/homepage/2024/drumsticks.webp',
                 'title' => 'Drumeo Drumsticks',
                 'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
                 'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
                 'shipping' => true,
                 ],
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/rdm.webp',
+                'image' => 'marketing/drumeo/membership/homepage/2024/rdm.webp',
                 'title' => 'Rock Drumming Masterclass',
                 'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
                 'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
                 ],
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/dtme.webp',
+                'image' => 'marketing/drumeo/membership/homepage/2024/dtme.webp',
                 'title' => 'Drum Technique Made Easy',
                 'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
                 'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
                 ],
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/ime.webp',
+                'image' => 'marketing/drumeo/membership/homepage/2024/ime.webp',
                 'title' => 'Independence Made Easy',
                 'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
                 'price' => floatval($productPrices['independence-made-easy-pack']->price),

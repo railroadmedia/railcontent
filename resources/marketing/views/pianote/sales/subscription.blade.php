@@ -384,26 +384,26 @@
         @php
             $bonuses = [
                 [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bonus-chords-scales.webp',
+                    'image' => 'marketing/pianote/membership/homepage/2024/bonus-chords-scales.webp',
                     'title' => 'Chords & <br>Scales Book',
                     'description' => 'Your encyclopedia of piano chords & scales.',
                     'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
                     'shipping' => 'true'
                 ],
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/piano-technique-made-easy.webp',
+                'image' => 'marketing/pianote/membership/homepage/2024/piano-technique-made-easy.webp',
                 'title' => 'Piano Technique<br> Made Easy',
                 'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
                 'price' => floatval($productPrices['piano-technique-made-easy']->price),
                 ],
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/piano-riffs-and-fills.webp',
+                'image' => 'marketing/pianote/membership/homepage/2024/piano-riffs-and-fills.webp',
                 'title' => 'Piano Riffs<br> & Fills',
                 'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
                 'price' => floatval($productPrices['piano-riffs-and-fills']->price),
                 ],
                 [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/faster-fingers.webp',
+                    'image' => 'marketing/pianote/membership/homepage/2024/faster-fingers.webp',
                     'title' => '',
                     'description' => 'Boost your speed and confidence with this guided practice course.',
                     'price' => floatval($productPrices['faster-fingers']->price),
