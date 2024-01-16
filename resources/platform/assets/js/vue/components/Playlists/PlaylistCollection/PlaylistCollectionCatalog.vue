@@ -1,23 +1,27 @@
 <template>
     <main class="tw-w-full">
+
         <!-- No Playlists -->
         <section
             v-if="playlistsStore.playlists.length === 0 && !playlistsStore.loadingPlaylists && !state.searchTerm && !state.categories"
-            class="tw-w-full tw-flex dark:tw-text-white tw-items-center "
-            :class="miniCatalog ? 'tw-mt-1 tw-px-4 lg:tw-px-0' : 'tw-mt-[58px] tw-flex-col'">
-            <div>
-                <h1 class="tw-text-3xl tw-font-normal tw-font-open-sans tw-text-[16px] tw-text-center"
-                    :class="!miniCatalog ? 'tw-mb-[15px]' : 'tw-mb-2'">
-                    You haven't created any playlists yet.
-                </h1>
-                <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
-                    <a :href="`/${brand}/create-playlist-window`"
-                        class="tw-btn-primary tw-rounded-full tw-mr-2 tw-line-clamp-1 md:tw-inline-block tw-bg-white tw-text-[#000C17] hover:tw-bg-[#00101D] hover:dark:tw-bg-[#627F97] hover:tw-text-white md:tw-mb-2 tw-border-2 tw-border-[#000C17]">Create
-                        Playlist</a>
-                    <a href="/playlists"
-                        class="tw-border-2 tw-btn-primary tw-rounded-full tw-line-clamp-1 md:tw-inline-block tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17] md:tw-mb-2">Learn
-                        More</a>
-                </div>
+            class="tw-w-full tw-flex dark:tw-text-white tw-justify-center tw-flex-col"
+            :class="miniCatalog ? 'tw-mt-1 tw-px-4 lg:tw-px-0 tw-items-start' : 'tw-mt-[58px] tw-items-center'"
+        >
+            <musora-icon v-if="!miniCatalog" icon-name="playlist" width="57" height="57" class="tw-mb-2" />
+            <h1 class=" tw-font-bold tw-text-center tw-mb-2"
+                :class="miniCatalog ? 'tw-text-xl tw-mb-4' : 'tw-text-[30px] tw-leading-[48px]'"
+            >
+                No Playlists here yet
+            </h1>
+            <p v-if="!miniCatalog" class="tw-text-center tw-mb-4">
+                Go ahead and create you first playlist!
+            </p>
+            <div class="tw-flex tw-items-center md:tw-block">
+                <a :href="`/${brand}/create-playlist-window`"
+                    class="tw-btn-primary tw-bg-[#000C17] tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]">
+                    <musora-icon icon-name="plus" class="tw-w-[30px] tw-mr-1" />
+                    Create Playlist
+                </a>
             </div>
         </section>
 
@@ -29,25 +33,26 @@
 
             <!-- List View Header -->
             <header v-if="playlistsStore.playlists.length !== 0"
-                class="tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-py-4 tw-pl-[48px]"
+                class="tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-rounded-t-md tw-py-4 tw-px-6"
                 :class="state.isListView && !miniCatalog ? 'tw-hidden md:tw-flex' : 'tw-hidden'">
-                <div class="tw-grid tw-grid-cols-10 tw-w-full">
-                    <p class="tw-col-span-2 tw-relative">
-                        <span class="tw-ml-[-24px] tw-inline-block">Name</span>
-                    </p>
-                    <p class="tw-col-span-5 tw-pl-2">
-                        <span class="tw-hidden xl:tw-block">Description</span>
-                    </p>
-                    <div class="tw-col-span-3 tw-w-full tw-flex">
-                        <p class="tw-w-1/2 tw-text-center">Category</p>
-                        <p class="tw-w-1/2 tw-text-center">
-                            Time
+                <div class="tw-w-full tw-flex">
+                    <p class="tw-w-[72px] tw-flex-shrink-0">Name</p>
+                    <div class="tw-grid tw-grid-cols-10 tw-w-full">
+                        <div class="tw-col-span-3"></div>
+                        <p class="tw-col-span-4 tw-pl-2">
+                            <span class="tw-hidden xl:tw-block">Description</span>
                         </p>
+                        <div class="tw-col-span-3 tw-w-full tw-flex">
+                            <p class="tw-w-1/2">Category</p>
+                            <p class="tw-w-1/2 tw-text-center">
+                                Time
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="tw-inline-flex tw-px-4 xl:tw-px-8"><span class="tw-w-[24px] tw-h-[24px]"></span></div>
                 <!-- Spacer for Pin Icon -->
-                <p class="tw-pr-[22px] tw-w-[100px] tw-text-center">Options</p>
+                <p class="tw-w-[100px] tw-text-center">Options</p>
             </header>
 
             <!-- Cards -->

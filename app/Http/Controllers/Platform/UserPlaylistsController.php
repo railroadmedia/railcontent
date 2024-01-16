@@ -234,6 +234,7 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['is_low_routine'] = $item['is_low_routine'] ?? false;
                 $playlistItems[$index]['playlist_item_name'] = $item['playlist_item_name'] ?? false;
                 $playlistItems[$index]['content_name'] = $item['content_name'] ?? false;
+                $playlistItems[$index]['difficulty'] = $item['difficulty'] ?? false;
             }
         }
 

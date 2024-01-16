@@ -25,7 +25,10 @@ class ImpactTrackConversion implements ShouldQueue
     public function handle()
     {
 
-        $promoCodes = implode(',', $this->order['discount_codes']);
+        $promoCodesList = array_map(function($code) {
+            return $code['code'];
+        }, $this->order['discount_codes']);
+        $promoCodesString = implode(',', $promoCodesList);
         $products = $this->getAllProducts($this->order['line_items']);
         $orderId = $this->order['id'];
         $userID = $this->user->id;
@@ -34,11 +37,11 @@ class ImpactTrackConversion implements ShouldQueue
         try {
             Tracker::queue(
                 $this->brand,
-                function () use ($products, $promoCodes, $orderId, $userID, $email, $currency) {
+                function () use ($products, $promoCodesString, $orderId, $userID, $email, $currency) {
                     Tracker::trackTransactionAPI(
                         $products,
                         $orderId,
-                        $promoCodes,
+                        $promoCodesString,
                         $userID,
                         $email,
                         currency: $currency
