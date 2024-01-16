@@ -1409,10 +1409,12 @@ class ContentRepository extends RepositoryBase
             }
             if(!empty($this->groupByFields['associated_table'])) {
                 $orderBy = ($this->groupByFields['associated_table']['alias'] . '.' . $this->groupByFields['associated_table']['column']);
-                $contentRows = $query->selectRaw(' "'.$this->groupByFields['associated_table']['column'].'" as type') ->directPaginate($this->page, $this->limit)
+                $contentRows = $query->selectRaw(' "'.$this->groupByFields['associated_table']['column'].'" as type')
+                    ->directPaginate($this->page, $this->limit)
                     ->orderByRaw($orderBy . ' asc')->getToArray();
             }else{
-                $contentRows = $query->selectRaw(' "'.$this->groupByFields['field'].'" as type')->directPaginate($this->page, $this->limit)
+                $contentRows = $query->selectRaw(' "'.$this->groupByFields['field'].'" as type')
+                    ->directPaginate($this->page, $this->limit)
                     ->orderByRaw( $this->groupByFields['field'].' asc')->getToArray();
             }
 
@@ -1545,12 +1547,11 @@ class ContentRepository extends RepositoryBase
         $possibleContentFields = $this->getFilterOptionsForQuery($query);
         if (self::$countFilterOptionItems) {
             $includedFields = collect($this->includedFields);
-            $selectedFilterCategories = $includedFields->pluck('name');
+            $selectedFilterCategories = $includedFields->pluck('name')->unique();
             $initialFilters = $this->includedFields;
 
             $myResults = [];
             foreach ($selectedFilterCategories as $category) {
-                if (isset($possibleContentFields[$category])) {
                     $otherCategories = $includedFields->where('name', '!=', $category);
                     $this->includedFields = $otherCategories->values()->toArray();
                     $allQuery =
@@ -1564,9 +1565,8 @@ class ContentRepository extends RepositoryBase
                             ->restrictByTypes($this->typesToInclude)
                             ->restrictByParentIds($this->requiredParentIds);
                     $possibleContentFields2 = $this->getFilterOptionsForQueryVersion2($allQuery);
-                    $myResults[$category] = $possibleContentFields2[$category];
+                    $myResults[$category] = $possibleContentFields2[$category] ;
                     $this->includedFields = $initialFilters;
-                }
             }
 
             foreach ($possibleContentFields as $possibleContentFieldKey => $possibleContentFieldValue) {
@@ -2941,9 +2941,8 @@ if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) == 1){
             'lifestyle' => ['table' => 'railcontent_content_lifestyle', 'column' => 'lifestyle', 'alias' => '_rcl'],
         ];
 
-        $filterOptions = self::$catalogMetaAllowableFilters ?? [
+        $filterOptions = [
             'data',
-         //   'instructor',
             'style',
             'topic',
             'focus',
@@ -3007,7 +3006,7 @@ if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) == 1){
         if (!empty($groupBy)) {
             $joinTablesQuery->groupBy($groupBy);
         } else {
-            return [];
+            $joinTablesQuery->select(['railcontent_content.id']);
         }
 
         $tableResults = $joinTablesQuery->get();

@@ -174,7 +174,7 @@ class ContentCompiledColumnTransformer
                 continue;
             }
 
-            if($contentRow['type'] == 'style'){
+            if($contentRow['type'] == 'style' || $contentRow['type'] == 'artist'){
                 $contentRows[$contentRowIndex]['data'][] = [
                     'id' => substr(md5(mt_rand()), 0, 10),
                     'content_id' =>substr(md5(mt_rand()), 0, 10),
