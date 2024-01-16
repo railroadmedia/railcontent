@@ -112,7 +112,7 @@ class Avo
                 try {
                     $ch = curl_init('https://api.avo.app/i');
                     $data = [
-                        'ac' => 'LLPAJFFniF81M2CVDWNE',
+                        'ac' => 'qFfudstSrDkqLCrQ5Yfk',
                         'br' => '6PZYbxx4K',
                         'en' => self::$__AVO_ENV__,
                         'ev' => $event_id,
@@ -149,7 +149,7 @@ class Avo
                 try {
                     $ch = curl_init('https://api.avo.app/i');
                     $data = [
-                        'ac' => 'LLPAJFFniF81M2CVDWNE',
+                        'ac' => 'qFfudstSrDkqLCrQ5Yfk',
                         'br' => '6PZYbxx4K',
                         'en' => self::$__AVO_ENV__,
                         'ty' => $type,
@@ -582,6 +582,88 @@ class Avo
          self::$rudder_stackDestination->log_event($properties['user_id_'], 'Account Created', [
          'os' => $properties['os'],
          'platform' => $properties['platform'],
+         ]);
+     }
+
+     public static function referral_invite_sent($properties = [])
+     {
+         // assert properties
+         if (self::$__AVO_ENV__ !== 'prod') {
+             $messages = [];
+             $messages = array_merge($messages, self::_assert_os($properties['os']));
+             $messages = array_merge($messages, self::_assert_platform($properties['platform']));
+             $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
+             $messages = array_merge($messages, self::_assert_brand($properties['brand']));
+             // debug console in Avo
+             self::_invoke('SFvxiAyg2', '8db8fedb4679f41a7c2ae113260ac73e526f5d6125c09e2ea991d2704e733bcf', $messages);
+             if (self::$__STRICT__) {
+                 // throw exception if messages is not empty
+                 if (count($messages) > 0) {
+                     throw new \UnexpectedValueException("Error sending event 'Referral Invite Sent': {$messages[0]['message']}");
+                 }
+             } else {
+                 if (self::$__VERBOSE__) {
+                     foreach($messages as $m) {
+                         self::$__LOGGER__->error("[avo] {$m['message']}");
+                     }
+                 }
+             }
+         }
+
+         if (self::$__AVO_ENV__ !== 'prod') {
+             self::$__LOGGER__->info("[avo] Event sent: 'Referral Invite Sent', Event props: ". print_r(array_filter([
+             'os' => $properties['os'],
+             'platform' => $properties['platform'],
+             'brand' => $properties['brand'],
+             ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
+         }
+
+         // destination rudder_stack
+         self::$rudder_stackDestination->log_event($properties['user_id_'], 'Referral Invite Sent', [
+         'os' => $properties['os'],
+         'platform' => $properties['platform'],
+         'brand' => $properties['brand'],
+         ]);
+     }
+
+     public static function referral_link_copied($properties = [])
+     {
+         // assert properties
+         if (self::$__AVO_ENV__ !== 'prod') {
+             $messages = [];
+             $messages = array_merge($messages, self::_assert_os($properties['os']));
+             $messages = array_merge($messages, self::_assert_platform($properties['platform']));
+             $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
+             $messages = array_merge($messages, self::_assert_brand($properties['brand']));
+             // debug console in Avo
+             self::_invoke('l6EEHrFAm', 'a16f19aa0a7252bb64a8dd00d82c90e17b4d1dff638dfcdda5d1777752ab9d0f', $messages);
+             if (self::$__STRICT__) {
+                 // throw exception if messages is not empty
+                 if (count($messages) > 0) {
+                     throw new \UnexpectedValueException("Error sending event 'Referral Link Copied': {$messages[0]['message']}");
+                 }
+             } else {
+                 if (self::$__VERBOSE__) {
+                     foreach($messages as $m) {
+                         self::$__LOGGER__->error("[avo] {$m['message']}");
+                     }
+                 }
+             }
+         }
+
+         if (self::$__AVO_ENV__ !== 'prod') {
+             self::$__LOGGER__->info("[avo] Event sent: 'Referral Link Copied', Event props: ". print_r(array_filter([
+             'os' => $properties['os'],
+             'platform' => $properties['platform'],
+             'brand' => $properties['brand'],
+             ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
+         }
+
+         // destination rudder_stack
+         self::$rudder_stackDestination->log_event($properties['user_id_'], 'Referral Link Copied', [
+         'os' => $properties['os'],
+         'platform' => $properties['platform'],
+         'brand' => $properties['brand'],
          ]);
      }
 
@@ -1104,9 +1186,50 @@ class Avo
          ]);
      }
 
+     public static function referral_page_viewed($properties = [])
+     {
+         // assert properties
+         if (self::$__AVO_ENV__ !== 'prod') {
+             $messages = [];
+             $messages = array_merge($messages, self::_assert_os($properties['os']));
+             $messages = array_merge($messages, self::_assert_platform($properties['platform']));
+             $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
+             $messages = array_merge($messages, self::_assert_brand($properties['brand']));
+             // debug console in Avo
+             self::_invoke('fMpb6d55W5', '35c14b4c9bb3b4c5575ceaec34d98c62b9d8744dd9a421d997777969a3c876e1', $messages);
+             if (self::$__STRICT__) {
+                 // throw exception if messages is not empty
+                 if (count($messages) > 0) {
+                     throw new \UnexpectedValueException("Error sending event 'Referral Page Viewed': {$messages[0]['message']}");
+                 }
+             } else {
+                 if (self::$__VERBOSE__) {
+                     foreach($messages as $m) {
+                         self::$__LOGGER__->error("[avo] {$m['message']}");
+                     }
+                 }
+             }
+         }
+
+         if (self::$__AVO_ENV__ !== 'prod') {
+             self::$__LOGGER__->info("[avo] Event sent: 'Referral Page Viewed', Event props: ". print_r(array_filter([
+             'os' => $properties['os'],
+             'platform' => $properties['platform'],
+             'brand' => $properties['brand'],
+             ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
+         }
+
+         // destination rudder_stack
+         self::$rudder_stackDestination->log_event($properties['user_id_'], 'Referral Page Viewed', [
+         'os' => $properties['os'],
+         'platform' => $properties['platform'],
+         'brand' => $properties['brand'],
+         ]);
+     }
+
 }
 if (!function_exists('json_encode')) {
     throw new \Exception('Avo needs the JSON PHP extension.');
 }
 // AVOMODULEMAP:"Avo"
-// AVOEVENTMAP:["onboarding_started","account_created","onboarding_about_step_completed","onboarding_instrument_step_completed","onboarding_gear_step_completed","onboarding_experience_step_completed","onboarding_genres_step_completed","onboarding_topics_step_completed","onboarding_skipped","order_placed","order_refunded","onboarding_goals_step_completed"]
+// AVOEVENTMAP:["onboarding_started","account_created","referral_invite_sent","referral_link_copied","onboarding_about_step_completed","onboarding_instrument_step_completed","onboarding_gear_step_completed","onboarding_experience_step_completed","onboarding_genres_step_completed","onboarding_topics_step_completed","onboarding_skipped","order_placed","order_refunded","onboarding_goals_step_completed","referral_page_viewed"]

@@ -315,7 +315,7 @@ export default {
 
         getUserAccessPermissions() {
             userPermissionsApi.getUserAccessPermissions(this.userId, {
-                limit: 100,
+                limit: 500,
             })
                 .then((response) => {
                     if (response) {

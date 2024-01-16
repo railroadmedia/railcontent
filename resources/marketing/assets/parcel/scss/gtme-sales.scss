@@ -47,7 +47,7 @@ body {
 
 .join.made-easy {
   display: inline-block;
-  font: 700 24px/1em $robotocondensed;
+  font: 700 24px/1em $bebas;
   text-transform: uppercase;
   background: #00BC75;
   border-radius: 100px;
@@ -192,7 +192,7 @@ body {
     }
 
     &.price-info {
-      font-family: $robotocondensed;
+      font-family: $bebas;
       text-transform: uppercase;
       margin: 7px auto 0;
       font-size: 12px;
@@ -394,7 +394,7 @@ body {
 
   .title-text {
     h1 {
-      font: 700 30px/1em $robotocondensed;
+      font: 700 30px/1em $bebas;
       margin: 0 auto;
       text-transform: uppercase;
       color: $altGuitareoGreen;
@@ -456,7 +456,7 @@ body {
       }
 
       h1 {
-        font: 700 24px/1em $robotocondensed;
+        font: 700 24px/1em $bebas;
         color: #fff;
         text-transform: uppercase;
         position: absolute;
@@ -500,7 +500,7 @@ body {
 
   .title-text {
     h1 {
-      font: 700 30px/1em $robotocondensed;
+      font: 700 30px/1em $bebas;
       margin: 0 auto;
       text-transform: uppercase;
       color: $altGuitareoGreen;
@@ -572,7 +572,7 @@ body {
       h2 {
         margin: 0 auto 3px;
         text-transform: uppercase;
-        font: 700 17px/1em $robotocondensed;
+        font: 700 17px/1em $bebas;
         @include tablet {
           font-size: 16px;
         }
@@ -812,7 +812,7 @@ body {
   h1 {
     position: relative;
     z-index: 2;
-    font: 700 30px/1em $robotocondensed;
+    font: 700 30px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto;
     @include tablet {
@@ -957,7 +957,7 @@ body.is-reveal-open {
   h1 {
     text-transform: uppercase;
     text-shadow: 0 0 25px #000;
-    font: 400 25px/1em $robotocondensed;
+    font: 400 25px/1em $bebas;
     z-index: 1;
     margin: 0;
     @include tablet {
@@ -1089,7 +1089,7 @@ body.is-reveal-open {
       }
 
       h1 {
-        font: 700 26px/1em $robotocondensed;
+        font: 700 26px/1em $bebas;
         margin: 0 auto;
         @include tablet {
           font-size: 36px;
@@ -1217,7 +1217,7 @@ body.is-reveal-open {
   }
 
   h1 {
-    font: 700 30px/1em $robotocondensed;
+    font: 700 30px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto 7px;
     @include tablet {
@@ -1253,7 +1253,7 @@ body.is-reveal-open {
           border: 1px solid #DFE6E3;
           border-width: 0 1px;
           padding: 7px;
-          font: 600 11px/1.2em $robotocondensed;
+          font: 600 11px/1.2em $bebas;
           text-transform: uppercase;
           @include tablet {
             font-size: 15px;
@@ -1399,7 +1399,7 @@ body.is-reveal-open {
   }
 
   h1 {
-    font: 700 23px/1em $robotocondensed;
+    font: 700 23px/1em $bebas;
     margin: 20px auto 10px;
     text-transform: uppercase;
     @include tablet {
@@ -1475,7 +1475,7 @@ body.is-reveal-open {
 
 
     p {
-      font: 400 14px/1.2em $robotocondensed;
+      font: 400 14px/1.2em $bebas;
       margin: 15px auto 0;
       text-transform: uppercase;
       color: #fff;
@@ -1677,7 +1677,7 @@ body.is-reveal-open {
   }
 
   h1.upper {
-    font: 700 22px/1em $robotocondensed;
+    font: 700 22px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto 20px;
     @include tablet {
@@ -1866,7 +1866,7 @@ body.is-reveal-open {
       }
 
       button {
-        font: 700 18px/1em $robotocondensed;
+        font: 700 18px/1em $bebas;
         margin: 0 auto;
         background: #00BC75;
         color: #FFF;

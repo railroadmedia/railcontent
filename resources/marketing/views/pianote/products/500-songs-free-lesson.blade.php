@@ -25,7 +25,7 @@
 
         .join {
             display:inline-block;
-            font:700 20px / 1em "Roboto Condensed", sans-serif;
+            font:700 20px / 1em "Bebas Neue", sans-serif;
             text-transform:uppercase;
             background:#F61A30;
             border-radius:50px;

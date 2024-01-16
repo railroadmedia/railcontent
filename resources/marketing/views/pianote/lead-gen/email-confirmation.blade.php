@@ -34,7 +34,7 @@
         }
 
         h2 {
-            font:700 30px/1em "Roboto Condensed", sans-serif;
+            font:700 30px/1em "Bebas Neue", sans-serif;
             text-transform:uppercase;
             color:#F61A30;
         }
@@ -100,7 +100,7 @@
         }
         .join {
             display: inline-block;
-            font: 700 20px/1em "Roboto Condensed",sans-serif;
+            font: 700 20px/1em "Bebas Neue",sans-serif;
             text-transform: uppercase;
             background: #F61A30;
             border-radius: 50px;

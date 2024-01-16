@@ -27,6 +27,7 @@ class MusoraApiServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadRoutesFrom(__DIR__ . '/../routes/onboarding.php');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/referral.php');
         $router = $this->app['router'];
         $router->aliasMiddleware('api_version', ApiVersionMiddleware::class);
     }
