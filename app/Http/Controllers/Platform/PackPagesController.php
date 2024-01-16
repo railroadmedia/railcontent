@@ -74,6 +74,8 @@ class PackPagesController extends Controller
     public function index(Request $request, $domain, $brand)
     {
         PackDecorator::$skip = true;
+        ContentRepository::$countFilterOptionItems = true;
+
         $packs = $this->packService->getPacks();
         $activePack = $this->cohortService->getActiveCohort()['content_id'] ?? 0;
 
@@ -93,8 +95,11 @@ class PackPagesController extends Controller
             }
         }
 
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['pack'] ?? [];
+
         return view('content.packs.packs-index', [
             "packs" => $packs,
+            "catalogueMeta" => $catalogueMeta,
         ]);
     }
 

@@ -472,8 +472,8 @@ return [
                 'name' => 'Coaches',
                 'icon' => 'icon-coach',
                 'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
-                'allowableFilters' => ['progress'],
-                'allowableFiltersMobile' => ['focus', 'style'],
+                'allowableFilters' =>  ['difficulty', 'style', 'essentials', 'theory', 'lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'style', 'essentials', 'theory', 'lifestyle'],
                 'sortBy' => '-published_on',
             ],
             'courses' => [
@@ -1057,6 +1057,10 @@ return [
                     ],
                 ],
             ],
+            'pack' => [
+                'allowableFilters' => ['difficulty', 'style', 'essentials','theory', 'lifestyle'],
+                'allowableFiltersMobile' =>  ['difficulty', 'style', 'essentials','theory', 'lifestyle'],
+            ]
         ],
         'pianote' => [
             'all' => [
