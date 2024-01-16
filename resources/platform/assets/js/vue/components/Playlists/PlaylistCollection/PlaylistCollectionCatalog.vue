@@ -4,11 +4,13 @@
         <!-- No Playlists -->
         <section
             v-if="playlistsStore.playlists.length === 0 && !playlistsStore.loadingPlaylists && !state.searchTerm && !state.categories"
-            class="tw-w-full tw-flex dark:tw-text-white tw-items-center tw-justify-center"
-            :class="miniCatalog ? 'tw-mt-1 tw-px-4 lg:tw-px-0' : 'tw-mt-[58px] tw-flex-col'"
+            class="tw-w-full tw-flex dark:tw-text-white tw-justify-center tw-flex-col"
+            :class="miniCatalog ? 'tw-mt-1 tw-px-4 lg:tw-px-0 tw-items-start' : 'tw-mt-[58px] tw-items-center'"
         >
             <musora-icon v-if="!miniCatalog" icon-name="playlist" width="57" height="57" class="tw-mb-2" />
-            <h1 class="tw-text-[30px] tw-leading-[48px] tw-font-bold tw-text-center tw-mb-2">
+            <h1 class=" tw-font-bold tw-text-center tw-mb-2"
+                :class="miniCatalog ? 'tw-text-xl tw-mb-4' : 'tw-text-[30px] tw-leading-[48px]'"
+            >
                 No Playlists here yet
             </h1>
             <p v-if="!miniCatalog" class="tw-text-center tw-mb-4">
