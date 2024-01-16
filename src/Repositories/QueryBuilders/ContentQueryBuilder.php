@@ -783,7 +783,7 @@ class ContentQueryBuilder extends QueryBuilder
                                  DB::raw(
                                      "( 
            JSON_ARRAYAGG(
-            id
+            ".ConfigService::$tableContent.".id
         ) ) as lessons_grouped_by_field"
                                  ),
                              ])
