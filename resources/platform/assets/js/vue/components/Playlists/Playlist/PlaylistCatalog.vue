@@ -21,7 +21,8 @@
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14 tw-pt-[28px]">
                 <div class="tw-flex tw-flex-col">
                     <!-- Empty State -->
-                    <section v-if="playlistsStore.lessons.length === 0" class="tw-w-full tw-flex tw-flex-col dark:tw-text-white tw-items-center tw-mt-[58px]">
+                    <section v-if="playlistsStore.lessons.length === 0" 
+                            class="tw-w-full tw-flex tw-flex-col dark:tw-text-white tw-items-center tw-mt-[58px]">
                         <div class="tw-h-[84px] tw-w-[84px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#3F3F46] dark:tw-bg-[#445F74] tw-mb-6">
                             <musora-icon icon-name="playlist" width="45" height="45" />
                         </div>
@@ -33,7 +34,7 @@
                     <div v-if="playlistsStore.lessons.length" class="tw-w-full">
 
                         <!-- List View Header -->
-                        <header class="tw-hidden xl:tw-flex tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] tw-text-[#0D0D0D] dark:tw-bg-[#002039]  dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-px-3 tw-py-2">
+                        <header class="tw-hidden xl:tw-flex tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] tw-text-[#0D0D0D] dark:tw-bg-[#002039]  dark:tw-text-white tw-rounded-t-md tw-px-3 tw-py-2">
                             <div class="tw-w-[40px] tw-flex-shrink-0">#</div>
                             <p class="tw-relative tw-inline-block tw-mr-auto tw-w-full">Name</p>
                             <p class="tw-inline-flex tw-shrink-0 tw-justify-start tw-w-[140px]">Skill</p>

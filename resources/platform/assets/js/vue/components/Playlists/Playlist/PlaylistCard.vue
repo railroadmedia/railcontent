@@ -207,7 +207,7 @@ onBeforeMount(() => {
 </script>
 <template>
     <div :id="cardId"
-        class="tw-group tw-h-[90px] tw-min-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-px-3">
+        class="tw-mb-0.5 tw-group tw-h-[100px] tw-min-h-[100px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] tw-bg-white dark:tw-bg-[#081825] tw-px-3">
         <div class="tw-flex tw-items-center tw-h-full tw-w-full"
              :class="{ 'tw-relative' : playlistsStore.sortingPlaylist }"
         >
@@ -227,15 +227,14 @@ onBeforeMount(() => {
                 </div>
                 <!-- Playlist thumbnail -->
                 <div
-                    class="tw-relative tw-inline-flex tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-video tw-w-[110px] tw-rounded tw-shrink-0 ">
+                    class="tw-relative tw-inline-flex tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-video tw-w-[125px] tw-rounded tw-shrink-0 ">
                     <!-- Image Conatiner -->
                     <div class="tw-relative tw-w-full tw-h-full" v-if="lessonThumbnail">
                         <img :src="`https://musora.com/cdn-cgi/image/width=330/${lessonThumbnail}`" alt="playlist thumbnail"
                             class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full tw-blur-sm"
                             :class="{ '': needAccess }" loading="lazy" onload="this.classList.remove('tw-opacity-0')" />
                         <!-- Image Mask -->
-                        <div
-                            class="tw-z-10 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
+                        <div class="tw-z-10 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
                             <img class="tw-h-full tw-object-contain" :class="{ '': needAccess }"
                                 :src="`https://musora.com/cdn-cgi/image/width=330/${lessonThumbnail}`" alt="playlist thumbnail">
                         </div>
