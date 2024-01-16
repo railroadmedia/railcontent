@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Listeners;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Services\ShopifyCustomerService;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
@@ -17,25 +18,26 @@ class EcommerceEventListener
     public function __construct(
         private readonly ShopifySyncService $shopifySyncService,
         private readonly ShopifyCustomerService $shopifyCustomerService,
-        private readonly RechargeGateway $rechargeGateway
+        private readonly RechargeGateway $rechargeGateway,
+        private readonly UserAccessPermissionsService $userAccessPermissionsService
     ) {
     }
 
-    public function handleUserCreated(UserCreated $userCreated)
+    public function handleUserCreated(UserCreated $userCreated): void
     {
         try {
             $user = $userCreated->getUser();
             $this->shopifySyncService->syncUser($user);
             $this->shopifySyncService->syncCustomer($user->shopify_id);
         } catch (\Throwable $e) {
-            Log::error($e->getMessage());
+            Log::error($e);
         }
     }
 
     /**
      * Handle necessary updates to external ecommerce systems when the user has been updated.
      *
-     * @param  UserUpdated|UsoraUserUpdated  $userUpdated
+     * @param UserUpdated|UsoraUserUpdated $userUpdated
      */
     public function handleUserUpdated(UserUpdated|UsoraUserUpdated $userUpdated): void
     {
@@ -63,10 +65,12 @@ class EcommerceEventListener
                     Log::error("Failed to update Recharge email address from $oldEmail to $newEmail");
                 }
             } catch (\Exception $e) {
-                Log::error($e->getMessage());
+                Log::error($e);
             }
 
             $this->shopifyCustomerService->updateOrCreateShopifyCustomer($newUser);
         }
+
+        $this->userAccessPermissionsService->syncUser($newUser);
     }
 }

@@ -1,4 +1,5 @@
 @php
+    $hasQAVideo = !empty($lessonContent['qna_video_playback_endpoints']);
     $hasRelatedLessons = false;
     if(count(json_decode($relatedLessons)->data) > 1 && $lessonContent['id'] !== json_decode($relatedLessons)->data[0]->id){
         $hasRelatedLessons = true;
@@ -13,6 +14,9 @@
 
 @section('inject-components')
     <script src="{{ mix('platform/js/lesson-page.js') }}"></script>
+    @if($hasQAVideo)
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js"></script>
+    @endif
 @endsection
 
 @section('content')
@@ -140,7 +144,8 @@
                     'themeColor' => $brand,
                     'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
                     'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
-                    'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
+                    'hasQAVideo' => $hasQAVideo,
+                    'QAVideo' => $hasQAVideo ? $lessonContent['qna_video_playback_endpoints'] : '',
                     'isCompleted' => $lessonContent->fetch('completed'),
                     'contentId' => $lessonContent->fetch('id'),
                     'xpAmount' => $lessonContent->fetch('fields.xp'),

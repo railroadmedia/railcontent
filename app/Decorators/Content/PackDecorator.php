@@ -59,18 +59,20 @@ class PackDecorator extends TypeDecoratorBase
 
 
             $contentsOfType[$contentIndex]['bundle_count'] = $childCounts[$content['id']] ?? 0;
-
+            $allLessons = 0;
             foreach ($packBundlesHierarchies as $packBundlesHierarchy) {
                 if ($packBundlesHierarchy['parent_id'] == $content['id']) {
                     $contentsOfType[$contentIndex]['xp'] += config('xp_ranks.pack_bundle_content_completed');
 
                     foreach ($packBundleLessonsHierarchies as $packBundleLessonsHierarchy) {
                         if ($packBundleLessonsHierarchy['parent_id'] == $packBundlesHierarchy['child_id']) {
+                            $allLessons++;
                             $contentsOfType[$contentIndex]['xp'] += config('xp_ranks.difficulty_xp_map.all');
                         }
                     }
                 }
             }
+            $contentsOfType[$contentIndex]['lesson_count'] = $allLessons;
         }
 
         return $this->mergeDecorated($contents, $contentsOfType);

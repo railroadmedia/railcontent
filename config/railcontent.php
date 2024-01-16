@@ -114,6 +114,8 @@ return [
         'student-review',
         'song-tutorial',
         'song-tutorial-children',
+        'workout',
+        'challenge'
     ],
     'validation' => [
         'drumeo' => [
@@ -775,6 +777,37 @@ return [
             'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
             'allowableFilters' => ['difficulty','style','topic'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+            'tabs' => [
+                [
+                    'name' => 'All',
+                    'short_name' => 'ALL',
+                    'value' => [''],
+                ],
+                [
+                    'name' => '5 Minutes',
+                    'short_name' => '5 MINS',
+                    'is_required_field' => true,
+                    'value' => ['length_in_seconds,450,integer,<,video']
+                ],
+                [
+                    'name' => '10 Minutes',
+                    'short_name' => '10 MINS',
+                    'is_required_field' => true,
+                    'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                ],
+                [
+                    'name' => '15+ Minutes',
+                    'short_name' => '15+ MINS',
+                    'is_required_field' => true,
+                    'value' => ['length_in_seconds,750,integer,>,video']
+                ],
+                [
+                    'name' => 'Instructors',
+                    'short_name' => 'INSTRUCTORS',
+                    'is_group_by' => true,
+                    'value' => ['instructor']
+                ],
+            ],
         ],
         ],
         'pianote' => [
@@ -934,6 +967,31 @@ return [
             'workout' => [
                 'allowableFilters' => ['difficulty','style','topic'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'tabs' => [
+                    [
+                        'name' => 'All',
+                        'short_name' => 'ALL',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => '5 Minutes',
+                        'short_name' => '5 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,450,integer,<,video']
+                    ],
+                    [
+                        'name' => '10 Minutes',
+                        'short_name' => '10 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor']
+                    ],
+                ],
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
             ],
             'challenge-part' => [
@@ -1047,6 +1105,37 @@ return [
             'workout' => [
                 'allowableFilters' => ['difficulty','style','topic'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'tabs' => [
+                    [
+                        'name' => 'All',
+                        'short_name' => 'ALL',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => '5 Minutes',
+                        'short_name' => '5 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,450,integer,<,video']
+                    ],
+                    [
+                        'name' => '10 Minutes',
+                        'short_name' => '10 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                    ],
+                    [
+                        'name' => '15+ Minutes',
+                        'short_name' => '15+ MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,750,integer,>,video']
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor']
+                    ],
+                ],
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
             ],
             'challenge-part' => [
@@ -1145,6 +1234,31 @@ return [
             'workout' => [
                 'allowableFilters' => ['difficulty','style','topic'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'tabs' => [
+                    [
+                        'name' => 'All',
+                        'short_name' => 'ALL',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => '5 Minutes',
+                        'short_name' => '5 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,450,integer,<,video']
+                    ],
+                    [
+                        'name' => '10 Minutes',
+                        'short_name' => '10 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor']
+                    ],
+                ],
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
             ],
             'challenge-part' => [

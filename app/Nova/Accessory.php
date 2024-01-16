@@ -32,7 +32,7 @@ class Accessory extends Resource
 {
     public static $model = \App\Models\Product::class;
 
-    public static $search = ['name'];
+    public static $search = ['name', 'slug'];
 
     public static function indexQuery(NovaRequest $request, $query)
     {

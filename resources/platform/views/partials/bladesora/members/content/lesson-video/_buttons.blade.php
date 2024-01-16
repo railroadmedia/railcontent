@@ -15,13 +15,21 @@
         @endif
     </div>
 
-    <div class="flex flex-column">
+    <div
+        class="flex flex-column"
+        @if($hasQAVideo)
+            x-data="{ QAVideo: false }"
+        @endif
+    >
         <div class="flex flex-row">
             @if($hasQAVideo)
                 <div class="flex flex-column ph-1">
                     <button id="playQAVideo"
                             data-tooltip="Play QnA Video"
-                            class="btn">
+                            data-open-modal="QAVideoModal"
+                            class="btn"
+                            x-on:click="QAVideo = true"
+                    >
                         <span class="qa bg-{{ $brand }} inverted text-{{ $brand }}">
                             <i class="fas fa-question-circle"></i>
                             <span class="hide-xs-only ml-1">Watch Q&A</span>
@@ -32,6 +40,12 @@
                         </span>
                     </button>
                 </div>
+
+
+                @include('partials.modals._video-modal',[
+                   'name' => "QAVideo",
+                   "video" => $QAVideo[0]['file'],
+               ])
             @endif
         </div>
     </div>

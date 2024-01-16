@@ -1,3 +1,8 @@
+@php
+    require_once(resource_path('marketing/views/musora/_partials/homepage-data.php'));
+    $workoutImages = $musora['workoutImages'];
+@endphp
+
 @if(!empty($vid))
     <div class="h-96 sm:h-[720px] cursor-pointer autoplay-video w-full relative z-20 bg-black" x-on:click="trailer = true;">
         <div class="absolute top-0 left-0 right-0 text-white z-20 text-center px-4 pt-7 sm:pt-10">
@@ -21,32 +26,39 @@
     <div class=" overflow-hidden mx-auto text-center relative">
         <div class="inline-block mx-auto left-1/2 relative xl:w-full" style="    transform: translate(-50%, 0);">
             <div class="flex flex-wrap justify-center mx-auto w-[965px] sm:w-[1485px] xl:w-[1665px]">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-01.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-01.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-02.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-03.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-01.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-04.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-05.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-06.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-07.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-02.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-08.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-02.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-09.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-10.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-11.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-03.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-12.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-13.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-03.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-14.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-15.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-16.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-04.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-17.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-04.jpg">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-18.jpg">
+                {{-- <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-01.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-01.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-02.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-03.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-01.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-04.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-05.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-06.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-07.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-02.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-08.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-02.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-09.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-10.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-11.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-03.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-12.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-13.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-03.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-14.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-15.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-16.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-04.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-17.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-04.webp" loading="lazy">
+                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-18.webp" loading="lazy"> --}}
+
+                @foreach($workoutImages as $image)
+                    <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity"
+                        src="{{ $image['src'] }}" 
+                        style="{{ $image['animation'] }}"
+                        loading="lazy">
+                @endforeach
             </div>
         </div>
     </div>
@@ -55,7 +67,7 @@
     <div class="container max-w-5xl mx-auto">
         <div class="flex flex-wrap sm:flex-nowrap justify-center text-left">
             <div class="w-full sm:w-1/2">
-                <div class="rounded-xl px-7 sm:px-10 py-7 sm:py-14 mb-5 sm:mb-7 clearfix" style="background-color:#f6f8fc;">
+                <div class="rounded-xl px-7 lg:px-10 py-7 lg:py-14 mb-5 lg:mb-7 clearfix" style="background-color:#f6f8fc;">
                     <h5 class="leading-tight mb-3"><strong>Your daily energy boost.</strong></h5>
                     <h6 class="leading-normal">
                         You shouldn't lose momentum between lessons. We’ll help you play every
@@ -63,7 +75,7 @@
                         day with fun guided practice sessions.
                     </h6>
                 </div>
-                <div class="rounded-xl px-7 sm:px-10 py-7 sm:py-14 clearfix" style="background-color:#f6f8fc;">
+                <div class="rounded-xl px-7 lg:px-10 py-7 lg:py-14 clearfix" style="background-color:#f6f8fc;">
                     <h5 class="leading-tight mb-3"><strong>Build better habits. </strong></h5>
                     <h6 class="leading-normal">
                         The best way to build habits is to start with small habits. Our
@@ -73,7 +85,7 @@
                 </div>
             </div>
             <div class="mt-5 sm:mt-0 sm:pl-7 sm:w-1/2 flex-grow-0">
-                <div class="h-full rounded-xl p-7 sm:p-10 pb-52 sm:pb-48 bg-black @if($theme != 'musora') text-white @else text-black @endif flex bg-cover bg-top" style="background-image:url('{{ $workoutsBG }}');">
+                <div class="h-full rounded-xl p-7 lg:p-10 pb-64 sm:pb-48 bg-black @if($theme != 'musora') text-white @else text-black @endif flex bg-cover bg-top" style="background-image:url('{{ $workoutsBG }}');">
                     <div>
                         <h5 class="leading-tight mb-3"><strong>
                                 @if($theme == 'drumeo' || $theme == 'pianote')
