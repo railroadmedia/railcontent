@@ -173,7 +173,7 @@ h1, h2, h3, h4, h5, h6, p {
       }
 
       .drumeo-free {
-        font: 400 17px/1em $robotocondensed;
+        font: 400 17px/1em $bebas;
         margin: 0 auto;
         text-transform: uppercase;
         letter-spacing: 3px;
@@ -231,7 +231,7 @@ h1, h2, h3, h4, h5, h6, p {
           }
 
           &.price-info {
-            font-family: $robotocondensed;
+            font-family: $bebas;
             text-transform: uppercase;
             margin: 7px auto 0;
             font-size: 12px;
@@ -255,7 +255,7 @@ h1, h2, h3, h4, h5, h6, p {
 
         h2 {
           text-shadow: 0 0 15px #000;
-          font: 400 27px/1em $robotocondensed;
+          font: 400 27px/1em $bebas;
           margin: 0 auto;
           text-transform: uppercase;
           letter-spacing: 0.04em;
@@ -452,7 +452,7 @@ h1, h2, h3, h4, h5, h6, p {
   }
 
   h1 {
-    font: 700 26px/1em $robotocondensed;
+    font: 700 26px/1em $bebas;
     margin: 0 auto 10px;
     color: $guitareoGreen;
     text-transform: uppercase;
@@ -524,7 +524,7 @@ h1, h2, h3, h4, h5, h6, p {
       }
 
       strong {
-        font: 700 17px/1em $robotocondensed;
+        font: 700 17px/1em $bebas;
         margin: 0 auto 5px;
         color: $guitareoGreen;
         text-transform: uppercase;
@@ -628,7 +628,7 @@ h1, h2, h3, h4, h5, h6, p {
 
   h2 {
     text-shadow: 0 0 15px #000;
-    font: 500 17px/1em $robotocondensed;
+    font: 500 17px/1em $bebas;
     text-transform: uppercase;
     color: $guitareoGreen;
     margin: 0 auto;
@@ -641,7 +641,7 @@ h1, h2, h3, h4, h5, h6, p {
   }
 
   h1 {
-    font: 600 32px/1em $robotocondensed;
+    font: 600 32px/1em $bebas;
     text-transform: uppercase;
     white-space: nowrap;
     text-shadow: 0 0 15px #000;
@@ -706,7 +706,7 @@ h1, h2, h3, h4, h5, h6, p {
   }
 
   h1 {
-    font: 700 23px/1em $robotocondensed;
+    font: 700 23px/1em $bebas;
     margin: 20px auto 10px;
     text-transform: uppercase;
     @include tablet {
@@ -777,7 +777,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 
     p {
-      font: 400 14px/1.2em $robotocondensed;
+      font: 400 14px/1.2em $bebas;
       margin: 20px auto 0;
       text-transform: uppercase;
       color: #fff;
@@ -820,7 +820,7 @@ h1, h2, h3, h4, h5, h6, p {
   }
 
   p.breakdown {
-    font: 400 13px/1.4em $robotocondensed;
+    font: 400 13px/1.4em $bebas;
     margin: 20px auto 0;
     @include tablet {
       margin: 30px auto 0;

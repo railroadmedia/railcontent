@@ -97,7 +97,7 @@
             text-align: center;
             z-index: 2;
             box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            font: 700 12px/1em "Roboto Condensed", sans-serif;
+            font: 700 12px/1em "Bebas Neue", sans-serif;
         }
         .subnav.stick-to-top {
             position: fixed;

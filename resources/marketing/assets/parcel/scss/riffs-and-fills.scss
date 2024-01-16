@@ -216,7 +216,7 @@ button {
         }
 
         &.breakdown {
-            font: 400 13px/1.5em $robotocondensed;
+            font: 400 13px/1.5em $bebas;
             margin: 0 auto;
             @include tablet {
                 font-size: 16px;
@@ -479,7 +479,7 @@ button {
 
     h1 {
         text-transform: uppercase;
-        font: 700 47px/1.1em $robotocondensed;
+        font: 700 47px/1.1em $bebas;
         margin: 0 auto;
         @include tablet {
             font-size: 70px;
@@ -630,7 +630,7 @@ button {
 
 
         p {
-            font: 400 14px/1.2em $robotocondensed;
+            font: 400 14px/1.2em $bebas;
             margin: 25px auto 0;
             text-transform: uppercase;
             color: #fff;
@@ -666,7 +666,7 @@ button {
     }
 
     p.breakdown {
-        font: 400 13px/1.4em $robotocondensed;
+        font: 400 13px/1.4em $bebas;
         margin: 25px auto 0;
         @include tablet {
             margin: 35px auto 0;
@@ -930,7 +930,7 @@ button {
     background: $pianoteRed;
     color: #fff;
     border: 2px solid $pianoteRed;
-    font: 700 15px/1em $robotocondensed;
+    font: 700 15px/1em $bebas;
     transition-property: background-color, border-color, color, fill, stroke;
     transition-duration: 300ms;
     text-transform: uppercase;

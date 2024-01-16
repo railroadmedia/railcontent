@@ -445,6 +445,7 @@ class UserAccessPermissionsService
         $user = User::find($userId);
         $items = collect(
             $this->getUserAccessPermissionsQuery($userId)
+                ->orderBy('updated_at', 'desc')
                 ->with('permission')
                 ->paginate(
                     $limit,

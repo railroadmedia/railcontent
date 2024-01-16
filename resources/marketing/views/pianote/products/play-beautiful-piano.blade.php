@@ -247,32 +247,32 @@
         <div class="flex flex-wrap mx-auto bg-white" style="max-width:2000px;">
             <div data-open="lesson1" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/thumb-video-1.jpg">
                 <p class="py-0.5 md:py-2 px-2 md:px-3 leading-none inline-block mx-auto mb-2 md:mb-4 md:tracking-widest relative z-20" style="background-color:#d04b4c;">LESSON 1</p>
-                <h3 class="font-roboto uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>You didn’t know you<br> could sound this good</strong></h3>
+                <h3 class="font-bebas uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>You didn’t know you<br> could sound this good</strong></h3>
                 <div class="overlay absolute top-0 left-0 z-10 h-full w-full transition-opacity duration-300 hover:opacity-0" style="background: linear-gradient(to bottom, transparent 33%, rgba(0,10,30,0.7) 100%);"></div>
             </div>
             <div data-open="lesson2" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/thumb-video-2.jpg">
                 <p class="py-0.5 md:py-2 px-2 md:px-3 leading-none inline-block mx-auto mb-2 md:mb-4 md:tracking-widest relative z-20" style="background-color:#22aa55;">LESSON 2</p>
-                <h3 class="font-roboto uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>Why you sounded<br>  amazing just then</strong></h3>
+                <h3 class="font-bebas uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>Why you sounded<br>  amazing just then</strong></h3>
                 <div class="overlay absolute top-0 left-0 z-10 h-full w-full transition-opacity duration-300 hover:opacity-0" style="background: linear-gradient(to bottom, transparent 33%, rgba(0,10,30,0.7) 100%);"></div>
             </div>
             <div data-open="lesson3" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/thumb-video-3.jpg">
                 <p class="py-0.5 md:py-2 px-2 md:px-3 leading-none inline-block mx-auto mb-2 md:mb-4 md:tracking-widest relative z-20" style="background-color:#148cc9;">LESSON 3</p>
-                <h3 class="font-roboto uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>Make your own<br>  beautiful music</strong></h3>
+                <h3 class="font-bebas uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>Make your own<br>  beautiful music</strong></h3>
                 <div class="overlay absolute top-0 left-0 z-10 h-full w-full transition-opacity duration-300 hover:opacity-0" style="background: linear-gradient(to bottom, transparent 33%, rgba(0,10,30,0.7) 100%);"></div>
             </div>
             <div data-open="lesson4" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/thumb-video-4.jpg">
                 <p class="py-0.5 md:py-2 px-2 md:px-3 leading-none inline-block mx-auto mb-2 md:mb-4 md:tracking-widest relative z-20" style="background-color:#ed8749;">LESSON 4</p>
-                <h3 class="font-roboto uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>The secret sauce to<br>  spice up your playing</strong></h3>
+                <h3 class="font-bebas uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>The secret sauce to<br>  spice up your playing</strong></h3>
                 <div class="overlay absolute top-0 left-0 z-10 h-full w-full transition-opacity duration-300 hover:opacity-0" style="background: linear-gradient(to bottom, transparent 33%, rgba(0,10,30,0.7) 100%);"></div>
             </div>
             <div data-open="lesson5" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/thumb-video-5.jpg">
                 <p class="py-0.5 md:py-2 px-2 md:px-3 leading-none inline-block mx-auto mb-2 md:mb-4 md:tracking-widest relative z-20" style="background-color:#c942e4;">LESSON 5</p>
-                <h3 class="font-roboto uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>You don’t have to <br> hit the keys</strong></h3>
+                <h3 class="font-bebas uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>You don’t have to <br> hit the keys</strong></h3>
                 <div class="overlay absolute top-0 left-0 z-10 h-full w-full transition-opacity duration-300 hover:opacity-0" style="background: linear-gradient(to bottom, transparent 33%, rgba(0,10,30,0.7) 100%);"></div>
             </div>
             <div data-open="lesson6" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/thumb-video-6.jpg">
                 <p class="py-0.5 md:py-2 px-2 md:px-3 leading-none inline-block mx-auto mb-2 md:mb-4 md:tracking-widest relative z-20" style="background-color:#6700ff;">LESSON 6</p>
-                <h3 class="font-roboto uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>C ya later. Exploring<br>  other key signatures</strong></h3>
+                <h3 class="font-bebas uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>C ya later. Exploring<br>  other key signatures</strong></h3>
                 <div class="overlay absolute top-0 left-0 z-10 h-full w-full transition-opacity duration-300 hover:opacity-0" style="background: linear-gradient(to bottom, transparent 33%, rgba(0,10,30,0.7) 100%);"></div>
             </div>
         </div>

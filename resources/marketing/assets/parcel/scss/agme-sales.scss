@@ -475,7 +475,7 @@ footer .row {
 
     h3 {
       text-transform: uppercase;
-      font: 400 18px/1em "Roboto Condensed", sans-serif;
+      font: 400 18px/1em $bebas;
       margin: 15px auto 30px;
       @include tablet {
         font-size: 22px;
@@ -501,7 +501,7 @@ footer .row {
   }
 
   h1 {
-    font: 700 28px/1em $robotocondensed;
+    font: 700 28px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto 5px;
     @include tablet {
@@ -667,7 +667,7 @@ footer .row {
       h2 {
         margin: 0 auto 3px;
         text-transform: uppercase;
-        font: 700 17px/1em $robotocondensed;
+        font: 700 17px/1em $bebas;
         @include tablet {
           font-size: 16px;
         }
@@ -907,7 +907,7 @@ footer .row {
   h1 {
     position: relative;
     z-index: 2;
-    font: 700 30px/1em $robotocondensed;
+    font: 700 30px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto;
     @include tablet {
@@ -1050,7 +1050,7 @@ body.is-reveal-open {
   h1 {
     text-transform: uppercase;
     text-shadow: 0 0 25px #000;
-    font: 400 25px/1em $robotocondensed;
+    font: 400 25px/1em $bebas;
     z-index: 1;
     margin: 0;
     @include tablet {
@@ -1176,7 +1176,7 @@ body.is-reveal-open {
       }
 
       h1 {
-        font: 700 26px/1em $robotocondensed;
+        font: 700 26px/1em $bebas;
         margin: 0 auto;
         @include tablet {
           font-size: 36px;
@@ -1339,7 +1339,7 @@ body.is-reveal-open {
           border: 1px solid #DFE6E3;
           border-width: 0 1px;
           padding: 7px;
-          font: 600 12px/1.2em $robotocondensed;
+          font: 600 12px/1.2em $bebas;
           text-transform: uppercase;
           @include tablet {
             width: 25%;
@@ -1485,7 +1485,7 @@ body.is-reveal-open {
   }
 
   h1 {
-    font: 700 23px/1em $robotocondensed;
+    font: 700 23px/1em $bebas;
     margin: 20px auto 10px;
     text-transform: uppercase;
     @include tablet {
@@ -1565,7 +1565,7 @@ body.is-reveal-open {
 
 
     p {
-      font: 400 14px/1.2em $robotocondensed;
+      font: 400 14px/1.2em $bebas;
       margin: 15px auto 0;
       text-transform: uppercase;
       color: #fff;
@@ -1742,7 +1742,7 @@ body.is-reveal-open {
   }
 
   h1.upper {
-    font: 700 22px/1em $robotocondensed;
+    font: 700 22px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto 20px;
     @include tablet {
@@ -2007,7 +2007,7 @@ body.is-reveal-open {
       }
 
       button {
-        font-family: $robotocondensed;
+        font-family: $bebas;
         font-weight: 700;
         color: #FFF;
         background: $altGuitareoGreen;
@@ -2104,7 +2104,7 @@ body.is-reveal-open {
   }
 
   h2 {
-    font: 700 30px/1em $robotocondensed;
+    font: 700 30px/1em $bebas;
     margin: 15px auto;
     text-transform: uppercase;
     color: $guitareoGreen;
