@@ -22,8 +22,7 @@
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <style>
         .tool:after, .tool:before {
             position: absolute;
@@ -136,6 +135,8 @@
     x-data ='{
         soundslice : false,
         trailer : false,
+        lazyLoad: false,
+        videoLoaded: false,
     }'
 @endsection
 
@@ -339,16 +340,14 @@
 
     @include('musora.sales.components.workouts-section', [
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/898668674/rendition/540p/file.mp4?loc=external&signature=d5f33375d3a16dc91641be1539d7d621d07ad049b030baa8a7f32c23e63e3ab4',
-        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/workouts-card2.webp',
+        'workoutsBG' => 'marketing/drumeo/membership/homepage/2024/workouts-card2.webp',
     ])
 
     @php
         $songItems = $drumeo['songItems'];
     @endphp
 
-    @include('musora.sales.components.songs-section', [
-        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/device.webp',
-    ])
+    @include('musora.sales.components.songs-section')
 
     @php
         $testimonials = $drumeo['testimonials'];
@@ -365,7 +364,7 @@
     ])
     @if(empty($trialVersion))
         @include('musora.sales.components.guarantee-section', [
-            'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/guarantee.webp',
+            'badge' => 'marketing/drumeo/membership/homepage/2024/guarantee.webp',
             'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
             'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
         ])
@@ -395,26 +394,26 @@
         @php
             $bonuses = [
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/drumsticks.webp',
+                'image' => 'marketing/drumeo/membership/homepage/2024/drumsticks.webp',
                 'title' => 'Drumeo Drumsticks',
                 'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
                 'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
                 'shipping' => true,
                 ],
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/rdm.webp',
+                'image' => 'marketing/drumeo/membership/homepage/2024/rdm.webp',
                 'title' => 'Rock Drumming Masterclass',
                 'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
                 'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
                 ],
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/dtme.webp',
+                'image' => 'marketing/drumeo/membership/homepage/2024/dtme.webp',
                 'title' => 'Drum Technique Made Easy',
                 'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
                 'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
                 ],
                 [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/ime.webp',
+                'image' => 'marketing/drumeo/membership/homepage/2024/ime.webp',
                 'title' => 'Independence Made Easy',
                 'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
                 'price' => floatval($productPrices['independence-made-easy-pack']->price),
@@ -425,7 +424,7 @@
 
 
         @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
+        'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
         'header' => 'Online drum lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
         'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special',
@@ -507,7 +506,7 @@
      </section>
     @else
         @include('musora.sales.components.order-section-collage', [
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/logo-blue.webp',
+        'logo' => 'marketing/drumeo/membership/homepage/2024/logo-blue.webp',
         'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 6000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
@@ -547,7 +546,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>   
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     @yield('scripts')

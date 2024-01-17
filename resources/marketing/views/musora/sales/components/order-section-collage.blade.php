@@ -21,7 +21,7 @@
             </div>
             <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0">
                 @if(!empty($logo))
-                    <img class="h-7 mb-4 sm:mb-7" src="{{ $logo }}" alt="logo">
+                    <img class="h-7 mb-4 sm:mb-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/230x0/filters:quality(95)/{{ $logo }}" alt="logo">
                 @endif
                 <p class="uppercase text-musora mb-2"><strong class="font-black">YOUR FIRST @if(!empty($month)) 30 Days @else 7 Days @endif ARE FREE.</strong></p>
                 <h3 class="leading-normal"><strong>{!! $header !!}</strong></h3>
