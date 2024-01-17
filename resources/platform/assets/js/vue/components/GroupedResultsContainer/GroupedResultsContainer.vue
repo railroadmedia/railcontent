@@ -1,5 +1,5 @@
 <template>
-    <GroupedCard v-for="item in content" :item="item" />
+    <GroupedCard v-for="(item, index) in content" :item="item" :key="index" :content-type-override="contentTypeOverride" />
 </template>
 
 <script setup>
@@ -10,5 +10,9 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
+    contentTypeOverride: {
+        type: String,
+        default: () => '',
+    }
 })
 </script>
