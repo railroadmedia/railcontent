@@ -1,6 +1,6 @@
 <div id="songs" class="anchor"></div>
 <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#0c1524;">
-    <div class="container max-w-5xl mx-auto">
+    <div class="container max-w-4xl mx-auto">
         <h2><strong>Play your favorite songs.</strong></h2>
         <p class="leading-tight mt-2 sm:mt-3">You’ll have all the tools you need to make sure you never miss a beat.
             @if($theme != 'musora')
@@ -15,23 +15,35 @@
 
         </p>
 
-        <div class="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-between my-10 sm:my-14 timed-toggle">
-            <div class="sm:order-1 rounded-l-xl overflow-hidden py-7 pl-10" style="background-color:#1B2434;">
+        <div class="flex flex-wrap sm:flex-nowrap items-center justify-center my-10 sm:my-14 timed-toggle">
+            <div class="sm:order-1 rounded-l-xl overflow-hidden py-10 pl-10 max-w-xs sm:max-w-full" style="background-color:#1B2434;">
                 @foreach ($songItems as $key => $songItem)
                     @if(!empty($songItem['mediaVid']))
-                        <video class="h-64 sm:h-72 lg:h-96 hidden media-toggle rounded-l-xl overflow-hidden @if($key == 0) active @endif" src="{{ $songItem['media'] }}" muted autoplay loop playsinline></video>
+                    <video
+                    class="w-full hidden media-toggle rounded-l-xl overflow-hidden @if($key == 0) active @endif"
+                    src="{{ $songItem['media'] }}"
+                    muted
+                    autoplay
+                    loop
+                    playsinline
+                    preload="none"
+                    x-ref="video"
+                    x-effect="if (videoLoaded) { $refs.video.play(); }"
+                    x-intersect.once="videoLoaded = true"
+                    ></video>
+                        {{-- <video class="h-64 sm:h-72 lg:h-96 hidden media-toggle rounded-l-xl overflow-hidden @if($key == 0) active @endif" src="{{ $songItem['media'] }}" muted autoplay loop playsinline></video> --}}
                     @else
-                        <img class="h-64 sm:h-72 lg:h-96 hidden media-toggle rounded-l-xl overflow-hidden" src="{{ $songItem['media'] }}" >
+                        <img class="w-full hidden media-toggle rounded-l-xl overflow-hidden opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="{{ $songItem['media'] }}" >
                     @endif
                 @endforeach
             </div>
-            <div class="w-full sm:w-1/2 text-left mt-6 sm:mt-0 sm:pr-8">
+            <div class="w-full sm:w-auto text-left mt-6 sm:mt-0 sm:pr-5 lg:pr-8 flex-shrink-0">
                 @foreach ($songItems as $key => $songItem)
                     <div class="flex px-4 py-4 mb-1 rounded-xl w-full cursor-pointer active-toggle transition-colors duration-500 border bg-[#0c1524] border-[#0c1524] @if($key == 0) active @endif">
-                        <div class="w-12 sm:w-16 flex-grow-0"><img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-8 @if($theme == 'musora') filter invert @endif"></div>
-                        <div class="flex-grow pl-4">
+                        <div class="w-9 sm:w-12 lg:w-16 flex-grow-0"><img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-7 lg:h-8 @if($theme == 'musora') filter invert @endif opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"></div>
+                        <div class="flex-grow pl-2 lg:pl-4">
                             <h5><strong>{!!$songItem['title']!!}</strong></h5>
-                            <p class="mt-1 sm:mt-2 text-sm description overflow-hidden max-h-0">{!! $songItem['desc'] !!}</p>
+                            <p class="mx-0 mt-1 sm:mt-2 text-sm description overflow-hidden max-h-0" style="max-width: 270px;">{!! $songItem['desc'] !!}</p>
                         </div>
                     </div>
                 @endforeach

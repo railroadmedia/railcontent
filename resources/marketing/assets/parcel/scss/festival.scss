@@ -199,7 +199,7 @@ p {
 
   #addeventatc1.addeventatc,
   #addeventatc2.addeventatc {
-    font: 700 17px/1em $robotocondensed;
+    font: 700 17px/1em $bebas;
     color: #fff !important;
     border-radius: 200px;
     border: 2px solid #fff;
@@ -217,7 +217,7 @@ p {
     }
 
     .addeventatc_dropdown {
-      font-family: $robotocondensed;
+      font-family: $bebas;
     }
   }
 }
@@ -303,7 +303,7 @@ p {
     }
 
     button {
-      font-family: $robotocondensed;
+      font-family: $bebas;
       font-weight: 700;
       color: #FFF;
       background: $drumeoBlue;
@@ -398,7 +398,7 @@ p {
       }
 
       h2 {
-        font: 700 30px/1em $robotocondensed;
+        font: 700 30px/1em $bebas;
         margin: 15px auto;
         text-transform: uppercase;
         color: $drumeoBlue;

@@ -850,7 +850,7 @@
         }
 
         .thank-you-box h2 {
-            font:700 30px/1em "Roboto Condensed", sans-serif;
+            font:700 30px/1em "Bebas Neue", sans-serif;
             margin:15px auto;
             text-transform:uppercase;
             color:#0b76db
@@ -947,7 +947,7 @@
         }
 
         #bulkOrder .join {
-            font-family:"Roboto Condensed", sans-serif;
+            font-family:"Bebas Neue", sans-serif;
             border-radius:6px;
             font-weight:700;
             background:#0b76db;

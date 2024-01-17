@@ -55,7 +55,7 @@
 
                 @foreach($workoutImages as $image)
                     <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity"
-                        src="{{ $image['src'] }}" 
+                        src="{{ $image['src'] }}"
                         style="{{ $image['animation'] }}"
                         loading="lazy">
                 @endforeach
@@ -85,15 +85,26 @@
                 </div>
             </div>
             <div class="mt-5 sm:mt-0 sm:pl-7 sm:w-1/2 flex-grow-0">
-                <div class="h-full rounded-xl p-7 lg:p-10 pb-64 sm:pb-48 bg-black @if($theme != 'musora') text-white @else text-black @endif flex bg-cover bg-top" style="background-image:url('{{ $workoutsBG }}');">
-                    <div>
+                <div class="h-full rounded-xl p-7 lg:p-10 pb-64 sm:pb-48 bg-black @if($theme != 'musora') text-white @else text-black @endif flex relative"
+                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                x-intersect.once="lazyLoad = true">
+                    <picture class="absolute inset-0 w-full h-full rounded-xl object-cover bg-top">
+                        <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/{{ $workoutsBG }}"
+                                media="(min-width:640px)">
+                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $workoutsBG }}"
+                            alt="Workouts Background"
+                            class="w-full h-full object-cover rounded-xl opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"
+                            loading="lazy">
+                    </picture>
+
+                    <div class="relative z-10">
                         <h5 class="leading-tight mb-3"><strong>
-                                @if($theme == 'drumeo' || $theme == 'pianote')
-                                    Practice with your heroes.
-                                @else
-                                    Never practice alone.
-                                @endif
-                            </strong></h5>
+                            @if($theme == 'drumeo' || $theme == 'pianote')
+                                Practice with your heroes.
+                            @else
+                                Never practice alone.
+                            @endif
+                        </strong></h5>
                         <h6 class="leading-normal max-w-lg mx-0">
                             Your favorite
                             @php
@@ -113,7 +124,7 @@
                                     echo 'musicians';
                                 }
                             @endphp
-                             and teachers will share their tips, cheer you along, and help you learn by playing!
+                            and teachers will share their tips, cheer you along, and help you learn by playing!
                         </h6>
                     </div>
                 </div>

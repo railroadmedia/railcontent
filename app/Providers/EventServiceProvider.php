@@ -28,8 +28,6 @@ use Railroad\Railforums\Events\PostLiked;
 use Railroad\Railforums\Events\ThreadCreated;
 use Railroad\Railforums\Events\ThreadDeleted;
 use Railroad\Railnotifications\Listeners\NotificationEventListener;
-use Railroad\Railtracker\Events\EngageContent;
-use Railroad\Railtracker\Events\RemoveEngagedContent;
 
 class EventServiceProvider extends ServiceProvider
 {

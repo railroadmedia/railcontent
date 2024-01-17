@@ -897,7 +897,7 @@
         </div>
     </section>
     @include('musora.sales.components.order-section-collage', [
-    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/210x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/musora_logo.webp',
+    'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
     'header' => 'Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.',
     'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Personalized feedback from real teachers.</li>

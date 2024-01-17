@@ -1,12 +1,12 @@
     <?php
-    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/sami-ghawi.webp';
+    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/sami-ghawi.webp';
     $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/ayla-tesler-mabe.webp';
-    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/mark_lettieri.webp';
-    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/pete-thorn.webp';
-    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/dean-lamb.webp';
-    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/rob-scallon.webp';
-    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/yvette-young.webp';
-    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/kent-shores.webp';
+    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/mark_lettieri.webp';
+    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/pete-thorn.webp';
+    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/dean-lamb.webp';
+    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/340x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/rob-scallon.webp';
+    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/370x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/yvette-young.webp';
+    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/bubbles/kent-shores.webp';
 
     $guitareo = [
 
@@ -35,7 +35,7 @@
         'slides' => [
             [
                 'desc' => 'for people who want to learn how to play guitar, and fast',
-                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/guitareo/membership/homepage/2024/as-logo.webp',
+                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/80x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/as-logo.webp',
                 'name' => 'American Songwriter',
                 'credit' => 'Music Magazine',
             ],
@@ -246,28 +246,28 @@
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/songs-icon.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs-ultra.mp4",
                 "title" => "1000+ popular songs.",
                 "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
             ],
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/tempo-icon.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/membership/homepage/2024/speed-feature.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/membership/homepage/2024/speed-feature-ultra.mp4",
                 "title" => "Find the perfect tempo.",
                 "desc" => "Slow down any section of a song to make those tricky bars easier.",
             ],
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/loop-icon.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/membership/homepage/2024/loop.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/membership/homepage/2024/loop-ultra.mp4",
                 "title" => "Loop the trouble spots.",
                 "desc" => "Create practice loops to play-through  those difficult parts over and over.   ",
             ],
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/timing-icon.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/membership/homepage/2024/metronome-feature.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/membership/homepage/2024/metronome-feature-ultra.mp4",
                 'title' => 'Improve your timing.',
                 'desc' => 'Use the built-in-metronome – your new best friend for difficult rhythms.  ',
             ],
@@ -280,37 +280,37 @@
         ],
         "testimonials" => [
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/erlik-sorensen-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/erlik-sorensen-thumb.webp",
                 "name" => "Ërlik Sörensen",
                 "location" => "Canada",
                 "title" => "<strong>I’m lightyears ahead of where I was at.</strong> And no matter where I go, I’ll always have one of my guitars in the passenger seat. The life long journey has begun!",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/athina-katri-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/athina-katri-thumb.webp",
                 "name" => "Athina Katri ",
                 "location" => "Greece",
                 "title" => "I feel happy and more confident while playing. I played my first song with mini barre chords and actually enjoyed it. <strong>I’ve never done that before!</strong>",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/vetriselvi-senguttuvan-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/vetriselvi-senguttuvan-thumb.webp",
                 "name" => "Vetriselvi Senguttuvan ",
                 "location" => "India",
                 "title" => "I’m already playing things that were a nightmare to me before. Strumming patterns, smoothly changing chords, and improvisation of different scales. <strong>The frustration is over.</strong>",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/wj-williams-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/wj-williams-thumb.webp",
                 "name" => "WJ Williams",
                 "location" => "Georgia, USA",
                 "title" => "Things that I’ve struggled with for years have been explained in ways that make sense – and the Guitareo instructors have <strong>helped me become more comfortable.</strong>",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/jamie-k-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/jamie-k-thumb.webp",
                 "name" => "Jamie K",
                 "location" => "Canada",
                 "title" => "The goal-based learning makes each set of lessons more entertaining and a <strong>feeling of accomplishment</strong> when completed. I had a feeling of joy that I’ve never had before when playing guitar.",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/jim-mckenna-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/guitareo/membership/homepage/2024/testimonials/jim-mckenna-thumb.webp",
                 "name" => "Jim McKenna",
                 "location" => "Illinois, USA",
                 "title" => "I like the sincerity, knowledge, and positivity. They <strong>got me started on my journey</strong> and gave me confidence. Now I’m excited to practice and I can actually say “I’m a guitarist!”",

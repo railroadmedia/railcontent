@@ -245,7 +245,7 @@ onMounted(() => {
             <div class="tw-w-full" :class="playlistsStore.playerExpanded ? 'lg:tw-w-1/3' : '' ">
                 <div class="tw-flex tw-items-start">
                     <a :href="playlistUrl"
-                        class="tw-inline-flex tw-mr-auto tw-pb-1 tw-large tw-leading-tight tw-font-bold tw-text-[#00101D] dark:tw-text-white hover:tw-underline">
+                        class="tw-inline-flex tw-mr-auto tw-large tw-leading-tight tw-font-bold tw-text-[#00101D] dark:tw-text-white hover:tw-underline">
                         {{ playlistName }}
                     </a>
                     <!-- Expand/Collapse -->
@@ -262,7 +262,7 @@ onMounted(() => {
                     </button>
                 </div>
                 <!-- Cue Data -->
-                <p class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1">
+                <p class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-2 tw-text-sm">
                     <span>{{ playlistItemPosition }}/{{ props.lessons?.meta?.totalResults }}</span>
                     <span class="tw-mx-1">•</span>
                     <span>{{ Math.floor(duration / 60) }} min</span>
@@ -270,11 +270,11 @@ onMounted(() => {
             </div>
 
             <!-- CTAs -->
-            <div class="tw-flex"
+            <div class="tw-flex tw-justify-between"
                  :class="playlistsStore.playerExpanded ? 'lg:tw-w-1/3 lg:tw-justify-center' : ''"
             >
                 <!-- Prev Lesson -->
-                <a class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-transition-colors tw-mr-3"
+                <a class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-transition-colors tw-h-[30px] tw-w-[30px] tw-rounded"
                     :href="prevLessonUrl" title="Previous">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -283,7 +283,7 @@ onMounted(() => {
                     </svg>
                 </a>
                 <!-- Shuffle -->
-                <button class="tw-text-[#3F3F46] tw-transition-colors tw-mr-3"
+                <button class="tw-flex tw-justify-center tw-items-center tw-text-[#3F3F46] tw-transition-colors tw-h-[30px] tw-w-[30px] tw-rounded"
                     :class="`${isPlaybackShuffleOn ? 'dark:tw-text-white' : 'dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'}`"
                     @click.prevent="handleShuffleToggle" title="Shuffle">
                     <MusoraIcon icon-name="shuffle" class="tw-h-[22px] tw-w-[22px]" width="22" height="22"
@@ -291,20 +291,20 @@ onMounted(() => {
                 </button>
                 <!-- Repeat Video -->
                 <button v-if="!isPlaybackPlaylistRepeatOn && isPlaybackRepeatOn"
-                    class="tw-text-[#3F3F46] tw-transition-colors tw-mr-3 dark:tw-text-white"
+                    class="tw-flex tw-justify-center tw-items-center tw-text-[#3F3F46] tw-transition-colors dark:tw-text-white tw-h-[30px] tw-w-[30px] tw-rounded"
                     @click.prevent="handleRepeatToggle" title="Loop Video">
                     <MusoraIcon icon-name="repeat-video" class="tw-h-[22px] tw-w-[22px]" width="22" height="22"
                         viewBox="0 0 22 22" />
                 </button>
                 <!-- Repeat Playlist -->
-                <button v-if="!isPlaybackRepeatOn" class="tw-text-[#3F3F46] tw-transition-colors tw-mr-3"
+                <button v-if="!isPlaybackRepeatOn" class="tw-flex tw-justify-center tw-items-center tw-text-[#3F3F46] tw-transition-colors tw-h-[30px] tw-w-[30px] tw-rounded"
                     :class="`${isPlaybackPlaylistRepeatOn ? 'dark:tw-text-white' : 'dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'}`"
                     @click.prevent="handlePlaylistRepeatToggle" title="Loop Playlist">
                     <MusoraIcon icon-name="repeat" class="tw-h-[22px] tw-w-[22px]" width="22" height="22"
                         viewBox="0 0 22 22" />
                 </button>
                 <!-- Next Lesson -->
-                <a class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-transition-colors"
+                <a class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-transition-colors tw-h-[30px] tw-w-[30px] tw-rounded"
                     :href="nextLessonUrl" title="Next">
                     <svg class="tw-rotate-180" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                         fill="none">

@@ -206,7 +206,7 @@ a.text-yellow:hover {
     }
 
     &.dense {
-      font-family: $robotocondensed;
+      font-family: $bebas;
       text-transform: uppercase;
       margin-bottom: 5px;
       font-size: 16px;
@@ -929,7 +929,7 @@ a.text-yellow:hover {
 
           &:nth-child(1) {
             text-align: left;
-            font: 700 12px/1.2em $robotocondensed;
+            font: 700 12px/1.2em $bebas;
             text-transform: uppercase;
             @include tablet {
               font-size: 15px;
@@ -986,7 +986,7 @@ a.text-yellow:hover {
 
         &:nth-child(1) td {
           text-transform: uppercase;
-          font-family: $robotocondensed;
+          font-family: $bebas;
           border-radius: 7px 7px 0 0;
           font-weight: 700;
           padding: 15px 0;
@@ -1098,7 +1098,7 @@ a.text-yellow:hover {
   }
 
   h3 {
-    font: 400 18px/1.2em $robotocondensed;
+    font: 400 18px/1.2em $bebas;
     text-transform: uppercase;
     margin: 20px auto;
     @include tablet {
