@@ -30,33 +30,31 @@ class EventTrackingService
         $brand = $this->getBrandFromOrder($order);
         $data = $this->getOrderEventData($order, $brand);
 
-        dispatch(
+        dispatchWithDelay(
             new CustomerIoCreateEventByUserId(
                 $user->id,
                 $brand,
                 'musora_user_order',
                 $data,
                 null,
-                Carbon::parse($order['processed_at'])->timestamp
-            )
-        )->delay(Carbon::now()->addSeconds(3));
+                Carbon::parse($order['processed_at'])->timestamp),
+            3);
 
         if ($brand !== 'musora') {
-            dispatch(
+            dispatchWithDelay(
                 new CustomerIoCreateEventByUserId(
                     $user->id,
                     $brand,
                     $brand . "_user_order",
                     $data,
                     null,
-                    Carbon::parse($order['processed_at'])->timestamp
-                )
-            )->delay(Carbon::now()->addSeconds(3));
+                    Carbon::parse($order['processed_at'])->timestamp),
+                3);
         }
 
         Avo::order_placed(AvoHelper::defaultEventProperties($data, $user));
 
-        dispatch(new ImpactTrackConversion($user, $brand, $order))->delay(Carbon::now()->addSeconds(3));
+        dispatchWithDelay(new ImpactTrackConversion($user, $brand, $order), 3);
     }
 
     public function handleOrderRefundEventTracking(array $refund, array $order): void
@@ -66,16 +64,15 @@ class EventTrackingService
         $brand = $this->getBrandFromOrder($order);
         $data = $this->getOrderEventData($order, $brand);
 
-        dispatch(
+        dispatchWithDelay(
             new CustomerIoCreateEventByUserId(
                 $user->id,
                 $brand,
                 'musora_user_refund',
                 $data,
                 null,
-                null
-            )
-        )->delay(Carbon::now()->addSeconds(3));
+                null),
+            3);
 
         $eventTrackingData = $this->getRefundData($refund, $order, $brand);
 
