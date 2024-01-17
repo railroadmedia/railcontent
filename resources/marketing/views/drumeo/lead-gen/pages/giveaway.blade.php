@@ -200,10 +200,6 @@
             "minimal" => true
         ])
 
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2023-04-01 00:00:00',
-        'promoVersion' => false
-    ])
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script>
