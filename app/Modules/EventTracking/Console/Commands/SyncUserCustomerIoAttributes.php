@@ -7,8 +7,8 @@ use App\Modules\EventTracking\Jobs\SyncUserCustomerIoAttributesJob;
 
 class SyncUserCustomerIoAttributes extends Command
 {
-    protected $signature = 'eventTracking:mergeDBCustomerIoProfiles {workspaceName}';
-    protected $description = 'Merge duplicate customer.io profiles that exists in the customer_io_customers table';
+    protected $signature = 'eventTracking:syncUserCustomerIoAttributes {workspaceName}';
+    protected $description = 'Sync users that have digital product access to customerio';
 
     public function handle(): void
     {
