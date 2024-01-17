@@ -388,6 +388,9 @@ return [
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
             \App\Decorators\Content\UrlDecorator::class,
         ],
+        'group' => [
+            \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
+        ],
     ],
 
     // specific decorator configs
