@@ -5,13 +5,15 @@
                 :class="`
                     tw-px-4 lg:tw-px-0 tw-no-scrollbar
                     ${isMiniView && willScroll ? 'tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-3 xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-y-[25px] tw-gap-x-[8px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : ''}
-                    ${!isMiniView && willScroll ? 'tw-flex tw-overflow-x-scroll lg:tw-overflow-x-clip tw-flex-nowrap' : ''}
+                    ${!isMiniView && willScroll ? 'tw-flex lg:tw-overflow-x-clip tw-flex-nowrap' : ''}
+                    ${!isMiniView && willScroll && !collectionStoreLoading ? 'tw-overflow-x-scroll' : ''}
                     ${!isMiniView && !willScroll ? 'tw-flex tw-flex-wrap' : ''}
                     ${breakToListView ? 'tw-@container/breakToList' : ''}
                 `">
                 <!-- Skeleton Loader -->
                 <template v-if="collectionStoreLoading && (isWorkout || isChallenge)">
-                    <SkeletonLoader :count="skeletonCardCount" type="card" />
+                    <SkeletonLoader :count="skeletonCardCount" type="card" :force-list-view="displayInline"
+                        :break-to-list-view="breakToListView" />
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else>
@@ -160,7 +162,7 @@ const data = computed(() => {
 })
 
 const breakToListView = computed( () => {
-    return (isWorkout.value || isChallenge.value) && !props.groupByCards;
+    return !showGroupBy.value && (isWorkout.value || isChallenge.value);
 })
 
 const skeletonCardCount = computed(() => {

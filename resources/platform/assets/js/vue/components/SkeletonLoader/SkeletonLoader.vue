@@ -1,5 +1,5 @@
 <template>
-    <component :is="skeletonComponent" v-for="n in count" :key="n" />
+    <component :is="skeletonComponent" v-for="n in count" :key="n" v-bind="props" />
 </template>
   
   
@@ -16,6 +16,14 @@ const props = defineProps({
     count: {
         type: Number,
         default: 1
+    },
+    forceListView: {
+        type: Boolean,
+        default: false,
+    },
+    breakToListView: {
+        type: Boolean,
+        default: false,
     }
 });
 
