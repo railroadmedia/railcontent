@@ -26,8 +26,6 @@ class SyncUserCustomerIoAttributesJob extends BatchQueryJob
         $this->skip = $skip;
         $this->take = $take;
         $this->workspaceName = $workspaceName;
-        $this->customerIoService = app(CustomerIoService::class);
-        $this->shopifySyncService = app(ShopifySyncService::class);
     }
 
     public function getSkip(): int
@@ -45,6 +43,7 @@ class SyncUserCustomerIoAttributesJob extends BatchQueryJob
      */
     public function getQuery(): Builder
     {
+        $this->customerIoService = app(CustomerIoService::class);
         $accountConfigData = $this->customerIoService->getAccountConfigData($this->workspaceName);
 
         return Customer::query()
@@ -72,6 +71,7 @@ class SyncUserCustomerIoAttributesJob extends BatchQueryJob
 
     public function handleAllItems($items): bool
     {
+        $this->shopifySyncService = app(ShopifySyncService::class);
         foreach ($items as $item) {
             $this->handleItem($item);
         }
