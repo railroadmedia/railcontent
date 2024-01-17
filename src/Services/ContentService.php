@@ -1134,7 +1134,7 @@ class ContentService
                 if($groupBy) {
                     foreach ($res as $i => $v) {
                         if (!empty($v['lessons'] ?? [])) {
-                            $res[$i]['lessons'] = (Decorator::decorate($v['lessons'], 'content'));
+                            $res[$i]['lessons'] = (Decorator::decorate($v['lessons'], 'card'));
                         }
                     }
                 }

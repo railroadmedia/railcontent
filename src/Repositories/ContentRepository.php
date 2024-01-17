@@ -2409,11 +2409,6 @@ class ContentRepository extends RepositoryBase
 
         // get values that are in other tables
         $filterNameToTableNameAndColumnName = [
-            'instructor' => [
-                'table' => 'railcontent_content_instructors',
-                'column' => 'instructor_id',
-                'alias' => '_rci'
-            ],
             'style' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcs'],
             'topic' => ['table' => 'railcontent_content_topics', 'column' => 'topic', 'alias' => '_rct'],
             'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus', 'alias' => '_rcf'],
@@ -2423,27 +2418,23 @@ class ContentRepository extends RepositoryBase
             'creativity' => ['table' => 'railcontent_content_creativity', 'column' => 'creativity', 'alias' => '_rcc'],
             'lifestyle' => ['table' => 'railcontent_content_lifestyle', 'column' => 'lifestyle', 'alias' => '_rcl'],
         ];
-if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) == 1){
-    $brand = config('railcontent.brand');
-    self::$catalogMetaAllowableFilters = (config('railcontent.cataloguesMetadata.'.$brand.'.'.$this->typesToInclude[0].'.allowableFilters'));
-}
+        if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) >= 1){
+            $brand = config('railcontent.brand');
+
+            $type = ($this->typesToInclude[0] === 'song' || $this->typesToInclude[0] === 'course' || $this->typesToInclude[0] === 'rudiment')?$this->typesToInclude[0].'s':$this->typesToInclude[0];
+            $type = ($this->typesToInclude[0] === 'live')?'live-streams':$type;
+            self::$catalogMetaAllowableFilters = (config('railcontent.cataloguesMetadata.'.$brand.'.'.$type.'.allowableFilters'));
+        }
+
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
-                'data',
-//                'instructor',
                 'style',
                 'topic',
                 'focus',
-                'bpm',
-            'essentials',
-            'theory',
-            'creativity',
-            'lifestyle'
+                'essentials',
+                'theory',
+                'creativity',
+                'lifestyle'
             ];
-
-        // we always need the related data
-        if (!in_array('data', $filterOptions)) {
-            $filterOptions[] = 'data';
-        }
 
         $filterOptions = array_unique($filterOptions);
 
@@ -2490,22 +2481,14 @@ if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) == 1){
         $countingQuery = clone($joinTablesQuery);
 
         if (!empty($groupBy)) {
+            $groupBy[] = 'railcontent_content.id';
+            $joinTablesQuery->addSelect(['railcontent_content.id']);
             $joinTablesQuery->groupBy($groupBy);
         } else {
             $joinTablesQuery->select(['railcontent_content.id']);
         }
 
         $tableResults = $joinTablesQuery->get();
-        $countingQueryResults = collect([]);
-        if (self::$countFilterOptionItems) {
-            $countingQuery->addSelect(
-                ['railcontent_content.id']
-            );
-            $groupBy[] = 'id';
-            $countingQuery->groupBy($groupBy);
-
-            $countingQueryResults = $countingQuery->get();
-        }
 
         $counts = [];
         foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
@@ -2514,7 +2497,7 @@ if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) == 1){
                 ->unique()
                 ->values()
                 ->toArray();
-            $counts[$filterOptionName] = $countingQueryResults->whereNotNull($filterOptionName)
+            $counts[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
                 ->unique(function ($item) use ($filterOptionName) {
                     return $item['id'] . $item["$filterOptionName"];
                 })
@@ -2584,10 +2567,7 @@ if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) == 1){
         // todo: now to the right place
         $filterOptionNameToContentTableColumnName = [
             'difficulty' => ConfigService::$tableContent . '.difficulty',
-            'difficulty_range' => ConfigService::$tableContent . '.difficulty_range',
             'artist' => ConfigService::$tableContent . '.artist',
-            'type' => ConfigService::$tableContent . '.type',
-            'instrument' => ConfigService::$tableContent . '.instrument',
             'content_id' => ConfigService::$tableContent . '.id',
         ];
 
@@ -2598,8 +2578,10 @@ if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) == 1){
             ->select($filterOptionNameToContentTableColumnName);
 
         $tableResults = $contentTableQuery->get();
-
         foreach ($filterOptionNameToContentTableColumnName as $filterOptionName => $filterOptionValue) {
+            if(!in_array($filterOptionName, $filterOptions)){
+                continue;
+            }
             $filterOptionsArray[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
                 ->pluck($filterOptionName)
                 ->unique()
@@ -2641,8 +2623,8 @@ if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) == 1){
     {
         $contentIds = [];
         foreach ($contentRows as $contentRow) {
-            $ids = \GuzzleHttp\json_decode($contentRow['lessons_grouped_by_field'], true);
-            $contentIds = array_merge($contentIds, $ids);
+            $ids =  explode(',',$contentRow['lessons_grouped_by_field']);
+            $contentIds = array_merge($contentIds, array_slice($ids,0,5));
         }
         $contentIds = array_unique($contentIds);
         return $contentIds;
@@ -2926,11 +2908,6 @@ if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) == 1){
 
         // get values that are in other tables
         $filterNameToTableNameAndColumnName = [
-            'instructor' => [
-                'table' => 'railcontent_content_instructors',
-                'column' => 'instructor_id',
-                'alias' => '_rci'
-            ],
             'style' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcs'],
             'topic' => ['table' => 'railcontent_content_topics', 'column' => 'topic', 'alias' => '_rct'],
             'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus', 'alias' => '_rcf'],
@@ -2942,7 +2919,7 @@ if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) == 1){
         ];
 
         $filterOptions = [
-            'data',
+//            'data',
             'style',
             'topic',
             'focus',
@@ -2953,11 +2930,6 @@ if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) == 1){
             'lifestyle'
 
         ];
-
-        // we always need the related data
-        if (!in_array('data', $filterOptions)) {
-            $filterOptions[] = 'data';
-        }
 
         $filterOptions = array_unique($filterOptions);
 
@@ -3051,57 +3023,10 @@ if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) == 1){
             sort($filterOptionsArray[$filterOptionName]);
         }
 
-        // todo: handle instructors which need to be pulled from matching content rows
-        if (!empty($filterOptionsArray['instructor_id'])) {
-            $instructorRows = $this->query()
-                ->select(['railcontent_content.id as id', 'name', 'value as head_shot_picture_url'])
-                ->leftJoin(
-                    ConfigService::$tableContentData,
-                    function (JoinClause $joinClause) {
-                        $joinClause->on(
-                            ConfigService::$tableContentData . '.content_id',
-                            '=',
-                            ConfigService::$tableContent . '.id'
-                        )
-                            ->where(
-                                ConfigService::$tableContentData . '.id',
-                                '=',
-                                DB::raw(
-                                    '(SELECT id FROM ' . ConfigService::$tableContentData . ' WHERE ' . ConfigService::$tableContentData . '.content_id = railcontent_content.id and railcontent_content_data.key = \'head_shot_picture_url\' LIMIT 1)'
-                                )
-                            );
-                    }
-                )
-                ->whereIn('railcontent_content.id', $filterOptionsArray['instructor_id'])
-                ->orderBy('name')
-                ->get()
-                ->toArray();
-
-            foreach ($instructorRows as $instructorRowIndex => $instructorRow) {
-                $instructorRows[$instructorRowIndex]["fields"][] = [
-                    'id' => 1,
-                    'key' => 'name',
-                    'value' => $instructorRow["name"]
-                ];
-                $instructorRows[$instructorRowIndex]["data"][] = [
-                    'id' => 1,
-                    'key' => 'head_shot_picture_url',
-                    'value' => $instructorRow["head_shot_picture_url"]
-                ];
-            }
-
-            $filterOptionsArray['instructor'] = $instructorRows;
-        }
-
-        // dd($filterOptionsArray);
-
         // todo: now to the right place
         $filterOptionNameToContentTableColumnName = [
             'difficulty' => ConfigService::$tableContent . '.difficulty',
-            'difficulty_range' => ConfigService::$tableContent . '.difficulty_range',
             'artist' => ConfigService::$tableContent . '.artist',
-            'type' => ConfigService::$tableContent . '.type',
-            'instrument' => ConfigService::$tableContent . '.instrument',
             'content_id' => ConfigService::$tableContent . '.id',
         ];
 

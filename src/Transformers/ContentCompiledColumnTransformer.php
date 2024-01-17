@@ -163,7 +163,7 @@ class ContentCompiledColumnTransformer
 
         foreach($contentRows as $contentRowIndex => $contentRow){
             $lessons = $contentRow['lessons_grouped_by_field'] ?? [];
-            $lessonContentIds = json_decode($lessons ?? '', true);
+            $lessonContentIds = explode(',', $lessons);
             $lessonContentIds = array_unique($lessonContentIds);
             $allLessonsCount = count($lessonContentIds);
             $lessonContentIds = (array_slice($lessonContentIds,0,5));

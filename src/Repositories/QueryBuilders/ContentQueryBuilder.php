@@ -781,8 +781,8 @@ class ContentQueryBuilder extends QueryBuilder
                                  $this->raw(ConfigService::$tableContent.'.'.$field.' as grouped_by_field'),
 
                                  DB::raw(
-                                     "( 
-           JSON_ARRAYAGG(
+                                     "(
+            GROUP_CONCAT(
             ".ConfigService::$tableContent.".id
         ) ) as lessons_grouped_by_field"
                                  ),
@@ -807,7 +807,7 @@ class ContentQueryBuilder extends QueryBuilder
                              $this->raw($alias.'.'.$field.' as id'),
                              DB::raw(
                                  "( 
-           JSON_ARRAYAGG(
+           GROUP_CONCAT(
             ".$alias.".content_id      
         ) ) as lessons_grouped_by_field"
                              ),
