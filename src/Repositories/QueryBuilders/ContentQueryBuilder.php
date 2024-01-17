@@ -779,7 +779,7 @@ class ContentQueryBuilder extends QueryBuilder
             $this->addSelect([
                                  $this->raw(ConfigService::$tableContent.'.'.$field.' as '.$field),
                                  $this->raw(ConfigService::$tableContent.'.'.$field.' as grouped_by_field'),
-
+                                 $this->raw(ConfigService::$tableContent.'.'.$field.' as id'),
                                  DB::raw(
                                      "(
             GROUP_CONCAT(
