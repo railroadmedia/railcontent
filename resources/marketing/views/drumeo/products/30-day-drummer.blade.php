@@ -497,11 +497,6 @@ $points = [
 
     @include("drumeo.sales.partials._footer")
 
-    {{-- @include('_partials.components.countdown',[
-        'countdownDate' => '2023-09-04 00:00:00',
-        'promoVersion' => false
-    ]) --}}
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
