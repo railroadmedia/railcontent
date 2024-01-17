@@ -174,10 +174,10 @@ class ContentCompiledColumnTransformer
                 continue;
             }
 
-            if($contentRow['type'] == 'style' || $contentRow['type'] == 'artist'){
+            if($contentRow['type'] == 'style' || $contentRow['type'] == 'artist') {
                 $contentRows[$contentRowIndex]['data'][] = [
                     'id' => substr(md5(mt_rand()), 0, 10),
-                    'content_id' =>substr(md5(mt_rand()), 0, 10),
+                    'content_id' => substr(md5(mt_rand()), 0, 10),
                     'key' => 'head_shot_picture_url',
                     'value' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/challenges.jpg',
                     'type' => 'string',
@@ -185,145 +185,96 @@ class ContentCompiledColumnTransformer
                 ];
                 $contentRows[$contentRowIndex]['fields'][] = [
                     'id' => substr(md5(mt_rand()), 0, 10),
-                    'content_id' =>substr(md5(mt_rand()), 0, 10),
+                    'content_id' => substr(md5(mt_rand()), 0, 10),
                     'key' => 'name',
                     'value' => $contentRow['grouped_by_field'],
                     'type' => 'string',
                     'position' => 1,
                 ];
             }
-            // data
-            $dataKeyCounts = [];
 
-            foreach ($dataKeys as $dataKey) {
-                foreach($lessonContentIds as $index=>$contentId) {
-                    $data = $dataLookup[$contentId] ?? [];
-                    $contentRowCompiledColumnValue = json_decode($data['compiled_view_data'] ?? '', true);
+            foreach ($lessonContentIds as $index => $contentId) {
+                $data = $dataLookup[$contentId] ?? [];
+                $contentRowCompiledColumnValue = json_decode($data['compiled_view_data'] ?? '', true);
+                if (isset($data['compiled_view_data'])) {
+                    foreach (
+                        $contentRowCompiledColumnValue as $compiledDataKey =>
+                        $compiledDataValue
+                    ) {
+                        if (in_array(
+                            $compiledDataKey,
+                            config('railcontent.content_fields_that_are_now_columns_in_the_content_table')
+                        )) {
+                            $contentRows[$contentRowIndex]['lessons'][$index][$compiledDataKey] =
+                                $compiledDataValue;
+                        }
 
-                    if(isset($data['compiled_view_data'])) {
-                        foreach (
-                            $contentRowCompiledColumnValue as $compiledDataKey =>
-                            $compiledDataValue
-                        ) {
-                            if (in_array(
-                                $compiledDataKey,
-                                config('railcontent.content_fields_that_are_now_columns_in_the_content_table')
-                            )) {
-                                $contentRows[$contentRowIndex]['lessons'][$index][$compiledDataKey] =
-                                    $compiledDataValue;
-                            }
-
-                            if (!isset($dataKeyCounts[$dataKey])) {
-                                $dataKeyCounts[$dataKey] = 0;
-                            }
-
-                            if ($compiledDataKey === $dataKey) {
-                                $compiledDataValue = Arr::wrap($compiledDataValue);
-
-                                foreach ($compiledDataValue as $compiledDataSingleValue) {
-                                    $dataKeyCounts[$dataKey]++;
-                                    $contentRows[$contentRowIndex]['lessons'][$index]['data'][] = [
-                                        'id' => substr(md5(mt_rand()), 0, 10),
-                                        'content_id' => $contentRowCompiledColumnValue['id'],
-                                        'key' => $dataKey,
-                                        'value' => $compiledDataSingleValue,
-                                        'position' => 1,
-                                    ];
-                                }
+                        if (in_array($compiledDataKey, $dataKeys)) {
+                            $compiledDataValue = Arr::wrap($compiledDataValue);
+                            foreach ($compiledDataValue as $compiledDataSingleValue) {
+                                $contentRows[$contentRowIndex]['lessons'][$index]['data'][] = [
+                                    'id' => substr(md5(mt_rand()), 0, 10),
+                                    'content_id' => $contentRowCompiledColumnValue['id'],
+                                    'key' => $compiledDataKey,
+                                    'value' => $compiledDataSingleValue,
+                                    'position' => 1,
+                                ];
                             }
                         }
-                    }
-                }
-            }
 
-            // fields
-            $fieldKeyCounts = [];
-
-            foreach ($fieldKeys as $fieldKey) {
-                foreach($lessonContentIds as $index=>$contentId) {
-                    $data = $dataLookup[$contentId] ?? [];
-                    $contentRowCompiledColumnValue = json_decode($data['compiled_view_data'] ?? '', true);
-
-                    if(isset($contentRowCompiledColumnValue)) {
-                        foreach (
-                            $contentRowCompiledColumnValue as $compiledFieldKey =>
-                            $compiledFieldValue
-                        ) {
-                            if (!isset($fieldKeyCounts[$fieldKey])) {
-                                $fieldKeyCounts[$fieldKey] = 0;
-                            }
-
-                            if ($compiledFieldKey === $fieldKey && !in_array($fieldKey, $subContentFieldKeys)) {
-                                $compiledFieldValue = Arr::wrap($compiledFieldValue);
-
-                                foreach ($compiledFieldValue as $compiledFieldSingleValue) {
-                                    $fieldKeyCounts[$fieldKey]++;
-
-                                    $contentRows[$contentRowIndex]['lessons'][$index]['fields'][] = [
-                                        'id' => substr(md5(mt_rand()), 0, 10),
-                                        'content_id' => $contentRowCompiledColumnValue['id'],
-                                        'key' => $fieldKey,
-                                        'value' => $compiledFieldSingleValue,
-                                        'type' => 'string',
-                                        'position' => 1,
-                                    ];
-                                    if (self::$avoidDuplicates) {
-                                        unset($contentRows[$contentRowIndex][$fieldKey]);
-                                    }
-                                }
-                            } elseif ($compiledFieldKey === $fieldKey && in_array($fieldKey, $subContentFieldKeys)) {
-                                if (isset($compiledFieldValue['id'])) {
-                                    // its a single value
-                                    $fieldKeyCounts[$fieldKey]++;
-
-                                    $contentEntity = new ContentEntity();
-                                    $contentEntity->replace($this->transform([$compiledFieldValue])[0]);
-
-                                    $contentRows[$contentRowIndex]['lessons'][$index]['fields'][] = [
-                                        'id' => substr(md5(mt_rand()), 0, 10),
-                                        'content_id' => $contentRowCompiledColumnValue['id'],
-                                        'key' => $fieldKey,
-                                        'value' => $contentEntity,
-                                        'type' => 'content',
-                                        'position' => 1,
-                                    ];
-                                    if (self::$avoidDuplicates) {
-                                        unset($contentRows[$contentRowIndex][$fieldKey]);
-                                    }
-                                } elseif (is_array($compiledFieldValue)) {
-                                    // there are multiple values
+                        if (in_array($compiledDataKey, $fieldKeys) && !in_array($compiledDataKey, $subContentFieldKeys)) {
+                                    $compiledFieldValue = Arr::wrap($compiledDataValue);
                                     foreach ($compiledFieldValue as $compiledFieldSingleValue) {
-                                        if (!is_array($compiledFieldSingleValue)) {
-                                            continue;
-                                        }
-
-                                        $fieldKeyCounts[$fieldKey]++;
-
+                                        $contentRows[$contentRowIndex]['lessons'][$index]['fields'][] = [
+                                            'id' => substr(md5(mt_rand()), 0, 10),
+                                            'content_id' => $contentRowCompiledColumnValue['id'],
+                                            'key' => $compiledDataKey,
+                                            'value' => $compiledFieldSingleValue,
+                                            'type' => 'string',
+                                            'position' => 1,
+                                        ];
+                                    }
+                                } elseif (in_array($compiledDataKey, $fieldKeys) && in_array($compiledDataKey, $subContentFieldKeys)) {
+                                    if (isset($compiledDataValue['id'])) {
                                         $contentEntity = new ContentEntity();
-                                        $contentEntity->replace($this->transform([$compiledFieldSingleValue])[0]);
+                                        $contentEntity->replace($this->transform([$compiledDataValue])[0]);
 
                                         $contentRows[$contentRowIndex]['lessons'][$index]['fields'][] = [
                                             'id' => substr(md5(mt_rand()), 0, 10),
                                             'content_id' => $contentRowCompiledColumnValue['id'],
-                                            'key' => $fieldKey,
+                                            'key' => $compiledDataKey,
                                             'value' => $contentEntity,
                                             'type' => 'content',
                                             'position' => 1,
                                         ];
-                                    }
-                                    if (self::$avoidDuplicates) {
-                                        unset($contentRows[$contentRowIndex][$fieldKey]);
+
+                                    } elseif (is_array($compiledDataValue)) {
+                                        // there are multiple values
+                                        foreach ($compiledDataValue as $compiledFieldSingleValue) {
+                                            if (!is_array($compiledFieldSingleValue)) {
+                                                continue;
+                                            }
+
+                                            $contentEntity = new ContentEntity();
+                                            $contentEntity->replace($this->transform([$compiledFieldSingleValue])[0]);
+
+                                            $contentRows[$contentRowIndex]['lessons'][$index]['fields'][] = [
+                                                'id' => substr(md5(mt_rand()), 0, 10),
+                                                'content_id' => $contentRowCompiledColumnValue['id'],
+                                                'key' => $compiledDataKey,
+                                                'value' => $contentEntity,
+                                                'type' => 'content',
+                                                'position' => 1,
+                                            ];
+                                        }
                                     }
                                 }
-                            }
-                        }
                     }
                 }
             }
-            $content = collect($contentRows[$contentRowIndex]);
 
-            $contentRows[$contentRowIndex] = $content->only(['grouped_by_field','data','id','slug','type','fields','url','published_on','brand','lessons','all_lessons_count','web_url_path']);
         }
+
         return $contentRows;
     }
 }

@@ -1569,9 +1569,11 @@ class ContentRepository extends RepositoryBase
                     $this->includedFields = $initialFilters;
             }
 
-            foreach ($possibleContentFields as $possibleContentFieldKey => $possibleContentFieldValue) {
-                if (isset($myResults[$possibleContentFieldKey])) {
-                    $possibleContentFields[$possibleContentFieldKey] = $myResults[$possibleContentFieldKey];
+            if(!empty($selectedFilterCategories ?? [])) {
+                foreach ($possibleContentFields as $possibleContentFieldKey => $possibleContentFieldValue) {
+                    if (isset($myResults[$possibleContentFieldKey])) {
+                        $possibleContentFields[$possibleContentFieldKey] = $myResults[$possibleContentFieldKey];
+                    }
                 }
             }
         }

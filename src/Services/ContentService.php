@@ -1149,9 +1149,9 @@ class ContentService
                 $results = new ContentFilterResultsEntity($results);
             }
         }
+        $decorator = ($groupBy) ? 'group':'content';
 
-
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate($results, $decorator);
     }
 
     // for remove extraneous options and order logically rather than alphabetically
