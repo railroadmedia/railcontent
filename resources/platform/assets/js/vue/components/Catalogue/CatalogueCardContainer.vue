@@ -11,7 +11,7 @@
                     ${breakToListView ? 'tw-@container/breakToList' : ''}
                 `">
                 <!-- Skeleton Loader -->
-                <template v-if="collectionStoreLoading && (isWorkout || isChallenge)">
+                <template v-if="showSkeletonLoader">
                     <SkeletonLoader :count="skeletonCardCount" type="card" :force-list-view="displayInline"
                         :break-to-list-view="breakToListView" />
                 </template>
@@ -163,6 +163,10 @@ const data = computed(() => {
 
 const breakToListView = computed( () => {
     return !showGroupBy.value && (isWorkout.value || isChallenge.value);
+})
+
+const showSkeletonLoader = computed(() => {
+    return collectionStoreLoading.value && (isWorkout.value || isChallenge.value)
 })
 
 const skeletonCardCount = computed(() => {

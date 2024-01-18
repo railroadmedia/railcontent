@@ -1,6 +1,6 @@
 <template>
     <!--  Instructor Thumbnail Loader -->
-    <SkeletonLoader v-if="collectionStoreLoading" type="card-group-header" />
+    <SkeletonLoader v-if="showSkeletonLoader" type="card-group-header" />
     <!--  Instructor Thumbnail  -->
     <div v-else class="tw-flex tw-justify-between tw-items-center tw-mb-4 tw-mx-4 lg:tw-mx-0">
         <a :href="item.url"
@@ -56,5 +56,17 @@ const name = computed(() => {
 
 const thumb = computed(() => {
     return props.item.data.find(data => data.key === 'head_shot_picture_url')?.value || '';
+})
+
+const showSkeletonLoader = computed(() => {
+    return collectionStoreLoading.value && (isWorkout.value || isChallenge.value)
+})
+
+const isWorkout = computed(() => {
+    return props.contentTypeOverride === 'workout';
+})
+
+const isChallenge = computed(() => {
+    return props.contentTypeOverride === 'challenge';
 })
 </script>
