@@ -92,7 +92,7 @@
                         <picture>
                             <source data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/{{ $workoutsBG }}"
                                 media="(min-width:640px)">
-                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)//filters:blur(9)/{{ $workoutsBG }}" 
+                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)//filters:blur(11)/{{ $workoutsBG }}" 
                                 data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $workoutsBG }}" 
                                 alt="Workouts Background"
                                 class="w-full h-full object-cover rounded-xl transition-opacity opacity-0 duration-300 lazyload" 
