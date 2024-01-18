@@ -1394,6 +1394,9 @@ class ContentRepository extends RepositoryBase
                         ->addSubJoinToQuery($subQuery)
                         ->directPaginate($this->page, $this->limit)
                         ->orderBy('slug', 'asc');
+                if(!empty($this->typesToInclude)){
+                    $query->selectRaw(' "'.$this->typesToInclude[0].'" as content_type');
+                }
                 $contentRows = $query->getToArray();
                 $contentIds = $this->getGroupByContentIds($contentRows);
                 $dataLookup = $this->getContentLookupByIds($contentIds);
@@ -1407,6 +1410,11 @@ class ContentRepository extends RepositoryBase
 
                 return $contentRows;
             }
+
+            if(!empty($this->typesToInclude)){
+                $query->selectRaw(' "'.$this->typesToInclude[0].'" as content_type');
+            }
+
             if(!empty($this->groupByFields['associated_table'])) {
                 $orderBy = ($this->groupByFields['associated_table']['alias'] . '.' . $this->groupByFields['associated_table']['column']);
                 $contentRows = $query->selectRaw(' "'.$this->groupByFields['associated_table']['column'].'" as type')
