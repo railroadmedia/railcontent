@@ -390,6 +390,7 @@ return [
         ],
         'group' => [
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
+            \App\Decorators\GroupedContent\GroupedContentDecorator::class,
         ],
     ],
 
