@@ -140,9 +140,4 @@
         "brand" => "musora",
         "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png"
     ])
-
-    @include('_partials.components.countdown',[
-         'countdownDate' => '2023-11-28 00:00:00',
-         'promoVersion' => true
-     ])
 @stop
