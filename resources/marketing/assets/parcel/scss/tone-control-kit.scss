@@ -246,7 +246,7 @@ a.text-yellow:hover {
     margin: 0 auto;
     width: 100%;
     max-width: 300px;
-    font: 400 14px/1.4em $robotocondensed;
+    font: 400 14px/1.4em $bebas;
     text-transform: uppercase;
     @include tablet {
       font-size: 18px;
@@ -388,7 +388,7 @@ a.text-yellow:hover {
       position: relative;
       z-index: 1;
       width: 25%;
-      font: 700 15px/1em "Roboto Condensed";
+      font: 700 15px/1em $bebas;
       text-transform: uppercase;
       padding: 10px;
       color: #657281;
@@ -1102,7 +1102,7 @@ a.text-yellow:hover {
 
 
   h2 {
-    font-family: $robotocondensed;
+    font-family: $bebas;
     text-transform: uppercase;
     margin: 0 auto;
     line-height: 1.2em;
@@ -1131,7 +1131,7 @@ a.text-yellow:hover {
   }
 
   h3 {
-    font-family: $robotocondensed;
+    font-family: $bebas;
     text-transform: uppercase;
     line-height: 1.2em;
     margin: 0 auto 25px;

@@ -15,7 +15,7 @@
     <style>
         .title-wrap h1 {
             font-size:27px;
-            font-family:"Roboto Condensed", sans-serif;
+            font-family:"Bebas Neue", sans-serif;
         }
         .title-wrap p, .title-wrap li {
             font:400 14px/1.5em "Open Sans", sans-serif;

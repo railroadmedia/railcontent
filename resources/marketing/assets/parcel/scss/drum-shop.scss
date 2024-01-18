@@ -510,7 +510,7 @@ img {
         .filter {
             color: #555D5F;
             cursor: pointer;
-            font: 700 17px/1em $robotocondensed;
+            font: 700 17px/1em $bebas;
             border: 1px solid #555D5F;
             border-width: 0 1px 1px 0;
             text-transform: uppercase;
@@ -627,7 +627,7 @@ img {
         }
 
         h4 {
-            font: 700 18px/1em $robotocondensed;
+            font: 700 18px/1em $bebas;
             text-transform: uppercase;
             margin-top: 10px;
         }
@@ -646,7 +646,7 @@ img {
             }
 
             .checkout-button {
-                font: 700 16px/1em $robotocondensed;
+                font: 700 16px/1em $bebas;
                 text-transform: uppercase;
                 color: #FFF;
                 background: #10D05F;
@@ -708,7 +708,7 @@ img {
         border-radius: 0 0 10px 0;
         top: 0;
         left: 0;
-        font: 700 11px/1em $robotocondensed;
+        font: 700 11px/1em $bebas;
         text-transform: uppercase;
         //border: 1px solid #ddd;
         //border-width: 0 1px 1px 0;
@@ -1049,7 +1049,7 @@ img {
                             border-radius: 0 0 10px 0;
                             top: 0;
                             left: 0;
-                            font: 700 11px/1em $robotocondensed;
+                            font: 700 11px/1em $bebas;
                             text-transform: uppercase;
                             padding: 4px 7px;
                             @include tablet {
@@ -1228,7 +1228,7 @@ img {
                     border: 2px solid #717D80;
                     border-width: 0 0 2px;
                     color: #717D80;
-                    font: 700 12px $robotocondensed;
+                    font: 700 12px $bebas;
                     text-transform: uppercase;
                     box-shadow: none;
                     width: auto;

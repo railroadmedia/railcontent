@@ -59,7 +59,7 @@
             }
         }
         form input[type="submit"], form button[type="submit"], form input button, form button button {
-            font-family: 'Roboto Condensed', sans-serif;
+            font-family: 'Bebas Neue', sans-serif;
             font-weight: 700;
             color: #fff;
             background: #0b76db;
@@ -149,7 +149,7 @@
         }
 
         .thank-you-box h2 {
-            font:700 30px/1em "Roboto Condensed", sans-serif;
+            font:700 30px/1em "Bebas Neue", sans-serif;
             margin:15px auto;
             text-transform:uppercase;
             color:#0b76db
@@ -496,11 +496,6 @@ $points = [
     ])
 
     @include("drumeo.sales.partials._footer")
-
-    {{-- @include('_partials.components.countdown',[
-        'countdownDate' => '2023-09-04 00:00:00',
-        'promoVersion' => false
-    ]) --}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>

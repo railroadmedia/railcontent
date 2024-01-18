@@ -553,7 +553,7 @@ img {
         }
 
         strong {
-          font-family: $robotocondensed;
+          font-family: $bebas;
           text-transform: uppercase;
           color: $guitareoGreen;
           font-size: 20px;
@@ -639,7 +639,7 @@ img {
         width: auto;
         margin: 0;
         text-shadow: 0 0 10px #000;
-        font: 400 14px/1.1em $robotocondensed;
+        font: 400 14px/1.1em $bebas;
 
         strong {
           text-transform: uppercase;
@@ -738,7 +738,7 @@ img {
       }
 
       strong {
-        font-family: $robotocondensed;
+        font-family: $bebas;
         line-height: 1em;
         display: block;
         font-size: 14px;
@@ -771,7 +771,7 @@ img {
     }
 
     h1 {
-      font: 700 20px/1em $robotocondensed;
+      font: 700 20px/1em $bebas;
       margin: 20px auto 10px;
       text-transform: uppercase;
       @include tablet {
@@ -859,7 +859,7 @@ img {
 
 
     p {
-      font: 400 14px/1.2em $robotocondensed;
+      font: 400 14px/1.2em $bebas;
       margin: 20px auto 0;
       text-transform: uppercase;
       color: #fff;
@@ -1012,7 +1012,7 @@ img {
   transition: opacity .5s;
   overflow: hidden;
   position: relative;
-  font: 400 13px/1em $robotocondensed;
+  font: 400 13px/1em $bebas;
   box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.2);
   white-space: nowrap;
   z-index: 1;

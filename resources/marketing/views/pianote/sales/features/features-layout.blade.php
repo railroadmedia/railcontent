@@ -22,7 +22,7 @@
 
 @section('page-footer')
     @include('musora.sales.components.order-section-collage', [
-        'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png',
+        'logo' => 'marketing/pianote/membership/homepage/2024/pianote-logo-red.webp',
         'header' => 'Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>

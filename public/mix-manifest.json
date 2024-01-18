@@ -1,11 +1,11 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=4dc61e13ec5238717f6b6ef2600877e9",
+    "/platform/js/app.js": "/platform/js/app.js?id=73ea3cce53cca2b1c25e80cd81cac13f",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c889beb1ba5e4503ed1f92f9acca9348",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=5e255771f4c18ff0e362dff1c2b220f8",
     "/platform/js/books.js": "/platform/js/books.js?id=9429572834ae6ec9f887ec8226778941",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=7fedec6a754d947469293c207900a016",
-    "/platform/js/playlist-playback.js": "/platform/js/playlist-playback.js?id=53d98f231839ea7bab176a609adb8c65",
-    "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=561fed6b39894601fa5c6c54de118a02",
+    "/platform/js/playlist-playback.js": "/platform/js/playlist-playback.js?id=9da3dfd7169d3690d85e714eab8afc6e",
+    "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=adf48238704fd4b1d17e5e076d01b3f9",
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=f5972ab00486daad0811be3dc1d3d413",
     "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=2da4069227cee41d6e3316da55cdf312",
     "/platform/js/song.js": "/platform/js/song.js?id=6f823770fc2645e1f5818e009f6281b9",
@@ -26,8 +26,8 @@
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=c42a89d6b103cf8520a19ddbd16b64a9",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=87068a33136c70283a70c493d6ae7f1e",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=8ebf5120c66c66caf55528d3cdf70d42",
-    "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=027c1f4cbef556d1be41f55b7047d511",
-    "/platform/css/app.css": "/platform/css/app.css?id=5108159ab5afd7482b4ae515aed26d8c",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=3a629fffdfae793eeff00b0411057d2e",
+    "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=030b4efdb485e7244dd5a93cea1c1710",
+    "/platform/css/app.css": "/platform/css/app.css?id=dad201295b24fc1294278a3e8c014b0d",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=c95d0c5cf33ec9f845fea3bd9deb85c7",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=c098e0ea998b06116bfa4feb2ddbad64"
 }

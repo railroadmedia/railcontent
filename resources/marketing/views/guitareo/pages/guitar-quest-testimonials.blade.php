@@ -15,7 +15,6 @@
     @parent
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/fonts.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/guitar-quest.css') }}" rel="stylesheet">
     <style>
         h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
@@ -77,7 +76,7 @@
             background: #ffb100;
             color: #000718;
             border: 2px solid #ffb100;
-            font: 700 15px/1em 'Roboto Condensed', sans-serif;
+            font: 700 15px/1em 'Bebas Neue', sans-serif;
             transition-property: background-color, border-color, color, fill, stroke;
             transition-duration: 300ms;
             text-transform: uppercase;
@@ -250,7 +249,7 @@
     <section class="text-center px-4 md:px-8 text-white" style="background-color:#000512;">
         <div id="motivated" class="anchor"></div>
         <div class="container mx-auto" style="max-width: 850px;">
-            <h1 class="font-bison-bold leading-none text-3xl md:text-6xl lg:text-7xl mb-12 md:mb-20 lg:mb-28"><strong>STAY MOTIVATED <br class="inline md:hidden"> & HAVE FUN</strong></h1>
+            <h1 class="font-bebas leading-none text-3xl md:text-6xl lg:text-7xl mb-12 md:mb-20 lg:mb-28"><strong>STAY MOTIVATED <br class="inline md:hidden"> & HAVE FUN</strong></h1>
             <div class="flex flex-wrap">
                 @php
                     $testimonials = [
@@ -351,7 +350,7 @@
     <section class="text-center px-4 md:px-8 text-white" style="background-color:#000512;">
         <div id="faster" class="anchor"></div>
         <div class="container mx-auto" style="max-width: 850px;">
-            <h1 class="font-bison-bold leading-none text-3xl md:text-6xl lg:text-7xl pt-12 md:pt-16 lg:pt-18 mb-12 md:mb-20 lg:mb-28"><strong>LEARN FASTER <br class="inline md:hidden"> & PLAY SONGS</strong></h1>
+            <h1 class="font-bebas leading-none text-3xl md:text-6xl lg:text-7xl pt-12 md:pt-16 lg:pt-18 mb-12 md:mb-20 lg:mb-28"><strong>LEARN FASTER <br class="inline md:hidden"> & PLAY SONGS</strong></h1>
             <div class="flex flex-wrap">
                 @php
                     $testimonials = [
@@ -447,7 +446,7 @@
         <div class="max-w-screen-xl m-auto px-6 flex">
             <div class="w-full m-auto text-white text-center lg:w-2/3">
                 <img src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png" width="400px" class="m-auto block mb-10">
-                <h2 class="uppercase text-3xl font-bison-bold sm:text-5xl md:text-6xl mb-2">Your Guitar Journey<br class="inline xl:hidden"> Starts Here.</h2>
+                <h2 class="uppercase text-3xl font-bebas sm:text-5xl md:text-6xl mb-2">Your Guitar Journey<br class="inline xl:hidden"> Starts Here.</h2>
 
                 <h4 class="text-xl mb-2 md:mb-10 font-primary sm:text-2xl md:text-3xl">
                     @if($productPrice < floatval($productPrices['guitar-quest']->price))
@@ -461,7 +460,7 @@
                     @endif
                 </h4>
 
-                <a title="Go To Order Page" href="{{ $orderLink }}" class="bg-goldenrod-gradient transition duration-500 linear px-4 py-4 w-full inline-block uppercase text-black font-roboto-condensed-bold rounded-full text-3xl mb-5 md:w-3/4">
+                <a title="Go To Order Page" href="{{ $orderLink }}" class="bg-goldenrod-gradient transition duration-500 linear px-4 py-4 w-full inline-block uppercase text-black font-bebas rounded-full text-3xl mb-5 md:w-3/4">
                     Start Your Quest &raquo;
                 </a>
 
