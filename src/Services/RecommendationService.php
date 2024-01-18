@@ -132,7 +132,20 @@ class RecommendationService
         ];
 
         $response = Http::withToken($authToken)->post($url, $data);
+        if ($response->status() != 200) {
+            \Log::info($response);
+        }
+        if ($response->status() == 503) {
+            // service unavailable, retry once
+            $response = Http::withToken($authToken)->post($url, $data);
+        }
         $content = $response->json();
+        if (!$content) {
+            $content = [];
+            foreach($userIDs as $userID) {
+                $content[$userID] = [];
+            }
+        }
         return $content;
     }
 }
