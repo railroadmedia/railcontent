@@ -199,7 +199,7 @@ class CoachPagesController extends Controller
         );
 
         $upcomingCoaches = config('coaches.upcoming_coaches', []);
-
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['coaches'] ?? [];
         return view('content.coaches-index', [
             'coaches' => $coaches,
             'activeCoaches' => $activeCoaches->results(),
@@ -221,6 +221,7 @@ class CoachPagesController extends Controller
             "onlySubscribedCoaches" => $request->get('only_subscribed', false),
             'upcomingCoaches' => $upcomingCoaches,
             'hasUpcomingCoaches' => ($upcomingCoaches && count($upcomingCoaches) > 0),
+            "catalogueMeta" => $catalogueMeta,
         ]);
     }
 
