@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
     <meta property="og:url" content="https://www.musora.com/careers/">
 
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <script type="module" crossorigin src="https://dywrfp5ctng3l.cloudfront.net/external-jobs-table/index.js"></script>
     <link rel="stylesheet" href="https://dywrfp5ctng3l.cloudfront.net/external-jobs-table/index.css">
     <style>

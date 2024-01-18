@@ -39,7 +39,7 @@
                         <img
                             class="{{$secondImageHeight}} rounded-md transition-opacity opacity-0"
                             src={{ $secondDealImage }}
-                                        loading="lazy"
+                            loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             alt="card image"
                         >

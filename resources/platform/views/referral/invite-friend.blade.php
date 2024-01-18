@@ -66,6 +66,18 @@
                     //open modal
                     window.openModal('confirmationModal');
                 })
+                    .then((res) => {
+                        fetch('{{ url()->route('musora-api.v1.referral.invite_sent') }}', {
+                            method: 'POST',
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                _token: '{{ csrf_token() }}',
+                                brand,
+                            }),
+                        });
+                    })
             }
             else {
                 email.classList.add('tw-bg-red-200');
@@ -78,6 +90,16 @@
             window.shownotification({
                 icon: 'fa-file-import',
                 text: `Link copied to clipboard.`
+            });
+            fetch('{{ url()->route('musora-api.v1.referral.link_copied') }}', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    _token: '{{ csrf_token() }}',
+                    brand: document.getElementById('brand').value
+                }),
             });
         }
 

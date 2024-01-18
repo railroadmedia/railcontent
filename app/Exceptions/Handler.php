@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Log;
+use Railroad\MusoraApi\Exceptions\MusoraAPIException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -38,13 +39,16 @@ class Handler extends ExceptionHandler
         $this->renderable(function (Throwable $e) {
             if (request()->wantsJson()) {
                 return response()->json([
-                                            'message' => $e->getMessage(),
-                                            'trace' => ' File::'.$e->getFile().' Line::'.$e->getLine(),
-                                        ], 500);
+                    'message' => $e->getMessage(),
+                    'trace' => ' File::' . $e->getFile() . ' Line::' . $e->getLine(),
+                ], 500);
             }
         });
 
         $this->reportable(function (Throwable $e) {
+            if ($e instanceof MusoraAPIException) {
+                return false;
+            }
             Log::info(request()->url());
         });
     }

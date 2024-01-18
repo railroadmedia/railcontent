@@ -130,7 +130,7 @@
     </section>
 
     @include('guitareo.lead-gen.partials._meet-your-teacher1', [
-        "font" => "font-bison-bold",
+        "font" => "font-bebas",
         "bgColor" => "black",
         "meetYourTeacher" => '<h2>Meet your teacher...</h2>',
         "name" => '<img class="w-full mb-80 md:my-7 md:max-w-md" src="https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/rob-scallon.png" style="max-width:210px;">',
