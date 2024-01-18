@@ -85,17 +85,32 @@
                 </div>
             </div>
             <div class="mt-5 sm:mt-0 sm:pl-7 sm:w-1/2 flex-grow-0">
-                <div class="h-full rounded-xl p-7 lg:p-10 pb-64 sm:pb-48 bg-black @if($theme != 'musora') text-white @else text-black @endif flex relative"
-                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-                x-intersect.once="lazyLoad = true">
-                    <picture class="absolute inset-0 w-full h-full rounded-xl object-cover bg-top">
+                <div class="h-full rounded-xl p-7 lg:p-10 pb-64 sm:pb-48 @if($theme != 'musora') text-white @else text-black @endif flex relative"
+                    :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                    x-intersect.once="lazyLoad = true">
+                    <div class="absolute inset-0 w-full h-full rounded-xl object-cover bg-top" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
+                        <picture>
+                            <source data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/{{ $workoutsBG }}"
+                                media="(min-width:640px)">
+                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)//filters:blur(9)/{{ $workoutsBG }}" 
+                                data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $workoutsBG }}" 
+                                alt="Workouts Background"
+                                class="w-full h-full object-cover rounded-xl transition-opacity opacity-0 duration-300 lazyload" 
+                                onload="this.classList.remove('opacity-0');"
+                                loading="lazy"> 
+                        </picture>
+                    </div>
+                
+                {{-- <div class="absolute inset-0 w-full h-full rounded-xl object-cover bg-top"> 
+                    <picture>
                         <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/{{ $workoutsBG }}"
                                 media="(min-width:640px)">
                         <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $workoutsBG }}"
-                            alt="Workouts Background"
-                            class="w-full h-full object-cover rounded-xl opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"
-                            loading="lazy">
+                                            alt="Workouts Background"
+                                            class="w-full h-full object-cover rounded-xl opacity-0 transition-opacity lazyload" onload="this.classList.remove('opacity-0')"
+                                            loading="lazy">
                     </picture>
+                </div> --}}
 
                     <div class="relative z-10">
                         <h5 class="leading-tight mb-3"><strong>
