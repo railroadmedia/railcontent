@@ -1,6 +1,6 @@
 <?php
 
-namespace  App\Decorators\GroupedContent;
+namespace App\Decorators\GroupedContent;
 
 use App\Decorators\Content\ModeDecoratorBase;
 use App\Decorators\Content\UrlDecorator;
@@ -12,25 +12,30 @@ class GroupedContentDecorator extends ModeDecoratorBase
 
     public function decorate(Collection $contents)
     {
-        $contentsOfType = $contents->whereIn('type', ['style','artist']);
+        $contentsOfType = $contents->whereIn('type', ['style', 'artist', 'instructor']);
 
         if ($contentsOfType->isEmpty()) {
             return $contents;
         }
 
-        foreach($contents as $index=>$content){
-            if($content['type'] == 'artist')
-            {
-                $contents[$index]['url'] = url()->route('platform.content.artist.show',[
+        foreach ($contents as $index => $content) {
+            if ($content['type'] == 'artist') {
+                $contents[$index]['url'] = url()->route('platform.content.artist.show', [
                     'brand' => brand(),
-                    'slug' => $content['artist']
+                    'slug' => $content['artist'],
                 ]);
-            }else{
-                $contents[$index]['url'] = url()->route('platform.content.genre.show',[
+            } elseif ($content['type'] == 'style') {
+                $contents[$index]['url'] = url()->route('platform.content.genre.show', [
                     'brand' => brand(),
-                    'genre' => $content['grouped_by_field'],
-                    'contentTypeName' => 'courses'
+                    'genre' => urlencode($content['grouped_by_field']),
+                    'contentTypeName' => $content['content_type'],
                 ]);
+            } else {
+                $contents[$index]['url'] = url()->route('platform.content.coach.show', [
+                    'brand' => brand(),
+                    'firstContentSlug' => $content['slug'],
+                    'firstContentId' => $content['id'],
+                ]).'?included_types[]='.$content['content_type'];
             }
         }
 
