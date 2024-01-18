@@ -187,11 +187,39 @@ displayed in the Run Window of your PhpStorm.
 ![](https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/e0eb64b1-b163-4626-e217-5ce9d80d7900/public)
 
 ## Git Hooks
-We use [husky](https://github.com/typicode/husky) to set up Git hooks, to run on each developers' environment. These can be 
-found in the .husky directory and consist of the following:
-- pre-push
-  - This will automatically run all of our tests when you attempt to push (e.g. `git push origin my-branch`). If any tests fail, you will not be able to push.
-    - If you need to bypass this check, add the `--no-verify` option to your push command.
+Developers (especially BE) are encouraged to use [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) 
+to automatically perform desired actions, such as running the test suite before committing. You automatically have a hidden 
+directory for these in `.git/hooks` of the project's root, which is filled with example of hooks you can use. 
+
+Note that PhpStorm hides the .git directory by default. You can change that by going into the Settings and under 
+Editor -> File Types, there will be a tab titled Ignored Files and Folders, where you can remove the .git entry.
+
+Below is an example of the `.git/hoooks/pre-push` file that will run all of our tests inside the php 8 docker container 
+when you try to push to any branch:
+
+```shell
+#!/bin/sh
+
+printf "\nRunning tests\n"
+
+docker exec --workdir /app/musora-web-platform railenvironmentdocker_apache-php-fpm-8 php artisan test --parallel --recreate-databases --processes=4
+result=$?
+
+if [ $result -eq 0 ]
+then
+    printf "\nAll tests passed\n"
+else
+    printf "\nPlease fix failing tests before pushing\n"
+fi
+
+exit $result
+```
+
+These Git Hooks are unique to your environment and are not shared in the code repository. If you have your own hooks that 
+you find useful, please share them with the team.
+
+As a reminder, if you want to temporarily bypass one of your hooks, simply add the `--no-verify` option to your command. 
+e.g. `git push origin my-branch --no-verify`
 
 ## Code Coverage
 phpunit allows us to generate a code coverage report, that identifies what code is and isn't covered by tests. You can run 
