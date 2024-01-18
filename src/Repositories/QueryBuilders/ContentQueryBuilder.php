@@ -823,4 +823,23 @@ class ContentQueryBuilder extends QueryBuilder
 
         return $this;
     }
+
+    public function selectGroupedCountColumns($groupBy)
+    {
+        $isTableContent = $groupBy['is_content_column'] ?? false;
+        $alias = ConfigService::$tableContent;
+        $field = 'id';
+
+        if ($isTableContent) {
+            $field = $groupBy['field'];
+        } elseif(!empty($groupBy['associated_table'])) {
+            $field = $groupBy['associated_table']['column'];
+            $alias = $groupBy['associated_table']['alias'];
+        }
+        $this->select([
+                             $this->raw('DISTINCT('. $alias.'.'.$field.') as id'),
+                         ]);
+
+        return $this;
+    }
 }
