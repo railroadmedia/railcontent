@@ -57,6 +57,7 @@
                             pauseOnHover: true,
                             pauseOnFocus: true,
                             interval: 5000,
+                            lazyLoad: 'nearby',
                             breakpoints: {
                                 1020: {
                                     padding: '2.5rem',
@@ -69,7 +70,8 @@
                                     snap   : false,
                                 },
                             },
-                        }).mount()
+                        }
+                        ).mount()
                     },
                 }"
             >
@@ -80,15 +82,19 @@
                                 <li class="splide__slide flex px-1">
                                     <div class="w-full rounded-xl p-6 text-white flex flex-wrap sm:flex-nowrap transition-colors duration-300 active-bg"
                                         style="background-color:#0C1524;">
-                                        <div class="w-full @if(!empty($testimonial['video'])) sm:w-1/2 cursor-pointer @else sm:w-1/2 @endif flex-shrink-0 bg-cover bg-center rounded-xl relative h-56 sm:h-80 lg:h-[32rem]"
-                                             :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-                                             :style="`background-image:url('{{$testimonial['image']}}'); background-color: rgba(0, 0, 0, 0.6)`"
-                                             x-intersect.once="lazyLoad = true"
+                                        <picture class="w-full @if(!empty($testimonial['video'])) sm:w-1/2 cursor-pointer @else sm:w-1/2 @endif flex-shrink-0 bg-cover bg-center rounded-xl relative h-56 sm:h-80 lg:h-[32rem]"
+                                            :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
                                             @if(!empty($testimonial['video']))
                                                 x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
                                             @endif
                                         >
-                                        </div>
+                                            <img
+                                                data-splide-lazy="{{$testimonial['image']}}"
+                                                alt="{{ $testimonial['name'] }}"
+                                                class="object-cover w-full h-full"
+                                                @load="event.target.parentNode.style.backgroundImage = `url(${event.target.src})`"
+                                            >
+                                        </picture>
                                         <div class="flex flex-col justify-between text-left sm:pl-8 sm:py-5">
                                             <h3 class="leading-normal mt-3 sm:mt-0 mb-2"><em>{!! $testimonial['title'] !!}</em></h3>
                                             <div class="flex items-center">
