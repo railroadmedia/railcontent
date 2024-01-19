@@ -9,6 +9,7 @@ use App\Http\Controllers\Content\CoachesController;
 use App\Maps\ContentTypes;
 use App\Modules\Content\Services\CarouselService;
 use App\Modules\Content\Services\CohortService;
+use App\Modules\Content\Services\LearningPathsService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
@@ -49,6 +50,7 @@ class HomePageController extends BaseController
     private CarouselService $carouselService;
     private CohortService $cohortService;
     private UserProductService $userProductService;
+    private LearningPathsService $learningPathsService;
 
     /**
      * @param ContentService $contentService
@@ -78,6 +80,7 @@ class HomePageController extends BaseController
         CohortService $cohortService,
         UserProductService $userProductService,
         OnboardingService $onboardingService,
+        LearningPathsService $learningPathsService
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
@@ -91,6 +94,7 @@ class HomePageController extends BaseController
         $this->cohortService = $cohortService;
         $this->userProductService = $userProductService;
         $this->onboardingService = $onboardingService;
+        $this->learningPathsService = $learningPathsService;
     }
 
     public function homeRedirect()
@@ -309,6 +313,13 @@ class HomePageController extends BaseController
 
         $carousel = $this->carouselService->getCarouselSlides();
 
+        //TODO:
+        $shouldShowTrialSection = true;
+        $trialSection = [];
+        if($shouldShowTrialSection){
+            $trialSection = $this->learningPathsService->getLearningPaths();
+        }
+
         $cohortBanner = [];
         $activeCohort = $this->cohortService->getActiveCohort();
 
@@ -389,6 +400,8 @@ class HomePageController extends BaseController
             'carousel' => $carousel,
             'cohortBanner' => json_encode($cohortBanner),
             'existsCohortBanner' => !empty($cohortBanner),
+            'existsTrialSection' => $shouldShowTrialSection,
+            'trialSection' => $trialSection,
         ]);
     }
 
