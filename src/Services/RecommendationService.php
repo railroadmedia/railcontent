@@ -34,7 +34,7 @@ class RecommendationService
         if ($this->hasNoResults($brand, $section)) {
             return [];
         }
-        return $this->getFilteredRecommendationsUsingHuggingFace([$userID], $brand, $section)[$userID],
+        return $this->getFilteredRecommendationsUsingHuggingFace([$userID], $brand, $section)[$userID];
 //        return match($this->accessMethod)
 //        {
 //            AccessMethod::PDO => $this->getFilteredRecommendationsUsingPDO($userID, $brand, $section),
