@@ -18,6 +18,7 @@ class FulfillOrdersImportedIntoShopifyDispatcher extends Command
      * @var string
      */
     protected $signature = 'shopify:fulfill-imported-orders
+                            {--customerId= : (Optional) the Shopify ID of the customer to restrict the orders to}
                             {--limit= : (Optional) The number of orders to limit this run to}
                             {--execute : Update the database records. Without this flag, results will be simulated.}';
     /**
@@ -37,9 +38,10 @@ class FulfillOrdersImportedIntoShopifyDispatcher extends Command
     {
         $simulate = $this->option("execute") == false;
         $limit = $this->option("limit");
+        $customerId = $this->option("customerId");
 
         $startAt = Carbon::now();
-        $batch = Bus::batch(new FulfillOrdersImportedIntoShopify(null, $limit, $simulate))
+        $batch = Bus::batch(new FulfillOrdersImportedIntoShopify(null, $limit, $customerId, $simulate))
             ->then(function (Batch $batch) use ($startAt) {
                 Log::info(
                     sprintf("FulfillOrdersImportedIntoShopify: completed in %s seconds", $startAt->diffInSeconds())

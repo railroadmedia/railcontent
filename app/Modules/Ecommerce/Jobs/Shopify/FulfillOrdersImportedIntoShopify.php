@@ -55,6 +55,7 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
     public function __construct(
         protected ?string $endCursor,
         protected ?int $limit,
+        protected ?int $customerId,
         protected bool $simulate,
     ) {
     }
@@ -100,7 +101,7 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
         if ($this->hasNextPage && $limitRemaining) {
             // create another job to do the next batch
             $this->batch()->add(
-                new FulfillOrdersImportedIntoShopify($this->endCursor, $limitRemaining, $this->simulate)
+                new FulfillOrdersImportedIntoShopify($this->endCursor, $limitRemaining, $this->customerId, $this->simulate)
             );
         }
     }
@@ -118,10 +119,11 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
         $date = self::SHOPIFY_LAUNCH_DATE_TIME;
         $count = is_null($this->limit) ? self::PAGE_SIZE : min(self::PAGE_SIZE, $this->limit);
         $cursor = empty($endCursor) ? "" : "after: \"$endCursor\",";
+        $customerIdQuery = empty($this->customerId) ? "" : "AND customer_id:{$this->customerId}";
 
         $gql = <<<GQL
             query {
-                orders(first: $count, $cursor query: "created_at:<=\"$date\" AND financial_status:paid AND -fulfillment_status:shipped", sortKey: PROCESSED_AT) {
+                orders(first: $count, $cursor query: "created_at:<=\"$date\" $customerIdQuery AND financial_status:paid AND -fulfillment_status:shipped", sortKey: PROCESSED_AT) {
                     nodes {
                         ... on Order {
                             id,
