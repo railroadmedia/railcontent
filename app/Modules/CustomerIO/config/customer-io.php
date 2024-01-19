@@ -338,7 +338,7 @@ return [
                     'drumeo',
                 ],
             ],
-            'Alesis Waitlist Waitlist' => [
+            'Alesis Waitlist' => [
                 'custom_attributes' => [
                 ],
                 'events' => [

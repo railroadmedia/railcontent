@@ -744,7 +744,7 @@
                     "formName" => 'Alesis Waitlist',
                     "buttonText" => "Notify Me",
                     'stacked' => true,
-                    "redirectURL" => "/drumshop/kit?notify",
+                    "redirectURL" => "/drumshop/kit?thankyou",
                     "recaptchaKey" => $recaptchaKey,
                     "minimalForm" => true
                 ])
