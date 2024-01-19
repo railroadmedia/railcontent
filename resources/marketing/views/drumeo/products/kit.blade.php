@@ -222,6 +222,7 @@
 @section('body-data')
     x-data="{
     waitlist: false,
+    lazyLoad: false,
     trailer: false,
     image1: false,
     image2: false,
@@ -754,6 +755,6 @@
     @endcomponent
 
     @include("drumeo.sales.partials._footer")
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" async defer></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" async defer></script>
 @stop
