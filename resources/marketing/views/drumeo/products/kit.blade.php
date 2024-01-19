@@ -276,7 +276,8 @@
                 @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
                     <a class="w-full join smaller blue" href="{{ $orderUrl }}">Buy Now</a>
                 @else
-                    <a class="w-full join smaller sold-out" @click="waitlist = true;">Join The Waitlist</a>
+                    <h4 class="bg-black w-full text-red-600 leading-tight py-1 mb-3"><strong>SOLD OUT</strong></h4>
+                    <a class="w-full join smaller blue" @click="waitlist = true;">Join The Waitlist</a>
                 @endif
                 <br>
                 <div class="join smaller outline mt-3" @click="trailer = true;"><i class="fas fa-play"></i> &nbsp;WATCH
@@ -598,7 +599,8 @@
                     @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
                         <a class="join blue smaller w-full max-w-xs" href="{{ $orderUrl }}">Buy Now</a>
                     @else
-                        <a class="join sold-out smaller w-full max-w-xs" @click="waitlist = true;">Join The Waitlist</a>
+                        <h4 class="text-red-600 leading-tight mb-2"><strong>SOLD OUT</strong></h4>
+                        <a class="join blue smaller w-full max-w-xs" @click="waitlist = true;">Join The Waitlist</a>
                     @endif
                 </div>
                 <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
@@ -714,7 +716,7 @@
     <section class="text-center py-10 text-white" style="background: #00101D;">
         <div class="container mx-auto relative z-50">
             <div class="inline-block w-full px-3 md:px-4 mb-5 opacity-60">
-                <p @click="waitlist = true;">Call us toll-free at
+                <p>Call us toll-free at
                     <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
                     <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
             </div>
