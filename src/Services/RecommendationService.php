@@ -20,7 +20,7 @@ class RecommendationService
     private array $RETRY_ERROR_CODES = [500, 503];
 
     public function __construct(
-        private DatabaseManager $databaseManager,
+        //private DatabaseManager $databaseManager,
     ) {
         $this->accessMethod = AccessMethod::HUGGINGFACE;
         $this->invalidConfigurations = [
