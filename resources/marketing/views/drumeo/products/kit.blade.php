@@ -713,7 +713,7 @@
     <section class="text-center py-10 text-white" style="background: #00101D;">
         <div class="container mx-auto relative z-50">
             <div class="inline-block w-full px-3 md:px-4 mb-5 opacity-60">
-                <p>Call us toll-free at
+                <p @click="waitlist = true;">Call us toll-free at
                     <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
                     <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
             </div>
