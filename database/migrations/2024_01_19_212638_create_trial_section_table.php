@@ -28,6 +28,34 @@ return new class extends Migration
             $table->integer('display_order');
             $table->timestamps();
         });
+
+        $lists = [
+            [
+                'brand_id' => 1,
+                'title' => 'Get To Playing Songs Fast',
+                'subtitle' => '30-Day Drumming Quick-Start',
+                'description' => 'Learn by actually playing the drums. By focusing on timing & coordination.',
+                'tagline' => 'Best Rated Course',
+                'desktop_img' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/4487c685-3f71-40fe-9697-c7ae14638200/public',
+                'product_id' => 402199,
+                'trailer' => 'https://player.vimeo.com/video/825206369?h=e8d828248a&autoplay=1',
+                'display_order' => 1,
+            ],
+            [
+                'brand_id' => 1,
+                'title' => 'Learn Everything, Slowly',
+                'subtitle' => 'A Lifetime of Learning',
+                'description' => 'Follow our extensive step=by-step curriculum that will take you from your first hits.',
+                'desktop_img' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/afea1626-b9ed-4963-2285-aab5acefa700/public',
+                'product_id' => 241247,
+                'trailer' => 'https://player.vimeo.com/video/825206369?h=e8d828248a&autoplay=1',
+                'display_order' => 2,
+            ]
+        ];
+
+        foreach ($lists as $item) {
+            \App\Models\TrialSection::create($item);
+        }
     }
 
     /**
