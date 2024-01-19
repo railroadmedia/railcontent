@@ -186,6 +186,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             ];
         }
 
+        //TODO: show_learning_paths_on_homepage based on user's data
         return array_merge([
             'id' => $user->id,
             'email' => $user->email,
@@ -200,6 +201,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'has_started_method' => $hasStartedMethod ?? false,
             'has_completed_method' => $hasCompletedMethod ?? false,
             'login_as_users' => $user->hasRole('login_as_users'),
+            'show_learning_paths_on_homepage' => true,
         ], $extraData);
     }
 
