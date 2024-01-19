@@ -124,6 +124,23 @@ onBeforeMount(()=> {
 </script>
 <template>
     <nav class="tw-flex tw-my-4 tw-w-full tw-items-center tw-flex-wrap md:tw-flex-nowrap">
+        <!-- Search -->
+        <div class="tw-relative tw-w-full md:tw-max-w-[465px] md:tw-mx-4 tw-mb-[20px] md:tw-mb-0 xl:tw-ml-[30px] xl:tw-mr-[26px] tw-order-1 md:tw-order-2">
+            <MusoraIcon
+                icon-name="search"
+                class="tw-absolute tw-top-5 tw-left-[26px] dark:tw-text-[#9EC0DC] tw-z-0"
+            />
+            <input type="text"
+                   class="tw-px-[50px] tw-w-full tw-h-[50px] focus:tw-ring-0 tw-text-[#00101D] dark:tw-text-white dark:focus:tw-bg-[#00101D] dark:placeholder:tw-text-[#9EC0DC] dark:tw-border-[#445F74] tw-bg-white dark:tw-bg-transparent tw-rounded-full focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#D4D4D8]"
+                   placeholder="Search"
+                   ref="playlistSearch"
+                   v-model="state.searchTerm"
+                   @keyup.enter="loadPlaylists"
+            >
+            <button v-if="state.searchTerm.length" class="tw-absolute tw-top-4 tw-w-[18px] tw-right-[22px] dark:tw-text-white tw-z-0" @click="state.searchTerm = ''">
+                <XIcon class="" />
+            </button>
+        </div>
         <!--Sort -->
         <div class="tw-w-full tw-max-w-[calc(100%-68px)] tw-pr-3 md:tw-pr-0 md:tw-max-w-[290px] tw-mr-auto tw-order-3 md:tw-order-1 form-group md:tw-mr-1">
             <select name="playlist-sort"
@@ -159,25 +176,6 @@ onBeforeMount(()=> {
                     @click="cancelCategoryFilter"
                 ></i>
             </span>
-        </div>
-
-        <!-- Search -->
-        <div class="tw-relative tw-w-full md:tw-max-w-[465px] md:tw-mx-4 tw-mb-[20px] md:tw-mb-0 xl:tw-ml-[30px] xl:tw-mr-[26px] tw-order-1 md:tw-order-2">
-            <MusoraIcon
-                icon-name="search"
-                class="tw-absolute tw-top-5 tw-left-[26px] dark:tw-text-[#9EC0DC] tw-z-0"
-            />
-            <input type="text"
-                   class="tw-px-[50px] tw-w-full tw-h-[50px] focus:tw-ring-0 tw-text-[#00101D] dark:tw-text-white dark:focus:tw-bg-[#00101D] dark:placeholder:tw-text-[#9EC0DC] dark:tw-border-[#445F74] tw-bg-white dark:tw-bg-transparent tw-rounded-full focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#D4D4D8]"
-                   placeholder="Search"
-                   ref="playlistSearch"
-                   v-model="state.searchTerm"
-                   @keyup.enter="loadPlaylists"
-            >
-            <button v-if="state.searchTerm.length" class="tw-absolute tw-top-4 tw-w-[18px] tw-right-[22px] dark:tw-text-white tw-z-0" @click="state.searchTerm = ''">
-                <XIcon class="" />
-            </button>
-
         </div>
         <!-- List/Grid Toggle -->
         <div class="tw-flex-shrink-0 tw-order-3">

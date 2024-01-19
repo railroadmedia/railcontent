@@ -122,6 +122,11 @@ module.exports = (theme) => {
         },
 
         //Button Variants,
+        '.btn-regular': {
+            padding: '7px 70px 6px',
+            height: 'auto',
+            width: 'auto'
+        },
         '.btn-circle': {
             padding: '0',
             height: '50px',

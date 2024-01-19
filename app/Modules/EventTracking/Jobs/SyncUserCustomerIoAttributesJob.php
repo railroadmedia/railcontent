@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 use Throwable;
 
-class MergeDBCustomerIoProfilesJob extends BatchQueryJob
+class SyncUserCustomerIoAttributesJob extends BatchQueryJob
 {
     private int $skip;
     private int $take;
@@ -47,49 +47,22 @@ class MergeDBCustomerIoProfilesJob extends BatchQueryJob
         $accountConfigData = $this->customerIoService->getAccountConfigData($this->workspaceName);
 
         return Customer::query()
-            ->selectRaw('email, count(*) as pcount')
+            ->whereNotNull('user_id')
             ->where(
                 [
                     'workspace_id' => $accountConfigData['workspace_id'],
                     'site_id' => $accountConfigData['site_id'],
                     'workspace_name' => $this->workspaceName,
                 ]
-            )
-            ->groupBy('email')
-            ->having('pcount', '>', 1);
+            );
     }
 
     public function handleItem($item): void
     {
         try {
-            $accountConfigData = $this->customerIoService->getAccountConfigData($this->workspaceName);
-
             /** @var Customer $item */
-            $profiles = Customer::query()
-                ->where('email', $item->email)
-                ->where(
-                    [
-                        'workspace_id' => $accountConfigData['workspace_id'],
-                        'site_id' => $accountConfigData['site_id'],
-                        'workspace_name' => $this->workspaceName,
-                    ]
-                )
-                ->orderByRaw('user_id desc, created_at asc, updated_at desc');
-
-            $primary = $profiles->first();
-            $profiles = $profiles->skip(1)->get();
-            foreach ($profiles as $secondary) {
-                $this->customerIoService->mergeCustomers($this->workspaceName, $primary->uuid, $secondary->uuid);
-            }
-
-            $user = User::query()->where('email', $item->email)->first();
-
-            if ($user) {
-                $primary->user_id = $user->id;
-                $primary->save();
-
-                $this->shopifySyncService->syncCustomerByUser($user, false, false);
-            }
+            $user = User::find($item->user_id);
+            $this->shopifySyncService->syncCustomer($user, $user->email);
         } catch (Throwable $ex) {
             Log::error("Error migrating profile for email $item->email");
             Log::error($ex);
