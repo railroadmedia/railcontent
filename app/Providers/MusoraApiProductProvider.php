@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Carousel;
 use App\Modules\Content\Services\CarouselService;
 use App\Modules\Content\Services\CohortService;
+use App\Modules\Content\Services\LearningPathsService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use App\Services\PackService;
 use App\Services\PlaylistService;
@@ -27,6 +28,7 @@ class MusoraApiProductProvider implements ProductProviderInterface
     private VimeoTrailerDecorator $vimeoTrailerDecorator;
     private ContentService $contentService;
     private PlaylistService $playlistService;
+    private LearningPathsService $learningPathsService;
 
     /**
      * @param CarouselService $carouselService
@@ -46,7 +48,8 @@ class MusoraApiProductProvider implements ProductProviderInterface
         PackService $packService,
         VimeoTrailerDecorator $vimeoTrailerDecorator,
         ContentService $contentService,
-        PlaylistService $playlistService
+        PlaylistService $playlistService,
+        LearningPathsService $learningPathsService
     ) {
         $this->carouselService = $carouselService;
         $this->userProductService = $userProductService;
@@ -56,6 +59,7 @@ class MusoraApiProductProvider implements ProductProviderInterface
         $this->vimeoTrailerDecorator = $vimeoTrailerDecorator;
         $this->contentService = $contentService;
         $this->playlistService = $playlistService;
+        $this->learningPathsService = $learningPathsService;
     }
 
     public function getPackPrice($slug)
@@ -212,6 +216,11 @@ class MusoraApiProductProvider implements ProductProviderInterface
     public function getVimeoEndpoints($vimeoId)
     {
        return  $this->vimeoTrailerDecorator->decorate($vimeoId);
+    }
+
+    public function getLearningPaths()
+    {
+        return $this->learningPathsService->getLearningPaths();
     }
 
 }
