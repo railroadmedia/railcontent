@@ -59,6 +59,7 @@ class TrialSection extends Resource
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Text::make('Title')->hideFromIndex()->sortable()->help('This is visible only if there is no logo uploaded or supported. Older app versions do not support the logo and will only see this text.'),
             Text::make('Subtitle')->hideFromIndex()->sortable()->help('This is visible only if there is no logo uploaded or supported. Older app versions do not support the logo and will only see this text.'),
+            Text::make('Tagline')->hideFromIndex()->sortable(),
 
             Markdown::make('Description')->help('If a description exceeds 316 the last three characters will be replaced with an ellipses.<br> Use &lt;br&gt; for a line break, &lt;i&gt;&lt;/i&gt; for italics, and &lt;b&gt;&lt;/b&gt; for bold. <br> Limited to three lines of text.'),
             Image::make('Desktop Image', 'desktop_img')

@@ -50,6 +50,14 @@ class LearningPathsService
                 ->orderBy('display_order')
                 ->get();
 
+        $learningPaths->each(function (TrialSection $section) {
+            $content = $this->contentService->getById($section->product_id);
+            $section->bgImg = $section->desktop_img;
+            $section->topPillText = $section->tagline ?? '';
+            $section->ctaUrl = $content['url'];
+            $section->ctaText = ($content['completed'])?'Completed':((!$content['started']) ? 'Start now':'Continue');
+        });
+
         return $learningPaths;
     }
 }

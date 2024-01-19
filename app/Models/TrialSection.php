@@ -16,25 +16,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $description
  * @property string $cta_text
  * @property string $cta_url
- * @property string $img
+ * @property string $desktop_img
  * @property integer $display_order
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @property Carbon $start_date
- * @property Carbon $end_date
- * @property integer $visible
- * @property integer $is_featured
  * @property integer $product_id
- * @property integer $challenge_id
- * @property string $product_url
- * @property string $endpoint
- * @property string $video_src
- * @property string $primary_cta_text
- * @property string $primary_cta_text_alt
- * @property string $primary_cta_url
- * @property string $primary_cta_url_alt
- * @property string $secondary_cta_text
- * @property string $secondary_cta_url
  */
 class TrialSection extends Model
 {
