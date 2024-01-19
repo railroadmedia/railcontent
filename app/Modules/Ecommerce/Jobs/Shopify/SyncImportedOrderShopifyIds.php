@@ -58,6 +58,7 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
     public function __construct(
         protected ?string $endCursor,
         protected ?int $limit,
+        protected ?int $customerId,
         protected bool $simulate,
     ) {
     }
@@ -96,10 +97,11 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
         $date = self::SHOPIFY_LAUNCH_DATE_TIME;
         $count = is_null($this->limit) ? self::PAGE_SIZE : min(self::PAGE_SIZE, $this->limit);
         $cursor = empty($endCursor) ? "" : "after: \"$endCursor\",";
+        $customerIdQuery = empty($this->customerId) ? "" : "AND customer_id:{$this->customerId}";
 
         $gql = <<<GQL
             query {
-                orders(first: $count, $cursor query: "created_at:<=\"$date\"", sortKey: PROCESSED_AT) {
+                orders(first: $count, $cursor query: "created_at:<=\"$date\"$customerIdQuery", sortKey: PROCESSED_AT) {
                     nodes {
                         ... on Order {
                             id,
@@ -139,7 +141,7 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
         // if there are more results to get, add another job to the batch
         if ($hasNextPage && $limitRemaining) {
             // create another job to do the next batch
-            $this->batch()->add(new SyncImportedOrderShopifyIds($endCursor, $limitRemaining, $this->simulate));
+            $this->batch()->add(new SyncImportedOrderShopifyIds($endCursor, $limitRemaining, $this->customerId, $this->simulate));
         }
     }
 
