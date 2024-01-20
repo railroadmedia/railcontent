@@ -6,15 +6,19 @@
   @endif >
     <div class="container mx-auto max-w-6xl mb-5 sm:mb-10">
         <div class="flex flex-wrap sm:flex-nowrap items-center">
-            <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5 mb-4 sm:mb-0">
+            <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5 mb-4 sm:mb-0"
+            :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+            x-intersect.once="lazyLoad = true; $refs.collage.src = $refs.collage.dataset.src;">
                 <picture>
-                    <source media="(min-width:1280px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/{!! $image !!}">
-                    <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1130x0/filters:quality(95)/{!! $image !!}">
-                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1020x0/filters:quality(95)/{!! $image !!}">
-                    <img class="object-contain h-64 sm:h-auto max-w-full sm:max-w-md md:max-w-lg lg:max-w-full transition-opacity opacity-0"
+                    <source type="image/webp" media="(min-width:1280px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/{!! $image !!}">
+                    <source type="image/webp" media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1130x0/filters:quality(95)/{!! $image !!}">
+                    <source type="image/webp" media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1020x0/filters:quality(95)/{!! $image !!}">
+                    <img x-ref="collage" 
+                         class="object-contain h-64 sm:h-auto max-w-full sm:max-w-md md:max-w-lg lg:max-w-full transition-opacity opacity-0"
                          loading="lazy"
                          onload="this.classList.remove('opacity-0')"
-                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/{!! $image !!}"
+                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/30x0/filters:quality(10)/filters:blur(5){!! $image !!}"
+                         data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/{!! $image !!}"
                          alt="{{$theme}} collage image"
                     >
                 </picture>

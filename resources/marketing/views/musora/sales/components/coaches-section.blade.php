@@ -93,7 +93,7 @@
                         <section x-ref="splide" class="splide mb-20 h-44 sm:h-48 lg:h-72">
                             <div class="splide__track">
                                 <ul class="splide__list">
-                                    @foreach ($course['images'] as $index => $image)
+                                    @foreach ($course['images'] as $image)
                                         <li class="splide__slide flex flex-col items-center justify-center px-1">
                                             <div class="relative w-full rounded-xl overflow-hidden pb-48 sm:pb-52 lg:pb-72">
                                                 <picture>

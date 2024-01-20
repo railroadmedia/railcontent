@@ -27,8 +27,8 @@
                     loop
                     playsinline
                     preload="none"
-                    x-ref="video"
-                    x-effect="if (videoLoaded) { $refs.video.play(); }"
+                    x-ref="videoSongsSection"
+                    x-effect="if (videoLoaded) { $refs.videoSongsSection.play(); }"
                     x-intersect.once="videoLoaded = true"
                     ></video>
                         {{-- <video class="h-64 sm:h-72 lg:h-96 hidden media-toggle rounded-l-xl overflow-hidden @if($key == 0) active @endif" src="{{ $songItem['media'] }}" muted autoplay loop playsinline></video> --}}

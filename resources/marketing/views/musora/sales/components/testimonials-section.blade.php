@@ -83,7 +83,6 @@
                                     <div class="w-full rounded-xl p-6 text-white flex flex-wrap sm:flex-nowrap transition-colors duration-300 active-bg"
                                         style="background-color:#0C1524;">
                                         <picture class="w-full @if(!empty($testimonial['video'])) sm:w-1/2 cursor-pointer @else sm:w-1/2 @endif flex-shrink-0 bg-cover bg-center rounded-xl relative h-56 sm:h-80 lg:h-[32rem]"
-                                            :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
                                             @if(!empty($testimonial['video']))
                                                 x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
                                             @endif

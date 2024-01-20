@@ -106,24 +106,25 @@
                     pauseOnHover: true,
                     pauseOnFocus: true,
                     interval: 3000,
+                    lazyLoad: 'nearby',
                 ",
             ])
                 @slot('content')
                     @foreach ($slides as $slide)
-                        <li class="splide__slide">
-                            <div class="px-3 md:px-6 text-center">
-                                <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
-                                <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
-                                    <img
-                                        class="rounded-full object-cover object-right w-9 h-9"
-                                        src={{ $slide['thumb'] }}
-                                        alt="{{$slide['name']}}"
-                                    ><br class="inline md:hidden">
-                                    <p class="leading-tight w-full text-center md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
-                                </div>
+                    <li class="splide__slide">
+                        <div class="px-3 md:px-6 text-center">
+                            <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
+                            <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
+                                <img
+                                    class="rounded-full object-cover object-right w-9 h-9"
+                                    data-splide-lazy={{ $slide['thumb'] }}
+                                    alt="{{$slide['name']}}"
+                                ><br class="inline md:hidden">
+                                <p class="leading-tight w-full text-center md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
                             </div>
-                        </li>
-                    @endforeach
+                        </div>
+                    </li>
+                @endforeach
                 @endslot
             @endcomponent
         </div>
