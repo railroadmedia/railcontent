@@ -554,11 +554,6 @@ $points = [
         'video' => '881061653',
         'vimeo' => true,
     ])
-
-     {{-- @include('_partials.components.countdown',[
-        'countdownDate' => '2023-06-05 00:00:00',
-        'promoVersion' => false
-    ]) --}}
     @include("pianote.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

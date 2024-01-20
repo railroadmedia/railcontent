@@ -34,10 +34,6 @@
         document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
     })
 </script>
-@include('_partials.components.countdown',[
-        'countdownDate' => '2023-11-28 00:00:00',
-        'promoVersion' => true
-    ])
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
 <script type="text/javascript" id="inspectletjs">

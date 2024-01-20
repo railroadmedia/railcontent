@@ -26,7 +26,7 @@
             :preLoadedContent="newContent" />
 
         <!-- Playlist section -->
-        <ListSection :newContentUrl="newContentUrl" :usersList="usersList" />
+        <ListSection :newContentUrl="newContentUrl" :usersList="usersList" :my-list-url="`/${brand}/playlists`" />
 
         <div v-if="coachEvent" class="tw-px-4 lg:tw-px-0">
             <!-- Live section -->
@@ -59,6 +59,13 @@ import MiniCatalogueSection from '../components/MiniCatalogueSection/MiniCatalog
 import ListSection from '../components/ListSection/ListSection.vue';
 import CoachEvent from '../vuesora/components/Coaches/CoachEvent.vue';
 import StatsSection from '../components/StatsSection/StatsSection.vue';
+import { useUserStore } from "../../stores/user";
+import {storeToRefs} from "pinia/dist/pinia";
+
+//Pinia Stores
+const userStore = useUserStore();
+
+const { brand } = storeToRefs(userStore);
 
 const showTriggerBanner = computed(() => {
     return !props.hasGear || !props.hasTopics || !props.hasGenres || !props.hasExperience || !props.hasGoals;
@@ -100,7 +107,7 @@ const props = defineProps({
 const openPlaylistModal = () => {
     window.openplaylistmodal({
         modalType: 'create',
-        brand: '{{ $brand }}',
+        brand: brand,
         data: {
             name: '',
             category: 'General',
