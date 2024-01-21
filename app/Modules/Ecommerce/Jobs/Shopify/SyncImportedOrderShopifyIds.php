@@ -97,7 +97,7 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
         $date = self::SHOPIFY_LAUNCH_DATE_TIME;
         $count = is_null($this->limit) ? self::PAGE_SIZE : min(self::PAGE_SIZE, $this->limit);
         $cursor = empty($endCursor) ? "" : "after: \"$endCursor\",";
-        $customerIdQuery = empty($this->customerId) ? "" : "AND customer_id:{$this->customerId}";
+        $customerIdQuery = empty($this->customerId) ? "" : " AND customer_id:{$this->customerId}";
 
         $gql = <<<GQL
             query {
