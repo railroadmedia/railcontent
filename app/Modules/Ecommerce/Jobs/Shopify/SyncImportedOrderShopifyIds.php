@@ -140,8 +140,9 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
 
         // if there are more results to get, add another job to the batch
         if ($hasNextPage && $limitRemaining) {
+            $newLimit = is_null($this->limit) ? null : $limitRemaining;
             // create another job to do the next batch
-            $this->batch()->add(new SyncImportedOrderShopifyIds($endCursor, $limitRemaining, $this->customerId, $this->simulate));
+            $this->batch()->add(new SyncImportedOrderShopifyIds($endCursor, $newLimit, $this->customerId, $this->simulate));
         }
     }
 

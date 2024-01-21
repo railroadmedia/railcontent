@@ -99,9 +99,10 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
 
         // if there are more results to get, add another job to the batch
         if ($this->hasNextPage && $limitRemaining) {
+            $newLimit = is_null($this->limit) ? null : $limitRemaining;
             // create another job to do the next batch
             $this->batch()->add(
-                new FulfillOrdersImportedIntoShopify($this->endCursor, $limitRemaining, $this->customerId, $this->simulate)
+                new FulfillOrdersImportedIntoShopify($this->endCursor, $newLimit, $this->customerId, $this->simulate)
             );
         }
     }
