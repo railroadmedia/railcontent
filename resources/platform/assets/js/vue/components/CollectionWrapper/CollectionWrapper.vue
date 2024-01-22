@@ -6,7 +6,7 @@
         />
 
         <transition appear name="fade">
-            <CollectionResults :brand="brand" :current-page="getCurrentPage" :loading="loading" :total-pages="getTotalPages" @on-load-more="collectionStore.loadMore">
+            <CollectionResults :brand="brand" :current-page="getCurrentPage" :loading="loading" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
@@ -14,6 +14,7 @@
                 <DownloadsCatalogue v-else-if="isDownloadView" :content="data" />
                 <RoutinesCatalogue v-else-if="isRoutine" :content="data"
                                    @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
+                <PackCatalogue v-else-if="isPack" :content="preLoadedContent" />
                 <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <CatalogueCardContainer
@@ -45,6 +46,7 @@ import RoutinesCatalogue from "../../vuesora/views/catalogues/RoutinesCatalogue"
 import CoachesGridCatalogue from "../../vuesora/views/catalogues/CoachesGridCatalogue";
 import GroupedResultsContainer from "../GroupedResultsContainer/GroupedResultsContainer";
 import DownloadsCatalogue from "../../vuesora/views/catalogues/DownloadsCatalogue";
+import PackCatalogue from "../Packs/PackCatalogue";
 
 
 const props = defineProps({
@@ -106,6 +108,10 @@ const props = defineProps({
     tabs: {
         type: Array,
         default: () => [],
+    },
+    infiniteScroll: {
+        type: Boolean,
+        default: () => true,
     },
 });
 
@@ -205,6 +211,10 @@ const isChallenge = computed(() => {
 
 const isSongPdf = computed(() => {
     return props.collectionType === 'song-pdf';
+})
+
+const isPack = computed(() => {
+    return props.collectionType === 'pack';
 })
 
 //List view reactive
