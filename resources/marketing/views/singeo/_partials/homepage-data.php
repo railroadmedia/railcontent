@@ -1,12 +1,12 @@
     <?php
-    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/hailey-benedict.webp';
+    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/hailey-benedict.webp';
     $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/lisa-witt.webp';
-    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/tony-lindsay.webp';
-    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/darcy-d.webp';
-    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/julia-ziegler.webp';
-    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/chris-johnson.webp';
-    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/shelea.webp';
-    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/cate-canning.webp';
+    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/tony-lindsay.webp';
+    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/darcy-d.webp';
+    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/julia-ziegler.webp';
+    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/340x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/chris-johnson.webp';
+    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/370x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/shelea.webp';
+    $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/cate-canning.webp';
     $singeo = [
 
         'youtube' => '139,000',
@@ -233,7 +233,7 @@
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/songs-icon.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs-ultra.mp4",
                 "title" => "1000+ popular songs.",
                 "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
             ],
@@ -247,14 +247,14 @@
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/loop-icon.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/singeo/membership/homepage/2024/metronome-feature.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/singeo/membership/homepage/2024/metronome-feature-ultra.mp4",
                 "title" => "Loop the hard parts.",
                 "desc" => "Working on the chorus? Simply create  a loop to sing it over and over!",
             ],
             [
                 "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2024/singeo-metronome.svg",
                 "mediaVid" => true,
-                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/singeo/membership/homepage/2024/metronome-feature.mp4",
+                "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/singeo/membership/homepage/2024/metronome-feature-ultra.mp4",
                 'title' => 'Improve your timing.',
                 'desc' => 'Use the built-in-metronome – your new best friend for difficult sections.  ',
             ],
@@ -267,37 +267,37 @@
         ],
         "testimonials" => [
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/orianna-sells-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/orianna-sells-thumb.webp",
                 "name" => "Orianna Sells",
                 "location" => "South Carolina, USA",
                 "title" => "I started practicing my songs more meticulously and it paid off – stronger high notes were available and it felt like <strong>the chains finally fell off my voice!</strong>",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/richard-bailey-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/richard-bailey-thumb.webp",
                 "name" => "Richard Bailey ",
                 "location" => "New Jersey, USA",
                 "title" => "Singeo is <strong>like having your own singing coach</strong> at your home, literally any time of the day or night. I enjoy singing so much more than I did before and it’s great fun.",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/kathy-mandell-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/kathy-mandell-thumb.webp",
                 "name" => "Kathy Mandell",
                 "location" => "South Carolina, USA",
                 "title" => "It was like, OH! THAT’S what my problem is! The teachers and students are so <strong>supportive, non-judgmental, and encouraging.</strong> ",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/damien-given-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/damien-given-thumb.webp",
                 "name" => "Damien Given",
                 "location" => "Northern Ireland",
                 "title" => "I’ve received a great deal of positive feedback from my classmates - and great tips from Lisa, Julia, and the team. What a find, what a course, and <strong>what great tutors!</strong>",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/jocelynn-rodrigues-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/jocelynn-rodrigues-thumb.webp",
                 "name" => "Jocelynn Rodrigues",
                 "location" => "Canada",
                 "title" => "<strong>My voice feels stronger.</strong> Everyone can truly sing, and it’s so healing to sing. We were all born with this beautiful instrument and it’s just waiting to be played.",
             ],
             [
-                "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/terri-pigg-thumb.webp",
+                "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/singeo/membership/homepage/2024/testimonial/terri-pigg-thumb.webp",
                 "name" => "Terri Pigg",
                 "location" => "Tennessee, USA",
                 "title" => "Singeo’s <strong>given me a confidence boost.</strong> I sing all the time – at home, at the office, in the car, wherever. Singing just makes me happy! ",

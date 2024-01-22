@@ -92,7 +92,7 @@
             '<img class="logo mx-auto" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/logo-purple.png" alt="song-in-an-hour-logo">',
         ],
         "playButton" => "down",
-        "headLine" => "<h1 class='font-bison-bold leading-none text-3xl md:text-5xl lg:text-6xl'><strong>PLAY YOUR FIRST SONG ON THE<br> GUITAR, START TO FINISH, IN AN HOUR.</strong></h1>
+        "headLine" => "<h1 class='font-bebas leading-none text-3xl md:text-5xl lg:text-6xl'><strong>PLAY YOUR FIRST SONG ON THE<br> GUITAR, START TO FINISH, IN AN HOUR.</strong></h1>
         <h2 class='text-lg mt-5 mb-8 text-yellow md:text-xl lg:text-2xl'>Even if you've never played before!</h2>",
         "formId" => "Guitareo - Engagement - Trigger - Song Hour - Web Form",
         "formName" => "Song Hour",
@@ -116,7 +116,7 @@
         "bg" => "#010611",
         "headLine" => '',
         "subHeadLine" => '',
-        "lessonTitleFont" => 'font-bison-bold',
+        "lessonTitleFont" => 'font-bebas',
         "lessons" => [
             [
             'title' => "SONG IN AN HOUR CHALLENGE",
@@ -205,10 +205,10 @@
     ])
 
     @include('guitareo.lead-gen.partials._meet-your-teacher1', [
-      "font" => "font-bison-bold",
+      "font" => "font-bebas",
       "bgColor" => "black",
       "meetYourTeacher" => '<div class="text-yellow text-lg md:text-xl lg:text-2xl">Meet your teacher...</div>',
-      "name" => '<h1 class="font-bison-bold leading-none text-5xl md:text-6xl lg:text-8xl"><strong>ROB SCALLON</strong></h1>',
+      "name" => '<h1 class="font-bebas leading-none text-5xl md:text-6xl lg:text-8xl"><strong>ROB SCALLON</strong></h1>',
       "desc" => "Rob Scallon plays guitar for the internet — with 2M Subscribers on YouTube and counting — and now he’s sharing his best tips to help YOU get more out of this amazing instrument.",
       "asSeenColor" => "text-yellow",
       "thumbnails" => [

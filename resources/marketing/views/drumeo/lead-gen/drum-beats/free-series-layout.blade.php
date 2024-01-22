@@ -30,7 +30,7 @@
         .toolbox-title h1 {
             color:#FFF;
             margin:0 auto;
-            font:700 35px/1em "Roboto Condensed", sans-serif;
+            font:700 35px/1em "Bebas Neue", sans-serif;
             text-shadow:-1px 1px 1px rgba(0, 0, 0, 0.4);
             text-transform:uppercase;
         }

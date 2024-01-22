@@ -270,10 +270,10 @@ export const useCollectionStore = defineStore({
                 filterApplied: true,
             }
 
-            if (this.tabData[tab.value] && this.tabData[tab.value].filterApplied) {
+            this.filter.activeTab = tab.value;
+            if (this.tabData[this.filter.activeTab] && this.tabData[this.filter.activeTab].filterApplied) {
                 this.data = ([...this.tabData[this.filter.activeTab].data]);
             } else {
-                this.filter.activeTab = tab.value;
                 this.tabData[this.filter.activeTab] = { ...tab, filterApplied: true };
                 this.getData();
             }

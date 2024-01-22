@@ -468,7 +468,7 @@
         </div>
     </section>
     @include('musora.sales.components.guarantee-section', [
-        'badge' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png',
+        'badge' => 'marketing/pianote/membership/homepage/webp-format/piano-guarantee.webp',
         'header' => '<strong>But what if it doesn’t work for you?</strong>',
         'desc' => 'You’ll love your Pianote lessons and how quickly you’ll see progress. That’s our promise.<br>
 But what if it doesn’t work?<br>

@@ -16,6 +16,10 @@
             type: String,
             default: ''
         },
+        contentQuantity: {
+            type: [String, Number],
+            default: null
+        },
         titleIcon: {
             type: String,
             default: ''
@@ -45,7 +49,8 @@
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-1">
                     <musora-icon :icon-name="titleIcon" class="tw-w-[36px] tw-mr-2 tw-text-white">
                     </musora-icon>
-                    <span class="tw-text-32 tw-font-bold">{{ title }}</span>
+                    <span class="tw-text-32 tw-font-bold tw-mr-2">{{ title }}</span>
+                    <span v-if="contentQuantity !== null" class="tw-rounded-full tw-aspect-square tw-min-w-[33px] tw-min-h-[33px] tw-p-1 tw-inline-flex tw-items-center tw-justify-center tw-text-base tw-font-bold dark:tw-bg-[#002039] dark:tw-text-white tw-bg-[#E6E7E9] tw-text-[#0D0D0D]">{{ contentQuantity }}</span>
                 </h1>
                 <!-- CONTENT Slot-->
                 <slot name="content" />

@@ -127,7 +127,7 @@ class ContentPagesController extends BaseController
 
         $sortOverride = $lessonType === 'chord-and-scale' ? 'slug' : null;
 
-        $defaultPage = $lessonType === 'routine' ? 12 : 20;
+        $defaultPage = $lessonType === 'routine' ? 12 : 10;
 
         ContentRepository::$pullFilterResultsOptionsAndCount = true;
 
@@ -1710,6 +1710,7 @@ class ContentPagesController extends BaseController
 
     public function artistSongs($route, Request $request, $brand, $artistSlug)
     {
+        $artist = urldecode($artistSlug);
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['songs'] ?? [];
 
         $initialContent = $this->contentService->getFiltered(
@@ -1719,7 +1720,7 @@ class ContentPagesController extends BaseController
             ['song'],
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
-            ['artist,'.$this->slugToPhrase($artistSlug)],
+            ['artist,'.$artist],
             $request->get('included_fields', []),
             $request->get('required_user_states', []),
             $request->get('included_user_states', []),
@@ -1751,6 +1752,7 @@ class ContentPagesController extends BaseController
 
     public function genreContentByType($slug, Request $request, $brand, $genre, $contentTypeName)
     {
+        $genre = urldecode($genre);
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$contentTypeName] ?? [];
 

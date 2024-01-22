@@ -455,7 +455,7 @@ onBeforeMount(() => {
                     <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
                         :content-chapters="contentChapters" :instructors="contentInstructors" />
 
-                    <VideoChapters v-if="formattedChapters.length" :chapters="formattedChapters" @open-slice="openSlice"
+                    <VideoChapters v-if="formattedChapters.length && lessonType === 'workout'" :chapters="formattedChapters" @open-slice="openSlice"
                         @seek-to-chapter="seekToChapter" />
 
                     <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />

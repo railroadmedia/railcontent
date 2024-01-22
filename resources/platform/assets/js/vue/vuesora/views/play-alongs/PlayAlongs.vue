@@ -188,6 +188,7 @@ export default {
             limit: 20,
             sort: '-published_on',
             totalResults: this.totalResults,
+            // totalResults: this.preLoadedContent.meta.totalResults,
             // filterOptions: this.getFilterOptions(this.preLoadedContent.meta.filterOptions),
             isKeyboardControlsEnabled: false,
             selectedFilters: {

@@ -3,7 +3,7 @@
         <div class="bg-grey-2 active corners-10 widescreen mb-2 relative">
             <img class="rounded-lg" src="{{ $thumbURL }}" alt="{{ $title }} - {{ $artist }}">
             <i class="add-to-list fas fa-info-circle text-white absolute top-0 right-0 h-9 w-9 z-10 flex justify-center items-center"></i>
-            <h3 class="font-roboto tiny font-compressed uppercase dense font-bold text-white absolute bottom-0 left-0 w-full z-10 text-xs pb-2 px-2">{{ $artist }}</h3>
+            <h3 class="font-bebas tiny font-compressed uppercase dense font-bold text-white absolute bottom-0 left-0 w-full z-10 text-xs pb-2 px-2">{{ $artist }}</h3>
             <span class="absolute w-full h-full z-20 opacity-0 hover:opacity-100 top-0 left-0 rounded-lg flex justify-center items-center" style="background:rgba(0, 0, 0, .4);">
                 <i class="fas fa-arrow-right text-white text-3xl"></i>
             </span>

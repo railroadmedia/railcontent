@@ -210,7 +210,7 @@ body {
     }
   }
   p {
-    font-family: $robotocondensed;
+    font-family: $bebas;
     margin: 0 auto;
     font-size: 14px;
     @include tablet {
@@ -267,7 +267,7 @@ body {
   }
 
   p {
-    font: 700 14px/1em $robotocondensed;
+    font: 700 14px/1em $bebas;
     color: #fff;
     display: inline-block;
     margin: 0 0 7px;
@@ -383,7 +383,7 @@ body {
   }
 
   h1 {
-    font: 400 28px/1em $robotocondensed;
+    font: 400 28px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto 35px;
     @include tablet {
@@ -477,7 +477,7 @@ body {
 
   .title-text {
     h1 {
-      font: 700 30px/1em $robotocondensed;
+      font: 700 30px/1em $bebas;
       margin: 0 auto;
       text-transform: uppercase;
       color: $drumeoBlue;
@@ -549,7 +549,7 @@ body {
       h2 {
         margin: 0 auto 3px;
         text-transform: uppercase;
-        font: 700 17px/1em $robotocondensed;
+        font: 700 17px/1em $bebas;
         @include tablet {
           font-size: 16px;
         }
@@ -781,7 +781,7 @@ body {
   h1 {
     position: relative;
     z-index: 2;
-    font: 700 30px/1em $robotocondensed;
+    font: 700 30px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto;
     @include tablet {
@@ -919,7 +919,7 @@ body.is-reveal-open {
 
   h1 {
     text-transform: uppercase;
-    font: 700 33px/1em $robotocondensed;
+    font: 700 33px/1em $bebas;
     z-index: 1;
     margin: 0;
     @include tablet {
@@ -931,7 +931,7 @@ body.is-reveal-open {
   }
 
   p {
-    font: 400 18px/1em $robotocondensed;
+    font: 400 18px/1em $bebas;
     text-transform: uppercase;
     margin: 5px auto 0;
     @include tablet {
@@ -1063,7 +1063,7 @@ body.is-reveal-open {
     }
 
     h1 {
-      font: 700 21px/1em $robotocondensed;
+      font: 700 21px/1em $bebas;
       margin: 15px auto 5px;
       text-transform: uppercase;
       @include tablet {
@@ -1076,7 +1076,7 @@ body.is-reveal-open {
 
       .band {
         color: $drumeoBlue;
-        font: italic 400 17px/1em $robotocondensed;
+        font: italic 400 17px/1em $bebas;
         margin: 0 auto;
         text-transform: uppercase;
         display: inline-block;
@@ -1183,7 +1183,7 @@ body.is-reveal-open {
   }
 
   h1 {
-    font: 700 30px/1em $robotocondensed;
+    font: 700 30px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto 7px;
     @include tablet {
@@ -1219,7 +1219,7 @@ body.is-reveal-open {
           border: 1px solid #DFE6E3;
           border-width: 0 1px;
           padding: 7px;
-          font: 600 11px/1.2em $robotocondensed;
+          font: 600 11px/1.2em $bebas;
           text-transform: uppercase;
           @include tablet {
             font-size: 15px;
@@ -1407,7 +1407,7 @@ body.is-reveal-open {
 
 
       h1 {
-        font: 700 22px/1em $robotocondensed;
+        font: 700 22px/1em $bebas;
         text-transform: uppercase;
         margin: 0 auto 15px;
         @include tablet {
@@ -1473,7 +1473,7 @@ body.is-reveal-open {
   }
 
   h2 {
-    font: 400 14px/1.3em $robotocondensed;
+    font: 400 14px/1.3em $bebas;
     text-transform: uppercase;
     margin: 0 auto;
     @include tablet {
@@ -1775,7 +1775,7 @@ body.is-reveal-open {
       }
 
       p {
-        font: 400 15px/1em $robotocondensed;
+        font: 400 15px/1em $bebas;
         color: #000;
         text-transform: uppercase;
         margin: 18px auto 0;
@@ -1845,7 +1845,7 @@ body.is-reveal-open {
 
 
   h1.upper {
-    font: 700 22px/1em $robotocondensed;
+    font: 700 22px/1em $bebas;
     text-transform: uppercase;
     margin: 0 auto 20px;
     @include tablet {
@@ -1984,7 +1984,7 @@ body.is-reveal-open {
   }
 
   h1 {
-    font: 700 24px/1em $robotocondensed;
+    font: 700 24px/1em $bebas;
     vertical-align: middle;
     display: inline-block;
     text-transform: uppercase;
@@ -2092,7 +2092,7 @@ body.is-reveal-open {
     }
 
     h2 {
-      font: 700 36px/1em $robotocondensed;
+      font: 700 36px/1em $bebas;
       margin: 0 auto;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -2103,7 +2103,7 @@ body.is-reveal-open {
     }
 
     h3 {
-      font: 400 16px/1em $robotocondensed;
+      font: 400 16px/1em $bebas;
       margin: 0 auto;
       text-transform: uppercase;
       @include tablet {
@@ -2256,7 +2256,7 @@ body.is-reveal-open {
 
   h1 {
     text-transform: uppercase;
-    font: 700 25px/1em $robotocondensed;
+    font: 700 25px/1em $bebas;
     margin: 0 auto 20px;
     @include tablet {
       font-size: 32px;
@@ -2302,7 +2302,7 @@ body.is-reveal-open {
         right: 0;
         bottom: 0;
         text-align: center;
-        font: 600 9px/1.15em $robotocondensed;
+        font: 600 9px/1.15em $bebas;
         text-transform: uppercase;
         color: #fff;
         text-shadow: 0 0 15px #000;

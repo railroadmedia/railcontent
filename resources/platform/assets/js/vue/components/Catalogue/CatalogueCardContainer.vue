@@ -5,34 +5,43 @@
                 :class="`
                     tw-px-4 lg:tw-px-0 tw-no-scrollbar
                     ${isMiniView && willScroll ? 'tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-3 xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-y-[25px] tw-gap-x-[8px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : ''}
-                    ${!isMiniView && willScroll ? 'tw-flex tw-overflow-x-scroll lg:tw-overflow-x-clip tw-flex-nowrap' : ''}
+                    ${!isMiniView && willScroll ? 'tw-flex lg:tw-overflow-x-clip tw-flex-nowrap' : ''}
+                    ${!isMiniView && willScroll && !collectionStoreLoading ? 'tw-overflow-x-scroll' : ''}
                     ${!isMiniView && !willScroll ? 'tw-flex tw-flex-wrap' : ''}
                     ${breakToListView ? 'tw-@container/breakToList' : ''}
                 `">
-                <CatalogueCard
-                    v-for="item in data"
-                    :key="'grid' + item.id"
-                    :item="item"
-                    :content-type="item.type"
-                    :brand="brand"
-                    :use-theme-color="useThemeColor"
-                    :user-id="userId"
-                    :is-admin="isAdmin"
-                    :lock-unowned="lockUnowned"
-                    :force-wide-thumbs="forceWideThumbs"
-                    :content-type-override="contentTypeOverride"
-                    :is-mini-card="isMiniView"
-                    :show-my-list-action="showMyListAction"
-                    :force-no-links="forceNoLinks"
-                    :force-list-view="displayInline"
-                    :break-to-list-view="breakToListView"
-                    @addToList="addToList"
-                    @progressReset="resetProgressEventHandler"
-                    :show-dropdown="showDropdown"
-                />
+                <!-- Skeleton Loader -->
+                <template v-if="showSkeletonLoader">
+                    <SkeletonLoader :count="skeletonCardCount" type="card" :force-list-view="displayInline"
+                        :break-to-list-view="breakToListView" />
+                </template>
+                <!-- Catalogue Cards -->
+                <template v-else>
+                    <CatalogueCard
+                        v-for="item in data"
+                        :key="'grid' + item.id"
+                        :item="item"
+                        :content-type="item.type"
+                        :brand="brand"
+                        :use-theme-color="useThemeColor"
+                        :user-id="userId"
+                        :is-admin="isAdmin"
+                        :lock-unowned="lockUnowned"
+                        :force-wide-thumbs="forceWideThumbs"
+                        :content-type-override="contentTypeOverride"
+                        :is-mini-card="isMiniView"
+                        :show-my-list-action="showMyListAction"
+                        :force-no-links="forceNoLinks"
+                        :force-list-view="displayInline"
+                        :break-to-list-view="breakToListView"
+                        @addToList="addToList"
+                        @progressReset="resetProgressEventHandler"
+                        :show-dropdown="showDropdown"
+                    />
+                </template>
             </div>
         </div>
-        <div v-if="data.length === 0 && noResultsMessage.length > 0" class="tw-flex tw-flex-row tw-py-4 tw-justify-center tw-items-center tw-px-4 lg:tw-px-0">
+        <div v-if="!collectionStoreLoading && data.length === 0 && noResultsMessage.length > 0" class="tw-flex tw-flex-row tw-py-4 tw-justify-center tw-items-center tw-px-4 lg:tw-px-0">
             <div class="tw-flex tw-flex-column icon-col face-icon tw-mr-1">
                 <div class="icon-wrap square"></div>
             </div>
@@ -59,6 +68,8 @@ import AddEventModal from '../../vuesora/components/AddEvent/AddEventModal.vue';
 import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
 import { storeToRefs } from "pinia";
 import { useUserStore } from "../../../stores/user";
+import { useCollectionStore } from "../../../stores/collection";
+import SkeletonLoader from '../SkeletonLoader/SkeletonLoader.vue';
 
 const props = defineProps({
     willScroll: {
@@ -129,11 +140,18 @@ const props = defineProps({
         type: String,
         default: 'No lessons found',
     },
+    groupByCards: {
+        type: Boolean,
+        default: () => false,
+    }
+
 },
 );
-
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
+
+const collectionStore = useCollectionStore();
+const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collectionStore);
 
 const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, content: props.preLoadedContent.data });
 const content = ref(props.preLoadedContent ? props.preLoadedContent.data : []);
@@ -144,7 +162,27 @@ const data = computed(() => {
 })
 
 const breakToListView = computed( () => {
-    return props.contentTypeOverride === 'challenge' || props.contentTypeOverride === 'workout';
+    return !showGroupBy.value && (isWorkout.value || isChallenge.value);
+})
+
+const showSkeletonLoader = computed(() => {
+    return collectionStoreLoading.value && (isWorkout.value || isChallenge.value)
+})
+
+const skeletonCardCount = computed(() => {
+    return showGroupBy.value ? 5 : 12;
+})
+
+const showGroupBy = computed(() => {
+    return tabData.value[filter.value.activeTab]?.groupByView;
+})
+
+const isWorkout = computed(() => {
+    return props.contentTypeOverride === 'workout';
+})
+
+const isChallenge = computed(() => {
+    return props.contentTypeOverride === 'challenge';
 })
 
 </script>

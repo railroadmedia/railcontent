@@ -203,8 +203,4 @@
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2023-11-28 00:00:00',
-        'promoVersion' => true
-    ])
 @endsection

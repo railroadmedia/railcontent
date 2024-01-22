@@ -159,7 +159,7 @@
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mb-3">
         <collection-wrapper
             collection-type="coach"
-            :filterable-values="{{ json_encode(['focus','style']) }}"
+            :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
             :included-types="{{ json_encode(['instructor']) }}"
             limit="{{ $limitOverride ?? 18 }}"
             :pre-loaded-content="{{ $coaches->toResponseRawJson() }}"

@@ -33,7 +33,7 @@
         }
 
         .title-wrap h1 {
-            font:700 27px/1.2em "Roboto Condensed", sans-serif;
+            font:700 27px/1.2em "Bebas Neue", sans-serif;
             margin:15px auto;
             text-transform:uppercase;
             text-align:center;
