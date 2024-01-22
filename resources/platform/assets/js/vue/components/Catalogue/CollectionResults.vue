@@ -22,51 +22,55 @@
 
 <script setup>
 import {onMounted, onUnmounted, onUpdated} from "vue";
-    import { useCollectionStore } from "../../../stores/collection";
+import { useCollectionStore } from "../../../stores/collection";
 
-    const props = defineProps({
-        brand: {
-            type: String,
-            default: 'drumeo',
-        },
-        currentPage: {
-            type: Number,
-            default: 1,
-        },
-        loading: {
-            type: Boolean,
-            default: false,
-        },
-        totalPages: {
-            type: Number,
-            default: 1,
-        },
-    });
-
-    const emit = defineEmits(['onLoadMore'])
-
-    const collectionStore = useCollectionStore();
-
-    const infiniteScrollEventHandler = () => {
-
-        let scrollEl = document.querySelector('#content-container');
-        const scroll_position = scrollEl.scrollTop + scrollEl.offsetHeight;
-        const scroll_buffer = scrollEl.scrollHeight * 0.8;
-
-        if (scroll_position >= scroll_buffer && props.currentPage < props.totalPages) {
-            emit('onLoadMore');
-        }
+const props = defineProps({
+    brand: {
+        type: String,
+        default: 'drumeo',
+    },
+    currentPage: {
+        type: Number,
+        default: 1,
+    },
+    loading: {
+        type: Boolean,
+        default: false,
+    },
+    totalPages: {
+        type: Number,
+        default: 1,
+    },
+    infiniteScroll: {
+        type: Boolean,
+        default: true,
     }
+});
 
-    onMounted(()=>{
-        document.querySelector('#content-container').addEventListener("scroll", infiniteScrollEventHandler);
-    })
+const emit = defineEmits(['onLoadMore'])
 
-    onUnmounted(()=>{
-        document.querySelector('#content-container').removeEventListener("scroll", infiniteScrollEventHandler);
-    })
+const collectionStore = useCollectionStore();
 
-    onUpdated(() => {
-        infiniteScrollEventHandler();
-    })
+const infiniteScrollEventHandler = () => {
+
+    let scrollEl = document.querySelector('#content-container');
+    const scroll_position = scrollEl.scrollTop + scrollEl.offsetHeight;
+    const scroll_buffer = scrollEl.scrollHeight * 0.8;
+
+    if (scroll_position >= scroll_buffer && props.currentPage < props.totalPages) {
+        emit('onLoadMore');
+    }
+}
+
+onMounted(()=>{
+    props.infiniteScroll && document.querySelector('#content-container').addEventListener("scroll", infiniteScrollEventHandler);
+})
+
+onUnmounted(()=>{
+    props.infiniteScroll && document.querySelector('#content-container').removeEventListener("scroll", infiniteScrollEventHandler);
+})
+
+onUpdated(() => {
+    props.infiniteScroll && infiniteScrollEventHandler();
+})
 </script>
