@@ -22041,6 +22041,9 @@ a:visited{
 .tw-mt-auto{
   margin-top: auto !important;
 }
+.tw-mr-\[14px\]{
+  margin-right: 14px !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -27257,6 +27260,9 @@ a:visited{
   .lg\:tw-order-last{
     order: 9999 !important;
   }
+  .lg\:tw-order-1{
+    order: 1 !important;
+  }
   .lg\:tw-mx-0{
     margin-left: 0px !important;
     margin-right: 0px !important;
@@ -27351,6 +27357,9 @@ a:visited{
   }
   .lg\:tw-mt-\[6px\]{
     margin-top: 6px !important;
+  }
+  .lg\:tw-mr-\[14px\]{
+    margin-right: 14px !important;
   }
   .lg\:tw-line-clamp-2{
     overflow: hidden !important;
@@ -27775,6 +27784,9 @@ a:visited{
   }
   .lg\:tw-pt-40{
     padding-top: 10rem !important;
+  }
+  .lg\:tw-pr-\[14px\]{
+    padding-right: 14px !important;
   }
   .lg\:tw-text-left{
     text-align: left !important;
