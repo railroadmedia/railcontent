@@ -190,7 +190,7 @@ form :-moz-placeholder {
   }
 
   h2 {
-    font: 700 30px/1em $robotocondensed;
+    font: 700 30px/1em $bebas;
     margin: 15px auto;
     text-transform: uppercase;
     color: $guitareoGreen;
@@ -247,7 +247,7 @@ form :-moz-placeholder {
 
   .outline-button {
     display: inline-block;
-    font: 700 14px/1em $robotocondensed;
+    font: 700 14px/1em $bebas;
     text-transform: uppercase;
     border-radius: 100px;
     color: #FFF;
@@ -332,7 +332,7 @@ form :-moz-placeholder {
       padding: 5px;
       text-align: center;
       color: #FFF;
-      font: 700 14px $robotocondensed;
+      font: 700 14px $bebas;
       text-transform: uppercase;
       border-radius: 0 0 5px 5px;
       margin: 0 auto 20px;
@@ -467,7 +467,7 @@ form :-moz-placeholder {
       top: 0;
       border-radius: 5px 0 5px 0;
       padding: 5px 8px;
-      font: 700 13px $robotocondensed;
+      font: 700 13px $bebas;
       text-transform: uppercase;
       background: $guitareoGreen;
       color: #FFF;
@@ -498,7 +498,7 @@ a.download-button {
   width: 100%;
   text-align: center;
   color: #FFF;
-  font: 700 14px $robotocondensed;
+  font: 700 14px $bebas;
   text-transform: uppercase;
   margin: 10px auto 0;
   border-radius: 100px;
@@ -533,7 +533,7 @@ a.download-button {
     background: $guitareoGreen;
     border: 2px solid $guitareoGreen;
     padding: 16px 15px;
-    font: 700 16px $robotocondensed;
+    font: 700 16px $bebas;
     @include tablet {
       font-size: 23px;
       padding: 20px 15px;

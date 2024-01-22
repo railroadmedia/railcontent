@@ -6,8 +6,8 @@
         />
 
         <transition appear name="fade">
-            <CollectionResults :brand="brand" :current-page="getCurrentPage" :loading="loading" :total-pages="getTotalPages" @on-load-more="collectionStore.loadMore">
-                <GroupedResultsContainer v-if="showGroupBy" :content="data" />
+            <CollectionResults :brand="brand" :current-page="getCurrentPage" :total-pages="getTotalPages" @on-load-more="collectionStore.loadMore">
+                <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
@@ -106,7 +106,6 @@ const request_params = computed(() => {
     return {
         required_fields: props.requiredFields,
         included_fields: props.includedFields,
-        statuses: props.statuses,
         required_user_states: props.requiredUserStates,
         included_types: includedTypes.value,
         include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
@@ -226,14 +225,6 @@ const getTabOptions = computed(() => {
             { key: 'flams', value: 'Flams' },
             { key: 'paradiddles', value: 'Paradiddles' },
             { key: 'rolls', value: 'Rolls' },
-        ];
-    } else if (isWorkout.value) {
-        return [
-            { key: '', value: 'All', },
-            { key: 'duration,450,<', value: '5 Minutes', },
-            { key: ['duration,451,>', 'duration,750,<'], value: '10 Minutes', },
-            { key: 'duration,751,>', value: '15+ Minutes', },
-            { key: 'group_by,instructor', value: 'Instructors', groupByView: true, },
         ];
     }
 

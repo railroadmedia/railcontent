@@ -55,7 +55,7 @@ class ProcessAppleExpiredSubscriptionsJob extends BatchQueryJob
             $appleStoreKitService->processSubscriptionRenewal($subscription);
             usleep(250000); //delay 250 ms to reduce load
         } catch (\Throwable $e) {
-            Log::error($e->getMessage());
+            Log::error($e);
         }
 
     }

@@ -202,7 +202,7 @@
       </div>
       <button
           v-if="!resetProgress"
-          class="add-to-list tw-inline-flex tw-rounded-full tw-justify-center tw-px-0.5 tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white"
+          class="add-to-list tw-inline-flex tw-rounded-full tw-justify-center tw-px-0.5 tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-h-full tw-items-center"
           :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'"
           :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"
           @click.stop.prevent="addToList"
@@ -219,14 +219,15 @@
     <div class="flex tw-flex-col icon-col tw-justify-center" :class="is_search || overview ? 'hide-xs-only' : ''">
 
       <!-- LOCK ICON OR ADD TO CALENDAR -->
-      <div v-if="noAccess" class="body"
+      <div v-if="noAccess" class="body tw-inline-flex tw-h-full tw-items-center"
+        tabindex="0"
         :class="isBranchPath ? branchPathText : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D]'"
         title="Add to Calendar" data-open-modal="addToCalendarModal" @click="addEvent">
         <i class="fas flex-center rounded" :class="isReleased ? 'fa-lock' : 'fa-calendar-plus'"></i>
       </div>
 
       <!-- STARTED OR COMPLETED -->
-      <div v-else class="body">
+      <div v-else class="body tw-inline-flex tw-h-full tw-items-center">
         <i v-if="item.started || item.completed"
           class="fas flex-center rounded dark:hover:tw-text-white hover:tw-text-[#00101D]" :class="[
             item.completed ? completedIcon : 'fa-adjust',
@@ -268,14 +269,8 @@ export default {
   },
   computed: {
     mappedData() {
-      //console.log('mappedData', this.contentModel.list.column_data)
-      const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value
-      if (Number.isFinite(Number(difficultyValue))) {
-        this.contentModel.list.difficulty = difficultyValue;
-      }
-      else {
-        this.contentModel.list.difficulty = 'all';
-      }
+      const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value;
+      this.contentModel.list.difficulty = difficultyValue;
 
       const excludeWords = ['novice', 'beginner', 'intermediate', 'advanced', 'expert', 'all'];
       const filteredColumnData = this.contentModel.list.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));

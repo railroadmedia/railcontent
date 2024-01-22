@@ -214,9 +214,9 @@
         <div class="container mx-auto relative z-0">
             <a target="_blank" href="https://dmmior4id2ysr.cloudfront.net/brand/Branding-Guide-2023-Musora.pdf" class="m-2 join smaller musora-gold relative">MUSORA BRANDING GUIDE &nbsp; <i class="fas fa-arrow-to-bottom"></i></a>
             <br><a target="_blank" href="https://dmmior4id2ysr.cloudfront.net/brand/Branding-Guide-2023-Drumeo.pdf" class="m-2 join smaller drumeo relative">Drumeo BRANDING GUIDE &nbsp; <i class="fas fa-arrow-to-bottom"></i></a>
-            <br><a target="_blank" href="https://dmmior4id2ysr.cloudfront.net/brand/Branding-Guide-2023-Drumeo.pdf" class="m-2 join smaller pianote relative">Pianote BRANDING GUIDE &nbsp; <i class="fas fa-arrow-to-bottom"></i></a>
-            <br><a target="_blank" href="https://dmmior4id2ysr.cloudfront.net/brand/Branding-Guide-2023-Drumeo.pdf" class="m-2 join smaller guitareo relative">Guitareo BRANDING GUIDE &nbsp; <i class="fas fa-arrow-to-bottom"></i></a>
-            <br><a target="_blank" href="https://dmmior4id2ysr.cloudfront.net/brand/Branding-Guide-2023-Drumeo.pdf" class="m-2 join smaller singeo relative">Singeo BRANDING GUIDE &nbsp; <i class="fas fa-arrow-to-bottom"></i></a>
+            <br><a target="_blank" href="https://dmmior4id2ysr.cloudfront.net/brand/Branding-Guide-2023-Pianote.pdf" class="m-2 join smaller pianote relative">Pianote BRANDING GUIDE &nbsp; <i class="fas fa-arrow-to-bottom"></i></a>
+            <br><a target="_blank" href="https://dmmior4id2ysr.cloudfront.net/brand/Branding-Guide-2023-Guitareo.pdf" class="m-2 join smaller guitareo relative">Guitareo BRANDING GUIDE &nbsp; <i class="fas fa-arrow-to-bottom"></i></a>
+            <br><a target="_blank" href="https://dmmior4id2ysr.cloudfront.net/brand/Branding-Guide-2023-Singeo.pdf" class="m-2 join smaller singeo relative">Singeo BRANDING GUIDE &nbsp; <i class="fas fa-arrow-to-bottom"></i></a>
 
             <div class="mt-7 md:mt-16" style="font-size: 0;">
                 <a href="https://dmmior4id2ysr.cloudfront.net/brand/musora-assets-2023.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #FFAE00;">

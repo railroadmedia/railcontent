@@ -1,6 +1,6 @@
 <section class="text-center py-10 md:py-16 lg:py-24" style="background:#E5E8E8;">
     <div class="mx-auto max-w-6xl">
-        <h1 class="font-bold text-3xl leading-6 uppercase mx-auto mb-3 md:text-4xl lg:text-5xl lg:mb-4" style="color:{{ $themeColor }}; font-family:Roboto Condensed, sans-serif;">{!! $headLine !!}</h1>
+        <h1 class="font-bold text-3xl leading-6 uppercase mx-auto mb-3 md:text-4xl lg:text-5xl lg:mb-4" style="color:{{ $themeColor }}; font-family:Bebas Neue, sans-serif;">{!! $headLine !!}</h1>
         <h2 class="leading-6 mx-auto mb-9 text-base px-3 md:px-4 md:text-xl lg:text-2xl lg:mb-11">{!! $subHeadLine !!}</h2>
         <div class="flex flex-wrap justify-center flex-col sm:justify-between sm:flex-row">
             @foreach ($lessons as $lesson)
@@ -9,7 +9,7 @@
                         {!! $lesson['icon'] !!}
                     </div>
                     <p class="text-sm leading-normal mx-auto mb-5 w-full md:mb-0 md:max-w-full lg:text-base" style="max-width:300px;">
-                        <strong class="font-bold mx-auto mb-1 uppercase inline-block md:text-2xl md:mb-2" style="color:{{ $themeColor }};font-family:Roboto Condensed, sans-serif;">
+                        <strong class="font-bold mx-auto mb-1 uppercase inline-block md:text-2xl md:mb-2" style="color:{{ $themeColor }};font-family:Bebas Neue, sans-serif;">
                             {!! $lesson['title'] !!}
                         </strong><br>
                         {!! $lesson['desc'] !!}

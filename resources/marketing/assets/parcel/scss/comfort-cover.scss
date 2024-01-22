@@ -431,7 +431,7 @@ a.text-yellow:hover {
       position: relative;
       z-index: 1;
       width: 33.3%;
-      font: 700 15px/1em "Roboto Condensed";
+      font: 700 15px/1em $bebas;
       text-transform: uppercase;
       padding: 10px;
       color: #657281;
@@ -856,7 +856,7 @@ a.text-yellow:hover {
 
 
   h2 {
-    font-family: $robotocondensed;
+    font-family: $bebas;
     text-transform: uppercase;
     margin: 0 auto;
     line-height: 1.2em;

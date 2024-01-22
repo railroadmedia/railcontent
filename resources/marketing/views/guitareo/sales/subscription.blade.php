@@ -15,17 +15,14 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/share-image-guitareo.jpg"/>
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/share-image-guitareo.webp"/>
     @endif
-
-    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-page-guitareo.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <style>
         .tool:after, .tool:before {
             position: absolute;
@@ -141,7 +138,9 @@
 @section('body-data')
     x-data ='{
         soundslice : false,
-        trailer : false
+        trailer : false,
+        lazyLoad : false,
+        videoLoaded: false,
     }'
 @endsection
 
@@ -171,18 +170,50 @@
     @endif
 
     @php
-
-        $bubbles = $guitareo['bubbles'];
-        $features = $guitareo['features'];;
-        $slides = $guitareo['slides'];
+        $bubbles =  [
+             [
+                 'src' => $bubble1,
+                 'classes' => 'h-10 sm:h-14 lg:h-16 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]',
+             ],
+             [
+                 'src' => $bubble2,
+                 'classes' => 'h-24 sm:h-28 lg:h-44 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]',
+             ],
+             [
+                 'src' => $bubble3,
+                 'classes' => 'h-32 sm:h-40 lg:h-52 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]',
+             ],
+             [
+                 'src' => $bubble4,
+                 'classes' => 'h-10 sm:h-12 lg:h-16 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]',
+             ],
+             [
+                 'src' => $bubble5,
+                 'classes' => 'h-10 sm:h-12 lg:h-16 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]',
+             ],
+             [
+                 'src' => $bubble6,
+                 'classes' => 'h-28 sm:h-32 lg:h-48 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]',
+             ],
+             [
+                 'src' => $bubble7,
+                 'classes' => 'h-28 sm:h-36 lg:h-52 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]',
+             ],
+             [
+                 'src' => $bubble8,
+                 'classes' => 'h-12 sm:h-14 lg:h-16 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]',
+             ]
+         ];
+          $features = $guitareo['features'];;
+          $slides = $guitareo['slides'];
     @endphp
 
     @include('musora.sales.components.header-section', [
-        'header' => 'THE <span class="text-guitareo">NEW WAY</span> TO<br> <span class="relative inline-block">LEARN GUITAR<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="" height="" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#00c9ac" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#00c9ac" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
+        'header' => 'THE <span class="text-guitareo">NEW WAY</span> TO<br> <span class="relative inline-block">LEARN GUITAR<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#00c9ac" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#00c9ac" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
         'desc' => 'Learn the guitar faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
-        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/header-thumb.jpg',
-        'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/jan-thumb.png',
-        'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/jan-thumb-m.jpg',
+        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/header-thumb.webp',
+        'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/jan-thumb.webp',
+        'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/jan-thumb-m.webp',
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
@@ -212,7 +243,7 @@
 
     @include('musora.sales.components.workouts-section', [
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314551/rendition/540p/file.mp4?loc=external&signature=49333e2b437f90a4af69eb5b19468b68f5185729516f735cd390a6ce8b673516',
-        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/workouts-card2.jpg',
+        'workoutsBG' => 'marketing/guitareo/membership/homepage/2024/workouts-card2.webp',
     ])
 
 
@@ -223,7 +254,7 @@
     @include('musora.sales.components.songs-section', [
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note.',
-        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/device.png',
+        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/device.webp',
         'brandName' => 'Guitareo',
         'bannerDesc' => 'Powered by Musora, Guitareo includes full access to our communities for voice, piano, and drums.',
     ])
@@ -243,7 +274,7 @@
     ])
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
-        'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-guarantee.png',
+        'badge' => 'marketing/guitareo/membership/homepage/2024/guitareo-guarantee.webp',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the guitar.',
     ])
@@ -254,8 +285,8 @@
     @if(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
             "noSelector" => true,
-            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-plus-logo-light.svg",
-            "logo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-logo.png",
+            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-plus-logo-light.svg",
+            "logo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/guitareo-logo.webp",
             "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",
@@ -272,20 +303,20 @@
         @php
             $bonuses = [
                 [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/survival-kit-shop.jpg',
+                    'image' => 'marketing/guitareo/membership/homepage/2024/survival-kit-shop.webp',
                     'title' => 'The Guitarist’s Survival Kit',
                     'description' => 'Get the gear essentials to start sounding better on the guitar.',
                     'price' => floatval($productPrices['guitarists-survival-kit']->price),
                     'shipping' => 'true'
                 ],
                 [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/black-friday/bundles/ultimate/gq.jpg',
+                    'image' => 'marketing/guitareo/membership/homepage/2024/gq.webp',
                     'title' => 'GuitarQuest',
                     'description' => 'Skip the boring stuff and start having fun! Your journey starts here.',
                     'price' => floatval($productPrices['guitar-quest']->price),
                 ],
                 [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/black-friday/rhythm_groove_cart.jpg',
+                    'image' => 'marketing/guitareo/membership/homepage/2024/rhythm_groove_cart.webp',
                     'title' => 'Rhythm & Groove',
                     'description' => 'Go beyond simple strumming on the guitar.',
                     'price' => floatval($productPrices['rhythm-and-groove']->price),
@@ -293,7 +324,7 @@
             ]
         @endphp
         @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-annual-2w-card.png',
+        'topImage' => 'marketing/guitareo/membership/homepage/2024/guitareo-annual-2w-card.webp',
         'header' => 'Online guitar lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 3 bonuses<br class="inline sm:hidden"> worth $333',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
@@ -302,7 +333,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-logo-green.png',
+        'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
         'header' => 'Unlimited guitar lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
@@ -314,7 +345,7 @@
     @endif
 
     @include('musora.sales.components.app-section', [
-        'image' => 'marketing/guitareo/membership/homepage/2023/devices.png',
+        'image' => 'marketing/guitareo/membership/homepage/webp-format/devices.webp',
         'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?ppid=e92a296a-7aeb-40ec-85eb-aaf891c3e6c1',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=guitareo_previews',
     ])
@@ -344,7 +375,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     @yield('scripts')

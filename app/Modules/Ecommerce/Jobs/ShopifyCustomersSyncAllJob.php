@@ -97,6 +97,17 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJobByIds
                         ->where('user_access_permissions.time_lifetime', false);
                 });
                 break;
+            case "createdWithinLastDay":
+                $query = $query->where('created_at', '>', Carbon::now()->subDay());
+                break;
+            case "isAdmin":
+                $query = $query->where('permission_level', User::PERMISSION_LEVEL_ADMIN);
+                break;
+            case "requiresRechargeSync":
+                $query = $query->whereRaw(
+                    'recharge_renewal_date is not null and recharge_renewal_date > now() and DATEDIFF(membership_expiration_date, recharge_renewal_date) - 7 > 7'
+                );
+                break;
             case "":
                 break;
             default:
@@ -120,11 +131,7 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJobByIds
         $shopifySyncService = app(ShopifySyncService::class);
         foreach ($items as $item) {
             try {
-                $shopifySyncService->syncCustomerByUser(
-                    $item,
-                    isRebuildingPermissions: false,
-                    skipEventSync: $this->skipEventSync
-                );
+                $shopifySyncService->syncCustomerByEmail($item->email);
             } catch (\Throwable $ex) {
                 Log::error("Error syncing shopify user $item->shopify_id: user:$item->id");
                 Log::error($ex);

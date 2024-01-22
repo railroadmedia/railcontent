@@ -37,7 +37,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1, h2 {
-  font-family: $robotocondensed;
+  font-family: $bebas;
   text-transform: uppercase;
 
   &.blue-tab {
@@ -90,7 +90,7 @@ p, li {
 .logo {
   h1 {
     text-shadow: 0 0 30px #000;
-    font: 400 26px/1em $robotocondensed;
+    font: 400 26px/1em $bebas;
     margin: 0 auto 10px;
     letter-spacing: 0.07em;
     @include tablet {
@@ -572,7 +572,7 @@ p, li {
 
   #addeventatc1 {
     background: $drumeoBlue;
-    font: 700 26px/1em $robotocondensed;
+    font: 700 26px/1em $bebas;
     text-transform: uppercase;
     padding: 16px 40px;
     margin: 20px auto;
@@ -583,7 +583,7 @@ p, li {
     }
 
     .addeventatc_dropdown {
-      font-family: $robotocondensed;
+      font-family: $bebas;
     }
   }
 

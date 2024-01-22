@@ -21,7 +21,6 @@
     </style>
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/fonts.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/guitar-quest.css') }}" rel="stylesheet">
 
 @stop()
@@ -124,7 +123,7 @@
     {{--    </ul>--}}
     {{--    <div class="ml-auto items-center inline-flex flex-shrink-0 ">--}}
 
-    {{--            <a class="bg-goldenrod-gradient transition duration-300 linear px-6 md:px-8 py-1 inline-block uppercase text-black font-roboto-condensed-bold rounded-full" title="Go To Order Page" href="{{ $orderLink }}">Order Now</a>--}}
+    {{--            <a class="bg-goldenrod-gradient transition duration-300 linear px-6 md:px-8 py-1 inline-block uppercase text-black font-bebas rounded-full" title="Go To Order Page" href="{{ $orderLink }}">Order Now</a>--}}
 
     {{--    </div>--}}
     {{--</nav>--}}
@@ -157,7 +156,7 @@
                     </div>
                     <!-- Content -->
                     <div class="w-full lg:w-2/3 z-10">
-                        <h1 class="text-white uppercase leading-none text-5xl sm:text-7xl lg:text-8xl font-bison-bold text-center @if(empty($saveText)) mb-12 @endif">
+                        <h1 class="text-white uppercase leading-none text-5xl sm:text-7xl lg:text-8xl font-bebas text-center @if(empty($saveText)) mb-12 @endif">
                             <span class="inline-block">Your</span>
                             <span class="block text-goldenrod text-6xl sm:text-8xl lg:text-9xl -my-3">Guitar Journey</span>
                             <span class="inline-block">Starts Here</span>
@@ -170,15 +169,15 @@
                             </div>
                         @endif
                         <div class="text-center">
-                            <button class="border-box px-4 mb-2 sm:px-8 py-2 cursor-pointer border-solid mr-2 border-white border-3 py-1 inline-block uppercase text-white font-roboto-condensed-bold rounded-full transition duration-300 linear hover:bg-white hover:text-black"
+                            <button class="border-box px-4 mb-2 sm:px-8 py-2 cursor-pointer border-solid mr-2 border-white border-3 py-1 inline-block uppercase text-white font-bebas rounded-full transition duration-300 linear hover:bg-white hover:text-black"
                                 x-on:click.prevent="document.querySelector('#intro-video').src += '&autoplay=1'; modalOpen = 'trailerModal';"
                             >
                                 <i class="fas fa-play pr-1"></i> Watch Trailer
                             </button>
                             @if($products['guitar-quest']->getPublicStockCount() > 0)
-                                <a class="bg-goldenrod-gradient transition duration-300 linear px-6 sm:px-10 py-2 inline-block uppercase text-black font-roboto-condensed-bold rounded-full" title="Go To Order Page" href="{{ $orderLink }}">Get Started</a>
+                                <a class="bg-goldenrod-gradient transition duration-300 linear px-6 sm:px-10 py-2 inline-block uppercase text-black font-bebas rounded-full" title="Go To Order Page" href="{{ $orderLink }}">Get Started</a>
                             @else
-                                <a class="bg-gray-400 hover-yellow transition duration-300 linear px-6 sm:px-10 py-2 inline-block uppercase text-black font-roboto-condensed-bold rounded-full" x-on:click.prevent="modalOpen = 'waitlistModal'">Join The Waitlist</a>
+                                <a class="bg-gray-400 hover-yellow transition duration-300 linear px-6 sm:px-10 py-2 inline-block uppercase text-black font-bebas rounded-full" x-on:click.prevent="modalOpen = 'waitlistModal'">Join The Waitlist</a>
                             @endif
                             @if(!empty($saveText))<p class="uppercase font-primary text-sm sm:text-base leading-relaxed mx-auto text-white"><strong>{!! $saveText !!}</strong></p>@endif
                         </div>
@@ -200,7 +199,7 @@
                 <!-- Sticky Section -->
                 <div class="w-full pb-8 text-center text-white flex-col inline-flex justify-end lg:pb-0 lg:text-left lg:w-1/2 lg:justify-center">
                     <div class="p-4 text-shadow sm:p-8 md:p-16" style="background-color: rgba(1,5,17,.7);">
-                        <h2 class="uppercase text-4xl font-bison-bold mb-6 sm:text-5xl lg:text-6xl">
+                        <h2 class="uppercase text-4xl font-bebas mb-6 sm:text-5xl lg:text-6xl">
                             <span class="text-goldenrod">Play Your First Song,</span>
                             <br><span>Start To Finish.</span>
                         </h2>
@@ -220,7 +219,7 @@
                 <!-- Sticky Section -->
                 <div class="w-full pb-8 text-center text-white inline-flex justify-end flex-col lg:pb-0 lg:text-left lg:w-1/2 lg:justify-center">
                     <div class="p-4 text-shadow sm:p-8 md:p-16" style="background-color: rgba(1,5,17,.7);">
-                        <h2 class="uppercase text-4xl font-bison-bold mb-6 sm:text-5xl lg:text-6xl">
+                        <h2 class="uppercase text-4xl font-bebas mb-6 sm:text-5xl lg:text-6xl">
                             <span>Play this. Play that.</span><br>
                             <span class="text-goldenrod">And then play more.</span>
                         </h2>
@@ -240,7 +239,7 @@
                 <!-- Sticky Section -->
                 <div class="w-full pb-8 text-center text-white inline-flex flex-col justify-end lg:pb-0 lg:text-left lg:w-1/2 lg:justify-center">
                     <div class="p-4 text-shadow sm:p-8 md:p-16" style="background-color: rgba(1,5,17,.7);">
-                        <h2 class="uppercase text-4xl font-bison-bold mb-6 sm:text-5xl lg:text-6xl">
+                        <h2 class="uppercase text-4xl font-bebas mb-6 sm:text-5xl lg:text-6xl">
                             <span class="text-goldenrod">Express Yourself</span>
                             <br><span>On the guitar.</span>
                         </h2>
@@ -259,7 +258,7 @@
         <section id="your_map" class="py-24 relative md:py-28" style="background-image: url('https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/star-pattern.svg'); background-color: #000718;">
             <div class="max-w-screen-xl m-auto px-6 flex text-center mb-6">
                 <div class="w-full m-auto text-white sm:w-3/4 lg:w-1/2">
-                    <h2 class="uppercase font-bison-bold text-5xl md:text-6xl">
+                    <h2 class="uppercase font-bebas text-5xl md:text-6xl">
                         <span class="">The</span>
                         <span class="text-goldenrod underline">More Fun</span>
                         <span class="">Guitar Lessons</span>
@@ -267,7 +266,7 @@
                     <p class="font-semibold md:text-lg my-6">
                         Skip the boring stuff. GuitarQuest is designed to get you playing songs faster, hooked and returning to the guitar more often, and making your own musical projects come to life with entertaining video missions and fluff-free exercises.
                     </p>
-                    <button class="border-box px-6 mb-4 sm:px-8 py-2 cursor-pointer border-solid border-goldenrod text-goldenrod border-3 inline-block uppercase font-roboto-condensed-bold rounded-full transition duration-300 linear hover:bg-white hover:text-black" x-show="levelMap === false" x-on:click.prevent="levelModalOpen = 1">
+                    <button class="border-box px-6 mb-4 sm:px-8 py-2 cursor-pointer border-solid border-goldenrod text-goldenrod border-3 inline-block uppercase font-bebas rounded-full transition duration-300 linear hover:bg-white hover:text-black" x-show="levelMap === false" x-on:click.prevent="levelModalOpen = 1">
                         Click For Course Details &nbsp; <i class="fas fa-external-link"></i>
                     </button>
                 </div>
@@ -6946,17 +6945,17 @@
                 <div class="text-center flex-col w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
                     <div class="mb-10 m-auto w-5/6 sm:mb-20 sm:w-full sm:px-4">
                         <img src="https://www.musora.com/musora-cdn/image/width=45,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-playing-first-song.svg" width="45px" class="m-auto mb-2" alt="Note icon">
-                        <h3 class="font-bison-bold uppercase text-3xl" alt="play your first song icon">Play Your First Song</h3>
+                        <h3 class="font-bebas uppercase text-3xl" alt="play your first song icon">Play Your First Song</h3>
                         <p class="font-semibold md:text-lg">If you can walk and talk, then you can do this way sooner than you’d think. We promise!</p>
                     </div>
                     <div class="mb-10 m-auto w-5/6 sm:mb-20 sm:w-full sm:px-4">
                         <img src="https://www.musora.com/musora-cdn/image/width=45,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-play-campfire-songs.svg" width="45px" class="m-auto mb-2" alt="play campfire songs icon">
-                        <h3 class="font-bison-bold uppercase text-3xl">Play Campfire Songs</h3>
+                        <h3 class="font-bebas uppercase text-3xl">Play Campfire Songs</h3>
                         <p class="font-semibold md:text-lg ">Learn all those catchy tunes that’ll make your friends sing and clap late into the night.</p>
                     </div>
                     <div class="mb-10 sm:mb-0 m-auto w-5/6 sm:w-full sm:px-4">
                         <img src="https://www.musora.com/musora-cdn/image/width=45,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-play-any-song.svg" width="45px" class="m-auto mb-2" alt="play any song icon">
-                        <h3 class="font-bison-bold uppercase text-3xl">Play (Almost) Any Song…</h3>
+                        <h3 class="font-bebas uppercase text-3xl">Play (Almost) Any Song…</h3>
                         <p class="font-semibold md:text-lg">You won’t be Hendrix in three months, but you’ll actually be able to play along to popular songs.</p>
                     </div>
                 </div>
@@ -6966,18 +6965,18 @@
                 <div class="text-center flex-col m-auto w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
                     <div class="mb-10 m-auto w-5/6 sm:mb-20 sm:w-full sm:px-4">
                         <img src="https://www.musora.com/musora-cdn/image/width=45,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-jamming-with-band.svg" width="45px" class="m-auto mb-2" alt="Calendar icon">
-                        <h3 class="font-bison-bold uppercase text-3xl" alt="gain insane momentum icon">Gain Insane Momentum</h3>
+                        <h3 class="font-bebas uppercase text-3xl" alt="gain insane momentum icon">Gain Insane Momentum</h3>
                         <p class="font-semibold md:text-lg">Practice just became FUN with exciting missions and challenges to keep you motivated. </p>
                     </div>
                     <div class="mb-10 m-auto w-5/6 sm:mb-20 sm:w-full sm:px-4">
                         <img src="https://www.musora.com/musora-cdn/image/width=45,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-write-first-song.svg" width="45px" class="m-auto mb-2" alt="write your own music icon">
-                        <h3 class="font-bison-bold uppercase text-3xl">Write Your Own Music</h3>
+                        <h3 class="font-bebas uppercase text-3xl">Write Your Own Music</h3>
                         <p class="font-semibold md:text-lg">Express yourself by writing a song, adding lyrics, and recording something that makes you smile.</p>
                     </div>
                     <div class="mb-0 sm:mb-10 m-auto w-5/6 sm:w-full sm:px-4">
                         <i class="fa-light fa-trophy m-auto mb-2" style="font-size: 40px; color:#FFB500;"></i>
                         {{--<img src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-final-boss.svg", ["auto" => "format", "w" => 45]) }}" width="45px" class="m-auto mb-2">--}}
-                        <h3 class="font-bison-bold uppercase text-3xl">The Final Mission</h3>
+                        <h3 class="font-bebas uppercase text-3xl">The Final Mission</h3>
                         <p class="font-semibold mb-0 md:text-lg">Everything you’ve learned is tested with ONE high energy tune — and it’s so satisfying to pull off.</p>
                     </div>
                 </div>
@@ -6993,14 +6992,14 @@
                     <p class="italic mb-0 text-goldenrod pb-4 text-2xl md:text-3xl md:pb-0">
                         Meet your guide...
                     </p>
-                    <h2 class="block uppercase -mt-4 text-center font-bison-bold text-7xl md:text-9xl lg:leading-none">Rob Scallon</h2>
+                    <h2 class="block uppercase -mt-4 text-center font-bebas text-7xl md:text-9xl lg:leading-none">Rob Scallon</h2>
                 </div>
                 <div class="w-full m-auto relative -mt-7 md:-mt-11 md:w-9/12 lg:w-7/12">
                     <img src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-scallon-guide.png" alt="frob scallon">
                     <div class="bottom-0 w-full h-48 absolute gradient"></div>
                 </div>
                 <div class="w-full m-auto text-white relative -mt-24 md:w-3/4 lg:w-1/2">
-                    <h3 class="text-center uppercase mb-4 font-bison-bold mb-6 text-5xl md:text-6xl">
+                    <h3 class="text-center uppercase mb-4 font-bebas mb-6 text-5xl md:text-6xl">
                         Your <span class="text-goldenrod underline">Mission</span>
                     </h3>
                     <p>Music is a language — and just like you didn’t start talking by understanding prepositions and nouns, you shouldn’t learn guitar by endlessly studying theory. <span class="font-bold">Instead, let’s just start playing!</span></p>
@@ -7022,21 +7021,21 @@
                             <div class="bg-goldenrod rounded-full h-20 w-20 inline-flex items-center justify-center text-4xl mb-2">
                                 <i class="fab fa-youtube"></i>
                             </div>
-                            <p class="font-bold text-xl leading-none font-bison-bold mb-0">2,140,000</p>
+                            <p class="font-bold text-xl leading-none font-bebas mb-0">2,140,000</p>
                             <p class="font-bold italic text-goldenrod text-xs">Subscribers</p>
                         </div>
                         <div class="text-white text-center mr-4 sm:mr-12">
                             <div class="bg-goldenrod rounded-full h-20 w-20 inline-flex items-center justify-center text-5xl mb-2">
                                 <i class="fab fa-instagram"></i>
                             </div>
-                            <p class="font-bold text-xl leading-none font-bison-bold mb-0">401,000</p>
+                            <p class="font-bold text-xl leading-none font-bebas mb-0">401,000</p>
                             <p class="font-bold italic text-goldenrod text-xs">Followers</p>
                         </div>
                         <div class="text-white text-center">
                             <div class="bg-goldenrod rounded-full h-20 w-20 inline-flex items-center justify-center text-4xl mb-2">
                                 <i class="fas fa-play"></i>
                             </div>
-                            <p class="font-bold text-xl leading-none font-bison-bold mb-0">450,000,000+</p>
+                            <p class="font-bold text-xl leading-none font-bebas mb-0">450,000,000+</p>
                             <p class="font-bold italic text-goldenrod text-xs">Video Views</p>
                         </div>
                     </div>
@@ -7052,7 +7051,7 @@
                 <div class="w-full m-auto text-white md:w-5/6">
                     <div class="text-center mb-12 w-3/4 m-auto md:w-full">
                         <img src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png" width="200px" class="mb-4" alt="Guitar quest logo">
-                        <h2 class="uppercase font-bison-bold mb-6 text-5xl md:text-6xl">
+                        <h2 class="uppercase font-bebas mb-6 text-5xl md:text-6xl">
                             <span class="">Play</span>
                             <span class="text-goldenrod underline">Your Way</span>
                         </h2>
@@ -7063,34 +7062,34 @@
                     <div class="mb-12 md:mb-24">
                         <ul class="m-0 grid grid-cols-1 gap-4 list-none md:grid-cols-3">
                             <li class="w-full relative custom-list-style pl-4">
-                                <p class="font-bold text-xl font-bison-bold mb-1">Start Playing Faster</p>
+                                <p class="font-bold text-xl font-bebas mb-1">Start Playing Faster</p>
                                 <p class="text-sm">Get 9 missions that’ll take you from zero to playing real songs, start to finish.</p>
                             </li>
                             <li class="w-full relative custom-list-style pl-4">
-                                <p class="font-bold text-xl font-bison-bold mb-1">Step-By-Step Videos</p>
+                                <p class="font-bold text-xl font-bebas mb-1">Step-By-Step Videos</p>
                                 <p class="text-sm">Rob Scallon is your guide with helpful step-by-step videos for every quest!</p>
                             </li>
                             <li class="w-full relative custom-list-style pl-4">
-                                <p class="font-bold text-xl font-bison-bold mb-1">11 Exclusive Songs</p>
+                                <p class="font-bold text-xl font-bebas mb-1">11 Exclusive Songs</p>
                                 <p class="text-sm">You’ll get exclusive songs from a bunch of genres (and varying levels of silliness!)</p>
                             </li>
                             <li class="w-full relative custom-list-style pl-4">
-                                <p class="font-bold text-xl font-bison-bold mb-1">Your Biggest Questions</p>
+                                <p class="font-bold text-xl font-bebas mb-1">Your Biggest Questions</p>
                                 <p class="text-sm">Ask your biggest questions & get personalized feedback from real teachers.</p>
                             </li>
                             <li class="w-full relative custom-list-style pl-4">
-                                <p class="font-bold text-xl font-bison-bold mb-1">Yours Forever</p>
+                                <p class="font-bold text-xl font-bebas mb-1">Yours Forever</p>
                                 <p class="text-sm">Unlike lessons that make you pay over and over, GuitarQuest is yours for life.</p>
                             </li>
                             <li class="w-full relative custom-list-style pl-4">
-                                <p class="font-bold text-xl font-bison-bold mb-1">Watch Anywhere, Anytime</p>
+                                <p class="font-bold text-xl font-bebas mb-1">Watch Anywhere, Anytime</p>
                                 <p class="text-sm">You’ll have online access 24/7 from any computer, tablet, or smartphone.</p>
                             </li>
                         </ul>
                     </div>
                     <div class='flex flex-wrap lg:flex-no-wrap'>
                         <div class=" w-full lg:w-4/6">
-                            <h2 class="uppercase font-bison-bold text-5xl mb-9 sm:mb-12 inline-flex items-center items-center flex-wrap text-center w-full justify-center md:text-6xl lg:flex-no-wrap lg:justify-start">
+                            <h2 class="uppercase font-bebas text-5xl mb-9 sm:mb-12 inline-flex items-center items-center flex-wrap text-center w-full justify-center md:text-6xl lg:flex-no-wrap lg:justify-start">
                         <span class="inline-block pb-1 sm:pb-2 w-full lg:inline-flex lg:w-auto ">
                             You<span class="text-goldenrod underline px-2">Will Play</span><span class="inline-flex">In 90 Days</span>
                         </span>

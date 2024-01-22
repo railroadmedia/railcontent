@@ -65,7 +65,7 @@
     </div>
     <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl">
         <p><strong><i class="fas fa-check"></i> Success!</strong></p>
-        <h2 class="text-{{ $brand }} my-4 sm:my-5 font-roboto"><strong>@if(!empty($headline)) {{ $headline }} @else CHECK YOUR EMAIL @endif</strong></h2>
+        <h2 class="text-{{ $brand }} my-4 sm:my-5 font-bebas"><strong>@if(!empty($headline)) {{ $headline }} @else CHECK YOUR EMAIL @endif</strong></h2>
         <p><em>@if(!empty($body)) {{ $body }} @else You should receive an email from {{ 'team@' . $brand . '.com' }} within 10 minutes.
                 If you don’t, then check your spam folder or re-enter your email address again. @endif
             </em>

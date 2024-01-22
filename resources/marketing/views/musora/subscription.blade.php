@@ -15,11 +15,12 @@
     <meta property="og:description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
 
     <meta property="og:url" content="https://www.musora.com">
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.jpg">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.webp">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
 
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
+
     <style>
         .join {
             display:inline-block;
@@ -323,13 +324,48 @@
         guitareoSoundslice: false,
         singeoSoundslice: false,
         trailer: false,
+        lazyLoad: false,
+        videoLoaded: false,
     }'
 @endsection
 
 @section('layout-body')
 
     @php
-        $bubbles = $musora['bubbles'];
+        $bubbles =  [
+             [
+                 'src' => $bubble1,
+                 'classes' => 'h-10 sm:h-14 lg:h-16 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]',
+             ],
+             [
+                 'src' => $bubble2,
+                 'classes' => 'h-24 sm:h-28 lg:h-44 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]',
+             ],
+             [
+                 'src' => $bubble3,
+                 'classes' => 'h-32 sm:h-40 lg:h-52 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]',
+             ],
+             [
+                 'src' => $bubble4,
+                 'classes' => 'h-10 sm:h-12 lg:h-16 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]',
+             ],
+             [
+                 'src' => $bubble5,
+                 'classes' => 'h-10 sm:h-12 lg:h-16 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]',
+             ],
+             [
+                 'src' => $bubble6,
+                 'classes' => 'h-28 sm:h-32 lg:h-48 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]',
+             ],
+             [
+                 'src' => $bubble7,
+                 'classes' => 'h-28 sm:h-36 lg:h-52 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]',
+             ],
+             [
+                 'src' => $bubble8,
+                 'classes' => 'h-12 sm:h-14 lg:h-16 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]',
+             ]
+         ];
     @endphp
     @include('musora.sales.components.header-section', [
         'header' => '“So positive and uplifting!”',
@@ -363,7 +399,7 @@
     ])
 
     @include('musora.sales.components.workouts-section', [
-        'workoutsBG' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts-card.jpg',
+        'workoutsBG' => 'marketing/musora/membership/homepage/2024/workouts-card.webp',
     ])
 
 
@@ -372,7 +408,7 @@
     @endphp
 
     @include('musora.sales.components.songs-section', [
-        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/device.png',
+        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/device.webp',
     ])
 
     @php
@@ -384,15 +420,22 @@
 
     @if(empty($trialVersion))
         @include('musora.sales.components.guarantee-section', [
-            'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/musora/membership/homepage/2024/guarantee.png',
+            'badge' => 'marketing/musora/membership/homepage/2024/guarantee.webp',
             'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
             'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
         ])
     @endif
-    @include('musora._partials.order-section-collage')
+    @include('musora.sales.components.order-section-collage', [
+    'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
+    'header' => 'Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.',
+    'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Personalized feedback from real teachers.</li>
+    <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',
+    'image' => 'marketing/musora/membership/homepage/webp-format/musora-m-team2.webp',
+    ])
 
     @include('musora.sales.components.app-section', [
-        'image' => 'marketing/musora/membership/homepage/2023/devices2.png',
+        'image' => 'marketing/musora/membership/homepage/2024/devices2.webp',
         'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?platform=iphone',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
     ])
@@ -431,7 +474,7 @@
 
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>   
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     @yield('scripts')

@@ -14,22 +14,9 @@
 
     @include('_partials.layout._fonts')
     @include('_partials.layout.favicons.pianote-favicons')
-    <script type="module">
-        try {
-            const response = await fetch("https://shopify-gtm-suite.getelevar.com/configs/b2934fc67ad5f4d4708f129db537a4679accfc78/config.json");
-            const config = await response.json();
-            const scriptUrl = config.script_src_custom_pages;
 
-            if (scriptUrl) {
-                const { handler } = await import(scriptUrl);
-                await handler(config);
-            }
-        } catch (error) {
-            console.error("Elevar Error:", error);
-        }
-    </script>
     {!! \App\Analytics\Tracker::headBottom() !!}
-
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>     <!-- Alpine Plugin -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js"></script>
 </head>
 
@@ -47,10 +34,6 @@
         document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
     })
 </script>
-@include('_partials.components.countdown',[
-        'countdownDate' => '2023-11-28 00:00:00',
-        'promoVersion' => true
-    ])
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
 <script type="text/javascript" id="inspectletjs">

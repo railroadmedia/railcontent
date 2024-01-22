@@ -97,7 +97,7 @@
                 <form id="ajaxForm" accept-charset="UTF-8" action="https://www.pianote.com/claim-roland-90-day-access" class="ajax-form clearfix infusion-form facebook-track-lead w-full mx-auto" method="POST">
                     {{ csrf_field() }}
                     <input class="w-full mb-2 text-left rounded-full py-2 px-5 text-gray-400 text-base md:text-lg" name="email" type="email" placeholder="Email Address..." required/>
-                    <button class="submit w-full transition-opacity duration-300 hover:opacity-90 uppercase cursor-pointer text-center text-white text-base md:text-lg font-roboto font-bold bg-pianote rounded-full" type="submit">
+                    <button class="submit w-full transition-opacity duration-300 hover:opacity-90 uppercase cursor-pointer text-center text-white text-base md:text-lg font-bebas font-bold bg-pianote rounded-full" type="submit">
                         <span class="pre-add">Get Started <i class="fad fa-paper-plane"></i></span>
                         <span class="pending hidden">Sending <i class="fad fa-spinner-third fa-spin"></i></span>
                         <span class="success hidden">Sent <i class="fad fa-thumbs-up"></i></span>
@@ -112,7 +112,7 @@
                 </div>
                 <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl transition-all duration-700 block overflow-hidden invisible max-h-0 opacity-0">
                     <h5 class="mx-auto"><strong><i class="fas fa-check"></i> Success!</strong></h5>
-                    <h2 class="leading-none text-pianote my-3 md:my-4 font-roboto"><strong>CHECK YOUR EMAIL</strong></h2>
+                    <h2 class="leading-none text-pianote my-3 md:my-4 font-bebas"><strong>CHECK YOUR EMAIL</strong></h2>
                     <p class="leading-normal mx-auto max-w-xl"><em>You should receive an email from team@pianote.com within 10 minutes.
                             If you don’t, then check your spam folder or re-enter your email address again.</em></p>
                     <div class="mt-5 lg:mt-6">

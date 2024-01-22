@@ -82,14 +82,60 @@ class ShopifyGateway
         return $orders;
     }
 
-    public function getCustomerOrderByProcessAtDate(int $shopifyCustomerId, Carbon $processedAt) {
+    public function getCustomersToUpdate(Carbon $date)
+    {
+        $emails = collect();
+        $cursor = "";
+        $processedAtStartString = $date->toIso8601String();
+        $i = 0;
+        $max = 100;
+        do {
+            $this->handleRateLimitBefore();
+            $gql = <<<GQL
+            query {
+                 orders(first:250$cursor, query:"updated_at:>=\"$processedAtStartString\""){
+                    nodes {
+                        ... on Order {
+                            customer {
+                                email
+                            }
+                        }
+                    }
+                    pageInfo {
+                      hasNextPage
+                      endCursor
+                    }
+                }
+            }
+            GQL;
+
+            $responseBody = $this->executeQuery($gql);
+
+
+            $emails = $emails->merge(
+                collect($responseBody->data->orders->nodes)->map(function ($order) {
+                    return $order->customer->email;
+                })
+            );
+            $hasNextPage = $responseBody->data->orders->pageInfo->hasNextPage;
+            $endCursor = $responseBody->data->orders->pageInfo->endCursor;
+            $cursor = ", after: \"$endCursor\"";
+            $i++;
+        } while ($hasNextPage && $i < $max);
+        $emails = $emails->unique();
+        return $emails;
+    }
+
+    public function getCustomerOrderByProcessAtDate(int $shopifyCustomerId, Carbon $processedAt)
+    {
         // DEV NOTE: we must supply the datetime as a properly formatted string, and for some reason Shopify isn't
         // taking the full datetime string into account when querying processed_at:\"$processedAtString\", and instead
         // only uses the date. So as a workaround, just check >= and <=.
-        $processedAtString = $processedAt->toIso8601String();
+        $processedAtStartString = $processedAt->clone()->addDays(-1)->toIso8601String();
+        $processedAtEndString = $processedAt->clone()->addDays(1)->toIso8601String();
         $gql = <<<GQL
             query {
-                 orders(first:1, query:"customer_id:$shopifyCustomerId AND processed_at:>=\"$processedAtString\" AND processed_at:<=\"$processedAtString\""){
+                 orders(first:1, query:"customer_id:$shopifyCustomerId AND processed_at:>=\"$processedAtStartString\" AND processed_at:<=\"$processedAtEndString\""){
                     nodes {
                         ... on Order {
                             id,
@@ -178,7 +224,6 @@ class ShopifyGateway
         $response = $this->executeQuery($query);
         return $response;
     }
-
 
 
     public function executeQuery(string $gql): mixed

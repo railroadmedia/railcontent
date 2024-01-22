@@ -16,48 +16,62 @@ class ImpactTrackConversion implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct($order) {
-        $this->order = $order;
-
+    public function __construct(
+        private $user,
+        private $brand,
+        private $order) {
     }
 
-    public function handle(CartService $cartService) {
+    public function handle()
+    {
+
+        $promoCodesList = array_map(function($code) {
+            return $code['code'];
+        }, $this->order['discount_codes']);
+        $promoCodesString = implode(',', $promoCodesList);
+        $products = $this->getAllProducts($this->order['line_items']);
+        $orderId = $this->order['id'];
+        $userID = $this->user->id;
+        $email = $this->user->email;
+        $currency = $this->order['currency'];
         try {
-            $cartService->refreshCart();
-            $promoCode = $cartService->getCart()->getPromoCode();
-            $order = $this->order;
-
             Tracker::queue(
-                $order->getBrand(),
-                function () use ($order, $promoCode) {
-                    $products = [];
-
-                    foreach ($order->getOrderItems() as $orderItem) {
-                        $product = $orderItem->getProduct();
-                        $products[] = [
-                            'id' => $product->getId(),
-                            'name' => $product->getName(),
-                            'category' => $product->getType(),
-                            'value' => $orderItem->getFinalPrice(),
-                            'quantity' => $orderItem->getQuantity(),
-                            'sku' => $product->getSku(),
-                            'discount' => $orderItem->getTotalDiscounted()
-                        ];
-                    }
-
+                $this->brand,
+                function () use ($products, $promoCodesString, $orderId, $userID, $email, $currency) {
                     Tracker::trackTransactionAPI(
                         $products,
-                        $order->getId(),
-                        $promoCode
+                        $orderId,
+                        $promoCodesString,
+                        $userID,
+                        $email,
+                        currency: $currency
                     );
                 }
         );
         } catch (Throwable $exception) {
-            error_log("There is with the Impact Track Conversion job in event data sync.");
+            error_log("Error in ImpactTrackConversion with order: $orderId");
             error_log($exception);
         }
     }
 
+    private function getAllProducts(array $lineItems = []): array
+    {
+        return collect($lineItems)
+            ->map(function ($lineItem) {
+                return [
+                    'id' => $lineItem['product_id'],
+                    'name' => $lineItem['name'],
+                    'quantity' => $lineItem['quantity'],
+                    'sku' => $lineItem['sku'],
+                    'brand' => $lineItem['vendor'],
+                    'value' => $lineItem['price'],
+                    'category' => '',
+                    'variant_id' => $lineItem['variant_id'],
+                    'variant_name' => $lineItem['variant_title']
+                ];
+            })
+            ->toArray();
+    }
 
     /**
      * The job failed to process.

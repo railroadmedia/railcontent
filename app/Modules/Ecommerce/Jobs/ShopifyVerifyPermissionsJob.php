@@ -65,7 +65,7 @@ class ShopifyVerifyPermissionsJob extends BatchQueryJob
             /** @var User $user */
             try {
                 $potentialIssue = false;
-                $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($user->id);
+                $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissionsByUser($user);
                 $permissions = $cs->buildUserPermissionsList($user->id);
 
                 if ($userAccessPermissions->getCollection()->count() == 0 && count($permissions) > 0) {
