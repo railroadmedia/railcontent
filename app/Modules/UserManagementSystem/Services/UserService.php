@@ -56,4 +56,12 @@ class UserService
         event(new UserCreated($user));
         return $user;
     }
+
+    public function setTrialPeriod($shopifyCustomerId, $trialExpirationDate)
+    {
+        $user = $this->getUserByShopifyCustomerId($shopifyCustomerId);
+        $user->trial_expiration_date = $trialExpirationDate;
+        $user->is_trial = true;
+        $user->save();
+    }
 }
