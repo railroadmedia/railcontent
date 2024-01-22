@@ -41,6 +41,8 @@ import ContentInfo from './vue/components/ContentInfo/ContentInfo';
 import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWrapper';
 import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper';
 import ChildCollectionPage from './vue/components/CollectionPage/ChildCollectionPage';
+import PackCatalogue from './vue/components/Packs/PackCatalogue';
+
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -283,6 +285,7 @@ app.component('AppContainer', AppContainer)
     .component('Playlists', Playlists)
     .component('Playlist', Playlist)
     .component('Referral', Referral)
+    .component('PackCatalogue', PackCatalogue)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
