@@ -20,6 +20,177 @@
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <style>
+
+        [placeholder]:focus::-webkit-input-placeholder {
+            color:transparent
+        }
+
+        form ::-webkit-input-placeholder, form ::-moz-placeholder, form :-ms-input-placeholder, form :-moz-placeholder {
+            color:#777
+        }
+
+        form {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        @media (min-width: 768px) {
+            form {
+                margin: 0 auto 10px;
+            }
+        }
+
+        form input, form button {
+            font: 400 18px/50px 'Open Sans', sans-serif;
+            height: 50px;
+            color: #999;
+            border-radius: 100px;
+            text-align: left;
+            padding: 7px 20px;
+            margin: 0 auto 15px;
+        }
+        @media (min-width: 768px) {
+            form input, form button {
+                font-size: 22px;
+                height: 65px;
+                line-height: 65px;
+            }
+        }
+        form input[type="submit"], form button[type="submit"], form input button, form button button {
+            font-family: 'Bebas Neue', sans-serif;
+            font-weight: 700;
+            color: #fff;
+            background: #0b76db;
+            text-transform: uppercase;
+            margin: 0 auto 15px;
+            display: block;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: center;
+            padding: 0;
+        }
+        form input[type="submit"]:hover, form button[type="submit"]:hover, form input button:hover, form button button:hover {
+            background: #258ff4;
+        }
+        .disclaimer {
+            display: none;
+            margin: 0 auto;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+        .thank-you-box {
+            width:100%;
+            max-width:960px;
+            border-radius:5px;
+            height:auto;
+            max-height:0;
+            visibility:hidden;
+            opacity:0;
+            transition:all .4s ease-in;
+            display:block;
+            margin:0 auto;
+            background:#FFF;
+            text-align:center;
+            overflow:hidden;
+            color:#000
+        }
+
+        .thank-you-box.active {
+            max-height:1000px;
+            visibility:visible;
+            opacity:1;
+            padding:15px
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box.active {
+                padding:20px
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box.active {
+                padding:30px
+            }
+        }
+
+        .thank-you-box p {
+            font:400 15px/1.4em "Open Sans", sans-serif;
+            margin:0 auto
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box p {
+                font-size:19px
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box p {
+                font-size:23px
+            }
+        }
+
+        .thank-you-box p em {
+            line-height:1.4em;
+            max-width:550px;
+            display:inline-block;
+            font-size:12px
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box p em {
+                font-size:14px
+            }
+        }
+
+        .thank-you-box h2 {
+            font:700 30px/1em "Bebas Neue", sans-serif;
+            margin:15px auto;
+            text-transform:uppercase;
+            color:#0b76db
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box h2 {
+                font-size:37px;
+                margin:20px auto
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box h2 {
+                font-size:44px
+            }
+        }
+
+        .thank-you-box .social-media a {
+            background:#000;
+            color:#fff;
+            border-radius:50%;
+            display:inline-block;
+            text-align:center;
+            margin:20px 3px 0;
+            width:50px;
+            height:50px;
+            line-height:50px;
+            font-size:26px
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box .social-media a {
+                width:70px;
+                height:70px;
+                line-height:70px;
+                font-size:35px;
+                margin:25px 10px 0
+            }
+        }
+    </style>
+    <style>
         .join.outline.blue {
             border-color:#0b76db;
             color:#0b76db;
@@ -50,6 +221,8 @@
 
 @section('body-data')
     x-data="{
+    waitlist: false,
+    lazyLoad: false,
     trailer: false,
     image1: false,
     image2: false,
@@ -64,6 +237,14 @@
         "cartVersion" => true
     ])
 
+    @if(strpos(url()->full(), 'thankyou'))
+        <div class="py-5 sm:py-7 px-6 text-center bg-green-400">
+            <div class="container mx-auto max-w-xl">
+                <h3 class="leading-tight mb-2"><strong>Thanks for contacting us!</strong></h3>
+                <p class="leading-tight">You’re on the early access list for the next drop of Alesis E-Kits.<br class="hidden sm:inline"> Keep on eye on your inbox to get yours before anyone else.</p>
+            </div>
+        </div>
+    @endif
 <!-- hero section-->
 <header class="text-white relative overflow-hidden z-20"
     style="height:700px;background:linear-gradient(to bottom, rgb(26, 26, 26), #1e1e1e);">
@@ -95,7 +276,8 @@
                 @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
                     <a class="w-full join smaller blue" href="{{ $orderUrl }}">Buy Now</a>
                 @else
-                    <a class="w-full join smaller sold-out">SOLD OUT</a>
+                    <h4 class="bg-black w-full text-red-600 leading-tight py-1 mb-3"><strong>SOLD OUT</strong></h4>
+                    <a class="w-full join smaller blue" @click="waitlist = true;">Join The Waitlist</a>
                 @endif
                 <br>
                 <div class="join smaller outline mt-3" @click="trailer = true;"><i class="fas fa-play"></i> &nbsp;WATCH
@@ -414,7 +596,12 @@
                             <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
                         @endif
                     </h4>
-                    <a href="{{ $orderUrl }}" class="join blue smaller w-full max-w-xs">BUY NOW</a>
+                    @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
+                        <a class="join blue smaller w-full max-w-xs" href="{{ $orderUrl }}">Buy Now</a>
+                    @else
+                        <h4 class="text-red-600 leading-tight mb-2"><strong>SOLD OUT</strong></h4>
+                        <a class="join blue smaller w-full max-w-xs" @click="waitlist = true;">Join The Waitlist</a>
+                    @endif
                 </div>
                 <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
                     @if(!empty($membersVersion))
@@ -518,7 +705,9 @@
         <p class="p-4 text-center hidden md:block" style="color: rgb(135, 144, 151, 1.2)"> <strong>Depth</strong> 36" (91.44cm) // <strong>Width</strong> 48" (121.92cm) //  <strong>Height</strong> 12.12" (30.78cm)</p>
 
         <div class="w-full max-w-xs mx-auto pt-4">
-            <a href="{{ $orderUrl }}" class="join blue smaller w-full max-w-xs">BUY NOW</a>
+            @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
+                <a class="join blue smaller w-full max-w-xs" href="{{ $orderUrl }}">Buy Now</a>
+            @endif
         </div>
 
     </div>
@@ -547,8 +736,27 @@
         'vimeo' => true,
     ])
 
+    @component('_partials.components.modal',[
+        'name' => 'waitlist',
+    ])
+        @slot('content')
+            <div class="relative overflow-y-visible max-w-3xl px-4 md:px-5 lg:px-7 py-5 md:py-7 lg:py-10 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
+                <h3 class="leading-tight mb-5"><strong>Notify Me When They’re Back</strong></h3>
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "formId" => "Drumeo - Engagement - Trigger - Alesis Waitlist - Web Form",
+                    "formName" => 'Alesis Waitlist',
+                    "buttonText" => "Notify Me",
+                    'stacked' => true,
+                    "redirectURL" => "/drumshop/kit?thankyou",
+                    "recaptchaKey" => $recaptchaKey,
+                    "minimalForm" => true
+                ])
+
+            </div>
+        @endslot
+    @endcomponent
 
     @include("drumeo.sales.partials._footer")
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" async defer></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" async defer></script>
 @stop
