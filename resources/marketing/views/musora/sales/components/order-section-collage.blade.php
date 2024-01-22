@@ -17,7 +17,7 @@
                          class="object-contain h-64 sm:h-auto max-w-full sm:max-w-md md:max-w-lg lg:max-w-full transition-opacity opacity-0"
                          loading="lazy"
                          onload="this.classList.remove('opacity-0')"
-                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/30x0/filters:quality(10)/filters:blur(5){!! $image !!}"
+                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/30x0/filters:quality(10)/filters:blur(6)/{!! $image !!}"
                          data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/{!! $image !!}"
                          alt="{{$theme}} collage image"
                     >
