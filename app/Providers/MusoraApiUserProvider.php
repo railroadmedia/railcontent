@@ -185,8 +185,17 @@ class MusoraApiUserProvider implements UserProviderInterface
                 'customer_io_id' => strval($externalAttributes['id']),
             ];
         }
+        $brand = brand();
+        $showLearningPathsOnHomepage = false;
+        if($user->is_trial && $user->created_at->diffInDays(now()) <= 30) {
+            $hasExperienceLevels =  count(
+                user()->onboardingExperience->filter(function ($item) use($brand) {
+                    return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
+                })
+            ) > 0;
+            $showLearningPathsOnHomepage = ($hasExperienceLevels) ? true : false;
+        }
 
-        //TODO: show_learning_paths_on_homepage based on user's data
         return array_merge([
             'id' => $user->id,
             'email' => $user->email,
@@ -201,7 +210,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'has_started_method' => $hasStartedMethod ?? false,
             'has_completed_method' => $hasCompletedMethod ?? false,
             'login_as_users' => $user->hasRole('login_as_users'),
-            'show_learning_paths_on_homepage' => true,
+            'show_learning_paths_on_homepage' => $showLearningPathsOnHomepage,
         ], $extraData);
     }
 

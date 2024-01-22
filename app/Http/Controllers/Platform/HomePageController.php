@@ -314,7 +314,17 @@ class HomePageController extends BaseController
         $carousel = $this->carouselService->getCarouselSlides();
 
         //TODO:
-        $shouldShowTrialSection = true;
+        $shouldShowTrialSection = false;
+        $brand = brand();
+        if(user()->is_trial && user()->created_at->diffInDays(now()) <= 30) {
+            $hasExperienceLevels =  count(
+                    user()->onboardingExperience->filter(function ($item) use($brand) {
+                        return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
+                    })
+                ) > 0;
+
+            $shouldShowTrialSection = ($hasExperienceLevels) ? true : false;
+        }
         $trialSection = [];
         if($shouldShowTrialSection){
             $trialSection = $this->learningPathsService->getLearningPaths();
