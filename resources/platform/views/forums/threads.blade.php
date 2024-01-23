@@ -69,22 +69,33 @@
                 @endslot
             @endcomponent
 
-            <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-8 tw-pb-14">
-                <div class="tw-flex tw-flex-col">
-                    <div class="tw-flex">
-                        <forum-threads-table
-                            theme-color="{{ $brand }}"
-                            brand="{{ $brand }}"
-                            :only-followed="false"
-                            :pinned-threads="{{ json_encode($pinnedThreads) }}"
-                            :threads="{{ json_encode($threads) }}"
-                            :thread-count="{{ $threadCount }}"
-                            search-json-results-endpoint-url="{{ url()->route('forums.get-search-results-json') }}"
-                        />
-                    </div>
-                <!-- <p class="font-bold">{{ json_encode($threads) }}</p> -->
-                </div>
+            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[30px]">
+                <collection-wrapper
+                    collection-type="threads"
+                    :pre-loaded-content="{{ json_encode($threads) }}"
+                    :tab-options="{{ json_encode([
+                        [ 'key' => 'all', 'value' => 'All Threads' ],
+                        [ 'key' => 'followed', 'value' => 'Followed' ]
+                    ]) }}"
+                ></collection-wrapper>
             </div>
+
+{{--            <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-8 tw-pb-14">--}}
+{{--                <div class="tw-flex tw-flex-col">--}}
+{{--                    <div class="tw-flex">--}}
+{{--                        <forum-threads-table--}}
+{{--                            theme-color="{{ $brand }}"--}}
+{{--                            brand="{{ $brand }}"--}}
+{{--                            :only-followed="false"--}}
+{{--                            :pinned-threads="{{ json_encode($pinnedThreads) }}"--}}
+{{--                            :threads="{{ json_encode($threads) }}"--}}
+{{--                            :thread-count="{{ $threadCount }}"--}}
+{{--                            search-json-results-endpoint-url="{{ url()->route('forums.get-search-results-json') }}"--}}
+{{--                        />--}}
+{{--                    </div>--}}
+{{--                <!-- <p class="font-bold">{{ json_encode($threads) }}</p> -->--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
         </div>
 @endsection
