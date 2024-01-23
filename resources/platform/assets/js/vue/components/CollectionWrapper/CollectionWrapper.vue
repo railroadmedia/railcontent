@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-filter="hideFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-filter="hideFilter" :hide-sort-icon="hideSortIcon" :hide-search="hideSearch" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
@@ -15,7 +15,7 @@
                 <RoutinesCatalogue v-else-if="isRoutine" :content="data"
                                    @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <PackCatalogue v-else-if="isPack" :content="preLoadedContent" />
-                <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
+                <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview" :reset-progress="resetProgress"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <CatalogueCardContainer
                     v-else
@@ -61,6 +61,14 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
+    hideSortIcon: {
+        type: Boolean,
+        default: () => false,
+    },
+    hideSearch: {
+        type: Boolean,
+        default: () => false,
+    },
     includeFutureScheduledContentOnly: {
         type: Boolean,
         default: () => false,
@@ -84,6 +92,10 @@ const props = defineProps({
     requiredFields: {
         type: Array,
         default: () => [],
+    },
+    resetProgress: {
+        type: Boolean,
+        default: () => false,
     },
     subscriptionCalendarId: {
         type: String,
@@ -234,6 +246,7 @@ const isDownloadView = computed(() => {
 const hideFilter = computed(() => {
     return isRoutine.value;
 })
+
 const getTabOptions = computed(() => {
     if (props.tabs?.length) {
         return props.tabs.map(({ name, value, is_required_field, is_group_by }) => {
@@ -338,5 +351,6 @@ onMounted(() => {
     // console.log('collection type',props.collectionType)
     // console.log(props.title)
     // console.log(props.preLoadedContent)
+    console.log(props.hideSortIcon)
 })
 </script>
