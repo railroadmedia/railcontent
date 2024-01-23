@@ -17,7 +17,7 @@
             </div>
         </div>
     </header>
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-mt-[30px]">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[30px]">
         <CollectionWrapper
             :collection-type="collectionType"
             :hide-search="hideSearch"
