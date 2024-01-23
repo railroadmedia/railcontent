@@ -6,7 +6,7 @@
         />
 
         <transition appear name="fade">
-            <CollectionResults :current-page="getCurrentPage" :total-pages="getTotalPages" @on-load-more="collectionStore.loadMore">
+            <CollectionResults :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"

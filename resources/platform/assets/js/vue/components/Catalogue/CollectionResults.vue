@@ -25,6 +25,10 @@ const props = defineProps({
         type: Number,
         default: 1,
     },
+    infiniteScroll: {
+        type: Boolean,
+        default: false,
+    },
     totalPages: {
         type: Number,
         default: 1,
