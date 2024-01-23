@@ -78,7 +78,6 @@
 <section class="content-section text-center" style="background: #0c1429;">
     <div class="container mx-auto relative z-50">
         <a class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
-            <img alt="" class="h-7 md:h-12 lg:h-14 mb-2 md:mb-0 mx-auto md:mr-2 opacity-70 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=320,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/shopper-approved-logo-white.png">
             <i class="align-middle text-2xl md:text-4xl fas fa-star" style="color: #f68d2d;"></i>
             <i class="align-middle text-2xl md:text-4xl fas fa-star" style="color: #f68d2d;"></i>
             <i class="align-middle text-2xl md:text-4xl fas fa-star" style="color: #f68d2d;"></i>
