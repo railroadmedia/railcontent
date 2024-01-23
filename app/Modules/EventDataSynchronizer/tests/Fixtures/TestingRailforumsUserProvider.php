@@ -66,4 +66,11 @@ class TestingRailforumsUserProvider implements UserProviderInterface
         return null;
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function getBlockedUsers(): ?array
+    {
+        // TODO: Implement getBlockedUsers() method.
+    }
 }
