@@ -39,10 +39,13 @@
             <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))
                     href="#customize-anchor"
+                    aria-label="Customize anchor"
                 @elseif(!empty($month))
                     href="/choose-your-trial-month"
+                    aria-label="Choose your trial month"
                 @else
                     href="/choose-plan"
+                     aria-label="Choose plan"
                 @endif
             >
                 @if(!empty($promoVersion) && empty($trialVersion))
@@ -52,9 +55,9 @@
                         SEE YOUR DEAL &raquo;
                     @endif
                 @elseif(!empty($month))
-                    30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                    30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @else
-                    7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                    7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @endif
             </a>
             @if(empty($noTrailer))
