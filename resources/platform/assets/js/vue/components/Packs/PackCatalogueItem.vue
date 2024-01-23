@@ -2,7 +2,7 @@
     <div class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-flex-nowrap tw-py-[30px] first:tw-border-none tw-border-b tw-border-[#D4D4D8] dark:tw-border-[#223F57] tw-relative">
         <a
             class="tw-flex-shrink-0 tw-w-full tw-h-auto sm:tw-w-[220px] sm:tw-h-[220px] md:tw-w-[280px] md:tw-h-[280px] tw-rounded-xl tw-overflow-hidden tw-relative tw-group tw-pb-[100%] sm:tw-pb-0 tw-mb-4 sm:tw-mb-0"
-            :class="isReleased ? '' : 'tw-saturate-0 tw-pointer-events-none tw-cursor-default'"
+            :class="!isReleased ? 'tw-saturate-0 tw-pointer-events-none tw-cursor-default' : '' "
             :href="pack.url"
         >
             <!-- Thumbnail -->
