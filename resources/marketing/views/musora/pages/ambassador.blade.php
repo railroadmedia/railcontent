@@ -11,11 +11,15 @@
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
 
+    @include('_partials.layout._fonts')
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+
     <style>
         .join {
             display: inline-block;
             font: 500 22px/1em 'Bebas Neue', sans-serif;
-            letter-spacing: 0.1em;
             text-transform: uppercase;
             background: #0c1524;
             border-radius: 50px;
@@ -177,9 +181,6 @@
             background:#FFAE00 !important;
         }
     </style>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
-    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 @endsection
 
 @section('body-data')
@@ -199,208 +200,108 @@
             <div class="guitar"  style="background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/background-guitar.jpg);"></div>
         </div>
         <div class="container mx-auto max-w-6xl relative z-10">
-            <img class="mx-auto h-16 sm:h-32 lg:h-40 mb-5 md:mb-10" src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/Musora-AllBrands.png" alt="musora logos" fetchpriority="high">
+            <img class="mx-auto h-16 sm:h-32 lg:h-40 mb-5 md:mb-7" src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/Musora-AllBrands.png" alt="musora logos" fetchpriority="high">
 
-            <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
-            <h4 class="mt-3 mb-5 md:mb-10 leading-normal">Get paid to promote world-class<br class="inline md:hidden"> online music lessons.</h4>
+            <h2 class="leading-tight"><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
+            <h4 class="mb-5 md:mb-7 leading-normal">Join the band by becoming a voice for world-class <br class="hidden sm:inline">
+                music instruction and earn in return</h4>
 
             <span class="join smaller mb-3 md:mb-0 md:mx-2 cursor-pointer border-2 text-musora-gold border-musora-gold hover:bg-musora-gold" x-on:click="modal = true">Guidelines</span>
-            <a class="join smaller md:mx-2 bg-musora-gold" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
+            <a class="join smaller md:mx-2 bg-musora-gold text-black" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
         </div>
     </header>
-    <section class="text-white py-8 md:py-10 lg:py-12 px-4 bg-musora-black">
-        <div class="container mx-auto max-w-6xl">
-            <p class="leading-normal px-3">
-                Musora is the home of Drumeo, Pianote, Guitareo, and Singeo — and the leader in online music education with more than 15 years experience, 500 million video views, and 100 world-class instructors.
+    <section class="text-white text-center py-8 md:py-10 lg:py-12 px-4 bg-musora-black">
+        <div class="container mx-auto max-w-2xl">
+            <h6 class="leading-normal px-3">
+                Our mission at Musora is to create more musicians and keep them playing longer. As the trusted expert and influencer in your community, we look to you to help us achieve that mission through our ambassador program.
                 <br><br>
-                Each brand offers a membership platform for music students to learn with step-by-step lessons, useful practice tools, and a supportive community of qualified teachers. The unique differentiator is that we provide a home for students, blending technology with tradition to give them an affordable and supportive home base to reach their musical goals.
+                Our reward model ensures generous compensation for your creativity, hard work and the results delivered. We provide the tools and resources for success, allowing you to cater to your followers who look to you for entertainment and guidance and maximize your returns.
                 <br><br>
-                We believe in a transparent environment where diversity, equity, and inclusion are celebrated. All humans are unique and we care about ensuring that all of our people feel welcome, heard and appreciated.
-                <br><br>
-                Let’s work together to support and inspire musicians around the world!
-            </p>
+                <strong>Apply today, and let’s fill the world with more music!</strong>
+            </h6>
         </div>
     </section>
-    <section class="text-white py-8 md:py-14 lg:py-20 px-4 bg-musora-black">
-        <div class="container mx-auto max-w-6xl">
-            <h3 class="text-center mb-8 md:mb-16"><strong>Program Benefits</strong></h3>
-            <ul class="fa-ul flex flex-wrap">
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Built For Creators</strong><br> If you’re a publisher, influencer, or content creator — this program is designed for you! You have an audience who cares about music, and we’d love to support their educational journeys!</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Get Paid Consistently & On Time</strong><br> We always put our students first. After that, it’s you! You’ll be paid consistently and on-time — with a clear breakdown of your earnings so you can attribute your efforts and successes.</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">World-Class Student Experience</strong><br> You’ll always have confidence that you’re promoting meaningful products and services. Students are always supported with world-class platforms, teachers, and communities.</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Free Membership For Active Partners</strong><br> If you’re promoting our memberships, we want you to be a part of the community so you see the impact it makes! You’ll receive a free membership for as long as you remain an ambassador.</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Unique Offers & Creatives</strong><br> Depending on the partnership, you’ll have access to a dedicated storefront page and custom creatives to support your goals as an ambassador.</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Sponsored Content & Giveaways</strong><br> Have an idea? We’re all ears. We want to support your community and help you find the best ways to promote the partnership with your audience.</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-0"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Monthly Newsletter</strong><br> You’ll get a monthly newsletter about opportunities, initiatives, and Musora events. We want to help spark ideas for collaborating on exciting campaigns.</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Dedicated & Responsive Support</strong><br> You’ll have an account manager to support your campaigns — brainstorm what’s working, what’s not, and how we can work together to reach the goal of supporting and inspiring musicians.</li>
-            </ul>
-        </div>
-    </section>
-    <section class="bg-cover bg-center text-center text-white py-8 md:py-10 lg:py-14 px-4 relative">
+    <section class="bg-cover bg-center text-center text-white py-10 md:py-14 lg:py-20 px-4 sm:px-6 relative">
         {{-- background --}}
         <img src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/background-piano.jpg"
             class="absolute object-cover object-center inset-0 w-full h-full"
              alt="piano background"
         />
         <div class="container mx-auto max-w-6xl relative z-0">
-            <h3><strong>How Do I Start?</strong></h3>
-            <div class="flex flex-wrap my-8 md:my-12 lg:my-16">
+            <h3><strong>Applying is as easy as ¾ time</strong></h3>
+            <div class="flex flex-wrap my-8 md:my-12 lg:my-14">
                 <div class="w-full md:w-1/3 px-2 mb-8 md:mb-0">
-                    <div class="inline-block rounded-full p-3 text-center border-4 border-musora-gold relative" style="background-color:#091724;width: 78px;"><h1 class="text-5xl text-musora-gold leading-none"><strong>1</strong></h1></div>
-                    <h4 class="leading-normal mt-4 lg:mt-5 mb-2 lg:mb-4"><strong>Read The Guidelines</strong></h4>
-                    <p><em><span class="cursor-pointer" x-on:click="modal = true"><u>Click here to open &raquo;</u></span></em></p>
+                    <div class="inline-block rounded-full p-3 text-center border-4 border-musora-gold relative" style="width: 78px;"><h1 class="text-5xl text-musora-gold leading-none"><strong>1</strong></h1></div>
+                    <h4 class="leading-normal mt-4 lg:mt-5 mb-2 lg:mb-4"><strong>Read This</strong></h4>
+                    <span class="join smaller cursor-pointer border-2 text-musora-gold border-musora-gold hover:bg-musora-gold" x-on:click="modal = true">Guidelines</span>
                 </div>
                 <div class="w-full md:w-1/3 px-2 mb-8 md:mb-0">
-                    <div class="inline-block rounded-full p-3 text-center border-4 border-musora-gold relative" style="background-color:#161e29;width: 78px;"><h1 class="text-5xl text-musora-gold leading-none"><strong>2</strong></h1></div>
-                    <h4 class="leading-normal mt-4 lg:mt-5 mb-2 lg:mb-4"><strong>Apply For The Program</strong></h4>
-                    <p><em><a href="https://airtable.com/shr086ixt4K8JIQpi"><u>Just fill out the short form &raquo;</u></a></em></p>
+                    <div class="inline-block rounded-full p-3 text-center border-4 border-musora-gold relative" style="width: 78px;"><h1 class="text-5xl text-musora-gold leading-none"><strong>2</strong></h1></div>
+                    <h4 class="leading-normal mt-4 lg:mt-5 mb-2 lg:mb-4"><strong>Fill This Out</strong></h4>
+                    <a class="join smaller border-2 text-musora-gold border-musora-gold hover:bg-musora-gold" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
                 </div>
                 <div class="w-full md:w-1/3 px-2">
-                    <div class="inline-block rounded-full p-3 text-center border-4 border-musora-gold relative" style="background-color:#020e1a;width: 78px;"><h1 class="text-5xl text-musora-gold leading-none"><strong>3</strong></h1></div>
-                    <h4 class="leading-normal mt-4 lg:mt-5 mb-2 lg:mb-4"><strong>Review & Processing</strong></h4>
-                    <p><em>We’ll reach out if you’re approved.</em></p>
+                    <div class="inline-block rounded-full p-3 text-center border-4 border-musora-gold relative" style="width: 78px;"><h1 class="text-5xl text-musora-gold leading-none"><strong>3</strong></h1></div>
+                    <h4 class="leading-normal mt-4 lg:mt-5 mb-2 lg:mb-4"><strong>Get Approved</strong></h4>
+                    <h3><i class="fas fa-check bg-musora-gold rounded-full text-black inline-block py-1.5 leading-tight px-3"></i></h3>
                 </div>
             </div>
             <div class="inline-block text-left">
-                <p><strong>Thanks for your interest in our partner program!</strong></p>
-                <ul class="fa-ul">
-                    <li><i class="fas fa-li fa-asterisk"></i><em>Your site and/or channel will be reviewed to join the Musora  Affiliate program.</em></li>
-                    <li><i class="fas fa-li fa-asterisk"></i><em>If approved, you’ll have access to all the links, logos and banners for your chosen Musora brand(s).</em></li>
-                    <li><i class="fas fa-li fa-asterisk"></i><em>We will not approve coupon sites, sites under construction, or sites with long load times or functionality issues.</em></li>
+                <h5 class="leading-tight mb-3"><strong>Thanks for your interest in our partner program!</strong></h5>
+                <ul class="fa-ul pl-4">
+                    <li><i class="fas fa-li fa-check text-musora-gold text-2xl"></i><em>Your site and/or channel will be reviewed to join the Musora  Affiliate program.</em></li>
+                    <li><i class="fas fa-li fa-check text-musora-gold text-2xl"></i><em>If approved, you’ll have access to all the links, logos and banners for your chosen Musora brand(s).</em></li>
+                    <li><i class="fas fa-li fa-check text-musora-gold text-2xl"></i><em>We will not approve coupon sites, sites under construction, or sites with long load times or functionality issues.</em></li>
                 </ul>
             </div>
         </div>
     </section>
-
-    <section
-        x-data="{
-            init() {
-                new Splide(this.$refs.splide, {
-                    perPage: 3,
-                    rewind : true,
-                    perMove: 1,
-                    classes: {
-                        arrow: 'splide__arrow bg-white',
-                        pagination: 'hidden',
-                    },
-                    breakpoints: {
-                        767: {
-                            perPage: 1,
-                        },
-                        1023: {
-                            perPage: 2,
-                            type   : 'loop',
-                        },
-                    },
-                }).mount()
-            },
-        }"
-        class="bg-musora-black"
-    >
-        <div x-ref="splide" class="splide text-white px-7 py-8 md:py-14 lg:py-20 mx-auto max-w-6xl">
-            <div class="splide__track relative">
-                <ul class="splide__list">
-                    <li class="splide__slide flex flex-col items-center justify-center">
-                        <div class="px-3">
-                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000C17, #01132b)">
-                                <p class="leading-normal md:leading-relaxed">
-                                    "Drumeo is by far the greatest drum community out there. Literally you can find everything about drums, from lessons, to play alongs, live streams, documentaries, tips, drum sheets. Everything is extremely well organized. It’s amazing!"
-                                </p>
-                                <div class="flex items-center justify-center pt-5 md:pt-8">
-                                    <img
-                                        class="rounded-full w-1/4 transition-opacity opacity-0"
-                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/testimonial-alejandro.jpg"
-                                        alt="testimonial alejandro"
-                                    >
-                                    <div class="text pl-3 md:pl-5">
-                                        <h6 class="uppercase"><strong>Alejandro Sifuentes</strong></h6>
-                                        <h6 style="color:#405575" class="uppercase pt-2 leading-none">Drum YouTuber &<br>
-                                            Musora Ambassador</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="splide__slide flex flex-col items-center justify-center">
-                        <div class="px-3">
-                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000C17, #01132b)">
-                                <p class="leading-normal md:leading-relaxed">
-                                    "Pianote avoids the one-size-fits-all feel that online piano methods can have, and gives in-person piano teachers a run for their money with several instructors with whom students can interact."
-                                </p>
-                                <div class="flex items-center justify-center pt-5 md:pt-8">
-                                    <img
-                                        class="rounded-full w-1/4"
-                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/testimonial-piano-dreamers.jpg"
-                                        alt="testimonial piano dreamer"
-                                    >
-                                    <div class="text pl-3 md:pl-5">
-                                        <h6 class="uppercase"><strong>Piano Dreamers</strong></h6>
-                                        <h6 style="color:#405575" class="uppercase pt-2 leading-none">Piano Community &<br>
-                                            Musora Ambassador</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="splide__slide flex flex-col items-center justify-center">
-                        <div class="px-3">
-                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000C17, #01132b)">
-                                <p class="leading-normal md:leading-relaxed">
-                                    "The reason this approach appeals to me is because it’s kind of a more guided way to how I learned guitar. And that’s just doing the cool stuff! So if you tried the theory and exercise way and it’s just not working or you already play guitar and just want to have fun, check it out!"
-                                </p>
-                                <div class="flex items-center justify-center pt-5 md:pt-8">
-                                    <img
-                                        class="rounded-full w-1/4"
-                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/testimonial-aguafish.jpg"
-                                        alt="testimonial aguafish"
-                                    >
-                                    <div class="text pl-3 md:pl-5">
-                                        <h6 class="uppercase"><strong>Agufish</strong></h6>
-                                        <h6 style="color:#405575" class="uppercase pt-2 leading-none">Guitar YouTuber &<br>
-                                            Musora Ambassador</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="splide__slide flex flex-col items-center justify-center">
-                        <div class="px-3">
-                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000C17, #01132b)">
-                                <p class="leading-normal md:leading-relaxed">
-                                    "I always recommend Drumeo because of the absolute wealth of knowledge they offer from so many of the world’s greatest drummers! Not only will you learn just about anything you could desire to learn, but you will be so inspired and entertained by your drum heroes with some of the best production value on the internet!"
-                                </p>
-                                <div class="flex items-center justify-center pt-5 md:pt-8">
-                                    <img
-                                        class="rounded-full w-1/4"
-                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/trials/casey-cooper.jpg"
-                                        alt="casey cooper"
-                                    >
-                                    <div class="text pl-3 md:pl-5">
-                                        <h6 class="uppercase"><strong>Casey Cooper</strong></h6>
-                                        <h6 style="color:#405575" class="uppercase pt-2 leading-none">Drum YouTuber &<br>
-                                            Musora Ambassador</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+    <section class="text-white py-8 md:py-14 lg:py-20 px-3 sm:px-6 bg-musora-black">
+        <div class="container mx-auto max-w-3xl">
+            <h3 class="text-center mb-7 md:mb-10"><strong>FAQ<br class="sm:hidden"> (Frequent Ambassador Questions)</strong></h3>
+            <ul class="fa-ul pl-4">
+                <li class="w-full leading-relaxed mb-7 md:mb-10">
+                    <i class="far fa-li fa-question-circle text-musora-gold text-4xl"></i>
+                    <strong class="font-black">Who Can Apply?</strong><br>
+                    Anyone can apply, as long as you read the "read this" and didn't think, "Hey, that describes me perfectly!"
+                </li>
+                <li class="w-full leading-relaxed mb-7 md:mb-10">
+                    <i class="far fa-li fa-question-circle text-musora-gold text-4xl"></i>
+                    <strong class="font-black">How Do I Make Money?</strong><br>
+                    Through promoting the benefits and joys of learning music on the best platform for music education in the world. Aka, using affiliate links to direct traffic to our trials, products and special offers.
+                </li>
+                <li class="w-full leading-relaxed mb-7 md:mb-10">
+                    <i class="far fa-li fa-question-circle text-musora-gold text-4xl"></i>
+                    <strong class="font-black">What Else Do I Get?</strong><br>
+                    You have to practice what you preach, so we will give you free access to everything we offer our students so you can make educated recommendations.
+                </li>
+                <li class="w-full leading-relaxed mb-7 md:mb-10">
+                    <i class="far fa-li fa-question-circle text-musora-gold text-4xl"></i>
+                    <strong class="font-black">What Else?</strong><br>
+                    How about dedicated support? (If you need it)
+                </li>
+                <li class="w-full leading-relaxed mb-7 md:mb-10">
+                    <i class="far fa-li fa-question-circle text-musora-gold text-4xl"></i>
+                    <strong class="font-black">That's It?</strong><br>
+                    Jeeze. Okay, besides the money, free Musora access, and dedicated support? We will work with you to brainstorm on sponsored content and giveaways.
+                </li>
+                <li class="w-full leading-relaxed">
+                    <i class="far fa-li fa-question-circle text-musora-gold text-4xl"></i>
+                    <strong class="font-black">Who Is Tracking All Of This?</strong><br>
+                    Our Influencer Marketing Partnership Ambassador Calculation Thingamabob, or IMPACT. This fantastic system looks after all the tracking, assets, reporting, and calculations. It also makes sure you get paid on time and consistently.
+                </li>
+            </ul>
         </div>
     </section>
-
-    <section class="bg-cover bg-center text-center text-white py-24 md:py-32 lg:py-52 px-4 relative">
+    <section class="bg-cover bg-center text-center text-white py-10 md:py-16 lg:py-20 px-4 relative">
         <img src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/background-guitar.jpg"
             class="absolute object-cover z-[-2] w-full h-full top-0 left-0 object-cover"
              alt="guitar background"
         />
         <div class="container mx-auto max-w-6xl">
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
-            <a class="join bg-musora-gold my-8 md:my-10 inline-block" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
-            <p class="leading-normal">Have any questions? Please email <a href="mailto:dave@musora.com"><u>dave@musora.com</u></a> after<br class="hidden md:inline">
+            <a class="join bg-musora-gold text-black my-5 md:my-7 inline-block" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
+            <p class="leading-normal">Have any questions? Please email <a href="mailto:jmilligan@musora.com"><u>jmilligan@musora.com</u></a> after<br class="hidden md:inline">
                 reviewing the <span class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></span> and <a href="https://airtable.com/shr086ixt4K8JIQpi"><u>application page</u></a>.</p>
         </div>
     </section>
