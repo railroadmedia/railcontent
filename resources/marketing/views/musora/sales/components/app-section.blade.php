@@ -3,19 +3,20 @@
 <section class="relative text-center px-6 pb-10 md:pb-0" style="background-color:#f6f8fc;">
     <div class="container mx-auto max-w-5xl relative z-20">
         <div class="text-center md:text-left md:flex justify-center items-center"
-        :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-        x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;">
+                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;">
+
             <picture class="max-w-md lg:max-w-2xl order-1 w-full">
                 <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/{!! $image !!}">
                 <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/{!! $image !!}">
+
                 <img x-ref="image"
-                    class="w-full transition-opacity opacity-0 mb-6 md:mb-0 lg:-mt-11 lg:-mb-4 "
+                    class="w-full transition-opacity opacity-0 mb-6 md:mb-0 lg:-mt-11 lg:-mb-4"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/filters:blur(15)/{!! $image !!}"
                     data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/650x0/filters:quality(95)/{!! $image !!}"
-                    alt="device image"
-                >
+                    alt="Device Image">
             </picture>
 
             <div class="pr-4 lg:pr-7">
