@@ -9,6 +9,7 @@
             <CollectionResults :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
+                <ForumThreadsTable v-else-if="isThreads" :threads="preLoadedContent" />
                 <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
                             :total-results="getTotalResults" />
                 <DownloadsCatalogue v-else-if="isDownloadView" :content="data" />
@@ -227,6 +228,10 @@ const isSongPdf = computed(() => {
 
 const isPack = computed(() => {
     return props.collectionType === 'pack';
+})
+
+const isThreads = computed(() => {
+    return props.collectionType === 'threads';
 })
 
 //List view reactive
