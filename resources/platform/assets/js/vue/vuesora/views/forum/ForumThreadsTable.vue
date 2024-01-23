@@ -1,31 +1,6 @@
 <template>
 
-    <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
-
-        <!-- Forum Tabs -->
-        <div v-if="!onlyFollowed && showTabs"
-             class="tw-flex tw-px-4">
-            <div class="tw-flex tw-flex-col tw-mb-6">
-                <div class="tw-flex">
-                    <a class="tw-no-underline tw-mr-6"
-                       :href="currentUrl"
-                       :class="[!isFollowedSection ? 'tw-text-[#00101D] dark:tw-text-white' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]' ]"
-                    >
-                        <h3 class="tw-text-3xl tw-font-bold tw-cursor-pointer">
-                            All Threads
-                        </h3>
-                    </a>
-                    <a class="tw-no-underline"
-                       :href=" currentUrl + '?followed=true' "
-                       :class="[isFollowedSection ? 'tw-text-[#00101D] dark:tw-text-white' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]', {'hide': searching}]"
-                    >
-                        <h3 class="tw-text-3xl tw-font-bold tw-cursor-pointer">
-                            Followed
-                        </h3>
-                    </a>
-                </div>
-            </div>
-        </div>
+    <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full tw-pb-[30px]">
 
         <!-- All Threads -->
         <div v-if="!showTabs && !onlyFollowed"
@@ -39,89 +14,6 @@
                         All New Threads
                     </h3>
                 </div>
-            </div>
-        </div>
-
-        <!-- Search -->
-        <div class="tw-flex tw-px-2 ">
-            <div class="tw-flex tw-flex-col tw-mb-6 tw-w-full">
-                <div class="tw-flex tw-flex-wrap">
-
-                    <template v-if="!onlyFollowed && !searching">
-                        <!-- Filter -->
-                        <div class="flex tw-ml-0 form-group tw-w-full md:tw-w-1/3 md:tw-pr-10">
-                            <div
-                                class="form-group xs-12 tw-w-full">
-                                <select
-                                    id="threadSort"
-                                    v-model="filterInterface"
-                                    class="has-input tw-text-[#00101D] dark:tw-text-white tw-pb-0 tw-bg-white dark:tw-bg-transparent"
-                                >
-                                    <option
-                                        v-for="option in filterOptions"
-                                        :key="option.label"
-                                        :value="option.value"
-                                        class="tw-text-[#00101D]"
-                                    >
-                                        {{ option.label }}
-                                    </option>
-                                </select>
-                                <label
-                                    for="threadSort"
-                                    :class="brand"
-                                >Sort By... </label>
-                            </div>
-                        </div>
-                    </template>
-
-                    <!-- Search Bar -->
-                    <div class="tw-flex tw-w-full tw-mb-4 tw-order-first md:tw-order-last"
-                         :class="[!onlyFollowed && !searching ? 'md:tw-w-2/3' : '']"
-                    >
-                        <div class="tw-flex tw-flex-col tw-w-full tw-w-full tw-mr-3 form-group">
-                            <input
-                                id="threadSearch"
-                                class="dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74] tw-pb-0"
-                                :class="{ 'has-input': searchTerm.length }"
-                                ref="searchInput"
-                                v-model.lazy="searchInterface"
-                                type="text"
-                            >
-                            <label
-                                for="threadSearch"
-                                class="dark:tw-text-[#9EC0DC]"
-                                :class="brand"
-                            >Search</label>
-
-                            <span
-                                v-if="searching"
-                                id="clearSearch"
-                                class="tw-px-4 tw-py-3 tw-cursor-pointer tw-absolute tw-right-0"
-                                @click="clearSearch"
-                            >
-                                <i class="fas fa-times"></i>
-                            </span>
-                        </div>
-                        <!-- Submit Button -->
-                        <div class="tw-flex tw-flex-col">
-                            <button
-                                class="tw-btn-primary tw-px-4 sm:tw-px-5 lg:tw-px-12"
-                                :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
-                                @click="$refs.searchInput.blur()"
-                            >
-                                <i class="fas fa-search sm:tw-mr-1 tw-text-sm"></i>
-                                <span class="tw-hidden sm:tw-inline-flex">Search</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <p
-                    v-if="searching"
-                    class="tiny font-italic text-grey-4 dark:tw-text-[#9EC0DC] tw-mt-2 tw-ml-6"
-                >
-                    Showing results for <span class="tw-font-bold tw-text-black dark:tw-text-white">"{{ searchInterface }}"</span> in All Forums.
-                </p>
             </div>
         </div>
 
@@ -219,7 +111,6 @@
 </template>
 
 <script>
-
 import * as QueryString from 'query-string';
 import ForumThreadsTableItem from './_ForumThreadsTableItem';
 import ForumItem from './_ForumItem.vue';
@@ -227,6 +118,8 @@ import ForumSearchResult from './_ForumSearchResult.vue';
 import Pagination from '../../components/Pagination.vue';
 import ClearableFilter from '../../components/ClearableFilter.vue';
 import ForumService from '../../assets/js/services/forums';
+import {useUserStore} from "../../../../stores/user";
+import {storeToRefs} from "pinia/dist/pinia";
 
 export default {
     name: 'ForumThreadsTable',
@@ -249,10 +142,6 @@ export default {
         forums: {
             type: Array,
             default: () => [],
-        },
-        brand: {
-            type: String,
-            default: () => '',
         },
         threadCount: {
             type: Number,
@@ -306,6 +195,12 @@ export default {
         };
     },
     computed: {
+        brand(){
+            const userStore = useUserStore();
+            const { brand } = storeToRefs(userStore);
+
+            return brand.value;
+        },
         brandBorderColor() {
             return 'tw-border-' + this.brand;
         },
