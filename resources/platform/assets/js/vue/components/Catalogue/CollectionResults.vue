@@ -14,19 +14,20 @@
 </template>
 
 <script setup>
+
 import { onMounted, onUnmounted, onUpdated } from "vue";
 import { storeToRefs } from "pinia";
 
 import { useCollectionStore } from "../../../stores/collection";
 
 const props = defineProps({
-    brand: {
-        type: String,
-        default: 'drumeo',
-    },
     currentPage: {
         type: Number,
         default: 1,
+    },
+    infiniteScroll: {
+        type: Boolean,
+        default: false,
     },
     totalPages: {
         type: Number,
@@ -50,15 +51,15 @@ const infiniteScrollEventHandler = () => {
     }
 }
 
-onMounted(() => {
-    document.querySelector('#content-container').addEventListener("scroll", infiniteScrollEventHandler);
+onMounted(()=>{
+    props.infiniteScroll && document.querySelector('#content-container').addEventListener("scroll", infiniteScrollEventHandler);
 })
 
-onUnmounted(() => {
-    document.querySelector('#content-container').removeEventListener("scroll", infiniteScrollEventHandler);
+onUnmounted(()=>{
+    props.infiniteScroll && document.querySelector('#content-container').removeEventListener("scroll", infiniteScrollEventHandler);
 })
 
 onUpdated(() => {
-    infiniteScrollEventHandler();
+    props.infiniteScroll && infiniteScrollEventHandler();
 })
 </script>

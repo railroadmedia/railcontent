@@ -20,7 +20,6 @@ import Schedule from './vue/Views/Schedule';
 import Playlists from './vue/Views/Playlists';
 import Playlist from './vue/Views/Playlist';
 import Referral from './vue/Views/Referral';
-import LessonHistory from './vue/Views/LessonHistory';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -42,6 +41,8 @@ import ContentInfo from './vue/components/ContentInfo/ContentInfo';
 import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWrapper';
 import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper';
 import ChildCollectionPage from './vue/components/CollectionPage/ChildCollectionPage';
+import PackCatalogue from './vue/components/Packs/PackCatalogue';
+
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -284,7 +285,7 @@ app.component('AppContainer', AppContainer)
     .component('Playlists', Playlists)
     .component('Playlist', Playlist)
     .component('Referral', Referral)
-    .component('LessonHistory', LessonHistory)
+    .component('PackCatalogue', PackCatalogue)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
