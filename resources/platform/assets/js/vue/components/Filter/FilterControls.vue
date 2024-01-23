@@ -27,7 +27,7 @@
         </div>
         <div v-if="!hideFilter" class="tw-flex tw-grow tw-items-start tw-px-4 lg:tw-px-0">
             <div class="tw-flex tw-grow tw-justify-end tw-items-center tw-relative">
-                <filter-search :search-term="searchTerm" @on-submit="handleSubmit"></filter-search>
+                <FilterSearch v-if="!hideSearch" :search-term="searchTerm" @on-submit="handleSubmit" />
                 <template v-if="!hideFilterIcon">
                     <button v-if="!isCollapsed" @click="() => emit('onToggleCollapse')"
                         class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-black tw-bg-[#000C17] dark:tw-bg-white dark:tw-border-white tw-rounded-full">
@@ -38,7 +38,9 @@
                         <AdjustmentsIcon class="tw-w-[22px] tw-h-[22px] tw-rotate-90" />
                     </button>
                 </template>
-                <button @click="handleOpenDropdown"
+                <button
+                    v-if="!hideSortIcon"
+                    @click="handleOpenDropdown"
                     class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-[#CBCBCD] tw-bg-white dark:tw-bg-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-border-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-bg-[#000C17] hover:dark:tw-bg-white tw-text-[#000C17] dark:tw-text-white hover:tw-text-white hover:dark:tw-text-[#000C17]">
                     <musora-icon :icon-name="sortIcon()" class="tw-w-[22px] tw-h-[22px]" />
                 </button>
@@ -95,6 +97,14 @@ import {computed, onMounted, ref} from 'vue';
             default: [],
         },
         hideFilterIcon: {
+            type: Boolean,
+            default: false,
+        },
+        hideSearch: {
+            type: Boolean,
+            default: false,
+        },
+        hideSortIcon: {
             type: Boolean,
             default: false,
         },
