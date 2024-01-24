@@ -16,18 +16,16 @@
     </div>
 @else
     <section class="text-center pt-7 sm:pt-9 relative">
-        <div id="sticky-slider" class="w-auto inline-block py-2 px-3 bg-white z-10 sticky top-24">
+        <div id="sticky-slider" class="w-auto inline-block py-3 sm:py-4 px-4 sm:px-6 bg-white rounded-xl z-10 sticky top-[40vh]">
             <h1 class="font-lexend  text-3xl sm:text-5xl lg:text-6xl leading-none uppercase mb-1 sm:mb-3"><strong>PLAY TO LEARN</strong></h1>
             <h4 class="leading-tight">Improve your skills in just<br class="sm:hidden">  10 minutes a day.</h4>
         </div>
-        <div class=" overflow-hidden mx-auto text-center relative">
+        <div class="overflow-hidden pt-2 sm:pt-6">
             <div class="inline-block mx-auto left-1/2 relative xl:w-full -translate-x-1/2">
-                <div class="flex flex-wrap justify-center mx-auto w-[810px] sm:w-[1250px] xl:w-[1400px]">
+                <div class="flex flex-wrap justify-center mx-auto w-[490px] sm:w-[1010px] lg:w-[1250px] xl:w-[1400px]">
                     @foreach($workoutImages as $image)
-                        <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity"
-                            src="{{ $image['src'] }}"
-                            style="{{ $image['animation'] }}"
-                            loading="lazy">
+                        <img src="{{ $image['src'] }}" style="{{ $image['animation'] }}" loading="lazy"
+                            class="h-24 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity">
                     @endforeach
                 </div>
             </div>
