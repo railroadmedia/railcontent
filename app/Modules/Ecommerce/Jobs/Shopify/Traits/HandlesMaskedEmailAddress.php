@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 trait HandlesMaskedEmailAddress
 {
     // this would be a const, if we were on PHP 8.2
-    protected string $fakeSuffix = ".ex";
+    public string $fakeSuffix = ".ex";
 
     /**
      * Get the unmasked value of the given email address from Shopify
