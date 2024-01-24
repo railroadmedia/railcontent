@@ -474,8 +474,18 @@
 
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>   
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
+    <script>
+        const stickyElement = document.getElementById("sticky-slider");
+        const parentElement = stickyElement.parentElement;
+        const unstickPosition = parentElement.offsetTop + parentElement.offsetHeight;
+
+        function handleScroll() {
+            const scrollPosition = window.scrollY + window.innerHeight;
+            stickyElement.classList.toggle("bottom-auto", scrollPosition > unstickPosition);
+        }
+
+        window.addEventListener("scroll", handleScroll);
+    </script>
 @stop
