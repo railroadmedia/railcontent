@@ -184,7 +184,10 @@
 @endsection
 
 @section('body-data')
-    x-data="{ modal: false }"
+    x-data="{
+    modal: false,
+    apply: false
+    }"
 @endsection
 
 @section('layout-scripts')
@@ -207,7 +210,7 @@
                 music instruction and earn in return</h4>
 
             <span class="join smaller mb-3 md:mb-0 md:mx-2 cursor-pointer border-2 text-musora-gold border-musora-gold hover:bg-musora-gold" x-on:click="modal = true">Guidelines</span>
-            <a class="join smaller md:mx-2 bg-musora-gold text-black" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
+            <a class="join smaller md:mx-2 bg-musora-gold text-black" x-on:click="apply = true">APPLY NOW</a>
         </div>
     </header>
     <section class="text-white text-center py-8 md:py-10 lg:py-12 px-4 bg-musora-black">
@@ -238,7 +241,7 @@
                 <div class="w-full md:w-1/3 px-2 mb-8 md:mb-0">
                     <div class="inline-block rounded-full p-3 text-center border-4 border-musora-gold relative" style="width: 78px;"><h1 class="text-5xl text-musora-gold leading-none"><strong>2</strong></h1></div>
                     <h4 class="leading-normal mt-4 lg:mt-5 mb-2 lg:mb-4"><strong>Fill This Out</strong></h4>
-                    <a class="join smaller border-2 text-musora-gold border-musora-gold hover:bg-musora-gold" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
+                    <span class="join smaller border-2 text-musora-gold border-musora-gold hover:bg-musora-gold" x-on:click="apply = true">APPLY NOW</span>
                 </div>
                 <div class="w-full md:w-1/3 px-2">
                     <div class="inline-block rounded-full p-3 text-center border-4 border-musora-gold relative" style="width: 78px;"><h1 class="text-5xl text-musora-gold leading-none"><strong>3</strong></h1></div>
@@ -300,65 +303,51 @@
         />
         <div class="container mx-auto max-w-6xl">
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
-            <a class="join bg-musora-gold text-black my-5 md:my-7 inline-block" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
+            <span class="join bg-musora-gold text-black my-5 md:my-7 inline-block" x-on:click="apply = true">APPLY NOW</span>
             <p class="leading-normal">Have any questions? Please email <a href="mailto:jmilligan@musora.com"><u>jmilligan@musora.com</u></a> after<br class="hidden md:inline">
-                reviewing the <span class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></span> and <a href="https://airtable.com/shr086ixt4K8JIQpi"><u>application page</u></a>.</p>
+                reviewing the <span class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></span> and <span class="cursor-pointer" x-on:click="apply = true"><u>application page</u></span>.</p>
         </div>
     </section>
 
-    <!-- Modal -->
-    <div
-        x-show="modal"
-        style="display: none"
-        x-on:keydown.escape.prevent.stop="modal = false"
-        role="dialog"
-        aria-modal="true"
-        x-id="['modal-title']"
-        class="fixed inset-0 z-10 overflow-y-auto"
-    >
-        <!-- Overlay -->
-        <div x-show="modal" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
-
-        <!-- Panel -->
-        <div
-            x-show="modal" x-transition
-            x-on:click="modal = false"
-            class="relative flex min-h-screen items-center justify-center p-4"
-        >
-            <!-- Close button -->
-            <i class="fa-light fa-times fa-2x fixed top-16 right-2 text-white cursor-pointer text-5xl"></i>
-            <div
-                x-on:click.stop
-                x-trap.noscroll.inert="modal"
-                class="relative w-full max-w-5xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg"
-            >
-                <div class="py-4 md:py-6 px-3 md:px-6 text-left">
-                    <h5 class="text-center mb-2"><strong>Partnership and Brand Guidelines</strong></h5>
-                    <p>Requirements:</p>
-                    <ul class="list-disc list-outside pl-5 mb-2">
-                        <li>Must disclose either affiliate partnership or sponsorship.</li>
-                        <li>All sponsored content must be approved by Musora Account Manager prior to publishing.</li>
-                        <li>All content must live permanently on respective channel (unless platform removes on time schedule, e.g. Snapchat, IG Stories, etc.).</li>
-                        <li>Honest and fair reviews. If you’re unhappy with the product, please give us the opportunity to resolve any issue prior to posting your review.</li>
-                    </ul>
-                    <p>Restrictions:</p>
-                    <ul class="list-disc list-outside pl-5 mb-2">
-                        <li>Must not promote or contain sexually explicit or obscene materials.</li>
-                        <li>Must not promote violence or contain violent materials.</li>
-                        <li>Must not promote or contain materials or activity that is hateful, harassing, harmful, invasive of another’s privacy, abusive, or discriminatory (including on the basis of race, color, sex, religion, nationality, disability, sexual orientation, political affiliation or age.)</li>
-                        <li>Must not promote or undertake in illegal activities.</li>
-                        <li>Must not incorporate any materials which infringe or assist others to infringe on any copyright, trademark or other intellectual property rights or to violate the law.</li>
-                        <li>Must not include any unapproved trademark, including logos, of Musora Media brands or its partners.</li>
-                        <li>Must not make inaccurate, deceptive or otherwise misleading claims about Musora Media brands, Musora Media partners, products, policies, promotions, or prices.</li>
-                        <li>You will not artificially generate clicks or impressions on your Site(s) or create Sessions on Musora Media Inc.  site(s), whether by way of fake redirects, automated software, or other mechanisms to generate Actions;</li>
-                        <li>You must not create or design your website(s) or any other website(s) that you operate,  explicitly or implied in a manner which resembles our website(s) nor design your website(s) in a  manner which leads customers to believe you are Musora Media Inc. or any other affiliated business.</li>
-                        <li>Affiliates that bid in their Pay-Per-Click campaigns using keywords such as  drumeo.com, Drumeo, www.drumeo, www.drumeo.com, and/or any  misspellings or similar alterations of these – be it separately or in combination with other  keywords – and do not direct the traffic from such campaigns to their own website prior to re directing it to ours, will be considered trademark violators, and will be banned from Musora Media Inc.’s Affiliate Program.</li>
-                        <li>Affiliate shall not transmit any so-called “interstitials,” “Parasiteware™,” “Parasitic  Marketing,” “Shopping Assistance Application,” “Toolbar Installations and/or Add-ons,”  “Shopping Wallets” or “deceptive pop-ups and/or pop-unders” to consumers from the time the consumer clicks on a qualifying link until such time as the consumer has fully exited Musora Media Inc.’s sites (i.e., where no page from our site or any of Musora Media Inc. brand’s content or  branding is visible on the end-user’s screen).</li>
-                        <li>You will not sell, resell, redistribute, sublicense, or transfer any Program Content or any  application that uses, incorporates, or displays any Program Content or Data Feeds.</li>
-                    </ul>
-                    <p>We reserve the right to terminate our agreement at any time.</p>
-                </div>
+    @component('_partials.components.modal', ['name' => 'modal'])
+        @slot('content')
+            <div class="relative w-full max-w-4xl overflow-y-auto rounded-xl bg-white px-5 py-5 sm:px-8 sm:py-8 lg:px-12 lg:py-12 shadow-lg">
+                <h5 class="text-center mb-2"><strong>Partnership and Brand Guidelines</strong></h5>
+                <p>Requirements:</p>
+                <ul class="list-disc list-outside pl-5 mb-2">
+                    <li>Must disclose either affiliate partnership or sponsorship.</li>
+                    <li>All sponsored content must be approved by Musora Account Manager prior to publishing.</li>
+                    <li>All content must live permanently on respective channel (unless platform removes on time schedule, e.g. Snapchat, IG Stories, etc.).</li>
+                    <li>Honest and fair reviews. If you’re unhappy with the product, please give us the opportunity to resolve any issue prior to posting your review.</li>
+                </ul>
+                <p>Restrictions:</p>
+                <ul class="list-disc list-outside pl-5 mb-2">
+                    <li>Must not promote or contain sexually explicit or obscene materials.</li>
+                    <li>Must not promote violence or contain violent materials.</li>
+                    <li>Must not promote or contain materials or activity that is hateful, harassing, harmful, invasive of another’s privacy, abusive, or discriminatory (including on the basis of race, color, sex, religion, nationality, disability, sexual orientation, political affiliation or age.)</li>
+                    <li>Must not promote or undertake in illegal activities.</li>
+                    <li>Must not incorporate any materials which infringe or assist others to infringe on any copyright, trademark or other intellectual property rights or to violate the law.</li>
+                    <li>Must not include any unapproved trademark, including logos, of Musora Media brands or its partners.</li>
+                    <li>Must not make inaccurate, deceptive or otherwise misleading claims about Musora Media brands, Musora Media partners, products, policies, promotions, or prices.</li>
+                    <li>You will not artificially generate clicks or impressions on your Site(s) or create Sessions on Musora Media Inc.  site(s), whether by way of fake redirects, automated software, or other mechanisms to generate Actions;</li>
+                    <li>You must not create or design your website(s) or any other website(s) that you operate,  explicitly or implied in a manner which resembles our website(s) nor design your website(s) in a  manner which leads customers to believe you are Musora Media Inc. or any other affiliated business.</li>
+                    <li>Affiliates that bid in their Pay-Per-Click campaigns using keywords such as  drumeo.com, Drumeo, www.drumeo, www.drumeo.com, and/or any  misspellings or similar alterations of these – be it separately or in combination with other  keywords – and do not direct the traffic from such campaigns to their own website prior to re directing it to ours, will be considered trademark violators, and will be banned from Musora Media Inc.’s Affiliate Program.</li>
+                    <li>Affiliate shall not transmit any so-called “interstitials,” “Parasiteware™,” “Parasitic  Marketing,” “Shopping Assistance Application,” “Toolbar Installations and/or Add-ons,”  “Shopping Wallets” or “deceptive pop-ups and/or pop-unders” to consumers from the time the consumer clicks on a qualifying link until such time as the consumer has fully exited Musora Media Inc.’s sites (i.e., where no page from our site or any of Musora Media Inc. brand’s content or  branding is visible on the end-user’s screen).</li>
+                    <li>You will not sell, resell, redistribute, sublicense, or transfer any Program Content or any  application that uses, incorporates, or displays any Program Content or Data Feeds.</li>
+                </ul>
+                <p>We reserve the right to terminate our agreement at any time.</p>
             </div>
-        </div>
-    </div>
+        @endslot
+    @endcomponent
+    @component('_partials.components.modal', ['name' => 'apply'])
+        @slot('content')
+            <div class="relative w-full max-w-lg overflow-y-auto rounded-xl bg-white px-5 py-5 sm:px-8 sm:py-8 shadow-lg">
+                <h4 class="leading-tight text-center mb-3 sm:mb-5"><strong>Which program would you<br class="hidden sm:inline"> like to apply for? </strong></h4>
+                <a class="join w-full mb-4 bg-drumeo " href="http://app.impact.com/campaign-campaign-info-v2/Drumeo.brand">APPLY FOR Drumeo</a>
+                <a class="join w-full mb-4 bg-pianote " href="http://app.impact.com/campaign-campaign-info-v2/Pianote.brand">APPLY FOR Pianote</a>
+                <a class="join w-full mb-4 bg-guitareo " href="http://app.impact.com/campaign-campaign-info-v2/Guitareo.brand">APPLY FOR Guitareo</a>
+                <a class="join w-full bg-singeo " href="http://app.impact.com/campaign-campaign-info-v2/Singeo.brand">APPLY FOR Singeo</a>
+            </div>
+        @endslot
+    @endcomponent
 @stop

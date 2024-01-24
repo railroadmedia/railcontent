@@ -53,61 +53,73 @@ $(window).on("load", function (){
         }
     });
 
-    // sliding scrollbar function
+
+    // Function to check if the scroll position is past a given distance from the top
     function isScrollPast(distanceFromTop) {
         return $(window).scrollTop() > distanceFromTop;
     }
 
+    // Function to get the distance from the top of the parent element
     function getDistanceFromTop(elementToCalculate) {
         if ($(elementToCalculate).is(':visible')) {
             return $(elementToCalculate).parent().offset().top;
         }
-
         return false;
     }
 
-    var bodyWidth = $(window).width();
-    var slidingElm = $('.sliding-function .side-slide');
-    var menuHeight = $('.top-bar').height();
+    var slidingElm = $('#sticky-slide');
+    var menuHeight = $('nav').height();
     var topFixedSidebarBuffer = 15;
-
-    $(window).resize(function () {
-        bodyWidth = $(window).width();
-        $(slidingElm).removeClass('fixedSlider');
-    });
-
+    var bodyWidth = $(window).width();
     var originalDistanceFromTop = getDistanceFromTop(slidingElm);
-    $(window).scroll(function () {
-        if (bodyWidth > 1023) {
-            var footerOffsetTop = $('.bottom-footer').offset().top;
+    var $slidingElm = $(slidingElm);
+    var $window = $(window);
+    var $bottomFooter = $('.bottom-footer');
 
-            if (originalDistanceFromTop === false) {
-                return;
-            }
+    $window.resize(function () {
+        bodyWidth = $window.width();
+        // Recalculate the distance from the top after resizing
+        originalDistanceFromTop = getDistanceFromTop($slidingElm);
+        // Set the width of the sliding element to match its parent's width
+        $slidingElm.css('width', $slidingElm.parent().width());
+        // Remove classes, trigger scroll event to update position
+        $slidingElm.removeClass('fixed top-[70px]');
+        $window.trigger('scroll');
+    });
 
-            if (isScrollPast(originalDistanceFromTop - menuHeight - topFixedSidebarBuffer)) {
-                if (!$(slidingElm).hasClass('fixedSlider')) {
-                    $(slidingElm).addClass('fixedSlider');
-                }
+    $window.scroll(function () {
+        // Check if the window width is less than 1024px
+        if (bodyWidth < 1024) {
+            return;
+        }
 
-                if (isScrollPast(footerOffsetTop - slidingElm.height() - menuHeight - (topFixedSidebarBuffer * 2))) {
-                    slidingElm.css('top', (footerOffsetTop - slidingElm.height() - $(window).scrollTop() - (topFixedSidebarBuffer)));
-                } else {
-                    slidingElm.css('top', '');
-                }
+        var footerOffsetTop = $bottomFooter.offset().top;
+
+        // Check if the distance from the top is available
+        if (originalDistanceFromTop === false) {
+            return;
+        }
+
+        // Check if the scroll position is past the threshold
+        var scrollPastThreshold = isScrollPast(originalDistanceFromTop - menuHeight - topFixedSidebarBuffer);
+
+        // Add or remove classes when scrolled past the threshold
+        if (scrollPastThreshold) {
+            $slidingElm.addClass('fixed top-[70px]');
+
+            var footerThreshold = footerOffsetTop - $slidingElm.height() - menuHeight - (topFixedSidebarBuffer * 2);
+
+            if (isScrollPast(footerThreshold)) {
+                $slidingElm.addClass('absolute top-auto bottom-0 mb-4');
             } else {
-                if ($(slidingElm).hasClass('fixedSlider')) {
-                    $(slidingElm).removeClass('fixedSlider');
-                }
+                $slidingElm.removeClass('absolute top-auto bottom-0 mb-4');
             }
+        } else {
+            $slidingElm.removeClass('fixed top-[70px]');
         }
     });
-    $(slidingElm).css('width', $(slidingElm).parent().width());
-    $(window).resize(function () {
-        if (typeof slidingElm !== 'undefined') {
-            originalDistanceFromTop = getDistanceFromTop(slidingElm);
-            $(slidingElm).css('width', $(slidingElm).parent().width());
-            $(window).trigger('scroll');
-        }
-    });
+
+    // Set the initial width of the sliding element and trigger the scroll event
+    $slidingElm.css('width', $slidingElm.parent().width());
+    $window.trigger('scroll');
 });

@@ -14,7 +14,7 @@
                 "price" => $product->discounted_price,
                 "noBreadcrumb" => true
     ])
-    <div class="clearfix container mx-auto max-w-6xl">
+    <div class="clearfix container mx-auto max-w-6xl relative pt-5 md:pt-9 lg:pt-11">
         <div class="lg:flex">
             @include('_partials.components.shop.slider',[
                 "headerText" => $product->header_text,
